@@ -3,6 +3,7 @@ variables:
 
 build-and-deploy:
   stage: deploy
+  only: staging
   script:
     - cd $PROJECT_PATH
     - meteor build --directory --server $STAGING_HTTP_URL build

@@ -8,6 +8,7 @@ build-and-deploy:
   script:
     - cd "$PROJECT_PATH"
     - meteor build --directory --server "$STAGING_HTTP_URL" build
+    - chmod -R a+rX,ug+w build
     - eval $(ssh-agent -s)
     - mkdir ~/.ssh && echo "$STAGING_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - ssh-add <(echo "$STAGING_SSH_PRIVATE_KEY")

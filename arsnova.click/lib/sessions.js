@@ -4,20 +4,20 @@ Sessions.attachSchema(new SimpleSchema({
 	hashtag: {
 		type: String,
 		min: 1,
-		max: 25,
+		max: 25
 	},
 	questionText: {
 		type: String,
 		min: 5,
-		max: 1000,
+		max: 1000
 	},
 	timer: {
 		type: Number,
-		min: 0,
+		min: 0
 	},
-	readConfirmationNeeded: {
+	isReadingConfirmationRequired: {
 		type: Number,
 		min: 0,
-		max: 1,
+		max: 1
 	}
 }));

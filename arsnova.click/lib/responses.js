@@ -1,6 +1,6 @@
-Answers = new Mongo.Collection("answers");
+Responses = new Mongo.Collection("responses");
 
-Answers.attachSchema(new SimpleSchema({
+Responses.attachSchema(new SimpleSchema({
 	hashtag: {
 		type: String,
 		min: 1,

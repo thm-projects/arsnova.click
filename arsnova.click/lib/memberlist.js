@@ -1,6 +1,6 @@
-Users = new Mongo.Collection("users");
+MemberList = new Mongo.Collection("memberlist");
 
-Users.attachSchema(new SimpleSchema({
+MemberList.attachSchema(new SimpleSchema({
 	hashtag: {
 		type: String,
 		min: 1,

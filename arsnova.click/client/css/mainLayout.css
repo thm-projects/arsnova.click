@@ -1,0 +1,10 @@
+body {
+    background-color: #2972a3;
+}
+
+.contentPosition {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 50px);
+    top: 50px;
+}

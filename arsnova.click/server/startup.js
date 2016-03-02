@@ -57,6 +57,7 @@ if(Meteor.isServer){
             answerOptionNumber: 1,
             responseTime: 3
         }];
+
         Hashtags.insert(hashtagsExample);
         AnswerOptions.insert(answerOptionsExample);
         MemberList.insert(memberListExample);

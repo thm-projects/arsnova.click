@@ -9,9 +9,9 @@ AnswerOptions.attachSchema(new SimpleSchema({
 	answerText: {
 		type: String,
 		min: 1,
-		max: 50,
+		max: 500,
 	},
-	answerNumber: {
+	answerOptionNumber: {
 		type: Number,
 		min: 0,
 	},

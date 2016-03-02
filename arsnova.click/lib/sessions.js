@@ -15,7 +15,7 @@ Sessions.attachSchema(new SimpleSchema({
 		type: Number,
 		min: 0,
 	},
-	readConfirmationNeeded: {
+	isReadingConfirmationRequired: {
 		type: Number,
 		min: 0,
 		max: 1,

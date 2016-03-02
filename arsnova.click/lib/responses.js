@@ -11,7 +11,7 @@ Answers.attachSchema(new SimpleSchema({
 		min: 1,
 		max: 25,
 	},
-	optionNumber: {
+	answerOptionNumber: {
 		type: Number,
 		min: 0,
 	},

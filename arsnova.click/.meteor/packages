@@ -20,3 +20,4 @@ autopublish             # Publish all data to the clients (for prototyping)
 iron:router
 aldeed:simple-schema
 reywood:publish-composite
+aldeed:collection2

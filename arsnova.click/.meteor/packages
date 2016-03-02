@@ -21,3 +21,4 @@ iron:router
 aldeed:simple-schema
 reywood:publish-composite
 aldeed:collection2
+twbs:bootstrap

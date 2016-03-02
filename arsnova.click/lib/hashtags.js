@@ -11,4 +11,9 @@ Hashtags.attachSchema(new SimpleSchema({
 		min: 12,
 		max: 12,
 	},
+	isActive: {
+		type: Number,
+		min: 0,
+		max: 1,
+	}
 }));

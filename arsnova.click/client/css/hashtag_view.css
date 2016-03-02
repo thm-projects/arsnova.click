@@ -69,6 +69,13 @@
     box-shadow: none;
 }
 
+.hashtag-field {
+    width: 100%;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    outline: none;
+}
+
 .bg-hashtag-field {
     background-color: #f4cd25;
     border: none;

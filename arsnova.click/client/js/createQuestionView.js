@@ -3,35 +3,37 @@
  */
 Template.createQuestionView.helpers({
     question: function() {
-        const session = Session.get("currentSession");
-        if(!session || !session.hashtag || !session.questionText) {
+        const currentSession = window.localStorage.getItem("session");
+        if(!currentSession || !currentSession.questionText) {
             return "";
         }
-        return session.questionText;
+        return currentSession.questionText;
     }
 });
 
 Template.createQuestionView.events({
     "click #forwardButton":function(){
-        const session = Session.get("currentSession");
+        const session = window.localStorage.getItem("session");
+
         if(!session ||!session.hashtag) {
             return;
         }
 
         //Validate input?
         session.questionText = $('#questionText').val();
-        Session.set("currentsession", session);
+        window.localStorage.setItem("session", session);
     },
 
     "click #backButton":function(){
-        const session = Session.get("currentSession");
+        const session = window.localStorage.getItem("session");
+
         if(!session ||!session.hashtag) {
             return;
         }
 
         //Validate input?
         session.questionText = $('#questionText').val();
-        Session.set("currentsession", session);
+        window.localStorage.setItem("session", session);
     },
     "click #formatButton":function(){
         //Not implemented yet

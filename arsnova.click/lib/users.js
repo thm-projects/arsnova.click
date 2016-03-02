@@ -11,4 +11,9 @@ Users.attachSchema(new SimpleSchema({
 		min: 3,
 		max: 25,
 	},
+	readConfirmed: {
+		type: String,
+		min: 0,
+		max: 1,
+	}
 }));

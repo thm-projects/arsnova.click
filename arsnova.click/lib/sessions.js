@@ -13,5 +13,11 @@ Sessions.attachSchema(new SimpleSchema({
 	},
 	timer: {
 		type: Number,
+		min: 0,
+	},
+	readConfirmationNeeded: {
+		type: Number,
+		min: 0,
+		max: 1,
 	}
 }));

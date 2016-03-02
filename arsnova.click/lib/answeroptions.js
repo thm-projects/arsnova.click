@@ -19,5 +19,5 @@ AnswerOptions.attachSchema(new SimpleSchema({
 		type: Number,
 		min: 0,
 		max: 1,
-	}
+	},
 }));

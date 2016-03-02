@@ -3,12 +3,13 @@ variables:
 
 build-and-deploy:
   stage: deploy
-  only: 
+  only:
     - staging
   script:
-    - cd $PROJECT_PATH
-    - meteor build --directory --server $STAGING_HTTP_URL build
+    - cd "$PROJECT_PATH"
+    - meteor build --directory --server "$STAGING_HTTP_URL" build
+    - chmod -R a+rX,ug+w build
     - eval $(ssh-agent -s)
-    - mkdir ~/.ssh && echo $STAGING_SSH_KNOWN_HOSTS > ~/.ssh/known_hosts
+    - mkdir ~/.ssh && echo "$STAGING_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - ssh-add <(echo "$STAGING_SSH_PRIVATE_KEY")
-    - scp -r build/bundle $STAGING_SSH_URL
+    - scp -r build/bundle/* "$STAGING_SSH_URL"

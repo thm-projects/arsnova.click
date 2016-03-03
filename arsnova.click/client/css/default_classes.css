@@ -1,0 +1,34 @@
+.round-corners {
+    border-radius: 10px;
+}
+
+.button-shadow {
+    box-shadow: 1px 1px 5px black;
+}
+
+.input-field-bg-color {
+    background-color: #f4cd25;
+    border: none;
+}
+
+/*
+ * center's the placeholder
+ */
+.placeholder-align-center {
+}
+
+.placeholder-align-center::-webkit-input-placeholder {
+    text-align: center;
+}
+
+.placeholder-align-center:-moz-placeholder { /* Firefox 18- */
+    text-align: center;
+}
+
+.placeholder-align-center::-moz-placeholder { /* Firefox 19+ */
+    text-align: center;
+}
+
+.placeholder-align-center:-ms-input-placeholder {
+    text-align: center;
+}

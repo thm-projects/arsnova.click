@@ -1,7 +1,50 @@
-.round-corners {
-    border-radius: 10px;
+body {
+    background-color: #2972a3;
 }
 
-.button-shadow {
-    box-shadow: 1px 1px 5px black;
+/*
+ * cuts off the Placeholder if it is to long for the input filed
+ */
+/* TODO: if the textfield is focused, the text-overflow will be ignored */
+input[placeholder] {
+    text-overflow: ellipsis;
+}
+
+input::-webkit-input-placeholder {
+    text-overflow: ellipsis;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+    text-overflow: ellipsis;
+}
+
+input::-moz-placeholder { /* Firefox 19+ */
+    text-overflow: ellipsis;
+}
+
+input:-ms-input-placeholder {
+    text-overflow: ellipsis;
+}
+
+/*
+ * defines a default Color for the placeholder of all input fields
+ * TODO: maybe the same for TextArea
+ */
+
+input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #4d6a75;
+}
+
+input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #4d6a75;
+    opacity: 1;
+}
+
+input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #4d6a75;
+    opacity: 1;
+}
+
+input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #4d6a75;
 }

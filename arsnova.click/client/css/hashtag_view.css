@@ -41,6 +41,7 @@
     height: 50px;
     width: 100%;
     border: none;
+    white-space: nowrap;
 }
 
 .btn-create-session {

@@ -36,3 +36,7 @@
 .placeholder-align-center:-ms-input-placeholder {
     text-align: center;
 }
+
+.hover-underline:hover {
+    text-decoration: underline;
+}

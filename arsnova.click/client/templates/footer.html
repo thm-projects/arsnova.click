@@ -1,18 +1,33 @@
 <template name="footer">
-    <nav class="navbar navbar-default navbar-fixed-bottom navbar-small" style="background-color: gainsboro">
-        <div class="container-fluid text-center color-black">
-            <div class="col-xs-2 col-sm-3">
-                <a href="#">Über</a>
-            </div>
-            <div class="col-xs-2 col-sm-3">
-                <a href="#">AGB</a>
-            </div>
-            <div class="col-xs-4 col-sm-3">
-                <a href="#">Impressum</a>
-            </div>
-            <div class="col-xs-4 col-sm-3">
-                <a href="#">Datenschutz</a>
-            </div>
+    <nav class="navbar navbar-default navbar-fixed-bottom footer footer-gradient">
+        <div class="container-fluid text-center text-dark">
+
+            <!-- TODO: Insert right condition for the "Home"-Routing -->
+            {{#if isInHomePath}}
+                <a class="text-dark" href="/ueber">
+                    <div class="col-xs-2 col-sm-3">Über</div>
+                </a>
+            {{else}}
+                <a class="text-dark" href="/">
+                    <div class="col-xs-2 col-sm-3">Home</div>
+                </a>
+            {{/if}}
+
+            <a class="text-dark" href="/agb">
+                <div class="col-xs-2 col-sm-3">
+                    AGB
+                </div>
+            </a>
+            <a class="text-dark" href="/datenschutz">
+                <div class="col-xs-4 col-sm-3">
+                    Datenschutz
+                </div>
+            </a>
+            <a class="text-dark" href="/impressum">
+                <div class="col-xs-4 col-sm-3">
+                    Impressum
+                </div>
+            </a>
         </div>
     </nav>
 </template>

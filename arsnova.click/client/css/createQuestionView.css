@@ -1,0 +1,36 @@
+.createQuestion-template {
+    position: relative;
+    background-color: #2972a3;
+    width: 100%;
+    height: 100%;
+}
+
+.row-question-padding {
+
+    padding: 0 10px;
+    position: relative;
+    top: 20%;
+    /* TODO: IE 8 and Opera 8 doesn't support translateY*/
+    transform: translateY(-70%);
+
+}
+
+#questionText {
+    font-size: 1.5em;
+    width: 100%;
+    outline: none;
+    resize: none;
+}
+
+.col-left-button {
+    padding-right: 5px
+}
+
+.col-right-button {
+    padding-left: 5px
+}
+
+.row-create-question-buttons {
+    margin-top: 20px;
+
+}

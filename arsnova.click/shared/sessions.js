@@ -1,5 +1,14 @@
 Meteor.methods({
-    setSessionQuestion: function (privateKey, hashtag, questionText) {
+    "Sessions.setQuestion": function (privateKey, hashtag, questionText) {
+        //TODO: validate questionText with SimpleSchema
+        new SimpleSchema({
+            questionText: {
+                type: String,
+                min: 5,
+                max: 1000
+            }
+        }).validate({questionText: questionText});
+
         const hashItem = Hashtags.findOne({hashtag: hashtag});
         if (hashItem && privateKey === hashItem.privateKey) {
             const session = Sessions.findOne({hashtag: hashtag});

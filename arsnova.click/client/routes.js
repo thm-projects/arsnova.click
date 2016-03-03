@@ -12,6 +12,8 @@ Router.route('/nick', function () {
 Router.route('/question', function () {
     if (Session.get("isOwner")) {
 		this.render('createQuestionView');
+    } else {
+        Router.go("/");
     }
 });
 

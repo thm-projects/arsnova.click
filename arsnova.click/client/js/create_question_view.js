@@ -20,16 +20,15 @@ Template.createQuestionView.helpers({
 Template.createQuestionView.events({
     //Save question in Sessions-Collection when Button "Next" is clicked
     "click #forwardButton": function () {
-        //Validate input?
         var questionText = $('#questionText').val();
-        Meteor.call("setSessionQuestion", localStorage.getItem("privateKey"), Session.get("hashtag"), questionText);
-    },
-
-    //Save question in Sessions-Collection when Button "Back" is clicked
+        Meteor.call("Sessions.setQuestion", localStorage.getItem("privateKey"), Session.get("hashtag"), questionText);
+        Router.go("/answeroptions");
+    }, //Save question in Sessions-Collection when Button "Back" is clicked
     "click #backButton": function () {
-        //Validate input?
         var questionText = $('#questionText').val();
-        Meteor.call("setSessionQuestion", localStorage.getItem("privateKey"), Session.get("hashtag"), questionText);
+        Meteor.call("Sessions.setQuestion", localStorage.getItem("privateKey"), Session.get("hashtag"), questionText);
+        Session.set("isOwner", undefined);
+        Router.go("/");
     },
     "click #formatButton": function () {
         //Not implemented yet

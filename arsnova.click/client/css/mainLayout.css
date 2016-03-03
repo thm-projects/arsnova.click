@@ -2,6 +2,10 @@ body {
     background-color: #2972a3;
 }
 
+.contentContainer {
+    margin-bottom: 35px;
+}
+
 .contentPosition {
     position: absolute;
     width: 100%;
@@ -13,3 +17,21 @@ body {
     height: calc(100% - 50px - 20px);
     top: 50px;
 }
+
+.text-light {
+    color: white;
+}
+
+.text-dark {
+    color: black !important;
+}
+
+a,
+a:hover,
+a:active,
+a:visited,
+a:focus {
+    text-decoration: none;
+    outline: none;
+}
+

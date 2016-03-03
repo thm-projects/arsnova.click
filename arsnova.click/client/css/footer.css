@@ -1,0 +1,25 @@
+
+.footer {
+    min-height: 20px;
+    color: black;
+    margin-top: 10px;
+    border: 0px;
+}
+
+.footer-gradient {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fafafa+0,bfbfbf+100 */
+    background: #fafafa; /* Old browsers */
+    background: -moz-linear-gradient(top, #fafafa 0%, #bfbfbf 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #fafafa 0%, #bfbfbf 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #fafafa 0%, #bfbfbf 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa', endColorstr='#bfbfbf', GradientType=0); /* IE6-9 */
+}
+
+.footer div {
+    border-left: solid black 1px;
+    padding: 2px 0;
+}
+
+.footer div:first-child {
+    border: none;
+}

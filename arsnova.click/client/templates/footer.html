@@ -1,17 +1,24 @@
 <template name="footer">
-    <nav class="navbar navbar-default navbar-fixed-bottom navbar-small">
-        <div class="container-fluid text-center color-black">
+    <nav class="navbar navbar-default navbar-fixed-bottom footer footer-gradient">
+        <div class="container-fluid text-center text-dark">
             <div class="col-xs-2 col-sm-3">
-                <a href="#">Über</a>
+
+                <!-- TODO: Insert right condition for the "Home"-Routing -->
+                {{#if isActiveRoute '/'}}
+                    <a class="text-dark" href="/ueber">Über</a>
+                {{else}}
+                    <a class="text-dark" href="/">Home</a>
+                {{/if}}
+
             </div>
             <div class="col-xs-2 col-sm-3">
-                <a href="#">AGB</a>
+                <a class="text-dark" href="/agb">AGB</a>
             </div>
             <div class="col-xs-4 col-sm-3">
-                <a href="#">Impressum</a>
+                <a class="text-dark" href="/datenschutz">Datenschutz</a>
             </div>
             <div class="col-xs-4 col-sm-3">
-                <a href="#">Datenschutz</a>
+                <a class="text-dark" href="/impressum">Impressum</a>
             </div>
         </div>
     </nav>

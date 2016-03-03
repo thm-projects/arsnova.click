@@ -1,4 +1,3 @@
-
 .hashtag-template {
     position: relative;
     background-color: #2972a3;
@@ -14,11 +13,6 @@
     /* TODO: IE 8 and Opera 8 doesn't support translateY*/
     transform: translateY(-70%);
 
-}
-
-.round-corners {
-    border-radius: 10px;
-    box-shadow: 1px 1px 5px black;
 }
 
 .hashtag-char {
@@ -76,9 +70,4 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     outline: none;
-}
-
-.bg-hashtag-field {
-    background-color: #f4cd25;
-    border: none;
 }

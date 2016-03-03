@@ -5,6 +5,6 @@ body {
 .contentPosition {
     position: absolute;
     width: 100%;
-    height: calc(100% - 50px);
+    height: calc(100% - 50px - 20px);
     top: 50px;
 }

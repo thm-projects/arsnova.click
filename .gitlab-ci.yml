@@ -13,3 +13,6 @@ build-and-deploy:
     - mkdir ~/.ssh && echo "$STAGING_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - ssh-add <(echo "$STAGING_SSH_PRIVATE_KEY")
     - scp -r build/bundle/* "$STAGING_SSH_URL"
+  cache:
+    paths:
+      - ~/.meteor/packages. 

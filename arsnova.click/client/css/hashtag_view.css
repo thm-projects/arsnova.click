@@ -11,12 +11,13 @@
     padding: 0 10px;
     position: relative;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-70%);
 
 }
 
 .round-corners {
     border-radius: 10px;
+    box-shadow: 1px 1px 5px black;
 }
 
 .hashtag-char {

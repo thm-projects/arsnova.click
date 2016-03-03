@@ -16,9 +16,9 @@ Router.route('/question', function () {
 });
 
 Router.route('/answeroptions', function () {
-    if (Session.get("isOwner")) {
-
-    }
+    //if (Session.get("isOwner")) {
+        this.render('createAnswerOptions');
+    //}
 });
 
 Router.route('/settimer', function () {

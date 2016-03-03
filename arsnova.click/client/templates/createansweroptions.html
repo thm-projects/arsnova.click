@@ -1,26 +1,22 @@
 <template name="createAnswerOptions">
     <form>
         Antwortoptionen
-        {{#each answeroptions}}
-            {{> answerOptionItem}}
-        {{/each}}
-    </form>
-</template>
-
-<template name="answerOptionItem">
-    {{#with answerOptions}}
-    <div class="form-group">
-        <div class="input-group">
-            <div class="input-group-addon">{{answerOptionNr}}</div>
-            <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
-            <div class="input-group-addon">
-                {{#if isCorrect}}
-                    r
-                {{/else}}
-                    f
-                {{/if}}
+        {{#each answerOptions}}
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon input-field-bg-color">{{answerOptionLetter answerOptionNumber}}</div>
+                <input type="text" class="form-control input-field-bg-color placeholder-align-center" id="answerOptionText" placeholder="Text oder lass leer" value="{{answerText}}">
+                <div class="input-group-addon input-field-bg-color">
+                    {{#if isCorrect}}
+                        r
+                    {{else}}
+                        f
+                    {{/if}}
+                </div>
             </div>
         </div>
-    </div>
-    {{/with}}
+        {{/each}}
+        <button type="button" id="addAnswerOption" class="btn btn-lg btn-secondary round-corners button-shadow">+</button>
+        <button type="button" id="deleteAnswerOption" class="btn btn-lg btn-secondary round-corners button-shadow">-</button>
+    </form>
 </template>

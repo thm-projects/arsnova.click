@@ -29,6 +29,9 @@ Template.createAnswerOptions.events({
    "click #deleteAnswerOption": function (event) {
       var number = AnswerOptions.find().count() - 1;
       Meteor.call('AnswerOptions.deleteOption', localStorage.getItem("privateKey"), Session.get("hashtag"), number);
+      if (AnswerOptions.find().count() == 0) {
+         $(event.target).hide();
+      }
    },
    "click #backButton": function (event) {
       Router.go('/question');
@@ -37,6 +40,9 @@ Template.createAnswerOptions.events({
       for (var i = 0; i < AnswerOptions.find().count(); i++) {
          var text = $("#answerOptionText_Number" + i).val();
          Meteor.call('AnswerOptions.updateAnswerText', localStorage.getItem("privateKey"), Session.get("hashtag"), i, text);
+         if (AnswerOptions.find().count() > 0) {
+            $(event.target).show();
+         }
       }
    }
 });

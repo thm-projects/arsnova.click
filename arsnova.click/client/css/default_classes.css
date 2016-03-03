@@ -6,6 +6,11 @@
     box-shadow: 1px 1px 5px black;
 }
 
+.input-field-sizing {
+    height: 50px;
+    font-size: 1.5em;
+}
+
 .input-field-bg-color {
     background-color: gold;
     border: none;

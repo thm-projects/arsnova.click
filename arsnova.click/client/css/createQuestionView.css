@@ -1,8 +1,10 @@
 .createQuestion-template {
-    /*position: relative;*/
-    /*background-color: #2972a3;*/
-    /*width: 100%;*/
-    /*height: 100%;*/
+    /* TODO change with default css */
+    padding: 0 10px;
+    position: relative;
+    top: 50%;
+    /* TODO: IE 8 and Opera 8 doesn't support translateY; */
+    transform: translateY(-70%);
 }
 
 .row-question-padding {

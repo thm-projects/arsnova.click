@@ -21,6 +21,12 @@
     }
 }
 
+@media (min-width: 990px) {
+    .header-layout {
+        font-size: 6vw;
+    }
+}
+
 @media (min-width: 768px) {
     .header-layout {
         font-size: 5vw;

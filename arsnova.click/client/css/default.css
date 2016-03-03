@@ -1,14 +1,5 @@
 body {
-    background-color: steelblue;
-    font-family: Georgia, serif;
-}
-
-button {
-    font-size: 1.3em;
-}
-
-button:focus {
-    outline: none;
+    background-color: #2972a3;
 }
 
 /*
@@ -44,22 +35,22 @@ input:-ms-input-placeholder {
 
 /* WebKit, Blink, Edge */
 input::-webkit-input-placeholder {
-    color: darkslategrey;
+    color: #4d6a75;
 }
 
 /* Mozilla Firefox 4 to 18 */
 input:-moz-placeholder {
-    color: darkslategrey;
+    color: #4d6a75;
     opacity: 1;
 }
 
 /* Mozilla Firefox 19+ */
 input::-moz-placeholder {
-    color: darkslategrey;
+    color: #4d6a75;
     opacity: 1;
 }
 
 /* Internet Explorer 10-11 */
 input:-ms-input-placeholder {
-    color: darkslategrey;
+    color: #4d6a75;
 }

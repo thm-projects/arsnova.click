@@ -12,7 +12,6 @@
     /* TODO: IE 8 and Opera 8 doesn't support translateY*/
     transform: translateY(-70%);
 }
-
 .hashtag-char {
     font-size: 2em;
     color: darkslategrey;

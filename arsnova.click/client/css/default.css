@@ -1,5 +1,14 @@
 body {
     background-color: #2972a3;
+    font-family: Georgia, serif;
+}
+
+button {
+    font-size: 1.3em;
+}
+
+button:focus {
+    outline: none;
 }
 
 /*

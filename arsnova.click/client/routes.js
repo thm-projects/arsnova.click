@@ -51,3 +51,22 @@ Router.route('/statistics', function () {
 
 Router.route('/results', function () {
 });
+
+
+// Routes for Footer-Links
+
+Router.route('/ueber', function () {
+    this.render('ueber');
+});
+
+Router.route('/agb', function () {
+    this.render('agb');
+});
+
+Router.route('/datenschutz', function () {
+    this.render('datenschutz');
+});
+
+Router.route('/impressum', function () {
+    this.render('impressum');
+});

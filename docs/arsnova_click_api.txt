@@ -1,0 +1,20 @@
+getAnswer(hashtag, nick)
+addAnswer(hashtag, nick, answerNumber)
+getAllAnswers(hashtag)
+
+getAnswerOptions(hashtag)
+getAnswerOption(hashtag, number)
+addAnswerOption(hashtag, answerText, answerNumber, isCorrect)
+
+setSession(privateKey, hashtag)
+setSessionQuestion(privateKey, hashtag, questionText)
+setSessionTimer(privateKey, hashtag, timer)
+getUserSessions(privateKey)
+
+getSessionUserList(hashtag)
+addSessionUser(hashtag, nick)
+isUserNickAvailable(hashtag, nick)
+
+addHashtag(privateKey, hashtag)
+getAllHashtags(privateKey)
+isHashtagAvailable(hashtag)

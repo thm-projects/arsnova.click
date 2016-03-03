@@ -1,8 +1,8 @@
-.round-corners {
+.round-corners, .button {
     border-radius: 10px;
 }
 
-.button-shadow {
+.button-shadow, .button {
     box-shadow: 1px 1px 5px black;
 }
 
@@ -13,6 +13,17 @@
 
 .default-yellow-text-color {
     color: gold;
+}
+
+.button {
+    height: 50px;
+    width: 100%;
+    border: none;
+    white-space: nowrap;
+}
+
+.button:hover, .button:active:focus {
+    box-shadow: none;
 }
 
 /*

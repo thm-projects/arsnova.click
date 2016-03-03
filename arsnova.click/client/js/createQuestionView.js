@@ -4,7 +4,12 @@
 Template.createQuestionView.helpers({
     //Get question from Sessions-Collection if it already exists
     question: function() {
+        //To test
+        //Session.set("hashtag", "wpw");
+        //window.localStorage.setItem("privateKey", "thisismypriv");
+
         const currentSession = Sessions.findOne({hashtag:Session.get("hashtag")});
+
         if(!currentSession || !currentSession.questionText) {
             return "";
         }

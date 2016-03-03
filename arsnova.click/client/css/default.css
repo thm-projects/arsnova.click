@@ -1,5 +1,14 @@
 body {
-    background-color: #2972a3;
+    background-color: steelblue;
+    font-family: Georgia, serif;
+}
+
+button {
+    font-size: 1.3em;
+}
+
+button:focus {
+    outline: none;
 }
 
 /*
@@ -35,22 +44,43 @@ input:-ms-input-placeholder {
 
 /* WebKit, Blink, Edge */
 input::-webkit-input-placeholder {
-    color: #4d6a75;
+    color: darkslategrey;
 }
 
 /* Mozilla Firefox 4 to 18 */
 input:-moz-placeholder {
-    color: #4d6a75;
+    color: darkslategrey;
     opacity: 1;
 }
 
 /* Mozilla Firefox 19+ */
 input::-moz-placeholder {
-    color: #4d6a75;
+    color: darkslategrey;
     opacity: 1;
 }
 
 /* Internet Explorer 10-11 */
 input:-ms-input-placeholder {
-    color: #4d6a75;
+    color: darkslategrey;
+}
+
+/*
+ * defines a big X over the whole Button
+ */
+button:disabled {
+    box-shadow: none;
+}
+
+button:disabled::before {
+    content: '\2715';
+    position: absolute;
+    height: 100%;
+    font-size: 8em;
+    text-align: center;
+    line-height: 25%;
+    width: 100%;
+    padding-right: 30px;
+    z-index: 100;
+    display: block;
+    color: black;
 }

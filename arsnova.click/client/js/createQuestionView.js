@@ -2,8 +2,9 @@
  * Created by Kevin on 02.03.16.
  */
 Template.createQuestionView.helpers({
+    //Get question from Sessions-Collection if it already exists
     question: function() {
-        const currentSession = window.localStorage.getItem("session");
+        const currentSession = Sessions.findOne({hashtag:Session.get("hashtag")});
         if(!currentSession || !currentSession.questionText) {
             return "";
         }
@@ -12,28 +13,20 @@ Template.createQuestionView.helpers({
 });
 
 Template.createQuestionView.events({
+    //Save question in Sessions-Collection when Button "Next" is clicked
     "click #forwardButton":function(){
-        const session = window.localStorage.getItem("session");
-
-        if(!session ||!session.hashtag) {
-            return;
-        }
-
         //Validate input?
-        session.questionText = $('#questionText').val();
-        window.localStorage.setItem("session", session);
+        const questionText = $('#questionText').val();
+
+        Meteor.call("setSessionQuestion", window.localStorage.getItem("privateKey"), Session.get("hashtag"), questionText);
     },
 
+    //Save question in Sessions-Collection when Button "Back" is clicked
     "click #backButton":function(){
-        const session = window.localStorage.getItem("session");
-
-        if(!session ||!session.hashtag) {
-            return;
-        }
-
         //Validate input?
-        session.questionText = $('#questionText').val();
-        window.localStorage.setItem("session", session);
+        const questionText = $('#questionText').val();
+
+        Meteor.call("setSessionQuestion", window.localStorage.getItem("privateKey"), Session.get("hashtag"), questionText);
     },
     "click #formatButton":function(){
         //Not implemented yet

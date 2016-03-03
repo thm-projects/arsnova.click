@@ -1,11 +1,14 @@
 Meteor.methods({
     'MemberList.addLearner'( hashtag, nick ) {
-        console.log(nick);
         new SimpleSchema({
             hashtag: { type: String },
             nick: { type: String }
         }).validate({ hashtag, nick });
-        var member = MemberList.findOne({hashtag: hashtag, nick: nick});
+        if (Meteor.isServer) {
+            member = MemberList.findOne({
+                hashtag: hashtag,
+                nick: nick});
+        }
         if (!member){
             MemberList.insert({
                 hashtag: hashtag,
@@ -23,7 +26,11 @@ Meteor.methods({
             hashtag: { type: String },
             nick: { type: String }
         }).validate({ hashtag, nickName });
-        var member = MemberList.findOne({hashtag: hashtag, nick: nickName});
+        if (Meteor.isServer) {
+            member = MemberList.findOne({
+                hashtag: hashtag,
+                nick: nick});
+        }
         if (!member) {
             throw new Meteor.Error('MemberList.setReadConfirmed', 'Member not found!');
             return;

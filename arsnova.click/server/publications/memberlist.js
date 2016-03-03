@@ -1,6 +1,6 @@
 Meteor.publish('MemberList.members', function(phashtag) {
     new SimpleSchema({
-        hashtag: {type: String}
+        phashtag: {type: String}
     }).validate({phashtag});
     var learners = MemberList.find({
         hashtag: phashtag

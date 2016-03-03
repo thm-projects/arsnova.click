@@ -3,6 +3,10 @@ body {
     font-family: Georgia, serif;
 }
 
+button {
+    font-size: 1.5em;
+}
+
 /*
  * cuts off the Placeholder if it is to long for the input filed
  */

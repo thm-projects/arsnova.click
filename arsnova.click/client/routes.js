@@ -10,9 +10,11 @@ Router.route('/nick', function () {
 });
 
 Router.route('/question', function () {
-    //if (Session.get("isOwner")) {
-        this.render('home');
-    //}
+    if (Session.get("isOwner")) {
+		this.render('createQuestionView');
+    } else {
+        Router.go("/");
+    }
 });
 
 Router.route('/answeroptions', function () {

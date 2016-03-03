@@ -6,6 +6,13 @@
     color:black;
 }
 
+.splashSmallTitle {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color:black;
+}
+
 .modal-dialog {
     width: 90%;
     max-width: 500px;
@@ -17,7 +24,7 @@
 .modal-content {
     height: 100%;
     background: linear-gradient(white,grey);
-    border-radius: 30px;
+    border-radius: 50px;
     text-align: center;
     font-size: 20px;
     color: black;

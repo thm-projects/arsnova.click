@@ -1,4 +1,13 @@
 <template name="home">
-    {{> splashscreen}}
-    <h1>Huhu</h1>
+
+    <!--
+    session - true sessions
+            false question # answers
+
+    -->
+    {{> splashscreen session=false}}
+
+
+    {{> hashtag_view}}
+    <!-- TODO insert splashscreen existing sessions here -->
 </template>

@@ -10,17 +10,41 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-body">
-                    <p class="splashTitle">Hinweis:</p>
-                    <p>Die folgenden Hashtags sind in diesem Browser verfügbar:</p>
 
-                    <ul>
-                        <li>SWT 29.03</li>
-                        <li>SWT 03.03</li>
-                        <li>AuD 8812</li>
-                    </ul>
+                    <p class="splashTitle">{{titel}}</p><br />
+                    <p>{{text}}</p>
+
+
+                    {{#if session}}
+                        {{>sessionsT}}
+                    {{else}}
+                        {{>questionT}}
+                    {{/if}}
+
                 </div>
             </div>
         </div>
     </div>
 
+</template>
+
+<template name="sessionsT">
+    <p class="splashTitle">Hinweis:</p><br />
+    <p class="#">Die folgenden Hashtags sind in diesem Browser verfügbar:</p><br />
+        <ul>
+            {{#each links}}
+                <li><a href="#">{{content}}</a></li>
+            {{/each}}
+        </ul>
+</template>
+
+<template name="questionT">
+    <br />
+    <p class="splashSmallTitle">{{quest}}</p>
+    <br />
+        <ul>
+            {{#each answ}}
+                <li><a href="#">{{content}}</a></li>
+            {{/each}}
+        </ul>
 </template>

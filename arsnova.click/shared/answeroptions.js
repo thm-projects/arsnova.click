@@ -26,10 +26,7 @@ Meteor.methods({
                 isCorrect: isCorrect
             });
         }
-    }
-});
-
-Meteor.methods({
+    },
     'AnswerOptions.deleteOption'( pprivateKey, hashtag, answerOptionNumber ) {
         (new SimpleSchema({
             pprivateKey: { type: String },
@@ -48,14 +45,37 @@ Meteor.methods({
             return;
         }
         else {
-            var answerOptionDoc = AnswerOptions.find({
-                hashtag: hashtag,
-                answerOptionNumber: answerOptionNumber
-            });
-
             AnswerOptions.remove({
                 hashtag: hashtag,
                 answerOptionNumber: answerOptionNumber
+            });
+        }
+    },
+    'AnswerOptions.updateAnswerText'( pprivateKey, hashtag, answerOptionNumber, answerText ) {
+        new SimpleSchema({
+            pprivateKey: { type: String },
+            hashtag: { type: String },
+            answerOptionNumber: { type: Number },
+            answerText: { type: String }
+        }).validate({ pprivateKey, hashtag, answerOptionNumber, answerText });
+        var doc = true;
+        if (Meteor.isServer) {
+            doc = Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: pprivateKey
+            });
+        }
+        if (!doc) {
+            throw new Meteor.Error('AnswerOptions.addOption', 'Either there is no hashtag or you don\'t have write access');
+            return;
+        }
+        else {
+            var answerOptionDoc = AnswerOptions.findOne({
+                hashtag: hashtag,
+                answerOptionNumber: answerOptionNumber
+            });
+            AnswerOptions.update(answerOptionDoc._id, {
+                $set: {answerText: answerText}
             });
         }
     }

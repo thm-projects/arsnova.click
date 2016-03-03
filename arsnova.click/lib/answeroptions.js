@@ -8,8 +8,9 @@ AnswerOptions.attachSchema(new SimpleSchema({
 	},
 	answerText: {
 		type: String,
-		min: 1,
-		max: 500
+		min: 0,
+		max: 500,
+		optional: true
 	},
 	answerOptionNumber: {
 		type: Number,

@@ -1,4 +1,3 @@
-
 .hashtag-template {
     position: relative;
     background-color: #2972a3;
@@ -23,23 +22,6 @@
 #hashtag-input-field {
     height: 50px;
     font-size: 1.5em;
-    text-align: center;
-}
-
-#hashtag-input-field::-webkit-input-placeholder {
-    text-align: center;
-}
-
-#hashtag-input-field:-moz-placeholder { /* Firefox 18- */
-    text-align: center;
-}
-
-#hashtag-input-field::-moz-placeholder { /* Firefox 19+ */
-    text-align: center;
-}
-
-#hashtag-input-field:-ms-input-placeholder {
-    text-align: center;
 }
 
 .col-join-session {
@@ -88,9 +70,4 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     outline: none;
-}
-
-.bg-hashtag-field {
-    background-color: #f4cd25;
-    border: none;
 }

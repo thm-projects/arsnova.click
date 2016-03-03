@@ -11,14 +11,16 @@ Router.route('/nick', function () {
 
 Router.route('/question', function () {
     if (Session.get("isOwner")) {
-
+		this.render('createQuestionView');
+    } else {
+        Router.go("/");
     }
 });
 
 Router.route('/answeroptions', function () {
-    if (Session.get("isOwner")) {
-
-    }
+    //if (Session.get("isOwner")) {
+        this.render('createAnswerOptions');
+    //}
 });
 
 Router.route('/settimer', function () {

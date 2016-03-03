@@ -16,11 +16,6 @@
 
 }
 
-.round-corners {
-    border-radius: 10px;
-    box-shadow: 1px 1px 5px black;
-}
-
 .hashtag-char {
     font-size: 2em;
 }
@@ -28,6 +23,23 @@
 #hashtag-input-field {
     height: 50px;
     font-size: 1.5em;
+    text-align: center;
+}
+
+#hashtag-input-field::-webkit-input-placeholder {
+    text-align: center;
+}
+
+#hashtag-input-field:-moz-placeholder { /* Firefox 18- */
+    text-align: center;
+}
+
+#hashtag-input-field::-moz-placeholder { /* Firefox 19+ */
+    text-align: center;
+}
+
+#hashtag-input-field:-ms-input-placeholder {
+    text-align: center;
 }
 
 .col-join-session {

@@ -1,0 +1,7 @@
+.round-corners {
+    border-radius: 10px;
+}
+
+.button-shadow {
+    box-shadow: 1px 1px 5px black;
+}

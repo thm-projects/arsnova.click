@@ -25,26 +25,23 @@
             </div>
         </div>
     </div>
-
 </template>
+
 
 <template name="sessionsT">
     <p class="splashTitle">Hinweis:</p><br />
-    <p class="#">Die folgenden Hashtags sind in diesem Browser verfügbar:</p><br />
-        <ul>
-            {{#each links}}
-                <li><a href="#">{{content}}</a></li>
-            {{/each}}
-        </ul>
+    <p class="modal-center">Die folgenden Hashtags sind in diesem Browser verfügbar:</p><br />
+    {{#each links}}
+        <a href="#">{{content}}</a><br />
+    {{/each}}
 </template>
+
 
 <template name="questionT">
     <br />
     <p class="splashSmallTitle">{{quest}}</p>
     <br />
-        <ul>
-            {{#each answ}}
-                <li><a href="#">{{content}}</a></li>
-            {{/each}}
-        </ul>
+    {{#each answ}}
+        <a href="#">{{content}}</a>
+    {{/each}}
 </template>

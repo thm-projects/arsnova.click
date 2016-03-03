@@ -1,13 +1,9 @@
 <template name="home">
 
-    <!--
-    session - true sessions
-            false question # answers
-
+    <!--Parameter:
+    session - true: session list
+            - false: question answers screen
     -->
-    {{> splashscreen session=false}}
-
-
+    {{> splashscreen session=true}}
     {{> hashtag_view}}
-    <!-- TODO insert splashscreen existing sessions here -->
 </template>

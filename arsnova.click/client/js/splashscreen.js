@@ -6,7 +6,7 @@ Template.splashscreen.rendered = function () {
         $('.js-splashscreen').modal('hide')
     });
 
-    // testweise Daten in localStorage legen
+    // test data in localStorage
     var qq = [
         { content: "SWT 29.03" },
         { content: "SWT 29.043" },
@@ -27,7 +27,7 @@ Template.splashscreen.rendered = function () {
 
 };
 
-
+// get Data from localStorage
 Template.sessionsT.helpers({
     links: JSON.parse(localStorage.getItem("activeSessions"))
 });

@@ -16,7 +16,6 @@
 .modal-dialog {
     width: 90%;
     max-width: 500px;
-    height: 90%;
     max-height: 500px;
     padding: 0;
 }
@@ -31,11 +30,24 @@
 }
 
 .modal-list ul {
-
     list-style: initial;
     margin: auto;
 }
 
 .modal-center{
  text-align: center;
+}
+
+.modal-body {
+    padding: 0;
+    max-height: calc(100vh - 50px);
+    overflow-y: auto;
+}
+.modal-header{
+    border-bottom: none;
+    padding: 20px;
+}
+.modal-footer{
+    border-top: none;
+    padding:20px;
 }

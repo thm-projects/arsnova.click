@@ -1,47 +1,44 @@
 <!--kevin weigand, michael sann-->
 
 <template name="splashscreen">
-    <!--
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal
-    </button>
-     -->
-    <div class="modal fade bs-example-modal-lg js-splashscreen" tabindex="-1" role="dialog"
-         aria-labelledby="myLargeModalLabel">
-        <div class="modal-dialog modal-lg">
+    <div class="modal fade js-splashscreen" role="dialog">
+        <div class="modal-dialog">
             <div class="modal-content">
+                <div class="modal-header">
+                </div>
                 <div class="modal-body">
-
-                    <p class="splashTitle">{{titel}}</p><br />
                     <p>{{text}}</p>
-
-
                     {{#if session}}
                         {{>sessionsT}}
                     {{else}}
                         {{>questionT}}
                     {{/if}}
-
+                </div>
+                <div class="modal-footer">
                 </div>
             </div>
+            <!-- /.modal-content -->
         </div>
+        <!-- /.modal-dialog -->
     </div>
+    <!-- /.modal -->
 </template>
 
 
 <template name="sessionsT">
-    <p class="splashTitle">Hinweis:</p><br />
-    <p class="modal-center">Die folgenden Hashtags sind in diesem Browser verfügbar:</p><br />
+    <p class="splashTitle">Hinweis:</p><br/>
+    <p class="modal-center">Die folgenden Hashtags sind in diesem Browser verfügbar:</p><br/>
     {{#each links}}
-        <a href="#">{{content}}</a><br />
+        <a href="#">{{content}}</a><br/>
     {{/each}}
 </template>
 
 
 <template name="questionT">
-    <br />
+    <br/>
     <p class="splashSmallTitle">{{quest}}</p>
-    <br />
+    <br/>
     {{#each answ}}
-        <a href="#">{{content}}</a>
+        <a href="#">{{content}}</a><br/>
     {{/each}}
 </template>

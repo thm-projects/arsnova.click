@@ -1,28 +1,28 @@
 Meteor.methods({
-    'MemberList.addNick'( hashtag, nickName ) {
+    'MemberList.addLearner'( hashtag, nick ) {
+        console.log(nick);
         new SimpleSchema({
             hashtag: { type: String },
-            nick: { type: String },
-            readConfirmed: { type: Number },
-        }).validate({ hashtag, nickName, isReadConfirmed });
-        var member = MemberList.findOne({hashtag: hashtag, nick: nickName});
+            nick: { type: String }
+        }).validate({ hashtag, nick });
+        var member = MemberList.findOne({hashtag: hashtag, nick: nick});
         if (!member){
             MemberList.insert({
                 hashtag: hashtag,
-                nick: nickName,
+                nick: nick,
                 readConfirmed: 0
             });
         }else{
-            throw new Meteor.Error('MemberList.addNick', 'Nick already exists!');
+            throw new Meteor.Error('MemberList.addLearner', 'Nick already exists!');
             return;
         }
     },
     'MemberList.setReadConfirmed'( hashtag, nickName ) {
+        // TODO Thought: maybe link this method to a privateKey for learners? otherwise everybody can set "readConfirmed" for each user!
         new SimpleSchema({
             hashtag: { type: String },
-            nick: { type: String },
-            readConfirmed: { type: Number },
-        }).validate({ hashtag, nickName, isReadConfirmed });
+            nick: { type: String }
+        }).validate({ hashtag, nickName });
         var member = MemberList.findOne({hashtag: hashtag, nick: nickName});
         if (!member) {
             throw new Meteor.Error('MemberList.setReadConfirmed', 'Member not found!');

@@ -15,11 +15,11 @@
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa', endColorstr='#bfbfbf', GradientType=0); /* IE6-9 */
 }
 
-.footer div {
+.footer a div {
     border-left: solid black 1px;
     padding: 2px 0;
 }
 
-.footer div:first-child {
+.footer a:first-child div {
     border: none;
 }

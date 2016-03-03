@@ -1,5 +1,16 @@
 body {
     background-color: #2972a3;
+    font-family: 'Droid Serif', serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    /* integrated seperate sans-serif font family for headlines / this contrasts nicely to the body serif font*/
+    font-family: 'Arial', sans-serif;
 }
 
 .contentContainer {
@@ -18,11 +29,20 @@ body {
     top: 50px;
 }
 
-.text-light {
+.text-light,
+a.text-light,
+a:hover.text-light,
+a:active.text-light,
+a:visited.text-light,
+a:focus.text-light {
     color: white;
 }
 
-.text-dark {
+a.text-dark,
+a:hover.text-dark,
+a:active.text-dark,
+a:visited.text-dark,
+a:focus.text-dark {
     color: black !important;
 }
 
@@ -35,3 +55,21 @@ a:focus {
     outline: none;
 }
 
+a:hover {
+    text-decoration: underline;
+}
+
+p, ul.list-unstyled {
+    margin-left: 30px;
+    text-align: justify;
+}
+
+/*  Font definition / Georgia-like */
+/* latin */
+@font-face {
+    font-family: 'Droid Serif';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Droid Serif'), local('DroidSerif'), url('../fonts/droid-serif.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}

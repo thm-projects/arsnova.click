@@ -11,6 +11,10 @@
     border: none;
 }
 
+.default-yellow-text-color {
+    color: #f4cd25;
+}
+
 /*
  * center's the placeholder
  */

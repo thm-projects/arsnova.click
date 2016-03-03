@@ -9,3 +9,20 @@
     height: calc(100% - 50px - 20px);
     top: 50px;
 }
+
+.header-layout {
+    white-space: nowrap;
+    font-size: 7vw;
+}
+
+@media (min-width: 1200px) {
+    .header-layout {
+        font-size: 80px;
+    }
+}
+
+@media (min-width: 768px) {
+    .header-layout {
+        font-size: 5vw;
+    }
+}

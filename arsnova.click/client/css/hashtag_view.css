@@ -1,7 +1,5 @@
-
 .hashtag-template {
     position: relative;
-    background-color: #2972a3;
     width: 100%;
     height: 100%;
 }
@@ -13,16 +11,11 @@
     top: 50%;
     /* TODO: IE 8 and Opera 8 doesn't support translateY*/
     transform: translateY(-70%);
-
-}
-
-.round-corners {
-    border-radius: 10px;
-    box-shadow: 1px 1px 5px black;
 }
 
 .hashtag-char {
     font-size: 2em;
+    color: darkslategrey;
 }
 
 #hashtag-input-field {
@@ -43,17 +36,20 @@
 
 }
 
-.btn-create-session {
-    background-color: #a03628;
-    border: none;
+.btn-create-session, .btn-join-session {
     height: 50px;
+    width: 100%;
+    border: none;
+    white-space: nowrap;
+}
+
+.btn-create-session {
+    background-color: firebrick;
     color: #ffffff;
 }
 
 .btn-join-session {
-    background-color: #773f9c;
-    border: none;
-    height: 50px;
+    background-color: rebeccapurple;
     color: #ffffff;
 }
 
@@ -76,9 +72,4 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     outline: none;
-}
-
-.bg-hashtag-field {
-    background-color: #f4cd25;
-    border: none;
 }

@@ -1,7 +1,3 @@
-body {
-    background-color: #2972a3;
-}
-
 .contentPosition {
     position: absolute;
     width: 100%;
@@ -12,4 +8,27 @@ body {
      */
     height: calc(100% - 50px - 20px);
     top: 50px;
+}
+
+.header-layout {
+    white-space: nowrap;
+    font-size: 7vw;
+}
+
+@media (min-width: 1200px) {
+    .header-layout {
+        font-size: 80px;
+    }
+}
+
+@media (min-width: 990px) {
+    .header-layout {
+        font-size: 6vw;
+    }
+}
+
+@media (min-width: 768px) {
+    .header-layout {
+        font-size: 5vw;
+    }
 }

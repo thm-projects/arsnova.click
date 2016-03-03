@@ -3,6 +3,14 @@
     border: 0px;
 }
 
+.arsnova-logo {
+    width: 6vw;
+}
+
+.text-header-hashtag {
+    font-size: 4vw;
+}
+
 .navbar-small {
     min-height: 20px;
     color: black;

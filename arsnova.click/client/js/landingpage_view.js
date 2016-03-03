@@ -3,5 +3,8 @@ Template.hashtag_view.events({
         //TODO:
         Session.set("isOwner", true);
         Router.go("/question");
+    },
+    "click #joinSession": function () {
+        Router.go("/nick");
     }
 });

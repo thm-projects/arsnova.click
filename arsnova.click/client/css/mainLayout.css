@@ -1,8 +1,3 @@
-body {
-    background-color: #2972a3;
-    font-family: 'Georgia', serif;
-}
-
 h1,
 h2,
 h3,
@@ -62,4 +57,27 @@ a:hover {
 p, ul.list-unstyled {
     margin-left: 30px;
     text-align: justify;
+}
+
+.header-layout {
+    white-space: nowrap;
+    font-size: 7vw;
+}
+
+@media (min-width: 1200px) {
+    .header-layout {
+        font-size: 80px;
+    }
+}
+
+@media (min-width: 990px) {
+    .header-layout {
+        font-size: 6vw;
+    }
+}
+
+@media (min-width: 768px) {
+    .header-layout {
+        font-size: 5vw;
+    }
 }

@@ -7,12 +7,12 @@
 }
 
 .input-field-bg-color {
-    background-color: #f4cd25;
+    background-color: gold;
     border: none;
 }
 
 .default-yellow-text-color {
-    color: #f4cd25;
+    color: gold;
 }
 
 /*
@@ -35,4 +35,8 @@
 
 .placeholder-align-center:-ms-input-placeholder {
     text-align: center;
+}
+
+.hover-underline:hover {
+    text-decoration: underline;
 }

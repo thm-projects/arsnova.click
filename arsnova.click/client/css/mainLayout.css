@@ -5,6 +5,11 @@ body {
 .contentPosition {
     position: absolute;
     width: 100%;
-    height: calc(100% - 50px);
+    /* TODO: IE 8 and Opera 8 doesn't support calc*/
+    /*
+     * -50px because of the header height
+     * -20px because of the footer height
+     */
+    height: calc(100% - 50px - 20px);
     top: 50px;
 }

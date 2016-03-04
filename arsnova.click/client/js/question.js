@@ -1,5 +1,5 @@
 Template.questionT.onCreated(function () {
-    this.autorun(() = > {
+    this.autorun(() => {
         this.subscribe('AnswerOptions.options', Session.get("hashtag"));
     this.subscribe('Sessions.question', Session.get("hashtag"));
 });
@@ -20,5 +20,11 @@ Template.questionT.helpers({
             return "";
         }
         return question.questionText;
+    }
+});
+
+Template.questionT.events({
+    "click #setReadConfirmed": function(event){
+        Meteor.call("MemberList.setReadConfirmed",Session.get("hashtag"),Session.get("nick"));
     }
 });

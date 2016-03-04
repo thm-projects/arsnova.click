@@ -1,36 +1,44 @@
 Meteor.methods({
-    'MemberList.addLearner'( hashtag, nick ) {
+    'MemberList.addLearner': function (hashtag, nick) {
         new SimpleSchema({
-            hashtag: { type: String },
-            nick: { type: String }
-        }).validate({ hashtag, nick });
-            member = MemberList.findOne({
-                hashtag: hashtag,
-                nick: nick});
-        if (!member){
+            hashtag: {type: String},
+            nick: {type: String}
+        }).validate({
+                hashtag,
+                nick
+            });
+        member = MemberList.findOne({
+            hashtag: hashtag,
+            nick: nick
+        });
+        if (!member) {
             MemberList.insert({
                 hashtag: hashtag,
                 nick: nick,
                 readConfirmed: 0
             });
-        }else{
+        } else {
             throw new Meteor.Error('MemberList.addLearner', 'Nick already exists!');
         }
     },
-    'MemberList.setReadConfirmed'( hashtag, nickName ) {
+    'MemberList.setReadConfirmed': function (hashtag, nick) {
         // TODO Thought: maybe link this method to a privateKey for learners? otherwise everybody can set "readConfirmed" for each user!
         new SimpleSchema({
-            hashtag: { type: String },
-            nick: { type: String }
-        }).validate({ hashtag, nickName });
-            member = MemberList.findOne({
-                hashtag: hashtag,
-                nick: nick});
+            hashtag: {type: String},
+            nick: {type: String}
+        }).validate({
+                hashtag,
+                nick
+            });
+
+        member = MemberList.findOne({
+            hashtag: hashtag,
+            nick: nick
+        });
         if (!member) {
             throw new Meteor.Error('MemberList.setReadConfirmed', 'Member not found!');
-        }else{
-            member.readConfirmed = 1;
-            MemberList.update({_hashtag: hashtag, nick: nickName}, member);
+        } else {
+            MemberList.update(member._id, {$set: {readConfirmed: 1}}, member);
         }
     }
 });

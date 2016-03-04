@@ -25,10 +25,27 @@
     width: 100%;
     border: none;
     white-space: nowrap;
+    color: #ffffff;
 }
 
 .button:hover, .button:active:focus {
     box-shadow: none;
+}
+
+.button-next {
+    background-color: green;
+}
+
+.button-warning {
+    background-color: firebrick;
+}
+
+.button-purple {
+    background-color: rebeccapurple;
+}
+
+.button-default {
+    background-color: grey;
 }
 
 /*

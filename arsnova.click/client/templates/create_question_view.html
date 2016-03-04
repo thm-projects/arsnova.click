@@ -1,38 +1,46 @@
 <template name="createQuestionView">
-    <div class="createQuestion-template contentContainer">
+    <div class="col-md-12 center-vertical">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <div class="row">
-                    <div class="col-md-12">
-                        <!--<div class="input-group">-->
-                        <textarea class="round-corners input-field-bg-color placeholder-align-center" maxlength="1000"
+            <div class="col-md-12">
+                <!--<div class="input-group">-->
+                        <textarea class="round-corners textarea" maxlength="1000"
                                   rows="4" id="questionText" placeholder="Gib hier die Frage ein!"
                                   autofocus>{{question}}</textarea>
-                        <!--</div>-->
-                    </div>
-                </div>
+                <!--</div>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <div class="row row-create-question-buttons">
-                    <div class="col-xs-6 col-left-button">
-                        <button id="formatButton" class="form-control btn-join-session round-corners button-shadow">
+                    <div class="col-xs-6">
+                        <button id="formatButton" class="button button-default">
                             Format
                         </button>
                     </div>
 
-                    <div class="col-xs-6 col-right-button">
-                        <button id="previewButton" class="form-control btn-join-session round-corners button-shadow">
+                    <div class="col-xs-6">
+                        <button id="previewButton" class="button button-default">
                             Vorschau
                         </button>
                     </div>
                 </div>
-                <div class="row row-create-question-buttons">
-                    <div class="col-xs-6 col-left-button">
-                        <button id="backButton" class="form-control btn-join-session round-corners button-shadow">
+            </div>
+        </div>
+
+    </div>
+    <div class="fixed-bottom">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="row">
+
+                    <div class="col-xs-6">
+                        <button id="backButton" class="button button-warning">
                             Zurück
                         </button>
                     </div>
 
-                    <div class="col-xs-6 col-right-button">
-                        <button id="forwardButton" class="form-control btn-join-session round-corners button-shadow">
+                    <div class="col-xs-6">
+                        <button id="forwardButton" class="button button-next">
                             Weiter
                         </button>
                     </div>

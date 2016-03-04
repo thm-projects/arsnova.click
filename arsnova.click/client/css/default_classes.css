@@ -99,3 +99,11 @@
     overflow-y: auto;
     padding-bottom: 10px;
 }
+
+.textarea {
+    width: 100%;
+    background-color: gold;
+    font-size: 1.5em;
+    outline: none;
+    resize: none;
+}

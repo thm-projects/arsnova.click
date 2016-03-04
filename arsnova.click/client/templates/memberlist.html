@@ -1,31 +1,30 @@
 <template name="memberlist">
-    <ol>
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <div class="row learner-title">
-                    <h3 class="text-light text-center">
-                        Teilnehmer/innen
-                    </h3>
-                </div>
-                <div class="row learner-list">
-                    {{#each loops}}
-                        {{#each learners}}
-                            <div class="col-md-4">
-                                <button class="btn btn-grey btn-learner">
-                                    {{>learner}}
-                                </button>
-                            </div>
-                        {{/each}} <!-- learners -->
-                    {{/each}} <!-- loops -->
-                </div>
-
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="row learner-title">
+                <h3 class="text-light text-center">
+                    Teilnehmer/innen im Hashtag {{hashtag}}
+                </h3>
+            </div>
+            <div class="row learner-list" id="learner-list">
+                <!-- TODO: delete test loop before push-->
+                {{#each loops}}
+                    {{#each learners}}
+                        <div class="col-md-4">
+                            <button class="btn btn-grey btn-learner">
+                                {{>learner}}
+                            </button>
+                        </div>
+                    {{/each}} <!-- learners -->
+                {{/each}} <!-- loops -->
             </div>
 
-            <!--  container-height mit row height vergleichen // mit jQuery  -->
-            <!-- Session.set("showMore",true)-->
         </div>
 
-    </ol>
+        <!--  container-height mit row height vergleichen // mit jQuery  -->
+        <!-- contentPosition ist der container-->
+        <!-- Session.set("showMore",true)-->
+    </div>
 
 
     {{#if isOwnerAndReadConfirmationNeeded}}

@@ -1,14 +1,16 @@
+@import "colors";
+
 body {
-    background-color: steelblue;
-    font-family: Georgia, serif;
+  background-color: $background-color;
+  font-family: $font;
 }
 
 button {
-    font-size: 1.3em;
+  font-size: 1.3em;
 }
 
 button:focus, input:focus, textarea:focus {
-    outline: none;
+  outline: none;
 }
 
 /*
@@ -16,25 +18,25 @@ button:focus, input:focus, textarea:focus {
  */
 /* TODO: if the textfield is focused, the text-overflow will be ignored */
 input[placeholder] {
-    text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 
 input::-webkit-input-placeholder {
-    text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 
 /* Firefox 18- */
 input:-moz-placeholder {
-    text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 
 /* Firefox 19+ */
 input::-moz-placeholder {
-    text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 
 input:-ms-input-placeholder {
-    text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 
 /*
@@ -44,56 +46,56 @@ input:-ms-input-placeholder {
 
 /* WebKit, Blink, Edge */
 textarea::-webkit-input-placeholder {
-    color: darkslategrey;
+  color: $placeholder-color;
 }
 
 /* Mozilla Firefox 4 to 18 */
 textarea:-moz-placeholder {
-    color: darkslategrey;
-    opacity: 1;
+  color: $placeholder-color;
+  opacity: 1;
 }
 
 /* Mozilla Firefox 19+ */
 textarea::-moz-placeholder {
-    color: darkslategrey;
-    opacity: 1;
+  color: $placeholder-color;
+  opacity: 1;
 }
 
 /* Internet Explorer 10-11 */
 textarea:-ms-input-placeholder {
-    color: darkslategrey;
+  color: $placeholder-color;
 }
 
 /* WebKit, Blink, Edge */
 input::-webkit-input-placeholder {
-    color: darkslategrey;
+  color: $placeholder-color;
 }
 
 input[placeholder] {
-    color: darkslategrey;
+  color: $placeholder-color;
 }
 
 /* Mozilla Firefox 4 to 18 */
 input:-moz-placeholder {
-    color: darkslategrey;
-    opacity: 1;
+  color: $placeholder-color;
+  opacity: 1;
 }
 
 /* Mozilla Firefox 19+ */
 input::-moz-placeholder {
-    color: darkslategrey;
-    opacity: 1;
+  color: $placeholder-color;
+  opacity: 1;
 }
 
 /* Internet Explorer 10-11 */
 input:-ms-input-placeholder {
-    color: darkslategrey;
+  color: $placeholder-color;
 }
 
 /*
  * defines a big X over the whole Button
  */
 button:disabled {
-    box-shadow: none;
-    background-color: grey;
+  box-shadow: none;
+  background-color: $disabled-button-background;
 }

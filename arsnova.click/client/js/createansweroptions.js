@@ -17,6 +17,18 @@ Template.createAnswerOptions.helpers({
 });
 
 Template.createAnswerOptions.events({
+   "click .toggleCorrect": function (event) {
+      if (this.isCorrect) {
+         this.isCorrect = 0;
+         $(event.currentTarget.firstElementChild).removeClass("check-mark-checked");
+         $(event.currentTarget.firstElementChild).removeClass("check-mark-unchecked");
+      }
+      else {
+         this.isCorrect = 1;
+         $(event.currentTarget.firstElementChild).removeClass("check-mark-unchecked");
+         $(event.currentTarget.firstElementChild).removeClass("check-mark-checked");
+      }
+   },
    "click #addAnswerOption": function () {
       var newAnswerOption = {
          hashtag: Session.get("hashtag"),
@@ -42,7 +54,14 @@ Template.createAnswerOptions.events({
    "click #forwardButton": function (event) {
       for (var i = 0; i < AnswerOptions.find().count(); i++) {
          var text = $("#answerOptionText_Number" + i).val();
-         Meteor.call('AnswerOptions.updateAnswerText', localStorage.getItem("privateKey"), Session.get("hashtag"), i, text);
+         Meteor.call('AnswerOptions.updateAnswerText', {
+            privateKey: localStorage.getItem("privateKey"),
+            hashtag: Session.get("hashtag"),
+            answerOptionNumber: i,
+            answerText: text
+         }, {
+
+         });
       }
    }
 });

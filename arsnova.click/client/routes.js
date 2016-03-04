@@ -7,6 +7,7 @@ Router.route('/', function () {
 });
 
 Router.route('/nick', function () {
+    this.render('nick');
 });
 
 Router.route('/question', function () {

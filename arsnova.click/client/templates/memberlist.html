@@ -1,0 +1,16 @@
+<template name="memberlist">
+    <ol>
+        {{#each learners}} {{>learner}} {{/each}}
+    </ol>
+
+    {{#if isOwnerAndReadConfirmationNeeded}}
+        <!-- TODO percent readConfirmed of all members -->
+    {{/if}}
+</template>
+
+<template name="learner">
+<div>
+    <!-- TODO! css-stylings-->
+    {{nick}}
+</div>
+</template>

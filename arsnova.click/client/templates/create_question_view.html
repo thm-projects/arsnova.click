@@ -1,0 +1,43 @@
+<template name="createQuestionView">
+    <div class="createQuestion-template contentContainer">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--<div class="input-group">-->
+                        <textarea class="round-corners input-field-bg-color placeholder-align-center" maxlength="1000"
+                                  rows="4" id="questionText" placeholder="Gib hier die Frage ein!"
+                                  autofocus>{{question}}</textarea>
+                        <!--</div>-->
+                    </div>
+                </div>
+                <div class="row row-create-question-buttons">
+                    <div class="col-xs-6 col-left-button">
+                        <button id="formatButton" class="form-control btn-join-session round-corners button-shadow">
+                            Format
+                        </button>
+                    </div>
+
+                    <div class="col-xs-6 col-right-button">
+                        <button id="previewButton" class="form-control btn-join-session round-corners button-shadow">
+                            Vorschau
+                        </button>
+                    </div>
+                </div>
+                <div class="row row-create-question-buttons">
+                    <div class="col-xs-6 col-left-button">
+                        <button id="backButton" class="form-control btn-join-session round-corners button-shadow">
+                            Zurück
+                        </button>
+                    </div>
+
+                    <div class="col-xs-6 col-right-button">
+                        <button id="forwardButton" class="form-control btn-join-session round-corners button-shadow">
+                            Weiter
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -39,6 +39,7 @@ Router.route('/readconfirmation', function () {
 });
 
 Router.route('/memberlist', function () {
+    this.render('memberlist');
 });
 
 Router.route('/onpolling', function () {

@@ -7,6 +7,7 @@ Template.nick.onCreated(function () {
 Template.nick.events({
     "click #addNickname": function () {
         var nickname = $("#nickname-input-field").val();
+        Session.set("nick",nickname);
         Meteor.call('MemberList.addLearner', Session.get("hashtag"), nickname);
         Router.go("/memberlist");
     },

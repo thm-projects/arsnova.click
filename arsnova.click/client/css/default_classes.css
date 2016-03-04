@@ -90,5 +90,12 @@
     position: fixed;
     bottom: 50px;
     width: 100%;
-    padding-right: 30px;
+    left: 0;
+    padding: 10px;
+}
+
+.content-with-navigation-buttons {
+    max-height: calc(100% - 100px);
+    overflow-y: auto;
+    padding-bottom: 10px;
 }

@@ -13,21 +13,21 @@ Template.hashtag_view.events({
         if (inputHashtag.length > 0) {
             var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
             if (!hashtagDoc) {
-                $(".btn-join-session").attr("disabled", "disabled");
-                $(".btn-create-session").removeAttr("disabled");
+                $("#joinSession").attr("disabled", "disabled");
+                $("#addNewHashtag").removeAttr("disabled");
             } else {
                 if (hashtagDoc.isActive) {
-                    $(".btn-join-session").removeAttr("disabled");
-                    $(".btn-create-session").attr("disabled", "disabled");
+                    $("#joinSession").removeAttr("disabled");
+                    $("#addNewHashtag").attr("disabled", "disabled");
                 } else {
-                    $(".btn-create-session").attr("disabled", "disabled");
-                    $(".btn-join-session").attr("disabled", "disabled");
+                    $("#addNewHashtag").attr("disabled", "disabled");
+                    $("#joinSession").attr("disabled", "disabled");
                 }
             }
         }
         else {
-            $(".btn-join-session").removeAttr("disabled");
-            $(".btn-create-session").removeAttr("disabled");
+            $("#joinSession").removeAttr("disabled");
+            $("#addNewHashtag").removeAttr("disabled");
         }
     },
     "click #addNewHashtag": function (event) {

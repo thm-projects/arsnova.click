@@ -9,12 +9,12 @@ if(Meteor.isServer){
             var memberListExample1 = {
                 hashtag: "wpw",
                 nick: "Testuser",
-                readConfirmed: 0
+                readConfirmed: 1
             };
             var memberListExample2 = {
                 hashtag: "wpw",
                 nick: "Metoo",
-                readConfirmed: 0
+                readConfirmed: 1
             };
             var memberListExample3 = {
                 hashtag: "wpw",

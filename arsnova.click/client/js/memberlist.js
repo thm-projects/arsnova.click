@@ -25,11 +25,12 @@ Template.memberlist.helpers({
     percentRead: function () {
         var sumRead = 0;
         var count = 0;
-        MemberList.find({hashtag: Session.get("hashtag")}).map(function (doc) {
+        MemberList.find({hashtag: Session.get("hashtag")}).map(function (member) {
             count++;
-            sumRead += doc.isReadingConfirmationRequired;
+            sumRead += member.readConfirmed;
         });
-        return count ? Math.floor(sumRead / count) : 0;
+
+        return count ? Math.floor(sumRead / count * 100) : 0;
     },
 
     learners: function () {
@@ -62,12 +63,13 @@ Template.memberlist.helpers({
 
     isOwnerAndReadConfirmationNeeded: function () {
         // TODO isReadConfirmation needed?
-        return Session.get("isOwner");
+        return Session.get("isOwner") && (Sessions.findOne({hashtag: Sessions.get("hashtag")}).isReadingConfirmationRequired == 1);
     },
     hashtag: function () {
         return Session.get("hashtag");
     },
-    loops: function () {
+    // use for test purposes only
+    /*loops: function () {
         // list for test purpose //
         // TODO: Delete this list before push
         return [
@@ -102,5 +104,5 @@ Template.memberlist.helpers({
             true,
             true
         ]
-    }
+    }*/
 });

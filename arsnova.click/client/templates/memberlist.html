@@ -8,17 +8,14 @@
             </div>
             <div class="row learner-list" id="learner-list">
                 <!-- TODO: delete test loop before push-->
-                {{#each loops}}
-                    {{#each learners}}
-                        <div class="col-md-4">
-                            <button class="btn btn-grey btn-learner">
-                                {{>learner}}
-                            </button>
-                        </div>
-                    {{/each}} <!-- learners -->
-                {{/each}} <!-- loops -->
+                {{#each learners}}
+                    <div class="col-md-4">
+                        <button class="btn btn-grey btn-learner">
+                            {{>learner}}
+                        </button>
+                    </div>
+                {{/each}} <!-- learners -->
             </div>
-
         </div>
 
         <!--  container-height mit row height vergleichen // mit jQuery  -->
@@ -28,13 +25,14 @@
 
 
     {{#if isOwnerAndReadConfirmationNeeded}}
+        Percent read Question: {{percentRead}} %
         <!-- TODO percent readConfirmed of all members -->
     {{/if}}
 </template>
 
 <template name="learner">
-<div>
-    <!-- TODO! css-stylings-->
-    {{nick}}
-</div>
+    <div>
+        <!-- TODO! css-stylings-->
+        {{nick}}
+    </div>
 </template>

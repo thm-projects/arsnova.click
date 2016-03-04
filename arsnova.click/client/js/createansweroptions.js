@@ -37,19 +37,21 @@ Template.createAnswerOptions.events({
          answerOptionNumber: (AnswerOptions.find().count()),
          isCorrect: 0
       });
-      if (AnswerOptions.find().count() > 0) {
+      if (AnswerOptions.find().count() > 1) {
          $("#deleteAnswerOption").show();
       }
    },
    "click #deleteAnswerOption": function (event) {
       var number = AnswerOptions.find().count() - 1;
-      Meteor.call('AnswerOptions.deleteOption', {
-         privateKey: localStorage.getItem("privateKey"),
-         hashtag: Session.get("hashtag"),
-         answerOptionNumber: number
-      });
-      if (AnswerOptions.find().count() == 0) {
-         $(event.target).hide();
+      if (AnswerOptions.find().count() > 1) {
+         Meteor.call('AnswerOptions.deleteOption', {
+            privateKey: localStorage.getItem("privateKey"),
+            hashtag: Session.get("hashtag"),
+            answerOptionNumber: number
+         });
+         if (AnswerOptions.find().count() == 1) {
+            $(event.target).hide();
+         }
       }
    },
    "click #backButton": function (event) {

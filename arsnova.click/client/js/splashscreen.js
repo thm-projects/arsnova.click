@@ -18,6 +18,8 @@ Template.splashscreen.rendered = function () {
     localStorage.setItem("testing", JSON.stringify(testingSessionData));
 };
 
-Template.splashscreen.loadingTemplate = function (name) {
-    return {template: Template[name]};
-};
+Template.splashscreen.helpers({
+    loadingTemplate: function () {
+        return {template: Template[this.templateName]};
+    }
+});

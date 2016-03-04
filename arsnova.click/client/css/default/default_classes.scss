@@ -35,7 +35,6 @@
   width: 100%;
   border: none;
   white-space: nowrap;
-  color: $button-text-color;
 }
 
 .input-group-letter {
@@ -49,18 +48,22 @@
 
 .button-next, .button-success {
   background-color: $success;
+  color: $success-text-color;
 }
 
 .button-warning, .button-back {
   background-color: $warning;
+  color: $warning-text-color;
 }
 
 .button-purple {
   background-color: $info;
+  color: $info-text-color;
 }
 
 .button-default {
   background-color: $default;
+  color: $default-text-color;
 }
 
 .distance-top {

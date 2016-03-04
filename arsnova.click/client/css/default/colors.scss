@@ -1,15 +1,21 @@
 $success: green;
-$warning: firebrick;
-$info: rebeccapurple;
-$default: grey;
+$success-text-color: white;
 
-$placeholder-color: darkslategrey;
+$warning: firebrick;
+$warning-text-color: white;
+
+$info: rebeccapurple;
+$info-text-color: white;
+
+$default: grey;
+$default-text-color: white;
+
 $background-color: steelblue;
 $disabled-button-background: grey;
 
+$placeholder-color: darkslategrey;
 $input-background-color: gold;
 $input-group-letter-color: darkslategrey;
-$button-text-color: white;
 
 $footer-background-color: gainsboro;
 $footer-text-color: black;

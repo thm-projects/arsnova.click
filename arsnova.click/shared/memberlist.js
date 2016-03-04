@@ -4,11 +4,9 @@ Meteor.methods({
             hashtag: { type: String },
             nick: { type: String }
         }).validate({ hashtag, nick });
-        if (Meteor.isServer) {
             member = MemberList.findOne({
                 hashtag: hashtag,
                 nick: nick});
-        }
         if (!member){
             MemberList.insert({
                 hashtag: hashtag,
@@ -17,7 +15,6 @@ Meteor.methods({
             });
         }else{
             throw new Meteor.Error('MemberList.addLearner', 'Nick already exists!');
-            return;
         }
     },
     'MemberList.setReadConfirmed'( hashtag, nickName ) {
@@ -26,14 +23,11 @@ Meteor.methods({
             hashtag: { type: String },
             nick: { type: String }
         }).validate({ hashtag, nickName });
-        if (Meteor.isServer) {
             member = MemberList.findOne({
                 hashtag: hashtag,
                 nick: nick});
-        }
         if (!member) {
             throw new Meteor.Error('MemberList.setReadConfirmed', 'Member not found!');
-            return;
         }else{
             member.readConfirmed = 1;
             MemberList.update({_hashtag: hashtag, nick: nickName}, member);

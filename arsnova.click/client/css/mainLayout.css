@@ -20,8 +20,8 @@ h6 {
      * -50px because of the header height
      * -20px because of the footer height
      */
-    height: calc(100% - 50px - 20px);
-    top: 50px;
+    height: calc(100% - 80px - 20px);
+    top: 80px;
 }
 
 .text-light,

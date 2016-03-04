@@ -1,0 +1,17 @@
+<template name="readconfirmationrequired">
+    <div class="row center-vertical">
+        <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-12">
+                    {{#if isReadConfirmationRequired}}
+                            <button id="isReadConfirmationRequiredButton" class="button down button-purple">Lesebestätigung ?</button>
+                    {{else}}
+                        <button id="isReadConfirmationRequiredButton" class="button button-purple">Lesebestätigung ?</button>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{> footer_nav_buttons backId="backButton" forwardId="forwardButton"}}
+</template>

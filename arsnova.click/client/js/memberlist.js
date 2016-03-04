@@ -63,46 +63,10 @@ Template.memberlist.helpers({
 
     isOwnerAndReadConfirmationNeeded: function () {
         // TODO isReadConfirmation needed?
+        return true;
         return Session.get("isOwner") && (Sessions.findOne({hashtag: Sessions.get("hashtag")}).isReadingConfirmationRequired == 1);
     },
     hashtag: function () {
         return Session.get("hashtag");
-    },
-    // use for test purposes only
-    /*loops: function () {
-        // list for test purpose //
-        // TODO: Delete this list before push
-        return [
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true
-        ]
-    }*/
+    }
 });

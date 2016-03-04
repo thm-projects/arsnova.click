@@ -24,6 +24,14 @@ h6 {
     top: 80px;
 }
 
+.contentPosition > .row {
+    height: 100%;
+}
+
+.contentPosition > .row > .col-md-6 {
+    height: 100%;
+}
+
 .text-light,
 a.text-light,
 a:hover.text-light,

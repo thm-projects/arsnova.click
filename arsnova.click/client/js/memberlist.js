@@ -46,6 +46,9 @@ Template.memberlist.helpers({
         return returnMemberList;
     },
 
+    isReadingConfirmationRequired: function () {
+        return Sessions.findOne({hashtag: Session.get("hashtag")}).isReadingConfirmationRequired == 1;
+    },
     isOwnerAndReadConfirmationNeeded: function () {
         return Session.get("isOwner") && (Sessions.findOne({hashtag: Session.get("hashtag")}).isReadingConfirmationRequired == 1);
     },

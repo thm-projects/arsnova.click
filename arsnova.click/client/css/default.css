@@ -7,7 +7,7 @@ button {
     font-size: 1.3em;
 }
 
-button:focus {
+button:focus, input:focus, textarea:focus {
     outline: none;
 }
 
@@ -43,7 +43,33 @@ input:-ms-input-placeholder {
  */
 
 /* WebKit, Blink, Edge */
+textarea::-webkit-input-placeholder {
+    color: darkslategrey;
+}
+
+/* Mozilla Firefox 4 to 18 */
+textarea:-moz-placeholder {
+    color: darkslategrey;
+    opacity: 1;
+}
+
+/* Mozilla Firefox 19+ */
+textarea::-moz-placeholder {
+    color: darkslategrey;
+    opacity: 1;
+}
+
+/* Internet Explorer 10-11 */
+textarea:-ms-input-placeholder {
+    color: darkslategrey;
+}
+
+/* WebKit, Blink, Edge */
 input::-webkit-input-placeholder {
+    color: darkslategrey;
+}
+
+input[placeholder] {
     color: darkslategrey;
 }
 
@@ -69,18 +95,5 @@ input:-ms-input-placeholder {
  */
 button:disabled {
     box-shadow: none;
-}
-
-button:disabled::before {
-    content: '\2715';
-    position: absolute;
-    height: 100%;
-    font-size: 8em;
-    text-align: center;
-    line-height: 25%;
-    width: 100%;
-    padding-right: 30px;
-    z-index: 100;
-    display: block;
-    color: black;
+    background-color: grey;
 }

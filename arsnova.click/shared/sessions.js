@@ -1,5 +1,5 @@
 Meteor.methods({
-    "Sessions.setQuestion": function (privateKey, hashtag, questionText) {
+    "Sessions.setQuestion": function ({privateKey, hashtag, questionText}) {
         //TODO: validate questionText with SimpleSchema
         new SimpleSchema({
             questionText: {
@@ -9,9 +9,12 @@ Meteor.methods({
             }
         }).validate({questionText: questionText});
 
-        const hashItem = Hashtags.findOne({hashtag: hashtag});
-        if (hashItem && privateKey === hashItem.privateKey) {
-            const session = Sessions.findOne({hashtag: hashtag});
+        var hashtagDoc = Hashtags.findOne({
+            hashtag: hashtag,
+            privateKey: privateKey
+        });
+        if (hashtagDoc) {
+            var session = Sessions.findOne({hashtag: hashtag});
             if (!session) {
                 Sessions.insert({
                     hashtag: hashtag,
@@ -22,7 +25,8 @@ Meteor.methods({
             } else {
                 Sessions.update(session._id, {$set: {questionText: questionText}}, function (error) {
                     if (error) {
-                        console.log(error);
+                        throw new Meteor.Error('Sessions.setQuestion', error);
+                        return;
                     }
                 });
             }

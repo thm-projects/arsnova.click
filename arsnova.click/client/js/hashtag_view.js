@@ -33,14 +33,12 @@ Template.hashtag_view.events({
     "click #addNewHashtag": function (event) {
         event.preventDefault();
         var hashtag = $("#hashtag-input-field").val();
-        console.log(hashtag.length);
         if (hashtag.length > 0) {
             var doc = {
                 privateKey: localStorage.getItem("privateKey"),
                 hashtag: hashtag,
                 isActive: 1
             };
-            console.log(doc);
             Meteor.call('Hashtags.addHashtag', doc);
             Session.set("hashtag", hashtag);
             Session.set("isOwner", true);

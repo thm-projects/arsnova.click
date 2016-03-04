@@ -1,11 +1,38 @@
 Template.memberlist.onCreated(function () {
     this.autorun(() => {
         this.subscribe('MemberList.members', Session.get("hashtag"));
+        if(Session.get("isOwner")) {
+            this.subscribe('MemberList.percentRead', Session.get("hashtag"), window.localStorage.getItem("privateKey"));
+        }
+        this.subscribe('Sessions.isReadingConfirmationRequired', Session.get("hashtag"));
     });
+
 });
 
 Template.memberlist.helpers({
-    learners:function () {
+    isOwner: function () {
+        return Session.get("isOwner");
+    },
+
+    isReadConfirmationNeeded: function () {
+        const readNeeded = Sessions.findOne({hashtag: Session.get("hashtag")});
+        if (!readNeeded) {
+            return;
+        }
+        return readNeeded.isReadingConfirmationRequired;
+    },
+
+    percentRead: function () {
+        var sumRead = 0;
+        var count = 0;
+        MemberList.find({hashtag: Session.get("hashtag")}).map(function (doc) {
+            count++;
+            sumRead += doc.isReadingConfirmationRequired;
+        });
+        return count ? Math.floor(sumRead / count) : 0;
+    },
+
+    learners: function () {
         var returnMemberList = MemberList.find();
         var memberCount = returnMemberList.length;
 

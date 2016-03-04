@@ -10,3 +10,10 @@ Meteor.publish('AnswerOptions.instructor', function(pprivateKey, phashtag) {
     if (!doc) return;
     return AnswerOptions.find({hashtag: phashtag});
 });
+
+Meteor.publish('AnswerOptions.options', function(phashtag) {
+    new SimpleSchema({
+        phashtag: {type: String}
+    }).validate({phashtag});
+    return AnswerOptions.find({hashtag: phashtag, isActive:1});
+});

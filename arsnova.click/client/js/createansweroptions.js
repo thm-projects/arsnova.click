@@ -68,7 +68,7 @@ Template.createAnswerOptions.events({
             if (err) {
                alert(err);
             } else {
-               Router.go("/memberlist");
+               Router.go("/readconfirmationrequired");
             }
          });
       }

@@ -1,19 +1,4 @@
-.col-join-session {
-    padding-right: 5px
-}
-
-.col-create-session {
-    padding-left: 5px
-}
-
-.row-landingpage-buttons {
-    margin-top: 20px;
-
-}
-
 .hashtag-field {
-    width: 100%;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    outline: none;
 }

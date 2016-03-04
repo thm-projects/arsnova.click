@@ -13,13 +13,13 @@
     box-shadow: 1px 1px 5px black;
 }
 
-.input-field-sizing {
+.input-field {
     height: 50px;
     font-size: 1.5em;
     width: 100%;
 }
 
-.input-field-bg-color {
+.input-field-bg-color, .input-field {
     background-color: gold;
     border: none;
 }
@@ -68,22 +68,22 @@
 /*
  * center's the placeholder
  */
-.placeholder-align-center {
+.placeholder-align-center, .input-field {
 }
 
-.placeholder-align-center::-webkit-input-placeholder {
+.placeholder-align-center::-webkit-input-placeholder, .input-field::-webkit-input-placeholder {
     text-align: center;
 }
 
-.placeholder-align-center:-moz-placeholder { /* Firefox 18- */
+.placeholder-align-center:-moz-placeholder, .input-field:-moz-placeholder { /* Firefox 18- */
     text-align: center;
 }
 
-.placeholder-align-center::-moz-placeholder { /* Firefox 19+ */
+.placeholder-align-center::-moz-placeholder, .input-field::-moz-placeholder { /* Firefox 19+ */
     text-align: center;
 }
 
-.placeholder-align-center:-ms-input-placeholder {
+.placeholder-align-center:-ms-input-placeholder, .input-field:-ms-input-placeholder {
     text-align: center;
 }
 
@@ -96,7 +96,7 @@
     bottom: 50px;
     width: 100%;
     left: 0;
-    padding: 15px;
+    padding: 30px;
 }
 
 .content-with-navigation-buttons {

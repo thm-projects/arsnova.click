@@ -80,3 +80,8 @@
 .hover-underline:hover {
     text-decoration: underline;
 }
+
+.fixed-bottom {
+    position: fixed;
+    bottom: 50px;
+}

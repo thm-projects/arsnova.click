@@ -17,5 +17,8 @@ Meteor.methods({
         else {
             return false;
         }
+    },
+    'Hashtags.addHashtag'(doc) {
+        Hashtags.insert(doc);
     }
 });

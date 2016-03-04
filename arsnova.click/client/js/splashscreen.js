@@ -2,25 +2,20 @@ Template.splashscreen.rendered = function () {
     $('.js-splashscreen').modal('show').on('click', function () {
         $('.js-splashscreen').modal('hide')
     });
-
-    var qq = [
-        {content: "SWT 29.03"},
-        {content: "SWT 29.043"},
-        {content: "SWT 29.01233"},
-        {content: "SWT 29.12"}
-    ];
-    localStorage.setItem("activeSessions", JSON.stringify(qq));
-
-    var qq = [
-        {content: "Feuerball Junge"},
-        {content: "Stern"},
-        {content: "Framework"}
-    ];
-    localStorage.setItem("answerExample", JSON.stringify(qq));
-
-
-    localStorage.setItem("questionExample", "Was assoziieren Sie mit dem Wort \"Meteor\"?");
-
+    var hashtags = ["wpw", "testing"];
+    localStorage.setItem("hashtags", hashtags.toString());
+    var wpwSessionData = {
+        questionText: "I'm a question text. This is for testing purpose. Do you understand?",
+        timer: 1800000,
+        isReadingConfirmationRequired: 0
+    };
+    var testingSessionData = {
+        questionText: "Do you like this course?",
+        timer: 8000000,
+        isReadingConfirmationRequired: 0
+    };
+    localStorage.setItem("wpw", JSON.stringify(wpwSessionData));
+    localStorage.setItem("testing", JSON.stringify(testingSessionData));
 };
 
 Template.splashscreen.loadingTemplate = function (name) {

@@ -13,15 +13,6 @@ Template.memberlist.helpers({
     isOwner: function () {
         return Session.get("isOwner");
     },
-
-    isReadConfirmationNeeded: function () {
-        const readNeeded = Sessions.findOne({hashtag: Session.get("hashtag")});
-        if (!readNeeded) {
-            return;
-        }
-        return readNeeded.isReadingConfirmationRequired;
-    },
-
     percentRead: function () {
         var sumRead = 0;
         var count = 0;
@@ -56,7 +47,10 @@ Template.memberlist.helpers({
     },
 
     isOwnerAndReadConfirmationNeeded: function () {
-        return Session.get("isOwner") && (Sessions.findOne({hashtag: Sessions.get("hashtag")}).isReadingConfirmationRequired == 1);
+        return Session.get("isOwner") && (Sessions.findOne({hashtag: Session.get("hashtag")}).isReadingConfirmationRequired == 1);
+    },
+    isNotOwnerAndReadConfirmationNeeded: function () {
+        return !Session.get("isOwner") && (Sessions.findOne({hashtag: Session.get("hashtag")}).isReadingConfirmationRequired == 1);
     },
     hashtag: function () {
         return Session.get("hashtag");

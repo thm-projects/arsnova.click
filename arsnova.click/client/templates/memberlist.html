@@ -1,6 +1,7 @@
 <template name="memberlist">
-    {{> splashscreen templateName = "questionT" lazyClose = false}}
-
+    {{#if isNotOwnerAndReadConfirmationNeeded}}
+        {{> splashscreen templateName = "questionT" lazyClose = false}}
+    {{/if}}
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="row learner-title">
@@ -9,7 +10,7 @@
                 </h3>
             </div>
             <div class="row learner-list"
-                 id="learn                                                                                                         er-list">
+                 id="learner-list">
                 <!-- TODO: delete test loop before push-->
                 {{#each learners}}
                     <div class="col-xs-4">

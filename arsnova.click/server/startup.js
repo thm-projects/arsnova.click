@@ -40,7 +40,7 @@ if(Meteor.isServer){
                 hashtag: "wpw",
                 questionText: "I am a question text. This is for testing purpose. Do you understand?",
                 timer: "180",
-                isReadingConfirmationRequired: 0
+                isReadingConfirmationRequired: 1
             };
             var answerOptionsExample1 = {
                 hashtag: "wpw",

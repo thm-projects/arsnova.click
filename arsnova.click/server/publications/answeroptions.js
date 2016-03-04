@@ -15,5 +15,5 @@ Meteor.publish('AnswerOptions.options', function(phashtag) {
     new SimpleSchema({
         phashtag: {type: String}
     }).validate({phashtag});
-    return AnswerOptions.find({hashtag: phashtag, isActive:1});
+    return AnswerOptions.find({hashtag: phashtag});
 });

@@ -1,4 +1,6 @@
 <template name="memberlist">
+    {{> splashscreen templateName = "questionT" lazyClose = false}}
+
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="row learner-title">
@@ -23,7 +25,6 @@
         <!-- Session.set("showMore",true)-->
     </div>
 
-
     {{#if isOwnerAndReadConfirmationNeeded}}
         Percent read Question: {{percentRead}} %
         <!-- TODO percent readConfirmed of all members -->
@@ -34,5 +35,20 @@
     <div>
         <!-- TODO! css-stylings-->
         {{nick}}
+    </div>
+</template>
+
+<template name="questionT">
+    <p class="splashSmallTitle">{{quest}}</p>
+    <br/>
+    <ol>
+        {{#each answ}}
+            <li>{{answerText}}</li>
+        {{/each}}
+    </ol>
+    <div class="row">
+        <div class="col-md-12">
+            <button id="setReadConfirmed" class="" onclick="closeSplashscreen();">Gelesen</button>
+        </div>
     </div>
 </template>

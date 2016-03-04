@@ -46,7 +46,7 @@ Template.createAnswerOptions.events({
       Meteor.call('AnswerOptions.deleteOption', {
          privateKey: localStorage.getItem("privateKey"),
          hashtag: Session.get("hashtag"),
-         AnswerOptionNumber: number
+         answerOptionNumber: number
       });
       if (AnswerOptions.find().count() == 0) {
          $(event.target).hide();
@@ -58,6 +58,7 @@ Template.createAnswerOptions.events({
    "click #forwardButton": function (event) {
       for (var i = 0; i < AnswerOptions.find().count(); i++) {
          var text = $("#answerOptionText_Number" + i).val();
+         var checkedButton = $("#answerOption-" + i);
          Meteor.call('AnswerOptions.updateAnswerText', {
             privateKey: localStorage.getItem("privateKey"),
             hashtag: Session.get("hashtag"),

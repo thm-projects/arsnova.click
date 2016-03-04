@@ -89,4 +89,6 @@
 .fixed-bottom {
     position: fixed;
     bottom: 50px;
+    width: 100%;
+    padding-right: 30px;
 }

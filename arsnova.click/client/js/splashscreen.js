@@ -1,8 +1,23 @@
 Template.splashscreen.rendered = function () {
-    $('.js-splashscreen').modal('show').on('click', function () {
-        $('.js-splashscreen').modal('hide')
-    });
-    var hashtags = ["wpw", "testing"];
+    var splashscreen = $('.js-splashscreen');
+
+    if (templateParams.lazyClose) {
+        splashscreen.on('click', function () {
+            $('.js-splashscreen').modal('hide')
+        });
+    } else {
+        splashscreen.modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+    }
+
+    splashscreen.modal('show');
+
+    var hashtags = [
+        "wpw",
+        "testing"
+    ];
     localStorage.setItem("hashtags", hashtags.toString());
     var wpwSessionData = {
         questionText: "I'm a question text. This is for testing purpose. Do you understand?",
@@ -20,6 +35,7 @@ Template.splashscreen.rendered = function () {
 
 Template.splashscreen.helpers({
     loadingTemplate: function () {
+        templateParams = this;
         return {template: Template[this.templateName]};
     }
 });

@@ -7,18 +7,21 @@ Router.route('/', function () {
 });
 
 Router.route('/nick', function () {
+    this.render('nick');
 });
 
 Router.route('/question', function () {
     if (Session.get("isOwner")) {
-
+		this.render('createQuestionView');
+    } else {
+        Router.go("/");
     }
 });
 
 Router.route('/answeroptions', function () {
-    if (Session.get("isOwner")) {
-
-    }
+    //if (Session.get("isOwner")) {
+        this.render('createAnswerOptions');
+    //}
 });
 
 Router.route('/settimer', function () {
@@ -50,4 +53,23 @@ Router.route('/statistics', function () {
 });
 
 Router.route('/results', function () {
+});
+
+
+// Routes for Footer-Links
+
+Router.route('/ueber', function () {
+    this.render('ueber');
+});
+
+Router.route('/agb', function () {
+    this.render('agb');
+});
+
+Router.route('/datenschutz', function () {
+    this.render('datenschutz');
+});
+
+Router.route('/impressum', function () {
+    this.render('impressum');
 });

@@ -1,3 +1,17 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    /* integrated seperate sans-serif font family for headlines / this contrasts nicely to the body serif font*/
+    font-family: 'Arial', sans-serif;
+}
+
+.contentContainer {
+    margin-bottom: 35px;
+}
+
 .contentPosition {
     position: absolute;
     width: 100%;
@@ -10,6 +24,37 @@
     top: 50px;
 }
 
+.text-light,
+a.text-light,
+a:hover.text-light,
+a:active.text-light,
+a:visited.text-light,
+a:focus.text-light {
+    color: white;
+}
+
+a.text-dark,
+a:hover.text-dark,
+a:active.text-dark,
+a:visited.text-dark,
+a:focus.text-dark {
+    color: black !important;
+}
+
+a,
+a:hover,
+a:active,
+a:visited,
+a:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+p, ul.list-unstyled {
+    margin-left: 30px;
+    text-align: justify;
+}
+
 .header-layout {
     white-space: nowrap;
     font-size: 7vw;
@@ -18,6 +63,12 @@
 @media (min-width: 1200px) {
     .header-layout {
         font-size: 80px;
+    }
+}
+
+@media (min-width: 990px) {
+    .header-layout {
+        font-size: 6vw;
     }
 }
 

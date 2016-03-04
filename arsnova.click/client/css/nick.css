@@ -1,11 +1,10 @@
-.hashtag-template {
+.nickname-template {
     position: relative;
     width: 100%;
     height: 100%;
 }
 
-.row-hashtag-padding {
-
+.row-nickname-padding {
     padding: 0 10px;
     position: relative;
     top: 50%;
@@ -13,61 +12,56 @@
     transform: translateY(-70%);
 }
 
-.hashtag-char {
-    font-size: 2em;
-    color: darkslategrey;
-}
-
-#hashtag-input-field {
+#nickname-input-field {
     height: 50px;
     font-size: 1.5em;
 }
 
-.col-join-session {
+.col-forward {
     padding-right: 5px
 }
 
-.col-create-session {
+.col-backward {
     padding-left: 5px
 }
 
-.row-landingpage-buttons {
+.row-nickname-buttons {
     margin-top: 20px;
 
 }
 
-.btn-create-session, .btn-join-session {
+.btn-forward, .btn-backward {
     height: 50px;
     width: 100%;
     border: none;
     white-space: nowrap;
 }
 
-.btn-create-session {
-    background-color: firebrick;
+.btn-forward {
+    background-color: green;
     color: #ffffff;
 }
 
-.btn-join-session {
-    background-color: rebeccapurple;
+.btn-backward {
+    background-color: red;
     color: #ffffff;
 }
 
-.btn-create-session:hover, .btn-create-session:active:focus {
-    color: #ffffff;
-    border: none;
-    outline: none;
-    box-shadow: none;
-}
-
-.btn-join-session:hover, .btn-join-session:active:focus {
+.btn-forward:hover, .btn-forward:active:focus {
     color: #ffffff;
     border: none;
     outline: none;
     box-shadow: none;
 }
 
-.hashtag-field {
+.btn-backward:hover, .btn-backward:active:focus {
+    color: #ffffff;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.nickname-field {
     width: 100%;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;

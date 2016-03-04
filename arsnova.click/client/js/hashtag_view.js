@@ -26,8 +26,8 @@ Template.hashtag_view.events({
             }
         }
         else {
-            $("#joinSession").removeAttr("disabled");
-            $("#addNewHashtag").removeAttr("disabled");
+            $("#joinSession").attr("disabled", "disabled");
+            $("#addNewHashtag").attr("disabled", "disabled");
         }
     },
     "click #addNewHashtag": function (event) {

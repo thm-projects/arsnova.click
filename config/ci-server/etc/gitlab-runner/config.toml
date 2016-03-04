@@ -1,0 +1,14 @@
+concurrent = 1
+
+[[runners]]
+  name = "WPW WS15/16"
+  url = "https://git.thm.de/ci"
+  token = ""
+  tls-ca-file = ""
+  executor = "docker"
+  [runners.docker]
+    image = "local-nodejs-meteor"
+    privileged = false
+    volumes = ["/cache"]
+    allowed_images = ["local-nodejs-meteor"]
+    allowed_services = [] 

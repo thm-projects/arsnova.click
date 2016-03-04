@@ -1,0 +1,25 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:             meteor-app
+# Required-Start:       $local_fs $remote_fs $network $syslog $named
+# Required-Stop:        $local_fs $remote_fs $network $syslog $named
+# Default-Start:        2 3 4 5
+# Default-Stop:         0 1 6
+# Short-Description:    Starts the Meteor app.
+### END INIT INFO
+
+user=meteor
+userdir=/home/$user
+cmd="$userdir/appctl.sh"
+
+case "$1" in
+        start)
+                sudo -u $user PATH="$userdir/.meteor:$PATH" "$cmd" start &
+        ;;
+        stop)
+                sudo -u $user "$cmd" stop
+        ;;
+        *)
+                sudo -u $user "$cmd"
+        ;;
+esac

@@ -1,0 +1,53 @@
+/*kevin weigand, michael sann*/
+.splashTitle {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    color:black;
+}
+
+.splashSmallTitle {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color:black;
+}
+
+.modal-dialog {
+    width: 90%;
+    max-width: 500px;
+    max-height: 500px;
+    padding: 0;
+}
+
+.modal-content {
+    height: 100%;
+    background: linear-gradient(white,grey);
+    border-radius: 50px;
+    font-size: 20px;
+    color: black;
+    text-align: center;
+}
+
+.modal-list ul {
+    list-style: initial;
+    margin: auto;
+}
+
+.modal-center{
+ text-align: center;
+}
+
+.modal-body {
+    padding: 0;
+    max-height: calc(100vh - 50px);
+    overflow-y: auto;
+}
+.modal-header{
+    border-bottom: none;
+    padding: 20px;
+}
+.modal-footer{
+    border-top: none;
+    padding:20px;
+}

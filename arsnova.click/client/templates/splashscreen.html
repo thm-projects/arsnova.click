@@ -1,0 +1,27 @@
+<template name="splashscreen">
+    <div class="modal fade js-splashscreen " role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    {{#with loadingTemplate templateName}}
+                        {{> template}}
+                    {{/with}}
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="questionT">
+    <br/>
+
+    <p class="splashSmallTitle">{{quest}}</p>
+    <br/>
+    {{#each answ}}
+        <a href="#">{{content}}</a><br/>
+    {{/each}}
+</template>

@@ -1,5 +1,11 @@
 <template name="createAnswerOptions">
-    <div class="row content-with-navigation-buttons">
+    <div class="row titel titel-relative">
+        <div class="col-md-12">
+            <div class="col-md-12">Antwortoptionen</div>
+        </div>
+    </div>
+
+    <div class="row ">
         <div class="col-md-12">
             <div class="row row-landingpage-buttons">
                 <div class="col-md-12 text-center">
@@ -25,9 +31,11 @@
 
                                 <div class="round-corners input-group-addon input-field-bg-color input-group-letter">
                                     {{#if isCorrect}}
-                                        r
+                                        <!--r-->
+                                        <div class="check-mark-checked">&#10004;</div>
                                     {{else}}
-                                        f
+                                        <!--f-->
+                                        <div class="check-mark-unchecked">&#10004;</div>
                                     {{/if}}
                                 </div>
                             </div>

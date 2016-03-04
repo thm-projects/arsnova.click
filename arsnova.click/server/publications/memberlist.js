@@ -5,6 +5,5 @@ Meteor.publish('MemberList.members', function(phashtag) {
     var learners = MemberList.find({
         hashtag: phashtag
     });
-    if (!learners) return;
-    return MemberList.find({hashtag: phashtag});
+    return learners ? MemberList.find({hashtag: phashtag}) : null;
 });

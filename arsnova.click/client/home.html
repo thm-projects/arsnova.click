@@ -1,9 +1,15 @@
 <template name="home">
-
-    <!--Parameter:
-    session - true: session list
-            - false: question answers screen
-    -->
-    {{> splashscreen session=true}}
+    {{> splashscreen templateName = "modalSessionTemplate" }}
     {{> hashtag_view}}
+</template>
+
+<template name="modalSessionTemplate">
+    <p>{{text}}</p>
+
+    <p class="splashTitle">Hinweis:</p><br/>
+
+    <p class="modal-center">Die folgenden Hashtags sind in diesem Browser verfügbar:</p><br/>
+    {{#each links}}
+        <a href="#">{{content}}</a><br/>
+    {{/each}}
 </template>

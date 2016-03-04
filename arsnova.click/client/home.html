@@ -1,13 +1,10 @@
 <template name="home">
-    {{> splashscreen templateName = "modalSessionTemplate" }}
+    {{> splashscreen templateName = "modalShowMyHashtags" }}
     {{> hashtag_view}}
 </template>
 
-<template name="modalSessionTemplate">
-    <p>{{text}}</p>
-
+<template name="modalShowMyHashtags">
     <p class="splashTitle">Hinweis:</p><br/>
-
     <p class="modal-center">Die folgenden Hashtags sind in diesem Browser verfügbar:</p><br/>
     {{#each links}}
         <a href="#">{{content}}</a><br/>

@@ -1,9 +1,9 @@
 Template.createAnswerOptions.onCreated(function () {
    this.autorun(() => {
-      Session.set("privateKey", "thisismypriv");
       Session.set("hashtag", "wpw");
+      Session.set("isOwner", true);
       localStorage.setItem("privateKey", "thisismypriv");
-      this.subscribe('AnswerOptions.instructor', Session.get("privateKey"), Session.get("hashtag"));
+      this.subscribe('AnswerOptions.instructor', localStorage.getItem("privateKey"), Session.get("hashtag"));
    });
 });
 
@@ -59,8 +59,12 @@ Template.createAnswerOptions.events({
             hashtag: Session.get("hashtag"),
             answerOptionNumber: i,
             answerText: text
-         }, {
-
+         }, (err, res) => {
+            if (err) {
+               alert(err);
+            } else {
+               Router.go("/memberlist");
+            }
          });
       }
    }

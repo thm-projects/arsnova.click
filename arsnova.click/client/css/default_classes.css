@@ -35,6 +35,11 @@
     color: #ffffff;
 }
 
+.input-group-letter {
+    font-size: 2em;
+    color: darkslategrey;
+}
+
 .button:hover, .button:active:focus {
     box-shadow: none;
 }
@@ -79,4 +84,9 @@
 
 .hover-underline:hover {
     text-decoration: underline;
+}
+
+.fixed-bottom {
+    position: fixed;
+    bottom: 50px;
 }

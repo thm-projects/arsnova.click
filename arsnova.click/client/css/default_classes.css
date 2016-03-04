@@ -1,3 +1,10 @@
+.center-vertical {
+    position: relative;
+    top: 50%;
+    /* TODO: IE 8 and Opera 8 doesn't support translateY*/
+    transform: translateY(-50%);
+}
+
 .round-corners, .button {
     border-radius: 10px;
 }

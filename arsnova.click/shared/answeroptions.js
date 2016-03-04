@@ -1,5 +1,5 @@
 Meteor.methods({
-    'AnswerOptions.addOption'( privateKey, {hashtag, answerText, answerOptionNumber, isCorrect} ) {
+    'AnswerOptions.addOption'({privateKey, hashtag, answerText, answerOptionNumber, isCorrect}) {
         new SimpleSchema({
             privateKey: { type: String },
             hashtag: { type: String },
@@ -27,7 +27,7 @@ Meteor.methods({
             });
         }
     },
-    'AnswerOptions.deleteOption'( privateKey, hashtag, answerOptionNumber ) {
+    'AnswerOptions.deleteOption'({privateKey, hashtag, answerOptionNumber}) {
         (new SimpleSchema({
             privateKey: { type: String },
             hashtag: { type: String },

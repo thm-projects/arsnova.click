@@ -21,29 +21,33 @@ Template.createAnswerOptions.events({
       if (this.isCorrect) {
          this.isCorrect = 0;
          $(event.currentTarget.firstElementChild).removeClass("check-mark-checked");
-         $(event.currentTarget.firstElementChild).removeClass("check-mark-unchecked");
+         $(event.currentTarget.firstElementChild).addClass("check-mark-unchecked");
       }
       else {
          this.isCorrect = 1;
          $(event.currentTarget.firstElementChild).removeClass("check-mark-unchecked");
-         $(event.currentTarget.firstElementChild).removeClass("check-mark-checked");
+         $(event.currentTarget.firstElementChild).addClass("check-mark-checked");
       }
    },
    "click #addAnswerOption": function () {
-      var newAnswerOption = {
+      Meteor.call('AnswerOptions.addOption', {
+         privateKey: localStorage.getItem("privateKey"),
          hashtag: Session.get("hashtag"),
          answerText: "",
          answerOptionNumber: (AnswerOptions.find().count()),
          isCorrect: 0
-      };
-      Meteor.call('AnswerOptions.addOption', localStorage.getItem("privateKey"), newAnswerOption);
+      });
       if (AnswerOptions.find().count() > 0) {
          $("#deleteAnswerOption").show();
       }
    },
    "click #deleteAnswerOption": function (event) {
       var number = AnswerOptions.find().count() - 1;
-      Meteor.call('AnswerOptions.deleteOption', localStorage.getItem("privateKey"), Session.get("hashtag"), number);
+      Meteor.call('AnswerOptions.deleteOption', {
+         privateKey: localStorage.getItem("privateKey"),
+         hashtag: Session.get("hashtag"),
+         AnswerOptionNumber: number
+      });
       if (AnswerOptions.find().count() == 0) {
          $(event.target).hide();
       }

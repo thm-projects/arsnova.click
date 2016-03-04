@@ -8,3 +8,11 @@ Template.modalShowMyHashtags.helpers({
         return dataArray;
     }
 });
+
+Template.modalShowMyHashtags.events({
+    "click .js-my-hash": function (event) {
+        var hashtag = event.target.innerHTML;
+        var question = localStorage.getItem(hashtag);
+        console.log(question);
+    }
+});

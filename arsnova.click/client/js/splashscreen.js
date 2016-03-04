@@ -39,3 +39,7 @@ Template.splashscreen.helpers({
         return {template: Template[this.templateName]};
     }
 });
+
+closeSplashscreen = function () {
+    $('.js-splashscreen').modal("hide");
+};

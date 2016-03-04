@@ -16,6 +16,7 @@
 .input-field-sizing {
     height: 50px;
     font-size: 1.5em;
+    width: 100%;
 }
 
 .input-field-bg-color {
@@ -91,11 +92,11 @@
     bottom: 50px;
     width: 100%;
     left: 0;
-    padding: 10px;
+    padding: 15px;
 }
 
 .content-with-navigation-buttons {
-    max-height: calc(100% - 100px);
+    max-height: calc(100% - 105px);
     overflow-y: auto;
     padding-bottom: 10px;
 }

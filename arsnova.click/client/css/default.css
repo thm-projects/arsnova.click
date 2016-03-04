@@ -7,7 +7,7 @@ button {
     font-size: 1.3em;
 }
 
-button:focus {
+button:focus, input:focus, textarea:focus {
     outline: none;
 }
 
@@ -66,6 +66,10 @@ textarea:-ms-input-placeholder {
 
 /* WebKit, Blink, Edge */
 input::-webkit-input-placeholder {
+    color: darkslategrey;
+}
+
+input[placeholder] {
     color: darkslategrey;
 }
 

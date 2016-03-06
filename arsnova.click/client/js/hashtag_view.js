@@ -1,6 +1,5 @@
 Template.hashtag_view.onCreated(function () {
     this.autorun(() => {
-        localStorage.setItem("privateKey", "thisismypriv");
         this.subscribe('Hashtags.public');
     });
 });

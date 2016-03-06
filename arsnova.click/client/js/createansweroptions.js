@@ -4,6 +4,15 @@ Template.createAnswerOptions.onCreated(function () {
       Session.set("isOwner", true);
       localStorage.setItem("privateKey", "thisismypriv");
       this.subscribe('AnswerOptions.instructor', localStorage.getItem("privateKey"), Session.get("hashtag"));
+      while (AnswerOptions.length < 0) {
+         Meteor.call('AnswerOptions.addOption', {
+            privateKey: localStorage.getItem("privateKey"),
+            hashtag: Session.get("hashtag"),
+            answerText: "",
+            answerOptionNumber: (AnswerOptions.find().count()),
+            isCorrect: 0
+         });
+      }
    });
 });
 

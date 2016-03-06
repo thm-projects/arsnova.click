@@ -1,7 +1,5 @@
 Template.hashtag_view.onCreated(function () {
     this.autorun(() => {
-        Session.set("privateKey", "thisismypriv");
-        Session.set("hashtag", "wpw");
         localStorage.setItem("privateKey", "thisismypriv");
         this.subscribe('Hashtags.public');
     });

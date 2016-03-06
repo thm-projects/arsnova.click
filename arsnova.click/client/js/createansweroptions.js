@@ -1,10 +1,7 @@
 Template.createAnswerOptions.onCreated(function () {
    this.autorun(() => {
-      Session.set("hashtag", "wpw");
-      Session.set("isOwner", true);
-      localStorage.setItem("privateKey", "thisismypriv");
       this.subscribe('AnswerOptions.instructor', localStorage.getItem("privateKey"), Session.get("hashtag"));
-      while (AnswerOptions.length < 0) {
+      while (AnswerOptions.length < 4) {
          Meteor.call('AnswerOptions.addOption', {
             privateKey: localStorage.getItem("privateKey"),
             hashtag: Session.get("hashtag"),

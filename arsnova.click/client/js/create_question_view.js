@@ -1,4 +1,4 @@
-Template.createAnswerOptions.onCreated(function () {
+Template.createQuestionView.onCreated(function () {
     this.autorun(() => {
         this.subscribe('Sessions.instructor', localStorage.getItem("privateKey"), Session.get("hashtag"));
     });

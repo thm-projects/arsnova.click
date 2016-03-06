@@ -4,7 +4,7 @@ Router.configure({
 
 Router.map(function () {
     if (!localStorage.getItem(("privateKey"))) {
-        localStorage.setItem("privateKey");
+        localStorage.setItem("privateKey", "thisismypriv");
     }
     if (!Session.get("hashtag")) {
         this.go("/");

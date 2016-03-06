@@ -35,17 +35,9 @@ Template.createQuestionView.events({
     },
     "click #backButton": function () {
         var questionText = $('#questionText').val();
-        Meteor.call("Sessions.setQuestion", {
-            privateKey: localStorage.getItem("privateKey"),
-            hashtag: Session.get("hashtag"),
-            questionText: questionText
-        }, (err, res) => {
-            if (err) {
-                alert("Question not saved!\n" + err);
-            } else {
-                Router.go("/answeroptions");
-            }
-        });
+        Session.set("hashtag", undefined);
+        Session.set("isOwner", undefined);
+        Router.go("/");
     },
     "click #formatButton": function () {
         //Not implemented yet

@@ -19,6 +19,16 @@ Meteor.methods({
         }
     },
     'Hashtags.addHashtag'(doc) {
+        for (var i = 0; i < 4; i++) {
+            var emptyAnswerDoc = {
+                privateKey: doc.privateKey,
+                hashtag: doc.hashtag,
+                answerText: "",
+                answerOptionNumber: i,
+                isCorrect: 0
+            };
+            AnswerOptions.insert(emptyAnswerDoc);
+        }
         Hashtags.insert(doc);
     }
 });

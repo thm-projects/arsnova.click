@@ -36,15 +36,22 @@ Template.hashtag_view.events({
                 hashtag: hashtag,
                 isActive: 1
             };
-            Meteor.call('Hashtags.addHashtag', doc);
-            Session.set("hashtag", hashtag);
-            Session.set("isOwner", true);
-            Router.go("/question");
+            Meteor.call('Hashtags.addHashtag', doc, (err, res) => {
+                if (err) {
+                    alert("Hashtag not saved!\n" + err);
+                } else {
+                    Session.set("hashtag", hashtag);
+                    Session.set("isOwner", true);
+                    localStorage.setItem("hashtag", hashtag);
+                    Router.go("/question");
+                }
+            });
         }
     },
     "click #joinSession": function () {
         var hashtag = $("#hashtag-input-field").val();
         Session.set("hashtag", hashtag);
+        localStorage.setItem("hashtag", hashtag);
         Router.go("/nick");
     }
 });

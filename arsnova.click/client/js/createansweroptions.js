@@ -1,15 +1,6 @@
 Template.createAnswerOptions.onCreated(function () {
    this.autorun(() => {
-      this.subscribe('AnswerOptions.instructor', localStorage.getItem("privateKey"), Session.get("hashtag"));
-      while (AnswerOptions.length < 4) {
-         Meteor.call('AnswerOptions.addOption', {
-            privateKey: localStorage.getItem("privateKey"),
-            hashtag: Session.get("hashtag"),
-            answerText: "",
-            answerOptionNumber: (AnswerOptions.find().count()),
-            isCorrect: 0
-         });
-      }
+      this.subscription = Meteor.subscribe('AnswerOptions.instructor', localStorage.getItem("privateKey"), Session.get("hashtag"));
    });
 });
 

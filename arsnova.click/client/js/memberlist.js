@@ -11,14 +11,17 @@ Template.memberlist.onCreated(function () {
 
 Template.memberlist.onCreated(function () {
     $(window).resize(function () {
-        var viewPortHeight = $(document).height() - 200;
-        var viewPortWidth = $(document).width();
+        var viewPortHeight = $(".contentPosition").height() - $('.learner-title').height() + 40;
+        var viewPortWidth = $(".contentPosition").width();
 
         // btnLearnerHeight muss hart hinterlegt werden / ggf anpassung an neue css klassen
         var btnLearnerHeight = 54;
 
         var queryLimiter = Math.floor(viewPortHeight / btnLearnerHeight);
-        if (viewPortWidth > 768 && viewPortWidth < 1200) {
+        if (queryLimiter < 4) {
+            queryLimiter = 4;
+        }
+        if (viewPortWidth >= 768 && viewPortWidth < 1200) {
             queryLimiter *= 3;
         } else if (viewPortWidth >= 1200) {
             queryLimiter *= 4;

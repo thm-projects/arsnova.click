@@ -117,3 +117,11 @@
   outline: none;
   resize: none;
 }
+
+.color-changing {
+  width: 100px;
+  height: 100px;
+  animation-name: colorChanging;
+  animation-duration: 7s;
+  animation-iteration-count: infinite;
+}

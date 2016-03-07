@@ -1,11 +1,9 @@
 <template name="home">
-    {{> splashscreen templateName = "modalShowMyHashtags" lazyClose = true}}
+    {{> splashscreen templateName = "modalShowMyHashtags" lazyClose = true timerClose = 5000 headername = 'Hinweis:' type = 'splash-screen-session'}}
     {{> hashtag_view}}
 </template>
 
 <template name="modalShowMyHashtags">
-    <p class="splashTitle">Hinweis:</p><br/>
-
     <p class="modal-center">Die folgenden Hashtags sind in diesem Browser verfügbar:</p><br/>
     {{#each hashtags}}
         <a href="#" class="js-my-hash">{{hashtag}}</a><br/>

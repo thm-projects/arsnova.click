@@ -40,6 +40,18 @@
     <!-- Fallback for everything else -->
     <link rel="shortcut icon" href="images/icons/arsNovaClick-180.png">
 
+    <!--
+            Chrome 31+ has home screen icon 192×192 (the recommended size for multiple resolutions).
+            If it’s not defined on that size it will take 128×128.
+        -->
+    <link rel="icon" sizes="192x192" href="images/icons/arsNovaClick-192.png">
+    <link rel="icon" sizes="128x128" href="images/icons/arsNovaClick-128.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/icons/arsNovaClick-144.png">
+    <!-- todo: nachvollziehen was er hier macht -->
+    <meta name="msapplication-TileColor" content="#222222">
+
     <!-- wp icon -->
     <meta name="msapplication-square70x70logo" content="images/icons/arsNovaClick-72.png"/>
     <meta name="msapplication-square150x150logo" content="images/icons/arsNovaClick-152.png"/>

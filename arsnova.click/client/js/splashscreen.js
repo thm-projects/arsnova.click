@@ -3,13 +3,21 @@ Template.splashscreen.rendered = function () {
 
     if (templateParams.lazyClose) {
         splashscreen.on('click', function () {
-            $('.js-splashscreen').modal('hide')
+            closeSplashscreen();
         });
     } else {
         splashscreen.modal({
             backdrop: 'static',
             keyboard: false
         });
+    }
+
+    if (templateParams.timerClose && !isNaN(templateParams.timerClose)) {
+        setTimeout(function () {
+            if (splashscreen.css('display') === 'block') {
+                closeSplashscreen();
+            }
+        }, templateParams.timerClose);
     }
 
     splashscreen.modal('show');

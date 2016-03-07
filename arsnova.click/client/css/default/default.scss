@@ -1,4 +1,5 @@
 @import "colors";
+@import "appearance";
 
 body {
   background-color: $background-color;
@@ -128,4 +129,5 @@ button:disabled {
 
   border: 0;
   background-color: $background-color;
+  margin-bottom: 0;
 }

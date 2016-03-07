@@ -9,19 +9,19 @@
 
 /* todo: we have to define the background-colors */
 .splash-screen-request-read-confirm {
-
+  background: $splash-screen-request-read-confirm-background-color;
 }
 
 .splash-screen-countdown {
-
+  background: $splash-screen-countdown-background-color;
 }
 
 .splash-screen-only-view-seconds-left {
-
+  background: $splash-view-seconds-left-background-color;
 }
 
 .splash-screen-show-question {
-
+  background: $splash-show-question-background-color;
 }
 
 /*

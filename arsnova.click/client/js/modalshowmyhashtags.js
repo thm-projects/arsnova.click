@@ -6,7 +6,7 @@ Template.modalShowMyHashtags.helpers({
             dataArray.push({hashtag: name});
         });
         return dataArray;*/
-        return getAllHashtags();
+        return getAllHashtagsFromLocalStorage();
     }
 });
 

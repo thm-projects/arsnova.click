@@ -15,7 +15,7 @@ Template.hashtag_view.events({
                 $("#addNewHashtag").removeAttr("disabled");
             } else {
                 var canReenter = false;
-                var localHashtags = getAllHashtags();
+                var localHashtags = getAllHashtagsFromLocalStorage();
                 if ($.inArray(inputHashtag, localHashtags) > -1) {
                     $("#addNewHashtag").text("Wiederherstellen");
                     canReenter = true;
@@ -41,7 +41,7 @@ Template.hashtag_view.events({
         var hashtag = $("#hashtag-input-field").val();
         var reenter = false;
         if (hashtag.length > 0) {
-            var localHashtags = getAllHashtags();
+            var localHashtags = getAllHashtagsFromLocalStorage();
             if ($.inArray(hashtag, localHashtags) > -1) {
                 var oldHashtagDoc = Hashtags.findOne({hashtag: hashtag});
                 if (oldHashtagDoc) {

@@ -1,7 +1,7 @@
 /**
  * Created by Kevin on 07.03.16.
  */
-getAllHashtags = function(){
+getAllHashtagsFromLocalStorage = function(){
     const hashtagString = localStorage.getItem("hashtags");
     if(!hashtagString) {
         localStorage.setItem("hashtags", JSON.stringify([]));

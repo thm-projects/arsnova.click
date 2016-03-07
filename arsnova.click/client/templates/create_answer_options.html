@@ -1,24 +1,22 @@
 <template name="createAnswerOptions">
-    <div class="row titel titel-relative">
-        <div class="col-md-12">
-            <div class="col-md-12">Antwortoptionen</div>
+    {{> titel titelText = "Antowortoptionen"}}
+
+    <div class="row row-landingpage-buttons margin-title">
+        <div class="col-md-12 text-center">
+            <button type="button" id="addAnswerOption"
+                    class="button btn-add-remove-ans_opt round-corners button-shadow button-grey">&#43;
+            </button>
+            <button type="button" id="deleteAnswerOption"
+                    class="button btn-add-remove-ans_opt round-corners button-shadow button-grey">&#8722;
+            </button>
         </div>
     </div>
 
-    <div class="row ">
+    <div class="row answer-options distance-top">
         <div class="col-md-12">
-            <div class="row row-landingpage-buttons">
-                <div class="col-md-12 text-center">
-                    <button type="button" id="addAnswerOption"
-                            class="btn btn-lg btn-secondary round-corners button-shadow button-grey">+
-                    </button>
-                    <button type="button" id="deleteAnswerOption"
-                            class="btn btn-lg btn-secondary round-corners button-shadow button-grey">-
-                    </button>
-                </div>
-            </div>
-            <div class="row distance-top">
-                <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-12 ">
                     {{#each answerOptions}}
                         <div class="form-group">
                             <div class="input-group">
@@ -32,10 +30,10 @@
                                 <div id="answerOption-{{answerOptionNumber}}" class="toggleCorrect round-corners input-group-addon input-field-bg-color input-group-letter">
                                     {{#if isCorrect}}
                                         <!--r-->
-                                        <div class="check-mark-checked">&#10004;</div>
+                                        <div class="check-mark-checked success-color">&#10004;</div>
                                     {{else}}
                                         <!--f-->
-                                        <div class="check-mark-unchecked">&#10004;</div>
+                                        <div class="check-mark-unchecked default-color">&#10004;</div>
                                     {{/if}}
                                 </div>
                             </div>

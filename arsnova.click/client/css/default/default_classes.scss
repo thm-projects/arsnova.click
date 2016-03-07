@@ -1,4 +1,5 @@
 @import "colors";
+@import "appearance";
 
 .center-vertical {
   position: relative;
@@ -8,7 +9,7 @@
 }
 
 .round-corners, .button {
-  border-radius: 10px;
+  border-radius: $corner-radius;
 }
 
 .button-shadow, .button {
@@ -19,6 +20,8 @@
   height: 50px;
   font-size: 1.5em;
   width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .input-field-bg-color, .input-field {
@@ -39,6 +42,7 @@
 
 .input-group-letter {
   font-size: 2em;
+  font-weight: 800;
   color: $input-group-letter-color;
 }
 
@@ -116,4 +120,32 @@
   font-size: 1.5em;
   outline: none;
   resize: none;
+  padding: 10px;
+}
+
+.check-mark-checked {
+  color: $check-mark-checked;
+  font-size: 1.3em;
+  width: 30px;
+}
+
+.check-mark-unchecked {
+  color: $check-mark-unchecked;
+  width: 30px;
+}
+
+.btn-add-remove-ans_opt {
+  line-height: 100%;
+  width: 50px !important;
+  height: 50px !important;
+  background-color: $check-mark-unchecked;
+
+}
+
+.color-changing {
+  width: 100px;
+  height: 100px;
+  animation-name: colorChanging;
+  animation-duration: 7s;
+  animation-iteration-count: infinite;
 }

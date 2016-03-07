@@ -1,11 +1,10 @@
 Template.modalShowMyHashtags.helpers({
     hashtags: function () {
-        var hashtags = localStorage.getItem("hashtags").split(",");
-        var dataArray = [];
-        hashtags.forEach(function (name) {
-            dataArray.push({hashtag: name});
-        });
-        return dataArray;
+        var localHashtags = [];
+        if (localStorage.getItem("hashtags")) {
+            localHashtags = JSON.parse(localStorage.getItem("hashtags"));
+        }
+        return localHashtags;
     }
 });
 

@@ -2,6 +2,15 @@ Router.configure({
     layoutTemplate: 'layout'
 });
 
+Router.map(function () {
+    if (!localStorage.getItem(("privateKey"))) {
+        localStorage.setItem("privateKey", "thisismypriv");
+    }
+    if (!Session.get("hashtag")) {
+        this.go("/");
+    }
+});
+
 Router.route('/', function () {
     this.render('home');
 });

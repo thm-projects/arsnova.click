@@ -1,9 +1,6 @@
 Template.createAnswerOptions.onCreated(function () {
    this.autorun(() => {
-      Session.set("hashtag", "wpw");
-      Session.set("isOwner", true);
-      localStorage.setItem("privateKey", "thisismypriv");
-      this.subscribe('AnswerOptions.instructor', localStorage.getItem("privateKey"), Session.get("hashtag"));
+      this.subscription = Meteor.subscribe('AnswerOptions.instructor', localStorage.getItem("privateKey"), Session.get("hashtag"));
    });
 });
 
@@ -37,19 +34,21 @@ Template.createAnswerOptions.events({
          answerOptionNumber: (AnswerOptions.find().count()),
          isCorrect: 0
       });
-      if (AnswerOptions.find().count() > 0) {
+      if (AnswerOptions.find().count() > 1) {
          $("#deleteAnswerOption").show();
       }
    },
    "click #deleteAnswerOption": function (event) {
       var number = AnswerOptions.find().count() - 1;
-      Meteor.call('AnswerOptions.deleteOption', {
-         privateKey: localStorage.getItem("privateKey"),
-         hashtag: Session.get("hashtag"),
-         answerOptionNumber: number
-      });
-      if (AnswerOptions.find().count() == 0) {
-         $(event.target).hide();
+      if (AnswerOptions.find().count() > 1) {
+         Meteor.call('AnswerOptions.deleteOption', {
+            privateKey: localStorage.getItem("privateKey"),
+            hashtag: Session.get("hashtag"),
+            answerOptionNumber: number
+         });
+         if (AnswerOptions.find().count() == 1) {
+            $(event.target).hide();
+         }
       }
    },
    "click #backButton": function (event) {

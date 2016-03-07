@@ -1,8 +1,5 @@
-Template.createAnswerOptions.onCreated(function () {
+Template.createQuestionView.onCreated(function () {
     this.autorun(() => {
-        Session.set("privateKey", "thisismypriv");
-        Session.set("hashtag", "wpw");
-        localStorage.setItem("privateKey", "thisismypriv");
         this.subscribe('Sessions.instructor', localStorage.getItem("privateKey"), Session.get("hashtag"));
     });
 });
@@ -10,8 +7,6 @@ Template.createAnswerOptions.onCreated(function () {
 Template.createQuestionView.helpers({
     //Get question from Sessions-Collection if it already exists
     questionText: function () {
-        //To test
-        Session.set("hashtag", "wpw");
         var currentSession = Sessions.findOne({hashtag: Session.get("hashtag")});
         if (currentSession) {
             return currentSession.questionText;
@@ -40,17 +35,9 @@ Template.createQuestionView.events({
     },
     "click #backButton": function () {
         var questionText = $('#questionText').val();
-        Meteor.call("Sessions.setQuestion", {
-            privateKey: localStorage.getItem("privateKey"),
-            hashtag: Session.get("hashtag"),
-            questionText: questionText
-        }, (err, res) => {
-            if (err) {
-                alert("Question not saved!\n" + err);
-            } else {
-                Router.go("/answeroptions");
-            }
-        });
+        Session.set("hashtag", undefined);
+        Session.set("isOwner", undefined);
+        Router.go("/");
     },
     "click #formatButton": function () {
         //Not implemented yet

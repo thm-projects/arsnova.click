@@ -16,6 +16,7 @@ Template.readconfirmationrequired.helpers({
 
 Template.readconfirmationrequired.events({
     "click #forwardButton": function () {
+        Meteor.call('Hashtags.setIsActive', localStorage.getItem("privateKey"), Session.get("hashtag"), 1);
         Router.go("/memberlist");
     },
     "click #backButton": function () {

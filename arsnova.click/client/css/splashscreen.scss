@@ -4,44 +4,61 @@
  * various splash screen colors
  */
 .splash-screen-session {
-    background: $splash-screen-show-session-background-color;
+  background: $splash-screen-show-session-background-color;
+}
+
+/* todo: we have to define the background-colors */
+.splash-screen-request-read-confirm {
+
+}
+
+.splash-screen-countdown {
+
+}
+
+.splash-screen-only-view-seconds-left {
+
+}
+
+.splash-screen-show-question {
+
 }
 
 /*
  * Splash screen appearance
  */
 .modal-content {
-    font-size: 20px;
-    color: black;
-    text-align: center;
-    border-radius: 40px;
-    box-shadow: none;
+  font-size: 20px;
+  color: black;
+  text-align: center;
+  border-radius: 40px;
+  box-shadow: none;
 }
 
 .modal-list ul {
-    list-style: initial;
-    margin: auto;
+  list-style: initial;
+  margin: auto;
 }
 
 .modal-center {
-    text-align: center;
+  text-align: center;
 }
 
 .modal-body {
-    padding: 0;
+  padding: 0;
 }
 
 .modal-header {
-    border-bottom: none;
-    padding: 20px;
-    color: $splash-screen-header-color;
+  border-bottom: none;
+  padding: 20px;
+  color: $splash-screen-header-color;
 }
 
 .modal-footer {
-    border-top: none;
-    padding: 20px;
+  border-top: none;
+  padding: 20px;
 }
 
 .modal-backdrop {
-    background-color: $background-color;
+  background-color: $background-color;
 }

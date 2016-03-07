@@ -13,12 +13,6 @@ Template.splashscreen.rendered = function () {
     }
 
     splashscreen.modal('show');
-
-    var hashtags = [
-        "wpw",
-        "testing"
-    ];
-    localStorage.setItem("hashtags", hashtags.toString());
     var wpwSessionData = {
         questionText: "I'm a question text. This is for testing purpose. Do you understand?",
         timer: 1800000,

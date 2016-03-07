@@ -51,13 +51,14 @@ Meteor.methods({
             });
         }
     },
-    'AnswerOptions.updateAnswerText'({privateKey, hashtag, answerOptionNumber, answerText}) {
+    'AnswerOptions.updateAnswerTextAndIsCorrect'({privateKey, hashtag, answerOptionNumber, answerText, isCorrect}) {
         new SimpleSchema({
             privateKey: { type: String },
             hashtag: { type: String },
             answerOptionNumber: { type: Number },
-            answerText: { type: String }
-        }).validate({ privateKey, hashtag, answerOptionNumber, answerText });
+            answerText: { type: String },
+            isCorrect: { type: Number }
+        }).validate({ privateKey, hashtag, answerOptionNumber, answerText, isCorrect });
         var doc = true;
         if (Meteor.isServer) {
             doc = Hashtags.findOne({
@@ -75,7 +76,7 @@ Meteor.methods({
                 answerOptionNumber: answerOptionNumber
             });
             AnswerOptions.update(answerOptionDoc._id, {
-                $set: {answerText: answerText}
+                $set: {answerText: answerText, isCorrect: isCorrect}
             });
         }
     }

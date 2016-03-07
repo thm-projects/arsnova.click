@@ -32,14 +32,14 @@ Meteor.methods({
             }
         }
     },
-    "Sessions.updateIsReadConfirmationRequired": function ({privateKey, hashtag, isReadConfirmationRequired}) {
+    "Sessions.updateIsReadConfirmationRequired": function ({privateKey, hashtag, isReadingConfirmationRequired}) {
         new SimpleSchema({
-            isReadConfirmationRequired: {
+            isReadingConfirmationRequired: {
                 type: Number,
                 min: 0,
                 max: 1
             }
-        }).validate({isReadConfirmationRequired: isReadConfirmationRequired});
+        }).validate({isReadingConfirmationRequired: isReadingConfirmationRequired});
 
         var hashtagDoc = Hashtags.findOne({
             hashtag: hashtag,
@@ -50,7 +50,7 @@ Meteor.methods({
             if (!session) {
                 throw new Meteor.Error('Sessions.updateIsReadConfirmationRequired: no access to session');
             } else {
-                Sessions.update(session._id, {$set: {isReadingConfirmationRequired: isReadConfirmationRequired}}, function (error) {
+                Sessions.update(session._id, {$set: {isReadingConfirmationRequired: isReadingConfirmationRequired}}, function (error) {
                     if (error) {
                         throw new Meteor.Error('Sessions.updateIsReadConfirmationRequired', error);
                     }

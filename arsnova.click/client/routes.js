@@ -35,7 +35,7 @@ Router.route('/answeroptions', function () {
 
 Router.route('/settimer', function () {
     if (Session.get("isOwner")) {
-
+        this.render('createTimerView');
     }
 });
 

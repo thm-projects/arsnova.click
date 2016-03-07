@@ -2,7 +2,8 @@
     {{#if isNotOwnerAndReadConfirmationNeeded}}
         {{> splashscreen templateName = "questionT" lazyClose = false}}
     {{/if}}
-    <div class="row">
+    <div class="container-fluid">
+        <div class="row">
             <div class="row learner-title">
                 <h3 class="text-light text-center">
                     Teilnehmer/innen im Hashtag {{hashtag}}
@@ -12,14 +13,16 @@
                  id="learner-list">
                 <!-- TODO: delete test loop before push-->
                 {{#each learners}}
-                    <div class="col-xs-12 col-sm-4 col-lg-3">
-                        <button class="btn btn-grey btn-learner">
-                            {{>learner}}
-                        </button>
-                    </div>
+                    {{>learner}}
                 {{/each}} <!-- learners -->
+                {{#if showMoreButton}}
+                    <div class="col-xs-12 col-sm-4 col-lg-3">
+                        <button class="btn btn-grey btn-learner">...</button>
+                    </div>
+                {{/if}}
             </div>
             <!--  TODO: Meteor Pagination verwenden -->
+        </div>
     </div>
     {{#if isReadingConfirmationRequired}}
         <div class="row confirmationCounter">
@@ -46,8 +49,11 @@
 
 <template name="learner">
     <div>
-        <!-- TODO! css-stylings-->
-        {{nick}}
+        <div class="col-xs-12 col-sm-4 col-lg-3">
+            <button class="btn btn-grey btn-learner">
+                {{nick}}
+            </button>
+        </div>
     </div>
 </template>
 

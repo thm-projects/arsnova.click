@@ -15,13 +15,13 @@ h6 {
 .contentPosition {
     position: absolute;
     width: 100%;
-    /* TODO: IE 8 and Opera 8 doesn't support calc*/
+    /* TODO: IE 8 and Opera 8 doesn't support calc */
     /*
      * -50px because of the header height
      * -20px because of the footer height
      */
     height: calc(100% - 114px - 20px);
-    top: 114px;
+    top: 7vw;
 }
 
 .contentPosition > .row {
@@ -78,7 +78,7 @@ p, ul.list-unstyled {
 .titel-relative {
 
     position: relative;
-    matgin-top: 20px;
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 

@@ -9,6 +9,25 @@ Template.memberlist.onCreated(function () {
 
 });
 
+Template.memberlist.onCreated(function () {
+    $(window).resize(function () {
+        var viewPortHeight = $(document).height() - 125;
+        var viewPortWidth = $(document).width();
+
+        // btnLearnerHeight muss hart hinterlegt werden / ggf anpassung an neue css klassen
+        var btnLearnerHeight = 54;
+
+        var queryLimiter = Math.floor(viewPortHeight / btnLearnerHeight);
+        if (viewPortWidth > 768 && viewPortWidth < 1200) {
+            queryLimiter *= 3;
+        } else if (viewPortWidth >= 1200) {
+            queryLimiter *= 4;
+        }
+
+        Session.set("showMoreButton", queryLimiter);
+    })
+})
+
 Template.memberlist.helpers({
     isOwner: function () {
         return Session.get("isOwner");
@@ -25,25 +44,12 @@ Template.memberlist.helpers({
     },
 
     learners: function () {
-        var returnMemberList = MemberList.find();
-        var memberCount = returnMemberList.length;
-
-        var viewPortHeigth = $(".contentPosition").height();
-        var viewPortWidth = $(".contentPosition").width();
-
-        // btnLearnerHeight muss hart hinterlegt werden / ggf anpassung an neue css klassen
-        var btnLearnerHeight = 54;
-
-
-        var breakFactor = viewPortWidth < 945 ? 1 : 3;
-
-        console.log("     viewPortHeigth : " + viewPortHeigth);
-        console.log("     viewPortWidth : " + viewPortWidth);
-        console.log("     btnLearnerHeight : " + btnLearnerHeight);
-        console.log("     memberCount : " + memberCount);
-        console.log("     breakFactor : " + breakFactor);
-
+        var returnMemberList = MemberList.find({}, {limit: (Session.get("showMoreButton") - 1)});
         return returnMemberList;
+    },
+
+    showMoreButton: function () {
+        return Session.get("showMoreButton") <= MemberList.find().count();
     },
 
     isReadingConfirmationRequired: function () {

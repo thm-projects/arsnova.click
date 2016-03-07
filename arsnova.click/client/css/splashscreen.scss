@@ -1,23 +1,21 @@
-/*kevin weigand, michael sann*/
-.splashTitle {
-    text-align: center;
-    font-size: 40px;
-    font-weight: bold;
-    color: black;
+@import "default/colors";
+
+/*
+ * various splash screen colors
+ */
+.splash-screen-session {
+    background: $splash-screen-show-session-background-color;
 }
 
-.splashSmallTitle {
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-    color: black;
-}
-
+/*
+ * Splash screen appearance
+ */
 .modal-content {
-    background: linear-gradient(white, grey);
     font-size: 20px;
     color: black;
     text-align: center;
+    border-radius: 40px;
+    box-shadow: none;
 }
 
 .modal-list ul {
@@ -36,9 +34,14 @@
 .modal-header {
     border-bottom: none;
     padding: 20px;
+    color: $splash-screen-header-color;
 }
 
 .modal-footer {
     border-top: none;
     padding: 20px;
+}
+
+.modal-backdrop {
+    background-color: $background-color;
 }

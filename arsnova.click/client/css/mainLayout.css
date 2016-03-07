@@ -69,7 +69,7 @@ p, ul.list-unstyled {
 
 .answer-options {
     height: calc(100% - 265px);
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 @media (min-width: 1200px) {

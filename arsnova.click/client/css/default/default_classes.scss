@@ -1,4 +1,5 @@
 @import "colors";
+@import "appearance";
 
 .center-vertical {
   position: relative;
@@ -8,7 +9,7 @@
 }
 
 .round-corners, .button {
-  border-radius: 10px;
+  border-radius: $corner-radius;
 }
 
 .button-shadow, .button {

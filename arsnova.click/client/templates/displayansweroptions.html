@@ -1,0 +1,12 @@
+<template name="displayAnswerOptions">
+    {{#each answerOptions}}
+        <div class="row">
+            <div id="{{answerOptionNumber}}" class="sendResponse">{{answerText}}</div>
+        </div>
+    {{/each}}
+    {{#if showForwardButton}}
+        <button id="forwardButton" class="button button-next">
+            Zur Auswertung
+        </button>
+    {{/if}}
+</template>

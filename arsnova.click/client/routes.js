@@ -60,6 +60,10 @@ Router.route('/onpolling', function () {
     }
 });
 
+Router.route('/giveresponse', function () {
+   this.render('displayAnswerOptions');
+});
+
 Router.route('/statistics', function () {
 });
 

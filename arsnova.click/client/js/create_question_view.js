@@ -70,4 +70,4 @@ Template.createQuestionView.events({
     "click #previewButton": function () {
         //Not implemented yet
     }
-});;
+});

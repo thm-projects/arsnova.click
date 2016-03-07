@@ -17,3 +17,14 @@ Meteor.publish('AnswerOptions.options', function(phashtag) {
     }).validate({phashtag});
     return AnswerOptions.find({hashtag: phashtag});
 });
+
+Meteor.publish('AnswerOptions.public', function(hashtag) {
+    new SimpleSchema({
+        hashtag: {type: String}
+    }).validate({hashtag});
+    return AnswerOptions.find({hashtag: hashtag}, {
+        fields: {
+            isCorrect: 0
+        }
+    });
+});

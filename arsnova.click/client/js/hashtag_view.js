@@ -20,10 +20,7 @@ Template.hashtag_view.events({
                     $("#addNewHashtag").text("Wiederherstellen");
                     canReenter = true;
                 }
-                console.log("shit is on fire");
-                console.log(canReenter);
                 if (hashtagDoc.isActive) {
-                    console.log("firetoo");
                     $("#joinSession").removeAttr("disabled");
                     if (!canReenter) {
                         $("#addNewHashtag").attr("disabled", "disabled");
@@ -72,8 +69,8 @@ Template.hashtag_view.events({
                         if (localStorage.getItem("hashtags")) {
                             oldHashtags = JSON.parse(localStorage.getItem("hashtags"))
                         }
-                        localHashtags.push(hashtag);
-                        localStorage.setItem("hashtags", JSON.stringify(localHashtags));
+                        oldHashtags.push(hashtag);
+                        localStorage.setItem("hashtags", JSON.stringify(oldHashtags));
                         Router.go("/question");
                     }
                 });

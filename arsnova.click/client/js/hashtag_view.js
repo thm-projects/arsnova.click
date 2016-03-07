@@ -68,7 +68,10 @@ Template.hashtag_view.events({
                         Session.set("isOwner", true);
                         localStorage.setItem("hashtag", hashtag);
                         // flag the client as owner via localStorage
-                        var localHashtags = JSON.parse(localStorage.getItem("hashtags"));
+                        var oldHashtags = [];
+                        if (localStorage.getItem("hashtags")) {
+                            oldHashtags = JSON.parse(localStorage.getItem("hashtags"))
+                        }
                         localHashtags.push(hashtag);
                         localStorage.setItem("hashtags", JSON.stringify(localHashtags));
                         Router.go("/question");

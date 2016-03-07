@@ -11,7 +11,7 @@ Template.memberlist.onCreated(function () {
 
 Template.memberlist.onCreated(function () {
     $(window).resize(function () {
-        var viewPortHeight = $(document).height() - 125;
+        var viewPortHeight = $(document).height() - 200;
         var viewPortWidth = $(document).width();
 
         // btnLearnerHeight muss hart hinterlegt werden / ggf anpassung an neue css klassen
@@ -25,8 +25,10 @@ Template.memberlist.onCreated(function () {
         }
 
         Session.set("showMoreButton", queryLimiter);
+        console.log("Show Buttons: " + queryLimiter);
     })
-})
+});
+
 
 Template.memberlist.helpers({
     isOwner: function () {

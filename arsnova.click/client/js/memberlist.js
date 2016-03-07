@@ -24,6 +24,9 @@ Template.memberlist.events({
 });
 
 Template.memberlist.helpers({
+    hashtag: function () {
+        return Session.get("hashtag");
+    },
     isOwner: function () {
         return Session.get("isOwner");
     },

@@ -2,14 +2,14 @@
     {{#if isNotOwnerAndReadConfirmationNeeded}}
         {{> splashscreen templateName = "questionT" lazyClose = false}}
     {{/if}}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="row learner-title">
-                <h3 class=" titel titel-relative text-light text-center">
-                    Teilnehmer/innen im Hashtag {{hashtag}}
-                </h3>
-            </div>
-            <div class="row learner-list"
+    <div class="row learner-title">
+        {{> titel titelText = "Teilnehmer/innen" }}
+
+    </div>
+    <div class="container-fluid ">
+        <div class="row margin-title">
+
+            <div class="row learner-list "
                  id="learner-list">
                 <!-- TODO: delete test loop before push-->
                 {{#each learners}}

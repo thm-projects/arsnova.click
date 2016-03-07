@@ -14,18 +14,23 @@ Template.hashtag_view.events({
                 $("#joinSession").attr("disabled", "disabled");
                 $("#addNewHashtag").removeAttr("disabled");
             } else {
-                var localHashtags = localStorage.getItem("hashtags");
-                if ($.inArray(inputHashtag, localHashtags)) {
+                var canReenter = false;
+                var localHashtags = JSON.parse(localStorage.getItem("hashtags"));
+                if ($.inArray(inputHashtag, localHashtags) > -1) {
                     $("#addNewHashtag").text("Wiederherstellen");
+                    canReenter = true;
                 }
-                else {
-                    if (hashtagDoc.isActive) {
-                        $("#joinSession").removeAttr("disabled");
+                console.log("shit is on fire");
+                console.log(canReenter);
+                if (hashtagDoc.isActive) {
+                    console.log("firetoo");
+                    $("#joinSession").removeAttr("disabled");
+                    if (!canReenter) {
                         $("#addNewHashtag").attr("disabled", "disabled");
-                    } else {
-                        $("#addNewHashtag").attr("disabled", "disabled");
-                        $("#joinSession").attr("disabled", "disabled");
                     }
+                } else {
+                    $("#addNewHashtag").attr("disabled", "disabled");
+                    $("#joinSession").attr("disabled", "disabled");
                 }
             }
         }
@@ -39,8 +44,8 @@ Template.hashtag_view.events({
         var hashtag = $("#hashtag-input-field").val();
         var reenter = false;
         if (hashtag.length > 0) {
-            var localHashtags = localStorage.getItem("hashtags");
-            if ($.inArray(hashtag, localHashtags)) {
+            var localHashtags = JSON.parse(localStorage.getItem("hashtags"));
+            if ($.inArray(hashtag, localHashtags) > -1) {
                 var oldHashtagDoc = Hashtags.findOne({hashtag: hashtag});
                 if (oldHashtagDoc) {
                     reenter = true;
@@ -63,8 +68,9 @@ Template.hashtag_view.events({
                         Session.set("isOwner", true);
                         localStorage.setItem("hashtag", hashtag);
                         // flag the client as owner via localStorage
-                        var localHashtags = localStorage.getItem("hashtags");
-                        localStorage.setItem("hashtags", (localHashtags + "," + hashtag));
+                        var localHashtags = JSON.parse(localStorage.getItem("hashtags"));
+                        localHashtags.push(hashtag);
+                        localStorage.setItem("hashtags", JSON.stringify(localHashtags));
                         Router.go("/question");
                     }
                 });

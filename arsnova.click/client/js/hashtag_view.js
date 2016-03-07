@@ -20,10 +20,7 @@ Template.hashtag_view.events({
                     $("#addNewHashtag").text("Wiederherstellen");
                     canReenter = true;
                 }
-                console.log("shit is on fire");
-                console.log(canReenter);
                 if (hashtagDoc.isActive) {
-                    console.log("firetoo");
                     $("#joinSession").removeAttr("disabled");
                     if (!canReenter) {
                         $("#addNewHashtag").attr("disabled", "disabled");

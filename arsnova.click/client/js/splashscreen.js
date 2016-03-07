@@ -37,3 +37,9 @@ Template.splashscreen.helpers({
 closeSplashscreen = function () {
     $('.js-splashscreen').modal("hide");
 };
+
+closeAndRedirectTo = function(url) {
+    $('.js-splashscreen').on('hidden.bs.modal', function() {
+        Router.go(url);
+    }).modal('hide');
+}

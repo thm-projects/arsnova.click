@@ -18,6 +18,7 @@ Template.modalShowMyHashtags.events({
         console.log(question);*/
         Session.set("isOwner", true);
         Session.set("hashtag", hashtag);
-        Router.go('/question');
+
+        closeAndRedirectTo('/question');
     }
 });

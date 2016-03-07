@@ -3,7 +3,7 @@
 
 .center-vertical {
   position: relative;
-  margin-top: 50%;
+  top: 50%;
   /* TODO: IE 8 and Opera 8 doesn't support translateY*/
   transform: translateY(-50%);
 }

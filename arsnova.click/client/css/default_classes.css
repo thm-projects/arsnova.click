@@ -1,17 +1,25 @@
-.round-corners {
+.center-vertical {
+    position: relative;
+    top: 50%;
+    /* TODO: IE 8 and Opera 8 doesn't support translateY*/
+    transform: translateY(-50%);
+}
+
+.round-corners, .button {
     border-radius: 10px;
 }
 
-.button-shadow {
+.button-shadow, .button {
     box-shadow: 1px 1px 5px black;
 }
 
-.input-field-sizing {
+.input-field {
     height: 50px;
     font-size: 1.5em;
+    width: 100%;
 }
 
-.input-field-bg-color {
+.input-field-bg-color, .input-field {
     background-color: gold;
     border: none;
 }
@@ -20,28 +28,88 @@
     color: gold;
 }
 
+.button {
+    height: 50px;
+    width: 100%;
+    border: none;
+    white-space: nowrap;
+    color: #ffffff;
+}
+
+.input-group-letter {
+    font-size: 2em;
+    color: darkslategrey;
+}
+
+.button:hover, .button:active:focus {
+    box-shadow: none;
+}
+
+.button-next {
+    background-color: green;
+}
+
+.button-warning {
+    background-color: firebrick;
+}
+
+.button-purple {
+    background-color: rebeccapurple;
+}
+
+.button-default {
+    background-color: grey;
+}
+
+.distance-top {
+    margin-top: 20px;
+}
+
 /*
  * center's the placeholder
  */
-.placeholder-align-center {
+.placeholder-align-center, .input-field {
 }
 
-.placeholder-align-center::-webkit-input-placeholder {
+.placeholder-align-center::-webkit-input-placeholder, .input-field::-webkit-input-placeholder {
     text-align: center;
 }
 
-.placeholder-align-center:-moz-placeholder { /* Firefox 18- */
+.placeholder-align-center:-moz-placeholder, .input-field:-moz-placeholder { /* Firefox 18- */
     text-align: center;
 }
 
-.placeholder-align-center::-moz-placeholder { /* Firefox 19+ */
+.placeholder-align-center::-moz-placeholder, .input-field::-moz-placeholder { /* Firefox 19+ */
     text-align: center;
 }
 
-.placeholder-align-center:-ms-input-placeholder {
+.placeholder-align-center:-ms-input-placeholder, .input-field:-ms-input-placeholder {
     text-align: center;
 }
 
 .hover-underline:hover {
     text-decoration: underline;
 }
+
+.fixed-bottom {
+    position: fixed;
+    bottom: 25px;
+    width: 100%;
+    left: 0;
+    padding: 30px;
+}
+
+.content-with-navigation-buttons {
+    max-height: calc(100% - 105px);
+    overflow-y: auto;
+    padding-bottom: 10px;
+}
+
+.textarea {
+    width: 100%;
+    background-color: gold;
+    font-size: 1.5em;
+    outline: none;
+    resize: none;
+}
+

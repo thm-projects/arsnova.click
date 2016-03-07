@@ -9,12 +9,12 @@ if(Meteor.isServer){
             var memberListExample1 = {
                 hashtag: "wpw",
                 nick: "Testuser",
-                readConfirmed: 0
+                readConfirmed: 1
             };
             var memberListExample2 = {
                 hashtag: "wpw",
                 nick: "Metoo",
-                readConfirmed: 0
+                readConfirmed: 1
             };
             var memberListExample3 = {
                 hashtag: "wpw",
@@ -40,7 +40,7 @@ if(Meteor.isServer){
                 hashtag: "wpw",
                 questionText: "I am a question text. This is for testing purpose. Do you understand?",
                 timer: "180",
-                isReadingConfirmationRequired: 0
+                isReadingConfirmationRequired: 1
             };
             var answerOptionsExample1 = {
                 hashtag: "wpw",

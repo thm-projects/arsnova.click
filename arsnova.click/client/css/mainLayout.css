@@ -20,8 +20,16 @@ h6 {
      * -50px because of the header height
      * -20px because of the footer height
      */
-    height: calc(100% - 50px - 20px);
-    top: 50px;
+    height: calc(100% - 114px - 20px);
+    top: 114px;
+}
+
+.contentPosition > .row {
+    height: 100%;
+}
+
+.contentPosition > .row > .col-md-6 {
+    height: 100%;
 }
 
 .text-light,
@@ -60,20 +68,45 @@ p, ul.list-unstyled {
     font-size: 7vw;
 }
 
+.titel {
+    color: white;
+    text-align: center;
+    width: 100%;
+    font-size: 6vw;
+}
+
+.titel-relative {
+
+    position: relative;
+    matgin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.titel-absolute {
+    position: absolute;
+    margin-top: 100px;
+}
+
 @media (min-width: 1200px) {
     .header-layout {
         font-size: 80px;
     }
+
 }
 
 @media (min-width: 990px) {
     .header-layout {
         font-size: 6vw;
     }
+
 }
 
 @media (min-width: 768px) {
     .header-layout {
         font-size: 5vw;
+    }
+
+    .titel {
+        font-size: 3.5vw;
     }
 }

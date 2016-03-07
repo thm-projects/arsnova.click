@@ -1,4 +1,13 @@
 <template name="home">
+    {{> splashscreen templateName = "modalShowMyHashtags" lazyClose = true}}
     {{> hashtag_view}}
-    <!-- TODO insert splashscreen existing sessions here -->
+</template>
+
+<template name="modalShowMyHashtags">
+    <p class="splashTitle">Hinweis:</p><br/>
+
+    <p class="modal-center">Die folgenden Hashtags sind in diesem Browser verfügbar:</p><br/>
+    {{#each hashtags}}
+        <a href="#" class="js-my-hash">{{hashtag}}</a><br/>
+    {{/each}}
 </template>

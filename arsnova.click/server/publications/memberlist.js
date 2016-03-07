@@ -5,6 +5,16 @@ Meteor.publish('MemberList.members', function(phashtag) {
     var learners = MemberList.find({
         hashtag: phashtag
     });
-    if (!learners) return;
-    return MemberList.find({hashtag: phashtag});
+    return learners ? MemberList.find({hashtag: phashtag}) : null;
+});
+
+Meteor.publish('MemberList.percentRead', function(phashtag, pprivateKey) {
+    new SimpleSchema({
+        phashtag: {type: String},
+        pprivateKey: {type:String}
+    }).validate({phashtag, pprivateKey});
+    const exists = Hashtags.findOne({hashtag:phashtag, privateKey:pprivateKey});
+    if(exists) {
+        return MemberList.find({hashtag:phashtag});
+    }
 });

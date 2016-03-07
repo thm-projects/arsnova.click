@@ -140,3 +140,11 @@
   background-color: $check-mark-unchecked;
 
 }
+
+.color-changing {
+  width: 100px;
+  height: 100px;
+  animation-name: colorChanging;
+  animation-duration: 7s;
+  animation-iteration-count: infinite;
+}

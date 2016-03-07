@@ -12,7 +12,10 @@ Template.splashscreen.rendered = function () {
         });
     }
 
-    if (templateParams.timerClose && !isNaN(templateParams.timerClose)) {
+    if (templateParams.timerClose) {
+        if (isNaN(templateParams.timerClose)) {
+            templateParams.timerClose = 5000;
+        }
         setTimeout(function () {
             if (splashscreen.css('display') === 'block') {
                 closeSplashscreen();

@@ -33,7 +33,7 @@ addHashtagToLocalStorage = function(hashtag){
             hashtag:hashtag,
             questionText:"",
             timer:20,
-            isReadingConfirmationRequired:0,
+            isReadingConfirmationRequired:1,
             answers:[]
         }));
         return;
@@ -47,8 +47,24 @@ addHashtagToLocalStorage = function(hashtag){
         hashtag:hashtag,
         questionText:"",
         timer:20,
-        isReadingConfirmationRequired:0,
+        isReadingConfirmationRequired:1,
         answers:[]
+    }));
+};
+
+updateIsReadingConfirmationRequiredToLocalStorage = function(hashtag, isReadingConcfirmationRequired){
+    var hashtagString = localStorage.getItem(hashtag);
+    if (!hashtagString){
+        // TODO Err-Message?
+        return;
+    }
+    var hashtagData = JSON.parse(hashtagString);
+    localStorage.setItem(hashtag, JSON.stringify({
+        hashtag:hashtag,
+        questionText:hashtagData.questionText,
+        timer:hashtagData.timer,
+        isReadingConfirmationRequired:isReadingConcfirmationRequired,
+        answers:hashtagData.answers
     }));
 };
 
@@ -158,7 +174,7 @@ deleteAnswerOptionFromLocalStorage = function(hashtag, answerOptionsNumber){
     localStorage.setItem(hashtag, JSON.stringify(sessionData));
 };
 
-updateAnswerTextInLocalStorage = function(hashtag, answerOptionNumber, answerText) {
+updateAnswerTextInLocalStorage = function(hashtag, answerOptionNumber, answerText, isCorrect) {
     if(!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
         return;
     }
@@ -175,6 +191,7 @@ updateAnswerTextInLocalStorage = function(hashtag, answerOptionNumber, answerTex
     $.each(sessionData.answers, function(key, value){
         if(value.answerOptionNumber === answerOptionNumber){
             value.answerText = answerText;
+            value.isCorrect = isCorrect;
         }
     });
 

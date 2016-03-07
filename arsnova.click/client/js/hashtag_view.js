@@ -18,6 +18,7 @@ Template.hashtag_view.events({
                 var localHashtags = getAllHashtagsFromLocalStorage();
                 if ($.inArray(inputHashtag, localHashtags) > -1) {
                     $("#addNewHashtag").text("Wiederherstellen");
+                    $("#addNewHashtag").removeAttr("disabled");
                     canReenter = true;
                 }
                 if (hashtagDoc.isActive) {

@@ -17,11 +17,15 @@ Template.readconfirmationrequired.helpers({
 
 Template.readconfirmationrequired.events({
     "click #forwardButton": function () {
-        Meteor.call('Hashtags.setIsActive', localStorage.getItem("privateKey"), Session.get("hashtag"), 1);
+        updateIsReadingConfirmationRequiredToLocalStorage(Session.get("hashtag"), Sessions.findOne({hashtag:Session.get("hashtag")}).isReadingConfirmationRequired);
         Router.go("/memberlist");
     },
     "click #backButton": function () {
-        Router.go("/nick");
+        if (Session.get("isOwner")){
+            Router.go("/answeroptions");
+        }else{
+            Router.go("/nick");
+        }
     },
     'click #isReadConfirmationRequiredButton': function (event) {
         event.preventDefault();

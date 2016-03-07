@@ -20,7 +20,6 @@ Meteor.methods({
     },
     // TODO call and set inactive!
     'Hashtags.setIsActive'(privateKey, hashtag, isActive){
-        console.log("set to isActive");
         new SimpleSchema({
             hashtag: {type: String},
             privateKey: {type: String},
@@ -38,7 +37,6 @@ Meteor.methods({
             privateKey: privateKey
         });
         if (doc){
-            console.log("set active!");
             Hashtags.update({_id:doc._id}, {$set: {isActive: isActive}});
         }else{
             // TODO error message: user is not owner or inputs are wrong!

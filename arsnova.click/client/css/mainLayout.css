@@ -62,9 +62,13 @@ p, ul.list-unstyled {
     color: white;
     text-align: center;
     font-size: 6vw;
-    position: fixed;
+    position: absolute;
     margin-top: 10px;
     width: 100%;
+}
+
+.titel + .margin-title {
+    margin-top: 80px;
 }
 
 .answer-options {

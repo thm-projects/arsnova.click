@@ -1,0 +1,22 @@
+@import "colors";
+
+@keyframes colorChanging {
+  0% {
+    color: $success;
+  }
+  20% {
+    color: $warning;
+  }
+  40% {
+    color: $info;
+  }
+  60% {
+    color: $default;
+  }
+  80% {
+    color: $input-background-color;
+  }
+  100% {
+    color: white;
+  }
+}

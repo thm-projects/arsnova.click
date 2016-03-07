@@ -27,13 +27,17 @@ Template.createAnswerOptions.events({
       }
    },
    "click #addAnswerOption": function () {
-      Meteor.call('AnswerOptions.addOption', {
+      const answerOption = {
          privateKey: localStorage.getItem("privateKey"),
          hashtag: Session.get("hashtag"),
          answerText: "",
          answerOptionNumber: (AnswerOptions.find().count()),
          isCorrect: 0
-      });
+      };
+      
+      Meteor.call('AnswerOptions.addOption', answerOption);
+      addAnswersToLocalStorage(hashtag, answerOption);
+
       if (AnswerOptions.find().count() > 1) {
          $("#deleteAnswerOption").show();
       }
@@ -46,6 +50,7 @@ Template.createAnswerOptions.events({
             hashtag: Session.get("hashtag"),
             answerOptionNumber: number
          });
+         deleteAnswerOptionFromLocalStorage(Session.get("hashtag"), number);
          if (AnswerOptions.find().count() == 1) {
             $(event.target).hide();
          }
@@ -67,9 +72,12 @@ Template.createAnswerOptions.events({
             if (err) {
                alert(err);
             } else {
+               updateAnswerTextInLocalStorage(Session.get("hashtag"), i, text);
                Router.go("/readconfirmationrequired");
             }
          });
+
+
       }
    }
 });

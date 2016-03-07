@@ -1,15 +1,16 @@
 /**
  * Created by Kevin on 07.03.16.
  */
-function getAllHashtags(){
+getAllHashtags = function(){
     const hashtagString = localStorage.getItem("hashtags");
     if(!hashtagString) {
+        localStorage.setItem("hashtags", JSON.stringify([]));
         return [];
     }
     return JSON.parse(hashtagString);
-}
+};
 
-function isHashtagInLocalStorage(hashtag){
+isHashtagInLocalStorage = function(hashtag){
     if(!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
         return;
     }
@@ -18,9 +19,9 @@ function isHashtagInLocalStorage(hashtag){
         return false;
     }
     return $.inArray(hashtag, JSON.parse(hashtagString));
-}
+};
 
-function addHashtagToLocalStorage(hashtag){
+addHashtagToLocalStorage = function(hashtag){
     if(!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
         return;
     }
@@ -49,9 +50,9 @@ function addHashtagToLocalStorage(hashtag){
         isReadingConfirmationRequired:0,
         answers:[]
     }));
-}
+};
 
-function addQuestionToLocalStorage(hashtag, question) {
+addQuestionToLocalStorage = function(hashtag, question) {
     if(!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
         return;
     }
@@ -62,9 +63,9 @@ function addQuestionToLocalStorage(hashtag, question) {
     const sessionData = JSON.parse(sessionDataString);
     sessionData.questionText = question;
     localStorage.setItem(hashtag, JSON.stringify(sessionData));
-}
+};
 
-function addTimerToLocalStorage(hashtag, timer) {
+addTimerToLocalStorage = function(hashtag, timer) {
     if(!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
         return;
     }
@@ -75,22 +76,22 @@ function addTimerToLocalStorage(hashtag, timer) {
     const sessionData = JSON.parse(sessionDataString);
     sessionData.timer = timer;
     localStorage.setItem(hashtag, JSON.stringify(sessionData));
-}
+};
 
-function addAnswersToLocalStorage(hashtag, answers) {
-    if(!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
+addAnswersToLocalStorage = function(answer){
+    if(!answer.hashtag || answer.hashtag === "hashtags" || answer.hashtag === "privateKey") {
         return;
     }
-    const sessionDataString = localStorage.getItem(hashtag);
+    const sessionDataString = localStorage.getItem(answer.hashtag);
     if(!sessionDataString) {
         return;
     }
     const sessionData = JSON.parse(sessionDataString);
-    sessionData.answers = answers;
-    localStorage.setItem(hashtag, JSON.stringify(sessionData));
-}
+    sessionData.answers.push(answer);
+    localStorage.setItem(answer.hashtag, JSON.stringify(sessionData));
+};
 
-function reenterSession(hashtag){
+reenterSession = function(hashtag){
     if(!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
         return;
     }
@@ -113,7 +114,7 @@ function reenterSession(hashtag){
     Meteor.call("Sessions.updateIsReadConfirmationRequired", {
         privateKey:localStorage.getItem("privateKey"),
         hashtag:hashtag,
-        isReadConfirmationRequired:sessionData.isReadConfirmationRequired
+        isReadingConfirmationRequired:sessionData.isReadingConfirmationRequired
     });
 
     /*
@@ -135,9 +136,9 @@ function reenterSession(hashtag){
             isCorrect:value.isCorrect
         });
     });
-}
+};
 
-function deleteAnswerOptionFromLocalStorage(hashtag, answerOptionsNumber){
+deleteAnswerOptionFromLocalStorage = function(hashtag, answerOptionsNumber){
     if(!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
         return;
     }
@@ -155,9 +156,9 @@ function deleteAnswerOptionFromLocalStorage(hashtag, answerOptionsNumber){
     });
 
     localStorage.setItem(hashtag, JSON.stringify(sessionData));
-}
+};
 
-function updateAnswerTextInLocalStorage(hashtag, answerOptionNumber, answerText) {
+updateAnswerTextInLocalStorage = function(hashtag, answerOptionNumber, answerText) {
     if(!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
         return;
     }
@@ -178,4 +179,4 @@ function updateAnswerTextInLocalStorage(hashtag, answerOptionNumber, answerText)
     });
 
     localStorage.setItem(hashtag, JSON.stringify(sessionData));
-}
+};

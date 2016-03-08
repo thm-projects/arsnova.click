@@ -41,7 +41,7 @@ Template.createQuestionView.events({
         }
     },
     //Save question in Sessions-Collection when Button "Next" is clicked
-    "click #forwardButton": function () {
+    'click #forwardButton': function () {
         var questionText = $('#questionText').val();
         Meteor.call("Sessions.setQuestion", {
             privateKey: localData.getPrivateKey(),

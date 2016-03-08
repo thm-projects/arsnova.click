@@ -1,19 +1,55 @@
 @import "colors";
 
-@keyframes colorChanging {
+@keyframes colorChangingArs {
   0% {
-    color: $success;
+    color: white;
   }
-  25% {
+  17% {
     color: $warning;
   }
   50% {
     color: $info;
   }
-  75% {
+  83% {
     color: $input-background-color;
   }
   100% {
     color: white;
+  }
+}
+
+@keyframes colorChangingNova {
+  0% {
+    color: $input-background-color;
+  }
+  17% {
+    color: white;
+  }
+  50% {
+    color: $warning;
+  }
+  83% {
+    color: $info;
+  }
+  100% {
+    color: $input-background-color;
+  }
+}
+
+@keyframes colorChangingClick {
+  0% {
+    color: $info;
+  }
+  17% {
+    color: $input-background-color;
+  }
+  50% {
+    color: white;
+  }
+  83% {
+    color: $warning;
+  }
+  100% {
+    color: $info;
   }
 }

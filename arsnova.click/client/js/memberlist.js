@@ -47,13 +47,25 @@ Template.memberlist.helpers({
     },
 
     isReadingConfirmationRequired: function () {
-        return Sessions.findOne({hashtag: Session.get("hashtag")}).isReadingConfirmationRequired == 1;
+        const doc = Sessions.findOne({hashtag: Session.get("hashtag")});
+        if(!doc){
+            return;
+        }
+        return doc.isReadingConfirmationRequired == 1;
     },
     isOwnerAndReadConfirmationNeeded: function () {
-        return Session.get("isOwner") && (Sessions.findOne({hashtag: Session.get("hashtag")}).isReadingConfirmationRequired == 1);
+        const doc = Sessions.findOne({hashtag: Session.get("hashtag")});
+        if(!doc){
+            return;
+        }
+        return Session.get("isOwner") && (doc.isReadingConfirmationRequired == 1);
     },
     isNotOwnerAndReadConfirmationNeeded: function () {
-        return !Session.get("isOwner") && (Sessions.findOne({hashtag: Session.get("hashtag")}).isReadingConfirmationRequired == 1);
+        const doc = Sessions.findOne({hashtag: Session.get("hashtag")});
+        if(!doc){
+            return;
+        }
+        return !Session.get("isOwner") && (doc.isReadingConfirmationRequired == 1);
     },
     hashtag: function () {
         return Session.get("hashtag");

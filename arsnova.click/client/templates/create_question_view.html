@@ -1,8 +1,10 @@
 <template name="createQuestionView">
-    <div class="col-md-12 center-vertical">
+    <div class="row center-vertical">
+        <div class="col-md-12">
         <div class="row">
             <div class="col-md-12">
-                <textarea class="round-corners textarea" maxlength="1000"
+                <!-- todo: center Placeholder vertical -->
+                <textarea class="round-corners textarea placeholder-align-center" maxlength="1000"
                           rows="4" id="questionText" placeholder="Gib hier die Frage ein!"
                           autofocus>{{questionText}}</textarea>
             </div>
@@ -23,6 +25,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
     </div>

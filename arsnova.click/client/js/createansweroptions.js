@@ -6,7 +6,7 @@ Template.createAnswerOptions.onCreated(function () {
 
 Template.createAnswerOptions.helpers({
    answerOptions: function () {
-      return AnswerOptions.find();
+      return AnswerOptions.find({}, {sort:{answerOptionNumber: 1}});
    },
    answerOptionLetter: function (Nr) {
       return String.fromCharCode(Nr + 65);
@@ -27,13 +27,17 @@ Template.createAnswerOptions.events({
       }
    },
    "click #addAnswerOption": function () {
-      Meteor.call('AnswerOptions.addOption', {
+      const answerOption = {
          privateKey: localStorage.getItem("privateKey"),
          hashtag: Session.get("hashtag"),
          answerText: "",
          answerOptionNumber: (AnswerOptions.find().count()),
          isCorrect: 0
-      });
+      };
+      
+      Meteor.call('AnswerOptions.addOption', answerOption);
+      addAnswersToLocalStorage(hashtag, answerOption);
+
       if (AnswerOptions.find().count() > 1) {
          $("#deleteAnswerOption").show();
       }
@@ -46,6 +50,7 @@ Template.createAnswerOptions.events({
             hashtag: Session.get("hashtag"),
             answerOptionNumber: number
          });
+         deleteAnswerOptionFromLocalStorage(Session.get("hashtag"), number);
          if (AnswerOptions.find().count() == 1) {
             $(event.target).hide();
          }
@@ -57,19 +62,23 @@ Template.createAnswerOptions.events({
    "click #forwardButton": function (event) {
       for (var i = 0; i < AnswerOptions.find().count(); i++) {
          var text = $("#answerOptionText_Number" + i).val();
-         var checkedButton = $("#answerOption-" + i);
-         Meteor.call('AnswerOptions.updateAnswerText', {
+         var isCorrect = $('div#answerOption-' + i + ' .check-mark-checked').length > 0 ? 1 : 0;
+         Meteor.call('AnswerOptions.updateAnswerTextAndIsCorrect', {
             privateKey: localStorage.getItem("privateKey"),
             hashtag: Session.get("hashtag"),
             answerOptionNumber: i,
-            answerText: text
+            answerText: text,
+            isCorrect: isCorrect
          }, (err, res) => {
             if (err) {
                alert(err);
             } else {
+               updateAnswerTextInLocalStorage(Session.get("hashtag"), i, text, isCorrect);
                Router.go("/readconfirmationrequired");
             }
          });
+
+
       }
    }
 });

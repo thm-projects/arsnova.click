@@ -1,0 +1,64 @@
+@import "default/colors";
+@import "default/appearance";
+
+/*
+ * various splash screen colors
+ */
+.splash-screen-session {
+  background: $splash-screen-show-session-background-color;
+}
+
+.splash-screen-request-read-confirm {
+  background: $splash-screen-request-read-confirm-background-color;
+}
+
+.splash-screen-countdown {
+  background: $splash-screen-countdown-background-color;
+}
+
+.splash-screen-only-view-seconds-left {
+  background: $splash-view-seconds-left-background-color;
+}
+
+.splash-screen-show-question {
+  background: $splash-show-question-background-color;
+}
+
+/*
+ * Splash screen appearance
+ */
+.modal-content {
+  font-size: 20px;
+  color: black;
+  text-align: center;
+  border-radius: $splash-screen-corner-radius;
+  box-shadow: none;
+}
+
+.modal-list ul {
+  list-style: initial;
+  margin: auto;
+}
+
+.modal-center {
+  text-align: center;
+}
+
+.modal-body {
+  padding: 0;
+}
+
+.modal-header {
+  border-bottom: none;
+  padding: 20px;
+  color: $splash-screen-header-color;
+}
+
+.modal-footer {
+  border-top: none;
+  padding: 20px;
+}
+
+.modal-backdrop {
+  background-color: $background-color;
+}

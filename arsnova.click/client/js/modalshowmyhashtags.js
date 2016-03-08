@@ -6,14 +6,14 @@ Template.modalShowMyHashtags.helpers({
             dataArray.push({hashtag: name});
         });
         return dataArray;*/
-        return getAllHashtagsFromLocalStorage();
+        return localData.getAllHashtags();
     }
 });
 
 Template.modalShowMyHashtags.events({
     "click .js-my-hash": function (event) {
         var hashtag = event.target.innerHTML;
-        reenterSession(hashtag);
+        localData.reenterSession(hashtag);
         /*var question = localStorage.getItem(hashtag);
         console.log(question);*/
         Session.set("isOwner", true);

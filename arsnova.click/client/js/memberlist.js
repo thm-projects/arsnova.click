@@ -2,7 +2,7 @@ Template.memberlist.onCreated(function () {
     this.autorun(() => {
         this.subscribe('MemberList.members', Session.get("hashtag"));
         if(Session.get("isOwner")) {
-            this.subscribe('MemberList.percentRead', Session.get("hashtag"), window.localStorage.getItem("privateKey"));
+            this.subscribe('MemberList.percentRead', Session.get("hashtag"), localData.getPrivateKey());
         }
         this.subscribe('Sessions.isReadingConfirmationRequired', Session.get("hashtag"));
     });

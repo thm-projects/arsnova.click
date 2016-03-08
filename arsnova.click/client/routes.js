@@ -3,15 +3,14 @@ Router.configure({
 });
 
 Router.map(function () {
-    if (!localStorage.getItem(("privateKey"))) {
-        localStorage.setItem("privateKey", "thisismypriv");
-    }
     if (!Session.get("hashtag")) {
         this.go("/");
     }
 });
 
 Router.route('/', function () {
+    localData.initializePrivateKey();
+    localData.createTestData();
     this.render('home');
 });
 

@@ -19,22 +19,26 @@ Meteor.methods({
             return;
         }
         else {
-            var answerOptionDoc = AnswerOptions.findOne({
-                hashtag: hashtag,
-                answerOptionNumber: answerOptionNumber
-            });
-            if (!answerOptionDoc){
-                AnswerOptions.insert({
+            if (AnswerOptions.find({hashtag: hashtag}).count() < 26) {
+                var answerOptionDoc = AnswerOptions.findOne({
                     hashtag: hashtag,
-                    answerText: answerText,
-                    answerOptionNumber: answerOptionNumber,
-                    isCorrect: isCorrect
+                    answerOptionNumber: answerOptionNumber
                 });
-            }else{
-                AnswerOptions.update(answerOptionDoc._id, {$set:{
-                    answerText: answerText,
-                    isCorrect: isCorrect
-                }});
+                if (!answerOptionDoc) {
+                    AnswerOptions.insert({
+                        hashtag: hashtag,
+                        answerText: answerText,
+                        answerOptionNumber: answerOptionNumber,
+                        isCorrect: isCorrect
+                    });
+                } else {
+                    AnswerOptions.update(answerOptionDoc._id, {
+                        $set: {
+                            answerText: answerText,
+                            isCorrect: isCorrect
+                        }
+                    });
+                }
             }
         }
     },

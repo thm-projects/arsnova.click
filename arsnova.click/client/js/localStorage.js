@@ -54,9 +54,11 @@ localData = {
     },
 
     updateIsReadingConfirmationRequired : function(hashtag, isReadingConfirmationRequired){
-        var hashtagString = localStorage.getItem(hashtag);
+        if(!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
+            return;
+        }
+        const hashtagString = localStorage.getItem(hashtag);
         if (!hashtagString){
-            // TODO Err-Message?
             return;
         }
         var hashtagData = JSON.parse(hashtagString);

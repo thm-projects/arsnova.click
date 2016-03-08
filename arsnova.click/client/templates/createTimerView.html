@@ -1,0 +1,23 @@
+<template name="createTimerView">
+    <div class="row center-vertical">
+        <div class="col-md-12">
+            {{> titel titelText = 'Timer einstellen' }}
+            <div class="row distance-top">
+                <div class="col-xs-8">
+                    <div id="slider"></div>
+                </div>
+                <div class="col-xs-4">
+                    <input class="input-field round-corners slider-timer-input" disabled value="{{slider}} Sekunden"/>
+                </div>
+            </div>
+            <div class="row distance-top">
+                <div class="col-xs-6">
+                    <button class="button button-back" id="backButton">Zurück</button>
+                </div>
+                <div class="col-xs-6">
+                    <button class="button button-next" id="forwardButton">Weiter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

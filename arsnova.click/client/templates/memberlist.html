@@ -1,37 +1,19 @@
 <template name="memberlist">
     {{#if isNotOwnerAndReadConfirmationNeeded}}
-        {{> splashscreen templateName = "questionT" lazyClose = false}}
+        {{> splashscreen templateName = "questionT" lazyClose = false type = 'splash-screen-show-question'}}
     {{/if}}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row titel learner-title">
-                <h3 class=" titel-relative text-light text-center">
-                    Teilnehmer/innen im Hashtag {{hashtag}}
-                </h3>
-            </div>
-            <div class="row learner-list margin-title"
-                 id="learner-list">
-                <!-- TODO: delete test loop before push-->
-                {{#each learners}}
-                    <div class="col-xs-4">
-                        <button class="btn btn-grey btn-learner">
-                            {{>learner}}
-                        </button>
-                    </div>
-                {{/each}} <!-- learners -->
-            </div>
-            <!--  TODO: Meteor Pagination verwenden -->
-        </div>
+    <div class="learner-title">
+        {{> titel titelText = "Teilnehmer/innen" }}
     </div>
     {{#if isReadingConfirmationRequired}}
         <div class="row confirmationCounter">
-            <div class="col-md-2 col-md-offset-3">
+            <div class="col-xs-5 col-md-5 col-lg-4 text-right">
                 <span class="text-light">
                     Percent read Question:
                 </span>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-xs-7 col-md-7 col-lg-8">
                 <div class="progress">
                     <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
                          aria-valuenow="{{percentRead}}"
@@ -44,24 +26,49 @@
 
         </div>
     {{/if}}
+    <div class="row">
+        <div class="col-md-12">
 
+            <div class="row learner-list margin-title"
+                 id="learner-list">
+                <!-- TODO: delete test loop before push-->
+                {{#each learners}}
+                    {{>learner}}
+                {{/each}}
+                {{#if showMoreButton}}
+                    <div class="col-xs-12 col-sm-4 col-lg-3">
+                        <button class="btn btn-success btn-learner btn-more-learners">Show more...</button>
+                    </div>
+                {{else}}
+                    {{#if isLearnerCountOverride}}
+                        <div class="col-xs-12 col-sm-4 col-lg-3">
+                            <button class="btn btn-success btn-learner btn-less-learners">Show less...</button>
+                        </div>
+                    {{/if}}
+                {{/if}}
+            </div>
+            <!--  TODO: Meteor Pagination verwenden -->
+        </div>
+    </div>
 </template>
 
 <template name="learner">
-    <div>
-        <!-- TODO! css-stylings-->
-        {{nick}}
+    <div class="col-xs-12 col-sm-4 col-lg-3">
+        <button class="btn btn-grey btn-learner">
+            {{nick}}
+        </button>
     </div>
 </template>
 
 <template name="questionT">
-    <!-- TODO! css-stylings-->
-    <p class="splashSmallTitle">{{quest}}</p>
-    <br/>
-
     <div class="row">
-        <div class="col-md-12">
-            <button id="setReadConfirmed" class="" onclick="closeSplashscreen();">Gelesen</button>
+        <div class="col-xs-10 col-xs-offset-1">
+            {{quest}}
+        </div>
+    </div>
+    <div class="row distance-top">
+        <div class="col-xs-6 col-xs-offset-3">
+            <button id="setReadConfirmed" class="button button-default">Gelesen</button>
         </div>
     </div>
 </template>

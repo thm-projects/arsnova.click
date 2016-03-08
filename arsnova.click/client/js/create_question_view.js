@@ -4,6 +4,19 @@ Template.createQuestionView.onCreated(function () {
     });
 });
 
+Template.createQuestionView.onRendered(function () {
+    // just to set the forward-button style, when the question name is already existing
+    var currentSession = Sessions.findOne({hashtag: Session.get("hashtag")});
+    if (currentSession) {
+        if (currentSession.questionText.length > 4){
+            $("#forwardButton").removeAttr("disabled");
+        }
+        else {
+            $("#forwardButton").attr("disabled", "disabled");
+        }
+    }
+});
+
 Template.createQuestionView.helpers({
     //Get question from Sessions-Collection if it already exists
     questionText: function () {
@@ -14,12 +27,21 @@ Template.createQuestionView.helpers({
         else {
             return "";
         }
-    }
+    },
 });
 
 Template.createQuestionView.events({
+    "input #questionText": function (event) {
+        var questionText = event.currentTarget.value;
+        if (questionText.length > 4) {
+            $("#forwardButton").removeAttr("disabled");
+        }
+        else {
+            $("#forwardButton").attr("disabled", "disabled");
+        }
+    },
     //Save question in Sessions-Collection when Button "Next" is clicked
-    "click #forwardButton": function () {
+    'click #forwardButton': function () {
         var questionText = $('#questionText').val();
         Meteor.call("Sessions.setQuestion", {
             privateKey: localData.getPrivateKey(),

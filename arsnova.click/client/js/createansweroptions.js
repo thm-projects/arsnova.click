@@ -27,19 +27,20 @@ Template.createAnswerOptions.events({
       }
    },
    "click #addAnswerOption": function () {
-      const answerOption = {
+      if (AnswerOptions.find().count() < 26) {
+         const answerOption = {
          privateKey: localData.getPrivateKey(),
-         hashtag: Session.get("hashtag"),
-         answerText: "",
-         answerOptionNumber: (AnswerOptions.find().count()),
-         isCorrect: 0
-      };
-      
-      Meteor.call('AnswerOptions.addOption', answerOption);
-      localData.addAnswers(hashtag, answerOption);
+            hashtag: Session.get("hashtag"),
+            answerText: "",
+            answerOptionNumber: (AnswerOptions.find().count()),
+            isCorrect: 0
+         };
 
-      if (AnswerOptions.find().count() > 1) {
-         $("#deleteAnswerOption").show();
+         Meteor.call('AnswerOptions.addOption', answerOption);
+         localData.addAnswers(Session.get("hashtag"), answerOption);
+         if (AnswerOptions.find().count() > 1) {
+            $("#deleteAnswerOption").show();
+         }
       }
    },
    "click #deleteAnswerOption": function (event) {
@@ -74,7 +75,7 @@ Template.createAnswerOptions.events({
                alert(err);
             } else {
                localData.updateAnswerText(Session.get("hashtag"), i, text, isCorrect);
-               Router.go("/readconfirmationrequired");
+               Router.go("/settimer");
             }
          });
 

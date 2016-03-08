@@ -38,13 +38,35 @@ Template.createTimerView.helpers({
 
 Template.createTimerView.events({
     "click #forwardButton":function(){
-        const timer = $('#setTimer').val();
-        Meteor.call("setSessionTimer", window.localStorage.getItem("privateKey"), Session.get("hashtag"), timer);
+        const timer = Session.get("slider");
+        Meteor.call("Sessions.setTimer", {
+            privateKey:localData.getPrivateKey(),
+            hashtag:Session.get("hashtag"),
+            timer:timer
+        }, (err, res) => {
+            if (err) {
+                alert(err);
+            } else {
+                localData.addTimer(Session.get("hashtag"), timer);
+                Router.go("/memberlist");
+            }
+        });
     },
     "click #backButton":function(){
-        const timer = $('#setTimer').val();
+        const timer = Session.get("slider");
         if(!isNaN(timer) && timer > 0) {
-            Meteor.call("setSessionTimer", window.localStorage.getItem("privateKey"), Session.get("hashtag"), timer);
+            Meteor.call("Sessions.setTimer", {
+                privateKey:localData.getPrivateKey(),
+                hashtag:Session.get("hashtag"),
+                timer:timer
+            }, (err, res) => {
+                if (err) {
+                    alert(err);
+                } else {
+                    localData.addTimer(Session.get("hashtag"), timer);
+            Router.go("/answeroptions");
+        }
+        });
         }
 
     }

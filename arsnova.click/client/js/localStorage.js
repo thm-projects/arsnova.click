@@ -197,6 +197,19 @@ localData = {
         });
 
         localStorage.setItem(hashtag, JSON.stringify(sessionData));
+    },
+
+    initializePrivateKey : function() {
+        /*
+         TODO: Generate privateKey
+         */
+        if (!localStorage.getItem("privateKey")) {
+            localStorage.setItem("privateKey", "thisismypriv");
+        }
+    },
+
+    getPrivateKey : function() {
+        return localStorage.getItem("privateKey");
     }
 };
 

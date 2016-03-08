@@ -55,7 +55,7 @@ Template.hashtag_view.events({
             }
             if (!reenter) {
                 var doc = {
-                    privateKey: localStorage.getItem("privateKey"),
+                    privateKey: localData.getPrivateKey(),
                     hashtag: hashtag,
                     isActive: 1
                 };
@@ -65,7 +65,7 @@ Template.hashtag_view.events({
                     } else {
                         Session.set("hashtag", hashtag);
                         Session.set("isOwner", true);
-                        localStorage.setItem("hashtag", hashtag);
+                        //localStorage.setItem("hashtag", hashtag);
                         // flag the client as owner via localStorage
                         localData.addHashtag(hashtag);
                         //var localHashtags = JSON.parse(localStorage.getItem("hashtags"));
@@ -80,7 +80,7 @@ Template.hashtag_view.events({
     "click #joinSession": function () {
         var hashtag = $("#hashtag-input-field").val();
         Session.set("hashtag", hashtag);
-        localStorage.setItem("hashtag", hashtag);
+        //localStorage.setItem("hashtag", hashtag);
         Router.go("/nick");
     }
 });

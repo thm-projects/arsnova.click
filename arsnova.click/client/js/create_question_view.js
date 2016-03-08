@@ -1,6 +1,6 @@
 Template.createQuestionView.onCreated(function () {
     this.autorun(() => {
-        this.subscribe('Sessions.instructor', localStorage.getItem("privateKey"), Session.get("hashtag"));
+        this.subscribe('Sessions.instructor', localData.getPrivateKey(), Session.get("hashtag"));
     });
 });
 
@@ -22,7 +22,7 @@ Template.createQuestionView.events({
     "click #forwardButton": function () {
         var questionText = $('#questionText').val();
         Meteor.call("Sessions.setQuestion", {
-            privateKey: localStorage.getItem("privateKey"),
+            privateKey: localData.getPrivateKey(),
             hashtag: Session.get("hashtag"),
             questionText: questionText
         }, (err, res) => {

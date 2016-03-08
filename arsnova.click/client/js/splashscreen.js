@@ -24,7 +24,7 @@ Template.splashscreen.rendered = function () {
     }
 
     splashscreen.modal('show');
-    var wpwSessionData = {
+    /*var wpwSessionData = {
         questionText: "I'm a question text. This is for testing purpose. Do you understand?",
         timer: 1800000,
         isReadingConfirmationRequired: 0
@@ -35,7 +35,7 @@ Template.splashscreen.rendered = function () {
         isReadingConfirmationRequired: 0
     };
     localStorage.setItem("wpw", JSON.stringify(wpwSessionData));
-    localStorage.setItem("testing", JSON.stringify(testingSessionData));
+    localStorage.setItem("testing", JSON.stringify(testingSessionData));*/
 };
 
 Template.splashscreen.helpers({

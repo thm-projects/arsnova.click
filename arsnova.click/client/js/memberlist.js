@@ -23,6 +23,10 @@ Template.memberlist.events({
     },
     'click #setReadConfirmed': function () {
         closeSplashscreen();
+    },
+    'click .btn-less-learners': function () {
+        Session.set("LearnerCountOverride", false);
+        calculateButtonCount();
     }
 });
 
@@ -32,6 +36,9 @@ Template.memberlist.helpers({
     },
     isOwner: function () {
         return Session.get("isOwner");
+    },
+    isLearnerCountOverride: function () {
+        return Session.get('LearnerCountOverride');
     },
     percentRead: function () {
         var sumRead = 0;
@@ -86,16 +93,19 @@ function calculateButtonCount () {
 
     var contentPosition = $(".contentPosition");
 
-    var viewPortHeight = contentPosition.height() - $('.learner-title').height() + 40;
-    var viewPortWidth = contentPosition.width();
+    var viewPortHeight = contentPosition.height() - $('.learner-title').height();
+    var readConfirm = $('.confirmationCounter:first');
+
+    if (readConfirm.length > 0) {
+        viewPortHeight -= readConfirm.height();
+    }
+    // + 30 because contentPosition has 15px padding left and right
+    var viewPortWidth = contentPosition.width() + 30;
 
     // btnLearnerHeight muss hart hinterlegt werden / ggf anpassung an neue css klassen
     var btnLearnerHeight = 54;
 
     var queryLimiter = Math.floor(viewPortHeight / btnLearnerHeight);
-    if (queryLimiter < 4) {
-        queryLimiter = 4;
-    }
     if (viewPortWidth >= 768 && viewPortWidth < 1200) {
         queryLimiter *= 3;
     } else if (viewPortWidth >= 1200) {

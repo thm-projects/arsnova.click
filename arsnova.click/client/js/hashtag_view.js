@@ -7,7 +7,7 @@ Template.hashtag_view.onCreated(function () {
 Template.hashtag_view.events({
     "input #hashtag-input-field": function (event) {
         var inputHashtag = $(event.target).val();
-        $("#addNewHashtag").html("<span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>Mach neu !");
+        $("#addNewHashtag").html("Mach neu !<span class=\"glyphicon glyphicon-plus glyph-right\" aria-hidden=\"true\"></span>");
         if (inputHashtag.length > 0) {
             var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
             if (!hashtagDoc) {
@@ -17,7 +17,7 @@ Template.hashtag_view.events({
                 var canReenter = false;
                 var localHashtags = localData.getAllHashtags();
                 if ($.inArray(inputHashtag, localHashtags) > -1) {
-                    $("#addNewHashtag").html("<span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span>Wiederherstellen");
+                    $("#addNewHashtag").html("Wiederherstellen<span class=\"glyphicon glyphicon-pencil glyph-right\" aria-hidden=\"true\"></span>");
                     $("#addNewHashtag").removeAttr("disabled");
                     canReenter = true;
                 }

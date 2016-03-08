@@ -142,10 +142,22 @@
 
 }
 
-.color-changing {
+.color-changing-ars, .color-changing-nova, .color-changing-click {
   width: 100px;
   height: 100px;
-  animation-name: colorChanging;
   animation-duration: 7s;
   animation-iteration-count: infinite;
+  font-weight: bold;
+}
+
+.color-changing-ars {
+  animation-name: colorChangingArs;
+}
+
+.color-changing-nova {
+  animation-name: colorChangingNova;
+}
+
+.color-changing-click {
+  animation-name: colorChangingClick;
 }

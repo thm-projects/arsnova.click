@@ -6,6 +6,18 @@ if(Meteor.isServer){
                 privateKey: "thisismypriv",
                 isActive: 1
             };
+            // block this hash / pk -> do not use and merge to production server!
+            var hashtagsExample2 = {
+                hashtag: "hashtags",
+                privateKey: "lliöutopqiugfae",
+                isActive: 1
+            };
+            // block this hash / pk -> do not use and merge to production server!
+            var hashtagsExample3 = {
+                hashtag: "privateKey",
+                privateKey: "3ö4ooituaöosrngpöaw",
+                isActive: 1
+            };
             var memberListExample1 = {
                 hashtag: "wpw",
                 nick: "Testuser",
@@ -74,6 +86,8 @@ if(Meteor.isServer){
             };
 
             Hashtags.insert(hashtagsExample);
+            Hashtags.insert(hashtagsExample2);
+            Hashtags.insert(hashtagsExample3);
             Sessions.insert(sessionExample);
             Responses.insert(responseExample1);
             Responses.insert(responseExample2);

@@ -8,8 +8,6 @@ Template.titel.onRendered(function () {
         var final_height = $(window).height() - $(".navbar").height();
         $(".margin-to-logo").css("margin-top", $(".navbar").height());
         $(".container").css("height", final_height);
-        console.log("test");
-
     });
 });
 
@@ -19,5 +17,4 @@ Template.titel.rendered = function () {
 
     $(".margin-to-logo").css("margin-top", $(".navbar").height());
     $(".container").css("height", final_height);
-    console.log("test");
 };

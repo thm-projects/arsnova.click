@@ -28,6 +28,7 @@ Template.splashscreen.rendered = function () {
         splashscreen.modal({show: false});
     } else {
         splashscreen.modal('show');
+    }
 };
 
 Template.splashscreen.helpers({

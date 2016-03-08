@@ -63,7 +63,6 @@ Template.votingview.events({
 Template.questionContentSplash.helpers({
     questionContent: function () {
         mySessions = Sessions.find();
-        console.log(mySessions);
         return mySessions;
     }
 });

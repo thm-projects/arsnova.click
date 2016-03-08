@@ -13,6 +13,7 @@
     /*height: calc(100% - 114px - 20px);*/
     /*top: 10%;*/
     height: 100%;
+    overflow-x: auto;
 }
 
 .contentPosition > .row {

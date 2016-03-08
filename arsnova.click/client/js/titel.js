@@ -6,9 +6,9 @@ Template.titel.onRendered(function () {
     $(window).resize(function () {
 
         var final_height = $(window).height() - $(".navbar").height();
-        $(".titel").css("margin-top", $(".navbar").height());
+        $(".margin-to-logo").css("margin-top", $(".navbar").height());
         $(".container").css("height", final_height);
-
+        console.log("test");
 
     });
 });
@@ -17,11 +17,7 @@ Template.titel.onRendered(function () {
 Template.titel.rendered = function () {
     var final_height = $(window).height() - $(".navbar").height();
 
-    $(".titel").css("margin-top", $(".navbar").height());
+    $(".margin-to-logo").css("margin-top", $(".navbar").height());
     $(".container").css("height", final_height);
-
-
     console.log("test");
-
-
 };

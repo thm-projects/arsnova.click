@@ -36,7 +36,7 @@ Template.createAnswerOptions.events({
       };
       
       Meteor.call('AnswerOptions.addOption', answerOption);
-      addAnswersToLocalStorage(hashtag, answerOption);
+      localData.addAnswers(hashtag, answerOption);
 
       if (AnswerOptions.find().count() > 1) {
          $("#deleteAnswerOption").show();
@@ -50,7 +50,7 @@ Template.createAnswerOptions.events({
             hashtag: Session.get("hashtag"),
             answerOptionNumber: number
          });
-         deleteAnswerOptionFromLocalStorage(Session.get("hashtag"), number);
+         localData.deleteAnswerOption(Session.get("hashtag"), number);
          if (AnswerOptions.find().count() == 1) {
             $(event.target).hide();
          }
@@ -73,7 +73,7 @@ Template.createAnswerOptions.events({
             if (err) {
                alert(err);
             } else {
-               updateAnswerTextInLocalStorage(Session.get("hashtag"), i, text, isCorrect);
+               localData.updateAnswerText(Session.get("hashtag"), i, text, isCorrect);
                Router.go("/readconfirmationrequired");
             }
          });

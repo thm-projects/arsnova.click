@@ -29,7 +29,7 @@ Template.createQuestionView.events({
             if (err) {
                 alert(err);
             } else {
-                addQuestionToLocalStorage(Session.get("hashtag"), questionText);
+                localData.addQuestion(Session.get("hashtag"), questionText);
                 Router.go("/answeroptions");
             }
         });

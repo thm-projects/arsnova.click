@@ -17,7 +17,7 @@ Template.readconfirmationrequired.helpers({
 
 Template.readconfirmationrequired.events({
     "click #forwardButton": function () {
-        updateIsReadingConfirmationRequiredToLocalStorage(Session.get("hashtag"), Sessions.findOne({hashtag:Session.get("hashtag")}).isReadingConfirmationRequired);
+        localData.updateIsReadingConfirmationRequired(Session.get("hashtag"), Sessions.findOne({hashtag:Session.get("hashtag")}).isReadingConfirmationRequired);
         Router.go("/memberlist");
     },
     "click #backButton": function () {

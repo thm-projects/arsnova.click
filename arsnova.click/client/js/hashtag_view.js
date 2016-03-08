@@ -15,9 +15,10 @@ Template.hashtag_view.events({
                 $("#addNewHashtag").removeAttr("disabled");
             } else {
                 var canReenter = false;
-                var localHashtags = JSON.parse(localStorage.getItem("hashtags"));
+                var localHashtags = getAllHashtagsFromLocalStorage();
                 if ($.inArray(inputHashtag, localHashtags) > -1) {
                     $("#addNewHashtag").text("Wiederherstellen");
+                    $("#addNewHashtag").removeAttr("disabled");
                     canReenter = true;
                 }
                 if (hashtagDoc.isActive) {
@@ -41,13 +42,14 @@ Template.hashtag_view.events({
         var hashtag = $("#hashtag-input-field").val();
         var reenter = false;
         if (hashtag.length > 0) {
-            var localHashtags = JSON.parse(localStorage.getItem("hashtags"));
+            var localHashtags = getAllHashtagsFromLocalStorage();
             if ($.inArray(hashtag, localHashtags) > -1) {
                 var oldHashtagDoc = Hashtags.findOne({hashtag: hashtag});
                 if (oldHashtagDoc) {
                     reenter = true;
                     Session.set("hashtag", hashtag);
                     Session.set("isOwner", true);
+                    reenterSession(hashtag);
                     Router.go("/question");
                 }
             }
@@ -65,12 +67,10 @@ Template.hashtag_view.events({
                         Session.set("isOwner", true);
                         localStorage.setItem("hashtag", hashtag);
                         // flag the client as owner via localStorage
-                        var oldHashtags = [];
-                        if (localStorage.getItem("hashtags")) {
-                            oldHashtags = JSON.parse(localStorage.getItem("hashtags"))
-                        }
-                        oldHashtags.push(hashtag);
-                        localStorage.setItem("hashtags", JSON.stringify(oldHashtags));
+                        addHashtagToLocalStorage(hashtag);
+                        //var localHashtags = JSON.parse(localStorage.getItem("hashtags"));
+                        //localHashtags.push(hashtag);
+                        //localStorage.setItem("hashtags", JSON.stringify(localHashtags));
                         Router.go("/question");
                     }
                 });

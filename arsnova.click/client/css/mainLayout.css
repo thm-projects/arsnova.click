@@ -5,7 +5,7 @@
 .contentPosition {
     position: absolute;
     width: 100%;
-    /* TODO: IE 8 and Opera 8 doesn't support calc */
+    /* TODO: IE 8 and Opera 8 doesn't support calc*/
     /*
      * -50px because of the header height
      * -20px because of the footer height
@@ -62,18 +62,17 @@ p, ul.list-unstyled {
     color: white;
     text-align: center;
     font-size: 6vw;
-    position: absolute;
-    margin-top: 10px;
+    margin-top: 20px;
     width: 100%;
 }
 
-.margin-title {
-    margin-top: 80px;
+.titel + .margin-title {
+    margin-top: 60px;
 }
 
 .answer-options {
     height: calc(100% - 265px);
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 @media (min-width: 1200px) {

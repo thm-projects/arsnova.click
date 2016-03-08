@@ -29,9 +29,12 @@ Template.createQuestionView.events({
             if (err) {
                 alert(err);
             } else {
+                addQuestionToLocalStorage(Session.get("hashtag"), questionText);
                 Router.go("/answeroptions");
             }
         });
+
+
     },
     "click #backButton": function () {
         var questionText = $('#questionText').val();

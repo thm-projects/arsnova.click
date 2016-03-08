@@ -4,6 +4,9 @@ Meteor.setInterval(function () {
     var sessionDeleteTimeInMilliseconds = (sessionDeleteAfterIdleMinutes * 60 * 1000);
     Hashtags.find({lastConnection: {$lt: (now - sessionDeleteTimeInMilliseconds)}}).forEach(function (session) {
         //Remove Session-Datas
-        console.log("Found idle connection");
+        AnswerOptions.remove({hashtag: session.hashtag});
+        MemberList.remove({hashtag: session.hashtag});
+        Responses.remove({hashtag: session.hashtag});
+        Sessions.remove({hashtag: session.hashtag});
     });
 }, 60 * 1000);

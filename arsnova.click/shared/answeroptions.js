@@ -1,17 +1,17 @@
 Meteor.methods({
-    'AnswerOptions.addOption'( pprivateKey, {hashtag, answerText, answerOptionNumber, isCorrect} ) {
+    'AnswerOptions.addOption'({privateKey, hashtag, answerText, answerOptionNumber, isCorrect}) {
         new SimpleSchema({
-            pprivateKey: { type: String },
+            privateKey: { type: String },
             hashtag: { type: String },
             answerText: { type: String },
             answerOptionNumber: { type: Number },
             isCorrect: { type: Number }
-        }).validate({ pprivateKey, hashtag, answerText, answerOptionNumber, isCorrect });
+        }).validate({ privateKey, hashtag, answerText, answerOptionNumber, isCorrect });
         var doc = true;
         if (Meteor.isServer) {
             doc = Hashtags.findOne({
                 hashtag: hashtag,
-                privateKey: pprivateKey
+                privateKey: privateKey
             });
         }
         if (!doc) {
@@ -27,17 +27,17 @@ Meteor.methods({
             });
         }
     },
-    'AnswerOptions.deleteOption'( pprivateKey, hashtag, answerOptionNumber ) {
+    'AnswerOptions.deleteOption'({privateKey, hashtag, answerOptionNumber}) {
         (new SimpleSchema({
-            pprivateKey: { type: String },
+            privateKey: { type: String },
             hashtag: { type: String },
             answerOptionNumber: { type: Number }
-        }).validate({ pprivateKey, hashtag, answerOptionNumber }));
+        }).validate({ privateKey, hashtag, answerOptionNumber }));
         var doc = true;
         if (Meteor.isServer) {
             doc = Hashtags.findOne({
                 hashtag: hashtag,
-                privateKey: pprivateKey
+                privateKey: privateKey
             });
         }
         if (!doc) {
@@ -51,18 +51,19 @@ Meteor.methods({
             });
         }
     },
-    'AnswerOptions.updateAnswerText'( pprivateKey, hashtag, answerOptionNumber, answerText ) {
+    'AnswerOptions.updateAnswerTextAndIsCorrect'({privateKey, hashtag, answerOptionNumber, answerText, isCorrect}) {
         new SimpleSchema({
-            pprivateKey: { type: String },
+            privateKey: { type: String },
             hashtag: { type: String },
             answerOptionNumber: { type: Number },
-            answerText: { type: String }
-        }).validate({ pprivateKey, hashtag, answerOptionNumber, answerText });
+            answerText: { type: String },
+            isCorrect: { type: Number }
+        }).validate({ privateKey, hashtag, answerOptionNumber, answerText, isCorrect });
         var doc = true;
         if (Meteor.isServer) {
             doc = Hashtags.findOne({
                 hashtag: hashtag,
-                privateKey: pprivateKey
+                privateKey: privateKey
             });
         }
         if (!doc) {
@@ -75,7 +76,7 @@ Meteor.methods({
                 answerOptionNumber: answerOptionNumber
             });
             AnswerOptions.update(answerOptionDoc._id, {
-                $set: {answerText: answerText}
+                $set: {answerText: answerText, isCorrect: isCorrect}
             });
         }
     }

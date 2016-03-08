@@ -2,6 +2,15 @@ Router.configure({
     layoutTemplate: 'layout'
 });
 
+Router.map(function () {
+    if (!localStorage.getItem(("privateKey"))) {
+        localStorage.setItem("privateKey", "thisismypriv");
+    }
+    if (!Session.get("hashtag")) {
+        this.go("/");
+    }
+});
+
 Router.route('/', function () {
     this.render('home');
 });
@@ -30,15 +39,16 @@ Router.route('/settimer', function () {
     }
 });
 
-Router.route('/readconfirmation', function () {
+Router.route('/readconfirmationrequired', function () {
     if (Session.get("isOwner")) {
-
+        this.render('readconfirmationrequired');
     } else {
-
+        Router.go("/");
     }
 });
 
 Router.route('/memberlist', function () {
+    this.render('memberlist');
 });
 
 Router.route('/onpolling', function () {

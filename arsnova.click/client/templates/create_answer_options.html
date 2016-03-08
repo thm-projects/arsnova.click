@@ -1,0 +1,50 @@
+<template name="createAnswerOptions">
+    {{> titel titelText = "Antowortoptionen"}}
+
+    <div class="row row-landingpage-buttons margin-title">
+        <div class="col-md-12 text-center">
+            <button type="button" id="addAnswerOption"
+                    class="button btn-add-remove-ans_opt round-corners button-shadow button-grey">&#43;
+            </button>
+            <button type="button" id="deleteAnswerOption"
+                    class="button btn-add-remove-ans_opt round-corners button-shadow button-grey">&#8722;
+            </button>
+        </div>
+    </div>
+
+    <div class="row answer-options distance-top">
+        <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-12 ">
+                    {{#each answerOptions}}
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-letter round-corners input-group-addon input-field-bg-color">{{answerOptionLetter answerOptionNumber}}</div>
+                                <input type="text"
+                                       class="input-field"
+                                       id="answerOptionText_Number{{answerOptionNumber}}"
+                                       placeholder="Text oder lass leer"
+                                       value="{{answerText}}">
+
+                                <div id="answerOption-{{answerOptionNumber}}" class="toggleCorrect round-corners input-group-addon input-field-bg-color input-group-letter">
+                                    {{#if isCorrect}}
+                                        <!--r-->
+                                        <div class="check-mark-checked success-color">&#10004;</div>
+                                    {{else}}
+                                        <!--f-->
+                                        <div class="check-mark-unchecked default-color">&#10004;</div>
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {{> footer_nav_buttons backId="backButton" forwardId="forwardButton"}}
+
+</template>

@@ -1,0 +1,6 @@
+button.down {
+  background: green;
+  /*border-bottom:solid 2px rebeccapurple;
+  border-right: solid 2px rebeccapurple;*/
+  box-shadow: none;
+}

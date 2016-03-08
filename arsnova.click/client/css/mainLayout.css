@@ -1,13 +1,3 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    /* integrated seperate sans-serif font family for headlines / this contrasts nicely to the body serif font*/
-    font-family: 'Arial', sans-serif;
-}
-
 .contentContainer {
     margin-bottom: 35px;
 }
@@ -20,8 +10,16 @@ h6 {
      * -50px because of the header height
      * -20px because of the footer height
      */
-    height: calc(100% - 50px - 20px);
-    top: 50px;
+    height: calc(100% - 114px - 20px);
+    top: 10%;
+}
+
+.contentPosition > .row {
+    height: 100%;
+}
+
+.contentPosition > .row > .col-md-6 {
+    height: 100%;
 }
 
 .text-light,
@@ -60,20 +58,43 @@ p, ul.list-unstyled {
     font-size: 7vw;
 }
 
+.titel {
+    color: white;
+    text-align: center;
+    font-size: 6vw;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.titel + .margin-title {
+    margin-top: 60px;
+}
+
+.answer-options {
+    height: calc(100% - 265px);
+    overflow-y: auto;
+}
+
 @media (min-width: 1200px) {
     .header-layout {
         font-size: 80px;
     }
+
 }
 
 @media (min-width: 990px) {
     .header-layout {
         font-size: 6vw;
     }
+
 }
 
 @media (min-width: 768px) {
     .header-layout {
         font-size: 5vw;
+    }
+
+    .titel {
+        font-size: 3.5vw;
     }
 }

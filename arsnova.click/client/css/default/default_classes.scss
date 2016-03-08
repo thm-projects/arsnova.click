@@ -1,0 +1,151 @@
+@import "colors";
+@import "appearance";
+
+.center-vertical {
+  position: relative;
+  top: 50%;
+  /* TODO: IE 8 and Opera 8 doesn't support translateY*/
+  transform: translateY(-50%);
+}
+
+.round-corners, .button {
+  border-radius: $corner-radius;
+}
+
+.button-shadow, .button {
+  box-shadow: 1px 1px 5px black;
+}
+
+.input-field {
+  height: 50px;
+  font-size: 1.5em;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.input-field-bg-color, .input-field {
+  background-color: $input-background-color;
+  border: none;
+}
+
+.default-yellow-text-color {
+  color: $input-background-color;
+}
+
+.button {
+  height: 50px;
+  width: 100%;
+  border: none;
+  white-space: nowrap;
+}
+
+.input-group-letter {
+  font-size: 2em;
+  font-weight: 800;
+  color: $input-group-letter-color;
+}
+
+.button:hover, .button:active:focus {
+  box-shadow: none;
+}
+
+.button-next, .button-success {
+  background-color: $success;
+  color: $success-text-color;
+}
+
+.button-warning, .button-back {
+  background-color: $warning;
+  color: $warning-text-color;
+}
+
+.button-purple {
+  background-color: $info;
+  color: $info-text-color;
+}
+
+.button-default {
+  background-color: $default;
+  color: $default-text-color;
+}
+
+.distance-top {
+  margin-top: 20px;
+}
+
+/*
+ * center's the placeholder
+ */
+.placeholder-align-center, .input-field {
+}
+
+.placeholder-align-center::-webkit-input-placeholder, .input-field::-webkit-input-placeholder {
+  text-align: center;
+}
+
+.placeholder-align-center:-moz-placeholder, .input-field:-moz-placeholder { /* Firefox 18- */
+  text-align: center;
+}
+
+.placeholder-align-center::-moz-placeholder, .input-field::-moz-placeholder { /* Firefox 19+ */
+  text-align: center;
+}
+
+.placeholder-align-center:-ms-input-placeholder, .input-field:-ms-input-placeholder {
+  text-align: center;
+}
+
+.hover-underline:hover {
+  text-decoration: underline;
+}
+
+.fixed-bottom {
+  position: fixed;
+  bottom: 25px;
+  width: 100%;
+  left: 0;
+  padding: 30px;
+}
+
+.content-with-navigation-buttons {
+  max-height: calc(100% - 105px);
+  overflow-y: auto;
+  padding-bottom: 10px;
+}
+
+.textarea {
+  width: 100%;
+  background-color: gold;
+  font-size: 1.5em;
+  outline: none;
+  resize: none;
+  padding: 10px;
+}
+
+.check-mark-checked {
+  color: $check-mark-checked;
+  font-size: 1.3em;
+  width: 30px;
+}
+
+.check-mark-unchecked {
+  color: $check-mark-unchecked;
+  width: 30px;
+}
+
+.btn-add-remove-ans_opt {
+  line-height: 100%;
+  width: 50px !important;
+  height: 50px !important;
+  background-color: $check-mark-unchecked;
+
+}
+
+.color-changing {
+  width: 100px;
+  height: 100px;
+  animation-name: colorChanging;
+  animation-duration: 7s;
+  animation-iteration-count: infinite;
+}

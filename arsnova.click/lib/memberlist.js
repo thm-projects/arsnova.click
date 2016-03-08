@@ -12,7 +12,7 @@ MemberList.attachSchema(new SimpleSchema({
 		max: 25
 	},
 	readConfirmed: {
-		type: String,
+		type: Number,
 		min: 0,
 		max: 1
 	}

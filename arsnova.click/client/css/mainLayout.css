@@ -98,3 +98,7 @@ p, ul.list-unstyled {
         font-size: 3.5vw;
     }
 }
+
+.toggleCorrect:hover {
+    cursor: pointer;
+}

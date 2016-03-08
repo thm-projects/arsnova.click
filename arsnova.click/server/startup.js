@@ -9,13 +9,13 @@ if(Meteor.isServer){
             // block this hash / pk -> do not use and merge to production server!
             var hashtagsExample2 = {
                 hashtag: "hashtags",
-                privateKey: "lliöutopqiugfae",
+                privateKey: "äölkjhgfdsaq",
                 isActive: 1
             };
             // block this hash / pk -> do not use and merge to production server!
             var hashtagsExample3 = {
                 hashtag: "privateKey",
-                privateKey: "3ö4ooituaöosrngpöaw",
+                privateKey: "poiuztrewqas",
                 isActive: 1
             };
             var memberListExample1 = {

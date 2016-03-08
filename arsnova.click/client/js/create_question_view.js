@@ -4,6 +4,10 @@ Template.createQuestionView.onCreated(function () {
     });
 });
 
+Template.createQuestionView.onRendered(function () {
+    $("#forwardButton").attr("disabled", "disabled");
+});
+
 Template.createQuestionView.helpers({
     //Get question from Sessions-Collection if it already exists
     questionText: function () {
@@ -18,6 +22,15 @@ Template.createQuestionView.helpers({
 });
 
 Template.createQuestionView.events({
+    "input #questionText": function (event) {
+        var questionText = event.currentTarget.value;
+        if (questionText.length > 4) {
+            $("#forwardButton").removeAttr("disabled");
+        }
+        else {
+            $("#forwardButton").attr("disabled", "disabled");
+        }
+    },
     //Save question in Sessions-Collection when Button "Next" is clicked
     'click #forwardButton': function () {
         var questionText = $('#questionText').val();

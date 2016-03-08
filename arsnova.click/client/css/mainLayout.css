@@ -10,8 +10,9 @@
      * -50px because of the header height
      * -20px because of the footer height
      */
-    height: calc(100% - 114px - 20px);
-    top: 10%;
+    /*height: calc(100% - 114px - 20px);*/
+    /*top: 10%;*/
+    height: 100%;
 }
 
 .contentPosition > .row {
@@ -50,6 +51,7 @@ a:focus {
 
 p, ul.list-unstyled {
     margin-left: 30px;
+    margin-right: 30px;
     text-align: justify;
 }
 
@@ -62,12 +64,12 @@ p, ul.list-unstyled {
     color: white;
     text-align: center;
     font-size: 6vw;
-    margin-top: 20px;
+    /*margin-top: 20px;*/
     width: 100%;
 }
 
 .titel + .margin-title {
-    margin-top: 60px;
+    margin-top: 10px;
 }
 
 .answer-options {

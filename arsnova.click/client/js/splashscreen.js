@@ -11,7 +11,7 @@ Template.splashscreen.rendered = function () {
             keyboard: false
         });
     }
-
+    /*
     if (templateParams.timerClose) {
         if (isNaN(templateParams.timerClose)) {
             templateParams.timerClose = 5000;
@@ -21,7 +21,7 @@ Template.splashscreen.rendered = function () {
                 closeSplashscreen();
             }
         }, templateParams.timerClose);
-    }
+     }*/
 
     splashscreen.modal('show');
     /*var wpwSessionData = {

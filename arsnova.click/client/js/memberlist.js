@@ -30,6 +30,23 @@ Template.memberlist.events({
     }
 });
 
+Template.memberlist.onRendered(function () {
+    $(window).resize(function () {
+
+        var final_height = $(window).height() - $(".navbar").height();
+        $(".titel").css("margin-top", $(".navbar").height());
+        $(".container").css("height", final_height);
+
+
+    });
+});
+
+Template.memberlist.rendered = function () {
+    var final_height = $(window).height() - $(".navbar").height();
+    $(".titel").css("margin-top", $(".navbar").height());
+    $(".container").css("height", final_height);
+};
+
 Template.memberlist.helpers({
     hashtag: function () {
         return Session.get("hashtag");
@@ -83,6 +100,8 @@ Template.memberlist.helpers({
         }
         return !Session.get("isOwner") && (doc.isReadingConfirmationRequired == 1);
     }
+
+
 });
 
 function calculateButtonCount () {

@@ -15,5 +15,8 @@ Hashtags.attachSchema(new SimpleSchema({
 		type: Number,
 		min: 0,
 		max: 1
+	},
+	lastConnection:{
+		type: Number
 	}
 }));

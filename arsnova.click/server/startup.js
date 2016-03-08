@@ -4,7 +4,8 @@ if(Meteor.isServer){
             var hashtagsExample = {
                 hashtag: "wpw",
                 privateKey: "thisismypriv",
-                isActive: 1
+                isActive: 1,
+                lastConnection: (new Date()).getTime()
             };
             // block this hash / pk -> do not use and merge to production server!
             var hashtagsExample2 = {

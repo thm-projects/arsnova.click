@@ -1,6 +1,6 @@
 Template.createAnswerOptions.onCreated(function () {
    this.autorun(() => {
-      this.subscription = Meteor.subscribe('AnswerOptions.instructor', localStorage.getItem("privateKey"), Session.get("hashtag"));
+      this.subscription = Meteor.subscribe('AnswerOptions.instructor', localData.getPrivateKey(), Session.get("hashtag"));
    });
 });
 
@@ -27,30 +27,31 @@ Template.createAnswerOptions.events({
       }
    },
    "click #addAnswerOption": function () {
-      const answerOption = {
-         privateKey: localStorage.getItem("privateKey"),
-         hashtag: Session.get("hashtag"),
-         answerText: "",
-         answerOptionNumber: (AnswerOptions.find().count()),
-         isCorrect: 0
-      };
-      
-      Meteor.call('AnswerOptions.addOption', answerOption);
-      addAnswersToLocalStorage(hashtag, answerOption);
+      if (AnswerOptions.find().count() < 26) {
+         const answerOption = {
+            privateKey: localData.getPrivateKey(),
+            hashtag: Session.get("hashtag"),
+            answerText: "",
+            answerOptionNumber: (AnswerOptions.find().count()),
+            isCorrect: 0
+         };
 
-      if (AnswerOptions.find().count() > 1) {
-         $("#deleteAnswerOption").show();
+         Meteor.call('AnswerOptions.addOption', answerOption);
+         localData.addAnswers(Session.get("hashtag"), answerOption);
+         if (AnswerOptions.find().count() > 1) {
+            $("#deleteAnswerOption").show();
+         }
       }
    },
    "click #deleteAnswerOption": function (event) {
       var number = AnswerOptions.find().count() - 1;
       if (AnswerOptions.find().count() > 1) {
          Meteor.call('AnswerOptions.deleteOption', {
-            privateKey: localStorage.getItem("privateKey"),
+            privateKey: localData.getPrivateKey(),
             hashtag: Session.get("hashtag"),
             answerOptionNumber: number
          });
-         deleteAnswerOptionFromLocalStorage(Session.get("hashtag"), number);
+         localData.deleteAnswerOption(Session.get("hashtag"), number);
          if (AnswerOptions.find().count() == 1) {
             $(event.target).hide();
          }
@@ -64,7 +65,7 @@ Template.createAnswerOptions.events({
          var text = $("#answerOptionText_Number" + i).val();
          var isCorrect = $('div#answerOption-' + i + ' .check-mark-checked').length > 0 ? 1 : 0;
          Meteor.call('AnswerOptions.updateAnswerTextAndIsCorrect', {
-            privateKey: localStorage.getItem("privateKey"),
+            privateKey: localData.getPrivateKey(),
             hashtag: Session.get("hashtag"),
             answerOptionNumber: i,
             answerText: text,
@@ -73,8 +74,8 @@ Template.createAnswerOptions.events({
             if (err) {
                alert(err);
             } else {
-               updateAnswerTextInLocalStorage(Session.get("hashtag"), i, text, isCorrect);
-               Router.go("/readconfirmationrequired");
+               localData.updateAnswerText(Session.get("hashtag"), i, text, isCorrect);
+               Router.go("/settimer");
             }
          });
 

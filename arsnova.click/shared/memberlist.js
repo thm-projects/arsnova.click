@@ -1,5 +1,5 @@
 Meteor.methods({
-    'MemberList.addLearner': function (hashtag, nick) {
+    'MemberList.addLearner': function ({hashtag, nick}) {
         new SimpleSchema({
             hashtag: {type: String},
             nick: {type: String}
@@ -19,6 +19,7 @@ Meteor.methods({
             });
         } else {
             throw new Meteor.Error('MemberList.addLearner', 'Nick already exists!');
+            return;
         }
     },
     'MemberList.setReadConfirmed': function (hashtag, nick) {

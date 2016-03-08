@@ -3,15 +3,14 @@ Router.configure({
 });
 
 Router.map(function () {
-    if (!localStorage.getItem(("privateKey"))) {
-        localStorage.setItem("privateKey", "thisismypriv");
-    }
     if (!Session.get("hashtag")) {
         this.go("/");
     }
 });
 
 Router.route('/', function () {
+    localData.initializePrivateKey();
+    localData.createTestData();
     this.render('home');
 });
 
@@ -35,7 +34,9 @@ Router.route('/answeroptions', function () {
 
 Router.route('/settimer', function () {
     if (Session.get("isOwner")) {
-
+        this.render('createTimerView');
+    } else {
+        Router.go('/')
     }
 });
 
@@ -51,12 +52,20 @@ Router.route('/memberlist', function () {
     this.render('memberlist');
 });
 
+Router.route('/votingview', function () {
+    this.render('votingview');
+});
+
 Router.route('/onpolling', function () {
     if (Session.get("isOwner")) {
 
     } else {
 
     }
+});
+
+Router.route('/giveresponse', function () {
+    this.render('votingview');
 });
 
 Router.route('/statistics', function () {

@@ -2,16 +2,64 @@ Template.memberlist.onCreated(function () {
     this.autorun(() => {
         this.subscribe('MemberList.members', Session.get("hashtag"));
         if(Session.get("isOwner")) {
-            this.subscribe('MemberList.percentRead', Session.get("hashtag"), window.localStorage.getItem("privateKey"));
+            this.subscribe('MemberList.percentRead', Session.get("hashtag"), localData.getPrivateKey());
         }
         this.subscribe('Sessions.isReadingConfirmationRequired', Session.get("hashtag"));
     });
 
+    $(window).resize(function () {
+        calculateButtonCount();
+    });
 });
 
+Template.memberlist.rendered = function () {
+    calculateButtonCount();
+};
+
+Template.memberlist.events({
+    "click .btn-more-learners": function (event) {
+        Session.set("LearnerCount", MemberList.find() + 1);
+        Session.set("LearnerCountOverride", true);
+    },
+    'click #setReadConfirmed': function () {
+        closeSplashscreen();
+    },
+    'click .btn-less-learners': function () {
+        Session.set("LearnerCountOverride", false);
+        calculateButtonCount();
+    },    
+    'click #memberlist-go': function () {
+        Router.go("/votingview");
+    }
+
+});
+
+Template.memberlist.onRendered(function () {
+    $(window).resize(function () {
+
+        var final_height = $(window).height() - $(".navbar").height();
+        $(".titel").css("margin-top", $(".navbar").height());
+        $(".container").css("height", final_height);
+
+
+    });
+});
+
+Template.memberlist.rendered = function () {
+    var final_height = $(window).height() - $(".navbar").height();
+    $(".titel").css("margin-top", $(".navbar").height());
+    $(".container").css("height", final_height);
+};
+
 Template.memberlist.helpers({
+    hashtag: function () {
+        return Session.get("hashtag");
+    },
     isOwner: function () {
         return Session.get("isOwner");
+    },
+    isLearnerCountOverride: function () {
+        return Session.get('LearnerCountOverride');
     },
     percentRead: function () {
         var sumRead = 0;
@@ -25,25 +73,14 @@ Template.memberlist.helpers({
     },
 
     learners: function () {
-        var returnMemberList = MemberList.find();
-        var memberCount = returnMemberList.length;
+        return MemberList.find({}, {
+            limit: (Session.get("LearnerCount") - 1),
+            sort: {nick: 1}
+        });
+    },
 
-        var viewPortHeigth = $(".contentPosition").height();
-        var viewPortWidth = $(".contentPosition").width();
-
-        // btnLearnerHeight muss hart hinterlegt werden / ggf anpassung an neue css klassen
-        var btnLearnerHeight = 54;
-
-
-        var breakFactor = viewPortWidth < 945 ? 1 : 3;
-
-        console.log("     viewPortHeigth : " + viewPortHeigth);
-        console.log("     viewPortWidth : " + viewPortWidth);
-        console.log("     btnLearnerHeight : " + btnLearnerHeight);
-        console.log("     memberCount : " + memberCount);
-        console.log("     breakFactor : " + breakFactor);
-
-        return returnMemberList;
+    showMoreButton: function () {
+        return Session.get("LearnerCount") <= MemberList.find().count();
     },
 
     isReadingConfirmationRequired: function () {
@@ -66,8 +103,37 @@ Template.memberlist.helpers({
             return;
         }
         return !Session.get("isOwner") && (doc.isReadingConfirmationRequired == 1);
-    },
-    hashtag: function () {
-        return Session.get("hashtag");
     }
+
+
 });
+
+function calculateButtonCount () {
+
+    if (Session.get("LearnerCountOverride")) {
+        return;
+    }
+
+    var contentPosition = $(".contentPosition");
+
+    var viewPortHeight = contentPosition.height() - $('.learner-title').height();
+    var readConfirm = $('.confirmationCounter:first');
+
+    if (readConfirm.length > 0) {
+        viewPortHeight -= readConfirm.height();
+    }
+    // + 30 because contentPosition has 15px padding left and right
+    var viewPortWidth = contentPosition.width() + 30;
+
+    // btnLearnerHeight muss hart hinterlegt werden / ggf anpassung an neue css klassen
+    var btnLearnerHeight = 54;
+
+    var queryLimiter = Math.floor(viewPortHeight / btnLearnerHeight);
+    if (viewPortWidth >= 768 && viewPortWidth < 1200) {
+        queryLimiter *= 3;
+    } else if (viewPortWidth >= 1200) {
+        queryLimiter *= 4;
+    }
+
+    Session.set("LearnerCount", queryLimiter);
+}

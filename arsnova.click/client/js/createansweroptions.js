@@ -29,7 +29,7 @@ Template.createAnswerOptions.events({
    "click #addAnswerOption": function () {
       if (AnswerOptions.find().count() < 26) {
          const answerOption = {
-         privateKey: localData.getPrivateKey(),
+            privateKey: localData.getPrivateKey(),
             hashtag: Session.get("hashtag"),
             answerText: "",
             answerOptionNumber: (AnswerOptions.find().count()),

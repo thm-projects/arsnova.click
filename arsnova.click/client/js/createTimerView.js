@@ -17,30 +17,30 @@ Template.createTimerView.rendered = function () {
 };
 
 Template.createTimerView.helpers({
-  /*  timer:function(){
-        //For testing purposes
-        //Session.set("hashtag","wpw");
-        //window.localStorage.setItem("privateKey", "thisismypriv");
+    /*  timer:function(){
+     //For testing purposes
+     //Session.set("hashtag","wpw");
+     //window.localStorage.setItem("privateKey", "thisismypriv");
 
-        const currentSession = Sessions.findOne({hashtag:Session.get("hashtag")});
+     const currentSession = Sessions.findOne({hashtag:Session.get("hashtag")});
 
-        if(!currentSession || !currentSession.timer) {
-            return "";
-        }
-        return currentSession.timer;
-    },*/
+     if(!currentSession || !currentSession.timer) {
+     return "";
+     }
+     return currentSession.timer;
+     },*/
     slider: function () {
         return Session.get("slider");
     }
 });
 
 Template.createTimerView.events({
-    "click #forwardButton":function(){
+    "click #forwardButton": function () {
         const timer = Session.get("slider");
         Meteor.call("Sessions.setTimer", {
-            privateKey:localData.getPrivateKey(),
-            hashtag:Session.get("hashtag"),
-            timer:timer
+            privateKey: localData.getPrivateKey(),
+            hashtag: Session.get("hashtag"),
+            timer: timer
         }, (err, res) => {
             if (err) {
                 alert(err);
@@ -50,21 +50,21 @@ Template.createTimerView.events({
             }
         });
     },
-    "click #backButton":function(){
+    "click #backButton": function () {
         const timer = Session.get("slider");
-        if(!isNaN(timer) && timer > 0) {
+        if (!isNaN(timer) && timer > 0) {
             Meteor.call("Sessions.setTimer", {
-                privateKey:localData.getPrivateKey(),
-                hashtag:Session.get("hashtag"),
-                timer:timer
+                privateKey: localData.getPrivateKey(),
+                hashtag: Session.get("hashtag"),
+                timer: timer
             }, (err, res) => {
                 if (err) {
                     alert(err);
                 } else {
                     localData.addTimer(Session.get("hashtag"), timer);
-            Router.go("/answeroptions");
-        }
-        });
+                    Router.go("/answeroptions");
+                }
+            });
         }
 
     }

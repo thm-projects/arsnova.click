@@ -1,14 +1,15 @@
 .timer-input {
     height: 50px;
     font-size: 1.5em;
-    width:100%;
+    width: 100%;
 }
+
 .text-center {
-    text-align:center;
+    text-align: center;
 }
 
 .text-white {
-    color:#ffffff;
+    color: #ffffff;
     font-family: Georgia, serif;
 }
 

@@ -7,7 +7,7 @@ Template.votingview.onCreated(function () {
 
 var countdown = new ReactiveCountdown(30);
 
-countdown.start(function() {
+countdown.start(function () {
 
     // do something when this is completed
 
@@ -23,7 +23,7 @@ Template.votingview.helpers({
     answerOptionLetter: function (number) {
         return String.fromCharCode((number.hash.number + 65));
     },
-    getCountdown: function() {
+    getCountdown: function () {
         return countdown.get();
     }
 

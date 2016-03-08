@@ -24,7 +24,7 @@ Template.votingview.helpers({
         return String.fromCharCode((number.hash.number + 65));
     },
     getCountdown: function () {
-        return countdown.get();
+        return countdown.get() + "seconds left!";
     }
 
 });

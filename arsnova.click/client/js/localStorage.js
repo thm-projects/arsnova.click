@@ -53,7 +53,7 @@ localData = {
         }));
     },
 
-    updateIsReadingConfirmationRequired : function(hashtag, isReadingConcfirmationRequired){
+    updateIsReadingConfirmationRequired : function(hashtag, isReadingConfirmationRequired){
         var hashtagString = localStorage.getItem(hashtag);
         if (!hashtagString){
             // TODO Err-Message?
@@ -64,7 +64,7 @@ localData = {
             hashtag:hashtag,
             questionText:hashtagData.questionText,
             timer:hashtagData.timer,
-            isReadingConfirmationRequired:isReadingConcfirmationRequired,
+            isReadingConfirmationRequired:isReadingConfirmationRequired,
             answers:hashtagData.answers
         }));
     },
@@ -210,6 +210,30 @@ localData = {
 
     getPrivateKey : function() {
         return localStorage.getItem("privateKey");
+    },
+
+    createTestData : function() {
+        if(!localStorage.getItem("wpw")) {
+
+            localStorage.setItem("wpw", JSON.stringify({
+                hashtag: "wpw",
+                questionText: "I am a question text. This is for testing purpose. Do you understand?",
+                timer: 180000,
+                isReadingConfirmationRequired: 1,
+                answers: [{
+                    hashtag: "wpw",
+                    answerText: "Ja",
+                    answerOptionNumber: 0,
+                    isCorrect: 1
+                }, {
+                    hashtag: "wpw",
+                    answerText: "Nein",
+                    answerOptionNumber: 1,
+                    isCorrect: 0
+                }]
+            }));
+            localStorage.setItem("hashtags", JSON.stringify(["wpw"]));
+        }
     }
 };
 

@@ -10,6 +10,7 @@ Router.map(function () {
 
 Router.route('/', function () {
     localData.initializePrivateKey();
+    localData.createTestData();
     this.render('home');
 });
 

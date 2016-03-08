@@ -22,7 +22,7 @@ Template.readconfirmationrequired.events({
     },
     "click #backButton": function () {
         if (Session.get("isOwner")){
-            Router.go("/answeroptions");
+            Router.go("/settimer");
         }else{
             Router.go("/nick");
         }

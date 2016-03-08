@@ -48,7 +48,7 @@ Template.createTimerView.events({
                 alert(err);
             } else {
                 localData.addTimer(Session.get("hashtag"), timer);
-                Router.go("/memberlist");
+                Router.go("/readconfirmationrequired");
             }
         });
     },

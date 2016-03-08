@@ -9,7 +9,7 @@ Template.live_results.onCreated(function () {
 Template.live_results.helpers({
     result: function () {
         var result = [];
-        var memberAmount = MemberList.find({hashtag: Session.get("hashtag")}).count();
+        var memberAmount = Responses.find({hashtag: Session.get("hashtag")}).count();
         var answerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
         if(false && answerOptions){ //survey
             console.log('Umfrage');
@@ -17,7 +17,7 @@ Template.live_results.helpers({
             AnswerOptions.find({hashtag: Session.get("hashtag")}).forEach(function(value){
                 console.log(value);
                 var amount = Responses.find({hashtag: Session.get("hashtag"), answerOptionNumber: value.answerOptionNumber}).count();
-                result.push({name: String.fromCharCode(value.answerOptionNumber + 65), absolute: amount, percent: '0', isCorrect: 1});
+                result.push({name: String.fromCharCode(value.answerOptionNumber + 65), absolute: amount, percent: '0', isCorrect: -1});
             });
         } else { //MC / SC
             if(answerOptions === 1){ //SC
@@ -28,6 +28,11 @@ Template.live_results.helpers({
                 });
 
             } else { //MC
+                AnswerOptions.find({hashtag: Session.get("hashtag")}).forEach(function(value){
+                    console.log(value);
+                    var amount = Responses.find({hashtag: Session.get("hashtag"), answerOptionNumber: value.answerOptionNumber}).count();
+                    result.push({name: String.fromCharCode(value.answerOptionNumber + 65), absolute: amount, percent: Math.floor((amount * 100) / memberAmount), isCorrect: value.isCorrect});
+                });
 
             }
         }
@@ -39,7 +44,6 @@ Template.live_results.helpers({
 Template.live_results.events({
     //Save question in Sessions-Collection when Button "Next" is clicked
     "click #showQuestion": function () {
-
 
     }
 

@@ -27,19 +27,21 @@ Template.createAnswerOptions.events({
       }
    },
    "click #addAnswerOption": function () {
-      const answerOption = {
+      if (AnswerOptions.find().count() < 26) {
+         const answerOption = {
          privateKey: localData.getPrivateKey(),
-         hashtag: Session.get("hashtag"),
-         answerText: "",
-         answerOptionNumber: (AnswerOptions.find().count()),
-         isCorrect: 0
-      };
-      
-      Meteor.call('AnswerOptions.addOption', answerOption);
+            hashtag: Session.get("hashtag"),
+            answerText: "",
+            answerOptionNumber: (AnswerOptions.find().count()),
+            isCorrect: 0
+         };
+
+         Meteor.call('AnswerOptions.addOption', answerOption);
       localData.addAnswers(Session.get("hashtag"), answerOption);
 
-      if (AnswerOptions.find().count() > 1) {
-         $("#deleteAnswerOption").show();
+         if (AnswerOptions.find().count() > 1) {
+            $("#deleteAnswerOption").show();
+         }
       }
    },
    "click #deleteAnswerOption": function (event) {

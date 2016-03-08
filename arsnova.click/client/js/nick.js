@@ -4,6 +4,10 @@ Template.nick.onCreated(function () {
     });
 });
 
+Template.nick.onRendered(function () {
+   $("#forwardButton").attr("disabled", "disabled");
+});
+
 Template.nick.events({
     "click #forwardButton": function () {
         var nickname = $("#nickname-input-field").val();
@@ -17,6 +21,12 @@ Template.nick.events({
     'input #nickname-input-field': function (event) {
         var hashtag = Session.get("hashtag");
         var currentNickName = event.currentTarget.value;
+        if (currentNickName.length > 2) {
+            $("#forwardButton").removeAttr("disabled");
+        }
+        else {
+            $("#forwardButton").attr("disabled", "disabled");
+        }
         var member = MemberList.findOne({nick: currentNickName});
         if (!member){
             $("#addNickname").prop('disabled', false);

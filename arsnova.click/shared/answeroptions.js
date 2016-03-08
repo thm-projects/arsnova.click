@@ -19,6 +19,7 @@ Meteor.methods({
             return;
         }
         else {
+        if (AnswerOptions.find({hashtag: hashtag}).count() < 26) {
             var answerOptionDoc = AnswerOptions.findOne({
                 hashtag: hashtag,
                 answerOptionNumber: answerOptionNumber

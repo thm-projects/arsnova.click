@@ -5,6 +5,14 @@ Template.votingview.onCreated(function () {
     });
 });
 
+var countdown = new ReactiveCountdown(30);
+
+countdown.start(function() {
+
+    // do something when this is completed
+
+});
+
 Template.votingview.helpers({
     answerOptions: function () {
         return AnswerOptions.find();
@@ -14,7 +22,11 @@ Template.votingview.helpers({
     },
     answerOptionLetter: function (number) {
         return String.fromCharCode((number.hash.number + 65));
+    },
+    getCountdown: function() {
+        return countdown.get();
     }
+
 });
 
 Template.votingview.events({

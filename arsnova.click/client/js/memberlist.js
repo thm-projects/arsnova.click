@@ -14,12 +14,15 @@ Template.memberlist.onCreated(function () {
 
 Template.memberlist.rendered = function () {
     calculateButtonCount();
-}
+};
 
 Template.memberlist.events({
     "click .btn-more-learners": function (event) {
         Session.set("LearnerCount", MemberList.find() + 1);
         Session.set("LearnerCountOverride", true);
+    },
+    'click #setReadConfirmed': function () {
+        closeSplashscreen();
     }
 });
 

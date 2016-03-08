@@ -52,12 +52,20 @@ Router.route('/memberlist', function () {
     this.render('memberlist');
 });
 
+Router.route('/votingview', function () {
+    this.render('votingview');
+});
+
 Router.route('/onpolling', function () {
     if (Session.get("isOwner")) {
 
     } else {
 
     }
+});
+
+Router.route('/giveresponse', function () {
+    this.render('votingview');
 });
 
 Router.route('/statistics', function () {

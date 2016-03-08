@@ -17,7 +17,7 @@ Template.readconfirmationrequired.helpers({
 
 Template.readconfirmationrequired.events({
     "click #forwardButton": function () {
-        localData.updateIsReadingConfirmationRequired(Session.get("hashtag"), Sessions.findOne({hashtag:Session.get("hashtag")}).isReadingConfirmationRequired);
+        localData.updateIsReadingConfirmationRequired(Session.get("hashtag"), Sessions.findOne({hashtag: Session.get("hashtag")}).isReadingConfirmationRequired);
         Router.go("/memberlist");
     },
     "click #backButton": function () {
@@ -31,7 +31,11 @@ Template.readconfirmationrequired.events({
         event.preventDefault();
 
         var newVal = Sessions.findOne({hashtag:Session.get("hashtag")}).isReadingConfirmationRequired ? 0 : 1;
-        Meteor.call("Sessions.updateIsReadConfirmationRequired", {privateKey:localData.getPrivateKey(), hashtag:Session.get("hashtag"), isReadingConfirmationRequired:newVal});
+        Meteor.call("Sessions.updateIsReadConfirmationRequired", {
+            privateKey: localData.getPrivateKey(),
+            hashtag: Session.get("hashtag"),
+            isReadingConfirmationRequired: newVal
+        });
 
         $('#isReadConfirmationRequiredButton').toggleClass("down");
     }

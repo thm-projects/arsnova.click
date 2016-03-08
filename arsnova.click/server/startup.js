@@ -111,7 +111,7 @@ if(Meteor.isServer){
             var sessionExample = {
                 hashtag: "wpw",
                 questionText: "I am a question text. This is for testing purpose. Do you understand?",
-                timer: "180",
+                timer: "1800000",
                 isReadingConfirmationRequired: 1
             };
             var answerOptionsExample1 = {

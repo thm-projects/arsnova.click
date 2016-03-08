@@ -59,7 +59,7 @@ Meteor.methods({
         }
     },
 
-    "Sessions.setTimer": function({privateKey, hashtag, timer}){
+    "Sessions.setTimer": function ({privateKey, hashtag, timer}) {
         new SimpleSchema({
             timer: {
                 type: Number,
@@ -67,14 +67,17 @@ Meteor.methods({
             }
         }).validate({timer: timer});
 
-        const hashItem = Hashtags.findOne({hashtag:hashtag, privateKey:privateKey});
+        const hashItem = Hashtags.findOne({
+            hashtag: hashtag,
+            privateKey: privateKey
+        });
 
-        if(hashItem) {
-            const session = Sessions.findOne({hashtag:hashtag});
-            if(!session) {
+        if (hashItem) {
+            const session = Sessions.findOne({hashtag: hashtag});
+            if (!session) {
                 throw new Meteor.Error('Sessions.setTimer: no access to session');
             } else {
-                Sessions.update(session._id, {$set: {timer: timer}}, function(error) {
+                Sessions.update(session._id, {$set: {timer: timer}}, function (error) {
                     if (error) {
                         throw new Meteor.Error('Sessions.updateIsReadConfirmationRequired', error);
                     }

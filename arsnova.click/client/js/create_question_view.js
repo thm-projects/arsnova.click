@@ -35,8 +35,7 @@ Template.createQuestionView.events({
         var questionText = event.currentTarget.value;
         if (questionText.length > 4) {
             $("#forwardButton").removeAttr("disabled");
-        }
-        else {
+        } else {
             $("#forwardButton").attr("disabled", "disabled");
         }
     },
@@ -70,4 +69,4 @@ Template.createQuestionView.events({
     "click #previewButton": function () {
         //Not implemented yet
     }
-});;
+});

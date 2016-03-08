@@ -1,8 +1,25 @@
-/**
- * Created by Kevin on 03.03.16.
- */
+// slider starts at 20 and 80
+Session.setDefault("slider", 20);
+
+
+Template.createTimerView.rendered = function () {
+    this.$("#slider").noUiSlider({
+        start: Session.get("slider"),
+        range: {
+            'min': 5,
+            'max': 180
+        }
+    }).on('slide', function (ev, val) {
+        // set real values on 'slide' event
+        Session.set('slider', val);
+    }).on('change', function (ev, val) {
+        // round off values on 'change' event
+        Session.set('slider', Math.round(val));
+    });
+};
+
 Template.createTimerView.helpers({
-    timer:function(){
+  /*  timer:function(){
         //For testing purposes
         //Session.set("hashtag","wpw");
         //window.localStorage.setItem("privateKey", "thisismypriv");
@@ -13,6 +30,9 @@ Template.createTimerView.helpers({
             return "";
         }
         return currentSession.timer;
+    },*/
+    slider: function () {
+        return Session.get("slider");
     }
 });
 

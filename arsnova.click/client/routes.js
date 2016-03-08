@@ -10,7 +10,7 @@ Router.map(function () {
 
 Router.route('/', function () {
     localData.initializePrivateKey();
-    localData.createTestData();
+    Session.set("isOwner", undefined);
     this.render('home');
 });
 

@@ -75,9 +75,6 @@ Template.memberlist.helpers({
             return;
         }
         return !Session.get("isOwner") && (doc.isReadingConfirmationRequired == 1);
-    },
-    hashtag: function () {
-        return Session.get("hashtag");
     }
 });
 
@@ -87,8 +84,10 @@ function calculateButtonCount () {
         return;
     }
 
-    var viewPortHeight = $(".contentPosition").height() - $('.learner-title').height() + 40;
-    var viewPortWidth = $(".contentPosition").width();
+    var contentPosition = $(".contentPosition");
+
+    var viewPortHeight = contentPosition.height() - $('.learner-title').height() + 40;
+    var viewPortWidth = contentPosition.width();
 
     // btnLearnerHeight muss hart hinterlegt werden / ggf anpassung an neue css klassen
     var btnLearnerHeight = 54;

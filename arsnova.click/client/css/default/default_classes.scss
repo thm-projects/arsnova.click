@@ -41,8 +41,12 @@
   white-space: nowrap;
 }
 
-.button > span {
-  padding: 0 10px;
+.glyph-right {
+  padding-left: 10px;
+}
+
+.glyph-left {
+  padding-right: 10px;
 }
 
 .input-group-letter {

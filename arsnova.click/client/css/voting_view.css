@@ -1,5 +1,14 @@
+.btn-answerFont {
+  font-size: 4em;
+}
+
 .btn-answerOption {
-    margin: 20px 0;
-    width: 100%;
-    font-size: 4em;
+  margin: 23px 0;
+  width: 100%;
+}
+
+.answer-row {
+  /*position: fixed;
+  bottom: 10px;*/
+  background-color: steelblue;
 }

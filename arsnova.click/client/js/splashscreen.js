@@ -12,6 +12,7 @@ Template.splashscreen.rendered = function () {
         });
     }
     /*
+
     if (templateParams.timerClose) {
         if (isNaN(templateParams.timerClose)) {
             templateParams.timerClose = 5000;
@@ -23,19 +24,10 @@ Template.splashscreen.rendered = function () {
         }, templateParams.timerClose);
      }*/
 
-    splashscreen.modal('show');
-    /*var wpwSessionData = {
-        questionText: "I'm a question text. This is for testing purpose. Do you understand?",
-        timer: 1800000,
-        isReadingConfirmationRequired: 0
-    };
-    var testingSessionData = {
-        questionText: "Do you like this course?",
-        timer: 8000000,
-        isReadingConfirmationRequired: 0
-    };
-    localStorage.setItem("wpw", JSON.stringify(wpwSessionData));
-    localStorage.setItem("testing", JSON.stringify(testingSessionData));*/
+    if (templateParams.noAutorun) {
+        splashscreen.modal({show: false});
+    } else {
+        splashscreen.modal('show');
 };
 
 Template.splashscreen.helpers({
@@ -44,6 +36,10 @@ Template.splashscreen.helpers({
         return {template: Template[this.templateName]};
     }
 });
+
+showSplashscreen = function () {
+    $('.js-splashscreen').modal();
+};
 
 closeSplashscreen = function () {
     $('.js-splashscreen').modal("hide");

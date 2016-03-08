@@ -27,16 +27,14 @@ Router.route('/question', function () {
 });
 
 Router.route('/answeroptions', function () {
-    //if (Session.get("isOwner")) {
-        this.render('createAnswerOptions');
-    //}
+    this.render('createAnswerOptions');
 });
 
 Router.route('/settimer', function () {
     if (Session.get("isOwner")) {
         this.render('createTimerView');
     } else {
-        Router.go('/')
+        Router.go('/');
     }
 });
 
@@ -60,12 +58,8 @@ Router.route('/onpolling', function () {
     if (Session.get("isOwner")) {
 
     } else {
-
+        this.render('votingview');
     }
-});
-
-Router.route('/giveresponse', function () {
-    this.render('votingview');
 });
 
 Router.route('/statistics', function () {

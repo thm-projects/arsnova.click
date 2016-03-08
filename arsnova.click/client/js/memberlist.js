@@ -28,20 +28,25 @@ Template.memberlist.events({
         Session.set("LearnerCountOverride", false);
         calculateButtonCount();
     },    
-    'click #memberlist-go': function () {
-        Router.go("/votingview");
+    'click #startPolling': function (event) {
+        Meteor.call('Sessions.startTimer', {
+            privateKey: localData.getPrivateKey(),
+            hashtag: Session.get("hashtag")
+        }, (err, res) => {
+            if (err) {
+                alert(err);
+            } else {
+                Router.go("/livestatistics");
+            }
+        });
     }
-
 });
 
 Template.memberlist.onRendered(function () {
     $(window).resize(function () {
-
         var final_height = $(window).height() - $(".navbar").height();
         $(".titel").css("margin-top", $(".navbar").height());
         $(".container").css("height", final_height);
-
-
     });
 });
 

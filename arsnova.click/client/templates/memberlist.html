@@ -5,6 +5,7 @@
     <div class="learner-title">
         {{> titel titelText = "Teilnehmer/innen" }}
     </div>
+    <button id="startPolling">Start!</button>
     {{#if isReadingConfirmationRequired}}
         <div class="row confirmationCounter">
             <div class="col-xs-5 col-md-5 col-lg-4 text-right">
@@ -18,7 +19,7 @@
                     <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
                          aria-valuenow="{{percentRead}}"
                          aria-valuemin="{{percentRead}}" aria-valuemax="100"
-                         style="min-width: 2em; width: {{percentRead}}%;   ">
+                         style="min-width: 2em; width: {{percentRead}}%;">
                         {{percentRead}} %
                     </div>
                 </div>
@@ -28,7 +29,6 @@
     {{/if}}
     <div class="row">
         <div class="col-md-12">
-
             <div class="row learner-list margin-title"
                  id="learner-list">
                 <!-- TODO: delete test loop before push-->

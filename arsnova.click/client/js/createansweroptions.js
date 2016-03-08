@@ -74,7 +74,7 @@ Template.createAnswerOptions.events({
                alert(err);
             } else {
                localData.updateAnswerText(Session.get("hashtag"), i, text, isCorrect);
-               Router.go("/readconfirmationrequired");
+               Router.go("/settimer");
             }
          });
 

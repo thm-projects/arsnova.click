@@ -4,7 +4,10 @@ Router.configure({
 
 Router.map(function () {
     if (!Session.get("hashtag")) {
-        this.go("/");
+        //this.go("/");
+        Session.set("hashtag","wpw");
+    } else {
+
     }
 });
 
@@ -62,6 +65,7 @@ Router.route('/statistics', function () {
 });
 
 Router.route('/results', function () {
+    this.render('live_results');
 });
 
 

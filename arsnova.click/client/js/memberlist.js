@@ -27,7 +27,11 @@ Template.memberlist.events({
     'click .btn-less-learners': function () {
         Session.set("LearnerCountOverride", false);
         calculateButtonCount();
+    },    
+    'click #memberlist-go': function () {
+        Router.go("/votingview");
     }
+
 });
 
 Template.memberlist.onRendered(function () {

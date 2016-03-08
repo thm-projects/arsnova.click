@@ -52,6 +52,10 @@ Router.route('/memberlist', function () {
     this.render('memberlist');
 });
 
+Router.route('/votingview', function () {
+    this.render('votingview');
+});
+
 Router.route('/onpolling', function () {
     if (Session.get("isOwner")) {
 
@@ -61,7 +65,7 @@ Router.route('/onpolling', function () {
 });
 
 Router.route('/giveresponse', function () {
-   this.render('displayAnswerOptions');
+    this.render('votingview');
 });
 
 Router.route('/statistics', function () {

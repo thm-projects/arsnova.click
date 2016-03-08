@@ -1,0 +1,27 @@
+<template name="votingview">
+
+    {{>titel titelText="0:12 Minuten"}}
+
+    <div class="row answer-row">
+
+        {{#each answerOptions}}
+            <div class="col-xs-6 col-sm-4 col-md-3">
+                <button id="{{answerOptionNumber}}" class="sendResponse btn btn-grey btn-answerOption">
+                    {{answerOptionLetter number=answerOptionNumber}}
+                </button>
+
+            </div>
+        {{/each}}
+    </div>
+
+    <div class="row">
+        {{#if showForwardButton}}
+            <button id="forwardButton" class="button button-next">
+                Zur Auswertung
+            </button>
+        {{/if}}
+    </div>
+
+</template>
+
+

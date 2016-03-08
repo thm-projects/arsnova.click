@@ -5,7 +5,16 @@ Template.createQuestionView.onCreated(function () {
 });
 
 Template.createQuestionView.onRendered(function () {
-    $("#forwardButton").attr("disabled", "disabled");
+    // just to set the forward-button style, when the question name is already existing
+    var currentSession = Sessions.findOne({hashtag: Session.get("hashtag")});
+    if (currentSession) {
+        if (currentSession.questionText.length > 4){
+            $("#forwardButton").removeAttr("disabled");
+        }
+        else {
+            $("#forwardButton").attr("disabled", "disabled");
+        }
+    }
 });
 
 Template.createQuestionView.helpers({
@@ -19,16 +28,6 @@ Template.createQuestionView.helpers({
             return "";
         }
     },
-    isQuestionLengthValidOnStartup: function () {
-        // just to set the forward-button style, when the question name is already existing
-        var currentSession = Sessions.findOne({hashtag: Session.get("hashtag")});
-        if (currentSession) {
-            if (currentSession.questionText.length > 4){
-                $("#forwardButton").removeAttr("disabled");
-            }
-        }
-        return;
-    }
 });
 
 Template.createQuestionView.events({

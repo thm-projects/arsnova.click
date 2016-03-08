@@ -11,3 +11,11 @@
     color:#ffffff;
     font-family: Georgia, serif;
 }
+
+#slider {
+    margin-top: 14px;
+}
+
+.slider-timer-input {
+    text-align: center;
+}

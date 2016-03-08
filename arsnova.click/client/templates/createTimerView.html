@@ -1,31 +1,23 @@
 <template name="createTimerView">
-
-    <div class="hashtag-template">
-
-        <div class="row row-hashtag-padding">
-
-            <div class="col-md-6 col-md-offset-3">
-                <h1 class="text-center text-white">Timer einstellen</h1>
-
-                <div id="slider"></div>
-                <p>value: {{slider}}</p>
-
-                <div class="row row-landingpage-buttons">
-
-                    <div class="col-xs-6 col-join-session">
-                        <button class="btn-join-session round-corners button-shadow" id="backButton">Zurück</button>
-                    </div>
-
-                    <div class="col-xs-6 col-create-session">
-                        <button class="btn-create-session round-corners button-shadow" id="forwardButton">Weiter</button>
-                    </div>
-
+    <div class="row center-vertical">
+        <div class="col-md-12">
+            {{> titel titelText = 'Timer einstellen' }}
+            <div class="row distance-top">
+                <div class="col-xs-8">
+                    <div id="slider"></div>
                 </div>
-
+                <div class="col-xs-4">
+                    <input class="input-field round-corners slider-timer-input" disabled value="{{slider}} ms"/>
+                </div>
             </div>
-
+            <div class="row distance-top">
+                <div class="col-xs-6">
+                    <button class="button button-back" id="backButton">Zurück</button>
+                </div>
+                <div class="col-xs-6">
+                    <button class="button button-next" id="forwardButton">Weiter</button>
+                </div>
+            </div>
         </div>
-
-
     </div>
 </template>

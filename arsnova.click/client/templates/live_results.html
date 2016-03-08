@@ -1,0 +1,34 @@
+<template name="live_results">
+
+    <div class="center-vertical">
+
+        <div class="survey_button">
+            <span class="survey_letter">A</span>
+            <span class="survey_answer">Das ist die antwort möglichlkeit</span>
+        </div>
+        <br/>
+        <div class="survey_button">
+            <span class="survey_letter">B</span>
+            <span class="survey_answer">Das ist die antwort möglichlkeit</span>
+        </div>
+        <br/>
+        <div class="survey_button">
+            <span class="survey_letter">C</span>
+            <span class="survey_answer">Das ist die antwort möglichlkeit</span>
+        </div>
+        <br/>
+
+
+
+hier:
+        {{#each result}}
+            {{answerOptionNumber}}">
+        {{/each}}
+
+
+
+    </div>
+
+    {{> footer_nav_buttons backId="backButton" forwardId="forwardButton"}}
+
+</template>

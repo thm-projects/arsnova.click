@@ -36,7 +36,7 @@ Template.createAnswerOptions.events({
       };
       
       Meteor.call('AnswerOptions.addOption', answerOption);
-      localData.addAnswers(hashtag, answerOption);
+      localData.addAnswers(Session.get("hashtag"), answerOption);
 
       if (AnswerOptions.find().count() > 1) {
          $("#deleteAnswerOption").show();

@@ -19,12 +19,23 @@ Meteor.methods({
             return;
         }
         else {
-            AnswerOptions.insert({
+            var answerOptionDoc = AnswerOptions.findOne({
                 hashtag: hashtag,
-                answerText: answerText,
-                answerOptionNumber: answerOptionNumber,
-                isCorrect: isCorrect
+                answerOptionNumber: answerOptionNumber
             });
+            if (!answerOptionDoc){
+                AnswerOptions.insert({
+                    hashtag: hashtag,
+                    answerText: answerText,
+                    answerOptionNumber: answerOptionNumber,
+                    isCorrect: isCorrect
+                });
+            }else{
+                AnswerOptions.update(answerOptionDoc._id, {$set:{
+                    answerText: answerText,
+                    isCorrect: isCorrect
+                }});
+            }
         }
     },
     'AnswerOptions.deleteOption'({privateKey, hashtag, answerOptionNumber}) {

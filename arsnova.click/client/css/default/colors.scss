@@ -1,61 +1,38 @@
-$success: #008000/* green */
-;
-$success-text-color: #ffffff/* white */
-;
+$success: #008000; /* green */
+$success-text-color: #ffffff; /* white */
 
-$warning: #b22222/* firebrick */
-;
-$warning-text-color: #ffffff/* white */
-;
+$warning: #b22222; /* firebrick */
+$warning-text-color: #ffffff; /* white */
 
-$info: #663399/* rebeccapurple */
-;
-$info-text-color: #ffffff/* white */
-;
+$info: #663399; /* rebeccapurple */
+$info-text-color: #ffffff; /* white */
 
-$default: #808080/* grey */
-;
-$default-text-color: #ffffff/* white */
-;
+$default: #808080; /* grey */
+$default-text-color: #ffffff; /* white */
 
-$background-color: #4682b4/* steelblue */
-;
-$disabled-button-background: #808080/* grey */
-;
+$background-color: #4682b4; /* steelblue */
+$disabled-button-background: #808080; /* grey */
 
-$placeholder-color: #2f4f4f/* darkslategrey */
-;
-$input-background-color: #ffd700/* gold */
-;
-$input-group-letter-color: #2f4f4f/* darkslategrey */
-;
+$placeholder-color: #2f4f4f; /* darkslategrey */
 
-$footer-background-color: #dcdcdc/* gainsboro */
-;
-$footer-text-color: #000000/* black */
-;
+$input-background-color: #ffd700; /* gold */
+$input-group-letter-color: #2f4f4f; /* darkslategrey */
 
-$splash-screen-header-color: #2f4f4f/* darkslategrey */
-;
-$splash-screen-body-color: #2f4f4f/* darkslategrey */
-;
+$footer-background-color: #dcdcdc; /* gainsboro */
+$footer-text-color: #000000; /* black */
 
-$slider-color: #ff4500/* orangered */
-;
+$splash-screen-header-color: #2f4f4f; /* darkslategrey */
+$splash-screen-body-color: #2f4f4f; /* darkslategrey */
+
+$slider-color: #ff4500; /* orangered */
 
 /* todo: we have to define the background-colors */
-$splash-screen-show-session-background-color: #98fb98/* palegreen */
-;
-$splash-screen-request-read-confirm-background-color: #98fb98/* palegreen */
-;
-$splash-screen-countdown-background-color: #98fb98/* palegreen */
-;
-$splash-view-seconds-left-background-color: #98fb98/* palegreen */
-;
-$splash-show-question-background-color: #98fb98/* palegreen */
-;
-$splash-screen-read-confirmation-background-color: #2f4f4f/* darkslategrey */
-;
+$splash-screen-show-session-background-color: #98fb98; /* palegreen */
+$splash-screen-request-read-confirm-background-color: #98fb98; /* palegreen */
+$splash-screen-countdown-background-color: #98fb98; /* palegreen */
+$splash-view-seconds-left-background-color: #98fb98; /* palegreen */
+$splash-show-question-background-color: #98fb98; /* palegreen */
+$splash-screen-read-confirmation-background-color: #2f4f4f; /* darkslategrey */
 
 $check-mark-checked: #00882a;
 $check-mark-unchecked: #aaaaaa;

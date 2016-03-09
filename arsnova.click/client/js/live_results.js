@@ -12,14 +12,14 @@ Template.live_results.helpers({
         var memberAmount = Responses.find({hashtag: Session.get("hashtag")}).fetch();
         memberAmount = _.uniq(memberAmount, false, function(user) {return user.userNick}).length;
 
-        var answerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
-        if(answerOptions){ //survey
+        var correctAnswerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
+        if(!correctAnswerOptions){ //survey
             AnswerOptions.find({hashtag: Session.get("hashtag")}).forEach(function(value){
                 var amount = Responses.find({hashtag: Session.get("hashtag"), answerOptionNumber: value.answerOptionNumber}).count();
                 result.push({name: String.fromCharCode(value.answerOptionNumber + 65), absolute: amount, percent: memberAmount ? ( Math.floor((amount * 100) / memberAmount)) : 0, isCorrect: -1});
             });
         } else { //MC / SC
-            if(answerOptions === 1){ //SC
+            if(correctAnswerOptions === 1){ //SC
                 AnswerOptions.find({hashtag: Session.get("hashtag")}).forEach(function(value){
                     var amount = Responses.find({hashtag: Session.get("hashtag"), answerOptionNumber: value.answerOptionNumber}).count();
                     result.push({name: String.fromCharCode(value.answerOptionNumber + 65), absolute: amount, percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0, isCorrect: value.isCorrect});

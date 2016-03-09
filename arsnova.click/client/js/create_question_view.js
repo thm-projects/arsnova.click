@@ -49,8 +49,6 @@ Template.createQuestionView.events({
                 Router.go("/answeroptions");
             }
         });
-
-
     },
     "click #backButton": function () {
         var questionText = $('#questionText').val();

@@ -190,3 +190,11 @@
 .color-changing-click {
   animation-name: colorChangingClick;
 }
+
+.success input, .success textarea, input.success, textarea.success {
+  border: 3px solid $success;
+}
+
+.error input, .error textarea, input.error, textarea.error {
+  border: 3px solid $warning;
+}

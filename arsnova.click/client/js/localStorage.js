@@ -153,16 +153,12 @@ localData = {
         });
 
         $.each(sessionData.answers, function (key, value) {
-            if (AnswerOptions.find({hashtag:hashtag}).count() === 0) {
-                Meteor.call("AnswerOptions.addOption", {
-                    privateKey: localStorage.getItem("privateKey"),
-                    hashtag: hashtag,
-                    answerText: value.answerText,
-                    answerOptionNumber: value.answerOptionNumber,
-                    isCorrect: value.isCorrect});
-            } else {
-                //console.log("Nutze vorhandene Antworten aus DB");
-            }
+            Meteor.call("AnswerOptions.addOption", {
+                privateKey: localStorage.getItem("privateKey"),
+                hashtag: hashtag,
+                answerText: value.answerText,
+                answerOptionNumber: value.answerOptionNumber,
+                isCorrect: value.isCorrect});
         });
     },
 
@@ -205,7 +201,6 @@ localData = {
                 value.isCorrect = isCorrect;
             }
         });
-
         localStorage.setItem(hashtag, JSON.stringify(sessionData));
     },
 

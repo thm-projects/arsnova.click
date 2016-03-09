@@ -37,11 +37,11 @@ Template.readconfirmationrequired.events({
                 newVal = 1;
             }
         }
-        /*Meteor.call("Sessions.updateIsReadConfirmationRequired", {
+        Meteor.call("Sessions.updateIsReadConfirmationRequired", {
             privateKey: localData.getPrivateKey(),
             hashtag: Session.get("hashtag"),
             isReadingConfirmationRequired: newVal
-        });*/
+        });
 
         var btn = $('#isReadConfirmationRequiredButton');
         btn.toggleClass("down");

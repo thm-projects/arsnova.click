@@ -75,7 +75,6 @@ Template.createAnswerOptions.events({
             if (err) {
                alert(err);
             } else {
-               localData.updateAnswerText(answer);
                Router.go("/settimer");
             }
          });

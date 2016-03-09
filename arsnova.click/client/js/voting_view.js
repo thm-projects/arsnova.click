@@ -6,6 +6,7 @@ Template.votingview.onCreated(function () {
             countdown = new ReactiveCountdown(Sessions.findOne().timer / 1000);
             countdown.start(function () {
                 // show feedback splashscreen?
+                $("#end-of-polling-text").html("Abstimmung gelaufen!");
                 $('.js-splashscreen-end-of-polling').modal('show');
             });
             Session.set("countdownInitialized", true);
@@ -53,14 +54,14 @@ Template.votingview.events({
             if (err) {
                 alert(err);
             } else {
-                if (!res) {
+                if (res) {
                     if (res.instantRouting) {
                         // singlechoice
                         $('.js-splashscreen-end-of-polling').modal('show');
-                    } else {
-                        Session.set("hasGivenResponse", true);
                         Session.set("hasGivenResponse", undefined);
                         Session.set("countdownInitialized", undefined);
+                    } else {
+                        Session.set("hasGivenResponse", true);
                     }
                 }
             }

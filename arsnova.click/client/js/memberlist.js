@@ -4,12 +4,25 @@ Template.memberlist.onCreated(function () {
         if(Session.get("isOwner")) {
             this.subscribe('MemberList.percentRead', Session.get("hashtag"), localData.getPrivateKey());
         }
-        this.subscribe('Sessions.isReadingConfirmationRequired', Session.get("hashtag"));
+        this.subscribe('Sessions.memberlist', Session.get("hashtag"));
     });
 
     $(window).resize(function () {
         calculateButtonCount();
     });
+});
+
+
+Tracker.autorun(function() {
+    var initializing = true;
+    Sessions.find().observeChanges({
+        changed: function (id, startTime) {
+            if (!initializing) {
+                Router.go("onpolling");
+            }
+        }
+    });
+    initializing = false;
 });
 
 Template.memberlist.rendered = function () {
@@ -28,20 +41,25 @@ Template.memberlist.events({
         Session.set("LearnerCountOverride", false);
         calculateButtonCount();
     },    
-    'click #memberlist-go': function () {
-        Router.go("/votingview");
+    'click #startPolling': function (event) {
+        Meteor.call('Sessions.startTimer', {
+            privateKey: localData.getPrivateKey(),
+            hashtag: Session.get("hashtag")
+        }, (err, res) => {
+            if (err) {
+                alert(err);
+            } else {
+                //Router.go("/onpolling");
+            }
+        });
     }
-
 });
 
 Template.memberlist.onRendered(function () {
     $(window).resize(function () {
-
         var final_height = $(window).height() - $(".navbar").height();
         $(".titel").css("margin-top", $(".navbar").height());
         $(".container").css("height", final_height);
-
-
     });
 });
 

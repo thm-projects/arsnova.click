@@ -1,16 +1,15 @@
+var countdown = null;
 Template.votingview.onCreated(function () {
     this.autorun(() => {
         this.subscribe('AnswerOptions.public', Session.get("hashtag"));
-        this.subscribe('Sessions.question', Session.get("hashtag"));
+        this.subscribe('Sessions.question', Session.get("hashtag"), function () {
+            countdown = new ReactiveCountdown(Sessions.findOne().timer);
+            Session.set("countdownInitialized", true);
+            countdown.start(function () {
+                //Router.go("/results");
+            });
+        });
     });
-});
-
-var countdown = new ReactiveCountdown(30);
-
-countdown.start(function () {
-
-    // do something when this is completed
-
 });
 
 Template.votingview.helpers({
@@ -24,7 +23,9 @@ Template.votingview.helpers({
         return String.fromCharCode((number.hash.number + 65));
     },
     getCountdown: function () {
-        return countdown.get() + "seconds left!";
+        if (Session.get("countdownInitialized")) {
+            return countdown.get() + "seconds left!";
+        }
     }
 
 });

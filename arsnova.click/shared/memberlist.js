@@ -31,7 +31,6 @@ Meteor.methods({
                 hashtag,
                 nick
             });
-
         member = MemberList.findOne({
             hashtag: hashtag,
             nick: nick

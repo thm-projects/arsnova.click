@@ -1,6 +1,3 @@
-/**
- * Created by Kevin on 07.03.16.
- */
 localData = {
     getAllHashtags: function () {
         const hashtagString = localStorage.getItem("hashtags");

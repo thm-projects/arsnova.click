@@ -63,7 +63,7 @@ Router.route('/onpolling', function () {
 });
 
 Router.route('/results', function () {
-    this.render('votingview');
+    this.render('live_results');
 });
 
 Router.route('/statistics', function () {

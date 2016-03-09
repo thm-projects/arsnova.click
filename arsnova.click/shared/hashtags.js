@@ -16,7 +16,7 @@ Meteor.methods({
         } else {
             return false;
         }
-    }, // TODO call and set inactive!
+    },
     'Hashtags.setIsActive': function (privateKey, hashtag, isActive) {
         new SimpleSchema({
             hashtag: {type: String},

@@ -10,6 +10,7 @@ Template.modalShowMyHashtags.events({
         localData.reenterSession(hashtag);
         Session.set("isOwner", true);
         Session.set("hashtag", hashtag);
+        Meteor.call("Hashtags.setIsActive", localData.getPrivateKey(), hashtag, 1);
 
         closeAndRedirectTo('/question');
     }

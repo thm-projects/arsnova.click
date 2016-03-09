@@ -32,7 +32,7 @@ Template.votingview.helpers({
 
 Template.votingview.events({
     "click #js-btn-showQuestionModal": function () {
-        showSplashscreen();
+        $('.test321').parents('.modal').modal();
     },
     "click #forwardButton": function () {
         Session.set("showForwardButton", undefined);
@@ -49,15 +49,23 @@ Template.votingview.events({
                 alert(err);
             } else {
                 if (res.instantRouting) {
-                    // show feedback splashscreen
-                    Router.go("/results");
+                // singlechoice
+            $('.test123').parents('.modal').modal();
+
+
+            Router.go("/results");
                 }
                 else {
                     Session.set("hasGivenResponse", true);
+            // nmc / abstimmung
+            // submit-button einblenden
                 }
             }
+
         });
+
     }
+    // submit button onclick -> feedback splashscreen + redirect
 });
 
 Template.questionContentSplash.helpers({
@@ -73,3 +81,6 @@ Template.questionContentSplash.events({
     }
 });
 
+Template.correctSplash.helpers({
+    correctAnswer:
+});

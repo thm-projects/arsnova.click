@@ -38,9 +38,13 @@
     </div>
 
     {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Frage:" templateName="questionContentSplash" type="splash-screen-show-question"}}
+    {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Frage:" templateName="correctSplash" type="splash-screen-show-question"}}
+
+
 </template>
 
 <template name="questionContentSplash">
+    <div class="test321">
     {{#each questionContent}}
         <div>{{questionText}}</div>
     {{/each}}
@@ -48,6 +52,18 @@
         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
         Fenster schließen
     </button>
+    </div>
 </template>
 
 
+<template name="correctSplash">
+<div class="testCorrect">
+    {{isAnswerCorrect}}
+</div>
+</template>
+
+<template name="submitSplash">
+    <div class="testSubmit">
+        <button class="button button-default" id="submitSplash">Submit</button>
+    </div>
+</template>

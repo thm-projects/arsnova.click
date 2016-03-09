@@ -49,34 +49,59 @@ Meteor.methods({
             var session = Sessions.findOne({hashtag: hashtag});
             if (!session) {
                 throw new Meteor.Error('Sessions.updateIsReadConfirmationRequired: no access to session');
+                return;
             } else {
                 Sessions.update(session._id, {$set: {isReadingConfirmationRequired: isReadingConfirmationRequired}}, function (error) {
                     if (error) {
                         throw new Meteor.Error('Sessions.updateIsReadConfirmationRequired', error);
+                        return;
                     }
                 });
             }
         }
     },
-
-    "Sessions.setTimer": function({privateKey, hashtag, timer}){
+    "Sessions.setTimer": function ({privateKey, hashtag, timer}) {
         new SimpleSchema({
             timer: {
                 type: Number,
                 min: 0
             }
         }).validate({timer: timer});
-
-        const hashItem = Hashtags.findOne({hashtag:hashtag, privateKey:privateKey});
-
-        if(hashItem) {
-            const session = Sessions.findOne({hashtag:hashtag});
-            if(!session) {
+        const hashItem = Hashtags.findOne({
+            hashtag: hashtag,
+            privateKey: privateKey
+        });
+        if (hashItem) {
+            const session = Sessions.findOne({hashtag: hashtag});
+            if (!session) {
                 throw new Meteor.Error('Sessions.setTimer: no access to session');
+                return;
             } else {
-                Sessions.update(session._id, {$set: {timer: timer}}, function(error) {
+                Sessions.update(session._id, {$set: {timer: timer}}, function (error) {
                     if (error) {
                         throw new Meteor.Error('Sessions.updateIsReadConfirmationRequired', error);
+                        return;
+                    }
+                });
+            }
+        }
+    },
+    "Sessions.startTimer": function ({privateKey, hashtag}) {
+        if (Meteor.isServer) {
+            var startTime = new Date();
+            var hashtagDoc = Hashtags.findOne({hashtag: hashtag, privateKey: privateKey});
+            if (!hashtagDoc) {
+                new Meteor.Error('Sessions.startTimer', 'There is no hashtag with this key');
+                return;
+            }
+            var sessionDoc = Sessions.findOne({hashtag: hashtag});
+            if (sessionDoc) {
+                Sessions.update(sessionDoc._id, {
+                    $set: {startTime: startTime.getTime()}
+                }, function (error) {
+                    if (error){
+                        throw new Meteor.Error('Sessions.updateIsReadConfirmationRequired', error);
+                        return;
                     }
                 });
             }

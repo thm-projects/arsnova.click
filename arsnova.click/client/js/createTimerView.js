@@ -17,18 +17,6 @@ Template.createTimerView.rendered = function () {
 };
 
 Template.createTimerView.helpers({
-  /*  timer:function(){
-        //For testing purposes
-        //Session.set("hashtag","wpw");
-        //window.localStorage.setItem("privateKey", "thisismypriv");
-
-        const currentSession = Sessions.findOne({hashtag:Session.get("hashtag")});
-
-        if(!currentSession || !currentSession.timer) {
-            return "";
-        }
-        return currentSession.timer;
-    },*/
     slider: function () {
         return Session.get("slider");
     }
@@ -62,10 +50,9 @@ Template.createTimerView.events({
                     alert(err);
                 } else {
                     localData.addTimer(Session.get("hashtag"), timer);
-            Router.go("/answeroptions");
+                    Router.go("/answeroptions");
+                }
+            });
         }
-        });
-        }
-
     }
 });

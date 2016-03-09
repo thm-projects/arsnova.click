@@ -1,7 +1,7 @@
 
 .footer {
     min-height: 20px;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     border: 0px;
 }
 
@@ -11,4 +11,8 @@
 
 .footer a:first-child div {
     border: none;
+}
+
+.footer .container-fluid {
+    padding: 0;
 }

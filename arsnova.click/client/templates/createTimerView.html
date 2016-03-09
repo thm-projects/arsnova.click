@@ -10,14 +10,7 @@
                     <input class="input-field round-corners slider-timer-input" disabled value="{{slider}} Sekunden"/>
                 </div>
             </div>
-            <div class="row distance-top">
-                <div class="col-xs-6">
-                    <button class="button button-back" id="backButton">Zurück</button>
-                </div>
-                <div class="col-xs-6">
-                    <button class="button button-next" id="forwardButton">Weiter</button>
-                </div>
-            </div>
         </div>
     </div>
+    {{> footer_nav_buttons backId = 'backButton' forwardId = 'forwardButton' }}
 </template>

@@ -19,5 +19,9 @@ Sessions.attachSchema(new SimpleSchema({
 		type: Number,
 		min: 0,
 		max: 1
+	},
+	startTime: {
+		type: String,
+		optional: true
 	}
 }));

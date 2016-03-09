@@ -5,14 +5,16 @@ Template.nick.onCreated(function () {
 });
 
 Template.nick.onRendered(function () {
-   $("#forwardButton").attr("disabled", "disabled");
+    $("#forwardButton").attr("disabled", "disabled");
 });
 
 Template.nick.events({
     "click #forwardButton": function () {
         var nickname = $("#nickname-input-field").val();
-        Meteor.call('MemberList.addLearner', {hashtag: Session.get("hashtag"), nick: nickname},
-        (err, res) => {
+        Meteor.call('MemberList.addLearner', {
+            hashtag: Session.get("hashtag"),
+            nick: nickname
+        }, (err, res) => {
             if (err) {
                 alert(err);
             } else {
@@ -29,8 +31,7 @@ Template.nick.events({
         var currentNickName = event.currentTarget.value;
         if (currentNickName.length > 2) {
             $("#forwardButton").removeAttr("disabled");
-        }
-        else {
+        } else {
             $("#forwardButton").attr("disabled", "disabled");
         }
         var member = MemberList.findOne({nick: currentNickName});

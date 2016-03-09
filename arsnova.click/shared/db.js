@@ -1,3 +1,1 @@
-Meteor.methods({
-
-});
+Meteor.methods({});

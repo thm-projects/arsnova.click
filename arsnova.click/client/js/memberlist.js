@@ -67,6 +67,9 @@ Template.memberlist.events({
                 //Router.go("/onpolling");
             }
         });
+    },
+    'click #backButton':function(event){
+        Router.go("/readconfirmationrequired");
     }
 });
 

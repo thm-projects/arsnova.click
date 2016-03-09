@@ -23,11 +23,21 @@
         </div>
     </div>
     {{#if isOwner}}
-    <div class="row distance-top">
-        <div class="col-md-6 col-md-offset-3">
-            <button id="startPolling" class="button button-next">Start !</button>
+        <div class="fixed-bottom">
+            <div class="row">
+                <div class="col-xs-6">
+                    <button id="backButton" class="button button-back">
+                        <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
+                        Zurück
+                    </button>
+                </div>
+                <div class="col-xs-6">
+                    <button id="startPolling" class="button button-next button-start">
+                        <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
     {{/if}}
     {{#if isReadingConfirmationRequired}}
         <div class="row confirmationCounter">

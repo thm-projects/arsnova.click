@@ -36,7 +36,7 @@ Template.createAnswerOptions.events({
       };
       
       Meteor.call('AnswerOptions.addOption', answerOption);
-      addAnswersToLocalStorage(hashtag, answerOption);
+      addAnswersToLocalStorage(answerOption);
 
       if (AnswerOptions.find().count() > 1) {
          $("#deleteAnswerOption").show();
@@ -77,8 +77,21 @@ Template.createAnswerOptions.events({
                Router.go("/readconfirmationrequired");
             }
          });
-
-
       }
-   }
+   },
+    "keydown .input-field": function(event){
+         //Prevent tab default
+         if(event.keyCode==9){
+            event.preventDefault();
+         }
+
+         if(event.keyCode == 9 || event.keyCode == 13) {
+            var nextElement = $(event.currentTarget).closest(".form-group").next();
+            if (nextElement.length > 0) {
+               nextElement.find(".input-field").focus();
+            } else {
+               $("#addAnswerOption").click();
+            }
+         }
+      }
 });

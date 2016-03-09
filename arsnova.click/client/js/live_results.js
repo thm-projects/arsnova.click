@@ -3,6 +3,7 @@ Template.live_results.onCreated(function () {
         this.subscription = Meteor.subscribe('Responses.instructor', Session.get("hashtag"));
         this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"));
         this.subscription = Meteor.subscribe('MemberList.members', Session.get("hashtag"));
+        this.subscription = Meteor.subscribe('Sessions.question', Session.get("hashtag"));
     });
 });
 
@@ -38,11 +39,7 @@ Template.live_results.helpers({
     }
 });
 
-Template.questionContentSplash.helpers({
-    questionContent: function () {
-        mySessions = Sessions.find();
-        return mySessions;
-    },
+Template.answerContentSplash.helpers({
     answerContent: function () {
         answerOptions = AnswerOptions.find({hashtag: Session.get("hashtag")});
         return answerOptions;
@@ -57,12 +54,6 @@ Template.live_results.events({
         showSplashscreen();
     }
 
-});
-
-Template.questionContentSplash.events({
-    "click #js-btn-hideQuestionModal": function () {
-        closeSplashscreen();
-    }
 });
 
 Template.answerContentSplash.events({

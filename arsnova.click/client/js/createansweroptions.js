@@ -91,6 +91,8 @@ Template.createAnswerOptions.events({
                nextElement.find(".input-field").focus();
             } else {
                $("#addAnswerOption").click();
+               //sets focus to the new input field
+               $(event.currentTarget).closest(".form-group").next().find(".input-field").focus();
             }
          }
       }

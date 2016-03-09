@@ -60,3 +60,16 @@ Template.questionContentSplash.events({
         closeSplashscreen();
     }
 });
+
+
+Template.result_button.helpers({
+    getCSSClassForIsCorrect: function (isCorrect) {
+        if (isCorrect > 0) {
+            return 'progress-success';
+        } else if (isCorrect < 0) {
+            return 'progress-default';
+        } else {
+            return 'progress-failure';
+        }
+    }
+});

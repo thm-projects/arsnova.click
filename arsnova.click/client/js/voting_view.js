@@ -39,7 +39,7 @@ Template.votingview.events({
     },
     "click #forwardButton": function () {
         Session.set("showForwardButton", undefined);
-        Session.set("countdownInitialized", undefined)
+        Session.set("countdownInitialized", undefined);
         Router.go("/results");
         Session.set("hasGivenResponse", undefined);
         Session.set("countdownInitialized", undefined);
@@ -70,36 +70,13 @@ Template.votingview.events({
     // submit button onclick -> feedback splashscreen + redirect
 });
 
-Template.questionContentSplash.helpers({
+/*Template.questionContentSplash.helpers({
     questionContent: function () {
         mySessions = Sessions.find();
+        console.log(mySessions.fetch());
         return mySessions;
     }
-});
-
-Template.answerOptionsSplash.onCreated(function () {
-    this.autorun(() => {
-        this.subscribe('AnswerOptions.public', Session.get("hashtag"));
-    });
-});
-
-Template.answerOptionsSplash.helpers({
-    answerOptions: function () {
-        return AnswerOptions.find();
-    }
-});
-
-Template.questionContentSplash.onCreated(function () {
-    this.autorun(() => {
-        this.subscribe('Sessions.question', Session.get("hashtag"));
-    });
-});
-
-Template.questionContentSplash.helpers({
-    questionText: function () {
-        return Sessions.findOne().questionText;
-    }
-});
+});*/
 
 Template.correctSplash.helpers({
     correctAnswer: function () {

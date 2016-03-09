@@ -4,19 +4,22 @@ if(Meteor.isServer){
             var hashtagsExample = {
                 hashtag: "wpw",
                 privateKey: "thisismypriv",
-                isActive: 1
+                isActive: 1,
+                lastConnection: (new Date()).getTime()
             };
             // block this hash / pk -> do not use and merge to production server!
             var hashtagsExample2 = {
                 hashtag: "hashtags",
                 privateKey: "äölkjhgfdsaq",
-                isActive: 1
+                isActive: 1,
+                lastConnection: (new Date()).getTime()
             };
             // block this hash / pk -> do not use and merge to production server!
             var hashtagsExample3 = {
                 hashtag: "privateKey",
                 privateKey: "poiuztrewqas",
-                isActive: 1
+                isActive: 1,
+                lastConnection: (new Date()).getTime()
             };
             var memberListExample1 = {
                 hashtag: "wpw",

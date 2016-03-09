@@ -2,9 +2,52 @@
     margin: 10px 0;
 }
 */
+
+.slide-left {
+    transform: translateY(0%);
+    -webkit-transform: translateY(0%);
+    animation: slide-in 0.5s forwards;
+    -webkit-animation: slide-in 0.5s forwards;
+}
+
+.slide-top {
+    transform: translateX(0%);
+    -webkit-transform: translateX(0%);
+    animation: slide-top 1s forwards;
+    -webkit-animation: slide-top 1s forwards;
+}
+
+@keyframes slide-left {
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@-webkit-keyframes slide-left {
+    100% {
+        -webkit-transform: translateX(0%);
+    }
+}
+
+@keyframes slide-top {
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@-webkit-keyframes slide-top {
+    100% {
+        -webkit-transform: translateY(0%);
+    }
+}
+
 .btn-learner {
     margin-bottom: 20px;
     width: 100%;
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
 }
 
 .learner-list {

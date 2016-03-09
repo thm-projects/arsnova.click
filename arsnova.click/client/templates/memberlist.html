@@ -11,16 +11,15 @@
             </div>
             <div class="row learner-list margin-title"
                  id="learner-list">
-                <!-- TODO: delete test loop before push-->
                 {{#each learners}}
-                    <div class="col-xs-4">
-                        <button class="btn btn-grey btn-learner">
-                            {{>learner}}
-                        </button>
-                    </div>
+                    {{>learner}}
                 {{/each}} <!-- learners -->
             </div>
-            <!--  TODO: Meteor Pagination verwenden -->
+            {{#if showMoreButton}}
+                <button class="btn btn-grey btn-more-learners">
+                    (Zeige {{invisibleLearnerCount}} weitere)
+                </button>
+            {{/if}}
         </div>
     </div>
     {{#if isOwner}}
@@ -50,9 +49,11 @@
 </template>
 
 <template name="learner">
-    <div>
-        <!-- TODO! css-stylings-->
-        {{nick}}
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <button class="btn btn-learner slide-top"
+                style="background-color: {{backgroundColor}}; color:{{foregroundColor}}">
+            {{nick}}
+        </button>
     </div>
 </template>
 

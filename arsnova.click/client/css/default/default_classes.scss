@@ -49,11 +49,12 @@
   padding-right: 10px;
 }
 
-.input-group-letter {
+.input-group-letter, .button-result-letter {
   font-size: 2em;
   font-weight: 800;
   color: $input-group-letter-color;
   min-width: 50px;
+  margin-left: 5px;
 }
 
 .button:hover, .button:active:focus {
@@ -82,6 +83,39 @@
 
 .distance-top {
   margin-top: 20px;
+}
+
+.button-result {
+  background-color: #eeeeee;
+  box-shadow: none;
+  height: auto;
+}
+
+.button-result .percentage {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 2px;
+  left: 0;
+  color: black;
+  font-weight: bolder;
+}
+
+.button-result .progress {
+  margin: 10px 10px 0 0;
+  position: relative;
+}
+
+.progress-success {
+  background-color: $progress-bar-success-color;
+}
+
+.progress-failure {
+  background-color: $progress-bar-failure-color;
+}
+
+.progress-default {
+  background-color: $progress-bar-default-color;
 }
 
 /*

@@ -24,12 +24,8 @@
             </div>
         </div>
     </div>
-
-
     {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Frage:" templateName="questionContentSplash" type="splash-screen-show-question"}}
-    {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Antworten:" templateName="answerContentSplash" type="splash-screen-show-question"}}
-
-
+    {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Antworten:" templateName="answerOptionsSplash" type="splash-screen-show-question"}}
 </template>
 
 <template name="result_button">
@@ -52,17 +48,5 @@
                 </div>
             </div>
         </div>
-    </div>
-</template>
-
-<template name="answerContentSplash">
-    <div class="answerContentSplashWrapper">
-    {{#each answerContent}}
-        <div>{{answerText}}</div><br />
-    {{/each}}
-    <button id="js-btn-hideAnswerModal" type="button" class="btn btn-success btn-answerOption btn-lg">
-        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-        Fenster schließen
-    </button>
     </div>
 </template>

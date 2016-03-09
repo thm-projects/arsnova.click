@@ -32,12 +32,17 @@ Template.votingview.helpers({
 
 Template.votingview.events({
     "click #js-btn-showQuestionModal": function () {
-        showSplashscreen();
+        $('.questionContentSplash').parents('.modal').modal();
+    },
+    "click #js-showAnswerTexts": function () {
+        $('.answerTextSplash').parents('.modal').modal();
     },
     "click #forwardButton": function () {
         Session.set("showForwardButton", undefined);
-        Session.set("countdownInitialized", undefined)
+        Session.set("countdownInitialized", undefined);
         Router.go("/results");
+        Session.set("hasGivenResponse", undefined);
+        Session.set("countdownInitialized", undefined);
     },
     "click .sendResponse": function (event) {
         Meteor.call('Responses.addResponse', {
@@ -49,28 +54,32 @@ Template.votingview.events({
                 alert(err);
             } else {
                 if (res.instantRouting) {
-                    // show feedback splashscreen
+                    // singlechoice
                     Router.go("/results");
                 }
                 else {
                     Session.set("hasGivenResponse", true);
+                    Session.set("hasGivenResponse", undefined);
+                    Session.set("countdownInitialized", undefined);
                 }
             }
+
         });
+
     }
+    // submit button onclick -> feedback splashscreen + redirect
 });
 
-Template.questionContentSplash.helpers({
+/*Template.questionContentSplash.helpers({
     questionContent: function () {
         mySessions = Sessions.find();
         console.log(mySessions.fetch());
         return mySessions;
     }
-});
+});*/
 
-Template.questionContentSplash.events({
-    "click #js-btn-hideQuestionModal": function () {
-        closeSplashscreen();
+Template.correctSplash.helpers({
+    correctAnswer: function () {
+        return "mesodunno";
     }
 });
-

@@ -30,34 +30,22 @@ Template.live_results.helpers({
                     result.push({name: String.fromCharCode(value.answerOptionNumber + 65), absolute: amount, percent: memberAmount ? ( Math.floor((amount * 100) / memberAmount)) : 0, isCorrect: value.isCorrect});
                 });
                 //TODO allAnswersCorrect/Wrong
-
             }
         }
         return result;
     }
 });
 
-Template.answerContentSplash.helpers({
-    answerContent: function () {
-        answerOptions = AnswerOptions.find({hashtag: Session.get("hashtag")});
-        return answerOptions;
-    }
-});
+
 
 Template.live_results.events({
     "click #js-btn-showQuestionModal": function () {
-        $('.questionContentSplashWrapper').parents('.modal').modal();
+        $('.questionContentSplash').parents('.modal').modal();
     },
     "click #js-btn-showAnswerModal": function () {
-        $('.answerContentSplashWrapper').parents('.modal').modal();
+        $('.answerTextSplash').parents('.modal').modal();
     }
 
-});
-
-Template.answerContentSplash.events({
-    "click #js-btn-hideAnswerModal": function () {
-        closeSplashscreen();
-    }
 });
 
 

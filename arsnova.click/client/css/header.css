@@ -40,15 +40,19 @@ p.header-layout {
 }
 
 .arsnova-logo {
-    width: 7vw;
-    height: 6vw;
+    margin-left: 15px;
+}
+
+.arsnova-logo img {
+    height: 8vw;
 }
 
 .kill-session-switch {
     color: white;
-    font-size: 0.7em;
+    font-size: 5vw;
     cursor: pointer;
-    margin-top: 30px;
+    margin-top: 15px;
+    right: 15px;
 }
 
 .kill-session-switch:hover {

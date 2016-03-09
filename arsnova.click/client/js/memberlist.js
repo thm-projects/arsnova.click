@@ -10,19 +10,18 @@ Template.memberlist.onCreated(function () {
     $(window).resize(function () {
         calculateButtonCount();
     });
-});
 
-
-Tracker.autorun(function() {
-    var initializing = true;
-    Sessions.find().observeChanges({
-        changed: function (id, startTime) {
-            if (!initializing) {
-                Router.go("onpolling");
+    Tracker.autorun(function() {
+        var initializing = true;
+        Sessions.find().observeChanges({
+            changed: function (id, doc) {
+                if (!initializing) {
+                    Router.go("onpolling");
+                }
             }
-        }
+        });
+        initializing = false;
     });
-    initializing = false;
 });
 
 Template.memberlist.rendered = function () {

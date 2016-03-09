@@ -53,7 +53,7 @@ a:focus {
 p, ul.list-unstyled {
     margin-left: 30px;
     margin-right: 30px;
-    text-align: justify;
+    /*text-align: justify;*/
 }
 
 .header-layout {

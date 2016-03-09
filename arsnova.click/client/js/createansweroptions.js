@@ -78,8 +78,23 @@ Template.createAnswerOptions.events({
                Router.go("/settimer");
             }
          });
-
-
       }
-   }
+   },
+    "keydown .input-field": function(event){
+         //Prevent tab default
+         if(event.keyCode==9){
+            event.preventDefault();
+         }
+
+         if(event.keyCode == 9 || event.keyCode == 13) {
+            var nextElement = $(event.currentTarget).closest(".form-group").next();
+            if (nextElement.length > 0) {
+               nextElement.find(".input-field").focus();
+            } else {
+               $("#addAnswerOption").click();
+               //sets focus to the new input field
+               $(event.currentTarget).closest(".form-group").next().find(".input-field").focus();
+            }
+         }
+      }
 });

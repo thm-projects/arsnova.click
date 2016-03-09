@@ -1,41 +1,42 @@
-$success: green;
-$success-text-color: white;
+$success: #008000; /* green */
+$success-text-color: #ffffff; /* white */
 
-$warning: firebrick;
-$warning-text-color: white;
+$warning: #b22222; /* firebrick */
+$warning-text-color: #ffffff; /* white */
 
-$info: rebeccapurple;
-$info-text-color: white;
+$info: #663399; /* rebeccapurple */
+$info-text-color: #ffffff; /* white */
 
-$default: grey;
-$default-text-color: white;
+$default: #808080; /* grey */
+$default-text-color: #ffffff; /* white */
 
-$background-color: steelblue;
-$disabled-button-background: grey;
+$background-color: #4682b4; /* steelblue */
+$disabled-button-background: #808080; /* grey */
 
-$placeholder-color: darkslategrey;
-$input-background-color: gold;
-$input-group-letter-color: darkslategrey;
+$placeholder-color: #2f4f4f; /* darkslategrey */
 
-$footer-background-color: gainsboro;
-$footer-text-color: black;
+$input-background-color: #ffd700; /* gold */
+$input-group-letter-color: #2f4f4f; /* darkslategrey */
 
-$splash-screen-header-color: DarkSlateGray;
-$splash-screen-body-color: DarkSlateGray;
+$footer-background-color: #dcdcdc; /* gainsboro */
+$footer-text-color: #000000; /* black */
 
-$slider-color: orangered;
+$splash-screen-header-color: #2f4f4f; /* darkslategrey */
+$splash-screen-body-color: #2f4f4f; /* darkslategrey */
+
+$slider-color: #ff4500; /* orangered */
 
 $progress-bar-success-color: green;
 $progress-bar-failure-color: firebrick;
 $progress-bar-default-color: grey;
 
 /* todo: we have to define the background-colors */
-$splash-screen-show-session-background-color: PaleGreen;
-$splash-screen-request-read-confirm-background-color: PaleGreen;
-$splash-screen-countdown-background-color: PaleGreen;
-$splash-view-seconds-left-background-color: PaleGreen;
-$splash-show-question-background-color: PaleGreen;
-$splash-screen-read-confirmation-background-color: DarkSlateGray;
+$splash-screen-show-session-background-color: #98fb98; /* palegreen */
+$splash-screen-request-read-confirm-background-color: #98fb98; /* palegreen */
+$splash-screen-countdown-background-color: #98fb98; /* palegreen */
+$splash-view-seconds-left-background-color: #98fb98; /* palegreen */
+$splash-show-question-background-color: #98fb98; /* palegreen */
+$splash-screen-read-confirmation-background-color: #2f4f4f; /* darkslategrey */
 
 $check-mark-checked: #00882a;
 $check-mark-unchecked: #aaaaaa;

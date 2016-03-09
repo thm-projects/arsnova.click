@@ -10,17 +10,15 @@ Template.live_results.onCreated(function () {
 Template.live_results.helpers({
     result: function () {
         var result = [];
-        var memberAmount = Responses.find({hashtag: Session.get("hashtag")}).fetch();
-        memberAmount = _.uniq(memberAmount, false, function(user) {return user.userNick}).length;
-
-        var correctAnswerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
-        if(!correctAnswerOptions){ //survey
+        var memberAmount = Responses.find({hashtag: Session.get("hashtag")}).count();
+        var answerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
+        if(false && answerOptions){ //survey
             AnswerOptions.find({hashtag: Session.get("hashtag")}).forEach(function(value){
                 var amount = Responses.find({hashtag: Session.get("hashtag"), answerOptionNumber: value.answerOptionNumber}).count();
                 result.push({name: String.fromCharCode(value.answerOptionNumber + 65), absolute: amount, percent: memberAmount ? ( Math.floor((amount * 100) / memberAmount)) : 0, isCorrect: -1});
             });
         } else { //MC / SC
-            if(correctAnswerOptions === 1){ //SC
+            if(answerOptions === 1){ //SC
                 AnswerOptions.find({hashtag: Session.get("hashtag")}).forEach(function(value){
                     var amount = Responses.find({hashtag: Session.get("hashtag"), answerOptionNumber: value.answerOptionNumber}).count();
                     result.push({name: String.fromCharCode(value.answerOptionNumber + 65), absolute: amount, percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0, isCorrect: value.isCorrect});
@@ -74,4 +72,3 @@ Template.result_button.helpers({
         }
     }
 });
-

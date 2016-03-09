@@ -92,7 +92,10 @@ input::-moz-placeholder {
 input:-ms-input-placeholder {
   color: $placeholder-color;
 }
-
+/*Safari on iOS border-radius problems */
+input{
+  border-radius: 0;
+}
 /*
  * defines a big X over the whole Button
  */

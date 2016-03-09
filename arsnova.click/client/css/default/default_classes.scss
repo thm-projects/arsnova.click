@@ -20,6 +20,12 @@
 .slider.noUi-target {
   border: 0;
   box-shadow: none;
+  margin-top: 35px;
+}
+
+.slider-timer-input {
+  margin-top: 20px;
+  text-align: center;
 }
 
 .button-shadow, .button {
@@ -180,12 +186,12 @@
 
 .check-mark-checked {
   color: $check-mark-checked;
-  font-size: 1.3em;
   width: 30px;
 }
 
 .check-mark-unchecked {
   color: $check-mark-unchecked;
+  font-size: 0.8em;
   width: 30px;
 }
 
@@ -194,7 +200,9 @@
   width: 50px !important;
   height: 50px !important;
   background-color: $check-mark-unchecked;
-
+  font-weight: 900;
+  font-size: 40px;
+  padding: 0;
 }
 
 .color-changing-ars, .color-changing-nova, .color-changing-click {

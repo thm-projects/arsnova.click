@@ -15,7 +15,7 @@ Template.votingview.onCreated(function () {
 
 Template.votingview.helpers({
     answerOptions: function () {
-        return AnswerOptions.find();
+        return AnswerOptions.find({}, {sort:{answerOptionNumber: 1}});
     },
     showForwardButton: function () {
         return Session.get("hasGivenResponse");

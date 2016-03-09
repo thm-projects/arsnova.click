@@ -1,13 +1,12 @@
 <template name="readconfirmationrequired">
     <div class="row center-vertical">
         <div class="col-md-12">
-
             <div class="row">
                 <div class="col-md-12">
                     {{#if isReadConfirmationRequired}}
-                            <button id="isReadConfirmationRequiredButton" class="button down button-purple">Lesebestätigung ?</button>
+                            <button id="isReadConfirmationRequiredButton" class="button down button-warning">Lesebestätigung ist aktiv!</button>
                     {{else}}
-                        <button id="isReadConfirmationRequiredButton" class="button button-warning">Lesebestätigung ?
+                        <button id="isReadConfirmationRequiredButton" class="button button-warning">Lesebestätigung ist inaktiv!
                         </button>
                     {{/if}}
                 </div>

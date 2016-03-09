@@ -14,9 +14,11 @@ Template.memberlist.onCreated(function () {
     Tracker.autorun(function() {
         var initializing = true;
         Sessions.find().observeChanges({
-            changed: function (id, doc) {
+            changed: function (oldDoc, newDoc) {
                 if (!initializing) {
-                    Router.go("onpolling");
+                    if (!oldDoc.startTime || (oldDoc.startTime != newDoc.startTime)) {
+                        Router.go("onpolling");
+                    }
                 }
             }
         });

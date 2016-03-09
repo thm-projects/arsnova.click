@@ -39,12 +39,13 @@
 
     {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Frage:" templateName="questionContentSplash" type="splash-screen-show-question"}}
     {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Frage:" templateName="correctSplash" type="splash-screen-show-question"}}
+    {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Frage:" templateName="submitSplash" type="splash-screen-show-question"}}
 
 
 </template>
 
 <template name="questionContentSplash">
-    <div class="test321">
+    <div class="questionContentSplash">
     {{#each questionContent}}
         <div>{{questionText}}</div>
     {{/each}}
@@ -57,13 +58,13 @@
 
 
 <template name="correctSplash">
-<div class="testCorrect">
-    {{isAnswerCorrect}}
+<div class="correctSplash">
+    Deine Antwort ist: {{isAnswerCorrect}}
 </div>
 </template>
 
 <template name="submitSplash">
-    <div class="testSubmit">
+    <div class="submitSplash">
         <button class="button button-default" id="submitSplash">Submit</button>
     </div>
 </template>

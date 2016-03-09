@@ -49,16 +49,12 @@ Template.votingview.events({
                 alert(err);
             } else {
                 if (res.instantRouting) {
-                // singlechoice
-            $('.test123').parents('.modal').modal();
-
-
-            Router.go("/results");
+                    // singlechoice
+                    $('.correctSplash').parents('.modal').modal();
+                    Router.go("/results");
                 }
                 else {
                     Session.set("hasGivenResponse", true);
-            // nmc / abstimmung
-            // submit-button einblenden
                 }
             }
 

@@ -14,6 +14,8 @@ Template.createQuestionView.onRendered(function () {
         else {
             $("#forwardButton").attr("disabled", "disabled");
         }
+    } else {
+        $("#forwardButton").attr("disabled", "disabled");
     }
 });
 

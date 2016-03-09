@@ -1,12 +1,13 @@
 Template.memberlist.onCreated(function () {
     this.autorun(() => {
-        this.subscribe('MemberList.members', Session.get("hashtag"), function () {
-        Session.set("memberListInitialized", MemberList.find({hashtag: Session.get("hashtag")}, {
-            fields: {
-                _id: 1
-            }
-        }));
-    });
+        this.subscribe('MemberList.members', Session.get("hashtag"));
+    /*, function () {
+     Session.set("memberListInitialized", MemberList.find({hashtag: Session.get("hashtag")}, {
+     fields: {
+     _id: 1
+     }
+     })
+     });*/
         if(Session.get("isOwner")) {
             this.subscribe('MemberList.percentRead', {
                 hashtag: Session.get("hashtag"),

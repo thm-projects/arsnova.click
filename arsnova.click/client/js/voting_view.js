@@ -6,7 +6,7 @@ Template.votingview.onCreated(function () {
             countdown = new ReactiveCountdown(Sessions.findOne().timer / 1000);
             countdown.start(function () {
                 // show feedback splashscreen?
-                Router.go("/results");
+                $('.js-splashscreen-end-of-polling').modal('show');
             });
             Session.set("countdownInitialized", true);
         });
@@ -40,8 +40,8 @@ Template.votingview.events({
     "click #forwardButton": function () {
         Session.set("showForwardButton", undefined);
         Session.set("countdownInitialized", undefined);
-        Router.go("/results");
         Session.set("hasGivenResponse", undefined);
+        $('.js-splashscreen-end-of-polling').modal('show');
     },
     "click .sendResponse": function (event) {
         $(event.target).attr("disabled", "disabled");
@@ -56,7 +56,7 @@ Template.votingview.events({
                 if (!res) {
                     if (res.instantRouting) {
                         // singlechoice
-                        Router.go("/results");
+                        $('.js-splashscreen-end-of-polling').modal('show');
                     } else {
                         Session.set("hasGivenResponse", true);
                         Session.set("hasGivenResponse", undefined);
@@ -69,10 +69,4 @@ Template.votingview.events({
 
     }
     // submit button onclick -> feedback splashscreen + redirect
-});
-
-Template.correctSplash.helpers({
-    correctAnswer: function () {
-        return "mesodunno";
-    }
 });

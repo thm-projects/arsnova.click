@@ -1,16 +1,39 @@
 <template name="header">
-    <nav class="navbar navbar-fixed-top navbar-transparent">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <div class="container-fluid center-block">
-                    <div class="text-center text-size-medium header-layout">
-                        <a href="/">
-                            <span style="color:white">a r s <span class="default-yellow-text-color">n o v a </span><span
-                                    style="font-weight: bolder;" class="color-changing">. c l i c k</span></span>
-                        </a>
+    <nav class="navbar navbar-fixed-top navbar-transparent navbar-gradient">
+        <div class="container-fluid">
+            <div class="row">
+                {{#if isInHomePathOrIsStudent}}
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="container-fluid center-block">
+                            <div class="text-center text-size-medium header-layout">
+                                <a href="/">
+                                    <span class="color-changing-ars">a r s </span><span
+                                        class="color-changing-nova">n o v a </span><span class="color-changing-click">. c l i c k</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
+
+                {{else}}
+
+                    <div class="col-md-12 header-layout ">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <a href="/" class="arsnova-logo">
+                                    <img src="images/arsnova_click.svg" alt="arsnova_click_logo"/>
+                                </a>
+                            </div>
+                            <div class="col-xs-6">
+                                <p class="text-center text-size-medium header-layout text-light"># {{currentHashtag}}</p>
+                            </div>
+                            <div class="col-xs-3">
+                                <span class="pull-right glyphicon glyphicon-off kill-session-switch"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                {{/if}}
             </div>
-        </div>
+        </div> <!-- row -->
     </nav>
 </template>

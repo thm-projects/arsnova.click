@@ -3,15 +3,14 @@ Router.configure({
 });
 
 Router.map(function () {
-    if (!localStorage.getItem(("privateKey"))) {
-        localStorage.setItem("privateKey", "thisismypriv");
-    }
     if (!Session.get("hashtag")) {
         this.go("/");
     }
 });
 
 Router.route('/', function () {
+    localData.initializePrivateKey();
+    Session.set("isOwner", undefined);
     this.render('home');
 });
 
@@ -28,14 +27,14 @@ Router.route('/question', function () {
 });
 
 Router.route('/answeroptions', function () {
-    //if (Session.get("isOwner")) {
-        this.render('createAnswerOptions');
-    //}
+    this.render('createAnswerOptions');
 });
 
 Router.route('/settimer', function () {
     if (Session.get("isOwner")) {
-
+        this.render('createTimerView');
+    } else {
+        Router.go('/');
     }
 });
 
@@ -51,11 +50,15 @@ Router.route('/memberlist', function () {
     this.render('memberlist');
 });
 
+Router.route('/votingview', function () {
+    this.render('votingview');
+});
+
 Router.route('/onpolling', function () {
     if (Session.get("isOwner")) {
-
+        this.render('live_results');
     } else {
-
+        this.render('votingview');
     }
 });
 
@@ -63,6 +66,7 @@ Router.route('/statistics', function () {
 });
 
 Router.route('/results', function () {
+
 });
 
 

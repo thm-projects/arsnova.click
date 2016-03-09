@@ -1,12 +1,16 @@
-.learner-title {
+/*.learner-title {
     margin: 10px 0;
 }
-
+*/
 .btn-learner {
     margin-bottom: 20px;
     width: 100%;
 }
 
-.confirmationCounter {
-    margin-top: 70px;
+.learner-list {
+    margin-bottom: 15px;
+}
+
+.button-row {
+    margin-top: 20px;
 }

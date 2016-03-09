@@ -23,6 +23,9 @@
             <!--  TODO: Meteor Pagination verwenden -->
         </div>
     </div>
+    {{#if isOwner}}
+    <button id="startPolling">Start!</button>
+    {{/if}}
     {{#if isReadingConfirmationRequired}}
         <div class="row confirmationCounter">
             <div class="col-md-2 col-md-offset-3">
@@ -36,7 +39,7 @@
                     <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
                          aria-valuenow="{{percentRead}}"
                          aria-valuemin="{{percentRead}}" aria-valuemax="100"
-                         style="min-width: 2em; width: {{percentRead}}%;   ">
+                         style="min-width: 2em; width: {{percentRead}}%;">
                         {{percentRead}} %
                     </div>
                 </div>

@@ -57,7 +57,8 @@ Template.hashtag_view.events({
                 var doc = {
                     privateKey: localData.getPrivateKey(),
                     hashtag: hashtag,
-                    isActive: 1
+                    isActive: 1,
+                    lastConnection: (new Date()).getTime()
                 };
                 Meteor.call('Hashtags.addHashtag', doc, (err, res) => {
                     if (err) {

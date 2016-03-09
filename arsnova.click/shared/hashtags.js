@@ -1,49 +1,48 @@
 Meteor.methods({
-    'Hashtags.checkPrivateKey'(privateKey, hashtag) {
+    'Hashtags.checkPrivateKey': function (privateKey, hashtag) {
         new SimpleSchema({
             hashtag: {type: String},
             privateKey: {type: String}
         }).validate({
-            privateKey,
-            hashtag
-        });
+                privateKey,
+                hashtag
+            });
         var doc = Hashtags.findOne({
             hashtag: hashtag,
             privateKey: privateKey
         });
         if (doc) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
-    },
-    // TODO call and set inactive!
-    'Hashtags.setIsActive'(privateKey, hashtag, isActive){
+    }, // TODO call and set inactive!
+    'Hashtags.setIsActive': function (privateKey, hashtag, isActive) {
         new SimpleSchema({
             hashtag: {type: String},
             privateKey: {type: String},
             isActive: {
                 type: Number,
                 min: 0,
-                max: 1}
+                max: 1
+            }
         }).validate({
-            privateKey,
-            hashtag,
-            isActive
-        });
+                privateKey,
+                hashtag,
+                isActive
+            });
         var doc = Hashtags.findOne({
             hashtag: hashtag,
             privateKey: privateKey
         });
-        if (doc){
-            Hashtags.update({_id:doc._id}, {$set: {isActive: isActive}});
-        }else{
+        if (doc) {
+            Hashtags.update({_id: doc._id}, {$set: {isActive: isActive}});
+        } else {
             // TODO error message: user is not owner or inputs are wrong!
             return false;
         }
     },
-    'Hashtags.addHashtag'(doc) {
+    'Hashtags.addHashtag': function (doc) {
         for (var i = 0; i < 4; i++) {
             var emptyAnswerDoc = {
                 privateKey: doc.privateKey,
@@ -56,4 +55,24 @@ Meteor.methods({
         }
         Hashtags.insert(doc);
     },
+    'keepalive': function (privateKey, hashtag) {
+        if (Meteor.isServer){
+            new SimpleSchema({
+                hashtag: {type: String},
+                privateKey: {type: String},
+            }).validate({
+                privateKey,
+                hashtag,
+            });
+
+            var doc = Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
+            });
+
+            if (doc) {
+                Hashtags.update({_id: doc._id}, {$set: {lastConnection: (new Date()).getTime()}});
+            }
+        }
+    }
 });

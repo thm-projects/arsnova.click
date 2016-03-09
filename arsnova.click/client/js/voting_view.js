@@ -3,36 +3,41 @@ Template.votingview.onCreated(function () {
     this.autorun(() => {
         this.subscribe('AnswerOptions.public', Session.get("hashtag"));
         this.subscribe('Sessions.question', Session.get("hashtag"), function () {
-            countdown = new ReactiveCountdown(Sessions.findOne().timer);
-            Session.set("countdownInitialized", true);
+            countdown = new ReactiveCountdown(Sessions.findOne().timer / 1000);
             countdown.start(function () {
-                //Router.go("/results");
+                // show feedback splashscreen?
+                Router.go("/results");
             });
+            Session.set("countdownInitialized", true);
         });
     });
 });
 
 Template.votingview.helpers({
     answerOptions: function () {
-        return AnswerOptions.find();
+        return AnswerOptions.find({}, {sort:{answerOptionNumber: 1}});
     },
     showForwardButton: function () {
-        return Session.get("showForwardButton");
+        return Session.get("hasGivenResponse");
     },
     answerOptionLetter: function (number) {
         return String.fromCharCode((number.hash.number + 65));
     },
     getCountdown: function () {
         if (Session.get("countdownInitialized")) {
-            return countdown.get() + "seconds left!";
+            return countdown.get() + " Sekunden übrig!";
         }
     }
-
 });
 
 Template.votingview.events({
     "click #js-btn-showQuestionModal": function () {
         showSplashscreen();
+    },
+    "click #forwardButton": function () {
+        Session.set("showForwardButton", undefined);
+        Session.set("countdownInitialized", undefined)
+        Router.go("/results");
     },
     "click .sendResponse": function (event) {
         Meteor.call('Responses.addResponse', {
@@ -43,18 +48,12 @@ Template.votingview.events({
             if (err) {
                 alert(err);
             } else {
-                console.log(res);
-                if (!res.isCorrect || (res.questionType == "sc")) {
-                    console.log("hiergehtsnichtweiter");
-                    //TODO Route to responsestatistics
-                    //Router.go("/")
-                } else {
-                    if (Session.get("responseCount") === 1) {
-                        Session.set("responseCount", Session.get("responseCount") + 1);
-                        Session.set("showForwardButton", 1);
-                    } else {
-                        Session.set("responseCount", 1);
-                    }
+                if (res.instantRouting) {
+                    // show feedback splashscreen
+                    Router.go("/results");
+                }
+                else {
+                    Session.set("hasGivenResponse", true);
                 }
             }
         });

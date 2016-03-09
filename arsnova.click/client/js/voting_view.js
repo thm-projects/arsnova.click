@@ -42,9 +42,9 @@ Template.votingview.events({
         Session.set("countdownInitialized", undefined);
         Router.go("/results");
         Session.set("hasGivenResponse", undefined);
-        Session.set("countdownInitialized", undefined);
     },
     "click .sendResponse": function (event) {
+        $(event.target).attr("disabled", "disabled");
         Meteor.call('Responses.addResponse', {
             hashtag: Session.get("hashtag"),
             answerOptionNumber: event.target.id,
@@ -53,14 +53,15 @@ Template.votingview.events({
             if (err) {
                 alert(err);
             } else {
-                if (res.instantRouting) {
-                    // singlechoice
-                    Router.go("/results");
-                }
-                else {
-                    Session.set("hasGivenResponse", true);
-                    Session.set("hasGivenResponse", undefined);
-                    Session.set("countdownInitialized", undefined);
+                if (!res) {
+                    if (res.instantRouting) {
+                        // singlechoice
+                        Router.go("/results");
+                    } else {
+                        Session.set("hasGivenResponse", true);
+                        Session.set("hasGivenResponse", undefined);
+                        Session.set("countdownInitialized", undefined);
+                    }
                 }
             }
 
@@ -69,14 +70,6 @@ Template.votingview.events({
     }
     // submit button onclick -> feedback splashscreen + redirect
 });
-
-/*Template.questionContentSplash.helpers({
-    questionContent: function () {
-        mySessions = Sessions.find();
-        console.log(mySessions.fetch());
-        return mySessions;
-    }
-});*/
 
 Template.correctSplash.helpers({
     correctAnswer: function () {

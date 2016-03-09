@@ -2,6 +2,10 @@ Meteor.methods({
     'Responses.addResponse'(responseDoc) {
         var timestamp = new Date().getTime();
         var hashtag = responseDoc.hashtag;
+        var dupDoc = Responses.find({hashtag: responseDoc.hashtag, answerOptionNumber: responseDoc.answerOptionNumber});
+        if (!dupDoc) {
+            return null;
+        }
         if (Meteor.isServer) {
             var hashtagDoc = Hashtags.findOne({
                 hashtag: hashtag,

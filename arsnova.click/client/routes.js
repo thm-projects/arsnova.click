@@ -3,6 +3,7 @@ Router.configure({
 });
 
 Router.map(function () {
+    Session.set("hashtag", "wpw")
     if (!Session.get("hashtag")) {
         this.go("/");
     }

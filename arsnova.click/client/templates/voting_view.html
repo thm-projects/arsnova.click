@@ -36,23 +36,7 @@
         </div>
         {{/if}}
     </div>
-
     {{> splashscreen lazyClose="true" noAutorun="true" headername="Frage" templateName="questionContentSplash" type="splash-screen-show-question"}}
-    {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Frage:" templateName="correctSplash" type="splash-screen-show-question"}}
-    {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Frage:" templateName="submittedSplash" type="splash-screen-show-question"}}
+    {{> endOfPollingSplashscreen }}
     {{> splashscreen lazyClose="true" noAutorun="true" headername="Antwortoptionen" templateName="answerOptionsSplash" type="splash-screen-show-question"}}
-
-
-</template>
-
-<template name="correctSplash">
-<div class="correctSplash">
-    Deine Antwort ist: {{isAnswerCorrect}}
-</div>
-</template>
-
-<template name="submittedSplash">
-    <div class="submittedSplash">
-        abgestimmt!
-    </div>
 </template>

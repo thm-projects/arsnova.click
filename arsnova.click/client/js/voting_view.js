@@ -6,7 +6,8 @@ Template.votingview.onCreated(function () {
             countdown = new ReactiveCountdown(Sessions.findOne().timer / 1000);
             countdown.start(function () {
                 // show feedback splashscreen?
-                Router.go("/results");
+                $("#end-of-polling-text").html("Abstimmung gelaufen!");
+                $('.js-splashscreen-end-of-polling').modal('show');
             });
             Session.set("countdownInitialized", true);
         });
@@ -40,11 +41,11 @@ Template.votingview.events({
     "click #forwardButton": function () {
         Session.set("showForwardButton", undefined);
         Session.set("countdownInitialized", undefined);
-        Router.go("/results");
         Session.set("hasGivenResponse", undefined);
-        Session.set("countdownInitialized", undefined);
+        $('.js-splashscreen-end-of-polling').modal('show');
     },
     "click .sendResponse": function (event) {
+        $(event.target).attr("disabled", "disabled");
         Meteor.call('Responses.addResponse', {
             hashtag: Session.get("hashtag"),
             answerOptionNumber: event.target.id,
@@ -53,14 +54,15 @@ Template.votingview.events({
             if (err) {
                 alert(err);
             } else {
-                if (res.instantRouting) {
-                    // singlechoice
-                    Router.go("/results");
-                }
-                else {
-                    Session.set("hasGivenResponse", true);
-                    Session.set("hasGivenResponse", undefined);
-                    Session.set("countdownInitialized", undefined);
+                if (res) {
+                    if (res.instantRouting) {
+                        // singlechoice
+                        $('.js-splashscreen-end-of-polling').modal('show');
+                        Session.set("hasGivenResponse", undefined);
+                        Session.set("countdownInitialized", undefined);
+                    } else {
+                        Session.set("hasGivenResponse", true);
+                    }
                 }
             }
 
@@ -68,18 +70,4 @@ Template.votingview.events({
 
     }
     // submit button onclick -> feedback splashscreen + redirect
-});
-
-/*Template.questionContentSplash.helpers({
-    questionContent: function () {
-        mySessions = Sessions.find();
-        console.log(mySessions.fetch());
-        return mySessions;
-    }
-});*/
-
-Template.correctSplash.helpers({
-    correctAnswer: function () {
-        return "mesodunno";
-    }
 });

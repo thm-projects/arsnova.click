@@ -1,6 +1,5 @@
 Template.splashscreen.rendered = function () {
     var splashscreen = $('.js-splashscreen');
-
     if (templateParams.lazyClose) {
         splashscreen.on('click', function () {
             closeSplashscreen();
@@ -11,18 +10,6 @@ Template.splashscreen.rendered = function () {
             keyboard: false
         });
     }
-    /*
-
-    if (templateParams.timerClose) {
-        if (isNaN(templateParams.timerClose)) {
-            templateParams.timerClose = 5000;
-        }
-        setTimeout(function () {
-            if (splashscreen.css('display') === 'block') {
-                closeSplashscreen();
-            }
-        }, templateParams.timerClose);
-     }*/
 
     if (templateParams.noAutorun) {
         splashscreen.modal({show: false});

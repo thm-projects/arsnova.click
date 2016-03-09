@@ -1,22 +1,15 @@
 Template.createQuestionView.onCreated(function () {
     this.autorun(() => {
-        this.subscribe('Sessions.instructor', localData.getPrivateKey(), Session.get("hashtag"));
+        this.subscribe('Sessions.instructor', localData.getPrivateKey(), Session.get("hashtag"), function () {
+            var sessionDoc = Sessions.findOne({hashtag: Session.get("hashtag")});
+            if (sessionDoc && sessionDoc.questionText.length > 4) {
+                $("#forwardButton").removeAttr("disabled");
+            }
+            else {
+                $("#forwardButton").attr("disabled", "disabled");
+            }
+        });
     });
-});
-
-Template.createQuestionView.onRendered(function () {
-    // just to set the forward-button style, when the question name is already existing
-    var currentSession = Sessions.findOne({hashtag: Session.get("hashtag")});
-    if (currentSession) {
-        if (currentSession.questionText.length > 4){
-            $("#forwardButton").removeAttr("disabled");
-        }
-        else {
-            $("#forwardButton").attr("disabled", "disabled");
-        }
-    } else {
-        $("#forwardButton").attr("disabled", "disabled");
-    }
 });
 
 Template.createQuestionView.helpers({

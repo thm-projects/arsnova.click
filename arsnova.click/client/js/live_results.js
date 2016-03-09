@@ -48,10 +48,10 @@ Template.answerContentSplash.helpers({
 
 Template.live_results.events({
     "click #js-btn-showQuestionModal": function () {
-        showSplashscreen();
+        $('.questionContentSplashWrapper').parents('.modal').modal();
     },
     "click #js-btn-showAnswerModal": function () {
-        showSplashscreen();
+        $('.answerContentSplashWrapper').parents('.modal').modal();
     }
 
 });

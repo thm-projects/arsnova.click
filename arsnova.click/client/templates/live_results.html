@@ -27,7 +27,7 @@
 
 
     {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Frage:" templateName="questionContentSplash" type="splash-screen-show-question"}}
-    <!-- {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Antworten:" templateName="answerContentSplash" type="splash-screen-show-question"}}  -->
+    {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Antworten:" templateName="answerContentSplash" type="splash-screen-show-question"}}
 
 
 </template>
@@ -56,6 +56,7 @@
 </template>
 
 <template name="answerContentSplash">
+    <div class="answerContentSplashWrapper">
     {{#each answerContent}}
         <div>{{answerText}}</div><br />
     {{/each}}
@@ -63,4 +64,5 @@
         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
         Fenster schließen
     </button>
+    </div>
 </template>

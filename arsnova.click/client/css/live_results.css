@@ -1,0 +1,22 @@
+.survey_button {
+    font-size: 2em;
+    font-weight: normal;
+    color: #555;
+    text-align: left;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.survey_letter {
+    font-weight: 800;
+    text-align: center;
+    margin-left: 5px;
+}
+
+.survey_answer {
+    font-weight: normal;
+    text-align: center;
+    margin-left: 15px;
+    width: auto;
+}

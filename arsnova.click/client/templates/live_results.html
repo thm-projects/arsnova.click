@@ -1,0 +1,26 @@
+<template name="live_results">
+
+    {{> titel titelText = "Abstimmung beendet"}}
+
+    <div class="center-vertical">
+
+        {{#each result}}
+
+            <div class="survey_button">
+                <span class="survey_letter">{{name}}</span>
+                <span class="survey_answer">{{absolute}} | {{percent}}%</span>
+            </div>
+            <br/>
+        {{/each}}
+
+    </div>
+
+    <div class="fixed-bottom">
+        <div class="row">
+            <div class="col-md-12">
+                <button id="showQuestion" class="button">Frage einblenden</button>
+            </div>
+        </div>
+    </div>
+
+</template>

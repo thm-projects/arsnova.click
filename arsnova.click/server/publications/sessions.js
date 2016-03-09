@@ -21,7 +21,7 @@ Meteor.publish('Sessions.question', function (phashtag) {
     return Sessions.find({hashtag: phashtag}, {
         fields: {
             questionText: 1,
-            starTime: 1,
+            startTime: 1,
             timer: 1
         }
     });

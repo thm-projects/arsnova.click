@@ -24,7 +24,8 @@ Template.createTimerView.helpers({
 
 Template.createTimerView.events({
     "click #forwardButton":function(){
-        const timer = Session.get("slider");
+        // timer is given in seconds
+        const timer = Session.get("slider") * 1000;
         Meteor.call("Sessions.setTimer", {
             privateKey:localData.getPrivateKey(),
             hashtag:Session.get("hashtag"),

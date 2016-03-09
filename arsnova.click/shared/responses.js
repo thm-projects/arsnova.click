@@ -7,7 +7,7 @@ Meteor.methods({
                 hashtag: hashtag,
                 isActive: 1
             });
-            if (!doc) {
+            if (!hashtagDoc) {
                 throw new Meteor.Error('Responses.addResponse', 'There is no such hashtag active in the db')
                 return;
             } else {
@@ -16,7 +16,7 @@ Meteor.methods({
                     throw new Meteor.Error('Responses.addResponse', 'No session doc for this hashtag');
                     return;
                 }
-                var responseTime = timestamp - hashtagDoc.startTime;
+                var responseTime = Number(timestamp) - Number(sessionDoc.startTime);
                 if (responseTime <= sessionDoc.timer) {
                     responseDoc.responseTime = responseTime;
                     var answerOptionDoc = AnswerOptions.findOne({
@@ -29,18 +29,23 @@ Meteor.methods({
                     }
                     Responses.insert(responseDoc);
                     var questionType = "polling";
-                    var correctAnswerCount = AnswerOptions.find({
+                    var nickResponsesCount = Responses.find({
                         hashtag: hashtag,
-                        isCorrect: 1
+                        userNick: responseDoc.userNick
                     }).count();
-                    if (correctAnswerCount === 1) {
-                        questionType = "sc";
-                    } else if (correctAnswerCount >= 2) {
-                        questionType = "mc";
+                    var showForwardButton = false;
+                    if (nickResponsesCount > 1) {
+                        showForwardButton = true;
+                    }
+                    var instantRouting = false;
+                    var correctAnswerOptionsCount = AnswerOptions.find({hashtag: responseDoc.hashtag, isCorrect: 1}).count();
+                    if (correctAnswerOptionsCount === 1) {
+                        instantRouting = true;
                     }
                     var retDoc = {
                         isCorrect: answerOptionDoc.isCorrect,
-                        questionType: questionType
+                        instantRouting: instantRouting,
+                        showForwardButton: showForwardButton
                     }
                     return retDoc;
                 }

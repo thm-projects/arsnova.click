@@ -83,5 +83,11 @@ Template.hashtag_view.events({
         Session.set("hashtag", hashtag);
         //localStorage.setItem("hashtag", hashtag);
         Router.go("/nick");
+    },
+    "keydown #hashtag-input-field": function (event) {
+        var charCount = $(event.currentTarget).val().length;
+        if (charCount >= 25) {
+            event.preventDefault();
+        }
     }
 });

@@ -78,5 +78,7 @@ Template.questionContentSplash.events({
 });
 
 Template.correctSplash.helpers({
-    correctAnswer:
+    correctAnswer: function () {
+        return "mesodunno";
+    }
 });

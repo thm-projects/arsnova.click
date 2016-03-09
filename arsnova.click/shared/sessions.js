@@ -19,7 +19,7 @@ Meteor.methods({
                 Sessions.insert({
                     hashtag: hashtag,
                     questionText: questionText,
-                    timer: 20,
+                    timer: 40000,
                     isReadingConfirmationRequired: 1
                 });
             } else {

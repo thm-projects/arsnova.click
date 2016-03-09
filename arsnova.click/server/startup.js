@@ -1,6 +1,6 @@
 if(Meteor.isServer){
     Meteor.startup(function(){
-        if (!Hashtags.findOne()) {
+        /*if (!Hashtags.findOne()) {
             var hashtagsExample = {
                 hashtag: "wpw",
                 privateKey: "thisismypriv",
@@ -175,6 +175,6 @@ if(Meteor.isServer){
             MemberList.insert(memberListExample16);
             MemberList.insert(memberListExample17);
             MemberList.insert(memberListExample18);
-        }
+        }*/
     });
 }

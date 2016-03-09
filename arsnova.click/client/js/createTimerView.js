@@ -1,10 +1,27 @@
-// slider starts at 20 and 80
-Session.setDefault("slider", 20);
-
+Template.createTimerView.onCreated(function () {
+    this.autorun(() => {
+        this.subscription = Meteor.subscribe('Sessions.instructor', localData.getPrivateKey(), Session.get("hashtag"), function () {
+            var sessionDoc = Sessions.findOne({hashtag: Session.get("hashtag")});
+            if (sessionDoc) {
+                Session.setDefault("slider", (sessionDoc.timer / 1000));
+            }else{
+                Session.setDefault("slider", 40);
+            }
+        });
+    });
+});
 
 Template.createTimerView.rendered = function () {
+    createSlider();
+};
+
+function createSlider () {
+    if (Session.get("slider") == undefined){
+        setTimeout(createSlider, 50);
+        return;
+    }
     this.$("#slider").noUiSlider({
-        start: Session.get("slider"),
+        start: Session.get("slider") == undefined ? 40 : Session.get("slider"),
         range: {
             'min': 5,
             'max': 180
@@ -14,7 +31,7 @@ Template.createTimerView.rendered = function () {
     }).on('change', function (ev, val) {
         Session.set('slider', Math.round(val));
     });
-};
+}
 
 Template.createTimerView.helpers({
     slider: function () {
@@ -40,7 +57,7 @@ Template.createTimerView.events({
         });
     },
     "click #backButton":function(){
-        const timer = Session.get("slider");
+        const timer = Session.get("slider") * 1000;
         if(!isNaN(timer) && timer > 0) {
             Meteor.call("Sessions.setTimer", {
                 privateKey:localData.getPrivateKey(),

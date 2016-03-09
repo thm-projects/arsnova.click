@@ -27,7 +27,7 @@ Template.hashtag_view.events({
                         $("#addNewHashtag").attr("disabled", "disabled");
                     }
                 } else {
-                    $("#addNewHashtag").attr("disabled", "disabled");
+                    //$("#addNewHashtag").attr("disabled", "disabled");
                     $("#joinSession").attr("disabled", "disabled");
                 }
             }
@@ -49,6 +49,7 @@ Template.hashtag_view.events({
                     reenter = true;
                     Session.set("hashtag", hashtag);
                     Session.set("isOwner", true);
+                    Meteor.call("Hashtags.setIsActive", localData.getPrivateKey(), hashtag, 1);
                     localData.reenterSession(hashtag);
                     Router.go("/question");
                 }

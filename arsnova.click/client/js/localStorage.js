@@ -30,9 +30,14 @@ localData = {
             localStorage.setItem(hashtag, JSON.stringify({
                 hashtag: hashtag,
                 questionText: "",
-                timer: 20,
+                timer: 40000,
                 isReadingConfirmationRequired: 1,
-                answers: []
+                answers:[
+                    {answerOptionNumber:0, answerText:"", isCorrect:0},
+                    {answerOptionNumber:1, answerText:"", isCorrect:0},
+                    {answerOptionNumber:2, answerText:"", isCorrect:0},
+                    {answerOptionNumber:3, answerText:"", isCorrect:0}
+                 ]
             }));
             return;
         }
@@ -44,9 +49,14 @@ localData = {
         localStorage.setItem(hashtag, JSON.stringify({
             hashtag:hashtag,
             questionText:"",
-            timer:20,
-            isReadingConfirmationRequired:1,
-            answers:[]
+            timer: 40000,
+            isReadingConfirmationRequired: 1,
+            answers:[
+                {answerOptionNumber:0, answerText:"", isCorrect:0},
+                {answerOptionNumber:1, answerText:"", isCorrect:0},
+                {answerOptionNumber:2, answerText:"", isCorrect:0},
+                {answerOptionNumber:3, answerText:"", isCorrect:0}
+            ]
         }));
     },
 
@@ -94,16 +104,19 @@ localData = {
         localStorage.setItem(hashtag, JSON.stringify(sessionData));
     },
 
-    addAnswers: function (answer) {
-        if (!answer.hashtag || answer.hashtag === "hashtags" || answer.hashtag === "privateKey") {
+    addAnswers : function({hashtag,  answerOptionNumber, answerText, isCorrect}){
+        if(!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
-        const sessionDataString = localStorage.getItem(answer.hashtag);
+        const sessionDataString = localStorage.getItem(hashtag);
         if (!sessionDataString) {
             return;
         }
         const sessionData = JSON.parse(sessionDataString);
-        sessionData.answers.push(answer);
+        sessionData.answers.push({
+            answerOptionNumber:answerOptionNumber,
+            answerText:answerText,
+            isCorrect:isCorrect});
         localStorage.setItem(answer.hashtag, JSON.stringify(sessionData));
     },
 
@@ -133,15 +146,11 @@ localData = {
             isReadingConfirmationRequired: sessionData.isReadingConfirmationRequired
         });
 
-        /*
-         TODO:Meteor-Call für Timer
-
-         Meteor.call("Sessions.setSessionTimer", {
-         privateKey:localStorage.getItem("privateKey"),
-         hashtag:hashtag,
-         timer:sessionData.timer
-         });
-         */
+        Meteor.call("Sessions.setTimer", {
+            privateKey:localStorage.getItem("privateKey"),
+            hashtag:hashtag,
+            timer:sessionData.timer
+        });
 
         $.each(sessionData.answers, function (key, value) {
             Meteor.call("AnswerOptions.addOption", {
@@ -149,12 +158,11 @@ localData = {
                 hashtag: hashtag,
                 answerText: value.answerText,
                 answerOptionNumber: value.answerOptionNumber,
-                isCorrect: value.isCorrect
-            });
+                isCorrect: value.isCorrect});
         });
     },
 
-    deleteAnswerOption: function (hashtag, answerOptionsNumber) {
+    deleteAnswerOption: function (hashtag, answerOptionNumber) {
         if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
@@ -168,17 +176,16 @@ localData = {
             return;
         }
         sessionData.answers = $.grep(sessionData.answers, function (value) {
-            return value.answerOptionNumber != answerOptionsNumber;
+            return value.answerOptionNumber != answerOptionNumber;
         });
 
         localStorage.setItem(hashtag, JSON.stringify(sessionData));
     },
 
-    updateAnswerText: function (hashtag, answerOptionNumber, answerText, isCorrect) {
+    updateAnswerText: function ({hashtag, answerOptionNumber, answerText, isCorrect}) {
         if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
-
         const sessionDataString = localStorage.getItem(hashtag);
         if (!sessionDataString) {
             return;
@@ -194,7 +201,6 @@ localData = {
                 value.isCorrect = isCorrect;
             }
         });
-
         localStorage.setItem(hashtag, JSON.stringify(sessionData));
     },
 

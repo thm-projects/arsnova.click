@@ -64,17 +64,17 @@ Template.createAnswerOptions.events({
       for (var i = 0; i < AnswerOptions.find().count(); i++) {
          var text = $("#answerOptionText_Number" + i).val();
          var isCorrect = $('div#answerOption-' + i + ' .check-mark-checked').length > 0 ? 1 : 0;
-         Meteor.call('AnswerOptions.updateAnswerTextAndIsCorrect', {
-            privateKey: localData.getPrivateKey(),
-            hashtag: Session.get("hashtag"),
+         var answer = {
+            privateKey:localData.getPrivateKey(),
+            hashtag:Session.get("hashtag"),
             answerOptionNumber: i,
-            answerText: text,
-            isCorrect: isCorrect
-         }, (err, res) => {
+            answerText:text,
+            isCorrect:isCorrect};
+         Meteor.call('AnswerOptions.updateAnswerTextAndIsCorrect', answer,
+             (err, res) => {
             if (err) {
                alert(err);
             } else {
-               localData.updateAnswerText(Session.get("hashtag"), i, text, isCorrect);
                Router.go("/settimer");
             }
          });

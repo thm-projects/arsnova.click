@@ -31,11 +31,5 @@ Meteor.publish('Sessions.memberlist', function (phashtag) {
     new SimpleSchema({
         phashtag: {type: String}
     }).validate({phashtag});
-    return Sessions.find({hashtag: phashtag},{
-        fields: {
-            _id: 1,
-            isReadingConfirmationRequired: 1,
-        startTime: 1
-        }
-    });
+    return Sessions.find({hashtag: phashtag});
 });

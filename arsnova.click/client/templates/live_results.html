@@ -18,13 +18,14 @@
                 </button>
             </div>
             <div class="col-xs-6">
-                <button type="button" class="btn btn-info btn-lg btn-answerOption">
+                <button id="js-btn-showAnswerModal" type="button" class="btn btn-info btn-lg btn-answerOption">
                     <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Antworten
                 </button>
             </div>
         </div>
     </div>
 
+    {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Antworten:" templateName="answerContentSplash" type="splash-screen-show-question"}}
     {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Frage:" templateName="questionContentSplash" type="splash-screen-show-question"}}
 
 
@@ -51,4 +52,14 @@
             </div>
         </div>
     </div>
+</template>
+
+<template name="answerContentSplash">
+    {{#each answerContent}}
+        <div>{{answerText}}</div><br />
+    {{/each}}
+    <button id="js-btn-hideAnswerModal" type="button" class="btn btn-success btn-answerOption btn-lg">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        Fenster schließen
+    </button>
 </template>

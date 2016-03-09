@@ -38,25 +38,35 @@ Template.live_results.helpers({
     }
 });
 
-Template.live_results.events({
-    "click #js-btn-showQuestionModal": function () {
-        showSplashscreen();
-    }
-
-});
-
 Template.questionContentSplash.helpers({
     questionContent: function () {
         mySessions = Sessions.find();
         return mySessions;
     },
     answerContent: function () {
-        var answerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
+        answerOptions = AnswerOptions.find({hashtag: Session.get("hashtag")});
+        return answerOptions;
     }
+});
+
+Template.live_results.events({
+    "click #js-btn-showQuestionModal": function () {
+        showSplashscreen();
+    },
+    "click #js-btn-showAnswerModal": function () {
+        showSplashscreen();
+    }
+
 });
 
 Template.questionContentSplash.events({
     "click #js-btn-hideQuestionModal": function () {
+        closeSplashscreen();
+    }
+});
+
+Template.answerContentSplash.events({
+    "click #js-btn-hideAnswerModal": function () {
         closeSplashscreen();
     }
 });
@@ -73,3 +83,4 @@ Template.result_button.helpers({
         }
     }
 });
+

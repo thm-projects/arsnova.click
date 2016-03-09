@@ -1,13 +1,6 @@
 Template.memberlist.onCreated(function () {
     this.autorun(() => {
         this.subscribe('MemberList.members', Session.get("hashtag"));
-    /*, function () {
-     Session.set("memberListInitialized", MemberList.find({hashtag: Session.get("hashtag")}, {
-     fields: {
-     _id: 1
-     }
-     })
-     });*/
         if(Session.get("isOwner")) {
             this.subscribe('MemberList.percentRead', {
                 hashtag: Session.get("hashtag"),
@@ -30,20 +23,6 @@ Template.memberlist.onCreated(function () {
                         Router.go("onpolling");
                     }
                 }
-            }
-        });
-        MemberList.find().observeChanges({
-            added: function (id, newDoc) {
-                /*
-                 if (!initializing && Session.get("memberListInitialized")) {
-                 $('#learner-list').on('DOMNodeInserted', function (e) {
-                 if ($.inArray(id, Session.get("memberListInitialized")) > -1) {
-                 $('#' + id).removeClass("slide-top");
-                 $('#' + id).addClass("slide-left");
-                 }
-                 });
-                 }
-                 */
             }
         });
         initializing = false;

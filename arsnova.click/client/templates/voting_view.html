@@ -28,13 +28,13 @@
             </button>
         </div>
 
-
+        {{#if showForwardButton}}
         <div class="col-xs-4">
-            <button type="button" class="btn btn-success btn-lg btn-answerOption">
+            <button id="forwardButton" type="button" class="btn btn-success btn-lg btn-answerOption">
                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Absenden
             </button>
         </div>
-
+        {{/if}}
     </div>
 
     {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Frage:" templateName="questionContentSplash" type="splash-screen-show-question"}}

@@ -43,6 +43,12 @@ Template.readconfirmationrequired.events({
             isReadingConfirmationRequired: newVal
         });*/
 
-        $('#isReadConfirmationRequiredButton').toggleClass("down");
+        var btn = $('#isReadConfirmationRequiredButton');
+        btn.toggleClass("down");
+        if(btn.hasClass("down")){
+            btn.html("Lesebestätigung ist aktiv!");
+        }else{
+            btn.html("Lesebestätigung ist inaktiv!");
+        }
     }
 });

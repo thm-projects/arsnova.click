@@ -1,4 +1,5 @@
-//todo: call this code when a user creates a new or Hashtag
 Meteor.setInterval(function () {
-    Meteor.call('keepalive', localStorage.getItem("privateKey"));
+    if (Session.get("isOwner")){
+        Meteor.call('keepalive', localData.getPrivateKey(), Session.get("hashtag"));
+    }
 }, 5000);

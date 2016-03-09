@@ -2,7 +2,10 @@ Template.memberlist.onCreated(function () {
     this.autorun(() => {
         this.subscribe('MemberList.members', Session.get("hashtag"));
         if(Session.get("isOwner")) {
-            this.subscribe('MemberList.percentRead', Session.get("hashtag"), localData.getPrivateKey());
+            this.subscribe('MemberList.percentRead', {
+                hashtag: Session.get("hashtag"),
+                privateKey: localData.getPrivateKey()
+            });
         }
         this.subscribe('Sessions.memberlist', Session.get("hashtag"));
     });
@@ -26,7 +29,18 @@ Template.memberlist.onCreated(function () {
     });
 });
 
+Template.memberlist.onRendered(function () {
+    $(window).resize(function () {
+        var final_height = $(window).height() - $(".navbar").height();
+        $(".titel").css("margin-top", $(".navbar").height());
+        $(".container").css("height", final_height);
+    });
+});
+
 Template.memberlist.rendered = function () {
+    var final_height = $(window).height() - $(".navbar").height();
+    $(".titel").css("margin-top", $(".navbar").height());
+    $(".container").css("height", final_height);
     calculateButtonCount();
 };
 
@@ -55,20 +69,6 @@ Template.memberlist.events({
         });
     }
 });
-
-Template.memberlist.onRendered(function () {
-    $(window).resize(function () {
-        var final_height = $(window).height() - $(".navbar").height();
-        $(".titel").css("margin-top", $(".navbar").height());
-        $(".container").css("height", final_height);
-    });
-});
-
-Template.memberlist.rendered = function () {
-    var final_height = $(window).height() - $(".navbar").height();
-    $(".titel").css("margin-top", $(".navbar").height());
-    $(".container").css("height", final_height);
-};
 
 Template.memberlist.helpers({
     hashtag: function () {
@@ -99,7 +99,11 @@ Template.memberlist.helpers({
     },
 
     showMoreButton: function () {
-        return Session.get("LearnerCount") <= MemberList.find().count();
+        return Session.get("LearnerCount") < MemberList.find().count();
+    },
+
+    invisibleLearnerCount: function () {
+        return MemberList.find().count() - Session.get("LearnerCount");
     },
 
     isReadingConfirmationRequired: function () {

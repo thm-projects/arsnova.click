@@ -3,7 +3,8 @@
 }
 
 p.header-layout {
-    margin-left: 0px;
+    margin-left: 0;
+    margin-top: 20px;
 }
 
 @media (min-width: 1200px) {

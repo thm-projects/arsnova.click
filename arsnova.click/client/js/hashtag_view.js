@@ -17,7 +17,7 @@ Template.hashtag_view.events({
                 var canReenter = false;
                 var localHashtags = localData.getAllHashtags();
                 if ($.inArray(inputHashtag, localHashtags) > -1) {
-                    $("#addNewHashtag").html("Wiederherstellen<span class=\"glyphicon glyphicon-pencil glyph-right\" aria-hidden=\"true\"></span>");
+                    $("#addNewHashtag").html("Bearbeiten<span class=\"glyphicon glyphicon-pencil glyph-right\" aria-hidden=\"true\"></span>");
                     $("#addNewHashtag").removeAttr("disabled");
                     canReenter = true;
                 }

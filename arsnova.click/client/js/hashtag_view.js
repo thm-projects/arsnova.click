@@ -22,7 +22,7 @@ Template.hashtag_view.events({
                 else {
                     $("#addNewHashtag").attr("disabled", "disabled");
                 }
-                if (hashtagDoc.isActive) {
+                if (hashtagDoc.sessionStatus === 2) {
                     $("#joinSession").removeAttr("disabled");
                 } else {
                     $("#joinSession").attr("disabled", "disabled");
@@ -46,7 +46,7 @@ Template.hashtag_view.events({
                     reenter = true;
                     Session.set("hashtag", hashtag);
                     Session.set("isOwner", true);
-                    Meteor.call("Hashtags.setIsActive", localData.getPrivateKey(), hashtag, 1);
+                    Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), hashtag, 1);
                     localData.reenterSession(hashtag);
                     Router.go("/question");
                 }
@@ -55,7 +55,7 @@ Template.hashtag_view.events({
                 var doc = {
                     privateKey: localData.getPrivateKey(),
                     hashtag: hashtag,
-                    isActive: 1,
+                    sessionStatus: 1,
                     lastConnection: (new Date()).getTime()
                 };
                 Meteor.call('Hashtags.addHashtag', doc, (err, res) => {

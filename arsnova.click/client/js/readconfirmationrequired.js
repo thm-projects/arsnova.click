@@ -18,6 +18,7 @@ Template.readconfirmationrequired.helpers({
 Template.readconfirmationrequired.events({
     "click #forwardButton": function () {
         localData.updateIsReadingConfirmationRequired(Session.get("hashtag"), Sessions.findOne({hashtag: Session.get("hashtag")}).isReadingConfirmationRequired);
+        Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 2);
         Router.go("/memberlist");
     },
     "click #backButton": function () {

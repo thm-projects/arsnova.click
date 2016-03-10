@@ -9,7 +9,7 @@ Meteor.methods({
         if (Meteor.isServer) {
             var hashtagDoc = Hashtags.findOne({
                 hashtag: hashtag,
-                isActive: 1
+                sessionStatus: 3
             });
             if (!hashtagDoc) {
                 throw new Meteor.Error('Responses.addResponse', 'There is no such hashtag active in the db')

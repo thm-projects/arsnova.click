@@ -17,26 +17,26 @@ Meteor.methods({
             return false;
         }
     },
-    'Hashtags.setIsActive': function (privateKey, hashtag, isActive) {
+    'Hashtags.setSessionStatus': function (privateKey, hashtag, sessionStatus) {
         new SimpleSchema({
             hashtag: {type: String},
             privateKey: {type: String},
-            isActive: {
+            sessionStatus: {
                 type: Number,
                 min: 0,
-                max: 1
+                max: 3
             }
         }).validate({
                 privateKey,
                 hashtag,
-                isActive
+                sessionStatus
             });
         var doc = Hashtags.findOne({
             hashtag: hashtag,
             privateKey: privateKey
         });
         if (doc) {
-            Hashtags.update({_id: doc._id}, {$set: {isActive: isActive}});
+            Hashtags.update({_id: doc._id}, {$set: {sessionStatus: sessionStatus}});
         } else {
             // TODO error message: user is not owner or inputs are wrong!
             return false;

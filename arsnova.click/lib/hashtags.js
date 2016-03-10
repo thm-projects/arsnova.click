@@ -11,12 +11,12 @@ Hashtags.attachSchema(new SimpleSchema({
 		min: 24,
 		max: 24
 	},
-	isActive: {
+	sessionStatus: {
 		type: Number,
 		min: 0,
-		max: 1
+		max: 3
 	},
-	lastConnection:{
+	lastConnection: {
 		type: Number
 	}
 }));

@@ -4,11 +4,13 @@
     {{/if}}
     <div class="row">
         <div class="col-md-12">
-            <div class="row titel learner-title">
-                <h3 class=" titel-relative text-light text-center">
-                    Teilnehmer/innen im Hashtag &laquo; {{hashtag}} &raquo;
-                </h3>
-            </div>
+            {{#if isNotOwner}}
+                <div class="row titel learner-title">
+                    <h3 class=" titel-relative text-light text-center">
+                        Teilnehmer/innen im Hashtag &laquo; {{hashtag}} &raquo;
+                    </h3>
+                </div>
+            {{/if}}
             <div class="row learner-list margin-title"
                  id="learner-list">
                 {{#each learners}}
@@ -25,16 +27,20 @@
     {{#if isOwner}}
         <div class="fixed-bottom">
             <div class="row">
-                <div class="col-xs-6">
-                    <button id="backButton" class="button button-back">
-                        <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
-                        Zurück
-                    </button>
-                </div>
-                <div class="col-xs-6">
-                    <button id="startPolling" class="button button-next button-start">
-                        <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
-                    </button>
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <button id="backButton" class="button button-back">
+                                <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
+                                Zurück
+                            </button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button id="startPolling" class="button button-next button-start">
+                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -17,7 +17,7 @@ Template.hashtag_view.events({
                 var canReenter = false;
                 var localHashtags = localData.getAllHashtags();
                 if ($.inArray(inputHashtag, localHashtags) > -1) {
-                    $("#addNewHashtag").html("Wiederherstellen<span class=\"glyphicon glyphicon-pencil glyph-right\" aria-hidden=\"true\"></span>");
+                    $("#addNewHashtag").html("Bearbeiten<span class=\"glyphicon glyphicon-pencil glyph-right\" aria-hidden=\"true\"></span>");
                     $("#addNewHashtag").removeAttr("disabled");
                     canReenter = true;
                 }
@@ -86,8 +86,9 @@ Template.hashtag_view.events({
         Router.go("/nick");
     },
     "keydown #hashtag-input-field": function (event) {
+        var keyWhiteList = [37,39,8,46]; //left, right, delete, entf
         var charCount = $(event.currentTarget).val().length;
-        if (charCount >= 25) {
+        if (charCount >= 25 && keyWhiteList.indexOf(event.keyCode)==-1) {
             event.preventDefault();
         }
     }

@@ -4,10 +4,12 @@
     <div class="row row-landingpage-buttons margin-title">
         <div class="col-md-12 text-center">
             <button type="button" id="addAnswerOption"
-                    class="button btn-add-remove-ans_opt round-corners button-shadow button-grey">&#43;
+                    class="button btn-add-remove-ans_opt round-corners button-shadow button-grey">
+                <span class="glyphicon glyphicon-plus"></span>
             </button>
             <button type="button" id="deleteAnswerOption"
-                    class="button btn-add-remove-ans_opt round-corners button-shadow button-grey">&#8722;
+                    class="button btn-add-remove-ans_opt round-corners button-shadow button-grey">
+                <span class="glyphicon glyphicon-minus"></span>
             </button>
         </div>
     </div>
@@ -27,13 +29,16 @@
                                        placeholder="Text oder lass leer"
                                        value="{{answerText}}">
 
-                                <div id="answerOption-{{answerOptionNumber}}" class="toggleCorrect round-corners input-group-addon input-field-bg-color input-group-letter">
+                                <div id="answerOption-{{answerOptionNumber}}"
+                                     class="toggleCorrect round-corners input-group-addon input-field-bg-color input-group-letter">
                                     {{#if isCorrect}}
                                         <!--r-->
-                                        <div class="check-mark-checked success-color"><i class="glyphicon glyphicon-ok"></i></div>
+                                        <div class="check-mark-checked success-color"><i
+                                                class="glyphicon glyphicon-ok"></i></div>
                                     {{else}}
                                         <!--f-->
-                                        <div class="check-mark-unchecked default-color"><i class="glyphicon glyphicon-ok"></i></div>
+                                        <div class="check-mark-unchecked default-color"><i
+                                                class="glyphicon glyphicon-ok"></i></div>
                                     {{/if}}
                                 </div>
                             </div>

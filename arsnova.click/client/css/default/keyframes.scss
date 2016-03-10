@@ -36,7 +36,7 @@
   }
 }
 
-@keyframes colorChangingClick {
+@keyframes colorChangingDot {
   0% {
     color: $info;
   }
@@ -51,5 +51,23 @@
   }
   100% {
     color: $info;
+  }
+}
+
+@keyframes colorChangingClick {
+  0% {
+    color: $warning;
+  }
+  25% {
+    color: $info;
+  }
+  50% {
+    color: $input-background-color;
+  }
+  75% {
+    color: white;
+  }
+  100% {
+    color: $warning;
   }
 }

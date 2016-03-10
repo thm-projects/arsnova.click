@@ -199,11 +199,11 @@
   height: 50px !important;
   background-color: $check-mark-unchecked;
   font-weight: 900;
-  font-size: 40px;
+  font-size: 22px;
   padding: 0;
 }
 
-.color-changing-ars, .color-changing-nova, .color-changing-click {
+.color-changing-ars, .color-changing-nova, .color-changing-dot, .color-changing-click {
   width: 100px;
   height: 100px;
   animation-duration: 7s;
@@ -217,6 +217,10 @@
 
 .color-changing-nova {
   animation-name: colorChangingNova;
+}
+
+.color-changing-dot {
+  animation-name: colorChangingDot;
 }
 
 .color-changing-click {

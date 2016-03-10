@@ -61,6 +61,10 @@ p, ul.list-unstyled {
     font-size: 7vw;
 }
 
+.header-session > .row {
+    margin-top: 20px;
+}
+
 .titel {
     color: white;
     text-align: center;

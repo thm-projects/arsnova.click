@@ -2,7 +2,7 @@
 
     {{> titel titelText = "Abstimmung beendet"}}
 
-    <div class="row center-vertical">
+    <div class="row">
         <div class="col-md-12">
             {{#each result}}
                 {{> result_button name = name absolute = absolute percent = percent isCorrect = isCorrect }}
@@ -12,17 +12,23 @@
 
     <div class="fixed-bottom">
         <div class="row">
-            <div class="col-xs-6">
-                <button id="js-btn-showQuestionModal" type="button" class="btn btn-info btn-lg btn-answerOption">
-                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Frage
-                </button>
+            <div class="col-md-6 col-md-offset-3">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button id="js-btn-showQuestionModal" type="button"
+                                class="btn btn-info btn-lg btn-answerOption">
+                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Frage
+                        </button>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <button id="js-btn-showAnswerModal" type="button" class="btn btn-info btn-lg btn-answerOption">
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Antworten
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-6">
-                <button id="js-btn-showAnswerModal" type="button" class="btn btn-info btn-lg btn-answerOption">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Antworten
-                </button>
             </div>
-        </div>
     </div>
     {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Frage:" templateName="questionContentSplash" type="splash-screen-show-question"}}
     {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Antworten:" templateName="answerOptionsSplash" type="splash-screen-show-question"}}
@@ -40,9 +46,9 @@
                         <div class="progress" style="padding-right: 10px; margin-top: 10px">
                             <div class="progress-bar {{getCSSClassForIsCorrect isCorrect}}" role="progressbar"
                                  aria-valuemin="0" aria-valuemax="100"
-                                 style="width: {{percent}}%">
+                                 style="width: {{percent}}%"><span class="percentage">{{percent}}%</span>
                             </div>
-                            <span class="percentage">{{percent}}%</span>
+
                         </div>
                     </div>
                 </div>

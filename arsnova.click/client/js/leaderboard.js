@@ -45,7 +45,7 @@ Template.leaderBoard.helpers({
                 }
             });
         }
-        var sortedArray = _.sortBy(allGoodMembers, 'responseTime');
+        var sortedArray = _.sortBy(allGoodMembers, 'responseTime').slice(0,6);
         console.log(sortedArray);
         return sortedArray;
     }

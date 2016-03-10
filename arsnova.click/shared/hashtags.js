@@ -43,17 +43,27 @@ Meteor.methods({
         }
     },
     'Hashtags.addHashtag': function (doc) {
-        for (var i = 0; i < 4; i++) {
-            var emptyAnswerDoc = {
-                privateKey: doc.privateKey,
-                hashtag: doc.hashtag,
-                answerText: "",
-                answerOptionNumber: i,
-                isCorrect: 0
-            };
-            AnswerOptions.insert(emptyAnswerDoc);
+
+        var testDoc = Hashtags.findOne({
+            hashtag: doc.hashtag
+        });
+
+        if (!testDoc){
+            for (var i = 0; i < 4; i++) {
+                var emptyAnswerDoc = {
+                    privateKey: doc.privateKey,
+                    hashtag: doc.hashtag,
+                    answerText: "",
+                    answerOptionNumber: i,
+                    isCorrect: 0
+                };
+                AnswerOptions.insert(emptyAnswerDoc);
+            }
+            Hashtags.insert(doc);
+        }else{
+            throw new Meteor.Error('Hashtags.addHashtag', 'Session already exists!');
         }
-        Hashtags.insert(doc);
+
     },
     'keepalive': function (privateKey, hashtag) {
         if (Meteor.isServer){

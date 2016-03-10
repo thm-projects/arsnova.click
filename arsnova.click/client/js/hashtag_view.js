@@ -64,12 +64,7 @@ Template.hashtag_view.events({
                     } else {
                         Session.set("hashtag", hashtag);
                         Session.set("isOwner", true);
-                        //localStorage.setItem("hashtag", hashtag);
-                        // flag the client as owner via localStorage
                         localData.addHashtag(hashtag);
-                        //var localHashtags = JSON.parse(localStorage.getItem("hashtags"));
-                        //localHashtags.push(hashtag);
-                        //localStorage.setItem("hashtags", JSON.stringify(localHashtags));
                         Router.go("/question");
                     }
                 });

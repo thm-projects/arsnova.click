@@ -12,3 +12,7 @@
   bottom: 10px;*/
   background-color: steelblue;
 }
+
+.answer-selected{
+ background-color: #ffd700 !important;
+}

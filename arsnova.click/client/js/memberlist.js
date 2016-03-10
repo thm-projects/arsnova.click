@@ -184,7 +184,6 @@ function calculateButtonCount () {
 }
 
 function calculateProgressBarTextWidth () {
-    //$('.progress-fill').css('width', getPercentRead() + '%');
     $('.progress-fill').width((getPercentRead() - 20) + "%");
     if (getPercentRead() === 0) {
         $('.progress-fill').hide();

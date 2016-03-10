@@ -205,11 +205,9 @@ localData = {
     },
 
     initializePrivateKey: function () {
-        /*
-         TODO: Generate privateKey
-         */
+
         if (!localStorage.getItem("privateKey")) {
-            localStorage.setItem("privateKey", "thisismypriv");
+            localStorage.setItem("privateKey", new Mongo.ObjectID()._str);
         }
     },
 

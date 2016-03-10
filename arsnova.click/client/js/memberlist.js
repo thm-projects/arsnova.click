@@ -57,6 +57,7 @@ Template.memberlist.events({
         calculateButtonCount();
     },    
     'click #startPolling': function (event) {
+        Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 3);
         Meteor.call('Sessions.startTimer', {
             privateKey: localData.getPrivateKey(),
             hashtag: Session.get("hashtag")

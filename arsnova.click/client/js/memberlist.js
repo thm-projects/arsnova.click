@@ -57,6 +57,7 @@ Template.memberlist.events({
     },
     'click #setReadConfirmed': function () {
         closeSplashscreen();
+        calculateProgressBarTextWidth();
     },
     'click .btn-less-learners': function () {
         Session.set("LearnerCountOverride", false);
@@ -121,13 +122,6 @@ Template.memberlist.helpers({
         }
         return doc.isReadingConfirmationRequired == 1;
     },
-    isOwnerAndReadConfirmationNeeded: function () {
-        const doc = Sessions.findOne({hashtag: Session.get("hashtag")});
-        if(!doc){
-            return;
-        }
-        return Session.get("isOwner") && (doc.isReadingConfirmationRequired == 1);
-    },
     isNotOwnerAndReadConfirmationNeeded: function () {
         const doc = Sessions.findOne({hashtag: Session.get("hashtag")});
         if(!doc){
@@ -152,7 +146,6 @@ Template.readingConfirmation.helpers({
         return getPercentRead();
     }
 });
-
 
 function calculateButtonCount () {
 
@@ -191,6 +184,7 @@ function calculateButtonCount () {
 
 function calculateProgressBarTextWidth () {
     $('.progress-fill').css('width', getPercentRead() + '%');
+    //$('.progress-fill').width((getPercentRead() - 20) + "%");
     if (getPercentRead() === 0) {
         $('.progress-fill').hide();
     } else {

@@ -19,9 +19,11 @@ Meteor.methods({
             MemberList.insert({
                 hashtag: hashtag,
                 nick: nick,
+                lowerCaseNick: nick.toLowerCase(),
                 backgroundColor: backgroundColor,
                 foregroundColor: foregroundColor,
-                readConfirmed: 0
+                readConfirmed: 0,
+                insertDate: new Date().getTime()
             });
         } else {
             throw new Meteor.Error('MemberList.addLearner', 'Nick already exists!');

@@ -1,20 +1,18 @@
 <template name="memberlist">
     {{#if isNotOwnerAndReadConfirmationNeeded}}
-        {{> splashscreen templateName = "questionT" lazyClose = false}}
+        {{> splashscreen templateName = "questionT" lazyClose = "false" headername="Frage" type="splash-screen-show-question"}}
     {{/if}}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 contentFrame">
+            <div class="row titel learner-title">
             {{#if isNotOwner}}
-                <div class="row titel learner-title">
-                    <h3 class=" titel-relative text-light text-center">
-                        Teilnehmer/innen im Hashtag &laquo; {{hashtag}} &raquo;
-                    </h3>
-                </div>
-            {{else}}
-                <div class="row titel learner-title">
-                    <h3 class=" titel-relative text-light text-center">
-                    </h3>
-                </div>
+                <h3 class=" titel-relative text-light text-center">
+                    Teilnehmende im Quiz &laquo;{{hashtag}}&raquo;
+                </h3>
+            {{/if}}
+            </div>
+            {{#if isReadingConfirmationRequired}}
+                {{> readingConfirmation }}
             {{/if}}
             <div class="row learner-list margin-title"
                  id="learner-list">
@@ -23,9 +21,14 @@
                 {{/each}} <!-- learners -->
             </div>
             {{#if showMoreButton}}
-                <button class="btn btn-grey btn-more-learners">
-                    (Zeige {{invisibleLearnerCount}} weitere)
-                </button>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button class="btn btn-more-learners">
+                            <span class="glypicon glyphicon-align-justify"></span>
+                            (Zeige {{invisibleLearnerCount}} weitere)
+                        </button>
+                    </div>
+                </div>
             {{/if}}
         </div>
     </div>
@@ -52,31 +55,10 @@
             </div>
         </div>
     {{/if}}
-    {{#if isReadingConfirmationRequired}}
-        <div class="row confirmationCounter">
-            <div class="col-md-2 col-md-offset-3">
-                <span class="text-light">
-                    Percent read Question:
-                </span>
-            </div>
-
-            <div class="col-md-4">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
-                         aria-valuenow="{{percentRead}}"
-                         aria-valuemin="{{percentRead}}" aria-valuemax="100"
-                         style="min-width: 2em; width: {{percentRead}}%;">
-                        {{percentRead}} %
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    {{/if}}
 </template>
 
 <template name="learner">
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+    <div class="col-xs-12 col-sm-6 col-md-4">
         <button class="btn btn-learner slide-top {{#if isOwnNick nick}}color-changing-own-nick{{/if}} "
                 id="{{_id}}"
                 style="background-color: {{backgroundColor}}; color:{{foregroundColor}}">
@@ -92,7 +74,20 @@
 
     <div class="row">
         <div class="col-md-12">
-            <button id="setReadConfirmed" class="" onclick="closeSplashscreen();">Gelesen</button>
+            <button id="setReadConfirmed" class="" onclick="closeSplashscreen();">Das weiß ich!</button>
+        </div>
+    </div>
+</template>
+
+<template name="readingConfirmation">
+    <div class="row confirmationCounter margin-title">
+        <div class="col-xs-12">
+            <div class="progress-bar color-changing-progress-bar">
+                <div class="progress-fill">
+                    <div class="progress-fill-text">Lesebestätigung: {{percentRead}} %</div>
+                </div>
+                Lesebestätigung: {{percentRead}} %
+            </div>
         </div>
     </div>
 </template>

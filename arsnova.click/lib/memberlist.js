@@ -11,6 +11,11 @@ MemberList.attachSchema(new SimpleSchema({
 		min: 3,
 		max: 25
 	},
+	lowerCaseNick: {
+		type: String,
+		min: 3,
+		max: 25
+	},
 	readConfirmed: {
 		type: Number,
 		min: 0,
@@ -25,5 +30,8 @@ MemberList.attachSchema(new SimpleSchema({
 		type: String,
 		min: 7,
 		max: 7
+	},
+	insertDate: {
+		type: String
 	}
 }));

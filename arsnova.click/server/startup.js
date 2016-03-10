@@ -1,26 +1,30 @@
 if(Meteor.isServer){
     Meteor.startup(function(){
-        /*if (!Hashtags.findOne()) {
-            var hashtagsExample = {
-                hashtag: "wpw",
-                privateKey: "thisismypriv",
-                isActive: 1,
-                lastConnection: (new Date()).getTime()
-            };
+        if (!Hashtags.findOne()) {
+            /*
+             var hashtagsExample = {
+             hashtag: "wpw",
+             privateKey: "thisismypriv",
+             isActive: 1,
+             lastConnection: (new Date()).getTime()
+             };
+             */
+
             // block this hash / pk -> do not use and merge to production server!
             var hashtagsExample2 = {
                 hashtag: "hashtags",
-                privateKey: "äölkjhgfdsaq",
-                isActive: 1,
+                privateKey: new Mongo.ObjectID()._str,
+                isActive: 0,
                 lastConnection: (new Date()).getTime()
             };
             // block this hash / pk -> do not use and merge to production server!
             var hashtagsExample3 = {
                 hashtag: "privateKey",
-                privateKey: "poiuztrewqas",
-                isActive: 1,
+                privateKey: new Mongo.ObjectID()._str,
+                isActive: 0,
                 lastConnection: (new Date()).getTime()
             };
+            /*
             var memberListExample1 = {
                 hashtag: "wpw",
                 nick: "Testuser",
@@ -148,9 +152,9 @@ if(Meteor.isServer){
                 responseTime: 3
             };
 
-            Hashtags.insert(hashtagsExample);
+            Hashtags.insert(hashtagsExample); */
             Hashtags.insert(hashtagsExample2);
-            Hashtags.insert(hashtagsExample3);
+            Hashtags.insert(hashtagsExample3); /*
             Sessions.insert(sessionExample);
             Responses.insert(responseExample1);
             Responses.insert(responseExample2);
@@ -175,6 +179,7 @@ if(Meteor.isServer){
             MemberList.insert(memberListExample16);
             MemberList.insert(memberListExample17);
             MemberList.insert(memberListExample18);
-        }*/
+             */
+        }
     });
 }

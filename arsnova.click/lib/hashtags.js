@@ -8,8 +8,8 @@ Hashtags.attachSchema(new SimpleSchema({
 	},
 	privateKey: {
 		type: String,
-		min: 12,
-		max: 12
+		min: 24,
+		max: 24
 	},
 	isActive: {
 		type: Number,

@@ -7,7 +7,12 @@
                     <div id="slider" class="slider"></div>
                 </div>
                 <div class="col-md-4">
-                    <input class="input-field round-corners slider-timer-input" disabled value="{{slider}} Sekunden"/>
+                    <div class="input-group input-group-slider">
+                        <span class="input-group-addon round-corners input-field-bg-color input-group-letter glyphicon-hourglass"></span>
+                        <input type="text"
+                               class="input-field round-corners slider-timer-input"
+                               aria-describedby="basic-addon1" disabled value="{{slider}} Sekunden">
+                    </div>
                 </div>
             </div>
         </div>

@@ -109,3 +109,7 @@ p, ul.list-unstyled {
 .toggleCorrect:hover {
     cursor: pointer;
 }
+
+.input-group-slider {
+    margin-top: 20px;
+}

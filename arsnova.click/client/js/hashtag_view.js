@@ -14,20 +14,17 @@ Template.hashtag_view.events({
                 $("#joinSession").attr("disabled", "disabled");
                 $("#addNewHashtag").removeAttr("disabled");
             } else {
-                var canReenter = false;
                 var localHashtags = localData.getAllHashtags();
                 if ($.inArray(inputHashtag, localHashtags) > -1) {
                     $("#addNewHashtag").html("Bearbeiten<span class=\"glyphicon glyphicon-pencil glyph-right\" aria-hidden=\"true\"></span>");
                     $("#addNewHashtag").removeAttr("disabled");
-                    canReenter = true;
+                }
+                else {
+                    $("#addNewHashtag").attr("disabled", "disabled");
                 }
                 if (hashtagDoc.isActive) {
                     $("#joinSession").removeAttr("disabled");
-                    if (!canReenter) {
-                        $("#addNewHashtag").attr("disabled", "disabled");
-                    }
                 } else {
-                    //$("#addNewHashtag").attr("disabled", "disabled");
                     $("#joinSession").attr("disabled", "disabled");
                 }
             }

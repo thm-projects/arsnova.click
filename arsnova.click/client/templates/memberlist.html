@@ -70,7 +70,7 @@
 
 <template name="learner">
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-        <button class="btn btn-learner slide-top"
+        <button class="btn btn-learner slide-top {{#if isOwnNick nick}}color-changing-own-nick{{/if}} "
                 id="{{_id}}"
                 style="background-color: {{backgroundColor}}; color:{{foregroundColor}}">
             {{nick}}

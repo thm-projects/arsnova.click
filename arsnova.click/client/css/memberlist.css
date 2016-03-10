@@ -73,3 +73,42 @@
 .button-start{
     font-size: 30px;
 }
+
+
+.button-start {
+     font-size: 40px;
+ }
+
+.color-changing-own-nick {
+     animation-duration: 7s;
+     animation-iteration-count: infinite;
+     font-weight: bold;
+     animation-name: colorChangingOwnNick;
+ }
+
+@keyframes colorChangingOwnNick {
+    0% {
+        background-color: #ffd700;
+        transform: translateY(0%);
+        -webkit-transform: translateY(0%);
+        color: black;
+    }
+    25% {
+        background-color: white;
+        color: black;
+    }
+    50% {
+        background-color: #b22222;
+        color: white;
+    }
+    75% {
+        background-color: #663399;
+        color: white;
+    }
+    100% {
+        background-color: #ffd700;
+        transform: translateY(0%);
+        -webkit-transform: translateY(0%);
+        color: black;
+    }
+}

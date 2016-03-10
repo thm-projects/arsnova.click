@@ -88,5 +88,27 @@ Template.hashtag_view.events({
         if (charCount >= 25 && keyWhiteList.indexOf(event.keyCode)==-1) {
             event.preventDefault();
         }
+
+        //Select option on enter
+        if(event.keyCode == 13){
+            var inputHashtag = $(event.target).val();
+            if (inputHashtag.length > 0) {
+                var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
+                if (!hashtagDoc) {
+                    //Add new Hashtag
+                    $("#addNewHashtag").click();
+                } else {
+                    var localHashtags = localData.getAllHashtags();
+                    if ($.inArray(inputHashtag, localHashtags) > -1) {
+                        //Edit own Hashtag
+                        $("#addNewHashtag").click();
+                    }
+                    if (hashtagDoc.isActive) {
+                        //Join session
+                        $("#joinSession").click();
+                    }
+                }
+            }
+        }
     }
 });

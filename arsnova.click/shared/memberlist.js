@@ -1,12 +1,16 @@
 Meteor.methods({
-    'MemberList.addLearner': function ({hashtag, nick}) {
+    'MemberList.addLearner': function ({hashtag, nick, backgroundColor, foregroundColor}) {
         new SimpleSchema({
             hashtag: {type: String},
-            nick: {type: String}
+            nick: {type: String},
+            backgroundColor: {type: String},
+            foregroundColor: {type: String}
         }).validate({
-                hashtag,
-                nick
-            });
+            hashtag,
+            nick,
+            backgroundColor,
+            foregroundColor
+        });
         member = MemberList.findOne({
             hashtag: hashtag,
             nick: nick
@@ -15,6 +19,8 @@ Meteor.methods({
             MemberList.insert({
                 hashtag: hashtag,
                 nick: nick,
+                backgroundColor: backgroundColor,
+                foregroundColor: foregroundColor,
                 readConfirmed: 0
             });
         } else {

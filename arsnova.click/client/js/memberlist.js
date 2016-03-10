@@ -133,9 +133,14 @@ Template.memberlist.helpers({
         }
         return !Session.get("isOwner") && (doc.isReadingConfirmationRequired == 1);
     }
-
-
 });
+
+Template.learner.helpers({
+    isOwnNick: function (nickname) {
+        return nickname === Session.get("nick");
+    }
+});
+
 
 function calculateButtonCount () {
 

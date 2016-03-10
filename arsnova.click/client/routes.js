@@ -87,3 +87,13 @@ Router.route('/datenschutz', function () {
 Router.route('/impressum', function () {
     this.render('impressum');
 });
+
+Router.onStop(function() {
+    var lastRoute = Router.current().route.getName();
+    if(lastRoute===undefined){
+        //homeView
+        Session.set("lastPage","/");
+    }else if(lastRoute!=="agb" && lastRoute!=="datenschutz" && lastRoute!=="impressum"){
+        Session.set("lastPage",lastRoute);
+    }
+});

@@ -2,17 +2,21 @@
     <nav class="navbar navbar-default navbar-fixed-bottom footer footer-gradient">
         <div class="container-fluid text-center text-dark">
 
-            <!-- TODO: Insert right condition for the "Home"-Routing -->
-            {{#if isInHomePath}}
-                <a href="/ueber">
-                    <div class="col-xs-2 col-sm-3">Über</div>
+            {{#if isBackButton}}
+                <a href="/{{getLastPage}}">
+                    <div class="col-xs-2 col-sm-3" id="toPrevPage">zurück</div>
                 </a>
             {{else}}
-                <a href="/">
-                    <div class="col-xs-2 col-sm-3">Home</div>
-                </a>
+                {{#if isInHomePath}}
+                    <a href="/ueber">
+                        <div class="col-xs-2 col-sm-3">Über</div>
+                    </a>
+                {{else}}
+                    <a href="/">
+                        <div class="col-xs-2 col-sm-3">Home</div>
+                    </a>
+                {{/if}}
             {{/if}}
-
             <a href="/agb">
                 <div class="col-xs-2 col-sm-3">
                     AGB

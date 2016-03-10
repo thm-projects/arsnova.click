@@ -9,7 +9,10 @@ Template.endOfPollingSplashscreen.rendered = function () {
 
 Template.endOfPollingSplashscreen.events({
     "click #js-btn-hideEndOfPollingModal": function () {
-        $('.js-splashscreen-end-of-polling').modal("hide");
-        Router.go("/results");
+        $('.js-splashscreen-end-of-polling')
+            .on('hidden.bs.modal', function() {
+                Router.go('/results');
+            })
+            .modal('hide');
     }
 });

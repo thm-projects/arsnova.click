@@ -16,5 +16,14 @@ MemberList.attachSchema(new SimpleSchema({
 		min: 0,
 		max: 1
 	},
-
+	backgroundColor: {
+		type: String,
+		min: 7,
+		max: 7
+	},
+	foregroundColor: {
+		type: String,
+		min: 7,
+		max: 7
+	}
 }));

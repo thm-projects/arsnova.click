@@ -143,6 +143,7 @@ Template.readingConfirmation.onRendered(function () {
 
 Template.readingConfirmation.helpers({
     percentRead: function () {
+        calculateProgressBarTextWidth();
         return getPercentRead();
     }
 });
@@ -183,8 +184,8 @@ function calculateButtonCount () {
 }
 
 function calculateProgressBarTextWidth () {
-    $('.progress-fill').css('width', getPercentRead() + '%');
-    //$('.progress-fill').width((getPercentRead() - 20) + "%");
+    //$('.progress-fill').css('width', getPercentRead() + '%');
+    $('.progress-fill').width((getPercentRead() - 20) + "%");
     if (getPercentRead() === 0) {
         $('.progress-fill').hide();
     } else {
@@ -199,6 +200,6 @@ function getPercentRead () {
         count++;
         sumRead += member.readConfirmed;
     });
-
+    console.log(count);
     return count ? Math.floor(sumRead / count * 100) : 0;
 }

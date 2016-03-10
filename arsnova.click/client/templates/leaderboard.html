@@ -1,15 +1,17 @@
 <template name="leaderBoard">
-    <div class="row">
+    <div class="row center-vertical">
         <div class="col-md-12">
             <div class="row titel learner-title">
                 <h3 class=" titel-relative text-light text-center">
-                    Teilnehmer/innen, die alles richtig haben
+                    Teilnehmer/innen, die im Quiz &laquo;{{hashtag}}&raquo; alles richtig haben
                 </h3>
             </div>
-            <div class="row learner-list margin-title" id="learner-list">
-                {{#each leaderBoardItems}}
-                    {{nick}} - {{responseTime}}
-                {{/each}}
+            <div class="row distance-top">
+                <div class="row learner-list margin-title" id="learner-list">
+                    {{#each leaderBoardItems}}
+                        {{nick}} - {{responseTime}}
+                    {{/each}}
+                </div>
             </div>
         </div>
     </div>

@@ -13,6 +13,9 @@ Template.leaderBoard.onCreated(function () {
 });
 
 Template.leaderBoard.helpers({
+    hashtag: function () {
+        return Session.get("hashtag");
+    },
     "leaderBoardItems": function () {
         var leaderBoardItems = [];
         var allGoodMembers = [];

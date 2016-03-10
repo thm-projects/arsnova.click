@@ -199,6 +199,5 @@ function getPercentRead () {
         count++;
         sumRead += member.readConfirmed;
     });
-    console.log(count);
     return count ? Math.floor(sumRead / count * 100) : 0;
 }

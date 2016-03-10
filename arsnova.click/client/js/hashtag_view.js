@@ -83,7 +83,7 @@ Template.hashtag_view.events({
         Router.go("/nick");
     },
     "keydown #hashtag-input-field": function (event) {
-        var keyWhiteList = [37,39,8,46]; //left, right, delete, entf
+        var keyWhiteList = [37,39,8,46,13]; //left, right, delete, entf
         var charCount = $(event.currentTarget).val().length;
         if (charCount >= 25 && keyWhiteList.indexOf(event.keyCode)==-1) {
             event.preventDefault();

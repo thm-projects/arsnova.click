@@ -73,6 +73,7 @@ Router.route('/results', function () {
 });
 
 Router.route('/statistics', function () {
+    this.render('leaderBoard');
 });
 
 

@@ -41,6 +41,8 @@ Template.createAnswerOptions.events({
          if (AnswerOptions.find().count() > 1) {
             $("#deleteAnswerOption").show();
          }
+         $('.answer-options').scrollTop($('.answer-options')[0].scrollHeight);
+
       }
    },
    "click #deleteAnswerOption": function (event) {
@@ -55,6 +57,12 @@ Template.createAnswerOptions.events({
          if (AnswerOptions.find().count() == 1) {
             $(event.target).hide();
          }
+
+         if (AnswerOptions.find().count() > 2) {
+
+            $('.answer-options').scrollTop($('.answer-options')[0].scrollHeight);
+         }
+
       }
    },
    "click #backButton": function (event) {

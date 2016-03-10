@@ -57,7 +57,12 @@ Template.createAnswerOptions.events({
          if (AnswerOptions.find().count() == 1) {
             $(event.target).hide();
          }
-         $('.answer-options').scrollTop($('.answer-options')[0].scrollHeight);
+
+         if (AnswerOptions.find().count() > 2) {
+
+            $('.answer-options').scrollTop($('.answer-options')[0].scrollHeight);
+         }
+
       }
    },
    "click #backButton": function (event) {

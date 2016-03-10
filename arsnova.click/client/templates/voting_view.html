@@ -1,40 +1,38 @@
 <template name="votingview">
-
     {{> titel titelText = getCountdown}}
+    <div class="row">
+        <div class="col-xs-4">
+            <button type="button" id="js-showAnswerTexts" class="btn btn-info btn-lg btn-answerOption">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span><span
+                    class="ansBtn"> Antworten</span>
+            </button>
+        </div>
+
+        <div class="col-xs-4">
+            <button id="js-btn-showQuestionModal" type="button" class="btn btn-info btn-lg btn-answerOption">
+                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span><span
+                    class="ansBtn"> Frage</span>
+            </button>
+        </div>
+
+        {{#if showForwardButton}}
+            <div class="col-xs-4">
+                <button id="forwardButton" type="button" class="btn btn-success btn-lg btn-answerOption">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span><span class="ansBtn"> Absenden</span>
+                </button>
+            </div>
+        {{/if}}
+    </div>
 
     <div class="row answer-row">
 
         {{#each answerOptions}}
             <div class="col-xs-6 col-sm-4 col-md-3">
-                <button id="{{answerOptionNumber}}" class="sendResponse btn btn-grey btn-answerOption btn-answerFont">
+                <button id="{{answerOptionNumber}}" class="sendResponse btn btn-answerOption btn-answerFont">
                     {{answerOptionLetter number=answerOptionNumber}}
                 </button>
             </div>
         {{/each}}
-    </div>
-
-    <div class="row">
-        <div class="col-xs-4">
-            <button type="button" id="js-showAnswerTexts" class="btn btn-info btn-lg btn-answerOption">
-                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Antworten
-            </button>
-        </div>
-
-        <!-- glyphicon glyphicon-th-large -->
-
-        <div class="col-xs-4">
-            <button id="js-btn-showQuestionModal" type="button" class="btn btn-info btn-lg btn-answerOption">
-                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Frage
-            </button>
-        </div>
-
-        {{#if showForwardButton}}
-        <div class="col-xs-4">
-            <button id="forwardButton" type="button" class="btn btn-success btn-lg btn-answerOption">
-                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Absenden
-            </button>
-        </div>
-        {{/if}}
     </div>
     {{> splashscreen lazyClose="true" noAutorun="true" headername="Frage" templateName="questionContentSplash" type="splash-screen-show-question"}}
     {{> endOfPollingSplashscreen }}

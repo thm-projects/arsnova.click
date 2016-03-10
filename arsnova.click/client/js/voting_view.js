@@ -45,18 +45,19 @@ Template.votingview.events({
         $('.js-splashscreen-end-of-polling').modal('show');
     },
     "click .sendResponse": function (event) {
-        $(event.target).attr("disabled", "disabled");
         Meteor.call('Responses.addResponse', {
             hashtag: Session.get("hashtag"),
             answerOptionNumber: event.target.id,
             userNick: Session.get("nick")
         }, (err, res) => {
             if (err) {
-                alert(err);
-            } else {
-                if (res) {
-                    if (res.instantRouting) {
-                        // singlechoice
+            alert(err);
+        } else {
+            if (res) {
+                $(event.target).attr("disabled", "disabled");
+                $(event.target).addClass("answer-selected");
+                if (res.instantRouting) {
+                    // singlechoice
                         $('.js-splashscreen-end-of-polling').modal('show');
                         Session.set("hasGivenResponse", undefined);
                         Session.set("countdownInitialized", undefined);

@@ -12,3 +12,13 @@
   bottom: 10px;*/
   background-color: steelblue;
 }
+
+.answer-selected{
+ background-color: #ffd700 !important;
+}
+
+@media (max-width: 490px) {
+  .ansBtn{
+    display: none;
+  }
+}

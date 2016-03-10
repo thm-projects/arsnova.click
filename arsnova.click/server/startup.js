@@ -14,14 +14,14 @@ if(Meteor.isServer){
             var hashtagsExample2 = {
                 hashtag: "hashtags",
                 privateKey: new Mongo.ObjectID()._str,
-                isActive: 1,
+                isActive: 0,
                 lastConnection: (new Date()).getTime()
             };
             // block this hash / pk -> do not use and merge to production server!
             var hashtagsExample3 = {
                 hashtag: "privateKey",
                 privateKey: new Mongo.ObjectID()._str,
-                isActive: 1,
+                isActive: 0,
                 lastConnection: (new Date()).getTime()
             };
             /*

@@ -24,7 +24,7 @@ function createSlider () {
         start: Session.get("slider") == undefined ? 40 : Session.get("slider"),
         range: {
             'min': 5,
-            'max': 180
+            'max': 240
         }
     }).on('slide', function (ev, val) {
         Session.set('slider', Math.round(val));

@@ -14,6 +14,11 @@ Router.route('/', function () {
     this.render('home');
 });
 
+Router.route('/resetToHome', function () {
+    this.render('home');
+    location.reload();
+});
+
 Router.route('/nick', function () {
     this.render('nick');
 });

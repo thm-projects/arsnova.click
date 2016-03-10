@@ -11,6 +11,7 @@ Router.map(function () {
 Router.route('/', function () {
     localData.initializePrivateKey();
     Session.set("isOwner", undefined);
+    Session.set("slider", undefined);
     this.render('home');
 });
 

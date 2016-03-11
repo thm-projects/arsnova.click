@@ -1,43 +1,9 @@
-.text-size-medium {
-    font-size: 2em;
-}
-
 p.header-layout {
     margin-left: 0;
+    margin-right: 0;
 }
 
-@media (min-width: 1200px) {
-    .text-header-hashtag {
-        font-size: 80px;
-    }
 
-    .arsnova-logo {
-        width: 80px;
-        height: 80px;
-    }
-}
-
-@media (min-width: 990px) {
-    .text-header-hashtag {
-        font-size: 6vw;
-    }
-
-    .arsnova-logo {
-        width: 6vw;
-        height: 6vw;
-    }
-}
-
-@media (min-width: 768px) {
-    .text-header-hashtag {
-        font-size: 5vw;
-    }
-
-    .arsnova-logo {
-        width: 5vw;
-        height: 5vw;
-    }
-}
 
 .arsnova-logo {
     margin-left: 15px;

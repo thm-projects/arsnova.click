@@ -69,17 +69,16 @@ p, ul.list-unstyled {
 .titel {
     color: white;
     text-align: center;
-    font-size: 6vw;
+    font-size: 3vw;
     /*margin-top: 20px;*/
     width: 100%;
 }
 
-.titel + .margin-title {
+.margin-top-logo {
     margin-top: 10px;
 }
 
 .answer-options {
-    height: calc(100% - 265px);
     overflow-y: auto;
 }
 

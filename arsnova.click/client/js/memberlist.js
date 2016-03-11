@@ -2,13 +2,14 @@ Template.memberlist.onCreated(function () {
     this.autorun(() => {
         this.subscribe('MemberList.members', Session.get("hashtag"), function () {
         $(window).resize(function () {
-            var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
+            var final_height = $(window).height() - $(".fixed-bottom").outerHeight() - $(".navbar-fixed-bottom").height();
+            $(".titel").css("margin-top", $(".navbar").height());
             $(".container").css("height", final_height);
             Session.set("LearnerCountOverride", false);
             calculateButtonCount();
             calculateProgressBarTextWidth();
         });
-        });
+    });
         if(Session.get("isOwner")) {
             this.subscribe('MemberList.percentRead', {
                 hashtag: Session.get("hashtag"),
@@ -40,7 +41,8 @@ Template.memberlist.onCreated(function () {
 });
 
 Template.memberlist.rendered = function () {
-    var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
+    var final_height = $(window).height() - $(".fixed-bottom").outerHeight() - $(".navbar-fixed-bottom").height();
+    $(".titel").css("margin-top", $(".navbar").height());
     $(".container").css("height", final_height);
     Session.set("LearnerCountOverride", false);
     calculateButtonCount();

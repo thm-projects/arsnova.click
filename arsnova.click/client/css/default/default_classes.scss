@@ -131,18 +131,19 @@
 .button-result .progress {
   margin: 10px 10px 0 0;
   position: relative;
+  margin-bottom: 10px;
 }
 
 .progress-success {
-  background-color: $progress-bar-success-color;
+  background-color: $progress-bar-success-color !important;
 }
 
 .progress-failure {
-  background-color: $progress-bar-failure-color;
+  background-color: $progress-bar-failure-color !important;
 }
 
 .progress-default {
-  background-color: $progress-bar-default-color;
+  background-color: $progress-bar-default-color !important;
 }
 
 /*

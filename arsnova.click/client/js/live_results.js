@@ -121,3 +121,15 @@ Template.result_button.helpers({
         }
     }
 });
+
+Template.result_button_mc.helpers({
+    getCSSClassForIsCorrect: function (isCorrect) {
+        if (isCorrect > 0) {
+            return 'progress-success';
+        } else if (isCorrect < 0) {
+            return 'progress-default';
+        } else {
+            return 'progress-failure';
+        }
+    }
+});

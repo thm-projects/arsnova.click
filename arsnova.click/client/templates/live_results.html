@@ -12,12 +12,16 @@
             {{#each result}}
                 {{> result_button name = name absolute = absolute percent = percent isCorrect = isCorrect }}
             {{/each}}
-            {{#if isMC}}
-                {{> result_button name = "Richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = 1 }}
-                {{> result_button name = "Falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = 0 }}
-            {{/if}}
         </div>
     </div>
+    {{#if true}}
+        <div class="row" style="margin-top: 50px">
+            <div class="col-md-12">
+                {{> result_button_mc name = "Richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = 1  }}
+                {{> result_button_mc name = "Falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = 0 }}
+            </div>
+        </div>
+    {{/if}}
 
     <div class="fixed-bottom">
         <div class="row">
@@ -60,14 +64,39 @@
         <div class="col-md-12">
             <div class="button button-result">
                 <div class="row">
-                    <div class="col-xs-2 col-sm-1 col-md-1">
-                        <span class="button-result-letter">{{name}} {{absolute}}</span>
+                    <div class="col-xs-1 col-sm-1 col-md-1">
+                        <span class="button-result-letter">{{name}}</span>
                     </div>
-                    <div class="col-xs-10 col-sm-11 col-md-11">
+                    <div class="col-xs-11 col-sm-11 col-md-11">
                         <div class="progress" style="padding-right: 10px; margin-top: 10px">
                             <div class="progress-bar {{getCSSClassForIsCorrect isCorrect}}" role="progressbar"
                                  aria-valuemin="0" aria-valuemax="100"
-                                 style="width: {{percent}}%"><span class="percentage">{{percent}}%</span>
+                                 style="width: {{percent}}%"><span class="percentage">{{absolute}} | {{percent}}%</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="result_button_mc">
+    <div class="row form-group">
+        <div class="col-md-12">
+            <div class="button button-result">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <span class="button-result-letter">{{name}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-11 col-sm-11 col-md-11 col-xs-offset-1 col-sm-offset-1 col-md-offset-1">
+                        <div class="progress" style="padding-right: 10px; margin-top: 10px">
+                            <div class="progress-bar {{getCSSClassForIsCorrect isCorrect}}" role="progressbar"
+                                 aria-valuemin="0" aria-valuemax="100"
+                                 style="width: {{percent}}%"><span class="percentage">{{absolute}} | {{percent}}%</span>
                             </div>
 
                         </div>

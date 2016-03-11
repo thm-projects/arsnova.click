@@ -103,6 +103,12 @@
   color: $default-text-color;
 }
 
+.button-leader {
+  background-color: $input-background-color;
+  color: black;
+  box-shadow: none;
+}
+
 .distance-top {
   margin-top: 20px;
 }

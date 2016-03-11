@@ -91,6 +91,10 @@ p, ul.list-unstyled {
     margin-top: 20px;
 }
 
+.logo-header-chars {
+    font-size: 6vw;
+}
+
 .row-landingpage-buttons {
     margin-top: 10px;
     margin-bottom: 20px;

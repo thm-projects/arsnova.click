@@ -61,7 +61,6 @@ Template.live_results.events({
         $('.answerTextSplash').parents('.modal').modal();
     },
     "click #js-btn-showLeaderBoard": function () {
-        console.log("fire");
         Router.go("/statistics");
     }
 });

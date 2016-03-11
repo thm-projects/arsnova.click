@@ -58,7 +58,8 @@ p, ul.list-unstyled {
 
 .header-layout {
     white-space: nowrap;
-    font-size: 7vw;
+    font-size: 3vw;
+    margin-top: 20px;
 }
 
 .header-session > .row {
@@ -68,43 +69,19 @@ p, ul.list-unstyled {
 .titel {
     color: white;
     text-align: center;
-    font-size: 6vw;
+    font-size: 3vw;
     /*margin-top: 20px;*/
     width: 100%;
 }
 
-.titel + .margin-title {
+.margin-top-logo {
     margin-top: 10px;
 }
 
 .answer-options {
-    height: calc(100% - 265px);
     overflow-y: auto;
 }
 
-@media (min-width: 1200px) {
-    .header-layout {
-        font-size: 80px;
-    }
-
-}
-
-@media (min-width: 990px) {
-    .header-layout {
-        font-size: 6vw;
-    }
-
-}
-
-@media (min-width: 768px) {
-    .header-layout {
-        font-size: 5vw;
-    }
-
-    .titel {
-        font-size: 3.5vw;
-    }
-}
 
 .toggleCorrect:hover {
     cursor: pointer;

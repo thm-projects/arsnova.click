@@ -34,18 +34,18 @@ Template.memberlist.onCreated(function () {
 
 Template.memberlist.onRendered(function () {
     $(window).resize(function () {
-        var final_height = $(window).height() - $(".navbar").height();
-        $(".titel").css("margin-top", $(".navbar").height());
+        var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
         $(".container").css("height", final_height);
+        $(".container").css("margin-top", $(".navbar").height());
         calculateButtonCount();
         calculateProgressBarTextWidth();
     });
 });
 
 Template.memberlist.rendered = function () {
-    var final_height = $(window).height() - $(".navbar").height();
-    $(".titel").css("margin-top", $(".navbar").height());
+    var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
     $(".container").css("height", final_height);
+    $(".container").css("margin-top", $(".navbar").height());
     calculateButtonCount();
     calculateProgressBarTextWidth();
 };

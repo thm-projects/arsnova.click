@@ -44,6 +44,10 @@ Template.createAnswerOptions.events({
          if (AnswerOptions.find().count() > 1) {
             $("#deleteAnswerOption").removeClass("hide");
          }
+
+         if (AnswerOptions.find().count() > 25) {
+            $("#addAnswerOption").addClass("hide");
+         }
          $('.answer-options').scrollTop($('.answer-options')[0].scrollHeight);
 
       }
@@ -51,6 +55,8 @@ Template.createAnswerOptions.events({
    "click #deleteAnswerOption": function (event) {
       var number = AnswerOptions.find().count() - 1;
       if (AnswerOptions.find().count() > 1) {
+         $("#addAnswerOption").removeClass("hide");
+
          Meteor.call('AnswerOptions.deleteOption', {
             privateKey: localData.getPrivateKey(),
             hashtag: Session.get("hashtag"),
@@ -64,7 +70,6 @@ Template.createAnswerOptions.events({
          if (AnswerOptions.find().count() > 2) {
             $('.answer-options').scrollTop($('.answer-options')[0].scrollHeight);
          }
-
       }
    },
    "click #backButton": function (event) {

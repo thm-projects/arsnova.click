@@ -32,16 +32,22 @@ Template.nick.events({
     'input #nickname-input-field': function (event) {
         var hashtag = Session.get("hashtag");
         var currentNickName = event.currentTarget.value;
-        if (currentNickName.length > 2) {
+    var member = MemberList.findOne({nick: currentNickName});
+
+        if (currentNickName.length > 2 && !member) {
             $("#forwardButton").removeAttr("disabled");
         } else {
             $("#forwardButton").attr("disabled", "disabled");
         }
-        var member = MemberList.findOne({nick: currentNickName});
-        if (!member){
-            $("#addNickname").prop('disabled', false);
-        }else{
-            $("#addNickname").prop('disabled', true);
+    },
+    "keydown #nickname-input-field": function(event){
+        if(event.keyCode==13){
+            var currentNickName = event.currentTarget.value;
+            var member = MemberList.findOne({nick: currentNickName});
+
+            if (currentNickName.length > 2 && !member) {
+                $("#forwardButton").click();
+            }
         }
     }
 });

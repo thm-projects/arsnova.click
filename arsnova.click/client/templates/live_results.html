@@ -41,6 +41,16 @@
                             <span class="ansBtn">Antworten</span>
                         </button>
                     </div>
+
+                    {{#if sessionClosed}}
+                        <div class="col-xs-4">
+                            <button id="js-btn-showLeaderBoard" type="button"
+                                    class="btn btn-info btn-lg btn-answerOption">
+                                <span class="ansBtn">Rangliste</span>
+                                <span class="glyphicon glyphicon-th-list glyph-right" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    {{/if}}
                 </div>
             </div>
         </div>
@@ -115,7 +125,7 @@
             {{/if}}
             {{#if isMC}}
                 {{#if correct}}
-                        <p>Du hast komplett richtig geantwortet!</p>
+                    <p>Du hast komplett richtig geantwortet!</p>
                 {{else}}
                     <p>Du hast falsch geantwortet!</p>
                 {{/if}}

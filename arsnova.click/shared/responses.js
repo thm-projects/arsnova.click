@@ -13,12 +13,12 @@ Meteor.methods({
                 sessionStatus: 3
             });
             if (!hashtagDoc) {
-                throw new Meteor.Error('Responses.addResponse', 'There is no such hashtag active in the db');
+                throw new Meteor.Error('Responses.addResponse', 'There is no such quiz active in the db');
                 return;
             } else {
                 var sessionDoc = Sessions.findOne({hashtag: responseDoc.hashtag});
                 if (!sessionDoc) {
-                    throw new Meteor.Error('Responses.addResponse', 'No session doc for this hashtag');
+                    throw new Meteor.Error('Responses.addResponse', 'No session doc for this quiz');
                     return;
                 }
                 var responseTime = Number(timestamp) - Number(sessionDoc.startTime);

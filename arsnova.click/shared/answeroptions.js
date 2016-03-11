@@ -15,7 +15,7 @@ Meteor.methods({
             });
         }
         if (!doc) {
-            throw new Meteor.Error('AnswerOptions.addOption', 'Either there is no hashtag or you don\'t have write access');
+            throw new Meteor.Error('AnswerOptions.addOption', 'Either there is no quiz or you don\'t have write access');
             return;
         }
         else {
@@ -56,7 +56,7 @@ Meteor.methods({
             });
         }
         if (!doc) {
-            throw new Meteor.Error('AnswerOptions.addOption', 'Either there is no hashtag or you don\'t have write access');
+            throw new Meteor.Error('AnswerOptions.addOption', 'Either there is no quiz or you don\'t have write access');
             return;
         }
         else {
@@ -82,7 +82,7 @@ Meteor.methods({
             });
         }
         if (!doc) {
-            throw new Meteor.Error('AnswerOptions.addOption', 'Either there is no hashtag or you don\'t have write access');
+            throw new Meteor.Error('AnswerOptions.addOption', 'Either there is no quiz or you don\'t have write access');
             return;
         }
         else {

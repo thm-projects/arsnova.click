@@ -113,3 +113,16 @@ Template.createAnswerOptions.events({
          }
       }
 });
+
+Template.createAnswerOptions.onRendered(function () {
+   $(window).resize(function () {
+      var answer_options_height = $(".container").height() - $(".row-landingpage-buttons").outerHeight(true) - $(".titel-relative").outerHeight(true);
+      $('.answer-options').css("height", answer_options_height);
+   });
+});
+
+
+Template.createAnswerOptions.rendered = function () {
+   var answer_options_height = $(".container").height() - $(".row-landingpage-buttons").outerHeight(true) - $(".titel-relative").outerHeight(true);
+   $('.answer-options').css("height", answer_options_height);
+};

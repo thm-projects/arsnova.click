@@ -1,13 +1,27 @@
+var countdown = null;
 Template.live_results.onCreated(function () {
     this.autorun(() => {
         this.subscription = Meteor.subscribe('Responses.instructor', Session.get("hashtag"));
         this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"));
         this.subscription = Meteor.subscribe('MemberList.members', Session.get("hashtag"));
         this.subscription = Meteor.subscribe('Sessions.question', Session.get("hashtag"));
+        this.subscription = Meteor.subscribe('Hashtags.public', Session.get("hashtag"), function () {
+            var timestamp = new Date().getTime();
+            var sessionDoc = Sessions.findOne();
+            countdown = new ReactiveCountdown((timestamp - (sessionDoc.startTime + sessionDoc.timer )) / 1000);
+            countdown.start(function () {
+                $('#appTitle').html("Abstimmung gelaufen");
+                Session.set("sessionClosed", true);
+            });
+            Session.set("countdownInitialized", true);
+        });
     });
 });
 
 Template.live_results.helpers({
+    sessionClosed: function () {
+        return Session.get("sessionClosed");
+    },
     result: function () {
         var result = [];
         var memberAmount = Responses.find({hashtag: Session.get("hashtag")}).count();
@@ -45,8 +59,11 @@ Template.live_results.events({
     },
     "click #js-btn-showAnswerModal": function () {
         $('.answerTextSplash').parents('.modal').modal();
+    },
+    "click .js-btn-showLeaderBoard": function () {
+        console.log("fire");
+        Router.go("/statistics");
     }
-
 });
 
 

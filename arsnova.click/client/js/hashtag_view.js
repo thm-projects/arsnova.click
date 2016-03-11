@@ -2,6 +2,22 @@ Template.hashtag_view.onCreated(function () {
     this.autorun(() => {
         this.subscribe('Hashtags.public');
     });
+
+    Tracker.autorun(function() {
+        var initializing = true;
+        Hashtags.find().observeChanges({
+            changed: function (id, attr) {
+                if (!initializing) {
+                    var inputHashtag = $("#hashtag-input-field").val();
+                    var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
+                    if (hashtagDoc.hashtag && (hashtagDoc.sessionStatus === 2)) {
+                        $("#joinSession").removeAttr("disabled");
+                    }
+                }
+            }
+        });
+        initializing = false;
+    });
 });
 
 Template.hashtag_view.events({

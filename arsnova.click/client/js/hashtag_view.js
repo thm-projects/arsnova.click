@@ -98,7 +98,8 @@ Template.hashtag_view.events({
                         //Edit own Hashtag
                         $("#addNewHashtag").click();
                     }
-                    if (hashtagDoc.isActive) {
+
+                    if (hashtagDoc.sessionStatus === 2) {
                         //Join session
                         $("#joinSession").click();
                     }

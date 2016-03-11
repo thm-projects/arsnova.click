@@ -10,8 +10,10 @@
      * -50px because of the header height
      * -20px because of the footer height
      */
-    height: calc(100% - 114px - 20px);
-    top: 10%;
+    /*height: calc(100% - 114px - 20px);*/
+    /*top: 10%;*/
+    height: 100%;
+    overflow-x: auto;
 }
 
 .contentPosition > .row {
@@ -50,7 +52,8 @@ a:focus {
 
 p, ul.list-unstyled {
     margin-left: 30px;
-    text-align: justify;
+    margin-right: 30px;
+    /*text-align: justify;*/
 }
 
 .header-layout {
@@ -58,16 +61,20 @@ p, ul.list-unstyled {
     font-size: 7vw;
 }
 
+.header-session > .row {
+    margin-top: 20px;
+}
+
 .titel {
     color: white;
     text-align: center;
     font-size: 6vw;
-    margin-top: 20px;
+    /*margin-top: 20px;*/
     width: 100%;
 }
 
 .titel + .margin-title {
-    margin-top: 60px;
+    margin-top: 10px;
 }
 
 .answer-options {
@@ -97,4 +104,12 @@ p, ul.list-unstyled {
     .titel {
         font-size: 3.5vw;
     }
+}
+
+.toggleCorrect:hover {
+    cursor: pointer;
+}
+
+.input-group-slider {
+    margin-top: 20px;
 }

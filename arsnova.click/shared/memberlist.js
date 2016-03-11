@@ -1,12 +1,16 @@
 Meteor.methods({
-    'MemberList.addLearner': function (hashtag, nick) {
+    'MemberList.addLearner': function ({hashtag, nick, backgroundColor, foregroundColor}) {
         new SimpleSchema({
             hashtag: {type: String},
-            nick: {type: String}
+            nick: {type: String},
+            backgroundColor: {type: String},
+            foregroundColor: {type: String}
         }).validate({
-                hashtag,
-                nick
-            });
+            hashtag,
+            nick,
+            backgroundColor,
+            foregroundColor
+        });
         member = MemberList.findOne({
             hashtag: hashtag,
             nick: nick
@@ -15,10 +19,15 @@ Meteor.methods({
             MemberList.insert({
                 hashtag: hashtag,
                 nick: nick,
-                readConfirmed: 0
+                lowerCaseNick: nick.toLowerCase(),
+                backgroundColor: backgroundColor,
+                foregroundColor: foregroundColor,
+                readConfirmed: 0,
+                insertDate: new Date().getTime()
             });
         } else {
             throw new Meteor.Error('MemberList.addLearner', 'Nick already exists!');
+            return;
         }
     },
     'MemberList.setReadConfirmed': function (hashtag, nick) {
@@ -30,7 +39,6 @@ Meteor.methods({
                 hashtag,
                 nick
             });
-
         member = MemberList.findOne({
             hashtag: hashtag,
             nick: nick

@@ -1,12 +1,100 @@
-.learner-title {
-    margin: 10px 0;
+.slide-left {
+    transform: translateX(0%);
+    -webkit-transform: translateX(0%);
+    animation: slide-left 1s forwards;
+    -webkit-animation: slide-left 1s forwards;
+}
+
+.slide-top {
+    transform: translateY(0%);
+    -webkit-transform: translateY(0%);
+    animation: slide-top 1s forwards;
+    -webkit-animation: slide-top 1s forwards;
+}
+
+@keyframes slide-left {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@-webkit-keyframes slide-left {
+    0% {
+        -webkit-transform: translateX(-100%);
+    }
+    100% {
+        -webkit-transform: translateX(0%);
+    }
+}
+
+@keyframes slide-top {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@-webkit-keyframes slide-top {
+    0% {
+        -webkit-transform: translateY(-100%);
+    }
+    100% {
+        -webkit-transform: translateY(0%);
+    }
 }
 
 .btn-learner {
     margin-bottom: 20px;
     width: 100%;
+    transform: translateX(-100%);
+    transform: translateY(-100%);
+    -webkit-transform: translateX(-100%);
+    -webkit-transform: translateY(-100%);
 }
 
-.confirmationCounter {
-    margin-top: 70px;
+.learner-list {
+    margin-bottom: 15px;
+}
+
+.button-row {
+    margin-top: 20px;
+}
+
+.color-changing-own-nick {
+     animation-duration: 7s;
+     animation-iteration-count: infinite;
+     font-weight: bold;
+     animation-name: colorChangingOwnNick;
+ }
+
+@keyframes colorChangingOwnNick {
+    0% {
+        background-color: #ffd700;
+        transform: translateY(0%);
+        -webkit-transform: translateY(0%);
+        color: black;
+    }
+    25% {
+        background-color: white;
+        color: black;
+    }
+    50% {
+        background-color: #b22222;
+        color: white;
+    }
+    75% {
+        background-color: #663399;
+        color: white;
+    }
+    100% {
+        background-color: #ffd700;
+        transform: translateY(0%);
+        -webkit-transform: translateY(0%);
+        color: black;
+    }
 }

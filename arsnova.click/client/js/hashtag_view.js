@@ -7,27 +7,24 @@ Template.hashtag_view.onCreated(function () {
 Template.hashtag_view.events({
     "input #hashtag-input-field": function (event) {
         var inputHashtag = $(event.target).val();
-        $("#addNewHashtag").text("Mach neu !");
+        $("#addNewHashtag").html("Mach neu !<span class=\"glyphicon glyphicon-plus glyph-right\" aria-hidden=\"true\"></span>");
         if (inputHashtag.length > 0) {
             var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
             if (!hashtagDoc) {
                 $("#joinSession").attr("disabled", "disabled");
                 $("#addNewHashtag").removeAttr("disabled");
             } else {
-                var canReenter = false;
-                var localHashtags = getAllHashtagsFromLocalStorage();
+                var localHashtags = localData.getAllHashtags();
                 if ($.inArray(inputHashtag, localHashtags) > -1) {
-                    $("#addNewHashtag").text("Wiederherstellen");
+                    $("#addNewHashtag").html("Bearbeiten<span class=\"glyphicon glyphicon-pencil glyph-right\" aria-hidden=\"true\"></span>");
                     $("#addNewHashtag").removeAttr("disabled");
-                    canReenter = true;
                 }
-                if (hashtagDoc.isActive) {
-                    $("#joinSession").removeAttr("disabled");
-                    if (!canReenter) {
-                        $("#addNewHashtag").attr("disabled", "disabled");
-                    }
-                } else {
+                else {
                     $("#addNewHashtag").attr("disabled", "disabled");
+                }
+                if (hashtagDoc.sessionStatus === 2) {
+                    $("#joinSession").removeAttr("disabled");
+                } else {
                     $("#joinSession").attr("disabled", "disabled");
                 }
             }
@@ -42,22 +39,24 @@ Template.hashtag_view.events({
         var hashtag = $("#hashtag-input-field").val();
         var reenter = false;
         if (hashtag.length > 0) {
-            var localHashtags = getAllHashtagsFromLocalStorage();
+            var localHashtags = localData.getAllHashtags();
             if ($.inArray(hashtag, localHashtags) > -1) {
                 var oldHashtagDoc = Hashtags.findOne({hashtag: hashtag});
                 if (oldHashtagDoc) {
                     reenter = true;
                     Session.set("hashtag", hashtag);
                     Session.set("isOwner", true);
-                    reenterSession(hashtag);
+                    Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), hashtag, 1);
+                    localData.reenterSession(hashtag);
                     Router.go("/question");
                 }
             }
             if (!reenter) {
                 var doc = {
-                    privateKey: localStorage.getItem("privateKey"),
+                    privateKey: localData.getPrivateKey(),
                     hashtag: hashtag,
-                    isActive: 1
+                    sessionStatus: 1,
+                    lastConnection: (new Date()).getTime()
                 };
                 Meteor.call('Hashtags.addHashtag', doc, (err, res) => {
                     if (err) {
@@ -65,12 +64,7 @@ Template.hashtag_view.events({
                     } else {
                         Session.set("hashtag", hashtag);
                         Session.set("isOwner", true);
-                        localStorage.setItem("hashtag", hashtag);
-                        // flag the client as owner via localStorage
-                        addHashtagToLocalStorage(hashtag);
-                        //var localHashtags = JSON.parse(localStorage.getItem("hashtags"));
-                        //localHashtags.push(hashtag);
-                        //localStorage.setItem("hashtags", JSON.stringify(localHashtags));
+                        localData.addHashtag(hashtag);
                         Router.go("/question");
                     }
                 });
@@ -80,7 +74,36 @@ Template.hashtag_view.events({
     "click #joinSession": function () {
         var hashtag = $("#hashtag-input-field").val();
         Session.set("hashtag", hashtag);
-        localStorage.setItem("hashtag", hashtag);
+        //localStorage.setItem("hashtag", hashtag);
         Router.go("/nick");
+    },
+    "keydown #hashtag-input-field": function (event) {
+        var keyWhiteList = [37,39,8,46,13]; //left, right, delete, entf
+        var charCount = $(event.currentTarget).val().length;
+        if (charCount >= 25 && keyWhiteList.indexOf(event.keyCode)==-1) {
+            event.preventDefault();
+        }
+
+        //Select option on enter
+        if(event.keyCode == 13){
+            var inputHashtag = $(event.target).val();
+            if (inputHashtag.length > 0) {
+                var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
+                if (!hashtagDoc) {
+                    //Add new Hashtag
+                    $("#addNewHashtag").click();
+                } else {
+                    var localHashtags = localData.getAllHashtags();
+                    if ($.inArray(inputHashtag, localHashtags) > -1) {
+                        //Edit own Hashtag
+                        $("#addNewHashtag").click();
+                    }
+                    if (hashtagDoc.isActive) {
+                        //Join session
+                        $("#joinSession").click();
+                    }
+                }
+            }
+        }
     }
 });

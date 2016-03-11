@@ -2,7 +2,8 @@
 @import "appearance";
 
 .center-vertical {
-  position: relative;
+  position: absolute;
+  width: 100%;
   top: 50%;
   /* TODO: IE 8 and Opera 8 doesn't support translateY*/
   transform: translateY(-50%);
@@ -10,6 +11,22 @@
 
 .round-corners, .button {
   border-radius: $corner-radius;
+}
+
+.slider, .slider .noUi-handle {
+  background-color: $slider-color;
+}
+
+.slider.noUi-target {
+  border: 0;
+  box-shadow: none;
+  margin-top: 35px;
+}
+
+.slider-timer-input {
+  text-align: center;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .button-shadow, .button {
@@ -40,10 +57,24 @@
   white-space: nowrap;
 }
 
-.input-group-letter {
+.glyph-left, .glyph-right {
+  font-size: 1.5em;
+}
+
+.glyph-right {
+  padding-left: 10px;
+}
+
+.glyph-left {
+  padding-right: 10px;
+}
+
+.input-group-letter, .button-result-letter {
   font-size: 2em;
   font-weight: 800;
   color: $input-group-letter-color;
+  min-width: 50px;
+  margin-left: 5px;
 }
 
 .button:hover, .button:active:focus {
@@ -72,6 +103,37 @@
 
 .distance-top {
   margin-top: 20px;
+}
+
+.button-result {
+  background-color: #eeeeee;
+  box-shadow: none;
+  height: auto;
+}
+
+.button-result .percentage {
+  position: absolute;
+  text-align: center;
+  top: 2px;
+  color: #ffffff;
+  font-weight: bolder;
+}
+
+.button-result .progress {
+  margin: 10px 10px 0 0;
+  position: relative;
+}
+
+.progress-success {
+  background-color: $progress-bar-success-color;
+}
+
+.progress-failure {
+  background-color: $progress-bar-failure-color;
+}
+
+.progress-default {
+  background-color: $progress-bar-default-color;
 }
 
 /*
@@ -105,7 +167,8 @@
   bottom: 25px;
   width: 100%;
   left: 0;
-  padding: 30px;
+  background-color: steelblue;
+  padding: 10px 15px 25px 15px;
 }
 
 .content-with-navigation-buttons {
@@ -121,16 +184,17 @@
   outline: none;
   resize: none;
   padding: 10px;
+  border: 0;
 }
 
 .check-mark-checked {
   color: $check-mark-checked;
-  font-size: 1.3em;
   width: 30px;
 }
 
 .check-mark-unchecked {
   color: $check-mark-unchecked;
+  font-size: 0.8em;
   width: 30px;
 }
 
@@ -138,14 +202,39 @@
   line-height: 100%;
   width: 50px !important;
   height: 50px !important;
-  background-color: $check-mark-unchecked;
-
+  font-weight: 900;
+  font-size: 22px;
+  padding: 0;
 }
 
-.color-changing {
+.color-changing-ars, .color-changing-nova, .color-changing-dot, .color-changing-click {
   width: 100px;
   height: 100px;
-  animation-name: colorChanging;
   animation-duration: 7s;
   animation-iteration-count: infinite;
+  font-weight: bold;
+}
+
+.color-changing-ars {
+  animation-name: colorChangingArs;
+}
+
+.color-changing-nova {
+  animation-name: colorChangingNova;
+}
+
+.color-changing-dot {
+  animation-name: colorChangingDot;
+}
+
+.color-changing-click {
+  animation-name: colorChangingClick;
+}
+
+.success input, .success textarea, input.success, textarea.success {
+  border: 3px solid $success;
+}
+
+.error input, .error textarea, input.error, textarea.error {
+  border: 3px solid $warning;
 }

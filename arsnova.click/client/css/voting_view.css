@@ -1,0 +1,24 @@
+.btn-answerFont {
+  font-size: 4em;
+}
+
+.btn-answerOption {
+  margin: 23px 0;
+  width: 100%;
+}
+
+.answer-row {
+  /*position: fixed;
+  bottom: 10px;*/
+  background-color: steelblue;
+}
+
+.answer-selected{
+ background-color: #ffd700 !important;
+}
+
+@media (max-width: 490px) {
+  .ansBtn{
+    display: none;
+  }
+}

@@ -1,6 +1,6 @@
 Template.readconfirmationrequired.onCreated(function () {
     this.autorun(() => {
-        this.subscribe('Sessions.instructor', localStorage.getItem("privateKey"), Session.get("hashtag"));
+        this.subscribe('Sessions.instructor', localData.getPrivateKey(), Session.get("hashtag"));
     });
 });
 
@@ -9,7 +9,7 @@ Template.readconfirmationrequired.helpers({
 
         var thisSession = Sessions.findOne({hashtag:Session.get("hashtag")});
         if (!thisSession) {
-            return;
+            return false;
         }
         return thisSession.isReadingConfirmationRequired;
     }
@@ -17,12 +17,13 @@ Template.readconfirmationrequired.helpers({
 
 Template.readconfirmationrequired.events({
     "click #forwardButton": function () {
-        updateIsReadingConfirmationRequiredToLocalStorage(Session.get("hashtag"), Sessions.findOne({hashtag:Session.get("hashtag")}).isReadingConfirmationRequired);
+        localData.updateIsReadingConfirmationRequired(Session.get("hashtag"), Sessions.findOne({hashtag: Session.get("hashtag")}).isReadingConfirmationRequired);
+        Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 2);
         Router.go("/memberlist");
     },
     "click #backButton": function () {
         if (Session.get("isOwner")){
-            Router.go("/answeroptions");
+            Router.go("/settimer");
         }else{
             Router.go("/nick");
         }
@@ -30,9 +31,25 @@ Template.readconfirmationrequired.events({
     'click #isReadConfirmationRequiredButton': function (event) {
         event.preventDefault();
 
-        var newVal = Sessions.findOne({hashtag:Session.get("hashtag")}).isReadingConfirmationRequired ? 0 : 1;
-        Meteor.call("Sessions.updateIsReadConfirmationRequired", {privateKey:localStorage.getItem("privateKey"), hashtag:Session.get("hashtag"), isReadingConfirmationRequired:newVal});
+        var newVal = 0;
+        var sessionDoc = Sessions.findOne({hashtag:Session.get("hashtag")});
+        if (sessionDoc) {
+            if (!sessionDoc.isReadingConfirmationRequired) {
+                newVal = 1;
+            }
+        }
+        Meteor.call("Sessions.updateIsReadConfirmationRequired", {
+            privateKey: localData.getPrivateKey(),
+            hashtag: Session.get("hashtag"),
+            isReadingConfirmationRequired: newVal
+        });
 
-        $('#isReadConfirmationRequiredButton').toggleClass("down");
+        var btn = $('#isReadConfirmationRequiredButton');
+        btn.toggleClass("down");
+        if(btn.hasClass("down")){
+            btn.html("Lesebestätigung ist aktiv!");
+        }else{
+            btn.html("Lesebestätigung ist inaktiv!");
+        }
     }
 });

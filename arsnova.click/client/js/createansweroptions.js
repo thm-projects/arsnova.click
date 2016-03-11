@@ -10,6 +10,9 @@ Template.createAnswerOptions.helpers({
    },
    answerOptionLetter: function (Nr) {
       return String.fromCharCode(Nr + 65);
+   },
+   showDeleteButtonOnStart: function(){
+      return (AnswerOptions.find().count()==1) ? "hide": "";
    }
 });
 
@@ -39,7 +42,7 @@ Template.createAnswerOptions.events({
          Meteor.call('AnswerOptions.addOption', answerOption);
          localData.addAnswers(Session.get("hashtag"), answerOption);
          if (AnswerOptions.find().count() > 1) {
-            $("#deleteAnswerOption").show();
+            $("#deleteAnswerOption").removeClass("hide");
          }
          $('.answer-options').scrollTop($('.answer-options')[0].scrollHeight);
 
@@ -55,11 +58,10 @@ Template.createAnswerOptions.events({
          });
          localData.deleteAnswerOption(Session.get("hashtag"), number);
          if (AnswerOptions.find().count() == 1) {
-            $(event.target).hide();
+            $("#deleteAnswerOption").addClass("hide");
          }
 
          if (AnswerOptions.find().count() > 2) {
-
             $('.answer-options').scrollTop($('.answer-options')[0].scrollHeight);
          }
 

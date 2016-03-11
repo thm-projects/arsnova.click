@@ -10,15 +10,19 @@ Template.live_results.onCreated(function () {
 Template.live_results.helpers({
     result: function () {
         var result = [];
-        var memberAmount = Responses.find({hashtag: Session.get("hashtag")}).count();
-        var answerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
-        if(answerOptions){ //survey
+
+        var memberAmount = Responses.find({hashtag: Session.get("hashtag")}).fetch();
+        memberAmount = _.uniq(memberAmount, false, function(user) {return user.userNick}).length;
+
+        var correctAnswerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
+
+        if(!correctAnswerOptions){ //survey
             AnswerOptions.find({hashtag: Session.get("hashtag")}).forEach(function(value){
                 var amount = Responses.find({hashtag: Session.get("hashtag"), answerOptionNumber: value.answerOptionNumber}).count();
                 result.push({name: String.fromCharCode(value.answerOptionNumber + 65), absolute: amount, percent: memberAmount ? ( Math.floor((amount * 100) / memberAmount)) : 0, isCorrect: -1});
             });
         } else { //MC / SC
-            if(answerOptions === 1){ //SC
+            if(correctAnswerOptions === 1){ //SC
                 AnswerOptions.find({hashtag: Session.get("hashtag")}).forEach(function(value){
                     var amount = Responses.find({hashtag: Session.get("hashtag"), answerOptionNumber: value.answerOptionNumber}).count();
                     result.push({name: String.fromCharCode(value.answerOptionNumber + 65), absolute: amount, percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0, isCorrect: value.isCorrect});
@@ -39,8 +43,10 @@ Template.live_results.helpers({
         return answerOptions > 1;
     },
     mcOptions: function(){
-        //TODO memberAmount wrong
-        const memberAmount = Responses.find({hashtag: Session.get("hashtag")}).count();
+
+        let memberAmount = Responses.find({hashtag: Session.get("hashtag")}).fetch();
+        memberAmount = _.uniq(memberAmount, false, function(user) {return user.userNick}).length;
+
         const correctAnswers = [];
         AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect:1},{fields:{"answerOptionNumber":1}}).forEach(function (answer){
             correctAnswers.push(answer.answerOptionNumber);
@@ -69,8 +75,8 @@ Template.live_results.helpers({
             }
         });
         return {
-            allCorrect: {absolute: allCorrect, percent: allCorrect/memberAmount},
-            allWrong: {absolute: allWrong, percent: allWrong/memberAmount}
+            allCorrect: {absolute: allCorrect, percent: memberAmount ? allCorrect/memberAmount : 0},
+            allWrong: {absolute: allWrong, percent: memberAmount ? allWrong/memberAmount : 0}
         };
     } 
 });

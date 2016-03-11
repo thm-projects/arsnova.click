@@ -14,14 +14,8 @@
             {{#if isReadingConfirmationRequired}}
                 {{> readingConfirmation }}
             {{/if}}
-            <div class="row learner-list margin-title"
-                 id="learner-list">
-                {{#each learners}}
-                    {{>learner}}
-                {{/each}} <!-- learners -->
-            </div>
             {{#if showMoreButton}}
-                <div class="row">
+                <div class="row more-learners-row">
                     <div class="col-xs-12">
                         <button class="btn btn-more-learners">
                             <span class="glypicon glyphicon-align-justify"></span>
@@ -30,6 +24,12 @@
                     </div>
                 </div>
             {{/if}}
+            <div class="row learner-list margin-title"
+                 id="learner-list">
+                {{#each learners}}
+                    {{>learner}}
+                {{/each}} <!-- learners -->
+            </div>
         </div>
     </div>
     {{#if isOwner}}
@@ -81,8 +81,8 @@
 <template name="readingConfirmation">
     <div class="row confirmationCounter margin-title">
         <div class="col-xs-12">
-            <div class="progress-bar color-changing-progress-bar">
-                <div class="progress-fill">
+            <div class="progress-bar color-changing-progress-bar round-corners">
+                <div class="progress-fill round-corners-left">
                     <div class="progress-fill-text">Lesebestätigung: {{percentRead}} %</div>
                 </div>
                 Lesebestätigung: {{percentRead}} %

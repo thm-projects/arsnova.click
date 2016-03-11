@@ -10,8 +10,10 @@ Template.hashtag_view.onCreated(function () {
                 if (!initializing) {
                     var inputHashtag = $("#hashtag-input-field").val();
                     var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
-                    if (hashtagDoc.hashtag && (hashtagDoc.sessionStatus === 2)) {
-                        $("#joinSession").removeAttr("disabled");
+                    if (hashtagDoc) {
+                        if ((hashtagDoc.sessionStatus === 2)) {
+                            $("#joinSession").removeAttr("disabled");
+                        }
                     }
                 }
             }

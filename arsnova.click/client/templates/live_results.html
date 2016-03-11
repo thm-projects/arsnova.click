@@ -7,6 +7,10 @@
             {{#each result}}
                 {{> result_button name = name absolute = absolute percent = percent isCorrect = isCorrect }}
             {{/each}}
+            {{#if isMC}}
+                {{> result_button name = "Richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = 1 }}
+                {{> result_button name = "Falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = 0 }}
+            {{/if}}
         </div>
     </div>
 

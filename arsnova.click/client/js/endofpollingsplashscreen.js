@@ -1,4 +1,4 @@
-Template.live_results.onCreated(function () {
+Template.endOfPollingSplashscreen.onCreated(function () {
     this.autorun(() => {
         this.subscription = Meteor.subscribe('Responses.instructor', Session.get("hashtag"));
         this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"));

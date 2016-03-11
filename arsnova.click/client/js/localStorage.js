@@ -192,7 +192,7 @@ localData = {
         }
         const sessionData = JSON.parse(sessionDataString);
 
-        if (!(typeof sessionData === "object")) {
+        if ((typeof sessionData) !== "object") {
             return;
         }
 

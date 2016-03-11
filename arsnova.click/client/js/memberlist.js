@@ -15,7 +15,7 @@ Template.memberlist.onCreated(function () {
         Sessions.find().observeChanges({
             changed: function (oldDoc, newDoc) {
                 if (!initializing) {
-                    if (!oldDoc.startTime || (oldDoc.startTime != newDoc.startTime)) {
+                    if (newDoc.startTime && (oldDoc.startTime != newDoc.startTime)) {
                         Router.go("onpolling");
                     }
                 }
@@ -77,6 +77,7 @@ Template.memberlist.events({
         });
     },
     'click #backButton':function(event){
+        Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 1);
         Router.go("/readconfirmationrequired");
     }
 });

@@ -1,10 +1,4 @@
 <template name="leaderBoard">
-    <style type="text/css">
-        .learner-list > .col-md-6 {
-            margin-top: 20px;
-        }
-    </style>
-
     {{> titel titelText = "Teilnehmer/innen, die im Quiz alles richtig haben"}}
     <div class="row">
         <div class="col-md-12">
@@ -19,20 +13,27 @@
                     {{/each}}
                 </div>
             </div>
-            <div class="row distance-top">
-                <div class="col-md-6 col-md-offset-3">
-                    <button class="button button-success" id="showMore">
-                        Show more
-                        <span class="glyphicon glyphicon-menu-down glyph-right"></span>
-                    </button>
+        </div>
+    </div>
+
+    <div class="fixed-bottom">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="row distance-top">
+                    <div class="col-md-6 col-md-offset-3">
+                        <button class="button button-success" id="showMore">
+                            Show more
+                            <span class="glyphicon glyphicon-menu-down glyph-right"></span>
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="row distance-top hidden">
-                <div class="col-md-6 col-md-offset-3">
-                    <button class="button button-success" id="showLess">
-                        Show less
-                        <span class="glyphicon glyphicon-menu-up glyph-right"></span>
-                    </button>
+                <div class="row distance-top hidden">
+                    <div class="col-md-6 col-md-offset-3">
+                        <button class="button button-success" id="showLess">
+                            Show less
+                            <span class="glyphicon glyphicon-menu-up glyph-right"></span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

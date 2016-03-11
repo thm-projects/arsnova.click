@@ -30,11 +30,49 @@ Template.live_results.helpers({
                     var amount = Responses.find({hashtag: Session.get("hashtag"), answerOptionNumber: value.answerOptionNumber}).count();
                     result.push({name: String.fromCharCode(value.answerOptionNumber + 65), absolute: amount, percent: memberAmount ? ( Math.floor((amount * 100) / memberAmount)) : 0, isCorrect: value.isCorrect});
                 });
-                //TODO allAnswersCorrect/Wrong
             }
         }
         return result;
-    }
+    },
+    isMC: function(){
+        var answerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
+        return answerOptions > 1;
+    },
+    mcOptions: function(){
+        //TODO memberAmount wrong
+        const memberAmount = Responses.find({hashtag: Session.get("hashtag")}).count();
+        const correctAnswers = [];
+        AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect:1},{fields:{"answerOptionNumber":1}}).forEach(function (answer){
+            correctAnswers.push(answer.answerOptionNumber);
+        });
+        let allCorrect = 0;
+        let allWrong = 0;
+        MemberList.find({hashtag: Session.get("hashtag")}).forEach(function(user){
+            let responseAmount = 0;
+            let everythingRight = true;
+            let everythingWrong = true;
+            Responses.find({hashtag: Session.get("hashtag"), userNick: user.nick}).forEach(function (response){
+                if($.inArray(response.answerOptionNumber, correctAnswers)){
+                    everythingWrong = false;
+                }else{
+                    everythingRight = false;
+                }
+                responseAmount++;
+            });
+            if(responseAmount){
+                if(everythingRight && responseAmount === correctAnswers.length){
+                    allCorrect++;
+                }
+                if(everythingWrong){
+                    allWrong++;
+                }
+            }
+        });
+        return {
+            allCorrect: {absolute: allCorrect, percent: allCorrect/memberAmount},
+            allWrong: {absolute: allWrong, percent: allWrong/memberAmount}
+        };
+    } 
 });
 
 

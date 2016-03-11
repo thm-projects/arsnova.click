@@ -12,7 +12,7 @@ Template.live_results.helpers({
         var result = [];
         var memberAmount = Responses.find({hashtag: Session.get("hashtag")}).count();
         var answerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
-        if(false && answerOptions){ //survey
+        if(answerOptions){ //survey
             AnswerOptions.find({hashtag: Session.get("hashtag")}).forEach(function(value){
                 var amount = Responses.find({hashtag: Session.get("hashtag"), answerOptionNumber: value.answerOptionNumber}).count();
                 result.push({name: String.fromCharCode(value.answerOptionNumber + 65), absolute: amount, percent: memberAmount ? ( Math.floor((amount * 100) / memberAmount)) : 0, isCorrect: -1});

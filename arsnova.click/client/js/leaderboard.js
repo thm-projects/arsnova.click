@@ -10,11 +10,32 @@ Template.leaderBoard.onCreated(function () {
             Session.set("memberListLoaded", true);
         });
     });
+
+    Session.set('show_all_leaderboard', false);
+});
+
+Template.leaderBoard.events({
+    'click #showMore': function () {
+        Session.set('show_all_leaderboard', true);
+        $('#showLess').closest('div.row').toggleClass('hidden');
+        $('#showMore').closest('div.row').toggleClass('hidden');
+    },
+    'click #showLess': function () {
+        Session.set('show_all_leaderboard', false);
+        $('#showLess').closest('div.row').toggleClass('hidden');
+        $('#showMore').closest('div.row').toggleClass('hidden');
+    }
 });
 
 Template.leaderBoard.helpers({
     hashtag: function () {
         return Session.get("hashtag");
+    },
+    getPosition: function (index) {
+        return (index + 1);
+    },
+    parseTimeToSeconds: function (milliseconds) {
+        return Math.round((milliseconds / 10), 2) / 100;
     },
     "leaderBoardItems": function () {
         var leaderBoardItems = [];
@@ -48,7 +69,15 @@ Template.leaderBoard.helpers({
                 }
             });
         }
-        var sortedArray = _.sortBy(allGoodMembers, 'responseTime').slice(0,6);
+
+        var sortedArray;
+        //check if the show all button was pressed
+        if (!Session.get('show_all_leaderboard')) {
+            sortedArray = _.sortBy(allGoodMembers, 'responseTime').slice(0, 6);
+        } else {
+            sortedArray = _.sortBy(allGoodMembers, 'responseTime');
+        }
+
         return sortedArray;
     }
 });

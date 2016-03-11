@@ -2,6 +2,10 @@
   font-size: 4em;
 }
 
+.sendResponse{
+  background-color: silver;
+}
+
 .btn-answerOption {
   margin: 23px 0;
   width: 100%;

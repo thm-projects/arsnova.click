@@ -24,13 +24,6 @@
   background: $splash-show-question-background-color;
 }
 
-/* issue for long words */
-.splash-screen-show-question div,
-.questionContentSplash div {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
 
 
 /*

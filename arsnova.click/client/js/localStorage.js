@@ -192,9 +192,10 @@ localData = {
         }
         const sessionData = JSON.parse(sessionDataString);
 
-        if (!(typeof sessionData) === "object") {
+        if ((typeof sessionData) !== "object") {
             return;
         }
+
         $.each(sessionData.answers, function (key, value) {
             if (value.answerOptionNumber === answerOptionNumber) {
                 value.answerText = answerText;

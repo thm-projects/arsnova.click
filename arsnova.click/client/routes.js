@@ -12,6 +12,7 @@ Router.route('/', function () {
     localData.initializePrivateKey();
     Session.set("isOwner", undefined);
     Session.set("slider", undefined);
+    Session.set("hashtag", undefined);
     this.render('home');
 });
 

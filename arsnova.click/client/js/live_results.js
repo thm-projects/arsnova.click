@@ -26,6 +26,7 @@ Template.live_results.helpers({
 
             } else { //MC
                 AnswerOptions.find({hashtag: Session.get("hashtag")}).forEach(function(value){
+
                     var amount = Responses.find({hashtag: Session.get("hashtag"), answerOptionNumber: value.answerOptionNumber}).count();
                     result.push({name: String.fromCharCode(value.answerOptionNumber + 65), absolute: amount, percent: memberAmount ? ( Math.floor((amount * 100) / memberAmount)) : 0, isCorrect: value.isCorrect});
                 });

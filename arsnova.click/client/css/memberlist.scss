@@ -74,6 +74,7 @@
 .btn-more-learners {
     background-color: rebeccapurple;
     color: white;
+    margin: 20px 0px 0px 0px;
 }
 
 .learner-list {
@@ -83,10 +84,6 @@
 .button-row {
     margin-top: 20px;
 }
-
-.button-start {
-     font-size: 40px;
- }
 
 .color-changing-progress-bar,
 .color-changing-own-nick {
@@ -226,4 +223,14 @@
 
     -webkit-background-size: 40px 40px;
     background-size: 40px 40px;
+}
+
+.round-corners-left {
+    border-top-left-radius: $corner-radius;
+    border-bottom-left-radius: $corner-radius;
+}
+
+.round-corners-right {
+    border-top-right-radius: $corner-radius;
+    border-bottom-right-radius: $corner-radius;
 }

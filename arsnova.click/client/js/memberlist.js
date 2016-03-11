@@ -1,6 +1,14 @@
 Template.memberlist.onCreated(function () {
     this.autorun(() => {
-        this.subscribe('MemberList.members', Session.get("hashtag"));
+        this.subscribe('MemberList.members', Session.get("hashtag"), function () {
+        $(window).resize(function () {
+            var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
+            $(".container").css("height", final_height);
+            Session.set("LearnerCountOverride", false);
+            calculateButtonCount();
+            calculateProgressBarTextWidth();
+        });
+        });
         if(Session.get("isOwner")) {
             this.subscribe('MemberList.percentRead', {
                 hashtag: Session.get("hashtag"),
@@ -23,29 +31,18 @@ Template.memberlist.onCreated(function () {
         });
         MemberList.find().observeChanges({
             added: function (id, newDoc) {
-                if (!initializing) {
-                    calculateProgressBarTextWidth();
-                }
+                calculateButtonCount();
+                calculateProgressBarTextWidth();
             }
         });
         initializing = false;
     });
 });
 
-Template.memberlist.onRendered(function () {
-    $(window).resize(function () {
-        var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
-        $(".container").css("height", final_height);
-        $(".container").css("margin-top", $(".navbar").height());
-        calculateButtonCount();
-        calculateProgressBarTextWidth();
-    });
-});
-
 Template.memberlist.rendered = function () {
     var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
     $(".container").css("height", final_height);
-    $(".container").css("margin-top", $(".navbar").height());
+    Session.set("LearnerCountOverride", false);
     calculateButtonCount();
     calculateProgressBarTextWidth();
 };
@@ -109,7 +106,7 @@ Template.memberlist.helpers({
     },
 
     showMoreButton: function () {
-        return Session.get("LearnerCount") < MemberList.find().count();
+        return ((MemberList.find().count() - Session.get("LearnerCount")) > 1);
     },
 
     invisibleLearnerCount: function () {
@@ -158,7 +155,7 @@ function calculateButtonCount () {
     var contentPosition = $(".contentPosition");
     var viewport = $(".contentFrame");
 
-    var viewPortHeight = viewport.height() - $('.learner-title').height();
+    var viewPortHeight = viewport.height() - $('.learner-title').height() - $('.more-learners-row').height();
     var readConfirm = $('.confirmationCounter').first();
 
     if (readConfirm.length > 0) {
@@ -181,11 +178,22 @@ function calculateButtonCount () {
         queryLimiter -= 1;
     }
 
+    if (queryLimiter <= 0) {
+        queryLimiter = 1;
+    }
+
     Session.set("LearnerCount", queryLimiter);
 }
 
 function calculateProgressBarTextWidth () {
-    $('.progress-fill').width((getPercentRead() - 20) + "%");
+    $('.progress-fill').outerWidth((getPercentRead()) + "%");
+
+    if (getPercentRead() === 100) {
+        $('.progress-fill').addClass('round-corners-right');
+    } else {
+        $('.progress-fill').removeClass('round-corners-right');
+    }
+
     if (getPercentRead() === 0) {
         $('.progress-fill').hide();
     } else {

@@ -4,13 +4,14 @@
     {{/if}}
     <div class="row">
         <div class="col-md-12 contentFrame">
-            <div class="row titel learner-title">
+            {{> titel titelText=""}}
             {{#if isNotOwner}}
-                <h3 class=" titel-relative text-light text-center">
-                    Teilnehmende im Quiz &laquo;{{hashtag}}&raquo;
-                </h3>
+                <div class="row">
+                    <div class=" titel-relative text-light text-center">
+                        <div class="titel margin-to-logo">Teilnehmende im Quiz &laquo;{{hashtag}}&raquo;</div>
+                    </div>
+                </div>
             {{/if}}
-            </div>
             {{#if isReadingConfirmationRequired}}
                 {{> readingConfirmation }}
             {{/if}}

@@ -8,6 +8,10 @@ Template.live_results.onCreated(function () {
 });
 
 Template.live_results.helpers({
+    isNotOwner: function(){
+        return !Session.get("isOwner");
+    },
+
     result: function () {
         var result = [];
 

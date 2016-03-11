@@ -1,20 +1,15 @@
-Template.hashtag_view.onCreated(function () {
+Template.header.onCreated(function () {
     this.autorun(() => {
-        this.subscribe('Hashtags.public');
+        this.subscribe('Hashtags.public', function(){
+            var hashtagDocs = Hashtags.find();
 
-        Tracker.autorun(function() {
-            var initializing = true;
-            Hashtags.find({hashtags: Session.get("hashtag")}).observeChanges({
-                changed: function (id, attr) {
-                    if (!initializing) {
-                        var hashDoc = Hashtags.findOne({_id:id});
-                        if ((hashDoc.sessionStatus == 0) || ((hashDoc.sessionStatus == 1) && (!Session.get("isOwner")))) {
-                            Router.go("/resetToHome");
-                        }
+            hashtagDocs.observe({
+                changed: function (doc, atIndex) {
+                    if ((doc.sessionStatus == 0) || ((doc.sessionStatus == 1) && (!Session.get("isOwner")))) {
+                        Router.go("/resetToHome");
                     }
                 }
             });
-            initializing = false;
         });
     });
 });

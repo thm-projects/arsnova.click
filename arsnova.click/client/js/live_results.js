@@ -1,4 +1,3 @@
-var countdown = null;
 Template.live_results.onCreated(function () {
     this.autorun(() => {
         this.subscription = Meteor.subscribe('Responses.instructor', Session.get("hashtag"));
@@ -107,6 +106,7 @@ Template.live_results.events({
     "click #js-btn-showLeaderBoard": function () {
         Router.go("/statistics");
     }
+
 });
 
 

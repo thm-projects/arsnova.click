@@ -6,7 +6,23 @@
                 </div>
                 <div class="modal-body">
                     <div id="end-of-polling-text">
-                        Es wurde abgestimmt!
+                        {{#if isSurvey}}
+                            <p>Du hast erfolgreich an der Umfrage teilgenommen</p>
+                        {{/if}}
+                        {{#if isSC}}
+                            {{#if correct}}
+                                <p>Du hast richtig geantwortet!</p>
+                            {{else}}
+                                <p>Du hast falsch geantwortet!</p>
+                            {{/if}}
+                        {{/if}}
+                        {{#if isMC}}
+                            {{#if correct}}
+                                <p>Du hast komplett richtig geantwortet!</p>
+                            {{else}}
+                                <p>Du hast falsch geantwortet!</p>
+                            {{/if}}
+                        {{/if}}
                     </div>
                     <button id="js-btn-hideEndOfPollingModal" type="button" class="btn btn-success btn-answerOption btn-lg ">
                         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>

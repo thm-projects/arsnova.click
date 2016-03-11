@@ -64,7 +64,6 @@ Template.hashtag_view.events({
                     reenter = true;
                     Session.set("hashtag", hashtag);
                     Session.set("isOwner", true);
-                    Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), hashtag, 1);
                     localData.reenterSession(hashtag);
                     Router.go("/question");
                 }

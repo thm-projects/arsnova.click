@@ -1,25 +1,28 @@
 Template.live_results.onCreated(function () {
     this.autorun(() => {
         this.subscription = Meteor.subscribe('Responses.instructor', Session.get("hashtag"));
-        this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"));
+        this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"), function () {
+            Session.set("rightAnswerOptionCount", AnswerOptions.find({isCorrect: 1}).count());
+        });
         this.subscription = Meteor.subscribe('MemberList.members', Session.get("hashtag"));
-        this.subscription = Meteor.subscribe('Sessions.question', Session.get("hashtag"));
-        this.subscription = Meteor.subscribe('Hashtags.public', Session.get("hashtag"), function () {
-            var timestamp = new Date().getTime();
+        this.subscription = Meteor.subscribe('Sessions.question', Session.get("hashtag"), function () {
             var sessionDoc = Sessions.findOne();
-            countdown = new ReactiveCountdown((timestamp - (sessionDoc.startTime + sessionDoc.timer )) / 1000);
+            Session.set("sessionCountDown", sessionDoc.timer);
+            var timestamp = new Date().getTime();
+            countdown = new ReactiveCountdown((timestamp - sessionDoc.startTime + sessionDoc.timer) / 1000);
             countdown.start(function () {
                 $('#appTitle').html("Abstimmung gelaufen");
                 Session.set("sessionClosed", true);
             });
             Session.set("countdownInitialized", true);
         });
+        this.subscription = Meteor.subscribe('Hashtags.public', Session.get("hashtag"));
     });
 });
 
 Template.live_results.helpers({
     sessionClosed: function () {
-        return Session.get("sessionClosed");
+        return (Session.get("sessionClosed") && (Session.get("rightAnswerOptionCount") > 0));
     },
     result: function () {
         var result = [];

@@ -2,17 +2,18 @@ Meteor.methods({
     'Responses.addResponse'(responseDoc) {
         var timestamp = new Date().getTime();
         var hashtag = responseDoc.hashtag;
-        var dupDoc = Responses.find({hashtag: responseDoc.hashtag, answerOptionNumber: responseDoc.answerOptionNumber});
-        if (!dupDoc) {
-            return null;
-        }
         if (Meteor.isServer) {
+            var dupDoc = Responses.findOne({hashtag: responseDoc.hashtag, answerOptionNumber: responseDoc.answerOptionNumber, userNick: responseDoc.userNick});
+            if (dupDoc) {
+                throw new Meteor.Error('Responses.addResponse', 'User has already given this response');
+                return;
+            }
             var hashtagDoc = Hashtags.findOne({
                 hashtag: hashtag,
                 sessionStatus: 3
             });
             if (!hashtagDoc) {
-                throw new Meteor.Error('Responses.addResponse', 'There is no such hashtag active in the db')
+                throw new Meteor.Error('Responses.addResponse', 'There is no such hashtag active in the db');
                 return;
             } else {
                 var sessionDoc = Sessions.findOne({hashtag: responseDoc.hashtag});
@@ -25,7 +26,7 @@ Meteor.methods({
                     responseDoc.responseTime = responseTime;
                     var answerOptionDoc = AnswerOptions.findOne({
                         hashtag: hashtag,
-                        answerOptionNumber: parseInt(responseDoc.answerOptionNumber)
+                        answerOptionNumber: responseDoc.answerOptionNumber
                     });
                     if (!answerOptionDoc) {
                         throw new Meteor.Error('Responses.addResponse', 'There is no answer option with the given answerOptionNumber');

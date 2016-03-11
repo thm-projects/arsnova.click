@@ -248,3 +248,9 @@
 .error input, .error textarea, input.error, textarea.error {
   border: 3px solid $warning;
 }
+
+@media (max-width: 490px) {
+  .ansBtn {
+    display: none;
+  }
+}

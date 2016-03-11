@@ -47,7 +47,7 @@ Template.votingview.events({
     "click .sendResponse": function (event) {
         Meteor.call('Responses.addResponse', {
             hashtag: Session.get("hashtag"),
-            answerOptionNumber: event.target.id,
+            answerOptionNumber: Number(event.target.id),
             userNick: Session.get("nick")
         }, (err, res) => {
             if (err) {

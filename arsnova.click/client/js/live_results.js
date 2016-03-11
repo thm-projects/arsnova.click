@@ -60,7 +60,7 @@ Template.live_results.events({
     "click #js-btn-showAnswerModal": function () {
         $('.answerTextSplash').parents('.modal').modal();
     },
-    "click .js-btn-showLeaderBoard": function () {
+    "click #js-btn-showLeaderBoard": function () {
         console.log("fire");
         Router.go("/statistics");
     }

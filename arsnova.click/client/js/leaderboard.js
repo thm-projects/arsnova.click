@@ -17,13 +17,16 @@ Template.leaderBoard.onCreated(function () {
 Template.leaderBoard.events({
     'click #showMore': function () {
         Session.set('show_all_leaderboard', true);
-        $('#showLess').closest('div.row').toggleClass('hidden');
-        $('#showMore').closest('div.row').toggleClass('hidden');
+        $('#showLess').closest('div.col-xs-6').toggleClass('hidden');
+        $('#showMore').closest('div.col-xs-6').toggleClass('hidden');
     },
     'click #showLess': function () {
         Session.set('show_all_leaderboard', false);
-        $('#showLess').closest('div.row').toggleClass('hidden');
-        $('#showMore').closest('div.row').toggleClass('hidden');
+        $('#showLess').closest('div.col-xs-6').toggleClass('hidden');
+        $('#showMore').closest('div.col-xs-6').toggleClass('hidden');
+    },
+    'click #js-btn-backToPolling': function () {
+        Router.go('/onpolling');
     }
 });
 

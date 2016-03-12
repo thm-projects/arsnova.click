@@ -67,7 +67,8 @@ Template.memberlist.events({
             hashtag: Session.get("hashtag")
         }, (err, res) => {
             if (err) {
-                alert(err);
+                $('.errorMessageSplash').parents('.modal').modal('show');
+                $("#errorMessage-text").html(err.reason);
             } else {
                 //Router.go("/onpolling");
             }

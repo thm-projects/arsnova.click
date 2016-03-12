@@ -12,15 +12,23 @@ p.header-layout {
 }
 
 .kill-session-switch {
-    color: white;
+    color: #b22222;
     font-size: 5vw;
     cursor: pointer;
-    margin-top: 15px;
+    margin-top: 5px;
     right: 15px;
 }
 
 .kill-session-switch:hover {
-    color: lightgray;
+    color: red;
+}
+
+.emergency-button-text {
+    position: relative;
+    top: 52px;
+    margin-left: -37px;
+    font-size: 0.8em;
+    color: #b22222;
 }
 
 /*

@@ -1,6 +1,6 @@
 <template name="live_results">
 
-    {{> titel titelText = "Abstimmung läuft"}}
+    {{> titel titelText = "Abstimmung läuft..."}}
 
 
 
@@ -17,8 +17,8 @@
     {{#if isMC}}
         <div class="row" style="margin-top: 50px">
             <div class="col-md-12">
-                {{> result_button_mc name = "Richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = 1  }}
-                {{> result_button_mc name = "Falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = 0 }}
+                {{> result_button_mc name = "Komplett richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = 1  }}
+                {{> result_button_mc name = "Komplett falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = 0 }}
             </div>
         </div>
     {{/if}}
@@ -88,7 +88,7 @@
             <div class="button button-result">
                 <div class="row">
                     <div class="col-xs-12">
-                        <span class="button-result-letter">{{name}}</span>
+                        <span class="button-result-letter button-result-mc-letter">{{name}}</span>
                     </div>
                 </div>
                 <div class="row">

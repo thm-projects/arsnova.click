@@ -28,7 +28,7 @@ function createSlider (defaultSec) {
         start: Session.get("slider"),
         range: {
             'min': 5,
-            'max': 240
+            'max': 260
         }
     }).on('slide', function (ev, val) {
         Session.set('slider', Math.round(val));

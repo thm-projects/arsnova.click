@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row">
                 {{#if isInHomePathOrIsStudent}}
-                    <div class="col-md-10 col-md-offset-1">
+                    <div class="col-md-10 col-md-offset-1 header-title">
                         <div class="container-fluid center-block">
                             <div class="text-center text-size-medium logo-header-chars">
                                 <a href="/resetToHome">
@@ -18,7 +18,7 @@
 
                 {{else}}
 
-                    <div class="col-md-12 header-layout ">
+                    <div class="col-md-12 header-layout header-title">
                         <div class="row">
                             <div class="col-xs-1">
                                 <a href="/" class="arsnova-logo">
@@ -26,10 +26,13 @@
                                 </a>
                             </div>
                             <div class="col-xs-10">
-                                <p class="text-center header-layout text-light">{{currentHashtag}}</p>
+                                <p class="text-center header-layout default-yellow-text-color">{{currentHashtag}}</p>
                             </div>
                             <div class="col-xs-1">
                                 <span class="pull-right glyphicon glyphicon-off kill-session-switch"></span>
+                                <div class="emergency-button-text">
+                                    Not Aus !
+                                </div>
                             </div>
                         </div>
                     </div>

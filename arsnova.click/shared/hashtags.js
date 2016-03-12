@@ -65,6 +65,30 @@ Meteor.methods({
         }
 
     },
+    'Hashtags.export': function ({hashtag, privateKey}) {
+        if (Meteor.isServer) {
+            var hashtagDoc = Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
+            });
+            if (!hashtagDoc) {
+                throw new Meteor.Error('Hashtags.export', 'No such hashtag with the given key');
+                return;
+            }
+            var sessionDoc = Sessions.findOne({hashtag: hashtag});
+            var answerOptionsDoc = AnswerOptions.find({hashtag: hashtag}).fetch();
+            var memberListDoc = MemberList.find({hashtag: hashtag}).fetch();
+            var responsesDoc = Responses.find({hashtag: hashtag}).fetch();
+            var ret = {
+                hashtagDoc: hashtagDoc,
+                sessionDoc: sessionDoc,
+                answerOptionsDoc: answerOptionsDoc,
+                memberListDoc: memberListDoc,
+                responsesDoc: responsesDoc,
+            }
+            return JSON.stringify(ret);
+        }
+    },
     'keepalive': function (privateKey, hashtag) {
         if (Meteor.isServer){
             new SimpleSchema({

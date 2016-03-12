@@ -59,7 +59,8 @@ Template.votingview.events({
             userNick: Session.get("nick")
         }, (err, res) => {
             if (err) {
-            alert(err);
+                $('.errorMessageSplash').parents('.modal').modal('show');
+                $("#errorMessage-text").html(err.reason);
         } else {
             if (res) {
                 $(event.target).attr("disabled", "disabled");

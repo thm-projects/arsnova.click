@@ -95,7 +95,8 @@ Template.createAnswerOptions.events({
          Meteor.call('AnswerOptions.updateAnswerTextAndIsCorrect', answer,
              (err, res) => {
             if (err) {
-               alert(err);
+               $('.errorMessageSplash').parents('.modal').modal('show');
+               $("#errorMessage-text").html(err.reason);
             } else {
                Router.go("/settimer");
             }

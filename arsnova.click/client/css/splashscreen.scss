@@ -24,7 +24,17 @@
   background: $splash-show-question-background-color;
 }
 
+.splash-screen-error-message {
+  background: $splash-screen-error-message-background-color;
+}
 
+/*
+ * Splash screen button appearance
+ */
+.splash-button-error-message {
+  background-color: grey;
+  border-color: black;
+}
 
 /*
  * Splash screen appearance

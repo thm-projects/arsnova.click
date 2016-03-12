@@ -39,7 +39,7 @@ Template.createAnswerOptions.events({
             isCorrect: 0
          };
 
-         Meteor.call('AnswerOptions.addOption', answerOption, , (err, res) => {
+         Meteor.call('AnswerOptions.addOption', answerOption, (err, res) => {
             if (err) {
                $('.errorMessageSplash').parents('.modal').modal('show');
                $("#errorMessage-text").html(err.reason);

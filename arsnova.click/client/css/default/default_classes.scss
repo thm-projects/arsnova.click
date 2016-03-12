@@ -39,6 +39,7 @@
   width: 100%;
   padding-left: 10px;
   padding-right: 10px;
+  text-align: center;
 }
 
 .input-field-bg-color, .input-field {
@@ -131,6 +132,7 @@
   margin: 10px 10px 0 0;
   position: relative;
   margin-bottom: 10px;
+  background-color: LightSteelBlue;
 }
 
 .progress-success {
@@ -248,7 +250,7 @@
   border: 3px solid $warning;
 }
 
-@media (max-width: 490px) {
+@media (max-width: 550px) {
   .ansBtn {
     display: none;
   }

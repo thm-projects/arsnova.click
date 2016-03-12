@@ -1,9 +1,22 @@
 Template.live_results.onCreated(function () {
     this.autorun(() => {
         this.subscription = Meteor.subscribe('Responses.instructor', Session.get("hashtag"));
-        this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"));
+        this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"), function () {
+            Session.set("rightAnswerOptionCount", AnswerOptions.find({isCorrect: 1}).count());
+        });
         this.subscription = Meteor.subscribe('MemberList.members', Session.get("hashtag"));
-        this.subscription = Meteor.subscribe('Sessions.question', Session.get("hashtag"));
+        this.subscription = Meteor.subscribe('Sessions.question', Session.get("hashtag"), function () {
+            var sessionDoc = Sessions.findOne();
+            Session.set("sessionCountDown", sessionDoc.timer);
+            var timestamp = new Date().getTime();
+            countdown = new ReactiveCountdown((timestamp - sessionDoc.startTime + sessionDoc.timer) / 1000);
+            countdown.start(function () {
+                $('#appTitle').html("Abstimmung gelaufen");
+                Session.set("sessionClosed", true);
+            });
+            Session.set("countdownInitialized", true);
+        });
+        this.subscription = Meteor.subscribe('Hashtags.public', Session.get("hashtag"));
     });
 });
 
@@ -12,6 +25,9 @@ Template.live_results.helpers({
         return !Session.get("isOwner");
     },
 
+    sessionClosed: function () {
+        return (Session.get("sessionClosed") && (Session.get("rightAnswerOptionCount") > 0));
+    },
     result: function () {
         var result = [];
 
@@ -82,7 +98,7 @@ Template.live_results.helpers({
             allCorrect: {absolute: allCorrect, percent: memberAmount ? Math.floor((allCorrect * 100) / memberAmount) : 0},
             allWrong: {absolute: allWrong, percent: memberAmount ? Math.floor((allWrong * 100) / memberAmount) : 0}
         };
-    } 
+    }
 });
 
 
@@ -93,6 +109,9 @@ Template.live_results.events({
     },
     "click #js-btn-showAnswerModal": function () {
         $('.answerTextSplash').parents('.modal').modal();
+    },
+    "click #js-btn-showLeaderBoard": function () {
+        Router.go("/statistics");
     }
 
 });

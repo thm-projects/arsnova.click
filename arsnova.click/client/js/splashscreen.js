@@ -26,15 +26,15 @@ Template.splashscreen.helpers({
 });
 
 showSplashscreen = function () {
-    $('.js-splashscreen').modal();
+    $('.js-splashscreen').modal('show');
 };
 
 closeSplashscreen = function () {
     $('.js-splashscreen').modal("hide");
 };
 
-closeAndRedirectTo = function(url) {
-    $('.js-splashscreen').on('hidden.bs.modal', function() {
+closeAndRedirectTo = function (url) {
+    $('.js-splashscreen').on('hidden.bs.modal', function () {
         Router.go(url);
     }).modal('hide');
 }

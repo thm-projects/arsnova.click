@@ -16,6 +16,12 @@ Template.hashtag_view.onCreated(function () {
                         }
                     }
                 }
+            },
+            added: function (id, doc) {
+                var inputHashtag = $("#hashtag-input-field").val();
+                if (doc.hashtag === inputHashtag) {
+                    $("#addNewHashtag").attr("disabled", "disabled");
+                }
             }
         });
         initializing = false;

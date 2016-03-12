@@ -91,7 +91,7 @@ Meteor.methods({
             var startTime = new Date();
             var hashtagDoc = Hashtags.findOne({hashtag: hashtag, privateKey: privateKey});
             if (!hashtagDoc) {
-                new Meteor.Error('Sessions.startTimer', 'There is no hashtag with this key');
+                new Meteor.Error('Sessions.startTimer', 'There is no quiz with this key');
                 return;
             }
             var sessionDoc = Sessions.findOne({hashtag: hashtag});

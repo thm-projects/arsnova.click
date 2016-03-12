@@ -55,11 +55,13 @@ Template.createQuestionView.events({
         Session.set("hashtag", undefined);
         Session.set("isOwner", undefined);
         Router.go("/");
+        $('.previewSplash').parents('.modal').modal('hide');
     },
     "click #formatButton": function () {
         //Not implemented yet
     },
     "click #previewButton": function () {
-        //Not implemented yet
+        $('.previewSplash').parents('.modal').modal('show');
+        $("#modalpreview-text").html($('#questionText').val());
     }
 });

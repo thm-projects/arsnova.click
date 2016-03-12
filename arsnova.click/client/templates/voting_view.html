@@ -1,6 +1,6 @@
 <template name="votingview">
     {{> titel titelText = getCountdown}}
-    <div class="row">
+    <div class="row voting-helper-buttons">
         <div class="col-xs-4">
             <button type="button" id="js-showAnswerTexts" class="btn btn-info btn-lg btn-answerOption">
                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span><span
@@ -27,7 +27,7 @@
     <div class="row answer-row">
 
         {{#each answerOptions}}
-            <div class="col-xs-6 col-sm-4 col-md-3">
+            <div>
                 <button id="{{answerOptionNumber}}" class="sendResponse btn btn-answerOption btn-answerFont">
                     {{answerOptionLetter number=answerOptionNumber}}
                 </button>

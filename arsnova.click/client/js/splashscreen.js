@@ -1,6 +1,6 @@
 Template.splashscreen.rendered = function () {
     var splashscreen = $('.js-splashscreen');
-    if (templateParams.lazyClose) {
+    if (templateParams.lazyClose === true) {
         splashscreen.on('click', function () {
             closeSplashscreen();
         });

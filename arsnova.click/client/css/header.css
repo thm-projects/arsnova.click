@@ -11,24 +11,27 @@ p.header-layout {
     height: 8vw;
 }
 
-.kill-session-switch {
-    color: #b22222;
-    font-size: 5vw;
+.kill-session-switch-wrapper {
+    text-align: center;
     cursor: pointer;
-    margin-top: 5px;
-    right: 15px;
+    color: #b22222;
+    top: 15px;
 }
 
-.kill-session-switch:hover {
+.kill-session-switch-wrapper:hover {
     color: red;
+}
+
+.kill-session-switch {
+    font-size: 3vw;
 }
 
 .emergency-button-text {
     position: relative;
-    top: 52px;
-    margin-left: -37px;
-    font-size: 0.8em;
-    color: #b22222;
+    top: -8px;
+    font-size: 2vw;
+    margin: 0px;
+    line-height: 1em;
 }
 
 /*

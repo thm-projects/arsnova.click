@@ -190,7 +190,7 @@
     text-align: left;
     position: relative;
     height: 40px;
-    line-height: 40px;
+    line-height: 40px !important; /* Override .progress-bar setting in default.scss */
     color: black;
     padding: 0px 10px;
 }

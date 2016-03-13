@@ -213,7 +213,12 @@ function calculateButtonCount () {
 }
 
 function calculateProgressBarTextWidth () {
-    $('.progress-fill').outerWidth((getPercentRead()) + "%");
+    /*
+     * In chrome the width is always set 20% too high. In all other browsers either this and the original calculation
+     * (e.g. $('.progress-fill').width((getPercentRead()) + "%");) works as expected. The function returns the correct
+     * percent values so no other manipulation is needed. This could be a chrome bug and is perhaps fixed later.
+    */
+    $('.progress-fill').width((getPercentRead() - 20) + "%");
 
     if (getPercentRead() === 100) {
         $('.progress-fill').addClass('round-corners-right');

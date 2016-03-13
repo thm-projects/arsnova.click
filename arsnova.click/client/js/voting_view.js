@@ -5,7 +5,7 @@ Template.votingview.onCreated(function () {
         this.subscribe('Sessions.question', Session.get("hashtag"), function () {
             countdown = new ReactiveCountdown(Sessions.findOne().timer / 1000);
             countdown.start(function () {
-                // show feedback splashscreen?
+                Session.set("sessionClosed", true);
                 $("#end-of-polling-text").html("Abstimmung gelaufen!");
                 $('.js-splashscreen-end-of-polling').modal('show');
             });

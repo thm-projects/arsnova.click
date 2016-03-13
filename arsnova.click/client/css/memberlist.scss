@@ -75,6 +75,12 @@
     background-color: rebeccapurple;
     color: white;
     margin: 20px 0px 0px 0px;
+    font-size: 17px;
+
+    .glyphicon-align-justify {
+        /* Fix vertical alignment */
+        top: 3px;
+    }
 }
 
 .learner-list {

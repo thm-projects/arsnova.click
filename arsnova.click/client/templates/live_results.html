@@ -4,7 +4,6 @@
 
 
 
-    {{> splashscreen lazyClose="true" noAutorun="true" headername="Die Frage" templateName="successT" type="splash-screen-show-question"}}
 
 
     <div class="row">
@@ -103,34 +102,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</template>
-
-<template name="successT">
-    <p class="splashSmallTitle">Ergebnis</p>
-    <br/>
-
-    <div class="row">
-        <div class="col-md-12">
-            {{#if isSurvey}}
-                <p>Du hast erfolgreich an der Umfrage teilgenommen</p>
-            {{/if}}
-            {{#if isSC}}
-                {{#if correct}}
-                    <p>Du hast richtig geantwortet!</p>
-                {{else}}
-                    <p>Du hast falsch geantwortet!</p>
-                {{/if}}
-            {{/if}}
-            {{#if isMC}}
-                {{#if correct}}
-                        <p>Du hast komplett richtig geantwortet!</p>
-                {{else}}
-                    <p>Du hast falsch geantwortet!</p>
-                {{/if}}
-            {{/if}}
-            <button class="" onclick="closeSplashscreen();">Fenster Schließen</button>
         </div>
     </div>
 </template>

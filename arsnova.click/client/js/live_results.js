@@ -11,7 +11,6 @@ Template.live_results.onCreated(function () {
             var timestamp = new Date().getTime();
             countdown = new ReactiveCountdown((timestamp - sessionDoc.startTime + sessionDoc.timer) / 1000);
             countdown.start(function () {
-                $('#appTitle').html("Abstimmung gelaufen");
                 Session.set("sessionClosed", true);
             });
             Session.set("countdownInitialized", true);
@@ -21,6 +20,13 @@ Template.live_results.onCreated(function () {
 });
 
 Template.live_results.helpers({
+    votingText: function () {
+      if (Session.get("sessionClosed")){
+          return "Abstimmung beendet";
+      }  else{
+          return "Abstimmung läuft...";
+      }
+    },
     isNotOwner: function(){
         return !Session.get("isOwner");
     },

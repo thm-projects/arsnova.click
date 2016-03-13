@@ -96,10 +96,15 @@ Template.memberlist.helpers({
         } else {
             sortParamObj = {insertDate: -1};
         }
-        return MemberList.find({}, {
-            limit: (Session.get("LearnerCount")),
-            sort: sortParamObj
-        });
+        return [
+            MemberList.find({nick:Session.get("nick")}, {
+                limit: 1
+            }),
+            MemberList.find({nick: {$ne: Session.get("nick")}}, {
+                limit: (Session.get("LearnerCount") - 1),
+                sort: sortParamObj
+            })
+        ];
     },
 
     showMoreButton: function () {

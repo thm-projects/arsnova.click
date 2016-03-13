@@ -28,7 +28,9 @@
             <div class="row learner-list margin-title"
                  id="learner-list">
                 {{#each learners}}
-                    {{>learner}}
+                    {{#each this}}
+                        {{>learner}}
+                    {{/each}}
                 {{/each}} <!-- learners -->
             </div>
         </div>

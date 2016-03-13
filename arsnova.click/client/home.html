@@ -1,6 +1,6 @@
 <template name="home">
     {{#if existingHashtagsAvailable}}
-        {{> splashscreen templateName = "modalShowMyHashtags" lazyClose = true timerClose = 5000 headername = 'Hinweis:' type = 'splash-screen-session'}}
+        {{> splashscreen templateName = "modalShowMyHashtags" lazyClose = "true" timerClose = 5000 headername = 'Hinweis:' type = 'splash-screen-session'}}
     {{/if}}
     {{> hashtag_view}}
 </template>

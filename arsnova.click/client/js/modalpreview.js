@@ -1,5 +1,5 @@
 Template.questionPreviewSplash.events({
-    "click #js-btn-hideAnswerModal": function () {
+    "click #js-btn-hidePreviewModal": function () {
         $('.js-splashscreen').modal("hide");
     }
 });

@@ -133,6 +133,7 @@ Template.memberlist.helpers({
 
 Template.learner.onRendered(function () {
     calculateButtonCount();
+    calculateProgressBarTextWidth();
 });
 
 Template.learner.helpers({

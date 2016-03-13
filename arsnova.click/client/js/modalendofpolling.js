@@ -31,12 +31,10 @@ Template.endOfPollingSplashscreen.events({
 Template.endOfPollingSplashscreen.helpers({
     isSurvey: function(){
         var correctAnswerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
-        console.log(AnswerOptions.find());
         return correctAnswerOptions === 0;
     },
 
     isSC: function(){
-        console.log(AnswerOptions.find().fetch());
         var correctAnswerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
         return correctAnswerOptions === 1;
     },
@@ -48,6 +46,7 @@ Template.endOfPollingSplashscreen.helpers({
 
     correct: function() {
         const correctAnswers = [];
+
         AnswerOptions.find({
             hashtag: Session.get("hashtag"),
             isCorrect: 1
@@ -56,10 +55,11 @@ Template.endOfPollingSplashscreen.helpers({
         });
         MemberList.findOne({hashtag: Session.get("hashtag"), nick: Session.get("nick")});
 
-        let responseAmount = 0;
-        let everythingRight = true;
+        var responseAmount = 0;
+        var everythingRight = true;
+
         Responses.find({hashtag: Session.get("hashtag"), userNick: Session.get("nick")}).forEach(function (response) {
-            if (!$.inArray(response.answerOptionNumber, correctAnswers) !== -1) {
+            if (!($.inArray(response.answerOptionNumber, correctAnswers) !== -1)) {
                 everythingRight = false;
             }
             responseAmount++;

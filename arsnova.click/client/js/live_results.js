@@ -21,6 +21,10 @@ Template.live_results.onCreated(function () {
 });
 
 Template.live_results.helpers({
+    isNotOwner: function(){
+        return !Session.get("isOwner");
+    },
+
     sessionClosed: function () {
         return (Session.get("sessionClosed") && (Session.get("rightAnswerOptionCount") > 0));
     },
@@ -94,7 +98,7 @@ Template.live_results.helpers({
             allCorrect: {absolute: allCorrect, percent: memberAmount ? Math.floor((allCorrect * 100) / memberAmount) : 0},
             allWrong: {absolute: allWrong, percent: memberAmount ? Math.floor((allWrong * 100) / memberAmount) : 0}
         };
-    } 
+    }
 });
 
 

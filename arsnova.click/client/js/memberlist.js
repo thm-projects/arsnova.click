@@ -3,7 +3,7 @@ Template.memberlist.onCreated(function () {
         this.subscribe('MemberList.members', Session.get("hashtag"), function () {
         $(window).resize(function () {
             var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
-            $(".container").css("height", final_height);
+            $(".container").css("height", final_height + "px");
             Session.set("LearnerCountOverride", false);
             calculateButtonCount();
             calculateProgressBarTextWidth();
@@ -41,7 +41,7 @@ Template.memberlist.onCreated(function () {
 
 Template.memberlist.rendered = function () {
     var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
-    $(".container").css("height", final_height);
+    $(".container").css("height", final_height + "px");
     Session.set("LearnerCountOverride", false);
     calculateButtonCount();
     calculateProgressBarTextWidth();
@@ -86,9 +86,6 @@ Template.memberlist.helpers({
     isOwner: function () {
         return Session.get("isOwner");
     },
-    isNotOwner: function () {
-        return !Session.get('isOwner');
-    },
     isLearnerCountOverride: function () {
         return Session.get('LearnerCountOverride');
     },
@@ -129,6 +126,10 @@ Template.memberlist.helpers({
     }
 });
 
+Template.learner.onRendered(function () {
+    calculateButtonCount();
+});
+
 Template.learner.helpers({
     isOwnNick: function (nickname) {
         return nickname === Session.get("nick");
@@ -148,40 +149,61 @@ Template.readingConfirmation.helpers({
 
 function calculateButtonCount () {
 
-    if (Session.get("LearnerCountOverride")) {
-        return;
-    }
+    /*
+    This session variable determines if the user has clicked on the show-more-button. The button count must not
+    be calculated then. It is set in the event handler of the button and is reset if the user reenters the page
+     */
+    if (Session.get("LearnerCountOverride")) return;
 
-    var contentPosition = $(".contentPosition");
-    var viewport = $(".contentFrame");
+    /*
+    To calculate the maximum output of attendee button rows we need to:
+    - get the contentPosition height (the content wrapper for all elements)
+    - subtract the confirmationCounter height (the progress bar)
+    - subtract the attendee-in-quiz-wrapper height (the session information for the attendees)
+    - subtract the margin to the top (the title or the show more button)
+     */
+    var viewport = $(".contentPosition"),
+        confirmationCounter = $('.confirmationCounter').length > 0 ? $('.confirmationCounter').first().outerHeight() : 0,
+        attendeeInQuiz = $('#attendee-in-quiz-wrapper').length > 0 ? $('#attendee-in-quiz-wrapper').outerHeight() : 0,
+        learnerListMargin = parseInt($('.learner-list').first().css('margin-top').replace("px", ""));
 
-    var viewPortHeight = viewport.height() - $('.learner-title').height() - $('.more-learners-row').height();
-    var readConfirm = $('.confirmationCounter').first();
+    var viewPortHeight =
+        viewport.outerHeight() -
+        confirmationCounter -
+        attendeeInQuiz -
+        learnerListMargin;
 
-    if (readConfirm.length > 0) {
-        viewPortHeight -= readConfirm.height();
-    }
-    // + 30 because contentPosition has 15px padding left and right
-    var viewPortWidth = viewport.width() + 30;
+    /* The height of the learner button must be set manually if the html elements are not yet generated */
+    var btnLearnerHeight = $('.btn-learner').first().parent().outerHeight() ? $('.btn-learner').first().parent().outerHeight() : 54;
 
-    /* The height of the learner button must be set manually because the html elements are not yet generated */
-    var btnLearnerHeight = 54;
-
+    /* Calculate how much buttons we can place in the viewport until we need to scroll */
     var queryLimiter = Math.floor(viewPortHeight / btnLearnerHeight);
 
-    /* Multiply the displayed elements by 3 if on widescreen and
-     reduce the max output of buttons by 1 for the display more button */
-    if (contentPosition.width() >= 768) {
-        queryLimiter *= 3;
-        queryLimiter -= 3;
-    } else {
-        queryLimiter -= 1;
+    /*
+    Multiply the displayed elements by 3 if on widescreen and reduce the max output of buttons by 1 row for the display
+    more button if necessary. Also make sure there is at least one row of buttons shown even if the user has to scroll
+    */
+    var allMembers = MemberList.find().count();
+    var limitModifier = (viewport.outerWidth() >= 992) ? 3 : (viewport.outerWidth() >= 768 && viewport.outerWidth() < 992) ? 2 : 1;
+
+    queryLimiter *= limitModifier;
+    if (queryLimiter <= 0) queryLimiter = limitModifier;
+    else if(allMembers > queryLimiter) {
+        /*
+        Use Math.ceil() as a session owner because the member buttons position may conflict with the back/forward buttons position.
+        As a session attendee we do not have these buttons, so we can use Math.floor() to display a extra row
+         */
+        if($(".fixed-bottom").length > 0) {
+            queryLimiter -= Math.ceil($('.more-learners-row').first().outerHeight() / btnLearnerHeight) * limitModifier;
+        } else {
+            queryLimiter -= Math.floor($('.more-learners-row').first().outerHeight() / btnLearnerHeight) * limitModifier;
+        }
     }
 
-    if (queryLimiter <= 0) {
-        queryLimiter = 1;
-    }
-
+    /*
+    This session variable holds the amount of shown buttons and is used in the helper function
+    Template.memberlist.helpers.learners which gets the attendees from the mongo db
+     */
     Session.set("LearnerCount", queryLimiter);
 }
 

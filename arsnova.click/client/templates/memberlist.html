@@ -5,13 +5,13 @@
     <div class="row">
         <div class="col-md-12 contentFrame">
             {{> titel titelText=""}}
-            {{#if isNotOwner}}
+            {{#unless isOwner}}
                 <div class="row">
-                    <div class=" titel-relative text-light text-center">
+                    <div class=" titel-relative text-light text-center" id="attendee-in-quiz-wrapper">
                         <div class="titel margin-to-logo">Teilnehmende im Quiz &laquo;{{hashtag}}&raquo;</div>
                     </div>
                 </div>
-            {{/if}}
+            {{/unless}}
             {{#if isReadingConfirmationRequired}}
                 {{> readingConfirmation }}
             {{/if}}

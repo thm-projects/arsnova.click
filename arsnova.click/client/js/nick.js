@@ -72,7 +72,7 @@ function rgbToHex (r, g, b) {
 
 function transformForegroundColor (rgbObj) {
     var o = Math.round(((parseInt(rgbObj.r) * 299) + (parseInt(rgbObj.g) * 587) + (parseInt(rgbObj.b) * 114)) / 1000);
-    return o > 125 ? "#ffffff" : "#000000";
+    return o < 125 ? "#ffffff" : "#000000";
 }
 
 /**

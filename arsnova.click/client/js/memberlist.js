@@ -133,6 +133,7 @@ Template.memberlist.helpers({
 
 Template.learner.onRendered(function () {
     calculateButtonCount();
+    calculateProgressBarTextWidth();
 });
 
 Template.learner.helpers({
@@ -170,7 +171,7 @@ function calculateButtonCount () {
     var viewport = $(".contentPosition"),
         confirmationCounter = $('.confirmationCounter').length > 0 ? $('.confirmationCounter').first().outerHeight() : 0,
         attendeeInQuiz = $('#attendee-in-quiz-wrapper').length > 0 ? $('#attendee-in-quiz-wrapper').outerHeight() : 0,
-        learnerListMargin = parseInt($('.learner-list').first().css('margin-top').replace("px", ""));
+        learnerListMargin = $('.learner-list').length > 0 ? parseInt($('.learner-list').first().css('margin-top').replace("px", "")) : 0;
 
     var viewPortHeight =
         viewport.outerHeight() -
@@ -213,7 +214,12 @@ function calculateButtonCount () {
 }
 
 function calculateProgressBarTextWidth () {
-    $('.progress-fill').outerWidth((getPercentRead()) + "%");
+    /*
+     * In chrome the width is always set 20% too high. In all other browsers either this and the original calculation
+     * (e.g. $('.progress-fill').width((getPercentRead()) + "%");) works as expected. The function returns the correct
+     * percent values so no other manipulation is needed. This could be a chrome bug and is perhaps fixed later.
+    */
+    $('.progress-fill').width((getPercentRead() - 20) + "%");
 
     if (getPercentRead() === 100) {
         $('.progress-fill').addClass('round-corners-right');

@@ -171,7 +171,7 @@ function calculateButtonCount () {
     var viewport = $(".contentPosition"),
         confirmationCounter = $('.confirmationCounter').length > 0 ? $('.confirmationCounter').first().outerHeight() : 0,
         attendeeInQuiz = $('#attendee-in-quiz-wrapper').length > 0 ? $('#attendee-in-quiz-wrapper').outerHeight() : 0,
-        learnerListMargin = parseInt($('.learner-list').first().css('margin-top').replace("px", ""));
+        learnerListMargin = $('.learner-list').length > 0 ? parseInt($('.learner-list').first().css('margin-top').replace("px", "")) : 0;
 
     var viewPortHeight =
         viewport.outerHeight() -

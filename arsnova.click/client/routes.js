@@ -17,8 +17,8 @@ Router.route('/', function () {
 });
 
 Router.route('/resetToHome', function () {
-    this.render('home');
-    location.reload();
+    this.redirect('/');
+    $('.modal-backdrop').remove();
 });
 
 Router.route('/nick', function () {

@@ -66,6 +66,7 @@ Router.route('/onpolling', function () {
     if (Session.get("isOwner")) {
         this.render('live_results');
     } else {
+        $('.modal-backdrop').hide();
         this.render('votingview');
     }
 });

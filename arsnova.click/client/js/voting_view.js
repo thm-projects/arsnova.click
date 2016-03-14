@@ -50,7 +50,7 @@ Template.votingview.helpers({
     },
     getCountdown: function () {
         if (Session.get("countdownInitialized")) {
-            return countdown.get() + " Sekunden übrig!";
+            return "Noch " + countdown.get() + " Sekunden!";
         }
     }
 });

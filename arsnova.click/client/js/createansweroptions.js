@@ -39,7 +39,14 @@ Template.createAnswerOptions.events({
             isCorrect: 0
          };
 
-         Meteor.call('AnswerOptions.addOption', answerOption);
+         Meteor.call('AnswerOptions.addOption', answerOption, (err, res) => {
+            if (err) {
+               $('.errorMessageSplash').parents('.modal').modal('show');
+               $("#errorMessage-text").html(err.reason);
+            }
+         });
+
+
          localData.addAnswers(Session.get("hashtag"), answerOption);
          if (AnswerOptions.find().count() > 1) {
             $("#deleteAnswerOption").removeClass("hide");
@@ -88,7 +95,8 @@ Template.createAnswerOptions.events({
          Meteor.call('AnswerOptions.updateAnswerTextAndIsCorrect', answer,
              (err, res) => {
             if (err) {
-               alert(err);
+               $('.errorMessageSplash').parents('.modal').modal('show');
+               $("#errorMessage-text").html(err.reason);
             } else {
                Router.go("/settimer");
             }

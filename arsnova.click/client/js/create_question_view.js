@@ -43,7 +43,8 @@ Template.createQuestionView.events({
             questionText: questionText
         }, (err, res) => {
             if (err) {
-                alert(err);
+                $('.errorMessageSplash').parents('.modal').modal('show');
+                $("#errorMessage-text").html(err.reason);
             } else {
                 localData.addQuestion(Session.get("hashtag"), questionText);
                 Router.go("/answeroptions");

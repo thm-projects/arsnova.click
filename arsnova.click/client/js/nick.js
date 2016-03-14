@@ -19,7 +19,9 @@ Template.nick.events({
             foregroundColor: transformForegroundColor(hexToRgb(bgColor))
         }, (err, res) => {
             if (err) {
-                alert(err);
+                $("#forwardButton").attr("disabled", "disabled");
+                $('.errorMessageSplash').parents('.modal').modal('show');
+                $("#errorMessage-text").html(err.reason);
             } else {
                 Session.set("nick", nickname);
                 Router.go("/memberlist");

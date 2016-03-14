@@ -1,13 +1,13 @@
 Template.memberlist.onCreated(function () {
     this.autorun(() => {
         this.subscribe('MemberList.members', Session.get("hashtag"), function () {
-        $(window).resize(function () {
-            var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
-            $(".container").css("height", final_height + "px");
-            Session.set("LearnerCountOverride", false);
-            calculateButtonCount();
-            calculateProgressBarTextWidth();
-        });
+            $(window).resize(function () {
+                var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
+                $(".container").css("height", final_height + "px");
+                Session.set("LearnerCountOverride", false);
+                calculateButtonCount();
+                calculateProgressBarTextWidth();
+            });
         });
         if(Session.get("isOwner")) {
             this.subscribe('MemberList.percentRead', {
@@ -67,7 +67,8 @@ Template.memberlist.events({
             hashtag: Session.get("hashtag")
         }, (err, res) => {
             if (err) {
-                alert(err);
+                $('.errorMessageSplash').parents('.modal').modal('show');
+                $("#errorMessage-text").html(err.reason);
             } else {
                 //Router.go("/onpolling");
             }

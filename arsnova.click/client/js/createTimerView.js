@@ -53,7 +53,8 @@ Template.createTimerView.events({
             timer:timer
         }, (err, res) => {
             if (err) {
-                alert(err);
+                $('.errorMessageSplash').parents('.modal').modal('show');
+                $("#errorMessage-text").html(err.reason);
             } else {
                 localData.addTimer(Session.get("hashtag"), timer);
         Router.go("/readconfirmationrequired");
@@ -69,7 +70,8 @@ Template.createTimerView.events({
                 timer:timer
             }, (err, res) => {
                 if (err) {
-                    alert(err);
+                    $('.errorMessageSplash').parents('.modal').modal('show');
+                    $("#errorMessage-text").html(err.reason);
                 } else {
                     localData.addTimer(Session.get("hashtag"), timer);
             Router.go("/answeroptions");

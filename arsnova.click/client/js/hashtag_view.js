@@ -83,7 +83,9 @@ Template.hashtag_view.events({
                 };
                 Meteor.call('Hashtags.addHashtag', doc, (err, res) => {
                     if (err) {
-                        alert("Hashtag not saved!\n" + err);
+                        $("#addNewHashtag").removeAttr("disabled");
+                        $('.errorMessageSplash').parents('.modal').modal('show');
+                        $("#errorMessage-text").html(err.reason);
                     } else {
                         Session.set("hashtag", hashtag);
                         Session.set("isOwner", true);

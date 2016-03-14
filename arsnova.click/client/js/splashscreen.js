@@ -10,7 +10,6 @@ Template.splashscreen.rendered = function () {
             keyboard: false
         });
     }
-
     if (templateParams.noAutorun) {
         splashscreen.modal({show: false});
     } else {
@@ -37,4 +36,4 @@ closeAndRedirectTo = function (url) {
     $('.js-splashscreen').on('hidden.bs.modal', function () {
         Router.go(url);
     }).modal('hide');
-}
+};

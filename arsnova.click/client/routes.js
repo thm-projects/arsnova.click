@@ -18,7 +18,7 @@ Router.route('/', function () {
 
 Router.route('/resetToHome', function () {
     this.render('home');
-    location.reload();
+    $('.modal-backdrop').hide();
 });
 
 Router.route('/nick', function () {

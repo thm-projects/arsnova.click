@@ -103,6 +103,7 @@ Template.hashtag_view.events({
             Session.set("hashtag", hashtag);
             Router.go("/nick");
         } else {
+            $("#joinSession").attr("disabled", "disabled");
             $('.errorMessageSplash').parents('.modal').modal('show');
             $("#errorMessage-text").html("Session is currently not available for joining");
         }

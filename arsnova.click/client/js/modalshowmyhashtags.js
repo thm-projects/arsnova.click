@@ -13,5 +13,8 @@ Template.modalShowMyHashtags.events({
         Meteor.call("Hashtags.setIsActive", localData.getPrivateKey(), hashtag, 1);
 
         closeAndRedirectTo('/question');
+    },
+    "click #js-btn-showHashtagManagement": function (event) {
+        closeAndRedirectTo('/hashtagmanagement');
     }
 });

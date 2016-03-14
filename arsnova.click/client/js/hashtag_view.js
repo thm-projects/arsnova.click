@@ -98,9 +98,15 @@ Template.hashtag_view.events({
     },
     "click #joinSession": function () {
         var hashtag = $("#hashtag-input-field").val();
-        Session.set("hashtag", hashtag);
-        //localStorage.setItem("hashtag", hashtag);
-        Router.go("/nick");
+
+        if (Hashtags.findOne({hashtag:hashtag}).sessionStatus == 2) {
+            Session.set("hashtag", hashtag);
+            Router.go("/nick");
+        } else {
+            $("#joinSession").attr("disabled", "disabled");
+            $('.errorMessageSplash').parents('.modal').modal('show');
+            $("#errorMessage-text").html("Session is currently not available for joining");
+        }
     },
     "keydown #hashtag-input-field": function (event) {
         var keyWhiteList = [37,39,8,46,13]; //left, right, delete, entf

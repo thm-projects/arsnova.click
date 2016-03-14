@@ -1,5 +1,5 @@
 Template.errorSplashscreen.rendered = function () {
-    var splashscreen = $('.js-splashscreen');
+    var splashscreen = $('.js-errorsplashscreen');
     splashscreen.on('click', function () {
         $('.js-errorsplashscreen').modal("hide");
     });

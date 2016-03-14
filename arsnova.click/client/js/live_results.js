@@ -129,8 +129,10 @@ Template.live_results.events({
             } else {
                 var exportData = "text/json;charset=utf-8," + encodeURIComponent(res);
                 var a = document.createElement('a');
+                var time = new Date();
+                var timestring = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
                 a.href = 'data:' + exportData;
-                a.download = 'data.json';
+                a.download = Session.get("hashtag") + "-" + timestring + ".json";
                 a.innerHTML = '';
                 event.target.appendChild(a);
                 if (Session.get("exportReady")) {

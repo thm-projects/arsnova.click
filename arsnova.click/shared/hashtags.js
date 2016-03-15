@@ -71,23 +71,44 @@ Meteor.methods({
             var hashtagDoc = Hashtags.findOne({
                 hashtag: hashtag,
                 privateKey: privateKey
+            }, {
+                fields: {
+                    _id: 0,
+                    privateKey: 0
+                }
             });
             if (!hashtagDoc) {
                 throw new Meteor.Error('Hashtags.export', 'No such hashtag with the given key');
                 return;
             }
-            var sessionDoc = Sessions.findOne({hashtag: hashtag});
-            var answerOptionsDoc = AnswerOptions.find({hashtag: hashtag}).fetch();
-            var memberListDoc = MemberList.find({hashtag: hashtag}).fetch();
-            var responsesDoc = Responses.find({hashtag: hashtag}).fetch();
-            var ret = {
+            var sessionDoc = Sessions.find({hashtag: hashtag}, {
+                fields: {
+                    _id: 0
+                }
+            });
+            var answerOptionsDoc = AnswerOptions.find({hashtag: hashtag}, {
+                fields: {
+                    _id: 0
+                }
+            }).fetch();
+            var memberListDoc = MemberList.find({hashtag: hashtag}, {
+                fields: {
+                    _id: 0
+                }
+            }).fetch();
+            var responsesDoc = Responses.find({hashtag: hashtag}, {
+                fields: {
+                    _id: 0
+                }
+            }).fetch();
+            var exportData = {
                 hashtagDoc: hashtagDoc,
                 sessionDoc: sessionDoc,
                 answerOptionsDoc: answerOptionsDoc,
                 memberListDoc: memberListDoc,
                 responsesDoc: responsesDoc,
-            }
-            return JSON.stringify(ret);
+            };
+            return JSON.stringify(exportData);
         }
     },
     'keepalive': function (privateKey, hashtag) {

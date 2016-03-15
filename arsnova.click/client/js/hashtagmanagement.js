@@ -21,37 +21,14 @@ Template.hashtagManagement.events({
     },
     "click .js-export": function (event) {
         var hashtag = $(event.currentTarget).parent().parent()[0].id;
-        var localStorageData = JSON.parse(localStorage.getItem(hashtag));
-        if (localStorageData) {
-            var hashtagDoc = {
-                hashtag: localStorageData.hashtag,
-                sessionStatus: 0,
-                lastConnection: 0
-            };
-            var sessionDoc = {
-                hashtag: localStorageData.hashtag,
-                questionText: localStorageData.questionText,
-                timer: localStorageData.timer,
-                isReadingConfirmationRequired: localStorageData.isReadingConfirmationRequired
-            };
-            answerOptionsDoc = [];
-            localStorageData.answers.forEach(function (answerOption) {
-                answerOption.hashtag = localStorageData.hashtag;
-                answerOptionsDoc.push(answerOption);
-            });
-            var exportData = {
-                hashtagDoc: hashtagDoc,
-                sessionDoc: sessionDoc,
-                answerOptionsDoc: answerOptionsDoc,
-                memberListDoc: [],
-                responsesDoc: [],
-            };
-            var exportDataJson = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportData));
+        var exportData = localData.exportFromLocalStorage(hashtag);
+        if (exportData) {
+            var exportDataJson = "text/json;charset=utf-8," + encodeURIComponent(exportData);
             var a = document.createElement('a');
             var time = new Date();
             var timestring = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
             a.href = 'data:' + exportDataJson;
-            a.download = localStorageData.hashtag + "-" + timestring + ".json";
+            a.download = hashtag + "-" + timestring + ".json";
             a.innerHTML = '';
             event.target.appendChild(a);
             if (Session.get("exportReady")) {

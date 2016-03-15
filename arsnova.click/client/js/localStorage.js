@@ -232,6 +232,36 @@ localData = {
         return localStorage.getItem("privateKey");
     },
 
+    exportFromLocalStorage: function (hashtag) {
+        var localStorageData = JSON.parse(localStorage.getItem(hashtag));
+        if (localStorageData) {
+            var hashtagDoc = {
+                hashtag: localStorageData.hashtag,
+                sessionStatus: 0,
+                lastConnection: 0
+            };
+            var sessionDoc = {
+                hashtag: localStorageData.hashtag,
+                questionText: localStorageData.questionText,
+                timer: localStorageData.timer,
+                isReadingConfirmationRequired: localStorageData.isReadingConfirmationRequired
+            };
+            answerOptionsDoc = [];
+            localStorageData.answers.forEach(function (answerOption) {
+                answerOption.hashtag = localStorageData.hashtag;
+                answerOptionsDoc.push(answerOption);
+            });
+            var exportData = {
+                hashtagDoc: hashtagDoc,
+                sessionDoc: sessionDoc,
+                answerOptionsDoc: answerOptionsDoc,
+                memberListDoc: [],
+                responsesDoc: [],
+            };
+            return JSON.stringify(exportData);
+        }
+    },
+
     createTestData: function () {
         if (!localStorage.getItem("wpw")) {
 

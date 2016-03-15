@@ -38,8 +38,8 @@ Meteor.methods({
         if (doc) {
             Hashtags.update({_id: doc._id}, {$set: {sessionStatus: sessionStatus}});
         } else {
-            // TODO error message: user is not owner or inputs are wrong!
-            return false;
+            throw new Meteor.Error('Hashtags.setSessionStatus', 'Either the hashtag isn\'t available or the key is wrong');
+            return;
         }
     },
     'Hashtags.addHashtag': function (doc) {
@@ -62,6 +62,7 @@ Meteor.methods({
             Hashtags.insert(doc);
         }else{
             throw new Meteor.Error('Hashtags.addHashtag', 'Session already exists!');
+            return;
         }
 
     },

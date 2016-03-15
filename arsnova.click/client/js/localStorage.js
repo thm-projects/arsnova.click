@@ -19,6 +19,22 @@ localData = {
         return $.inArray(hashtag, JSON.parse(hashtagString));
     },
 
+    deleteHashtag: function (hashtag) {
+        if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
+            return;
+        }
+        var allHashtags = JSON.parse(localStorage.getItem("hashtags"));
+        if (!allHashtags) {
+            return false;
+        }
+        var index = $.inArray(hashtag, allHashtags);
+        if (index > -1) {
+            var newHashtags = allHashtags.splice(index, 1);
+            localStorage.removeItem(hashtag);
+            localStorage.setItem("hashtags", JSON.stringify(allHashtags));
+        }
+    },
+
     addHashtag: function (hashtag) {
         if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;

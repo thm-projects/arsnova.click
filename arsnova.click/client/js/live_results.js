@@ -27,11 +27,24 @@ Template.live_results.helpers({
           return "Abstimmung läuft...";
       }
     },
-    isNotOwner: function(){
-        return !Session.get("isOwner");
-    },
     isOwner: function () {
         return Session.get("isOwner");
+    },
+    getCountdown: function () {
+        var timestamp = new Date().getTime();
+        var sessionDoc = Sessions.findOne({hashtag:Session.get("hashtag")});
+        return (timestamp - sessionDoc.startTime + sessionDoc.timer) / 1000;
+    },
+    getCountStudents: function () {
+        var allResponses = Responses.find();
+        var nickCountArray = [];
+        allResponses.forEach(function(entry){
+           if (!nickCountArray.contains(entry.nick)){
+               nickCountArray.push(entry.nick);
+           }
+        });
+        console.log(nickCountArray);
+        return nickCountArray.length;
     },
     sessionClosed: function () {
         return Session.get("sessionClosed");
@@ -147,6 +160,7 @@ Template.live_results.events({
             }
         });
     }
+
 });
 
 

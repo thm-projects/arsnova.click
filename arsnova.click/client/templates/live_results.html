@@ -1,7 +1,21 @@
 <template name="live_results">
-    <!-- "Abstimmung läuft..."-->
-    {{> titel titelText = votingText}}
-
+        <div class="row">
+            {{#if isOwner}}
+                <div class="col-xs-3 text-left">
+                    <div class="titel">Countdown: {{getCountdown}}</div>
+                </div>
+                <div class="col-xs-6 text-center">
+                    <div id="appTitle" class="titel margin-to-logo">{{votingText}}</div>
+                </div>
+                <div class="col-xs-3 text-right">
+                    <div class="titel">Studenten: {{getCountStudents}}</div>
+                </div>
+            {{else}}
+                <div class=" titel-relative text-light text-center">
+                    <div id="appTitle" class="titel margin-to-logo">{{votingText}}</div>
+                </div>
+            {{/if}}
+        </div>
     <div class="row">
         <div class="col-md-12">
             {{#each result}}

@@ -44,5 +44,15 @@ Template.hashtagManagement.events({
         localData.deleteHashtag(hashtagRow[0].id);
         Meteor.call('Main.deleteEverything', {privateKey: localData.getPrivateKey(), hashtag: hashtagRow[0].id});
         hashtagRow.hide();
+    },
+    "change #js-import": function (event) {
+        var fileList = event.target.files;
+        var fileReader = new FileReader();
+        fileReader.onload = function (fileLoadEvent) {
+            console.log(fileReader.result);
+        };
+        for (var i = 0; i < fileList.length; i++) {
+            fileReader.readAsBinaryString(fileList[i]);
+        }
     }
 });

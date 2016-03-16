@@ -30,7 +30,9 @@ Template.live_results.helpers({
     isNotOwner: function(){
         return !Session.get("isOwner");
     },
-
+    isOwner: function () {
+        return Session.get("isOwner");
+    },
     sessionClosed: function () {
         return Session.get("sessionClosed");
     },

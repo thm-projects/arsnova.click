@@ -32,6 +32,9 @@ Meteor.methods({
             }
         }
     },
+    "Sessions.isSC": function ({hashtag}) {
+        return (AnswerOptions.find({hashtag: hashtag, isCorrect: 1}).count() == 1);
+    },
     "Sessions.updateIsReadConfirmationRequired": function ({privateKey, hashtag, isReadingConfirmationRequired}) {
         new SimpleSchema({
             isReadingConfirmationRequired: {

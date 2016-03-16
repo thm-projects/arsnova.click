@@ -13,9 +13,7 @@ App.icons({
     'android_ldpi': 'public/images/icons/icon-ldpi.png',
     'android_mdpi': 'public/images/icons/icon-mdpi.png',
     'android_hdpi': 'public/images/icons/icon-hdpi.png',
-    'android_xhdpi': 'public/images/icons/icon-xhdpi.png',
-    'android_xxhdpi': 'public/images/icons/icon-xxhdpi.png',
-    'android_xxxhdpi': 'public/images/icons/icon-xxxhdpi.png'
+    'android_xhdpi': 'public/images/icons/icon-xhdpi.png'
 });
 
 /*App.launchScreens({

@@ -61,7 +61,20 @@ Template.hashtagManagement.events({
                         $("#errorMessage-text").html(err.reason);
                     }
                     else {
-
+                        localData.importFromFile(asJSON);
+                        Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
+                            (err, res) => {
+                                if (err) {
+                                    $('.errorMessageSplash').parents('.modal').modal('show');
+                                    $("#errorMessage-text").html(err.reason);
+                                }
+                                else {
+                                    Session.set("hashtag", asJSON.hashtagDoc.hashtag);
+                                    Session.set("isOwner", true);
+                                    Router.go("/memberlist");
+                                }
+                            }
+                        );
                     }
                 }
             );

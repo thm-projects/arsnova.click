@@ -232,6 +232,32 @@ localData = {
         return localStorage.getItem("privateKey");
     },
 
+    importFromFile: function (data) {
+        var hashtag = data.hashtagDoc.hashtag;
+        if ((hashtag === "hashtags") || (hashtag === "privateKey")) {
+            return;
+        }
+        var allHashtags = JSON.parse(localStorage.getItem("hashtags"));
+        allHashtags.push(hashtag);
+        var answerOptionsLocalStorage = [];
+        data.answerOptionsDoc.forEach(function (answerOptionDoc) {
+            var newDoc = {
+                answerOptionNumber: answerOptionDoc.answerOptionNumber,
+                answerText: answerOptionDoc.answerText,
+                isCorrect: answerOptionDoc.isCorrect
+            };
+            answerOptionsLocalStorage.push(newDoc);
+        });
+        var localDataObject = {
+            hashtag: hashtag,
+            questionText: data.sessionDoc.questionText,
+            timer: data.sessionDoc.timer,
+            isReadingConfirmationRequired: data.sessionDoc.isReadingConfirmationRequired,
+            answers: answerOptionsLocalStorage
+        };
+        localStorage.setItem(hashtag, JSON.stringify(localDataObject));
+    },
+
     exportFromLocalStorage: function (hashtag) {
         var localStorageData = JSON.parse(localStorage.getItem(hashtag));
         if (localStorageData) {

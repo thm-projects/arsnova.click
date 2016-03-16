@@ -239,6 +239,7 @@ localData = {
         }
         var allHashtags = JSON.parse(localStorage.getItem("hashtags"));
         allHashtags.push(hashtag);
+        localStorage.setItem("hashtags", JSON.stringify(allHashtags));
         var answerOptionsLocalStorage = [];
         data.answerOptionsDoc.forEach(function (answerOptionDoc) {
             var newDoc = {

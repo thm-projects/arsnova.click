@@ -81,7 +81,7 @@ Meteor.methods({
                 throw new Meteor.Error('Hashtags.export', 'No such hashtag with the given key');
                 return;
             }
-            var sessionDoc = Sessions.find({hashtag: hashtag}, {
+            var sessionDoc = Sessions.findOne({hashtag: hashtag}, {
                 fields: {
                     _id: 0
                 }

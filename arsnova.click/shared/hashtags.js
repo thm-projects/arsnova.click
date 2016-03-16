@@ -111,6 +111,41 @@ Meteor.methods({
             return JSON.stringify(exportData);
         }
     },
+    'Hashtags.import': function ({privateKey, data}) {
+        if (Meteor.isServer) {
+            var hashtag = data.hashtagDoc.hashtag;
+            var oldDoc = Hashtags.findOne({hashtag: hashtag});
+            if (oldDoc) {
+                if (oldDoc.privateKey == privateKey) {
+                    throw new Meteor.Error('Hashtags.import', 'You already have this hashtag on this server');
+                }
+                else {
+                    throw new Meteor.Error('Hashtags.import', 'This hashtag is already taken by another user on the server');
+                }
+                return;
+            }
+            var hashtagDoc = data.hashtagDoc;
+            hashtagDoc.privateKey = privateKey;
+            hashtagDoc.lastConnection = new Date().getTime();
+            hashtagDoc.sessionStatus = 1;
+            hashtagDoc._id = undefined;
+            Hashtags.insert(hashtagDoc);
+            data.sessionDoc._id = undefined;
+            Sessions.insert(data.sessionDoc);
+            data.answerOptionsDoc.forEach(function (answerOptionDoc) {
+                answerOptionDoc._id = undefined;
+                AnswerOptions.insert(answerOptionDoc);
+            });
+            data.memberListDoc.forEach(function (memberDoc) {
+                memberDoc._id = undefined;
+                MemberList.insert(memberDoc);
+            });
+            data.responsesDoc.forEach(function (responseDoc) {
+                responseDoc._id = undefined;
+                Responses.insert(responseDoc);
+            });
+        }
+    },
     'keepalive': function (privateKey, hashtag) {
         if (Meteor.isServer){
             new SimpleSchema({

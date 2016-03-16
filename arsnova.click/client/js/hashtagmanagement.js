@@ -49,7 +49,22 @@ Template.hashtagManagement.events({
         var fileList = event.target.files;
         var fileReader = new FileReader();
         fileReader.onload = function (fileLoadEvent) {
-            console.log(fileReader.result);
+            var asJSON = JSON.parse(fileReader.result);
+            Meteor.call("Hashtags.import",
+                {
+                    privateKey: localData.getPrivateKey(),
+                    data: asJSON
+                },
+                (err, res) => {
+                    if (err) {
+                        $('.errorMessageSplash').parents('.modal').modal('show');
+                        $("#errorMessage-text").html(err.reason);
+                    }
+                    else {
+
+                    }
+                }
+            );
         };
         for (var i = 0; i < fileList.length; i++) {
             fileReader.readAsBinaryString(fileList[i]);

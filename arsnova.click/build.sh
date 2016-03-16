@@ -2,6 +2,9 @@
 
 #https://github.com/Differential/meteor-mobile-cookbook/blob/master/iOS/Building.md
 
+#android build
+#https://github.com/meteor/meteor/wiki/How-to-submit-your-Android-app-to-Play-Store
+
 #remove last build files
 rm -r .meteor/local/cordova-build/
 rm -r arsnova.click-build/

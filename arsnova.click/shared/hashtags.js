@@ -136,14 +136,6 @@ Meteor.methods({
                 answerOptionDoc._id = undefined;
                 AnswerOptions.insert(answerOptionDoc);
             });
-            data.memberListDoc.forEach(function (memberDoc) {
-                memberDoc._id = undefined;
-                MemberList.insert(memberDoc);
-            });
-            data.responsesDoc.forEach(function (responseDoc) {
-                responseDoc._id = undefined;
-                Responses.insert(responseDoc);
-            });
         }
     },
     'keepalive': function (privateKey, hashtag) {

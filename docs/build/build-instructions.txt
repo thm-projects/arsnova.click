@@ -3,7 +3,10 @@ Android:
 preconditions:
 1. install android sdk
 2. set ANDROID_HOME path to "<android_home>/sdk/"
-3. move .keystore to ~/.keystore
+    - MAC:
+        - open ~/.bash_profile/
+        - export ANDROID_HOME=/Users/<<username>>/Library/Android/sdk
+        - save & close the file
 
 1. run build.sh in arsnova.click root dir
 2. Enter Passphrase for keystore:  arsnova.click

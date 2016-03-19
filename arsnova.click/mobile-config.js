@@ -1,6 +1,6 @@
 App.info({
     version: '1.0.0',
-    id: 'com.thm.click.arsnova',
+    id: 'click.arsnova',
     name: 'ARSnova.click',
     description: 'Quiz-App für alle(s) !',
     email: 'info@arsnova.eu',

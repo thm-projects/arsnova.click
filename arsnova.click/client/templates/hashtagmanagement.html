@@ -1,0 +1,34 @@
+<template name="hashtagManagement">
+    {{> titel titelText = "Hashtagverwaltung" }}
+    <div class="row answer-options distance-top">
+        <div class="col-md-12">
+        {{#each serverHashtags}}
+            <div class="row" id="{{this}}">
+                <div class="col-xs-6">
+                    <button type="button" class="js-reactivate-hashtag btn btn-secondary btn-lg btn-answerOption">
+                        <span class="ansBtn">{{this}}</span>
+                    </button>
+                </div>
+                <div class="col-xs-3">
+                    <button type="button" class="js-export btn btn-info btn-lg btn-answerOption">
+                        <span class="glyphicon glyphicon-export glyph-left" aria-hidden="true"></span>
+                        <span class="ansBtn">Export</span>
+                    </button>
+                </div>
+                <div class="col-xs-3">
+                    <button type="button" class="js-delete btn btn-info btn-lg btn-answerOption">
+                        <span class="glyphicon glyphicon-trash glyph-left" aria-hidden="true"></span>
+                        <span class="ansBtn">Löschen</span>
+                    </button>
+                </div>
+            </div>
+        {{/each}}
+        </div>
+        <div class="col-md-12">
+            <span class="btn btn-lg btn-warning">
+                <input id="js-import" type="file">
+            </span>
+        </div>
+    </div>
+    {{> errorSplashscreen}}
+</template>

@@ -19,6 +19,22 @@ localData = {
         return $.inArray(hashtag, JSON.parse(hashtagString));
     },
 
+    deleteHashtag: function (hashtag) {
+        if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
+            return;
+        }
+        var allHashtags = JSON.parse(localStorage.getItem("hashtags"));
+        if (!allHashtags) {
+            return false;
+        }
+        var index = $.inArray(hashtag, allHashtags);
+        if (index > -1) {
+            var newHashtags = allHashtags.splice(index, 1);
+            localStorage.removeItem(hashtag);
+            localStorage.setItem("hashtags", JSON.stringify(allHashtags));
+        }
+    },
+
     addHashtag: function (hashtag) {
         if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
@@ -214,6 +230,63 @@ localData = {
 
     getPrivateKey: function () {
         return localStorage.getItem("privateKey");
+    },
+
+    importFromFile: function (data) {
+        var hashtag = data.hashtagDoc.hashtag;
+        if ((hashtag === "hashtags") || (hashtag === "privateKey")) {
+            return;
+        }
+        var allHashtags = JSON.parse(localStorage.getItem("hashtags"));
+        allHashtags.push(hashtag);
+        localStorage.setItem("hashtags", JSON.stringify(allHashtags));
+        var answerOptionsLocalStorage = [];
+        data.answerOptionsDoc.forEach(function (answerOptionDoc) {
+            var newDoc = {
+                answerOptionNumber: answerOptionDoc.answerOptionNumber,
+                answerText: answerOptionDoc.answerText,
+                isCorrect: answerOptionDoc.isCorrect
+            };
+            answerOptionsLocalStorage.push(newDoc);
+        });
+        var localDataObject = {
+            hashtag: hashtag,
+            questionText: data.sessionDoc.questionText,
+            timer: data.sessionDoc.timer,
+            isReadingConfirmationRequired: data.sessionDoc.isReadingConfirmationRequired,
+            answers: answerOptionsLocalStorage
+        };
+        localStorage.setItem(hashtag, JSON.stringify(localDataObject));
+    },
+
+    exportFromLocalStorage: function (hashtag) {
+        var localStorageData = JSON.parse(localStorage.getItem(hashtag));
+        if (localStorageData) {
+            var hashtagDoc = {
+                hashtag: localStorageData.hashtag,
+                sessionStatus: 0,
+                lastConnection: 0
+            };
+            var sessionDoc = {
+                hashtag: localStorageData.hashtag,
+                questionText: localStorageData.questionText,
+                timer: localStorageData.timer,
+                isReadingConfirmationRequired: localStorageData.isReadingConfirmationRequired
+            };
+            answerOptionsDoc = [];
+            localStorageData.answers.forEach(function (answerOption) {
+                answerOption.hashtag = localStorageData.hashtag;
+                answerOptionsDoc.push(answerOption);
+            });
+            var exportData = {
+                hashtagDoc: hashtagDoc,
+                sessionDoc: sessionDoc,
+                answerOptionsDoc: answerOptionsDoc,
+                memberListDoc: [],
+                responsesDoc: [],
+            };
+            return JSON.stringify(exportData);
+        }
     },
 
     createTestData: function () {

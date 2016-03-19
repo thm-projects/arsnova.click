@@ -30,9 +30,14 @@ Template.live_results.helpers({
     isNotOwner: function(){
         return !Session.get("isOwner");
     },
-
+    isOwner: function () {
+        return Session.get("isOwner");
+    },
     sessionClosed: function () {
-        return (Session.get("sessionClosed") && (Session.get("rightAnswerOptionCount") > 0));
+        return Session.get("sessionClosed");
+    },
+    showLeaderBoardButton: function () {
+        return (Session.get("rightAnswerOptionCount") > 0);
     },
     result: function () {
         var result = [];
@@ -118,8 +123,30 @@ Template.live_results.events({
     },
     "click #js-btn-showLeaderBoard": function () {
         Router.go("/statistics");
+    },
+    "click #js-btn-export": function (event) {
+        Meteor.call('Hashtags.export', {hashtag: Session.get("hashtag"), privateKey: localData.getPrivateKey()}, (err, res) => {
+            if (err) {
+                alert("Could not export!\n" + err);
+            } else {
+                var exportData = "text/json;charset=utf-8," + encodeURIComponent(res);
+                var a = document.createElement('a');
+                var time = new Date();
+                var timestring = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
+                a.href = 'data:' + exportData;
+                a.download = Session.get("hashtag") + "-" + timestring + ".json";
+                a.innerHTML = '';
+                event.target.appendChild(a);
+                if (Session.get("exportReady")) {
+                    Session.set("exportReady", undefined);
+                }
+                else {
+                    Session.set("exportReady", true);
+                    a.click();
+                }
+            }
+        });
     }
-
 });
 
 

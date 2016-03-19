@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-xs-6">
                         <button id="js-btn-showQuestionModal" type="button"
                                 class="btn btn-info btn-lg btn-answerOption">
                             <span class="glyphicon glyphicon-question-sign glyph-left" aria-hidden="true"></span>
@@ -30,21 +30,33 @@
                         </button>
                     </div>
 
-                    <div class="col-xs-4">
+                    <div class="col-xs-6">
                         <button id="js-btn-showAnswerModal" type="button" class="btn btn-info btn-lg btn-answerOption">
                             <span class="glyphicon glyphicon-th-list glyph-left" aria-hidden="true"></span>
                             <span class="ansBtn">Antworten</span>
                         </button>
                     </div>
-
+                </div>
+                <div class="row">
                     {{#if sessionClosed}}
-                        <div class="col-xs-4">
-                            <button id="js-btn-showLeaderBoard" type="button"
+                        {{#if isOwner}}
+                        <div class="col-xs-6">
+                            <button id="js-btn-export" type="button"
                                     class="btn btn-info btn-lg btn-answerOption">
-                                <span class="ansBtn">leaderboard</span>
-                                <span class="glyphicon glyphicon-arrow-right glyph-right" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-export glyph-left" aria-hidden="true"></span>
+                                <span class="ansBtn">Export</span>
                             </button>
                         </div>
+                        {{/if}}
+                        {{#if showLeaderBoardButton}}
+                            <div class="col-xs-6">
+                                <button id="js-btn-showLeaderBoard" type="button"
+                                        class="btn btn-info btn-lg btn-answerOption">
+                                    <span class="glyphicon glyphicon glyphicon-th-list glyph-left" aria-hidden="true"></span>
+                                    <span class="ansBtn">Rangliste</span>
+                                </button>
+                            </div>
+                        {{/if}}
                     {{/if}}
                 </div>
             </div>
@@ -83,7 +95,7 @@
             <div class="button button-result">
                 <div class="row">
                     <div class="col-xs-12">
-                        <span class="button-result-letter">{{name}}</span>
+                        <span class="button-result-letter button-result-mc-letter">{{name}}</span>
                     </div>
                 </div>
                 <div class="row">
@@ -98,6 +110,34 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</template>
+
+<template name="successT">
+    <p class="splashSmallTitle">Ergebnis</p>
+    <br/>
+
+    <div class="row">
+        <div class="col-md-12">
+            {{#if isSurvey}}
+                <p>Du hast erfolgreich an der Umfrage teilgenommen</p>
+            {{/if}}
+            {{#if isSC}}
+                {{#if correct}}
+                    <p>Du hast richtig geantwortet!</p>
+                {{else}}
+                    <p>Du hast falsch geantwortet!</p>
+                {{/if}}
+            {{/if}}
+            {{#if isMC}}
+                {{#if correct}}
+                    <p>Du hast komplett richtig geantwortet!</p>
+                {{else}}
+                    <p>Du hast falsch geantwortet!</p>
+                {{/if}}
+            {{/if}}
+            <button class="" onclick="closeSplashscreen();">Fenster Schließen</button>
         </div>
     </div>
 </template>

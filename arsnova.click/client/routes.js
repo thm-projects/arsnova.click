@@ -78,6 +78,9 @@ Router.route('/statistics', function () {
     this.render('leaderBoard');
 });
 
+Router.route('/hashtagmanagement', function () {
+    this.render('hashtagManagement');
+});
 
 // Routes for Footer-Links
 

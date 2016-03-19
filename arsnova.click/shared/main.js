@@ -21,4 +21,18 @@ Meteor.methods({
             }
         }
     },
+    'Main.deleteEverything': function ({privateKey, hashtag}) {
+        if (Meteor.isServer) {
+            var hashtagDoc = Hashtags.findOne({hashtag: hashtag, privateKey: privateKey});
+            if (!hashtagDoc) {
+                throw new Meteor.Error('Main.deleteEverything', 'Either the hashtag isn\'t available or the key is wrong');
+                return;
+            }
+            Hashtags.remove({hashtag: hashtag});
+            AnswerOptions.remove({hashtag: doc.hashtag});
+            MemberList.remove({hashtag: doc.hashtag});
+            Responses.remove({hashtag: doc.hashtag});
+            Sessions.remove({hashtag: doc.hashtag});
+        }
+    }
 });

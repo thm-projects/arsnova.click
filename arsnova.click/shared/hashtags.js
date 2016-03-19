@@ -38,8 +38,8 @@ Meteor.methods({
         if (doc) {
             Hashtags.update({_id: doc._id}, {$set: {sessionStatus: sessionStatus}});
         } else {
-            // TODO error message: user is not owner or inputs are wrong!
-            return false;
+            throw new Meteor.Error('Hashtags.setSessionStatus', 'Either the hashtag isn\'t available or the key is wrong');
+            return;
         }
     },
     'Hashtags.addHashtag': function (doc) {
@@ -62,8 +62,81 @@ Meteor.methods({
             Hashtags.insert(doc);
         }else{
             throw new Meteor.Error('Hashtags.addHashtag', 'Session already exists!');
+            return;
         }
 
+    },
+    'Hashtags.export': function ({hashtag, privateKey}) {
+        if (Meteor.isServer) {
+            var hashtagDoc = Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
+            }, {
+                fields: {
+                    _id: 0,
+                    privateKey: 0
+                }
+            });
+            if (!hashtagDoc) {
+                throw new Meteor.Error('Hashtags.export', 'No such hashtag with the given key');
+                return;
+            }
+            var sessionDoc = Sessions.findOne({hashtag: hashtag}, {
+                fields: {
+                    _id: 0
+                }
+            });
+            var answerOptionsDoc = AnswerOptions.find({hashtag: hashtag}, {
+                fields: {
+                    _id: 0
+                }
+            }).fetch();
+            var memberListDoc = MemberList.find({hashtag: hashtag}, {
+                fields: {
+                    _id: 0
+                }
+            }).fetch();
+            var responsesDoc = Responses.find({hashtag: hashtag}, {
+                fields: {
+                    _id: 0
+                }
+            }).fetch();
+            var exportData = {
+                hashtagDoc: hashtagDoc,
+                sessionDoc: sessionDoc,
+                answerOptionsDoc: answerOptionsDoc,
+                memberListDoc: memberListDoc,
+                responsesDoc: responsesDoc,
+            };
+            return JSON.stringify(exportData);
+        }
+    },
+    'Hashtags.import': function ({privateKey, data}) {
+        if (Meteor.isServer) {
+            var hashtag = data.hashtagDoc.hashtag;
+            var oldDoc = Hashtags.findOne({hashtag: hashtag});
+            if (oldDoc) {
+                if (oldDoc.privateKey == privateKey) {
+                    throw new Meteor.Error('Hashtags.import', 'You already have this hashtag on this server');
+                }
+                else {
+                    throw new Meteor.Error('Hashtags.import', 'This hashtag is already taken by another user on the server');
+                }
+                return;
+            }
+            var hashtagDoc = data.hashtagDoc;
+            hashtagDoc.privateKey = privateKey;
+            hashtagDoc.lastConnection = new Date().getTime();
+            hashtagDoc.sessionStatus = 1;
+            hashtagDoc._id = undefined;
+            Hashtags.insert(hashtagDoc);
+            data.sessionDoc._id = undefined;
+            Sessions.insert(data.sessionDoc);
+            data.answerOptionsDoc.forEach(function (answerOptionDoc) {
+                answerOptionDoc._id = undefined;
+                AnswerOptions.insert(answerOptionDoc);
+            });
+        }
     },
     'keepalive': function (privateKey, hashtag) {
         if (Meteor.isServer){

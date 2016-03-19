@@ -13,6 +13,5 @@ rm -r arsnova.click-build/
 meteor build arsnova.click-build --server=http://arsnova.click:80
 
 #Generate Android apk
-cd arsnova.click-build/android/
-jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../../../docs/build/android-release-key.keystore release-unsigned.apk  arsnova.click
-$ANDROID_HOME/build-tools/23.0.2/zipalign -v 4 release-unsigned.apk ../arsnova.click-production.apk
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../docs/build/android-release-key.keystore ./arsnova.click-build/android/release-unsigned.apk  arsnova.click
+$ANDROID_HOME/build-tools/23.0.2/zipalign -v 4 ./arsnova.click-build/android/release-unsigned.apk ./arsnova.click-build/arsnova.click-production.apk

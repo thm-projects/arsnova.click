@@ -23,7 +23,7 @@ Template.live_results.helpers({
     votingText: function () {
       if (Session.get("sessionClosed")){
           return "Abstimmung beendet";
-      }  else{
+      } else {
           return "Abstimmung läuft...";
       }
     },
@@ -31,20 +31,19 @@ Template.live_results.helpers({
         return Session.get("isOwner");
     },
     getCountdown: function () {
-        var timestamp = new Date().getTime();
-        var sessionDoc = Sessions.findOne({hashtag:Session.get("hashtag")});
-        return (timestamp - sessionDoc.startTime + sessionDoc.timer) / 1000;
+        if (Session.get("countdownInitialized")){
+            var timer = Math.round(countdown.get())
+            if (timer < 0){
+                return 0;
+            } else {
+                return Math.round(countdown.get());
+            }
+        } else {
+            return 0;
+        }
     },
     getCountStudents: function () {
-        var allResponses = Responses.find();
-        var nickCountArray = [];
-        allResponses.forEach(function(entry){
-           if (!nickCountArray.contains(entry.nick)){
-               nickCountArray.push(entry.nick);
-           }
-        });
-        console.log(nickCountArray);
-        return nickCountArray.length;
+        return MemberList.find().count();
     },
     sessionClosed: function () {
         return Session.get("sessionClosed");

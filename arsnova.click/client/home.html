@@ -1,6 +1,6 @@
 <template name="home">
     {{#if existingHashtagsAvailable}}
-        {{> splashscreen templateName="modalShowMyHashtags" noAutorun=false lazyClose=true timerClose=5000 headername='Hinweis:' type='splash-screen-session'}}
+        {{> splashscreen templateName="modalShowMyHashtags" noAutorun=false lazyClose=true timerClose=5000 headername='Quiz-Verwaltung' type='splash-screen-session'}}
     {{/if}}
     {{> hashtag_view}}
 </template>
@@ -14,8 +14,8 @@
         <div class="col-xs-6">
             <button id="js-btn-showHashtagManagement" type="button"
                     class="btn btn-info btn-lg btn-answerOption">
-                <span class="glyphicon glyphicon-list glyph-left" aria-hidden="true"></span>
-                <span class="ansBtn">Verwaltung</span>
+                <span class="glyphicon glyphicon-cloud glyph-left" aria-hidden="true"></span>
+                <span class="ansBtn">Import | Export</span>
             </button>
         </div>
     </div>

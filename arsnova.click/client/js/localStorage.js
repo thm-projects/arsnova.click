@@ -1,11 +1,12 @@
 localData = {
     getAllHashtags: function () {
-        const hashtagString = localStorage.getItem("hashtags");
+        var hashtagString = localStorage.getItem("hashtags");
         if (!hashtagString) {
             localStorage.setItem("hashtags", JSON.stringify([]));
             return [];
         }
-        return JSON.parse(hashtagString);
+        var localHashtags = JSON.parse(hashtagString);
+        return localHashtags.sort();
     },
 
     containsHashtag: function (hashtag) {

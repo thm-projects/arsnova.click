@@ -1,7 +1,7 @@
 <template name="hashtagManagement">
-    {{> titel titelText = "Hashtagverwaltung" }}
+    {{> titel titelText = "Import | Export" }}
     <div class="row answer-options distance-top">
-        <div class="col-md-12">
+        <div class="col-xs-12">
         {{#each serverHashtags}}
             <div class="row" id="{{this}}">
                 <div class="col-xs-6">
@@ -24,9 +24,11 @@
             </div>
         {{/each}}
         </div>
-        <div class="col-md-12">
-            <span class="btn btn-lg btn-warning">
-                <input id="js-import" type="file">
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <span class="btn btn-lg btn-warning btn-file distance-top">
+                Import <input id="js-import" type="file" accept="application/json" multiple>
             </span>
         </div>
     </div>

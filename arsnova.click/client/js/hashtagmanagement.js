@@ -58,7 +58,7 @@ Template.hashtagManagement.events({
                 (err, res) => {
                     if (err) {
                         $('.errorMessageSplash').parents('.modal').modal('show');
-                        $("#errorMessage-text").html(err.reason);
+                        $("#errorMessage-text").html("Diese Sitzung existiert bereits!");
                     }
                     else {
                         localData.importFromFile(asJSON);
@@ -66,7 +66,7 @@ Template.hashtagManagement.events({
                             (err, res) => {
                                 if (err) {
                                     $('.errorMessageSplash').parents('.modal').modal('show');
-                                    $("#errorMessage-text").html(err.reason);
+                                    $("#errorMessage-text").html("Es ist ein Fehler bei der Aktualisierung ihrer Frage aufgetreten.");
                                 }
                                 else {
                                     Session.set("hashtag", asJSON.hashtagDoc.hashtag);

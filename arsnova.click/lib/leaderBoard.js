@@ -1,6 +1,6 @@
-Hashtags = new Mongo.Collection("leaderBoard");
+LeaderBoard = new Mongo.Collection("leaderBoard");
 
-Hashtags.attachSchema(new SimpleSchema({
+LeaderBoard.attachSchema(new SimpleSchema({
 	hashtag: {
 		type:String,
 		min:1,

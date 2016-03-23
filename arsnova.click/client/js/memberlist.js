@@ -85,8 +85,8 @@ Template.memberlist.rendered = function () {
             $(".hashtag_in_title").css("font-size", "2vw");
         }
 
-        $(".header-titel").css("font-size", "3vw");
-        $(".header-titel").css("margin-top", titel_margin_top * 0.5)
+        $(".header-titel").css("font-size", "2.5vw");
+        $(".header-titel").css("margin-top", titel_margin_top * 0.6)
     }
 
 };
@@ -133,8 +133,8 @@ Template.memberlist.onRendered(function () {
                 $(".hashtag_in_title").css("font-size", "2vw");
             }
 
-            $(".header-titel").css("font-size", "3vw");
-            $(".header-titel").css("margin-top", titel_margin_top * 0.5)
+            $(".header-titel").css("font-size", "2.5vw");
+            $(".header-titel").css("margin-top", titel_margin_top * 0.6)
         }
 
 

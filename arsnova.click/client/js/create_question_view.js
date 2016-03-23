@@ -88,8 +88,8 @@ Template.createQuestionView.onRendered(function () {
             $(".header-titel").css("font-size", "4vw");
             $(".header-titel").css("margin-top", titel_margin_top * 0.4);
         } else {
-            $(".header-titel").css("font-size", "3vw");
-            $(".header-titel").css("margin-top", titel_margin_top * 0.5);
+            $(".header-titel").css("font-size", "2.5vw");
+            $(".header-titel").css("margin-top", titel_margin_top * 0.6);
         }
 
 
@@ -117,8 +117,8 @@ Template.createQuestionView.rendered = function () {
         $(".header-titel").css("font-size", "4vw");
         $(".header-titel").css("margin-top", titel_margin_top * 0.4);
     } else {
-        $(".header-titel").css("font-size", "3vw");
-        $(".header-titel").css("margin-top", titel_margin_top * 0.5);
+        $(".header-titel").css("font-size", "2.5vw");
+        $(".header-titel").css("margin-top", titel_margin_top * 0.6);
     }
 
 };

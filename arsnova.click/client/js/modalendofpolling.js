@@ -99,6 +99,15 @@ Template.endOfPollingSplashscreen.helpers({
         return false;
     },
     getActPosition: function () {
+        var myResponseMillis = Responses.findOne({hashtag: Session.get("hashtag"), userNick: Session.get("nick")}).responseTime;
+
+        if (AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count() === 1) {
+            // SC
+            //Responses.find({hashtag: Sessions.get("hashtag")})
+        } else {
+            // MC
+        }
+
 
     }
 });

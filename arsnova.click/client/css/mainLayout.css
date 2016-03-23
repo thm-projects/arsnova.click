@@ -62,6 +62,10 @@ p, ul.list-unstyled {
     margin-top: 20px;
 }
 
+.header-title {
+    margin-top: 20px;
+}
+
 .header-session > .row {
     margin-top: 20px;
 }
@@ -98,4 +102,11 @@ p, ul.list-unstyled {
 .row-landingpage-buttons {
     margin-top: 10px;
     margin-bottom: 20px;
+}
+
+
+@media screen and (max-width: 991px) {
+    .titel {
+        font-size:6vw;
+    }
 }

@@ -134,6 +134,10 @@ leaderboard: {
         min:3,
         max:25
     },
+    responseTimeMillis: {
+		type: Number,
+        min: 0
+	},
     givenAnswers: {
         type: Number,
         min: 1,

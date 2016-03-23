@@ -22,6 +22,7 @@ Meteor.methods({
                     return;
                 }
                 var responseTime = Number(timestamp) - Number(sessionDoc.startTime);
+
                 if (responseTime <= sessionDoc.timer) {
                     responseDoc.responseTime = responseTime;
                     var answerOptionDoc = AnswerOptions.findOne({
@@ -32,7 +33,15 @@ Meteor.methods({
                         throw new Meteor.Error('Responses.addResponse', 'There is no answer option with the given answerOptionNumber');
                         return;
                     }
+
                     Responses.insert(responseDoc);
+
+                    Meteor.call('LeaderBoard.addResponseSet', {
+                        phashtag: responseDoc.hashtag,
+                        nick: responseDoc.userNick,
+                        responseTimeMillis: responseDoc.responseTime
+                    });
+
                     var questionType = "polling";
                     var nickResponsesCount = Responses.find({
                         hashtag: hashtag,

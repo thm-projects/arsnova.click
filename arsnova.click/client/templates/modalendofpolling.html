@@ -11,6 +11,7 @@
                         {{/if}}
                         {{#if isSC}}
                             {{#if correct}}
+                                <p>Deine aktuelle Position ist: {{getActPosition}}</p>
                                 <p>Du hast richtig geantwortet!</p>
                             {{else}}
                                 <p>Du hast falsch geantwortet!!</p>
@@ -18,9 +19,14 @@
                         {{/if}}
                         {{#if isMC}}
                             {{#if correct}}
+                                <p>Deine aktuelle Position ist: {{getActPosition}}. {{getTextPositionContext}}</p>
                                 <p>Du hast komplett richtig geantwortet!</p>
                             {{else}}
-                                <p>Du hast falsch geantwortet!</p>
+                                {{#if allAnswersFalse}}
+                                    <p>Du hast leider komplett falsch geantwortet!</p>
+                                {{else}}
+                                    <p>Du hast teilweise falsch geantwortet!</p>
+                                {{/if}}
                             {{/if}}
                         {{/if}}
                     </div>

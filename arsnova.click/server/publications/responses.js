@@ -1,4 +1,4 @@
-Meteor.publish('Responses.instructor', function(phashtag) {
+Meteor.publish('Responses.session', function(phashtag) {
     new SimpleSchema({
         phashtag: {type: String}
     }).validate({phashtag});

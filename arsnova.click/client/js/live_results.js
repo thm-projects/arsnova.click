@@ -1,6 +1,6 @@
 Template.live_results.onCreated(function () {
     this.autorun(() => {
-        this.subscription = Meteor.subscribe('Responses.instructor', Session.get("hashtag"));
+        this.subscription = Meteor.subscribe('Responses.session', Session.get("hashtag"));
         this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"), function () {
             Session.set("rightAnswerOptionCount", AnswerOptions.find({isCorrect: 1}).count());
         });
@@ -23,15 +23,27 @@ Template.live_results.helpers({
     votingText: function () {
       if (Session.get("sessionClosed")){
           return "Abstimmung beendet";
-      }  else{
+      } else {
           return "Abstimmung läuft...";
       }
     },
-    isNotOwner: function(){
-        return !Session.get("isOwner");
-    },
     isOwner: function () {
         return Session.get("isOwner");
+    },
+    getCountdown: function () {
+        if (Session.get("countdownInitialized")){
+            var timer = Math.round(countdown.get())
+            if (timer < 0){
+                return 0;
+            } else {
+                return Math.round(countdown.get());
+            }
+        } else {
+            return 0;
+        }
+    },
+    getCountStudents: function () {
+        return MemberList.find().count();
     },
     sessionClosed: function () {
         return Session.get("sessionClosed");
@@ -147,6 +159,7 @@ Template.live_results.events({
             }
         });
     }
+
 });
 
 

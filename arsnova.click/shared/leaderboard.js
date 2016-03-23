@@ -2,7 +2,7 @@ Meteor.methods({
     'LeaderBoard.addResponseSet': function ({phashtag, nick, responseTimeMillis}) {
         if (Meteor.isServer){
             new SimpleSchema({
-                hashtag: {type: String},
+                phashtag: {type: String},
                 nick: {type: String},
                 responseTimeMillis: {type: Number}
             }).validate({
@@ -11,14 +11,14 @@ Meteor.methods({
                 responseTimeMillis
             });
             var memberEntry = LeaderBoard.findOne({
-                hashtag: hashtag,
+                phashtag: phashtag,
                 nick: nick
             });
 
             const correctAnswers = [];
 
             AnswerOptions.find({
-                hashtag: Session.get("hashtag"),
+                hashtag: phashtag,
                 isCorrect: 1
             }, {fields: {"answerOptionNumber": 1}}).forEach(function (answer) {
                 correctAnswers.push(answer.answerOptionNumber);
@@ -27,8 +27,8 @@ Meteor.methods({
             var responseAmount = 0;
             var falseResponseAmount = 0;
 
-            Responses.find({hashtag: Session.get("hashtag"), userNick: Session.get("nick")}).forEach(function (response) {
-                if (!($.inArray(response.answerOptionNumber, correctAnswers) !== -1)) {
+            Responses.find({hashtag: phashtag, userNick: nick}).forEach(function (response) {
+                if (correctAnswers.indexOf(response.answerOptionNumber) == -1){
                     falseResponseAmount++;
                 }
                 responseAmount++;
@@ -36,9 +36,14 @@ Meteor.methods({
 
             var rightResponseAmount = responseAmount-falseResponseAmount;
 
-            if (!member) {
+            memberEntry = LeaderBoard.findOne({
+                hashtag: phashtag,
+                nick: nick
+            });
+
+            if (!memberEntry) {
                 LeaderBoard.insert({
-                    hashtag: hashtag,
+                    hashtag: phashtag,
                     userNick: nick,
                     responseTimeMillis: responseTimeMillis,
                     givenAnswers: responseAmount,

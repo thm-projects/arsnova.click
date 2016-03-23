@@ -22,6 +22,7 @@ Meteor.methods({
                     return;
                 }
                 var responseTime = Number(timestamp) - Number(sessionDoc.startTime);
+
                 if (responseTime <= sessionDoc.timer) {
                     responseDoc.responseTime = responseTime;
                     var answerOptionDoc = AnswerOptions.findOne({

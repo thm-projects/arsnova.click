@@ -1,6 +1,6 @@
 Template.live_results.onCreated(function () {
     this.autorun(() => {
-        this.subscription = Meteor.subscribe('Responses.instructor', Session.get("hashtag"));
+        this.subscription = Meteor.subscribe('Responses.session', Session.get("hashtag"));
         this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"), function () {
             Session.set("rightAnswerOptionCount", AnswerOptions.find({isCorrect: 1}).count());
         });

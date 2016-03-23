@@ -6,6 +6,7 @@
                 </div>
                 <div class="modal-body">
                     <div id="end-of-polling-text">
+                        <p>Deine aktuelle Position ist: {{getActPosition}}.</p>
                         {{#if isSurvey}}
                             <p>Du hast erfolgreich an der Umfrage teilgenommen</p>
                         {{/if}}
@@ -20,7 +21,11 @@
                             {{#if correct}}
                                 <p>Du hast komplett richtig geantwortet!</p>
                             {{else}}
-                                <p>Du hast falsch geantwortet!</p>
+                                {{#if allAnswersFalse}}
+                                    <p>Du hast leider komplett falsch geantwortet!</p>
+                                {{else}}
+                                    <p>Du hast teilweise richtig geantwortet!</p>
+                                {{/if}}
                             {{/if}}
                         {{/if}}
                     </div>

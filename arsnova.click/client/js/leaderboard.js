@@ -1,6 +1,6 @@
 Template.leaderBoard.onCreated( function () {
     this.autorun(() => {
-        this.subscription = Meteor.subscribe('Responses.instructor', Session.get("hashtag"), function () {
+        this.subscription = Meteor.subscribe('Responses.session', Session.get("hashtag"), function () {
             Session.set("responsesLoaded", true);
         });
         this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"), function () {

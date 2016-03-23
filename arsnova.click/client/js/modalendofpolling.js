@@ -1,6 +1,6 @@
 Template.endOfPollingSplashscreen.onCreated(function () {
     this.autorun(() => {
-        this.subscription = Meteor.subscribe('Responses.instructor', Session.get("hashtag"));
+        this.subscription = Meteor.subscribe('Responses.session', Session.get("hashtag"));
         this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"));
         this.subscription = Meteor.subscribe('MemberList.members', Session.get("hashtag"));
         this.subscription = Meteor.subscribe('Sessions.question', Session.get("hashtag"));
@@ -70,5 +70,35 @@ Template.endOfPollingSplashscreen.helpers({
             }
         }
         return false;
+    },
+    allAnswersFalse: function () {
+        const wrongAnswers = [];
+
+        AnswerOptions.find({
+            hashtag: Session.get("hashtag"),
+            isCorrect: 0
+        }, {fields: {"answerOptionNumber": 1}}).forEach(function (answer) {
+            wrongAnswers.push(answer.answerOptionNumber);
+        });
+        MemberList.findOne({hashtag: Session.get("hashtag"), nick: Session.get("nick")});
+
+        var responseAmount = 0;
+        var everythingFalse = true;
+
+        Responses.find({hashtag: Session.get("hashtag"), userNick: Session.get("nick")}).forEach(function (response) {
+            if (!($.inArray(response.answerOptionNumber, wrongAnswers) !== -1)) {
+                everythingFalse = false;
+            }
+            responseAmount++;
+        });
+        if (responseAmount) {
+            if (everythingFalse && responseAmount === wrongAnswers.length) {
+                return true;
+            }
+        }
+        return false;
+    },
+    getActPosition: function () {
+
     }
 });

@@ -8,11 +8,10 @@
                     <div id="end-of-polling-text">
                         {{#if isSurvey}}
                             <p>Du hast erfolgreich an der Umfrage teilgenommen</p>
-                        {{else}}
-                            <p>Deine aktuelle Position ist: {{getActPosition}}.</p>
                         {{/if}}
                         {{#if isSC}}
                             {{#if correct}}
+                                <p>Deine aktuelle Position ist: {{getActPosition}}</p>
                                 <p>Du hast richtig geantwortet!</p>
                             {{else}}
                                 <p>Du hast falsch geantwortet!!</p>
@@ -20,6 +19,7 @@
                         {{/if}}
                         {{#if isMC}}
                             {{#if correct}}
+                                <p>Deine aktuelle Position ist: {{getActPosition}}. {{getTextPositionContext}}</p>
                                 <p>Du hast komplett richtig geantwortet!</p>
                             {{else}}
                                 {{#if allAnswersFalse}}

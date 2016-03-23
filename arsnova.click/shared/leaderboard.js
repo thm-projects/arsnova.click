@@ -10,10 +10,6 @@ Meteor.methods({
                 nick,
                 responseTimeMillis
             });
-            var memberEntry = LeaderBoard.findOne({
-                phashtag: phashtag,
-                nick: nick
-            });
 
             const correctAnswers = [];
 
@@ -36,9 +32,9 @@ Meteor.methods({
 
             var rightResponseAmount = responseAmount-falseResponseAmount;
 
-            memberEntry = LeaderBoard.findOne({
+            var memberEntry = LeaderBoard.findOne({
                 hashtag: phashtag,
-                nick: nick
+                userNick: nick
             });
 
             if (!memberEntry) {

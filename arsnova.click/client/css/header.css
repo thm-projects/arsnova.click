@@ -15,7 +15,6 @@ p.header-layout {
     text-align: center;
     cursor: pointer;
     color: #b22222;
-    top: 15px;
 }
 
 .kill-session-switch-wrapper:hover {
@@ -24,6 +23,7 @@ p.header-layout {
 
 .kill-session-switch {
     font-size: 3vw;
+    margin-bottom:10px;
 }
 
 .emergency-button-text {

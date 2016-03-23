@@ -103,3 +103,10 @@ p, ul.list-unstyled {
     margin-top: 10px;
     margin-bottom: 20px;
 }
+
+
+@media screen and (max-width: 991px) {
+    .titel {
+        font-size:6vw;
+    }
+}

@@ -27,7 +27,13 @@ Router.map(function () {
 });
 
 Router.route('/', function () {
-    localData.initializePrivateKey();
+    try{
+        localData.initializePrivateKey();
+        Session.set("localStorageAvailable", true);
+    } catch(err) {
+        Session.set("localStorageAvailable", false);
+    }
+
     Session.set("isOwner", undefined);
     Session.set("slider", undefined);
     Session.set("hashtag", undefined);

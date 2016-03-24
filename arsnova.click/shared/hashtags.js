@@ -1,3 +1,21 @@
+/*
+ * This file is part of ARSnova Click.
+ * Copyright (C) 2016 The ARSnova Team
+ *
+ * ARSnova Click is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ARSnova Click is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 Meteor.methods({
     'Hashtags.checkPrivateKey': function (privateKey, hashtag) {
         new SimpleSchema({
@@ -18,28 +36,30 @@ Meteor.methods({
         }
     },
     'Hashtags.setSessionStatus': function (privateKey, hashtag, sessionStatus) {
-        new SimpleSchema({
-            hashtag: {type: String},
-            privateKey: {type: String},
-            sessionStatus: {
-                type: Number,
-                min: 0,
-                max: 3
-            }
-        }).validate({
+        if (Meteor.isServer){
+            new SimpleSchema({
+                hashtag: {type: String},
+                privateKey: {type: String},
+                sessionStatus: {
+                    type: Number,
+                    min: 0,
+                    max: 3
+                }
+            }).validate({
                 privateKey,
                 hashtag,
                 sessionStatus
             });
-        var doc = Hashtags.findOne({
-            hashtag: hashtag,
-            privateKey: privateKey
-        });
-        if (doc) {
-            Hashtags.update({_id: doc._id}, {$set: {sessionStatus: sessionStatus}});
-        } else {
-            throw new Meteor.Error('Hashtags.setSessionStatus', 'Either the hashtag isn\'t available or the key is wrong');
-            return;
+            var doc = Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
+            });
+            if (doc) {
+                Hashtags.update({_id: doc._id}, {$set: {sessionStatus: sessionStatus}});
+            } else {
+                throw new Meteor.Error('Hashtags.setSessionStatus', 'Either the hashtag isn\'t available or the key is wrong');
+                return;
+            }
         }
     },
     'Hashtags.addHashtag': function (doc) {

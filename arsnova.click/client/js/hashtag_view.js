@@ -46,6 +46,13 @@ Template.hashtag_view.onCreated(function () {
     });
 });
 
+Template.hashtag_view.onRendered(function () {
+    if (!Session.get("localStorageAvailable")){
+        $("#errorMessage-text").html("Local storage isn't available in this browser session, but is needed to execute arsnova.click. Please enable the local storage and return to this site.");
+        $('.errorMessageSplash').parents('.modal').modal('show');
+    }
+});
+
 Template.hashtag_view.events({
     "input #hashtag-input-field": function (event) {
         var inputHashtag = $(event.target).val();

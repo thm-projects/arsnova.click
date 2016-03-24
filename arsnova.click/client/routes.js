@@ -45,7 +45,7 @@ Router.route('/nick', function () {
 
 Router.route('/question', function () {
     if (Session.get("isOwner")) {
-        Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 1);
+        Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 1);
 		this.render('createQuestionView');
     } else {
         Router.go("/");

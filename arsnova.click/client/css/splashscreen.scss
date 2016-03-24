@@ -65,6 +65,14 @@
   box-shadow: none;
 }
 
+.modal-content-white-fonts {
+  font-size: 20px;
+  color: white;
+  text-align: left;
+  border-radius: $splash-screen-corner-radius;
+  box-shadow: none;
+}
+
 .modal-list ul {
   list-style: initial;
   margin: auto;

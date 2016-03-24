@@ -36,28 +36,30 @@ Meteor.methods({
         }
     },
     'Hashtags.setSessionStatus': function (privateKey, hashtag, sessionStatus) {
-        new SimpleSchema({
-            hashtag: {type: String},
-            privateKey: {type: String},
-            sessionStatus: {
-                type: Number,
-                min: 0,
-                max: 3
-            }
-        }).validate({
+        if (Meteor.isServer){
+            new SimpleSchema({
+                hashtag: {type: String},
+                privateKey: {type: String},
+                sessionStatus: {
+                    type: Number,
+                    min: 0,
+                    max: 3
+                }
+            }).validate({
                 privateKey,
                 hashtag,
                 sessionStatus
             });
-        var doc = Hashtags.findOne({
-            hashtag: hashtag,
-            privateKey: privateKey
-        });
-        if (doc) {
-            Hashtags.update({_id: doc._id}, {$set: {sessionStatus: sessionStatus}});
-        } else {
-            throw new Meteor.Error('Hashtags.setSessionStatus', 'Either the hashtag isn\'t available or the key is wrong');
-            return;
+            var doc = Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
+            });
+            if (doc) {
+                Hashtags.update({_id: doc._id}, {$set: {sessionStatus: sessionStatus}});
+            } else {
+                throw new Meteor.Error('Hashtags.setSessionStatus', 'Either the hashtag isn\'t available or the key is wrong');
+                return;
+            }
         }
     },
     'Hashtags.addHashtag': function (doc) {

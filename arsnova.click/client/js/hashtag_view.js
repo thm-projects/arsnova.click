@@ -48,7 +48,7 @@ Template.hashtag_view.onCreated(function () {
 
 Template.hashtag_view.onRendered(function () {
     if (!Session.get("localStorageAvailable")){
-        $("#errorMessage-text").html("Local storage isn't available in this browser session, but is needed to execute arsnova.click. Please enable the local storage and return to this site.");
+        $("#errorMessage-text").html("Im Privatmodus deines Browsers funktioniert arsnova.click leider nicht, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von arsnova.click den Privatmodus deaktivieren und ARSnova erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.");
         $('.errorMessageSplash').parents('.modal').modal('show');
     }
 });

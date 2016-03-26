@@ -64,6 +64,7 @@ a:hover,
 a:active,
 a:visited,
 a:focus {
+    color: #ffd700; /* gold */
     text-decoration: none;
     outline: none;
 }

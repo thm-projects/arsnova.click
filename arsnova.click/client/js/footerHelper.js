@@ -48,8 +48,10 @@ Template.footer.events({
     "click #hideShowFooterBar": function () {
         if ($("#footerBar").hasClass("hide")) {
             $("#footerBar").removeClass("hide");
-            $(".footer-info-bar").addClass("hide");
-
+            $("#hideShowFooterBar").addClass("hide");
+            $(".footer-info-bar").css("bottom", "15px");
+            $(".footer-info-bar").css("margin-bottom", "15px");
+            
             // Do nothing - there is currently no option to hide the navbar again, to loss on usable space is too high as we can display the info-button and the navbar
             /*$(".footer-info-bar").css("bottom", "15px");
             $(".footer-info-bar").css("margin-bottom", "15px");

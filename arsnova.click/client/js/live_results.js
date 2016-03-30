@@ -40,9 +40,9 @@ Template.live_results.onCreated(function () {
 Template.live_results.helpers({
     votingText: function () {
       if (Session.get("sessionClosed")){
-          return "Abstimmung beendet";
+          return "Game over";
       } else {
-          return "Abstimmung läuft...";
+          return "Zeit läuft...";
       }
     },
     isOwner: function () {

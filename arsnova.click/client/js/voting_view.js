@@ -31,7 +31,7 @@ Template.votingview.onCreated(function () {
             countdown = new ReactiveCountdown(Sessions.findOne().timer / 1000);
             countdown.start(function () {
                 Session.set("sessionClosed", true);
-                $("#end-of-polling-text").html("Abstimmung gelaufen!");
+                $("#end-of-polling-text").html("Game over");
                 $('.js-splashscreen-end-of-polling').modal('show');
             });
             Session.set("countdownInitialized", true);

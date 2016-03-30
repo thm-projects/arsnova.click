@@ -44,5 +44,20 @@ Template.footer.helpers({
 Template.footer.events({
     "click #toPrevPage": function () {
         Session.set("lastPage", undefined);
+    },
+    "click #hideShowFooterBar": function () {
+        if ($("#footerBar").hasClass("hide")) {
+            $("#footerBar").removeClass("hide");
+            $(".footer-info-bar").addClass("hide");
+
+            // Do nothing - there is currently no option to hide the navbar again, to loss on usable space is too high as we can display the info-button and the navbar
+            /*$(".footer-info-bar").css("bottom", "15px");
+            $(".footer-info-bar").css("margin-bottom", "15px");
+        } else {
+
+            $("#footerBar").addClass("hide");
+            $(".footer-info-bar").css("bottom", "0px");
+            $(".footer-info-bar").css("margin-bottom", "2px");*/
+        }
     }
 })

@@ -18,8 +18,8 @@
 
 Template.titel.onRendered(function () {
     $(window).resize(function () {
-
-        var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
+        var footerHeight = $("#footerBar").hasClass("hide") ?  $(".footer-info-bar").outerHeight() : $(".fixed-bottom").outerHeight();
+        var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - footerHeight;
         $(".container").css("height", final_height);
         $(".container").css("margin-top", $(".navbar-fixed-top").outerHeight());
 
@@ -29,7 +29,8 @@ Template.titel.onRendered(function () {
 
 
 Template.titel.rendered = function () {
-    var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
+    var footerHeight = $("#footerBar").hasClass("hide") ?  $(".footer-info-bar").outerHeight() : $(".fixed-bottom").outerHeight();
+    var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - footerHeight;
 
     $(".container").css("height", final_height);
     $(".container").css("margin-top", $(".navbar-fixed-top").outerHeight());

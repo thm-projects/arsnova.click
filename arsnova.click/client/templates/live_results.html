@@ -19,14 +19,18 @@
 <template name="live_results">
         <div class="row">
             {{#if isOwner}}
-                <div class="col-xs-3 text-left">
-                    <div class="titel">Countdown: {{getCountdown}}</div>
+                <div class="col-xs-3 top-bar-content">
+                    <span class="glyphicon icon-top-bar glyphicon-hourglass glyphicon-style center" aria-hidden="true">
+                        <div class="titel">{{getCountdown}}</div>
+                    </span>
                 </div>
                 <div class="col-xs-6 text-center">
                     <div id="appTitle" class="titel margin-to-logo">{{votingText}}</div>
                 </div>
-                <div class="col-xs-3 text-right">
-                    <div class="titel">Studenten: {{getCountStudents}}</div>
+                <div class="col-xs-3 top-bar-content">
+                    <span class="glyphicon icon-top-bar glyphicon-user glyphicon-style center" aria-hidden="true">
+                        <div class="titel">{{getCountStudents}}</div>
+                    </span>
                 </div>
             {{else}}
                 <div class=" titel-relative text-light text-center">

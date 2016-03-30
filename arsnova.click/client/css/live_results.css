@@ -19,3 +19,13 @@
 .button-result-mc-letter {
     font-size: 1.5em;
 }
+
+.top-bar-content {
+    margin-top: 18px;
+    text-align: center;
+}
+
+.glyphicon-style {
+    font-size: 17px;
+    color: #FFF;
+}

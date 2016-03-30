@@ -42,7 +42,7 @@ Template.live_results.helpers({
       if (Session.get("sessionClosed")){
           return "Game over";
       } else {
-          return "Zeit läuft...";
+          return "Countdown";
       }
     },
     isOwner: function () {

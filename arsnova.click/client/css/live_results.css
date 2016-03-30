@@ -27,10 +27,14 @@
 }
 
 .glyphicon-style {
-    font-size: 6vw;
+    font-size: 5vw;
     color: #FFF;
 }
 
 .row-padding-bottom {
     padding-bottom: 1vw;
+}
+
+.subtitel-padding-top {
+    padding-top: 3vw;
 }

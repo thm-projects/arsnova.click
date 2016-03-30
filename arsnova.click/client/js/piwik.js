@@ -1,6 +1,6 @@
 _paq = [
-    "trackPageView",
-    "enableLinkTracking",
+    ["trackPageView"],
+    ["enableLinkTracking"],
     ["setTrackerUrl", "//arsnova.thm.de/stats/piwik.php"],
     ["setSiteId", 4]
 ];

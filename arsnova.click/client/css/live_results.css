@@ -23,9 +23,18 @@
 .top-bar-content {
     margin-top: 18px;
     text-align: center;
+    font-family: Georgia, serif;
 }
 
 .glyphicon-style {
-    font-size: 17px;
+    font-size: 5vw;
     color: #FFF;
+}
+
+.row-padding-bottom {
+    padding-bottom: 1vw;
+}
+
+.subtitel-padding-top {
+    padding-top: 3vw;
 }

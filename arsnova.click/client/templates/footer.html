@@ -17,9 +17,12 @@
 -->
 
 <template name="footer">
-    <nav class="navbar navbar-default navbar-fixed-bottom footer footer-gradient">
-        <div class="container-fluid text-center text-dark">
+    <!--<div id="hideShowFooterBar" class="footerClass">
+        <span class="glyphicon glyphicons-info-sign" aria-hidden="true"></span>
+    </div>-->
 
+    <nav id="footerBar" class="navbar navbar-default navbar-fixed-bottom footer footer-gradient">
+        <div class="container-fluid text-center text-dark">
             {{#if isBackButton}}
                 <a href="/{{getLastPage}}">
                     <div class="col-xs-2 col-sm-3" id="toPrevPage">zurück</div>

@@ -17,19 +17,19 @@
 -->
 
 <template name="live_results">
-        <div class="row">
+        <div class="row row-padding-bottom">
             {{#if isOwner}}
-                <div class="col-xs-3 top-bar-content">
-                    <span class="glyphicon icon-top-bar glyphicon-hourglass glyphicon-style center" aria-hidden="true">
-                        <div class="titel">{{getCountdown}}</div>
-                    </span>
-                </div>
-                <div class="col-xs-6 text-center">
-                    <div id="appTitle" class="titel margin-to-logo">{{votingText}}</div>
-                </div>
                 <div class="col-xs-3 top-bar-content">
                     <span class="glyphicon icon-top-bar glyphicon-user glyphicon-style center" aria-hidden="true">
                         <div class="titel">{{getCountStudents}}</div>
+                    </span>
+                </div>
+                <div class="col-xs-6 text-center">
+                    <div id="appTitle" class="titel subtitel-padding-top">{{votingText}}</div>
+                </div>
+                <div class="col-xs-3 top-bar-content">
+                    <span class="glyphicon icon-top-bar glyphicon-hourglass glyphicon-style center" aria-hidden="true">
+                        <div class="titel">{{getCountdown}}</div>
                     </span>
                 </div>
             {{else}}

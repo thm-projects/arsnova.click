@@ -41,15 +41,24 @@
     <div class="row">
         <div class="col-md-12">
             {{#each result}}
-                {{> result_button name = name absolute = absolute percent = percent isCorrect = isCorrect }}
+                {{#if isOwnerAndIsCountdownNotZero}}
+                    {{> result_button name = name absolute = absolute percent = percent isCorrect = -1 }}
+                {{else}}
+                    {{> result_button name = name absolute = absolute percent = percent isCorrect = isCorrect }}
+                {{/if}}
             {{/each}}
         </div>
     </div>
     {{#if isMC}}
         <div class="row" style="margin-top: 50px">
             <div class="col-md-12">
+            {{#if isOwnerAndIsCountdownNotZero}}
+                {{> result_button_mc name = "Komplett richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = -1  }}
+                {{> result_button_mc name = "Komplett falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = -1 }}
+            {{else}}
                 {{> result_button_mc name = "Komplett richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = 1  }}
                 {{> result_button_mc name = "Komplett falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = 0 }}
+            {{/if}}
             </div>
         </div>
     {{/if}}
@@ -107,7 +116,6 @@
                                  aria-valuemin="0" aria-valuemax="100"
                                  style="width: {{percent}}%"><span class="percentage">{{absolute}} | {{percent}}%</span>
                             </div>
-
                         </div>
                     </div>
                 </div>

@@ -60,6 +60,22 @@ Template.live_results.helpers({
             return 0;
         }
     },
+    isOwnerAndIsCountdownNotZero: function () {
+        if (Session.get("isOwner")){
+            if (Session.get("countdownInitialized")){
+                var timer = Math.round(countdown.get())
+                if (timer <= 0){
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    },
     getCountStudents: function () {
         return MemberList.find().count();
     },

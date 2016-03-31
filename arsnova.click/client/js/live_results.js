@@ -30,7 +30,6 @@ Template.live_results.onCreated(function () {
             countdown = new ReactiveCountdown((timestamp - sessionDoc.startTime + sessionDoc.timer) / 1000);
             countdown.start(function () {
                 Session.set("sessionClosed", true);
-                // TODO colorize answer bars
             });
             Session.set("countdownInitialized", true);
         });

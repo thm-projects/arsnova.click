@@ -17,12 +17,20 @@
 -->
 
 <template name="footer">
-    <div class="footer-info-bar">
-        <span id="hideShowFooterBar" class="glyphicon glyphicon-info-sign glyphicon-info-style" aria-hidden="true"></span>
+    {{#if footerIsHidden}}
+        <div class="footer-info-bar">
+            <span id="hideShowFooterBar" class="glyphicon glyphicon-info-sign glyphicon-info-style" aria-hidden="true"></span>
+            {{#if isInHomePath}}
+                <span class="glyphicon glyphicon-import glyphicon-import-style" aria-hidden="true"></span>
+            {{/if}}
+        </div>
+    {{else}}
         {{#if isInHomePath}}
-            <span class="glyphicon glyphicon-import glyphicon-import-style" aria-hidden="true"></span>
+            <div class="footer-info-bar">
+                <span class="glyphicon glyphicon-import glyphicon-import-style" aria-hidden="true"></span>
+            </div>
         {{/if}}
-    </div>
+    {{/if}}
 
     <nav id="footerBar" class="navbar navbar-default navbar-fixed-bottom footer footer-gradient hide">
         <div class="container-fluid text-center text-dark">

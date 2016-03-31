@@ -16,9 +16,21 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+Template.footer.onRendered(function () {
+    Session.set("footerIsHidden", true);
+});
+
 Template.footer.helpers({
     isInHomePath: function () {
         return Router.current().route.path() === '/';
+    },
+    footerIsHidden: function () {
+        var isFooterHidden = Session.get("footerIsHidden");
+        if (isFooterHidden == undefined){
+            return true;
+        } else {
+            return isFooterHidden;
+        }
     },
     isBackButton: function () {
         var showHome = [
@@ -51,7 +63,8 @@ Template.footer.events({
             $("#hideShowFooterBar").addClass("hide");
             $(".footer-info-bar").css("bottom", "15px");
             $(".footer-info-bar").css("margin-bottom", "15px");
-            
+            Session.set("footerIsHidden", false);
+
             // Do nothing - there is currently no option to hide the navbar again, to loss on usable space is too high as we can display the info-button and the navbar
             /*$(".footer-info-bar").css("bottom", "15px");
             $(".footer-info-bar").css("margin-bottom", "15px");

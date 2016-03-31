@@ -34,16 +34,32 @@
     padding: 0;
 }
 
-.footer-info-bar {
-    height: 6vw;
-    bottom: 0px;
-    margin-bottom: 2px;
-    font-size: 5vw;
-    position: fixed;
-    Color: #FFF;
-    right: 0;
-    left: 0;
-    z-index: 1030;
+@media (max-width:991px) {
+    .footer-info-bar {
+        height: 6vw;
+        bottom: 0px;
+        margin-bottom: 2px;
+        font-size: 5vw;
+        position: fixed;
+        Color: #FFF;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+    }
+}
+
+@media (min-width:992px) {
+    .footer-info-bar {
+        height: 45px;
+        bottom: 0px;
+        margin-bottom: 2px;
+        font-size: 40px;
+        position: fixed;
+        Color: #FFF;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+    }
 }
 
 .glyphicon-info-style {

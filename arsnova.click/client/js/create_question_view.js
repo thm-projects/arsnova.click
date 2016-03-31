@@ -81,7 +81,7 @@ Template.createQuestionView.events({
     },
     "click #previewButton": function () {
         $('.previewSplash').parents('.modal').modal('show');
-        $("#modalpreview-text").html($('#questionText').val());
+        $("#modalpreview-text").html(marked($('#questionText').val()));
     }
 });
 

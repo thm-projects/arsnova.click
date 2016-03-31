@@ -18,7 +18,7 @@
 
 <template name="questionContentSplash">
     <div class="questionContentSplash">
-        <div>{{questionText}}</div>
+        <div>{{#markdown}}{{questionText}}{{/markdown}}</div>
         <button id="js-btn-hideQuestionModal" type="button" class="btn btn-success btn-answerOption btn-lg ">
             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
             Fenster schließen

@@ -51,8 +51,7 @@
 @media (min-width:992px) {
     .footer-info-bar {
         height: 45px;
-        bottom: 0px;
-        margin-bottom: 2px;
+
         font-size: 40px;
         position: fixed;
         Color: #FFF;
@@ -60,6 +59,16 @@
         left: 0;
         z-index: 1030;
     }
+}
+
+.hiddenStyle {
+    bottom: 0px;
+    margin-bottom: 2px;
+}
+
+.showStyle {
+    bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .glyphicon-info-style {

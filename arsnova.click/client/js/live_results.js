@@ -30,6 +30,7 @@ Template.live_results.onCreated(function () {
             countdown = new ReactiveCountdown((timestamp - sessionDoc.startTime + sessionDoc.timer) / 1000);
             countdown.start(function () {
                 Session.set("sessionClosed", true);
+                // TODO colorize answer bars
             });
             Session.set("countdownInitialized", true);
         });
@@ -58,6 +59,22 @@ Template.live_results.helpers({
             }
         } else {
             return 0;
+        }
+    },
+    isOwnerAndIsCountdownNotZero: function () {
+        if (Session.get("isOwner")){
+            if (Session.get("countdownInitialized")){
+                var timer = Math.round(countdown.get())
+                if (timer <= 0){
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return false;
         }
     },
     getCountStudents: function () {

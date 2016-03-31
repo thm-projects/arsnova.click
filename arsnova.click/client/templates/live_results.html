@@ -53,11 +53,11 @@
         <div class="row" style="margin-top: 50px">
             <div class="col-md-12">
             {{#if isOwnerAndIsCountdownNotZero}}
-                {{> result_button_mc name = "Ganz richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = -1  }}
-                {{> result_button_mc name = "Ganz falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = -1 }}
+                {{> result_button_mc name = "Ganz richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = -1 id = 0}}
+                {{> result_button_mc name = "Ganz falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = -1 id = 1 }}
             {{else}}
-                {{> result_button_mc name = "Ganz richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = 1  }}
-                {{> result_button_mc name = "Ganz falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = 0 }}
+                {{> result_button_mc name = "Ganz richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = 1 id = 0  }}
+                {{> result_button_mc name = "Ganz falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = 0 id = 1 }}
             {{/if}}
             </div>
         </div>
@@ -114,7 +114,6 @@
                                  aria-valuemin="0" aria-valuemax="100"
                                  style="width: {{percent}}%"><span class="percentage">{{absolute}} | {{percent}}%</span>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -128,12 +127,10 @@
         <div class="col-md-12">
             <div class="button button-result">
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div id="mc_label{{id}}">
                         <span class="button-result-letter button-result-mc-letter">{{name}}</span>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-11 col-sm-11 col-md-11 col-xs-offset-1 col-sm-offset-1 col-md-offset-1">
+                    <div id="mc_bar{{id}}">
                         <div class="progress" style="padding-right: 10px; margin-top: 10px">
                             <div class="progress-bar {{getCSSClassForIsCorrect isCorrect}}" role="progressbar"
                                  aria-valuemin="0" aria-valuemax="100"

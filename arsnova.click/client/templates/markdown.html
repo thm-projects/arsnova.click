@@ -1,10 +1,45 @@
 <template name="markdownBar">
-    <div class="input-field round-corners-top">
-        <div class="button-markdown button-purple col-xs-1">
+    <div class="input-field round-corners-top markdown-box-padding">
+        <div class="col-md-12 col-xs-12 col-sm-12 markdown-box-padding">
+            <!--
+        <div id="infoMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1">
             <span class="glyphicon glyphicon-info-sign glyph-markdown" aria-hidden="true"></span>
+        </div>-->
+        <div id="boldMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1">
+            <span class="glyphicon glyphicon-bold glyph-markdown" aria-hidden="true"></span>
+        </div>
+        <div id="headerMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1">
+            <span class="glyphicon glyphicon-header glyph-markdown" aria-hidden="true"></span>
+        </div>
+        <div id="linkMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1">
+            <span class="glyphicon glyphicon-globe glyph-markdown" aria-hidden="true"></span>
+        </div>
+        <div id="unsortedListMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1">
+            <span class="glyphicon glyphicon-list glyph-markdown" aria-hidden="true"></span>
+        </div>
+        <div id="sortedListMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1">
+            <span class="glyphicon glyphicon-sort-by-attributes glyph-markdown" aria-hidden="true"></span>
+        </div>
+        {{#if withLatex}}
+            <div id="latexMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1">
+                <span class="glyphicon latexIcon glyph-markdown" aria-hidden="true"></span>
+            </div>
+        {{/if}}
+        <div id="codeMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1">
+            <span class="glyphicon codeListingIcon glyph-markdown" aria-hidden="true"></span>
+        </div>
+        <div id="commentMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1">
+            <span class="glyphicon glyphicon-comment glyph-markdown" aria-hidden="true"></span>
+        </div>
+        <div id="pictureMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1">
+            <span class="glyphicon glyphicon-picture glyph-markdown" aria-hidden="true"></span>
+        </div>
+        <div id="youtubeMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1">
+            <span class="glyphicon youtubeIcon glyph-markdown" aria-hidden="true"></span>
+        </div>
+        <div id="vimeoMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1">
+            <span class="glyphicon vimeoIcon glyph-markdown" aria-hidden="true"></span>
+        </div>
         </div>
     </div>
-    {{#if withLatex}}
-
-    {{/if}}
 </template>

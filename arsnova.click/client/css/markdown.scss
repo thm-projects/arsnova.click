@@ -16,12 +16,30 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+@font-face {
+    font-family: 'arsnova';
+    src:    url('/fonts/arsnova.eot?u4wa2e');
+    src:    url('/fonts/arsnova.eot?u4wa2e#iefix') format('embedded-opentype'),
+        url('/fonts/arsnova.ttf?u4wa2e') format('truetype'),
+        url('/fonts/arsnova.woff?u4wa2e') format('woff'),
+        url('/fonts/arsnova.svg?u4wa2e#arsnova') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.markdown-box-padding {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
 .button-markdown {
     border-radius: 5px;
-    border: none;
+    border: 1px;
+    margin-right: 2px;
+    margin-left: 2px;
     white-space: nowrap;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     margin-top: 4px;
 }
 
@@ -35,7 +53,27 @@
 
 .glyph-markdown {
     position:relative;
-    margin-top: 3px;
-    margin-left: -9px;
-    font-size: 30px;
+    margin-top: 4px;
+    margin-left: -8px;
+    font-size: 22px;
+}
+
+.vimeoIcon::before {
+    content: "\f194";
+    font-family: "arsnova";
+}
+
+.youtubeIcon::before {
+    content: "\f167";
+    font-family: "arsnova" !important;
+}
+
+.latexIcon::before {
+    content: "\f12b";
+    font-family: "arsnova";
+}
+
+.codeListingIcon::before {
+    content: "\f121";
+    font-family: "arsnova";
 }

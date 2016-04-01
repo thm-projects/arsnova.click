@@ -27,7 +27,26 @@
     font-style: normal;
 }
 
-.markdown-box-padding {
+@import "default/appearance";
+
+.round-corners-top {
+    border-radius: $corner-radius $corner-radius 0px 0px;
+}
+
+.round-corners-markdown {
+    border-radius: 0px 0px $corner-radius $corner-radius;
+}
+
+@media (max-width:479px) {
+    .markdown-box {
+        display: none;
+    }
+
+    .round-corners-markdown {
+        border-radius: $corner-radius;
+    }
+}
+.markdown-box {
     padding-left: 5px;
     padding-right: 5px;
 }
@@ -76,4 +95,14 @@
 .codeListingIcon::before {
     content: "\f121";
     font-family: "arsnova";
+}
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    text-align:left;
+    margin-right:-4px;
 }

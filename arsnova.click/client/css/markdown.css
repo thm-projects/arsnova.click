@@ -1,0 +1,41 @@
+/*
+ * This file is part of ARSnova Click.
+ * Copyright (C) 2016 The ARSnova Team
+ *
+ * ARSnova Click is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ARSnova Click is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+.button-markdown {
+    border-radius: 5px;
+    border: none;
+    white-space: nowrap;
+    width: 40px;
+    height: 40px;
+    margin-top: 4px;
+}
+
+.button-markdown:hover, .button-markdown:active:focus {
+    box-shadow: none;
+}
+
+.button-markdown-shadow, .button-markdown {
+    box-shadow: 1px 1px 5px black;
+}
+
+.glyph-markdown {
+    position:relative;
+    margin-top: 3px;
+    margin-left: -9px;
+    font-size: 30px;
+}

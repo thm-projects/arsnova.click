@@ -42,12 +42,12 @@ Template.splashscreen.helpers({
 
 showSplashscreen = function () {
     $('.js-splashscreen').modal('show');
-    $('.js-splashscreenNoLazyClose').modal('show');
+    $('.js-splashscreen-noLazyClose').modal('show');
 };
 
 closeSplashscreen = function () {
     $('.js-splashscreen').modal("hide");
-    $('.js-splashscreenNoLazyClose').modal('hide');
+    $('.js-splashscreen-noLazyClose').modal('hide');
 };
 
 closeAndRedirectTo = function (url) {

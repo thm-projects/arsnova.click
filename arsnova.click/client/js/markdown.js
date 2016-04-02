@@ -32,10 +32,10 @@ Template.markdownBar.events({
         $("#hyperlinkInsertSplashContent").parents('.modal').modal('show');
     },
     "click #unsortedListMarkdownButton": function (event) {
-        insertInQuestionText('- ', '');
+        insertInQuestionText('- ');
     },
     "click #sortedListMarkdownButton": function (event) {
-        insertInQuestionText('1. ', '');
+        insertInQuestionText('1. ');
     },
     "click #latexMarkdownButton": function (event) {
         insertInQuestionText('\\)', '\\)');
@@ -44,7 +44,7 @@ Template.markdownBar.events({
         insertInQuestionText('<hlcode>', '</hlcode>');
     },
     "click #commentMarkdownButton": function (event) {
-        insertInQuestionText('>', '');
+        insertInQuestionText('>');
     },
     "click #pictureMarkdownButton": function (event) {
         $("#pictureInsertSplashContent").parents('.modal').modal('show');
@@ -57,7 +57,48 @@ Template.markdownBar.events({
     },
 });
 
+Template.hyperlinkInsertSplash.events({
+    "click #js-btn-saveHyperlink": function (event) {
+        var linkText = document.getElementById('hyperlinkText').value;
+        var linkDestination = document.getElementById('hyperlinkDestination').value;
+        insertInQuestionText('[' + linkText + '](' + linkDestination + ')');
+        closeSplashscreen();
+    }
+});
+
+Template.pictureInsertSplash.events({
+    "click #js-btn-savePicture": function (event) {
+        var linkText = document.getElementById('pictureText').value;
+        var linkDestination = document.getElementById('pictureDestination').value;
+        insertInQuestionText('![' + linkText + '](' + linkDestination + ' "autoxautoxleft")');
+        closeSplashscreen();
+    }
+});
+
+Template.youtubeInsertSplash.events({
+    "click #js-btn-saveYoutube": function (event) {
+        var linkText = document.getElementById('youtubeText').value;
+        var linkDestination = document.getElementById('youtubeDestination').value;
+        var picUrl = linkDestination.replace("www.", "img.").replace("watch?v=", "vi/").concat("/o.jpg");
+        insertInQuestionText('[![' + linkText + '](' + picUrl + ')](' + linkDestination + ')');
+        closeSplashscreen();
+    }
+});
+
+Template.vimeoInsertSplash.events({
+    "click #js-btn-saveVimeo": function (event) {
+        var linkText = document.getElementById('vimeoText').value;
+        var linkDestination = document.getElementById('vimeoDestination').value;
+        var videoId = linkDestination.substr(linkDestination.lastIndexOf("/") + 1);
+        var picUrl = 'https://i.vimeocdn.com/video/' + videoId + '_200x150.jpg';
+        var videoUrl = 'https://player.vimeo.com/video/' + videoId;
+        insertInQuestionText('[![' + linkText + '](' + picUrl + ')](' + videoUrl + ')');
+        closeSplashscreen();
+    }
+});
+
 function insertInQuestionText(textStart, textEnd) {
+    textEnd = typeof textEnd !== 'undefined' ? textEnd : '';
     var textarea = document.getElementById('questionText');
 
     var scrollPos = textarea.scrollTop;

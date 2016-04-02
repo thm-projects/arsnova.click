@@ -76,9 +76,6 @@ Template.createQuestionView.events({
         Router.go("/");
         $('.previewSplash').parents('.modal').modal('hide');
     },
-    "click #formatButton": function () {
-        //Not implemented yet
-    },
     "click #previewButton": function () {
         $('.previewSplash').parents('.modal').modal('show');
         $("#modalpreview-text").html(marked($('#questionText').val()));

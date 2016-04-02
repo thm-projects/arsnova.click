@@ -18,7 +18,9 @@
 
 Template.markdownBar.events({
     "click #infoMarkdownButton": function (event) {
-        // TODO not implemented yet
+        var markdownInfoText = $("#markdownInfoText");
+        markdownInfoText.parents('.modal').modal('show');
+        markdownInfoText.html("Sie können Texte innerhalb von ARSnova mithilfe von <a class=\"hyperlink\" href=\"https://de.wikipedia.org/wiki/Markdown\">Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown Optionen werden in Form von Schaltflächen über den unterstützten Eingabefeldern angeboten. Zudem unterstützt ARSnova <a class=\"hyperlink\" href=\"https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet\">GitHub Flavored Markdown</a>");
     },
     "click #boldMarkdownButton": function (event) {
         insertInQuestionText('**', '**');
@@ -27,7 +29,7 @@ Template.markdownBar.events({
         insertInQuestionText('#', '#');
     },
     "click #linkMarkdownButton": function (event) {
-        // TODO not implemented yet
+        $("#hyperlinkInsertSplashContent").parents('.modal').modal('show');
     },
     "click #unsortedListMarkdownButton": function (event) {
         insertInQuestionText('- ', '');
@@ -45,13 +47,13 @@ Template.markdownBar.events({
         insertInQuestionText('>', '');
     },
     "click #pictureMarkdownButton": function (event) {
-        // TODO not implemented yet
+        $("#pictureInsertSplashContent").parents('.modal').modal('show');
     },
     "click #youtubeMarkdownButton": function (event) {
-        // TODO not implemented yet
+        $("#youtubeInsertSplashContent").parents('.modal').modal('show');
     },
     "click #vimeoMarkdownButton": function (event) {
-        // TODO not implemented yet
+        $("#vimeoInsertSplashContent").parents('.modal').modal('show');
     },
 });
 

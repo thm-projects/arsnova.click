@@ -17,6 +17,8 @@
  */
 
 var countdown = null;
+var aktBtn = 0;
+var lastBtn = 0;
 Template.votingview.onCreated(function () {
     this.autorun(() => {
         this.subscribe('AnswerOptions.public', Session.get("hashtag"), function () {
@@ -28,7 +30,47 @@ Template.votingview.onCreated(function () {
             Session.set("responses", JSON.stringify(responseArr));
         });
         this.subscribe('Sessions.question', Session.get("hashtag"), function () {
-            countdown = new ReactiveCountdown(Sessions.findOne().timer / 1000);
+            countdown = new ReactiveCountdown(Sessions.findOne().timer / 1000,{
+                tick: function() {
+                    var btnsCount = $('.answer-row').children().length;
+
+                    /*if ( $('#'+aktBtn).hasClass('answer-selected') ) {
+                        aktBtn++;
+                        if(aktBtn>=btnsCount) aktBtn = 0;
+                    }
+
+                    if(aktBtn==0) lastBtn = btnsCount-1;
+                    else lastBtn = aktBtn-1;
+
+                    if ( $('#'+aktBtn).hasClass('answer-selected') ) {
+                        aktBtn++;
+                        if(aktBtn>=btnsCount-1) aktBtn = 0;
+
+                        var i = lastBtn;
+                        while($('#'+i).hasClass('answer-selected')){
+                            i--;
+                        }
+                        lastBtn = i;
+
+
+                    }*/
+                    if(aktBtn==0) lastBtn = btnsCount-1;
+                    else lastBtn = aktBtn-1;
+
+                    $('#' + lastBtn).removeClass('button-next');
+                    $('#' + lastBtn).addClass('button-purple');
+                    $('#' + aktBtn).addClass('button-next');
+                    $('#' + aktBtn).removeClass('button-purple');
+
+                    console.log("akt: "+aktBtn);
+                    console.log("last: "+lastBtn);
+                    console.log("anzah: "+btnsCount);
+
+                    aktBtn++;
+                    if(aktBtn>=btnsCount) aktBtn = 0;
+
+                }
+            });
             countdown.start(function () {
                 Session.set("sessionClosed", true);
                 $("#end-of-polling-text").html("Game over");
@@ -177,4 +219,8 @@ function formatAnswerButtons () {
     }
 
     answerRow.find('button').css('height', buttonHeight + 'px');
+}
+
+function changeButtonColor() {
+
 }

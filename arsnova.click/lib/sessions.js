@@ -16,14 +16,9 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Sessions = new Mongo.Collection("sessions");
+QuestionGroup = new Mongo.Collection("questionGroup");
 
-Sessions.attachSchema(new SimpleSchema({
-	hashtag: {
-		type: String,
-		min: 1,
-		max: 25
-	},
+SingleQuestion = new SimpleSchema({
 	questionText: {
 		type: String,
 		min: 5,
@@ -36,5 +31,16 @@ Sessions.attachSchema(new SimpleSchema({
 	startTime: {
 		type: String,
 		optional: true
+	}
+});
+
+QuestionGroup.attachSchema(new SimpleSchema({
+	hashtag: {
+		type: String,
+		min: 1,
+		max: 25
+	},
+	questionList: {
+		type: [SingleQuestion]
 	}
 }));

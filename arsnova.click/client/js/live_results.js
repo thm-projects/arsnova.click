@@ -127,15 +127,15 @@ Template.live_results.helpers({
         }
     },
     isCountdownZero: function () {
-        if (Session.get("countdownInitialized")){
+        if (Session.get("sessionClosed")){
+            return true;
+        } else {
             var timer = Math.round(countdown.get())
             if (timer <= 0){
                 return true;
             } else {
                 return false;
             }
-        } else {
-            return true;
         }
     },
     getCountStudents: function () {

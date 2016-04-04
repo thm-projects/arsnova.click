@@ -43,8 +43,8 @@ Template.leaderBoard.events({
         $('#showLess').closest('div.col-xs-6').toggleClass('hidden');
         $('#showMore').closest('div.col-xs-6').toggleClass('hidden');
     },
-    'click #js-btn-backToPolling': function () {
-        Router.go('/onpolling');
+    'click #js-btn-backToResults': function () {
+        Router.go('/results');
     }
 });
 

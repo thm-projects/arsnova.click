@@ -18,7 +18,7 @@
 
 QuestionGroup = new Mongo.Collection("questionGroup");
 
-SingleQuestion = new SimpleSchema({
+SingleQuestionSchema = new SimpleSchema({
 	questionText: {
 		type: String,
 		min: 5,
@@ -34,13 +34,15 @@ SingleQuestion = new SimpleSchema({
 	}
 });
 
-QuestionGroup.attachSchema(new SimpleSchema({
+QuestionGroupSchema = new SimpleSchema({
 	hashtag: {
 		type: String,
 		min: 1,
 		max: 25
 	},
 	questionList: {
-		type: [SingleQuestion]
+		type: [SingleQuestionSchema]
 	}
-}));
+});
+
+QuestionGroup.attachSchema(QuestionGroupSchema);

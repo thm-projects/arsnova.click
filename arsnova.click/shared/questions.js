@@ -17,8 +17,26 @@
  */
 
 Meteor.methods({
+    "QuestionGroup.insert": function ({privateKey, hashtag, questionGroupObject}) {
+        QuestionGroupSchema.validate({
+            hashtag: hashtag,
+            questionList: questionGroupObject
+        });
+
+        var hashtagDoc = Hashtags.findOne({
+            hashtag: hashtag,
+            privateKey: privateKey
+        });
+        if (!hashtagDoc) {
+            throw new Meteor.Error('QuestionGroup.insert', 'There is no quiz with this key');
+        }
+
+        QuestionGroup.insert({
+            hashtag: hashtag,
+            questionList: questionGroupObject
+        });
+    },
     "QuestionGroup.addQuestion": function ({privateKey, hashtag, questionText}) {
-        //TODO: validate questionText with SimpleSchema
         new SimpleSchema({
             questionText: {
                 type: String,
@@ -32,8 +50,7 @@ Meteor.methods({
             privateKey: privateKey
         });
         if (!hashtagDoc) {
-            new Meteor.Error('QuestionGroup.addQuestion', 'There is no quiz with this key');
-            return;
+            throw new Meteor.Error('QuestionGroup.addQuestion', 'There is no quiz with this key');
         }
         var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
         var questionItem = {
@@ -51,7 +68,6 @@ Meteor.methods({
             QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
                 if (error) {
                     throw new Meteor.Error('Sessions.setQuestion', error);
-                    return;
                 }
             });
         }
@@ -70,7 +86,6 @@ Meteor.methods({
             QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList.splice(questionIndex)}}, function (error) {
                 if (error) {
                     throw new Meteor.Error('Sessions.setQuestion', error);
-                    return;
                 }
             });
         }
@@ -87,7 +102,6 @@ Meteor.methods({
         return (AnswerOptions.find({hashtag: hashtag, questionIndex: questionIndex, isCorrect: 1}).count() === 1);
     },
     "Question.updateIsReadConfirmationRequired": function ({privateKey, hashtag, questionIndex, isReadingConfirmationRequired}) {
-        //TODO: validate isReadingConfirmationRequired with SimpleSchema
         new SimpleSchema({
             isReadingConfirmationRequired: {
                 type: Number,
@@ -101,20 +115,18 @@ Meteor.methods({
             privateKey: privateKey
         });
         if (!hashtagDoc) {
-            new Meteor.Error('QuestionGroup.updateIsReadConfirmationRequired', 'There is no quiz with this key');
+            new Meteor.Error('Question.updateIsReadConfirmationRequired', 'There is no quiz with this key');
             return;
         }
 
         var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
         if (!questionGroup) {
-            throw new Meteor.Error('QuestionGroup.updateIsReadConfirmationRequired', 'no access to session');
-            return;
+            throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'no access to session');
         } else {
             questionGroup.questionList[questionIndex].isReadingConfirmationRequired = isReadingConfirmationRequired;
             QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
                 if (error) {
-                    throw new Meteor.Error('QuestionGroup.updateIsReadConfirmationRequired', error);
-                    return;
+                    throw new Meteor.Error('Question.updateIsReadConfirmationRequired', error);
                 }
             });
         }
@@ -139,13 +151,11 @@ Meteor.methods({
         var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
         if (!questionGroup) {
             throw new Meteor.Error('Question.setTimer', 'no access to session');
-            return;
         } else {
             questionGroup.questionList[questionIndex].timer = timer;
             QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
                 if (error) {
                     throw new Meteor.Error('Question.setTimer', error);
-                    return;
                 }
             });
         }
@@ -159,19 +169,17 @@ Meteor.methods({
                 privateKey: privateKey
             });
             if (!hashtagDoc) {
-                new Meteor.Error('Sessions.startTimer', 'There is no quiz with this key');
+                new Meteor.Error('Question.startTimer', 'There is no quiz with this key');
                 return;
             }
             var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
             if (!questionGroup) {
                 throw new Meteor.Error('Question.startTimer: no access to session');
-                return;
             } else {
                 questionGroup.questionList[questionIndex].startTime = startTime.getTime();
                 QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
                     if (error){
-                        throw new Meteor.Error('Sessions.startTimer', error);
-                        return;
+                        throw new Meteor.Error('Question.startTimer', error);
                     }
                 });
             }

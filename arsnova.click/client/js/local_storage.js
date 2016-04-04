@@ -32,10 +32,7 @@ localData = {
             return;
         }
         const hashtagString = localStorage.getItem("hashtags");
-        if (!hashtagString) {
-            return false;
-        }
-        return $.inArray(hashtag, JSON.parse(hashtagString));
+        return hashtagString ? $.inArray(hashtag, JSON.parse(hashtagString)) : false;
     },
 
     deleteHashtag: function (hashtag) {
@@ -48,7 +45,6 @@ localData = {
         }
         var index = $.inArray(hashtag, allHashtags);
         if (index > -1) {
-            var newHashtags = allHashtags.splice(index, 1);
             localStorage.removeItem(hashtag);
             localStorage.setItem("hashtags", JSON.stringify(allHashtags));
         }
@@ -59,38 +55,28 @@ localData = {
             return;
         }
         const hashtagString = localStorage.getItem("hashtags");
-        if (!hashtagString) {
-            localStorage.setItem("hashtags", JSON.stringify([hashtag]));
-
-            localStorage.setItem(hashtag, JSON.stringify({
-                hashtag: hashtag,
-                questionText: "",
-                timer: 40000,
-                answers:[
-                    {answerOptionNumber:0, answerText:"", isCorrect:0},
-                    {answerOptionNumber:1, answerText:"", isCorrect:0},
-                    {answerOptionNumber:2, answerText:"", isCorrect:0},
-                    {answerOptionNumber:3, answerText:"", isCorrect:0}
-                 ]
-            }));
-            return;
-        }
-        const hashtags = JSON.parse(hashtagString);
-        hashtags.push(hashtag);
-
-        localStorage.setItem("hashtags", JSON.stringify(hashtags));
-
-        localStorage.setItem(hashtag, JSON.stringify({
+        var questionObject = JSON.stringify({
             hashtag:hashtag,
-            questionText:"",
+            questionIndex: 0,
+            questionText: "",
             timer: 40000,
-            answers:[
+            answers: [
                 {answerOptionNumber:0, answerText:"", isCorrect:0},
                 {answerOptionNumber:1, answerText:"", isCorrect:0},
                 {answerOptionNumber:2, answerText:"", isCorrect:0},
                 {answerOptionNumber:3, answerText:"", isCorrect:0}
             ]
-        }));
+        });
+        if (!hashtagString) {
+            localStorage.setItem("hashtags", JSON.stringify([hashtag]));
+            localStorage.setItem(hashtag, questionObject);
+        } else {
+            const hashtags = JSON.parse(hashtagString);
+            hashtags.push(hashtag);
+
+            localStorage.setItem("hashtags", JSON.stringify(hashtags));
+            localStorage.setItem(hashtag, questionObject);
+        }
     },
 
     addQuestion: function (hashtag, question) {
@@ -98,80 +84,70 @@ localData = {
             return;
         }
         const sessionDataString = localStorage.getItem(hashtag);
-        if (!sessionDataString) {
-            return;
+        if (sessionDataString) {
+            const sessionData = JSON.parse(sessionDataString);
+            sessionData[questionIndex].questionText = questionText;
+            localStorage.setItem(hashtag, JSON.stringify(sessionData));
         }
-        const sessionData = JSON.parse(sessionDataString);
-        sessionData.questionText = question;
-        localStorage.setItem(hashtag, JSON.stringify(sessionData));
     },
 
-    addTimer: function (hashtag, timer) {
+    addTimer: function (hashtag, questionIndex, timer) {
         if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
         const sessionDataString = localStorage.getItem(hashtag);
-        if (!sessionDataString) {
-            return;
+        if (sessionDataString) {
+            const sessionData = JSON.parse(sessionDataString);
+            sessionData[questionIndex].timer = timer;
+            localStorage.setItem(hashtag, JSON.stringify(sessionData));
         }
-        const sessionData = JSON.parse(sessionDataString);
-        sessionData.timer = timer;
-        localStorage.setItem(hashtag, JSON.stringify(sessionData));
     },
 
-    addAnswers : function({hashtag,  answerOptionNumber, answerText, isCorrect}){
+    addAnswers : function({hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}){
         if(!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
         const sessionDataString = localStorage.getItem(hashtag);
-        if (!sessionDataString) {
-            return;
+        if (sessionDataString) {
+            const sessionData = JSON.parse(sessionDataString);
+            sessionData[questionIndex].answers.push({
+                answerOptionNumber:answerOptionNumber,
+                answerText:answerText,
+                isCorrect:isCorrect});
+            localStorage.setItem(answer.hashtag, JSON.stringify(sessionData));
         }
-        const sessionData = JSON.parse(sessionDataString);
-        sessionData.answers.push({
-            answerOptionNumber:answerOptionNumber,
-            answerText:answerText,
-            isCorrect:isCorrect});
-        localStorage.setItem(answer.hashtag, JSON.stringify(sessionData));
     },
 
     reenterSession: function (hashtag) {
         if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
+
         const sessionDataString = localStorage.getItem(hashtag);
         if (!sessionDataString) {
             return;
         }
+
         const sessionData = JSON.parse(sessionDataString);
 
-        if (!(typeof sessionData) === "object") {
-            return;
+        if (typeof sessionData === "object") {
+            Meteor.call("QuestionGroup.insert", {
+                privateKey: localStorage.getItem("privateKey"),
+                hashtag: hashtag,
+                questionGroupObject: sessionData
+            });
         }
-
-        Meteor.call("Sessions.setQuestion", {
-            privateKey: localStorage.getItem("privateKey"),
-            hashtag: hashtag,
-            questionText: sessionData.questionText
-        });
-
-        Meteor.call("Sessions.setTimer", {
-            privateKey:localStorage.getItem("privateKey"),
-            hashtag:hashtag,
-            timer:sessionData.timer
-        });
 
         $.each(sessionData.answers, function (key, value) {
             Meteor.call("AnswerOptions.addOption", {
                 privateKey: localStorage.getItem("privateKey"),
                 hashtag: hashtag,
                 answerText: value.answerText,
-                answerOptionNumber: value.answerOptionNumber,
                 isCorrect: value.isCorrect});
         });
     },
 
-    deleteAnswerOption: function (hashtag, answerOptionNumber) {
+    deleteAnswerOption: function (hashtag, questionIndex, answerOptionNumber) {
         if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
@@ -179,19 +155,18 @@ localData = {
         if (!sessionDataString) {
             return;
         }
+
         const sessionData = JSON.parse(sessionDataString);
+        if (typeof sessionData === "object") {
+            sessionData[questionIndex].answers = $.grep(sessionData[questionIndex].answers, function (value) {
+                return value.answerOptionNumber !== answerOptionNumber;
+            });
 
-        if (!(typeof sessionData) === "object") {
-            return;
+            localStorage.setItem(hashtag, JSON.stringify(sessionData));
         }
-        sessionData.answers = $.grep(sessionData.answers, function (value) {
-            return value.answerOptionNumber != answerOptionNumber;
-        });
-
-        localStorage.setItem(hashtag, JSON.stringify(sessionData));
     },
 
-    updateAnswerText: function ({hashtag, answerOptionNumber, answerText, isCorrect}) {
+    updateAnswerText: function ({hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}) {
         if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
@@ -199,23 +174,20 @@ localData = {
         if (!sessionDataString) {
             return;
         }
+
         const sessionData = JSON.parse(sessionDataString);
-
-        if ((typeof sessionData) !== "object") {
-            return;
+        if (typeof sessionData === "object") {
+            $.each(sessionData[questionIndex].answers, function (key, value) {
+                if (value.answerOptionNumber === answerOptionNumber) {
+                    value.answerText = answerText;
+                    value.isCorrect = isCorrect;
+                }
+            });
+            localStorage.setItem(hashtag, JSON.stringify(sessionData));
         }
-
-        $.each(sessionData.answers, function (key, value) {
-            if (value.answerOptionNumber === answerOptionNumber) {
-                value.answerText = answerText;
-                value.isCorrect = isCorrect;
-            }
-        });
-        localStorage.setItem(hashtag, JSON.stringify(sessionData));
     },
 
     initializePrivateKey: function () {
-
         if (!localStorage.getItem("privateKey")) {
             localStorage.setItem("privateKey", new Mongo.ObjectID()._str);
         }
@@ -230,9 +202,14 @@ localData = {
         if ((hashtag === "hashtags") || (hashtag === "privateKey")) {
             return;
         }
+
         var allHashtags = JSON.parse(localStorage.getItem("hashtags"));
+        allHashtags = $.grep(allHashtags, function (value) {
+            return value !== data.hashtagDoc.hashtag;
+        });
         allHashtags.push(hashtag);
         localStorage.setItem("hashtags", JSON.stringify(allHashtags));
+
         var answerOptionsLocalStorage = [];
         data.answerOptionsDoc.forEach(function (answerOptionDoc) {
             var newDoc = {
@@ -242,13 +219,20 @@ localData = {
             };
             answerOptionsLocalStorage.push(newDoc);
         });
-        var localDataObject = {
-            hashtag: hashtag,
-            questionText: data.sessionDoc.questionText,
-            timer: data.sessionDoc.timer,
-            answers: answerOptionsLocalStorage
-        };
-        localStorage.setItem(hashtag, JSON.stringify(localDataObject));
+
+        localStorage.setItem(
+            hashtag,
+            JSON.stringify({
+                hashtag: hashtag,
+                questionList: [
+                    {
+                        questionText: data.sessionDoc.questionText,
+                        timer: data.sessionDoc.timer,
+                        answers: answerOptionsLocalStorage
+                    }
+                ]
+            })
+        );
     },
 
     exportFromLocalStorage: function (hashtag) {

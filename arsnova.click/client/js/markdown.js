@@ -38,7 +38,7 @@ Template.markdownBar.events({
         insertInQuestionText('1. ');
     },
     "click #latexMarkdownButton": function (event) {
-        insertInQuestionText('\\)', '\\)');
+        insertInQuestionText('\\(', '\\)');
     },
     "click #codeMarkdownButton": function (event) {
         insertInQuestionText('<hlcode>', '</hlcode>');

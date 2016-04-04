@@ -18,7 +18,7 @@
 
 Meteor.startup(function(){
     if (Meteor.isClient) {
-        $.getScript('https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML');
+        // $.getScript('https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML');
         $.getScript('/lib/highlight.pack.min.js');
         $.getScript('/lib/marked.min.js');
     }

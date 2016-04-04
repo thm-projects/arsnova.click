@@ -81,11 +81,9 @@ Template.createQuestionView.events({
 
         mathjaxMarkdown.initializeMarkdownAndLatex();
         var content = $('#questionText').val();
-        console.log(content);
-        content = mathjaxMarkdown.replaceCodeBlockFromContent(content);
-        console.log(content);
-        content = mathjaxMarkdown.parseMarkdown(content);
-        console.log(content);
+
+        content = mathjaxMarkdown.getContent(content);
+
         $("#modalpreview-text").html(content);
     }
 });

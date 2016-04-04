@@ -73,9 +73,11 @@
 
 .glyphicon-info-style {
     margin-left: 10px;
+    cursor: pointer;
 }
 
 .glyphicon-import-style {
     margin-right: 10px;
     float: right;
+    cursor: pointer;
 }

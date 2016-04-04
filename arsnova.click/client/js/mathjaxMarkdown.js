@@ -1,6 +1,29 @@
+/*
+ * This file is part of ARSnova Click.
+ * Copyright (C) 2016 The ARSnova Team
+ *
+ * ARSnova Click is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ARSnova Click is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 mathjaxMarkdown = {
     initializeMarkdownAndLatex: function () {
         // markdown setup
+        var markedRenderer = marked.Renderer;
+
+        markedRenderer.prototype.link = this.hyperlinkRenderer;
+        markedRenderer.prototype.image = this.imageRenderer;
+
         marked.setOptions({
             highlight: function (code) {
                 return "<pre class='hljs-pre'><code class='hljs-highlight'>" +
@@ -156,5 +179,68 @@ mathjaxMarkdown = {
     },
     htmlEncode: function(value) {
         return ! value ? value: String(value).replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+    },
+    imageRenderer: function (href, title, text) {
+        var isVideoElement = href.indexOf('://i.vimeocdn') > -1 || href.indexOf('://img.youtube') > -1;
+        var size = '', alignment = 'center';
+
+        if (!isVideoElement) {
+            /*size = size[1] && size[1] !== 'inital;' ?
+            '"max-width:' + size[0] + 'max-height:' + size[1] + '"' :
+            '"max-width:' + size[0] + '"';*/
+
+            var maxWidth = $('.modal-dialog').width() - 100;
+            var maxHeight = maxWidth - 100;
+            size = '"width:' + maxWidth + 'px;height:' + maxHeight + 'px"'
+
+            return '<div style="text-align:' + alignment + '">' +
+                '<img class="resizeableImage" title="' + text + '" src="' + href + '" alt="' + text + '" style=' + size + '>' +
+                '</div>';
+        }
+
+        return '<img class="resizeableImage" title="' + text + '" src="' + href + '" alt="' + text + '">';
+    },
+    hyperlinkRenderer: function (href, title, text) {
+        var titleDelimiter = /^.*alt="([^"]*)/;
+        var content = text;
+
+        var youtubeDelimiters = {
+            accessKey: 'youtube',
+            videoURI: 'https://www.youtube.com/embed/',
+            elementDel: /<img[^<>]*(img.youtube\.com\/vi)[^<>]*>/,
+            videoIdDel: /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/,
+            titleDel: titleDelimiter
+        };
+
+        var vimeoDelimiters = {
+            accessKey: 'vimeo',
+            videoURI: 'https://player.vimeo.com/video/',
+            elementDel: /<img[^<>]*(vimeo)[^<>]*>/,
+            videoIdDel: /^.*(vimeo\.com\/video)\/?([0-9]+)/,
+            titleDel: titleDelimiter
+        };
+
+        var videoElementReplace = function (content, delimiters) {
+            return content.replace(delimiters.elementDel, function (element) {
+                var videoId = delimiters.accessKey === 'youtube' ?
+                    href.match(delimiters.videoIdDel)[7] :
+                    href.match(delimiters.videoIdDel)[2];
+
+                var title = element.match(delimiters.titleDel)[1];
+                return '<p class="videoImageParagraph"><a class="hyperlink" href="' + delimiters.videoURI
+                    + videoId + '"><span class="videoImageContainer" id="' + videoId + '" accesskey="'
+                    + delimiters.accessKey + '" title="' + title + '">' + text + '</span></a></p>';
+            });
+        };
+
+        content = videoElementReplace(content, youtubeDelimiters);
+        content = videoElementReplace(content, vimeoDelimiters);
+
+        if (text === content) {
+            content = controller.defaultHyperLinkRenderer.call(marked, href, title, text);
+            content = content.slice(0, 3) + 'class="hyperlink" ' + content.slice(3, content.length);
+        }
+
+        return content;
     }
 }

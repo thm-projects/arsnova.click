@@ -16,10 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Template.markdownBar.onRendered( function () {
-   $('.modal-dialog').width($('#mainContentContainer').width() - 40);
-});
-
 Template.markdownBar.events({
     "click #infoMarkdownButton": function (event) {
         var markdownInfoText = $("#markdownInfoText");

@@ -185,16 +185,8 @@ mathjaxMarkdown = {
         var size = '', alignment = 'center';
 
         if (!isVideoElement) {
-            /*size = size[1] && size[1] !== 'inital;' ?
-            '"max-width:' + size[0] + 'max-height:' + size[1] + '"' :
-            '"max-width:' + size[0] + '"';*/
-
-            var maxWidth = $('.modal-dialog').width() - 100;
-            var maxHeight = maxWidth - 100;
-            size = '"width:' + maxWidth + 'px;height:' + maxHeight + 'px"'
-
             return '<div style="text-align:' + alignment + '">' +
-                '<img class="resizeableImage" title="' + text + '" src="' + href + '" alt="' + text + '" style=' + size + '>' +
+                '<img class="resizeableImage img-responsive" title="' + text + '" src="' + href + '" alt="' + text + '" style=' + size + '>' +
                 '</div>';
         }
 

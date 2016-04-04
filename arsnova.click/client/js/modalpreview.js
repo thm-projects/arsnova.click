@@ -16,6 +16,12 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+Template.questionPreviewSplash.onRendered(function () {
+    $(window).resize(function () {
+        $('.modal-dialog').width($('#mainContentContainer').width() - 40);
+    });
+});
+
 Template.questionPreviewSplash.events({
     "click #js-btn-hidePreviewModal": function () {
         $('.js-splashscreen').modal("hide");

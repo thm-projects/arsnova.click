@@ -35,7 +35,7 @@ Meteor.methods({
                 AnswerOptions.remove({hashtag: doc.hashtag});
                 MemberList.remove({hashtag: doc.hashtag});
                 Responses.remove({hashtag: doc.hashtag});
-                Sessions.remove({hashtag: doc.hashtag});
+                QuestionGroup.remove({hashtag: doc.hashtag});
             }
         }
     },
@@ -50,7 +50,7 @@ Meteor.methods({
             AnswerOptions.remove({hashtag: doc.hashtag});
             MemberList.remove({hashtag: doc.hashtag});
             Responses.remove({hashtag: doc.hashtag});
-            Sessions.remove({hashtag: doc.hashtag});
+            QuestionGroup.remove({hashtag: doc.hashtag});
         }
     }
 });

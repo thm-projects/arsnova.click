@@ -63,27 +63,27 @@ Meteor.methods({
         }
     },
     'Hashtags.addHashtag': function (doc) {
-
-        var testDoc = Hashtags.findOne({
+        var existingSession = Hashtags.findOne({
             hashtag: doc.hashtag
         });
 
-        if (!testDoc){
-            for (var i = 0; i < 4; i++) {
-                var emptyAnswerDoc = {
-                    privateKey: doc.privateKey,
-                    hashtag: doc.hashtag,
-                    answerText: "",
-                    answerOptionNumber: i,
-                    isCorrect: 0
-                };
-                AnswerOptions.insert(emptyAnswerDoc);
-            }
-            Hashtags.insert(doc);
-        }else{
+        if (existingSession){
             throw new Meteor.Error('Hashtags.addHashtag', 'Session already exists!');
             return;
         }
+
+        var emptyAnswerDoc = {
+            privateKey: doc.privateKey,
+            hashtag: doc.hashtag,
+            questionIndex: 0,
+            answerText: "",
+            isCorrect: 0
+        };
+        for (var i = 0; i < 4; i++) {
+            emptyAnswerDoc.answerOptionNumber = i;
+            AnswerOptions.insert(emptyAnswerDoc);
+        }
+        Hashtags.insert(doc);
 
     },
     'Hashtags.export': function ({hashtag, privateKey}) {
@@ -101,7 +101,7 @@ Meteor.methods({
                 throw new Meteor.Error('Hashtags.export', 'No such hashtag with the given key');
                 return;
             }
-            var sessionDoc = Sessions.findOne({hashtag: hashtag}, {
+            var questionGroupDoc = QuestionGroup.findOne({hashtag: hashtag}, {
                 fields: {
                     _id: 0
                 }
@@ -123,7 +123,7 @@ Meteor.methods({
             }).fetch();
             var exportData = {
                 hashtagDoc: hashtagDoc,
-                sessionDoc: sessionDoc,
+                questionGroupDoc: questionGroupDoc,
                 answerOptionsDoc: answerOptionsDoc,
                 memberListDoc: memberListDoc,
                 responsesDoc: responsesDoc
@@ -150,10 +150,10 @@ Meteor.methods({
             hashtagDoc.sessionStatus = 1;
             hashtagDoc._id = undefined;
             Hashtags.insert(hashtagDoc);
-            data.sessionDoc._id = undefined;
-            Sessions.insert(data.sessionDoc);
+            delete data.questionGroupDoc._id;
+            QuestionGroup.insert(data.questionGroupDoc);
             data.answerOptionsDoc.forEach(function (answerOptionDoc) {
-                answerOptionDoc._id = undefined;
+                delete answerOptionDoc._id;
                 AnswerOptions.insert(answerOptionDoc);
             });
         }

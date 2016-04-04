@@ -21,7 +21,12 @@ Meteor.methods({
         var timestamp = new Date().getTime();
         var hashtag = responseDoc.hashtag;
         if (Meteor.isServer) {
-            var dupDoc = Responses.findOne({hashtag: responseDoc.hashtag, answerOptionNumber: responseDoc.answerOptionNumber, userNick: responseDoc.userNick});
+            var dupDoc = Responses.findOne({
+                hashtag: responseDoc.hashtag,
+                questionIndex: responseDoc.questionIndex,
+                answerOptionNumber: responseDoc.answerOptionNumber,
+                userNick: responseDoc.userNick
+            });
             if (dupDoc) {
                 throw new Meteor.Error('Responses.addResponse', 'User has already given this response');
                 return;
@@ -34,17 +39,18 @@ Meteor.methods({
                 throw new Meteor.Error('Responses.addResponse', 'There is no such quiz active in the db');
                 return;
             } else {
-                var sessionDoc = Sessions.findOne({hashtag: responseDoc.hashtag});
-                if (!sessionDoc) {
-                    throw new Meteor.Error('Responses.addResponse', 'No session doc for this quiz');
+                var questionGroupDoc = QuestionGroup.findOne({hashtag: responseDoc.hashtag, questionIndex: responseDoc.questionIndex});
+                if (!questionGroupDoc) {
+                    throw new Meteor.Error('Responses.addResponse', 'No questionGroup doc for this quiz');
                     return;
                 }
-                var responseTime = Number(timestamp) - Number(sessionDoc.startTime);
+                var responseTime = Number(timestamp) - Number(questionGroupDoc.startTime);
 
-                if (responseTime <= sessionDoc.timer) {
+                if (responseTime <= questionGroupDoc.timer) {
                     responseDoc.responseTime = responseTime;
                     var answerOptionDoc = AnswerOptions.findOne({
                         hashtag: hashtag,
+                        questionIndex: responseDoc.questionIndex,
                         answerOptionNumber: responseDoc.answerOptionNumber
                     });
                     if (!answerOptionDoc) {
@@ -60,26 +66,16 @@ Meteor.methods({
                         responseTimeMillis: responseDoc.responseTime
                     });
 
-                    var questionType = "polling";
                     var nickResponsesCount = Responses.find({
                         hashtag: hashtag,
                         userNick: responseDoc.userNick
                     }).count();
-                    var showForwardButton = false;
-                    if (nickResponsesCount > 1) {
-                        showForwardButton = true;
-                    }
-                    var instantRouting = false;
-                    var correctAnswerOptionsCount = AnswerOptions.find({hashtag: responseDoc.hashtag, isCorrect: 1}).count();
-                    if (correctAnswerOptionsCount === 1) {
-                        instantRouting = true;
-                    }
-                    var retDoc = {
+                    var correctAnswerOptionsCount = AnswerOptions.find({hashtag: responseDoc.hashtag, questionIndex: responseDoc.questionIndex, isCorrect: 1}).count();
+                    return {
                         isCorrect: answerOptionDoc.isCorrect,
-                        instantRouting: instantRouting,
-                        showForwardButton: showForwardButton
-                    }
-                    return retDoc;
+                        instantRouting: correctAnswerOptionsCount === 1,
+                        showForwardButton: nickResponsesCount <= 1
+                    };
                 }
                 else {
                     throw new Meteor.Error('Responses.addResponse', 'Response was given out of time range');

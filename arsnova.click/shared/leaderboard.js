@@ -17,7 +17,7 @@
  */
 
 Meteor.methods({
-    'LeaderBoard.addResponseSet': function ({phashtag, nick, responseTimeMillis}) {
+    'LeaderBoard.addResponseSet': function ({phashtag, questionIndex, nick, responseTimeMillis}) {
         if (Meteor.isServer){
             new SimpleSchema({
                 phashtag: {type: String},
@@ -33,6 +33,7 @@ Meteor.methods({
 
             AnswerOptions.find({
                 hashtag: phashtag,
+                questionIndex: questionIndex,
                 isCorrect: 1
             }, {fields: {"answerOptionNumber": 1}}).forEach(function (answer) {
                 correctAnswers.push(answer.answerOptionNumber);

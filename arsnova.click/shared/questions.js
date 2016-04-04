@@ -75,16 +75,16 @@ Meteor.methods({
             });
         }
     },
-    "QuestionGroup.isSC": function ({hashtag}) {
+    "Question.isSC": function ({hashtag, questionIndex}) {
         var hashtagDoc = Hashtags.findOne({
             hashtag: hashtag,
             privateKey: privateKey
         });
         if (!hashtagDoc) {
-            new Meteor.Error('QuestionGroup.isSC', 'There is no quiz with this key');
+            new Meteor.Error('Question.isSC', 'There is no quiz with this key');
             return;
         }
-        return (AnswerOptions.find({hashtag: hashtag, isCorrect: 1}).count() == 1);
+        return (AnswerOptions.find({hashtag: hashtag, questionIndex: questionIndex, isCorrect: 1}).count() === 1);
     },
     "Question.updateIsReadConfirmationRequired": function ({privateKey, hashtag, questionIndex, isReadingConfirmationRequired}) {
         //TODO: validate isReadingConfirmationRequired with SimpleSchema

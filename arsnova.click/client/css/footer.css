@@ -81,3 +81,9 @@
     float: right;
     cursor: pointer;
 }
+.js-import-input-home {
+    display: none;
+}
+.js-import-input-home input[type=file] {
+    display: none;
+}

@@ -17,9 +17,9 @@
 -->
 
 <template name="hashtagManagement">
-    {{> titel titelText = "Import | Export" }}
-    <div class="row answer-options distance-top">
-        <div class="col-xs-12">
+    <div class="row">
+        <div class="col-md-12 contentFrame">
+            {{> titel titelText = "Import | Export" }}
         {{#each serverHashtags}}
             <div class="row" id="{{this}}">
                 <div class="col-xs-6">
@@ -29,14 +29,14 @@
                 </div>
                 <div class="col-xs-3">
                     <button type="button" class="js-export btn btn-info btn-lg btn-answerOption">
-                        <span class="glyphicon glyphicon-export glyph-left" aria-hidden="true"></span>
-                        <span class="ansBtn">Export</span>
+                        <span class="glyphicon glyphicon-export glyph-left alignGlyphicon" aria-hidden="true"></span>
+                        <span class="buttonLabels ansBtn">Export</span>
                     </button>
                 </div>
                 <div class="col-xs-3">
                     <button type="button" class="js-delete btn btn-info btn-lg btn-answerOption">
-                        <span class="glyphicon glyphicon-trash glyph-left" aria-hidden="true"></span>
-                        <span class="ansBtn">Löschen</span>
+                        <span class="glyphicon glyphicon-trash glyph-left alignGlyphicon" aria-hidden="true"></span>
+                        <span class="buttonLabels ansBtn">Löschen</span>
                     </button>
                 </div>
             </div>
@@ -44,8 +44,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
-            <span class="btn btn-lg btn-warning btn-file distance-top">
+        <div class="col-md-12">
+            <span class="btn btn-lg btn-warning btn-file distance-top btn-answerOption">
                 Import <input id="js-import" type="file" accept="application/json" multiple>
             </span>
         </div>

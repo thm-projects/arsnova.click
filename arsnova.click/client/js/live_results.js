@@ -24,17 +24,21 @@ Template.live_results.onCreated(function () {
         });
         this.subscription = Meteor.subscribe('MemberList.members', Session.get("hashtag"));
         this.subscription = Meteor.subscribe('Sessions.question', Session.get("hashtag"), function () {
-            var sessionDoc = Sessions.findOne();
-            Session.set("sessionCountDown", sessionDoc.timer);
-            var timestamp = new Date().getTime();
-            countdown = new ReactiveCountdown((timestamp - sessionDoc.startTime + sessionDoc.timer) / 1000);
-            countdown.start(function () {
-                Session.set("sessionClosed", true);
-                if (Session.get("isOwner")) {
-                    setTimeout(function () {Router.go("/statistics");}, 7000);
-                }
-            });
-            Session.set("countdownInitialized", true);
+            if (!Session.get("sessionClosed")){
+                var sessionDoc = Sessions.findOne();
+                Session.set("sessionCountDown", sessionDoc.timer);
+                var timestamp = new Date().getTime();
+                countdown = new ReactiveCountdown((timestamp - sessionDoc.startTime + sessionDoc.timer) / 1000);
+                countdown.start(function () {
+                    Session.set("sessionClosed", true);
+                    if (Session.get("isOwner")) {
+                        setTimeout(function () {Router.go("/statistics");}, 7000);
+                    }
+                });
+                Session.set("countdownInitialized", true);
+            } else {
+                Session.set("countdownInitialized", false);
+            }
         });
         this.subscription = Meteor.subscribe('Hashtags.public', Session.get("hashtag"));
     });
@@ -122,20 +126,16 @@ Template.live_results.helpers({
             return 0;
         }
     },
-    isOwnerAndIsCountdownNotZero: function () {
-        if (Session.get("isOwner")){
-            if (Session.get("countdownInitialized")){
-                var timer = Math.round(countdown.get())
-                if (timer <= 0){
-                    return false;
-                } else {
-                    return true;
-                }
-            } else {
+    isCountdownZero: function () {
+        if (Session.get("countdownInitialized")){
+            var timer = Math.round(countdown.get())
+            if (timer <= 0){
                 return true;
+            } else {
+                return false;
             }
         } else {
-            return false;
+            return true;
         }
     },
     getCountStudents: function () {
@@ -145,7 +145,7 @@ Template.live_results.helpers({
         return Session.get("sessionClosed");
     },
     showLeaderBoardButton: function () {
-        return (Session.get("rightAnswerOptionCount") > 0);
+        return (AnswerOptions.find({isCorrect: 1}).count() > 0);
     },
     result: function () {
         var result = [];

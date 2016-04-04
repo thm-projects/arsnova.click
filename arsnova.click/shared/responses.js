@@ -62,6 +62,7 @@ Meteor.methods({
 
                     Meteor.call('LeaderBoard.addResponseSet', {
                         phashtag: responseDoc.hashtag,
+                        questionIndex: responseDoc.questionIndex,
                         nick: responseDoc.userNick,
                         responseTimeMillis: responseDoc.responseTime
                     });

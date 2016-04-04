@@ -29,46 +29,42 @@ Meteor.methods({
             backgroundColor,
             foregroundColor
         });
-        member = MemberList.findOne({
-            hashtag: hashtag,
-            nick: nick
-        });
-        if (!member) {
-            if (Hashtags.findOne({hashtag:hashtag}).sessionStatus == 2) {
-                MemberList.insert({
-                    hashtag: hashtag,
-                    nick: nick,
-                    lowerCaseNick: nick.toLowerCase(),
-                    backgroundColor: backgroundColor,
-                    foregroundColor: foregroundColor,
-                    readConfirmed: 0,
-                    insertDate: new Date().getTime()
-                });
-            } else {
-                throw new Meteor.error('MemberList.addLearner', 'Session is currently not available for joining');
-            }
-        } else {
+        if (MemberList.findOne({hashtag: hashtag, nick: nick})) {
             throw new Meteor.Error('MemberList.addLearner', 'Nick already exists!');
-            return;
         }
+        if (Hashtags.findOne({hashtag:hashtag}).sessionStatus !== 2) {
+            throw new Meteor.Error('MemberList.addLearner', 'Session is currently not available for joining');
+        }
+        MemberList.insert({
+            hashtag: hashtag,
+            nick: nick,
+            lowerCaseNick: nick.toLowerCase(),
+            backgroundColor: backgroundColor,
+            foregroundColor: foregroundColor,
+            readConfirmed: 0,
+            insertDate: new Date().getTime()
+        });
     },
     'MemberList.setReadConfirmed': function (hashtag, nick) {
-        // TODO Thought: maybe link this method to a privateKey for learners? otherwise everybody can set "readConfirmed" for each user!
+        /*
+        TODO Everybody can set "readConfirmed" for each user!
+        Maybe link this method to a privateKey for learners?
+        Maybe check with Meteor.user()?
+         */
         new SimpleSchema({
             hashtag: {type: String},
             nick: {type: String}
         }).validate({
-                hashtag,
-                nick
-            });
-        member = MemberList.findOne({
-            hashtag: hashtag,
-            nick: nick
+            hashtag,
+            nick
         });
+        var member = MemberList.findOne({hashtag: hashtag, nick: nick});
         if (!member) {
             throw new Meteor.Error('MemberList.setReadConfirmed', 'Member not found!');
-        } else {
-            MemberList.update(member._id, {$set: {readConfirmed: 1}}, member);
         }
+        /*
+         TODO Why is member added here as options field?
+         */
+        MemberList.update(member._id, {$set: {readConfirmed: 1}}, member);
     }
 });

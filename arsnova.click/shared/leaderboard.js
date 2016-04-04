@@ -21,10 +21,12 @@ Meteor.methods({
         if (Meteor.isServer){
             new SimpleSchema({
                 phashtag: {type: String},
+                questionIndex: {type: Number},
                 nick: {type: String},
                 responseTimeMillis: {type: Number}
             }).validate({
                 phashtag,
+                questionIndex,
                 nick,
                 responseTimeMillis
             });
@@ -42,8 +44,8 @@ Meteor.methods({
             var responseAmount = 0;
             var falseResponseAmount = 0;
 
-            Responses.find({hashtag: phashtag, userNick: nick}).forEach(function (response) {
-                if (correctAnswers.indexOf(response.answerOptionNumber) == -1){
+            Responses.find({hashtag: phashtag, questionIndex: questionIndex, userNick: nick}).forEach(function (response) {
+                if (correctAnswers.indexOf(response.answerOptionNumber) === -1){
                     falseResponseAmount++;
                 }
                 responseAmount++;
@@ -59,6 +61,7 @@ Meteor.methods({
             if (!memberEntry) {
                 LeaderBoard.insert({
                     hashtag: phashtag,
+                    questionIndex: questionIndex,
                     userNick: nick,
                     responseTimeMillis: responseTimeMillis,
                     givenAnswers: responseAmount,

@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Meteor.publish('Sessions.instructor', function(pprivateKey, phashtag) {
+Meteor.publish('QuestionGroup.instructor', function(pprivateKey, phashtag) {
     new SimpleSchema({
         phashtag: {type: String},
         pprivateKey: {type: String}
@@ -24,19 +24,18 @@ Meteor.publish('Sessions.instructor', function(pprivateKey, phashtag) {
             pprivateKey,
             phashtag
         });
-    var doc = Hashtags.find({
+    var isOwner = Hashtags.find({
         hashtag: phashtag,
         privateKey: pprivateKey
-    });
-    if (!doc) return;
-    return Sessions.find({hashtag: phashtag});
+    }).count();
+    return isOwner !== 0 ? QuestionGroup.find({hashtag: phashtag}) : false;
 });
 
-Meteor.publish('Sessions.question', function (phashtag) {
+Meteor.publish('QuestionGroup.question', function (phashtag) {
     new SimpleSchema({
         phashtag: {type: String}
     }).validate({phashtag});
-    return Sessions.find({hashtag: phashtag}, {
+    return QuestionGroup.find({hashtag: phashtag}, {
         fields: {
             questionText: 1,
             startTime: 1,
@@ -45,9 +44,9 @@ Meteor.publish('Sessions.question', function (phashtag) {
     });
 });
 
-Meteor.publish('Sessions.memberlist', function (phashtag) {
+Meteor.publish('QuestionGroup.memberlist', function (phashtag) {
     new SimpleSchema({
         phashtag: {type: String}
     }).validate({phashtag});
-    return Sessions.find({hashtag: phashtag});
+    return QuestionGroup.find({hashtag: phashtag});
 });

@@ -53,7 +53,6 @@ localData = {
         if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
-        const hashtagString = localStorage.getItem("hashtags");
         var questionObject = JSON.stringify({
             hashtag:hashtag,
             questionList: [
@@ -69,6 +68,7 @@ localData = {
                 }
             ]
         });
+        const hashtagString = localStorage.getItem("hashtags");
         if (!hashtagString) {
             localStorage.setItem("hashtags", JSON.stringify([hashtag]));
             localStorage.setItem(hashtag, questionObject);

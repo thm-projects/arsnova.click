@@ -16,31 +16,31 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Meteor.publish('AnswerOptions.instructor', function(pprivateKey, phashtag) {
+Meteor.publish('AnswerOptions.instructor', function(pprivateKey, phashtag, questionIndex) {
     new SimpleSchema({
         phashtag: {type: String},
-        pprivateKey: {type: String}
-    }).validate({pprivateKey, phashtag});
+        pprivateKey: {type: String},
+        questionIndex: {type: Number}
+    }).validate({pprivateKey, phashtag, questionIndex});
     var doc = Hashtags.find({
         hashtag: phashtag,
         privateKey: pprivateKey
     });
-    if (!doc) return;
-    return AnswerOptions.find({hashtag: phashtag});
+    return doc ? AnswerOptions.find({hashtag: phashtag, questionIndex: questionIndex}) : false;
 });
 
-Meteor.publish('AnswerOptions.options', function(phashtag) {
+Meteor.publish('AnswerOptions.options', function(phashtag, questionIndex) {
     new SimpleSchema({
         phashtag: {type: String}
     }).validate({phashtag});
-    return AnswerOptions.find({hashtag: phashtag});
+    return AnswerOptions.find({hashtag: phashtag, questionIndex: questionIndex});
 });
 
-Meteor.publish('AnswerOptions.public', function(hashtag) {
+Meteor.publish('AnswerOptions.public', function(hashtag, questionIndex) {
     new SimpleSchema({
         hashtag: {type: String}
     }).validate({hashtag});
-    return AnswerOptions.find({hashtag: hashtag}, {
+    return AnswerOptions.find({hashtag: hashtag, questionIndex: questionIndex}, {
         fields: {
             isCorrect: 0
         }

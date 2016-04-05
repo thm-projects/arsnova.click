@@ -35,7 +35,7 @@ Template.createQuestionView.helpers({
     //Get question from Sessions-Collection if it already exists
     questionText: function () {
         var currentSession = QuestionGroup.findOne();
-        return currentSession ? currentSession.questionText : "";
+        return currentSession ? currentSession.questionList[Session.get("questionIndex")].questionText : "";
     },
     isFormattingEnabled: function () {
         return $('#markdownBarDiv').hasClass('hide');
@@ -72,13 +72,12 @@ Template.createQuestionView.events({
         $('.previewSplash').parents('.modal').modal('hide');
     },
     "click #formatPreviewButton": function () {
-        if ($('#formatPreviewText').text() == "Format") {
-            $('#formatPreviewText').text("Vorschau");
-            $('#formatPreviewGlyphicon').removeClass("glyphicon-cog");
-            $('#formatPreviewGlyphicon').addClass("glyphicon-phone");
+        var formatPreviewText = $('#formatPreviewText');
+        if (formatPreviewText.text() === "Format") {
+            formatPreviewText.text("Vorschau");
+            $('#formatPreviewGlyphicon').removeClass("glyphicon-cog").addClass("glyphicon-phone");
             $('#markdownBarDiv').removeClass('hide');
-            $('#questionText').removeClass('round-corners');
-            $('#questionText').addClass('round-corners-markdown');
+            $('#questionText').removeClass('round-corners').addClass('round-corners-markdown');
         } else {
             $('.previewSplash').parents('.modal').modal('show');
 

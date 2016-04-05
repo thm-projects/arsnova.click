@@ -40,7 +40,7 @@ function createSlider (defaultSec) {
         return;
     }
     if (Session.get("slider") === 0){
-        Session.set("slider", AnswerOptions.find({hashtag: Session.get("hashtag")}).count()*10);
+        Session.set("slider", AnswerOptions.find({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex")}).count()*10);
     }
     this.$("#slider").noUiSlider({
         start: Session.get("slider"),

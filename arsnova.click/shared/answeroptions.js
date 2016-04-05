@@ -33,12 +33,10 @@ Meteor.methods({
             });
             if (!doc) {
                 throw new Meteor.Error('AnswerOptions.addOption', 'Either there is no quiz or you don\'t have write access');
-                return;
             }
             var relevantAnswerOptions = AnswerOptions.find({hashtag: hashtag, questionIndex: questionIndex});
             if (relevantAnswerOptions.count() > 25) {
                 throw new Meteor.Error('AnswerOptions.addOption', 'Maximum number of possible answer options exceeded');
-                return;
             }
             var answerOptionDoc = relevantAnswerOptions.findOne({answerOptionNumber: answerOptionNumber});
             if (!answerOptionDoc) {

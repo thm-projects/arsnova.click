@@ -18,28 +18,28 @@
 
 Template.createTimerView.onCreated(function () {
     this.autorun(() => {
+        if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
         this.subscription = Meteor.subscribe('AnswerOptions.instructor', localData.getPrivateKey(), Session.get("hashtag"), function() {});
-        this.subscription = Meteor.subscribe('Sessions.instructor', localData.getPrivateKey(), Session.get("hashtag"), function () {
-        var sessionDoc = Sessions.findOne({hashtag: Session.get("hashtag")});
-        if (sessionDoc && sessionDoc.timer != 0) {
-            Session.set("slider", (sessionDoc.timer / 1000));
-        }else {
+        this.subscription = Meteor.subscribe('QuestionGroup.authorizeAsOwner', localData.getPrivateKey(), Session.get("hashtag"), function (doc) {
+        if (doc && doc.questionList[Session.get("questionIndex")].timer !== 0) {
+            Session.set("slider", (doc.questionList[Session.get("questionIndex")].timer / 1000));
+        } else {
             Session.set("slider", 0);
         }
     });
 });
 });
 
-Template.createTimerView.rendered = function () {
+Template.createTimerView.onRendered(function () {
     createSlider();
-};
+});
 
 function createSlider (defaultSec) {
-    if (Session.get("slider") == undefined){
+    if (Session.get("slider") === undefined){
         setTimeout(createSlider, 50);
         return;
     }
-    if (Session.get("slider") == 0){
+    if (Session.get("slider") === 0){
         Session.set("slider", AnswerOptions.find({hashtag: Session.get("hashtag")}).count()*10);
     }
     this.$("#slider").noUiSlider({
@@ -62,39 +62,28 @@ Template.createTimerView.helpers({
 });
 
 Template.createTimerView.events({
-    "click #forwardButton":function(){
+    "click #forwardButton, click #backButton":function(event){
         // timer is given in seconds
         const timer = Session.get("slider") * 1000;
-        Meteor.call("Sessions.setTimer", {
-            privateKey:localData.getPrivateKey(),
-            hashtag:Session.get("hashtag"),
-            timer:timer
-        }, (err, res) => {
-            if (err) {
-                $('.errorMessageSplash').parents('.modal').modal('show');
-                $("#errorMessage-text").html(err.reason);
-            } else {
-                localData.addTimer(Session.get("hashtag"), timer);
-        Router.go("/memberlist");
-    }
-    });
-    },
-    "click #backButton":function(){
-        const timer = Session.get("slider") * 1000;
         if(!isNaN(timer) && timer > 0) {
-            Meteor.call("Sessions.setTimer", {
-                privateKey:localData.getPrivateKey(),
-                hashtag:Session.get("hashtag"),
-                timer:timer
+            Meteor.call("Question.setTimer", {
+                privateKey: localData.getPrivateKey(),
+                hashtag: Session.get("hashtag"),
+                questionIndex: Session.get("questionIndex"),
+                timer: timer
             }, (err, res) => {
                 if (err) {
                     $('.errorMessageSplash').parents('.modal').modal('show');
                     $("#errorMessage-text").html(err.reason);
                 } else {
-                    localData.addTimer(Session.get("hashtag"), timer);
-            Router.go("/answeroptions");
-        }
-        });
+                    localData.addTimer(Session.get("hashtag"), Session.get("questionIndex"), timer);
+                    if($(event.target).attr("id") === "forwardButton") {
+                        Router.go("/memberlist");
+                    } else {
+                        Router.go("/answeroptions");
+                    }
+                }
+            });
         }
     }
 });

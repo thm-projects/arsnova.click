@@ -20,26 +20,26 @@
     <div id="countdowndiv" class="fader"></div>
     <img id="countdown" class="fader" src="gr5.gif">
     <div class="row row-padding-bottom">
-            {{#if isOwner}}
-                <div class="col-xs-3 top-bar-content">
+        {{#if isOwner}}
+            <div class="col-xs-3 top-bar-content">
                     <span class="glyphicon icon-top-bar glyphicon-user glyphicon-style center" aria-hidden="true">
                         <div class="titel">{{getCountStudents}}</div>
                     </span>
-                </div>
-                <div class="col-xs-6 text-center">
-                    <div id="appTitle" class="titel subtitel-padding-top">{{votingText}}</div>
-                </div>
-                <div class="col-xs-3 top-bar-content">
+            </div>
+            <div class="col-xs-6 text-center">
+                <div id="appTitle" class="titel subtitel-padding-top">{{votingText}}</div>
+            </div>
+            <div class="col-xs-3 top-bar-content">
                     <span class="glyphicon icon-top-bar glyphicon-hourglass glyphicon-style center" aria-hidden="true">
                         <div class="titel">{{getCountdown}}</div>
                     </span>
-                </div>
-            {{else}}
-                <div class=" titel-relative text-light text-center">
-                    <div id="appTitle" class="titel margin-to-logo">{{votingText}}</div>
-                </div>
-            {{/if}}
-        </div>
+            </div>
+        {{else}}
+            <div class=" titel-relative text-light text-center">
+                <div id="appTitle" class="titel margin-to-logo">{{votingText}}</div>
+            </div>
+        {{/if}}
+    </div>
     <div class="row">
         <div class="col-md-12">
             {{#each result}}
@@ -54,13 +54,13 @@
     {{#if isMC}}
         <div class="row" style="margin-top: 50px">
             <div class="col-md-12">
-            {{#if isOwnerAndIsCountdownNotZero}}
-                {{> result_button_mc name = "Ganz richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = -1 id = 0}}
-                {{> result_button_mc name = "Ganz falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = -1 id = 1 }}
-            {{else}}
-                {{> result_button_mc name = "Ganz richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = 1 id = 0  }}
-                {{> result_button_mc name = "Ganz falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = 0 id = 1 }}
-            {{/if}}
+                {{#if isOwnerAndIsCountdownNotZero}}
+                    {{> result_button_mc name = "Ganz richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = -1 id = 0}}
+                    {{> result_button_mc name = "Ganz falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = -1 id = 1 }}
+                {{else}}
+                    {{> result_button_mc name = "Ganz richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = 1 id = 0  }}
+                    {{> result_button_mc name = "Ganz falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = 0 id = 1 }}
+                {{/if}}
             </div>
         </div>
     {{/if}}

@@ -20,12 +20,9 @@
   font-size: 4em;
 }
 
-.sendResponse{
-}
-
 .btn-answerOption {
     margin: 15px 0;
-  width: 100%;
+    width: 100%;
 }
 
 .answer-row {
@@ -36,7 +33,7 @@
 
 .answer-selected{
     background-color: #ffd700 !important;
-    color: #000000;
+    color: #000000 !important;
 }
 
 .button-purple-transition {

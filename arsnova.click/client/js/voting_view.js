@@ -17,7 +17,7 @@
  */
 
 var countdown = null;
-var aktBtn = 0;
+var aktBtn = -3;
 var lastBtn = 0;
 Template.votingview.onCreated(function () {
     this.autorun(() => {
@@ -34,27 +34,14 @@ Template.votingview.onCreated(function () {
                 tick: function() {
                     var btnsCount = $('.answer-row').children().length;
 
-                    /* skip the selected answer options
-                    if ( $('#'+aktBtn).hasClass('answer-selected') ) {
-                        aktBtn++;
-                        if(aktBtn>=btnsCount) aktBtn = 0;
-                    }
-
-                    if(aktBtn==0) lastBtn = btnsCount-1;
-                    else lastBtn = aktBtn-1;
-
-                    if ( $('#'+aktBtn).hasClass('answer-selected') ) {
-                        aktBtn++;
-                        if(aktBtn>=btnsCount-1) aktBtn = 0;
-
-                        var i = lastBtn;
-                        while($('#'+i).hasClass('answer-selected')){
-                            i--;
-                        }
-                        lastBtn = i;
-                    }*/
-                    if(aktBtn==0)   lastBtn = btnsCount-1;
+                    if(aktBtn<=0)   lastBtn = btnsCount-1;
                     else            lastBtn = aktBtn-1;
+
+                    /* skip the selected answer options */
+                    while ( $('#'+aktBtn).hasClass('answer-selected') ) {
+                        aktBtn++;
+                        if(aktBtn>=btnsCount) aktBtn = -3;
+                    }
 
                     $('#' + lastBtn).removeClass('button-green-transition');
                     $('#' + lastBtn).addClass('button-purple-transition');
@@ -62,7 +49,7 @@ Template.votingview.onCreated(function () {
                     $('#' + aktBtn).removeClass('button-purple-transition');
 
                     aktBtn++;
-                    if(aktBtn>=btnsCount) aktBtn = 0;
+                    if(aktBtn>=btnsCount) aktBtn = -3;
                 }
             });
             countdown.start(function () {
@@ -213,8 +200,4 @@ function formatAnswerButtons () {
     }
 
     answerRow.find('button').css('height', buttonHeight + 'px');
-}
-
-function changeButtonColor() {
-
 }

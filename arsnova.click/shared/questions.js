@@ -17,10 +17,10 @@
  */
 
 Meteor.methods({
-    "QuestionGroup.insert": function ({privateKey, hashtag, questionGroupObject}) {
+    "QuestionGroup.insert": function ({privateKey, hashtag, questionList}) {
         QuestionGroupSchema.validate({
             hashtag: hashtag,
-            questionList: questionGroupObject
+            questionList: questionList
         });
 
         var hashtagDoc = Hashtags.findOne({
@@ -33,7 +33,7 @@ Meteor.methods({
 
         QuestionGroup.insert({
             hashtag: hashtag,
-            questionList: questionGroupObject
+            questionList: questionList
         });
     },
     "QuestionGroup.addQuestion": function ({privateKey, hashtag, questionText}) {

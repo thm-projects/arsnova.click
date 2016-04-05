@@ -23,8 +23,7 @@ localData = {
             localStorage.setItem("hashtags", JSON.stringify([]));
             return [];
         }
-        var localHashtags = JSON.parse(hashtagString);
-        return localHashtags.sort();
+        return JSON.parse(hashtagString).sort();
     },
 
     containsHashtag: function (hashtag) {
@@ -57,14 +56,17 @@ localData = {
         const hashtagString = localStorage.getItem("hashtags");
         var questionObject = JSON.stringify({
             hashtag:hashtag,
-            questionIndex: 0,
-            questionText: "",
-            timer: 40000,
-            answers: [
-                {answerOptionNumber:0, answerText:"", isCorrect:0},
-                {answerOptionNumber:1, answerText:"", isCorrect:0},
-                {answerOptionNumber:2, answerText:"", isCorrect:0},
-                {answerOptionNumber:3, answerText:"", isCorrect:0}
+            questionList: [
+                {
+                    questionText: "",
+                    timer: 40000,
+                    answers: [
+                        {answerOptionNumber:0, answerText:"", isCorrect:0},
+                        {answerOptionNumber:1, answerText:"", isCorrect:0},
+                        {answerOptionNumber:2, answerText:"", isCorrect:0},
+                        {answerOptionNumber:3, answerText:"", isCorrect:0}
+                    ]
+                }
             ]
         });
         if (!hashtagString) {
@@ -86,7 +88,7 @@ localData = {
         const sessionDataString = localStorage.getItem(hashtag);
         if (sessionDataString) {
             const sessionData = JSON.parse(sessionDataString);
-            sessionData[questionIndex].questionText = questionText;
+            sessionData.questionList[questionIndex].questionText = questionText;
             localStorage.setItem(hashtag, JSON.stringify(sessionData));
         }
     },
@@ -98,7 +100,7 @@ localData = {
         const sessionDataString = localStorage.getItem(hashtag);
         if (sessionDataString) {
             const sessionData = JSON.parse(sessionDataString);
-            sessionData[questionIndex].timer = timer;
+            sessionData.questionList[questionIndex].timer = timer;
             localStorage.setItem(hashtag, JSON.stringify(sessionData));
         }
     },
@@ -110,11 +112,11 @@ localData = {
         const sessionDataString = localStorage.getItem(hashtag);
         if (sessionDataString) {
             const sessionData = JSON.parse(sessionDataString);
-            sessionData[questionIndex].answers.push({
+            sessionData.questionList[questionIndex].answers.push({
                 answerOptionNumber:answerOptionNumber,
                 answerText:answerText,
                 isCorrect:isCorrect});
-            localStorage.setItem(answer.hashtag, JSON.stringify(sessionData));
+            localStorage.setItem(hashtag, JSON.stringify(sessionData));
         }
     },
 
@@ -134,7 +136,7 @@ localData = {
             Meteor.call("QuestionGroup.insert", {
                 privateKey: localStorage.getItem("privateKey"),
                 hashtag: hashtag,
-                questionGroupObject: sessionData
+                questionList: sessionData.questionList
             });
         }
 
@@ -158,7 +160,7 @@ localData = {
 
         const sessionData = JSON.parse(sessionDataString);
         if (typeof sessionData === "object") {
-            sessionData[questionIndex].answers = $.grep(sessionData[questionIndex].answers, function (value) {
+            sessionData.questionList[questionIndex].answers = $.grep(sessionData[questionIndex].answers, function (value) {
                 return value.answerOptionNumber !== answerOptionNumber;
             });
 
@@ -177,7 +179,7 @@ localData = {
 
         const sessionData = JSON.parse(sessionDataString);
         if (typeof sessionData === "object") {
-            $.each(sessionData[questionIndex].answers, function (key, value) {
+            $.each(sessionData.questionList[questionIndex].answers, function (key, value) {
                 if (value.answerOptionNumber === answerOptionNumber) {
                     value.answerText = answerText;
                     value.isCorrect = isCorrect;
@@ -210,27 +212,30 @@ localData = {
         allHashtags.push(hashtag);
         localStorage.setItem("hashtags", JSON.stringify(allHashtags));
 
-        var answerOptionsLocalStorage = [];
-        data.answerOptionsDoc.forEach(function (answerOptionDoc) {
-            var newDoc = {
-                answerOptionNumber: answerOptionDoc.answerOptionNumber,
-                answerText: answerOptionDoc.answerText,
-                isCorrect: answerOptionDoc.isCorrect
-            };
-            answerOptionsLocalStorage.push(newDoc);
+        var questionList = [];
+        data.sessionDoc.forEach(function (questionListDoc) {
+            var answerOptionsLocalStorage = [];
+            data.answerOptionsDoc.forEach(function (answerOptionDoc) {
+                answerOptionsLocalStorage.push({
+                    answerOptionNumber: answerOptionDoc.answerOptionNumber,
+                    answerText: answerOptionDoc.answerText,
+                    isCorrect: answerOptionDoc.isCorrect
+                });
+            });
+
+            questionList.push({
+                questionText: questionListDoc.questionText,
+                timer: questionListDoc.timer,
+                isReadingConfirmationRequired: questionListDoc.isReadingConfirmationRequired,
+                answers: answerOptionsLocalStorage
+            });
         });
 
         localStorage.setItem(
             hashtag,
             JSON.stringify({
-                hashtag: hashtag,
-                questionList: [
-                    {
-                        questionText: data.sessionDoc.questionText,
-                        timer: data.sessionDoc.timer,
-                        answers: answerOptionsLocalStorage
-                    }
-                ]
+                hashtag: data.hashtagDoc.hashtag,
+                questionList: questionList
             })
         );
     },
@@ -243,24 +248,23 @@ localData = {
                 sessionStatus: 0,
                 lastConnection: 0
             };
-            var sessionDoc = {
-                hashtag: localStorageData.hashtag,
-                questionText: localStorageData.questionText,
-                timer: localStorageData.timer
-            };
-            answerOptionsDoc = [];
+            var sessionDoc = [];
+            localStorageData.questionList.forEach(function (question) {
+                answerOptionsDoc.push(question);
+            });
+            var answerOptionsDoc = [];
             localStorageData.answers.forEach(function (answerOption) {
                 answerOption.hashtag = localStorageData.hashtag;
                 answerOptionsDoc.push(answerOption);
             });
-            var exportData = {
+
+            return JSON.stringify({
                 hashtagDoc: hashtagDoc,
                 sessionDoc: sessionDoc,
                 answerOptionsDoc: answerOptionsDoc,
                 memberListDoc: [],
                 responsesDoc: []
-            };
-            return JSON.stringify(exportData);
+            });
         }
     },
 
@@ -269,20 +273,48 @@ localData = {
 
             localStorage.setItem("wpw", JSON.stringify({
                 hashtag: "wpw",
-                questionText: "I am a question text. This is for testing purpose. Do you understand?",
-                timer: 180000,
-                answers: [
+                questionList: [
                     {
-                        hashtag: "wpw",
-                        answerText: "Ja",
-                        answerOptionNumber: 0,
-                        isCorrect: 1
+                        questionText: "I am a question text. This is for testing purpose. Do you understand?",
+                        timer: 180000,
+                        answers: [
+                            {
+                                hashtag: "wpw",
+                                answerText: "Ja",
+                                answerOptionNumber: 0,
+                                isCorrect: 1
+                            },
+                            {
+                                hashtag: "wpw",
+                                answerText: "Nein",
+                                answerOptionNumber: 1,
+                                isCorrect: 0
+                            }
+                        ]
                     },
                     {
-                        hashtag: "wpw",
-                        answerText: "Nein",
-                        answerOptionNumber: 1,
-                        isCorrect: 0
+                        questionText: "I am a second question text. This is for testing purpose. Do you understand?",
+                        timer: 10000,
+                        answers: [
+                            {
+                                hashtag: "wpw",
+                                answerText: "Ja",
+                                answerOptionNumber: 0,
+                                isCorrect: 1
+                            },
+                            {
+                                hashtag: "wpw",
+                                answerText: "Nein",
+                                answerOptionNumber: 1,
+                                isCorrect: 0
+                            },
+                            {
+                                hashtag: "wpw",
+                                answerText: "Vielleicht",
+                                answerOptionNumber: 2,
+                                isCorrect: 0
+                            }
+                        ]
                     }
                 ]
             }));

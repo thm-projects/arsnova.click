@@ -56,7 +56,7 @@ Template.createAnswerOptions.events({
                 hashtag: Session.get("hashtag"),
                 questionIndex: Session.get("questionIndex"),
                 answerText: "",
-                answerOptionNumber: answerOptionsCount - 1,
+                answerOptionNumber: answerOptionsCount,
                 isCorrect: 0
             };
 
@@ -67,10 +67,9 @@ Template.createAnswerOptions.events({
                 } else {
                     localData.addAnswers(Session.get("hashtag"), answerOption);
 
+                    $("#deleteAnswerOption").removeClass("hide");
+
                     answerOptionsCount++;
-                    if (answerOptionsCount > 1) {
-                        $("#deleteAnswerOption").removeClass("hide");
-                    }
                     if (answerOptionsCount > 25) {
                         $("#addAnswerOption").addClass("hide");
                     }

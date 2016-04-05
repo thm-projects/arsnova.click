@@ -28,7 +28,7 @@ Meteor.publish('QuestionGroup.authorizeAsOwner', function(pprivateKey, phashtag)
         hashtag: phashtag,
         privateKey: pprivateKey
     }).count();
-    return isOwner !== 0 ? QuestionGroup.findOne({hashtag: phashtag}) : false;
+    return isOwner > 0 ? QuestionGroup.find({hashtag: phashtag}) : null;
 });
 
 Meteor.publish('QuestionGroup.questionList', function (phashtag) {

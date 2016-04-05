@@ -34,11 +34,10 @@ Meteor.methods({
             if (!doc) {
                 throw new Meteor.Error('AnswerOptions.addOption', 'Either there is no quiz or you don\'t have write access');
             }
-            var relevantAnswerOptions = AnswerOptions.find({hashtag: hashtag, questionIndex: questionIndex});
-            if (relevantAnswerOptions.count() > 25) {
+            if (AnswerOptions.find({hashtag: hashtag, questionIndex: questionIndex}).count() > 25) {
                 throw new Meteor.Error('AnswerOptions.addOption', 'Maximum number of possible answer options exceeded');
             }
-            var answerOptionDoc = relevantAnswerOptions.findOne({answerOptionNumber: answerOptionNumber});
+            var answerOptionDoc = AnswerOptions.findOne({hashtag: hashtag, questionIndex: questionIndex, answerOptionNumber: answerOptionNumber});
             if (!answerOptionDoc) {
                 AnswerOptions.insert({
                     hashtag: hashtag,
@@ -71,7 +70,6 @@ Meteor.methods({
             });
             if (!doc) {
                 throw new Meteor.Error('AnswerOptions.deleteOption', 'Either there is no quiz or you don\'t have write access');
-                return;
             }
             else {
                 AnswerOptions.remove({
@@ -90,27 +88,27 @@ Meteor.methods({
             answerOptionNumber: { type: Number },
             answerText: { type: String },
             isCorrect: { type: Number }
-        }).validate({ privateKey, hashtag, answerOptionNumber, answerText, isCorrect });
-        var doc = Hashtags.findOne({
-            hashtag: hashtag,
-            privateKey: privateKey
-        });
+        }).validate({ privateKey, hashtag, questionIndex, answerOptionNumber, answerText, isCorrect });
+        var doc = true;
+        if (Meteor.isServer) {
+            doc = Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
+            });
+        }
         if (!doc) {
             throw new Meteor.Error('AnswerOptions.updateAnswerTextAndIsCorrect', 'Either there is no quiz or you don\'t have write access');
-            return;
         }
-        else {
-            var answerOptionDoc = AnswerOptions.findOne({
-                hashtag: hashtag,
-                questionIndex: questionIndex,
-                answerOptionNumber: answerOptionNumber
-            });
-            AnswerOptions.update(answerOptionDoc._id, {
-                $set: {answerText: answerText, isCorrect: isCorrect}
-            });
-            if (Meteor.isClient){
-                localData.updateAnswerText({hashtag, questionIndex, answerOptionNumber, answerText, isCorrect});
-            }
+        var answerOptionDoc = AnswerOptions.findOne({
+            hashtag: hashtag,
+            questionIndex: questionIndex,
+            answerOptionNumber: answerOptionNumber
+        });
+        AnswerOptions.update(answerOptionDoc._id, {
+            $set: {answerText: answerText, isCorrect: isCorrect}
+        });
+        if (Meteor.isClient){
+            localData.updateAnswerText({hashtag, questionIndex, answerOptionNumber, answerText, isCorrect});
         }
     }
 });

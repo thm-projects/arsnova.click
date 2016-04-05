@@ -34,7 +34,8 @@ Template.votingview.onCreated(function () {
                 tick: function() {
                     var btnsCount = $('.answer-row').children().length;
 
-                    /*if ( $('#'+aktBtn).hasClass('answer-selected') ) {
+                    /* skip the selected answer options
+                    if ( $('#'+aktBtn).hasClass('answer-selected') ) {
                         aktBtn++;
                         if(aktBtn>=btnsCount) aktBtn = 0;
                     }
@@ -51,24 +52,17 @@ Template.votingview.onCreated(function () {
                             i--;
                         }
                         lastBtn = i;
-
-
                     }*/
-                    if(aktBtn==0) lastBtn = btnsCount-1;
-                    else lastBtn = aktBtn-1;
+                    if(aktBtn==0)   lastBtn = btnsCount-1;
+                    else            lastBtn = aktBtn-1;
 
-                    $('#' + lastBtn).removeClass('button-next');
-                    $('#' + lastBtn).addClass('button-purple');
-                    $('#' + aktBtn).addClass('button-next');
-                    $('#' + aktBtn).removeClass('button-purple');
-
-                    console.log("akt: "+aktBtn);
-                    console.log("last: "+lastBtn);
-                    console.log("anzah: "+btnsCount);
+                    $('#' + lastBtn).removeClass('button-green-transition');
+                    $('#' + lastBtn).addClass('button-purple-transition');
+                    $('#' + aktBtn).addClass('button-green-transition');
+                    $('#' + aktBtn).removeClass('button-purple-transition');
 
                     aktBtn++;
                     if(aktBtn>=btnsCount) aktBtn = 0;
-
                 }
             });
             countdown.start(function () {

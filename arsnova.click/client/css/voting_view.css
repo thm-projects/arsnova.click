@@ -38,3 +38,23 @@
     background-color: #ffd700 !important;
     color: #000000;
 }
+
+.button-purple-transition {
+    background-color: #663399;
+    color: #FFFFFF;
+    -webkit-transition: background 500ms ease;
+    -moz-transition: background 500ms ease;
+    -ms-transition: background 500ms ease;
+    -o-transition: background 500ms ease;
+    transition: background 500ms ease;
+}
+
+.button-green-transition {
+    background-color: #008000;
+    color: #FFFFFF;
+    -webkit-transition: background 500ms ease-in;
+    -moz-transition: background 500ms ease-in;
+    -ms-transition: background 500ms ease-in;
+    -o-transition: background 500ms ease-in;
+    transition: background 500ms ease-in;
+}

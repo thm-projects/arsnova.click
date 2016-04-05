@@ -18,28 +18,24 @@
 
 Template.createQuestionView.onCreated(function () {
     this.autorun(() => {
-        this.subscribe('Sessions.instructor', localData.getPrivateKey(), Session.get("hashtag"), function () {
-        var sessionDoc = Sessions.findOne({hashtag: Session.get("hashtag")});
-        if (sessionDoc && sessionDoc.questionText.length > 4) {
-            $("#forwardButton").removeAttr("disabled");
-        }
-        else {
-            $("#forwardButton").attr("disabled", "disabled");
-        }
+        if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
+        this.subscribe('QuestionGroup.authorizeAsOwner', localData.getPrivateKey(), Session.get("hashtag"), function () {
+            var doc = QuestionGroup.findOne();
+            if (doc && doc.questionList[Session.get("questionIndex")].questionText.length > 4) {
+                $("#forwardButton").removeAttr("disabled");
+            }
+            else {
+                $("#forwardButton").attr("disabled", "disabled");
+            }
+        });
     });
-});
 });
 
 Template.createQuestionView.helpers({
     //Get question from Sessions-Collection if it already exists
     questionText: function () {
-        var currentSession = Sessions.findOne({hashtag: Session.get("hashtag")});
-        if (currentSession) {
-            return currentSession.questionText;
-        }
-        else {
-            return "";
-        }
+        var currentSession = QuestionGroup.findOne();
+        return currentSession ? currentSession.questionText : "";
     },
     isFormattingEnabled: function () {
         return $('#markdownBarDiv').hasClass('hide');
@@ -47,18 +43,14 @@ Template.createQuestionView.helpers({
 });
 
 Template.createQuestionView.events({
-    "input #questionText": function (event) {
-        var questionText = event.currentTarget.value;
-        if (questionText.length > 4) {
-            $("#forwardButton").removeAttr("disabled");
-        } else {
-            $("#forwardButton").attr("disabled", "disabled");
-        }
+    "input #questionText": function () {
+        var forwardButton = $("#forwardButton");
+        $('#questionText').val().length > 4 ? forwardButton.removeAttr("disabled") : forwardButton.attr("disabled", "disabled");
     },
     //Save question in Sessions-Collection when Button "Next" is clicked
     'click #forwardButton': function () {
         var questionText = $('#questionText').val();
-        Meteor.call("Sessions.setQuestion", {
+        Meteor.call("QuestionGroup.addQuestion", {
             privateKey: localData.getPrivateKey(),
             hashtag: Session.get("hashtag"),
             questionText: questionText
@@ -67,16 +59,16 @@ Template.createQuestionView.events({
                 $('.errorMessageSplash').parents('.modal').modal('show');
                 $("#errorMessage-text").html(err.reason);
             } else {
-                localData.addQuestion(Session.get("hashtag"), questionText);
-        Router.go("/answeroptions");
+                localData.addQuestion(Session.get("hashtag"), res, questionText);
+                Router.go("/answeroptions");
             }
         });
     },
     "click #backButton": function () {
-        var questionText = $('#questionText').val();
         Session.set("hashtag", undefined);
         Session.set("isOwner", undefined);
         Router.go("/");
+        // TODO: Why is this line after the Router.go() call? Maybe non-reachable code?
         $('.previewSplash').parents('.modal').modal('hide');
     },
     "click #formatPreviewButton": function () {
@@ -104,57 +96,33 @@ Template.createQuestionView.events({
 });
 
 Template.createQuestionView.onRendered(function () {
-    $(window).resize(function () {
-
-        var hashtag_length = Session.get("hashtag").length;
-
-        //take the hastag in the middle of the logo
-        var titel_margin_top  = $(".arsnova-logo").height();
-
-        if(hashtag_length <= 10){
-            if($(document).width() < 1200){
-                $(".header-titel").css("font-size", "6vw");
-                $(".header-titel").css("margin-top", titel_margin_top * 0.1);
-            } else {
-                $(".header-titel").css("font-size", "5vw");
-                $(".header-titel").css("margin-top", titel_margin_top * 0.2);
-            }
-
-        } else if(hashtag_length > 10 && hashtag_length <= 15){
-            $(".header-titel").css("font-size", "4vw");
-            $(".header-titel").css("margin-top", titel_margin_top * 0.4);
-        } else {
-            $(".header-titel").css("font-size", "2.5vw");
-            $(".header-titel").css("margin-top", titel_margin_top * 0.6);
-        }
-
-
-    });
+    $(window).resize(calculateWindow());
+    calculateWindow();
 });
 
-
-Template.createQuestionView.rendered = function () {
-
+function calculateWindow() {
     var hashtag_length = Session.get("hashtag").length;
-
-    //take the hastag in the middle of the logo
-    var titel_margin_top  = $(".arsnova-logo").height();
+    var headerTitel = $(".header-titel");
+    var fontSize = "";
+    var marginTopModifier = 0;
 
     if(hashtag_length <= 10){
         if($(document).width() < 1200){
-            $(".header-titel").css("font-size", "6vw");
-            $(".header-titel").css("margin-top", titel_margin_top * 0.1);
+            fontSize = "6vw";
+            marginTopModifier = 0.1;
         } else {
-            $(".header-titel").css("font-size", "5vw");
-            $(".header-titel").css("margin-top", titel_margin_top * 0.2);
+            fontSize = "5vw";
+            marginTopModifier = 0.2;
         }
 
     } else if(hashtag_length > 10 && hashtag_length <= 15){
-        $(".header-titel").css("font-size", "4vw");
-        $(".header-titel").css("margin-top", titel_margin_top * 0.4);
+        fontSize = "4vw";
+        marginTopModifier = 0.4;
     } else {
-        $(".header-titel").css("font-size", "2.5vw");
-        $(".header-titel").css("margin-top", titel_margin_top * 0.6);
+        fontSize = "2.5vw";
+        marginTopModifier = 0.6;
     }
 
-};
+    headerTitel.css("font-size", fontSize);
+    headerTitel.css("margin-top", $(".arsnova-logo").height() * marginTopModifier);
+}

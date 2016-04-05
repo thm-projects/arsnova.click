@@ -63,6 +63,7 @@ Meteor.methods({
                 hashtag: hashtag,
                 questionList: [questionItem]
             });
+            return 0;
         } else {
             questionGroup.questionList.push(questionItem);
             QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
@@ -70,6 +71,7 @@ Meteor.methods({
                     throw new Meteor.Error('Sessions.setQuestion', error);
                 }
             });
+            return questionGroup.questionList.length -1;
         }
     },
     "QuestionGroup.removeQuestion": function({privateKey, hashtag, questionIndex}) {

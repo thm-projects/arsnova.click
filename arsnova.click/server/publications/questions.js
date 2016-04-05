@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Meteor.publish('QuestionGroup.instructor', function(pprivateKey, phashtag) {
+Meteor.publish('QuestionGroup.authorizeAsOwner', function(pprivateKey, phashtag) {
     new SimpleSchema({
         phashtag: {type: String},
         pprivateKey: {type: String}
@@ -28,10 +28,10 @@ Meteor.publish('QuestionGroup.instructor', function(pprivateKey, phashtag) {
         hashtag: phashtag,
         privateKey: pprivateKey
     }).count();
-    return isOwner !== 0 ? QuestionGroup.find({hashtag: phashtag}) : false;
+    return isOwner !== 0 ? QuestionGroup.findOne({hashtag: phashtag}) : false;
 });
 
-Meteor.publish('QuestionGroup.question', function (phashtag) {
+Meteor.publish('QuestionGroup.questionList', function (phashtag) {
     new SimpleSchema({
         phashtag: {type: String}
     }).validate({phashtag});

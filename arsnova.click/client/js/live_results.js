@@ -18,17 +18,18 @@
 
 Template.live_results.onCreated(function () {
     this.autorun(() => {
+        if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
         this.subscription = Meteor.subscribe('Responses.session', Session.get("hashtag"));
         this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"), function () {
             Session.set("rightAnswerOptionCount", AnswerOptions.find({isCorrect: 1}).count());
         });
         this.subscription = Meteor.subscribe('MemberList.members', Session.get("hashtag"));
-        this.subscription = Meteor.subscribe('Sessions.question', Session.get("hashtag"), function () {
+        this.subscription = Meteor.subscribe('QuestionGroup.questionList', Session.get("hashtag"), function () {
             if (!Session.get("sessionClosed")){
-                var sessionDoc = Sessions.findOne();
-                Session.set("sessionCountDown", sessionDoc.timer);
+                var questionDoc = QuestionGroup.findOne().questionList[Session.get("questionIndex")];
+                Session.set("sessionCountDown", questionDoc.timer);
                 var timestamp = new Date().getTime();
-                countdown = new ReactiveCountdown((timestamp - sessionDoc.startTime + sessionDoc.timer) / 1000);
+                countdown = new ReactiveCountdown((timestamp - questionDoc.startTime + questionDoc.timer) / 1000);
                 countdown.start(function () {
                     Session.set("sessionClosed", true);
                     if (Session.get("isOwner")) {
@@ -47,19 +48,14 @@ Template.live_results.onCreated(function () {
 
 Template.result_button.onRendered(function () {
     $(window).resize(function () {
-        var answerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
-        if (answerOptions > 1) {
+        if (AnswerOptions.find({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() > 1) {
             setMcCSSClasses();
         }
     });
-});
-
-Template.result_button.rendered = function () {
-    var answerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
-    if (answerOptions > 1) {
+    if (AnswerOptions.find({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() > 1) {
         setMcCSSClasses();
     }
-};
+});
 
 function setMcCSSClasses () {
     var windowWidth = $(window).width();
@@ -105,26 +101,17 @@ function setMcCSSClasses () {
 
 Template.live_results.helpers({
     votingText: function () {
-      if (Session.get("sessionClosed")){
-          return "Game over";
-      } else {
-          return "Countdown";
-      }
+        return Session.get("sessionClosed") ? "Game over" : "Countdown";
     },
     isOwner: function () {
         return Session.get("isOwner");
     },
     getCountdown: function () {
         if (Session.get("countdownInitialized")){
-            var timer = Math.round(countdown.get())
-            if (timer < 0){
-                return 0;
-            } else {
-                return Math.round(countdown.get());
-            }
-        } else {
-            return 0;
+            var roundedCountdown = Math.round(countdown.get());
+            return roundedCountdown < 0 ? 0 : roundedCountdown;
         }
+        return 0;
     },
     isCountdownZero: function () {
         if (Session.get("sessionClosed")){
@@ -153,22 +140,22 @@ Template.live_results.helpers({
         var memberAmount = Responses.find({hashtag: Session.get("hashtag")}).fetch();
         memberAmount = _.uniq(memberAmount, false, function(user) {return user.userNick}).length;
 
-        var correctAnswerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
+        var correctAnswerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex"), isCorrect: 1}).count();
 
         if(!correctAnswerOptions){ //survey
-            AnswerOptions.find({hashtag: Session.get("hashtag")}, {sort:{'answerOptionNumber':1}}).forEach(function(value){
+            AnswerOptions.find({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex")}, {sort:{'answerOptionNumber':1}}).forEach(function(value){
                 var amount = Responses.find({hashtag: Session.get("hashtag"), answerOptionNumber: value.answerOptionNumber}).count();
                 result.push({name: String.fromCharCode(value.answerOptionNumber + 65), absolute: amount, percent: memberAmount ? ( Math.floor((amount * 100) / memberAmount)) : 0, isCorrect: -1});
             });
         } else { //MC / SC
             if(correctAnswerOptions === 1){ //SC
-                AnswerOptions.find({hashtag: Session.get("hashtag")}, {sort:{'answerOptionNumber':1}}).forEach(function(value){
+                AnswerOptions.find({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex")}, {sort:{'answerOptionNumber':1}}).forEach(function(value){
                     var amount = Responses.find({hashtag: Session.get("hashtag"), answerOptionNumber: value.answerOptionNumber}).count();
                     result.push({name: String.fromCharCode(value.answerOptionNumber + 65), absolute: amount, percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0, isCorrect: value.isCorrect});
                 });
 
             } else { //MC
-                AnswerOptions.find({hashtag: Session.get("hashtag")}, {sort:{'answerOptionNumber':1}}).forEach(function(value){
+                AnswerOptions.find({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex")}, {sort:{'answerOptionNumber':1}}).forEach(function(value){
 
                     var amount = Responses.find({hashtag: Session.get("hashtag"), answerOptionNumber: value.answerOptionNumber}).count();
                     result.push({name: String.fromCharCode(value.answerOptionNumber + 65), absolute: amount, percent: memberAmount ? ( Math.floor((amount * 100) / memberAmount)) : 0, isCorrect: value.isCorrect});
@@ -178,8 +165,7 @@ Template.live_results.helpers({
         return result;
     },
     isMC: function(){
-        var answerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
-        return answerOptions > 1;
+        return AnswerOptions.find({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() > 1;
     },
     mcOptions: function(){
 
@@ -187,7 +173,7 @@ Template.live_results.helpers({
         memberAmount = _.uniq(memberAmount, false, function(user) {return user.userNick}).length;
 
         const correctAnswers = [];
-        AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect:1},{fields:{"answerOptionNumber":1}}).forEach(function (answer){
+        AnswerOptions.find({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex"), isCorrect:1},{fields:{"answerOptionNumber":1}}).forEach(function (answer){
             correctAnswers.push(answer.answerOptionNumber);
         });
         let allCorrect = 0;
@@ -220,16 +206,14 @@ Template.live_results.helpers({
     }
 });
 
-
-
 Template.live_results.events({
     "click #js-btn-showQuestionModal": function () {
         $('.questionContentSplash').parents('.modal').modal();
-        var sessionDoc = Sessions.findOne();
+        var questionDoc = QuestionGroup.findOne();
         var content = "";
-        if (sessionDoc) {
+        if (questionDoc) {
             mathjaxMarkdown.initializeMarkdownAndLatex();
-            var questionText = sessionDoc.questionText;
+            var questionText = questionDoc.questionList[Session.get("questionIndex")].questionText;
             content = mathjaxMarkdown.getContent(questionText);
         }
 
@@ -274,30 +258,16 @@ Template.live_results.events({
             }
         });
     }
-
 });
 
-
 Template.result_button.helpers({
-    getCSSClassForIsCorrect: function (isCorrect) {
-        if (isCorrect > 0) {
-            return 'progress-success';
-        } else if (isCorrect < 0) {
-            return 'progress-default';
-        } else {
-            return 'progress-failure';
-        }
-    }
+    getCSSClassForIsCorrect: checkIfIsCorrect()
 });
 
 Template.result_button_mc.helpers({
-    getCSSClassForIsCorrect: function (isCorrect) {
-        if (isCorrect > 0) {
-            return 'progress-success';
-        } else if (isCorrect < 0) {
-            return 'progress-default';
-        } else {
-            return 'progress-failure';
-        }
-    }
+    getCSSClassForIsCorrect: checkIfIsCorrect()
 });
+
+function checkIfIsCorrect(isCorrect){
+    return isCorrect > 0 ? 'progress-success' : isCorrect < 0 ? 'progress-default' : 'progress-failure';
+}

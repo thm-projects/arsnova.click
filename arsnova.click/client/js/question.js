@@ -17,50 +17,29 @@
  */
 
 Template.questionT.onCreated(function () {
+    if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
     this.autorun(() => {
-        this.subscribe('Sessions.question', Session.get("hashtag"), function () {
-        var sessionDoc = Sessions.findOne({hashtag: Session.get("hashtag")});
-        var content = "";
-
-        if (sessionDoc) {
-            mathjaxMarkdown.initializeMarkdownAndLatex();
-            var questionText = sessionDoc.questionText;
-            content = mathjaxMarkdown.getContent(questionText);
-        }
-
-        $('#questionTText').html(content);
-        });
+        this.subscribe('AnswerOptions.options', Session.get("hashtag"));
+        this.subscribe('QuestionGroup.questionList', Session.get("hashtag"));
     });
 });
 
 Template.questionT.onRendered(function () {
-    var sessionDoc = Sessions.findOne({hashtag: Session.get("hashtag")});
+    var questionDoc = QuestionGroup.findOne();
     var content = "";
-
-    if (sessionDoc) {
+    if (questionDoc) {
         mathjaxMarkdown.initializeMarkdownAndLatex();
-        var questionText = sessionDoc.questionText;
+        var questionText = questionDoc.questionList[Session.get("questionIndex")].questionText;
         content = mathjaxMarkdown.getContent(questionText);
     }
 
     $('#questionTText').html(content);
 });
 
-Template.questionT.onCreated(function () {
-    this.autorun(() => {
-        this.subscribe('AnswerOptions.options', Session.get("hashtag"));
-    this.subscribe('Sessions.question', Session.get("hashtag"));
-});
-})
-;
-
 Template.questionT.helpers({
     answ: function () {
-        const answers = AnswerOptions.find({hashtag: Session.get("hashtag")});
-        if (!answers) {
-            return "";
-        }
-        return answers;
+        const answers = AnswerOptions.find({questionIndex: Session.get("questionIndex")});
+        return answers ? answers : "";
     }
 });
 

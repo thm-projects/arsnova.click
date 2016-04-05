@@ -29,11 +29,11 @@ Meteor.publish('AnswerOptions.instructor', function(pprivateKey, phashtag, quest
     return doc ? AnswerOptions.find({hashtag: phashtag, questionIndex: questionIndex}) : false;
 });
 
-Meteor.publish('AnswerOptions.options', function(phashtag, questionIndex) {
+Meteor.publish('AnswerOptions.options', function(phashtag) {
     new SimpleSchema({
         phashtag: {type: String}
     }).validate({phashtag});
-    return AnswerOptions.find({hashtag: phashtag, questionIndex: questionIndex});
+    return AnswerOptions.find({hashtag: phashtag});
 });
 
 Meteor.publish('AnswerOptions.public', function(hashtag, questionIndex) {

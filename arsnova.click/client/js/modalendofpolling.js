@@ -18,6 +18,7 @@
 
 Template.endOfPollingSplashscreen.onCreated(function () {
     this.autorun(() => {
+        if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
         this.subscription = Meteor.subscribe('Responses.session', Session.get("hashtag"));
         this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"));
         this.subscription = Meteor.subscribe('MemberList.members', Session.get("hashtag"));
@@ -47,18 +48,15 @@ Template.endOfPollingSplashscreen.events({
 
 Template.endOfPollingSplashscreen.helpers({
     isSurvey: function(){
-        var correctAnswerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
-        return correctAnswerOptions === 0;
+        return AnswerOptions.find({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() === 0;
     },
 
     isSC: function(){
-        var correctAnswerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
-        return correctAnswerOptions === 1;
+        return AnswerOptions.find({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() === 1;
     },
 
     isMC:function(){
-        var correctAnswerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), isCorrect: 1}).count();
-        return correctAnswerOptions > 1;
+        return AnswerOptions.find({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() > 1;
     },
 
     correct: function() {
@@ -66,6 +64,7 @@ Template.endOfPollingSplashscreen.helpers({
 
         AnswerOptions.find({
             hashtag: Session.get("hashtag"),
+            questionIndex: Session.get("questionIndex"),
             isCorrect: 1
         }, {fields: {"answerOptionNumber": 1}}).forEach(function (answer) {
             correctAnswers.push(answer.answerOptionNumber);
@@ -81,18 +80,15 @@ Template.endOfPollingSplashscreen.helpers({
             }
             responseAmount++;
         });
-        if (responseAmount) {
-            if (everythingRight && responseAmount === correctAnswers.length) {
-                return true;
-            }
-        }
-        return false;
+
+        return responseAmount && everythingRight && responseAmount === correctAnswers.length;
     },
     allAnswersFalse: function () {
         const wrongAnswers = [];
 
         AnswerOptions.find({
             hashtag: Session.get("hashtag"),
+            questionIndex: Session.get("questionIndex"),
             isCorrect: 0
         }, {fields: {"answerOptionNumber": 1}}).forEach(function (answer) {
             wrongAnswers.push(answer.answerOptionNumber);
@@ -108,12 +104,8 @@ Template.endOfPollingSplashscreen.helpers({
             }
             responseAmount++;
         });
-        if (responseAmount) {
-            if (everythingFalse && responseAmount === wrongAnswers.length) {
-                return true;
-            }
-        }
-        return false;
+
+        return responseAmount && everythingFalse && responseAmount === wrongAnswers.length;
     },
     getActPosition: function () {
         var startPosition = 1;
@@ -148,19 +140,9 @@ Template.endOfPollingSplashscreen.helpers({
             }
         });
 
-        if (!currentMemberBehind && !currentMemberInFront){
-            return String.empty();
-        }else{
-            if(!currentMemberBehind){
-                return "Du bist hinter " + currentMemberInFront.userNick + ".";
-            }else{
-                if(!currentMemberInFront) {
-                    return "Du bist vor " + currentMemberBehind.userNick + ".";
-                }
-                else{
-                    return "Du bist vor " + currentMemberBehind.userNick + " und hinter " + currentMemberInFront.userNick + ".";
-                }
-            }
-        }
+        return !currentMemberBehind && !currentMemberInFront ? String.empty()
+            : !currentMemberBehind ? "Du bist hinter " + currentMemberInFront.userNick + "."
+            : !currentMemberInFront ? "Du bist vor " + currentMemberBehind.userNick + "."
+            : "Du bist vor " + currentMemberBehind.userNick + " und hinter " + currentMemberInFront.userNick + ".";
     }
 });

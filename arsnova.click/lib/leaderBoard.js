@@ -24,6 +24,10 @@ LeaderBoard.attachSchema(new SimpleSchema({
 		min:1,
 		max:25
 	},
+	questionIndex: {
+		type: Number,
+		min: 0
+	},
 	userNick: {
 		type:String,
 		min:3,

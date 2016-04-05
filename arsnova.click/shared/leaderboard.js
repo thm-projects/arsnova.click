@@ -55,6 +55,7 @@ Meteor.methods({
 
             var memberEntry = LeaderBoard.findOne({
                 hashtag: phashtag,
+                questionIndex: questionIndex,
                 userNick: nick
             });
 

@@ -19,6 +19,7 @@
 var countdown = null;
 Template.votingview.onCreated(function () {
     this.autorun(() => {
+        if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
         this.subscribe('AnswerOptions.public', Session.get("hashtag"), function () {
             var answerOptionCount = AnswerOptions.find().count();
             var responseArr = [];
@@ -27,8 +28,8 @@ Template.votingview.onCreated(function () {
             }
             Session.set("responses", JSON.stringify(responseArr));
         });
-        this.subscribe('Sessions.question', Session.get("hashtag"), function () {
-            countdown = new ReactiveCountdown(Sessions.findOne().timer / 1000);
+        this.subscribe('QuestionGroup.questionList', Session.get("hashtag"), function () {
+            countdown = new ReactiveCountdown(QuestionGroup.findOne({questionIndex: Session.get("questionIndex")}).timer / 1000);
             countdown.start(function () {
                 Session.set("sessionClosed", true);
                 $("#end-of-polling-text").html("Game over");
@@ -141,6 +142,7 @@ Template.votingview.events({
 function makeAndSendResponse(answerOptionNumber) {
     Meteor.call('Responses.addResponse', {
         hashtag: Session.get("hashtag"),
+        questionIndex: Session.get("questionIndex"),
         answerOptionNumber: Number(answerOptionNumber),
         userNick: Session.get("nick")
     }, (err, res) => {

@@ -18,8 +18,18 @@
 
 Template.answerOptionsSplash.onCreated(function () {
     this.autorun(() => {
+        if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
         this.subscribe('AnswerOptions.public', Session.get("hashtag"));
     });
+});
+
+Template.answerOptionsSplash.helpers({
+    answerOptions: function () {
+        return AnswerOptions.find({questionIndex: Session.get("questionIndex")});
+    },
+    answerOptionLetter: function (number) {
+        return String.fromCharCode((number + 65));
+    }
 });
 
 Template.answerOptionsSplash.events({

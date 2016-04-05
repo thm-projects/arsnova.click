@@ -21,5 +21,6 @@ Meteor.publish('LeaderBoard.session', function (phashtag) {
         phashtag: {type: String}
     }).validate({phashtag});
     return LeaderBoard.find({
-        hashtag: phashtag});
+        hashtag: phashtag
+    });
 });

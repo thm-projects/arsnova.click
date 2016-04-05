@@ -29,7 +29,6 @@ Meteor.methods({
             });
             if (dupDoc) {
                 throw new Meteor.Error('Responses.addResponse', 'User has already given this response');
-                return;
             }
             var hashtagDoc = Hashtags.findOne({
                 hashtag: hashtag,
@@ -37,12 +36,10 @@ Meteor.methods({
             });
             if (!hashtagDoc) {
                 throw new Meteor.Error('Responses.addResponse', 'There is no such quiz active in the db');
-                return;
             } else {
                 var questionGroupDoc = QuestionGroup.findOne({hashtag: responseDoc.hashtag, questionIndex: responseDoc.questionIndex});
                 if (!questionGroupDoc) {
                     throw new Meteor.Error('Responses.addResponse', 'No questionGroup doc for this quiz');
-                    return;
                 }
                 var responseTime = Number(timestamp) - Number(questionGroupDoc.startTime);
 
@@ -55,7 +52,6 @@ Meteor.methods({
                     });
                     if (!answerOptionDoc) {
                         throw new Meteor.Error('Responses.addResponse', 'There is no answer option with the given answerOptionNumber');
-                        return;
                     }
 
                     Responses.insert(responseDoc);
@@ -80,7 +76,6 @@ Meteor.methods({
                 }
                 else {
                     throw new Meteor.Error('Responses.addResponse', 'Response was given out of time range');
-                    return;
                 }
             }
         }

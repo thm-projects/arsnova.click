@@ -18,13 +18,6 @@
 
 Template.home.helpers({
     existingHashtagsAvailable: function () {
-        if (Session.get("localStorageAvailable")){
-            if (localData.getAllHashtags().length == 0) {
-                return false;
-            }
-            return true;
-        }else{
-            return false;
-        }
+        return Session.get("localStorageAvailable") && localData.getAllHashtags().length > 0;
     }
 });

@@ -254,6 +254,7 @@ localData = {
             });
             var answerOptionsDoc = [];
             localStorageData.answers.forEach(function (answerOption) {
+                // TODO: Is it required to save the hashtag to the answers? We can always access the hashtag in the top level object index (localstorageItem.hashtag)
                 answerOption.hashtag = localStorageData.hashtag;
                 answerOptionsDoc.push(answerOption);
             });

@@ -36,3 +36,6 @@
     cursor: inherit;
     display: block;
 }
+.alignGlyphicon {
+    padding-top: 5px;
+}

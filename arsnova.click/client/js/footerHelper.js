@@ -68,12 +68,53 @@ Template.footer.events({
 
             // Do nothing - there is currently no option to hide the navbar again, to loss on usable space is too high as we can display the info-button and the navbar
             /*$(".footer-info-bar").css("bottom", "15px");
-            $(".footer-info-bar").css("margin-bottom", "15px");
-        } else {
+             $(".footer-info-bar").css("margin-bottom", "15px");
+             } else {
 
-            $("#footerBar").addClass("hide");
-            $(".footer-info-bar").css("bottom", "0px");
-            $(".footer-info-bar").css("margin-bottom", "2px");*/
+             $("#footerBar").addClass("hide");
+             $(".footer-info-bar").css("bottom", "0px");
+             $(".footer-info-bar").css("margin-bottom", "2px");*/
+        }
+    },
+    "click .js-import-home": function (e) {
+        $(".js-import-input-home").trigger('click');
+    },
+    "click .js-import-input-home": function (event) {
+        var fileList = event.target.files;
+        var fileReader = new FileReader();
+        fileReader.onload = function (fileLoadEvent) {
+            var asJSON = JSON.parse(fileReader.result);
+            Meteor.call("Hashtags.import",
+                {
+                    privateKey: localData.getPrivateKey(),
+                    data: asJSON
+                },
+                (err, res) => {
+                    if (err) {
+                        $('.errorMessageSplash').parents('.modal').modal('show');
+                        $("#errorMessage-text").html("Diese Sitzung existiert bereits!");
+                    }
+                    else {
+                        localData.importFromFile(asJSON);
+                        Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
+                            (err, res) => {
+                                if (err) {
+                                    $('.errorMessageSplash').parents('.modal').modal('show');
+                                    $("#errorMessage-text").html("Es ist ein Fehler bei der Aktualisierung ihrer Frage aufgetreten.");
+                                }
+                                else {
+                                    Session.set("hashtag", asJSON.hashtagDoc.hashtag);
+                                    Session.set("isOwner", true);
+                                    Router.go("/memberlist");
+                                }
+                            }
+                        );
+                    }
+                }
+            );
+        };
+        for (var i = 0; i < fileList.length; i++) {
+            fileReader.readAsBinaryString(fileList[i]);
         }
     }
 })

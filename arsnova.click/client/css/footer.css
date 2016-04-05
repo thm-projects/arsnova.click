@@ -73,9 +73,17 @@
 
 .glyphicon-info-style {
     margin-left: 10px;
+    cursor: pointer;
 }
 
 .glyphicon-import-style {
     margin-right: 10px;
     float: right;
+    cursor: pointer;
+}
+.js-import-input-home {
+    display: none;
+}
+.js-import-input-home input[type=file] {
+    display: none;
 }

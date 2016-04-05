@@ -17,17 +17,18 @@
 -->
 
 <template name="footer">
+    <input class="js-import-input-home" type="file" accept="application/json" multiple>
     {{#if footerIsHidden}}
         <div id="footer-info-div" class="footer-info-bar hiddenStyle">
             <span id="hideShowFooterBar" class="glyphicon glyphicon-info-sign glyphicon-info-style" aria-hidden="true"></span>
             {{#if isInHomePath}}
-                <span class="glyphicon glyphicon-import glyphicon-import-style" aria-hidden="true"></span>
+                <span class="js-import-home glyphicon glyphicon-import glyphicon-import-style" aria-hidden="true"></span>
             {{/if}}
         </div>
     {{else}}
         {{#if isInHomePath}}
             <div id="footer-info-div" class="footer-info-bar showStyle">
-                <span class="glyphicon glyphicon-import glyphicon-import-style" aria-hidden="true"></span>
+                <span class="js-import-home glyphicon glyphicon-import glyphicon-import-style" aria-hidden="true"></span>
             </div>
         {{/if}}
     {{/if}}
@@ -67,4 +68,5 @@
             </a>
         </div>
     </nav>
+    {{> errorSplashscreen}}
 </template>

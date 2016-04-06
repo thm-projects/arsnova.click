@@ -18,7 +18,6 @@
 
 var countdown = null;
 var aktBtn = -3;
-var lastBtn = 0;
 Template.votingview.onCreated(function () {
     this.autorun(() => {
         this.subscribe('AnswerOptions.public', Session.get("hashtag"), function () {
@@ -33,6 +32,7 @@ Template.votingview.onCreated(function () {
             countdown = new ReactiveCountdown(Sessions.findOne().timer / 1000,{
                 tick: function() {
                     var btnsCount = $('.answer-row').children().length;
+                    var lastBtn = 0;
 
                     if(aktBtn<=0)   lastBtn = btnsCount-1;
                     else            lastBtn = aktBtn-1;

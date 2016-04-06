@@ -229,7 +229,6 @@ mathjaxMarkdown = {
         content = videoElementReplace(content, vimeoDelimiters);
 
         if (text === content) {
-            //content = controller.defaultHyperLinkRenderer.call(marked, href, title, text);
             content = content.slice(0, 3) + 'class="hyperlink" ' + content.slice(3, content.length);
         }
 

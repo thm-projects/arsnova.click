@@ -24,6 +24,6 @@ Template.questionPreviewSplash.onRendered(function () {
 
 Template.questionPreviewSplash.events({
     "click #js-btn-hidePreviewModal": function () {
-        $('.js-splashscreen').modal("hide");
+        $('.js-splashscreen-noLazyClose').modal("hide");
     }
 });

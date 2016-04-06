@@ -156,13 +156,13 @@ function markdownAlreadyExistsAndAutoRemove (textStart, textEnd) {
     var strPosBegin = textarea.selectionStart;
     var strPosEnd = textarea.selectionEnd;
 
-    if (strPosBegin == strPosEnd) {
+    //if (strPosBegin == strPosEnd) {
         textEnd = typeof textEnd !== 'undefined' ? textEnd : '';
         var textEndExists = false;
         var textStartExists = false;
 
         if (textEnd.length > 0) {
-            if ((textarea.value).substring(strPosBegin, strPosBegin + textEnd.length) == textEnd) {
+            if ((textarea.value).substring(strPosEnd, strPosEnd + textEnd.length) == textEnd) {
                 textEndExists = true;
             }
         } else {
@@ -172,13 +172,14 @@ function markdownAlreadyExistsAndAutoRemove (textStart, textEnd) {
         if ((textarea.value).substring(strPosBegin - textStart.length, strPosBegin) == textStart) {
             textStartExists = true;
         }
-        
+
         if (textStartExists && textEndExists) {
             var frontText = (textarea.value).substring(0, strPosBegin - textStart.length);
-            var backText = (textarea.value).substring(strPosBegin + textEnd.length, textarea.value.length);
-            textarea.value = frontText + backText;
+            var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
+            var backText = (textarea.value).substring(strPosEnd + textEnd.length, textarea.value.length);
+            textarea.value = frontText + middleText + backText;
             textarea.selectionStart = strPosBegin - textStart.length;
-            textarea.selectionEnd = strPosBegin - textStart.length;
+            textarea.selectionEnd = strPosEnd - textEnd.length;
             textarea.focus();
 
             textarea.scrollTop = scrollPos;
@@ -187,7 +188,7 @@ function markdownAlreadyExistsAndAutoRemove (textStart, textEnd) {
         } else {
             return false;
         }
-    } else {
-        return false;
-    }
+    //} else {
+     //   return false;
+    //}
 }

@@ -117,11 +117,13 @@
 .row-centered {
     text-align: center;
     padding-top: 3px;
+    display: inline-block;
 }
 .col-centered {
     display: inline-block;
-    float: none;
-    text-align: left;
+    /*float: none;
+    text-align: left;*/
+    float: left;
 }
 
 .clearFloat {

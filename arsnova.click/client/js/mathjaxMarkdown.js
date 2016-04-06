@@ -219,7 +219,7 @@ mathjaxMarkdown = {
                     href.match(delimiters.videoIdDel)[2];
 
                 var title = element.match(delimiters.titleDel)[1];
-                return '<p class="videoImageParagraph"><a class="hyperlink" href="' + delimiters.videoURI
+                return '<p class="videoImageParagraph"><a target="_blank" class="hyperlink" href="' + delimiters.videoURI
                     + videoId + '"><span class="videoImageContainer" id="' + videoId + '" accesskey="'
                     + delimiters.accessKey + '" title="' + title + '">' + text + '</span></a></p>';
             });
@@ -229,7 +229,7 @@ mathjaxMarkdown = {
         content = videoElementReplace(content, vimeoDelimiters);
 
         if (text === content) {
-            content = controller.defaultHyperLinkRenderer.call(marked, href, title, text);
+            //content = controller.defaultHyperLinkRenderer.call(marked, href, title, text);
             content = content.slice(0, 3) + 'class="hyperlink" ' + content.slice(3, content.length);
         }
 

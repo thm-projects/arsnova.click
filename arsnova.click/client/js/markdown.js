@@ -38,7 +38,9 @@ Template.markdownBar.events({
         markdownInfoText.html("Sie können Texte innerhalb von ARSnova mithilfe von <a class=\"hyperlink\" href=\"https://de.wikipedia.org/wiki/Markdown\">Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown Optionen werden in Form von Schaltflächen über den unterstützten Eingabefeldern angeboten. Zudem unterstützt ARSnova <a class=\"hyperlink\" href=\"https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet\">GitHub Flavored Markdown</a>");
     },
     "click #boldMarkdownButton": function (event) {
-        insertInQuestionText('**', '**');
+        if (!markdownAlreadyExistsAndAutoRemove('**', '**')){
+            insertInQuestionText('**', '**');
+        }
     },
     "click #headerMarkdownButton": function (event) {
         insertInQuestionText('#', '#');
@@ -47,19 +49,33 @@ Template.markdownBar.events({
         $("#hyperlinkInsertSplashContent").parents('.modal').modal('show');
     },
     "click #unsortedListMarkdownButton": function (event) {
-        insertInQuestionText('- ');
+        if (!markdownAlreadyExistsAndAutoRemove('- ')){
+            insertInQuestionText('- ');
+        }
     },
     "click #sortedListMarkdownButton": function (event) {
-        insertInQuestionText('1. ');
+        if (!markdownAlreadyExistsAndAutoRemove('1. ')){
+            insertInQuestionText('1. ');
+        }
     },
     "click #latexMarkdownButton": function (event) {
-        insertInQuestionText('\\(', '\\)');
+        if (!markdownAlreadyExistsAndAutoRemove('\\(', '\\)')){
+            if (!markdownAlreadyExistsAndAutoRemove('$$', '$$')) {
+                insertInQuestionText('\\(', '\\)');
+            }
+        } else {
+            insertInQuestionText('$$', '$$');
+        }
     },
     "click #codeMarkdownButton": function (event) {
-        insertInQuestionText('<hlcode>', '</hlcode>');
+        if (!markdownAlreadyExistsAndAutoRemove('<hlcode>', '</hlcode>')){
+            insertInQuestionText('<hlcode>', '</hlcode>');
+        }
     },
     "click #commentMarkdownButton": function (event) {
-        insertInQuestionText('>');
+        if (!markdownAlreadyExistsAndAutoRemove('>')) {
+            insertInQuestionText('>');
+        }
     },
     "click #pictureMarkdownButton": function (event) {
         $("#pictureInsertSplashContent").parents('.modal').modal('show');
@@ -112,7 +128,7 @@ Template.vimeoInsertSplash.events({
     }
 });
 
-function insertInQuestionText(textStart, textEnd) {
+function insertInQuestionText (textStart, textEnd) {
     textEnd = typeof textEnd !== 'undefined' ? textEnd : '';
     var textarea = document.getElementById('questionText');
 
@@ -121,8 +137,8 @@ function insertInQuestionText(textStart, textEnd) {
     var strPosBegin = textarea.selectionStart;
     var strPosEnd = textarea.selectionEnd;
 
-    var frontText = (textarea.value).substring(0,strPosBegin);
-    var backText = (textarea.value).substring(strPosEnd,textarea.value.length);
+    var frontText = (textarea.value).substring(0, strPosBegin);
+    var backText = (textarea.value).substring(strPosEnd, textarea.value.length);
     var selectedText = (textarea.value).substring(strPosBegin, strPosEnd);
 
     textarea.value = frontText + textStart + selectedText + textEnd + backText;
@@ -132,4 +148,46 @@ function insertInQuestionText(textStart, textEnd) {
     textarea.focus();
 
     textarea.scrollTop = scrollPos;
+}
+
+function markdownAlreadyExistsAndAutoRemove (textStart, textEnd) {
+    var textarea = document.getElementById('questionText');
+    var scrollPos = textarea.scrollTop;
+    var strPosBegin = textarea.selectionStart;
+    var strPosEnd = textarea.selectionEnd;
+
+    if (strPosBegin == strPosEnd) {
+        textEnd = typeof textEnd !== 'undefined' ? textEnd : '';
+        var textEndExists = false;
+        var textStartExists = false;
+
+        if (textEnd.length > 0) {
+            if ((textarea.value).substring(strPosBegin, strPosBegin + textEnd.length) == textEnd) {
+                textEndExists = true;
+            }
+        } else {
+            textEndExists = true;
+        }
+
+        if ((textarea.value).substring(strPosBegin - textStart.length, strPosBegin) == textStart) {
+            textStartExists = true;
+        }
+        
+        if (textStartExists && textEndExists) {
+            var frontText = (textarea.value).substring(0, strPosBegin - textStart.length);
+            var backText = (textarea.value).substring(strPosBegin + textEnd.length, textarea.value.length);
+            textarea.value = frontText + backText;
+            textarea.selectionStart = strPosBegin - textStart.length;
+            textarea.selectionEnd = strPosBegin - textStart.length;
+            textarea.focus();
+
+            textarea.scrollTop = scrollPos;
+
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
 }

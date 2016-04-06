@@ -16,20 +16,15 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+Template.questionContentSplash.onRendered(function () {
+    $('.modal-dialog').width($('#mainContentContainer').width() - 40);
+    $(window).resize(function () {
+        $('.modal-dialog').width($('#mainContentContainer').width() - 40);
+    });
+});
+
 Template.questionContentSplash.onCreated(function () {
     this.autorun(() => {
         this.subscribe('Sessions.question', Session.get("hashtag"));
     });
-});
-
-Template.questionContentSplash.helpers({
-    questionText: function () {
-        var sessionDoc = Sessions.findOne();
-        if (sessionDoc) {
-            return Sessions.findOne().questionText;
-        }
-        else {
-            return "";
-        }
-    }
 });

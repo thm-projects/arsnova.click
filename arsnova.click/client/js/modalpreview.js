@@ -17,6 +17,7 @@
  */
 
 Template.questionPreviewSplash.onRendered(function () {
+    $('.modal-dialog').width($('#mainContentContainer').width() - 40);
     $(window).resize(function () {
         $('.modal-dialog').width($('#mainContentContainer').width() - 40);
     });

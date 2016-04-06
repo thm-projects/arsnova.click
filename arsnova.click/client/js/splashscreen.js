@@ -18,20 +18,18 @@
 
 Template.splashscreen.rendered = function () {
     var splashscreen = $('.js-splashscreen');
-    if (templateParams.lazyClose === true) {
-        splashscreen.on('click', function () {
-            closeSplashscreen();
-        });
-    } else {
-        splashscreen.modal({
-            backdrop: 'static',
-            keyboard: false
-        });
-    }
+    var splashscreenNoLazyClose = $('.js-splashscreen-noLazyClose');
+
+    splashscreen.on('click', function () {
+        closeSplashscreen();
+    });
+
     if (templateParams.noAutorun) {
         splashscreen.modal({show: false});
+        splashscreenNoLazyClose.modal({show: false});
     } else {
         splashscreen.modal('show');
+        splashscreenNoLazyClose.modal('show');
     }
 };
 
@@ -44,10 +42,12 @@ Template.splashscreen.helpers({
 
 showSplashscreen = function () {
     $('.js-splashscreen').modal('show');
+    $('.js-splashscreen-noLazyClose').modal('show');
 };
 
 closeSplashscreen = function () {
     $('.js-splashscreen').modal("hide");
+    $('.js-splashscreen-noLazyClose').modal('hide');
 };
 
 closeAndRedirectTo = function (url) {

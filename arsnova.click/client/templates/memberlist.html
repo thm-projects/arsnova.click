@@ -18,7 +18,7 @@
 
 <template name="memberlist">
     {{#if isNotOwnerAndReadConfirmationNeeded}}
-        {{> splashscreen templateName = "questionT" lazyClose = false headername="Frage" type="splash-screen-show-question"}}
+        {{> splashscreen templateName = "questionT" lazyCloseJsClass='js-splashscreen-noLazyClose' headername="Frage" type="splash-screen-show-question"}}
     {{/if}}
     <div class="row">
         <div class="col-md-12 contentFrame">
@@ -88,7 +88,7 @@
 </template>
 
 <template name="questionT">
-    <p class="splashSmallTitle">{{quest}}</p>
+    <div id="questionTText"></div>
     <br/>
 
     <div class="row">

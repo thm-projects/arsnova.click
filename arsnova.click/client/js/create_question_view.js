@@ -66,8 +66,8 @@ Template.createQuestionView.events({
             } else {
                 localData.addQuestion(Session.get("hashtag"), questionText);
         Router.go("/answeroptions");
-    }
-    });
+            }
+        });
     },
     "click #backButton": function () {
         var questionText = $('#questionText').val();
@@ -76,12 +76,15 @@ Template.createQuestionView.events({
         Router.go("/");
         $('.previewSplash').parents('.modal').modal('hide');
     },
-    "click #formatButton": function () {
-        //Not implemented yet
-    },
     "click #previewButton": function () {
         $('.previewSplash').parents('.modal').modal('show');
-        $("#modalpreview-text").html($('#questionText').val());
+
+        mathjaxMarkdown.initializeMarkdownAndLatex();
+        var content = $('#questionText').val();
+
+        content = mathjaxMarkdown.getContent(content);
+
+        $("#modalpreview-text").html(content);
     }
 });
 

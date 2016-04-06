@@ -99,6 +99,15 @@ Template.votingview.helpers({
 Template.votingview.events({
     "click #js-btn-showQuestionModal": function () {
         $('.questionContentSplash').parents('.modal').modal();
+        var sessionDoc = Sessions.findOne();
+        var content = "";
+        if (sessionDoc) {
+            mathjaxMarkdown.initializeMarkdownAndLatex();
+            var questionText = sessionDoc.questionText;
+            content = mathjaxMarkdown.getContent(questionText);
+        }
+
+        $('#questionText').html(content);
     },
     "click #js-showAnswerTexts": function () {
         $('.answerTextSplash').parents('.modal').modal();

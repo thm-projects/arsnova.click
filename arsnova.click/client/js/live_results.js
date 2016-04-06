@@ -225,6 +225,15 @@ Template.live_results.helpers({
 Template.live_results.events({
     "click #js-btn-showQuestionModal": function () {
         $('.questionContentSplash').parents('.modal').modal();
+        var sessionDoc = Sessions.findOne();
+        var content = "";
+        if (sessionDoc) {
+            mathjaxMarkdown.initializeMarkdownAndLatex();
+            var questionText = sessionDoc.questionText;
+            content = mathjaxMarkdown.getContent(questionText);
+        }
+
+        $('#questionText').html(content);
     },
     "click #js-btn-showAnswerModal": function () {
         $('.answerTextSplash').parents('.modal').modal();

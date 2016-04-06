@@ -61,5 +61,12 @@ Template.header.events({
             Meteor.call("Main.killAll", localData.getPrivateKey(), Session.get("hashtag"));
             Router.go("/");
         }
+    },
+    'click .sound-button': function () {
+        $('.soundConfig').parents('.modal').modal();
+
+        var content = "";
+        $('.soundConfig ').html(content);
+
     }
 });

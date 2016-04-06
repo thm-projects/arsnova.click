@@ -29,7 +29,7 @@ Template.votingview.onCreated(function () {
             Session.set("responses", JSON.stringify(responseArr));
         });
         this.subscribe('QuestionGroup.questionList', Session.get("hashtag"), function () {
-            countdown = new ReactiveCountdown(QuestionGroup.findOne({questionIndex: Session.get("questionIndex")}).timer / 1000);
+            countdown = new ReactiveCountdown(QuestionGroup.findOne().questionList[Session.get("questionIndex")].timer / 1000);
             countdown.start(function () {
                 Session.set("sessionClosed", true);
                 $("#end-of-polling-text").html("Game over");
@@ -48,14 +48,21 @@ Template.votingview.onCreated(function () {
             }
         }
     });
+});
+
+Template.votingview.onDestroyed(function () {
+    Session.set("questionSC", undefined);
+    Session.set("responses", undefined);
+    Session.set("sessionClosed", undefined);
+    Session.set("countdownInitialized", undefined);
+});
+
+Template.votingview.onRendered(function () {
     $(window).resize(function () {
         formatAnswerButtons();
     });
-});
-
-Template.votingview.rendered = function () {
     formatAnswerButtons();
-};
+});
 
 Template.votingview.helpers({
     answerOptions: function () {

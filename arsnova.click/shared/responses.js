@@ -37,13 +37,13 @@ Meteor.methods({
             if (!hashtagDoc) {
                 throw new Meteor.Error('Responses.addResponse', 'There is no such quiz active in the db');
             } else {
-                var questionGroupDoc = QuestionGroup.findOne({hashtag: responseDoc.hashtag, questionIndex: responseDoc.questionIndex});
+                var questionGroupDoc = QuestionGroup.findOne({hashtag: responseDoc.hashtag});
                 if (!questionGroupDoc) {
                     throw new Meteor.Error('Responses.addResponse', 'No questionGroup doc for this quiz');
                 }
-                var responseTime = Number(timestamp) - Number(questionGroupDoc.startTime);
+                var responseTime = Number(timestamp) - Number(questionGroupDoc.questionList[responseDoc.questionIndex].startTime);
 
-                if (responseTime <= questionGroupDoc.timer) {
+                if (responseTime <= questionGroupDoc.questionList[responseDoc.questionIndex].timer) {
                     responseDoc.responseTime = responseTime;
                     var answerOptionDoc = AnswerOptions.findOne({
                         hashtag: hashtag,

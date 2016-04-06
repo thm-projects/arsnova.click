@@ -21,9 +21,9 @@ Meteor.publish('QuestionGroup.authorizeAsOwner', function(pprivateKey, phashtag)
         phashtag: {type: String},
         pprivateKey: {type: String}
     }).validate({
-            pprivateKey,
-            phashtag
-        });
+        pprivateKey,
+        phashtag
+    });
     var isOwner = Hashtags.find({
         hashtag: phashtag,
         privateKey: pprivateKey
@@ -37,9 +37,7 @@ Meteor.publish('QuestionGroup.questionList', function (phashtag) {
     }).validate({phashtag});
     return QuestionGroup.find({hashtag: phashtag}, {
         fields: {
-            questionText: 1,
-            startTime: 1,
-            timer: 1
+            questionList: 1
         }
     });
 });

@@ -1,0 +1,23 @@
+<template name="questionList">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="row questionScrollPane">
+                {{#each question}}
+                    <div class="{{#if isActiveIndex @index}}active {{/if}}questionIcon" id="questionIcon_{{@index}}">
+                        <span class="indexNumber">{{getNormalizedIndex @index}}</span>
+                        <button class="removeQuestion button button-default">
+                            <span class="glyphicon glyphicon-trash"></span>
+                            Löschen
+                        </button>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <button id="addQuestion" class="button button-success">
+                <span class="glyphicon glyphicon-plus"></span>
+                Neue Frage
+            </button>
+        </div>
+    </div>
+</template>

@@ -21,8 +21,7 @@ QuestionGroup = new Mongo.Collection("questionGroup");
 SingleQuestionSchema = new SimpleSchema({
 	questionText: {
 		type: String,
-		min: 5,
-		max: 1000
+		optional: true
 	},
 	timer: {
 		type: Number,

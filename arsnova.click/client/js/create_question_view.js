@@ -53,13 +53,14 @@ Template.createQuestionView.events({
         Meteor.call("QuestionGroup.addQuestion", {
             privateKey: localData.getPrivateKey(),
             hashtag: Session.get("hashtag"),
+            questionIndex: Session.get("questionIndex"),
             questionText: questionText
         }, (err, res) => {
             if (err) {
                 $('.errorMessageSplash').parents('.modal').modal('show');
                 $("#errorMessage-text").html(err.reason);
             } else {
-                localData.addQuestion(Session.get("hashtag"), res, questionText);
+                localData.addQuestion(Session.get("hashtag"), Session.get("questionIndex"), questionText);
                 Router.go("/answeroptions");
             }
         });

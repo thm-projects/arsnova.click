@@ -1,0 +1,69 @@
+@import "default/appearance";
+
+$activeItemBackground: #de5454;
+$activeItemBackgroundLight: #86253E;
+
+.questionScrollPane {
+  height: 70px;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  font-family: serif;
+  font-size: 15px;
+
+  .questionIcon {
+    height: 50px;
+    display: inline-flex;
+    margin: 0 10px;
+    cursor: pointer;
+
+    .indexNumber {
+      font-size: 2.5em;
+      padding: 0 20px;
+      background-color: yellow;
+      border-radius: 90%;
+      line-height: 50px;
+    }
+    .removeQuestion {
+      display: none;
+    }
+    &:hover:not(.active) {
+      .indexNumber {
+        background-color: darken(yellow, 10%);
+      }
+    }
+    &.active {
+      border-radius: $corner-radius;
+
+      .indexNumber {
+        border-radius: $corner-radius 0 0 $corner-radius;
+        background: yellow;
+      }
+      .removeQuestion {
+        display: block;
+        box-shadow: none;
+        border-left: 10px solid black;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        background: yellow;
+        font-family: Georgia, serif;
+        color: black;
+
+        .glyphicon {
+          top: 3px;
+        }
+
+        &:hover {
+          background-color: red;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+#addQuestion {
+  font-size: 20px;
+  height: 50px;
+  display: block;
+}

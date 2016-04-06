@@ -16,6 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var countdown = null;
 Template.live_results.onCreated(function () {
     this.autorun(() => {
         if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
@@ -45,6 +46,12 @@ Template.live_results.onCreated(function () {
     });
 });
 
+Template.live_results.onDestroyed(function () {
+    Session.set("countdownInitialized", undefined);
+    Session.set("rightAnswerOptionCount", undefined);
+    Session.set("sessionCountDown", undefined);
+    Session.set("sessionClosed", undefined);
+});
 
 Template.result_button.onRendered(function () {
     $(window).resize(function () {
@@ -60,41 +67,42 @@ Template.result_button.onRendered(function () {
 function setMcCSSClasses () {
     var windowWidth = $(window).width();
 
-    var i = 0;
-    for (i; i<2;i++){
-        $("#mc_label"+i).removeClass();
-        $("#mc_bar"+i).removeClass();
+    for (var i = 0; i < 2; i++){
+        var label = $("#mc_label"+i);
+        var bar = $("#mc_bar"+i);
+        label.removeClass();
+        bar.removeClass();
         if (windowWidth < 361) {
-            $("#mc_label"+i).addClass("col-xs-6 col-sm-6 col-md-6");
-            $("#mc_bar"+i).addClass("col-xs-6 col-sm-6 col-md-6");
+            label.addClass("col-xs-6 col-sm-6 col-md-6");
+            bar.addClass("col-xs-6 col-sm-6 col-md-6");
         }
         if (windowWidth > 360 && windowWidth < 431) {
-            $("#mc_label"+i).addClass("col-xs-5 col-sm-5 col-md-5");
-            $("#mc_bar"+i).addClass("col-xs-7 col-sm-7 col-md-7");
+            label.addClass("col-xs-5 col-sm-5 col-md-5");
+            bar.addClass("col-xs-7 col-sm-7 col-md-7");
         }
         if (windowWidth > 430 && windowWidth < 576) {
-            $("#mc_label"+i).addClass("col-xs-4 col-sm-4 col-md-4");
-            $("#mc_bar"+i).addClass("col-xs-8 col-sm-8 col-md-8");
+            label.addClass("col-xs-4 col-sm-4 col-md-4");
+            bar.addClass("col-xs-8 col-sm-8 col-md-8");
         }
         if (windowWidth > 575 && windowWidth < 851) {
-            $("#mc_label"+i).addClass("col-xs-3 col-sm-3 col-md-3");
-            $("#mc_bar"+i).addClass("col-xs-9 col-sm-9 col-md-9");
+            label.addClass("col-xs-3 col-sm-3 col-md-3");
+            bar.addClass("col-xs-9 col-sm-9 col-md-9");
         }
         if (windowWidth > 850 && windowWidth < 992) {
-            $("#mc_label"+i).addClass("col-xs-2 col-sm-2 col-md-2");
-            $("#mc_bar"+i).addClass("col-xs-10 col-sm-10 col-md-10");
+            label.addClass("col-xs-2 col-sm-2 col-md-2");
+            bar.addClass("col-xs-10 col-sm-10 col-md-10");
         }
         if (windowWidth > 991 && windowWidth < 1151) {
-            $("#mc_label"+i).addClass("col-xs-4 col-sm-4 col-md-4");
-            $("#mc_bar"+i).addClass("col-xs-8 col-sm-8 col-md-8");
+            label.addClass("col-xs-4 col-sm-4 col-md-4");
+            bar.addClass("col-xs-8 col-sm-8 col-md-8");
         }
         if (windowWidth > 1150 && windowWidth < 1701) {
-            $("#mc_label"+i).addClass("col-xs-3 col-sm-3 col-md-3");
-            $("#mc_bar"+i).addClass("col-xs-9 col-sm-9 col-md-9");
+            label.addClass("col-xs-3 col-sm-3 col-md-3");
+            bar.addClass("col-xs-9 col-sm-9 col-md-9");
         }
         if (windowWidth > 1700) {
-            $("#mc_label"+i).addClass("col-xs-2 col-sm-2 col-md-2");
-            $("#mc_bar"+i).addClass("col-xs-10 col-sm-10 col-md-10");
+            label.addClass("col-xs-2 col-sm-2 col-md-2");
+            bar.addClass("col-xs-10 col-sm-10 col-md-10");
         }
     }
 }
@@ -138,7 +146,7 @@ Template.live_results.helpers({
         var result = [];
 
         var memberAmount = Responses.find({hashtag: Session.get("hashtag")}).fetch();
-        memberAmount = _.uniq(memberAmount, false, function(user) {return user.userNick}).length;
+        memberAmount = _.uniq(memberAmount, false, function(user) {return user.userNick;}).length;
 
         var correctAnswerOptions = AnswerOptions.find({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex"), isCorrect: 1}).count();
 
@@ -261,11 +269,11 @@ Template.live_results.events({
 });
 
 Template.result_button.helpers({
-    getCSSClassForIsCorrect: checkIfIsCorrect()
+    getCSSClassForIsCorrect: checkIfIsCorrect
 });
 
 Template.result_button_mc.helpers({
-    getCSSClassForIsCorrect: checkIfIsCorrect()
+    getCSSClassForIsCorrect: checkIfIsCorrect
 });
 
 function checkIfIsCorrect(isCorrect){

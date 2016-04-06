@@ -65,7 +65,7 @@ Template.createAnswerOptions.events({
                     $('.errorMessageSplash').parents('.modal').modal('show');
                     $("#errorMessage-text").html(err.reason);
                 } else {
-                    localData.addAnswers(Session.get("hashtag"), answerOption);
+                    localData.addAnswers(answerOption);
 
                     $("#deleteAnswerOption").removeClass("hide");
 
@@ -90,7 +90,7 @@ Template.createAnswerOptions.events({
                 questionIndex: Session.get("questionIndex"),
                 answerOptionNumber: answerOptionsCount - 1
             });
-            localData.deleteAnswerOption(Session.get("hashtag"), Session, get("questionIndex"), answerOptionsCount - 1);
+            localData.deleteAnswerOption(Session.get("hashtag"), Session.get("questionIndex"), answerOptionsCount - 1);
 
             answerOptionsCount--;
             if (answerOptionsCount === 1) {
@@ -103,27 +103,16 @@ Template.createAnswerOptions.events({
     "click #backButton": function (event) {
         Router.go('/question');
     },
-    "click #forwardButton": function (event) {
-        for (var i = 0; i < AnswerOptions.find().count(); i++) {
-            var text = $("#answerOptionText_Number" + i).val();
-            var isCorrect = $('div#answerOption-' + i + ' .check-mark-checked').length > 0 ? 1 : 0;
-            var answer = {
-                privateKey: localData.getPrivateKey(),
-                hashtag: Session.get("hashtag"),
-                questionIndex: Session.get("questionIndex"),
-                answerOptionNumber: i,
-                answerText: text,
-                isCorrect: isCorrect
-            };
-            Meteor.call('AnswerOptions.updateAnswerTextAndIsCorrect', answer,
-                (err, res) => {
-                    if (err) {
-                        $('.errorMessageSplash').parents('.modal').modal('show');
-                        $("#errorMessage-text").html(err.reason);
-                    } else {
-                        Router.go("/settimer");
-                    }
-                });
+    "click #forwardButton, click .questionIcon": function (event) {
+        var error = parseAnswerOptionInput();
+
+        if (error) {
+            $('.errorMessageSplash').parents('.modal').modal('show');
+            $("#errorMessage-text").html(error.reason);
+        } else {
+            if($(event.target).attr("id") === "forwardButton") {
+                Router.go("/settimer");
+            }
         }
     },
     "keydown .input-field": function (event) {
@@ -153,3 +142,25 @@ Template.createAnswerOptions.onRendered(function () {
     $(window).resize(calculateHeight);
     calculateHeight();
 });
+
+function parseAnswerOptionInput() {
+    var hasError = false;
+    for (var i = 0; i < AnswerOptions.find().count(); i++) {
+        var text = $("#answerOptionText_Number" + i).val();
+        var isCorrect = $('div#answerOption-' + i + ' .check-mark-checked').length > 0 ? 1 : 0;
+        var answer = {
+            privateKey: localData.getPrivateKey(),
+            hashtag: Session.get("hashtag"),
+            questionIndex: Session.get("questionIndex"),
+            answerOptionNumber: i,
+            answerText: text,
+            isCorrect: isCorrect
+        };
+        Meteor.call('AnswerOptions.updateAnswerTextAndIsCorrect', answer,
+            (err, res) => {
+                hasError = err;
+            }
+        );
+    }
+    return hasError;
+}

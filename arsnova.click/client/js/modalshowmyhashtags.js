@@ -28,7 +28,11 @@ Template.modalShowMyHashtags.events({
         localData.reenterSession(hashtag);
         Session.set("isOwner", true);
         Session.set("hashtag", hashtag);
+
+        /*
+        TODO This method is not defined and throws "Error invoking Method 'Hashtags.setIsActive': Method not found [404]"
         Meteor.call("Hashtags.setIsActive", localData.getPrivateKey(), hashtag, 1);
+        */
 
         closeAndRedirectTo('/question');
     },

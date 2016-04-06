@@ -53,32 +53,43 @@ localData = {
         if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
-        var questionObject = JSON.stringify({
+        var questionObject = {
             hashtag:hashtag,
             questionList: [
                 {
                     questionText: "",
                     timer: 40000,
                     answers: [
-                        {answerOptionNumber:0, answerText:"", isCorrect:0},
-                        {answerOptionNumber:1, answerText:"", isCorrect:0},
-                        {answerOptionNumber:2, answerText:"", isCorrect:0},
-                        {answerOptionNumber:3, answerText:"", isCorrect:0}
+                        {answerOptionNumber:0, answerText:"", isCorrect:0}
                     ]
                 }
             ]
-        });
+        };
         const hashtagString = localStorage.getItem("hashtags");
         if (!hashtagString) {
             localStorage.setItem("hashtags", JSON.stringify([hashtag]));
-            localStorage.setItem(hashtag, questionObject);
+            localStorage.setItem(hashtag, JSON.stringify(questionObject));
         } else {
             const hashtags = JSON.parse(hashtagString);
             hashtags.push(hashtag);
 
             localStorage.setItem("hashtags", JSON.stringify(hashtags));
-            localStorage.setItem(hashtag, questionObject);
+            localStorage.setItem(hashtag, JSON.stringify(questionObject));
         }
+        Meteor.call("AnswerOptions.addOption", {
+            privateKey: localStorage.getItem("privateKey"),
+            hashtag: hashtag,
+            questionIndex: 0,
+            answerText: questionObject.questionList[0].answers[0].answerText,
+            answerOptionNumber: questionObject.questionList[0].answers[0].answerOptionNumber,
+            isCorrect: questionObject.questionList[0].answers[0].isCorrect
+        });
+        delete questionObject.questionList[0].answers;
+        Meteor.call("QuestionGroup.insert", {
+            privateKey: localStorage.getItem("privateKey"),
+            hashtag: hashtag,
+            questionList: questionObject.questionList
+        });
     },
 
     addQuestion: function (hashtag, question) {
@@ -88,7 +99,27 @@ localData = {
         const sessionDataString = localStorage.getItem(hashtag);
         if (sessionDataString) {
             const sessionData = JSON.parse(sessionDataString);
-            sessionData.questionList[questionIndex].questionText = questionText;
+            if(questionIndex < sessionData.questionList.length) {
+                sessionData.questionList[questionIndex].questionText = questionText;
+            } else {
+                sessionData.questionList.push({
+                    questionText: questionText,
+                    timer: 0,
+                    isReadingConfirmationRequired: 1
+                });
+            }
+            localStorage.setItem(hashtag, JSON.stringify(sessionData));
+        }
+    },
+
+    removeQuestion: function (hashtag, questionIndex) {
+        if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
+            return;
+        }
+        const sessionDataString = localStorage.getItem(hashtag);
+        if (sessionDataString) {
+            const sessionData = JSON.parse(sessionDataString);
+            sessionData.questionList.splice(questionIndex, 1);
             localStorage.setItem(hashtag, JSON.stringify(sessionData));
         }
     },
@@ -112,6 +143,7 @@ localData = {
         const sessionDataString = localStorage.getItem(hashtag);
         if (sessionDataString) {
             const sessionData = JSON.parse(sessionDataString);
+            if(!sessionData.questionList[questionIndex].answers) sessionData.questionList[questionIndex].answers = [];
             sessionData.questionList[questionIndex].answers.push({
                 answerOptionNumber:answerOptionNumber,
                 answerText:answerText,
@@ -133,6 +165,21 @@ localData = {
         const sessionData = JSON.parse(sessionDataString);
 
         if (typeof sessionData === "object") {
+            for(var i = 0; i < sessionData.questionList.length; i++) {
+                if(!sessionData.questionList[i].answers) continue;
+                var answer = sessionData.questionList[i].answers;
+                delete sessionData.questionList[i].answers;
+                for(var j = 0; j< answer.length; j++) {
+                    Meteor.call("AnswerOptions.addOption", {
+                        privateKey: localStorage.getItem("privateKey"),
+                        hashtag: hashtag,
+                        questionIndex: i,
+                        answerText: answer[j].answerText,
+                        answerOptionNumber: answer[j].answerOptionNumber,
+                        isCorrect: answer[j].isCorrect
+                    });
+                }
+            }
             Meteor.call("QuestionGroup.insert", {
                 privateKey: localStorage.getItem("privateKey"),
                 hashtag: hashtag,

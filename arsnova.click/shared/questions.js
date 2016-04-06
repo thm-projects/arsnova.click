@@ -18,33 +18,41 @@
 
 Meteor.methods({
     "QuestionGroup.insert": function ({privateKey, hashtag, questionList}) {
-        QuestionGroupSchema.validate({
-            hashtag: hashtag,
-            questionList: questionList
-        });
+        if(Meteor.isServer) {
+            QuestionGroupSchema.validate({
+                hashtag: hashtag,
+                questionList: questionList
+            });
 
-        var hashtagDoc = Hashtags.findOne({
-            hashtag: hashtag,
-            privateKey: privateKey
-        });
-        if (!hashtagDoc) {
-            throw new Meteor.Error('QuestionGroup.insert', 'There is no quiz with this key');
+            var hashtagDoc = Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
+            });
+            if (!hashtagDoc) {
+                throw new Meteor.Error('QuestionGroup.insert', 'There is no quiz with this key');
+            }
+
+            if(QuestionGroup.find({hashtag: hashtag}).count() > 0) {
+                QuestionGroup.update({hashtag: hashtag},{$set: {questionList: questionList}});
+            } else {
+                console.log(questionList);
+                QuestionGroup.insert({
+                    hashtag: hashtag,
+                    questionList: questionList
+                });
+            }
         }
-
-        QuestionGroup.insert({
-            hashtag: hashtag,
-            questionList: questionList
-        });
     },
-    "QuestionGroup.addQuestion": function ({privateKey, hashtag, questionText}) {
+    "QuestionGroup.addQuestion": function ({privateKey, hashtag, questionIndex, questionText}) {
         if(Meteor.isServer) {
             new SimpleSchema({
                 questionText: {
                     type: String,
                     min: 5,
                     max: 1000
-                }
-            }).validate({questionText: questionText});
+                },
+                questionIndex: {type: Number}
+            }).validate({questionIndex: questionIndex, questionText: questionText});
 
             var hashtagDoc = Hashtags.findOne({
                 hashtag: hashtag,
@@ -64,34 +72,38 @@ Meteor.methods({
                     hashtag: hashtag,
                     questionList: [questionItem]
                 });
-                return 0;
             } else {
-                questionGroup.questionList.push(questionItem);
+                if(questionIndex < questionGroup.questionList.length) {
+                    questionGroup.questionList[questionIndex].questionText = questionText;
+                } else {
+                    questionGroup.questionList.push(questionItem);
+                }
                 QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
                     if (error) {
                         throw new Meteor.Error('Sessions.setQuestion', error);
                     }
                 });
-                return questionGroup.questionList.length -1;
             }
         }
     },
     "QuestionGroup.removeQuestion": function({privateKey, hashtag, questionIndex}) {
-        var hashtagDoc = Hashtags.findOne({
-            hashtag: hashtag,
-            privateKey: privateKey
-        });
-        if (!hashtagDoc) {
-            new Meteor.Error('QuestionGroup.removeQuestion', 'There is no quiz with this key');
-            return;
-        }
-        var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
-        if (questionGroup) {
-            QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList.splice(questionIndex)}}, function (error) {
-                if (error) {
-                    throw new Meteor.Error('Sessions.setQuestion', error);
-                }
+        if(Meteor.isServer) {
+            var hashtagDoc = Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
             });
+            if (!hashtagDoc) {
+                throw new Meteor.Error('QuestionGroup.removeQuestion', 'There is no quiz with this key');
+            }
+            var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
+            if (questionGroup) {
+                questionGroup.questionList.splice(questionIndex, 1);
+                QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
+                    if (error) {
+                        throw new Meteor.Error('Sessions.setQuestion', error);
+                    }
+                });
+            }
         }
     },
     "Question.isSC": function ({hashtag, questionIndex}) {
@@ -100,8 +112,7 @@ Meteor.methods({
             privateKey: privateKey
         });
         if (!hashtagDoc) {
-            new Meteor.Error('Question.isSC', 'There is no quiz with this key');
-            return;
+            throw new Meteor.Error('Question.isSC', 'There is no quiz with this key');
         }
         return (AnswerOptions.find({hashtag: hashtag, questionIndex: questionIndex, isCorrect: 1}).count() === 1);
     },
@@ -119,8 +130,7 @@ Meteor.methods({
             privateKey: privateKey
         });
         if (!hashtagDoc) {
-            new Meteor.Error('Question.updateIsReadConfirmationRequired', 'There is no quiz with this key');
-            return;
+            throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'There is no quiz with this key');
         }
 
         var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
@@ -136,32 +146,33 @@ Meteor.methods({
         }
     },
     "Question.setTimer": function ({privateKey, hashtag, questionIndex, timer}) {
-        new SimpleSchema({
-            timer: {
-                type: Number,
-                min: 0
-            }
-        }).validate({timer: timer});
-
-        var hashtagDoc = Hashtags.findOne({
-            hashtag: hashtag,
-            privateKey: privateKey
-        });
-        if (!hashtagDoc) {
-            new Meteor.Error('Question.setTimer', 'There is no quiz with this key');
-            return;
-        }
-
-        var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
-        if (!questionGroup) {
-            throw new Meteor.Error('Question.setTimer', 'no access to session');
-        } else {
-            questionGroup.questionList[questionIndex].timer = timer;
-            QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
-                if (error) {
-                    throw new Meteor.Error('Question.setTimer', error);
+        if (Meteor.isServer) {
+            new SimpleSchema({
+                timer: {
+                    type: Number,
+                    min: 0
                 }
+            }).validate({timer: timer});
+
+            var hashtagDoc = Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
             });
+            if (!hashtagDoc) {
+                throw new Meteor.Error('Question.setTimer', 'There is no quiz with this key');
+            }
+
+            var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
+            if (!questionGroup) {
+                throw new Meteor.Error('Question.setTimer', 'no access to session');
+            } else {
+                questionGroup.questionList[questionIndex].timer = timer;
+                QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
+                    if (error) {
+                        throw new Meteor.Error('Question.setTimer', error);
+                    }
+                });
+            }
         }
     },
     "Question.startTimer": function ({privateKey, hashtag, questionIndex}) {
@@ -173,8 +184,7 @@ Meteor.methods({
                 privateKey: privateKey
             });
             if (!hashtagDoc) {
-                new Meteor.Error('Question.startTimer', 'There is no quiz with this key');
-                return;
+                throw new Meteor.Error('Question.startTimer', 'There is no quiz with this key');
             }
             var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
             if (!questionGroup) {

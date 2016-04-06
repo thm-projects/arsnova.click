@@ -18,42 +18,43 @@
 
 Meteor.methods({
     'AnswerOptions.addOption'({privateKey, hashtag, questionIndex, answerText, answerOptionNumber, isCorrect}) {
+        new SimpleSchema({
+            privateKey: { type: String },
+            hashtag: { type: String },
+            questionIndex: { type: Number },
+            answerText: { type: String },
+            answerOptionNumber: { type: Number },
+            isCorrect: { type: Number }
+        }).validate({ privateKey, hashtag, questionIndex, answerText, answerOptionNumber, isCorrect });
+        var doc = true;
         if (Meteor.isServer) {
-            new SimpleSchema({
-                privateKey: { type: String },
-                hashtag: { type: String },
-                questionIndex: { type: Number },
-                answerText: { type: String },
-                answerOptionNumber: { type: Number },
-                isCorrect: { type: Number }
-            }).validate({ privateKey, hashtag, questionIndex, answerText, answerOptionNumber, isCorrect });
-            var doc = Hashtags.findOne({
+            doc = Hashtags.findOne({
                 hashtag: hashtag,
                 privateKey: privateKey
             });
-            if (!doc) {
-                throw new Meteor.Error('AnswerOptions.addOption', 'Either there is no quiz or you don\'t have write access');
-            }
-            if (AnswerOptions.find({hashtag: hashtag, questionIndex: questionIndex}).count() > 25) {
-                throw new Meteor.Error('AnswerOptions.addOption', 'Maximum number of possible answer options exceeded');
-            }
-            var answerOptionDoc = AnswerOptions.findOne({hashtag: hashtag, questionIndex: questionIndex, answerOptionNumber: answerOptionNumber});
-            if (!answerOptionDoc) {
-                AnswerOptions.insert({
-                    hashtag: hashtag,
-                    questionIndex: questionIndex,
+        }
+        if (!doc) {
+            throw new Meteor.Error('AnswerOptions.addOption', 'Either there is no quiz or you don\'t have write access');
+        }
+        if (AnswerOptions.find({hashtag: hashtag, questionIndex: questionIndex}).count() > 25) {
+            throw new Meteor.Error('AnswerOptions.addOption', 'Maximum number of possible answer options exceeded');
+        }
+        var answerOptionDoc = AnswerOptions.findOne({hashtag: hashtag, questionIndex: questionIndex, answerOptionNumber: answerOptionNumber});
+        if (!answerOptionDoc) {
+            AnswerOptions.insert({
+                hashtag: hashtag,
+                questionIndex: questionIndex,
+                answerText: answerText,
+                answerOptionNumber: answerOptionNumber,
+                isCorrect: isCorrect
+            });
+        } else {
+            AnswerOptions.update(answerOptionDoc._id, {
+                $set: {
                     answerText: answerText,
-                    answerOptionNumber: answerOptionNumber,
                     isCorrect: isCorrect
-                });
-            } else {
-                AnswerOptions.update(answerOptionDoc._id, {
-                    $set: {
-                        answerText: answerText,
-                        isCorrect: isCorrect
-                    }
-                });
-            }
+                }
+            });
         }
     },
     'AnswerOptions.deleteOption'({privateKey, hashtag, questionIndex, answerOptionNumber}) {

@@ -20,14 +20,15 @@ Template.createTimerView.onCreated(function () {
     this.autorun(() => {
         if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
         this.subscription = Meteor.subscribe('AnswerOptions.instructor', localData.getPrivateKey(), Session.get("hashtag"), function() {});
-        this.subscription = Meteor.subscribe('QuestionGroup.authorizeAsOwner', localData.getPrivateKey(), Session.get("hashtag"), function (doc) {
-        if (doc && doc.questionList[Session.get("questionIndex")].timer !== 0) {
-            Session.set("slider", (doc.questionList[Session.get("questionIndex")].timer / 1000));
-        } else {
-            Session.set("slider", 0);
-        }
+        this.subscription = Meteor.subscribe('QuestionGroup.authorizeAsOwner', localData.getPrivateKey(), Session.get("hashtag"), function () {
+            var doc = QuestionGroup.findOne({hashtag: Session.get("hashtag")});
+            if (doc && doc.questionList[Session.get("questionIndex")].timer !== 0) {
+                Session.set("slider", (doc.questionList[Session.get("questionIndex")].timer / 1000));
+            } else {
+                Session.set("slider", 0);
+            }
+        });
     });
-});
 });
 
 Template.createTimerView.onRendered(function () {
@@ -65,7 +66,7 @@ Template.createTimerView.events({
     "click #forwardButton, click #backButton":function(event){
         // timer is given in seconds
         const timer = Session.get("slider") * 1000;
-        if(!isNaN(timer) && timer > 0) {
+        if(!isNaN(timer)) {
             Meteor.call("Question.setTimer", {
                 privateKey: localData.getPrivateKey(),
                 hashtag: Session.get("hashtag"),

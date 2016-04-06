@@ -28,3 +28,9 @@ Template.questionPreviewSplash.events({
         $('.js-splashscreen-noLazyClose').modal("hide");
     }
 });
+
+Template.soundConfig.events({
+    "click #js-btn-hidePreviewModal": function () {
+        $('.js-splashscreen-noLazyClose').modal("hide");
+    }
+});

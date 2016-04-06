@@ -63,7 +63,7 @@ Template.header.events({
         }
     },
     'click .sound-button': function () {
-        $('.soundConfig').parents('.modal').modal();
+        $('.soundConfig').parents('.modal').modal({backdrop:'static'});
 
         var content = "";
         $('.soundConfig ').html(content);

@@ -18,7 +18,7 @@
 
 <template name="home">
     {{#if existingHashtagsAvailable}}
-        {{> splashscreen templateName="modalShowMyHashtags" noAutorun=false lazyClose=true timerClose=5000 headername='Quiz-Verwaltung' type='splash-screen-session'}}
+        {{> splashscreen templateName="modalShowMyHashtags" noAutorun=false lazyCloseJsClass='js-splashscreen' timerClose=5000 headername='Quiz-Verwaltung' type='splash-screen-session'}}
     {{/if}}
 
     {{> hashtag_view}}

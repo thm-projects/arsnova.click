@@ -16,15 +16,10 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Template.questionContentSplash.onRendered(function () {
-    $('.modal-dialog').width($('#mainContentContainer').width() - 40);
-    $(window).resize(function () {
-        $('.modal-dialog').width($('#mainContentContainer').width() - 40);
-    });
-});
-
-Template.questionContentSplash.onCreated(function () {
-    this.autorun(() => {
-        this.subscribe('Sessions.question', Session.get("hashtag"));
-    });
+Meteor.startup(function(){
+    if (Meteor.isClient) {
+        // $.getScript('https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML');
+        $.getScript('/lib/highlight.pack.min.js');
+        $.getScript('/lib/marked.min.js');
+    }
 });

@@ -41,6 +41,9 @@ Template.createQuestionView.helpers({
             return "";
         }
     },
+    isFormattingEnabled: function () {
+        return $('#markdownBarDiv').hasClass('hide');
+    }
 });
 
 Template.createQuestionView.events({
@@ -76,15 +79,24 @@ Template.createQuestionView.events({
         Router.go("/");
         $('.previewSplash').parents('.modal').modal('hide');
     },
-    "click #previewButton": function () {
-        $('.previewSplash').parents('.modal').modal('show');
+    "click #formatPreviewButton": function () {
+        if ($('#formatPreviewText').text() == "Format") {
+            $('#formatPreviewText').text("Vorschau");
+            $('#formatPreviewGlyphicon').removeClass("glyphicon-cog");
+            $('#formatPreviewGlyphicon').addClass("glyphicon-phone");
+            $('#markdownBarDiv').removeClass('hide');
+            $('#questionText').removeClass('round-corners');
+            $('#questionText').addClass('round-corners-markdown');
+        } else {
+            $('.previewSplash').parents('.modal').modal('show');
 
-        mathjaxMarkdown.initializeMarkdownAndLatex();
-        var content = $('#questionText').val();
+            mathjaxMarkdown.initializeMarkdownAndLatex();
+            var content = $('#questionText').val();
 
-        content = mathjaxMarkdown.getContent(content);
+            content = mathjaxMarkdown.getContent(content);
 
-        $("#modalpreview-text").html(content);
+            $("#modalpreview-text").html(content);
+        }
     }
 });
 

@@ -106,3 +106,30 @@
 .modal-backdrop {
   background-color: $background-color;
 }
+
+.iPhone-splashscreen {
+  background-image: url("/images/borders/iPhone_6_portrait.png");
+  background-repeat: no-repeat;
+  background-position: top left;
+  margin: 0 auto 0 auto;
+  text-align: center;
+  background-size: 101% 100%;
+}
+
+@media (max-width:550px) {
+  .iPhone-splashscreen {
+    padding: 120px 40px 150px 60px;
+  }
+}
+
+@media (min-width:551px) and (max-width:991px) {
+  .iPhone-splashscreen {
+    padding: 250px 40px 240px 70px;
+  }
+}
+
+@media (min-width:992px) {
+  .iPhone-splashscreen {
+    padding: 230px 40px 240px 70px;
+  }
+}

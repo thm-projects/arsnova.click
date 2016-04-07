@@ -17,9 +17,11 @@
  */
 
 var countdown = null;
+var nextQuestionCountdown = null;
 Template.votingview.onCreated(function () {
+    Session.set("sessionClosed", undefined);
+
     this.autorun(() => {
-        if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
         this.subscribe('AnswerOptions.public', Session.get("hashtag"), function () {
             var answerOptionCount = AnswerOptions.find().count();
             var responseArr = [];
@@ -29,32 +31,51 @@ Template.votingview.onCreated(function () {
             Session.set("responses", JSON.stringify(responseArr));
         });
         this.subscribe('QuestionGroup.questionList', Session.get("hashtag"), function () {
-            countdown = new ReactiveCountdown(QuestionGroup.findOne().questionList[Session.get("questionIndex")].timer / 1000);
-            countdown.start(function () {
-                Session.set("sessionClosed", true);
-                $("#end-of-polling-text").html("Game over");
-                $('.js-splashscreen-end-of-polling').modal('show');
-            });
-            Session.set("countdownInitialized", true);
+            if(!Session.get("sessionClosed")) {
+                startCountdown(0);
+            }
         });
     });
-    Meteor.call('Sessions.isSC', {
+    Meteor.call('Question.isSC', {
         hashtag: Session.get("hashtag")
     }, (err, res) => {
-        if (err) {
-        } else {
-            if (res) {
-                Session.set("questionSC", res);
-            }
+        if (!err && res) {
+            Session.set("questionSC", res);
         }
     });
 });
 
+function startCountdown(index) {
+    Session.set("questionIndex", index);
+    Session.set("nextQuestionCountdownInitialized", false);
+    var questionDoc = QuestionGroup.findOne().questionList[index];
+    Session.set("sessionCountDown", questionDoc.timer);
+    countdown = new ReactiveCountdown(questionDoc.timer / 1000);
+    countdown.start(function () {
+        index++;
+        if(index < QuestionGroup.findOne().questionList.length) {
+            nextQuestionCountdown = new ReactiveCountdown(5);
+            nextQuestionCountdown.start(function () {
+                startCountdown(index);
+            });
+            Session.set("nextQuestionCountdownInitialized", true);
+        } else {
+            $("#end-of-polling-text").html("Game over");
+            $('.js-splashscreen-end-of-polling').modal('show');
+            Session.set("nextQuestionCountdownInitialized", false);
+            Session.set("sessionClosed", true);
+        }
+    });
+    Session.set("countdownInitialized", true);
+}
+
 Template.votingview.onDestroyed(function () {
     Session.set("questionSC", undefined);
     Session.set("responses", undefined);
-    Session.set("sessionClosed", undefined);
     Session.set("countdownInitialized", undefined);
+    Session.set("nextQuestionCountdownInitialized", undefined);
+    countdown.stop();
+    nextQuestionCountdown.stop();
 });
 
 Template.votingview.onRendered(function () {
@@ -66,7 +87,7 @@ Template.votingview.onRendered(function () {
 
 Template.votingview.helpers({
     answerOptions: function () {
-        return AnswerOptions.find({}, {sort:{answerOptionNumber: 1}});
+        return AnswerOptions.find({questionIndex: Session.get("questionIndex")}, {sort:{answerOptionNumber: 1}});
     },
     showForwardButton: function () {
         return Session.get("hasToggledResponse");
@@ -76,8 +97,17 @@ Template.votingview.helpers({
     },
     getCountdown: function () {
         if (Session.get("countdownInitialized")) {
+            if(countdown.get() === 1) {
+                return "Noch 1 Sekunde!";
+            }
             return "Noch " + countdown.get() + " Sekunden!";
         }
+    },
+    isWaitingForNextQuestion: function() {
+        return Session.get("nextQuestionCountdownInitialized");
+    },
+    getTimeUntilNextQuestion: function() {
+        return "Nächste Quizfrage in " + nextQuestionCountdown.get();
     }
 });
 
@@ -127,11 +157,7 @@ Template.votingview.events({
         else {
             var responseArr = JSON.parse(Session.get("responses"));
             var currentId = event.currentTarget.id;
-            if (responseArr[currentId]) {
-                responseArr[currentId] = false;
-            } else {
-                responseArr[currentId] = true;
-            }
+            responseArr[currentId] = responseArr[currentId] ? false : true;
             var hasToggledResponse = false;
             responseArr.forEach(function (number) {
                 if (number) {

@@ -79,5 +79,18 @@ Meteor.methods({
                 }
             }
         }
+    },
+    'Responses.clearAll': function (privateKey, hashtag) {
+        if (Meteor.isServer) {
+            var hashtagDoc = Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
+            });
+            if (!hashtagDoc) {
+                throw new Meteor.Error('Responses.clearAll', 'There is no such quiz active in the db');
+            }
+
+            Responses.remove({hashtag: hashtag});
+        }
     }
 });

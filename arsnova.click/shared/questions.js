@@ -46,11 +46,7 @@ Meteor.methods({
     "QuestionGroup.addQuestion": function ({privateKey, hashtag, questionIndex, questionText}) {
         if(Meteor.isServer) {
             new SimpleSchema({
-                questionText: {
-                    type: String,
-                    min: 5,
-                    max: 1000
-                },
+                questionText: {type: String},
                 questionIndex: {type: Number}
             }).validate({questionIndex: questionIndex, questionText: questionText});
 
@@ -80,7 +76,7 @@ Meteor.methods({
                 }
                 QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
                     if (error) {
-                        throw new Meteor.Error('Sessions.setQuestion', error);
+                        throw new Meteor.Error('QuestionGroup.addQuestion', error);
                     }
                 });
             }
@@ -100,49 +96,44 @@ Meteor.methods({
                 questionGroup.questionList.splice(questionIndex, 1);
                 QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
                     if (error) {
-                        throw new Meteor.Error('Sessions.setQuestion', error);
+                        throw new Meteor.Error('QuestionGroup.removeQuestion', error);
                     }
                 });
             }
         }
     },
     "Question.isSC": function ({hashtag, questionIndex}) {
-        var hashtagDoc = Hashtags.findOne({
-            hashtag: hashtag,
-            privateKey: privateKey
-        });
-        if (!hashtagDoc) {
-            throw new Meteor.Error('Question.isSC', 'There is no quiz with this key');
-        }
         return (AnswerOptions.find({hashtag: hashtag, questionIndex: questionIndex, isCorrect: 1}).count() === 1);
     },
     "Question.updateIsReadConfirmationRequired": function ({privateKey, hashtag, questionIndex, isReadingConfirmationRequired}) {
-        new SimpleSchema({
-            isReadingConfirmationRequired: {
-                type: Number,
-                min: 0,
-                max: 1
-            }
-        }).validate({isReadingConfirmationRequired: isReadingConfirmationRequired});
-
-        var hashtagDoc = Hashtags.findOne({
-            hashtag: hashtag,
-            privateKey: privateKey
-        });
-        if (!hashtagDoc) {
-            throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'There is no quiz with this key');
-        }
-
-        var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
-        if (!questionGroup) {
-            throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'no access to session');
-        } else {
-            questionGroup.questionList[questionIndex].isReadingConfirmationRequired = isReadingConfirmationRequired;
-            QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
-                if (error) {
-                    throw new Meteor.Error('Question.updateIsReadConfirmationRequired', error);
+        if (Meteor.isServer) {
+            new SimpleSchema({
+                isReadingConfirmationRequired: {
+                    type: Number,
+                    min: 0,
+                    max: 1
                 }
+            }).validate({isReadingConfirmationRequired: isReadingConfirmationRequired});
+
+            var hashtagDoc = Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
             });
+            if (!hashtagDoc) {
+                throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'There is no quiz with this key');
+            }
+
+            var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
+            if (!questionGroup) {
+                throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'no access to session');
+            } else {
+                questionGroup.questionList[questionIndex].isReadingConfirmationRequired = isReadingConfirmationRequired;
+                QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
+                    if (error) {
+                        throw new Meteor.Error('Question.updateIsReadConfirmationRequired', error);
+                    }
+                });
+            }
         }
     },
     "Question.setTimer": function ({privateKey, hashtag, questionIndex, timer}) {

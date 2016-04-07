@@ -16,6 +16,10 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+Template.home.onRendered(function () {
+    Session.set("questionIndex", 0);
+});
+
 Template.home.helpers({
     existingHashtagsAvailable: function () {
         return Session.get("localStorageAvailable") && localData.getAllHashtags().length > 0;

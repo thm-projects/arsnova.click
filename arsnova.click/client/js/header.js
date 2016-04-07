@@ -52,6 +52,17 @@ Template.header.helpers({
     },
     currentHashtag: function () {
         return Session.get("hashtag");
+    },
+    isEditingQuestion: function () {
+        switch (Router.current().route.path()) {
+            case '/question':
+            case '/answeroptions':
+            case '/settimer':
+            case '/readconfirmationrequired':
+                return true;
+            default:
+                return false;
+        }
     }
 });
 

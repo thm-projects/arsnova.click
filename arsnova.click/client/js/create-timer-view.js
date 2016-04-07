@@ -17,11 +17,11 @@
  */
 
 Template.createTimerView.onCreated(function () {
+    if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
     this.autorun(() => {
-        if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
         this.subscription = Meteor.subscribe('AnswerOptions.instructor', localData.getPrivateKey(), Session.get("hashtag"), function() {});
         this.subscription = Meteor.subscribe('QuestionGroup.authorizeAsOwner', localData.getPrivateKey(), Session.get("hashtag"), function () {
-            var doc = QuestionGroup.findOne({hashtag: Session.get("hashtag")});
+            var doc = QuestionGroup.findOne();
             if (doc && doc.questionList[Session.get("questionIndex")].timer !== 0) {
                 Session.set("slider", (doc.questionList[Session.get("questionIndex")].timer / 1000));
             } else {
@@ -35,13 +35,66 @@ Template.createTimerView.onRendered(function () {
     createSlider();
 });
 
-function createSlider (defaultSec) {
+Template.createTimerView.onDestroyed(function () {
+    $('body').off('click', '.questionIcon:not(.active)');
+});
+
+
+Template.createTimerView.helpers({
+    slider: function () {
+        return Session.get("slider");
+    }
+});
+
+Template.createTimerView.events({
+    "click #forwardButton, click #backButton":function(event){
+        var err = setTimer(Session.get("questionIndex"));
+
+        if (err) {
+            $('.errorMessageSplash').parents('.modal').modal('show');
+            $("#errorMessage-text").html(err.reason);
+        } else {
+            if($(event.target).attr("id") === "forwardButton") {
+                Router.go("/memberlist");
+            } else {
+                Router.go("/answeroptions");
+            }
+        }
+    }
+});
+
+function setTimer(index) {
+    var hasError = false;
+    // timer is given in seconds
+    const timer = Session.get("slider") * 1000;
+    if(!isNaN(timer)) {
+        Meteor.call("Question.setTimer", {
+            privateKey: localData.getPrivateKey(),
+            hashtag: Session.get("hashtag"),
+            questionIndex: index,
+            timer: timer
+        }, (err, res) => {
+            if(err) {
+                hasError = err;
+            } else {
+                localData.addTimer(Session.get("hashtag"), index, timer);
+            }
+        });
+    } else {
+        hasError = {
+            reason: "Timer is not a number"
+        };
+    }
+    return hasError;
+}
+
+function createSlider (index) {
     if (Session.get("slider") === undefined){
         setTimeout(createSlider, 50);
         return;
     }
     if (Session.get("slider") === 0){
-        Session.set("slider", AnswerOptions.find({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex")}).count()*10);
+        Session.set("slider", AnswerOptions.find({questionIndex: index}).count()*10);
     }
     this.$("#slider").noUiSlider({
         start: Session.get("slider"),
@@ -56,35 +109,9 @@ function createSlider (defaultSec) {
     });
 }
 
-Template.createTimerView.helpers({
-    slider: function () {
-        return Session.get("slider");
-    }
-});
-
-Template.createTimerView.events({
-    "click #forwardButton, click #backButton":function(event){
-        // timer is given in seconds
-        const timer = Session.get("slider") * 1000;
-        if(!isNaN(timer)) {
-            Meteor.call("Question.setTimer", {
-                privateKey: localData.getPrivateKey(),
-                hashtag: Session.get("hashtag"),
-                questionIndex: Session.get("questionIndex"),
-                timer: timer
-            }, (err, res) => {
-                if (err) {
-                    $('.errorMessageSplash').parents('.modal').modal('show');
-                    $("#errorMessage-text").html(err.reason);
-                } else {
-                    localData.addTimer(Session.get("hashtag"), Session.get("questionIndex"), timer);
-                    if($(event.target).attr("id") === "forwardButton") {
-                        Router.go("/memberlist");
-                    } else {
-                        Router.go("/answeroptions");
-                    }
-                }
-            });
-        }
-    }
-});
+function setSlider(index) {
+    //console.log("oldVal:"+$("#slider").val()+", newVal:"+ QuestionGroup.findOne().questionList[index].timer+", Session: "+Session.get("slider"));
+    //$("#slider").val(QuestionGroup.findOne().questionList[index].timer / 1000);
+    Session.set('slider', (QuestionGroup.findOne().questionList[index].timer / 1000));
+    $("#slider").val((QuestionGroup.findOne().questionList[index].timer / 1000));
+}

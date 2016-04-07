@@ -27,7 +27,8 @@ Template.nick.onRendered(function () {
 });
 
 Template.nick.events({
-    "click #forwardButton": function () {
+    "click #forwardButton": function (event) {
+        event.stopPropagation();
         var nickname = $("#nickname-input-field").val();
         var bgColor = rgbToHex(getRandomInt(0, 255), getRandomInt(0, 255), getRandomInt(0, 255));
         Meteor.call('MemberList.addLearner', {

@@ -66,5 +66,18 @@ Meteor.methods({
          TODO Why is member added here as options field?
          */
         MemberList.update(member._id, {$set: {readConfirmed: 1}}, member);
+    },
+    'MemberList.removeFromSession': function(privateKey, hashtag) {
+        if(Meteor.isServer) {
+            var doc = Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
+            });
+            if (doc) {
+                MemberList.remove({hashtag: hashtag});
+            } else {
+                throw new Meteor.Error('MemberList.removeFromSession', 'Either the hashtag isn\'t available or the key is wrong');
+            }
+        }
     }
 });

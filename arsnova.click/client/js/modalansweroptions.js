@@ -17,8 +17,8 @@
  */
 
 Template.answerOptionsSplash.onCreated(function () {
+    if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
     this.autorun(() => {
-        if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
         this.subscribe('AnswerOptions.public', Session.get("hashtag"));
     });
 });

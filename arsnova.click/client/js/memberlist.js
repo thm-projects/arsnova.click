@@ -17,6 +17,9 @@
  */
 
 Template.memberlist.onCreated(function () {
+    Session.set("questionIndex", 0);
+    var oldStartTimeValues = {};
+
     this.autorun(() => {
         this.subscribe('MemberList.members', Session.get("hashtag"), function () {
             $(window).resize(function () {
@@ -34,20 +37,24 @@ Template.memberlist.onCreated(function () {
             });
             Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 2);
         }
-        this.subscribe('QuestionGroup.memberlist', Session.get("hashtag"));
+        this.subscribe('QuestionGroup.memberlist', Session.get("hashtag"), function () {
+            var doc = QuestionGroup.findOne();
+            for(var i = 0; i< doc.questionList.length; i++) {
+                oldStartTimeValues[i] = doc.questionList[i].startTime;
+            }
+        });
+        this.subscribe('Responses.session', Session.get("hashtag"));
     });
 
-    var oldStartTimeValues = {};
     Tracker.autorun(function() {
         var initializing = true;
         QuestionGroup.find().observeChanges({
             changed: function (id, changedFields) {
-                if (!initializing) {
-                    if (changedFields.questionList[Session.get("questionIndex")].startTime && (oldStartTimeValues[Session.get("questionIndex")] != changedFields.questionList[Session.get("questionIndex")].startTime)) {
+                if(!initializing && changedFields.questionList) {
+                    var question = changedFields.questionList[Session.get("questionIndex")];
+                    if (question.startTime && (oldStartTimeValues[Session.get("questionIndex")] !== question.startTime)) {
                         Router.go("onpolling");
                     }
-                } else {
-                    oldStartTimeValues[Session.get("questionIndex")] = changedFields.questionList[Session.get("questionIndex")].startTime;
                 }
             }
         });
@@ -127,9 +134,13 @@ Template.memberlist.events({
     'click .btn-less-learners': function () {
         Session.set("LearnerCountOverride", false);
         calculateButtonCount();
-    },    
+    },
+    'click .btn-learner': function (event) {
+        event.preventDefault();
+    },
     'click #startPolling': function (event) {
         Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 3);
+        Meteor.call('Responses.clearAll', localData.getPrivateKey(), Session.get("hashtag"));
         Meteor.call('Question.startTimer', {
             privateKey: localData.getPrivateKey(),
             hashtag: Session.get("hashtag"),
@@ -143,6 +154,7 @@ Template.memberlist.events({
     },
     'click #backButton':function(event){
         Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 1);
+        Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
         Router.go("/settimer");
     }
 });

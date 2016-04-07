@@ -17,21 +17,40 @@
  */
 
 Template.createAnswerOptions.onCreated(function () {
+    if (!Session.get("questionIndex")) Session.set("questionIndex", 0);
     this.autorun(() => {
-        if (!Session.get("questionIndex")) Session.set("questionIndex", 0);
-        this.subscription = Meteor.subscribe('AnswerOptions.instructor', localData.getPrivateKey(), Session.get("hashtag"), Session.get("questionIndex"));
+        this.subscription = Meteor.subscribe('AnswerOptions.instructor', localData.getPrivateKey(), Session.get("hashtag"));
     });
+});
+
+Template.createAnswerOptions.onRendered(function () {
+    var calculateHeight = function calculateHeight() {
+        var answer_options_height = $(".container").height() - $(".row-landingpage-buttons").outerHeight(true) - $(".titel-relative").outerHeight(true);
+        $('.answer-options').css("height", answer_options_height);
+    };
+    $(window).resize(calculateHeight);
+    calculateHeight();
+
+    var index = Session.get("questionIndex");
+    $('body').on('click', '.questionIcon:not(.active)', function () {
+        parseAnswerOptionInput(index);
+        index = Session.get("questionIndex");
+    });
+});
+
+Template.createAnswerOptions.onDestroyed(function () {
+    $('body').off('click', '.questionIcon:not(.active)');
 });
 
 Template.createAnswerOptions.helpers({
     answerOptions: function () {
-        return AnswerOptions.find({}, {sort: {answerOptionNumber: 1}});
+        return AnswerOptions.find({questionIndex: Session.get("questionIndex")}, {sort: {answerOptionNumber: 1}});
     },
     answerOptionLetter: function (Nr) {
         return String.fromCharCode(Nr + 65);
     },
     showDeleteButtonOnStart: function () {
-        return (AnswerOptions.find().count() === 1) ? "hide" : "";
+        return (AnswerOptions.find({questionIndex: Session.get("questionIndex")}).count() === 1) ? "hide" : "";
     }
 });
 
@@ -49,7 +68,7 @@ Template.createAnswerOptions.events({
         }
     },
     "click #addAnswerOption": function () {
-        var answerOptionsCount = AnswerOptions.find().count();
+        var answerOptionsCount = AnswerOptions.find({questionIndex: Session.get("questionIndex")}).count();
         if (answerOptionsCount < 26) {
             const answerOption = {
                 privateKey: localData.getPrivateKey(),
@@ -80,7 +99,7 @@ Template.createAnswerOptions.events({
         }
     },
     "click #deleteAnswerOption": function (event) {
-        var answerOptionsCount = AnswerOptions.find().count();
+        var answerOptionsCount = AnswerOptions.find({questionIndex: Session.get("questionIndex")}).count();
         if (answerOptionsCount > 1) {
             $("#addAnswerOption").removeClass("hide");
 
@@ -103,16 +122,14 @@ Template.createAnswerOptions.events({
     "click #backButton": function (event) {
         Router.go('/question');
     },
-    "click #forwardButton, click .questionIcon": function (event) {
-        var error = parseAnswerOptionInput();
+    "click #forwardButton": function (event) {
+        var error = parseAnswerOptionInput(Session.get("questionIndex"));
 
         if (error) {
             $('.errorMessageSplash').parents('.modal').modal('show');
             $("#errorMessage-text").html(error.reason);
         } else {
-            if($(event.target).attr("id") === "forwardButton") {
-                Router.go("/settimer");
-            }
+            Router.go("/settimer");
         }
     },
     "keydown .input-field": function (event) {
@@ -134,24 +151,15 @@ Template.createAnswerOptions.events({
     }
 });
 
-Template.createAnswerOptions.onRendered(function () {
-    var calculateHeight = function calculateHeight() {
-        var answer_options_height = $(".container").height() - $(".row-landingpage-buttons").outerHeight(true) - $(".titel-relative").outerHeight(true);
-        $('.answer-options').css("height", answer_options_height);
-    };
-    $(window).resize(calculateHeight);
-    calculateHeight();
-});
-
-function parseAnswerOptionInput() {
+function parseAnswerOptionInput(index) {
     var hasError = false;
-    for (var i = 0; i < AnswerOptions.find().count(); i++) {
+    for (var i = 0; i < AnswerOptions.find({questionIndex: index}).count(); i++) {
         var text = $("#answerOptionText_Number" + i).val();
         var isCorrect = $('div#answerOption-' + i + ' .check-mark-checked').length > 0 ? 1 : 0;
         var answer = {
             privateKey: localData.getPrivateKey(),
             hashtag: Session.get("hashtag"),
-            questionIndex: Session.get("questionIndex"),
+            questionIndex: index,
             answerOptionNumber: i,
             answerText: text,
             isCorrect: isCorrect

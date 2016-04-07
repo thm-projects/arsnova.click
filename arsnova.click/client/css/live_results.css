@@ -16,6 +16,26 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#liveResultsFrame.fixed-bottom {
+    bottom: 0;
+}
+
+.question-title {
+    color: white;
+    font-size: 1.5em;
+}
+
+.question-wrapper {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.question-row.active {
+    -webkit-box-shadow: 0 0 13px 3px rebeccapurple;
+    -moz-box-shadow: 0 0 13px 3px rebeccapurple;
+    box-shadow: 0 0 13px 3px rebeccapurple;
+}
+
 .button-result-mc-letter {
     font-size: 1.5em;
     line-height: 40px;

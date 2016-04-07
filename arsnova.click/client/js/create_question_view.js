@@ -17,25 +17,32 @@
  */
 
 Template.createQuestionView.onCreated(function () {
+    if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
     this.autorun(() => {
-        if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
-        this.subscribe('QuestionGroup.authorizeAsOwner', localData.getPrivateKey(), Session.get("hashtag"), function () {
-            var doc = QuestionGroup.findOne();
-            if (doc && doc.questionList[Session.get("questionIndex")].questionText.length > 4) {
-                $("#forwardButton").removeAttr("disabled");
-            }
-            else {
-                $("#forwardButton").attr("disabled", "disabled");
-            }
-        });
+        this.subscribe('QuestionGroup.authorizeAsOwner', localData.getPrivateKey(), Session.get("hashtag"));
     });
+});
+
+Template.createQuestionView.onRendered(function () {
+    $(window).resize(calculateWindow());
+    calculateWindow();
+
+    var index = Session.get("questionIndex");
+    $('body').on('click', '.questionIcon:not(.active)', function () {
+        addQuestion(index);
+        index = Session.get("questionIndex");
+    });
+});
+
+Template.createQuestionView.onDestroyed(function () {
+    $('body').off('click', '.questionIcon:not(.active)');
 });
 
 Template.createQuestionView.helpers({
     //Get question from Sessions-Collection if it already exists
     questionText: function () {
         var currentSession = QuestionGroup.findOne();
-        return currentSession ? currentSession.questionList[Session.get("questionIndex")].questionText : "";
+        return currentSession && currentSession.questionList[Session.get("questionIndex")] ? currentSession.questionList[Session.get("questionIndex")].questionText : "";
     },
     isFormattingEnabled: function () {
         return $('#markdownBarDiv').hasClass('hide');
@@ -43,10 +50,6 @@ Template.createQuestionView.helpers({
 });
 
 Template.createQuestionView.events({
-    "input #questionText": function () {
-        var forwardButton = $("#forwardButton");
-        $('#questionText').val().length > 4 ? forwardButton.removeAttr("disabled") : forwardButton.attr("disabled", "disabled");
-    },
     //Save question in Sessions-Collection when Button "Next" is clicked
     'click #forwardButton': function () {
         var questionText = $('#questionText').val();
@@ -95,10 +98,22 @@ Template.createQuestionView.events({
     }
 });
 
-Template.createQuestionView.onRendered(function () {
-    $(window).resize(calculateWindow());
-    calculateWindow();
-});
+function addQuestion(index) {
+    var questionText = $('#questionText').val();
+    Meteor.call("QuestionGroup.addQuestion", {
+        privateKey: localData.getPrivateKey(),
+        hashtag: Session.get("hashtag"),
+        questionIndex: index,
+        questionText: questionText
+    }, (err, res) => {
+        if (err) {
+            $('.errorMessageSplash').parents('.modal').modal('show');
+            $("#errorMessage-text").html(err.reason);
+        } else {
+            localData.addQuestion(Session.get("hashtag"), index, questionText);
+        }
+    });
+}
 
 function calculateWindow() {
     var hashtag_length = Session.get("hashtag").length;

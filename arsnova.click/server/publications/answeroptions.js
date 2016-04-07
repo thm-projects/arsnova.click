@@ -16,17 +16,16 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Meteor.publish('AnswerOptions.instructor', function(pprivateKey, phashtag, questionIndex) {
+Meteor.publish('AnswerOptions.instructor', function(pprivateKey, phashtag) {
     new SimpleSchema({
         phashtag: {type: String},
-        pprivateKey: {type: String},
-        questionIndex: {type: Number}
-    }).validate({pprivateKey, phashtag, questionIndex});
+        pprivateKey: {type: String}
+    }).validate({pprivateKey, phashtag});
     var doc = Hashtags.find({
         hashtag: phashtag,
         privateKey: pprivateKey
     });
-    return doc ? AnswerOptions.find({hashtag: phashtag, questionIndex: questionIndex}) : false;
+    return doc ? AnswerOptions.find({hashtag: phashtag}) : false;
 });
 
 Meteor.publish('AnswerOptions.options', function(phashtag) {

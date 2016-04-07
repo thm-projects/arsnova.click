@@ -124,7 +124,7 @@ Template.hashtag_view.events({
     "click #joinSession": function () {
         var hashtag = $("#hashtag-input-field").val();
 
-        if (Hashtags.findOne({hashtag:hashtag}).sessionStatus == 2) {
+        if (Hashtags.findOne({hashtag:hashtag}).sessionStatus === 2) {
             Session.set("hashtag", hashtag);
             Router.go("/nick");
         } else {

@@ -3,7 +3,7 @@
         <div class="col-md-9">
             <div class="row questionScrollPane">
                 {{#each question}}
-                    <div class="{{#if isActiveIndex @index}}active {{/if}}questionIcon" id="questionIcon_{{@index}}">
+                    <div class="{{#if isActiveIndex @index}}active {{/if}}{{#if hasCompleteContent @index}} valid {{/if}}questionIcon" id="questionIcon_{{@index}}">
                         <span class="indexNumber">{{getNormalizedIndex @index}}</span>
                         <button class="removeQuestion button button-default">
                             <span class="glyphicon glyphicon-trash"></span>

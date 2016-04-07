@@ -194,7 +194,7 @@ mathjaxMarkdown = {
                 '</div>';
         }
 
-        return '<img class="resizeableImage" title="' + text + '" src="' + href + '" alt="' + text + '">';
+        return '<img class="resizeableImage" title="' + text + '" src="' + href + '" alt="' + text + '"style="width: 100%">';
     },
     hyperlinkRenderer: function (href, title, text) {
         var titleDelimiter = /^.*alt="([^"]*)/;

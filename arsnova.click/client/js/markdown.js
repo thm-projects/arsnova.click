@@ -110,7 +110,7 @@ Template.youtubeInsertSplash.events({
     "click #js-btn-saveYoutube": function (event) {
         var linkText = document.getElementById('youtubeText').value;
         var linkDestination = document.getElementById('youtubeDestination').value;
-        var picUrl = linkDestination.replace("www.", "img.").replace("watch?v=", "vi/").concat("/o.jpg");
+        var picUrl = linkDestination.replace("www.", "img.").replace("watch?v=", "vi/").concat("/0.jpg");
         insertInQuestionText('[![' + linkText + '](' + picUrl + ')](' + linkDestination + ')');
         closeSplashscreen();
     }

@@ -2,6 +2,13 @@ variables:
   PROJECT_PATH: arsnova.click
   MIRROR_REPO: git@github.com:thm-projects/arsnova.click.git
 
+jshint:
+  stage: test
+  allow_failure: true
+  script:
+    - npm install jshint@^2.9.0
+    - node_modules/jshint/bin/jshint --config .jshintrc $PROJECT_PATH/client/ $PROJECT_PATH/server/ $PROJECT_PATH/shared/
+
 build-and-deploy:
   stage: deploy
   only:

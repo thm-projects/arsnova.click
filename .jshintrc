@@ -1,0 +1,27 @@
+{
+	"browser": true,
+	"esnext": true,
+	"undef": true,
+	"globals": {
+		"_": false,
+		"$": false,
+		"hljs": false,
+		"marked": false,
+		"MathJax": false,
+		"Meteor": false,
+		"Mongo": false,
+		"ReactiveCountdown": false,
+		"Router": false,
+		"Session": false,
+		"SimpleSchema": false,
+		"Template": false,
+		"Tracker": false,
+
+		"AnswerOptions": true,
+		"Hashtags": true,
+		"LeaderBoard": true,
+		"MemberList": true,
+		"Responses": true,
+		"Sessions": true
+	}
+}

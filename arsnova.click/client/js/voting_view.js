@@ -202,20 +202,14 @@ function formatAnswerButtons () {
 
     var buttonHeight = 0;
     answerRow.children().removeClass('col-xs-12').removeClass('col-xs-6').removeClass('col-xs-4');
-
-    if (answerOptionsCount <= 3) {
-        answerButtonContainerHeight -= answerOptionsCount * 30;
+    if($(window).width() < 300) {
         answerRow.children().addClass('col-xs-12');
-        buttonHeight = answerButtonContainerHeight / answerOptionsCount;
-    } else if (answerOptionsCount <= 6) {
-        answerButtonContainerHeight -= Math.ceil((answerOptionsCount / 2)) * 30;
+    } else if (answerOptionsCount <= 6 || $(window).width() < 500) {
         answerRow.children().addClass('col-xs-6');
-        buttonHeight = answerButtonContainerHeight / (Math.ceil(answerOptionsCount / 2));
     } else {
-        answerButtonContainerHeight -= Math.ceil((answerOptionsCount / 3)) * 30;
         answerRow.children().addClass('col-xs-4');
-        buttonHeight = answerButtonContainerHeight / (Math.ceil(answerOptionsCount / 3));
     }
 
-    answerRow.find('button').css('height', buttonHeight + 'px');
+    answerRow.find('button').css('height', $('#0').width() + 'px');
+
 }

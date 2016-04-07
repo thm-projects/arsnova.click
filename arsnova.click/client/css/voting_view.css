@@ -23,6 +23,7 @@
 .btn-answerOption {
     margin: 15px 0;
     width: 100%;
+    height: 100%;
 }
 
 .sendResponse {
@@ -58,4 +59,8 @@
     -ms-transition: background 500ms ease-in;
     -o-transition: background 500ms ease-in;
     transition: background 500ms ease-in;
+}
+
+.buttonWrapper {
+    text-align: center;
 }

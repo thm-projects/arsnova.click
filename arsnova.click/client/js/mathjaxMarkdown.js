@@ -57,7 +57,7 @@ mathjaxMarkdown = {
 
         script = document.createElement("script");
         script.type = "text/javascript";
-        script.src = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+        script.src = "https://cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=TeX-MML-AM_CHTML";
         head.appendChild(script);
     },
     replaceCodeBlockFromContent: function (content) {

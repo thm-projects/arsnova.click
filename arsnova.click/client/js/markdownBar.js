@@ -179,7 +179,7 @@ function markdownAlreadyExistsAndAutoRemove (textStart, textEnd) {
             var backText = (textarea.value).substring(strPosEnd + textEnd.length, textarea.value.length);
             textarea.value = frontText + middleText + backText;
             textarea.selectionStart = strPosBegin - textStart.length;
-            textarea.selectionEnd = strPosEnd - textEnd.length;
+            textarea.selectionEnd = strPosEnd - (textEnd.length == 0 ? textStart.length : textEnd.length);
             textarea.focus();
 
             textarea.scrollTop = scrollPos;

@@ -106,7 +106,7 @@
 
 .youtubeIcon::before {
     content: "\f167";
-    font-family: "arsnova" !important;
+    font-family: "arsnova";
 }
 
 .latexIcon::before {
@@ -116,6 +116,21 @@
 
 .codeListingIcon::before {
     content: "\f121";
+    font-family: "arsnova";
+}
+
+.codeCommentIcon::before {
+    content: "\f10e";
+    font-family: "arsnova";
+}
+
+.iconEditorUl::before {
+    content: "\f0ca";
+    font-family: "arsnova";
+}
+
+.iconEditorOl::before {
+    content: "\f0cb";
     font-family: "arsnova";
 }
 

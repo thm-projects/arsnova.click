@@ -133,3 +133,19 @@
     padding: 230px 40px 240px 70px;
   }
 }
+
+.videoImageContainer {
+  position: relative;
+}
+
+.videoImageContainer:after {
+  font-size: 500%;
+  position: absolute;
+  left: 50%; top: 50%;
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: "arsnova";
+  content: "\f01d";
+}

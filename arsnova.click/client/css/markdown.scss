@@ -99,6 +99,11 @@
     font-size: 22px;
 }
 
+.icon-play-circle::before {
+    content: "\f01d";
+    font-family: "arsnova";
+}
+
 .vimeoIcon::before {
     content: "\f194";
     font-family: "arsnova";
@@ -141,8 +146,6 @@
 }
 .col-centered {
     display: inline-block;
-    /*float: none;
-    text-align: left;*/
     float: left;
 }
 

@@ -189,9 +189,9 @@ mathjaxMarkdown = {
         var size = '', alignment = 'center';
 
         if (!isVideoElement) {
-            return '<div style="text-align:' + alignment + '">' +
+            return '<a target="_blank" class="hyperlink" href="' + href + '"><div style="text-align:' + alignment + '">' +
                 '<img class="resizeableImage img-responsive" title="' + text + '" src="' + href + '" alt="' + text + '" style=' + size + '>' +
-                '</div>';
+                '</div></a>';
         }
 
         return '<img class="resizeableImage" title="' + text + '" src="' + href + '" alt="' + text + '"style="width: 100%">';

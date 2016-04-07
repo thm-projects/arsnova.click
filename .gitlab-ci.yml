@@ -1,5 +1,6 @@
 variables:
   PROJECT_PATH: arsnova.click
+  MIRROR_REPO: git@github.com:thm-projects/arsnova.click.git
 
 build-and-deploy:
   stage: deploy
@@ -19,3 +20,12 @@ build-and-deploy:
     paths:
       - package-metadata
       - $PROJECT_PATH/.meteor/local
+
+sync_mirror:
+  stage: deploy
+  when: always
+  allow_failure: true
+  script:
+    - git clone --bare "$CI_BUILD_REPO" mirror.git
+    - cd mirror.git
+    - git push --mirror "$MIRROR_REPO"

@@ -16,10 +16,14 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var defaultHyperLinkRenderer;
+
 mathjaxMarkdown = {
     initializeMarkdownAndLatex: function () {
         // markdown setup
         var markedRenderer = marked.Renderer;
+
+        defaultHyperLinkRenderer = markedRenderer.prototype.link;
 
         markedRenderer.prototype.link = this.hyperlinkRenderer;
         markedRenderer.prototype.image = this.imageRenderer;
@@ -229,7 +233,8 @@ mathjaxMarkdown = {
         content = videoElementReplace(content, vimeoDelimiters);
 
         if (text === content) {
-            content = content.slice(0, 3) + 'class="hyperlink" ' + content.slice(3, content.length);
+            content = defaultHyperLinkRenderer.call(marked, href, title, text);
+            content = content.slice(0, 3) + 'target="_blank" class="hyperlink" ' + content.slice(3, content.length);
         }
 
         return content;

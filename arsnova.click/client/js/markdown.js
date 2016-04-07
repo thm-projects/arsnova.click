@@ -35,7 +35,7 @@ Template.markdownBar.events({
     "click #infoMarkdownButton": function (event) {
         var markdownInfoText = $("#markdownInfoText");
         markdownInfoText.parents('.modal').modal('show');
-        markdownInfoText.html("Sie können Texte innerhalb von ARSnova mithilfe von <a class=\"hyperlink\" href=\"https://de.wikipedia.org/wiki/Markdown\">Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown Optionen werden in Form von Schaltflächen über den unterstützten Eingabefeldern angeboten. Zudem unterstützt ARSnova <a class=\"hyperlink\" href=\"https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet\">GitHub Flavored Markdown</a>");
+        markdownInfoText.html("Sie können Texte innerhalb von ARSnova mithilfe von <a target=\"_blank\" class=\"hyperlink\" href=\"https://de.wikipedia.org/wiki/Markdown\">Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown Optionen werden in Form von Schaltflächen über den unterstützten Eingabefeldern angeboten. Zudem unterstützt ARSnova <a target=\"_blank\" class=\"hyperlink\" href=\"https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet\">GitHub Flavored Markdown</a>");
     },
     "click #boldMarkdownButton": function (event) {
         if (!markdownAlreadyExistsAndAutoRemove('**', '**')){

@@ -43,7 +43,17 @@ Template.markdownBar.events({
         }
     },
     "click #headerMarkdownButton": function (event) {
-        insertInQuestionText('#', '#');
+        if (!markdownAlreadyExistsAndAutoRemove('###', '###')){
+            if (markdownAlreadyExistsAndAutoRemove('##', '##')){
+                insertInQuestionText('###', '###');
+            } else {
+                if (markdownAlreadyExistsAndAutoRemove('#', '#')){
+                    insertInQuestionText('##', '##');
+                } else {
+                    insertInQuestionText('#', '#');
+                }
+            }
+        }
     },
     "click #linkMarkdownButton": function (event) {
         $("#hyperlinkInsertSplashContent").parents('.modal').modal('show');

@@ -51,8 +51,8 @@
 }
 
 .button-green-transition {
-    background-color: #008000;
-    color: #FFFFFF;
+    background-color: #FFFFFF;
+    color: #663399;
     -webkit-transition: background 500ms ease-in;
     -moz-transition: background 500ms ease-in;
     -ms-transition: background 500ms ease-in;

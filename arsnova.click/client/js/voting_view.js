@@ -17,7 +17,7 @@
  */
 
 var countdown = null;
-var aktBtn = -3;
+var currentButton = 0;
 Template.votingview.onCreated(function () {
     this.autorun(() => {
         this.subscribe('AnswerOptions.public', Session.get("hashtag"), function () {
@@ -31,25 +31,34 @@ Template.votingview.onCreated(function () {
         this.subscribe('Sessions.question', Session.get("hashtag"), function () {
             countdown = new ReactiveCountdown(Sessions.findOne().timer / 1000,{
                 tick: function() {
-                    var btnsCount = $('.answer-row').children().length;
-                    var lastBtn = 0;
+                    var buttonsCount = $('.answer-row').children().length;
+                    var lastButton = 0;
+                    var secondsUntilNextRound = 3;
 
-                    if(aktBtn<=0)   lastBtn = btnsCount-1;
-                    else            lastBtn = aktBtn-1;
-
-                    /* skip the selected answer options */
-                    while ( $('#'+aktBtn).hasClass('answer-selected') ) {
-                        aktBtn++;
-                        if(aktBtn>=btnsCount) aktBtn = -3;
+                    if(currentButton<=0) {
+                        lastButton = buttonsCount-1;
+                    } else {
+                        lastButton = currentButton-1;
                     }
 
-                    $('#' + lastBtn).removeClass('button-green-transition');
-                    $('#' + lastBtn).addClass('button-purple-transition');
-                    $('#' + aktBtn).addClass('button-green-transition');
-                    $('#' + aktBtn).removeClass('button-purple-transition');
+                    /* skip the selected answer options */
+                    while ( $('#'+currentButton).hasClass('answer-selected') ) {
+                        currentButton++;
+                        if(currentButton>=buttonsCount) {
+                            currentButton = 0 - secondsUntilNextRound;
+                        }
+                    }
 
-                    aktBtn++;
-                    if(aktBtn>=btnsCount) aktBtn = -3;
+                    $('#' + lastButton).removeClass('button-green-transition');
+                    $('#' + lastButton).addClass('button-purple-transition');
+                    $('#' + currentButton).addClass('button-green-transition');
+                    $('#' + currentButton).removeClass('button-purple-transition');
+
+                    currentButton++;
+
+                    if(currentButton>=buttonsCount) {
+                        currentButton = 0 - secondsUntilNextRound;
+                    }
                 }
             });
             countdown.start(function () {

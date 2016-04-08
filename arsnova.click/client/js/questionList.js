@@ -6,14 +6,17 @@ Template.questionList.onCreated(function () {
         this.subscribe('QuestionGroup.questionList', Session.get("hashtag"));
         this.subscribe('AnswerOptions.instructor', localData.getPrivateKey(), Session.get("hashtag"));
     });
-});
 
-Template.questionList.onDestroyed(function () {
-    
-});
+    this.autorun(() => {
+        if(!QuestionGroup.findOne()) return;
 
-Template.questionList.onRendered(function () {
-    
+        var questionList = QuestionGroup.findOne().questionList;
+        var valid_questions = Session.get("valid_questions");
+        if(questionList.length >= valid_questions.length) return;
+
+        valid_questions.splice(questionList.length - 1, valid_questions.length - questionList.length);
+        Session.set("valid_questions",valid_questions);
+    })
 });
 
 Template.questionList.helpers({
@@ -53,9 +56,6 @@ Template.questionList.events({
                 $("#errorMessage-text").html(err.reason);
             } else {
                 localData.removeQuestion(Session.get("hashtag"), id);
-                var valid_questions = Session.get("valid_questions");
-                valid_questions.splice(id, 1);
-                Session.set("valid_questions",valid_questions);
                 if (QuestionGroup.findOne().questionList.length === 0) {
                     addNewQuestion();
                 }

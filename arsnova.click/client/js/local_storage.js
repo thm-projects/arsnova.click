@@ -104,8 +104,11 @@ localData = {
             } else {
                 sessionData.questionList.push({
                     questionText: questionText,
-                    timer: 0,
-                    isReadingConfirmationRequired: 1
+                    timer: 10000,
+                    isReadingConfirmationRequired: 1,
+                    answers: [
+                        {answerOptionNumber:0, answerText:"", isCorrect:0}
+                    ]
                 });
             }
             localStorage.setItem(hashtag, JSON.stringify(sessionData));
@@ -143,11 +146,14 @@ localData = {
         const sessionDataString = localStorage.getItem(hashtag);
         if (sessionDataString) {
             const sessionData = JSON.parse(sessionDataString);
-            if(!sessionData.questionList[questionIndex].answers) sessionData.questionList[questionIndex].answers = [];
+            if(!sessionData.questionList[questionIndex].answers) {
+                sessionData.questionList[questionIndex].answers = [];
+            }
             sessionData.questionList[questionIndex].answers.push({
                 answerOptionNumber:answerOptionNumber,
                 answerText:answerText,
-                isCorrect:isCorrect});
+                isCorrect:isCorrect
+            });
             localStorage.setItem(hashtag, JSON.stringify(sessionData));
         }
     },
@@ -217,7 +223,7 @@ localData = {
 
         const sessionData = JSON.parse(sessionDataString);
         if (typeof sessionData === "object") {
-            sessionData.questionList[questionIndex].answers = $.grep(sessionData[questionIndex].answers, function (value) {
+            sessionData.questionList[questionIndex].answers = $.grep(sessionData.questionList[questionIndex].answers, function (value) {
                 return value.answerOptionNumber !== answerOptionNumber;
             });
 

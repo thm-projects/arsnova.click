@@ -45,30 +45,6 @@ Template.votingview.onCreated(function () {
     });
 });
 
-function startCountdown(index) {
-    Session.set("questionIndex", index);
-    Session.set("nextQuestionCountdownInitialized", false);
-    var questionDoc = QuestionGroup.findOne().questionList[index];
-    Session.set("sessionCountDown", questionDoc.timer);
-    countdown = new ReactiveCountdown(questionDoc.timer / 1000);
-    countdown.start(function () {
-        index++;
-        if(index < QuestionGroup.findOne().questionList.length) {
-            nextQuestionCountdown = new ReactiveCountdown(5);
-            nextQuestionCountdown.start(function () {
-                startCountdown(index);
-            });
-            Session.set("nextQuestionCountdownInitialized", true);
-        } else {
-            $("#end-of-polling-text").html("Game over");
-            $('.js-splashscreen-end-of-polling').modal('show');
-            Session.set("nextQuestionCountdownInitialized", false);
-            Session.set("sessionClosed", true);
-        }
-    });
-    Session.set("countdownInitialized", true);
-}
-
 Template.votingview.onDestroyed(function () {
     Session.set("questionSC", undefined);
     Session.set("responses", undefined);
@@ -112,21 +88,22 @@ Template.votingview.helpers({
 });
 
 Template.votingview.events({
-    "click #js-btn-showQuestionModal": function () {
+    "click #js-btn-showQuestionModal": function (event) {
+        event.stopPropagation();
         $('.questionContentSplash').parents('.modal').modal();
-        var sessionDoc = Sessions.findOne();
+        var questionDoc = QuestionGroup.findOne();
         var content = "";
-        if (sessionDoc) {
+        if (questionDoc) {
             mathjaxMarkdown.initializeMarkdownAndLatex();
-            var questionText = sessionDoc.questionText;
+            var questionText = questionDoc.questionText;
             content = mathjaxMarkdown.getContent(questionText);
         }
 
         $('#questionText').html(content);
     },
-    "click #js-showAnswerTexts": function () {
+    "click #js-showAnswerTexts": function (event) {
+        event.stopPropagation();
         mathjaxMarkdown.initializeMarkdownAndLatex();
-        
         $('.answerTextSplash').parents('.modal').modal();
         var content = "";
 
@@ -134,7 +111,7 @@ Template.votingview.events({
             content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
             content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
         });
-        
+
         $('#answerOptionsTxt').html(content);
     },
     "click #forwardButton": function () {
@@ -171,6 +148,30 @@ Template.votingview.events({
     }
     // submit button onclick -> feedback splashscreen + redirect
 });
+
+function startCountdown(index) {
+    Session.set("questionIndex", index);
+    Session.set("nextQuestionCountdownInitialized", false);
+    var questionDoc = QuestionGroup.findOne().questionList[index];
+    Session.set("sessionCountDown", questionDoc.timer);
+    countdown = new ReactiveCountdown(questionDoc.timer / 1000);
+    countdown.start(function () {
+        index++;
+        if(index < QuestionGroup.findOne().questionList.length) {
+            nextQuestionCountdown = new ReactiveCountdown(5);
+            nextQuestionCountdown.start(function () {
+                startCountdown(index);
+            });
+            Session.set("nextQuestionCountdownInitialized", true);
+        } else {
+            $("#end-of-polling-text").html("Game over");
+            $('.js-splashscreen-end-of-polling').modal('show');
+            Session.set("nextQuestionCountdownInitialized", false);
+            Session.set("sessionClosed", true);
+        }
+    });
+    Session.set("countdownInitialized", true);
+}
 
 function makeAndSendResponse(answerOptionNumber) {
     Meteor.call('Responses.addResponse', {

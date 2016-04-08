@@ -28,7 +28,62 @@ Template.live_results.onCreated(function () {
                 var sessionDoc = Sessions.findOne();
                 Session.set("sessionCountDown", sessionDoc.timer);
                 var timestamp = new Date().getTime();
-                countdown = new ReactiveCountdown((timestamp - sessionDoc.startTime + sessionDoc.timer) / 1000);
+                $( "#countdowndiv" ).appendTo( $( "body" ) );
+                $( "#countdown" ).appendTo( $( "body" ) );
+
+                countdown = new ReactiveCountdown((timestamp - sessionDoc.startTime + sessionDoc.timer) / 1000,{
+
+                    tick: function() {
+                        if(countdown.get()<=6){
+                            var image = document.getElementById('countdown');
+                            var image1 = $('.fader');
+                            var imageDiv = document.getElementById('countdowndiv');
+
+                            if (image.src.match("gr5")) {
+
+                                image.src = "gruen.gif";
+                                image1.fadeIn(500);
+                                imageDiv.style.display="block";
+                                image.style.display="block";
+                                image1.fadeOut(500);
+                            }else if (image.src.match("gruen")) {
+                                imageDiv.style.backgroundColor="#2f4f4f";
+
+                                image.src = "blau.gif";
+                                image1.fadeIn(500);
+                                image1.fadeOut(500);
+                            } else if(image.src.match("blau")){
+                                imageDiv.style.backgroundColor="#663399";
+
+                                image.src = "lila.gif";
+                                image1.fadeIn(500);
+                                image1.fadeOut(500);
+                            } else if(image.src.match("lila")){
+                                imageDiv.style.backgroundColor="#b22222";
+
+
+                                image.src="rot.gif";
+                                image1.fadeIn(500);
+                                image1.fadeOut(500);
+                            }else if(image.src.match("rot")){
+                                imageDiv.style.backgroundColor="#ff8c00";
+
+
+
+                                image.src="orange.gif";
+                                image1.fadeIn(500);
+                                image1.fadeOut(500);
+                            } else if(image.src.match("orange")){
+                                imageDiv.style.backgroundColor="#ffd700";
+
+                                image.src="gelb.gif";
+                                image1.fadeIn(500);
+                                image1.fadeOut(500);
+                            }
+
+                        }
+                    }
+                });
                 countdown.start(function () {
                     Session.set("sessionClosed", true);
                     if (Session.get("isOwner")) {

@@ -29,10 +29,9 @@ Template.questionList.helpers({
     },
     hasCompleteContent: function (index) {
         var valid_questions = Session.get("valid_questions");
-        var result = checkForValidQuestions(index);
-        valid_questions[index] = result;
+        valid_questions[index] = checkForValidQuestions(index);
         Session.set("valid_questions",valid_questions);
-        return result;
+        return valid_questions[index];
     }
 });
 
@@ -43,6 +42,7 @@ Template.questionList.events({
     'click .removeQuestion': function (event) {
         var id = parseInt($(event.target).closest(".questionIcon").attr("id").replace("questionIcon_",""));
         if(id > 0) Session.set("questionIndex",(id - 1));
+
         Meteor.call("QuestionGroup.removeQuestion", {
             privateKey: localData.getPrivateKey(),
             hashtag: Session.get("hashtag"),
@@ -53,6 +53,9 @@ Template.questionList.events({
                 $("#errorMessage-text").html(err.reason);
             } else {
                 localData.removeQuestion(Session.get("hashtag"), id);
+                var valid_questions = Session.get("valid_questions");
+                valid_questions.splice(id, 1);
+                Session.set("valid_questions",valid_questions);
                 if (QuestionGroup.findOne().questionList.length === 0) {
                     addNewQuestion();
                 }
@@ -81,10 +84,11 @@ function checkForValidQuestions(index) {
 }
 
 function addNewQuestion(){
+    var index = QuestionGroup.findOne().questionList.length;
     Meteor.call("QuestionGroup.addQuestion", {
         privateKey: localData.getPrivateKey(),
         hashtag: Session.get("hashtag"),
-        questionIndex: QuestionGroup.findOne().questionList.length,
+        questionIndex: index,
         questionText: ""
     }, (err, res) => {
         if (err) {
@@ -92,6 +96,10 @@ function addNewQuestion(){
             $("#errorMessage-text").html(err.reason);
         } else {
             localData.addQuestion(Session.get("hashtag"), QuestionGroup.findOne().questionList.length, "");
+
+            var valid_questions = Session.get("valid_questions");
+            valid_questions[index] = false;
+            Session.set("valid_questions",valid_questions);
         }
     });
 }

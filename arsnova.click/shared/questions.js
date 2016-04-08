@@ -59,7 +59,7 @@ Meteor.methods({
             var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
             var questionItem = {
                 questionText: questionText,
-                timer: 0,
+                timer: 10000,
                 isReadingConfirmationRequired: 1
             };
             if (!questionGroup) {

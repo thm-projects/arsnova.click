@@ -204,14 +204,6 @@ localData = {
                 questionList: sessionData.questionList
             });
         }
-
-        $.each(sessionData.answers, function (key, value) {
-            Meteor.call("AnswerOptions.addOption", {
-                privateKey: localStorage.getItem("privateKey"),
-                hashtag: hashtag,
-                answerText: value.answerText,
-                isCorrect: value.isCorrect});
-        });
     },
 
     deleteAnswerOption: function (hashtag, questionIndex, answerOptionNumber) {

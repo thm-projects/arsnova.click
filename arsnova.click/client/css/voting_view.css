@@ -38,3 +38,7 @@
 .answer-selected{
  background-color: #ffd700 !important;
 }
+
+.answer-disabled {
+    opacity: 1 !important;
+}

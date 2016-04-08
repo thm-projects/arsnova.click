@@ -33,7 +33,8 @@ Template.answerOptionsSplash.helpers({
 });
 
 Template.answerOptionsSplash.events({
-    "click #js-btn-hideAnswerModal": function () {
+    "click #js-btn-hideAnswerModal": function (event) {
+        event.stopPropagation();
         closeSplashscreen();
     }
 });

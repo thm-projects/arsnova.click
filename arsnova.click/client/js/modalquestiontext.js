@@ -34,7 +34,7 @@ Template.questionContentSplash.helpers({
     questionText: function () {
         var questionDoc = QuestionGroup.findOne();
         if (questionDoc) {
-            return QuestionGroup.findOne().questionList[Session.get("questionIndex")].questionText;
+            return questionDoc.questionList[Session.get("questionIndex")].questionText;
         }
         else {
             return "";

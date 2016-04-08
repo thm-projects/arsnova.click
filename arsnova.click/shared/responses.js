@@ -63,6 +63,7 @@ Meteor.methods({
                         responseTimeMillis: responseDoc.responseTime
                     });
 
+                    /*
                     var nickResponsesCount = Responses.find({
                         hashtag: hashtag,
                         userNick: responseDoc.userNick
@@ -73,6 +74,7 @@ Meteor.methods({
                         instantRouting: correctAnswerOptionsCount === 1,
                         showForwardButton: nickResponsesCount <= 1
                     };
+                    */
                 }
                 else {
                     throw new Meteor.Error('Responses.addResponse', 'Response was given out of time range');

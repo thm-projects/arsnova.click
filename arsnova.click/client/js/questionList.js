@@ -16,7 +16,7 @@ Template.questionList.onCreated(function () {
 
         valid_questions.splice(questionList.length - 1, valid_questions.length - questionList.length);
         Session.set("valid_questions",valid_questions);
-    })
+    });
 });
 
 Template.questionList.helpers({
@@ -80,16 +80,19 @@ Template.questionList.events({
 });
 
 function checkForValidQuestions(index) {
-    var question = QuestionGroup.findOne().questionList[index];
-    var answerDoc = AnswerOptions.find();
-    if(!question || !answerDoc) return false;
+    var questionDoc = QuestionGroup.findOne();
+    var answerDoc = AnswerOptions.find({questionIndex: index});
+    if(!questionDoc || !answerDoc) return false;
+
+    var question = questionDoc.questionList[index];
+    if(!question) return false;
 
     if(!question.questionText || question.questionText.length < 5) return false;
     if(!question.timer || isNaN(question.timer) || question.timer < 5000 || question.timer > 260000) return false;
     if(typeof question.isReadingConfirmationRequired === "undefined" || isNaN(question.isReadingConfirmationRequired) || question.isReadingConfirmationRequired < 0 || question.isReadingConfirmationRequired > 1) return false;
 
     var hasValidAnswers = false;
-    var answerOptions = AnswerOptions.find({questionIndex: index}).forEach(function (value) {
+    answerDoc.forEach(function (value) {
         if(typeof value.answerText === "undefined" || value.answerText.length <= 500) hasValidAnswers = true;
     });
     return hasValidAnswers;

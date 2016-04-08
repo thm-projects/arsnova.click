@@ -23,7 +23,7 @@ Template.votingview.onCreated(function () {
 
     this.autorun(() => {
         this.subscribe('AnswerOptions.public', Session.get("hashtag"), function () {
-            var answerOptionCount = AnswerOptions.find().count();
+            var answerOptionCount = AnswerOptions.find({questionIndex: Session.get("questionIndex")}).count();
             var responseArr = [];
             for (var i = 0; i <answerOptionCount; i++) {
                 responseArr[i] = false;
@@ -36,13 +36,6 @@ Template.votingview.onCreated(function () {
             }
         });
     });
-    Meteor.call('Question.isSC', {
-        hashtag: Session.get("hashtag")
-    }, (err, res) => {
-        if (!err && res) {
-            Session.set("questionSC", res);
-        }
-    });
 });
 
 Template.votingview.onDestroyed(function () {
@@ -50,8 +43,11 @@ Template.votingview.onDestroyed(function () {
     Session.set("responses", undefined);
     Session.set("countdownInitialized", undefined);
     Session.set("nextQuestionCountdownInitialized", undefined);
-    countdown.stop();
-    nextQuestionCountdown.stop();
+    Session.set("hasGivenResponse", undefined);
+    Session.set("hasToggledResponse", undefined);
+    Session.set("hasSendResponse", undefined);
+    if(countdown) countdown.stop();
+    if(nextQuestionCountdown) nextQuestionCountdown.stop();
 });
 
 Template.votingview.onRendered(function () {
@@ -66,7 +62,7 @@ Template.votingview.helpers({
         return AnswerOptions.find({questionIndex: Session.get("questionIndex")}, {sort:{answerOptionNumber: 1}});
     },
     showForwardButton: function () {
-        return Session.get("hasToggledResponse");
+        return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
     },
     answerOptionLetter: function (number) {
         return String.fromCharCode((number.hash.number + 65));
@@ -83,7 +79,8 @@ Template.votingview.helpers({
         return Session.get("nextQuestionCountdownInitialized");
     },
     getTimeUntilNextQuestion: function() {
-        return "Nächste Quizfrage in " + nextQuestionCountdown.get();
+        var time = nextQuestionCountdown.get();
+        return "Nächste Quizfrage in " + time;
     }
 });
 
@@ -95,7 +92,7 @@ Template.votingview.events({
         var content = "";
         if (questionDoc) {
             mathjaxMarkdown.initializeMarkdownAndLatex();
-            var questionText = questionDoc.questionText;
+            var questionText = questionDoc.questionList[Session.get("questionIndex")].questionText;
             content = mathjaxMarkdown.getContent(questionText);
         }
 
@@ -114,22 +111,35 @@ Template.votingview.events({
 
         $('#answerOptionsTxt').html(content);
     },
-    "click #forwardButton": function () {
+    "click #forwardButton": function (event) {
+        event.stopPropagation();
+        if(Session.get("hasSendResponse")) return;
+
+        Session.set("hasSendResponse", true);
         var responseArr = JSON.parse(Session.get("responses"));
-        for (var i = 0; i < AnswerOptions.find().count(); i++ ) {
+        for (var i = 0; i < AnswerOptions.find({questionIndex: Session.get("questionIndex")}).count(); i++ ) {
             if (responseArr[i]) {
                 makeAndSendResponse(i);
             }
         }
+        var sendResponseButtons = $('.sendResponse');
+        sendResponseButtons.attr("disabled","disabled");
+        sendResponseButtons.css({opacity: 1});
+        /*
         Session.set("showForwardButton", undefined);
         Session.set("countdownInitialized", undefined);
         Session.set("hasGivenResponse", undefined);
         Session.set("responses", undefined);
         $('.js-splashscreen-end-of-polling').modal('show');
+        */
     },
     "click .sendResponse": function (event) {
+        event.stopPropagation();
+        if(Session.get("hasSendResponse")) return;
+
         if (Session.get("questionSC")) {
             makeAndSendResponse(event.currentTarget.id);
+            Session.set("hasToggledResponse", true);
         }
         else {
             var responseArr = JSON.parse(Session.get("responses"));
@@ -152,6 +162,18 @@ Template.votingview.events({
 function startCountdown(index) {
     Session.set("questionIndex", index);
     Session.set("nextQuestionCountdownInitialized", false);
+    Session.set("hasSendResponse", false);
+    Session.set("hasToggledResponse", false);
+
+    Meteor.call('Question.isSC', {
+        hashtag: Session.get("hashtag"),
+        questionIndex: Session.get("questionIndex")
+    }, (err, res) => {
+        if (!err && res) {
+            Session.set("questionSC", res);
+        }
+    });
+
     var questionDoc = QuestionGroup.findOne().questionList[index];
     Session.set("sessionCountDown", questionDoc.timer);
     countdown = new ReactiveCountdown(questionDoc.timer / 1000);
@@ -183,17 +205,18 @@ function makeAndSendResponse(answerOptionNumber) {
         if (err) {
             $('.errorMessageSplash').parents('.modal').modal('show');
             $("#errorMessage-text").html(err.reason);
-        } else {
+        } /*else {
             if (res) {
                 if (res.instantRouting) {
                     // singlechoice
+
                     $('.js-splashscreen-end-of-polling').modal('show');
                     Session.set("hasGivenResponse", undefined);
                     Session.set("countdownInitialized", undefined);
                     Session.set("responses", undefined);
                 }
             }
-        }
+        } */
     });
 }
 

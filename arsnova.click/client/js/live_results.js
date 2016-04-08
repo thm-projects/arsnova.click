@@ -21,9 +21,7 @@ var nextQuestionCountdown = null;
 Template.live_results.onCreated(function () {
     this.autorun(() => {
         this.subscription = Meteor.subscribe('Responses.session', Session.get("hashtag"));
-        this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"), function () {
-            Session.set("rightAnswerOptionCount", AnswerOptions.find({isCorrect: 1}).count());
-        });
+        this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"));
         this.subscription = Meteor.subscribe('MemberList.members', Session.get("hashtag"));
         this.subscription = Meteor.subscribe('QuestionGroup.questionList', Session.get("hashtag"), function () {
             if(!Session.get("sessionClosed")) {
@@ -36,24 +34,207 @@ Template.live_results.onCreated(function () {
 
 Template.live_results.onDestroyed(function () {
     Session.set("countdownInitialized", undefined);
-    Session.set("rightAnswerOptionCount", undefined);
     Session.set("sessionCountDown", undefined);
-    Session.set("sessionClosed", undefined);
     Session.set("nextQuestionCountdownInitialized", undefined);
-    countdown.stop();
-    nextQuestionCountdown.stop();
+    if(countdown) countdown.stop();
+    if(nextQuestionCountdown) nextQuestionCountdown.stop();
 });
 
 Template.result_button.onRendered(function () {
     $(window).resize(function () {
-        if (AnswerOptions.find({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() > 1) {
+        if (AnswerOptions.find({questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() > 1) {
             setMcCSSClasses();
         }
     });
-    if (AnswerOptions.find({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() > 1) {
+    if (AnswerOptions.find({questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() > 1) {
         setMcCSSClasses();
     }
 });
+
+Template.live_results.helpers({
+    votingText: function () {
+        return Session.get("nextQuestionCountdownInitialized") ? "Nächste Frage in" : Session.get("sessionClosed") ? "Game over" : "Countdown";
+    },
+    getTimeUntilNextQuestion: function () {
+        return Session.get("nextQuestion");
+    },
+    isOwner: function () {
+        return Session.get("isOwner");
+    },
+    getCountdown: function () {
+        if (Session.get("countdownInitialized")){
+            var roundedCountdown;
+            if(Session.get("nextQuestionCountdownInitialized")) {
+                roundedCountdown = Math.round(nextQuestionCountdown.get());
+            } else {
+                roundedCountdown = Math.round(countdown.get());
+            }
+
+            return roundedCountdown < 0 ? 0 : roundedCountdown;
+        }
+        return 0;
+    },
+    isCountdownZero: function () {
+        if (Session.get("sessionClosed")){
+            return true;
+        } else {
+            var timer = Math.round(countdown.get());
+            return timer <= 0;
+        }
+    },
+    getCountStudents: function () {
+        return MemberList.find().count();
+    },
+    sessionClosed: function () {
+        return Session.get("sessionClosed");
+    },
+    showLeaderBoardButton: function () {
+        return (AnswerOptions.find({questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() > 0);
+    },
+    isMC: function(){
+        return AnswerOptions.find({questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() > 1;
+    },
+    mcOptions: function(){
+        let memberAmount = Responses.find({questionIndex: Session.get("questionIndex")}).fetch();
+        memberAmount = _.uniq(memberAmount, false, function(user) {return user.userNick;}).length;
+
+        const correctAnswers = [];
+        AnswerOptions.find({questionIndex: Session.get("questionIndex"), isCorrect:1},{fields:{"answerOptionNumber":1}}).forEach(function (answer){
+            correctAnswers.push(answer.answerOptionNumber);
+        });
+        let allCorrect = 0;
+        let allWrong = 0;
+        MemberList.find().forEach(function(user){
+            let responseAmount = 0;
+            let everythingRight = true;
+            let everythingWrong = true;
+            Responses.find({questionIndex: Session.get("questionIndex"), userNick: user.nick}).forEach(function (response){
+                if($.inArray(response.answerOptionNumber, correctAnswers) !== -1){
+                    everythingWrong = false;
+                }else{
+                    everythingRight = false;
+                }
+                responseAmount++;
+            });
+            if(responseAmount){
+                if(everythingRight && responseAmount === correctAnswers.length){
+                    allCorrect++;
+                }
+                if(everythingWrong){
+                    allWrong++;
+                }
+            }
+        });
+        return {
+            allCorrect: {absolute: allCorrect, percent: memberAmount ? Math.floor((allCorrect * 100) / memberAmount) : 0},
+            allWrong: {absolute: allWrong, percent: memberAmount ? Math.floor((allWrong * 100) / memberAmount) : 0}
+        };
+    },
+    getNormalizedIndex: function (index) {
+        return index + 1;
+    },
+    allQuestionCount: function () {
+        var doc = QuestionGroup.findOne();
+        return doc ? doc.questionList.length : false;
+    },
+    questionList: function () {
+        var questionDoc = QuestionGroup.findOne();
+        if(!questionDoc) return;
+
+        var questionList = questionDoc.questionList;
+        if(Session.get("questionIndex") < questionList.length - 1) {
+            questionList.splice(Session.get("questionIndex") + 1, questionList.length - (Session.get("questionIndex") + 1));
+        }
+        return questionList ? questionList : false;
+    },
+    answerList: function (index) {
+        var result = [];
+        var memberAmount = Responses.find({questionIndex: index}).fetch();
+        memberAmount = _.uniq(memberAmount, false, function(user) {return user.userNick;}).length;
+
+        var correctAnswerOptions = AnswerOptions.find({questionIndex: index, isCorrect: 1}).count();
+        AnswerOptions.find({questionIndex: index}, {sort:{'answerOptionNumber':1}}).forEach(function(value){
+            var amount = Responses.find({questionIndex: index, answerOptionNumber: value.answerOptionNumber}).count();
+            result.push({
+                name: String.fromCharCode(value.answerOptionNumber + 65),
+                absolute: amount,
+                percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
+                isCorrect: correctAnswerOptions ? value.isCorrect : -1
+            });
+        });
+        return result;
+    },
+    isActiveQuestion: function (index) {
+        return !Session.get("sessionClosed") && !Session.get("nextQuestionCountdownInitialized") && index === Session.get("questionIndex");
+    }
+});
+
+Template.live_results.events({
+    "click #js-btn-showQuestionModal": function (event) {
+        event.stopPropagation();
+        $('.questionContentSplash').parents('.modal').modal();
+        var questionDoc = QuestionGroup.findOne();
+        var content = "";
+        if (questionDoc) {
+            mathjaxMarkdown.initializeMarkdownAndLatex();
+            var questionText = questionDoc.questionList[Session.get("questionIndex")].questionText;
+            content = mathjaxMarkdown.getContent(questionText);
+        }
+
+        $('#questionText').html(content);
+    },
+    "click #js-btn-showAnswerModal": function (event) {
+        event.stopPropagation();
+        mathjaxMarkdown.initializeMarkdownAndLatex();
+        $('.answerTextSplash').parents('.modal').modal();
+        var content = "";
+
+        AnswerOptions.find({questionIndex: index}, {sort:{answerOptionNumber: 1}}).forEach(function (answerOption) {
+            content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+            content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+        });
+
+        $('#answerOptionsTxt').html(content);
+    },
+    "click #js-btn-showLeaderBoard": function () {
+        Router.go("/statistics");
+    },
+    "click #js-btn-export": function (event) {
+        Meteor.call('Hashtags.export', {hashtag: Session.get("hashtag"), privateKey: localData.getPrivateKey()}, (err, res) => {
+            if (err) {
+                alert("Could not export!\n" + err);
+            } else {
+                var exportData = "text/json;charset=utf-8," + encodeURIComponent(res);
+                var a = document.createElement('a');
+                var time = new Date();
+                var timestring = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
+                a.href = 'data:' + exportData;
+                a.download = Session.get("hashtag") + "-" + timestring + ".json";
+                a.innerHTML = '';
+                event.target.appendChild(a);
+                if (Session.get("exportReady")) {
+                    Session.set("exportReady", undefined);
+                }
+                else {
+                    Session.set("exportReady", true);
+                    a.click();
+                }
+            }
+        });
+    }
+});
+
+Template.result_button.helpers({
+    getCSSClassForIsCorrect: checkIfIsCorrect
+});
+
+Template.result_button_mc.helpers({
+    getCSSClassForIsCorrect: checkIfIsCorrect
+});
+
+function checkIfIsCorrect(isCorrect){
+    return isCorrect > 0 ? 'progress-success' : isCorrect < 0 ? 'progress-default' : 'progress-failure';
+}
 
 function startCountdown(index) {
     Session.set("questionIndex", index);
@@ -132,185 +313,4 @@ function setMcCSSClasses () {
             bar.addClass("col-xs-10 col-sm-10 col-md-10");
         }
     }
-}
-
-Template.live_results.helpers({
-    votingText: function () {
-        return Session.get("nextQuestionCountdownInitialized") ? "Nächste Frage in" : Session.get("sessionClosed") ? "Game over" : "Countdown";
-    },
-    getTimeUntilNextQuestion: function () {
-        return Session.get("nextQuestion");
-    },
-    isOwner: function () {
-        return Session.get("isOwner");
-    },
-    getCountdown: function () {
-        if (Session.get("countdownInitialized")){
-            var roundedCountdown;
-            if(Session.get("nextQuestionCountdownInitialized")) {
-                roundedCountdown = Math.round(nextQuestionCountdown.get());
-            } else {
-                roundedCountdown = Math.round(countdown.get());
-            }
-
-            return roundedCountdown < 0 ? 0 : roundedCountdown;
-        }
-        return 0;
-    },
-    isCountdownZero: function () {
-        if (Session.get("sessionClosed")){
-            return true;
-        } else {
-            var timer = Math.round(countdown.get());
-            return timer <= 0;
-        }
-    },
-    getCountStudents: function () {
-        return MemberList.find().count();
-    },
-    sessionClosed: function () {
-        return Session.get("sessionClosed");
-    },
-    showLeaderBoardButton: function () {
-        return (AnswerOptions.find({isCorrect: 1}).count() > 0);
-    },
-    isMC: function(){
-        return AnswerOptions.find({questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() > 1;
-    },
-    mcOptions: function(){
-        let memberAmount = Responses.find().fetch();
-        memberAmount = _.uniq(memberAmount, false, function(user) {return user.userNick}).length;
-
-        const correctAnswers = [];
-        AnswerOptions.find({questionIndex: Session.get("questionIndex"), isCorrect:1},{fields:{"answerOptionNumber":1}}).forEach(function (answer){
-            correctAnswers.push(answer.answerOptionNumber);
-        });
-        let allCorrect = 0;
-        let allWrong = 0;
-        MemberList.find({hashtag: Session.get("hashtag")}).forEach(function(user){
-            let responseAmount = 0;
-            let everythingRight = true;
-            let everythingWrong = true;
-            Responses.find({userNick: user.nick}).forEach(function (response){
-                if($.inArray(response.answerOptionNumber, correctAnswers) !== -1){
-                    everythingWrong = false;
-                }else{
-                    everythingRight = false;
-                }
-                responseAmount++;
-            });
-            if(responseAmount){
-                if(everythingRight && responseAmount === correctAnswers.length){
-                    allCorrect++;
-                }
-                if(everythingWrong){
-                    allWrong++;
-                }
-            }
-        });
-        return {
-            allCorrect: {absolute: allCorrect, percent: memberAmount ? Math.floor((allCorrect * 100) / memberAmount) : 0},
-            allWrong: {absolute: allWrong, percent: memberAmount ? Math.floor((allWrong * 100) / memberAmount) : 0}
-        };
-    },
-    getNormalizedIndex: function (index) {
-        return index + 1;
-    },
-    allQuestionCount: function () {
-        var doc = QuestionGroup.findOne();
-        return doc ? doc.questionList.length : false;
-    },
-    questionList: function () {
-        var questionList = QuestionGroup.findOne().questionList;
-        if(Session.get("questionIndex") < questionList.length - 1) {
-            questionList.splice(Session.get("questionIndex") + 1, questionList.length - (Session.get("questionIndex") + 1));
-        }
-        return questionList ? questionList : false;
-    },
-    answerList: function (index) {
-        var result = [];
-        var memberAmount = Responses.find().fetch();
-        memberAmount = _.uniq(memberAmount, false, function(user) {return user.userNick;}).length;
-
-        var correctAnswerOptions = AnswerOptions.find({questionIndex: index, isCorrect: 1}).count();
-        AnswerOptions.find({questionIndex: index}, {sort:{'answerOptionNumber':1}}).forEach(function(value){
-            var amount = Responses.find({answerOptionNumber: value.answerOptionNumber}).count();
-            result.push({
-                name: String.fromCharCode(value.answerOptionNumber + 65),
-                absolute: amount,
-                percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
-                isCorrect: correctAnswerOptions ? value.isCorrect : -1
-            });
-        });
-        return result;
-    },
-    isActiveQuestion: function (index) {
-        return !Session.get("sessionClosed") && !Session.get("nextQuestionCountdownInitialized") && index === Session.get("questionIndex");
-    }
-});
-
-Template.live_results.events({
-    "click #js-btn-showQuestionModal": function () {
-        $('.questionContentSplash').parents('.modal').modal();
-        var questionDoc = QuestionGroup.findOne();
-        var content = "";
-        if (questionDoc) {
-            mathjaxMarkdown.initializeMarkdownAndLatex();
-            var questionText = questionDoc.questionList[Session.get("questionIndex")].questionText;
-            content = mathjaxMarkdown.getContent(questionText);
-        }
-
-        $('#questionText').html(content);
-    },
-    "click #js-btn-showAnswerModal": function () {
-        mathjaxMarkdown.initializeMarkdownAndLatex();
-
-        $('.answerTextSplash').parents('.modal').modal();
-        var content = "";
-
-        AnswerOptions.find({}, {sort:{answerOptionNumber: 1}}).forEach(function (answerOption) {
-            content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
-            content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
-        });
-
-        $('#answerOptionsTxt').html(content);
-    },
-    "click #js-btn-showLeaderBoard": function () {
-        Router.go("/statistics");
-    },
-    "click #js-btn-export": function (event) {
-        Meteor.call('Hashtags.export', {hashtag: Session.get("hashtag"), privateKey: localData.getPrivateKey()}, (err, res) => {
-            if (err) {
-                alert("Could not export!\n" + err);
-            } else {
-                var exportData = "text/json;charset=utf-8," + encodeURIComponent(res);
-                var a = document.createElement('a');
-                var time = new Date();
-                var timestring = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
-                a.href = 'data:' + exportData;
-                a.download = Session.get("hashtag") + "-" + timestring + ".json";
-                a.innerHTML = '';
-                event.target.appendChild(a);
-                if (Session.get("exportReady")) {
-                    Session.set("exportReady", undefined);
-                }
-                else {
-                    Session.set("exportReady", true);
-                    a.click();
-                }
-            }
-        });
-    }
-});
-
-Template.result_button.helpers({
-    getCSSClassForIsCorrect: checkIfIsCorrect
-});
-
-Template.result_button_mc.helpers({
-    getCSSClassForIsCorrect: checkIfIsCorrect
-});
-
-function checkIfIsCorrect(isCorrect){
-    return isCorrect > 0 ? 'progress-success' : isCorrect < 0 ? 'progress-default' : 'progress-failure';
 }

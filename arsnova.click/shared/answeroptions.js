@@ -83,6 +83,11 @@ Meteor.methods({
                 delete query.answerOptionNumber;
             }
             AnswerOptions.remove(query);
+            AnswerOptions.update(
+                { hashtag: hashtag, questionIndex: { $gt: questionIndex } },
+                { $inc : { questionIndex : -1 }},
+                { multi : true }
+            );
         }
     },
     'AnswerOptions.updateAnswerTextAndIsCorrect'({privateKey, hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}) {

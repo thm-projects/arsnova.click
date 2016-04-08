@@ -46,26 +46,31 @@ Template.questionList.events({
         var id = parseInt($(event.target).closest(".questionIcon").attr("id").replace("questionIcon_",""));
         if(id > 0) Session.set("questionIndex",(id - 1));
 
-        Meteor.call("QuestionGroup.removeQuestion", {
+        Meteor.call('AnswerOptions.deleteOption',{
             privateKey: localData.getPrivateKey(),
             hashtag: Session.get("hashtag"),
-            questionIndex: id
+            questionIndex: id,
+            answerOptionNumber: -1
         }, (err, res) => {
             if (err) {
                 $('.errorMessageSplash').parents('.modal').modal('show');
                 $("#errorMessage-text").html(err.reason);
             } else {
-                Meteor.call('AnswerOptions.deleteOption',{
-                    privateKey: localData.getPrivateKey(), 
-                    hashtag: Session.get("hashtag"), 
-                    questionIndex: id, 
-                    answerOptionNumber: -1
+                Meteor.call("QuestionGroup.removeQuestion", {
+                    privateKey: localData.getPrivateKey(),
+                    hashtag: Session.get("hashtag"),
+                    questionIndex: id
+                }, (err, res) => {
+                    if (err) {
+                        $('.errorMessageSplash').parents('.modal').modal('show');
+                        $("#errorMessage-text").html(err.reason);
+                    } else {
+                        localData.removeQuestion(Session.get("hashtag"), id);
+                        if (QuestionGroup.findOne().questionList.length === 0) {
+                            addNewQuestion();
+                        }
+                    }
                 });
-                
-                localData.removeQuestion(Session.get("hashtag"), id);
-                if (QuestionGroup.findOne().questionList.length === 0) {
-                    addNewQuestion();
-                }
             }
         });
     },

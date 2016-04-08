@@ -165,6 +165,24 @@ localData = {
         const sessionData = JSON.parse(sessionDataString);
 
         if (typeof sessionData === "object") {
+            /*
+            This supports the "old" question format where one question was bound to one hashtag.
+            It saves the content of the question to the new questionList and deletes the invalid keys.
+            TODO: remove later when it is likely that there are no more sessions with the old question format
+             */
+            if(typeof sessionData.questionList === "undefined") {
+                sessionData.questionList = [{
+                    questionText: sessionData.questionText,
+                    timer: sessionData.timer,
+                    isReadingConfirmationRequired: sessionData.isReadingConfirmationRequired,
+                    answers: sessionData.answers
+                }];
+                delete sessionData.questionText;
+                delete sessionData.timer;
+                delete sessionData.isReadingConfirmationRequired;
+                delete sessionData.answers;
+            }
+
             for(var i = 0; i < sessionData.questionList.length; i++) {
                 if(!sessionData.questionList[i].answers) continue;
                 var answer = sessionData.questionList[i].answers;

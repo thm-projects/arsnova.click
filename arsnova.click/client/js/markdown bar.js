@@ -57,6 +57,18 @@ Template.markdownBar.events({
     },
     "click #linkMarkdownButton": function (event) {
         $("#hyperlinkInsertSplashContent").parents('.modal').modal('show');
+
+        var textarea = document.getElementById('questionText');
+        if (textarea.selectionStart != textarea.selectionEnd) {
+            var strPosBegin = textarea.selectionStart;
+            var strPosEnd = textarea.selectionEnd;
+            var frontText = (textarea.value).substring(0, strPosBegin);
+            var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
+            var backText = (textarea.value).substring(strPosEnd, textarea.value.length);
+
+            $('#hyperlinkText').val(middleText);
+            textarea.value = frontText + backText;
+        }
     },
     "click #unsortedListMarkdownButton": function (event) {
         if (!markdownAlreadyExistsAndAutoRemove('- ')){
@@ -89,12 +101,48 @@ Template.markdownBar.events({
     },
     "click #pictureMarkdownButton": function (event) {
         $("#pictureInsertSplashContent").parents('.modal').modal('show');
+
+        var textarea = document.getElementById('questionText');
+        if (textarea.selectionStart != textarea.selectionEnd) {
+            var strPosBegin = textarea.selectionStart;
+            var strPosEnd = textarea.selectionEnd;
+            var frontText = (textarea.value).substring(0, strPosBegin);
+            var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
+            var backText = (textarea.value).substring(strPosEnd, textarea.value.length);
+
+            $('#hyperlinkText').val(middleText);
+            textarea.value = frontText + backText;
+        }
     },
     "click #youtubeMarkdownButton": function (event) {
         $("#youtubeInsertSplashContent").parents('.modal').modal('show');
+
+        var textarea = document.getElementById('questionText');
+        if (textarea.selectionStart != textarea.selectionEnd) {
+            var strPosBegin = textarea.selectionStart;
+            var strPosEnd = textarea.selectionEnd;
+            var frontText = (textarea.value).substring(0, strPosBegin);
+            var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
+            var backText = (textarea.value).substring(strPosEnd, textarea.value.length);
+
+            $('#youtubeText').val(middleText);
+            textarea.value = frontText + backText;
+        }
     },
     "click #vimeoMarkdownButton": function (event) {
         $("#vimeoInsertSplashContent").parents('.modal').modal('show');
+
+        var textarea = document.getElementById('questionText');
+        if (textarea.selectionStart != textarea.selectionEnd) {
+            var strPosBegin = textarea.selectionStart;
+            var strPosEnd = textarea.selectionEnd;
+            var frontText = (textarea.value).substring(0, strPosBegin);
+            var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
+            var backText = (textarea.value).substring(strPosEnd, textarea.value.length);
+
+            $('#vimeoText').val(middleText);
+            textarea.value = frontText + backText;
+        }
     },
 });
 
@@ -103,6 +151,13 @@ Template.hyperlinkInsertSplash.events({
         var linkText = document.getElementById('hyperlinkText').value;
         var linkDestination = document.getElementById('hyperlinkDestination').value;
         insertInQuestionText('[' + linkText + '](' + linkDestination + ')');
+        $('#hyperlinkText').val("");
+        $('#hyperlinkDestination').val("");
+        closeSplashscreen();
+    },
+    "click #js-btn-closeHyperlink": function (event) {
+        $('#hyperlinkText').val("");
+        $('#hyperlinkDestination').val("");
         closeSplashscreen();
     }
 });
@@ -112,6 +167,13 @@ Template.pictureInsertSplash.events({
         var linkText = document.getElementById('pictureText').value;
         var linkDestination = document.getElementById('pictureDestination').value;
         insertInQuestionText('![' + linkText + '](' + linkDestination + ' "autoxautoxleft")');
+        $('#pictureText').val("");
+        $('#pictureDestination').val("");
+        closeSplashscreen();
+    },
+    "click #js-btn-closePicture": function (event) {
+        $('#pictureText').val("");
+        $('#pictureDestination').val("");
         closeSplashscreen();
     }
 });
@@ -122,6 +184,13 @@ Template.youtubeInsertSplash.events({
         var linkDestination = document.getElementById('youtubeDestination').value;
         var picUrl = linkDestination.replace("www.", "img.").replace("watch?v=", "vi/").concat("/0.jpg");
         insertInQuestionText('[![' + linkText + '](' + picUrl + ')](' + linkDestination + ')');
+        $('#youtubeText').val("");
+        $('#youtubeDestination').val("");
+        closeSplashscreen();
+    },
+    "click #js-btn-closeYoutube": function (event) {
+        $('#youtubeText').val("");
+        $('#youtubeDestination').val("");
         closeSplashscreen();
     }
 });
@@ -134,6 +203,13 @@ Template.vimeoInsertSplash.events({
         var picUrl = 'https://i.vimeocdn.com/video/' + videoId + '_200x150.jpg';
         var videoUrl = 'https://player.vimeo.com/video/' + videoId;
         insertInQuestionText('[![' + linkText + '](' + picUrl + ')](' + videoUrl + ')');
+        $('#vimeoText').val("");
+        $('#vimeoDestination').val("");
+        closeSplashscreen();
+    },
+    "click #js-btn-closeVimeo": function (event) {
+        $('#vimeoText').val("");
+        $('#vimeoDestination').val("");
         closeSplashscreen();
     }
 });

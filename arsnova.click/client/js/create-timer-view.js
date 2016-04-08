@@ -110,8 +110,6 @@ function createSlider (index) {
 }
 
 function setSlider(index) {
-    //console.log("oldVal:"+$("#slider").val()+", newVal:"+ QuestionGroup.findOne().questionList[index].timer+", Session: "+Session.get("slider"));
-    //$("#slider").val(QuestionGroup.findOne().questionList[index].timer / 1000);
     Session.set('slider', (QuestionGroup.findOne().questionList[index].timer / 1000));
     $("#slider").val((QuestionGroup.findOne().questionList[index].timer / 1000));
 }

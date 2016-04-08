@@ -35,7 +35,6 @@ Meteor.methods({
             if(QuestionGroup.find({hashtag: hashtag}).count() > 0) {
                 QuestionGroup.update({hashtag: hashtag},{$set: {questionList: questionList}});
             } else {
-                console.log(questionList);
                 QuestionGroup.insert({
                     hashtag: hashtag,
                     questionList: questionList

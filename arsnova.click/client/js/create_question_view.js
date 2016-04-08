@@ -50,23 +50,13 @@ Template.createQuestionView.helpers({
 });
 
 Template.createQuestionView.events({
+    'input #questionText': function () {
+        parseQuestionText();
+    },
     //Save question in Sessions-Collection when Button "Next" is clicked
     'click #forwardButton': function () {
-        var questionText = $('#questionText').val();
-        Meteor.call("QuestionGroup.addQuestion", {
-            privateKey: localData.getPrivateKey(),
-            hashtag: Session.get("hashtag"),
-            questionIndex: Session.get("questionIndex"),
-            questionText: questionText
-        }, (err, res) => {
-            if (err) {
-                $('.errorMessageSplash').parents('.modal').modal('show');
-                $("#errorMessage-text").html(err.reason);
-            } else {
-                localData.addQuestion(Session.get("hashtag"), Session.get("questionIndex"), questionText);
-                Router.go("/answeroptions");
-            }
-        });
+        parseQuestionText();
+        Router.go("/answeroptions");
     },
     "click #backButton": function () {
         Session.set("hashtag", undefined);
@@ -97,6 +87,23 @@ Template.createQuestionView.events({
         }
     }
 });
+
+function parseQuestionText() {
+    var questionText = $('#questionText').val();
+    Meteor.call("QuestionGroup.addQuestion", {
+        privateKey: localData.getPrivateKey(),
+        hashtag: Session.get("hashtag"),
+        questionIndex: Session.get("questionIndex"),
+        questionText: questionText
+    }, (err, res) => {
+        if (err) {
+            $('.errorMessageSplash').parents('.modal').modal('show');
+            $("#errorMessage-text").html(err.reason);
+        } else {
+            localData.addQuestion(Session.get("hashtag"), Session.get("questionIndex"), questionText);
+        }
+    });
+}
 
 function addQuestion(index) {
     var questionText = $('#questionText').val();

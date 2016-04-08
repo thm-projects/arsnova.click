@@ -76,20 +76,6 @@ localData = {
             localStorage.setItem("hashtags", JSON.stringify(hashtags));
             localStorage.setItem(hashtag, JSON.stringify(questionObject));
         }
-        Meteor.call("AnswerOptions.addOption", {
-            privateKey: localStorage.getItem("privateKey"),
-            hashtag: hashtag,
-            questionIndex: 0,
-            answerText: questionObject.questionList[0].answers[0].answerText,
-            answerOptionNumber: questionObject.questionList[0].answers[0].answerOptionNumber,
-            isCorrect: questionObject.questionList[0].answers[0].isCorrect
-        });
-        delete questionObject.questionList[0].answers;
-        Meteor.call("QuestionGroup.insert", {
-            privateKey: localStorage.getItem("privateKey"),
-            hashtag: hashtag,
-            questionList: questionObject.questionList
-        });
     },
 
     addQuestion: function (hashtag, question) {

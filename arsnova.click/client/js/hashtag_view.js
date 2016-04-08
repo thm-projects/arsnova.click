@@ -112,6 +112,24 @@ Template.hashtag_view.events({
                         $('.errorMessageSplash').parents('.modal').modal('show');
                         $("#errorMessage-text").html(err.reason);
                     } else {
+                        Meteor.call("AnswerOptions.addOption", {
+                            privateKey: localData.getPrivateKey(),
+                            hashtag: hashtag,
+                            questionIndex: 0,
+                            answerText: "",
+                            answerOptionNumber: 0,
+                            isCorrect: 0
+                        });
+                        Meteor.call("QuestionGroup.insert", {
+                            privateKey: localData.getPrivateKey(),
+                            hashtag: hashtag,
+                            questionList: [{
+                                questionText: "",
+                                timer: 10000,
+                                isReadingConfirmationRequired: 1
+                            }]
+                        });
+
                         Session.set("hashtag", hashtag);
                         Session.set("isOwner", true);
                         localData.addHashtag(hashtag);

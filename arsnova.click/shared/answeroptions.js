@@ -65,6 +65,7 @@ Meteor.methods({
                 questionIndex: { type: Number },
                 answerOptionNumber: { type: Number }
             }).validate({ privateKey, hashtag, questionIndex, answerOptionNumber });
+            
             var doc = Hashtags.findOne({
                 hashtag: hashtag,
                 privateKey: privateKey
@@ -72,13 +73,16 @@ Meteor.methods({
             if (!doc) {
                 throw new Meteor.Error('AnswerOptions.deleteOption', 'Either there is no quiz or you don\'t have write access');
             }
-            else {
-                AnswerOptions.remove({
-                    hashtag: hashtag,
-                    questionIndex: questionIndex,
-                    answerOptionNumber: answerOptionNumber
-                });
+            
+            var query = {
+                hashtag: hashtag,
+                questionIndex: questionIndex,
+                answerOptionNumber: answerOptionNumber
+            };
+            if(answerOptionNumber < 0) {
+                delete query.answerOptionNumber;
             }
+            AnswerOptions.remove(query);
         }
     },
     'AnswerOptions.updateAnswerTextAndIsCorrect'({privateKey, hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}) {

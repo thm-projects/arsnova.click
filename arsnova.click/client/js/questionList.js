@@ -55,6 +55,13 @@ Template.questionList.events({
                 $('.errorMessageSplash').parents('.modal').modal('show');
                 $("#errorMessage-text").html(err.reason);
             } else {
+                Meteor.call('AnswerOptions.deleteOption',{
+                    privateKey: localData.getPrivateKey(), 
+                    hashtag: Session.get("hashtag"), 
+                    questionIndex: id, 
+                    answerOptionNumber: -1
+                });
+                
                 localData.removeQuestion(Session.get("hashtag"), id);
                 if (QuestionGroup.findOne().questionList.length === 0) {
                     addNewQuestion();
@@ -95,6 +102,15 @@ function addNewQuestion(){
             $('.errorMessageSplash').parents('.modal').modal('show');
             $("#errorMessage-text").html(err.reason);
         } else {
+            Meteor.call('AnswerOptions.addOption',{
+                privateKey:localData.getPrivateKey(), 
+                hashtag:Session.get("hashtag"), 
+                questionIndex: index, 
+                answerOptionNumber:0, 
+                answerText:"", 
+                isCorrect:0
+            });
+            
             localData.addQuestion(Session.get("hashtag"), QuestionGroup.findOne().questionList.length, "");
 
             var valid_questions = Session.get("valid_questions");

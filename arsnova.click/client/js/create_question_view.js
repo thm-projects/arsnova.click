@@ -27,18 +27,23 @@ Template.createQuestionView.onRendered(function () {
     $(window).resize(calculateWindow());
     calculateWindow();
 
+    var body = $('body');
     var index = Session.get("questionIndex");
-    $('body').on('click', '.questionIcon:not(.active)', function () {
+    body.on('click', '.questionIcon:not(.active)', function () {
         var currentSession = QuestionGroup.findOne();
         if(!currentSession || index >= currentSession.questionList.length) return;
 
         addQuestion(index);
         index = Session.get("questionIndex");
     });
+    body.on('click', '.removeQuestion', function () {
+        index = Session.get("questionIndex");
+    });
 });
 
 Template.createQuestionView.onDestroyed(function () {
     $('body').off('click', '.questionIcon:not(.active)');
+    body.off('click', '.removeQuestion');
 });
 
 Template.createQuestionView.helpers({

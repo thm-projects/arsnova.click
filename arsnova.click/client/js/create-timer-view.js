@@ -34,8 +34,9 @@ Template.createTimerView.onCreated(function () {
 Template.createTimerView.onRendered(function () {
     createSlider(Session.get("questionIndex"));
 
+    var body = $('body');
     var index = Session.get("questionIndex");
-    $('body').on('click', '.questionIcon:not(.active)', function () {
+    body.on('click', '.questionIcon:not(.active)', function () {
         var currentSession = QuestionGroup.findOne();
         if(!currentSession || index >= currentSession.questionList.length) return;
 
@@ -43,10 +44,14 @@ Template.createTimerView.onRendered(function () {
         index = Session.get("questionIndex");
         setSlider(index);
     });
+    body.on('click', '.removeQuestion', function () {
+        index = Session.get("questionIndex");
+    });
 });
 
 Template.createTimerView.onDestroyed(function () {
     $('body').off('click', '.questionIcon:not(.active)');
+    body.off('click', '.removeQuestion');
 });
 
 

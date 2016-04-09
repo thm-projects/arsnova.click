@@ -31,18 +31,24 @@ Template.createAnswerOptions.onRendered(function () {
     $(window).resize(calculateHeight);
     calculateHeight();
 
+    var body = $('body');
     var index = Session.get("questionIndex");
-    $('body').on('click', '.questionIcon:not(.active)', function () {
+    body.on('click', '.questionIcon:not(.active)', function () {
         var currentSession = QuestionGroup.findOne();
         if(!currentSession || index >= currentSession.questionList.length) return;
         
         parseAnswerOptionInput(index);
         index = Session.get("questionIndex");
     });
+    body.on('click', '.removeQuestion', function () {
+        index = Session.get("questionIndex");
+    });
 });
 
 Template.createAnswerOptions.onDestroyed(function () {
-    $('body').off('click', '.questionIcon:not(.active)');
+    var body = $('body');
+    body.off('click', '.questionIcon:not(.active)');
+    body.off('click', '.removeQuestion');
 });
 
 Template.createAnswerOptions.helpers({

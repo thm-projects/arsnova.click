@@ -50,7 +50,8 @@ Template.createTimerView.onRendered(function () {
 });
 
 Template.createTimerView.onDestroyed(function () {
-    $('body').off('click', '.questionIcon:not(.active)');
+    var body = $('body');
+    body.off('click', '.questionIcon:not(.active)');
     body.off('click', '.removeQuestion');
 });
 

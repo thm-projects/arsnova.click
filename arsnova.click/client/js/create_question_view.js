@@ -42,7 +42,8 @@ Template.createQuestionView.onRendered(function () {
 });
 
 Template.createQuestionView.onDestroyed(function () {
-    $('body').off('click', '.questionIcon:not(.active)');
+    var body = $('body');
+    body.off('click', '.questionIcon:not(.active)');
     body.off('click', '.removeQuestion');
 });
 

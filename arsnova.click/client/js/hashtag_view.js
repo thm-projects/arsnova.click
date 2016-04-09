@@ -112,14 +112,16 @@ Template.hashtag_view.events({
                         $('.errorMessageSplash').parents('.modal').modal('show');
                         $("#errorMessage-text").html(err.reason);
                     } else {
-                        Meteor.call("AnswerOptions.addOption", {
-                            privateKey: localData.getPrivateKey(),
-                            hashtag: hashtag,
-                            questionIndex: 0,
-                            answerText: "",
-                            answerOptionNumber: 0,
-                            isCorrect: 0
-                        });
+                        for(var i=0; i < 4; i++) {
+                            Meteor.call("AnswerOptions.addOption", {
+                                privateKey: localData.getPrivateKey(),
+                                hashtag: hashtag,
+                                questionIndex: 0,
+                                answerText: "",
+                                answerOptionNumber: i,
+                                isCorrect: 0
+                            });
+                        }
                         Meteor.call("QuestionGroup.insert", {
                             privateKey: localData.getPrivateKey(),
                             hashtag: hashtag,

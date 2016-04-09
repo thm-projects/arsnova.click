@@ -60,7 +60,10 @@ localData = {
                     questionText: "",
                     timer: 40000,
                     answers: [
-                        {answerOptionNumber:0, answerText:"", isCorrect:0}
+                        {answerOptionNumber:0, answerText:"", isCorrect:0},
+                        {answerOptionNumber:1, answerText:"", isCorrect:0},
+                        {answerOptionNumber:2, answerText:"", isCorrect:0},
+                        {answerOptionNumber:3, answerText:"", isCorrect:0}
                     ]
                 }
             ]
@@ -93,7 +96,10 @@ localData = {
                     timer: 10000,
                     isReadingConfirmationRequired: 1,
                     answers: [
-                        {answerOptionNumber:0, answerText:"", isCorrect:0}
+                        {answerOptionNumber:0, answerText:"", isCorrect:0},
+                        {answerOptionNumber:1, answerText:"", isCorrect:0},
+                        {answerOptionNumber:2, answerText:"", isCorrect:0},
+                        {answerOptionNumber:3, answerText:"", isCorrect:0}
                     ]
                 });
             }

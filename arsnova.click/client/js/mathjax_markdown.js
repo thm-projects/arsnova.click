@@ -74,35 +74,34 @@ mathjaxMarkdown = {
         return marked.parser(this.lexer.lex(content));
     },
     getContent: function (content) {
-        var hideMediaDummy = '<div class="hideMediaDummy" accessKey="@@@"><span class="###"></span></div>';
+        if (content) {
+            var hideMediaDummy = '<div class="hideMediaDummy" accessKey="@@@"><span class="###"></span></div>';
 
-        var replStack = [], repl;
+            var replStack = [], repl;
 
-        // replace MathJax delimiters
-        var delimiterPairs = MathJax.tex2jax.inlineMath.concat(MathJax.tex2jax.displayMath);
-        delimiterPairs.forEach(function (delimiterPair, i) {
-            var delimiterPositions = this.getDelimiter(content, delimiterPair[0], delimiterPair[1]);
-            replStack.push(repl = this.replaceDelimiter(content, delimiterPositions, '%%MATHJAX' + i + '%%'));
-            content = repl.content;
-        }, this);
+            // replace MathJax delimiters
+            var delimiterPairs = MathJax.tex2jax.inlineMath.concat(MathJax.tex2jax.displayMath);
+            delimiterPairs.forEach(function (delimiterPair, i) {
+                var delimiterPositions = this.getDelimiter(content, delimiterPair[0], delimiterPair[1]);
+                replStack.push(repl = this.replaceDelimiter(content, delimiterPositions, '%%MATHJAX' + i + '%%'));
+                content = repl.content;
+            }, this);
 
-        // replace code block before markdown parsing
-        repl.content = this.replaceCodeBlockFromContent(repl.content);
+            // replace code block before markdown parsing
+            repl.content = this.replaceCodeBlockFromContent(repl.content);
 
-        // converted MarkDown to HTML
-        repl.content = this.markdownToHtml(repl.content);
+            // converted MarkDown to HTML
+            repl.content = this.markdownToHtml(repl.content);
 
-        // undo MathJax delimiter replacements in reverse order
-        for (var i = replStack.length - 1; i > 0; i--) {
-            replStack[i - 1].content = this.replaceBack(replStack[i]);
+            // undo MathJax delimiter replacements in reverse order
+            for (var i = replStack.length - 1; i > 0; i--) {
+                replStack[i - 1].content = this.replaceBack(replStack[i]);
+            }
+
+            content = this.replaceBack(replStack[0]);
         }
 
-        content = this.replaceBack(replStack[0]);
-
         return content;
-
-        // MathJax parsing
-        //MathJax.Queue([function(){}, element]);
     },
 
     // get all delimiter indices as array of [start(incl), end(excl)] elements

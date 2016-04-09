@@ -50,6 +50,7 @@ $activeItemBackgroundLight: #86253E;
     }
     &.active {
       border-radius: $corner-radius;
+      border: 1px solid beige;
 
       .indexNumber {
         border-radius: $corner-radius;
@@ -66,6 +67,7 @@ $activeItemBackgroundLight: #86253E;
         border-bottom-left-radius: 0;
         border-top-left-radius: 0;
         font-family: Georgia, serif;
+        height: 48px; /* Standard button height is 50px -> subtract 2px for the border */
 
         .glyphicon {
           top: 3px;

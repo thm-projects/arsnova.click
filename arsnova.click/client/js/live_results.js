@@ -30,7 +30,9 @@ Template.live_results.onCreated(function () {
                 var timestamp = new Date().getTime();
                 $( "#countdowndiv" ).appendTo( $( "body" ) );
                 $( "#countdown" ).appendTo( $( "body" ) );
-
+                var f = new buzz.sound('/sounds/trillerpfeife.mp3',{
+                    volume:50
+                });
                 countdown = new ReactiveCountdown((timestamp - sessionDoc.startTime + sessionDoc.timer) / 1000,{
 
                     tick: function() {
@@ -41,7 +43,7 @@ Template.live_results.onCreated(function () {
 
                             if (image.src.match("gr5")) {
 
-                                image.src = "gruen.gif";
+                                image.src = "/images/gruen.gif";
                                 image1.fadeIn(500);
                                 imageDiv.style.display="block";
                                 image.style.display="block";
@@ -49,42 +51,47 @@ Template.live_results.onCreated(function () {
                             }else if (image.src.match("gruen")) {
                                 imageDiv.style.backgroundColor="#2f4f4f";
 
-                                image.src = "blau.gif";
+                                image.src = "/images/blau.gif";
                                 image1.fadeIn(500);
                                 image1.fadeOut(500);
                             } else if(image.src.match("blau")){
                                 imageDiv.style.backgroundColor="#663399";
 
-                                image.src = "lila.gif";
+                                image.src = "/images/lila3.gif";
                                 image1.fadeIn(500);
                                 image1.fadeOut(500);
-                            } else if(image.src.match("lila")){
+                            } else if(image.src.match("lila3")){
                                 imageDiv.style.backgroundColor="#b22222";
 
 
-                                image.src="rot.gif";
+                                image.src="/images/rot2.gif";
                                 image1.fadeIn(500);
                                 image1.fadeOut(500);
-                            }else if(image.src.match("rot")){
+                            }else if(image.src.match("rot2")){
                                 imageDiv.style.backgroundColor="#ff8c00";
 
 
 
-                                image.src="orange.gif";
+                                image.src="/images/orange1.gif";
                                 image1.fadeIn(500);
                                 image1.fadeOut(500);
-                            } else if(image.src.match("orange")){
+                            } else if(image.src.match("orange1")){
                                 imageDiv.style.backgroundColor="#ffd700";
 
-                                image.src="gelb.gif";
+                                image.src="/images/gelb0.gif";
                                 image1.fadeIn(500);
                                 image1.fadeOut(500);
+                                f.play();
                             }
 
                         }
                     }
                 });
+
+                buzzsound1.setVolume(globalVolume);
+                buzzsound1.play();
                 countdown.start(function () {
+                    buzzsound1.stop();
                     Session.set("sessionClosed", true);
                     if (Session.get("isOwner")) {
                         setTimeout(function () {Router.go("/statistics");}, 7000);

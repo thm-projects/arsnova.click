@@ -107,6 +107,32 @@ Meteor.methods({
             }
         }
     },
+    "Sessions.setVolume": function ({privateKey, hashtag, volume}) {
+        new SimpleSchema({
+            volume: {
+                type: Number,
+                min: 0
+            }
+        }).validate({volume: volume});
+        const hashItem = Hashtags.findOne({
+            hashtag: hashtag,
+            privateKey: privateKey
+        });
+        if (hashItem) {
+            const session = Sessions.findOne({hashtag: hashtag});
+            if (!session) {
+                throw new Meteor.Error('Sessions.setTimer: no access to session');
+                return;
+            } else {
+                Sessions.update(session._id, {$set: {volume: volume}}, function (error) {
+                    if (error) {
+                        throw new Meteor.Error('Sessions.updateIsReadConfirmationRequired', error);
+                        return;
+                    }
+                });
+            }
+        }
+    },
     "Sessions.startTimer": function ({privateKey, hashtag}) {
         if (Meteor.isServer) {
             var startTime = new Date();

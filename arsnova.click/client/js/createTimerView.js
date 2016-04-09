@@ -45,7 +45,7 @@ function createSlider (defaultSec) {
     this.$("#slider").noUiSlider({
         start: Session.get("slider"),
         range: {
-            'min': 5,
+            'min': 6,
             'max': 260
         }
     }).on('slide', function (ev, val) {

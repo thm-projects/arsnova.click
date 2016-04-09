@@ -32,7 +32,17 @@ Template.createTimerView.onCreated(function () {
 });
 
 Template.createTimerView.onRendered(function () {
-    createSlider();
+    createSlider(Session.get("questionIndex"));
+
+    var index = Session.get("questionIndex");
+    $('body').on('click', '.questionIcon:not(.active)', function () {
+        var currentSession = QuestionGroup.findOne();
+        if(!currentSession || index >= currentSession.questionList.length) return;
+
+        setTimer(index);
+        index = Session.get("questionIndex");
+        setSlider(index);
+    });
 });
 
 Template.createTimerView.onDestroyed(function () {

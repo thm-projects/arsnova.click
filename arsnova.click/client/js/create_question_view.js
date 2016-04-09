@@ -29,6 +29,9 @@ Template.createQuestionView.onRendered(function () {
 
     var index = Session.get("questionIndex");
     $('body').on('click', '.questionIcon:not(.active)', function () {
+        var currentSession = QuestionGroup.findOne();
+        if(!currentSession || index >= currentSession.questionList.length) return;
+
         addQuestion(index);
         index = Session.get("questionIndex");
     });

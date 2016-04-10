@@ -46,7 +46,7 @@ Template.memberlist.onCreated(function () {
         this.subscribe('Responses.session', Session.get("hashtag"));
     });
 
-    Tracker.autorun(function() {
+    this.autorun(function() {
         var initializing = true;
         QuestionGroup.find().observeChanges({
             changed: function (id, changedFields) {

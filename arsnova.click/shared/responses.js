@@ -61,6 +61,10 @@ Meteor.methods({
                         questionIndex: responseDoc.questionIndex,
                         nick: responseDoc.userNick,
                         responseTimeMillis: responseDoc.responseTime
+                    }, (err, res) => {
+                        if (err) {
+                            throw new Meteor.Error('Responses.addResponse', 'Error while adding response set to leaderboard');
+                        }
                     });
 
                     /*

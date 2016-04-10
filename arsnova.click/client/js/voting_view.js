@@ -17,9 +17,9 @@
  */
 
 var countdown = null;
-var nextQuestionCountdown = null;
 Template.votingview.onCreated(function () {
     Session.set("sessionClosed", undefined);
+    countdown = null;
 
     this.autorun(() => {
         this.subscribe('AnswerOptions.public', Session.get("hashtag"), function () {
@@ -31,10 +31,11 @@ Template.votingview.onCreated(function () {
             Session.set("responses", JSON.stringify(responseArr));
         });
         this.subscribe('QuestionGroup.questionList', Session.get("hashtag"), function () {
-            if(!Session.get("sessionClosed")) {
-                startCountdown(0);
-            }
+            Session.set("questionGroupSubscriptionReady", true);
         });
+        if(Session.get("questionGroupSubscriptionReady") && !Session.get("sessionClosed")) {
+            startCountdown(Session.get("questionIndex"));
+        }
     });
 });
 
@@ -42,12 +43,9 @@ Template.votingview.onDestroyed(function () {
     Session.set("questionSC", undefined);
     Session.set("responses", undefined);
     Session.set("countdownInitialized", undefined);
-    Session.set("nextQuestionCountdownInitialized", undefined);
-    Session.set("hasGivenResponse", undefined);
     Session.set("hasToggledResponse", undefined);
     Session.set("hasSendResponse", undefined);
     if(countdown) countdown.stop();
-    if(nextQuestionCountdown) nextQuestionCountdown.stop();
 });
 
 Template.votingview.onRendered(function () {
@@ -74,13 +72,6 @@ Template.votingview.helpers({
             }
             return "Noch " + countdown.get() + " Sekunden!";
         }
-    },
-    isWaitingForNextQuestion: function() {
-        return Session.get("nextQuestionCountdownInitialized");
-    },
-    getTimeUntilNextQuestion: function() {
-        var time = nextQuestionCountdown.get();
-        return "Nächste Quizfrage in " + time;
     }
 });
 
@@ -160,8 +151,6 @@ Template.votingview.events({
 });
 
 function startCountdown(index) {
-    Session.set("questionIndex", index);
-    Session.set("nextQuestionCountdownInitialized", false);
     Session.set("hasSendResponse", false);
     Session.set("hasToggledResponse", false);
 
@@ -178,19 +167,10 @@ function startCountdown(index) {
     Session.set("sessionCountDown", questionDoc.timer);
     countdown = new ReactiveCountdown(questionDoc.timer / 1000);
     countdown.start(function () {
-        index++;
-        if(index < QuestionGroup.findOne().questionList.length) {
-            nextQuestionCountdown = new ReactiveCountdown(5);
-            nextQuestionCountdown.start(function () {
-                startCountdown(index);
-            });
-            Session.set("nextQuestionCountdownInitialized", true);
-        } else {
-            $("#end-of-polling-text").html("Game over");
-            $('.js-splashscreen-end-of-polling').modal('show');
-            Session.set("nextQuestionCountdownInitialized", false);
+        if(index + 1 >= QuestionGroup.findOne().questionList.length) {
             Session.set("sessionClosed", true);
         }
+        Router.go("/results");
     });
     Session.set("countdownInitialized", true);
 }

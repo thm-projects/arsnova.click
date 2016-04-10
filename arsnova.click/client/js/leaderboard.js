@@ -27,6 +27,7 @@ Template.leaderBoard.onCreated( function () {
         this.subscription = Meteor.subscribe('MemberList.members', Session.get("hashtag"), function () {
             Session.set("memberListLoaded", true);
         });
+        this.subscription = Meteor.subscribe('QuestionGroup.questionList', Session.get("hashtag"));
     });
 
     Session.set('show_all_leaderboard', false);

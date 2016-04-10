@@ -17,44 +17,40 @@
 -->
 
 <template name="votingview">
-    {{#if isWaitingForNextQuestion}}
-        {{> titel titelText = getTimeUntilNextQuestion}}
-    {{ else }}
-        {{> titel titelText = getCountdown}}
-        <div class="row voting-helper-buttons">
-            <div class="col-xs-4">
-                <button id="js-btn-showQuestionModal" type="button" class="btn btn-info btn-lg btn-answerOption">
-                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span><span
-                        class="ansBtn"> Frage</span>
-                </button>
-            </div>
-
-            <div class="col-xs-4">
-                <button type="button" id="js-showAnswerTexts" class="btn btn-info btn-lg btn-answerOption">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span><span
-                        class="ansBtn"> Antworten</span>
-                </button>
-            </div>
-
-            {{#if showForwardButton}}
-                <div class="col-xs-4">
-                    <button id="forwardButton" type="button" class="btn btn-success btn-lg btn-answerOption">
-                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span><span class="ansBtn"> Absenden</span>
-                    </button>
-                </div>
-            {{/if}}
+    {{> titel titelText = getCountdown}}
+    <div class="row voting-helper-buttons">
+        <div class="col-xs-4">
+            <button id="js-btn-showQuestionModal" type="button" class="btn btn-info btn-lg btn-answerOption">
+                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span><span
+                    class="ansBtn"> Frage</span>
+            </button>
         </div>
 
-        <div class="row answer-row">
-            {{#each answerOptions}}
-                <div>
-                    <button id="{{answerOptionNumber}}" class="sendResponse btn btn-answerOption btn-answerFont">
-                        {{answerOptionLetter number=answerOptionNumber}}
-                    </button>
-                </div>
-            {{/each}}
+        <div class="col-xs-4">
+            <button type="button" id="js-showAnswerTexts" class="btn btn-info btn-lg btn-answerOption">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span><span
+                    class="ansBtn"> Antworten</span>
+            </button>
         </div>
-    {{/if}}
+
+        {{#if showForwardButton}}
+            <div class="col-xs-4">
+                <button id="forwardButton" type="button" class="btn btn-success btn-lg btn-answerOption">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span><span class="ansBtn"> Absenden</span>
+                </button>
+            </div>
+        {{/if}}
+    </div>
+
+    <div class="row answer-row">
+        {{#each answerOptions}}
+            <div>
+                <button id="{{answerOptionNumber}}" class="sendResponse btn btn-answerOption btn-answerFont">
+                    {{answerOptionLetter number=answerOptionNumber}}
+                </button>
+            </div>
+        {{/each}}
+    </div>
     {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Frage" templateName="questionContentSplash"}}
     {{> endOfPollingSplashscreen }}
     {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Antwortoptionen" templateName="answerOptionsSplash"}}

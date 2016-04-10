@@ -96,6 +96,8 @@ Template.createQuestionView.events({
             content = mathjaxMarkdown.getContent(content);
 
             $("#modalpreview-text").html(content);
+
+            $('#modalpreview-text').find('p').css("margin-left", "0px");
         }
     }
 });

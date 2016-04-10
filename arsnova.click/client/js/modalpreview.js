@@ -25,8 +25,6 @@ Template.questionPreviewSplash.onRendered(function () {
 
 function calculateAndSetPreviewSplashWidthAndHeight() {
     $('.modal-dialog').width($('#mainContentContainer').width() - 40);
-    //$('.iPhone-splashscreen').height($('.modal-dialog').height());
-    //$('.iPhone-splashscreen').width($('.modal-dialog').width());
 };
 
 Template.questionPreviewSplash.events({

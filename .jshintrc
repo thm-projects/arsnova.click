@@ -22,6 +22,6 @@
 		"LeaderBoard": true,
 		"MemberList": true,
 		"Responses": true,
-		"Sessions": true
+		"QuestionGroup": true
 	}
 }

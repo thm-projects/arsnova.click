@@ -89,6 +89,13 @@ Template.live_results.helpers({
     getCountStudents: function () {
         return MemberList.find().count();
     },
+    isReadingConfirmationRequired: function (index) {
+        const doc = QuestionGroup.findOne();
+        return doc ? doc.questionList[index].isReadingConfirmationRequired === 1 : null;
+    },
+    getPercentRead: (index)=>{
+        return getPercentRead(index);
+    },
     sessionClosed: function () {
         return Session.get("sessionClosed");
     },
@@ -181,6 +188,9 @@ Template.live_results.helpers({
         if(Session.get("questionIndex") < questionDoc.questionList.length - 1) {
             return Session.get("questionIndex") + 2;
         }
+    },
+    getCSSClassForPercent: (percent)=>{
+        return hsl_col_perc(percent, 0, 100);
     }
 });
 
@@ -279,6 +289,26 @@ Template.result_button.helpers({
 Template.result_button_mc.helpers({
     getCSSClassForIsCorrect: checkIfIsCorrect
 });
+
+/**
+ * @source http://stackoverflow.com/a/17267684
+ */
+function hsl_col_perc(percent,start,end) {
+    var a = percent/100,
+        b = end*a,
+        c = b+start;
+    return 'hsl('+c+',100%,50%)';
+}
+
+function getPercentRead (index) {
+    var sumRead = 0;
+    var count = 0;
+    MemberList.find().map(function (member) {
+        count++;
+        if(member.readConfirmed[index]) sumRead += member.readConfirmed[index];
+    });
+    return count ? Math.floor(sumRead / count * 100) : 0;
+}
 
 function checkIfIsCorrect(isCorrect){
     return isCorrect > 0 ? 'progress-success' : isCorrect < 0 ? 'progress-default' : 'progress-failure';

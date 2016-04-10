@@ -41,11 +41,11 @@ Meteor.methods({
             lowerCaseNick: nick.toLowerCase(),
             backgroundColor: backgroundColor,
             foregroundColor: foregroundColor,
-            readConfirmed: 0,
+            readConfirmed: [],
             insertDate: new Date().getTime()
         });
     },
-    'MemberList.setReadConfirmed': function (hashtag, nick) {
+    'MemberList.setReadConfirmed': function ({hashtag, questionIndex, nick}) {
         /*
         TODO Everybody can set "readConfirmed" for each user!
         Maybe link this method to a privateKey for learners?
@@ -53,19 +53,19 @@ Meteor.methods({
          */
         new SimpleSchema({
             hashtag: {type: String},
+            questionIndex: {type: Number},
             nick: {type: String}
         }).validate({
             hashtag,
+            questionIndex,
             nick
         });
         var member = MemberList.findOne({hashtag: hashtag, nick: nick});
         if (!member) {
             throw new Meteor.Error('MemberList.setReadConfirmed', 'Member not found!');
         }
-        /*
-         TODO Why is member added here as options field?
-         */
-        MemberList.update(member._id, {$set: {readConfirmed: 1}}, member);
+        member.readConfirmed[questionIndex] = 1;
+        MemberList.update(member._id, { $set: {readConfirmed: member.readConfirmed} });
     },
     'MemberList.removeFromSession': function(privateKey, hashtag) {
         if(Meteor.isServer) {

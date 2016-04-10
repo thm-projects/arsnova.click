@@ -27,7 +27,6 @@ Template.memberlist.onCreated(function () {
                 $(".container").css("height", final_height + "px");
                 Session.set("LearnerCountOverride", false);
                 calculateButtonCount();
-                calculateProgressBarTextWidth();
             });
         });
         if(Session.get("isOwner")) {
@@ -53,7 +52,7 @@ Template.memberlist.onCreated(function () {
                 if(!initializing && changedFields.questionList) {
                     var question = changedFields.questionList[Session.get("questionIndex")];
                     if (question.startTime && (oldStartTimeValues[Session.get("questionIndex")] !== question.startTime)) {
-                        Router.go("onpolling");
+                        Router.go("/onpolling");
                     }
                 }
             }
@@ -61,7 +60,6 @@ Template.memberlist.onCreated(function () {
         MemberList.find().observeChanges({
             added: function (id, newDoc) {
                 calculateButtonCount();
-                calculateProgressBarTextWidth();
             }
         });
         initializing = false;
@@ -73,7 +71,6 @@ Template.memberlist.onRendered(function () {
     $(".container").css("height", final_height + "px");
     Session.set("LearnerCountOverride", false);
     calculateButtonCount();
-    calculateProgressBarTextWidth();
 
     var calculateFontSize = function() {
         var hashtag_length = Session.get("hashtag").length;
@@ -127,10 +124,6 @@ Template.memberlist.events({
         Session.set("LearnerCount", MemberList.find().count());
         Session.set("LearnerCountOverride", true);
     },
-    'click #setReadConfirmed': function () {
-        closeSplashscreen();
-        calculateProgressBarTextWidth();
-    },
     'click .btn-less-learners': function () {
         Session.set("LearnerCountOverride", false);
         calculateButtonCount();
@@ -155,6 +148,7 @@ Template.memberlist.events({
     'click #backButton':function(event){
         Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 1);
         Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
+        Session.set("questionIndex", 0);
         Router.go("/settimer");
     }
 });
@@ -188,37 +182,16 @@ Template.memberlist.helpers({
 
     invisibleLearnerCount: function () {
         return MemberList.find().count() - Session.get("LearnerCount");
-    },
-
-    isReadingConfirmationRequired: function () {
-        const doc = QuestionGroup.findOne({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex")});
-        return doc ? doc.isReadingConfirmationRequired === 1 : null;
-    },
-    isNotOwnerAndReadConfirmationNeeded: function () {
-        const doc = QuestionGroup.findOne({hashtag: Session.get("hashtag"), questionIndex: Session.get("questionIndex")});
-        return doc ? ( !Session.get("isOwner") && doc.isReadingConfirmationRequired === 1 ) : null;
     }
 });
 
 Template.learner.onRendered(function () {
     calculateButtonCount();
-    calculateProgressBarTextWidth();
 });
 
 Template.learner.helpers({
     isOwnNick: function (nickname) {
         return nickname === Session.get("nick");
-    }
-});
-
-Template.readingConfirmation.onRendered(function () {
-    calculateProgressBarTextWidth();
-});
-
-Template.readingConfirmation.helpers({
-    percentRead: function () {
-        calculateProgressBarTextWidth();
-        return getPercentRead();
     }
 });
 
@@ -280,37 +253,4 @@ function calculateButtonCount () {
     Template.memberlist.helpers.learners which gets the attendees from the mongo db
      */
     Session.set("LearnerCount", queryLimiter);
-}
-
-function calculateProgressBarTextWidth () {
-    /*
-     * In chrome the width is always set 20% too high. In all other browsers either this and the original calculation
-     * (e.g. $('.progress-fill').width((getPercentRead()) + "%");) works as expected. The function returns the correct
-     * percent values so no other manipulation is needed. This could be a chrome bug and is perhaps fixed later.
-    */
-    var progressFill = $('.progress-fill');
-    var percentRead = getPercentRead();
-    progressFill.width((percentRead - 20) + "%");
-
-    if (percentRead === 100) {
-        progressFill.addClass('round-corners-right');
-    } else {
-        progressFill.removeClass('round-corners-right');
-    }
-
-    if (percentRead === 0) {
-        progressFill.hide();
-    } else {
-        progressFill.show();
-    }
-}
-
-function getPercentRead () {
-    var sumRead = 0;
-    var count = 0;
-    MemberList.find({hashtag: Session.get("hashtag")}).map(function (member) {
-        count++;
-        sumRead += member.readConfirmed;
-    });
-    return count ? Math.floor(sumRead / count * 100) : 0;
 }

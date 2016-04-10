@@ -52,7 +52,20 @@
         {{/each}}
     </div>
     {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Frage" templateName="questionContentSplash"}}
-    {{> endOfPollingSplashscreen }}
     {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Antwortoptionen" templateName="answerOptionsSplash"}}
+    {{#if isNotOwnerAndReadConfirmationNeeded}}
+        {{> splashscreen lazyCloseJsClass='js-splashscreen-noLazyClose' noAutorun=false headername="Frage" templateName="questionT" type="splash-screen-show-question"}}
+    {{/if}}
     {{> errorSplashscreen }}
+</template>
+
+<template name="questionT">
+    <div id="questionTText"></div>
+    <br/>
+
+    <div class="row">
+        <div class="col-md-12">
+            <button id="setReadConfirmed">gelesen</button>
+        </div>
+    </div>
 </template>

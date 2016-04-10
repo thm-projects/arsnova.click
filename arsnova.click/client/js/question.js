@@ -21,6 +21,7 @@ Template.questionT.onCreated(function () {
     this.autorun(() => {
         this.subscribe('AnswerOptions.options', Session.get("hashtag"));
         this.subscribe('QuestionGroup.questionList', Session.get("hashtag"));
+        this.subscribe('MemberList.members', Session.get("hashtag"));
     });
 });
 
@@ -45,6 +46,17 @@ Template.questionT.helpers({
 
 Template.questionT.events({
     "click #setReadConfirmed": function(event){
-        Meteor.call("MemberList.setReadConfirmed",Session.get("hashtag"),Session.get("nick"));
+        Meteor.call("MemberList.setReadConfirmed", {
+            hashtag: Session.get("hashtag"),
+            questionIndex: Session.get("questionIndex"),
+            nick: Session.get("nick")
+        }, (err, res)=> {
+            if(err) {
+                $('.errorMessageSplash').parents('.modal').modal('show');
+                $("#errorMessage-text").html(err.reason);
+            } else {
+                closeSplashscreen();
+            }
+        });
     }
 });

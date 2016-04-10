@@ -84,28 +84,3 @@
         </button>
     </div>
 </template>
-
-<template name="questionT">
-    <div id="questionTText"></div>
-    <br/>
-
-    <div class="row">
-        <div class="col-md-12">
-            <button id="setReadConfirmed" class="" onclick="closeSplashscreen();">gelesen</button>
-        </div>
-    </div>
-</template>
-
-<template name="readingConfirmation">
-    <div class="row confirmationCounter margin-title">
-        <div class="col-xs-12">
-            <div class="progress-bar-memberlist color-changing-progress-bar round-corners">
-                <div class="progress-fill round-corners-left">
-                    <div class="progress-fill-text">Lesebestätigung: {{percentRead}} %</div>
-                </div>
-                Lesebestätigung: {{percentRead}} %
-            </div>
-        </div>
-    </div>
-    {{> errorSplashscreen }}
-</template>

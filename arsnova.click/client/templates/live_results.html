@@ -48,6 +48,22 @@
                                 <p class="question-title">Frage {{getNormalizedIndex @index}} / {{allQuestionCount}}</p>
                             </div>
                         </div>
+                        {{#if isReadingConfirmationRequired @index}}
+                            <div class="row form-group button button-result readingConfirmationProgressRow">
+                                <div class="col-xs-5 col-sm-5 col-md-5">
+                                    <span class="button-result-letter button-result-readingConfirmation">Lesebestätigung</span>
+                                </div>
+                                <div class="col-xs-7 col-sm-7 col-md-7">
+                                    <div class="progress" style="margin-right: 0;">
+                                        <div class="progress-bar" role="progressbar"
+                                             aria-valuemin="0" aria-valuemax="100"
+                                             style="width:{{getPercentRead @index}}%; background:{{getCSSClassForPercent (getPercentRead @index)}}">
+                                                <span class="percentage">{{getCountStudents}} | {{getPercentRead @index}}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {{/if}}
                         <div class="row">
                             <div class="col-md-12">
                                 {{#each answerList @index}}

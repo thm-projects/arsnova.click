@@ -59,3 +59,14 @@
 .subtitel-padding-top {
     padding-top: 3vw;
 }
+
+.readingConfirmationProgressRow {
+    padding: 0 10px;
+    margin: 0 0 10px;
+}
+
+.button-result-readingConfirmation {
+    line-height: 40px;
+    font-size: 1.4em;
+    margin-left: -5px;
+}

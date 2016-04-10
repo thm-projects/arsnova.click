@@ -99,9 +99,11 @@ mathjaxMarkdown = {
             }
 
             content = this.replaceBack(replStack[0]);
-        }
 
-        return content;
+            return content;
+        } else {
+            return "";
+        }
     },
 
     // get all delimiter indices as array of [start(incl), end(excl)] elements

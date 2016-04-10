@@ -16,10 +16,14 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var defaultHyperLinkRenderer;
+
 mathjaxMarkdown = {
     initializeMarkdownAndLatex: function () {
         // markdown setup
         var markedRenderer = marked.Renderer;
+
+        defaultHyperLinkRenderer = markedRenderer.prototype.link;
 
         markedRenderer.prototype.link = this.hyperlinkRenderer;
         markedRenderer.prototype.image = this.imageRenderer;
@@ -57,7 +61,7 @@ mathjaxMarkdown = {
 
         script = document.createElement("script");
         script.type = "text/javascript";
-        script.src = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+        script.src = "https://cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=TeX-MML-AM_CHTML";
         head.appendChild(script);
     },
     replaceCodeBlockFromContent: function (content) {
@@ -70,35 +74,34 @@ mathjaxMarkdown = {
         return marked.parser(this.lexer.lex(content));
     },
     getContent: function (content) {
-        var hideMediaDummy = '<div class="hideMediaDummy" accessKey="@@@"><span class="###"></span></div>';
+        if (content) {
+            var hideMediaDummy = '<div class="hideMediaDummy" accessKey="@@@"><span class="###"></span></div>';
 
-        var replStack = [], repl;
+            var replStack = [], repl;
 
-        // replace MathJax delimiters
-        var delimiterPairs = MathJax.tex2jax.inlineMath.concat(MathJax.tex2jax.displayMath);
-        delimiterPairs.forEach(function (delimiterPair, i) {
-            var delimiterPositions = this.getDelimiter(content, delimiterPair[0], delimiterPair[1]);
-            replStack.push(repl = this.replaceDelimiter(content, delimiterPositions, '%%MATHJAX' + i + '%%'));
-            content = repl.content;
-        }, this);
+            // replace MathJax delimiters
+            var delimiterPairs = MathJax.tex2jax.inlineMath.concat(MathJax.tex2jax.displayMath);
+            delimiterPairs.forEach(function (delimiterPair, i) {
+                var delimiterPositions = this.getDelimiter(content, delimiterPair[0], delimiterPair[1]);
+                replStack.push(repl = this.replaceDelimiter(content, delimiterPositions, '%%MATHJAX' + i + '%%'));
+                content = repl.content;
+            }, this);
 
-        // replace code block before markdown parsing
-        repl.content = this.replaceCodeBlockFromContent(repl.content);
+            // replace code block before markdown parsing
+            repl.content = this.replaceCodeBlockFromContent(repl.content);
 
-        // converted MarkDown to HTML
-        repl.content = this.markdownToHtml(repl.content);
+            // converted MarkDown to HTML
+            repl.content = this.markdownToHtml(repl.content);
 
-        // undo MathJax delimiter replacements in reverse order
-        for (var i = replStack.length - 1; i > 0; i--) {
-            replStack[i - 1].content = this.replaceBack(replStack[i]);
+            // undo MathJax delimiter replacements in reverse order
+            for (var i = replStack.length - 1; i > 0; i--) {
+                replStack[i - 1].content = this.replaceBack(replStack[i]);
+            }
+
+            content = this.replaceBack(replStack[0]);
         }
 
-        content = this.replaceBack(replStack[0]);
-
         return content;
-
-        // MathJax parsing
-        //MathJax.Queue([function(){}, element]);
     },
 
     // get all delimiter indices as array of [start(incl), end(excl)] elements
@@ -185,12 +188,12 @@ mathjaxMarkdown = {
         var size = '', alignment = 'center';
 
         if (!isVideoElement) {
-            return '<div style="text-align:' + alignment + '">' +
+            return '<a target="_blank" class="hyperlink" href="' + href + '"><div style="text-align:' + alignment + '">' +
                 '<img class="resizeableImage img-responsive" title="' + text + '" src="' + href + '" alt="' + text + '" style=' + size + '>' +
-                '</div>';
+                '</div></a>';
         }
 
-        return '<img class="resizeableImage" title="' + text + '" src="' + href + '" alt="' + text + '">';
+        return '<img class="resizeableImage" title="' + text + '" src="' + href + '" alt="' + text + '"style="width: 100%">';
     },
     hyperlinkRenderer: function (href, title, text) {
         var titleDelimiter = /^.*alt="([^"]*)/;
@@ -229,7 +232,8 @@ mathjaxMarkdown = {
         content = videoElementReplace(content, vimeoDelimiters);
 
         if (text === content) {
-            content = content.slice(0, 3) + 'class="hyperlink" ' + content.slice(3, content.length);
+            content = defaultHyperLinkRenderer.call(marked, href, title, text);
+            content = content.slice(0, 3) + 'target="_blank" class="hyperlink" ' + content.slice(3, content.length);
         }
 
         return content;

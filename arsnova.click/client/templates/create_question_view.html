@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-12">
                 {{> markdownBar }}
-                <textarea class="round-corners-markdown textarea placeholder-align-center" maxlength="1000"
+                <textarea class="round-corners textarea placeholder-align-center" maxlength="1000"
                           rows="4" id="questionText" placeholder="Gib hier die Frage ein!"
                 >{{questionText}}</textarea>
             </div>
@@ -32,9 +32,9 @@
             <div class="col-md-12">
                 <div class="row row-create-question-buttons">
                     <div class="col-xs-6 col-xs-offset-3">
-                        <button id="previewButton" class="button button-purple">
-                            Vorschau
-                            <span class="glyphicon glyphicon-phone glyph-right"></span>
+                        <button id="formatPreviewButton" class="button button-purple">
+                            <span id="formatPreviewText">Format</span>
+                            <span id="formatPreviewGlyphicon" class="glyphicon glyphicon-cog glyph-right"></span>
                         </button>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
         </div>
     </div>
     {{> errorSplashscreen}}
-    {{> splashscreen lazyCloseJsClass='js-splashscreen-noLazyClose' noAutorun=true headername="Vorschau" templateName="questionPreviewSplash"}}
+    {{> splashscreen lazyCloseJsClass='js-splashscreen-noLazyClose' noAutorun=true headername="Vorschau" templateName="questionPreviewSplash" type="iPhone-splashscreen"}}
     {{> splashscreen lazyCloseJsClass='js-splashscreen-noLazyClose' noAutorun=true headername="Hyperlink" templateName="hyperlinkInsertSplash"}}
     {{> splashscreen lazyCloseJsClass='js-splashscreen-noLazyClose' noAutorun=true headername="Bild" templateName="pictureInsertSplash"}}
     {{> splashscreen lazyCloseJsClass='js-splashscreen-noLazyClose' noAutorun=true headername="YouTube" templateName="youtubeInsertSplash"}}

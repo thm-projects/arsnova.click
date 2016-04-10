@@ -87,7 +87,17 @@ Template.votingview.events({
         $('#questionText').html(content);
     },
     "click #js-showAnswerTexts": function () {
+        mathjaxMarkdown.initializeMarkdownAndLatex();
+        
         $('.answerTextSplash').parents('.modal').modal();
+        var content = "";
+
+        AnswerOptions.find({}, {sort:{answerOptionNumber: 1}}).forEach(function (answerOption) {
+            content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+            content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+        });
+        
+        $('#answerOptionsTxt').html(content);
     },
     "click #forwardButton": function () {
         var responseArr = JSON.parse(Session.get("responses"));

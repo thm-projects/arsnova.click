@@ -17,11 +17,17 @@
  */
 
 Template.questionPreviewSplash.onRendered(function () {
-    $('.modal-dialog').width($('#mainContentContainer').width() - 40);
+    calculateAndSetPreviewSplashWidthAndHeight();
     $(window).resize(function () {
-        $('.modal-dialog').width($('#mainContentContainer').width() - 40);
+        calculateAndSetPreviewSplashWidthAndHeight();
     });
 });
+
+function calculateAndSetPreviewSplashWidthAndHeight() {
+    $('.modal-dialog').width($('#mainContentContainer').width() - 40);
+    //$('.iPhone-splashscreen').height($('.modal-dialog').height());
+    //$('.iPhone-splashscreen').width($('.modal-dialog').width());
+};
 
 Template.questionPreviewSplash.events({
     "click #js-btn-hidePreviewModal": function () {

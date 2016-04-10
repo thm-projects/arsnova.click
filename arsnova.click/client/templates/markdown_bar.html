@@ -1,5 +1,5 @@
 <template name="markdownBar">
-    <div class="input-field round-corners-top markdown-box">
+    <div id="markdownBarDiv" class="hide input-field round-corners-top markdown-box">
         <div class="row row-centered">
                 <div id="infoMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1 col-centered" data-toggle="tooltip" title="Info" data-animation="false">
                     <span class="glyphicon glyphicon-info-sign glyph-markdown" aria-hidden="true"></span>
@@ -14,10 +14,10 @@
                     <span class="glyphicon glyphicon-globe glyph-markdown" aria-hidden="true"></span>
                 </div>
                 <div id="unsortedListMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1 col-centered" data-toggle="tooltip" title="Unsortierte Liste" data-animation="false">
-                    <span class="glyphicon glyphicon-list glyph-markdown" aria-hidden="true"></span>
+                    <span class="glyphicon iconEditorUl glyph-markdown" aria-hidden="true"></span>
                 </div>
                 <div id="sortedListMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1 col-centered" data-toggle="tooltip" title="Sortierte Liste" data-animation="false">
-                    <span class="glyphicon glyphicon-sort-by-attributes glyph-markdown" aria-hidden="true"></span>
+                    <span class="glyphicon iconEditorOl glyph-markdown" aria-hidden="true"></span>
                 </div>
                 <div id="latexMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1 col-centered" data-toggle="tooltip" title="LaTex-Auszeichnung" data-animation="false">
                     <span class="glyphicon latexIcon glyph-markdown" aria-hidden="true"></span>
@@ -26,7 +26,7 @@
                     <span class="glyphicon codeListingIcon glyph-markdown" aria-hidden="true"></span>
                 </div>
                 <div id="commentMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1 col-centered" data-toggle="tooltip" title="Zitat" data-animation="false">
-                    <span class="glyphicon glyphicon-comment glyph-markdown" aria-hidden="true"></span>
+                    <span class="glyphicon codeCommentIcon glyph-markdown" aria-hidden="true"></span>
                 </div>
                 <div id="pictureMarkdownButton" class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1 col-centered" data-toggle="tooltip" title="Bild" data-animation="false">
                     <span class="glyphicon glyphicon-picture glyph-markdown" aria-hidden="true"></span>

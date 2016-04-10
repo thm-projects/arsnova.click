@@ -59,6 +59,10 @@
         display: none;
     }
 
+    .row-create-question-buttons {
+        display: none;
+    }
+
     .round-corners-markdown {
         border-radius: $corner-radius;
     }
@@ -77,6 +81,7 @@
     width: 35px;
     height: 35px;
     margin-top: 4px;
+    cursor: pointer;
 }
 
 .button-markdown:hover, .button-markdown:active:focus {
@@ -94,6 +99,11 @@
     font-size: 22px;
 }
 
+.icon-play-circle::before {
+    content: "\f01d";
+    font-family: "arsnova";
+}
+
 .vimeoIcon::before {
     content: "\f194";
     font-family: "arsnova";
@@ -101,7 +111,7 @@
 
 .youtubeIcon::before {
     content: "\f167";
-    font-family: "arsnova" !important;
+    font-family: "arsnova";
 }
 
 .latexIcon::before {
@@ -114,6 +124,21 @@
     font-family: "arsnova";
 }
 
+.codeCommentIcon::before {
+    content: "\f10e";
+    font-family: "arsnova";
+}
+
+.iconEditorUl::before {
+    content: "\f0ca";
+    font-family: "arsnova";
+}
+
+.iconEditorOl::before {
+    content: "\f0cb";
+    font-family: "arsnova";
+}
+
 .row-centered {
     text-align: center;
     padding-top: 3px;
@@ -121,8 +146,6 @@
 }
 .col-centered {
     display: inline-block;
-    /*float: none;
-    text-align: left;*/
     float: left;
 }
 
@@ -140,4 +163,19 @@
 
 .hr-without-margin {
     margin: 0px;
+}
+
+table {
+    display: block;
+    overflow: auto;
+    width: 100%;
+}
+
+table th, table td {
+    padding: 6px 13px;
+    border: 1px solid #ddd;
+}
+
+table tr:nth-child(2n) {
+    background-color: #f8f8f8;
 }

@@ -66,7 +66,6 @@ localData = {
                 hashtag: hashtag,
                 questionText: "",
                 timer: 40000,
-                isReadingConfirmationRequired: 1,
                 answers:[
                     {answerOptionNumber:0, answerText:"", isCorrect:0},
                     {answerOptionNumber:1, answerText:"", isCorrect:0},
@@ -85,31 +84,12 @@ localData = {
             hashtag:hashtag,
             questionText:"",
             timer: 40000,
-            isReadingConfirmationRequired: 1,
             answers:[
                 {answerOptionNumber:0, answerText:"", isCorrect:0},
                 {answerOptionNumber:1, answerText:"", isCorrect:0},
                 {answerOptionNumber:2, answerText:"", isCorrect:0},
                 {answerOptionNumber:3, answerText:"", isCorrect:0}
             ]
-        }));
-    },
-
-    updateIsReadingConfirmationRequired: function (hashtag, isReadingConfirmationRequired) {
-        if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
-            return;
-        }
-        const hashtagString = localStorage.getItem(hashtag);
-        if (!hashtagString) {
-            return;
-        }
-        var hashtagData = JSON.parse(hashtagString);
-        localStorage.setItem(hashtag, JSON.stringify({
-            hashtag: hashtag,
-            questionText: hashtagData.questionText,
-            timer: hashtagData.timer,
-            isReadingConfirmationRequired: isReadingConfirmationRequired,
-            answers: hashtagData.answers
         }));
     },
 
@@ -173,12 +153,6 @@ localData = {
             privateKey: localStorage.getItem("privateKey"),
             hashtag: hashtag,
             questionText: sessionData.questionText
-        });
-
-        Meteor.call("Sessions.updateIsReadConfirmationRequired", {
-            privateKey: localStorage.getItem("privateKey"),
-            hashtag: hashtag,
-            isReadingConfirmationRequired: sessionData.isReadingConfirmationRequired
         });
 
         Meteor.call("Sessions.setTimer", {
@@ -272,7 +246,6 @@ localData = {
             hashtag: hashtag,
             questionText: data.sessionDoc.questionText,
             timer: data.sessionDoc.timer,
-            isReadingConfirmationRequired: data.sessionDoc.isReadingConfirmationRequired,
             answers: answerOptionsLocalStorage
         };
         localStorage.setItem(hashtag, JSON.stringify(localDataObject));
@@ -290,7 +263,6 @@ localData = {
                 hashtag: localStorageData.hashtag,
                 questionText: localStorageData.questionText,
                 timer: localStorageData.timer,
-                isReadingConfirmationRequired: localStorageData.isReadingConfirmationRequired
             };
             answerOptionsDoc = [];
             localStorageData.answers.forEach(function (answerOption) {
@@ -315,7 +287,6 @@ localData = {
                 hashtag: "wpw",
                 questionText: "I am a question text. This is for testing purpose. Do you understand?",
                 timer: 180000,
-                isReadingConfirmationRequired: 1,
                 answers: [
                     {
                         hashtag: "wpw",

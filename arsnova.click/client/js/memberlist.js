@@ -32,6 +32,8 @@ Template.memberlist.onCreated(function () {
                 hashtag: Session.get("hashtag"),
                 privateKey: localData.getPrivateKey()
             });
+            Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 2);
+            Router.go("/memberlist");
         }
         this.subscribe('Sessions.memberlist', Session.get("hashtag"));
     });
@@ -188,7 +190,7 @@ Template.memberlist.events({
     },
     'click #backButton':function(event){
         Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 1);
-        Router.go("/readconfirmationrequired");
+        Router.go("/settimer");
     }
 });
 
@@ -198,6 +200,9 @@ Template.memberlist.helpers({
     },
     isOwner: function () {
         return Session.get("isOwner");
+    },
+    isNotOwner: function () {
+        return !Session.get("isOwner");
     },
     isLearnerCountOverride: function () {
         return Session.get('LearnerCountOverride');
@@ -227,21 +232,6 @@ Template.memberlist.helpers({
     invisibleLearnerCount: function () {
         return MemberList.find().count() - Session.get("LearnerCount");
     },
-
-    isReadingConfirmationRequired: function () {
-        const doc = Sessions.findOne({hashtag: Session.get("hashtag")});
-        if(!doc){
-            return;
-        }
-        return doc.isReadingConfirmationRequired == 1;
-    },
-    isNotOwnerAndReadConfirmationNeeded: function () {
-        const doc = Sessions.findOne({hashtag: Session.get("hashtag")});
-        if(!doc){
-            return;
-        }
-        return !Session.get("isOwner") && (doc.isReadingConfirmationRequired == 1);
-    }
 });
 
 Template.learner.onRendered(function () {

@@ -17,7 +17,7 @@
 -->
 
 <template name="memberlist">
-    {{#if isNotOwnerAndReadConfirmationNeeded}}
+    {{#if isNotOwner}}
         {{> splashscreen templateName = "questionT" lazyCloseJsClass='js-splashscreen-noLazyClose' headername="Frage" type="splash-screen-show-question"}}
     {{/if}}
     <div class="row">
@@ -30,9 +30,7 @@
                     </div>
                 </div>
             {{/unless}}
-            {{#if isReadingConfirmationRequired}}
-                {{> readingConfirmation }}
-            {{/if}}
+            {{> readingConfirmation }}
             {{#if showMoreButton}}
                 <div class="row more-learners-row">
                     <div class="col-xs-12">

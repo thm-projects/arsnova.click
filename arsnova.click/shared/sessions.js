@@ -53,34 +53,6 @@ Meteor.methods({
     "Sessions.isSC": function ({hashtag}) {
         return (AnswerOptions.find({hashtag: hashtag, isCorrect: 1}).count() == 1);
     },
-    "Sessions.updateIsReadConfirmationRequired": function ({privateKey, hashtag, isReadingConfirmationRequired}) {
-        new SimpleSchema({
-            isReadingConfirmationRequired: {
-                type: Number,
-                min: 0,
-                max: 1
-            }
-        }).validate({isReadingConfirmationRequired: isReadingConfirmationRequired});
-
-        var hashtagDoc = Hashtags.findOne({
-            hashtag: hashtag,
-            privateKey: privateKey
-        });
-        if (hashtagDoc) {
-            var session = Sessions.findOne({hashtag: hashtag});
-            if (!session) {
-                throw new Meteor.Error('Sessions.updateIsReadConfirmationRequired: no access to session');
-                return;
-            } else {
-                Sessions.update(session._id, {$set: {isReadingConfirmationRequired: isReadingConfirmationRequired}}, function (error) {
-                    if (error) {
-                        throw new Meteor.Error('Sessions.updateIsReadConfirmationRequired', error);
-                        return;
-                    }
-                });
-            }
-        }
-    },
     "Sessions.setTimer": function ({privateKey, hashtag, timer}) {
         new SimpleSchema({
             timer: {
@@ -100,7 +72,7 @@ Meteor.methods({
             } else {
                 Sessions.update(session._id, {$set: {timer: timer}}, function (error) {
                     if (error) {
-                        throw new Meteor.Error('Sessions.updateIsReadConfirmationRequired', error);
+                        throw new Meteor.Error('Sessions.setTimer', error);
                         return;
                     }
                 });
@@ -121,7 +93,7 @@ Meteor.methods({
                     $set: {startTime: startTime.getTime()}
                 }, function (error) {
                     if (error){
-                        throw new Meteor.Error('Sessions.updateIsReadConfirmationRequired', error);
+                        throw new Meteor.Error('Sessions.startTimer', error);
                         return;
                     }
                 });

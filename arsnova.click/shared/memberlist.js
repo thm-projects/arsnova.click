@@ -67,7 +67,7 @@ Meteor.methods({
         member.readConfirmed[questionIndex] = 1;
         MemberList.update(member._id, { $set: {readConfirmed: member.readConfirmed} });
     },
-    'MemberList.clearReadConfirmed': function ({privateKey, hashtag}) {
+    'MemberList.clearReadConfirmed': function (privateKey, hashtag) {
         if(Meteor.isServer) {
             var doc = Hashtags.findOne({
                 hashtag: hashtag,

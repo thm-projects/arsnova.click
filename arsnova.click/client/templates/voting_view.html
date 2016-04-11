@@ -53,17 +53,5 @@
     </div>
     {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Frage" templateName="questionContentSplash"}}
     {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Antwortoptionen" templateName="answerOptionsSplash"}}
-    {{> splashscreen templateName = "questionT" lazyCloseJsClass='js-splashscreen-noLazyClose' headername="Frage" type="splash-screen-show-question"}}
     {{> errorSplashscreen }}
-</template>
-
-<template name="questionT">
-    <div id="questionTText"></div>
-    <br/>
-
-    <div class="row">
-        <div class="col-md-12">
-            <button id="setReadConfirmed">gelesen</button>
-        </div>
-    </div>
 </template>

@@ -137,17 +137,25 @@
                                 </button>
                             </div>
                             <div class="col-xs-6">
-                                {{#if sessionClosed}}
+                                {{#if showGlobalLeaderboardButton}}
                                     <button class="button button-next" id="goGlobalRanking">
                                         <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
                                         <span class="ansBtn">Globale Rangliste</span>
                                     </button>
                                 {{else}}
-                                    <button class="button button-next button-start" id="startNextQuestion">
-                                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                        <span class="ansBtn">Starte Frage {{nextQuestionIndex}}
-                                            / {{allQuestionCount}}</span>
-                                    </button>
+                                    {{#if showQuestionDialog}}
+                                        <button class="button button-next button-start" id="showNextQuestionDialog">
+                                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                            <span class="ansBtn">Zeige Frage {{nextQuestionIndex}}
+                                                / {{allQuestionCount}}</span>
+                                        </button>
+                                    {{else}}
+                                        <button class="button button-next button-start" id="startNextQuestion">
+                                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                            <span class="ansBtn">Starte Runde {{nextQuestionIndex}}
+                                                / {{allQuestionCount}}</span>
+                                        </button>
+                                    {{/if}}
                                 {{/if}}
                             </div>
                         </div>
@@ -155,10 +163,21 @@
                 </div>
             </div>
         {{/if}}
-
     </div>
     {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Die Frage" templateName="questionContentSplash" type="splash-screen-show-question"}}
     {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Die Antworten" templateName="answerOptionsSplash" type="splash-screen-show-question"}}
+    {{> splashscreen lazyCloseJsClass='js-splashscreen-noLazyClose' noAutorun=true headername="Frage" templateName="questionT" type="splash-screen-show-question"}}
+</template>
+
+<template name="questionT">
+    <div id="questionTText"></div>
+    <br/>
+
+    <div class="row">
+        <div class="col-md-12">
+            <button id="setReadConfirmed">gelesen</button>
+        </div>
+    </div>
 </template>
 
 <template name="result_button">

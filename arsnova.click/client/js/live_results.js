@@ -53,7 +53,6 @@ Template.live_results.onCreated(function () {
 Template.live_results.onDestroyed(function () {
     Session.set("countdownInitialized", undefined);
     Session.set("sessionCountDown", undefined);
-    Session.set("sessionClosed", undefined);
     if (countdown) {
         countdown.stop();
     }
@@ -81,8 +80,10 @@ Template.live_results.onRendered(()=>{
     enableNextQuestionButtonTrackerHandle = Tracker.autorun(()=>{
         if(Session.get("countdownInitialized")) {
             $('#startNextQuestion').attr("disabled","disabled");
+            $('#goGlobalRanking').attr("disabled","disabled");
         } else {
             $('#startNextQuestion').removeAttr("disabled");
+            $('#goGlobalRanking').removeAttr("disabled");
         }
     });
 });
@@ -213,6 +214,15 @@ Template.live_results.helpers({
     },
     getCSSClassForPercent: (percent)=>{
         return hsl_col_perc(percent, 0, 100);
+    },
+    showGlobalLeaderboardButton: ()=>{
+        var questionDoc = QuestionGroup.findOne();
+        if(!questionDoc) return;
+
+        return Session.get("sessionClosed") || Session.get("questionIndex") >= questionDoc.questionList.length - 1;
+    },
+    showQuestionDialog: ()=>{
+        return !Session.get("hasReadConfirmationRequested");
     }
 });
 
@@ -304,6 +314,24 @@ Template.live_results.events({
                 startCountdown(nextIndex);
             }
         });
+    },
+    'click #goGlobalRanking': (event)=>{
+        event.stopPropagation();
+        Router.go("/statistics");
+    },
+    'click #showNextQuestionDialog': (event)=>{
+        event.stopPropagation();
+        $('.questionContentSplash').parents('.modal').modal();
+        var questionDoc = QuestionGroup.findOne();
+        var content = "";
+        if (questionDoc) {
+            mathjaxMarkdown.initializeMarkdownAndLatex();
+            var targetId = Session.get("questionIndex") + 2;
+            var questionText = questionDoc.questionList[targetId].questionText;
+            content = mathjaxMarkdown.getContent(questionText);
+        }
+
+        $('#questionText').html(content);
     }
 });
 
@@ -369,6 +397,11 @@ function startCountdown(index) {
         Session.set("countdownInitialized", false);
         if(index + 1 >= QuestionGroup.findOne().questionList.length) {
             Session.set("sessionClosed", true);
+            if(Session.get("isOwner")) {
+                setTimeout(()=>{
+                    Router.go("/statistics");
+                }, 7000);
+            }
         }
     });
     Session.set("countdownInitialized", true);

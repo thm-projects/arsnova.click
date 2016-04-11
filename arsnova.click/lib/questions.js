@@ -19,29 +19,30 @@
 QuestionGroup = new Mongo.Collection("questionGroup");
 
 SingleQuestionSchema = new SimpleSchema({
-	questionText: {
-		type: String,
-		optional: true
-	},
-	timer: {
-		type: Number,
-		min: 0
-	},
-	startTime: {
-		type: String,
-		optional: true
-	}
+    questionText: {
+        type: String,
+        optional: true,
+        max: 10000
+    },
+    timer: {
+        type: Number,
+        min: 0
+    },
+    startTime: {
+        type: String,
+        optional: true
+    }
 });
 
 QuestionGroupSchema = new SimpleSchema({
-	hashtag: {
-		type: String,
-		min: 1,
-		max: 25
-	},
-	questionList: {
-		type: [SingleQuestionSchema]
-	}
+    hashtag: {
+        type: String,
+        min: 1,
+        max: 25
+    },
+    questionList: {
+        type: [SingleQuestionSchema]
+    }
 });
 
 QuestionGroup.attachSchema(QuestionGroupSchema);

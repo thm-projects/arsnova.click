@@ -20,43 +20,41 @@ Template.memberlist.onCreated(function () {
     Session.set("questionIndex", 0);
     var oldStartTimeValues = {};
 
-    this.autorun(() => {
-        this.subscribe('MemberList.members', Session.get("hashtag"), function () {
-            $(window).resize(function () {
-                var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
-                $(".container").css("height", final_height + "px");
-                Session.set("LearnerCountOverride", false);
-                calculateButtonCount();
-            });
-        });
-        if(Session.get("isOwner")) {
-            this.subscribe('MemberList.percentRead', {
-                hashtag: Session.get("hashtag"),
-                privateKey: localData.getPrivateKey()
-            });
-            Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 2);
-        }
-        this.subscribe('QuestionGroup.memberlist', Session.get("hashtag"), function () {
-            var doc = QuestionGroup.findOne();
-            for(var i = 0; i< doc.questionList.length; i++) {
-                oldStartTimeValues[i] = doc.questionList[i].startTime;
-            }
-        });
-        this.subscribe('Responses.session', Session.get("hashtag"));
-    });
-
-    this.autorun(function() {
-        var initializing = true;
-        QuestionGroup.find().observeChanges({
-            changed: function (id, changedFields) {
-                if(!initializing && changedFields.questionList) {
-                    var question = changedFields.questionList[Session.get("questionIndex")];
-                    if (question.startTime && (oldStartTimeValues[Session.get("questionIndex")] !== question.startTime)) {
-                        Router.go("/onpolling");
-                    }
+    this.subscribe('Hashtags.byHashtag', Session.get("hashtag"), function () {
+        Hashtags.find().observeChanges({
+            changed: (id, changedFields) => {
+                if (changedFields.sessionStatus === 3) {
+                    Router.go("/results");
                 }
             }
         });
+    });
+    this.subscribe('MemberList.members', Session.get("hashtag"), function () {
+        $(window).resize(function () {
+            var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
+            $(".container").css("height", final_height + "px");
+            Session.set("LearnerCountOverride", false);
+            calculateButtonCount();
+        });
+    });
+    this.subscribe('QuestionGroup.memberlist', Session.get("hashtag"), function () {
+        var doc = QuestionGroup.findOne();
+        for(var i = 0; i< doc.questionList.length; i++) {
+            oldStartTimeValues[i] = doc.questionList[i].startTime;
+        }
+    });
+    this.subscribe('Responses.session', Session.get("hashtag"));
+
+    if(Session.get("isOwner")) {
+        this.subscribe('MemberList.percentRead', {
+            hashtag: Session.get("hashtag"),
+            privateKey: localData.getPrivateKey()
+        });
+        Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 2);
+    }
+
+    this.autorun(function() {
+        var initializing = true;
         MemberList.find().observeChanges({
             added: function (id, newDoc) {
                 calculateButtonCount();
@@ -132,17 +130,8 @@ Template.memberlist.events({
         event.preventDefault();
     },
     'click #startPolling': function (event) {
+        Session.set("sessionClosed", false);
         Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 3);
-        Meteor.call('Question.startTimer', {
-            privateKey: localData.getPrivateKey(),
-            hashtag: Session.get("hashtag"),
-            questionIndex: Session.get("questionIndex")
-        }, (err, res) => {
-            if (err) {
-                $('.errorMessageSplash').parents('.modal').modal('show');
-                $("#errorMessage-text").html(err.reason);
-            }
-        });
     },
     'click #backButton':function(event){
         Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));

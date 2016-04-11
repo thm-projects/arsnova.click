@@ -92,9 +92,10 @@ Template.createQuestionView.events({
 
             mathjaxMarkdown.initializeMarkdownAndLatex();
             var content = $('#questionText').val();
-
+            
             content = mathjaxMarkdown.getContent(content);
 
+            $("#modalpreview-text").html("");
             $("#modalpreview-text").html(content);
 
             $('#modalpreview-text').find('p').css("margin-left", "0px");

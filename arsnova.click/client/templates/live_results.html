@@ -17,13 +17,14 @@
 -->
 
 <template name="live_results">
+    {{> titel}}
     <div id="liveResultsFrame">
         <div class="row row-padding-bottom">
-            {{#if isOwner}}
+            {{#unless sessionClosed}}{{#if isOwner}}
                 <div class="col-xs-3 top-bar-content">
-                <span class="glyphicon icon-top-bar glyphicon-user glyphicon-style center" aria-hidden="true">
-                    <div class="titel">{{getCountStudents}}</div>
-                </span>
+                    <span class="glyphicon icon-top-bar glyphicon-user glyphicon-style center" aria-hidden="true">
+                        <div class="titel">{{getCountStudents}}</div>
+                    </span>
                 </div>
                 <div class="col-xs-6 text-center">
                     <div id="appTitle" class="titel subtitel-padding-top">{{votingText}}</div>
@@ -37,11 +38,11 @@
                 <div class=" titel-relative text-light text-center">
                     <div id="appTitle" class="titel margin-to-logo">{{votingText}}</div>
                 </div>
-            {{/if}}
+            {{/if}}{{/unless}}
         </div>
         <div class="row question-wrapper">
             {{#each questionList}}
-                <div class="row question-row">
+                <div class="row question-row" id="question-row_{{@index}}">
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-12">
@@ -49,10 +50,10 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-10 col-md-offset-1">
+                            <div class="col-md-12">
                                 <div class="row">
                                     {{#if showLeaderBoardButton}}
-                                        <div class="col-xs-12">
+                                        <div class="col-xs-4">
                                             <button id="js-btn-showLeaderBoard" type="button"
                                                     class="btn btn-info btn-lg btn-answerOption">
                                                 <span class="glyphicon glyphicon-flag glyph-left"
@@ -61,7 +62,7 @@
                                             </button>
                                         </div>
                                     {{/if}}
-                                    <div class="col-xs-{{#if isOwner}}4{{else}}6{{/if}}">
+                                    <div class="col-xs-{{#if isOwner}}{{#if showLeaderBoardButton}}4{{else}}6{{/if}}{{else}}6{{/if}}">
                                         <button id="js-btn-showQuestionModal" type="button"
                                                 class="btn btn-info btn-lg btn-answerOption">
                                             <span class="glyphicon glyphicon-question-sign glyph-left"
@@ -69,7 +70,7 @@
                                             <span class="ansBtn">Frage</span>
                                         </button>
                                     </div>
-                                    <div class="col-xs-{{#if isOwner}}4{{else}}6{{/if}}">
+                                    <div class="col-xs-{{#if isOwner}}{{#if showLeaderBoardButton}}4{{else}}6{{/if}}{{else}}6{{/if}}">
                                         <button id="js-btn-showAnswerModal" type="button"
                                                 class="btn btn-info btn-lg btn-answerOption">
                                             <span class="glyphicon glyphicon-th-list glyph-left"
@@ -137,7 +138,7 @@
                             </div>
                             <div class="col-xs-6">
                                 {{#if sessionClosed}}
-                                    <button class="button button-next button-start" id="goGlobalRanking">
+                                    <button class="button button-next" id="goGlobalRanking">
                                         <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
                                         <span class="ansBtn">Globale Rangliste</span>
                                     </button>

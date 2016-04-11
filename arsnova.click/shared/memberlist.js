@@ -47,9 +47,9 @@ Meteor.methods({
     },
     'MemberList.setReadConfirmed': function ({hashtag, questionIndex, nick}) {
         /*
-        TODO Everybody can set "readConfirmed" for each user!
-        Maybe link this method to a privateKey for learners?
-        Maybe check with Meteor.user()?
+         TODO Everybody can set "readConfirmed" for each user!
+         Maybe link this method to a privateKey for learners?
+         Maybe check with Meteor.user()?
          */
         new SimpleSchema({
             hashtag: {type: String},
@@ -66,6 +66,19 @@ Meteor.methods({
         }
         member.readConfirmed[questionIndex] = 1;
         MemberList.update(member._id, { $set: {readConfirmed: member.readConfirmed} });
+    },
+    'MemberList.clearReadConfirmed': function ({privateKey, hashtag}) {
+        if(Meteor.isServer) {
+            var doc = Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
+            });
+            if (doc) {
+                MemberList.update({hashtag: hashtag}, { $set: {readConfirmed: []} });
+            } else {
+                throw new Meteor.Error('MemberList.clearReadConfirmed', 'Either the hashtag isn\'t available or the key is wrong');
+            }
+        }
     },
     'MemberList.removeFromSession': function(privateKey, hashtag) {
         if(Meteor.isServer) {

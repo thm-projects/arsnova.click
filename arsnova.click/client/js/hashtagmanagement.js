@@ -17,20 +17,15 @@
  */
 
 Template.hashtagManagement.onCreated(function () {
-    this.autorun(() => {
-        this.subscribe('Hashtags.public');
-    });
+    this.subscribe('Hashtags.public');
 });
 
 Template.hashtagManagement.onRendered(function () {
     $(window).resize(function () {
         labelManagement();
     });
-});
-
-Template.hashtagManagement.rendered = function () {
     labelManagement();
-};
+});
 
 Template.hashtagManagement.helpers({
     serverHashtags: function () {

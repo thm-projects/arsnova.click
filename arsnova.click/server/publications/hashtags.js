@@ -17,7 +17,15 @@
  */
 
 Meteor.publish('Hashtags.public', function () {
-    return Hashtags.find({},{
+    return Hashtags.find({}, {
+        fields: {
+            privateKey: 0
+        }
+    });
+});
+
+Meteor.publish('Hashtags.byHashtag', function (hashtag) {
+    return Hashtags.find({hashtag: hashtag}, {
         fields: {
             privateKey: 0
         }

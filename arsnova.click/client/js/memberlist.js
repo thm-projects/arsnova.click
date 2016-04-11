@@ -133,7 +133,6 @@ Template.memberlist.events({
     },
     'click #startPolling': function (event) {
         Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 3);
-        Meteor.call('Responses.clearAll', localData.getPrivateKey(), Session.get("hashtag"));
         Meteor.call('Question.startTimer', {
             privateKey: localData.getPrivateKey(),
             hashtag: Session.get("hashtag"),
@@ -146,9 +145,8 @@ Template.memberlist.events({
         });
     },
     'click #backButton':function(event){
-        Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 1);
         Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
-        Session.set("questionIndex", 0);
+        Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 1);
         Router.go("/settimer");
     }
 });

@@ -94,7 +94,6 @@ function checkForValidQuestions(index) {
 
     if(!question.questionText || question.questionText.length < 5) return false;
     if(!question.timer || isNaN(question.timer) || question.timer < 5000 || question.timer > 260000) return false;
-    if(typeof question.isReadingConfirmationRequired === "undefined" || isNaN(question.isReadingConfirmationRequired) || question.isReadingConfirmationRequired < 0 || question.isReadingConfirmationRequired > 1) return false;
 
     var hasValidAnswers = false;
     answerDoc.forEach(function (value) {

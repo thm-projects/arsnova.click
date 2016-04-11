@@ -201,9 +201,6 @@ Template.memberlist.helpers({
     isOwner: function () {
         return Session.get("isOwner");
     },
-    isNotOwner: function () {
-        return !Session.get("isOwner");
-    },
     isLearnerCountOverride: function () {
         return Session.get('LearnerCountOverride');
     },

@@ -17,9 +17,9 @@
 -->
 
 <template name="memberlist">
-    {{#if isNotOwner}}
+    {{#unless isOwner}}
         {{> splashscreen templateName = "questionT" lazyCloseJsClass='js-splashscreen-noLazyClose' headername="Frage" type="splash-screen-show-question"}}
-    {{/if}}
+    {{/unless}}
     <div class="row">
         <div class="col-md-12 contentFrame">
             {{> titel titelText=""}}

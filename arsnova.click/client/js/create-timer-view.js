@@ -75,7 +75,7 @@ Template.createTimerView.events({
                 $("#errorMessage-text").html(err.reason);
             } else {
                 localData.addTimer(Session.get("hashtag"), timer);
-        Router.go("/readconfirmationrequired");
+        Router.go("/memberlist");
     }
     });
     },

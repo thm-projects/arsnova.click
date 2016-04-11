@@ -70,14 +70,6 @@ Router.route('/settimer', function () {
     }
 });
 
-Router.route('/readconfirmationrequired', function () {
-    if (Session.get("isOwner")) {
-        this.render('readconfirmationrequired');
-    } else {
-        Router.go("/");
-    }
-});
-
 Router.route('/memberlist', function () {
     this.render('memberlist');
 });

@@ -29,14 +29,10 @@ Meteor.methods({
             hashtag: hashtag,
             privateKey: privateKey
         });
-        if (doc) {
-            return true;
-        } else {
-            return false;
-        }
+        return Boolean(doc);
     },
     'Hashtags.setSessionStatus': function (privateKey, hashtag, sessionStatus) {
-        if (Meteor.isServer){
+        if (Meteor.isServer) {
             new SimpleSchema({
                 hashtag: {type: String},
                 privateKey: {type: String},

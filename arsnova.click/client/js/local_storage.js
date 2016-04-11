@@ -175,8 +175,8 @@ localData = {
                 }];
                 delete sessionData.questionText;
                 delete sessionData.timer;
-                delete sessionData.isReadingConfirmationRequired;
                 delete sessionData.answers;
+                delete sessionData.isReadingConfirmationRequired;
                 localStorage.setItem(hashtag, JSON.stringify(sessionData));
             }
 
@@ -184,6 +184,7 @@ localData = {
                 if(!sessionData.questionList[i].answers) continue;
                 var answer = sessionData.questionList[i].answers;
                 delete sessionData.questionList[i].answers;
+                delete sessionData.questionList[i].isReadingConfirmationRequired;
                 for(var j = 0; j< answer.length; j++) {
                     Meteor.call("AnswerOptions.addOption", {
                         privateKey: localStorage.getItem("privateKey"),

@@ -1,25 +1,23 @@
 <template name="questionList">
     <div class="row">
-        <div class="col-md-12">
-            <div class="row questionScrollPane" style="display: table; width: 100%; ">
-                <div style="display: table-row; width: 100%;">
-                    <div style="display: table-cell;margin-right: 5%;max-width: 65%;overflow-x: hidden;">
-                        {{#each question}}
-                            <div class="{{#if isActiveIndex @index}}active {{/if}}{{#if hasCompleteContent @index}} valid {{/if}}questionIcon "
-                                 id="questionIcon_{{@index}}">
-                                <span class="indexNumber">{{getNormalizedIndex @index}}</span>
-                                <button class="removeQuestion button button-default">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                    Löschen
-                                </button>
-                            </div>
-                        {{/each}}
+        <div class="col-xs-12 col-md-3">
+            <button id="addQuestion" class="button button-success">
+                <span class="glyphicon glyphicon-plus"></span>
+                Neue Frage
+            </button>
+        </div>
+        <div class="col-xs-12 col-md-9">
+            <div class="questionScrollPane">
+                {{#each question}}
+                    <div class="{{#if isActiveIndex @index}}active {{/if}}{{#if hasCompleteContent @index}} valid {{/if}}questionIcon "
+                         id="questionIcon_{{@index}}">
+                        <span class="indexNumber">{{getNormalizedIndex @index}}.</span>
+                        <button class="removeQuestion button button-default">
+                            <span class="glyphicon glyphicon-trash"></span>
+                            <span class="hidden-xs hidden-sm">Löschen</span>
+                        </button>
                     </div>
-                    <button id="addQuestion" class="button button-success" style="display:table-cell;width:30%;">
-                        <span class="glyphicon glyphicon-plus"></span>
-                        Neue Frage
-                    </button>
-                </div>
+                {{/each}}
             </div>
         </div>
     </div>

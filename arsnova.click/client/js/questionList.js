@@ -76,6 +76,11 @@ Template.questionList.events({
     },
     'click #addQuestion': function (event) {
         addNewQuestion();
+        setTimeout(()=> {
+            let scrollPane = $(".questionScrollPane");
+            scrollPane.scrollLeft(scrollPane.width());
+        }, 200);
+
     }
 });
 
@@ -124,6 +129,8 @@ function addNewQuestion(){
             var valid_questions = Session.get("valid_questions");
             valid_questions[index] = false;
             Session.set("valid_questions",valid_questions);
+
+            Session.set("questionIndex", index);
         }
     });
 }

@@ -5,11 +5,11 @@ $activeItemBackgroundLight: #86253E;
 
 .questionScrollPane {
   height: 70px;
-  display: flex;
   overflow-x: auto;
   overflow-y: hidden;
   font-family: serif;
   font-size: 15px;
+  margin-top: 15px;
 
   .questionIcon {
     height: 50px;
@@ -53,7 +53,7 @@ $activeItemBackgroundLight: #86253E;
       border: 1px solid beige;
 
       .indexNumber {
-        border-radius: $corner-radius;
+        border-radius: $corner-radius 0 0 $corner-radius;
       }
 
       &.valid {
@@ -68,6 +68,7 @@ $activeItemBackgroundLight: #86253E;
         border-top-left-radius: 0;
         font-family: Georgia, serif;
         height: 48px; /* Standard button height is 50px -> subtract 2px for the border */
+        display: block;
 
         .glyphicon {
           top: 3px;
@@ -78,15 +79,6 @@ $activeItemBackgroundLight: #86253E;
           color: white;
         }
       }
-
-      &:hover {
-        .indexNumber {
-          border-radius: $corner-radius 0 0 $corner-radius;
-        }
-        .removeQuestion {
-          display: block;
-        }
-      }
     }
   }
 }
@@ -95,4 +87,5 @@ $activeItemBackgroundLight: #86253E;
   font-size: 20px;
   height: 50px;
   display: block;
+  margin-top: 15px;
 }

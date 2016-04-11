@@ -16,6 +16,8 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+let validationTrackerHandle = null;
+
 Template.createTimerView.onCreated(function () {
     if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
     this.autorun(() => {
@@ -47,12 +49,24 @@ Template.createTimerView.onRendered(function () {
     body.on('click', '.removeQuestion', function () {
         index = Session.get("questionIndex");
     });
+
+    validationTrackerHandle = Tracker.autorun(()=>{
+        var valid_questions = Session.get("valid_questions");
+        var forwardButton = $('#forwardButton');
+        forwardButton.removeAttr("disabled");
+        for(var i = 0; i < valid_questions.length; i++) {
+            if( !valid_questions[i] ) {
+                forwardButton.attr("disabled","disabled");
+            }
+        }
+    });
 });
 
 Template.createTimerView.onDestroyed(function () {
     var body = $('body');
     body.off('click', '.questionIcon:not(.active)');
     body.off('click', '.removeQuestion');
+    validationTrackerHandle.stop();
 });
 
 

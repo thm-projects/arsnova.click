@@ -1,5 +1,7 @@
 Template.questionList.onCreated(function () {
-    if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
+    if (!Session.get("questionIndex")) {
+        Session.set("questionIndex", 0);
+    }
     Session.set("valid_questions",[]);
 
     this.autorun(() => {
@@ -8,13 +10,14 @@ Template.questionList.onCreated(function () {
     });
 
     this.autorun(() => {
-        if(!QuestionGroup.findOne()) return;
+        if (!QuestionGroup.findOne()) return;
 
         var questionList = QuestionGroup.findOne().questionList;
         var valid_questions = Session.get("valid_questions");
         if(questionList.length >= valid_questions.length) return;
 
         valid_questions.splice(questionList.length - 1, valid_questions.length - questionList.length);
+                
         Session.set("valid_questions",valid_questions);
     });
 });

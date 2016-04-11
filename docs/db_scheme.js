@@ -75,12 +75,6 @@ sessions: {
     timer: {
         type: Number,
         min: 0
-    },
-    // Soll eine Lesebestätigung angefordert werden?
-    isReadingConfirmationRequired:{
-        type: Number,
-        min: 0,
-        max: 1
     }
 }
 

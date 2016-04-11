@@ -179,6 +179,7 @@ localData = {
                 delete sessionData.timer;
                 delete sessionData.isReadingConfirmationRequired;
                 delete sessionData.answers;
+                localStorage.setItem(hashtag, JSON.stringify(sessionData));
             }
 
             for(var i = 0; i < sessionData.questionList.length; i++) {

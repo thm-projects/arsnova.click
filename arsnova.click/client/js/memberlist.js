@@ -211,13 +211,11 @@ function calculateButtonCount () {
     - subtract the margin to the top (the title or the show more button)
      */
     var viewport = $(".contentPosition"),
-        confirmationCounter = $('.confirmationCounter').length > 0 ? $('.confirmationCounter').first().outerHeight() : 0,
         attendeeInQuiz = $('#attendee-in-quiz-wrapper').length > 0 ? $('#attendee-in-quiz-wrapper').outerHeight() : 0,
         learnerListMargin = $('.learner-list').length > 0 ? parseInt($('.learner-list').first().css('margin-top').replace("px", "")) : 0;
 
     var viewPortHeight =
         viewport.outerHeight() -
-        confirmationCounter -
         attendeeInQuiz -
         learnerListMargin;
 

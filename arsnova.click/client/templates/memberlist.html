@@ -17,9 +17,6 @@
 -->
 
 <template name="memberlist">
-    {{#unless isOwner}}
-        {{> splashscreen templateName = "questionT" lazyCloseJsClass='js-splashscreen-noLazyClose' headername="Frage" type="splash-screen-show-question"}}
-    {{/unless}}
     <div class="row">
         <div class="col-md-12 contentFrame">
             {{> titel titelText=""}}
@@ -30,7 +27,6 @@
                     </div>
                 </div>
             {{/unless}}
-            {{> readingConfirmation }}
             {{#if showMoreButton}}
                 <div class="row more-learners-row">
                     <div class="col-xs-12">

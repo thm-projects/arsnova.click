@@ -21,22 +21,20 @@ Template.live_results.onCreated(function () {
     var oldStartTimeValues = {};
     countdown = null;
 
-    this.autorun(() => {
-        this.subscription = Meteor.subscribe('Responses.session', Session.get("hashtag"));
-        this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"));
-        this.subscription = Meteor.subscribe('MemberList.members', Session.get("hashtag"));
-        this.subscription = Meteor.subscribe('QuestionGroup.questionList', Session.get("hashtag"), function () {
-            var doc = QuestionGroup.findOne();
-            for(var i = 0; i< doc.questionList.length; i++) {
-                oldStartTimeValues[i] = doc.questionList[i].startTime;
-            }
-            Session.set("oldStartTimeValues", oldStartTimeValues);
-            if(!Session.get("sessionClosed") && Session.get("isOwner")) {
-                startCountdown(0);
-            }
-        });
-        this.subscription = Meteor.subscribe('Hashtags.public');
+    this.subscription = Meteor.subscribe('Responses.session', Session.get("hashtag"));
+    this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"));
+    this.subscription = Meteor.subscribe('MemberList.members', Session.get("hashtag"));
+    this.subscription = Meteor.subscribe('QuestionGroup.questionList', Session.get("hashtag"), function () {
+        var doc = QuestionGroup.findOne();
+        for (var i = 0; i < doc.questionList.length; i++) {
+            oldStartTimeValues[i] = doc.questionList[i].startTime;
+        }
+        Session.set("oldStartTimeValues", oldStartTimeValues);
+        if (!Session.get("sessionClosed") && Session.get("isOwner")) {
+            startCountdown(0);
+        }
     });
+    this.subscription = Meteor.subscribe('Hashtags.public');
 });
 
 Template.live_results.onDestroyed(function () {
@@ -89,12 +87,11 @@ Template.live_results.helpers({
     getCountStudents: function () {
         return MemberList.find().count();
     },
-    isReadingConfirmationRequired: function (index) {
-        const doc = QuestionGroup.findOne();
-        return doc ? doc.questionList[index].isReadingConfirmationRequired === 1 : null;
-    },
     getPercentRead: (index)=>{
         return getPercentRead(index);
+    },
+    getCurrentRead: (index)=> {
+        return getCurrentRead(index);
     },
     sessionClosed: function () {
         return Session.get("sessionClosed");
@@ -156,7 +153,7 @@ Template.live_results.helpers({
         if(Session.get("questionIndex") < questionList.length - 1) {
             questionList.splice(Session.get("questionIndex") + 1, questionList.length - (Session.get("questionIndex") + 1));
         }
-        return questionList ? questionList : false;
+        return questionList ? questionList.reverse() : false;
     },
     answerList: function (index) {
         var result = [];
@@ -221,10 +218,12 @@ Template.live_results.events({
 
         $('#answerOptionsTxt').html(content);
     },
-    "click #js-btn-showLeaderBoard": function () {
+    "click #js-btn-showLeaderBoard": function (event) {
+        event.stopPropagation();
         Router.go("/statistics");
     },
     "click #js-btn-export": function (event) {
+        event.stopPropagation();
         Meteor.call('Hashtags.export', {hashtag: Session.get("hashtag"), privateKey: localData.getPrivateKey()}, (err, res) => {
             if (err) {
                 alert("Could not export!\n" + err);
@@ -247,7 +246,16 @@ Template.live_results.events({
             }
         });
     },
-    'click #startNextQuestion':()=>{
+    'click #backButton': (event)=> {
+        event.stopPropagation();
+        /*
+         TODO: Reroute all attendees to the memberlist
+         */
+        countdown.stop();
+        Router.go("/memberlist");
+    },
+    'click #startNextQuestion': (event)=> {
+        event.stopPropagation();
         var questionDoc = QuestionGroup.findOne();
         if(!questionDoc) return;
 
@@ -308,6 +316,16 @@ function getPercentRead (index) {
         if(member.readConfirmed[index]) sumRead += member.readConfirmed[index];
     });
     return count ? Math.floor(sumRead / count * 100) : 0;
+}
+
+function getCurrentRead (index) {
+    var sumRead = 0;
+    MemberList.find().map(function (member) {
+        if (member.readConfirmed[index]) {
+            sumRead += member.readConfirmed[index];
+        }
+    });
+    return sumRead;
 }
 
 function checkIfIsCorrect(isCorrect){

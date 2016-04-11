@@ -53,9 +53,7 @@
     </div>
     {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Frage" templateName="questionContentSplash"}}
     {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Antwortoptionen" templateName="answerOptionsSplash"}}
-    {{#if isNotOwnerAndReadConfirmationNeeded}}
-        {{> splashscreen lazyCloseJsClass='js-splashscreen-noLazyClose' noAutorun=false headername="Frage" templateName="questionT" type="splash-screen-show-question"}}
-    {{/if}}
+    {{> splashscreen templateName = "questionT" lazyCloseJsClass='js-splashscreen-noLazyClose' headername="Frage" type="splash-screen-show-question"}}
     {{> errorSplashscreen }}
 </template>
 

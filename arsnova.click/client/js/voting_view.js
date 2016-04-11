@@ -72,10 +72,6 @@ Template.votingview.helpers({
             }
             return "Noch " + countdown.get() + " Sekunden!";
         }
-    },
-    isNotOwnerAndReadConfirmationNeeded: function () {
-        let doc = QuestionGroup.findOne();
-        return doc ? ( !Session.get("isOwner") && doc.questionList[Session.get("questionIndex")].isReadingConfirmationRequired === 1 ) : null;
     }
 });
 

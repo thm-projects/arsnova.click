@@ -81,7 +81,7 @@ localData = {
         }
     },
 
-    addQuestion: function (hashtag, question) {
+    addQuestion: function (hashtag, questionIndex, questionText) {
         if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
@@ -94,7 +94,6 @@ localData = {
                 sessionData.questionList.push({
                     questionText: questionText,
                     timer: 10000,
-                    isReadingConfirmationRequired: 1,
                     answers: [
                         {answerOptionNumber:0, answerText:"", isCorrect:0},
                         {answerOptionNumber:1, answerText:"", isCorrect:0},
@@ -172,7 +171,6 @@ localData = {
                 sessionData.questionList = [{
                     questionText: sessionData.questionText,
                     timer: sessionData.timer,
-                    isReadingConfirmationRequired: sessionData.isReadingConfirmationRequired,
                     answers: sessionData.answers
                 }];
                 delete sessionData.questionText;
@@ -282,7 +280,6 @@ localData = {
             questionList.push({
                 questionText: questionListDoc.questionText,
                 timer: questionListDoc.timer,
-                isReadingConfirmationRequired: questionListDoc.isReadingConfirmationRequired,
                 answers: answerOptionsLocalStorage
             });
         });

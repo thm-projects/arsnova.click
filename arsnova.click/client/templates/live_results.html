@@ -48,22 +48,53 @@
                                 <p class="question-title">Frage {{getNormalizedIndex @index}} / {{allQuestionCount}}</p>
                             </div>
                         </div>
-                        {{#if isReadingConfirmationRequired @index}}
-                            <div class="row form-group button button-result readingConfirmationProgressRow">
-                                <div class="col-xs-5 col-sm-5 col-md-5">
-                                    <span class="button-result-letter button-result-readingConfirmation">Lesebestätigung</span>
-                                </div>
-                                <div class="col-xs-7 col-sm-7 col-md-7">
-                                    <div class="progress" style="margin-right: 0;">
-                                        <div class="progress-bar" role="progressbar"
-                                             aria-valuemin="0" aria-valuemax="100"
-                                             style="width:{{getPercentRead @index}}%; background:{{getCSSClassForPercent (getPercentRead @index)}}">
-                                                <span class="percentage">{{getCountStudents}} | {{getPercentRead @index}}%</span>
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="row">
+                                    {{#if showLeaderBoardButton}}
+                                        <div class="col-xs-12">
+                                            <button id="js-btn-showLeaderBoard" type="button"
+                                                    class="btn btn-info btn-lg btn-answerOption">
+                                                <span class="glyphicon glyphicon-flag glyph-left"
+                                                      aria-hidden="true"></span>
+                                                <span class="ansBtn">Rangliste</span>
+                                            </button>
                                         </div>
+                                    {{/if}}
+                                    <div class="col-xs-{{#if isOwner}}4{{else}}6{{/if}}">
+                                        <button id="js-btn-showQuestionModal" type="button"
+                                                class="btn btn-info btn-lg btn-answerOption">
+                                            <span class="glyphicon glyphicon-question-sign glyph-left"
+                                                  aria-hidden="true"></span>
+                                            <span class="ansBtn">Frage</span>
+                                        </button>
+                                    </div>
+                                    <div class="col-xs-{{#if isOwner}}4{{else}}6{{/if}}">
+                                        <button id="js-btn-showAnswerModal" type="button"
+                                                class="btn btn-info btn-lg btn-answerOption">
+                                            <span class="glyphicon glyphicon-th-list glyph-left"
+                                                  aria-hidden="true"></span>
+                                            <span class="ansBtn">Antworten</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        {{/if}}
+                        </div>
+                        <div class="row form-group button button-result readingConfirmationProgressRow">
+                            <div class="col-xs-5 col-sm-5 col-md-5">
+                                <span class="button-result-letter button-result-readingConfirmation">Lesebestätigung</span>
+                            </div>
+                            <div class="col-xs-7 col-sm-7 col-md-7">
+                                <div class="progress" style="margin-right: 0;">
+                                    <div class="progress-bar" role="progressbar"
+                                         aria-valuemin="0" aria-valuemax="100"
+                                         style="width:{{getPercentRead @index}}%; background:{{getCSSClassForPercent (getPercentRead @index)}}">
+                                        <span class="percentage">{{getCurrentRead @index}} / {{getCountStudents}}
+                                            | {{getPercentRead @index}}%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 {{#each answerList @index}}
@@ -93,47 +124,37 @@
             </div>
         {{/if}}
 
-        <div class="fixed-bottom">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="row">
-                        {{#if sessionClosed}}
-                            {{#if showLeaderBoardButton}}
-                                <div class="col-xs-12">
-                                    <button id="js-btn-showLeaderBoard" type="button"
-                                            class="btn btn-info btn-lg btn-answerOption">
-                                        <span class="glyphicon glyphicon-flag glyph-left" aria-hidden="true"></span>
-                                        <span class="ansBtn">Rangliste</span>
-                                    </button>
-                                </div>
-                            {{/if}}
-                        {{ else }}
-                            <div class="col-xs-{{#if isOwner}}4{{else}}6{{/if}}">
-                                <button id="js-btn-showQuestionModal" type="button"
-                                        class="btn btn-info btn-lg btn-answerOption">
-                                    <span class="glyphicon glyphicon-question-sign glyph-left" aria-hidden="true"></span>
-                                    <span class="ansBtn">Frage</span>
+        {{#if isOwner}}
+            <div class="fixed-bottom">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button id="backButton" class="button button-back">
+                                    <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
+                                    Zurück zur Lobby
                                 </button>
                             </div>
-                            <div class="col-xs-{{#if isOwner}}4{{else}}6{{/if}}">
-                                <button id="js-btn-showAnswerModal" type="button" class="btn btn-info btn-lg btn-answerOption">
-                                    <span class="glyphicon glyphicon-th-list glyph-left" aria-hidden="true"></span>
-                                    <span class="ansBtn">Antworten</span>
-                                </button>
-                            </div>
-                            {{#unless isRunningQuestion}}{{#if isOwner}}
-                                <div class="col-xs-4">
-                                    <button class="btn btn-info btn-lg btn-answerOption" id="startNextQuestion">
+                            <div class="col-xs-6">
+                                {{#if sessionClosed}}
+                                    <button class="button button-next button-start" id="goGlobalRanking">
                                         <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                        <span class="ansBtn">Starte Frage {{nextQuestionIndex}} von {{allQuestionCount}}</span>
+                                        <span class="ansBtn">Globale Rangliste</span>
                                     </button>
-                                </div>
-                            {{/if}}{{/unless}}
-                        {{/if}}
+                                {{else}}
+                                    <button class="button button-next button-start" id="startNextQuestion">
+                                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                        <span class="ansBtn">Starte Frage {{nextQuestionIndex}}
+                                            / {{allQuestionCount}}</span>
+                                    </button>
+                                {{/if}}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {{/if}}
+
     </div>
     {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Die Frage" templateName="questionContentSplash" type="splash-screen-show-question"}}
     {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Die Antworten" templateName="answerOptionsSplash" type="splash-screen-show-question"}}

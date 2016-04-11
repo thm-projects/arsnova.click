@@ -20,16 +20,16 @@ let validationTrackerHandle = null;
 
 Template.createTimerView.onCreated(function () {
     if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
+    this.subscription = Meteor.subscribe('AnswerOptions.instructor', localData.getPrivateKey(), Session.get("hashtag"));
+    this.subscription = Meteor.subscribe('QuestionGroup.authorizeAsOwner', localData.getPrivateKey(), Session.get("hashtag"));
+
     this.autorun(() => {
-        this.subscription = Meteor.subscribe('AnswerOptions.instructor', localData.getPrivateKey(), Session.get("hashtag"), function() {});
-        this.subscription = Meteor.subscribe('QuestionGroup.authorizeAsOwner', localData.getPrivateKey(), Session.get("hashtag"), function () {
-            var doc = QuestionGroup.findOne();
-            if (doc && doc.questionList[Session.get("questionIndex")].timer !== 0) {
-                Session.set("slider", (doc.questionList[Session.get("questionIndex")].timer / 1000));
-            } else {
-                Session.set("slider", 0);
-            }
-        });
+        var doc = QuestionGroup.findOne();
+        if (doc && doc.questionList[Session.get("questionIndex")].timer !== 0) {
+            setSlider(Session.get("questionIndex"));
+        } else {
+            Session.set("slider", 0);
+        }
     });
 });
 

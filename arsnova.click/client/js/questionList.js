@@ -95,7 +95,7 @@ function checkForValidQuestions(index) {
     var question = questionDoc.questionList[index];
     if(!question) return false;
 
-    if(!question.questionText || question.questionText.length < 5) return false;
+    if(!question.questionText || question.questionText.length < 5 || question.questionText.length > 10000) return false;
     if(!question.timer || isNaN(question.timer) || question.timer < 5000 || question.timer > 260000) return false;
 
     var hasValidAnswers = false;
@@ -117,14 +117,16 @@ function addNewQuestion(){
             $('.errorMessageSplash').parents('.modal').modal('show');
             $("#errorMessage-text").html(err.reason);
         } else {
-            Meteor.call('AnswerOptions.addOption',{
-                privateKey:localData.getPrivateKey(), 
-                hashtag:Session.get("hashtag"), 
-                questionIndex: index, 
-                answerOptionNumber:0, 
-                answerText:"", 
-                isCorrect:0
-            });
+            for(var i = 0; i < 4; i++) {
+                Meteor.call('AnswerOptions.addOption',{
+                    privateKey:localData.getPrivateKey(),
+                    hashtag:Session.get("hashtag"),
+                    questionIndex: index,
+                    answerOptionNumber:i,
+                    answerText:"",
+                    isCorrect:0
+                });
+            }
             
             localData.addQuestion(Session.get("hashtag"), QuestionGroup.findOne().questionList.length, "");
 

@@ -93,7 +93,7 @@ localData = {
             } else {
                 sessionData.questionList.push({
                     questionText: questionText,
-                    timer: 10000,
+                    timer: 40000,
                     answers: [
                         {answerOptionNumber:0, answerText:"", isCorrect:0},
                         {answerOptionNumber:1, answerText:"", isCorrect:0},

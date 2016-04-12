@@ -16,15 +16,33 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+Template.questionT.onCreated(function () {
+    this.autorun(() => {
+        this.subscribe('Sessions.question', Session.get("hashtag"), function () {
+        var sessionDoc = Sessions.findOne({hashtag: Session.get("hashtag")});
+        var content = "";
+        console.log(sessionDoc);
+        if (sessionDoc) {
+            mathjaxMarkdown.initializeMarkdownAndLatex();
+            var questionText = sessionDoc.questionText;
+            content = mathjaxMarkdown.getContent(questionText);
+        }
+        console.log(content);
+        $('#questionTText').html(content);
+        });
+    });
+});
+
 Template.questionT.onRendered(function () {
     var sessionDoc = Sessions.findOne({hashtag: Session.get("hashtag")});
     var content = "";
+    console.log(sessionDoc);
     if (sessionDoc) {
         mathjaxMarkdown.initializeMarkdownAndLatex();
         var questionText = sessionDoc.questionText;
         content = mathjaxMarkdown.getContent(questionText);
     }
-
+    console.log(content);
     $('#questionTText').html(content);
 });
 

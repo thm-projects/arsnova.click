@@ -84,7 +84,7 @@ Template.createTimerView.events({
             $('.errorMessageSplash').parents('.modal').modal('show');
             $("#errorMessage-text").html(err.reason);
         } else {
-            if($(event.target).attr("id") === "forwardButton") {
+            if($(event.currentTarget).attr("id") === "forwardButton") {
                 Router.go("/memberlist");
             } else {
                 Router.go("/answeroptions");

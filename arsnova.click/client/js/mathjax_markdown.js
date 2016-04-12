@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 var defaultHyperLinkRenderer;
 
 mathjaxMarkdown = {
@@ -39,9 +38,6 @@ mathjaxMarkdown = {
         this.lexer = new marked.Lexer();
         this.lexer.rules.heading = /^(#{1,6})\s*(.*?)\s*#*\s*(?:\n|$)/;
 
-        // mathjax config
-        var head = document.getElementsByTagName("head")[0], script;
-
         window.MathJax = {
             jax: ["input/TeX", "output/HTML-CSS"],
             extensions: ["tex2jax.js", "Safe.js"],
@@ -59,10 +55,17 @@ mathjaxMarkdown = {
             showMathMenu: false
         };
 
-        script = document.createElement("script");
-        script.type = "text/javascript";
-        script.src = "https://cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=TeX-MML-AM_CHTML";
-        head.appendChild(script);
+        var mathjaxScriptLen = $('script[src*="https://cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=TeX-MML-AM_CHTML"]').length;
+
+        if (mathjaxScriptLen === 0) {
+            // mathjax config
+            var head = document.getElementsByTagName("head")[0], script;
+
+            script = document.createElement("script");
+            script.type = "text/javascript";
+            script.src = "https://cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=TeX-MML-AM_CHTML";
+            head.appendChild(script);
+        }
     },
     replaceCodeBlockFromContent: function (content) {
         return content.replace(/<hlcode>([\s\S]*?)<\/hlcode>/g, function (element) {
@@ -99,9 +102,11 @@ mathjaxMarkdown = {
             }
 
             content = this.replaceBack(replStack[0]);
-        }
 
-        return content;
+            return content;
+        } else {
+            return "";
+        }
     },
 
     // get all delimiter indices as array of [start(incl), end(excl)] elements
@@ -232,8 +237,7 @@ mathjaxMarkdown = {
         content = videoElementReplace(content, vimeoDelimiters);
 
         if (text === content) {
-            content = defaultHyperLinkRenderer.call(marked, href, title, text);
-            content = content.slice(0, 3) + 'target="_blank" class="hyperlink" ' + content.slice(3, content.length);
+            content = '<p><a target="_blank" class=hyperlink" href="' + href + '">' + text + '</a></p>';
         }
 
         return content;

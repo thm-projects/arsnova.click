@@ -9,6 +9,17 @@ jshint:
     - npm install jshint@^2.9.0
     - node_modules/jshint/bin/jshint --config .jshintrc $PROJECT_PATH/client/ $PROJECT_PATH/server/ $PROJECT_PATH/shared/
 
+sonar:
+  stage: test
+  only:
+    - master
+    - staging
+  tags:
+    - gradle
+  allow_failure: true
+  script:
+    - gradle sonarqube
+
 build-and-deploy:
   stage: deploy
   only:

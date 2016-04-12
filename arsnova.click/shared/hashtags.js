@@ -126,7 +126,7 @@ Meteor.methods({
                 sessionDoc: sessionDoc,
                 answerOptionsDoc: answerOptionsDoc,
                 memberListDoc: memberListDoc,
-                responsesDoc: responsesDoc,
+                responsesDoc: responsesDoc
             };
             return JSON.stringify(exportData);
         }
@@ -162,10 +162,10 @@ Meteor.methods({
         if (Meteor.isServer){
             new SimpleSchema({
                 hashtag: {type: String},
-                privateKey: {type: String},
+                privateKey: {type: String}
             }).validate({
                 privateKey,
-                hashtag,
+                hashtag
             });
 
             var doc = Hashtags.findOne({

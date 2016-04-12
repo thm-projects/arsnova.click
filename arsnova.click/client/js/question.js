@@ -21,13 +21,13 @@ Template.questionT.onCreated(function () {
         this.subscribe('Sessions.question', Session.get("hashtag"), function () {
         var sessionDoc = Sessions.findOne({hashtag: Session.get("hashtag")});
         var content = "";
-        console.log(sessionDoc);
+
         if (sessionDoc) {
             mathjaxMarkdown.initializeMarkdownAndLatex();
             var questionText = sessionDoc.questionText;
             content = mathjaxMarkdown.getContent(questionText);
         }
-        console.log(content);
+
         $('#questionTText').html(content);
         });
     });
@@ -36,13 +36,13 @@ Template.questionT.onCreated(function () {
 Template.questionT.onRendered(function () {
     var sessionDoc = Sessions.findOne({hashtag: Session.get("hashtag")});
     var content = "";
-    console.log(sessionDoc);
+
     if (sessionDoc) {
         mathjaxMarkdown.initializeMarkdownAndLatex();
         var questionText = sessionDoc.questionText;
         content = mathjaxMarkdown.getContent(questionText);
     }
-    console.log(content);
+
     $('#questionTText').html(content);
 });
 

@@ -262,7 +262,7 @@ localData = {
             var sessionDoc = {
                 hashtag: localStorageData.hashtag,
                 questionText: localStorageData.questionText,
-                timer: localStorageData.timer,
+                timer: localStorageData.timer
             };
             answerOptionsDoc = [];
             localStorageData.answers.forEach(function (answerOption) {
@@ -274,7 +274,7 @@ localData = {
                 sessionDoc: sessionDoc,
                 answerOptionsDoc: answerOptionsDoc,
                 memberListDoc: [],
-                responsesDoc: [],
+                responsesDoc: []
             };
             return JSON.stringify(exportData);
         }

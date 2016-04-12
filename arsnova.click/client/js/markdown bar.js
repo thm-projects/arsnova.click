@@ -143,7 +143,7 @@ Template.markdownBar.events({
             $('#vimeoText').val(middleText);
             textarea.value = frontText + backText;
         }
-    },
+    }
 });
 
 Template.hyperlinkInsertSplash.events({

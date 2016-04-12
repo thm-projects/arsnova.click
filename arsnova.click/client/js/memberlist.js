@@ -228,7 +228,7 @@ Template.memberlist.helpers({
 
     invisibleLearnerCount: function () {
         return MemberList.find().count() - Session.get("LearnerCount");
-    },
+    }
 });
 
 Template.learner.onRendered(function () {

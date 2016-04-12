@@ -20,7 +20,7 @@
     {{> titel}}
     <div id="liveResultsFrame">
         <div class="row row-padding-bottom">
-            {{#unless sessionClosed}}{{#if isOwner}}
+            {{#if isRunningQuestion}}{{#if isOwner}}
                 <div class="col-xs-3 top-bar-content">
                     <span class="glyphicon icon-top-bar glyphicon-user glyphicon-style center" aria-hidden="true">
                         <div class="titel">{{getCountStudents}}</div>
@@ -38,7 +38,7 @@
                 <div class=" titel-relative text-light text-center">
                     <div id="appTitle" class="titel margin-to-logo">{{votingText}}</div>
                 </div>
-            {{/if}}{{/unless}}
+            {{/if}}{{/if}}
         </div>
         <div class="row question-wrapper">
             {{#each questionList}}
@@ -49,38 +49,40 @@
                                 <p class="question-title">Frage {{getNormalizedIndex @index}} / {{allQuestionCount}}</p>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    {{#if showLeaderBoardButton}}
-                                        <div class="col-xs-4">
-                                            <button id="js-btn-showLeaderBoard" type="button"
+                        {{#if hasReadConfirmationRequested @index}}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        {{#if showLeaderBoardButton @index}}
+                                            <div class="col-xs-4">
+                                                <button id="js-btn-showLeaderBoard_{{@index}}" type="button"
+                                                        class="btn btn-info btn-lg btn-answerOption btn-showLeaderBoard">
+                                                    <span class="glyphicon glyphicon-flag glyph-left"
+                                                          aria-hidden="true"></span>
+                                                    <span class="ansBtn">Rangliste</span>
+                                                </button>
+                                            </div>
+                                        {{/if}}
+                                        <div class="col-xs-{{#if isOwner}}{{#if showLeaderBoardButton @index}}4{{else}}6{{/if}}{{else}}6{{/if}}">
+                                            <button id="js-btn-showQuestionModal" type="button"
                                                     class="btn btn-info btn-lg btn-answerOption">
-                                                <span class="glyphicon glyphicon-flag glyph-left"
+                                                <span class="glyphicon glyphicon-question-sign glyph-left"
                                                       aria-hidden="true"></span>
-                                                <span class="ansBtn">Rangliste</span>
+                                                <span class="ansBtn">Frage</span>
                                             </button>
                                         </div>
-                                    {{/if}}
-                                    <div class="col-xs-{{#if isOwner}}{{#if showLeaderBoardButton}}4{{else}}6{{/if}}{{else}}6{{/if}}">
-                                        <button id="js-btn-showQuestionModal" type="button"
-                                                class="btn btn-info btn-lg btn-answerOption">
-                                            <span class="glyphicon glyphicon-question-sign glyph-left"
-                                                  aria-hidden="true"></span>
-                                            <span class="ansBtn">Frage</span>
-                                        </button>
-                                    </div>
-                                    <div class="col-xs-{{#if isOwner}}{{#if showLeaderBoardButton}}4{{else}}6{{/if}}{{else}}6{{/if}}">
-                                        <button id="js-btn-showAnswerModal" type="button"
-                                                class="btn btn-info btn-lg btn-answerOption">
-                                            <span class="glyphicon glyphicon-th-list glyph-left"
-                                                  aria-hidden="true"></span>
-                                            <span class="ansBtn">Antworten</span>
-                                        </button>
+                                        <div class="col-xs-{{#if isOwner}}{{#if showLeaderBoardButton @index}}4{{else}}6{{/if}}{{else}}6{{/if}}">
+                                            <button id="js-btn-showAnswerModal" type="button"
+                                                    class="btn btn-info btn-lg btn-answerOption">
+                                                <span class="glyphicon glyphicon-th-list glyph-left"
+                                                      aria-hidden="true"></span>
+                                                <span class="ansBtn">Antworten</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {{/if}}
                         <div class="row form-group button button-result readingConfirmationProgressRow">
                             <div class="col-xs-5 col-sm-5 col-md-5">
                                 <span class="button-result-letter button-result-readingConfirmation">Lesebestätigung</span>
@@ -96,34 +98,36 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                {{#each answerList @index}}
-                                    {{#if isCountdownZero}}
-                                        {{> result_button name = name absolute = absolute percent = percent isCorrect = isCorrect }}
-                                    {{else}}
-                                        {{> result_button name = name absolute = absolute percent = percent isCorrect = -1 }}
-                                    {{/if}}
-                                {{/each}}
+                        {{#if hasReadConfirmationRequested @index}}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{#each answerList @index}}
+                                        {{#if isCountdownZero}}
+                                            {{> result_button name = name absolute = absolute percent = percent isCorrect = isCorrect }}
+                                        {{else}}
+                                            {{> result_button name = name absolute = absolute percent = percent isCorrect = -1 }}
+                                        {{/if}}
+                                    {{/each}}
+                                </div>
                             </div>
-                        </div>
+                        {{/if}}
                     </div>
                 </div>
+                {{#if isMC @index}}
+                    <div class="row" style="margin-top: 50px">
+                        <div class="col-md-12">
+                            {{#if isCountdownZero}}
+                                {{> result_button_mc name = "Ganz richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = 1 id = 0}}
+                                {{> result_button_mc name = "Ganz falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = 0 id = 1 }}
+                            {{else}}
+                                {{> result_button_mc name = "Ganz richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = -1 id = 0}}
+                                {{> result_button_mc name = "Ganz falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = -1 id = 1 }}
+                            {{/if}}
+                        </div>
+                    </div>
+                {{/if}}
             {{/each}}
         </div>
-        {{#if isMC}}
-            <div class="row" style="margin-top: 50px">
-                <div class="col-md-12">
-                    {{#if isCountdownZero}}
-                        {{> result_button_mc name = "Ganz richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = 1 id = 0}}
-                        {{> result_button_mc name = "Ganz falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = 0 id = 1 }}
-                    {{else}}
-                        {{> result_button_mc name = "Ganz richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = -1 id = 0}}
-                        {{> result_button_mc name = "Ganz falsch" absolute = mcOptions.allWrong.absolute percent = mcOptions.allWrong.percent isCorrect = -1 id = 1 }}
-                    {{/if}}
-                </div>
-            </div>
-        {{/if}}
 
         {{#if isOwner}}
             <div class="fixed-bottom">

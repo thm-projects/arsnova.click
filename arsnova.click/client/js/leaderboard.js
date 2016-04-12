@@ -16,42 +16,37 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Template.leaderBoard.onCreated( function () {
-    this.autorun(() => {
-        this.subscription = Meteor.subscribe('Responses.session', Session.get("hashtag"), function () {
-            Session.set("responsesLoaded", true);
-        });
-        this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"), function () {
-            Session.set("answerOptionsLoaded", true);
-        });
-        this.subscription = Meteor.subscribe('MemberList.members', Session.get("hashtag"), function () {
-            Session.set("memberListLoaded", true);
-        });
-        this.subscription = Meteor.subscribe('QuestionGroup.questionList', Session.get("hashtag"));
-    });
+Template.leaderBoard.onCreated(()=>{
+    this.subscription = Meteor.subscribe('Responses.session', Session.get("hashtag"));
+    this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"));
+    this.subscription = Meteor.subscribe('MemberList.members', Session.get("hashtag"));
+    this.subscription = Meteor.subscribe('QuestionGroup.questionList', Session.get("hashtag"));
 
     Session.set('show_all_leaderboard', false);
 });
 
 Template.leaderBoard.events({
-    'click #showMore': function () {
+    'click #showMore': ()=> {
         Session.set('show_all_leaderboard', true);
-        $('#showLess').closest('div.col-xs-6').toggleClass('hidden');
-        $('#showMore').closest('div.col-xs-6').toggleClass('hidden');
     },
-    'click #showLess': function () {
+    'click #showLess': ()=> {
         Session.set('show_all_leaderboard', false);
-        $('#showLess').closest('div.col-xs-6').toggleClass('hidden');
-        $('#showMore').closest('div.col-xs-6').toggleClass('hidden');
     },
-    'click #js-btn-backToResults': function () {
+    'click #js-btn-backToResults': ()=> {
         Router.go('/results');
     }
 });
 
 Template.leaderBoard.helpers({
-    hashtag: function () {
+    hashtag: ()=> {
         return Session.get("hashtag");
+    },
+    getTitleText: ()=>{
+        if(typeof Session.get("showLeaderBoardId") !== "undefined") {
+            return "Quizfrage " + (Session.get("showLeaderBoardId") + 1) + ": Alles richtig haben...";
+        } else {
+            return "Alles richtig haben...";
+        }
     },
     getPosition: function (index) {
         return (index + 1);
@@ -59,23 +54,32 @@ Template.leaderBoard.helpers({
     parseTimeToSeconds: function (milliseconds) {
         return Math.round((milliseconds / 10), 2) / 100;
     },
-    leaderBoardItems: function () {
-        var leaderBoardItems = [];
+    showAllLeaderboard: ()=>{
+        return Session.get('show_all_leaderboard');
+    },
+    leaderBoardItems: ()=> {
         var allGoodMembers = [];
-        var rightAnswerOptions = AnswerOptions.find({isCorrect: 1});
-        var memberNicks = MemberList.find({}, {fields: {nick: 1}});
-        memberNicks.forEach(function (member) {
-            var entry = {
-                nick: member.nick,
-                responseTime: 0
-            };
-            var userResponses = Responses.find({userNick: member.nick});
+        var param = {isCorrect: 1};
+        if(typeof Session.get("showLeaderBoardId") !== "undefined") {
+            param.questionIndex = Session.get("showLeaderBoardId");
+        }
+        var rightAnswerOptions = AnswerOptions.find(param);
+        delete param.isCorrect;
+
+        MemberList.find({}, {fields: {nick: 1}}).forEach(function (member) {
+            var param = {userNick: member.nick};
+            var userResponses = Responses.find(param);
+            delete param.userNick;
             var userHasRightAnswers = true;
             // only put member in leaderboard when he clicked the right amount, then check whether he clicked all the right ones
             var totalResponseTime = 0;
             if ((userResponses.count() === rightAnswerOptions.count()) && (userResponses.count() > 0) && userHasRightAnswers ) {
                 userResponses.forEach(function (userResponse) {
-                    var checkAnswerOptionDoc = AnswerOptions.findOne({isCorrect: 1, answerOptionNumber: userResponse.answerOptionNumber});
+                    var param = {
+                        isCorrect: 1,
+                        answerOptionNumber: userResponse.answerOptionNumber
+                    };
+                    var checkAnswerOptionDoc = AnswerOptions.findOne(param);
                     if (!checkAnswerOptionDoc) {
                         userHasRightAnswers = false;
                     }
@@ -84,20 +88,19 @@ Template.leaderBoard.helpers({
                     }
                 });
                 if (userHasRightAnswers) {
-                    entry.responseTime = totalResponseTime / rightAnswerOptions.count();
-                    allGoodMembers.push(entry);
+                    allGoodMembers.push({
+                        nick: member.nick,
+                        responseTime: totalResponseTime / rightAnswerOptions.count()
+                    });
                 }
             }
         });
 
-        var sortedArray;
         //check if the show all button was pressed
-        if (!Session.get('show_all_leaderboard')) {
-            sortedArray = _.sortBy(allGoodMembers, 'responseTime').slice(0, 6);
+        if (Session.get('show_all_leaderboard')) {
+            return _.sortBy(allGoodMembers, 'responseTime');
         } else {
-            sortedArray = _.sortBy(allGoodMembers, 'responseTime');
+            return _.sortBy(allGoodMembers, 'responseTime').slice(0, 6);
         }
-
-        return sortedArray;
     }
 });

@@ -131,6 +131,7 @@ Template.memberlist.events({
     },
     'click #startPolling': function (event) {
         Session.set("sessionClosed", false);
+        Session.set("hasReadConfirmationRequested", undefined);
         Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 3);
     },
     'click #backButton':function(event){

@@ -17,7 +17,7 @@
 -->
 
 <template name="leaderBoard">
-    {{> titel titelText = "Alles richtig haben..."}}
+    {{> titel titelText = getTitleText}}
     <div class="row">
         <div class="col-md-12">
             <div class="row distance-top">
@@ -45,16 +45,17 @@
                         </button>
                     </div>
                     <div class="col-xs-6">
-                        <button class="button button-success" id="showMore">
-                            <span class="ansBtn">Zeige mehr</span>
-                            <span class="glyphicon glyphicon-menu-down glyph-right"></span>
-                        </button>
-                    </div>
-                    <div class="col-xs-6 hidden">
-                        <button class="button button-success" id="showLess">
-                            <span class="ansBtn">Zeige weniger</span>
-                            <span class="glyphicon glyphicon-menu-up glyph-right"></span>
-                        </button>
+                        {{#if showAllLeaderboard}}
+                            <button class="button button-success" id="showLess">
+                                <span class="ansBtn">Zeige weniger</span>
+                                <span class="glyphicon glyphicon-menu-up glyph-right"></span>
+                            </button>
+                        {{else}}
+                            <button class="button button-success" id="showMore">
+                                <span class="ansBtn">Zeige mehr</span>
+                                <span class="glyphicon glyphicon-menu-down glyph-right"></span>
+                            </button>
+                        {{/if}}
                     </div>
                 </div>
             </div>

@@ -17,27 +17,26 @@
  */
 
 Template.hashtag_view.onCreated(function () {
-    this.autorun(() => {
-        this.subscribe('Hashtags.public');
+    this.subscribe('Hashtags.public');
+    Session.set("hashtag", undefined);
+    this.autorun(()=> {
+        this.subscribe('EventManager.join', Session.get("hashtag"));
     });
 
-    Tracker.autorun(function() {
+    this.autorun(function () {
         var initializing = true;
-        Hashtags.find().observeChanges({
+        EventManager.findOne().observeChanges({
             changed: function (id, attr) {
                 if (!initializing) {
-                    var inputHashtag = $("#hashtag-input-field").val();
-                    var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
-                    if (hashtagDoc) {
-                        if ((hashtagDoc.sessionStatus === 2)) {
-                            $("#joinSession").removeAttr("disabled");
-                        }
+                    if (attr.sessionStatus === 2) {
+                        $("#joinSession").removeAttr("disabled");
                     }
                 }
-            },
+            }
+        });
+        Hashtags.find().observeChanges({
             added: function (id, doc) {
-                var inputHashtag = $("#hashtag-input-field").val();
-                if (doc.hashtag === inputHashtag) {
+                if (doc.hashtag === $("#hashtag-input-field").val()) {
                     $("#addNewHashtag").attr("disabled", "disabled");
                 }
             }
@@ -57,25 +56,26 @@ Template.hashtag_view.events({
     "input #hashtag-input-field": function (event) {
         var inputHashtag = $(event.target).val();
         $("#addNewHashtag").html("Mach neu !<span class=\"glyphicon glyphicon-plus glyph-right\" aria-hidden=\"true\"></span>");
-        if (inputHashtag.length > 0) {
-            var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
-            if (!hashtagDoc) {
-                $("#joinSession").attr("disabled", "disabled");
+        if (inputHashtag.length === 0) {
+            return;
+        }
+
+        var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
+        if (!hashtagDoc) {
+            $("#joinSession").attr("disabled", "disabled");
+            $("#addNewHashtag").removeAttr("disabled");
+        } else {
+            var localHashtags = localData.getAllHashtags();
+            if ($.inArray(inputHashtag, localHashtags) > -1) {
+                $("#addNewHashtag").html("Bearbeiten<span class=\"glyphicon glyphicon-pencil glyph-right\" aria-hidden=\"true\"></span>");
                 $("#addNewHashtag").removeAttr("disabled");
             } else {
-                var localHashtags = localData.getAllHashtags();
-                if ($.inArray(inputHashtag, localHashtags) > -1) {
-                    $("#addNewHashtag").html("Bearbeiten<span class=\"glyphicon glyphicon-pencil glyph-right\" aria-hidden=\"true\"></span>");
-                    $("#addNewHashtag").removeAttr("disabled");
-                }
-                else {
-                    $("#addNewHashtag").attr("disabled", "disabled");
-                }
-                if (hashtagDoc.sessionStatus === 2) {
-                    $("#joinSession").removeAttr("disabled");
-                } else {
-                    $("#joinSession").attr("disabled", "disabled");
-                }
+                $("#addNewHashtag").attr("disabled", "disabled");
+            }
+            if (hashtagDoc.sessionStatus === 2) {
+                $("#joinSession").removeAttr("disabled");
+            } else {
+                $("#joinSession").attr("disabled", "disabled");
             }
         }
         else {

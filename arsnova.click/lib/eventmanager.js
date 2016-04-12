@@ -31,12 +31,12 @@ var eventManagerScheme = new SimpleSchema({
     },
     readingConfirmationIndex: {
         type: Number,
-        min: 0,
+        min: -1,
         optional: true
     },
     questionIndex: {
         type: Number,
-        min: 0,
+        min: -1,
         optional: true
     }
 });

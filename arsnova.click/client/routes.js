@@ -20,12 +20,6 @@ Router.configure({
     layoutTemplate: 'layout'
 });
 
-Router.map(function () {
-    if (!Session.get("hashtag")) {
-        this.go("/");
-    }
-});
-
 Router.route('/', function () {
     try{
         localData.initializePrivateKey();
@@ -46,12 +40,15 @@ Router.route('/resetToHome', function () {
 });
 
 Router.route('/nick', function () {
+    if (!Session.get("hashtag")) {
+        Router.go("/");
+    }
     this.render('nick');
 });
 
 Router.route('/question', function () {
     if (Session.get("isOwner")) {
-        Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 1);
+        Meteor.call('EventManager.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 1);
 		this.render('createQuestionView');
     } else {
         Router.go("/");

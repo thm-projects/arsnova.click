@@ -17,12 +17,10 @@
  */
 
 Template.questionT.onCreated(function () {
-    if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
-    this.autorun(() => {
-        this.subscribe('AnswerOptions.options', Session.get("hashtag"));
-        this.subscribe('QuestionGroup.questionList', Session.get("hashtag"));
-        this.subscribe('MemberList.members', Session.get("hashtag"));
-    });
+    this.subscribe("EventManager.join",Session.get("hashtag"));
+    this.subscribe('AnswerOptions.options', Session.get("hashtag"));
+    this.subscribe('QuestionGroup.questionList', Session.get("hashtag"));
+    this.subscribe('MemberList.members', Session.get("hashtag"));
 });
 
 Template.questionT.onRendered(function () {
@@ -30,7 +28,7 @@ Template.questionT.onRendered(function () {
     var content = "";
     if (questionDoc) {
         mathjaxMarkdown.initializeMarkdownAndLatex();
-        var questionText = questionDoc.questionList[Session.get("questionIndex")].questionText;
+        var questionText = questionDoc.questionList[EventManager.findOne().questionIndex].questionText;
         content = mathjaxMarkdown.getContent(questionText);
     }
 
@@ -39,7 +37,7 @@ Template.questionT.onRendered(function () {
 
 Template.questionT.helpers({
     answ: function () {
-        const answers = AnswerOptions.find({questionIndex: Session.get("questionIndex")});
+        const answers = AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex});
         return answers ? answers : "";
     }
 });
@@ -48,7 +46,7 @@ Template.questionT.events({
     "click #setReadConfirmed": function(event){
         Meteor.call("MemberList.setReadConfirmed", {
             hashtag: Session.get("hashtag"),
-            questionIndex: Session.get("questionIndex"),
+            questionIndex: EventManager.findOne().questionIndex,
             nick: Session.get("nick")
         }, (err, res)=> {
             if(err) {

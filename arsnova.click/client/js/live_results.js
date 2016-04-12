@@ -18,19 +18,28 @@
 
 var countdown = null;
 var enableNextQuestionButtonTrackerHandle = null;
+var showReadingConfirmationSplashscreenTrackerHandle = null;
 
 Template.live_results.onCreated(function () {
     var oldStartTimeValues = {};
     countdown = null;
 
-    this.subscribe('Hashtags.byHashtag', Session.get("hashtag"), function () {
-        Hashtags.find().observeChanges({
-            changed: (id, changedFields) => {
-                if (changedFields.sessionStatus === 2) {
-                    Router.go("/memberlist");
-                }
+    let eventManagerHandle = this.subscribe('EventManager.join', Session.get("hashtag"));
+    this.autorun(function () {
+        if (eventManagerHandle.ready()) {
+            var sessionStatus = EventManager.findOne().sessionStatus;
+            if (sessionStatus === 2) {
+                Router.go("/memberlist");
+            } else if (sessionStatus < 2) {
+                Router.go("/resetToHome");
             }
-        });
+        }
+    });
+    this.autorun(function () {
+        if (eventManagerHandle.ready()) {
+            var questionIndex = EventManager.findOne().questionIndex;
+
+        }
     });
     this.subscription = Meteor.subscribe('Responses.session', Session.get("hashtag"));
     this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"));
@@ -42,27 +51,8 @@ Template.live_results.onCreated(function () {
             oldStartTimeValues[i] = doc.questionList[i].startTime;
         }
         Session.set("oldStartTimeValues", oldStartTimeValues);
-        if (!Session.get("sessionClosed") && Session.get("isOwner")) {
-            //startCountdown(0);
-        }
     });
     this.subscription = Meteor.subscribe('Hashtags.public');
-
-    this.autorun(()=>{
-        var initializing = true;
-        QuestionGroup.find().observeChanges({
-            changed: function (id, changedFields) {
-                if(!initializing && !Session.get("isOwner") && changedFields.questionList) {
-                    var question = changedFields.questionList[Session.get("questionIndex")+1];
-                    if (question.startTime && (Session.get("oldStartTimeValues")[Session.get("questionIndex")+1] !== question.startTime)) {
-                        Session.set("questionIndex", Session.get("questionIndex") + 1);
-                        Router.go("/onpolling");
-                    }
-                }
-            }
-        });
-        initializing = false;
-    });
 });
 
 Template.live_results.onDestroyed(function () {
@@ -72,6 +62,9 @@ Template.live_results.onDestroyed(function () {
         countdown.stop();
     }
     enableNextQuestionButtonTrackerHandle.stop();
+    if(showReadingConfirmationSplashscreenTrackerHandle) {
+        showReadingConfirmationSplashscreenTrackerHandle.stop();
+    }
 });
 
 Template.live_results.onRendered(()=>{
@@ -89,6 +82,25 @@ Template.live_results.onRendered(()=>{
             $('.btn-showLeaderBoard').removeAttr("disabled");
         }
     });
+
+    if (!Session.get("isOwner")) {
+        showReadingConfirmationSplashscreenTrackerHandle = Tracker.autorun(function () {
+            $('.questionContentSplash').parents('.modal').modal();
+            var questionDoc = QuestionGroup.findOne();
+            var content = "";
+            if (questionDoc) {
+                mathjaxMarkdown.initializeMarkdownAndLatex();
+                var questionText = questionDoc.questionList[EventManager.findOne().readingConfirmationIndex].questionText;
+                content = mathjaxMarkdown.getContent(questionText);
+            }
+
+            $('#questionText').html(content);
+        });
+    } else {
+        if(EventManager.findOne().readingConfirmationIndex === 0) {
+            Meteor.call("EventManager.showReadConfirmedForIndex",localData.getPrivateKey(), Session.get("hashtag"), 0);
+        }
+    }
 });
 
 Template.live_results.helpers({
@@ -132,11 +144,11 @@ Template.live_results.helpers({
         return AnswerOptions.find({questionIndex: index, isCorrect: 1}).count() > 1;
     },
     mcOptions: function(){
-        let memberAmount = Responses.find({questionIndex: Session.get("questionIndex")}).fetch();
+        let memberAmount = Responses.find({questionIndex: EventManager.findOne().questionIndex}).fetch();
         memberAmount = _.uniq(memberAmount, false, function(user) {return user.userNick;}).length;
 
         const correctAnswers = [];
-        AnswerOptions.find({questionIndex: Session.get("questionIndex"), isCorrect:1},{fields:{"answerOptionNumber":1}}).forEach(function (answer){
+        AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex, isCorrect:1},{fields:{"answerOptionNumber":1}}).forEach(function (answer){
             correctAnswers.push(answer.answerOptionNumber);
         });
         let allCorrect = 0;
@@ -145,7 +157,7 @@ Template.live_results.helpers({
             let responseAmount = 0;
             let everythingRight = true;
             let everythingWrong = true;
-            Responses.find({questionIndex: Session.get("questionIndex"), userNick: user.nick}).forEach(function (response){
+            Responses.find({questionIndex: EventManager.findOne().questionIndex, userNick: user.nick}).forEach(function (response){
                 if($.inArray(response.answerOptionNumber, correctAnswers) !== -1){
                     everythingWrong = false;
                 }else{
@@ -179,8 +191,8 @@ Template.live_results.helpers({
         if(!questionDoc) return;
 
         var questionList = questionDoc.questionList;
-        if(Session.get("questionIndex") < questionList.length - 1) {
-            questionList.splice(Session.get("questionIndex") + 1, questionList.length - (Session.get("questionIndex") + 1));
+        if(EventManager.findOne().questionIndex < questionList.length - 1) {
+            questionList.splice(EventManager.findOne().questionIndex + 1, questionList.length - (EventManager.findOne().questionIndex + 1));
         }
         return questionList ? questionList.reverse() : false;
     },
@@ -202,7 +214,7 @@ Template.live_results.helpers({
         return result;
     },
     isActiveQuestion: function (index) {
-        return !Session.get("sessionClosed") && index === Session.get("questionIndex");
+        return !Session.get("sessionClosed") && index === EventManager.findOne().questionIndex;
     },
     isRunningQuestion: ()=>{
         return Session.get("countdownInitialized");
@@ -211,8 +223,8 @@ Template.live_results.helpers({
         var questionDoc = QuestionGroup.findOne();
         if(!questionDoc) return;
 
-        if(Session.get("questionIndex") < questionDoc.questionList.length - 1) {
-            return Session.get("questionIndex") + 1;
+        if(EventManager.findOne().questionIndex < questionDoc.questionList.length - 1) {
+            return EventManager.findOne().questionIndex + 1;
         }
     },
     getCSSClassForPercent: (percent)=>{
@@ -222,7 +234,7 @@ Template.live_results.helpers({
         var questionDoc = QuestionGroup.findOne();
         if(!questionDoc) return;
 
-        return Session.get("sessionClosed") || Session.get("questionIndex") >= questionDoc.questionList.length - 1;
+        return Session.get("sessionClosed") || EventManager.findOne().questionIndex >= questionDoc.questionList.length - 1;
     },
     showQuestionDialog: ()=>{
         return !Session.get("hasReadConfirmationRequested");
@@ -299,10 +311,10 @@ Template.live_results.events({
     },
     'click #backButton': (event)=> {
         event.stopPropagation();
-        Session.set("questionIndex", 0);
         Meteor.call('Responses.clearAll', localData.getPrivateKey(), Session.get("hashtag"));
         Meteor.call("MemberList.clearReadConfirmed", localData.getPrivateKey(), Session.get("hashtag"));
-        Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 2 );
+        Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), 0);
+        Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 2);
     },
     'click #startNextQuestion': (event)=> {
         event.stopPropagation();
@@ -312,15 +324,15 @@ Template.live_results.events({
         Meteor.call('Question.startTimer', {
             privateKey: localData.getPrivateKey(),
             hashtag: Session.get("hashtag"),
-            questionIndex: Session.get("questionIndex")
+            questionIndex: EventManager.findOne().questionIndex
         }, (err, res) => {
             if (err) {
                 $('.errorMessageSplash').parents('.modal').modal('show');
                 $("#errorMessage-text").html(err.reason);
                 Session.set("sessionClosed", true);
             } else {
-                startCountdown(Session.get("questionIndex"));
-                Session.set("questionIndex", Session.get("questionIndex") + 1);
+                startCountdown(EventManager.findOne().questionIndex);
+                Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), EventManager.findOne().questionIndex + 1);
             }
         });
     },
@@ -331,28 +343,17 @@ Template.live_results.events({
     },
     'click #showNextQuestionDialog': (event)=>{
         event.stopPropagation();
-        $('.questionContentSplash').parents('.modal').modal();
-        var questionDoc = QuestionGroup.findOne();
-        var content = "";
-        if (questionDoc) {
-            mathjaxMarkdown.initializeMarkdownAndLatex();
-            var targetId = Session.get("questionIndex") + 1;
-            var questionText = questionDoc.questionList[targetId].questionText;
-            content = mathjaxMarkdown.getContent(questionText);
-            Session.set("hasReadConfirmationRequested", targetId);
-        }
-
-        $('#questionText').html(content);
+        Meteor.call("EventManager.showReadConfirmedForIndex",localData.getPrivateKey(), Session.get("hashtag"), EventManager.findOne().questionIndex + 1);
     }
 });
 
 Template.result_button.onRendered(function () {
     $(window).resize(function () {
-        if (AnswerOptions.find({questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() > 1) {
+        if (AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex, isCorrect: 1}).count() > 1) {
             setMcCSSClasses();
         }
     });
-    if (AnswerOptions.find({questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() > 1) {
+    if (AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex, isCorrect: 1}).count() > 1) {
         setMcCSSClasses();
     }
 });
@@ -400,7 +401,7 @@ function checkIfIsCorrect(isCorrect){
 }
 
 function startCountdown(index) {
-    Session.set("questionIndex", index);
+    Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), index);
     var questionDoc = QuestionGroup.findOne().questionList[index];
     Session.set("sessionCountDown", questionDoc.timer);
     countdown = new ReactiveCountdown(questionDoc.timer / 1000);

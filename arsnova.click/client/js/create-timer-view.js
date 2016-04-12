@@ -17,37 +17,44 @@
  */
 
 let validationTrackerHandle = null;
-
+var subscriptionHandler = null;
 Template.createTimerView.onCreated(function () {
-    if (!Session.get("questionIndex")) Session.set("questionIndex", 0);
     Session.set("slider", 0);
 
-    this.subscription = Meteor.subscribe('AnswerOptions.instructor', localData.getPrivateKey(), Session.get("hashtag"));
-    this.subscription = Meteor.subscribe('QuestionGroup.authorizeAsOwner', localData.getPrivateKey(), Session.get("hashtag"));
+    this.subscribe('AnswerOptions.instructor', localData.getPrivateKey(), Session.get("hashtag"));
+    this.subscribe('QuestionGroup.authorizeAsOwner', localData.getPrivateKey(), Session.get("hashtag"));
+    this.subscribe("EventManager.join",Session.get("hashtag"));
 
     this.autorun(() => {
-        var doc = QuestionGroup.findOne();
-        if (doc && doc.questionList[Session.get("questionIndex")].timer !== 0) {
-            setSlider(Session.get("questionIndex"));
+        if(this.subscriptionsReady()) {
+            if (QuestionGroup.findOne().questionList[EventManager.findOne().questionIndex].timer !== 0) {
+                setSlider(EventManager.findOne().questionIndex);
+            }
         }
     });
 });
 
 Template.createTimerView.onRendered(function () {
-    createSlider(Session.get("questionIndex"));
+    createSlider();
 
+    let index;
+    subscriptionHandler = Tracker.autorun(()=> {
+        if (this.subscriptionsReady()) {
+            index = EventManager.findOne().questionIndex;
+            setSlider(index);
+        }
+    });
     var body = $('body');
-    var index = Session.get("questionIndex");
     body.on('click', '.questionIcon:not(.active)', function () {
         var currentSession = QuestionGroup.findOne();
-        if(!currentSession || index >= currentSession.questionList.length) return;
+        if (!currentSession || index >= currentSession.questionList.length) return;
 
         setTimer(index);
-        index = Session.get("questionIndex");
+        index = EventManager.findOne().questionIndex;
         setSlider(index);
     });
     body.on('click', '.removeQuestion', function () {
-        index = Session.get("questionIndex");
+        index = EventManager.findOne().questionIndex;
     });
 
     validationTrackerHandle = Tracker.autorun(()=>{
@@ -67,6 +74,7 @@ Template.createTimerView.onDestroyed(function () {
     body.off('click', '.questionIcon:not(.active)');
     body.off('click', '.removeQuestion');
     validationTrackerHandle.stop();
+    subscriptionHandler.stop();
 });
 
 
@@ -78,13 +86,14 @@ Template.createTimerView.helpers({
 
 Template.createTimerView.events({
     "click #forwardButton, click #backButton":function(event){
-        var err = setTimer(Session.get("questionIndex"));
+        var err = setTimer(EventManager.findOne().questionIndex);
 
         if (err) {
             $('.errorMessageSplash').parents('.modal').modal('show');
             $("#errorMessage-text").html(err.reason);
         } else {
             if($(event.currentTarget).attr("id") === "forwardButton") {
+                Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), 0);
                 Router.go("/memberlist");
             } else {
                 Router.go("/answeroptions");

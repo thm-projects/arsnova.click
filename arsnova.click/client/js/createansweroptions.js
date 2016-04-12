@@ -16,11 +16,10 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var subscriptionHandler = null;
 Template.createAnswerOptions.onCreated(function () {
-    if (!Session.get("questionIndex")) Session.set("questionIndex", 0);
-    this.autorun(() => {
-        this.subscription = Meteor.subscribe('AnswerOptions.instructor', localData.getPrivateKey(), Session.get("hashtag"));
-    });
+    this.subscribe('AnswerOptions.instructor', localData.getPrivateKey(), Session.get("hashtag"));
+    this.subscribe('EventManager.join', Session.get("hashtag"));
 });
 
 Template.createAnswerOptions.onRendered(function () {
@@ -31,17 +30,22 @@ Template.createAnswerOptions.onRendered(function () {
     $(window).resize(calculateHeight);
     calculateHeight();
 
+    let index;
+    subscriptionHandler = Tracker.autorun(()=> {
+        if (this.subscriptionsReady()) {
+            index = EventManager.findOne().questionIndex;
+        }
+    });
     var body = $('body');
-    var index = Session.get("questionIndex");
     body.on('click', '.questionIcon:not(.active)', function () {
         var currentSession = QuestionGroup.findOne();
-        if(!currentSession || index >= currentSession.questionList.length) return;
-        
+        if (!currentSession || index >= currentSession.questionList.length) return;
+
         parseAnswerOptionInput(index);
-        index = Session.get("questionIndex");
+        index = EventManager.findOne().questionIndex;
     });
     body.on('click', '.removeQuestion', function () {
-        index = Session.get("questionIndex");
+        index = EventManager.findOne().questionIndex;
     });
 });
 
@@ -49,17 +53,18 @@ Template.createAnswerOptions.onDestroyed(function () {
     var body = $('body');
     body.off('click', '.questionIcon:not(.active)');
     body.off('click', '.removeQuestion');
+    subscriptionHandler.stop();
 });
 
 Template.createAnswerOptions.helpers({
     answerOptions: function () {
-        return AnswerOptions.find({questionIndex: Session.get("questionIndex")}, {sort: {answerOptionNumber: 1}});
+        return AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}, {sort: {answerOptionNumber: 1}});
     },
     answerOptionLetter: function (Nr) {
         return String.fromCharCode(Nr + 65);
     },
     showDeleteButtonOnStart: function () {
-        return (AnswerOptions.find({questionIndex: Session.get("questionIndex")}).count() === 1) ? "hide" : "";
+        return (AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count() === 1) ? "hide" : "";
     }
 });
 
@@ -77,12 +82,12 @@ Template.createAnswerOptions.events({
         }
     },
     "click #addAnswerOption": function () {
-        var answerOptionsCount = AnswerOptions.find({questionIndex: Session.get("questionIndex")}).count();
+        var answerOptionsCount = AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count();
         if (answerOptionsCount < 26) {
             const answerOption = {
                 privateKey: localData.getPrivateKey(),
                 hashtag: Session.get("hashtag"),
-                questionIndex: Session.get("questionIndex"),
+                questionIndex: EventManager.findOne().questionIndex,
                 answerText: "",
                 answerOptionNumber: answerOptionsCount,
                 isCorrect: 0
@@ -108,17 +113,17 @@ Template.createAnswerOptions.events({
         }
     },
     "click #deleteAnswerOption": function (event) {
-        var answerOptionsCount = AnswerOptions.find({questionIndex: Session.get("questionIndex")}).count();
+        var answerOptionsCount = AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count();
         if (answerOptionsCount > 1) {
             $("#addAnswerOption").removeClass("hide");
 
             Meteor.call('AnswerOptions.deleteOption', {
                 privateKey: localData.getPrivateKey(),
                 hashtag: Session.get("hashtag"),
-                questionIndex: Session.get("questionIndex"),
+                questionIndex: EventManager.findOne().questionIndex,
                 answerOptionNumber: answerOptionsCount - 1
             });
-            localData.deleteAnswerOption(Session.get("hashtag"), Session.get("questionIndex"), answerOptionsCount - 1);
+            localData.deleteAnswerOption(Session.get("hashtag"), EventManager.findOne().questionIndex, answerOptionsCount - 1);
 
             answerOptionsCount--;
             if (answerOptionsCount === 1) {
@@ -132,7 +137,7 @@ Template.createAnswerOptions.events({
         Router.go('/question');
     },
     "click #forwardButton": function (event) {
-        var error = parseAnswerOptionInput(Session.get("questionIndex"));
+        var error = parseAnswerOptionInput(EventManager.findOne().questionIndex);
 
         if (error) {
             $('.errorMessageSplash').parents('.modal').modal('show');

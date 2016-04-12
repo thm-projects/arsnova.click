@@ -18,13 +18,13 @@
 
 Template.header.onCreated(function () {
     this.autorun(() => {
-        this.subscribe('Hashtags.public', function(){
+        this.subscribe('EventManager.join', Session.get("hashtag"), ()=>{
             var hashtagDocs = Hashtags.find();
 
             hashtagDocs.observe({
                 changed: function (doc, atIndex) {
                     if(doc.hashtag == Session.get("hashtag")){
-                        if ((doc.sessionStatus == 0) || ((doc.sessionStatus == 1) && (!Session.get("isOwner")))) {
+                        if ((doc.sessionStatus === 0) || ((doc.sessionStatus === 1) && (!Session.get("isOwner")))) {
                             if (Session.get("isOwner")){
                                 Router.go("/");
                             }else{

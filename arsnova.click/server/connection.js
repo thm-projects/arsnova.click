@@ -27,5 +27,6 @@ Meteor.setInterval(function () {
         MemberList.remove({hashtag: session.hashtag});
         Responses.remove({hashtag: session.hashtag});
         QuestionGroup.remove({hashtag: session.hashtag});
+        EventManager.remove({hashtag: session.hashtag});
     });
 }, 300000);

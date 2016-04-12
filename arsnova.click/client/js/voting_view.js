@@ -22,8 +22,9 @@ Template.votingview.onCreated(function () {
     countdown = null;
 
     this.autorun(() => {
+        this.subscribe("EventManager.join",Session.get("hashtag"));
         this.subscribe('AnswerOptions.public', Session.get("hashtag"), function () {
-            var answerOptionCount = AnswerOptions.find({questionIndex: Session.get("questionIndex")}).count();
+            var answerOptionCount = AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count();
             var responseArr = [];
             for (var i = 0; i <answerOptionCount; i++) {
                 responseArr[i] = false;
@@ -34,7 +35,7 @@ Template.votingview.onCreated(function () {
             Session.set("questionGroupSubscriptionReady", true);
         });
         if(Session.get("questionGroupSubscriptionReady") && !Session.get("sessionClosed")) {
-            startCountdown(Session.get("questionIndex"));
+            startCountdown(EventManager.findOne().questionIndex);
         }
     });
 });
@@ -57,7 +58,7 @@ Template.votingview.onRendered(function () {
 
 Template.votingview.helpers({
     answerOptions: function () {
-        return AnswerOptions.find({questionIndex: Session.get("questionIndex")}, {sort:{answerOptionNumber: 1}});
+        return AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}, {sort:{answerOptionNumber: 1}});
     },
     showForwardButton: function () {
         return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
@@ -83,7 +84,7 @@ Template.votingview.events({
         var content = "";
         if (questionDoc) {
             mathjaxMarkdown.initializeMarkdownAndLatex();
-            var questionText = questionDoc.questionList[Session.get("questionIndex")].questionText;
+            var questionText = questionDoc.questionList[EventManager.findOne().questionIndex].questionText;
             content = mathjaxMarkdown.getContent(questionText);
         }
 
@@ -108,7 +109,7 @@ Template.votingview.events({
 
         Session.set("hasSendResponse", true);
         var responseArr = JSON.parse(Session.get("responses"));
-        for (var i = 0; i < AnswerOptions.find({questionIndex: Session.get("questionIndex")}).count(); i++ ) {
+        for (var i = 0; i < AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count(); i++ ) {
             if (responseArr[i]) {
                 makeAndSendResponse(i);
             }
@@ -156,7 +157,7 @@ function startCountdown(index) {
 
     Meteor.call('Question.isSC', {
         hashtag: Session.get("hashtag"),
-        questionIndex: Session.get("questionIndex")
+        questionIndex: EventManager.findOne().questionIndex
     }, (err, res) => {
         if (!err && res) {
             Session.set("questionSC", res);
@@ -178,7 +179,7 @@ function startCountdown(index) {
 function makeAndSendResponse(answerOptionNumber) {
     Meteor.call('Responses.addResponse', {
         hashtag: Session.get("hashtag"),
-        questionIndex: Session.get("questionIndex"),
+        questionIndex: EventManager.findOne().questionIndex,
         answerOptionNumber: Number(answerOptionNumber),
         userNick: Session.get("nick")
     }, (err, res) => {

@@ -17,15 +17,13 @@
  */
 
 Template.answerOptionsSplash.onCreated(function () {
-    if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
-    this.autorun(() => {
-        this.subscribe('AnswerOptions.public', Session.get("hashtag"));
-    });
+    this.subscribe("EventManager.join",Session.get("hashtag"));
+    this.subscribe('AnswerOptions.public', Session.get("hashtag"));
 });
 
 Template.answerOptionsSplash.helpers({
     answerOptions: function () {
-        return AnswerOptions.find({questionIndex: Session.get("questionIndex")});
+        return AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex});
     },
     answerOptionLetter: function (number) {
         return String.fromCharCode((number + 65));

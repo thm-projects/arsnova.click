@@ -17,7 +17,7 @@
  */
 
 Template.home.onRendered(function () {
-    Session.set("questionIndex", 0);
+
 });
 
 Template.home.helpers({

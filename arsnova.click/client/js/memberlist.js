@@ -17,17 +17,18 @@
  */
 
 Template.memberlist.onCreated(function () {
-    Session.set("questionIndex", 0);
     var oldStartTimeValues = {};
 
-    this.subscribe('Hashtags.byHashtag', Session.get("hashtag"), function () {
-        Hashtags.find().observeChanges({
-            changed: (id, changedFields) => {
-                if (changedFields.sessionStatus === 3) {
-                    Router.go("/results");
-                }
+    var eventManagerHandle = this.subscribe('EventManager.join', Session.get("hashtag"));
+    this.autorun(function () {
+        if (eventManagerHandle.ready()) {
+            var sessionStatus = EventManager.findOne().sessionStatus;
+            if (sessionStatus < 2) {
+                Router.go("/resetToHome");
+            } else if (sessionStatus === 3) {
+                Router.go("/results");
             }
-        });
+        }
     });
     this.subscribe('MemberList.members', Session.get("hashtag"), function () {
         $(window).resize(function () {
@@ -44,13 +45,14 @@ Template.memberlist.onCreated(function () {
         }
     });
     this.subscribe('Responses.session', Session.get("hashtag"));
+    this.subscribe("EventManager.join",Session.get("hashtag"));
 
     if(Session.get("isOwner")) {
         this.subscribe('MemberList.percentRead', {
             hashtag: Session.get("hashtag"),
             privateKey: localData.getPrivateKey()
         });
-        Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 2);
+        Meteor.call('EventManager.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 2);
     }
 
     this.autorun(function() {
@@ -132,11 +134,11 @@ Template.memberlist.events({
     'click #startPolling': function (event) {
         Session.set("sessionClosed", false);
         Session.set("hasReadConfirmationRequested", undefined);
-        Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 3);
+        Meteor.call('EventManager.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 3);
     },
     'click #backButton':function(event){
         Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
-        Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 1);
+        Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 1);
         Router.go("/settimer");
     }
 });

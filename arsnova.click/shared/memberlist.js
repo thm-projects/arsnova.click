@@ -32,7 +32,7 @@ Meteor.methods({
         if (MemberList.findOne({hashtag: hashtag, nick: nick})) {
             throw new Meteor.Error('MemberList.addLearner', 'Nick already exists!');
         }
-        if (Hashtags.findOne({hashtag:hashtag}).sessionStatus !== 2) {
+        if (EventManager.findOne({hashtag:hashtag}).sessionStatus !== 2) {
             throw new Meteor.Error('MemberList.addLearner', 'Session is currently not available for joining');
         }
         MemberList.insert({

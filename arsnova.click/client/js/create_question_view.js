@@ -16,28 +16,32 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var subscriptionHandler = null;
 Template.createQuestionView.onCreated(function () {
-    if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
-    this.autorun(() => {
-        this.subscribe('QuestionGroup.authorizeAsOwner', localData.getPrivateKey(), Session.get("hashtag"));
-    });
+    this.subscribe('QuestionGroup.authorizeAsOwner', localData.getPrivateKey(), Session.get("hashtag"));
+    this.subscribe("EventManager.join",Session.get("hashtag"));
 });
 
 Template.createQuestionView.onRendered(function () {
-    $(window).resize(calculateWindow());
     calculateWindow();
+    $(window).resize(calculateWindow());
 
+    let index;
+    subscriptionHandler = Tracker.autorun(()=>{
+        if(this.subscriptionsReady()) {
+            index = EventManager.findOne().questionIndex;
+        }
+    });
     var body = $('body');
-    var index = Session.get("questionIndex");
     body.on('click', '.questionIcon:not(.active)', function () {
         var currentSession = QuestionGroup.findOne();
         if(!currentSession || index >= currentSession.questionList.length) return;
 
         addQuestion(index);
-        index = Session.get("questionIndex");
+        index = EventManager.findOne().questionIndex;
     });
     body.on('click', '.removeQuestion', function () {
-        index = Session.get("questionIndex");
+        index = EventManager.findOne().questionIndex;
     });
 });
 
@@ -45,13 +49,14 @@ Template.createQuestionView.onDestroyed(function () {
     var body = $('body');
     body.off('click', '.questionIcon:not(.active)');
     body.off('click', '.removeQuestion');
+    subscriptionHandler.stop();
 });
 
 Template.createQuestionView.helpers({
     //Get question from Sessions-Collection if it already exists
     questionText: function () {
         var currentSession = QuestionGroup.findOne();
-        return currentSession && currentSession.questionList[Session.get("questionIndex")] ? currentSession.questionList[Session.get("questionIndex")].questionText : "";
+        return currentSession && currentSession.questionList[EventManager.findOne().questionIndex] ? currentSession.questionList[EventManager.findOne().questionIndex].questionText : "";
     },
     isFormattingEnabled: function () {
         return $('#markdownBarDiv').hasClass('hide');
@@ -60,11 +65,11 @@ Template.createQuestionView.helpers({
 
 Template.createQuestionView.events({
     'input #questionText': function () {
-        addQuestion(Session.get("questionIndex"));
+        addQuestion(EventManager.findOne().questionIndex);
     },
     //Save question in Sessions-Collection when Button "Next" is clicked
     'click #forwardButton': function () {
-        addQuestion(Session.get("questionIndex"));
+        addQuestion(EventManager.findOne().questionIndex);
         Router.go("/answeroptions");
     },
     "click #backButton": function () {

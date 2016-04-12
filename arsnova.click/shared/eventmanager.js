@@ -23,7 +23,7 @@ Meteor.methods({
 
         return EventManager.update({hashtag: hashtag}, {$set: {sessionStatus: sessionStatus}});
     },
-    'EventManager.setReadConfirmedIndex': (privateKey, hashtag, index)=> {
+    'EventManager.showReadConfirmedForIndex': (privateKey, hashtag, index)=> {
         if (Meteor.isClient) {
             return;
         }
@@ -69,6 +69,6 @@ Meteor.methods({
             throw new Meteor.Error('EventManager.setSessionStatus', 'Either there is no quiz or you don\'t have write access');
         }
 
-        return EventManager.update({hashtag: hashtag}, {$set: {questionIndex: index}});
+        return EventManager.update({hashtag: hashtag}, {$set: {questionIndex: index, readingConfirmationIndex: index}});
     }
 });

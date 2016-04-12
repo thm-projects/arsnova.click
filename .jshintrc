@@ -22,6 +22,7 @@
 		"LeaderBoard": true,
 		"MemberList": true,
 		"Responses": true,
-		"QuestionGroup": true
+		"QuestionGroup": true,
+		"EventManager": true
 	}
 }

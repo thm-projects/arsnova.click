@@ -31,32 +31,6 @@ Meteor.methods({
         });
         return Boolean(doc);
     },
-    'Hashtags.setSessionStatus': function (privateKey, hashtag, sessionStatus) {
-        if (Meteor.isServer) {
-            new SimpleSchema({
-                hashtag: {type: String},
-                privateKey: {type: String},
-                sessionStatus: {
-                    type: Number,
-                    min: 0,
-                    max: 3
-                }
-            }).validate({
-                privateKey,
-                hashtag,
-                sessionStatus
-            });
-            var doc = Hashtags.findOne({
-                hashtag: hashtag,
-                privateKey: privateKey
-            });
-            if (doc) {
-                Hashtags.update({_id: doc._id}, {$set: {sessionStatus: sessionStatus}});
-            } else {
-                throw new Meteor.Error('Hashtags.setSessionStatus', 'Either the hashtag isn\'t available or the key is wrong');
-            }
-        }
-    },
     'Hashtags.addHashtag': function (doc) {
         if (Hashtags.find({hashtag: doc.hashtag}).count() > 0){
             throw new Meteor.Error('Hashtags.addHashtag', 'Session already exists!');
@@ -77,7 +51,6 @@ Meteor.methods({
             });
             if (!hashtagDoc) {
                 throw new Meteor.Error('Hashtags.export', 'No such hashtag with the given key');
-                return;
             }
             var questionGroupDoc = QuestionGroup.findOne({hashtag: hashtag}, {
                 fields: {

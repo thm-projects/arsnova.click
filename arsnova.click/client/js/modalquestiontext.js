@@ -17,10 +17,8 @@
  */
 
 Template.questionContentSplash.onCreated(function () {
-    if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
-    this.autorun(() => {
-        this.subscribe('QuestionGroup.questionList', Session.get("hashtag"));
-    });
+    this.subscribe("EventManager.join",Session.get("hashtag"));
+    this.subscribe('QuestionGroup.questionList', Session.get("hashtag"));
 });
 
 Template.questionContentSplash.onRendered(function () {
@@ -34,7 +32,7 @@ Template.questionContentSplash.helpers({
     questionText: function () {
         var questionDoc = QuestionGroup.findOne();
         if (questionDoc) {
-            return questionDoc.questionList[Session.get("questionIndex")].questionText;
+            return questionDoc.questionList[EventManager.findOne().questionIndex].questionText;
         }
         else {
             return "";

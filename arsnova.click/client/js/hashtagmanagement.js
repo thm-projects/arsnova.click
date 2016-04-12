@@ -39,7 +39,7 @@ Template.hashtagManagement.events({
         localData.reenterSession(hashtag);
         Session.set("isOwner", true);
         Session.set("hashtag", hashtag);
-        Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), hashtag, 1);
+        Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), hashtag, 1);
         Router.go("/question");
     },
     "click .js-export": function (event) {
@@ -85,7 +85,7 @@ Template.hashtagManagement.events({
                     }
                     else {
                         localData.importFromFile(asJSON);
-                        Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
+                        Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
                             (err, res) => {
                                 if (err) {
                                     $('.errorMessageSplash').parents('.modal').modal('show');

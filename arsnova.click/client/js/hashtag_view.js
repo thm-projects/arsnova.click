@@ -17,31 +17,30 @@
  */
 
 Template.hashtag_view.onCreated(function () {
-    this.subscribe('Hashtags.public');
     Session.set("hashtag", undefined);
-    this.autorun(()=> {
-        this.subscribe('EventManager.join', Session.get("hashtag"));
-    });
-
-    this.autorun(function () {
-        var initializing = true;
-        EventManager.findOne().observeChanges({
-            changed: function (id, attr) {
-                if (!initializing) {
-                    if (attr.sessionStatus === 2) {
-                        $("#joinSession").removeAttr("disabled");
+    this.subscribe('Hashtags.public', ()=>{
+        this.autorun(()=>{
+            Hashtags.find().observeChanges({
+                added: function (id, doc) {
+                    if (doc.hashtag === $("#hashtag-input-field").val()) {
+                        $("#addNewHashtag").attr("disabled", "disabled");
                     }
                 }
-            }
+            });
         });
-        Hashtags.find().observeChanges({
-            added: function (id, doc) {
-                if (doc.hashtag === $("#hashtag-input-field").val()) {
-                    $("#addNewHashtag").attr("disabled", "disabled");
-                }
-            }
+    });
+    this.autorun(()=>{
+        this.subscribe("EventManager.join",Session.get("hashtag"), ()=>{
+            this.autorun(()=>{
+                EventManager.find().observeChanges({
+                    changed: function (id, changedFields) {
+                        if(changedFields.sessionStatus === 2) {
+                            $("#joinSession").removeAttr("disabled");
+                        }
+                    }
+                });
+            });
         });
-        initializing = false;
     });
 });
 
@@ -72,15 +71,8 @@ Template.hashtag_view.events({
             } else {
                 $("#addNewHashtag").attr("disabled", "disabled");
             }
-            if (hashtagDoc.sessionStatus === 2) {
-                $("#joinSession").removeAttr("disabled");
-            } else {
-                $("#joinSession").attr("disabled", "disabled");
-            }
-        }
-        else {
-            $("#joinSession").attr("disabled", "disabled");
-            $("#addNewHashtag").attr("disabled", "disabled");
+
+            Session.set("hashtag",inputHashtag);
         }
     },
     "click #addNewHashtag": function (event) {
@@ -127,8 +119,7 @@ Template.hashtag_view.events({
                             hashtag: hashtag,
                             questionList: [{
                                 questionText: "",
-                                timer: 10000,
-                                isReadingConfirmationRequired: 1
+                                timer: 40000
                             }]
                         });
 
@@ -144,7 +135,7 @@ Template.hashtag_view.events({
     "click #joinSession": function () {
         var hashtag = $("#hashtag-input-field").val();
 
-        if (Hashtags.findOne({hashtag:hashtag}).sessionStatus === 2) {
+        if (EventManager.findOne().sessionStatus === 2) {
             Session.set("hashtag", hashtag);
             Router.go("/nick");
         } else {
@@ -163,22 +154,24 @@ Template.hashtag_view.events({
         //Select option on enter
         if(event.keyCode == 13){
             var inputHashtag = $(event.target).val();
-            if (inputHashtag.length > 0) {
-                var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
-                if (!hashtagDoc) {
-                    //Add new Hashtag
-                    $("#addNewHashtag").click();
-                } else {
-                    var localHashtags = localData.getAllHashtags();
-                    if ($.inArray(inputHashtag, localHashtags) > -1) {
-                        //Edit own Hashtag
-                        $("#addNewHashtag").click();
-                    }
+            if (inputHashtag.length === 0) {
+                return;
+            }
 
-                    if (hashtagDoc.sessionStatus === 2) {
-                        //Join session
-                        $("#joinSession").click();
-                    }
+            var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
+            if (!hashtagDoc) {
+                //Add new Hashtag
+                $("#addNewHashtag").click();
+            } else {
+                var localHashtags = localData.getAllHashtags();
+                if ($.inArray(inputHashtag, localHashtags) > -1) {
+                    //Edit own Hashtag
+                    $("#addNewHashtag").click();
+                }
+
+                if (EventManager.findOne().sessionStatus === 2) {
+                    //Join session
+                    $("#joinSession").click();
                 }
             }
         }

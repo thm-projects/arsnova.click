@@ -17,14 +17,12 @@
  */
 
 Template.endOfPollingSplashscreen.onCreated(function () {
-    if(!Session.get("questionIndex")) Session.set("questionIndex", 0);
-    this.autorun(() => {
-        this.subscription = Meteor.subscribe('Responses.session', Session.get("hashtag"));
-        this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"));
-        this.subscription = Meteor.subscribe('MemberList.members', Session.get("hashtag"));
-        this.subscription = Meteor.subscribe('QuestionGroup.question', Session.get("hashtag"));
-        this.subscription = Meteor.subscribe('LeaderBoard.session', Session.get("hashtag"));
-    });
+    this.subscribe('Responses.session', Session.get("hashtag"));
+    this.subscribe('AnswerOptions.options', Session.get("hashtag"));
+    this.subscribe('MemberList.members', Session.get("hashtag"));
+    this.subscribe('QuestionGroup.question', Session.get("hashtag"));
+    this.subscribe('LeaderBoard.session', Session.get("hashtag"));
+    this.subscribe("EventManager.join",Session.get("hashtag"));
 });
 
 Template.endOfPollingSplashscreen.onRendered(function () {
@@ -50,22 +48,22 @@ Template.endOfPollingSplashscreen.events({
 
 Template.endOfPollingSplashscreen.helpers({
     isSurvey: function(){
-        return AnswerOptions.find({questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() === 0;
+        return AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex, isCorrect: 1}).count() === 0;
     },
 
     isSC: function(){
-        return AnswerOptions.find({questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() === 1;
+        return AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex, isCorrect: 1}).count() === 1;
     },
 
     isMC:function(){
-        return AnswerOptions.find({questionIndex: Session.get("questionIndex"), isCorrect: 1}).count() > 1;
+        return AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex, isCorrect: 1}).count() > 1;
     },
 
     correct: function() {
         const correctAnswers = [];
 
         AnswerOptions.find({
-            questionIndex: Session.get("questionIndex"),
+            questionIndex: EventManager.findOne().questionIndex,
             isCorrect: 1
         }, {fields: {"answerOptionNumber": 1}}).forEach(function (answer) {
             correctAnswers.push(answer.answerOptionNumber);
@@ -88,7 +86,7 @@ Template.endOfPollingSplashscreen.helpers({
         const wrongAnswers = [];
 
         AnswerOptions.find({
-            questionIndex: Session.get("questionIndex"),
+            questionIndex: EventManager.findOne().questionIndex,
             isCorrect: 0
         }, {fields: {"answerOptionNumber": 1}}).forEach(function (answer) {
             wrongAnswers.push(answer.answerOptionNumber);

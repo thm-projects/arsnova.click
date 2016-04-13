@@ -42,6 +42,12 @@ Template.leaderBoard.helpers({
     hashtag: ()=> {
         return Session.get("hashtag");
     },
+    getNormalizedIndex: (index)=>{
+        return index + 1;
+    },
+    isNumber: (index)=>{
+        return !isNaN(index);
+    },
     getTitleText: ()=>{
         if(typeof Session.get("showLeaderBoardId") !== "undefined") {
             return "Quizfrage " + (Session.get("showLeaderBoardId") + 1) + ": Alles richtig haben...";
@@ -58,8 +64,16 @@ Template.leaderBoard.helpers({
     showAllLeaderboard: ()=>{
         return Session.get('show_all_leaderboard');
     },
-    noLeaderBoardItems: ()=>{
-        return getLeaderBoardItems().length === 0;
+    noLeaderBoardItems: (index)=>{
+        var items = getLeaderBoardItems();
+        if(typeof index !== "undefined") {
+            if(items[index].value.length > 0) return false;
+        } else {
+            for(var i = 0; i < items.length; i++) {
+                if(items[i].value.length > 0) return false;
+            }
+        }
+        return true;
     },
     leaderBoardItems: ()=> {
         return getLeaderBoardItems();
@@ -67,11 +81,24 @@ Template.leaderBoard.helpers({
 });
 
 function getLeaderBoardItems() {
+    if(typeof Session.get("showLeaderBoardId") !== "undefined") {
+        return [{value: getLeaderBoardItemsByIndex(Session.get("showLeaderBoardId"))}];
+    } else {
+        if(!EventManager.findOne()) return [];
+
+        var result = [];
+        for(var i = 0; i <= EventManager.findOne().questionIndex; i++) {
+            result.push({index: i, value: getLeaderBoardItemsByIndex(i)});
+        }
+
+        return result;
+    }
+}
+
+function getLeaderBoardItemsByIndex(index) {
     var allGoodMembers = [];
     var param = {isCorrect: 1};
-    if(typeof Session.get("showLeaderBoardId") !== "undefined") {
-        param.questionIndex = Session.get("showLeaderBoardId");
-    }
+    param.questionIndex = index;
     var rightAnswerOptions = AnswerOptions.find(param);
     delete param.isCorrect;
 
@@ -84,8 +111,10 @@ function getLeaderBoardItems() {
         var totalResponseTime = 0;
         if ((userResponses.count() === rightAnswerOptions.count()) && (userResponses.count() > 0) && userHasRightAnswers ) {
             userResponses.forEach(function (userResponse) {
+                param.isCorrect = 1;
                 param.answerOptionNumber = userResponse.answerOptionNumber;
                 var checkAnswerOptionDoc = AnswerOptions.findOne(param);
+                delete param.isCorrect;
                 delete param.answerOptionNumber;
                 if (!checkAnswerOptionDoc) {
                     userHasRightAnswers = false;

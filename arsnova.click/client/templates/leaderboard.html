@@ -26,14 +26,28 @@
                         <div class="col-md-12">
                             <h2 class="titel" style="font-weight: bold;">Leider hat kein Teilnehmer richtig abgestimmt!</h2>
                         </div>
+                    {{ else }}
+                        {{#each leaderBoardItems}}
+                            {{#if isNumber index}}
+                                <div class="col-md-12">
+                                    <h3 class="titel-relative text-light">Frage {{getNormalizedIndex index}}:</h3>
+                                </div>
+                            {{/if}}
+                            {{#if noLeaderBoardItems index}}
+                                <div class="col-md-12">
+                                    <p class="titel" style="font-weight: bold;font-size: 2vw;">Leider hat kein Teilnehmer richtig abgestimmt!</p>
+                                </div>
+                            {{else}}
+                                {{#each value}}
+                                    <div class="col-md-6">
+                                        <button class="button button-leader">{{getPosition @index}}. {{nick}}
+                                            - {{parseTimeToSeconds responseTime}}s
+                                        </button>
+                                    </div>
+                                {{/each}}
+                            {{/if}}
+                        {{/each}}
                     {{/if}}
-                    {{#each leaderBoardItems}}
-                        <div class="col-md-6">
-                            <button class="button button-leader">{{getPosition @index}}. {{nick}}
-                                - {{parseTimeToSeconds responseTime}}s
-                            </button>
-                        </div>
-                    {{/each}}
                 </div>
             </div>
         </div>

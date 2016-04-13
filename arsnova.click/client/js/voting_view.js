@@ -125,7 +125,7 @@ Template.votingview.events({
 
         if (Session.get("questionSC")) {
             makeAndSendResponse(event.currentTarget.id);
-            Session.set("hasToggledResponse", true);
+            Router.go("/results");
         }
         else {
             var responseArr = JSON.parse(Session.get("responses"));

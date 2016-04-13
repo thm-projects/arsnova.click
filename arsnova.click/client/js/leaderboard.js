@@ -68,7 +68,7 @@ Template.leaderBoard.helpers({
         delete param.isCorrect;
 
         MemberList.find({}, {fields: {nick: 1}}).forEach(function (member) {
-            var param = {userNick: member.nick};
+            param.userNick = member.nick;
             var userResponses = Responses.find(param);
             delete param.userNick;
             var userHasRightAnswers = true;
@@ -76,11 +76,11 @@ Template.leaderBoard.helpers({
             var totalResponseTime = 0;
             if ((userResponses.count() === rightAnswerOptions.count()) && (userResponses.count() > 0) && userHasRightAnswers ) {
                 userResponses.forEach(function (userResponse) {
-                    var param = {
-                        isCorrect: 1,
-                        answerOptionNumber: userResponse.answerOptionNumber
-                    };
+                    param.isCorrect = 1;
+                    param.answerOptionNumber = userResponse.answerOptionNumber;
                     var checkAnswerOptionDoc = AnswerOptions.findOne(param);
+                    delete param.isCorrect;
+                    delete param.answerOptionNumber;
                     if (!checkAnswerOptionDoc) {
                         userHasRightAnswers = false;
                     }

@@ -97,7 +97,7 @@ Template.live_results.onRendered(()=>{
             }
         });
     } else {
-        if(EventManager.findOne().readingConfirmationIndex === -1) {
+        if(EventManager.findOne() && EventManager.findOne().readingConfirmationIndex === -1) {
             Meteor.call("EventManager.showReadConfirmedForIndex", localData.getPrivateKey(), Session.get("hashtag"), 0);
         }
     }
@@ -143,12 +143,12 @@ Template.live_results.helpers({
     isMC: function(index){
         return AnswerOptions.find({questionIndex: index, isCorrect: 1}).count() > 1;
     },
-    mcOptions: function(){
-        let memberAmount = Responses.find({questionIndex: EventManager.findOne().questionIndex}).fetch();
+    mcOptions: function(index){
+        let memberAmount = Responses.find({questionIndex: index}).fetch();
         memberAmount = _.uniq(memberAmount, false, function(user) {return user.userNick;}).length;
 
         const correctAnswers = [];
-        AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex, isCorrect:1},{fields:{"answerOptionNumber":1}}).forEach(function (answer){
+        AnswerOptions.find({questionIndex: index, isCorrect:1},{fields:{"answerOptionNumber":1}}).forEach(function (answer){
             correctAnswers.push(answer.answerOptionNumber);
         });
         let allCorrect = 0;
@@ -157,7 +157,7 @@ Template.live_results.helpers({
             let responseAmount = 0;
             let everythingRight = true;
             let everythingWrong = true;
-            Responses.find({questionIndex: EventManager.findOne().questionIndex, userNick: user.nick}).forEach(function (response){
+            Responses.find({questionIndex: index, userNick: user.nick}).forEach(function (response){
                 if($.inArray(response.answerOptionNumber, correctAnswers) !== -1){
                     everythingWrong = false;
                 }else{

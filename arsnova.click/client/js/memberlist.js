@@ -24,7 +24,11 @@ Template.memberlist.onCreated(function () {
         if (eventManagerHandle.ready()) {
             var sessionStatus = EventManager.findOne().sessionStatus;
             if (sessionStatus < 2) {
-                Router.go("/resetToHome");
+                if(Session.get("isOwner")) {
+                    Router.go("/settimer");
+                } else {
+                    Router.go("/resetToHome");
+                }
             } else if (sessionStatus === 3) {
                 Router.go("/results");
             }

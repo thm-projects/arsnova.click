@@ -22,6 +22,11 @@
         <div class="col-md-12">
             <div class="row distance-top">
                 <div class="row learner-list margin-title" id="learner-list">
+                    {{#if noLeaderBoardItems}}
+                        <div class="col-md-12">
+                            <h2 class="titel" style="font-weight: bold;">Leider hat kein Teilnehmer richtig abgestimmt!</h2>
+                        </div>
+                    {{/if}}
                     {{#each leaderBoardItems}}
                         <div class="col-md-6">
                             <button class="button button-leader">{{getPosition @index}}. {{nick}}
@@ -45,17 +50,19 @@
                         </button>
                     </div>
                     <div class="col-xs-6">
-                        {{#if showAllLeaderboard}}
-                            <button class="button button-success" id="showLess">
-                                <span class="ansBtn">Zeige weniger</span>
-                                <span class="glyphicon glyphicon-menu-up glyph-right"></span>
-                            </button>
-                        {{else}}
-                            <button class="button button-success" id="showMore">
-                                <span class="ansBtn">Zeige mehr</span>
-                                <span class="glyphicon glyphicon-menu-down glyph-right"></span>
-                            </button>
-                        {{/if}}
+                        {{#unless noLeaderBoardItems}}
+                            {{#if showAllLeaderboard}}
+                                <button class="button button-success" id="showLess">
+                                    <span class="ansBtn">Zeige weniger</span>
+                                    <span class="glyphicon glyphicon-menu-up glyph-right"></span>
+                                </button>
+                            {{else}}
+                                <button class="button button-success" id="showMore">
+                                    <span class="ansBtn">Zeige mehr</span>
+                                    <span class="glyphicon glyphicon-menu-down glyph-right"></span>
+                                </button>
+                            {{/if}}
+                        {{/unless}}
                     </div>
                 </div>
             </div>

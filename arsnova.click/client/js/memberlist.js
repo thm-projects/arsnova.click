@@ -131,7 +131,6 @@ Template.memberlist.events({
     'click #startPolling': function (event) {
         Session.set("sessionClosed", false);
         Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), -1);
-        Meteor.call("EventManager.showReadConfirmedForIndex",localData.getPrivateKey(), Session.get("hashtag"), 0);
         Meteor.call('EventManager.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 3);
     },
     'click #backButton':function(event){

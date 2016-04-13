@@ -24,15 +24,7 @@ Template.questionT.onCreated(function () {
 });
 
 Template.questionT.onRendered(function () {
-    var questionDoc = QuestionGroup.findOne();
-    var content = "";
-    if (questionDoc) {
-        mathjaxMarkdown.initializeMarkdownAndLatex();
-        var questionText = questionDoc.questionList[EventManager.findOne().readingConfirmationIndex].questionText;
-        content = mathjaxMarkdown.getContent(questionText);
-    }
-
-    $('#questionTText').html(content);
+    
 });
 
 Template.questionT.helpers({

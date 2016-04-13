@@ -28,7 +28,7 @@ Template.hashtag_view.onCreated(function () {
     });
     this.autorun(()=>{
         this.subscribe("EventManager.join",Session.get("hashtag"), ()=>{
-            if( !EventManager.findOne({hashtag: Session.get("hashtag")}) ) {
+            if( !EventManager.findOne({hashtag: Session.get("hashtag")}) || localData.containsHashtag(Session.get("hashtag")) > -1) {
                 $("#joinSession").attr("disabled", "disabled");
                 return;
             }

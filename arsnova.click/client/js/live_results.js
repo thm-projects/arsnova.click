@@ -18,15 +18,33 @@
 
 var countdown = null;
 var routeToLeaderboardTimer = null;
-var showReadingConfirmationSplashscreenTrackerHandle = null;
+var eventManagerObserver = null;
+var readingConfirmationTracker = null;
 
-Template.live_results.onCreated(function () {
+    Template.live_results.onCreated(function () {
     var oldStartTimeValues = {};
     var initQuestionIndex = -1;
     countdown = null;
 
     let eventManagerHandle = this.subscribe('EventManager.join', Session.get("hashtag"), function(){
         initQuestionIndex = EventManager.findOne().questionIndex;
+        eventManagerObserver = EventManager.find().observeChanges({
+            changed: function (id, changedFields) {
+                if(!isNaN(changedFields.sessionStatus)){
+                    if(changedFields.sessionStatus === 2) {
+                        $('.modal-backdrop').remove();
+                        eventManagerObserver.stop();
+                        Router.go("/memberlist");
+                    } else if(changedFields.sessionStatus < 2) {
+                        $('.modal-backdrop').remove();
+                        eventManagerObserver.stop();
+                        Router.go("/resetToHome");
+                    }
+                } else if(!Session.get("isOwner") && !isNaN(changedFields.questionIndex) && changedFields.questionIndex !== initQuestionIndex) {
+                    Router.go("/onpolling");
+                }
+            }
+        });
     });
     this.subscription = Meteor.subscribe('Responses.session', Session.get("hashtag"));
     this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"));
@@ -40,41 +58,9 @@ Template.live_results.onCreated(function () {
         Session.set("oldStartTimeValues", oldStartTimeValues);
     });
     this.subscription = Meteor.subscribe('Hashtags.public');
-
-    this.autorun(function () {
-        if (eventManagerHandle.ready()) {
-            if( !Session.get("isOwner") ) {
-                let sessionStatus = EventManager.findOne().sessionStatus;
-                if (sessionStatus === 2) {
-                    showReadingConfirmationSplashscreenTrackerHandle.stop();
-                    $('.modal-backdrop').remove();
-                    Router.go("/memberlist");
-                } else if (sessionStatus < 2) {
-                    showReadingConfirmationSplashscreenTrackerHandle.stop();
-                    $('.modal-backdrop').remove();
-                    Router.go("/resetToHome");
-                }
-                var questionIndex = EventManager.findOne().questionIndex;
-                if(initQuestionIndex !== questionIndex) {
-                    showReadingConfirmationSplashscreenTrackerHandle.stop();
-                    Router.go("/onpolling");
-                }
-            } else {
-                let sessionStatus = EventManager.findOne().sessionStatus;
-                if (sessionStatus === 2) {
-                    Router.go("/memberlist");
-                } else if (sessionStatus < 2) {
-                    Router.go("/resetToHome");
-                }
-            }
-        }
-    });
 });
 
 Template.live_results.onDestroyed(function () {
-    if(showReadingConfirmationSplashscreenTrackerHandle) {
-        showReadingConfirmationSplashscreenTrackerHandle.stop();
-    }
     Session.set("countdownInitialized", undefined);
     Session.set("sessionCountDown", undefined);
     if (countdown) {
@@ -83,24 +69,35 @@ Template.live_results.onDestroyed(function () {
     if (routeToLeaderboardTimer) {
         clearTimeout(routeToLeaderboardTimer);
     }
+    if (readingConfirmationTracker) {
+        readingConfirmationTracker.stop();
+    }
 });
 
 Template.live_results.onRendered(()=>{
     if (!Session.get("isOwner")) {
-        showReadingConfirmationSplashscreenTrackerHandle = Tracker.autorun(function () {
-            if(!EventManager.findOne() || EventManager.findOne().readingConfirmationIndex === EventManager.findOne().questionIndex) return;
+        readingConfirmationTracker = Tracker.autorun(()=> {
+            if (EventManager.findOne()) {
+                EventManager.find().observeChanges({
+                    changed: function (id, changedFields) {
+                        if (!isNaN(changedFields.readingConfirmationIndex)) {
+                            $('.splash-screen-show-readingConfirmation').parents('.modal').modal();
+                            var questionDoc = QuestionGroup.findOne();
+                            var content = "";
+                            if (questionDoc) {
+                                mathjaxMarkdown.initializeMarkdownAndLatex();
+                                var questionText = questionDoc.questionList[EventManager.findOne().readingConfirmationIndex].questionText;
+                                content = mathjaxMarkdown.getContent(questionText);
+                            }
 
-            $('.splash-screen-show-readingConfirmation').parents('.modal').modal();
-            var questionDoc = QuestionGroup.findOne();
-            var content = "";
-            if (questionDoc) {
-                mathjaxMarkdown.initializeMarkdownAndLatex();
-                var questionText = questionDoc.questionList[EventManager.findOne().readingConfirmationIndex].questionText;
-                content = mathjaxMarkdown.getContent(questionText);
+                            $('#questionTText').html(content);
+                        }
+                    }
+                });
             }
-
-            $('#questionTText').html(content);
         });
+    } else {
+        Meteor.call("EventManager.showReadConfirmedForIndex", localData.getPrivateKey(), Session.get("hashtag"), 0);
     }
 });
 

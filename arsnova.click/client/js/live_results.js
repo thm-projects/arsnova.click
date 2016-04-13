@@ -17,6 +17,7 @@
  */
 
 var countdown = null;
+var routeToLeaderboardTimer = null;
 var showReadingConfirmationSplashscreenTrackerHandle = null;
 
 Template.live_results.onCreated(function () {
@@ -78,6 +79,9 @@ Template.live_results.onDestroyed(function () {
     Session.set("sessionCountDown", undefined);
     if (countdown) {
         countdown.stop();
+    }
+    if (routeToLeaderboardTimer) {
+        clearTimeout(routeToLeaderboardTimer);
     }
 });
 
@@ -417,7 +421,7 @@ function startCountdown(index) {
         if(index + 1 >= QuestionGroup.findOne().questionList.length) {
             Session.set("sessionClosed", true);
             if(Session.get("isOwner") && AnswerOptions.find({isCorrect: 1}).count() > 0) {
-                setTimeout(()=>{
+                routeToLeaderboardTimer = setTimeout(()=>{
                     Router.go("/statistics");
                 }, 7000);
             }

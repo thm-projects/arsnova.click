@@ -97,7 +97,9 @@ Template.live_results.onRendered(()=>{
             }
         });
     } else {
-        Meteor.call("EventManager.showReadConfirmedForIndex", localData.getPrivateKey(), Session.get("hashtag"), 0);
+        if(EventManager.findOne().readingConfirmationIndex === -1) {
+            Meteor.call("EventManager.showReadConfirmedForIndex", localData.getPrivateKey(), Session.get("hashtag"), 0);
+        }
     }
 });
 

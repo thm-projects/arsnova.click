@@ -25,13 +25,6 @@ Template.createTimerView.onCreated(function () {
     this.subscribe('QuestionGroup.authorizeAsOwner', localData.getPrivateKey(), Session.get("hashtag"));
     this.subscribe("EventManager.join",Session.get("hashtag"));
 
-    this.autorun(() => {
-        if(this.subscriptionsReady()) {
-            if (QuestionGroup.findOne().questionList[EventManager.findOne().questionIndex].timer !== 0) {
-                setSlider(EventManager.findOne().questionIndex);
-            }
-        }
-    });
 });
 
 Template.createTimerView.onRendered(function () {
@@ -41,6 +34,7 @@ Template.createTimerView.onRendered(function () {
     subscriptionHandler = Tracker.autorun(()=> {
         if (this.subscriptionsReady()) {
             index = EventManager.findOne().questionIndex;
+            subscriptionHandler.stop();
             setSlider(index);
         }
     });
@@ -51,6 +45,11 @@ Template.createTimerView.onRendered(function () {
 
         setTimer(index);
         index = EventManager.findOne().questionIndex;
+        subscriptionHandler = Tracker.autorun(()=> {
+            index = EventManager.findOne().questionIndex;
+            subscriptionHandler.stop();
+            setSlider(index);
+        });
         setSlider(index);
     });
     body.on('click', '.removeQuestion', function () {

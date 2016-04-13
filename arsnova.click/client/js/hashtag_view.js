@@ -32,14 +32,14 @@ Template.hashtag_view.onCreated(function () {
         this.subscribe("EventManager.join",Session.get("hashtag"), ()=>{
             EventManager.find().observeChanges({
                 changed: function (id, changedFields) {
-                    if(changedFields.sessionStatus === 2) {
+                    if(changedFields.sessionStatus && changedFields.sessionStatus === 2) {
                         $("#joinSession").removeAttr("disabled");
                     } else {
                         $("#joinSession").attr("disabled", "disabled");
                     }
                 },
                 added: function (id, doc) {
-                    if(doc.sessionStatus === 2) {
+                    if(doc.sessionStatus && doc.sessionStatus === 2) {
                         $("#joinSession").removeAttr("disabled");
                     } else {
                         $("#joinSession").attr("disabled", "disabled");

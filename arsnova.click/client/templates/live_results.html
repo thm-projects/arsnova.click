@@ -63,7 +63,7 @@
                                                 </button>
                                             </div>
                                         {{/if}}
-                                        <div class="col-xs-{{#if isOwner}}{{#if showLeaderBoardButton displayIndex}}4{{else}}6{{/if}}{{else}}6{{/if}}">
+                                        <div class="col-xs-{{#if showLeaderBoardButton displayIndex}}4{{else}}6{{/if}}">
                                             <button id="js-btn-showQuestionModal" type="button"
                                                     class="btn btn-info btn-lg btn-answerOption">
                                                 <span class="glyphicon glyphicon-question-sign glyph-left"
@@ -71,7 +71,7 @@
                                                 <span class="ansBtn">Frage</span>
                                             </button>
                                         </div>
-                                        <div class="col-xs-{{#if isOwner}}{{#if showLeaderBoardButton displayIndex}}4{{else}}6{{/if}}{{else}}6{{/if}}">
+                                        <div class="col-xs-{{#if showLeaderBoardButton displayIndex}}4{{else}}6{{/if}}">
                                             <button id="js-btn-showAnswerModal" type="button"
                                                     class="btn btn-info btn-lg btn-answerOption">
                                                 <span class="glyphicon glyphicon-th-list glyph-left"
@@ -113,8 +113,8 @@
                         {{/if}}
                     </div>
                 </div>
-                {{#if isMC displayIndex}}
-                    <div class="row" style="margin-top: 50px">
+                {{#if hasReadConfirmationRequested displayIndex}}{{#if isMC displayIndex}}
+                    <div class="row">
                         <div class="col-md-12">
                             {{#if isCountdownZero}}
                                 {{> result_button_mc name = "Ganz richtig" absolute = mcOptions.allCorrect.absolute percent = mcOptions.allCorrect.percent isCorrect = 1 id = 0}}
@@ -125,7 +125,7 @@
                             {{/if}}
                         </div>
                     </div>
-                {{/if}}
+                {{/if}}{{/if}}
             {{/each}}
         </div>
 
@@ -216,10 +216,10 @@
         <div class="col-md-12">
             <div class="button button-result">
                 <div class="row">
-                    <div id="mc_label{{id}}">
+                    <div class="col-md-4" id="mc_label{{id}}">
                         <span class="button-result-letter button-result-mc-letter">{{name}}</span>
                     </div>
-                    <div id="mc_bar{{id}}">
+                    <div class="col-md-8" id="mc_bar{{id}}">
                         <div class="progress" style="margin-top: 10px">
                             <div class="progress-bar {{getCSSClassForIsCorrect isCorrect}}" role="progressbar"
                                  aria-valuemin="0" aria-valuemax="100"

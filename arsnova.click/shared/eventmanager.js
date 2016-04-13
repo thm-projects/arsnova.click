@@ -119,7 +119,7 @@ Meteor.methods({
         
         return EventManager.insert({
             hashtag: hashtag,
-            sessionStatus: 0,
+            sessionStatus: 1,
             lastConnection: 0,
             readingConfirmationIndex: -1,
             questionIndex: 0

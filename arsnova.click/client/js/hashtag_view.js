@@ -18,18 +18,20 @@
 
 Template.hashtag_view.onCreated(function () {
     this.subscribe('Hashtags.public', ()=>{
-        this.autorun(()=>{
-            Hashtags.find().observeChanges({
-                added: function (id, doc) {
-                    if (doc.hashtag === $("#hashtag-input-field").val()) {
-                        $("#addNewHashtag").attr("disabled", "disabled");
-                    }
+        Hashtags.find().observeChanges({
+            added: function (id, doc) {
+                if (doc.hashtag === $("#hashtag-input-field").val()) {
+                    $("#addNewHashtag").attr("disabled", "disabled");
                 }
-            });
+            }
         });
     });
     this.autorun(()=>{
         this.subscribe("EventManager.join",Session.get("hashtag"), ()=>{
+            if( !EventManager.findOne({hashtag: Session.get("hashtag")}) ) {
+                $("#joinSession").attr("disabled", "disabled");
+                return;
+            }
             EventManager.find().observeChanges({
                 changed: function (id, changedFields) {
                     if(!isNaN(changedFields.sessionStatus)){
@@ -61,6 +63,7 @@ Template.hashtag_view.onRendered(function () {
 Template.hashtag_view.events({
     "input #hashtag-input-field": function (event) {
         var inputHashtag = $(event.target).val();
+        Session.set("hashtag",inputHashtag);
         $("#addNewHashtag").html("Mach neu !<span class=\"glyphicon glyphicon-plus glyph-right\" aria-hidden=\"true\"></span>");
         if (inputHashtag.length === 0) {
             return;
@@ -78,8 +81,6 @@ Template.hashtag_view.events({
             } else {
                 $("#addNewHashtag").attr("disabled", "disabled");
             }
-
-            Session.set("hashtag",inputHashtag);
         }
     },
     "click #addNewHashtag": function (event) {

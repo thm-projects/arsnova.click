@@ -11,7 +11,7 @@ Meteor.publish('EventManager.join', (hashtag, privateKey)=> {
                 max: 25
             }
         }).validate({hashtag: hashtag});
-
         return EventManager.find({hashtag: hashtag});
     }
+    return false;
 });

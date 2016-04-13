@@ -86,25 +86,26 @@ Meteor.methods({
         if (Meteor.isServer) {
             var hashtag = data.hashtagDoc.hashtag;
             var oldDoc = Hashtags.findOne({hashtag: hashtag});
+            console.log(oldDoc);
             if (oldDoc) {
-                if (oldDoc.privateKey == privateKey) {
-                    throw new Meteor.Error('Hashtags.import', 'You already have this hashtag on this server');
-                }
-                else {
-                    throw new Meteor.Error('Hashtags.import', 'This hashtag is already taken by another user on the server');
-                }
-                return;
+                throw new Meteor.Error('Hashtags.import', 'Dieser Hashtag ist bereits vorhanden');
             }
             var hashtagDoc = data.hashtagDoc;
             hashtagDoc.privateKey = privateKey;
-            hashtagDoc._id = undefined;
+            delete hashtagDoc._id;
             Hashtags.insert(hashtagDoc);
-            delete data.questionGroupDoc._id;
-            QuestionGroup.insert(data.questionGroupDoc);
-            data.answerOptionsDoc.forEach(function (answerOptionDoc) {
-                delete answerOptionDoc._id;
-                AnswerOptions.insert(answerOptionDoc);
+            data.questionGroupDoc.questionList.forEach(function (question) {
+                AnswerOptions.insert({
+                    hashtag: hashtag,
+                    questionIndex: question.questionIndex,
+                    answerText: question.answerText,
+                    answerOptionNumber: question.answerOptionNumber,
+                    isCorrect: question.isCorrect
+                });
+                delete data.questionGroupDoc.questionList.answers;
             });
+            QuestionGroup.insert(data.questionGroupDoc);
+
         }
     }
 });

@@ -136,7 +136,9 @@ Template.hashtag_view.events({
                         Session.set("hashtag", hashtag);
                         Session.set("isOwner", true);
                         localData.addHashtag(hashtag);
-                        Router.go("/question");
+                        Meteor.call('EventManager.add', localData.getPrivateKey(), hashtag, function(){
+                            Router.go("/question");
+                        });
                     }
                 });
             }

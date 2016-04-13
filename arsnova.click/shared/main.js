@@ -31,26 +31,26 @@ Meteor.methods({
                 privateKey: privateKey
             });
             if (doc) {
-                Hashtags.update(doc._id, {$set:{sessionStatus : 0}});
                 AnswerOptions.remove({hashtag: doc.hashtag});
                 MemberList.remove({hashtag: doc.hashtag});
                 Responses.remove({hashtag: doc.hashtag});
                 QuestionGroup.remove({hashtag: doc.hashtag});
+                EventManager.remove({hashtag: doc.hashtag});
             }
         }
     },
     'Main.deleteEverything': function ({privateKey, hashtag}) {
         if (Meteor.isServer) {
             var hashtagDoc = Hashtags.findOne({hashtag: hashtag, privateKey: privateKey});
-            if (!hashtagDoc) {
+            if (typeof hashtagDoc === "undefined") {
                 throw new Meteor.Error('Main.deleteEverything', 'Either the hashtag isn\'t available or the key is wrong');
-                return;
             }
             Hashtags.remove({hashtag: hashtag});
-            AnswerOptions.remove({hashtag: doc.hashtag});
-            MemberList.remove({hashtag: doc.hashtag});
-            Responses.remove({hashtag: doc.hashtag});
-            QuestionGroup.remove({hashtag: doc.hashtag});
+            AnswerOptions.remove({hashtag: hashtag});
+            MemberList.remove({hashtag: hashtag});
+            Responses.remove({hashtag: hashtag});
+            QuestionGroup.remove({hashtag: hashtag});
+            EventManager.remove({hashtag: hashtag});
         }
     }
 });

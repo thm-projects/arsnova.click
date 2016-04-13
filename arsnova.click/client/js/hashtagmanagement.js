@@ -39,8 +39,9 @@ Template.hashtagManagement.events({
         localData.reenterSession(hashtag);
         Session.set("isOwner", true);
         Session.set("hashtag", hashtag);
-        Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), hashtag, 1);
-        Router.go("/question");
+        Meteor.call('EventManager.add', localData.getPrivateKey(), hashtag, function(){
+            Router.go("/question");
+        });
     },
     "click .js-export": function (event) {
         var hashtag = $(event.currentTarget).parent().parent()[0].id;
@@ -79,22 +80,22 @@ Template.hashtagManagement.events({
                     data: asJSON
                 },
                 (err, res) => {
+                    console.log(err,res);
                     if (err) {
                         $('.errorMessageSplash').parents('.modal').modal('show');
-                        $("#errorMessage-text").html("Diese Sitzung existiert bereits!");
+                        $("#errorMessage-text").html(err.reason);
                     }
                     else {
                         localData.importFromFile(asJSON);
                         Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
                             (err, res) => {
+                                console.log(err,res);
                                 if (err) {
                                     $('.errorMessageSplash').parents('.modal').modal('show');
-                                    $("#errorMessage-text").html("Es ist ein Fehler bei der Aktualisierung ihrer Frage aufgetreten.");
+                                    $("#errorMessage-text").html("Es ist ein Fehler bei der Aktualisierung deiner Frage aufgetreten.");
                                 }
                                 else {
-                                    Session.set("hashtag", asJSON.hashtagDoc.hashtag);
-                                    Session.set("isOwner", true);
-                                    Router.go("/memberlist");
+
                                 }
                             }
                         );

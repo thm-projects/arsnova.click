@@ -55,6 +55,7 @@ Template.createQuestionView.onDestroyed(function () {
 Template.createQuestionView.helpers({
     //Get question from Sessions-Collection if it already exists
     questionText: function () {
+        if(!EventManager.findOne()) return;
         var currentSession = QuestionGroup.findOne();
         return currentSession && currentSession.questionList[EventManager.findOne().questionIndex] ? currentSession.questionList[EventManager.findOne().questionIndex].questionText : "";
     },
@@ -65,10 +66,12 @@ Template.createQuestionView.helpers({
 
 Template.createQuestionView.events({
     'input #questionText': function () {
+        if(!EventManager.findOne()) return;
         addQuestion(EventManager.findOne().questionIndex);
     },
     //Save question in Sessions-Collection when Button "Next" is clicked
     'click #forwardButton': function () {
+        if(!EventManager.findOne()) return;
         addQuestion(EventManager.findOne().questionIndex);
         Router.go("/answeroptions");
     },

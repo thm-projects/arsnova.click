@@ -45,6 +45,7 @@ localData = {
         var index = $.inArray(hashtag, allHashtags);
         if (index > -1) {
             localStorage.removeItem(hashtag);
+            allHashtags.splice(index, 1);
             localStorage.setItem("hashtags", JSON.stringify(allHashtags));
         }
     },
@@ -269,19 +270,10 @@ localData = {
 
         var questionList = [];
         data.sessionDoc.forEach(function (questionListDoc) {
-            var answerOptionsLocalStorage = [];
-            data.answerOptionsDoc.forEach(function (answerOptionDoc) {
-                answerOptionsLocalStorage.push({
-                    answerOptionNumber: answerOptionDoc.answerOptionNumber,
-                    answerText: answerOptionDoc.answerText,
-                    isCorrect: answerOptionDoc.isCorrect
-                });
-            });
-
             questionList.push({
                 questionText: questionListDoc.questionText,
                 timer: questionListDoc.timer,
-                answers: answerOptionsLocalStorage
+                answers: questionListDoc.answers
             });
         });
 
@@ -304,19 +296,12 @@ localData = {
             };
             var sessionDoc = [];
             localStorageData.questionList.forEach(function (question) {
-                answerOptionsDoc.push(question);
-            });
-            var answerOptionsDoc = [];
-            localStorageData.answers.forEach(function (answerOption) {
-                // TODO: Is it required to save the hashtag to the answers? We can always access the hashtag in the top level object index (localstorageItem.hashtag)
-                answerOption.hashtag = localStorageData.hashtag;
-                answerOptionsDoc.push(answerOption);
+                sessionDoc.push(question);
             });
 
             return JSON.stringify({
                 hashtagDoc: hashtagDoc,
                 sessionDoc: sessionDoc,
-                answerOptionsDoc: answerOptionsDoc,
                 memberListDoc: [],
                 responsesDoc: []
             });

@@ -29,6 +29,7 @@ Template.questionList.helpers({
         return index + 1;
     },
     isActiveIndex: function (index) {
+        if(!EventManager.findOne()) return;
         return index === EventManager.findOne().questionIndex;
     },
     hasCompleteContent: function (index) {

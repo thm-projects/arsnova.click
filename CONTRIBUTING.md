@@ -47,11 +47,7 @@ In the screenshot above, the license header was accidentally changed, presumably
 
 Is every file present that has seen some changes? Are there any files that appear in the list even if they were not changed? As mentioned previously, only necessary changes should appear in a commit. Review your changes using `git diff --stat`.
 
-![List of files that have been changed](arsnova.click/client/public/documentation/affected_files.png "Output of `git diff --summary`")
-
-Addtionally, watch out for mode changes using `git diff --summary`. A file's mode should not be changed without a reason. As a default, all files should have mode `644`:
-
-![Mode of four files has been changed](arsnova.click/client/public/documentation/mode_changes.png "Output of `git diff --summary`")
+![List of files that have been changed](arsnova.click/client/public/documentation/affected_files.png "Output of `git diff --stat`")
 
 ### Use UTF-8
 

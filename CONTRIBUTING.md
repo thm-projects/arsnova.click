@@ -31,7 +31,7 @@ This is a no-brainer. Keep your branches up to date so that merges will never en
 
 Committing trailing white-spaces makes your merge request look sloppy. Most editors have a setting that remove trailing white-spaces, which you should activate. You can use `git diff` to review changes since it highlights erroneous white-spaces.
 
-![Erroneuous white-spaces are highlighted](arsnova.click/client/public/documentation/trailing_whitespaces.png "Output of `git diff`")
+![Erroneuous white-spaces are highlighted](arsnova.click/public/documentation/trailing_whitespaces.PNG "Output of `git diff`")
 
 In addition, do not accidentally remove white-spaces of unrelated lines.
 
@@ -39,7 +39,7 @@ In addition, do not accidentally remove white-spaces of unrelated lines.
 
 Use `git add -p` to selectively add changes. Skip those that have nothing to do with the commit you are preparing. Every commit should precisely contain only those changes that are important for the feature you are developing or the bug you are fixing.
 
-![Unrelated lines are changed](arsnova.click/client/public/documentation/unwanted_changes.png "Output of `git diff`")
+![Unrelated lines are changed](arsnova.click/public/documentation/unwanted_changes.PNG "Output of `git diff`")
 
 In the screenshot above, the license header was accidentally changed, presumably by some editor misconfiguration. Reviewing your changes before committing allows you to spot such mistakes.
 
@@ -47,7 +47,7 @@ In the screenshot above, the license header was accidentally changed, presumably
 
 Is every file present that has seen some changes? Are there any files that appear in the list even if they were not changed? As mentioned previously, only necessary changes should appear in a commit. Review your changes using `git diff --stat`.
 
-![List of files that have been changed](arsnova.click/client/public/documentation/affected_files.png "Output of `git diff --stat`")
+![List of files that have been changed](arsnova.click/public/documentation/affected_files.PNG "Output of `git diff --stat`")
 
 ### Use UTF-8
 

@@ -121,7 +121,7 @@ Template.votingview.events({
     },
     "click .sendResponse": function (event) {
         event.stopPropagation();
-        if(Session.get("hasSendResponse") || Session.get("hasToggledResponse")) return;
+        //if(Session.get("hasSendResponse") || Session.get("hasToggledResponse")) return;
 
         if (Session.get("questionSC")) {
             makeAndSendResponse(event.currentTarget.id);
@@ -132,9 +132,10 @@ Template.votingview.events({
             var currentId = event.currentTarget.id;
             responseArr[currentId] = responseArr[currentId] ? false : true;
             var hasToggledResponse = false;
-            responseArr.forEach(function (number) {
-                if (number) {
+            $.each(responseArr, function (index, item) {
+                if (item) {
                     hasToggledResponse = true;
+                    return false;
                 }
             });
             Session.set("hasToggledResponse", hasToggledResponse);

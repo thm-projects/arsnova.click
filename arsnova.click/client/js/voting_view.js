@@ -96,7 +96,7 @@ Template.votingview.events({
         $('.answerTextSplash').parents('.modal').modal();
         var content = "";
 
-        AnswerOptions.find({}, {sort:{answerOptionNumber: 1}}).forEach(function (answerOption) {
+        AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}, {sort:{answerOptionNumber: 1}}).forEach(function (answerOption) {
             content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
             content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
         });
@@ -114,16 +114,10 @@ Template.votingview.events({
                 makeAndSendResponse(i);
             }
         }
-        var sendResponseButtons = $('.sendResponse');
-        sendResponseButtons.attr("disabled","disabled");
-        sendResponseButtons.css({opacity: 1});
-        /*
-        Session.set("showForwardButton", undefined);
-        Session.set("countdownInitialized", undefined);
-        Session.set("hasGivenResponse", undefined);
-        Session.set("responses", undefined);
-        $('.js-splashscreen-end-of-polling').modal('show');
-        */
+        if(EventManager.findOne().questionIndex + 1 >= QuestionGroup.findOne().questionList.length) {
+            Session.set("sessionClosed", true);
+        }
+        Router.go("/results");
     },
     "click .sendResponse": function (event) {
         event.stopPropagation();
@@ -184,20 +178,15 @@ function makeAndSendResponse(answerOptionNumber) {
         userNick: Session.get("nick")
     }, (err, res) => {
         if (err) {
+            console.log({
+                hashtag: Session.get("hashtag"),
+                questionIndex: EventManager.findOne().questionIndex,
+                answerOptionNumber: Number(answerOptionNumber),
+                userNick: Session.get("nick")
+            },err);
             $('.errorMessageSplash').parents('.modal').modal('show');
             $("#errorMessage-text").html(err.reason);
-        } /*else {
-            if (res) {
-                if (res.instantRouting) {
-                    // singlechoice
-
-                    $('.js-splashscreen-end-of-polling').modal('show');
-                    Session.set("hasGivenResponse", undefined);
-                    Session.set("countdownInitialized", undefined);
-                    Session.set("responses", undefined);
-                }
-            }
-        } */
+        }
     });
 }
 

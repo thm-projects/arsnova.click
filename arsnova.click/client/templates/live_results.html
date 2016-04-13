@@ -42,28 +42,28 @@
         </div>
         <div class="row question-wrapper">
             {{#each questionList}}
-                <div class="row question-row" id="question-row_{{@index}}">
+                <div class="row question-row" id="question-row_{{displayIndex}}">
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-12">
-                                <p class="question-title">Frage {{getNormalizedIndex @index}} / {{allQuestionCount}}</p>
+                                <p class="question-title">Frage {{getNormalizedIndex displayIndex}} / {{allQuestionCount}}</p>
                             </div>
                         </div>
-                        {{#if hasReadConfirmationRequested @index}}
+                        {{#if hasReadConfirmationRequested displayIndex}}
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="row">
-                                        {{#if showLeaderBoardButton @index}}
+                                        {{#if showLeaderBoardButton displayIndex}}
                                             <div class="col-xs-4">
-                                                <button id="js-btn-showLeaderBoard_{{@index}}" type="button"
-                                                        class="btn btn-info btn-lg btn-answerOption btn-showLeaderBoard">
+                                                <button id="js-btn-showLeaderBoard_{{displayIndex}}" type="button"
+                                                        class="btn btn-info btn-lg btn-answerOption btn-showLeaderBoard disableOnActiveCountdown">
                                                     <span class="glyphicon glyphicon-flag glyph-left"
                                                           aria-hidden="true"></span>
                                                     <span class="ansBtn">Rangliste</span>
                                                 </button>
                                             </div>
                                         {{/if}}
-                                        <div class="col-xs-{{#if isOwner}}{{#if showLeaderBoardButton @index}}4{{else}}6{{/if}}{{else}}6{{/if}}">
+                                        <div class="col-xs-{{#if isOwner}}{{#if showLeaderBoardButton displayIndex}}4{{else}}6{{/if}}{{else}}6{{/if}}">
                                             <button id="js-btn-showQuestionModal" type="button"
                                                     class="btn btn-info btn-lg btn-answerOption">
                                                 <span class="glyphicon glyphicon-question-sign glyph-left"
@@ -71,7 +71,7 @@
                                                 <span class="ansBtn">Frage</span>
                                             </button>
                                         </div>
-                                        <div class="col-xs-{{#if isOwner}}{{#if showLeaderBoardButton @index}}4{{else}}6{{/if}}{{else}}6{{/if}}">
+                                        <div class="col-xs-{{#if isOwner}}{{#if showLeaderBoardButton displayIndex}}4{{else}}6{{/if}}{{else}}6{{/if}}">
                                             <button id="js-btn-showAnswerModal" type="button"
                                                     class="btn btn-info btn-lg btn-answerOption">
                                                 <span class="glyphicon glyphicon-th-list glyph-left"
@@ -91,17 +91,17 @@
                                 <div class="progress" style="margin-right: 0;">
                                     <div class="progress-bar" role="progressbar"
                                          aria-valuemin="0" aria-valuemax="100"
-                                         style="width:{{getPercentRead @index}}%; background:{{getCSSClassForPercent (getPercentRead @index)}}">
-                                        <span class="percentage">{{getCurrentRead @index}} / {{getCountStudents}}
-                                            | {{getPercentRead @index}}%</span>
+                                         style="width:{{getPercentRead displayIndex}}%; background:{{getCSSClassForPercent (getPercentRead displayIndex)}}">
+                                        <span class="percentage">{{getCurrentRead displayIndex}} / {{getCountStudents}}
+                                            | {{getPercentRead displayIndex}}%</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {{#if hasReadConfirmationRequested @index}}
+                        {{#if hasReadConfirmationRequested displayIndex}}
                             <div class="row">
                                 <div class="col-md-12">
-                                    {{#each answerList @index}}
+                                    {{#each answerList displayIndex}}
                                         {{#if isCountdownZero}}
                                             {{> result_button name = name absolute = absolute percent = percent isCorrect = isCorrect }}
                                         {{else}}
@@ -113,7 +113,7 @@
                         {{/if}}
                     </div>
                 </div>
-                {{#if isMC @index}}
+                {{#if isMC displayIndex}}
                     <div class="row" style="margin-top: 50px">
                         <div class="col-md-12">
                             {{#if isCountdownZero}}
@@ -135,42 +135,47 @@
                     <div class="col-md-6 col-md-offset-3">
                         <div class="row">
                             <div class="col-xs-6">
-                                <button id="backButton" class="button button-back">
+                                <button id="backButton" class="button button-back disableOnActiveCountdown">
                                     <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
                                     Zurück zur Lobby
                                 </button>
                             </div>
                             <div class="col-xs-6">
-                                {{#if showGlobalLeaderboardButton}}
-                                    <button class="button button-next" id="goGlobalRanking">
-                                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                        <span class="ansBtn">Globale Rangliste</span>
-                                    </button>
-                                {{else}}
-                                    {{#if showQuestionDialog}}
-                                        <button class="button button-next button-start" id="showNextQuestionDialog">
-                                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                            <span class="ansBtn">Zeige Frage {{nextQuestionIndex}}
-                                                / {{allQuestionCount}}</span>
-                                        </button>
+                                {{#unless isRunningQuestion}}
+                                    {{#if showGlobalLeaderboardButton}}
+                                        {{#if hasCorrectAnswerOptions}}
+                                            <button class="button button-next disableOnActiveCountdown" id="goGlobalRanking">
+                                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                                <span class="ansBtn">Globale Rangliste</span>
+                                            </button>
+                                        {{/if}}
                                     {{else}}
-                                        <button class="button button-next button-start" id="startNextQuestion">
-                                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                            <span class="ansBtn">Starte Runde {{nextQuestionIndex}}
-                                                / {{allQuestionCount}}</span>
-                                        </button>
+                                        {{#if showNextQuestionButton}}
+                                            <button class="button button-next button-start disableOnActiveCountdown" id="showNextQuestionDialog">
+                                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                                <span class="ansBtn">Zeige Frage {{nextReadingConfirmationIndex}}
+                                                    / {{allQuestionCount}}</span>
+                                            </button>
+                                        {{else}}
+                                            <button class="button button-next button-start disableOnActiveCountdown" id="startNextQuestion">
+                                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                                <span class="ansBtn">Starte Runde {{nextQuestionIndex}}
+                                                    / {{allQuestionCount}}</span>
+                                            </button>
+                                        {{/if}}
                                     {{/if}}
-                                {{/if}}
+                                {{/unless}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        {{else}}
+            {{> splashscreen lazyCloseJsClass='js-splashscreen-noLazyClose' noAutorun=true headername="Frage" templateName="questionT" type="splash-screen-show-readingConfirmation"}}
         {{/if}}
+        {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Die Frage" templateName="questionContentSplash" type="splash-screen-show-question"}}
+        {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Die Antworten" templateName="answerOptionsSplash" type="splash-screen-show-question"}}
     </div>
-    {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Die Frage" templateName="questionContentSplash" type="splash-screen-show-question"}}
-    {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Die Antworten" templateName="answerOptionsSplash" type="splash-screen-show-question"}}
-    {{> splashscreen lazyCloseJsClass='js-splashscreen-noLazyClose' noAutorun=true headername="Frage" templateName="questionT" type="splash-screen-show-question"}}
 </template>
 
 <template name="questionT">

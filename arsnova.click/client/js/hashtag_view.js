@@ -36,6 +36,15 @@ Template.hashtag_view.onCreated(function () {
                     changed: function (id, changedFields) {
                         if(changedFields.sessionStatus === 2) {
                             $("#joinSession").removeAttr("disabled");
+                        } else {
+                            $("#joinSession").attr("disabled", "disabled");
+                        }
+                    },
+                    added: function (id, doc) {
+                        if(doc.sessionStatus === 2) {
+                            $("#joinSession").removeAttr("disabled");
+                        } else {
+                            $("#joinSession").attr("disabled", "disabled");
                         }
                     }
                 });
@@ -45,10 +54,7 @@ Template.hashtag_view.onCreated(function () {
 });
 
 Template.hashtag_view.onRendered(function () {
-    if (!Session.get("localStorageAvailable")){
-        $("#errorMessage-text").html("Im Privatmodus deines Browsers funktioniert arsnova.click leider nicht, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von arsnova.click den Privatmodus deaktivieren und ARSnova erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.");
-        $('.errorMessageSplash').parents('.modal').modal('show');
-    }
+
 });
 
 Template.hashtag_view.events({
@@ -77,6 +83,11 @@ Template.hashtag_view.events({
     },
     "click #addNewHashtag": function (event) {
         event.preventDefault();
+        if (!Session.get("localStorageAvailable")){
+            $("#errorMessage-text").html("Im Privatmodus deines Browsers funktioniert arsnova.click leider nur als Teilnehmer, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von arsnova.click den Privatmodus deaktivieren und ARSnova erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.");
+            $("#errorMessage-text").parents('.errorMessageSplash').parents('.modal').modal('show');
+            return;
+        }
         var hashtag = $("#hashtag-input-field").val();
         var reenter = false;
         if (hashtag.length > 0) {

@@ -31,8 +31,7 @@ Meteor.methods({
                 throw new Meteor.Error('Responses.addResponse', 'User has already given this response');
             }
             var hashtagDoc = Hashtags.findOne({
-                hashtag: hashtag,
-                sessionStatus: 3
+                hashtag: hashtag
             });
             if (!hashtagDoc) {
                 throw new Meteor.Error('Responses.addResponse', 'There is no such quiz active in the db');

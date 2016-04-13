@@ -28,7 +28,7 @@ Template.questionT.onRendered(function () {
     var content = "";
     if (questionDoc) {
         mathjaxMarkdown.initializeMarkdownAndLatex();
-        var questionText = questionDoc.questionList[EventManager.findOne().questionIndex].questionText;
+        var questionText = questionDoc.questionList[EventManager.findOne().readingConfirmationIndex].questionText;
         content = mathjaxMarkdown.getContent(questionText);
     }
 
@@ -37,7 +37,7 @@ Template.questionT.onRendered(function () {
 
 Template.questionT.helpers({
     answ: function () {
-        const answers = AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex});
+        const answers = AnswerOptions.find({questionIndex: EventManager.findOne().readingConfirmationIndex});
         return answers ? answers : "";
     }
 });
@@ -46,7 +46,7 @@ Template.questionT.events({
     "click #setReadConfirmed": function(event){
         Meteor.call("MemberList.setReadConfirmed", {
             hashtag: Session.get("hashtag"),
-            questionIndex: EventManager.findOne().questionIndex,
+            questionIndex: EventManager.findOne().readingConfirmationIndex,
             nick: Session.get("nick")
         }, (err, res)=> {
             if(err) {

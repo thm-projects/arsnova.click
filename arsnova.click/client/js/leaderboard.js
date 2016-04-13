@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Template.leaderBoard.onCreated(()=>{
+Template.leaderBoard.onCreated(function () {
     this.subscribe('Responses.session', Session.get("hashtag"));
     this.subscribe('AnswerOptions.options', Session.get("hashtag"));
     this.subscribe('MemberList.members', Session.get("hashtag"));

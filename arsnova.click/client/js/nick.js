@@ -52,7 +52,7 @@ Template.nick.events({
     'input #nickname-input-field': function (event) {
         var hashtag = Session.get("hashtag");
         var currentNickName = event.currentTarget.value;
-    var member = MemberList.findOne({nick: currentNickName});
+        var member = MemberList.findOne({nick: currentNickName});
 
         if (currentNickName.length > 2 && !member) {
             $("#forwardButton").removeAttr("disabled");

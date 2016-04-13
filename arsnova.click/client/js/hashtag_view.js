@@ -17,7 +17,6 @@
  */
 
 Template.hashtag_view.onCreated(function () {
-    Session.set("hashtag", undefined);
     this.subscribe('Hashtags.public', ()=>{
         this.autorun(()=>{
             Hashtags.find().observeChanges({
@@ -99,7 +98,9 @@ Template.hashtag_view.events({
                     Session.set("hashtag", hashtag);
                     Session.set("isOwner", true);
                     localData.reenterSession(hashtag);
-                    Router.go("/question");
+                    Meteor.call('EventManager.add', localData.getPrivateKey(), hashtag, function(){
+                        Router.go("/question");
+                    });
                 }
             }
             if (!reenter) {
@@ -178,9 +179,7 @@ Template.hashtag_view.events({
                 if ($.inArray(inputHashtag, localHashtags) > -1) {
                     //Edit own Hashtag
                     $("#addNewHashtag").click();
-                }
-
-                if (EventManager.findOne().sessionStatus === 2) {
+                } else if (EventManager.findOne() && EventManager.findOne().sessionStatus === 2) {
                     //Join session
                     $("#joinSession").click();
                 }

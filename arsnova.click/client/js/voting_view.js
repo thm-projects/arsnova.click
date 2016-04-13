@@ -121,7 +121,7 @@ Template.votingview.events({
     },
     "click .sendResponse": function (event) {
         event.stopPropagation();
-        if(Session.get("hasSendResponse")) return;
+        if(Session.get("hasSendResponse") || Session.get("hasToggledResponse")) return;
 
         if (Session.get("questionSC")) {
             makeAndSendResponse(event.currentTarget.id);

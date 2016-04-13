@@ -73,11 +73,7 @@ Template.createQuestionView.events({
         Router.go("/answeroptions");
     },
     "click #backButton": function () {
-        Session.set("hashtag", undefined);
-        Session.set("isOwner", undefined);
         Router.go("/");
-        // TODO: Why is this line after the Router.go() call? Maybe non-reachable code?
-        $('.previewSplash').parents('.modal').modal('hide');
     },
     "click #formatPreviewButton": function () {
         var formatPreviewText = $('#formatPreviewText');

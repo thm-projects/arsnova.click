@@ -29,14 +29,14 @@ Router.route('/', function () {
     }
 
     Session.set("isOwner", undefined);
-    Session.set("slider", undefined);
     Session.set("hashtag", undefined);
+    Session.set("slider", undefined);
     this.render('home');
 });
 
 Router.route('/resetToHome', function () {
-    this.render('home');
     $('.modal-backdrop').hide();
+    Router.go("/");
 });
 
 Router.route('/nick', function () {
@@ -48,8 +48,7 @@ Router.route('/nick', function () {
 
 Router.route('/question', function () {
     if (Session.get("isOwner")) {
-        Meteor.call('EventManager.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 1);
-		this.render('createQuestionView');
+        this.render('createQuestionView');
     } else {
         Router.go("/");
     }

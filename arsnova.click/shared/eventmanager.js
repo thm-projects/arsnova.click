@@ -70,5 +70,79 @@ Meteor.methods({
         }
 
         return EventManager.update({hashtag: hashtag}, {$set: {questionIndex: index, readingConfirmationIndex: index}});
+    },
+    'EventManager.clear': (privateKey, hashtag) => {
+        if (Meteor.isClient) {
+            return;
+        }
+
+        new SimpleSchema({
+            privateKey: {type: String},
+            hashtag: {type: String}
+        }).validate({
+            privateKey,
+            hashtag
+        });
+
+        if (!Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
+            })) {
+            throw new Meteor.Error('EventManager.setSessionStatus', 'Either there is no quiz or you don\'t have write access');
+        }
+
+        return EventManager.remove({hashtag: hashtag});
+    },
+    'EventManager.add': (privateKey, hashtag) => {
+        if (Meteor.isClient) {
+            return;
+        }
+
+        new SimpleSchema({
+            privateKey: {type: String},
+            hashtag: {type: String}
+        }).validate({
+            privateKey,
+            hashtag
+        });
+
+        if (!Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
+            })) {
+            throw new Meteor.Error('EventManager.setSessionStatus', 'Either there is no quiz or you don\'t have write access');
+        }
+
+        if (EventManager.findOne({ hashtag: hashtag })) {
+            EventManager.remove({hashtag: hashtag});
+        }
+        
+        return EventManager.insert({
+            hashtag: hashtag,
+            sessionStatus: 0,
+            lastConnection: 0,
+            readingConfirmationIndex: -1,
+            questionIndex: 0
+        });
+    },
+    'keepalive': function (privateKey, hashtag) {
+        if (Meteor.isServer){
+            new SimpleSchema({
+                hashtag: {type: String},
+                privateKey: {type: String}
+            }).validate({
+                privateKey,
+                hashtag
+            });
+
+            var doc = Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
+            });
+
+            if (doc) {
+                EventManager.update({hashtag: hashtag}, {$set: {lastConnection: (new Date()).getTime()}});
+            }
+        }
     }
 });

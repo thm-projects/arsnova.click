@@ -28,8 +28,5 @@ Hashtags.attachSchema(new SimpleSchema({
 		type: String,
 		min: 24,
 		max: 24
-	},
-	lastConnection: {
-		type: Number
 	}
 }));

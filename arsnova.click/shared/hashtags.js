@@ -97,8 +97,6 @@ Meteor.methods({
             }
             var hashtagDoc = data.hashtagDoc;
             hashtagDoc.privateKey = privateKey;
-            hashtagDoc.lastConnection = new Date().getTime();
-            hashtagDoc.sessionStatus = 1;
             hashtagDoc._id = undefined;
             Hashtags.insert(hashtagDoc);
             delete data.questionGroupDoc._id;
@@ -107,26 +105,6 @@ Meteor.methods({
                 delete answerOptionDoc._id;
                 AnswerOptions.insert(answerOptionDoc);
             });
-        }
-    },
-    'keepalive': function (privateKey, hashtag) {
-        if (Meteor.isServer){
-            new SimpleSchema({
-                hashtag: {type: String},
-                privateKey: {type: String}
-            }).validate({
-                privateKey,
-                hashtag
-            });
-
-            var doc = Hashtags.findOne({
-                hashtag: hashtag,
-                privateKey: privateKey
-            });
-
-            if (doc) {
-                Hashtags.update({_id: doc._id}, {$set: {lastConnection: (new Date()).getTime()}});
-            }
         }
     }
 });

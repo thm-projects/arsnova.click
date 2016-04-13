@@ -29,6 +29,9 @@ var eventManagerScheme = new SimpleSchema({
         min: 0,
         max: 3
     },
+    lastConnection: {
+        type: Number
+    },
     readingConfirmationIndex: {
         type: Number,
         min: -1,

@@ -44,7 +44,11 @@ Template.memberlist.onCreated(function () {
             oldStartTimeValues[i] = doc.questionList[i].startTime;
         }
     });
-    this.subscribe('Responses.session', Session.get("hashtag"));
+    this.subscribe('Responses.session', Session.get("hashtag"),function () {
+        if(Session.get("isOwner")) {
+            Meteor.call('Responses.clearAll',localData.getPrivateKey(), Session.get("hashtag"));
+        }
+    });
     this.subscribe("EventManager.join",Session.get("hashtag"));
 
     this.autorun(function() {

@@ -93,7 +93,7 @@ Template.hashtagManagement.events({
                                     $("#errorMessage-text").html("Es ist ein Fehler bei der Aktualisierung deiner Frage aufgetreten.");
                                 }
                                 else {
-
+												            Router.go("/memberlist");
                                 }
                             }
                         );

@@ -2,6 +2,8 @@
 	"browser": true,
 	"esnext": true,
 	"undef": true,
+	"unused": true,
+	"curly": true,
 	"globals": {
 		"_": false,
 		"$": false,
@@ -23,6 +25,7 @@
 		"MemberList": true,
 		"Responses": true,
 		"QuestionGroup": true,
-		"EventManager": true
+		"EventManager": true,
+		"localData": true
 	}
 }

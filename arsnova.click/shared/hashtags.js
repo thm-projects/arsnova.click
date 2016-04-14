@@ -100,15 +100,16 @@ Meteor.methods({
 									questionText: question.questionText,
 									timer: question.timer
 								});
-								question.answers.forEach(function (answer) {
-		                AnswerOptions.insert({
-		                    hashtag: hashtag,
-		                    questionIndex: i,
-		                    answerText: answer.answerText,
-		                    answerOptionNumber: answer.answerOptionNumber,
-		                    isCorrect: answer.isCorrect
-		                });
-								});
+								for (var j = 0; j < question.answers.length; j++) {
+										var answer = question.answers[j];
+										AnswerOptions.insert({
+												hashtag: hashtag,
+												questionIndex: i,
+												answerText: answer.answerText,
+												answerOptionNumber: answer.answerOptionNumber,
+												isCorrect: answer.isCorrect
+										});
+								}
 						}
 						QuestionGroup.insert({
 								hashtag: hashtag,

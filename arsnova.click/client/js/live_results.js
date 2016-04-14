@@ -26,7 +26,7 @@ var readingConfirmationTracker = null;
     var initQuestionIndex = -1;
     countdown = null;
 
-    let eventManagerHandle = this.subscribe('EventManager.join', Session.get("hashtag"), function(){
+    this.subscribe('EventManager.join', Session.get("hashtag"), function(){
         initQuestionIndex = EventManager.findOne().questionIndex;
         eventManagerObserver = EventManager.find().observeChanges({
             changed: function (id, changedFields) {

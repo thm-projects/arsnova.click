@@ -169,6 +169,7 @@ Template.createAnswerOptions.events({
 
 function parseAnswerOptionInput(index) {
     var hasError = false;
+    var setError = (err) => hasError = err;
     for (var i = 0; i < AnswerOptions.find({questionIndex: index}).count(); i++) {
         var text = $("#answerOptionText_Number" + i).val();
         var isCorrect = $('div#answerOption-' + i + ' .check-mark-checked').length > 0 ? 1 : 0;
@@ -180,7 +181,7 @@ function parseAnswerOptionInput(index) {
             answerText: text,
             isCorrect: isCorrect
         };
-        Meteor.call('AnswerOptions.updateAnswerTextAndIsCorrect', answer, (err) => hasError = err);
+        Meteor.call('AnswerOptions.updateAnswerTextAndIsCorrect', answer, (err) => setError(err));
     }
     return hasError;
 }

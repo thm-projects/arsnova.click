@@ -53,8 +53,6 @@ Template.memberlist.onCreated(function () {
             Meteor.call('Responses.clearAll',localData.getPrivateKey(), Session.get("hashtag"));
         }
     });
-    this.subscribe("EventManager.join",Session.get("hashtag"));
-
     this.autorun(function() {
         MemberList.find().observeChanges({
             added: function () {
@@ -232,7 +230,7 @@ function calculateButtonCount () {
     if (queryLimiter <= 0){
         queryLimiter = limitModifier;
     } else if(allMembers > queryLimiter) {
-        
+
         /*
         Use Math.ceil() as a session owner because the member buttons position may conflict with the back/forward buttons position.
         As a session attendee we do not have these buttons, so we can use Math.floor() to display a extra row

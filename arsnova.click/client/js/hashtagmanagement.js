@@ -86,17 +86,21 @@ Template.hashtagManagement.events({
                     }
                     else {
                         localData.importFromFile(asJSON);
-                        Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
-                            (err) => {
-                                if (err) {
-                                    $('.errorMessageSplash').parents('.modal').modal('show');
-                                    $("#errorMessage-text").html("Es ist ein Fehler bei der Aktualisierung deiner Frage aufgetreten.");
-                                }
-                                else {
-												            Router.go("/memberlist");
-                                }
-                            }
-                        );
+												Meteor.call('EventManager.add', localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, function () {
+		                        Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
+		                            (err) => {
+		                                if (err) {
+		                                    $('.errorMessageSplash').parents('.modal').modal('show');
+		                                    $("#errorMessage-text").html("Es ist ein Fehler bei der Aktualisierung ihrer Frage aufgetreten.");
+		                                }
+		                                else {
+		                                    Session.set("hashtag", asJSON.hashtagDoc.hashtag);
+		                                    Session.set("isOwner", true);
+		                                    Router.go("/memberlist");
+		                                }
+		                            }
+		                        );
+												});
                     }
                 }
             );

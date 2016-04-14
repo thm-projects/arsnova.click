@@ -172,7 +172,7 @@ function parseAnswerOptionInput(index) {
 
     var meteorAnswerOptionsUpdateCall = function (err) {
         hasError = err;
-    }
+    };
 
     for (var i = 0; i < AnswerOptions.find({questionIndex: index}).count(); i++) {
         var text = $("#answerOptionText_Number" + i).val();

@@ -16,30 +16,48 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var subscriptionHandler = null;
 Template.createQuestionView.onCreated(function () {
-    this.autorun(() => {
-        this.subscribe('Sessions.instructor', localData.getPrivateKey(), Session.get("hashtag"), function () {
-        var sessionDoc = Sessions.findOne({hashtag: Session.get("hashtag")});
-        if (sessionDoc && sessionDoc.questionText.length > 4) {
-            $("#forwardButton").removeAttr("disabled");
-        }
-        else {
-            $("#forwardButton").attr("disabled", "disabled");
+    this.subscribe('QuestionGroup.authorizeAsOwner', localData.getPrivateKey(), Session.get("hashtag"));
+    this.subscribe("EventManager.join",Session.get("hashtag"));
+});
+
+Template.createQuestionView.onRendered(function () {
+    calculateWindow();
+    $(window).resize(calculateWindow());
+
+    let index;
+    subscriptionHandler = Tracker.autorun(()=>{
+        if(this.subscriptionsReady()) {
+            index = EventManager.findOne().questionIndex;
         }
     });
+    var body = $('body');
+    body.on('click', '.questionIcon:not(.active)', function () {
+        var currentSession = QuestionGroup.findOne();
+        if(!currentSession || index >= currentSession.questionList.length) return;
+
+        addQuestion(index);
+        index = EventManager.findOne().questionIndex;
+    });
+    body.on('click', '.removeQuestion', function () {
+        index = EventManager.findOne().questionIndex;
+    });
 });
+
+Template.createQuestionView.onDestroyed(function () {
+    var body = $('body');
+    body.off('click', '.questionIcon:not(.active)');
+    body.off('click', '.removeQuestion');
+    subscriptionHandler.stop();
 });
 
 Template.createQuestionView.helpers({
     //Get question from Sessions-Collection if it already exists
     questionText: function () {
-        var currentSession = Sessions.findOne({hashtag: Session.get("hashtag")});
-        if (currentSession) {
-            return currentSession.questionText;
-        }
-        else {
-            return "";
-        }
+        if(!EventManager.findOne()) return;
+        var currentSession = QuestionGroup.findOne();
+        return currentSession && currentSession.questionList[EventManager.findOne().questionIndex] ? currentSession.questionList[EventManager.findOne().questionIndex].questionText : "";
     },
     isFormattingEnabled: function () {
         return $('#markdownBarDiv').hasClass('hide');
@@ -47,46 +65,26 @@ Template.createQuestionView.helpers({
 });
 
 Template.createQuestionView.events({
-    "input #questionText": function (event) {
-        var questionText = event.currentTarget.value;
-        if (questionText.length > 4) {
-            $("#forwardButton").removeAttr("disabled");
-        } else {
-            $("#forwardButton").attr("disabled", "disabled");
-        }
+    'input #questionText': function () {
+        if(!EventManager.findOne()) return;
+        addQuestion(EventManager.findOne().questionIndex);
     },
     //Save question in Sessions-Collection when Button "Next" is clicked
     'click #forwardButton': function () {
-        var questionText = $('#questionText').val();
-        Meteor.call("Sessions.setQuestion", {
-            privateKey: localData.getPrivateKey(),
-            hashtag: Session.get("hashtag"),
-            questionText: questionText
-        }, (err, res) => {
-            if (err) {
-                $('.errorMessageSplash').parents('.modal').modal('show');
-                $("#errorMessage-text").html(err.reason);
-            } else {
-                localData.addQuestion(Session.get("hashtag"), questionText);
+        if(!EventManager.findOne()) return;
+        addQuestion(EventManager.findOne().questionIndex);
         Router.go("/answeroptions");
-            }
-        });
     },
     "click #backButton": function () {
-        var questionText = $('#questionText').val();
-        Session.set("hashtag", undefined);
-        Session.set("isOwner", undefined);
         Router.go("/");
-        $('.previewSplash').parents('.modal').modal('hide');
     },
     "click #formatPreviewButton": function () {
-        if ($('#formatPreviewText').text() == "Format") {
-            $('#formatPreviewText').text("Vorschau");
-            $('#formatPreviewGlyphicon').removeClass("glyphicon-cog");
-            $('#formatPreviewGlyphicon').addClass("glyphicon-phone");
+        var formatPreviewText = $('#formatPreviewText');
+        if (formatPreviewText.text() === "Format") {
+            formatPreviewText.text("Vorschau");
+            $('#formatPreviewGlyphicon').removeClass("glyphicon-cog").addClass("glyphicon-phone");
             $('#markdownBarDiv').removeClass('hide');
-            $('#questionText').removeClass('round-corners');
-            $('#questionText').addClass('round-corners-markdown');
+            $('#questionText').removeClass('round-corners').addClass('round-corners-markdown');
         } else {
             $('.previewSplash').parents('.modal').modal('show');
 
@@ -103,58 +101,46 @@ Template.createQuestionView.events({
     }
 });
 
-Template.createQuestionView.onRendered(function () {
-    $(window).resize(function () {
-
-        var hashtag_length = Session.get("hashtag").length;
-
-        //take the hastag in the middle of the logo
-        var titel_margin_top  = $(".arsnova-logo").height();
-
-        if(hashtag_length <= 10){
-            if($(document).width() < 1200){
-                $(".header-titel").css("font-size", "6vw");
-                $(".header-titel").css("margin-top", titel_margin_top * 0.1);
-            } else {
-                $(".header-titel").css("font-size", "5vw");
-                $(".header-titel").css("margin-top", titel_margin_top * 0.2);
-            }
-
-        } else if(hashtag_length > 10 && hashtag_length <= 15){
-            $(".header-titel").css("font-size", "4vw");
-            $(".header-titel").css("margin-top", titel_margin_top * 0.4);
+function addQuestion(index) {
+    var questionText = $('#questionText').val();
+    Meteor.call("QuestionGroup.addQuestion", {
+        privateKey: localData.getPrivateKey(),
+        hashtag: Session.get("hashtag"),
+        questionIndex: index,
+        questionText: questionText
+    }, (err, res) => {
+        if (err) {
+            $('.errorMessageSplash').parents('.modal').modal('show');
+            $("#errorMessage-text").html(err.reason);
         } else {
-            $(".header-titel").css("font-size", "2.5vw");
-            $(".header-titel").css("margin-top", titel_margin_top * 0.6);
+            localData.addQuestion(Session.get("hashtag"), index, questionText);
         }
-
-
     });
-});
+}
 
-
-Template.createQuestionView.rendered = function () {
-
+function calculateWindow() {
     var hashtag_length = Session.get("hashtag").length;
-
-    //take the hastag in the middle of the logo
-    var titel_margin_top  = $(".arsnova-logo").height();
+    var headerTitel = $(".header-titel");
+    var fontSize = "";
+    var marginTopModifier = 0;
 
     if(hashtag_length <= 10){
         if($(document).width() < 1200){
-            $(".header-titel").css("font-size", "6vw");
-            $(".header-titel").css("margin-top", titel_margin_top * 0.1);
+            fontSize = "6vw";
+            marginTopModifier = 0.1;
         } else {
-            $(".header-titel").css("font-size", "5vw");
-            $(".header-titel").css("margin-top", titel_margin_top * 0.2);
+            fontSize = "5vw";
+            marginTopModifier = 0.2;
         }
 
     } else if(hashtag_length > 10 && hashtag_length <= 15){
-        $(".header-titel").css("font-size", "4vw");
-        $(".header-titel").css("margin-top", titel_margin_top * 0.4);
+        fontSize = "4vw";
+        marginTopModifier = 0.4;
     } else {
-        $(".header-titel").css("font-size", "2.5vw");
-        $(".header-titel").css("margin-top", titel_margin_top * 0.6);
+        fontSize = "2.5vw";
+        marginTopModifier = 0.6;
     }
 
-};
+    headerTitel.css("font-size", fontSize);
+    headerTitel.css("margin-top", $(".arsnova-logo").height() * marginTopModifier);
+}

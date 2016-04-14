@@ -17,103 +17,67 @@
  */
 
 Template.memberlist.onCreated(function () {
-    this.autorun(() => {
-        this.subscribe('MemberList.members', Session.get("hashtag"), function () {
-            $(window).resize(function () {
-                var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
-                $(".container").css("height", final_height + "px");
-                Session.set("LearnerCountOverride", false);
-                calculateButtonCount();
-                calculateProgressBarTextWidth();
-            });
-        });
-        if(Session.get("isOwner")) {
-            this.subscribe('MemberList.percentRead', {
-                hashtag: Session.get("hashtag"),
-                privateKey: localData.getPrivateKey()
-            });
-            Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 2);
-            Router.go("/memberlist");
-        }
-        this.subscribe('Sessions.memberlist', Session.get("hashtag"));
-    });
+    var oldStartTimeValues = {};
 
-    Tracker.autorun(function() {
-        var initializing = true;
-        Sessions.find().observeChanges({
-            changed: function (oldDoc, newDoc) {
-                if (!initializing) {
-                    if (newDoc.startTime && (oldDoc.startTime != newDoc.startTime)) {
-                        Router.go("onpolling");
-                    }
+    var eventManagerHandle = this.subscribe('EventManager.join', Session.get("hashtag"));
+    this.autorun(function () {
+        if (eventManagerHandle.ready()) {
+            var sessionStatus = EventManager.findOne().sessionStatus;
+            if (sessionStatus < 2) {
+                if(Session.get("isOwner")) {
+                    Router.go("/settimer");
+                } else {
+                    Router.go("/resetToHome");
                 }
+            } else if (sessionStatus === 3) {
+                Router.go("/results");
             }
+        }
+    });
+    this.subscribe('MemberList.members', Session.get("hashtag"), function () {
+        $(window).resize(function () {
+            var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
+            $(".container").css("height", final_height + "px");
+            Session.set("LearnerCountOverride", false);
+            calculateButtonCount();
         });
+    });
+    this.subscribe('QuestionGroup.memberlist', Session.get("hashtag"), function () {
+        var doc = QuestionGroup.findOne();
+        for(var i = 0; i< doc.questionList.length; i++) {
+            oldStartTimeValues[i] = doc.questionList[i].startTime;
+        }
+    });
+    this.subscribe('Responses.session', Session.get("hashtag"),function () {
+        if(Session.get("isOwner")) {
+            Meteor.call('Responses.clearAll',localData.getPrivateKey(), Session.get("hashtag"));
+        }
+    });
+    this.subscribe("EventManager.join",Session.get("hashtag"));
+
+    this.autorun(function() {
+        var initializing = true;
         MemberList.find().observeChanges({
             added: function (id, newDoc) {
                 calculateButtonCount();
-                calculateProgressBarTextWidth();
             }
         });
         initializing = false;
     });
+
+    if(Session.get("isOwner")) {
+        Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), 0);
+        Meteor.call("EventManager.showReadConfirmedForIndex",localData.getPrivateKey(), Session.get("hashtag"), -1);
+    }
 });
 
-Template.memberlist.rendered = function () {
+Template.memberlist.onRendered(function () {
     var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
     $(".container").css("height", final_height + "px");
     Session.set("LearnerCountOverride", false);
     calculateButtonCount();
-    calculateProgressBarTextWidth();
 
-    var hashtag_length = Session.get("hashtag").length;
-    //take the hastag in the middle of the logo
-    var titel_margin_top  = $(".arsnova-logo").height();
-
-    if(hashtag_length <= 10){
-
-        if($(document).width() < 992) {
-            $(".hashtag_in_title").css("font-size", "6vw");
-        } else {
-            $(".hashtag_in_title").css("font-size", "3vw");
-        }
-
-        if($(document).width() < 1200){
-            $(".header-titel").css("font-size", "6vw");
-            $(".header-titel").css("margin-top", titel_margin_top * 0.1);
-        } else {
-            $(".header-titel").css("font-size", "5vw");
-            $(".header-titel").css("margin-top", titel_margin_top * 0.2);
-        }
-
-    } else if(hashtag_length > 10 && hashtag_length <= 15){
-
-        if($(document).width() < 992) {
-            $(".hashtag_in_title").css("font-size", "6vw");
-        } else {
-            $(".hashtag_in_title").css("font-size", "3vw");
-        }
-
-        $(".header-titel").css("font-size", "4vw");
-        $(".header-titel").css("margin-top", titel_margin_top * 0.4);
-
-    } else {
-
-        if($(document).width() < 992) {
-            $(".hashtag_in_title").css("font-size", "4vw");
-        } else {
-            $(".hashtag_in_title").css("font-size", "2vw");
-        }
-
-        $(".header-titel").css("font-size", "2.5vw");
-        $(".header-titel").css("margin-top", titel_margin_top * 0.6)
-    }
-
-};
-
-Template.memberlist.onRendered(function () {
-    $(window).resize(function () {
-
+    var calculateFontSize = function() {
         var hashtag_length = Session.get("hashtag").length;
         //take the hastag in the middle of the logo
         var titel_margin_top  = $(".arsnova-logo").height();
@@ -156,9 +120,8 @@ Template.memberlist.onRendered(function () {
             $(".header-titel").css("font-size", "2.5vw");
             $(".header-titel").css("margin-top", titel_margin_top * 0.6)
         }
-
-
-    });
+    }();
+    $(window).resize(calculateFontSize);
 });
 
 Template.memberlist.events({
@@ -166,30 +129,22 @@ Template.memberlist.events({
         Session.set("LearnerCount", MemberList.find().count());
         Session.set("LearnerCountOverride", true);
     },
-    'click #setReadConfirmed': function () {
-        closeSplashscreen();
-        calculateProgressBarTextWidth();
-    },
     'click .btn-less-learners': function () {
         Session.set("LearnerCountOverride", false);
         calculateButtonCount();
-    },    
+    },
+    'click .btn-learner': function (event) {
+        event.preventDefault();
+    },
     'click #startPolling': function (event) {
-        Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 3);
-        Meteor.call('Sessions.startTimer', {
-            privateKey: localData.getPrivateKey(),
-            hashtag: Session.get("hashtag")
-        }, (err, res) => {
-            if (err) {
-                $('.errorMessageSplash').parents('.modal').modal('show');
-                $("#errorMessage-text").html(err.reason);
-            } else {
-                //Router.go("/onpolling");
-            }
-        });
+        Session.set("sessionClosed", false);
+        Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), -1);
+        Meteor.call('EventManager.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 3);
     },
     'click #backButton':function(event){
-        Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 1);
+        Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
+        Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), 0);
+        Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 1);
         Router.go("/settimer");
     }
 });
@@ -205,12 +160,7 @@ Template.memberlist.helpers({
         return Session.get('LearnerCountOverride');
     },
     learners: function () {
-        var sortParamObj;
-        if (Session.get('LearnerCountOverride')) {
-            sortParamObj = {lowerCaseNick: 1};
-        } else {
-            sortParamObj = {insertDate: -1};
-        }
+        var sortParamObj = Session.get('LearnerCountOverride') ? {lowerCaseNick: 1} : {insertDate: -1};
         return [
             MemberList.find({nick:Session.get("nick")}, {
                 limit: 1
@@ -233,23 +183,11 @@ Template.memberlist.helpers({
 
 Template.learner.onRendered(function () {
     calculateButtonCount();
-    calculateProgressBarTextWidth();
 });
 
 Template.learner.helpers({
     isOwnNick: function (nickname) {
         return nickname === Session.get("nick");
-    }
-});
-
-Template.readingConfirmation.onRendered(function () {
-    calculateProgressBarTextWidth();
-});
-
-Template.readingConfirmation.helpers({
-    percentRead: function () {
-        calculateProgressBarTextWidth();
-        return getPercentRead();
     }
 });
 
@@ -269,13 +207,11 @@ function calculateButtonCount () {
     - subtract the margin to the top (the title or the show more button)
      */
     var viewport = $(".contentPosition"),
-        confirmationCounter = $('.confirmationCounter').length > 0 ? $('.confirmationCounter').first().outerHeight() : 0,
         attendeeInQuiz = $('#attendee-in-quiz-wrapper').length > 0 ? $('#attendee-in-quiz-wrapper').outerHeight() : 0,
         learnerListMargin = $('.learner-list').length > 0 ? parseInt($('.learner-list').first().css('margin-top').replace("px", "")) : 0;
 
     var viewPortHeight =
         viewport.outerHeight() -
-        confirmationCounter -
         attendeeInQuiz -
         learnerListMargin;
 
@@ -311,35 +247,4 @@ function calculateButtonCount () {
     Template.memberlist.helpers.learners which gets the attendees from the mongo db
      */
     Session.set("LearnerCount", queryLimiter);
-}
-
-function calculateProgressBarTextWidth () {
-    /*
-     * In chrome the width is always set 20% too high. In all other browsers either this and the original calculation
-     * (e.g. $('.progress-fill').width((getPercentRead()) + "%");) works as expected. The function returns the correct
-     * percent values so no other manipulation is needed. This could be a chrome bug and is perhaps fixed later.
-    */
-    $('.progress-fill').width((getPercentRead() - 20) + "%");
-
-    if (getPercentRead() === 100) {
-        $('.progress-fill').addClass('round-corners-right');
-    } else {
-        $('.progress-fill').removeClass('round-corners-right');
-    }
-
-    if (getPercentRead() === 0) {
-        $('.progress-fill').hide();
-    } else {
-        $('.progress-fill').show();
-    }
-}
-
-function getPercentRead () {
-    var sumRead = 0;
-    var count = 0;
-    MemberList.find({hashtag: Session.get("hashtag")}).map(function (member) {
-        count++;
-        sumRead += member.readConfirmed;
-    });
-    return count ? Math.floor(sumRead / count * 100) : 0;
 }

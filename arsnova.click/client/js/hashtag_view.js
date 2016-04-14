@@ -17,74 +17,79 @@
  */
 
 Template.hashtag_view.onCreated(function () {
-    this.autorun(() => {
-        this.subscribe('Hashtags.public');
-    });
-
-    Tracker.autorun(function() {
-        var initializing = true;
+    this.subscribe('Hashtags.public', ()=>{
         Hashtags.find().observeChanges({
-            changed: function (id, attr) {
-                if (!initializing) {
-                    var inputHashtag = $("#hashtag-input-field").val();
-                    var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
-                    if (hashtagDoc) {
-                        if ((hashtagDoc.sessionStatus === 2)) {
-                            $("#joinSession").removeAttr("disabled");
-                        }
-                    }
-                }
-            },
             added: function (id, doc) {
-                var inputHashtag = $("#hashtag-input-field").val();
-                if (doc.hashtag === inputHashtag) {
+                if (doc.hashtag === $("#hashtag-input-field").val()) {
                     $("#addNewHashtag").attr("disabled", "disabled");
                 }
             }
         });
-        initializing = false;
+    });
+    this.autorun(()=>{
+        this.subscribe("EventManager.join",Session.get("hashtag"), ()=>{
+            if( !EventManager.findOne({hashtag: Session.get("hashtag")}) || localData.containsHashtag(Session.get("hashtag")) > -1) {
+                $("#joinSession").attr("disabled", "disabled");
+                return;
+            }
+            EventManager.find().observeChanges({
+                changed: function (id, changedFields) {
+                    if(!isNaN(changedFields.sessionStatus)){
+                        if(changedFields.sessionStatus === 2) {
+                            $("#joinSession").removeAttr("disabled");
+                        } else {
+                            $("#joinSession").attr("disabled", "disabled");
+                        }
+                    }
+                },
+                added: function (id, doc) {
+                    if(!isNaN(doc.sessionStatus)){
+                        if(doc.sessionStatus === 2) {
+                            $("#joinSession").removeAttr("disabled");
+                        } else {
+                            $("#joinSession").attr("disabled", "disabled");
+                        }
+                    }
+                }
+            });
+        });
     });
 });
 
 Template.hashtag_view.onRendered(function () {
-    if (!Session.get("localStorageAvailable")){
-        $("#errorMessage-text").html("Im Privatmodus deines Browsers funktioniert arsnova.click leider nicht, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von arsnova.click den Privatmodus deaktivieren und ARSnova erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.");
-        $('.errorMessageSplash').parents('.modal').modal('show');
-    }
+
 });
 
 Template.hashtag_view.events({
     "input #hashtag-input-field": function (event) {
         var inputHashtag = $(event.target).val();
+        Session.set("hashtag",inputHashtag);
         $("#addNewHashtag").html("Mach neu !<span class=\"glyphicon glyphicon-plus glyph-right\" aria-hidden=\"true\"></span>");
-        if (inputHashtag.length > 0) {
-            var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
-            if (!hashtagDoc) {
-                $("#joinSession").attr("disabled", "disabled");
+        if (inputHashtag.length === 0) {
+            return;
+        }
+
+        var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
+        if (!hashtagDoc) {
+            $("#joinSession").attr("disabled", "disabled");
+            $("#addNewHashtag").removeAttr("disabled");
+        } else {
+            var localHashtags = localData.getAllHashtags();
+            if ($.inArray(inputHashtag, localHashtags) > -1) {
+                $("#addNewHashtag").html("Bearbeiten<span class=\"glyphicon glyphicon-pencil glyph-right\" aria-hidden=\"true\"></span>");
                 $("#addNewHashtag").removeAttr("disabled");
             } else {
-                var localHashtags = localData.getAllHashtags();
-                if ($.inArray(inputHashtag, localHashtags) > -1) {
-                    $("#addNewHashtag").html("Bearbeiten<span class=\"glyphicon glyphicon-pencil glyph-right\" aria-hidden=\"true\"></span>");
-                    $("#addNewHashtag").removeAttr("disabled");
-                }
-                else {
-                    $("#addNewHashtag").attr("disabled", "disabled");
-                }
-                if (hashtagDoc.sessionStatus === 2) {
-                    $("#joinSession").removeAttr("disabled");
-                } else {
-                    $("#joinSession").attr("disabled", "disabled");
-                }
+                $("#addNewHashtag").attr("disabled", "disabled");
             }
-        }
-        else {
-            $("#joinSession").attr("disabled", "disabled");
-            $("#addNewHashtag").attr("disabled", "disabled");
         }
     },
     "click #addNewHashtag": function (event) {
         event.preventDefault();
+        if (!Session.get("localStorageAvailable")){
+            $("#errorMessage-text").html("Im Privatmodus deines Browsers funktioniert arsnova.click leider nur als Teilnehmer, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von arsnova.click den Privatmodus deaktivieren und ARSnova erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.");
+            $("#errorMessage-text").parents('.errorMessageSplash').parents('.modal').modal('show');
+            return;
+        }
         var hashtag = $("#hashtag-input-field").val();
         var reenter = false;
         if (hashtag.length > 0) {
@@ -96,7 +101,9 @@ Template.hashtag_view.events({
                     Session.set("hashtag", hashtag);
                     Session.set("isOwner", true);
                     localData.reenterSession(hashtag);
-                    Router.go("/question");
+                    Meteor.call('EventManager.add', localData.getPrivateKey(), hashtag, function(){
+                        Router.go("/question");
+                    });
                 }
             }
             if (!reenter) {
@@ -112,10 +119,31 @@ Template.hashtag_view.events({
                         $('.errorMessageSplash').parents('.modal').modal('show');
                         $("#errorMessage-text").html(err.reason);
                     } else {
+                        for(var i=0; i < 4; i++) {
+                            Meteor.call("AnswerOptions.addOption", {
+                                privateKey: localData.getPrivateKey(),
+                                hashtag: hashtag,
+                                questionIndex: 0,
+                                answerText: "",
+                                answerOptionNumber: i,
+                                isCorrect: 0
+                            });
+                        }
+                        Meteor.call("QuestionGroup.insert", {
+                            privateKey: localData.getPrivateKey(),
+                            hashtag: hashtag,
+                            questionList: [{
+                                questionText: "",
+                                timer: 40000
+                            }]
+                        });
+
                         Session.set("hashtag", hashtag);
                         Session.set("isOwner", true);
                         localData.addHashtag(hashtag);
-                        Router.go("/question");
+                        Meteor.call('EventManager.add', localData.getPrivateKey(), hashtag, function(){
+                            Router.go("/question");
+                        });
                     }
                 });
             }
@@ -124,7 +152,7 @@ Template.hashtag_view.events({
     "click #joinSession": function () {
         var hashtag = $("#hashtag-input-field").val();
 
-        if (Hashtags.findOne({hashtag:hashtag}).sessionStatus == 2) {
+        if (EventManager.findOne().sessionStatus === 2) {
             Session.set("hashtag", hashtag);
             Router.go("/nick");
         } else {
@@ -143,22 +171,22 @@ Template.hashtag_view.events({
         //Select option on enter
         if(event.keyCode == 13){
             var inputHashtag = $(event.target).val();
-            if (inputHashtag.length > 0) {
-                var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
-                if (!hashtagDoc) {
-                    //Add new Hashtag
-                    $("#addNewHashtag").click();
-                } else {
-                    var localHashtags = localData.getAllHashtags();
-                    if ($.inArray(inputHashtag, localHashtags) > -1) {
-                        //Edit own Hashtag
-                        $("#addNewHashtag").click();
-                    }
+            if (inputHashtag.length === 0) {
+                return;
+            }
 
-                    if (hashtagDoc.sessionStatus === 2) {
-                        //Join session
-                        $("#joinSession").click();
-                    }
+            var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
+            if (!hashtagDoc) {
+                //Add new Hashtag
+                $("#addNewHashtag").click();
+            } else {
+                var localHashtags = localData.getAllHashtags();
+                if ($.inArray(inputHashtag, localHashtags) > -1) {
+                    //Edit own Hashtag
+                    $("#addNewHashtag").click();
+                } else if (EventManager.findOne() && EventManager.findOne().sessionStatus === 2) {
+                    //Join session
+                    $("#joinSession").click();
                 }
             }
         }

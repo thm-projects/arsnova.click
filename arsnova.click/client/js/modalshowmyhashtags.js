@@ -25,12 +25,12 @@ Template.modalShowMyHashtags.helpers({
 Template.modalShowMyHashtags.events({
     "click .js-my-hash": function (event) {
         var hashtag = event.target.text;
-        localData.reenterSession(hashtag);
         Session.set("isOwner", true);
         Session.set("hashtag", hashtag);
-        Meteor.call("Hashtags.setIsActive", localData.getPrivateKey(), hashtag, 1);
-
-        closeAndRedirectTo('/question');
+        localData.reenterSession(hashtag);
+        Meteor.call('EventManager.add', localData.getPrivateKey(), hashtag, function () {
+            closeAndRedirectTo('/question');
+        });
     },
     "click #js-btn-showHashtagManagement": function (event) {
         closeAndRedirectTo('/hashtagmanagement');

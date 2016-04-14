@@ -20,12 +20,6 @@ Router.configure({
     layoutTemplate: 'layout'
 });
 
-Router.map(function () {
-    if (!Session.get("hashtag")) {
-        this.go("/");
-    }
-});
-
 Router.route('/', function () {
     try{
         localData.initializePrivateKey();
@@ -35,24 +29,26 @@ Router.route('/', function () {
     }
 
     Session.set("isOwner", undefined);
-    Session.set("slider", undefined);
     Session.set("hashtag", undefined);
+    Session.set("slider", undefined);
     this.render('home');
 });
 
 Router.route('/resetToHome', function () {
-    this.render('home');
     $('.modal-backdrop').hide();
+    Router.go("/");
 });
 
 Router.route('/nick', function () {
+    if (!Session.get("hashtag")) {
+        Router.go("/");
+    }
     this.render('nick');
 });
 
 Router.route('/question', function () {
     if (Session.get("isOwner")) {
-        Meteor.call('Hashtags.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 1);
-		this.render('createQuestionView');
+        this.render('createQuestionView');
     } else {
         Router.go("/");
     }

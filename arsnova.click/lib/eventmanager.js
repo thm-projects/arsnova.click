@@ -16,25 +16,32 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Sessions = new Mongo.Collection("sessions");
+EventManager = new Mongo.Collection("eventmanager");
 
-Sessions.attachSchema(new SimpleSchema({
-	hashtag: {
-		type: String,
-		min: 1,
-		max: 25
-	},
-	questionText: {
-		type: String,
-		min: 5,
-		max: 1000
-	},
-	timer: {
-		type: Number,
-		min: 0
-	},
-	startTime: {
-		type: String,
-		optional: true
-	}
-}));
+var eventManagerScheme = new SimpleSchema({
+    hashtag: {
+        type: String,
+        min: 1,
+        max: 25
+    },
+    sessionStatus: {
+        type: Number,
+        min: 0,
+        max: 3
+    },
+    lastConnection: {
+        type: Number
+    },
+    readingConfirmationIndex: {
+        type: Number,
+        min: -1,
+        optional: true
+    },
+    questionIndex: {
+        type: Number,
+        min: -1,
+        optional: true
+    }
+});
+
+EventManager.attachSchema(eventManagerScheme);

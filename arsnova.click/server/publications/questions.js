@@ -16,38 +16,35 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Meteor.publish('Sessions.instructor', function(pprivateKey, phashtag) {
+Meteor.publish('QuestionGroup.authorizeAsOwner', function(pprivateKey, phashtag) {
     new SimpleSchema({
         phashtag: {type: String},
         pprivateKey: {type: String}
     }).validate({
-            pprivateKey,
-            phashtag
-        });
-    var doc = Hashtags.find({
+        pprivateKey,
+        phashtag
+    });
+    var isOwner = Hashtags.find({
         hashtag: phashtag,
         privateKey: pprivateKey
-    });
-    if (!doc) return;
-    return Sessions.find({hashtag: phashtag});
+    }).count();
+    return isOwner > 0 ? QuestionGroup.find({hashtag: phashtag}) : null;
 });
 
-Meteor.publish('Sessions.question', function (phashtag) {
+Meteor.publish('QuestionGroup.questionList', function (phashtag) {
     new SimpleSchema({
         phashtag: {type: String}
     }).validate({phashtag});
-    return Sessions.find({hashtag: phashtag}, {
+    return QuestionGroup.find({hashtag: phashtag}, {
         fields: {
-            questionText: 1,
-            startTime: 1,
-            timer: 1
+            questionList: 1
         }
     });
 });
 
-Meteor.publish('Sessions.memberlist', function (phashtag) {
+Meteor.publish('QuestionGroup.memberlist', function (phashtag) {
     new SimpleSchema({
         phashtag: {type: String}
     }).validate({phashtag});
-    return Sessions.find({hashtag: phashtag});
+    return QuestionGroup.find({hashtag: phashtag});
 });

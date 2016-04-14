@@ -23,8 +23,7 @@ localData = {
             localStorage.setItem("hashtags", JSON.stringify([]));
             return [];
         }
-        var localHashtags = JSON.parse(hashtagString);
-        return localHashtags.sort();
+        return JSON.parse(hashtagString).sort();
     },
 
     containsHashtag: function (hashtag) {
@@ -32,10 +31,7 @@ localData = {
             return;
         }
         const hashtagString = localStorage.getItem("hashtags");
-        if (!hashtagString) {
-            return false;
-        }
-        return $.inArray(hashtag, JSON.parse(hashtagString));
+        return hashtagString ? $.inArray(hashtag, JSON.parse(hashtagString)) : false;
     },
 
     deleteHashtag: function (hashtag) {
@@ -48,8 +44,8 @@ localData = {
         }
         var index = $.inArray(hashtag, allHashtags);
         if (index > -1) {
-            var newHashtags = allHashtags.splice(index, 1);
             localStorage.removeItem(hashtag);
+            allHashtags.splice(index, 1);
             localStorage.setItem("hashtags", JSON.stringify(allHashtags));
         }
     },
@@ -58,120 +54,158 @@ localData = {
         if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
+        var questionObject = {
+            hashtag:hashtag,
+            questionList: [
+                {
+                    questionText: "",
+                    timer: 40000,
+                    answers: [
+                        {answerOptionNumber:0, answerText:"", isCorrect:0},
+                        {answerOptionNumber:1, answerText:"", isCorrect:0},
+                        {answerOptionNumber:2, answerText:"", isCorrect:0},
+                        {answerOptionNumber:3, answerText:"", isCorrect:0}
+                    ]
+                }
+            ]
+        };
         const hashtagString = localStorage.getItem("hashtags");
         if (!hashtagString) {
             localStorage.setItem("hashtags", JSON.stringify([hashtag]));
+            localStorage.setItem(hashtag, JSON.stringify(questionObject));
+        } else {
+            const hashtags = JSON.parse(hashtagString);
+            hashtags.push(hashtag);
 
-            localStorage.setItem(hashtag, JSON.stringify({
-                hashtag: hashtag,
-                questionText: "",
-                timer: 40000,
-                answers:[
-                    {answerOptionNumber:0, answerText:"", isCorrect:0},
-                    {answerOptionNumber:1, answerText:"", isCorrect:0},
-                    {answerOptionNumber:2, answerText:"", isCorrect:0},
-                    {answerOptionNumber:3, answerText:"", isCorrect:0}
-                 ]
-            }));
-            return;
+            localStorage.setItem("hashtags", JSON.stringify(hashtags));
+            localStorage.setItem(hashtag, JSON.stringify(questionObject));
         }
-        const hashtags = JSON.parse(hashtagString);
-        hashtags.push(hashtag);
-
-        localStorage.setItem("hashtags", JSON.stringify(hashtags));
-
-        localStorage.setItem(hashtag, JSON.stringify({
-            hashtag:hashtag,
-            questionText:"",
-            timer: 40000,
-            answers:[
-                {answerOptionNumber:0, answerText:"", isCorrect:0},
-                {answerOptionNumber:1, answerText:"", isCorrect:0},
-                {answerOptionNumber:2, answerText:"", isCorrect:0},
-                {answerOptionNumber:3, answerText:"", isCorrect:0}
-            ]
-        }));
     },
 
-    addQuestion: function (hashtag, question) {
+    addQuestion: function (hashtag, questionIndex, questionText) {
         if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
         const sessionDataString = localStorage.getItem(hashtag);
-        if (!sessionDataString) {
-            return;
+        if (sessionDataString) {
+            const sessionData = JSON.parse(sessionDataString);
+            if(questionIndex < sessionData.questionList.length) {
+                sessionData.questionList[questionIndex].questionText = questionText;
+            } else {
+                sessionData.questionList.push({
+                    questionText: questionText,
+                    timer: 40000,
+                    answers: [
+                        {answerOptionNumber:0, answerText:"", isCorrect:0},
+                        {answerOptionNumber:1, answerText:"", isCorrect:0},
+                        {answerOptionNumber:2, answerText:"", isCorrect:0},
+                        {answerOptionNumber:3, answerText:"", isCorrect:0}
+                    ]
+                });
+            }
+            localStorage.setItem(hashtag, JSON.stringify(sessionData));
         }
-        const sessionData = JSON.parse(sessionDataString);
-        sessionData.questionText = question;
-        localStorage.setItem(hashtag, JSON.stringify(sessionData));
     },
 
-    addTimer: function (hashtag, timer) {
+    removeQuestion: function (hashtag, questionIndex) {
         if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
         const sessionDataString = localStorage.getItem(hashtag);
-        if (!sessionDataString) {
-            return;
+        if (sessionDataString) {
+            const sessionData = JSON.parse(sessionDataString);
+            sessionData.questionList.splice(questionIndex, 1);
+            localStorage.setItem(hashtag, JSON.stringify(sessionData));
         }
-        const sessionData = JSON.parse(sessionDataString);
-        sessionData.timer = timer;
-        localStorage.setItem(hashtag, JSON.stringify(sessionData));
     },
 
-    addAnswers : function({hashtag,  answerOptionNumber, answerText, isCorrect}){
+    addTimer: function (hashtag, questionIndex, timer) {
+        if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
+            return;
+        }
+        const sessionDataString = localStorage.getItem(hashtag);
+        if (sessionDataString) {
+            const sessionData = JSON.parse(sessionDataString);
+            sessionData.questionList[questionIndex].timer = timer;
+            localStorage.setItem(hashtag, JSON.stringify(sessionData));
+        }
+    },
+
+    addAnswers : function({hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}){
         if(!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
         const sessionDataString = localStorage.getItem(hashtag);
-        if (!sessionDataString) {
-            return;
+        if (sessionDataString) {
+            const sessionData = JSON.parse(sessionDataString);
+            if(!sessionData.questionList[questionIndex].answers) {
+                sessionData.questionList[questionIndex].answers = [];
+            }
+            sessionData.questionList[questionIndex].answers.push({
+                answerOptionNumber:answerOptionNumber,
+                answerText:answerText,
+                isCorrect:isCorrect
+            });
+            localStorage.setItem(hashtag, JSON.stringify(sessionData));
         }
-        const sessionData = JSON.parse(sessionDataString);
-        sessionData.answers.push({
-            answerOptionNumber:answerOptionNumber,
-            answerText:answerText,
-            isCorrect:isCorrect});
-        localStorage.setItem(answer.hashtag, JSON.stringify(sessionData));
     },
 
     reenterSession: function (hashtag) {
         if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
+
         const sessionDataString = localStorage.getItem(hashtag);
         if (!sessionDataString) {
             return;
         }
+
         const sessionData = JSON.parse(sessionDataString);
 
-        if (!(typeof sessionData) === "object") {
-            return;
-        }
+        if (typeof sessionData === "object") {
+            /*
+            This supports the "old" question format where one question was bound to one hashtag.
+            It saves the content of the question to the new questionList and deletes the invalid keys.
+            TODO: remove later when it is likely that there are no more sessions with the old question format
+             */
+            if(typeof sessionData.questionList === "undefined") {
+                sessionData.questionList = [{
+                    questionText: sessionData.questionText,
+                    timer: sessionData.timer,
+                    answers: sessionData.answers
+                }];
+                delete sessionData.questionText;
+                delete sessionData.timer;
+                delete sessionData.answers;
+                delete sessionData.isReadingConfirmationRequired;
+                localStorage.setItem(hashtag, JSON.stringify(sessionData));
+            }
 
-        Meteor.call("Sessions.setQuestion", {
-            privateKey: localStorage.getItem("privateKey"),
-            hashtag: hashtag,
-            questionText: sessionData.questionText
-        });
-
-        Meteor.call("Sessions.setTimer", {
-            privateKey:localStorage.getItem("privateKey"),
-            hashtag:hashtag,
-            timer:sessionData.timer
-        });
-
-        $.each(sessionData.answers, function (key, value) {
-            Meteor.call("AnswerOptions.addOption", {
+            for(var i = 0; i < sessionData.questionList.length; i++) {
+                if(!sessionData.questionList[i].answers) continue;
+                var answer = sessionData.questionList[i].answers;
+                delete sessionData.questionList[i].answers;
+                delete sessionData.questionList[i].isReadingConfirmationRequired;
+                for(var j = 0; j< answer.length; j++) {
+                    Meteor.call("AnswerOptions.addOption", {
+                        privateKey: localStorage.getItem("privateKey"),
+                        hashtag: hashtag,
+                        questionIndex: i,
+                        answerText: answer[j].answerText,
+                        answerOptionNumber: answer[j].answerOptionNumber,
+                        isCorrect: answer[j].isCorrect
+                    });
+                }
+            }
+            Meteor.call("QuestionGroup.insert", {
                 privateKey: localStorage.getItem("privateKey"),
                 hashtag: hashtag,
-                answerText: value.answerText,
-                answerOptionNumber: value.answerOptionNumber,
-                isCorrect: value.isCorrect});
-        });
+                questionList: sessionData.questionList
+            });
+        }
     },
 
-    deleteAnswerOption: function (hashtag, answerOptionNumber) {
+    deleteAnswerOption: function (hashtag, questionIndex, answerOptionNumber) {
         if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
@@ -179,19 +213,18 @@ localData = {
         if (!sessionDataString) {
             return;
         }
+
         const sessionData = JSON.parse(sessionDataString);
+        if (typeof sessionData === "object") {
+            sessionData.questionList[questionIndex].answers = $.grep(sessionData.questionList[questionIndex].answers, function (value) {
+                return value.answerOptionNumber !== answerOptionNumber;
+            });
 
-        if (!(typeof sessionData) === "object") {
-            return;
+            localStorage.setItem(hashtag, JSON.stringify(sessionData));
         }
-        sessionData.answers = $.grep(sessionData.answers, function (value) {
-            return value.answerOptionNumber != answerOptionNumber;
-        });
-
-        localStorage.setItem(hashtag, JSON.stringify(sessionData));
     },
 
-    updateAnswerText: function ({hashtag, answerOptionNumber, answerText, isCorrect}) {
+    updateAnswerText: function ({hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}) {
         if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;
         }
@@ -199,23 +232,20 @@ localData = {
         if (!sessionDataString) {
             return;
         }
+
         const sessionData = JSON.parse(sessionDataString);
-
-        if ((typeof sessionData) !== "object") {
-            return;
+        if (typeof sessionData === "object") {
+            $.each(sessionData.questionList[questionIndex].answers, function (key, value) {
+                if (value.answerOptionNumber === answerOptionNumber) {
+                    value.answerText = answerText;
+                    value.isCorrect = isCorrect;
+                }
+            });
+            localStorage.setItem(hashtag, JSON.stringify(sessionData));
         }
-
-        $.each(sessionData.answers, function (key, value) {
-            if (value.answerOptionNumber === answerOptionNumber) {
-                value.answerText = answerText;
-                value.isCorrect = isCorrect;
-            }
-        });
-        localStorage.setItem(hashtag, JSON.stringify(sessionData));
     },
 
     initializePrivateKey: function () {
-
         if (!localStorage.getItem("privateKey")) {
             localStorage.setItem("privateKey", new Mongo.ObjectID()._str);
         }
@@ -230,25 +260,30 @@ localData = {
         if ((hashtag === "hashtags") || (hashtag === "privateKey")) {
             return;
         }
+
         var allHashtags = JSON.parse(localStorage.getItem("hashtags"));
+        allHashtags = $.grep(allHashtags, function (value) {
+            return value !== data.hashtagDoc.hashtag;
+        });
         allHashtags.push(hashtag);
         localStorage.setItem("hashtags", JSON.stringify(allHashtags));
-        var answerOptionsLocalStorage = [];
-        data.answerOptionsDoc.forEach(function (answerOptionDoc) {
-            var newDoc = {
-                answerOptionNumber: answerOptionDoc.answerOptionNumber,
-                answerText: answerOptionDoc.answerText,
-                isCorrect: answerOptionDoc.isCorrect
-            };
-            answerOptionsLocalStorage.push(newDoc);
+
+        var questionList = [];
+        data.sessionDoc.forEach(function (questionListDoc) {
+            questionList.push({
+                questionText: questionListDoc.questionText,
+                timer: questionListDoc.timer,
+                answers: questionListDoc.answers
+            });
         });
-        var localDataObject = {
-            hashtag: hashtag,
-            questionText: data.sessionDoc.questionText,
-            timer: data.sessionDoc.timer,
-            answers: answerOptionsLocalStorage
-        };
-        localStorage.setItem(hashtag, JSON.stringify(localDataObject));
+
+        localStorage.setItem(
+            hashtag,
+            JSON.stringify({
+                hashtag: data.hashtagDoc.hashtag,
+                questionList: questionList
+            })
+        );
     },
 
     exportFromLocalStorage: function (hashtag) {
@@ -259,24 +294,17 @@ localData = {
                 sessionStatus: 0,
                 lastConnection: 0
             };
-            var sessionDoc = {
-                hashtag: localStorageData.hashtag,
-                questionText: localStorageData.questionText,
-                timer: localStorageData.timer
-            };
-            answerOptionsDoc = [];
-            localStorageData.answers.forEach(function (answerOption) {
-                answerOption.hashtag = localStorageData.hashtag;
-                answerOptionsDoc.push(answerOption);
+            var sessionDoc = [];
+            localStorageData.questionList.forEach(function (question) {
+                sessionDoc.push(question);
             });
-            var exportData = {
+
+            return JSON.stringify({
                 hashtagDoc: hashtagDoc,
                 sessionDoc: sessionDoc,
-                answerOptionsDoc: answerOptionsDoc,
                 memberListDoc: [],
                 responsesDoc: []
-            };
-            return JSON.stringify(exportData);
+            });
         }
     },
 
@@ -285,20 +313,48 @@ localData = {
 
             localStorage.setItem("wpw", JSON.stringify({
                 hashtag: "wpw",
-                questionText: "I am a question text. This is for testing purpose. Do you understand?",
-                timer: 180000,
-                answers: [
+                questionList: [
                     {
-                        hashtag: "wpw",
-                        answerText: "Ja",
-                        answerOptionNumber: 0,
-                        isCorrect: 1
+                        questionText: "I am a question text. This is for testing purpose. Do you understand?",
+                        timer: 180000,
+                        answers: [
+                            {
+                                hashtag: "wpw",
+                                answerText: "Ja",
+                                answerOptionNumber: 0,
+                                isCorrect: 1
+                            },
+                            {
+                                hashtag: "wpw",
+                                answerText: "Nein",
+                                answerOptionNumber: 1,
+                                isCorrect: 0
+                            }
+                        ]
                     },
                     {
-                        hashtag: "wpw",
-                        answerText: "Nein",
-                        answerOptionNumber: 1,
-                        isCorrect: 0
+                        questionText: "I am a second question text. This is for testing purpose. Do you understand?",
+                        timer: 10000,
+                        answers: [
+                            {
+                                hashtag: "wpw",
+                                answerText: "Ja",
+                                answerOptionNumber: 0,
+                                isCorrect: 1
+                            },
+                            {
+                                hashtag: "wpw",
+                                answerText: "Nein",
+                                answerOptionNumber: 1,
+                                isCorrect: 0
+                            },
+                            {
+                                hashtag: "wpw",
+                                answerText: "Vielleicht",
+                                answerOptionNumber: 2,
+                                isCorrect: 0
+                            }
+                        ]
                     }
                 ]
             }));

@@ -29,46 +29,68 @@ Meteor.methods({
             backgroundColor,
             foregroundColor
         });
-        member = MemberList.findOne({
-            hashtag: hashtag,
-            nick: nick
-        });
-        if (!member) {
-            if (Hashtags.findOne({hashtag:hashtag}).sessionStatus == 2) {
-                MemberList.insert({
-                    hashtag: hashtag,
-                    nick: nick,
-                    lowerCaseNick: nick.toLowerCase(),
-                    backgroundColor: backgroundColor,
-                    foregroundColor: foregroundColor,
-                    readConfirmed: 0,
-                    insertDate: new Date().getTime()
-                });
-            } else {
-                throw new Meteor.error('MemberList.addLearner', 'Session is currently not available for joining');
-            }
-        } else {
+        if (MemberList.findOne({hashtag: hashtag, nick: nick})) {
             throw new Meteor.Error('MemberList.addLearner', 'Nick already exists!');
-            return;
         }
+        if (EventManager.findOne({hashtag:hashtag}).sessionStatus !== 2) {
+            throw new Meteor.Error('MemberList.addLearner', 'Session is currently not available for joining');
+        }
+        MemberList.insert({
+            hashtag: hashtag,
+            nick: nick,
+            lowerCaseNick: nick.toLowerCase(),
+            backgroundColor: backgroundColor,
+            foregroundColor: foregroundColor,
+            readConfirmed: [],
+            insertDate: new Date().getTime()
+        });
     },
-    'MemberList.setReadConfirmed': function (hashtag, nick) {
-        // TODO Thought: maybe link this method to a privateKey for learners? otherwise everybody can set "readConfirmed" for each user!
+    'MemberList.setReadConfirmed': function ({hashtag, questionIndex, nick}) {
+        /*
+         TODO Everybody can set "readConfirmed" for each user!
+         Maybe link this method to a privateKey for learners?
+         Maybe check with Meteor.user()?
+         */
         new SimpleSchema({
             hashtag: {type: String},
+            questionIndex: {type: Number},
             nick: {type: String}
         }).validate({
-                hashtag,
-                nick
-            });
-        member = MemberList.findOne({
-            hashtag: hashtag,
-            nick: nick
+            hashtag,
+            questionIndex,
+            nick
         });
+        var member = MemberList.findOne({hashtag: hashtag, nick: nick});
         if (!member) {
             throw new Meteor.Error('MemberList.setReadConfirmed', 'Member not found!');
-        } else {
-            MemberList.update(member._id, {$set: {readConfirmed: 1}}, member);
+        }
+        member.readConfirmed[questionIndex] = 1;
+        MemberList.update(member._id, { $set: {readConfirmed: member.readConfirmed} });
+    },
+    'MemberList.clearReadConfirmed': function (privateKey, hashtag) {
+        if(Meteor.isServer) {
+            var doc = Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
+            });
+            if (doc) {
+                MemberList.update({hashtag: hashtag}, { $set: {readConfirmed: []} });
+            } else {
+                throw new Meteor.Error('MemberList.clearReadConfirmed', 'Either the hashtag isn\'t available or the key is wrong');
+            }
+        }
+    },
+    'MemberList.removeFromSession': function(privateKey, hashtag) {
+        if(Meteor.isServer) {
+            var doc = Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
+            });
+            if (doc) {
+                MemberList.remove({hashtag: hashtag});
+            } else {
+                throw new Meteor.Error('MemberList.removeFromSession', 'Either the hashtag isn\'t available or the key is wrong');
+            }
         }
     }
 });

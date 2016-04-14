@@ -16,7 +16,33 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-button.down {
-  background: green;
-  box-shadow: none;
-}
+QuestionGroup = new Mongo.Collection("questionGroup");
+
+SingleQuestionSchema = new SimpleSchema({
+    questionText: {
+        type: String,
+        optional: true,
+        max: 10000
+    },
+    timer: {
+        type: Number,
+        min: 0
+    },
+    startTime: {
+        type: String,
+        optional: true
+    }
+});
+
+QuestionGroupSchema = new SimpleSchema({
+    hashtag: {
+        type: String,
+        min: 1,
+        max: 25
+    },
+    questionList: {
+        type: [SingleQuestionSchema]
+    }
+});
+
+QuestionGroup.attachSchema(QuestionGroupSchema);

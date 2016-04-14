@@ -26,7 +26,7 @@ Template.footer.helpers({
     },
     footerIsHidden: function () {
         var isFooterHidden = Session.get("footerIsHidden");
-        if (isFooterHidden == undefined){
+        if (!isFooterHidden) {
             return true;
         } else {
             return isFooterHidden;
@@ -96,7 +96,7 @@ Template.footer.events({
                     }
                     else {
                         localData.importFromFile(asJSON);
-                        Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
+                        Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
                             (err, res) => {
                                 if (err) {
                                     $('.errorMessageSplash').parents('.modal').modal('show');

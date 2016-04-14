@@ -16,15 +16,12 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+Template.home.onRendered(function () {
+
+});
+
 Template.home.helpers({
     existingHashtagsAvailable: function () {
-        if (Session.get("localStorageAvailable")){
-            if (localData.getAllHashtags().length == 0) {
-                return false;
-            }
-            return true;
-        }else{
-            return false;
-        }
+        return Session.get("localStorageAvailable") && localData.getAllHashtags().length > 0;
     }
 });

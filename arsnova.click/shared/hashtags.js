@@ -29,62 +29,14 @@ Meteor.methods({
             hashtag: hashtag,
             privateKey: privateKey
         });
-        if (doc) {
-            return true;
-        } else {
-            return false;
-        }
-    },
-    'Hashtags.setSessionStatus': function (privateKey, hashtag, sessionStatus) {
-        if (Meteor.isServer){
-            new SimpleSchema({
-                hashtag: {type: String},
-                privateKey: {type: String},
-                sessionStatus: {
-                    type: Number,
-                    min: 0,
-                    max: 3
-                }
-            }).validate({
-                privateKey,
-                hashtag,
-                sessionStatus
-            });
-            var doc = Hashtags.findOne({
-                hashtag: hashtag,
-                privateKey: privateKey
-            });
-            if (doc) {
-                Hashtags.update({_id: doc._id}, {$set: {sessionStatus: sessionStatus}});
-            } else {
-                throw new Meteor.Error('Hashtags.setSessionStatus', 'Either the hashtag isn\'t available or the key is wrong');
-                return;
-            }
-        }
+        return Boolean(doc);
     },
     'Hashtags.addHashtag': function (doc) {
-
-        var testDoc = Hashtags.findOne({
-            hashtag: doc.hashtag
-        });
-
-        if (!testDoc){
-            for (var i = 0; i < 4; i++) {
-                var emptyAnswerDoc = {
-                    privateKey: doc.privateKey,
-                    hashtag: doc.hashtag,
-                    answerText: "",
-                    answerOptionNumber: i,
-                    isCorrect: 0
-                };
-                AnswerOptions.insert(emptyAnswerDoc);
-            }
-            Hashtags.insert(doc);
-        }else{
+        if (Hashtags.find({hashtag: doc.hashtag}).count() > 0){
             throw new Meteor.Error('Hashtags.addHashtag', 'Session already exists!');
-            return;
         }
 
+        Hashtags.insert(doc);
     },
     'Hashtags.export': function ({hashtag, privateKey}) {
         if (Meteor.isServer) {
@@ -99,9 +51,8 @@ Meteor.methods({
             });
             if (!hashtagDoc) {
                 throw new Meteor.Error('Hashtags.export', 'No such hashtag with the given key');
-                return;
             }
-            var sessionDoc = Sessions.findOne({hashtag: hashtag}, {
+            var questionGroupDoc = QuestionGroup.findOne({hashtag: hashtag}, {
                 fields: {
                     _id: 0
                 }
@@ -123,7 +74,7 @@ Meteor.methods({
             }).fetch();
             var exportData = {
                 hashtagDoc: hashtagDoc,
-                sessionDoc: sessionDoc,
+                questionGroupDoc: questionGroupDoc,
                 answerOptionsDoc: answerOptionsDoc,
                 memberListDoc: memberListDoc,
                 responsesDoc: responsesDoc
@@ -135,47 +86,26 @@ Meteor.methods({
         if (Meteor.isServer) {
             var hashtag = data.hashtagDoc.hashtag;
             var oldDoc = Hashtags.findOne({hashtag: hashtag});
+            console.log(oldDoc);
             if (oldDoc) {
-                if (oldDoc.privateKey == privateKey) {
-                    throw new Meteor.Error('Hashtags.import', 'You already have this hashtag on this server');
-                }
-                else {
-                    throw new Meteor.Error('Hashtags.import', 'This hashtag is already taken by another user on the server');
-                }
-                return;
+                throw new Meteor.Error('Hashtags.import', 'Dieser Hashtag ist bereits vorhanden');
             }
             var hashtagDoc = data.hashtagDoc;
             hashtagDoc.privateKey = privateKey;
-            hashtagDoc.lastConnection = new Date().getTime();
-            hashtagDoc.sessionStatus = 1;
-            hashtagDoc._id = undefined;
+            delete hashtagDoc._id;
             Hashtags.insert(hashtagDoc);
-            data.sessionDoc._id = undefined;
-            Sessions.insert(data.sessionDoc);
-            data.answerOptionsDoc.forEach(function (answerOptionDoc) {
-                answerOptionDoc._id = undefined;
-                AnswerOptions.insert(answerOptionDoc);
+            data.questionGroupDoc.questionList.forEach(function (question) {
+                AnswerOptions.insert({
+                    hashtag: hashtag,
+                    questionIndex: question.questionIndex,
+                    answerText: question.answerText,
+                    answerOptionNumber: question.answerOptionNumber,
+                    isCorrect: question.isCorrect
+                });
+                delete data.questionGroupDoc.questionList.answers;
             });
-        }
-    },
-    'keepalive': function (privateKey, hashtag) {
-        if (Meteor.isServer){
-            new SimpleSchema({
-                hashtag: {type: String},
-                privateKey: {type: String}
-            }).validate({
-                privateKey,
-                hashtag
-            });
+            QuestionGroup.insert(data.questionGroupDoc);
 
-            var doc = Hashtags.findOne({
-                hashtag: hashtag,
-                privateKey: privateKey
-            });
-
-            if (doc) {
-                Hashtags.update({_id: doc._id}, {$set: {lastConnection: (new Date()).getTime()}});
-            }
         }
     }
 });

@@ -89,22 +89,31 @@ Meteor.methods({
             if (oldDoc) {
                 throw new Meteor.Error('Hashtags.import', 'Dieser Hashtag ist bereits vorhanden');
             }
+						var questionList = [];
             var hashtagDoc = data.hashtagDoc;
             hashtagDoc.privateKey = privateKey;
             delete hashtagDoc._id;
             Hashtags.insert(hashtagDoc);
-            data.questionGroupDoc.questionList.forEach(function (question) {
-                AnswerOptions.insert({
-                    hashtag: hashtag,
-                    questionIndex: question.questionIndex,
-                    answerText: question.answerText,
-                    answerOptionNumber: question.answerOptionNumber,
-                    isCorrect: question.isCorrect
-                });
-                delete data.questionGroupDoc.questionList.answers;
-            });
-            QuestionGroup.insert(data.questionGroupDoc);
-
+						for (var i = 0; i < data.sessionDoc.length; i++) {
+								var question = data.sessionDoc[i];
+								questionList.push({
+									questionText: question.questionText,
+									timer: question.timer
+								});
+								question.answers.forEach(function (answer) {
+		                AnswerOptions.insert({
+		                    hashtag: hashtag,
+		                    questionIndex: i,
+		                    answerText: answer.answerText,
+		                    answerOptionNumber: answer.answerOptionNumber,
+		                    isCorrect: answer.isCorrect
+		                });
+								});
+						}
+						QuestionGroup.insert({
+								hashtag: hashtag,
+								questionList: questionList
+						});
         }
     }
 });

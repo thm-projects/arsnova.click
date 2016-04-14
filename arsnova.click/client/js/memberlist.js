@@ -41,6 +41,17 @@ Template.memberlist.onCreated(function () {
             Session.set("LearnerCountOverride", false);
             calculateButtonCount();
         });
+
+        MemberList.find().observeChanges({
+            removed: function (id) {
+                let idButton = $('#' + id);
+                if(idButton.hasClass("color-changing-own-nick")) {
+                    Router.go("/resetToHome");
+                } else {
+                    idButton.remove();
+                }
+            }
+        });
     });
     this.subscribe('QuestionGroup.memberlist', Session.get("hashtag"), function () {
         var doc = QuestionGroup.findOne();
@@ -131,6 +142,16 @@ Template.memberlist.events({
     },
     'click .btn-learner': function (event) {
         event.preventDefault();
+        if( !Session.get("isOwner") ) {
+            return;
+        }
+
+        Meteor.call('MemberList.removeLearner',localData.getPrivateKey(),Session.get("hashtag"),$(event.currentTarget).attr("id"),function (err) {
+            if (err) {
+                $('.errorMessageSplash').parents('.modal').modal('show');
+                $("#errorMessage-text").html(err.reason);
+            }
+        });
     },
     'click #startPolling': function () {
         Session.set("sessionClosed", false);

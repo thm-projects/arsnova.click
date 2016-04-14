@@ -188,7 +188,9 @@ Template.live_results.helpers({
     },
     questionList: function () {
         var questionDoc = QuestionGroup.findOne();
-        if(!questionDoc) return;
+        if(!questionDoc) {
+            return;
+        }
 
         var questionList = questionDoc.questionList;
         if(EventManager.findOne().readingConfirmationIndex < questionList.length - 1) {
@@ -240,7 +242,9 @@ Template.live_results.helpers({
     },
     showGlobalLeaderboardButton: ()=>{
         var questionDoc = QuestionGroup.findOne();
-        if(!questionDoc) return;
+        if(!questionDoc) {
+            return;
+        }
 
         return Session.get("sessionClosed") || EventManager.findOne().questionIndex >= questionDoc.questionList.length - 1;
     },
@@ -248,7 +252,9 @@ Template.live_results.helpers({
         return AnswerOptions.find({isCorrect: 1}).count() > 0;
     },
     showQuestionDialog: ()=>{
-        if(!EventManager.findOne()) return;
+        if(!EventManager.findOne()) {
+            return;
+        }
 
         return EventManager.findOne().questionIndex === EventManager.findOne().readingConfirmationIndex;
     },
@@ -280,7 +286,9 @@ Template.live_results.events({
         var targetId = parseInt($(event.currentTarget).parents(".question-row").attr("id").replace("question-row_",""));
 
         AnswerOptions.find({questionIndex: targetId}, {sort:{answerOptionNumber: 1}}).forEach(function (answerOption) {
-            if(!answerOption.answerText) answerOption.answerText = "";
+            if(!answerOption.answerText) {
+                answerOption.answerText = "";
+            }
 
             content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
             content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
@@ -298,7 +306,8 @@ Template.live_results.events({
         event.stopPropagation();
         Meteor.call('Hashtags.export', {hashtag: Session.get("hashtag"), privateKey: localData.getPrivateKey()}, (err, res) => {
             if (err) {
-                alert("Could not export!\n" + err);
+                $('.errorMessageSplash').parents('.modal').modal('show');
+                $("#errorMessage-text").html("Could not export!\n" + err.reason);
             } else {
                 var exportData = "text/json;charset=utf-8," + encodeURIComponent(res);
                 var a = document.createElement('a');
@@ -327,13 +336,15 @@ Template.live_results.events({
     'click #startNextQuestion': (event)=> {
         event.stopPropagation();
         var questionDoc = QuestionGroup.findOne();
-        if(!questionDoc) return;
+        if(!questionDoc) {
+            return;
+        }
 
         Meteor.call('Question.startTimer', {
             privateKey: localData.getPrivateKey(),
             hashtag: Session.get("hashtag"),
             questionIndex: EventManager.findOne().questionIndex + 1
-        }, (err, res) => {
+        }, (err) => {
             if (err) {
                 $('.errorMessageSplash').parents('.modal').modal('show');
                 $("#errorMessage-text").html(err.reason);
@@ -390,7 +401,9 @@ function getPercentRead (index) {
     var count = 0;
     MemberList.find().map(function (member) {
         count++;
-        if(member.readConfirmed[index]) sumRead += member.readConfirmed[index];
+        if(member.readConfirmed[index]) {
+            sumRead += member.readConfirmed[index];
+        }
     });
     return count ? Math.floor(sumRead / count * 100) : 0;
 }

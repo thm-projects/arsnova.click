@@ -76,20 +76,20 @@ Template.footer.events({
              $(".footer-info-bar").css("margin-bottom", "2px");*/
         }
     },
-    "click .js-import-home": function (e) {
+    "click .js-import-home": function () {
         $(".js-import-input-home").trigger('click');
     },
     "click .js-import-input-home": function (event) {
         var fileList = event.target.files;
         var fileReader = new FileReader();
-        fileReader.onload = function (fileLoadEvent) {
+        fileReader.onload = function () {
             var asJSON = JSON.parse(fileReader.result);
             Meteor.call("Hashtags.import",
                 {
                     privateKey: localData.getPrivateKey(),
                     data: asJSON
                 },
-                (err, res) => {
+                (err) => {
                     if (err) {
                         $('.errorMessageSplash').parents('.modal').modal('show');
                         $("#errorMessage-text").html("Diese Sitzung existiert bereits!");
@@ -97,7 +97,7 @@ Template.footer.events({
                     else {
                         localData.importFromFile(asJSON);
                         Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
-                            (err, res) => {
+                            (err) => {
                                 if (err) {
                                     $('.errorMessageSplash').parents('.modal').modal('show');
                                     $("#errorMessage-text").html("Es ist ein Fehler bei der Aktualisierung ihrer Frage aufgetreten.");
@@ -117,4 +117,4 @@ Template.footer.events({
             fileReader.readAsBinaryString(fileList[i]);
         }
     }
-})
+});

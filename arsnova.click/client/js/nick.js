@@ -35,7 +35,7 @@ Template.nick.events({
             nick: nickname,
             backgroundColor: bgColor,
             foregroundColor: transformForegroundColor(hexToRgb(bgColor))
-        }, (err, res) => {
+        }, (err) => {
             if (err) {
                 $("#forwardButton").attr("disabled", "disabled");
                 $('.errorMessageSplash').parents('.modal').modal('show');
@@ -50,7 +50,6 @@ Template.nick.events({
         Router.go("/");
     },
     'input #nickname-input-field': function (event) {
-        var hashtag = Session.get("hashtag");
         var currentNickName = event.currentTarget.value;
         var member = MemberList.findOne({nick: currentNickName});
 

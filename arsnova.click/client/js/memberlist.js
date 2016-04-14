@@ -56,13 +56,11 @@ Template.memberlist.onCreated(function () {
     this.subscribe("EventManager.join",Session.get("hashtag"));
 
     this.autorun(function() {
-        var initializing = true;
         MemberList.find().observeChanges({
-            added: function (id, newDoc) {
+            added: function () {
                 calculateButtonCount();
             }
         });
-        initializing = false;
     });
 
     if(Session.get("isOwner")) {
@@ -118,14 +116,14 @@ Template.memberlist.onRendered(function () {
             }
 
             $(".header-titel").css("font-size", "2.5vw");
-            $(".header-titel").css("margin-top", titel_margin_top * 0.6)
+            $(".header-titel").css("margin-top", titel_margin_top * 0.6);
         }
     }();
     $(window).resize(calculateFontSize);
 });
 
 Template.memberlist.events({
-    "click .btn-more-learners": function (event) {
+    "click .btn-more-learners": function () {
         Session.set("LearnerCount", MemberList.find().count());
         Session.set("LearnerCountOverride", true);
     },
@@ -136,12 +134,12 @@ Template.memberlist.events({
     'click .btn-learner': function (event) {
         event.preventDefault();
     },
-    'click #startPolling': function (event) {
+    'click #startPolling': function () {
         Session.set("sessionClosed", false);
         Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), -1);
         Meteor.call('EventManager.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 3);
     },
-    'click #backButton':function(event){
+    'click #backButton':function(){
         Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
         Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), 0);
         Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 1);
@@ -197,7 +195,9 @@ function calculateButtonCount () {
     This session variable determines if the user has clicked on the show-more-button. The button count must not
     be calculated then. It is set in the event handler of the button and is reset if the user reenters the page
      */
-    if (Session.get("LearnerCountOverride")) return;
+    if (Session.get("LearnerCountOverride")) {
+        return;
+    }
 
     /*
     To calculate the maximum output of attendee button rows we need to:
@@ -229,8 +229,10 @@ function calculateButtonCount () {
     var limitModifier = (viewport.outerWidth() >= 992) ? 3 : (viewport.outerWidth() >= 768 && viewport.outerWidth() < 992) ? 2 : 1;
 
     queryLimiter *= limitModifier;
-    if (queryLimiter <= 0) queryLimiter = limitModifier;
-    else if(allMembers > queryLimiter) {
+    if (queryLimiter <= 0){
+        queryLimiter = limitModifier;
+    } else if(allMembers > queryLimiter) {
+        
         /*
         Use Math.ceil() as a session owner because the member buttons position may conflict with the back/forward buttons position.
         As a session attendee we do not have these buttons, so we can use Math.floor() to display a extra row

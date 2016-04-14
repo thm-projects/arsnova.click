@@ -46,7 +46,9 @@ Template.votingview.onDestroyed(function () {
     Session.set("countdownInitialized", undefined);
     Session.set("hasToggledResponse", undefined);
     Session.set("hasSendResponse", undefined);
-    if(countdown) countdown.stop();
+    if (countdown) {
+        countdown.stop();
+    }
 });
 
 Template.votingview.onRendered(function () {
@@ -105,7 +107,9 @@ Template.votingview.events({
     },
     "click #forwardButton": function (event) {
         event.stopPropagation();
-        if(Session.get("hasSendResponse")) return;
+        if(Session.get("hasSendResponse")) {
+            return;
+        }
 
         Session.set("hasSendResponse", true);
         var responseArr = JSON.parse(Session.get("responses"));
@@ -177,14 +181,8 @@ function makeAndSendResponse(answerOptionNumber) {
         questionIndex: EventManager.findOne().questionIndex,
         answerOptionNumber: Number(answerOptionNumber),
         userNick: Session.get("nick")
-    }, (err, res) => {
+    }, (err) => {
         if (err) {
-            console.log({
-                hashtag: Session.get("hashtag"),
-                questionIndex: EventManager.findOne().questionIndex,
-                answerOptionNumber: Number(answerOptionNumber),
-                userNick: Session.get("nick")
-            },err);
             $('.errorMessageSplash').parents('.modal').modal('show');
             $("#errorMessage-text").html(err.reason);
         }
@@ -201,7 +199,7 @@ function formatAnswerButtons () {
     answerRow.css('height', answerButtonContainerHeight + 'px');
 
     var answerOptionsCount = answerRow.children().length;
-    if (answerOptionsCount == 0) {
+    if (answerOptionsCount === 0) {
         setTimeout(function () {
             formatAnswerButtons();
         }, 100);

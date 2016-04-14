@@ -41,7 +41,9 @@ Template.createTimerView.onRendered(function () {
     var body = $('body');
     body.on('click', '.questionIcon:not(.active)', function () {
         var currentSession = QuestionGroup.findOne();
-        if (!currentSession || index >= currentSession.questionList.length) return;
+        if (!currentSession || index >= currentSession.questionList.length) {
+            return;
+        }
 
         setTimer(index);
         index = EventManager.findOne().questionIndex;
@@ -113,7 +115,7 @@ function setTimer(index) {
             hashtag: Session.get("hashtag"),
             questionIndex: index,
             timer: timer
-        }, (err, res) => {
+        }, (err) => {
             if(err) {
                 hasError = err;
             } else {

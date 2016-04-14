@@ -35,7 +35,9 @@ Template.createQuestionView.onRendered(function () {
     var body = $('body');
     body.on('click', '.questionIcon:not(.active)', function () {
         var currentSession = QuestionGroup.findOne();
-        if(!currentSession || index >= currentSession.questionList.length) return;
+        if(!currentSession || index >= currentSession.questionList.length) {
+            return;
+        }
 
         addQuestion(index);
         index = EventManager.findOne().questionIndex;
@@ -55,7 +57,9 @@ Template.createQuestionView.onDestroyed(function () {
 Template.createQuestionView.helpers({
     //Get question from Sessions-Collection if it already exists
     questionText: function () {
-        if(!EventManager.findOne()) return;
+        if(!EventManager.findOne()) {
+            return;
+        }
         var currentSession = QuestionGroup.findOne();
         return currentSession && currentSession.questionList[EventManager.findOne().questionIndex] ? currentSession.questionList[EventManager.findOne().questionIndex].questionText : "";
     },
@@ -66,12 +70,16 @@ Template.createQuestionView.helpers({
 
 Template.createQuestionView.events({
     'input #questionText': function () {
-        if(!EventManager.findOne()) return;
+        if(!EventManager.findOne()) {
+            return;
+        }
         addQuestion(EventManager.findOne().questionIndex);
     },
     //Save question in Sessions-Collection when Button "Next" is clicked
     'click #forwardButton': function () {
-        if(!EventManager.findOne()) return;
+        if(!EventManager.findOne()) {
+            return;
+        }
         addQuestion(EventManager.findOne().questionIndex);
         Router.go("/answeroptions");
     },
@@ -108,7 +116,7 @@ function addQuestion(index) {
         hashtag: Session.get("hashtag"),
         questionIndex: index,
         questionText: questionText
-    }, (err, res) => {
+    }, (err) => {
         if (err) {
             $('.errorMessageSplash').parents('.modal').modal('show');
             $("#errorMessage-text").html(err.reason);

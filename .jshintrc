@@ -25,7 +25,13 @@
 		"MemberList": true,
 		"Responses": true,
 		"QuestionGroup": true,
+
 		"EventManager": true,
-		"localData": true
+		"localData": true,
+		"mathjaxMarkdown": true,
+		"closeSplashscreen": true,
+		"showSplashscreen": true,
+		"closeAndRedirectTo": true,
+		"QuestionGroupSchema": true
 	}
 }

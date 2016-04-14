@@ -67,10 +67,14 @@ Template.leaderBoard.helpers({
     noLeaderBoardItems: (index)=>{
         var items = getLeaderBoardItems();
         if(typeof index !== "undefined") {
-            if(items[index].value.length > 0) return false;
+            if(items[index].value.length > 0) {
+                return false;
+            }
         } else {
             for(var i = 0; i < items.length; i++) {
-                if(items[i].value.length > 0) return false;
+                if(items[i].value.length > 0) {
+                    return false;
+                }
             }
         }
         return true;
@@ -84,7 +88,9 @@ function getLeaderBoardItems() {
     if(typeof Session.get("showLeaderBoardId") !== "undefined") {
         return [{value: getLeaderBoardItemsByIndex(Session.get("showLeaderBoardId"))}];
     } else {
-        if(!EventManager.findOne()) return [];
+        if(!EventManager.findOne()) {
+            return [];
+        }
 
         var result = [];
         for(var i = 0; i <= EventManager.findOne().questionIndex; i++) {

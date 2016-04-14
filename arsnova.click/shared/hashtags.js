@@ -86,7 +86,6 @@ Meteor.methods({
         if (Meteor.isServer) {
             var hashtag = data.hashtagDoc.hashtag;
             var oldDoc = Hashtags.findOne({hashtag: hashtag});
-            console.log(oldDoc);
             if (oldDoc) {
                 throw new Meteor.Error('Hashtags.import', 'Dieser Hashtag ist bereits vorhanden');
             }

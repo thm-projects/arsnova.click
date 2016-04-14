@@ -78,8 +78,6 @@ mathjaxMarkdown = {
     },
     getContent: function (content) {
         if (content) {
-            var hideMediaDummy = '<div class="hideMediaDummy" accessKey="@@@"><span class="###"></span></div>';
-
             var replStack = [], repl;
 
             // replace MathJax delimiters
@@ -227,9 +225,9 @@ mathjaxMarkdown = {
                     href.match(delimiters.videoIdDel)[2];
 
                 var title = element.match(delimiters.titleDel)[1];
-                return '<p class="videoImageParagraph"><a target="_blank" class="hyperlink" href="' + delimiters.videoURI
-                    + videoId + '"><span class="videoImageContainer" id="' + videoId + '" accesskey="'
-                    + delimiters.accessKey + '" title="' + title + '">' + text + '</span></a></p>';
+                return '<p class="videoImageParagraph"><a target="_blank" class="hyperlink" href="' + delimiters.videoURI +
+                    videoId + '"><span class="videoImageContainer" id="' + videoId + '" accesskey="' +
+                    delimiters.accessKey + '" title="' + title + '">' + text + '</span></a></p>';
             });
         };
 
@@ -242,4 +240,4 @@ mathjaxMarkdown = {
 
         return content;
     }
-}
+};

@@ -1,4 +1,4 @@
-Meteor.publish('EventManager.join', (hashtag, privateKey)=> {
+Meteor.publish('EventManager.join', (hashtag)=> {
     if(typeof hashtag === "undefined") {
         return false;
     }

@@ -113,7 +113,7 @@ Template.hashtag_view.events({
                     sessionStatus: 1,
                     lastConnection: (new Date()).getTime()
                 };
-                Meteor.call('Hashtags.addHashtag', doc, (err, res) => {
+                Meteor.call('Hashtags.addHashtag', doc, (err) => {
                     if (err) {
                         $("#addNewHashtag").removeAttr("disabled");
                         $('.errorMessageSplash').parents('.modal').modal('show');

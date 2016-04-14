@@ -32,7 +32,7 @@ Template.modalShowMyHashtags.events({
             closeAndRedirectTo('/question');
         });
     },
-    "click #js-btn-showHashtagManagement": function (event) {
+    "click #js-btn-showHashtagManagement": function () {
         closeAndRedirectTo('/hashtagmanagement');
     }
 });

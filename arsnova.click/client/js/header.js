@@ -18,13 +18,15 @@
 
 Template.header.onCreated(function () {
     this.autorun(() => {
-        if(!Session.get("hashtag")) return;
+        if(!Session.get("hashtag")) {
+            return;
+        }
 
         this.subscribe('EventManager.join', Session.get("hashtag"), ()=>{
             var hashtagDocs = Hashtags.find();
 
             hashtagDocs.observe({
-                changed: function (doc, atIndex) {
+                changed: function (doc) {
                     if(doc.hashtag == Session.get("hashtag")){
                         if (doc.sessionStatus === 0 || doc.sessionStatus === 1) {
                             Router.go("/resetToHome");

@@ -74,7 +74,7 @@ Template.endOfPollingSplashscreen.helpers({
         var everythingRight = true;
 
         Responses.find({userNick: Session.get("nick")}).forEach(function (response) {
-            if (!($.inArray(response.answerOptionNumber, correctAnswers) !== -1)) {
+            if ($.inArray(response.answerOptionNumber, correctAnswers) == -1) {
                 everythingRight = false;
             }
             responseAmount++;
@@ -97,7 +97,7 @@ Template.endOfPollingSplashscreen.helpers({
         var everythingFalse = true;
 
         Responses.find({userNick: Session.get("nick")}).forEach(function (response) {
-            if (!($.inArray(response.answerOptionNumber, wrongAnswers) !== -1)) {
+            if ($.inArray(response.answerOptionNumber, wrongAnswers) == -1) {
                 everythingFalse = false;
             }
             responseAmount++;
@@ -110,9 +110,9 @@ Template.endOfPollingSplashscreen.helpers({
         var myResponseMillis = Responses.findOne({userNick: Session.get("nick")}).responseTime;
 
         LeaderBoard.find().forEach(function (leaderBoardEntry) {
-            if (leaderBoardEntry.userNick != Session.get("nick")
-                && leaderBoardEntry.givenAnswers == leaderBoardEntry.rightAnswers
-                && leaderBoardEntry.responseTimeMillis < myResponseMillis) {
+            if (leaderBoardEntry.userNick != Session.get("nick") &&
+                leaderBoardEntry.givenAnswers == leaderBoardEntry.rightAnswers &&
+                leaderBoardEntry.responseTimeMillis < myResponseMillis) {
                 startPosition++;
             }
         });

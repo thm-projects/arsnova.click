@@ -25,7 +25,7 @@ Template.questionPreviewSplash.onRendered(function () {
 
 function calculateAndSetPreviewSplashWidthAndHeight() {
     $('.modal-dialog').width($('#mainContentContainer').width() - 40);
-};
+}
 
 Template.questionPreviewSplash.events({
     "click #js-btn-hidePreviewModal": function () {

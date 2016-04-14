@@ -7,11 +7,15 @@ Template.questionList.onCreated(function () {
 
     this.autorun(() => {
         if(this.subscriptionsReady()) {
-            if (!QuestionGroup.findOne()) return;
+            if (!QuestionGroup.findOne()) {
+                return;
+            }
 
             var questionList = QuestionGroup.findOne().questionList;
             var valid_questions = Session.get("valid_questions");
-            if(questionList.length >= valid_questions.length) return;
+            if(questionList.length >= valid_questions.length) {
+                return;
+            }
 
             valid_questions.splice(questionList.length - 1, valid_questions.length - questionList.length);
 
@@ -29,7 +33,9 @@ Template.questionList.helpers({
         return index + 1;
     },
     isActiveIndex: function (index) {
-        if(!EventManager.findOne()) return;
+        if(!EventManager.findOne()) {
+            return;
+        }
         return index === EventManager.findOne().questionIndex;
     },
     hasCompleteContent: function (index) {
@@ -55,7 +61,7 @@ Template.questionList.events({
             hashtag: Session.get("hashtag"),
             questionIndex: id,
             answerOptionNumber: -1
-        }, (err, res) => {
+        }, (err) => {
             if (err) {
                 $('.errorMessageSplash').parents('.modal').modal('show');
                 $("#errorMessage-text").html(err.reason);
@@ -64,7 +70,7 @@ Template.questionList.events({
                     privateKey: localData.getPrivateKey(),
                     hashtag: Session.get("hashtag"),
                     questionIndex: id
-                }, (err, res) => {
+                }, (err) => {
                     if (err) {
                         $('.errorMessageSplash').parents('.modal').modal('show');
                         $("#errorMessage-text").html(err.reason);
@@ -78,7 +84,7 @@ Template.questionList.events({
             }
         });
     },
-    'click #addQuestion': function (event) {
+    'click #addQuestion': function () {
         addNewQuestion();
         setTimeout(()=> {
             let scrollPane = $(".questionScrollPane");
@@ -91,17 +97,27 @@ Template.questionList.events({
 function checkForValidQuestions(index) {
     var questionDoc = QuestionGroup.findOne();
     var answerDoc = AnswerOptions.find({questionIndex: index});
-    if(!questionDoc || !answerDoc) return false;
+    if(!questionDoc || !answerDoc) {
+        return false;
+    }
 
     var question = questionDoc.questionList[index];
-    if(!question) return false;
+    if(!question) {
+        return false;
+    }
 
-    if(!question.questionText || question.questionText.length < 5 || question.questionText.length > 10000) return false;
-    if(!question.timer || isNaN(question.timer) || question.timer < 5000 || question.timer > 260000) return false;
+    if(!question.questionText || question.questionText.length < 5 || question.questionText.length > 10000) {
+        return false;
+    }
+    if(!question.timer || isNaN(question.timer) || question.timer < 5000 || question.timer > 260000) {
+        return false;
+    }
 
     var hasValidAnswers = false;
     answerDoc.forEach(function (value) {
-        if(typeof value.answerText === "undefined" || value.answerText.length <= 500) hasValidAnswers = true;
+        if(typeof value.answerText === "undefined" || value.answerText.length <= 500) {
+            hasValidAnswers = true;
+        }
     });
     return hasValidAnswers;
 }
@@ -113,7 +129,7 @@ function addNewQuestion(){
         hashtag: Session.get("hashtag"),
         questionIndex: index,
         questionText: ""
-    }, (err, res) => {
+    }, (err) => {
         if (err) {
             $('.errorMessageSplash').parents('.modal').modal('show');
             $("#errorMessage-text").html(err.reason);

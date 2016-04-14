@@ -32,17 +32,17 @@ Template.markdownBar.onRendered(function () {
 });
 
 Template.markdownBar.events({
-    "click #infoMarkdownButton": function (event) {
+    "click #infoMarkdownButton": function () {
         var markdownInfoText = $("#markdownInfoText");
         markdownInfoText.parents('.modal').modal('show');
         markdownInfoText.html("Sie können Texte innerhalb von ARSnova mithilfe von <a target=\"_blank\" class=\"hyperlink\" href=\"https://de.wikipedia.org/wiki/Markdown\">Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown Optionen werden in Form von Schaltflächen über den unterstützten Eingabefeldern angeboten. Zudem unterstützt ARSnova <a target=\"_blank\" class=\"hyperlink\" href=\"https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet\">GitHub Flavored Markdown</a>");
     },
-    "click #boldMarkdownButton": function (event) {
+    "click #boldMarkdownButton": function () {
         if (!markdownAlreadyExistsAndAutoRemove('**', '**')){
             insertInQuestionText('**', '**');
         }
     },
-    "click #headerMarkdownButton": function (event) {
+    "click #headerMarkdownButton": function () {
         if (!markdownAlreadyExistsAndAutoRemove('###', '###')){
             if (markdownAlreadyExistsAndAutoRemove('##', '##')){
                 insertInQuestionText('###', '###');
@@ -55,7 +55,7 @@ Template.markdownBar.events({
             }
         }
     },
-    "click #linkMarkdownButton": function (event) {
+    "click #linkMarkdownButton": function () {
         $("#hyperlinkInsertSplashContent").parents('.modal').modal('show');
 
         var textarea = document.getElementById('questionText');
@@ -70,17 +70,17 @@ Template.markdownBar.events({
             textarea.value = frontText + backText;
         }
     },
-    "click #unsortedListMarkdownButton": function (event) {
+    "click #unsortedListMarkdownButton": function () {
         if (!markdownAlreadyExistsAndAutoRemove('- ')){
             insertInQuestionText('- ');
         }
     },
-    "click #sortedListMarkdownButton": function (event) {
+    "click #sortedListMarkdownButton": function () {
         if (!markdownAlreadyExistsAndAutoRemove('1. ')){
             insertInQuestionText('1. ');
         }
     },
-    "click #latexMarkdownButton": function (event) {
+    "click #latexMarkdownButton": function () {
         if (!markdownAlreadyExistsAndAutoRemove('\\(', '\\)')){
             if (!markdownAlreadyExistsAndAutoRemove('$$', '$$')) {
                 insertInQuestionText('\\(', '\\)');
@@ -89,17 +89,17 @@ Template.markdownBar.events({
             insertInQuestionText('$$', '$$');
         }
     },
-    "click #codeMarkdownButton": function (event) {
+    "click #codeMarkdownButton": function () {
         if (!markdownAlreadyExistsAndAutoRemove('<hlcode>', '</hlcode>')){
             insertInQuestionText('<hlcode>', '</hlcode>');
         }
     },
-    "click #commentMarkdownButton": function (event) {
+    "click #commentMarkdownButton": function () {
         if (!markdownAlreadyExistsAndAutoRemove('>')) {
             insertInQuestionText('>');
         }
     },
-    "click #pictureMarkdownButton": function (event) {
+    "click #pictureMarkdownButton": function () {
         $("#pictureInsertSplashContent").parents('.modal').modal('show');
 
         var textarea = document.getElementById('questionText');
@@ -114,7 +114,7 @@ Template.markdownBar.events({
             textarea.value = frontText + backText;
         }
     },
-    "click #youtubeMarkdownButton": function (event) {
+    "click #youtubeMarkdownButton": function () {
         $("#youtubeInsertSplashContent").parents('.modal').modal('show');
 
         var textarea = document.getElementById('questionText');
@@ -129,7 +129,7 @@ Template.markdownBar.events({
             textarea.value = frontText + backText;
         }
     },
-    "click #vimeoMarkdownButton": function (event) {
+    "click #vimeoMarkdownButton": function () {
         $("#vimeoInsertSplashContent").parents('.modal').modal('show');
 
         var textarea = document.getElementById('questionText');
@@ -147,7 +147,7 @@ Template.markdownBar.events({
 });
 
 Template.hyperlinkInsertSplash.events({
-    "click #js-btn-saveHyperlink": function (event) {
+    "click #js-btn-saveHyperlink": function () {
         var linkText = document.getElementById('hyperlinkText').value;
         var linkDestination = document.getElementById('hyperlinkDestination').value;
         insertInQuestionText('[' + linkText + '](' + linkDestination + ')');
@@ -155,7 +155,7 @@ Template.hyperlinkInsertSplash.events({
         $('#hyperlinkDestination').val("");
         closeSplashscreen();
     },
-    "click #js-btn-closeHyperlink": function (event) {
+    "click #js-btn-closeHyperlink": function () {
         $('#hyperlinkText').val("");
         $('#hyperlinkDestination').val("");
         closeSplashscreen();
@@ -163,7 +163,7 @@ Template.hyperlinkInsertSplash.events({
 });
 
 Template.pictureInsertSplash.events({
-    "click #js-btn-savePicture": function (event) {
+    "click #js-btn-savePicture": function () {
         var linkText = document.getElementById('pictureText').value;
         var linkDestination = document.getElementById('pictureDestination').value;
         insertInQuestionText('![' + linkText + '](' + linkDestination + ' "autoxautoxleft")');
@@ -171,7 +171,7 @@ Template.pictureInsertSplash.events({
         $('#pictureDestination').val("");
         closeSplashscreen();
     },
-    "click #js-btn-closePicture": function (event) {
+    "click #js-btn-closePicture": function () {
         $('#pictureText').val("");
         $('#pictureDestination').val("");
         closeSplashscreen();
@@ -179,7 +179,7 @@ Template.pictureInsertSplash.events({
 });
 
 Template.youtubeInsertSplash.events({
-    "click #js-btn-saveYoutube": function (event) {
+    "click #js-btn-saveYoutube": function () {
         var linkText = document.getElementById('youtubeText').value;
         var linkDestination = document.getElementById('youtubeDestination').value;
         var picUrl = linkDestination.replace("www.", "img.").replace("watch?v=", "vi/").concat("/0.jpg");
@@ -188,7 +188,7 @@ Template.youtubeInsertSplash.events({
         $('#youtubeDestination').val("");
         closeSplashscreen();
     },
-    "click #js-btn-closeYoutube": function (event) {
+    "click #js-btn-closeYoutube": function () {
         $('#youtubeText').val("");
         $('#youtubeDestination').val("");
         closeSplashscreen();
@@ -196,7 +196,7 @@ Template.youtubeInsertSplash.events({
 });
 
 Template.vimeoInsertSplash.events({
-    "click #js-btn-saveVimeo": function (event) {
+    "click #js-btn-saveVimeo": function () {
         var linkText = document.getElementById('vimeoText').value;
         var linkDestination = document.getElementById('vimeoDestination').value;
         var videoId = linkDestination.substr(linkDestination.lastIndexOf("/") + 1);
@@ -207,7 +207,7 @@ Template.vimeoInsertSplash.events({
         $('#vimeoDestination').val("");
         closeSplashscreen();
     },
-    "click #js-btn-closeVimeo": function (event) {
+    "click #js-btn-closeVimeo": function () {
         $('#vimeoText').val("");
         $('#vimeoDestination').val("");
         closeSplashscreen();
@@ -242,39 +242,35 @@ function markdownAlreadyExistsAndAutoRemove (textStart, textEnd) {
     var strPosBegin = textarea.selectionStart;
     var strPosEnd = textarea.selectionEnd;
 
-    //if (strPosBegin == strPosEnd) {
-        textEnd = typeof textEnd !== 'undefined' ? textEnd : '';
-        var textEndExists = false;
-        var textStartExists = false;
+    textEnd = typeof textEnd !== 'undefined' ? textEnd : '';
+    var textEndExists = false;
+    var textStartExists = false;
 
-        if (textEnd.length > 0) {
-            if ((textarea.value).substring(strPosEnd, strPosEnd + textEnd.length) == textEnd) {
-                textEndExists = true;
-            }
-        } else {
+    if (textEnd.length > 0) {
+        if ((textarea.value).substring(strPosEnd, strPosEnd + textEnd.length) == textEnd) {
             textEndExists = true;
         }
+    } else {
+        textEndExists = true;
+    }
 
-        if ((textarea.value).substring(strPosBegin - textStart.length, strPosBegin) == textStart) {
-            textStartExists = true;
-        }
+    if ((textarea.value).substring(strPosBegin - textStart.length, strPosBegin) == textStart) {
+        textStartExists = true;
+    }
 
-        if (textStartExists && textEndExists) {
-            var frontText = (textarea.value).substring(0, strPosBegin - textStart.length);
-            var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
-            var backText = (textarea.value).substring(strPosEnd + textEnd.length, textarea.value.length);
-            textarea.value = frontText + middleText + backText;
-            textarea.selectionStart = strPosBegin - textStart.length;
-            textarea.selectionEnd = strPosEnd - (textEnd.length == 0 ? textStart.length : textEnd.length);
-            textarea.focus();
+    if (textStartExists && textEndExists) {
+        var frontText = (textarea.value).substring(0, strPosBegin - textStart.length);
+        var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
+        var backText = (textarea.value).substring(strPosEnd + textEnd.length, textarea.value.length);
+        textarea.value = frontText + middleText + backText;
+        textarea.selectionStart = strPosBegin - textStart.length;
+        textarea.selectionEnd = strPosEnd - (textEnd.length === 0 ? textStart.length : textEnd.length);
+        textarea.focus();
 
-            textarea.scrollTop = scrollPos;
+        textarea.scrollTop = scrollPos;
 
-            return true;
-        } else {
-            return false;
-        }
-    //} else {
-     //   return false;
-    //}
+        return true;
+    } else {
+        return false;
+    }
 }

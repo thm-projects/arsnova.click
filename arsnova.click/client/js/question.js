@@ -35,12 +35,12 @@ Template.questionT.helpers({
 });
 
 Template.questionT.events({
-    "click #setReadConfirmed": function(event){
+    "click #setReadConfirmed": function(){
         Meteor.call("MemberList.setReadConfirmed", {
             hashtag: Session.get("hashtag"),
             questionIndex: EventManager.findOne().readingConfirmationIndex,
             nick: Session.get("nick")
-        }, (err, res)=> {
+        }, (err)=> {
             if(err) {
                 $('.errorMessageSplash').parents('.modal').modal('show');
                 $("#errorMessage-text").html(err.reason);

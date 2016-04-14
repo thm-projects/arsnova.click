@@ -39,7 +39,9 @@ Template.createAnswerOptions.onRendered(function () {
     var body = $('body');
     body.on('click', '.questionIcon:not(.active)', function () {
         var currentSession = QuestionGroup.findOne();
-        if (!currentSession || index >= currentSession.questionList.length) return;
+        if (!currentSession || index >= currentSession.questionList.length) {
+            return;
+        }
 
         parseAnswerOptionInput(index);
         index = EventManager.findOne().questionIndex;
@@ -93,7 +95,7 @@ Template.createAnswerOptions.events({
                 isCorrect: 0
             };
 
-            Meteor.call('AnswerOptions.addOption', answerOption, (err, res) => {
+            Meteor.call('AnswerOptions.addOption', answerOption, (err) => {
                 if (err) {
                     $('.errorMessageSplash').parents('.modal').modal('show');
                     $("#errorMessage-text").html(err.reason);
@@ -112,7 +114,7 @@ Template.createAnswerOptions.events({
             });
         }
     },
-    "click #deleteAnswerOption": function (event) {
+    "click #deleteAnswerOption": function () {
         var answerOptionsCount = AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count();
         if (answerOptionsCount > 1) {
             $("#addAnswerOption").removeClass("hide");
@@ -133,10 +135,10 @@ Template.createAnswerOptions.events({
             }
         }
     },
-    "click #backButton": function (event) {
+    "click #backButton": function () {
         Router.go('/question');
     },
-    "click #forwardButton": function (event) {
+    "click #forwardButton": function () {
         var error = parseAnswerOptionInput(EventManager.findOne().questionIndex);
 
         if (error) {
@@ -178,11 +180,7 @@ function parseAnswerOptionInput(index) {
             answerText: text,
             isCorrect: isCorrect
         };
-        Meteor.call('AnswerOptions.updateAnswerTextAndIsCorrect', answer,
-            (err, res) => {
-                hasError = err;
-            }
-        );
+        Meteor.call('AnswerOptions.updateAnswerTextAndIsCorrect', answer, (err) => hasError = err);
     }
     return hasError;
 }

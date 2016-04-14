@@ -72,15 +72,14 @@ Template.hashtagManagement.events({
     "change #js-import": function (event) {
         var fileList = event.target.files;
         var fileReader = new FileReader();
-        fileReader.onload = function (fileLoadEvent) {
+        fileReader.onload = function () {
             var asJSON = JSON.parse(fileReader.result);
             Meteor.call("Hashtags.import",
                 {
                     privateKey: localData.getPrivateKey(),
                     data: asJSON
                 },
-                (err, res) => {
-                    console.log(err,res);
+                (err) => {
                     if (err) {
                         $('.errorMessageSplash').parents('.modal').modal('show');
                         $("#errorMessage-text").html(err.reason);
@@ -88,8 +87,7 @@ Template.hashtagManagement.events({
                     else {
                         localData.importFromFile(asJSON);
                         Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
-                            (err, res) => {
-                                console.log(err,res);
+                            (err) => {
                                 if (err) {
                                     $('.errorMessageSplash').parents('.modal').modal('show');
                                     $("#errorMessage-text").html("Es ist ein Fehler bei der Aktualisierung deiner Frage aufgetreten.");

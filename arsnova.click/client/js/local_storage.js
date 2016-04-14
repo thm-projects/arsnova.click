@@ -182,7 +182,9 @@ localData = {
             }
 
             for(var i = 0; i < sessionData.questionList.length; i++) {
-                if(!sessionData.questionList[i].answers) continue;
+                if(!sessionData.questionList[i].answers) {
+                    continue;
+                }
                 var answer = sessionData.questionList[i].answers;
                 delete sessionData.questionList[i].answers;
                 delete sessionData.questionList[i].isReadingConfirmationRequired;

@@ -24,6 +24,15 @@ Template.footer.helpers({
     isInHomePath: function () {
         return Router.current().route.path() === '/';
     },
+    isInMemberlistOrPollingPathAndIsInstructor: function () {
+        var currentRouterPath = Router.current().route.path();
+
+        if (Session.get("isOwner") && (currentRouterPath === '/memberlist' || currentRouterPath === '/results' || currentRouterPath === '/statistics')) {
+            return true;
+        } else {
+            return false;
+        }
+    },
     footerIsHidden: function () {
         var isFooterHidden = Session.get("footerIsHidden");
         if (!isFooterHidden) {
@@ -65,15 +74,26 @@ Template.footer.events({
             $("#footer-info-div").addClass("showStyle");
 
             Session.set("footerIsHidden", false);
-
-            // Do nothing - there is currently no option to hide the navbar again, to loss on usable space is too high as we can display the info-button and the navbar
-            /*$(".footer-info-bar").css("bottom", "15px");
-             $(".footer-info-bar").css("margin-bottom", "15px");
-             } else {
-
-             $("#footerBar").addClass("hide");
-             $(".footer-info-bar").css("bottom", "0px");
-             $(".footer-info-bar").css("margin-bottom", "2px");*/
+        }
+    },
+    "click #js-activate-fullscreen": function () {
+        if (!document.fullscreenElement &&    // alternative standard method
+            !document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) {
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) {
+                document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+            }
+        } else {
+            if (document.cancelFullScreen) {
+                document.cancelFullScreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitCancelFullScreen) {
+                document.webkitCancelFullScreen();
+            }
         }
     },
     "click .js-import-home": function () {

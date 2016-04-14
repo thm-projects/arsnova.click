@@ -181,7 +181,7 @@ function parseAnswerOptionInput(index) {
             answerText: text,
             isCorrect: isCorrect
         };
-        Meteor.call('AnswerOptions.updateAnswerTextAndIsCorrect', answer, (err) => setError(err));
+        Meteor.call('AnswerOptions.updateAnswerTextAndIsCorrect', answer, setError(err));
     }
     return hasError;
 }

@@ -131,7 +131,7 @@
             {{/each}}
         </div>
 
-        {{#if isOwner}}
+        {{#if isOwner}}{{#unless isRunningQuestion}}
             <div class="fixed-bottom">
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
@@ -143,36 +143,34 @@
                                 </button>
                             </div>
                             <div class="col-xs-6">
-                                {{#unless isRunningQuestion}}
-                                    {{#if showGlobalLeaderboardButton}}
-                                        {{#if hasCorrectAnswerOptions}}
-                                            <button class="button button-next disableOnActiveCountdown" id="goGlobalRanking">
-                                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                                <span class="ansBtn">Globale Rangliste</span>
-                                            </button>
-                                        {{/if}}
-                                    {{else}}
-                                        {{#if showNextQuestionButton}}
-                                            <button class="button button-next button-start disableOnActiveCountdown" id="showNextQuestionDialog">
-                                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                                <span class="ansBtn">Zeige Frage {{nextReadingConfirmationIndex}}
-                                                    / {{allQuestionCount}}</span>
-                                            </button>
-                                        {{else}}
-                                            <button class="button button-next button-start disableOnActiveCountdown" id="startNextQuestion">
-                                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                                <span class="ansBtn">Starte Runde {{nextQuestionIndex}}
-                                                    / {{allQuestionCount}}</span>
-                                            </button>
-                                        {{/if}}
+                                {{#if showGlobalLeaderboardButton}}
+                                    {{#if hasCorrectAnswerOptions}}
+                                        <button class="button button-next disableOnActiveCountdown" id="goGlobalRanking">
+                                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                            <span class="ansBtn">Globale Rangliste</span>
+                                        </button>
                                     {{/if}}
-                                {{/unless}}
+                                {{else}}
+                                    {{#if showNextQuestionButton}}
+                                        <button class="button button-next button-start disableOnActiveCountdown" id="showNextQuestionDialog">
+                                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                            <span class="ansBtn">Zeige Frage {{nextReadingConfirmationIndex}}
+                                                / {{allQuestionCount}}</span>
+                                        </button>
+                                    {{else}}
+                                        <button class="button button-next button-start disableOnActiveCountdown" id="startNextQuestion">
+                                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                            <span class="ansBtn">Starte Runde {{nextQuestionIndex}}
+                                                / {{allQuestionCount}}</span>
+                                        </button>
+                                    {{/if}}
+                                {{/if}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        {{else}}
+        {{/unless}}{{else}}
             {{> splashscreen lazyCloseJsClass='js-splashscreen-noLazyClose' noAutorun=true headername="Frage" templateName="questionT" type="splash-screen-show-readingConfirmation"}}
         {{/if}}
         {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Die Frage" templateName="questionContentSplash" type="splash-screen-show-question"}}

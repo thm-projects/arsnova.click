@@ -125,7 +125,6 @@ Template.votingview.events({
     },
     "click .sendResponse": function (event) {
         event.stopPropagation();
-        //if(Session.get("hasSendResponse") || Session.get("hasToggledResponse")) return;
 
         if (Session.get("questionSC")) {
             makeAndSendResponse(event.currentTarget.id);
@@ -170,6 +169,7 @@ function startCountdown(index) {
         if(index + 1 >= QuestionGroup.findOne().questionList.length) {
             Session.set("sessionClosed", true);
         }
+        Session.set("countdownInitialized", false);
         Router.go("/results");
     });
     Session.set("countdownInitialized", true);

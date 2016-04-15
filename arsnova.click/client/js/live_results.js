@@ -138,7 +138,7 @@ Template.live_results.helpers({
         return Session.get("sessionClosed");
     },
     showLeaderBoardButton: function (index) {
-        return (AnswerOptions.find({questionIndex: index, isCorrect: 1}).count() > 0);
+        return !Session.get("countdownInitialized") && (AnswerOptions.find({questionIndex: index, isCorrect: 1}).count() > 0);
     },
     isMC: function(index){
         return AnswerOptions.find({questionIndex: index, isCorrect: 1}).count() > 1;

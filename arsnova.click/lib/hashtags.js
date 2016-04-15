@@ -28,13 +28,5 @@ Hashtags.attachSchema(new SimpleSchema({
 		type: String,
 		min: 24,
 		max: 24
-	},
-	sessionStatus: {
-		type: Number,
-		min: 0,
-		max: 3
-	},
-	lastConnection: {
-		type: Number
 	}
 }));

@@ -83,6 +83,7 @@
 }
 
 .btn-learner {
+    outline: none !important;
     transform: translateX(-100%);
     transform: translateY(-100%);
     -webkit-transform: translateX(-100%);
@@ -200,16 +201,6 @@
     to {
         background-position: 0 0;
     }
-}
-
-.progress-bar {
-    background: white;
-    width: 100%;
-    text-align: left;
-    position: relative;
-    height: 40px;
-    color: black;
-    padding: 0px 10px;
 }
 
 .progress-bar-memberlist {

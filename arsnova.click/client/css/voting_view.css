@@ -69,3 +69,7 @@
 .buttonWrapper {
     text-align: center;
 }
+
+.answer-disabled {
+    opacity: 1 !important;
+}

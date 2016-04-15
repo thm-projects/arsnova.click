@@ -26,7 +26,7 @@ Template.footer.helpers({
     },
     footerIsHidden: function () {
         var isFooterHidden = Session.get("footerIsHidden");
-        if (isFooterHidden == undefined){
+        if (!isFooterHidden) {
             return true;
         } else {
             return isFooterHidden;
@@ -76,39 +76,41 @@ Template.footer.events({
              $(".footer-info-bar").css("margin-bottom", "2px");*/
         }
     },
-    "click .js-import-home": function (e) {
+    "click .js-import-home": function () {
         $(".js-import-input-home").trigger('click');
     },
     "click .js-import-input-home": function (event) {
         var fileList = event.target.files;
         var fileReader = new FileReader();
-        fileReader.onload = function (fileLoadEvent) {
+        fileReader.onload = function () {
             var asJSON = JSON.parse(fileReader.result);
             Meteor.call("Hashtags.import",
                 {
                     privateKey: localData.getPrivateKey(),
                     data: asJSON
                 },
-                (err, res) => {
+                (err) => {
                     if (err) {
                         $('.errorMessageSplash').parents('.modal').modal('show');
                         $("#errorMessage-text").html("Diese Sitzung existiert bereits!");
                     }
                     else {
                         localData.importFromFile(asJSON);
-                        Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
-                            (err, res) => {
-                                if (err) {
-                                    $('.errorMessageSplash').parents('.modal').modal('show');
-                                    $("#errorMessage-text").html("Es ist ein Fehler bei der Aktualisierung ihrer Frage aufgetreten.");
-                                }
-                                else {
-                                    Session.set("hashtag", asJSON.hashtagDoc.hashtag);
-                                    Session.set("isOwner", true);
-                                    Router.go("/memberlist");
-                                }
-                            }
-                        );
+												Meteor.call('EventManager.add', localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, function () {
+		                        Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
+		                            (err) => {
+		                                if (err) {
+		                                    $('.errorMessageSplash').parents('.modal').modal('show');
+		                                    $("#errorMessage-text").html("Es ist ein Fehler bei der Aktualisierung ihrer Frage aufgetreten.");
+		                                }
+		                                else {
+		                                    Session.set("hashtag", asJSON.hashtagDoc.hashtag);
+		                                    Session.set("isOwner", true);
+		                                    Router.go("/memberlist");
+		                                }
+		                            }
+		                        );
+												});
                     }
                 }
             );
@@ -117,4 +119,4 @@ Template.footer.events({
             fileReader.readAsBinaryString(fileList[i]);
         }
     }
-})
+});

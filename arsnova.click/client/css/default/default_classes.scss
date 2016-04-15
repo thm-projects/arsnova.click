@@ -96,7 +96,7 @@
   font-weight: 800;
   color: $input-group-letter-color;
   min-width: 50px;
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 .button:hover, .button:active:focus {
@@ -145,6 +145,7 @@
   top: 1px;
   color: #ffffff;
   font-weight: bolder;
+  padding: 0 10px;
 }
 
 .button-result .progress {

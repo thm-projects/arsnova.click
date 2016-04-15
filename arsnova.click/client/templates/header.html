@@ -51,6 +51,9 @@
                                 <p class="emergency-button-text">Not Aus !</p>
                             </div>
                         </div>
+                        {{#if isEditingQuestion}}
+                            {{> questionList}}
+                        {{/if}}
                     </div>
 
                 {{/if}}

@@ -17,11 +17,15 @@
  */
 
 Template.questionPreviewSplash.onRendered(function () {
-    $('.modal-dialog').width($('#mainContentContainer').width() - 40);
+    calculateAndSetPreviewSplashWidthAndHeight();
     $(window).resize(function () {
-        $('.modal-dialog').width($('#mainContentContainer').width() - 40);
+        calculateAndSetPreviewSplashWidthAndHeight();
     });
 });
+
+function calculateAndSetPreviewSplashWidthAndHeight() {
+    $('.modal-dialog').width($('#mainContentContainer').width() - 40);
+}
 
 Template.questionPreviewSplash.events({
     "click #js-btn-hidePreviewModal": function () {

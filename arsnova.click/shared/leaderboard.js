@@ -17,14 +17,16 @@
  */
 
 Meteor.methods({
-    'LeaderBoard.addResponseSet': function ({phashtag, nick, responseTimeMillis}) {
+    'LeaderBoard.addResponseSet': function ({phashtag, questionIndex, nick, responseTimeMillis}) {
         if (Meteor.isServer){
             new SimpleSchema({
                 phashtag: {type: String},
+                questionIndex: {type: Number},
                 nick: {type: String},
                 responseTimeMillis: {type: Number}
             }).validate({
                 phashtag,
+                questionIndex,
                 nick,
                 responseTimeMillis
             });
@@ -33,6 +35,7 @@ Meteor.methods({
 
             AnswerOptions.find({
                 hashtag: phashtag,
+                questionIndex: questionIndex,
                 isCorrect: 1
             }, {fields: {"answerOptionNumber": 1}}).forEach(function (answer) {
                 correctAnswers.push(answer.answerOptionNumber);
@@ -41,8 +44,8 @@ Meteor.methods({
             var responseAmount = 0;
             var falseResponseAmount = 0;
 
-            Responses.find({hashtag: phashtag, userNick: nick}).forEach(function (response) {
-                if (correctAnswers.indexOf(response.answerOptionNumber) == -1){
+            Responses.find({hashtag: phashtag, questionIndex: questionIndex, userNick: nick}).forEach(function (response) {
+                if (correctAnswers.indexOf(response.answerOptionNumber) === -1){
                     falseResponseAmount++;
                 }
                 responseAmount++;
@@ -52,12 +55,14 @@ Meteor.methods({
 
             var memberEntry = LeaderBoard.findOne({
                 hashtag: phashtag,
+                questionIndex: questionIndex,
                 userNick: nick
             });
 
             if (!memberEntry) {
                 LeaderBoard.insert({
                     hashtag: phashtag,
+                    questionIndex: questionIndex,
                     userNick: nick,
                     responseTimeMillis: responseTimeMillis,
                     givenAnswers: responseAmount,

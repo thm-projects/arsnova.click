@@ -16,38 +16,37 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Template.questionT.onRendered(function () {
-    var sessionDoc = Sessions.findOne({hashtag: Session.get("hashtag")});
-    var content = "";
-    if (sessionDoc) {
-        mathjaxMarkdown.initializeMarkdownAndLatex();
-        var questionText = sessionDoc.questionText;
-        content = mathjaxMarkdown.getContent(questionText);
-    }
-
-    $('#questionTText').html(content);
-});
-
 Template.questionT.onCreated(function () {
-    this.autorun(() => {
-        this.subscribe('AnswerOptions.options', Session.get("hashtag"));
-    this.subscribe('Sessions.question', Session.get("hashtag"));
+    this.subscribe("EventManager.join",Session.get("hashtag"));
+    this.subscribe('AnswerOptions.options', Session.get("hashtag"));
+    this.subscribe('QuestionGroup.questionList', Session.get("hashtag"));
+    this.subscribe('MemberList.members', Session.get("hashtag"));
 });
-})
-;
+
+Template.questionT.onRendered(function () {
+    
+});
 
 Template.questionT.helpers({
     answ: function () {
-        const answers = AnswerOptions.find({hashtag: Session.get("hashtag")});
-        if (!answers) {
-            return "";
-        }
-        return answers;
+        const answers = AnswerOptions.find({questionIndex: EventManager.findOne().readingConfirmationIndex});
+        return answers ? answers : "";
     }
 });
 
 Template.questionT.events({
-    "click #setReadConfirmed": function(event){
-        Meteor.call("MemberList.setReadConfirmed",Session.get("hashtag"),Session.get("nick"));
+    "click #setReadConfirmed": function(){
+        Meteor.call("MemberList.setReadConfirmed", {
+            hashtag: Session.get("hashtag"),
+            questionIndex: EventManager.findOne().readingConfirmationIndex,
+            nick: Session.get("nick")
+        }, (err)=> {
+            if(err) {
+                $('.errorMessageSplash').parents('.modal').modal('show');
+                $("#errorMessage-text").html(err.reason);
+            } else {
+                closeSplashscreen();
+            }
+        });
     }
 });

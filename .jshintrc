@@ -2,6 +2,8 @@
 	"browser": true,
 	"esnext": true,
 	"undef": true,
+	"unused": true,
+	"curly": true,
 	"globals": {
 		"_": false,
 		"$": false,
@@ -22,6 +24,14 @@
 		"LeaderBoard": true,
 		"MemberList": true,
 		"Responses": true,
-		"Sessions": true
+		"QuestionGroup": true,
+
+		"EventManager": true,
+		"localData": true,
+		"mathjaxMarkdown": true,
+		"closeSplashscreen": true,
+		"showSplashscreen": true,
+		"closeAndRedirectTo": true,
+		"QuestionGroupSchema": true
 	}
 }

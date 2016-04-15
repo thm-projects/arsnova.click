@@ -18,18 +18,18 @@
 
 Template.header.onCreated(function () {
     this.autorun(() => {
-        this.subscribe('Hashtags.public', function(){
+        if(!Session.get("hashtag")) {
+            return;
+        }
+
+        this.subscribe('EventManager.join', Session.get("hashtag"), ()=>{
             var hashtagDocs = Hashtags.find();
 
             hashtagDocs.observe({
-                changed: function (doc, atIndex) {
+                changed: function (doc) {
                     if(doc.hashtag == Session.get("hashtag")){
-                        if ((doc.sessionStatus == 0) || ((doc.sessionStatus == 1) && (!Session.get("isOwner")))) {
-                            if (Session.get("isOwner")){
-                                Router.go("/");
-                            }else{
-                                Router.go("/resetToHome");
-                            }
+                        if (doc.sessionStatus === 0 || doc.sessionStatus === 1) {
+                            Router.go("/resetToHome");
                         }
                     }
                 }
@@ -52,6 +52,17 @@ Template.header.helpers({
     },
     currentHashtag: function () {
         return Session.get("hashtag");
+    },
+    isEditingQuestion: function () {
+        switch (Router.current().route.path()) {
+            case '/question':
+            case '/answeroptions':
+            case '/settimer':
+            case '/readconfirmationrequired':
+                return true;
+            default:
+                return false;
+        }
     }
 });
 

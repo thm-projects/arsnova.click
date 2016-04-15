@@ -38,7 +38,8 @@
   background: $splash-view-seconds-left-background-color;
 }
 
-.splash-screen-show-question {
+.splash-screen-show-question,
+.splash-screen-show-readingConfirmation {
   background: $splash-show-question-background-color;
 }
 
@@ -105,4 +106,24 @@
 
 .modal-backdrop {
   background-color: $background-color;
+}
+
+.videoImageContainer {
+  position: relative;
+}
+
+.videoImageContainer:after {
+  font-size: 500%;
+  position: absolute;
+  left: 50%; top: 50%;
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: "arsnova";
+  content: "\f01d";
+}
+
+.resizeableImage {
+  cursor: pointer;
 }

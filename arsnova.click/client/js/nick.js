@@ -17,9 +17,8 @@
  */
 
 Template.nick.onCreated(function () {
-    this.autorun(() => {
-        this.subscribe('MemberList.members', Session.get("hashtag"));
-    });
+    this.subscribe('MemberList.members', Session.get("hashtag"));
+    this.subscribe("EventManager.join",Session.get("hashtag"));
 });
 
 Template.nick.onRendered(function () {
@@ -27,7 +26,8 @@ Template.nick.onRendered(function () {
 });
 
 Template.nick.events({
-    "click #forwardButton": function () {
+    "click #forwardButton": function (event) {
+        event.stopPropagation();
         var nickname = $("#nickname-input-field").val();
         var bgColor = rgbToHex(getRandomInt(0, 255), getRandomInt(0, 255), getRandomInt(0, 255));
         Meteor.call('MemberList.addLearner', {
@@ -35,7 +35,7 @@ Template.nick.events({
             nick: nickname,
             backgroundColor: bgColor,
             foregroundColor: transformForegroundColor(hexToRgb(bgColor))
-        }, (err, res) => {
+        }, (err) => {
             if (err) {
                 $("#forwardButton").attr("disabled", "disabled");
                 $('.errorMessageSplash').parents('.modal').modal('show');
@@ -50,9 +50,8 @@ Template.nick.events({
         Router.go("/");
     },
     'input #nickname-input-field': function (event) {
-        var hashtag = Session.get("hashtag");
         var currentNickName = event.currentTarget.value;
-    var member = MemberList.findOne({nick: currentNickName});
+        var member = MemberList.findOne({nick: currentNickName});
 
         if (currentNickName.length > 2 && !member) {
             $("#forwardButton").removeAttr("disabled");
@@ -83,7 +82,7 @@ function hexToRgb (hex) {
 
 function componentToHex (c) {
     var hex = c.toString(16);
-    return hex.length == 1 ? "0" + hex : hex;
+    return hex.length === 1 ? "0" + hex : hex;
 }
 
 function rgbToHex (r, g, b) {

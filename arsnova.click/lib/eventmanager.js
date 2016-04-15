@@ -16,7 +16,32 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-button.down {
-  background: green;
-  box-shadow: none;
-}
+EventManager = new Mongo.Collection("eventmanager");
+
+var eventManagerScheme = new SimpleSchema({
+    hashtag: {
+        type: String,
+        min: 1,
+        max: 25
+    },
+    sessionStatus: {
+        type: Number,
+        min: 0,
+        max: 3
+    },
+    lastConnection: {
+        type: Number
+    },
+    readingConfirmationIndex: {
+        type: Number,
+        min: -1,
+        optional: true
+    },
+    questionIndex: {
+        type: Number,
+        min: -1,
+        optional: true
+    }
+});
+
+EventManager.attachSchema(eventManagerScheme);

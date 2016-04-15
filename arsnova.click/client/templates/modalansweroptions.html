@@ -18,10 +18,7 @@
 
 <template name="answerOptionsSplash">
     <div class="answerTextSplash">
-        {{#each answerOptions}}
-            {{answerOptionLetter answerOptionNumber}}<br/>
-            {{answerText}}<br/>
-        {{/each}}
+        <div id="answerOptionsTxt"></div>
         <button id="js-btn-hideQuestionModal" type="button" class="btn btn-success btn-answerOption btn-lg ">
             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
             Fenster schließen

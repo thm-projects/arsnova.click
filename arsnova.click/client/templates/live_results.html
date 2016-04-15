@@ -110,6 +110,18 @@
                                     {{/each}}
                                 </div>
                             </div>
+                        {{else}}
+                            {{#each readingConfirmationListForQuestion displayIndex}}
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <button class="btn btn-learner slide-top {{#if isOwnNick nick}}color-changing-own-nick{{/if}} "
+                                                id="{{_id}}"
+                                                style="background-color: {{backgroundColor}}; color:{{foregroundColor}}">
+                                            {{nick}}
+                                        </button>
+                                    </div>
+                                </div>
+                            {{/each}}
                         {{/if}}
                     </div>
                 </div>

@@ -21,7 +21,7 @@ var routeToLeaderboardTimer = null;
 var eventManagerObserver = null;
 var readingConfirmationTracker = null;
 
-    Template.live_results.onCreated(function () {
+Template.live_results.onCreated(function () {
     var oldStartTimeValues = {};
     var initQuestionIndex = -1;
     countdown = null;
@@ -260,6 +260,26 @@ Template.live_results.helpers({
     },
     hasReadConfirmationRequested: (index)=>{
         return index <= EventManager.findOne().questionIndex;
+    },
+    readingConfirmationListForQuestion: (index)=>{
+        let result = [];
+        let sortParamObj = Session.get('LearnerCountOverride') ? {lowerCaseNick: 1} : {insertDate: -1};
+        let ownNick = MemberList.findOne({nick:Session.get("nick")}, {limit: 1});
+        if ( !Session.get("isOwner") && ownNick.readConfirmed[index] ) {
+            result.push(ownNick);
+        }
+        MemberList.find({nick: {$ne: Session.get("nick")}}, {
+            limit: (Session.get("LearnerCount") - 1),
+            sort: sortParamObj
+        }).forEach(function (doc) {
+            if(doc.readConfirmed[index]) {
+                result.push(doc);
+            }
+        });
+        return result;
+    },
+    isOwnNick: (nick)=>{
+        return nick === Session.get("nick");
     }
 });
 

@@ -17,6 +17,8 @@
  */
 
 var countdown = null;
+var currentButton = 0;
+var countdownRunning = false;
 Template.votingview.onCreated(function () {
     Session.set("sessionClosed", undefined);
     countdown = null;
@@ -31,10 +33,12 @@ Template.votingview.onCreated(function () {
             }
             Session.set("responses", JSON.stringify(responseArr));
         });
+
         this.subscribe('QuestionGroup.questionList', Session.get("hashtag"), function () {
             Session.set("questionGroupSubscriptionReady", true);
         });
-        if(Session.get("questionGroupSubscriptionReady") && !Session.get("sessionClosed")) {
+        if(Session.get("questionGroupSubscriptionReady") && !Session.get("sessionClosed") && !countdownRunning) {
+            countdownRunning = true;
             startCountdown(EventManager.findOne().questionIndex);
         }
     });
@@ -164,13 +168,46 @@ function startCountdown(index) {
 
     var questionDoc = QuestionGroup.findOne().questionList[index];
     Session.set("sessionCountDown", questionDoc.timer);
-    countdown = new ReactiveCountdown(questionDoc.timer / 1000);
+    countdown = new ReactiveCountdown(questionDoc.timer / 1000,{
+        interval: 1000,
+        tick: function() {
+            var buttonsCount = $('.answer-row').children().length;
+            var lastButton = 0;
+            var secondsUntilNextRound = 3;
+
+            if(currentButton<=0) {
+                lastButton = buttonsCount-1;
+            } else {
+                lastButton = currentButton-1;
+            }
+
+            /* skip the selected answer options */
+            while ( $('#'+currentButton).hasClass('answer-selected') ) {
+                currentButton++;
+                if(currentButton>=buttonsCount) {
+                    currentButton = 0 - secondsUntilNextRound;
+                }
+            }
+
+            $('#' + lastButton).removeClass('button-green-transition');
+            $('#' + lastButton).addClass('button-purple-transition');
+            $('#' + currentButton).addClass('button-green-transition');
+            $('#' + currentButton).removeClass('button-purple-transition');
+
+            currentButton++;
+
+            if(currentButton>=buttonsCount) {
+                currentButton = 0 - secondsUntilNextRound;
+            }
+        }
+    });
     countdown.start(function () {
         if(index + 1 >= QuestionGroup.findOne().questionList.length) {
             Session.set("sessionClosed", true);
         }
         Session.set("countdownInitialized", false);
         Router.go("/results");
+        countdownRunning=false;
     });
     Session.set("countdownInitialized", true);
 }
@@ -208,20 +245,14 @@ function formatAnswerButtons () {
 
     var buttonHeight = 0;
     answerRow.children().removeClass('col-xs-12').removeClass('col-xs-6').removeClass('col-xs-4');
-
-    if (answerOptionsCount <= 3) {
-        answerButtonContainerHeight -= answerOptionsCount * 30;
+    if($(window).width() < 300) {
         answerRow.children().addClass('col-xs-12');
-        buttonHeight = answerButtonContainerHeight / answerOptionsCount;
-    } else if (answerOptionsCount <= 6) {
-        answerButtonContainerHeight -= Math.ceil((answerOptionsCount / 2)) * 30;
+    } else if (answerOptionsCount <= 6 || $(window).width() < 500) {
         answerRow.children().addClass('col-xs-6');
-        buttonHeight = answerButtonContainerHeight / (Math.ceil(answerOptionsCount / 2));
     } else {
-        answerButtonContainerHeight -= Math.ceil((answerOptionsCount / 3)) * 30;
         answerRow.children().addClass('col-xs-4');
-        buttonHeight = answerButtonContainerHeight / (Math.ceil(answerOptionsCount / 3));
     }
 
-    answerRow.find('button').css('height', buttonHeight + 'px');
+    answerRow.find('button').css('height', $('#0').width() + 'px');
+
 }

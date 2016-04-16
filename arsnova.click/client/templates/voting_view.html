@@ -44,8 +44,8 @@
 
     <div class="row answer-row">
         {{#each answerOptions}}
-            <div>
-                <button id="{{answerOptionNumber}}" class="sendResponse btn btn-answerOption btn-answerFont">
+            <div class="buttonWrapper">
+                <button id="{{answerOptionNumber}}" class="sendResponse btn btn-answerOption btn-answerFont button-purple">
                     {{answerOptionLetter number=answerOptionNumber}}
                 </button>
             </div>

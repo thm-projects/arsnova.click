@@ -67,6 +67,7 @@ localData = {
                 questionText: "",
                 timer: 40000,
                 isReadingConfirmationRequired: 1,
+                isSoundOn:1,
                 answers:[
                     {answerOptionNumber:0, answerText:"", isCorrect:0},
                     {answerOptionNumber:1, answerText:"", isCorrect:0},
@@ -86,6 +87,7 @@ localData = {
             questionText:"",
             timer: 40000,
             isReadingConfirmationRequired: 1,
+            isSoundOn: 1,
             answers:[
                 {answerOptionNumber:0, answerText:"", isCorrect:0},
                 {answerOptionNumber:1, answerText:"", isCorrect:0},
@@ -109,6 +111,24 @@ localData = {
             questionText: hashtagData.questionText,
             timer: hashtagData.timer,
             isReadingConfirmationRequired: isReadingConfirmationRequired,
+            answers: hashtagData.answers
+        }));
+    },
+
+    updateIsSoundOn: function (hashtag, isSoundOn) {
+        if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
+            return;
+        }
+        const hashtagString = localStorage.getItem(hashtag);
+        if (!hashtagString) {
+            return;
+        }
+        var hashtagData = JSON.parse(hashtagString);
+        localStorage.setItem(hashtag, JSON.stringify({
+            hashtag: hashtag,
+            questionText: hashtagData.questionText,
+            timer: hashtagData.timer,
+            isSoundOn: isSoundOn,
             answers: hashtagData.answers
         }));
     },
@@ -179,6 +199,12 @@ localData = {
             privateKey: localStorage.getItem("privateKey"),
             hashtag: hashtag,
             isReadingConfirmationRequired: sessionData.isReadingConfirmationRequired
+        });
+
+        Meteor.call("Sessions.updateIsSoundOn", {
+            privateKey: localStorage.getItem("privateKey"),
+            hashtag: hashtag,
+            isSoundOn: sessionData.isSoundOn
         });
 
         Meteor.call("Sessions.setTimer", {
@@ -273,6 +299,7 @@ localData = {
             questionText: data.sessionDoc.questionText,
             timer: data.sessionDoc.timer,
             isReadingConfirmationRequired: data.sessionDoc.isReadingConfirmationRequired,
+            isSoundOn: data.sessionDoc.isSoundOn,
             answers: answerOptionsLocalStorage
         };
         localStorage.setItem(hashtag, JSON.stringify(localDataObject));
@@ -290,7 +317,8 @@ localData = {
                 hashtag: localStorageData.hashtag,
                 questionText: localStorageData.questionText,
                 timer: localStorageData.timer,
-                isReadingConfirmationRequired: localStorageData.isReadingConfirmationRequired
+                isReadingConfirmationRequired: localStorageData.isReadingConfirmationRequired,
+                isSoundOn: localStorageData.isSoundOn
             };
             answerOptionsDoc = [];
             localStorageData.answers.forEach(function (answerOption) {
@@ -316,6 +344,7 @@ localData = {
                 questionText: "I am a question text. This is for testing purpose. Do you understand?",
                 timer: 180000,
                 isReadingConfirmationRequired: 1,
+                isSoundOn: 1,
                 answers: [
                     {
                         hashtag: "wpw",

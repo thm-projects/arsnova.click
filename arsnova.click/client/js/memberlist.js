@@ -236,6 +236,13 @@ Template.memberlist.helpers({
         }
         return doc.isReadingConfirmationRequired == 1;
     },
+    isSoundOn: function () {
+        const doc = Sessions.findOne({hashtag: Session.get("hashtag")});
+        if(!doc){
+            return;
+        }
+        return doc.isSoundOn == 1;
+    },
     isNotOwnerAndReadConfirmationNeeded: function () {
         const doc = Sessions.findOne({hashtag: Session.get("hashtag")});
         if(!doc){

@@ -38,7 +38,8 @@ Meteor.methods({
                     hashtag: hashtag,
                     questionText: questionText,
                     timer: 0,
-                    isReadingConfirmationRequired: 1
+                    isReadingConfirmationRequired: 1,
+                    isSoundOn: 1
                 });
             } else {
                 Sessions.update(session._id, {$set: {questionText: questionText}}, function (error) {
@@ -75,6 +76,34 @@ Meteor.methods({
                 Sessions.update(session._id, {$set: {isReadingConfirmationRequired: isReadingConfirmationRequired}}, function (error) {
                     if (error) {
                         throw new Meteor.Error('Sessions.updateIsReadConfirmationRequired', error);
+                        return;
+                    }
+                });
+            }
+        }
+    },
+    "Sessions.updateIsSoundOn": function ({privateKey, hashtag, isSoundOn}) {
+        new SimpleSchema({
+            isSoundOn: {
+                type: Number,
+                min: 0,
+                max: 1
+            }
+        }).validate({isSoundOn: isSoundOn});
+
+        var hashtagDoc = Hashtags.findOne({
+            hashtag: hashtag,
+            privateKey: privateKey
+        });
+        if (hashtagDoc) {
+            var session = Sessions.findOne({hashtag: hashtag});
+            if (!session) {
+                throw new Meteor.Error('Sessions.updateIsSoundOn: no access to session');
+                return;
+            } else {
+                Sessions.update(session._id, {$set: {isSoundOn: isSoundOn}}, function (error) {
+                    if (error) {
+                        throw new Meteor.Error('Sessions.updateIsSoundOn', error);
                         return;
                     }
                 });

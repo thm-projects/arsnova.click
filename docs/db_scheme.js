@@ -81,6 +81,11 @@ sessions: {
         type: Number,
         min: 0,
         max: 1
+    },
+    isSoundOn:{
+        type: Number,
+            min: 0,
+            max: 1
     }
 }
 

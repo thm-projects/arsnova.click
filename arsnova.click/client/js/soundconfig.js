@@ -1,6 +1,25 @@
 
 Session.setDefault("slider2", 80);
 
+Template.soundConfig.onCreated(function () {
+    this.autorun(() => {
+        this.subscribe('Sessions.instructor', localData.getPrivateKey(), Session.get("hashtag"));
+});
+});
+
+Template.soundConfig.helpers({
+    isSoundOn:function () {
+
+        var thisSession = Sessions.findOne({hashtag:Session.get("hashtag")});
+        if (!thisSession) {
+            return false;
+        }
+        return thisSession.isSoundOn;
+    }
+});
+
+
+
 
 Template.soundConfig.rendered = function () {
 
@@ -36,9 +55,6 @@ Template.soundConfig.helpers({
     }
 });
 
-
-
-
 Template.soundConfig.events({
     "change #soundSelect": function(evt) {
 
@@ -67,7 +83,10 @@ case "Song3":
     }
     },
     "click #js-btn-playMusic": function(event){
-        buzzsound1.play();
+        const doc = Sessions.findOne({hashtag: Session.get("hashtag")});
+        if(doc.isSoundOn==1){
+            buzzsound1.play();
+        }
     },
     "click #js-btn-stopMusic": function(event){
         buzzsound1.stop();
@@ -76,9 +95,36 @@ case "Song3":
         buzzsound1.stop();
     },
     "click #js-btn-hideSoundModal": function(event){
+        localData.updateIsSoundOn(Session.get("hashtag"), Sessions.findOne({hashtag: Session.get("hashtag")}).isSoundOn);
         $('#soundModal').modal("hide");
         buzzsound1.stop();
-    }
+    },
 
+
+    'click #isSoundOnButton': function (event) {
+        buzzsound1.stop();
+        event.preventDefault();
+
+        var newVal = 0;
+        var sessionDoc = Sessions.findOne({hashtag:Session.get("hashtag")});
+        if (sessionDoc) {
+            if (!sessionDoc.isSoundOn) {
+                newVal = 1;
+            }
+        }
+        Meteor.call("Sessions.updateIsSoundOn", {
+            privateKey: localData.getPrivateKey(),
+            hashtag: Session.get("hashtag"),
+            isSoundOn: newVal
+        });
+
+        var btn = $('#isSoundOnButton');
+        btn.toggleClass("down");
+        if(btn.hasClass("down")){
+            btn.html("Sound ist aktiv!");
+        }else{
+            btn.html("Sound ist inaktiv!");
+        }
+    }
 
 });

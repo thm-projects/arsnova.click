@@ -81,7 +81,12 @@ Template.live_results.onCreated(function () {
                                 image.src="/images/gelb0.gif";
                                 image1.fadeIn(500);
                                 image1.fadeOut(500);
-                                f.play();
+
+                                const doc = Sessions.findOne({hashtag: Session.get("hashtag")});
+                                if(doc.isSoundOn==1){
+                                    f.play();
+                                }
+
                             }
 
                         }
@@ -89,7 +94,10 @@ Template.live_results.onCreated(function () {
                 });
 
                 buzzsound1.setVolume(globalVolume);
-                buzzsound1.play();
+                const doc = Sessions.findOne({hashtag: Session.get("hashtag")});
+                if(doc.isSoundOn==1){
+                    buzzsound1.play();
+                }
                 countdown.start(function () {
                     buzzsound1.stop();
                     Session.set("sessionClosed", true);

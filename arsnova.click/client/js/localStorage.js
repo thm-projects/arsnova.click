@@ -139,19 +139,6 @@ localData = {
         localStorage.setItem(hashtag, JSON.stringify(sessionData));
     },
 
-    addVolume: function (hashtag, volume) {
-        if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
-            return;
-        }
-        const sessionDataString = localStorage.getItem(hashtag);
-        if (!sessionDataString) {
-            return;
-        }
-        const sessionData = JSON.parse(sessionDataString);
-        sessionData.volume = volume;
-        localStorage.setItem(hashtag, JSON.stringify(sessionData));
-    },
-
     addAnswers : function({hashtag,  answerOptionNumber, answerText, isCorrect}){
         if(!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
             return;

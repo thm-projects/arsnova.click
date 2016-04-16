@@ -1,3 +1,4 @@
+/* globals _paq: true */
 _paq = [
     ["trackPageView"],
     ["enableLinkTracking"],

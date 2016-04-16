@@ -58,15 +58,14 @@ Template.header.helpers({
 Template.header.events({
     'click .kill-session-switch': function () {
         if (Session.get("isOwner")){
+            buzzsound1.stop();
             Meteor.call("Main.killAll", localData.getPrivateKey(), Session.get("hashtag"));
             Router.go("/");
         }
     },
     'click .sound-button': function () {
-        $('.soundConfig').parents('.modal').modal({backdrop:'static'});
+        $('#soundModal').modal({backdrop: 'static', keyboard: false});
 
-        var content = "";
-        $('.soundConfig ').html(content);
 
     }
 });

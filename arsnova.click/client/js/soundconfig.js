@@ -3,10 +3,11 @@ Session.setDefault("slider2", 80);
 
 
 Template.soundConfig.rendered = function () {
-    $('.soundConfig').parents('.modal').modal({backdrop: 'static', keyboard: false});
 
 
-    buzzsound1= new buzz.sound('/sounds/Waity.mp3');
+    buzzsound1= new buzz.sound('/sounds/Waity.mp3', {
+        loop: true
+    });
     globalVolume=80;
 
     this.$("#slider2").noUiSlider({
@@ -44,16 +45,22 @@ Template.soundConfig.events({
     switch ($(evt.target).val()) {
 case "Song1":
     buzzsound1.stop();
-    buzzsound1= new buzz.sound('/sounds/Waity.mp3');
+    buzzsound1= new buzz.sound('/sounds/Waity.mp3', {
+        loop: true
+    });
     break;
 
 case "Song2":
     buzzsound1.stop();
-    buzzsound1 = new buzz.sound('/sounds/Jazzy.mp3');
+    buzzsound1 = new buzz.sound('/sounds/Jazzy.mp3', {
+        loop: true
+    });
     break;
 case "Song3":
     buzzsound1.stop();
-    buzzsound1 = new buzz.sound('/sounds/MarioWaity.mp3');
+    buzzsound1 = new buzz.sound('/sounds/MarioWaity.mp3', {
+        loop: true
+    });
     break;
 
 
@@ -69,7 +76,7 @@ case "Song3":
         buzzsound1.stop();
     },
     "click #js-btn-hideSoundModal": function(event){
-        $('.js-splashscreen-noLazyClose').modal("hide");
+        $('#soundModal').modal("hide");
         buzzsound1.stop();
     }
 

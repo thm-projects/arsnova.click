@@ -33,10 +33,6 @@ Sessions.attachSchema(new SimpleSchema({
 		type: Number,
 		min: 0
 	},
-	volume: {
-		type: Number,
-		min: 0
-	},
 	isReadingConfirmationRequired: {
 		type: Number,
 		min: 0,

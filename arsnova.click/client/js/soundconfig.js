@@ -1,4 +1,3 @@
-
 Session.setDefault("slider2", 80);
 
 Template.soundConfig.onCreated(function () {
@@ -9,7 +8,6 @@ Template.soundConfig.onCreated(function () {
 
 Template.soundConfig.helpers({
     isSoundOn:function () {
-
         var thisSession = Sessions.findOne({hashtag:Session.get("hashtag")});
         if (!thisSession) {
             return false;
@@ -18,12 +16,7 @@ Template.soundConfig.helpers({
     }
 });
 
-
-
-
 Template.soundConfig.rendered = function () {
-
-
     buzzsound1= new buzz.sound('/sounds/Waity.mp3', {
         loop: true
     });
@@ -36,7 +29,6 @@ Template.soundConfig.rendered = function () {
             'max': 100
         }
     }).on('slide', function (ev, val) {
-        //
         Session.set('slider2', Math.round(val));
         globalVolume=Math.round(val);
         buzzsound1.setVolume(globalVolume);
@@ -57,30 +49,26 @@ Template.soundConfig.helpers({
 
 Template.soundConfig.events({
     "change #soundSelect": function(evt) {
-
-    switch ($(evt.target).val()) {
-case "Song1":
-    buzzsound1.stop();
-    buzzsound1= new buzz.sound('/sounds/Waity.mp3', {
-        loop: true
-    });
-    break;
-
-case "Song2":
-    buzzsound1.stop();
-    buzzsound1 = new buzz.sound('/sounds/Jazzy.mp3', {
-        loop: true
-    });
-    break;
-case "Song3":
-    buzzsound1.stop();
-    buzzsound1 = new buzz.sound('/sounds/MarioWaity.mp3', {
-        loop: true
-    });
-    break;
-
-
-    }
+        switch ($(evt.target).val()) {
+            case "Song1":
+                buzzsound1.stop();
+                buzzsound1= new buzz.sound('/sounds/Waity.mp3', {
+                    loop: true
+                });
+                break;
+            case "Song2":
+                buzzsound1.stop();
+                buzzsound1 = new buzz.sound('/sounds/Jazzy.mp3', {
+                    loop: true
+                });
+                break;
+            case "Song3":
+                buzzsound1.stop();
+                buzzsound1 = new buzz.sound('/sounds/MarioWaity.mp3', {
+                    loop: true
+                });
+                break;
+        }
     },
     "click #js-btn-playMusic": function(event){
         const doc = Sessions.findOne({hashtag: Session.get("hashtag")});
@@ -99,7 +87,6 @@ case "Song3":
         $('#soundModal').modal("hide");
         buzzsound1.stop();
     },
-
 
     'click #isSoundOnButton': function (event) {
         buzzsound1.stop();
@@ -126,5 +113,4 @@ case "Song3":
             btn.html("Sound ist inaktiv!");
         }
     }
-
 });

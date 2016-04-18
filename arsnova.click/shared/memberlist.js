@@ -45,6 +45,25 @@ Meteor.methods({
             insertDate: new Date().getTime()
         });
     },
+    'MemberList.removeLearner': function (privateKey, hashtag, nick_id) {
+        if(Meteor.isClient) {
+            return;
+        }
+
+        new SimpleSchema({
+            hashtag: {type: String},
+            nick_id: {type: String}
+        }).validate({
+            hashtag,
+            nick_id
+        });
+
+        if( !Hashtags.findOne({privateKey: privateKey, hashtag: hashtag}) ) {
+            throw new Meteor.Error('MemberList.removeLearner', 'Either the hashtag isn\'t available or the key is wrong');
+        }
+
+        MemberList.remove({ hashtag: hashtag, _id: nick_id });
+    },
     'MemberList.setReadConfirmed': function ({hashtag, questionIndex, nick}) {
         /*
          TODO Everybody can set "readConfirmed" for each user!

@@ -202,8 +202,11 @@ Template.memberlist.helpers({
     invisibleLearnerCount: function () {
         return MemberList.find().count() - Session.get("LearnerCount");
     },
-    getTitleText: function () {
-        return 'Quiz-Lobby - ' + MemberList.find().count() + " Teilnehmer";
+    titleText: function () {
+        return 'Quiz-Lobby ... ';
+    },
+    memberlistCount: function () {
+        return MemberList.find().count();
     }
 });
 

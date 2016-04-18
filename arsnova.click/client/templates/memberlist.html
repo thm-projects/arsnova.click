@@ -18,7 +18,16 @@
 
 <template name="memberlist">
     {{#if isOwner}}
-        {{> titel titelText = getTitleText }}
+        <div class="row row-padding-bottom">
+            <div class="col-xs-3 top-bar-content">
+                <span class="glyphicon icon-top-bar glyphicon-user glyphicon-style center" aria-hidden="true">
+                    <div class="titel">{{memberlistCount}}</div>
+                </span>
+            </div>
+            <div class="col-xs-7 text-center">
+                <div id="appTitle" class="titel subtitel-padding-top">{{titleText}}</div>
+            </div>
+        </div>
     {{/if}}
     <div class="row">
         <div class="col-md-12 contentFrame">

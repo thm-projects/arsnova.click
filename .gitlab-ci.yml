@@ -31,6 +31,7 @@ build-and-deploy:
   script:
     - test -d package-metadata && rm -rf /opt/meteor/package-metadata && mv package-metadata /opt/meteor/
     - cd "$CI_PROJECT_DIR/$PROJECT_PATH"
+    - printf "browser\nserver\n" > .meteor/platforms
     - meteor --verbose build --directory --server "$STAGING_HTTP_URL" build
     - chmod -R a+rX,ug+w build
     - eval $(ssh-agent -s)

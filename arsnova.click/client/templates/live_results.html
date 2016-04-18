@@ -68,9 +68,7 @@
                                                     class="btn btn-info btn-lg btn-answerOption">
                                                 <span class="glyphicon glyphicon-question-sign glyph-left"
                                                       aria-hidden="true"></span>
-                                                <span class="ansBtn">Frage & Antworten</span>
-                                                <span class="glyphicon glyphicon-th-list glyph-right"
-                                                      aria-hidden="true"></span>
+                                                <span class="ansBtn">Frage</span>
                                             </button>
                                         </div>
                                     </div>
@@ -187,7 +185,7 @@
         {{> splashscreen lazyCloseJsClass='js-splashscreen-noLazyClose' noAutorun=true headername="Frage" templateName="questionT" type="splash-screen-show-readingConfirmation"}}
         {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Die Frage" templateName="questionContentSplash" type="splash-screen-show-question"}}
         {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Die Antworten" templateName="answerOptionsSplash" type="splash-screen-show-question"}}
-        {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Frage & Antworten" templateName="questionAndAnswerContentSplash" type="splash-screen-show-question"}}
+        {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true templateName="questionAndAnswerContentSplash" type="splash-screen-show-question"}}
         {{> errorSplashscreen }}
     </div>
 </template>
@@ -196,7 +194,7 @@
     <div class="questionAndAnswerTextSplash">
         <h3>Frage:</h3>
         <div id="questionText"></div>
-        <h3>Antworten:</h3>
+        <h3>Antwortoptionen:</h3>
         <div id="answerOptionsTxt"></div>
         <button id="js-btn-hideQuestionModal" type="button" class="btn btn-success btn-answerOption btn-lg ">
             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>

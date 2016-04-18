@@ -207,7 +207,7 @@ Template.memberlist.helpers({
 
 Template.kickMemberConfirmation.helpers({
     kicked_nick_name: function () {
-        return Session.get("nickToBeKicked").nick_name;
+        return Session.get("nickToBeKicked") ? Session.get("nickToBeKicked").nick_name : "";
     }
 });
 

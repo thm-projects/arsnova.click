@@ -563,7 +563,10 @@ function startReadingConfirmationTracker() {
                     }
 
                     if(Session.get("isOwner")) {
-                        $('#setReadConfirmed').remove();
+                        $('#setReadConfirmed').text("Fenster schließen").parent().on('click', '#setReadConfirmed', function (event) {
+                            event.stopPropagation();
+                            closeSplashscreen();
+                        });
                     }
                 }
             });

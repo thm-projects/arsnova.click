@@ -111,17 +111,22 @@
                                 </div>
                             </div>
                         {{else}}
-                            {{#each readingConfirmationListForQuestion displayIndex}}
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-6 col-md-4">
-                                        <button class="btn btn-learner slide-top {{#if isOwnNick nick}}color-changing-own-nick{{/if}} "
-                                                id="{{_id}}"
-                                                style="background-color: {{backgroundColor}}; color:{{foregroundColor}}">
-                                            {{nick}}
+                            {{#if showMoreButton displayIndex}}
+                                <div class="row more-learners-row">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-more-learners">
+                                            <span class="glyphicon glyphicon-align-justify"></span>
+                                            (Zeige {{invisibleLearnerCount displayIndex}} weitere)
                                         </button>
                                     </div>
                                 </div>
-                            {{/each}}
+                            {{/if}}
+                            <div class="row learner-list margin-title"
+                                 id="learner-list">
+                                {{#each readingConfirmationListForQuestion displayIndex}}
+                                    {{>readingConfirmedLearner}}
+                                {{/each}}
+                            </div>
                         {{/if}}
                     </div>
                 </div>
@@ -188,6 +193,16 @@
         {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Die Frage" templateName="questionContentSplash" type="splash-screen-show-question"}}
         {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Die Antworten" templateName="answerOptionsSplash" type="splash-screen-show-question"}}
         {{> errorSplashscreen }}
+    </div>
+</template>
+
+<template name="readingConfirmedLearner">
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        <button class="btn btn-learner slide-top {{#if isOwnNick nick}}color-changing-own-nick{{/if}} "
+                id="{{_id}}"
+                style="background-color: {{backgroundColor}}; color:{{foregroundColor}}">
+            {{nick}}
+        </button>
     </div>
 </template>
 

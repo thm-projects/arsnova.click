@@ -28,7 +28,19 @@ Template.footer.helpers({
         var currentRouterPath = Router.current().route.path();
 
         if (Session.get("isOwner") && (currentRouterPath === '/memberlist' || currentRouterPath === '/results' || currentRouterPath === '/statistics')) {
-            return true;
+            // TODO currently not working in IE and Webkit
+            var ua = window.navigator.userAgent;
+            var msie = ua.indexOf("MSIE ");
+            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)){
+                // is IE
+                return false;
+            } else if ((/Safari/.test(ua) && /Apple Computer/.test(navigator.vendor)) ||
+                        (/Chrome/.test(ua) && /Google Inc/.test(navigator.vendor))) {
+                // is webkit
+                return false;
+            } else {
+                return true;
+            }
         } else {
             return false;
         }
@@ -83,17 +95,21 @@ Template.footer.events({
                 document.documentElement.requestFullscreen();
             } else if (document.documentElement.mozRequestFullScreen) {
                 document.documentElement.mozRequestFullScreen();
-            } else if (document.documentElement.webkitRequestFullscreen) {
+                // TODO webkit is currently not working!
+            } /*else if (document.documentElement.webkitRequestFullscreen) {
                 document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-            }
+            }*/
         } else {
             if (document.cancelFullScreen) {
                 document.cancelFullScreen();
-            } else if (document.mozCancelFullScreen) {
+            } else if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }else if (document.mozCancelFullScreen) {
                 document.mozCancelFullScreen();
-            } else if (document.webkitCancelFullScreen) {
+                // TODO webkit is currently not working!
+            } /*else if (document.webkitCancelFullScreen) {
                 document.webkitCancelFullScreen();
-            }
+            }*/
         }
     },
     "click .js-import-home": function () {

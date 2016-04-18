@@ -24,6 +24,23 @@ Template.questionList.onCreated(function () {
     });
 });
 
+Template.questionList.onRendered(function () {
+    let valid_questions = Session.get("valid_questions");
+    let allValid = true;
+    for(var i = 0; i < valid_questions.length; i++) {
+        if(valid_questions[i] !== true) {
+            allValid = false;
+            break;
+        }
+    }
+    if(allValid) {
+        Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
+        Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), 0);
+        Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 2);
+        Router.go("/memberlist");
+    }
+});
+
 Template.questionList.helpers({
     question: function () {
         var doc = QuestionGroup.findOne();

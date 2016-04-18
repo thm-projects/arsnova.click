@@ -235,8 +235,7 @@ function formatAnswerButtons () {
         }, 100);
         return;
     }
-
-    var buttonHeight = 0;
+    
     answerRow.children().removeClass('col-xs-12').removeClass('col-xs-6').removeClass('col-xs-4');
     if($(window).width() < 300) {
         answerRow.children().addClass('col-xs-12');

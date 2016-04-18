@@ -94,31 +94,10 @@ Template.live_results.onDestroyed(function () {
 });
 
 Template.live_results.onRendered(()=>{
-    if (!Session.get("isOwner")) {
-        readingConfirmationTracker = Tracker.autorun(()=> {
-            if (EventManager.findOne()) {
-                EventManager.find().observeChanges({
-                    changed: function (id, changedFields) {
-                        if (!isNaN(changedFields.readingConfirmationIndex)) {
-                            $('.splash-screen-show-readingConfirmation').parents('.modal').modal();
-                            var questionDoc = QuestionGroup.findOne();
-                            var content = "";
-                            if (questionDoc) {
-                                mathjaxMarkdown.initializeMarkdownAndLatex();
-                                var questionText = questionDoc.questionList[EventManager.findOne().readingConfirmationIndex].questionText;
-                                content = mathjaxMarkdown.getContent(questionText);
-                            }
+    startReadingConfirmationTracker();
 
-                            $('#questionTText').html(content);
-                        }
-                    }
-                });
-            }
-        });
-    } else {
-        if(EventManager.findOne() && EventManager.findOne().readingConfirmationIndex === -1) {
-            Meteor.call("EventManager.showReadConfirmedForIndex", localData.getPrivateKey(), Session.get("hashtag"), 0);
-        }
+    if (Session.get("isOwner") && EventManager.findOne() && EventManager.findOne().readingConfirmationIndex === -1) {
+        Meteor.call("EventManager.showReadConfirmedForIndex", localData.getPrivateKey(), Session.get("hashtag"), 0);
     }
     Session.set("LearnerCountOverride", false);
     calculateButtonCount();
@@ -283,7 +262,7 @@ Template.live_results.helpers({
         return index <= EventManager.findOne().questionIndex;
     },
     readingConfirmationListForQuestion: (index)=>{
-        var result = [];
+        let result = [];
         let sortParamObj = Session.get('LearnerCountOverride') ? {lowerCaseNick: 1} : {insertDate: -1};
         let ownNick = MemberList.findOne({nick:Session.get("nick")}, {limit: 1});
         if ( !Session.get("isOwner") && ownNick.readConfirmed[index] ) {
@@ -563,6 +542,33 @@ function setMcCSSClasses () {
             bar.addClass("col-xs-10 col-sm-10 col-md-10");
         }
     }
+}
+
+function startReadingConfirmationTracker() {
+    readingConfirmationTracker = Tracker.autorun(()=> {
+        if (EventManager.findOne()) {
+            EventManager.find().observeChanges({
+                changed: function (id, changedFields) {
+                    if (!isNaN(changedFields.readingConfirmationIndex)) {
+                        $('.splash-screen-show-readingConfirmation').parents('.modal').modal();
+                        var questionDoc = QuestionGroup.findOne();
+                        var content = "";
+                        if (questionDoc) {
+                            mathjaxMarkdown.initializeMarkdownAndLatex();
+                            var questionText = questionDoc.questionList[EventManager.findOne().readingConfirmationIndex].questionText;
+                            content = mathjaxMarkdown.getContent(questionText);
+                        }
+
+                        $('#questionTText').html(content);
+                    }
+
+                    if(Session.get("isOwner")) {
+                        $('#setReadConfirmed').remove();
+                    }
+                }
+            });
+        }
+    });
 }
 
 /**

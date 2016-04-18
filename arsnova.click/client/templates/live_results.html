@@ -148,48 +148,49 @@
             {{/each}}
         </div>
 
-        {{#if isOwner}}{{#unless isRunningQuestion}}
-            <div class="fixed-bottom">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <button id="backButton" class="button button-back disableOnActiveCountdown">
-                                    <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
-                                    Zurück zur Lobby
-                                </button>
-                            </div>
-                            <div class="col-xs-6">
-                                {{#if showGlobalLeaderboardButton}}
-                                    {{#if hasCorrectAnswerOptions}}
-                                        <button class="button button-next disableOnActiveCountdown" id="goGlobalRanking">
-                                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                            <span class="ansBtn">Globale Rangliste</span>
-                                        </button>
-                                    {{/if}}
-                                {{else}}
-                                    {{#if showNextQuestionButton}}
-                                        <button class="button button-next button-start disableOnActiveCountdown" id="showNextQuestionDialog">
-                                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                            <span class="ansBtn">Zeige Frage {{nextReadingConfirmationIndex}}
-                                                / {{allQuestionCount}}</span>
-                                        </button>
+        {{#if isOwner}}
+            {{#unless isRunningQuestion}}
+                <div class="fixed-bottom">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <button id="backButton" class="button button-back disableOnActiveCountdown">
+                                        <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
+                                        Zurück zur Lobby
+                                    </button>
+                                </div>
+                                <div class="col-xs-6">
+                                    {{#if showGlobalLeaderboardButton}}
+                                        {{#if hasCorrectAnswerOptions}}
+                                            <button class="button button-next disableOnActiveCountdown" id="goGlobalRanking">
+                                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                                <span class="ansBtn">Globale Rangliste</span>
+                                            </button>
+                                        {{/if}}
                                     {{else}}
-                                        <button class="button button-next button-start disableOnActiveCountdown" id="startNextQuestion">
-                                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                            <span class="ansBtn">Starte Runde {{nextQuestionIndex}}
-                                                / {{allQuestionCount}}</span>
-                                        </button>
+                                        {{#if showNextQuestionButton}}
+                                            <button class="button button-next button-start disableOnActiveCountdown" id="showNextQuestionDialog">
+                                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                                <span class="ansBtn">Zeige Frage {{nextReadingConfirmationIndex}}
+                                                    / {{allQuestionCount}}</span>
+                                            </button>
+                                        {{else}}
+                                            <button class="button button-next button-start disableOnActiveCountdown" id="startNextQuestion">
+                                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                                <span class="ansBtn">Starte Runde {{nextQuestionIndex}}
+                                                    / {{allQuestionCount}}</span>
+                                            </button>
+                                        {{/if}}
                                     {{/if}}
-                                {{/if}}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {{/unless}}{{else}}
-            {{> splashscreen lazyCloseJsClass='js-splashscreen-noLazyClose' noAutorun=true headername="Frage" templateName="questionT" type="splash-screen-show-readingConfirmation"}}
+            {{/unless}}
         {{/if}}
+        {{> splashscreen lazyCloseJsClass='js-splashscreen-noLazyClose' noAutorun=true headername="Frage" templateName="questionT" type="splash-screen-show-readingConfirmation"}}
         {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Die Frage" templateName="questionContentSplash" type="splash-screen-show-question"}}
         {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Die Antworten" templateName="answerOptionsSplash" type="splash-screen-show-question"}}
         {{> errorSplashscreen }}

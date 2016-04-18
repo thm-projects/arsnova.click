@@ -22,10 +22,12 @@ sonar:
   script:
     - gradle sonarqube
 
-build-and-deploy:
-  stage: deploy
+build:
+  stage: build
   only:
+    - master
     - staging
+    - /^v[0-9]+/
   tags:
     - meteor
   script:
@@ -33,16 +35,38 @@ build-and-deploy:
     - cd "$CI_PROJECT_DIR/$PROJECT_PATH"
     - printf "browser\nserver\n" > .meteor/platforms
     - meteor --verbose build --directory --server "$STAGING_HTTP_URL" build
+  cache:
+    paths:
+      - package-metadata
+      - $PROJECT_PATH/.meteor/local
+
+deploy_staging:
+  stage: deploy
+  only:
+    - staging
+  tags:
+    - ssh
+  script:
     - chmod -R a+rX,ug+w build
     - eval $(ssh-agent -s)
     - mkdir ~/.ssh && echo "$STAGING_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - ssh-add <(echo "$STAGING_SSH_PRIVATE_KEY")
     - scp -r build/bundle/* "$STAGING_SSH_URL"
     - mv /opt/meteor/package-metadata "$CI_PROJECT_DIR/"
-  cache:
-    paths:
-      - package-metadata
-      - $PROJECT_PATH/.meteor/local
+
+deploy_production:
+  stage: deploy
+  only:
+    - master
+  tags:
+    - ssh
+  script:
+    - chmod -R a+rX,ug+w build
+    - eval $(ssh-agent -s)
+    - mkdir ~/.ssh && echo "$PRODUCTION_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - ssh-add <(echo "$PRODUCTION_SSH_PRIVATE_KEY")
+    - scp -r build/bundle/* "$PRODUCTION_SSH_URL"
+    - mv /opt/meteor/package-metadata "$CI_PROJECT_DIR/"
 
 sync_mirror:
   stage: deploy

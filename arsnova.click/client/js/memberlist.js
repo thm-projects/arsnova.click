@@ -165,12 +165,6 @@ Template.memberlist.events({
         Session.set("sessionClosed", false);
         Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), -1);
         Meteor.call('EventManager.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 3);
-    },
-    'click #backButton':function(){
-        Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
-        Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), 0);
-        Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 1);
-        Router.go("/settimer");
     }
 });
 

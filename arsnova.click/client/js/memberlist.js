@@ -46,10 +46,15 @@ Template.memberlist.onCreated(function () {
             removed: function (id) {
                 let idButton = $('#' + id);
                 if(idButton.hasClass("color-changing-own-nick")) {
+                    $('.errorMessageSplash').parents('.modal').modal('show');
+                    $("#errorMessage-text").html("Du wurdest aus dem Quiz geworfen!");
                     Router.go("/resetToHome");
                 } else {
                     idButton.remove();
                 }
+            },
+            added: function () {
+                calculateButtonCount();
             }
         });
     });
@@ -63,13 +68,6 @@ Template.memberlist.onCreated(function () {
         if(Session.get("isOwner")) {
             Meteor.call('Responses.clearAll',localData.getPrivateKey(), Session.get("hashtag"));
         }
-    });
-    this.autorun(function() {
-        MemberList.find().observeChanges({
-            added: function () {
-                calculateButtonCount();
-            }
-        });
     });
 
     if(Session.get("isOwner")) {
@@ -145,13 +143,23 @@ Template.memberlist.events({
         if( !Session.get("isOwner") ) {
             return;
         }
-
-        Meteor.call('MemberList.removeLearner',localData.getPrivateKey(),Session.get("hashtag"),$(event.currentTarget).attr("id"),function (err) {
+        Session.set("nickToBeKicked",{
+            nick_name: $(event.currentTarget).text().replace(/(?:\r\n|\r| |\n)/g, ''),
+            nick_id: $(event.currentTarget).attr("id")
+        });
+        $('.js-splashscreen-noLazyClose').modal("show");
+    },
+    'click #kickMemberButton': function () {
+        Meteor.call('MemberList.removeLearner',localData.getPrivateKey(),Session.get("hashtag"),Session.get("nickToBeKicked").nick_id,function (err) {
+            $('.js-splashscreen-noLazyClose').modal("hide");
             if (err) {
                 $('.errorMessageSplash').parents('.modal').modal('show');
                 $("#errorMessage-text").html(err.reason);
             }
         });
+    },
+    'click #closeDialogButton': function () {
+        closeSplashscreen();
     },
     'click #startPolling': function () {
         Session.set("sessionClosed", false);
@@ -188,13 +196,18 @@ Template.memberlist.helpers({
             })
         ];
     },
-
     showMoreButton: function () {
         return ((MemberList.find().count() - Session.get("LearnerCount")) > 1);
     },
 
     invisibleLearnerCount: function () {
         return MemberList.find().count() - Session.get("LearnerCount");
+    }
+});
+
+Template.kickMemberConfirmation.helpers({
+    kicked_nick_name: function () {
+        return Session.get("nickToBeKicked").nick_name;
     }
 });
 

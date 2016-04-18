@@ -23,8 +23,16 @@ Template.votingview.onCreated(function () {
     Session.set("sessionClosed", undefined);
     countdown = null;
 
+    this.subscribe("EventManager.join",Session.get("hashtag"));
+    this.subscribe('QuestionGroup.questionList', Session.get("hashtag"), function () {
+        Session.set("questionGroupSubscriptionReady", true);
+        if(!Session.get("sessionClosed")) {
+            countdownRunning = true;
+            startCountdown(EventManager.findOne().questionIndex);
+        }
+    });
+
     this.autorun(() => {
-        this.subscribe("EventManager.join",Session.get("hashtag"));
         this.subscribe('AnswerOptions.public', Session.get("hashtag"), function () {
             var answerOptionCount = AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count();
             var responseArr = [];
@@ -33,14 +41,6 @@ Template.votingview.onCreated(function () {
             }
             Session.set("responses", JSON.stringify(responseArr));
         });
-
-        this.subscribe('QuestionGroup.questionList', Session.get("hashtag"), function () {
-            Session.set("questionGroupSubscriptionReady", true);
-        });
-        if(Session.get("questionGroupSubscriptionReady") && !Session.get("sessionClosed") && !countdownRunning) {
-            countdownRunning = true;
-            startCountdown(EventManager.findOne().questionIndex);
-        }
     });
 });
 
@@ -138,15 +138,8 @@ Template.votingview.events({
             var responseArr = JSON.parse(Session.get("responses"));
             var currentId = event.currentTarget.id;
             responseArr[currentId] = responseArr[currentId] ? false : true;
-            var hasToggledResponse = false;
-            $.each(responseArr, function (index, item) {
-                if (item) {
-                    hasToggledResponse = true;
-                    return false;
-                }
-            });
-            Session.set("hasToggledResponse", hasToggledResponse);
             Session.set("responses", JSON.stringify(responseArr));
+            Session.set("hasToggledResponse", JSON.stringify(responseArr).indexOf("true") > -1);
             $(event.target).toggleClass("answer-selected");
         }
     }

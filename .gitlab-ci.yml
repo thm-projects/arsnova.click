@@ -4,6 +4,8 @@ variables:
 
 jshint:
   stage: test
+  tags:
+    - nodejs
   allow_failure: true
   script:
     - npm install jshint@^2.9.0

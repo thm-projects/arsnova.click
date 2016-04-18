@@ -40,8 +40,27 @@ Template.live_results.onCreated(function () {
                         eventManagerObserver.stop();
                         Router.go("/resetToHome");
                     }
-                } else if(!Session.get("isOwner") && !isNaN(changedFields.questionIndex) && changedFields.questionIndex !== initQuestionIndex) {
-                    Router.go("/onpolling");
+                } else if(!isNaN(changedFields.questionIndex) && changedFields.questionIndex !== initQuestionIndex) {
+                    if(Session.get("isOwner")) {
+                        mathjaxMarkdown.initializeMarkdownAndLatex();
+                        $('.answerTextSplash').parents('.modal').modal();
+                        var content = "";
+                        AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}, {sort:{answerOptionNumber: 1}}).forEach(function (answerOption) {
+                            if(!answerOption.answerText) {
+                                answerOption.answerText = "";
+                            }
+
+                            content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+                            content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+                        });
+
+                        $('#answerOptionsTxt').html(content);
+                        setTimeout(function () {
+                            $('.answerTextSplash').parents('.modal').modal("hide");
+                        }, 10000);
+                    } else {
+                        Router.go("/onpolling");
+                    }
                 }
             }
         });

@@ -24,6 +24,8 @@ build-and-deploy:
   stage: deploy
   only:
     - staging
+  tags:
+    - meteor
   script:
     - test -d package-metadata && rm -rf /opt/meteor/package-metadata && mv package-metadata /opt/meteor/
     - cd "$CI_PROJECT_DIR/$PROJECT_PATH"
@@ -41,6 +43,8 @@ build-and-deploy:
 
 sync_mirror:
   stage: deploy
+  tags:
+    - git
   when: always
   allow_failure: true
   script:

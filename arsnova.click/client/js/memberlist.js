@@ -199,9 +199,11 @@ Template.memberlist.helpers({
     showMoreButton: function () {
         return ((MemberList.find().count() - Session.get("LearnerCount")) > 1);
     },
-
     invisibleLearnerCount: function () {
         return MemberList.find().count() - Session.get("LearnerCount");
+    },
+    getTitleText: function () {
+        return 'Quiz-Lobby - ' + MemberList.find().count() + " Teilnehmer";
     }
 });
 

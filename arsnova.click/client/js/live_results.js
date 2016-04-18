@@ -333,6 +333,30 @@ Template.live_results.events({
 
         $('#answerOptionsTxt').html(content);
     },
+    'click #js-btn-showQuestionAndAnswerModal': function (event) {
+        event.stopPropagation();
+        var questionDoc = QuestionGroup.findOne();
+        if (!questionDoc) {
+            return;
+        }
+
+        var targetId = parseInt($(event.currentTarget).parents(".question-row").attr("id").replace("question-row_",""));
+        var content = "";
+        mathjaxMarkdown.initializeMarkdownAndLatex();
+
+        AnswerOptions.find({questionIndex: targetId}, {sort:{answerOptionNumber: 1}}).forEach(function (answerOption) {
+            if(!answerOption.answerText) {
+                answerOption.answerText = "";
+            }
+
+            content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+            content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+        });
+
+        $('.questionAndAnswerTextSplash').parents('.modal').modal("show");
+        $('.questionAndAnswerTextSplash>#questionText').html(mathjaxMarkdown.getContent(questionDoc.questionList[targetId].questionText));
+        $('.questionAndAnswerTextSplash>#answerOptionsTxt').html(content);
+    },
     "click .btn-showLeaderBoard": function (event) {
         event.stopPropagation();
         var targetId = parseInt($(event.currentTarget).attr("id").replace("js-btn-showLeaderBoard_",""));

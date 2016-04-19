@@ -40,6 +40,18 @@ build:
       - package-metadata
       - $PROJECT_PATH/.meteor/local
 
+release:
+  stage: deploy
+  only:
+    - /^v[0-9]+/
+  except:
+    - branches
+  script:
+    - echo Generating artifact for release $CI_BUILD_TAG
+  artifacts:
+    paths:
+      - build/bundle/
+
 deploy_staging:
   stage: deploy
   only:

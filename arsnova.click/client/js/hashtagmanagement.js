@@ -43,6 +43,15 @@ Template.hashtagManagement.events({
             Router.go("/question");
         });
     },
+		"click .js-edit": function (event) {
+        var hashtag = $(event.currentTarget).parent().parent()[0].id;
+        localData.reenterSession(hashtag);
+        Session.set("isOwner", true);
+        Session.set("hashtag", hashtag);
+        Meteor.call('EventManager.add', localData.getPrivateKey(), hashtag, function(){
+            Router.go("/question");
+        });
+		},
     "click .js-export": function (event) {
         var hashtag = $(event.currentTarget).parent().parent()[0].id;
         var exportData = localData.exportFromLocalStorage(hashtag);

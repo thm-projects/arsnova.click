@@ -20,13 +20,6 @@ Template.hashtagManagement.onCreated(function () {
     this.subscribe('Hashtags.public');
 });
 
-Template.hashtagManagement.onRendered(function () {
-    $(window).resize(function () {
-        labelManagement();
-    });
-    labelManagement();
-});
-
 Template.hashtagManagement.helpers({
     serverHashtags: function () {
         return localData.getAllHashtags();
@@ -110,13 +103,3 @@ Template.hashtagManagement.events({
         }
     }
 });
-
-function labelManagement () {
-    var windowWidth = $(window).width();
-    if (windowWidth < 1220 && windowWidth > 990) {
-        $('.buttonLabels').hide();
-    }
-    else {
-        $('.buttonLabels').show();
-    }
-}

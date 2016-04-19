@@ -344,14 +344,23 @@ Template.live_results.events({
         var content = "";
         mathjaxMarkdown.initializeMarkdownAndLatex();
 
+        let hasEmptyAnswers = true;
+
         AnswerOptions.find({questionIndex: targetId}, {sort:{answerOptionNumber: 1}}).forEach(function (answerOption) {
             if(!answerOption.answerText) {
                 answerOption.answerText = "";
+            } else {
+                hasEmptyAnswers = false;
             }
 
             content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
             content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
         });
+
+        if (hasEmptyAnswers) {
+            content = "";
+            $('#answerOptionsHeader').hide();
+        }
 
         $('.questionAndAnswerTextSplash').parents('.modal').modal("show");
         $('.questionAndAnswerTextSplash>#questionText').html(mathjaxMarkdown.getContent(questionDoc.questionList[targetId].questionText));

@@ -2,8 +2,8 @@ FROM debian:jessie
 MAINTAINER Daniel Gerhardt <code@dgerhardt.net>
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 4.3.1
-ENV METEOR_VERSION 1.2.1
+ENV NODE_VERSION 4.4.3
+ENV METEOR_VERSION 1.3.2.1
 ENV METEOR_TARBALL_FILE meteor-bootstrap-os.linux.x86_64.tar.gz
 ENV METEOR_TARBALL_URL https://d3sqy0vbqsdhku.cloudfront.net/packages-bootstrap/$METEOR_VERSION/$METEOR_TARBALL_FILE
 ENV METEOR_WAREHOUSE_DIR /opt/meteor

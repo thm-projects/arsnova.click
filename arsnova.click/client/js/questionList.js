@@ -1,3 +1,5 @@
+var redirectTracker = null;
+
 Template.questionList.onCreated(function () {
     Session.set("valid_questions",[]);
 
@@ -24,21 +26,35 @@ Template.questionList.onCreated(function () {
     });
 });
 
+Template.questionList.onDestroyed(function () {
+    redirectTracker.stop();
+});
+
 Template.questionList.onRendered(function () {
-    let valid_questions = Session.get("valid_questions");
-    let allValid = true;
-    for(var i = 0; i < valid_questions.length; i++) {
-        if(valid_questions[i] !== true) {
-            allValid = false;
-            break;
+    let handleRedirect = true;
+    redirectTracker = Tracker.autorun(function () {
+        let valid_questions = Session.get("valid_questions");
+        if (!valid_questions || valid_questions.length === 0) {
+            return;
         }
-    }
-    if(allValid) {
-        Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
-        Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), 0);
-        Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 2);
-        Router.go("/memberlist");
-    }
+
+        let allValid = true;
+        for (var i = 0; i < valid_questions.length; i++) {
+            if (valid_questions[i] !== true) {
+                allValid = false;
+                break;
+            }
+        }
+        if (allValid && handleRedirect) {
+            Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
+            Meteor.call("EventManager.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), 0);
+            Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 2);
+            Router.go("/memberlist");
+        } else {
+            handleRedirect = false;
+            redirectTracker.stop();
+        }
+    });
 });
 
 Template.questionList.helpers({

@@ -19,3 +19,7 @@
 #soundSelect{
     margin: 15px;
 }
+button.down {
+    background: green;
+    box-shadow: none;
+}

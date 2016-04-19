@@ -6,17 +6,10 @@ Template.soundConfig.onCreated(function () {
 });
 });
 
-Template.soundConfig.helpers({
-    isSoundOn:function () {
-        var thisSession = Sessions.findOne({hashtag:Session.get("hashtag")});
-        if (!thisSession) {
-            return false;
-        }
-        return thisSession.isSoundOn;
-    }
-});
+
 
 Template.soundConfig.rendered = function () {
+    togglemusic=false;
     buzzsound1= new buzz.sound('/sounds/Waity.mp3', {
         loop: true
     });
@@ -71,10 +64,10 @@ Template.soundConfig.events({
         }
     },
     "click #js-btn-playMusic": function(event){
-        const doc = Sessions.findOne({hashtag: Session.get("hashtag")});
-        if(doc.isSoundOn==1){
+        if(togglemusic==true){
             buzzsound1.play();
         }
+
     },
     "click #js-btn-stopMusic": function(event){
         buzzsound1.stop();
@@ -83,33 +76,19 @@ Template.soundConfig.events({
         buzzsound1.stop();
     },
     "click #js-btn-hideSoundModal": function(event){
-        localData.updateIsSoundOn(Session.get("hashtag"), Sessions.findOne({hashtag: Session.get("hashtag")}).isSoundOn);
         $('#soundModal').modal("hide");
         buzzsound1.stop();
     },
 
     'click #isSoundOnButton': function (event) {
         buzzsound1.stop();
-        event.preventDefault();
-
-        var newVal = 0;
-        var sessionDoc = Sessions.findOne({hashtag:Session.get("hashtag")});
-        if (sessionDoc) {
-            if (!sessionDoc.isSoundOn) {
-                newVal = 1;
-            }
-        }
-        Meteor.call("Sessions.updateIsSoundOn", {
-            privateKey: localData.getPrivateKey(),
-            hashtag: Session.get("hashtag"),
-            isSoundOn: newVal
-        });
-
         var btn = $('#isSoundOnButton');
         btn.toggleClass("down");
         if(btn.hasClass("down")){
+            togglemusic=true;
             btn.html("Sound ist aktiv!");
         }else{
+            togglemusic=false;
             btn.html("Sound ist inaktiv!");
         }
     }

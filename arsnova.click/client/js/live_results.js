@@ -398,6 +398,7 @@ Template.live_results.events({
         });
     },
     'click #backButton': (event)=> {
+        $('.sound-button').show();
         event.stopPropagation();
         Meteor.call('Responses.clearAll', localData.getPrivateKey(), Session.get("hashtag"));
         Meteor.call("MemberList.clearReadConfirmed", localData.getPrivateKey(), Session.get("hashtag"));
@@ -525,7 +526,7 @@ function startCountdown(index) {
     countdown = new ReactiveCountdown(questionDoc.timer / 1000,{
 
         tick: function() {
-            if(countdown.get()<=6){
+            if(countdown.get()<6){
                 var image = document.getElementById('countdown');
                 var image1 = $('.fader');
                 var imageDiv = document.getElementById('countdowndiv');
@@ -570,8 +571,10 @@ function startCountdown(index) {
                     image.src="/images/gelb0.gif";
                     image1.fadeIn(500);
                     image1.fadeOut(500);
-
+                    if(togglemusic==true){
                         f.play();
+                    }
+
 
 
                 }
@@ -581,7 +584,10 @@ function startCountdown(index) {
     });
 
     buzzsound1.setVolume(globalVolume);
+    if(togglemusic==true){
         buzzsound1.play();
+    }
+
 
     countdown.start(function () {
         buzzsound1.stop();

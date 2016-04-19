@@ -40,7 +40,7 @@ Template.createQuestionView.onRendered(function () {
         }
 
         addQuestion(index);
-        index = EventManager.findOne().questionIndex;
+        Router.go("/question");
     });
     body.on('click', '.removeQuestion', function () {
         index = EventManager.findOne().questionIndex;

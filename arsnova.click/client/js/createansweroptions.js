@@ -44,7 +44,7 @@ Template.createAnswerOptions.onRendered(function () {
         }
 
         parseAnswerOptionInput(index);
-        index = EventManager.findOne().questionIndex;
+        Router.go("/question");
     });
     body.on('click', '.removeQuestion', function () {
         index = EventManager.findOne().questionIndex;

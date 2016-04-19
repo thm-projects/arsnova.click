@@ -46,13 +46,7 @@ Template.createTimerView.onRendered(function () {
         }
 
         setTimer(index);
-        index = EventManager.findOne().questionIndex;
-        subscriptionHandler = Tracker.autorun(()=> {
-            index = EventManager.findOne().questionIndex;
-            subscriptionHandler.stop();
-            setSlider(index);
-        });
-        setSlider(index);
+        Router.go("/question");
     });
     body.on('click', '.removeQuestion', function () {
         index = EventManager.findOne().questionIndex;

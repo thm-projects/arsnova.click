@@ -1,21 +1,92 @@
 variables:
   PROJECT_PATH: arsnova.click
+  MIRROR_REPO: git@github.com:thm-projects/arsnova.click.git
 
-build-and-deploy:
-  stage: deploy
+jshint:
+  stage: test
+  tags:
+    - nodejs
+  allow_failure: true
+  script:
+    - npm install jshint@^2.9.0
+    - node_modules/jshint/bin/jshint --config .jshintrc $PROJECT_PATH/client/ $PROJECT_PATH/server/ $PROJECT_PATH/shared/
+
+sonar:
+  stage: test
   only:
+    - master
     - staging
+  tags:
+    - gradle
+  allow_failure: true
+  script:
+    - gradle sonarqube
+
+build:
+  stage: build
+  only:
+    - master
+    - staging
+    - /^v[0-9]+/
+  tags:
+    - meteor
   script:
     - test -d package-metadata && rm -rf /opt/meteor/package-metadata && mv package-metadata /opt/meteor/
     - cd "$CI_PROJECT_DIR/$PROJECT_PATH"
+    - printf "browser\nserver\n" > .meteor/platforms
     - meteor --verbose build --directory --server "$STAGING_HTTP_URL" build
+  cache:
+    paths:
+      - package-metadata
+      - $PROJECT_PATH/.meteor/local
+
+release:
+  stage: deploy
+  only:
+    - /^v[0-9]+/
+  except:
+    - branches
+  script:
+    - echo Generating artifact for release $CI_BUILD_TAG
+  artifacts:
+    paths:
+      - build/bundle/
+
+deploy_staging:
+  stage: deploy
+  only:
+    - staging
+  tags:
+    - ssh
+  script:
     - chmod -R a+rX,ug+w build
     - eval $(ssh-agent -s)
     - mkdir ~/.ssh && echo "$STAGING_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - ssh-add <(echo "$STAGING_SSH_PRIVATE_KEY")
     - scp -r build/bundle/* "$STAGING_SSH_URL"
     - mv /opt/meteor/package-metadata "$CI_PROJECT_DIR/"
-  cache:
-    paths:
-      - package-metadata
-      - $PROJECT_PATH/.meteor/local
+
+deploy_production:
+  stage: deploy
+  only:
+    - master
+  tags:
+    - ssh
+  script:
+    - chmod -R a+rX,ug+w build
+    - eval $(ssh-agent -s)
+    - mkdir ~/.ssh && echo "$PRODUCTION_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - ssh-add <(echo "$PRODUCTION_SSH_PRIVATE_KEY")
+    - scp -r build/bundle/* "$PRODUCTION_SSH_URL"
+    - mv /opt/meteor/package-metadata "$CI_PROJECT_DIR/"
+
+sync_mirror:
+  stage: deploy
+  tags:
+    - git
+  when: always
+  allow_failure: true
+  script:
+    - git clone --bare "$CI_BUILD_REPO" mirror.git
+    - cd mirror.git
+    - git push --mirror "$MIRROR_REPO"

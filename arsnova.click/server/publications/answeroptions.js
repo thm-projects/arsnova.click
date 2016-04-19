@@ -25,8 +25,7 @@ Meteor.publish('AnswerOptions.instructor', function(pprivateKey, phashtag) {
         hashtag: phashtag,
         privateKey: pprivateKey
     });
-    if (!doc) return;
-    return AnswerOptions.find({hashtag: phashtag});
+    return doc ? AnswerOptions.find({hashtag: phashtag}) : false;
 });
 
 Meteor.publish('AnswerOptions.options', function(phashtag) {
@@ -36,11 +35,11 @@ Meteor.publish('AnswerOptions.options', function(phashtag) {
     return AnswerOptions.find({hashtag: phashtag});
 });
 
-Meteor.publish('AnswerOptions.public', function(hashtag) {
+Meteor.publish('AnswerOptions.public', function(hashtag, questionIndex) {
     new SimpleSchema({
         hashtag: {type: String}
     }).validate({hashtag});
-    return AnswerOptions.find({hashtag: hashtag}, {
+    return AnswerOptions.find({hashtag: hashtag, questionIndex: questionIndex}, {
         fields: {
             isCorrect: 0
         }

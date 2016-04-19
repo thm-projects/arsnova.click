@@ -18,22 +18,19 @@
 
 Template.titel.onRendered(function () {
     $(window).resize(function () {
-        var footerHeight = $("#footerBar").hasClass("hide") ?  $(".footer-info-bar").outerHeight() : $(".fixed-bottom").outerHeight();
-        var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - footerHeight;
-        $(".container").css("height", final_height);
-        $(".container").css("margin-top", $(".navbar-fixed-top").outerHeight());
-
-        $(".kill-session-switch-wrapper").css("top", $(".arsnova-logo").height() * 0.4);
+        calculateTitelHeight();
     });
+    calculateTitelHeight();
 });
 
+function calculateTitelHeight() {
+    var fixedTop = $(".navbar-fixed-top");
+    var container = $(".container");
+    var footerHeight = $("#footerBar").hasClass("hide") ? $(".fixed-bottom").outerHeight() + $(".footer-info-bar").outerHeight() : $(".fixed-bottom").outerHeight();
+    var final_height = $(window).height() - fixedTop.outerHeight() - $(".navbar-fixed-bottom").outerHeight() - footerHeight;
 
-Template.titel.rendered = function () {
-    var footerHeight = $("#footerBar").hasClass("hide") ?  $(".footer-info-bar").outerHeight() : $(".fixed-bottom").outerHeight();
-    var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - footerHeight;
-
-    $(".container").css("height", final_height);
-    $(".container").css("margin-top", $(".navbar-fixed-top").outerHeight());
+    container.css("height", final_height);
+    container.css("margin-top", fixedTop.outerHeight());
 
     $(".kill-session-switch-wrapper").css("top", $(".arsnova-logo").height() * 0.4);
-};
+}

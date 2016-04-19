@@ -23,6 +23,8 @@ Meteor.publish('Responses.session', function(phashtag) {
     var doc = Hashtags.find({
         hashtag: phashtag
     });
-    if (!doc) return;
+    if (!doc) {
+        return;
+    }
     return Responses.find({hashtag: phashtag});
 });

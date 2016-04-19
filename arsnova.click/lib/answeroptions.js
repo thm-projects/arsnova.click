@@ -24,6 +24,10 @@ AnswerOptions.attachSchema(new SimpleSchema({
 		min: 1,
 		max: 25
 	},
+	questionIndex: {
+		type: Number,
+		min: 0
+	},
 	answerText: {
 		type: String,
 		min: 0,

@@ -16,6 +16,11 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+Template.questionContentSplash.onCreated(function () {
+    this.subscribe("EventManager.join",Session.get("hashtag"));
+    this.subscribe('QuestionGroup.questionList', Session.get("hashtag"));
+});
+
 Template.questionContentSplash.onRendered(function () {
     $('.modal-dialog').width($('#mainContentContainer').width() - 40);
     $(window).resize(function () {
@@ -23,8 +28,14 @@ Template.questionContentSplash.onRendered(function () {
     });
 });
 
-Template.questionContentSplash.onCreated(function () {
-    this.autorun(() => {
-        this.subscribe('Sessions.question', Session.get("hashtag"));
-    });
+Template.questionContentSplash.helpers({
+    questionText: function () {
+        var questionDoc = QuestionGroup.findOne();
+        if (questionDoc) {
+            return questionDoc.questionList[EventManager.findOne().questionIndex].questionText;
+        }
+        else {
+            return "";
+        }
+    }
 });

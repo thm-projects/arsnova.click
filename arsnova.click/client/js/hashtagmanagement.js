@@ -17,20 +17,8 @@
  */
 
 Template.hashtagManagement.onCreated(function () {
-    this.autorun(() => {
-        this.subscribe('Hashtags.public');
-    });
+    this.subscribe('Hashtags.public');
 });
-
-Template.hashtagManagement.onRendered(function () {
-    $(window).resize(function () {
-        labelManagement();
-    });
-});
-
-Template.hashtagManagement.rendered = function () {
-    labelManagement();
-};
 
 Template.hashtagManagement.helpers({
     serverHashtags: function () {
@@ -44,8 +32,9 @@ Template.hashtagManagement.events({
         localData.reenterSession(hashtag);
         Session.set("isOwner", true);
         Session.set("hashtag", hashtag);
-        Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), hashtag, 1);
-        Router.go("/question");
+        Meteor.call('EventManager.add', localData.getPrivateKey(), hashtag, function(){
+            Router.go("/question");
+        });
     },
     "click .js-export": function (event) {
         var hashtag = $(event.currentTarget).parent().parent()[0].id;
@@ -76,33 +65,35 @@ Template.hashtagManagement.events({
     "change #js-import": function (event) {
         var fileList = event.target.files;
         var fileReader = new FileReader();
-        fileReader.onload = function (fileLoadEvent) {
+        fileReader.onload = function () {
             var asJSON = JSON.parse(fileReader.result);
             Meteor.call("Hashtags.import",
                 {
                     privateKey: localData.getPrivateKey(),
                     data: asJSON
                 },
-                (err, res) => {
+                (err) => {
                     if (err) {
                         $('.errorMessageSplash').parents('.modal').modal('show');
-                        $("#errorMessage-text").html("Diese Sitzung existiert bereits!");
+                        $("#errorMessage-text").html(err.reason);
                     }
                     else {
                         localData.importFromFile(asJSON);
-                        Meteor.call("Hashtags.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
-                            (err, res) => {
-                                if (err) {
-                                    $('.errorMessageSplash').parents('.modal').modal('show');
-                                    $("#errorMessage-text").html("Es ist ein Fehler bei der Aktualisierung ihrer Frage aufgetreten.");
-                                }
-                                else {
-                                    Session.set("hashtag", asJSON.hashtagDoc.hashtag);
-                                    Session.set("isOwner", true);
-                                    Router.go("/memberlist");
-                                }
-                            }
-                        );
+												Meteor.call('EventManager.add', localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, function () {
+		                        Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
+		                            (err) => {
+		                                if (err) {
+		                                    $('.errorMessageSplash').parents('.modal').modal('show');
+		                                    $("#errorMessage-text").html("Es ist ein Fehler bei der Aktualisierung ihrer Frage aufgetreten.");
+		                                }
+		                                else {
+		                                    Session.set("hashtag", asJSON.hashtagDoc.hashtag);
+		                                    Session.set("isOwner", true);
+		                                    Router.go("/memberlist");
+		                                }
+		                            }
+		                        );
+												});
                     }
                 }
             );
@@ -112,13 +103,3 @@ Template.hashtagManagement.events({
         }
     }
 });
-
-function labelManagement () {
-    var windowWidth = $(window).width();
-    if (windowWidth < 1220 && windowWidth > 990) {
-        $('.buttonLabels').hide();
-    }
-    else {
-        $('.buttonLabels').show();
-    }
-}

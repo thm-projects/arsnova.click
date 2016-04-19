@@ -58,36 +58,32 @@ memberlist: {
     }
 }
 
-sessions: {
+QuestionGroup: {
     _id: {
 		type:ObjectId
 	},
-    hashtag: {
-		type:String,
-		min:1,
-		max:25
+	hashtag: {
+		type: String,
+		min: 1,
+		max: 25
 	},
-    questionText: {
-        type:String,
-        min: 5,
-        max: 1000
-    },
-    timer: {
-        type: Number,
-        min: 0
-    },
-    // Soll eine Lesebestätigung angefordert werden?
-    isReadingConfirmationRequired:{
-        type: Number,
-        min: 0,
-        max: 1
-    },
-    isSoundOn:{
-        type: Number,
-            min: 0,
-            max: 1
-    }
-}
+	questionList: {
+		type: [
+			questionText: {
+				type: String,
+				optional: true
+			},
+			timer: {
+				type: Number,
+				min: 0
+			},
+			startTime: {
+				type: String,
+				optional: true
+			}
+		]
+	}
+});
 
 responses: {
     _id: {
@@ -98,7 +94,11 @@ responses: {
 		min:1,
 		max:25
 	},
-    userNick: {
+	questionIndex: {
+		type: Number,
+			min: 0
+	},
+	userNick: {
         type:String,
         min:3,
         max:25
@@ -122,6 +122,10 @@ answerOptions: {
 		type:String,
 		min:1,
 		max:25
+	},
+	questionIndex: {
+		type: Number,
+		min: 0
 	},
     answerText: {
         type: String,
@@ -151,6 +155,10 @@ leaderboard: {
 		type:String,
 		min:1,
 		max:25
+	},
+	questionIndex: {
+		type: Number,
+		min: 0
 	},
     userNick: {
         type:String,

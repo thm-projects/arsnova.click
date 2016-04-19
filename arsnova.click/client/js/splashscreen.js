@@ -16,33 +16,30 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Template.splashscreen.rendered = function () {
-    var splashscreen = $('.js-splashscreen');
-    var splashscreenNoLazyClose = $('.js-splashscreen-noLazyClose');
+Template.splashscreen.onCreated(()=>{
 
-    splashscreen.on('click', function () {
+});
+
+Template.splashscreen.onRendered(()=>{
+    $('.js-splashscreen').on('click', function () {
         closeSplashscreen();
     });
 
-    if (templateParams.noAutorun) {
-        splashscreen.modal({show: false});
-        splashscreenNoLazyClose.modal({show: false});
+    if (Template.instance().data.noAutorun) {
+        closeSplashscreen();
     } else {
-        splashscreen.modal('show');
-        splashscreenNoLazyClose.modal('show');
+        showSplashscreen();
     }
-};
+});
 
 Template.splashscreen.helpers({
     loadingTemplate: function () {
-        templateParams = this;
-        return {template: Template[this.templateName]};
+        return {template: Template[Template.instance().data.templateName]};
     }
 });
 
 showSplashscreen = function () {
-    $('.js-splashscreen').modal('show');
-    $('.js-splashscreen-noLazyClose').modal('show');
+    $(Template.instance().firstNode).modal('show');
 };
 
 closeSplashscreen = function () {

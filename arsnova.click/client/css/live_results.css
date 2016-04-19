@@ -70,5 +70,6 @@
 .button-result-readingConfirmation {
     line-height: 40px;
     font-size: 1.4em;
-    margin-left: -5px;
+    float: left;
+    margin: 0 10px 0 -5px;
 }

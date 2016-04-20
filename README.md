@@ -17,6 +17,24 @@ arsnova.click is somewhere in the feature range of both:
 * It takes privacy to the extreme: no data is stored on a server, everything is in the [HTML5 WebStorage](http://www.w3schools.com/html/html5_webstorage.asp) of the quizmaster's browser
 * It is at the peak of open-source web technology: [Meteor](https://www.meteor.com/) and [Bootstrap](http://getbootstrap.com/)
 
+# Getting started
+
+To run arsnova.click on your own Node.js-Server, at least a [MongoDB](https://docs.mongodb.org/manual/installation/) and [Meteor](https://www.meteor.com/) is needed. Furthermore, a Proxy-HTTP-Server (for example Nginx) is highly recommended.
+Note, that Meteor is currently just offering support for the old node.js-version 0.10.x. If you want to use Node.js 4/5, additional adjustments are required.
+
+## Hardware Resources
+Up to a amount of 100 users, we are recommending:
+
+* 1 CPU-Core
+* 1 GB of RAM
+* 4 GB of free disk-space for the database
+
+If you are going one step further, we are recommending for 100+ users:
+
+* 2 CPU-Cores
+* 2 GB of RAM
+* 4 GB of free disk-space for the database
+
 # Code Inspection
 
 We use [SonarQube](https://scm.thm.de/sonar/overview?id=de.thm.arsnova%3Aarsnova.click) to continuously check the quality and technical debts of our repo.

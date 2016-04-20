@@ -1,0 +1,73 @@
+<!--
+* This file is part of ARSnova Click.
+* Copyright (C) 2016 The ARSnova Team
+*
+* ARSnova Click is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* ARSnova Click is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<template name="soundConfig">
+
+    <div class="modal fade" id="soundModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content splash-screen-show-question">
+                <div class="modal-header">
+                    <h2>
+                        Voting-Musik
+                    </h2>
+                </div>
+                <div class="modal-body">
+                    <div class="soundConfig">
+
+                    </div>
+                    <div class="row">
+
+
+                        <div id="slider2"></div>
+                        <p>Lautstärke: {{slider2}} %</p>
+
+                        <button id="js-btn-playMusic" type="button" class="btn btn-success btn-answerOption btn-lg ">
+                            <span class="glyphicon glyphicon-play"></span>
+                        </button>
+
+                        <button id="js-btn-stopMusic" type="button" class="btn btn-success btn-answerOption btn-lg ">
+                            <span class="glyphicon glyphicon-stop"></span>
+                        </button>
+
+
+
+                        <select id="soundSelect">
+                            <option value="Song1">Wait</option>
+                            <option value="Song2">Jazzy</option>
+                            <option value="Song3">Wait Mario</option>
+                        </select>
+                        <div class="col-md-12">
+                                <button id="isSoundOnButton" class="button button-warning">Sound ist
+                                    inaktiv !
+                                </button>
+                        </div>
+
+                        <button id="js-btn-hideSoundModal" type="button" class="btn btn-success btn-answerOption btn-lg ">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            Fenster schließen
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>
+

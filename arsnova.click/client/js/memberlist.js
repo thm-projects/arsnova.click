@@ -162,6 +162,7 @@ Template.memberlist.events({
         closeSplashscreen();
     },
     'click #startPolling': function () {
+        $('.sound-button').hide();
         Session.set("sessionClosed", false);
         Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), -1);
         Meteor.call('EventManager.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 3);

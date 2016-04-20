@@ -29,7 +29,7 @@ Up to a amount of 100 users, we are recommending:
 * 1 GB of RAM
 * 4 GB of free disk-space for the database
 
-If you are going one step further, we are recommending for 100+ users:
+For 100+ users, we recommend:
 
 * 2 CPU-Cores
 * 2 GB of RAM
@@ -37,8 +37,9 @@ If you are going one step further, we are recommending for 100+ users:
 
 # Development
 
-Our application uses Meteor as application framework. Download and install [Meteor](https://www.meteor.com/install) to get arsnova.click running on your local development environment. You can start the app using the 'meteor'-command in the main directory, the application will rebuild itself automatically on code changes.
-You can get additional informations through the official [Meteor Guide](http://guide.meteor.com/) and its [API-Documentation](http://docs.meteor.com/#/basic/)).
+Our application uses Meteor as application framework. Download and install [Meteor](https://www.meteor.com/install) to get arsnova.click running on your local development environment.
+You can start the app using the 'meteor'-command in the main directory, the application will rebuild itself automatically on code changes.
+Get additional informations through the official [Meteor Guide](http://guide.meteor.com/) and its [API-Documentation](http://docs.meteor.com/#/basic/).
 
 # Code Inspection
 

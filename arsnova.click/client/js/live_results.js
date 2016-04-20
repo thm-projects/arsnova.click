@@ -521,82 +521,69 @@ function startCountdown(index) {
     $( "#countdowndiv" ).appendTo( $( "body" ) );
     $( "#countdown" ).appendTo( $( "body" ) );
     var f = new buzz.sound('/sounds/trillerpfeife.mp3',{
-        volume:50
+        volume: 50
     });
     countdown = new ReactiveCountdown(questionDoc.timer / 1000,{
 
         tick: function() {
-            if(countdown.get()<6){
+            if(countdown.get() < 6){
                 var image = document.getElementById('countdown');
                 var image1 = $('.fader');
                 var imageDiv = document.getElementById('countdowndiv');
 
                 if (image.src.match("gr5")) {
-
                     image.src = "/images/gruen.gif";
                     image1.fadeIn(500);
-                    imageDiv.style.display="block";
-                    image.style.display="block";
+                    imageDiv.style.display = "block";
+                    image.style.display = "block";
                     image1.fadeOut(500);
-                }else if (image.src.match("gruen")) {
-                    imageDiv.style.backgroundColor="#2f4f4f";
-
+                } else if (image.src.match("gruen")) {
+                    imageDiv.style.backgroundColor = "#2f4f4f";
                     image.src = "/images/blau.gif";
                     image1.fadeIn(500);
                     image1.fadeOut(500);
-                } else if(image.src.match("blau")){
-                    imageDiv.style.backgroundColor="#663399";
-
+                } else if (image.src.match("blau")) {
+                    imageDiv.style.backgroundColor = "#663399";
                     image.src = "/images/lila3.gif";
                     image1.fadeIn(500);
                     image1.fadeOut(500);
-                } else if(image.src.match("lila3")){
-                    imageDiv.style.backgroundColor="#b22222";
-
-
-                    image.src="/images/rot2.gif";
+                } else if (image.src.match("lila3")) {
+                    imageDiv.style.backgroundColor = "#b22222";
+                    image.src = "/images/rot2.gif";
                     image1.fadeIn(500);
                     image1.fadeOut(500);
-                }else if(image.src.match("rot2")){
-                    imageDiv.style.backgroundColor="#ff8c00";
-
-
-
-                    image.src="/images/orange1.gif";
+                } else if (image.src.match("rot2")) {
+                    imageDiv.style.backgroundColor = "#ff8c00";
+                    image.src = "/images/orange1.gif";
                     image1.fadeIn(500);
                     image1.fadeOut(500);
-                } else if(image.src.match("orange1")){
+                } else if (image.src.match("orange1")) {
                     imageDiv.style.backgroundColor="#ffd700";
-
-                    image.src="/images/gelb0.gif";
+                    image.src = "/images/gelb0.gif";
                     image1.fadeIn(500);
                     image1.fadeOut(500);
-                    if(togglemusic==true){
+                    if (Session.get("togglemusic")){
                         f.play();
                     }
-
-
-
                 }
 
             }
         }
     });
 
-    buzzsound1.setVolume(globalVolume);
-    if(togglemusic==true){
+    buzzsound1.setVolume(Session.get("globalVolume"));
+    if (Session.get("togglemusic")) {
         buzzsound1.play();
     }
-
 
     countdown.start(function () {
         buzzsound1.stop();
         Session.set("countdownInitialized", false);
         $('.disableOnActiveCountdown').removeAttr("disabled");
-        if(index + 1 >= QuestionGroup.findOne().questionList.length) {
+        if (index + 1 >= QuestionGroup.findOne().questionList.length) {
             Session.set("sessionClosed", true);
             if(Session.get("isOwner") && AnswerOptions.find({isCorrect: 1}).count() > 0) {
-                routeToLeaderboardTimer = setTimeout(()=>{
+                routeToLeaderboardTimer = setTimeout( () => {
                     Router.go("/statistics");
                 }, 7000);
             }

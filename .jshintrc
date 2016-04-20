@@ -32,6 +32,9 @@
 		"closeSplashscreen": true,
 		"showSplashscreen": true,
 		"closeAndRedirectTo": true,
-		"QuestionGroupSchema": true
+		"QuestionGroupSchema": true,
+
+		"buzz": true,
+		"buzzsound1": true
 	}
 }

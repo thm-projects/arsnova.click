@@ -42,7 +42,7 @@ Meteor.methods({
                 hashtag: hashtag,
                 privateKey: privateKey
             })) {
-            throw new Meteor.Error('EventManager.setSessionStatus', 'Either there is no quiz or you don\'t have write access');
+            throw new Meteor.Error('EventManager.showReadConfirmedForIndex', 'Either there is no quiz or you don\'t have write access');
         }
 
         return EventManager.update({hashtag: hashtag}, {$set: {readingConfirmationIndex: index}});
@@ -66,7 +66,7 @@ Meteor.methods({
                 hashtag: hashtag,
                 privateKey: privateKey
             })) {
-            throw new Meteor.Error('EventManager.setSessionStatus', 'Either there is no quiz or you don\'t have write access');
+            throw new Meteor.Error('EventManager.setActiveQuestion', 'Either there is no quiz or you don\'t have write access');
         }
 
         return EventManager.update({hashtag: hashtag}, {$set: {questionIndex: index, readingConfirmationIndex: index}});
@@ -88,7 +88,7 @@ Meteor.methods({
                 hashtag: hashtag,
                 privateKey: privateKey
             })) {
-            throw new Meteor.Error('EventManager.setSessionStatus', 'Either there is no quiz or you don\'t have write access');
+            throw new Meteor.Error('EventManager.clear', 'Either there is no quiz or you don\'t have write access');
         }
 
         return EventManager.remove({hashtag: hashtag});
@@ -110,7 +110,7 @@ Meteor.methods({
                 hashtag: hashtag,
                 privateKey: privateKey
             })) {
-            throw new Meteor.Error('EventManager.setSessionStatus', 'Either there is no quiz or you don\'t have write access');
+            throw new Meteor.Error('EventManager.reset', 'Either there is no quiz or you don\'t have write access');
         }
 
         return EventManager.update({hashtag: hashtag}, {$set: {sessionStatus: 1, readingConfirmationIndex: -1, questionIndex: -1}});
@@ -132,7 +132,7 @@ Meteor.methods({
                 hashtag: hashtag,
                 privateKey: privateKey
             })) {
-            throw new Meteor.Error('EventManager.setSessionStatus', 'Either there is no quiz or you don\'t have write access');
+            throw new Meteor.Error('EventManager.add', 'Either there is no quiz or you don\'t have write access');
         }
 
         if (EventManager.findOne({ hashtag: hashtag })) {

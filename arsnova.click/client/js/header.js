@@ -67,16 +67,16 @@ Template.header.helpers({
 });
 
 Template.header.events({
-    'click .kill-session-switch': function () {
+    'click .kill-session-switch, click .arsnova-logo': function () {
         if (Session.get("isOwner")){
             buzzsound1.stop();
             Meteor.call("Main.killAll", localData.getPrivateKey(), Session.get("hashtag"));
             Router.go("/");
+        } else {
+            Router.go("/resetToHome");
         }
     },
     'click .sound-button': function () {
         $('#soundModal').modal({backdrop: 'static', keyboard: false});
-
-
     }
 });

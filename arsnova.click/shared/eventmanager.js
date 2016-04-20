@@ -93,6 +93,28 @@ Meteor.methods({
 
         return EventManager.remove({hashtag: hashtag});
     },
+    'EventManager.reset': (privateKey, hashtag) => {
+        if (Meteor.isClient) {
+            return;
+        }
+
+        new SimpleSchema({
+            privateKey: {type: String},
+            hashtag: {type: String}
+        }).validate({
+            privateKey,
+            hashtag
+        });
+
+        if (!Hashtags.findOne({
+                hashtag: hashtag,
+                privateKey: privateKey
+            })) {
+            throw new Meteor.Error('EventManager.setSessionStatus', 'Either there is no quiz or you don\'t have write access');
+        }
+
+        return EventManager.update({hashtag: hashtag}, {$set: {sessionStatus: 1, readingConfirmationIndex: -1, questionIndex: -1}});
+    },
     'EventManager.add': (privateKey, hashtag) => {
         if (Meteor.isClient) {
             return;

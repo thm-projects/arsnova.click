@@ -65,10 +65,10 @@ Template.live_results.onCreated(function () {
             }
         });
     });
-    this.subscription = Meteor.subscribe('Responses.session', Session.get("hashtag"));
-    this.subscription = Meteor.subscribe('AnswerOptions.options', Session.get("hashtag"));
-    this.subscription = Meteor.subscribe('MemberList.members', Session.get("hashtag"));
-    this.subscription = Meteor.subscribe('QuestionGroup.questionList', Session.get("hashtag"), function () {
+    this.subscribe('Responses.session', Session.get("hashtag"));
+    this.subscribe('AnswerOptions.options', Session.get("hashtag"));
+    this.subscribe('MemberList.members', Session.get("hashtag"));
+    this.subscribe('QuestionGroup.questionList', Session.get("hashtag"), function () {
         var doc = QuestionGroup.findOne();
         var i = 0;
         for (i; i < doc.questionList.length; i++) {
@@ -76,7 +76,7 @@ Template.live_results.onCreated(function () {
         }
         Session.set("oldStartTimeValues", oldStartTimeValues);
     });
-    this.subscription = Meteor.subscribe('Hashtags.public');
+    this.subscribe('Hashtags.public');
 });
 
 Template.live_results.onDestroyed(function () {

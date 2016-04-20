@@ -42,12 +42,13 @@ Template.memberlist.onCreated(function () {
             calculateButtonCount();
         });
 
-        MemberList.find().observeChanges({
+        let memberListObserver = MemberList.find().observeChanges({
             removed: function (id) {
                 let idButton = $('#' + id);
                 if(idButton.hasClass("color-changing-own-nick")) {
                     $('.errorMessageSplash').parents('.modal').modal('show');
                     $("#errorMessage-text").html("Du wurdest aus dem Quiz geworfen!");
+                    memberListObserver.stop();
                     Router.go("/resetToHome");
                 } else {
                     idButton.remove();
@@ -83,6 +84,9 @@ Template.memberlist.onRendered(function () {
     calculateButtonCount();
 
     var calculateFontSize = function() {
+        if(!Session.get("hashtag")) {
+            return;
+        }
         var hashtag_length = Session.get("hashtag").length;
         //take the hastag in the middle of the logo
         var titel_margin_top  = $(".arsnova-logo").height();

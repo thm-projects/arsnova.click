@@ -27,6 +27,10 @@ To get your merge request accepted faster, you should follow our review process 
 
 This is a no-brainer. Keep your branches up to date so that merges will never end up conflicting. Always test-merge your branches before submitting your pull requests. Ideally, your branches are fast-forwardable, but this is not a requirement.
 
+### Code Style
+
+Please check your code against our code guidelines defined with jshint.
+
 ### Avoid trailing white-spaces
 
 Committing trailing white-spaces makes your merge request look sloppy. Most editors have a setting that remove trailing white-spaces, which you should activate. You can use `git diff` to review changes since it highlights erroneous white-spaces.

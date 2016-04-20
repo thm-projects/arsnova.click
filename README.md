@@ -19,8 +19,8 @@ arsnova.click is somewhere in the feature range of both:
 
 # Getting started
 
-To run arsnova.click on your own Node.js-Server, at least a [MongoDB](https://docs.mongodb.org/manual/installation/) and [Meteor](https://www.meteor.com/) is needed. Furthermore, a Proxy-HTTP-Server (for example Nginx) is highly recommended.
-Note, that Meteor is currently just offering support for the old node.js-version 0.10.x. If you want to use Node.js 4/5, additional adjustments are required.
+To run arsnova.click on your own Node.js-Server, at least a [MongoDB](https://docs.mongodb.org/manual/installation/) and [Meteor](https://www.meteor.com/) is needed. Furthermore, a HTTP-Proxy-Server (for example Nginx) is highly recommended.
+Note, that Meteor is currently only offering support for the old node.js-version 0.10.x. If you want to use Node.js 4/5, additional adjustments are required.
 
 ## Hardware Resources
 Up to a amount of 100 users, we are recommending:
@@ -38,6 +38,7 @@ For 100+ users, we recommend:
 # Development
 
 Our application uses Meteor as application framework. Download and install [Meteor](https://www.meteor.com/install) to get arsnova.click running on your local development environment.
+
 You can start the app using the 'meteor'-command in the main directory, the application will rebuild itself automatically on code changes.
 Get additional informations through the official [Meteor Guide](http://guide.meteor.com/) and its [API-Documentation](http://docs.meteor.com/#/basic/).
 

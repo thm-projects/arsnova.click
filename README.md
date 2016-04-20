@@ -42,6 +42,8 @@ Our application uses Meteor as application framework. Download and install [Mete
 You can start the app using the 'meteor'-command in the main directory, the application will rebuild itself automatically on code changes.
 Get additional informations through the official [Meteor Guide](http://guide.meteor.com/) and its [API-Documentation](http://docs.meteor.com/#/basic/).
 
+For code-checking we use [jshint](http://jshint.com/).
+
 # Code Inspection
 
 We use [SonarQube](https://scm.thm.de/sonar/overview?id=de.thm.arsnova%3Aarsnova.click) to continuously check the quality and technical debts of our repo.

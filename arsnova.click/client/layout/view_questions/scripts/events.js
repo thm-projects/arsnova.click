@@ -1,5 +1,5 @@
-import * as lib from '././lib.js';
-import {mathjaxMarkdown} from './../../lib/mathjax_markdown.js';
+import * as lib from './lib.js';
+import {mathjaxMarkdown} from '../../../lib/mathjax_markdown.js';
 
 Template.createQuestionView.events({
     'input #questionText': function () {

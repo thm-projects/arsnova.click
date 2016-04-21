@@ -1,5 +1,5 @@
-import {mathjaxMarkdown} from './../../lib/mathjax_markdown.js';
-import {makeAndSendResponse} from '././lib.js';
+import {mathjaxMarkdown} from '../../../lib/mathjax_markdown.js';
+import {makeAndSendResponse} from './lib.js';
 
 Template.votingview.events({
     "click #js-btn-showQuestionModal": function (event) {

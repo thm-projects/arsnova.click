@@ -1,5 +1,5 @@
 import {countdown, eventManagerObserver, deleteCountdown, setEventManagerObserver} from './lib.js';
-import {mathjaxMarkdown} from './../../../lib/mathjax_markdown.js';
+import {mathjaxMarkdown} from '../../../lib/mathjax_markdown.js';
 
 Template.questionT.onCreated(function () {
     this.subscribe("EventManager.join", Session.get("hashtag"));

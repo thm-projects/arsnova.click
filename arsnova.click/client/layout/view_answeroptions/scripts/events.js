@@ -1,3 +1,5 @@
+import {parseAnswerOptionInput} from './lib.js';
+
 Template.createAnswerOptions.events({
     "click .toggleCorrect": function (event) {
         if (this.isCorrect) {
@@ -67,7 +69,7 @@ Template.createAnswerOptions.events({
         Router.go('/question');
     },
     "click #forwardButton": function () {
-        var error = lib.parseAnswerOptionInput(EventManager.findOne().questionIndex);
+        var error = parseAnswerOptionInput(EventManager.findOne().questionIndex);
 
         if (error) {
             $('.errorMessageSplash').parents('.modal').modal('show');

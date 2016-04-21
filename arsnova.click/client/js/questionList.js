@@ -45,12 +45,14 @@ Template.questionList.onRendered(function () {
                 break;
             }
         }
-        if (allValid && handleRedirect) {
+        if (!Session.get("overrideValidQuestionRedirect") && allValid && handleRedirect) {
+            Session.set("overrideValidQuestionRedirect", undefined);
             Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
             Meteor.call("EventManager.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), 0);
             Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 2);
             Router.go("/memberlist");
         } else {
+            Session.set("overrideValidQuestionRedirect", undefined);
             handleRedirect = false;
             redirectTracker.stop();
         }

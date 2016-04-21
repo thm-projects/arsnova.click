@@ -50,4 +50,4 @@ We use [SonarQube](https://scm.thm.de/sonar/overview?id=de.thm.arsnova%3Aarsnova
 
 # Build & Deploy
 
-We continuously integrate, sync with [GitHub](https://github.com/thm-projects/arsnova.click), and deploy to [staging](https://arsnova-staging.mni.thm.de) and [production](http://arsnova.click) evironments with [GitLab CI](https://git.thm.de/arsnova/arsnova.click/builds).
+We continuously integrate, sync with [GitHub](https://github.com/thm-projects/arsnova.click), and deploy to [staging](http://staging.arsnova.click) and [production](http://arsnova.click) evironments with [GitLab CI](https://git.thm.de/arsnova/arsnova.click/builds).

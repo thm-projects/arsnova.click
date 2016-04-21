@@ -1,5 +1,7 @@
 import {memberlistObserver} from './lib.js';
 
 Template.memberlist.onDestroyed(function () {
-    memberlistObserver.stop();
+    if(memberlistObserver) {
+        memberlistObserver.stop();
+    }
 });

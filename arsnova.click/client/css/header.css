@@ -23,6 +23,7 @@ p.header-layout {
 
 .arsnova-logo {
     margin-left: 15px;
+    cursor: pointer;
 }
 
 .arsnova-logo img {

@@ -31,11 +31,12 @@ Meteor.methods({
                 privateKey: privateKey
             });
             if (doc) {
-                AnswerOptions.remove({hashtag: doc.hashtag});
-                MemberList.remove({hashtag: doc.hashtag});
-                Responses.remove({hashtag: doc.hashtag});
-                QuestionGroup.remove({hashtag: doc.hashtag});
-                EventManager.remove({hashtag: doc.hashtag});
+                Meteor.call('EventManager.reset', privateKey, doc.hashtag, function () {
+                    AnswerOptions.remove({hashtag: doc.hashtag});
+                    MemberList.remove({hashtag: doc.hashtag});
+                    Responses.remove({hashtag: doc.hashtag});
+                    QuestionGroup.remove({hashtag: doc.hashtag});
+                });
             }
         }
     },

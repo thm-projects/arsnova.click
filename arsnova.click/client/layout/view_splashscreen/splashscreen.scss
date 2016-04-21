@@ -1,0 +1,128 @@
+/*
+ * This file is part of ARSnova Click.
+ * Copyright (C) 2016 The ARSnova Team
+ *
+ * ARSnova Click is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ARSnova Click is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
+ */
+@import "../../layout/global/styles/colors";
+@import "../../layout/global/styles/appearance";
+
+/*
+ * various splash screen colors
+ */
+.splash-screen-session {
+  background: $splash-screen-show-session-background-color;
+}
+
+.splash-screen-request-read-confirm {
+  background: $splash-screen-request-read-confirm-background-color;
+}
+
+.splash-screen-countdown {
+  background: $splash-screen-countdown-background-color;
+}
+
+.splash-screen-only-view-seconds-left {
+  background: $splash-view-seconds-left-background-color;
+}
+
+.splash-screen-show-question,
+.splash-screen-show-readingConfirmation {
+  background: $splash-show-question-background-color;
+}
+
+.splash-screen-error-message {
+  background: $splash-screen-error-message-background-color;
+}
+
+/*
+ * Splash screen button appearance
+ */
+.splash-button-error-message {
+  background-color: grey;
+  border-color: black;
+}
+
+/*
+ * Splash screen appearance
+ */
+.modal-content {
+  font-size: 20px;
+  color: black;
+  text-align: left;
+  border-radius: $splash-screen-corner-radius;
+  box-shadow: none;
+}
+
+.modal-content-white-fonts {
+  font-size: 20px;
+  color: white;
+  text-align: left;
+  border-radius: $splash-screen-corner-radius;
+  box-shadow: none;
+}
+
+.h2-white-fonts {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.modal-list ul {
+  list-style: initial;
+  margin: auto;
+}
+
+.modal-center {
+  text-align: center;
+}
+
+.modal-body {
+  padding: 0 50px;
+}
+
+.modal-header {
+  border-bottom: none;
+  padding: 20px;
+  color: $splash-screen-header-color;
+}
+
+.modal-footer {
+  border-top: none;
+  padding: 20px;
+}
+
+.modal-backdrop {
+  background-color: $background-color;
+}
+
+.videoImageContainer {
+  position: relative;
+}
+
+.videoImageContainer:after {
+  font-size: 500%;
+  position: absolute;
+  left: 50%; top: 50%;
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: "arsnova";
+  content: "\f01d";
+}
+
+.resizeableImage {
+  cursor: pointer;
+}

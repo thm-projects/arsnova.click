@@ -1,79 +1,3 @@
-/*
- * This file is part of ARSnova Click.
- * Copyright (C) 2016 The ARSnova Team
- *
- * ARSnova Click is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ARSnova Click is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-var subscriptionHandler = null;
-Template.createAnswerOptions.onCreated(function () {
-    this.subscribe('AnswerOptions.instructor', localData.getPrivateKey(), Session.get("hashtag"));
-    this.subscribe('EventManager.join', Session.get("hashtag"));
-});
-
-Template.createAnswerOptions.onRendered(function () {
-    var calculateHeight = function calculateHeight() {
-        var answer_options_height = $(".container").height() - $(".row-landingpage-buttons").outerHeight(true) - $(".titel-relative").outerHeight(true);
-        $('.answer-options').css("height", answer_options_height);
-    };
-    $(window).resize(calculateHeight);
-    calculateHeight();
-
-    let index;
-    subscriptionHandler = Tracker.autorun(()=> {
-        if (this.subscriptionsReady()) {
-            index = EventManager.findOne().questionIndex;
-        }
-    });
-    var body = $('body');
-    body.on('click', '.questionIcon:not(.active)', function () {
-        var currentSession = QuestionGroup.findOne();
-        if (!currentSession || index >= currentSession.questionList.length) {
-            return;
-        }
-
-        parseAnswerOptionInput(index);
-        Router.go("/question");
-    });
-    body.on('click', '.removeQuestion', function () {
-        index = EventManager.findOne().questionIndex;
-    });
-
-    if($(window).width() >= 992) {
-        $('#answerOptionText_Number0').focus();
-    }
-});
-
-Template.createAnswerOptions.onDestroyed(function () {
-    var body = $('body');
-    body.off('click', '.questionIcon:not(.active)');
-    body.off('click', '.removeQuestion');
-    subscriptionHandler.stop();
-});
-
-Template.createAnswerOptions.helpers({
-    answerOptions: function () {
-        return AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}, {sort: {answerOptionNumber: 1}});
-    },
-    answerOptionLetter: function (Nr) {
-        return String.fromCharCode(Nr + 65);
-    },
-    showDeleteButtonOnStart: function () {
-        return (AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count() === 1) ? "hide" : "";
-    }
-});
-
 Template.createAnswerOptions.events({
     "click .toggleCorrect": function (event) {
         if (this.isCorrect) {
@@ -143,7 +67,7 @@ Template.createAnswerOptions.events({
         Router.go('/question');
     },
     "click #forwardButton": function () {
-        var error = parseAnswerOptionInput(EventManager.findOne().questionIndex);
+        var error = lib.parseAnswerOptionInput(EventManager.findOne().questionIndex);
 
         if (error) {
             $('.errorMessageSplash').parents('.modal').modal('show');
@@ -170,26 +94,3 @@ Template.createAnswerOptions.events({
         }
     }
 });
-
-function parseAnswerOptionInput(index) {
-    var hasError = false;
-
-    var meteorAnswerOptionsUpdateCall = function (err) {
-        hasError = err;
-    };
-
-    for (var i = 0; i < AnswerOptions.find({questionIndex: index}).count(); i++) {
-        var text = $("#answerOptionText_Number" + i).val();
-        var isCorrect = $('div#answerOption-' + i + ' .check-mark-checked').length > 0 ? 1 : 0;
-        var answer = {
-            privateKey: localData.getPrivateKey(),
-            hashtag: Session.get("hashtag"),
-            questionIndex: index,
-            answerOptionNumber: i,
-            answerText: text,
-            isCorrect: isCorrect
-        };
-        Meteor.call('AnswerOptions.updateAnswerTextAndIsCorrect', answer, meteorAnswerOptionsUpdateCall);
-    }
-    return hasError;
-}

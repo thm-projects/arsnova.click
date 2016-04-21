@@ -731,8 +731,8 @@ function calculateButtonCount () {
     }
 
     /*
-     This session variable holds the amount of shown buttons and is used in the helper function
-     Template.memberlist.helpers.learners which gets the attendees from the mongo db
+     This session variable holds the amount of shown buttons and is used in the scripts function
+     Template.memberlist.scripts.learners which gets the attendees from the mongo db
      */
     Session.set("LearnerCount", queryLimiter);
 }

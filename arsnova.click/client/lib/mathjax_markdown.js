@@ -17,7 +17,7 @@
  */
 var defaultHyperLinkRenderer;
 
-mathjaxMarkdown = {
+export var mathjaxMarkdown = {
     initializeMarkdownAndLatex: function () {
         // markdown setup
         var markedRenderer = marked.Renderer;
@@ -55,7 +55,7 @@ mathjaxMarkdown = {
             showMathMenu: false
         };
 
-        var mathjaxScriptLen = $('script[src*="https://cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=TeX-MML-AM_CHTML"]').length;
+        var mathjaxScriptLen = $('scripts[src*="https://cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=TeX-MML-AM_CHTML"]').length;
 
         if (mathjaxScriptLen === 0) {
             // mathjax config
@@ -191,12 +191,12 @@ mathjaxMarkdown = {
         var size = '', alignment = 'center';
 
         if (!isVideoElement) {
-            return '<a target="_blank" class="hyperlink" href="' + href + '"><div style="text-align:' + alignment + '">' +
-                '<img class="resizeableImage img-responsive" title="' + text + '" src="' + href + '" alt="' + text + '" style=' + size + '>' +
+            return '<a target="_blank" class="hyperlink" href="' + href + '"><div styles="text-align:' + alignment + '">' +
+                '<img class="resizeableImage img-responsive" title="' + text + '" src="' + href + '" alt="' + text + '" styles=' + size + '>' +
                 '</div></a>';
         }
 
-        return '<img class="resizeableImage" title="' + text + '" src="' + href + '" alt="' + text + '"style="width: 100%">';
+        return '<img class="resizeableImage" title="' + text + '" src="' + href + '" alt="' + text + '"styles="width: 100%">';
     },
     hyperlinkRenderer: function (href, title, text) {
         var titleDelimiter = /^.*alt="([^"]*)/;

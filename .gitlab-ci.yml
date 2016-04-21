@@ -7,6 +7,7 @@ jshint:
   tags:
     - nodejs
   allow_failure: true
+  dependencies: []
   script:
     - npm install jshint@^2.9.0
     - node_modules/jshint/bin/jshint --config .jshintrc $PROJECT_PATH/client/ $PROJECT_PATH/server/ $PROJECT_PATH/shared/
@@ -19,6 +20,7 @@ sonar:
   tags:
     - gradle
   allow_failure: true
+  dependencies: []
   script:
     - gradle sonarqube
 
@@ -30,6 +32,7 @@ build:
     - /^v[0-9]+/
   tags:
     - meteor
+  dependencies: []
   script:
     - test -d package-metadata && rm -rf /opt/meteor/package-metadata && mv package-metadata /opt/meteor/
     - cd "$PROJECT_PATH"
@@ -80,6 +83,7 @@ sync_mirror:
     - git
   when: always
   allow_failure: true
+  dependencies: []
   script:
     - git clone --bare "$CI_BUILD_REPO" mirror.git
     - cd mirror.git

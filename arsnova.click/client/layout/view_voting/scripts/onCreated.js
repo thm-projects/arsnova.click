@@ -12,14 +12,12 @@ Template.votingview.onCreated(function () {
         }
     });
 
-    this.autorun(() => {
-        this.subscribe('AnswerOptions.public', Session.get("hashtag"), function () {
-            var answerOptionCount = AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count();
-            var responseArr = [];
-            for (var i = 0; i < answerOptionCount; i++) {
-                responseArr[i] = false;
-            }
-            Session.set("responses", JSON.stringify(responseArr));
-        });
+    this.subscribe('AnswerOptions.public', Session.get("hashtag"), function () {
+        var answerOptionCount = AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count();
+        var responseArr = [];
+        for (var i = 0; i < answerOptionCount; i++) {
+            responseArr[i] = false;
+        }
+        Session.set("responses", JSON.stringify(responseArr));
     });
 });

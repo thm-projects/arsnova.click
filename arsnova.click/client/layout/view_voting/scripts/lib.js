@@ -44,10 +44,8 @@ export function startCountdown (index) {
                 }
             }
 
-            $('#' + lastButton).removeClass('button-green-transition');
-            $('#' + lastButton).addClass('button-purple-transition');
-            $('#' + currentButton).addClass('button-green-transition');
-            $('#' + currentButton).removeClass('button-purple-transition');
+            $('#' + lastButton).removeClass('button-green-transition').addClass('button-purple-transition');
+            $('#' + currentButton).addClass('button-green-transition').removeClass('button-purple-transition');
 
             currentButton++;
 

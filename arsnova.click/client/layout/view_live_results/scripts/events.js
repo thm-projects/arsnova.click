@@ -119,8 +119,8 @@ Template.live_results.events({
         });
     },
     'click #backButton': (event)=> {
-        $('.sound-button').show();
         event.stopPropagation();
+        $('.sound-button').show();
         Meteor.call('Responses.clearAll', localData.getPrivateKey(), Session.get("hashtag"));
         Meteor.call("MemberList.clearReadConfirmed", localData.getPrivateKey(), Session.get("hashtag"));
         Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 2);

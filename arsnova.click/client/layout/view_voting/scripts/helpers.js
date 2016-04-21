@@ -1,3 +1,5 @@
+import {countdown} from './lib.js';
+
 Template.votingview.helpers({
     answerOptions: function () {
         return AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}, {sort: {answerOptionNumber: 1}});

@@ -16,6 +16,8 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import {buzzsound1} from '../../plugins/sound/scripts/lib.js';
+
 Template.header.onCreated(function () {
     this.autorun(() => {
         if(!Session.get("hashtag")) {

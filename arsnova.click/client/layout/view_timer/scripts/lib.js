@@ -34,7 +34,7 @@ export function createSlider (index) {
     if (Session.get("slider") === 0) {
         Session.set("slider", AnswerOptions.find({questionIndex: index}).count() * 10);
     }
-    this.$("#slider").noUiSlider({
+    $("#slider").noUiSlider({
         start: Session.get("slider"),
         range: {
             'min': 6,

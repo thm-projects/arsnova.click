@@ -1,3 +1,5 @@
+import localData from '../../lib/local_storage.js';
+
 var redirectTracker = null;
 
 Template.questionList.onCreated(function () {

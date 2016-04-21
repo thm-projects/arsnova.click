@@ -35,11 +35,11 @@ Meteor.publish('AnswerOptions.options', function(phashtag) {
     return AnswerOptions.find({hashtag: phashtag});
 });
 
-Meteor.publish('AnswerOptions.public', function(hashtag, questionIndex) {
+Meteor.publish('AnswerOptions.public', function (hashtag) {
     new SimpleSchema({
         hashtag: {type: String}
     }).validate({hashtag});
-    return AnswerOptions.find({hashtag: hashtag, questionIndex: questionIndex}, {
+    return AnswerOptions.find({hashtag: hashtag}, {
         fields: {
             isCorrect: 0
         }

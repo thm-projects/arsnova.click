@@ -1,4 +1,4 @@
-import {formatAnswerButtons} from '././lib.js';
+import {formatAnswerButtons} from './lib.js';
 
 Template.votingview.onRendered(function () {
     $(window).resize(function () {

@@ -31,6 +31,40 @@ This is a no-brainer. Keep your branches up to date so that merges will never en
 
 Please check your code against our code guidelines defined with jshint.
 
+### Project structure
+
+Since Meteor is supporting ES6 (ES2015) we use the import/export statements to modularize the application.
+Please take a look at our project file structure for the clients:
+'''client/
+    layout/
+        global/
+			styles/
+			templates/
+			scripts/
+        region_XYZ/
+        view_XYZ/
+			styles/
+			templates/
+			scripts/
+				events.js
+				helpers.js
+				lib.js			<= Use this file as a library for the view
+				onCreated.js
+				onDestroyed.js
+				onRendered.js
+    lib/        <= Here are global libraries defined, e.g. the access to the localStorage
+    plugins/	<= Here we have plugins for the application. 
+        styles/
+        templates/
+        scripts/
+            events.js
+			helpers.js
+			lib.js
+			onCreated.js
+			onDestroyed.js
+			onRendered.js'''
+The difference between a region and a view is that the region is named by the location (e.g. "header") and is nearly over the entire quiz-workflow visible where a view is rendered only to specific routes.
+
 ### Avoid trailing white-spaces
 
 Committing trailing white-spaces makes your merge request look sloppy. Most editors have a setting that remove trailing white-spaces, which you should activate. You can use `git diff` to review changes since it highlights erroneous white-spaces.

@@ -1,4 +1,4 @@
-import {calculateButtonCount} from './lib.js';
+import {calculateButtonCount, setMemberlistObserver} from './lib.js';
 import * as localData from '../../../lib/local_storage.js';
 
 Template.memberlist.onCreated(function () {
@@ -27,13 +27,12 @@ Template.memberlist.onCreated(function () {
             calculateButtonCount();
         });
 
-        let memberListObserver = MemberList.find().observeChanges({
+        setMemberlistObserver({
             removed: function (id) {
                 let idButton = $('#' + id);
                 if (idButton.hasClass("color-changing-own-nick")) {
                     $('.errorMessageSplash').parents('.modal').modal('show');
                     $("#errorMessage-text").html("Du wurdest aus dem Quiz geworfen!");
-                    memberListObserver.stop();
                     Router.go("/resetToHome");
                 } else {
                     idButton.remove();

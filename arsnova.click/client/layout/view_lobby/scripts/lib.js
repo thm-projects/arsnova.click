@@ -1,3 +1,5 @@
+export let memberlistObserver = null;
+
 export function calculateButtonCount () {
 
     /*
@@ -53,4 +55,8 @@ export function calculateButtonCount () {
      Template.memberlist.scripts.learners which gets the attendees from the mongo db
      */
     Session.set("LearnerCount", queryLimiter);
+}
+
+export function setMemberlistObserver (options) {
+    memberlistObserver = MemberList.find().observeChanges(options);
 }

@@ -1,0 +1,3 @@
+Template.nick.onDestroyed(function () {
+
+});

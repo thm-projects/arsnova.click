@@ -1,0 +1,23 @@
+<template name="kickMemberConfirmation">
+    <div class="row">
+        <div class="col-md-12">
+            <p>Soll der Teilnehmer '{{kicked_nick_name}}' aus dem Quiz entfernt werden?</p>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-xs-6">
+                    <button id="closeDialogButton" class="button">
+                        <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
+                        Nein
+                    </button>
+                </div>
+                <div class="col-xs-6">
+                    <button id="kickMemberButton" class="button button-next">
+                        Ja !
+                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -41,6 +41,10 @@ QuestionGroupSchema = new SimpleSchema({
         max: 25
     },
     questionList: {
+        /*
+         The index is defined in the EventManager.questionIndex variable.
+         The arrays index represents the questionIndex.
+         */
         type: [SingleQuestionSchema]
     }
 });

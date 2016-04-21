@@ -119,8 +119,5 @@ Meteor.methods({
         AnswerOptions.update(answerOptionDoc._id, {
             $set: {answerText: answerText, isCorrect: isCorrect}
         });
-        if (Meteor.isClient){
-            localData.updateAnswerText({hashtag, questionIndex, answerOptionNumber, answerText, isCorrect});
-        }
     }
 });

@@ -27,12 +27,13 @@ Template.memberlist.onCreated(function () {
             calculateButtonCount();
         });
 
-        MemberList.find().observeChanges({
+        let memberListObserver = MemberList.find().observeChanges({
             removed: function (id) {
                 let idButton = $('#' + id);
                 if (idButton.hasClass("color-changing-own-nick")) {
                     $('.errorMessageSplash').parents('.modal').modal('show');
                     $("#errorMessage-text").html("Du wurdest aus dem Quiz geworfen!");
+                    memberListObserver.stop();
                     Router.go("/resetToHome");
                 } else {
                     idButton.remove();

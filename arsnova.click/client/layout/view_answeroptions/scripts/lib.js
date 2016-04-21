@@ -1,11 +1,9 @@
+import * as localData from '../../../lib/local_storage.js';
+
 export var subscriptionHandler = null;
 
 export function parseAnswerOptionInput(index) {
     var hasError = false;
-
-    var meteorAnswerOptionsUpdateCall = function (err) {
-        hasError = err;
-    };
 
     for (var i = 0; i < AnswerOptions.find({questionIndex: index}).count(); i++) {
         var text = $("#answerOptionText_Number" + i).val();
@@ -18,7 +16,12 @@ export function parseAnswerOptionInput(index) {
             answerText: text,
             isCorrect: isCorrect
         };
-        Meteor.call('AnswerOptions.updateAnswerTextAndIsCorrect', answer, meteorAnswerOptionsUpdateCall);
+        Meteor.call('AnswerOptions.updateAnswerTextAndIsCorrect', answer, function (err) {
+            hasError = err;
+            if (!err) {
+                localData.updateAnswerText(Session.get("hashtag"), index, i, text, isCorrect);
+            }
+        });
     }
     return hasError;
 }

@@ -1,3 +1,5 @@
+import * as localData from '../../../lib/local_storage.js';
+
 export let validationTrackerHandle = null;
 export let subscriptionHandler = null;
 

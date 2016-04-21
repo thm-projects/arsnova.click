@@ -1,3 +1,5 @@
+import * as localData from '../../../lib/local_storage.js';
+
 Template.createTimerView.onCreated(function () {
     Session.set("slider", 0);
 

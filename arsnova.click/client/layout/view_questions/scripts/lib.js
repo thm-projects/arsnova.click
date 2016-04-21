@@ -1,3 +1,5 @@
+import * as localData from '../../../lib/local_storage.js';
+
 export var subscriptionHandler = null;
 
 export function addQuestion(index) {

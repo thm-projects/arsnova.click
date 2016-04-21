@@ -1,4 +1,5 @@
 import {parseAnswerOptionInput} from './lib.js';
+import * as localData from '../../../lib/local_storage.js';
 
 Template.createAnswerOptions.events({
     "click .toggleCorrect": function (event) {

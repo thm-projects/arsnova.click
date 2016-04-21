@@ -1,4 +1,4 @@
-import {validationTrackerHandle, subscriptionHandler} from '././lib.js';
+import {validationTrackerHandle, subscriptionHandler} from './lib.js';
 
 Template.createTimerView.onDestroyed(function () {
     var body = $('body');

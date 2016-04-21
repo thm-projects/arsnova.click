@@ -17,6 +17,7 @@
  */
 
 import {buzzsound1} from '../../plugins/sound/scripts/lib.js';
+import * as localData from '../../lib/local_storage.js';
 
 Template.header.onCreated(function () {
     this.autorun(() => {

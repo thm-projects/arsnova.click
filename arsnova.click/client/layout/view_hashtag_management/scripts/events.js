@@ -166,6 +166,7 @@ Template.hashtagManagement.events({
         Session.set("isOwner", true);
         Session.set("hashtag", hashtag);
         Meteor.call('EventManager.add', localData.getPrivateKey(), hashtag, function () {
+            Session.set("overrideValidQuestionRedirect", true);
             Router.go("/question");
         });
     },
@@ -220,7 +221,7 @@ Template.hashtagManagement.events({
                             } else {
                                 Session.set("hashtag", asJSON.hashtagDoc.hashtag);
                                 Session.set("isOwner", true);
-                                Router.go("/memberlist");
+                                Router.go("/question");
                             }
                         });
                     });

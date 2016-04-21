@@ -27,4 +27,8 @@ Template.createAnswerOptions.onRendered(function () {
     body.on('click', '.removeQuestion', function () {
         index = EventManager.findOne().questionIndex;
     });
+
+    if ($(window).width() >= 992) {
+        $('#answerOptionText_Number0').focus();
+    }
 });

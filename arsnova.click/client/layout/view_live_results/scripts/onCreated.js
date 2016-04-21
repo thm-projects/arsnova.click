@@ -1,4 +1,4 @@
-import {countdown, eventManagerObserver, deleteCountdown, setEventManagerObserver} from './lib.js';
+import {eventManagerObserver, deleteCountdown, setEventManagerObserver} from './lib.js';
 import {mathjaxMarkdown} from '../../../lib/mathjax_markdown.js';
 
 Template.questionT.onCreated(function () {

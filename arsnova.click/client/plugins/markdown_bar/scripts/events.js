@@ -1,3 +1,5 @@
+import {markdownAlreadyExistsAndAutoRemove, insertInQuestionText} from './lib.js';
+
 Template.markdownBar.events({
     "click #infoMarkdownButton": function () {
         var markdownInfoText = $("#markdownInfoText");

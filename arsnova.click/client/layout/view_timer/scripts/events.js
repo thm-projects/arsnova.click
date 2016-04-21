@@ -1,4 +1,5 @@
-import {setTimer} from '././lib.js';
+import {setTimer} from './lib.js';
+import * as localData from '../../../lib/local_storage.js';
 
 Template.createTimerView.events({
     "click #forwardButton, click #backButton": function (event) {

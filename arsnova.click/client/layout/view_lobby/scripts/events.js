@@ -1,3 +1,6 @@
+import {calculateButtonCount} from './lib.js';
+import * as localData from '../../../lib/local_storage.js';
+
 Template.memberlist.events({
     "click .btn-more-learners": function () {
         Session.set("LearnerCount", MemberList.find().count());

@@ -45,6 +45,10 @@ Template.createQuestionView.onRendered(function () {
     body.on('click', '.removeQuestion', function () {
         index = EventManager.findOne().questionIndex;
     });
+
+    if($(window).width() >= 992) {
+        $('#questionText').focus();
+    }
 });
 
 Template.createQuestionView.onDestroyed(function () {

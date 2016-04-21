@@ -1,4 +1,5 @@
 import {calculateButtonCount} from './lib.js';
+import * as localData from '../../../lib/local_storage.js';
 
 Template.memberlist.onCreated(function () {
     var oldStartTimeValues = {};

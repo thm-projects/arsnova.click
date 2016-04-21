@@ -1,5 +1,5 @@
 import {mathjaxMarkdown} from '../../../lib/mathjax_markdown.js';
-import localData from '../../../lib/local_storage.js';
+import * as localData from '../../../lib/local_storage.js';
 import {calculateButtonCount, startCountdown} from './lib.js';
 
 Template.questionT.events({

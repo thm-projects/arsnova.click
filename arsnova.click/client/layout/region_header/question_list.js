@@ -1,4 +1,4 @@
-import localData from '../../lib/local_storage.js';
+import * as localData from '../../lib/local_storage.js';
 
 var redirectTracker = null;
 

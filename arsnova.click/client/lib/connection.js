@@ -16,6 +16,8 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import * as localData from './local_storage.js';
+
 Meteor.setInterval(function () {
     if (Session.get("isOwner")){
         Meteor.call('keepalive', localData.getPrivateKey(), Session.get("hashtag"));

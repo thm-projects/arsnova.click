@@ -1,5 +1,5 @@
 import {startReadingConfirmationTracker, calculateButtonCount, setMcCSSClasses} from './lib.js';
-import localData from './../../../lib/local_storage.js';
+import * as localData from './../../../lib/local_storage.js';
 
 Template.questionT.onRendered(function () {
 

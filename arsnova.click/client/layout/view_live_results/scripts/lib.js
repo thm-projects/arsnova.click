@@ -1,5 +1,5 @@
 import {buzzsound1} from '../../../plugins/sound/scripts/lib.js';
-import localData from '../../../lib/local_storage.js';
+import * as localData from '../../../lib/local_storage.js';
 import {mathjaxMarkdown} from '../../../lib/mathjax_markdown.js';
 
 export let countdown = null;

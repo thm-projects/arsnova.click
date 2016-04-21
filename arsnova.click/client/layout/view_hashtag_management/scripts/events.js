@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import localData from './../../../lib/local_storage';
+import * as localData from '../../../lib/local_storage.js';
 
 Template.hashtag_view.events({
     "input #hashtag-input-field": function (event) {

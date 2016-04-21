@@ -1,4 +1,4 @@
-import localData from './../../../lib/local_storage';
+import * as localData from './../../../lib/local_storage';
 
 Template.soundConfig.onCreated(function () {
     Session.setDefault("slider2", 80);

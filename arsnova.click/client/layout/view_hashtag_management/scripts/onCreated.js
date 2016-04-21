@@ -1,4 +1,4 @@
-import localData from './../../../lib/local_storage';
+import * as localData from './../../../lib/local_storage';
 
 Template.hashtag_view.onCreated(function () {
     this.subscribe('Hashtags.public', ()=> {

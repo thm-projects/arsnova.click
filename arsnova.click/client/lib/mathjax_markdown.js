@@ -17,7 +17,7 @@
  */
 var defaultHyperLinkRenderer;
 
-export var mathjaxMarkdown = {
+export const mathjaxMarkdown = {
     initializeMarkdownAndLatex: function () {
         // markdown setup
         var markedRenderer = marked.Renderer;

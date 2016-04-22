@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import { EventManager } from '/lib/eventmanager.js';
 import { QuestionGroup } from '/lib/questions.js';
 import * as lib from '././lib.js';

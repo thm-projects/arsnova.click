@@ -1,40 +1,21 @@
 {
-	"browser": true,
-	"esnext": true,
-	"undef": true,
-	"unused": true,
-	"curly": true,
-	"globals": {
-		"_": false,
-		"$": false,
-		"hljs": false,
-		"marked": false,
-		"MathJax": false,
-		"Meteor": false,
-		"Mongo": false,
-		"ReactiveCountdown": false,
-		"Router": false,
-		"Session": false,
-		"SimpleSchema": false,
-		"Template": false,
-		"Tracker": false,
+  "browser": true,
+  "esnext": true,
+  "undef": true,
+  "unused": true,
+  "curly": true,
+  "globals": {
+    "_": false,
+    "$": false,
+    "hljs": false,
+    "marked": false,
+    "MathJax": false,
+    "buzz": false,
+    "Router": false,
+    "ReactiveCountdown": false,
 
-		"AnswerOptions": false,
-		"Hashtags": false,
-		"LeaderBoard": false,
-		"MemberList": false,
-		"Responses": false,
-		"QuestionGroup": false,
-
-		"EventManager": false,
-		"localData": false,
-		"mathjaxMarkdown": false,
-		"closeSplashscreen": true,
-		"showSplashscreen": true,
-		"closeAndRedirectTo": true,
-		"QuestionGroupSchema": false,
-
-		"buzz": false,
-		"buzzsound1": false
-	}
+    "closeSplashscreen": true,
+    "showSplashscreen": true,
+    "closeAndRedirectTo": true
+  }
 }

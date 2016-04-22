@@ -123,5 +123,8 @@ Meteor.methods({
         AnswerOptions.update(answerOptionDoc._id, {
             $set: {answerText: answerText, isCorrect: isCorrect}
         });
+        return {
+            questionIndex: questionIndex, answerOptionNumber: answerOptionNumber, answerText: answerText, isCorrect: isCorrect
+        };
     }
 });

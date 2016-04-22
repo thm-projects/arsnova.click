@@ -16,6 +16,9 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+
 export function getAllHashtags () {
     var hashtagString = localStorage.getItem("hashtags");
     if (!hashtagString) {

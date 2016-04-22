@@ -78,7 +78,7 @@ export const mathjaxMarkdown = {
     },
     getContent: function (content) {
         if (content) {
-            var replStack = [], repl;
+            var replStack = [], repl = {};
 
             // replace MathJax delimiters
             var delimiterPairs = MathJax.tex2jax.inlineMath.concat(MathJax.tex2jax.displayMath);

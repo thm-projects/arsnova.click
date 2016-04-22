@@ -23,7 +23,7 @@ Template.leaderBoard.helpers({
         return (index + 1);
     },
     parseTimeToSeconds: function (milliseconds) {
-        return Math.round((milliseconds / 10), 2) / 100;
+        return Math.round((milliseconds / 10)) / 100;
     },
     showAllLeaderboard: ()=> {
         return Session.get('show_all_leaderboard');

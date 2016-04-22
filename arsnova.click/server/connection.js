@@ -16,6 +16,13 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Meteor } from 'meteor/meteor';
+import { EventManager } from '/lib/eventmanager.js';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { MemberList } from '/lib/memberlist.js';
+import { Responses } from '/lib/responses.js';
+import { QuestionGroup } from '/lib/questions.js';
+
 Meteor.setInterval(function () {
     var sessionDeleteAfterIdleMinutes = 10; //Minutes to session is idle
     var now = (new Date()).getTime();

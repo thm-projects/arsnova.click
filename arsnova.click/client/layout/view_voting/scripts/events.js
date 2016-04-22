@@ -1,5 +1,10 @@
-import {mathjaxMarkdown} from '../../../lib/mathjax_markdown.js';
-import {makeAndSendResponse} from './lib.js';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { EventManager } from '/lib/eventmanager.js';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { QuestionGroup } from '/lib/questions.js';
+import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
+import { makeAndSendResponse } from './lib.js';
 
 Template.votingview.events({
     "click #js-btn-showQuestionModal": function (event) {

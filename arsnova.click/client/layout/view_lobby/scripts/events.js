@@ -1,5 +1,9 @@
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { MemberList } from '/lib/memberlist.js';
+import * as localData from '/client/lib/local_storage.js';
 import {calculateButtonCount} from './lib.js';
-import * as localData from '../../../lib/local_storage.js';
 
 Template.memberlist.events({
     "click .btn-more-learners": function () {

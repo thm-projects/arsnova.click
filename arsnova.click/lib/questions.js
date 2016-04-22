@@ -16,9 +16,12 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-QuestionGroup = new Mongo.Collection("questionGroup");
+import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-SingleQuestionSchema = new SimpleSchema({
+export const QuestionGroup = new Mongo.Collection("questionGroup");
+
+export const SingleQuestionSchema = new SimpleSchema({
     questionText: {
         type: String,
         optional: true,
@@ -34,7 +37,7 @@ SingleQuestionSchema = new SimpleSchema({
     }
 });
 
-QuestionGroupSchema = new SimpleSchema({
+export const QuestionGroupSchema = new SimpleSchema({
     hashtag: {
         type: String,
         min: 1,

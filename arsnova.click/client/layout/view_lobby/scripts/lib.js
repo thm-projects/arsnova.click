@@ -1,3 +1,6 @@
+import { Session } from 'meteor/session';
+import { MemberList } from '/lib/memberlist.js';
+
 export let memberlistObserver = null;
 
 export function calculateButtonCount () {

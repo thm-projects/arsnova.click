@@ -1,3 +1,6 @@
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+
 Template.leaderBoard.onCreated(function () {
     this.subscribe('Responses.session', Session.get("hashtag"));
     this.subscribe('AnswerOptions.options', Session.get("hashtag"));

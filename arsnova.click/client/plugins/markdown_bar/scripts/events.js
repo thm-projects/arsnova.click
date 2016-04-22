@@ -1,3 +1,4 @@
+import { Template } from 'meteor/templating';
 import {markdownAlreadyExistsAndAutoRemove, insertInQuestionText} from './lib.js';
 
 Template.markdownBar.events({

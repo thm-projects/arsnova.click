@@ -1,1 +1,5 @@
-Template.nick.helpers({});
+import { Template } from 'meteor/templating';
+
+Template.nick.helpers({
+    
+});

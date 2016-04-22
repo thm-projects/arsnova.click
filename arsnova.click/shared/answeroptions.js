@@ -16,6 +16,11 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { Hashtags } from '/lib/hashtags.js';
+
 Meteor.methods({
     'AnswerOptions.addOption'({privateKey, hashtag, questionIndex, answerText, answerOptionNumber, isCorrect}) {
         new SimpleSchema({
@@ -119,5 +124,8 @@ Meteor.methods({
         AnswerOptions.update(answerOptionDoc._id, {
             $set: {answerText: answerText, isCorrect: isCorrect}
         });
+        return {
+            questionIndex: questionIndex, answerOptionNumber: answerOptionNumber, answerText: answerText, isCorrect: isCorrect
+        };
     }
 });

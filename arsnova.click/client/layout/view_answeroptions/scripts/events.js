@@ -1,5 +1,10 @@
-import {parseAnswerOptionInput} from './lib.js';
-import * as localData from '../../../lib/local_storage.js';
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { EventManager } from '/lib/eventmanager.js';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { parseAnswerOptionInput } from './lib.js';
+import * as localData from '/client/lib/local_storage.js';
 
 Template.createAnswerOptions.events({
     "click .toggleCorrect": function (event) {

@@ -1,3 +1,6 @@
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+
 Template.leaderBoard.events({
     'click #showMore': ()=> {
         Session.set('show_all_leaderboard', true);

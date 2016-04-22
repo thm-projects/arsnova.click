@@ -16,7 +16,12 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import * as localData from '../../../lib/local_storage.js';
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { EventManager } from '/lib/eventmanager.js';
+import { Hashtags } from '/lib/hashtags.js';
+import * as localData from '/client/lib/local_storage.js';
 
 Template.hashtag_view.events({
     "input #hashtag-input-field": function (event) {

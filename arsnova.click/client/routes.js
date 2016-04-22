@@ -16,7 +16,8 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import * as localData from './lib/local_storage.js';
+import { Session } from 'meteor/session';
+import * as localData from '/client/lib/local_storage.js';
 
 Router.configure({
     layoutTemplate: 'layout'

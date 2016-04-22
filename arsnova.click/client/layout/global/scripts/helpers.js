@@ -1,4 +1,6 @@
-import  * as localData from './../../../lib/local_storage';
+import  * as localData from '/client/lib/local_storage.js';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
 
 Template.home.helpers({
     existingHashtagsAvailable: function () {

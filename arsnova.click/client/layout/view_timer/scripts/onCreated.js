@@ -1,4 +1,6 @@
-import * as localData from '../../../lib/local_storage.js';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import * as localData from '/client/lib/local_storage.js';
 
 Template.createTimerView.onCreated(function () {
     Session.set("slider", 0);

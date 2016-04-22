@@ -16,7 +16,10 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-AnswerOptions = new Mongo.Collection("answeroptions");
+import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+export const AnswerOptions = new Mongo.Collection("answeroptions");
 
 AnswerOptions.attachSchema(new SimpleSchema({
 	hashtag: {

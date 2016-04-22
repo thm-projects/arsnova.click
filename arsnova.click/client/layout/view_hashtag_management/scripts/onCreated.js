@@ -1,4 +1,9 @@
-import * as localData from './../../../lib/local_storage';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { EventManager } from '/lib/eventmanager.js';
+import { Hashtags } from '/lib/hashtags.js';
+
+import * as localData from '/client/lib/local_storage.js';
 
 Template.hashtag_view.onCreated(function () {
     this.subscribe('Hashtags.public', ()=> {

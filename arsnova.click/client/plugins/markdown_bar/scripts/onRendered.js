@@ -1,3 +1,5 @@
+import { Template } from 'meteor/templating';
+
 Template.markdownBar.onRendered(function () {
     $('#infoMarkdownButton').tooltip();
     $('#boldMarkdownButton').tooltip();

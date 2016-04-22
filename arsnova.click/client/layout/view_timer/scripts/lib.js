@@ -1,4 +1,8 @@
-import * as localData from '../../../lib/local_storage.js';
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { QuestionGroup } from '/lib/questions.js';
+import * as localData from '/client/lib/local_storage.js';
 
 export let validationTrackerHandle = null;
 export let subscriptionHandler = null;

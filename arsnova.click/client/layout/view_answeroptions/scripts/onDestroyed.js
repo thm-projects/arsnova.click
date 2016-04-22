@@ -1,4 +1,5 @@
-import * as lib from '././lib.js';
+import { Template } from 'meteor/templating';
+import * as lib from './lib.js';
 
 Template.createAnswerOptions.onDestroyed(function () {
     var body = $('body');

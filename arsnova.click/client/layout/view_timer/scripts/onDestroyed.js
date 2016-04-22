@@ -1,3 +1,4 @@
+import { Template } from 'meteor/templating';
 import {validationTrackerHandle, subscriptionHandler} from './lib.js';
 
 Template.createTimerView.onDestroyed(function () {

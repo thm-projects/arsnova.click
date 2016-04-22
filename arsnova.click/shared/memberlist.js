@@ -16,6 +16,12 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { EventManager } from '/lib/eventmanager.js';
+import { MemberList } from '/lib/memberlist.js';
+import { Hashtags } from '/lib/hashtags.js';
+
 Meteor.methods({
     'MemberList.addLearner': function ({hashtag, nick, backgroundColor, foregroundColor}) {
         new SimpleSchema({

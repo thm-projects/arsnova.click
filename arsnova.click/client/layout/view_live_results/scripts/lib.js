@@ -1,6 +1,13 @@
-import {buzzsound1} from '../../../plugins/sound/scripts/lib.js';
-import * as localData from '../../../lib/local_storage.js';
-import {mathjaxMarkdown} from '../../../lib/mathjax_markdown.js';
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+import { Tracker } from 'meteor/tracker';
+import { EventManager } from '/lib/eventmanager.js';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { MemberList } from '/lib/memberlist.js';
+import { QuestionGroup } from '/lib/questions.js';
+import * as localData from '/client/lib/local_storage.js';
+import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
+import { buzzsound1 } from '/client/plugins/sound/scripts/lib.js';
 
 export let countdown = null;
 export let routeToLeaderboardTimer = null;
@@ -61,47 +68,48 @@ export function startCountdown (index) {
     countdown = new ReactiveCountdown(questionDoc.timer / 1000, {
 
         tick: function () {
-            if (countdown.get() < 6) {
-                var image = document.getElementById('countdown');
-                var image1 = $('.fader');
-                var imageDiv = document.getElementById('countdowndiv');
+            if (countdown.get() > 5) {
+                return;
+            }
 
-                if (image.src.match("gr5")) {
-                    image.src = "/images/gruen.gif";
-                    image1.fadeIn(500);
-                    imageDiv.style.display = "block";
-                    image.style.display = "block";
-                    image1.fadeOut(500);
-                } else if (image.src.match("gruen")) {
-                    imageDiv.style.backgroundColor = "#2f4f4f";
-                    image.src = "/images/blau.gif";
-                    image1.fadeIn(500);
-                    image1.fadeOut(500);
-                } else if (image.src.match("blau")) {
-                    imageDiv.style.backgroundColor = "#663399";
-                    image.src = "/images/lila3.gif";
-                    image1.fadeIn(500);
-                    image1.fadeOut(500);
-                } else if (image.src.match("lila3")) {
-                    imageDiv.style.backgroundColor = "#b22222";
-                    image.src = "/images/rot2.gif";
-                    image1.fadeIn(500);
-                    image1.fadeOut(500);
-                } else if (image.src.match("rot2")) {
-                    imageDiv.style.backgroundColor = "#ff8c00";
-                    image.src = "/images/orange1.gif";
-                    image1.fadeIn(500);
-                    image1.fadeOut(500);
-                } else if (image.src.match("orange1")) {
-                    imageDiv.style.backgroundColor = "#ffd700";
-                    image.src = "/images/gelb0.gif";
-                    image1.fadeIn(500);
-                    image1.fadeOut(500);
-                    if (Session.get("togglemusic")) {
-                        f.play();
-                    }
+            var image = document.getElementById('countdown');
+            var image1 = $('.fader');
+            var imageDiv = document.getElementById('countdowndiv');
+
+            if (image.src.match(/gr5/g)) {
+                image.src = "/images/gruen.gif";
+                image1.fadeIn(500);
+                imageDiv.style.display = "block";
+                image.style.display = "block";
+                image1.fadeOut(500);
+            } else if (image.src.match(/gruen/g)) {
+                imageDiv.style.backgroundColor = "#2f4f4f";
+                image.src = "/images/blau.gif";
+                image1.fadeIn(500);
+                image1.fadeOut(500);
+            } else if (image.src.match(/blau/g)) {
+                imageDiv.style.backgroundColor = "#663399";
+                image.src = "/images/lila3.gif";
+                image1.fadeIn(500);
+                image1.fadeOut(500);
+            } else if (image.src.match(/lila3/g)) {
+                imageDiv.style.backgroundColor = "#b22222";
+                image.src = "/images/rot2.gif";
+                image1.fadeIn(500);
+                image1.fadeOut(500);
+            } else if (image.src.match(/rot2/g)) {
+                imageDiv.style.backgroundColor = "#ff8c00";
+                image.src = "/images/orange1.gif";
+                image1.fadeIn(500);
+                image1.fadeOut(500);
+            } else if (image.src.match(/orange1/g)) {
+                imageDiv.style.backgroundColor = "#ffd700";
+                image.src = "/images/gelb0.gif";
+                image1.fadeIn(500);
+                image1.fadeOut(500);
+                if (Session.get("togglemusic")) {
+                    f.play();
                 }
-
             }
         }
     });

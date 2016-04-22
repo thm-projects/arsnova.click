@@ -92,7 +92,7 @@
 .btn-more-learners {
     background-color: rebeccapurple;
     color: white;
-    margin: 20px 0px 0px 0px;
+    margin: 20px 0 0 0;
     font-size: 17px;
 
     .glyphicon-align-justify {
@@ -210,13 +210,13 @@
     height: 40px;
     line-height: 40px !important; /* Override .progress-bar setting in default.scss */
     color: black;
-    padding: 0px 10px;
+    padding: 0 10px;
 }
 
 .progress-fill {
     background: $progress-bar-read-confirmation;
     color: #ffffff;
-    padding: 0px 10px;
+    padding: 0 10px;
     width: auto;
     position: absolute;
     left: 0;

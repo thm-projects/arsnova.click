@@ -17,7 +17,7 @@
  */
 var defaultHyperLinkRenderer;
 
-export var mathjaxMarkdown = {
+export const mathjaxMarkdown = {
     initializeMarkdownAndLatex: function () {
         // markdown setup
         var markedRenderer = marked.Renderer;
@@ -78,7 +78,7 @@ export var mathjaxMarkdown = {
     },
     getContent: function (content) {
         if (content) {
-            var replStack = [], repl;
+            var replStack = [], repl = {};
 
             // replace MathJax delimiters
             var delimiterPairs = MathJax.tex2jax.inlineMath.concat(MathJax.tex2jax.displayMath);
@@ -191,12 +191,12 @@ export var mathjaxMarkdown = {
         var size = '', alignment = 'center';
 
         if (!isVideoElement) {
-            return '<a target="_blank" class="hyperlink" href="' + href + '"><div styles="text-align:' + alignment + '">' +
-                '<img class="resizeableImage img-responsive" title="' + text + '" src="' + href + '" alt="' + text + '" styles=' + size + '>' +
+            return '<a target="_blank" class="hyperlink" href="' + href + '"><div style="text-align:' + alignment + '">' +
+                '<img class="resizeableImage img-responsive" title="' + text + '" src="' + href + '" alt="' + text + '" style=' + size + '>' +
                 '</div></a>';
         }
 
-        return '<img class="resizeableImage" title="' + text + '" src="' + href + '" alt="' + text + '"styles="width: 100%">';
+        return '<img class="resizeableImage" title="' + text + '" src="' + href + '" alt="' + text + '" style="width: 100%">';
     },
     hyperlinkRenderer: function (href, title, text) {
         var titleDelimiter = /^.*alt="([^"]*)/;

@@ -1,4 +1,8 @@
-import {countdown} from './lib.js';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { EventManager } from '/lib/eventmanager.js';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { countdown } from './lib.js';
 
 Template.votingview.helpers({
     answerOptions: function () {

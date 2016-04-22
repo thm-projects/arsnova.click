@@ -1,40 +1,22 @@
 {
-	"browser": true,
-	"esnext": true,
-	"undef": true,
-	"unused": true,
-	"curly": true,
-	"globals": {
-		"_": false,
-		"$": false,
-		"hljs": false,
-		"marked": false,
-		"MathJax": false,
-		"Meteor": false,
-		"Mongo": false,
-		"ReactiveCountdown": false,
-		"Router": false,
-		"Session": false,
-		"SimpleSchema": false,
-		"Template": false,
-		"Tracker": false,
+  "browser": true,
+  "esnext": true,
+  "undef": true,
+  "unused": true,
+  "curly": true,
+  "globals": {
+    "_": false,
+    "$": false,
+    "hljs": false,
+    "marked": false,
+    "MathJax": false,
+    "buzz": false,
+    "Router": false,
+    "ReactiveCountdown": false,
+    "App": false,
 
-		"AnswerOptions": true,
-		"Hashtags": true,
-		"LeaderBoard": true,
-		"MemberList": true,
-		"Responses": true,
-		"QuestionGroup": true,
-
-		"EventManager": true,
-		"localData": true,
-		"mathjaxMarkdown": true,
-		"closeSplashscreen": true,
-		"showSplashscreen": true,
-		"closeAndRedirectTo": true,
-		"QuestionGroupSchema": true,
-
-		"buzz": true,
-		"buzzsound1": true
-	}
+    "closeSplashscreen": true,
+    "showSplashscreen": true,
+    "closeAndRedirectTo": true
+  }
 }

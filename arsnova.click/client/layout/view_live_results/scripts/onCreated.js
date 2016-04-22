@@ -1,5 +1,10 @@
-import {eventManagerObserver, deleteCountdown, setEventManagerObserver} from './lib.js';
-import {mathjaxMarkdown} from '../../../lib/mathjax_markdown.js';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { EventManager } from '/lib/eventmanager.js';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { QuestionGroup } from '/lib/questions.js';
+import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
+import { eventManagerObserver, deleteCountdown, setEventManagerObserver } from './lib.js';
 
 Template.questionT.onCreated(function () {
     this.subscribe("EventManager.join", Session.get("hashtag"));

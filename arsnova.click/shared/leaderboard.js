@@ -16,6 +16,12 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { Responses } from '/lib/responses.js';
+import { LeaderBoard } from '/lib/leaderBoard.js';
+
 Meteor.methods({
     'LeaderBoard.addResponseSet': function ({phashtag, questionIndex, nick, responseTimeMillis}) {
         if (Meteor.isServer){

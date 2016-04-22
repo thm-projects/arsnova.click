@@ -16,6 +16,8 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Meteor } from 'meteor/meteor';
+
 Meteor.startup(function(){
     if (Meteor.isClient) {
         $.getScript('/lib/highlight.pack.min.js');

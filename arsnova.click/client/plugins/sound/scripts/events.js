@@ -1,4 +1,6 @@
-import {buzzsound1, setBuzzsound1} from './lib.js';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { buzzsound1, setBuzzsound1 } from './lib.js';
 
 Template.soundConfig.events({
     "change #soundSelect": function (evt) {

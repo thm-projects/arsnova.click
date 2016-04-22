@@ -1,5 +1,10 @@
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { EventManager } from '/lib/eventmanager.js';
+import { QuestionGroup } from '/lib/questions.js';
+import * as localData from '/client/lib/local_storage.js';
 import {calculateButtonCount, setMemberlistObserver} from './lib.js';
-import * as localData from '../../../lib/local_storage.js';
 
 Template.memberlist.onCreated(function () {
     var oldStartTimeValues = {};

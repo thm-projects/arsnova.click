@@ -17,6 +17,7 @@
  */
 
 import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { AnswerOptions } from '/lib/answeroptions.js';
 import { Hashtags } from '/lib/hashtags.js';
 

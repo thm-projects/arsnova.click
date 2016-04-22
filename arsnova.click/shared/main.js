@@ -17,6 +17,7 @@
  */
 
 import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { EventManager } from '/lib/eventmanager.js';
 import { AnswerOptions } from '/lib/answeroptions.js';
 import { MemberList } from '/lib/memberlist.js';

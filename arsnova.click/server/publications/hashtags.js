@@ -17,6 +17,7 @@
  */
 
 import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Hashtags } from '/lib/hashtags.js';
 
 Meteor.publish('Hashtags.public', function () {

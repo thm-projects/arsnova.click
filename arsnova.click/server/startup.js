@@ -17,6 +17,7 @@
  */
 
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
 import { Hashtags } from '/lib/hashtags.js';
 
 if (Meteor.isServer) {

@@ -1,5 +1,6 @@
 
 import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { EventManager } from '/lib/eventmanager.js';
 
 Meteor.publish('EventManager.join', (hashtag)=> {

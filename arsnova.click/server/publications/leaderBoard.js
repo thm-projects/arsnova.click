@@ -17,6 +17,7 @@
  */
 
 import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { LeaderBoard } from '/lib/leaderBoard.js';
 
 Meteor.publish('LeaderBoard.session', function (phashtag) {

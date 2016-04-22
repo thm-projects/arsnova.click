@@ -16,6 +16,9 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
 export const EventManager = new Mongo.Collection("eventmanager");
 
 var eventManagerScheme = new SimpleSchema({

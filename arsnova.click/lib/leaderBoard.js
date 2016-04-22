@@ -16,6 +16,9 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
 export const LeaderBoard = new Mongo.Collection("leaderBoard");
 
 LeaderBoard.attachSchema(new SimpleSchema({

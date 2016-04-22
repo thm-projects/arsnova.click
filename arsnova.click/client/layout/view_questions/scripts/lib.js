@@ -53,3 +53,53 @@ export function calculateWindow() {
 export function calculateAndSetPreviewSplashWidthAndHeight() {
     $('.modal-dialog').width($('#mainContentContainer').width() - 40);
 }
+
+export function questionContainsMarkdownSyntax(questionText) {
+    if (doesMarkdownSyntaxExist(questionText, '**', '**') || doesMarkdownSyntaxExist(questionText, '#', '#') || doesMarkdownSyntaxExist(questionText, '[', '](', ')') ||
+        doesMarkdownSyntaxExist(questionText, '- ') || doesMarkdownSyntaxExist(questionText, '1. ') || doesMarkdownSyntaxExist(questionText, '\\(', '\\)') ||
+        doesMarkdownSyntaxExist(questionText, '$$', '$$') || doesMarkdownSyntaxExist(questionText, '<hlcode>', '</hlcode>') || doesMarkdownSyntaxExist(questionText, '>')) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function doesMarkdownSyntaxExist (questionText, syntaxStart, syntaxMiddle, syntaxEnd) {
+    if (questionText.length <= 0) {
+        return false;
+    }
+
+    if (questionText.indexOf(syntaxStart) !=-1) {
+        if (!syntaxMiddle && !syntaxEnd) {
+            return true;
+        }
+    } else {
+        return false;
+    }
+
+    questionText = questionText.substring(questionText.indexOf(syntaxStart) + syntaxStart.length, questionText.length);
+
+    if (questionText.indexOf(syntaxMiddle) !=-1) {
+        if (!syntaxEnd) {
+            return true;
+        }
+    } else {
+        return false;
+    }
+
+    questionText = questionText.substring(questionText.indexOf(syntaxMiddle) + syntaxMiddle.length, questionText.length);
+
+    if (questionText.indexOf(syntaxEnd) !=-1) {
+        return true;
+
+    } else {
+        return false;
+    }
+}
+
+export function changePreviewButtonText(text) {
+    $('#formatPreviewText').text(text);
+    $('#formatPreviewGlyphicon').removeClass("glyphicon-cog").addClass("glyphicon-phone");
+    $('#markdownBarDiv').removeClass('hide');
+    $('#questionText').removeClass('round-corners').addClass('round-corners-markdown');
+}

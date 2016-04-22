@@ -2,9 +2,11 @@ import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import { EventManager } from '/lib/eventmanager.js';
 import { QuestionGroup } from '/lib/questions.js';
+import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
 import * as lib from './lib.js';
 
 Template.createQuestionView.onRendered(function () {
+    Session.set("markdownAlreadyChecked", false)
     lib.calculateWindow();
     $(window).resize(lib.calculateWindow());
 
@@ -12,6 +14,10 @@ Template.createQuestionView.onRendered(function () {
     lib.subscriptionHandler = Tracker.autorun(()=>{
         if(this.subscriptionsReady()) {
             index = EventManager.findOne().questionIndex;
+            if (!Session.get("markdownAlreadyChecked")) {
+                checkForMarkdown();
+                Session.set("markdownAlreadyChecked", true);
+            }
         }
     });
     var body = $('body');
@@ -26,10 +32,6 @@ Template.createQuestionView.onRendered(function () {
     body.on('click', '.removeQuestion', function () {
         index = EventManager.findOne().questionIndex;
     });
-
-    if ($(window).width() >= 992) {
-        $('#questionText').focus();
-    }
 });
 
 Template.questionPreviewSplashscreen.onRendered(function () {
@@ -38,3 +40,23 @@ Template.questionPreviewSplashscreen.onRendered(function () {
         lib.calculateAndSetPreviewSplashWidthAndHeight();
     });
 });
+
+function checkForMarkdown () {
+    var questionText = QuestionGroup.findOne().questionList[EventManager.findOne().questionIndex].questionText;
+    console.log(questionText);
+    if (lib.questionContainsMarkdownSyntax(questionText)) {
+        lib.changePreviewButtonText("Bearbeiten");
+
+        mathjaxMarkdown.initializeMarkdownAndLatex();
+
+        questionText = mathjaxMarkdown.getContent(questionText);
+
+        $("#questionTextDisplay").html(questionText);
+        $('#editQuestionText').hide();
+        $('#previewQuestionText').show();
+    } else {
+        if ($(window).width() >= 992) {
+            $('#questionText').focus();
+        }
+    }
+};

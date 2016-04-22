@@ -13,7 +13,7 @@ Template.createQuestionView.helpers({
             return questionDoc.questionList[EventManager.findOne().questionIndex].questionText;
         }
     },
-    isFormattingEnabled: function () {
-        return $('#markdownBarDiv').hasClass('hide');
+    isPreview: function () {
+        return $('#formatPreviewText').text() === "Bearbeiten";
     }
 });

@@ -21,12 +21,20 @@ Template.live_results.helpers({
         }
         return 0;
     },
-    isCountdownZero: function () {
-        if (Session.get("sessionClosed") || !Session.get("countdownInitialized")) {
-            return true;
+    isCountdownZero: function (index) {
+        if (Session.get("isOwner")) {
+            if (Session.get("sessionClosed") || !Session.get("countdownInitialized")) {
+                return true;
+            } else {
+                var timer = Math.round(countdown.get());
+                return timer <= 0;
+            }
         } else {
-            var timer = Math.round(countdown.get());
-            return timer <= 0;
+            if (index === EventManager.findOne().questionIndex && EventManager.findOne().sessionStatus === 3) {
+                return false;
+            } else {
+                return true;
+            }
         }
     },
     getCountStudents: function () {

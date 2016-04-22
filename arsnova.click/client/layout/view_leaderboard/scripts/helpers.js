@@ -18,7 +18,7 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {getLeaderBoardItems} from './lib.js';
+import {getLeaderBoardItems, maxResponseButtons} from './lib.js';
 
 Template.leaderBoard.helpers({
 	hashtag: ()=> {
@@ -48,9 +48,15 @@ Template.leaderBoard.helpers({
 		seconds = parseInt(seconds) < 10 ? "0" + seconds : seconds;
 		return seconds;
 	},
+    invisibleResponsesCount: ()=> {
+        return maxResponseButtons - Session.get("allMembersCount");
+    },
 	showAllLeaderboard: ()=> {
 		return Session.get('show_all_leaderboard');
 	},
+    hasTooMuchButtons: ()=> {
+        return Session.get("allMembersCount") - maxResponseButtons > 0;
+    },
 	noLeaderBoardItems: (index)=> {
 		var items = getLeaderBoardItems();
 		if (typeof index !== "undefined") {

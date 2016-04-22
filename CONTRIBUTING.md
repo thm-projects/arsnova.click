@@ -35,7 +35,9 @@ Please check your code against our code guidelines defined with jshint.
 
 Since Meteor is supporting ES6 (ES2015) we use the import/export statements to modularize the application.
 Please take a look at our project file structure for the clients:
-'''client/
+
+```
+client/
     layout/
         global/
 			styles/
@@ -62,7 +64,9 @@ Please take a look at our project file structure for the clients:
 			lib.js
 			onCreated.js
 			onDestroyed.js
-			onRendered.js'''
+			onRendered.js
+```
+			
 The difference between a region and a view is that the region is named by the location (e.g. "header") and is nearly over the entire quiz-workflow visible where a view is rendered only to specific routes.
 
 ### Avoid trailing white-spaces

@@ -1,3 +1,4 @@
+import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import { EventManager } from '/lib/eventmanager.js';
@@ -6,7 +7,7 @@ import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
 import * as lib from './lib.js';
 
 Template.createQuestionView.onRendered(function () {
-    Session.set("markdownAlreadyChecked", false)
+    Session.set("markdownAlreadyChecked", false);
     lib.calculateWindow();
     $(window).resize(lib.calculateWindow());
 
@@ -43,7 +44,6 @@ Template.questionPreviewSplashscreen.onRendered(function () {
 
 function checkForMarkdown () {
     var questionText = QuestionGroup.findOne().questionList[EventManager.findOne().questionIndex].questionText;
-    console.log(questionText);
     if (lib.questionContainsMarkdownSyntax(questionText)) {
         lib.changePreviewButtonText("Bearbeiten");
 

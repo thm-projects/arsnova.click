@@ -8,12 +8,7 @@ Template.createQuestionView.helpers({
         if(!EventManager.findOne()) {
             return;
         }
-        var questionDoc = QuestionGroup.findOne();
-        if(questionDoc && questionDoc.questionList[EventManager.findOne().questionIndex]) {
-            return questionDoc.questionList[EventManager.findOne().questionIndex].questionText;
-        }
-    },
-    isPreview: function () {
-        return $('#formatPreviewText').text() === "Bearbeiten";
+        var currentSession = QuestionGroup.findOne();
+        return currentSession && currentSession.questionList[EventManager.findOne().questionIndex] ? currentSession.questionList[EventManager.findOne().questionIndex].questionText : "";
     }
 });

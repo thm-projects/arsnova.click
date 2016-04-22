@@ -18,7 +18,7 @@
 
 .footer {
     min-height: 20px;
-    border: 0px;
+    border: 0;
 }
 
 .footer a div {
@@ -37,7 +37,7 @@
 @media (max-width:991px) {
     .footer-info-bar {
         height: 6vw;
-        bottom: 0px;
+        bottom: 0;
         margin-bottom: 2px;
         font-size: 5vw;
         position: fixed;
@@ -62,7 +62,7 @@
 }
 
 .hiddenStyle {
-    bottom: 0px;
+    bottom: 0;
     margin-bottom: 2px;
 }
 

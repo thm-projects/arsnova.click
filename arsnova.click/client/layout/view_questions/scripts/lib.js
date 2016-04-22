@@ -70,7 +70,7 @@ export function changePreviewButtonText(text) {
 
 export function checkForMarkdown () {
     var questionText = QuestionGroup.findOne().questionList[EventManager.findOne().questionIndex].questionText;
-    if (questionContainsMarkdownSyntax(questionText)) {
+    if (questionText && questionContainsMarkdownSyntax(questionText)) {
         changePreviewButtonText("Bearbeiten");
 
         mathjaxMarkdown.initializeMarkdownAndLatex();
@@ -81,6 +81,9 @@ export function checkForMarkdown () {
         $('#editQuestionText').hide();
         $('#previewQuestionText').show();
     } else {
+        changePreviewButtonText("Format");
+        $('#previewQuestionText').hide();
+        $('#editQuestionText').show();
         if ($(window).width() >= 992) {
             $('#questionText').focus();
         }

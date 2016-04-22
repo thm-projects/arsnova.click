@@ -1,0 +1,25 @@
+<template name="showHashtagsSplashscreen">
+    <div class="modal fade" id={{instanceId}} role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"></div>
+                <div class="modal-body">
+                    <p class="modal-center">Die folgenden Quizze sind in deinem Browser verfügbar:</p><br/>
+                    {{#each hashtags}}
+                        <a href="#" class="js-my-hash">{{this}}</a><br/>
+                    {{/each}}
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button id="js-btn-showHashtagManagement" type="button"
+                                    class="btn btn-info btn-lg btn-answerOption">
+                                <span class="glyphicon glyphicon-cloud glyph-left" aria-hidden="true"></span>
+                                <span class="ansBtn">Sessionverwaltung</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+</template>

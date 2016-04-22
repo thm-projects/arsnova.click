@@ -88,7 +88,7 @@ function getLeaderBoardItemsByIndex(index) {
     return _.sortBy(allGoodMembers, 'responseTime').slice(0, maxResponseButtons);
 }
 
-function calculateButtonCount (allMembersCount) {
+export function calculateButtonCount (allMembersCount) {
 
     /*
      This session variable determines if the user has clicked on the show-more-button. The button count must not
@@ -104,13 +104,13 @@ function calculateButtonCount (allMembersCount) {
      - get the mainContentContainer height (the content wrapper for all elements)
      - subtract the appTitle height (the indicator for the question index)
      */
-    var viewport = $('#mainContentContainer'),
+    var viewport = $('.container'),
         appTitle = $('#appTitle');
 
     var viewPortHeight = viewport.outerHeight() - appTitle.outerHeight();
 
     /* The height of the learner button must be set manually if the html elements are not yet generated */
-    var btnLearnerHeight = $('.button-leader').first().parent().outerHeight() ? $('.button-leader').first().parent().outerHeight() : 70;
+    var btnLearnerHeight = $('.button-leader').first().parent().outerHeight(true) ? $('.button-leader').first().parent().outerHeight(true) : 70;
 
     /* Calculate how much buttons we can place in the viewport until we need to scroll */
     var queryLimiter = Math.floor(viewPortHeight / btnLearnerHeight);
@@ -119,7 +119,7 @@ function calculateButtonCount (allMembersCount) {
      Multiply the displayed elements by 2 if on widescreen and reduce the max output of buttons by 1 row for the display
      more button if necessary. Also make sure there is at least one row of buttons shown even if the user has to scroll
      */
-    var limitModifier = $(window).outerWidth() >= 768 ? 2 : 1;
+    var limitModifier = viewport.outerWidth() >= 768 ? 2 : 1;
 
     queryLimiter *= limitModifier;
     if (queryLimiter <= 0) {

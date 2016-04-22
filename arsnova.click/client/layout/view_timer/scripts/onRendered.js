@@ -1,3 +1,7 @@
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { EventManager } from '/lib/eventmanager.js';
+import { QuestionGroup } from '/lib/questions.js';
 import * as lib from './lib.js';
 
 Template.createTimerView.onRendered(function () {

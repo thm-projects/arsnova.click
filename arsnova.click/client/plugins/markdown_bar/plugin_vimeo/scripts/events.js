@@ -1,4 +1,5 @@
-import {insertInQuestionText} from './../../scripts/lib.js';
+import { Template } from 'meteor/templating';
+import { insertInQuestionText } from '/client/plugins/markdown_bar/scripts/lib.js';
 
 Template.vimeoInsertSplash.events({
     "click #js-btn-saveVimeo": function () {

@@ -1,4 +1,11 @@
-import {countdown, getPercentRead, getCurrentRead, hsl_col_perc, checkIfIsCorrect} from './lib.js';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { EventManager } from '/lib/eventmanager.js';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { MemberList } from '/lib/memberlist.js';
+import { Responses } from '/lib/responses.js';
+import { QuestionGroup } from '/lib/questions.js';
+import { countdown, getPercentRead, getCurrentRead, hsl_col_perc, checkIfIsCorrect } from './lib.js';
 
 Template.questionT.helpers({
     answ: function () {

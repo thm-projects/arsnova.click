@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-LeaderBoard = new Mongo.Collection("leaderBoard");
+export const LeaderBoard = new Mongo.Collection("leaderBoard");
 
 LeaderBoard.attachSchema(new SimpleSchema({
 	hashtag: {

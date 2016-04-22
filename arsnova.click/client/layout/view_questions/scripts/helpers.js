@@ -1,3 +1,7 @@
+import { Template } from 'meteor/templating';
+import { EventManager } from '/lib/eventmanager.js';
+import { QuestionGroup } from '/lib/questions.js';
+
 Template.createQuestionView.helpers({
     //Get question from Sessions-Collection if it already exists
     questionText: function () {

@@ -16,7 +16,10 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import * as localData from '../../lib/local_storage.js';
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import * as localData from '/client/lib/local_storage.js';
 
 Template.modalShowMyHashtags.helpers({
     hashtags: function () {

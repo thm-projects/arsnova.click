@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Hashtags = new Mongo.Collection("hashtags");
+export const Hashtags = new Mongo.Collection("hashtags");
 
 Hashtags.attachSchema(new SimpleSchema({
 	hashtag: {

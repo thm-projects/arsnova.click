@@ -16,6 +16,11 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Meteor } from 'meteor/meteor';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { QuestionGroup, QuestionGroupSchema } from '/lib/questions.js';
+import { Hashtags } from '/lib/hashtags.js';
+
 Meteor.methods({
     "QuestionGroup.insert": function ({privateKey, hashtag, questionList}) {
         if(Meteor.isServer) {

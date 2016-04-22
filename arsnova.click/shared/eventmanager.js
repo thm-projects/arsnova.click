@@ -1,3 +1,8 @@
+
+import { Meteor } from 'meteor/meteor';
+import { EventManager } from '/lib/eventmanager.js';
+import { Hashtags } from '/lib/hashtags.js';
+
 Meteor.methods({
     'EventManager.setSessionStatus': (privateKey, hashtag, sessionStatus)=> {
         if (Meteor.isClient) {

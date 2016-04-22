@@ -68,6 +68,7 @@ client/
 ```
 			
 The difference between a region and a view is that the region is named by the location (e.g. "header") and is nearly over the entire quiz-workflow visible where a view is rendered only to specific routes.
+Please note that global variables should be avoided. If you use the global Meteor variable, import it with ''' import { Meteor } from 'meteor/meteor' ''' (see the Meteor Doc at http://docs.meteor.com/#/full/)
 
 ### Avoid trailing white-spaces
 

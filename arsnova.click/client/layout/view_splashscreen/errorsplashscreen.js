@@ -16,6 +16,8 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Template } from 'meteor/templating';
+
 Template.errorSplashscreen.rendered = function () {
     var splashscreen = $('.js-errorsplashscreen');
     splashscreen.on('click', function () {

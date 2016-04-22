@@ -1,4 +1,6 @@
-import {getLeaderBoardItems} from './lib.js';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { getLeaderBoardItems } from './lib.js';
 
 Template.leaderBoard.helpers({
     hashtag: ()=> {

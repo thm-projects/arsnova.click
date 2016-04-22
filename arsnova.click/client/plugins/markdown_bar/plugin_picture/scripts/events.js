@@ -1,4 +1,5 @@
-import {insertInQuestionText} from './../../scripts/lib.js';
+import { Template } from 'meteor/templating';
+import { insertInQuestionText } from '/client/plugins/markdown_bar/scripts/lib.js';
 
 Template.pictureInsertSplash.events({
     "click #js-btn-savePicture": function () {

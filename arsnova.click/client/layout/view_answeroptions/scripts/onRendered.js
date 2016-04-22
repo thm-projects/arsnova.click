@@ -1,4 +1,7 @@
-import * as lib from '././lib.js';
+import { Template } from 'meteor/templating';
+import { EventManager } from '/lib/eventmanager.js';
+import { QuestionGroup } from '/lib/questions.js';
+import * as lib from './lib.js';
 
 Template.createAnswerOptions.onRendered(function () {
     var calculateHeight = function calculateHeight() {

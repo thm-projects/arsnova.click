@@ -1,8 +1,6 @@
-import * as localData from './../../../lib/local_storage';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
 
 Template.soundConfig.onCreated(function () {
     Session.setDefault("slider2", 80);
-    this.autorun(() => {
-        this.subscribe('Sessions.instructor', localData.getPrivateKey(), Session.get("hashtag"));
-    });
 });

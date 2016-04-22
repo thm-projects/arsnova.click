@@ -16,9 +16,9 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-QuestionGroup = new Mongo.Collection("questionGroup");
+export const QuestionGroup = new Mongo.Collection("questionGroup");
 
-SingleQuestionSchema = new SimpleSchema({
+export const SingleQuestionSchema = new SimpleSchema({
     questionText: {
         type: String,
         optional: true,
@@ -34,7 +34,7 @@ SingleQuestionSchema = new SimpleSchema({
     }
 });
 
-QuestionGroupSchema = new SimpleSchema({
+export const QuestionGroupSchema = new SimpleSchema({
     hashtag: {
         type: String,
         min: 1,

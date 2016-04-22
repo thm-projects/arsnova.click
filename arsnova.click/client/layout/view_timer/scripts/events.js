@@ -1,5 +1,9 @@
-import {setTimer} from './lib.js';
-import * as localData from '../../../lib/local_storage.js';
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { EventManager } from '/lib/eventmanager.js';
+import * as localData from '/client/lib/local_storage.js';
+import { setTimer } from './lib.js';
 
 Template.createTimerView.events({
     "click #forwardButton, click #backButton": function (event) {

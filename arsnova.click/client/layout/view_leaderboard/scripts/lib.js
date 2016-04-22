@@ -1,3 +1,9 @@
+import { Session } from 'meteor/session';
+import { EventManager } from '/lib/eventmanager.js';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { MemberList } from '/lib/memberlist.js';
+import { Responses } from '/lib/responses.js';
+
 export function getLeaderBoardItems () {
     if (typeof Session.get("showLeaderBoardId") !== "undefined") {
         return [{value: getLeaderBoardItemsByIndex(Session.get("showLeaderBoardId"))}];

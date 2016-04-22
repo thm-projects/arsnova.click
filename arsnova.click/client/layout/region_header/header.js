@@ -16,8 +16,12 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {buzzsound1} from '../../plugins/sound/scripts/lib.js';
-import * as localData from '../../lib/local_storage.js';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { Hashtags } from '/lib/hashtags.js';
+import * as localData from '/client/lib/local_storage.js';
+import { buzzsound1 } from '/client/plugins/sound/scripts/lib.js';
+
 
 Template.header.onCreated(function () {
     this.autorun(() => {

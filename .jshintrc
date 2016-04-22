@@ -19,22 +19,22 @@
 		"Template": false,
 		"Tracker": false,
 
-		"AnswerOptions": true,
-		"Hashtags": true,
-		"LeaderBoard": true,
-		"MemberList": true,
-		"Responses": true,
-		"QuestionGroup": true,
+		"AnswerOptions": false,
+		"Hashtags": false,
+		"LeaderBoard": false,
+		"MemberList": false,
+		"Responses": false,
+		"QuestionGroup": false,
 
-		"EventManager": true,
-		"localData": true,
-		"mathjaxMarkdown": true,
+		"EventManager": false,
+		"localData": false,
+		"mathjaxMarkdown": false,
 		"closeSplashscreen": true,
 		"showSplashscreen": true,
 		"closeAndRedirectTo": true,
-		"QuestionGroupSchema": true,
+		"QuestionGroupSchema": false,
 
-		"buzz": true,
-		"buzzsound1": true
+		"buzz": false,
+		"buzzsound1": false
 	}
 }

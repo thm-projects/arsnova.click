@@ -1,4 +1,6 @@
-import {countdown, routeToLeaderboardTimer, readingConfirmationTracker} from './lib.js';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { countdown, routeToLeaderboardTimer, readingConfirmationTracker } from './lib.js';
 
 Template.live_results.onDestroyed(function () {
     Session.set("countdownInitialized", undefined);

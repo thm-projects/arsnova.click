@@ -16,6 +16,8 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Template } from 'meteor/templating';
+
 Template.questionPreviewSplash.onRendered(function () {
     calculateAndSetPreviewSplashWidthAndHeight();
     $(window).resize(function () {

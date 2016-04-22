@@ -16,6 +16,14 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { EventManager } from '/lib/eventmanager.js';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { MemberList } from '/lib/memberlist.js';
+import { Responses } from '/lib/responses.js';
+import { LeaderBoard } from '/lib/leaderBoard.js';
+
 Template.endOfPollingSplashscreen.onCreated(function () {
     this.subscribe('Responses.session', Session.get("hashtag"));
     this.subscribe('AnswerOptions.options', Session.get("hashtag"));

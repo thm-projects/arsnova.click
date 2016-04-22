@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-EventManager = new Mongo.Collection("eventmanager");
+export const EventManager = new Mongo.Collection("eventmanager");
 
 var eventManagerScheme = new SimpleSchema({
     hashtag: {

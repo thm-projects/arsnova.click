@@ -1,6 +1,13 @@
-import {mathjaxMarkdown} from '../../../lib/mathjax_markdown.js';
-import * as localData from '../../../lib/local_storage.js';
-import {calculateButtonCount, startCountdown} from './lib.js';
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { EventManager } from '/lib/eventmanager.js';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { MemberList } from '/lib/memberlist.js';
+import { QuestionGroup } from '/lib/questions.js';
+import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
+import * as localData from '/client/lib/local_storage.js';
+import { calculateButtonCount, startCountdown } from './lib.js';
 
 Template.questionT.events({
     "click #setReadConfirmed": function () {

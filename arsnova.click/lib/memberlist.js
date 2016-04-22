@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-MemberList = new Mongo.Collection("memberlist");
+export const MemberList = new Mongo.Collection("memberlist");
 
 MemberList.attachSchema(new SimpleSchema({
     hashtag: {

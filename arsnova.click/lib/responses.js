@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Responses = new Mongo.Collection("responses");
+export const Responses = new Mongo.Collection("responses");
 
 Responses.attachSchema(new SimpleSchema({
 	hashtag: {

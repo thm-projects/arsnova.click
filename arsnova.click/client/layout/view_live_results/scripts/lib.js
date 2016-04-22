@@ -1,6 +1,12 @@
-import {buzzsound1} from '../../../plugins/sound/scripts/lib.js';
-import * as localData from '../../../lib/local_storage.js';
-import {mathjaxMarkdown} from '../../../lib/mathjax_markdown.js';
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+import { EventManager } from '/lib/eventmanager.js';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { MemberList } from '/lib/memberlist.js';
+import { QuestionGroup } from '/lib/questions.js';
+import * as localData from '/client/lib/local_storage.js';
+import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
+import { buzzsound1 } from '/client/plugins/sound/scripts/lib.js';
 
 export let countdown = null;
 export let routeToLeaderboardTimer = null;

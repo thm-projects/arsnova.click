@@ -1,4 +1,5 @@
-import * as localData from '../../../lib/local_storage.js';
+import { Template } from 'meteor/templating';
+import * as localData from '/client/lib/local_storage.js';
 
 Template.hashtagManagement.helpers({
     serverHashtags: function () {

@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-AnswerOptions = new Mongo.Collection("answeroptions");
+export const AnswerOptions = new Mongo.Collection("answeroptions");
 
 AnswerOptions.attachSchema(new SimpleSchema({
 	hashtag: {

@@ -1,3 +1,7 @@
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { MemberList } from '/lib/memberlist.js';
+
 Template.memberlist.helpers({
     hashtag: function () {
         return Session.get("hashtag");

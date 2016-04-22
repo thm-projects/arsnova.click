@@ -1,3 +1,7 @@
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { EventManager } from '/lib/eventmanager.js';
+import { AnswerOptions } from '/lib/answeroptions.js';
 import {startCountdown, deleteCountdown} from './lib.js';
 
 Template.votingview.onCreated(function () {

@@ -16,6 +16,12 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Meteor } from 'meteor/meteor';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { Responses } from '/lib/responses.js';
+import { QuestionGroup } from '/lib/questions.js';
+import { Hashtags } from '/lib/hashtags.js';
+
 Meteor.methods({
     'Responses.addResponse'(responseDoc) {
         var timestamp = new Date().getTime();
@@ -65,19 +71,6 @@ Meteor.methods({
                             throw new Meteor.Error('Responses.addResponse', 'Error while adding response set to leaderboard');
                         }
                     });
-
-                    /*
-                    var nickResponsesCount = Responses.find({
-                        hashtag: hashtag,
-                        userNick: responseDoc.userNick
-                    }).count();
-                    var correctAnswerOptionsCount = AnswerOptions.find({hashtag: responseDoc.hashtag, questionIndex: responseDoc.questionIndex, isCorrect: 1}).count();
-                    return {
-                        isCorrect: answerOptionDoc.isCorrect,
-                        instantRouting: correctAnswerOptionsCount === 1,
-                        showForwardButton: nickResponsesCount <= 1
-                    };
-                    */
                 }
                 else {
                     throw new Meteor.Error('Responses.addResponse', 'Response was given out of time range');

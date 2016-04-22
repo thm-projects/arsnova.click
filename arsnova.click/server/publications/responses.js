@@ -16,6 +16,10 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Meteor } from 'meteor/meteor';
+import { Responses } from '/lib/responses.js';
+import { Hashtags } from '/lib/hashtags.js';
+
 Meteor.publish('Responses.session', function(phashtag) {
     new SimpleSchema({
         phashtag: {type: String}

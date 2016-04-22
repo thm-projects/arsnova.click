@@ -16,6 +16,11 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import * as localData from '/client/lib/local_storage.js';
+
 Template.footer.onRendered(function () {
     Session.set("footerIsHidden", true);
 });
@@ -34,12 +39,8 @@ Template.footer.helpers({
             if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)){
                 // is IE
                 return false;
-            } else if ((/Safari/.test(ua) && /Apple Computer/.test(navigator.vendor)) ||
-                        (/Chrome/.test(ua) && /Google Inc/.test(navigator.vendor))) {
-                // is webkit
-                return false;
             } else {
-                return true;
+                return !((/Safari/.test(ua) && /Apple Computer/.test(navigator.vendor)) || (/Chrome/.test(ua) && /Google Inc/.test(navigator.vendor)));
             }
         } else {
             return false;

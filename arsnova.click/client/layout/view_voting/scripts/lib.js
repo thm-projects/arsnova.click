@@ -1,3 +1,8 @@
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+import { EventManager } from '/lib/eventmanager.js';
+import { QuestionGroup } from '/lib/questions.js';
+
 export let countdown = null;
 export let currentButton = 0;
 export let countdownRunning = false;

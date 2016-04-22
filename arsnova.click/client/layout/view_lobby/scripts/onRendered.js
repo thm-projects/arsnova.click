@@ -1,4 +1,6 @@
-import {calculateButtonCount} from './lib.js';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { calculateButtonCount } from './lib.js';
 
 Template.memberlist.onRendered(function () {
     var final_height = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();

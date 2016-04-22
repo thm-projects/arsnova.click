@@ -1,4 +1,6 @@
-import {countdown} from '././lib.js';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import {countdown} from './lib.js';
 
 Template.votingview.onDestroyed(function () {
     Session.set("questionSC", undefined);

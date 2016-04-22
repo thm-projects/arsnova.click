@@ -1,4 +1,8 @@
-import * as lib from '././lib.js';
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { MemberList } from '/lib/memberlist.js';
+import * as lib from './lib.js';
 
 Template.nick.events({
     "click #forwardButton": function (event) {

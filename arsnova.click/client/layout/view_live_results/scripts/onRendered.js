@@ -1,5 +1,10 @@
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+import { Template } from 'meteor/templating';
+import { EventManager } from '/lib/eventmanager.js';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import * as localData from '/client/lib/local_storage.js';
 import {startReadingConfirmationTracker, calculateButtonCount, setMcCSSClasses} from './lib.js';
-import * as localData from './../../../lib/local_storage.js';
 
 Template.questionT.onRendered(function () {
 

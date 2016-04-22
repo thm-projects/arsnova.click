@@ -1,8 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { TAPi18n } from 'meteor/tap:i18n';
-import * as localData from '/client/lib/local_storage.js';
 import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
+import { QuestionGroup } from '/lib/questions.js';
+import { EventManager } from '/lib/eventmanager.js';
+import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
+import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
+import * as localData from '/client/lib/local_storage.js';
 
 export var subscriptionHandler = null;
 
@@ -54,7 +58,36 @@ export function calculateAndSetPreviewSplashWidthAndHeight() {
     $('.modal-dialog').width($('#mainContentContainer').width() - 40);
 }
 
-export function questionContainsMarkdownSyntax(questionText) {
+export function changePreviewButtonText(text) {
+    $('#formatPreviewText').text(text);
+
+    if (text === "Vorschau") {
+        $('#formatPreviewGlyphicon').removeClass("glyphicon-cog").addClass("glyphicon-phone");
+        $('#markdownBarDiv').removeClass('hide');
+        $('#questionText').removeClass('round-corners').addClass('round-corners-markdown');
+    }
+}
+
+export function checkForMarkdown () {
+    var questionText = QuestionGroup.findOne().questionList[EventManager.findOne().questionIndex].questionText;
+    if (questionContainsMarkdownSyntax(questionText)) {
+        changePreviewButtonText("Bearbeiten");
+
+        mathjaxMarkdown.initializeMarkdownAndLatex();
+
+        questionText = mathjaxMarkdown.getContent(questionText);
+
+        $("#questionTextDisplay").html(questionText);
+        $('#editQuestionText').hide();
+        $('#previewQuestionText').show();
+    } else {
+        if ($(window).width() >= 992) {
+            $('#questionText').focus();
+        }
+    }
+}
+
+function questionContainsMarkdownSyntax(questionText) {
     if (doesMarkdownSyntaxExist(questionText, '**', '**') || doesMarkdownSyntaxExist(questionText, '#', '#') || doesMarkdownSyntaxExist(questionText, '[', '](', ')') ||
         doesMarkdownSyntaxExist(questionText, '- ') || doesMarkdownSyntaxExist(questionText, '1. ') || doesMarkdownSyntaxExist(questionText, '\\(', '\\)') ||
         doesMarkdownSyntaxExist(questionText, '$$', '$$') || doesMarkdownSyntaxExist(questionText, '<hlcode>', '</hlcode>') || doesMarkdownSyntaxExist(questionText, '>')) {
@@ -95,11 +128,4 @@ function doesMarkdownSyntaxExist (questionText, syntaxStart, syntaxMiddle, synta
     } else {
         return false;
     }
-}
-
-export function changePreviewButtonText(text) {
-    $('#formatPreviewText').text(text);
-    $('#formatPreviewGlyphicon').removeClass("glyphicon-cog").addClass("glyphicon-phone");
-    $('#markdownBarDiv').removeClass('hide');
-    $('#questionText').removeClass('round-corners').addClass('round-corners-markdown');
 }

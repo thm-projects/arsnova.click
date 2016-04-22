@@ -3,7 +3,6 @@ import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import { EventManager } from '/lib/eventmanager.js';
 import { QuestionGroup } from '/lib/questions.js';
-import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
 import * as lib from './lib.js';
 
 Template.createQuestionView.onRendered(function () {
@@ -16,7 +15,7 @@ Template.createQuestionView.onRendered(function () {
         if(this.subscriptionsReady()) {
             index = EventManager.findOne().questionIndex;
             if (!Session.get("markdownAlreadyChecked")) {
-                checkForMarkdown();
+                lib.checkForMarkdown();
                 Session.set("markdownAlreadyChecked", true);
             }
         }
@@ -34,29 +33,3 @@ Template.createQuestionView.onRendered(function () {
         index = EventManager.findOne().questionIndex;
     });
 });
-
-Template.questionPreviewSplashscreen.onRendered(function () {
-    lib.calculateAndSetPreviewSplashWidthAndHeight();
-    $(window).resize(function () {
-        lib.calculateAndSetPreviewSplashWidthAndHeight();
-    });
-});
-
-function checkForMarkdown () {
-    var questionText = QuestionGroup.findOne().questionList[EventManager.findOne().questionIndex].questionText;
-    if (lib.questionContainsMarkdownSyntax(questionText)) {
-        lib.changePreviewButtonText("Bearbeiten");
-
-        mathjaxMarkdown.initializeMarkdownAndLatex();
-
-        questionText = mathjaxMarkdown.getContent(questionText);
-
-        $("#questionTextDisplay").html(questionText);
-        $('#editQuestionText').hide();
-        $('#previewQuestionText').show();
-    } else {
-        if ($(window).width() >= 992) {
-            $('#questionText').focus();
-        }
-    }
-};

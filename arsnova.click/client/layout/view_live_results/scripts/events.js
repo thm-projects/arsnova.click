@@ -94,6 +94,7 @@ Template.live_results.events({
     },
     'click #startNextQuestion': (event)=> {
         event.stopPropagation();
+
         var questionDoc = QuestionGroup.findOne();
         if (!questionDoc) {
             return;

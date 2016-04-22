@@ -21,7 +21,7 @@ Template.live_results.helpers({
         }
         return 0;
     },
-    isCountdownZero: function (index) {
+    isCountdownZero: function () {
         if (Session.get("isOwner")) {
             if (Session.get("sessionClosed") || !Session.get("countdownInitialized")) {
                 return true;
@@ -30,7 +30,9 @@ Template.live_results.helpers({
                 return timer <= 0;
             }
         } else {
-            if (index === EventManager.findOne().questionIndex && EventManager.findOne().sessionStatus === 3) {
+            var question = QuestionGroup.findOne().questionList[EventManager.findOne().questionIndex];
+            
+            if (new Date().getTime() - parseInt(question.startTime) < question.timer) {
                 return false;
             } else {
                 return true;

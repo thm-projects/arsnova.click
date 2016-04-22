@@ -73,6 +73,8 @@ export class Splashscreen {
         if(template) {
             this.templateInstance = Blaze.render(Template[this.options.templateName], document.body);
             $(this.templateInstance.firstNode()).addClass(this.options.templateName).attr("id",this.options.templateName+"_"+this.options.instanceId);
+        } else {
+            throw new Error('Invalid template name');
         }
 
         this.isOpen = this.options.autostart;

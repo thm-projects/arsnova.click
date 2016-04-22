@@ -39,7 +39,7 @@
                             {{else}}
                                 {{#each value}}
                                     <div class="col-md-6">
-                                        <button class="button button-leader">{{getPosition @index}}. {{nick}}
+                                        <button class="button button-leader {{#if isOwnNick nick}}color-changing-own-nick{{/if}}">{{getPosition @index}}. {{nick}}
                                             - {{parseTimeToSeconds responseTime}}s
                                         </button>
                                     </div>

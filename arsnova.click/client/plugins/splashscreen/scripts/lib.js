@@ -24,18 +24,19 @@ import { Template } from 'meteor/templating';
  *
  * Since ES6 does not support destructors you'll need to manually call the destroy() method on the splashscreen if you
  * registered any root-level event listeners. You can pass the event removing calls to the onDestroyed option.
+ *
+ * Valid construction parameters are:
+ * - autostart      -> True, if the splashscreen should show on startup
+ * - templateName   -> The Meteor Template which is used to display the splashscreen
+ * - instanceId     -> If you define multiple splashscreens of the same template on one page you'll need to give each of them unique id's
+ * - closeOnButton  -> A valid JQuery selector which shall trigger the close event. A click on the modal or the splashscreen itself will not trigger the close event if this option is set.
+ * - onCreated      -> Callback function which is called when the splashscreen is created
+ * - onRendered     -> Callback function which is called when the splashscreen is rendered
+ * - onDestroyed    -> Callback function which is called when the splashscreen is destroyed
  */
 export class Splashscreen {
     /**
      * Constructs and returns a new instance of Splashscreen
-     * Valid parameters are:
-     * - autostart      -> True, if the splashscreen should show on startup
-     * - templateName   -> The Meteor Template which is used to display the splashscreen
-     * - instanceId     -> If you define multiple splashscreens on one page you'll need to give each of them unique id's
-     * - closeOnClick   -> False, if the splashscreen should close on click on the close button
-     * - onCreated      -> Callback function which is called when the splashscreen is created
-     * - onRendered     -> Callback function which is called when the splashscreen is rendered
-     * - onDestroyed    -> Callback function which is called when the splashscreen is destroyed
      *
      * @param options Must be an object with optional parameters
      */

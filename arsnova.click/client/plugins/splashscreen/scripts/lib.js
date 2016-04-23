@@ -29,10 +29,16 @@ import { Template } from 'meteor/templating';
  * - autostart      -> True, if the splashscreen should show on startup
  * - templateName   -> The Meteor Template which is used to display the splashscreen
  * - instanceId     -> If you define multiple splashscreens of the same template on one page you'll need to give each of them unique id's
- * - closeOnButton  -> A valid JQuery selector which shall trigger the close event. A click on the modal or the splashscreen itself will not trigger the close event if this option is set.
- * - onCreated      -> Callback function which is called when the splashscreen is created
- * - onRendered     -> Callback function which is called when the splashscreen is rendered
- * - onDestroyed    -> Callback function which is called when the splashscreen is destroyed
+ * - closeOnButton  -> A valid jQuery selector which shall trigger the close event. A click on the modal or the splashscreen itself will not trigger the close event if this option is set.
+ * - onCreated      -> Callback function which is called with the current instance as argument when the splashscreen is created
+ * - onRendered     -> Callback function which is called with the current instance as argument when the splashscreen template is rendered
+ * - onDestroyed    -> Callback function which is called with the current instance as argument when the splashscreen template is destroyed
+ * 
+ * Read-Only members are:
+ * - templateInstance   -> The Blaze template object
+ * - templateSelector   -> The jQuery object of the current Splashscreen object
+ * - isCreated          -> True, if the Splashscreen object has been created
+ * - isRendered         -> True, if the Splashscreen template has been rendered
  */
 export class Splashscreen {
     /**
@@ -50,6 +56,8 @@ export class Splashscreen {
             onDestroyed:    options.onDestroyed     || undefined,
             onRendered:     options.onRendered      || undefined
         };
+        this.templateInstance = null;
+        this.templateSelector = null;
         this.created();
         this.isCreated = true;
         this.rendered();
@@ -63,7 +71,7 @@ export class Splashscreen {
     created() {
 
         if(typeof this.options.onCreated === "function") {
-            this.options.onCreated();
+            this.options.onCreated(this);
         }
     }
 
@@ -79,7 +87,8 @@ export class Splashscreen {
         } else {
             throw new Error('Invalid template name');
         }
-
+        this.templateSelector = $('#'+this.options.templateName+"_"+this.options.instanceId);
+        
         this.isOpen = this.options.autostart;
         if(this.isOpen) {
             this.open();
@@ -88,7 +97,7 @@ export class Splashscreen {
         }
 
         if(typeof this.options.onRendered === "function") {
-            this.options.onRendered();
+            this.options.onRendered(this);
         }
     }
 
@@ -97,11 +106,14 @@ export class Splashscreen {
      * If a callback to options.onDestroyed has been specified this method will run the callback
      */
     destroy() {
+        if(!this.templateInstance) {
+            return;
+        }
         Blaze.remove(this.templateInstance);
         $('.modal-backdrop').remove();
         this.templateInstance = null;
         if(typeof this.options.onDestroyed === "function") {
-            this.options.onDestroyed();
+            this.options.onDestroyed(this);
         }
     }
 
@@ -109,27 +121,22 @@ export class Splashscreen {
      * A call of this method will close (hide) the splashscreen
      */
     close() {
-        let thisTemplate = $('#'+this.options.templateName+"_"+this.options.instanceId);
-
         if( this.options.closeOnButton ) {
-            thisTemplate.off('hide.bs.modal').off('click', this.options.closeOnButton);
+            this.templateSelector.off('hide.bs.modal').off('click', this.options.closeOnButton);
         }
-
-        thisTemplate.modal("hide");
-        $('.modal-backdrop').remove();
+        this.templateSelector.modal("hide");
         this.isOpen = false;
+        this.destroy();
     }
 
     /**
      * A call of this method will show (display) the splashscreen
      */
     open() {
-        let thisTemplate = $('#'+this.options.templateName+"_"+this.options.instanceId);
-
         if( this.options.closeOnButton ) {
             let self = this;
             let hasClickedOnCloseButton = false;
-            thisTemplate.on('hide.bs.modal',function (event) {
+            this.templateSelector.on('hide.bs.modal',function (event) {
                 if( !hasClickedOnCloseButton ) {
                     event.stopPropagation();
                     event.preventDefault();
@@ -140,7 +147,7 @@ export class Splashscreen {
             });
         }
 
-        thisTemplate.modal("show");
+        this.templateSelector.modal("show");
         this.isOpen = true;
     }
 }
@@ -153,7 +160,7 @@ class ErrorSplashscreen extends Splashscreen {
 
     setErrorText(text) {
         if(this.isRendered) {
-            $(this.templateInstance.firstNode()).find("#errorMessage-text").text(text);
+            $(this.templateSelector).find("#errorMessage-text").text(text);
         }
     }
 }

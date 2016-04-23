@@ -7,6 +7,7 @@ import { MemberList } from '/lib/memberlist.js';
 import { QuestionGroup } from '/lib/questions.js';
 import * as localData from '/client/lib/local_storage.js';
 import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
+import { splashscreen_error, Splashscreen } from '/client/plugins/splashscreen/scripts/lib.js';
 import { buzzsound1 } from '/client/plugins/sound/scripts/lib.js';
 
 export let countdown = null;
@@ -185,22 +186,37 @@ export function startReadingConfirmationTracker () {
             EventManager.find().observeChanges({
                 changed: function (id, changedFields) {
                     if (!isNaN(changedFields.readingConfirmationIndex)) {
-                        $('.splash-screen-show-readingConfirmation').parents('.modal').modal();
-                        var questionDoc = QuestionGroup.findOne();
-                        var content = "";
-                        if (questionDoc) {
-                            mathjaxMarkdown.initializeMarkdownAndLatex();
-                            var questionText = questionDoc.questionList[EventManager.findOne().readingConfirmationIndex].questionText;
-                            content = mathjaxMarkdown.getContent(questionText);
-                        }
+                        new Splashscreen({
+                            autostart: true,
+                            templateName: 'readingConfirmedSplashscreen',
+                            closeOnButton: '#setReadConfirmed',
+                            onRendered: function (instance) {
+                                var questionDoc = QuestionGroup.findOne();
+                                var content = "";
+                                if (questionDoc) {
+                                    mathjaxMarkdown.initializeMarkdownAndLatex();
+                                    var questionText = questionDoc.questionList[EventManager.findOne().readingConfirmationIndex].questionText;
+                                    content = mathjaxMarkdown.getContent(questionText);
+                                }
+                                instance.templateSelector.find('#questionContent').html(content);
 
-                        $('#questionTText').html(content);
-                    }
-
-                    if (Session.get("isOwner")) {
-                        $('#setReadConfirmed').text("Fenster schließen").parent().on('click', '#setReadConfirmed', function (event) {
-                            event.stopPropagation();
-                            closeSplashscreen();
+                                if ( Session.get("isOwner") ) {
+                                    instance.templateSelector.find('#setReadConfirmed').text("Fenster schließen");
+                                } else {
+                                    instance.templateSelector.find('#setReadConfirmed').parent().on('click', '#setReadConfirmed', function () {
+                                        Meteor.call("MemberList.setReadConfirmed", {
+                                            hashtag: Session.get("hashtag"),
+                                            questionIndex: EventManager.findOne().readingConfirmationIndex,
+                                            nick: Session.get("nick")
+                                        }, (err)=> {
+                                            if (err) {
+                                                splashscreen_error.setErrorText(err.reason);
+                                                splashscreen_error.open();
+                                            }
+                                        });
+                                    });
+                                }
+                            }
                         });
                     }
                 }

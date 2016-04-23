@@ -7,13 +7,6 @@ import { Responses } from '/lib/responses.js';
 import { QuestionGroup } from '/lib/questions.js';
 import { countdown, getPercentRead, getCurrentRead, hsl_col_perc, checkIfIsCorrect } from './lib.js';
 
-Template.questionT.helpers({
-    answ: function () {
-        const answers = AnswerOptions.find({questionIndex: EventManager.findOne().readingConfirmationIndex});
-        return answers ? answers : "";
-    }
-});
-
 Template.live_results.helpers({
     votingText: function () {
         return Session.get("sessionClosed") ? "Game over" : "Countdown";

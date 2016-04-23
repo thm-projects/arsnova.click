@@ -7,58 +7,10 @@ import { MemberList } from '/lib/memberlist.js';
 import { QuestionGroup } from '/lib/questions.js';
 import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
 import * as localData from '/client/lib/local_storage.js';
-import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
+import { splashscreen_error, Splashscreen } from '/client/plugins/splashscreen/scripts/lib.js';
 import { calculateButtonCount, startCountdown } from './lib.js';
 
-Template.questionT.events({
-    "click #setReadConfirmed": function () {
-        Meteor.call("MemberList.setReadConfirmed", {
-            hashtag: Session.get("hashtag"),
-            questionIndex: EventManager.findOne().readingConfirmationIndex,
-            nick: Session.get("nick")
-        }, (err)=> {
-            closeSplashscreen();
-            if (err) {
-                splashscreen_error.setErrorText(err.reason);
-                splashscreen_error.open();
-            }
-        });
-    }
-});
-
 Template.live_results.events({
-    "click #js-btn-showQuestionModal": function (event) {
-        event.stopPropagation();
-        $('.questionContentSplash').parents('.modal').modal();
-        var questionDoc = QuestionGroup.findOne();
-        var content = "";
-        if (questionDoc) {
-            mathjaxMarkdown.initializeMarkdownAndLatex();
-            var targetId = parseInt($(event.currentTarget).parents(".question-row").attr("id").replace("question-row_", ""));
-            var questionText = questionDoc.questionList[targetId].questionText;
-            content = mathjaxMarkdown.getContent(questionText);
-        }
-
-        $('#questionText').html(content);
-    },
-    "click #js-btn-showAnswerModal": function (event) {
-        event.stopPropagation();
-        mathjaxMarkdown.initializeMarkdownAndLatex();
-        $('.answerTextSplash').parents('.modal').modal();
-        var content = "";
-        var targetId = parseInt($(event.currentTarget).parents(".question-row").attr("id").replace("question-row_", ""));
-
-        AnswerOptions.find({questionIndex: targetId}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
-            if (!answerOption.answerText) {
-                answerOption.answerText = "";
-            }
-
-            content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
-            content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
-        });
-
-        $('#answerOptionsTxt').html(content);
-    },
     'click #js-btn-showQuestionAndAnswerModal': function (event) {
         event.stopPropagation();
         var questionDoc = QuestionGroup.findOne();
@@ -66,9 +18,10 @@ Template.live_results.events({
             return;
         }
 
-        var targetId = parseInt($(event.currentTarget).parents(".question-row").attr("id").replace("question-row_", ""));
-        var content = "";
         mathjaxMarkdown.initializeMarkdownAndLatex();
+        var targetId = parseInt($(event.currentTarget).parents(".question-row").attr("id").replace("question-row_", ""));
+        var answerContent = "";
+        let questionContent = mathjaxMarkdown.getContent(questionDoc.questionList[EventManager.findOne().questionIndex].questionText);
 
         let hasEmptyAnswers = true;
 
@@ -79,18 +32,25 @@ Template.live_results.events({
                 hasEmptyAnswers = false;
             }
 
-            content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
-            content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+            answerContent += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+            answerContent += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
         });
 
         if (hasEmptyAnswers) {
-            content = "";
+            answerContent = "";
             $('#answerOptionsHeader').hide();
         }
 
-        $('.questionAndAnswerTextSplash').parents('.modal').modal("show");
-        $('.questionAndAnswerTextSplash>#questionText').html(mathjaxMarkdown.getContent(questionDoc.questionList[targetId].questionText));
-        $('.questionAndAnswerTextSplash>#answerOptionsTxt').html(content);
+        new Splashscreen({
+            autostart: true,
+            templateName: 'questionAndAnswerSplashscreen',
+            closeOnButton: '#js-btn-hideQuestionModal',
+            instanceId: "questionAndAnswers_"+EventManager.findOne().questionIndex,
+            onRendered: function (instance) {
+                instance.templateSelector.find('#questionContent').html(questionContent);
+                instance.templateSelector.find('#answerContent').html(answerContent);
+            }
+        });
     },
     "click .btn-showLeaderBoard": function (event) {
         event.stopPropagation();

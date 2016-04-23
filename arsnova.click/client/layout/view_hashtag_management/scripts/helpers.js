@@ -6,3 +6,9 @@ Template.hashtagManagement.helpers({
         return localData.getAllHashtags();
     }
 });
+
+Template.showHashtagsSplashscreen.helpers({
+    hashtags: function () {
+        return localData.getAllHashtags();
+    }
+});

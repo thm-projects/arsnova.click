@@ -16,13 +16,19 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<template name="questionPreviewSplash">
-    <div class="previewSplash">
-        <div id="modalpreview-text">
+<template name="questionPreviewSplashscreen">
+    <div class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"></div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button id="js-btn-hidePreviewModal" type="button" class="btn btn-success btn-answerOption btn-lg ">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        Fenster schließen
+                    </button>
+                </div>
+            </div>
         </div>
-        <button id="js-btn-hidePreviewModal" type="button" class="btn btn-success btn-answerOption btn-lg ">
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-            Fenster schließen
-        </button>
     </div>
 </template>

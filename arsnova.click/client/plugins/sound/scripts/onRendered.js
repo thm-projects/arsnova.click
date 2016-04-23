@@ -16,8 +16,6 @@ Template.soundConfig.onRendered(function () {
         Session.set('slider2', Math.round(val));
         Session.set("globalVolume", Math.round(val));
         buzzsound1.setVolume(Session.get("globalVolume"));
-
-
     }).on('change', function (ev, val) {
         Session.set('slider2', Math.round(val));
         Session.set("globalVolume", Math.round(val));

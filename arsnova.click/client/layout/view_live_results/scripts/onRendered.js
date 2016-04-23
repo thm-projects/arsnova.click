@@ -6,10 +6,6 @@ import { AnswerOptions } from '/lib/answeroptions.js';
 import * as localData from '/client/lib/local_storage.js';
 import {startReadingConfirmationTracker, calculateButtonCount, setMcCSSClasses} from './lib.js';
 
-Template.questionT.onRendered(function () {
-
-});
-
 Template.live_results.onRendered(()=> {
     startReadingConfirmationTracker();
 

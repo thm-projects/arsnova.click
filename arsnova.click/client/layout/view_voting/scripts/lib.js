@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { EventManager } from '/lib/eventmanager.js';
 import { QuestionGroup } from '/lib/questions.js';
+import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
 
 export let countdown = null;
 export let currentButton = 0;
@@ -78,8 +79,8 @@ export function makeAndSendResponse (answerOptionNumber) {
         userNick: Session.get("nick")
     }, (err) => {
         if (err) {
-            $('.errorMessageSplash').parents('.modal').modal('show');
-            $("#errorMessage-text").html(err.reason);
+            splashscreen_error.setErrorText(err.reason);
+            splashscreen_error.open();
         }
     });
 }

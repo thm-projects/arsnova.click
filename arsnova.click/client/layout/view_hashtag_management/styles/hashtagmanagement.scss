@@ -16,6 +16,9 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+@import "../../../layout/global/styles/colors";
+@import "../../../layout/global/styles/appearance";
+
 .btn-file {
     position: relative;
     overflow: hidden;
@@ -38,5 +41,21 @@
 }
 .alignGlyphicon {
     padding-top: 5px;
-		padding-left: 5px;
+    padding-left: 5px;
+}
+
+.js-my-hash {
+  color: black;
+  border-radius: $corner-radius;
+  background-color: #ffffe0;
+  cursor: pointer;
+  padding: 5px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.showHashtagsSplashscreen {
+  .modal-content {
+    background: $splashscreen-show-hashtags-background-color;
+  }
 }

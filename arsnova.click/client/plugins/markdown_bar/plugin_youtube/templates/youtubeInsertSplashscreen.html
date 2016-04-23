@@ -1,0 +1,39 @@
+<template name="youtubeInsertSplashscreen">
+    <div class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"></div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-label round-corners-top-left input-group-addon input-field-bg-color">Linktext:</div>
+                            <input type="text" class="input-field round-corners-top-right" id="youtubeText" placeholder="angezeigter Text">
+                        </div>
+                        <hr class="hr-without-margin">
+                        <div class="input-group">
+                            <div class="input-label round-corners-bottom-left input-group-addon input-field-bg-color">Linkziel:</div>
+                            <input type="text" class="input-field round-corners-bottom-right" id="youtubeDestination" placeholder="http://">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <button id="js-btn-closeYoutube" type="button"
+                                    class="btn btn-warning btn-lg btn-answerOption">
+                                <span class="glyphicon glyphicon-remove glyph-left" aria-hidden="true"></span>
+                                <span class="ansBtn">Abbrechen</span>
+                            </button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button id="js-btn-saveYoutube" type="button" class="btn btn-success btn-lg btn-answerOption">
+                                <span class="glyphicon glyphicon-ok glyph-left" aria-hidden="true"></span>
+                                <span class="ansBtn">Speichern</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

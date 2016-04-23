@@ -3,7 +3,8 @@ import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 import { MemberList } from '/lib/memberlist.js';
 import * as localData from '/client/lib/local_storage.js';
-import {calculateButtonCount} from './lib.js';
+import { splashscreen_error, Splashscreen } from '/client/plugins/splashscreen/scripts/lib.js';
+import { calculateButtonCount } from './lib.js';
 
 Template.memberlist.events({
     "click .btn-more-learners": function () {
@@ -19,23 +20,22 @@ Template.memberlist.events({
         if (!Session.get("isOwner")) {
             return;
         }
-        Session.set("nickToBeKicked", {
-            nick_name: $(event.currentTarget).text().replace(/(?:\r\n|\r| |\n)/g, ''),
-            nick_id: $(event.currentTarget).attr("id")
-        });
-        $('.js-splashscreen-noLazyClose').modal("show");
-    },
-    'click #kickMemberButton': function () {
-        Meteor.call('MemberList.removeLearner', localData.getPrivateKey(), Session.get("hashtag"), Session.get("nickToBeKicked").nick_id, function (err) {
-            $('.js-splashscreen-noLazyClose').modal("hide");
-            if (err) {
-                $('.errorMessageSplash').parents('.modal').modal('show');
-                $("#errorMessage-text").html(err.reason);
+        new Splashscreen({
+            autostart: true,
+            templateName: "kickMemberSplashscreen",
+            closeOnButton: '#closeDialogButton, #kickMemberButton',
+            onRendered: function () {
+                $('#nickName').text($(event.currentTarget).text().replace(/(?:\r\n|\r| |\n)/g, ''));
+                $('#kickMemberButton').on('click',function () {
+                    Meteor.call('MemberList.removeLearner', localData.getPrivateKey(), Session.get("hashtag"), $(event.currentTarget).attr("id"), function (err) {
+                        if (err) {
+                            splashscreen_error.setErrorText(err.reason);
+                            splashscreen_error.open();
+                        }
+                    });
+                });
             }
         });
-    },
-    'click #closeDialogButton': function () {
-        closeSplashscreen();
     },
     'click #startPolling': function () {
         $('.sound-button').hide();

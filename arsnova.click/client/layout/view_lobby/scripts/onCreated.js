@@ -4,7 +4,8 @@ import { Template } from 'meteor/templating';
 import { EventManager } from '/lib/eventmanager.js';
 import { QuestionGroup } from '/lib/questions.js';
 import * as localData from '/client/lib/local_storage.js';
-import {calculateButtonCount, setMemberlistObserver} from './lib.js';
+import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
+import { calculateButtonCount, setMemberlistObserver } from './lib.js';
 
 Template.memberlist.onCreated(function () {
     var oldStartTimeValues = {};
@@ -36,8 +37,8 @@ Template.memberlist.onCreated(function () {
             removed: function (id) {
                 let idButton = $('#' + id);
                 if (idButton.hasClass("color-changing-own-nick")) {
-                    $('.errorMessageSplash').parents('.modal').modal('show');
-                    $("#errorMessage-text").html("Du wurdest aus dem Quiz geworfen!");
+                    splashscreen_error.setErrorText("Du wurdest aus dem Quiz geworfen!");
+                    splashscreen_error.open();
                     Router.go("/resetToHome");
                 } else {
                     idButton.remove();

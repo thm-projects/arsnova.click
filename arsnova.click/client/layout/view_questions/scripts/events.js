@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { EventManager } from '/lib/eventmanager.js';
 import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
+import { Splashscreen } from '/client/plugins/splashscreen/scripts/lib.js';
 import * as lib from './lib.js';
 
 Template.createQuestionView.events({
@@ -29,14 +30,16 @@ Template.createQuestionView.events({
             $('#markdownBarDiv').removeClass('hide');
             $('#questionText').removeClass('round-corners').addClass('round-corners-markdown');
         } else {
-            $('.previewSplash').parents('.modal').modal('show');
-
-            mathjaxMarkdown.initializeMarkdownAndLatex();
-            var content = $('#questionText').val();
-
-            content = mathjaxMarkdown.getContent(content);
-
-            $("#modalpreview-text").html(content).find('p').css("margin-left", "0px");
+            new Splashscreen({
+                autostart: true,
+                templateName: "questionPreviewSplashscreen",
+                closeOnButton: '#js-btn-hidePreviewModal',
+                onRendered: function (instance) {
+                    mathjaxMarkdown.initializeMarkdownAndLatex();
+                    let content = mathjaxMarkdown.getContent($('#questionText').val());
+                    instance.templateSelector.find('.modal-body').html(content).find('p').css("margin-left", "0px");
+                }
+            });
         }
     }
 });

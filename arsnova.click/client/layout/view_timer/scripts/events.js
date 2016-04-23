@@ -3,6 +3,7 @@ import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 import { EventManager } from '/lib/eventmanager.js';
 import * as localData from '/client/lib/local_storage.js';
+import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
 import { setTimer } from './lib.js';
 
 Template.createTimerView.events({
@@ -10,8 +11,8 @@ Template.createTimerView.events({
         var err = setTimer(EventManager.findOne().questionIndex);
 
         if (err) {
-            $('.errorMessageSplash').parents('.modal').modal('show');
-            $("#errorMessage-text").html(err.reason);
+            splashscreen_error.setErrorText(err.reason);
+            splashscreen_error.open();
         } else {
             if ($(event.currentTarget).attr("id") === "forwardButton") {
                 Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));

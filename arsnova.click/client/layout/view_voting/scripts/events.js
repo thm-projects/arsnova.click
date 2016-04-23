@@ -4,35 +4,10 @@ import { EventManager } from '/lib/eventmanager.js';
 import { AnswerOptions } from '/lib/answeroptions.js';
 import { QuestionGroup } from '/lib/questions.js';
 import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
+import { Splashscreen } from "/client/plugins/splashscreen/scripts/lib.js";
 import { makeAndSendResponse } from './lib.js';
 
 Template.votingview.events({
-    "click #js-btn-showQuestionModal": function (event) {
-        event.stopPropagation();
-        $('.questionContentSplash').parents('.modal').modal();
-        var questionDoc = QuestionGroup.findOne();
-        var content = "";
-        if (questionDoc) {
-            mathjaxMarkdown.initializeMarkdownAndLatex();
-            var questionText = questionDoc.questionList[EventManager.findOne().questionIndex].questionText;
-            content = mathjaxMarkdown.getContent(questionText);
-        }
-
-        $('#questionText').html(content);
-    },
-    "click #js-showAnswerTexts": function (event) {
-        event.stopPropagation();
-        mathjaxMarkdown.initializeMarkdownAndLatex();
-        $('.answerTextSplash').parents('.modal').modal();
-        var content = "";
-
-        AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
-            content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
-            content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
-        });
-
-        $('#answerOptionsTxt').html(content);
-    },
     'click #js-btn-showQuestionAndAnswerModal': function (event) {
         event.stopPropagation();
         var questionDoc = QuestionGroup.findOne();
@@ -40,8 +15,9 @@ Template.votingview.events({
             return;
         }
 
-        var content = "";
         mathjaxMarkdown.initializeMarkdownAndLatex();
+        let questionContent = mathjaxMarkdown.getContent(questionDoc.questionList[EventManager.findOne().questionIndex].questionText);
+        var answerContent = "";
 
         let hasEmptyAnswers = true;
 
@@ -52,18 +28,25 @@ Template.votingview.events({
                 hasEmptyAnswers = false;
             }
 
-            content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
-            content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+            answerContent += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+            answerContent += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
         });
 
         if (hasEmptyAnswers) {
-            content = "";
+            answerContent = "";
             $('#answerOptionsHeader').hide();
         }
 
-        $('.questionAndAnswerTextSplash').parents('.modal').modal("show");
-        $('.questionAndAnswerTextSplash>#questionText').html(mathjaxMarkdown.getContent(questionDoc.questionList[EventManager.findOne().questionIndex].questionText));
-        $('.questionAndAnswerTextSplash>#answerOptionsTxt').html(content);
+        new Splashscreen({
+            autostart: true,
+            templateName: 'questionAndAnswerSplashscreen',
+            closeOnButton: '#js-btn-hideQuestionModal',
+            instanceId: "questionAndAnswers_"+EventManager.findOne().questionIndex,
+            onRendered: function (instance) {
+                instance.templateSelector.find('#questionContent').html(questionContent);
+                instance.templateSelector.find('#answerContent').html(answerContent);
+            }
+        });
     },
     "click #forwardButton": function (event) {
         event.stopPropagation();

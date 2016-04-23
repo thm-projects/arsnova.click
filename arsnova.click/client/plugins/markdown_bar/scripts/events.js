@@ -1,11 +1,18 @@
 import { Template } from 'meteor/templating';
-import {markdownAlreadyExistsAndAutoRemove, insertInQuestionText} from './lib.js';
+import { Splashscreen } from '/client/plugins/splashscreen/scripts/lib.js';
+import { markdownAlreadyExistsAndAutoRemove, insertInQuestionText } from './lib.js';
 
 Template.markdownBar.events({
     "click #infoMarkdownButton": function () {
-        var markdownInfoText = $("#markdownInfoText");
-        markdownInfoText.parents('.modal').modal('show');
-        markdownInfoText.html("Sie können Texte innerhalb von ARSnova mithilfe von <a target=\"_blank\" class=\"hyperlink\" href=\"https://de.wikipedia.org/wiki/Markdown\">Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown Optionen werden in Form von Schaltflächen über den unterstützten Eingabefeldern angeboten. Zudem unterstützt ARSnova <a target=\"_blank\" class=\"hyperlink\" href=\"https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet\">GitHub Flavored Markdown</a>");
+        new Splashscreen({
+            autostart: true,
+            instanceId: "infoMarkdown",
+            onRendered: function (instance) {
+                instance.templateSelector.find(".modal-body").html(
+                    "Sie können Texte innerhalb von ARSnova mithilfe von <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown Optionen werden in Form von Schaltflächen über den unterstützten Eingabefeldern angeboten. Zudem unterstützt ARSnova <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
+                );
+            }
+        });
     },
     "click #boldMarkdownButton": function () {
         if (!markdownAlreadyExistsAndAutoRemove('**', '**')) {
@@ -25,20 +32,30 @@ Template.markdownBar.events({
             }
         }
     },
-    "click #linkMarkdownButton": function () {
-        $("#hyperlinkInsertSplashContent").parents('.modal').modal('show');
+    "click #hyperlinkMarkdownButton": function () {
+        new Splashscreen({
+            autostart: true,
+            templateName: "hyperlinkInsertSplashscreen",
+            closeOnButton: "#js-btn-closeHyperlink, #js-btn-saveHyperlink",
+            onRendered: function (instance) {
+                var textarea = document.getElementById('questionText');
+                if (textarea.selectionStart != textarea.selectionEnd) {
+                    var strPosBegin = textarea.selectionStart;
+                    var strPosEnd = textarea.selectionEnd;
+                    var frontText = (textarea.value).substring(0, strPosBegin);
+                    var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
+                    var backText = (textarea.value).substring(strPosEnd, textarea.value.length);
 
-        var textarea = document.getElementById('questionText');
-        if (textarea.selectionStart != textarea.selectionEnd) {
-            var strPosBegin = textarea.selectionStart;
-            var strPosEnd = textarea.selectionEnd;
-            var frontText = (textarea.value).substring(0, strPosBegin);
-            var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
-            var backText = (textarea.value).substring(strPosEnd, textarea.value.length);
-
-            $('#hyperlinkText').val(middleText);
-            textarea.value = frontText + backText;
-        }
+                    instance.templateSelector.find('#hyperlinkText').val(middleText);
+                    textarea.value = frontText + backText;
+                }
+                $('#js-btn-saveHyperlink').on('click', function () {
+                    var linkText = document.getElementById('hyperlinkText').value;
+                    var linkDestination = document.getElementById('hyperlinkDestination').value;
+                    insertInQuestionText('[' + linkText + '](' + linkDestination + ')');
+                });
+            }
+        });
     },
     "click #unsortedListMarkdownButton": function () {
         if (!markdownAlreadyExistsAndAutoRemove('- ')) {
@@ -70,48 +87,82 @@ Template.markdownBar.events({
         }
     },
     "click #pictureMarkdownButton": function () {
-        $("#pictureInsertSplashContent").parents('.modal').modal('show');
+        new Splashscreen({
+            autostart: true,
+            templateName: "pictureInsertSplashscreen",
+            closeOnButton: "#js-btn-closePicture, #js-btn-savePicture",
+            onRendered: function (instance) {
+                var textarea = document.getElementById('questionText');
+                if (textarea.selectionStart != textarea.selectionEnd) {
+                    var strPosBegin = textarea.selectionStart;
+                    var strPosEnd = textarea.selectionEnd;
+                    var frontText = (textarea.value).substring(0, strPosBegin);
+                    var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
+                    var backText = (textarea.value).substring(strPosEnd, textarea.value.length);
 
-        var textarea = document.getElementById('questionText');
-        if (textarea.selectionStart != textarea.selectionEnd) {
-            var strPosBegin = textarea.selectionStart;
-            var strPosEnd = textarea.selectionEnd;
-            var frontText = (textarea.value).substring(0, strPosBegin);
-            var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
-            var backText = (textarea.value).substring(strPosEnd, textarea.value.length);
-
-            $('#hyperlinkText').val(middleText);
-            textarea.value = frontText + backText;
-        }
+                    instance.templateSelector.find('#hyperlinkText').val(middleText);
+                    textarea.value = frontText + backText;
+                }
+                $('#js-btn-savePicture').on('click', function () {
+                    var linkText = document.getElementById('pictureText').value;
+                    var linkDestination = document.getElementById('pictureDestination').value;
+                    insertInQuestionText('![' + linkText + '](' + linkDestination + ' "autoxautoxleft")');
+                });
+            }
+        });
     },
     "click #youtubeMarkdownButton": function () {
-        $("#youtubeInsertSplashContent").parents('.modal').modal('show');
+        new Splashscreen({
+            autostart: true,
+            templateName: "youtubeInsertSplashscreen",
+            closeOnButton: "#js-btn-closeYoutube, #js-btn-saveYoutube",
+            onRendered: function (instance) {
+                var textarea = document.getElementById('questionText');
+                if (textarea.selectionStart != textarea.selectionEnd) {
+                    var strPosBegin = textarea.selectionStart;
+                    var strPosEnd = textarea.selectionEnd;
+                    var frontText = (textarea.value).substring(0, strPosBegin);
+                    var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
+                    var backText = (textarea.value).substring(strPosEnd, textarea.value.length);
 
-        var textarea = document.getElementById('questionText');
-        if (textarea.selectionStart != textarea.selectionEnd) {
-            var strPosBegin = textarea.selectionStart;
-            var strPosEnd = textarea.selectionEnd;
-            var frontText = (textarea.value).substring(0, strPosBegin);
-            var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
-            var backText = (textarea.value).substring(strPosEnd, textarea.value.length);
-
-            $('#youtubeText').val(middleText);
-            textarea.value = frontText + backText;
-        }
+                    instance.templateSelector.find('#youtubeText').val(middleText);
+                    textarea.value = frontText + backText;
+                }
+                $('#js-btn-saveYoutube').on('click', function () {
+                    var linkText = document.getElementById('youtubeText').value;
+                    var linkDestination = document.getElementById('youtubeDestination').value;
+                    var picUrl = linkDestination.replace("www.", "img.").replace("watch?v=", "vi/").concat("/0.jpg");
+                    insertInQuestionText('[![' + linkText + '](' + picUrl + ')](' + linkDestination + ')');
+                });
+            }
+        });
     },
     "click #vimeoMarkdownButton": function () {
-        $("#vimeoInsertSplashContent").parents('.modal').modal('show');
+        new Splashscreen({
+            autostart: true,
+            templateName: "vimeoInsertSplashscreen",
+            closeOnButton: "#js-btn-closeVimeo, #js-btn-saveVimeo",
+            onRendered: function (instance) {
+                var textarea = document.getElementById('questionText');
+                if (textarea.selectionStart != textarea.selectionEnd) {
+                    var strPosBegin = textarea.selectionStart;
+                    var strPosEnd = textarea.selectionEnd;
+                    var frontText = (textarea.value).substring(0, strPosBegin);
+                    var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
+                    var backText = (textarea.value).substring(strPosEnd, textarea.value.length);
 
-        var textarea = document.getElementById('questionText');
-        if (textarea.selectionStart != textarea.selectionEnd) {
-            var strPosBegin = textarea.selectionStart;
-            var strPosEnd = textarea.selectionEnd;
-            var frontText = (textarea.value).substring(0, strPosBegin);
-            var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
-            var backText = (textarea.value).substring(strPosEnd, textarea.value.length);
-
-            $('#vimeoText').val(middleText);
-            textarea.value = frontText + backText;
-        }
+                    instance.templateSelector.find('#vimeoText').val(middleText);
+                    textarea.value = frontText + backText;
+                }
+                $('#js-btn-saveVimeo').on('click', function () {
+                    var linkText = document.getElementById('vimeoText').value;
+                    var linkDestination = document.getElementById('vimeoDestination').value;
+                    var videoId = linkDestination.substr(linkDestination.lastIndexOf("/") + 1);
+                    var picUrl = 'https://i.vimeocdn.com/video/' + videoId + '_200x150.jpg';
+                    var videoUrl = 'https://player.vimeo.com/video/' + videoId;
+                    insertInQuestionText('[![' + linkText + '](' + picUrl + ')](' + videoUrl + ')');
+                });
+            }
+        });
     }
 });

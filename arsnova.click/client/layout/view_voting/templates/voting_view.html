@@ -20,16 +20,17 @@
     {{> titel titelText = getCountdown}}
     <div class="row voting-helper-buttons">
         <div class="col-xs-{{#if showForwardButton}}6{{else}}12{{/if}}">
-            <button id="js-btn-showQuestionModal" type="button" class="btn btn-info btn-lg btn-answerOption">
-                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span><span
-                    class="ansBtn"> Frage</span>
+            <button id="js-btn-showQuestionAndAnswerModal" type="button" class="btn btn-info btn-lg btn-answerOption">
+                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                <span class="ansBtn">Frage</span>
             </button>
         </div>
 
         {{#if showForwardButton}}
             <div class="col-xs-6">
                 <button id="forwardButton" type="button" class="btn btn-success btn-lg btn-answerOption">
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span><span class="ansBtn"> Absenden</span>
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    <span class="ansBtn">Absenden</span>
                 </button>
             </div>
         {{/if}}
@@ -44,8 +45,4 @@
             </div>
         {{/each}}
     </div>
-    {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Frage" templateName="questionContentSplash"}}
-    {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true headername="Antwortoptionen" templateName="answerOptionsSplash"}}
-    {{> splashscreen lazyCloseJsClass='js-splashscreen' noAutorun=true templateName="questionAndAnswerContentSplash" type="splash-screen-show-question"}}
-    {{> errorSplashscreen }}
 </template>

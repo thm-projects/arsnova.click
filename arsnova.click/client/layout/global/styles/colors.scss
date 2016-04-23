@@ -49,12 +49,10 @@ $progress-bar-read-confirmation: darkorange;
 $progress-bar-failure-color: firebrick;
 $progress-bar-default-color: grey;
 
-$splash-screen-show-session-background-color: #98fb98; /* palegreen */
-$splash-screen-request-read-confirm-background-color: #98fb98; /* palegreen */
-$splash-screen-countdown-background-color: #98fb98; /* palegreen */
-$splash-view-seconds-left-background-color: #98fb98; /* palegreen */
-$splash-show-question-background-color: #98fb98; /* palegreen */
-$splash-screen-read-confirmation-background-color: #2f4f4f; /* darkslategrey */
+$splashscreen-background-color: #98fb98; /* palegreen */
+$splashscreen-question-and-answer-background-color: #98fb98; /* palegreen */
+$splashscreen-question-preview-background-color: #98fb98; /* palegreen */
+$splashscreen-show-hashtags-background-color: #98fb98; /* palegreen */
 $splash-screen-error-message-background-color: #de5454; /* firebrick 60% */
 
 $check-mark-checked: #00882a;

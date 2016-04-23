@@ -102,42 +102,42 @@
 
 .icon-play-circle::before {
   content: "\f01d";
-  font-family: "arsnova";
+  font-family: "arsnova", serif;
 }
 
 .vimeoIcon::before {
   content: "\f194";
-  font-family: "arsnova";
+  font-family: "arsnova", serif;
 }
 
 .youtubeIcon::before {
   content: "\f167";
-  font-family: "arsnova";
+  font-family: "arsnova", serif;
 }
 
 .latexIcon::before {
   content: "\f12b";
-  font-family: "arsnova";
+  font-family: "arsnova", serif;
 }
 
 .codeListingIcon::before {
   content: "\f121";
-  font-family: "arsnova";
+  font-family: "arsnova", serif;
 }
 
 .codeCommentIcon::before {
   content: "\f10e";
-  font-family: "arsnova";
+  font-family: "arsnova", serif;
 }
 
 .iconEditorUl::before {
   content: "\f0ca";
-  font-family: "arsnova";
+  font-family: "arsnova", serif;
 }
 
 .iconEditorOl::before {
   content: "\f0cb";
-  font-family: "arsnova";
+  font-family: "arsnova", serif;
 }
 
 .row-centered {
@@ -180,4 +180,20 @@ table th, table td {
 
 table tr:nth-child(2n) {
   background-color: #f8f8f8;
+}
+
+.videoImageContainer {
+  position: relative;
+}
+
+.videoImageContainer:after {
+  font-size: 500%;
+  position: absolute;
+  left: 50%; top: 50%;
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: arsnova, serif;
+  content: "\f01d";
 }

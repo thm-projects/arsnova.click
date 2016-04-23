@@ -28,8 +28,9 @@ import * as lib from './lib.js';
 Template.hashtag_view.events({
     "input #hashtag-input-field": function (event) {
         var inputHashtag = $(event.target).val();
+        let addNewHashtagItem = $("#addNewHashtag");
         Session.set("hashtag", inputHashtag);
-        $("#addNewHashtag").html("Mach neu !<span class=\"glyphicon glyphicon-plus glyph-right\" aria-hidden=\"true\"></span>");
+        addNewHashtagItem.html("Mach neu !<span class=\"glyphicon glyphicon-plus glyph-right\" aria-hidden=\"true\"></span>");
         if (inputHashtag.length === 0) {
             return;
         }
@@ -37,18 +38,18 @@ Template.hashtag_view.events({
         var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
         if (!hashtagDoc) {
             $("#joinSession").attr("disabled", "disabled");
-            $("#addNewHashtag").removeAttr("disabled");
+            addNewHashtagItem.removeAttr("disabled");
         } else {
             var localHashtags = localData.getAllHashtags();
             if ($.inArray(inputHashtag, localHashtags) > -1) {
-                $("#addNewHashtag").html("Bearbeiten<span class=\"glyphicon glyphicon-pencil glyph-right\" aria-hidden=\"true\"></span>");
-                $("#addNewHashtag").removeAttr("disabled");
+                addNewHashtagItem.html("Bearbeiten<span class=\"glyphicon glyphicon-pencil glyph-right\" aria-hidden=\"true\"></span>");
+                addNewHashtagItem.removeAttr("disabled");
             } else {
-                $("#addNewHashtag").attr("disabled", "disabled");
+                addNewHashtagItem.attr("disabled", "disabled");
             }
         }
     },
-    "click #addNewHashtag": function (event) {
+    "click #addNewHashtag": function () {
         if (!Session.get("localStorageAvailable")) {
             splashscreen_error.setErrorText("Im Privatmodus deines Browsers funktioniert arsnova.click leider nur als Teilnehmer, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von arsnova.click den Privatmodus deaktivieren und ARSnova erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.");
             splashscreen_error.open();
@@ -242,7 +243,7 @@ Template.hashtagManagement.events({
 
 Template.showHashtagsSplashscreen.events({
     "click .js-my-hash": function (event) {
-        var hashtag = event.target.text;
+        var hashtag = $(event.currentTarget).text();
         Session.set("isOwner", true);
         Session.set("hashtag", hashtag);
         localData.reenterSession(hashtag);

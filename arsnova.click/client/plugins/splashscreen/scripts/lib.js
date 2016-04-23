@@ -144,7 +144,7 @@ export class Splashscreen {
                 }
             }).on('click', this.options.closeOnButton, function () {
                 hasClickedOnCloseButton = true;
-                self.destroy();
+                self.close();
             });
         } else {
             this.templateSelector.on('hide.bs.modal',function () {
@@ -165,7 +165,7 @@ class ErrorSplashscreen extends Splashscreen {
 
     setErrorText(text) {
         if(this.isRendered) {
-            $(this.templateSelector).find("#errorMessage-text").text(text);
+            $(this.templateSelector).find(".modal-body").text(text);
         }
     }
 }

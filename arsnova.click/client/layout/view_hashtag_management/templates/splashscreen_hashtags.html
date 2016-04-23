@@ -5,9 +5,11 @@
                 <div class="modal-header"></div>
                 <div class="modal-body">
                     <p class="modal-center">Die folgenden Quizze sind in deinem Browser verfügbar:</p><br/>
-                    {{#each hashtags}}
-                        <a href="#" class="js-my-hash">{{this}}</a><br/>
-                    {{/each}}
+                    <div class="row">
+                        {{#each hashtags}}
+                            <div class="col-xs-12 js-my-hash">{{this}}</div>
+                        {{/each}}
+                    </div>
                     <div class="row">
                         <div class="col-xs-12">
                             <button id="js-btn-showHashtagManagement" type="button"

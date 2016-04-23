@@ -47,14 +47,11 @@
 .js-my-hash {
   color: black;
   border-radius: $corner-radius;
+  background-color: #ffffe0;
+  cursor: pointer;
   padding: 5px;
   margin: 10px 0;
   text-align: center;
-
-  &:hover {
-    background-color: #ffffe0;
-    cursor: pointer;
-  }
 }
 
 .showHashtagsSplashscreen {

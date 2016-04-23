@@ -110,6 +110,7 @@ export class Splashscreen {
             return;
         }
         Blaze.remove(this.templateInstance);
+        this.templateSelector.remove();
         $('.modal-backdrop').remove();
         this.templateInstance = null;
         if(typeof this.options.onDestroyed === "function") {
@@ -133,8 +134,8 @@ export class Splashscreen {
      * A call of this method will show (display) the splashscreen
      */
     open() {
+        let self = this;
         if( this.options.closeOnButton ) {
-            let self = this;
             let hasClickedOnCloseButton = false;
             this.templateSelector.on('hide.bs.modal',function (event) {
                 if( !hasClickedOnCloseButton ) {
@@ -143,7 +144,11 @@ export class Splashscreen {
                 }
             }).on('click', this.options.closeOnButton, function () {
                 hasClickedOnCloseButton = true;
-                self.close();
+                self.destroy();
+            });
+        } else {
+            this.templateSelector.on('hide.bs.modal',function () {
+                self.destroy();
             });
         }
 

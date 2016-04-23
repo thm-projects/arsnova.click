@@ -4,7 +4,7 @@ Template.markdownBar.onRendered(function () {
     $('#infoMarkdownButton').tooltip();
     $('#boldMarkdownButton').tooltip();
     $('#headerMarkdownButton').tooltip();
-    $('#linkMarkdownButton').tooltip();
+    $('#hyperlinkMarkdownButton').tooltip();
     $('#unsortedListMarkdownButton').tooltip();
     $('#sortedListMarkdownButton').tooltip();
     $('#latexMarkdownButton').tooltip();

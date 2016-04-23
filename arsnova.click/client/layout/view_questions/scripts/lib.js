@@ -48,3 +48,7 @@ export function calculateWindow() {
     headerTitel.css("font-size", fontSize);
     headerTitel.css("margin-top", $(".arsnova-logo").height() * marginTopModifier);
 }
+
+export function calculateAndSetPreviewSplashWidthAndHeight() {
+    $('.modal-dialog').width($('#mainContentContainer').width() - 40);
+}

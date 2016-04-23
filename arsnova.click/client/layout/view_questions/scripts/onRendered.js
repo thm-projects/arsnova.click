@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import { EventManager } from '/lib/eventmanager.js';
 import { QuestionGroup } from '/lib/questions.js';
-import * as lib from '././lib.js';
+import * as lib from './lib.js';
 
 Template.createQuestionView.onRendered(function () {
     lib.calculateWindow();
@@ -22,7 +22,6 @@ Template.createQuestionView.onRendered(function () {
         }
 
         lib.addQuestion(index);
-        Router.go("/question");
     });
     body.on('click', '.removeQuestion', function () {
         index = EventManager.findOne().questionIndex;
@@ -31,4 +30,11 @@ Template.createQuestionView.onRendered(function () {
     if ($(window).width() >= 992) {
         $('#questionText').focus();
     }
+});
+
+Template.questionPreviewSplashscreen.onRendered(function () {
+    lib.calculateAndSetPreviewSplashWidthAndHeight();
+    $(window).resize(function () {
+        lib.calculateAndSetPreviewSplashWidthAndHeight();
+    });
 });

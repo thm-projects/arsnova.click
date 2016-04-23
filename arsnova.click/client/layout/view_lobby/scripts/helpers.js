@@ -31,7 +31,7 @@ Template.memberlist.helpers({
         return MemberList.find().count() - Session.get("LearnerCount");
     },
     titleText: function () {
-        return 'Quiz-Lobby ... ';
+        return 'Quiz-Lobby';
     },
     memberlistCount: function () {
         return MemberList.find().count();

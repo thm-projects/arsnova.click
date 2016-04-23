@@ -17,57 +17,39 @@
 -->
 
 <template name="soundConfig">
-
     <div class="modal fade" id="soundModal" role="dialog">
         <div class="modal-dialog">
-            <div class="modal-content splash-screen-show-question">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h2>
-                        Voting-Musik
-                    </h2>
+                    <h2>Quiz-Musik</h2>
                 </div>
                 <div class="modal-body">
-                    <div class="soundConfig">
-
-                    </div>
                     <div class="row">
-
-
                         <div id="slider2"></div>
                         <p>Lautstärke: {{slider2}} %</p>
-
-                        <button id="js-btn-playMusic" type="button" class="btn btn-success btn-answerOption btn-lg ">
-                            <span class="glyphicon glyphicon-play"></span>
+                        <button id="js-btn-playStopMusic" type="button" class="btn btn-success btn-answerOption btn-lg ">
+                            <span class="glyphicon glyphicon-{{#if isSoundPlaying}}stop{{ else }}play{{/if}}"></span>
                         </button>
-
-                        <button id="js-btn-stopMusic" type="button" class="btn btn-success btn-answerOption btn-lg ">
-                            <span class="glyphicon glyphicon-stop"></span>
-                        </button>
-
-
-
-                        <select id="soundSelect">
+                        <select id="soundSelect" title="soundSelect">
                             <option value="Song1">Wait</option>
                             <option value="Song2">Jazzy</option>
                             <option value="Song3">Wait Mario</option>
                         </select>
                         <div class="col-md-12">
-                                <button id="isSoundOnButton" class="button button-warning">Sound ist
-                                    inaktiv !
-                                </button>
+                            <button id="isSoundOnButton" class="button button-warning">Sound ist
+                                inaktiv !
+                            </button>
                         </div>
-
-                        <button id="js-btn-hideSoundModal" type="button" class="btn btn-success btn-answerOption btn-lg ">
-                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                            Fenster schließen
-                        </button>
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button id="js-btn-hideSoundModal" type="button" class="btn btn-success btn-answerOption btn-lg ">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        Fenster schließen
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-
 </template>
 

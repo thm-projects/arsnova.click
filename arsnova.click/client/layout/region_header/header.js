@@ -21,7 +21,8 @@ import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 import { Hashtags } from '/lib/hashtags.js';
 import * as localData from '/client/lib/local_storage.js';
-import { buzzsound1 } from '/client/plugins/sound/scripts/lib.js';
+import { buzzsound1, setBuzzsound1 } from '/client/plugins/sound/scripts/lib.js';
+import { Splashscreen } from "/client/plugins/splashscreen/scripts/lib";
 
 
 Template.header.onCreated(function () {
@@ -85,6 +86,54 @@ Template.header.events({
         }
     },
     'click .sound-button': function () {
-        $('#soundModal').modal({backdrop: 'static', keyboard: false});
+        new Splashscreen({
+            autostart: true,
+            templateName: "soundConfig",
+            closeOnButton: "#js-btn-hideSoundModal",
+            onRendered: function (instance) {
+                instance.templateSelector.find('#soundSelect').on('change', function(event){
+                    buzzsound1.stop();
+                    Session.set("soundIsPlaying", false);
+                    switch ($(event.target).val()) {
+                        case "Song1":
+                            setBuzzsound1("waity.mp3");
+                            break;
+                        case "Song2":
+                            setBuzzsound1("jazzy.mp3");
+                            break;
+                        case "Song3":
+                            setBuzzsound1("mariowaity.mp3");
+                            break;
+                    }
+                });
+
+                instance.templateSelector.find("#js-btn-playStopMusic").on('click', function(){
+                    if(Session.get("soundIsPlaying")) {
+                        buzzsound1.stop();
+                        Session.set("soundIsPlaying", false);
+                    } else {
+                        buzzsound1.play();
+                        Session.set("soundIsPlaying", true);
+                    }
+                });
+
+                instance.templateSelector.find("#js-btn-hideSoundModal").on('click', function(){
+                    buzzsound1.stop();
+                    Session.set("soundIsPlaying", false);
+                });
+
+                instance.templateSelector.find('#isSoundOnButton').on('click', function() {
+                    var btn = $('#isSoundOnButton');
+                    btn.toggleClass("down");
+                    if (btn.hasClass("down")) {
+                        Session.set("togglemusic", true);
+                        btn.html("Sound ist aktiv!");
+                    } else {
+                        Session.set("togglemusic", false);
+                        btn.html("Sound ist inaktiv!");
+                    }
+                });
+            }
+        });
     }
 });

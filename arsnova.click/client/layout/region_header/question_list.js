@@ -6,6 +6,7 @@ import { EventManager } from '/lib/eventmanager.js';
 import { AnswerOptions } from '/lib/answeroptions.js';
 import { QuestionGroup } from '/lib/questions.js';
 import * as localData from '/client/lib/local_storage.js';
+import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
 
 var redirectTracker = null;
 
@@ -107,8 +108,8 @@ Template.questionList.events({
             answerOptionNumber: -1
         }, (err) => {
             if (err) {
-                $('.errorMessageSplash').parents('.modal').modal('show');
-                $("#errorMessage-text").html(err.reason);
+                splashscreen_error.setErrorText(err.reason);
+                splashscreen_error.open();
             } else {
                 Meteor.call("QuestionGroup.removeQuestion", {
                     privateKey: localData.getPrivateKey(),
@@ -116,8 +117,8 @@ Template.questionList.events({
                     questionIndex: id
                 }, (err) => {
                     if (err) {
-                        $('.errorMessageSplash').parents('.modal').modal('show');
-                        $("#errorMessage-text").html(err.reason);
+                        splashscreen_error.setErrorText(err.reason);
+                        splashscreen_error.open();
                     } else {
                         localData.removeQuestion(Session.get("hashtag"), id);
                         if (QuestionGroup.findOne().questionList.length === 0) {
@@ -175,8 +176,8 @@ function addNewQuestion(){
         questionText: ""
     }, (err) => {
         if (err) {
-            $('.errorMessageSplash').parents('.modal').modal('show');
-            $("#errorMessage-text").html(err.reason);
+            splashscreen_error.setErrorText(err.reason);
+            splashscreen_error.open();
         } else {
             for(var i = 0; i < 4; i++) {
                 Meteor.call('AnswerOptions.addOption',{

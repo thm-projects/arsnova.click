@@ -3,8 +3,9 @@ import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 import { EventManager } from '/lib/eventmanager.js';
 import { AnswerOptions } from '/lib/answeroptions.js';
-import { parseAnswerOptionInput } from './lib.js';
 import * as localData from '/client/lib/local_storage.js';
+import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
+import { parseAnswerOptionInput } from './lib.js';
 
 Template.createAnswerOptions.events({
     "click .toggleCorrect": function (event) {
@@ -78,8 +79,8 @@ Template.createAnswerOptions.events({
         var error = parseAnswerOptionInput(EventManager.findOne().questionIndex);
 
         if (error) {
-            $('.errorMessageSplash').parents('.modal').modal('show');
-            $("#errorMessage-text").html(error.reason);
+            splashscreen_error.setErrorText(error.reason);
+            splashscreen_error.open();
         } else {
             Router.go("/settimer");
         }

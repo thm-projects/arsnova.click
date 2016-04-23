@@ -44,13 +44,15 @@ export class Splashscreen {
             autostart:      options.autostart       || false,
             templateName:   options.templateName    || "splashscreen",
             instanceId:     options.instanceId      || 0,
-            closeOnClick:   options.closeOnClick    || false,
+            closeOnButton:  options.closeOnButton   || false,
             onCreated:      options.onCreated       || undefined,
             onDestroyed:    options.onDestroyed     || undefined,
             onRendered:     options.onRendered      || undefined
         };
         this.created();
+        this.isCreated = true;
         this.rendered();
+        this.isRendered = true;
     }
 
     /**
@@ -106,7 +108,13 @@ export class Splashscreen {
      * A call of this method will close (hide) the splashscreen
      */
     close() {
-        $('#'+this.options.templateName+"_"+this.options.instanceId).modal("hide");
+        let thisTemplate = $('#'+this.options.templateName+"_"+this.options.instanceId);
+
+        if( this.options.closeOnButton ) {
+            thisTemplate.off('hide.bs.modal').off('click', this.options.closeOnButton);
+        }
+
+        thisTemplate.modal("hide");
         $('.modal-backdrop').remove();
         this.isOpen = false;
     }
@@ -115,7 +123,42 @@ export class Splashscreen {
      * A call of this method will show (display) the splashscreen
      */
     open() {
-        $('#'+this.options.templateName+"_"+this.options.instanceId).modal("show");
+        let thisTemplate = $('#'+this.options.templateName+"_"+this.options.instanceId);
+
+        if( this.options.closeOnButton ) {
+            let self = this;
+            let hasClickedOnCloseButton = false;
+            thisTemplate.on('hide.bs.modal',function (event) {
+                if( !hasClickedOnCloseButton ) {
+                    event.stopPropagation();
+                    event.preventDefault();
+                }
+            }).on('click', this.options.closeOnButton, function () {
+                hasClickedOnCloseButton = true;
+                self.close();
+            });
+        }
+
+        thisTemplate.modal("show");
         this.isOpen = true;
     }
 }
+
+
+class ErrorSplashscreen extends Splashscreen {
+    constructor(options) {
+        super(options);
+    }
+
+    setErrorText(text) {
+        if(this.isRendered) {
+            $(this.templateInstance.firstNode()).find("#errorMessage-text").text(text);
+        }
+    }
+}
+
+export const splashscreen_error = new ErrorSplashscreen({
+    autostart: false,
+    templateName: "errorSplashscreen",
+    closeOnButton: "#js-btn-hideErrorMessageModal"
+});

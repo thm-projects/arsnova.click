@@ -7,6 +7,7 @@ import { MemberList } from '/lib/memberlist.js';
 import { QuestionGroup } from '/lib/questions.js';
 import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
 import * as localData from '/client/lib/local_storage.js';
+import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
 import { calculateButtonCount, startCountdown } from './lib.js';
 
 Template.questionT.events({
@@ -16,11 +17,10 @@ Template.questionT.events({
             questionIndex: EventManager.findOne().readingConfirmationIndex,
             nick: Session.get("nick")
         }, (err)=> {
+            closeSplashscreen();
             if (err) {
-                $('.errorMessageSplash').parents('.modal').modal('show');
-                $("#errorMessage-text").html(err.reason);
-            } else {
-                closeSplashscreen();
+                splashscreen_error.setErrorText(err.reason);
+                splashscreen_error.open();
             }
         });
     }
@@ -105,8 +105,8 @@ Template.live_results.events({
             privateKey: localData.getPrivateKey()
         }, (err, res) => {
             if (err) {
-                $('.errorMessageSplash').parents('.modal').modal('show');
-                $("#errorMessage-text").html("Could not export!\n" + err.reason);
+                splashscreen_error.setErrorText("Could not export!\n" + err.reason);
+                splashscreen_error.open();
             } else {
                 var exportData = "text/json;charset=utf-8," + encodeURIComponent(res);
                 var a = document.createElement('a');
@@ -145,8 +145,8 @@ Template.live_results.events({
             questionIndex: EventManager.findOne().questionIndex + 1
         }, (err) => {
             if (err) {
-                $('.errorMessageSplash').parents('.modal').modal('show');
-                $("#errorMessage-text").html(err.reason);
+                splashscreen_error.setErrorText(err.reason);
+                splashscreen_error.open();
                 Session.set("sessionClosed", true);
             } else {
                 Meteor.call("EventManager.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), EventManager.findOne().questionIndex + 1, ()=> {

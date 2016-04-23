@@ -20,6 +20,7 @@ import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 import * as localData from '/client/lib/local_storage.js';
+import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
 
 Template.footer.onRendered(function () {
     Session.set("footerIsHidden", true);
@@ -83,8 +84,7 @@ Template.footer.events({
         if ($("#footerBar").hasClass("hide")) {
             $("#footerBar").removeClass("hide");
             $("#hideShowFooterBar").addClass("hide");
-            $("#footer-info-div").removeClass("hiddenStyle");
-            $("#footer-info-div").addClass("showStyle");
+            $("#footer-info-div").removeClass("hiddenStyle").addClass("showStyle");
 
             Session.set("footerIsHidden", false);
         }
@@ -97,9 +97,7 @@ Template.footer.events({
             } else if (document.documentElement.mozRequestFullScreen) {
                 document.documentElement.mozRequestFullScreen();
                 // TODO webkit is currently not working!
-            } /*else if (document.documentElement.webkitRequestFullscreen) {
-                document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-            }*/
+            }
         } else {
             if (document.cancelFullScreen) {
                 document.cancelFullScreen();
@@ -108,9 +106,7 @@ Template.footer.events({
             }else if (document.mozCancelFullScreen) {
                 document.mozCancelFullScreen();
                 // TODO webkit is currently not working!
-            } /*else if (document.webkitCancelFullScreen) {
-                document.webkitCancelFullScreen();
-            }*/
+            }
         }
     },
     "click .js-import-home": function () {
@@ -128,8 +124,8 @@ Template.footer.events({
                 },
                 (err) => {
                     if (err) {
-                        $('.errorMessageSplash').parents('.modal').modal('show');
-                        $("#errorMessage-text").html("Diese Sitzung existiert bereits!");
+                        splashscreen_error.setErrorText("Diese Sitzung existiert bereits!");
+                        splashscreen_error.open();
                     }
                     else {
                         localData.importFromFile(asJSON);
@@ -137,8 +133,8 @@ Template.footer.events({
 		                        Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
 		                            (err) => {
 		                                if (err) {
-		                                    $('.errorMessageSplash').parents('.modal').modal('show');
-		                                    $("#errorMessage-text").html("Es ist ein Fehler bei der Aktualisierung ihrer Frage aufgetreten.");
+                                            splashscreen_error.setErrorText("Es ist ein Fehler bei der Aktualisierung ihrer Frage aufgetreten.");
+                                            splashscreen_error.open();
 		                                }
 		                                else {
 		                                    Session.set("hashtag", asJSON.hashtagDoc.hashtag);

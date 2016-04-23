@@ -3,6 +3,7 @@ import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 import { MemberList } from '/lib/memberlist.js';
 import * as localData from '/client/lib/local_storage.js';
+import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
 import {calculateButtonCount} from './lib.js';
 
 Template.memberlist.events({
@@ -29,8 +30,8 @@ Template.memberlist.events({
         Meteor.call('MemberList.removeLearner', localData.getPrivateKey(), Session.get("hashtag"), Session.get("nickToBeKicked").nick_id, function (err) {
             $('.js-splashscreen-noLazyClose').modal("hide");
             if (err) {
-                $('.errorMessageSplash').parents('.modal').modal('show');
-                $("#errorMessage-text").html(err.reason);
+                splashscreen_error.setErrorText(err.reason);
+                splashscreen_error.open();
             }
         });
     },

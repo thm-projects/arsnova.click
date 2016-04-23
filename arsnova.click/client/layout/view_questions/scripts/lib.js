@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import * as localData from '/client/lib/local_storage.js';
+import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
 
 export var subscriptionHandler = null;
 
@@ -13,8 +14,8 @@ export function addQuestion(index) {
         questionText: questionText
     }, (err) => {
         if (err) {
-            $('.errorMessageSplash').parents('.modal').modal('show');
-            $("#errorMessage-text").html(err.reason);
+            splashscreen_error.setErrorText(err.reason);
+            splashscreen_error.open();
         } else {
             localData.addQuestion(Session.get("hashtag"), index, questionText);
         }

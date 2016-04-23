@@ -45,6 +45,11 @@ Template.header.onCreated(function () {
             });
         });
     });
+
+    Session.setDefault("slider2", 80);
+    Session.setDefault("globalVolume", 80);
+
+    setBuzzsound1('waity.mp3');
 });
 
 Template.header.helpers({

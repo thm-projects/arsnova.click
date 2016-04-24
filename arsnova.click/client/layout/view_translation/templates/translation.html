@@ -1,5 +1,5 @@
 <template name="translate">
-    {{> titel titelText = 'translations' }}
+    {{> titel titelText = 'view.translation.translations' }}
     <div class="row center-vertical">
         <div class="col-md-12">
             {{#if i18n_enabled}}
@@ -13,7 +13,7 @@
                     {{/each}}
                 </div>
             {{ else }}
-                <p>i18n ist aktuell nicht verfügbar!</p>
+                <p>{{_ "view.translation.i18n_currently_not_available"}}</p>
             {{/if}}
         </div>
     </div>

@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { Tracker } from 'meteor/tracker';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { EventManager } from '/lib/eventmanager.js';
 import { AnswerOptions } from '/lib/answeroptions.js';
 import { MemberList } from '/lib/memberlist.js';
@@ -201,7 +202,7 @@ export function startReadingConfirmationTracker () {
                                 instance.templateSelector.find('#questionContent').html(content);
 
                                 if ( Session.get("isOwner") ) {
-                                    instance.templateSelector.find('#setReadConfirmed').text("Fenster schließen");
+                                    instance.templateSelector.find('#setReadConfirmed').text(TAPi18n.__("global.close_window"));
                                 } else {
                                     instance.templateSelector.find('#setReadConfirmed').parent().on('click', '#setReadConfirmed', function () {
                                         Meteor.call("MemberList.setReadConfirmed", {
@@ -210,7 +211,7 @@ export function startReadingConfirmationTracker () {
                                             nick: Session.get("nick")
                                         }, (err)=> {
                                             if (err) {
-                                                splashscreen_error.setErrorText(err.reason);
+                                                splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
                                                 splashscreen_error.open();
                                             }
                                         });

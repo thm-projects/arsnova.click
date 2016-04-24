@@ -19,6 +19,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { EventManager } from '/lib/eventmanager.js';
 import { Hashtags } from '/lib/hashtags.js';
 import * as localData from '/client/lib/local_storage.js';
@@ -51,7 +52,7 @@ Template.hashtag_view.events({
     },
     "click #addNewHashtag": function () {
         if (!Session.get("localStorageAvailable")) {
-            splashscreen_error.setErrorText("Im Privatmodus deines Browsers funktioniert arsnova.click leider nur als Teilnehmer, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von arsnova.click den Privatmodus deaktivieren und ARSnova erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.");
+            splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing"));
             splashscreen_error.open();
             return;
         }
@@ -81,7 +82,7 @@ Template.hashtag_view.events({
                 Meteor.call('Hashtags.addHashtag', doc, (err) => {
                     if (err) {
                         $("#addNewHashtag").removeAttr("disabled");
-                        splashscreen_error.setErrorText(err.reason);
+                        splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
                         splashscreen_error.open();
                     } else {
                         for (var i = 0; i < 4; i++) {
@@ -124,7 +125,7 @@ Template.hashtag_view.events({
             Router.go("/nick");
         } else {
             $("#joinSession").attr("disabled", "disabled");
-            splashscreen_error.setErrorText("Session is currently not available for joining");
+            splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.session_not_available"));
             splashscreen_error.open();
         }
     },
@@ -216,14 +217,14 @@ Template.hashtagManagement.events({
                 data: asJSON
             }, (err) => {
                 if (err) {
-                    splashscreen_error.setErrorText(err.reason);
+                    splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
                     splashscreen_error.open();
                 } else {
                     localData.importFromFile(asJSON);
                     Meteor.call('EventManager.add', localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, function () {
                         Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2, (err) => {
                             if (err) {
-                                splashscreen_error.setErrorText("Es ist ein Fehler bei der Aktualisierung ihrer Frage aufgetreten.");
+                                splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.update_failed"));
                                 splashscreen_error.open();
                             } else {
                                 Session.set("hashtag", asJSON.hashtagDoc.hashtag);

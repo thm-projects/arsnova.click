@@ -17,7 +17,7 @@
 -->
 
 <template name="createTimerView">
-    {{> titel titelText = 'Countdown einstellen' }}
+    {{> titel titelText = 'view.timer.set_countdown' }}
     <div class="row center-vertical">
         <div class="col-md-12">
             <div class="row distance-top">
@@ -28,8 +28,9 @@
                     <div class="input-group input-group-slider">
                         <span class="input-group-addon round-corners input-field-bg-color input-group-letter glyphicon-hourglass"></span>
                         <input type="text"
+                               title="slider_value"
                                class="input-field round-corners slider-timer-input"
-                               aria-describedby="basic-addon1" disabled value="{{slider}} Sekunden">
+                               aria-describedby="basic-addon1" disabled value="{{slider}} {{_ "view.timer.second" count=slider}}">
                     </div>
                 </div>
             </div>

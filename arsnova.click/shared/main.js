@@ -53,7 +53,7 @@ Meteor.methods({
         if (Meteor.isServer) {
             var hashtagDoc = Hashtags.findOne({hashtag: hashtag, privateKey: privateKey});
             if (typeof hashtagDoc === "undefined") {
-                throw new Meteor.Error('Main.deleteEverything', 'Either the hashtag isn\'t available or the key is wrong');
+                throw new Meteor.Error('Main.deleteEverything', 'plugins.splashscreen.error.error_messages.not_authorized');
             }
             Hashtags.remove({hashtag: hashtag});
             AnswerOptions.remove({hashtag: hashtag});

@@ -1,6 +1,150 @@
 {
-  "enter_quiz_name": "Enter the Quiz name here !",
-  "translations": "Currently the following translations are available:",
-  "back": "Back",
-  "next": "Next"
+  "global": {
+    "arsnova_slogan": "Quizzes for everyone and anything !",
+    "back": "Back",
+    "next": "Next",
+    "delete": "Delete",
+    "save": "Save",
+    "abort": "Abort",
+    "close_window": "Close window"
+  },
+  "region": {
+    "footer": {
+      "agb": {
+        "title": "Terms of Service",
+        "declaration": "Everyone is allowed to use the quiz app ARSnova.click for their own purposes as long as the user does not infringe german or european law.",
+        "license": {
+          "title": "License",
+          "text": "ARSnova.click is a free webservice (Software as a Service). The software is <a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a> und is distributed under the <a href='http://www.gnu.org/licenses/gpl-3.0-standalone.html' target='_blank'>GNU General Public License Version 3</a>."
+        },
+        "warranty": {
+          "title": "Warranty",
+          "text": "We are trying to maintain the online service of ARSnova.click reliable but we cannot guarantee that. The quiz files are located exclusively in the local browser storage of the quiz owner. We do not give any legal responsibility for any data loss for example via deleting the local browser storage or by illegal usage of the service."
+        }
+      }
+    },
+    "header": {
+      "new_question": "New question",
+      "sound": "Sound",
+      "reset": "Reset"
+    }
+  },
+  "view": {
+    "answeroptions": {
+      "answeroption_or_leave_empty": "Type any answer option or leave it empty"
+    },
+    "choose_nickname": {
+      "enter_nickname": "Take a nickname !",
+      "enter_nickname_here": "Enter your nickname here !"
+    },
+    "hashtag_management": {
+      "enter_quiz_name": "Enter the Quiz name here !",
+      "join_session": "Join now !",
+      "create_session": "Make a new one !",
+      "quiz_management": "Quiz-Management",
+      "available_sessions": "Choose one of your Quizzes:",
+      "session_management": "Session management",
+      "import": "Import"
+    },
+    "leaderboard": {
+      "no_attendee_correct": "Unfortunately no attendee has given the correct answer!",
+      "question": "Question"
+    },
+    "live_results": {
+      "question": "Question",
+      "ranking": "Ranking",
+      "reading_confirmation": "Reading confirmation",
+      "show_more": "Show 1 more",
+      "show_more_plural": "Show %s more",
+      "complete_correct": "Everything correct",
+      "complete_wrong": "Everything wrong",
+      "back_to_lobby": "Back to the lobby",
+      "global_ranking": "Global ranking",
+      "show_question": "Show question",
+      "start_round": "Start round",
+      "confirm_read": "Got that !",
+      "game_over": "Game over",
+      "countdown": "Countdown"
+    },
+    "lobby": {
+      "title": "Quiz-Lobby",
+      "yes": "Yes !",
+      "no": "No",
+      "ready": "Ready for quizzing",
+      "show_more": "Show 1 more",
+      "show_more_plural": "Show %s more",
+      "start_quiz": "Let's go !"
+    },
+    "questions": {
+      "enter_question_here": "Enter your question here!",
+      "format": "Format",
+      "edit": "Edit",
+      "preview": "Preview"
+    },
+    "timer": {
+      "set_countdown": "Set countdown",
+      "second": "Second",
+      "second_plural": "Seconds"
+    },
+    "translation": {
+      "translations": "Currently the following translations are available:",
+      "i18n_currently_not_available": "I18n is currently not available!"
+    },
+    "voting": {
+      "question": "Question",
+      "send": "Send"
+    }
+  },
+  "plugins": {
+    "markdown_bar": {
+      "visible_text": "Visible text",
+      "link_text": "Link text",
+      "link_destination": "Link target",
+      "tooltip": {
+        "info": "Info",
+        "bold": "Bold",
+        "heading": "Headline",
+        "hyperlink": "Hyperlink",
+        "unordered_list": "Unordered list",
+        "ordered_list": "Ordered list",
+        "latex": "LaTex Markup",
+        "code": "Code Markup",
+        "citation": "Citation",
+        "image": "Image",
+        "youtube": "YouTube",
+        "vimeo": "Vimeo"
+      },
+      "info_content": "You can use <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> markup for your text in ARSnova.click. Frequently used markup options are available via the button bar which is visible on all supported input fields. Additionally ARSnova.click supports <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
+    },
+    "sound": {
+      "title": "Quiz-Music",
+      "volume": "Volume",
+      "inactive": "Sound is inactive !",
+      "active": "Sound is active !"
+    },
+    "splashscreen": {
+      "error": {
+        "title": "Error",
+        "set_text_error": "The text of the error splashscreen can only be set after it has been rendered!",
+        "error_messages": {
+          "update_failed": "The update of the question failed.",
+          "session_exists": "This session exists already!",
+          "hashtag_exists": "This hashtag exists already!",
+          "session_not_available": "Session is currently not available for joining",
+          "private_browsing": "If you use ARSnova.click in private browsing you can only join a quiz as an attendee. Unfortunately your browser seems to reject any write access to the local storage. Please use ARSnova.click only via a normal browser tab. Your anonymity will be respected even without using the private mode.",
+          "kicked_from_quiz": "You've been kicked from the quiz!",
+          "export_failed": "Could not export! - %s",
+          "not_authorized": "Either there is no quiz or you don't have write access",
+          "maximum_answer_options_exceeded": "Maximum number of possible answer options exceeded",
+          "hashtag_not_found": "No such hashtag with the given key",
+          "member_not_found": "Member not found",
+          "duplicate_response": "User has already given a response",
+          "answeroption_not_found": "There is no answer option with the given answerOptionNumber",
+          "response_timeout": "Response was given out of time range",
+          "insert_leaderboard_failed": "Error while adding response set to leaderboard"
+        }
+      },
+      "question_and_answer": { }
+    }
+  }
 }

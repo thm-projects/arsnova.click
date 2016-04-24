@@ -21,12 +21,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>Quiz-Musik</h2>
+                    <h2>{{_ "plugins.sound.title"}}</h2>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div id="slider2"></div>
-                        <p>Lautstärke: {{slider2}} %</p>
+                        <p>{{_ "plugins.sound.volume"}}: {{slider2}} %</p>
                         <button id="js-btn-playStopMusic" type="button" class="btn btn-success btn-answerOption btn-lg ">
                             <span class="glyphicon glyphicon-{{#if isSoundPlaying}}stop{{ else }}play{{/if}}"></span>
                         </button>
@@ -36,16 +36,14 @@
                             <option value="Song3">Wait Mario</option>
                         </select>
                         <div class="col-md-12">
-                            <button id="isSoundOnButton" class="button button-warning">Sound ist
-                                inaktiv !
-                            </button>
+                            <button id="isSoundOnButton" class="button button-warning">{{_ "plugins.sound.inactive"}}</button>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button id="js-btn-hideSoundModal" type="button" class="btn btn-success btn-answerOption btn-lg ">
                         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                        Fenster schließen
+                        {{_ "global.close_window"}}
                     </button>
                 </div>
             </div>

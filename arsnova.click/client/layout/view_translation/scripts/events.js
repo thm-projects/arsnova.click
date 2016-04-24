@@ -6,6 +6,6 @@ Template.translate.events({
         return TAPi18n.setLanguageAmplify(this.tag);
     },
     'click #backButton': function () {
-        Router.go("/");
+        history.back();
     }
 });

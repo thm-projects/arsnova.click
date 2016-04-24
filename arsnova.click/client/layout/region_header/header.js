@@ -19,6 +19,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { Hashtags } from '/lib/hashtags.js';
 import * as localData from '/client/lib/local_storage.js';
 import { buzzsound1, setBuzzsound1 } from '/client/plugins/sound/scripts/lib.js';
@@ -132,10 +133,10 @@ Template.header.events({
                     btn.toggleClass("down");
                     if (btn.hasClass("down")) {
                         Session.set("togglemusic", true);
-                        btn.html("Sound ist aktiv!");
+                        btn.html(TAPi18n.__("plugins.sound.active"));
                     } else {
                         Session.set("togglemusic", false);
-                        btn.html("Sound ist inaktiv!");
+                        btn.html(TAPi18n.__("plugins.sound.inactive"));
                     }
                 });
             }

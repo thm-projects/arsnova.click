@@ -19,6 +19,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
+export function getLanguage() {
+    return $.parseJSON(localStorage.getItem("__amplify__tap-i18n-language"));
+}
+
 export function getAllHashtags () {
     var hashtagString = localStorage.getItem("hashtags");
     if (!hashtagString) {

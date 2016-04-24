@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { EventManager } from '/lib/eventmanager.js';
 import { QuestionGroup } from '/lib/questions.js';
 import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
@@ -108,7 +109,7 @@ Template.questionList.events({
             answerOptionNumber: -1
         }, (err) => {
             if (err) {
-                splashscreen_error.setErrorText(err.reason);
+                splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
                 splashscreen_error.open();
             } else {
                 Meteor.call("QuestionGroup.removeQuestion", {
@@ -117,7 +118,7 @@ Template.questionList.events({
                     questionIndex: id
                 }, (err) => {
                     if (err) {
-                        splashscreen_error.setErrorText(err.reason);
+                        splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
                         splashscreen_error.open();
                     } else {
                         localData.removeQuestion(Session.get("hashtag"), id);

@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { EventManager } from '/lib/eventmanager.js';
 import { QuestionGroup } from '/lib/questions.js';
 import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
@@ -79,7 +80,7 @@ export function makeAndSendResponse (answerOptionNumber) {
         userNick: Session.get("nick")
     }, (err) => {
         if (err) {
-            splashscreen_error.setErrorText(err.reason);
+            splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
             splashscreen_error.open();
         }
     });

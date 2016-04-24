@@ -19,6 +19,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
 import * as localData from '/client/lib/local_storage.js';
 import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
 
@@ -124,26 +125,26 @@ Template.footer.events({
                 },
                 (err) => {
                     if (err) {
-                        splashscreen_error.setErrorText("Diese Sitzung existiert bereits!");
+                        splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.session_exists"));
                         splashscreen_error.open();
                     }
                     else {
                         localData.importFromFile(asJSON);
-												Meteor.call('EventManager.add', localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, function () {
-		                        Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
-		                            (err) => {
-		                                if (err) {
-                                            splashscreen_error.setErrorText("Es ist ein Fehler bei der Aktualisierung ihrer Frage aufgetreten.");
-                                            splashscreen_error.open();
-		                                }
-		                                else {
-		                                    Session.set("hashtag", asJSON.hashtagDoc.hashtag);
-		                                    Session.set("isOwner", true);
-		                                    Router.go("/memberlist");
-		                                }
-		                            }
-		                        );
-												});
+                        Meteor.call('EventManager.add', localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, function () {
+                            Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
+                                (err) => {
+                                    if (err) {
+                                        splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.update_failed"));
+                                        splashscreen_error.open();
+                                    }
+                                    else {
+                                        Session.set("hashtag", asJSON.hashtagDoc.hashtag);
+                                        Session.set("isOwner", true);
+                                        Router.go("/memberlist");
+                                    }
+                                }
+                            );
+                        });
                     }
                 }
             );

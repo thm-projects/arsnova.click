@@ -9,7 +9,7 @@ import { countdown, getPercentRead, getCurrentRead, hsl_col_perc, checkIfIsCorre
 
 Template.live_results.helpers({
     votingText: function () {
-        return Session.get("sessionClosed") ? "Game over" : "Countdown";
+        return Session.get("sessionClosed") ? "view.live_results.game_over" : "view.live_results.countdown";
     },
     isOwner: function () {
         return Session.get("isOwner");

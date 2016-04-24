@@ -23,8 +23,10 @@
         <div class="row">
             <div class="col-md-12">
                 {{> markdownBar }}
-                <textarea class="round-corners textarea placeholder-align-center" maxlength="1000"
-                          rows="4" id="questionText" placeholder="Gib hier die Frage ein!"
+                <textarea class="round-corners textarea placeholder-align-center"
+                          maxlength="1000"
+                          rows="4" id="questionText"
+                          placeholder="{{_ "view.questions.enter_question_here"}}"
                 >{{questionText}}</textarea>
             </div>
         </div>
@@ -33,7 +35,7 @@
                 <div class="row row-create-question-buttons">
                     <div class="col-xs-6 col-xs-offset-3">
                         <button id="formatPreviewButton" class="button button-purple">
-                            <span id="formatPreviewText">Format</span>
+                            <span id="formatPreviewText">{{_ "view.questions.format"}}</span>
                             <span id="formatPreviewGlyphicon" class="glyphicon glyphicon-cog glyph-right"></span>
                         </button>
                     </div>

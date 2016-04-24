@@ -1,6 +1,150 @@
 {
-  "enter_quiz_name": "Gib den Quiz-Namen ein !",
-  "translations": "Aktuell sind folgende Sprachen verfügbar:",
-  "back": "Zurück",
-  "next": "Weiter"
+  "global": {
+    "arsnova_slogan": "Quiz für alle(s) !",
+    "back": "Zurück",
+    "next": "Weiter",
+    "delete": "Löschen",
+    "save": "Speichern",
+    "abort": "Abbrechen",
+    "close_window": "Fenster schließen"
+  },
+  "region": {
+    "footer": {
+      "agb": {
+        "title": "Allgemeine Geschäftsbedingungen",
+        "declaration": "Alle dürfen die Quiz-App ARSnova.click für ihre Zwecke verwenden, solange dabei nicht gegen geltendes deutsches oder europäisches Recht verstoßen wird.",
+        "license": {
+          "title": "Lizenz",
+          "text": "ARSnova.click ist ein kostenloser Webservice (Software as a Service). Die Software ist <a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a> und steht unter der <a href='http://www.gnu.org/licenses/gpl-3.0-standalone.html' target='_blank'>GNU General Public License Version 3</a>."
+        },
+        "warranty": {
+          "title": "Gewährleistung",
+          "text": "Wir sind bemüht, den Online-Dienst ARSnova.click zuverlässig und störungsfrei zu betreiben, können dies aber nicht garantieren. Alle Quizdaten liegen ausschließlich im Browser-Speicher der Quizerstellerin oder des Quizerstellers. Wir übernehmen keine Haftung für den Verlust der Daten, zum Beispiel durch Löschen des Browser-Speichers, oder bei rechtswidriger Nutzung des Dienstes."
+        }
+      }
+    },
+    "header": {
+      "new_question": "Neue Frage",
+      "sound": "Sound",
+      "reset": "Reset"
+    }
+  },
+  "view": {
+    "answeroptions": {
+      "answeroption_or_leave_empty": "Antwortoption oder lass leer"
+    },
+    "choose_nickname": {
+      "enter_nickname": "Gib Dir einen Nicknamen !",
+      "enter_nickname_here": "Gib deinen Nick ein !"
+    },
+    "hashtag_management": {
+      "enter_quiz_name": "Gib den Quiz-Namen ein !",
+      "join_session": "Mach mit !",
+      "create_session": "Mach neu !",
+      "quiz_management": "Quiz-Verwaltung",
+      "available_sessions": "Diese Quizze sind in Deinem Browser:",
+      "session_management": "Sessionverwaltung",
+      "import": "Import"
+    },
+    "leaderboard": {
+      "no_attendee_correct": "Leider hat kein Teilnehmer richtig abgestimmt!",
+      "question": "Frage"
+    },
+    "live_results": {
+      "question": "Frage",
+      "ranking": "Rangliste",
+      "reading_confirmation": "Lesebestätigung",
+      "show_more": "Zeige 1 weiteren",
+      "show_more_plural": "Zeige %s weitere",
+      "complete_correct": "Ganz richtig",
+      "complete_wrong": "Ganz falsch",
+      "back_to_lobby": "Zurück zur Lobby",
+      "global_ranking": "Globale Rangliste",
+      "show_question": "Zeige Frage",
+      "start_round": "Starte Runde",
+      "confirm_read": "Ich habe die Frage gelesen",
+      "game_over": "Game over",
+      "countdown": "Countdown"
+    },
+    "lobby": {
+      "title": "Quiz-Lobby",
+      "yes": "Ja !",
+      "no": "Nein",
+      "ready": "Startklar fürs Quiz",
+      "show_more": "Zeige 1 weiteren",
+      "show_more_plural": "Zeige %s weitere",
+      "start_quiz": "Los geht's !"
+    },
+    "questions": {
+      "enter_question_here": "Gib hier die Frage ein!",
+      "format": "Format",
+      "edit": "Bearbeiten",
+      "preview": "Vorschau"
+    },
+    "timer": {
+      "set_countdown": "Countdown einstellen",
+      "second": "Sekunde",
+      "second_plural": "Sekunden"
+    },
+    "translation": {
+      "translations": "Aktuell sind folgende Sprachen verfügbar:",
+      "i18n_currently_not_available": "i18n ist aktuell nicht verfügbar!"
+    },
+    "voting": {
+      "question": "Frage",
+      "send": "Absenden"
+    }
+  },
+  "plugins": {
+    "markdown_bar": {
+      "visible_text": "Angezeigter Text",
+      "link_text": "Linktext",
+      "link_destination": "Linkziel",
+      "tooltip": {
+        "info": "Info",
+        "bold": "Fett",
+        "heading": "Überschrift",
+        "hyperlink": "Hyperlink",
+        "unordered_list": "Unsortierte Liste",
+        "ordered_list": "Sortierte Liste",
+        "latex": "LaTex-Auszeichnung",
+        "code": "Code-Auszeichnung",
+        "citation": "Zitat",
+        "image": "Bild",
+        "youtube": "YouTube",
+        "vimeo": "Vimeo"
+      },
+      "info_content": "Sie können Texte innerhalb von ARSnova mithilfe von <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown Optionen werden in Form von Schaltflächen über den unterstützten Eingabefeldern angeboten. Zudem unterstützt ARSnova <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
+    },
+    "sound": {
+      "title": "Quiz-Musik",
+      "volume": "Lautstärke",
+      "inactive": "Sound ist inaktiv !",
+      "active": "Sound ist aktiviert !"
+    },
+    "splashscreen": {
+      "error": {
+        "title": "Fehler",
+        "set_text_error": "Der Text des Splashscreens kann nur gesetzt werden, nachdem er gerendered wurde!",
+        "error_messages": {
+          "update_failed": "Es ist ein Fehler bei der Aktualisierung deiner Frage aufgetreten.",
+          "session_exists": "Diese Sitzung existiert bereits!",
+          "hashtag_exists": "Dieser Hashtag existiert bereits!",
+          "session_not_available": "Dieser Quizrunde kann aktuell nicht beigetreten werden.",
+          "private_browsing": "Im Privatmodus deines Browsers funktioniert ARSnova.click leider nur als Teilnehmer, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von ARSnova.click den Privatmodus deaktivieren und ARSnova erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.",
+          "kicked_from_quiz": "Du wurdest aus dem Quiz geworfen!",
+          "export_failed": "Konnte die Daten nicht exportieren! - %s",
+          "not_authorized": "Entweder ist das Quiz nicht vorhanden oder du hast keine Berechtigung, diese Daten zu lesen",
+          "maximum_answer_options_exceeded": "Die maximale Anzahl an Antwortoptionen wurde bereits erreicht",
+          "hashtag_not_found": "Dieser Hashtag wurde leider nicht gefunden",
+          "member_not_found": "Der Teilnehmer wurde leider nicht gefunden",
+          "duplicate_response": "Der Teilnehmer hat bereits eine Antwort abgegeben",
+          "answeroption_not_found": "Es existiert keine Antwort mit diesem Index",
+          "response_timeout": "Die Antwortzeit ist bereits abgelaufen",
+          "insert_leaderboard_failed": "Fehler beim Hinzufügen der Antwort zur Rangliste"
+        }
+      },
+      "question_and_answer": { }
+    }
+  }
 }

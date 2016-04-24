@@ -18,6 +18,7 @@
 
 import { Blaze } from 'meteor/blaze';
 import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 /**
  * This class will construct an empty splashscreen which can be modified via JQuery.
@@ -167,13 +168,16 @@ class ErrorSplashscreen extends Splashscreen {
         if(this.isRendered) {
             $(this.templateSelector).find(".modal-body").text(text);
         } else {
-            throw new Error("The text of the error splashscreen can only be set after it has been rendered");
+            throw new Error(TAPi18n.__("plugins.splashscreen.error.set_text_error"));
         }
     }
 }
 
-export const splashscreen_error = new ErrorSplashscreen({
-    autostart: false,
-    templateName: "errorSplashscreen",
-    closeOnButton: "#js-btn-hideErrorMessageModal"
-});
+export let splashscreen_error = null;
+export function setErrorSplashscreen(){
+    splashscreen_error = new ErrorSplashscreen({
+        autostart: false,
+        templateName: "errorSplashscreen",
+        closeOnButton: "#js-btn-hideErrorMessageModal"
+    });
+}

@@ -196,7 +196,9 @@ function addNewQuestion(){
             valid_questions[index] = false;
             Session.set("valid_questions",valid_questions);
 
-            Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), index);
+            Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), index, function () {
+                Router.go("/question");
+            });
         }
     });
 }

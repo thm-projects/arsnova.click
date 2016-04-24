@@ -26,7 +26,7 @@ import { Template } from 'meteor/templating';
  * registered any root-level event listeners. You can pass the event removing calls to the onDestroyed option.
  *
  * Valid construction parameters are:
- * - autostart      -> True, if the splashscreen should show as soon as it is rendered
+ * - autostart      -> True, if the splashscreen should show as soon as it has been rendered
  * - templateName   -> The Meteor Template which is used to display the splashscreen
  * - instanceId     -> If you define and display multiple splashscreens of the same template on one page you'll need to give each of them unique id's
  * - closeOnButton  -> A valid jQuery selector which shall trigger the close event. A click on the modal or the splashscreen itself will not trigger the close event if this option is set.

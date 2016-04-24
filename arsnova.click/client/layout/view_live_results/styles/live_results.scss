@@ -23,6 +23,12 @@
     bottom: 0;
 }
 
+.readingConfirmedSplashscreen {
+    .modal-content {
+        background: $splashscreen-reading-confirmed-background-color;
+    }
+}
+
 .question-title {
     color: white;
     font-size: 1.5em;

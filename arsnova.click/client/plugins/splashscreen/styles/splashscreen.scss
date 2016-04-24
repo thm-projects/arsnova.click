@@ -91,7 +91,8 @@
 .modal-body {
   padding: 0 50px;
   text-align: justify;
-  -webkit-hyphens: auto; /* Currently not supported by Chrome */
+  /* Currently not supported by Chrome and Opera! see http://caniuse.com/#feat=css-hyphens */
+  -webkit-hyphens: auto;
   -moz-hyphens: auto;
   -ms-hyphens: auto;
   hyphens: auto;

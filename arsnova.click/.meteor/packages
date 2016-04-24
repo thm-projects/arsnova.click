@@ -27,3 +27,6 @@ perak:markdown
 brentjanderson:buzz
 standard-minifier-css
 standard-minifier-js
+tap:i18n
+tap:i18n-ui
+tap:i18n-db

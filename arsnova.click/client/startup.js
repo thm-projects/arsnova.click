@@ -18,9 +18,23 @@
 
 import { Meteor } from 'meteor/meteor';
 
+function getUserLanguage() {
+    // Put here the logic for determining the user language
+
+    return "de";
+}
+
 Meteor.startup(function(){
     if (Meteor.isClient) {
         $.getScript('/lib/highlight.pack.min.js');
         $.getScript('/lib/marked.min.js');
+        TAPi18n.setLanguage(getUserLanguage())
+            .done(function () {
+
+            })
+            .fail(function (error_message) {
+                // Handle the situation
+                console.log(error_message);
+            });
     }
 });

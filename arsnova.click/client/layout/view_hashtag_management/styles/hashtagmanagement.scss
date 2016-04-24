@@ -52,6 +52,14 @@
   padding: 5px;
   margin: 10px 0;
   text-align: center;
+
+  &:hover {
+    background-color: lighten(#ffffe0, 20);
+  }
+
+  &:active {
+    background-color: darken(#ffffe0, 10);
+  }
 }
 
 .showHashtagsSplashscreen {

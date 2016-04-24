@@ -2,7 +2,9 @@
     <div class="modal fade" id={{instanceId}} role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header"></div>
+                <div class="modal-header">
+                    <h2>Quiz-Verwaltung</h2>
+                </div>
                 <div class="modal-body">
                     <p>Diese Quizze sind in Deinem Browser:</p><br/>
                     <div class="row">
@@ -10,17 +12,14 @@
                             <div class="col-xs-12 js-my-hash">{{this}}</div>
                         {{/each}}
                     </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <button id="js-btn-showHashtagManagement" type="button"
-                                    class="btn btn-info btn-lg btn-answerOption">
-                                <span class="glyphicon glyphicon-cloud glyph-left" aria-hidden="true"></span>
-                                <span class="ansBtn">Sessionverwaltung</span>
-                            </button>
-                        </div>
-                    </div>
                 </div>
-                <div class="modal-footer"></div>
+                <div class="modal-footer">
+                    <button id="js-btn-showHashtagManagement" type="button"
+                            class="btn btn-info btn-lg btn-answerOption">
+                        <span class="glyphicon glyphicon-cloud glyph-left" aria-hidden="true"></span>
+                        <span class="ansBtn">Sessionverwaltung</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>

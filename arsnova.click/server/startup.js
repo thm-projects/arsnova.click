@@ -18,10 +18,14 @@
 
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
+import { WebApp } from 'meteor/webapp';
 import { Hashtags } from '/lib/hashtags.js';
 
 if (Meteor.isServer) {
     Meteor.startup(function () {
+        WebApp.addHtmlAttributeHook(function() {
+            return { "lang": "de" };
+        });
         if (Hashtags && !Hashtags.findOne()) {
 
             // block this hash / pk -> do not use and merge to production server!

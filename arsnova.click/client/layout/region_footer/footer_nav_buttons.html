@@ -21,18 +21,22 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="row">
-                    <div class="col-xs-6">
-                        <button id="{{backId}}" class="button button-back">
-                            <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
-                            Zur&uuml;ck
-                        </button>
-                    </div>
-                    <div class="col-xs-6">
-                        <button id="{{forwardId}}" class="button button-next">
-                            Weiter
-                            <span class="glyphicon glyphicon-arrow-right glyph-right" aria-hidden="true"></span>
-                        </button>
-                    </div>
+                    {{#if backId}}
+                        <div class="col-xs-{{#if forwardId}}6{{else}}12{{/if}}">
+                            <button id="{{backId}}" class="button button-back">
+                                <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
+                                {{_ 'back' }}
+                            </button>
+                        </div>
+                    {{/if}}
+                    {{#if forwardId}}
+                        <div class="col-xs-{{#if backId}}6{{else}}12{{/if}}">
+                            <button id="{{forwardId}}" class="button button-next">
+                                {{_ 'next' }}
+                                <span class="glyphicon glyphicon-arrow-right glyph-right" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    {{/if}}
                 </div>
             </div>
         </div>

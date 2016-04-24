@@ -85,7 +85,6 @@ spacebars-compiler@1.0.11
 standard-minifier-css@1.0.6
 standard-minifier-js@1.0.6
 tap:i18n@1.8.0
-tap:i18n-db@0.4.0
 tap:i18n-ui@0.8.0
 templating@1.1.9
 templating-tools@1.0.4

@@ -10,7 +10,42 @@
   },
   "region": {
     "footer": {
-      "agb": {
+      "footer_bar": {
+        "about": "Über",
+        "home": "Home",
+        "tos": "AGB",
+        "imprint": "Impressum",
+        "data_privacy": "Datenschutz"
+      },
+      "about": {
+        "title": "Über die Quiz-App",
+        "declaration": "Ein bisschen <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, <br />ein bisschen <a href='https://arsnova.eu/' target='_blank'>ARSnova</a>!",
+        "ars": "First one is gamificated and the second one designed for educational use. Both are an <a href='https://de.wikipedia.org/wiki/Audience_Response_System' target='_blank'>Audience Response System (ARS)</a>.",
+        "developed_by": "Inspiriert durch <a href='https://getkahoot.com' target='_blank'>Kahoot!</a> entwickelte in nur 10 Tagen  ein <a href='http://www.scrumhub.com' target='_blank'>Scrum-Team</a> aus Bachelor- und Masterstudenten der <a href='http://www.thm.de/site/' target='_blank'>TH Mittelhessen</a> diese <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>gamifizierte</a> Alternative zu unserem ARSnova-Flaggschiff <a href='https://arsnova.eu/' target='_blank'>arsnova.eu</a>.",
+        "met_requirements": "Die bereits eingelösten Anforderungen an arsnova.click:",
+        "requirements": {
+          "1": "Absoluter Datenschutz: keine personenbezogenen Daten auf dem Server, alle Quizdaten liegen im Browser der Quizerstellerin oder des Quizerstellers (<a href='http://www.w3schools.com/html/html5_webstorage.asp' target='_blank'>HTML5 Local Storage</a>)",
+          "2": "Keine Registrierung, keine Anmeldung, keine Installation, keine Kosten",
+          "3": "Dieselbe Startseite ARSnova.click für beide Rollen: Quizmaster und Kandidat/in",
+          "4": "Jeder darf Quizze erstellen: sofort und beliebig viele!",
+          "5": "Extrem einfache und beamertaugliche Bedienoberfläche",
+          "6": "<a href='https://de.wikipedia.org/wiki/TeX' target='_blank'>TeX</a>-Formelsatz und Textformatierung mit <a href='https://guides.github.com/features/mastering-markdown/' target='_blank'>Markdown</a> in Fragen und Antwortoptionen",
+          "7": "Mit nur einem Dialog beliebig viele Antwortoptionen als Multiple Choice, Single Choice und Umfrage",
+          "8": "Edutainment: Lernspaß durch Live-Wettbewerb mit Sound gegen die Uhr und die Mitspieler/innen",
+          "9": "<a href='https://de.wikipedia.org/wiki/Responsive_Webdesign' target='_blank'>Responsives Webdesign</a>: egal ob Smartphone oder Wide Screen, das Design skaliert dank <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>",
+          "10": "Modernste reaktive Web-Technologie: <a href='https://www.meteor.com' target='_blank'>Meteor</a>",
+          "11": "<a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a>"
+        },
+        "manual": {
+          "title": "Bedienungshandbuch?",
+          "text": {
+            "1": "Braucht man nicht!",
+            "2": "Tippen Sie den Namen des Quiz ein. Die Buttons verfärben sich, sobald Sie entweder den Namen eines freigeschalteten Quiz eingeben (Mach mit!) oder ein neues Quiz mit dem eingegebenen Namen erstellen können (Mach neu!).",
+            "3": "Danach heißt es: Klicken. Schauen. Quizzen."
+          }
+        }
+      },
+      "tos": {
         "title": "Allgemeine Geschäftsbedingungen",
         "declaration": "Alle dürfen die Quiz-App ARSnova.click für ihre Zwecke verwenden, solange dabei nicht gegen geltendes deutsches oder europäisches Recht verstoßen wird.",
         "license": {
@@ -20,6 +55,57 @@
         "warranty": {
           "title": "Gewährleistung",
           "text": "Wir sind bemüht, den Online-Dienst ARSnova.click zuverlässig und störungsfrei zu betreiben, können dies aber nicht garantieren. Alle Quizdaten liegen ausschließlich im Browser-Speicher der Quizerstellerin oder des Quizerstellers. Wir übernehmen keine Haftung für den Verlust der Daten, zum Beispiel durch Löschen des Browser-Speichers, oder bei rechtswidriger Nutzung des Dienstes."
+        }
+      },
+      "data_privacy": {
+        "title": "Datenschutz",
+        "scope": "Geltungsbereich",
+        "declaration": "Diese Datenschutzerklärung klärt Nutzer/innen von arsnova.click über die Art, den Umfang und den Zweck der Verwendung personenbezogener Daten durch den verantwortlichen Anbieter auf. Die rechtlichen Grundlagen des Datenschutzes finden sich im Bundesdatenschutzgesetz (BDSG) und dem Telemediengesetz (TMG).",
+        "app_data": {
+          "title": "Anwendungsdaten",
+          "text": "Alle Quizfragen und deren Antwortoptionen werden ausschließlich im Browser-Speicher (localStorage) der Quizerstellerin oder des Quizerstellers gehalten."
+        },
+        "access_data": {
+          "title": "Zugriffsdaten",
+          "text": "Außer Webserver-Logdateien werden keine personenbezogenen Zugriffsdaten gespeichert."
+        },
+        "logfiles": {
+          "title": "Webserver-Logdateien",
+          "text": "Der Anbieter erhebt Protokolldaten über jeden Zugriff auf arsnova.click in sogenannten Logdateien. Der Anbieter verwendet die Protokolldaten ausschließlich für statistische Auswertungen zum Zwecke des Betriebs, der Sicherheit und der Optimierung des Angebotes. Der Anbieter behält sich vor, die Protokolldaten nachträglich zu überprüfen, wenn aufgrund konkreter Anhaltspunkte der berechtigte Verdacht einer rechtswidrigen Nutzung besteht."
+        },
+        "3rdparty": {
+          "title": "Dienste und Inhalte Dritter",
+          "text": "In Quizfragen können Inhalte Dritter, wie zum Beispiel Videos von YouTube und Vimeo oder Grafiken von anderen Webseiten, eingebunden werden. Dies setzt voraus, dass die Anbieter dieser Inhalte die IP-Adresse der Nutzer/innen wahrnehmen. Ohne die IP-Adresse können die Inhalte nicht an den Browser gesendet werden."
+        },
+        "cookies": {
+          "title": "Cookies",
+          "text": "Cookies sind kleine Dateien, die es ermöglichen, auf dem Zugriffsgerät der Nutzer/innen spezifische, auf das Gerät bezogene Informationen zu speichern. Das Angebot arsnova.click nutzt Cookies, um die statistischen Daten der Webseitennutzung mit Piwik (siehe unten) zu erfassen und sie zwecks Verbesserung des Angebotes analysieren zu können. Die Nutzer/innen können auf den Einsatz der Cookies Einfluss nehmen. Die meisten Browser verfügen über eine Option, mit der das Speichern von Cookies eingeschränkt oder komplett verhindert wird."
+        },
+        "piwik": {
+          "title": "Piwik",
+          "text": "Dieses Angebot benutzt Piwik, eine Open-Source-Software zur statistischen Auswertung der Zugriffe, siehe <a href='http://piwik.org/' target='_blank'>piwik.org</a>. Piwik verwendet Cookies, die auf dem Computer der Nutzer/innen gespeichert werden und die eine Analyse der Benutzung der Webseite ermöglichen. Die durch den Cookie erzeugten Informationen über die Benutzung dieses Agebotes werden auf dem Server des Anbieters in Deutschland gespeichert. Die IP-Adresse wird sofort nach der Verarbeitung und vor deren Speicherung anonymisiert. Nutzer/innen können die Installation der Cookies durch eine entsprechende Einstellung ihrer Browser-Software verhindern."
+        }
+      },
+      "imprint": {
+        "title": "Impressum",
+        "provider": {
+          "title": "Dienstanbieter",
+          "text": {
+            "1": "Der Betrieb der Webapp arsnova.click ist eine kostenlose Dienstleistung der TransMIT-Gesellschaft für Technologietransfer mbH, Projektbereich für mobile Anwendungen.",
+            "2": "c/o THM – Technische Hochschule Mittelhessen",
+            "3": "Fachbereich MNI – Mathematik, Naturwissenschaften und Informatik",
+            "4": "Prof. Dr. Klaus Quibeldey-Cirkel",
+            "5": "Lehrstuhl für Softwaretechnik",
+            "6": "Wiesenstraße 14",
+            "7": "D-35390 Gießen",
+            "8": "Telefon: +49 641 309 – 24 50",
+            "9": "E-Mail: <a href='mailto:klaus.quibeldey-cirkel@transmit.de' class='text-light'>klaus.quibeldey-cirkel@transmit.de</a>",
+            "10": "Sitz der Gesellschaft: Gießen",
+            "11": "Website: <a href='https://www.transmit.de' class='text-light'>https://www.transmit.de</a>",
+            "12": "Rechtsform: GmbH",
+            "13": "Amtsgericht: Gießen HRB 3036",
+            "14": "USt-IdNr.: DE 188 685 037"
+          }
         }
       }
     },

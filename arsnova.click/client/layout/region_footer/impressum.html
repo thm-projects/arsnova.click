@@ -17,65 +17,30 @@
 -->
 
 <template name="impressum">
-
     <div class="text-light contentContainer">
-        {{> titel titelText="Impressum"}}
-        <h3>
-            Dienstanbieter
-        </h3>
-        <p>
-            Der Betrieb der Webapp arsnova.click ist eine kostenlose 
-            Dienstleistung der TransMIT-Gesellschaft für Technologietransfer mbH, 
-            Projektbereich für mobile Anwendungen.
-        </p>
+        {{> titel titelText="region.footer.imprint.title"}}
+        <h3>{{_ "region.footer.imprint.provider.title"}}</h3>
+        <p>{{_ "region.footer.imprint.provider.text.1"}}</p>
         <ul class="list list-unstyled ">
-            <li>
-                c/o THM – Technische Hochschule Mittelhessen
-            </li>
-            <li>
-                Fachbereich MNI – Mathematik, Naturwissenschaften und Informatik
-            </li>
-            <li>
-                Prof. Dr. Klaus Quibeldey-Cirkel
-            </li>
-            <li>
-                Lehrstuhl für Softwaretechnik
-            </li>
+            <li>{{_ "region.footer.imprint.provider.text.2"}}</li>
+            <li>{{_ "region.footer.imprint.provider.text.3"}}</li>
+            <li>{{_ "region.footer.imprint.provider.text.4"}}</li>
+            <li>{{_ "region.footer.imprint.provider.text.5"}}</li>
         </ul>
         <ul class="list list-unstyled ">
-            <li>
-                Wiesenstraße 14
-            </li>
-            <li>
-                D-35390 Gießen
-            </li>
+            <li>{{_ "region.footer.imprint.provider.text.6"}}</li>
+            <li>{{_ "region.footer.imprint.provider.text.7"}}</li>
         </ul>
-
         <ul class="list list-unstyled ">
-            <li>
-                Telefon: +49 641 309 – 24 50
-            </li>
-            <li>
-                E-Mail: <a href="mailto:klaus.quibeldey-cirkel@transmit.de" class="text-light">klaus.quibeldey-cirkel@transmit.de</a>
-            </li>
+            <li>{{_ "region.footer.imprint.provider.text.8"}}</li>
+            <li>{{{_ "region.footer.imprint.provider.text.9"}}}</li>
         </ul>
-
         <ul class="list list-unstyled">
-            <li>
-                Sitz der Gesellschaft: Gießen
-            </li>
-            <li>
-                Website: <a href="https://www.transmit.de" class="text-light">https://www.transmit.de</a>
-            </li>
-            <li>
-                Rechtsform: GmbH
-            </li>
-            <li>
-                Amtsgericht: Gießen HRB 3036
-            </li>
-            <li>
-                USt-IdNr.: DE 188 685 037
-            </li>
+            <li>{{_ "region.footer.imprint.provider.text.10"}}</li>
+            <li>{{{_ "region.footer.imprint.provider.text.11"}}}</li>
+            <li>{{_ "region.footer.imprint.provider.text.12"}}</li>
+            <li>{{_ "region.footer.imprint.provider.text.13"}}</li>
+            <li>{{_ "region.footer.imprint.provider.text.14"}}</li>
         </ul>
     </div>
 </template>

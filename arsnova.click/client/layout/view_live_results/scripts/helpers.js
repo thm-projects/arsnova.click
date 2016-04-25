@@ -21,12 +21,22 @@ Template.live_results.helpers({
         }
         return 0;
     },
-    isCountdownZero: function () {
-        if (Session.get("sessionClosed") || !Session.get("countdownInitialized")) {
-            return true;
+    isCountdownZero: function (index) {
+        if (Session.get("isOwner")) {
+            if (Session.get("sessionClosed") || !Session.get("countdownInitialized") || EventManager.findOne().questionIndex !== index) {
+                return true;
+            } else {
+                var timer = Math.round(countdown.get());
+                return timer <= 0;
+            }
         } else {
-            var timer = Math.round(countdown.get());
-            return timer <= 0;
+            var question = QuestionGroup.findOne().questionList[EventManager.findOne().questionIndex];
+            
+            if (EventManager.findOne().questionIndex === index && new Date().getTime() - parseInt(question.startTime) < question.timer) {
+                return false;
+            } else {
+                return true;
+            }
         }
     },
     getCountStudents: function () {
@@ -147,7 +157,8 @@ Template.live_results.helpers({
                 name: String.fromCharCode(value.answerOptionNumber + 65),
                 absolute: amount,
                 percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
-                isCorrect: correctAnswerOptions ? value.isCorrect : -1
+                isCorrect: correctAnswerOptions ? value.isCorrect : -1,
+                questionIndex: index
             });
         });
         return result;

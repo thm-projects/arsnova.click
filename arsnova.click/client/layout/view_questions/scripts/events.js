@@ -25,12 +25,12 @@ Template.createQuestionView.events({
     },
     "click #formatPreviewButton": function () {
         var formatPreviewText = $('#formatPreviewText');
-        if (formatPreviewText.text() === "Bearbeiten") {
-            lib.changePreviewButtonText("view.questions.format");
+        if (formatPreviewText.text() === TAPi18n.__("view.questions.edit")) {
+            lib.changePreviewButtonText(TAPi18n.__("view.questions.format"));
             $('#previewQuestionText').hide();
             $('#editQuestionText').show();
-        } else if (formatPreviewText.text() === "Format") {
-            lib.changePreviewButtonText("view.questions.preview");
+        } else if (formatPreviewText.text() === TAPi18n.__("view.questions.format")) {
+            lib.changePreviewButtonText(TAPi18n.__("view.questions.preview"));
         } else {
             new Splashscreen({
                 autostart: true,

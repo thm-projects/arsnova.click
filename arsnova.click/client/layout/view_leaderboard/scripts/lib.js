@@ -4,26 +4,6 @@ import { AnswerOptions } from '/lib/answeroptions.js';
 import { MemberList } from '/lib/memberlist.js';
 import { Responses } from '/lib/responses.js';
 
-export function getLeaderBoardItems () {
-    if (typeof Session.get("showLeaderBoardId") !== "undefined") {
-        return [{value: getLeaderBoardItemsByIndex(Session.get("showLeaderBoardId"))}];
-    } else {
-        if (!EventManager.findOne()) {
-            return [];
-        }
-
-        var result = [];
-        for (var i = 0; i <= EventManager.findOne().questionIndex; i++) {
-            result.push({
-                index: i,
-                value: getLeaderBoardItemsByIndex(i)
-            });
-        }
-
-        return result;
-    }
-}
-
 function getLeaderBoardItemsByIndex (index) {
     var allGoodMembers = [];
     var param = {isCorrect: 1};
@@ -65,5 +45,25 @@ function getLeaderBoardItemsByIndex (index) {
         return _.sortBy(allGoodMembers, 'responseTime');
     } else {
         return _.sortBy(allGoodMembers, 'responseTime').slice(0, 6);
+    }
+}
+
+export function getLeaderBoardItems () {
+    if (typeof Session.get("showLeaderBoardId") !== "undefined") {
+        return [{value: getLeaderBoardItemsByIndex(Session.get("showLeaderBoardId"))}];
+    } else {
+        if (!EventManager.findOne()) {
+            return [];
+        }
+
+        var result = [];
+        for (var i = 0; i <= EventManager.findOne().questionIndex; i++) {
+            result.push({
+                index: i,
+                value: getLeaderBoardItemsByIndex(i)
+            });
+        }
+
+        return result;
     }
 }

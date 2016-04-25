@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
 import { QuestionGroup } from '/lib/questions.js';
 import { AnswerOptions } from '/lib/answeroptions.js';
 import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
@@ -65,4 +67,16 @@ export function addNewQuestion(){
             });
         }
     });
+}
+
+export function calculateTitelHeight() {
+    var fixedTop = $(".navbar-fixed-top");
+    var container = $(".container");
+    var footerHeight = $("#footerBar").hasClass("hide") ? $(".fixed-bottom").outerHeight() + $(".footer-info-bar").outerHeight() : $(".fixed-bottom").outerHeight();
+    var final_height = $(window).height() - fixedTop.outerHeight() - $(".navbar-fixed-bottom").outerHeight() - footerHeight;
+
+    container.css("height", final_height);
+    container.css("margin-top", fixedTop.outerHeight());
+
+    $(".kill-session-switch-wrapper").css("top", $(".arsnova-logo").height() * 0.4);
 }

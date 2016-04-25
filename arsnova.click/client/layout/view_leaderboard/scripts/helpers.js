@@ -18,7 +18,7 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {getLeaderBoardItems, maxResponseButtons} from './lib.js';
+import {getLeaderBoardItems} from './lib.js';
 
 Template.leaderBoard.helpers({
 	hashtag: ()=> {

@@ -47,8 +47,16 @@
 
     a {
       img {
-        height: 39px;
-        width: 39px;
+        margin-top: -1px;
+        height: 5vw;
+        width: 5vw;
+        max-width: 50px;
+        max-height: 50px;
+
+        @media screen and (min-width:992px) {
+          max-width: 39px;
+          max-height: 39px;
+        }
       }
     }
   }

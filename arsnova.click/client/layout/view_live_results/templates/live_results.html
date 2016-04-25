@@ -78,14 +78,17 @@
                             </div>
                         {{/if}}
                         <div class="row form-group button button-result readingConfirmationProgressRow">
-                            <div class="col-xs-12" id="readingConfirmationWrapper">
-                                <span class="button-result-letter button-result-readingConfirmation">{{_ "view.live_results.reading_confirmation"}}</span>
+                            <div class="col-xs-12 wrapper">
                                 <div class="progress" style="margin-right: 0;">
-                                    <div class="progress-bar" role="progressbar"
-                                         aria-valuemin="0" aria-valuemax="100"
-                                         style="width:{{getPercentRead displayIndex}}%; background:{{getCSSClassForPercent (getPercentRead displayIndex)}}">
-                                        <span class="percentage">{{getCurrentRead displayIndex}} / {{getCountStudents}}
-                                            | {{getPercentRead displayIndex}}%</span>
+                                    <div class="progress-bar"
+                                         role="progressbar"
+                                         aria-valuemin="0"
+                                         aria-valuemax="100"
+                                         style="width:{{getPercentRead displayIndex}}%; background:{{getCSSClassForPercent (getPercentRead displayIndex)}}" >
+                                    </div>
+                                    <div class="percentage">
+                                        <p class="label">{{_ "view.live_results.reading_confirmation"}}:</p>
+                                        <p class="values">{{getCurrentRead displayIndex}} / {{getCountStudents}} | {{getPercentRead displayIndex}}%</p>
                                     </div>
                                 </div>
                             </div>

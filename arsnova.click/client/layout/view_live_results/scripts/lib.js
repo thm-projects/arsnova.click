@@ -29,7 +29,7 @@ export function setEventManagerObserver (observer) {
  */
 export function hsl_col_perc (percent, start, end) {
     var a = percent / 100, b = end * a, c = b + start;
-    return 'hsl(' + c + ',50%,25%)';
+    return 'hsl(' + c + ',100%,25%)';
 }
 
 export function getPercentRead (index) {

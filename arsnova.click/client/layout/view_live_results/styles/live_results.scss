@@ -93,11 +93,12 @@
   margin: 0 0 10px;
 }
 
-.resultButtonMCProgressRow {
+.resultButtonMCProgressRow,
+.readingConfirmationProgressRow {
   padding: 0 10px;
   margin: 0 0 10px;
 
-  .resultButtonMCWrapper {
+  .wrapper {
     display: inline-block;
     padding: 0;
 
@@ -107,7 +108,7 @@
       .percentage {
         width: 100%;
 
-        .mc_label {
+        .label {
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
@@ -116,9 +117,15 @@
           line-height: 28px;
           font-size: 1.4em;
           font-weight: 800;
+          text-align: left;
+          display: block;
+          padding: 0;
+          border-radius: 0;
+          color: white;
+          vertical-align: middle;
         }
 
-        .mc_values {
+        .values {
           float: right;
           margin: 0;
           line-height: 28px;

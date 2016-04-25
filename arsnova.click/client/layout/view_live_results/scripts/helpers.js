@@ -181,7 +181,7 @@ Template.live_results.helpers({
         return EventManager.findOne() ? EventManager.findOne().readingConfirmationIndex + 2 : false;
     },
     getCSSClassForPercent: (percent)=> {
-        return hsl_col_perc(percent, 0, 100);
+        return hsl_col_perc(percent, 0, 120);
     },
     showGlobalLeaderboardButton: ()=> {
         var questionDoc = QuestionGroup.findOne();

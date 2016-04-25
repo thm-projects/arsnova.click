@@ -1,6 +1,6 @@
 <template name="result_button_mc">
     <div class="row form-group button button-result resultButtonMCProgressRow">
-        <div class="col-xs-12 resultButtonMCWrapper">
+        <div class="col-xs-12 wrapper">
             <div class="progress" id="mc_bar{{id}}" style="margin-right: 0;">
                 <div class="progress-bar {{getCSSClassForIsCorrect isCorrect}}"
                      role="progressbar"
@@ -8,7 +8,7 @@
                      aria-valuemax="100"
                      style="width: {{percent}}%" >
                 </div>
-                <div class="percentage"><p class="mc_label">{{_ name}}:</p> <p class="mc_values">{{absolute}} | {{percent}}%</p></div>
+                <div class="percentage"><p class="label">{{_ name}}:</p> <p class="values">{{absolute}} | {{percent}}%</p></div>
             </div>
         </div>
     </div>

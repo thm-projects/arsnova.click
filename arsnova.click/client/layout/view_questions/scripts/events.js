@@ -25,11 +25,12 @@ Template.createQuestionView.events({
     },
     "click #formatPreviewButton": function () {
         var formatPreviewText = $('#formatPreviewText');
-        if (formatPreviewText.text() === "Format") {
-            formatPreviewText.text(TAPi18n.__("view.questions.preview"));
-            $('#formatPreviewGlyphicon').removeClass("glyphicon-cog").addClass("glyphicon-phone");
-            $('#markdownBarDiv').removeClass('hide');
-            $('#questionText').removeClass('round-corners').addClass('round-corners-markdown');
+        if (formatPreviewText.text() === TAPi18n.__("view.questions.edit")) {
+            lib.changePreviewButtonText(TAPi18n.__("view.questions.format"));
+            $('#previewQuestionText').hide();
+            $('#editQuestionText').show();
+        } else if (formatPreviewText.text() === TAPi18n.__("view.questions.format")) {
+            lib.changePreviewButtonText(TAPi18n.__("view.questions.preview"));
         } else {
             new Splashscreen({
                 autostart: true,

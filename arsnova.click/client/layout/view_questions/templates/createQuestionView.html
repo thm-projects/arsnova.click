@@ -21,11 +21,13 @@
     <div class="row center-vertical">
         <div class="col-md-12">
         <div class="row">
-            <div class="col-md-12">
+            <div id="previewQuestionText" class="col-md-12" style="display: none;">
+                <div id="questionTextDisplay" class="round-corners previewText"></div>
+            </div>
+            <div id="editQuestionText" class="col-md-12">
                 {{> markdownBar }}
                 <textarea class="round-corners textarea placeholder-align-center"
-                          maxlength="1000"
-                          rows="4" id="questionText"
+                          maxlength="1000" rows="4" id="questionText"
                           placeholder="{{_ "view.questions.enter_question_here"}}"
                 >{{questionText}}</textarea>
             </div>

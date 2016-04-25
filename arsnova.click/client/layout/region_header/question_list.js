@@ -6,6 +6,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { EventManager } from '/lib/eventmanager.js';
 import { QuestionGroup } from '/lib/questions.js';
 import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
+import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as localData from '/client/lib/local_storage.js';
 import * as lib from './lib.js';
 
@@ -94,7 +95,9 @@ Template.questionList.helpers({
 
 Template.questionList.events({
     'click .questionIcon:not(.active)': function (event) {
-        Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), parseInt($(event.target).closest(".questionIcon").attr("id").replace("questionIcon_","")));
+        Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), parseInt($(event.target).closest(".questionIcon").attr("id").replace("questionIcon_","")), function () {
+            questionLib.checkForMarkdown();
+        });
     },
     'click .removeQuestion': function (event) {
         var id = parseInt($(event.target).closest(".questionIcon").attr("id").replace("questionIcon_",""));

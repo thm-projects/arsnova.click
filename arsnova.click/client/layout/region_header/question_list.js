@@ -5,8 +5,9 @@ import { Tracker } from 'meteor/tracker';
 import { EventManager } from '/lib/eventmanager.js';
 import { AnswerOptions } from '/lib/answeroptions.js';
 import { QuestionGroup } from '/lib/questions.js';
-import * as localData from '/client/lib/local_storage.js';
 import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
+import * as localData from '/client/lib/local_storage.js';
+import * as lib from 'lib.js';
 
 var redirectTracker = null;
 
@@ -85,7 +86,7 @@ Template.questionList.helpers({
     },
     hasCompleteContent: function (index) {
         var valid_questions = Session.get("valid_questions");
-        valid_questions[index] = checkForValidQuestions(index);
+        valid_questions[index] = lib.checkForValidQuestions(index);
         Session.set("valid_questions",valid_questions);
         return valid_questions[index];
     }
@@ -122,7 +123,7 @@ Template.questionList.events({
                     } else {
                         localData.removeQuestion(Session.get("hashtag"), id);
                         if (QuestionGroup.findOne().questionList.length === 0) {
-                            addNewQuestion();
+                            lib.addNewQuestion();
                         }
                     }
                 });
@@ -130,7 +131,7 @@ Template.questionList.events({
         });
     },
     'click #addQuestion': function () {
-        addNewQuestion();
+        lib.addNewQuestion();
         setTimeout(()=> {
             let scrollPane = $(".questionScrollPane");
             scrollPane.scrollLeft(scrollPane.width());
@@ -138,67 +139,3 @@ Template.questionList.events({
 
     }
 });
-
-function checkForValidQuestions(index) {
-    var questionDoc = QuestionGroup.findOne();
-    var answerDoc = AnswerOptions.find({questionIndex: index});
-    if(!questionDoc || !answerDoc) {
-        return false;
-    }
-
-    var question = questionDoc.questionList[index];
-    if(!question) {
-        return false;
-    }
-
-    if(!question.questionText || question.questionText.length < 5 || question.questionText.length > 10000) {
-        return false;
-    }
-    if(!question.timer || isNaN(question.timer) || question.timer < 5000 || question.timer > 260000) {
-        return false;
-    }
-
-    var hasValidAnswers = false;
-    answerDoc.forEach(function (value) {
-        if(typeof value.answerText === "undefined" || value.answerText.length <= 500) {
-            hasValidAnswers = true;
-        }
-    });
-    return hasValidAnswers;
-}
-
-function addNewQuestion(){
-    var index = QuestionGroup.findOne().questionList.length;
-    Meteor.call("QuestionGroup.addQuestion", {
-        privateKey: localData.getPrivateKey(),
-        hashtag: Session.get("hashtag"),
-        questionIndex: index,
-        questionText: ""
-    }, (err) => {
-        if (err) {
-            splashscreen_error.setErrorText(err.reason);
-            splashscreen_error.open();
-        } else {
-            for(var i = 0; i < 4; i++) {
-                Meteor.call('AnswerOptions.addOption',{
-                    privateKey:localData.getPrivateKey(),
-                    hashtag:Session.get("hashtag"),
-                    questionIndex: index,
-                    answerOptionNumber:i,
-                    answerText:"",
-                    isCorrect:0
-                });
-            }
-            
-            localData.addQuestion(Session.get("hashtag"), QuestionGroup.findOne().questionList.length, "");
-
-            var valid_questions = Session.get("valid_questions");
-            valid_questions[index] = false;
-            Session.set("valid_questions",valid_questions);
-
-            Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), index, function () {
-                Router.go("/question");
-            });
-        }
-    });
-}

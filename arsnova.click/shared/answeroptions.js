@@ -125,7 +125,7 @@ Meteor.methods({
             $set: {answerText: answerText, isCorrect: isCorrect}
         });
         return {
-            questionIndex: questionIndex, answerOptionNumber: answerOptionNumber, answerText: answerText, isCorrect: isCorrect
+            hashtag, questionIndex, answerOptionNumber, answerText, isCorrect
         };
     }
 });

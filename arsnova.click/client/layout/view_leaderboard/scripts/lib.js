@@ -51,6 +51,7 @@ export function calculateButtonCount (allMembersCount) {
 
     /* Calculate how much buttons we can place in the viewport until we need to scroll */
     var queryLimiter = Math.floor(viewPortHeight / btnLearnerHeight);
+    queryLimiter--;
 
     /*
      Multiply the displayed elements by 2 if on widescreen and reduce the max output of buttons by 1 row for the display

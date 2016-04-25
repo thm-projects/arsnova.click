@@ -126,6 +126,7 @@
     "hashtag_management": {
       "enter_quiz_name": "Gib den Quiz-Namen ein !",
       "join_session": "Mach mit !",
+      "edit_session": "Bearbeiten",
       "create_session": "Mach neu !",
       "quiz_management": "Quiz-Verwaltung",
       "available_sessions": "Diese Quizze sind in Deinem Browser:",
@@ -133,6 +134,10 @@
       "import": "Import"
     },
     "leaderboard": {
+      "title": {
+        "single_question": "Quizfrage __questionId__ - Alles richtig haben...",
+        "all_questions": "Alles richtig haben..."
+      },
       "no_attendee_correct": "Leider hat kein Teilnehmer richtig abgestimmt!",
       "question": "Frage"
     },
@@ -178,7 +183,9 @@
     },
     "voting": {
       "question": "Frage",
-      "send": "Absenden"
+      "send": "Absenden",
+      "seconds_left": "Noch 1 Sekunde!",
+      "seconds_left_plural": "Noch __value__ Sekunden!"
     }
   },
   "plugins": {

@@ -31,7 +31,7 @@ Template.hashtag_view.events({
         var inputHashtag = $(event.target).val();
         let addNewHashtagItem = $("#addNewHashtag");
         Session.set("hashtag", inputHashtag);
-        addNewHashtagItem.html("Mach neu !<span class=\"glyphicon glyphicon-plus glyph-right\" aria-hidden=\"true\"></span>");
+        addNewHashtagItem.html(TAPi18n.__("view.hashtag_management.create_session") + '<span class="glyphicon glyphicon-plus glyph-right" aria-hidden="true"></span>');
         if (inputHashtag.length === 0) {
             return;
         }
@@ -43,7 +43,7 @@ Template.hashtag_view.events({
         } else {
             var localHashtags = localData.getAllHashtags();
             if ($.inArray(inputHashtag, localHashtags) > -1) {
-                addNewHashtagItem.html("Bearbeiten<span class=\"glyphicon glyphicon-pencil glyph-right\" aria-hidden=\"true\"></span>");
+                addNewHashtagItem.html(TAPi18n.__("view.hashtag_management.edit_session") + '<span class="glyphicon glyphicon-pencil glyph-right" aria-hidden="true"></span>');
                 addNewHashtagItem.removeAttr("disabled");
             } else {
                 addNewHashtagItem.attr("disabled", "disabled");

@@ -126,6 +126,7 @@
     "hashtag_management": {
       "enter_quiz_name": "Enter the Quiz name here !",
       "join_session": "Join now !",
+      "edit_session": "Edit",
       "create_session": "Make a new one !",
       "quiz_management": "Quiz-Management",
       "available_sessions": "Choose one of your Quizzes:",
@@ -133,6 +134,10 @@
       "import": "Import"
     },
     "leaderboard": {
+      "title": {
+        "single_question": "Question __questionId__ - Correct answers from...",
+        "all_questions": "Correct answers from..."
+      },
       "no_attendee_correct": "Unfortunately no attendee has given the correct answer!",
       "question": "Question"
     },
@@ -178,7 +183,9 @@
     },
     "voting": {
       "question": "Question",
-      "send": "Send"
+      "send": "Send",
+      "seconds_left": "1 Second left!",
+      "seconds_left_plural": "__value__ Seconds left!"
     }
   },
   "plugins": {

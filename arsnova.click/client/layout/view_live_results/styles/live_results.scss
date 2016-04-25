@@ -15,87 +15,123 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 @import "../../../layout/global/styles/colors";
 @import "../../../layout/global/styles/appearance";
 
 #liveResultsFrame.fixed-bottom {
-    bottom: 0;
+  bottom: 0;
 }
 
 .readingConfirmedSplashscreen {
-    .modal-content {
-        background: $splashscreen-reading-confirmed-background-color;
-    }
+  .modal-content {
+    background: $splashscreen-reading-confirmed-background-color;
+  }
 }
 
 .question-title {
-    color: white;
-    font-size: 1.5em;
-    margin: 30px 0 0;
-    padding: 5px 30px 0;
+  color: white;
+  font-size: 1.5em;
+  margin: 30px 0 0;
+  padding: 5px 30px 0;
 }
 
 .question-wrapper {
-    overflow-x: hidden;
-    overflow-y: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .question-row.active {
-    -webkit-box-shadow: 0 0 13px 3px rebeccapurple;
-    -moz-box-shadow: 0 0 13px 3px rebeccapurple;
-    box-shadow: 0 0 13px 3px rebeccapurple;
+  -webkit-box-shadow: 0 0 13px 3px rebeccapurple;
+  -moz-box-shadow: 0 0 13px 3px rebeccapurple;
+  box-shadow: 0 0 13px 3px rebeccapurple;
 }
 
 .button-result-mc-letter {
-    font-size: 1.5em;
-    line-height: 40px;
+  font-size: 1.5em;
+  line-height: 40px;
 }
 
 .top-bar-content {
-    margin-top: 18px;
-    text-align: center;
-    font-family: Georgia, serif;
+  margin-top: 18px;
+  text-align: center;
+  font-family: Georgia, serif;
 }
 
 .glyphicon-style {
-    font-size: 5vw;
-    color: #FFF;
+  font-size: 5vw;
+  color: #FFF;
 }
 
 .row-padding-bottom {
-    padding-bottom: 1vw;
+  padding-bottom: 1vw;
 }
 
 .subtitel-padding-top {
-    padding-top: 3vw;
+  padding-top: 3vw;
 }
 
-#countdowndiv{
-    display:none;
-    background-color: #008000;
-    z-index:1;
-    position:absolute;
-    height: 100%;
-    width: 100%;
+#countdowndiv {
+  display: none;
+  background-color: #008000;
+  z-index: 1;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
-#countdown{
-    display:none;
-    z-index:2;
-    position:absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+
+#countdown {
+  display: none;
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .readingConfirmationProgressRow {
-    padding: 0 10px;
-    margin: 0 0 10px;
+  padding: 0 10px;
+  margin: 0 0 10px;
+}
+
+.resultButtonMCProgressRow {
+  padding: 0 10px;
+  margin: 0 0 10px;
+
+  .resultButtonMCWrapper {
+    display: inline-block;
+    padding: 0;
+
+    .progress {
+      height: 30px;
+
+      .percentage {
+        width: 100%;
+
+        .mc_label {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          float: left;
+          margin: 0;
+          line-height: 28px;
+          font-size: 1.4em;
+          font-weight: 800;
+        }
+
+        .mc_values {
+          float: right;
+          margin: 0;
+          line-height: 28px;
+          font-size: 17px;
+        }
+      }
+    }
+  }
 }
 
 .button-result-readingConfirmation {
-    line-height: 40px;
-    font-size: 1.4em;
-    float: left;
-    margin: 0 10px 0 -5px;
+  line-height: 40px;
+  font-size: 1.4em;
+  float: left;
+  margin: 0 10px 0 -5px;
 }

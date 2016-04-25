@@ -2,9 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 import { EventManager } from '/lib/eventmanager.js';
-import { AnswerOptions } from '/lib/answeroptions.js';
 import * as localData from '/client/lib/local_storage.js';
-import {startReadingConfirmationTracker, calculateButtonCount, setMcCSSClasses} from './lib.js';
+import {startReadingConfirmationTracker, calculateButtonCount} from './lib.js';
 
 Template.live_results.onRendered(()=> {
     startReadingConfirmationTracker();
@@ -15,24 +14,6 @@ Template.live_results.onRendered(()=> {
     Session.set("LearnerCountOverride", false);
     calculateButtonCount();
 });
-
-Template.result_button.onRendered(function () {
-    $(window).resize(function () {
-        if (AnswerOptions.find({
-                questionIndex: EventManager.findOne().questionIndex,
-                isCorrect: 1
-            }).count() > 1) {
-            setMcCSSClasses();
-        }
-    });
-    if (AnswerOptions.find({
-            questionIndex: EventManager.findOne().questionIndex,
-            isCorrect: 1
-        }).count() > 1) {
-        setMcCSSClasses();
-    }
-});
-
 
 Template.readingConfirmedLearner.onRendered(function () {
     calculateButtonCount();

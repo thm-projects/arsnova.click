@@ -138,49 +138,6 @@ export function startCountdown (index) {
     $('.disableOnActiveCountdown').attr("disabled", "disabled");
 }
 
-export function setMcCSSClasses () {
-    var windowWidth = $(window).width();
-
-    for (var i = 0; i < 2; i++) {
-        var label = $("#mc_label" + i);
-        var bar = $("#mc_bar" + i);
-        label.removeClass();
-        bar.removeClass();
-        if (windowWidth < 361) {
-            label.addClass("col-xs-6 col-sm-6 col-md-6");
-            bar.addClass("col-xs-6 col-sm-6 col-md-6");
-        }
-        if (windowWidth > 360 && windowWidth < 431) {
-            label.addClass("col-xs-5 col-sm-5 col-md-5");
-            bar.addClass("col-xs-7 col-sm-7 col-md-7");
-        }
-        if (windowWidth > 430 && windowWidth < 576) {
-            label.addClass("col-xs-4 col-sm-4 col-md-4");
-            bar.addClass("col-xs-8 col-sm-8 col-md-8");
-        }
-        if (windowWidth > 575 && windowWidth < 851) {
-            label.addClass("col-xs-3 col-sm-3 col-md-3");
-            bar.addClass("col-xs-9 col-sm-9 col-md-9");
-        }
-        if (windowWidth > 850 && windowWidth < 992) {
-            label.addClass("col-xs-2 col-sm-2 col-md-2");
-            bar.addClass("col-xs-10 col-sm-10 col-md-10");
-        }
-        if (windowWidth > 991 && windowWidth < 1151) {
-            label.addClass("col-xs-4 col-sm-4 col-md-4");
-            bar.addClass("col-xs-8 col-sm-8 col-md-8");
-        }
-        if (windowWidth > 1150 && windowWidth < 1701) {
-            label.addClass("col-xs-3 col-sm-3 col-md-3");
-            bar.addClass("col-xs-9 col-sm-9 col-md-9");
-        }
-        if (windowWidth > 1700) {
-            label.addClass("col-xs-2 col-sm-2 col-md-2");
-            bar.addClass("col-xs-10 col-sm-10 col-md-10");
-        }
-    }
-}
-
 export function startReadingConfirmationTracker () {
     readingConfirmationTracker = Tracker.autorun(()=> {
         if (EventManager.findOne()) {

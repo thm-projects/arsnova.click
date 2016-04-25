@@ -17,22 +17,11 @@
  */
 
 import { Template } from 'meteor/templating';
+import * as lib from '/lib.js';
 
 Template.titel.onRendered(function () {
     $(window).resize(function () {
-        calculateTitelHeight();
+        lib.calculateTitelHeight();
     });
-    calculateTitelHeight();
+    lib.calculateTitelHeight();
 });
-
-function calculateTitelHeight() {
-    var fixedTop = $(".navbar-fixed-top");
-    var container = $(".container");
-    var footerHeight = $("#footerBar").hasClass("hide") ? $(".fixed-bottom").outerHeight() + $(".footer-info-bar").outerHeight() : $(".fixed-bottom").outerHeight();
-    var final_height = $(window).height() - fixedTop.outerHeight() - $(".navbar-fixed-bottom").outerHeight() - footerHeight;
-
-    container.css("height", final_height);
-    container.css("margin-top", fixedTop.outerHeight());
-
-    $(".kill-session-switch-wrapper").css("top", $(".arsnova-logo").height() * 0.4);
-}

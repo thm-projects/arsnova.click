@@ -23,27 +23,14 @@ import {EventManager} from '/lib/eventmanager.js';
 import {QuestionGroup} from '/lib/questions.js';
 import * as localData from '/client/lib/local_storage.js';
 import {splashscreenError} from '/client/plugins/splashscreen/scripts/lib.js';
+import {globalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
 import {calculateButtonCount, setMemberlistObserver} from './lib.js';
 
 Template.memberlist.onCreated(function () {
 	var oldStartTimeValues = {};
 
-	var eventManagerHandle = this.subscribe('EventManager.join', Session.get("hashtag"));
-	this.autorun(function () {
-		if (eventManagerHandle.ready()) {
-			var sessionStatus = EventManager.findOne().sessionStatus;
-			if (sessionStatus < 2) {
-				if (Session.get("isOwner")) {
-					Router.go("/settimer");
-				} else {
-					Router.go("/resetToHome");
-				}
-			} else if (sessionStatus === 3) {
-				Router.go("/results");
-			}
-		}
-	});
-	this.subscribe('MemberList.members', Session.get("hashtag"), function () {
+    this.subscribe('EventManager.join', Session.get("hashtag"));
+    this.subscribe('MemberList.members', Session.get("hashtag"), function () {
 		$(window).resize(function () {
 			var finalHeight = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
 			$(".container").css("height", finalHeight + "px");

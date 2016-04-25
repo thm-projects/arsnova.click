@@ -20,6 +20,7 @@ import {AnswerOptions} from '/lib/answeroptions.js';
 import {Responses} from '/lib/responses.js';
 import {QuestionGroup} from '/lib/questions.js';
 import {Hashtags} from '/lib/hashtags.js';
+import {EventManager} from '/lib/eventmanager.js';
 
 Meteor.methods({
 	'Responses.addResponse': function (responseDoc) {
@@ -73,6 +74,7 @@ Meteor.methods({
 				} else {
 					throw new Meteor.Error('Responses.addResponse', 'plugins.splashscreen.error.error_messages.response_timeout');
 				}
+				EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "Responses.addResponse", value: {questionIndex: responseDoc.questionIndex, answerOptionNumber: responseDoc.answerOptionNumber, userNick: responseDoc.userNick}}}});
 			}
 		}
 	},
@@ -87,6 +89,7 @@ Meteor.methods({
 			}
 
 			Responses.remove({hashtag: hashtag});
+			EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "Responses.clearAll", value: {}}}});
 		}
 	}
 });

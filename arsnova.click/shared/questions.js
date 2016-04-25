@@ -20,6 +20,7 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {AnswerOptions} from '/lib/answeroptions.js';
 import {QuestionGroup, QuestionGroupSchema} from '/lib/questions.js';
 import {Hashtags} from '/lib/hashtags.js';
+import {EventManager} from '/lib/eventmanager.js';
 
 Meteor.methods({
 	"QuestionGroup.insert": function ({privateKey, hashtag, questionList}) {
@@ -45,6 +46,7 @@ Meteor.methods({
 					questionList: questionList
 				});
 			}
+			EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "QuestionGroup.insert", value: {}}}});
 		}
 	},
 	"QuestionGroup.addQuestion": function ({privateKey, hashtag, questionIndex, questionText}) {
@@ -80,6 +82,7 @@ Meteor.methods({
 				}
 				QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
 			}
+			EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "QuestionGroup.addQuestion", value: {questionIndex: questionIndex}}}});
 		}
 	},
 	"QuestionGroup.removeQuestion": function ({privateKey, hashtag, questionIndex}) {
@@ -96,6 +99,7 @@ Meteor.methods({
 				questionGroup.questionList.splice(questionIndex, 1);
 				QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
 			}
+			EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "QuestionGroup.addQuestion", value: {questionIndex: questionIndex}}}});
 		}
 	},
 	"Question.isSC": function ({hashtag, questionIndex}) {
@@ -126,6 +130,7 @@ Meteor.methods({
 				questionGroup.questionList[questionIndex].isReadingConfirmationRequired = isReadingConfirmationRequired;
 				QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
 			}
+			EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "QuestionGroup.updateIsReadConfirmationRequired", value: {questionIndex: questionIndex}}}});
 		}
 	},
 	"Question.setTimer": function ({privateKey, hashtag, questionIndex, timer}) {
@@ -151,6 +156,7 @@ Meteor.methods({
 			} else {
 				questionGroup.questionList[questionIndex].timer = timer;
 				QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
+				EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "QuestionGroup.setTimer", value: {questionIndex: questionIndex, timer: timer}}}});
 			}
 		}
 	},
@@ -171,6 +177,7 @@ Meteor.methods({
 			} else {
 				questionGroup.questionList[questionIndex].startTime = startTime.getTime();
 				QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
+				EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "QuestionGroup.setTimer", value: {questionIndex: questionIndex}}}});
 			}
 		}
 	}

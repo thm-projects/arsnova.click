@@ -26,28 +26,8 @@ import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib";
 
 
 Template.header.onCreated(function () {
-	this.autorun(() => {
-		if (!Session.get("hashtag")) {
-			return;
-		}
-
-		this.subscribe('EventManager.join', Session.get("hashtag"), ()=> {
-			var hashtagDocs = Hashtags.find();
-
-			hashtagDocs.observe({
-				changed: function (doc) {
-					if (doc.hashtag == Session.get("hashtag")) {
-						if (doc.sessionStatus === 0 || doc.sessionStatus === 1) {
-							Router.go("/resetToHome");
-						}
-					}
-				}
-			});
-		});
-	});
-
-	Session.setDefault("slider2", 80);
-	Session.setDefault("globalVolume", 80);
+    Session.setDefault("slider2", 80);
+    Session.setDefault("globalVolume", 80);
 
 	setBuzzsound1('waity.mp3');
 });

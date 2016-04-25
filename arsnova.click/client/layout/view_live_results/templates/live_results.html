@@ -20,7 +20,7 @@
     <img id="countdown" class="fader" src="gr5.gif">
     {{> titel}}
     <div id="liveResultsFrame">
-        <div class="row row-padding-bottom">
+        <div class="row-padding-bottom">
             {{#if isRunningQuestion}}{{#if isOwner}}
                 <div class="col-xs-3 top-bar-content">
                     <span class="glyphicon icon-top-bar glyphicon-user glyphicon-style center" aria-hidden="true">
@@ -41,7 +41,7 @@
                 </div>
             {{/if}}{{/if}}
         </div>
-        <div class="row question-wrapper">
+        <div class="question-wrapper">
             {{#each questionList}}
                 <div class="row question-row" id="question-row_{{displayIndex}}">
                     <div class="col-md-12">
@@ -141,41 +141,39 @@
         {{#if isOwner}}
             {{#unless isRunningQuestion}}
                 <div class="fixed-bottom">
-                    <div class="row">
-                        <div class="col-md-6 col-md-offset-3">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <button id="backButton" class="button button-back disableOnActiveCountdown">
-                                        <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
-                                        <span class="ansBtn">{{_ "view.liveResults.back_to_lobby"}}</span>
-                                    </button>
-                                </div>
-                                <div class="col-xs-6">
-                                    {{#if showGlobalLeaderboardButton}}
-                                        {{#if hasCorrectAnswerOptions}}
-                                            <button class="button button-next disableOnActiveCountdown" id="goGlobalRanking">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button id="backButton" class="button button-back disableOnActiveCountdown">
+                                    <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
+                                    <span class="ansBtn">{{_ "view.liveResults.back_to_lobby"}}</span>
+                                </button>
+                            </div>
+                            <div class="col-xs-6">
+                                {{#if showGlobalLeaderboardButton}}
+                                    {{#if hasCorrectAnswerOptions}}
+                                        <button class="button button-next disableOnActiveCountdown" id="goGlobalRanking">
+                                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                            <span class="ansBtn">{{_ "view.liveResults.global_ranking"}}</span>
+                                        </button>
+                                    {{/if}}
+                                {{else}}
+                                    {{#if hasNextQuestion}}
+                                        {{#if showNextQuestionButton}}
+                                            <button class="button button-next button-start disableOnActiveCountdown" id="showNextQuestionDialog">
                                                 <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                                <span class="ansBtn">{{_ "view.liveResults.global_ranking"}}</span>
+                                                <span class="ansBtn">{{_ "view.liveResults.show_question"}} {{nextReadingConfirmationIndex}}
+                                                    / {{allQuestionCount}}</span>
+                                            </button>
+                                        {{else}}
+                                            <button class="button button-next button-start disableOnActiveCountdown" id="startNextQuestion">
+                                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                                <span class="ansBtn">{{_ "view.liveResults.start_round"}} {{nextQuestionIndex}}
+                                                    / {{allQuestionCount}}</span>
                                             </button>
                                         {{/if}}
-                                    {{else}}
-                                        {{#if hasNextQuestion}}
-                                            {{#if showNextQuestionButton}}
-                                                <button class="button button-next button-start disableOnActiveCountdown" id="showNextQuestionDialog">
-                                                    <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                                    <span class="ansBtn">{{_ "view.liveResults.show_question"}} {{nextReadingConfirmationIndex}}
-                                                        / {{allQuestionCount}}</span>
-                                                </button>
-                                            {{else}}
-                                                <button class="button button-next button-start disableOnActiveCountdown" id="startNextQuestion">
-                                                    <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                                    <span class="ansBtn">{{_ "view.liveResults.start_round"}} {{nextQuestionIndex}}
-                                                        / {{allQuestionCount}}</span>
-                                                </button>
-                                            {{/if}}
-                                        {{/if}}
                                     {{/if}}
-                                </div>
+                                {{/if}}
                             </div>
                         </div>
                     </div>

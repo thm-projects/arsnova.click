@@ -22,6 +22,7 @@ import {MemberList} from '/lib/memberlist.js';
 import {Responses} from '/lib/responses.js';
 import {QuestionGroup} from '/lib/questions.js';
 import {Hashtags} from '/lib/hashtags.js';
+import {EventManager} from '/lib/eventmanager.js';
 
 Meteor.methods({
 	'Hashtags.checkPrivateKey': function (privateKey, hashtag) {
@@ -44,6 +45,7 @@ Meteor.methods({
 		}
 
 		Hashtags.insert(doc);
+		EventManager.update({hashtag: doc.hashtag}, { $push: {eventStack: {key: "Hashtags.addHashtag", value: {hashtag: doc.hashtag}}}});
 	},
 	'Hashtags.export': function ({hashtag, privateKey}) {
 		if (Meteor.isServer) {
@@ -122,6 +124,7 @@ Meteor.methods({
 				hashtag: hashtag,
 				questionList: questionList
 			});
+			EventManager.update({hashtag: data.hashtagDoc}, { $push: {eventStack: {key: "Hashtags.import", value: {hashtag: data.hashtagDoc}}}});
 		}
 	}
 });

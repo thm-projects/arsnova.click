@@ -155,49 +155,8 @@ export function startCountdown(index) {
 	$('.disableOnActiveCountdown').attr("disabled", "disabled");
 }
 
-export function startReadingConfirmationTracker() {
-	readingConfirmationTracker = Tracker.autorun(()=> {
-		if (EventManager.findOne()) {
-			EventManager.find().observeChanges({
-				changed: function (id, changedFields) {
-					if (!isNaN(changedFields.readingConfirmationIndex)) {
-						new Splashscreen({
-							autostart: true,
-							templateName: 'readingConfirmedSplashscreen',
-							closeOnButton: '#setReadConfirmed',
-							onRendered: function (instance) {
-								var questionDoc = QuestionGroup.findOne();
-								var content = "";
-								if (questionDoc) {
-									mathjaxMarkdown.initializeMarkdownAndLatex();
-									var questionText = questionDoc.questionList[EventManager.findOne().readingConfirmationIndex].questionText;
-									content = mathjaxMarkdown.getContent(questionText);
-								}
-								instance.templateSelector.find('#questionContent').html(content);
-
-								if (Session.get("isOwner")) {
-									instance.templateSelector.find('#setReadConfirmed').text(TAPi18n.__("global.close_window"));
-								} else {
-									instance.templateSelector.find('#setReadConfirmed').parent().on('click', '#setReadConfirmed', function () {
-										Meteor.call("MemberList.setReadConfirmed", {
-											hashtag: Session.get("hashtag"),
-											questionIndex: EventManager.findOne().readingConfirmationIndex,
-											nick: Session.get("nick")
-										}, (err)=> {
-											if (err) {
-												splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason));
-												splashscreenError.open();
-											}
-										});
-									});
-								}
-							}
-						});
-					}
-				}
-			});
-		}
-	});
+export function startReadingConfirmationTracker () {
+    
 }
 
 /**

@@ -249,10 +249,8 @@ Template.showHashtagsSplashscreen.events({
 		Session.set("isOwner", true);
 		Session.set("hashtag", hashtag);
 		localData.reenterSession(hashtag);
-		Meteor.call('EventManager.add', localData.getPrivateKey(), hashtag, function () {
-			lib.hashtagSplashscreen.destroy();
-			Router.go('/question');
-		});
+		lib.hashtagSplashscreen.destroy();
+		Router.go('/question');
 	},
 	"click #js-btn-showHashtagManagement": function () {
 		lib.hashtagSplashscreen.destroy();

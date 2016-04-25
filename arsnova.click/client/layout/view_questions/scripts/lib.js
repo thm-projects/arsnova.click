@@ -126,6 +126,9 @@ export function changePreviewButtonText(text) {
 }
 
 export function checkForMarkdown() {
+	if(EventManager.findOne().questionIndex < 0) {
+		return;
+	}
 	var questionText = QuestionGroup.findOne().questionList[EventManager.findOne().questionIndex].questionText;
 	if (questionText && questionContainsMarkdownSyntax(questionText)) {
 		changePreviewButtonText(TAPi18n.__("view.questions.edit"));

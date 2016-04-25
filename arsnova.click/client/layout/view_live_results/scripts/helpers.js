@@ -234,7 +234,7 @@ Template.liveResults.helpers({
         let result = [];
         let sortParamObj = Session.get('LearnerCountOverride') ? {lowerCaseNick: 1} : {insertDate: -1};
         let ownNick = MemberList.findOne({nick: Session.get("nick")}, {limit: 1});
-        if (!Session.get("isOwner") && ownNick.readConfirmed[index]) {
+        if (ownNick && ownNick.readConfirmed[index]) {
             result.push(ownNick);
         }
         MemberList.find({nick: {$ne: Session.get("nick")}}, {
@@ -270,16 +270,6 @@ Template.liveResults.helpers({
     getCSSClassForIsCorrect: checkIfIsCorrect
 });
 
-/*
- Template.result_button.helpers({
- getCSSClassForIsCorrect: checkIfIsCorrect
- });
-
- Template.result_button_mc.helpers({
- getCSSClassForIsCorrect: checkIfIsCorrect
- });
-
- */
 Template.readingConfirmedLearner.helpers({
 	isOwnNick: function (nickname) {
 		return nickname === Session.get("nick");

@@ -28,8 +28,8 @@ Template.createQuestionView.onRendered(function () {
 	$(window).resize(lib.calculateWindow());
 
 	let index;
-	lib.subscriptionHandler = Tracker.autorun(()=> {
-		if (this.subscriptionsReady()) {
+	lib.subscriptionHandler = Tracker.autorun(()=>{
+		if (this.subscriptionsReady() && EventManager.findOne()) {
 			index = EventManager.findOne().questionIndex;
 			if (!Session.get("markdownAlreadyChecked")) {
 				lib.checkForMarkdown();

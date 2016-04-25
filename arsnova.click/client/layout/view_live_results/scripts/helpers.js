@@ -21,9 +21,9 @@ Template.live_results.helpers({
         }
         return 0;
     },
-    isCountdownZero: function () {
+    isCountdownZero: function (index) {
         if (Session.get("isOwner")) {
-            if (Session.get("sessionClosed") || !Session.get("countdownInitialized")) {
+            if (Session.get("sessionClosed") || !Session.get("countdownInitialized") || EventManager.findOne().questionIndex !== index) {
                 return true;
             } else {
                 var timer = Math.round(countdown.get());
@@ -32,7 +32,7 @@ Template.live_results.helpers({
         } else {
             var question = QuestionGroup.findOne().questionList[EventManager.findOne().questionIndex];
             
-            if (new Date().getTime() - parseInt(question.startTime) < question.timer) {
+            if (EventManager.findOne().questionIndex === index && new Date().getTime() - parseInt(question.startTime) < question.timer) {
                 return false;
             } else {
                 return true;
@@ -105,11 +105,13 @@ Template.live_results.helpers({
         return {
             allCorrect: {
                 absolute: allCorrect,
-                percent: memberAmount ? Math.floor((allCorrect * 100) / memberAmount) : 0
+                percent: memberAmount ? Math.floor((allCorrect * 100) / memberAmount) : 0,
+                questionIndex: index
             },
             allWrong: {
                 absolute: allWrong,
-                percent: memberAmount ? Math.floor((allWrong * 100) / memberAmount) : 0
+                percent: memberAmount ? Math.floor((allWrong * 100) / memberAmount) : 0,
+                questionIndex: index
             }
         };
     },
@@ -157,7 +159,8 @@ Template.live_results.helpers({
                 name: String.fromCharCode(value.answerOptionNumber + 65),
                 absolute: amount,
                 percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
-                isCorrect: correctAnswerOptions ? value.isCorrect : -1
+                isCorrect: correctAnswerOptions ? value.isCorrect : -1,
+                questionIndex: index
             });
         });
         return result;

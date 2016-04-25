@@ -94,7 +94,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     {{#each answerList displayIndex}}
-                                        {{#if isCountdownZero}}
+                                        {{#if isCountdownZero questionIndex}}
                                             {{> result_button name = name absolute = absolute percent = percent isCorrect = isCorrect }}
                                         {{else}}
                                             {{> result_button name = name absolute = absolute percent = percent isCorrect = -1 }}
@@ -126,7 +126,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             {{#with mcOptions displayIndex}}
-                                {{#if isCountdownZero}}
+                                {{#if isCountdownZero questionIndex}}
                                     {{> result_button_mc name = "Ganz richtig" absolute = allCorrect.absolute percent = allCorrect.percent isCorrect = 1 id = 0}}
                                     {{> result_button_mc name = "Ganz falsch" absolute = allWrong.absolute percent = allWrong.percent isCorrect = 0 id = 1 }}
                                 {{/if}}

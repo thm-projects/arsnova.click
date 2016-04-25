@@ -17,73 +17,103 @@
  */
 
 .footer {
-    min-height: 20px;
-    border: 0;
+  min-height: 20px;
+  border: 0;
 }
 
 .footer a div {
-    padding: 2px 0;
-    color: black !important;
+  padding: 2px 0;
+  color: black !important;
 }
 
 .footer a:first-child div {
-    border: none;
+  border: none;
 }
 
 .footer .container-fluid {
-    padding: 0;
+  padding: 0;
 }
 
-@media (max-width:991px) {
-    .footer-info-bar {
-        height: 6vw;
-        bottom: 0;
-        margin-bottom: 2px;
-        font-size: 5vw;
-        position: fixed;
-        Color: #FFF;
-        right: 0;
-        left: 0;
-        z-index: 1030;
+.footer-info-bar {
+  #footerLanguageChooser {
+    position: absolute;
+    top: 4px;
+    display: inline-block;
+    line-height: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-left: 30px;
+    cursor: pointer;
+
+    a {
+      img {
+        margin-top: -1px;
+        height: 5vw;
+        width: 5vw;
+        max-width: 50px;
+        max-height: 50px;
+
+        @media screen and (min-width:992px) {
+          max-width: 39px;
+          max-height: 39px;
+        }
+      }
     }
+  }
 }
 
-@media (min-width:992px) {
-    .footer-info-bar {
-        height: 45px;
+@media (max-width: 991px) {
+  .footer-info-bar {
+    height: 6vw;
+    bottom: 0;
+    margin-bottom: 2px;
+    font-size: 5vw;
+    position: fixed;
+    Color: #FFF;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+  }
+}
 
-        font-size: 40px;
-        position: fixed;
-        Color: #FFF;
-        right: 0;
-        left: 0;
-        z-index: 1030;
-    }
+@media (min-width: 992px) {
+  .footer-info-bar {
+    height: 45px;
+
+    font-size: 40px;
+    position: fixed;
+    Color: #FFF;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+  }
 }
 
 .hiddenStyle {
-    bottom: 0;
-    margin-bottom: 2px;
+  bottom: 0;
+  margin-bottom: 2px;
 }
 
 .showStyle {
-    bottom: 15px;
-    margin-bottom: 15px;
+  bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .glyphicon-info-style {
-    margin-left: 10px;
-    cursor: pointer;
+  margin-left: 10px;
+  cursor: pointer;
 }
 
 .glyphicon-import-style {
-    margin-right: 10px;
-    float: right;
-    cursor: pointer;
+  margin-right: 10px;
+  float: right;
+  cursor: pointer;
 }
+
 .js-import-input-home {
-    display: none;
+  display: none;
 }
+
 .js-import-input-home input[type=file] {
-    display: none;
+  display: none;
 }

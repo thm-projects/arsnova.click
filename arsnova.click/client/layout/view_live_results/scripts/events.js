@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { EventManager } from '/lib/eventmanager.js';
 import { AnswerOptions } from '/lib/answeroptions.js';
 import { MemberList } from '/lib/memberlist.js';
@@ -65,7 +66,7 @@ Template.live_results.events({
             privateKey: localData.getPrivateKey()
         }, (err, res) => {
             if (err) {
-                splashscreen_error.setErrorText("Could not export!\n" + err.reason);
+                splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.export_failed", err.reason));
                 splashscreen_error.open();
             } else {
                 var exportData = "text/json;charset=utf-8," + encodeURIComponent(res);
@@ -106,7 +107,7 @@ Template.live_results.events({
             questionIndex: EventManager.findOne().questionIndex + 1
         }, (err) => {
             if (err) {
-                splashscreen_error.setErrorText(err.reason);
+                splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
                 splashscreen_error.open();
                 Session.set("sessionClosed", true);
             } else {

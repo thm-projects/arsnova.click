@@ -17,73 +17,28 @@
 -->
 
 <template name="datenschutz">
-
     <div class="text-light contentContainer">
+        {{> titel titelText="region.footer.data_privacy.title"}}
 
-        {{> titel titelText="Datenschutzerklärung"}}
-        <h3>
-            Geltungsbereich
-        </h3>
-        <p>
-            Diese Datenschutzerklärung klärt Nutzer/innen von arsnova.click über die Art, den Umfang und den Zweck 
-            der Verwendung personenbezogener Daten durch den verantwortlichen Anbieter auf.
-            Die rechtlichen Grundlagen des Datenschutzes finden sich im Bundesdatenschutzgesetz (BDSG) und dem
-            Telemediengesetz (TMG).
-        </p>
-        <h3>
-            Anwendungsdaten
-        </h3>
-        <p>
-            Alle Quizfragen und deren Antwortoptionen werden ausschließlich im Browser-Speicher (localStorage) 
-            der Quizerstellerin oder des Quizerstellers gehalten.
-        </p>
-        <h3>
-            Zugriffsdaten
-        </h3>
-        <p>
-            Außer Webserver-Logdateien werden keine personenbezogenen Zugriffsdaten gespeichert.
-        </p>
-        <h3>
-            Webserver-Logdateien
-        </h3>
-        <p>
-            Der Anbieter erhebt Protokolldaten über jeden Zugriff auf arsnova.click in sogenannten Logdateien.
+        <h3>{{_ "region.footer.data_privacy.scope"}}</h3>
+        <p>{{_ "region.footer.data_privacy.declaration"}}</p>
 
-            Der Anbieter verwendet die Protokolldaten ausschließlich für statistische Auswertungen zum Zwecke des Betriebs, der
-            Sicherheit und der Optimierung des Angebotes. Der Anbieter behält sich vor, die Protokolldaten
-            nachträglich zu überprüfen, wenn aufgrund konkreter Anhaltspunkte der berechtigte Verdacht einer
-            rechtswidrigen Nutzung besteht.
-        </p>
-        <h3>
-            Dienste und Inhalte Dritter
-        </h3>
-        <p>
-            In Quizfragen können Inhalte Dritter, wie zum Beispiel Videos von YouTube und Vimeo oder 
-            Grafiken von anderen Webseiten, eingebunden werden.
-            Dies setzt voraus, dass die Anbieter dieser Inhalte die IP-Adresse der Nutzer/innen wahrnehmen. 
-            Ohne die IP-Adresse können die Inhalte nicht an den Browser gesendet werden.
-        </p>
-        <h3>
-            Cookies
-        </h3>
-        <p>
-            Cookies sind kleine Dateien, die es ermöglichen, auf dem Zugriffsgerät der Nutzer/innen
-            spezifische, auf das Gerät bezogene Informationen zu speichern. Das Angebot arsnova.click nutzt Cookies,
-            um die statistischen Daten der Webseitennutzung mit Piwik (siehe unten) zu erfassen und sie zwecks Verbesserung des
-            Angebotes analysieren zu können. Die Nutzer/innen können auf den Einsatz der Cookies Einfluss nehmen. Die meisten
-            Browser verfügen über eine Option, mit der das Speichern von Cookies eingeschränkt oder komplett verhindert
-            wird.
-        </p>
-        <h3>
-            Piwik
-        </h3>
-        <p>
-            Dieses Angebot benutzt Piwik, eine Open-Source-Software zur statistischen Auswertung der Zugriffe, siehe piwik.org.
-            Piwik verwendet Cookies, die auf dem Computer der Nutzer/innen gespeichert werden und die eine
-            Analyse der Benutzung der Webseite ermöglichen. Die durch den Cookie erzeugten Informationen
-            über die Benutzung dieses Agebotes werden auf dem Server des Anbieters in Deutschland gespeichert. Die
-            IP-Adresse wird sofort nach der Verarbeitung und vor deren Speicherung anonymisiert. Nutzer/innen können die
-            Installation der Cookies durch eine entsprechende Einstellung ihrer Browser-Software verhindern.
-        </p>
+        <h3>{{_ "region.footer.data_privacy.app_data.title"}}</h3>
+        <p>{{_ "region.footer.data_privacy.app_data.text"}}</p>
+
+        <h3>{{_ "region.footer.data_privacy.access_data.title"}}</h3>
+        <p>{{_ "region.footer.data_privacy.access_data.text"}}</p>
+
+        <h3>{{_ "region.footer.data_privacy.logfiles.title"}}</h3>
+        <p>{{_ "region.footer.data_privacy.logfiles.text"}}</p>
+
+        <h3>{{_ "region.footer.data_privacy.3rdparty.title"}}</h3>
+        <p>{{_ "region.footer.data_privacy.3rdparty.text"}}</p>
+
+        <h3>{{_ "region.footer.data_privacy.cookies.title"}}</h3>
+        <p>{{_ "region.footer.data_privacy.cookies.text"}}</p>
+
+        <h3>{{_ "region.footer.data_privacy.piwik.title"}}</h3>
+        <p>{{{_ "region.footer.data_privacy.piwik.text"}}}</p>
     </div>
 </template>

@@ -21,6 +21,7 @@
     {{#if footerIsHidden}}
         <div id="footer-info-div" class="footer-info-bar hiddenStyle">
             <span id="hideShowFooterBar" class="glyphicon glyphicon-info-sign glyphicon-info-style" aria-hidden="true"></span>
+            <span id="footerLanguageChooser"><a href="/translate" id="translateLink"><img src="/images/globe.png" alt="internationalization"></a></span>
             {{#if isInHomePath}}
                 <span class="js-import-home glyphicon glyphicon-import glyphicon-import-style" aria-hidden="true"></span>
             {{/if}}
@@ -43,34 +44,17 @@
         <div class="container-fluid text-center text-dark">
 
             {{#if isBackButton}}
-                <a href="/{{getLastPage}}">
-                    <div class="col-xs-2 col-sm-3" id="toPrevPage">zurück</div>
-                </a>
+                <a href="/{{getLastPage}}"><div class="col-xs-2 col-sm-3" id="toPrevPage">{{_ "global.back"}}</div></a>
             {{else}}
                 {{#if isInHomePath}}
-                    <a href="/ueber">
-                        <div class="col-xs-2 col-sm-3">Über</div>
-                    </a>
+                    <a href="/ueber"><div class="col-xs-2 col-sm-3">{{_ "region.footer.footer_bar.about"}}</div></a>
                 {{else}}
-                    <a href="/">
-                        <div class="col-xs-2 col-sm-3">Home</div>
-                    </a>
+                    <a href="/"><div class="col-xs-2 col-sm-3">{{_ "region.footer.footer_bar.home"}}</div></a>
                 {{/if}}
             {{/if}}
-            <a href="/agb">
-                <div class="col-xs-2 col-sm-3">
-                    AGB
-                </div>
-            </a>
-            <a href="/datenschutz">
-                <div class="col-xs-4 col-sm-3">
-                    Datenschutz
-                </div>
-            </a>
-            <a href="/impressum">
-                <div class="col-xs-4 col-sm-3">
-                    Impressum
-                </div>
+            <a href="/agb"><div class="col-xs-2 col-sm-3">{{_ "region.footer.footer_bar.tos"}}</div></a>
+            <a href="/datenschutz"><div class="col-xs-4 col-sm-3">{{_ "region.footer.footer_bar.data_privacy"}}</div></a>
+            <a href="/impressum"><div class="col-xs-4 col-sm-3">{{_ "region.footer.footer_bar.imprint"}}</div>
             </a>
         </div>
     </nav>

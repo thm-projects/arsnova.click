@@ -19,7 +19,7 @@
 <template name="titel">
     <div class="row">
         <div class=" titel-relative text-light text-center">
-            <div id="appTitle" class="titel margin-to-logo">{{titelText}}</div>
+            <div id="appTitle" class="titel margin-to-logo">{{#if titelText}}{{_ titelText}}{{/if}}</div>
         </div>
     </div>
 </template>

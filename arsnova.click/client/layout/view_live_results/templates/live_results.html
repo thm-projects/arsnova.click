@@ -25,15 +25,15 @@
             {{#if isRunningQuestion}}{{#if isOwner}}
                 <div class="col-xs-3 top-bar-content">
                     <span class="glyphicon icon-top-bar glyphicon-user glyphicon-style center" aria-hidden="true">
-                        <div class="titel">{{getCountStudents}}</div>
+                        <span class="titel">{{getCountStudents}}</span>
                     </span>
                 </div>
                 <div class="col-xs-6 text-center">
-                    <div id="appTitle" class="titel subtitel-padding-top">{{votingText}}</div>
+                    <div id="appTitle" class="titel subtitel-padding-top">{{_ votingText}}</div>
                 </div>
                 <div class="col-xs-3 top-bar-content">
                 <span class="glyphicon icon-top-bar glyphicon-hourglass glyphicon-style center" aria-hidden="true">
-                    <div class="titel">{{getCountdown}}</div>
+                    <span class="titel">{{getCountdown}}</span>
                 </span>
                 </div>
             {{else}}
@@ -48,7 +48,7 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-12">
-                                <p class="question-title">Frage {{getNormalizedIndex displayIndex}} / {{allQuestionCount}}</p>
+                                <p class="question-title">{{_ "view.live_results.question"}} {{getNormalizedIndex displayIndex}} / {{allQuestionCount}}</p>
                             </div>
                         </div>
                         {{#if hasReadConfirmationRequested displayIndex}}
@@ -61,7 +61,7 @@
                                                         class="btn btn-info btn-lg btn-answerOption btn-showLeaderBoard disableOnActiveCountdown">
                                                     <span class="glyphicon glyphicon-flag glyph-left"
                                                           aria-hidden="true"></span>
-                                                    <span class="ansBtn">Rangliste</span>
+                                                    <span class="ansBtn">{{_ "view.live_results.ranking"}}</span>
                                                 </button>
                                             </div>
                                         {{/if}}
@@ -70,45 +70,35 @@
                                                     class="btn btn-info btn-lg btn-answerOption">
                                                 <span class="glyphicon glyphicon-question-sign glyph-left"
                                                       aria-hidden="true"></span>
-                                                <span class="ansBtn">Frage</span>
+                                                <span class="ansBtn">{{_ "view.live_results.question"}}</span>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         {{/if}}
-                        <div class="row form-group button button-result readingConfirmationProgressRow">
-                            <div class="col-xs-12" id="readingConfirmationWrapper">
-                                <span class="button-result-letter button-result-readingConfirmation">Lesebestätigung</span>
-                                <div class="progress" style="margin-right: 0;">
-                                    <div class="progress-bar" role="progressbar"
-                                         aria-valuemin="0" aria-valuemax="100"
-                                         style="width:{{getPercentRead displayIndex}}%; background:{{getCSSClassForPercent (getPercentRead displayIndex)}}">
-                                        <span class="percentage">{{getCurrentRead displayIndex}} / {{getCountStudents}}
-                                            | {{getPercentRead displayIndex}}%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {{> form_group
+                            name = "view.live_results.reading_confirmation"
+                            absolute = (getCurrentRead displayIndex)
+                            base = getCountStudents
+                            percent = (getPercentRead displayIndex)
+                            backgroundStyle = (getCSSClassForPercent (getPercentRead displayIndex))
+                        }}
                         {{#if hasReadConfirmationRequested displayIndex}}
-                            <div class="row">
-                                <div class="col-md-12">
-                                    {{#each answerList displayIndex}}
-                                        {{#if isCountdownZero questionIndex}}
-                                            {{> result_button name = name absolute = absolute percent = percent isCorrect = isCorrect }}
-                                        {{else}}
-                                            {{> result_button name = name absolute = absolute percent = percent isCorrect = -1 }}
-                                        {{/if}}
-                                    {{/each}}
-                                </div>
-                            </div>
+                            {{#each answerList displayIndex}}
+                                {{#if isCountdownZero questionIndex}}
+                                    {{> form_group name = name absolute = absolute percent = percent isCorrect = isCorrect backgroundClass = (getCSSClassForIsCorrect isCorrect) }}
+                                {{else}}
+                                    {{> form_group name = name absolute = absolute percent = percent backgroundClass = (getCSSClassForIsCorrect -1) }}
+                                {{/if}}
+                            {{/each}}
                         {{else}}
                             {{#if showMoreButton displayIndex}}
                                 <div class="row more-learners-row">
                                     <div class="col-xs-12">
                                         <button class="btn btn-more-learners">
                                             <span class="glyphicon glyphicon-align-justify"></span>
-                                            (Zeige {{invisibleLearnerCount displayIndex}} weitere)
+                                            ({{_ "view.live_results.show_more" (invisibleLearnerCount displayIndex) count=(invisibleLearnerCount displayIndex)}})
                                         </button>
                                     </div>
                                 </div>
@@ -116,7 +106,7 @@
                             <div class="row learner-list margin-title"
                                  id="learner-list">
                                 {{#each readingConfirmationListForQuestion displayIndex}}
-                                    {{>readingConfirmedLearner}}
+                                    {{> readingConfirmedLearner}}
                                 {{/each}}
                             </div>
                         {{/if}}
@@ -126,8 +116,22 @@
                     <div class="row">
                         <div class="col-md-12">
                             {{#with mcOptions displayIndex}}
-                                {{> result_button_mc name = "Ganz richtig" absolute = allCorrect.absolute percent = allCorrect.percent isCorrect = 1 id = 0}}
-                                {{> result_button_mc name = "Ganz falsch" absolute = allWrong.absolute percent = allWrong.percent isCorrect = 0 id = 1 }}
+                                {{> form_group
+                                    name = "view.live_results.complete_correct"
+                                    absolute = allCorrect.absolute
+                                    percent = allCorrect.percent
+                                    isCorrect = 1
+                                    id = 0
+                                    backgroundClass = (getCSSClassForIsCorrect 1)
+                                }}
+                                {{> form_group
+                                    name = "view.live_results.complete_wrong"
+                                    absolute = allWrong.absolute
+                                    percent = allWrong.percent
+                                    isCorrect = 0
+                                    id = 1
+                                    backgroundClass = (getCSSClassForIsCorrect 0)
+                                }}
                             {{/with}}
                         </div>
                     </div>
@@ -144,7 +148,7 @@
                                 <div class="col-xs-6">
                                     <button id="backButton" class="button button-back disableOnActiveCountdown">
                                         <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
-                                        <span class="ansBtn">Zurück zur Lobby</span>
+                                        <span class="ansBtn">{{_ "view.live_results.back_to_lobby"}}</span>
                                     </button>
                                 </div>
                                 <div class="col-xs-6">
@@ -152,20 +156,20 @@
                                         {{#if hasCorrectAnswerOptions}}
                                             <button class="button button-next disableOnActiveCountdown" id="goGlobalRanking">
                                                 <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                                <span class="ansBtn">Globale Rangliste</span>
+                                                <span class="ansBtn">{{_ "view.live_results.global_ranking"}}</span>
                                             </button>
                                         {{/if}}
                                     {{else}}
                                         {{#if showNextQuestionButton}}
                                             <button class="button button-next button-start disableOnActiveCountdown" id="showNextQuestionDialog">
                                                 <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                                <span class="ansBtn">Zeige Frage {{nextReadingConfirmationIndex}}
+                                                <span class="ansBtn">{{_ "view.live_results.show_question"}} {{nextReadingConfirmationIndex}}
                                                     / {{allQuestionCount}}</span>
                                             </button>
                                         {{else}}
                                             <button class="button button-next button-start disableOnActiveCountdown" id="startNextQuestion">
                                                 <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                                <span class="ansBtn">Starte Runde {{nextQuestionIndex}}
+                                                <span class="ansBtn">{{_ "view.live_results.start_round"}} {{nextQuestionIndex}}
                                                     / {{allQuestionCount}}</span>
                                             </button>
                                         {{/if}}

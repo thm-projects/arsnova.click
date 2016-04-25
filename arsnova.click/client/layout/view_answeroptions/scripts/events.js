@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { EventManager } from '/lib/eventmanager.js';
 import { AnswerOptions } from '/lib/answeroptions.js';
 import * as localData from '/client/lib/local_storage.js';
@@ -76,10 +77,10 @@ Template.createAnswerOptions.events({
         Router.go('/question');
     },
     "click #forwardButton": function () {
-        var error = parseAnswerOptionInput(EventManager.findOne().questionIndex);
+        var err = parseAnswerOptionInput(EventManager.findOne().questionIndex);
 
-        if (error) {
-            splashscreen_error.setErrorText(error.reason);
+        if (err) {
+            splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
             splashscreen_error.open();
         } else {
             Router.go("/settimer");

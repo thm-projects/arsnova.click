@@ -7,7 +7,7 @@ let hasError = false;
 const updateAnswerText = function (error, result) {
     hasError = error;
     if (!error) {
-        localData.updateAnswerText(Session.get("hashtag"), result.questionIndex, result.answerOptionNumber, result.answerText, result.isCorrect);
+        localData.updateAnswerText(result);
     }
 };
 

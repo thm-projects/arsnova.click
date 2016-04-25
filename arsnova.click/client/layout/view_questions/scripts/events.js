@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { EventManager } from '/lib/eventmanager.js';
 import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
 import { Splashscreen } from '/client/plugins/splashscreen/scripts/lib.js';
@@ -25,7 +26,7 @@ Template.createQuestionView.events({
     "click #formatPreviewButton": function () {
         var formatPreviewText = $('#formatPreviewText');
         if (formatPreviewText.text() === "Format") {
-            formatPreviewText.text("Vorschau");
+            formatPreviewText.text(TAPi18n.__("view.questions.preview"));
             $('#formatPreviewGlyphicon').removeClass("glyphicon-cog").addClass("glyphicon-phone");
             $('#markdownBarDiv').removeClass('hide');
             $('#questionText').removeClass('round-corners').addClass('round-corners-markdown');

@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { MemberList } from '/lib/memberlist.js';
 import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
 import * as lib from './lib.js';
@@ -18,7 +19,7 @@ Template.nick.events({
         }, (err) => {
             if (err) {
                 $("#forwardButton").attr("disabled", "disabled");
-                splashscreen_error.setErrorText(err.reason);
+                splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
                 splashscreen_error.open();
             } else {
                 Session.set("nick", nickname);

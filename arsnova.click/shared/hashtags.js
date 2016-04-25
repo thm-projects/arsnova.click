@@ -41,7 +41,7 @@ Meteor.methods({
     },
     'Hashtags.addHashtag': function (doc) {
         if (Hashtags.find({hashtag: doc.hashtag}).count() > 0) {
-            throw new Meteor.Error('Hashtags.addHashtag', 'Session already exists!');
+            throw new Meteor.Error('Hashtags.addHashtag', 'plugins.splashscreen.error.error_messages.session_exists');
         }
 
         Hashtags.insert(doc);
@@ -58,7 +58,7 @@ Meteor.methods({
                 }
             });
             if (!hashtagDoc) {
-                throw new Meteor.Error('Hashtags.export', 'No such hashtag with the given key');
+                throw new Meteor.Error('Hashtags.export', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
             }
             var questionGroupDoc = QuestionGroup.findOne({hashtag: hashtag}, {
                 fields: {
@@ -95,7 +95,7 @@ Meteor.methods({
             var hashtag = data.hashtagDoc.hashtag;
             var oldDoc = Hashtags.findOne({hashtag: hashtag});
             if (oldDoc) {
-                throw new Meteor.Error('Hashtags.import', 'Dieser Hashtag ist bereits vorhanden');
+                throw new Meteor.Error('Hashtags.import', 'plugins.splashscreen.error.error_messages.hashtag_exists');
             }
             var questionList = [];
             var hashtagDoc = data.hashtagDoc;

@@ -19,7 +19,7 @@
 <template name="hashtagManagement">
     <div class="row">
         <div class="col-md-12 contentFrame">
-            {{> titel titelText = "Sessionverwaltung" }}
+            {{> titel titelText = "view.hashtag_management.session_management" }}
             {{#each serverHashtags}}
                 <div class="row" id="{{this}}">
                     <div class="col-xs-6">
@@ -49,7 +49,7 @@
     <div class="row">
         <div class="col-md-12">
             <span class="btn btn-lg btn-warning btn-file distance-top btn-answerOption">
-                Import <input id="js-import" type="file" accept="application/json" multiple>
+                {{_ "import"}} <input id="js-import" type="file" accept="application/json" multiple>
             </span>
         </div>
     </div>

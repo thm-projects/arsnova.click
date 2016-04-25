@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { Splashscreen } from '/client/plugins/splashscreen/scripts/lib.js';
 import { markdownAlreadyExistsAndAutoRemove, insertInQuestionText } from './lib.js';
 
@@ -8,9 +9,7 @@ Template.markdownBar.events({
             autostart: true,
             instanceId: "infoMarkdown",
             onRendered: function (instance) {
-                instance.templateSelector.find(".modal-body").html(
-                    "Sie können Texte innerhalb von ARSnova mithilfe von <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown Optionen werden in Form von Schaltflächen über den unterstützten Eingabefeldern angeboten. Zudem unterstützt ARSnova <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
-                );
+                instance.templateSelector.find(".modal-body").html(TAPi18n.__("plugins.markdown_bar.info_content"));
             }
         });
     },

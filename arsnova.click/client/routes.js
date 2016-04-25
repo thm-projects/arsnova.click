@@ -116,6 +116,10 @@ Router.route('/impressum', function () {
     this.render('impressum');
 });
 
+Router.route('/translate', function () {
+    this.render('translate');
+});
+
 Router.onStop(function() {
     var lastRoute = Router.current().route.getName();
     if(lastRoute===undefined){

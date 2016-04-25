@@ -1,5 +1,6 @@
 import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { getLeaderBoardItems } from './lib.js';
 
 Template.leaderBoard.helpers({
@@ -14,9 +15,9 @@ Template.leaderBoard.helpers({
     },
     getTitleText: ()=> {
         if (typeof Session.get("showLeaderBoardId") !== "undefined") {
-            return "Quizfrage " + (Session.get("showLeaderBoardId") + 1) + ": Alles richtig haben...";
+            return TAPi18n.__("view.leaderboard.title.single_question", {questionId: (Session.get("showLeaderBoardId") + 1)});
         } else {
-            return "Alles richtig haben...";
+            return TAPi18n.__("view.leaderboard.title.all_questions");
         }
     },
     getPosition: function (index) {

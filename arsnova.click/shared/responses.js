@@ -34,17 +34,17 @@ Meteor.methods({
                 userNick: responseDoc.userNick
             });
             if (dupDoc) {
-                throw new Meteor.Error('Responses.addResponse', 'User has already given this response');
+                throw new Meteor.Error('Responses.addResponse', 'plugins.splashscreen.error.error_messages.duplicate_response');
             }
             var hashtagDoc = Hashtags.findOne({
                 hashtag: hashtag
             });
             if (!hashtagDoc) {
-                throw new Meteor.Error('Responses.addResponse', 'There is no such quiz active in the db');
+                throw new Meteor.Error('Responses.addResponse', 'plugins.splashscreen.error.error_messages.not_authorized');
             } else {
                 var questionGroupDoc = QuestionGroup.findOne({hashtag: responseDoc.hashtag});
                 if (!questionGroupDoc) {
-                    throw new Meteor.Error('Responses.addResponse', 'No questionGroup doc for this quiz');
+                    throw new Meteor.Error('Responses.addResponse', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
                 }
                 var responseTime = Number(timestamp) - Number(questionGroupDoc.questionList[responseDoc.questionIndex].startTime);
 
@@ -56,7 +56,7 @@ Meteor.methods({
                         answerOptionNumber: responseDoc.answerOptionNumber
                     });
                     if (!answerOptionDoc) {
-                        throw new Meteor.Error('Responses.addResponse', 'There is no answer option with the given answerOptionNumber');
+                        throw new Meteor.Error('Responses.addResponse', 'plugins.splashscreen.error.error_messages.answeroption_not_found');
                     }
 
                     Responses.insert(responseDoc);
@@ -68,12 +68,12 @@ Meteor.methods({
                         responseTimeMillis: responseDoc.responseTime
                     }, (err) => {
                         if (err) {
-                            throw new Meteor.Error('Responses.addResponse', 'Error while adding response set to leaderboard');
+                            throw new Meteor.Error('Responses.addResponse', 'plugins.splashscreen.error.error_messages.insert_leaderboard_failed');
                         }
                     });
                 }
                 else {
-                    throw new Meteor.Error('Responses.addResponse', 'Response was given out of time range');
+                    throw new Meteor.Error('Responses.addResponse', 'plugins.splashscreen.error.error_messages.response_timeout');
                 }
             }
         }
@@ -85,7 +85,7 @@ Meteor.methods({
                 privateKey: privateKey
             });
             if (!hashtagDoc) {
-                throw new Meteor.Error('Responses.clearAll', 'There is no such quiz active in the db');
+                throw new Meteor.Error('Responses.clearAll', 'plugins.splashscreen.error.error_messages.not_authorized');
             }
 
             Responses.remove({hashtag: hashtag});

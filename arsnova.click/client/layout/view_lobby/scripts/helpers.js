@@ -9,9 +9,6 @@ Template.memberlist.helpers({
     isOwner: function () {
         return Session.get("isOwner");
     },
-    isLearnerCountOverride: function () {
-        return Session.get('LearnerCountOverride');
-    },
     learners: function () {
         var sortParamObj = Session.get('LearnerCountOverride') ? {lowerCaseNick: 1} : {insertDate: -1};
         return [
@@ -29,9 +26,6 @@ Template.memberlist.helpers({
     },
     invisibleLearnerCount: function () {
         return MemberList.find().count() - Session.get("LearnerCount");
-    },
-    titleText: function () {
-        return 'Quiz-Lobby';
     },
     memberlistCount: function () {
         return MemberList.find().count();

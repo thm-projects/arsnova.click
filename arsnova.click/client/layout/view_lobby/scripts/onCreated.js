@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { EventManager } from '/lib/eventmanager.js';
 import { QuestionGroup } from '/lib/questions.js';
 import * as localData from '/client/lib/local_storage.js';
@@ -37,7 +38,7 @@ Template.memberlist.onCreated(function () {
             removed: function (id) {
                 let idButton = $('#' + id);
                 if (idButton.hasClass("color-changing-own-nick")) {
-                    splashscreen_error.setErrorText("Du wurdest aus dem Quiz geworfen!");
+                    splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.kicked_from_quiz"));
                     splashscreen_error.open();
                     Router.go("/resetToHome");
                 } else {

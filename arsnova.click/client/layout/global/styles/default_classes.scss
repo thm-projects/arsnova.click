@@ -99,6 +99,10 @@
   margin-left: 10px;
 }
 
+.button-result-letter {
+  line-height: 50px;
+}
+
 .button:hover, .button:active:focus {
   box-shadow: none;
 }
@@ -142,16 +146,17 @@
 .button-result .percentage {
   position: absolute;
   text-align: center;
-  top: 1px;
   color: #ffffff;
   font-weight: bolder;
   padding: 0 10px;
+  line-height: 30px;
 }
 
 .button-result .progress {
   margin: 10px 10px 0 0;
   position: relative;
   margin-bottom: 10px;
+  height: 30px;
   background-color: LightSteelBlue;
 }
 

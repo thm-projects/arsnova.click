@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
+import { TAPi18n } from 'meteor/tap:i18n';
 import * as localData from '/client/lib/local_storage.js';
 import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
 
@@ -14,7 +15,7 @@ export function addQuestion(index) {
         questionText: questionText
     }, (err) => {
         if (err) {
-            splashscreen_error.setErrorText(err.reason);
+            splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
             splashscreen_error.open();
         } else {
             localData.addQuestion(Session.get("hashtag"), index, questionText);

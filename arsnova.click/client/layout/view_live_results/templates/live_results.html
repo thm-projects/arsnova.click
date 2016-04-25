@@ -122,7 +122,7 @@
                                     percent = allCorrect.percent
                                     isCorrect = 1
                                     id = 0
-                                    backgroundClass = (getCSSClassForIsCorrect isCorrect)
+                                    backgroundClass = (getCSSClassForIsCorrect 1)
                                 }}
                                 {{> form_group
                                     name = "view.live_results.complete_wrong"
@@ -130,7 +130,7 @@
                                     percent = allWrong.percent
                                     isCorrect = 0
                                     id = 1
-                                    backgroundClass = (getCSSClassForIsCorrect isCorrect)
+                                    backgroundClass = (getCSSClassForIsCorrect 0)
                                 }}
                             {{/with}}
                         </div>

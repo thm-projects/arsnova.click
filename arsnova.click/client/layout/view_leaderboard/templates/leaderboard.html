@@ -67,12 +67,12 @@
                                 <div class="col-xs-6">
                                     {{#if hasOverridenDefaultButtonCount }}
                                         <button class="button button-success" id="showLess">
-                                            <span class="ansBtn">Zeige weniger</span>
+                                            <span class="ansBtn">{{_ "view.leaderboard.show_less"}}</span>
                                             <span class="glyphicon glyphicon-menu-up glyph-right"></span>
                                         </button>
                                     {{else}}
                                         <button class="button button-success" id="showMore">
-                                            <span class="ansBtn">Zeige {{invisibleResponsesCount}} weitere</span>
+                                            <span class="ansBtn">{{_ "view.leaderboard.show_more" count=invisibleResponsesCount}}</span>
                                             <span class="glyphicon glyphicon-menu-down glyph-right"></span>
                                         </button>
                                     {{/if}}

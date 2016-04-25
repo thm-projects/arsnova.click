@@ -139,7 +139,10 @@
         "all_questions": "Correct answers from..."
       },
       "no_attendee_correct": "Unfortunately no attendee has given the correct answer!",
-      "question": "Question"
+      "question": "Question",
+      "show_more": "Show 1 more",
+      "show_more_plural": "Show %s more",
+      "show_less": "Show less"
     },
     "liveResults": {
       "question": "Question",

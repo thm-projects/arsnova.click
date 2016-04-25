@@ -139,7 +139,10 @@
         "all_questions": "Alles richtig haben..."
       },
       "no_attendee_correct": "Leider hat kein Teilnehmer richtig abgestimmt!",
-      "question": "Frage"
+      "question": "Frage",
+      "show_more": "Zeige 1 weiteren",
+      "show_more_plural": "Zeige %s weitere",
+      "show_less": "Zeige weniger"
     },
     "liveResults": {
       "question": "Frage",

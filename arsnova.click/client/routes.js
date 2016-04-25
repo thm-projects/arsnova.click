@@ -69,11 +69,16 @@ Router.route('/nick', function () {
 });
 
 Router.route('/question', function () {
-	if (Session.get("isOwner")) {
-		this.render('createQuestionView');
-	} else {
-		Router.go("/");
-	}
+    if (Session.get("isOwner")) {
+        Meteor.subscribe('EventManager.join', Session.get("hashtag"), ()=>{
+            if(!EventManager.findOne(Session.get("hashtag"))) {
+                Meteor.call('EventManager.setActiveQuestion', localData.getPrivateKey(), Session.get("hashtag"), 0);
+            }
+        });
+        this.render('createQuestionView');
+    } else {
+        Router.go("/");
+    }
 });
 
 Router.route('/answeroptions', function () {

@@ -2,26 +2,6 @@
 
 import { EventManager } from '/lib/eventmanager.js';
 
-/*
- var eventManagerIndex = 0;
- EventManager.find().observeChanges({
- changed: function (id, changedFields) {
- if (changedFields.lastConnection) {
- delete changedFields.lastConnection;
- }
- if (changedFields.eventStack) {
- let i = eventManagerIndex;
- for(i; i< changedFields.eventStack.length; i++) {
- let item = changedFields.eventStack[i];
- if(item.key !== "EventManager.keepalive") {
- //console.log("EventStack 1: ", item.key, item.value);
- }
- }
- eventManagerIndex = i;
- }
- }
- });
- */
 export class EventStackObserver {
     constructor(options) {
         this.observer = null;

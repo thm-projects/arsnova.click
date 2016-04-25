@@ -89,7 +89,7 @@
                                 {{#if isCountdownZero questionIndex}}
                                     {{> form_group name = name absolute = absolute percent = percent isCorrect = isCorrect backgroundClass = (getCSSClassForIsCorrect isCorrect) }}
                                 {{else}}
-                                    {{> form_group name = name absolute = absolute percent = percent }}
+                                    {{> form_group name = name absolute = absolute percent = percent backgroundClass = (getCSSClassForIsCorrect -1) }}
                                 {{/if}}
                             {{/each}}
                         {{else}}

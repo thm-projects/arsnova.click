@@ -71,7 +71,7 @@ Template.nick.events({
     }
 });
 function isNickAllowed(nick){
-	var forbiddenNicks = ["asshat","arschloch","fart","dumpfbacke","pumukel","spaten","ass","motherfucker","fucker"];
+	var forbiddenNicks = ["asshat","arschloch","fart","dumpfbacke","pumukel","spaten","ass","motherfucker","fucker","idiot","dumbass"];
 	for(var i=0;i<forbiddenNicks.length;++i){
 		if(nick.toLowerCase() === forbiddenNicks[i]){
 			return false;

@@ -4,6 +4,11 @@
   "undef": true,
   "unused": true,
   "curly": true,
+  "eqnull": true,
+  "forin": true,
+  "latedef": true,
+  "noarg": true,
+  "nonbsp": true,
   "globals": {
     "_": false,
     "$": false,

@@ -122,18 +122,16 @@
                         {{/if}}
                     </div>
                 </div>
-                {{#if hasReadConfirmationRequested displayIndex}}{{#if isMC displayIndex}}
+                {{#if hasReadConfirmationRequested displayIndex}}{{#if isMC displayIndex}}{{#if isCountdownZero displayIndex}}
                     <div class="row">
                         <div class="col-md-12">
                             {{#with mcOptions displayIndex}}
-                                {{#if isCountdownZero questionIndex}}
-                                    {{> result_button_mc name = "Ganz richtig" absolute = allCorrect.absolute percent = allCorrect.percent isCorrect = 1 id = 0}}
-                                    {{> result_button_mc name = "Ganz falsch" absolute = allWrong.absolute percent = allWrong.percent isCorrect = 0 id = 1 }}
-                                {{/if}}
+                                {{> result_button_mc name = "Ganz richtig" absolute = allCorrect.absolute percent = allCorrect.percent isCorrect = 1 id = 0}}
+                                {{> result_button_mc name = "Ganz falsch" absolute = allWrong.absolute percent = allWrong.percent isCorrect = 0 id = 1 }}
                             {{/with}}
                         </div>
                     </div>
-                {{/if}}{{/if}}
+                {{/if}}{{/if}}{{/if}}
             {{/each}}
         </div>
 

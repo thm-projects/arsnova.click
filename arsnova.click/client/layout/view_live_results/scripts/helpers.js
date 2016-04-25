@@ -105,13 +105,11 @@ Template.live_results.helpers({
         return {
             allCorrect: {
                 absolute: allCorrect,
-                percent: memberAmount ? Math.floor((allCorrect * 100) / memberAmount) : 0,
-                questionIndex: index
+                percent: memberAmount ? Math.floor((allCorrect * 100) / memberAmount) : 0
             },
             allWrong: {
                 absolute: allWrong,
-                percent: memberAmount ? Math.floor((allWrong * 100) / memberAmount) : 0,
-                questionIndex: index
+                percent: memberAmount ? Math.floor((allWrong * 100) / memberAmount) : 0
             }
         };
     },

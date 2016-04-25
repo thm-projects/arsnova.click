@@ -62,23 +62,23 @@
                             <span class="ansBtn">{{_ "global.back"}}</span>
                         </button>
                     </div>
-                        {{#unless noLeaderBoardItems}}
-                            {{#if hasTooMuchButtons}}
-                                <div class="col-xs-6">
-                                    {{#if hasOverridenDefaultButtonCount }}
-                                        <button class="button button-success" id="showLess">
-                                            <span class="ansBtn">{{_ "view.leaderboard.show_less"}}</span>
-                                            <span class="glyphicon glyphicon-menu-up glyph-right"></span>
-                                        </button>
-                                    {{else}}
-                                        <button class="button button-success" id="showMore">
-                                            <span class="ansBtn">{{_ "view.leaderboard.show_more" count=invisibleResponsesCount}}</span>
-                                            <span class="glyphicon glyphicon-menu-down glyph-right"></span>
-                                        </button>
-                                    {{/if}}
-                                </div>
-                            {{/if}}
-                        {{/unless}}
+                    {{#unless noLeaderBoardItems}}
+                        {{#if hasTooMuchButtons}}
+                            <div class="col-xs-6">
+                                {{#if hasOverridenDefaultButtonCount }}
+                                    <button class="button button-success" id="showLess">
+                                        <span class="ansBtn">{{_ "view.leaderboard.show_less"}}</span>
+                                        <span class="glyphicon glyphicon-menu-up glyph-right"></span>
+                                    </button>
+                                {{else}}
+                                    <button class="button button-success" id="showMore">
+                                        <span class="ansBtn">{{_ "view.leaderboard.show_more" count=invisibleResponsesCount}}</span>
+                                        <span class="glyphicon glyphicon-menu-down glyph-right"></span>
+                                    </button>
+                                {{/if}}
+                            </div>
+                        {{/if}}
+                    {{/unless}}
                 </div>
             </div>
         </div>

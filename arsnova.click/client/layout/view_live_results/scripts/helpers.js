@@ -207,7 +207,7 @@ Template.liveResults.helpers({
 			return;
 		}
 
-		return Session.get("sessionClosed") || EventManager.findOne().questionIndex >= questionDoc.questionList.length - 1;
+		return Session.get("sessionClosed") && questionDoc.questionList.length > 1 && EventManager.findOne().questionIndex >= questionDoc.questionList.length - 1;
 	},
 	hasCorrectAnswerOptions: ()=> {
 		return AnswerOptions.find({isCorrect: 1}).count() > 0;
@@ -217,49 +217,57 @@ Template.liveResults.helpers({
 			return;
 		}
 
-		return EventManager.findOne().questionIndex === EventManager.findOne().readingConfirmationIndex;
-	},
-	hasReadConfirmationRequested: (index)=> {
-		return index <= EventManager.findOne().questionIndex;
-	},
-	readingConfirmationListForQuestion: (index)=> {
-		let result = [];
-		let sortParamObj = Session.get('LearnerCountOverride') ? {lowerCaseNick: 1} : {insertDate: -1};
-		let ownNick = MemberList.findOne({nick: Session.get("nick")}, {limit: 1});
-		if (!Session.get("isOwner") && ownNick.readConfirmed[index]) {
-			result.push(ownNick);
+        return EventManager.findOne().questionIndex === EventManager.findOne().readingConfirmationIndex;
+    },
+	hasNextQuestion: ()=>{
+		var questionDoc = QuestionGroup.findOne();
+		if (!questionDoc) {
+			return;
 		}
-		MemberList.find({nick: {$ne: Session.get("nick")}}, {
-			sort: sortParamObj
-		}).forEach(function (doc) {
-			if (result.length < Session.get("LearnerCount") && doc.readConfirmed[index]) {
-				result.push(doc);
-			}
-		});
-		return result;
+
+		return EventManager.findOne().questionIndex < questionDoc.questionList.length - 1;
 	},
-	isOwnNick: (nick)=> {
-		return nick === Session.get("nick");
-	},
-	showMoreButton: function (index) {
-		var result = [];
-		MemberList.find().forEach(function (doc) {
-			if (doc.readConfirmed[index]) {
-				result.push(doc);
-			}
-		});
-		return ((result.length - Session.get("LearnerCount")) > 1);
-	},
-	invisibleLearnerCount: function (index) {
-		var result = [];
-		MemberList.find().forEach(function (doc) {
-			if (doc.readConfirmed[index]) {
-				result.push(doc);
-			}
-		});
-		return result.length - Session.get("LearnerCount");
-	},
-	getCSSClassForIsCorrect: checkIfIsCorrect
+    hasReadConfirmationRequested: (index)=> {
+        return index <= EventManager.findOne().questionIndex;
+    },
+    readingConfirmationListForQuestion: (index)=> {
+        let result = [];
+        let sortParamObj = Session.get('LearnerCountOverride') ? {lowerCaseNick: 1} : {insertDate: -1};
+        let ownNick = MemberList.findOne({nick: Session.get("nick")}, {limit: 1});
+        if (!Session.get("isOwner") && ownNick.readConfirmed[index]) {
+            result.push(ownNick);
+        }
+        MemberList.find({nick: {$ne: Session.get("nick")}}, {
+            sort: sortParamObj
+        }).forEach(function (doc) {
+            if (result.length < Session.get("LearnerCount") && doc.readConfirmed[index]) {
+                result.push(doc);
+            }
+        });
+        return result;
+    },
+    isOwnNick: (nick)=> {
+        return nick === Session.get("nick");
+    },
+    showMoreButton: function (index) {
+        var result = [];
+        MemberList.find().forEach(function (doc) {
+            if (doc.readConfirmed[index]) {
+                result.push(doc);
+            }
+        });
+        return ((result.length - Session.get("LearnerCount")) > 1);
+    },
+    invisibleLearnerCount: function (index) {
+        var result = [];
+        MemberList.find().forEach(function (doc) {
+            if (doc.readConfirmed[index]) {
+                result.push(doc);
+            }
+        });
+        return result.length - Session.get("LearnerCount");
+    },
+    getCSSClassForIsCorrect: checkIfIsCorrect
 });
 
 /*

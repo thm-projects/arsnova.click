@@ -159,18 +159,20 @@
                                             </button>
                                         {{/if}}
                                     {{else}}
-                                        {{#if showNextQuestionButton}}
-                                            <button class="button button-next button-start disableOnActiveCountdown" id="showNextQuestionDialog">
-                                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                                <span class="ansBtn">{{_ "view.liveResults.show_question"}} {{nextReadingConfirmationIndex}}
-                                                    / {{allQuestionCount}}</span>
-                                            </button>
-                                        {{else}}
-                                            <button class="button button-next button-start disableOnActiveCountdown" id="startNextQuestion">
-                                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                                <span class="ansBtn">{{_ "view.liveResults.start_round"}} {{nextQuestionIndex}}
-                                                    / {{allQuestionCount}}</span>
-                                            </button>
+                                        {{#if hasNextQuestion}}
+                                            {{#if showNextQuestionButton}}
+                                                <button class="button button-next button-start disableOnActiveCountdown" id="showNextQuestionDialog">
+                                                    <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                                    <span class="ansBtn">{{_ "view.liveResults.show_question"}} {{nextReadingConfirmationIndex}}
+                                                        / {{allQuestionCount}}</span>
+                                                </button>
+                                            {{else}}
+                                                <button class="button button-next button-start disableOnActiveCountdown" id="startNextQuestion">
+                                                    <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                                    <span class="ansBtn">{{_ "view.liveResults.start_round"}} {{nextQuestionIndex}}
+                                                        / {{allQuestionCount}}</span>
+                                                </button>
+                                            {{/if}}
                                         {{/if}}
                                     {{/if}}
                                 </div>

@@ -62,23 +62,23 @@
                             <span class="ansBtn">{{_ "global.back"}}</span>
                         </button>
                     </div>
-                    <div class="col-xs-6">
                         {{#unless noLeaderBoardItems}}
-                            {{#if showAllLeaderboard}}
-                                <button class="button button-success" id="showLess">
-                                    <span class="ansBtn">Zeige weniger</span>
-                                    <span class="glyphicon glyphicon-menu-up glyph-right"></span>
-                                </button>
-                            {{else}}
-                                {{#if hasTooMuchButtons}}
-                                    <button class="button button-success" id="showMore">
-                                        <span class="ansBtn">Zeige {{invisibleResponsesCount}} weitere</span>
-                                        <span class="glyphicon glyphicon-menu-down glyph-right"></span>
-                                    </button>
-                                {{/if}}
+                            {{#if hasTooMuchButtons}}
+                                <div class="col-xs-6">
+                                    {{#if hasOverridenDefaultButtonCount }}
+                                        <button class="button button-success" id="showLess">
+                                            <span class="ansBtn">Zeige weniger</span>
+                                            <span class="glyphicon glyphicon-menu-up glyph-right"></span>
+                                        </button>
+                                    {{else}}
+                                        <button class="button button-success" id="showMore">
+                                            <span class="ansBtn">Zeige {{invisibleResponsesCount}} weitere</span>
+                                            <span class="glyphicon glyphicon-menu-down glyph-right"></span>
+                                        </button>
+                                    {{/if}}
+                                </div>
                             {{/if}}
                         {{/unless}}
-                    </div>
                 </div>
             </div>
         </div>

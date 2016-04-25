@@ -49,13 +49,13 @@ Template.leaderBoard.helpers({
 		return seconds;
 	},
     invisibleResponsesCount: ()=> {
-        return maxResponseButtons - Session.get("allMembersCount");
+        return Session.get("allMembersCount") - Session.get("maxResponseButtons");
     },
-	showAllLeaderboard: ()=> {
-		return Session.get('show_all_leaderboard');
-	},
+    hasOverridenDefaultButtonCount: ()=> {
+        return Session.get('responsesCountOverride');
+    },
     hasTooMuchButtons: ()=> {
-        return Session.get("allMembersCount") - maxResponseButtons > 0;
+        return Session.get('responsesCountOverride') || (Session.get("allMembersCount") - Session.get("maxResponseButtons") > 0);
     },
 	noLeaderBoardItems: (index)=> {
 		var items = getLeaderBoardItems();

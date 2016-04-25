@@ -21,10 +21,8 @@ import {AnswerOptions} from '/lib/answeroptions.js';
 import {MemberList} from '/lib/memberlist.js';
 import {Responses} from '/lib/responses.js';
 
-export let maxResponseButtons = 0;
-
 export function setMaxResponseButtons(value) {
-    maxResponseButtons = value;
+    Session.set("maxResponseButtons", value);
 }
 
 export function calculateButtonCount (allMembersCount) {
@@ -109,7 +107,7 @@ function getLeaderBoardItemsByIndex(index) {
 
     Session.set("allMembersCount",allGoodMembers.length);
     calculateButtonCount (allGoodMembers.length);
-    return _.sortBy(allGoodMembers, 'responseTime').slice(0, maxResponseButtons);
+    return _.sortBy(allGoodMembers, 'responseTime').slice(0, Session.get("maxResponseButtons"));
 }
 
 export function getLeaderBoardItems () {

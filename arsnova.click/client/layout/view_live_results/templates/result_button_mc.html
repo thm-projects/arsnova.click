@@ -1,14 +1,17 @@
-<template name="result_button_mc">
-    <div class="row form-group button button-result resultButtonMCProgressRow">
-        <div class="col-xs-12 wrapper">
-            <div class="progress" id="mc_bar{{id}}" style="margin-right: 0;">
-                <div class="progress-bar {{getCSSClassForIsCorrect isCorrect}}"
+<template name="form_group">
+    <div class="row button button-result form-group formGroupProgressRow">
+        <div class="col-xs-12">
+            <div class="progress" id="mc_bar{{id}}">
+                <div class="progress-bar {{#if backgroundClass}}{{backgroundClass}}{{/if}}"
                      role="progressbar"
                      aria-valuemin="0"
                      aria-valuemax="100"
-                     style="width: {{percent}}%" >
+                     style="width: {{percent}}%; {{#if backgroundStyle}}background:{{backgroundStyle}};{{/if}}">
                 </div>
-                <div class="percentage"><p class="label">{{_ name}}:</p> <p class="values">{{absolute}} | {{percent}}%</p></div>
+                <div class="percentage">
+                    <p class="label">{{_ name}}</p>
+                    <p class="values">{{absolute}}{{#if base}} / {{base}}{{/if}} | {{percent}}%</p>
+                </div>
             </div>
         </div>
     </div>

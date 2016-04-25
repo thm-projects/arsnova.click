@@ -155,7 +155,8 @@
       "start_round": "Starte Runde",
       "confirm_read": "Ich habe die Frage gelesen",
       "game_over": "Game over",
-      "countdown": "Countdown"
+      "countdown": "Countdown",
+      "answer_option": "Antwort"
     },
     "lobby": {
       "title": "Quiz-Lobby",

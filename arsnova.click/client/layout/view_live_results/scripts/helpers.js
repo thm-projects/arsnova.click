@@ -1,5 +1,6 @@
 import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { EventManager } from '/lib/eventmanager.js';
 import { AnswerOptions } from '/lib/answeroptions.js';
 import { MemberList } from '/lib/memberlist.js';
@@ -154,7 +155,7 @@ Template.live_results.helpers({
                 answerOptionNumber: value.answerOptionNumber
             }).count();
             result.push({
-                name: String.fromCharCode(value.answerOptionNumber + 65),
+                name: TAPi18n.__("view.live_results.answer_option") + " " + String.fromCharCode(value.answerOptionNumber + 65),
                 absolute: amount,
                 percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
                 isCorrect: correctAnswerOptions ? value.isCorrect : -1,
@@ -240,9 +241,11 @@ Template.live_results.helpers({
             }
         });
         return result.length - Session.get("LearnerCount");
-    }
+    },
+    getCSSClassForIsCorrect: checkIfIsCorrect
 });
 
+/*
 Template.result_button.helpers({
     getCSSClassForIsCorrect: checkIfIsCorrect
 });
@@ -251,6 +254,7 @@ Template.result_button_mc.helpers({
     getCSSClassForIsCorrect: checkIfIsCorrect
 });
 
+*/
 Template.readingConfirmedLearner.helpers({
     isOwnNick: function (nickname) {
         return nickname === Session.get("nick");

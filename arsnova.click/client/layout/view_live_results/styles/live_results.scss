@@ -88,49 +88,38 @@
   transform: translate(-50%, -50%);
 }
 
-.readingConfirmationProgressRow {
-  padding: 0 10px;
-  margin: 0 0 10px;
-}
+.formGroupProgressRow {
+  margin-left: 0;
 
-.resultButtonMCProgressRow,
-.readingConfirmationProgressRow {
-  padding: 0 10px;
-  margin: 0 0 10px;
+  .progress {
+    margin: 10px 10px 10px 0;
+    height: 30px;
 
-  .wrapper {
-    display: inline-block;
-    padding: 0;
+    .percentage {
+      width: 100%;
 
-    .progress {
-      height: 30px;
+      .label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        float: left;
+        margin: 0;
+        line-height: 28px;
+        font-size: 1.4em;
+        font-weight: 800;
+        text-align: left;
+        display: block;
+        padding: 0;
+        border-radius: 0;
+        color: white;
+        vertical-align: middle;
+      }
 
-      .percentage {
-        width: 100%;
-
-        .label {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          float: left;
-          margin: 0;
-          line-height: 28px;
-          font-size: 1.4em;
-          font-weight: 800;
-          text-align: left;
-          display: block;
-          padding: 0;
-          border-radius: 0;
-          color: white;
-          vertical-align: middle;
-        }
-
-        .values {
-          float: right;
-          margin: 0;
-          line-height: 28px;
-          font-size: 17px;
-        }
+      .values {
+        float: right;
+        margin: 0;
+        line-height: 28px;
+        font-size: 17px;
       }
     }
   }

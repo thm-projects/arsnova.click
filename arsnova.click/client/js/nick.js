@@ -53,7 +53,7 @@ Template.nick.events({
         var currentNickName = event.currentTarget.value;
         var member = MemberList.findOne({nick: currentNickName});
 
-        if (currentNickName.length > 2 && !member) {
+        if (currentNickName.length > 2 && !member && isNickAllowed(currentNickName)) {
             $("#forwardButton").removeAttr("disabled");
         } else {
             $("#forwardButton").attr("disabled", "disabled");
@@ -70,6 +70,15 @@ Template.nick.events({
         }
     }
 });
+function isNickAllowed(nick){
+	var forbiddenNicks = ["asshat","arschloch","fart","dumpfbacke","pumukel","spaten"];
+	for(var i=0;i<forbiddenNicks.length;++i){
+		if(nick.toLowerCase() === forbiddenNicks[i]){
+			return false;
+		}
+	}
+	return true;
+}
 
 function hexToRgb (hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);

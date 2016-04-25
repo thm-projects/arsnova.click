@@ -64,7 +64,7 @@ Template.hashtag_view.events({
     "input #hashtag-input-field": function (event) {
         var inputHashtag = $(event.target).val();
         Session.set("hashtag",inputHashtag);
-        $("#addNewHashtag").html("Mach neu !<span class=\"glyphicon glyphicon-plus glyph-right\" aria-hidden=\"true\"></span>");
+        $("#addNewHashtag").html("Mach neu!<span class=\"glyphicon glyphicon-plus glyph-right\" aria-hidden=\"true\"></span>");
         if (inputHashtag.length === 0) {
             return;
         }
@@ -76,7 +76,7 @@ Template.hashtag_view.events({
         } else {
             var localHashtags = localData.getAllHashtags();
             if ($.inArray(inputHashtag, localHashtags) > -1) {
-                $("#addNewHashtag").html("Bearbeiten<span class=\"glyphicon glyphicon-pencil glyph-right\" aria-hidden=\"true\"></span>");
+                $("#addNewHashtag").html("Bearbeiten?<span class=\"glyphicon glyphicon-pencil glyph-right\" aria-hidden=\"true\"></span>");
                 $("#addNewHashtag").removeAttr("disabled");
             } else {
                 $("#addNewHashtag").attr("disabled", "disabled");

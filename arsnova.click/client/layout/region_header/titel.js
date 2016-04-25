@@ -17,7 +17,7 @@
  */
 
 import { Template } from 'meteor/templating';
-import * as lib from '/lib.js';
+import * as lib from './lib.js';
 
 Template.titel.onRendered(function () {
     $(window).resize(function () {

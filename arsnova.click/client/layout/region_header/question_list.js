@@ -6,7 +6,7 @@ import { EventManager } from '/lib/eventmanager.js';
 import { QuestionGroup } from '/lib/questions.js';
 import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/client/lib/local_storage.js';
-import * as lib from '/lib.js';
+import * as lib from './lib.js';
 
 var redirectTracker = null;
 

@@ -126,7 +126,9 @@ Template.questionList.events({
                     } else {
                         localData.removeQuestion(Session.get("hashtag"), id);
                         if (QuestionGroup.findOne().questionList.length === 0) {
-                            lib.addNewQuestion();
+                            lib.addNewQuestion(questionLib.checkForMarkdown);
+                        } else {
+                            questionLib.checkForMarkdown();
                         }
                     }
                 });
@@ -134,11 +136,10 @@ Template.questionList.events({
         });
     },
     'click #addQuestion': function () {
-        lib.addNewQuestion();
+        lib.addNewQuestion(questionLib.checkForMarkdown);
         setTimeout(()=> {
             let scrollPane = $(".questionScrollPane");
             scrollPane.scrollLeft(scrollPane.width());
         }, 200);
-
     }
 });

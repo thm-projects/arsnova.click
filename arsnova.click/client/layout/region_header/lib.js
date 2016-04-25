@@ -33,7 +33,7 @@ export function checkForValidQuestions(index) {
     return hasValidAnswers;
 }
 
-export function addNewQuestion(){
+export function addNewQuestion(callback){
     var index = QuestionGroup.findOne().questionList.length;
     Meteor.call("QuestionGroup.addQuestion", {
         privateKey: localData.getPrivateKey(),
@@ -64,6 +64,9 @@ export function addNewQuestion(){
 
             Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), index, function () {
                 Router.go("/question");
+                if (callback) {
+                    callback();
+                }
             });
         }
     });

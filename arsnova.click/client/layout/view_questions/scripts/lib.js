@@ -65,6 +65,8 @@ export function changePreviewButtonText(text) {
         $('#formatPreviewGlyphicon').removeClass("glyphicon-cog").addClass("glyphicon-phone");
         $('#markdownBarDiv').removeClass('hide');
         $('#questionText').removeClass('round-corners').addClass('round-corners-markdown');
+    } else {
+        $('#markdownBarDiv').addClass('hide');
     }
 }
 

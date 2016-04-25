@@ -29,3 +29,4 @@ standard-minifier-css
 standard-minifier-js
 tap:i18n
 tap:i18n-ui
+fastclick

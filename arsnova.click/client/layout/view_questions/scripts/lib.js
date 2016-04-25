@@ -66,7 +66,9 @@ export function changePreviewButtonText(text) {
         $('#markdownBarDiv').removeClass('hide');
         $('#questionText').removeClass('round-corners').addClass('round-corners-markdown');
     } else {
+        $('#formatPreviewGlyphicon').removeClass("glyphicon-phone").addClass("glyphicon-cog");
         $('#markdownBarDiv').addClass('hide');
+        $('#questionText').removeClass('round-corners-markdown').addClass('round-corners');
     }
 }
 

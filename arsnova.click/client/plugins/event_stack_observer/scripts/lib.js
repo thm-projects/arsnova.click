@@ -93,5 +93,5 @@ export class EventStackObserver {
 export let globalEventStackObserver = null;
 
 export function setGlobalEventStackObserver() {
-    globalEventStackObserver = new EventStackObserver({verbose: true});
+    globalEventStackObserver = new EventStackObserver({verbose: false});
 }

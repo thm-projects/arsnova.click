@@ -11,6 +11,7 @@
     "gulp": "^3.9.1",
     "gulp-jscs": "^3.0.2",
     "gulp-jshint": "^2.0.0",
+    "gulp-watch": "^4.3.5",
     "jshint-stylish": "^2.1.0"
   }
 }

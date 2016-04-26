@@ -16,9 +16,17 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+import { WebApp } from 'meteor/webapp';
+import { Hashtags } from '/lib/hashtags.js';
+
 if (Meteor.isServer) {
     Meteor.startup(function () {
-        if (!Hashtags.findOne()) {
+        WebApp.addHtmlAttributeHook(function() {
+            return { "lang": "de" };
+        });
+        if (Hashtags && !Hashtags.findOne()) {
 
             // block this hash / pk -> do not use and merge to production server!
             var blockedHashtag1 = {

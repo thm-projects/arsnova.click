@@ -16,7 +16,10 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Hashtags = new Mongo.Collection("hashtags");
+import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+export const Hashtags = new Mongo.Collection("hashtags");
 
 Hashtags.attachSchema(new SimpleSchema({
 	hashtag: {

@@ -7,6 +7,7 @@ jshint:
   tags:
     - nodejs
   allow_failure: true
+  dependencies: []
   script:
     - npm install jshint@^2.9.0
     - node_modules/jshint/bin/jshint --config .jshintrc $PROJECT_PATH/client/ $PROJECT_PATH/server/ $PROJECT_PATH/shared/
@@ -19,6 +20,7 @@ sonar:
   tags:
     - gradle
   allow_failure: true
+  dependencies: []
   script:
     - gradle sonarqube
 
@@ -30,27 +32,20 @@ build:
     - /^v[0-9]+/
   tags:
     - meteor
+  dependencies: []
   script:
     - test -d package-metadata && rm -rf /opt/meteor/package-metadata && mv package-metadata /opt/meteor/
-    - cd "$CI_PROJECT_DIR/$PROJECT_PATH"
+    - cd "$PROJECT_PATH"
     - printf "browser\nserver\n" > .meteor/platforms
     - meteor --verbose build --directory --server "$STAGING_HTTP_URL" build
+    - mv /opt/meteor/package-metadata "$CI_PROJECT_DIR/"
   cache:
     paths:
       - package-metadata
       - $PROJECT_PATH/.meteor/local
-
-release:
-  stage: deploy
-  only:
-    - /^v[0-9]+/
-  except:
-    - branches
-  script:
-    - echo Generating artifact for release $CI_BUILD_TAG
   artifacts:
     paths:
-      - build/bundle/
+      - $PROJECT_PATH/build/bundle/
 
 deploy_staging:
   stage: deploy
@@ -58,13 +53,14 @@ deploy_staging:
     - staging
   tags:
     - ssh
+  dependencies:
+    - build
   script:
-    - chmod -R a+rX,ug+w build
+    - chmod -R a+rX,ug+w "$PROJECT_PATH/build"
     - eval $(ssh-agent -s)
     - mkdir ~/.ssh && echo "$STAGING_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - ssh-add <(echo "$STAGING_SSH_PRIVATE_KEY")
-    - scp -r build/bundle/* "$STAGING_SSH_URL"
-    - mv /opt/meteor/package-metadata "$CI_PROJECT_DIR/"
+    - scp -r "$PROJECT_PATH/build/bundle/"* "$STAGING_SSH_URL"
 
 deploy_production:
   stage: deploy
@@ -72,13 +68,14 @@ deploy_production:
     - master
   tags:
     - ssh
+  dependencies:
+    - build
   script:
     - chmod -R a+rX,ug+w build
     - eval $(ssh-agent -s)
     - mkdir ~/.ssh && echo "$PRODUCTION_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - ssh-add <(echo "$PRODUCTION_SSH_PRIVATE_KEY")
-    - scp -r build/bundle/* "$PRODUCTION_SSH_URL"
-    - mv /opt/meteor/package-metadata "$CI_PROJECT_DIR/"
+    - scp -r "$PROJECT_PATH/build/bundle/"* "$PRODUCTION_SSH_URL"
 
 sync_mirror:
   stage: deploy
@@ -86,6 +83,7 @@ sync_mirror:
     - git
   when: always
   allow_failure: true
+  dependencies: []
   script:
     - git clone --bare "$CI_BUILD_REPO" mirror.git
     - cd mirror.git

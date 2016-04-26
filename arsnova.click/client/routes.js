@@ -16,6 +16,9 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Session } from 'meteor/session';
+import * as localData from '/client/lib/local_storage.js';
+
 Router.configure({
     layoutTemplate: 'layout'
 });
@@ -111,6 +114,10 @@ Router.route('/datenschutz', function () {
 
 Router.route('/impressum', function () {
     this.render('impressum');
+});
+
+Router.route('/translate', function () {
+    this.render('translate');
 });
 
 Router.onStop(function() {

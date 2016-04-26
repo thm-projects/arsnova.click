@@ -1,0 +1,118 @@
+/*
+ * This file is part of ARSnova Click.
+ * Copyright (C) 2016 The ARSnova Team
+ *
+ * ARSnova Click is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ARSnova Click is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
+ */
+@import "../../../layout/global/styles/colors";
+@import "../../../layout/global/styles/appearance";
+
+/*
+ * library splashscreen colors
+ */
+.splashscreen {
+  .modal-content {
+    background: $splashscreen-background-color;
+  }
+}
+
+.questionAndAnswerSplashscreen {
+  .modal-content {
+    background: $splashscreen-question-and-answer-background-color;
+  }
+}
+
+.errorSplashscreen {
+  .modal-content {
+    background: $splash-screen-error-message-background-color;
+  }
+}
+
+/*
+ * Splash screen button appearance
+ */
+.splash-button-error-message {
+  background-color: grey;
+  border-color: black;
+}
+
+/*
+ * Splash screen appearance
+ */
+.modal-content {
+  font-size: 20px;
+  color: black;
+  border-radius: $splash-screen-corner-radius;
+  box-shadow: none;
+
+  a, a:hover, a:active, a:visited, a:focus {
+    color: $background-color;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.modal-content-white-fonts {
+  font-size: 20px;
+  color: white;
+  text-align: left;
+  border-radius: $splash-screen-corner-radius;
+  box-shadow: none;
+}
+
+.h2-white-fonts {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.modal-list ul {
+  list-style: initial;
+  margin: auto;
+}
+
+.modal-center {
+  text-align: center;
+}
+
+.modal-body {
+  padding: 0 50px;
+  text-align: justify;
+  /* Currently not supported by Chrome and Opera! see http://caniuse.com/#feat=css-hyphens */
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+
+.modal-header {
+  border-bottom: none;
+  padding: 20px;
+  color: $splash-screen-header-color;
+}
+
+.modal-footer {
+  border-top: none;
+  padding: 20px;
+}
+
+.modal-backdrop {
+  background-color: $background-color;
+}
+
+.resizeableImage {
+  cursor: pointer;
+}

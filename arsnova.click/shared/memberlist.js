@@ -16,6 +16,12 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { EventManager } from '/lib/eventmanager.js';
+import { MemberList } from '/lib/memberlist.js';
+import { Hashtags } from '/lib/hashtags.js';
+
 Meteor.methods({
     'MemberList.addLearner': function ({hashtag, nick, backgroundColor, foregroundColor}) {
         new SimpleSchema({
@@ -33,7 +39,7 @@ Meteor.methods({
             throw new Meteor.Error('MemberList.addLearner', 'Nick already exists!');
         }
         if (EventManager.findOne({hashtag:hashtag}).sessionStatus !== 2) {
-            throw new Meteor.Error('MemberList.addLearner', 'Session is currently not available for joining');
+            throw new Meteor.Error('MemberList.addLearner', 'plugins.splashscreen.error.error_messages.session_not_available');
         }
         MemberList.insert({
             hashtag: hashtag,
@@ -59,7 +65,7 @@ Meteor.methods({
         });
 
         if( !Hashtags.findOne({privateKey: privateKey, hashtag: hashtag}) ) {
-            throw new Meteor.Error('MemberList.removeLearner', 'Either the hashtag isn\'t available or the key is wrong');
+            throw new Meteor.Error('MemberList.removeLearner', 'plugins.splashscreen.error.error_messages.not_authorized');
         }
 
         MemberList.remove({ hashtag: hashtag, _id: nick_id });
@@ -81,7 +87,7 @@ Meteor.methods({
         });
         var member = MemberList.findOne({hashtag: hashtag, nick: nick});
         if (!member) {
-            throw new Meteor.Error('MemberList.setReadConfirmed', 'Member not found!');
+            throw new Meteor.Error('MemberList.setReadConfirmed', 'plugins.splashscreen.error.error_messages.member_not_found');
         }
         member.readConfirmed[questionIndex] = 1;
         MemberList.update(member._id, { $set: {readConfirmed: member.readConfirmed} });
@@ -95,7 +101,7 @@ Meteor.methods({
             if (doc) {
                 MemberList.update({hashtag: hashtag}, { $set: {readConfirmed: []} });
             } else {
-                throw new Meteor.Error('MemberList.clearReadConfirmed', 'Either the hashtag isn\'t available or the key is wrong');
+                throw new Meteor.Error('MemberList.clearReadConfirmed', 'plugins.splashscreen.error.error_messages.not_authorized');
             }
         }
     },
@@ -108,7 +114,7 @@ Meteor.methods({
             if (doc) {
                 MemberList.remove({hashtag: hashtag});
             } else {
-                throw new Meteor.Error('MemberList.removeFromSession', 'Either the hashtag isn\'t available or the key is wrong');
+                throw new Meteor.Error('MemberList.removeFromSession', 'plugins.splashscreen.error.error_messages.not_authorized');
             }
         }
     }

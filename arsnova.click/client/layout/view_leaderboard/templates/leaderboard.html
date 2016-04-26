@@ -1,0 +1,85 @@
+<!--
+* This file is part of ARSnova Click.
+* Copyright (C) 2016 The ARSnova Team
+*
+* ARSnova Click is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* ARSnova Click is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<template name="leaderBoard">
+    {{> titel titelText = getTitleText}}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row distance-top">
+                <div class="row learner-list margin-title" id="learner-list">
+                    {{#if noLeaderBoardItems}}
+                        <div class="col-md-12">
+                            <h2 class="titel" style="font-weight: bold;">{{_ "view.leaderboard.no_attendee_correct"}}</h2>
+                        </div>
+                    {{ else }}
+                        {{#each leaderBoardItems}}
+                            {{#if isNumber index}}
+                                <div class="col-md-12">
+                                    <h3 class="titel-relative text-light">{{_ "view.leaderboard.question"}} {{getNormalizedIndex index}}:</h3>
+                                </div>
+                            {{/if}}
+                            {{#if noLeaderBoardItems index}}
+                                <div class="col-md-12">
+                                    <p class="titel" style="font-weight: bold;font-size: 2vw;">{{_ "view.leaderboard.no_attendee_correct"}}</p>
+                                </div>
+                            {{else}}
+                                {{#each value}}
+                                    <div class="col-md-6">
+                                        <button class="button button-leader">{{getPosition @index}}. {{nick}}
+                                            - {{parseTimeToSeconds responseTime}}s
+                                        </button>
+                                    </div>
+                                {{/each}}
+                            {{/if}}
+                        {{/each}}
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed-bottom">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="row distance-top">
+                    <div class="col-xs-6">
+                        <button class="button button-back" id="js-btn-backToResults">
+                            <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
+                            <span class="ansBtn">{{_ "global.back"}}</span>
+                        </button>
+                    </div>
+                    <div class="col-xs-6">
+                        {{#unless noLeaderBoardItems}}
+                            {{#if showAllLeaderboard}}
+                                <button class="button button-success" id="showLess">
+                                    <span class="ansBtn">Zeige weniger</span>
+                                    <span class="glyphicon glyphicon-menu-up glyph-right"></span>
+                                </button>
+                            {{else}}
+                                <button class="button button-success" id="showMore">
+                                    <span class="ansBtn">Zeige mehr</span>
+                                    <span class="glyphicon glyphicon-menu-down glyph-right"></span>
+                                </button>
+                            {{/if}}
+                        {{/unless}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

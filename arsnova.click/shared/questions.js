@@ -16,6 +16,12 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { QuestionGroup, QuestionGroupSchema } from '/lib/questions.js';
+import { Hashtags } from '/lib/hashtags.js';
+
 Meteor.methods({
     "QuestionGroup.insert": function ({privateKey, hashtag, questionList}) {
         if(Meteor.isServer) {
@@ -29,7 +35,7 @@ Meteor.methods({
                 privateKey: privateKey
             });
             if (!hashtagDoc) {
-                throw new Meteor.Error('QuestionGroup.insert', 'There is no quiz with this key');
+                throw new Meteor.Error('QuestionGroup.insert', 'plugins.splashscreen.error.error_messages.not_authorized');
             }
 
             if(QuestionGroup.find({hashtag: hashtag}).count() > 0) {
@@ -54,7 +60,7 @@ Meteor.methods({
                 privateKey: privateKey
             });
             if (!hashtagDoc) {
-                throw new Meteor.Error('QuestionGroup.addQuestion', 'There is no quiz with this key');
+                throw new Meteor.Error('QuestionGroup.addQuestion', 'plugins.splashscreen.error.error_messages.not_authorized');
             }
             var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
             var questionItem = {
@@ -73,11 +79,7 @@ Meteor.methods({
                 } else {
                     questionGroup.questionList.push(questionItem);
                 }
-                QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
-                    if (error) {
-                        throw new Meteor.Error('QuestionGroup.addQuestion', error);
-                    }
-                });
+                QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
             }
         }
     },
@@ -88,16 +90,12 @@ Meteor.methods({
                 privateKey: privateKey
             });
             if (!hashtagDoc) {
-                throw new Meteor.Error('QuestionGroup.removeQuestion', 'There is no quiz with this key');
+                throw new Meteor.Error('QuestionGroup.removeQuestion', 'plugins.splashscreen.error.error_messages.not_authorized');
             }
             var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
             if (questionGroup) {
                 questionGroup.questionList.splice(questionIndex, 1);
-                QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
-                    if (error) {
-                        throw new Meteor.Error('QuestionGroup.removeQuestion', error);
-                    }
-                });
+                QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
             }
         }
     },
@@ -119,19 +117,15 @@ Meteor.methods({
                 privateKey: privateKey
             });
             if (!hashtagDoc) {
-                throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'There is no quiz with this key');
+                throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'plugins.splashscreen.error.error_messages.not_authorized');
             }
 
             var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
             if (!questionGroup) {
-                throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'no access to session');
+                throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
             } else {
                 questionGroup.questionList[questionIndex].isReadingConfirmationRequired = isReadingConfirmationRequired;
-                QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
-                    if (error) {
-                        throw new Meteor.Error('Question.updateIsReadConfirmationRequired', error);
-                    }
-                });
+                QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
             }
         }
     },
@@ -149,19 +143,15 @@ Meteor.methods({
                 privateKey: privateKey
             });
             if (!hashtagDoc) {
-                throw new Meteor.Error('Question.setTimer', 'There is no quiz with this key');
+                throw new Meteor.Error('Question.setTimer', 'plugins.splashscreen.error.error_messages.not_authorized');
             }
 
             var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
             if (!questionGroup) {
-                throw new Meteor.Error('Question.setTimer', 'no access to session');
+                throw new Meteor.Error('Question.setTimer', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
             } else {
                 questionGroup.questionList[questionIndex].timer = timer;
-                QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
-                    if (error) {
-                        throw new Meteor.Error('Question.setTimer', error);
-                    }
-                });
+                QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
             }
         }
     },
@@ -174,18 +164,14 @@ Meteor.methods({
                 privateKey: privateKey
             });
             if (!hashtagDoc) {
-                throw new Meteor.Error('Question.startTimer', 'There is no quiz with this key');
+                throw new Meteor.Error('Question.startTimer', 'plugins.splashscreen.error.error_messages.not_authorized');
             }
             var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
             if (!questionGroup) {
-                throw new Meteor.Error('Question.startTimer: no access to session');
+                throw new Meteor.Error('Question.startTimer', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
             } else {
                 questionGroup.questionList[questionIndex].startTime = startTime.getTime();
-                QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}}, function (error) {
-                    if (error){
-                        throw new Meteor.Error('Question.startTimer', error);
-                    }
-                });
+                QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
             }
         }
     }

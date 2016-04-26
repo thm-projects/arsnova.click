@@ -16,15 +16,23 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { MemberList } from '/lib/memberlist.js';
+import { Responses } from '/lib/responses.js';
+import { QuestionGroup } from '/lib/questions.js';
+import { Hashtags } from '/lib/hashtags.js';
+
 Meteor.methods({
     'Hashtags.checkPrivateKey': function (privateKey, hashtag) {
         new SimpleSchema({
             hashtag: {type: String},
             privateKey: {type: String}
         }).validate({
-                privateKey,
-                hashtag
-            });
+            privateKey,
+            hashtag
+        });
         var doc = Hashtags.findOne({
             hashtag: hashtag,
             privateKey: privateKey
@@ -32,8 +40,8 @@ Meteor.methods({
         return Boolean(doc);
     },
     'Hashtags.addHashtag': function (doc) {
-        if (Hashtags.find({hashtag: doc.hashtag}).count() > 0){
-            throw new Meteor.Error('Hashtags.addHashtag', 'Session already exists!');
+        if (Hashtags.find({hashtag: doc.hashtag}).count() > 0) {
+            throw new Meteor.Error('Hashtags.addHashtag', 'plugins.splashscreen.error.error_messages.session_exists');
         }
 
         Hashtags.insert(doc);
@@ -50,7 +58,7 @@ Meteor.methods({
                 }
             });
             if (!hashtagDoc) {
-                throw new Meteor.Error('Hashtags.export', 'No such hashtag with the given key');
+                throw new Meteor.Error('Hashtags.export', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
             }
             var questionGroupDoc = QuestionGroup.findOne({hashtag: hashtag}, {
                 fields: {
@@ -87,34 +95,34 @@ Meteor.methods({
             var hashtag = data.hashtagDoc.hashtag;
             var oldDoc = Hashtags.findOne({hashtag: hashtag});
             if (oldDoc) {
-                throw new Meteor.Error('Hashtags.import', 'Dieser Hashtag ist bereits vorhanden');
+                throw new Meteor.Error('Hashtags.import', 'plugins.splashscreen.error.error_messages.hashtag_exists');
             }
-						var questionList = [];
+            var questionList = [];
             var hashtagDoc = data.hashtagDoc;
             hashtagDoc.privateKey = privateKey;
             delete hashtagDoc._id;
             Hashtags.insert(hashtagDoc);
-						for (var i = 0; i < data.sessionDoc.length; i++) {
-								var question = data.sessionDoc[i];
-								questionList.push({
-									questionText: question.questionText,
-									timer: question.timer
-								});
-								for (var j = 0; j < question.answers.length; j++) {
-										var answer = question.answers[j];
-										AnswerOptions.insert({
-												hashtag: hashtag,
-												questionIndex: i,
-												answerText: answer.answerText,
-												answerOptionNumber: answer.answerOptionNumber,
-												isCorrect: answer.isCorrect
-										});
-								}
-						}
-						QuestionGroup.insert({
-								hashtag: hashtag,
-								questionList: questionList
-						});
+            for (var i = 0; i < data.sessionDoc.length; i++) {
+                var question = data.sessionDoc[i];
+                questionList.push({
+                    questionText: question.questionText,
+                    timer: question.timer
+                });
+                for (var j = 0; j < question.answers.length; j++) {
+                    var answer = question.answers[j];
+                    AnswerOptions.insert({
+                        hashtag: hashtag,
+                        questionIndex: i,
+                        answerText: answer.answerText,
+                        answerOptionNumber: answer.answerOptionNumber,
+                        isCorrect: answer.isCorrect
+                    });
+                }
+            }
+            QuestionGroup.insert({
+                hashtag: hashtag,
+                questionList: questionList
+            });
         }
     }
 });

@@ -16,6 +16,15 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { EventManager } from '/lib/eventmanager.js';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { MemberList } from '/lib/memberlist.js';
+import { Responses } from '/lib/responses.js';
+import { QuestionGroup } from '/lib/questions.js';
+import { Hashtags } from '/lib/hashtags.js';
+
 Meteor.methods({
     'Main.killAll': function (privateKey, hashtag) {
         if (Meteor.isServer){
@@ -31,11 +40,12 @@ Meteor.methods({
                 privateKey: privateKey
             });
             if (doc) {
-                AnswerOptions.remove({hashtag: doc.hashtag});
-                MemberList.remove({hashtag: doc.hashtag});
-                Responses.remove({hashtag: doc.hashtag});
-                QuestionGroup.remove({hashtag: doc.hashtag});
-                EventManager.remove({hashtag: doc.hashtag});
+                Meteor.call('EventManager.reset', privateKey, doc.hashtag, function () {
+                    AnswerOptions.remove({hashtag: doc.hashtag});
+                    MemberList.remove({hashtag: doc.hashtag});
+                    Responses.remove({hashtag: doc.hashtag});
+                    QuestionGroup.remove({hashtag: doc.hashtag});
+                });
             }
         }
     },
@@ -43,7 +53,7 @@ Meteor.methods({
         if (Meteor.isServer) {
             var hashtagDoc = Hashtags.findOne({hashtag: hashtag, privateKey: privateKey});
             if (typeof hashtagDoc === "undefined") {
-                throw new Meteor.Error('Main.deleteEverything', 'Either the hashtag isn\'t available or the key is wrong');
+                throw new Meteor.Error('Main.deleteEverything', 'plugins.splashscreen.error.error_messages.not_authorized');
             }
             Hashtags.remove({hashtag: hashtag});
             AnswerOptions.remove({hashtag: hashtag});

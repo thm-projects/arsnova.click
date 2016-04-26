@@ -16,6 +16,11 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { Hashtags } from '/lib/hashtags.js';
+
 Meteor.publish('AnswerOptions.instructor', function(pprivateKey, phashtag) {
     new SimpleSchema({
         phashtag: {type: String},
@@ -35,11 +40,11 @@ Meteor.publish('AnswerOptions.options', function(phashtag) {
     return AnswerOptions.find({hashtag: phashtag});
 });
 
-Meteor.publish('AnswerOptions.public', function(hashtag, questionIndex) {
+Meteor.publish('AnswerOptions.public', function (hashtag) {
     new SimpleSchema({
         hashtag: {type: String}
     }).validate({hashtag});
-    return AnswerOptions.find({hashtag: hashtag, questionIndex: questionIndex}, {
+    return AnswerOptions.find({hashtag: hashtag}, {
         fields: {
             isCorrect: 0
         }

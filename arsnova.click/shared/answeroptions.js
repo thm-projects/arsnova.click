@@ -16,6 +16,11 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { AnswerOptions } from '/lib/answeroptions.js';
+import { Hashtags } from '/lib/hashtags.js';
+
 Meteor.methods({
     'AnswerOptions.addOption'({privateKey, hashtag, questionIndex, answerText, answerOptionNumber, isCorrect}) {
         new SimpleSchema({
@@ -34,10 +39,10 @@ Meteor.methods({
             });
         }
         if (!doc) {
-            throw new Meteor.Error('AnswerOptions.addOption', 'Either there is no quiz or you don\'t have write access');
+            throw new Meteor.Error('AnswerOptions.addOption', 'plugins.splashscreen.error.error_messages.not_authorized');
         }
         if (AnswerOptions.find({hashtag: hashtag, questionIndex: questionIndex}).count() > 25) {
-            throw new Meteor.Error('AnswerOptions.addOption', 'Maximum number of possible answer options exceeded');
+            throw new Meteor.Error('AnswerOptions.addOption', 'plugins.splashscreen.error.error_messages.maximum_answer_options_exceeded');
         }
         var answerOptionDoc = AnswerOptions.findOne({hashtag: hashtag, questionIndex: questionIndex, answerOptionNumber: answerOptionNumber});
         if (!answerOptionDoc) {
@@ -71,7 +76,7 @@ Meteor.methods({
                 privateKey: privateKey
             });
             if (!doc) {
-                throw new Meteor.Error('AnswerOptions.deleteOption', 'Either there is no quiz or you don\'t have write access');
+                throw new Meteor.Error('AnswerOptions.deleteOption', 'plugins.splashscreen.error.error_messages.not_authorized');
             }
             
             var query = {
@@ -109,7 +114,7 @@ Meteor.methods({
             });
         }
         if (!doc) {
-            throw new Meteor.Error('AnswerOptions.updateAnswerTextAndIsCorrect', 'Either there is no quiz or you don\'t have write access');
+            throw new Meteor.Error('AnswerOptions.updateAnswerTextAndIsCorrect', 'plugins.splashscreen.error.error_messages.not_authorized');
         }
         var answerOptionDoc = AnswerOptions.findOne({
             hashtag: hashtag,
@@ -119,8 +124,8 @@ Meteor.methods({
         AnswerOptions.update(answerOptionDoc._id, {
             $set: {answerText: answerText, isCorrect: isCorrect}
         });
-        if (Meteor.isClient){
-            localData.updateAnswerText({hashtag, questionIndex, answerOptionNumber, answerText, isCorrect});
-        }
+        return {
+            hashtag, questionIndex, answerOptionNumber, answerText, isCorrect
+        };
     }
 });

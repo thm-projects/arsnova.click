@@ -16,7 +16,10 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-MemberList = new Mongo.Collection("memberlist");
+import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+export const MemberList = new Mongo.Collection("memberlist");
 
 MemberList.attachSchema(new SimpleSchema({
     hashtag: {

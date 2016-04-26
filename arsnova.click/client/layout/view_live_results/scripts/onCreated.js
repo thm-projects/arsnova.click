@@ -39,8 +39,11 @@ Template.live_results.onCreated(function () {
     }
     Session.set("oldStartTimeValues", oldStartTimeValues);
 
-    globalEventStackObserver.onChange(function (key, value) {
-        if (key === "EventManager.setSessionStatus" || key === "EventManager.reset" && !isNaN(value.sessionStatus)) {
+    globalEventStackObserver.onChange([
+        "EventManager.setSessionStatus",
+        "EventManager.reset"
+    ], function (key, value) {
+        if (!isNaN(value.sessionStatus)) {
             if (value.sessionStatus === 2) {
                 $('.modal-backdrop').remove();
                 Router.go("/memberlist");
@@ -51,8 +54,8 @@ Template.live_results.onCreated(function () {
         }
     });
 
-    globalEventStackObserver.onChange(function (key, value) {
-        if (key === "EventManager.setActiveQuestion" && !isNaN(value.questionIndex) && value.questionIndex !== initQuestionIndex) {
+    globalEventStackObserver.onChange(["EventManager.setActiveQuestion"], function (key, value) {
+        if (!isNaN(value.questionIndex) && value.questionIndex !== initQuestionIndex) {
             if (Session.get("isOwner")) {
                 new Splashscreen({
                     autostart: true,
@@ -83,8 +86,8 @@ Template.live_results.onCreated(function () {
         }
     });
 
-    globalEventStackObserver.onChange(function (key, value) {
-        if (key === "EventManager.showReadConfirmedForIndex" && !isNaN(value.readingConfirmationIndex) && value.readingConfirmationIndex > -1) {
+    globalEventStackObserver.onChange(["EventManager.showReadConfirmedForIndex"], function (key, value) {
+        if (!isNaN(value.readingConfirmationIndex) && value.readingConfirmationIndex > -1) {
             var questionDoc = QuestionGroup.findOne();
             new Splashscreen({
                 autostart: true,

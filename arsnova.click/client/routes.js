@@ -94,8 +94,11 @@ Router.route('/settimer', function () {
 });
 
 Router.route('/memberlist', function () {
-    globalEventStackObserver.onChange(function (key, value) {
-        if (key === "EventManager.setSessionStatus" || key === "EventManager.reset" && !isNaN(value.sessionStatus)) {
+    globalEventStackObserver.onChange([
+        "EventManager.setSessionStatus",
+        "EventManager.reset"
+    ], function (key, value) {
+        if (!isNaN(value.sessionStatus)) {
             if (value.sessionStatus < 2) {
                 if (Session.get("isOwner")) {
                     Router.go("/settimer");

@@ -36,11 +36,13 @@ export class EventStackObserver {
                             console.log("EventStackObserver: ", item.key, item.value);
                             console.log("currently on route: "+Router.current().route.path(), "Number of callbacks: "+observerInstance.onChangeCallbacks[Router.current().route.path()].length, "callbacks: ",[observerInstance.onChangeCallbacks[Router.current().route.path()]]);
                         }
-                        observerInstance.onChangeCallbacks[Router.current().route.path()].forEach(function(callback) {
-                            if(observerInstance.verbose) {
-                                console.log("EventStackObserver: Calling callback ", [callback]);
+                        observerInstance.onChangeCallbacks[Router.current().route.path()].forEach(function (callbackObject) {
+                            if ($.inArray(item.key, callbackObject.limiter) > -1) {
+                                if (observerInstance.verbose) {
+                                    console.log("EventStackObserver: Event received ", item.key, " key map ", callbackObject.limiter, " Calling ", [callbackObject.callback]);
+                                }
+                                callbackObject.callback(item.key, item.value);
                             }
-                            callback(item.key, item.value);
                         });
                     }
                 }
@@ -63,7 +65,10 @@ export class EventStackObserver {
         return this.running;
     }
 
-    onChange(callback) {
+    onChange (limiter, callback) {
+        if (!(limiter instanceof Array)) {
+            throw new Error("Limiter must be an Array!");
+        }
         if(typeof callback !== 'function') {
             throw new Error("invalid callback!");
         }
@@ -71,13 +76,16 @@ export class EventStackObserver {
             this.onChangeCallbacks[Router.current().route.path()] = [];
         }
         let hasCallback = false;
-        this.onChangeCallbacks[Router.current().route.path()].forEach(function(compareCallback) {
-            if(callback.toString() === compareCallback.toString()) {
+        this.onChangeCallbacks[Router.current().route.path()].forEach(function (callbackObject) {
+            if (callback.toString() === callbackObject.callback.toString()) {
                 hasCallback = true;
             }
         });
         if(!hasCallback) {
-            this.onChangeCallbacks[Router.current().route.path()].push(callback);
+            this.onChangeCallbacks[Router.current().route.path()].push({
+                limiter,
+                callback
+            });
         }
     }
 }
@@ -85,5 +93,5 @@ export class EventStackObserver {
 export let globalEventStackObserver = null;
 
 export function setGlobalEventStackObserver() {
-    globalEventStackObserver = new EventStackObserver({verbose: false});
+    globalEventStackObserver = new EventStackObserver({verbose: true});
 }

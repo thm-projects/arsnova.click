@@ -22,7 +22,7 @@ import {QuestionGroup} from '/lib/questions.js';
 import {Hashtags} from '/lib/hashtags.js';
 
 Meteor.methods({
-	'Responses.addResponse'(responseDoc) {
+	'Responses.addResponse': function (responseDoc) {
 		var timestamp = new Date().getTime();
 		var hashtag = responseDoc.hashtag;
 		if (Meteor.isServer) {

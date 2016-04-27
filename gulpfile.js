@@ -23,7 +23,7 @@ var stylish = require('jshint-stylish');
 
 var paths = [
 	'./arsnova.click/{lib,server,shared}/**/*.js',
-	'./arsnova.click/client/{layout,lib,plugins}/**/*.js',
+	'./arsnova.click/client/{layout,plugins}/**/*.js',
 	'./arsnova.click/client/routes.js'
 ];
 

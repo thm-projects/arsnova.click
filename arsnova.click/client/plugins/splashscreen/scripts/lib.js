@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Blaze } from 'meteor/blaze';
-import { Template } from 'meteor/templating';
-import { TAPi18n } from 'meteor/tap:i18n';
+import {Blaze} from 'meteor/blaze';
+import {Template} from 'meteor/templating';
+import {TAPi18n} from 'meteor/tap:i18n';
 
 /**
  * This class will construct an empty splashscreen which can be modified via JQuery.
@@ -42,19 +42,19 @@ import { TAPi18n } from 'meteor/tap:i18n';
  */
 export class Splashscreen {
 	/**
-     * Constructs and returns a new instance of Splashscreen
-     *
-     * @param options Must be an object with optional parameters
-     */
-	constructor(options) {
+	 * Constructs and returns a new instance of Splashscreen
+	 *
+	 * @param options Must be an object with optional parameters
+	 */
+	constructor (options) {
 		this.options = {
-			autostart:      options.autostart       || false,
-			templateName:   options.templateName    || "splashscreen",
-			instanceId:     options.instanceId      || 0,
-			closeOnButton:  options.closeOnButton   || false,
-			onCreated:      options.onCreated       || undefined,
-			onDestroyed:    options.onDestroyed     || undefined,
-			onRendered:     options.onRendered      || undefined
+			autostart: options.autostart || false,
+			templateName: options.templateName || "splashscreen",
+			instanceId: options.instanceId || 0,
+			closeOnButton: options.closeOnButton || false,
+			onCreated: options.onCreated || undefined,
+			onDestroyed: options.onDestroyed || undefined,
+			onRendered: options.onRendered || undefined
 		};
 		this.templateInstance = null;
 		this.templateSelector = null;
@@ -65,24 +65,24 @@ export class Splashscreen {
 	}
 
 	/**
-     * This method will be called after the options have been parsed by the constructor
-     * If a callback to options.onCreated has been specified this method will run the callback
-     */
-	created() {
+	 * This method will be called after the options have been parsed by the constructor
+	 * If a callback to options.onCreated has been specified this method will run the callback
+	 */
+	created () {
 		if (typeof this.options.onCreated === "function") {
 			this.options.onCreated(this);
 		}
 	}
 
 	/**
-     * This method will be called after the created method
-     * If a callback to options.onRendered has been specified this method will run the callback
-     */
-	rendered() {
+	 * This method will be called after the created method
+	 * If a callback to options.onRendered has been specified this method will run the callback
+	 */
+	rendered () {
 		let template = Template[this.options.templateName];
 		if (template) {
 			this.templateInstance = Blaze.render(Template[this.options.templateName], document.body);
-			$(this.templateInstance.firstNode()).addClass(this.options.templateName).attr("id",this.options.templateName + "_" + this.options.instanceId);
+			$(this.templateInstance.firstNode()).addClass(this.options.templateName).attr("id", this.options.templateName + "_" + this.options.instanceId);
 		} else {
 			throw new Error('Invalid template name');
 		}
@@ -101,10 +101,10 @@ export class Splashscreen {
 	}
 
 	/**
-     * This method must be called manually
-     * If a callback to options.onDestroyed has been specified this method will run the callback
-     */
-	destroy() {
+	 * This method must be called manually
+	 * If a callback to options.onDestroyed has been specified this method will run the callback
+	 */
+	destroy () {
 		if (!this.templateInstance) {
 			return;
 		}
@@ -118,9 +118,9 @@ export class Splashscreen {
 	}
 
 	/**
-     * A call of this method will close (hide) the splashscreen
-     */
-	close() {
+	 * A call of this method will close (hide) the splashscreen
+	 */
+	close () {
 		if (this.options.closeOnButton) {
 			this.templateSelector.off('hide.bs.modal').off('click', this.options.closeOnButton);
 		}
@@ -130,25 +130,25 @@ export class Splashscreen {
 	}
 
 	/**
-     * A call of this method will show (display) the splashscreen
-     */
-	open() {
+	 * A call of this method will show (display) the splashscreen
+	 */
+	open () {
 		let self = this;
 		if (this.options.closeOnButton) {
 			let hasClickedOnCloseButton = false;
-			this.templateSelector.on('hide.bs.modal',function (event) {
-							if (!hasClickedOnCloseButton) {
-								event.stopPropagation();
-								event.preventDefault();
-							}
-						}).on('click', this.options.closeOnButton, function () {
-							hasClickedOnCloseButton = true;
-							self.close();
-						});
+			this.templateSelector.on('hide.bs.modal', function (event) {
+				if (!hasClickedOnCloseButton) {
+					event.stopPropagation();
+					event.preventDefault();
+				}
+			}).on('click', this.options.closeOnButton, function () {
+				hasClickedOnCloseButton = true;
+				self.close();
+			});
 		} else {
-			this.templateSelector.on('hide.bs.modal',function () {
-							self.destroy();
-						});
+			this.templateSelector.on('hide.bs.modal', function () {
+				self.destroy();
+			});
 		}
 
 		this.templateSelector.modal("show");
@@ -158,11 +158,11 @@ export class Splashscreen {
 
 
 class ErrorSplashscreen extends Splashscreen {
-	constructor(options) {
+	constructor (options) {
 		super(options);
 	}
 
-	setErrorText(text) {
+	setErrorText (text) {
 		if (this.isRendered) {
 			$(this.templateSelector).find(".modal-body").text(text);
 		} else {
@@ -175,8 +175,8 @@ export let splashscreenError = null;
 
 export function setErrorSplashscreen() {
 	splashscreenError = new ErrorSplashscreen({
-					autostart: false,
-					templateName: "errorSplashscreen",
-					closeOnButton: "#js-btn-hideErrorMessageModal"
-				});
+		autostart: false,
+		templateName: "errorSplashscreen",
+		closeOnButton: "#js-btn-hideErrorMessageModal"
+	});
 }

@@ -21,7 +21,7 @@ import { AnswerOptions } from '/lib/answeroptions.js';
 import { Hashtags } from '/lib/hashtags.js';
 
 Meteor.methods({
-	'AnswerOptions.addOption'({privateKey, hashtag, questionIndex, answerText, answerOptionNumber, isCorrect}) {
+	'AnswerOptions.addOption': function ({privateKey, hashtag, questionIndex, answerText, answerOptionNumber, isCorrect}) {
 		new SimpleSchema({
 			privateKey: {type: String},
 			hashtag: {type: String},
@@ -60,7 +60,7 @@ Meteor.methods({
 				}
 			});
 		}},
-	'AnswerOptions.deleteOption'({privateKey, hashtag, questionIndex, answerOptionNumber}) {
+	'AnswerOptions.deleteOption': function ({privateKey, hashtag, questionIndex, answerOptionNumber}) {
 		if (Meteor.isServer) {
 			new SimpleSchema({
 				privateKey: {type: String},
@@ -95,7 +95,7 @@ Meteor.methods({
 			}
 		}
 	},
-	'AnswerOptions.updateAnswerTextAndIsCorrect'({privateKey, hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}) {
+	'AnswerOptions.updateAnswerTextAndIsCorrect': function ({privateKey, hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}) {
 		new SimpleSchema({
 			privateKey: {type: String},
 			hashtag: {type: String},

@@ -15,18 +15,18 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Template } from 'meteor/templating';
-import { EventManager } from '/lib/eventmanager.js';
-import { AnswerOptions } from '/lib/answeroptions.js';
+import {Template} from 'meteor/templating';
+import {EventManager} from '/lib/eventmanager.js';
+import {AnswerOptions} from '/lib/answeroptions.js';
 
 Template.createAnswerOptions.helpers({
-    answerOptions: function () {
-        return AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}, {sort: {answerOptionNumber: 1}});
-    },
-    answerOptionLetter: function (Nr) {
-        return String.fromCharCode(Nr + 65);
-    },
-    showDeleteButtonOnStart: function () {
-        return (AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count() === 1) ? "hide" : "";
-    }
+	answerOptions: function () {
+		return AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}, {sort: {answerOptionNumber: 1}});
+	},
+	answerOptionLetter: function (Nr) {
+		return String.fromCharCode(Nr + 65);
+	},
+	showDeleteButtonOnStart: function () {
+		return (AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count() === 1) ? "hide" : "";
+	}
 });

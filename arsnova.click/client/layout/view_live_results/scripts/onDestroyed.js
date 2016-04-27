@@ -15,20 +15,20 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Session } from 'meteor/session';
-import { Template } from 'meteor/templating';
-import { countdown, routeToLeaderboardTimer, readingConfirmationTracker } from './lib.js';
+import {Session} from 'meteor/session';
+import {Template} from 'meteor/templating';
+import {countdown, routeToLeaderboardTimer, readingConfirmationTracker} from './lib.js';
 
-Template.live_results.onDestroyed(function () {
-    Session.set("countdownInitialized", undefined);
-    Session.set("sessionCountDown", undefined);
-    if (countdown) {
-        countdown.stop();
-    }
-    if (routeToLeaderboardTimer) {
-        clearTimeout(routeToLeaderboardTimer);
-    }
-    if (readingConfirmationTracker) {
-        readingConfirmationTracker.stop();
-    }
+Template.liveResults.onDestroyed(function () {
+	Session.set("countdownInitialized", undefined);
+	Session.set("sessionCountDown", undefined);
+	if (countdown) {
+		countdown.stop();
+	}
+	if (routeToLeaderboardTimer) {
+		clearTimeout(routeToLeaderboardTimer);
+	}
+	if (readingConfirmationTracker) {
+		readingConfirmationTracker.stop();
+	}
 });

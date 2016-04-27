@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Template } from 'meteor/templating';
+import {Template} from 'meteor/templating';
 
 Template.nick.onRendered(function () {
-    $("#forwardButton").attr("disabled", "disabled");
+	$("#forwardButton").attr("disabled", "disabled");
 
-    if ($(window).width() >= 992) {
-        $('#nickname-input-field').focus();
-    }
+	if ($(window).width() >= 992) {
+		$('#nickname-input-field').focus();
+	}
 });

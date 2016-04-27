@@ -15,41 +15,41 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Template } from 'meteor/templating';
-import { Tracker } from 'meteor/tracker';
-import { EventManager } from '/lib/eventmanager.js';
-import { QuestionGroup } from '/lib/questions.js';
+import {Template} from 'meteor/templating';
+import {Tracker} from 'meteor/tracker';
+import {EventManager} from '/lib/eventmanager.js';
+import {QuestionGroup} from '/lib/questions.js';
 import * as lib from './lib.js';
 
 Template.createAnswerOptions.onRendered(function () {
-    var calculateHeight = function calculateHeight() {
-        var answer_options_height = $(".container").height() - $(".row-landingpage-buttons").outerHeight(true) - $(".titel-relative").outerHeight(true);
-        $('.answer-options').css("height", answer_options_height);
-    };
-    $(window).resize(calculateHeight);
-    calculateHeight();
+	var calculateHeight = function calculateHeight() {
+		var answerOptionsHeight = $(".container").height() - $(".row-landingpage-buttons").outerHeight(true) - $(".titel-relative").outerHeight(true);
+		$('.answer-options').css("height", answerOptionsHeight);
+	};
+	$(window).resize(calculateHeight);
+	calculateHeight();
 
-    let index;
-    lib.subscriptionHandler = Tracker.autorun(()=> {
-        if (this.subscriptionsReady()) {
-            index = EventManager.findOne().questionIndex;
-        }
-    });
-    var body = $('body');
-    body.on('click', '.questionIcon:not(.active)', function () {
-        var currentSession = QuestionGroup.findOne();
-        if (!currentSession || index >= currentSession.questionList.length) {
-            return;
-        }
+	let index;
+	lib.subscriptionHandler = Tracker.autorun(()=> {
+		if (this.subscriptionsReady()) {
+			index = EventManager.findOne().questionIndex;
+		}
+	});
+	var body = $('body');
+	body.on('click', '.questionIcon:not(.active)', function () {
+		var currentSession = QuestionGroup.findOne();
+		if (!currentSession || index >= currentSession.questionList.length) {
+			return;
+		}
 
-        lib.parseAnswerOptionInput(index);
-        Router.go("/question");
-    });
-    body.on('click', '.removeQuestion', function () {
-        index = EventManager.findOne().questionIndex;
-    });
+		lib.parseAnswerOptionInput(index);
+		Router.go("/question");
+	});
+	body.on('click', '.removeQuestion', function () {
+		index = EventManager.findOne().questionIndex;
+	});
 
-    if ($(window).width() >= 992) {
-        $('#answerOptionText_Number0').focus();
-    }
+	if ($(window).width() >= 992) {
+		$('#answerOptionText_Number0').focus();
+	}
 });

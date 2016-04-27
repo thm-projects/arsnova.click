@@ -15,17 +15,17 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Template } from 'meteor/templating';
+import {Template} from 'meteor/templating';
 import * as localData from '/client/lib/local_storage.js';
 
 Template.hashtagManagement.helpers({
-    serverHashtags: function () {
-        return localData.getAllHashtags();
-    }
+	serverHashtags: function () {
+		return localData.getAllHashtags();
+	}
 });
 
 Template.showHashtagsSplashscreen.helpers({
-    hashtags: function () {
-        return localData.getAllHashtags();
-    }
+	hashtags: function () {
+		return localData.getAllHashtags();
+	}
 });

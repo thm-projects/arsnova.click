@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Template } from 'meteor/templating';
-import { memberlistObserver } from './lib.js';
+import {Template} from 'meteor/templating';
+import {memberlistObserver} from './lib.js';
 
 Template.memberlist.onDestroyed(function () {
-    if(memberlistObserver) {
-        memberlistObserver.stop();
-    }
+	if (memberlistObserver) {
+		memberlistObserver.stop();
+	}
 });

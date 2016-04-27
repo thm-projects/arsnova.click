@@ -78,7 +78,7 @@ Router.route('/votingview', function () {
 
 Router.route('/onpolling', function () {
 	if (Session.get("isOwner")) {
-		this.render('live_results');
+		this.render('liveResults');
 	} else {
 		$('.modal-backdrop').hide();
 		this.render('votingview');
@@ -86,7 +86,7 @@ Router.route('/onpolling', function () {
 });
 
 Router.route('/results', function () {
-	this.render('live_results');
+	this.render('liveResults');
 });
 
 Router.route('/statistics', function () {

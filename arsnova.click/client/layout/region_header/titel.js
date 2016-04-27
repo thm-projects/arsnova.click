@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Template } from 'meteor/templating';
+import {Template} from 'meteor/templating';
 import * as lib from './lib.js';
 
 Template.titel.onRendered(function () {
-    $(window).resize(function () {
-        lib.calculateTitelHeight();
-    });
-    lib.calculateTitelHeight();
+	$(window).resize(function () {
+		lib.calculateTitelHeight();
+	});
+	lib.calculateTitelHeight();
 });

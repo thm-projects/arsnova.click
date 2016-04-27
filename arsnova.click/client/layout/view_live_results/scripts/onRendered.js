@@ -15,23 +15,23 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Meteor } from 'meteor/meteor';
-import { Session } from 'meteor/session';
-import { Template } from 'meteor/templating';
-import { EventManager } from '/lib/eventmanager.js';
+import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
+import {Template} from 'meteor/templating';
+import {EventManager} from '/lib/eventmanager.js';
 import * as localData from '/client/lib/local_storage.js';
 import {startReadingConfirmationTracker, calculateButtonCount} from './lib.js';
 
-Template.live_results.onRendered(()=> {
-    startReadingConfirmationTracker();
+Template.liveResults.onRendered(()=> {
+	startReadingConfirmationTracker();
 
-    if (Session.get("isOwner") && EventManager.findOne() && EventManager.findOne().readingConfirmationIndex === -1) {
-        Meteor.call("EventManager.showReadConfirmedForIndex", localData.getPrivateKey(), Session.get("hashtag"), 0);
-    }
-    Session.set("LearnerCountOverride", false);
-    calculateButtonCount();
+	if (Session.get("isOwner") && EventManager.findOne() && EventManager.findOne().readingConfirmationIndex === -1) {
+		Meteor.call("EventManager.showReadConfirmedForIndex", localData.getPrivateKey(), Session.get("hashtag"), 0);
+	}
+	Session.set("LearnerCountOverride", false);
+	calculateButtonCount();
 });
 
 Template.readingConfirmedLearner.onRendered(function () {
-    calculateButtonCount();
+	calculateButtonCount();
 });

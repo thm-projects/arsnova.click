@@ -15,24 +15,23 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Meteor } from 'meteor/meteor';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { EventManager } from '/lib/eventmanager.js';
+import {Meteor} from 'meteor/meteor';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {EventManager} from '/lib/eventmanager.js';
 
 Meteor.publish('EventManager.join', (hashtag)=> {
-    if(typeof hashtag === "undefined") {
-        return false;
-    }
-    if (Meteor.isServer) {
-
-        new SimpleSchema({
-            hashtag: {
-                type: String,
-                min: 1,
-                max: 25
-            }
-        }).validate({hashtag: hashtag});
-        return EventManager.find({hashtag: hashtag});
-    }
-    return false;
+	if (typeof hashtag === "undefined") {
+		return false;
+	}
+	if (Meteor.isServer) {
+		new SimpleSchema({
+			hashtag: {
+				type: String,
+				min: 1,
+				max: 25
+			}
+		}).validate({hashtag: hashtag});
+		return EventManager.find({hashtag: hashtag});
+	}
+	return false;
 });

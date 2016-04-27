@@ -21,7 +21,11 @@ var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
 var stylish = require('jshint-stylish');
 
-var paths = './arsnova.click/{client,lib,server,shared}/**/*.js';
+var paths = [
+	'./arsnova.click/{lib,server,shared}/**/*.js',
+	'./arsnova.click/client/{layout,lib,plugins}/**/*.js',
+	'./arsnova.click/client/routes.js'
+];
 
 gulp.task('default', ['codeCheck']);
 

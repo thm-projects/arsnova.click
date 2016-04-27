@@ -13,71 +13,80 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Meteor } from 'meteor/meteor';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { AnswerOptions } from '/lib/answeroptions.js';
-import { Responses } from '/lib/responses.js';
-import { LeaderBoard } from '/lib/leaderBoard.js';
+import {Meteor} from 'meteor/meteor';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {AnswerOptions} from '/lib/answeroptions.js';
+import {Responses} from '/lib/responses.js';
+import {LeaderBoard} from '/lib/leaderBoard.js';
 
 Meteor.methods({
-    'LeaderBoard.addResponseSet': function ({phashtag, questionIndex, nick, responseTimeMillis}) {
-        if (Meteor.isServer){
-            new SimpleSchema({
-                phashtag: {type: String},
-                questionIndex: {type: Number},
-                nick: {type: String},
-                responseTimeMillis: {type: Number}
-            }).validate({
-                phashtag,
-                questionIndex,
-                nick,
-                responseTimeMillis
-            });
+	'LeaderBoard.addResponseSet': function ({phashtag, questionIndex, nick, responseTimeMillis}) {
+		if (Meteor.isServer) {
+			new SimpleSchema({
+				phashtag: {type: String},
+				questionIndex: {type: Number},
+				nick: {type: String},
+				responseTimeMillis: {type: Number}
+			}).validate({
+				phashtag,
+				questionIndex,
+				nick,
+				responseTimeMillis
+			});
 
-            const correctAnswers = [];
+			const correctAnswers = [];
 
-            AnswerOptions.find({
-                hashtag: phashtag,
-                questionIndex: questionIndex,
-                isCorrect: 1
-            }, {fields: {"answerOptionNumber": 1}}).forEach(function (answer) {
-                correctAnswers.push(answer.answerOptionNumber);
-            });
+			AnswerOptions.find({
+				hashtag: phashtag,
+				questionIndex: questionIndex,
+				isCorrect: 1
+			}, {fields: {"answerOptionNumber": 1}}).forEach(function (answer) {
+				correctAnswers.push(answer.answerOptionNumber);
+			});
 
-            var responseAmount = 0;
-            var falseResponseAmount = 0;
+			var responseAmount = 0;
+			var falseResponseAmount = 0;
 
-            Responses.find({hashtag: phashtag, questionIndex: questionIndex, userNick: nick}).forEach(function (response) {
-                if (correctAnswers.indexOf(response.answerOptionNumber) === -1){
-                    falseResponseAmount++;
-                }
-                responseAmount++;
-            });
+			Responses.find({
+				hashtag: phashtag,
+				questionIndex: questionIndex,
+				userNick: nick
+			}).forEach(function (response) {
+				if (correctAnswers.indexOf(response.answerOptionNumber) === -1) {
+					falseResponseAmount++;
+				}
+				responseAmount++;
+			});
 
-            var rightResponseAmount = responseAmount-falseResponseAmount;
+			var rightResponseAmount = responseAmount - falseResponseAmount;
 
-            var memberEntry = LeaderBoard.findOne({
-                hashtag: phashtag,
-                questionIndex: questionIndex,
-                userNick: nick
-            });
+			var memberEntry = LeaderBoard.findOne({
+				hashtag: phashtag,
+				questionIndex: questionIndex,
+				userNick: nick
+			});
 
-            if (!memberEntry) {
-                LeaderBoard.insert({
-                    hashtag: phashtag,
-                    questionIndex: questionIndex,
-                    userNick: nick,
-                    responseTimeMillis: responseTimeMillis,
-                    givenAnswers: responseAmount,
-                    rightAnswers: rightResponseAmount,
-                    wrongAnswers: falseResponseAmount
-                });
-            } else {
-                LeaderBoard.update(memberEntry._id, {$set: {givenAnswers: responseAmount, rightAnswers: rightResponseAmount, wrongAnswers: falseResponseAmount}});
-            }
-        }
-    }
+			if (!memberEntry) {
+				LeaderBoard.insert({
+					hashtag: phashtag,
+					questionIndex: questionIndex,
+					userNick: nick,
+					responseTimeMillis: responseTimeMillis,
+					givenAnswers: responseAmount,
+					rightAnswers: rightResponseAmount,
+					wrongAnswers: falseResponseAmount
+				});
+			} else {
+				LeaderBoard.update(memberEntry._id, {
+					$set: {
+						givenAnswers: responseAmount,
+						rightAnswers: rightResponseAmount,
+						wrongAnswers: falseResponseAmount
+					}
+				});
+			}
+		}
+	}
 });

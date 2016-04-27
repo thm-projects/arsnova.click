@@ -44,5 +44,6 @@
     "beforeOpeningCurlyBrace": true
   },
   "validateIndentation": "\t",
-  "validateLineBreaks": "LF"
+  "validateLineBreaks": "LF",
+	"maxErrors": Infinity
 }

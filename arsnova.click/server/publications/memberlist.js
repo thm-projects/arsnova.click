@@ -13,30 +13,29 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Meteor } from 'meteor/meteor';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { MemberList } from '/lib/memberlist.js';
-import { Hashtags } from '/lib/hashtags.js';
+import {Meteor} from 'meteor/meteor';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {MemberList} from '/lib/memberlist.js';
+import {Hashtags} from '/lib/hashtags.js';
 
-Meteor.publish('MemberList.members', function(phashtag) {
-    new SimpleSchema({
-        phashtag: {type: String}
-    }).validate({phashtag});
-    return MemberList.find({
-        hashtag: phashtag
-    });
+Meteor.publish('MemberList.members', function (phashtag) {
+	new SimpleSchema({
+		phashtag: {type: String}
+	}).validate({phashtag});
+	return MemberList.find({
+		hashtag: phashtag
+	});
 });
 
-Meteor.publish('MemberList.percentRead', function(phashtag, pprivateKey) {
-    new SimpleSchema({
-        phashtag: {type: String},
-        pprivateKey: {type:String}
-    }).validate({phashtag, pprivateKey});
-    const exists = Hashtags.findOne({hashtag:phashtag, privateKey:pprivateKey});
-    if(exists) {
-        return MemberList.find({hashtag:phashtag});
-    }
+Meteor.publish('MemberList.percentRead', function (phashtag, pprivateKey) {
+	new SimpleSchema({
+		phashtag: {type: String},
+		pprivateKey: {type: String}
+	}).validate({phashtag, pprivateKey});
+	const exists = Hashtags.findOne({hashtag: phashtag, privateKey: pprivateKey});
+	if (exists) {
+		return MemberList.find({hashtag: phashtag});
+	}
 });

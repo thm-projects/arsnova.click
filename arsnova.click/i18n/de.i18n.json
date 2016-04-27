@@ -141,7 +141,7 @@
       "no_attendee_correct": "Leider hat kein Teilnehmer richtig abgestimmt!",
       "question": "Frage"
     },
-    "live_results": {
+    "liveResults": {
       "question": "Frage",
       "ranking": "Rangliste",
       "reading_confirmation": "Lesebestätigung",

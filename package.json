@@ -1,0 +1,18 @@
+{
+  "name": "arsnova.click",
+  "description": "arsnova.click is a little bit Kahoot! and a little bit ARSnova.",
+	"license": "GNU General Public License version 3",
+  "url": "http://arsnova.click/",
+  "author": "tekay",
+  "repository": {
+    "type": "git",
+    "url": "git@git.thm.de:arsnova/arsnova.click.git"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jscs": "^3.0.2",
+    "gulp-jshint": "^2.0.0",
+    "gulp-watch": "^4.3.5",
+    "jshint-stylish": "^2.1.0"
+  }
+}

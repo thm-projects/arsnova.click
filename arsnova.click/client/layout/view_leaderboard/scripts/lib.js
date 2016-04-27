@@ -21,6 +21,9 @@ import {AnswerOptions} from '/lib/answeroptions.js';
 import {MemberList} from '/lib/memberlist.js';
 import {Responses} from '/lib/responses.js';
 
+import { Meteor as libMeteor } from 'meteor/meteor';
+Meteor = libMeteor;
+
 export function setMaxResponseButtons(value) {
     Session.set("maxResponseButtons", value);
 }
@@ -57,7 +60,7 @@ export function calculateButtonCount (allMembersCount) {
      Multiply the displayed elements by 2 if on widescreen and reduce the max output of buttons by 1 row for the display
      more button if necessary. Also make sure there is at least one row of buttons shown even if the user has to scroll
      */
-    var limitModifier = viewport.outerWidth() >= 768 ? 2 : 1;
+    var limitModifier = viewport.outerWidth() >= 992 ? 2 : 1;
 
     queryLimiter *= limitModifier;
     if (queryLimiter <= 0) {

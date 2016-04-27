@@ -21,6 +21,16 @@ export function transformForegroundColor (rgbObj) {
     return o < 125 ? "#ffffff" : "#000000";
 }
 
+export function isNickAllowed(nick){
+    var forbiddenNicks=["ass","asshat","fart","motherfucker","pumukel","arsch","spaten"];
+    for(var i=0;i<forbiddenNicks.length;++i){
+	if(nick.toLowerCase()===forbiddenNicks[i]){
+	    return false;
+	}
+    }
+return true;
+}
+
 /**
  * Returns a random integer between min (inclusive) and max (inclusive)
  * Using Math.round() will give you a non-uniform distribution!

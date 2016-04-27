@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 var gulp = require('gulp'),
-		watch = require ('gulp-watch');
+	watch = require('gulp-watch');
 var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
 var stylish = require('jshint-stylish');
@@ -36,13 +36,13 @@ gulp.task('codeCheck', function () {
 });
 
 gulp.task('lint', function () {
-  return gulp.src(paths)
-    .pipe(jshint())
-    .pipe(jshint.reporter(stylish));
+	return gulp.src(paths)
+		.pipe(jshint())
+		.pipe(jshint.reporter(stylish));
 });
 
 gulp.task('jscs', function () {
 	return gulp.src(paths)
-        .pipe(jscs())
-        .pipe(jscs.reporter());
+		.pipe(jscs())
+		.pipe(jscs.reporter());
 });

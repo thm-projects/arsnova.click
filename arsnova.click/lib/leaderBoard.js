@@ -15,25 +15,25 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Mongo } from 'meteor/mongo';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import {Mongo} from 'meteor/mongo';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
 export const LeaderBoard = new Mongo.Collection("leaderBoard");
 
 LeaderBoard.attachSchema(new SimpleSchema({
 	hashtag: {
-		type:String,
-		min:1,
-		max:25
+		type: String,
+		min: 1,
+		max: 25
 	},
 	questionIndex: {
 		type: Number,
 		min: 0
 	},
 	userNick: {
-		type:String,
-		min:3,
-		max:25
+		type: String,
+		min: 3,
+		max: 25
 	},
 	responseTimeMillis: {
 		type: Number,

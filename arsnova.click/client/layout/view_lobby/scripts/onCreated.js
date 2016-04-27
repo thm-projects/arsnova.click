@@ -19,18 +19,16 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {EventManager} from '/lib/eventmanager.js';
 import {QuestionGroup} from '/lib/questions.js';
 import * as localData from '/client/lib/local_storage.js';
 import {splashscreenError} from '/client/plugins/splashscreen/scripts/lib.js';
-import {globalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
 import {calculateButtonCount, setMemberlistObserver} from './lib.js';
 
 Template.memberlist.onCreated(function () {
 	var oldStartTimeValues = {};
 
-    this.subscribe('EventManager.join', Session.get("hashtag"));
-    this.subscribe('MemberList.members', Session.get("hashtag"), function () {
+	this.subscribe('EventManager.join', Session.get("hashtag"));
+	this.subscribe('MemberList.members', Session.get("hashtag"), function () {
 		$(window).resize(function () {
 			var finalHeight = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
 			$(".container").css("height", finalHeight + "px");

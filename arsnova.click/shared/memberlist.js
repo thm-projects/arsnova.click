@@ -49,7 +49,7 @@ Meteor.methods({
 			readConfirmed: [],
 			insertDate: new Date().getTime()
 		});
-		EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "MemberList.addLearner", value: {user: nick}}}});
+		EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "MemberList.addLearner", value: {user: nick}}}});
 	},
 	'MemberList.removeLearner': function (privateKey, hashtag, nickId) {
 		if (Meteor.isClient) {
@@ -69,7 +69,7 @@ Meteor.methods({
 		}
 
 		MemberList.remove({hashtag: hashtag, _id: nickId});
-		EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "MemberList.removeLearner", value: {user: nickId}}}});
+		EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "MemberList.removeLearner", value: {user: nickId}}}});
 	},
 	'MemberList.setReadConfirmed': function ({hashtag, questionIndex, nick}) {
 		/*
@@ -92,7 +92,7 @@ Meteor.methods({
 		}
 		member.readConfirmed[questionIndex] = 1;
 		MemberList.update(member._id, {$set: {readConfirmed: member.readConfirmed}});
-		EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "MemberList.setReadConfirmed", value: {user: nick, questionIndex: questionIndex}}}});
+		EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "MemberList.setReadConfirmed", value: {user: nick, questionIndex: questionIndex}}}});
 	},
 	'MemberList.clearReadConfirmed': function (privateKey, hashtag) {
 		if (Meteor.isServer) {
@@ -106,8 +106,8 @@ Meteor.methods({
 				throw new Meteor.Error('MemberList.clearReadConfirmed', 'plugins.splashscreen.error.error_messages.not_authorized');
 			}
 		} else {
-			MemberList.update({hashtag: hashtag}, { $set: {readConfirmed: []} });
-			EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "MemberList.clearReadConfirmed", value: {}}}});
+			MemberList.update({hashtag: hashtag}, {$set: {readConfirmed: []}});
+			EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "MemberList.clearReadConfirmed", value: {}}}});
 		}
 	},
 	'MemberList.removeFromSession': function (privateKey, hashtag) {
@@ -118,7 +118,7 @@ Meteor.methods({
 			});
 			if (doc) {
 				MemberList.remove({hashtag: hashtag});
-				EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "MemberList.removeFromSession", value: {}}}});
+				EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "MemberList.removeFromSession", value: {}}}});
 			} else {
 				throw new Meteor.Error('MemberList.removeFromSession', 'plugins.splashscreen.error.error_messages.not_authorized');
 			}

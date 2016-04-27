@@ -19,15 +19,14 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {Hashtags} from '/lib/hashtags.js';
 import * as localData from '/client/lib/local_storage.js';
 import {buzzsound1, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib";
 
 
 Template.header.onCreated(function () {
-    Session.setDefault("slider2", 80);
-    Session.setDefault("globalVolume", 80);
+	Session.setDefault("slider2", 80);
+	Session.setDefault("globalVolume", 80);
 
 	setBuzzsound1('waity.mp3');
 });

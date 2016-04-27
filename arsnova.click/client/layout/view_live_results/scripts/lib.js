@@ -17,28 +17,18 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
-import {Tracker} from 'meteor/tracker';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManager} from '/lib/eventmanager.js';
 import {AnswerOptions} from '/lib/answeroptions.js';
 import {MemberList} from '/lib/memberlist.js';
 import {QuestionGroup} from '/lib/questions.js';
 import * as localData from '/client/lib/local_storage.js';
-import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
-import {splashscreenError, Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {buzzsound1} from '/client/plugins/sound/scripts/lib.js';
 
 export let countdown = null;
 export let routeToLeaderboardTimer = null;
-export let eventManagerObserver = null;
-export let readingConfirmationTracker = null;
 
 export function deleteCountdown() {
 	countdown = null;
-}
-
-export function setEventManagerObserver(observer) {
-	eventManagerObserver = observer;
 }
 
 /**
@@ -153,10 +143,6 @@ export function startCountdown(index) {
 	});
 	Session.set("countdownInitialized", true);
 	$('.disableOnActiveCountdown').attr("disabled", "disabled");
-}
-
-export function startReadingConfirmationTracker () {
-    
 }
 
 /**

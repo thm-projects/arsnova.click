@@ -23,103 +23,103 @@ import {EventManager} from '/lib/eventmanager.js';
 import {AnswerOptions} from '/lib/answeroptions.js';
 import {QuestionGroup} from '/lib/questions.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
-import {Splashscreen, splashscreen_error} from '/client/plugins/splashscreen/scripts/lib.js';
+import {Splashscreen, splashscreenError} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
 import {deleteCountdown} from './lib.js';
 
-Template.live_results.onCreated(function () {
-    var oldStartTimeValues = {};
-    var initQuestionIndex = -1;
-    deleteCountdown();
+Template.liveResults.onCreated(function () {
+	var oldStartTimeValues = {};
+	var initQuestionIndex = -1;
+	deleteCountdown();
 
-    var doc = QuestionGroup.findOne();
-    var i = 0;
-    for (i; i < doc.questionList.length; i++) {
-        oldStartTimeValues[i] = doc.questionList[i].startTime;
-    }
-    Session.set("oldStartTimeValues", oldStartTimeValues);
+	var doc = QuestionGroup.findOne();
+	var i = 0;
+	for (i; i < doc.questionList.length; i++) {
+		oldStartTimeValues[i] = doc.questionList[i].startTime;
+	}
+	Session.set("oldStartTimeValues", oldStartTimeValues);
 
-    globalEventStackObserver.onChange([
-        "EventManager.setSessionStatus",
-        "EventManager.reset"
-    ], function (key, value) {
-        if (!isNaN(value.sessionStatus)) {
-            if (value.sessionStatus === 2) {
-                $('.modal-backdrop').remove();
-                Router.go("/memberlist");
-            } else if (value.sessionStatus < 2) {
-                $('.modal-backdrop').remove();
-                Router.go("/resetToHome");
-            }
-        }
-    });
+	globalEventStackObserver.onChange([
+		"EventManager.setSessionStatus",
+		"EventManager.reset"
+	], function (key, value) {
+		if (!isNaN(value.sessionStatus)) {
+			if (value.sessionStatus === 2) {
+				$('.modal-backdrop').remove();
+				Router.go("/memberlist");
+			} else if (value.sessionStatus < 2) {
+				$('.modal-backdrop').remove();
+				Router.go("/resetToHome");
+			}
+		}
+	});
 
-    globalEventStackObserver.onChange(["EventManager.setActiveQuestion"], function (key, value) {
-        if (!isNaN(value.questionIndex) && value.questionIndex !== initQuestionIndex) {
-            if (Session.get("isOwner")) {
-                new Splashscreen({
-                    autostart: true,
-                    instanceId: "answers_"+EventManager.findOne().questionIndex,
-                    templateName: 'questionAndAnswerSplashscreen',
-                    closeOnButton: '#js-btn-hideQuestionModal',
-                    onRendered: function (instance) {
-                        var content = "";
-                        mathjaxMarkdown.initializeMarkdownAndLatex();
-                        AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
-                            if (!answerOption.answerText) {
-                                answerOption.answerText = "";
-                            }
+	globalEventStackObserver.onChange(["EventManager.setActiveQuestion"], function (key, value) {
+		if (!isNaN(value.questionIndex) && value.questionIndex !== initQuestionIndex) {
+			if (Session.get("isOwner")) {
+				new Splashscreen({
+					autostart: true,
+					instanceId: "answers_" + EventManager.findOne().questionIndex,
+					templateName: 'questionAndAnswerSplashscreen',
+					closeOnButton: '#js-btn-hideQuestionModal',
+					onRendered: function (instance) {
+						var content = "";
+						mathjaxMarkdown.initializeMarkdownAndLatex();
+						AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
+							if (!answerOption.answerText) {
+								answerOption.answerText = "";
+							}
 
-                            content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
-                            content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
-                        });
+							content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+							content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+						});
 
-                        instance.templateSelector.find('#answerContent').html(content);
-                        setTimeout(function () {
-                            instance.close();
-                        }, 10000);
-                    }
-                });
-            } else {
-                Router.go("/onpolling");
-            }
-        }
-    });
+						instance.templateSelector.find('#answerContent').html(content);
+						setTimeout(function () {
+							instance.close();
+						}, 10000);
+					}
+				});
+			} else {
+				Router.go("/onpolling");
+			}
+		}
+	});
 
-    globalEventStackObserver.onChange(["EventManager.showReadConfirmedForIndex"], function (key, value) {
-        if (!isNaN(value.readingConfirmationIndex) && value.readingConfirmationIndex > -1) {
-            var questionDoc = QuestionGroup.findOne();
-            new Splashscreen({
-                autostart: true,
-                templateName: 'readingConfirmedSplashscreen',
-                closeOnButton: '#setReadConfirmed',
-                onRendered: function (instance) {
-                    var content = "";
-                    if (questionDoc) {
-                        mathjaxMarkdown.initializeMarkdownAndLatex();
-                        var questionText = questionDoc.questionList[EventManager.findOne().readingConfirmationIndex].questionText;
-                        content = mathjaxMarkdown.getContent(questionText);
-                    }
-                    instance.templateSelector.find('#questionContent').html(content);
+	globalEventStackObserver.onChange(["EventManager.showReadConfirmedForIndex"], function (key, value) {
+		if (!isNaN(value.readingConfirmationIndex) && value.readingConfirmationIndex > -1) {
+			var questionDoc = QuestionGroup.findOne();
+			new Splashscreen({
+				autostart: true,
+				templateName: 'readingConfirmedSplashscreen',
+				closeOnButton: '#setReadConfirmed',
+				onRendered: function (instance) {
+					var content = "";
+					if (questionDoc) {
+						mathjaxMarkdown.initializeMarkdownAndLatex();
+						var questionText = questionDoc.questionList[EventManager.findOne().readingConfirmationIndex].questionText;
+						content = mathjaxMarkdown.getContent(questionText);
+					}
+					instance.templateSelector.find('#questionContent').html(content);
 
-                    if ( Session.get("isOwner") ) {
-                        instance.templateSelector.find('#setReadConfirmed').text(TAPi18n.__("global.close_window"));
-                    } else {
-                        instance.templateSelector.find('#setReadConfirmed').parent().on('click', '#setReadConfirmed', function () {
-                            Meteor.call("MemberList.setReadConfirmed", {
-                                hashtag: Session.get("hashtag"),
-                                questionIndex: EventManager.findOne().readingConfirmationIndex,
-                                nick: Session.get("nick")
-                            }, (err)=> {
-                                if (err) {
-                                    splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
-                                    splashscreen_error.open();
-                                }
-                            });
-                        });
-                    }
-                }
-            });
-        }
-    });
+					if (Session.get("isOwner")) {
+						instance.templateSelector.find('#setReadConfirmed').text(TAPi18n.__("global.close_window"));
+					} else {
+						instance.templateSelector.find('#setReadConfirmed').parent().on('click', '#setReadConfirmed', function () {
+							Meteor.call("MemberList.setReadConfirmed", {
+								hashtag: Session.get("hashtag"),
+								questionIndex: EventManager.findOne().readingConfirmationIndex,
+								nick: Session.get("nick")
+							}, (err)=> {
+								if (err) {
+									splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason));
+									splashscreenError.open();
+								}
+							});
+						});
+					}
+				}
+			});
+		}
+	});
 });

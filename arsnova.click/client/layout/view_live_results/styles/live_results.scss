@@ -24,7 +24,7 @@
 
 .readingConfirmedSplashscreen {
   .modal-content {
-    background: $splashscreen-reading-confirmed-background-color;
+	background: $splashscreen-reading-confirmed-background-color;
   }
 }
 
@@ -93,49 +93,49 @@
   margin: 0 0 5px;
 
   .progress {
-    margin: 10px 0;
-    height: 30px;
+	margin: 10px 0;
+	height: 30px;
 
-    .percentage {
-      width: 100%;
+	.percentage {
+	  width: 100%;
 
-      .label {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        float: left;
-        margin: 0;
-        line-height: 28px;
-        font-size: 1.4em;
-        font-weight: 800;
-        text-align: left;
-        display: block;
-        padding: 0;
-        border-radius: 0;
-        color: white;
-        vertical-align: middle;
-      }
+	  .label {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		float: left;
+		margin: 0;
+		line-height: 28px;
+		font-size: 1.4em;
+		font-weight: 800;
+		text-align: left;
+		display: block;
+		padding: 0;
+		border-radius: 0;
+		color: white;
+		vertical-align: middle;
+	  }
 
-      .values {
-        float: right;
-        line-height: 28px;
-        font-size: 17px;
-        display: inline-flex;
+	  .values {
+		float: right;
+		line-height: 28px;
+		font-size: 17px;
+		display: inline-flex;
 
-        p {
-          margin: 1px 0 0;
+		p {
+		  margin: 1px 0 0;
 
-          &.absolute {
-            margin-right: 10px;
-          }
-          &.percent {
-            margin-left: 10px;
-            width: 50px;
-            text-align: right;
-          }
-        }
-      }
-    }
+		  &.absolute {
+			margin-right: 10px;
+		  }
+		  &.percent {
+			margin-left: 10px;
+			width: 50px;
+			text-align: right;
+		  }
+		}
+	  }
+	}
   }
 }
 

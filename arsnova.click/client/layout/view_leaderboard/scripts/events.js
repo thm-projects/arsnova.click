@@ -19,13 +19,13 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 
 Template.leaderBoard.events({
-    'click #showMore': ()=> {
-        Session.set('responsesCountOverride', true);
-    },
-    'click #showLess': ()=> {
-        Session.set('responsesCountOverride', false);
-    },
-    'click #js-btn-backToResults': ()=> {
-        Router.go('/results');
-    }
+	'click #showMore': ()=> {
+		Session.set('responsesCountOverride', true);
+	},
+	'click #showLess': ()=> {
+		Session.set('responsesCountOverride', false);
+	},
+	'click #js-btn-backToResults': ()=> {
+		Router.go('/results');
+	}
 });

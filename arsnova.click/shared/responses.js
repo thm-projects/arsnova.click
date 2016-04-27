@@ -74,7 +74,7 @@ Meteor.methods({
 				} else {
 					throw new Meteor.Error('Responses.addResponse', 'plugins.splashscreen.error.error_messages.response_timeout');
 				}
-				EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "Responses.addResponse", value: {questionIndex: responseDoc.questionIndex, answerOptionNumber: responseDoc.answerOptionNumber, userNick: responseDoc.userNick}}}});
+				EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "Responses.addResponse", value: {questionIndex: responseDoc.questionIndex, answerOptionNumber: responseDoc.answerOptionNumber, userNick: responseDoc.userNick}}}});
 			}
 		}
 	},
@@ -89,7 +89,7 @@ Meteor.methods({
 			}
 
 			Responses.remove({hashtag: hashtag});
-			EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "Responses.clearAll", value: {}}}});
+			EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "Responses.clearAll", value: {}}}});
 		}
 	}
 });

@@ -17,18 +17,18 @@
 
 <template name="nick">
 
-    {{> titel titelText = "view.choose_nickname.enter_nickname"}}
-    <div class="row center-vertical">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-12">
-                    <input type="text"
-                           class="round-corners input-field"
-                           id="nickname-input-field" placeholder="{{_ "view.choose_nickname.enter_nickname_here"}}"
-                           aria-describedby="basic-addon1">
-                </div>
-            </div>
-        </div>
-    </div>
-    {{> footer_nav_buttons backId="backButton" forwardId="forwardButton"}}
+	{{> titel titelText = "view.choose_nickname.enter_nickname"}}
+	<div class="row center-vertical">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-12">
+					<input type="text"
+						   class="round-corners input-field"
+						   id="nickname-input-field" placeholder="{{_ "view.choose_nickname.enter_nickname_here"}}"
+						   aria-describedby="basic-addon1">
+				</div>
+			</div>
+		</div>
+	</div>
+	{{> footer_nav_buttons backId="backButton" forwardId="forwardButton"}}
 </template>

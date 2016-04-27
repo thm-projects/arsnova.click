@@ -88,7 +88,7 @@ Meteor.methods({
 					}
 				});
 			}
-			EventManager.update({hashtag: phashtag}, { $push: {eventStack: {key: "LeaderBoard.addResponseSet", value: {nick: nick, questionIndex: questionIndex}}}});
+			EventManager.update({hashtag: phashtag}, {$push: {eventStack: {key: "LeaderBoard.addResponseSet", value: {nick: nick, questionIndex: questionIndex}}}});
 		}
 	}
 });

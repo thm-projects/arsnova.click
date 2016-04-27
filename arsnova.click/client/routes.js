@@ -17,28 +17,27 @@
 
 import {Session} from 'meteor/session';
 import {Meteor} from 'meteor/meteor';
-import {Session} from 'meteor/session';
 import {EventManager} from '/lib/eventmanager.js';
 import * as localData from '/client/lib/local_storage.js';
-import { globalEventStackObserver, setGlobalEventStackObserver } from '/client/plugins/event_stack_observer/scripts/lib.js';
+import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
 
 Router.configure({
 	layoutTemplate: 'layout'
 });
 
 Router.onBeforeAction(function () {
-    if( !globalEventStackObserver || !globalEventStackObserver.isRunning()) {
-        if(Router.current().route.path() !== "/") {
-            Meteor.subscribe('EventManager.join', Session.get("hashtag"), ()=>{
-                if(!EventManager.findOne(Session.get("hashtag"))) {
-                    Meteor.call('EventManager.add', localData.getPrivateKey(), Session.get("hashtag"), function () {
-                        globalEventStackObserver.start(Session.get("hashtag"));
-                    });
-                }
-            });
-        }
-    }
-    this.next();
+	if (!globalEventStackObserver || !globalEventStackObserver.isRunning()) {
+		if (Router.current().route.path() !== "/") {
+			Meteor.subscribe('EventManager.join', Session.get("hashtag"), ()=> {
+				if (!EventManager.findOne(Session.get("hashtag"))) {
+					Meteor.call('EventManager.add', localData.getPrivateKey(), Session.get("hashtag"), function () {
+						globalEventStackObserver.start(Session.get("hashtag"));
+					});
+				}
+			});
+		}
+	}
+	this.next();
 });
 
 Router.route('/', function () {
@@ -52,7 +51,7 @@ Router.route('/', function () {
 	Session.set("isOwner", undefined);
 	Session.set("hashtag", undefined);
 	Session.set("slider", undefined);
-    setGlobalEventStackObserver();
+	setGlobalEventStackObserver();
 	this.render('home');
 });
 
@@ -69,16 +68,16 @@ Router.route('/nick', function () {
 });
 
 Router.route('/question', function () {
-    if (Session.get("isOwner")) {
-        Meteor.subscribe('EventManager.join', Session.get("hashtag"), ()=>{
-            if(!EventManager.findOne(Session.get("hashtag"))) {
-                Meteor.call('EventManager.setActiveQuestion', localData.getPrivateKey(), Session.get("hashtag"), 0);
-            }
-        });
-        this.render('createQuestionView');
-    } else {
-        Router.go("/");
-    }
+	if (Session.get("isOwner")) {
+		Meteor.subscribe('EventManager.join', Session.get("hashtag"), ()=> {
+			if (!EventManager.findOne(Session.get("hashtag"))) {
+				Meteor.call('EventManager.setActiveQuestion', localData.getPrivateKey(), Session.get("hashtag"), 0);
+			}
+		});
+		this.render('createQuestionView');
+	} else {
+		Router.go("/");
+	}
 });
 
 Router.route('/answeroptions', function () {
@@ -94,23 +93,23 @@ Router.route('/settimer', function () {
 });
 
 Router.route('/memberlist', function () {
-    globalEventStackObserver.onChange([
-        "EventManager.setSessionStatus",
-        "EventManager.reset"
-    ], function (key, value) {
-        if (!isNaN(value.sessionStatus)) {
-            if (value.sessionStatus < 2) {
-                if (Session.get("isOwner")) {
-                    Router.go("/settimer");
-                } else {
-                    Router.go("/resetToHome");
-                }
-            } else if (value.sessionStatus === 3) {
-                Router.go("/results");
-            }
-        }
-    });
-    this.render('memberlist');
+	globalEventStackObserver.onChange([
+		"EventManager.setSessionStatus",
+		"EventManager.reset"
+	], function (key, value) {
+		if (!isNaN(value.sessionStatus)) {
+			if (value.sessionStatus < 2) {
+				if (Session.get("isOwner")) {
+					Router.go("/settimer");
+				} else {
+					Router.go("/resetToHome");
+				}
+			} else if (value.sessionStatus === 3) {
+				Router.go("/results");
+			}
+		}
+	});
+	this.render('memberlist');
 });
 
 Router.route('/votingview', function () {
@@ -119,41 +118,41 @@ Router.route('/votingview', function () {
 
 
 Router.route('/onpolling', {
-    waitOn: function () {
-        return [
-            Meteor.subscribe('QuestionGroup.questionList', Session.get("hashtag")),
-            Meteor.subscribe('EventManager.join', Session.get("hashtag")),
-            Meteor.subscribe('Responses.session', Session.get("hashtag")),
-            Meteor.subscribe('AnswerOptions.options', Session.get("hashtag")),
-            Meteor.subscribe('MemberList.members', Session.get("hashtag")),
-            Meteor.subscribe('Hashtags.public')
-        ];
-    },
+	waitOn: function () {
+		return [
+			Meteor.subscribe('QuestionGroup.questionList', Session.get("hashtag")),
+			Meteor.subscribe('EventManager.join', Session.get("hashtag")),
+			Meteor.subscribe('Responses.session', Session.get("hashtag")),
+			Meteor.subscribe('AnswerOptions.options', Session.get("hashtag")),
+			Meteor.subscribe('MemberList.members', Session.get("hashtag")),
+			Meteor.subscribe('Hashtags.public')
+		];
+	},
 
-    action: function () {
-        if (Session.get("isOwner")) {
-            this.render('live_results');
-        } else {
-            $('.modal-backdrop').hide();
-            this.render('votingview');
-        }
-    }
+	action: function () {
+		if (Session.get("isOwner")) {
+			this.render('live_results');
+		} else {
+			$('.modal-backdrop').hide();
+			this.render('votingview');
+		}
+	}
 });
 Router.route('/results', {
-    waitOn: function () {
-        return [
-            Meteor.subscribe('QuestionGroup.questionList', Session.get("hashtag")),
-            Meteor.subscribe('EventManager.join', Session.get("hashtag")),
-            Meteor.subscribe('Responses.session', Session.get("hashtag")),
-            Meteor.subscribe('AnswerOptions.options', Session.get("hashtag")),
-            Meteor.subscribe('MemberList.members', Session.get("hashtag")),
-            Meteor.subscribe('Hashtags.public')
-        ];
-    },
+	waitOn: function () {
+		return [
+			Meteor.subscribe('QuestionGroup.questionList', Session.get("hashtag")),
+			Meteor.subscribe('EventManager.join', Session.get("hashtag")),
+			Meteor.subscribe('Responses.session', Session.get("hashtag")),
+			Meteor.subscribe('AnswerOptions.options', Session.get("hashtag")),
+			Meteor.subscribe('MemberList.members', Session.get("hashtag")),
+			Meteor.subscribe('Hashtags.public')
+		];
+	},
 
-    action: function () {
-        this.render('live_results');
-    }
+	action: function () {
+		this.render('live_results');
+	}
 });
 /*
 Router.route('/onpolling', function () {

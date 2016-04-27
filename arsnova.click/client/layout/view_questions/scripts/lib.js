@@ -126,7 +126,7 @@ export function changePreviewButtonText(text) {
 }
 
 export function checkForMarkdown() {
-	if(EventManager.findOne().questionIndex < 0) {
+	if (EventManager.findOne().questionIndex < 0) {
 		return;
 	}
 	var questionText = QuestionGroup.findOne().questionList[EventManager.findOne().questionIndex].questionText;

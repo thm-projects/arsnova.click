@@ -17,7 +17,7 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {countdown, routeToLeaderboardTimer, readingConfirmationTracker, eventManagerObserver} from './lib.js';
+import {countdown, routeToLeaderboardTimer, readingConfirmationTracker} from './lib.js';
 
 Template.liveResults.onDestroyed(function () {
 	Session.set("countdownInitialized", undefined);

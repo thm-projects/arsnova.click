@@ -53,17 +53,17 @@ Meteor.methods({
 				answerOptionNumber: answerOptionNumber,
 				isCorrect: isCorrect
 			});
-            EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "AnswerOptions.addOption", value: {questionIndex: questionIndex, answerOptionNumber: answerOptionNumber}}}});
-        } else {
+			EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "AnswerOptions.addOption", value: {questionIndex: questionIndex, answerOptionNumber: answerOptionNumber}}}});
+		} else {
 			AnswerOptions.update(answerOptionDoc._id, {
 				$set: {
 					answerText: answerText,
 					isCorrect: isCorrect
 				}
-            });
-            EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "AnswerOptions.updateOption", value: {questionIndex: questionIndex, answerOptionNumber: answerOptionNumber}}}});
+			});
+			EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "AnswerOptions.updateOption", value: {questionIndex: questionIndex, answerOptionNumber: answerOptionNumber}}}});
 		}
-    },
+	},
 	'AnswerOptions.deleteOption': function ({privateKey, hashtag, questionIndex, answerOptionNumber}) {
 		if (Meteor.isServer) {
 			new SimpleSchema({
@@ -96,9 +96,9 @@ Meteor.methods({
 				);
 			} else {
 				AnswerOptions.remove(query);
-            }
-            EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "AnswerOptions.deleteOption", value: {questionIndex: questionIndex, answerOptionNumber: answerOptionNumber}}}});
-        }
+			}
+			EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "AnswerOptions.deleteOption", value: {questionIndex: questionIndex, answerOptionNumber: answerOptionNumber}}}});
+		}
 	},
 	'AnswerOptions.updateAnswerTextAndIsCorrect': function ({privateKey, hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}) {
 		new SimpleSchema({
@@ -127,7 +127,7 @@ Meteor.methods({
 		AnswerOptions.update(answerOptionDoc._id, {
 			$set: {answerText: answerText, isCorrect: isCorrect}
 		});
-        EventManager.update({hashtag: hashtag}, { $push: {eventStack: {key: "AnswerOptions.updateAnswerTextAndIsCorrect", value: {questionIndex: questionIndex, answerOptionNumber: answerOptionDoc}}}});
+		EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "AnswerOptions.updateAnswerTextAndIsCorrect", value: {questionIndex: questionIndex, answerOptionNumber: answerOptionDoc}}}});
 		return {
 			hashtag, questionIndex, answerOptionNumber, answerText, isCorrect
 		};

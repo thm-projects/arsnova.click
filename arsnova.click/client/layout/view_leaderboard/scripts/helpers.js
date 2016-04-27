@@ -48,15 +48,15 @@ Template.leaderBoard.helpers({
 		seconds = parseInt(seconds) < 10 ? "0" + seconds : seconds;
 		return seconds;
 	},
-    invisibleResponsesCount: ()=> {
-        return Session.get("allMembersCount") - Session.get("maxResponseButtons");
-    },
-    hasOverridenDefaultButtonCount: ()=> {
-        return Session.get('responsesCountOverride');
-    },
-    hasTooMuchButtons: ()=> {
-        return Session.get('responsesCountOverride') || (Session.get("allMembersCount") - Session.get("maxResponseButtons") > 0);
-    },
+	invisibleResponsesCount: ()=> {
+		return Session.get("allMembersCount") - Session.get("maxResponseButtons");
+	},
+	hasOverridenDefaultButtonCount: ()=> {
+		return Session.get('responsesCountOverride');
+	},
+	hasTooMuchButtons: ()=> {
+		return Session.get('responsesCountOverride') || (Session.get("allMembersCount") - Session.get("maxResponseButtons") > 0);
+	},
 	noLeaderBoardItems: (index)=> {
 		var items = getLeaderBoardItems();
 		if (typeof index !== "undefined") {

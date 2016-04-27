@@ -20,7 +20,7 @@ jscs:
   dependencies: []
   script:
     - npm install jscs
-    - node_modules/jscs/bin/jscs --config .jscsrc $PROJECT_PATH/{client,lib,server,shared}/
+    - node_modules/jscs/bin/jscs --config .jscsrc $PROJECT_PATH/{lib,server,shared}/ $PROJECT_PATH/client/{layout,plugins} $PROJECT_PATH/client/routes.js
 
 sonar:
   stage: test

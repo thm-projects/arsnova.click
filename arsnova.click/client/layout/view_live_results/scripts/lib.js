@@ -8,7 +8,7 @@ import { MemberList } from '/lib/memberlist.js';
 import { QuestionGroup } from '/lib/questions.js';
 import * as localData from '/client/lib/local_storage.js';
 import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
-import { splashscreen_error, Splashscreen } from '/client/plugins/splashscreen/scripts/lib.js';
+import { splashscreenError, Splashscreen } from '/client/plugins/splashscreen/scripts/lib.js';
 import { buzzsound1 } from '/client/plugins/sound/scripts/lib.js';
 
 export let countdown = null;
@@ -168,8 +168,8 @@ export function startReadingConfirmationTracker () {
                                             nick: Session.get("nick")
                                         }, (err)=> {
                                             if (err) {
-                                                splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
-                                                splashscreen_error.open();
+                                                splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
+                                                splashscreenError.open();
                                             }
                                         });
                                     });

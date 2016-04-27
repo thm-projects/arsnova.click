@@ -4,7 +4,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { QuestionGroup } from '/lib/questions.js';
 import { EventManager } from '/lib/eventmanager.js';
 import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
-import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
+import { splashscreenError } from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/client/lib/local_storage.js';
 
 function doesMarkdownSyntaxExist (questionText, syntaxStart, syntaxMiddle, syntaxEnd) {
@@ -61,8 +61,8 @@ export function addQuestion(index) {
         questionText: questionText
     }, (err) => {
         if (err) {
-            splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
-            splashscreen_error.open();
+            splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
+            splashscreenError.open();
         } else {
             localData.addQuestion(Session.get("hashtag"), index, questionText);
         }

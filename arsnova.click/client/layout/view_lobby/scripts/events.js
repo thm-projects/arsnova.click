@@ -4,7 +4,7 @@ import { Template } from 'meteor/templating';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { MemberList } from '/lib/memberlist.js';
 import * as localData from '/client/lib/local_storage.js';
-import { splashscreen_error, Splashscreen } from '/client/plugins/splashscreen/scripts/lib.js';
+import { splashscreenError, Splashscreen } from '/client/plugins/splashscreen/scripts/lib.js';
 import { calculateButtonCount } from './lib.js';
 
 Template.memberlist.events({
@@ -30,8 +30,8 @@ Template.memberlist.events({
                 $('#kickMemberButton').on('click',function () {
                     Meteor.call('MemberList.removeLearner', localData.getPrivateKey(), Session.get("hashtag"), $(event.currentTarget).attr("id"), function (err) {
                         if (err) {
-                            splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
-                            splashscreen_error.open();
+                            splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
+                            splashscreenError.open();
                         }
                     });
                 });

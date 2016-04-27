@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { QuestionGroup } from '/lib/questions.js';
 import { AnswerOptions } from '/lib/answeroptions.js';
-import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
+import { splashscreenError } from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/client/lib/local_storage.js';
 
 export function checkForValidQuestions(index) {
@@ -42,8 +42,8 @@ export function addNewQuestion(callback){
         questionText: ""
     }, (err) => {
         if (err) {
-            splashscreen_error.setErrorText(err.reason);
-            splashscreen_error.open();
+            splashscreenError.setErrorText(err.reason);
+            splashscreenError.open();
         } else {
             for(var i = 0; i < 4; i++) {
                 Meteor.call('AnswerOptions.addOption',{

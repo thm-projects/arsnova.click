@@ -172,9 +172,9 @@ class ErrorSplashscreen extends Splashscreen {
 	}
 }
 
-export let splashscreen_error = null;
+export let splashscreenError = null;
 export function setErrorSplashscreen() {
-	splashscreen_error = new ErrorSplashscreen({
+	splashscreenError = new ErrorSplashscreen({
 					autostart: false,
 					templateName: "errorSplashscreen",
 					closeOnButton: "#js-btn-hideErrorMessageModal"

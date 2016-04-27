@@ -5,7 +5,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { EventManager } from '/lib/eventmanager.js';
 import { QuestionGroup } from '/lib/questions.js';
 import * as localData from '/client/lib/local_storage.js';
-import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
+import { splashscreenError } from '/client/plugins/splashscreen/scripts/lib.js';
 import { calculateButtonCount, setMemberlistObserver } from './lib.js';
 
 Template.memberlist.onCreated(function () {
@@ -38,8 +38,8 @@ Template.memberlist.onCreated(function () {
             removed: function (id) {
                 let idButton = $('#' + id);
                 if (idButton.hasClass("color-changing-own-nick")) {
-                    splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.kicked_from_quiz"));
-                    splashscreen_error.open();
+                    splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.kicked_from_quiz"));
+                    splashscreenError.open();
                     Router.go("/resetToHome");
                 } else {
                     idButton.remove();

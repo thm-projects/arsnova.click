@@ -5,7 +5,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { EventManager } from '/lib/eventmanager.js';
 import { AnswerOptions } from '/lib/answeroptions.js';
 import * as localData from '/client/lib/local_storage.js';
-import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
+import { splashscreenError } from '/client/plugins/splashscreen/scripts/lib.js';
 import { parseAnswerOptionInput } from './lib.js';
 
 Template.createAnswerOptions.events({
@@ -80,8 +80,8 @@ Template.createAnswerOptions.events({
         var err = parseAnswerOptionInput(EventManager.findOne().questionIndex);
 
         if (err) {
-            splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
-            splashscreen_error.open();
+            splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
+            splashscreenError.open();
         } else {
             Router.go("/settimer");
         }

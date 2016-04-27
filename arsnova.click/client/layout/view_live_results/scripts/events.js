@@ -8,7 +8,7 @@ import { MemberList } from '/lib/memberlist.js';
 import { QuestionGroup } from '/lib/questions.js';
 import { mathjaxMarkdown } from '/client/lib/mathjax_markdown.js';
 import * as localData from '/client/lib/local_storage.js';
-import { splashscreen_error, Splashscreen } from '/client/plugins/splashscreen/scripts/lib.js';
+import { splashscreenError, Splashscreen } from '/client/plugins/splashscreen/scripts/lib.js';
 import { calculateButtonCount, startCountdown } from './lib.js';
 
 Template.live_results.events({
@@ -66,8 +66,8 @@ Template.live_results.events({
             privateKey: localData.getPrivateKey()
         }, (err, res) => {
             if (err) {
-                splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.export_failed", err.reason));
-                splashscreen_error.open();
+                splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.export_failed", err.reason));
+                splashscreenError.open();
             } else {
                 var exportData = "text/json;charset=utf-8," + encodeURIComponent(res);
                 var a = document.createElement('a');
@@ -107,8 +107,8 @@ Template.live_results.events({
             questionIndex: EventManager.findOne().questionIndex + 1
         }, (err) => {
             if (err) {
-                splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
-                splashscreen_error.open();
+                splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
+                splashscreenError.open();
                 Session.set("sessionClosed", true);
             } else {
                 Meteor.call("EventManager.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), EventManager.findOne().questionIndex + 1, ()=> {

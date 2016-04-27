@@ -23,7 +23,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { EventManager } from '/lib/eventmanager.js';
 import { Hashtags } from '/lib/hashtags.js';
 import * as localData from '/client/lib/local_storage.js';
-import { splashscreen_error } from '/client/plugins/splashscreen/scripts/lib.js';
+import { splashscreenError } from '/client/plugins/splashscreen/scripts/lib.js';
 import * as lib from './lib.js';
 
 Template.hashtag_view.events({
@@ -52,8 +52,8 @@ Template.hashtag_view.events({
     },
     "click #addNewHashtag": function () {
         if (!Session.get("localStorageAvailable")) {
-            splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing"));
-            splashscreen_error.open();
+            splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing"));
+            splashscreenError.open();
             return;
         }
         var hashtag = $("#hashtag-input-field").val();
@@ -82,8 +82,8 @@ Template.hashtag_view.events({
                 Meteor.call('Hashtags.addHashtag', doc, (err) => {
                     if (err) {
                         $("#addNewHashtag").removeAttr("disabled");
-                        splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
-                        splashscreen_error.open();
+                        splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
+                        splashscreenError.open();
                     } else {
                         for (var i = 0; i < 4; i++) {
                             Meteor.call("AnswerOptions.addOption", {
@@ -125,8 +125,8 @@ Template.hashtag_view.events({
             Router.go("/nick");
         } else {
             $("#joinSession").attr("disabled", "disabled");
-            splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.session_not_available"));
-            splashscreen_error.open();
+            splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.session_not_available"));
+            splashscreenError.open();
         }
     },
     "keydown #hashtag-input-field": function (event) {
@@ -217,15 +217,15 @@ Template.hashtagManagement.events({
                 data: asJSON
             }, (err) => {
                 if (err) {
-                    splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
-                    splashscreen_error.open();
+                    splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
+                    splashscreenError.open();
                 } else {
                     localData.importFromFile(asJSON);
                     Meteor.call('EventManager.add', localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, function () {
                         Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2, (err) => {
                             if (err) {
-                                splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.update_failed"));
-                                splashscreen_error.open();
+                                splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.update_failed"));
+                                splashscreenError.open();
                             } else {
                                 Session.set("hashtag", asJSON.hashtagDoc.hashtag);
                                 Session.set("isOwner", true);

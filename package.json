@@ -1,6 +1,7 @@
 {
   "name": "arsnova.click",
   "description": "arsnova.click is a little bit Kahoot! and a little bit ARSnova.",
+	"license": "GNU General Public License version 3",
   "url": "http://arsnova.click/",
   "author": "tekay",
   "repository": {

@@ -26,11 +26,11 @@ Template.memberlist.onRendered(function () {
     calculateButtonCount();
 
     var calculateFontSize = function () {
-        var hashtag_length = Session.get("hashtag").length;
+        var hashtagLength = Session.get("hashtag").length;
         //take the hastag in the middle of the logo
         var titel_margin_top = $(".arsnova-logo").height();
 
-        if (hashtag_length <= 10) {
+        if (hashtagLength <= 10) {
 
             if ($(document).width() < 992) {
                 $(".hashtag_in_title").css("font-size", "6vw");
@@ -46,7 +46,7 @@ Template.memberlist.onRendered(function () {
                 $(".header-titel").css("margin-top", titel_margin_top * 0.2);
             }
 
-        } else if (hashtag_length > 10 && hashtag_length <= 15) {
+        } else if (hashtagLength > 10 && hashtagLength <= 15) {
 
             if ($(document).width() < 992) {
                 $(".hashtag_in_title").css("font-size", "6vw");

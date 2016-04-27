@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Template } from 'meteor/templating';
+import {Template} from 'meteor/templating';
 import {formatAnswerButtons} from './lib.js';
 
 Template.votingview.onRendered(function () {
-    $(window).resize(function () {
-        formatAnswerButtons();
-    });
-    formatAnswerButtons();
+	$(window).resize(function () {
+		formatAnswerButtons();
+	});
+	formatAnswerButtons();
 });

@@ -75,9 +75,9 @@ export function addNewQuestion(callback){
 
             localData.addQuestion(Session.get("hashtag"), QuestionGroup.findOne().questionList.length, "");
 
-            var valid_questions = Session.get("valid_questions");
-            valid_questions[index] = false;
-            Session.set("valid_questions",valid_questions);
+            var validQuestions = Session.get("validQuestions");
+            validQuestions[index] = false;
+            Session.set("validQuestions",validQuestions);
 
             Meteor.call("EventManager.setActiveQuestion",localData.getPrivateKey(), Session.get("hashtag"), index, function () {
                 Router.go("/question");

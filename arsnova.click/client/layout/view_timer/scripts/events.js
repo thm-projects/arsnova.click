@@ -15,31 +15,31 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Meteor } from 'meteor/meteor';
-import { Session } from 'meteor/session';
-import { Template } from 'meteor/templating';
-import { TAPi18n } from 'meteor/tap:i18n';
-import { EventManager } from '/lib/eventmanager.js';
+import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
+import {Template} from 'meteor/templating';
+import {TAPi18n} from 'meteor/tap:i18n';
+import {EventManager} from '/lib/eventmanager.js';
 import * as localData from '/client/lib/local_storage.js';
-import { splashscreenError } from '/client/plugins/splashscreen/scripts/lib.js';
-import { setTimer } from './lib.js';
+import {splashscreenError} from '/client/plugins/splashscreen/scripts/lib.js';
+import {setTimer} from './lib.js';
 
 Template.createTimerView.events({
-    "click #forwardButton, click #backButton": function (event) {
-        var err = setTimer(EventManager.findOne().questionIndex);
+	"click #forwardButton, click #backButton": function (event) {
+		var err = setTimer(EventManager.findOne().questionIndex);
 
-        if (err) {
-            splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason));
-            splashscreenError.open();
-        } else {
-            if ($(event.currentTarget).attr("id") === "forwardButton") {
-                Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
-                Meteor.call("EventManager.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), 0);
-                Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 2);
-                Router.go("/memberlist");
-            } else {
-                Router.go("/answeroptions");
-            }
-        }
-    }
+		if (err) {
+			splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason));
+			splashscreenError.open();
+		} else {
+			if ($(event.currentTarget).attr("id") === "forwardButton") {
+				Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
+				Meteor.call("EventManager.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), 0);
+				Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 2);
+				Router.go("/memberlist");
+			} else {
+				Router.go("/answeroptions");
+			}
+		}
+	}
 });

@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Session } from 'meteor/session';
-import { Template } from 'meteor/templating';
+import {Session} from 'meteor/session';
+import {Template} from 'meteor/templating';
 
 Template.createTimerView.helpers({
-    slider: function () {
-        return Session.get("slider");
-    }
+	slider: function () {
+		return Session.get("slider");
+	}
 });

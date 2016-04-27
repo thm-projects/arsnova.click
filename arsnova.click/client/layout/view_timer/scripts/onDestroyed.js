@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Template } from 'meteor/templating';
+import {Template} from 'meteor/templating';
 import {validationTrackerHandle, subscriptionHandler} from './lib.js';
 
 Template.createTimerView.onDestroyed(function () {
-    var body = $('body');
-    body.off('click', '.questionIcon:not(.active)');
-    body.off('click', '.removeQuestion');
-    validationTrackerHandle.stop();
-    subscriptionHandler.stop();
+	var body = $('body');
+	body.off('click', '.questionIcon:not(.active)');
+	body.off('click', '.removeQuestion');
+	validationTrackerHandle.stop();
+	subscriptionHandler.stop();
 });

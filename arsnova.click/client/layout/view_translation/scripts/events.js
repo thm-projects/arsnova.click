@@ -15,14 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Template } from 'meteor/templating';
-import { TAPi18n } from 'meteor/tap:i18n';
+import {Template} from 'meteor/templating';
+import {TAPi18n} from 'meteor/tap:i18n';
 
 Template.translate.events({
-    'click .available_translations button': function() {
-        return TAPi18n.setLanguageAmplify(this.tag);
-    },
-    'click #backButton': function () {
-        history.back();
-    }
+	'click .available_translations button': function () {
+		return TAPi18n.setLanguageAmplify(this.tag);
+	},
+	'click #backButton': function () {
+		history.back();
+	}
 });

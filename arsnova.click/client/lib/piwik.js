@@ -16,8 +16,8 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 _paq = [
-    ["trackPageView"],
-    ["enableLinkTracking"],
-    ["setTrackerUrl", "//arsnova.thm.de/stats/piwik.php"],
-    ["setSiteId", 4]
+	["trackPageView"],
+	["enableLinkTracking"],
+	["setTrackerUrl", "//arsnova.thm.de/stats/piwik.php"],
+	["setSiteId", 4]
 ];

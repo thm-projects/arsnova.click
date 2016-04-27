@@ -15,19 +15,19 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Template } from 'meteor/templating';
+import {Template} from 'meteor/templating';
 
 Template.markdownBar.onRendered(function () {
-    $('#infoMarkdownButton').tooltip();
-    $('#boldMarkdownButton').tooltip();
-    $('#headerMarkdownButton').tooltip();
-    $('#hyperlinkMarkdownButton').tooltip();
-    $('#unsortedListMarkdownButton').tooltip();
-    $('#sortedListMarkdownButton').tooltip();
-    $('#latexMarkdownButton').tooltip();
-    $('#codeMarkdownButton').tooltip();
-    $('#commentMarkdownButton').tooltip();
-    $('#pictureMarkdownButton').tooltip();
-    $('#youtubeMarkdownButton').tooltip();
-    $('#vimeoMarkdownButton').tooltip();
+	$('#infoMarkdownButton').tooltip();
+	$('#boldMarkdownButton').tooltip();
+	$('#headerMarkdownButton').tooltip();
+	$('#hyperlinkMarkdownButton').tooltip();
+	$('#unsortedListMarkdownButton').tooltip();
+	$('#sortedListMarkdownButton').tooltip();
+	$('#latexMarkdownButton').tooltip();
+	$('#codeMarkdownButton').tooltip();
+	$('#commentMarkdownButton').tooltip();
+	$('#pictureMarkdownButton').tooltip();
+	$('#youtubeMarkdownButton').tooltip();
+	$('#vimeoMarkdownButton').tooltip();
 });

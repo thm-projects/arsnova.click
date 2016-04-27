@@ -48,14 +48,14 @@ export class Splashscreen {
      */
 	constructor(options) {
 		this.options = {
-						autostart:      options.autostart       || false,
-						templateName:   options.templateName    || "splashscreen",
-						instanceId:     options.instanceId      || 0,
-						closeOnButton:  options.closeOnButton   || false,
-						onCreated:      options.onCreated       || undefined,
-						onDestroyed:    options.onDestroyed     || undefined,
-						onRendered:     options.onRendered      || undefined
-					};
+			autostart:      options.autostart       || false,
+			templateName:   options.templateName    || "splashscreen",
+			instanceId:     options.instanceId      || 0,
+			closeOnButton:  options.closeOnButton   || false,
+			onCreated:      options.onCreated       || undefined,
+			onDestroyed:    options.onDestroyed     || undefined,
+			onRendered:     options.onRendered      || undefined
+		};
 		this.templateInstance = null;
 		this.templateSelector = null;
 		this.created();
@@ -172,6 +172,7 @@ class ErrorSplashscreen extends Splashscreen {
 }
 
 export let splashscreenError = null;
+
 export function setErrorSplashscreen() {
 	splashscreenError = new ErrorSplashscreen({
 					autostart: false,

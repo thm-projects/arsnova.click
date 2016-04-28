@@ -30,6 +30,7 @@ This is a no-brainer. Keep your branches up to date so that merges will never en
 ### Code Style
 
 Please check your code against our code guidelines defined with jshint.
+We support the use of gulp, which checks against our jshint and jscs rules. Just install the node modules (```npm install```) and run ```gulp```. If you want to watch the files use ```gulp watch```.
 
 ### Project structure
 

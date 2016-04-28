@@ -12,6 +12,16 @@ jshint:
     - npm install jshint@^2.9.0
     - node_modules/jshint/bin/jshint --config .jshintrc $PROJECT_PATH/client/ $PROJECT_PATH/server/ $PROJECT_PATH/shared/
 
+jscs:
+  stage: test
+  tags:
+    - nodejs
+  allow_failure: true
+  dependencies: []
+  script:
+    - npm install jscs
+    - node_modules/jscs/bin/jscs --config .jscsrc $PROJECT_PATH/{lib,server,shared}/ $PROJECT_PATH/client/{layout,plugins} $PROJECT_PATH/client/routes.js
+
 sonar:
   stage: test
   only:

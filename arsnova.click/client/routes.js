@@ -13,119 +13,118 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Session } from 'meteor/session';
+import {Session} from 'meteor/session';
 import * as localData from '/client/lib/local_storage.js';
 
 Router.configure({
-    layoutTemplate: 'layout'
+	layoutTemplate: 'layout'
 });
 
 Router.route('/', function () {
-    try{
-        localData.initializePrivateKey();
-        Session.set("localStorageAvailable", true);
-    } catch(err) {
-        Session.set("localStorageAvailable", false);
-    }
+	try {
+		localData.initializePrivateKey();
+		Session.set("localStorageAvailable", true);
+	} catch (err) {
+		Session.set("localStorageAvailable", false);
+	}
 
-    Session.set("isOwner", undefined);
-    Session.set("hashtag", undefined);
-    Session.set("slider", undefined);
-    this.render('home');
+	Session.set("isOwner", undefined);
+	Session.set("hashtag", undefined);
+	Session.set("slider", undefined);
+	this.render('home');
 });
 
 Router.route('/resetToHome', function () {
-    $('.modal-backdrop').hide();
-    Router.go("/");
+	$('.modal-backdrop').hide();
+	Router.go("/");
 });
 
 Router.route('/nick', function () {
-    if (!Session.get("hashtag")) {
-        Router.go("/");
-    }
-    this.render('nick');
+	if (!Session.get("hashtag")) {
+		Router.go("/");
+	}
+	this.render('nick');
 });
 
 Router.route('/question', function () {
-    if (Session.get("isOwner")) {
-        this.render('createQuestionView');
-    } else {
-        Router.go("/");
-    }
+	if (Session.get("isOwner")) {
+		this.render('createQuestionView');
+	} else {
+		Router.go("/");
+	}
 });
 
 Router.route('/answeroptions', function () {
-    this.render('createAnswerOptions');
+	this.render('createAnswerOptions');
 });
 
 Router.route('/settimer', function () {
-    if (Session.get("isOwner")) {
-        this.render('createTimerView');
-    } else {
-        Router.go('/');
-    }
+	if (Session.get("isOwner")) {
+		this.render('createTimerView');
+	} else {
+		Router.go('/');
+	}
 });
 
 Router.route('/memberlist', function () {
-    this.render('memberlist');
+	this.render('memberlist');
 });
 
 Router.route('/votingview', function () {
-    this.render('votingview');
+	this.render('votingview');
 });
 
 Router.route('/onpolling', function () {
-    if (Session.get("isOwner")) {
-        this.render('live_results');
-    } else {
-        $('.modal-backdrop').hide();
-        this.render('votingview');
-    }
+	if (Session.get("isOwner")) {
+		this.render('liveResults');
+	} else {
+		$('.modal-backdrop').hide();
+		this.render('votingview');
+	}
 });
 
 Router.route('/results', function () {
-    this.render('live_results');
+	this.render('liveResults');
 });
 
 Router.route('/statistics', function () {
-    this.render('leaderBoard');
+	this.render('leaderBoard');
 });
 
 Router.route('/hashtagmanagement', function () {
-    this.render('hashtagManagement');
+	this.render('hashtagManagement');
 });
 
 // Routes for Footer-Links
 
 Router.route('/ueber', function () {
-    this.render('ueber');
+	this.render('ueber');
 });
 
 Router.route('/agb', function () {
-    this.render('agb');
+	this.render('agb');
 });
 
 Router.route('/datenschutz', function () {
-    this.render('datenschutz');
+	this.render('datenschutz');
 });
 
 Router.route('/impressum', function () {
-    this.render('impressum');
+	this.render('impressum');
 });
 
 Router.route('/translate', function () {
-    this.render('translate');
+	this.render('translate');
 });
 
-Router.onStop(function() {
-    var lastRoute = Router.current().route.getName();
-    if(lastRoute===undefined){
-        //homeView
-        Session.set("lastPage","/");
-    }else if(lastRoute!=="agb" && lastRoute!=="datenschutz" && lastRoute!=="impressum"){
-        Session.set("lastPage",lastRoute);
-    }
+Router.onStop(function () {
+	var lastRoute = Router.current().route.getName();
+	if (lastRoute === undefined) {
+		//homeView
+		Session.set("lastPage", "/");
+	} else if (lastRoute !== "agb" && lastRoute !== "datenschutz" && lastRoute !== "impressum") {
+		Session.set("lastPage", lastRoute);
+	}
 });

@@ -141,7 +141,7 @@
       "no_attendee_correct": "Unfortunately no attendee has given the correct answer!",
       "question": "Question"
     },
-    "live_results": {
+    "liveResults": {
       "question": "Question",
       "ranking": "Ranking",
       "reading_confirmation": "Reading confirmation",

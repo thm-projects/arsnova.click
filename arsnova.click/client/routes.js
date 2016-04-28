@@ -82,7 +82,6 @@ Router.route('/', function () {
 });
 
 Router.route('/resetToHome', function () {
-	$('.modal-backdrop').hide();
 	Router.go("/");
 });
 
@@ -128,6 +127,20 @@ Router.route('/memberlist', function () {
 			}
 		}
 	});
+
+	globalEventStackObserver.onChange([
+		"MemberList.removeLearner"
+	], function (key, value) {
+		if (value.user) {
+			if (value.user === Session.get("nick")) {
+				new ErrorSplashscreen({
+					autostart: true,
+					errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.kicked_from_quiz")
+				});
+				Router.go("/resetToHome");
+			}
+		}
+	});
 	this.render('memberlist');
 });
 
@@ -152,7 +165,6 @@ Router.route('/onpolling', {
 		if (Session.get("isOwner")) {
 			this.render('live_results');
 		} else {
-			$('.modal-backdrop').hide();
 			this.render('votingview');
 		}
 	}

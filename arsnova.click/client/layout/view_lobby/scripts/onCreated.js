@@ -37,18 +37,6 @@ Template.memberlist.onCreated(function () {
 		});
 
 		setMemberlistObserver({
-			removed: function (id) {
-				let idButton = $('#' + id);
-				if (idButton.hasClass("color-changing-own-nick")) {
-					new ErrorSplashscreen({
-						autostart: true,
-						errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.kicked_from_quiz")
-					});
-					Router.go("/resetToHome");
-				} else {
-					idButton.remove();
-				}
-			},
 			added: function () {
 				calculateButtonCount();
 			}

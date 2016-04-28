@@ -60,6 +60,12 @@ export class Splashscreen {
 		this.templateSelector = null;
 		this.created();
 		this.isCreated = true;
+
+		let duplicateEntry = $('#' + options.templateName + "_" + options.instanceId);
+		if (duplicateEntry.length > 0) {
+			duplicateEntry.remove();
+		}
+
 		this.rendered();
 		this.isRendered = true;
 	}
@@ -83,9 +89,7 @@ export class Splashscreen {
 		if (!template) {
 			throw new Error('Invalid template name');
 		}
-		if ($('#' + this.options.templateName + "_" + this.options.instanceId)) {
-			$('#' + this.options.templateName + "_" + this.options.instanceId).remove();
-		}
+
 		this.templateInstance = Blaze.render(Template[this.options.templateName], document.body);
 		$(this.templateInstance.firstNode()).addClass(this.options.templateName).attr("id", this.options.templateName + "_" + this.options.instanceId);
 		this.templateSelector = $('#' + this.options.templateName + "_" + this.options.instanceId);
@@ -135,15 +139,13 @@ export class Splashscreen {
 		if (self.options.closeOnButton) {
 			let hasClickedOnCloseButton = false;
 			self.templateSelector.on('hide.bs.modal', function (event) {
-				console.log(hasClickedOnCloseButton);
 				if (!hasClickedOnCloseButton) {
 					event.stopPropagation();
 					event.preventDefault();
 				}
 			});
 
-			self.templateSelector.on('click', self.options.closeOnButton, function () {
-				console.log("clicked on close");
+			self.templateSelector.find('.modal-dialog').on('click', self.options.closeOnButton, function () {
 				hasClickedOnCloseButton = true;
 				self.close();
 			});

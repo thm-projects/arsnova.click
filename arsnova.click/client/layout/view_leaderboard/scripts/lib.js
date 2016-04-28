@@ -129,3 +129,40 @@ export function getLeaderBoardItems() {
 		return result;
 	}
 }
+
+export function getAllNicksWhichAreAlwaysRight(leaderBoardItems) {
+	var allNicksAndTimes = [];
+	//console.log(leaderBoardItems);
+	$.each(leaderBoardItems, function (index, value) {
+		$.each(value.value, function (i2, v2) {
+			allNicksAndTimes.push({nick: v2.nick, time: v2.responseTime});
+		});
+	});
+	var allTimeWinners = [];
+	console.log(allNicksAndTimes);
+	$.each(allNicksAndTimes, function (index, value) {
+		var nickOccuresAmount = 0;
+		var nickSumTime = 0;
+		$.each(allNicksAndTimes, function (i2, v2) {
+			if (v2.nick === value.nick) {
+				nickOccuresAmount++;
+				nickSumTime += v2.responseTime;
+			}
+		});
+
+		if (nickOccuresAmount === leaderBoardItems.count) {
+			var alreadyExists = false;
+			$.each(allTimeWinners, function (index, value) {
+				if (value.value === value.nick) {
+					alreadyExists = true;
+					return false;
+				}
+			});
+			if (!alreadyExists) {
+				allTimeWinners.push({value: value.nick, sumResponseTime: nickSumTime});
+			}
+		}
+	});
+	console.log(allTimeWinners);
+	return allTimeWinners;
+}

@@ -139,6 +139,7 @@ Template.liveResults.events({
 	'click #goGlobalRanking': (event)=> {
 		event.stopPropagation();
 		Session.set("showLeaderBoardId", undefined);
+		Session.set("showGlobalRanking", true);
 		Router.go("/statistics");
 	},
 	'click #showNextQuestionDialog': (event)=> {

@@ -45,6 +45,22 @@ Router.onBeforeAction(function () {
 	this.next();
 });
 
+Router.onAfterAction(function () {
+	globalEventStackObserver.onChange([
+		"EventManager.setSessionStatus",
+		"EventManager.reset"
+	], function (key, value) {
+		if (!isNaN(value.sessionStatus)) {
+			if (value.sessionStatus < 2) {
+				if (!Session.get("isOwner")) {
+					$('.modal-backdrop').remove();
+					Router.go("/resetToHome");
+				}
+			}
+		}
+	});
+});
+
 Router.route('/', function () {
 	try {
 		localData.initializePrivateKey();
@@ -106,8 +122,6 @@ Router.route('/memberlist', function () {
 			if (value.sessionStatus < 2) {
 				if (Session.get("isOwner")) {
 					Router.go("/settimer");
-				} else {
-					Router.go("/resetToHome");
 				}
 			} else if (value.sessionStatus === 3) {
 				Router.go("/results");
@@ -164,9 +178,6 @@ Router.route('/results', {
 				if (value.sessionStatus === 2) {
 					$('.modal-backdrop').remove();
 					Router.go("/memberlist");
-				} else if (value.sessionStatus < 2) {
-					$('.modal-backdrop').remove();
-					Router.go("/resetToHome");
 				}
 			}
 		});

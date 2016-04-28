@@ -135,7 +135,7 @@ Meteor.methods({
 			throw new Meteor.Error('EventManager.reset', 'plugins.splashscreen.error.error_messages.not_authorized');
 		}
 
-		EventManager.update({hashtag: hashtag}, {$set: {sessionStatus: 1, readingConfirmationIndex: -1, questionIndex: -1}});
+		EventManager.update({hashtag: hashtag}, {$set: {sessionStatus: 1, readingConfirmationIndex: -1, questionIndex: -1, eventStack: [{key: "EventManager.reset", value: {sessionStatus: 1, readingConfirmationIndex: -1, questionIndex: -1}}]}});
 	},
 	'EventManager.add': (privateKey, hashtag) => {
 		if (Meteor.isClient) {

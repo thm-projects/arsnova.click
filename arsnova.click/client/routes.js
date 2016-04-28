@@ -23,7 +23,7 @@ import {AnswerOptions} from '/lib/answeroptions.js';
 import {QuestionGroup} from '/lib/questions.js';
 import * as localData from '/client/lib/local_storage.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
-import {Splashscreen, splashscreenError} from '/client/plugins/splashscreen/scripts/lib.js';
+import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
 
 Router.configure({
@@ -31,13 +31,35 @@ Router.configure({
 });
 
 Router.onBeforeAction(function () {
-	if (!globalEventStackObserver || !globalEventStackObserver.isRunning()) {
-		if (Router.current().route.path() !== "/") {
+	if (Router.current().route.path() !== "/") {
+		if (!globalEventStackObserver || !globalEventStackObserver.isRunning()) {
 			Meteor.subscribe('EventManager.join', Session.get("hashtag"), ()=> {
 				if (!EventManager.findOne(Session.get("hashtag"))) {
 					Meteor.call('EventManager.add', localData.getPrivateKey(), Session.get("hashtag"), function () {
 						globalEventStackObserver.start(Session.get("hashtag"));
 					});
+				}
+			});
+		} else {
+			globalEventStackObserver.onChange([
+				"EventManager.setSessionStatus",
+				"EventManager.reset"
+			], function (key, value) {
+				if (!isNaN(value.sessionStatus)) {
+					if (value.sessionStatus < 2) {
+						Session.set("hashtag", undefined);
+						Session.set("slider", undefined);
+						if (!Session.get("isOwner")) {
+							new ErrorSplashscreen({
+								autostart: true,
+								errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.session_closed")
+							});
+							Router.go("/resetToHome");
+						} else {
+							Session.set("isOwner", undefined);
+							Router.go("/");
+						}
+					}
 				}
 			});
 		}
@@ -46,21 +68,6 @@ Router.onBeforeAction(function () {
 });
 
 Router.onAfterAction(function () {
-	globalEventStackObserver.onChange([
-		"EventManager.setSessionStatus",
-		"EventManager.reset"
-	], function (key, value) {
-		if (!isNaN(value.sessionStatus)) {
-			if (value.sessionStatus < 2) {
-				if (!Session.get("isOwner")) {
-					$('.modal-backdrop').remove();
-					splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.session_closed"));
-					splashscreenError.open();
-					Router.go("/resetToHome");
-				}
-			}
-		}
-	});
 });
 
 Router.route('/', function () {
@@ -70,10 +77,6 @@ Router.route('/', function () {
 	} catch (err) {
 		Session.set("localStorageAvailable", false);
 	}
-
-	Session.set("isOwner", undefined);
-	Session.set("hashtag", undefined);
-	Session.set("slider", undefined);
 	setGlobalEventStackObserver();
 	this.render('home');
 });
@@ -117,15 +120,10 @@ Router.route('/settimer', function () {
 
 Router.route('/memberlist', function () {
 	globalEventStackObserver.onChange([
-		"EventManager.setSessionStatus",
-		"EventManager.reset"
+		"EventManager.setSessionStatus"
 	], function (key, value) {
 		if (!isNaN(value.sessionStatus)) {
-			if (value.sessionStatus < 2) {
-				if (Session.get("isOwner")) {
-					Router.go("/settimer");
-				}
-			} else if (value.sessionStatus === 3) {
+			if (value.sessionStatus === 3) {
 				Router.go("/results");
 			}
 		}
@@ -173,8 +171,7 @@ Router.route('/results', {
 
 	action: function () {
 		globalEventStackObserver.onChange([
-			"EventManager.setSessionStatus",
-			"EventManager.reset"
+			"EventManager.setSessionStatus"
 		], function (key, value) {
 			if (!isNaN(value.sessionStatus)) {
 				if (value.sessionStatus === 2) {
@@ -242,8 +239,10 @@ Router.route('/results', {
 									nick: Session.get("nick")
 								}, (err)=> {
 									if (err) {
-										splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason));
-										splashscreenError.open();
+										new ErrorSplashscreen({
+											autostart: true,
+											errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+										});
 									}
 								});
 							});

@@ -21,7 +21,7 @@ import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManager} from '/lib/eventmanager.js';
 import * as localData from '/client/lib/local_storage.js';
-import {splashscreenError} from '/client/plugins/splashscreen/scripts/lib.js';
+import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {setTimer} from './lib.js';
 
 Template.createTimerView.events({
@@ -29,8 +29,10 @@ Template.createTimerView.events({
 		var err = setTimer(EventManager.findOne().questionIndex);
 
 		if (err) {
-			splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason));
-			splashscreenError.open();
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+			});
 		} else {
 			if ($(event.currentTarget).attr("id") === "forwardButton") {
 				Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));

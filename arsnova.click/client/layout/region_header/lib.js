@@ -17,9 +17,10 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
+import {TAPi18n} from 'meteor/tap:i18n';
 import {QuestionGroup} from '/lib/questions.js';
 import {AnswerOptions} from '/lib/answeroptions.js';
-import {splashscreenError} from '/client/plugins/splashscreen/scripts/lib.js';
+import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/client/lib/local_storage.js';
 
 export function checkForValidQuestions(index) {
@@ -56,8 +57,10 @@ export function addNewQuestion(callback) {
 		questionText: ""
 	}, (err) => {
 		if (err) {
-			splashscreenError.setErrorText(err.reason);
-			splashscreenError.open();
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+			});
 		} else {
 			for (var i = 0; i < 4; i++) {
 				Meteor.call('AnswerOptions.addOption', {

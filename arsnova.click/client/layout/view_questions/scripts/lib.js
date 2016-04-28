@@ -21,7 +21,7 @@ import {TAPi18n} from 'meteor/tap:i18n';
 import {QuestionGroup} from '/lib/questions.js';
 import {EventManager} from '/lib/eventmanager.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
-import {splashscreenError} from '/client/plugins/splashscreen/scripts/lib.js';
+import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/client/lib/local_storage.js';
 
 function doesMarkdownSyntaxExist(questionText, syntaxStart, syntaxMiddle, syntaxEnd) {
@@ -49,21 +49,13 @@ function doesMarkdownSyntaxExist(questionText, syntaxStart, syntaxMiddle, syntax
 
 	questionText = questionText.substring(questionText.indexOf(syntaxMiddle) + syntaxMiddle.length, questionText.length);
 
-	if (questionText.indexOf(syntaxEnd) != -1) {
-		return true;
-	} else {
-		return false;
-	}
+	return questionText.indexOf(syntaxEnd) != -1;
 }
 
 function questionContainsMarkdownSyntax(questionText) {
-	if (doesMarkdownSyntaxExist(questionText, '**', '**') || doesMarkdownSyntaxExist(questionText, '#', '#') || doesMarkdownSyntaxExist(questionText, '[', '](', ')') ||
-		doesMarkdownSyntaxExist(questionText, '- ') || doesMarkdownSyntaxExist(questionText, '1. ') || doesMarkdownSyntaxExist(questionText, '\\(', '\\)') ||
-		doesMarkdownSyntaxExist(questionText, '$$', '$$') || doesMarkdownSyntaxExist(questionText, '<hlcode>', '</hlcode>') || doesMarkdownSyntaxExist(questionText, '>')) {
-		return true;
-	} else {
-		return false;
-	}
+	return !!(doesMarkdownSyntaxExist(questionText, '**', '**') || doesMarkdownSyntaxExist(questionText, '#', '#') || doesMarkdownSyntaxExist(questionText, '[', '](', ')') ||
+	doesMarkdownSyntaxExist(questionText, '- ') || doesMarkdownSyntaxExist(questionText, '1. ') || doesMarkdownSyntaxExist(questionText, '\\(', '\\)') ||
+	doesMarkdownSyntaxExist(questionText, '$$', '$$') || doesMarkdownSyntaxExist(questionText, '<hlcode>', '</hlcode>') || doesMarkdownSyntaxExist(questionText, '>'));
 }
 
 export var subscriptionHandler = null;
@@ -77,8 +69,10 @@ export function addQuestion(index) {
 		questionText: questionText
 	}, (err) => {
 		if (err) {
-			splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason));
-			splashscreenError.open();
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+			});
 		} else {
 			localData.addQuestion(Session.get("hashtag"), index, questionText);
 		}

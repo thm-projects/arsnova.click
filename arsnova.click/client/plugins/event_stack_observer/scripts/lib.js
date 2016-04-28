@@ -20,7 +20,6 @@ import {EventManager} from '/lib/eventmanager.js';
 export class EventStackObserver {
 	constructor (options) {
 		this.observer = null;
-		this.stackIndex = 0;
 		this.onChangeCallbacks = [];
 		this.ignoreChanges = options.ignoreChanges || ["EventManager.keepalive"];
 		this.verbose = options.verbose || false;
@@ -38,10 +37,6 @@ export class EventStackObserver {
 			changed: function (id, changedFields) {
 				if (changedFields.eventStack) {
 					let index = changedFields.eventStack.length - 1;
-					if (observerInstance.verbose) {
-						console.log(index,changedFields.eventStack);
-						console.log("EventStackObserver: changed ", changedFields.eventStack[index].key, changedFields.eventStack[index].value);
-					}
 					if (observerInstance.onChangeCallbacks[Router.current().route.path()] && observerInstance.onChangeCallbacks[Router.current().route.path()].length > 0) {
 						let item = changedFields.eventStack[index];
 						if ($.inArray(item.key, observerInstance.ignoreChanges) > -1) {
@@ -49,16 +44,21 @@ export class EventStackObserver {
 						}
 						if (observerInstance.verbose) {
 							console.log("EventStackObserver: ", item.key, item.value);
-							console.log("currently on route: " + Router.current().route.path(), "Number of callbacks: " + observerInstance.onChangeCallbacks[Router.current().route.path()].length, "callbacks: ",[observerInstance.onChangeCallbacks[Router.current().route.path()]]);
+							console.log("EventStackObserver: Currently on route: " + Router.current().route.path(), "Number of callbacks: " + observerInstance.onChangeCallbacks[Router.current().route.path()].length, "callbacks: ",observerInstance.onChangeCallbacks[Router.current().route.path()]);
 						}
 						observerInstance.onChangeCallbacks[Router.current().route.path()].forEach(function (callbackObject) {
 							if ($.inArray(item.key, callbackObject.limiter) > -1) {
 								if (observerInstance.verbose) {
-									console.log("EventStackObserver: Event received ", item.key, " key map ", callbackObject.limiter, " Calling ", [callbackObject.callback]);
+									console.log("EventStackObserver: Found matching event limiter", item.key, "in key map", callbackObject.limiter);
+									console.log("EventStackObserver: Calling ", [callbackObject.callback]);
 								}
 								callbackObject.callback(item.key, item.value);
 							}
 						});
+						if (observerInstance.verbose) {
+							console.log("EventStackObserver: All callbacks have been called");
+							console.log("EventStackObserver: ---------------------------------------------------");
+						}
 					}
 				}
 			}
@@ -108,5 +108,5 @@ export class EventStackObserver {
 export let globalEventStackObserver = null;
 
 export function setGlobalEventStackObserver() {
-	globalEventStackObserver = new EventStackObserver({verbose: false});
+	globalEventStackObserver = new EventStackObserver({verbose: true});
 }

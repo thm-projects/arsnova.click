@@ -22,7 +22,7 @@ import {Tracker} from 'meteor/tracker';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManager} from '/lib/eventmanager.js';
 import {QuestionGroup} from '/lib/questions.js';
-import {splashscreenError} from '/client/plugins/splashscreen/scripts/lib.js';
+import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as localData from '/client/lib/local_storage.js';
 import * as lib from './lib.js';
@@ -129,8 +129,10 @@ Template.questionList.events({
 			answerOptionNumber: -1
 		}, (err) => {
 			if (err) {
-				splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason));
-				splashscreenError.open();
+				new ErrorSplashscreen({
+					autostart: true,
+					errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+				});
 			} else {
 				Meteor.call("QuestionGroup.removeQuestion", {
 					privateKey: localData.getPrivateKey(),
@@ -138,8 +140,10 @@ Template.questionList.events({
 					questionIndex: id
 				}, (err) => {
 					if (err) {
-						splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason));
-						splashscreenError.open();
+						new ErrorSplashscreen({
+							autostart: true,
+							errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+						});
 					} else {
 						localData.removeQuestion(Session.get("hashtag"), id);
 						if (QuestionGroup.findOne().questionList.length === 0) {

@@ -18,7 +18,6 @@
 import {Meteor} from 'meteor/meteor';
 import {TAPi18n} from 'meteor/tap:i18n';
 import * as localData from '/client/lib/local_storage.js';
-import {setErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 export function getUserLanguage() {
 	/* Get the language of the browser */
@@ -43,6 +42,5 @@ Meteor.startup(function () {
 		$.getScript('/lib/highlight.pack.min.js');
 		$.getScript('/lib/marked.min.js');
 		TAPi18n.setLanguage(getUserLanguage());
-		setErrorSplashscreen();
 	}
 });

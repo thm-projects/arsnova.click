@@ -20,7 +20,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import * as localData from '/client/lib/local_storage.js';
-import {splashscreenError} from '/client/plugins/splashscreen/scripts/lib.js';
+import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 Template.footer.onRendered(function () {
 	Session.set("footerIsHidden", true);
@@ -127,8 +127,10 @@ Template.footer.events({
 				},
 				(err) => {
 					if (err) {
-						splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.session_exists"));
-						splashscreenError.open();
+						new ErrorSplashscreen({
+							autostart: true,
+							errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.session_exists")
+						});
 					} else {
 						localData.importFromFile(asJSON);
 					}

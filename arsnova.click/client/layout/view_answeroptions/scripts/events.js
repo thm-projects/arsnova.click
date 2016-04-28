@@ -22,7 +22,7 @@ import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManager} from '/lib/eventmanager.js';
 import {AnswerOptions} from '/lib/answeroptions.js';
 import * as localData from '/client/lib/local_storage.js';
-import {splashscreenError} from '/client/plugins/splashscreen/scripts/lib.js';
+import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {parseAnswerOptionInput} from './lib.js';
 
 Template.createAnswerOptions.events({
@@ -96,8 +96,10 @@ Template.createAnswerOptions.events({
 		var err = parseAnswerOptionInput(EventManager.findOne().questionIndex);
 
 		if (err) {
-			splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason));
-			splashscreenError.open();
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+			});
 		} else {
 			Router.go("/settimer");
 		}

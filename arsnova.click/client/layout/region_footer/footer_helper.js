@@ -90,14 +90,17 @@ Template.footer.events({
 		}
 	},
 	"click #js-activate-fullscreen": function () {
-		if (!document.fullscreenElement &&    // alternative standard method
-			!document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods
+		if (!document.fullscreenElement &&
+			!document.mozFullScreenElement && !document.webkitFullscreenElement) {
 			if (document.documentElement.requestFullscreen) {
 				document.documentElement.requestFullscreen();
 			} else if (document.documentElement.mozRequestFullScreen) {
 				document.documentElement.mozRequestFullScreen();
 				// TODO webkit is currently not working!
 			}
+			/*else if (document.documentElement.webkitRequestFullScreen) {
+				document.documentElement.webkitRequestFullScreen();
+			}*/
 		} else {
 			if (document.cancelFullScreen) {
 				document.cancelFullScreen();

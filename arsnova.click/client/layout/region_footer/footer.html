@@ -16,45 +16,45 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="footer">
-    <input class="js-import-input-home" type="file" accept="application/json" multiple>
-    {{#if footerIsHidden}}
-        <div id="footer-info-div" class="footer-info-bar hiddenStyle">
-            <span id="hideShowFooterBar" class="glyphicon glyphicon-info-sign glyphicon-info-style" aria-hidden="true"></span>
-            <span id="footerLanguageChooser"><a href="/translate" id="translateLink"><img src="/images/globe.png" alt="internationalization"></a></span>
-            {{#if isInHomePath}}
-                <span class="js-import-home glyphicon glyphicon-import glyphicon-import-style" aria-hidden="true"></span>
-            {{/if}}
-            {{#if isInMemberlistOrPollingPathAndIsInstructor}}
-                <span id="js-activate-fullscreen" class="glyphicon glyphicon-fullscreen glyphicon-import-style" aria-hidden="true"></span>
-            {{/if}}
-        </div>
-    {{else}}
-        {{#if isInHomePath}}
-            <div id="footer-info-div" class="footer-info-bar showStyle">
-                <span class="js-import-home glyphicon glyphicon-import glyphicon-import-style" aria-hidden="true"></span>
-            </div>
-        {{/if}}
-        {{#if isInMemberlistOrPollingPathAndIsInstructor}}
-            <span id="js-activate-fullscreen" class="glyphicon glyphicon-fullscreen glyphicon-import-style" aria-hidden="true"></span>
-        {{/if}}
-    {{/if}}
+	<input class="js-import-input-home" type="file" accept="application/json" multiple>
+	{{#if footerIsHidden}}
+		<div id="footer-info-div" class="footer-info-bar hiddenStyle">
+			<span id="hideShowFooterBar" class="glyphicon glyphicon-info-sign glyphicon-info-style" aria-hidden="true"></span>
+			<span id="footerLanguageChooser"><a href="/translate" id="translateLink"><img src="/images/globe.png" alt="internationalization"></a></span>
+			{{#if isInHomePath}}
+				<span class="js-import-home glyphicon glyphicon-import glyphicon-import-style" aria-hidden="true"></span>
+			{{/if}}
+			{{#if isInMemberlistOrPollingPathAndIsInstructor}}
+				<span id="js-activate-fullscreen" class="glyphicon glyphicon-fullscreen glyphicon-import-style" aria-hidden="true"></span>
+			{{/if}}
+		</div>
+	{{else}}
+		{{#if isInHomePath}}
+			<div id="footer-info-div" class="footer-info-bar showStyle">
+				<span class="js-import-home glyphicon glyphicon-import glyphicon-import-style" aria-hidden="true"></span>
+			</div>
+		{{/if}}
+		{{#if isInMemberlistOrPollingPathAndIsInstructor}}
+			<span id="js-activate-fullscreen" class="glyphicon glyphicon-fullscreen glyphicon-import-style" aria-hidden="true"></span>
+		{{/if}}
+	{{/if}}
 
-    <nav id="footerBar" class="navbar navbar-default navbar-fixed-bottom footer footer-gradient hide">
-        <div class="container-fluid text-center text-dark">
+	<nav id="footerBar" class="navbar navbar-default navbar-fixed-bottom footer footer-gradient hide">
+		<div class="container-fluid text-center text-dark">
 
-            {{#if isBackButton}}
-                <a href="/{{getLastPage}}"><div class="col-xs-2 col-sm-3" id="toPrevPage">{{_ "global.back"}}</div></a>
-            {{else}}
-                {{#if isInHomePath}}
-                    <a href="/ueber"><div class="col-xs-2 col-sm-3">{{_ "region.footer.footer_bar.about"}}</div></a>
-                {{else}}
-                    <a href="/"><div class="col-xs-2 col-sm-3">{{_ "region.footer.footer_bar.home"}}</div></a>
-                {{/if}}
-            {{/if}}
-            <a href="/agb"><div class="col-xs-2 col-sm-3">{{_ "region.footer.footer_bar.tos"}}</div></a>
-            <a href="/datenschutz"><div class="col-xs-4 col-sm-3">{{_ "region.footer.footer_bar.data_privacy"}}</div></a>
-            <a href="/impressum"><div class="col-xs-4 col-sm-3">{{_ "region.footer.footer_bar.imprint"}}</div>
-            </a>
-        </div>
-    </nav>
+			{{#if isBackButton}}
+				<a href="/{{getLastPage}}"><div class="col-xs-2 col-sm-3" id="toPrevPage">{{_ "global.back"}}</div></a>
+			{{else}}
+				{{#if isInHomePath}}
+					<a href="/ueber"><div class="col-xs-2 col-sm-3">{{_ "region.footer.footer_bar.about"}}</div></a>
+				{{else}}
+					<a href="/"><div class="col-xs-2 col-sm-3">{{_ "region.footer.footer_bar.home"}}</div></a>
+				{{/if}}
+			{{/if}}
+			<a href="/agb"><div class="col-xs-2 col-sm-3">{{_ "region.footer.footer_bar.tos"}}</div></a>
+			<a href="/datenschutz"><div class="col-xs-4 col-sm-3">{{_ "region.footer.footer_bar.data_privacy"}}</div></a>
+			<a href="/impressum"><div class="col-xs-4 col-sm-3">{{_ "region.footer.footer_bar.imprint"}}</div>
+			</a>
+		</div>
+	</nav>
 </template>

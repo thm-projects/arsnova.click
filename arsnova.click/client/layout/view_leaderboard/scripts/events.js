@@ -20,10 +20,10 @@ import {Template} from 'meteor/templating';
 
 Template.leaderBoard.events({
 	'click #showMore': ()=> {
-		Session.set('show_all_leaderboard', true);
+		Session.set('responsesCountOverride', true);
 	},
 	'click #showLess': ()=> {
-		Session.set('show_all_leaderboard', false);
+		Session.set('responsesCountOverride', false);
 	},
 	'click #js-btn-backToResults': ()=> {
 		Router.go('/results');

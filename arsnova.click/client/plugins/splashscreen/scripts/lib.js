@@ -26,19 +26,19 @@ import {TAPi18n} from 'meteor/tap:i18n';
  * registered any root-level event listeners. You can pass the event removing calls to the onDestroyed option.
  *
  * Valid construction parameters are:
- * - autostart      -> True, if the splashscreen should show as soon as it has been rendered
+ * - autostart	  -> True, if the splashscreen should show as soon as it has been rendered
  * - templateName   -> The Meteor Template which is used to display the splashscreen
- * - instanceId     -> If you define and display multiple splashscreens of the same template on one page you'll need to give each of them unique id's
+ * - instanceId	 -> If you define and display multiple splashscreens of the same template on one page you'll need to give each of them unique id's
  * - closeOnButton  -> A valid jQuery selector which shall trigger the close event. A click on the modal or the splashscreen itself will not trigger the close event if this option is set.
- * - onCreated      -> Callback function which is called with the current instance as argument when the splashscreen is created
- * - onRendered     -> Callback function which is called with the current instance as argument when the splashscreen template is rendered
- * - onDestroyed    -> Callback function which is called with the current instance as argument when the splashscreen template is destroyed
+ * - onCreated	  -> Callback function which is called with the current instance as argument when the splashscreen is created
+ * - onRendered	 -> Callback function which is called with the current instance as argument when the splashscreen template is rendered
+ * - onDestroyed	-> Callback function which is called with the current instance as argument when the splashscreen template is destroyed
  *
  * Read-Only members are:
  * - templateInstance   -> The Blaze template object
  * - templateSelector   -> The jQuery object of the current splashscreen template
- * - isCreated          -> True, if the Splashscreen object has been created
- * - isRendered         -> True, if the Splashscreen template has been rendered
+ * - isCreated		  -> True, if the Splashscreen object has been created
+ * - isRendered		 -> True, if the Splashscreen template has been rendered
  */
 export class Splashscreen {
 	/**

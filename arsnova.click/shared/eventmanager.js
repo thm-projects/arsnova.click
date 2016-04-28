@@ -43,7 +43,7 @@ Meteor.methods({
 			throw new Meteor.Error('EventManager.setSessionStatus', 'plugins.splashscreen.error.error_messages.not_authorized');
 		}
 
-		return EventManager.update({hashtag: hashtag}, {$set: {sessionStatus: sessionStatus}});
+		EventManager.update({hashtag: hashtag}, {$set: {sessionStatus: sessionStatus}, $push: {eventStack: {key: "EventManager.setSessionStatus", value: {sessionStatus: sessionStatus}}}});
 	},
 	'EventManager.showReadConfirmedForIndex': (privateKey, hashtag, index)=> {
 		if (Meteor.isClient) {
@@ -67,7 +67,7 @@ Meteor.methods({
 			throw new Meteor.Error('EventManager.showReadConfirmedForIndex', 'plugins.splashscreen.error.error_messages.not_authorized');
 		}
 
-		return EventManager.update({hashtag: hashtag}, {$set: {readingConfirmationIndex: index}});
+		EventManager.update({hashtag: hashtag}, {$set: {readingConfirmationIndex: index}, $push: {eventStack: {key: "EventManager.showReadConfirmedForIndex", value: {readingConfirmationIndex: index}}}});
 	},
 	'EventManager.setActiveQuestion': (privateKey, hashtag, index)=> {
 		if (Meteor.isClient) {
@@ -91,7 +91,7 @@ Meteor.methods({
 			throw new Meteor.Error('EventManager.setActiveQuestion', 'plugins.splashscreen.error.error_messages.not_authorized');
 		}
 
-		return EventManager.update({hashtag: hashtag}, {$set: {questionIndex: index, readingConfirmationIndex: index}});
+		EventManager.update({hashtag: hashtag}, {$set: {questionIndex: index, readingConfirmationIndex: index}, $push: {eventStack: {key: "EventManager.setActiveQuestion", value: {questionIndex: index, readingConfirmationIndex: index}}}});
 	},
 	'EventManager.clear': (privateKey, hashtag) => {
 		if (Meteor.isClient) {
@@ -113,7 +113,7 @@ Meteor.methods({
 			throw new Meteor.Error('EventManager.clear', 'plugins.splashscreen.error.error_messages.not_authorized');
 		}
 
-		return EventManager.remove({hashtag: hashtag});
+		EventManager.remove({hashtag: hashtag});
 	},
 	'EventManager.reset': (privateKey, hashtag) => {
 		if (Meteor.isClient) {
@@ -135,13 +135,7 @@ Meteor.methods({
 			throw new Meteor.Error('EventManager.reset', 'plugins.splashscreen.error.error_messages.not_authorized');
 		}
 
-		return EventManager.update({hashtag: hashtag}, {
-			$set: {
-				sessionStatus: 1,
-				readingConfirmationIndex: -1,
-				questionIndex: -1
-			}
-		});
+		EventManager.update({hashtag: hashtag}, {$set: {sessionStatus: 1, readingConfirmationIndex: -1, questionIndex: -1, eventStack: [{key: "EventManager.reset", value: {sessionStatus: 1, readingConfirmationIndex: -1, questionIndex: -1}}]}});
 	},
 	'EventManager.add': (privateKey, hashtag) => {
 		if (Meteor.isClient) {
@@ -164,15 +158,15 @@ Meteor.methods({
 		}
 
 		if (EventManager.findOne({hashtag: hashtag})) {
-			EventManager.remove({hashtag: hashtag});
+			throw new Meteor.Error('EventManager.add', 'plugins.splashscreen.error.error_messages.hashtag_exists');
 		}
-
-		return EventManager.insert({
+		EventManager.insert({
 			hashtag: hashtag,
 			sessionStatus: 1,
 			lastConnection: 0,
 			readingConfirmationIndex: -1,
-			questionIndex: 0
+			questionIndex: 0,
+			eventStack: [{key: "EventManager.add", value: {sessionStatus: 1, readingConfirmationIndex: -1, questionIndex: -1}}]
 		});
 	},
 	'keepalive': function (privateKey, hashtag) {

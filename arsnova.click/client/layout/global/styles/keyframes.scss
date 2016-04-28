@@ -19,72 +19,72 @@
 
 @keyframes colorChangingArs {
   0% {
-    color: white;
+	color: white;
   }
   25% {
-    color: $warning;
+	color: $warning;
   }
   50% {
-    color: $info;
+	color: $info;
   }
   75% {
-    color: $input-background-color;
+	color: $input-background-color;
   }
   100% {
-    color: white;
+	color: white;
   }
 }
 
 @keyframes colorChangingNova {
   0% {
-    color: $input-background-color;
+	color: $input-background-color;
   }
   25% {
-    color: white;
+	color: white;
   }
   50% {
-    color: $warning;
+	color: $warning;
   }
   75% {
-    color: $info;
+	color: $info;
   }
   100% {
-    color: $input-background-color;
+	color: $input-background-color;
   }
 }
 
 @keyframes colorChangingDot {
   0% {
-    color: $info;
+	color: $info;
   }
   25% {
-    color: $input-background-color;
+	color: $input-background-color;
   }
   50% {
-    color: white;
+	color: white;
   }
   75% {
-    color: $warning;
+	color: $warning;
   }
   100% {
-    color: $info;
+	color: $info;
   }
 }
 
 @keyframes colorChangingClick {
   0% {
-    color: $warning;
+	color: $warning;
   }
   25% {
-    color: $info;
+	color: $info;
   }
   50% {
-    color: $input-background-color;
+	color: $input-background-color;
   }
   75% {
-    color: white;
+	color: white;
   }
   100% {
-    color: $warning;
+	color: $warning;
   }
 }

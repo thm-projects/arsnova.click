@@ -19,6 +19,7 @@
     "Router": false,
     "ReactiveCountdown": false,
     "App": false,
+    "console": false,
 
     "closeSplashscreen": true,
     "showSplashscreen": true,

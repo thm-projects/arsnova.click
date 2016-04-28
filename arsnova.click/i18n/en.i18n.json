@@ -139,7 +139,10 @@
         "all_questions": "Correct answers from..."
       },
       "no_attendee_correct": "Unfortunately no attendee has given the correct answer!",
-      "question": "Question"
+      "question": "Question",
+      "show_more": "Show 1 more",
+      "show_more_plural": "Show %s more",
+      "show_less": "Show less"
     },
     "liveResults": {
       "question": "Question",
@@ -221,6 +224,7 @@
         "title": "Error",
         "set_text_error": "The text of the error splashscreen can only be set after it has been rendered!",
         "error_messages": {
+          "Internal Server Error": "Internal Server Error",
           "update_failed": "The update of the question failed.",
           "session_exists": "This session exists already!",
           "hashtag_exists": "This hashtag exists already!",
@@ -235,7 +239,8 @@
           "duplicate_response": "User has already given a response",
           "answeroption_not_found": "There is no answer option with the given answerOptionNumber",
           "response_timeout": "Response was given out of time range",
-          "insert_leaderboard_failed": "Error while adding response set to leaderboard"
+          "insert_leaderboard_failed": "Error while adding response set to leaderboard",
+          "session_closed": "The quiz session has been closed"
         }
       },
       "question_and_answer": { }

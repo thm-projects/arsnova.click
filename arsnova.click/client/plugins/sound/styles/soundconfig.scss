@@ -20,23 +20,23 @@
 
 .soundConfig {
   .modal-content {
-    background-color: $splashscreen-sound-config-background-color;
+	background-color: $splashscreen-sound-config-background-color;
 
-    #soundSelect {
-      width: 100%;
-      border-radius: $corner-radius;
-      height: 46px;
-      padding: 0 10px;
-      outline: none;
-    }
+	#soundSelect {
+	  width: 100%;
+	  border-radius: $corner-radius;
+	  height: 46px;
+	  padding: 0 10px;
+	  outline: none;
+	}
 
-    button.down {
-      background: green;
-      box-shadow: none;
-    }
+	button.down {
+	  background: green;
+	  box-shadow: none;
+	}
 
-    #isSoundOnButton {
-      margin: 15px 0;
-    }
+	#isSoundOnButton {
+	  margin: 15px 0;
+	}
   }
 }

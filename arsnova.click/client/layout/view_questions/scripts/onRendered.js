@@ -29,7 +29,7 @@ Template.createQuestionView.onRendered(function () {
 
 	let index;
 	lib.subscriptionHandler = Tracker.autorun(()=> {
-		if (this.subscriptionsReady()) {
+		if (this.subscriptionsReady() && EventManager.findOne()) {
 			index = EventManager.findOne().questionIndex;
 			if (!Session.get("markdownAlreadyChecked")) {
 				lib.checkForMarkdown();

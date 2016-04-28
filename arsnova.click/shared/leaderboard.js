@@ -20,6 +20,7 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {AnswerOptions} from '/lib/answeroptions.js';
 import {Responses} from '/lib/responses.js';
 import {LeaderBoard} from '/lib/leaderBoard.js';
+import {EventManager} from '/lib/eventmanager.js';
 
 Meteor.methods({
 	'LeaderBoard.addResponseSet': function ({phashtag, questionIndex, nick, responseTimeMillis}) {
@@ -87,6 +88,7 @@ Meteor.methods({
 					}
 				});
 			}
+			EventManager.update({hashtag: phashtag}, {$push: {eventStack: {key: "LeaderBoard.addResponseSet", value: {nick: nick, questionIndex: questionIndex}}}});
 		}
 	}
 });

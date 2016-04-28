@@ -131,20 +131,6 @@ Template.footer.events({
 						splashscreenError.open();
 					} else {
 						localData.importFromFile(asJSON);
-						Meteor.call('EventManager.add', localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, function () {
-							Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2,
-								(err) => {
-									if (err) {
-										splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.update_failed"));
-										splashscreenError.open();
-									} else {
-										Session.set("hashtag", asJSON.hashtagDoc.hashtag);
-										Session.set("isOwner", true);
-										Router.go("/memberlist");
-									}
-								}
-							);
-						});
 					}
 				}
 			);

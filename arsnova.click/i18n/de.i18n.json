@@ -168,7 +168,8 @@
       "ready": "Startklar fürs Quiz",
       "show_more": "Zeige 1 weiteren",
       "show_more_plural": "Zeige %s weitere",
-      "start_quiz": "Los geht's !"
+      "start_quiz": "Los geht's !",
+      "kick_member_confirmation": "Soll der Teilnehmer '<span id=\"nickName\"></span>' aus dem Quiz entfernt werden?"
     },
     "questions": {
       "enter_question_here": "Gib hier die Frage ein!",

@@ -112,7 +112,8 @@
     "header": {
       "new_question": "New question",
       "sound": "Sound",
-      "reset": "Reset"
+      "reset": "Reset",
+      "kick_member_confirmation": "Shall the attendee '<span id=\"nickName\"></span>' be removed from the session?"
     }
   },
   "view": {

@@ -224,6 +224,7 @@
         "title": "Fehler",
         "set_text_error": "Der Text des Splashscreens kann nur gesetzt werden, nachdem er gerendered wurde!",
         "error_messages": {
+          "Internal Server Error": "Interner Serverfehler",
           "update_failed": "Es ist ein Fehler bei der Aktualisierung deiner Frage aufgetreten.",
           "session_exists": "Diese Sitzung existiert bereits!",
           "hashtag_exists": "Dieser Hashtag existiert bereits!",

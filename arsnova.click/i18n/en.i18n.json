@@ -112,8 +112,7 @@
     "header": {
       "new_question": "New question",
       "sound": "Sound",
-      "reset": "Reset",
-      "kick_member_confirmation": "Shall the attendee '<span id=\"nickName\"></span>' be removed from the session?"
+      "reset": "Reset"
     }
   },
   "view": {
@@ -169,7 +168,8 @@
       "ready": "Ready for quizzing",
       "show_more": "Show 1 more",
       "show_more_plural": "Show %s more",
-      "start_quiz": "Let's go !"
+      "start_quiz": "Let's go !",
+      "kick_member_confirmation": "Shall the attendee '<span id=\"nickName\"></span>' be removed from the session?"
     },
     "questions": {
       "enter_question_here": "Enter your question here!",

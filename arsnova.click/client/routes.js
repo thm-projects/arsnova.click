@@ -78,6 +78,9 @@ Router.route('/', function () {
 		Session.set("localStorageAvailable", false);
 	}
 	setGlobalEventStackObserver();
+	Session.set("hashtag", undefined);
+	Session.set("slider", undefined);
+	Session.set("isOwner", undefined);
 	this.render('home');
 });
 

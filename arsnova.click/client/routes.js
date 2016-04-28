@@ -54,6 +54,8 @@ Router.onAfterAction(function () {
 			if (value.sessionStatus < 2) {
 				if (!Session.get("isOwner")) {
 					$('.modal-backdrop').remove();
+					splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages.session_closed"));
+					splashscreenError.open();
 					Router.go("/resetToHome");
 				}
 			}

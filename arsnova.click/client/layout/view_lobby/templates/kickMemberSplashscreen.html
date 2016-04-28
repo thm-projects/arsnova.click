@@ -16,30 +16,30 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="kickMemberSplashscreen">
-    <div class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <p>Soll der Teilnehmer '<span id="nickName"></span>' aus dem Quiz entfernt werden?</p>
-                </div>
-                <div class="modal-body"></div>
-                <div class="modal-footer">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <button id="closeDialogButton" class="button">
-                                <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
-                                {{_ "view.lobby.no"}}
-                            </button>
-                        </div>
-                        <div class="col-xs-6">
-                            <button id="kickMemberButton" class="button button-next">
-                                {{_ "view.lobby.yes"}}
-                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<p>{{{_ "view.lobby.kick_member_confirmation"}}}</p>
+				</div>
+				<div class="modal-body"></div>
+				<div class="modal-footer">
+					<div class="row">
+						<div class="col-xs-6">
+							<button id="closeDialogButton" class="button">
+								<span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
+								{{_ "view.lobby.no"}}
+							</button>
+						</div>
+						<div class="col-xs-6">
+							<button id="kickMemberButton" class="button button-next">
+								{{_ "view.lobby.yes"}}
+								<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>

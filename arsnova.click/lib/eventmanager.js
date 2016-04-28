@@ -20,6 +20,16 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
 export const EventManager = new Mongo.Collection("eventmanager");
 
+const eventStackScheme = new SimpleSchema({
+	key: {
+		type: String
+	},
+	value: {
+		type: Object,
+		blackbox: true
+	}
+});
+
 var eventManagerScheme = new SimpleSchema({
 	hashtag: {
 		type: String,
@@ -43,6 +53,9 @@ var eventManagerScheme = new SimpleSchema({
 		type: Number,
 		min: -1,
 		optional: true
+	},
+	eventStack: {
+		type: [eventStackScheme]
 	}
 });
 

@@ -30,6 +30,9 @@ Template.leaderBoard.helpers({
 	isNumber: (index)=> {
 		return !isNaN(index);
 	},
+	isOwnNick: (nick) => {
+		return nick === Session.get("nick");
+	},
 	getTitleText: ()=> {
 		if (typeof Session.get("showLeaderBoardId") !== "undefined") {
 			return TAPi18n.__("view.leaderboard.title.single_question", {questionId: (Session.get("showLeaderBoardId") + 1)});
@@ -41,10 +44,18 @@ Template.leaderBoard.helpers({
 		return (index + 1);
 	},
 	parseTimeToSeconds: function (milliseconds) {
-		return Math.round((milliseconds / 10)) / 100;
+		let seconds = String(((milliseconds / 1000) % 60).toFixed(2)).replace(".",",");
+		seconds = parseInt(seconds) < 10 ? "0" + seconds : seconds;
+		return seconds;
 	},
-	showAllLeaderboard: ()=> {
-		return Session.get('show_all_leaderboard');
+	invisibleResponsesCount: ()=> {
+		return Session.get("allMembersCount") - Session.get("maxResponseButtons");
+	},
+	hasOverridenDefaultButtonCount: ()=> {
+		return Session.get('responsesCountOverride');
+	},
+	hasTooMuchButtons: ()=> {
+		return Session.get('responsesCountOverride') || (Session.get("allMembersCount") - Session.get("maxResponseButtons") > 0);
 	},
 	noLeaderBoardItems: (index)=> {
 		var items = getLeaderBoardItems();

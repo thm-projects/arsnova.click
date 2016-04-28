@@ -35,56 +35,56 @@
 
 .footer-info-bar {
   #footerLanguageChooser {
-    position: absolute;
-    top: 4px;
-    display: inline-block;
-    line-height: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    margin-left: 30px;
-    cursor: pointer;
+	position: absolute;
+	top: 4px;
+	display: inline-block;
+	line-height: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	margin-left: 30px;
+	cursor: pointer;
 
-    a {
-      img {
-        margin-top: -1px;
-        height: 5vw;
-        width: 5vw;
-        max-width: 50px;
-        max-height: 50px;
+	a {
+	  img {
+		margin-top: -1px;
+		height: 5vw;
+		width: 5vw;
+		max-width: 50px;
+		max-height: 50px;
 
-        @media screen and (min-width:992px) {
-          max-width: 39px;
-          max-height: 39px;
-        }
-      }
-    }
+		@media screen and (min-width:992px) {
+		  max-width: 39px;
+		  max-height: 39px;
+		}
+	  }
+	}
   }
 }
 
 @media (max-width: 991px) {
   .footer-info-bar {
-    height: 6vw;
-    bottom: 0;
-    margin-bottom: 2px;
-    font-size: 5vw;
-    position: fixed;
-    Color: #FFF;
-    right: 0;
-    left: 0;
-    z-index: 1030;
+	height: 6vw;
+	bottom: 0;
+	margin-bottom: 2px;
+	font-size: 5vw;
+	position: fixed;
+	Color: #FFF;
+	right: 0;
+	left: 0;
+	z-index: 1030;
   }
 }
 
 @media (min-width: 992px) {
   .footer-info-bar {
-    height: 45px;
+	height: 45px;
 
-    font-size: 40px;
-    position: fixed;
-    Color: #FFF;
-    right: 0;
-    left: 0;
-    z-index: 1030;
+	font-size: 40px;
+	position: fixed;
+	Color: #FFF;
+	right: 0;
+	left: 0;
+	z-index: 1030;
   }
 }
 

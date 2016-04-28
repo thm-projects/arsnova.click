@@ -139,7 +139,10 @@
         "all_questions": "Alles richtig haben..."
       },
       "no_attendee_correct": "Leider hat kein Teilnehmer richtig abgestimmt!",
-      "question": "Frage"
+      "question": "Frage",
+      "show_more": "Zeige 1 weiteren",
+      "show_more_plural": "Zeige %s weitere",
+      "show_less": "Zeige weniger"
     },
     "liveResults": {
       "question": "Frage",
@@ -165,7 +168,8 @@
       "ready": "Startklar fürs Quiz",
       "show_more": "Zeige 1 weiteren",
       "show_more_plural": "Zeige %s weitere",
-      "start_quiz": "Los geht's !"
+      "start_quiz": "Los geht's !",
+      "kick_member_confirmation": "Soll der Teilnehmer '<span id=\"nickName\"></span>' aus dem Quiz entfernt werden?"
     },
     "questions": {
       "enter_question_here": "Gib hier die Frage ein!",
@@ -221,6 +225,7 @@
         "title": "Fehler",
         "set_text_error": "Der Text des Splashscreens kann nur gesetzt werden, nachdem er gerendered wurde!",
         "error_messages": {
+          "Internal Server Error": "Interner Serverfehler",
           "update_failed": "Es ist ein Fehler bei der Aktualisierung deiner Frage aufgetreten.",
           "session_exists": "Diese Sitzung existiert bereits!",
           "hashtag_exists": "Dieser Hashtag existiert bereits!",
@@ -235,7 +240,8 @@
           "duplicate_response": "Der Teilnehmer hat bereits eine Antwort abgegeben",
           "answeroption_not_found": "Es existiert keine Antwort mit diesem Index",
           "response_timeout": "Die Antwortzeit ist bereits abgelaufen",
-          "insert_leaderboard_failed": "Fehler beim Hinzufügen der Antwort zur Rangliste"
+          "insert_leaderboard_failed": "Fehler beim Hinzufügen der Antwort zur Rangliste",
+          "session_closed": "Die Quizrunde wurde beendet"
         }
       },
       "question_and_answer": { }

@@ -16,28 +16,28 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="showHashtagsSplashscreen">
-    <div class="modal fade" id={{instanceId}} role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>{{_ "view.hashtag_management.quiz_management"}}</h2>
-                </div>
-                <div class="modal-body">
-                    <p>{{_ "view.hashtag_management.available_sessions"}}</p><br/>
-                    <div class="row">
-                        {{#each hashtags}}
-                            <div class="col-xs-12 js-my-hash">{{this}}</div>
-                        {{/each}}
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button id="js-btn-showHashtagManagement" type="button"
-                            class="btn btn-info btn-lg btn-answerOption">
-                        <span class="glyphicon glyphicon-cloud glyph-left" aria-hidden="true"></span>
-                        <span class="ansBtn">{{_ "view.hashtag_management.session_management"}}</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="modal fade" id={{instanceId}} role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2>{{_ "view.hashtag_management.quiz_management"}}</h2>
+				</div>
+				<div class="modal-body">
+					<p>{{_ "view.hashtag_management.available_sessions"}}</p><br/>
+					<div class="row">
+						{{#each hashtags}}
+							<div class="col-xs-12 js-my-hash">{{this}}</div>
+						{{/each}}
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="js-btn-showHashtagManagement" type="button"
+							class="btn btn-info btn-lg btn-answerOption">
+						<span class="glyphicon glyphicon-cloud glyph-left" aria-hidden="true"></span>
+						<span class="ansBtn">{{_ "view.hashtag_management.session_management"}}</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>

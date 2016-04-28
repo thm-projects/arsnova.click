@@ -19,6 +19,7 @@ import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { AnswerOptions } from '/lib/answeroptions.js';
 import { Hashtags } from '/lib/hashtags.js';
+import { EventManager } from '/lib/eventmanager.js';
 
 Meteor.methods({
 	'AnswerOptions.addOption': function ({privateKey, hashtag, questionIndex, answerText, answerOptionNumber, isCorrect}) {
@@ -52,6 +53,7 @@ Meteor.methods({
 				answerOptionNumber: answerOptionNumber,
 				isCorrect: isCorrect
 			});
+			EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "AnswerOptions.addOption", value: {questionIndex: questionIndex, answerOptionNumber: answerOptionNumber}}}});
 		} else {
 			AnswerOptions.update(answerOptionDoc._id, {
 				$set: {
@@ -59,7 +61,9 @@ Meteor.methods({
 					isCorrect: isCorrect
 				}
 			});
-		}},
+			EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "AnswerOptions.updateOption", value: {questionIndex: questionIndex, answerOptionNumber: answerOptionNumber}}}});
+		}
+	},
 	'AnswerOptions.deleteOption': function ({privateKey, hashtag, questionIndex, answerOptionNumber}) {
 		if (Meteor.isServer) {
 			new SimpleSchema({
@@ -93,6 +97,7 @@ Meteor.methods({
 			} else {
 				AnswerOptions.remove(query);
 			}
+			EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "AnswerOptions.deleteOption", value: {questionIndex: questionIndex, answerOptionNumber: answerOptionNumber}}}});
 		}
 	},
 	'AnswerOptions.updateAnswerTextAndIsCorrect': function ({privateKey, hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}) {
@@ -122,6 +127,7 @@ Meteor.methods({
 		AnswerOptions.update(answerOptionDoc._id, {
 			$set: {answerText: answerText, isCorrect: isCorrect}
 		});
+		EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "AnswerOptions.updateAnswerTextAndIsCorrect", value: {questionIndex: questionIndex, answerOptionNumber: answerOptionDoc}}}});
 		return {
 			hashtag, questionIndex, answerOptionNumber, answerText, isCorrect
 		};

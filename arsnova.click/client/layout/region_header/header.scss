@@ -16,59 +16,59 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 p.header-layout {
-    margin-left: 0;
-    margin-right: 0;
+	margin-left: 0;
+	margin-right: 0;
 }
 
 .arsnova-logo {
-    margin-left: 15px;
-    cursor: pointer;
+	margin-left: 15px;
+	cursor: pointer;
 }
 
 .arsnova-logo img {
-    height: 8vw;
+	height: 8vw;
 }
 
 .kill-session-switch-wrapper {
-    text-align: center;
-    cursor: pointer;
-    color: #b22222;
+	text-align: center;
+	cursor: pointer;
+	color: #b22222;
 }
 
 .kill-session-switch-wrapper:hover {
-    color: red;
+	color: red;
 }
 
 .kill-session-switch {
-    text-align: center;
-    font-size: 3vw;
-    margin-bottom:10px;
+	text-align: center;
+	font-size: 3vw;
+	margin-bottom:10px;
 }
 
 .emergency-button-text {
-    position: relative;
-    top: -8px;
-    font-size: 2vw;
-    margin: 0;
-    line-height: 1em;
-    text-align: center;
+	position: relative;
+	top: -8px;
+	font-size: 2vw;
+	margin: 0;
+	line-height: 1em;
+	text-align: center;
 }
 
 .sound-button {
-    text-align: center;
-    color: #663399;
-    cursor: pointer;
+	text-align: center;
+	color: #663399;
+	cursor: pointer;
 
-    &:hover {
-        color: #CCB3E6;
-    }
+	&:hover {
+		color: #CCB3E6;
+	}
 }
 
 .sound-button-text {
-    position: relative;
-    top: -8px;
-    font-size: 2vw;
-    margin: 0;
-    line-height: 1em;
-    text-align: center;
+	position: relative;
+	top: -8px;
+	font-size: 2vw;
+	margin: 0;
+	line-height: 1em;
+	text-align: center;
 }

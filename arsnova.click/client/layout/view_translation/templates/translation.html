@@ -16,23 +16,23 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="translate">
-    {{> titel titelText = 'view.translation.translations' }}
-    <div class="row center-vertical">
-        <div class="col-md-12">
-            {{#if i18n_enabled}}
-                <div class="row">
-                    {{#each i18n_sortedLanguages }}
-                        <div class="col-xs-12 col-md-6 available_translations">
-                            <button type="button"
-                                    class="button btn btn-{{#if i18n_isCurrentLanguage this.tag}}primary disabled{{else}}default{{/if}}"
-                            >{{this.name}}</button>
-                        </div>
-                    {{/each}}
-                </div>
-            {{ else }}
-                <p>{{_ "view.translation.i18n_currently_not_available"}}</p>
-            {{/if}}
-        </div>
-    </div>
-    {{> footer_nav_buttons backId="backButton" }}
+	{{> titel titelText = 'view.translation.translations' }}
+	<div class="row center-vertical">
+		<div class="col-md-12">
+			{{#if i18n_enabled}}
+				<div class="row">
+					{{#each i18n_sortedLanguages }}
+						<div class="col-xs-12 col-md-6 available_translations">
+							<button type="button"
+									class="button btn btn-{{#if i18n_isCurrentLanguage this.tag}}primary disabled{{else}}default{{/if}}"
+							>{{this.name}}</button>
+						</div>
+					{{/each}}
+				</div>
+			{{ else }}
+				<p>{{_ "view.translation.i18n_currently_not_available"}}</p>
+			{{/if}}
+		</div>
+	</div>
+	{{> footer_nav_buttons backId="backButton" }}
 </template>

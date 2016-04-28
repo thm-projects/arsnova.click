@@ -39,6 +39,7 @@ Template.hashtagView.onCreated(function () {
 				return;
 			}
 			EventManager.find().observeChanges({
+				/*
 				changed: function (id, changedFields) {
 					if (!isNaN(changedFields.sessionStatus)) {
 						if (changedFields.sessionStatus === 2) {
@@ -48,6 +49,7 @@ Template.hashtagView.onCreated(function () {
 						}
 					}
 				},
+				*/
 				added: function (id, doc) {
 					if (!isNaN(doc.sessionStatus)) {
 						if (doc.sessionStatus === 2) {

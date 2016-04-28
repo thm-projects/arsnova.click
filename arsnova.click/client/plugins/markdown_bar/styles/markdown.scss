@@ -55,15 +55,15 @@
 
 @media (max-width: 500px) {
   .markdown-box {
-    display: none;
+	display: none;
   }
 
   .row-create-question-buttons {
-    display: none;
+	display: none;
   }
 
   .round-corners-markdown {
-    border-radius: $corner-radius;
+	border-radius: $corner-radius;
   }
 }
 

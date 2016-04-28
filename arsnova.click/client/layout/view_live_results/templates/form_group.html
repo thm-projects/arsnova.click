@@ -16,20 +16,20 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="form_group">
-    <div class="row button button-result form-group formGroupProgressRow">
-        <div class="col-xs-12">
-            <div class="progress" id="mc_bar{{id}}">
-                <div class="progress-bar {{#if backgroundClass}}{{backgroundClass}}{{/if}}"
-                     role="progressbar"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                     style="width: {{percent}}%; {{#if backgroundStyle}}background:{{backgroundStyle}};{{/if}}">
-                </div>
-                <div class="percentage">
-                    <p class="label">{{_ name}}</p>
-                    <div class="values"><p class="absolute">{{absolute}}{{#if base}} / {{base}}{{/if}}</p>|<p class="percent">{{percent}} %</p></div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row button button-result form-group formGroupProgressRow">
+		<div class="col-xs-12">
+			<div class="progress" id="mc_bar{{id}}">
+				<div class="progress-bar {{#if backgroundClass}}{{backgroundClass}}{{/if}}"
+					 role="progressbar"
+					 aria-valuemin="0"
+					 aria-valuemax="100"
+					 style="width: {{percent}}%; {{#if backgroundStyle}}background:{{backgroundStyle}};{{/if}}">
+				</div>
+				<div class="percentage">
+					<p class="label">{{_ name}}</p>
+					<div class="values"><p class="absolute">{{absolute}}{{#if base}} / {{base}}{{/if}}</p>|<p class="percent">{{percent}} %</p></div>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>

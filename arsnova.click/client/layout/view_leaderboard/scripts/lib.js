@@ -21,6 +21,54 @@ import {AnswerOptions} from '/lib/answeroptions.js';
 import {MemberList} from '/lib/memberlist.js';
 import {Responses} from '/lib/responses.js';
 
+export function setMaxResponseButtons(value) {
+	Session.set("maxResponseButtons", value);
+}
+
+export function calculateButtonCount(allMembersCount) {
+	/*
+	 This session variable determines if the user has clicked on the show-more-button. The button count must not
+	 be calculated then. It is set in the event handler of the button and is reset if the user reenters the page
+	 */
+	if (Session.get("responsesCountOverride")) {
+		setMaxResponseButtons(allMembersCount);
+		return;
+	}
+
+	/*
+	 To calculate the maximum output of attendee button rows we need to:
+	 - get the mainContentContainer height (the content wrapper for all elements)
+	 - subtract the appTitle height (the indicator for the question index)
+	 */
+	var viewport = $('.container'),
+		appTitle = $('#appTitle');
+
+	var viewPortHeight = viewport.outerHeight() - appTitle.outerHeight();
+
+	/* The height of the learner button must be set manually if the html elements are not yet generated */
+	var btnLearnerHeight = $('.button-leader').first().parent().outerHeight(true) ? $('.button-leader').first().parent().outerHeight(true) : 70;
+
+	/* Calculate how much buttons we can place in the viewport until we need to scroll */
+	var queryLimiter = Math.floor(viewPortHeight / btnLearnerHeight);
+	queryLimiter--;
+
+	/*
+	 Multiply the displayed elements by 2 if on widescreen and reduce the max output of buttons by 1 row for the display
+	 more button if necessary. Also make sure there is at least one row of buttons shown even if the user has to scroll
+	 */
+	var limitModifier = viewport.outerWidth() >= 992 ? 2 : 1;
+
+	queryLimiter *= limitModifier;
+	if (queryLimiter <= 0) {
+		queryLimiter = limitModifier;
+	}
+
+	/*
+	 This variable holds the amount of shown buttons and is used in the scripts functions
+	 */
+	setMaxResponseButtons(queryLimiter);
+}
+
 function getLeaderBoardItemsByIndex(index) {
 	var allGoodMembers = [];
 	var param = {isCorrect: 1};
@@ -57,12 +105,9 @@ function getLeaderBoardItemsByIndex(index) {
 		}
 	});
 
-	//check if the show all button was pressed
-	if (Session.get('show_all_leaderboard')) {
-		return _.sortBy(allGoodMembers, 'responseTime');
-	} else {
-		return _.sortBy(allGoodMembers, 'responseTime').slice(0, 6);
-	}
+	Session.set("allMembersCount",allGoodMembers.length);
+	calculateButtonCount(allGoodMembers.length);
+	return _.sortBy(allGoodMembers, 'responseTime').slice(0, Session.get("maxResponseButtons"));
 }
 
 export function getLeaderBoardItems() {

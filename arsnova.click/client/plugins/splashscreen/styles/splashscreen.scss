@@ -23,19 +23,19 @@
  */
 .splashscreen {
   .modal-content {
-    background: $splashscreen-background-color;
+	background: $splashscreen-background-color;
   }
 }
 
 .questionAndAnswerSplashscreen {
   .modal-content {
-    background: $splashscreen-question-and-answer-background-color;
+	background: $splashscreen-question-and-answer-background-color;
   }
 }
 
 .errorSplashscreen {
   .modal-content {
-    background: $splash-screen-error-message-background-color;
+	background: $splash-screen-error-message-background-color;
   }
 }
 
@@ -57,11 +57,11 @@
   box-shadow: none;
 
   a, a:hover, a:active, a:visited, a:focus {
-    color: $background-color;
+	color: $background-color;
 
-    &:hover {
-      text-decoration: underline;
-    }
+	&:hover {
+	  text-decoration: underline;
+	}
   }
 }
 

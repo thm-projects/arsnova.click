@@ -19,33 +19,12 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {Hashtags} from '/lib/hashtags.js';
 import * as localData from '/client/lib/local_storage.js';
 import {buzzsound1, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib";
 
 
 Template.header.onCreated(function () {
-	this.autorun(() => {
-		if (!Session.get("hashtag")) {
-			return;
-		}
-
-		this.subscribe('EventManager.join', Session.get("hashtag"), ()=> {
-			var hashtagDocs = Hashtags.find();
-
-			hashtagDocs.observe({
-				changed: function (doc) {
-					if (doc.hashtag == Session.get("hashtag")) {
-						if (doc.sessionStatus === 0 || doc.sessionStatus === 1) {
-							Router.go("/resetToHome");
-						}
-					}
-				}
-			});
-		});
-	});
-
 	Session.setDefault("slider2", 80);
 	Session.setDefault("globalVolume", 80);
 

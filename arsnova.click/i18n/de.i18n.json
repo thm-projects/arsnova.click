@@ -124,11 +124,11 @@
       "enter_nickname_here": "Gib deinen Nick ein"
     },
     "hashtag_management": {
-      "enter_quiz_name": "Gib den Quiz-Namen ein",
+      "enter_quiz_name": "Gib den Quiznamen ein",
       "join_session": "Mach mit!",
       "edit_session": "Bearbeiten",
       "create_session": "Mach neu!",
-      "quiz_management": "Quiz-Verwaltung",
+      "quiz_management": "Quizverwaltung",
       "available_sessions": "Diese Quizze sind in deinem Browser:",
       "session_management": "Sessionverwaltung",
       "import": "Import"
@@ -172,7 +172,7 @@
       "kick_member_confirmation": "Soll der Teilnehmer '<span id=\"nickName\"></span>' aus dem Quiz entfernt werden?"
     },
     "questions": {
-      "enter_question_here": "Gib hier die Frage ein!",
+      "enter_question_here": "Gib hier die Frage ein",
       "format": "Format",
       "edit": "Bearbeiten",
       "preview": "Vorschau"
@@ -205,7 +205,7 @@
         "hyperlink": "Hyperlink",
         "unordered_list": "Unsortierte Liste",
         "ordered_list": "Sortierte Liste",
-        "latex": "LaTex-Auszeichnung",
+        "latex": "LaTeX-Auszeichnung",
         "code": "Code-Auszeichnung",
         "citation": "Zitat",
         "image": "Bild",
@@ -215,14 +215,14 @@
       "info_content": "Sie können Texte innerhalb von ARSnova mithilfe von <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown Optionen werden in Form von Schaltflächen über den unterstützten Eingabefeldern angeboten. Zudem unterstützt ARSnova <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
     },
     "sound": {
-      "title": "Quiz-Musik",
+      "title": "Quizmusik",
       "volume": "Lautstärke",
       "inactive": "Sound ist inaktiv",
       "active": "Sound ist aktiviert"
     },
     "splashscreen": {
       "error": {
-        "title": "Fehler",
+        "title": "Hinweis",
         "set_text_error": "Der Text des Splashscreens kann nur gesetzt werden, nachdem er gerendered wurde!",
         "error_messages": {
           "Internal Server Error": "Interner Serverfehler",
@@ -230,7 +230,7 @@
           "session_exists": "Diese Sitzung existiert bereits!",
           "hashtag_exists": "Dieser Hashtag existiert bereits!",
           "session_not_available": "Dieser Quizrunde kann aktuell nicht beigetreten werden.",
-          "private_browsing": "Im Privatmodus deines Browsers funktioniert ARSnova.click leider nur als Teilnehmer, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von ARSnova.click den Privatmodus deaktivieren und ARSnova erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.",
+          "private_browsing": "Im Privatmodus deines Browsers funktioniert ARSnova.click leider nur als Teilnehmer/in, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von ARSnova.click den Privatmodus deaktivieren und ARSnova erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.",
           "kicked_from_quiz": "Du wurdest aus dem Quiz geworfen!",
           "export_failed": "Konnte die Daten nicht exportieren! - %s",
           "not_authorized": "Entweder ist das Quiz nicht vorhanden oder du hast keine Berechtigung, diese Daten zu lesen",

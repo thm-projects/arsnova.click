@@ -1,6 +1,6 @@
 {
   "global": {
-    "arsnova_slogan": "Quizzes for everyone and anything !",
+    "arsnova_slogan": "Quizzes for everyone & anything",
     "back": "Back",
     "next": "Next",
     "delete": "Delete",
@@ -138,7 +138,7 @@
         "single_question": "Question __questionId__ - Correct answers from...",
         "all_questions": "Correct answers from..."
       },
-      "no_attendee_correct": "Unfortunately no attendee has given the correct answer!",
+      "no_attendee_correct": "Unfortunately nobody",
       "question": "Question",
       "show_more": "Show 1 more",
       "show_more_plural": "Show %s more",

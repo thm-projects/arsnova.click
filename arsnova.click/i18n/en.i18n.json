@@ -15,7 +15,7 @@
         "home": "Home",
         "tos": "ToS",
         "imprint": "Imprint",
-        "data_privacy": "Data privacy"
+        "data_privacy": "Data Privacy"
       },
       "about": {
         "title": "About the quiz app",
@@ -32,7 +32,7 @@
           "6": "<a href='https://en.wikipedia.org/wiki/TeX' target='_blank'>TeX</a>-Formulas and text formatting with <a href='https://guides.github.com/features/mastering-markdown/' target='_blank'>Markdown</a> in questions and answer options",
           "7": "One dialog fits everything: As many answer options you like with multiple choice, single choice and surveys.",
           "8": "Edutainment: Have fun during learning with a live competition against the clock and the other players with sound effects.",
-          "9": "<a href='https://en.wikipedia.org/wiki/Responsive_Webdesign' target='_blank'>Responsives Webdesign</a>: From the smart phone to the wide screen - the design adapts thanks to <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>",
+          "9": "<a href='https://en.wikipedia.org/wiki/Responsive_Webdesign' target='_blank'>Responsive Web design</a>: From the smart phone to the wide screen - the design adapts thanks to <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>",
           "10": "The bleading edge in modern web technologies: <a href='https://www.meteor.com' target='_blank'>Meteor</a>",
           "11": "<a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a>"
         },
@@ -58,7 +58,7 @@
         }
       },
       "data_privacy": {
-        "title": "Data privacy",
+        "title": "Data Privacy",
         "scope": "Scope",
         "declaration": "This privacy statement explains to users of ARSnova.click the nature, scope and purpose of the usage of personal data by the responsible provider. The legal basis of this privacy policy can be found in the German Bundesdatenschutzgesetz (BDSG) and the German Telemediengesetz (TMG).",
         "app_data": {
@@ -128,9 +128,9 @@
       "join_session": "Join now !",
       "edit_session": "Edit",
       "create_session": "Make a new one !",
-      "quiz_management": "Quiz-Management",
+      "quiz_management": "Quiz Management",
       "available_sessions": "Choose one of your Quizzes:",
-      "session_management": "Session management",
+      "session_management": "Session Management",
       "import": "Import"
     },
     "leaderboard": {
@@ -162,7 +162,7 @@
       "answer_option": "Answer"
     },
     "lobby": {
-      "title": "Quiz-Lobby",
+      "title": "Quiz Lobby",
       "yes": "Yes !",
       "no": "No",
       "ready": "Ready for quizzing",
@@ -183,7 +183,7 @@
       "second_plural": "Seconds"
     },
     "translation": {
-      "translations": "Currently the following translations are available:",
+      "translations": "These translations are available:",
       "i18n_currently_not_available": "I18n is currently not available!"
     },
     "voting": {
@@ -215,7 +215,7 @@
       "info_content": "You can use <a target='_blank' class='hyperlink' href='https://en.wikipedia.org/wiki/Markdown'>Markdown</a> markup for your text in ARSnova.click. Frequently used markup options are available via the button bar which is visible on all supported input fields. Additionally ARSnova.click supports <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
     },
     "sound": {
-      "title": "Quiz-Music",
+      "title": "Quiz Music",
       "volume": "Volume",
       "inactive": "Sound is inactive !",
       "active": "Sound is active !"

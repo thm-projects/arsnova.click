@@ -40,7 +40,7 @@
           "title": "Manual?",
           "text": {
             "1": "You won't need that!",
-            "2": "Simply type in the name of the quiz. The buttons will discolour as soon as you've typed in the name of an active quiz (Join now !) or you can create a new quiz with the entered name (Make a new one !).",
+            "2": "Simply type in the name of the quiz. The buttons will discolour as soon as you've typed in the name of an active quiz (Join now!) or you can create a new quiz with the entered name (Make a new one!).",
             "3": "Now it is as simple as: Clicking. Looking. Quizzing."
           }
         }
@@ -120,14 +120,14 @@
       "answeroption_or_leave_empty": "Type any answer option or leave it empty"
     },
     "choose_nickname": {
-      "enter_nickname": "Take a nickname !",
-      "enter_nickname_here": "Enter your nickname here !"
+      "enter_nickname": "Take a nickname",
+      "enter_nickname_here": "Enter your nickname here"
     },
     "hashtag_management": {
-      "enter_quiz_name": "Enter the Quiz name here !",
-      "join_session": "Join now !",
+      "enter_quiz_name": "Enter the quiz name here",
+      "join_session": "Join now!",
       "edit_session": "Edit",
-      "create_session": "Make a new one !",
+      "create_session": "Make a new one!",
       "quiz_management": "Quiz Management",
       "available_sessions": "Choose one of your Quizzes:",
       "session_management": "Session Management",
@@ -156,23 +156,23 @@
       "global_ranking": "Global ranking",
       "show_question": "Show question",
       "start_round": "Start round",
-      "confirm_read": "Got that !",
+      "confirm_read": "Got that!",
       "game_over": "Game over",
       "countdown": "Countdown",
       "answer_option": "Answer"
     },
     "lobby": {
       "title": "Quiz Lobby",
-      "yes": "Yes !",
+      "yes": "Yes",
       "no": "No",
       "ready": "Ready for quizzing",
       "show_more": "Show 1 more",
       "show_more_plural": "Show %s more",
-      "start_quiz": "Let's go !",
+      "start_quiz": "Let's go!",
       "kick_member_confirmation": "Shall the attendee '<span id=\"nickName\"></span>' be removed from the session?"
     },
     "questions": {
-      "enter_question_here": "Enter your question here!",
+      "enter_question_here": "Enter your question here",
       "format": "Format",
       "edit": "Edit",
       "preview": "Preview"
@@ -190,7 +190,7 @@
       "question": "Question",
       "send": "Send",
       "seconds_left": "1 Second left!",
-      "seconds_left_plural": "__value__ Seconds left!"
+      "seconds_left_plural": "__value__ Seconds left"
     }
   },
   "plugins": {
@@ -217,8 +217,8 @@
     "sound": {
       "title": "Quiz Music",
       "volume": "Volume",
-      "inactive": "Sound is inactive !",
-      "active": "Sound is active !"
+      "inactive": "Sound is inactive",
+      "active": "Sound is active"
     },
     "splashscreen": {
       "error": {

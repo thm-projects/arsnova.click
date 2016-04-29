@@ -117,10 +117,10 @@
   },
   "view": {
     "answeroptions": {
-      "answeroption_or_leave_empty": "Antwortoption oder lass leer"
+      "answeroption_or_leave_empty": "Antwortoption oder leer lassen"
     },
     "choose_nickname": {
-      "enter_nickname": "Gib Dir einen Nicknamen !",
+      "enter_nickname": "Gib dir einen Nicknamen !",
       "enter_nickname_here": "Gib deinen Nick ein !"
     },
     "hashtag_management": {
@@ -129,7 +129,7 @@
       "edit_session": "Bearbeiten",
       "create_session": "Mach neu !",
       "quiz_management": "Quiz-Verwaltung",
-      "available_sessions": "Diese Quizze sind in Deinem Browser:",
+      "available_sessions": "Diese Quizze sind in deinem Browser:",
       "session_management": "Sessionverwaltung",
       "import": "Import"
     },
@@ -138,7 +138,7 @@
         "single_question": "Quizfrage __questionId__ - Alles richtig haben...",
         "all_questions": "Alles richtig haben..."
       },
-      "no_attendee_correct": "Leider hat kein Teilnehmer richtig abgestimmt!",
+      "no_attendee_correct": "Leider hat niemand richtig abgestimmt!",
       "question": "Frage",
       "show_more": "Zeige 1 weiteren",
       "show_more_plural": "Zeige %s weitere",
@@ -183,7 +183,7 @@
       "second_plural": "Sekunden"
     },
     "translation": {
-      "translations": "Aktuell sind folgende Sprachen verfügbar:",
+      "translations": "Diese Sprachen sind verfügbar:",
       "i18n_currently_not_available": "i18n ist aktuell nicht verfügbar!"
     },
     "voting": {

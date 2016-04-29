@@ -51,20 +51,21 @@ Template.nick.events({
 		var currentNickName = event.currentTarget.value;
 		var member = MemberList.findOne({nick: currentNickName});
 
-		if (currentNickName.length > 2 && !member) {
-			$("#forwardButton").removeAttr("disabled");
-		} else {
-			$("#forwardButton").attr("disabled", "disabled");
-		}
-	},
-	"keydown #nickname-input-field": function (event) {
-		if (event.keyCode == 13) {
-			var currentNickName = event.currentTarget.value;
-			var member = MemberList.findOne({nick: currentNickName});
+        if (currentNickName.length > 2 && !member && lib.isNickAllowed(currentNickName)) {
+            $("#forwardButton").removeAttr("disabled");
+        } else {
+            $("#forwardButton").attr("disabled", "disabled");
+        }
+    },
+    "keydown #nickname-input-field": function (event) {
+        if (event.keyCode == 13) {
+            var currentNickName = event.currentTarget.value;
+            var member = MemberList.findOne({nick: currentNickName});
 
-			if (currentNickName.length > 2 && !member) {
-				$("#forwardButton").click();
-			}
-		}
-	}
+            if (currentNickName.length > 2 && !member) {
+                $("#forwardButton").click();
+            }
+        }
+    }
 });
+

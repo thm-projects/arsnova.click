@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+
 function componentToHex(c) {
 	var hex = c.toString(16);
 	return hex.length === 1 ? "0" + hex : hex;
@@ -36,6 +37,16 @@ export function rgbToHex(r, g, b) {
 export function transformForegroundColor(rgbObj) {
 	var o = Math.round(((parseInt(rgbObj.r) * 299) + (parseInt(rgbObj.g) * 587) + (parseInt(rgbObj.b) * 114)) / 1000);
 	return o < 125 ? "#ffffff" : "#000000";
+}
+
+export function isNickAllowed(nick){
+    var forbiddenNicks= require("../../../../public/forbiddenNicks.json");
+    for(var i=0;i<forbiddenNicks.length;++i){
+	if(nick.toLowerCase()===forbiddenNicks[i].toLowerCase()){
+	    return false;
+	}
+    }
+    return true;
 }
 
 /**

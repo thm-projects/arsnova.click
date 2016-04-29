@@ -1,6 +1,6 @@
 {
   "global": {
-    "arsnova_slogan": "Quiz für alle(s) !",
+    "arsnova_slogan": "Quiz für alle(s)",
     "back": "Zurück",
     "next": "Weiter",
     "delete": "Löschen",
@@ -120,14 +120,14 @@
       "answeroption_or_leave_empty": "Antwortoption oder leer lassen"
     },
     "choose_nickname": {
-      "enter_nickname": "Gib dir einen Nicknamen !",
-      "enter_nickname_here": "Gib deinen Nick ein !"
+      "enter_nickname": "Gib dir einen Nicknamen",
+      "enter_nickname_here": "Gib deinen Nick ein"
     },
     "hashtag_management": {
-      "enter_quiz_name": "Gib den Quiz-Namen ein !",
-      "join_session": "Mach mit !",
+      "enter_quiz_name": "Gib den Quiz-Namen ein",
+      "join_session": "Mach mit!",
       "edit_session": "Bearbeiten",
-      "create_session": "Mach neu !",
+      "create_session": "Mach neu!",
       "quiz_management": "Quiz-Verwaltung",
       "available_sessions": "Diese Quizze sind in deinem Browser:",
       "session_management": "Sessionverwaltung",
@@ -163,12 +163,12 @@
     },
     "lobby": {
       "title": "Quiz-Lobby",
-      "yes": "Ja !",
+      "yes": "Ja",
       "no": "Nein",
       "ready": "Startklar fürs Quiz",
       "show_more": "Zeige 1 weiteren",
       "show_more_plural": "Zeige %s weitere",
-      "start_quiz": "Los geht's !",
+      "start_quiz": "Los geht's!",
       "kick_member_confirmation": "Soll der Teilnehmer '<span id=\"nickName\"></span>' aus dem Quiz entfernt werden?"
     },
     "questions": {

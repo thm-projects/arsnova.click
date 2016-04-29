@@ -138,7 +138,7 @@
         "single_question": "Quizfrage __questionId__ - Alles richtig haben...",
         "all_questions": "Alles richtig haben..."
       },
-      "no_attendee_correct": "Leider hat niemand richtig abgestimmt!",
+      "no_attendee_correct": "Leider niemand",
       "question": "Frage",
       "show_more": "Zeige 1 weiteren",
       "show_more_plural": "Zeige %s weitere",
@@ -217,8 +217,8 @@
     "sound": {
       "title": "Quiz-Musik",
       "volume": "Lautstärke",
-      "inactive": "Sound ist inaktiv !",
-      "active": "Sound ist aktiviert !"
+      "inactive": "Sound ist inaktiv",
+      "active": "Sound ist aktiviert"
     },
     "splashscreen": {
       "error": {

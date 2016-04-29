@@ -42,7 +42,7 @@ export function transformForegroundColor(rgbObj) {
 export function isNickAllowed(nick){
     var forbiddenNicks= require("../../../../public/forbiddenNicks.json");
     for(var i=0;i<forbiddenNicks.length;++i){
-	if(nick.toLowerCase()===forbiddenNicks[i]){
+	if(nick.toLowerCase()===forbiddenNicks[i].toLowerCase()){
 	    return false;
 	}
     }

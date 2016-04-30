@@ -20,7 +20,6 @@ import {EventManager} from '/lib/eventmanager.js';
 export class EventStackObserver {
 	constructor (options) {
 		this.observer = null;
-		this.stackIndex = 0;
 		this.onChangeCallbacks = [];
 		this.ignoreChanges = options.ignoreChanges || ["EventManager.keepalive"];
 		this.verbose = options.verbose || false;
@@ -38,27 +37,33 @@ export class EventStackObserver {
 			changed: function (id, changedFields) {
 				if (changedFields.eventStack) {
 					let index = changedFields.eventStack.length - 1;
-					if (observerInstance.verbose) {
-						console.log(index,changedFields.eventStack);
-						console.log("EventStackObserver: changed ", changedFields.eventStack[index].key, changedFields.eventStack[index].value);
-					}
-					if (observerInstance.onChangeCallbacks[Router.current().route.path()] && observerInstance.onChangeCallbacks[Router.current().route.path()].length > 0) {
+					let currentPath = Router.current().route.path();
+					if (observerInstance.onChangeCallbacks[currentPath] && observerInstance.onChangeCallbacks[currentPath].length > 0) {
 						let item = changedFields.eventStack[index];
 						if ($.inArray(item.key, observerInstance.ignoreChanges) > -1) {
 							return;
 						}
 						if (observerInstance.verbose) {
 							console.log("EventStackObserver: ", item.key, item.value);
-							console.log("currently on route: " + Router.current().route.path(), "Number of callbacks: " + observerInstance.onChangeCallbacks[Router.current().route.path()].length, "callbacks: ",[observerInstance.onChangeCallbacks[Router.current().route.path()]]);
+							console.log(
+								"EventStackObserver: Currently on route: " + currentPath,
+								"Number of callbacks: " + observerInstance.onChangeCallbacks[currentPath].length,
+								"callbacks: ",observerInstance.onChangeCallbacks[currentPath]
+							);
 						}
-						observerInstance.onChangeCallbacks[Router.current().route.path()].forEach(function (callbackObject) {
+						observerInstance.onChangeCallbacks[currentPath].forEach(function (callbackObject) {
 							if ($.inArray(item.key, callbackObject.limiter) > -1) {
 								if (observerInstance.verbose) {
-									console.log("EventStackObserver: Event received ", item.key, " key map ", callbackObject.limiter, " Calling ", [callbackObject.callback]);
+									console.log("EventStackObserver: Found matching event limiter", item.key, "in key map", callbackObject.limiter);
+									console.log("EventStackObserver: Calling ", [callbackObject.callback]);
 								}
 								callbackObject.callback(item.key, item.value);
 							}
 						});
+						if (observerInstance.verbose) {
+							console.log("EventStackObserver: All callbacks have been called");
+							console.log("EventStackObserver: ---------------------------------------------------");
+						}
 					}
 				}
 			}
@@ -87,17 +92,18 @@ export class EventStackObserver {
 		if (typeof callback !== 'function') {
 			throw new Error("invalid callback!");
 		}
-		if (!(this.onChangeCallbacks[Router.current().route.path()] instanceof Array)) {
-			this.onChangeCallbacks[Router.current().route.path()] = [];
+		let currentPath = Router.current().route.path();
+		if (!(this.onChangeCallbacks[currentPath] instanceof Array)) {
+			this.onChangeCallbacks[currentPath] = [];
 		}
 		let hasCallback = false;
-		this.onChangeCallbacks[Router.current().route.path()].forEach(function (callbackObject) {
+		this.onChangeCallbacks[currentPath].forEach(function (callbackObject) {
 			if (callback.toString() === callbackObject.callback.toString()) {
 				hasCallback = true;
 			}
 		});
 		if (!hasCallback) {
-			this.onChangeCallbacks[Router.current().route.path()].push({
+			this.onChangeCallbacks[currentPath].push({
 				limiter,
 				callback
 			});
@@ -108,5 +114,8 @@ export class EventStackObserver {
 export let globalEventStackObserver = null;
 
 export function setGlobalEventStackObserver() {
+	if (globalEventStackObserver) {
+		globalEventStackObserver.stop();
+	}
 	globalEventStackObserver = new EventStackObserver({verbose: false});
 }

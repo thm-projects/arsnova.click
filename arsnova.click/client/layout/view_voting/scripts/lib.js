@@ -20,7 +20,7 @@ import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManager} from '/lib/eventmanager.js';
 import {QuestionGroup} from '/lib/questions.js';
-import {splashscreenError} from '/client/plugins/splashscreen/scripts/lib.js';
+import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 export let countdown = null;
 export let currentButton = 0;
@@ -97,8 +97,10 @@ export function makeAndSendResponse(answerOptionNumber) {
 		userNick: Session.get("nick")
 	}, (err) => {
 		if (err) {
-			splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason));
-			splashscreenError.open();
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+			});
 		}
 	});
 }

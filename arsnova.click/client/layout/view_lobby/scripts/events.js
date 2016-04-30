@@ -21,7 +21,7 @@ import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {MemberList} from '/lib/memberlist.js';
 import * as localData from '/client/lib/local_storage.js';
-import {splashscreenError, Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {calculateButtonCount} from './lib.js';
 
 Template.memberlist.events({
@@ -42,13 +42,15 @@ Template.memberlist.events({
 			autostart: true,
 			templateName: "kickMemberSplashscreen",
 			closeOnButton: '#closeDialogButton, #kickMemberButton',
-			onRendered: function () {
-				$('#nickName').text($(event.currentTarget).text().replace(/(?:\r\n|\r| |\n)/g, ''));
-				$('#kickMemberButton').on('click', function () {
+			onRendered: function (instance) {
+				instance.templateSelector.find('#nickName').text($(event.currentTarget).text().replace(/(?:\r\n|\r| |\n)/g, ''));
+				instance.templateSelector.find('#kickMemberButton').on('click', function () {
 					Meteor.call('MemberList.removeLearner', localData.getPrivateKey(), Session.get("hashtag"), $(event.currentTarget).attr("id"), function (err) {
 						if (err) {
-							splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason));
-							splashscreenError.open();
+							new ErrorSplashscreen({
+								autostart: true,
+								errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+							});
 						}
 					});
 				});

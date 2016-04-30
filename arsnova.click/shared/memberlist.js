@@ -68,8 +68,16 @@ Meteor.methods({
 			throw new Meteor.Error('MemberList.removeLearner', 'plugins.splashscreen.error.error_messages.not_authorized');
 		}
 
-		MemberList.remove({hashtag: hashtag, _id: nickId});
-		EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "MemberList.removeLearner", value: {user: nickId}}}});
+		let nickName = MemberList.findOne({hashtag: hashtag, _id: nickId}).nick;
+
+		if (nickName) {
+			MemberList.remove({hashtag: hashtag, _id: nickId}, function (err) {
+				if (err) {
+					throw new Meteor.Error('MemberList.removeLearner', 'plugins.splashscreen.error.error_messages.Internal Server Error');
+				}
+				EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "MemberList.removeLearner", value: {user: nickName}}}});
+			});
+		}
 	},
 	'MemberList.setReadConfirmed': function ({hashtag, questionIndex, nick}) {
 		/*

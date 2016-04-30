@@ -60,6 +60,12 @@ export class Splashscreen {
 		this.templateSelector = null;
 		this.created();
 		this.isCreated = true;
+
+		let duplicateEntry = $('#' + options.templateName + "_" + options.instanceId);
+		if (duplicateEntry.length > 0) {
+			duplicateEntry.remove();
+		}
+
 		this.rendered();
 		this.isRendered = true;
 	}
@@ -80,19 +86,17 @@ export class Splashscreen {
 	 */
 	rendered () {
 		let template = Template[this.options.templateName];
-		if (template) {
-			this.templateInstance = Blaze.render(Template[this.options.templateName], document.body);
-			$(this.templateInstance.firstNode()).addClass(this.options.templateName).attr("id", this.options.templateName + "_" + this.options.instanceId);
-		} else {
+		if (!template) {
 			throw new Error('Invalid template name');
 		}
+
+		this.templateInstance = Blaze.render(Template[this.options.templateName], document.body);
+		$(this.templateInstance.firstNode()).addClass(this.options.templateName).attr("id", this.options.templateName + "_" + this.options.instanceId);
 		this.templateSelector = $('#' + this.options.templateName + "_" + this.options.instanceId);
 
 		this.isOpen = this.options.autostart;
 		if (this.isOpen) {
 			this.open();
-		} else {
-			this.close();
 		}
 
 		if (typeof this.options.onRendered === "function") {
@@ -121,9 +125,7 @@ export class Splashscreen {
 	 * A call of this method will close (hide) the splashscreen
 	 */
 	close () {
-		if (this.options.closeOnButton) {
-			this.templateSelector.off('hide.bs.modal').off('click', this.options.closeOnButton);
-		}
+		this.templateSelector.off('hide.bs.modal').off('click', this.options.closeOnButton);
 		this.templateSelector.modal("hide");
 		this.isOpen = false;
 		this.destroy();
@@ -134,49 +136,49 @@ export class Splashscreen {
 	 */
 	open () {
 		let self = this;
-		if (this.options.closeOnButton) {
+		if (self.options.closeOnButton) {
 			let hasClickedOnCloseButton = false;
-			this.templateSelector.on('hide.bs.modal', function (event) {
+			self.templateSelector.on('hide.bs.modal', function (event) {
 				if (!hasClickedOnCloseButton) {
 					event.stopPropagation();
 					event.preventDefault();
 				}
-			}).on('click', this.options.closeOnButton, function () {
+			});
+
+			self.templateSelector.find('.modal-dialog').on('click', self.options.closeOnButton, function () {
 				hasClickedOnCloseButton = true;
 				self.close();
 			});
 		} else {
-			this.templateSelector.on('hide.bs.modal', function () {
-				self.destroy();
+			self.templateSelector.on('hide.bs.modal', function () {
+				self.close();
 			});
 		}
 
-		this.templateSelector.modal("show");
-		this.isOpen = true;
+		self.templateSelector.modal("show");
+		self.isOpen = true;
 	}
 }
 
 
-class ErrorSplashscreen extends Splashscreen {
+export class ErrorSplashscreen extends Splashscreen {
 	constructor (options) {
+		options.templateName = "errorSplashscreen";
+		options.closeOnButton = "#js-btn-hideErrorMessageModal";
 		super(options);
+
+		if (!options.errorMessage) {
+			throw new Error('Invalid error message');
+		}
+		this.setErrorText(options.errorMessage);
 	}
 
 	setErrorText (text) {
 		if (this.isRendered) {
+			$(this.templateSelector).find(".modal-header>h2").text(TAPi18n.__("plugins.splashscreen.error.title"));
 			$(this.templateSelector).find(".modal-body").text(text);
 		} else {
 			throw new Error(TAPi18n.__("plugins.splashscreen.error.set_text_error"));
 		}
 	}
-}
-
-export let splashscreenError = null;
-
-export function setErrorSplashscreen() {
-	splashscreenError = new ErrorSplashscreen({
-		autostart: false,
-		templateName: "errorSplashscreen",
-		closeOnButton: "#js-btn-hideErrorMessageModal"
-	});
 }

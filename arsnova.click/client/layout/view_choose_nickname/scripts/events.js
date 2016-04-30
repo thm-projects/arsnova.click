@@ -20,7 +20,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {MemberList} from '/lib/memberlist.js';
-import {splashscreenError} from '/client/plugins/splashscreen/scripts/lib.js';
+import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as lib from './lib.js';
 
 Template.nick.events({
@@ -36,8 +36,10 @@ Template.nick.events({
 		}, (err) => {
 			if (err) {
 				$("#forwardButton").attr("disabled", "disabled");
-				splashscreenError.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason));
-				splashscreenError.open();
+				new ErrorSplashscreen({
+					autostart: true,
+					errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+				});
 			} else {
 				Session.set("nick", nickname);
 				Router.go("/memberlist");

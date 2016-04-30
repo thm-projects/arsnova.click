@@ -33,6 +33,12 @@
   }
 }
 
+.kickMemberSplashscreen {
+  .modal-content {
+	background: $splashscreen-question-and-answer-background-color;
+  }
+}
+
 .errorSplashscreen {
   .modal-content {
 	background: $splash-screen-error-message-background-color;

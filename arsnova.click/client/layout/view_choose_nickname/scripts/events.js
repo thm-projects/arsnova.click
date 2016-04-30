@@ -52,7 +52,7 @@ Template.nick.events({
         var member = MemberList.findOne({nick: currentNickName});
         var $inputField = $("#nickname-input-field");
         $inputField.popover({
-            title: "Dieser Name ist nicht verfügbar!",
+            title: TAPi18n.__("view.choose_nickname.nickname_na_popup"),
             trigger: 'manual',
             placement: 'bottom'
         });

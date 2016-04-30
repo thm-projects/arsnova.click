@@ -80,13 +80,13 @@ Template.header.events({
 					Session.set("soundIsPlaying", false);
 					switch ($(event.target).val()) {
 						case "Song1":
-							setBuzzsound1("waity.mp3");
+							setBuzzsound1("bensound-thelounge.mp3");
 							break;
 						case "Song2":
-							setBuzzsound1("jazzy.mp3");
+							setBuzzsound1("bensound-cute.mp3");
 							break;
 						case "Song3":
-							setBuzzsound1("mariowaity.mp3");
+							setBuzzsound1("bensound-epic.mp3");
 							break;
 					}
 				});

@@ -128,9 +128,9 @@
       "join_session": "Mach mit!",
       "edit_session": "Bearbeiten",
       "create_session": "Mach neu!",
-      "quiz_management": "Quizverwaltung",
+      "quiz_management": "Gespeicherte Quizze",
       "available_sessions": "Diese Quizze sind in deinem Browser:",
-      "session_management": "Sessionverwaltung",
+      "session_management": "Quizverwaltung",
       "import": "Import"
     },
     "leaderboard": {

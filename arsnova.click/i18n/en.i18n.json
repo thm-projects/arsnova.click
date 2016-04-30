@@ -128,9 +128,9 @@
       "join_session": "Join now!",
       "edit_session": "Edit",
       "create_session": "Make a new one!",
-      "quiz_management": "Quiz Management",
-      "available_sessions": "Choose one of your Quizzes:",
-      "session_management": "Session Management",
+      "quiz_management": "Stored Quizzes",
+      "available_sessions": "These quizzes are stored in your browser:",
+      "session_management": "Quiz Management",
       "import": "Import"
     },
     "leaderboard": {

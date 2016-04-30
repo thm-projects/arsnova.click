@@ -132,9 +132,7 @@ Template.liveResults.events({
 				});
 				Session.set("sessionClosed", true);
 			} else {
-				Meteor.call("EventManager.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), EventManager.findOne().questionIndex + 1, ()=> {
-					startCountdown(EventManager.findOne().questionIndex);
-				});
+				startCountdown(EventManager.findOne().questionIndex + 1);
 			}
 		});
 	},

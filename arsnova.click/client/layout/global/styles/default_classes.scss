@@ -303,3 +303,15 @@
 	display: none;
   }
 }
+
+.popover-title, .popover.bottom {
+  background-color: $warning;
+  color: $warning-text-color;
+  border-color: $warning;
+  font-family: $font;
+  font-size: medium;
+}
+
+.popover.bottom > .arrow:after {
+  border-bottom-color: $warning;
+}

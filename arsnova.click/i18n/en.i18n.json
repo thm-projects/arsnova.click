@@ -121,7 +121,8 @@
     },
     "choose_nickname": {
       "enter_nickname": "Take a nickname",
-      "enter_nickname_here": "Enter your nickname here"
+      "enter_nickname_here": "Enter your nickname here",
+      "nickname_na_popup": "This name is not available!"
     },
     "hashtag_management": {
       "enter_quiz_name": "Enter the quiz name here",

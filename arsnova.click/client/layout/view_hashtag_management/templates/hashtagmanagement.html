@@ -21,22 +21,22 @@
 			{{> titel titelText = "view.hashtag_management.session_management" }}
 			{{#each serverHashtags}}
 				<div class="row" id="{{this}}">
-					<div class="col-xs-6">
+					<div class="col-md-6 col-sm-6 col-xs-12">
 						<button type="button" class="js-reactivate-hashtag btn btn-secondary btn-lg btn-answerOption">
-							<span class="ansBtn">{{this}}</span>
+							<span>{{this}}</span>
 						</button>
 					</div>
-					<div class="col-xs-2">
+					<div class="col-md-2 col-sm-2 col-xs-4">
 						<button type="button" class="js-reactivate-hashtag btn btn-info btn-lg btn-answerOption">
 							<span class="glyphicon glyphicon-pencil glyph-left alignGlyphicon" aria-hidden="true"></span>
 						</button>
 					</div>
-					<div class="col-xs-2">
+					<div class="col-md-2 col-sm-2 col-xs-4">
 						<button type="button" class="js-delete btn btn-info btn-lg btn-answerOption">
 							<span class="glyphicon glyphicon-trash glyph-left alignGlyphicon" aria-hidden="true"></span>
 						</button>
 					</div>
-					<div class="col-xs-2">
+					<div class="col-md-2 col-sm-2 col-xs-4">
 						<button type="button" class="js-export btn btn-info btn-lg btn-answerOption">
 							<span class="glyphicon glyphicon-export glyph-left alignGlyphicon" aria-hidden="true"></span>
 						</button>

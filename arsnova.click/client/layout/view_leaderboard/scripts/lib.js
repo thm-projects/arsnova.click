@@ -117,7 +117,6 @@ export function getLeaderBoardItems() {
 		if (!EventManager.findOne()) {
 			return [];
 		}
-
 		var result = [];
 		for (var i = 0; i <= EventManager.findOne().questionIndex; i++) {
 			result.push({
@@ -128,4 +127,52 @@ export function getLeaderBoardItems() {
 
 		return result;
 	}
+}
+
+function getAllNonPollingLeaderBoardItems() {
+	var result = [];
+	for (var i = 0; i <= EventManager.findOne().questionIndex; i++) {
+		// just pick leaderBoardItems for sc & mc questions, pollings doesn't matter
+		if (AnswerOptions.find({questionIndex: i, isCorrect: 1}).count() > 0) {
+			result.push({
+				index: i,
+				value: getLeaderBoardItemsByIndex(i)
+			});
+		}
+	}
+	return result;
+}
+
+export function getAllNicksWhichAreAlwaysRight() {
+	var leaderBoardItems = getAllNonPollingLeaderBoardItems();
+	var allNicksAndTimes = [];
+	$.each(leaderBoardItems, function (index, value) {
+		$.each(value.value, function (i2, v2) {
+			allNicksAndTimes.push({nick: v2.nick, time: v2.responseTime});
+		});
+	});
+	var allTimeWinners = [];
+	$.each(allNicksAndTimes, function (index, value) {
+		var nickOccuresAmount = 0;
+		var nickSumTime = 0;
+		$.each(allNicksAndTimes, function (i2, v2) {
+			if (v2.nick === value.nick) {
+				nickOccuresAmount++;
+				nickSumTime += v2.time;
+			}
+		});
+		if (nickOccuresAmount === leaderBoardItems.length) {
+			var alreadyExists = false;
+			$.each(allTimeWinners, function (i3, v3) {
+				if (v3.value === value.nick) {
+					alreadyExists = true;
+					return false;
+				}
+			});
+			if (!alreadyExists) {
+				allTimeWinners.push({value: value.nick, sumResponseTime: nickSumTime});
+			}
+		}
+	});
+	return allTimeWinners;
 }

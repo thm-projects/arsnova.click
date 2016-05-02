@@ -19,6 +19,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {getLeaderBoardItems} from './lib.js';
+import {getAllNicksWhichAreAlwaysRight} from './lib.js';
 
 Template.leaderBoard.helpers({
 	hashtag: ()=> {
@@ -56,6 +57,12 @@ Template.leaderBoard.helpers({
 	},
 	hasTooMuchButtons: ()=> {
 		return Session.get('responsesCountOverride') || (Session.get("allMembersCount") - Session.get("maxResponseButtons") > 0);
+	},
+	isGlobalRanking: function () {
+		return Session.get("showGlobalRanking");
+	},
+	leaderBoardSums: function () {
+		return getAllNicksWhichAreAlwaysRight();
 	},
 	noLeaderBoardItems: (index)=> {
 		var items = getLeaderBoardItems();

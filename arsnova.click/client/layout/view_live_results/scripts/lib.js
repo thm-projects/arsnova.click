@@ -136,6 +136,7 @@ export function startCountdown(index) {
 			Session.set("sessionClosed", true);
 			if (Session.get("isOwner") && AnswerOptions.find({isCorrect: 1}).count() > 0) {
 				routeToLeaderboardTimer = setTimeout(() => {
+					Session.set("showGlobalRanking", true);
 					Router.go("/statistics");
 				}, 7000);
 			}

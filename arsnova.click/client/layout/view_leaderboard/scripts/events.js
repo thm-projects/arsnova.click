@@ -26,6 +26,7 @@ Template.leaderBoard.events({
 		Session.set('responsesCountOverride', false);
 	},
 	'click #js-btn-backToResults': ()=> {
+		Session.set("showGlobalRanking", false);
 		Router.go('/results');
 	}
 });

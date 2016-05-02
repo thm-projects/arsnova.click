@@ -25,26 +25,36 @@
 						<h2 class="titel" style="font-weight: bold;">{{_ "view.leaderboard.no_attendee_correct"}}</h2>
 					</div>
 				{{ else }}
-					{{#each leaderBoardItems}}
-						{{#if isNumber index}}
-							<div class="col-md-12">
-								<h3 class="titel-relative text-light">{{_ "view.leaderboard.question"}} {{getNormalizedIndex index}}:</h3>
-							</div>
-						{{/if}}
-						{{#if noLeaderBoardItems index}}
-							<div class="col-md-12">
-								<p class="titel" style="font-weight: bold;font-size: 2vw;">{{_ "view.leaderboard.no_attendee_correct"}}</p>
-							</div>
-						{{else}}
-							{{#each value}}
-								<div class="col-md-6">
-									<button class="button button-leader {{#if isOwnNick nick}}color-changing-own-nick{{/if}}">{{getPosition @index}}. {{nick}}
-										- {{parseTimeToSeconds responseTime}} s
-									</button>
-								</div>
-							{{/each}}
-						{{/if}}
-					{{/each}}
+                    {{#if isGlobalRanking}}
+                        {{#each leaderBoardSums}}
+                            <div class="col-md-6">
+                                <button class="button button-leader {{#if isOwnNick value}}color-changing-own-nick{{/if}}">{{getPosition @index}}. {{value}}
+                                    - {{parseTimeToSeconds sumResponseTime}} s
+                                </button>
+                            </div>
+                        {{/each}}
+                    {{else}}
+                        {{#each leaderBoardItems}}
+                            {{#if isNumber index}}
+                                <div class="col-md-12">
+                                    <h3 class="titel-relative text-light">{{_ "view.leaderboard.question"}} {{getNormalizedIndex index}}:</h3>
+                                </div>
+                            {{/if}}
+                            {{#if noLeaderBoardItems index}}
+                                <div class="col-md-12">
+                                    <p class="titel" style="font-weight: bold;font-size: 2vw;">{{_ "view.leaderboard.no_attendee_correct"}}</p>
+                                </div>
+                            {{else}}
+                                {{#each value}}
+                                    <div class="col-md-6">
+                                        <button class="button button-leader {{#if isOwnNick nick}}color-changing-own-nick{{/if}}">{{getPosition @index}}. {{nick}}
+                                            - {{parseTimeToSeconds responseTime}} s
+                                        </button>
+                                    </div>
+                                {{/each}}
+                            {{/if}}
+                        {{/each}}
+                    {{/if}}
 				{{/if}}
 			</div>
 		</div>

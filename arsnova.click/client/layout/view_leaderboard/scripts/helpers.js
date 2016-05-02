@@ -62,7 +62,7 @@ Template.leaderBoard.helpers({
 		return Session.get("showGlobalRanking");
 	},
 	leaderBoardSums: function () {
-		return getAllNicksWhichAreAlwaysRight(getLeaderBoardItems());
+		return getAllNicksWhichAreAlwaysRight();
 	},
 	noLeaderBoardItems: (index)=> {
 		var items = getLeaderBoardItems();

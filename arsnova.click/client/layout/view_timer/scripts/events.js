@@ -36,7 +36,6 @@ Template.createTimerView.events({
 			});
 		} else {
 			if ($(event.currentTarget).attr("id") === "forwardButton") {
-
 				/* After finishing question/answers-creation this function checks if there are answer-options
 				 * with no text. All answer-options with no text will consequently be deleted from database and
 				 * local storage to prevent the rendering of empty and therefore unnecessary answer-options during
@@ -62,7 +61,6 @@ Template.createTimerView.events({
 						}
 					}
 				});
-
 				Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
 				Meteor.call("EventManager.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), 0);
 				Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 2);

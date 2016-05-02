@@ -51,11 +51,6 @@ Template.nick.events({
 		var currentNickName = event.currentTarget.value;
 		var member = MemberList.findOne({nick: currentNickName});
 		var $inputField = $("#nickname-input-field");
-		$inputField.popover({
-			title: TAPi18n.__("view.choose_nickname.nickname_na_popup"),
-			trigger: 'manual',
-			placement: 'bottom'
-		});
 
 		if (currentNickName.length > 2 && !member) {
 			if (lib.isNickAllowed(currentNickName)) {
@@ -77,6 +72,11 @@ Template.nick.events({
 				$inputField.popover("destroy");
 			}
 			if (currentNickName.length > 2) {
+				$inputField.popover({
+					title: TAPi18n.__("view.choose_nickname.nickname_na_popup"),
+					trigger: 'manual',
+					placement: 'bottom'
+				});
 				$inputField.popover("show");
 			}
 		}

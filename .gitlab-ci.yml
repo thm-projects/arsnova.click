@@ -6,7 +6,6 @@ jshint:
   stage: test
   tags:
     - nodejs
-  allow_failure: true
   dependencies: []
   script:
     - npm install jshint@^2.9.0
@@ -16,7 +15,6 @@ jscs:
   stage: test
   tags:
     - nodejs
-  allow_failure: true
   dependencies: []
   script:
     - npm install jscs

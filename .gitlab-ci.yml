@@ -79,7 +79,7 @@ deploy_production:
   dependencies:
     - build
   script:
-    - chmod -R a+rX,ug+w build
+    - chmod -R a+rX,ug+w "$PROJECT_PATH/build"
     - eval $(ssh-agent -s)
     - mkdir ~/.ssh && echo "$PRODUCTION_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - ssh-add <(echo "$PRODUCTION_SSH_PRIVATE_KEY")

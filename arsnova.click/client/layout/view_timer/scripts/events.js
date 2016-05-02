@@ -28,7 +28,7 @@ import {setTimer} from './lib.js';
 Template.createTimerView.events({
 	"click #forwardButton, click #backButton": function (event) {
 		var err = setTimer(EventManager.findOne().questionIndex);
-        
+
 		if (err) {
 			new ErrorSplashscreen({
 				autostart: true,
@@ -37,19 +37,31 @@ Template.createTimerView.events({
 		} else {
 			if ($(event.currentTarget).attr("id") === "forwardButton") {
 
-                /* After finishing question/answers - creation this function checks if there are answer-options
+                /* After finishing question/answers-creation this function checks if there are answer-options
                  * with no text. All answer-options with no text will consequently be deleted from database and
                  * local storage to prevent the rendering of empty and therefore unnecessary answer-options during
-                 * the quiz.*/
+                 * the quiz. However, at least one answer remains even if all answers are empty.*/
                 var answers = AnswerOptions.find({answerText: { $exists: false}}).forEach(function(cursor) {
-                    Meteor.call('AnswerOptions.deleteOption', {
-                        privateKey: localData.getPrivateKey(),
-                        hashtag: Session.get("hashtag"),
-                        questionIndex: cursor.questionIndex,
-                        answerOptionNumber: cursor.answerOptionNumber,
-                    });
-                    localData.deleteAnswerOption(Session.get("hashtag"), cursor.questionIndex, cursor.answerOptionNumber);
+                    if (AnswerOptions.find({ $and: [{answerText: {$exists: true}},{questionIndex: cursor.questionIndex}]}).count() > 0) {
+                        Meteor.call('AnswerOptions.deleteOption', {
+                            privateKey: localData.getPrivateKey(),
+                            hashtag: Session.get("hashtag"),
+                            questionIndex: cursor.questionIndex,
+                            answerOptionNumber: cursor.answerOptionNumber,
+                        });
+                        localData.deleteAnswerOption(Session.get("hashtag"), cursor.questionIndex, cursor.answerOptionNumber);
+                    }
+                    else { if(cursor.answerOptionNumber > 0) {
+                        Meteor.call('AnswerOptions.deleteOption', {
+                            privateKey: localData.getPrivateKey(),
+                            hashtag: Session.get("hashtag"),
+                            questionIndex: cursor.questionIndex,
+                            answerOptionNumber: cursor.answerOptionNumber,
+                        });
+                        localData.deleteAnswerOption(Session.get("hashtag"), cursor.questionIndex, cursor.answerOptionNumber);
+                    }};
                 });
+
 
 				Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
 				Meteor.call("EventManager.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), 0);

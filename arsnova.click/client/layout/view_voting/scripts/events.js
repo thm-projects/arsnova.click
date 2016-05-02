@@ -73,11 +73,11 @@ Template.votingview.events({
 
 		Session.set("hasSendResponse", true);
 		var responseArr = JSON.parse(Session.get("responses"));
-		for (var i = 0; i < AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count(); i++) {
-			if (responseArr[i]) {
-				makeAndSendResponse(i);
+		AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).forEach(function(cursor) {
+			if (responseArr[cursor.answerOptionNumber]) {
+				makeAndSendResponse(cursor.answerOptionNumber);
 			}
-		}
+		});
 		if (EventManager.findOne().questionIndex + 1 >= QuestionGroup.findOne().questionList.length) {
 			Session.set("sessionClosed", true);
 		}
@@ -86,7 +86,7 @@ Template.votingview.events({
 	"click .sendResponse": function (event) {
 		event.stopPropagation();
 
-		if (Session.get("questionSC")) {
+		if (Session.get("questionSC") || (AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count() === 1)) {
 			makeAndSendResponse(event.currentTarget.id);
 			Router.go("/results");
 		} else {

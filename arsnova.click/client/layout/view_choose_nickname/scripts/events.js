@@ -57,9 +57,20 @@ Template.nick.events({
 			placement: 'bottom'
 		});
 
-		if (currentNickName.length > 2 && !member && lib.isNickAllowed(currentNickName)) {
-			$("#forwardButton").removeAttr("disabled");
-			$inputField.popover("destroy");
+		if (currentNickName.length > 2 && !member) {
+			if (lib.isNickAllowed(currentNickName)) {
+				$("#forwardButton").removeAttr("disabled");
+				$inputField.popover("destroy");
+			} else {
+				$("#forwardButton").attr("disabled", "disabled");
+				$inputField.popover("destroy");
+				$inputField.popover({
+					title: TAPi18n.__("view.choose_nickname.nickname_blacklist_popup"),
+					trigger: 'manual',
+					placement: 'bottom'
+				});
+				$inputField.popover("show");
+			}
 		} else {
 			$("#forwardButton").attr("disabled", "disabled");
 			if (currentNickName.length === 0 || !member) {

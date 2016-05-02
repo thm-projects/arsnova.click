@@ -122,7 +122,8 @@
     "choose_nickname": {
       "enter_nickname": "Gib dir einen Nicknamen",
       "enter_nickname_here": "Gib deinen Nick ein",
-      "nickname_na_popup": "Dieser Name ist nicht verfügbar!"
+      "nickname_na_popup": "Dieser Name ist nicht verfügbar!",
+      "nickname_blacklist_popup": "Dieser Name ist aufgrund seiner Bedeutung nicht zulässig!"
     },
     "hashtag_management": {
       "enter_quiz_name": "Gib den Quiznamen ein",

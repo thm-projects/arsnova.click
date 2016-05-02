@@ -73,7 +73,7 @@ Template.votingview.events({
 
 		Session.set("hasSendResponse", true);
 		var responseArr = JSON.parse(Session.get("responses"));
-		AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).forEach(function(cursor) {
+		AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).forEach(function (cursor) {
 			if (responseArr[cursor.answerOptionNumber]) {
 				makeAndSendResponse(cursor.answerOptionNumber);
 			}

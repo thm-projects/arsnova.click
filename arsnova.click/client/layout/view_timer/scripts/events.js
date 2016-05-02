@@ -46,7 +46,7 @@ Template.createTimerView.events({
 							privateKey: localData.getPrivateKey(),
 							hashtag: Session.get("hashtag"),
 							questionIndex: cursor.questionIndex,
-							answerOptionNumber: cursor.answerOptionNumber,
+							answerOptionNumber: cursor.answerOptionNumber
 						});
 						localData.deleteAnswerOption(Session.get("hashtag"), cursor.questionIndex, cursor.answerOptionNumber);
 					} else {

@@ -64,7 +64,11 @@ Template.liveResults.helpers({
 		return getPercentRead(index);
 	},
 	getCurrentRead: (index)=> {
-		return getCurrentRead(index);
+		var currentReadAmount = getCurrentRead(index);
+		if (currentReadAmount > 0) {
+			$('#startNextQuestion').prop('disabled', false);
+		}
+		return currentReadAmount;
 	},
 	sessionClosed: function () {
 		return Session.get("sessionClosed");

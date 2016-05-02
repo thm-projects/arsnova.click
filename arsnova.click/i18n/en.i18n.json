@@ -128,6 +128,7 @@
       "enter_quiz_name": "Enter the quiz name here",
       "join_session": "Join now!",
       "edit_session": "Edit",
+      "reenter_session": "Open",
       "create_session": "Make a new one!",
       "quiz_management": "Stored Quizzes",
       "available_sessions": "These quizzes are stored in your browser:",

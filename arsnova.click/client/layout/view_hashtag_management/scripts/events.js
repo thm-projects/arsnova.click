@@ -41,7 +41,7 @@ Template.hashtagView.events({
 		} else {
 			var localHashtags = localData.getAllHashtags();
 			if ($.inArray(inputHashtag, localHashtags) > -1) {
-				addNewHashtagItem.html(TAPi18n.__("view.hashtag_management.edit_session") + '<span class="glyphicon glyphicon-pencil glyph-right" aria-hidden="true"></span>');
+				addNewHashtagItem.html(TAPi18n.__("view.hashtag_management.reenter_session") + '<span class="glyphicon glyphicon-log-in glyph-right" aria-hidden="true"></span>');
 				addNewHashtagItem.removeAttr("disabled");
 			} else {
 				addNewHashtagItem.attr("disabled", "disabled");

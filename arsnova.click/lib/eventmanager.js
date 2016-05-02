@@ -13,35 +13,50 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-EventManager = new Mongo.Collection("eventmanager");
+import {Mongo} from 'meteor/mongo';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+
+export const EventManager = new Mongo.Collection("eventmanager");
+
+const eventStackScheme = new SimpleSchema({
+	key: {
+		type: String
+	},
+	value: {
+		type: Object,
+		blackbox: true
+	}
+});
 
 var eventManagerScheme = new SimpleSchema({
-    hashtag: {
-        type: String,
-        min: 1,
-        max: 25
-    },
-    sessionStatus: {
-        type: Number,
-        min: 0,
-        max: 3
-    },
-    lastConnection: {
-        type: Number
-    },
-    readingConfirmationIndex: {
-        type: Number,
-        min: -1,
-        optional: true
-    },
-    questionIndex: {
-        type: Number,
-        min: -1,
-        optional: true
-    }
+	hashtag: {
+		type: String,
+		min: 1,
+		max: 25
+	},
+	sessionStatus: {
+		type: Number,
+		min: 0,
+		max: 3
+	},
+	lastConnection: {
+		type: Number
+	},
+	readingConfirmationIndex: {
+		type: Number,
+		min: -1,
+		optional: true
+	},
+	questionIndex: {
+		type: Number,
+		min: -1,
+		optional: true
+	},
+	eventStack: {
+		type: [eventStackScheme]
+	}
 });
 
 EventManager.attachSchema(eventManagerScheme);

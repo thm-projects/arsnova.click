@@ -1,9 +1,10 @@
-aldeed:collection2@2.9.0
-aldeed:collection2-core@1.1.0
+aldeed:collection2@2.9.1
+aldeed:collection2-core@1.1.1
 aldeed:schema-deny@1.0.1
 aldeed:schema-index@1.0.1
 aldeed:simple-schema@1.5.3
 allow-deny@1.0.4
+amplify@1.0.0
 autoupdate@1.2.8
 babel-compiler@6.6.4
 babel-runtime@0.1.8
@@ -13,10 +14,13 @@ blaze@2.1.7
 blaze-html-templates@1.0.4
 blaze-tools@1.0.8
 boilerplate-generator@1.0.8
+brentjanderson:buzz@1.1.10
 caching-compiler@1.0.4
 caching-html-compiler@1.0.6
 callback-hook@1.0.8
+cfs:http-methods@0.0.32
 check@1.2.1
+coffeescript@1.0.17
 ddp@1.2.5
 ddp-client@1.2.6
 ddp-common@1.2.5
@@ -29,7 +33,7 @@ ejson@1.0.11
 es5-shim@4.5.10
 fastclick@1.0.11
 flyandi:reactive-countdown@0.0.3
-fourseven:scss@3.4.1
+fourseven:scss@3.4.3
 geojson-utils@1.0.8
 hot-code-push@1.0.4
 html-tools@1.0.9
@@ -51,6 +55,7 @@ logging@1.0.12
 mdg:validation-error@0.2.0
 meteor@1.1.14
 meteor-base@1.0.4
+meteorspark:util@0.2.0
 minifier-css@1.1.11
 minifier-js@1.1.11
 minimongo@1.0.15
@@ -79,6 +84,8 @@ spacebars@1.0.11
 spacebars-compiler@1.0.11
 standard-minifier-css@1.0.6
 standard-minifier-js@1.0.6
+tap:i18n@1.8.0
+tap:i18n-ui@0.8.0
 templating@1.1.9
 templating-tools@1.0.4
 tracker@1.0.13

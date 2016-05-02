@@ -13,35 +13,39 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-Meteor.publish('AnswerOptions.instructor', function(pprivateKey, phashtag) {
-    new SimpleSchema({
-        phashtag: {type: String},
-        pprivateKey: {type: String}
-    }).validate({pprivateKey, phashtag});
-    var doc = Hashtags.find({
-        hashtag: phashtag,
-        privateKey: pprivateKey
-    });
-    return doc ? AnswerOptions.find({hashtag: phashtag}) : false;
+import {Meteor} from 'meteor/meteor';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {AnswerOptions} from '/lib/answeroptions.js';
+import {Hashtags} from '/lib/hashtags.js';
+
+Meteor.publish('AnswerOptions.instructor', function (pprivateKey, phashtag) {
+	new SimpleSchema({
+		phashtag: {type: String},
+		pprivateKey: {type: String}
+	}).validate({pprivateKey, phashtag});
+	var doc = Hashtags.find({
+		hashtag: phashtag,
+		privateKey: pprivateKey
+	});
+	return doc ? AnswerOptions.find({hashtag: phashtag}) : false;
 });
 
-Meteor.publish('AnswerOptions.options', function(phashtag) {
-    new SimpleSchema({
-        phashtag: {type: String}
-    }).validate({phashtag});
-    return AnswerOptions.find({hashtag: phashtag});
+Meteor.publish('AnswerOptions.options', function (phashtag) {
+	new SimpleSchema({
+		phashtag: {type: String}
+	}).validate({phashtag});
+	return AnswerOptions.find({hashtag: phashtag});
 });
 
-Meteor.publish('AnswerOptions.public', function(hashtag, questionIndex) {
-    new SimpleSchema({
-        hashtag: {type: String}
-    }).validate({hashtag});
-    return AnswerOptions.find({hashtag: hashtag, questionIndex: questionIndex}, {
-        fields: {
-            isCorrect: 0
-        }
-    });
+Meteor.publish('AnswerOptions.public', function (hashtag) {
+	new SimpleSchema({
+		hashtag: {type: String}
+	}).validate({hashtag});
+	return AnswerOptions.find({hashtag: hashtag}, {
+		fields: {
+			isCorrect: 0
+		}
+	});
 });

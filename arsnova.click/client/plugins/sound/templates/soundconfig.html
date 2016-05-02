@@ -1,0 +1,52 @@
+<!--
+* This file is part of ARSnova Click.
+* Copyright (C) 2016 The ARSnova Team
+*
+* ARSnova Click is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* ARSnova Click is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
+
+<template name="soundConfig">
+	<div class="modal fade" id="soundModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2>{{_ "plugins.sound.title"}}</h2>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div id="slider2"></div>
+						<p>{{_ "plugins.sound.volume"}}: {{slider2}} %</p>
+						<button id="js-btn-playStopMusic" type="button" class="btn btn-success btn-answerOption btn-lg ">
+							<span class="glyphicon glyphicon-{{#if isSoundPlaying}}stop{{ else }}play{{/if}}"></span>
+						</button>
+						<select id="soundSelect" title="soundSelect">
+							<option value="Song1">Relax mood: "The Lounge" | Bensound.com</option>
+							<option value="Song2">Ukulele: "Cute" | Bensound.com</option>
+							<option value="Song3">Driving tune: "Epic" | Bensound.com</option>
+						</select>
+						<div class="col-md-12">
+							<button id="isSoundOnButton" class="button button-warning">{{_ "plugins.sound.inactive"}}</button>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="js-btn-hideSoundModal" type="button" class="btn btn-success btn-answerOption btn-lg ">
+						<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+						{{_ "global.close_window"}}
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+

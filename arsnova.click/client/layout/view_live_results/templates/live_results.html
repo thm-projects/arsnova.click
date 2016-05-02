@@ -1,0 +1,184 @@
+<!--
+* This file is part of ARSnova Click.
+* Copyright (C) 2016 The ARSnova Team
+*
+* ARSnova Click is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* ARSnova Click is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
+
+<template name="liveResults">
+	<div id="countdowndiv" class="fader"></div>
+	<img id="countdown" class="fader" src="gr5.gif">
+	{{> titel}}
+	<div id="liveResultsFrame">
+		<div class="row-padding-bottom">
+			{{#if isRunningQuestion}}{{#if isOwner}}
+				<div class="col-xs-3 top-bar-content">
+					<span class="glyphicon icon-top-bar glyphicon-user glyphicon-style center" aria-hidden="true">
+						<span class="titel">{{getCountStudents}}</span>
+					</span>
+				</div>
+				<div class="col-xs-6 text-center">
+					<div id="appTitle" class="titel subtitel-padding-top">{{_ votingText}}</div>
+				</div>
+				<div class="col-xs-3 top-bar-content">
+				<span class="glyphicon icon-top-bar glyphicon-hourglass glyphicon-style center" aria-hidden="true">
+					<span class="titel">{{getCountdown}}</span>
+				</span>
+				</div>
+			{{else}}
+				<div class=" titel-relative text-light text-center">
+					<div id="appTitle" class="titel margin-to-logo">{{votingText}}</div>
+				</div>
+			{{/if}}{{/if}}
+		</div>
+		<div class="question-wrapper">
+			{{#each questionList}}
+				<div class="row question-row" id="question-row_{{displayIndex}}">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-12">
+								<p class="question-title">{{_ "view.liveResults.question"}} {{getNormalizedIndex displayIndex}} / {{allQuestionCount}}</p>
+							</div>
+						</div>
+						{{#if hasReadConfirmationRequested displayIndex}}
+							<div class="row">
+								<div class="col-md-12">
+									<div class="row">
+										{{#if showLeaderBoardButton displayIndex}}
+											<div class="col-xs-6">
+												<button id="js-btn-showLeaderBoard_{{displayIndex}}" type="button"
+														class="btn btn-info btn-lg btn-answerOption btn-showLeaderBoard disableOnActiveCountdown">
+													<span class="glyphicon glyphicon-flag glyph-left"
+														  aria-hidden="true"></span>
+													<span class="ansBtn">{{_ "view.liveResults.ranking"}}</span>
+												</button>
+											</div>
+										{{/if}}
+										<div class="col-xs-{{#if showLeaderBoardButton displayIndex}}6{{else}}12{{/if}}">
+											<button id="js-btn-showQuestionAndAnswerModal" type="button"
+													class="btn btn-info btn-lg btn-answerOption">
+												<span class="glyphicon glyphicon-question-sign glyph-left"
+													  aria-hidden="true"></span>
+												<span class="ansBtn">{{_ "view.liveResults.question"}}</span>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						{{/if}}
+						{{> form_group
+							name = "view.liveResults.reading_confirmation"
+							absolute = (getCurrentRead displayIndex)
+							base = getCountStudents
+							percent = (getPercentRead displayIndex)
+							backgroundStyle = (getCSSClassForPercent (getPercentRead displayIndex))
+						}}
+						{{#if hasReadConfirmationRequested displayIndex}}
+							{{#each answerList displayIndex}}
+								{{#if isCountdownZero questionIndex}}
+									{{> form_group name = name absolute = absolute percent = percent isCorrect = isCorrect backgroundClass = (getCSSClassForIsCorrect isCorrect) }}
+								{{else}}
+									{{> form_group name = name absolute = absolute percent = percent backgroundClass = (getCSSClassForIsCorrect -1) }}
+								{{/if}}
+							{{/each}}
+						{{else}}
+							{{#if showMoreButton displayIndex}}
+								<div class="row more-learners-row">
+									<div class="col-xs-12">
+										<button class="btn btn-more-learners">
+											<span class="glyphicon glyphicon-align-justify"></span>
+											({{_ "view.liveResults.show_more" (invisibleLearnerCount displayIndex) count=(invisibleLearnerCount displayIndex)}})
+										</button>
+									</div>
+								</div>
+							{{/if}}
+							<div class="row learner-list margin-title"
+								 id="learner-list">
+								{{#each readingConfirmationListForQuestion displayIndex}}
+									{{> readingConfirmedLearner}}
+								{{/each}}
+							</div>
+						{{/if}}
+					</div>
+				</div>
+				{{#if hasReadConfirmationRequested displayIndex}}{{#if isMC displayIndex}}{{#if isCountdownZero displayIndex}}
+					<div class="row">
+						<div class="col-md-12">
+							{{#with mcOptions displayIndex}}
+								{{> form_group
+									name = "view.liveResults.complete_correct"
+									absolute = allCorrect.absolute
+									percent = allCorrect.percent
+									isCorrect = 1
+									id = 0
+									backgroundClass = (getCSSClassForIsCorrect 1)
+								}}
+								{{> form_group
+									name = "view.liveResults.complete_wrong"
+									absolute = allWrong.absolute
+									percent = allWrong.percent
+									isCorrect = 0
+									id = 1
+									backgroundClass = (getCSSClassForIsCorrect 0)
+								}}
+							{{/with}}
+						</div>
+					</div>
+				{{/if}}{{/if}}{{/if}}
+			{{/each}}
+		</div>
+
+		{{#if isOwner}}
+			{{#unless isRunningQuestion}}
+				<div class="fixed-bottom">
+					<div class="col-md-6 col-md-offset-3">
+						<div class="row">
+							<div class="col-xs-6">
+								<button id="backButton" class="button button-back disableOnActiveCountdown">
+									<span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
+									<span class="ansBtn">{{_ "view.liveResults.back_to_lobby"}}</span>
+								</button>
+							</div>
+							<div class="col-xs-6">
+								{{#if showGlobalLeaderboardButton}}
+									{{#if hasCorrectAnswerOptions}}
+										<button class="button button-next disableOnActiveCountdown" id="goGlobalRanking">
+											<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+											<span class="ansBtn">{{_ "view.liveResults.global_ranking"}}</span>
+										</button>
+									{{/if}}
+								{{else}}
+									{{#if hasNextQuestion}}
+										{{#if showNextQuestionButton}}
+											<button class="button button-next button-start disableOnActiveCountdown" id="showNextQuestionDialog">
+												<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+												<span class="ansBtn">{{_ "view.liveResults.show_question"}} {{nextReadingConfirmationIndex}}
+													/ {{allQuestionCount}}</span>
+											</button>
+										{{else}}
+											<button class="button button-next button-start disableOnActiveCountdown" id="startNextQuestion">
+												<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+												<span class="ansBtn">{{_ "view.liveResults.start_round"}} {{nextQuestionIndex}}
+													/ {{allQuestionCount}}</span>
+											</button>
+										{{/if}}
+									{{/if}}
+								{{/if}}
+							</div>
+						</div>
+					</div>
+				</div>
+			{{/unless}}
+		{{/if}}
+	</div>
+</template>

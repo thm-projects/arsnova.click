@@ -1,0 +1,44 @@
+<!--
+* This file is part of ARSnova Click.
+* Copyright (C) 2016 The ARSnova Team
+*
+* ARSnova Click is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* ARSnova Click is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
+
+<template name="hashtagView">
+	{{> titel titelText = 'global.arsnova_slogan' }}
+	<div class="row center-vertical margin-title">
+		<div class="col-md-12">
+			<div class="row distance-top">
+				<div class="col-md-12">
+					<input type="text"
+						   class="input-field round-corners hashtag-field text-center"
+						   id="hashtag-input-field" placeholder="{{_ "view.hashtag_management.enter_quiz_name" }}"
+						   aria-describedby="basic-addon1" maxlength="25">
+				</div>
+			</div>
+			<div class="row distance-top">
+				<div class="col-xs-6 col-join-session">
+					<button id="joinSession" class="button button-purple" disabled><span
+							class="glyphicon glyphicon-share-alt glyph-left" aria-hidden="true"></span>{{_ "view.hashtag_management.join_session"}}
+					</button>
+				</div>
+				<div class="col-xs-6 col-create-session">
+					<button id="addNewHashtag" class="button button-warning" disabled>{{_ "view.hashtag_management.create_session"}}<span
+							class="glyphicon glyphicon-plus glyph-right" aria-hidden="true"></span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

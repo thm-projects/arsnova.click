@@ -13,18 +13,22 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-Meteor.publish('Responses.session', function(phashtag) {
-    new SimpleSchema({
-        phashtag: {type: String}
-    }).validate({phashtag});
-    var doc = Hashtags.find({
-        hashtag: phashtag
-    });
-    if (!doc) {
-        return;
-    }
-    return Responses.find({hashtag: phashtag});
+import {Meteor} from 'meteor/meteor';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {Responses} from '/lib/responses.js';
+import {Hashtags} from '/lib/hashtags.js';
+
+Meteor.publish('Responses.session', function (phashtag) {
+	new SimpleSchema({
+		phashtag: {type: String}
+	}).validate({phashtag});
+	var doc = Hashtags.find({
+		hashtag: phashtag
+	});
+	if (!doc) {
+		return;
+	}
+	return Responses.find({hashtag: phashtag});
 });

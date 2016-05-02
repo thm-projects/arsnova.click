@@ -13,38 +13,42 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-Meteor.publish('QuestionGroup.authorizeAsOwner', function(pprivateKey, phashtag) {
-    new SimpleSchema({
-        phashtag: {type: String},
-        pprivateKey: {type: String}
-    }).validate({
-        pprivateKey,
-        phashtag
-    });
-    var isOwner = Hashtags.find({
-        hashtag: phashtag,
-        privateKey: pprivateKey
-    }).count();
-    return isOwner > 0 ? QuestionGroup.find({hashtag: phashtag}) : null;
+import {Meteor} from 'meteor/meteor';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {QuestionGroup} from '/lib/questions.js';
+import {Hashtags} from '/lib/hashtags.js';
+
+Meteor.publish('QuestionGroup.authorizeAsOwner', function (pprivateKey, phashtag) {
+	new SimpleSchema({
+		phashtag: {type: String},
+		pprivateKey: {type: String}
+	}).validate({
+		pprivateKey,
+		phashtag
+	});
+	var isOwner = Hashtags.find({
+		hashtag: phashtag,
+		privateKey: pprivateKey
+	}).count();
+	return isOwner > 0 ? QuestionGroup.find({hashtag: phashtag}) : null;
 });
 
 Meteor.publish('QuestionGroup.questionList', function (phashtag) {
-    new SimpleSchema({
-        phashtag: {type: String}
-    }).validate({phashtag});
-    return QuestionGroup.find({hashtag: phashtag}, {
-        fields: {
-            questionList: 1
-        }
-    });
+	new SimpleSchema({
+		phashtag: {type: String}
+	}).validate({phashtag});
+	return QuestionGroup.find({hashtag: phashtag}, {
+		fields: {
+			questionList: 1
+		}
+	});
 });
 
 Meteor.publish('QuestionGroup.memberlist', function (phashtag) {
-    new SimpleSchema({
-        phashtag: {type: String}
-    }).validate({phashtag});
-    return QuestionGroup.find({hashtag: phashtag});
+	new SimpleSchema({
+		phashtag: {type: String}
+	}).validate({phashtag});
+	return QuestionGroup.find({hashtag: phashtag});
 });

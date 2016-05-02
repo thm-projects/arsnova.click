@@ -13,21 +13,23 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
+
+import {Meteor} from 'meteor/meteor';
+import {Hashtags} from '/lib/hashtags.js';
 
 Meteor.publish('Hashtags.public', function () {
-    return Hashtags.find({}, {
-        fields: {
-            privateKey: 0
-        }
-    });
+	return Hashtags.find({}, {
+		fields: {
+			privateKey: 0
+		}
+	});
 });
 
 Meteor.publish('Hashtags.byHashtag', function (hashtag) {
-    return Hashtags.find({hashtag: hashtag}, {
-        fields: {
-            privateKey: 0
-        }
-    });
+	return Hashtags.find({hashtag: hashtag}, {
+		fields: {
+			privateKey: 0
+		}
+	});
 });

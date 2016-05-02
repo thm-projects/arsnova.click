@@ -1,0 +1,49 @@
+<!--
+* This file is part of ARSnova Click.
+* Copyright (C) 2016 The ARSnova Team
+*
+* ARSnova Click is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* ARSnova Click is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
+
+<template name="createQuestionView">
+	{{> titel titelText=""}}
+	<div class="row center-vertical">
+		<div class="col-md-12">
+		<div class="row">
+			<div id="previewQuestionText" class="col-md-12" style="display: none;">
+				<div id="questionTextDisplay" class="round-corners previewText"></div>
+			</div>
+			<div id="editQuestionText" class="col-md-12">
+				{{> markdownBar }}
+				<textarea class="round-corners textarea placeholder-align-center"
+						  maxlength="1000" rows="4" id="questionText"
+						  placeholder="{{_ "view.questions.enter_question_here"}}"
+				>{{questionText}}</textarea>
+			</div>
+		</div>
+		<div class="row distance-top">
+			<div class="col-md-12">
+				<div class="row row-create-question-buttons">
+					<div class="col-xs-6 col-xs-offset-3">
+						<button id="formatPreviewButton" class="button button-purple">
+							<span id="formatPreviewText">{{_ "view.questions.format"}}</span>
+							<span id="formatPreviewGlyphicon" class="glyphicon glyphicon-cog glyph-right"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	{{> footer_nav_buttons backId="backButton" forwardId="forwardButton"}}
+</template>

@@ -13,112 +13,311 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
+
+import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
+import {TAPi18n} from 'meteor/tap:i18n';
+import {EventManager} from '/lib/eventmanager.js';
+import {AnswerOptions} from '/lib/answeroptions.js';
+import {QuestionGroup} from '/lib/questions.js';
+import * as localData from '/client/lib/local_storage.js';
+import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
+import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
 
 Router.configure({
-    layoutTemplate: 'layout'
+	layoutTemplate: 'layout'
+});
+
+Router.onBeforeAction(function () {
+	if (Router.current().route.path() !== "/") {
+		if (!globalEventStackObserver || !globalEventStackObserver.isRunning()) {
+			Meteor.subscribe('EventManager.join', Session.get("hashtag"), ()=> {
+				if (!EventManager.findOne(Session.get("hashtag"))) {
+					Meteor.call('EventManager.add', localData.getPrivateKey(), Session.get("hashtag"), function () {
+						globalEventStackObserver.start(Session.get("hashtag"));
+					});
+				}
+			});
+		} else {
+			globalEventStackObserver.onChange([
+				"EventManager.setSessionStatus",
+				"EventManager.reset"
+			], function (key, value) {
+				if (!isNaN(value.sessionStatus)) {
+					if (value.sessionStatus < 2) {
+						Session.set("hashtag", undefined);
+						Session.set("slider", undefined);
+						if (!Session.get("isOwner")) {
+							new ErrorSplashscreen({
+								autostart: true,
+								errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.session_closed")
+							});
+							Router.go("/resetToHome");
+						} else {
+							Session.set("isOwner", undefined);
+							Router.go("/");
+						}
+					}
+				}
+			});
+		}
+	}
+	this.next();
+});
+
+Router.onAfterAction(function () {
 });
 
 Router.route('/', function () {
-    try{
-        localData.initializePrivateKey();
-        Session.set("localStorageAvailable", true);
-    } catch(err) {
-        Session.set("localStorageAvailable", false);
-    }
-
-    Session.set("isOwner", undefined);
-    Session.set("hashtag", undefined);
-    Session.set("slider", undefined);
-    this.render('home');
+	try {
+		localData.initializePrivateKey();
+		Session.set("localStorageAvailable", true);
+	} catch (err) {
+		Session.set("localStorageAvailable", false);
+	}
+	setGlobalEventStackObserver();
+	Session.set("hashtag", undefined);
+	Session.set("slider", undefined);
+	Session.set("isOwner", undefined);
+	this.render('home');
 });
 
 Router.route('/resetToHome', function () {
-    $('.modal-backdrop').hide();
-    Router.go("/");
+	Router.go("/");
 });
 
 Router.route('/nick', function () {
-    if (!Session.get("hashtag")) {
-        Router.go("/");
-    }
-    this.render('nick');
+	if (!Session.get("hashtag")) {
+		Router.go("/");
+	}
+	this.render('nick');
 });
 
 Router.route('/question', function () {
-    if (Session.get("isOwner")) {
-        this.render('createQuestionView');
-    } else {
-        Router.go("/");
-    }
+	if (Session.get("isOwner")) {
+		Meteor.subscribe('EventManager.join', Session.get("hashtag"), ()=> {
+			if (!EventManager.findOne(Session.get("hashtag"))) {
+				Meteor.call('EventManager.setActiveQuestion', localData.getPrivateKey(), Session.get("hashtag"), 0);
+			}
+		});
+		this.render('createQuestionView');
+	} else {
+		Router.go("/");
+	}
 });
 
 Router.route('/answeroptions', function () {
-    this.render('createAnswerOptions');
+	this.render('createAnswerOptions');
 });
 
 Router.route('/settimer', function () {
-    if (Session.get("isOwner")) {
-        this.render('createTimerView');
-    } else {
-        Router.go('/');
-    }
+	if (Session.get("isOwner")) {
+		this.render('createTimerView');
+	} else {
+		Router.go('/');
+	}
 });
 
 Router.route('/memberlist', function () {
-    this.render('memberlist');
+	globalEventStackObserver.onChange([
+		"EventManager.setSessionStatus"
+	], function (key, value) {
+		if (!isNaN(value.sessionStatus)) {
+			if (value.sessionStatus === 3) {
+				Router.go("/results");
+			}
+		}
+	});
+
+	globalEventStackObserver.onChange([
+		"MemberList.removeLearner"
+	], function (key, value) {
+		if (value.user) {
+			if (value.user === Session.get("nick")) {
+				new ErrorSplashscreen({
+					autostart: true,
+					errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.kicked_from_quiz")
+				});
+				Router.go("/resetToHome");
+			}
+		}
+	});
+	this.render('memberlist');
 });
 
 Router.route('/votingview', function () {
-    this.render('votingview');
+	this.render('votingview');
 });
 
+
+Router.route('/onpolling', {
+	waitOn: function () {
+		return [
+			Meteor.subscribe('QuestionGroup.questionList', Session.get("hashtag")),
+			Meteor.subscribe('EventManager.join', Session.get("hashtag")),
+			Meteor.subscribe('Responses.session', Session.get("hashtag")),
+			Meteor.subscribe('AnswerOptions.options', Session.get("hashtag")),
+			Meteor.subscribe('MemberList.members', Session.get("hashtag")),
+			Meteor.subscribe('Hashtags.public')
+		];
+	},
+
+	action: function () {
+		if (Session.get("isOwner")) {
+			this.render('live_results');
+		} else {
+			this.render('votingview');
+		}
+	}
+});
+Router.route('/results', {
+	waitOn: function () {
+		return [
+			Meteor.subscribe('QuestionGroup.questionList', Session.get("hashtag")),
+			Meteor.subscribe('EventManager.join', Session.get("hashtag")),
+			Meteor.subscribe('Responses.session', Session.get("hashtag")),
+			Meteor.subscribe('AnswerOptions.options', Session.get("hashtag")),
+			Meteor.subscribe('MemberList.members', Session.get("hashtag")),
+			Meteor.subscribe('Hashtags.public')
+		];
+	},
+
+	action: function () {
+		globalEventStackObserver.onChange([
+			"EventManager.setSessionStatus"
+		], function (key, value) {
+			if (!isNaN(value.sessionStatus)) {
+				if (value.sessionStatus === 2) {
+					$('.modal-backdrop').remove();
+					Router.go("/memberlist");
+				}
+			}
+		});
+
+		globalEventStackObserver.onChange(["EventManager.setActiveQuestion"], function (key, value) {
+			if (!isNaN(value.questionIndex) && value.questionIndex !== -1) {
+				if (Session.get("isOwner")) {
+					new Splashscreen({
+						autostart: true,
+						instanceId: "answers_" + EventManager.findOne().questionIndex,
+						templateName: 'questionAndAnswerSplashscreen',
+						closeOnButton: '#js-btn-hideQuestionModal',
+						onRendered: function (instance) {
+							var content = "";
+							mathjaxMarkdown.initializeMarkdownAndLatex();
+							AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
+								if (!answerOption.answerText) {
+									answerOption.answerText = "";
+								}
+
+								content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+								content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+							});
+
+							instance.templateSelector.find('#answerContent').html(content);
+							setTimeout(function () {
+								instance.close();
+							}, 10000);
+						}
+					});
+				} else {
+					Router.go("/onpolling");
+				}
+			}
+		});
+
+		globalEventStackObserver.onChange(["EventManager.showReadConfirmedForIndex"], function (key, value) {
+			if (!isNaN(value.readingConfirmationIndex) && value.readingConfirmationIndex > -1) {
+				var questionDoc = QuestionGroup.findOne();
+				new Splashscreen({
+					autostart: true,
+					templateName: 'readingConfirmedSplashscreen',
+					closeOnButton: '#setReadConfirmed',
+					onRendered: function (instance) {
+						var content = "";
+						if (questionDoc) {
+							mathjaxMarkdown.initializeMarkdownAndLatex();
+							var questionText = questionDoc.questionList[EventManager.findOne().readingConfirmationIndex].questionText;
+							content = mathjaxMarkdown.getContent(questionText);
+						}
+						instance.templateSelector.find('#questionContent').html(content);
+
+						if (Session.get("isOwner")) {
+							instance.templateSelector.find('#setReadConfirmed').text(TAPi18n.__("global.close_window"));
+						} else {
+							instance.templateSelector.find('#setReadConfirmed').parent().on('click', '#setReadConfirmed', function () {
+								Meteor.call("MemberList.setReadConfirmed", {
+									hashtag: Session.get("hashtag"),
+									questionIndex: EventManager.findOne().readingConfirmationIndex,
+									nick: Session.get("nick")
+								}, (err)=> {
+									if (err) {
+										new ErrorSplashscreen({
+											autostart: true,
+											errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+										});
+									}
+								});
+							});
+						}
+					}
+				});
+			}
+		});
+		this.render('live_results');
+	}
+});
+/*
 Router.route('/onpolling', function () {
-    if (Session.get("isOwner")) {
-        this.render('live_results');
-    } else {
-        $('.modal-backdrop').hide();
-        this.render('votingview');
-    }
+	if (Session.get("isOwner")) {
+		this.render('liveResults');
+	} else {
+		$('.modal-backdrop').hide();
+		this.render('votingview');
+	}
 });
-
 Router.route('/results', function () {
-    this.render('live_results');
+	this.render('liveResults');
 });
-
+*/
 Router.route('/statistics', function () {
-    this.render('leaderBoard');
+	this.render('leaderBoard');
 });
 
 Router.route('/hashtagmanagement', function () {
-    this.render('hashtagManagement');
+	this.render('hashtagManagement');
 });
 
 // Routes for Footer-Links
 
 Router.route('/ueber', function () {
-    this.render('ueber');
+	this.render('ueber');
 });
 
 Router.route('/agb', function () {
-    this.render('agb');
+	this.render('agb');
 });
 
 Router.route('/datenschutz', function () {
-    this.render('datenschutz');
+	this.render('datenschutz');
 });
 
 Router.route('/impressum', function () {
-    this.render('impressum');
+	this.render('impressum');
 });
 
-Router.onStop(function() {
-    var lastRoute = Router.current().route.getName();
-    if(lastRoute===undefined){
-        //homeView
-        Session.set("lastPage","/");
-    }else if(lastRoute!=="agb" && lastRoute!=="datenschutz" && lastRoute!=="impressum"){
-        Session.set("lastPage",lastRoute);
-    }
+Router.route('/translate', function () {
+	this.render('translate');
+});
+
+Router.onStop(function () {
+	var lastRoute = Router.current().route.getName();
+	if (lastRoute === undefined) {
+		//homeView
+		Session.set("lastPage", "/");
+	} else if (lastRoute !== "agb" && lastRoute !== "datenschutz" && lastRoute !== "impressum") {
+		Session.set("lastPage", lastRoute);
+	}
 });

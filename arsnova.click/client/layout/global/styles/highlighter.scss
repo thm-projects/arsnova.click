@@ -1,0 +1,329 @@
+/*
+ * This file is part of ARSnova Click.
+ * Copyright (C) 2016 The ARSnova Team
+ *
+ * ARSnova Click is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ARSnova Click is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
+
+.hljs-line-numbers {
+	width: auto !important;
+	text-align: right;
+	border-right: 1px solid #ccc;
+	color: #999;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+blockquote {
+	padding-right: 1.5em;
+	color: #394a59 !important;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	padding: 0.5em;
+	background: #f0f0f0;
+	color: black;
+	-webkit-text-size-adjust: none;
+}
+
+.hljs-pre {
+	display: table;
+	background-color: white;
+	padding-right: 1.5em;
+}
+
+.x-html code .hljs-pre {
+	margin: 0;
+}
+
+.hljs-highlight {
+	margin: 0.415em;
+	display: inline-block;
+}
+
+.hljs-comment {
+	color: #006a00;
+}
+
+.hljs-keyword,
+.hljs-literal,
+.nginx .hljs-title {
+	color: #aa0d91;
+}
+
+.method,
+.hljs-list .hljs-title,
+.hljs-tag .hljs-title,
+.setting .hljs-value,
+.hljs-winutils,
+.tex .hljs-command,
+.http .hljs-title,
+.hljs-request,
+.hljs-status,
+.hljs-name {
+	color: #008;
+}
+
+.hljs-envvar,
+.tex .hljs-special {
+	color: #660;
+}
+
+.hljs-string {
+	color: #c41a16;
+}
+.hljs-tag .hljs-value,
+.hljs-cdata,
+.hljs-filter .hljs-argument,
+.hljs-attr_selector,
+.apache .hljs-cbracket,
+.hljs-date,
+.hljs-regexp {
+	color: #080;
+}
+
+.hljs-sub .hljs-identifier,
+.hljs-pi,
+.hljs-tag,
+.hljs-tag .hljs-keyword,
+.hljs-decorator,
+.ini .hljs-title,
+.hljs-shebang,
+.hljs-prompt,
+.hljs-hexcolor,
+.hljs-rule .hljs-value,
+.hljs-symbol,
+.hljs-symbol .hljs-string,
+.hljs-number,
+.css .hljs-function,
+.hljs-function .hljs-title,
+.coffeescript .hljs-attribute {
+	color: #1c00cf;
+}
+
+.hljs-class .hljs-title,
+.smalltalk .hljs-class,
+.hljs-type,
+.hljs-typename,
+.hljs-tag .hljs-attribute,
+.hljs-doctype,
+.hljs-class .hljs-id,
+.hljs-built_in,
+.setting,
+.hljs-params,
+.clojure .hljs-attribute {
+	color: #5c2699;
+}
+
+.hljs-variable {
+	color: #3f6e74;
+}
+
+.css .hljs-tag,
+.hljs-rule .hljs-property,
+.hljs-pseudo,
+.hljs-subst {
+	color: #000;
+}
+
+.css .hljs-class,
+.css .hljs-id {
+	color: #9b703f;
+}
+
+.hljs-value .hljs-important {
+	color: #ff7700;
+	font-weight: bold;
+}
+
+.hljs-rule .hljs-keyword {
+	color: #c5af75;
+}
+
+.hljs-annotation,
+.apache .hljs-sqbracket,
+.nginx .hljs-built_in {
+	color: #9b859d;
+}
+
+.hljs-preprocessor,
+.hljs-preprocessor *,
+.hljs-pragma {
+	color: #643820;
+}
+
+.tex .hljs-formula {
+	background-color: #eee;
+	font-style: italic;
+}
+
+.diff .hljs-header,
+.hljs-chunk {
+	color: #808080;
+	font-weight: bold;
+}
+
+.diff .hljs-change {
+	background-color: #bccff9;
+}
+
+.hljs-addition {
+	background-color: #baeeba;
+}
+
+.hljs-deletion {
+	background-color: #ffc8bd;
+}
+
+.hljs-comment .hljs-doctag {
+	font-weight: bold;
+}
+
+.method .hljs-id {
+	color: #000;
+}
+
+.projector-mode {
+	span[class^='hljs'],
+	span[class*=' hljs'] {
+		color: inherit;
+		font-style: inherit;
+		font-weight: inherit;
+		background-color: inherit;
+		text-decoration: inherit;
+	}
+
+	.hljs-pre.hidden {
+		display: none;
+	}
+
+	.hljs-pre {
+		color: white;
+		display: table;
+		background-color: #333;
+		padding-right: 1.5em;
+
+		.hljs {
+			display: block;
+			overflow-x: auto;
+			padding: .5em;
+			background: #333;
+			color: white;
+			-webkit-text-size-adjust: none;
+		}
+
+		.hljs-tag,
+		.ini .hljs-title {
+			color: #62c8f3;
+		}
+
+		.hljs-id,
+		.hljs-cbracket,
+		.hljs-tag .hljs-value {
+			color: #ade5fc;
+		}
+
+		.hljs-string,
+		.hljs-bullet {
+			color: #a2fca2;
+		}
+
+		.hljs-type,
+		.hljs-variable,
+		.hljs-name,
+		.actionscript .hljs-title,
+		.aspectj .hljs-annotation,
+		.aspectj .hljs-title,
+		.hljs-attribute,
+		.hljs-change,
+		.hljs-blockquote,
+		.hljs-built_in {
+			color: #ffa;
+		}
+
+		.hljs-number,
+		.hljs-hexcolor,
+		.hljs-link_label,
+		.hljs-link_reference {
+			color: #d36363;
+		}
+
+		.hljs-keyword,
+		.hljs-literal,
+		.hljs-constant,
+		.css .hljs-tag,
+		.hljs-typename,
+		.hljs-winutils {
+			color: #fcc28c;
+		}
+
+		.hljs-comment,
+		.hljs-cdata,
+		.hljs-preprocessor,
+		.hljs-annotation,
+		.hljs-decorator,
+		.hljs-doctype,
+		.hljs-deletion,
+		.hljs-shebang,
+		.apache .hljs-sqbracket,
+		.tex .hljs-formula,
+		.hljs-header,
+		.hljs-horizontal_rule,
+		.hljs-code {
+			color: #888;
+		}
+
+		.hljs-regexp,
+		.hljs-attr_selector {
+			color: #c6b4f0;
+		}
+
+		.hljs-important,
+		.hljs-doctype,
+		.hljs-pi,
+		.hljs-chunk,
+		.actionscript .hljs-type,
+		.hljs-shebang,
+		.hljs-pragma,
+		.http .hljs-attribute {
+			color: #fc9b9b;
+		}
+
+		.hljs-deletion {
+			background-color: #fc9b9b;
+			color: #333;
+		}
+
+		.hljs-addition {
+			background-color: #a2fca2;
+			color: #333;
+		}
+
+		.hljs a,
+		.hljs-tag .hljs-attribute {
+			color: inherit;
+		}
+
+		.hljs a:focus,
+		.hljs a:hover {
+			color: inherit;
+			text-decoration: underline;
+		}
+	}
+}

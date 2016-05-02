@@ -8,7 +8,7 @@ arsnova.click needs you! If you are interested in helping, here is a short guide
 2. Create a topic branch.
 3. Make your changes. Be sure to provide clean commits and to write [expressive commit messages][commit-message].
 4. Check your style: after pushing to your branch, read the jshint-comments in the [build section][build-section].
-5. Stay up to date with our repository: Rebase to the latest revision of our master branch using `git rebase`.
+5. Stay up to date with our repository: Rebase to our `staging` branch using `git rebase`.
 6. Push the changes to your topic branch.
 7. Finally, [submit a merge request][merge-request].
 
@@ -21,11 +21,55 @@ If you don't feel like writing code, you could also update the documentation. An
 
 ## How we review merge requests
 
-To get your merge request accepted faster, you should follow our review process before submitting your request. Here is our list of do's and dont's.
+To get your merge request accepted faster, you should follow our review process before submitting your request. Here is our list of dos and don'ts.
 
 ### No merge conflicts
 
 This is a no-brainer. Keep your branches up to date so that merges will never end up conflicting. Always test-merge your branches before submitting your pull requests. Ideally, your branches are fast-forwardable, but this is not a requirement.
+
+### Code Style
+
+Please check your code against our code guidelines defined with jshint.
+We support the use of gulp, which checks against our jshint and jscs rules. Just install the node modules (```npm install```) and run ```gulp```. If you want to watch the files use ```gulp watch```.
+
+### Project structure
+
+Since Meteor is supporting ES6 (ES2015) we use the import/export statements to modularize the application.
+Please take a look at our project file structure for the clients:
+
+```
+client/
+    layout/
+        global/
+			styles/
+			templates/
+			scripts/
+        region_XYZ/
+        view_XYZ/
+			styles/
+			templates/
+			scripts/
+				events.js
+				helpers.js
+				lib.js			<= Use this file as a library for the view
+				onCreated.js
+				onDestroyed.js
+				onRendered.js
+    lib/        <= Here are global libraries defined, e.g. the access to the localStorage
+    plugins/	<= Here we have plugins for the application. 
+        styles/
+        templates/
+        scripts/
+            events.js
+			helpers.js
+			lib.js
+			onCreated.js
+			onDestroyed.js
+			onRendered.js
+```
+			
+The difference between a region and a view is that the region is named by the location (e.g. "header") and is nearly over the entire quiz-workflow visible where a view is rendered only to specific routes.
+Please note that global variables should be avoided. If you use the global Meteor variable, import it with ''' import { Meteor } from 'meteor/meteor' ''' (see the Meteor Doc at http://docs.meteor.com/#/full/)
 
 ### Avoid trailing white-spaces
 
@@ -61,4 +105,4 @@ It all comes down to
 * keeping your commits clean and focused,
 * and always staying up to date.
 
-If you keep these things in mind, your pull requests will be accepted much faster. Happy coding!
+If you keep these things in mind, your merge requests will be accepted much faster. Happy coding!

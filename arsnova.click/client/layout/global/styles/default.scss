@@ -1,0 +1,164 @@
+/*
+ * This file is part of ARSnova Click.
+ * Copyright (C) 2016 The ARSnova Team
+ *
+ * ARSnova Click is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ARSnova Click is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
+
+@import "colors";
+@import "appearance";
+
+body {
+  background-color: $background-color;
+  font-family: $font;
+}
+
+button {
+  font-size: 1.3em;
+}
+
+button:focus, input:focus, textarea:focus {
+  outline: none;
+}
+
+/*
+ * cuts off the Placeholder if it is to long for the input filed
+ */
+/* TODO: if the textfield is focused, the text-overflow will be ignored */
+input[placeholder] {
+  text-overflow: ellipsis;
+}
+
+input::-webkit-input-placeholder {
+  text-overflow: ellipsis;
+}
+
+/* Firefox 18- */
+input:-moz-placeholder {
+  text-overflow: ellipsis;
+}
+
+/* Firefox 19+ */
+input::-moz-placeholder {
+  text-overflow: ellipsis;
+}
+
+input:-ms-input-placeholder {
+  text-overflow: ellipsis;
+}
+
+/*
+ * defines a default Color for the placeholder of all input fields
+ * TODO: maybe the same for TextArea
+ */
+
+/* WebKit, Blink, Edge */
+textarea::-webkit-input-placeholder {
+  color: $placeholder-color;
+}
+
+/* Mozilla Firefox 4 to 18 */
+textarea:-moz-placeholder {
+  color: $placeholder-color;
+  opacity: 1;
+}
+
+/* Mozilla Firefox 19+ */
+textarea::-moz-placeholder {
+  color: $placeholder-color;
+  opacity: 1;
+}
+
+/* Internet Explorer 10-11 */
+textarea:-ms-input-placeholder {
+  color: $placeholder-color;
+}
+
+/* WebKit, Blink, Edge */
+input::-webkit-input-placeholder {
+  color: $placeholder-color;
+}
+
+input[placeholder] {
+  color: $placeholder-color;
+}
+
+/* Mozilla Firefox 4 to 18 */
+input:-moz-placeholder {
+  color: $placeholder-color;
+  opacity: 1;
+}
+
+/* Mozilla Firefox 19+ */
+input::-moz-placeholder {
+  color: $placeholder-color;
+  opacity: 1;
+}
+
+/* Internet Explorer 10-11 */
+input:-ms-input-placeholder {
+  color: $placeholder-color;
+}
+/*Safari on iOS border-radius problems */
+input{
+  border-radius: 0;
+}
+/*
+ * defines a big X over the whole Button
+ */
+button:disabled {
+  box-shadow: none;
+  background-color: $disabled-button-background;
+}
+
+.footer-gradient {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fafafa+0,bfbfbf+100 */
+  /*background: $footer-background-color; /* Old browsers */
+  /*background: -moz-linear-gradient(top, $footer-background-color 0%, $footer-background-color 100%); /* FF3.6-15 */
+  /*background: -webkit-linear-gradient(top, $footer-background-color 0%, $footer-background-color 100%); /* Chrome10-25,Safari5.1-6 */
+  /*background: linear-gradient(to bottom, $footer-background-color 0%, $footer-background-color 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$footer-background-color', endColorstr='$footer-background-color', GradientType=0); /* IE6-9 */
+  color: $footer-text-color;
+}
+
+.footer a {
+  color: $footer-text-color;
+}
+
+.footer a div {
+  border-left: solid $footer-text-color 1px;
+}
+
+.navbar-transparent {
+  /*TODO: Umbruch bei größeren Content*/
+  // Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2972a3+0,2972a3+100&1+0,1+61,0+100
+  /*background: -moz-linear-gradient(top, rgba(41, 114, 163, 1) 0%, rgba(41, 114, 163, 1) 61%, rgba(41, 114, 163, 0) 100%);
+  background: -webkit-linear-gradient(top, rgba(41, 114, 163, 1) 0%, rgba(41, 114, 163, 1) 61%, rgba(41, 114, 163, 0) 100%);
+  background: linear-gradient(to bottom, rgba(41, 114, 163, 1) 0%, rgba(41, 114, 163, 1) 61%, rgba(41, 114, 163, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2972a3', endColorstr='#002972a3', GradientType=0);*/
+
+  border: 0;
+  background-color: $background-color;
+  margin-bottom: 0;
+}
+
+.progress-bar {
+  line-height: 100% !important;
+  font-size: 17px;
+  background: white;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  height: 40px;
+  color: black;
+}

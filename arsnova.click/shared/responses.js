@@ -13,89 +13,83 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
+
+import {Meteor} from 'meteor/meteor';
+import {AnswerOptions} from '/lib/answeroptions.js';
+import {Responses} from '/lib/responses.js';
+import {QuestionGroup} from '/lib/questions.js';
+import {Hashtags} from '/lib/hashtags.js';
+import {EventManager} from '/lib/eventmanager.js';
 
 Meteor.methods({
-    'Responses.addResponse'(responseDoc) {
-        var timestamp = new Date().getTime();
-        var hashtag = responseDoc.hashtag;
-        if (Meteor.isServer) {
-            var dupDoc = Responses.findOne({
-                hashtag: responseDoc.hashtag,
-                questionIndex: responseDoc.questionIndex,
-                answerOptionNumber: responseDoc.answerOptionNumber,
-                userNick: responseDoc.userNick
-            });
-            if (dupDoc) {
-                throw new Meteor.Error('Responses.addResponse', 'User has already given this response');
-            }
-            var hashtagDoc = Hashtags.findOne({
-                hashtag: hashtag
-            });
-            if (!hashtagDoc) {
-                throw new Meteor.Error('Responses.addResponse', 'There is no such quiz active in the db');
-            } else {
-                var questionGroupDoc = QuestionGroup.findOne({hashtag: responseDoc.hashtag});
-                if (!questionGroupDoc) {
-                    throw new Meteor.Error('Responses.addResponse', 'No questionGroup doc for this quiz');
-                }
-                var responseTime = Number(timestamp) - Number(questionGroupDoc.questionList[responseDoc.questionIndex].startTime);
+	'Responses.addResponse': function (responseDoc) {
+		var timestamp = new Date().getTime();
+		var hashtag = responseDoc.hashtag;
+		if (Meteor.isServer) {
+			var dupDoc = Responses.findOne({
+				hashtag: responseDoc.hashtag,
+				questionIndex: responseDoc.questionIndex,
+				answerOptionNumber: responseDoc.answerOptionNumber,
+				userNick: responseDoc.userNick
+			});
+			if (dupDoc) {
+				throw new Meteor.Error('Responses.addResponse', 'plugins.splashscreen.error.error_messages.duplicate_response');
+			}
+			var hashtagDoc = Hashtags.findOne({
+				hashtag: hashtag
+			});
+			if (!hashtagDoc) {
+				throw new Meteor.Error('Responses.addResponse', 'plugins.splashscreen.error.error_messages.not_authorized');
+			} else {
+				var questionGroupDoc = QuestionGroup.findOne({hashtag: responseDoc.hashtag});
+				if (!questionGroupDoc) {
+					throw new Meteor.Error('Responses.addResponse', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
+				}
+				var responseTime = Number(timestamp) - Number(questionGroupDoc.questionList[responseDoc.questionIndex].startTime);
 
-                if (responseTime <= questionGroupDoc.questionList[responseDoc.questionIndex].timer) {
-                    responseDoc.responseTime = responseTime;
-                    var answerOptionDoc = AnswerOptions.findOne({
-                        hashtag: hashtag,
-                        questionIndex: responseDoc.questionIndex,
-                        answerOptionNumber: responseDoc.answerOptionNumber
-                    });
-                    if (!answerOptionDoc) {
-                        throw new Meteor.Error('Responses.addResponse', 'There is no answer option with the given answerOptionNumber');
-                    }
+				if (responseTime <= questionGroupDoc.questionList[responseDoc.questionIndex].timer) {
+					responseDoc.responseTime = responseTime;
+					var answerOptionDoc = AnswerOptions.findOne({
+						hashtag: hashtag,
+						questionIndex: responseDoc.questionIndex,
+						answerOptionNumber: responseDoc.answerOptionNumber
+					});
+					if (!answerOptionDoc) {
+						throw new Meteor.Error('Responses.addResponse', 'plugins.splashscreen.error.error_messages.answeroption_not_found');
+					}
 
-                    Responses.insert(responseDoc);
+					Responses.insert(responseDoc);
 
-                    Meteor.call('LeaderBoard.addResponseSet', {
-                        phashtag: responseDoc.hashtag,
-                        questionIndex: responseDoc.questionIndex,
-                        nick: responseDoc.userNick,
-                        responseTimeMillis: responseDoc.responseTime
-                    }, (err) => {
-                        if (err) {
-                            throw new Meteor.Error('Responses.addResponse', 'Error while adding response set to leaderboard');
-                        }
-                    });
+					Meteor.call('LeaderBoard.addResponseSet', {
+						phashtag: responseDoc.hashtag,
+						questionIndex: responseDoc.questionIndex,
+						nick: responseDoc.userNick,
+						responseTimeMillis: responseDoc.responseTime
+					}, (err) => {
+						if (err) {
+							throw new Meteor.Error('Responses.addResponse', 'plugins.splashscreen.error.error_messages.insert_leaderboard_failed');
+						}
+					});
+				} else {
+					throw new Meteor.Error('Responses.addResponse', 'plugins.splashscreen.error.error_messages.response_timeout');
+				}
+				EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "Responses.addResponse", value: {questionIndex: responseDoc.questionIndex, answerOptionNumber: responseDoc.answerOptionNumber, userNick: responseDoc.userNick}}}});
+			}
+		}
+	},
+	'Responses.clearAll': function (privateKey, hashtag) {
+		if (Meteor.isServer) {
+			var hashtagDoc = Hashtags.findOne({
+				hashtag: hashtag,
+				privateKey: privateKey
+			});
+			if (!hashtagDoc) {
+				throw new Meteor.Error('Responses.clearAll', 'plugins.splashscreen.error.error_messages.not_authorized');
+			}
 
-                    /*
-                    var nickResponsesCount = Responses.find({
-                        hashtag: hashtag,
-                        userNick: responseDoc.userNick
-                    }).count();
-                    var correctAnswerOptionsCount = AnswerOptions.find({hashtag: responseDoc.hashtag, questionIndex: responseDoc.questionIndex, isCorrect: 1}).count();
-                    return {
-                        isCorrect: answerOptionDoc.isCorrect,
-                        instantRouting: correctAnswerOptionsCount === 1,
-                        showForwardButton: nickResponsesCount <= 1
-                    };
-                    */
-                }
-                else {
-                    throw new Meteor.Error('Responses.addResponse', 'Response was given out of time range');
-                }
-            }
-        }
-    },
-    'Responses.clearAll': function (privateKey, hashtag) {
-        if (Meteor.isServer) {
-            var hashtagDoc = Hashtags.findOne({
-                hashtag: hashtag,
-                privateKey: privateKey
-            });
-            if (!hashtagDoc) {
-                throw new Meteor.Error('Responses.clearAll', 'There is no such quiz active in the db');
-            }
-
-            Responses.remove({hashtag: hashtag});
-        }
-    }
+			Responses.remove({hashtag: hashtag});
+			EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "Responses.clearAll", value: {}}}});
+		}
+	}
 });

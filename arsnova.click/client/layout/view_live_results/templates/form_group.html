@@ -1,0 +1,35 @@
+<!--
+* This file is part of ARSnova Click.
+* Copyright (C) 2016 The ARSnova Team
+*
+* ARSnova Click is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* ARSnova Click is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
+
+<template name="form_group">
+	<div class="row button button-result form-group formGroupProgressRow">
+		<div class="col-xs-12">
+			<div class="progress" id="mc_bar{{id}}">
+				<div class="progress-bar {{#if backgroundClass}}{{backgroundClass}}{{/if}}"
+					 role="progressbar"
+					 aria-valuemin="0"
+					 aria-valuemax="100"
+					 style="width: {{percent}}%; {{#if backgroundStyle}}background:{{backgroundStyle}};{{/if}}">
+				</div>
+				<div class="percentage">
+					<p class="label">{{_ name}}</p>
+					<div class="values"><p class="absolute">{{absolute}}{{#if base}} / {{base}}{{/if}}</p>|<p class="percent">{{percent}} %</p></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.1.0
+
+#### Features
+* i18n
+
+#### UX
+* Get an instant preview for questions containing latex or markdown in the "edit question"-view.
+* format times in german standards (01,23 s)
+* Set the focus directly on input files while not using a mobile device
+* Improve the responsive design of the" reading confirmation" progress-bar
+* Fullscreen button and support for Edge / Firefox-browsers (we're working getting it on webkit, too)
+
+#### Bugfixes
+* Hide informations about right or wrong answers for students until the current turn is finished.
+* Fix behaviour of show more- / show less-button in the leaderboard
+* Improve the JS-hint
+* Resolve issues with the deletion of sessions and the redirect of the attendees.
+
+Furthermore, we improved the jshint-rules for a better code quality and refactored the project scaffolding for a better maintainability.
+
 ## 1.0.0
 First version including the main features:
 

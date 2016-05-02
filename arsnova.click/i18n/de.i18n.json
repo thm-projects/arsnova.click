@@ -1,0 +1,251 @@
+{
+  "global": {
+    "arsnova_slogan": "Quiz für alle(s)",
+    "back": "Zurück",
+    "next": "Weiter",
+    "delete": "Löschen",
+    "save": "Speichern",
+    "abort": "Abbrechen",
+    "close_window": "Fenster schließen"
+  },
+  "region": {
+    "footer": {
+      "footer_bar": {
+        "about": "Über",
+        "home": "Home",
+        "tos": "AGB",
+        "imprint": "Impressum",
+        "data_privacy": "Datenschutz"
+      },
+      "about": {
+        "title": "Über die Quiz-App",
+        "declaration": "Ein bisschen <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, <br />ein bisschen <a href='https://arsnova.eu/' target='_blank'>ARSnova</a>!",
+        "ars": "First one is gamificated and the second one designed for educational use. Both are an <a href='https://de.wikipedia.org/wiki/Audience_Response_System' target='_blank'>Audience Response System (ARS)</a>.",
+        "developed_by": "Inspiriert durch <a href='https://getkahoot.com' target='_blank'>Kahoot!</a> entwickelte in nur 10 Tagen  ein <a href='http://www.scrumhub.com' target='_blank'>Scrum-Team</a> aus Bachelor- und Masterstudenten der <a href='http://www.thm.de/site/' target='_blank'>TH Mittelhessen</a> diese <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>gamifizierte</a> Alternative zu unserem ARSnova-Flaggschiff <a href='https://arsnova.eu/' target='_blank'>arsnova.eu</a>.",
+        "met_requirements": "Die bereits eingelösten Anforderungen an arsnova.click:",
+        "requirements": {
+          "1": "Absoluter Datenschutz: keine personenbezogenen Daten auf dem Server, alle Quizdaten liegen im Browser der Quizerstellerin oder des Quizerstellers (<a href='http://www.w3schools.com/html/html5_webstorage.asp' target='_blank'>HTML5 Local Storage</a>)",
+          "2": "Keine Registrierung, keine Anmeldung, keine Installation, keine Kosten",
+          "3": "Dieselbe Startseite ARSnova.click für beide Rollen: Quizmaster und Kandidat/in",
+          "4": "Jeder darf Quizze erstellen: sofort und beliebig viele!",
+          "5": "Extrem einfache und beamertaugliche Bedienoberfläche",
+          "6": "<a href='https://de.wikipedia.org/wiki/TeX' target='_blank'>TeX</a>-Formelsatz und Textformatierung mit <a href='https://guides.github.com/features/mastering-markdown/' target='_blank'>Markdown</a> in Fragen und Antwortoptionen",
+          "7": "Mit nur einem Dialog beliebig viele Antwortoptionen als Multiple Choice, Single Choice und Umfrage",
+          "8": "Edutainment: Lernspaß durch Live-Wettbewerb mit Sound gegen die Uhr und die Mitspieler/innen",
+          "9": "<a href='https://de.wikipedia.org/wiki/Responsive_Webdesign' target='_blank'>Responsives Webdesign</a>: egal ob Smartphone oder Wide Screen, das Design skaliert dank <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>",
+          "10": "Modernste reaktive Web-Technologie: <a href='https://www.meteor.com' target='_blank'>Meteor</a>",
+          "11": "<a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a>"
+        },
+        "manual": {
+          "title": "Bedienungshandbuch?",
+          "text": {
+            "1": "Braucht man nicht!",
+            "2": "Tippen Sie den Namen des Quiz ein. Die Buttons verfärben sich, sobald Sie entweder den Namen eines freigeschalteten Quiz eingeben (Mach mit!) oder ein neues Quiz mit dem eingegebenen Namen erstellen können (Mach neu!).",
+            "3": "Danach heißt es: Klicken. Schauen. Quizzen."
+          }
+        }
+      },
+      "tos": {
+        "title": "Allgemeine Geschäftsbedingungen",
+        "declaration": "Alle dürfen die Quiz-App ARSnova.click für ihre Zwecke verwenden, solange dabei nicht gegen geltendes deutsches oder europäisches Recht verstoßen wird.",
+        "license": {
+          "title": "Lizenz",
+          "text": "ARSnova.click ist ein kostenloser Webservice (Software as a Service). Die Software ist <a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a> und steht unter der <a href='http://www.gnu.org/licenses/gpl-3.0-standalone.html' target='_blank'>GNU General Public License Version 3</a>."
+        },
+        "warranty": {
+          "title": "Gewährleistung",
+          "text": "Wir sind bemüht, den Online-Dienst ARSnova.click zuverlässig und störungsfrei zu betreiben, können dies aber nicht garantieren. Alle Quizdaten liegen ausschließlich im Browser-Speicher der Quizerstellerin oder des Quizerstellers. Wir übernehmen keine Haftung für den Verlust der Daten, zum Beispiel durch Löschen des Browser-Speichers, oder bei rechtswidriger Nutzung des Dienstes."
+        }
+      },
+      "data_privacy": {
+        "title": "Datenschutz",
+        "scope": "Geltungsbereich",
+        "declaration": "Diese Datenschutzerklärung klärt Nutzer/innen von arsnova.click über die Art, den Umfang und den Zweck der Verwendung personenbezogener Daten durch den verantwortlichen Anbieter auf. Die rechtlichen Grundlagen des Datenschutzes finden sich im Bundesdatenschutzgesetz (BDSG) und dem Telemediengesetz (TMG).",
+        "app_data": {
+          "title": "Anwendungsdaten",
+          "text": "Alle Quizfragen und deren Antwortoptionen werden ausschließlich im Browser-Speicher (localStorage) der Quizerstellerin oder des Quizerstellers gehalten."
+        },
+        "access_data": {
+          "title": "Zugriffsdaten",
+          "text": "Außer Webserver-Logdateien werden keine personenbezogenen Zugriffsdaten gespeichert."
+        },
+        "logfiles": {
+          "title": "Webserver-Logdateien",
+          "text": "Der Anbieter erhebt Protokolldaten über jeden Zugriff auf arsnova.click in sogenannten Logdateien. Der Anbieter verwendet die Protokolldaten ausschließlich für statistische Auswertungen zum Zwecke des Betriebs, der Sicherheit und der Optimierung des Angebotes. Der Anbieter behält sich vor, die Protokolldaten nachträglich zu überprüfen, wenn aufgrund konkreter Anhaltspunkte der berechtigte Verdacht einer rechtswidrigen Nutzung besteht."
+        },
+        "3rdparty": {
+          "title": "Dienste und Inhalte Dritter",
+          "text": "In Quizfragen können Inhalte Dritter, wie zum Beispiel Videos von YouTube und Vimeo oder Grafiken von anderen Webseiten, eingebunden werden. Dies setzt voraus, dass die Anbieter dieser Inhalte die IP-Adresse der Nutzer/innen wahrnehmen. Ohne die IP-Adresse können die Inhalte nicht an den Browser gesendet werden."
+        },
+        "cookies": {
+          "title": "Cookies",
+          "text": "Cookies sind kleine Dateien, die es ermöglichen, auf dem Zugriffsgerät der Nutzer/innen spezifische, auf das Gerät bezogene Informationen zu speichern. Das Angebot arsnova.click nutzt Cookies, um die statistischen Daten der Webseitennutzung mit Piwik (siehe unten) zu erfassen und sie zwecks Verbesserung des Angebotes analysieren zu können. Die Nutzer/innen können auf den Einsatz der Cookies Einfluss nehmen. Die meisten Browser verfügen über eine Option, mit der das Speichern von Cookies eingeschränkt oder komplett verhindert wird."
+        },
+        "piwik": {
+          "title": "Piwik",
+          "text": "Dieses Angebot benutzt Piwik, eine Open-Source-Software zur statistischen Auswertung der Zugriffe, siehe <a href='http://piwik.org/' target='_blank'>piwik.org</a>. Piwik verwendet Cookies, die auf dem Computer der Nutzer/innen gespeichert werden und die eine Analyse der Benutzung der Webseite ermöglichen. Die durch den Cookie erzeugten Informationen über die Benutzung dieses Agebotes werden auf dem Server des Anbieters in Deutschland gespeichert. Die IP-Adresse wird sofort nach der Verarbeitung und vor deren Speicherung anonymisiert. Nutzer/innen können die Installation der Cookies durch eine entsprechende Einstellung ihrer Browser-Software verhindern."
+        }
+      },
+      "imprint": {
+        "title": "Impressum",
+        "provider": {
+          "title": "Dienstanbieter",
+          "text": {
+            "1": "Der Betrieb der Webapp arsnova.click ist eine kostenlose Dienstleistung der TransMIT-Gesellschaft für Technologietransfer mbH, Projektbereich für mobile Anwendungen.",
+            "2": "c/o THM – Technische Hochschule Mittelhessen",
+            "3": "Fachbereich MNI – Mathematik, Naturwissenschaften und Informatik",
+            "4": "Prof. Dr. Klaus Quibeldey-Cirkel",
+            "5": "Lehrstuhl für Softwaretechnik",
+            "6": "Wiesenstraße 14",
+            "7": "D-35390 Gießen",
+            "8": "Telefon: +49 641 309 – 24 50",
+            "9": "E-Mail: <a href='mailto:klaus.quibeldey-cirkel@transmit.de' class='text-light'>klaus.quibeldey-cirkel@transmit.de</a>",
+            "10": "Sitz der Gesellschaft: Gießen",
+            "11": "Website: <a href='https://www.transmit.de' class='text-light'>https://www.transmit.de</a>",
+            "12": "Rechtsform: GmbH",
+            "13": "Amtsgericht: Gießen HRB 3036",
+            "14": "USt-IdNr.: DE 188 685 037"
+          }
+        }
+      }
+    },
+    "header": {
+      "new_question": "Neue Frage",
+      "sound": "Sound",
+      "reset": "Reset"
+    }
+  },
+  "view": {
+    "answeroptions": {
+      "answeroption_or_leave_empty": "Antwortoption oder leer lassen"
+    },
+    "choose_nickname": {
+      "enter_nickname": "Gib dir einen Nicknamen",
+      "enter_nickname_here": "Gib deinen Nick ein",
+      "nickname_na_popup": "Dieser Name ist nicht verfügbar!q"
+    },
+    "hashtag_management": {
+      "enter_quiz_name": "Gib den Quiznamen ein",
+      "join_session": "Mach mit!",
+      "edit_session": "Bearbeiten",
+      "create_session": "Mach neu!",
+      "quiz_management": "Gespeicherte Quizze",
+      "available_sessions": "Diese Quizze sind in deinem Browser:",
+      "session_management": "Quizverwaltung",
+      "import": "Quiz importieren"
+    },
+    "leaderboard": {
+      "title": {
+        "single_question": "Quizfrage __questionId__ - Alles richtig haben...",
+        "all_questions": "Alles richtig haben..."
+      },
+      "no_attendee_correct": "Leider niemand",
+      "question": "Frage",
+      "show_more": "Zeige 1 weiteren",
+      "show_more_plural": "Zeige %s weitere",
+      "show_less": "Zeige weniger"
+    },
+    "liveResults": {
+      "question": "Frage",
+      "ranking": "Rangliste",
+      "reading_confirmation": "Lesebestätigung",
+      "show_more": "Zeige 1 weiteren",
+      "show_more_plural": "Zeige %s weitere",
+      "complete_correct": "Ganz richtig",
+      "complete_wrong": "Ganz falsch",
+      "back_to_lobby": "Zurück zur Lobby",
+      "global_ranking": "Globale Rangliste",
+      "show_question": "Zeige Frage",
+      "start_round": "Starte Runde",
+      "confirm_read": "Ich habe die Frage gelesen",
+      "game_over": "Game over",
+      "countdown": "Countdown",
+      "answer_option": "Antwort"
+    },
+    "lobby": {
+      "title": "Quiz-Lobby",
+      "yes": "Ja",
+      "no": "Nein",
+      "ready": "Startklar fürs Quiz",
+      "show_more": "Zeige 1 weiteren",
+      "show_more_plural": "Zeige %s weitere",
+      "start_quiz": "Los geht's!",
+      "kick_member_confirmation": "Soll der Teilnehmer '<span id=\"nickName\"></span>' aus dem Quiz entfernt werden?"
+    },
+    "questions": {
+      "enter_question_here": "Gib hier die Frage ein",
+      "format": "Format",
+      "edit": "Bearbeiten",
+      "preview": "Vorschau"
+    },
+    "timer": {
+      "set_countdown": "Countdown einstellen",
+      "second": "Sekunde",
+      "second_plural": "Sekunden"
+    },
+    "translation": {
+      "translations": "Diese Sprachen sind verfügbar:",
+      "i18n_currently_not_available": "i18n ist aktuell nicht verfügbar!"
+    },
+    "voting": {
+      "question": "Frage",
+      "send": "Absenden",
+      "seconds_left": "Noch 1 Sekunde!",
+      "seconds_left_plural": "Noch __value__ Sekunden!"
+    }
+  },
+  "plugins": {
+    "markdown_bar": {
+      "visible_text": "Angezeigter Text",
+      "link_text": "Linktext",
+      "link_destination": "Linkziel",
+      "tooltip": {
+        "info": "Info",
+        "bold": "Fett",
+        "heading": "Überschrift",
+        "hyperlink": "Hyperlink",
+        "unordered_list": "Unsortierte Liste",
+        "ordered_list": "Sortierte Liste",
+        "latex": "LaTeX-Auszeichnung",
+        "code": "Code-Auszeichnung",
+        "citation": "Zitat",
+        "image": "Bild",
+        "youtube": "YouTube",
+        "vimeo": "Vimeo"
+      },
+      "info_content": "Sie können Texte innerhalb von ARSnova mithilfe von <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown Optionen werden in Form von Schaltflächen über den unterstützten Eingabefeldern angeboten. Zudem unterstützt ARSnova <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
+    },
+    "sound": {
+      "title": "Quizmusik",
+      "volume": "Lautstärke",
+      "inactive": "Sound ist inaktiv",
+      "active": "Sound ist aktiviert"
+    },
+    "splashscreen": {
+      "error": {
+        "title": "Hinweis",
+        "set_text_error": "Der Text des Splashscreens kann nur gesetzt werden, nachdem er gerendered wurde!",
+        "error_messages": {
+          "Internal Server Error": "Interner Serverfehler",
+          "update_failed": "Es ist ein Fehler bei der Aktualisierung deiner Frage aufgetreten.",
+          "session_exists": "Diese Sitzung existiert bereits!",
+          "hashtag_exists": "Dieser Hashtag existiert bereits!",
+          "session_not_available": "Dieser Quizrunde kann aktuell nicht beigetreten werden.",
+          "private_browsing": "Im Privatmodus deines Browsers funktioniert ARSnova.click leider nur als Teilnehmer/in, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von ARSnova.click den Privatmodus deaktivieren und ARSnova erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.",
+          "kicked_from_quiz": "Du wurdest aus dem Quiz geworfen!",
+          "export_failed": "Konnte die Daten nicht exportieren! - %s",
+          "not_authorized": "Entweder ist das Quiz nicht vorhanden oder du hast keine Berechtigung, diese Daten zu lesen",
+          "maximum_answer_options_exceeded": "Die maximale Anzahl an Antwortoptionen wurde bereits erreicht",
+          "hashtag_not_found": "Dieser Hashtag wurde leider nicht gefunden",
+          "member_not_found": "Der Teilnehmer wurde leider nicht gefunden",
+          "duplicate_response": "Der Teilnehmer hat bereits eine Antwort abgegeben",
+          "answeroption_not_found": "Es existiert keine Antwort mit diesem Index",
+          "response_timeout": "Die Antwortzeit ist bereits abgelaufen",
+          "insert_leaderboard_failed": "Fehler beim Hinzufügen der Antwort zur Rangliste",
+          "session_closed": "Die Quizrunde wurde beendet"
+        }
+      },
+      "question_and_answer": { }
+    }
+  }
+}

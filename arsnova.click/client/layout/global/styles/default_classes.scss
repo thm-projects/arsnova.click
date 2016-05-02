@@ -1,0 +1,317 @@
+/*
+ * This file is part of ARSnova Click.
+ * Copyright (C) 2016 The ARSnova Team
+ *
+ * ARSnova Click is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ARSnova Click is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
+
+@import "colors";
+@import "appearance";
+
+.center-vertical {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  /* TODO: IE 8 and Opera 8 doesn't support translateY*/
+  transform: translateY(-50%);
+}
+
+.round-corners, .button {
+  border-radius: $corner-radius;
+}
+
+.slider, .slider .noUi-handle {
+  background-color: $slider-color;
+}
+
+.slider.noUi-target {
+  border: 0;
+  box-shadow: none;
+  margin-top: 35px;
+}
+
+.slider-timer-input {
+  text-align: center;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.button-shadow, .button {
+  box-shadow: 1px 1px 5px black;
+}
+
+.input-field {
+  color: black !important;
+  height: 50px;
+  font-size: 1.5em;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+}
+
+.input-field-bg-color, .input-field {
+  background-color: $input-background-color;
+  border: none;
+}
+
+.default-yellow-text-color {
+  color: $input-background-color;
+}
+
+.button {
+  height: 50px;
+  width: 100%;
+  border: none;
+  white-space: nowrap;
+}
+
+.glyph-left, .glyph-right {
+  font-size: 1.5em;
+  vertical-align: middle;
+  margin-top: -8px;
+}
+
+.glyph-right {
+  padding-left: 10px;
+}
+
+.glyph-left {
+  padding-right: 10px;
+}
+
+.input-group-letter, .button-result-letter {
+  font-size: 2em;
+  font-weight: 800;
+  color: $input-group-letter-color;
+  min-width: 50px;
+  margin-left: 10px;
+}
+
+.button-result-letter {
+  line-height: 50px;
+}
+
+.button:hover, .button:active:focus {
+  box-shadow: none;
+}
+
+.button-next, .button-success {
+  background-color: $success;
+  color: $success-text-color;
+}
+
+.button-warning, .button-back {
+  background-color: $warning;
+  color: $warning-text-color;
+}
+
+.button-purple {
+  background-color: $info;
+  color: $info-text-color;
+}
+
+.button-default {
+  background-color: $default;
+  color: $default-text-color;
+}
+
+.button-leader {
+  background-color: $input-background-color;
+  color: black;
+  box-shadow: none;
+  cursor: default;
+}
+
+.distance-top {
+  margin-top: 20px;
+}
+
+.button-result {
+  background-color: #eeeeee;
+  box-shadow: none;
+  height: auto;
+}
+
+.button-result .percentage {
+  position: absolute;
+  text-align: center;
+  color: #ffffff;
+  font-weight: bolder;
+  padding: 0 10px;
+  line-height: 30px;
+}
+
+.button-result .progress {
+  margin: 10px 10px 0 0;
+  position: relative;
+  margin-bottom: 10px;
+  height: 30px;
+  background-color: LightSteelBlue;
+}
+
+.progress-success {
+  background-color: $progress-bar-success-color !important;
+}
+
+.progress-failure {
+  background-color: $progress-bar-failure-color !important;
+}
+
+.progress-default {
+  background-color: $input-background-color !important;
+}
+
+/*
+ * center's the placeholder
+ */
+.placeholder-align-center, .input-field {
+}
+
+.placeholder-align-center::-webkit-input-placeholder, .input-field::-webkit-input-placeholder {
+  text-align: center;
+}
+
+.placeholder-align-center:-moz-placeholder, .input-field:-moz-placeholder { /* Firefox 18- */
+  text-align: center;
+}
+
+.placeholder-align-center::-moz-placeholder, .input-field::-moz-placeholder { /* Firefox 19+ */
+  text-align: center;
+}
+
+.placeholder-align-center:-ms-input-placeholder, .input-field:-ms-input-placeholder {
+  text-align: center;
+}
+
+.hover-underline:hover {
+  text-decoration: underline;
+}
+
+@media (max-width:991px) {
+  .fixed-bottom {
+	position: fixed;
+	bottom: 4vw;
+	width: 100%;
+	left: 0;
+	background-color: steelblue;
+	padding: 10px 15px 25px 15px;
+  }
+}
+
+@media (min-width:992px) {
+  .fixed-bottom {
+	position: fixed;
+	bottom: 25px;
+	width: 100%;
+	left: 0;
+	background-color: steelblue;
+	padding: 10px 15px 25px 15px;
+  }
+}
+
+.content-with-navigation-buttons {
+  max-height: calc(100% - 105px);
+  overflow-y: auto;
+  padding-bottom: 10px;
+}
+
+.textarea {
+  width: 100%;
+  background-color: gold;
+  font-size: 1.5em;
+  outline: none;
+  resize: none;
+  padding: 10px;
+  border: 0;
+}
+
+.previewText {
+  width: 100%;
+  background-color: white;
+  font-size: 1.5em;
+  outline: none;
+  resize: none;
+  padding: 10px;
+  border: 0;
+}
+
+.check-mark-checked {
+  color: $check-mark-checked;
+  width: 30px;
+}
+
+.check-mark-unchecked {
+  color: $check-mark-unchecked;
+  font-size: 0.8em;
+  width: 30px;
+}
+
+.btn-add-remove-ans_opt {
+  line-height: 100%;
+  width: 50px !important;
+  height: 50px !important;
+  font-weight: 900;
+  font-size: 22px;
+  padding: 0;
+}
+
+.color-changing-ars, .color-changing-nova, .color-changing-dot, .color-changing-click {
+  width: 100px;
+  height: 100px;
+  animation-duration: 7s;
+  animation-iteration-count: infinite;
+  font-weight: bold;
+}
+
+.color-changing-ars {
+  animation-name: colorChangingArs;
+}
+
+.color-changing-nova {
+  animation-name: colorChangingNova;
+}
+
+.color-changing-dot {
+  animation-name: colorChangingDot;
+}
+
+.color-changing-click {
+  animation-name: colorChangingClick;
+}
+
+.success input, .success textarea, input.success, textarea.success {
+  border: 3px solid $success;
+}
+
+.error input, .error textarea, input.error, textarea.error {
+  border: 3px solid $warning;
+}
+
+@media (max-width: 550px) {
+  .ansBtn {
+	display: none;
+  }
+}
+
+.popover-title, .popover.bottom {
+  background-color: $warning;
+  color: $warning-text-color;
+  border-color: $warning;
+  font-family: $font;
+  font-size: medium;
+}
+
+.popover.bottom > .arrow:after {
+  border-bottom-color: $warning;
+}

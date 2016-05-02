@@ -62,6 +62,9 @@ Template.nick.events({
 			$inputField.popover("destroy");
 		} else {
 			$("#forwardButton").attr("disabled", "disabled");
+			if (currentNickName.length === 0 || !member) {
+				$inputField.popover("destroy");
+			}
 			if (currentNickName.length > 2) {
 				$inputField.popover("show");
 			}

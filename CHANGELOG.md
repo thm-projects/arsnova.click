@@ -20,6 +20,12 @@
 
 Furthermore, we improved the jshint-rules for a better code quality and refactored the project scaffolding for a better maintainability.
 
+This version is brought to you by:
+Project management: Klaus Quibeldey-Cirkel
+Lead programming: Tjark Wilhelm Hoeck, Christopher Fullarton, Tom "tekay" Käsler, Daniel Gerhardt
+Contributions: Nina Isensee, Yannick Lehnhausen
+
+
 ## 1.0.0
 First version including the main features:
 
@@ -33,3 +39,8 @@ First version including the main features:
 * Responsive
 * Support for multiple questions
 * Session management in local storage
+
+This version is brought to you by:
+Project management: Klaus Quibeldey-Cirkel
+Lead programming: Tjark Wilhelm Hoeck, Tom "tekay" Käsler, Daniel Gerhardt
+Contributions: Christopher Fullarton, Daniel Henkel, Maurice Wallbott, Anton Schwarz, Kevin Weigand, Kevin Linne, Tim Strietzel, Michael Sann, Tobias Viehmann

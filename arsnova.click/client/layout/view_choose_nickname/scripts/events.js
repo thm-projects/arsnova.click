@@ -57,20 +57,23 @@ Template.nick.events({
 			placement: 'bottom'
 		});
 
-		if (currentNickName.length > 2 && !member && lib.isNickAllowed(currentNickName)) {
-			$("#forwardButton").removeAttr("disabled");
-			$inputField.popover("destroy");
-		} else {
-			$("#forwardButton").attr("disabled", "disabled");
-			if (currentNickName.length > 2) {
-				$inputField.popover("show");
-			}
-		}
-	},
-	"keydown #nickname-input-field": function (event) {
-		if (event.keyCode == 13) {
-			var currentNickName = event.currentTarget.value;
-			var member = MemberList.findOne({nick: currentNickName});
+        if (currentNickName.length > 2 && !member && lib.isNickAllowed(currentNickName)) {
+            $("#forwardButton").removeAttr("disabled");
+            $inputField.popover("destroy");
+        } else {
+            $("#forwardButton").attr("disabled", "disabled");
+            if(currentNickName.length == 0 || !member)  {
+                $inputField.popover("destroy");
+            }
+            if(currentNickName.length > 2) {
+                $inputField.popover("show");
+            }
+        }
+    },
+    "keydown #nickname-input-field": function (event) {
+        if (event.keyCode == 13) {
+            var currentNickName = event.currentTarget.value;
+            var member = MemberList.findOne({nick: currentNickName});
 
 			if (currentNickName.length > 2 && !member) {
 				$("#forwardButton").click();

@@ -36,8 +36,8 @@ Template.nick.events({
         }, (err) => {
             if (err) {
                 $("#forwardButton").attr("disabled", "disabled");
-                splashscreen_error.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
-                splashscreen_error.open();
+                ErrorSplashscreen.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages."+err.reason));
+                ErrorSplashscreen.open();
             } else {
                 Session.set("nick", nickname);
                 Router.go("/memberlist");

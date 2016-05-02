@@ -39,14 +39,14 @@ export function transformForegroundColor(rgbObj) {
 	return o < 125 ? "#ffffff" : "#000000";
 }
 
-export function isNickAllowed(nick){
-    var forbiddenNicks= require("../../../../public/forbiddenNicks.json");
-    for(var i=0;i<forbiddenNicks.length;++i){
-	if(nick.toLowerCase()===forbiddenNicks[i].toLowerCase()){
-	    return false;
+export function isNickAllowed(nick) {
+	var forbiddenNicks = require("../../../../public/forbiddenNicks.json");
+	for (var i = 0; i < forbiddenNicks.length; ++i) {
+		if (nick.toLowerCase() === forbiddenNicks[i].toLowerCase()) {
+			return false;
+		}
 	}
-    }
-    return true;
+	return true;
 }
 
 /**

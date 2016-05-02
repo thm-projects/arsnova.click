@@ -40,6 +40,7 @@ export function transformForegroundColor(rgbObj) {
 }
 
 export function isNickAllowed(nick) {
+	/* jshint node: true */
 	var forbiddenNicks = require("../../../../public/forbiddenNicks.json");
 	for (var i = 0; i < forbiddenNicks.length; ++i) {
 		if (nick.toLowerCase() === forbiddenNicks[i].toLowerCase()) {

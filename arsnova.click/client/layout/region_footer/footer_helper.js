@@ -97,10 +97,11 @@ Template.footer.events({
 			} else if (document.documentElement.mozRequestFullScreen) {
 				document.documentElement.mozRequestFullScreen();
 				// TODO webkit is currently not working!
-			}
-			/*else if (document.documentElement.webkitRequestFullScreen) {
+			} /*else if (document.documentElement.webkitRequestFullScreen) {
 				document.documentElement.webkitRequestFullScreen();
 			}*/
+			$("#js-activate-fullscreen").removeClass("glyphicon-fullscreen");
+			$("#js-activate-fullscreen").addClass("glyphicon-resize-small");
 		} else {
 			if (document.cancelFullScreen) {
 				document.cancelFullScreen();
@@ -109,7 +110,11 @@ Template.footer.events({
 			} else if (document.mozCancelFullScreen) {
 				document.mozCancelFullScreen();
 				// TODO webkit is currently not working!
-			}
+			} /*else if (document.webkitFullscreenElement) {
+				document.webkitCancelFullscreen();
+			}*/
+			$("#js-activate-fullscreen").removeClass("glyphicon-resize-small");
+			$("#js-activate-fullscreen").addClass("glyphicon-fullscreen");
 		}
 	},
 	"click .js-import-home": function () {

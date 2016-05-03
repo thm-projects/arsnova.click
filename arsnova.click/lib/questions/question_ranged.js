@@ -10,21 +10,21 @@ export class RangedQuestion extends AbstractQuestion {
         this.rangeMax = options.rangeMax || 0;
     }
 
-    setMaxRange (max) {
+    public setMaxRange (max) {
         if (!max || max <= this.rangeMin) {
             throw new Error("Invalid argument list for RangedAnswerOption.setMaxRange");
         }
         this.rangeMax = max;
     }
 
-    setMinRange (min) {
+    public setMinRange (min) {
         if (!min || min >= this.rangeMax) {
             throw new Error("Invalid argument list for RangedAnswerOption.setMinRange");
         }
         this.rangeMin = min;
     }
 
-    setRange (min, max) {
+    public setRange (min, max) {
         if (!min || !max || min >= max) {
             throw new Error("Invalid argument list for RangedAnswerOption.setRange");
         }
@@ -32,11 +32,11 @@ export class RangedQuestion extends AbstractQuestion {
         this.rangeMax = max;
     }
 
-    getMaxRange () {
+    public getMaxRange () {
         return this.rangeMax;
     }
 
-    getMinRange () {
+    public getMinRange () {
         return this.rangeMin;
     }
 }

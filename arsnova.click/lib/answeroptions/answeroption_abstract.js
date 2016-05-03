@@ -6,10 +6,14 @@ export class AbstractAnswerOption {
     private var _isCorrect = Symbol("_isCorrect");
 
     constructor (options) {
-        if (!options._hashtag || !options._questionIndex || !options._answerText || !options._answerOptionNumber || !options._isCorrect) {
+        if (!options.hashtag || !options.questionIndex || !options.answerText || !options.answerOptionNumber || !options.isCorrect) {
             throw new Error("Invalid argument list for AnswerOption instantiation");
         }
-        this.params = options;
+        this._hashtag = options.hashtag;
+        this._questionIndex = options.questionIndex;
+        this._answerText = options.answerText;
+        this._answerOptionNumber = options.answerOptionNumber;
+        this._isCorrect = options.isCorrect;
     }
 
     public getHashtag () {

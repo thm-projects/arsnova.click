@@ -32,6 +32,10 @@ export class AbstractQuestion {
         return this.questionText;
     }
 
+    public getQuestionIndex () {
+        return this.questionIndex;
+    }
+
     public setTimer (time) {
         if (!time) {
             throw new Error("Invalid argument for Question.setTimer");

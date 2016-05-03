@@ -19,7 +19,7 @@ export class AbstractQuestionGroup {
         this.questionList = options.questionList;
     }
 
-    addQuestion (options) {
+    public addQuestion (options) {
         try {
             let question = new Question(options);
             this.questionList.push(question);

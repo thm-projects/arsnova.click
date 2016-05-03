@@ -4,16 +4,21 @@ export class AbstractQuestion {
     private var questionText = Symbol("questionText");
     private var timer = Symbol("timer");
     private var startTime = Symbol("startTime");
+    private var questionIndex = Symbol("questionIndex");
     private var answerOptionList = Symbol("answerOptionList");
 
     constructor (options) {
-        if (!options.questionText || !options.timer || !options.startTime) {
+        if (!options.questionText || !options.timer || !options.startTime || !options.questionIndex) {
             throw new Error("Invalid argument list for Question instantiation");
         }
         this.questionText = options.questionText;
         this.timer = options.timer;
         this.startTime = options.startTime;
-        this.answerOptionList = AnswerOptionCollection.find({hashtag: options.hashtag}).fetch();
+        this.questionIndex = options.questionIndex;
+        this.answerOptionList = AnswerOptionCollection.find({
+            hashtag: options.hashtag,
+            questionIndex: options.questionIndex
+        }).fetch();
     }
 
     public setQuestionText (text) {

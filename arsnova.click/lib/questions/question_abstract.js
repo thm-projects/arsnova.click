@@ -1,81 +1,82 @@
 import {AnswerOptionCollection} from '../answeroptions/collection.js';
+import {AbstractAnswerOption} from '../answeroptions/answeroption_abstract.js';
+
+const questionText = Symbol("questionText");
+const timer = Symbol("timer");
+const startTime = Symbol("startTime");
+const questionIndex = Symbol("questionIndex");
+const answerOptionList = Symbol("answerOptionList");
 
 export class AbstractQuestion {
-    private var questionText = Symbol("questionText");
-    private var timer = Symbol("timer");
-    private var startTime = Symbol("startTime");
-    private var questionIndex = Symbol("questionIndex");
-    private var answerOptionList = Symbol("answerOptionList");
+	constructor (options) {
+		if (new.target === AbstractQuestion) {
+			throw new TypeError("Cannot construct Abstract instances directly");
+		}
+		if (!options.questionText || !options.timer || !options.startTime || !options.questionIndex) {
+			throw new Error("Invalid argument list for Question instantiation");
+		}
+		this[questionText] = options.questionText;
+		this[timer] = options.timer;
+		this[startTime] = options.startTime;
+		this[questionIndex] = options.questionIndex;
+		this[answerOptionList] = AnswerOptionCollection.find({
+			hashtag: options.hashtag,
+			questionIndex: options.questionIndex
+		}).fetch();
+	}
 
-    constructor (options) {
-        if (new.target === AbstractQuestion) {
-            throw new TypeError("Cannot construct Abstract instances directly");
-        }
-        if (!options.questionText || !options.timer || !options.startTime || !options.questionIndex) {
-            throw new Error("Invalid argument list for Question instantiation");
-        }
-        this.questionText = options.questionText;
-        this.timer = options.timer;
-        this.startTime = options.startTime;
-        this.questionIndex = options.questionIndex;
-        this.answerOptionList = AnswerOptionCollection.find({
-            hashtag: options.hashtag,
-            questionIndex: options.questionIndex
-        }).fetch();
-    }
+	setQuestionText (text) {
+		if (!(text instanceof String) || text.length < 5 || text.length > 10000) {
+			throw new Error("Invalid argument for Question.setText");
+		}
+		this.questionText = text;
+	}
 
-    public setQuestionText (text) {
-        if (!text instanceof String || text.length < 5 || text.length > 10000) {
-            throw new Error("Invalid argument for Question.setText");
-        }
-        this.questionText = text;
-    }
+	getQuestionText () {
+		return this.questionText;
+	}
 
-    public getQuestionText () {
-        return this.questionText;
-    }
+	getQuestionIndex () {
+		return this.questionIndex;
+	}
 
-    public getQuestionIndex () {
-        return this.questionIndex;
-    }
+	setTimer (time) {
+		if (!time) {
+			throw new Error("Invalid argument for Question.setTimer");
+		}
+		this.timer = time;
+	}
 
-    public setTimer (time) {
-        if (!time) {
-            throw new Error("Invalid argument for Question.setTimer");
-        }
-        this.timer = time;
-    }
+	getTimer () {
+		return this.timer;
+	}
 
-    public getTimer () {
-        return this.timer;
-    }
+	setStartTime (time) {
+		if (!time || new Date(time) <= new Date()) {
+			throw new Error("Invalid argument for Question.setStartTime");
+		}
+		this.startTime = time;
+	}
 
-    public setStartTime (time) {
-        if (!time || new Date(time) <= new Date()) {
-            throw new Error("Invalid argument for Question.setStartTime");
-        }
-        this.startTime = time;
-    }
+	getStartTime () {
+		return this.startTime;
+	}
 
-    public getStartTime () {
-        return this.startTime;
-    }
+	addAnswerOption (answerOption) {
+		if (!answerOption || !(answerOption instanceof AbstractAnswerOption)) {
+			throw new Error("Invalid argument for Question.removeAnswerOption");
+		}
+		this[answerOptionList].push(answerOption);
+	}
 
-    public addAnswerOption (answerOption) {
-        if (!answerOption || !answerOption instanceof AnswerOption) {
-            throw new Error("Invalid argument for Question.removeAnswerOption");
-        }
-        this.answerOptionList.push(answerOption);
-    }
+	removeAnswerOption (index) {
+		if (!index || index < 0 || index > this[answerOptionList].length) {
+			throw new Error("Invalid argument for Question.removeAnswerOption");
+		}
+		this[answerOptionList].splice(index);
+	}
 
-    public removeAnswerOption (index) {
-        if (!index || index < 0 || index > this.answerOptionList.length) {
-            throw new Error("Invalid argument for Question.removeAnswerOption");
-        }
-        this.answerOptionList.splice(index);
-    }
-
-    public getAnswerOptionList () {
-        return this.answerOptionList;
-    }
+	getAnswerOptionList () {
+		return this[answerOptionList];
+	}
 }

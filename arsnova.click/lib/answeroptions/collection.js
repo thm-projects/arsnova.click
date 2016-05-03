@@ -21,28 +21,28 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 export const AnswerOptionCollection = new Mongo.Collection("answeroptions");
 
 AnswerOptionCollection.attachSchema(new SimpleSchema({
-    hashtag: {
-        type: String,
-        min: 1,
-        max: 25
-    },
-    questionIndex: {
-        type: Number,
-        min: 0
-    },
-    answerText: {
-        type: String,
-        min: 0,
-        max: 500,
-        optional: true
-    },
-    answerOptionNumber: {
-        type: Number,
-        min: 0
-    },
-    isCorrect: {
-        type: Number,
-        min: 0,
-        max: 1
-    }
+	hashtag: {
+		type: String,
+		min: 1,
+		max: 25
+	},
+	questionIndex: {
+		type: Number,
+		min: 0
+	},
+	answerText: {
+		type: String,
+		min: 0,
+		max: 500,
+		optional: true
+	},
+	answerOptionNumber: {
+		type: Number,
+		min: 0
+	},
+	isCorrect: {
+		type: Number,
+		min: 0,
+		max: 1
+	}
 }));

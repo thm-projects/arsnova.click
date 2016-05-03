@@ -18,37 +18,43 @@
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
-export const QuestionGroup = new Mongo.Collection("questionGroup");
+export const QuestionGroupCollection = new Mongo.Collection("questionGroup", {
+    transform: function (x) {
+        var y = _.extend({}, x);
+        y.handler = new Function("return " + x.handler)();
+        return y;
+    }
+});
 
 export const SingleQuestionSchema = new SimpleSchema({
-	questionText: {
-		type: String,
-		optional: true,
-		max: 10000
-	},
-	timer: {
-		type: Number,
-		min: 0
-	},
-	startTime: {
-		type: String,
-		optional: true
-	}
+    questionText: {
+        type: String,
+        optional: true,
+        max: 10000
+    },
+    timer: {
+        type: Number,
+        min: 0
+    },
+    startTime: {
+        type: String,
+        optional: true
+    }
 });
 
 export const QuestionGroupSchema = new SimpleSchema({
-	hashtag: {
-		type: String,
-		min: 1,
-		max: 25
-	},
-	questionList: {
-		/*
-		 The index is defined in the EventManager.questionIndex variable.
-		 The arrays index represents the questionIndex.
-		 */
-		type: [SingleQuestionSchema]
-	}
+    hashtag: {
+        type: String,
+        min: 1,
+        max: 25
+    },
+    questionList: {
+        /*
+         The index is defined in the EventManager.questionIndex variable.
+         The arrays index represents the questionIndex.
+         */
+        type: [SingleQuestionSchema]
+    }
 });
 
-QuestionGroup.attachSchema(QuestionGroupSchema);
+QuestionGroupCollection.attachSchema(QuestionGroupSchema);

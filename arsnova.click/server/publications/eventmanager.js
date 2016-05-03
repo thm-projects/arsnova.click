@@ -17,9 +17,9 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {EventManager} from '/lib/eventmanager.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
-Meteor.publish('EventManager.join', (hashtag)=> {
+Meteor.publish('EventManagerCollection.join', (hashtag)=> {
 	if (typeof hashtag === "undefined") {
 		return false;
 	}
@@ -31,7 +31,7 @@ Meteor.publish('EventManager.join', (hashtag)=> {
 				max: 25
 			}
 		}).validate({hashtag: hashtag});
-		return EventManager.find({hashtag: hashtag});
+		return EventManagerCollection.find({hashtag: hashtag});
 	}
 	return false;
 });

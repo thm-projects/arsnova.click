@@ -18,8 +18,8 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
-import {EventManager} from '/lib/eventmanager.js';
-import {QuestionGroup} from '/lib/questions.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as lib from './lib.js';
 
 Template.createQuestionView.onRendered(function () {
@@ -29,8 +29,8 @@ Template.createQuestionView.onRendered(function () {
 
 	let index;
 	lib.subscriptionHandler = Tracker.autorun(()=> {
-		if (this.subscriptionsReady() && EventManager.findOne()) {
-			index = EventManager.findOne().questionIndex;
+		if (this.subscriptionsReady() && EventManagerCollection.findOne()) {
+			index = EventManagerCollection.findOne().questionIndex;
 			if (!Session.get("markdownAlreadyChecked")) {
 				lib.checkForMarkdown();
 				Session.set("markdownAlreadyChecked", true);
@@ -39,7 +39,7 @@ Template.createQuestionView.onRendered(function () {
 	});
 	var body = $('body');
 	body.on('click', '.questionIcon:not(.active)', function () {
-		var currentSession = QuestionGroup.findOne();
+		var currentSession = QuestionGroupCollection.findOne();
 		if (!currentSession || index >= currentSession.questionList.length) {
 			return;
 		}
@@ -47,6 +47,6 @@ Template.createQuestionView.onRendered(function () {
 		lib.addQuestion(index);
 	});
 	body.on('click', '.removeQuestion', function () {
-		index = EventManager.findOne().questionIndex;
+		index = EventManagerCollection.findOne().questionIndex;
 	});
 });

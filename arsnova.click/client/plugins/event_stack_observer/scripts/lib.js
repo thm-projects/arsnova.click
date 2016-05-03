@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {EventManager} from '/lib/eventmanager.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 export class EventStackObserver {
 	constructor (options) {
@@ -28,12 +28,12 @@ export class EventStackObserver {
 
 	start (hashtag) {
 		this.stop();
-		if (!EventManager.findOne({hashtag})) {
+		if (!EventManagerCollection.findOne({hashtag})) {
 			throw new Error("EventManager collection is not ready!");
 		}
 		const observerInstance = this;
 		observerInstance.stackIndex = 0;
-		this.observer = EventManager.find({hashtag}).observeChanges({
+		this.observer = EventManagerCollection.find({hashtag}).observeChanges({
 			changed: function (id, changedFields) {
 				if (changedFields.eventStack) {
 					let index = changedFields.eventStack.length - 1;

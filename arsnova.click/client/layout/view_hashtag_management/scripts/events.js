@@ -18,8 +18,8 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {EventManager} from '/lib/eventmanager.js';
-import {Hashtags} from '/lib/hashtags.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as localData from '/client/lib/local_storage.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as lib from './lib.js';
@@ -34,7 +34,7 @@ Template.hashtagView.events({
 			return;
 		}
 
-		var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
+		var hashtagDoc = HashtagsCollection.findOne({hashtag: inputHashtag});
 		if (!hashtagDoc) {
 			$("#joinSession").attr("disabled", "disabled");
 			addNewHashtagItem.removeAttr("disabled");
@@ -61,13 +61,13 @@ Template.hashtagView.events({
 		if (hashtag.length > 0) {
 			var localHashtags = localData.getAllHashtags();
 			if ($.inArray(hashtag, localHashtags) > -1) {
-				var oldHashtagDoc = Hashtags.findOne({hashtag: hashtag});
+				var oldHashtagDoc = HashtagsCollection.findOne({hashtag: hashtag});
 				if (oldHashtagDoc) {
 					reenter = true;
 					Session.set("hashtag", hashtag);
 					Session.set("isOwner", true);
 					localData.reenterSession(hashtag);
-					Meteor.call('EventManager.add', localData.getPrivateKey(), hashtag, function () {
+					Meteor.call('EventManagerCollection.add', localData.getPrivateKey(), hashtag, function () {
 						Router.go("/question");
 					});
 				}
@@ -88,7 +88,7 @@ Template.hashtagView.events({
 						});
 					} else {
 						for (var i = 0; i < 4; i++) {
-							Meteor.call("AnswerOptions.addOption", {
+							Meteor.call("AnswerOptionCollection.addOption", {
 								privateKey: localData.getPrivateKey(),
 								hashtag: hashtag,
 								questionIndex: 0,
@@ -97,7 +97,7 @@ Template.hashtagView.events({
 								isCorrect: 0
 							});
 						}
-						Meteor.call("QuestionGroup.insert", {
+						Meteor.call("QuestionGroupCollection.insert", {
 							privateKey: localData.getPrivateKey(),
 							hashtag: hashtag,
 							questionList: [
@@ -111,7 +111,7 @@ Template.hashtagView.events({
 						Session.set("hashtag", hashtag);
 						Session.set("isOwner", true);
 						localData.addHashtag(hashtag);
-						Meteor.call('EventManager.add', localData.getPrivateKey(), hashtag, function () {
+						Meteor.call('EventManagerCollection.add', localData.getPrivateKey(), hashtag, function () {
 							Router.go("/question");
 						});
 					}
@@ -122,7 +122,7 @@ Template.hashtagView.events({
 	"click #joinSession": function () {
 		var hashtag = $("#hashtag-input-field").val();
 
-		if (EventManager.findOne().sessionStatus === 2) {
+		if (EventManagerCollection.findOne().sessionStatus === 2) {
 			Session.set("hashtag", hashtag);
 			Router.go("/nick");
 		} else {
@@ -153,7 +153,7 @@ Template.hashtagView.events({
 				return;
 			}
 
-			var hashtagDoc = Hashtags.findOne({hashtag: inputHashtag});
+			var hashtagDoc = HashtagsCollection.findOne({hashtag: inputHashtag});
 			if (!hashtagDoc) {
 				//Add new Hashtag
 				$("#addNewHashtag").click();
@@ -162,7 +162,7 @@ Template.hashtagView.events({
 				if ($.inArray(inputHashtag, localHashtags) > -1) {
 					//Edit own Hashtag
 					$("#addNewHashtag").click();
-				} else if (EventManager.findOne() && EventManager.findOne().sessionStatus === 2) {
+				} else if (EventManagerCollection.findOne() && EventManagerCollection.findOne().sessionStatus === 2) {
 					//Join session
 					$("#joinSession").click();
 				}
@@ -180,7 +180,7 @@ Template.hashtagManagement.events({
 		localData.reenterSession(hashtag);
 		Session.set("isOwner", true);
 		Session.set("hashtag", hashtag);
-		Meteor.call('EventManager.add', localData.getPrivateKey(), hashtag, function () {
+		Meteor.call('EventManagerCollection.add', localData.getPrivateKey(), hashtag, function () {
 			Session.set("overrideValidQuestionRedirect", true);
 			Router.go("/question");
 		});
@@ -230,8 +230,8 @@ Template.hashtagManagement.events({
 					});
 				} else {
 					localData.importFromFile(asJSON);
-					Meteor.call('EventManager.add', localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, function () {
-						Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2, (err) => {
+					Meteor.call('EventManagerCollection.add', localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, function () {
+						Meteor.call("EventManagerCollection.setSessionStatus", localData.getPrivateKey(), asJSON.hashtagDoc.hashtag, 2, (err) => {
 							if (err) {
 								new ErrorSplashscreen({
 									autostart: true,

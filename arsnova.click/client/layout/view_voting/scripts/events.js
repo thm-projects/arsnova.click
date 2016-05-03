@@ -17,9 +17,9 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {EventManager} from '/lib/eventmanager.js';
-import {AnswerOptions} from '/lib/answeroptions.js';
-import {QuestionGroup} from '/lib/questions.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
 import {makeAndSendResponse} from './lib.js';
@@ -27,18 +27,18 @@ import {makeAndSendResponse} from './lib.js';
 Template.votingview.events({
 	'click #js-btn-showQuestionAndAnswerModal': function (event) {
 		event.stopPropagation();
-		var questionDoc = QuestionGroup.findOne();
+		var questionDoc = QuestionGroupCollection.findOne();
 		if (!questionDoc) {
 			return;
 		}
 
 		mathjaxMarkdown.initializeMarkdownAndLatex();
-		let questionContent = mathjaxMarkdown.getContent(questionDoc.questionList[EventManager.findOne().questionIndex].questionText);
+		let questionContent = mathjaxMarkdown.getContent(questionDoc.questionList[EventManagerCollection.findOne().questionIndex].questionText);
 		var answerContent = "";
 
 		let hasEmptyAnswers = true;
 
-		AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
+		AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
 			if (!answerOption.answerText) {
 				answerOption.answerText = "";
 			} else {
@@ -58,7 +58,7 @@ Template.votingview.events({
 			autostart: true,
 			templateName: 'questionAndAnswerSplashscreen',
 			closeOnButton: '#js-btn-hideQuestionModal',
-			instanceId: "questionAndAnswers_" + EventManager.findOne().questionIndex,
+			instanceId: "questionAndAnswers_" + EventManagerCollection.findOne().questionIndex,
 			onRendered: function (instance) {
 				instance.templateSelector.find('#questionContent').html(questionContent);
 				instance.templateSelector.find('#answerContent').html(answerContent);
@@ -73,12 +73,12 @@ Template.votingview.events({
 
 		Session.set("hasSendResponse", true);
 		var responseArr = JSON.parse(Session.get("responses"));
-		AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).forEach(function (cursor) {
+		AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).forEach(function (cursor) {
 			if (responseArr[cursor.answerOptionNumber]) {
 				makeAndSendResponse(cursor.answerOptionNumber);
 			}
 		});
-		if (EventManager.findOne().questionIndex + 1 >= QuestionGroup.findOne().questionList.length) {
+		if (EventManagerCollection.findOne().questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
 			Session.set("sessionClosed", true);
 		}
 		Router.go("/results");
@@ -86,7 +86,7 @@ Template.votingview.events({
 	"click .sendResponse": function (event) {
 		event.stopPropagation();
 
-		if (Session.get("questionSC") || (AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count() === 1)) {
+		if (Session.get("questionSC") || (AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).count() === 1)) {
 			makeAndSendResponse(event.currentTarget.id);
 			Router.go("/results");
 		} else {

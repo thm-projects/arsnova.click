@@ -17,10 +17,10 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {AnswerOptions} from '/lib/answeroptions.js';
-import {Responses} from '/lib/responses.js';
-import {LeaderBoard} from '/lib/leaderBoard.js';
-import {EventManager} from '/lib/eventmanager.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
+import {ResponsesCollection} from '/lib/responses/collection.js';
+import {LeaderBoardCollection} from '/lib/leader_board/collection.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
 	'LeaderBoard.addResponseSet': function ({phashtag, questionIndex, nick, responseTimeMillis}) {
@@ -39,7 +39,7 @@ Meteor.methods({
 
 			const correctAnswers = [];
 
-			AnswerOptions.find({
+			AnswerOptionCollection.find({
 				hashtag: phashtag,
 				questionIndex: questionIndex,
 				isCorrect: 1
@@ -50,7 +50,7 @@ Meteor.methods({
 			var responseAmount = 0;
 			var falseResponseAmount = 0;
 
-			Responses.find({
+			ResponsesCollection.find({
 				hashtag: phashtag,
 				questionIndex: questionIndex,
 				userNick: nick
@@ -63,14 +63,14 @@ Meteor.methods({
 
 			var rightResponseAmount = responseAmount - falseResponseAmount;
 
-			var memberEntry = LeaderBoard.findOne({
+			var memberEntry = LeaderBoardCollection.findOne({
 				hashtag: phashtag,
 				questionIndex: questionIndex,
 				userNick: nick
 			});
 
 			if (!memberEntry) {
-				LeaderBoard.insert({
+				LeaderBoardCollection.insert({
 					hashtag: phashtag,
 					questionIndex: questionIndex,
 					userNick: nick,
@@ -80,7 +80,7 @@ Meteor.methods({
 					wrongAnswers: falseResponseAmount
 				});
 			} else {
-				LeaderBoard.update(memberEntry._id, {
+				LeaderBoardCollection.update(memberEntry._id, {
 					$set: {
 						givenAnswers: responseAmount,
 						rightAnswers: rightResponseAmount,
@@ -88,7 +88,14 @@ Meteor.methods({
 					}
 				});
 			}
-			EventManager.update({hashtag: phashtag}, {$push: {eventStack: {key: "LeaderBoard.addResponseSet", value: {nick: nick, questionIndex: questionIndex}}}});
+			EventManagerCollection.update({hashtag: phashtag}, {$push: {eventStack: {key: "LeaderBoard.addResponseSet",
+				value: {
+					nick: nick,
+					questionIndex: questionIndex
+				}
+			}
+			}
+			});
 		}
 	}
 });

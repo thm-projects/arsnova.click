@@ -19,14 +19,14 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {MemberList} from '/lib/memberlist.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/client/lib/local_storage.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {calculateButtonCount} from './lib.js';
 
 Template.memberlist.events({
 	"click .btn-more-learners": function () {
-		Session.set("LearnerCount", MemberList.find().count());
+		Session.set("LearnerCount", MemberListCollection.find().count());
 		Session.set("LearnerCountOverride", true);
 	},
 	'click .btn-less-learners': function () {
@@ -60,7 +60,7 @@ Template.memberlist.events({
 	'click #startPolling': function () {
 		$('.sound-button').hide();
 		Session.set("sessionClosed", false);
-		Meteor.call("EventManager.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), -1);
-		Meteor.call('EventManager.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 3);
+		Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), -1);
+		Meteor.call('EventManagerCollection.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 3);
 	}
 });

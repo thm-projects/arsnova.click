@@ -17,7 +17,7 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {MemberList} from '/lib/memberlist.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
 
 Template.memberlist.helpers({
 	hashtag: function () {
@@ -29,23 +29,23 @@ Template.memberlist.helpers({
 	learners: function () {
 		var sortParamObj = Session.get('LearnerCountOverride') ? {lowerCaseNick: 1} : {insertDate: -1};
 		return [
-			MemberList.find({nick: Session.get("nick")}, {
+			MemberListCollection.find({nick: Session.get("nick")}, {
 				limit: 1
 			}),
-			MemberList.find({nick: {$ne: Session.get("nick")}}, {
+			MemberListCollection.find({nick: {$ne: Session.get("nick")}}, {
 				limit: (Session.get("LearnerCount") - 1),
 				sort: sortParamObj
 			})
 		];
 	},
 	showMoreButton: function () {
-		return ((MemberList.find().count() - Session.get("LearnerCount")) > 1);
+		return ((MemberListCollection.find().count() - Session.get("LearnerCount")) > 1);
 	},
 	invisibleLearnerCount: function () {
-		return MemberList.find().count() - Session.get("LearnerCount");
+		return MemberListCollection.find().count() - Session.get("LearnerCount");
 	},
 	memberlistCount: function () {
-		return MemberList.find().count();
+		return MemberListCollection.find().count();
 	}
 });
 

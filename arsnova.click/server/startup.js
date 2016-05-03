@@ -18,14 +18,14 @@
 import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {WebApp} from 'meteor/webapp';
-import {Hashtags} from '/lib/hashtags.js';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
 if (Meteor.isServer) {
 	Meteor.startup(function () {
 		WebApp.addHtmlAttributeHook(function () {
 			return {"lang": "de"};
 		});
-		if (Hashtags && !Hashtags.findOne()) {
+		if (HashtagsCollection && !HashtagsCollection.findOne()) {
 			// block this hash / pk -> do not use and merge to production server!
 			var blockedHashtag1 = {
 				hashtag: "hashtags",
@@ -41,8 +41,8 @@ if (Meteor.isServer) {
 				lastConnection: (new Date()).getTime()
 			};
 
-			Hashtags.insert(blockedHashtag1);
-			Hashtags.insert(blockedHashtag2);
+			HashtagsCollection.insert(blockedHashtag1);
+			HashtagsCollection.insert(blockedHashtag2);
 		}
 	});
 }

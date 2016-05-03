@@ -18,8 +18,8 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {QuestionGroup} from '/lib/questions.js';
-import {EventManager} from '/lib/eventmanager.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/client/lib/local_storage.js';
@@ -62,7 +62,7 @@ export var subscriptionHandler = null;
 
 export function addQuestion(index) {
 	var questionText = $('#questionText').val();
-	Meteor.call("QuestionGroup.addQuestion", {
+	Meteor.call("QuestionGroupCollection.addQuestion", {
 		privateKey: localData.getPrivateKey(),
 		hashtag: Session.get("hashtag"),
 		questionIndex: index,
@@ -120,10 +120,10 @@ export function changePreviewButtonText(text) {
 }
 
 export function checkForMarkdown() {
-	if (EventManager.findOne().questionIndex < 0) {
+	if (EventManagerCollection.findOne().questionIndex < 0) {
 		return;
 	}
-	var questionText = QuestionGroup.findOne().questionList[EventManager.findOne().questionIndex].questionText;
+	var questionText = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].questionText;
 	if (questionText && questionContainsMarkdownSyntax(questionText)) {
 		changePreviewButtonText(TAPi18n.__("view.questions.edit"));
 

@@ -18,14 +18,14 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {QuestionGroup} from '/lib/questions.js';
-import {AnswerOptions} from '/lib/answeroptions.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/client/lib/local_storage.js';
 
 export function checkForValidQuestions(index) {
-	var questionDoc = QuestionGroup.findOne();
-	var answerDoc = AnswerOptions.find({questionIndex: index});
+	var questionDoc = QuestionGroupCollection.findOne();
+	var answerDoc = AnswerOptionCollection.find({questionIndex: index});
 	if (!questionDoc || !answerDoc) {
 		return false;
 	}
@@ -49,8 +49,8 @@ export function checkForValidQuestions(index) {
 }
 
 export function addNewQuestion(callback) {
-	var index = QuestionGroup.findOne().questionList.length;
-	Meteor.call("QuestionGroup.addQuestion", {
+	var index = QuestionGroupCollection.findOne().questionList.length;
+	Meteor.call("QuestionGroupCollection.addQuestion", {
 		privateKey: localData.getPrivateKey(),
 		hashtag: Session.get("hashtag"),
 		questionIndex: index,
@@ -63,7 +63,7 @@ export function addNewQuestion(callback) {
 			});
 		} else {
 			for (var i = 0; i < 4; i++) {
-				Meteor.call('AnswerOptions.addOption', {
+				Meteor.call('AnswerOptionCollection.addOption', {
 					privateKey: localData.getPrivateKey(),
 					hashtag: Session.get("hashtag"),
 					questionIndex: index,
@@ -73,13 +73,13 @@ export function addNewQuestion(callback) {
 				});
 			}
 
-			localData.addQuestion(Session.get("hashtag"), QuestionGroup.findOne().questionList.length, "");
+			localData.addQuestion(Session.get("hashtag"), QuestionGroupCollection.findOne().questionList.length, "");
 
 			var validQuestions = Session.get("validQuestions");
 			validQuestions[index] = false;
 			Session.set("validQuestions", validQuestions);
 
-			Meteor.call("EventManager.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), index, function () {
+			Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), index, function () {
 				Router.go("/question");
 				if (callback) {
 					callback();

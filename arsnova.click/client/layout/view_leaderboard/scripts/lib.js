@@ -16,10 +16,10 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Session} from 'meteor/session';
-import {EventManager} from '/lib/eventmanager.js';
-import {AnswerOptions} from '/lib/answeroptions.js';
-import {MemberList} from '/lib/memberlist.js';
-import {Responses} from '/lib/responses.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
+import {ResponsesCollection} from '/lib/responses/collection.js';
 
 export function setMaxResponseButtons(value) {
 	Session.set("maxResponseButtons", value);
@@ -73,12 +73,12 @@ function getLeaderBoardItemsByIndex(index) {
 	var allGoodMembers = [];
 	var param = {isCorrect: 1};
 	param.questionIndex = index;
-	var rightAnswerOptions = AnswerOptions.find(param);
+	var rightAnswerOptions = AnswerOptionCollection.find(param);
 	delete param.isCorrect;
 
-	MemberList.find({}, {fields: {nick: 1}}).forEach(function (member) {
+	MemberListCollection.find({}, {fields: {nick: 1}}).forEach(function (member) {
 		param.userNick = member.nick;
-		var userResponses = Responses.find(param);
+		var userResponses = ResponsesCollection.find(param);
 		delete param.userNick;
 		var userHasRightAnswers = true;
 		// only put member in leaderboard when he clicked the right amount, then check whether he clicked all the right ones
@@ -87,7 +87,7 @@ function getLeaderBoardItemsByIndex(index) {
 			userResponses.forEach(function (userResponse) {
 				param.isCorrect = 1;
 				param.answerOptionNumber = userResponse.answerOptionNumber;
-				var checkAnswerOptionDoc = AnswerOptions.findOne(param);
+				var checkAnswerOptionDoc = AnswerOptionCollection.findOne(param);
 				delete param.isCorrect;
 				delete param.answerOptionNumber;
 				if (!checkAnswerOptionDoc) {
@@ -114,11 +114,11 @@ export function getLeaderBoardItems() {
 	if (typeof Session.get("showLeaderBoardId") !== "undefined") {
 		return [{value: getLeaderBoardItemsByIndex(Session.get("showLeaderBoardId"))}];
 	} else {
-		if (!EventManager.findOne()) {
+		if (!EventManagerCollection.findOne()) {
 			return [];
 		}
 		var result = [];
-		for (var i = 0; i <= EventManager.findOne().questionIndex; i++) {
+		for (var i = 0; i <= EventManagerCollection.findOne().questionIndex; i++) {
 			result.push({
 				index: i,
 				value: getLeaderBoardItemsByIndex(i)
@@ -131,9 +131,12 @@ export function getLeaderBoardItems() {
 
 function getAllNonPollingLeaderBoardItems() {
 	var result = [];
-	for (var i = 0; i <= EventManager.findOne().questionIndex; i++) {
+	for (var i = 0; i <= EventManagerCollection.findOne().questionIndex; i++) {
 		// just pick leaderBoardItems for sc & mc questions, pollings doesn't matter
-		if (AnswerOptions.find({questionIndex: i, isCorrect: 1}).count() > 0) {
+		if (AnswerOptionCollection.find({
+				questionIndex: i,
+				isCorrect: 1
+			}).count() > 0) {
 			result.push({
 				index: i,
 				value: getLeaderBoardItemsByIndex(i)

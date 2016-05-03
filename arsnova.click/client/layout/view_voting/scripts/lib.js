@@ -18,8 +18,8 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {EventManager} from '/lib/eventmanager.js';
-import {QuestionGroup} from '/lib/questions.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 export let countdown = null;
@@ -38,14 +38,14 @@ export function startCountdown(index) {
 
 	Meteor.call('Question.isSC', {
 		hashtag: Session.get("hashtag"),
-		questionIndex: EventManager.findOne().questionIndex
+		questionIndex: EventManagerCollection.findOne().questionIndex
 	}, (err, res) => {
 		if (!err && res) {
 			Session.set("questionSC", res);
 		}
 	});
 
-	var questionDoc = QuestionGroup.findOne().questionList[index];
+	var questionDoc = QuestionGroupCollection.findOne().questionList[index];
 	Session.set("sessionCountDown", questionDoc.timer);
 	countdown = new ReactiveCountdown(questionDoc.timer / 1000, {
 		interval: 1000,
@@ -79,7 +79,7 @@ export function startCountdown(index) {
 		}
 	});
 	countdown.start(function () {
-		if (index + 1 >= QuestionGroup.findOne().questionList.length) {
+		if (index + 1 >= QuestionGroupCollection.findOne().questionList.length) {
 			Session.set("sessionClosed", true);
 		}
 		Session.set("countdownInitialized", false);
@@ -92,7 +92,7 @@ export function startCountdown(index) {
 export function makeAndSendResponse(answerOptionNumber) {
 	Meteor.call('Responses.addResponse', {
 		hashtag: Session.get("hashtag"),
-		questionIndex: EventManager.findOne().questionIndex,
+		questionIndex: EventManagerCollection.findOne().questionIndex,
 		answerOptionNumber: Number(answerOptionNumber),
 		userNick: Session.get("nick")
 	}, (err) => {

@@ -17,14 +17,14 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {EventManager} from '/lib/eventmanager.js';
-import {Hashtags} from '/lib/hashtags.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
 import * as localData from '/client/lib/local_storage.js';
 
 Template.hashtagView.onCreated(function () {
 	this.subscribe('Hashtags.public', ()=> {
-		Hashtags.find().observeChanges({
+		HashtagsCollection.find().observeChanges({
 			added: function (id, doc) {
 				if (doc.hashtag === $("#hashtag-input-field").val()) {
 					$("#addNewHashtag").attr("disabled", "disabled");
@@ -33,12 +33,12 @@ Template.hashtagView.onCreated(function () {
 		});
 	});
 	this.autorun(()=> {
-		this.subscribe("EventManager.join", Session.get("hashtag"), ()=> {
-			if (!EventManager.findOne({hashtag: Session.get("hashtag")}) || localData.containsHashtag(Session.get("hashtag")) > -1) {
+		this.subscribe("EventManagerCollection.join", Session.get("hashtag"), ()=> {
+			if (!EventManagerCollection.findOne({hashtag: Session.get("hashtag")}) || localData.containsHashtag(Session.get("hashtag")) > -1) {
 				$("#joinSession").attr("disabled", "disabled");
 				return;
 			}
-			EventManager.find().observeChanges({
+			EventManagerCollection.find().observeChanges({
 				/*
 				changed: function (id, changedFields) {
 					if (!isNaN(changedFields.sessionStatus)) {

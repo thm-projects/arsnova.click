@@ -16,10 +16,10 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {Hashtags} from '/lib/hashtags.js';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
 Meteor.publish('Hashtags.public', function () {
-	return Hashtags.find({}, {
+	return HashtagsCollection.find({}, {
 		fields: {
 			privateKey: 0
 		}
@@ -27,7 +27,7 @@ Meteor.publish('Hashtags.public', function () {
 });
 
 Meteor.publish('Hashtags.byHashtag', function (hashtag) {
-	return Hashtags.find({hashtag: hashtag}, {
+	return HashtagsCollection.find({hashtag: hashtag}, {
 		fields: {
 			privateKey: 0
 		}

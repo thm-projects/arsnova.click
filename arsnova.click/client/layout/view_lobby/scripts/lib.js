@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Session} from 'meteor/session';
-import {MemberList} from '/lib/memberlist.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
 
 export let memberlistObserver = null;
 
@@ -50,7 +50,7 @@ export function calculateButtonCount() {
 	 Multiply the displayed elements by 3 if on widescreen and reduce the max output of buttons by 1 row for the display
 	 more button if necessary. Also make sure there is at least one row of buttons shown even if the user has to scroll
 	 */
-	var allMembers = MemberList.find().count();
+	var allMembers = MemberListCollection.find().count();
 	var limitModifier = (viewport.outerWidth() >= 992) ? 3 : (viewport.outerWidth() >= 768 && viewport.outerWidth() < 992) ? 2 : 1;
 
 	queryLimiter *= limitModifier;
@@ -76,5 +76,5 @@ export function calculateButtonCount() {
 }
 
 export function setMemberlistObserver(options) {
-	memberlistObserver = MemberList.find().observeChanges(options);
+	memberlistObserver = MemberListCollection.find().observeChanges(options);
 }

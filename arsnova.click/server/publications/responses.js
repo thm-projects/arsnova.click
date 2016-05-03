@@ -17,18 +17,18 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {Responses} from '/lib/responses.js';
-import {Hashtags} from '/lib/hashtags.js';
+import {ResponsesCollection} from '/lib/responses/collection.js';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
 Meteor.publish('Responses.session', function (phashtag) {
 	new SimpleSchema({
 		phashtag: {type: String}
 	}).validate({phashtag});
-	var doc = Hashtags.find({
+	var doc = HashtagsCollection.find({
 		hashtag: phashtag
 	});
 	if (!doc) {
 		return;
 	}
-	return Responses.find({hashtag: phashtag});
+	return ResponsesCollection.find({hashtag: phashtag});
 });

@@ -17,14 +17,14 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {MemberList} from '/lib/memberlist.js';
-import {Hashtags} from '/lib/hashtags.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
 Meteor.publish('MemberList.members', function (phashtag) {
 	new SimpleSchema({
 		phashtag: {type: String}
 	}).validate({phashtag});
-	return MemberList.find({
+	return MemberListCollection.find({
 		hashtag: phashtag
 	});
 });
@@ -34,8 +34,11 @@ Meteor.publish('MemberList.percentRead', function (phashtag, pprivateKey) {
 		phashtag: {type: String},
 		pprivateKey: {type: String}
 	}).validate({phashtag, pprivateKey});
-	const exists = Hashtags.findOne({hashtag: phashtag, privateKey: pprivateKey});
+	const exists = HashtagsCollection.findOne({
+		hashtag: phashtag,
+		privateKey: pprivateKey
+	});
 	if (exists) {
-		return MemberList.find({hashtag: phashtag});
+		return MemberListCollection.find({hashtag: phashtag});
 	}
 });

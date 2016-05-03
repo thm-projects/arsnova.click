@@ -18,38 +18,31 @@
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
-export const MemberList = new Mongo.Collection("memberlist");
+export const AnswerOptionCollection = new Mongo.Collection("answeroptions");
 
-MemberList.attachSchema(new SimpleSchema({
-	hashtag: {
-		type: String,
-		min: 1,
-		max: 25
-	},
-	nick: {
-		type: String,
-		min: 3,
-		max: 25
-	},
-	lowerCaseNick: {
-		type: String,
-		min: 3,
-		max: 25
-	},
-	readConfirmed: {
-		type: [Number]
-	},
-	backgroundColor: {
-		type: String,
-		min: 7,
-		max: 7
-	},
-	foregroundColor: {
-		type: String,
-		min: 7,
-		max: 7
-	},
-	insertDate: {
-		type: String
-	}
+AnswerOptionCollection.attachSchema(new SimpleSchema({
+    hashtag: {
+        type: String,
+        min: 1,
+        max: 25
+    },
+    questionIndex: {
+        type: Number,
+        min: 0
+    },
+    answerText: {
+        type: String,
+        min: 0,
+        max: 500,
+        optional: true
+    },
+    answerOptionNumber: {
+        type: Number,
+        min: 0
+    },
+    isCorrect: {
+        type: Number,
+        min: 0,
+        max: 1
+    }
 }));

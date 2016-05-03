@@ -1,4 +1,4 @@
-import {AbstractQuestion} from '../questions/question_abstract.js';
+import {AbstractQuestion} from './question_abstract.js';
 
 export class RangedQuestion extends AbstractQuestion {
     private var rangeMin = Symbol("rangeMin");

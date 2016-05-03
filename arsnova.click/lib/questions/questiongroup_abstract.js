@@ -3,6 +3,9 @@ export class AbstractQuestionGroup {
     private var questionList = Symbol("questionList");
 
     constructor (options) {
+        if (new.target === AbstractQuestionGroup) {
+            throw new TypeError("Cannot construct Abstract instances directly");
+        }
         if (!options.hashtag) {
             throw new Error("Invalid argument list for QuestionGroup instantiation");
         }

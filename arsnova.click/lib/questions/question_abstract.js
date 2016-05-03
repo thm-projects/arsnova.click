@@ -8,6 +8,9 @@ export class AbstractQuestion {
     private var answerOptionList = Symbol("answerOptionList");
 
     constructor (options) {
+        if (new.target === AbstractQuestion) {
+            throw new TypeError("Cannot construct Abstract instances directly");
+        }
         if (!options.questionText || !options.timer || !options.startTime || !options.questionIndex) {
             throw new Error("Invalid argument list for Question instantiation");
         }

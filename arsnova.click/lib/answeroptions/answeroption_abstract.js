@@ -5,7 +5,10 @@ export class AbstractAnswerOption {
     private var _answerOptionNumber = Symbol("_answerOptionNumber");
     private var _isCorrect = Symbol("_isCorrect");
 
-    constructor (options) {
+    constructor () {
+        if (new.target === AbstractAnswerOption) {
+            throw new TypeError("Cannot construct Abstract instances directly");
+        }
         if (!options.hashtag || !options.questionIndex || !options.answerText || !options.answerOptionNumber || !options.isCorrect) {
             throw new Error("Invalid argument list for AnswerOption instantiation");
         }

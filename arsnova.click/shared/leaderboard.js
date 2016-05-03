@@ -23,7 +23,7 @@ import {LeaderBoardCollection} from '/lib/leader_board/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
-	'LeaderBoard.addResponseSet': function ({phashtag, questionIndex, nick, responseTimeMillis}) {
+	'LeaderBoardCollection.addResponseSet': function ({phashtag, questionIndex, nick, responseTimeMillis}) {
 		if (Meteor.isServer) {
 			new SimpleSchema({
 				phashtag: {type: String},
@@ -88,7 +88,7 @@ Meteor.methods({
 					}
 				});
 			}
-			EventManagerCollection.update({hashtag: phashtag}, {$push: {eventStack: {key: "LeaderBoard.addResponseSet",
+			EventManagerCollection.update({hashtag: phashtag}, {$push: {eventStack: {key: "LeaderBoardCollection.addResponseSet",
 				value: {
 					nick: nick,
 					questionIndex: questionIndex

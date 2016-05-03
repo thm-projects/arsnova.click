@@ -23,7 +23,7 @@ import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
-	"QuestionGroup.insert": function ({privateKey, hashtag, questionList}) {
+	"QuestionGroupCollection.insert": function ({privateKey, hashtag, questionList}) {
 		if (Meteor.isServer) {
 			QuestionGroupSchema.validate({
 				hashtag: hashtag,
@@ -56,7 +56,7 @@ Meteor.methods({
 			});
 		}
 	},
-	"QuestionGroup.addQuestion": function ({privateKey, hashtag, questionIndex, questionText}) {
+	"QuestionGroupCollection.addQuestion": function ({privateKey, hashtag, questionIndex, questionText}) {
 		if (Meteor.isServer) {
 			new SimpleSchema({
 				questionText: {type: String},
@@ -99,7 +99,7 @@ Meteor.methods({
 			});
 		}
 	},
-	"QuestionGroup.removeQuestion": function ({privateKey, hashtag, questionIndex}) {
+	"QuestionGroupCollection.removeQuestion": function ({privateKey, hashtag, questionIndex}) {
 		if (Meteor.isServer) {
 			var hashtagDoc = HashtagsCollection.findOne({
 				hashtag: hashtag,

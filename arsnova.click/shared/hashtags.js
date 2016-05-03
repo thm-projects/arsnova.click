@@ -25,7 +25,7 @@ import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
-	'Hashtags.checkPrivateKey': function (privateKey, hashtag) {
+	'HashtagsCollection.checkPrivateKey': function (privateKey, hashtag) {
 		new SimpleSchema({
 			hashtag: {type: String},
 			privateKey: {type: String}
@@ -39,22 +39,22 @@ Meteor.methods({
 		});
 		return Boolean(doc);
 	},
-	'Hashtags.addHashtag': function (doc) {
+	'HashtagsCollection.addHashtag': function (doc) {
 		if (HashtagsCollection.find({hashtag: doc.hashtag}).count() > 0) {
-			throw new Meteor.Error('Hashtags.addHashtag', 'plugins.splashscreen.error.error_messages.session_exists');
+			throw new Meteor.Error('HashtagsCollection.addHashtag', 'plugins.splashscreen.error.error_messages.session_exists');
 		}
 
 		HashtagsCollection.insert(doc);
 		EventManagerCollection.update({hashtag: doc.hashtag}, {
 			$push: {
 				eventStack: {
-					key: "Hashtags.addHashtag",
+					key: "HashtagsCollection.addHashtag",
 					value: {hashtag: doc.hashtag}
 				}
 			}
 		});
 	},
-	'Hashtags.export': function ({hashtag, privateKey}) {
+	'HashtagsCollection.export': function ({hashtag, privateKey}) {
 		if (Meteor.isServer) {
 			var hashtagDoc = HashtagsCollection.findOne({
 				hashtag: hashtag,
@@ -66,7 +66,7 @@ Meteor.methods({
 				}
 			});
 			if (!hashtagDoc) {
-				throw new Meteor.Error('Hashtags.export', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
+				throw new Meteor.Error('HashtagsCollection.export', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
 			}
 			var questionGroupDoc = QuestionGroupCollection.findOne({hashtag: hashtag}, {
 				fields: {
@@ -98,12 +98,12 @@ Meteor.methods({
 			return JSON.stringify(exportData);
 		}
 	},
-	'Hashtags.import': function ({privateKey, data}) {
+	'HashtagsCollection.import': function ({privateKey, data}) {
 		if (Meteor.isServer) {
 			var hashtag = data.hashtagDoc.hashtag;
 			var oldDoc = HashtagsCollection.findOne({hashtag: hashtag});
 			if (oldDoc) {
-				throw new Meteor.Error('Hashtags.import', 'plugins.splashscreen.error.error_messages.hashtag_exists');
+				throw new Meteor.Error('HashtagsCollection.import', 'plugins.splashscreen.error.error_messages.hashtag_exists');
 			}
 			var questionList = [];
 			var hashtagDoc = data.hashtagDoc;
@@ -134,7 +134,7 @@ Meteor.methods({
 			EventManagerCollection.update({hashtag: data.hashtagDoc}, {
 				$push: {
 					eventStack: {
-						key: "Hashtags.import",
+						key: "HashtagsCollection.import",
 						value: {hashtag: data.hashtagDoc}
 					}
 				}

@@ -9,7 +9,7 @@ const answerOptionList = Symbol("answerOptionList");
 
 export class AbstractQuestion {
 	constructor (options) {
-		if (new.target === AbstractQuestion) {
+		if (this.constructor === AbstractQuestion) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
 		if (!options.questionText || !options.timer || !options.startTime || !options.questionIndex) {
@@ -29,37 +29,37 @@ export class AbstractQuestion {
 		if (!(text instanceof String) || text.length < 5 || text.length > 10000) {
 			throw new Error("Invalid argument for Question.setText");
 		}
-		this.questionText = text;
+		this[questionText] = text;
 	}
 
 	getQuestionText () {
-		return this.questionText;
+		return this[questionText];
 	}
 
 	getQuestionIndex () {
-		return this.questionIndex;
+		return this[questionIndex];
 	}
 
 	setTimer (time) {
 		if (!time) {
 			throw new Error("Invalid argument for Question.setTimer");
 		}
-		this.timer = time;
+		this[timer] = time;
 	}
 
 	getTimer () {
-		return this.timer;
+		return this[timer];
 	}
 
 	setStartTime (time) {
 		if (!time || new Date(time) <= new Date()) {
 			throw new Error("Invalid argument for Question.setStartTime");
 		}
-		this.startTime = time;
+		this[startTime] = time;
 	}
 
 	getStartTime () {
-		return this.startTime;
+		return this[startTime];
 	}
 
 	addAnswerOption (answerOption) {

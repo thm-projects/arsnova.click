@@ -6,7 +6,7 @@ const questionList = Symbol("questionList");
 export class AbstractQuestionGroup {
 
 	constructor (options) {
-		if (new.target === AbstractQuestionGroup) {
+		if (this.constructor === AbstractQuestionGroup) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
 		if (!options.hashtag) {

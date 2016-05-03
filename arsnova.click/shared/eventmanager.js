@@ -21,7 +21,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
 Meteor.methods({
-	'EventManager.setSessionStatus': (privateKey, hashtag, sessionStatus)=> {
+	'EventManagerCollection.setSessionStatus': (privateKey, hashtag, sessionStatus)=> {
 		if (Meteor.isClient) {
 			return;
 		}
@@ -53,7 +53,7 @@ Meteor.methods({
 			}
 		});
 	},
-	'EventManager.showReadConfirmedForIndex': (privateKey, hashtag, index)=> {
+	'EventManagerCollection.showReadConfirmedForIndex': (privateKey, hashtag, index)=> {
 		if (Meteor.isClient) {
 			return;
 		}
@@ -85,7 +85,7 @@ Meteor.methods({
 			}
 		});
 	},
-	'EventManager.setActiveQuestion': (privateKey, hashtag, index)=> {
+	'EventManagerCollection.setActiveQuestion': (privateKey, hashtag, index)=> {
 		if (Meteor.isClient) {
 			return;
 		}
@@ -123,7 +123,7 @@ Meteor.methods({
 			}
 		});
 	},
-	'EventManager.clear': (privateKey, hashtag) => {
+	'EventManagerCollection.clear': (privateKey, hashtag) => {
 		if (Meteor.isClient) {
 			return;
 		}
@@ -145,7 +145,7 @@ Meteor.methods({
 
 		EventManagerCollection.remove({hashtag: hashtag});
 	},
-	'EventManager.reset': (privateKey, hashtag) => {
+	'EventManagerCollection.reset': (privateKey, hashtag) => {
 		if (Meteor.isClient) {
 			return;
 		}
@@ -183,7 +183,7 @@ Meteor.methods({
 			}
 		});
 	},
-	'EventManager.add': (privateKey, hashtag) => {
+	'EventManagerCollection.add': (privateKey, hashtag) => {
 		if (Meteor.isClient) {
 			return;
 		}

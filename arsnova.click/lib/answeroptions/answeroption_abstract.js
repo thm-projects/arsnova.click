@@ -7,7 +7,7 @@ const isCorrect = Symbol("isCorrect");
 export class AbstractAnswerOption {
 
 	constructor (options) {
-		if (new.target === AbstractAnswerOption) {
+		if (this.constructor === AbstractAnswerOption) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
 		if (!options.hashtag || !options.questionIndex || !options.answerText || !options.answerOptionNumber || !options.isCorrect) {

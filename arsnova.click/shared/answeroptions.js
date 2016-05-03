@@ -22,7 +22,7 @@ import { HashtagsCollection } from '/lib/hashtags/collection.js';
 import { EventManagerCollection } from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
-	'AnswerOptions.addOption': function ({privateKey, hashtag, questionIndex, answerText, answerOptionNumber, isCorrect}) {
+	'AnswerOptionCollection.addOption': function ({privateKey, hashtag, questionIndex, answerText, answerOptionNumber, isCorrect}) {
 		new SimpleSchema({
 			privateKey: {type: String},
 			hashtag: {type: String},
@@ -91,7 +91,7 @@ Meteor.methods({
 			});
 		}
 	},
-	'AnswerOptions.deleteOption': function ({privateKey, hashtag, questionIndex, answerOptionNumber}) {
+	'AnswerOptionCollection.deleteOption': function ({privateKey, hashtag, questionIndex, answerOptionNumber}) {
 		if (Meteor.isServer) {
 			new SimpleSchema({
 				privateKey: {type: String},
@@ -137,7 +137,7 @@ Meteor.methods({
 			});
 		}
 	},
-	'AnswerOptions.updateAnswerTextAndIsCorrect': function ({privateKey, hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}) {
+	'AnswerOptionCollection.updateAnswerTextAndIsCorrect': function ({privateKey, hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}) {
 		new SimpleSchema({
 			privateKey: {type: String},
 			hashtag: {type: String},

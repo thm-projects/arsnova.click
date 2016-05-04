@@ -18,7 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
-Meteor.publish('Hashtags.public', function () {
+Meteor.publish('HashtagsCollection.public', function () {
 	return HashtagsCollection.find({}, {
 		fields: {
 			privateKey: 0
@@ -26,7 +26,7 @@ Meteor.publish('Hashtags.public', function () {
 	});
 });
 
-Meteor.publish('Hashtags.byHashtag', function (hashtag) {
+Meteor.publish('HashtagsCollection.byHashtag', function (hashtag) {
 	return HashtagsCollection.find({hashtag: hashtag}, {
 		fields: {
 			privateKey: 0

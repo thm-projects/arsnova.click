@@ -45,7 +45,7 @@ Template.memberlist.events({
 			onRendered: function (instance) {
 				instance.templateSelector.find('#nickName').text($(event.currentTarget).text().replace(/(?:\r\n|\r| |\n)/g, ''));
 				instance.templateSelector.find('#kickMemberButton').on('click', function () {
-					Meteor.call('MemberList.removeLearner', localData.getPrivateKey(), Session.get("hashtag"), $(event.currentTarget).attr("id"), function (err) {
+					Meteor.call('MemberListCollection.removeLearner', localData.getPrivateKey(), Session.get("hashtag"), $(event.currentTarget).attr("id"), function (err) {
 						if (err) {
 							new ErrorSplashscreen({
 								autostart: true,

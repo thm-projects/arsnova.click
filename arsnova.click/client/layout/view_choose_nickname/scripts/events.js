@@ -28,7 +28,7 @@ Template.nick.events({
 		event.stopPropagation();
 		var nickname = $("#nickname-input-field").val();
 		var bgColor = lib.rgbToHex(lib.getRandomInt(0, 255), lib.getRandomInt(0, 255), lib.getRandomInt(0, 255));
-		Meteor.call('MemberList.addLearner', {
+		Meteor.call('MemberListCollection.addLearner', {
 			hashtag: Session.get("hashtag"),
 			nick: nickname,
 			backgroundColor: bgColor,

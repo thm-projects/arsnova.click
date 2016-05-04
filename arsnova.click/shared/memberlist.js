@@ -157,7 +157,7 @@ Meteor.methods({
 			EventManagerCollection.update({hashtag: hashtag}, {
 				$push: {
 					eventStack: {
-						key: "MemberList.clearReadConfirmed",
+						key: "MemberListCollection.clearReadConfirmed",
 						value: {}
 					}
 				}

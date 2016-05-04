@@ -23,7 +23,7 @@ import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as localData from '/client/lib/local_storage.js';
 
 Template.hashtagView.onCreated(function () {
-	this.subscribe('Hashtags.public', ()=> {
+	this.subscribe('HashtagsCollection.public', ()=> {
 		HashtagsCollection.find().observeChanges({
 			added: function (id, doc) {
 				if (doc.hashtag === $("#hashtag-input-field").val()) {
@@ -65,5 +65,5 @@ Template.hashtagView.onCreated(function () {
 });
 
 Template.hashtagManagement.onCreated(function () {
-	this.subscribe('Hashtags.public');
+	this.subscribe('HashtagsCollection.public');
 });

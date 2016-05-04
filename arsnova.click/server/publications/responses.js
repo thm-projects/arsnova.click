@@ -20,7 +20,7 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
-Meteor.publish('Responses.session', function (phashtag) {
+Meteor.publish('ResponsesCollection.session', function (phashtag) {
 	new SimpleSchema({
 		phashtag: {type: String}
 	}).validate({phashtag});

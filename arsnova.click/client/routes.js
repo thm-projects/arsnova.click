@@ -132,7 +132,7 @@ Router.route('/memberlist', function () {
 	});
 
 	globalEventStackObserver.onChange([
-		"MemberList.removeLearner"
+		"MemberListCollection.removeLearner"
 	], function (key, value) {
 		if (value.user) {
 			if (value.user === Session.get("nick")) {
@@ -157,10 +157,10 @@ Router.route('/onpolling', {
 		return [
 			Meteor.subscribe('QuestionGroupCollection.questionList', Session.get("hashtag")),
 			Meteor.subscribe('EventManagerCollection.join', Session.get("hashtag")),
-			Meteor.subscribe('Responses.session', Session.get("hashtag")),
+			Meteor.subscribe('ResponsesCollection.session', Session.get("hashtag")),
 			Meteor.subscribe('AnswerOptionCollection.options', Session.get("hashtag")),
-			Meteor.subscribe('MemberList.members', Session.get("hashtag")),
-			Meteor.subscribe('Hashtags.public')
+			Meteor.subscribe('MemberListCollection.members', Session.get("hashtag")),
+			Meteor.subscribe('HashtagsCollection.public')
 		];
 	},
 
@@ -177,10 +177,10 @@ Router.route('/results', {
 		return [
 			Meteor.subscribe('QuestionGroupCollection.questionList', Session.get("hashtag")),
 			Meteor.subscribe('EventManagerCollection.join', Session.get("hashtag")),
-			Meteor.subscribe('Responses.session', Session.get("hashtag")),
+			Meteor.subscribe('ResponsesCollection.session', Session.get("hashtag")),
 			Meteor.subscribe('AnswerOptionCollection.options', Session.get("hashtag")),
-			Meteor.subscribe('MemberList.members', Session.get("hashtag")),
-			Meteor.subscribe('Hashtags.public')
+			Meteor.subscribe('MemberListCollection.members', Session.get("hashtag")),
+			Meteor.subscribe('HashtagsCollection.public')
 		];
 	},
 
@@ -248,7 +248,7 @@ Router.route('/results', {
 							instance.templateSelector.find('#setReadConfirmed').text(TAPi18n.__("global.close_window"));
 						} else {
 							instance.templateSelector.find('#setReadConfirmed').parent().on('click', '#setReadConfirmed', function () {
-								Meteor.call("MemberList.setReadConfirmed", {
+								Meteor.call("MemberListCollection.setReadConfirmed", {
 									hashtag: Session.get("hashtag"),
 									questionIndex: EventManagerCollection.findOne().readingConfirmationIndex,
 									nick: Session.get("nick")

@@ -78,7 +78,7 @@ Template.liveResults.events({
 	},
 	"click #js-btn-export": function (event) {
 		event.stopPropagation();
-		Meteor.call('Hashtags.export', {
+		Meteor.call('HashtagsCollection.export', {
 			hashtag: Session.get("hashtag"),
 			privateKey: localData.getPrivateKey()
 		}, (err, res) => {
@@ -108,8 +108,8 @@ Template.liveResults.events({
 	'click #backButton': (event)=> {
 		event.stopPropagation();
 		$('.sound-button').show();
-		Meteor.call('Responses.clearAll', localData.getPrivateKey(), Session.get("hashtag"));
-		Meteor.call("MemberList.clearReadConfirmed", localData.getPrivateKey(), Session.get("hashtag"));
+		Meteor.call('ResponsesCollection.clearAll', localData.getPrivateKey(), Session.get("hashtag"));
+		Meteor.call("MemberListCollection.clearReadConfirmed", localData.getPrivateKey(), Session.get("hashtag"));
 		Meteor.call("EventManagerCollection.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 2);
 	},
 	'click #startNextQuestion': (event)=> {

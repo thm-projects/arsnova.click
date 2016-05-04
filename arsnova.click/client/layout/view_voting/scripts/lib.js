@@ -90,7 +90,7 @@ export function startCountdown(index) {
 }
 
 export function makeAndSendResponse(answerOptionNumber) {
-	Meteor.call('Responses.addResponse', {
+	Meteor.call('ResponsesCollection.addResponse', {
 		hashtag: Session.get("hashtag"),
 		questionIndex: EventManagerCollection.findOne().questionIndex,
 		answerOptionNumber: Number(answerOptionNumber),

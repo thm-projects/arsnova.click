@@ -66,7 +66,7 @@ Template.createTimerView.events({
 						}
 					}
 				});
-				Meteor.call("MemberList.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
+				Meteor.call("MemberListCollection.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
 				Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), 0);
 				Meteor.call("EventManagerCollection.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 2);
 				Router.go("/memberlist");

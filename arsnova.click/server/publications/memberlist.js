@@ -20,7 +20,7 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
-Meteor.publish('MemberList.members', function (phashtag) {
+Meteor.publish('MemberListCollection.members', function (phashtag) {
 	new SimpleSchema({
 		phashtag: {type: String}
 	}).validate({phashtag});
@@ -29,7 +29,7 @@ Meteor.publish('MemberList.members', function (phashtag) {
 	});
 });
 
-Meteor.publish('MemberList.percentRead', function (phashtag, pprivateKey) {
+Meteor.publish('MemberListCollection.percentRead', function (phashtag, pprivateKey) {
 	new SimpleSchema({
 		phashtag: {type: String},
 		pprivateKey: {type: String}

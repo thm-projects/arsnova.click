@@ -79,7 +79,7 @@ Template.hashtagView.events({
 					sessionStatus: 1,
 					lastConnection: (new Date()).getTime()
 				};
-				Meteor.call('Hashtags.addHashtag', doc, (err) => {
+				Meteor.call('HashtagsCollection.addHashtag', doc, (err) => {
 					if (err) {
 						$("#addNewHashtag").removeAttr("disabled");
 						new ErrorSplashscreen({
@@ -219,7 +219,7 @@ Template.hashtagManagement.events({
 		var fileReader = new FileReader();
 		fileReader.onload = function () {
 			var asJSON = JSON.parse(fileReader.result);
-			Meteor.call("Hashtags.import", {
+			Meteor.call("HashtagsCollection.import", {
 				privateKey: localData.getPrivateKey(),
 				data: asJSON
 			}, (err) => {

@@ -22,7 +22,7 @@ import {TAPi18n} from 'meteor/tap:i18n';
 import * as localData from '/client/lib/local_storage.js';
 import {buzzsound1, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib";
-
+import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 Template.header.onCreated(function () {
 	Session.setDefault("slider2", 80);
@@ -63,8 +63,25 @@ Template.header.events({
 	'click .kill-session-switch, click .arsnova-logo': function () {
 		if (Session.get("isOwner")) {
 			buzzsound1.stop();
-			Meteor.call("Main.killAll", localData.getPrivateKey(), Session.get("hashtag"));
-			Router.go("/");
+
+			new Splashscreen({
+				autostart: true,
+				templateName: "resetSessionSplashscreen",
+				closeOnButton: '#closeDialogButton, #resetSessionButton',
+				onRendered: function (instance) {
+					instance.templateSelector.find('#resetSessionButton').on('click', function () {
+						Meteor.call("Main.killAll", localData.getPrivateKey(), Session.get("hashtag"), function (err) {
+							if (err) {
+								new ErrorSplashscreen({
+									autostart: true,
+									errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+								});
+							}
+						});
+						Router.go("/");
+					});
+				}
+			});
 		} else {
 			Router.go("/resetToHome");
 		}

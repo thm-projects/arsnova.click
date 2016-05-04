@@ -112,7 +112,10 @@
     "header": {
       "new_question": "New question",
       "sound": "Sound",
-      "reset": "Reset"
+      "reset": "Reset",
+      "yes": "Yes",
+      "no": "No",
+      "reset_session_confirmation": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted.<br><br> The created Question(s), including the assigned answer options and timer configurations, will be stored in the local storage of your browser. Except the hashtag-name, all data of this session will be deleted from the server. Do you really want to reset the session?"
     }
   },
   "view": {

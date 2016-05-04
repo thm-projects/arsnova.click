@@ -31,6 +31,7 @@ Template.hashtagView.events({
 		Session.set("hashtag", inputHashtag);
 		addNewHashtagItem.html(TAPi18n.__("view.hashtag_management.create_session") + '<span class="glyphicon glyphicon-plus glyph-right" aria-hidden="true"></span>');
 		if (inputHashtag.length === 0) {
+			addNewHashtagItem.attr("disabled", "disabled");
 			return;
 		}
 

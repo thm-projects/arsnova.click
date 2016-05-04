@@ -1,5 +1,6 @@
 import {AnswerOptionCollection} from '../answeroptions/collection.js';
 import {AbstractAnswerOption} from '../answeroptions/answeroption_abstract.js';
+import {DefaultAnswerOption} from '../answeroptions/answeroption_default.js';
 
 const questionText = Symbol("questionText");
 const timer = Symbol("timer");
@@ -12,17 +13,21 @@ export class AbstractQuestion {
 		if (this.constructor === AbstractQuestion) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
-		if (!options.questionText || !options.timer || !options.startTime || !options.questionIndex) {
-			throw new Error("Invalid argument list for Question instantiation");
+		if (typeof options.hashtag === "undefined" || typeof options.questionText === "undefined" || typeof options.timer === "undefined" || typeof options.startTime === "undefined" || typeof options.questionIndex === "undefined") {
+			throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
 		}
 		this[questionText] = options.questionText;
 		this[timer] = options.timer;
 		this[startTime] = options.startTime;
 		this[questionIndex] = options.questionIndex;
-		this[answerOptionList] = AnswerOptionCollection.find({
+		this[answerOptionList] = [];
+		let self = this;
+		AnswerOptionCollection.find({
 			hashtag: options.hashtag,
 			questionIndex: options.questionIndex
-		}).fetch();
+		}).fetch().forEach(function (answerOption) {
+			self[answerOptionList].push(new DefaultAnswerOption(answerOption));
+		});
 	}
 
 	setQuestionText (text) {
@@ -78,5 +83,17 @@ export class AbstractQuestion {
 
 	getAnswerOptionList () {
 		return this[answerOptionList];
+	}
+
+	serialize() {
+		let answerOptionListSerialized = [];
+		this[answerOptionList].forEach(function (answeroption) { answerOptionListSerialized.push(answeroption.serialize()); });
+		return {
+			questionText: this[questionText],
+			timer: this[timer],
+			startTime: this[startTime],
+			questionIndex: this[questionIndex],
+			answerOptionList: answerOptionListSerialized
+		};
 	}
 }

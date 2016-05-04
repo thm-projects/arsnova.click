@@ -10,7 +10,7 @@ export class AbstractAnswerOption {
 		if (this.constructor === AbstractAnswerOption) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
-		if (!options.hashtag || !options.questionIndex || !options.answerText || !options.answerOptionNumber || !options.isCorrect) {
+		if (typeof options.hashtag === "undefined" || typeof options.questionIndex === "undefined" || typeof options.answerText === "undefined" || typeof options.answerOptionNumber === "undefined" || typeof options.isCorrect === "undefined") {
 			throw new Error("Invalid argument list for AnswerOption instantiation");
 		}
 		this[hashtag] = options.hashtag;
@@ -52,5 +52,15 @@ export class AbstractAnswerOption {
 			throw new Error("Invalid argument for AnswerOption.setIsCorrect");
 		}
 		this[isCorrect] = isCorrect;
+	}
+
+	serialize() {
+		return {
+			hashtag: this[hashtag],
+			questionIndex: this[questionIndex],
+			answerText: this[answerText],
+			answerOptionNumber: this[answerOptionNumber],
+			isCorrect: this[isCorrect]
+		};
 	}
 }

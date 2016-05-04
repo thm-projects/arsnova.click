@@ -1,10 +1,12 @@
 import {AbstractQuestion} from './question_abstract.js';
 
+const correctAnswerCount = Symbol("correctAnswerCount");
+
 export class SingleChoiceQuestion extends AbstractQuestion {
 
 	constructor (options) {
 		super(options);
-		this.correctAnswers = 0;
+		this[correctAnswerCount] = 0;
 	}
 
 	/**
@@ -14,10 +16,10 @@ export class SingleChoiceQuestion extends AbstractQuestion {
 	 */
 	addAnswerOption (answerOption) {
 		if (answerOption.isCorrect) {
-			if (this.correctAnswers > 0) {
+			if (this[correctAnswerCount] > 0) {
 				throw new Error("This question has already a correct answer");
 			} else {
-				this.correctAnswers++;
+				this[correctAnswerCount]++;
 			}
 		}
 		super.addAnswerOption(answerOption);
@@ -29,7 +31,7 @@ export class SingleChoiceQuestion extends AbstractQuestion {
 	 * @param index
 	 */
 	removeAnswerOption (index) {
-		this.correctAnswers--;
+		this[correctAnswerCount]--;
 		super.removeAnswerOption(index);
 	}
 }

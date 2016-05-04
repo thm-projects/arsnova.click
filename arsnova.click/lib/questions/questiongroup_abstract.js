@@ -9,10 +9,10 @@ export class AbstractQuestionGroup {
 		if (this.constructor === AbstractQuestionGroup) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
-		if (!options.hashtag) {
+		if (typeof options.hashtag === "undefined") {
 			throw new Error("Invalid argument list for QuestionGroup instantiation");
 		}
-		if (!options.questionList || !(options.questionList instanceof Array)) {
+		if (typeof options.questionList === "undefined" || !(options.questionList instanceof Array)) {
 			this[questionList] = [];
 		} else {
 			for (let i = 0; i < options.questionList.length; i++) {
@@ -45,5 +45,14 @@ export class AbstractQuestionGroup {
 
 	getQuestionList () {
 		return this[questionList];
+	}
+
+	serialize() {
+		let questionListSerialized = [];
+		this[questionList].forEach(function (question) { questionListSerialized.push(question.serialize()); });
+		return {
+			hashtag: this[hashtag],
+			questionList: questionListSerialized
+		};
 	}
 }

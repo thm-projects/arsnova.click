@@ -63,8 +63,25 @@ Template.header.events({
 	'click .kill-session-switch, click .arsnova-logo': function () {
 		if (Session.get("isOwner")) {
 			buzzsound1.stop();
-			Meteor.call("Main.killAll", localData.getPrivateKey(), Session.get("hashtag"));
-			Router.go("/");
+
+			new Splashscreen({
+				autostart: true,
+				templateName: "resetSessionSplashscreen",
+				closeOnButton: '#closeDialogButton, #resetSessionButton',
+				onRendered: function (instance) {
+					instance.templateSelector.find('#resetSessionButton').on('click', function () {
+						Meteor.call("Main.killAll", localData.getPrivateKey(), Session.get("hashtag"), function (err) {
+							if (err) {
+								new ErrorSplashscreen({
+									autostart: true,
+									errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+								});
+							}
+						});
+						Router.go("/");
+					});
+				}
+			});
 		} else {
 			Router.go("/resetToHome");
 		}

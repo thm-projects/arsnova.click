@@ -112,7 +112,10 @@
     "header": {
       "new_question": "Neue Frage",
       "sound": "Sound",
-      "reset": "Reset"
+      "reset": "Reset",
+      "yes": "Ja",
+      "no": "Nein",
+      "reset_session_confirmation": "Beim Zurücksetzen der Session werden alle Studenten zu der Startseite zurückgeführt. Das aktuelle Ranking sowie die Quiz-Lobby werden gelöscht.<br><br> Die angelegte(n) Frage(n) sowie die zugehörigen Antwortoptionen und Zeitkonfigurationen werden im local storage des Browsers gesichert. Abgesehen von dem Hashtag-Namen werden alle Daten, die im Zusammmenhang mit Ihrer Session stehen, vom Server entfernt. Wollen Sie das wirklich?"
     }
   },
   "view": {

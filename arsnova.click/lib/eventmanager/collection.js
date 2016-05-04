@@ -18,7 +18,7 @@
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
-export const EventManager = new Mongo.Collection("eventmanager");
+export const EventManagerCollection = new Mongo.Collection("eventmanager");
 
 const eventStackScheme = new SimpleSchema({
 	key: {
@@ -59,4 +59,4 @@ var eventManagerScheme = new SimpleSchema({
 	}
 });
 
-EventManager.attachSchema(eventManagerScheme);
+EventManagerCollection.attachSchema(eventManagerScheme);

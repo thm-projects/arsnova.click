@@ -17,12 +17,12 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {EventManager} from '/lib/eventmanager.js';
-import {MemberList} from '/lib/memberlist.js';
-import {Hashtags} from '/lib/hashtags.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
 Meteor.methods({
-	'MemberList.addLearner': function ({hashtag, nick, backgroundColor, foregroundColor}) {
+	'MemberListCollection.addLearner': function ({hashtag, nick, backgroundColor, foregroundColor}) {
 		new SimpleSchema({
 			hashtag: {type: String},
 			nick: {type: String},
@@ -34,13 +34,16 @@ Meteor.methods({
 			backgroundColor,
 			foregroundColor
 		});
-		if (MemberList.findOne({hashtag: hashtag, nick: nick})) {
-			throw new Meteor.Error('MemberList.addLearner', 'Nick already exists!');
+		if (MemberListCollection.findOne({
+				hashtag: hashtag,
+				nick: nick
+			})) {
+			throw new Meteor.Error('MemberListCollection.addLearner', 'Nick already exists!');
 		}
-		if (EventManager.findOne({hashtag: hashtag}).sessionStatus !== 2) {
-			throw new Meteor.Error('MemberList.addLearner', 'plugins.splashscreen.error.error_messages.session_not_available');
+		if (EventManagerCollection.findOne({hashtag: hashtag}).sessionStatus !== 2) {
+			throw new Meteor.Error('MemberListCollection.addLearner', 'plugins.splashscreen.error.error_messages.session_not_available');
 		}
-		MemberList.insert({
+		MemberListCollection.insert({
 			hashtag: hashtag,
 			nick: nick,
 			lowerCaseNick: nick.toLowerCase(),
@@ -49,9 +52,16 @@ Meteor.methods({
 			readConfirmed: [],
 			insertDate: new Date().getTime()
 		});
-		EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "MemberList.addLearner", value: {user: nick}}}});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "MemberListCollection.addLearner",
+					value: {user: nick}
+				}
+			}
+		});
 	},
-	'MemberList.removeLearner': function (privateKey, hashtag, nickId) {
+	'MemberListCollection.removeLearner': function (privateKey, hashtag, nickId) {
 		if (Meteor.isClient) {
 			return;
 		}
@@ -64,22 +74,38 @@ Meteor.methods({
 			nickId
 		});
 
-		if (!Hashtags.findOne({privateKey: privateKey, hashtag: hashtag})) {
-			throw new Meteor.Error('MemberList.removeLearner', 'plugins.splashscreen.error.error_messages.not_authorized');
+		if (!HashtagsCollection.findOne({
+				privateKey: privateKey,
+				hashtag: hashtag
+			})) {
+			throw new Meteor.Error('MemberListCollection.removeLearner', 'plugins.splashscreen.error.error_messages.not_authorized');
 		}
 
-		let nickName = MemberList.findOne({hashtag: hashtag, _id: nickId}).nick;
+		let nickName = MemberListCollection.findOne({
+			hashtag: hashtag,
+			_id: nickId
+		}).nick;
 
 		if (nickName) {
-			MemberList.remove({hashtag: hashtag, _id: nickId}, function (err) {
+			MemberListCollection.remove({
+				hashtag: hashtag,
+				_id: nickId
+			}, function (err) {
 				if (err) {
-					throw new Meteor.Error('MemberList.removeLearner', 'plugins.splashscreen.error.error_messages.Internal Server Error');
+					throw new Meteor.Error('MemberListCollection.removeLearner', 'plugins.splashscreen.error.error_messages.Internal Server Error');
 				}
-				EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "MemberList.removeLearner", value: {user: nickName}}}});
+				EventManagerCollection.update({hashtag: hashtag}, {
+					$push: {
+						eventStack: {
+							key: "MemberListCollection.removeLearner",
+							value: {user: nickName}
+						}
+					}
+				});
 			});
 		}
 	},
-	'MemberList.setReadConfirmed': function ({hashtag, questionIndex, nick}) {
+	'MemberListCollection.setReadConfirmed': function ({hashtag, questionIndex, nick}) {
 		/*
 		 TODO Everybody can set "readConfirmed" for each user!
 		 Maybe link this method to a privateKey for learners?
@@ -94,41 +120,68 @@ Meteor.methods({
 			questionIndex,
 			nick
 		});
-		var member = MemberList.findOne({hashtag: hashtag, nick: nick});
+		var member = MemberListCollection.findOne({
+			hashtag: hashtag,
+			nick: nick
+		});
 		if (!member) {
-			throw new Meteor.Error('MemberList.setReadConfirmed', 'plugins.splashscreen.error.error_messages.member_not_found');
+			throw new Meteor.Error('MemberListCollection.setReadConfirmed', 'plugins.splashscreen.error.error_messages.member_not_found');
 		}
 		member.readConfirmed[questionIndex] = 1;
-		MemberList.update(member._id, {$set: {readConfirmed: member.readConfirmed}});
-		EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "MemberList.setReadConfirmed", value: {user: nick, questionIndex: questionIndex}}}});
+		MemberListCollection.update(member._id, {$set: {readConfirmed: member.readConfirmed}});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "MemberListCollection.setReadConfirmed",
+					value: {
+						user: nick,
+						questionIndex: questionIndex
+					}
+				}
+			}
+		});
 	},
-	'MemberList.clearReadConfirmed': function (privateKey, hashtag) {
+	'MemberListCollection.clearReadConfirmed': function (privateKey, hashtag) {
 		if (Meteor.isServer) {
-			var doc = Hashtags.findOne({
+			var doc = HashtagsCollection.findOne({
 				hashtag: hashtag,
 				privateKey: privateKey
 			});
 			if (doc) {
-				MemberList.update({hashtag: hashtag}, {$set: {readConfirmed: []}});
+				MemberListCollection.update({hashtag: hashtag}, {$set: {readConfirmed: []}});
 			} else {
-				throw new Meteor.Error('MemberList.clearReadConfirmed', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('MemberListCollection.clearReadConfirmed', 'plugins.splashscreen.error.error_messages.not_authorized');
 			}
 		} else {
-			MemberList.update({hashtag: hashtag}, {$set: {readConfirmed: []}});
-			EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "MemberList.clearReadConfirmed", value: {}}}});
+			MemberListCollection.update({hashtag: hashtag}, {$set: {readConfirmed: []}});
+			EventManagerCollection.update({hashtag: hashtag}, {
+				$push: {
+					eventStack: {
+						key: "MemberListCollection.clearReadConfirmed",
+						value: {}
+					}
+				}
+			});
 		}
 	},
-	'MemberList.removeFromSession': function (privateKey, hashtag) {
+	'MemberListCollection.removeFromSession': function (privateKey, hashtag) {
 		if (Meteor.isServer) {
-			var doc = Hashtags.findOne({
+			var doc = HashtagsCollection.findOne({
 				hashtag: hashtag,
 				privateKey: privateKey
 			});
 			if (doc) {
-				MemberList.remove({hashtag: hashtag});
-				EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "MemberList.removeFromSession", value: {}}}});
+				MemberListCollection.remove({hashtag: hashtag});
+				EventManagerCollection.update({hashtag: hashtag}, {
+					$push: {
+						eventStack: {
+							key: "MemberListCollection.removeFromSession",
+							value: {}
+						}
+					}
+				});
 			} else {
-				throw new Meteor.Error('MemberList.removeFromSession', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('MemberListCollection.removeFromSession', 'plugins.splashscreen.error.error_messages.not_authorized');
 			}
 		}
 	}

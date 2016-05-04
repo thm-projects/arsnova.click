@@ -19,7 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {MemberList} from '/lib/memberlist.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as lib from './lib.js';
 
@@ -28,7 +28,7 @@ Template.nick.events({
 		event.stopPropagation();
 		var nickname = $("#nickname-input-field").val();
 		var bgColor = lib.rgbToHex(lib.getRandomInt(0, 255), lib.getRandomInt(0, 255), lib.getRandomInt(0, 255));
-		Meteor.call('MemberList.addLearner', {
+		Meteor.call('MemberListCollection.addLearner', {
 			hashtag: Session.get("hashtag"),
 			nick: nickname,
 			backgroundColor: bgColor,
@@ -49,7 +49,7 @@ Template.nick.events({
 	},
 	'input #nickname-input-field': function (event) {
 		var currentNickName = event.currentTarget.value;
-		var member = MemberList.findOne({nick: currentNickName});
+		var member = MemberListCollection.findOne({nick: currentNickName});
 		var $inputField = $("#nickname-input-field");
 
 		if (currentNickName.length > 2 && !member) {
@@ -84,7 +84,7 @@ Template.nick.events({
 	"keydown #nickname-input-field": function (event) {
 		if (event.keyCode == 13) {
 			var currentNickName = event.currentTarget.value;
-			var member = MemberList.findOne({nick: currentNickName});
+			var member = MemberListCollection.findOne({nick: currentNickName});
 
 			if (currentNickName.length > 2 && !member) {
 				$("#forwardButton").click();

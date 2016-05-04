@@ -17,10 +17,10 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
-import {EventManager} from '/lib/eventmanager.js';
-import {AnswerOptions} from '/lib/answeroptions.js';
-import {MemberList} from '/lib/memberlist.js';
-import {QuestionGroup} from '/lib/questions.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as localData from '/client/lib/local_storage.js';
 import {buzzsound1} from '/client/plugins/sound/scripts/lib.js';
 
@@ -42,7 +42,7 @@ export function hslColPerc(percent, start, end) {
 export function getPercentRead(index) {
 	var sumRead = 0;
 	var count = 0;
-	MemberList.find().map(function (member) {
+	MemberListCollection.find().map(function (member) {
 		count++;
 		if (member.readConfirmed[index]) {
 			sumRead += member.readConfirmed[index];
@@ -53,7 +53,7 @@ export function getPercentRead(index) {
 
 export function getCurrentRead(index) {
 	var sumRead = 0;
-	MemberList.find().map(function (member) {
+	MemberListCollection.find().map(function (member) {
 		if (member.readConfirmed[index]) {
 			sumRead += member.readConfirmed[index];
 		}
@@ -66,8 +66,8 @@ export function checkIfIsCorrect(isCorrect) {
 }
 
 export function startCountdown(index) {
-	Meteor.call("EventManager.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), index);
-	var questionDoc = QuestionGroup.findOne().questionList[index];
+	Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), index);
+	var questionDoc = QuestionGroupCollection.findOne().questionList[index];
 	Session.set("sessionCountDown", questionDoc.timer);
 	$("#countdowndiv").appendTo($("body"));
 	$("#countdown").appendTo($("body"));
@@ -132,9 +132,9 @@ export function startCountdown(index) {
 		buzzsound1.stop();
 		Session.set("countdownInitialized", false);
 		$('.disableOnActiveCountdown').removeAttr("disabled");
-		if (index + 1 >= QuestionGroup.findOne().questionList.length) {
+		if (index + 1 >= QuestionGroupCollection.findOne().questionList.length) {
 			Session.set("sessionClosed", true);
-			if (Session.get("isOwner") && AnswerOptions.find({isCorrect: 1}).count() > 0) {
+			if (Session.get("isOwner") && AnswerOptionCollection.find({isCorrect: 1}).count() > 0) {
 				routeToLeaderboardTimer = setTimeout(() => {
 					Session.set("showGlobalRanking", true);
 					Router.go("/statistics");
@@ -180,8 +180,8 @@ export function calculateButtonCount() {
 	 more button if necessary. Also make sure there is at least one row of buttons shown even if the user has to scroll
 	 */
 	var allMembers = [];
-	MemberList.find().forEach(function (doc) {
-		if (doc.readConfirmed[EventManager.findOne().readingConfirmationIndex]) {
+	MemberListCollection.find().forEach(function (doc) {
+		if (doc.readConfirmed[EventManagerCollection.findOne().readingConfirmationIndex]) {
 			allMembers.push(doc);
 		}
 	});

@@ -17,8 +17,8 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
-import {AnswerOptions} from '/lib/answeroptions.js';
-import {QuestionGroup} from '/lib/questions.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as localData from '/client/lib/local_storage.js';
 
 export let validationTrackerHandle = null;
@@ -55,7 +55,7 @@ export function createSlider(index) {
 		return;
 	}
 	if (Session.get("slider") === 0) {
-		Session.set("slider", AnswerOptions.find({questionIndex: index}).count() * 10);
+		Session.set("slider", AnswerOptionCollection.find({questionIndex: index}).count() * 10);
 	}
 	$("#slider").noUiSlider({
 		start: Session.get("slider"),
@@ -71,6 +71,6 @@ export function createSlider(index) {
 }
 
 export function setSlider(index) {
-	Session.set('slider', (QuestionGroup.findOne().questionList[index].timer / 1000));
-	$("#slider").val((QuestionGroup.findOne().questionList[index].timer / 1000));
+	Session.set('slider', (QuestionGroupCollection.findOne().questionList[index].timer / 1000));
+	$("#slider").val((QuestionGroupCollection.findOne().questionList[index].timer / 1000));
 }

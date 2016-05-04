@@ -17,24 +17,24 @@
 
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {EventManager} from '/lib/eventmanager.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as lib from './lib.js';
 
 Template.createQuestionView.events({
 	'input #questionText': function () {
-		if (!EventManager.findOne()) {
+		if (!EventManagerCollection.findOne()) {
 			return;
 		}
-		lib.addQuestion(EventManager.findOne().questionIndex);
+		lib.addQuestion(EventManagerCollection.findOne().questionIndex);
 	},
 	//Save question in Sessions-Collection when Button "Next" is clicked
 	'click #forwardButton': function () {
-		if (!EventManager.findOne()) {
+		if (!EventManagerCollection.findOne()) {
 			return;
 		}
-		lib.addQuestion(EventManager.findOne().questionIndex);
+		lib.addQuestion(EventManagerCollection.findOne().questionIndex);
 		Router.go("/answeroptions");
 	},
 	"click #backButton": function () {

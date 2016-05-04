@@ -15,20 +15,40 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import { Mongo } from 'meteor/mongo';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import {Mongo} from 'meteor/mongo';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
-export const Hashtags = new Mongo.Collection("hashtags");
+export const QuestionGroupCollection = new Mongo.Collection("questionGroup");
 
-Hashtags.attachSchema(new SimpleSchema({
+export const SingleQuestionSchema = new SimpleSchema({
+	questionText: {
+		type: String,
+		optional: true,
+		max: 10000
+	},
+	timer: {
+		type: Number,
+		min: 0
+	},
+	startTime: {
+		type: String,
+		optional: true
+	}
+});
+
+export const QuestionGroupSchema = new SimpleSchema({
 	hashtag: {
 		type: String,
 		min: 1,
 		max: 25
 	},
-	privateKey: {
-		type: String,
-		min: 24,
-		max: 24
+	questionList: {
+		/*
+		 The index is defined in the EventManager.questionIndex variable.
+		 The arrays index represents the questionIndex.
+		 */
+		type: [SingleQuestionSchema]
 	}
-}));
+});
+
+QuestionGroupCollection.attachSchema(QuestionGroupSchema);

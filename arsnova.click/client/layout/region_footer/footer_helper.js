@@ -125,7 +125,7 @@ Template.footer.events({
 		var fileReader = new FileReader();
 		fileReader.onload = function () {
 			var asJSON = JSON.parse(fileReader.result);
-			Meteor.call("Hashtags.import",
+			Meteor.call("HashtagsCollection.import",
 				{
 					privateKey: localData.getPrivateKey(),
 					data: asJSON

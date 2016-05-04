@@ -22,7 +22,7 @@ import {TAPi18n} from 'meteor/tap:i18n';
 import * as localData from '/client/lib/local_storage.js';
 import {buzzsound1, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib";
-
+import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 Template.header.onCreated(function () {
 	Session.setDefault("slider2", 80);

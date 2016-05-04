@@ -57,6 +57,7 @@ export class AbstractAnswerOption {
 	serialize() {
 		return {
 			hashtag: this[hashtag],
+			type: this.constructor.name,
 			questionIndex: this[questionIndex],
 			answerText: this[answerText],
 			answerOptionNumber: this[answerOptionNumber],

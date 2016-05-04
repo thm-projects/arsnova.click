@@ -2,6 +2,7 @@ import {AnswerOptionCollection} from '../answeroptions/collection.js';
 import {AbstractAnswerOption} from '../answeroptions/answeroption_abstract.js';
 import {DefaultAnswerOption} from '../answeroptions/answeroption_default.js';
 
+const hashtag = Symbol("questionText");
 const questionText = Symbol("questionText");
 const timer = Symbol("timer");
 const startTime = Symbol("startTime");
@@ -13,9 +14,11 @@ export class AbstractQuestion {
 		if (this.constructor === AbstractQuestion) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
+		console.log(options);
 		if (typeof options.hashtag === "undefined" || typeof options.questionText === "undefined" || typeof options.timer === "undefined" || typeof options.startTime === "undefined" || typeof options.questionIndex === "undefined") {
 			throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
 		}
+		this[hashtag] = options.hashtag;
 		this[questionText] = options.questionText;
 		this[timer] = options.timer;
 		this[startTime] = options.startTime;
@@ -89,7 +92,9 @@ export class AbstractQuestion {
 		let answerOptionListSerialized = [];
 		this[answerOptionList].forEach(function (answeroption) { answerOptionListSerialized.push(answeroption.serialize()); });
 		return {
+			hashtag: this[hashtag],
 			questionText: this[questionText],
+			type: this.constructor.name,
 			timer: this[timer],
 			startTime: this[startTime],
 			questionIndex: this[questionIndex],

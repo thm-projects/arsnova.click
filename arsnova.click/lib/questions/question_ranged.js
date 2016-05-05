@@ -41,7 +41,11 @@ export class RangedQuestion extends AbstractQuestion {
 		return this[rangeMin];
 	}
 
-	isValid() {
+	isValid () {
 		return this.getAnswerOptionList().length === 1 && this[rangeMin] < this[rangeMax];
+	}
+
+	equals (question) {
+		return super.equals(question) && question.getMaxRange() === this[rangeMax] && question.getMinRange() === this[rangeMin];
 	}
 }

@@ -48,9 +48,9 @@ export class AbstractQuestionGroup {
 		}
 	}
 
-	removeQuestionByIndex (index) {
+	removeQuestion (index) {
 		if (!index || index < 0 || index > this[questionList].length) {
-			throw new Error("Invalid argument list for QuestionGroup.removeQuestionByIndex");
+			throw new Error("Invalid argument list for QuestionGroup.removeQuestion");
 		}
 		this[questionList].splice(index, 1);
 	}

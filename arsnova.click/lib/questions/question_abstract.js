@@ -105,7 +105,7 @@ export class AbstractQuestion {
 		if (typeof index === "undefined" || index < 0 || index > this[answerOptionList].length) {
 			throw new Error("Invalid argument for Question.removeAnswerOption");
 		}
-		this[answerOptionList].splice(index);
+		this[answerOptionList].splice(index, 1);
 	}
 
 	removeAllAnswerOptions () {

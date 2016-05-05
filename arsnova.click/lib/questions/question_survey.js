@@ -6,11 +6,6 @@ export class SurveyQuestion extends AbstractQuestion {
 		super(options);
 	}
 
-	/**
-	 *
-	 * @override
-	 * @param answerOption
-	 */
 	addAnswerOption (answerOption) {
 		if (answerOption.getIsCorrect()) {
 			throw new Error("This question is not allowed to hold correct answers");

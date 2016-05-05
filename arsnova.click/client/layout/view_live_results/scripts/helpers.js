@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
@@ -23,6 +22,7 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import * as localData from '/client/lib/local_storage.js';
 import {countdown, getPercentRead, getCurrentRead, hslColPerc, checkIfIsCorrect} from './lib.js';
 
 Template.liveResults.helpers({
@@ -30,7 +30,7 @@ Template.liveResults.helpers({
 		return Session.get("sessionClosed") ? "view.liveResults.game_over" : "view.liveResults.countdown";
 	},
 	isOwner: function () {
-		return Session.get("isOwner");
+		return localData.containsHashtag(Router.current().params.quizName);
 	},
 	getCountdown: function () {
 		if (Session.get("countdownInitialized")) {
@@ -40,7 +40,7 @@ Template.liveResults.helpers({
 		return 0;
 	},
 	isCountdownZero: function (index) {
-		if (Session.get("isOwner")) {
+		if (localData.containsHashtag(Router.current().params.quizName)) {
 			if (Session.get("sessionClosed") || !Session.get("countdownInitialized") || EventManagerCollection.findOne().questionIndex !== index) {
 				return true;
 			} else {
@@ -237,11 +237,11 @@ Template.liveResults.helpers({
 	readingConfirmationListForQuestion: (index)=> {
 		let result = [];
 		let sortParamObj = Session.get('LearnerCountOverride') ? {lowerCaseNick: 1} : {insertDate: -1};
-		let ownNick = MemberListCollection.findOne({nick: Session.get("nick")}, {limit: 1});
+		let ownNick = MemberListCollection.findOne({nick: localStorage.getItem(Router.current().params.quizName + "nick")}, {limit: 1});
 		if (ownNick && ownNick.readConfirmed[index]) {
 			result.push(ownNick);
 		}
-		MemberListCollection.find({nick: {$ne: Session.get("nick")}}, {
+		MemberListCollection.find({nick: {$ne: localStorage.getItem(Router.current().params.quizName + "nick")}}, {
 			sort: sortParamObj
 		}).forEach(function (doc) {
 			if (result.length < Session.get("LearnerCount") && doc.readConfirmed[index]) {
@@ -251,7 +251,7 @@ Template.liveResults.helpers({
 		return result;
 	},
 	isOwnNick: (nick)=> {
-		return nick === Session.get("nick");
+		return nick === localStorage.getItem(Router.current().params.quizName + "nick");
 	},
 	showMoreButton: function (index) {
 		var result = [];
@@ -276,6 +276,6 @@ Template.liveResults.helpers({
 
 Template.readingConfirmedLearner.helpers({
 	isOwnNick: function (nickname) {
-		return nickname === Session.get("nick");
+		return nickname === localStorage.getItem(Router.current().params.quizName + "nick");
 	}
 });

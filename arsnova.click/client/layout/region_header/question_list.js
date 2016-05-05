@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
 import {TAPi18n} from 'meteor/tap:i18n';
@@ -30,11 +29,11 @@ import * as lib from './lib.js';
 var redirectTracker = null;
 
 Template.questionList.onCreated(function () {
-	Session.set("validQuestions", []);
+	localStorage.setItem(Router.current().params.quizName + "validQuestions", []);
 
-	this.subscribe("EventManagerCollection.join", Session.get("hashtag"));
-	this.subscribe('QuestionGroupCollection.questionList', Session.get("hashtag"));
-	this.subscribe('AnswerOptionCollection.instructor', localData.getPrivateKey(), Session.get("hashtag"));
+	this.subscribe("EventManagerCollection.join", Router.current().params.quizName);
+	this.subscribe('QuestionGroupCollection.questionList', Router.current().params.quizName);
+	this.subscribe('AnswerOptionCollection.instructor', localData.getPrivateKey(), Router.current().params.quizName);
 
 	this.autorun(() => {
 		if (this.subscriptionsReady()) {
@@ -43,14 +42,14 @@ Template.questionList.onCreated(function () {
 			}
 
 			var questionList = QuestionGroupCollection.findOne().questionList;
-			var validQuestions = Session.get("validQuestions");
+			var validQuestions = localStorage.getItem(Router.current().params.quizName + "validQuestions");
 			if (questionList.length >= validQuestions.length) {
 				return;
 			}
 
 			validQuestions.splice(questionList.length - 1, validQuestions.length - questionList.length);
 
-			Session.set("validQuestions", validQuestions);
+			localStorage.setItem(Router.current().params.quizName + "validQuestions", validQuestions);
 		}
 	});
 });
@@ -62,7 +61,7 @@ Template.questionList.onDestroyed(function () {
 Template.questionList.onRendered(function () {
 	let handleRedirect = true;
 	redirectTracker = Tracker.autorun(function () {
-		let validQuestions = Session.get("validQuestions");
+		let validQuestions = localStorage.getItem(Router.current().params.quizName + "validQuestions");
 		if (!validQuestions || validQuestions.length === 0) {
 			return;
 		}
@@ -74,14 +73,14 @@ Template.questionList.onRendered(function () {
 				break;
 			}
 		}
-		if (!Session.get("overrideValidQuestionRedirect") && allValid && handleRedirect) {
-			Session.set("overrideValidQuestionRedirect", undefined);
-			Meteor.call("MemberListCollection.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
-			Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), 0);
-			Meteor.call("EventManagerCollection.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 2);
-			Router.go("/memberlist");
+		if (!localStorage.getItem(Router.current().params.quizName + "overrideValidQuestionRedirect") && allValid && handleRedirect) {
+			localStorage.setItem(Router.current().params.quizName + "overrideValidQuestionRedirect", undefined);
+			Meteor.call("MemberListCollection.removeFromSession", localData.getPrivateKey(), Router.current().params.quizName);
+			Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, 0);
+			Meteor.call("EventManagerCollection.setSessionStatus", localData.getPrivateKey(), Router.current().params.quizName, 2);
+			Router.go("/" + Router.current().params.quizName + "/memberlist");
 		} else {
-			Session.set("overrideValidQuestionRedirect", undefined);
+			localStorage.setItem(Router.current().params.quizName + "overrideValidQuestionRedirect", undefined);
 			handleRedirect = false;
 			redirectTracker.stop();
 		}
@@ -103,28 +102,28 @@ Template.questionList.helpers({
 		return index === EventManagerCollection.findOne().questionIndex;
 	},
 	hasCompleteContent: function (index) {
-		var validQuestions = Session.get("validQuestions");
+		var validQuestions = localStorage.getItem(Router.current().params.quizName + "validQuestions");
 		validQuestions[index] = lib.checkForValidQuestions(index);
-		Session.set("validQuestions", validQuestions);
+		localStorage.setItem(Router.current().params.quizName + "validQuestions", validQuestions);
 		return validQuestions[index];
 	}
 });
 
 Template.questionList.events({
 	'click .questionIcon:not(.active)': function (event) {
-		Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), parseInt($(event.target).closest(".questionIcon").attr("id").replace("questionIcon_", "")), function () {
+		Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, parseInt($(event.target).closest(".questionIcon").attr("id").replace("questionIcon_", "")), function () {
 			questionLib.checkForMarkdown();
 		});
 	},
 	'click .removeQuestion': function (event) {
 		var id = parseInt($(event.target).closest(".questionIcon").attr("id").replace("questionIcon_", ""));
 		if (id > 0) {
-			Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), (id - 1));
+			Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, (id - 1));
 		}
 
 		Meteor.call('AnswerOptionCollection.deleteOption', {
 			privateKey: localData.getPrivateKey(),
-			hashtag: Session.get("hashtag"),
+			hashtag: Router.current().params.quizName,
 			questionIndex: id,
 			answerOptionNumber: -1
 		}, (err) => {
@@ -136,7 +135,7 @@ Template.questionList.events({
 			} else {
 				Meteor.call("QuestionGroupCollection.removeQuestion", {
 					privateKey: localData.getPrivateKey(),
-					hashtag: Session.get("hashtag"),
+					hashtag: Router.current().params.quizName,
 					questionIndex: id
 				}, (err) => {
 					if (err) {
@@ -145,7 +144,7 @@ Template.questionList.events({
 							errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
 						});
 					} else {
-						localData.removeQuestion(Session.get("hashtag"), id);
+						localData.removeQuestion(Router.current().params.quizName, id);
 						if (QuestionGroupCollection.findOne().questionList.length === 0) {
 							lib.addNewQuestion(questionLib.checkForMarkdown);
 						} else {

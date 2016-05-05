@@ -20,13 +20,13 @@ import {Template} from 'meteor/templating';
 
 Template.leaderBoard.events({
 	'click #showMore': ()=> {
-		Session.set('responsesCountOverride', true);
+		Session.set("responsesCountOverride", true);
 	},
 	'click #showLess': ()=> {
-		Session.set('responsesCountOverride', false);
+		Session.set("responsesCountOverride", false);
 	},
 	'click #js-btn-backToResults': ()=> {
 		Session.set("showGlobalRanking", false);
-		Router.go('/results');
+		Router.go("/" + Router.current().params.quizName + "/results");
 	}
 });

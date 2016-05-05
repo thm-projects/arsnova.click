@@ -37,7 +37,7 @@ export class EventStackObserver {
 			changed: function (id, changedFields) {
 				if (changedFields.eventStack) {
 					let index = changedFields.eventStack.length - 1;
-					let currentPath = Router.current().route.path();
+					let currentPath = Router.current().route.getName();
 					if (observerInstance.onChangeCallbacks[currentPath] && observerInstance.onChangeCallbacks[currentPath].length > 0) {
 						let item = changedFields.eventStack[index];
 						if ($.inArray(item.key, observerInstance.ignoreChanges) > -1) {
@@ -92,7 +92,8 @@ export class EventStackObserver {
 		if (typeof callback !== 'function') {
 			throw new Error("invalid callback!");
 		}
-		let currentPath = Router.current().route.path();
+		let currentPath = Router.current().route.getName();
+		console.log("attemting to push callback to array", Router.current().route.getName(), limiter, callback);
 		if (!(this.onChangeCallbacks[currentPath] instanceof Array)) {
 			this.onChangeCallbacks[currentPath] = [];
 		}
@@ -103,6 +104,7 @@ export class EventStackObserver {
 			}
 		});
 		if (!hasCallback) {
+			console.log("adding callback to array",limiter, callback);
 			this.onChangeCallbacks[currentPath].push({
 				limiter,
 				callback
@@ -117,5 +119,5 @@ export function setGlobalEventStackObserver() {
 	if (globalEventStackObserver) {
 		globalEventStackObserver.stop();
 	}
-	globalEventStackObserver = new EventStackObserver({verbose: false});
+	globalEventStackObserver = new EventStackObserver({verbose: true});
 }

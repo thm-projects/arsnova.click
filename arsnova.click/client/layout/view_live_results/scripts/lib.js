@@ -66,7 +66,7 @@ export function checkIfIsCorrect(isCorrect) {
 }
 
 export function startCountdown(index) {
-	Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), index);
+	Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, index);
 	var questionDoc = QuestionGroupCollection.findOne().questionList[index];
 	Session.set("sessionCountDown", questionDoc.timer);
 	$("#countdowndiv").appendTo($("body"));
@@ -137,7 +137,7 @@ export function startCountdown(index) {
 			if (Session.get("isOwner") && AnswerOptionCollection.find({isCorrect: 1}).count() > 0) {
 				routeToLeaderboardTimer = setTimeout(() => {
 					Session.set("showGlobalRanking", true);
-					Router.go("/statistics");
+					Router.go("/" + Router.current().params.quizName + "/statistics");
 				}, 7000);
 			}
 		}

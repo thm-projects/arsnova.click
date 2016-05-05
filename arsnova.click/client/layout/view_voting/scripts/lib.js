@@ -37,7 +37,7 @@ export function startCountdown(index) {
 	countdownRunning = true;
 
 	Meteor.call('Question.isSC', {
-		hashtag: Session.get("hashtag"),
+		hashtag: Router.current().params.quizName,
 		questionIndex: EventManagerCollection.findOne().questionIndex
 	}, (err, res) => {
 		if (!err && res) {
@@ -83,7 +83,7 @@ export function startCountdown(index) {
 			Session.set("sessionClosed", true);
 		}
 		Session.set("countdownInitialized", false);
-		Router.go("/results");
+		Router.go("/" + Router.current().params.quizName + "/results");
 		countdownRunning = false;
 	});
 	Session.set("countdownInitialized", true);
@@ -91,10 +91,10 @@ export function startCountdown(index) {
 
 export function makeAndSendResponse(answerOptionNumber) {
 	Meteor.call('ResponsesCollection.addResponse', {
-		hashtag: Session.get("hashtag"),
+		hashtag: Router.current().params.quizName,
 		questionIndex: EventManagerCollection.findOne().questionIndex,
 		answerOptionNumber: Number(answerOptionNumber),
-		userNick: Session.get("nick")
+		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
 	}, (err) => {
 		if (err) {
 			new ErrorSplashscreen({

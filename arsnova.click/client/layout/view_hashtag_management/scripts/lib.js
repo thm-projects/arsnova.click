@@ -16,7 +16,12 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 export let hashtagSplashscreen = null;
+export let eventManagerHandle = null;
 
 export function setHashtagSplashscreen(instance) {
 	hashtagSplashscreen = instance;
+}
+
+export function setEventManagerHandle(handle) {
+	eventManagerHandle = handle;
 }

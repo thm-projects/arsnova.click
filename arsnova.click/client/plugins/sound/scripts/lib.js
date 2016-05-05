@@ -15,13 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Session} from 'meteor/session';
-
 export let buzzsound1 = null;
 
 export function setBuzzsound1(fileName) {
 	buzzsound1 = new buzz.sound('/sounds/' + fileName, {
 		loop: true
 	});
-	buzzsound1.setVolume(Session.get("globalVolume"));
+	buzzsound1.setVolume(localStorage.getItem(Router.current().params.quizName + "globalVolume"));
 }

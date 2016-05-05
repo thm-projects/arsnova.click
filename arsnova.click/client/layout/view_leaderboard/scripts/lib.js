@@ -22,7 +22,7 @@ import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 
 export function setMaxResponseButtons(value) {
-	Session.set("maxResponseButtons", value);
+	Session.get("maxResponseButtons", value);
 }
 
 export function calculateButtonCount(allMembersCount) {

@@ -22,11 +22,11 @@ import {calculateButtonCount} from './lib.js';
 Template.memberlist.onRendered(function () {
 	var finalHeight = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
 	$(".container").css("height", finalHeight + "px");
-	Session.set("LearnerCountOverride", false);
+	Session.set("learnerCountOverride", false);
 	calculateButtonCount();
 
 	var calculateFontSize = function () {
-		var hashtagLength = Session.get("hashtag").length;
+		var hashtagLength = Router.current().params.quizName.length;
 		//take the hastag in the middle of the logo
 		var titelMarginTop = $(".arsnova-logo").height();
 

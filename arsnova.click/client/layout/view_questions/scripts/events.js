@@ -35,7 +35,7 @@ Template.createQuestionView.events({
 			return;
 		}
 		lib.addQuestion(EventManagerCollection.findOne().questionIndex);
-		Router.go("/answeroptions");
+		Router.go("/" + Router.current().params.quizName + "/answeroptions");
 	},
 	"click #backButton": function () {
 		Router.go("/");

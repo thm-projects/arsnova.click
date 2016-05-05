@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import * as localData from '/client/lib/local_storage.js';
@@ -25,13 +24,16 @@ import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib";
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 Template.header.onCreated(function () {
-	Session.setDefault("slider2", 80);
-	Session.setDefault("globalVolume", 80);
+	localStorage.setItem("slider2", 80);
+	localStorage.setItem("globalVolume", 80);
 
 	setBuzzsound1('waity.mp3');
 });
 
 Template.header.helpers({
+	getCurrentRoute: function () {
+		return "/" + Router.current().params.quizName;
+	},
 	isInHomePathOrIsStudent: function () {
 		switch (Router.current().route.path()) {
 			case '/':
@@ -41,17 +43,16 @@ Template.header.helpers({
 			case '/impressum':
 				return true;
 		}
-		return !Session.get("isOwner");
+		return !localData.containsHashtag(Router.current().params.quizName);
 	},
 	currentHashtag: function () {
-		return Session.get("hashtag");
+		return Router.current().params.quizName;
 	},
 	isEditingQuestion: function () {
-		switch (Router.current().route.path()) {
-			case '/question':
-			case '/answeroptions':
-			case '/settimer':
-			case '/readconfirmationrequired':
+		switch (Router.current().route.getName()) {
+			case ":quizName.question":
+			case ":quizName.answeroptions":
+			case ":quizName.settimer":
 				return true;
 			default:
 				return false;
@@ -60,8 +61,8 @@ Template.header.helpers({
 });
 
 Template.header.events({
-	'click .kill-session-switch, click .arsnova-logo': function () {
-		if (Session.get("isOwner")) {
+	'click .kill-session-switch-wrapper, click .arsnova-logo': function () {
+		if (localData.containsHashtag(Router.current().params.quizName)) {
 			buzzsound1.stop();
 
 			new Splashscreen({
@@ -70,7 +71,7 @@ Template.header.events({
 				closeOnButton: '#closeDialogButton, #resetSessionButton',
 				onRendered: function (instance) {
 					instance.templateSelector.find('#resetSessionButton').on('click', function () {
-						Meteor.call("Main.killAll", localData.getPrivateKey(), Session.get("hashtag"), function (err) {
+						Meteor.call("Main.killAll", localData.getPrivateKey(), Router.current().params.quizName, function (err) {
 							if (err) {
 								new ErrorSplashscreen({
 									autostart: true,
@@ -83,7 +84,7 @@ Template.header.events({
 				}
 			});
 		} else {
-			Router.go("/resetToHome");
+			Router.go("/" + Router.current().params.quizName + "/resetToHome");
 		}
 	},
 	'click .sound-button': function () {
@@ -94,7 +95,7 @@ Template.header.events({
 			onRendered: function (instance) {
 				instance.templateSelector.find('#soundSelect').on('change', function (event) {
 					buzzsound1.stop();
-					Session.set("soundIsPlaying", false);
+					localStorage.setItem(Router.current().params.quizName + "soundIsPlaying", false);
 					switch ($(event.target).val()) {
 						case "Song1":
 							setBuzzsound1("bensound-thelounge.mp3");
@@ -109,28 +110,28 @@ Template.header.events({
 				});
 
 				instance.templateSelector.find("#js-btn-playStopMusic").on('click', function () {
-					if (Session.get("soundIsPlaying")) {
+					if (localStorage.getItem(Router.current().params.quizName + "soundIsPlaying")) {
 						buzzsound1.stop();
-						Session.set("soundIsPlaying", false);
+						localStorage.setItem(Router.current().params.quizName + "soundIsPlaying", false);
 					} else {
 						buzzsound1.play();
-						Session.set("soundIsPlaying", true);
+						localStorage.setItem(Router.current().params.quizName + "soundIsPlaying", true);
 					}
 				});
 
 				instance.templateSelector.find("#js-btn-hideSoundModal").on('click', function () {
 					buzzsound1.stop();
-					Session.set("soundIsPlaying", false);
+					localStorage.setItem(Router.current().params.quizName + "soundIsPlaying", false);
 				});
 
 				instance.templateSelector.find('#isSoundOnButton').on('click', function () {
 					var btn = $('#isSoundOnButton');
 					btn.toggleClass("down");
 					if (btn.hasClass("down")) {
-						Session.set("togglemusic", true);
+						localStorage.setItem(Router.current().params.quizName + "togglemusic", true);
 						btn.html(TAPi18n.__("plugins.sound.active"));
 					} else {
-						Session.set("togglemusic", false);
+						localStorage.setItem(Router.current().params.quizName + "togglemusic", false);
 						btn.html(TAPi18n.__("plugins.sound.inactive"));
 					}
 				});

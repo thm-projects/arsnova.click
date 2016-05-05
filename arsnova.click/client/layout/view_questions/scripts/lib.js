@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
@@ -64,7 +63,7 @@ export function addQuestion(index) {
 	var questionText = $('#questionText').val();
 	Meteor.call("QuestionGroupCollection.addQuestion", {
 		privateKey: localData.getPrivateKey(),
-		hashtag: Session.get("hashtag"),
+		hashtag: Router.current().params.quizName,
 		questionIndex: index,
 		questionText: questionText
 	}, (err) => {
@@ -74,13 +73,13 @@ export function addQuestion(index) {
 				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
 			});
 		} else {
-			localData.addQuestion(Session.get("hashtag"), index, questionText);
+			localData.addQuestion(Router.current().params.quizName, index, questionText);
 		}
 	});
 }
 
 export function calculateWindow() {
-	var hashtagLength = Session.get("hashtag").length;
+	var hashtagLength = Router.current().params.quizName.length;
 	var headerTitel = $(".header-titel");
 	var fontSize = "";
 	var marginTopModifier = 0;

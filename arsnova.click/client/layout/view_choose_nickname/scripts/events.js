@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {MemberListCollection} from '/lib/member_list/collection.js';
@@ -29,7 +28,7 @@ Template.nick.events({
 		var nickname = $("#nickname-input-field").val();
 		var bgColor = lib.rgbToHex(lib.getRandomInt(0, 255), lib.getRandomInt(0, 255), lib.getRandomInt(0, 255));
 		Meteor.call('MemberListCollection.addLearner', {
-			hashtag: Session.get("hashtag"),
+			hashtag: Router.current().params.quizName,
 			nick: nickname,
 			backgroundColor: bgColor,
 			foregroundColor: lib.transformForegroundColor(lib.hexToRgb(bgColor))
@@ -39,8 +38,8 @@ Template.nick.events({
 				ErrorSplashscreen.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason));
 				ErrorSplashscreen.open();
 			} else {
-				Session.set("nick", nickname);
-				Router.go("/memberlist");
+				localStorage.setItem(Router.current().params.quizName + "nick", nickname);
+				Router.go("/" + Router.current().params.quizName + "/memberlist");
 			}
 		});
 	},

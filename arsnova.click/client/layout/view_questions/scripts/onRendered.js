@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
@@ -23,7 +22,7 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as lib from './lib.js';
 
 Template.createQuestionView.onRendered(function () {
-	Session.set("markdownAlreadyChecked", false);
+	localStorage.setItem(Router.current().params.quizName + "markdownAlreadyChecked", false);
 	lib.calculateWindow();
 	$(window).resize(lib.calculateWindow());
 
@@ -31,9 +30,9 @@ Template.createQuestionView.onRendered(function () {
 	lib.subscriptionHandler = Tracker.autorun(()=> {
 		if (this.subscriptionsReady() && EventManagerCollection.findOne()) {
 			index = EventManagerCollection.findOne().questionIndex;
-			if (!Session.get("markdownAlreadyChecked")) {
+			if (!localStorage.getItem(Router.current().params.quizName + "markdownAlreadyChecked")) {
 				lib.checkForMarkdown();
-				Session.set("markdownAlreadyChecked", true);
+				localStorage.setItem(Router.current().params.quizName + "markdownAlreadyChecked", true);
 			}
 		}
 	});

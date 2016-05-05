@@ -25,7 +25,7 @@ export function calculateButtonCount() {
 	 This session variable determines if the user has clicked on the show-more-button. The button count must not
 	 be calculated then. It is set in the event handler of the button and is reset if the user reenters the page
 	 */
-	if (Session.get("LearnerCountOverride")) {
+	if (Session.get("learnerCountOverride")) {
 		return;
 	}
 
@@ -72,7 +72,7 @@ export function calculateButtonCount() {
 	 This session variable holds the amount of shown buttons and is used in the scripts function
 	 Template.memberlist.scripts.learners which gets the attendees from the mongo db
 	 */
-	Session.set("LearnerCount", queryLimiter);
+	Session.set("learnerCount", queryLimiter);
 }
 
 export function setMemberlistObserver(options) {

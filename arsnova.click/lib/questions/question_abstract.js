@@ -116,7 +116,7 @@ export class AbstractQuestion {
 		return this[answerOptionList];
 	}
 
-	serialize() {
+	serialize () {
 		let answerOptionListSerialized = [];
 		this[answerOptionList].forEach(function (answeroption) { answerOptionListSerialized.push(answeroption.serialize()); });
 		return {
@@ -130,7 +130,7 @@ export class AbstractQuestion {
 		};
 	}
 
-	isValid() {
+	isValid () {
 		return true;
 	}
 

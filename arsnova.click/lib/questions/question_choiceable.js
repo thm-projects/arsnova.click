@@ -6,7 +6,7 @@ export class ChoicableQuestion extends AbstractQuestion {
 		super(options);
 	}
 
-	isValid() {
+	isValid () {
 		let hasValidAnswer = false;
 		this.getAnswerOptionList().forEach(function (answeroption) {
 			if (answeroption.isCorrect === 1) {

@@ -12,21 +12,21 @@ export class RangedQuestion extends AbstractQuestion {
 	}
 
 	setMaxRange (max) {
-		if (!max || max <= this[rangeMin]) {
+		if (typeof max === "undefined" || max <= this[rangeMin]) {
 			throw new Error("Invalid argument list for RangedQuestion.setMaxRange");
 		}
 		this[rangeMax] = max;
 	}
 
 	setMinRange (min) {
-		if (!min || min >= this[rangeMax]) {
+		if (typeof min === "undefined" || min >= this[rangeMax]) {
 			throw new Error("Invalid argument list for RangedQuestion.setMinRange");
 		}
 		this[rangeMin] = min;
 	}
 
 	setRange (min, max) {
-		if (!min || !max || min >= max) {
+		if (typeof min === "undefined" || typeof max === "undefined" || min >= max) {
 			throw new Error("Invalid argument list for RangedQuestion.setRange");
 		}
 		this[rangeMin] = min;
@@ -39,6 +39,13 @@ export class RangedQuestion extends AbstractQuestion {
 
 	getMinRange () {
 		return this[rangeMin];
+	}
+
+	serialize () {
+		let serializeObject = super.serialize();
+		serializeObject.rangeMin = this[rangeMin];
+		serializeObject.rangeMax = this[rangeMax];
+		return serializeObject;
 	}
 
 	isValid () {

@@ -92,6 +92,9 @@ export class AbstractQuestionGroup {
 						allQuestionsEqual = true;
 					}
 				}
+				if (questionGroup.getHashtag() !== this.getHashtag()) {
+					allQuestionsEqual = false;
+				}
 				return allQuestionsEqual;
 			}
 		}

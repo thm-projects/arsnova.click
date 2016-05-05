@@ -135,14 +135,15 @@ export class AbstractQuestion {
 		if (question instanceof AbstractQuestion) {
 			let questionAnswerOptionList = question.getAnswerOptionList();
 			if (questionAnswerOptionList.length === this[answerOptionList].length) {
-				let isEqual = false;
+				let isEqual = true;
 				for (let i = 0; i < this[answerOptionList].length; i++) {
-					if (this[answerOptionList][i].equals(questionAnswerOptionList[i])) {
-						isEqual = true;
+					if (isEqual && !this[answerOptionList][i].equals(questionAnswerOptionList[i])) {
+						isEqual = false;
 					}
 				}
 				if (question.getTimer() !== this[timer] ||
-					question.getStartTime() !== this[startTime] && question.getHashtag() === this[hashtag] ||
+					question.getStartTime() !== this[startTime] ||
+					question.getHashtag() !== this[hashtag] ||
 					question.getQuestionText() !== this[questionText]) {
 					isEqual = false;
 				}

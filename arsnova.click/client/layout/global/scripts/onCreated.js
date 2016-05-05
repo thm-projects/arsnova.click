@@ -98,7 +98,9 @@ Template.home.onCreated(function () {
 										questionText: "rangedtext",
 										timer: 0,
 										startTime: 0,
-										questionIndex: 3
+										questionIndex: 3,
+										rangeMax: 10,
+										rangeMin: 5
 									})
 								]
 							});
@@ -109,7 +111,10 @@ Template.home.onCreated(function () {
 							console.log("------------------------------------");
 							let deserializeTest = new DefaultQuestionGroup(Session.get("test"));
 							console.log(deserializeTest);
-							console.log(test === deserializeTest, test == deserializeTest, test.equals(deserializeTest));
+							console.log("------------------------------------");
+							console.log("test === deserializeTest: ", test === deserializeTest);
+							console.log("test == deserializeTest: ", test == deserializeTest);
+							console.log("test.equals(deserializeTest): ", test.equals(deserializeTest));
 						});
 					});
 				}

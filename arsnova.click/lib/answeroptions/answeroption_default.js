@@ -5,4 +5,8 @@ export class DefaultAnswerOption extends AbstractAnswerOption {
 	constructor (options) {
 		super(options);
 	}
+
+	isValid () {
+		return true;
+	}
 }

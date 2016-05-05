@@ -17,4 +17,8 @@ export class SurveyQuestion extends AbstractQuestion {
 		}
 		super.addAnswerOption(answerOption);
 	}
+
+	isValid() {
+		return this.getAnswerOptionList().length > 0;
+	}
 }

@@ -1,6 +1,5 @@
 import {AbstractQuestion} from './question_abstract.js';
-import {SingleChoiceQuestion} from "/lib/questions/question_choice_single.js";
-import {MultipleChoiceQuestion} from "/lib/questions/question_choice_multiple.js";
+import {ChoicableQuestion} from "/lib/questions/question_choiceable.js";
 import {RangedQuestion} from "/lib/questions/question_ranged.js";
 import {SurveyQuestion} from "/lib/questions/question_survey.js";
 
@@ -22,11 +21,8 @@ export class AbstractQuestionGroup {
 			for (let i = 0; i < options.questionList.length; i++) {
 				if (options.questionList[i] instanceof Object) {
 					switch (options.questionList[i].type) {
-						case "SingleChoiceQuestion":
-							options.questionList[i] = new SingleChoiceQuestion(options.questionList[i]);
-							break;
-						case "MultipleChoiceQuestion":
-							options.questionList[i] = new MultipleChoiceQuestion(options.questionList[i]);
+						case "ChoicableQuestion":
+							options.questionList[i] = new ChoicableQuestion(options.questionList[i]);
 							break;
 						case "SurveyQuestion":
 							options.questionList[i] = new SurveyQuestion(options.questionList[i]);
@@ -67,7 +63,7 @@ export class AbstractQuestionGroup {
 		return this[questionList];
 	}
 
-	serialize() {
+	serialize () {
 		let questionListSerialized = [];
 		this[questionList].forEach(function (question) { questionListSerialized.push(question.serialize()); });
 		return {
@@ -75,5 +71,30 @@ export class AbstractQuestionGroup {
 			type: this.constructor.name,
 			questionList: questionListSerialized
 		};
+	}
+
+	isValid () {
+		let questionListValid = false;
+		this[questionList].forEach(function (question) {
+			if (question.isValid()) {
+				questionListValid = true;
+			}
+		});
+		return questionListValid;
+	}
+
+	equals (questionGroup) {
+		if (questionGroup instanceof AbstractQuestionGroup) {
+			if (questionGroup.getQuestionList().length === this[questionList].length) {
+				let allQuestionsEqual = false;
+				for (let i = 0; i < this[questionList].length; i++) {
+					if (this[questionList][i].equals(questionGroup.getQuestionList()[i])) {
+						allQuestionsEqual = true;
+					}
+				}
+				return allQuestionsEqual;
+			}
+		}
+		return false;
 	}
 }

@@ -4,10 +4,9 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import  * as localData from '/client/lib/local_storage.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
-import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
+import {DefaultAnswerOption} from '/lib/answeroptions/answeroption_default.js';
 import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
-import {SingleChoiceQuestion} from "/lib/questions/question_choice_single.js";
-import {MultipleChoiceQuestion} from "/lib/questions/question_choice_multiple.js";
+import {ChoicableQuestion} from "/lib/questions/question_choiceable.js";
 import {RangedQuestion} from "/lib/questions/question_ranged.js";
 import {SurveyQuestion} from "/lib/questions/question_survey.js";
 
@@ -27,30 +26,76 @@ Template.home.onCreated(function () {
 							let test = new DefaultQuestionGroup({
 								hashtag: hashtag,
 								questionList: [
-									new SingleChoiceQuestion({
+									new SurveyQuestion({
 										hashtag: hashtag,
-										questionText: "singlechoicetext",
-										timer: 10,
-										startTime: 10,
+										questionText: "surveytext",
+										timer: 0,
+										startTime: 0,
 										questionIndex: 0
 									}),
-									new MultipleChoiceQuestion({
+									new ChoicableQuestion({
+										hashtag: hashtag,
+										questionText: "singlechoicetext",
+										timer: 0,
+										startTime: 0,
+										questionIndex: 1,
+										answerOptionList: [
+											new DefaultAnswerOption({
+												hashtag: hashtag,
+												questionIndex: 1,
+												answerText: "answertext 1",
+												answerOptionNumber: 0,
+												isCorrect: 0
+											}),
+											new DefaultAnswerOption({
+												hashtag: hashtag,
+												questionIndex: 1,
+												answerText: "answertext 2",
+												answerOptionNumber: 1,
+												isCorrect: 1
+											}),
+											new DefaultAnswerOption({
+												hashtag: hashtag,
+												questionIndex: 1,
+												answerText: "answertext 3",
+												answerOptionNumber: 2,
+												isCorrect: 0
+											})
+										]
+									}),
+									new ChoicableQuestion({
 										hashtag: hashtag,
 										questionText: "multiplechoicetext",
 										timer: 0,
 										startTime: 0,
-										questionIndex: 1
+										questionIndex: 2,
+										answerOptionList: [
+											new DefaultAnswerOption({
+												hashtag: hashtag,
+												questionIndex: 2,
+												answerText: "answertext 1",
+												answerOptionNumber: 0,
+												isCorrect: 0
+											}),
+											new DefaultAnswerOption({
+												hashtag: hashtag,
+												questionIndex: 2,
+												answerText: "answertext 2",
+												answerOptionNumber: 1,
+												isCorrect: 1
+											}),
+											new DefaultAnswerOption({
+												hashtag: hashtag,
+												questionIndex: 2,
+												answerText: "answertext 3",
+												answerOptionNumber: 2,
+												isCorrect: 1
+											})
+										]
 									}),
 									new RangedQuestion({
 										hashtag: hashtag,
 										questionText: "rangedtext",
-										timer: 0,
-										startTime: 0,
-										questionIndex: 2
-									}),
-									new SurveyQuestion({
-										hashtag: hashtag,
-										questionText: "surveytext",
 										timer: 0,
 										startTime: 0,
 										questionIndex: 3
@@ -64,6 +109,7 @@ Template.home.onCreated(function () {
 							console.log("------------------------------------");
 							let deserializeTest = new DefaultQuestionGroup(Session.get("test"));
 							console.log(deserializeTest);
+							console.log(test === deserializeTest, test == deserializeTest, test.equals(deserializeTest));
 						});
 					});
 				}

@@ -14,7 +14,9 @@ export class AbstractQuestion {
 		if (this.constructor === AbstractQuestion) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
-		console.log(options);
+		if (typeof options.type !== "undefined" && options.type !== this.constructor.name) {
+			throw new TypeError("Invalid construction type");
+		}
 		if (typeof options.hashtag === "undefined" || typeof options.questionText === "undefined" || typeof options.timer === "undefined" || typeof options.startTime === "undefined" || typeof options.questionIndex === "undefined") {
 			throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
 		}
@@ -23,14 +25,33 @@ export class AbstractQuestion {
 		this[timer] = options.timer;
 		this[startTime] = options.startTime;
 		this[questionIndex] = options.questionIndex;
-		this[answerOptionList] = [];
-		let self = this;
-		AnswerOptionCollection.find({
-			hashtag: options.hashtag,
-			questionIndex: options.questionIndex
-		}).fetch().forEach(function (answerOption) {
-			self[answerOptionList].push(new DefaultAnswerOption(answerOption));
-		});
+		this[answerOptionList] = options.answerOptionList || [];
+		if (this[answerOptionList].length === 0) {
+			let self = this;
+			AnswerOptionCollection.find({
+				hashtag: options.hashtag,
+				questionIndex: options.questionIndex
+			}).fetch().forEach(function (answerOption) {
+				self[answerOptionList].push(new DefaultAnswerOption(answerOption));
+			});
+		} else {
+			for (let i = 0; i < this[answerOptionList].length; i++) {
+				if (this[answerOptionList][i] instanceof Object) {
+					switch (this[answerOptionList][i].type) {
+						case "DefaultAnswerOption":
+							this[answerOptionList][i] = new DefaultAnswerOption(this[answerOptionList][i]);
+							break;
+					}
+				}
+				if (!(this[answerOptionList][i] instanceof AbstractAnswerOption)) {
+					throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
+				}
+			}
+		}
+	}
+
+	getHashtag () {
+		return this[hashtag];
 	}
 
 	setQuestionText (text) {
@@ -84,6 +105,10 @@ export class AbstractQuestion {
 		this[answerOptionList].splice(index);
 	}
 
+	removeAllAnswerOptions () {
+		this[answerOptionList] = [];
+	}
+
 	getAnswerOptionList () {
 		return this[answerOptionList];
 	}
@@ -100,5 +125,30 @@ export class AbstractQuestion {
 			questionIndex: this[questionIndex],
 			answerOptionList: answerOptionListSerialized
 		};
+	}
+
+	isValid() {
+		return true;
+	}
+
+	equals (question) {
+		if (question instanceof AbstractQuestion) {
+			let questionAnswerOptionList = question.getAnswerOptionList();
+			if (questionAnswerOptionList.length === this[answerOptionList].length) {
+				let isEqual = false;
+				for (let i = 0; i < this[answerOptionList].length; i++) {
+					if (this[answerOptionList][i].equals(questionAnswerOptionList[i])) {
+						isEqual = true;
+					}
+				}
+				if (question.getTimer() !== this[timer] ||
+					question.getStartTime() !== this[startTime] && question.getHashtag() === this[hashtag] ||
+					question.getQuestionText() !== this[questionText]) {
+					isEqual = false;
+				}
+				return isEqual;
+			}
+		}
+		return false;
 	}
 }

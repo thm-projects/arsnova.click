@@ -23,15 +23,12 @@ Meteor.publish('EventManagerCollection.join', (hashtag)=> {
 	if (typeof hashtag === "undefined") {
 		return false;
 	}
-	if (Meteor.isServer) {
-		new SimpleSchema({
-			hashtag: {
-				type: String,
-				min: 1,
-				max: 25
-			}
-		}).validate({hashtag: hashtag});
-		return EventManagerCollection.find({hashtag: hashtag});
-	}
-	return false;
+	new SimpleSchema({
+		hashtag: {
+			type: String,
+			min: 1,
+			max: 25
+		}
+	}).validate({hashtag: hashtag});
+	return EventManagerCollection.find({hashtag: hashtag});
 });

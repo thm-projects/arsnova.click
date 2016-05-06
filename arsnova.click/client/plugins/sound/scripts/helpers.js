@@ -15,13 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 
 Template.soundConfig.helpers({
 	slider2: function () {
-		return localStorage.getItem(Router.current().params.quizName + "slider2");
+		return Session.get("slider2");
 	},
 	isSoundPlaying: function () {
-		return localStorage.getItem(Router.current().params.quizName + "soundIsPlaying");
+		return Session.get("soundIsPlaying");
 	}
 });

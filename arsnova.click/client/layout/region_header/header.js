@@ -16,6 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import * as localData from '/client/lib/local_storage.js';
@@ -24,8 +25,8 @@ import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib";
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 Template.header.onCreated(function () {
-	localStorage.setItem("slider2", 80);
-	localStorage.setItem("globalVolume", 80);
+	Session.setDefault("slider2", 80);
+	Session.setDefault("globalVolume", 80);
 
 	setBuzzsound1('waity.mp3');
 });
@@ -95,7 +96,7 @@ Template.header.events({
 			onRendered: function (instance) {
 				instance.templateSelector.find('#soundSelect').on('change', function (event) {
 					buzzsound1.stop();
-					localStorage.setItem(Router.current().params.quizName + "soundIsPlaying", false);
+					Session.set("soundIsPlaying", false);
 					switch ($(event.target).val()) {
 						case "Song1":
 							setBuzzsound1("bensound-thelounge.mp3");
@@ -110,28 +111,28 @@ Template.header.events({
 				});
 
 				instance.templateSelector.find("#js-btn-playStopMusic").on('click', function () {
-					if (localStorage.getItem(Router.current().params.quizName + "soundIsPlaying")) {
+					if (Session.get("soundIsPlaying")) {
 						buzzsound1.stop();
-						localStorage.setItem(Router.current().params.quizName + "soundIsPlaying", false);
+						Session.set("soundIsPlaying", false);
 					} else {
 						buzzsound1.play();
-						localStorage.setItem(Router.current().params.quizName + "soundIsPlaying", true);
+						Session.set("soundIsPlaying", true);
 					}
 				});
 
 				instance.templateSelector.find("#js-btn-hideSoundModal").on('click', function () {
 					buzzsound1.stop();
-					localStorage.setItem(Router.current().params.quizName + "soundIsPlaying", false);
+					Session.set("soundIsPlaying", false);
 				});
 
 				instance.templateSelector.find('#isSoundOnButton').on('click', function () {
 					var btn = $('#isSoundOnButton');
 					btn.toggleClass("down");
 					if (btn.hasClass("down")) {
-						localStorage.setItem(Router.current().params.quizName + "togglemusic", true);
+						Session.set("togglemusic", true);
 						btn.html(TAPi18n.__("plugins.sound.active"));
 					} else {
-						localStorage.setItem(Router.current().params.quizName + "togglemusic", false);
+						Session.set("togglemusic", false);
 						btn.html(TAPi18n.__("plugins.sound.inactive"));
 					}
 				});

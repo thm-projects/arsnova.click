@@ -26,7 +26,7 @@ export class EventStackObserver {
 		this.running = false;
 	}
 
-	start (hashtag) {
+	startObserving (hashtag) {
 		this.stop();
 		if (!EventManagerCollection.findOne({hashtag})) {
 			throw new Error("EventManager collection is not ready!");
@@ -93,7 +93,6 @@ export class EventStackObserver {
 			throw new Error("invalid callback!");
 		}
 		let currentPath = Router.current().route.getName();
-		console.log("attemting to push callback to array", Router.current().route.getName(), limiter, callback);
 		if (!(this.onChangeCallbacks[currentPath] instanceof Array)) {
 			this.onChangeCallbacks[currentPath] = [];
 		}
@@ -104,7 +103,6 @@ export class EventStackObserver {
 			}
 		});
 		if (!hasCallback) {
-			console.log("adding callback to array",limiter, callback);
 			this.onChangeCallbacks[currentPath].push({
 				limiter,
 				callback
@@ -119,5 +117,5 @@ export function setGlobalEventStackObserver() {
 	if (globalEventStackObserver) {
 		globalEventStackObserver.stop();
 	}
-	globalEventStackObserver = new EventStackObserver({verbose: true});
+	globalEventStackObserver = new EventStackObserver({verbose: false});
 }

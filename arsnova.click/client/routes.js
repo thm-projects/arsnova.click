@@ -38,7 +38,7 @@ Router.configure({
 });
 
 Router.onBeforeAction(function () {
-	if (Router.current().route.path() !== "/") {
+	if (typeof Router.current().params.quizName !== "undefined") {
 		if (!globalEventStackObserver) {
 			setGlobalEventStackObserver();
 			if (!globalEventStackObserver.isRunning()) {
@@ -70,6 +70,13 @@ Router.onBeforeAction(function () {
 });
 
 Router.onAfterAction(function () {
+	$('#loader-wrapper').toggleClass('loaded');
+});
+
+Router.route("/loading", {
+	action: function () {
+		this.render("loading");
+	}
 });
 
 Router.route('/', {

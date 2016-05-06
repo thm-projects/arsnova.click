@@ -104,8 +104,7 @@ Router.route('/', {
 Router.route('/hashtagmanagement', {
 	waitOn: function () {
 		return [
-			Meteor.subscribe('HashtagsCollection.public'),
-			Meteor.subscribe("EventManagerCollection.join", Router.current().params.quizName)
+			Meteor.subscribe('HashtagsCollection.public')
 		];
 	},
 	action: function () {
@@ -161,6 +160,7 @@ Router.route('/:quizName/resetToHome', function () {
 	delete localStorage[Router.current().params.quizName + "markdownAlreadyChecked"];
 	delete localStorage[Router.current().params.quizName + "slider"];
 	delete localStorage[Router.current().params.quizName + "sessionClosed"];
+	delete localStorage[Router.current().params.quizName + "overrideValidQuestionRedirect"];
 	delete localStorage.slider;
 	delete localStorage.lastPage;
 	Router.go("/");

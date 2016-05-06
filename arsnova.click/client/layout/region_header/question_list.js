@@ -16,6 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
 import {TAPi18n} from 'meteor/tap:i18n';
@@ -29,9 +30,7 @@ import * as lib from './lib.js';
 var redirectTracker = null;
 
 Template.questionList.onCreated(function () {
-	localStorage.setItem(Router.current().params.quizName + "validQuestions", []);
-
-	this.subscribe("EventManagerCollection.join", Router.current().params.quizName);
+	Session.set("validQuestions", []);
 	this.subscribe('QuestionGroupCollection.questionList', Router.current().params.quizName);
 	this.subscribe('AnswerOptionCollection.instructor', localData.getPrivateKey(), Router.current().params.quizName);
 
@@ -42,14 +41,14 @@ Template.questionList.onCreated(function () {
 			}
 
 			var questionList = QuestionGroupCollection.findOne().questionList;
-			var validQuestions = localStorage.getItem(Router.current().params.quizName + "validQuestions");
+			var validQuestions = Session.get("validQuestions");
 			if (questionList.length >= validQuestions.length) {
 				return;
 			}
 
 			validQuestions.splice(questionList.length - 1, validQuestions.length - questionList.length);
 
-			localStorage.setItem(Router.current().params.quizName + "validQuestions", validQuestions);
+			Session.set("validQuestions", validQuestions);
 		}
 	});
 });
@@ -61,7 +60,7 @@ Template.questionList.onDestroyed(function () {
 Template.questionList.onRendered(function () {
 	let handleRedirect = true;
 	redirectTracker = Tracker.autorun(function () {
-		let validQuestions = localStorage.getItem(Router.current().params.quizName + "validQuestions");
+		let validQuestions = Session.get("validQuestions");
 		if (!validQuestions || validQuestions.length === 0) {
 			return;
 		}
@@ -73,16 +72,18 @@ Template.questionList.onRendered(function () {
 				break;
 			}
 		}
-		if (!localStorage.getItem(Router.current().params.quizName + "overrideValidQuestionRedirect") && allValid && handleRedirect) {
-			localStorage.setItem(Router.current().params.quizName + "overrideValidQuestionRedirect", undefined);
-			Meteor.call("MemberListCollection.removeFromSession", localData.getPrivateKey(), Router.current().params.quizName);
-			Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, 0);
-			Meteor.call("EventManagerCollection.setSessionStatus", localData.getPrivateKey(), Router.current().params.quizName, 2);
-			Router.go("/" + Router.current().params.quizName + "/memberlist");
-		} else {
-			localStorage.setItem(Router.current().params.quizName + "overrideValidQuestionRedirect", undefined);
+		if (!Session.get("overrideValidQuestionRedirect")) {
+			delete Session.keys.overrideValidQuestionRedirect;
 			handleRedirect = false;
 			redirectTracker.stop();
+		} else {
+			if (allValid && handleRedirect) {
+				delete Session.keys.overrideValidQuestionRedirect;
+				Meteor.call("MemberListCollection.removeFromSession", localData.getPrivateKey(), Router.current().params.quizName);
+				Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, 0);
+				Meteor.call("EventManagerCollection.setSessionStatus", localData.getPrivateKey(), Router.current().params.quizName, 2);
+				Router.go("/" + Router.current().params.quizName + "/memberlist");
+			}
 		}
 	});
 });
@@ -102,9 +103,9 @@ Template.questionList.helpers({
 		return index === EventManagerCollection.findOne().questionIndex;
 	},
 	hasCompleteContent: function (index) {
-		var validQuestions = localStorage.getItem(Router.current().params.quizName + "validQuestions");
+		var validQuestions = Session.get("validQuestions");
 		validQuestions[index] = lib.checkForValidQuestions(index);
-		localStorage.setItem(Router.current().params.quizName + "validQuestions", validQuestions);
+		Session.set("validQuestions", validQuestions);
 		return validQuestions[index];
 	}
 });

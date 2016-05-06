@@ -40,7 +40,7 @@ Template.createTimerView.onRendered(function () {
 	});
 
 	lib.validationTrackerHandle = Tracker.autorun(()=> {
-		var validQuestions = localStorage.getItem(Router.current().params.quizName + "validQuestions");
+		var validQuestions = Session.get("validQuestions");
 		var forwardButton = $('#forwardButton');
 		forwardButton.removeAttr("disabled");
 		for (var i = 0; i < validQuestions.length; i++) {

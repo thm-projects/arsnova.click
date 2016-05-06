@@ -23,6 +23,9 @@ Template.createTimerView.onDestroyed(function () {
 	var body = $('body');
 	body.off('click', '.questionIcon:not(.active)');
 	body.off('click', '.removeQuestion');
-	validationTrackerHandle.stop();
-	Session.set("slider", undefined);
+	if (validationTrackerHandle) {
+		validationTrackerHandle.stop();
+	}
+	delete Session.keys.validQuestions;
+	delete Session.keys.slider;
 });

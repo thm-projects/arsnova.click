@@ -18,5 +18,4 @@
 import {Template} from 'meteor/templating';
 
 Template.hashtagManagement.onCreated(function () {
-	this.subscribe('HashtagsCollection.public');
 });

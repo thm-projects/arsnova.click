@@ -22,18 +22,14 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as lib from './lib.js';
 
 Template.createQuestionView.onRendered(function () {
-	localStorage.setItem(Router.current().params.quizName + "markdownAlreadyChecked", false);
 	lib.calculateWindow();
 	$(window).resize(lib.calculateWindow());
 
 	let index;
 	lib.subscriptionHandler = Tracker.autorun(()=> {
-		if (this.subscriptionsReady() && EventManagerCollection.findOne()) {
+		if (this.subscriptionsReady() && typeof localStorage.getItem(Router.current().params.quizName) !== "undefined") {
 			index = EventManagerCollection.findOne().questionIndex;
-			if (!localStorage.getItem(Router.current().params.quizName + "markdownAlreadyChecked")) {
-				lib.checkForMarkdown();
-				localStorage.setItem(Router.current().params.quizName + "markdownAlreadyChecked", true);
-			}
+			lib.checkForMarkdown();
 		}
 	});
 	var body = $('body');

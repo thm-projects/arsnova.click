@@ -18,5 +18,4 @@
 import {Template} from 'meteor/templating';
 
 Template.createTimerView.onCreated(function () {
-	localStorage.setItem(Router.current().params.quizName + "slider", 0);
 });

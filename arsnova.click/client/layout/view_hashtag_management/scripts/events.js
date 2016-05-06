@@ -78,7 +78,7 @@ Template.hashtagView.events({
 		}));
 	},
 	"click #addNewHashtag": function () {
-		if (!localStorage.getItem(Router.current().params.quizName + "localStorageAvailable")) {
+		if (!localStorage.getItem("localStorageAvailable")) {
 			new ErrorSplashscreen({
 				autostart: true,
 				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing")
@@ -204,7 +204,6 @@ Template.hashtagManagement.events({
 		var hashtag = $(event.currentTarget).parent().parent()[0].id;
 		localData.reenterSession(hashtag);
 		Meteor.call('EventManagerCollection.add', localData.getPrivateKey(), hashtag, function () {
-			localStorage.setItem(Router.current().params.quizName + "overrideValidQuestionRedirect", true);
 			Router.go("/" + hashtag + "/question");
 		});
 	},
@@ -279,6 +278,7 @@ Template.showHashtagsSplashscreen.events({
 		var hashtag = $(event.currentTarget).text();
 		localData.reenterSession(hashtag);
 		lib.hashtagSplashscreen.destroy();
+		Session.set("overrideValidQuestionRedirect", true);
 		Router.go("/" + hashtag + "/question");
 	},
 	"click #js-btn-showHashtagManagement": function () {

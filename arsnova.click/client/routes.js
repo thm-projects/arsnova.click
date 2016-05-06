@@ -41,9 +41,9 @@ Router.onStop(function () {
 	var lastRoute = Router.current().route.getName();
 	if (lastRoute === undefined) {
 		//homeView
-		localStorage.setItem(Router.current().params.quizName + "lastPage", "/");
+		localStorage.setItem("lastPage", "/");
 	} else if (lastRoute !== "agb" && lastRoute !== "datenschutz" && lastRoute !== "impressum") {
-		localStorage.setItem(Router.current().params.quizName + "lastPage", lastRoute);
+		localStorage.setItem("lastPage", lastRoute);
 	}
 });
 
@@ -157,7 +157,12 @@ Router.route("/:quizName", {
 
 Router.route('/:quizName/resetToHome', function () {
 	delete localStorage[Router.current().params.quizName + "nick"];
+	delete localStorage[Router.current().params.quizName + "validQuestions"];
+	delete localStorage[Router.current().params.quizName + "markdownAlreadyChecked"];
+	delete localStorage[Router.current().params.quizName + "slider"];
+	delete localStorage[Router.current().params.quizName + "sessionClosed"];
 	delete localStorage.slider;
+	delete localStorage.lastPage;
 	Router.go("/");
 });
 

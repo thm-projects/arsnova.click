@@ -80,7 +80,7 @@ Template.header.events({
 								});
 							}
 						});
-						Router.go("/");
+						Router.go("/" + Router.current().params.quizName + "/resetToHome");
 					});
 				}
 			});

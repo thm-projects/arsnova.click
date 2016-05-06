@@ -71,13 +71,13 @@ Template.footer.helpers({
 		return (showHomeSl.indexOf(Router.current().route.path()) !== -1) && (localStorage.getItem(Router.current().params.quizName + "lastPage") !== undefined) && (showHome.indexOf(localStorage.getItem(Router.current().params.quizName + "lastPage")) === -1) && (Router.current().route.path() !== '/');
 	},
 	getLastPage: function () {
-		return localStorage.getItem(Router.current().params.quizName + "lastPage");
+		return localStorage.getItem("lastPage");
 	}
 });
 
 Template.footer.events({
 	"click #toPrevPage": function () {
-		localStorage.setItem(Router.current().params.quizName + "lastPage", undefined);
+		delete localStorage.lastPage;
 	},
 	"click #hideShowFooterBar": function () {
 		if ($("#footerBar").hasClass("hide")) {

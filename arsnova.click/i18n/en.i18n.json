@@ -228,7 +228,7 @@
     },
     "splashscreen": {
       "error": {
-        "title": "Error",
+        "title": "Notification",
         "set_text_error": "The text of the error splashscreen can only be set after it has been rendered!",
         "error_messages": {
           "Internal Server Error": "Internal Server Error",
@@ -249,8 +249,7 @@
           "insert_leaderboard_failed": "Error while adding response set to leaderboard",
           "session_closed": "The quiz session has been closed"
         }
-      },
-      "question_and_answer": { }
+      }
     }
   }
 }

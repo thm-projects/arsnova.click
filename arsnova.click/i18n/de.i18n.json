@@ -249,8 +249,7 @@
           "insert_leaderboard_failed": "Fehler beim Hinzufügen der Antwort zur Rangliste",
           "session_closed": "Die Quizrunde wurde beendet"
         }
-      },
-      "question_and_answer": { }
+      }
     }
   }
 }

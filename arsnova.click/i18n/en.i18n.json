@@ -6,8 +6,7 @@
     "delete": "Delete",
     "save": "Save",
     "abort": "Abort",
-    "close_window": "Close window",
-    "beta": "Beta"
+    "close_window": "Close window"
   },
   "region": {
     "footer": {
@@ -191,7 +190,8 @@
     },
     "translation": {
       "translations": "These translations are available:",
-      "i18n_currently_not_available": "I18n is currently not available!"
+      "i18n_currently_not_available": "I18n is currently not available!",
+      "beta": "Beta"
     },
     "voting": {
       "question": "Question",

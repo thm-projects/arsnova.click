@@ -136,7 +136,6 @@ Router.route('/translate', function () {
 
 Router.route("/:quizName", {
 	action: function () {
-		console.log(EventManagerCollection.findOne().sessionStatus);
 		if (!EventManagerCollection.findOne() || EventManagerCollection.findOne().sessionStatus !== 2) {
 			try {
 				localData.initializePrivateKey();

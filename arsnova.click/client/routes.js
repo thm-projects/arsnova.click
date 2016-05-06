@@ -37,6 +37,17 @@ Router.configure({
 	}
 });
 
+Router.onStop(function () {
+	var lastRoute = Router.current().route.getName();
+	if (lastRoute === undefined) {
+		//homeView
+		localStorage.setItem(Router.current().params.quizName + "lastPage", "/");
+	} else if (lastRoute !== "agb" && lastRoute !== "datenschutz" && lastRoute !== "impressum") {
+		localStorage.setItem(Router.current().params.quizName + "lastPage", lastRoute);
+	}
+});
+
+
 Router.onBeforeAction(function () {
 	if (typeof Router.current().params.quizName !== "undefined") {
 		if (!globalEventStackObserver) {
@@ -73,12 +84,6 @@ Router.onAfterAction(function () {
 	$('#loader-wrapper').toggleClass('loaded');
 });
 
-Router.route("/loading", {
-	action: function () {
-		this.render("loading");
-	}
-});
-
 Router.route('/', {
 	waitOn: function () {
 		return [
@@ -92,18 +97,78 @@ Router.route('/', {
 		} catch (err) {
 			localStorage.setItem("localStorageAvailable", false);
 		}
-		localStorage.setItem("slider", undefined);
 		this.render('home');
+	}
+});
+
+Router.route('/hashtagmanagement', {
+	waitOn: function () {
+		return [
+			Meteor.subscribe('HashtagsCollection.public'),
+			Meteor.subscribe("EventManagerCollection.join", Router.current().params.quizName)
+		];
+	},
+	action: function () {
+		this.render('hashtagManagement');
+	}
+});
+
+// Routes for Footer-Links
+
+Router.route('/ueber', function () {
+	this.render('ueber');
+});
+
+Router.route('/agb', function () {
+	this.render('agb');
+});
+
+Router.route('/datenschutz', function () {
+	this.render('datenschutz');
+});
+
+Router.route('/impressum', function () {
+	this.render('impressum');
+});
+
+Router.route('/translate', function () {
+	this.render('translate');
+});
+
+Router.route("/:quizName", {
+	action: function () {
+		console.log(EventManagerCollection.findOne().sessionStatus);
+		if (!EventManagerCollection.findOne() || EventManagerCollection.findOne().sessionStatus !== 2) {
+			try {
+				localData.initializePrivateKey();
+				localStorage.setItem("localStorageAvailable", true);
+				if (localData.containsHashtag(Router.current().params.quizName)) {
+					Router.go("/" + Router.current().params.quizName + "/question");
+				}
+			} catch (err) {
+				localStorage.setItem("localStorageAvailable", false);
+				Router.go("/");
+			}
+		} else {
+			Router.go("/" + Router.current().params.quizName + "/nick");
+		}
 	}
 });
 
 Router.route('/:quizName/resetToHome', function () {
 	delete localStorage[Router.current().params.quizName + "nick"];
+	delete localStorage.slider;
 	Router.go("/");
 });
 
-Router.route('/:quizName/nick', function () {
-	this.render('nick');
+Router.route('/:quizName/nick', {
+	action: function () {
+		if (!EventManagerCollection.findOne() || EventManagerCollection.findOne().sessionStatus !== 2) {
+			Router.go("/");
+		} else {
+			this.render('nick');
+		}
+	}
 });
 
 Router.route('/:quizName/question', {
@@ -339,49 +404,5 @@ Router.route('/:quizName/statistics', {
 	},
 	action: function () {
 		this.render('leaderBoard');
-	}
-});
-
-Router.route('/hashtagmanagement', {
-	waitOn: function () {
-		return [
-			Meteor.subscribe('HashtagsCollection.public'),
-			Meteor.subscribe("EventManagerCollection.join", Router.current().params.quizName)
-		];
-	},
-	action: function () {
-		this.render('hashtagManagement');
-	}
-});
-
-// Routes for Footer-Links
-
-Router.route('/ueber', function () {
-	this.render('ueber');
-});
-
-Router.route('/agb', function () {
-	this.render('agb');
-});
-
-Router.route('/datenschutz', function () {
-	this.render('datenschutz');
-});
-
-Router.route('/impressum', function () {
-	this.render('impressum');
-});
-
-Router.route('/translate', function () {
-	this.render('translate');
-});
-
-Router.onStop(function () {
-	var lastRoute = Router.current().route.getName();
-	if (lastRoute === undefined) {
-		//homeView
-		localStorage.setItem(Router.current().params.quizName + "lastPage", "/");
-	} else if (lastRoute !== "agb" && lastRoute !== "datenschutz" && lastRoute !== "impressum") {
-		localStorage.setItem(Router.current().params.quizName + "lastPage", lastRoute);
 	}
 });

@@ -6,7 +6,8 @@
     "delete": "Effacer",
     "save": "Sauvegarder",
     "abort": "Avorter",
-    "close_window": "Fermer la fenêtre"
+    "close_window": "Fermer la fenêtre",
+    "beta": "Beta"
   },
   "region": {
     "footer": {

@@ -74,12 +74,12 @@ Template.liveResults.events({
 		event.stopPropagation();
 		var targetId = parseInt($(event.currentTarget).attr("id").replace("js-btn-showLeaderBoard_", ""));
 		Session.set("showLeaderBoardId", targetId);
-		Router.go("/statistics");
+		Router.go("/" + Router.current().params.quizName + "/statistics");
 	},
 	"click #js-btn-export": function (event) {
 		event.stopPropagation();
 		Meteor.call('HashtagsCollection.export', {
-			hashtag: Session.get("hashtag"),
+			hashtag: Router.current().params.quizName,
 			privateKey: localData.getPrivateKey()
 		}, (err, res) => {
 			if (err) {
@@ -93,7 +93,7 @@ Template.liveResults.events({
 				var time = new Date();
 				var timestring = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
 				a.href = 'data:' + exportData;
-				a.download = Session.get("hashtag") + "-" + timestring + ".json";
+				a.download = Router.current().params.quizName + "-" + timestring + ".json";
 				a.innerHTML = '';
 				event.target.appendChild(a);
 				if (Session.get("exportReady")) {
@@ -108,9 +108,9 @@ Template.liveResults.events({
 	'click #backButton': (event)=> {
 		event.stopPropagation();
 		$('.sound-button').show();
-		Meteor.call('ResponsesCollection.clearAll', localData.getPrivateKey(), Session.get("hashtag"));
-		Meteor.call("MemberListCollection.clearReadConfirmed", localData.getPrivateKey(), Session.get("hashtag"));
-		Meteor.call("EventManagerCollection.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 2);
+		Meteor.call('ResponsesCollection.clearAll', localData.getPrivateKey(), Router.current().params.quizName);
+		Meteor.call("MemberListCollection.clearReadConfirmed", localData.getPrivateKey(), Router.current().params.quizName);
+		Meteor.call("EventManagerCollection.setSessionStatus", localData.getPrivateKey(), Router.current().params.quizName, 2);
 	},
 	'click #startNextQuestion': (event)=> {
 		event.stopPropagation();
@@ -122,7 +122,7 @@ Template.liveResults.events({
 
 		Meteor.call('Question.startTimer', {
 			privateKey: localData.getPrivateKey(),
-			hashtag: Session.get("hashtag"),
+			hashtag: Router.current().params.quizName,
 			questionIndex: EventManagerCollection.findOne().questionIndex + 1
 		}, (err) => {
 			if (err) {
@@ -140,11 +140,11 @@ Template.liveResults.events({
 		event.stopPropagation();
 		Session.set("showLeaderBoardId", undefined);
 		Session.set("showGlobalRanking", true);
-		Router.go("/statistics");
+		Router.go("/" + Router.current().params.quizName + "/statistics");
 	},
 	'click #showNextQuestionDialog': (event)=> {
 		event.stopPropagation();
-		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", localData.getPrivateKey(), Session.get("hashtag"), EventManagerCollection.findOne().questionIndex + 1);
+		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", localData.getPrivateKey(), Router.current().params.quizName, EventManagerCollection.findOne().questionIndex + 1);
 	},
 	"click .btn-more-learners": function () {
 		Session.set("LearnerCount", MemberListCollection.find().count());

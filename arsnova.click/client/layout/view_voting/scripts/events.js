@@ -81,14 +81,14 @@ Template.votingview.events({
 		if (EventManagerCollection.findOne().questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
 			Session.set("sessionClosed", true);
 		}
-		Router.go("/results");
+		Router.go("/" + Router.current().params.quizName + "/results");
 	},
 	"click .sendResponse": function (event) {
 		event.stopPropagation();
 
 		if (Session.get("questionSC") || (AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).count() === 1)) {
 			makeAndSendResponse(event.currentTarget.id);
-			Router.go("/results");
+			Router.go("/" + Router.current().params.quizName + "/results");
 		} else {
 			var responseArr = JSON.parse(Session.get("responses"));
 			var currentId = event.currentTarget.id;

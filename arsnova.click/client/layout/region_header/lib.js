@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
@@ -52,7 +51,7 @@ export function addNewQuestion(callback) {
 	var index = QuestionGroupCollection.findOne().questionList.length;
 	Meteor.call("QuestionGroupCollection.addQuestion", {
 		privateKey: localData.getPrivateKey(),
-		hashtag: Session.get("hashtag"),
+		hashtag: Router.current().params.quizName,
 		questionIndex: index,
 		questionText: ""
 	}, (err) => {
@@ -65,7 +64,7 @@ export function addNewQuestion(callback) {
 			for (var i = 0; i < 4; i++) {
 				Meteor.call('AnswerOptionCollection.addOption', {
 					privateKey: localData.getPrivateKey(),
-					hashtag: Session.get("hashtag"),
+					hashtag: Router.current().params.quizName,
 					questionIndex: index,
 					answerOptionNumber: i,
 					answerText: "",
@@ -73,14 +72,14 @@ export function addNewQuestion(callback) {
 				});
 			}
 
-			localData.addQuestion(Session.get("hashtag"), QuestionGroupCollection.findOne().questionList.length, "");
+			localData.addQuestion(Router.current().params.quizName, QuestionGroupCollection.findOne().questionList.length, "");
 
-			var validQuestions = Session.get("validQuestions");
+			var validQuestions = localStorage.getItem(Router.current().params.quizName + "validQuestions");
 			validQuestions[index] = false;
-			Session.set("validQuestions", validQuestions);
+			localStorage.setItem(Router.current().params.quizName + "validQuestions", validQuestions);
 
-			Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), index, function () {
-				Router.go("/question");
+			Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, index, function () {
+				Router.go("/" + Router.current().params.quizName + "/question");
 				if (callback) {
 					callback();
 				}

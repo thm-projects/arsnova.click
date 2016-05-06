@@ -22,23 +22,14 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {startCountdown, deleteCountdown} from './lib.js';
 
 Template.votingview.onCreated(function () {
-	Session.set("sessionClosed", undefined);
+	Session.set("sessionClosed",undefined);
 	deleteCountdown();
 
-	this.subscribe("EventManagerCollection.join", Session.get("hashtag"));
-	this.subscribe('QuestionGroupCollection.questionList', Session.get("hashtag"), function () {
-		Session.set("questionGroupSubscriptionReady", true);
-		if (!Session.get("sessionClosed")) {
-			startCountdown(EventManagerCollection.findOne().questionIndex);
-		}
-	});
-
-	this.subscribe('AnswerOptionCollection.public', Session.get("hashtag"), function () {
-		var answerOptionCount = AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).count();
-		var responseArr = [];
-		for (var i = 0; i < answerOptionCount; i++) {
-			responseArr[i] = false;
-		}
-		Session.set("responses", JSON.stringify(responseArr));
-	});
+	startCountdown(EventManagerCollection.findOne().questionIndex);
+	var answerOptionCount = AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).count();
+	var responseArr = [];
+	for (var i = 0; i < answerOptionCount; i++) {
+		responseArr[i] = false;
+	}
+	Session.set("responses",JSON.stringify(responseArr));
 });

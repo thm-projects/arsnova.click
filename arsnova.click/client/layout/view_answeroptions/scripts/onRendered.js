@@ -43,7 +43,7 @@ Template.createAnswerOptions.onRendered(function () {
 		}
 
 		lib.parseAnswerOptionInput(index);
-		Router.go("/question");
+		Router.go("/" + Router.current().params.quizName + "/question");
 	});
 	body.on('click', '.removeQuestion', function () {
 		index = EventManagerCollection.findOne().questionIndex;

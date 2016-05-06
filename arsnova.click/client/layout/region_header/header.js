@@ -32,6 +32,9 @@ Template.header.onCreated(function () {
 });
 
 Template.header.helpers({
+	getCurrentRoute: function () {
+		return "/" + Router.current().params.quizName;
+	},
 	isInHomePathOrIsStudent: function () {
 		switch (Router.current().route.path()) {
 			case '/':
@@ -41,17 +44,16 @@ Template.header.helpers({
 			case '/impressum':
 				return true;
 		}
-		return !Session.get("isOwner");
+		return !localData.containsHashtag(Router.current().params.quizName);
 	},
 	currentHashtag: function () {
-		return Session.get("hashtag");
+		return Router.current().params.quizName;
 	},
 	isEditingQuestion: function () {
-		switch (Router.current().route.path()) {
-			case '/question':
-			case '/answeroptions':
-			case '/settimer':
-			case '/readconfirmationrequired':
+		switch (Router.current().route.getName()) {
+			case ":quizName.question":
+			case ":quizName.answeroptions":
+			case ":quizName.settimer":
 				return true;
 			default:
 				return false;
@@ -60,8 +62,8 @@ Template.header.helpers({
 });
 
 Template.header.events({
-	'click .kill-session-switch, click .arsnova-logo': function () {
-		if (Session.get("isOwner")) {
+	'click .kill-session-switch-wrapper, click .arsnova-logo': function () {
+		if (localData.containsHashtag(Router.current().params.quizName)) {
 			buzzsound1.stop();
 
 			new Splashscreen({
@@ -70,7 +72,7 @@ Template.header.events({
 				closeOnButton: '#closeDialogButton, #resetSessionButton',
 				onRendered: function (instance) {
 					instance.templateSelector.find('#resetSessionButton').on('click', function () {
-						Meteor.call("Main.killAll", localData.getPrivateKey(), Session.get("hashtag"), function (err) {
+						Meteor.call("Main.killAll", localData.getPrivateKey(), Router.current().params.quizName, function (err) {
 							if (err) {
 								new ErrorSplashscreen({
 									autostart: true,
@@ -78,12 +80,12 @@ Template.header.events({
 								});
 							}
 						});
-						Router.go("/");
+						Router.go("/" + Router.current().params.quizName + "/resetToHome");
 					});
 				}
 			});
 		} else {
-			Router.go("/resetToHome");
+			Router.go("/" + Router.current().params.quizName + "/resetToHome");
 		}
 	},
 	'click .sound-button': function () {

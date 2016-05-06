@@ -14,6 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
+
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
@@ -28,7 +29,6 @@ Template.hashtagView.events({
 	"input #hashtag-input-field": function (event) {
 		var inputHashtag = $(event.target).val();
 		let addNewHashtagItem = $("#addNewHashtag");
-		Session.set("hashtag", inputHashtag);
 		addNewHashtagItem.html(TAPi18n.__("view.hashtag_management.create_session") + '<span class="glyphicon glyphicon-plus glyph-right" aria-hidden="true"></span>');
 		if (inputHashtag.length === 0) {
 			addNewHashtagItem.attr("disabled", "disabled");
@@ -48,9 +48,39 @@ Template.hashtagView.events({
 				addNewHashtagItem.attr("disabled", "disabled");
 			}
 		}
+
+		if (lib.eventManagerHandle) {
+			lib.eventManagerHandle.stop();
+			$("#joinSession").attr("disabled", "disabled");
+		}
+		lib.setEventManagerHandle(Meteor.subscribe("EventManagerCollection.join", $("#hashtag-input-field").val(),function () {
+			if (!EventManagerCollection.findOne() || localData.containsHashtag($("#hashtag-input-field").val()) > -1) {
+				$("#joinSession").attr("disabled", "disabled");
+			}
+			EventManagerCollection.find().observeChanges({
+				changed: function (id, changedFields) {
+					if (!isNaN(changedFields.sessionStatus)) {
+						if (changedFields.sessionStatus === 2) {
+							$("#joinSession").removeAttr("disabled");
+						} else {
+							$("#joinSession").attr("disabled", "disabled");
+						}
+					}
+				},
+				added: function (id, doc) {
+					if (!isNaN(doc.sessionStatus)) {
+						if (doc.sessionStatus === 2) {
+							$("#joinSession").removeAttr("disabled");
+						} else {
+							$("#joinSession").attr("disabled", "disabled");
+						}
+					}
+				}
+			});
+		}));
 	},
 	"click #addNewHashtag": function () {
-		if (!Session.get("localStorageAvailable")) {
+		if (!localStorage.getItem("localStorageAvailable")) {
 			new ErrorSplashscreen({
 				autostart: true,
 				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing")
@@ -66,11 +96,9 @@ Template.hashtagView.events({
 				var oldHashtagDoc = HashtagsCollection.findOne({hashtag: hashtag});
 				if (oldHashtagDoc) {
 					reenter = true;
-					Session.set("hashtag", hashtag);
-					Session.set("isOwner", true);
 					localData.reenterSession(hashtag);
 					Meteor.call('EventManagerCollection.add', localData.getPrivateKey(), hashtag, function () {
-						Router.go("/question");
+						Router.go("/" + hashtag + "/question");
 					});
 				}
 			}
@@ -110,11 +138,9 @@ Template.hashtagView.events({
 							]
 						});
 
-						Session.set("hashtag", hashtag);
-						Session.set("isOwner", true);
 						localData.addHashtag(hashtag);
 						Meteor.call('EventManagerCollection.add', localData.getPrivateKey(), hashtag, function () {
-							Router.go("/question");
+							Router.go("/" + hashtag + "/question");
 						});
 					}
 				});
@@ -125,8 +151,7 @@ Template.hashtagView.events({
 		var hashtag = $("#hashtag-input-field").val();
 
 		if (EventManagerCollection.findOne().sessionStatus === 2) {
-			Session.set("hashtag", hashtag);
-			Router.go("/nick");
+			Router.go("/" + hashtag + "/nick");
 		} else {
 			$("#joinSession").attr("disabled", "disabled");
 			new ErrorSplashscreen({
@@ -180,11 +205,8 @@ Template.hashtagManagement.events({
 	"click .js-reactivate-hashtag": function (event) {
 		var hashtag = $(event.currentTarget).parent().parent()[0].id;
 		localData.reenterSession(hashtag);
-		Session.set("isOwner", true);
-		Session.set("hashtag", hashtag);
 		Meteor.call('EventManagerCollection.add', localData.getPrivateKey(), hashtag, function () {
-			Session.set("overrideValidQuestionRedirect", true);
-			Router.go("/question");
+			Router.go("/" + hashtag + "/question");
 		});
 	},
 	"click .js-export": function (event) {
@@ -199,10 +221,10 @@ Template.hashtagManagement.events({
 			a.download = hashtag + "-" + timestring + ".json";
 			a.innerHTML = '';
 			event.target.appendChild(a);
-			if (Session.get("exportReady")) {
-				Session.set("exportReady", undefined);
+			if (localStorage.getItem(Router.current().params.quizName + "exportReady")) {
+				localStorage.setItem(Router.current().params.quizName + "exportReady", undefined);
 			} else {
-				Session.set("exportReady", true);
+				localStorage.setItem(Router.current().params.quizName + "exportReady", true);
 				a.click();
 			}
 		}
@@ -240,9 +262,7 @@ Template.hashtagManagement.events({
 									errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.update_failed")
 								});
 							} else {
-								Session.set("hashtag", asJSON.hashtagDoc.hashtag);
-								Session.set("isOwner", true);
-								Router.go("/question");
+								Router.go("/" + asJSON.hashtagDoc.hashtag + "/question");
 							}
 						});
 					});
@@ -258,14 +278,13 @@ Template.hashtagManagement.events({
 Template.showHashtagsSplashscreen.events({
 	"click .js-my-hash": function (event) {
 		var hashtag = $(event.currentTarget).text();
-		Session.set("isOwner", true);
-		Session.set("hashtag", hashtag);
 		localData.reenterSession(hashtag);
 		lib.hashtagSplashscreen.destroy();
-		Router.go('/question');
+		Session.set("overrideValidQuestionRedirect", true);
+		Router.go("/" + hashtag + "/question");
 	},
 	"click #js-btn-showHashtagManagement": function () {
 		lib.hashtagSplashscreen.destroy();
-		Router.go('/hashtagmanagement');
+		Router.go("/hashtagmanagement");
 	}
 });

@@ -16,11 +16,10 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {Session} from 'meteor/session';
 import * as localData from './local_storage.js';
 
 Meteor.setInterval(function () {
-	if (Session.get("isOwner")) {
-		Meteor.call('keepalive', localData.getPrivateKey(), Session.get("hashtag"));
+	if (localData.containsHashtag(Router.current().params.quizName)) {
+		Meteor.call('keepalive', localData.getPrivateKey(), Router.current().params.quizName);
 	}
 }, 5000);

@@ -19,11 +19,5 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 
 Template.leaderBoard.onCreated(function () {
-	this.subscribe('ResponsesCollection.session', Session.get("hashtag"));
-	this.subscribe('AnswerOptionCollection.options', Session.get("hashtag"));
-	this.subscribe('MemberListCollection.members', Session.get("hashtag"));
-	this.subscribe('QuestionGroupCollection.questionList', Session.get("hashtag"));
-	this.subscribe("EventManagerCollection.join", Session.get("hashtag"));
-
-	Session.set('show_all_leaderboard', false);
+	Session.set("show_all_leaderboard", false);
 });

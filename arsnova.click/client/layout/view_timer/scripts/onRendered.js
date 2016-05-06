@@ -23,16 +23,9 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as lib from './lib.js';
 
 Template.createTimerView.onRendered(function () {
-	lib.createSlider();
-
-	let index;
-	lib.subscriptionHandler = Tracker.autorun(()=> {
-		if (this.subscriptionsReady()) {
-			index = EventManagerCollection.findOne().questionIndex;
-			lib.subscriptionHandler.stop();
-			lib.setSlider(index);
-		}
-	});
+	let index = EventManagerCollection.findOne().questionIndex;
+	lib.createSlider(index);
+	lib.setSlider(index);
 	var body = $('body');
 	body.on('click', '.questionIcon:not(.active)', function () {
 		var currentSession = QuestionGroupCollection.findOne();
@@ -41,7 +34,7 @@ Template.createTimerView.onRendered(function () {
 		}
 
 		lib.setTimer(index);
-		Router.go("/question");
+		Router.go("/" + Router.current().params.quizName + "/question");
 	});
 	body.on('click', '.removeQuestion', function () {
 		index = EventManagerCollection.findOne().questionIndex;

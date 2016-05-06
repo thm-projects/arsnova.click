@@ -36,7 +36,7 @@ export function containsHashtag(hashtag) {
 		return;
 	}
 	const hashtagString = localStorage.getItem("hashtags");
-	return hashtagString ? $.inArray(hashtag, JSON.parse(hashtagString)) : false;
+	return hashtagString ? $.inArray(hashtag, JSON.parse(hashtagString)) > -1 : false;
 }
 
 export function deleteHashtag(hashtag) {

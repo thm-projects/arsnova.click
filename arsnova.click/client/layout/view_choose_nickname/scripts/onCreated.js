@@ -15,10 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 
 Template.nick.onCreated(function () {
-	this.subscribe('MemberListCollection.members', Session.get("hashtag"));
-	this.subscribe("EventManagerCollection.join", Session.get("hashtag"));
+	this.subscribe('MemberListCollection.members', Router.current().params.quizName);
+	this.subscribe("EventManagerCollection.join", Router.current().params.quizName);
 });

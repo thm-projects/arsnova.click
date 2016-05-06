@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
@@ -49,29 +48,29 @@ Template.createTimerView.events({
 						}).count() > 0) {
 						Meteor.call('AnswerOptionCollection.deleteOption', {
 							privateKey: localData.getPrivateKey(),
-							hashtag: Session.get("hashtag"),
+							hashtag: Router.current().params.quizName,
 							questionIndex: cursor.questionIndex,
 							answerOptionNumber: cursor.answerOptionNumber
 						});
-						localData.deleteAnswerOption(Session.get("hashtag"), cursor.questionIndex, cursor.answerOptionNumber);
+						localData.deleteAnswerOption(Router.current().params.quizName, cursor.questionIndex, cursor.answerOptionNumber);
 					} else {
 						if (cursor.answerOptionNumber > 0) {
 							Meteor.call('AnswerOptionCollection.deleteOption', {
 								privateKey: localData.getPrivateKey(),
-								hashtag: Session.get("hashtag"),
+								hashtag: Router.current().params.quizName,
 								questionIndex: cursor.questionIndex,
 								answerOptionNumber: cursor.answerOptionNumber
 							});
-							localData.deleteAnswerOption(Session.get("hashtag"), cursor.questionIndex, cursor.answerOptionNumber);
+							localData.deleteAnswerOption(Router.current().params.quizName, cursor.questionIndex, cursor.answerOptionNumber);
 						}
 					}
 				});
-				Meteor.call("MemberListCollection.removeFromSession", localData.getPrivateKey(), Session.get("hashtag"));
-				Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), 0);
-				Meteor.call("EventManagerCollection.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 2);
-				Router.go("/memberlist");
+				Meteor.call("MemberListCollection.removeFromSession", localData.getPrivateKey(), Router.current().params.quizName);
+				Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, 0);
+				Meteor.call("EventManagerCollection.setSessionStatus", localData.getPrivateKey(), Router.current().params.quizName, 2);
+				Router.go("/" + Router.current().params.quizName + "/memberlist");
 			} else {
-				Router.go("/answeroptions");
+				Router.go("/" + Router.current().params.quizName + "/answeroptions");
 			}
 		}
 	}

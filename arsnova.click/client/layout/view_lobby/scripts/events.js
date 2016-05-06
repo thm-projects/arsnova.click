@@ -26,16 +26,16 @@ import {calculateButtonCount} from './lib.js';
 
 Template.memberlist.events({
 	"click .btn-more-learners": function () {
-		Session.set("LearnerCount", MemberListCollection.find().count());
-		Session.set("LearnerCountOverride", true);
+		Session.set("learnerCount", MemberListCollection.find().count());
+		Session.set("learnerCountOverride", true);
 	},
 	'click .btn-less-learners': function () {
-		Session.set("LearnerCountOverride", false);
+		Session.set("learnerCountOverride", false);
 		calculateButtonCount();
 	},
 	'click .btn-learner': function (event) {
 		event.preventDefault();
-		if (!Session.get("isOwner")) {
+		if (!localData.containsHashtag(Router.current().params.quizName)) {
 			return;
 		}
 		new Splashscreen({
@@ -45,7 +45,7 @@ Template.memberlist.events({
 			onRendered: function (instance) {
 				instance.templateSelector.find('#nickName').text($(event.currentTarget).text().replace(/(?:\r\n|\r| |\n)/g, ''));
 				instance.templateSelector.find('#kickMemberButton').on('click', function () {
-					Meteor.call('MemberListCollection.removeLearner', localData.getPrivateKey(), Session.get("hashtag"), $(event.currentTarget).attr("id"), function (err) {
+					Meteor.call('MemberListCollection.removeLearner', localData.getPrivateKey(), Router.current().params.quizName, $(event.currentTarget).attr("id"), function (err) {
 						if (err) {
 							new ErrorSplashscreen({
 								autostart: true,
@@ -59,8 +59,8 @@ Template.memberlist.events({
 	},
 	'click #startPolling': function () {
 		$('.sound-button').hide();
-		Session.set("sessionClosed", false);
-		Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), -1);
-		Meteor.call('EventManagerCollection.setSessionStatus', localData.getPrivateKey(), Session.get("hashtag"), 3);
+		localStorage.setItem(Router.current().params.quizName + "sessionClosed", false);
+		Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, -1);
+		Meteor.call('EventManagerCollection.setSessionStatus', localData.getPrivateKey(), Router.current().params.quizName, 3);
 	}
 });

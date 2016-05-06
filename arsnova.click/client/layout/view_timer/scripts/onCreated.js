@@ -15,14 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import * as localData from '/client/lib/local_storage.js';
 
 Template.createTimerView.onCreated(function () {
-	Session.set("slider", 0);
-
-	this.subscribe('AnswerOptionCollection.instructor', localData.getPrivateKey(), Session.get("hashtag"));
-	this.subscribe('QuestionGroupCollection.authorizeAsOwner', localData.getPrivateKey(), Session.get("hashtag"));
-	this.subscribe("EventManagerCollection.join", Session.get("hashtag"));
 });

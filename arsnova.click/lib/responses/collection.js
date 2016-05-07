@@ -18,9 +18,9 @@
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
-export const LeaderBoard = new Mongo.Collection("leaderBoard");
+export const ResponsesCollection = new Mongo.Collection("responses");
 
-LeaderBoard.attachSchema(new SimpleSchema({
+ResponsesCollection.attachSchema(new SimpleSchema({
 	hashtag: {
 		type: String,
 		min: 1,
@@ -32,26 +32,15 @@ LeaderBoard.attachSchema(new SimpleSchema({
 	},
 	userNick: {
 		type: String,
-		min: 3,
+		min: 1,
 		max: 25
 	},
-	responseTimeMillis: {
+	answerOptionNumber: {
 		type: Number,
 		min: 0
 	},
-	givenAnswers: {
+	responseTime: {
 		type: Number,
-		min: 1,
-		max: 26
-	},
-	rightAnswers: {
-		type: Number,
-		min: 0,
-		max: 26
-	},
-	wrongAnswers: {
-		type: Number,
-		min: 0,
-		max: 26
+		min: 0
 	}
 }));

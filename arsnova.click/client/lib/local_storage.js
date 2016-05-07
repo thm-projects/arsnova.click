@@ -36,7 +36,7 @@ export function containsHashtag(hashtag) {
 		return;
 	}
 	const hashtagString = localStorage.getItem("hashtags");
-	return hashtagString ? $.inArray(hashtag, JSON.parse(hashtagString)) : false;
+	return hashtagString ? $.inArray(hashtag, JSON.parse(hashtagString)) > -1 : false;
 }
 
 export function deleteHashtag(hashtag) {
@@ -228,7 +228,7 @@ export function reenterSession(hashtag) {
 			delete sessionData.questionList[i].answers;
 			delete sessionData.questionList[i].isReadingConfirmationRequired;
 			for (var j = 0; j < answer.length; j++) {
-				Meteor.call("AnswerOptions.addOption", {
+				Meteor.call("AnswerOptionCollection.addOption", {
 					privateKey: localStorage.getItem("privateKey"),
 					hashtag: hashtag,
 					questionIndex: i,
@@ -238,7 +238,7 @@ export function reenterSession(hashtag) {
 				});
 			}
 		}
-		Meteor.call("QuestionGroup.insert", {
+		Meteor.call("QuestionGroupCollection.insert", {
 			privateKey: localStorage.getItem("privateKey"),
 			hashtag: hashtag,
 			questionList: sessionData.questionList

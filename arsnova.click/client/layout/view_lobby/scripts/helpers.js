@@ -17,40 +17,41 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {MemberList} from '/lib/memberlist.js';
+import * as localData from '/client/lib/local_storage.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
 
 Template.memberlist.helpers({
 	hashtag: function () {
-		return Session.get("hashtag");
+		return Router.current().params.quizName;
 	},
 	isOwner: function () {
-		return Session.get("isOwner");
+		return localData.containsHashtag(Router.current().params.quizName);
 	},
 	learners: function () {
-		var sortParamObj = Session.get('LearnerCountOverride') ? {lowerCaseNick: 1} : {insertDate: -1};
+		var sortParamObj = Session.get("learnerCountOverride") ? {lowerCaseNick: 1} : {insertDate: -1};
 		return [
-			MemberList.find({nick: Session.get("nick")}, {
+			MemberListCollection.find({nick: localStorage.getItem(Router.current().params.quizName + "nick")}, {
 				limit: 1
 			}),
-			MemberList.find({nick: {$ne: Session.get("nick")}}, {
-				limit: (Session.get("LearnerCount") - 1),
+			MemberListCollection.find({nick: {$ne: localStorage.getItem(Router.current().params.quizName + "nick")}}, {
+				limit: (Session.get("learnerCount") - 1),
 				sort: sortParamObj
 			})
 		];
 	},
 	showMoreButton: function () {
-		return ((MemberList.find().count() - Session.get("LearnerCount")) > 1);
+		return ((MemberListCollection.find().count() - Session.get("learnerCount")) > 1);
 	},
 	invisibleLearnerCount: function () {
-		return MemberList.find().count() - Session.get("LearnerCount");
+		return MemberListCollection.find().count() - Session.get("learnerCount");
 	},
 	memberlistCount: function () {
-		return MemberList.find().count();
+		return MemberListCollection.find().count();
 	}
 });
 
 Template.learner.helpers({
 	isOwnNick: function (nickname) {
-		return nickname === Session.get("nick");
+		return nickname === localStorage.getItem(Router.current().params.quizName + "nick");
 	}
 });

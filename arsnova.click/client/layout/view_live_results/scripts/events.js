@@ -19,10 +19,10 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {EventManager} from '/lib/eventmanager.js';
-import {AnswerOptions} from '/lib/answeroptions.js';
-import {MemberList} from '/lib/memberlist.js';
-import {QuestionGroup} from '/lib/questions.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import * as localData from '/client/lib/local_storage.js';
 import {ErrorSplashscreen, Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
@@ -31,7 +31,7 @@ import {calculateButtonCount, startCountdown} from './lib.js';
 Template.liveResults.events({
 	'click #js-btn-showQuestionAndAnswerModal': function (event) {
 		event.stopPropagation();
-		var questionDoc = QuestionGroup.findOne();
+		var questionDoc = QuestionGroupCollection.findOne();
 		if (!questionDoc) {
 			return;
 		}
@@ -39,11 +39,11 @@ Template.liveResults.events({
 		mathjaxMarkdown.initializeMarkdownAndLatex();
 		var targetId = parseInt($(event.currentTarget).parents(".question-row").attr("id").replace("question-row_", ""));
 		var answerContent = "";
-		let questionContent = mathjaxMarkdown.getContent(questionDoc.questionList[EventManager.findOne().questionIndex].questionText);
+		let questionContent = mathjaxMarkdown.getContent(questionDoc.questionList[EventManagerCollection.findOne().questionIndex].questionText);
 
 		let hasEmptyAnswers = true;
 
-		AnswerOptions.find({questionIndex: targetId}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
+		AnswerOptionCollection.find({questionIndex: targetId}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
 			if (!answerOption.answerText) {
 				answerOption.answerText = "";
 			} else {
@@ -63,7 +63,7 @@ Template.liveResults.events({
 			autostart: true,
 			templateName: 'questionAndAnswerSplashscreen',
 			closeOnButton: '#js-btn-hideQuestionModal',
-			instanceId: "questionAndAnswers_" + EventManager.findOne().questionIndex,
+			instanceId: "questionAndAnswers_" + EventManagerCollection.findOne().questionIndex,
 			onRendered: function (instance) {
 				instance.templateSelector.find('#questionContent').html(questionContent);
 				instance.templateSelector.find('#answerContent').html(answerContent);
@@ -74,12 +74,12 @@ Template.liveResults.events({
 		event.stopPropagation();
 		var targetId = parseInt($(event.currentTarget).attr("id").replace("js-btn-showLeaderBoard_", ""));
 		Session.set("showLeaderBoardId", targetId);
-		Router.go("/statistics");
+		Router.go("/" + Router.current().params.quizName + "/statistics");
 	},
 	"click #js-btn-export": function (event) {
 		event.stopPropagation();
-		Meteor.call('Hashtags.export', {
-			hashtag: Session.get("hashtag"),
+		Meteor.call('HashtagsCollection.export', {
+			hashtag: Router.current().params.quizName,
 			privateKey: localData.getPrivateKey()
 		}, (err, res) => {
 			if (err) {
@@ -93,7 +93,7 @@ Template.liveResults.events({
 				var time = new Date();
 				var timestring = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
 				a.href = 'data:' + exportData;
-				a.download = Session.get("hashtag") + "-" + timestring + ".json";
+				a.download = Router.current().params.quizName + "-" + timestring + ".json";
 				a.innerHTML = '';
 				event.target.appendChild(a);
 				if (Session.get("exportReady")) {
@@ -108,22 +108,22 @@ Template.liveResults.events({
 	'click #backButton': (event)=> {
 		event.stopPropagation();
 		$('.sound-button').show();
-		Meteor.call('Responses.clearAll', localData.getPrivateKey(), Session.get("hashtag"));
-		Meteor.call("MemberList.clearReadConfirmed", localData.getPrivateKey(), Session.get("hashtag"));
-		Meteor.call("EventManager.setSessionStatus", localData.getPrivateKey(), Session.get("hashtag"), 2);
+		Meteor.call('ResponsesCollection.clearAll', localData.getPrivateKey(), Router.current().params.quizName);
+		Meteor.call("MemberListCollection.clearReadConfirmed", localData.getPrivateKey(), Router.current().params.quizName);
+		Meteor.call("EventManagerCollection.setSessionStatus", localData.getPrivateKey(), Router.current().params.quizName, 2);
 	},
 	'click #startNextQuestion': (event)=> {
 		event.stopPropagation();
 
-		var questionDoc = QuestionGroup.findOne();
+		var questionDoc = QuestionGroupCollection.findOne();
 		if (!questionDoc) {
 			return;
 		}
 
 		Meteor.call('Question.startTimer', {
 			privateKey: localData.getPrivateKey(),
-			hashtag: Session.get("hashtag"),
-			questionIndex: EventManager.findOne().questionIndex + 1
+			hashtag: Router.current().params.quizName,
+			questionIndex: EventManagerCollection.findOne().questionIndex + 1
 		}, (err) => {
 			if (err) {
 				new ErrorSplashscreen({
@@ -132,7 +132,7 @@ Template.liveResults.events({
 				});
 				Session.set("sessionClosed", true);
 			} else {
-				startCountdown(EventManager.findOne().questionIndex + 1);
+				startCountdown(EventManagerCollection.findOne().questionIndex + 1);
 			}
 		});
 	},
@@ -140,14 +140,14 @@ Template.liveResults.events({
 		event.stopPropagation();
 		Session.set("showLeaderBoardId", undefined);
 		Session.set("showGlobalRanking", true);
-		Router.go("/statistics");
+		Router.go("/" + Router.current().params.quizName + "/statistics");
 	},
 	'click #showNextQuestionDialog': (event)=> {
 		event.stopPropagation();
-		Meteor.call("EventManager.showReadConfirmedForIndex", localData.getPrivateKey(), Session.get("hashtag"), EventManager.findOne().questionIndex + 1);
+		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", localData.getPrivateKey(), Router.current().params.quizName, EventManagerCollection.findOne().questionIndex + 1);
 	},
 	"click .btn-more-learners": function () {
-		Session.set("LearnerCount", MemberList.find().count());
+		Session.set("LearnerCount", MemberListCollection.find().count());
 		Session.set("LearnerCountOverride", true);
 	},
 	'click .btn-less-learners': function () {

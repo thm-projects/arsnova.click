@@ -18,33 +18,26 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
-import {EventManager} from '/lib/eventmanager.js';
-import {QuestionGroup} from '/lib/questions.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as lib from './lib.js';
 
 Template.createTimerView.onRendered(function () {
-	lib.createSlider();
-
-	let index;
-	lib.subscriptionHandler = Tracker.autorun(()=> {
-		if (this.subscriptionsReady()) {
-			index = EventManager.findOne().questionIndex;
-			lib.subscriptionHandler.stop();
-			lib.setSlider(index);
-		}
-	});
+	let index = EventManagerCollection.findOne().questionIndex;
+	lib.createSlider(index);
+	lib.setSlider(index);
 	var body = $('body');
 	body.on('click', '.questionIcon:not(.active)', function () {
-		var currentSession = QuestionGroup.findOne();
+		var currentSession = QuestionGroupCollection.findOne();
 		if (!currentSession || index >= currentSession.questionList.length) {
 			return;
 		}
 
 		lib.setTimer(index);
-		Router.go("/question");
+		Router.go("/" + Router.current().params.quizName + "/question");
 	});
 	body.on('click', '.removeQuestion', function () {
-		index = EventManager.findOne().questionIndex;
+		index = EventManagerCollection.findOne().questionIndex;
 	});
 
 	lib.validationTrackerHandle = Tracker.autorun(()=> {

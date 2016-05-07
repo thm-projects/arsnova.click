@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Session} from 'meteor/session';
-import {MemberList} from '/lib/memberlist.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
 
 export let memberlistObserver = null;
 
@@ -25,7 +25,7 @@ export function calculateButtonCount() {
 	 This session variable determines if the user has clicked on the show-more-button. The button count must not
 	 be calculated then. It is set in the event handler of the button and is reset if the user reenters the page
 	 */
-	if (Session.get("LearnerCountOverride")) {
+	if (Session.get("learnerCountOverride")) {
 		return;
 	}
 
@@ -50,7 +50,7 @@ export function calculateButtonCount() {
 	 Multiply the displayed elements by 3 if on widescreen and reduce the max output of buttons by 1 row for the display
 	 more button if necessary. Also make sure there is at least one row of buttons shown even if the user has to scroll
 	 */
-	var allMembers = MemberList.find().count();
+	var allMembers = MemberListCollection.find().count();
 	var limitModifier = (viewport.outerWidth() >= 992) ? 3 : (viewport.outerWidth() >= 768 && viewport.outerWidth() < 992) ? 2 : 1;
 
 	queryLimiter *= limitModifier;
@@ -72,9 +72,9 @@ export function calculateButtonCount() {
 	 This session variable holds the amount of shown buttons and is used in the scripts function
 	 Template.memberlist.scripts.learners which gets the attendees from the mongo db
 	 */
-	Session.set("LearnerCount", queryLimiter);
+	Session.set("learnerCount", queryLimiter);
 }
 
 export function setMemberlistObserver(options) {
-	memberlistObserver = MemberList.find().observeChanges(options);
+	memberlistObserver = MemberListCollection.find().observeChanges(options);
 }

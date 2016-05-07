@@ -23,7 +23,7 @@ import {getAllNicksWhichAreAlwaysRight} from './lib.js';
 
 Template.leaderBoard.helpers({
 	hashtag: ()=> {
-		return Session.get("hashtag");
+		return Router.current().params.quizName;
 	},
 	getNormalizedIndex: (index)=> {
 		return index + 1;
@@ -32,10 +32,10 @@ Template.leaderBoard.helpers({
 		return !isNaN(index);
 	},
 	isOwnNick: (nick) => {
-		return nick === Session.get("nick");
+		return nick === localStorage.getItem(Router.current().params.quizName + "nick");
 	},
 	getTitleText: ()=> {
-		if (typeof Session.get("showLeaderBoardId") !== "undefined") {
+		if (Session.get("showLeaderBoardId") !== "undefined") {
 			return TAPi18n.__("view.leaderboard.title.single_question", {questionId: (Session.get("showLeaderBoardId") + 1)});
 		} else {
 			return TAPi18n.__("view.leaderboard.title.all_questions");
@@ -53,10 +53,10 @@ Template.leaderBoard.helpers({
 		return Session.get("allMembersCount") - Session.get("maxResponseButtons");
 	},
 	hasOverridenDefaultButtonCount: ()=> {
-		return Session.get('responsesCountOverride');
+		return Session.get("responsesCountOverride");
 	},
 	hasTooMuchButtons: ()=> {
-		return Session.get('responsesCountOverride') || (Session.get("allMembersCount") - Session.get("maxResponseButtons") > 0);
+		return Session.get("responsesCountOverride") || (Session.get("allMembersCount") - Session.get("maxResponseButtons") > 0);
 	},
 	isGlobalRanking: function () {
 		return Session.get("showGlobalRanking");

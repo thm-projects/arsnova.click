@@ -190,7 +190,8 @@
     },
     "translation": {
       "translations": "Diese Sprachen sind verfügbar:",
-      "i18n_currently_not_available": "i18n ist aktuell nicht verfügbar!"
+      "i18n_currently_not_available": "i18n ist aktuell nicht verfügbar!",
+      "beta": "Beta"
     },
     "voting": {
       "question": "Frage",
@@ -249,8 +250,7 @@
           "insert_leaderboard_failed": "Fehler beim Hinzufügen der Antwort zur Rangliste",
           "session_closed": "Die Quizrunde wurde beendet"
         }
-      },
-      "question_and_answer": { }
+      }
     }
   }
 }

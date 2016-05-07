@@ -1,21 +1,21 @@
 {
   "global": {
-    "arsnova_slogan": "Quizzes for everyone & anything",
-    "back": "Back",
-    "next": "Next",
-    "delete": "Delete",
-    "save": "Save",
-    "abort": "Abort",
-    "close_window": "Close window"
+    "arsnova_slogan": "Tests para todo el mundo y cualquier cosa",
+    "back": "Espalda",
+    "next": "Siguiente",
+    "delete": "Borrar",
+    "save": "Salvar",
+    "abort": "Abortar",
+    "close_window": "Cerrar ventana"
   },
   "region": {
     "footer": {
       "footer_bar": {
-        "about": "About",
-        "home": "Home",
-        "tos": "ToS",
-        "imprint": "Imprint",
-        "data_privacy": "Data Privacy"
+        "about": "Acerca de",
+        "home": "Casa",
+        "tos": "Términos de servicio",
+        "imprint": "Imprimir",
+        "data_privacy": "Privacidad de datos"
       },
       "about": {
         "title": "About the quiz app",
@@ -110,52 +110,52 @@
       }
     },
     "header": {
-      "new_question": "New question",
-      "sound": "Sound",
-      "reset": "Reset",
-      "yes": "Yes",
+      "new_question": "Nueva pregunta",
+      "sound": "Sonar",
+      "reset": "Reiniciar",
+      "yes": "Sí",
       "no": "No",
       "reset_session_confirmation": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted.<br><br> The created Question(s), including the assigned answer options and timer configurations, will be stored in the local storage of your browser. Except the hashtag-name, all data of this session will be deleted from the server. Do you really want to reset the session?"
     }
   },
   "view": {
     "answeroptions": {
-      "answeroption_or_leave_empty": "Type any answer option or leave it empty"
+      "answeroption_or_leave_empty": "Escriba cualquier opción de respuesta o dejarlo vacío"
     },
     "choose_nickname": {
-      "enter_nickname": "Take a nickname",
-      "enter_nickname_here": "Enter your nickname here",
-      "nickname_na_popup": "This name is not available!",
-      "nickname_blacklist_popup": "This name is (because of its meaning) not available!"
+      "enter_nickname": "Tome un apodo",
+      "enter_nickname_here": "Introduzca su apodo aquí",
+      "nickname_na_popup": "Este nombre no está disponible!",
+      "nickname_blacklist_popup": "Este nombre es (debido a su significado) no disponible!"
     },
     "hashtag_management": {
-      "enter_quiz_name": "Enter the quiz name here",
-      "join_session": "Join now!",
-      "edit_session": "Edit",
-      "reenter_session": "Open",
-      "create_session": "Make a new one!",
-      "quiz_management": "Stored Quizzes",
-      "available_sessions": "These quizzes are stored in your browser:",
-      "session_management": "Quiz Management",
-      "import": "Import quiz"
+      "enter_quiz_name": "Introduzca el nombre del concurso aquí",
+      "join_session": "Únete ahora!",
+      "edit_session": "Editar",
+      "reenter_session": "Abierto",
+      "create_session": "Hacer una nueva!",
+      "quiz_management": "Tests almacenados",
+      "available_sessions": "Estas pruebas se almacenan en el navegador:",
+      "session_management": "Gestión de prueba",
+      "import": "Cuestionario de importación"
     },
     "leaderboard": {
       "title": {
-        "single_question": "Question __questionId__ - Correct answers from...",
-        "all_questions": "Correct answers from..."
+        "single_question": "Pregunta __questionId__ - Las respuestas correctas a partir de...",
+        "all_questions": "Las respuestas correctas a partir de..."
       },
-      "no_attendee_correct": "Unfortunately nobody",
-      "question": "Question",
-      "show_more": "Show 1 more",
-      "show_more_plural": "Show %s more",
-      "show_less": "Show less"
+      "no_attendee_correct": "Desafortunadamente nadie",
+      "question": "Pregunta",
+      "show_more": "Desde el 1 más",
+      "show_more_plural": "Mostrar %s más",
+      "show_less": "Muestra menos"
     },
     "liveResults": {
-      "question": "Question",
-      "ranking": "Ranking",
-      "reading_confirmation": "Reading confirmation",
-      "show_more": "Show 1 more",
-      "show_more_plural": "Show %s more",
+      "question": "Pregunta",
+      "ranking": "Clasificación",
+      "reading_confirmation": "Confirmación de lectura",
+      "show_more": "Desde el 1 más",
+      "show_more_plural": "Mostrar %s más",
       "complete_correct": "Everything correct",
       "complete_wrong": "Everything wrong",
       "back_to_lobby": "Back to the lobby",
@@ -172,83 +172,83 @@
       "yes": "Yes",
       "no": "No",
       "ready": "Ready for quizzing",
-      "show_more": "Show 1 more",
-      "show_more_plural": "Show %s more",
-      "start_quiz": "Let's go!",
-      "kick_member_confirmation": "Shall the attendee '<span id=\"nickName\"></span>' be removed from the session?"
+      "show_more": "Desde el 1 más",
+      "show_more_plural": "Mostrar %s más",
+      "start_quiz": "Vamonos!",
+      "kick_member_confirmation": "Será el asistente '<span id=\"nickName\"></span>' ser retirado de la sesión?"
     },
     "questions": {
-      "enter_question_here": "Enter your question here",
-      "format": "Format",
-      "edit": "Edit",
-      "preview": "Preview"
+      "enter_question_here": "Introduzca su pregunta aquí",
+      "format": "Formato",
+      "edit": "Editar",
+      "preview": "Avance"
     },
     "timer": {
-      "set_countdown": "Set countdown",
-      "second": "Second",
-      "second_plural": "Seconds"
+      "set_countdown": "Ajuste de cuenta atrás",
+      "second": "Segundo",
+      "second_plural": "Segundos"
     },
     "translation": {
-      "translations": "These translations are available:",
-      "i18n_currently_not_available": "I18n is currently not available!",
-      "beta": "Beta"
+      "translations": "Estas traducciones están disponibles:",
+      "i18n_currently_not_available": "I18n actualmente no está disponible!",
+      "beta": "Bêta"
     },
     "voting": {
-      "question": "Question",
-      "send": "Send",
-      "seconds_left": "1 Second left!",
-      "seconds_left_plural": "__value__ Seconds left"
+      "question": "Pregunta",
+      "send": "Enviar",
+      "seconds_left": "1 segundo a la izquierda!",
+      "seconds_left_plural": "__value__ segundos en el reloj"
     }
   },
   "plugins": {
     "markdown_bar": {
-      "visible_text": "Visible text",
-      "link_text": "Link text",
-      "link_destination": "Link target",
+      "visible_text": "Texto visible",
+      "link_text": "Texto del enlace",
+      "link_destination": "Destino del enlace",
       "tooltip": {
-        "info": "Info",
-        "bold": "Bold",
-        "heading": "Headline",
-        "hyperlink": "Hyperlink",
-        "unordered_list": "Unordered list",
-        "ordered_list": "Ordered list",
+        "info": "Información",
+        "bold": "Negrita",
+        "heading": "Titular",
+        "hyperlink": "Hiperenlace",
+        "unordered_list": "Lista desordenada",
+        "ordered_list": "Lista ordenada",
         "latex": "LaTex Markup",
         "code": "Code Markup",
-        "citation": "Citation",
-        "image": "Image",
+        "citation": "Citación",
+        "image": "Imagen",
         "youtube": "YouTube",
         "vimeo": "Vimeo"
       },
       "info_content": "You can use <a target='_blank' class='hyperlink' href='https://en.wikipedia.org/wiki/Markdown'>Markdown</a> markup for your text in ARSnova.click. Frequently used markup options are available via the button bar which is visible on all supported input fields. Additionally ARSnova.click supports <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
     },
     "sound": {
-      "title": "Quiz Music",
-      "volume": "Volume",
-      "inactive": "Sound is inactive",
-      "active": "Sound is active"
+      "title": "Music Quiz",
+      "volume": "Volumen",
+      "inactive": "El sonido es inactiva",
+      "active": "El sonido es activa"
     },
     "splashscreen": {
       "error": {
-        "title": "Notification",
-        "set_text_error": "The text of the error splashscreen can only be set after it has been rendered!",
+        "title": "Notificación",
+        "set_text_error": "El texto de la pantalla de bienvenida de error sólo puede establecerse después de que se ha prestado!",
         "error_messages": {
-          "Internal Server Error": "Internal Server Error",
-          "update_failed": "The update of the question failed.",
-          "session_exists": "This session exists already!",
-          "hashtag_exists": "This hashtag exists already!",
-          "session_not_available": "Session is currently not available for joining",
+          "Internal Server Error": "Error de servidor interno",
+          "update_failed": "El estado de la cuestión no.",
+          "session_exists": "Esta sesión ya existe!",
+          "hashtag_exists": "Este hashtag ya existe!",
+          "session_not_available": "La sesión no está actualmente disponible para unirse",
           "private_browsing": "If you use ARSnova.click in private browsing you can only join a quiz as an attendee. Unfortunately your browser seems to reject any write access to the local storage. Please use ARSnova.click only via a normal browser tab. Your anonymity will be respected even without using the private mode.",
-          "kicked_from_quiz": "You've been kicked from the quiz!",
-          "export_failed": "Could not export! - %s",
-          "not_authorized": "Either there is no quiz or you don't have write access",
-          "maximum_answer_options_exceeded": "Maximum number of possible answer options exceeded",
-          "hashtag_not_found": "No such hashtag with the given key",
-          "member_not_found": "Member not found",
-          "duplicate_response": "User has already given a response",
-          "answeroption_not_found": "There is no answer option with the given answerOptionNumber",
-          "response_timeout": "Response was given out of time range",
-          "insert_leaderboard_failed": "Error while adding response set to leaderboard",
-          "session_closed": "The quiz session has been closed"
+          "kicked_from_quiz": "Usted ha sido expulsado de la prueba!",
+          "export_failed": "No se pudo exportar! - %s",
+          "not_authorized": "O bien no hay prueba o que no tiene acceso de escritura",
+          "maximum_answer_options_exceeded": "El número máximo de posibles opciones de respuesta superó",
+          "hashtag_not_found": "No existe el hashtag con la clave dada",
+          "member_not_found": "Miembro no encontrado",
+          "duplicate_response": "El usuario ya ha dado una respuesta",
+          "answeroption_not_found": "No hay ninguna opción de respuesta con el número de opción respuesta dada",
+          "response_timeout": "La respuesta se da fuera del rango de tiempo",
+          "insert_leaderboard_failed": "Error al añadir la respuesta se establece en la tabla de posiciones",
+          "session_closed": "La sesión se ha cerrado cuestionario"
         }
       }
     }

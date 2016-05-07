@@ -16,6 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
@@ -74,9 +75,9 @@ export function addNewQuestion(callback) {
 
 			localData.addQuestion(Router.current().params.quizName, QuestionGroupCollection.findOne().questionList.length, "");
 
-			var validQuestions = localStorage.getItem(Router.current().params.quizName + "validQuestions");
+			var validQuestions = Session.get("validQuestions");
 			validQuestions[index] = false;
-			localStorage.setItem(Router.current().params.quizName + "validQuestions", validQuestions);
+			Session.set("validQuestions", validQuestions);
 
 			Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, index, function () {
 				Router.go("/" + Router.current().params.quizName + "/question");

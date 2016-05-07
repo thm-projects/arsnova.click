@@ -27,10 +27,8 @@ Template.createQuestionView.onRendered(function () {
 
 	let index;
 	lib.subscriptionHandler = Tracker.autorun(()=> {
-		if (this.subscriptionsReady() && typeof localStorage.getItem(Router.current().params.quizName) !== "undefined") {
-			index = EventManagerCollection.findOne().questionIndex;
-			lib.checkForMarkdown();
-		}
+		index = EventManagerCollection.findOne().questionIndex;
+		lib.checkForMarkdown();
 	});
 	var body = $('body');
 	body.on('click', '.questionIcon:not(.active)', function () {

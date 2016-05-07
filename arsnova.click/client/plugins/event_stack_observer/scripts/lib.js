@@ -32,17 +32,13 @@ export class EventStackObserver {
 			throw new Error("EventManager collection is not ready!");
 		}
 		const observerInstance = this;
-		observerInstance.stackIndex = 0;
 		this.observer = EventManagerCollection.find({hashtag}).observeChanges({
 			changed: function (id, changedFields) {
-				if (changedFields.eventStack) {
+				if (changedFields.eventStack && Router.current().route.getName()) {
 					let index = changedFields.eventStack.length - 1;
-					let currentPath = Router.current().route.getName();
+					let currentPath = Router.current().route.getName().replace(":quizName.", "");
 					if (observerInstance.onChangeCallbacks[currentPath] && observerInstance.onChangeCallbacks[currentPath].length > 0) {
 						let item = changedFields.eventStack[index];
-						if ($.inArray(item.key, observerInstance.ignoreChanges) > -1) {
-							return;
-						}
 						if (observerInstance.verbose) {
 							console.log("EventStackObserver: ", item.key, item.value);
 							console.log(
@@ -50,6 +46,9 @@ export class EventStackObserver {
 								"Number of callbacks: " + observerInstance.onChangeCallbacks[currentPath].length,
 								"callbacks: ",observerInstance.onChangeCallbacks[currentPath]
 							);
+						}
+						if ($.inArray(item.key, observerInstance.ignoreChanges) > -1) {
+							return;
 						}
 						observerInstance.onChangeCallbacks[currentPath].forEach(function (callbackObject) {
 							if ($.inArray(item.key, callbackObject.limiter) > -1) {
@@ -92,7 +91,7 @@ export class EventStackObserver {
 		if (typeof callback !== 'function') {
 			throw new Error("invalid callback!");
 		}
-		let currentPath = Router.current().route.getName();
+		let currentPath = Router.current().route.getName().replace(":quizName.", "");
 		if (!(this.onChangeCallbacks[currentPath] instanceof Array)) {
 			this.onChangeCallbacks[currentPath] = [];
 		}
@@ -108,6 +107,14 @@ export class EventStackObserver {
 				callback
 			});
 		}
+	}
+
+	getAllCallbacks (routeLimiter) {
+		return routeLimiter ? this.onChangeCallbacks[routeLimiter] : this.onChangeCallbacks;
+	}
+
+	getObserver () {
+		return this.observer;
 	}
 }
 

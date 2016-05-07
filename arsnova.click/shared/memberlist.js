@@ -62,10 +62,6 @@ Meteor.methods({
 		});
 	},
 	'MemberListCollection.removeLearner': function (privateKey, hashtag, nickId) {
-		if (Meteor.isClient) {
-			return;
-		}
-
 		new SimpleSchema({
 			hashtag: {type: String},
 			nickId: {type: String}
@@ -74,34 +70,30 @@ Meteor.methods({
 			nickId
 		});
 
-		if (!HashtagsCollection.findOne({
-				privateKey: privateKey,
-				hashtag: hashtag
-			})) {
-			throw new Meteor.Error('MemberListCollection.removeLearner', 'plugins.splashscreen.error.error_messages.not_authorized');
-		}
-
 		let nickName = MemberListCollection.findOne({
 			hashtag: hashtag,
 			_id: nickId
 		}).nick;
 
 		if (nickName) {
+			EventManagerCollection.update({hashtag: hashtag}, {
+				$push: {
+					eventStack: {
+						key: "MemberListCollection.removeLearner",
+						value: {user: nickName}
+					}
+				}
+			});
+
+			if (!HashtagsCollection.findOne({
+					privateKey: privateKey,
+					hashtag: hashtag
+				})) {
+				return;
+			}
 			MemberListCollection.remove({
 				hashtag: hashtag,
 				_id: nickId
-			}, function (err) {
-				if (err) {
-					throw new Meteor.Error('MemberListCollection.removeLearner', 'plugins.splashscreen.error.error_messages.Internal Server Error');
-				}
-				EventManagerCollection.update({hashtag: hashtag}, {
-					$push: {
-						eventStack: {
-							key: "MemberListCollection.removeLearner",
-							value: {user: nickName}
-						}
-					}
-				});
 			});
 		}
 	},

@@ -77,44 +77,6 @@ Credits: https://ihatetomatoes.net/create-custom-preloading-screen/
 	}
   }
 
-  /* Loaded */
-  &.loaded {
-	-webkit-transform: translateY(-100%);
-	-ms-transform: translateY(-100%);
-	transform: translateY(-100%);
-
-	-webkit-transition: all 0.3s 0.6s ease-out;
-	transition: all 0.3s 0.6s ease-out;
-
-	.loader-section.section-left {
-	  -webkit-transform: translateX(-100%);  /* Chrome, Opera 15+, Safari 3.1+ */
-	  -ms-transform: translateX(-100%);  /* IE 9 */
-	  transform: translateX(-100%);  /* Firefox 16+, IE 10+, Opera */
-
-	  -webkit-transition: all 0.3s 0.3s ease-out;
-	  transition: all 0.3s 0.3s ease-out;
-	}
-
-	.loader-section.section-right {
-	  -webkit-transform: translateX(100%);  /* Chrome, Opera 15+, Safari 3.1+ */
-	  -ms-transform: translateX(100%);  /* IE 9 */
-	  transform: translateX(100%);  /* Firefox 16+, IE 10+, Opera */
-
-	  -webkit-transition: all 0.3s 0.3s ease-out;
-	  transition: all 0.3s 0.3s ease-out;
-	}
-
-	#loader {
-	  opacity: 0;
-	  -webkit-transition: all 0.3s ease-out;
-	  transition: all 0.3s ease-out;
-	}
-
-	#loader-wrapper {
-	  visibility: hidden;
-	}
-  }
-
   @-webkit-keyframes spin {
 	0%   {
 	  -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */

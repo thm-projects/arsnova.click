@@ -59,7 +59,7 @@ Template.memberlist.events({
 	},
 	'click #startPolling': function () {
 		$('.sound-button').hide();
-		localStorage.setItem(Router.current().params.quizName + "sessionClosed", false);
+		Session.set("sessionClosed", false);
 		Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, -1);
 		Meteor.call('EventManagerCollection.setSessionStatus', localData.getPrivateKey(), Router.current().params.quizName, 3);
 	}

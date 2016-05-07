@@ -31,26 +31,23 @@ var redirectTracker = null;
 
 Template.questionList.onCreated(function () {
 	Session.set("validQuestions", []);
-	this.subscribe('QuestionGroupCollection.questionList', Router.current().params.quizName);
 	this.subscribe('AnswerOptionCollection.instructor', localData.getPrivateKey(), Router.current().params.quizName);
 
-	this.autorun(() => {
-		if (this.subscriptionsReady()) {
-			if (!QuestionGroupCollection.findOne()) {
-				return;
-			}
+	localData.reenterSession(Router.current().params.quizName);
+	if (!QuestionGroupCollection.findOne()) {
+		return;
+	}
 
-			var questionList = QuestionGroupCollection.findOne().questionList;
-			var validQuestions = Session.get("validQuestions");
-			if (questionList.length >= validQuestions.length) {
-				return;
-			}
 
-			validQuestions.splice(questionList.length - 1, validQuestions.length - questionList.length);
+	var questionList = QuestionGroupCollection.findOne().questionList;
+	var validQuestions = Session.get("validQuestions");
+	if (questionList.length >= validQuestions.length) {
+		return;
+	}
 
-			Session.set("validQuestions", validQuestions);
-		}
-	});
+	validQuestions.splice(questionList.length - 1, validQuestions.length - questionList.length);
+
+	Session.set("validQuestions", validQuestions);
 });
 
 Template.questionList.onDestroyed(function () {

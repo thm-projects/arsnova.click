@@ -35,6 +35,9 @@ Template.memberlist.onCreated(function () {
 	setMemberlistObserver({
 		added: function () {
 			calculateButtonCount();
+		},
+		removed: function () {
+			calculateButtonCount();
 		}
 	});
 
@@ -45,9 +48,6 @@ Template.memberlist.onCreated(function () {
 
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		Meteor.call('ResponsesCollection.clearAll', localData.getPrivateKey(), Router.current().params.quizName);
-	}
-
-	if (localData.containsHashtag(Router.current().params.quizName)) {
 		Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, 0);
 		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", localData.getPrivateKey(), Router.current().params.quizName, -1);
 	}

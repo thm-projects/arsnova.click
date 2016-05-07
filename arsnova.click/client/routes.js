@@ -56,8 +56,16 @@ Router.onBeforeAction(function () {
 			setGlobalEventStackObserver();
 			if (!globalEventStackObserver.isRunning()) {
 				if (!EventManagerCollection.findOne(Router.current().params.quizName)) {
-					Meteor.call('EventManagerCollection.add', localData.getPrivateKey(), Router.current().params.quizName, function () {
-						globalEventStackObserver.startObserving(Router.current().params.quizName);
+					Meteor.call('EventManagerCollection.add', localData.getPrivateKey(), Router.current().params.quizName, function (err) {
+						if (err) {
+							new ErrorSplashscreen({
+								autostart: true,
+								errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+							});
+							Router.go("/" + Router.current().params.quizName + "/resetToHome");
+						} else {
+							globalEventStackObserver.startObserving(Router.current().params.quizName);
+						}
 					});
 				}
 			}

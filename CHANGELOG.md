@@ -16,9 +16,14 @@
 #### Bugfixes
 * Hide informations about right or wrong answers for students until the current turn is finished
 * Fix behaviour of show more- / show less-button in the leaderboard
+<<<<<<< HEAD
+* Improve the JS-hint
+* Resolve issues with the deletion of sessions and the redirect of the attendees.
+=======
 * Improve the JS-hint 
 * Resolve issues with the deletion of sessions and the redirect of the attendees
 * Prevent empty answer options if there is text input for at least one
+>>>>>>> staging
 
 Furthermore, we improved the jshint-rules for a better code quality and refactored the project scaffolding for a better maintainability.
 

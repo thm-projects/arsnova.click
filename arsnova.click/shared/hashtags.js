@@ -17,15 +17,15 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {AnswerOptions} from '/lib/answeroptions.js';
-import {MemberList} from '/lib/memberlist.js';
-import {Responses} from '/lib/responses.js';
-import {QuestionGroup} from '/lib/questions.js';
-import {Hashtags} from '/lib/hashtags.js';
-import {EventManager} from '/lib/eventmanager.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
+import {ResponsesCollection} from '/lib/responses/collection.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
-	'Hashtags.checkPrivateKey': function (privateKey, hashtag) {
+	'HashtagsCollection.checkPrivateKey': function (privateKey, hashtag) {
 		new SimpleSchema({
 			hashtag: {type: String},
 			privateKey: {type: String}
@@ -33,23 +33,30 @@ Meteor.methods({
 			privateKey,
 			hashtag
 		});
-		var doc = Hashtags.findOne({
+		var doc = HashtagsCollection.findOne({
 			hashtag: hashtag,
 			privateKey: privateKey
 		});
 		return Boolean(doc);
 	},
-	'Hashtags.addHashtag': function (doc) {
-		if (Hashtags.find({hashtag: doc.hashtag}).count() > 0) {
-			throw new Meteor.Error('Hashtags.addHashtag', 'plugins.splashscreen.error.error_messages.session_exists');
+	'HashtagsCollection.addHashtag': function (doc) {
+		if (HashtagsCollection.find({hashtag: doc.hashtag}).count() > 0) {
+			throw new Meteor.Error('HashtagsCollection.addHashtag', 'plugins.splashscreen.error.error_messages.session_exists');
 		}
 
-		Hashtags.insert(doc);
-		EventManager.update({hashtag: doc.hashtag}, {$push: {eventStack: {key: "Hashtags.addHashtag", value: {hashtag: doc.hashtag}}}});
+		HashtagsCollection.insert(doc);
+		EventManagerCollection.update({hashtag: doc.hashtag}, {
+			$push: {
+				eventStack: {
+					key: "HashtagsCollection.addHashtag",
+					value: {hashtag: doc.hashtag}
+				}
+			}
+		});
 	},
-	'Hashtags.export': function ({hashtag, privateKey}) {
+	'HashtagsCollection.export': function ({hashtag, privateKey}) {
 		if (Meteor.isServer) {
-			var hashtagDoc = Hashtags.findOne({
+			var hashtagDoc = HashtagsCollection.findOne({
 				hashtag: hashtag,
 				privateKey: privateKey
 			}, {
@@ -59,24 +66,24 @@ Meteor.methods({
 				}
 			});
 			if (!hashtagDoc) {
-				throw new Meteor.Error('Hashtags.export', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
+				throw new Meteor.Error('HashtagsCollection.export', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
 			}
-			var questionGroupDoc = QuestionGroup.findOne({hashtag: hashtag}, {
+			var questionGroupDoc = QuestionGroupCollection.findOne({hashtag: hashtag}, {
 				fields: {
 					_id: 0
 				}
 			});
-			var answerOptionsDoc = AnswerOptions.find({hashtag: hashtag}, {
+			var answerOptionsDoc = AnswerOptionCollection.find({hashtag: hashtag}, {
 				fields: {
 					_id: 0
 				}
 			}).fetch();
-			var memberListDoc = MemberList.find({hashtag: hashtag}, {
+			var memberListDoc = MemberListCollection.find({hashtag: hashtag}, {
 				fields: {
 					_id: 0
 				}
 			}).fetch();
-			var responsesDoc = Responses.find({hashtag: hashtag}, {
+			var responsesDoc = ResponsesCollection.find({hashtag: hashtag}, {
 				fields: {
 					_id: 0
 				}
@@ -91,18 +98,18 @@ Meteor.methods({
 			return JSON.stringify(exportData);
 		}
 	},
-	'Hashtags.import': function ({privateKey, data}) {
+	'HashtagsCollection.import': function ({privateKey, data}) {
 		if (Meteor.isServer) {
 			var hashtag = data.hashtagDoc.hashtag;
-			var oldDoc = Hashtags.findOne({hashtag: hashtag});
+			var oldDoc = HashtagsCollection.findOne({hashtag: hashtag});
 			if (oldDoc) {
-				throw new Meteor.Error('Hashtags.import', 'plugins.splashscreen.error.error_messages.hashtag_exists');
+				throw new Meteor.Error('HashtagsCollection.import', 'plugins.splashscreen.error.error_messages.hashtag_exists');
 			}
 			var questionList = [];
 			var hashtagDoc = data.hashtagDoc;
 			hashtagDoc.privateKey = privateKey;
 			delete hashtagDoc._id;
-			Hashtags.insert(hashtagDoc);
+			HashtagsCollection.insert(hashtagDoc);
 			for (var i = 0; i < data.sessionDoc.length; i++) {
 				var question = data.sessionDoc[i];
 				questionList.push({
@@ -111,7 +118,7 @@ Meteor.methods({
 				});
 				for (var j = 0; j < question.answers.length; j++) {
 					var answer = question.answers[j];
-					AnswerOptions.insert({
+					AnswerOptionCollection.insert({
 						hashtag: hashtag,
 						questionIndex: i,
 						answerText: answer.answerText,
@@ -120,11 +127,18 @@ Meteor.methods({
 					});
 				}
 			}
-			QuestionGroup.insert({
+			QuestionGroupCollection.insert({
 				hashtag: hashtag,
 				questionList: questionList
 			});
-			EventManager.update({hashtag: data.hashtagDoc}, {$push: {eventStack: {key: "Hashtags.import", value: {hashtag: data.hashtagDoc}}}});
+			EventManagerCollection.update({hashtag: data.hashtagDoc}, {
+				$push: {
+					eventStack: {
+						key: "HashtagsCollection.import",
+						value: {hashtag: data.hashtagDoc}
+					}
+				}
+			});
 		}
 	}
 });

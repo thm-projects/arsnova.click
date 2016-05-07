@@ -4,6 +4,7 @@
 
 #### Features
 * i18n
+* Ban filter for nicknames
 
 #### UX
 * Get an instant preview for questions containing latex or markdown in the "edit question"-view.
@@ -13,17 +14,23 @@
 * Fullscreen button and support for Edge / Firefox-browsers (we're working getting it on webkit, too)
 
 #### Bugfixes
-* Hide informations about right or wrong answers for students until the current turn is finished.
+* Hide informations about right or wrong answers for students until the current turn is finished
 * Fix behaviour of show more- / show less-button in the leaderboard
+<<<<<<< HEAD
 * Improve the JS-hint
 * Resolve issues with the deletion of sessions and the redirect of the attendees.
+=======
+* Improve the JS-hint 
+* Resolve issues with the deletion of sessions and the redirect of the attendees
+* Prevent empty answer options if there is text input for at least one
+>>>>>>> staging
 
 Furthermore, we improved the jshint-rules for a better code quality and refactored the project scaffolding for a better maintainability.
 
-This version is brought to you by:
-Project management: Klaus Quibeldey-Cirkel
-Lead programming: Tjark Wilhelm Hoeck, Christopher Fullarton, Tom "tekay" Käsler, Daniel Gerhardt
-Contributions: Nina Isensee, Yannick Lehnhausen
+This version is brought to you by:  
+Project management: Klaus Quibeldey-Cirkel  
+Lead programming: Tjark Wilhelm Hoeck, Christopher Fullarton, Tom "tekay" Käsler, Daniel Gerhardt  
+Contributions: Nina Isensee, Curtis Adam, Tobias Brähler, Adrian Tim Guthmann, Yannick Lehnhausen
 
 
 ## 1.0.0
@@ -40,7 +47,7 @@ First version including the main features:
 * Support for multiple questions
 * Session management in local storage
 
-This version is brought to you by:
-Project management: Klaus Quibeldey-Cirkel
-Lead programming: Tjark Wilhelm Hoeck, Tom "tekay" Käsler, Daniel Gerhardt
+This version is brought to you by:  
+Project management: Klaus Quibeldey-Cirkel  
+Lead programming: Tjark Wilhelm Hoeck, Tom "tekay" Käsler, Daniel Gerhardt  
 Contributions: Christopher Fullarton, Daniel Henkel, Maurice Wallbott, Anton Schwarz, Kevin Weigand, Kevin Linne, Tim Strietzel, Michael Sann, Tobias Viehmann

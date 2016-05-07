@@ -35,12 +35,14 @@
 
 .kickMemberSplashscreen {
   .modal-content {
-	background: $splashscreen-question-and-answer-background-color;
+    color: black;
+	background: $splash-screen-error-message-background-color;
   }
 }
 
 .errorSplashscreen {
   .modal-content {
+    color: black;
 	background: $splash-screen-error-message-background-color;
   }
 }
@@ -49,8 +51,8 @@
  * Splash screen button appearance
  */
 .splash-button-error-message {
-  background-color: grey;
-  border-color: black;
+  color: white;
+  background-color: $success;
 }
 
 /*
@@ -77,12 +79,6 @@
   text-align: left;
   border-radius: $splash-screen-corner-radius;
   box-shadow: none;
-}
-
-.h2-white-fonts {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  color: white;
 }
 
 .modal-list ul {

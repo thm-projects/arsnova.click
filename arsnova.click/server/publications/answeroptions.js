@@ -17,33 +17,33 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {AnswerOptions} from '/lib/answeroptions.js';
-import {Hashtags} from '/lib/hashtags.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
-Meteor.publish('AnswerOptions.instructor', function (pprivateKey, phashtag) {
+Meteor.publish('AnswerOptionCollection.instructor', function (pprivateKey, phashtag) {
 	new SimpleSchema({
 		phashtag: {type: String},
 		pprivateKey: {type: String}
 	}).validate({pprivateKey, phashtag});
-	var doc = Hashtags.find({
+	var doc = HashtagsCollection.find({
 		hashtag: phashtag,
 		privateKey: pprivateKey
 	});
-	return doc ? AnswerOptions.find({hashtag: phashtag}) : false;
+	return doc ? AnswerOptionCollection.find({hashtag: phashtag}) : false;
 });
 
-Meteor.publish('AnswerOptions.options', function (phashtag) {
+Meteor.publish('AnswerOptionCollection.options', function (phashtag) {
 	new SimpleSchema({
 		phashtag: {type: String}
 	}).validate({phashtag});
-	return AnswerOptions.find({hashtag: phashtag});
+	return AnswerOptionCollection.find({hashtag: phashtag});
 });
 
-Meteor.publish('AnswerOptions.public', function (hashtag) {
+Meteor.publish('AnswerOptionCollection.public', function (hashtag) {
 	new SimpleSchema({
 		hashtag: {type: String}
 	}).validate({hashtag});
-	return AnswerOptions.find({hashtag: hashtag}, {
+	return AnswerOptionCollection.find({hashtag: hashtag}, {
 		fields: {
 			isCorrect: 0
 		}

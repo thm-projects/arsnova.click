@@ -18,13 +18,13 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {EventManager} from '/lib/eventmanager.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as localData from '/client/lib/local_storage.js';
 import {calculateButtonCount} from './lib.js';
 
 Template.liveResults.onRendered(()=> {
-	if (Session.get("isOwner") && EventManager.findOne() && EventManager.findOne().readingConfirmationIndex === -1) {
-		Meteor.call("EventManager.showReadConfirmedForIndex", localData.getPrivateKey(), Session.get("hashtag"), 0);
+	if (localData.containsHashtag(Router.current().params.quizName) && EventManagerCollection.findOne() && EventManagerCollection.findOne().readingConfirmationIndex === -1) {
+		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", localData.getPrivateKey(), Router.current().params.quizName, 0);
 	}
 	Session.set("LearnerCountOverride", false);
 	calculateButtonCount();

@@ -40,9 +40,14 @@
 }
 .alignGlyphicon {
 	padding-top: 5px;
-	padding-left: 5px;
-}
+	padding-right: 0px;
+	text-align: center;
+	display: block;
 
+	@media screen and (min-width: 991px) and (max-width: 1100px) {
+		margin-left: -3px;
+	}
+}
 .js-my-hash {
   color: black;
   border-radius: $corner-radius;

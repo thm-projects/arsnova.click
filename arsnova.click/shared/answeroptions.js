@@ -17,12 +17,12 @@
 
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { AnswerOptions } from '/lib/answeroptions.js';
-import { Hashtags } from '/lib/hashtags.js';
-import { EventManager } from '/lib/eventmanager.js';
+import { AnswerOptionCollection } from '/lib/answeroptions/collection.js';
+import { HashtagsCollection } from '/lib/hashtags/collection.js';
+import { EventManagerCollection } from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
-	'AnswerOptions.addOption': function ({privateKey, hashtag, questionIndex, answerText, answerOptionNumber, isCorrect}) {
+	'AnswerOptionCollection.addOption': function ({privateKey, hashtag, questionIndex, answerText, answerOptionNumber, isCorrect}) {
 		new SimpleSchema({
 			privateKey: {type: String},
 			hashtag: {type: String},
@@ -33,38 +33,65 @@ Meteor.methods({
 		}).validate({privateKey, hashtag, questionIndex, answerText, answerOptionNumber, isCorrect});
 		var doc = true;
 		if (Meteor.isServer) {
-			doc = Hashtags.findOne({
+			doc = HashtagsCollection.findOne({
 				hashtag: hashtag,
 				privateKey: privateKey
 			});
 		}
 		if (!doc) {
-			throw new Meteor.Error('AnswerOptions.addOption', 'plugins.splashscreen.error.error_messages.not_authorized');
+			throw new Meteor.Error('AnswerOptionCollection.addOption', 'plugins.splashscreen.error.error_messages.not_authorized');
 		}
-		if (AnswerOptions.find({hashtag: hashtag, questionIndex: questionIndex}).count() > 25) {
-			throw new Meteor.Error('AnswerOptions.addOption', 'plugins.splashscreen.error.error_messages.maximum_answer_options_exceeded');
+		if (AnswerOptionCollection.find({
+				hashtag: hashtag,
+				questionIndex: questionIndex
+			}).count() > 25) {
+			throw new Meteor.Error('AnswerOptionCollection.addOption', 'plugins.splashscreen.error.error_messages.maximum_answer_options_exceeded');
 		}
-		var answerOptionDoc = AnswerOptions.findOne({hashtag: hashtag, questionIndex: questionIndex, answerOptionNumber: answerOptionNumber});
+		var answerOptionDoc = AnswerOptionCollection.findOne({
+			hashtag: hashtag,
+			questionIndex: questionIndex,
+			answerOptionNumber: answerOptionNumber
+		});
 		if (!answerOptionDoc) {
-			AnswerOptions.insert({
+			AnswerOptionCollection.insert({
 				hashtag: hashtag,
 				questionIndex: questionIndex,
 				answerText: answerText,
 				answerOptionNumber: answerOptionNumber,
 				isCorrect: isCorrect
 			});
-			EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "AnswerOptions.addOption", value: {questionIndex: questionIndex, answerOptionNumber: answerOptionNumber}}}});
+			EventManagerCollection.update({hashtag: hashtag}, {
+				$push: {
+					eventStack: {
+						key: "AnswerOptionCollection.addOption",
+						value: {
+							questionIndex: questionIndex,
+							answerOptionNumber: answerOptionNumber
+						}
+					}
+				}
+			});
 		} else {
-			AnswerOptions.update(answerOptionDoc._id, {
+			AnswerOptionCollection.update(answerOptionDoc._id, {
 				$set: {
 					answerText: answerText,
 					isCorrect: isCorrect
 				}
 			});
-			EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "AnswerOptions.updateOption", value: {questionIndex: questionIndex, answerOptionNumber: answerOptionNumber}}}});
+			EventManagerCollection.update({hashtag: hashtag}, {
+				$push: {
+					eventStack: {
+						key: "AnswerOptionCollection.updateOption",
+						value: {
+							questionIndex: questionIndex,
+							answerOptionNumber: answerOptionNumber
+						}
+					}
+				}
+			});
 		}
 	},
-	'AnswerOptions.deleteOption': function ({privateKey, hashtag, questionIndex, answerOptionNumber}) {
+	'AnswerOptionCollection.deleteOption': function ({privateKey, hashtag, questionIndex, answerOptionNumber}) {
 		if (Meteor.isServer) {
 			new SimpleSchema({
 				privateKey: {type: String},
@@ -73,12 +100,12 @@ Meteor.methods({
 				answerOptionNumber: {type: Number}
 			}).validate({privateKey, hashtag, questionIndex, answerOptionNumber});
 
-			var doc = Hashtags.findOne({
+			var doc = HashtagsCollection.findOne({
 				hashtag: hashtag,
 				privateKey: privateKey
 			});
 			if (!doc) {
-				throw new Meteor.Error('AnswerOptions.deleteOption', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('AnswerOptionCollection.deleteOption', 'plugins.splashscreen.error.error_messages.not_authorized');
 			}
 
 			var query = {
@@ -88,19 +115,29 @@ Meteor.methods({
 			};
 			if (answerOptionNumber < 0) {
 				delete query.answerOptionNumber;
-				AnswerOptions.remove(query);
-				AnswerOptions.update(
+				AnswerOptionCollection.remove(query);
+				AnswerOptionCollection.update(
 					{hashtag: hashtag, questionIndex: {$gt: questionIndex}},
 					{$inc: {questionIndex: -1}},
 					{multi: true}
 				);
 			} else {
-				AnswerOptions.remove(query);
+				AnswerOptionCollection.remove(query);
 			}
-			EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "AnswerOptions.deleteOption", value: {questionIndex: questionIndex, answerOptionNumber: answerOptionNumber}}}});
+			EventManagerCollection.update({hashtag: hashtag}, {
+				$push: {
+					eventStack: {
+						key: "AnswerOptionCollection.deleteOption",
+						value: {
+							questionIndex: questionIndex,
+							answerOptionNumber: answerOptionNumber
+						}
+					}
+				}
+			});
 		}
 	},
-	'AnswerOptions.updateAnswerTextAndIsCorrect': function ({privateKey, hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}) {
+	'AnswerOptionCollection.updateAnswerTextAndIsCorrect': function ({privateKey, hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}) {
 		new SimpleSchema({
 			privateKey: {type: String},
 			hashtag: {type: String},
@@ -111,23 +148,33 @@ Meteor.methods({
 		}).validate({privateKey, hashtag, questionIndex, answerOptionNumber, answerText, isCorrect});
 		var doc = true;
 		if (Meteor.isServer) {
-			doc = Hashtags.findOne({
+			doc = HashtagsCollection.findOne({
 				hashtag: hashtag,
 				privateKey: privateKey
 			});
 		}
 		if (!doc) {
-			throw new Meteor.Error('AnswerOptions.updateAnswerTextAndIsCorrect', 'plugins.splashscreen.error.error_messages.not_authorized');
+			throw new Meteor.Error('AnswerOptionCollection.updateAnswerTextAndIsCorrect', 'plugins.splashscreen.error.error_messages.not_authorized');
 		}
-		var answerOptionDoc = AnswerOptions.findOne({
+		var answerOptionDoc = AnswerOptionCollection.findOne({
 			hashtag: hashtag,
 			questionIndex: questionIndex,
 			answerOptionNumber: answerOptionNumber
 		});
-		AnswerOptions.update(answerOptionDoc._id, {
+		AnswerOptionCollection.update(answerOptionDoc._id, {
 			$set: {answerText: answerText, isCorrect: isCorrect}
 		});
-		EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "AnswerOptions.updateAnswerTextAndIsCorrect", value: {questionIndex: questionIndex, answerOptionNumber: answerOptionDoc}}}});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "AnswerOptionCollection.updateAnswerTextAndIsCorrect",
+					value: {
+						questionIndex: questionIndex,
+						answerOptionNumber: answerOptionDoc
+					}
+				}
+			}
+		});
 		return {
 			hashtag, questionIndex, answerOptionNumber, answerText, isCorrect
 		};

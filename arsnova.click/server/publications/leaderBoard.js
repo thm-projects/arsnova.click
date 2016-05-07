@@ -17,13 +17,13 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {LeaderBoard} from '/lib/leaderBoard.js';
+import {LeaderBoardCollection} from '/lib/leader_board/collection.js';
 
-Meteor.publish('LeaderBoard.session', function (phashtag) {
+Meteor.publish('LeaderBoardCollection.session', function (phashtag) {
 	new SimpleSchema({
 		phashtag: {type: String}
 	}).validate({phashtag});
-	return LeaderBoard.find({
+	return LeaderBoardCollection.find({
 		hashtag: phashtag
 	});
 });

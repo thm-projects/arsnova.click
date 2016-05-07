@@ -16,25 +16,25 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {EventManager} from '/lib/eventmanager.js';
-import {AnswerOptions} from '/lib/answeroptions.js';
-import {MemberList} from '/lib/memberlist.js';
-import {Responses} from '/lib/responses.js';
-import {QuestionGroup} from '/lib/questions.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
+import {ResponsesCollection} from '/lib/responses/collection.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
 
 Meteor.setInterval(function () {
 	var sessionDeleteAfterIdleMinutes = 10; //Minutes to session is idle
 	var now = (new Date()).getTime();
 	var sessionDeleteTimeInMilliseconds = (sessionDeleteAfterIdleMinutes * 60 * 1000);
-	EventManager.find({
+	EventManagerCollection.find({
 		lastConnection: {$lt: (now - sessionDeleteTimeInMilliseconds)},
 		sessionStatus: {$ne: 0}
 	}).forEach(function (session) {
 		//Remove Session-Datas
-		AnswerOptions.remove({hashtag: session.hashtag});
-		MemberList.remove({hashtag: session.hashtag});
-		Responses.remove({hashtag: session.hashtag});
-		QuestionGroup.remove({hashtag: session.hashtag});
-		EventManager.remove({hashtag: session.hashtag});
+		AnswerOptionCollection.remove({hashtag: session.hashtag});
+		MemberListCollection.remove({hashtag: session.hashtag});
+		ResponsesCollection.remove({hashtag: session.hashtag});
+		QuestionGroupCollection.remove({hashtag: session.hashtag});
+		EventManagerCollection.remove({hashtag: session.hashtag});
 	});
 }, 300000);

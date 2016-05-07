@@ -18,42 +18,37 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {QuestionGroup} from '/lib/questions.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as localData from '/client/lib/local_storage.js';
 import {calculateButtonCount, setMemberlistObserver} from './lib.js';
 
 Template.memberlist.onCreated(function () {
 	var oldStartTimeValues = {};
 
-	this.subscribe('EventManager.join', Session.get("hashtag"));
-	this.subscribe('MemberList.members', Session.get("hashtag"), function () {
-		$(window).resize(function () {
-			var finalHeight = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
-			$(".container").css("height", finalHeight + "px");
-			Session.set("LearnerCountOverride", false);
+	$(window).resize(function () {
+		var finalHeight = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
+		$(".container").css("height", finalHeight + "px");
+		Session.set("learnerCountOverride", false);
+		calculateButtonCount();
+	});
+
+	setMemberlistObserver({
+		added: function () {
 			calculateButtonCount();
-		});
-
-		setMemberlistObserver({
-			added: function () {
-				calculateButtonCount();
-			}
-		});
-	});
-	this.subscribe('QuestionGroup.memberlist', Session.get("hashtag"), function () {
-		var doc = QuestionGroup.findOne();
-		for (var i = 0; i < doc.questionList.length; i++) {
-			oldStartTimeValues[i] = doc.questionList[i].startTime;
-		}
-	});
-	this.subscribe('Responses.session', Session.get("hashtag"), function () {
-		if (Session.get("isOwner")) {
-			Meteor.call('Responses.clearAll', localData.getPrivateKey(), Session.get("hashtag"));
+		},
+		removed: function () {
+			calculateButtonCount();
 		}
 	});
 
-	if (Session.get("isOwner")) {
-		Meteor.call("EventManager.setActiveQuestion", localData.getPrivateKey(), Session.get("hashtag"), 0);
-		Meteor.call("EventManager.showReadConfirmedForIndex", localData.getPrivateKey(), Session.get("hashtag"), -1);
+	var doc = QuestionGroupCollection.findOne();
+	for (var i = 0; i < doc.questionList.length; i++) {
+		oldStartTimeValues[i] = doc.questionList[i].startTime;
+	}
+
+	if (localData.containsHashtag(Router.current().params.quizName)) {
+		Meteor.call('ResponsesCollection.clearAll', localData.getPrivateKey(), Router.current().params.quizName);
+		Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, 0);
+		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", localData.getPrivateKey(), Router.current().params.quizName, -1);
 	}
 });

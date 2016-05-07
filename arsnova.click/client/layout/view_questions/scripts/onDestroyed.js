@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import * as lib from './lib.js';
 
@@ -22,5 +23,8 @@ Template.createQuestionView.onDestroyed(function () {
 	var body = $('body');
 	body.off('click', '.questionIcon:not(.active)');
 	body.off('click', '.removeQuestion');
-	lib.subscriptionHandler.stop();
+	if (lib.subscriptionHandler) {
+		lib.subscriptionHandler.stop();
+	}
+	delete Session.keys.overrideValidQuestionRedirect;
 });

@@ -17,12 +17,11 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
-import {AnswerOptions} from '/lib/answeroptions.js';
-import {QuestionGroup} from '/lib/questions.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as localData from '/client/lib/local_storage.js';
 
 export let validationTrackerHandle = null;
-export let subscriptionHandler = null;
 
 export function setTimer(index) {
 	var hasError = false;
@@ -31,14 +30,14 @@ export function setTimer(index) {
 	if (!isNaN(timer)) {
 		Meteor.call("Question.setTimer", {
 			privateKey: localData.getPrivateKey(),
-			hashtag: Session.get("hashtag"),
+			hashtag: Router.current().params.quizName,
 			questionIndex: index,
 			timer: timer
 		}, (err) => {
 			if (err) {
 				hasError = err;
 			} else {
-				localData.addTimer(Session.get("hashtag"), index, timer);
+				localData.addTimer(Router.current().params.quizName, index, timer);
 			}
 		});
 	} else {
@@ -50,27 +49,27 @@ export function setTimer(index) {
 }
 
 export function createSlider(index) {
-	if (Session.get("slider") === undefined) {
+	if (typeof QuestionGroupCollection.findOne() === "undefined") {
 		setTimeout(createSlider, 50);
 		return;
 	}
-	if (Session.get("slider") === 0) {
-		Session.set("slider", AnswerOptions.find({questionIndex: index}).count() * 10);
+	if (QuestionGroupCollection.findOne().questionList[index].timer === 0) {
+		Session.set("slider", AnswerOptionCollection.find({questionIndex: index}).count() * 10);
 	}
 	$("#slider").noUiSlider({
-		start: Session.get("slider"),
+		start: QuestionGroupCollection.findOne().questionList[index].timer / 1000,
 		range: {
 			'min': 6,
 			'max': 260
 		}
 	}).on('slide', function (ev, val) {
-		Session.set('slider', Math.round(val));
+		Session.set("slider", Math.round(val));
 	}).on('change', function (ev, val) {
-		Session.set('slider', Math.round(val));
+		Session.set("slider", Math.round(val));
 	});
 }
 
 export function setSlider(index) {
-	Session.set('slider', (QuestionGroup.findOne().questionList[index].timer / 1000));
-	$("#slider").val((QuestionGroup.findOne().questionList[index].timer / 1000));
+	Session.set("slider", (QuestionGroupCollection.findOne().questionList[index].timer / 1000));
+	$("#slider").val((QuestionGroupCollection.findOne().questionList[index].timer / 1000));
 }

@@ -17,10 +17,10 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {QuestionGroup} from '/lib/questions.js';
-import {Hashtags} from '/lib/hashtags.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
-Meteor.publish('QuestionGroup.authorizeAsOwner', function (pprivateKey, phashtag) {
+Meteor.publish('QuestionGroupCollection.authorizeAsOwner', function (pprivateKey, phashtag) {
 	new SimpleSchema({
 		phashtag: {type: String},
 		pprivateKey: {type: String}
@@ -28,27 +28,27 @@ Meteor.publish('QuestionGroup.authorizeAsOwner', function (pprivateKey, phashtag
 		pprivateKey,
 		phashtag
 	});
-	var isOwner = Hashtags.find({
+	var isOwner = HashtagsCollection.find({
 		hashtag: phashtag,
 		privateKey: pprivateKey
 	}).count();
-	return isOwner > 0 ? QuestionGroup.find({hashtag: phashtag}) : null;
+	return isOwner > 0 ? QuestionGroupCollection.find({hashtag: phashtag}) : null;
 });
 
-Meteor.publish('QuestionGroup.questionList', function (phashtag) {
+Meteor.publish('QuestionGroupCollection.questionList', function (phashtag) {
 	new SimpleSchema({
 		phashtag: {type: String}
 	}).validate({phashtag});
-	return QuestionGroup.find({hashtag: phashtag}, {
+	return QuestionGroupCollection.find({hashtag: phashtag}, {
 		fields: {
 			questionList: 1
 		}
 	});
 });
 
-Meteor.publish('QuestionGroup.memberlist', function (phashtag) {
+Meteor.publish('QuestionGroupCollection.memberlist', function (phashtag) {
 	new SimpleSchema({
 		phashtag: {type: String}
 	}).validate({phashtag});
-	return QuestionGroup.find({hashtag: phashtag});
+	return QuestionGroupCollection.find({hashtag: phashtag});
 });

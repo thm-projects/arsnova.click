@@ -16,17 +16,17 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {EventManager} from '/lib/eventmanager.js';
-import {AnswerOptions} from '/lib/answeroptions.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 
 Template.createAnswerOptions.helpers({
 	answerOptions: function () {
-		return AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}, {sort: {answerOptionNumber: 1}});
+		return AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}, {sort: {answerOptionNumber: 1}});
 	},
 	answerOptionLetter: function (Nr) {
 		return String.fromCharCode(Nr + 65);
 	},
 	showDeleteButtonOnStart: function () {
-		return (AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count() === 1) ? "hide" : "";
+		return (AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).count() === 1) ? "hide" : "";
 	}
 });

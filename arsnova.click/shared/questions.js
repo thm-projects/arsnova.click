@@ -17,60 +17,67 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {AnswerOptions} from '/lib/answeroptions.js';
-import {QuestionGroup, QuestionGroupSchema} from '/lib/questions.js';
-import {Hashtags} from '/lib/hashtags.js';
-import {EventManager} from '/lib/eventmanager.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
+import {QuestionGroupCollection, QuestionGroupSchema} from '/lib/questions/collection.js';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
-	"QuestionGroup.insert": function ({privateKey, hashtag, questionList}) {
+	"QuestionGroupCollection.insert": function ({privateKey, hashtag, questionList}) {
 		if (Meteor.isServer) {
 			QuestionGroupSchema.validate({
 				hashtag: hashtag,
 				questionList: questionList
 			});
 
-			var hashtagDoc = Hashtags.findOne({
+			var hashtagDoc = HashtagsCollection.findOne({
 				hashtag: hashtag,
 				privateKey: privateKey
 			});
 			if (!hashtagDoc) {
-				throw new Meteor.Error('QuestionGroup.insert', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('QuestionGroupCollection.insert', 'plugins.splashscreen.error.error_messages.not_authorized');
 			}
 
-			if (QuestionGroup.find({hashtag: hashtag}).count() > 0) {
-				QuestionGroup.update({hashtag: hashtag}, {$set: {questionList: questionList}});
+			if (QuestionGroupCollection.find({hashtag: hashtag}).count() > 0) {
+				QuestionGroupCollection.update({hashtag: hashtag}, {$set: {questionList: questionList}});
 			} else {
-				QuestionGroup.insert({
+				QuestionGroupCollection.insert({
 					hashtag: hashtag,
 					questionList: questionList
 				});
 			}
-			EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "QuestionGroup.insert", value: {}}}});
+			EventManagerCollection.update({hashtag: hashtag}, {
+				$push: {
+					eventStack: {
+						key: "QuestionGroupCollection.insert",
+						value: {}
+					}
+				}
+			});
 		}
 	},
-	"QuestionGroup.addQuestion": function ({privateKey, hashtag, questionIndex, questionText}) {
+	"QuestionGroupCollection.addQuestion": function ({privateKey, hashtag, questionIndex, questionText}) {
 		if (Meteor.isServer) {
 			new SimpleSchema({
 				questionText: {type: String},
 				questionIndex: {type: Number}
 			}).validate({questionIndex: questionIndex, questionText: questionText});
 
-			var hashtagDoc = Hashtags.findOne({
+			var hashtagDoc = HashtagsCollection.findOne({
 				hashtag: hashtag,
 				privateKey: privateKey
 			});
 			if (!hashtagDoc) {
-				throw new Meteor.Error('QuestionGroup.addQuestion', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('QuestionGroupCollection.addQuestion', 'plugins.splashscreen.error.error_messages.not_authorized');
 			}
-			var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
+			var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
 			var questionItem = {
 				questionText: questionText,
 				timer: 40000,
 				isReadingConfirmationRequired: 1
 			};
 			if (!questionGroup) {
-				QuestionGroup.insert({
+				QuestionGroupCollection.insert({
 					hashtag: hashtag,
 					questionList: [questionItem]
 				});
@@ -80,30 +87,48 @@ Meteor.methods({
 				} else {
 					questionGroup.questionList.push(questionItem);
 				}
-				QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
+				QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
 			}
-			EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "QuestionGroup.addQuestion", value: {questionIndex: questionIndex}}}});
+			EventManagerCollection.update({hashtag: hashtag}, {
+				$push: {
+					eventStack: {
+						key: "QuestionGroupCollection.addQuestion",
+						value: {questionIndex: questionIndex}
+					}
+				}
+			});
 		}
 	},
-	"QuestionGroup.removeQuestion": function ({privateKey, hashtag, questionIndex}) {
+	"QuestionGroupCollection.removeQuestion": function ({privateKey, hashtag, questionIndex}) {
 		if (Meteor.isServer) {
-			var hashtagDoc = Hashtags.findOne({
+			var hashtagDoc = HashtagsCollection.findOne({
 				hashtag: hashtag,
 				privateKey: privateKey
 			});
 			if (!hashtagDoc) {
-				throw new Meteor.Error('QuestionGroup.removeQuestion', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('QuestionGroupCollection.removeQuestion', 'plugins.splashscreen.error.error_messages.not_authorized');
 			}
-			var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
+			var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
 			if (questionGroup) {
 				questionGroup.questionList.splice(questionIndex, 1);
-				QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
+				QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
 			}
-			EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "QuestionGroup.addQuestion", value: {questionIndex: questionIndex}}}});
+			EventManagerCollection.update({hashtag: hashtag}, {
+				$push: {
+					eventStack: {
+						key: "QuestionGroupCollection.addQuestion",
+						value: {questionIndex: questionIndex}
+					}
+				}
+			});
 		}
 	},
 	"Question.isSC": function ({hashtag, questionIndex}) {
-		return (AnswerOptions.find({hashtag: hashtag, questionIndex: questionIndex, isCorrect: 1}).count() === 1);
+		return (AnswerOptionCollection.find({
+			hashtag: hashtag,
+			questionIndex: questionIndex,
+			isCorrect: 1
+		}).count() === 1);
 	},
 	"Question.updateIsReadConfirmationRequired": function ({privateKey, hashtag, questionIndex, isReadingConfirmationRequired}) {
 		if (Meteor.isServer) {
@@ -115,7 +140,7 @@ Meteor.methods({
 				}
 			}).validate({isReadingConfirmationRequired: isReadingConfirmationRequired});
 
-			var hashtagDoc = Hashtags.findOne({
+			var hashtagDoc = HashtagsCollection.findOne({
 				hashtag: hashtag,
 				privateKey: privateKey
 			});
@@ -123,14 +148,21 @@ Meteor.methods({
 				throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'plugins.splashscreen.error.error_messages.not_authorized');
 			}
 
-			var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
+			var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
 			if (!questionGroup) {
 				throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
 			} else {
 				questionGroup.questionList[questionIndex].isReadingConfirmationRequired = isReadingConfirmationRequired;
-				QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
+				QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
 			}
-			EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "QuestionGroup.updateIsReadConfirmationRequired", value: {questionIndex: questionIndex}}}});
+			EventManagerCollection.update({hashtag: hashtag}, {
+				$push: {
+					eventStack: {
+						key: "QuestionGroupCollection.updateIsReadConfirmationRequired",
+						value: {questionIndex: questionIndex}
+					}
+				}
+			});
 		}
 	},
 	"Question.setTimer": function ({privateKey, hashtag, questionIndex, timer}) {
@@ -142,7 +174,7 @@ Meteor.methods({
 				}
 			}).validate({timer: timer});
 
-			var hashtagDoc = Hashtags.findOne({
+			var hashtagDoc = HashtagsCollection.findOne({
 				hashtag: hashtag,
 				privateKey: privateKey
 			});
@@ -150,13 +182,23 @@ Meteor.methods({
 				throw new Meteor.Error('Question.setTimer', 'plugins.splashscreen.error.error_messages.not_authorized');
 			}
 
-			var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
+			var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
 			if (!questionGroup) {
 				throw new Meteor.Error('Question.setTimer', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
 			} else {
 				questionGroup.questionList[questionIndex].timer = timer;
-				QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
-				EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "QuestionGroup.setTimer", value: {questionIndex: questionIndex, timer: timer}}}});
+				QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
+				EventManagerCollection.update({hashtag: hashtag}, {
+					$push: {
+						eventStack: {
+							key: "QuestionGroupCollection.setTimer",
+							value: {
+								questionIndex: questionIndex,
+								timer: timer
+							}
+						}
+					}
+				});
 			}
 		}
 	},
@@ -164,20 +206,27 @@ Meteor.methods({
 		if (Meteor.isServer) {
 			var startTime = new Date();
 
-			var hashtagDoc = Hashtags.findOne({
+			var hashtagDoc = HashtagsCollection.findOne({
 				hashtag: hashtag,
 				privateKey: privateKey
 			});
 			if (!hashtagDoc) {
 				throw new Meteor.Error('Question.startTimer', 'plugins.splashscreen.error.error_messages.not_authorized');
 			}
-			var questionGroup = QuestionGroup.findOne({hashtag: hashtag});
+			var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
 			if (!questionGroup) {
 				throw new Meteor.Error('Question.startTimer', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
 			} else {
 				questionGroup.questionList[questionIndex].startTime = startTime.getTime();
-				QuestionGroup.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
-				EventManager.update({hashtag: hashtag}, {$push: {eventStack: {key: "QuestionGroup.setTimer", value: {questionIndex: questionIndex}}}});
+				QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
+				EventManagerCollection.update({hashtag: hashtag}, {
+					$push: {
+						eventStack: {
+							key: "QuestionGroupCollection.setTimer",
+							value: {questionIndex: questionIndex}
+						}
+					}
+				});
 			}
 		}
 	}

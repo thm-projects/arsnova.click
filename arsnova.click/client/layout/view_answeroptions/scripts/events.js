@@ -16,11 +16,10 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {EventManager} from '/lib/eventmanager.js';
-import {AnswerOptions} from '/lib/answeroptions.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import * as localData from '/client/lib/local_storage.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {parseAnswerOptionInput} from './lib.js';
@@ -38,18 +37,18 @@ Template.createAnswerOptions.events({
 		}
 	},
 	"click #addAnswerOption": function () {
-		var answerOptionsCount = AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count();
+		var answerOptionsCount = AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).count();
 		if (answerOptionsCount < 26) {
 			const answerOption = {
 				privateKey: localData.getPrivateKey(),
-				hashtag: Session.get("hashtag"),
-				questionIndex: EventManager.findOne().questionIndex,
+				hashtag: Router.current().params.quizName,
+				questionIndex: EventManagerCollection.findOne().questionIndex,
 				answerText: "",
 				answerOptionNumber: answerOptionsCount,
 				isCorrect: 0
 			};
 
-			Meteor.call('AnswerOptions.addOption', answerOption, (err) => {
+			Meteor.call('AnswerOptionCollection.addOption', answerOption, (err) => {
 				if (err) {
 					$('.errorMessageSplash').parents('.modal').modal('show');
 					$("#errorMessage-text").html(err.reason);
@@ -69,17 +68,17 @@ Template.createAnswerOptions.events({
 		}
 	},
 	"click #deleteAnswerOption": function () {
-		var answerOptionsCount = AnswerOptions.find({questionIndex: EventManager.findOne().questionIndex}).count();
+		var answerOptionsCount = AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).count();
 		if (answerOptionsCount > 1) {
 			$("#addAnswerOption").removeClass("hide");
 
-			Meteor.call('AnswerOptions.deleteOption', {
+			Meteor.call('AnswerOptionCollection.deleteOption', {
 				privateKey: localData.getPrivateKey(),
-				hashtag: Session.get("hashtag"),
-				questionIndex: EventManager.findOne().questionIndex,
+				hashtag: Router.current().params.quizName,
+				questionIndex: EventManagerCollection.findOne().questionIndex,
 				answerOptionNumber: answerOptionsCount - 1
 			});
-			localData.deleteAnswerOption(Session.get("hashtag"), EventManager.findOne().questionIndex, answerOptionsCount - 1);
+			localData.deleteAnswerOption(Router.current().params.quizName, EventManagerCollection.findOne().questionIndex, answerOptionsCount - 1);
 
 			answerOptionsCount--;
 			if (answerOptionsCount === 1) {
@@ -90,10 +89,10 @@ Template.createAnswerOptions.events({
 		}
 	},
 	"click #backButton": function () {
-		Router.go('/question');
+		Router.go("/" + Router.current().params.quizName + "/question");
 	},
 	"click #forwardButton": function () {
-		var err = parseAnswerOptionInput(EventManager.findOne().questionIndex);
+		var err = parseAnswerOptionInput(EventManagerCollection.findOne().questionIndex);
 
 		if (err) {
 			new ErrorSplashscreen({
@@ -101,7 +100,7 @@ Template.createAnswerOptions.events({
 				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
 			});
 		} else {
-			Router.go("/settimer");
+			Router.go("/" + Router.current().params.quizName + "/settimer");
 		}
 	},
 	"keydown .input-field": function (event) {

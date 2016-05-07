@@ -17,21 +17,18 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {EventManager} from '/lib/eventmanager.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
-Meteor.publish('EventManager.join', (hashtag)=> {
+Meteor.publish('EventManagerCollection.join', (hashtag)=> {
 	if (typeof hashtag === "undefined") {
 		return false;
 	}
-	if (Meteor.isServer) {
-		new SimpleSchema({
-			hashtag: {
-				type: String,
-				min: 1,
-				max: 25
-			}
-		}).validate({hashtag: hashtag});
-		return EventManager.find({hashtag: hashtag});
-	}
-	return false;
+	new SimpleSchema({
+		hashtag: {
+			type: String,
+			min: 1,
+			max: 25
+		}
+	}).validate({hashtag: hashtag});
+	return EventManagerCollection.find({hashtag: hashtag});
 });

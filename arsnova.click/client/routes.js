@@ -191,6 +191,7 @@ Router.route('/:quizName/question', {
 
 	waitOn: function () {
 		return [
+			Meteor.subscribe('AnswerOptionCollection.instructor', localData.getPrivateKey(), Router.current().params.quizName),
 			Meteor.subscribe('QuestionGroupCollection.authorizeAsOwner', localData.getPrivateKey(), Router.current().params.quizName)
 		];
 	},
@@ -208,7 +209,8 @@ Router.route('/:quizName/question', {
 Router.route('/:quizName/answeroptions', {
 	waitOn: function () {
 		return [
-			Meteor.subscribe('AnswerOptionCollection.instructor', localData.getPrivateKey(), Router.current().params.quizName)
+			Meteor.subscribe('AnswerOptionCollection.instructor', localData.getPrivateKey(), Router.current().params.quizName),
+			Meteor.subscribe('QuestionGroupCollection.authorizeAsOwner', localData.getPrivateKey(), Router.current().params.quizName)
 		];
 	},
 	action: function () {

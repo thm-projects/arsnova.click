@@ -32,6 +32,10 @@ export function checkForValidQuestions(index) {
 
 	var question = questionDoc.questionList[index];
 
+	if (typeof question === "undefined") {
+		return false;
+	}
+
 	if (!question.questionText || question.questionText.length < 5 || question.questionText.length > 10000) {
 		return false;
 	}

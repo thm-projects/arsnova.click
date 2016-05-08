@@ -34,17 +34,17 @@ Meteor.methods({
 				userNick: responseDoc.userNick
 			});
 			if (dupDoc) {
-				throw new Meteor.Error('ResponsesCollection.addResponse', 'plugins.splashscreen.error.error_messages.duplicate_response');
+				throw new Meteor.Error('ResponsesCollection.addResponse', 'duplicate_response');
 			}
 			var hashtagDoc = HashtagsCollection.findOne({
 				hashtag: hashtag
 			});
 			if (!hashtagDoc) {
-				throw new Meteor.Error('ResponsesCollection.addResponse', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('ResponsesCollection.addResponse', 'not_authorized');
 			} else {
 				var questionGroupDoc = QuestionGroupCollection.findOne({hashtag: responseDoc.hashtag});
 				if (!questionGroupDoc) {
-					throw new Meteor.Error('ResponsesCollection.addResponse', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
+					throw new Meteor.Error('ResponsesCollection.addResponse', 'hashtag_not_found');
 				}
 				var responseTime = Number(timestamp) - Number(questionGroupDoc.questionList[responseDoc.questionIndex].startTime);
 
@@ -56,7 +56,7 @@ Meteor.methods({
 						answerOptionNumber: responseDoc.answerOptionNumber
 					});
 					if (!answerOptionDoc) {
-						throw new Meteor.Error('ResponsesCollection.addResponse', 'plugins.splashscreen.error.error_messages.answeroption_not_found');
+						throw new Meteor.Error('ResponsesCollection.addResponse', 'answeroption_not_found');
 					}
 
 					ResponsesCollection.insert(responseDoc);
@@ -68,11 +68,11 @@ Meteor.methods({
 						responseTimeMillis: responseDoc.responseTime
 					}, (err) => {
 						if (err) {
-							throw new Meteor.Error('ResponsesCollection.addResponse', 'plugins.splashscreen.error.error_messages.insert_leaderboard_failed');
+							throw new Meteor.Error('ResponsesCollection.addResponse', 'insert_leaderboard_failed');
 						}
 					});
 				} else {
-					throw new Meteor.Error('ResponsesCollection.addResponse', 'plugins.splashscreen.error.error_messages.response_timeout');
+					throw new Meteor.Error('ResponsesCollection.addResponse', 'response_timeout');
 				}
 				EventManagerCollection.update({hashtag: hashtag}, {
 					$push: {
@@ -96,7 +96,7 @@ Meteor.methods({
 				privateKey: privateKey
 			});
 			if (!hashtagDoc) {
-				throw new Meteor.Error('ResponsesCollection.clearAll', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('ResponsesCollection.clearAll', 'not_authorized');
 			}
 
 			ResponsesCollection.remove({hashtag: hashtag});

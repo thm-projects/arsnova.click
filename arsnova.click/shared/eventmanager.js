@@ -40,7 +40,7 @@ Meteor.methods({
 				hashtag: hashtag,
 				privateKey: privateKey
 			})) {
-			throw new Meteor.Error('EventManagerCollection.setSessionStatus', 'plugins.splashscreen.error.error_messages.not_authorized');
+			throw new Meteor.Error('EventManagerCollection.setSessionStatus', 'not_authorized');
 		}
 
 		EventManagerCollection.update({hashtag: hashtag}, {
@@ -72,7 +72,7 @@ Meteor.methods({
 				hashtag: hashtag,
 				privateKey: privateKey
 			})) {
-			throw new Meteor.Error('EventManagerCollection.showReadConfirmedForIndex', 'plugins.splashscreen.error.error_messages.not_authorized');
+			throw new Meteor.Error('EventManagerCollection.showReadConfirmedForIndex', 'not_authorized');
 		}
 
 		EventManagerCollection.update({hashtag: hashtag}, {
@@ -104,7 +104,7 @@ Meteor.methods({
 				hashtag: hashtag,
 				privateKey: privateKey
 			})) {
-			throw new Meteor.Error('EventManagerCollection.setActiveQuestion', 'plugins.splashscreen.error.error_messages.not_authorized');
+			throw new Meteor.Error('EventManagerCollection.setActiveQuestion', 'not_authorized');
 		}
 
 		EventManagerCollection.update({hashtag: hashtag}, {
@@ -140,7 +140,7 @@ Meteor.methods({
 				hashtag: hashtag,
 				privateKey: privateKey
 			})) {
-			throw new Meteor.Error('EventManagerCollection.clear', 'plugins.splashscreen.error.error_messages.not_authorized');
+			throw new Meteor.Error('EventManagerCollection.clear', 'not_authorized');
 		}
 
 		EventManagerCollection.remove({hashtag: hashtag});
@@ -162,7 +162,7 @@ Meteor.methods({
 				hashtag: hashtag,
 				privateKey: privateKey
 			})) {
-			throw new Meteor.Error('EventManagerCollection.reset', 'plugins.splashscreen.error.error_messages.not_authorized');
+			throw new Meteor.Error('EventManagerCollection.reset', 'not_authorized');
 		}
 
 		EventManagerCollection.update({hashtag: hashtag}, {
@@ -200,11 +200,11 @@ Meteor.methods({
 				hashtag: hashtag,
 				privateKey: privateKey
 			})) {
-			throw new Meteor.Error('EventManagerCollection.add', 'plugins.splashscreen.error.error_messages.not_authorized');
+			throw new Meteor.Error('EventManagerCollection.add', 'not_authorized');
 		}
 
 		if (EventManagerCollection.findOne({hashtag: hashtag})) {
-			throw new Meteor.Error('EventManagerCollection.add', 'plugins.splashscreen.error.error_messages.hashtag_exists');
+			throw new Meteor.Error('EventManagerCollection.add', 'hashtag_exists');
 		}
 		EventManagerCollection.insert({
 			hashtag: hashtag,

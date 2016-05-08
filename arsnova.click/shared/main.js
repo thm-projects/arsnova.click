@@ -55,7 +55,7 @@ Meteor.methods({
 				privateKey: privateKey
 			});
 			if (typeof hashtagDoc === "undefined") {
-				throw new Meteor.Error('Main.deleteEverything', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('Main.deleteEverything', 'not_authorized');
 			}
 			HashtagsCollection.remove({hashtag: hashtag});
 			AnswerOptionCollection.remove({hashtag: hashtag});

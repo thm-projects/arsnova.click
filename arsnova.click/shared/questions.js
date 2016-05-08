@@ -35,7 +35,7 @@ Meteor.methods({
 				privateKey: privateKey
 			});
 			if (!hashtagDoc) {
-				throw new Meteor.Error('QuestionGroupCollection.insert', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('QuestionGroupCollection.insert', 'not_authorized');
 			}
 
 			if (QuestionGroupCollection.find({hashtag: hashtag}).count() > 0) {
@@ -68,7 +68,7 @@ Meteor.methods({
 				privateKey: privateKey
 			});
 			if (!hashtagDoc) {
-				throw new Meteor.Error('QuestionGroupCollection.addQuestion', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('QuestionGroupCollection.addQuestion', 'not_authorized');
 			}
 			var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
 			var questionItem = {
@@ -106,7 +106,7 @@ Meteor.methods({
 				privateKey: privateKey
 			});
 			if (!hashtagDoc) {
-				throw new Meteor.Error('QuestionGroupCollection.removeQuestion', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('QuestionGroupCollection.removeQuestion', 'not_authorized');
 			}
 			var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
 			if (questionGroup) {
@@ -145,12 +145,12 @@ Meteor.methods({
 				privateKey: privateKey
 			});
 			if (!hashtagDoc) {
-				throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'not_authorized');
 			}
 
 			var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
 			if (!questionGroup) {
-				throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
+				throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'hashtag_not_found');
 			} else {
 				questionGroup.questionList[questionIndex].isReadingConfirmationRequired = isReadingConfirmationRequired;
 				QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
@@ -179,12 +179,12 @@ Meteor.methods({
 				privateKey: privateKey
 			});
 			if (!hashtagDoc) {
-				throw new Meteor.Error('Question.setTimer', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('Question.setTimer', 'not_authorized');
 			}
 
 			var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
 			if (!questionGroup) {
-				throw new Meteor.Error('Question.setTimer', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
+				throw new Meteor.Error('Question.setTimer', 'hashtag_not_found');
 			} else {
 				questionGroup.questionList[questionIndex].timer = timer;
 				QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
@@ -211,11 +211,11 @@ Meteor.methods({
 				privateKey: privateKey
 			});
 			if (!hashtagDoc) {
-				throw new Meteor.Error('Question.startTimer', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('Question.startTimer', 'not_authorized');
 			}
 			var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
 			if (!questionGroup) {
-				throw new Meteor.Error('Question.startTimer', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
+				throw new Meteor.Error('Question.startTimer', 'hashtag_not_found');
 			} else {
 				questionGroup.questionList[questionIndex].startTime = startTime.getTime();
 				QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});

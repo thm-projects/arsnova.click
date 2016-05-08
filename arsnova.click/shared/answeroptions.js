@@ -39,13 +39,13 @@ Meteor.methods({
 			});
 		}
 		if (!doc) {
-			throw new Meteor.Error('AnswerOptionCollection.addOption', 'plugins.splashscreen.error.error_messages.not_authorized');
+			throw new Meteor.Error('AnswerOptionCollection.addOption', 'not_authorized');
 		}
 		if (AnswerOptionCollection.find({
 				hashtag: hashtag,
 				questionIndex: questionIndex
 			}).count() > 25) {
-			throw new Meteor.Error('AnswerOptionCollection.addOption', 'plugins.splashscreen.error.error_messages.maximum_answer_options_exceeded');
+			throw new Meteor.Error('AnswerOptionCollection.addOption', 'maximum_answer_options_exceeded');
 		}
 		var answerOptionDoc = AnswerOptionCollection.findOne({
 			hashtag: hashtag,
@@ -105,7 +105,7 @@ Meteor.methods({
 				privateKey: privateKey
 			});
 			if (!doc) {
-				throw new Meteor.Error('AnswerOptionCollection.deleteOption', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('AnswerOptionCollection.deleteOption', 'not_authorized');
 			}
 
 			var query = {
@@ -154,7 +154,7 @@ Meteor.methods({
 			});
 		}
 		if (!doc) {
-			throw new Meteor.Error('AnswerOptionCollection.updateAnswerTextAndIsCorrect', 'plugins.splashscreen.error.error_messages.not_authorized');
+			throw new Meteor.Error('AnswerOptionCollection.updateAnswerTextAndIsCorrect', 'not_authorized');
 		}
 		var answerOptionDoc = AnswerOptionCollection.findOne({
 			hashtag: hashtag,

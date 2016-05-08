@@ -41,7 +41,7 @@ Meteor.methods({
 			throw new Meteor.Error('MemberListCollection.addLearner', 'Nick already exists!');
 		}
 		if (EventManagerCollection.findOne({hashtag: hashtag}).sessionStatus !== 2) {
-			throw new Meteor.Error('MemberListCollection.addLearner', 'plugins.splashscreen.error.error_messages.session_not_available');
+			throw new Meteor.Error('MemberListCollection.addLearner', 'session_not_available');
 		}
 		MemberListCollection.insert({
 			hashtag: hashtag,
@@ -117,7 +117,7 @@ Meteor.methods({
 			nick: nick
 		});
 		if (!member) {
-			throw new Meteor.Error('MemberListCollection.setReadConfirmed', 'plugins.splashscreen.error.error_messages.member_not_found');
+			throw new Meteor.Error('MemberListCollection.setReadConfirmed', 'member_not_found');
 		}
 		member.readConfirmed[questionIndex] = 1;
 		MemberListCollection.update(member._id, {$set: {readConfirmed: member.readConfirmed}});
@@ -142,7 +142,7 @@ Meteor.methods({
 			if (doc) {
 				MemberListCollection.update({hashtag: hashtag}, {$set: {readConfirmed: []}});
 			} else {
-				throw new Meteor.Error('MemberListCollection.clearReadConfirmed', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('MemberListCollection.clearReadConfirmed', 'not_authorized');
 			}
 		} else {
 			MemberListCollection.update({hashtag: hashtag}, {$set: {readConfirmed: []}});
@@ -173,7 +173,7 @@ Meteor.methods({
 					}
 				});
 			} else {
-				throw new Meteor.Error('MemberListCollection.removeFromSession', 'plugins.splashscreen.error.error_messages.not_authorized');
+				throw new Meteor.Error('MemberListCollection.removeFromSession', 'not_authorized');
 			}
 		}
 	}

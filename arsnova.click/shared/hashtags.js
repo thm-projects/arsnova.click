@@ -41,7 +41,7 @@ Meteor.methods({
 	},
 	'HashtagsCollection.addHashtag': function (doc) {
 		if (HashtagsCollection.find({hashtag: doc.hashtag}).count() > 0) {
-			throw new Meteor.Error('HashtagsCollection.addHashtag', 'plugins.splashscreen.error.error_messages.session_exists');
+			throw new Meteor.Error('HashtagsCollection.addHashtag', 'session_exists');
 		}
 
 		HashtagsCollection.insert(doc);
@@ -66,7 +66,7 @@ Meteor.methods({
 				}
 			});
 			if (!hashtagDoc) {
-				throw new Meteor.Error('HashtagsCollection.export', 'plugins.splashscreen.error.error_messages.hashtag_not_found');
+				throw new Meteor.Error('HashtagsCollection.export', 'hashtag_not_found');
 			}
 			var questionGroupDoc = QuestionGroupCollection.findOne({hashtag: hashtag}, {
 				fields: {
@@ -103,7 +103,7 @@ Meteor.methods({
 			var hashtag = data.hashtagDoc.hashtag;
 			var oldDoc = HashtagsCollection.findOne({hashtag: hashtag});
 			if (oldDoc) {
-				throw new Meteor.Error('HashtagsCollection.import', 'plugins.splashscreen.error.error_messages.hashtag_exists');
+				throw new Meteor.Error('HashtagsCollection.import', 'hashtag_exists');
 			}
 			var questionList = [];
 			var hashtagDoc = data.hashtagDoc;

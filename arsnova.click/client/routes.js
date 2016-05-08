@@ -29,7 +29,7 @@ import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plu
 Router.configure({
 	layoutTemplate: "layout",
 	loadingTemplate: "loading",
-	subscriptions: function () {
+	waitOn: function () {
 		const subscriptions = [
 			Meteor.subscribe('HashtagsCollection.public')
 		];
@@ -55,7 +55,7 @@ Router.onBeforeAction(function () {
 		if (!globalEventStackObserver) {
 			setGlobalEventStackObserver();
 			if (!globalEventStackObserver.isRunning()) {
-				if (!EventManagerCollection.findOne(Router.current().params.quizName)) {
+				if (!EventManagerCollection.findOne()) {
 					Meteor.call('EventManagerCollection.add', localData.getPrivateKey(), Router.current().params.quizName, function (err) {
 						if (err) {
 							new ErrorSplashscreen({
@@ -67,6 +67,8 @@ Router.onBeforeAction(function () {
 							globalEventStackObserver.startObserving(Router.current().params.quizName);
 						}
 					});
+				} else {
+					globalEventStackObserver.startObserving(Router.current().params.quizName);
 				}
 			}
 		}
@@ -190,7 +192,11 @@ Router.route('/:quizName/nick', {
 		if (!EventManagerCollection.findOne() || EventManagerCollection.findOne().sessionStatus !== 2) {
 			Router.go("/");
 		} else {
-			this.render('nick');
+			if (this.ready()) {
+				this.render('nick');
+			} else {
+				this.render("loading");
+			}
 		}
 	}
 });
@@ -206,8 +212,11 @@ Router.route('/:quizName/question', {
 
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
-			Meteor.call('EventManagerCollection.setActiveQuestion', localData.getPrivateKey(), Router.current().params.quizName, 0);
-			this.render('createQuestionView');
+			if (this.ready()) {
+				this.render('createQuestionView');
+			} else {
+				this.render("loading");
+			}
 		} else {
 			Router.go("/");
 		}
@@ -223,7 +232,11 @@ Router.route('/:quizName/answeroptions', {
 	},
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
-			this.render('createAnswerOptions');
+			if (this.ready()) {
+				this.render('createAnswerOptions');
+			} else {
+				this.render("loading");
+			}
 		} else {
 			Router.go("/");
 		}
@@ -239,7 +252,11 @@ Router.route('/:quizName/settimer', {
 	},
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
-			this.render('createTimerView');
+			if (this.ready()) {
+				this.render('createTimerView');
+			} else {
+				this.render("loading");
+			}
 		} else {
 			Router.go("/");
 		}
@@ -255,31 +272,34 @@ Router.route('/:quizName/memberlist', {
 		];
 	},
 	action: function () {
-		globalEventStackObserver.onChange([
-			"EventManagerCollection.setSessionStatus"
-		], function (key, value) {
-			if (!isNaN(value.sessionStatus)) {
-				if (value.sessionStatus === 3) {
-					Router.go("/" + Router.current().params.quizName + "/results");
+		if (this.ready()) {
+			globalEventStackObserver.onChange([
+				"EventManagerCollection.setSessionStatus"
+			], function (key, value) {
+				if (!isNaN(value.sessionStatus)) {
+					if (value.sessionStatus === 3) {
+						Router.go("/" + Router.current().params.quizName + "/results");
+					}
 				}
-			}
-		});
+			});
 
-		globalEventStackObserver.onChange([
-			"MemberListCollection.removeLearner"
-		], function (key, value) {
-			if (value.user) {
-				if (value.user === localStorage.getItem(Router.current().params.quizName + "nick")) {
-					new ErrorSplashscreen({
-						autostart: true,
-						errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.kicked_from_quiz")
-					});
-					Router.go("/" + Router.current().params.quizName + "/resetToHome");
+			globalEventStackObserver.onChange([
+				"MemberListCollection.removeLearner"
+			], function (key, value) {
+				if (value.user) {
+					if (value.user === localStorage.getItem(Router.current().params.quizName + "nick")) {
+						new ErrorSplashscreen({
+							autostart: true,
+							errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.kicked_from_quiz")
+						});
+						Router.go("/" + Router.current().params.quizName + "/resetToHome");
+					}
 				}
-			}
-		});
-
-		this.render("memberlist");
+			});
+			this.render("memberlist");
+		} else {
+			this.render("loading");
+		}
 	}
 });
 
@@ -291,7 +311,11 @@ Router.route('/:quizName/votingview', {
 		];
 	},
 	action: function () {
-		this.render('votingview');
+		if (this.ready()) {
+			this.render('votingview');
+		} else {
+			this.render("loading");
+		}
 	}
 });
 
@@ -307,10 +331,14 @@ Router.route('/:quizName/onpolling', {
 	},
 
 	action: function () {
-		if (localData.containsHashtag(Router.current().params.quizName)) {
-			this.render('live_results');
+		if (this.ready()) {
+			if (localData.containsHashtag(Router.current().params.quizName)) {
+				this.render('live_results');
+			} else {
+				this.render('votingview');
+			}
 		} else {
-			this.render('votingview');
+			this.render("loading");
 		}
 	}
 });
@@ -324,92 +352,96 @@ Router.route('/:quizName/results', {
 		];
 	},
 	action: function () {
-		globalEventStackObserver.onChange([
-			"EventManagerCollection.setSessionStatus"
-		], function (key, value) {
-			if (!isNaN(value.sessionStatus)) {
-				if (value.sessionStatus === 2) {
-					$('.modal-backdrop').remove();
-					Router.go("/" + Router.current().params.quizName + "/memberlist");
+		if (!this.ready()) {
+			this.render("loading");
+		} else {
+			globalEventStackObserver.onChange([
+				"EventManagerCollection.setSessionStatus"
+			], function (key, value) {
+				if (!isNaN(value.sessionStatus)) {
+					if (value.sessionStatus === 2) {
+						$('.modal-backdrop').remove();
+						Router.go("/" + Router.current().params.quizName + "/memberlist");
+					}
 				}
-			}
-		});
+			});
 
-		globalEventStackObserver.onChange([
-			"EventManagerCollection.setActiveQuestion"
-		], function (key, value) {
-			if (!isNaN(value.questionIndex) && value.questionIndex !== -1) {
-				if (localData.containsHashtag(Router.current().params.quizName)) {
+			globalEventStackObserver.onChange([
+				"EventManagerCollection.setActiveQuestion"
+			], function (key, value) {
+				if (!isNaN(value.questionIndex) && value.questionIndex !== -1) {
+					if (localData.containsHashtag(Router.current().params.quizName)) {
+						new Splashscreen({
+							autostart: true,
+							instanceId: "answers_" + EventManagerCollection.findOne().questionIndex,
+							templateName: 'questionAndAnswerSplashscreen',
+							closeOnButton: '#js-btn-hideQuestionModal',
+							onRendered: function (instance) {
+								var content = "";
+								mathjaxMarkdown.initializeMarkdownAndLatex();
+								AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
+									if (!answerOption.answerText) {
+										answerOption.answerText = "";
+									}
+
+									content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+									content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+								});
+
+								instance.templateSelector.find('#answerContent').html(content);
+								setTimeout(function () {
+									instance.close();
+								}, 10000);
+							}
+						});
+					} else {
+						Router.go("/" + Router.current().params.quizName + "/onpolling");
+					}
+				}
+			});
+
+			globalEventStackObserver.onChange([
+				"EventManagerCollection.showReadConfirmedForIndex"
+			], function (key, value) {
+				if (!isNaN(value.readingConfirmationIndex) && value.readingConfirmationIndex > -1) {
+					var questionDoc = QuestionGroupCollection.findOne();
 					new Splashscreen({
 						autostart: true,
-						instanceId: "answers_" + EventManagerCollection.findOne().questionIndex,
-						templateName: 'questionAndAnswerSplashscreen',
-						closeOnButton: '#js-btn-hideQuestionModal',
+						templateName: 'readingConfirmedSplashscreen',
+						closeOnButton: '#setReadConfirmed',
 						onRendered: function (instance) {
 							var content = "";
-							mathjaxMarkdown.initializeMarkdownAndLatex();
-							AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
-								if (!answerOption.answerText) {
-									answerOption.answerText = "";
-								}
+							if (questionDoc) {
+								mathjaxMarkdown.initializeMarkdownAndLatex();
+								var questionText = questionDoc.questionList[EventManagerCollection.findOne().readingConfirmationIndex].questionText;
+								content = mathjaxMarkdown.getContent(questionText);
+							}
+							instance.templateSelector.find('#questionContent').html(content);
 
-								content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
-								content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
-							});
-
-							instance.templateSelector.find('#answerContent').html(content);
-							setTimeout(function () {
-								instance.close();
-							}, 10000);
+							if (localData.containsHashtag(Router.current().params.quizName)) {
+								instance.templateSelector.find('#setReadConfirmed').text(TAPi18n.__("global.close_window"));
+							} else {
+								instance.templateSelector.find('#setReadConfirmed').parent().on('click', '#setReadConfirmed', function () {
+									Meteor.call("MemberListCollection.setReadConfirmed", {
+										hashtag: Router.current().params.quizName,
+										questionIndex: EventManagerCollection.findOne().readingConfirmationIndex,
+										nick: localStorage.getItem(Router.current().params.quizName + "nick")
+									}, (err)=> {
+										if (err) {
+											new ErrorSplashscreen({
+												autostart: true,
+												errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+											});
+										}
+									});
+								});
+							}
 						}
 					});
-				} else {
-					Router.go("/" + Router.current().params.quizName + "/onpolling");
 				}
-			}
-		});
-
-		globalEventStackObserver.onChange([
-			"EventManagerCollection.showReadConfirmedForIndex"
-		], function (key, value) {
-			if (!isNaN(value.readingConfirmationIndex) && value.readingConfirmationIndex > -1) {
-				var questionDoc = QuestionGroupCollection.findOne();
-				new Splashscreen({
-					autostart: true,
-					templateName: 'readingConfirmedSplashscreen',
-					closeOnButton: '#setReadConfirmed',
-					onRendered: function (instance) {
-						var content = "";
-						if (questionDoc) {
-							mathjaxMarkdown.initializeMarkdownAndLatex();
-							var questionText = questionDoc.questionList[EventManagerCollection.findOne().readingConfirmationIndex].questionText;
-							content = mathjaxMarkdown.getContent(questionText);
-						}
-						instance.templateSelector.find('#questionContent').html(content);
-
-						if (localData.containsHashtag(Router.current().params.quizName)) {
-							instance.templateSelector.find('#setReadConfirmed').text(TAPi18n.__("global.close_window"));
-						} else {
-							instance.templateSelector.find('#setReadConfirmed').parent().on('click', '#setReadConfirmed', function () {
-								Meteor.call("MemberListCollection.setReadConfirmed", {
-									hashtag: Router.current().params.quizName,
-									questionIndex: EventManagerCollection.findOne().readingConfirmationIndex,
-									nick: localStorage.getItem(Router.current().params.quizName + "nick")
-								}, (err)=> {
-									if (err) {
-										new ErrorSplashscreen({
-											autostart: true,
-											errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
-										});
-									}
-								});
-							});
-						}
-					}
-				});
-			}
-		});
-		this.render('live_results');
+			});
+			this.render('live_results');
+		}
 	}
 });
 
@@ -423,6 +455,10 @@ Router.route('/:quizName/statistics', {
 		];
 	},
 	action: function () {
-		this.render('leaderBoard');
+		if (this.ready()) {
+			this.render('leaderBoard');
+		} else {
+			this.render("loading");
+		}
 	}
 });

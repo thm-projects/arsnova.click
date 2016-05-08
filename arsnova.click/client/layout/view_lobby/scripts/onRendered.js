@@ -20,8 +20,6 @@ import {Template} from 'meteor/templating';
 import {calculateButtonCount} from './lib.js';
 
 Template.memberlist.onRendered(function () {
-	var finalHeight = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
-	$(".container").css("height", finalHeight + "px");
 	Session.set("learnerCountOverride", false);
 	calculateButtonCount();
 

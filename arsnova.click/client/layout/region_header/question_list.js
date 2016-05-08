@@ -116,7 +116,7 @@ Template.questionList.events({
 		var validQuestions = Session.get("validQuestions");
 		validQuestions.splice(id, 1);
 		if (id > 0) {
-			Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, (id - 1))
+			Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, (id - 1));
 			validQuestions.push(false);
 		}
 

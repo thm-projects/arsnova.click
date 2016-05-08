@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {memberlistObserver} from './lib.js';
 
@@ -22,4 +23,6 @@ Template.memberlist.onDestroyed(function () {
 	if (memberlistObserver) {
 		memberlistObserver.stop();
 	}
+	delete Session.keys.learnerCount;
+	delete Session.keys.learnerCountOverride;
 });

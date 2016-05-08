@@ -218,7 +218,7 @@ Meteor.methods({
 					value: {
 						sessionStatus: 1,
 						readingConfirmationIndex: -1,
-						questionIndex: -1
+						questionIndex: 0
 					}
 				}
 			]

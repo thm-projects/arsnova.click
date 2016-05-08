@@ -10,7 +10,10 @@ export class AbstractAnswerOption {
 		if (this.constructor === AbstractAnswerOption) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
-		if (!options.hashtag || !options.questionIndex || !options.answerText || !options.answerOptionNumber || !options.isCorrect) {
+		if (typeof options.type !== "undefined" && options.type !== this.constructor.name) {
+			throw new TypeError("Invalid construction type");
+		}
+		if (typeof options.hashtag === "undefined" || typeof options.questionIndex === "undefined" || typeof options.answerText === "undefined" || typeof options.answerOptionNumber === "undefined" || typeof options.isCorrect === "undefined") {
 			throw new Error("Invalid argument list for AnswerOption instantiation");
 		}
 		this[hashtag] = options.hashtag;
@@ -52,5 +55,28 @@ export class AbstractAnswerOption {
 			throw new Error("Invalid argument for AnswerOption.setIsCorrect");
 		}
 		this[isCorrect] = isCorrect;
+	}
+
+	serialize () {
+		return {
+			hashtag: this[hashtag],
+			type: this.constructor.name,
+			questionIndex: this[questionIndex],
+			answerText: this[answerText],
+			answerOptionNumber: this[answerOptionNumber],
+			isCorrect: this[isCorrect]
+		};
+	}
+
+	isValid () {
+		return true;
+	}
+
+	equals (answerOption) {
+		return answerOption instanceof AbstractAnswerOption &&
+			answerOption.getQuestionIndex() === this[questionIndex] &&
+			answerOption.getAnswerText() === this[answerText] &&
+			answerOption.getAnswerOptionNumber() === this[answerOptionNumber] &&
+			answerOption.getIsCorrect() === this[isCorrect];
 	}
 }

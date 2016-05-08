@@ -32,8 +32,8 @@ Template.header.onCreated(function () {
 });
 
 Template.header.helpers({
-	getCurrentRoute: function () {
-		return "/" + Router.current().params.quizName;
+	getCurrentResetRoute: function () {
+		return Router.current().params.quizName ? "/" + Router.current().params.quizName + "/resetToHome" : "";
 	},
 	isInHomePathOrIsStudent: function () {
 		switch (Router.current().route.path()) {

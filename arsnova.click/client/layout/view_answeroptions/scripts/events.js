@@ -63,6 +63,8 @@ Template.createAnswerOptions.events({
 					}
 
 					$('.answer-options').scrollTop($('.answer-options')[0].scrollHeight);
+
+					$('#answerOptionText_Number' + (answerOptionsCount - 1)).closest(".input-group").addClass("invalidAnswerOption");
 				}
 			});
 		}

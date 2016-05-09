@@ -17,11 +17,9 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import * as localData from '/client/lib/local_storage.js';
-import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {parseAnswerOptionInput} from './lib.js';
 
 Template.createAnswerOptions.events({

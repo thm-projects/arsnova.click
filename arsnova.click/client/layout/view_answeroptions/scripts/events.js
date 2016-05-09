@@ -89,9 +89,11 @@ Template.createAnswerOptions.events({
 		}
 	},
 	"click #backButton": function () {
+		parseAnswerOptionInput(EventManagerCollection.findOne().questionIndex);
 		Router.go("/" + Router.current().params.quizName + "/question");
 	},
 	"click #forwardButton": function () {
+		parseAnswerOptionInput(EventManagerCollection.findOne().questionIndex);
 		Router.go("/" + Router.current().params.quizName + "/settimer");
 	},
 	"keyup .input-field": function (event) {
@@ -115,15 +117,6 @@ Template.createAnswerOptions.events({
 			$(event.currentTarget).closest(".input-group").addClass("invalidAnswerOption");
 		} else {
 			$(event.currentTarget).closest(".input-group").removeClass("invalidAnswerOption");
-		}
-
-		var err = parseAnswerOptionInput(EventManagerCollection.findOne().questionIndex);
-
-		if (err) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
-			});
 		}
 	}
 });

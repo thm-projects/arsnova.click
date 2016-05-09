@@ -103,7 +103,7 @@ Template.createAnswerOptions.events({
 			Router.go("/" + Router.current().params.quizName + "/settimer");
 		}
 	},
-	"keydown .input-field": function (event) {
+	"keyup .input-field": function (event) {
 		//Prevent tab default
 		if (event.keyCode === 9) {
 			event.preventDefault();
@@ -118,6 +118,12 @@ Template.createAnswerOptions.events({
 				//sets focus to the new input field
 				$(event.currentTarget).closest(".form-group").next().find(".input-field").focus();
 			}
+		}
+
+		if ($(event.currentTarget).val().length === 0) {
+			$(event.currentTarget).closest(".input-group").addClass("invalidAnswerOption");
+		} else {
+			$(event.currentTarget).closest(".input-group").removeClass("invalidAnswerOption");
 		}
 	}
 });

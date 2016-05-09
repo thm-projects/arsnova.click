@@ -28,6 +28,11 @@ Template.createQuestionView.events({
 			return;
 		}
 		lib.addQuestion(EventManagerCollection.findOne().questionIndex);
+		if ($('#questionText').val().length < 5) {
+			$('#questionText').addClass("invalidAnswerOption");
+		} else {
+			$('#questionText').removeClass("invalidAnswerOption");
+		}
 	},
 	//Save question in Sessions-Collection when Button "Next" is clicked
 	'click #forwardButton': function () {

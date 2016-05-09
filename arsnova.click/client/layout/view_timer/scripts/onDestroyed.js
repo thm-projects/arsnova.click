@@ -26,6 +26,5 @@ Template.createTimerView.onDestroyed(function () {
 	if (validationTrackerHandle) {
 		validationTrackerHandle.stop();
 	}
-	delete Session.keys.validQuestions;
 	delete Session.keys.slider;
 });

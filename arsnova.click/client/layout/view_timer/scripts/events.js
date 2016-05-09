@@ -21,6 +21,7 @@ import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as localData from '/client/lib/local_storage.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import * as localData from '/client/lib/local_storage.js';
 import {setTimer} from './lib.js';
 
 Template.createTimerView.events({
@@ -41,6 +42,6 @@ Template.createTimerView.events({
 			} else {
 				Router.go("/" + Router.current().params.quizName + "/answeroptions");
 			}
-		}
+		});
 	}
 });

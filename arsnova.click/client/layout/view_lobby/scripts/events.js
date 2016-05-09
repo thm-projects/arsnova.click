@@ -45,14 +45,7 @@ Template.memberlist.events({
 			onRendered: function (instance) {
 				instance.templateSelector.find('#nickName').text($(event.currentTarget).text().replace(/(?:\r\n|\r| |\n)/g, ''));
 				instance.templateSelector.find('#kickMemberButton').on('click', function () {
-					Meteor.call('MemberListCollection.removeLearner', localData.getPrivateKey(), Router.current().params.quizName, $(event.currentTarget).attr("id"), function (err) {
-						if (err) {
-							new ErrorSplashscreen({
-								autostart: true,
-								errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
-							});
-						}
-					});
+					Meteor.call('MemberListCollection.removeLearner', Router.current().params.quizName, $(event.currentTarget).attr("id"));
 				});
 			}
 		});
@@ -60,7 +53,7 @@ Template.memberlist.events({
 	'click #startPolling': function () {
 		$('.sound-button').hide();
 		Session.set("sessionClosed", false);
-		Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, -1);
-		Meteor.call('EventManagerCollection.setSessionStatus', localData.getPrivateKey(), Router.current().params.quizName, 3);
+		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, -1);
+		Meteor.call('EventManagerCollection.setSessionStatus', Router.current().params.quizName, 3);
 	}
 });

@@ -54,11 +54,10 @@ Meteor.methods({
 			}
 		});
 	},
-	'HashtagsCollection.export': function ({hashtag, privateKey}) {
+	'HashtagsCollection.export': function ({hashtag}) {
 		if (Meteor.isServer) {
 			var hashtagDoc = HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
+				hashtag: hashtag
 			}, {
 				fields: {
 					_id: 0,
@@ -98,7 +97,7 @@ Meteor.methods({
 			return JSON.stringify(exportData);
 		}
 	},
-	'HashtagsCollection.import': function ({privateKey, data}) {
+	'HashtagsCollection.import': function ({data}) {
 		if (Meteor.isServer) {
 			var hashtag = data.hashtagDoc.hashtag;
 			var oldDoc = HashtagsCollection.findOne({hashtag: hashtag});
@@ -107,7 +106,6 @@ Meteor.methods({
 			}
 			var questionList = [];
 			var hashtagDoc = data.hashtagDoc;
-			hashtagDoc.privateKey = privateKey;
 			delete hashtagDoc._id;
 			HashtagsCollection.insert(hashtagDoc);
 			for (var i = 0; i < data.sessionDoc.length; i++) {

@@ -62,9 +62,7 @@
 							</div>
 
 						</div>
-						{{#if isEditingQuestion}}
-							{{> questionList}}
-						{{/if}}
+                        {{> yield "header.questionList"}}
 					</div>
 
 				{{/if}}

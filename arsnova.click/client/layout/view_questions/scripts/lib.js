@@ -62,7 +62,6 @@ export var subscriptionHandler = null;
 export function addQuestion(index) {
 	var questionText = $('#questionText').val();
 	Meteor.call("QuestionGroupCollection.addQuestion", {
-		privateKey: localData.getPrivateKey(),
 		hashtag: Router.current().params.quizName,
 		questionIndex: index,
 		questionText: questionText
@@ -119,7 +118,7 @@ export function changePreviewButtonText(text) {
 }
 
 export function checkForMarkdown() {
-	if (EventManagerCollection.findOne().questionIndex < 0) {
+	if (EventManagerCollection.findOne().questionIndex < 0 || !QuestionGroupCollection.findOne()) {
 		return;
 	}
 	var questionText = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].questionText;

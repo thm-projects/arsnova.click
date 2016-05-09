@@ -66,7 +66,7 @@ export function checkIfIsCorrect(isCorrect) {
 }
 
 export function startCountdown(index) {
-	Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, index);
+	Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index);
 	var questionDoc = QuestionGroupCollection.findOne().questionList[index];
 	Session.set("sessionCountDown", questionDoc.timer);
 	$("#countdowndiv").appendTo($("body"));

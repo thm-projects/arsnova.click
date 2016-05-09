@@ -55,7 +55,6 @@ export function checkForValidQuestions(index) {
 export function addNewQuestion(callback) {
 	var index = QuestionGroupCollection.findOne().questionList.length;
 	Meteor.call("QuestionGroupCollection.addQuestion", {
-		privateKey: localData.getPrivateKey(),
 		hashtag: Router.current().params.quizName,
 		questionIndex: index,
 		questionText: ""
@@ -68,7 +67,6 @@ export function addNewQuestion(callback) {
 		} else {
 			for (var i = 0; i < 4; i++) {
 				Meteor.call('AnswerOptionCollection.addOption', {
-					privateKey: localData.getPrivateKey(),
 					hashtag: Router.current().params.quizName,
 					questionIndex: index,
 					answerOptionNumber: i,
@@ -83,7 +81,7 @@ export function addNewQuestion(callback) {
 			validQuestions[index] = false;
 			Session.set("validQuestions", validQuestions);
 
-			Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, index, function () {
+			Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index, function () {
 				Router.go("/" + Router.current().params.quizName + "/question");
 				if (callback) {
 					callback();

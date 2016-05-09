@@ -23,7 +23,7 @@ import {LeaderBoardCollection} from '/lib/leader_board/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
-	'LeaderBoardCollection.addResponseSet': function ({phashtag, questionIndex, nick, responseTimeMillis}) {
+	'LeaderBoardCollection.addResponseSet': function ({hashtag, questionIndex, nick, responseTimeMillis}) {
 		if (Meteor.isServer) {
 			new SimpleSchema({
 				phashtag: {type: String},
@@ -31,7 +31,7 @@ Meteor.methods({
 				nick: {type: String},
 				responseTimeMillis: {type: Number}
 			}).validate({
-				phashtag,
+				hashtag,
 				questionIndex,
 				nick,
 				responseTimeMillis
@@ -40,7 +40,7 @@ Meteor.methods({
 			const correctAnswers = [];
 
 			AnswerOptionCollection.find({
-				hashtag: phashtag,
+				hashtag: hashtag,
 				questionIndex: questionIndex,
 				isCorrect: 1
 			}, {fields: {"answerOptionNumber": 1}}).forEach(function (answer) {
@@ -51,7 +51,7 @@ Meteor.methods({
 			var falseResponseAmount = 0;
 
 			ResponsesCollection.find({
-				hashtag: phashtag,
+				hashtag: hashtag,
 				questionIndex: questionIndex,
 				userNick: nick
 			}).forEach(function (response) {
@@ -64,14 +64,14 @@ Meteor.methods({
 			var rightResponseAmount = responseAmount - falseResponseAmount;
 
 			var memberEntry = LeaderBoardCollection.findOne({
-				hashtag: phashtag,
+				hashtag: hashtag,
 				questionIndex: questionIndex,
 				userNick: nick
 			});
 
 			if (!memberEntry) {
 				LeaderBoardCollection.insert({
-					hashtag: phashtag,
+					hashtag: hashtag,
 					questionIndex: questionIndex,
 					userNick: nick,
 					responseTimeMillis: responseTimeMillis,
@@ -88,7 +88,7 @@ Meteor.methods({
 					}
 				});
 			}
-			EventManagerCollection.update({hashtag: phashtag}, {$push: {eventStack: {key: "LeaderBoardCollection.addResponseSet",
+			EventManagerCollection.update({hashtag: hashtag}, {$push: {eventStack: {key: "LeaderBoardCollection.addResponseSet",
 				value: {
 					nick: nick,
 					questionIndex: questionIndex

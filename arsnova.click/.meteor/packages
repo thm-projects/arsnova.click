@@ -30,3 +30,5 @@ standard-minifier-js
 tap:i18n
 tap:i18n-ui
 fastclick
+matb33:collection-hooks
+meteorhacks:subs-manager

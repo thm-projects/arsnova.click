@@ -30,5 +30,19 @@ Meteor.publish('EventManagerCollection.join', (hashtag)=> {
 			max: 25
 		}
 	}).validate({hashtag: hashtag});
-	return EventManagerCollection.find({hashtag: hashtag});
+	return EventManagerCollection.find({hashtag});
+});
+
+Meteor.publish('EventManagerCollection.getSessionStatus', function (hashtag, callback) {
+	if (typeof hashtag === "undefined") {
+		return false;
+	}
+	new SimpleSchema({
+		hashtag: {
+			type: String,
+			min: 1,
+			max: 25
+		}
+	}).validate({hashtag: hashtag});
+	return EventManagerCollection.find({hashtag: hashtag}, {fields: {sessionStatus: true}});
 });

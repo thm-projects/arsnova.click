@@ -20,6 +20,6 @@ import * as localData from './local_storage.js';
 
 Meteor.setInterval(function () {
 	if (localData.containsHashtag(Router.current().params.quizName)) {
-		Meteor.call('keepalive', localData.getPrivateKey(), Router.current().params.quizName);
+		Meteor.call('keepalive', Router.current().params.quizName);
 	}
 }, 5000);

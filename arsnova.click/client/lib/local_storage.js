@@ -229,7 +229,6 @@ export function reenterSession(hashtag) {
 			delete sessionData.questionList[i].isReadingConfirmationRequired;
 			for (var j = 0; j < answer.length; j++) {
 				Meteor.call("AnswerOptionCollection.addOption", {
-					privateKey: localStorage.getItem("privateKey"),
 					hashtag: hashtag,
 					questionIndex: i,
 					answerText: answer[j].answerText,
@@ -239,7 +238,6 @@ export function reenterSession(hashtag) {
 			}
 		}
 		Meteor.call("QuestionGroupCollection.insert", {
-			privateKey: localStorage.getItem("privateKey"),
 			hashtag: hashtag,
 			questionList: sessionData.questionList
 		});

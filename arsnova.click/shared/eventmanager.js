@@ -21,28 +21,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
 Meteor.methods({
-	'EventManagerCollection.setSessionStatus': (privateKey, hashtag, sessionStatus)=> {
-		if (Meteor.isClient) {
-			return;
-		}
-
-		new SimpleSchema({
-			privateKey: {type: String},
-			hashtag: {type: String},
-			sessionStatus: {type: Number}
-		}).validate({
-			privateKey,
-			hashtag,
-			sessionStatus
-		});
-
-		if (!HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			})) {
-			throw new Meteor.Error('EventManagerCollection.setSessionStatus', 'not_authorized');
-		}
-
+	'EventManagerCollection.setSessionStatus': (hashtag, sessionStatus)=> {
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$set: {sessionStatus: sessionStatus},
 			$push: {
@@ -53,28 +32,7 @@ Meteor.methods({
 			}
 		});
 	},
-	'EventManagerCollection.showReadConfirmedForIndex': (privateKey, hashtag, index)=> {
-		if (Meteor.isClient) {
-			return;
-		}
-
-		new SimpleSchema({
-			privateKey: {type: String},
-			hashtag: {type: String},
-			index: {type: Number}
-		}).validate({
-			privateKey,
-			hashtag,
-			index
-		});
-
-		if (!HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			})) {
-			throw new Meteor.Error('EventManagerCollection.showReadConfirmedForIndex', 'not_authorized');
-		}
-
+	'EventManagerCollection.showReadConfirmedForIndex': (hashtag, index)=> {
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$set: {readingConfirmationIndex: index},
 			$push: {
@@ -85,28 +43,7 @@ Meteor.methods({
 			}
 		});
 	},
-	'EventManagerCollection.setActiveQuestion': (privateKey, hashtag, index)=> {
-		if (Meteor.isClient) {
-			return;
-		}
-
-		new SimpleSchema({
-			privateKey: {type: String},
-			hashtag: {type: String},
-			index: {type: Number}
-		}).validate({
-			privateKey,
-			hashtag,
-			index
-		});
-
-		if (!HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			})) {
-			throw new Meteor.Error('EventManagerCollection.setActiveQuestion', 'not_authorized');
-		}
-
+	'EventManagerCollection.setActiveQuestion': (hashtag, index)=> {
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$set: {
 				questionIndex: index,
@@ -123,48 +60,15 @@ Meteor.methods({
 			}
 		});
 	},
-	'EventManagerCollection.clear': (privateKey, hashtag) => {
-		if (Meteor.isClient) {
-			return;
-		}
-
+	'EventManagerCollection.clear': (hashtag) => {
 		new SimpleSchema({
-			privateKey: {type: String},
 			hashtag: {type: String}
 		}).validate({
-			privateKey,
 			hashtag
 		});
-
-		if (!HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			})) {
-			throw new Meteor.Error('EventManagerCollection.clear', 'not_authorized');
-		}
-
 		EventManagerCollection.remove({hashtag: hashtag});
 	},
-	'EventManagerCollection.reset': (privateKey, hashtag) => {
-		if (Meteor.isClient) {
-			return;
-		}
-
-		new SimpleSchema({
-			privateKey: {type: String},
-			hashtag: {type: String}
-		}).validate({
-			privateKey,
-			hashtag
-		});
-
-		if (!HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			})) {
-			throw new Meteor.Error('EventManagerCollection.reset', 'not_authorized');
-		}
-
+	'EventManagerCollection.reset': (hashtag) => {
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$set: {
 				sessionStatus: 1,
@@ -183,26 +87,7 @@ Meteor.methods({
 			}
 		});
 	},
-	'EventManagerCollection.add': (privateKey, hashtag) => {
-		if (Meteor.isClient) {
-			return;
-		}
-
-		new SimpleSchema({
-			privateKey: {type: String},
-			hashtag: {type: String}
-		}).validate({
-			privateKey,
-			hashtag
-		});
-
-		if (!HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			})) {
-			throw new Meteor.Error('EventManagerCollection.add', 'not_authorized');
-		}
-
+	'EventManagerCollection.add': (hashtag) => {
 		if (EventManagerCollection.findOne({hashtag: hashtag})) {
 			throw new Meteor.Error('EventManagerCollection.add', 'hashtag_exists');
 		}
@@ -224,24 +109,12 @@ Meteor.methods({
 			]
 		});
 	},
-	'keepalive': function (privateKey, hashtag) {
-		if (Meteor.isServer) {
-			new SimpleSchema({
-				hashtag: {type: String},
-				privateKey: {type: String}
-			}).validate({
-				privateKey,
-				hashtag
-			});
-
-			var doc = HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			});
-
-			if (doc) {
-				EventManagerCollection.update({hashtag: hashtag}, {$set: {lastConnection: (new Date()).getTime()}});
-			}
-		}
+	'keepalive': function (hashtag) {
+		new SimpleSchema({
+			hashtag: {type: String}
+		}).validate({
+			hashtag
+		});
+		EventManagerCollection.update({hashtag: hashtag}, {$set: {lastConnection: (new Date()).getTime()}});
 	}
 });

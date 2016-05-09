@@ -61,7 +61,7 @@ Meteor.methods({
 			}
 		});
 	},
-	'MemberListCollection.removeLearner': function (privateKey, hashtag, nickId) {
+	'MemberListCollection.removeLearner': function (hashtag, nickId) {
 		new SimpleSchema({
 			hashtag: {type: String},
 			nickId: {type: String}
@@ -76,6 +76,12 @@ Meteor.methods({
 		}).nick;
 
 		if (nickName) {
+			/*
+			MemberListCollection.remove({
+				hashtag: hashtag,
+				_id: nickId
+			});
+			*/
 			EventManagerCollection.update({hashtag: hashtag}, {
 				$push: {
 					eventStack: {
@@ -84,25 +90,9 @@ Meteor.methods({
 					}
 				}
 			});
-
-			if (!HashtagsCollection.findOne({
-					privateKey: privateKey,
-					hashtag: hashtag
-				})) {
-				return;
-			}
-			MemberListCollection.remove({
-				hashtag: hashtag,
-				_id: nickId
-			});
 		}
 	},
 	'MemberListCollection.setReadConfirmed': function ({hashtag, questionIndex, nick}) {
-		/*
-		 TODO Everybody can set "readConfirmed" for each user!
-		 Maybe link this method to a privateKey for learners?
-		 Maybe check with Meteor.user()?
-		 */
 		new SimpleSchema({
 			hashtag: {type: String},
 			questionIndex: {type: Number},
@@ -133,48 +123,26 @@ Meteor.methods({
 			}
 		});
 	},
-	'MemberListCollection.clearReadConfirmed': function (privateKey, hashtag) {
-		if (Meteor.isServer) {
-			var doc = HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			});
-			if (doc) {
-				MemberListCollection.update({hashtag: hashtag}, {$set: {readConfirmed: []}});
-			} else {
-				throw new Meteor.Error('MemberListCollection.clearReadConfirmed', 'not_authorized');
-			}
-		} else {
-			MemberListCollection.update({hashtag: hashtag}, {$set: {readConfirmed: []}});
-			EventManagerCollection.update({hashtag: hashtag}, {
-				$push: {
-					eventStack: {
-						key: "MemberListCollection.clearReadConfirmed",
-						value: {}
-					}
+	'MemberListCollection.clearReadConfirmed': function (hashtag) {
+		MemberListCollection.update({hashtag: hashtag}, {$set: {readConfirmed: []}});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "MemberListCollection.clearReadConfirmed",
+					value: {}
 				}
-			});
-		}
-	},
-	'MemberListCollection.removeFromSession': function (privateKey, hashtag) {
-		if (Meteor.isServer) {
-			var doc = HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			});
-			if (doc) {
-				MemberListCollection.remove({hashtag: hashtag});
-				EventManagerCollection.update({hashtag: hashtag}, {
-					$push: {
-						eventStack: {
-							key: "MemberListCollection.removeFromSession",
-							value: {}
-						}
-					}
-				});
-			} else {
-				throw new Meteor.Error('MemberListCollection.removeFromSession', 'not_authorized');
 			}
-		}
+		});
+	},
+	'MemberListCollection.removeFromSession': function (hashtag) {
+		MemberListCollection.remove({hashtag: hashtag});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "MemberListCollection.removeFromSession",
+					value: {}
+				}
+			}
+		});
 	}
 });

@@ -33,8 +33,9 @@ Template.createTimerView.onRendered(function () {
 			return;
 		}
 
-		lib.setTimer(index);
-		Router.go("/" + Router.current().params.quizName + "/question");
+		lib.setTimer(index, function () {
+			Router.go("/" + Router.current().params.quizName + "/question");
+		});
 	});
 	body.on('click', '.removeQuestion', function () {
 		index = EventManagerCollection.findOne().questionIndex;
@@ -42,6 +43,9 @@ Template.createTimerView.onRendered(function () {
 
 	lib.validationTrackerHandle = Tracker.autorun(()=> {
 		var validQuestions = Session.get("validQuestions");
+		if (!validQuestions) {
+			return;
+		}
 		var forwardButton = $('#forwardButton');
 		forwardButton.removeAttr("disabled");
 		for (var i = 0; i < validQuestions.length; i++) {

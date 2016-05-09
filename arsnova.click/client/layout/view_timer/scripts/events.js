@@ -44,4 +44,3 @@ Template.createTimerView.events({
 		}
 	}
 });
-

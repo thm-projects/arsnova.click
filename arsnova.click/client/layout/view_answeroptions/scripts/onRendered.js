@@ -55,6 +55,8 @@ Template.createAnswerOptions.onRendered(function () {
 
 	var inputFieldElements = document.getElementsByClassName("input-field");
 	for (var i = inputFieldElements.length - 1; i >= 0; --i) {
-		$(inputFieldElements[i]).closest(".input-group").addClass("invalidAnswerOption");
+		if ($(inputFieldElements[i]).val().length === 0) {
+			$(inputFieldElements[i]).closest(".input-group").addClass("invalidAnswerOption");
+		}
 	}
 });

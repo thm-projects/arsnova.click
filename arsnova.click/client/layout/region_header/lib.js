@@ -43,10 +43,10 @@ export function checkForValidQuestions(index) {
 		return false;
 	}
 
-	var hasValidAnswers = false;
+	var hasValidAnswers = true;
 	answerDoc.forEach(function (value) {
-		if (typeof value.answerText === "undefined" || value.answerText.length <= 500) {
-			hasValidAnswers = true;
+		if (typeof value.answerText === "undefined" || value.answerText.length > 500 || value.answerText.length === 0) {
+			hasValidAnswers = false;
 		}
 	});
 	return hasValidAnswers;

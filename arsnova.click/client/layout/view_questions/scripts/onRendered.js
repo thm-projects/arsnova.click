@@ -42,8 +42,4 @@ Template.createQuestionView.onRendered(function () {
 	body.on('click', '.removeQuestion', function () {
 		index = EventManagerCollection.findOne().questionIndex;
 	});
-
-	if ($('#questionText').val().length < 5) {
-		$('#questionText').addClass("invalidAnswerOption");
-	}
 });

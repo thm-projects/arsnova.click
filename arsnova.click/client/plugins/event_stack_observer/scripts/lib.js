@@ -56,8 +56,8 @@ export class EventStackObserver {
 			return EventManagerCollection.find();
 		}, {
 			changedAt: function (id,newDocument, oldDocument) {
-				for (let i = oldDocument.eventStack.length; i < newDocument.eventStack.length; i++) {
-					if (newDocument.eventStack[i] && Router.current().route.getName()) {
+				if (Router.current().route.getName()) {
+					for (let i = oldDocument.eventStack.length; i < newDocument.eventStack.length; i++) {
 						let currentPath = Router.current().route.getName().replace(":quizName.", "");
 						if (observerInstance.onChangeCallbacks[currentPath] && observerInstance.onChangeCallbacks[currentPath].length > 0) {
 							let item = newDocument.eventStack[i];

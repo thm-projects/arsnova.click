@@ -21,7 +21,7 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import * as localData from '/client/lib/local_storage.js';
+import * as localData from '/lib/local_storage.js';
 
 function doesMarkdownSyntaxExist(questionText, syntaxStart, syntaxMiddle, syntaxEnd) {
 	if (questionText.length <= 0) {

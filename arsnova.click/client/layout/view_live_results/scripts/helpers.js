@@ -23,7 +23,7 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import * as localData from '/client/lib/local_storage.js';
+import * as localData from '/lib/local_storage.js';
 import {countdown, getPercentRead, getCurrentRead, hslColPerc, checkIfIsCorrect} from './lib.js';
 
 Template.liveResults.helpers({

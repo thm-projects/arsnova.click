@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import * as localData from '/client/lib/local_storage.js';
+import * as localData from '/lib/local_storage.js';
 
 Template.hashtagManagement.helpers({
 	serverHashtags: function () {

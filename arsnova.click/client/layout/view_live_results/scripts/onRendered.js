@@ -19,7 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import * as localData from '/client/lib/local_storage.js';
+import * as localData from '/lib/local_storage.js';
 import {calculateButtonCount} from './lib.js';
 
 Template.liveResults.onRendered(()=> {

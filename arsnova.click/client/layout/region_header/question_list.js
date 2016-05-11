@@ -24,7 +24,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
-import * as localData from '/client/lib/local_storage.js';
+import * as localData from '/lib/local_storage.js';
 import * as lib from './lib.js';
 
 var redirectTracker = null;

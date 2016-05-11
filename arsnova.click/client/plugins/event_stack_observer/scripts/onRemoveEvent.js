@@ -1,6 +1,6 @@
 
 import {TAPi18n} from 'meteor/tap:i18n';
-import * as localData from '/client/lib/local_storage.js';
+import * as localData from '/lib/local_storage.js';
 import { ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
 

@@ -4,7 +4,7 @@ import {TAPi18n} from 'meteor/tap:i18n';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import * as localData from '/client/lib/local_storage.js';
+import * as localData from '/lib/local_storage.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';

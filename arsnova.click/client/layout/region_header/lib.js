@@ -21,7 +21,7 @@ import {TAPi18n} from 'meteor/tap:i18n';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import * as localData from '/client/lib/local_storage.js';
+import * as localData from '/lib/local_storage.js';
 
 export function checkForValidQuestions(index) {
 	var questionDoc = QuestionGroupCollection.findOne();

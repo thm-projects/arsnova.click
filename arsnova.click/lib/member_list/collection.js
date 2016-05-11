@@ -17,6 +17,7 @@
 
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import * as localData from '/lib/local_storage.js';
 
 export const MemberListCollection = new Mongo.Collection("memberlist");
 
@@ -53,3 +54,33 @@ MemberListCollection.attachSchema(new SimpleSchema({
 		type: String
 	}
 }));
+
+MemberListCollection.deny({
+	insert: function () {
+		return true;
+	},
+	update: function () {
+		return true;
+	},
+	remove: function () {
+		return true;
+	}
+});
+
+MemberListCollection.allow({
+	insert: function (userId, doc) {
+		const isOwner = localData.containsHashtag(doc.hashtag);
+		const isOwnNick = doc.nick === localStorage.getItem(doc.hashtag + "nick");
+		return isOwner || isOwnNick;
+	},
+	update: function (userId, doc) {
+		const isOwner = localData.containsHashtag(doc.hashtag);
+		const isOwnNick = doc.nick === localStorage.getItem(doc.hashtag + "nick");
+		return isOwner || isOwnNick;
+	},
+	remove: function (userId, doc) {
+		const isOwner = localData.containsHashtag(doc.hashtag);
+		const isOwnNick = doc.nick === localStorage.getItem(doc.hashtag + "nick");
+		return isOwner || isOwnNick;
+	}
+});

@@ -17,6 +17,7 @@
 
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import * as localData from '/lib/local_storage.js';
 
 export const HashtagsCollection = new Mongo.Collection("hashtags");
 
@@ -32,3 +33,24 @@ HashtagsCollection.attachSchema(new SimpleSchema({
 		max: 24
 	}
 }));
+
+HashtagsCollection.deny({
+	insert: function () {
+		return true;
+	},
+	update: function () {
+		return true;
+	},
+	remove: function () {
+		return true;
+	}
+});
+
+HashtagsCollection.allow({
+	insert: function (userId, doc) {
+		return doc.privateKey === localData.getPrivateKey();
+	},
+	remove: function (userId, doc) {
+		return doc.privateKey === localData.getPrivateKey();
+	}
+});

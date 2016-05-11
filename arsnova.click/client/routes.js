@@ -20,7 +20,7 @@ import {TAPi18n} from 'meteor/tap:i18n';
 import {SubsManager} from 'meteor/meteorhacks:subs-manager';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
-import * as localData from '/client/lib/local_storage.js';
+import * as localData from '/lib/local_storage.js';
 import { ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
 import {getChangeEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onChangeEvent.js';

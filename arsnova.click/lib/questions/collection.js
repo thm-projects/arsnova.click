@@ -17,6 +17,7 @@
 
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import * as localData from '/lib/local_storage.js';
 
 export const QuestionGroupCollection = new Mongo.Collection("questionGroup");
 
@@ -52,3 +53,27 @@ export const QuestionGroupSchema = new SimpleSchema({
 });
 
 QuestionGroupCollection.attachSchema(QuestionGroupSchema);
+
+QuestionGroupCollection.deny({
+	insert: function () {
+		return true;
+	},
+	update: function () {
+		return true;
+	},
+	remove: function () {
+		return true;
+	}
+});
+
+QuestionGroupCollection.allow({
+	insert: function (userId, doc) {
+		return localData.containsHashtag(doc.hashtag);
+	},
+	update: function (userId, doc) {
+		return localData.containsHashtag(doc.hashtag);
+	},
+	remove: function (userId, doc) {
+		return localData.containsHashtag(doc.hashtag);
+	}
+});

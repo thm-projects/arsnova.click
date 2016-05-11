@@ -17,7 +17,7 @@
 
 import {Meteor} from 'meteor/meteor';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
-import * as localData from '/client/lib/local_storage.js';
+import * as localData from '/lib/local_storage.js';
 
 let hasError = false;
 const updateAnswerText = function (error, result) {

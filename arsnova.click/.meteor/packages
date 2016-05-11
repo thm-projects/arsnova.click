@@ -32,3 +32,4 @@ tap:i18n-ui
 fastclick
 matb33:collection-hooks
 meteorhacks:subs-manager
+observe-sequence

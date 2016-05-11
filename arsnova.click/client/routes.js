@@ -54,6 +54,12 @@ Router.onBeforeAction(function () {
 });
 
 Router.route('/', {
+	waitOn: function () {
+		const subscriptions = [
+			Meteor.subscribe('HashtagsCollection.public')
+		];
+		return subscriptions;
+	},
 	action: function () {
 		try {
 			localData.initializePrivateKey();
@@ -107,9 +113,7 @@ Router.route("/:quizName", {
 	},
 	action: function () {
 		if (this.ready()) {
-			if (!globalEventStackObserver.isRunning()) {
-				globalEventStackObserver.startObserving(Router.current().params.quizName);
-			}
+			globalEventStackObserver.startObserving(Router.current().params.quizName);
 			getChangeEventsForRoute(Router.current().route.getName());
 			getRemoveEventsForRoute(Router.current().route.getName());
 			let route = "/";
@@ -180,9 +184,11 @@ Router.route('/:quizName/nick', {
 			if (!globalEventStackObserver.isRunning()) {
 				globalEventStackObserver.startObserving(Router.current().params.quizName);
 			}
-			getChangeEventsForRoute(Router.current().route.getName());
-			getRemoveEventsForRoute(Router.current().route.getName());
-			this.render('nick');
+			if (this.ready()) {
+				getChangeEventsForRoute(Router.current().route.getName());
+				getRemoveEventsForRoute(Router.current().route.getName());
+				this.render('nick');
+			}
 		} else {
 			Router.go("/");
 		}
@@ -205,9 +211,7 @@ Router.route('/:quizName/question', {
 	},
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (!globalEventStackObserver.isRunning()) {
-				globalEventStackObserver.startObserving(Router.current().params.quizName);
-			}
+			globalEventStackObserver.startObserving(Router.current().params.quizName);
 			getChangeEventsForRoute(Router.current().route.getName());
 			getRemoveEventsForRoute(Router.current().route.getName());
 			this.render('questionList', {to: 'header.questionList'});
@@ -234,9 +238,7 @@ Router.route('/:quizName/answeroptions', {
 	},
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (!globalEventStackObserver.isRunning()) {
-				globalEventStackObserver.startObserving(Router.current().params.quizName);
-			}
+			globalEventStackObserver.startObserving(Router.current().params.quizName);
 			getChangeEventsForRoute(Router.current().route.getName());
 			getRemoveEventsForRoute(Router.current().route.getName());
 			this.render('questionList', {to: 'header.questionList'});
@@ -263,9 +265,7 @@ Router.route('/:quizName/settimer', {
 	},
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (!globalEventStackObserver.isRunning()) {
-				globalEventStackObserver.startObserving(Router.current().params.quizName);
-			}
+			globalEventStackObserver.startObserving(Router.current().params.quizName);
 			getChangeEventsForRoute(Router.current().route.getName());
 			getRemoveEventsForRoute(Router.current().route.getName());
 			this.render('questionList', {to: 'header.questionList'});
@@ -279,22 +279,27 @@ Router.route('/:quizName/settimer', {
 Router.route('/:quizName/memberlist', {
 	waitOn: function () {
 		const subscriptions = [
-			this.subscribe('HashtagsCollection.public'),
-			this.subscribe('ResponsesCollection.session', Router.current().params.quizName),
-			this.subscribe('AnswerOptionCollection.options', Router.current().params.quizName),
-			this.subscribe('QuestionGroupCollection.questionList', Router.current().params.quizName),
-			this.subscribe('MemberListCollection.members', Router.current().params.quizName),
-			this.subscribe('EventManagerCollection.join', Router.current().params.quizName)
+			this.subscribe('HashtagsCollection.public')
 		];
+		if (typeof Router.current().params.quizName !== "undefined") {
+			subscriptions.push(this.subscribe('ResponsesCollection.session', Router.current().params.quizName));
+			subscriptions.push(this.subscribe('AnswerOptionCollection.options', Router.current().params.quizName));
+			subscriptions.push(this.subscribe('QuestionGroupCollection.questionList', Router.current().params.quizName));
+			subscriptions.push(this.subscribe('MemberListCollection.members', Router.current().params.quizName));
+			subscriptions.push(this.subscribe('EventManagerCollection.join', Router.current().params.quizName));
+		}
 		return subscriptions;
 	},
 	action: function () {
 		if (!globalEventStackObserver.isRunning()) {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
 		}
-		getChangeEventsForRoute(Router.current().route.getName());
-		getRemoveEventsForRoute(Router.current().route.getName());
-		this.render("memberlist");
+		if (this.ready()) {
+			getChangeEventsForRoute(Router.current().route.getName());
+			getRemoveEventsForRoute(Router.current().route.getName());
+			console.log(globalEventStackObserver.getAllCallbacks("memberlist"));
+			this.render("memberlist");
+		}
 	}
 });
 
@@ -313,9 +318,7 @@ Router.route('/:quizName/votingview', {
 		return subscriptions;
 	},
 	action: function () {
-		if (!globalEventStackObserver.isRunning()) {
-			globalEventStackObserver.startObserving(Router.current().params.quizName);
-		}
+		globalEventStackObserver.startObserving(Router.current().params.quizName);
 		getChangeEventsForRoute(Router.current().route.getName());
 		getRemoveEventsForRoute(Router.current().route.getName());
 		this.render('votingview');
@@ -338,9 +341,7 @@ Router.route('/:quizName/onpolling', {
 		return subscriptions;
 	},
 	action: function () {
-		if (!globalEventStackObserver.isRunning()) {
-			globalEventStackObserver.startObserving(Router.current().params.quizName);
-		}
+		globalEventStackObserver.startObserving(Router.current().params.quizName);
 		getChangeEventsForRoute(Router.current().route.getName());
 		getRemoveEventsForRoute(Router.current().route.getName());
 		if (localData.containsHashtag(Router.current().params.quizName)) {
@@ -365,9 +366,7 @@ Router.route('/:quizName/results', {
 		return subscriptions;
 	},
 	action: function () {
-		if (!globalEventStackObserver.isRunning()) {
-			globalEventStackObserver.startObserving(Router.current().params.quizName);
-		}
+		globalEventStackObserver.startObserving(Router.current().params.quizName);
 		getChangeEventsForRoute(Router.current().route.getName());
 		getRemoveEventsForRoute(Router.current().route.getName());
 		this.render('live_results');
@@ -389,9 +388,7 @@ Router.route('/:quizName/statistics', {
 		return subscriptions;
 	},
 	action: function () {
-		if (!globalEventStackObserver.isRunning()) {
-			globalEventStackObserver.startObserving(Router.current().params.quizName);
-		}
+		globalEventStackObserver.startObserving(Router.current().params.quizName);
 		getChangeEventsForRoute(Router.current().route.getName());
 		getRemoveEventsForRoute(Router.current().route.getName());
 		this.render('leaderBoard');

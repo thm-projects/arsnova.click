@@ -19,6 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as localData from '/client/lib/local_storage.js';
 import {calculateButtonCount, setMemberlistObserver} from './lib.js';
 

@@ -111,6 +111,7 @@ Template.hashtagView.events({
 			var localHashtags = localData.getAllHashtags();
 			if ($.inArray(hashtag, localHashtags) > -1) {
 				var oldHashtagDoc = HashtagsCollection.findOne({hashtag: hashtag});
+				console.log(oldHashtagDoc);
 				if (oldHashtagDoc) {
 					reenter = true;
 					localData.reenterSession(hashtag);

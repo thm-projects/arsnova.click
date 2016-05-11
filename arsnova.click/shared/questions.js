@@ -133,7 +133,7 @@ Meteor.methods({
 				min: 0
 			}
 		}).validate({timer: timer});
-		var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
+		var questionGroup = QuestionGroupCollection.findOne();
 		if (!questionGroup) {
 			throw new Meteor.Error('Question.setTimer', 'hashtag_not_found');
 		}

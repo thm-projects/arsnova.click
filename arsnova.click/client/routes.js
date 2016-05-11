@@ -39,10 +39,10 @@ Router.configure({
 			subsCache.subscribe('HashtagsCollection.public')
 		];
 		if (typeof Router.current().params.quizName !== "undefined") {
-			subscriptions.push(subsCache.subscribe('ResponsesCollection.session', Router.current().params.quizName));
-			subscriptions.push(subsCache.subscribe('AnswerOptionCollection.options', Router.current().params.quizName));
-			subscriptions.push(subsCache.subscribe('QuestionGroupCollection.questionList', Router.current().params.quizName));
-			subscriptions.push(subsCache.subscribe('MemberListCollection.members', Router.current().params.quizName));
+			subscriptions.push(subsCache.subscribe('ResponsesCollection.join', Router.current().params.quizName));
+			subscriptions.push(subsCache.subscribe('AnswerOptionCollection.join', Router.current().params.quizName));
+			subscriptions.push(subsCache.subscribe('QuestionGroupCollection.join', Router.current().params.quizName));
+			subscriptions.push(subsCache.subscribe('MemberListCollection.join', Router.current().params.quizName));
 			subscriptions.push(subsCache.subscribe('EventManagerCollection.join', Router.current().params.quizName));
 		}
 		return subscriptions;

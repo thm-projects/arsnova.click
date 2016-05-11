@@ -18,35 +18,8 @@
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
-Meteor.publish('QuestionGroupCollection.authorizeAsOwner', function (pprivateKey, hashtag) {
-	new SimpleSchema({
-		hashtag: {type: String},
-		pprivateKey: {type: String}
-	}).validate({
-		pprivateKey,
-		hashtag
-	});
-	var isOwner = HashtagsCollection.find({
-		hashtag: hashtag,
-		privateKey: pprivateKey
-	}).count();
-	return isOwner > 0 ? QuestionGroupCollection.find({hashtag: hashtag}) : null;
-});
-
-Meteor.publish('QuestionGroupCollection.questionList', function (hashtag) {
-	new SimpleSchema({
-		hashtag: {type: String}
-	}).validate({hashtag});
-	return QuestionGroupCollection.find({hashtag: hashtag}, {
-		fields: {
-			questionList: 1
-		}
-	});
-});
-
-Meteor.publish('QuestionGroupCollection.memberlist', function (hashtag) {
+Meteor.publish('QuestionGroupCollection.join', function (hashtag) {
 	new SimpleSchema({
 		hashtag: {type: String}
 	}).validate({hashtag});

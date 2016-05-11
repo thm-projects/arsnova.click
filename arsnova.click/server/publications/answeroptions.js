@@ -18,34 +18,10 @@
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
-Meteor.publish('AnswerOptionCollection.instructor', function (pprivateKey, hashtag) {
-	new SimpleSchema({
-		hashtag: {type: String},
-		pprivateKey: {type: String}
-	}).validate({pprivateKey, hashtag});
-	var doc = HashtagsCollection.find({
-		hashtag: hashtag,
-		privateKey: pprivateKey
-	});
-	return doc ? AnswerOptionCollection.find({hashtag: hashtag}) : false;
-});
-
-Meteor.publish('AnswerOptionCollection.options', function (hashtag) {
+Meteor.publish('AnswerOptionCollection.join', function (hashtag) {
 	new SimpleSchema({
 		hashtag: {type: String}
 	}).validate({hashtag});
 	return AnswerOptionCollection.find({hashtag: hashtag});
-});
-
-Meteor.publish('AnswerOptionCollection.public', function (hashtag) {
-	new SimpleSchema({
-		hashtag: {type: String}
-	}).validate({hashtag});
-	return AnswerOptionCollection.find({hashtag: hashtag}, {
-		fields: {
-			isCorrect: 0
-		}
-	});
 });

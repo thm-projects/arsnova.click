@@ -40,7 +40,6 @@ Template.createAnswerOptions.events({
 		var answerOptionsCount = AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).count();
 		if (answerOptionsCount < 26) {
 			const answerOption = {
-				privateKey: localData.getPrivateKey(),
 				hashtag: Router.current().params.quizName,
 				questionIndex: EventManagerCollection.findOne().questionIndex,
 				answerText: "",

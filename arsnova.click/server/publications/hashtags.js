@@ -25,11 +25,3 @@ Meteor.publish('HashtagsCollection.public', function () {
 		}
 	});
 });
-
-Meteor.publish('HashtagsCollection.byHashtag', function (hashtag) {
-	return HashtagsCollection.find({hashtag: hashtag}, {
-		fields: {
-			privateKey: 0
-		}
-	});
-});

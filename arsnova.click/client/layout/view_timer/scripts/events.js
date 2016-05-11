@@ -34,9 +34,9 @@ Template.createTimerView.events({
 			});
 		} else {
 			if ($(event.currentTarget).attr("id") === "forwardButton") {
-				Meteor.call("MemberListCollection.removeFromSession", localData.getPrivateKey(), Router.current().params.quizName);
-				Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, 0);
-				Meteor.call("EventManagerCollection.setSessionStatus", localData.getPrivateKey(), Router.current().params.quizName, 2);
+				Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
+				Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
+				Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
 				Router.go("/" + Router.current().params.quizName + "/memberlist");
 			} else {
 				Router.go("/" + Router.current().params.quizName + "/answeroptions");

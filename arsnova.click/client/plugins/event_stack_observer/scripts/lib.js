@@ -119,9 +119,10 @@ export class EventStackObserver {
 
 	stop () {
 		if (this.isRunning()) {
-			//this.hooks.after.update.remove();
 			this.hooks.after.remove.remove();
-			this.observer.stop();
+			if (this.observer) {
+				this.observer.stop();
+			}
 			this.running = false;
 		}
 	}

@@ -27,8 +27,8 @@ import {getChangeEventsForRoute} from '/client/plugins/event_stack_observer/scri
 import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onRemoveEvent.js';
 
 export const subsCache = new SubsManager({
-	cacheLimit: 10,
-	expireIn: 5
+	cacheLimit: 1,
+	expireIn: 15
 });
 
 Router.configure({

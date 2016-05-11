@@ -41,6 +41,6 @@ Template.createTimerView.events({
 			} else {
 				Router.go("/" + Router.current().params.quizName + "/answeroptions");
 			}
-		});
+		}
 	}
 });

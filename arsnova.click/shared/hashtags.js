@@ -67,6 +67,15 @@ Meteor.methods({
 					musicTitle: doc.musicTitle
 				}
 			});
+
+			EventManagerCollection.update({hashtag: doc.hashtag}, {
+				$push: {
+					eventStack: {
+						key: "HashtagsCollection.updateMusicSettings",
+						value: {hashtag: doc.hashtag}
+					}
+				}
+			});
 		}
 	},
 	'HashtagsCollection.export': function ({hashtag}) {

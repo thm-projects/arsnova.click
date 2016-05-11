@@ -18,6 +18,18 @@
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {ObserveSequence} from 'meteor/observe-sequence';
 
+function checkOnChangeCallbacks(observerInstance, item, currentPath) {
+	observerInstance.onChangeCallbacks[currentPath].forEach(function (callbackObject) {
+		if ($.inArray(item.key, callbackObject.limiter) > -1) {
+			if (observerInstance.verbose) {
+				console.log("EventStackObserver: Found matching event limiter", item.key, "in key map", callbackObject.limiter);
+				console.log("EventStackObserver: Calling ", [callbackObject.callback]);
+			}
+			callbackObject.callback(item.key, item.value);
+		}
+	});
+}
+
 export class EventStackObserver {
 	constructor (options) {
 		this.observer = null;
@@ -40,7 +52,7 @@ export class EventStackObserver {
 			throw new Error("EventManager collection is not ready!");
 		}
 		const observerInstance = this;
-		observerInstance.observer = ObserveSequence.observe(function () {
+		ObserveSequence.observe(function () {
 			return EventManagerCollection.find();
 		}, {
 			changedAt: function (id,newDocument, oldDocument) {
@@ -60,15 +72,7 @@ export class EventStackObserver {
 							if ($.inArray(item.key, observerInstance.ignoreChanges) > -1) {
 								return;
 							}
-							observerInstance.onChangeCallbacks[currentPath].forEach(function (callbackObject) {
-								if ($.inArray(item.key, callbackObject.limiter) > -1) {
-									if (observerInstance.verbose) {
-										console.log("EventStackObserver: Found matching event limiter", item.key, "in key map", callbackObject.limiter);
-										console.log("EventStackObserver: Calling ", [callbackObject.callback]);
-									}
-									callbackObject.callback(item.key, item.value);
-								}
-							});
+							checkOnChangeCallbacks(observerInstance, item, currentPath);
 							if (observerInstance.verbose) {
 								console.log("EventStackObserver: All change callbacks have been called");
 								console.log("EventStackObserver: ---------------------------------------------------");
@@ -84,6 +88,102 @@ export class EventStackObserver {
 			movedTo: function () {
 			}
 		});
+		/*
+		EventManagerCollection.hookOptions.after.update = {fetchPrevious: false};
+		/*
+		this.observer = EventManagerCollection.find().observeChanges({
+			changed: function (id, changedFields) {
+				if (changedFields.eventStack && Router.current().route.getName()) {
+					let index = changedFields.eventStack.length - 1;
+					let currentPath = Router.current().route.getName().replace(":quizName.", "");
+					if (observerInstance.onChangeCallbacks[currentPath] && observerInstance.onChangeCallbacks[currentPath].length > 0) {
+						let item = changedFields.eventStack[index];
+						if (observerInstance.verbose) {
+							console.log("EventStackObserver: ", item.key, item.value);
+							console.log(
+								"EventStackObserver: Currently on route: " + currentPath,
+								"Number of callbacks: " + observerInstance.onChangeCallbacks[currentPath].length,
+								"callbacks: ",observerInstance.onChangeCallbacks[currentPath]
+							);
+						}
+						if ($.inArray(item.key, observerInstance.ignoreChanges) > -1) {
+							return;
+						}
+						observerInstance.onChangeCallbacks[currentPath].forEach(function (callbackObject) {
+							if ($.inArray(item.key, callbackObject.limiter) > -1) {
+								if (observerInstance.verbose) {
+									console.log("EventStackObserver: Found matching event limiter", item.key, "in key map", callbackObject.limiter);
+									console.log("EventStackObserver: Calling ", [callbackObject.callback]);
+								}
+								callbackObject.callback(item.key, item.value);
+							}
+						});
+						if (observerInstance.verbose) {
+							console.log("EventStackObserver: All change callbacks have been called");
+							console.log("EventStackObserver: ---------------------------------------------------");
+						}
+					}
+				}
+			}
+		});
+		*/
+		/*
+		this.hooks.after.update = EventManagerCollection.after.update(function (userId, doc, fieldNames, modifier) {
+			EVTCOL = EventManagerCollection.find().fetch();
+			let changedFields = modifier.$push || modifier.$set;
+			if (changedFields.eventStack && Router.current().route.getName()) {
+				console.log(modifier);
+				let currentPath = Router.current().route.getName().replace(":quizName.", "");
+				if (observerInstance.onChangeCallbacks[currentPath] && observerInstance.onChangeCallbacks[currentPath].length > 0) {
+					let item = changedFields.eventStack;
+					if (observerInstance.verbose) {
+						console.log("EventStackObserver: Change event fired");
+						console.log("EventStackObserver: ", item.key, item.value);
+						console.log(
+							"EventStackObserver: Currently on route: " + currentPath,
+							"Number of callbacks: " + observerInstance.onChangeCallbacks[currentPath].length,
+							"callbacks: ",observerInstance.onChangeCallbacks[currentPath]
+						);
+					}
+					observerInstance.onChangeCallbacks[currentPath].forEach(function (callbackObject) {
+						if ($.inArray(item.key, callbackObject.limiter) > -1) {
+							if (observerInstance.verbose) {
+								console.log("EventStackObserver: Found matching event limiter", item.key, "in key map", callbackObject.limiter);
+								console.log("EventStackObserver: Calling ", [callbackObject.callback]);
+							}
+							callbackObject.callback(item.key, item.value);
+						}
+					});
+					if (observerInstance.verbose) {
+						console.log("EventStackObserver: All change callbacks have been called");
+						console.log("EventStackObserver: ---------------------------------------------------");
+					}
+				}
+			}
+		});
+		*/
+		this.hooks.after.remove = EventManagerCollection.after.remove(function () {
+			if (Router.current().route.getName()) {
+				let currentPath = Router.current().route.getName().replace(":quizName.", "");
+				if (observerInstance.onRemoveCallbacks[currentPath] && observerInstance.onRemoveCallbacks[currentPath].length > 0) {
+					if (observerInstance.verbose) {
+						console.log("EventStackObserver: Remove event fired");
+						console.log(
+							"EventStackObserver: Currently on route: " + currentPath,
+							"Number of callbacks: " + observerInstance.onRemoveCallbacks[currentPath].length,
+							"callbacks: ",observerInstance.onRemoveCallbacks[currentPath]
+						);
+					}
+					observerInstance.onRemoveCallbacks[currentPath].forEach(function (callbackObject) {
+						callbackObject();
+					});
+					if (observerInstance.verbose) {
+						console.log("EventStackObserver: All remove callbacks have been called");
+						console.log("EventStackObserver: ---------------------------------------------------");
+					}
+				}
+			}
+		});
 		if (observerInstance.verbose) {
 			console.log("EventStackObserver: Observer started");
 		}
@@ -92,6 +192,8 @@ export class EventStackObserver {
 
 	stop () {
 		if (this.isRunning()) {
+			//this.hooks.after.update.remove();
+			this.hooks.after.remove.remove();
 			this.observer.stop();
 			this.running = false;
 		}

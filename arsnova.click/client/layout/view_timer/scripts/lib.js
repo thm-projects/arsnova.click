@@ -52,7 +52,7 @@ export function setTimer(index, callback) {
 			autostart: true,
 			errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + hasError.reason)
 		});
-	} else {
+	} else if (typeof callback === "function") {
 		callback();
 	}
 }

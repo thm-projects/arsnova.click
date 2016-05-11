@@ -20,25 +20,25 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
-Meteor.publish('MemberListCollection.members', function (phashtag) {
+Meteor.publish('MemberListCollection.members', function (hashtag) {
 	new SimpleSchema({
-		phashtag: {type: String}
-	}).validate({phashtag});
+		hashtag: {type: String}
+	}).validate({hashtag});
 	return MemberListCollection.find({
-		hashtag: phashtag
+		hashtag: hashtag
 	});
 });
 
-Meteor.publish('MemberListCollection.percentRead', function (phashtag, pprivateKey) {
+Meteor.publish('MemberListCollection.percentRead', function (hashtag, pprivateKey) {
 	new SimpleSchema({
-		phashtag: {type: String},
+		hashtag: {type: String},
 		pprivateKey: {type: String}
-	}).validate({phashtag, pprivateKey});
+	}).validate({hashtag, pprivateKey});
 	const exists = HashtagsCollection.findOne({
-		hashtag: phashtag,
+		hashtag: hashtag,
 		privateKey: pprivateKey
 	});
 	if (exists) {
-		return MemberListCollection.find({hashtag: phashtag});
+		return MemberListCollection.find({hashtag: hashtag});
 	}
 });

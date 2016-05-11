@@ -26,7 +26,7 @@ Meteor.methods({
 	'LeaderBoardCollection.addResponseSet': function ({hashtag, questionIndex, nick, responseTimeMillis}) {
 		if (Meteor.isServer) {
 			new SimpleSchema({
-				phashtag: {type: String},
+				hashtag: {type: String},
 				questionIndex: {type: Number},
 				nick: {type: String},
 				responseTimeMillis: {type: Number}

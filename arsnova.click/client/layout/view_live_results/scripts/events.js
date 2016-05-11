@@ -108,8 +108,9 @@ Template.liveResults.events({
 		event.stopPropagation();
 		$('.sound-button').show();
 		Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);
-		Meteor.call("MemberListCollection.clearReadConfirmed", Router.current().params.quizName);
-		Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
+		Meteor.call("MemberListCollection.clearReadConfirmed", Router.current().params.quizName, function () {
+			Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
+		});
 	},
 	'click #startNextQuestion': (event)=> {
 		event.stopPropagation();

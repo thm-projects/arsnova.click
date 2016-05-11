@@ -20,23 +20,23 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
-Meteor.publish('AnswerOptionCollection.instructor', function (pprivateKey, phashtag) {
+Meteor.publish('AnswerOptionCollection.instructor', function (pprivateKey, hashtag) {
 	new SimpleSchema({
-		phashtag: {type: String},
+		hashtag: {type: String},
 		pprivateKey: {type: String}
-	}).validate({pprivateKey, phashtag});
+	}).validate({pprivateKey, hashtag});
 	var doc = HashtagsCollection.find({
-		hashtag: phashtag,
+		hashtag: hashtag,
 		privateKey: pprivateKey
 	});
-	return doc ? AnswerOptionCollection.find({hashtag: phashtag}) : false;
+	return doc ? AnswerOptionCollection.find({hashtag: hashtag}) : false;
 });
 
-Meteor.publish('AnswerOptionCollection.options', function (phashtag) {
+Meteor.publish('AnswerOptionCollection.options', function (hashtag) {
 	new SimpleSchema({
-		phashtag: {type: String}
-	}).validate({phashtag});
-	return AnswerOptionCollection.find({hashtag: phashtag});
+		hashtag: {type: String}
+	}).validate({hashtag});
+	return AnswerOptionCollection.find({hashtag: hashtag});
 });
 
 Meteor.publish('AnswerOptionCollection.public', function (hashtag) {

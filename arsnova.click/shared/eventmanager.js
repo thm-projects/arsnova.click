@@ -22,7 +22,11 @@ import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
 Meteor.methods({
 	'EventManagerCollection.setSessionStatus': (hashtag, sessionStatus)=> {
-		EventManagerCollection.update({hashtag: hashtag}, {
+		const query = {};
+		if (Meteor.isServer) {
+			query.hashtag = hashtag;
+		}
+		EventManagerCollection.update(query, {
 			$set: {sessionStatus: sessionStatus},
 			$push: {
 				eventStack: {

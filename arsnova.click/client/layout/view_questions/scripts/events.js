@@ -28,6 +28,7 @@ Template.createQuestionView.events({
 			return;
 		}
 		lib.addQuestion(EventManagerCollection.findOne().questionIndex);
+		lib.checkForValidQuestiontext();
 	},
 	//Save question in Sessions-Collection when Button "Next" is clicked
 	'click #forwardButton': function () {

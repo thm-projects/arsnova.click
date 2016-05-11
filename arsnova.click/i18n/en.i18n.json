@@ -120,7 +120,7 @@
   },
   "view": {
     "answeroptions": {
-      "answeroption_or_leave_empty": "Type any answer option or leave it empty"
+      "answeroptiontext_placeholder": "Answer option required"
     },
     "choose_nickname": {
       "enter_nickname": "Take a nickname",

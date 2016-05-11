@@ -19,7 +19,6 @@ import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import * as localData from '/client/lib/local_storage.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {setTimer} from './lib.js';
@@ -35,36 +34,6 @@ Template.createTimerView.events({
 			});
 		} else {
 			if ($(event.currentTarget).attr("id") === "forwardButton") {
-				/* After finishing question/answers-creation this function checks if there are answer-options
-				 * with no text. All answer-options with no text will consequently be deleted from database and
-				 * local storage to prevent the rendering of empty and therefore unnecessary answer-options during
-				 * the quiz. However, at least one answer remains even if all answers are empty.*/
-				AnswerOptionCollection.find({answerText: {$exists: false}}).forEach(function (cursor) {
-					if (AnswerOptionCollection.find({
-							$and: [
-								{answerText: {$exists: true}},
-								{questionIndex: cursor.questionIndex}
-							]
-						}).count() > 0) {
-						Meteor.call('AnswerOptionCollection.deleteOption', {
-							privateKey: localData.getPrivateKey(),
-							hashtag: Router.current().params.quizName,
-							questionIndex: cursor.questionIndex,
-							answerOptionNumber: cursor.answerOptionNumber
-						});
-						localData.deleteAnswerOption(Router.current().params.quizName, cursor.questionIndex, cursor.answerOptionNumber);
-					} else {
-						if (cursor.answerOptionNumber > 0) {
-							Meteor.call('AnswerOptionCollection.deleteOption', {
-								privateKey: localData.getPrivateKey(),
-								hashtag: Router.current().params.quizName,
-								questionIndex: cursor.questionIndex,
-								answerOptionNumber: cursor.answerOptionNumber
-							});
-							localData.deleteAnswerOption(Router.current().params.quizName, cursor.questionIndex, cursor.answerOptionNumber);
-						}
-					}
-				});
 				Meteor.call("MemberListCollection.removeFromSession", localData.getPrivateKey(), Router.current().params.quizName);
 				Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, 0);
 				Meteor.call("EventManagerCollection.setSessionStatus", localData.getPrivateKey(), Router.current().params.quizName, 2);
@@ -75,4 +44,3 @@ Template.createTimerView.events({
 		}
 	}
 });
-

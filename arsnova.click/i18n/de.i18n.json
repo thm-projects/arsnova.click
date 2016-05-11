@@ -120,7 +120,7 @@
   },
   "view": {
     "answeroptions": {
-      "answeroption_or_leave_empty": "Antwortoption oder leer lassen"
+      "answeroptiontext_placeholder": "Antwortoption benötigt"
     },
     "choose_nickname": {
       "enter_nickname": "Gib dir einen Nicknamen",

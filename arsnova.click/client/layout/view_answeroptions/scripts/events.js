@@ -17,11 +17,9 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import * as localData from '/client/lib/local_storage.js';
-import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {parseAnswerOptionInput} from './lib.js';
 
 Template.createAnswerOptions.events({
@@ -63,6 +61,8 @@ Template.createAnswerOptions.events({
 					}
 
 					$('.answer-options').scrollTop($('.answer-options')[0].scrollHeight);
+
+					$('#answerOptionText_Number' + (answerOptionsCount - 1)).closest(".input-group").addClass("invalidAnswerOption");
 				}
 			});
 		}
@@ -89,35 +89,29 @@ Template.createAnswerOptions.events({
 		}
 	},
 	"click #backButton": function () {
+		parseAnswerOptionInput(EventManagerCollection.findOne().questionIndex);
 		Router.go("/" + Router.current().params.quizName + "/question");
 	},
 	"click #forwardButton": function () {
-		var err = parseAnswerOptionInput(EventManagerCollection.findOne().questionIndex);
-
-		if (err) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
-			});
-		} else {
-			Router.go("/" + Router.current().params.quizName + "/settimer");
-		}
+		parseAnswerOptionInput(EventManagerCollection.findOne().questionIndex);
+		Router.go("/" + Router.current().params.quizName + "/settimer");
 	},
 	"keydown .input-field": function (event) {
-		//Prevent tab default
-		if (event.keyCode === 9) {
-			event.preventDefault();
-		}
-
-		if (event.keyCode === 9 || event.keyCode === 13) {
+		if ((event.keyCode === 9 || event.keyCode === 13) && !event.shiftKey) {
 			var nextElement = $(event.currentTarget).closest(".form-group").next();
-			if (nextElement.length > 0) {
-				nextElement.find(".input-field").focus();
-			} else {
+			if (nextElement.length <= 0) {
+				event.preventDefault();
 				$("#addAnswerOption").click();
 				//sets focus to the new input field
 				$(event.currentTarget).closest(".form-group").next().find(".input-field").focus();
 			}
+		}
+	},
+	"keyup .input-field": function (event) {
+		if ($(event.currentTarget).val().length === 0) {
+			$(event.currentTarget).closest(".input-group").addClass("invalidAnswerOption");
+		} else {
+			$(event.currentTarget).closest(".input-group").removeClass("invalidAnswerOption");
 		}
 	}
 });

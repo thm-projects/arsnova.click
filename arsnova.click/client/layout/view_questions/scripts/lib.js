@@ -142,3 +142,12 @@ export function checkForMarkdown() {
 		}
 	}
 }
+
+export function checkForValidQuestiontext() {
+	var questionText = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].questionText;
+	if (questionText.length < 5) {
+		$('#questionText').addClass("invalidAnswerOption");
+	} else {
+		$('#questionText').removeClass("invalidAnswerOption");
+	}
+}

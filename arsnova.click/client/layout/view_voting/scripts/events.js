@@ -86,7 +86,7 @@ Template.votingview.events({
 	"click .sendResponse": function (event) {
 		event.stopPropagation();
 
-		if (Session.get("questionSC") || (AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).count() === 1)) {
+		if (Session.get("questionSC")) {
 			makeAndSendResponse(event.currentTarget.id);
 			Router.go("/" + Router.current().params.quizName + "/results");
 		} else {

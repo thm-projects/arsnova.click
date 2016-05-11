@@ -120,7 +120,7 @@
   },
   "view": {
     "answeroptions": {
-      "answeroption_or_leave_empty": "Escriba cualquier opción de respuesta o dejarlo vacío"
+      "answeroptiontext_placeholder": "Opción de respuesta necesario"
     },
     "choose_nickname": {
       "enter_nickname": "Tome un apodo",

@@ -96,23 +96,18 @@ Template.createAnswerOptions.events({
 		parseAnswerOptionInput(EventManagerCollection.findOne().questionIndex);
 		Router.go("/" + Router.current().params.quizName + "/settimer");
 	},
-	"keyup .input-field": function (event) {
-		//Prevent tab default
-		if (event.keyCode === 9) {
-			event.preventDefault();
-		}
-
-		if (event.keyCode === 9 || event.keyCode === 13) {
+	"keydown .input-field": function (event) {
+		if ((event.keyCode === 9 || event.keyCode === 13) && !event.shiftKey) {
 			var nextElement = $(event.currentTarget).closest(".form-group").next();
-			if (nextElement.length > 0) {
-				nextElement.find(".input-field").focus();
-			} else {
+			if (nextElement.length <= 0) {
+				event.preventDefault();
 				$("#addAnswerOption").click();
 				//sets focus to the new input field
 				$(event.currentTarget).closest(".form-group").next().find(".input-field").focus();
 			}
 		}
-
+	},
+	"keyup .input-field": function (event) {
 		if ($(event.currentTarget).val().length === 0) {
 			$(event.currentTarget).closest(".input-group").addClass("invalidAnswerOption");
 		} else {

@@ -103,6 +103,7 @@ export class EventStackObserver {
 					observerInstance.onRemoveCallbacks[currentPath].forEach(function (callbackObject) {
 						callbackObject();
 					});
+					observerInstance.stop();
 					if (observerInstance.verbose) {
 						console.log("EventStackObserver: All remove callbacks have been called");
 						console.log("EventStackObserver: ---------------------------------------------------");

@@ -45,6 +45,5 @@ Template.createQuestionView.onRendered(function () {
 
 	if ($('#questionText').val().length < 5) {
 		$('#questionText').addClass("invalidAnswerOption");
-
 	}
 });

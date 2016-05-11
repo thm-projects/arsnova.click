@@ -17,9 +17,11 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SubsManager} from 'meteor/meteorhacks:subs-manager';
+import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
+import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
 import {getChangeEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onChangeEvent.js';
 import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onRemoveEvent.js';
@@ -61,8 +63,18 @@ Router.onBeforeAction(function () {
 	if (!globalEventStackObserver) {
 		setGlobalEventStackObserver();
 	}
-	getChangeEventsForRoute(Router.current().route.getName());
-	getRemoveEventsForRoute(Router.current().route.getName());
+	if (typeof Router.current().params.quizName !== "undefined" && !EventManagerCollection.findOne()) {
+		if (!localData.containsHashtag(Router.current().params.quizName)) {
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.session_closed")
+			});
+		}
+		Router.go("/" + Router.current().params.quizName + "/resetToHome");
+	} else {
+		getChangeEventsForRoute(Router.current().route.getName());
+		getRemoveEventsForRoute(Router.current().route.getName());
+	}
 	this.next();
 });
 

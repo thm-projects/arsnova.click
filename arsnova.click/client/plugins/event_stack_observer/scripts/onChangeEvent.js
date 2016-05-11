@@ -148,6 +148,7 @@ export function getChangeEventsForRoute(route) {
 			addMemberlistChangeEvents();
 			break;
 		case "results":
+		case "statistics":
 			addLiveresultsChangeEvents();
 			break;
 	}

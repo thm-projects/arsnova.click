@@ -76,12 +76,10 @@ Meteor.methods({
 		}).nick;
 
 		if (nickName) {
-			/*
 			MemberListCollection.remove({
 				hashtag: hashtag,
 				_id: nickId
 			});
-			*/
 			EventManagerCollection.update({hashtag: hashtag}, {
 				$push: {
 					eventStack: {

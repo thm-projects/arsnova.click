@@ -17,6 +17,7 @@
 
 export let hashtagSplashscreen = null;
 export let eventManagerHandle = null;
+export let eventManagerTracker = null;
 
 export function setHashtagSplashscreen(instance) {
 	hashtagSplashscreen = instance;
@@ -24,4 +25,8 @@ export function setHashtagSplashscreen(instance) {
 
 export function setEventManagerHandle(handle) {
 	eventManagerHandle = handle;
+}
+
+export function setEventManagerTracker(handle) {
+	eventManagerTracker = handle;
 }

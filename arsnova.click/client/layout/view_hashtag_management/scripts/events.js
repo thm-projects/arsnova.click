@@ -48,12 +48,15 @@ Template.hashtagView.events({
 		if (lib.eventManagerHandle) {
 			lib.eventManagerHandle.stop();
 		}
-		lib.setEventManagerHandle(Tracker.autorun(function () {
+		if (lib.eventManagerTracker) {
+			lib.eventManagerTracker.stop();
+		}
+		lib.setEventManagerTracker(Tracker.autorun(function () {
 			Meteor.subscribe("EventManagerCollection.join", $("#hashtag-input-field").val(), function () {
-				if (!EventManagerCollection.findOne() || !localData.containsHashtag($("#hashtag-input-field").val())) {
+				if (!EventManagerCollection.findOne() || localData.containsHashtag($("#hashtag-input-field").val())) {
 					$("#joinSession").attr("disabled", "disabled");
 				}
-				EventManagerCollection.find().observeChanges({
+				lib.setEventManagerHandle(EventManagerCollection.find({hashtag: $("#hashtag-input-field").val()}).observeChanges({
 					changed: function (id, changedFields) {
 						if (!isNaN(changedFields.sessionStatus)) {
 							if (changedFields.sessionStatus === 2) {
@@ -72,7 +75,7 @@ Template.hashtagView.events({
 							}
 						}
 					}
-				});
+				}));
 			});
 		}));
 		let addNewHashtagItem = $("#addNewHashtag");
@@ -110,8 +113,7 @@ Template.hashtagView.events({
 		if (hashtag.length > 0) {
 			var localHashtags = localData.getAllHashtags();
 			if ($.inArray(hashtag, localHashtags) > -1) {
-				var oldHashtagDoc = HashtagsCollection.findOne({hashtag: hashtag});
-				console.log(oldHashtagDoc);
+				var oldHashtagDoc = HashtagsCollection.findOne();
 				if (oldHashtagDoc) {
 					reenter = true;
 					localData.reenterSession(hashtag);

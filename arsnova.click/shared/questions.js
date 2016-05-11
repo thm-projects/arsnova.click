@@ -29,8 +29,12 @@ Meteor.methods({
 			questionList: questionList
 		});
 
-		if (QuestionGroupCollection.find({hashtag: hashtag}).count() > 0) {
-			QuestionGroupCollection.update({hashtag: hashtag}, {$set: {questionList: questionList}});
+		const query = {};
+		if (Meteor.isServer) {
+			query.hashtag = hashtag;
+		}
+		if (QuestionGroupCollection.find(query).count() > 0) {
+			QuestionGroupCollection.update(query, {$set: {questionList: questionList}});
 		} else {
 			QuestionGroupCollection.insert({
 				hashtag: hashtag,
@@ -52,7 +56,11 @@ Meteor.methods({
 			questionIndex: {type: Number}
 		}).validate({questionIndex: questionIndex, questionText: questionText});
 
-		var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
+		const query = {};
+		if (Meteor.isServer) {
+			query.hashtag = hashtag;
+		}
+		var questionGroup = QuestionGroupCollection.findOne(query);
 		var questionItem = {
 			questionText: questionText,
 			timer: 40000,
@@ -81,7 +89,11 @@ Meteor.methods({
 		});
 	},
 	"QuestionGroupCollection.removeQuestion": function ({hashtag, questionIndex}) {
-		var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
+		const query = {};
+		if (Meteor.isServer) {
+			query.hashtag = hashtag;
+		}
+		var questionGroup = QuestionGroupCollection.findOne(query);
 		if (questionGroup) {
 			questionGroup.questionList.splice(questionIndex, 1);
 			QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
@@ -111,7 +123,11 @@ Meteor.methods({
 			}
 		}).validate({isReadingConfirmationRequired: isReadingConfirmationRequired});
 
-		var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
+		const query = {};
+		if (Meteor.isServer) {
+			query.hashtag = hashtag;
+		}
+		var questionGroup = QuestionGroupCollection.findOne(query);
 		if (!questionGroup) {
 			throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'hashtag_not_found');
 		}
@@ -133,7 +149,11 @@ Meteor.methods({
 				min: 0
 			}
 		}).validate({timer: timer});
-		var questionGroup = QuestionGroupCollection.findOne();
+		const query = {};
+		if (Meteor.isServer) {
+			query.hashtag = hashtag;
+		}
+		var questionGroup = QuestionGroupCollection.findOne(query);
 		if (!questionGroup) {
 			throw new Meteor.Error('Question.setTimer', 'hashtag_not_found');
 		}
@@ -155,7 +175,11 @@ Meteor.methods({
 	"Question.startTimer": function ({hashtag, questionIndex}) {
 		var startTime = new Date();
 
-		var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
+		const query = {};
+		if (Meteor.isServer) {
+			query.hashtag = hashtag;
+		}
+		var questionGroup = QuestionGroupCollection.findOne(query);
 		if (!questionGroup) {
 			throw new Meteor.Error('Question.startTimer', 'hashtag_not_found');
 		}

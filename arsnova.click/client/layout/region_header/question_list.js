@@ -65,13 +65,6 @@ Template.questionList.onRendered(function () {
 			return;
 		}
 
-		let allValid = true;
-		for (var i = 0; i < validQuestions.length; i++) {
-			if (validQuestions[i] !== true) {
-				allValid = false;
-				break;
-			}
-		}
 		if (!Session.get("overrideValidQuestionRedirect")) {
 			delete Session.keys.overrideValidQuestionRedirect;
 			handleRedirect = false;
@@ -79,6 +72,13 @@ Template.questionList.onRendered(function () {
 				redirectTracker.stop();
 			}
 		} else {
+			let allValid = true;
+			for (var i = 0; i < validQuestions.length; i++) {
+				if (validQuestions[i] !== true) {
+					allValid = false;
+					break;
+				}
+			}
 			if (allValid && handleRedirect) {
 				delete Session.keys.overrideValidQuestionRedirect;
 				Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
@@ -103,6 +103,10 @@ Template.questionList.helpers({
 	},
 	hasCompleteContent: function (index) {
 		var validQuestions = Session.get("validQuestions");
+		if (!validQuestions) {
+			return false;
+		}
+
 		validQuestions[index] = lib.checkForValidQuestions(index);
 		Session.set("validQuestions", validQuestions);
 		return validQuestions[index];

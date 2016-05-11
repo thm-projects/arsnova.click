@@ -35,7 +35,11 @@ Meteor.methods({
 		if (dupDoc) {
 			throw new Meteor.Error('ResponsesCollection.addResponse', 'duplicate_response');
 		}
-		var questionGroupDoc = QuestionGroupCollection.findOne({hashtag: responseDoc.hashtag});
+		const query = {};
+		if (Meteor.isServer) {
+			query.hashtag = responseDoc.hashtag;
+		}
+		var questionGroupDoc = QuestionGroupCollection.findOne(query);
 		if (!questionGroupDoc) {
 			throw new Meteor.Error('ResponsesCollection.addResponse', 'hashtag_not_found');
 		}
@@ -61,10 +65,6 @@ Meteor.methods({
 			questionIndex: responseDoc.questionIndex,
 			nick: responseDoc.userNick,
 			responseTimeMillis: responseDoc.responseTime
-		}, (err) => {
-			if (err) {
-				throw new Meteor.Error('ResponsesCollection.addResponse', 'insert_leaderboard_failed');
-			}
 		});
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$push: {

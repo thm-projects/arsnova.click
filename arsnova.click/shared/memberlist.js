@@ -39,7 +39,11 @@ Meteor.methods({
 			})) {
 			throw new Meteor.Error('MemberListCollection.addLearner', 'Nick already exists!');
 		}
-		if (EventManagerCollection.findOne({hashtag: hashtag}).sessionStatus !== 2) {
+		const query = {};
+		if (Meteor.isServer) {
+			query.hashtag = hashtag;
+		}
+		if (EventManagerCollection.findOne(query).sessionStatus !== 2) {
 			throw new Meteor.Error('MemberListCollection.addLearner', 'session_not_available');
 		}
 		MemberListCollection.insert({
@@ -51,7 +55,7 @@ Meteor.methods({
 			readConfirmed: [],
 			insertDate: new Date().getTime()
 		});
-		EventManagerCollection.update({hashtag: hashtag}, {
+		EventManagerCollection.update(query, {
 			$push: {
 				eventStack: {
 					key: "MemberListCollection.addLearner",

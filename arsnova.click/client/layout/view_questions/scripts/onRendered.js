@@ -27,6 +27,9 @@ Template.createQuestionView.onRendered(function () {
 
 	let index;
 	lib.subscriptionHandler = Tracker.autorun(()=> {
+		if (!EventManagerCollection.findOne()) {
+			return;
+		}
 		index = EventManagerCollection.findOne().questionIndex;
 		lib.checkForMarkdown();
 	});

@@ -41,21 +41,25 @@ Template.liveResults.helpers({
 		return 0;
 	},
 	isCountdownZero: function (index) {
+		let eventDoc = EventManagerCollection.findOne();
+		if (!eventDoc) {
+			return;
+		}
 		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (Session.get("sessionClosed") || !Session.get("countdownInitialized") || EventManagerCollection.findOne().questionIndex !== index) {
+			if (Session.get("sessionClosed") || !Session.get("countdownInitialized") || eventDoc.questionIndex !== index) {
 				return true;
 			} else {
 				var timer = Math.round(countdown.get());
 				return timer <= 0;
 			}
 		} else {
-			var question = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex];
-
-			if (EventManagerCollection.findOne().questionIndex === index && new Date().getTime() - parseInt(question.startTime) < question.timer) {
-				return false;
-			} else {
-				return true;
+			let questionDoc = QuestionGroupCollection.findOne();
+			if (!questionDoc) {
+				return;
 			}
+			var question = questionDoc.questionList[eventDoc.questionIndex];
+
+			return !(eventDoc.questionIndex === index && new Date().getTime() - parseInt(question.startTime) < question.timer);
 		}
 	},
 	getCountStudents: function () {
@@ -145,13 +149,14 @@ Template.liveResults.helpers({
 	},
 	questionList: function () {
 		var questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc) {
+		let eventDoc = EventManagerCollection.findOne();
+		if (!questionDoc || !eventDoc) {
 			return;
 		}
 
 		var questionList = questionDoc.questionList;
-		if (EventManagerCollection.findOne().readingConfirmationIndex < questionList.length - 1) {
-			questionList.splice(EventManagerCollection.findOne().readingConfirmationIndex + 1, questionList.length - (EventManagerCollection.findOne().readingConfirmationIndex + 1));
+		if (eventDoc.readingConfirmationIndex < questionList.length - 1) {
+			questionList.splice(eventDoc.readingConfirmationIndex + 1, questionList.length - (eventDoc.readingConfirmationIndex + 1));
 		}
 
 		for (var i = 0; i < questionList.length; i++) {
@@ -187,53 +192,74 @@ Template.liveResults.helpers({
 		return result;
 	},
 	isActiveQuestion: function (index) {
-		return !Session.get("sessionClosed") && index === EventManagerCollection.findOne().questionIndex;
+		let eventDoc = EventManagerCollection.findOne();
+		if (!eventDoc) {
+			return;
+		}
+		return !Session.get("sessionClosed") && index === eventDoc.questionIndex;
 	},
 	isRunningQuestion: ()=> {
 		return Session.get("countdownInitialized");
 	},
 	showNextQuestionButton: ()=> {
-		if (EventManagerCollection.findOne() && EventManagerCollection.findOne().readingConfirmationIndex <= EventManagerCollection.findOne().questionIndex) {
-			return true;
+		let eventDoc = EventManagerCollection.findOne();
+		if (!eventDoc) {
+			return;
 		}
+		return eventDoc.readingConfirmationIndex <= eventDoc.questionIndex;
 	},
 	nextQuestionIndex: ()=> {
-		return EventManagerCollection.findOne() ? EventManagerCollection.findOne().questionIndex + 2 : false;
+		let eventDoc = EventManagerCollection.findOne();
+		if (!eventDoc) {
+			return;
+		}
+		return eventDoc.questionIndex + 2;
 	},
 	nextReadingConfirmationIndex: ()=> {
-		return EventManagerCollection.findOne() ? EventManagerCollection.findOne().readingConfirmationIndex + 2 : false;
+		let eventDoc = EventManagerCollection.findOne();
+		if (!eventDoc) {
+			return;
+		}
+		return eventDoc.readingConfirmationIndex + 2;
 	},
 	getCSSClassForPercent: (percent)=> {
 		return hslColPerc(percent, 0, 120);
 	},
 	showGlobalLeaderboardButton: ()=> {
 		var questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc) {
+		let eventDoc = EventManagerCollection.findOne();
+		if (!questionDoc || !eventDoc) {
 			return;
 		}
 
-		return Session.get("sessionClosed") && questionDoc.questionList.length > 1 && EventManagerCollection.findOne().questionIndex >= questionDoc.questionList.length - 1;
+		return Session.get("sessionClosed") && questionDoc.questionList.length > 1 && eventDoc.questionIndex >= questionDoc.questionList.length - 1;
 	},
 	hasCorrectAnswerOptions: ()=> {
 		return AnswerOptionCollection.find({isCorrect: 1}).count() > 0;
 	},
 	showQuestionDialog: ()=> {
-		if (!EventManagerCollection.findOne()) {
+		let eventDoc = EventManagerCollection.findOne();
+		if (!eventDoc) {
 			return;
 		}
 
-		return EventManagerCollection.findOne().questionIndex === EventManagerCollection.findOne().readingConfirmationIndex;
+		return eventDoc.questionIndex === eventDoc.readingConfirmationIndex;
 	},
 	hasNextQuestion: ()=> {
 		var questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc) {
+		let eventDoc = EventManagerCollection.findOne();
+		if (!questionDoc || !eventDoc) {
 			return;
 		}
 
-		return EventManagerCollection.findOne().questionIndex < questionDoc.questionList.length - 1;
+		return eventDoc.questionIndex < questionDoc.questionList.length - 1;
 	},
 	hasReadConfirmationRequested: (index)=> {
-		return index <= EventManagerCollection.findOne().questionIndex;
+		let eventDoc = EventManagerCollection.findOne();
+		if (!eventDoc) {
+			return;
+		}
+		return index <= eventDoc.questionIndex;
 	},
 	readingConfirmationListForQuestion: (index)=> {
 		let result = [];

@@ -99,7 +99,7 @@ Template.questionList.helpers({
 		return index + 1;
 	},
 	isActiveIndex: function (index) {
-		return index === EventManagerCollection.findOne().questionIndex;
+		return EventManagerCollection.findOne() && index === EventManagerCollection.findOne().questionIndex;
 	},
 	hasCompleteContent: function (index) {
 		var validQuestions = Session.get("validQuestions");

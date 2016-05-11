@@ -21,12 +21,12 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 
 Template.createAnswerOptions.helpers({
 	answerOptions: function () {
-		return AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}, {sort: {answerOptionNumber: 1}});
+		return EventManagerCollection.findOne() ? AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}, {sort: {answerOptionNumber: 1}}) : false;
 	},
 	answerOptionLetter: function (Nr) {
 		return String.fromCharCode(Nr + 65);
 	},
 	showDeleteButtonOnStart: function () {
-		return (AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).count() === 1) ? "hide" : "";
+		return EventManagerCollection.findOne() && (AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).count() === 1) ? "hide" : "";
 	}
 });

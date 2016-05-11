@@ -156,7 +156,7 @@ Router.route('/:quizName/resetToHome', function () {
 	delete localStorage.slider;
 	delete localStorage.lastPage;
 
-	if (EventManagerCollection.findOne()) {
+	if (EventManagerCollection.findOne() && localData.containsHashtag(Router.current().params.quizName)) {
 		Meteor.call("EventManagerCollection.clear", Router.current().params.quizName);
 	}
 	Router.go("/");

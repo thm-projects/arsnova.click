@@ -18,7 +18,6 @@
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
 Meteor.methods({
 	'EventManagerCollection.setSessionStatus': (hashtag, sessionStatus)=> {
@@ -71,6 +70,21 @@ Meteor.methods({
 			hashtag
 		});
 		EventManagerCollection.remove({hashtag: hashtag});
+	},
+	'EventManagerCollection.beforeClear': (hashtag) => {
+		new SimpleSchema({
+			hashtag: {type: String}
+		}).validate({
+			hashtag
+		});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "EventManagerCollection.beforeClear",
+					value: {}
+				}
+			}
+		});
 	},
 	'EventManagerCollection.reset': (hashtag) => {
 		EventManagerCollection.update({hashtag: hashtag}, {

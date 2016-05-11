@@ -19,7 +19,6 @@ import {Meteor} from 'meteor/meteor';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({

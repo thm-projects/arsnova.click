@@ -29,7 +29,7 @@ Meteor.methods({
 		MemberListCollection.remove({hashtag: hashtag});
 		ResponsesCollection.remove({hashtag: hashtag});
 		QuestionGroupCollection.remove({hashtag: hashtag});
-		EventManagerCollection.remove({hashtag: hashtag});
+		Meteor.call("EventManagerCollection.beforeClear", hashtag);
 	},
 	'Main.deleteEverything': function ({hashtag}) {
 		HashtagsCollection.remove({hashtag: hashtag});

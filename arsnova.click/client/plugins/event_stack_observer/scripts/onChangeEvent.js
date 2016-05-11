@@ -11,20 +11,15 @@ import {globalEventStackObserver} from '/client/plugins/event_stack_observer/scr
 
 function addDefaultChangeEvents() {
 	globalEventStackObserver.onChange([
-		"EventManagerCollection.setSessionStatus",
-		"EventManagerCollection.reset"
-	], function (key, value) {
-		if (!isNaN(value.sessionStatus)) {
-			if (value.sessionStatus < 2) {
-				if (!localData.containsHashtag(Router.current().params.quizName)) {
-					new ErrorSplashscreen({
-						autostart: true,
-						errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.session_closed")
-					});
-				}
-				Router.go("/" + Router.current().params.quizName + "/resetToHome");
-			}
+		"EventManagerCollection.beforeClear"
+	], function () {
+		if (!localData.containsHashtag(Router.current().params.quizName)) {
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.session_closed")
+			});
 		}
+		Router.go("/" + Router.current().params.quizName + "/resetToHome");
 	});
 }
 

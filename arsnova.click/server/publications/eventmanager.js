@@ -33,7 +33,7 @@ Meteor.publish('EventManagerCollection.join', (hashtag)=> {
 	return EventManagerCollection.find({hashtag});
 });
 
-Meteor.publish('EventManagerCollection.getSessionStatus', function (hashtag, callback) {
+Meteor.publish('EventManagerCollection.getSessionStatus', function (hashtag) {
 	if (typeof hashtag === "undefined") {
 		return false;
 	}

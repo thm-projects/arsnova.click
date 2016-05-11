@@ -19,7 +19,6 @@ import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
 Meteor.methods({
 	'MemberListCollection.addLearner': function ({hashtag, nick, backgroundColor, foregroundColor}) {

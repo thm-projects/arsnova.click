@@ -16,12 +16,10 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {SubsManager} from 'meteor/meteorhacks:subs-manager';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
-import { ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
 import {getChangeEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onChangeEvent.js';
 import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onRemoveEvent.js';
@@ -158,6 +156,9 @@ Router.route('/:quizName/resetToHome', function () {
 	delete localStorage.slider;
 	delete localStorage.lastPage;
 
+	if (EventManagerCollection.findOne()) {
+		Meteor.call("EventManagerCollection.clear", Router.current().params.quizName);
+	}
 	Router.go("/");
 });
 

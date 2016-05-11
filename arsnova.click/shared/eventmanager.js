@@ -77,7 +77,11 @@ Meteor.methods({
 		}).validate({
 			hashtag
 		});
-		EventManagerCollection.update({hashtag: hashtag}, {
+		const query = {};
+		if (Meteor.isServer) {
+			query.hashtag = hashtag;
+		}
+		EventManagerCollection.update(query, {
 			$push: {
 				eventStack: {
 					key: "EventManagerCollection.beforeClear",

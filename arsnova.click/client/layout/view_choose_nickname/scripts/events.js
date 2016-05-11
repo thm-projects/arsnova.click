@@ -44,7 +44,7 @@ Template.nick.events({
 		});
 	},
 	"click #backButton": function () {
-		Router.go("/");
+		Router.go("/" + Router.current().params.quizName + "/resetToHome");
 	},
 	'input #nickname-input-field': function (event) {
 		var currentNickName = event.currentTarget.value;

@@ -33,7 +33,7 @@ Template.createQuestionView.events({
 		Router.go("/" + Router.current().params.quizName + "/answeroptions");
 	},
 	"click #backButton": function () {
-		Router.go("/");
+		Router.go("/" + Router.current().params.quizName + "/resetToHome");
 	},
 	"click #formatPreviewButton": function () {
 		var formatPreviewText = $('#formatPreviewText');

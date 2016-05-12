@@ -17,10 +17,16 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {EventManagerCollection, sessionStatusSchema, readingConfirmationIndexSchema, questionIndexSchema} from '/lib/eventmanager/collection.js';
+import {hashtagSchema} from '/lib/hashtags/collection.js';
 
 Meteor.methods({
 	'EventManagerCollection.setSessionStatus': (hashtag, sessionStatus)=> {
+		new SimpleSchema({
+			hashtag: hashtagSchema,
+			sessionStatus: sessionStatusSchema
+		}).validate({hashtag, sessionStatus});
+
 		const query = {};
 		if (Meteor.isServer) {
 			query.hashtag = hashtag;
@@ -35,48 +41,52 @@ Meteor.methods({
 			}
 		});
 	},
-	'EventManagerCollection.showReadConfirmedForIndex': (hashtag, index)=> {
+	'EventManagerCollection.showReadConfirmedForIndex': (hashtag, readingConfirmationIndex)=> {
+		new SimpleSchema({
+			hashtag: hashtagSchema,
+			readingConfirmationIndex: readingConfirmationIndexSchema
+		}).validate({hashtag, readingConfirmationIndex});
+
 		EventManagerCollection.update({hashtag: hashtag}, {
-			$set: {readingConfirmationIndex: index},
+			$set: {readingConfirmationIndex: readingConfirmationIndex},
 			$push: {
 				eventStack: {
 					key: "EventManagerCollection.showReadConfirmedForIndex",
-					value: {readingConfirmationIndex: index}
+					value: {readingConfirmationIndex: readingConfirmationIndex}
 				}
 			}
 		});
 	},
-	'EventManagerCollection.setActiveQuestion': (hashtag, index)=> {
+	'EventManagerCollection.setActiveQuestion': (hashtag, questionIndex)=> {
+		new SimpleSchema({
+			hashtag: hashtagSchema,
+			questionIndex: questionIndexSchema
+		}).validate({hashtag, questionIndex});
+
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$set: {
-				questionIndex: index,
-				readingConfirmationIndex: index
+				questionIndex: questionIndex,
+				readingConfirmationIndex: questionIndex
 			},
 			$push: {
 				eventStack: {
 					key: "EventManagerCollection.setActiveQuestion",
 					value: {
-						questionIndex: index,
-						readingConfirmationIndex: index
+						questionIndex: questionIndex,
+						readingConfirmationIndex: questionIndex
 					}
 				}
 			}
 		});
 	},
 	'EventManagerCollection.clear': (hashtag) => {
-		new SimpleSchema({
-			hashtag: {type: String}
-		}).validate({
-			hashtag
-		});
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
+
 		EventManagerCollection.remove({hashtag: hashtag});
 	},
 	'EventManagerCollection.beforeClear': (hashtag) => {
-		new SimpleSchema({
-			hashtag: {type: String}
-		}).validate({
-			hashtag
-		});
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
+
 		const query = {};
 		if (Meteor.isServer) {
 			query.hashtag = hashtag;
@@ -91,6 +101,8 @@ Meteor.methods({
 		});
 	},
 	'EventManagerCollection.reset': (hashtag) => {
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
+
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$set: {
 				sessionStatus: 1,
@@ -110,6 +122,8 @@ Meteor.methods({
 		});
 	},
 	'EventManagerCollection.add': (hashtag) => {
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
+
 		if (EventManagerCollection.findOne({hashtag: hashtag})) {
 			throw new Meteor.Error('EventManagerCollection.add', 'hashtag_exists');
 		}
@@ -132,11 +146,8 @@ Meteor.methods({
 		});
 	},
 	'keepalive': function (hashtag) {
-		new SimpleSchema({
-			hashtag: {type: String}
-		}).validate({
-			hashtag
-		});
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
+
 		EventManagerCollection.update({hashtag: hashtag}, {$set: {lastConnection: (new Date()).getTime()}});
 	}
 });

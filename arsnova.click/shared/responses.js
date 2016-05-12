@@ -16,13 +16,23 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {AnswerOptionCollection, answerOptionNumberSchema} from '/lib/answeroptions/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {userNickSchema} from '/lib/member_list/collection.js';
+import {hashtagSchema} from '/lib/hashtags/collection.js';
+import {EventManagerCollection, questionIndexSchema} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
 	'ResponsesCollection.addResponse': function (responseDoc) {
+		new SimpleSchema({
+			hashtag: hashtagSchema,
+			questionIndex: questionIndexSchema,
+			answerOptionNumber: answerOptionNumberSchema,
+			userNick: userNickSchema
+		}).validate({hashtag: responseDoc.hashtag, questionIndex: responseDoc.questionIndex, answerOptionNumber: responseDoc.answerOptionNumber, userNick: responseDoc.userNick});
+
 		var timestamp = new Date().getTime();
 		var hashtag = responseDoc.hashtag;
 		var dupDoc = ResponsesCollection.findOne({
@@ -63,7 +73,7 @@ Meteor.methods({
 			hashtag: responseDoc.hashtag,
 			questionIndex: responseDoc.questionIndex,
 			nick: responseDoc.userNick,
-			responseTimeMillis: responseDoc.responseTime
+			responseTime: responseDoc.responseTime
 		});
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$push: {
@@ -79,6 +89,8 @@ Meteor.methods({
 		});
 	},
 	'ResponsesCollection.clearAll': function (hashtag) {
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
+
 		ResponsesCollection.remove({hashtag: hashtag});
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$push: {

@@ -17,42 +17,43 @@
 
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {hashtagSchema} from '../hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
 
 export const QuestionGroupCollection = new Mongo.Collection("questionGroup");
+export const questionTextSchema = {
+	type: String,
+	optional: true,
+	max: 10000
+};
+export const timerSchema = {
+	type: Number,
+	min: 0
+};
+export const startTimeSchema = {
+	type: String,
+	optional: true
+};
 
-export const SingleQuestionSchema = new SimpleSchema({
-	questionText: {
-		type: String,
-		optional: true,
-		max: 10000
+export const questionGroupSchema = new SimpleSchema({
+	hashtag: hashtagSchema,
+	questionList: {
+		/* The index is defined in the EventManager.questionIndex variable. The arrays index represents the questionIndex. */
+		type: [Object]
 	},
-	timer: {
-		type: Number,
-		min: 0
+	"questionList.$.questionText": {
+		type: questionTextSchema
 	},
-	startTime: {
-		type: String,
+	"questionList.$.timer": {
+		type: timerSchema
+	},
+	"questionList.$.startTime": {
+		type: startTimeSchema,
 		optional: true
 	}
 });
 
-export const QuestionGroupSchema = new SimpleSchema({
-	hashtag: {
-		type: String,
-		min: 1,
-		max: 25
-	},
-	questionList: {
-		/*
-		 The index is defined in the EventManager.questionIndex variable.
-		 The arrays index represents the questionIndex.
-		 */
-		type: [SingleQuestionSchema]
-	}
-});
-
-QuestionGroupCollection.attachSchema(QuestionGroupSchema);
+QuestionGroupCollection.attachSchema(questionGroupSchema);
 
 QuestionGroupCollection.deny({
 	insert: function () {

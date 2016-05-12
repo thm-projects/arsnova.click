@@ -17,45 +17,53 @@
 
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {hashtagSchema} from '../hashtags/collection.js';
+import {questionIndexSchema} from '../eventmanager/collection.js';
+import {userNickSchema} from '../member_list/collection.js';
+import {responseTimeSchema} from '../responses/collection.js';
 import * as localData from '/lib/local_storage.js';
 
 export const LeaderBoardCollection = new Mongo.Collection("leaderBoard");
-
-LeaderBoardCollection.attachSchema(new SimpleSchema({
+export const givenAnswersSchema = {
+	type: Number,
+	min: 1,
+	max: 26
+};
+export const rightAnswersSchema = {
+	type: Number,
+	min: 0,
+	max: 26
+};
+export const wrongAnswersSchema = {
+	type: Number,
+	min: 0,
+	max: 26
+};
+export const leaderBoardCollectionSchema = new SimpleSchema({
 	hashtag: {
-		type: String,
-		min: 1,
-		max: 25
+		type: hashtagSchema
 	},
 	questionIndex: {
-		type: Number,
-		min: 0
+		type: questionIndexSchema
 	},
 	userNick: {
-		type: String,
-		min: 3,
-		max: 25
+		type: userNickSchema
 	},
-	responseTimeMillis: {
-		type: Number,
-		min: 0
+	responseTime: {
+		type: responseTimeSchema
 	},
 	givenAnswers: {
-		type: Number,
-		min: 1,
-		max: 26
+		type: givenAnswersSchema
 	},
 	rightAnswers: {
-		type: Number,
-		min: 0,
-		max: 26
+		type: rightAnswersSchema
 	},
 	wrongAnswers: {
-		type: Number,
-		min: 0,
-		max: 26
+		type: wrongAnswersSchema
 	}
-}));
+});
+
+LeaderBoardCollection.attachSchema(leaderBoardCollectionSchema);
 
 LeaderBoardCollection.deny({
 	insert: function () {

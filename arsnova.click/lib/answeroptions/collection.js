@@ -17,36 +17,45 @@
 
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {hashtagSchema} from '../hashtags/collection.js';
+import {questionIndexSchema} from '../eventmanager/collection.js';
 import * as localData from '/lib/local_storage.js';
 
 export const AnswerOptionCollection = new Mongo.Collection("answeroptions");
-
-AnswerOptionCollection.attachSchema(new SimpleSchema({
+export const answerTextSchema = {
+	type: String,
+	min: 0,
+	max: 500,
+	optional: true
+};
+export const answerOptionNumberSchema = {
+	type: Number,
+	min: 0
+};
+export const isCorrectSchema = {
+	type: Number,
+	min: 0,
+	max: 1
+};
+export const answerOptionsCollectionSchema = new SimpleSchema({
 	hashtag: {
-		type: String,
-		min: 1,
-		max: 25
+		type: hashtagSchema
 	},
 	questionIndex: {
-		type: Number,
-		min: 0
+		type: questionIndexSchema
 	},
 	answerText: {
-		type: String,
-		min: 0,
-		max: 500,
-		optional: true
+		type: answerTextSchema
 	},
 	answerOptionNumber: {
-		type: Number,
-		min: 0
+		type: answerOptionNumberSchema
 	},
 	isCorrect: {
-		type: Number,
-		min: 0,
-		max: 1
+		type: isCorrectSchema
 	}
-}));
+});
+
+AnswerOptionCollection.attachSchema(answerOptionsCollectionSchema);
 
 AnswerOptionCollection.deny({
 	insert: function () {

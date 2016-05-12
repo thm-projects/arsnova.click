@@ -21,18 +21,13 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {HashtagsCollection, hashtagsCollectionSchema, hashtagSchema} from '/lib/hashtags/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
 	'HashtagsCollection.checkPrivateKey': function (privateKey, hashtag) {
-		new SimpleSchema({
-			hashtag: {type: String},
-			privateKey: {type: String}
-		}).validate({
-			privateKey,
-			hashtag
-		});
+		hashtagsCollectionSchema.validate({hashtag, privateKey});
+
 		var doc = HashtagsCollection.findOne({
 			hashtag: hashtag,
 			privateKey: privateKey
@@ -40,6 +35,8 @@ Meteor.methods({
 		return Boolean(doc);
 	},
 	'HashtagsCollection.addHashtag': function (doc) {
+		new SimpleSchema({hashtagSchema}).validate({hashtag: doc.hashtag});
+
 		if (HashtagsCollection.find({hashtag: doc.hashtag}).count() > 0) {
 			throw new Meteor.Error('HashtagsCollection.addHashtag', 'session_exists');
 		}
@@ -79,6 +76,8 @@ Meteor.methods({
 		}
 	},
 	'HashtagsCollection.export': function ({hashtag}) {
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
+
 		if (Meteor.isServer) {
 			var hashtagDoc = HashtagsCollection.findOne({
 				hashtag: hashtag

@@ -67,6 +67,7 @@ export function checkIfIsCorrect(isCorrect) {
 
 export function startCountdown(index) {
 	Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index);
+	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	var questionDoc = QuestionGroupCollection.findOne().questionList[index];
 	Session.set("sessionCountDown", questionDoc.timer);
 	$("#countdowndiv").appendTo($("body"));
@@ -116,11 +117,13 @@ export function startCountdown(index) {
 				image.src = "/images/gelb0.gif";
 				image1.fadeIn(500);
 				image1.fadeOut(500);
+				if (hashtagDoc.musicEnabled) {
+					f.play();
+				}
 			}
 		}
 	});
 
-	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	if (hashtagDoc.musicEnabled) {
 		setBuzzsound1(hashtagDoc.musicTitle);
 		buzzsound1.setVolume(hashtagDoc.musicVolume);

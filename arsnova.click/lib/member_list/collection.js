@@ -21,32 +21,35 @@ import {hashtagSchema} from '../hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
 
 export const MemberListCollection = new Mongo.Collection("memberlist");
-export const userNickSchema = new SimpleSchema({
+export const userNickSchema = {
 	type: String,
 	min: 3,
 	max: 25
-});
-export const lowerCaseNickSchema = new SimpleSchema({
+};
+export const lowerCaseNickSchema = {
 	type: String,
 	min: 3,
 	max: 25
-});
-export const readConfirmedSchema = new SimpleSchema({
-	type: [Number]
-});
-export const backgroundColorSchema = new SimpleSchema({
-	type: String,
-	min: 7,
-	max: 7
-});
-export const foregroundColorSchema = new SimpleSchema({
-	type: String,
-	min: 7,
-	max: 7
-});
-export const insertDateSchema = new SimpleSchema({
+};
+export const userNickIdSchema = {
 	type: String
-});
+};
+export const readConfirmedSchema = {
+	type: [Number]
+};
+export const backgroundColorSchema = {
+	type: String,
+	min: 7,
+	max: 7
+};
+export const foregroundColorSchema = {
+	type: String,
+	min: 7,
+	max: 7
+};
+export const insertDateSchema = {
+	type: String
+};
 export const memberListCollectionSchema = new SimpleSchema({
 	hashtag: hashtagSchema,
 	nick: userNickSchema,

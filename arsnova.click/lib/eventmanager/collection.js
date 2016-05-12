@@ -21,43 +21,50 @@ import {hashtagSchema} from '../hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
 
 export const EventManagerCollection = new Mongo.Collection("eventmanager");
-export const sessionStatusSchema = new SimpleSchema({
+export const sessionStatusSchema = {
 	type: Number,
 	min: 0,
 	max: 3
-});
-export const lastConnectionSchema = new SimpleSchema({
+};
+export const lastConnectionSchema = {
 	type: Number
-});
-export const readingConfirmationIndexSchema = new SimpleSchema({
+};
+export const readingConfirmationIndexSchema = {
 	type: Number,
 	min: -1,
 	optional: true
-});
-export const questionIndexSchema = new SimpleSchema({
+};
+export const questionIndexSchema = {
 	type: Number,
 	min: -1,
 	optional: true
-});
-export const eventStackItemScheme = new SimpleSchema({
-	key: {
+};
+export const eventManagerCollectionSchema = new SimpleSchema({
+	hashtag: {
+		type: hashtagSchema
+	},
+	sessionStatus: {
+		type: sessionStatusSchema
+	},
+	lastConnection: {
+		type: lastConnectionSchema
+	},
+	readingConfirmationIndex: {
+		type: readingConfirmationIndexSchema
+	},
+	questionIndex: {
+		type: questionIndexSchema
+	},
+	eventStack: {
+		type: [Object]
+	},
+	"eventStack.$.key": {
 		type: String
 	},
-	value: {
+	"eventStack.$.value": {
 		type: Object,
 		blackbox: true /* @see https://github.com/aldeed/meteor-simple-schema#blackbox */
 	}
-});
-export const eventStackScheme = new SimpleSchema({
-	type: [eventStackItemScheme]
-});
-export const eventManagerCollectionSchema = new SimpleSchema({
-	hashtag: hashtagSchema,
-	sessionStatus: sessionStatusSchema,
-	lastConnection: lastConnectionSchema,
-	readingConfirmationIndex: readingConfirmationIndexSchema,
-	questionIndex: questionIndexSchema,
-	eventStack: eventStackScheme
 });
 
 EventManagerCollection.attachSchema(eventManagerCollectionSchema);

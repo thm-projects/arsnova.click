@@ -18,25 +18,22 @@
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
-import {ResponsesCollection} from '/lib/responses/collection.js';
+import {ResponsesCollection, responseTimeSchema} from '/lib/responses/collection.js';
 import {LeaderBoardCollection} from '/lib/leader_board/collection.js';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {hashtagSchema} from '/lib/hashtags/collection.js';
+import {userNickSchema} from '/lib/member_list/collection.js';
+import {EventManagerCollection, questionIndexSchema} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
-	'LeaderBoardCollection.addResponseSet': function ({hashtag, questionIndex, nick, responseTimeMillis}) {
-		if (Meteor.isServer) {
-			new SimpleSchema({
-				hashtag: {type: String},
-				questionIndex: {type: Number},
-				nick: {type: String},
-				responseTimeMillis: {type: Number}
-			}).validate({
-				hashtag,
-				questionIndex,
-				nick,
-				responseTimeMillis
-			});
+	'LeaderBoardCollection.addResponseSet': function ({hashtag, questionIndex, nick, responseTime}) {
+		new SimpleSchema({
+			hashtag: hashtagSchema,
+			questionIndex: questionIndexSchema,
+			nick: userNickSchema,
+			responseTime: responseTimeSchema
+		}).validate({hashtag, questionIndex, nick, responseTime});
 
+		if (Meteor.isServer) {
 			const correctAnswers = [];
 
 			AnswerOptionCollection.find({
@@ -74,7 +71,7 @@ Meteor.methods({
 					hashtag: hashtag,
 					questionIndex: questionIndex,
 					userNick: nick,
-					responseTimeMillis: responseTimeMillis,
+					responseTime: responseTime,
 					givenAnswers: responseAmount,
 					rightAnswers: rightResponseAmount,
 					wrongAnswers: falseResponseAmount

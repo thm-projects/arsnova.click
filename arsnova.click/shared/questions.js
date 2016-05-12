@@ -18,12 +18,13 @@
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
-import {QuestionGroupCollection, QuestionGroupSchema} from '/lib/questions/collection.js';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {hashtagSchema} from '/lib/hashtags/collection.js';
+import {QuestionGroupCollection, questionGroupSchema, questionTextSchema, timerSchema} from '/lib/questions/collection.js';
+import {EventManagerCollection, questionIndexSchema} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
 	"QuestionGroupCollection.insert": function ({hashtag, questionList}) {
-		QuestionGroupSchema.validate({
+		questionGroupSchema.validate({
 			hashtag: hashtag,
 			questionList: questionList
 		});
@@ -51,9 +52,10 @@ Meteor.methods({
 	},
 	"QuestionGroupCollection.addQuestion": function ({hashtag, questionIndex, questionText}) {
 		new SimpleSchema({
-			questionText: {type: String},
-			questionIndex: {type: Number}
-		}).validate({questionIndex: questionIndex, questionText: questionText});
+			hashtag: hashtagSchema,
+			questionIndex: questionIndexSchema,
+			questionText: questionTextSchema
+		}).validate({hashtag, questionIndex, questionText});
 
 		const query = {};
 		if (Meteor.isServer) {
@@ -88,6 +90,11 @@ Meteor.methods({
 		});
 	},
 	"QuestionGroupCollection.removeQuestion": function ({hashtag, questionIndex}) {
+		new SimpleSchema({
+			hashtag: hashtagSchema,
+			questionIndex: questionIndexSchema
+		}).validate({hashtag, questionIndex});
+
 		const query = {};
 		if (Meteor.isServer) {
 			query.hashtag = hashtag;
@@ -107,47 +114,24 @@ Meteor.methods({
 		});
 	},
 	"Question.isSC": function ({hashtag, questionIndex}) {
+		new SimpleSchema({
+			hashtag: hashtagSchema,
+			questionIndex: questionIndexSchema
+		}).validate({hashtag, questionIndex});
+
 		return (AnswerOptionCollection.find({
 			hashtag: hashtag,
 			questionIndex: questionIndex,
 			isCorrect: 1
 		}).count() === 1);
 	},
-	"Question.updateIsReadConfirmationRequired": function ({hashtag, questionIndex, isReadingConfirmationRequired}) {
-		new SimpleSchema({
-			isReadingConfirmationRequired: {
-				type: Number,
-				min: 0,
-				max: 1
-			}
-		}).validate({isReadingConfirmationRequired: isReadingConfirmationRequired});
-
-		const query = {};
-		if (Meteor.isServer) {
-			query.hashtag = hashtag;
-		}
-		var questionGroup = QuestionGroupCollection.findOne(query);
-		if (!questionGroup) {
-			throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'hashtag_not_found');
-		}
-		questionGroup.questionList[questionIndex].isReadingConfirmationRequired = isReadingConfirmationRequired;
-		QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
-		EventManagerCollection.update({hashtag: hashtag}, {
-			$push: {
-				eventStack: {
-					key: "QuestionGroupCollection.updateIsReadConfirmationRequired",
-					value: {questionIndex: questionIndex}
-				}
-			}
-		});
-	},
 	"Question.setTimer": function ({hashtag, questionIndex, timer}) {
 		new SimpleSchema({
-			timer: {
-				type: Number,
-				min: 0
-			}
-		}).validate({timer: timer});
+			hashtag: hashtagSchema,
+			questionIndex: questionIndexSchema,
+			timer: timerSchema
+		}).validate({hashtag, questionIndex, timer});
+
 		const query = {};
 		if (Meteor.isServer) {
 			query.hashtag = hashtag;
@@ -172,6 +156,11 @@ Meteor.methods({
 		});
 	},
 	"Question.startTimer": function ({hashtag, questionIndex}) {
+		new SimpleSchema({
+			hashtag: hashtagSchema,
+			questionIndex: questionIndexSchema
+		}).validate({hashtag, questionIndex});
+
 		var startTime = new Date();
 
 		const query = {};

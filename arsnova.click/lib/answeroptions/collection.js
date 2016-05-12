@@ -22,27 +22,37 @@ import {questionIndexSchema} from '../eventmanager/collection.js';
 import * as localData from '/lib/local_storage.js';
 
 export const AnswerOptionCollection = new Mongo.Collection("answeroptions");
-export const answerTextSchema = new SimpleSchema({
+export const answerTextSchema = {
 	type: String,
 	min: 0,
 	max: 500,
 	optional: true
-});
-export const answerOptionNumberSchema = new SimpleSchema({
+};
+export const answerOptionNumberSchema = {
 	type: Number,
 	min: 0
-});
-export const isCorrectSchema = new SimpleSchema({
+};
+export const isCorrectSchema = {
 	type: Number,
 	min: 0,
 	max: 1
-});
+};
 export const answerOptionsCollectionSchema = new SimpleSchema({
-	hashtag: hashtagSchema,
-	questionIndex: questionIndexSchema,
-	answerText: answerTextSchema,
-	answerOptionNumber: answerOptionNumberSchema,
-	isCorrect: isCorrectSchema
+	hashtag: {
+		type: hashtagSchema
+	},
+	questionIndex: {
+		type: questionIndexSchema
+	},
+	answerText: {
+		type: answerTextSchema
+	},
+	answerOptionNumber: {
+		type: answerOptionNumberSchema
+	},
+	isCorrect: {
+		type: isCorrectSchema
+	}
 });
 
 AnswerOptionCollection.attachSchema(answerOptionsCollectionSchema);

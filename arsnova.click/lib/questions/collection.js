@@ -21,31 +21,36 @@ import {hashtagSchema} from '../hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
 
 export const QuestionGroupCollection = new Mongo.Collection("questionGroup");
-export const questionTextSchema = new SimpleSchema({
+export const questionTextSchema = {
 	type: String,
 	optional: true,
 	max: 10000
-});
-export const timerSchema = new SimpleSchema({
+};
+export const timerSchema = {
 	type: Number,
 	min: 0
-});
-export const startTimeSchema = new SimpleSchema({
+};
+export const startTimeSchema = {
 	type: String,
 	optional: true
-});
-export const singleQuestionSchema = new SimpleSchema({
-	questionText: questionTextSchema,
-	timer: timerSchema,
-	startTime: startTimeSchema
-});
-export const questionListSchema = new SimpleSchema({
-	type: [singleQuestionSchema] /* The index is defined in the EventManager.questionIndex variable. The arrays index represents the questionIndex. */
-});
+};
 
 export const questionGroupSchema = new SimpleSchema({
 	hashtag: hashtagSchema,
-	questionList: questionListSchema
+	questionList: {
+		/* The index is defined in the EventManager.questionIndex variable. The arrays index represents the questionIndex. */
+		type: [Object]
+	},
+	"questionList.$.questionText": {
+		type: questionTextSchema
+	},
+	"questionList.$.timer": {
+		type: timerSchema
+	},
+	"questionList.$.startTime": {
+		type: startTimeSchema,
+		optional: true
+	}
 });
 
 QuestionGroupCollection.attachSchema(questionGroupSchema);

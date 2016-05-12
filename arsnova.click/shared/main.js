@@ -16,15 +16,18 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {HashtagsCollection, hashtagSchema} from '/lib/hashtags/collection.js';
 
 Meteor.methods({
 	'Main.killAll': function (hashtag) {
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
+
 		AnswerOptionCollection.remove({hashtag: hashtag});
 		MemberListCollection.remove({hashtag: hashtag});
 		ResponsesCollection.remove({hashtag: hashtag});
@@ -32,6 +35,8 @@ Meteor.methods({
 		Meteor.call("EventManagerCollection.beforeClear", hashtag);
 	},
 	'Main.deleteEverything': function ({hashtag}) {
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
+
 		HashtagsCollection.remove({hashtag: hashtag});
 		AnswerOptionCollection.remove({hashtag: hashtag});
 		MemberListCollection.remove({hashtag: hashtag});

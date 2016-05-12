@@ -24,29 +24,43 @@ import {responseTimeSchema} from '../responses/collection.js';
 import * as localData from '/lib/local_storage.js';
 
 export const LeaderBoardCollection = new Mongo.Collection("leaderBoard");
-export const givenAnswersSchema = new SimpleSchema({
+export const givenAnswersSchema = {
 	type: Number,
 	min: 1,
 	max: 26
-});
-export const rightAnswersSchema = new SimpleSchema({
+};
+export const rightAnswersSchema = {
 	type: Number,
 	min: 0,
 	max: 26
-});
-export const wrongAnswersSchema = new SimpleSchema({
+};
+export const wrongAnswersSchema = {
 	type: Number,
 	min: 0,
 	max: 26
-});
+};
 export const leaderBoardCollectionSchema = new SimpleSchema({
-	hashtag: hashtagSchema,
-	questionIndex: questionIndexSchema,
-	userNick: userNickSchema,
-	responseTimeMillis: responseTimeSchema,
-	givenAnswers: givenAnswersSchema,
-	rightAnswers: rightAnswersSchema,
-	wrongAnswers: wrongAnswersSchema
+	hashtag: {
+		type: hashtagSchema
+	},
+	questionIndex: {
+		type: questionIndexSchema
+	},
+	userNick: {
+		type: userNickSchema
+	},
+	responseTime: {
+		type: responseTimeSchema
+	},
+	givenAnswers: {
+		type: givenAnswersSchema
+	},
+	rightAnswers: {
+		type: rightAnswersSchema
+	},
+	wrongAnswers: {
+		type: wrongAnswersSchema
+	}
 });
 
 LeaderBoardCollection.attachSchema(leaderBoardCollectionSchema);

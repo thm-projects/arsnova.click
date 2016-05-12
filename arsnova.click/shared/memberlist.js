@@ -17,22 +17,19 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {MemberListCollection} from '/lib/member_list/collection.js';
+import {EventManagerCollection, questionIndexSchema} from '/lib/eventmanager/collection.js';
+import {hashtagSchema} from '/lib/hashtags/collection.js';
+import {MemberListCollection, userNickSchema, backgroundColorSchema, foregroundColorSchema, userNickIdSchema} from '/lib/member_list/collection.js';
 
 Meteor.methods({
 	'MemberListCollection.addLearner': function ({hashtag, nick, backgroundColor, foregroundColor}) {
 		new SimpleSchema({
-			hashtag: {type: String},
-			nick: {type: String},
-			backgroundColor: {type: String},
-			foregroundColor: {type: String}
-		}).validate({
-			hashtag,
-			nick,
-			backgroundColor,
-			foregroundColor
-		});
+			hashtag: hashtagSchema,
+			nick: userNickSchema,
+			backgroundColor: backgroundColorSchema,
+			foregroundColor: foregroundColorSchema
+		}).validate({hashtag, nick, backgroundColor, foregroundColor});
+
 		if (MemberListCollection.findOne({
 				hashtag: hashtag,
 				nick: nick
@@ -66,12 +63,9 @@ Meteor.methods({
 	},
 	'MemberListCollection.removeLearner': function (hashtag, nickId) {
 		new SimpleSchema({
-			hashtag: {type: String},
-			nickId: {type: String}
-		}).validate({
-			hashtag,
-			nickId
-		});
+			hashtag: hashtagSchema,
+			nickId: userNickIdSchema
+		}).validate({hashtag, nickId});
 
 		let nickName = MemberListCollection.findOne({
 			hashtag: hashtag,
@@ -95,14 +89,11 @@ Meteor.methods({
 	},
 	'MemberListCollection.setReadConfirmed': function ({hashtag, questionIndex, nick}) {
 		new SimpleSchema({
-			hashtag: {type: String},
-			questionIndex: {type: Number},
-			nick: {type: String}
-		}).validate({
-			hashtag,
-			questionIndex,
-			nick
-		});
+			hashtag: hashtagSchema,
+			questionIndex: questionIndexSchema,
+			nick: userNickSchema
+		}).validate({hashtag, questionIndex, nick});
+
 		var member = MemberListCollection.findOne({
 			hashtag: hashtag,
 			nick: nick
@@ -125,6 +116,8 @@ Meteor.methods({
 		});
 	},
 	'MemberListCollection.clearReadConfirmed': function (hashtag) {
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
+
 		MemberListCollection.update({hashtag: hashtag}, {$set: {readConfirmed: []}});
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$push: {
@@ -136,6 +129,8 @@ Meteor.methods({
 		});
 	},
 	'MemberListCollection.removeFromSession': function (hashtag) {
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
+
 		MemberListCollection.remove({hashtag: hashtag});
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$push: {

@@ -20,35 +20,45 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import * as localData from '/lib/local_storage.js';
 
 export const HashtagsCollection = new Mongo.Collection("hashtags");
-export const hashtagSchema = new SimpleSchema({
+export const hashtagSchema = {
 	type: String,
 	min: 1,
 	max: 25
-});
-export const privateKeySchema = new SimpleSchema({
+};
+export const privateKeySchema = {
 	type: String,
 	min: 24,
 	max: 24
-});
-export const musicVolumeSchema = new SimpleSchema({
+};
+export const musicVolumeSchema = {
 	type: Number,
 	min: 0,
 	max: 100
-});
-export const musicEnabledSchema = new SimpleSchema({
+};
+export const musicEnabledSchema = {
 	type: Number,
 	min: 0,
 	max: 1
-});
-export const musicTitleSchema = new SimpleSchema({
+};
+export const musicTitleSchema = {
 	type: String
-});
+};
 export const hashtagsCollectionSchema = new SimpleSchema({
-	hashtag: hashtagSchema,
-	privateKey: privateKeySchema,
-	musicVolume: musicVolumeSchema,
-	musicEnabled: musicEnabledSchema,
-	musicTitle: musicTitleSchema
+	hashtag: {
+		type: hashtagSchema
+	},
+	privateKey: {
+		type: privateKeySchema
+	},
+	musicVolume: {
+		type: musicVolumeSchema
+	},
+	musicEnabled: {
+		type: musicEnabledSchema
+	},
+	musicTitle: {
+		type: musicTitleSchema
+	}
 });
 
 HashtagsCollection.attachSchema(hashtagsCollectionSchema);

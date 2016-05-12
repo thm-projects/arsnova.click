@@ -26,5 +26,5 @@ Template.createQuestionView.onDestroyed(function () {
 	if (lib.subscriptionHandler) {
 		lib.subscriptionHandler.stop();
 	}
-	delete Session.keys.overrideValidQuestionRedirect;
+	delete sessionStorage.overrideValidQuestionRedirect;
 });

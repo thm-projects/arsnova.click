@@ -16,6 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {SubsManager} from 'meteor/meteorhacks:subs-manager';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
@@ -165,9 +166,10 @@ Router.route("/:quizName", {
 
 Router.route('/:quizName/resetToHome', function () {
 	delete localStorage[Router.current().params.quizName + "nick"];
-	delete localStorage[Router.current().params.quizName + "overrideValidQuestionRedirect"];
 	delete localStorage.slider;
 	delete localStorage.lastPage;
+
+	delete sessionStorage.overrideValidQuestionRedirect;
 
 	if (EventManagerCollection.findOne() && localData.containsHashtag(Router.current().params.quizName)) {
 		Meteor.call("EventManagerCollection.clear", Router.current().params.quizName);
@@ -237,9 +239,7 @@ Router.route('/:quizName/memberlist', {
 		if (!globalEventStackObserver.isRunning()) {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
 		}
-		if (this.ready()) {
-			this.render("memberlist");
-		}
+		this.render("memberlist");
 	}
 });
 

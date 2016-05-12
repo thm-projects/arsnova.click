@@ -16,6 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
 import {TAPi18n} from 'meteor/tap:i18n';
@@ -281,7 +282,7 @@ Template.showHashtagsSplashscreen.events({
 		var hashtag = $(event.currentTarget).text();
 		localData.reenterSession(hashtag);
 		lib.hashtagSplashscreen.destroy();
-		//Session.set("overrideValidQuestionRedirect", true);
+		sessionStorage.setItem("overrideValidQuestionRedirect", true);
 		connectEventManager(hashtag);
 	},
 	"click #js-btn-showHashtagManagement": function () {

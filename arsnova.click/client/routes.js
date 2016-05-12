@@ -26,9 +26,9 @@ import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plu
 import {getChangeEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onChangeEvent.js';
 import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onRemoveEvent.js';
 
-export const subsCache = new SubsManager({
-	cacheLimit: 1,
-	expireIn: 15
+const subsCache = new SubsManager({
+	cacheLimit: 7, // maximum number of cached subscriptions
+	expireIn: 15 // any subscription will be expire after 15 minutes, if it's not subscribed again
 });
 
 Router.configure({
@@ -43,6 +43,7 @@ Router.configure({
 			subscriptions.push(subsCache.subscribe('AnswerOptionCollection.join', Router.current().params.quizName));
 			subscriptions.push(subsCache.subscribe('QuestionGroupCollection.join', Router.current().params.quizName));
 			subscriptions.push(subsCache.subscribe('MemberListCollection.join', Router.current().params.quizName));
+			subscriptions.push(subsCache.subscribe('LeaderBoardCollection.join', Router.current().params.quizName));
 			subscriptions.push(subsCache.subscribe('EventManagerCollection.join', Router.current().params.quizName));
 		}
 		return subscriptions;

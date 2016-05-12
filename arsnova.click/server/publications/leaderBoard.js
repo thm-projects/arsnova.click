@@ -19,11 +19,9 @@ import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {LeaderBoardCollection} from '/lib/leader_board/collection.js';
 
-Meteor.publish('LeaderBoardCollection.session', function (phashtag) {
+Meteor.publish('LeaderBoardCollection.join', function (hashtag) {
 	new SimpleSchema({
-		phashtag: {type: String}
-	}).validate({phashtag});
-	return LeaderBoardCollection.find({
-		hashtag: phashtag
-	});
+		hashtag: {type: String}
+	}).validate({hashtag});
+	return LeaderBoardCollection.find({hashtag: hashtag});
 });

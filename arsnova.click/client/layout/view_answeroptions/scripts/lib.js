@@ -17,7 +17,7 @@
 
 import {Meteor} from 'meteor/meteor';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
-import * as localData from '/client/lib/local_storage.js';
+import * as localData from '/lib/local_storage.js';
 
 let hasError = false;
 const updateAnswerText = function (error, result) {
@@ -34,7 +34,6 @@ export function parseAnswerOptionInput(index) {
 		var text = $("#answerOptionText_Number" + i).val();
 		var isCorrect = $('div#answerOption-' + i + ' .check-mark-checked').length > 0 ? 1 : 0;
 		var answer = {
-			privateKey: localData.getPrivateKey(),
 			hashtag: Router.current().params.quizName,
 			questionIndex: index,
 			answerOptionNumber: i,

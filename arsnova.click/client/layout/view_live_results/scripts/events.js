@@ -24,7 +24,6 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
-import * as localData from '/client/lib/local_storage.js';
 import {ErrorSplashscreen, Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {calculateButtonCount, startCountdown} from './lib.js';
 
@@ -79,8 +78,7 @@ Template.liveResults.events({
 	"click #js-btn-export": function (event) {
 		event.stopPropagation();
 		Meteor.call('HashtagsCollection.export', {
-			hashtag: Router.current().params.quizName,
-			privateKey: localData.getPrivateKey()
+			hashtag: Router.current().params.quizName
 		}, (err, res) => {
 			if (err) {
 				new ErrorSplashscreen({
@@ -108,9 +106,10 @@ Template.liveResults.events({
 	'click #backButton': (event)=> {
 		event.stopPropagation();
 		$('.sound-button').show();
-		Meteor.call('ResponsesCollection.clearAll', localData.getPrivateKey(), Router.current().params.quizName);
-		Meteor.call("MemberListCollection.clearReadConfirmed", localData.getPrivateKey(), Router.current().params.quizName);
-		Meteor.call("EventManagerCollection.setSessionStatus", localData.getPrivateKey(), Router.current().params.quizName, 2);
+		Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);
+		Meteor.call("MemberListCollection.clearReadConfirmed", Router.current().params.quizName, function () {
+			Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
+		});
 	},
 	'click #startNextQuestion': (event)=> {
 		event.stopPropagation();
@@ -121,7 +120,6 @@ Template.liveResults.events({
 		}
 
 		Meteor.call('Question.startTimer', {
-			privateKey: localData.getPrivateKey(),
 			hashtag: Router.current().params.quizName,
 			questionIndex: EventManagerCollection.findOne().questionIndex + 1
 		}, (err) => {
@@ -144,7 +142,7 @@ Template.liveResults.events({
 	},
 	'click #showNextQuestionDialog': (event)=> {
 		event.stopPropagation();
-		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", localData.getPrivateKey(), Router.current().params.quizName, EventManagerCollection.findOne().questionIndex + 1);
+		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, EventManagerCollection.findOne().questionIndex + 1);
 	},
 	"click .btn-more-learners": function () {
 		Session.set("LearnerCount", MemberListCollection.find().count());

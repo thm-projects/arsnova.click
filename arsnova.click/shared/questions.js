@@ -19,109 +19,92 @@ import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {QuestionGroupCollection, QuestionGroupSchema} from '/lib/questions/collection.js';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
-	"QuestionGroupCollection.insert": function ({privateKey, hashtag, questionList}) {
+	"QuestionGroupCollection.insert": function ({hashtag, questionList}) {
+		QuestionGroupSchema.validate({
+			hashtag: hashtag,
+			questionList: questionList
+		});
+
+		const query = {};
 		if (Meteor.isServer) {
-			QuestionGroupSchema.validate({
+			query.hashtag = hashtag;
+		}
+		if (QuestionGroupCollection.find(query).count() > 0) {
+			QuestionGroupCollection.update(query, {$set: {questionList: questionList}});
+		} else {
+			QuestionGroupCollection.insert({
 				hashtag: hashtag,
 				questionList: questionList
 			});
-
-			var hashtagDoc = HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			});
-			if (!hashtagDoc) {
-				throw new Meteor.Error('QuestionGroupCollection.insert', 'not_authorized');
-			}
-
-			if (QuestionGroupCollection.find({hashtag: hashtag}).count() > 0) {
-				QuestionGroupCollection.update({hashtag: hashtag}, {$set: {questionList: questionList}});
-			} else {
-				QuestionGroupCollection.insert({
-					hashtag: hashtag,
-					questionList: questionList
-				});
-			}
-			EventManagerCollection.update({hashtag: hashtag}, {
-				$push: {
-					eventStack: {
-						key: "QuestionGroupCollection.insert",
-						value: {}
-					}
-				}
-			});
 		}
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "QuestionGroupCollection.insert",
+					value: {}
+				}
+			}
+		});
 	},
-	"QuestionGroupCollection.addQuestion": function ({privateKey, hashtag, questionIndex, questionText}) {
-		if (Meteor.isServer) {
-			new SimpleSchema({
-				questionText: {type: String},
-				questionIndex: {type: Number}
-			}).validate({questionIndex: questionIndex, questionText: questionText});
+	"QuestionGroupCollection.addQuestion": function ({hashtag, questionIndex, questionText}) {
+		new SimpleSchema({
+			questionText: {type: String},
+			questionIndex: {type: Number}
+		}).validate({questionIndex: questionIndex, questionText: questionText});
 
-			var hashtagDoc = HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			});
-			if (!hashtagDoc) {
-				throw new Meteor.Error('QuestionGroupCollection.addQuestion', 'not_authorized');
-			}
-			var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
-			var questionItem = {
-				questionText: questionText,
-				timer: 40000,
-				isReadingConfirmationRequired: 1
-			};
-			if (!questionGroup) {
-				QuestionGroupCollection.insert({
-					hashtag: hashtag,
-					questionList: [questionItem]
-				});
-			} else {
-				if (questionIndex < questionGroup.questionList.length) {
-					questionGroup.questionList[questionIndex].questionText = questionText;
-				} else {
-					questionGroup.questionList.push(questionItem);
-				}
-				QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
-			}
-			EventManagerCollection.update({hashtag: hashtag}, {
-				$push: {
-					eventStack: {
-						key: "QuestionGroupCollection.addQuestion",
-						value: {questionIndex: questionIndex}
-					}
-				}
-			});
-		}
-	},
-	"QuestionGroupCollection.removeQuestion": function ({privateKey, hashtag, questionIndex}) {
+		const query = {};
 		if (Meteor.isServer) {
-			var hashtagDoc = HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			});
-			if (!hashtagDoc) {
-				throw new Meteor.Error('QuestionGroupCollection.removeQuestion', 'not_authorized');
-			}
-			var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
-			if (questionGroup) {
-				questionGroup.questionList.splice(questionIndex, 1);
-				QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
-			}
-			EventManagerCollection.update({hashtag: hashtag}, {
-				$push: {
-					eventStack: {
-						key: "QuestionGroupCollection.addQuestion",
-						value: {questionIndex: questionIndex}
-					}
-				}
-			});
+			query.hashtag = hashtag;
 		}
+		var questionGroup = QuestionGroupCollection.findOne(query);
+		var questionItem = {
+			questionText: questionText,
+			timer: 40000,
+			isReadingConfirmationRequired: 1
+		};
+		if (!questionGroup) {
+			QuestionGroupCollection.insert({
+				hashtag: hashtag,
+				questionList: [questionItem]
+			});
+		} else {
+			if (questionIndex < questionGroup.questionList.length) {
+				questionGroup.questionList[questionIndex].questionText = questionText;
+			} else {
+				questionGroup.questionList.push(questionItem);
+			}
+			QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
+		}
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "QuestionGroupCollection.addQuestion",
+					value: {questionIndex: questionIndex}
+				}
+			}
+		});
+	},
+	"QuestionGroupCollection.removeQuestion": function ({hashtag, questionIndex}) {
+		const query = {};
+		if (Meteor.isServer) {
+			query.hashtag = hashtag;
+		}
+		var questionGroup = QuestionGroupCollection.findOne(query);
+		if (questionGroup) {
+			questionGroup.questionList.splice(questionIndex, 1);
+			QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
+		}
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "QuestionGroupCollection.addQuestion",
+					value: {questionIndex: questionIndex}
+				}
+			}
+		});
 	},
 	"Question.isSC": function ({hashtag, questionIndex}) {
 		return (AnswerOptionCollection.find({
@@ -130,104 +113,84 @@ Meteor.methods({
 			isCorrect: 1
 		}).count() === 1);
 	},
-	"Question.updateIsReadConfirmationRequired": function ({privateKey, hashtag, questionIndex, isReadingConfirmationRequired}) {
+	"Question.updateIsReadConfirmationRequired": function ({hashtag, questionIndex, isReadingConfirmationRequired}) {
+		new SimpleSchema({
+			isReadingConfirmationRequired: {
+				type: Number,
+				min: 0,
+				max: 1
+			}
+		}).validate({isReadingConfirmationRequired: isReadingConfirmationRequired});
+
+		const query = {};
 		if (Meteor.isServer) {
-			new SimpleSchema({
-				isReadingConfirmationRequired: {
-					type: Number,
-					min: 0,
-					max: 1
-				}
-			}).validate({isReadingConfirmationRequired: isReadingConfirmationRequired});
-
-			var hashtagDoc = HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			});
-			if (!hashtagDoc) {
-				throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'not_authorized');
-			}
-
-			var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
-			if (!questionGroup) {
-				throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'hashtag_not_found');
-			} else {
-				questionGroup.questionList[questionIndex].isReadingConfirmationRequired = isReadingConfirmationRequired;
-				QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
-			}
-			EventManagerCollection.update({hashtag: hashtag}, {
-				$push: {
-					eventStack: {
-						key: "QuestionGroupCollection.updateIsReadConfirmationRequired",
-						value: {questionIndex: questionIndex}
-					}
-				}
-			});
+			query.hashtag = hashtag;
 		}
+		var questionGroup = QuestionGroupCollection.findOne(query);
+		if (!questionGroup) {
+			throw new Meteor.Error('Question.updateIsReadConfirmationRequired', 'hashtag_not_found');
+		}
+		questionGroup.questionList[questionIndex].isReadingConfirmationRequired = isReadingConfirmationRequired;
+		QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "QuestionGroupCollection.updateIsReadConfirmationRequired",
+					value: {questionIndex: questionIndex}
+				}
+			}
+		});
 	},
-	"Question.setTimer": function ({privateKey, hashtag, questionIndex, timer}) {
+	"Question.setTimer": function ({hashtag, questionIndex, timer}) {
+		new SimpleSchema({
+			timer: {
+				type: Number,
+				min: 0
+			}
+		}).validate({timer: timer});
+		const query = {};
 		if (Meteor.isServer) {
-			new SimpleSchema({
-				timer: {
-					type: Number,
-					min: 0
+			query.hashtag = hashtag;
+		}
+		var questionGroup = QuestionGroupCollection.findOne(query);
+		if (!questionGroup) {
+			throw new Meteor.Error('Question.setTimer', 'hashtag_not_found');
+		}
+
+		questionGroup.questionList[questionIndex].timer = timer;
+		QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "QuestionGroupCollection.setTimer",
+					value: {
+						questionIndex: questionIndex,
+						timer: timer
+					}
 				}
-			}).validate({timer: timer});
-
-			var hashtagDoc = HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			});
-			if (!hashtagDoc) {
-				throw new Meteor.Error('Question.setTimer', 'not_authorized');
 			}
-
-			var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
-			if (!questionGroup) {
-				throw new Meteor.Error('Question.setTimer', 'hashtag_not_found');
-			} else {
-				questionGroup.questionList[questionIndex].timer = timer;
-				QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
-				EventManagerCollection.update({hashtag: hashtag}, {
-					$push: {
-						eventStack: {
-							key: "QuestionGroupCollection.setTimer",
-							value: {
-								questionIndex: questionIndex,
-								timer: timer
-							}
-						}
-					}
-				});
-			}
-		}
+		});
 	},
-	"Question.startTimer": function ({privateKey, hashtag, questionIndex}) {
-		if (Meteor.isServer) {
-			var startTime = new Date();
+	"Question.startTimer": function ({hashtag, questionIndex}) {
+		var startTime = new Date();
 
-			var hashtagDoc = HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			});
-			if (!hashtagDoc) {
-				throw new Meteor.Error('Question.startTimer', 'not_authorized');
-			}
-			var questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
-			if (!questionGroup) {
-				throw new Meteor.Error('Question.startTimer', 'hashtag_not_found');
-			} else {
-				questionGroup.questionList[questionIndex].startTime = startTime.getTime();
-				QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
-				EventManagerCollection.update({hashtag: hashtag}, {
-					$push: {
-						eventStack: {
-							key: "QuestionGroupCollection.setTimer",
-							value: {questionIndex: questionIndex}
-						}
-					}
-				});
-			}
+		const query = {};
+		if (Meteor.isServer) {
+			query.hashtag = hashtag;
 		}
+		var questionGroup = QuestionGroupCollection.findOne(query);
+		if (!questionGroup) {
+			throw new Meteor.Error('Question.startTimer', 'hashtag_not_found');
+		}
+		questionGroup.questionList[questionIndex].startTime = startTime.getTime();
+		QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "QuestionGroupCollection.setTimer",
+					value: {questionIndex: questionIndex}
+				}
+			}
+		});
 	}
 });

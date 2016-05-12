@@ -24,13 +24,13 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
-import * as localData from '/client/lib/local_storage.js';
+import * as localData from '/lib/local_storage.js';
 import * as lib from './lib.js';
 
 var redirectTracker = null;
 
 Template.questionList.onCreated(function () {
-	Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, 0);
+	Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
 	Session.set("validQuestions", []);
 
 	localData.reenterSession(Router.current().params.quizName);
@@ -51,8 +51,11 @@ Template.questionList.onCreated(function () {
 });
 
 Template.questionList.onDestroyed(function () {
-	redirectTracker.stop();
-	delete Session.keys.validQuestions;
+	if (redirectTracker) {
+		redirectTracker.stop();
+	}
+	Session.set("validQuestions", undefined);
+	delete sessionStorage.overrideValidQuestionRedirect;
 });
 
 Template.questionList.onRendered(function () {
@@ -62,24 +65,24 @@ Template.questionList.onRendered(function () {
 		if (!validQuestions || validQuestions.length === 0) {
 			return;
 		}
-
-		let allValid = true;
-		for (var i = 0; i < validQuestions.length; i++) {
-			if (validQuestions[i] !== true) {
-				allValid = false;
-				break;
-			}
-		}
-		if (!Session.get("overrideValidQuestionRedirect")) {
-			delete Session.keys.overrideValidQuestionRedirect;
+		if (!sessionStorage.getItem("overrideValidQuestionRedirect")) {
+			delete sessionStorage.overrideValidQuestionRedirect;
 			handleRedirect = false;
-			redirectTracker.stop();
+			if (redirectTracker) {
+				redirectTracker.stop();
+			}
 		} else {
+			let allValid = true;
+			for (var i = 0; i < validQuestions.length; i++) {
+				if (validQuestions[i] !== true) {
+					allValid = false;
+					break;
+				}
+			}
 			if (allValid && handleRedirect) {
-				delete Session.keys.overrideValidQuestionRedirect;
-				Meteor.call("MemberListCollection.removeFromSession", localData.getPrivateKey(), Router.current().params.quizName);
-				Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, 0);
-				Meteor.call("EventManagerCollection.setSessionStatus", localData.getPrivateKey(), Router.current().params.quizName, 2);
+				Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
+				Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
+				Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
 				Router.go("/" + Router.current().params.quizName + "/memberlist");
 			}
 		}
@@ -95,10 +98,14 @@ Template.questionList.helpers({
 		return index + 1;
 	},
 	isActiveIndex: function (index) {
-		return index === EventManagerCollection.findOne().questionIndex;
+		return EventManagerCollection.findOne() && index === EventManagerCollection.findOne().questionIndex;
 	},
 	hasCompleteContent: function (index) {
 		var validQuestions = Session.get("validQuestions");
+		if (!validQuestions) {
+			return false;
+		}
+
 		validQuestions[index] = lib.checkForValidQuestions(index);
 		Session.set("validQuestions", validQuestions);
 		return validQuestions[index];
@@ -107,7 +114,7 @@ Template.questionList.helpers({
 
 Template.questionList.events({
 	'click .questionIcon:not(.active)': function (event) {
-		Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, parseInt($(event.target).closest(".questionIcon").attr("id").replace("questionIcon_", "")), function () {
+		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, parseInt($(event.target).closest(".questionIcon").attr("id").replace("questionIcon_", "")), function () {
 			questionLib.checkForMarkdown();
 			questionLib.checkForValidQuestiontext();
 		});
@@ -117,12 +124,11 @@ Template.questionList.events({
 		var validQuestions = Session.get("validQuestions");
 		validQuestions.splice(id, 1);
 		if (id > 0) {
-			Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, (id - 1));
+			Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, (id - 1));
 			validQuestions.push(false);
 		}
 
 		Meteor.call('AnswerOptionCollection.deleteOption', {
-			privateKey: localData.getPrivateKey(),
 			hashtag: Router.current().params.quizName,
 			questionIndex: id,
 			answerOptionNumber: -1
@@ -134,7 +140,6 @@ Template.questionList.events({
 				});
 			} else {
 				Meteor.call("QuestionGroupCollection.removeQuestion", {
-					privateKey: localData.getPrivateKey(),
 					hashtag: Router.current().params.quizName,
 					questionIndex: id
 				}, (err) => {

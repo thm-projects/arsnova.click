@@ -18,17 +18,10 @@
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {ResponsesCollection} from '/lib/responses/collection.js';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
-Meteor.publish('ResponsesCollection.session', function (phashtag) {
+Meteor.publish('ResponsesCollection.join', function (hashtag) {
 	new SimpleSchema({
-		phashtag: {type: String}
-	}).validate({phashtag});
-	var doc = HashtagsCollection.find({
-		hashtag: phashtag
-	});
-	if (!doc) {
-		return;
-	}
-	return ResponsesCollection.find({hashtag: phashtag});
+		hashtag: {type: String}
+	}).validate({hashtag});
+	return ResponsesCollection.find({hashtag: hashtag});
 });

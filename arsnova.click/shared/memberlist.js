@@ -19,7 +19,6 @@ import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
 Meteor.methods({
 	'MemberListCollection.addLearner': function ({hashtag, nick, backgroundColor, foregroundColor}) {
@@ -40,7 +39,11 @@ Meteor.methods({
 			})) {
 			throw new Meteor.Error('MemberListCollection.addLearner', 'Nick already exists!');
 		}
-		if (EventManagerCollection.findOne({hashtag: hashtag}).sessionStatus !== 2) {
+		const query = {};
+		if (Meteor.isServer) {
+			query.hashtag = hashtag;
+		}
+		if (EventManagerCollection.findOne(query).sessionStatus !== 2) {
 			throw new Meteor.Error('MemberListCollection.addLearner', 'session_not_available');
 		}
 		MemberListCollection.insert({
@@ -52,7 +55,7 @@ Meteor.methods({
 			readConfirmed: [],
 			insertDate: new Date().getTime()
 		});
-		EventManagerCollection.update({hashtag: hashtag}, {
+		EventManagerCollection.update(query, {
 			$push: {
 				eventStack: {
 					key: "MemberListCollection.addLearner",
@@ -61,7 +64,7 @@ Meteor.methods({
 			}
 		});
 	},
-	'MemberListCollection.removeLearner': function (privateKey, hashtag, nickId) {
+	'MemberListCollection.removeLearner': function (hashtag, nickId) {
 		new SimpleSchema({
 			hashtag: {type: String},
 			nickId: {type: String}
@@ -76,6 +79,10 @@ Meteor.methods({
 		}).nick;
 
 		if (nickName) {
+			MemberListCollection.remove({
+				hashtag: hashtag,
+				_id: nickId
+			});
 			EventManagerCollection.update({hashtag: hashtag}, {
 				$push: {
 					eventStack: {
@@ -84,25 +91,9 @@ Meteor.methods({
 					}
 				}
 			});
-
-			if (!HashtagsCollection.findOne({
-					privateKey: privateKey,
-					hashtag: hashtag
-				})) {
-				return;
-			}
-			MemberListCollection.remove({
-				hashtag: hashtag,
-				_id: nickId
-			});
 		}
 	},
 	'MemberListCollection.setReadConfirmed': function ({hashtag, questionIndex, nick}) {
-		/*
-		 TODO Everybody can set "readConfirmed" for each user!
-		 Maybe link this method to a privateKey for learners?
-		 Maybe check with Meteor.user()?
-		 */
 		new SimpleSchema({
 			hashtag: {type: String},
 			questionIndex: {type: Number},
@@ -133,48 +124,26 @@ Meteor.methods({
 			}
 		});
 	},
-	'MemberListCollection.clearReadConfirmed': function (privateKey, hashtag) {
-		if (Meteor.isServer) {
-			var doc = HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			});
-			if (doc) {
-				MemberListCollection.update({hashtag: hashtag}, {$set: {readConfirmed: []}});
-			} else {
-				throw new Meteor.Error('MemberListCollection.clearReadConfirmed', 'not_authorized');
-			}
-		} else {
-			MemberListCollection.update({hashtag: hashtag}, {$set: {readConfirmed: []}});
-			EventManagerCollection.update({hashtag: hashtag}, {
-				$push: {
-					eventStack: {
-						key: "MemberListCollection.clearReadConfirmed",
-						value: {}
-					}
+	'MemberListCollection.clearReadConfirmed': function (hashtag) {
+		MemberListCollection.update({hashtag: hashtag}, {$set: {readConfirmed: []}});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "MemberListCollection.clearReadConfirmed",
+					value: {}
 				}
-			});
-		}
-	},
-	'MemberListCollection.removeFromSession': function (privateKey, hashtag) {
-		if (Meteor.isServer) {
-			var doc = HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			});
-			if (doc) {
-				MemberListCollection.remove({hashtag: hashtag});
-				EventManagerCollection.update({hashtag: hashtag}, {
-					$push: {
-						eventStack: {
-							key: "MemberListCollection.removeFromSession",
-							value: {}
-						}
-					}
-				});
-			} else {
-				throw new Meteor.Error('MemberListCollection.removeFromSession', 'not_authorized');
 			}
-		}
+		});
+	},
+	'MemberListCollection.removeFromSession': function (hashtag) {
+		MemberListCollection.remove({hashtag: hashtag});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "MemberListCollection.removeFromSession",
+					value: {}
+				}
+			}
+		});
 	}
 });

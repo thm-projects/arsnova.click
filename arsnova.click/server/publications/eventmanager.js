@@ -20,15 +20,8 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Meteor.publish('EventManagerCollection.join', (hashtag)=> {
-	if (typeof hashtag === "undefined") {
-		return false;
-	}
 	new SimpleSchema({
-		hashtag: {
-			type: String,
-			min: 1,
-			max: 25
-		}
+		hashtag: {type: String}
 	}).validate({hashtag: hashtag});
-	return EventManagerCollection.find({hashtag: hashtag});
+	return EventManagerCollection.find({hashtag});
 });

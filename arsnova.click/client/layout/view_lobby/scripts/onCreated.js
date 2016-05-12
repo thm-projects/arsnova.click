@@ -19,7 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import * as localData from '/client/lib/local_storage.js';
+import * as localData from '/lib/local_storage.js';
 import {calculateButtonCount, setMemberlistObserver} from './lib.js';
 
 Template.memberlist.onCreated(function () {
@@ -47,8 +47,8 @@ Template.memberlist.onCreated(function () {
 	}
 
 	if (localData.containsHashtag(Router.current().params.quizName)) {
-		Meteor.call('ResponsesCollection.clearAll', localData.getPrivateKey(), Router.current().params.quizName);
-		Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, 0);
-		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", localData.getPrivateKey(), Router.current().params.quizName, -1);
+		Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);
+		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
+		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, -1);
 	}
 });

@@ -17,19 +17,20 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
+import {TAPi18n} from 'meteor/tap:i18n';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import * as localData from '/client/lib/local_storage.js';
+import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import * as localData from '/lib/local_storage.js';
 
 export let validationTrackerHandle = null;
 
-export function setTimer(index) {
+export function setTimer(index, callback) {
 	var hasError = false;
 	// timer is given in seconds
 	const timer = Session.get("slider") * 1000;
 	if (!isNaN(timer)) {
 		Meteor.call("Question.setTimer", {
-			privateKey: localData.getPrivateKey(),
 			hashtag: Router.current().params.quizName,
 			questionIndex: index,
 			timer: timer
@@ -45,7 +46,15 @@ export function setTimer(index) {
 			reason: "Timer is not a number"
 		};
 	}
-	return hasError;
+
+	if (hasError) {
+		new ErrorSplashscreen({
+			autostart: true,
+			errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + hasError.reason)
+		});
+	} else if (typeof callback === "function") {
+		callback();
+	}
 }
 
 export function createSlider(index) {

@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
@@ -25,44 +24,19 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 
 Meteor.methods({
-	'Main.killAll': function (privateKey, hashtag) {
-		if (Meteor.isServer) {
-			new SimpleSchema({
-				hashtag: {type: String},
-				privateKey: {type: String}
-			}).validate({
-				privateKey,
-				hashtag
-			});
-			var doc = HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			});
-			if (doc) {
-				Meteor.call('EventManagerCollection.reset', privateKey, doc.hashtag, function () {
-					AnswerOptionCollection.remove({hashtag: doc.hashtag});
-					MemberListCollection.remove({hashtag: doc.hashtag});
-					ResponsesCollection.remove({hashtag: doc.hashtag});
-					QuestionGroupCollection.remove({hashtag: doc.hashtag});
-				});
-			}
-		}
+	'Main.killAll': function (hashtag) {
+		AnswerOptionCollection.remove({hashtag: hashtag});
+		MemberListCollection.remove({hashtag: hashtag});
+		ResponsesCollection.remove({hashtag: hashtag});
+		QuestionGroupCollection.remove({hashtag: hashtag});
+		Meteor.call("EventManagerCollection.beforeClear", hashtag);
 	},
-	'Main.deleteEverything': function ({privateKey, hashtag}) {
-		if (Meteor.isServer) {
-			var hashtagDoc = HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			});
-			if (typeof hashtagDoc === "undefined") {
-				throw new Meteor.Error('Main.deleteEverything', 'not_authorized');
-			}
-			HashtagsCollection.remove({hashtag: hashtag});
-			AnswerOptionCollection.remove({hashtag: hashtag});
-			MemberListCollection.remove({hashtag: hashtag});
-			ResponsesCollection.remove({hashtag: hashtag});
-			QuestionGroupCollection.remove({hashtag: hashtag});
-			EventManagerCollection.remove({hashtag: hashtag});
-		}
+	'Main.deleteEverything': function ({hashtag}) {
+		HashtagsCollection.remove({hashtag: hashtag});
+		AnswerOptionCollection.remove({hashtag: hashtag});
+		MemberListCollection.remove({hashtag: hashtag});
+		ResponsesCollection.remove({hashtag: hashtag});
+		QuestionGroupCollection.remove({hashtag: hashtag});
+		EventManagerCollection.remove({hashtag: hashtag});
 	}
 });

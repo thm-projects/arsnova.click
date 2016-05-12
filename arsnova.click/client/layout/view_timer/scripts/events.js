@@ -19,7 +19,6 @@ import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import * as localData from '/client/lib/local_storage.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {setTimer} from './lib.js';
 
@@ -34,9 +33,9 @@ Template.createTimerView.events({
 			});
 		} else {
 			if ($(event.currentTarget).attr("id") === "forwardButton") {
-				Meteor.call("MemberListCollection.removeFromSession", localData.getPrivateKey(), Router.current().params.quizName);
-				Meteor.call("EventManagerCollection.setActiveQuestion", localData.getPrivateKey(), Router.current().params.quizName, 0);
-				Meteor.call("EventManagerCollection.setSessionStatus", localData.getPrivateKey(), Router.current().params.quizName, 2);
+				Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
+				Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
+				Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
 				Router.go("/" + Router.current().params.quizName + "/memberlist");
 			} else {
 				Router.go("/" + Router.current().params.quizName + "/answeroptions");

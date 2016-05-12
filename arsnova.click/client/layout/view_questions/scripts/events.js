@@ -24,22 +24,16 @@ import * as lib from './lib.js';
 
 Template.createQuestionView.events({
 	'input #questionText': function () {
-		if (!EventManagerCollection.findOne()) {
-			return;
-		}
 		lib.addQuestion(EventManagerCollection.findOne().questionIndex);
 		lib.checkForValidQuestiontext();
 	},
 	//Save question in Sessions-Collection when Button "Next" is clicked
 	'click #forwardButton': function () {
-		if (!EventManagerCollection.findOne()) {
-			return;
-		}
 		lib.addQuestion(EventManagerCollection.findOne().questionIndex);
 		Router.go("/" + Router.current().params.quizName + "/answeroptions");
 	},
 	"click #backButton": function () {
-		Router.go("/");
+		Router.go("/" + Router.current().params.quizName + "/resetToHome");
 	},
 	"click #formatPreviewButton": function () {
 		var formatPreviewText = $('#formatPreviewText');

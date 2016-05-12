@@ -18,29 +18,17 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { AnswerOptionCollection } from '/lib/answeroptions/collection.js';
-import { HashtagsCollection } from '/lib/hashtags/collection.js';
 import { EventManagerCollection } from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
-	'AnswerOptionCollection.addOption': function ({privateKey, hashtag, questionIndex, answerText, answerOptionNumber, isCorrect}) {
+	'AnswerOptionCollection.addOption': function ({hashtag, questionIndex, answerText, answerOptionNumber, isCorrect}) {
 		new SimpleSchema({
-			privateKey: {type: String},
 			hashtag: {type: String},
 			questionIndex: {type: Number},
 			answerText: {type: String},
 			answerOptionNumber: {type: Number},
 			isCorrect: {type: Number}
-		}).validate({privateKey, hashtag, questionIndex, answerText, answerOptionNumber, isCorrect});
-		var doc = true;
-		if (Meteor.isServer) {
-			doc = HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			});
-		}
-		if (!doc) {
-			throw new Meteor.Error('AnswerOptionCollection.addOption', 'not_authorized');
-		}
+		}).validate({hashtag, questionIndex, answerText, answerOptionNumber, isCorrect});
 		if (AnswerOptionCollection.find({
 				hashtag: hashtag,
 				questionIndex: questionIndex
@@ -91,71 +79,48 @@ Meteor.methods({
 			});
 		}
 	},
-	'AnswerOptionCollection.deleteOption': function ({privateKey, hashtag, questionIndex, answerOptionNumber}) {
-		if (Meteor.isServer) {
-			new SimpleSchema({
-				privateKey: {type: String},
-				hashtag: {type: String},
-				questionIndex: {type: Number},
-				answerOptionNumber: {type: Number}
-			}).validate({privateKey, hashtag, questionIndex, answerOptionNumber});
-
-			var doc = HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			});
-			if (!doc) {
-				throw new Meteor.Error('AnswerOptionCollection.deleteOption', 'not_authorized');
-			}
-
-			var query = {
-				hashtag: hashtag,
-				questionIndex: questionIndex,
-				answerOptionNumber: answerOptionNumber
-			};
-			if (answerOptionNumber < 0) {
-				delete query.answerOptionNumber;
-				AnswerOptionCollection.remove(query);
-				AnswerOptionCollection.update(
-					{hashtag: hashtag, questionIndex: {$gt: questionIndex}},
-					{$inc: {questionIndex: -1}},
-					{multi: true}
-				);
-			} else {
-				AnswerOptionCollection.remove(query);
-			}
-			EventManagerCollection.update({hashtag: hashtag}, {
-				$push: {
-					eventStack: {
-						key: "AnswerOptionCollection.deleteOption",
-						value: {
-							questionIndex: questionIndex,
-							answerOptionNumber: answerOptionNumber
-						}
+	'AnswerOptionCollection.deleteOption': function ({hashtag, questionIndex, answerOptionNumber}) {
+		new SimpleSchema({
+			hashtag: {type: String},
+			questionIndex: {type: Number},
+			answerOptionNumber: {type: Number}
+		}).validate({hashtag, questionIndex, answerOptionNumber});
+		var query = {
+			hashtag: hashtag,
+			questionIndex: questionIndex,
+			answerOptionNumber: answerOptionNumber
+		};
+		if (answerOptionNumber < 0) {
+			delete query.answerOptionNumber;
+			AnswerOptionCollection.remove(query);
+			AnswerOptionCollection.update(
+				{hashtag: hashtag, questionIndex: {$gt: questionIndex}},
+				{$inc: {questionIndex: -1}},
+				{multi: true}
+			);
+		} else {
+			AnswerOptionCollection.remove(query);
+		}
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "AnswerOptionCollection.deleteOption",
+					value: {
+						questionIndex: questionIndex,
+						answerOptionNumber: answerOptionNumber
 					}
 				}
-			});
-		}
+			}
+		});
 	},
-	'AnswerOptionCollection.updateAnswerTextAndIsCorrect': function ({privateKey, hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}) {
+	'AnswerOptionCollection.updateAnswerTextAndIsCorrect': function ({hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}) {
 		new SimpleSchema({
-			privateKey: {type: String},
 			hashtag: {type: String},
 			questionIndex: {type: Number},
 			answerOptionNumber: {type: Number},
 			answerText: {type: String},
 			isCorrect: {type: Number}
-		}).validate({privateKey, hashtag, questionIndex, answerOptionNumber, answerText, isCorrect});
-		var doc = true;
-		if (Meteor.isServer) {
-			doc = HashtagsCollection.findOne({
-				hashtag: hashtag,
-				privateKey: privateKey
-			});
-		}
-		if (!doc) {
-			throw new Meteor.Error('AnswerOptionCollection.updateAnswerTextAndIsCorrect', 'not_authorized');
-		}
+		}).validate({hashtag, questionIndex, answerOptionNumber, answerText, isCorrect});
 		var answerOptionDoc = AnswerOptionCollection.findOne({
 			hashtag: hashtag,
 			questionIndex: questionIndex,

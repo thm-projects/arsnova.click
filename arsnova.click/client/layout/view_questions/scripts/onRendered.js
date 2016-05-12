@@ -27,9 +27,12 @@ Template.createQuestionView.onRendered(function () {
 
 	let index;
 	lib.subscriptionHandler = Tracker.autorun(()=> {
+		if (!EventManagerCollection.findOne()) {
+			return;
+		}
 		index = EventManagerCollection.findOne().questionIndex;
-		lib.checkForMarkdown();
 	});
+	lib.checkForMarkdown();
 	var body = $('body');
 	body.on('click', '.questionIcon:not(.active)', function () {
 		var currentSession = QuestionGroupCollection.findOne();

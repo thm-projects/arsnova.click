@@ -23,6 +23,8 @@ Template.memberlist.onDestroyed(function () {
 	if (memberlistObserver) {
 		memberlistObserver.stop();
 	}
+	Session.set("learnerCount", undefined);
+	Session.set("learnerCountOverride", undefined);
 	delete Session.keys.learnerCount;
 	delete Session.keys.learnerCountOverride;
 });

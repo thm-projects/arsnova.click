@@ -31,9 +31,10 @@ Template.createAnswerOptions.onRendered(function () {
 
 	let index;
 	lib.subscriptionHandler = Tracker.autorun(()=> {
-		if (this.subscriptionsReady()) {
-			index = EventManagerCollection.findOne().questionIndex;
+		if (!EventManagerCollection.findOne()) {
+			return;
 		}
+		index = EventManagerCollection.findOne().questionIndex;
 	});
 	var body = $('body');
 	body.on('click', '.questionIcon:not(.active)', function () {

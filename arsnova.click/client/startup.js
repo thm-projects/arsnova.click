@@ -17,7 +17,7 @@
 
 import {Meteor} from 'meteor/meteor';
 import {TAPi18n} from 'meteor/tap:i18n';
-import * as localData from '/client/lib/local_storage.js';
+import * as localData from '/lib/local_storage.js';
 
 export function getUserLanguage() {
 	/* Get the language of the browser */

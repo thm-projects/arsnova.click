@@ -17,6 +17,7 @@
 
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import * as localData from '/lib/local_storage.js';
 
 export const LeaderBoardCollection = new Mongo.Collection("leaderBoard");
 
@@ -55,3 +56,29 @@ LeaderBoardCollection.attachSchema(new SimpleSchema({
 		max: 26
 	}
 }));
+
+LeaderBoardCollection.deny({
+	insert: function () {
+		return true;
+	},
+	update: function () {
+		return true;
+	},
+	remove: function () {
+		return true;
+	}
+});
+
+LeaderBoardCollection.allow({
+	insert: function (userId, doc) {
+		const isOwner = localData.containsHashtag(doc.hashtag);
+		const isOwnNick = doc.userNick === localStorage.getItem(doc.hashtag + "nick");
+		return isOwner || isOwnNick;
+	},
+	update: function (userId, doc) {
+		return localData.containsHashtag(doc.hashtag);
+	},
+	remove: function (userId, doc) {
+		return localData.containsHashtag(doc.hashtag);
+	}
+});

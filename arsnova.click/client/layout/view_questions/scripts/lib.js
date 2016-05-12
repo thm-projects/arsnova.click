@@ -21,7 +21,7 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import * as localData from '/client/lib/local_storage.js';
+import * as localData from '/lib/local_storage.js';
 
 function doesMarkdownSyntaxExist(questionText, syntaxStart, syntaxMiddle, syntaxEnd) {
 	if (questionText.length <= 0) {
@@ -62,7 +62,6 @@ export var subscriptionHandler = null;
 export function addQuestion(index) {
 	var questionText = $('#questionText').val();
 	Meteor.call("QuestionGroupCollection.addQuestion", {
-		privateKey: localData.getPrivateKey(),
 		hashtag: Router.current().params.quizName,
 		questionIndex: index,
 		questionText: questionText
@@ -119,7 +118,7 @@ export function changePreviewButtonText(text) {
 }
 
 export function checkForMarkdown() {
-	if (EventManagerCollection.findOne().questionIndex < 0) {
+	if (EventManagerCollection.findOne().questionIndex < 0 || !QuestionGroupCollection.findOne()) {
 		return;
 	}
 	var questionText = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].questionText;
@@ -145,7 +144,7 @@ export function checkForMarkdown() {
 
 export function checkForValidQuestiontext() {
 	var questionText = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].questionText;
-	if (questionText.length < 5) {
+	if (typeof questionText !== "undefined" && questionText.length < 5) {
 		$('#questionText').addClass("invalidAnswerOption");
 	} else {
 		$('#questionText').removeClass("invalidAnswerOption");

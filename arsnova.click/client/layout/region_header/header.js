@@ -19,7 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import * as localData from '/client/lib/local_storage.js';
+import * as localData from '/lib/local_storage.js';
 import {buzzsound1, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib";
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
@@ -33,7 +33,7 @@ Template.header.onCreated(function () {
 
 Template.header.helpers({
 	getCurrentResetRoute: function () {
-		return Router.current().params.quizName ? "/" + Router.current().params.quizName + "/resetToHome" : "";
+		return Router.current().params.quizName ? Router.current().params.quizName + "/resetToHome" : "";
 	},
 	isInHomePathOrIsStudent: function () {
 		switch (Router.current().route.path()) {
@@ -72,7 +72,7 @@ Template.header.events({
 				closeOnButton: '#closeDialogButton, #resetSessionButton',
 				onRendered: function (instance) {
 					instance.templateSelector.find('#resetSessionButton').on('click', function () {
-						Meteor.call("Main.killAll", localData.getPrivateKey(), Router.current().params.quizName, function (err) {
+						Meteor.call("Main.killAll", Router.current().params.quizName, function (err) {
 							if (err) {
 								new ErrorSplashscreen({
 									autostart: true,
@@ -80,12 +80,9 @@ Template.header.events({
 								});
 							}
 						});
-						Router.go("/" + Router.current().params.quizName + "/resetToHome");
 					});
 				}
 			});
-		} else {
-			Router.go("/" + Router.current().params.quizName + "/resetToHome");
 		}
 	},
 	'click .sound-button': function () {

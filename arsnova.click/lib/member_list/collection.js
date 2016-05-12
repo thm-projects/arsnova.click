@@ -17,43 +17,47 @@
 
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {hashtagSchema} from '../hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
 
 export const MemberListCollection = new Mongo.Collection("memberlist");
+export const userNickSchema = new SimpleSchema({
+	type: String,
+	min: 3,
+	max: 25
+});
+export const lowerCaseNickSchema = new SimpleSchema({
+	type: String,
+	min: 3,
+	max: 25
+});
+export const readConfirmedSchema = new SimpleSchema({
+	type: [Number]
+});
+export const backgroundColorSchema = new SimpleSchema({
+	type: String,
+	min: 7,
+	max: 7
+});
+export const foregroundColorSchema = new SimpleSchema({
+	type: String,
+	min: 7,
+	max: 7
+});
+export const insertDateSchema = new SimpleSchema({
+	type: String
+});
+export const memberListCollectionSchema = new SimpleSchema({
+	hashtag: hashtagSchema,
+	nick: userNickSchema,
+	lowerCaseNick: lowerCaseNickSchema,
+	readConfirmed: readConfirmedSchema,
+	backgroundColor: backgroundColorSchema,
+	foregroundColor: foregroundColorSchema,
+	insertDate: insertDateSchema
+});
 
-MemberListCollection.attachSchema(new SimpleSchema({
-	hashtag: {
-		type: String,
-		min: 1,
-		max: 25
-	},
-	nick: {
-		type: String,
-		min: 3,
-		max: 25
-	},
-	lowerCaseNick: {
-		type: String,
-		min: 3,
-		max: 25
-	},
-	readConfirmed: {
-		type: [Number]
-	},
-	backgroundColor: {
-		type: String,
-		min: 7,
-		max: 7
-	},
-	foregroundColor: {
-		type: String,
-		min: 7,
-		max: 7
-	},
-	insertDate: {
-		type: String
-	}
-}));
+MemberListCollection.attachSchema(memberListCollectionSchema);
 
 MemberListCollection.deny({
 	insert: function () {

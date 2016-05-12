@@ -54,6 +54,30 @@ Meteor.methods({
 			}
 		});
 	},
+	'HashtagsCollection.updateMusicSettings': function (doc) {
+		var hashtagDoc = HashtagsCollection.findOne({hashtag: doc.hashtag});
+
+		if (!hashtagDoc) {
+			throw new Meteor.Error('HashtagsCollection.updateMusicSettings', 'session_not_exists');
+		} else {
+			HashtagsCollection.update(hashtagDoc._id, {
+				$set: {
+					musicVolume: doc.musicVolume,
+					musicEnabled: doc.musicEnabled,
+					musicTitle: doc.musicTitle
+				}
+			});
+
+			EventManagerCollection.update({hashtag: doc.hashtag}, {
+				$push: {
+					eventStack: {
+						key: "HashtagsCollection.updateMusicSettings",
+						value: {hashtag: doc.hashtag}
+					}
+				}
+			});
+		}
+	},
 	'HashtagsCollection.export': function ({hashtag}) {
 		if (Meteor.isServer) {
 			var hashtagDoc = HashtagsCollection.findOne({

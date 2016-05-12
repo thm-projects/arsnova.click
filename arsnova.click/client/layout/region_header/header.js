@@ -19,16 +19,14 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {buzzsound1, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib";
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 Template.header.onCreated(function () {
-	Session.setDefault("slider2", 80);
-	Session.setDefault("globalVolume", 80);
-
-	setBuzzsound1('waity.mp3');
+	setBuzzsound1("WaitSong1");
 });
 
 Template.header.helpers({
@@ -92,19 +90,12 @@ Template.header.events({
 			closeOnButton: "#js-btn-hideSoundModal",
 			onRendered: function (instance) {
 				instance.templateSelector.find('#soundSelect').on('change', function (event) {
+					var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+					hashtagDoc.musicTitle = $(event.target).val();
 					buzzsound1.stop();
 					Session.set("soundIsPlaying", false);
-					switch ($(event.target).val()) {
-						case "Song1":
-							setBuzzsound1("bensound-thelounge.mp3");
-							break;
-						case "Song2":
-							setBuzzsound1("bensound-cute.mp3");
-							break;
-						case "Song3":
-							setBuzzsound1("bensound-epic.mp3");
-							break;
-					}
+					setBuzzsound1($(event.target).val());
+					Meteor.call('HashtagsCollection.updateMusicSettings', hashtagDoc);
 				});
 
 				instance.templateSelector.find("#js-btn-playStopMusic").on('click', function () {
@@ -123,16 +114,23 @@ Template.header.events({
 				});
 
 				instance.templateSelector.find('#isSoundOnButton').on('click', function () {
+					var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 					var btn = $('#isSoundOnButton');
 					btn.toggleClass("down");
 					if (btn.hasClass("down")) {
-						Session.set("togglemusic", true);
+						hashtagDoc.musicEnabled = 1;
 						btn.html(TAPi18n.__("plugins.sound.active"));
 					} else {
-						Session.set("togglemusic", false);
+						hashtagDoc.musicEnabled = 0;
 						btn.html(TAPi18n.__("plugins.sound.inactive"));
 					}
+					Meteor.call('HashtagsCollection.updateMusicSettings', hashtagDoc);
 				});
+			},
+			onDestroyed: function () {
+				var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+				hashtagDoc.musicVolume = Session.get("slider2");
+				Meteor.call('HashtagsCollection.updateMusicSettings', hashtagDoc);
 			}
 		});
 	}

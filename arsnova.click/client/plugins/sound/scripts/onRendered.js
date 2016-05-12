@@ -17,11 +17,18 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {buzzsound1, setBuzzsound1} from './lib.js';
 
 Template.soundConfig.onRendered(function () {
-	setBuzzsound1('bensound-thelounge.mp3');
-	Session.set("globalVolume", 80);
+	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+	Session.set("slider2", hashtagDoc.musicVolume);
+	setBuzzsound1(hashtagDoc.musicTitle);
+	$('#soundSelect').val(hashtagDoc.musicTitle).select();
+
+	if (hashtagDoc.musicEnabled) {
+		$('#isSoundOnButton').toggleClass("down");
+	}
 
 	this.$("#slider2").noUiSlider({
 		start: Session.get("slider2"),
@@ -30,12 +37,12 @@ Template.soundConfig.onRendered(function () {
 			'max': 100
 		}
 	}).on('slide', function (ev, val) {
-		Session.set('slider2', Math.round(val));
-		Session.set("globalVolume", Math.round(val));
-		buzzsound1.setVolume(Session.get("globalVolume"));
+		var musicVolume = Math.round(val);
+		Session.set('slider2', musicVolume);
+		buzzsound1.setVolume(musicVolume);
 	}).on('change', function (ev, val) {
-		Session.set('slider2', Math.round(val));
-		Session.set("globalVolume", Math.round(val));
-		buzzsound1.setVolume(Session.get("globalVolume"));
+		var musicVolume = Math.round(val);
+		Session.set('slider2', musicVolume);
+		buzzsound1.setVolume(musicVolume);
 	});
 });

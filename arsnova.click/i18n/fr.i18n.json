@@ -235,6 +235,7 @@
           "Internal Server Error": "Erreur interne du serveur",
           "update_failed": "La mise à jour de la question n'a pas.",
           "session_exists": "Cette session existe déjà!",
+          "session_not_exists": "N'existe pas Cette session",
           "hashtag_exists": "Ce hashtag existe déjà!",
           "session_not_available": "Session est actuellement pas disponible pour rejoindre",
           "private_browsing": "If you use ARSnova.click in private browsing you can only join a quiz as an attendee. Unfortunately your browser seems to reject any write access to the local storage. Please use ARSnova.click only via a normal browser tab. Your anonymity will be respected even without using the private mode.",

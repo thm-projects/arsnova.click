@@ -61,6 +61,9 @@ export function addHashtag(hashtag) {
 	}
 	var questionObject = {
 		hashtag: hashtag,
+		musicVolume: 80,
+		musicEnabled: 1,
+		musicTitle: "Song1",
 		questionList: [
 			{
 				questionText: "",
@@ -140,6 +143,21 @@ export function addQuestion(hashtag, questionIndex, questionText) {
 				]
 			});
 		}
+		localStorage.setItem(hashtag, JSON.stringify(sessionData));
+	}
+}
+
+export function updateMusicSettings(hashtag, musicVolume, musicEnabled, musicTitle) {
+	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
+		return;
+	}
+	const sessionDataString = localStorage.getItem(hashtag);
+	if (sessionDataString) {
+		const sessionData = JSON.parse(sessionDataString);
+		sessionData.musicVolume = musicVolume;
+		sessionData.musicEnabled = musicEnabled;
+		sessionData.musicTitle = musicTitle;
+
 		localStorage.setItem(hashtag, JSON.stringify(sessionData));
 	}
 }

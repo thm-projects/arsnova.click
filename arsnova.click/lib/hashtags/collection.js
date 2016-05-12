@@ -31,6 +31,19 @@ HashtagsCollection.attachSchema(new SimpleSchema({
 		type: String,
 		min: 24,
 		max: 24
+	},
+	musicVolume: {
+		type: Number,
+		min: 0,
+		max: 100
+	},
+	musicEnabled: {
+		type: Number,
+		min: 0,
+		max: 1
+	},
+	musicTitle: {
+		type: String
 	}
 }));
 

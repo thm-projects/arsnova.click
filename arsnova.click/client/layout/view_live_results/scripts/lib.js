@@ -17,11 +17,12 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {buzzsound1} from '/client/plugins/sound/scripts/lib.js';
+import {buzzsound1, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 
 export let countdown = null;
 export let routeToLeaderboardTimer = null;
@@ -66,6 +67,7 @@ export function checkIfIsCorrect(isCorrect) {
 
 export function startCountdown(index) {
 	Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index);
+	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	var questionDoc = QuestionGroupCollection.findOne().questionList[index];
 	Session.set("sessionCountDown", questionDoc.timer);
 	$("#countdowndiv").appendTo($("body"));
@@ -115,15 +117,16 @@ export function startCountdown(index) {
 				image.src = "/images/gelb0.gif";
 				image1.fadeIn(500);
 				image1.fadeOut(500);
-				if (Session.get("togglemusic")) {
+				if (hashtagDoc.musicEnabled) {
 					f.play();
 				}
 			}
 		}
 	});
 
-	buzzsound1.setVolume(Session.get("globalVolume"));
-	if (Session.get("togglemusic")) {
+	if (hashtagDoc.musicEnabled) {
+		setBuzzsound1(hashtagDoc.musicTitle);
+		buzzsound1.setVolume(hashtagDoc.musicVolume);
 		buzzsound1.play();
 	}
 

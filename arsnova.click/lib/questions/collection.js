@@ -42,7 +42,8 @@ export const questionGroupSchema = new SimpleSchema({
 		type: [Object]
 	},
 	"questionList.$.questionText": {
-		type: questionTextSchema
+		type: questionTextSchema,
+		optional: true
 	},
 	"questionList.$.timer": {
 		type: timerSchema

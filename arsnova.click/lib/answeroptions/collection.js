@@ -45,7 +45,8 @@ export const answerOptionsCollectionSchema = new SimpleSchema({
 		type: questionIndexSchema
 	},
 	answerText: {
-		type: answerTextSchema
+		type: answerTextSchema,
+		optional: true
 	},
 	answerOptionNumber: {
 		type: answerOptionNumberSchema

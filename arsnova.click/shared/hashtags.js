@@ -35,7 +35,7 @@ Meteor.methods({
 		return Boolean(doc);
 	},
 	'HashtagsCollection.addHashtag': function (doc) {
-		new SimpleSchema({hashtagSchema}).validate({hashtag: doc.hashtag});
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag: doc.hashtag});
 
 		if (HashtagsCollection.find({hashtag: doc.hashtag}).count() > 0) {
 			throw new Meteor.Error('HashtagsCollection.addHashtag', 'session_exists');

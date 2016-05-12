@@ -118,6 +118,7 @@ Template.hashtagView.events({
 				var oldHashtagDoc = HashtagsCollection.findOne();
 				if (oldHashtagDoc) {
 					reenter = true;
+					sessionStorage.setItem("overrideValidQuestionRedirect", true);
 					localData.reenterSession(hashtag);
 					connectEventManager(hashtag);
 				}

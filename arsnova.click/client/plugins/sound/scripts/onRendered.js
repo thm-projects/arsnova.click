@@ -17,11 +17,20 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {buzzsound1, setBuzzsound1} from './lib.js';
 
 Template.soundConfig.onRendered(function () {
-	setBuzzsound1('bensound-thelounge.mp3');
-	Session.set("globalVolume", 80);
+
+	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+	Session.set("slider2", hashtagDoc.musicVolume);
+	Session.set("globalVolume", hashtagDoc.musicVolume);
+	setBuzzsound1(hashtagDoc.musicTitle);
+	$('#soundSelect').val(hashtagDoc.musicTitle).select();
+
+	if (hashtagDoc.musicEnabled) {
+		$('#isSoundOnButton').toggleClass("down");
+	}
 
 	this.$("#slider2").noUiSlider({
 		start: Session.get("slider2"),

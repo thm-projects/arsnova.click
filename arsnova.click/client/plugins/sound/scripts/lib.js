@@ -19,7 +19,23 @@ import {Session} from 'meteor/session';
 
 export let buzzsound1 = null;
 
-export function setBuzzsound1(fileName) {
+export function setBuzzsound1(songName) {
+	var fileName = "";
+	switch (songName) {
+		case "Song1":
+			fileName = "bensound-thelounge.mp3";
+			break;
+		case "Song2":
+			fileName = "bensound-cute.mp3";
+			break;
+		case "Song3":
+			fileName = "bensound-epic.mp3";
+			break;
+		case "WaitSong1":
+			fileName = "waity.mp3";
+			break;
+	}
+
 	buzzsound1 = new buzz.sound('/sounds/' + fileName, {
 		loop: true
 	});

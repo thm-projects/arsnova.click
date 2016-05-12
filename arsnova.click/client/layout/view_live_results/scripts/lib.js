@@ -118,6 +118,7 @@ export function startCountdown(index) {
 				image1.fadeIn(500);
 				image1.fadeOut(500);
 				if (hashtagDoc.musicEnabled) {
+					buzzsound1.stop();
 					f.play();
 				}
 			}

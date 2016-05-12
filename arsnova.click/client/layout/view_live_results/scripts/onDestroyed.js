@@ -17,12 +17,14 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {buzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {countdown, routeToLeaderboardTimer, readingConfirmationTracker} from './lib.js';
 
 Template.liveResults.onDestroyed(function () {
 	Session.set("countdownInitialized", undefined);
 	Session.set("sessionCountDown", undefined);
 	if (countdown) {
+		buzzsound1.stop();
 		countdown.stop();
 	}
 	if (routeToLeaderboardTimer) {

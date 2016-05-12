@@ -21,7 +21,6 @@ import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {buzzsound1, setBuzzsound1} from './lib.js';
 
 Template.soundConfig.onRendered(function () {
-
 	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	Session.set("slider2", hashtagDoc.musicVolume);
 	setBuzzsound1(hashtagDoc.musicTitle);

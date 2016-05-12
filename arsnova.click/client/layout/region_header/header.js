@@ -89,9 +89,6 @@ Template.header.events({
 			templateName: "soundConfig",
 			closeOnButton: "#js-btn-hideSoundModal",
 			onRendered: function (instance) {
-
-
-
 				instance.templateSelector.find('#soundSelect').on('change', function (event) {
 					var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 					hashtagDoc.musicTitle = $(event.target).val();

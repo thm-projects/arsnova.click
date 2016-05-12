@@ -127,7 +127,7 @@ Template.hashtagView.events({
 					privateKey: localData.getPrivateKey(),
 					hashtag: hashtag,
 					musicVolume: 80,
-					musicEnabled: 0,
+					musicEnabled: 1,
 					musicTitle: "Song1"
 				};
 				Meteor.call('HashtagsCollection.addHashtag', doc, (err) => {

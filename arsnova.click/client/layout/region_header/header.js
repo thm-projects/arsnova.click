@@ -19,6 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {buzzsound1, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib";
@@ -92,6 +93,8 @@ Template.header.events({
 			closeOnButton: "#js-btn-hideSoundModal",
 			onRendered: function (instance) {
 				instance.templateSelector.find('#soundSelect').on('change', function (event) {
+					var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+					hashtagDoc.musicTitle = $(event.target).val();
 					buzzsound1.stop();
 					Session.set("soundIsPlaying", false);
 					switch ($(event.target).val()) {
@@ -105,6 +108,7 @@ Template.header.events({
 							setBuzzsound1("bensound-epic.mp3");
 							break;
 					}
+					Meteor.call('HashtagsCollection.updateMusicSettings', hashtagDoc);
 				});
 
 				instance.templateSelector.find("#js-btn-playStopMusic").on('click', function () {
@@ -123,16 +127,23 @@ Template.header.events({
 				});
 
 				instance.templateSelector.find('#isSoundOnButton').on('click', function () {
+					var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 					var btn = $('#isSoundOnButton');
 					btn.toggleClass("down");
 					if (btn.hasClass("down")) {
-						Session.set("togglemusic", true);
+						hashtagDoc.musicEnabled = 1;
 						btn.html(TAPi18n.__("plugins.sound.active"));
 					} else {
-						Session.set("togglemusic", false);
+						hashtagDoc.musicEnabled = 0;
 						btn.html(TAPi18n.__("plugins.sound.inactive"));
 					}
+					Meteor.call('HashtagsCollection.updateMusicSettings', hashtagDoc);
 				});
+			},
+			onDestroyed: function () {
+				var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+				hashtagDoc.musicVolume = Session.get("slider2");
+				Meteor.call('HashtagsCollection.updateMusicSettings', hashtagDoc);
 			}
 		});
 	}

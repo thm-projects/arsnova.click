@@ -24,7 +24,6 @@ Template.soundConfig.onRendered(function () {
 
 	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	Session.set("slider2", hashtagDoc.musicVolume);
-	Session.set("globalVolume", hashtagDoc.musicVolume);
 	setBuzzsound1(hashtagDoc.musicTitle);
 	$('#soundSelect').val(hashtagDoc.musicTitle).select();
 
@@ -39,12 +38,12 @@ Template.soundConfig.onRendered(function () {
 			'max': 100
 		}
 	}).on('slide', function (ev, val) {
-		Session.set('slider2', Math.round(val));
-		Session.set("globalVolume", Math.round(val));
-		buzzsound1.setVolume(Session.get("globalVolume"));
+		var musicVolume = Math.round(val);
+		Session.set('slider2', musicVolume);
+		buzzsound1.setVolume(musicVolume);
 	}).on('change', function (ev, val) {
-		Session.set('slider2', Math.round(val));
-		Session.set("globalVolume", Math.round(val));
-		buzzsound1.setVolume(Session.get("globalVolume"));
+		var musicVolume = Math.round(val);
+		Session.set('slider2', musicVolume);
+		buzzsound1.setVolume(musicVolume);
 	});
 });

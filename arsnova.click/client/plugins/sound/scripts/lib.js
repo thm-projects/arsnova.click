@@ -39,5 +39,4 @@ export function setBuzzsound1(songName) {
 	buzzsound1 = new buzz.sound('/sounds/' + fileName, {
 		loop: true
 	});
-	buzzsound1.setVolume(Session.get("globalVolume"));
 }

@@ -56,11 +56,20 @@ p.header-layout {
 
 .sound-button {
 	text-align: center;
-	color: #663399;
 	cursor: pointer;
+}
 
+.sound-button-active {
+	color: #00CC00;
 	&:hover {
-		color: #CCB3E6;
+		color: #33FF00;
+	}
+}
+
+.sound-button-inactive {
+	color: #b22222;
+	&:hover {
+		color: red;
 	}
 }
 

@@ -16,8 +16,6 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="liveResults">
-	<div id="countdowndiv" class="fader"></div>
-	<img id="countdown" class="fader" src="gr5.gif">
 	{{> titel}}
 	<div id="liveResultsFrame">
 		<div class="row-padding-bottom">
@@ -180,5 +178,13 @@
 				</div>
 			{{/unless}}
 		{{/if}}
+        {{> gamificationAnimation}}
 	</div>
+</template>
+
+<template name="gamificationAnimation">
+    <div id="countdownAnimationWrapper">
+        <div id="countdownAnimation"
+             style="background-image: url('/images/gamification/{{getCurrentAnimationSrc}}');"></div>
+    </div>
 </template>

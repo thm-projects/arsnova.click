@@ -71,22 +71,27 @@
   padding-top: 3vw;
 }
 
-#countdowndiv {
-  display: none;
-  background-color: #008000;
-  z-index: 1;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-}
+#liveResultsFrame {
+  #countdownAnimationWrapper {
+    z-index: 1070;
+    position: fixed;
+    left: 0;
+    top: 80px;
+    height: 100%;
+    width: 100%;
 
-#countdown {
-  display: none;
-  z-index: 2;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    #countdownAnimation {
+      z-index: 1070;
+      position: fixed;
+      top: 0;
+      left: calc(50% - 150px);
+      width: 100%;
+      height: 100%;
+      background-image: none;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+    }
+  }
 }
 
 .formGroupProgressRow {
@@ -144,4 +149,22 @@
   font-size: 1.4em;
   float: left;
   margin: 0 10px 0 -5px;
+}
+
+@keyframes countdownAnimation {
+  0% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+
+@-webkit-keyframes countdownAnimation {
+  0% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
 }

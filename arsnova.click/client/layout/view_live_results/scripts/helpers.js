@@ -23,8 +23,9 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {countdown, getPercentRead, getCurrentRead, hslColPerc, checkIfIsCorrect} from './lib.js';
+import {countdown, getPercentRead, getCurrentRead, hslColPerc, checkIfIsCorrect, whistleSound} from './lib.js';
 
 Template.liveResults.helpers({
 	votingText: function () {
@@ -304,5 +305,50 @@ Template.liveResults.helpers({
 Template.readingConfirmedLearner.helpers({
 	isOwnNick: function (nickname) {
 		return nickname === localStorage.getItem(Router.current().params.quizName + "nick");
+	}
+});
+
+countdown2 = {
+	val: 5,
+	get: function () {
+		return this.val;
+	}
+};
+setInterval(function () {
+	if (countdown2.val > 0) {
+		countdown2.val--;
+	}
+}, 1000);
+Template.gamificationAnimation.helpers({
+	getCurrentAnimationSrc: function () {
+		if (!countdown) {
+			//return false;
+		}
+
+		var countdownAnimationWrapper = $('#countdownAnimationWrapper');
+		switch (countdown2.val) {
+			case 0:
+				if (HashtagsCollection.findOne().musicEnabled) {
+					whistleSound.play();
+				}
+				$('#countdownAnimationWrapper').css("background", "#ffd700");
+				return "finger_0.gif";
+			case 1:
+				$('#countdownAnimationWrapper').css("background", "#008000");
+				return "finger_1.gif";
+			case 2:
+				$('#countdownAnimationWrapper').css("background", "#2f4f4f");
+				return "finger_2.gif";
+			case 3:
+				console.log(countdown2.val);
+				$('#countdownAnimationWrapper').css("background", "#663399");
+				return "finger_3.gif";
+			case 4:
+				$('#countdownAnimationWrapper').css("background", "#b22222");
+				return "finger_4.gif";
+			case 5:
+				$('#countdownAnimationWrapper').css("background", "#ff8c00");
+				return "finger_5.gif";
+		}
 	}
 });

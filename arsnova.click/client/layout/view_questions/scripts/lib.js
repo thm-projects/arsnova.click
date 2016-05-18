@@ -57,6 +57,38 @@ function questionContainsMarkdownSyntax(questionText) {
 	doesMarkdownSyntaxExist(questionText, '$$', '$$') || doesMarkdownSyntaxExist(questionText, '<hlcode>', '</hlcode>') || doesMarkdownSyntaxExist(questionText, '>'));
 }
 
+function questionTextLengthWithoutMarkdownSyntax(questionText) {
+	var questionTextLength = questionText.length;
+	if (doesMarkdownSyntaxExist(questionText, '**', '**')) {
+		questionTextLength -= 4;
+	}
+	if (doesMarkdownSyntaxExist(questionText, '#', '#')) {
+		questionTextLength -= 4;
+	}
+	if (doesMarkdownSyntaxExist(questionText, '[', '](', ')')) {
+		questionTextLength -= 4;
+	}
+	if (doesMarkdownSyntaxExist(questionText, '- ')) {
+		questionTextLength -= 4;
+	}
+	if (doesMarkdownSyntaxExist(questionText, '1. ')) {
+		questionTextLength -= 4;
+	}
+	if (doesMarkdownSyntaxExist(questionText, '\\(', '\\)')) {
+		questionTextLength -= 4;
+	}
+	if (doesMarkdownSyntaxExist(questionText, '$$', '$$')) {
+		questionTextLength -= 4;
+	}
+	if (doesMarkdownSyntaxExist(questionText, '<hlcode>', '</hlcode>')) {
+		questionTextLength -= 4;
+	}
+	if (doesMarkdownSyntaxExist(questionText, '>')) {
+		questionTextLength -= 4;
+	}
+	return questionTextLength;
+}
+
 export var subscriptionHandler = null;
 
 export function addQuestion(index) {
@@ -111,6 +143,7 @@ export function changePreviewButtonText(text) {
 		$('#markdownBarDiv').removeClass('hide');
 		$('#questionText').removeClass('round-corners').addClass('round-corners-markdown');
 	} else {
+		checkForValidQuestionText();
 		$('#formatPreviewGlyphicon').removeClass("glyphicon-phone").addClass("glyphicon-cog");
 		$('#markdownBarDiv').addClass('hide');
 		$('#questionText').removeClass('round-corners-markdown').addClass('round-corners');
@@ -142,9 +175,9 @@ export function checkForMarkdown() {
 	}
 }
 
-export function checkForValidQuestiontext() {
+export function checkForValidQuestionText() {
 	var questionText = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].questionText;
-	if (typeof questionText !== "undefined" && questionText.length < 5) {
+	if (typeof questionText !== "undefined" && questionTextLengthWithoutMarkdownSyntax(questionText) < 5) {
 		$('#questionText').addClass("invalidAnswerOption");
 	} else {
 		$('#questionText').removeClass("invalidAnswerOption");

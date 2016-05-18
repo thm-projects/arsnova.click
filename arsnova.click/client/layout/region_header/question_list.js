@@ -116,7 +116,7 @@ Template.questionList.events({
 	'click .questionIcon:not(.active)': function (event) {
 		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, parseInt($(event.target).closest(".questionIcon").attr("id").replace("questionIcon_", "")), function () {
 			questionLib.checkForMarkdown();
-			questionLib.checkForValidQuestiontext();
+			questionLib.checkForValidQuestionText();
 		});
 	},
 	'click .removeQuestion': function (event) {

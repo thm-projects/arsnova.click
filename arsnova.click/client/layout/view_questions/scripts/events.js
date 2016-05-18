@@ -25,7 +25,7 @@ import * as lib from './lib.js';
 Template.createQuestionView.events({
 	'input #questionText': function () {
 		lib.addQuestion(EventManagerCollection.findOne().questionIndex);
-		lib.checkForValidQuestiontext();
+		lib.checkForValidQuestionText();
 	},
 	//Save question in Sessions-Collection when Button "Next" is clicked
 	'click #forwardButton': function () {

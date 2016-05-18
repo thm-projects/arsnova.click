@@ -21,6 +21,7 @@ import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {calculateButtonCount} from './lib.js';
+import {calculateTitelHeight} from '/client/layout/region_header/lib.js';
 
 Template.liveResults.onRendered(()=> {
 	if (localData.containsHashtag(Router.current().params.quizName) && EventManagerCollection.findOne() && EventManagerCollection.findOne().readingConfirmationIndex === -1) {
@@ -28,6 +29,12 @@ Template.liveResults.onRendered(()=> {
 	}
 	Session.set("LearnerCountOverride", false);
 	calculateButtonCount();
+	$('#countdownAnimationWrapper').css('top', calculateTitelHeight().marginTop);
+	$(window).resize(function () {
+		calculateButtonCount();
+		$('#countdownAnimationWrapper').css('top', calculateTitelHeight().marginTop);
+		Session.set("LearnerCountOverride", false);
+	});
 });
 
 Template.readingConfirmedLearner.onRendered(function () {

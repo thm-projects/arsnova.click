@@ -308,47 +308,48 @@ Template.readingConfirmedLearner.helpers({
 	}
 });
 
-countdown2 = {
-	val: 5,
-	get: function () {
-		return this.val;
-	}
-};
-setInterval(function () {
-	if (countdown2.val > 0) {
-		countdown2.val--;
+Session.set("countdown2",6);
+Meteor.setInterval(function () {
+	if (Session.get("countdown2") > -1) {
+		Session.set("countdown2",Session.get("countdown2")-1);
 	}
 }, 1000);
 Template.gamificationAnimation.helpers({
 	getCurrentAnimationSrc: function () {
+		const countdownAnimationWrapper = $('#countdownAnimationWrapper');
+
 		if (!countdown) {
 			//return false;
 		}
 
-		var countdownAnimationWrapper = $('#countdownAnimationWrapper');
-		switch (countdown2.val) {
+		countdownAnimationWrapper.show();
+		switch (Session.get("countdown2")) {
 			case 0:
 				if (HashtagsCollection.findOne().musicEnabled) {
 					whistleSound.play();
 				}
-				$('#countdownAnimationWrapper').css("background", "#ffd700");
-				return "finger_0.gif";
+				countdownAnimationWrapper.css("background-color", "#b22222");
+				break;
 			case 1:
-				$('#countdownAnimationWrapper').css("background", "#008000");
-				return "finger_1.gif";
+				countdownAnimationWrapper.css("background-color", "#ff8c00");
+				break;
 			case 2:
-				$('#countdownAnimationWrapper').css("background", "#2f4f4f");
-				return "finger_2.gif";
+				countdownAnimationWrapper.css("background-color", "#ffd700");
+				break;
 			case 3:
-				console.log(countdown2.val);
-				$('#countdownAnimationWrapper').css("background", "#663399");
-				return "finger_3.gif";
+				countdownAnimationWrapper.css("background-color", "#008000");
+				break;
 			case 4:
-				$('#countdownAnimationWrapper').css("background", "#b22222");
-				return "finger_4.gif";
+				countdownAnimationWrapper.css("background-color", "#2f4f4f");
+				break;
 			case 5:
-				$('#countdownAnimationWrapper').css("background", "#ff8c00");
-				return "finger_5.gif";
+				countdownAnimationWrapper.css("background-color", "#663399");
+				break;
+			default:
+				countdownAnimationWrapper.hide();
+				return;
 		}
+
+		return "finger_" + Session.get("countdown2") + ".gif";
 	}
 });

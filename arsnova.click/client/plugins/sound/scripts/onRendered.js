@@ -23,7 +23,9 @@ import {buzzsound1, setBuzzsound1} from './lib.js';
 Template.soundConfig.onRendered(function () {
 	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	Session.set("slider2", hashtagDoc.musicVolume);
-	setBuzzsound1(hashtagDoc.musicTitle);
+	if (buzzsound1 == null) {
+		setBuzzsound1(hashtagDoc.musicTitle);
+	}
 	$('#soundSelect').val(hashtagDoc.musicTitle);
 
 	if (hashtagDoc.musicEnabled) {

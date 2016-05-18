@@ -117,8 +117,9 @@ export function startCountdown(index) {
 				image.src = "/images/gelb0.gif";
 				image1.fadeIn(500);
 				image1.fadeOut(500);
+				buzzsound1.stop();
+				Session.set("soundIsPlaying", false);
 				if (hashtagDoc.musicEnabled) {
-					buzzsound1.stop();
 					f.play();
 				}
 			}
@@ -126,13 +127,17 @@ export function startCountdown(index) {
 	});
 
 	if (hashtagDoc.musicEnabled) {
-		setBuzzsound1(hashtagDoc.musicTitle);
+		if (buzzsound1 == null) {
+			setBuzzsound1(hashtagDoc.musicTitle);
+		}
 		buzzsound1.setVolume(hashtagDoc.musicVolume);
 		buzzsound1.play();
+		Session.set("soundIsPlaying", true);
 	}
 
 	countdown.start(function () {
 		buzzsound1.stop();
+		Session.set("soundIsPlaying", false);
 		Session.set("countdownInitialized", false);
 		$('.disableOnActiveCountdown').removeAttr("disabled");
 		if (index + 1 >= QuestionGroupCollection.findOne().questionList.length) {

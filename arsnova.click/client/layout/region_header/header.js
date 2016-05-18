@@ -25,10 +25,6 @@ import {buzzsound1, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib";
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
-Template.header.onCreated(function () {
-	setBuzzsound1("WaitSong1");
-});
-
 Template.header.helpers({
 	getCurrentResetRoute: function () {
 		return Router.current().params.quizName ? Router.current().params.quizName + "/resetToHome" : "";
@@ -56,6 +52,9 @@ Template.header.helpers({
 			default:
 				return false;
 		}
+	},
+	isSoundEnabled: function () {
+		return HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).musicEnabled;
 	}
 });
 
@@ -94,7 +93,9 @@ Template.header.events({
 					hashtagDoc.musicTitle = $(event.target).val();
 					buzzsound1.stop();
 					Session.set("soundIsPlaying", false);
-					setBuzzsound1($(event.target).val());
+					if (buzzsound1 == null) {
+						setBuzzsound1($(event.target).val());
+					}
 					Meteor.call('HashtagsCollection.updateMusicSettings', hashtagDoc);
 				});
 

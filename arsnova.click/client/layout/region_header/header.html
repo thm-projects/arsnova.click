@@ -47,10 +47,18 @@
 							</div>
 							<div class="col-xs-2">
 								<div class="row">
-									<div class="col-xs-6 sound-button">
-										<span class=" glyphicon glyphicon-music kill-session-switch"></span>
-										<p class="sound-button-text">{{_ "region.header.sound"}}</p>
-									</div>
+                                    {{#if isSoundEnabled}}
+                                        <div class="col-xs-6 sound-button sound-button-active">
+                                            <span class=" glyphicon glyphicon-music kill-session-switch"></span>
+                                            <p class="sound-button-text">{{_ "region.header.sound"}}</p>
+                                        </div>
+                                    {{else}}
+                                        <div class="col-xs-6 sound-button sound-button-inactive">
+                                            <span class=" glyphicon glyphicon-music kill-session-switch"></span>
+                                            <p class="sound-button-text">{{_ "region.header.sound"}}</p>
+                                        </div>
+                                    {{/if}}
+
 									<div class="col-xs-6">
 										<div class="kill-session-switch-wrapper">
 											<span class="glyphicon glyphicon-off kill-session-switch"></span>

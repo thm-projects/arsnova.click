@@ -24,7 +24,7 @@ Template.soundConfig.onRendered(function () {
 	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	Session.set("slider2", hashtagDoc.musicVolume);
 	setBuzzsound1(hashtagDoc.musicTitle);
-	$('#soundSelect').value = hashtagDoc.musicTitle;
+	$('#soundSelect').val(hashtagDoc.musicTitle);
 
 	if (hashtagDoc.musicEnabled) {
 		$('#isSoundOnButton').toggleClass("down");

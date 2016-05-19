@@ -308,22 +308,17 @@ Template.readingConfirmedLearner.helpers({
 	}
 });
 
-Session.set("countdown2",6);
-Meteor.setInterval(function () {
-	if (Session.get("countdown2") > -1) {
-		Session.set("countdown2",Session.get("countdown2")-1);
-	}
-}, 1000);
 Template.gamificationAnimation.helpers({
 	getCurrentAnimationSrc: function () {
-		const countdownAnimationWrapper = $('#countdownAnimationWrapper');
-
 		if (!countdown) {
-			//return false;
+			return;
 		}
 
+		const countdownAnimationWrapper = $('#countdownAnimationWrapper');
+		const countdownValue = countdown.get();
+
 		countdownAnimationWrapper.show();
-		switch (Session.get("countdown2")) {
+		switch (countdownValue) {
 			case 0:
 				if (HashtagsCollection.findOne().musicEnabled) {
 					whistleSound.play();
@@ -350,6 +345,6 @@ Template.gamificationAnimation.helpers({
 				return;
 		}
 
-		return "finger_" + Session.get("countdown2") + ".gif";
+		return "finger_" + countdownValue + ".gif";
 	}
 });

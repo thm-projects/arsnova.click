@@ -92,10 +92,8 @@ Template.header.events({
 					var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 					hashtagDoc.musicTitle = $(event.target).val();
 					buzzsound1.stop();
-					Session.set("soundIsPlaying", false);
-					if (buzzsound1 == null) {
-						setBuzzsound1($(event.target).val());
-					}
+					setBuzzsound1($(event.target).val());
+					buzzsound1.play();
 					Meteor.call('HashtagsCollection.updateMusicSettings', hashtagDoc);
 				});
 

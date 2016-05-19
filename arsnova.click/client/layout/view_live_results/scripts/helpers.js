@@ -310,14 +310,13 @@ Template.readingConfirmedLearner.helpers({
 
 Template.gamificationAnimation.helpers({
 	getCurrentAnimationSrc: function () {
-		if (!countdown) {
+		if (!Session.get("countdownInitialized") && !countdown) {
 			return;
 		}
 
 		const countdownAnimationWrapper = $('#countdownAnimationWrapper');
 		const countdownValue = countdown.get();
 
-		countdownAnimationWrapper.show();
 		switch (countdownValue) {
 			case 0:
 				if (HashtagsCollection.findOne().musicEnabled) {
@@ -344,6 +343,7 @@ Template.gamificationAnimation.helpers({
 				countdownAnimationWrapper.hide();
 				return;
 		}
+		countdownAnimationWrapper.fadeIn(200).delay(600).fadeOut(200);
 
 		return "finger_" + countdownValue + ".gif";
 	}

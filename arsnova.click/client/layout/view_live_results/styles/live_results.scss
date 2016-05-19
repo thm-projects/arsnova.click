@@ -73,7 +73,6 @@
 
 #liveResultsFrame {
   #countdownAnimationWrapper {
-  	display: none;
     z-index: 1070;
     position: fixed;
     left: 0;
@@ -150,22 +149,4 @@
   font-size: 1.4em;
   float: left;
   margin: 0 10px 0 -5px;
-}
-
-@keyframes countdownAnimation {
-  0% {
-    visibility: hidden;
-  }
-  100% {
-    visibility: visible;
-  }
-}
-
-@-webkit-keyframes countdownAnimation {
-  0% {
-    visibility: hidden;
-  }
-  100% {
-    visibility: visible;
-  }
 }

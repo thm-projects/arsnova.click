@@ -135,6 +135,15 @@ export function calculateWindow() {
 	headerTitel.css("margin-top", $(".arsnova-logo").height() * marginTopModifier);
 }
 
+export function checkForValidQuestionText() {
+	var questionText = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].questionText;
+	if (typeof questionText !== "undefined" && questionTextLengthWithoutMarkdownSyntax(questionText) < 5) {
+		$('#questionText').addClass("invalidAnswerOption");
+	} else {
+		$('#questionText').removeClass("invalidAnswerOption");
+	}
+}
+
 export function changePreviewButtonText(text) {
 	$('#formatPreviewText').text(text);
 
@@ -172,14 +181,5 @@ export function checkForMarkdown() {
 		if ($(window).width() >= 992) {
 			$('#questionText').focus();
 		}
-	}
-}
-
-export function checkForValidQuestionText() {
-	var questionText = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].questionText;
-	if (typeof questionText !== "undefined" && questionTextLengthWithoutMarkdownSyntax(questionText) < 5) {
-		$('#questionText').addClass("invalidAnswerOption");
-	} else {
-		$('#questionText').removeClass("invalidAnswerOption");
 	}
 }

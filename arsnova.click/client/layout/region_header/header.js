@@ -54,7 +54,8 @@ Template.header.helpers({
 		}
 	},
 	isSoundEnabled: function () {
-		return HashtagsCollection.findOne().musicEnabled;
+		console.log(HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).musicEnabled);
+		return HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).musicEnabled;
 	}
 });
 
@@ -93,9 +94,13 @@ Template.header.events({
 				instance.templateSelector.find('#soundSelect').on('change', function (event) {
 					var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 					hashtagDoc.musicTitle = $(event.target).val();
-					buzzsound1.stop();
-					setBuzzsound1($(event.target).val());
-					buzzsound1.play();
+					if (Session.get("soundIsPlaying")) {
+						buzzsound1.stop();
+						setBuzzsound1($(event.target).val());
+						buzzsound1.play();
+					} else {
+						setBuzzsound1($(event.target).val());
+					}
 					Meteor.call('HashtagsCollection.updateMusicSettings', hashtagDoc);
 				});
 

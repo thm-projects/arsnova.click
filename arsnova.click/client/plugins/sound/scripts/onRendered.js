@@ -30,6 +30,7 @@ Template.soundConfig.onRendered(function () {
 
 	if (hashtagDoc.musicEnabled) {
 		$('#isSoundOnButton').toggleClass("down");
+		$('#isSoundOnButton').html(TAPi18n.__("plugins.sound.active"));
 	}
 
 	this.$("#slider2").noUiSlider({

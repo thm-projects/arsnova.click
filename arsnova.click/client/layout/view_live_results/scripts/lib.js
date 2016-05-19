@@ -67,7 +67,7 @@ export function checkIfIsCorrect(isCorrect) {
 
 export function startCountdown(index) {
 	Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index);
-	var hashtagDoc = HashtagsCollection.findOne();
+	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	var questionDoc = QuestionGroupCollection.findOne().questionList[index];
 	Session.set("sessionCountDown", questionDoc.timer);
 	countdown = new ReactiveCountdown(questionDoc.timer / 1000);

@@ -24,9 +24,14 @@ Template.liveResults.onDestroyed(function () {
 	Session.set("countdownInitialized", undefined);
 	Session.set("sessionCountDown", undefined);
 	if (countdown) {
-		buzzsound1.stop();
 		countdown.stop();
 	}
+
+	if (Session.get("soundIsPlaying")) {
+		buzzsound1.stop();
+		Session.set("soundIsPlaying", false);
+	}
+
 	if (routeToLeaderboardTimer) {
 		clearTimeout(routeToLeaderboardTimer);
 	}

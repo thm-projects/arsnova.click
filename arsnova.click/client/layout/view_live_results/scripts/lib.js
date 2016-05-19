@@ -117,8 +117,10 @@ export function startCountdown(index) {
 				image.src = "/images/gelb0.gif";
 				image1.fadeIn(500);
 				image1.fadeOut(500);
-				buzzsound1.stop();
-				Session.set("soundIsPlaying", false);
+				if (Session.get("soundIsPlaying")) {
+					buzzsound1.stop();
+					Session.set("soundIsPlaying", false);
+				}
 				if (hashtagDoc.musicEnabled) {
 					f.play();
 				}
@@ -136,7 +138,9 @@ export function startCountdown(index) {
 	}
 
 	countdown.start(function () {
-		buzzsound1.stop();
+		if (Session.get("soundIsPlaying")) {
+			buzzsound1.stop();
+		}
 		Session.set("soundIsPlaying", false);
 		Session.set("countdownInitialized", false);
 		$('.disableOnActiveCountdown').removeAttr("disabled");

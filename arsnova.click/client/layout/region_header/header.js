@@ -54,14 +54,16 @@ Template.header.helpers({
 		}
 	},
 	isSoundEnabled: function () {
-		return HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).musicEnabled;
+		return HashtagsCollection.findOne().musicEnabled;
 	}
 });
 
 Template.header.events({
 	'click .kill-session-switch-wrapper, click .arsnova-logo': function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
-			buzzsound1.stop();
+			if (Session.get("soundIsPlaying")) {
+				buzzsound1.stop();
+			}
 
 			new Splashscreen({
 				autostart: true,

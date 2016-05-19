@@ -70,63 +70,7 @@ export function startCountdown(index) {
 	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	var questionDoc = QuestionGroupCollection.findOne().questionList[index];
 	Session.set("sessionCountDown", questionDoc.timer);
-	$("#countdowndiv").appendTo($("body"));
-	$("#countdown").appendTo($("body"));
-	var f = new buzz.sound('/sounds/trillerpfeife.mp3', {
-		volume: 50
-	});
-	countdown = new ReactiveCountdown(questionDoc.timer / 1000, {
-
-		tick: function () {
-			if (countdown.get() > 5) {
-				return;
-			}
-
-			var image = document.getElementById('countdown');
-			var image1 = $('.fader');
-			var imageDiv = document.getElementById('countdowndiv');
-
-			if (image.src.match(/gr5/g)) {
-				image.src = "/images/gruen.gif";
-				image1.fadeIn(500);
-				imageDiv.style.display = "block";
-				image.style.display = "block";
-				image1.fadeOut(500);
-			} else if (image.src.match(/gruen/g)) {
-				imageDiv.style.backgroundColor = "#2f4f4f";
-				image.src = "/images/blau.gif";
-				image1.fadeIn(500);
-				image1.fadeOut(500);
-			} else if (image.src.match(/blau/g)) {
-				imageDiv.style.backgroundColor = "#663399";
-				image.src = "/images/lila3.gif";
-				image1.fadeIn(500);
-				image1.fadeOut(500);
-			} else if (image.src.match(/lila3/g)) {
-				imageDiv.style.backgroundColor = "#b22222";
-				image.src = "/images/rot2.gif";
-				image1.fadeIn(500);
-				image1.fadeOut(500);
-			} else if (image.src.match(/rot2/g)) {
-				imageDiv.style.backgroundColor = "#ff8c00";
-				image.src = "/images/orange1.gif";
-				image1.fadeIn(500);
-				image1.fadeOut(500);
-			} else if (image.src.match(/orange1/g)) {
-				imageDiv.style.backgroundColor = "#ffd700";
-				image.src = "/images/gelb0.gif";
-				image1.fadeIn(500);
-				image1.fadeOut(500);
-				if (Session.get("soundIsPlaying")) {
-					buzzsound1.stop();
-					Session.set("soundIsPlaying", false);
-				}
-				if (hashtagDoc.musicEnabled) {
-					f.play();
-				}
-			}
-		}
-	});
+	countdown = new ReactiveCountdown(questionDoc.timer / 1000);
 
 	if (hashtagDoc.musicEnabled) {
 		if (buzzsound1 == null) {
@@ -140,6 +84,7 @@ export function startCountdown(index) {
 	countdown.start(function () {
 		if (Session.get("soundIsPlaying")) {
 			buzzsound1.stop();
+			Session.set("soundIsPlaying", false);
 		}
 		Session.set("soundIsPlaying", false);
 		Session.set("countdownInitialized", false);

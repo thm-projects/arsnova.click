@@ -28,6 +28,10 @@ Template.liveResults.onRendered(()=> {
 	}
 	Session.set("LearnerCountOverride", false);
 	calculateButtonCount();
+	$(window).resize(function () {
+		calculateButtonCount();
+		Session.set("LearnerCountOverride", false);
+	});
 });
 
 Template.readingConfirmedLearner.onRendered(function () {

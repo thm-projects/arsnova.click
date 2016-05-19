@@ -24,6 +24,7 @@ import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as localData from '/lib/local_storage.js';
+import {buzzsound1, whistleSound} from '/client/plugins/sound/scripts/lib.js';
 import {countdown, getPercentRead, getCurrentRead, hslColPerc, checkIfIsCorrect} from './lib.js';
 
 Template.liveResults.helpers({
@@ -304,5 +305,48 @@ Template.liveResults.helpers({
 Template.readingConfirmedLearner.helpers({
 	isOwnNick: function (nickname) {
 		return nickname === localStorage.getItem(Router.current().params.quizName + "nick");
+	}
+});
+
+Template.gamificationAnimation.helpers({
+	getCurrentAnimationSrc: function () {
+		if (!Session.get("countdownInitialized") && !countdown) {
+			return;
+		}
+
+		const countdownAnimationWrapper = $('#countdownAnimationWrapper');
+		const countdownValue = countdown.get();
+
+		switch (countdownValue) {
+			case 0:
+				if (Session.get("soundIsPlaying")) {
+					buzzsound1.stop();
+					Session.set("soundIsPlaying", false);
+					whistleSound.play();
+				}
+				countdownAnimationWrapper.css("background-color", "#b22222");
+				break;
+			case 1:
+				countdownAnimationWrapper.css("background-color", "#ff8c00");
+				break;
+			case 2:
+				countdownAnimationWrapper.css("background-color", "#ffd700");
+				break;
+			case 3:
+				countdownAnimationWrapper.css("background-color", "#008000");
+				break;
+			case 4:
+				countdownAnimationWrapper.css("background-color", "#2f4f4f");
+				break;
+			case 5:
+				countdownAnimationWrapper.css("background-color", "#663399");
+				break;
+			default:
+				countdownAnimationWrapper.hide();
+				return;
+		}
+		countdownAnimationWrapper.fadeIn(200).delay(600).fadeOut(200);
+
+		return "finger_" + countdownValue + ".gif";
 	}
 });

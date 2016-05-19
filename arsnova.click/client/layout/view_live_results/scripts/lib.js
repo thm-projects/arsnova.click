@@ -65,10 +65,6 @@ export function checkIfIsCorrect(isCorrect) {
 	return isCorrect > 0 ? 'progress-success' : isCorrect < 0 ? 'progress-default' : 'progress-failure';
 }
 
-export const whistleSound = new buzz.sound('/sounds/whistle.mp3', {
-	volume: 50
-});
-
 export function startCountdown(index) {
 	Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index);
 	var hashtagDoc = HashtagsCollection.findOne();

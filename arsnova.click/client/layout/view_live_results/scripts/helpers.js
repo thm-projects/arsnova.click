@@ -25,8 +25,8 @@ import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {buzzsound1} from '/client/plugins/sound/scripts/lib.js';
-import {countdown, getPercentRead, getCurrentRead, hslColPerc, checkIfIsCorrect, whistleSound} from './lib.js';
+import {buzzsound1, whistleSound} from '/client/plugins/sound/scripts/lib.js';
+import {countdown, getPercentRead, getCurrentRead, hslColPerc, checkIfIsCorrect} from './lib.js';
 
 Template.liveResults.helpers({
 	votingText: function () {

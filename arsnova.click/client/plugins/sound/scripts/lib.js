@@ -17,6 +17,10 @@
 
 export let buzzsound1 = null;
 
+export const whistleSound = new buzz.sound('/sounds/whistle.mp3', {
+	volume: 50
+});
+
 export function setBuzzsound1(songName) {
 	var fileName = "";
 	switch (songName) {

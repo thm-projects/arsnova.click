@@ -21,6 +21,7 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
 import {HashtagsCollection, hashtagsCollectionSchema, hashtagSchema} from '/lib/hashtags/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
@@ -34,19 +35,27 @@ Meteor.methods({
 		});
 		return Boolean(doc);
 	},
-	'HashtagsCollection.addHashtag': function (doc) {
-		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag: doc.hashtag});
+	'HashtagsCollection.addHashtag': function (privateKey, questionGroup) {
+		questionGroup = new DefaultQuestionGroup(questionGroup);
 
-		if (HashtagsCollection.find({hashtag: doc.hashtag}).count() > 0) {
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag: questionGroup.getHashtag()});
+
+		if (HashtagsCollection.findOne({hashtag: questionGroup.getHashtag()})) {
 			throw new Meteor.Error('HashtagsCollection.addHashtag', 'session_exists');
 		}
 
-		HashtagsCollection.insert(doc);
-		EventManagerCollection.update({hashtag: doc.hashtag}, {
+		HashtagsCollection.insert({
+			privateKey: privateKey,
+			hashtag: questionGroup.getHashtag(),
+			musicVolume: 80,
+			musicEnabled: 1,
+			musicTitle: "Song1"
+		});
+		EventManagerCollection.update({hashtag: questionGroup.getHashtag()}, {
 			$push: {
 				eventStack: {
 					key: "HashtagsCollection.addHashtag",
-					value: {hashtag: doc.hashtag}
+					value: {hashtag: questionGroup.getHashtag()}
 				}
 			}
 		});

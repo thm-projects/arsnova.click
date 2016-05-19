@@ -21,6 +21,7 @@ import {Tracker} from 'meteor/tracker';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
 import * as localData from '/lib/local_storage.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as lib from './lib.js';
@@ -95,24 +96,22 @@ Template.hashtagView.events({
 		var reenter = false;
 		if (hashtag.length > 0) {
 			var localHashtags = localData.getAllHashtags();
-			if ($.inArray(hashtag, localHashtags) > -1) {
-				var oldHashtagDoc = HashtagsCollection.findOne();
-				if (oldHashtagDoc) {
-					reenter = true;
-					sessionStorage.setItem("overrideValidQuestionRedirect", true);
-					localData.reenterSession(hashtag);
-					lib.connectEventManager(hashtag);
-				}
+			if ($.inArray(hashtag, localHashtags) > -1 && HashtagsCollection.findOne()) {
+				reenter = true;
 			}
-			if (!reenter) {
-				var doc = {
-					privateKey: localData.getPrivateKey(),
+			if (reenter) {
+				sessionStorage.setItem("overrideValidQuestionRedirect", true);
+				localData.reenterSession(hashtag);
+				lib.connectEventManager(hashtag);
+			} else {
+				const questionGroup = new DefaultQuestionGroup({
 					hashtag: hashtag,
 					musicVolume: 80,
 					musicEnabled: 1,
-					musicTitle: "Song1"
-				};
-				Meteor.call('HashtagsCollection.addHashtag', doc, (err) => {
+					musicTitle: "Song1",
+					questionList: []
+				});
+				Meteor.call('HashtagsCollection.addHashtag', localData.getPrivateKey(), questionGroup.serialize(), (err) => {
 					if (err) {
 						$("#addNewHashtag").removeAttr("disabled");
 						new ErrorSplashscreen({
@@ -139,7 +138,7 @@ Template.hashtagView.events({
 							]
 						});
 
-						localData.addHashtag(hashtag);
+						localData.addHashtag(questionGroup);
 						lib.connectEventManager(hashtag);
 					}
 				});

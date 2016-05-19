@@ -92,7 +92,9 @@ function questionTextLengthWithoutMarkdownSyntax(questionText) {
 export var subscriptionHandler = null;
 
 export function addQuestion(index) {
-	var questionText = $('#questionText').val();
+	const questionText = $('#questionText').val();
+	const questionType = $('#chooseQuestionType').find('option:selected').text();
+
 	Meteor.call("QuestionGroupCollection.addQuestion", {
 		hashtag: Router.current().params.quizName,
 		questionIndex: index,

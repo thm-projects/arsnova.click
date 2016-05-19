@@ -17,6 +17,7 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
+import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
 
 export function getLanguage() {
 	return $.parseJSON(localStorage.getItem("__amplify__tap-i18n-language"));
@@ -55,54 +56,20 @@ export function deleteHashtag(hashtag) {
 	}
 }
 
-export function addHashtag(hashtag) {
-	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
+export function addHashtag(questionGroup) {
+	if (!questionGroup.getHashtag() || questionGroup.getHashtag() === "hashtags" || questionGroup.getHashtag() === "privateKey") {
 		return;
 	}
-	var questionObject = {
-		hashtag: hashtag,
-		musicVolume: 80,
-		musicEnabled: 1,
-		musicTitle: "Song1",
-		questionList: [
-			{
-				questionText: "",
-				timer: 40000,
-				answers: [
-					{
-						answerOptionNumber: 0,
-						answerText: "",
-						isCorrect: 0
-					},
-					{
-						answerOptionNumber: 1,
-						answerText: "",
-						isCorrect: 0
-					},
-					{
-						answerOptionNumber: 2,
-						answerText: "",
-						isCorrect: 0
-					},
-					{
-						answerOptionNumber: 3,
-						answerText: "",
-						isCorrect: 0
-					}
-				]
-			}
-		]
-	};
 	const hashtagString = localStorage.getItem("hashtags");
 	if (!hashtagString) {
-		localStorage.setItem("hashtags", JSON.stringify([hashtag]));
-		localStorage.setItem(hashtag, JSON.stringify(questionObject));
+		localStorage.setItem("hashtags", JSON.stringify([questionGroup.getHashtag()]));
+		localStorage.setItem(questionGroup.getHashtag(), JSON.stringify(questionGroup.serialize()));
 	} else {
 		const hashtags = JSON.parse(hashtagString);
-		hashtags.push(hashtag);
+		hashtags.push(questionGroup.getHashtag());
 
 		localStorage.setItem("hashtags", JSON.stringify(hashtags));
-		localStorage.setItem(hashtag, JSON.stringify(questionObject));
+		localStorage.setItem(questionGroup.getHashtag(), JSON.stringify(questionGroup.serialize()));
 	}
 }
 

@@ -323,8 +323,6 @@ Template.gamificationAnimation.helpers({
 				if (Session.get("soundIsPlaying")) {
 					buzzsound1.stop();
 					Session.set("soundIsPlaying", false);
-				}
-				if (HashtagsCollection.findOne().musicEnabled) {
 					whistleSound.play();
 				}
 				countdownAnimationWrapper.css("background-color", "#b22222");

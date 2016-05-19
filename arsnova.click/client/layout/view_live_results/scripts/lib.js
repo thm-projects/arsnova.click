@@ -86,9 +86,9 @@ export function startCountdown(index) {
 	}
 
 	countdown.start(function () {
-		buzzsound1.stop();
 		if (Session.get("soundIsPlaying")) {
 			buzzsound1.stop();
+			Session.set("soundIsPlaying", false);
 		}
 		Session.set("soundIsPlaying", false);
 		Session.set("countdownInitialized", false);

@@ -22,7 +22,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {buzzsound1, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
+import {buzzsound1, whistleSound, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 
 export let countdown = null;
 export let routeToLeaderboardTimer = null;
@@ -84,9 +84,9 @@ export function startCountdown(index) {
 	countdown.start(function () {
 		if (Session.get("soundIsPlaying")) {
 			buzzsound1.stop();
+			whistleSound.play();
 			Session.set("soundIsPlaying", false);
 		}
-		Session.set("soundIsPlaying", false);
 		Session.set("countdownInitialized", false);
 		$('.disableOnActiveCountdown').removeAttr("disabled");
 		if (index + 1 >= QuestionGroupCollection.findOne().questionList.length) {

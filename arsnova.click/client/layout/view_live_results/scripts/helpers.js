@@ -24,7 +24,6 @@ import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {buzzsound1, whistleSound} from '/client/plugins/sound/scripts/lib.js';
 import {countdown, getPercentRead, getCurrentRead, hslColPerc, checkIfIsCorrect} from './lib.js';
 
 Template.liveResults.helpers({
@@ -319,11 +318,6 @@ Template.gamificationAnimation.helpers({
 
 		switch (countdownValue) {
 			case 0:
-				if (Session.get("soundIsPlaying")) {
-					buzzsound1.stop();
-					Session.set("soundIsPlaying", false);
-					whistleSound.play();
-				}
 				countdownAnimationWrapper.css("background-color", "#b22222");
 				break;
 			case 1:

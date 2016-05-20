@@ -1,3 +1,4 @@
+import {EJSON} from 'meteor/ejson';
 import {AbstractQuestionGroup} from './questiongroup_abstract.js';
 
 export class DefaultQuestionGroup extends AbstractQuestionGroup {
@@ -6,3 +7,8 @@ export class DefaultQuestionGroup extends AbstractQuestionGroup {
 		super(options);
 	}
 }
+
+EJSON.addType("DefaultQuestionGroup", function (value) {
+	return new DefaultQuestionGroup(value);
+});
+

@@ -36,8 +36,7 @@ Meteor.methods({
 		return Boolean(doc);
 	},
 	'HashtagsCollection.addHashtag': function (privateKey, questionGroup) {
-		questionGroup = new DefaultQuestionGroup(questionGroup);
-
+		console.log("addHashtag", questionGroup);
 		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag: questionGroup.getHashtag()});
 
 		if (HashtagsCollection.findOne({hashtag: questionGroup.getHashtag()})) {

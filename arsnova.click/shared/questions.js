@@ -23,25 +23,36 @@ import {QuestionGroupCollection, questionGroupSchema, questionTextSchema, timerS
 import {EventManagerCollection, questionIndexSchema} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
-	"QuestionGroupCollection.insert": function ({hashtag, questionList}) {
+	"QuestionGroupCollection.insert": function (questionGroup) {
+		console.log("insert", questionGroup);
 		questionGroupSchema.validate({
-			hashtag: hashtag,
-			questionList: questionList
+			hashtag: questionGroup.getHashtag(),
+			questionList: questionGroup.getQuestionList()
 		});
 
 		const query = {};
 		if (Meteor.isServer) {
-			query.hashtag = hashtag;
+			query.hashtag = questionGroup.getHashtag();
 		}
 		if (QuestionGroupCollection.find(query).count() > 0) {
-			QuestionGroupCollection.update(query, {$set: {questionList: questionList}});
+			QuestionGroupCollection.update(query, questionGroup);
 		} else {
-			QuestionGroupCollection.insert({
-				hashtag: hashtag,
-				questionList: questionList
-			});
+			QuestionGroupCollection.insert(questionGroup);
+			for (let i = 0; i < questionGroup.getQuestionList().length; i++) {
+				const questionItem = questionGroup.getQuestionList()[i];
+				for (let j = 0; j < questionItem.getAnswerOptionList(); j++) {
+					const answerItem = questionItem.getAnswerOptionList()[j];
+					Meteor.call("AnswerOptionCollection.addOption", {
+						hashtag: questionGroup.getHashtag(),
+						questionIndex: questionItem.getQuestionIndex(),
+						answerText: answerItem.getAnswerText(),
+						answerOptionNumber: answerItem.getAnswerOptionNumber(),
+						isCorrect: answerItem.getIsCorrect()
+					});
+				}
+			}
 		}
-		EventManagerCollection.update({hashtag: hashtag}, {
+		EventManagerCollection.update({hashtag: questionGroup.getHashtag()}, {
 			$push: {
 				eventStack: {
 					key: "QuestionGroupCollection.insert",
@@ -50,41 +61,36 @@ Meteor.methods({
 			}
 		});
 	},
-	"QuestionGroupCollection.addQuestion": function ({hashtag, questionIndex, questionText}) {
+	"QuestionGroupCollection.addQuestion": function (questionItem) {
 		new SimpleSchema({
 			hashtag: hashtagSchema,
 			questionIndex: questionIndexSchema,
 			questionText: questionTextSchema
-		}).validate({hashtag, questionIndex, questionText});
+		}).validate({hashtag: questionItem.getHashtag(), questionIndex: questionItem.getQuestionIndex(), questionText: questionItem.getQuestionText()});
 
 		const query = {};
 		if (Meteor.isServer) {
-			query.hashtag = hashtag;
+			query.hashtag = questionItem.getHashtag();
 		}
 		var questionGroup = QuestionGroupCollection.findOne(query);
-		var questionItem = {
-			questionText: questionText,
-			timer: 40000,
-			isReadingConfirmationRequired: 1
-		};
 		if (!questionGroup) {
 			QuestionGroupCollection.insert({
-				hashtag: hashtag,
+				hashtag: questionItem.getHashtag(),
 				questionList: [questionItem]
 			});
 		} else {
-			if (questionIndex < questionGroup.questionList.length) {
-				questionGroup.questionList[questionIndex].questionText = questionText;
+			if (questionItem.getQuestionIndex() < questionGroup.questionList.length) {
+				questionGroup.questionList[questionItem.getQuestionIndex()].questionText = questionItem.getQuestionIndex();
 			} else {
-				questionGroup.questionList.push(questionItem);
+				questionGroup.questionList.push(questionItem.serialize());
 			}
 			QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
 		}
-		EventManagerCollection.update({hashtag: hashtag}, {
+		EventManagerCollection.update({hashtag: questionItem.getHashtag()}, {
 			$push: {
 				eventStack: {
 					key: "QuestionGroupCollection.addQuestion",
-					value: {questionIndex: questionIndex}
+					value: {questionIndex: questionItem.getQuestionIndex()}
 				}
 			}
 		});

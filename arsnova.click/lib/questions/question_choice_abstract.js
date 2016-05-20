@@ -1,9 +1,12 @@
 import {AbstractQuestion} from './question_abstract.js';
 
-export class ChoicableQuestion extends AbstractQuestion {
+export class AbstractChoiceQuestion extends AbstractQuestion {
 
 	constructor (options) {
 		super(options);
+		if (this.constructor === AbstractChoiceQuestion) {
+			throw new TypeError("Cannot construct Abstract instances directly");
+		}
 	}
 
 	isValid () {

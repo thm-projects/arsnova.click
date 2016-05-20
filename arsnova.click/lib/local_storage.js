@@ -17,7 +17,9 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
+import {AbstractQuestionGroup} from "/lib/questions/questiongroup_abstract.js";
 import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
+import {AbstractQuestion} from "/lib/questions/question_abstract.js";
 
 export function getLanguage() {
 	return $.parseJSON(localStorage.getItem("__amplify__tap-i18n-language"));
@@ -57,7 +59,7 @@ export function deleteHashtag(hashtag) {
 }
 
 export function addHashtag(questionGroup) {
-	if (!questionGroup.getHashtag() || questionGroup.getHashtag() === "hashtags" || questionGroup.getHashtag() === "privateKey") {
+	if (!(questionGroup instanceof AbstractQuestionGroup)) {
 		return;
 	}
 	const hashtagString = localStorage.getItem("hashtags");
@@ -73,44 +75,19 @@ export function addHashtag(questionGroup) {
 	}
 }
 
-export function addQuestion(hashtag, questionIndex, questionText) {
-	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
+export function addQuestion(questionItem) {
+	if (!(questionItem instanceof AbstractQuestion)) {
 		return;
 	}
-	const sessionDataString = localStorage.getItem(hashtag);
+	const sessionDataString = localStorage.getItem(questionItem.getHashtag());
 	if (sessionDataString) {
 		const sessionData = JSON.parse(sessionDataString);
-		if (questionIndex < sessionData.questionList.length) {
-			sessionData.questionList[questionIndex].questionText = questionText;
+		if (questionItem.getQuestionIndex() < sessionData.questionList.length) {
+			sessionData.questionList[questionItem.getQuestionIndex()].questionText = questionItem.getQuestionText();
 		} else {
-			sessionData.questionList.push({
-				questionText: questionText,
-				timer: 40000,
-				answers: [
-					{
-						answerOptionNumber: 0,
-						answerText: "",
-						isCorrect: 0
-					},
-					{
-						answerOptionNumber: 1,
-						answerText: "",
-						isCorrect: 0
-					},
-					{
-						answerOptionNumber: 2,
-						answerText: "",
-						isCorrect: 0
-					},
-					{
-						answerOptionNumber: 3,
-						answerText: "",
-						isCorrect: 0
-					}
-				]
-			});
+			sessionData.questionList.push(questionItem.serialize());
 		}
-		localStorage.setItem(hashtag, JSON.stringify(sessionData));
+		localStorage.setItem(questionItem.getHashtag(), JSON.stringify(sessionData));
 	}
 }
 
@@ -183,50 +160,12 @@ export function reenterSession(hashtag) {
 	}
 
 	const sessionData = JSON.parse(sessionDataString);
-
-	if (typeof sessionData === "object") {
-		/*
-		 This supports the "old" question format where one question was bound to one hashtag.
-		 It saves the content of the question to the new questionList and deletes the invalid keys.
-		 TODO: remove later when it is likely that there are no more sessions with the old question format
-		 */
-		if (typeof sessionData.questionList === "undefined") {
-			sessionData.questionList = [
-				{
-					questionText: sessionData.questionText,
-					timer: sessionData.timer,
-					answers: sessionData.answers
-				}
-			];
-			delete sessionData.questionText;
-			delete sessionData.timer;
-			delete sessionData.answers;
-			delete sessionData.isReadingConfirmationRequired;
-			localStorage.setItem(hashtag, JSON.stringify(sessionData));
-		}
-
-		for (var i = 0; i < sessionData.questionList.length; i++) {
-			if (!sessionData.questionList[i].answers) {
-				continue;
-			}
-			var answer = sessionData.questionList[i].answers;
-			delete sessionData.questionList[i].answers;
-			delete sessionData.questionList[i].isReadingConfirmationRequired;
-			for (var j = 0; j < answer.length; j++) {
-				Meteor.call("AnswerOptionCollection.addOption", {
-					hashtag: hashtag,
-					questionIndex: i,
-					answerText: answer[j].answerText,
-					answerOptionNumber: answer[j].answerOptionNumber,
-					isCorrect: answer[j].isCorrect
-				});
-			}
-		}
-		Meteor.call("QuestionGroupCollection.insert", {
-			hashtag: hashtag,
-			questionList: sessionData.questionList
-		});
+	if (typeof sessionData !== "object" || typeof sessionData.type === "undefined") {
+		return;
 	}
+
+	const questionGroup = new DefaultQuestionGroup(sessionData);
+	Meteor.call("QuestionGroupCollection.insert", questionGroup);
 }
 
 export function deleteAnswerOption(hashtag, questionIndex, answerOptionNumber) {

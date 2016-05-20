@@ -79,4 +79,12 @@ export class AbstractAnswerOption {
 			answerOption.getAnswerOptionNumber() === this[answerOptionNumber] &&
 			answerOption.getIsCorrect() === this[isCorrect];
 	}
+
+	typeName () {
+		return this.constructor.name;
+	}
+
+	toJSONValue () {
+		return this.serialize();
+	}
 }

@@ -1,3 +1,4 @@
+import {EJSON} from 'meteor/ejson';
 import {AbstractQuestion} from './question_abstract.js';
 
 const rangeMin = Symbol("rangeMin");
@@ -55,4 +56,12 @@ export class RangedQuestion extends AbstractQuestion {
 	equals (question) {
 		return super.equals(question) && question.getMaxRange() === this[rangeMax] && question.getMinRange() === this[rangeMin];
 	}
+
+	clone () {
+		return new RangedQuestion(this.serialize());
+	}
 }
+
+EJSON.addType("RangedQuestion", function (value) {
+	return new RangedQuestion(value);
+});

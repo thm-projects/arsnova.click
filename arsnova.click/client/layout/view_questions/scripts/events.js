@@ -30,6 +30,7 @@ Template.createQuestionView.events({
 	//Save question in Sessions-Collection when Button "Next" is clicked
 	'click #forwardButton': function () {
 		lib.addQuestion(EventManagerCollection.findOne().questionIndex);
+		return;
 		Router.go("/" + Router.current().params.quizName + "/answeroptions");
 	},
 	"click #backButton": function () {

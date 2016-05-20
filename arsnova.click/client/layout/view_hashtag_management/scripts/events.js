@@ -22,6 +22,8 @@ import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
+import {SingleChoiceQuestion} from "/lib/questions/question_choice_single.js";
+import {DefaultAnswerOption} from "/lib/answeroptions/answeroption_default.js";
 import * as localData from '/lib/local_storage.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as lib from './lib.js';
@@ -109,39 +111,52 @@ Template.hashtagView.events({
 					musicVolume: 80,
 					musicEnabled: 1,
 					musicTitle: "Song1",
-					questionList: []
-				});
-				Meteor.call('HashtagsCollection.addHashtag', localData.getPrivateKey(), questionGroup.serialize(), (err) => {
-					if (err) {
-						$("#addNewHashtag").removeAttr("disabled");
-						new ErrorSplashscreen({
-							autostart: true,
-							errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
-						});
-					} else {
-						for (var i = 0; i < 4; i++) {
-							Meteor.call("AnswerOptionCollection.addOption", {
-								hashtag: hashtag,
-								questionIndex: 0,
-								answerText: "",
-								answerOptionNumber: i,
-								isCorrect: 0
-							});
-						}
-						Meteor.call("QuestionGroupCollection.insert", {
+					questionList: [
+						new SingleChoiceQuestion({
 							hashtag: hashtag,
-							questionList: [
-								{
-									questionText: "",
-									timer: 40000
-								}
+							questionText: "",
+							questionIndex: 0,
+							timer: 40000,
+							startTime: 0,
+							answerOptionList: [
+								new DefaultAnswerOption({
+									hashtag: hashtag,
+									questionIndex: 0,
+									answerText: "",
+									answerOptionNumber: 0,
+									isCorrect: 0
+								}),
+								new DefaultAnswerOption({
+									hashtag: hashtag,
+									questionIndex: 0,
+									answerText: "",
+									answerOptionNumber: 1,
+									isCorrect: 0
+								}),
+								new DefaultAnswerOption({
+									hashtag: hashtag,
+									questionIndex: 0,
+									answerText: "",
+									answerOptionNumber: 2,
+									isCorrect: 0
+								}),
+								new DefaultAnswerOption({
+									hashtag: hashtag,
+									questionIndex: 0,
+									answerText: "",
+									answerOptionNumber: 3,
+									isCorrect: 0
+								})
 							]
-						});
-
-						localData.addHashtag(questionGroup);
-						lib.connectEventManager(hashtag);
-					}
+						})
+					]
 				});
+				console.log(questionGroup);
+				Meteor.call('HashtagsCollection.addHashtag', localData.getPrivateKey(), questionGroup);
+				Meteor.call('QuestionGroupCollection.insert', questionGroup);
+				localData.addHashtag(questionGroup);
+				Session.set("questionGroup", questionGroup);
+				lib.connectEventManager(hashtag);
 			}
 		}
 	},

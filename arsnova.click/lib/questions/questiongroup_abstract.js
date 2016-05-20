@@ -1,7 +1,5 @@
 import {AbstractQuestion} from './question_abstract.js';
-import {ChoicableQuestion} from "/lib/questions/question_choiceable.js";
-import {RangedQuestion} from "/lib/questions/question_ranged.js";
-import {SurveyQuestion} from "/lib/questions/question_survey.js";
+import {questionReflection} from "./question_reflection.js";
 
 const hashtag = Symbol("hashtag");
 const questionList = Symbol("questionList");
@@ -19,21 +17,12 @@ export class AbstractQuestionGroup {
 			this[questionList] = [];
 		} else {
 			for (let i = 0; i < options.questionList.length; i++) {
-				if (options.questionList[i] instanceof Object) {
-					switch (options.questionList[i].type) {
-						case "ChoicableQuestion":
-							options.questionList[i] = new ChoicableQuestion(options.questionList[i]);
-							break;
-						case "SurveyQuestion":
-							options.questionList[i] = new SurveyQuestion(options.questionList[i]);
-							break;
-						case "RangedQuestion":
-							options.questionList[i] = new RangedQuestion(options.questionList[i]);
-							break;
-					}
-				}
 				if (!(options.questionList[i] instanceof AbstractQuestion)) {
-					throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
+					if (options.questionList[i] instanceof Object) {
+						options.questionList[i] = questionReflection[options.questionList[i].type](options.questionList[i]);
+					} else {
+						throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
+					}
 				}
 			}
 		}
@@ -65,7 +54,7 @@ export class AbstractQuestionGroup {
 
 	serialize () {
 		let questionListSerialized = [];
-		this[questionList].forEach(function (question) { questionListSerialized.push(question.serialize()); });
+		this.getQuestionList().forEach(function (question) { questionListSerialized.push(question.serialize()); });
 		return {
 			hashtag: this[hashtag],
 			type: this.constructor.name,
@@ -99,5 +88,13 @@ export class AbstractQuestionGroup {
 			}
 		}
 		return false;
+	}
+
+	typeName () {
+		return this.constructor.name;
+	}
+
+	toJSONValue () {
+		return this.serialize();
 	}
 }

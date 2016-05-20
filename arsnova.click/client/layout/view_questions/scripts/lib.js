@@ -17,7 +17,9 @@
 
 import {Meteor} from 'meteor/meteor';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {DefaultAnswerOption} from '/lib/answeroptions/answeroption_default.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {questionReflection} from '/lib/questions/question_reflection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
@@ -92,21 +94,17 @@ function questionTextLengthWithoutMarkdownSyntax(questionText) {
 export var subscriptionHandler = null;
 
 export function addQuestion(index) {
-	const questionText = $('#questionText').val();
-	const questionType = $('#chooseQuestionType').find('option:selected').text();
+	const questionText = $('#questionText').val() || "";
+	const questionType = $('#chooseQuestionType').find('option:selected').attr("id");
 
-	Meteor.call("QuestionGroupCollection.addQuestion", {
-		hashtag: Router.current().params.quizName,
-		questionIndex: index,
-		questionText: questionText
-	}, (err) => {
+	Meteor.call("QuestionGroupCollection.addQuestion", questionItem, (err) => {
 		if (err) {
 			new ErrorSplashscreen({
 				autostart: true,
 				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
 			});
 		} else {
-			localData.addQuestion(Router.current().params.quizName, index, questionText);
+			localData.addQuestion(questionItem);
 		}
 	});
 }

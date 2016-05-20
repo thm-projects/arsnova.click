@@ -19,6 +19,7 @@ import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {hashtagSchema} from '../hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
+import {AbstractQuestion} from "./question_abstract";
 
 export const QuestionGroupCollection = new Mongo.Collection("questionGroup");
 export const questionTextSchema = {
@@ -39,8 +40,8 @@ export const questionGroupSchema = new SimpleSchema({
 	hashtag: hashtagSchema,
 	questionList: {
 		/* The index is defined in the EventManager.questionIndex variable. The arrays index represents the questionIndex. */
-		type: [Object]
-	},
+		type: [AbstractQuestion]
+	}/*,
 	"questionList.$.questionText": {
 		type: questionTextSchema,
 		optional: true
@@ -51,10 +52,10 @@ export const questionGroupSchema = new SimpleSchema({
 	"questionList.$.startTime": {
 		type: startTimeSchema,
 		optional: true
-	}
+	}*/
 });
 
-QuestionGroupCollection.attachSchema(questionGroupSchema);
+//QuestionGroupCollection.attachSchema(questionGroupSchema);
 
 QuestionGroupCollection.deny({
 	insert: function () {

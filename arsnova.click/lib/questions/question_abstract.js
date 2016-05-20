@@ -14,7 +14,7 @@ export class AbstractQuestion {
 		if (this.constructor === AbstractQuestion) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
-		if (typeof options.type !== "undefined" && options.type !== this.constructor.name) {
+		if (typeof options === "undefined" || (typeof options.type !== "undefined" && options.type !== this.constructor.name)) {
 			throw new TypeError("Invalid construction type");
 		}
 		if (typeof options.hashtag === "undefined" || typeof options.questionText === "undefined" || typeof options.timer === "undefined" || typeof options.startTime === "undefined" || typeof options.questionIndex === "undefined") {
@@ -36,15 +36,15 @@ export class AbstractQuestion {
 			});
 		} else {
 			for (let i = 0; i < options.answerOptionList.length; i++) {
-				if (options.answerOptionList[i] instanceof Object) {
-					switch (options.answerOptionList[i].type) {
-						case "DefaultAnswerOption":
-							this.addAnswerOption(new DefaultAnswerOption(options.answerOptionList[i]));
-							break;
-					}
+				if (options.answerOptionList[i] instanceof AbstractAnswerOption) {
+					this.addAnswerOption(options.answerOptionList[i]);
 				} else {
-					if (options.answerOptionList[i] instanceof AbstractAnswerOption) {
-						this.addAnswerOption(options.answerOptionList[i]);
+					if (options.answerOptionList[i] instanceof Object) {
+						switch (options.answerOptionList[i].type) {
+							case "DefaultAnswerOption":
+								this.addAnswerOption(new DefaultAnswerOption(options.answerOptionList[i]));
+								break;
+						}
 					} else {
 						throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
 					}
@@ -154,5 +154,13 @@ export class AbstractQuestion {
 			}
 		}
 		return false;
+	}
+
+	typeName () {
+		return this.constructor.name;
+	}
+
+	toJSONValue () {
+		return this.serialize();
 	}
 }

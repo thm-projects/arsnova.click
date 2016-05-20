@@ -25,25 +25,6 @@ import * as localData from '/lib/local_storage.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as lib from './lib.js';
 
-function connectEventManager(hashtag) {
-	Meteor.subscribe("EventManagerCollection.join", hashtag, function () {
-		if (!EventManagerCollection.findOne()) {
-			Meteor.call('EventManagerCollection.add', hashtag, function (err) {
-				if (err) {
-					new ErrorSplashscreen({
-						autostart: true,
-						errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
-					});
-					Router.go("/" + hashtag + "/resetToHome");
-				} else {
-					Router.go("/" + hashtag + "/question");
-				}
-			});
-		}
-		Router.go("/" + hashtag + "/question");
-	});
-}
-
 Template.hashtagView.events({
 	"input #hashtag-input-field": function (event) {
 		var inputHashtag = $(event.target).val();
@@ -120,7 +101,7 @@ Template.hashtagView.events({
 					reenter = true;
 					sessionStorage.setItem("overrideValidQuestionRedirect", true);
 					localData.reenterSession(hashtag);
-					connectEventManager(hashtag);
+					lib.connectEventManager(hashtag);
 				}
 			}
 			if (!reenter) {
@@ -159,7 +140,7 @@ Template.hashtagView.events({
 						});
 
 						localData.addHashtag(hashtag);
-						connectEventManager(hashtag);
+						lib.connectEventManager(hashtag);
 					}
 				});
 			}
@@ -223,7 +204,7 @@ Template.hashtagManagement.events({
 	"click .js-reactivate-hashtag": function (event) {
 		var hashtag = $(event.currentTarget).parent().parent()[0].id;
 		localData.reenterSession(hashtag);
-		connectEventManager(hashtag);
+		lib.connectEventManager(hashtag);
 	},
 	"click .js-export": function (event) {
 		var hashtag = $(event.currentTarget).parent().parent()[0].id;
@@ -268,7 +249,7 @@ Template.hashtagManagement.events({
 					});
 				} else {
 					localData.importFromFile(asJSON);
-					connectEventManager(asJSON.hashtagDoc.hashtag);
+					lib.connectEventManager(asJSON.hashtagDoc.hashtag);
 				}
 			});
 		};
@@ -284,7 +265,7 @@ Template.showHashtagsSplashscreen.events({
 		localData.reenterSession(hashtag);
 		lib.hashtagSplashscreen.destroy();
 		sessionStorage.setItem("overrideValidQuestionRedirect", true);
-		connectEventManager(hashtag);
+		lib.connectEventManager(hashtag);
 	},
 	"click #js-btn-showHashtagManagement": function () {
 		lib.hashtagSplashscreen.destroy();

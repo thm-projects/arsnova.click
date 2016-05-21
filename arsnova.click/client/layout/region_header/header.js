@@ -57,6 +57,9 @@ Template.header.helpers({
 		return Router.current().route.getName() === ":quizName.memberlist";
 	},
 	isSoundEnabled: function () {
+		if (!HashtagsCollection.findOne({hashtag: Router.current().params.quizName})) {
+			return;
+		}
 		return HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).musicEnabled;
 	}
 });

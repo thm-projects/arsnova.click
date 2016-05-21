@@ -144,7 +144,24 @@ export class AbstractQuestion {
 				answerOptionListValid = true;
 			}
 		});
-		return answerOptionListValid && this.getQuestionText().length > 4 && this.getQuestionText().length < 10001 && this.getTimer() > 5 && this.getTimer() < 261;
+		const markdownChars = this.getQuestionText().split().map(function (currentValue) {
+			let tmpValue = currentValue;
+			tmpValue = tmpValue.replace(/#/g,"");
+			tmpValue = tmpValue.replace(/\*/g,"");
+			tmpValue = tmpValue.replace(/1./g,"");
+			tmpValue = tmpValue.replace(/\[/g,"");
+			tmpValue = tmpValue.replace(/\]\(/g,"");
+			tmpValue = tmpValue.replace(/\)/g,"");
+			tmpValue = tmpValue.replace(/- /g,"");
+			tmpValue = tmpValue.replace(/\\\(/g,"");
+			tmpValue = tmpValue.replace(/\\\)/g,"");
+			tmpValue = tmpValue.replace(/$/g,"");
+			tmpValue = tmpValue.replace(/<hlcode>/g,"");
+			tmpValue = tmpValue.replace(/<\/hlcode>/g,"");
+			tmpValue = tmpValue.replace(/>/g,"");
+			return tmpValue.length;
+		});
+		return answerOptionListValid && markdownChars[0] > 4 && markdownChars[0] < 10001 && this.getTimer() > 5 && this.getTimer() < 261;
 	}
 
 	equals (question) {

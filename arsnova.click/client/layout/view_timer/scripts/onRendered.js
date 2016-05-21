@@ -31,9 +31,7 @@ Template.createTimerView.onRendered(function () {
 			return;
 		}
 
-		lib.setTimer(index, function () {
-			Router.go("/" + Router.current().params.quizName + "/question");
-		});
+		Router.go("/" + Router.current().params.quizName + "/question");
 	});
 	body.on('click', '.removeQuestion', function () {
 		index = EventManagerCollection.findOne().questionIndex;

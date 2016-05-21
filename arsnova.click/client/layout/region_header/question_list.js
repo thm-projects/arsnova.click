@@ -45,7 +45,6 @@ Template.questionList.onRendered(function () {
 	let handleRedirect = true;
 	redirectTracker = Tracker.autorun(function () {
 		if (!sessionStorage.getItem("overrideValidQuestionRedirect")) {
-			delete sessionStorage.overrideValidQuestionRedirect;
 			handleRedirect = false;
 			if (redirectTracker) {
 				redirectTracker.stop();
@@ -55,10 +54,11 @@ Template.questionList.onRendered(function () {
 				Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
 				Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
 				Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
-				Meteor.call("QuestionGroup.persist", Session.get("questionGroup").serialize());
+				Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
 				Router.go("/" + Router.current().params.quizName + "/memberlist");
 			}
 		}
+		delete sessionStorage.overrideValidQuestionRedirect;
 	});
 });
 

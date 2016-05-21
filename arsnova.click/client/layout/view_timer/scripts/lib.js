@@ -22,31 +22,6 @@ import * as localData from '/lib/local_storage.js';
 
 export let validationTrackerHandle = null;
 
-export function setTimer(index, callback) {
-	var hasError = false;
-	// timer is given in seconds
-	const questionItem = Session.get("questionGroup");
-	const timer = questionItem.getQuestionList()[index].getTimer();
-	if (!isNaN(timer)) {
-		questionItem.getQuestionList()[index].setTimer(timer);
-		Session.set("questionGroup", questionItem);
-		localData.addHashtag(Session.get("questionGroup"));
-	} else {
-		hasError = {
-			reason: "Timer is not a number"
-		};
-	}
-
-	if (hasError) {
-		new ErrorSplashscreen({
-			autostart: true,
-			errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + hasError.reason)
-		});
-	} else if (typeof callback === "function") {
-		callback();
-	}
-}
-
 export function createSlider(index) {
 	const questionItem = Session.get("questionGroup");
 	if (questionItem.getQuestionList()[index].getTimer() === 0) {
@@ -73,8 +48,5 @@ export function createSlider(index) {
 
 export function setSlider(index) {
 	const questionItem = Session.get("questionGroup");
-	questionItem.getQuestionList()[index].setTimer(questionItem.getQuestionList()[index].getTimer());
-	Session.set("questionGroup", questionItem);
-	localData.addHashtag(Session.get("questionGroup"));
 	$("#slider").val((questionItem.getQuestionList()[index].getTimer()));
 }

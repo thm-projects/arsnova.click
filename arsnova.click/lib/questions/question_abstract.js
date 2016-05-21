@@ -145,7 +145,7 @@ export class AbstractQuestion {
 				answerOptionListValid = true;
 			}
 		});
-		return answerOptionListValid && this.getQuestionText().length > 4 && this.getQuestionText().length < 10001;
+		return answerOptionListValid && this.getQuestionText().length > 4 && this.getQuestionText().length < 10001 && this.getTimer() > 5 && this.getTimer() < 261;
 	}
 
 	equals (question) {

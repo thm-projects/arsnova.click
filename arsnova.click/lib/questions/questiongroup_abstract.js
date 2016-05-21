@@ -67,10 +67,10 @@ export class AbstractQuestionGroup {
 	}
 
 	isValid () {
-		let questionListValid = false;
+		let questionListValid = true;
 		this.getQuestionList().forEach(function (question) {
-			if (question.isValid()) {
-				questionListValid = true;
+			if (questionListValid && !question.isValid()) {
+				questionListValid = false;
 			}
 		});
 		return questionListValid;
@@ -110,7 +110,7 @@ export class AbstractQuestionGroup {
 			hashtag: this.getHashtag(),
 			questionText: "",
 			questionIndex: index,
-			timer: 40000,
+			timer: 0,
 			startTime: 0,
 			answerOptionList: []
 		});

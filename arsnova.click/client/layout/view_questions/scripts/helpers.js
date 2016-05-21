@@ -42,11 +42,14 @@ Template.createQuestionView.helpers({
 				name: "Multiple-Choice",
 				selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].constructor.name === "MultipleChoiceQuestion" ? 'selected' : ""
 			},
+			/*
+			Disabled because not yet implemented!
 			{
 				id: "RangedQuestion",
 				name: "Ranged answers",
 				selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].constructor.name === "RangedQuestion" ? 'selected' : ""
 			},
+			*/
 			{
 				id: "SurveyQuestion",
 				name: "Survey",

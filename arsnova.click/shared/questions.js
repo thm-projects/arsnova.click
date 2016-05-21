@@ -118,7 +118,7 @@ Meteor.methods({
 			}
 		});
 	},
-	"QuestionGroup.persist": function (questionGroupElement) {
+	"QuestionGroupCollection.persist": function (questionGroupElement) {
 		new SimpleSchema({
 			hashtag: hashtagSchema
 		}).validate({hashtag: questionGroupElement.hashtag});

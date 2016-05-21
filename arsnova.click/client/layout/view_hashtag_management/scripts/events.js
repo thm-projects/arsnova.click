@@ -23,8 +23,6 @@ import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
-import {SingleChoiceQuestion} from "/lib/questions/question_choice_single.js";
-import {DefaultAnswerOption} from "/lib/answeroptions/answeroption_default.js";
 import * as localData from '/lib/local_storage.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as lib from './lib.js';
@@ -109,46 +107,12 @@ Template.hashtagView.events({
 			} else {
 				const questionGroup = new DefaultQuestionGroup({
 					hashtag: hashtag,
-					questionList: [
-						new SingleChoiceQuestion({
-							hashtag: hashtag,
-							questionText: "",
-							questionIndex: 0,
-							timer: 40000,
-							startTime: 0,
-							answerOptionList: [
-								new DefaultAnswerOption({
-									hashtag: hashtag,
-									questionIndex: 0,
-									answerText: "",
-									answerOptionNumber: 0,
-									isCorrect: 0
-								}),
-								new DefaultAnswerOption({
-									hashtag: hashtag,
-									questionIndex: 0,
-									answerText: "",
-									answerOptionNumber: 1,
-									isCorrect: 0
-								}),
-								new DefaultAnswerOption({
-									hashtag: hashtag,
-									questionIndex: 0,
-									answerText: "",
-									answerOptionNumber: 2,
-									isCorrect: 0
-								}),
-								new DefaultAnswerOption({
-									hashtag: hashtag,
-									questionIndex: 0,
-									answerText: "",
-									answerOptionNumber: 3,
-									isCorrect: 0
-								})
-							]
-						})
-					]
+					questionList: []
 				});
+				questionGroup.addDefaultQuestion(0);
+				for (let i = 0; i < 4; i++) {
+					questionGroup.getQuestionList()[0].addDefaultAnswerOption(i);
+				}
 				Meteor.call('HashtagsCollection.addHashtag', {
 					privateKey: localData.getPrivateKey(),
 					hashtag: questionGroup.getHashtag(),

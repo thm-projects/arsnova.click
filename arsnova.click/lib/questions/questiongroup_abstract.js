@@ -29,9 +29,13 @@ export class AbstractQuestionGroup {
 		this[hashtag] = options.hashtag;
 	}
 
-	addQuestion (question) {
+	addQuestion (question, index) {
 		if (question instanceof AbstractQuestion) {
-			this[questionList].push(question);
+			if (typeof index === "undefined") {
+				this[questionList].push(question);
+			} else {
+				this[questionList][index] = question;
+			}
 			return question;
 		}
 	}

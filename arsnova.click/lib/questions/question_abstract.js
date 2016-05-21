@@ -2,7 +2,7 @@ import {AnswerOptionCollection} from '../answeroptions/collection.js';
 import {AbstractAnswerOption} from '../answeroptions/answeroption_abstract.js';
 import {DefaultAnswerOption} from '../answeroptions/answeroption_default.js';
 
-const hashtag = Symbol("questionText");
+const hashtag = Symbol("hashtag");
 const questionText = Symbol("questionText");
 const timer = Symbol("timer");
 const startTime = Symbol("startTime");
@@ -58,7 +58,7 @@ export class AbstractQuestion {
 	}
 
 	setQuestionText (text) {
-		if (!(text instanceof String) || text.length < 5 || text.length > 10000) {
+		if (typeof text !== "string") {
 			throw new Error("Invalid argument for Question.setText");
 		}
 		this[questionText] = text;
@@ -131,7 +131,7 @@ export class AbstractQuestion {
 	}
 
 	isValid () {
-		return true;
+		return this.getQuestionText().length > 4 && this.getQuestionText().length < 10001;
 	}
 
 	equals (question) {

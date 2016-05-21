@@ -98,11 +98,15 @@ export class AbstractQuestion {
 		return this[startTime];
 	}
 
-	addAnswerOption (answerOption) {
+	addAnswerOption (answerOption, index) {
 		if (typeof answerOption === "undefined" || !(answerOption instanceof AbstractAnswerOption)) {
 			throw new Error("Invalid argument for Question.removeAnswerOption");
 		}
-		this[answerOptionList].push(answerOption);
+		if (typeof index === "undefined" || index >= this.getAnswerOptionList().length) {
+			this[answerOptionList].push(answerOption);
+		} else {
+			this[answerOptionList][index] = answerOption;
+		}
 	}
 
 	removeAnswerOption (index) {
@@ -135,7 +139,13 @@ export class AbstractQuestion {
 	}
 
 	isValid () {
-		return this.getQuestionText().length > 4 && this.getQuestionText().length < 10001;
+		let answerOptionListValid = false;
+		this.getAnswerOptionList().forEach(function (answerOption) {
+			if (answerOption.isValid()) {
+				answerOptionListValid = true;
+			}
+		});
+		return answerOptionListValid && this.getQuestionText().length > 4 && this.getQuestionText().length < 10001;
 	}
 
 	equals (question) {
@@ -166,5 +176,21 @@ export class AbstractQuestion {
 
 	toJSONValue () {
 		return this.serialize();
+	}
+
+	addDefaultAnswerOption (index) {
+		if (typeof index === "undefined" || index >= this.getAnswerOptionList().length) {
+			index = this.getAnswerOptionList().length;
+		}
+		this.addAnswerOption(
+			new DefaultAnswerOption({
+				hashtag: this.getHashtag(),
+				questionIndex: this.getQuestionIndex(),
+				answerText: "",
+				answerOptionNumber: index,
+				isCorrect: 0
+			}),
+			index
+		);
 	}
 }

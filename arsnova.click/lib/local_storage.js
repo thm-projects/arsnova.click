@@ -68,9 +68,10 @@ export function addHashtag(questionGroup) {
 		localStorage.setItem(questionGroup.getHashtag(), JSON.stringify(questionGroup.serialize()));
 	} else {
 		const hashtags = JSON.parse(hashtagString);
-		hashtags.push(questionGroup.getHashtag());
-
-		localStorage.setItem("hashtags", JSON.stringify(hashtags));
+		if (!containsHashtag(questionGroup.getHashtag())) {
+			hashtags.push(questionGroup.getHashtag());
+			localStorage.setItem("hashtags", JSON.stringify(hashtags));
+		}
 		localStorage.setItem(questionGroup.getHashtag(), JSON.stringify(questionGroup.serialize()));
 	}
 }

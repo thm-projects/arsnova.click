@@ -69,7 +69,7 @@ export class AbstractAnswerOption {
 	}
 
 	isValid () {
-		return true;
+		return this.getAnswerText().length > 0;
 	}
 
 	equals (answerOption) {

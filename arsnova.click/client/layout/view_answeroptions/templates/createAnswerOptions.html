@@ -38,7 +38,7 @@
 				<div class="col-md-12 ">
 					{{#each answerOptions}}
 						<div class="form-group">
-							<div class="input-group">
+							<div class="input-group {{#unless (isValidAnswerOption this)}}invalidAnswerOption{{/unless}}">
 								<div class="input-group-letter round-corners input-group-addon input-field-bg-color">{{answerOptionLetter getAnswerOptionNumber}}</div>
 								<input type="text"
 									   class="input-field"

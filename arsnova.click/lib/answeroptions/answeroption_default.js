@@ -7,10 +7,6 @@ export class DefaultAnswerOption extends AbstractAnswerOption {
 		super(options);
 	}
 
-	isValid () {
-		return true;
-	}
-
 	clone () {
 		return new DefaultAnswerOption(this.serialize());
 	}

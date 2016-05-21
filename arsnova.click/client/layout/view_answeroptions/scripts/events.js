@@ -26,15 +26,19 @@ import {parseAnswerOptionInput} from './lib.js';
 
 Template.createAnswerOptions.events({
 	"click .toggleCorrect": function (event) {
-		if (this.isCorrect) {
-			this.isCorrect = 0;
+		const questionItem = Session.get("questionGroup");
+		const answerlist = questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex];
+		if (this.getIsCorrect()) {
+			answerlist.getAnswerOptionList()[this.getAnswerOptionNumber()].setIsCorrect(false);
 			$(event.currentTarget.firstElementChild).removeClass("check-mark-checked");
 			$(event.currentTarget.firstElementChild).addClass("check-mark-unchecked");
 		} else {
-			this.isCorrect = 1;
+			answerlist.getAnswerOptionList()[this.getAnswerOptionNumber()].setIsCorrect(true);
 			$(event.currentTarget.firstElementChild).removeClass("check-mark-unchecked");
 			$(event.currentTarget.firstElementChild).addClass("check-mark-checked");
 		}
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
 	},
 	"click #addAnswerOption": function () {
 		const questionItem = Session.get("questionGroup");
@@ -42,13 +46,7 @@ Template.createAnswerOptions.events({
 		let answerOptionsCount = answerlist.getAnswerOptionList().length;
 
 		if (answerOptionsCount < 26) {
-			answerlist.addAnswerOption(new DefaultAnswerOption({
-				hashtag: Router.current().params.quizName,
-				questionIndex: EventManagerCollection.findOne().questionIndex,
-				answerText: "",
-				answerOptionNumber: answerOptionsCount,
-				isCorrect: 0
-			}));
+			answerlist.addDefaultAnswerOption(answerOptionsCount);
 			Session.set("questionGroup", questionItem);
 			localData.addHashtag(Session.get("questionGroup"));
 			$("#deleteAnswerOption").removeClass("hide");
@@ -60,8 +58,6 @@ Template.createAnswerOptions.events({
 
 			const answerOptionsField = $('.answer-options');
 			answerOptionsField.scrollTop(answerOptionsField[0].scrollHeight);
-
-			$('#answerOptionText_Number' + (answerOptionsCount - 1)).closest(".input-group").addClass("invalidAnswerOption");
 		}
 	},
 	"click #deleteAnswerOption": function () {
@@ -110,13 +106,6 @@ Template.createAnswerOptions.events({
 				//sets focus to the new input field
 				$(event.currentTarget).closest(".form-group").next().find(".input-field").focus();
 			}
-		}
-	},
-	"keyup .input-field": function (event) {
-		if ($(event.currentTarget).val().length === 0) {
-			$(event.currentTarget).closest(".input-group").addClass("invalidAnswerOption");
-		} else {
-			$(event.currentTarget).closest(".input-group").removeClass("invalidAnswerOption");
 		}
 	}
 });

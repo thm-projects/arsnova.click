@@ -7,15 +7,14 @@ export class SurveyQuestion extends AbstractQuestion {
 		super(options);
 	}
 
-	addAnswerOption (answerOption) {
-		if (answerOption.getIsCorrect()) {
-			throw new Error("This question is not allowed to hold correct answers");
-		}
-		super.addAnswerOption(answerOption);
-	}
-
 	isValid () {
-		return this.getAnswerOptionList().length > 0;
+		let hasValidAnswer = 0;
+		this.getAnswerOptionList().forEach(function (answeroption) {
+			if (answeroption.getIsCorrect()) {
+				hasValidAnswer++;
+			}
+		});
+		return super.isValid() && hasValidAnswer === 0;
 	}
 
 	clone () {

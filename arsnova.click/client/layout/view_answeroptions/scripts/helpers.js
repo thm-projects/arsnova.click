@@ -31,5 +31,8 @@ Template.createAnswerOptions.helpers({
 	},
 	showDeleteButtonOnStart: function () {
 		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().length === 1 ? "hide" : "";
+	},
+	isValidAnswerOption: function (item) {
+		return item.isValid();
 	}
 });

@@ -1,5 +1,6 @@
 import {AbstractQuestion} from './question_abstract.js';
 import {questionReflection} from "./question_reflection.js";
+import {SingleChoiceQuestion} from './question_choice_single.js';
 
 const hashtag = Symbol("hashtag");
 const questionList = Symbol("questionList");
@@ -31,7 +32,7 @@ export class AbstractQuestionGroup {
 
 	addQuestion (question, index) {
 		if (question instanceof AbstractQuestion) {
-			if (typeof index === "undefined") {
+			if (typeof index === "undefined" || index >= this.getQuestionList().length) {
 				this[questionList].push(question);
 			} else {
 				this[questionList][index] = question;
@@ -99,5 +100,26 @@ export class AbstractQuestionGroup {
 
 	toJSONValue () {
 		return this.serialize();
+	}
+
+	addDefaultQuestion (index) {
+		if (typeof index === "undefined" || index >= this.getQuestionList().length) {
+			index = this.getQuestionList().length;
+		}
+		const questionItem = new SingleChoiceQuestion({
+			hashtag: this.getHashtag(),
+			questionText: "",
+			questionIndex: index,
+			timer: 40000,
+			startTime: 0,
+			answerOptionList: []
+		});
+		for (let i = 0; i < 4; i++) {
+			questionItem.addDefaultAnswerOption(i);
+		}
+		this.addQuestion(
+			questionItem,
+			index
+		);
 	}
 }

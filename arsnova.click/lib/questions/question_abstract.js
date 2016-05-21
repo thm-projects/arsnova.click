@@ -102,7 +102,7 @@ export class AbstractQuestion {
 	}
 
 	removeAnswerOption (index) {
-		if (typeof index === "undefined" || index < 0 || index > this[answerOptionList].length) {
+		if (typeof index === "undefined" || index < 0 || index > this.getAnswerOptionList().length) {
 			throw new Error("Invalid argument for Question.removeAnswerOption");
 		}
 		this[answerOptionList].splice(index, 1);
@@ -118,14 +118,14 @@ export class AbstractQuestion {
 
 	serialize () {
 		let answerOptionListSerialized = [];
-		this[answerOptionList].forEach(function (answeroption) { answerOptionListSerialized.push(answeroption.serialize()); });
+		this.getAnswerOptionList().forEach(function (answeroption) { answerOptionListSerialized.push(answeroption.serialize()); });
 		return {
-			hashtag: this[hashtag],
-			questionText: this[questionText],
+			hashtag: this.getHashtag(),
+			questionText: this.getQuestionText(),
 			type: this.constructor.name,
-			timer: this[timer],
-			startTime: this[startTime],
-			questionIndex: this[questionIndex],
+			timer: this.getTimer(),
+			startTime: this.getStartTime(),
+			questionIndex: this.getQuestionIndex(),
 			answerOptionList: answerOptionListSerialized
 		};
 	}
@@ -137,17 +137,17 @@ export class AbstractQuestion {
 	equals (question) {
 		if (question instanceof AbstractQuestion) {
 			let questionAnswerOptionList = question.getAnswerOptionList();
-			if (questionAnswerOptionList.length === this[answerOptionList].length) {
+			if (questionAnswerOptionList.length === this.getAnswerOptionList().length) {
 				let isEqual = true;
-				for (let i = 0; i < this[answerOptionList].length; i++) {
-					if (isEqual && !this[answerOptionList][i].equals(questionAnswerOptionList[i])) {
+				for (let i = 0; i < this.getAnswerOptionList().length; i++) {
+					if (isEqual && !this.getAnswerOptionList()[i].equals(questionAnswerOptionList[i])) {
 						isEqual = false;
 					}
 				}
-				if (question.getTimer() !== this[timer] ||
-					question.getStartTime() !== this[startTime] ||
-					question.getHashtag() !== this[hashtag] ||
-					question.getQuestionText() !== this[questionText]) {
+				if (question.getTimer() !== this.getTimer() ||
+					question.getStartTime() !== this.getStartTime() ||
+					question.getHashtag() !== this.getHashtag() ||
+					question.getQuestionText() !== this.getQuestionText()) {
 					isEqual = false;
 				}
 				return isEqual;
@@ -156,7 +156,7 @@ export class AbstractQuestion {
 		return false;
 	}
 
-	static typeName () {
+	typeName () {
 		return this.constructor.name;
 	}
 

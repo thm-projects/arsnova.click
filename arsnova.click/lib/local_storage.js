@@ -164,8 +164,12 @@ export function reenterSession(hashtag) {
 		return;
 	}
 
-	const questionGroup = new DefaultQuestionGroup(sessionData);
-	Meteor.call("QuestionGroupCollection.insert", questionGroup);
+	switch (sessionData.type) {
+		case "DefaultQuestionGroup":
+			return new DefaultQuestionGroup(sessionData);
+		default:
+			throw new TypeError("Undefined session type while reentering");
+	}
 }
 
 export function deleteAnswerOption(hashtag, questionIndex, answerOptionNumber) {

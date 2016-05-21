@@ -13,10 +13,10 @@ export class AbstractQuestionGroup {
 		if (typeof options.hashtag === "undefined") {
 			throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
 		}
-		if (typeof options.questionList === "undefined" || !(options.questionList instanceof Array)) {
-			this[questionList] = [];
-		} else {
+		this[questionList] = [];
+		if (options.questionList instanceof Array) {
 			for (let i = 0; i < options.questionList.length; i++) {
+				console.log(options.questionList[i]);
 				if (!(options.questionList[i] instanceof AbstractQuestion)) {
 					if (options.questionList[i] instanceof Object) {
 						options.questionList[i] = questionReflection[options.questionList[i].type](options.questionList[i]);
@@ -24,10 +24,10 @@ export class AbstractQuestionGroup {
 						throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
 					}
 				}
+				this[questionList].push(options.questionList[i]);
 			}
 		}
 		this[hashtag] = options.hashtag;
-		this[questionList] = options.questionList;
 	}
 
 	addQuestion (question) {
@@ -38,7 +38,7 @@ export class AbstractQuestionGroup {
 	}
 
 	removeQuestion (index) {
-		if (!index || index < 0 || index > this[questionList].length) {
+		if (!index || index < 0 || index > this.getQuestionList().length) {
 			throw new Error("Invalid argument list for QuestionGroup.removeQuestion");
 		}
 		this[questionList].splice(index, 1);
@@ -56,7 +56,7 @@ export class AbstractQuestionGroup {
 		let questionListSerialized = [];
 		this.getQuestionList().forEach(function (question) { questionListSerialized.push(question.serialize()); });
 		return {
-			hashtag: this[hashtag],
+			hashtag: this.getHashtag(),
 			type: this.constructor.name,
 			questionList: questionListSerialized
 		};
@@ -64,7 +64,7 @@ export class AbstractQuestionGroup {
 
 	isValid () {
 		let questionListValid = false;
-		this[questionList].forEach(function (question) {
+		this.getQuestionList().forEach(function (question) {
 			if (question.isValid()) {
 				questionListValid = true;
 			}
@@ -74,15 +74,15 @@ export class AbstractQuestionGroup {
 
 	equals (questionGroup) {
 		if (questionGroup instanceof AbstractQuestionGroup) {
-			if (questionGroup.getQuestionList().length === this[questionList].length) {
+			if (questionGroup.getHashtag() !== this.getHashtag()) {
+				return false;
+			}
+			if (questionGroup.getQuestionList().length === this.getQuestionList().length) {
 				let allQuestionsEqual = false;
-				for (let i = 0; i < this[questionList].length; i++) {
-					if (this[questionList][i].equals(questionGroup.getQuestionList()[i])) {
+				for (let i = 0; i < this.getQuestionList().length; i++) {
+					if (this.getQuestionList()[i].equals(questionGroup.getQuestionList()[i])) {
 						allQuestionsEqual = true;
 					}
-				}
-				if (questionGroup.getHashtag() !== this.getHashtag()) {
-					allQuestionsEqual = false;
 				}
 				return allQuestionsEqual;
 			}
@@ -90,7 +90,7 @@ export class AbstractQuestionGroup {
 		return false;
 	}
 
-	static typeName () {
+	typeName () {
 		return this.constructor.name;
 	}
 

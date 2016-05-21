@@ -59,12 +59,12 @@ export class AbstractAnswerOption {
 
 	serialize () {
 		return {
-			hashtag: this[hashtag],
+			hashtag: this.getHashtag(),
 			type: this.constructor.name,
-			questionIndex: this[questionIndex],
-			answerText: this[answerText],
-			answerOptionNumber: this[answerOptionNumber],
-			isCorrect: this[isCorrect]
+			questionIndex: this.getQuestionIndex(),
+			answerText: this.getAnswerText(),
+			answerOptionNumber: this.getAnswerOptionNumber(),
+			isCorrect: this.getIsCorrect()
 		};
 	}
 
@@ -74,17 +74,23 @@ export class AbstractAnswerOption {
 
 	equals (answerOption) {
 		return answerOption instanceof AbstractAnswerOption &&
-			answerOption.getQuestionIndex() === this[questionIndex] &&
-			answerOption.getAnswerText() === this[answerText] &&
-			answerOption.getAnswerOptionNumber() === this[answerOptionNumber] &&
-			answerOption.getIsCorrect() === this[isCorrect];
+			answerOption.getQuestionIndex() === this.getQuestionIndex() &&
+			answerOption.getAnswerText() === this.getAnswerText() &&
+			answerOption.getAnswerOptionNumber() === this.getAnswerOptionNumber() &&
+			answerOption.getIsCorrect() === this.getIsCorrect();
 	}
 
-	static typeName () {
+	typeName () {
 		return this.constructor.name;
 	}
 
 	toJSONValue () {
-		return this.serialize();
+		return {
+			hashtag: this.getHashtag(),
+			questionIndex: this.getQuestionIndex(),
+			answerText: this.getAnswerText(),
+			answerOptionNumber: this.getAnswerOptionNumber(),
+			isCorrect: this.getIsCorrect()
+		};
 	}
 }

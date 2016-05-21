@@ -17,9 +17,13 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Template.createTimerView.helpers({
 	slider: function () {
-		return Session.get("slider");
+		if (!EventManagerCollection.findOne()) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getTimer();
 	}
 });

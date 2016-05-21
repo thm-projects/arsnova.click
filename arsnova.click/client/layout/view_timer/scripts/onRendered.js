@@ -19,7 +19,6 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as lib from './lib.js';
 
 Template.createTimerView.onRendered(function () {
@@ -28,8 +27,7 @@ Template.createTimerView.onRendered(function () {
 	lib.setSlider(index);
 	var body = $('body');
 	body.on('click', '.questionIcon:not(.active)', function () {
-		var currentSession = QuestionGroupCollection.findOne();
-		if (!currentSession || index >= currentSession.questionList.length) {
+		if (index >= Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList().length) {
 			return;
 		}
 

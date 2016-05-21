@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
+import {DefaultAnswerOption} from '/lib/answeroptions/answeroption_default.js';
 import * as localData from '/lib/local_storage.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {parseAnswerOptionInput} from './lib.js';
@@ -37,54 +37,51 @@ Template.createAnswerOptions.events({
 		}
 	},
 	"click #addAnswerOption": function () {
-		var answerOptionsCount = AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).count();
+		const questionItem = Session.get("questionGroup");
+		const answerlist = questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex];
+		let answerOptionsCount = answerlist.getAnswerOptionList().length;
+
 		if (answerOptionsCount < 26) {
-			const answerOption = {
+			answerlist.addAnswerOption(new DefaultAnswerOption({
 				hashtag: Router.current().params.quizName,
 				questionIndex: EventManagerCollection.findOne().questionIndex,
 				answerText: "",
 				answerOptionNumber: answerOptionsCount,
 				isCorrect: 0
-			};
+			}));
+			Session.set("questionGroup", questionItem);
+			localData.addHashtag(Session.get("questionGroup"));
+			$("#deleteAnswerOption").removeClass("hide");
 
-			Meteor.call('AnswerOptionCollection.addOption', answerOption, (err) => {
-				if (err) {
-					$('.errorMessageSplash').parents('.modal').modal('show');
-					$("#errorMessage-text").html(err.reason);
-				} else {
-					localData.addAnswers(answerOption);
+			answerOptionsCount++;
+			if (answerOptionsCount > 25) {
+				$("#addAnswerOption").addClass("hide");
+			}
 
-					$("#deleteAnswerOption").removeClass("hide");
+			const answerOptionsField = $('.answer-options');
+			answerOptionsField.scrollTop(answerOptionsField[0].scrollHeight);
 
-					answerOptionsCount++;
-					if (answerOptionsCount > 25) {
-						$("#addAnswerOption").addClass("hide");
-					}
-
-					$('.answer-options').scrollTop($('.answer-options')[0].scrollHeight);
-
-					$('#answerOptionText_Number' + (answerOptionsCount - 1)).closest(".input-group").addClass("invalidAnswerOption");
-				}
-			});
+			$('#answerOptionText_Number' + (answerOptionsCount - 1)).closest(".input-group").addClass("invalidAnswerOption");
 		}
 	},
 	"click #deleteAnswerOption": function () {
-		var answerOptionsCount = AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).count();
+		const questionItem = Session.get("questionGroup");
+		const answerlist = questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex];
+		let answerOptionsCount = answerlist.getAnswerOptionList().length;
+
 		if (answerOptionsCount > 1) {
 			$("#addAnswerOption").removeClass("hide");
 
-			Meteor.call('AnswerOptionCollection.deleteOption', {
-				hashtag: Router.current().params.quizName,
-				questionIndex: EventManagerCollection.findOne().questionIndex,
-				answerOptionNumber: answerOptionsCount - 1
-			});
-			localData.deleteAnswerOption(Router.current().params.quizName, EventManagerCollection.findOne().questionIndex, answerOptionsCount - 1);
+			answerlist.removeAnswerOption(answerOptionsCount - 1);
+			Session.set("questionGroup", questionItem);
+			localData.addHashtag(Session.get("questionGroup"));
 
 			answerOptionsCount--;
 			if (answerOptionsCount === 1) {
 				$("#deleteAnswerOption").addClass("hide");
 			} else if (answerOptionsCount > 2) {
-				$('.answer-options').scrollTop($('.answer-options')[0].scrollHeight);
+				const answerOptionsField = $('.answer-options');
+				answerOptionsField.scrollTop(answerOptionsField[0].scrollHeight);
 			}
 		}
 	},

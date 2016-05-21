@@ -15,18 +15,21 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 
 Template.createAnswerOptions.helpers({
 	answerOptions: function () {
-		return EventManagerCollection.findOne() ? AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}, {sort: {answerOptionNumber: 1}}) : false;
+		if (!EventManagerCollection.findOne()) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList();
 	},
 	answerOptionLetter: function (Nr) {
 		return String.fromCharCode(Nr + 65);
 	},
 	showDeleteButtonOnStart: function () {
-		return EventManagerCollection.findOne() && (AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).count() === 1) ? "hide" : "";
+		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().length === 1 ? "hide" : "";
 	}
 });

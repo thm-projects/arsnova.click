@@ -15,32 +15,19 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
-import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
+import {Session} from 'meteor/session';
 import * as localData from '/lib/local_storage.js';
-
-let hasError = false;
-const updateAnswerText = function (error, result) {
-	hasError = error;
-	if (!error) {
-		localData.updateAnswerText(result);
-	}
-};
 
 export var subscriptionHandler = null;
 
 export function parseAnswerOptionInput(index) {
-	for (var i = 0; i < AnswerOptionCollection.find({questionIndex: index}).count(); i++) {
-		var text = $("#answerOptionText_Number" + i).val();
-		var isCorrect = $('div#answerOption-' + i + ' .check-mark-checked').length > 0 ? 1 : 0;
-		var answer = {
-			hashtag: Router.current().params.quizName,
-			questionIndex: index,
-			answerOptionNumber: i,
-			answerText: text,
-			isCorrect: isCorrect
-		};
-		Meteor.call('AnswerOptionCollection.updateAnswerTextAndIsCorrect', answer, updateAnswerText);
+	const questionItem = Session.get("questionGroup");
+	const answerlist = questionItem.getQuestionList()[index].getAnswerOptionList();
+
+	for (var i = 0; i < answerlist.length; i++) {
+		answerlist[i].setAnswerText($("#answerOptionText_Number" + i).val());
+		answerlist[i].setIsCorrect($('#answerOption-' + i).find(".check-mark-checked").length > 0);
 	}
-	return hasError;
+	Session.set("questionGroup", questionItem);
+	localData.addHashtag(Session.get("questionGroup"));
 }

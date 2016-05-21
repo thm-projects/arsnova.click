@@ -39,16 +39,16 @@
 					{{#each answerOptions}}
 						<div class="form-group">
 							<div class="input-group">
-								<div class="input-group-letter round-corners input-group-addon input-field-bg-color">{{answerOptionLetter answerOptionNumber}}</div>
+								<div class="input-group-letter round-corners input-group-addon input-field-bg-color">{{answerOptionLetter getAnswerOptionNumber}}</div>
 								<input type="text"
 									   class="input-field"
-									   id="answerOptionText_Number{{answerOptionNumber}}"
+									   id="answerOptionText_Number{{getAnswerOptionNumber}}"
 									   placeholder="{{_ "view.answeroptions.answeroptiontext_placeholder"}}"
-									   value="{{answerText}}">
+									   value="{{getAnswerText}}">
 
-								<div id="answerOption-{{answerOptionNumber}}"
+								<div id="answerOption-{{getAnswerOptionNumber}}"
 									 class="toggleCorrect round-corners input-group-addon input-field-bg-color input-group-letter">
-									{{#if isCorrect}}
+									{{#if getIsCorrect}}
 										<!--r-->
 										<div class="check-mark-checked success-color"><i
 												class="glyphicon glyphicon-ok"></i></div>

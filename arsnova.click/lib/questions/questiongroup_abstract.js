@@ -16,7 +16,6 @@ export class AbstractQuestionGroup {
 		this[questionList] = [];
 		if (options.questionList instanceof Array) {
 			for (let i = 0; i < options.questionList.length; i++) {
-				console.log(options.questionList[i]);
 				if (!(options.questionList[i] instanceof AbstractQuestion)) {
 					if (options.questionList[i] instanceof Object) {
 						options.questionList[i] = questionReflection[options.questionList[i].type](options.questionList[i]);

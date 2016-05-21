@@ -19,7 +19,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import * as localData from '/lib/local_storage.js';
 
-Template.createAnswerOptions.onCreated(function () {
+Template.createTimerView.onCreated(function () {
 	if (!Session.get("questionGroup")) {
 		Session.set("questionGroup", localData.reenterSession(Router.current().params.quizName));
 	}

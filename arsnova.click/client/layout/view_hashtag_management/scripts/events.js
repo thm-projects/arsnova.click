@@ -18,6 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
+import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
@@ -103,14 +104,11 @@ Template.hashtagView.events({
 			}
 			if (reenter) {
 				sessionStorage.setItem("overrideValidQuestionRedirect", true);
-				localData.reenterSession(hashtag);
+				Session.set("questionGroup", localData.reenterSession(hashtag));
 				lib.connectEventManager(hashtag);
 			} else {
 				const questionGroup = new DefaultQuestionGroup({
 					hashtag: hashtag,
-					musicVolume: 80,
-					musicEnabled: 1,
-					musicTitle: "Song1",
 					questionList: [
 						new SingleChoiceQuestion({
 							hashtag: hashtag,
@@ -151,12 +149,19 @@ Template.hashtagView.events({
 						})
 					]
 				});
-				console.log(questionGroup);
-				Meteor.call('HashtagsCollection.addHashtag', localData.getPrivateKey(), questionGroup);
-				Meteor.call('QuestionGroupCollection.insert', questionGroup);
-				localData.addHashtag(questionGroup);
-				Session.set("questionGroup", questionGroup);
-				lib.connectEventManager(hashtag);
+				Meteor.call('HashtagsCollection.addHashtag', {
+					privateKey: localData.getPrivateKey(),
+					hashtag: questionGroup.getHashtag(),
+					musicVolume: 80,
+					musicEnabled: 1,
+					musicTitle: "Song1"
+				}, function (err) {
+					if (!err) {
+						localData.addHashtag(questionGroup);
+						Session.set("questionGroup", questionGroup);
+						lib.connectEventManager(hashtag);
+					}
+				});
 			}
 		}
 	},
@@ -217,7 +222,7 @@ Template.hashtagManagement.events({
 	},
 	"click .js-reactivate-hashtag": function (event) {
 		var hashtag = $(event.currentTarget).parent().parent()[0].id;
-		localData.reenterSession(hashtag);
+		Session.set("questionGroup", localData.reenterSession(hashtag));
 		lib.connectEventManager(hashtag);
 	},
 	"click .js-export": function (event) {
@@ -288,7 +293,7 @@ Template.hashtagManagement.events({
 Template.showHashtagsSplashscreen.events({
 	"click .js-my-hash": function (event) {
 		var hashtag = $(event.currentTarget).text();
-		localData.reenterSession(hashtag);
+		Session.set("questionGroup", localData.reenterSession(hashtag));
 		lib.hashtagSplashscreen.destroy();
 		sessionStorage.setItem("overrideValidQuestionRedirect", true);
 		lib.connectEventManager(hashtag);

@@ -35,26 +35,19 @@ Meteor.methods({
 		});
 		return Boolean(doc);
 	},
-	'HashtagsCollection.addHashtag': function (privateKey, questionGroup) {
-		console.log("addHashtag", questionGroup);
-		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag: questionGroup.getHashtag()});
+	'HashtagsCollection.addHashtag': function (sessionConfiguration) {
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag: sessionConfiguration.hashtag});
 
-		if (HashtagsCollection.findOne({hashtag: questionGroup.getHashtag()})) {
+		if (HashtagsCollection.findOne({hashtag: sessionConfiguration.hashtag})) {
 			throw new Meteor.Error('HashtagsCollection.addHashtag', 'session_exists');
 		}
 
-		HashtagsCollection.insert({
-			privateKey: privateKey,
-			hashtag: questionGroup.getHashtag(),
-			musicVolume: 80,
-			musicEnabled: 1,
-			musicTitle: "Song1"
-		});
-		EventManagerCollection.update({hashtag: questionGroup.getHashtag()}, {
+		HashtagsCollection.insert(sessionConfiguration);
+		EventManagerCollection.update({hashtag: sessionConfiguration.hashtag}, {
 			$push: {
 				eventStack: {
 					key: "HashtagsCollection.addHashtag",
-					value: {hashtag: questionGroup.getHashtag()}
+					value: {hashtag: sessionConfiguration.hashtag}
 				}
 			}
 		});

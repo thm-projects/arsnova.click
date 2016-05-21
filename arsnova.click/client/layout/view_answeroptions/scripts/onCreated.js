@@ -20,7 +20,4 @@ import {Template} from 'meteor/templating';
 import * as localData from '/lib/local_storage.js';
 
 Template.createAnswerOptions.onCreated(function () {
-	if (!Session.get("questionGroup")) {
-		Session.set("questionGroup", localData.reenterSession(Router.current().params.quizName));
-	}
 });

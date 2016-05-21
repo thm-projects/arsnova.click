@@ -31,30 +31,16 @@ var redirectTracker = null;
 
 Template.questionList.onCreated(function () {
 	Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
-	Session.set("validQuestions", []);
 
-	localData.reenterSession(Router.current().params.quizName);
-	if (!QuestionGroupCollection.findOne()) {
-		return;
+	if (!Session.get("questionGroup")) {
+		Session.set("questionGroup", localData.reenterSession(Router.current().params.quizName));
 	}
-
-
-	var questionList = QuestionGroupCollection.findOne().questionList;
-	var validQuestions = Session.get("validQuestions");
-	if (questionList.length >= validQuestions.length) {
-		return;
-	}
-
-	validQuestions.splice(questionList.length - 1, validQuestions.length - questionList.length);
-
-	Session.set("validQuestions", validQuestions);
 });
 
 Template.questionList.onDestroyed(function () {
 	if (redirectTracker) {
 		redirectTracker.stop();
 	}
-	Session.set("validQuestions", undefined);
 	delete sessionStorage.overrideValidQuestionRedirect;
 });
 

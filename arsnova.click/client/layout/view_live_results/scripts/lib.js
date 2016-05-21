@@ -70,7 +70,7 @@ export function startCountdown(index) {
 	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	var questionDoc = QuestionGroupCollection.findOne().questionList[index];
 	Session.set("sessionCountDown", questionDoc.timer);
-	countdown = new ReactiveCountdown(questionDoc.timer / 1000);
+	countdown = new ReactiveCountdown(questionDoc.timer);
 
 	if (hashtagDoc.musicEnabled) {
 		if (buzzsound1 == null) {

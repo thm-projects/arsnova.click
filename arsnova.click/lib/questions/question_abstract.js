@@ -27,13 +27,17 @@ export class AbstractQuestion {
 		this[questionIndex] = options.questionIndex;
 		this[answerOptionList] = [];
 		if (typeof options.answerOptionList === "undefined" || options.answerOptionList.length === 0) {
-			let self = this;
-			AnswerOptionCollection.find({
-				hashtag: options.hashtag,
-				questionIndex: options.questionIndex
-			}).fetch().forEach(function (answerOption) {
-				self.addAnswerOption(new DefaultAnswerOption(answerOption));
-			});
+			for (let i = 0; i < 4; i++) {
+				this.addAnswerOption(
+					new DefaultAnswerOption({
+						hashtag: options.hashtag,
+						questionIndex: options.questionIndex,
+						answerText: "",
+						answerOptionNumber: i,
+						isCorrect: 0
+					})
+				);
+			}
 		} else {
 			for (let i = 0; i < options.answerOptionList.length; i++) {
 				if (options.answerOptionList[i] instanceof AbstractAnswerOption) {

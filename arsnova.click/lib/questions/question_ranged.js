@@ -8,6 +8,7 @@ export class RangedQuestion extends AbstractQuestion {
 
 	constructor (options) {
 		super(options);
+		this.removeAllAnswerOptions();
 		this[rangeMin] = options.rangeMin || 0;
 		this[rangeMax] = options.rangeMax || 0;
 	}

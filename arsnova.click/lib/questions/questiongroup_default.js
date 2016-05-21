@@ -6,6 +6,10 @@ export class DefaultQuestionGroup extends AbstractQuestionGroup {
 	constructor (options) {
 		super(options);
 	}
+
+	clone () {
+		return new DefaultQuestionGroup(this.serialize());
+	}
 }
 
 EJSON.addType("DefaultQuestionGroup", function (value) {

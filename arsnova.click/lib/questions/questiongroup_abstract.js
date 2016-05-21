@@ -90,7 +90,7 @@ export class AbstractQuestionGroup {
 		return false;
 	}
 
-	typeName () {
+	static typeName () {
 		return this.constructor.name;
 	}
 

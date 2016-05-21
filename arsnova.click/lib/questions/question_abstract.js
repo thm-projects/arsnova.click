@@ -156,7 +156,7 @@ export class AbstractQuestion {
 		return false;
 	}
 
-	typeName () {
+	static typeName () {
 		return this.constructor.name;
 	}
 

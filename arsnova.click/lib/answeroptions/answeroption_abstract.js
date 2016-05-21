@@ -80,7 +80,7 @@ export class AbstractAnswerOption {
 			answerOption.getIsCorrect() === this[isCorrect];
 	}
 
-	typeName () {
+	static typeName () {
 		return this.constructor.name;
 	}
 

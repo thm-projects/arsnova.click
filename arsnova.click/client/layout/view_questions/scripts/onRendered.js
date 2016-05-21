@@ -41,12 +41,12 @@ Template.createQuestionView.onRendered(function () {
 		}
 
 		lib.addQuestion(index);
+		lib.checkForValidQuestionText();
 	});
 	body.on('click', '.removeQuestion', function () {
 		index = EventManagerCollection.findOne().questionIndex;
+		lib.checkForValidQuestionText();
 	});
 
-	if ($('#questionText').val().length < 5) {
-		$('#questionText').addClass("invalidAnswerOption");
-	}
+	lib.checkForValidQuestionText();
 });

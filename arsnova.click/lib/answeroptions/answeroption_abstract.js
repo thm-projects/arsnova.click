@@ -50,11 +50,11 @@ export class AbstractAnswerOption {
 		return this[isCorrect];
 	}
 
-	setIsCorrect (isCorrect) {
-		if (typeof isCorrect !== "boolean") {
+	setIsCorrect (value) {
+		if (typeof value !== "boolean") {
 			throw new Error("Invalid argument for AnswerOption.setIsCorrect");
 		}
-		this[isCorrect] = isCorrect;
+		this[isCorrect] = value;
 	}
 
 	serialize () {

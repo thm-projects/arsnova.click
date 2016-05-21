@@ -40,16 +40,11 @@ Template.createTimerView.onRendered(function () {
 	});
 
 	lib.validationTrackerHandle = Tracker.autorun(()=> {
-		var validQuestions = Session.get("validQuestions");
-		if (!validQuestions) {
-			return;
-		}
-		var forwardButton = $('#forwardButton');
-		forwardButton.removeAttr("disabled");
-		for (var i = 0; i < validQuestions.length; i++) {
-			if (!validQuestions[i]) {
-				forwardButton.attr("disabled", "disabled");
-			}
+		const forwardButton = $('#forwardButton');
+		if (Session.get("questionGroup").isValid()) {
+			forwardButton.removeAttr("disabled");
+		} else {
+			forwardButton.attr("disabled", "disabled");
 		}
 	});
 });

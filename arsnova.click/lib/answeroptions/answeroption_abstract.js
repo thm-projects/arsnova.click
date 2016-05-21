@@ -36,7 +36,7 @@ export class AbstractAnswerOption {
 	}
 
 	setAnswerText (text) {
-		if (!text || !(text instanceof String)) {
+		if (typeof text !== "string") {
 			throw new Error("Invalid argument for AnswerOption.setAnswerText");
 		}
 		this[answerText] = text;
@@ -51,7 +51,7 @@ export class AbstractAnswerOption {
 	}
 
 	setIsCorrect (isCorrect) {
-		if (!isCorrect || !(isCorrect instanceof Boolean)) {
+		if (typeof isCorrect !== "boolean") {
 			throw new Error("Invalid argument for AnswerOption.setIsCorrect");
 		}
 		this[isCorrect] = isCorrect;

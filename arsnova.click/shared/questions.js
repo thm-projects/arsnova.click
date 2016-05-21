@@ -24,35 +24,34 @@ import {EventManagerCollection, questionIndexSchema} from '/lib/eventmanager/col
 
 Meteor.methods({
 	"QuestionGroupCollection.insert": function (questionGroup) {
-		console.log("insert", questionGroup);
 		questionGroupSchema.validate({
-			hashtag: questionGroup.getHashtag(),
-			questionList: questionGroup.getQuestionList()
+			hashtag: questionGroup.hashtag,
+			questionList: questionGroup.questionList
 		});
 
 		const query = {};
 		if (Meteor.isServer) {
-			query.hashtag = questionGroup.getHashtag();
+			query.hashtag = questionGroup.hashtag;
 		}
 		if (QuestionGroupCollection.find(query).count() > 0) {
 			QuestionGroupCollection.update(query, questionGroup);
 		} else {
 			QuestionGroupCollection.insert(questionGroup);
-			for (let i = 0; i < questionGroup.getQuestionList().length; i++) {
-				const questionItem = questionGroup.getQuestionList()[i];
-				for (let j = 0; j < questionItem.getAnswerOptionList(); j++) {
-					const answerItem = questionItem.getAnswerOptionList()[j];
+			for (let i = 0; i < questionGroup.questionList.length; i++) {
+				const questionItem = questionGroup.questionList[i];
+				for (let j = 0; j < questionItem.answerOptionList; j++) {
+					const answerItem = questionItem.answerOptionList[j];
 					Meteor.call("AnswerOptionCollection.addOption", {
-						hashtag: questionGroup.getHashtag(),
-						questionIndex: questionItem.getQuestionIndex(),
-						answerText: answerItem.getAnswerText(),
-						answerOptionNumber: answerItem.getAnswerOptionNumber(),
-						isCorrect: answerItem.getIsCorrect()
+						hashtag: questionGroup.hashtag,
+						questionIndex: questionItem.questionIndex,
+						answerText: answerItem.answerText,
+						answerOptionNumber: answerItem.answerOptionNumber,
+						isCorrect: answerItem.isCorrect
 					});
 				}
 			}
 		}
-		EventManagerCollection.update({hashtag: questionGroup.getHashtag()}, {
+		EventManagerCollection.update({hashtag: questionGroup.hashtag}, {
 			$push: {
 				eventStack: {
 					key: "QuestionGroupCollection.insert",
@@ -66,16 +65,16 @@ Meteor.methods({
 			hashtag: hashtagSchema,
 			questionIndex: questionIndexSchema,
 			questionText: questionTextSchema
-		}).validate({hashtag: questionItem.getHashtag(), questionIndex: questionItem.getQuestionIndex(), questionText: questionItem.getQuestionText()});
+		}).validate({hashtag: questionItem.hashtag, questionIndex: questionItem.getQuestionIndex(), questionText: questionItem.getQuestionText()});
 
 		const query = {};
 		if (Meteor.isServer) {
-			query.hashtag = questionItem.getHashtag();
+			query.hashtag = questionItem.hashtag;
 		}
 		var questionGroup = QuestionGroupCollection.findOne(query);
 		if (!questionGroup) {
 			QuestionGroupCollection.insert({
-				hashtag: questionItem.getHashtag(),
+				hashtag: questionItem.hashtag,
 				questionList: [questionItem]
 			});
 		} else {
@@ -86,7 +85,7 @@ Meteor.methods({
 			}
 			QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
 		}
-		EventManagerCollection.update({hashtag: questionItem.getHashtag()}, {
+		EventManagerCollection.update({hashtag: questionItem.hashtag}, {
 			$push: {
 				eventStack: {
 					key: "QuestionGroupCollection.addQuestion",
@@ -115,6 +114,22 @@ Meteor.methods({
 				eventStack: {
 					key: "QuestionGroupCollection.addQuestion",
 					value: {questionIndex: questionIndex}
+				}
+			}
+		});
+	},
+	"QuestionGroup.persist": function (questionGroupElement) {
+		new SimpleSchema({
+			hashtag: hashtagSchema
+		}).validate({hashtag: questionGroupElement.hashtag});
+
+		Meteor.call("QuestionGroupCollection.insert", questionGroupElement);
+
+		EventManagerCollection.update({hashtag: questionGroupElement.hashtag}, {
+			$push: {
+				eventStack: {
+					key: "QuestionGroupCollection.persist",
+					value: {questionGroupElement: questionGroupElement}
 				}
 			}
 		});

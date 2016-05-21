@@ -40,11 +40,28 @@ export const questionGroupSchema = new SimpleSchema({
 	hashtag: hashtagSchema,
 	questionList: {
 		/* The index is defined in the EventManager.questionIndex variable. The arrays index represents the questionIndex. */
-		type: [AbstractQuestion]
-	}/*,
+		type: [Object]
+	},
+	"questionList.$.hashtag": {
+		type: hashtagSchema,
+		optional: true
+	},
+	"questionList.$.type": {
+		type: String,
+		optional: true
+	},
 	"questionList.$.questionText": {
 		type: questionTextSchema,
 		optional: true
+	},
+	"questionList.$.questionIndex": {
+		type: Number,
+		optional: true
+	},
+	"questionList.$.answerOptionList": {
+		type: [Object],
+		optional: true,
+		blackbox: true
 	},
 	"questionList.$.timer": {
 		type: timerSchema
@@ -52,7 +69,7 @@ export const questionGroupSchema = new SimpleSchema({
 	"questionList.$.startTime": {
 		type: startTimeSchema,
 		optional: true
-	}*/
+	}
 });
 
 //QuestionGroupCollection.attachSchema(questionGroupSchema);

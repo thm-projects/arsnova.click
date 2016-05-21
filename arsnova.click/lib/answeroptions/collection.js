@@ -33,9 +33,7 @@ export const answerOptionNumberSchema = {
 	min: 0
 };
 export const isCorrectSchema = {
-	type: Number,
-	min: 0,
-	max: 1
+	type: Boolean
 };
 export const answerOptionsCollectionSchema = new SimpleSchema({
 	hashtag: {

@@ -20,7 +20,7 @@ import {Session} from 'meteor/session';
 export let buzzsound1 = null;
 
 export const whistleSound = new buzz.sound('/sounds/whistle.mp3', {
-	volume: Session.get("slider2")
+	volume: Session.get("slider2") || 40
 });
 
 export function setBuzzsound1(songName) {

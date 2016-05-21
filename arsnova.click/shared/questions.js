@@ -143,7 +143,7 @@ Meteor.methods({
 		return (AnswerOptionCollection.find({
 			hashtag: hashtag,
 			questionIndex: questionIndex,
-			isCorrect: 1
+			isCorrect: true
 		}).count() === 1);
 	},
 	"Question.setTimer": function ({hashtag, questionIndex, timer}) {

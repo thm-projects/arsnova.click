@@ -81,13 +81,13 @@ Template.liveResults.helpers({
 	showLeaderBoardButton: function (index) {
 		return !Session.get("countdownInitialized") && (AnswerOptionCollection.find({
 				questionIndex: index,
-				isCorrect: 1
+				isCorrect: true
 			}).count() > 0);
 	},
 	isMC: function (index) {
 		return AnswerOptionCollection.find({
 				questionIndex: index,
-				isCorrect: 1
+				isCorrect: true
 			}).count() > 1;
 	},
 	mcOptions: function (index) {
@@ -99,7 +99,7 @@ Template.liveResults.helpers({
 		const correctAnswers = [];
 		AnswerOptionCollection.find({
 			questionIndex: index,
-			isCorrect: 1
+			isCorrect: true
 		}, {fields: {"answerOptionNumber": 1}}).forEach(function (answer) {
 			correctAnswers.push(answer.answerOptionNumber);
 		});
@@ -174,7 +174,7 @@ Template.liveResults.helpers({
 
 		var correctAnswerOptions = AnswerOptionCollection.find({
 			questionIndex: index,
-			isCorrect: 1
+			isCorrect: true
 		}).count();
 		AnswerOptionCollection.find({questionIndex: index}, {sort: {'answerOptionNumber': 1}}).forEach(function (value) {
 			var amount = ResponsesCollection.find({
@@ -235,7 +235,7 @@ Template.liveResults.helpers({
 		return Session.get("sessionClosed") && questionDoc.questionList.length > 1 && eventDoc.questionIndex >= questionDoc.questionList.length - 1;
 	},
 	hasCorrectAnswerOptions: ()=> {
-		return AnswerOptionCollection.find({isCorrect: 1}).count() > 0;
+		return AnswerOptionCollection.find({isCorrect: true}).count() > 0;
 	},
 	showQuestionDialog: ()=> {
 		let eventDoc = EventManagerCollection.findOne();

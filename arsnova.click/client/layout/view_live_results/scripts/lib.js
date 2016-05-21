@@ -91,7 +91,7 @@ export function startCountdown(index) {
 		$('.disableOnActiveCountdown').removeAttr("disabled");
 		if (index + 1 >= QuestionGroupCollection.findOne().questionList.length) {
 			Session.set("sessionClosed", true);
-			if (Session.get("isOwner") && AnswerOptionCollection.find({isCorrect: 1}).count() > 0) {
+			if (Session.get("isOwner") && AnswerOptionCollection.find({isCorrect: true}).count() > 0) {
 				routeToLeaderboardTimer = setTimeout(() => {
 					Session.set("showGlobalRanking", true);
 					Router.go("/" + Router.current().params.quizName + "/statistics");

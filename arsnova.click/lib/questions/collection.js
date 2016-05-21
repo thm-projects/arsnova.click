@@ -19,7 +19,6 @@ import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {hashtagSchema} from '../hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {AbstractQuestion} from "./question_abstract";
 
 export const QuestionGroupCollection = new Mongo.Collection("questionGroup");
 export const questionTextSchema = {

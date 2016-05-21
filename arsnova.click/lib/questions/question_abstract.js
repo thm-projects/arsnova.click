@@ -1,4 +1,3 @@
-import {AnswerOptionCollection} from '../answeroptions/collection.js';
 import {AbstractAnswerOption} from '../answeroptions/answeroption_abstract.js';
 import {DefaultAnswerOption} from '../answeroptions/answeroption_default.js';
 

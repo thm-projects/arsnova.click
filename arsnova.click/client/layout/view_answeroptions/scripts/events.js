@@ -19,7 +19,6 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {DefaultAnswerOption} from '/lib/answeroptions/answeroption_default.js';
 import * as localData from '/lib/local_storage.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {parseAnswerOptionInput} from './lib.js';

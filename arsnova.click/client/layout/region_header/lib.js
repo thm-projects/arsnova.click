@@ -17,10 +17,6 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
-import {TAPi18n} from 'meteor/tap:i18n';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
-import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 
 export function addNewQuestion(callback) {

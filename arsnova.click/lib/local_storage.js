@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {AbstractQuestionGroup} from "/lib/questions/questiongroup_abstract.js";
 import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";

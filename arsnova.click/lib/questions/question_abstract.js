@@ -65,7 +65,7 @@ export class AbstractQuestion {
 	}
 
 	/**
-	 * Gets the Hashtag of the questionGroup instance
+	 * Returns the Hashtag of the Question instance
 	 * @returns {String} The hashtag identifying the session
 	 */
 	getHashtag () {
@@ -141,7 +141,7 @@ export class AbstractQuestion {
 	}
 
 	/**
-	 * Adds a new answeroption to the Question instance
+	 * Adds a new AnswerOption to the Question instance
 	 * @param {AbstractAnswerOption} answerOption The AnswerOption instance to be added
 	 * @param {Number} [index] An optional index where the AnswerOption instance should be added. If not set or set to an invalid value the instance is added to the end of the answerOptionList
 	 * @throws {Error} If the answerOption is not of tye AbstractAnswerOption
@@ -186,7 +186,7 @@ export class AbstractQuestion {
 	}
 
 	/**
-	 * Serialized the instance object to a JSON compatible object
+	 * Serialize the instance object to a JSON compatible object
 	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
 	 */
 	serialize () {

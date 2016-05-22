@@ -65,6 +65,9 @@ export class AbstractQuestionGroup {
 			throw new Error("Invalid argument list for QuestionGroup.removeQuestion");
 		}
 		this[questionList].splice(index, 1);
+		for (let i = index; i < this.getQuestionList().length; i++) {
+			this.getQuestionList()[i].setQuestionIndex(i);
+		}
 	}
 
 	/**

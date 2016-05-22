@@ -85,7 +85,7 @@ export class AbstractQuestion {
 	}
 
 	/**
-	 * Returns the current set question text
+	 * Returns the currently set question text
 	 * @returns {String} The current question text
 	 */
 	getQuestionText () {
@@ -98,6 +98,16 @@ export class AbstractQuestion {
 	 */
 	getQuestionIndex () {
 		return this[questionIndex];
+	}
+
+	/**
+	 * Sets the index of the question and populates the changes to the AnswerOptions of this Question instance
+	 */
+	setQuestionIndex (index) {
+		this[questionIndex] = index;
+		for (let i = 0; i < this.getAnswerOptionList().length; i++) {
+			this.getAnswerOptionList()[i].setQuestionIndex(index);
+		}
 	}
 
 	/**

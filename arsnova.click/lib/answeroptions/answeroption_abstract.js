@@ -47,6 +47,13 @@ export class AbstractAnswerOption {
 	}
 
 	/**
+	 * Sets the questionIndex this AnswerOption belongs to
+	 */
+	setQuestionIndex (index) {
+		this[questionIndex] = index;
+	}
+
+	/**
 	 * Returns the currently set answer text displayed during a quiz
 	 * @returns {String} The answer text which will be displayed during a quiz
 	 */

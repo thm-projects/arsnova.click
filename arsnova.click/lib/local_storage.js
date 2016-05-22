@@ -20,7 +20,7 @@ import {AbstractQuestionGroup} from "/lib/questions/questiongroup_abstract.js";
 import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
 import {AbstractQuestion} from "/lib/questions/question_abstract.js";
 import {DefaultAnswerOption} from "/lib/answeroptions/answeroption_default.js";
-import {SingleChoiceQuestion} from "/lib/questions/question_choice_single.js";
+import {MultipleChoiceQuestion} from "/lib/questions/question_choice_multiple.js";
 
 export function getLanguage() {
 	return $.parseJSON(localStorage.getItem("__amplify__tap-i18n-language"));
@@ -182,16 +182,14 @@ export function reenterSession(hashtag) {
 					isCorrect: sessionData.questionList[i].answers[j].isCorrect === 1
 				}));
 			}
-			newQuestionGroup.addQuestion(new SingleChoiceQuestion({
+			newQuestionGroup.addQuestion(new MultipleChoiceQuestion({
 				hashtag: hashtag,
 				questionIndex: i,
 				questionText: sessionData.questionList[i].questionText,
 				timer: sessionData.questionList[i].timer / 1000,
 				startTime: 0,
 				answerOptionList: answerOptions
-			}),
-			i
-			);
+			}));
 		}
 		localStorage.setItem(newQuestionGroup.getHashtag(), JSON.stringify(newQuestionGroup.serialize()));
 		sessionData = newQuestionGroup.serialize();

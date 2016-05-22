@@ -102,6 +102,7 @@ export class AbstractQuestion {
 
 	/**
 	 * Sets the index of the question and populates the changes to the AnswerOptions of this Question instance
+	 * @param {Number} index The new index of the question
 	 */
 	setQuestionIndex (index) {
 		this[questionIndex] = index;

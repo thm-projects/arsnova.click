@@ -48,6 +48,7 @@ export class AbstractAnswerOption {
 
 	/**
 	 * Sets the questionIndex this AnswerOption belongs to
+	 * @param {Number} index The new index of the question this AnswerOption belongs to
 	 */
 	setQuestionIndex (index) {
 		this[questionIndex] = index;

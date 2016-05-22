@@ -19,6 +19,8 @@ import {Mongo} from 'meteor/mongo';
 import {AbstractQuestionGroup} from "/lib/questions/questiongroup_abstract.js";
 import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
 import {AbstractQuestion} from "/lib/questions/question_abstract.js";
+import {DefaultAnswerOption} from "/lib/answeroptions/answeroption_default.js";
+import {SingleChoiceQuestion} from "/lib/questions/question_choice_single.js";
 
 export function getLanguage() {
 	return $.parseJSON(localStorage.getItem("__amplify__tap-i18n-language"));
@@ -151,17 +153,48 @@ export function addAnswers({hashtag, questionIndex, answerOptionNumber, answerTe
 
 export function reenterSession(hashtag) {
 	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
-		return;
+		throw new TypeError("Undefined or illegal hashtag provided");
 	}
 
 	const sessionDataString = localStorage.getItem(hashtag);
 	if (!sessionDataString) {
-		return;
+		throw new TypeError("Undefined session data");
 	}
 
-	const sessionData = JSON.parse(sessionDataString);
-	if (typeof sessionData !== "object" || typeof sessionData.type === "undefined") {
-		return;
+	let sessionData = JSON.parse(sessionDataString);
+	if (typeof sessionData !== "object") {
+		throw new TypeError("Illegal session data");
+	}
+	if (typeof sessionData.type === "undefined") {
+		// Legacy mode -> Convert old session data to new OO style
+		const newQuestionGroup = new DefaultQuestionGroup({
+			hashtag: hashtag,
+			questionList: []
+		});
+		for (let i = 0; i < sessionData.questionList.length; i++) {
+			const answerOptions = [];
+			for (let j = 0; j < sessionData.questionList[i].answers.length; j++) {
+				answerOptions.push(new DefaultAnswerOption({
+					hashtag: hashtag,
+					questionIndex: i,
+					answerOptionNumber: j,
+					answerText: sessionData.questionList[i].answers[j].answerText,
+					isCorrect: sessionData.questionList[i].answers[j].isCorrect === 1
+				}));
+			}
+			newQuestionGroup.addQuestion(new SingleChoiceQuestion({
+				hashtag: hashtag,
+				questionIndex: i,
+				questionText: sessionData.questionList[i].questionText,
+				timer: sessionData.questionList[i].timer / 1000,
+				startTime: 0,
+				answerOptionList: answerOptions
+			}),
+			i
+			);
+		}
+		localStorage.setItem(newQuestionGroup.getHashtag(), JSON.stringify(newQuestionGroup.serialize()));
+		sessionData = newQuestionGroup.serialize();
 	}
 
 	switch (sessionData.type) {

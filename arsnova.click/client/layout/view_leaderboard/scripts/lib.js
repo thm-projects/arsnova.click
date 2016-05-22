@@ -85,7 +85,7 @@ function getLeaderBoardItemsByIndex(index) {
 		var totalResponseTime = 0;
 		if ((userResponses.count() === rightAnswerOptions.count()) && (userResponses.count() > 0) && userHasRightAnswers) {
 			userResponses.forEach(function (userResponse) {
-				param.isCorrect = 1;
+				param.isCorrect = true;
 				param.answerOptionNumber = userResponse.answerOptionNumber;
 				var checkAnswerOptionDoc = AnswerOptionCollection.findOne(param);
 				delete param.isCorrect;

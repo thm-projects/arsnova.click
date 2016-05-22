@@ -11,6 +11,8 @@ export class AbstractQuestionGroup {
 	 * Constructor super method for creating a QuestionGroup instance
 	 * This method cannot be invoked directly.
 	 * @param {{hashtag: String, questionList: Array}} options An object containing the hashtag and an optional questionList
+	 * @throws {TypeError} If this method is invoked directly
+	 * @throws {Error} If the hashtag of the options Object is missing
 	 */
 	constructor (options) {
 		if (this.constructor === AbstractQuestionGroup) {
@@ -96,9 +98,9 @@ export class AbstractQuestionGroup {
 	}
 
 	/**
-	 * Checks if the properties of this instance are valid. Checks also recursively all including question instances
+	 * Checks if the properties of this instance are valid. Checks also recursively all including Question instances
 	 * and summarizes their result of calling .isValid()
-	 * @returns {boolean} True, if the complete questionGroup instance is valid, False otherwise
+	 * @returns {boolean} True, if the complete QuestionGroup instance is valid, False otherwise
 	 */
 	isValid () {
 		let questionListValid = true;
@@ -154,7 +156,7 @@ export class AbstractQuestionGroup {
 	}
 
 	/**
-	 * Quick way to insert a default question to the questionGroup object.
+	 * Quick way to insert a default question to the QuestionGroup instance.
 	 * @param {Number} [index] The index where the question should be inserted. If not passed, it will be added to the end of the questionList
 	 */
 	addDefaultQuestion (index) {

@@ -68,7 +68,7 @@ export class AbstractQuestionGroup {
 	}
 
 	/**
-	 * Gets the Hashtag of the questionGroup instance
+	 * Returns the Hashtag of the questionGroup instance
 	 * @returns {String} The hashtag identifying the session
 	 */
 	getHashtag () {
@@ -76,7 +76,7 @@ export class AbstractQuestionGroup {
 	}
 
 	/**
-	 * Gets the questionList of the questionGroup instance
+	 * Returns the questionList of the questionGroup instance
 	 * @returns {Array} The current list of questions
 	 */
 	getQuestionList () {
@@ -84,7 +84,7 @@ export class AbstractQuestionGroup {
 	}
 
 	/**
-	 * Serialized the instance object to a JSON compatible object
+	 * Serialize the instance object to a JSON compatible object
 	 * @returns {{hashtag: String, type: String, questionList: Array}}
 	 */
 	serialize () {

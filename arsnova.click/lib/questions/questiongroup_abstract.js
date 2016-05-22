@@ -39,7 +39,7 @@ export class AbstractQuestionGroup {
 
 	/**
 	 * Adds a question to the questionGroup instance
-	 * @param {AbstractQuestion} question The question which extends {AbstractQuestion} to be added
+	 * @param {SingleChoiceQuestion|MultipleChoiceQuestion|RangedQuestion|SurveyQuestion} question The question which extends {AbstractQuestion} to be added
 	 * @param {Number} [index] An optional index position where the item should be added
 	 * @returns {AbstractQuestion|Null} if successful returns the inserted Question otherwise Null
 	 */

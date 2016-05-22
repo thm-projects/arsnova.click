@@ -7,6 +7,11 @@ const questionList = Symbol("questionList");
 
 export class AbstractQuestionGroup {
 
+	/**
+	 * Constructor super method for creating a QuestionGroup instance
+	 * This method cannot be invoked directly.
+	 * @param {{hashtag: String, questionList: Array}} options An object containing the hashtag and an optional questionList
+	 */
 	constructor (options) {
 		if (this.constructor === AbstractQuestionGroup) {
 			throw new TypeError("Cannot construct Abstract instances directly");
@@ -30,6 +35,12 @@ export class AbstractQuestionGroup {
 		this[hashtag] = options.hashtag;
 	}
 
+	/**
+	 * Adds a question to the questionGroup instance
+	 * @param {AbstractQuestion} question The question which extends {AbstractQuestion} to be added
+	 * @param {Number} [index] An optional index position where the item should be added
+	 * @returns {AbstractQuestion|Null} if successful returns the inserted Question otherwise Null
+	 */
 	addQuestion (question, index) {
 		if (question instanceof AbstractQuestion) {
 			if (typeof index === "undefined" || index >= this.getQuestionList().length) {
@@ -39,23 +50,41 @@ export class AbstractQuestionGroup {
 			}
 			return question;
 		}
+		return null;
 	}
 
+	/**
+	 * Removes a question by the specified index
+	 * @param {Number} index The index of the question to be removed
+	 * @throws {Error} If the index is not passed, smaller than 0 or larger than the length of the questionList
+	 */
 	removeQuestion (index) {
-		if (!index || index < 0 || index > this.getQuestionList().length) {
+		if (typeof index === "undefined" || index < 0 || index > this.getQuestionList().length) {
 			throw new Error("Invalid argument list for QuestionGroup.removeQuestion");
 		}
 		this[questionList].splice(index, 1);
 	}
 
+	/**
+	 * Gets the Hashtag of the questionGroup instance
+	 * @returns {String} The hashtag identifying the session
+	 */
 	getHashtag () {
 		return this[hashtag];
 	}
 
+	/**
+	 * Gets the questionList of the questionGroup instance
+	 * @returns {Array} The current list of questions
+	 */
 	getQuestionList () {
 		return this[questionList];
 	}
 
+	/**
+	 * Serialized the instance object to a JSON compatible object
+	 * @returns {{hashtag: String, type: String, questionList: Array}}
+	 */
 	serialize () {
 		let questionListSerialized = [];
 		this.getQuestionList().forEach(function (question) { questionListSerialized.push(question.serialize()); });
@@ -66,6 +95,11 @@ export class AbstractQuestionGroup {
 		};
 	}
 
+	/**
+	 * Checks if the properties of this instance are valid. Checks also recursively all including question instances
+	 * and summarizes their result of calling .isValid()
+	 * @returns {boolean} True, if the complete questionGroup instance is valid, False otherwise
+	 */
 	isValid () {
 		let questionListValid = true;
 		this.getQuestionList().forEach(function (question) {
@@ -76,6 +110,12 @@ export class AbstractQuestionGroup {
 		return questionListValid;
 	}
 
+	/**
+	 * Checks for equivalence relations to another questionGroup instance. Also part of the EJSON interface
+	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-equals
+	 * @param {AbstractQuestionGroup} questionGroup The questionGroup instance which should be checked
+	 * @returns {boolean} True if both instances are completely equal, False otherwise
+	 */
 	equals (questionGroup) {
 		if (questionGroup instanceof AbstractQuestionGroup) {
 			if (questionGroup.getHashtag() !== this.getHashtag()) {
@@ -94,14 +134,29 @@ export class AbstractQuestionGroup {
 		return false;
 	}
 
+	/**
+	 * Part of EJSON interface.
+	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
+	 * @returns {String} The name of the instantiated subclass
+	 */
 	typeName () {
 		return this.constructor.name;
 	}
 
+	/**
+	 * Part of EJSON interface
+	 * @see AbstractQuestionGroup.serialize()
+	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-toJSONValue
+	 * @returns {{hashtag, type, questionList}|{hashtag: String, type: String, questionList: Array}}
+	 */
 	toJSONValue () {
 		return this.serialize();
 	}
 
+	/**
+	 * Quick way to insert a default question to the questionGroup object.
+	 * @param {Number} [index] The index where the question should be inserted. If not passed, it will be added to the end of the questionList
+	 */
 	addDefaultQuestion (index) {
 		if (typeof index === "undefined" || index >= this.getQuestionList().length) {
 			index = this.getQuestionList().length;

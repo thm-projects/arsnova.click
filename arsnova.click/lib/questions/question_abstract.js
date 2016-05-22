@@ -15,7 +15,7 @@ export class AbstractQuestion {
 	 * This method cannot be invoked directly.
 	 * @param {{hashtag:String,questionText:String,timer:Number,startTime:Number,questionIndex:Number,type:String,answerOptionList:Array}} options An object containing the parameters for creating a Question instance. The type and answerOptionList attributes are optional.
 	 * @throws {TypeError} If this method is invoked directly, the options Object is undefined or the optional type attribute is not matching the constructor name
-	 * @throws {Error} If the hashtag, the questionText, the timer, the startTime or the questionIndex attribues of the options Object are missing
+	 * @throws {Error} If the hashtag, the questionText, the timer, the startTime or the questionIndex attributes of the options Object are missing
 	 */
 	constructor (options) {
 		if (this.constructor === AbstractQuestion) {

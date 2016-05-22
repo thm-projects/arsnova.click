@@ -73,7 +73,7 @@ export class AbstractQuestion {
 	}
 
 	/**
-	 * Sets the question text for the Question instance
+	 * Sets the question text for the Question instance displayed during the quiz
 	 * @param {String} text The text which will be displayed during the quiz
 	 * @throws {Error} If the text is not of type String
 	 */

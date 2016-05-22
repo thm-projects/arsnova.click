@@ -47,7 +47,7 @@ export class AbstractAnswerOption {
 	}
 
 	/**
-	 * Returns the currently set answer text
+	 * Returns the currently set answer text displayed during a quiz
 	 * @returns {String} The answer text which will be displayed during a quiz
 	 */
 	getAnswerText () {
@@ -75,7 +75,7 @@ export class AbstractAnswerOption {
 	}
 
 	/**
-	 * Returns if this AnswerOption instance is currently marked as correct
+	 * Returns whether this AnswerOption instance is currently marked as correct
 	 * @returns {Boolean} True if this AnswerOption instance is marked as correct, False otherwise
 	 */
 	getIsCorrect () {
@@ -95,7 +95,7 @@ export class AbstractAnswerOption {
 	}
 
 	/**
-	 * Serialized the instance object to a JSON compatible object
+	 * Serialize the instance object to a JSON compatible object
 	 * @returns {{hashtag: String, type: String, questionIndex: Number, answerText: String, answerOptionNumber: Number, isCorrect: Boolean}}
 	 */
 	serialize () {

@@ -19,6 +19,8 @@ import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {WebApp} from 'meteor/webapp';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {BannedNicks} from '/lib/banned_nicks/collection.js';
+import {forbiddenNicks} from './forbiddenNicks.js';
 
 if (Meteor.isServer) {
 	Meteor.startup(function () {
@@ -43,6 +45,11 @@ if (Meteor.isServer) {
 
 			HashtagsCollection.insert(blockedHashtag1);
 			HashtagsCollection.insert(blockedHashtag2);
+		}
+		if (BannedNicks && !BannedNicks.findOne()) {
+			forbiddenNicks.forEach(function (item) {
+				BannedNicks.insert({userNick: item});
+			});
 		}
 	});
 }

@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {BannedNicks} from '/lib/banned_nicks/collection.js';
 
 function componentToHex(c) {
 	var hex = c.toString(16);
@@ -40,14 +41,7 @@ export function transformForegroundColor(rgbObj) {
 }
 
 export function isNickAllowed(nick) {
-	/* jshint node: true */
-	var forbiddenNicks = require("../../../../public/forbiddenNicks.json");
-	for (var i = 0; i < forbiddenNicks.length; ++i) {
-		if (nick.toLowerCase() === forbiddenNicks[i].toLowerCase()) {
-			return false;
-		}
-	}
-	return true;
+	return BannedNicks.findOne({userNick: nick.toUpperCase()});
 }
 
 /**

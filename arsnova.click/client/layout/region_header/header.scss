@@ -74,6 +74,9 @@ p.header-layout {
 	left: 0;
 	z-index: 1050;
 	position: fixed;
+	border-radius: $corner-radius;
+	border: 1px solid white;
+	background-color: white;
 
 	canvas {
 		&:hover {
@@ -100,7 +103,6 @@ p.header-layout {
 .qr-code-label {
 	font-size: 3vh;
 	color: black;
-	background: white;
 	text-align: center;
 	line-height: 50px;
 }

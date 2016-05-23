@@ -135,7 +135,7 @@ export function calculateWindow() {
 
 export function checkForValidQuestionText() {
 	var questionText = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
-	if (questionText.length === 0 && questionTextLengthWithoutMarkdownSyntax(questionText) < 5) {
+	if (questionTextLengthWithoutMarkdownSyntax(questionText) < 5) {
 		$('#questionText').addClass("invalidAnswerOption");
 	} else {
 		$('#questionText').removeClass("invalidAnswerOption");

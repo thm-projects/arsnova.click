@@ -145,15 +145,24 @@ Template.header.events({
 	"click .qr-code-button": function () {
 		const url = window.location.href.replace("/memberlist","");
 		const qrCodeContainer = $(".qr-code-container");
+		const qrCodeSize = function () {
+			let width = $(window).outerWidth();
+			const maxWidth = 1024;
+			if (width > maxWidth) {
+				width = maxWidth;
+			}
+			return width * 0.7;
+		};
 		const calcQrCodeContainerSize = function () {
 			qrCodeContainer.css({
-				top: $(window).outerHeight() / 2 - $(window).outerWidth() * 0.7 / 2,
-				left: $(window).outerWidth() / 2 - $(window).outerWidth() * 0.7 / 2
+				top: $(window).outerHeight() / 2 - qrCodeSize() / 2,
+				left: $(window).outerWidth() / 2 - qrCodeSize() / 2
 			});
+			$('.qr-code-container-close').css("left", qrCodeSize() + 5);
 			qrCodeContainer.find("canvas").remove();
 			qrCodeContainer.find(".qr-code-item").qrcode({
 				background: "white",
-				size: $(window).outerWidth() * 0.7,
+				size: qrCodeSize(),
 				text: url,
 				label: url.replace("http://",""),
 				mode: 2,

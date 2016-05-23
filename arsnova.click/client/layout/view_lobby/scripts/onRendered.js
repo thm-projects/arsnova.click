@@ -34,11 +34,8 @@ Template.memberlist.onRendered(function () {
 			} else {
 				$(".hashtag_in_title").css("font-size", "3vw");
 			}
-			if ($(document).width() < 1200) {
-				$(".header-titel").css("font-size", "6vw");
-				$(".header-titel").css("margin-top", titelMarginTop * 0.1);
-			} else {
-				$(".header-titel").css("font-size", "5vw");
+			$(".header-titel").css("font-size", "5vw");
+			if ($(document).width() >= 1200) {
 				$(".header-titel").css("margin-top", titelMarginTop * 0.2);
 			}
 		} else if (hashtagLength > 10 && hashtagLength <= 15) {

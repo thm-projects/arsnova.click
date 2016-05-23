@@ -41,7 +41,7 @@ export function transformForegroundColor(rgbObj) {
 }
 
 export function isNickAllowed(nick) {
-	return BannedNicks.findOne({userNick: nick.toUpperCase()});
+	return typeof BannedNicks.findOne({userNick: {$regex: new RegExp(".*" + nick + ".*", "i")}}) === "undefined";
 }
 
 /**

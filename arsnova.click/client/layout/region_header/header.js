@@ -148,10 +148,6 @@ Template.header.events({
 		const qrCodeSize = function () {
 			let width = $(window).outerWidth();
 			const height = $(window).outerHeight();
-			const maxWidth = 1024;
-			if (width > maxWidth) {
-				width = maxWidth;
-			}
 			if (width > height) {
 				return height * 0.8;
 			}

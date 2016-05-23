@@ -151,7 +151,6 @@ Template.header.events({
 	"click .qr-code-button": function () {
 		const url = window.location.href.replace("/memberlist","");
 		const qrCodeContainer = $(".qr-code-container");
-		const qrCodeLabel = $('.qr-code-label');
 		const qrCodeSize = function () {
 			let width = $(window).outerWidth();
 			const height = $(window).outerHeight();

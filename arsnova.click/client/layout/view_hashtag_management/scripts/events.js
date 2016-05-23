@@ -228,7 +228,7 @@ Template.hashtagManagement.events({
 	},
 	"click .js-delete": function (event) {
 		const hashtagRow = $(event.currentTarget).parent().parent();
-		
+
 		new Splashscreen({
 			autostart: true,
 			templateName: "deleteConfirmationSplashscreen",
@@ -245,7 +245,6 @@ Template.hashtagManagement.events({
 				});
 			}
 		});
-
 	},
 	"change #js-import": function (event) {
 		var fileList = event.target.files;

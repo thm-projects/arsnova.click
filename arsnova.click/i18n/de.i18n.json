@@ -186,7 +186,11 @@
       "enter_question_here": "Gib hier die Frage ein",
       "format": "Format",
       "edit": "Bearbeiten",
-      "preview": "Vorschau"
+      "preview": "Vorschau",
+      "single_choice_question": "Single-Choice",
+      "multiple_choice_question": "Multiple-Choice",
+      "survey_question": "Umfrage",
+      "ranged_question": "Quizfrage mit Antwortintervall"
     },
     "timer": {
       "set_countdown": "Countdown einstellen",

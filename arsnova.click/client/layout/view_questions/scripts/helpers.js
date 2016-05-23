@@ -34,25 +34,25 @@ Template.createQuestionView.helpers({
 		return [
 			{
 				id: "SingleChoiceQuestion",
-				name: "Single-Choice",
+				translationName: "view.questions.single_choice_question",
 				selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].constructor.name === "SingleChoiceQuestion" ? 'selected' : ""
 			},
 			{
 				id: "MultipleChoiceQuestion",
-				name: "Multiple-Choice",
+				translationName: "view.questions.multiple_choice_question",
 				selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].constructor.name === "MultipleChoiceQuestion" ? 'selected' : ""
 			},
 			/*
 			Disabled because not yet implemented!
 			{
 				id: "RangedQuestion",
-				name: "Ranged answers",
+			 	translationName: "view.questions.ranged_question",
 				selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].constructor.name === "RangedQuestion" ? 'selected' : ""
 			},
 			*/
 			{
 				id: "SurveyQuestion",
-				name: "Survey",
+				translationName: "view.questions.survey_question",
 				selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].constructor.name === "SurveyQuestion" ? 'selected' : ""
 			}
 		];

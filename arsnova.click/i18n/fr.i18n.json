@@ -179,14 +179,18 @@
       "show_more": "Voir 1 plus",
       "show_more_plural": "Voir %s plus",
       "start_quiz": "Allons-y!",
-      "kick_member_confirmation": "Shall l'<span id=\"nickName\"></span> des participants être retiré de la session?",
+      "kick_member_confirmation": "Si les participants <span id=\"nickName\"></span> être retirés du jeu-questionnaire?",
       "add_kicked_member_to_ban_list": "Bannir définitivement les surnoms"
     },
     "questions": {
       "enter_question_here": "Entrez votre question ici",
       "format": "Format",
       "edit": "Modifier",
-      "preview": "Aperçu"
+      "preview": "Aperçu",
+      "single_choice_question": "Choix unique",
+      "multiple_choice_question": "Choix multiple",
+      "survey_question": "Enquête",
+      "ranged_question": "Question Quiz et réponses"
     },
     "timer": {
       "set_countdown": "Définir le compte à rebours",

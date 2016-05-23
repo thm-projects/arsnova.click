@@ -23,7 +23,7 @@
                 <div class="col-xs-12">
                     <select title="chooseQuestionType" class="round-corners textarea" id="chooseQuestionType">
                         {{#each questionTypes }}
-                            <option id="{{this.id}}" {{this.selected}}>{{this.name}}</option>
+                            <option id="{{this.id}}" {{this.selected}}>{{_ this.translationName}}</option>
                         {{/each}}
                     </select>
                 </div>

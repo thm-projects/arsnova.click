@@ -112,6 +112,7 @@
     "header": {
       "new_question": "Nouvelle question",
       "sound": "Sonner",
+      "qr_code": "QR Code",
       "reset": "Réinitialiser",
       "yes": "Oui",
       "no": "Non",

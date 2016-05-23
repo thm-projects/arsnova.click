@@ -15,6 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+@import "../global/styles/appearance.scss";
+@import "../global/styles/colors.scss";
+
 p.header-layout {
 	margin-left: 0;
 	margin-right: 0;
@@ -54,9 +57,44 @@ p.header-layout {
 	text-align: center;
 }
 
-.sound-button {
+.header-button {
 	text-align: center;
 	cursor: pointer;
+}
+
+.qr-code-button {
+	color: white;
+	&:hover {
+		color: darken(white, 20);
+	}
+}
+
+.qr-code-container {
+	top: 0;
+	left: 0;
+	z-index: 1050;
+	position: fixed;
+
+	canvas {
+		&:hover {
+			cursor: pointer;
+		}
+	}
+}
+.qr-code-container-close {
+	position: absolute;
+	font-size: 4vw;
+	color: white;
+
+	&:hover {
+		color: darken(white, 20);
+	}
+
+	.glyphicon-remove {
+		border: 1px solid black;
+		border-radius: $corner-radius;
+		cursor: pointer;
+	}
 }
 
 .sound-button-active {

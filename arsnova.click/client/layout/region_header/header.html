@@ -42,26 +42,26 @@
 									<img src="/images/arsnova_click.svg" alt="arsnova_click_logo"/>
 								</div>
 							</div>
-							<div class="col-xs-{{#if isInLobby}}6{{else}}8{{/if}}">
+							<div class="col-xs-{{#if isInLobby}}5{{else}}8{{/if}}">
 								<div class="text-center header-titel default-yellow-text-color">{{currentHashtag}}</div>
 							</div>
-							<div class="col-xs-{{#if isInLobby}}4{{else}}2{{/if}}">
+							<div class="col-xs-{{#if isInLobby}}5{{else}}2{{/if}}">
 								<div class="row">
                                     {{#if isInLobby}}
                                         <div class="col-xs-4 header-button qr-code-button">
-                                            <span class="glyphicon glyphicon-qrcode"></span>
+                                            <span class="glyphicon glyphicon-qrcode header-icon"></span>
                                             <p class="sound-button-text">{{_ "region.header.qr_code"}}</p>
                                         </div>
                                     {{/if}}
 
                                     <div class="col-xs-{{#if isInLobby}}4{{else}}6{{/if}} header-button sound-button sound-button-{{#unless isSoundEnabled}}in{{/unless}}active">
-                                        <span class=" glyphicon glyphicon-music kill-session-switch"></span>
+                                        <span class=" glyphicon glyphicon-music header-icon"></span>
                                         <p class="sound-button-text">{{_ "region.header.sound"}}</p>
                                     </div>
 
 									<div class="col-xs-{{#if isInLobby}}4{{else}}6{{/if}}">
 										<div class="kill-session-switch-wrapper">
-											<span class="glyphicon glyphicon-off kill-session-switch"></span>
+											<span class="glyphicon glyphicon-off header-icon"></span>
 											<p class="emergency-button-text">{{_ "region.header.reset"}}</p>
 										</div>
 									</div>

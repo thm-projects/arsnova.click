@@ -100,8 +100,6 @@ export function calculateTitelHeight() {
 	container.css("height", finalHeight);
 	container.css("margin-top", fixedTop.outerHeight());
 
-	$(".kill-session-switch-wrapper").css("top", $(".arsnova-logo").height() * 0.4);
-
 	return {
 		height: finalHeight,
 		marginTop: fixedTop.outerHeight()

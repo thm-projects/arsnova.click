@@ -117,7 +117,7 @@ export class AbstractQuestion {
 	 * @throws {Error} If the time is not of type Number
 	 */
 	setTimer (time) {
-		if (typeof text !== "number") {
+		if (typeof time !== "number") {
 			throw new Error("Invalid argument for Question.setTimer");
 		}
 		this[timer] = time;

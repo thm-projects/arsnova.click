@@ -30,6 +30,9 @@ Template.createAnswerOptions.helpers({
 		return String.fromCharCode(Nr + 65);
 	},
 	showDeleteButtonOnStart: function () {
+		if (!EventManagerCollection.findOne()) {
+			return;
+		}
 		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().length === 1 ? "hide" : "";
 	},
 	isValidAnswerOption: function (item) {

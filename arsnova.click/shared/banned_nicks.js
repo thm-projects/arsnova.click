@@ -16,8 +16,13 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
+import {userNickSchema} from '/lib/member_list/collection.js';
 import {BannedNicksCollection} from '/lib/banned_nicks/collection.js';
 
-Meteor.publish('BannedNicksCollection.public', function () {
-	return BannedNicksCollection.find();
+Meteor.methods({
+	'BannedNicksCollection.insert': function (nick) {
+		userNickSchema.validate({userNick: nick});
+
+		BannedNicksCollection.insert({userNick: nick});
+	}
 });

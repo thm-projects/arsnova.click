@@ -20,16 +20,16 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {userNickSchema} from '../member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
 
-export const BannedNicks = new Mongo.Collection("bannedNicks");
+export const BannedNicksCollection = new Mongo.Collection("bannedNicks");
 export const bannedNicksCollectionSchema = new SimpleSchema({
 	userNick: {
 		type: userNickSchema
 	}
 });
 
-BannedNicks.attachSchema(bannedNicksCollectionSchema);
+BannedNicksCollection.attachSchema(bannedNicksCollectionSchema);
 
-BannedNicks.deny({
+BannedNicksCollection.deny({
 	insert: function () {
 		return true;
 	},
@@ -41,7 +41,7 @@ BannedNicks.deny({
 	}
 });
 
-BannedNicks.allow({
+BannedNicksCollection.allow({
 	insert: function (userId, doc) {
 		return localData.containsHashtag(doc.hashtag);
 	},

@@ -21,7 +21,7 @@ import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import {parseAnswerOptionInput} from './lib.js';
+import {parseAnswerOptionInput, parseSingleAnswerOptionInput} from './lib.js';
 
 Template.createAnswerOptions.events({
 	"click .toggleCorrect": function (event) {
@@ -81,16 +81,8 @@ Template.createAnswerOptions.events({
 		}
 	},
 	"click #backButton": function () {
-		var err = parseAnswerOptionInput(EventManagerCollection.findOne().questionIndex);
-
-		if (err) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
-			});
-		} else {
-			Router.go("/" + Router.current().params.quizName + "/question");
-		}
+		parseAnswerOptionInput(EventManagerCollection.findOne().questionIndex);
+		Router.go("/" + Router.current().params.quizName + "/question");
 	},
 	"click #forwardButton": function () {
 		parseAnswerOptionInput(EventManagerCollection.findOne().questionIndex);
@@ -106,5 +98,8 @@ Template.createAnswerOptions.events({
 				$(event.currentTarget).closest(".form-group").next().find(".input-field").focus();
 			}
 		}
+	},
+	"input .input-field": function (event) {
+		parseSingleAnswerOptionInput(EventManagerCollection.findOne().questionIndex, $(event.currentTarget).attr("id").replace("answerOptionText_Number",""));
 	}
 });

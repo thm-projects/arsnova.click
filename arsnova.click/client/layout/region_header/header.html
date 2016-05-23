@@ -42,10 +42,10 @@
 									<img src="/images/arsnova_click.svg" alt="arsnova_click_logo"/>
 								</div>
 							</div>
-							<div class="col-xs-6">
+							<div class="col-xs-{{#if isInLobby}}6{{else}}8{{/if}}">
 								<div class="text-center header-titel default-yellow-text-color">{{currentHashtag}}</div>
 							</div>
-							<div class="col-xs-4">
+							<div class="col-xs-{{#if isInLobby}}4{{else}}2{{/if}}">
 								<div class="row">
                                     {{#if isInLobby}}
                                         <div class="col-xs-4 header-button qr-code-button">

@@ -52,3 +52,7 @@ export function connectEventManager(hashtag) {
 		Router.go("/" + hashtag + "/question");
 	});
 }
+
+export function trimIllegalChars(hashtag) {
+	return hashtag.replace(/ /g,"");
+}

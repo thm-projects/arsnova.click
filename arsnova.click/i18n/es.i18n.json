@@ -112,6 +112,7 @@
     "header": {
       "new_question": "Nueva pregunta",
       "sound": "Sonar",
+      "qr_code": "QR Code",
       "reset": "Reiniciar",
       "yes": "Sí",
       "no": "No",

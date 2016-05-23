@@ -53,6 +53,9 @@ Template.header.helpers({
 				return false;
 		}
 	},
+	isInLobby: function () {
+		return Router.current().route.getName() === ":quizName.memberlist";
+	},
 	isSoundEnabled: function () {
 		return HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).musicEnabled;
 	}
@@ -137,6 +140,38 @@ Template.header.events({
 				hashtagDoc.musicVolume = Session.get("slider2");
 				Meteor.call('HashtagsCollection.updateMusicSettings', hashtagDoc);
 			}
+		});
+	},
+	"click .qr-code-button": function () {
+		const url = window.location.href.replace("/memberlist","");
+		const qrCodeContainer = $(".qr-code-container");
+		const calcQrCodeContainerSize = function () {
+			qrCodeContainer.css({
+				top: $(window).outerHeight() / 2 - $(window).outerWidth() * 0.7 / 2,
+				left: $(window).outerWidth() / 2 - $(window).outerWidth() * 0.7 / 2
+			});
+			qrCodeContainer.find("canvas").remove();
+			qrCodeContainer.find(".qr-code-item").qrcode({
+				background: "white",
+				size: $(window).outerWidth() * 0.7,
+				text: url,
+				label: url.replace("http://",""),
+				mode: 2,
+				radius: 0.5,
+				minVersion: 6,
+				mSize: 0.05,
+				ecLevel: 'H'
+			});
+			qrCodeContainer.show();
+		};
+		const windowResizeHandler = function () {
+			calcQrCodeContainerSize();
+		};
+		$(window).on("resize", windowResizeHandler);
+		calcQrCodeContainerSize();
+		qrCodeContainer.on("click", function () {
+			$(window).off("resize", windowResizeHandler);
+			qrCodeContainer.hide();
 		});
 	}
 });

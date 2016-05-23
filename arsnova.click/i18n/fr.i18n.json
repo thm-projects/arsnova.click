@@ -177,7 +177,8 @@
       "show_more": "Voir 1 plus",
       "show_more_plural": "Voir %s plus",
       "start_quiz": "Allons-y!",
-      "kick_member_confirmation": "Shall l'<span id=\"nickName\"></span> des participants être retiré de la session?"
+      "kick_member_confirmation": "Shall l'<span id=\"nickName\"></span> des participants être retiré de la session?",
+      "add_kicked_member_to_ban_list": "Bannir définitivement les surnoms"
     },
     "questions": {
       "enter_question_here": "Entrez votre question ici",

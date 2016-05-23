@@ -170,7 +170,7 @@ Template.header.events({
 				text: url,
 				label: url.replace("http://",""),
 				mode: 2,
-				radius: 0.5,
+				quiet: 1,
 				minVersion: 6,
 				mSize: 0.05,
 				ecLevel: 'H'

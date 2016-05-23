@@ -137,7 +137,9 @@
       "quiz_management": "Stored Quizzes",
       "available_sessions": "These quizzes are stored in your browser:",
       "session_management": "Quiz Management",
-      "import": "Import quiz"
+      "import": "Import quiz",
+      "delete_session": "Delete quiz",
+      "delete_session_confirmation": "Shall the quiz '<span id=\"session_name\"></span>' be removed permanently?"
     },
     "leaderboard": {
       "title": {

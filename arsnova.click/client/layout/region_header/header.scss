@@ -63,9 +63,9 @@ p.header-layout {
 }
 
 .qr-code-button {
-	color: $input-background-color;
+	color: white;
 	&:hover {
-		color: lighten($input-background-color, 20);
+		color: darken(white, 20);
 	}
 }
 

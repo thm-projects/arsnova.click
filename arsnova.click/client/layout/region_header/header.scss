@@ -84,17 +84,25 @@ p.header-layout {
 .qr-code-container-close {
 	position: absolute;
 	font-size: 4vw;
-	color: white;
+	color: black;
 
 	&:hover {
-		color: darken(white, 20);
+		color: lighten(black, 20);
 	}
 
 	.glyphicon-remove {
 		border: 1px solid black;
+		background-color: white;
 		border-radius: $corner-radius;
 		cursor: pointer;
 	}
+}
+.qr-code-label {
+	font-size: 2vw;
+	color: black;
+	background: white;
+	text-align: center;
+	line-height: 50px;
 }
 
 .sound-button-active {

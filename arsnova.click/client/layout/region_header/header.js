@@ -61,6 +61,12 @@ Template.header.helpers({
 	}
 });
 
+Template.qrCodeDisplay.helpers({
+	getCurrentSessionName: function () {
+		return window.location.href.replace("/memberlist","").replace("http://","");
+	}
+});
+
 Template.header.events({
 	'click .kill-session-switch-wrapper, click .arsnova-logo': function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
@@ -145,6 +151,7 @@ Template.header.events({
 	"click .qr-code-button": function () {
 		const url = window.location.href.replace("/memberlist","");
 		const qrCodeContainer = $(".qr-code-container");
+		const qrCodeLabel = $('.qr-code-label');
 		const qrCodeSize = function () {
 			let width = $(window).outerWidth();
 			const height = $(window).outerHeight();
@@ -154,23 +161,21 @@ Template.header.events({
 			return width * 0.7;
 		};
 		const calcQrCodeContainerSize = function () {
-			qrCodeContainer.css({
-				top: $(window).outerHeight() / 2 - qrCodeSize() / 2,
-				left: $(window).outerWidth() / 2 - qrCodeSize() / 2
-			});
-			$('.qr-code-container-close').css("left", qrCodeSize() + 5);
 			qrCodeContainer.find("canvas").remove();
 			qrCodeContainer.find(".qr-code-item").qrcode({
 				background: "white",
 				size: qrCodeSize(),
 				text: url,
-				label: TAPi18n.__("region.header.go_to") + url.replace("http://",""),
-				mode: 2,
 				quiet: 1,
 				minVersion: 6,
 				mSize: 0.05,
 				ecLevel: 'H'
 			});
+			qrCodeContainer.css({
+				top: $(window).outerHeight() / 2 - (qrCodeSize() + 50) / 2,
+				left: $(window).outerWidth() / 2 - qrCodeSize() / 2
+			});
+			$('.qr-code-container-close').css("left", qrCodeSize() + 5);
 			qrCodeContainer.show();
 		};
 		const windowResizeHandler = function () {

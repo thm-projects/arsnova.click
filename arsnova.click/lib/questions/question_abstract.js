@@ -220,10 +220,10 @@ export class AbstractQuestion {
 	 * @returns {boolean} True, if the complete Question instance is valid, False otherwise
 	 */
 	isValid () {
-		let answerOptionListValid = false;
+		let answerOptionListValid = true;
 		this.getAnswerOptionList().forEach(function (answerOption) {
-			if (answerOption.isValid()) {
-				answerOptionListValid = true;
+			if (!answerOption.isValid()) {
+				answerOptionListValid = false;
 			}
 		});
 		const markdownChars = this.getQuestionText().split().map(function (currentValue) {

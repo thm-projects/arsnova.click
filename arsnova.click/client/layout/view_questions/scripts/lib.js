@@ -17,7 +17,6 @@
 
 import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {questionReflection} from '/lib/questions/question_reflection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';

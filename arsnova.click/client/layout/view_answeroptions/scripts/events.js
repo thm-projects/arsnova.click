@@ -17,7 +17,6 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {parseAnswerOptionInput, parseSingleAnswerOptionInput} from './lib.js';

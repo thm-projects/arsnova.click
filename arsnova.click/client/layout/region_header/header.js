@@ -161,15 +161,21 @@ Template.header.events({
 		};
 		const calcQrCodeContainerSize = function () {
 			qrCodeContainer.find("canvas").remove();
-			qrCodeContainer.find(".qr-code-item").qrcode({
-				background: "white",
-				size: qrCodeSize(),
-				text: url,
-				quiet: 1,
-				minVersion: 6,
-				mSize: 0.05,
-				ecLevel: 'H'
+			var img = new window.Image();
+			img.addEventListener("load", function () {
+				qrCodeContainer.find(".qr-code-item").qrcode({
+					background: "white",
+					size: qrCodeSize(),
+					text: url,
+					quiet: 1,
+					mode: 4,
+					minVersion: 6,
+					mSize: 0.3,
+					ecLevel: 'H',
+					image: img
+				});
 			});
+			img.setAttribute("src", "/images/arsnova_click.svg");
 			qrCodeContainer.css({
 				top: $(window).outerHeight() / 2 - (qrCodeSize() + 50) / 2,
 				left: $(window).outerWidth() / 2 - qrCodeSize() / 2

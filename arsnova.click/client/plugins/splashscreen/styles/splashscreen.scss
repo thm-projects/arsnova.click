@@ -33,6 +33,12 @@
   }
 }
 
+.deleteConfirmationSplashscreen {
+  .modal-content {
+    background: $splashscreen-delete-background-color;
+  }
+}
+
 .kickMemberSplashscreen {
   .modal-content {
     color: black;

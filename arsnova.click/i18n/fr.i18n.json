@@ -137,7 +137,9 @@
       "quiz_management": "Questionnaires stockées",
       "available_sessions": "Ces questionnaires sont stockés dans votre navigateur:",
       "session_management": "Management Quiz",
-      "import": "Importer quiz"
+      "import": "Importer quiz",
+      "delete_session": "Effacer Quiz",
+      "delete_session_confirmation": "Si le '<span id=\"session_name\"></span>' quiz définitivement supprimé?"
     },
     "leaderboard": {
       "title": {

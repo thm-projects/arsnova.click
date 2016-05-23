@@ -22,7 +22,7 @@ import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as lib from './lib.js';
 
 Template.hashtagView.events({
@@ -227,12 +227,25 @@ Template.hashtagManagement.events({
 		}
 	},
 	"click .js-delete": function (event) {
-		var hashtagRow = $(event.currentTarget).parent().parent();
-		localData.deleteHashtag(hashtagRow[0].id);
-		Meteor.call('Main.deleteEverything', {
-			hashtag: hashtagRow[0].id
+		const hashtagRow = $(event.currentTarget).parent().parent();
+		
+		new Splashscreen({
+			autostart: true,
+			templateName: "deleteConfirmationSplashscreen",
+			closeOnButton: "#closeDialogButton, #deleteSessionButton",
+			onRendered: function (instance) {
+				instance.templateSelector.find("#session_name").text(hashtagRow[0].id);
+
+				instance.templateSelector.find("#deleteSessionButton").on('click', function () {
+					localData.deleteHashtag(hashtagRow[0].id);
+					Meteor.call('Main.deleteEverything', {
+						hashtag: hashtagRow[0].id
+					});
+					hashtagRow.hide();
+				});
+			}
 		});
-		hashtagRow.hide();
+
 	},
 	"change #js-import": function (event) {
 		var fileList = event.target.files;

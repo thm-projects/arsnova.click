@@ -137,7 +137,9 @@
       "quiz_management": "Tests almacenados",
       "available_sessions": "Estas pruebas se almacenan en el navegador:",
       "session_management": "Gestión de prueba",
-      "import": "Cuestionario de importación"
+      "import": "Cuestionario de importación",
+      "delete_session": "Prueba clara",
+      "delete_session_confirmation": "Si elimina permanentemente el '<span id=\"session_name\"></span>' de cuestionarios?"
     },
     "leaderboard": {
       "title": {

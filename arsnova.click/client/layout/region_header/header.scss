@@ -16,6 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 @import "../global/styles/appearance.scss";
+@import "../global/styles/colors.scss";
 
 p.header-layout {
 	margin-left: 0;
@@ -62,9 +63,9 @@ p.header-layout {
 }
 
 .qr-code-button {
-	color: white;
+	color: $input-background-color;
 	&:hover {
-		color: darken(white, 20);
+		color: lighten($input-background-color, 20);
 	}
 }
 

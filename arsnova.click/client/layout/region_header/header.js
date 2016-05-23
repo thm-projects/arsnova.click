@@ -164,7 +164,7 @@ Template.header.events({
 				background: "white",
 				size: qrCodeSize(),
 				text: url,
-				label: url.replace("http://",""),
+				label: TAPi18n.__("region.header.go_to") + url.replace("http://",""),
 				mode: 2,
 				quiet: 1,
 				minVersion: 6,

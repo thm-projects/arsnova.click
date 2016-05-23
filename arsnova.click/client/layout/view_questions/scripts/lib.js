@@ -158,7 +158,7 @@ export function changePreviewButtonText(text) {
 }
 
 export function checkForMarkdown() {
-	if (EventManagerCollection.findOne().questionIndex < 0 || !QuestionGroupCollection.findOne()) {
+	if (EventManagerCollection.findOne().questionIndex < 0) {
 		return;
 	}
 	var questionText = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();

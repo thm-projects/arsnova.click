@@ -63,7 +63,7 @@ Template.hashtagView.events({
 		}));
 		let addNewHashtagItem = $("#addNewHashtag");
 		addNewHashtagItem.html(TAPi18n.__("view.hashtag_management.create_session") + '<span class="glyphicon glyphicon-plus glyph-right" aria-hidden="true"></span>');
-		if (inputHashtag.length === 0) {
+		if (lib.trimIllegalChars(inputHashtag).length === 0) {
 			addNewHashtagItem.attr("disabled", "disabled");
 			return;
 		}

@@ -63,7 +63,7 @@ Template.header.helpers({
 
 Template.qrCodeDisplay.helpers({
 	getCurrentSessionName: function () {
-		return window.location.href.replace("/memberlist","").replace("http://","");
+		return window.location.host + "/" + Router.current().params.quizName;
 	}
 });
 
@@ -149,7 +149,7 @@ Template.header.events({
 		});
 	},
 	"click .qr-code-button": function () {
-		const url = window.location.href.replace("/memberlist","");
+		const url = window.location.protocol + "//" + window.location.host + "/" + Router.current().params.quizName;
 		const qrCodeContainer = $(".qr-code-container");
 		const qrCodeSize = function () {
 			let width = $(window).outerWidth();

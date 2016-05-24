@@ -1,0 +1,619 @@
+@mixin theme($name) {
+	$fg-text-light: white;
+	$fg_text-dark: black;
+	$fg_a: #ffd700;
+	$fg_titel: white;
+	$success: #008000; /* green */
+	$success-text-color: #ffffff; /* white */
+	$warning: #b22222; /* firebrick */
+	$warning-text-color: #ffffff; /* white */
+	$info: #663399; /* rebeccapurple */
+	$info-text-color: #ffffff; /* white */
+	$default: #808080; /* grey */
+	$default-text-color: #ffffff; /* white */
+	$background-color: #4682b4; /* steelblue */
+	$disabled-button-background: #808080; /* grey */
+	$placeholder-color: #808080; /* grey */
+	$input-background-color: #ffd700; /* gold */
+	$input-group-letter-color: #2f4f4f; /* darkslategrey */
+	$footer-background-color: #dcdcdc; /*gainsboro */
+	$footer-text-color: #000000; /* black */
+	$splash-screen-header-color: #2f4f4f; /* darkslategrey */
+	$splash-screen-body-color: #2f4f4f; /* darkslategrey */
+	$slider-color: #008000; /* green */
+	$progress-bar-success-color: green;
+	$progress-bar-read-confirmation: darkorange;
+	$progress-bar-failure-color: firebrick;
+	$progress-bar-default-color: grey;
+	$splashscreen-background-color: #98fb98; /* palegreen */
+	$splashscreen-question-and-answer-background-color: #98fb98; /* palegreen */
+	$splashscreen-question-preview-background-color: #98fb98; /* palegreen */
+	$splashscreen-reading-confirmed-background-color: #98fb98; /* palegreen */
+	$splashscreen-show-hashtags-background-color: #98fb98; /* palegreen */
+	$splashscreen-sound-config-background-color: #98fb98; /* palegreen */
+	$splashscreen-delete-background-color: #98fb98; /* palegreen */
+	$splash-screen-error-message-background-color: white;
+	$check-mark-checked: #00882a;
+	$check-mark-unchecked: #aaaaaa;
+	$bg_progress-bar: white;
+	$fg_progress-bar: black;
+
+	@if ($name == "theme-elegant") {
+		$success: #00CD00; /* green */
+		$warning: #FF2222; /* firebrick */
+		$info: #1C86EE; /* dodgerblue */
+		$switch: #00CD00; /* green */
+		$switch-text-color: #ffffff;
+		$background-color: #4a4a4a; /* grey */
+		$disabled-button-background: darkgrey; /* darkgrey */
+		$placeholder-color: #FFFFFF ; /* white */
+		$input-background-color: #FF8C00; /* orange */
+		$input-group-letter-color: white; /* darkslategrey */
+		$footer-text-color: #FFFFFF; /* white */
+		$check-mark-checked: $success;
+		$check-mark-unchecked: $warning;
+	}
+
+	@if ($name == "theme-thm") {
+		$thmred: #b5003f;
+		$thmorange: #ffb300;
+		$thmbabyblue: #4dffed;
+		$thmnavy: #003bd1;
+		$thmgreen: #80ba24;
+		$thmgray: #4a5c66;
+		$placeholder-color: #ffffff ; /* white */
+		$input-background-color: #808080; /* grey */
+		$footer-background-color: #000000; /*gainsboro */
+		$warning-text-color: $thmgray;
+		$info: #E3CEF6; /* light purple */
+		$info-text-color: $thmgray;
+		$default: #d3d3d3; /* light grey */
+		$default-text-color: $thmgray;
+		$background-color: $thmgreen;
+		$disabled-button-background: #808080; /* grey */
+		$success: #a9f5a9; /*bright green*/
+		$success-text-color: $thmgray;
+		$check-mark-unchecked: #aaaaaa;
+	}
+
+	.#{$name} {
+		.text-light, a.text-light, a:hover.text-light, a:active.text-light, a:visited.text-light, a:focus.text-light {
+			color: $fg-text-light;
+		}
+
+		a.text-dark, a:hover.text-dark, a:active.text-dark, a:visited.text-dark, a:focus.text-dark {
+			color: $fg_text-dark !important;
+		}
+
+		a, a:hover, a:active, a:visited, a:focus {
+			color: $fg_a;
+		}
+
+		.titel {
+			color: $fg_titel;
+		}
+
+		.container,
+		.footer-info-bar {
+			background-color: $background-color;
+		}
+
+		textarea::-webkit-input-placeholder {
+			color: $placeholder-color;
+		}
+		/* WebKit, Blink, Edge */
+		textarea:-moz-placeholder {
+			color: $placeholder-color;
+			opacity: 1;
+		}
+		/* Mozilla Firefox 4 to 18 */
+
+		textarea::-moz-placeholder {
+			color: $placeholder-color;
+			opacity: 1;
+		}
+		/* Mozilla Firefox 19+ */
+		textarea:-ms-input-placeholder {
+			color: $placeholder-color;
+		}
+		/* Internet Explorer 10-11 */
+		input::-webkit-input-placeholder {
+			color: $placeholder-color;
+		}
+		/* WebKit, Blink, Edge */
+		input[placeholder] {
+			color: $placeholder-color;
+		}
+		input:-moz-placeholder {
+			color: $placeholder-color;
+			opacity: 1;
+		}
+		/* Mozilla Firefox 4 to 18 */
+		input::-moz-placeholder {
+			color: $placeholder-color;
+			opacity: 1;
+		}
+		/* Mozilla Firefox 19+ */
+		input:-ms-input-placeholder {
+			color: $placeholder-color;
+		}
+		/* Internet Explorer 10-11 */
+		button:disabled {
+			background-color: $disabled-button-background;
+		}
+		.footer-gradient {
+			color: $footer-text-color;
+		}
+		.footer a {
+			color: $footer-text-color;
+		}
+		.footer a div {
+			border-left: solid $footer-text-color 1px;
+		}
+		.navbar-transparent {
+			background-color: $background-color;
+		}
+		.progress-bar {
+			background: $bg_progress-bar;
+			color: $fg_progress-bar;
+		}
+		.slider, .slider .noUi-handle {
+			background-color: $slider-color;
+		}
+		.button-shadow, .button {
+			box-shadow: 1px 1px 5px black;
+		}
+		.input-field {
+			color: black !important;
+		}
+		.input-field-bg-color, .input-field {
+			background-color: $input-background-color;
+		}
+		.default-yellow-text-color {
+			color: $input-background-color;
+		}
+		.input-group-letter, .button-result-letter {
+			color: $input-group-letter-color;
+		}
+		.button-next, .button-success {
+			background-color: $success;
+			color: $success-text-color;
+		}
+		.button-warning, .button-back {
+			background-color: $warning;
+			color: $warning-text-color;
+		}
+		.button-purple {
+			background-color: $info;
+			color: $info-text-color;
+		}
+		.button-default {
+			background-color: $default;
+			color: $default-text-color;
+		}
+		.button-leader {
+			background-color: $input-background-color;
+			color: black;
+		}
+		.button-result {
+			background-color: #eeeeee;
+		}
+		.button-result .percentage {
+			color: #ffffff;
+			font-weight: bolder;
+		}
+		.button-result .progress {
+			background-color: LightSteelBlue;
+		}
+		.progress-success {
+			background-color: $progress-bar-success-color !important;
+		}
+		.progress-failure {
+			background-color: $progress-bar-failure-color !important;
+		}
+		.progress-default {
+			background-color: $input-background-color !important;
+		}
+		.fixed-bottom {
+			background-color: steelblue;
+		}
+		.textarea {
+			background-color: gold;
+		}
+		.previewText {
+			background-color: white;
+		}
+		.check-mark-checked {
+			color: $check-mark-checked;
+		}
+		.check-mark-unchecked {
+			color: $check-mark-unchecked;
+		}
+		.success input, .success textarea, input.success, textarea.success {
+			border: 3px solid $success;
+		}
+		.error input, .error textarea, input.error, textarea.error {
+			border: 3px solid $warning;
+		}
+		.popover-title, .popover.bottom {
+			background-color: $warning;
+			color: $warning-text-color;
+			border-color: $warning;
+		}
+		.popover.bottom > .arrow:after {
+			border-bottom-color: $warning;
+		}
+		.hljs-line-numbers {
+			border-right: 1px solid #ccc;
+			color: #999;
+		}
+		.lockquote {
+			color: #394a59 !important;
+		}
+		.hljs {
+			background: #f0f0f0;
+			color: black;
+		}
+		.hljs-pre {
+			background-color: white;
+		}
+		.hljs-comment {
+			color: #006a00;
+		}
+		.hljs-keyword, .hljs-literal, .nginx .hljs-title {
+			color: #aa0d91;
+		}
+		.method, .hljs-list .hljs-title, .hljs-tag .hljs-title, .setting .hljs-value, .hljs-winutils, .tex .hljs-command, .http .hljs-title, .hljs-request, .hljs-status, .hljs-name {
+			color: #008;
+		}
+		.hljs-envvar, .tex .hljs-special {
+			color: #660;
+		}
+		.hljs-string {
+			color: #c41a16;
+		}
+		.hljs-tag .hljs-value, .hljs-cdata, .hljs-filter .hljs-argument, .hljs-attr_selector, .apache .hljs-cbracket, .hljs-date, .hljs-regexp {
+			color: #080;
+		}
+		.hljs-sub .hljs-identifier, .hljs-pi, .hljs-tag, .hljs-tag .hljs-keyword, .hljs-decorator, .ini .hljs-title, .hljs-shebang, .hljs-prompt, .hljs-hexcolor, .hljs-rule .hljs-value, .hljs-symbol, .hljs-symbol .hljs-string, .hljs-number, .css .hljs-function, .hljs-function .hljs-title, .coffeescript .hljs-attribute {
+			color: #1c00cf;
+		}
+		.hljs-class .hljs-title, .smalltalk .hljs-class, .hljs-type, .hljs-typename, .hljs-tag .hljs-attribute, .hljs-doctype, .hljs-class .hljs-id, .hljs-built_in, .setting, .hljs-params, .clojure .hljs-attribute {
+			color: #5c2699;
+		}
+		.hljs-variable {
+			color: #3f6e74;
+		}
+		.css .hljs-tag, .hljs-rule .hljs-property, .hljs-pseudo, .hljs-subst {
+			color: #000;
+		}
+		.css .hljs-class, .css .hljs-id {
+			color: #9b703f;
+		}
+		.hljs-value .hljs-important {
+			color: #ff7700;
+			font-weight: bold;
+		}
+		.hljs-rule .hljs-keyword {
+			color: #c5af75;
+		}
+		.hljs-annotation, .apache .hljs-sqbracket, .nginx .hljs-built_in {
+			color: #9b859d;
+		}
+		.hljs-preprocessor, .hljs-preprocessor *, .hljs-pragma {
+			color: #643820;
+		}
+		.tex .hljs-formula {
+			background-color: #eee;
+			font-style: italic;
+		}
+		.diff .hljs-header, .hljs-chunk {
+			color: #808080;
+			font-weight: bold;
+		}
+		.diff .hljs-change {
+			background-color: #bccff9;
+		}
+		.hljs-addition {
+			background-color: #baeeba;
+		}
+		.hljs-deletion {
+			background-color: #ffc8bd;
+		}
+		.method .hljs-id {
+			color: #000;
+		}
+		.projector-mode {
+			span[class^='hljs'], span[class*=' hljs'] {
+				color: inherit;
+				background-color: inherit;
+			}
+			.hljs-pre {
+				color: white;
+				background-color: #333;
+			}
+			.hljs {
+				display: block;
+				overflow-x: auto;
+				padding: .5em;
+				background: #333;
+				color: white;
+				-webkit-text-size-adjust: none;
+			}
+			.hljs-tag, .ini .hljs-title {
+				color: #62c8f3;
+			}
+			.hljs-id, .hljs-cbracket, .hljs-tag .hljs-value {
+				color: #ade5fc;
+			}
+			.hljs-string, .hljs-bullet {
+				color: #a2fca2;
+			}
+			.hljs-type, .hljs-variable, .hljs-name, .actionscript .hljs-title, .aspectj .hljs-annotation, .aspectj .hljs-title, .hljs-attribute, .hljs-change, .hljs-blockquote, .hljs-built_in {
+				color: #ffa;
+			}
+			.hljs-number, .hljs-hexcolor, .hljs-link_label, .hljs-link_reference {
+				color: #d36363;
+			}
+			.hljs-keyword, .hljs-literal, .hljs-constant, .css .hljs-tag, .hljs-typename, .hljs-winutils {
+				color: #fcc28c;
+			}
+			.hljs-comment, .hljs-cdata, .hljs-preprocessor, .hljs-annotation, .hljs-decorator, .hljs-doctype, .hljs-deletion, .hljs-shebang, .apache .hljs-sqbracket, .tex .hljs-formula, .hljs-header, .hljs-horizontal_rule, .hljs-code {
+				color: #888;
+			}
+			.hljs-regexp, .hljs-attr_selector {
+				color: #c6b4f0;
+			}
+			.hljs-important, .hljs-doctype, .hljs-pi, .hljs-chunk, .actionscript .hljs-type, .hljs-shebang, .hljs-pragma, .http .hljs-attribute {
+				color: #fc9b9b;
+			}
+			.hljs-deletion {
+				background-color: #fc9b9b;
+				color: #333;
+			}
+			.hljs-addition {
+				background-color: #a2fca2;
+				color: #333;
+			}
+			.hljs a, .hljs-tag .hljs-attribute {
+				color: inherit;
+			}
+			.hljs a:focus, .hljs a:hover {
+				color: inherit;
+				text-decoration: underline;
+			}
+		}
+		@keyframes colorChangingArs {
+			0% {
+				color: white;
+			}
+			25% {
+				color: $warning;
+			}
+			50% {
+				color: $info;
+			}
+			75% {
+				color: $input-background-color;
+			}
+			100% {
+				color: white;
+			}
+		}
+		@keyframes colorChangingNova {
+			0% {
+				color: $input-background-color;
+			}
+			25% {
+				color: white;
+			}
+			50% {
+				color: $warning;
+			}
+			75% {
+				color: $info;
+			}
+			100% {
+				color: $input-background-color;
+			}
+		}
+		@keyframes colorChangingDot {
+			0% {
+				color: $info;
+			}
+			25% {
+				color: $input-background-color;
+			}
+			50% {
+				color: white;
+			}
+			75% {
+				color: $warning;
+			}
+			100% {
+				color: $info;
+			}
+		}
+		@keyframes colorChangingClick {
+			0% {
+				color: $warning;
+			}
+			25% {
+				color: $info;
+			}
+			50% {
+				color: $input-background-color;
+			}
+			75% {
+				color: white;
+			}
+			100% {
+				color: $warning;
+			}
+		}
+		.btn-file input[type=file] {
+			background: white;
+		}
+		.question-title {
+			color: white;
+		}
+		.glyphicon-style {
+			color: #FFF;
+		}
+		.formGroupProgressRow {
+			.progress {
+				.percentage {
+					.label {
+						color: white;
+					}
+				}
+			}
+		}
+		.question-row.active {
+			-webkit-box-shadow: 0 0 13px 3px rebeccapurple;
+			-moz-box-shadow: 0 0 13px 3px rebeccapurple;
+			box-shadow: 0 0 13px 3px rebeccapurple;
+		}
+		.btn-more-learners {
+			background-color: rebeccapurple;
+			color: white;
+		}
+		@keyframes colorChangingOwnNick {
+			0% {
+				background-color: $input-background-color;
+				transform: translateY(0%);
+				-webkit-transform: translateY(0%);
+				color: white;
+			}
+			25% {
+				background-color: $warning;
+				color: white;
+			}
+			50% {
+				background-color: $info;
+				color: white;
+			}
+			75% {
+				background-color: $default;
+				color: white;
+			}
+			100% {
+				background-color: #98fb98;
+				transform: translateY(0%);
+				-webkit-transform: translateY(0%);
+				color: black;
+			}
+		}
+		.button-markdown-shadow, .button-markdown {
+			box-shadow: 1px 1px 5px black;
+		}
+		.input-label {
+			color: $input-group-letter-color;
+		}
+		.soundConfig {
+			.modal-content {
+				background-color: $splashscreen-sound-config-background-color;
+				button.down {
+					background: green;
+				}
+			}
+		}
+
+		.showHashtagsSplashscreen {
+			.modal-content {
+				background: $splashscreen-show-hashtags-background-color;
+
+				.js-my-hash {
+					color: black;
+					background-color: #ffffe0;
+
+					&:hover {
+						background-color: lighten(#ffffe0, 20);
+					}
+
+					&:active {
+						background-color: darken(#ffffe0, 10);
+					}
+				}
+			}
+		}
+
+		.readingConfirmedSplashscreen {
+			.modal-content {
+				background: $splashscreen-reading-confirmed-background-color;
+			}
+		}
+
+		.questionPreviewSplashscreen {
+			.modal-content {
+				background: $splashscreen-question-preview-background-color;
+			}
+		}
+
+		/*
+		 * library splashscreen colors
+		 */
+		.splashscreen {
+			.modal-content {
+				background: $splashscreen-background-color;
+			}
+		}
+
+		.questionAndAnswerSplashscreen {
+			.modal-content {
+				background: $splashscreen-question-and-answer-background-color;
+			}
+		}
+
+		.deleteConfirmationSplashscreen {
+			.modal-content {
+				background: $splashscreen-delete-background-color;
+			}
+		}
+
+		.kickMemberSplashscreen {
+			.modal-content {
+				color: black;
+				background: $splash-screen-error-message-background-color;
+			}
+		}
+
+		.errorSplashscreen {
+			.modal-content {
+				color: black;
+				background: $splash-screen-error-message-background-color;
+			}
+		}
+
+		/*
+		 * Splash screen button appearance
+		 */
+		.splash-button-error-message {
+			color: white;
+			background-color: $success;
+		}
+
+		/*
+		 * Splash screen appearance
+		 */
+		.modal-content {
+			color: black;
+
+			a, a:hover, a:active, a:visited, a:focus {
+				color: $background-color;
+			}
+		}
+
+		.modal-header {
+			color: $splash-screen-header-color;
+		}
+
+		.modal-backdrop {
+			background-color: $background-color;
+		}
+	}
+}
+
+@include theme(theme-default);
+@include theme(theme-elegant);
+@include theme(theme-thm);

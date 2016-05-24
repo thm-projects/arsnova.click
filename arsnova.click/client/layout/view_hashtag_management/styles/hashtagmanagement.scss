@@ -34,13 +34,12 @@
 	filter: alpha(opacity=0);
 	opacity: 0;
 	outline: none;
-	background: white;
 	cursor: inherit;
 	display: block;
 }
 .alignGlyphicon {
 	padding-top: 5px;
-	padding-right: 0px;
+	padding-right: 0;
 	text-align: center;
 	display: block;
 
@@ -49,25 +48,9 @@
 	}
 }
 .js-my-hash {
-  color: black;
-  border-radius: $corner-radius;
-  background-color: #ffffe0;
+	border-radius: $corner-radius;
   cursor: pointer;
   padding: 5px;
   margin: 10px 0;
   text-align: center;
-
-  &:hover {
-	background-color: lighten(#ffffe0, 20);
-  }
-
-  &:active {
-	background-color: darken(#ffffe0, 10);
-  }
-}
-
-.showHashtagsSplashscreen {
-  .modal-content {
-	background: $splashscreen-show-hashtags-background-color;
-  }
 }

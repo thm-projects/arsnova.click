@@ -175,7 +175,7 @@ Template.header.events({
 					image: img
 				});
 			});
-			img.setAttribute("src", "/images/arsnova_click.svg");
+			img.setAttribute("src", "/images/icons/arsNovaClick-192.png");
 			qrCodeContainer.css({
 				top: $(window).outerHeight() / 2 - (qrCodeSize() + 50) / 2,
 				left: $(window).outerWidth() / 2 - qrCodeSize() / 2

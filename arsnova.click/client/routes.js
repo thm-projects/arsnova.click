@@ -27,7 +27,7 @@ import {getChangeEventsForRoute} from '/client/plugins/event_stack_observer/scri
 import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onRemoveEvent.js';
 
 const subsCache = new SubsManager({
-	cacheLimit: 7, // maximum number of cached subscriptions
+	cacheLimit: 8, // maximum number of cached subscriptions
 	expireIn: 15 // any subscription will be expire after 15 minutes, if it's not subscribed again
 });
 
@@ -36,7 +36,8 @@ Router.configure({
 	loadingTemplate: "loading",
 	waitOn: function () {
 		const subscriptions = [
-			subsCache.subscribe('HashtagsCollection.public')
+			subsCache.subscribe('HashtagsCollection.public'),
+			subsCache.subscribe('BannedNicksCollection.public')
 		];
 		if (typeof Router.current().params.quizName !== "undefined") {
 			subscriptions.push(subsCache.subscribe('ResponsesCollection.join', Router.current().params.quizName));

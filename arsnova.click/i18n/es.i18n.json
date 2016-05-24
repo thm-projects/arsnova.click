@@ -179,7 +179,8 @@
       "show_more": "Desde el 1 más",
       "show_more_plural": "Mostrar %s más",
       "start_quiz": "Vamonos!",
-      "kick_member_confirmation": "Será el asistente '<span id=\"nickName\"></span>' ser retirado de la sesión?"
+      "kick_member_confirmation": "Será el asistente '<span id=\"nickName\"></span>' ser retirado de la sesión?",
+      "add_kicked_member_to_ban_list": "Desterrar definitivamente los apodos"
     },
     "questions": {
       "enter_question_here": "Introduzca su pregunta aquí",

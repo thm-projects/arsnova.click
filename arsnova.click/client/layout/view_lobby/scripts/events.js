@@ -45,6 +45,9 @@ Template.memberlist.events({
 				instance.templateSelector.find('#nickName').text($(event.currentTarget).text().replace(/(?:\r\n|\r| |\n)/g, ''));
 				instance.templateSelector.find('#kickMemberButton').on('click', function () {
 					Meteor.call('MemberListCollection.removeLearner', Router.current().params.quizName, $(event.currentTarget).attr("id"));
+					if (instance.templateSelector.find("#ban-nick").prop("checked")) {
+						Meteor.call('BannedNicksCollection.insert', instance.templateSelector.find('#nickName').text());
+					}
 				});
 			}
 		});
@@ -53,5 +56,12 @@ Template.memberlist.events({
 		Session.set("sessionClosed", false);
 		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, -1);
 		Meteor.call('EventManagerCollection.setSessionStatus', Router.current().params.quizName, 3);
+	}
+});
+
+Template.kickMemberSplashscreen.events({
+	"click #ban-nick-label": function () {
+		const banNickInput = $('#ban-nick');
+		banNickInput.prop("checked",!banNickInput.prop("checked"));
 	}
 });

@@ -22,6 +22,7 @@
 	$input-group-letter-color: #2f4f4f; /* darkslategrey */
 	$footer-background-color: #dcdcdc; /*gainsboro */
 	$footer-text-color: #000000; /* black */
+	$fg-footer-info-bar: white;
 	$splash-screen-header-color: #2f4f4f; /* darkslategrey */
 	$splash-screen-body-color: #2f4f4f; /* darkslategrey */
 	$slider-color: #008000; /* green */
@@ -100,6 +101,29 @@
 	$bg-btn-file-input: white;
 	$fg-question-title: white;
 	$fg-glyphicon-style: #FFF;
+	$fg-kill-session-switch-wrapper: #b22222;
+	$fg-kill-session-switch-wrapper-hovered: red;
+	$fg-qr-code-button: white;
+	$border-qr-code-container: white;
+	$bg-qr-code-container: white;
+	$fg-qr-code-container-close: black;
+	$border-qr-code-container-close-icon: black;
+	$background-qr-code-container-close-icon: white;
+	$fg-qr-code-label: black;
+	$fg-sound-button-active: #00CC00;
+	$fg-sound-button-active-hovered: #33FF00;
+	$fg-sound-button-inactive: #b22222;
+	$fg-sound-button-inactive-hovered: red;
+	$fg-questionScrollPane-index-number: white;
+	$fg-questionScrollPane-remove-question: white;
+	$bg-questionScrollPane-question-icon-valid-index-number: green;
+	$bg-questionScrollPane-question-icon-invalid-index-number: grey;
+	$border-questionScrollPane-active: beige;
+	$border-questionScrollPane-active-valid-remove-question: green;
+	$box-shadow-questionScrollPane-active-remove-question: none;
+	$border-questionScrollPane-active-remove-question: black;
+	$bg-questionScrollPane-active-remove-question-hovered: red;
+	$fg-questionScrollPane-active-remove-question-hovered: white;
 
 	@if ($name == "theme-dark") {
 		$success: #00CD00; /* green */
@@ -128,9 +152,6 @@
 		$placeholder-color: #ffffff ; /* white */
 		$input-background-color: #808080; /* grey */
 		$footer-background-color: #000000; /*gainsboro */
-		$warning-text-color: $thmgray;
-		$info: #E3CEF6; /* light purple */
-		$info-text-color: $thmgray;
 		$default: #d3d3d3; /* light grey */
 		$default-text-color: $thmgray;
 		$background-color: $thmgreen;
@@ -176,87 +197,87 @@
 			background-color: $disabled-button-background;
 		}
 		.kill-session-switch-wrapper {
-			color: #b22222;
+			color: $fg-kill-session-switch-wrapper;
 			&:hover {
-				color: red;
+				color: $fg-kill-session-switch-wrapper-hovered;
 			}
 		}
 		.qr-code-button {
-			color: white;
+			color: $fg-qr-code-button;
 			&:hover {
-				color: darken(white, 20);
+				color: darken($fg-qr-code-button, 20);
 			}
 		}
 		.qr-code-container {
-			border: 1px solid white;
-			background-color: white;
+			border: 1px solid $border-qr-code-container;
+			background-color: $bg-qr-code-container;
 		}
 		.qr-code-container-close {
-			color: black;
+			color: $fg-qr-code-container-close;
 			&:hover {
-				color: lighten(black, 20);
+				color: lighten($fg-qr-code-container-close, 20);
 			}
 			.glyphicon-remove {
-				border: 1px solid black;
-				background-color: white;
+				border: 1px solid $border-qr-code-container-close-icon;
+				background-color: $background-qr-code-container-close-icon;
 			}
 		}
 		.qr-code-label {
-			color: black;
+			color: $fg-qr-code-label;
 		}
 		.sound-button-active {
-			color: #00CC00;
+			color: $fg-sound-button-active;
 			&:hover {
-				color: #33FF00;
+				color: $fg-sound-button-active-hovered;
 			}
 		}
 		.sound-button-inactive {
-			color: #b22222;
+			color: $fg-sound-button-inactive;
 			&:hover {
-				color: red;
+				color: $fg-sound-button-inactive-hovered;
 			}
 		}
 		.questionScrollPane {
 			.indexNumber {
-				color: white;
+				color: $fg-questionScrollPane-index-number;
 			}
 			.removeQuestion {
-				color: white;
+				color: $fg-questionScrollPane-remove-question;
 			}
 			.questionIcon {
 				&.valid {
 					.indexNumber {
-						background-color: green;
+						background-color: $bg-questionScrollPane-question-icon-valid-index-number;
 					}
 					&:hover:not(.active) {
 						.indexNumber {
-							background-color: darken(green, 5%);
+							background-color: darken($bg-questionScrollPane-question-icon-valid-index-number, 5%);
 						}
 					}
 				}
 				&:not(.valid) {
 					.indexNumber {
-						background-color: grey;
+						background-color: $bg-questionScrollPane-question-icon-invalid-index-number;
 					}
 					&:hover:not(.active) {
 						.indexNumber {
-							background-color: darken(grey, 10%);
+							background-color: darken($bg-questionScrollPane-question-icon-invalid-index-number, 10%);
 						}
 					}
 				}
 				&.active {
-					border: 1px solid beige;
+					border: 1px solid $border-questionScrollPane-active;
 					&.valid {
 						.removeQuestion {
-							background-color: green;
+							background-color: $border-questionScrollPane-active-valid-remove-question;
 						}
 					}
 					.removeQuestion {
-						box-shadow: none;
-						border-left: 10px solid black;
+						box-shadow: $box-shadow-questionScrollPane-active-remove-question;
+						border-left: 10px solid $border-questionScrollPane-active-remove-question;
 						&:hover {
-							background-color: red;
-							color: white;
+							background-color: $bg-questionScrollPane-active-remove-question-hovered;
+							color: $fg-questionScrollPane-active-remove-question-hovered;
 						}
 					}
 				}
@@ -267,13 +288,13 @@
 		}
 		.footer a {
 			color: $footer-text-color;
-		}
-		.footer a div {
-			border-left: solid $footer-text-color 1px;
-			color: black !important;
+			div {
+				border-left: solid $footer-text-color 1px;
+				color: $footer-text-color !important;
+			}
 		}
 		.footer-info-bar {
-			color: #fff;
+			color: $fg-footer-info-bar;
 		}
 		.navbar-transparent {
 			background-color: $background-color;

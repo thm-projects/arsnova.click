@@ -15,6 +15,10 @@
 	$default: #808080; /* grey */
 	$default-text-color: #ffffff; /* white */
 	$background-color: #4682b4; /* steelblue */
+	$bg-nav-row: $background-color;
+	$bg-container: $background-color;
+	$bg-footer: $background-color;
+	$bg-questionList-row: $background-color;
 	$disabled-button-background: #808080; /* grey */
 	$placeholder-color: #808080; /* grey */
 	$input-background-color: #ffd700; /* gold */
@@ -132,6 +136,10 @@
 		$switch: #00CD00; /* green */
 		$switch-text-color: #ffffff;
 		$background-color: #4a4a4a; /* grey */
+		$bg-nav-row: $background-color;
+		$bg-questionList-row: $bg-nav-row;
+		$bg-container: $background-color;
+		$bg-footer: $background-color;
 		$disabled-button-background: darkgrey; /* darkgrey */
 		$placeholder-color: #FFFFFF ; /* white */
 		$input-background-color: #FF8C00; /* orange */
@@ -155,6 +163,10 @@
 		$default: #d3d3d3; /* light grey */
 		$default-text-color: $thmgray;
 		$background-color: $thmgreen;
+		$bg-nav-row: $background-color;
+		$bg-questionList-row: $bg-nav-row;
+		$bg-container: $background-color;
+		$bg-footer: $background-color;
 		$disabled-button-background: #808080; /* grey */
 		$success: #a9f5a9; /*bright green*/
 		$success-text-color: $thmgray;
@@ -165,7 +177,17 @@
 	}
 
 	@if ($name == "theme-elegant") {
-
+		$bg-nav-row: #002d47;
+		$bg-container: #dbe4e9;
+		$bg-questionList-row: #B1C5D0;
+		$bg-footer: #374e5b;
+		$default-text-color: black;
+		$fg-text-light: black;
+		$fg_text-dark: black;
+		$fg_a: #ffd700;
+		$fg_quiz-name: #ffd700;
+		$fg_titel: black;
+		$fg-theme_description: black;
 	}
 
 	@if ($name == "theme-arsnova") {
@@ -188,8 +210,20 @@
 		.quizName {
 			color: $fg_quiz-name;
 		}
-		.container, .footer-info-bar, .fixed-bottom {
-			background-color: $background-color;
+		.container, .fixed-bottom {
+			background-color: $bg-container;
+		}
+		.footer-info-bar {
+			background-color: $bg-footer;
+		}
+		.navbar-fixed-top {
+			background-color: $bg-nav-row;
+			.questionList-row {
+				background-color: $bg-questionList-row;
+			}
+			.nav-row {
+				background-color: $bg-nav-row;
+			}
 		}
 		textarea::-moz-placeholder, textarea:-ms-input-placeholder, input::-webkit-input-placeholder, input[placeholder] {
 			color: $placeholder-color;
@@ -297,9 +331,6 @@
 		}
 		.footer-info-bar {
 			color: $fg-footer-info-bar;
-		}
-		.navbar-transparent {
-			background-color: $background-color;
 		}
 		.progress-bar {
 			background: $bg_progress-bar;

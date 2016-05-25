@@ -34,6 +34,11 @@ export const lowerCaseNickSchema = {
 export const userNickIdSchema = {
 	type: String
 };
+export const privateKeySchema = {
+	type: String,
+	min: 24,
+	max: 24
+};
 export const readConfirmedSchema = {
 	type: [Number]
 };
@@ -53,6 +58,7 @@ export const insertDateSchema = {
 export const memberListCollectionSchema = new SimpleSchema({
 	hashtag: hashtagSchema,
 	nick: userNickSchema,
+	privateKey: privateKeySchema,
 	lowerCaseNick: lowerCaseNickSchema,
 	readConfirmed: readConfirmedSchema,
 	backgroundColor: backgroundColorSchema,

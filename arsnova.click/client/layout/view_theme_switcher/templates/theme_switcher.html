@@ -6,7 +6,7 @@
                 <div class="col-lg-7">
                     <select id="select-theme" class="round-corners textarea" title="{{_ "view.theme_switcher.select_a_theme_title"}}">
                         {{#each themes}}
-                            <option id="{{this.id}}" {{this.selected}}>{{_ this.name}}</option>
+                            <option id="{{this.id}}" {{isThemeSelected this.id}}>{{_ this.name}}</option>
                         {{/each}}
                     </select>
                 </div>

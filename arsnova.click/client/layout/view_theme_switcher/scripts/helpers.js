@@ -36,5 +36,8 @@ Template.themeSwitcher.helpers({
 				return themes[i].description;
 			}
 		}
+	},
+	isThemeSelected: function (themeName) {
+		return Session.get("questionGroup") && Session.get("questionGroup").getTheme() === themeName ? "selected" : "";
 	}
 });

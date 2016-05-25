@@ -36,6 +36,9 @@ Template.home.onRendered(function () {
 			}
 		}
 	});
+
+	$('#theme-wrapper').removeClass().addClass("theme-default");
+
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemAbout);
 	footerElements.addFooterElement(footerElements.footerElemTranslation);

@@ -97,3 +97,10 @@ Template.header.events({
 		}
 	}
 });
+
+Template.header.onRendered(function () {
+	if (!Session.get("questionGroup")) {
+		const theme = HashtagsCollection.findOne() && Router.current.params.quizName ? HashtagsCollection.findOne().theme : "theme-default";
+		$('#theme-wrapper').removeClass().addClass(theme);
+	}
+});

@@ -104,7 +104,8 @@
 		}
 
 		.container,
-		.footer-info-bar {
+		.footer-info-bar,
+		.fixed-bottom {
 			background-color: $background-color;
 		}
 
@@ -223,9 +224,6 @@
 		}
 		.progress-default {
 			background-color: $input-background-color !important;
-		}
-		.fixed-bottom {
-			background-color: steelblue;
 		}
 		.textarea {
 			background-color: gold;

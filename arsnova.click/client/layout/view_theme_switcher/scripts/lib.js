@@ -22,31 +22,26 @@ export const themes = [
 	{
 		name: "view.theme_switcher.themes.default.name",
 		description: "view.theme_switcher.themes.default.description",
-		id: "theme-default",
-		selected: Session.get("questionGroup") && Session.get("questionGroup").getTheme() === "theme-default" ? 'selected' : ""
+		id: "theme-default"
 	},
 	{
 		name: "view.theme_switcher.themes.dark.name",
 		description: "view.theme_switcher.themes.dark.description",
-		id: "theme-dark",
-		selected: Session.get("questionGroup") && Session.get("questionGroup").getTheme() === "theme-dark" ? 'selected' : ""
+		id: "theme-dark"
 	},
 	{
 		name: "view.theme_switcher.themes.thm.name",
 		description: "view.theme_switcher.themes.thm.description",
-		id: "theme-thm",
-		selected: Session.get("questionGroup") && Session.get("questionGroup").getTheme() === "theme-thm" ? 'selected' : ""
+		id: "theme-thm"
 	},
 	{
 		name: "view.theme_switcher.themes.elegant.name",
 		description: "view.theme_switcher.themes.elegant.description",
-		id: "theme-elegant",
-		selected: Session.get("questionGroup") && Session.get("questionGroup").getTheme() === "theme-elegant" ? 'selected' : ""
+		id: "theme-elegant"
 	},
 	{
 		name: "view.theme_switcher.themes.arsnova.name",
 		description: "view.theme_switcher.themes.arsnova.description",
-		id: "theme-arsnova",
-		selected: Session.get("questionGroup") && Session.get("questionGroup").getTheme() === "theme-arsnova" ? 'selected' : ""
+		id: "theme-arsnova"
 	}
 ];

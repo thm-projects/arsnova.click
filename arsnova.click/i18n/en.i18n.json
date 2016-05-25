@@ -186,7 +186,11 @@
       "enter_question_here": "Enter your question here",
       "format": "Format",
       "edit": "Edit",
-      "preview": "Preview"
+      "preview": "Preview",
+      "single_choice_question": "Single-Choice",
+      "multiple_choice_question": "Multiple-Choice",
+      "survey_question": "Survey",
+      "ranged_question": "Question with ranged answeroptions"
     },
     "timer": {
       "set_countdown": "Set countdown",

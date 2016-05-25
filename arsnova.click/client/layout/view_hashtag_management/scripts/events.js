@@ -18,9 +18,11 @@
 import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
+import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
 import * as localData from '/lib/local_storage.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as lib from './lib.js';
@@ -95,51 +97,32 @@ Template.hashtagView.events({
 		var reenter = false;
 		if (hashtag.length > 0) {
 			var localHashtags = localData.getAllHashtags();
-			if ($.inArray(hashtag, localHashtags) > -1) {
-				var oldHashtagDoc = HashtagsCollection.findOne();
-				if (oldHashtagDoc) {
-					reenter = true;
-					sessionStorage.setItem("overrideValidQuestionRedirect", true);
-					localData.reenterSession(hashtag);
-					lib.connectEventManager(hashtag);
-				}
+			if ($.inArray(hashtag, localHashtags) > -1 && HashtagsCollection.findOne()) {
+				reenter = true;
 			}
-			if (!reenter) {
-				var doc = {
-					privateKey: localData.getPrivateKey(),
+			if (reenter) {
+				sessionStorage.setItem("overrideValidQuestionRedirect", true);
+				Session.set("questionGroup", localData.reenterSession(hashtag));
+				lib.connectEventManager(hashtag);
+			} else {
+				const questionGroup = new DefaultQuestionGroup({
 					hashtag: hashtag,
+					questionList: []
+				});
+				questionGroup.addDefaultQuestion(0);
+				for (let i = 0; i < 4; i++) {
+					questionGroup.getQuestionList()[0].addDefaultAnswerOption(i);
+				}
+				Meteor.call('HashtagsCollection.addHashtag', {
+					privateKey: localData.getPrivateKey(),
+					hashtag: questionGroup.getHashtag(),
 					musicVolume: 80,
 					musicEnabled: 1,
 					musicTitle: "Song1"
-				};
-				Meteor.call('HashtagsCollection.addHashtag', doc, (err) => {
-					if (err) {
-						$("#addNewHashtag").removeAttr("disabled");
-						new ErrorSplashscreen({
-							autostart: true,
-							errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
-						});
-					} else {
-						for (var i = 0; i < 4; i++) {
-							Meteor.call("AnswerOptionCollection.addOption", {
-								hashtag: hashtag,
-								questionIndex: 0,
-								answerText: "",
-								answerOptionNumber: i,
-								isCorrect: 0
-							});
-						}
-						Meteor.call("QuestionGroupCollection.insert", {
-							hashtag: hashtag,
-							questionList: [
-								{
-									questionText: "",
-									timer: 40000
-								}
-							]
-						});
-
-						localData.addHashtag(hashtag);
+				}, function (err) {
+					if (!err) {
+						localData.addHashtag(questionGroup);
+						Session.set("questionGroup", questionGroup);
 						lib.connectEventManager(hashtag);
 					}
 				});
@@ -203,7 +186,7 @@ Template.hashtagManagement.events({
 	},
 	"click .js-reactivate-hashtag": function (event) {
 		var hashtag = $(event.currentTarget).parent().parent()[0].id;
-		localData.reenterSession(hashtag);
+		Session.set("questionGroup", localData.reenterSession(hashtag));
 		lib.connectEventManager(hashtag);
 	},
 	"click .js-export": function (event) {
@@ -274,7 +257,7 @@ Template.hashtagManagement.events({
 Template.showHashtagsSplashscreen.events({
 	"click .js-my-hash": function (event) {
 		var hashtag = $(event.currentTarget).text();
-		localData.reenterSession(hashtag);
+		Session.set("questionGroup", localData.reenterSession(hashtag));
 		lib.hashtagSplashscreen.destroy();
 		sessionStorage.setItem("overrideValidQuestionRedirect", true);
 		lib.connectEventManager(hashtag);

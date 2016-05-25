@@ -33,14 +33,20 @@ if (Meteor.isServer) {
 				hashtag: "hashtags",
 				privateKey: new Mongo.ObjectID()._str,
 				sessionStatus: 0,
-				lastConnection: (new Date()).getTime()
+				lastConnection: (new Date()).getTime(),
+				musicVolume: 0,
+				musicEnabled: 0,
+				musicTitle: "noSong"
 			};
 			// block this hash / pk -> do not use and merge to production server!
 			var blockedHashtag2 = {
 				hashtag: "privateKey",
 				privateKey: new Mongo.ObjectID()._str,
 				sessionStatus: 0,
-				lastConnection: (new Date()).getTime()
+				lastConnection: (new Date()).getTime(),
+				musicVolume: 0,
+				musicEnabled: 0,
+				musicTitle: "noSong"
 			};
 
 			HashtagsCollection.insert(blockedHashtag1);

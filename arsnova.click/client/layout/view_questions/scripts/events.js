@@ -27,6 +27,9 @@ Template.createQuestionView.events({
 		lib.addQuestion(EventManagerCollection.findOne().questionIndex);
 		lib.checkForValidQuestionText();
 	},
+	'change #chooseQuestionType': function () {
+		lib.addQuestion(EventManagerCollection.findOne().questionIndex);
+	},
 	//Save question in Sessions-Collection when Button "Next" is clicked
 	'click #forwardButton': function () {
 		lib.addQuestion(EventManagerCollection.findOne().questionIndex);

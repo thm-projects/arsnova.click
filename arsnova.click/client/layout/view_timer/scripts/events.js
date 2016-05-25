@@ -16,30 +16,18 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {TAPi18n} from 'meteor/tap:i18n';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import {setTimer} from './lib.js';
 
 Template.createTimerView.events({
-	"click #forwardButton, click #backButton": function (event) {
-		var err = setTimer(EventManagerCollection.findOne().questionIndex);
-
-		if (err) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
-			});
-		} else {
-			if ($(event.currentTarget).attr("id") === "forwardButton") {
-				Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
-				Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
-				Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
-				Router.go("/" + Router.current().params.quizName + "/memberlist");
-			} else {
-				Router.go("/" + Router.current().params.quizName + "/answeroptions");
-			}
-		}
+	"click #forwardButton": function () {
+		Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
+		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
+		Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
+		Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
+		Router.go("/" + Router.current().params.quizName + "/memberlist");
+	},
+	"click #backButton": function () {
+		Router.go("/" + Router.current().params.quizName + "/answeroptions");
 	}
 });

@@ -47,8 +47,7 @@ export function startCountdown(index) {
 
 	var questionDoc = QuestionGroupCollection.findOne().questionList[index];
 	Session.set("sessionCountDown", questionDoc.timer);
-	countdown = new ReactiveCountdown(questionDoc.timer / 1000, {
-		interval: 1000,
+	countdown = new ReactiveCountdown(questionDoc.timer, {
 		tick: function () {
 			var buttonsCount = $('.answer-row').children().length;
 			var lastButton = 0;

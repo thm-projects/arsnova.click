@@ -186,7 +186,11 @@
       "enter_question_here": "Introduzca su pregunta aquí",
       "format": "Formato",
       "edit": "Editar",
-      "preview": "Avance"
+      "preview": "Avance",
+      "single_choice_question": "Una única opción",
+      "multiple_choice_question": "Opción multiple",
+      "survey_question": "Encuesta",
+      "ranged_question": "Pregunta de examen y respuestas"
     },
     "timer": {
       "set_countdown": "Ajuste de cuenta atrás",

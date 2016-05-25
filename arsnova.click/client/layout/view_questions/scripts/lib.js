@@ -15,12 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {questionReflection} from '/lib/questions/question_reflection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
-import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 
 function doesMarkdownSyntaxExist(questionText, syntaxStart, syntaxMiddle, syntaxEnd) {
@@ -92,21 +91,19 @@ function questionTextLengthWithoutMarkdownSyntax(questionText) {
 export var subscriptionHandler = null;
 
 export function addQuestion(index) {
-	var questionText = $('#questionText').val();
-	Meteor.call("QuestionGroupCollection.addQuestion", {
-		hashtag: Router.current().params.quizName,
-		questionIndex: index,
-		questionText: questionText
-	}, (err) => {
-		if (err) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
-			});
-		} else {
-			localData.addQuestion(Router.current().params.quizName, index, questionText);
-		}
-	});
+	const questionText = $('#questionText').val() || "";
+	const questionType = $('#chooseQuestionType').find('option:selected').attr("id");
+	const questionItem = Session.get("questionGroup");
+
+	// Check if we need to change the type of the question
+	if (questionItem.getQuestionList()[index].constructor.name !== questionType) {
+		const serialized = questionItem.getQuestionList()[index].serialize();
+		delete serialized.type;
+		questionItem.addQuestion(questionReflection[questionType](serialized), index);
+	}
+	questionItem.getQuestionList()[index].setQuestionText(questionText);
+	Session.set("questionGroup", questionItem);
+	localData.addHashtag(questionItem);
 }
 
 export function calculateWindow() {
@@ -136,8 +133,8 @@ export function calculateWindow() {
 }
 
 export function checkForValidQuestionText() {
-	var questionText = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].questionText;
-	if (typeof questionText !== "undefined" && questionTextLengthWithoutMarkdownSyntax(questionText) < 5) {
+	var questionText = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
+	if (questionTextLengthWithoutMarkdownSyntax(questionText) < 5) {
 		$('#questionText').addClass("invalidAnswerOption");
 	} else {
 		$('#questionText').removeClass("invalidAnswerOption");
@@ -160,10 +157,10 @@ export function changePreviewButtonText(text) {
 }
 
 export function checkForMarkdown() {
-	if (EventManagerCollection.findOne().questionIndex < 0 || !QuestionGroupCollection.findOne()) {
+	if (EventManagerCollection.findOne().questionIndex < 0) {
 		return;
 	}
-	var questionText = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].questionText;
+	var questionText = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
 	if (questionText && questionContainsMarkdownSyntax(questionText)) {
 		changePreviewButtonText(TAPi18n.__("view.questions.edit"));
 

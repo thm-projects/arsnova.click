@@ -34,19 +34,19 @@ Meteor.methods({
 		});
 		return Boolean(doc);
 	},
-	'HashtagsCollection.addHashtag': function (doc) {
-		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag: doc.hashtag});
+	'HashtagsCollection.addHashtag': function (sessionConfiguration) {
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag: sessionConfiguration.hashtag});
 
-		if (HashtagsCollection.find({hashtag: doc.hashtag}).count() > 0) {
+		if (HashtagsCollection.findOne({hashtag: sessionConfiguration.hashtag})) {
 			throw new Meteor.Error('HashtagsCollection.addHashtag', 'session_exists');
 		}
 
-		HashtagsCollection.insert(doc);
-		EventManagerCollection.update({hashtag: doc.hashtag}, {
+		HashtagsCollection.insert(sessionConfiguration);
+		EventManagerCollection.update({hashtag: sessionConfiguration.hashtag}, {
 			$push: {
 				eventStack: {
 					key: "HashtagsCollection.addHashtag",
-					value: {hashtag: doc.hashtag}
+					value: {hashtag: sessionConfiguration.hashtag}
 				}
 			}
 		});

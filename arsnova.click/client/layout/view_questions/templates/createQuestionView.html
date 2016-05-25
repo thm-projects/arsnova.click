@@ -19,30 +19,39 @@
 	{{> titel titelText=""}}
 	<div class="row center-vertical">
 		<div class="col-md-12">
-		<div class="row">
-			<div id="previewQuestionText" class="col-md-12" style="display: none;">
-				<div id="questionTextDisplay" class="round-corners previewText"></div>
-			</div>
-			<div id="editQuestionText" class="col-md-12">
-				{{> markdownBar }}
-				<textarea class="round-corners textarea placeholder-align-center"
-						  maxlength="1000" rows="4" id="questionText"
-						  placeholder="{{_ "view.questions.enter_question_here"}}"
-				>{{questionText}}</textarea>
-			</div>
-		</div>
-		<div class="row distance-top">
-			<div class="col-md-12">
-				<div class="row row-create-question-buttons">
-					<div class="col-xs-6 col-xs-offset-3">
-						<button id="formatPreviewButton" class="button button-purple">
-							<span id="formatPreviewText">{{_ "view.questions.format"}}</span>
-							<span id="formatPreviewGlyphicon" class="glyphicon glyphicon-cog glyph-right"></span>
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <select title="chooseQuestionType" class="round-corners textarea" id="chooseQuestionType">
+                        {{#each questionTypes }}
+                            <option id="{{this.id}}" {{this.selected}}>{{_ this.translationName}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="row distance-top">
+                <div id="previewQuestionText" class="col-md-12" style="display: none;">
+                    <div id="questionTextDisplay" class="round-corners previewText"></div>
+                </div>
+                <div id="editQuestionText" class="col-md-12">
+                    {{> markdownBar }}
+                    <textarea class="round-corners textarea placeholder-align-center"
+                              maxlength="1000" rows="4" id="questionText"
+                              placeholder="{{_ "view.questions.enter_question_here"}}"
+                    >{{questionText}}</textarea>
+                </div>
+            </div>
+            <div class="row distance-top">
+                <div class="col-md-12">
+                    <div class="row row-create-question-buttons">
+                        <div class="col-xs-6 col-xs-offset-3">
+                            <button id="formatPreviewButton" class="button button-purple">
+                                <span id="formatPreviewText">{{_ "view.questions.format"}}</span>
+                                <span id="formatPreviewGlyphicon" class="glyphicon glyphicon-cog glyph-right"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 		</div>
 	</div>
 	{{> footer_nav_buttons backId="backButton" forwardId="forwardButton"}}

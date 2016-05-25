@@ -71,7 +71,7 @@ export function calculateButtonCount(allMembersCount) {
 
 function getLeaderBoardItemsByIndex(index) {
 	var allGoodMembers = [];
-	var param = {isCorrect: 1};
+	var param = {isCorrect: true};
 	param.questionIndex = index;
 	var rightAnswerOptions = AnswerOptionCollection.find(param);
 	delete param.isCorrect;
@@ -85,7 +85,7 @@ function getLeaderBoardItemsByIndex(index) {
 		var totalResponseTime = 0;
 		if ((userResponses.count() === rightAnswerOptions.count()) && (userResponses.count() > 0) && userHasRightAnswers) {
 			userResponses.forEach(function (userResponse) {
-				param.isCorrect = 1;
+				param.isCorrect = true;
 				param.answerOptionNumber = userResponse.answerOptionNumber;
 				var checkAnswerOptionDoc = AnswerOptionCollection.findOne(param);
 				delete param.isCorrect;
@@ -135,7 +135,7 @@ function getAllNonPollingLeaderBoardItems() {
 		// just pick leaderBoardItems for sc & mc questions, pollings doesn't matter
 		if (AnswerOptionCollection.find({
 				questionIndex: i,
-				isCorrect: 1
+				isCorrect: true
 			}).count() > 0) {
 			result.push({
 				index: i,

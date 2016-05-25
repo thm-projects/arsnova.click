@@ -17,76 +17,18 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
-import {TAPi18n} from 'meteor/tap:i18n';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
-import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 
-export function checkForValidQuestions(index) {
-	var questionDoc = QuestionGroupCollection.findOne();
-	var answerDoc = AnswerOptionCollection.find({questionIndex: index});
-	if (!questionDoc || !answerDoc) {
-		return false;
-	}
-
-	var question = questionDoc.questionList[index];
-
-	if (typeof question === "undefined") {
-		return false;
-	}
-
-	if (!question.questionText || question.questionText.length < 5 || question.questionText.length > 10000) {
-		return false;
-	}
-	if (!question.timer || isNaN(question.timer) || question.timer < 5000 || question.timer > 260000) {
-		return false;
-	}
-
-	var hasValidAnswers = true;
-	answerDoc.forEach(function (value) {
-		if (typeof value.answerText === "undefined" || value.answerText.length > 500 || value.answerText.length === 0) {
-			hasValidAnswers = false;
-		}
-	});
-	return hasValidAnswers;
-}
-
 export function addNewQuestion(callback) {
-	var index = QuestionGroupCollection.findOne().questionList.length;
-	Meteor.call("QuestionGroupCollection.addQuestion", {
-		hashtag: Router.current().params.quizName,
-		questionIndex: index,
-		questionText: ""
-	}, (err) => {
-		if (err) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
-			});
-		} else {
-			for (var i = 0; i < 4; i++) {
-				Meteor.call('AnswerOptionCollection.addOption', {
-					hashtag: Router.current().params.quizName,
-					questionIndex: index,
-					answerOptionNumber: i,
-					answerText: "",
-					isCorrect: 0
-				});
-			}
-
-			localData.addQuestion(Router.current().params.quizName, QuestionGroupCollection.findOne().questionList.length, "");
-
-			var validQuestions = Session.get("validQuestions");
-			validQuestions[index] = false;
-			Session.set("validQuestions", validQuestions);
-
-			Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index, function () {
-				Router.go("/" + Router.current().params.quizName + "/question");
-				if (callback) {
-					callback();
-				}
-			});
+	const questionItem = Session.get("questionGroup");
+	const index = questionItem.getQuestionList().length;
+	questionItem.addDefaultQuestion();
+	Session.set("questionGroup", questionItem);
+	localData.addHashtag(questionItem);
+	Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index, function () {
+		Router.go("/" + Router.current().params.quizName + "/question");
+		if (callback) {
+			callback();
 		}
 	});
 }

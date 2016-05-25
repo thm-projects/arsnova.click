@@ -4,6 +4,7 @@
 	$fg-text-light: white;
 	$fg_text-dark: black;
 	$fg_a: #ffd700;
+	$fg_quiz-name: #ffd700;
 	$fg_titel: white;
 	$success: #008000; /* green */
 	$success-text-color: #ffffff; /* white */
@@ -123,6 +124,7 @@
 		$thmnavy: #003bd1;
 		$thmgreen: #80ba24;
 		$thmgray: #4a5c66;
+		$fg_quiz-name: #b5003f;
 		$placeholder-color: #ffffff ; /* white */
 		$input-background-color: #808080; /* grey */
 		$footer-background-color: #000000; /*gainsboro */
@@ -160,6 +162,9 @@
 		.titel {
 			color: $fg_titel;
 		}
+		.quizName {
+			color: $fg_quiz-name;
+		}
 		.container, .footer-info-bar, .fixed-bottom {
 			background-color: $background-color;
 		}
@@ -170,6 +175,93 @@
 		button:disabled {
 			background-color: $disabled-button-background;
 		}
+		.kill-session-switch-wrapper {
+			color: #b22222;
+			&:hover {
+				color: red;
+			}
+		}
+		.qr-code-button {
+			color: white;
+			&:hover {
+				color: darken(white, 20);
+			}
+		}
+		.qr-code-container {
+			border: 1px solid white;
+			background-color: white;
+		}
+		.qr-code-container-close {
+			color: black;
+			&:hover {
+				color: lighten(black, 20);
+			}
+			.glyphicon-remove {
+				border: 1px solid black;
+				background-color: white;
+			}
+		}
+		.qr-code-label {
+			color: black;
+		}
+		.sound-button-active {
+			color: #00CC00;
+			&:hover {
+				color: #33FF00;
+			}
+		}
+		.sound-button-inactive {
+			color: #b22222;
+			&:hover {
+				color: red;
+			}
+		}
+		.questionScrollPane {
+			.indexNumber {
+				color: white;
+			}
+			.removeQuestion {
+				color: white;
+			}
+			.questionIcon {
+				&.valid {
+					.indexNumber {
+						background-color: green;
+					}
+					&:hover:not(.active) {
+						.indexNumber {
+							background-color: darken(green, 5%);
+						}
+					}
+				}
+				&:not(.valid) {
+					.indexNumber {
+						background-color: grey;
+					}
+					&:hover:not(.active) {
+						.indexNumber {
+							background-color: darken(grey, 10%);
+						}
+					}
+				}
+				&.active {
+					border: 1px solid beige;
+					&.valid {
+						.removeQuestion {
+							background-color: green;
+						}
+					}
+					.removeQuestion {
+						box-shadow: none;
+						border-left: 10px solid black;
+						&:hover {
+							background-color: red;
+							color: white;
+						}
+					}
+				}
+			}
+		}
 		.footer-gradient {
 			color: $footer-text-color;
 		}
@@ -178,6 +270,10 @@
 		}
 		.footer a div {
 			border-left: solid $footer-text-color 1px;
+			color: black !important;
+		}
+		.footer-info-bar {
+			color: #fff;
 		}
 		.navbar-transparent {
 			background-color: $background-color;

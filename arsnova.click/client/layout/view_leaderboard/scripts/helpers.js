@@ -35,10 +35,10 @@ Template.leaderBoard.helpers({
 		return nick === localStorage.getItem(Router.current().params.quizName + "nick");
 	},
 	getTitleText: ()=> {
-		if (Session.get("showLeaderBoardId") !== "undefined") {
-			return TAPi18n.__("view.leaderboard.title.single_question", {questionId: (Session.get("showLeaderBoardId") + 1)});
-		} else {
+		if (Session.get("showGlobalRanking")) {
 			return TAPi18n.__("view.leaderboard.title.all_questions");
+		} else {
+			return TAPi18n.__("view.leaderboard.title.single_question", {questionId: (Session.get("showLeaderBoardId") + 1)});
 		}
 	},
 	getPosition: function (index) {

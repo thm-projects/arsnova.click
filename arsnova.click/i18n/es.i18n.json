@@ -204,6 +204,32 @@
       "survey_question": "Encuesta",
       "ranged_question": "Pregunta de examen y respuestas"
     },
+    "theme_switcher": {
+      "set_theme": "Elegir un tema para todos los asistentes",
+      "select_a_theme_title": "Elegir el tema",
+      "themes": {
+        "default": {
+          "name": "ARSnova.click",
+          "description": "La primera y principal tema de ARSnova.click"
+        },
+        "dark": {
+          "name": "Versión oscura",
+          "description": "Fondo oscuro con bajo contraste"
+        },
+        "elegant": {
+          "name": "Elegante",
+          "description": "Elegante tema para Quizzers sofisticados"
+        },
+        "thm": {
+          "name": "THM",
+          "description": "Diseño Corporativo de la Universidad de Ciencias Aplicadas (THM)"
+        },
+        "arsnova": {
+          "name": "ARSnova",
+          "description": "Ya sabes Ars Nova? Sentirse como en casa!"
+        }
+      }
+    },
     "timer": {
       "set_countdown": "Ajuste de cuenta atrás",
       "second": "Segundo",

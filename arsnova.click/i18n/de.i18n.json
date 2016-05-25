@@ -204,6 +204,32 @@
       "survey_question": "Umfrage",
       "ranged_question": "Quizfrage mit Antwortintervall"
     },
+    "theme_switcher": {
+      "set_theme": "Theme für alle Teilnehmer wählen",
+      "select_a_theme_title": "Wähle ein Theme für alle Teilnehmer",
+      "themes": {
+        "default": {
+          "name": "ARSnova.click",
+          "description": "Das Theme der ersten Stunde"
+        },
+        "dark": {
+          "name": "Dunkle Version",
+          "description": "Dunkler Hintergrund mit geringem Kontrast"
+        },
+        "elegant": {
+          "name": "Elegant",
+          "description": "Elegantes Theme für anspruchsvolle Quizrunden"
+        },
+        "thm": {
+          "name": "THM",
+          "description": "Corporate Design der Technischen Hochschule Mittelhessen"
+        },
+        "arsnova": {
+          "name": "ARSnova",
+          "description": "Du kennst ARSnova? Dann fühl' dich wie zu Hause!"
+        }
+      }
+    },
     "timer": {
       "set_countdown": "Countdown einstellen",
       "second": "Sekunde",

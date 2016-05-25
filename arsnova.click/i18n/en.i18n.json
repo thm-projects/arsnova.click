@@ -204,6 +204,32 @@
       "survey_question": "Survey",
       "ranged_question": "Question with ranged answeroptions"
     },
+    "theme_switcher": {
+      "set_theme": "Choose a theme for all attendees",
+      "select_a_theme_title": "Choose the theme",
+      "themes": {
+        "default": {
+          "name": "ARSnova.click",
+          "description": "The first and main theme of ARSnova.click"
+        },
+        "dark": {
+          "name": "Dark version",
+          "description": "Dark background with low contrast"
+        },
+        "elegant": {
+          "name": "Elegant",
+          "description": "Elegant theme for sophisticated Quizzers"
+        },
+        "thm": {
+          "name": "THM",
+          "description": "Corporate Design of the University of Applied Science (THM)"
+        },
+        "arsnova": {
+          "name": "ARSnova",
+          "description": "You know ARSnova? Feel home!"
+        }
+      }
+    },
     "timer": {
       "set_countdown": "Set countdown",
       "second": "Second",

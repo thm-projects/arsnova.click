@@ -20,32 +20,32 @@ import {TAPi18n} from 'meteor/tap:i18n';
 
 export const themes = [
 	{
-		name: TAPi18n.__("view.theme_switcher.themes.default.name"),
-		description: TAPi18n.__("view.theme_switcher.themes.default.description"),
+		name: "view.theme_switcher.themes.default.name",
+		description: "view.theme_switcher.themes.default.description",
 		id: "theme-default",
 		selected: Session.get("questionGroup") && Session.get("questionGroup").getTheme() === "theme-default" ? 'selected' : ""
 	},
 	{
-		name: TAPi18n.__("view.theme_switcher.themes.dark.name"),
-		description: TAPi18n.__("view.theme_switcher.themes.dark.description"),
+		name: "view.theme_switcher.themes.dark.name",
+		description: "view.theme_switcher.themes.dark.description",
 		id: "theme-dark",
 		selected: Session.get("questionGroup") && Session.get("questionGroup").getTheme() === "theme-dark" ? 'selected' : ""
 	},
 	{
-		name: TAPi18n.__("view.theme_switcher.themes.thm.name"),
-		description: TAPi18n.__("view.theme_switcher.themes.thm.description"),
+		name: "view.theme_switcher.themes.thm.name",
+		description: "view.theme_switcher.themes.thm.description",
 		id: "theme-thm",
 		selected: Session.get("questionGroup") && Session.get("questionGroup").getTheme() === "theme-thm" ? 'selected' : ""
 	},
 	{
-		name: TAPi18n.__("view.theme_switcher.themes.elegant.name"),
-		description: TAPi18n.__("view.theme_switcher.themes.elegant.description"),
+		name: "view.theme_switcher.themes.elegant.name",
+		description: "view.theme_switcher.themes.elegant.description",
 		id: "theme-elegant",
 		selected: Session.get("questionGroup") && Session.get("questionGroup").getTheme() === "theme-elegant" ? 'selected' : ""
 	},
 	{
-		name: TAPi18n.__("view.theme_switcher.themes.arsnova.name"),
-		description: TAPi18n.__("view.theme_switcher.themes.arsnova.description"),
+		name: "view.theme_switcher.themes.arsnova.name",
+		description: "view.theme_switcher.themes.arsnova.description",
 		id: "theme-arsnova",
 		selected: Session.get("questionGroup") && Session.get("questionGroup").getTheme() === "theme-arsnova" ? 'selected' : ""
 	}

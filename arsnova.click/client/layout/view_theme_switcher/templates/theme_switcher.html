@@ -6,14 +6,14 @@
                 <div class="col-lg-7">
                     <select id="select-theme" class="round-corners textarea" title="{{_ "view.theme_switcher.select_a_theme_title"}}">
                         {{#each themes}}
-                            <option id="{{this.id}}" {{this.selected}}>{{this.name}}</option>
+                            <option id="{{this.id}}" {{this.selected}}>{{_ this.name}}</option>
                         {{/each}}
                     </select>
                 </div>
             </div>
             <div class="row distance-top">
                 <div class="col-xs-12">
-                    <p class="theme-description">{{getCurrentThemeDescription}}</p>
+                    <p class="theme-description">{{_ getCurrentThemeDescription}}</p>
                 </div>
             </div>
         </div>

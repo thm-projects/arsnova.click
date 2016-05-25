@@ -169,6 +169,11 @@
   border: 0;
 }
 
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+}
+
 .previewText {
   width: 100%;
   font-size: 1.5em;

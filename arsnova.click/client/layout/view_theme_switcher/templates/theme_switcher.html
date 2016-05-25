@@ -1,9 +1,9 @@
 <template name="themeSwitcher">
     {{> titel titelText = 'view.theme_switcher.set_theme' }}
     <div class="row center-vertical">
-        <div class="col-md-12">
+        <div class="col-xs-12">
             <div class="row distance-top">
-                <div class="col-lg-7">
+                <div class="col-xs-12">
                     <select id="select-theme" class="round-corners textarea" title="{{_ "view.theme_switcher.select_a_theme_title"}}">
                         {{#each themes}}
                             <option id="{{this.id}}" {{isThemeSelected this.id}}>{{_ this.name}}</option>

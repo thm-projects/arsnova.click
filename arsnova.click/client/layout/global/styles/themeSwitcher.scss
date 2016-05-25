@@ -191,7 +191,20 @@
 	}
 
 	@if ($name == "theme-arsnova") {
-
+		$bg-nav-row: #3d9c19;
+		$bg-container: #dfe5e6;
+		$bg-questionList-row: $bg-container;
+		$bg-footer: #dfe5e6;
+		$fg_a: white;
+		$fg_quiz-name: white;
+		$fg_titel: black;
+		$fg-theme_description: black;
+		$default-text-color: black;
+		$fg-text-light: black;
+		$fg_text-dark: black;
+		$fg-footer-info-bar: #394a59;
+		$fg-sound-button-active: #33FF00;
+		$fg-sound-button-active-hovered: #A1FF8A;
 	}
 
 	.#{$name} {
@@ -215,6 +228,17 @@
 		}
 		.footer-info-bar {
 			background-color: $bg-footer;
+			color: $fg-footer-info-bar;
+		}
+		.footer-gradient {
+			color: $footer-text-color;
+		}
+		.footer a {
+			color: $footer-text-color;
+			div {
+				border-left: solid $footer-text-color 1px;
+				color: $footer-text-color !important;
+			}
 		}
 		.navbar-fixed-top {
 			background-color: $bg-nav-row;
@@ -318,19 +342,6 @@
 					}
 				}
 			}
-		}
-		.footer-gradient {
-			color: $footer-text-color;
-		}
-		.footer a {
-			color: $footer-text-color;
-			div {
-				border-left: solid $footer-text-color 1px;
-				color: $footer-text-color !important;
-			}
-		}
-		.footer-info-bar {
-			color: $fg-footer-info-bar;
 		}
 		.progress-bar {
 			background: $bg_progress-bar;

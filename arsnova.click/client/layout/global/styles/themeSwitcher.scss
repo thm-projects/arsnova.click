@@ -38,7 +38,7 @@
 	$bg_progress-bar: white;
 	$fg_progress-bar: black;
 
-	@if ($name == "theme-elegant") {
+	@if ($name == "theme-dark") {
 		$success: #00CD00; /* green */
 		$warning: #FF2222; /* firebrick */
 		$info: #1C86EE; /* dodgerblue */
@@ -74,6 +74,14 @@
 		$success: #a9f5a9; /*bright green*/
 		$success-text-color: $thmgray;
 		$check-mark-unchecked: #aaaaaa;
+	}
+
+	@if ($name == "theme-elegant") {
+
+	}
+
+	@if ($name == "theme-arsnova") {
+
 	}
 
 	.#{$name} {
@@ -615,5 +623,7 @@
 }
 
 @include theme(theme-default);
-@include theme(theme-elegant);
+@include theme(theme-dark);
 @include theme(theme-thm);
+@include theme(theme-elegant);
+@include theme(theme-arsnova);

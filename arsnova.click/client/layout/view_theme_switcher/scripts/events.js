@@ -15,19 +15,23 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import * as localData from '/lib/local_storage.js';
 
-Template.createTimerView.events({
+Template.themeSwitcher.events({
+	"change #select-theme": function (event) {
+		const theme = $(event.currentTarget).find("option:selected").attr("id");
+		const questionItem = Session.get("questionGroup");
+		questionItem.setTheme(theme);
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
+		$('#theme-wrapper').removeClass().addClass(theme);
+	},
 	"click #forwardButton": function () {
-		Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
-		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
-		Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
-		Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
-		Router.go("/" + Router.current().params.quizName + "/memberlist");
+		Router.go("/" + Router.current().params.quizName + "/settimer");
 	},
 	"click #backButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/theme");
+		Router.go("/" + Router.current().params.quizName + "/answeroptions");
 	}
 });

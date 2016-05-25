@@ -85,7 +85,7 @@ Template.createAnswerOptions.events({
 	},
 	"click #forwardButton": function () {
 		parseAnswerOptionInput(EventManagerCollection.findOne().questionIndex);
-		Router.go("/" + Router.current().params.quizName + "/settimer");
+		Router.go("/" + Router.current().params.quizName + "/theme");
 	},
 	"keydown .input-field": function (event) {
 		if ((event.keyCode === 9 || event.keyCode === 13) && !event.shiftKey) {

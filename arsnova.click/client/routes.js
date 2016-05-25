@@ -226,6 +226,20 @@ Router.route('/:quizName/answeroptions', {
 	}
 });
 
+Router.route('/:quizName/theme', {
+	action: function () {
+		if (localData.containsHashtag(Router.current().params.quizName)) {
+			if (!globalEventStackObserver.isRunning()) {
+				globalEventStackObserver.startObserving(Router.current().params.quizName);
+			}
+			this.render('questionList', {to: 'header.questionList'});
+			this.render('themeSwitcher');
+		} else {
+			Router.go("/");
+		}
+	}
+});
+
 Router.route('/:quizName/settimer', {
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {

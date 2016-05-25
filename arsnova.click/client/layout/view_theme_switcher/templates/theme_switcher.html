@@ -1,0 +1,22 @@
+<template name="themeSwitcher">
+    {{> titel titelText = 'view.theme_switcher.set_theme' }}
+    <div class="row center-vertical">
+        <div class="col-md-12">
+            <div class="row distance-top">
+                <div class="col-lg-7">
+                    <select id="select-theme" class="round-corners textarea" title="{{_ "view.theme_switcher.select_a_theme_title"}}">
+                        {{#each themes}}
+                            <option id="{{this.id}}" {{this.selected}}>{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="row distance-top">
+                <div class="col-xs-12">
+                    <p class="theme-description">{{getCurrentThemeDescription}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{> footer_nav_buttons backId = 'backButton' forwardId = 'forwardButton' }}
+</template>

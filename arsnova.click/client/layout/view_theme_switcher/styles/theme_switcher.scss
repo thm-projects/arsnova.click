@@ -5,9 +5,11 @@
 	font-size: 2vw;
 }
 
-.textarea {
-	text-align-last:center;
-	text-align: center;
+select {
+	&.textarea {
+		text-align-last:center;
+		text-align: center;
+	}
 }
 
 option {

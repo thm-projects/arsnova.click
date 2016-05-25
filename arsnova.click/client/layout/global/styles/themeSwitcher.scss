@@ -160,6 +160,8 @@
 		$success-text-color: $thmgray;
 		$check-mark-unchecked: #aaaaaa;
 		$fg-theme_description: black;
+		$fg-sound-button-active: #33FF00;
+		$fg-sound-button-active-hovered: #A1FF8A;
 	}
 
 	@if ($name == "theme-elegant") {

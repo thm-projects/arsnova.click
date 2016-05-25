@@ -17,6 +17,7 @@
 	$disabled-button-background: #808080; /* grey */
 	$placeholder-color: #808080; /* grey */
 	$input-background-color: #ffd700; /* gold */
+	$input-foreground-color: black;
 	$input-group-letter-color: #2f4f4f; /* darkslategrey */
 	$footer-background-color: #dcdcdc; /*gainsboro */
 	$footer-text-color: #000000; /* black */
@@ -28,18 +29,76 @@
 	$progress-bar-failure-color: firebrick;
 	$progress-bar-default-color: grey;
 	$splashscreen-background-color: #98fb98; /* palegreen */
+	$splashscreen-foreground-color: black;
 	$splashscreen-question-and-answer-background-color: $splashscreen-background-color; /* palegreen */
 	$splashscreen-question-preview-background-color: $splashscreen-background-color; /* palegreen */
 	$splashscreen-reading-confirmed-background-color: $splashscreen-background-color; /* palegreen */
 	$splashscreen-show-hashtags-background-color: $splashscreen-background-color; /* palegreen */
 	$splashscreen-sound-config-background-color: $splashscreen-background-color; /* palegreen */
+	$splashscreen-sound-config-button-background-color: $success;
 	$splashscreen-delete-background-color: $splashscreen-background-color; /* palegreen */
 	$splash-screen-error-message-background-color: white;
+	$splash-screen-error-message-button-background-color: $success;
+	$splash-screen-error-message-button-foreground-color: white;
 	$check-mark-checked: #00882a;
 	$check-mark-unchecked: #aaaaaa;
 	$bg_progress-bar: white;
 	$fg_progress-bar: black;
 	$fg-theme_description: white;
+	$button-shadow: black;
+	$bg-button-leader: $input-background-color;
+	$fg-button-leader: $input-foreground-color;
+	$bg-button-result: #eeeeee;
+	$fg-button-result-percentage: #ffffff;
+	$bg-button-result-progress: LightSteelBlue;
+	$bg-previewText: white;
+	$fg-hljs: #f0f0f0;
+	$bg-hljs: black;
+	$border-hljs-line-numbers: #ccc;
+	$fg-hljs-line-numbers: #999;
+	$bg-hljs-pre: white;
+	$fg-hljs-comment: #006a00;
+	$fg-lockquote: #394a59;
+	$fg-js-my-hash: black;
+	$bg-js-my-hash: #ffffe0;
+	$box-shadow-markdown: black;
+	$colorChangingArs0: white;
+	$colorChangingArs25: $warning;
+	$colorChangingArs50: $info;
+	$colorChangingArs75: $input-background-color;
+	$colorChangingArs100: white;
+	$colorChangingNova0: $input-background-color;
+	$colorChangingNova25: white;
+	$colorChangingNova50: $warning;
+	$colorChangingNova75: $info;
+	$colorChangingNova100: $input-background-color;
+	$colorChangingDot0: $info;
+	$colorChangingDot25: $input-background-color;
+	$colorChangingDot50: white;
+	$colorChangingDot75: $warning;
+	$colorChangingDot100: $info;
+	$colorChangingClick0: $warning;
+	$colorChangingClick25: $info;
+	$colorChangingClick50: $input-background-color;
+	$colorChangingClick75: white;
+	$colorChangingClick100: $warning;
+	$bg-colorChangingOwnNick0: $input-background-color;
+	$fg-colorChangingOwnNick0: white;
+	$bg-colorChangingOwnNick25: $warning;
+	$fg-colorChangingOwnNick25: white;
+	$bg-colorChangingOwnNick50: $info;
+	$fg-colorChangingOwnNick50: white;
+	$bg-colorChangingOwnNick75: $default;
+	$fg-colorChangingOwnNick75: white;
+	$bg-colorChangingOwnNick100: #98fb98;
+	$fg-colorChangingOwnNick100: black;
+	$bg-btn-more-learners: rebeccapurple;
+	$fg-btn-more-learners: white;
+	$box-shadow-question-row-active: rebeccapurple;
+	$fg-formGroup-progress-percentage-label: white;
+	$bg-btn-file-input: white;
+	$fg-question-title: white;
+	$fg-glyphicon-style: #FFF;
 
 	@if ($name == "theme-dark") {
 		$success: #00CD00; /* green */
@@ -92,65 +151,22 @@
 		.text-light, a.text-light, a:hover.text-light, a:active.text-light, a:visited.text-light, a:focus.text-light {
 			color: $fg-text-light;
 		}
-
 		a.text-dark, a:hover.text-dark, a:active.text-dark, a:visited.text-dark, a:focus.text-dark {
 			color: $fg_text-dark !important;
 		}
-
 		a, a:hover, a:active, a:visited, a:focus {
 			color: $fg_a;
 		}
-
 		.titel {
 			color: $fg_titel;
 		}
-
-		.container,
-		.footer-info-bar,
-		.fixed-bottom {
+		.container, .footer-info-bar, .fixed-bottom {
 			background-color: $background-color;
 		}
-
-		textarea::-webkit-input-placeholder {
-			color: $placeholder-color;
-		}
-		/* WebKit, Blink, Edge */
-		textarea:-moz-placeholder {
+		textarea::-moz-placeholder, textarea:-ms-input-placeholder, input::-webkit-input-placeholder, input[placeholder] {
 			color: $placeholder-color;
 			opacity: 1;
 		}
-		/* Mozilla Firefox 4 to 18 */
-
-		textarea::-moz-placeholder {
-			color: $placeholder-color;
-			opacity: 1;
-		}
-		/* Mozilla Firefox 19+ */
-		textarea:-ms-input-placeholder {
-			color: $placeholder-color;
-		}
-		/* Internet Explorer 10-11 */
-		input::-webkit-input-placeholder {
-			color: $placeholder-color;
-		}
-		/* WebKit, Blink, Edge */
-		input[placeholder] {
-			color: $placeholder-color;
-		}
-		input:-moz-placeholder {
-			color: $placeholder-color;
-			opacity: 1;
-		}
-		/* Mozilla Firefox 4 to 18 */
-		input::-moz-placeholder {
-			color: $placeholder-color;
-			opacity: 1;
-		}
-		/* Mozilla Firefox 19+ */
-		input:-ms-input-placeholder {
-			color: $placeholder-color;
-		}
-		/* Internet Explorer 10-11 */
 		button:disabled {
 			background-color: $disabled-button-background;
 		}
@@ -174,10 +190,10 @@
 			background-color: $slider-color;
 		}
 		.button-shadow, .button {
-			box-shadow: 1px 1px 5px black;
+			box-shadow: 1px 1px 5px $button-shadow;
 		}
 		.input-field {
-			color: black !important;
+			color: $input-foreground-color !important;
 		}
 		.input-field-bg-color, .input-field {
 			background-color: $input-background-color;
@@ -205,18 +221,18 @@
 			color: $default-text-color;
 		}
 		.button-leader {
-			background-color: $input-background-color;
-			color: black;
+			background-color: $bg-button-leader;
+			color: $fg-button-leader;
 		}
 		.button-result {
-			background-color: #eeeeee;
-		}
-		.button-result .percentage {
-			color: #ffffff;
-			font-weight: bolder;
-		}
-		.button-result .progress {
-			background-color: LightSteelBlue;
+			background-color: $bg-button-result;
+			.percentage {
+				color: $fg-button-result-percentage;
+				font-weight: bolder;
+			}
+			.progress {
+				background-color: $bg-button-result-progress;
+			}
 		}
 		.progress-success {
 			background-color: $progress-bar-success-color !important;
@@ -228,10 +244,10 @@
 			background-color: $input-background-color !important;
 		}
 		.textarea {
-			background-color: gold;
+			background-color: $input-background-color;
 		}
 		.previewText {
-			background-color: white;
+			background-color: $bg-previewText;
 		}
 		.check-mark-checked {
 			color: $check-mark-checked;
@@ -253,22 +269,22 @@
 		.popover.bottom > .arrow:after {
 			border-bottom-color: $warning;
 		}
-		.hljs-line-numbers {
-			border-right: 1px solid #ccc;
-			color: #999;
-		}
 		.lockquote {
-			color: #394a59 !important;
+			color: $fg-lockquote !important;
 		}
 		.hljs {
-			background: #f0f0f0;
-			color: black;
+			background: $bg-hljs;
+			color: $fg-hljs;
+		}
+		.hljs-line-numbers {
+			border-right: 1px solid $border-hljs-line-numbers;
+			color: $fg-hljs-line-numbers;
 		}
 		.hljs-pre {
-			background-color: white;
+			background-color: $bg-hljs-pre;
 		}
 		.hljs-comment {
-			color: #006a00;
+			color: $fg-hljs-comment;
 		}
 		.hljs-keyword, .hljs-literal, .nginx .hljs-title {
 			color: #aa0d91;
@@ -395,127 +411,127 @@
 		}
 		@keyframes colorChangingArs {
 			0% {
-				color: white;
+				color: $colorChangingArs0;
 			}
 			25% {
-				color: $warning;
+				color: $colorChangingArs25;
 			}
 			50% {
-				color: $info;
+				color: $colorChangingArs50;
 			}
 			75% {
-				color: $input-background-color;
+				color: $colorChangingArs75;
 			}
 			100% {
-				color: white;
+				color: $colorChangingArs100;
 			}
 		}
 		@keyframes colorChangingNova {
 			0% {
-				color: $input-background-color;
+				color: $colorChangingNova0;
 			}
 			25% {
-				color: white;
+				color: $colorChangingNova25;
 			}
 			50% {
-				color: $warning;
+				color: $colorChangingNova50;
 			}
 			75% {
-				color: $info;
+				color: $colorChangingNova75;
 			}
 			100% {
-				color: $input-background-color;
+				color: $colorChangingNova100;
 			}
 		}
 		@keyframes colorChangingDot {
 			0% {
-				color: $info;
+				color: $colorChangingDot0;
 			}
 			25% {
-				color: $input-background-color;
+				color: $colorChangingDot25;
 			}
 			50% {
-				color: white;
+				color: $colorChangingDot50;
 			}
 			75% {
-				color: $warning;
+				color: $colorChangingDot75;
 			}
 			100% {
-				color: $info;
+				color: $colorChangingDot100;
 			}
 		}
 		@keyframes colorChangingClick {
 			0% {
-				color: $warning;
+				color: $colorChangingClick0;
 			}
 			25% {
-				color: $info;
+				color: $colorChangingClick25;
 			}
 			50% {
-				color: $input-background-color;
+				color: $colorChangingClick50;
 			}
 			75% {
-				color: white;
+				color: $colorChangingClick75;
 			}
 			100% {
-				color: $warning;
+				color: $colorChangingClick100;
 			}
 		}
 		.btn-file input[type=file] {
-			background: white;
+			background: $bg-btn-file-input;
 		}
 		.question-title {
-			color: white;
+			color: $fg-question-title;
 		}
 		.glyphicon-style {
-			color: #FFF;
+			color: $fg-glyphicon-style;
 		}
 		.formGroupProgressRow {
 			.progress {
 				.percentage {
 					.label {
-						color: white;
+						color: $fg-formGroup-progress-percentage-label;;
 					}
 				}
 			}
 		}
 		.question-row.active {
-			-webkit-box-shadow: 0 0 13px 3px rebeccapurple;
-			-moz-box-shadow: 0 0 13px 3px rebeccapurple;
-			box-shadow: 0 0 13px 3px rebeccapurple;
+			-webkit-box-shadow: 0 0 13px 3px $box-shadow-question-row-active;
+			-moz-box-shadow: 0 0 13px 3px $box-shadow-question-row-active;
+			box-shadow: 0 0 13px 3px $box-shadow-question-row-active;
 		}
 		.btn-more-learners {
-			background-color: rebeccapurple;
-			color: white;
+			background-color: $bg-btn-more-learners;
+			color: $fg-btn-more-learners;
 		}
 		@keyframes colorChangingOwnNick {
 			0% {
-				background-color: $input-background-color;
+				background-color: $bg-colorChangingOwnNick0;
+				color: $fg-colorChangingOwnNick0;
 				transform: translateY(0%);
 				-webkit-transform: translateY(0%);
-				color: white;
 			}
 			25% {
-				background-color: $warning;
-				color: white;
+				background-color: $bg-colorChangingOwnNick25;
+				color: $fg-colorChangingOwnNick25;
 			}
 			50% {
-				background-color: $info;
-				color: white;
+				background-color: $bg-colorChangingOwnNick50;
+				color: $fg-colorChangingOwnNick50;
 			}
 			75% {
-				background-color: $default;
-				color: white;
+				background-color: $bg-colorChangingOwnNick75;
+				color: $fg-colorChangingOwnNick75;
 			}
 			100% {
-				background-color: #98fb98;
+				background-color: $bg-colorChangingOwnNick100;
+				color: $fg-colorChangingOwnNick100;
 				transform: translateY(0%);
 				-webkit-transform: translateY(0%);
-				color: black;
 			}
 		}
 		.button-markdown-shadow, .button-markdown {
-			box-shadow: 1px 1px 5px black;
+			box-shadow: 1px 1px 5px $box-shadow-markdown;
 		}
 		.input-label {
 			color: $input-group-letter-color;
@@ -524,104 +540,78 @@
 			.modal-content {
 				background-color: $splashscreen-sound-config-background-color;
 				button.down {
-					background: green;
+					background: $splashscreen-sound-config-button-background-color;
 				}
 			}
 		}
-
+		/*
+		 * library splashscreen colors
+		 */
+		.splashscreen {
+			.modal-header {
+				color: $splash-screen-header-color;
+			}
+			.modal-content {
+				background: $splashscreen-background-color;
+				color: $splashscreen-foreground-color;
+				a, a:hover, a:active, a:visited, a:focus {
+					color: $background-color;
+				}
+			}
+		}
+		.modal-backdrop {
+			background-color: $background-color;
+		}
+		.questionAndAnswerSplashscreen {
+			.modal-content {
+				background: $splashscreen-question-and-answer-background-color;
+			}
+		}
+		.deleteConfirmationSplashscreen {
+			.modal-content {
+				background: $splashscreen-delete-background-color;
+			}
+		}
+		.kickMemberSplashscreen {
+			.modal-content {
+				background: $splash-screen-error-message-background-color;
+			}
+		}
 		.showHashtagsSplashscreen {
 			.modal-content {
 				background: $splashscreen-show-hashtags-background-color;
-
 				.js-my-hash {
-					color: black;
-					background-color: #ffffe0;
-
+					color: $fg-js-my-hash;
+					background-color: $bg-js-my-hash;
 					&:hover {
-						background-color: lighten(#ffffe0, 20);
+						background-color: lighten($bg-js-my-hash, 20);
 					}
-
 					&:active {
-						background-color: darken(#ffffe0, 10);
+						background-color: darken($bg-js-my-hash, 10);
 					}
 				}
 			}
 		}
-
 		.readingConfirmedSplashscreen {
 			.modal-content {
 				background: $splashscreen-reading-confirmed-background-color;
 			}
 		}
-
 		.questionPreviewSplashscreen {
 			.modal-content {
 				background: $splashscreen-question-preview-background-color;
 			}
 		}
 
-		/*
-		 * library splashscreen colors
-		 */
-		.splashscreen {
-			.modal-content {
-				background: $splashscreen-background-color;
-			}
-		}
-
-		.questionAndAnswerSplashscreen {
-			.modal-content {
-				background: $splashscreen-question-and-answer-background-color;
-			}
-		}
-
-		.deleteConfirmationSplashscreen {
-			.modal-content {
-				background: $splashscreen-delete-background-color;
-			}
-		}
-
-		.kickMemberSplashscreen {
-			.modal-content {
-				color: black;
-				background: $splash-screen-error-message-background-color;
-			}
-		}
-
 		.errorSplashscreen {
 			.modal-content {
-				color: black;
 				background: $splash-screen-error-message-background-color;
 			}
-		}
-
-		/*
-		 * Splash screen button appearance
-		 */
-		.splash-button-error-message {
-			color: white;
-			background-color: $success;
-		}
-
-		/*
-		 * Splash screen appearance
-		 */
-		.modal-content {
-			color: black;
-
-			a, a:hover, a:active, a:visited, a:focus {
-				color: $background-color;
+			.splash-button-error-message {
+				color: $splash-screen-error-message-button-foreground-color;
+				background-color: $splash-screen-error-message-button-background-color;
 			}
 		}
-
-		.modal-header {
-			color: $splash-screen-header-color;
-		}
-
-		.modal-backdrop {
-			background-color: $background-color;
-		}
-
 		.theme-description {
 			color: $fg-theme_description;
 		}

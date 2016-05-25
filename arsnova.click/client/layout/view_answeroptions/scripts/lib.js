@@ -34,8 +34,7 @@ export function parseAnswerOptionInput(index) {
 
 export function parseSingleAnswerOptionInput(questionIndex, answerOptionIndex) {
 	const questionItem = Session.get("questionGroup");
-	const answerlist = questionItem.getQuestionList()[questionIndex].getAnswerOptionList();
-	answerlist[answerOptionIndex].setAnswerText($("#answerOptionText_Number" + questionIndex).val());
+	questionItem.getQuestionList()[questionIndex].getAnswerOptionList()[answerOptionIndex].setAnswerText($("#answerOptionText_Number" + answerOptionIndex).val());
 	Session.set("questionGroup", questionItem);
 	localData.addHashtag(Session.get("questionGroup"));
 }

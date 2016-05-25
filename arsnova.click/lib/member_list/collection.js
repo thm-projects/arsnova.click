@@ -17,7 +17,7 @@
 
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {hashtagSchema} from '../hashtags/collection.js';
+import {hashtagSchema, privateKeySchema} from '../hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
 
 export const MemberListCollection = new Mongo.Collection("memberlist");
@@ -33,11 +33,6 @@ export const lowerCaseNickSchema = {
 };
 export const userNickIdSchema = {
 	type: String
-};
-export const privateKeySchema = {
-	type: String,
-	min: 24,
-	max: 24
 };
 export const readConfirmedSchema = {
 	type: [Number]

@@ -18,8 +18,8 @@
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {EventManagerCollection, questionIndexSchema} from '/lib/eventmanager/collection.js';
-import {hashtagSchema} from '/lib/hashtags/collection.js';
-import {MemberListCollection, userNickSchema, privateKeySchema, backgroundColorSchema, foregroundColorSchema, userNickIdSchema} from '/lib/member_list/collection.js';
+import {hashtagSchema, privateKeySchema} from '/lib/hashtags/collection.js';
+import {MemberListCollection, userNickSchema, backgroundColorSchema, foregroundColorSchema, userNickIdSchema} from '/lib/member_list/collection.js';
 
 Meteor.methods({
 	'MemberListCollection.addLearner': function ({hashtag, nick, privateKey, backgroundColor, foregroundColor}) {

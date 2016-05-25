@@ -1,4 +1,6 @@
 @mixin theme($name) {
+
+	/* Default Theme */
 	$fg-text-light: white;
 	$fg_text-dark: black;
 	$fg_a: #ffd700;
@@ -26,12 +28,12 @@
 	$progress-bar-failure-color: firebrick;
 	$progress-bar-default-color: grey;
 	$splashscreen-background-color: #98fb98; /* palegreen */
-	$splashscreen-question-and-answer-background-color: #98fb98; /* palegreen */
-	$splashscreen-question-preview-background-color: #98fb98; /* palegreen */
-	$splashscreen-reading-confirmed-background-color: #98fb98; /* palegreen */
-	$splashscreen-show-hashtags-background-color: #98fb98; /* palegreen */
-	$splashscreen-sound-config-background-color: #98fb98; /* palegreen */
-	$splashscreen-delete-background-color: #98fb98; /* palegreen */
+	$splashscreen-question-and-answer-background-color: $splashscreen-background-color; /* palegreen */
+	$splashscreen-question-preview-background-color: $splashscreen-background-color; /* palegreen */
+	$splashscreen-reading-confirmed-background-color: $splashscreen-background-color; /* palegreen */
+	$splashscreen-show-hashtags-background-color: $splashscreen-background-color; /* palegreen */
+	$splashscreen-sound-config-background-color: $splashscreen-background-color; /* palegreen */
+	$splashscreen-delete-background-color: $splashscreen-background-color; /* palegreen */
 	$splash-screen-error-message-background-color: white;
 	$check-mark-checked: #00882a;
 	$check-mark-unchecked: #aaaaaa;

@@ -98,9 +98,20 @@ Template.header.events({
 	}
 });
 
+let headerThemeTracker = null;
+
 Template.header.onRendered(function () {
-	if (!Session.get("questionGroup")) {
-		const theme = HashtagsCollection.findOne() && Router.current.params.quizName ? HashtagsCollection.findOne().theme : "theme-default";
-		$('#theme-wrapper').removeClass().addClass(theme);
+	headerThemeTracker = Tracker.autorun(function () {
+		if (!Session.get("questionGroup")) {
+			const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+			const theme = hashtagDoc ? hashtagDoc.theme : "theme-default";
+			$('#theme-wrapper').removeClass().addClass(theme);
+		}
+	});
+});
+
+Template.header.onDestroyed(function () {
+	if (headerThemeTracker) {
+		headerThemeTracker.stop();
 	}
 });

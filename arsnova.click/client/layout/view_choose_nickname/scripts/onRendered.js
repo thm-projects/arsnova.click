@@ -16,11 +16,18 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
+import {MemberListCollection} from '/lib/member_list/collection.js';
 
 Template.nick.onRendered(function () {
 	$("#forwardButton").attr("disabled", "disabled");
 
 	if ($(window).width() >= 992) {
 		$('#nickname-input-field').focus();
+	}
+
+	var hashtag = Router.current().params.quizName;
+	if (MemberListCollection.findOne({hashtag: hashtag, privateKey: localStorage.getItem("privateKey")})) {
+		localStorage.setItem(hashtag + "nick", MemberListCollection.findOne({hashtag: hashtag, privateKey: localStorage.getItem("privateKey")}).nick);
+		Router.go("/" + hashtag + "/memberlist");
 	}
 });

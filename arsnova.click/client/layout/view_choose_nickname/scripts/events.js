@@ -30,6 +30,7 @@ Template.nick.events({
 		Meteor.call('MemberListCollection.addLearner', {
 			hashtag: Router.current().params.quizName,
 			nick: nickname,
+			privateKey: localStorage.getItem("privateKey"),
 			backgroundColor: bgColor,
 			foregroundColor: lib.transformForegroundColor(lib.hexToRgb(bgColor))
 		}, (err) => {

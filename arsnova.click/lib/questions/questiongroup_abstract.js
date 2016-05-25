@@ -4,13 +4,14 @@ import {SingleChoiceQuestion} from './question_choice_single.js';
 
 const hashtag = Symbol("hashtag");
 const questionList = Symbol("questionList");
+const theme = Symbol("theme");
 
 export class AbstractQuestionGroup {
 
 	/**
 	 * Constructor super method for creating a QuestionGroup instance
 	 * This method cannot be invoked directly.
-	 * @param {{hashtag: String, questionList: Array}} options An object containing the hashtag and an optional questionList
+	 * @param {{hashtag: String, questionList: Array, theme: String}} options An object containing the hashtag and an optional questionList
 	 * @throws {TypeError} If this method is invoked directly
 	 * @throws {Error} If the hashtag of the options Object is missing
 	 */
@@ -35,6 +36,7 @@ export class AbstractQuestionGroup {
 			}
 		}
 		this[hashtag] = options.hashtag;
+		this[theme] = options.theme || "theme-default";
 	}
 
 	/**
@@ -95,7 +97,8 @@ export class AbstractQuestionGroup {
 		this.getQuestionList().forEach(function (question) { questionListSerialized.push(question.serialize()); });
 		return {
 			hashtag: this.getHashtag(),
-			questionList: questionListSerialized
+			questionList: questionListSerialized,
+			theme: this.getTheme()
 		};
 	}
 
@@ -123,6 +126,9 @@ export class AbstractQuestionGroup {
 	equals (questionGroup) {
 		if (questionGroup instanceof AbstractQuestionGroup) {
 			if (questionGroup.getHashtag() !== this.getHashtag()) {
+				return false;
+			}
+			if (questionGroup.getTheme() !== this.getTheme()) {
 				return false;
 			}
 			if (questionGroup.getQuestionList().length === this.getQuestionList().length) {
@@ -171,5 +177,16 @@ export class AbstractQuestionGroup {
 			questionItem,
 			index
 		);
+	}
+
+	getTheme () {
+		return this[theme];
+	}
+
+	setTheme (newTheme) {
+		if (typeof newTheme !== "string") {
+			throw new Error("Invalid argument list for QuestionGroup.setTheme");
+		}
+		this[theme] = newTheme;
 	}
 }

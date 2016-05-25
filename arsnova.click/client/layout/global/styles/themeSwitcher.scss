@@ -37,6 +37,7 @@
 	$check-mark-unchecked: #aaaaaa;
 	$bg_progress-bar: white;
 	$fg_progress-bar: black;
+	$fg-theme_description: white;
 
 	@if ($name == "theme-dark") {
 		$success: #00CD00; /* green */
@@ -74,6 +75,7 @@
 		$success: #a9f5a9; /*bright green*/
 		$success-text-color: $thmgray;
 		$check-mark-unchecked: #aaaaaa;
+		$fg-theme_description: black;
 	}
 
 	@if ($name == "theme-elegant") {
@@ -618,6 +620,10 @@
 
 		.modal-backdrop {
 			background-color: $background-color;
+		}
+
+		.theme-description {
+			color: $fg-theme_description;
 		}
 	}
 }

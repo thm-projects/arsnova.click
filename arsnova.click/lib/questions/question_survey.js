@@ -9,6 +9,9 @@ export class SurveyQuestion extends AbstractQuestion {
 	 * @param options
 	 */
 	constructor (options) {
+		if (typeof options.type !== "undefined" && options.type !== "SurveyQuestion") {
+			throw new TypeError("Invalid construction type while creating new SurveyQuestion");
+		}
 		super(options);
 	}
 
@@ -35,6 +38,23 @@ export class SurveyQuestion extends AbstractQuestion {
 	 */
 	clone () {
 		return new SurveyQuestion(this.serialize());
+	}
+
+	/**
+	 * Serialize the instance object to a JSON compatible object
+	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
+	 */
+	serialize () {
+		return $.extend(super.serialize(), {type: "SurveyQuestion"});
+	}
+
+	/**
+	 * Part of EJSON interface.
+	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
+	 * @returns {String} The name of the instantiated class
+	 */
+	static typeName () {
+		return "SurveyQuestion";
 	}
 }
 

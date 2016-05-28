@@ -14,6 +14,9 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @param options.rangeMax The maximum range which will be accepted as correct
 	 */
 	constructor (options) {
+		if (typeof options.type !== "undefined" && options.type !== "RangedQuestion") {
+			throw new TypeError("Invalid construction type while creating new RangedQuestion");
+		}
 		super(options);
 		this.removeAllAnswerOptions();
 		this[rangeMin] = options.rangeMin || 0;
@@ -80,10 +83,7 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @returns {{hashtag, questionText, type, timer, startTime, questionIndex, answerOptionList}|{hashtag: String, questionText: String, type: AbstractQuestion, timer: Number, startTime: Number, questionIndex: Number, answerOptionList: Array}}
 	 */
 	serialize () {
-		let serializeObject = super.serialize();
-		serializeObject.rangeMin = this[rangeMin];
-		serializeObject.rangeMax = this[rangeMax];
-		return serializeObject;
+		return $.extend(super.serialize(), {type: "RangedQuestion", rangeMin: this.getMinRange(), rangeMax: this.getMaxRange()});
 	}
 
 	/**
@@ -114,6 +114,15 @@ export class RangedQuestion extends AbstractQuestion {
 	 */
 	clone () {
 		return new RangedQuestion(this.serialize());
+	}
+
+	/**
+	 * Part of EJSON interface.
+	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
+	 * @returns {String} The name of the instantiated class
+	 */
+	static typeName () {
+		return "RangedQuestion";
 	}
 }
 

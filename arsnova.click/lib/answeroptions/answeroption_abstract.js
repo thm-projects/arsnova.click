@@ -17,9 +17,6 @@ export class AbstractAnswerOption {
 		if (this.constructor === AbstractAnswerOption) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
-		if (typeof options.type !== "undefined" && options.type !== this.constructor.name) {
-			throw new TypeError("Invalid construction type");
-		}
 		if (typeof options.hashtag === "undefined" || typeof options.questionIndex === "undefined" || typeof options.answerText === "undefined" || typeof options.answerOptionNumber === "undefined" || typeof options.isCorrect === "undefined") {
 			throw new Error("Invalid argument list for AnswerOption instantiation");
 		}
@@ -109,7 +106,6 @@ export class AbstractAnswerOption {
 	serialize () {
 		return {
 			hashtag: this.getHashtag(),
-			type: this.constructor.name,
 			questionIndex: this.getQuestionIndex(),
 			answerText: this.getAnswerText(),
 			answerOptionNumber: this.getAnswerOptionNumber(),
@@ -137,15 +133,6 @@ export class AbstractAnswerOption {
 			answerOption.getAnswerText() === this.getAnswerText() &&
 			answerOption.getAnswerOptionNumber() === this.getAnswerOptionNumber() &&
 			answerOption.getIsCorrect() === this.getIsCorrect();
-	}
-
-	/**
-	 * Part of EJSON interface.
-	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
-	 * @returns {String} The name of the instantiated subclass
-	 */
-	typeName () {
-		return this.constructor.name;
 	}
 
 	/**

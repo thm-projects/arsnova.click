@@ -9,6 +9,9 @@ export class DefaultAnswerOption extends AbstractAnswerOption {
 	 * @param options
 	 */
 	constructor (options) {
+		if (typeof options.type !== "undefined" && options.type !== "DefaultAnswerOption") {
+			throw new TypeError("Invalid construction type while creating new DefaultAnswerOption");
+		}
 		super(options);
 	}
 
@@ -19,6 +22,23 @@ export class DefaultAnswerOption extends AbstractAnswerOption {
 	 */
 	clone () {
 		return new DefaultAnswerOption(this.serialize());
+	}
+
+	/**
+	 * Serialize the instance object to a JSON compatible object
+	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
+	 */
+	serialize () {
+		return $.extend(super.serialize(), {type: "DefaultAnswerOption"});
+	}
+
+	/**
+	 * Part of EJSON interface.
+	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
+	 * @returns {String} The name of the instantiated class
+	 */
+	static typeName () {
+		return "DefaultAnswerOption";
 	}
 }
 

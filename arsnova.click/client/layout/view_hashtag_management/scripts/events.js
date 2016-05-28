@@ -102,7 +102,9 @@ Template.hashtagView.events({
 			}
 			if (reenter) {
 				sessionStorage.setItem("overrideValidQuestionRedirect", true);
-				Session.set("questionGroup", localData.reenterSession(hashtag));
+				const session = localData.reenterSession(hashtag);
+				console.log(session);
+				Session.set("questionGroup", session);
 				lib.connectEventManager(hashtag);
 			} else {
 				const questionGroup = new DefaultQuestionGroup({
@@ -257,7 +259,9 @@ Template.hashtagManagement.events({
 Template.showHashtagsSplashscreen.events({
 	"click .js-my-hash": function (event) {
 		var hashtag = $(event.currentTarget).text();
-		Session.set("questionGroup", localData.reenterSession(hashtag));
+		const session = localData.reenterSession(hashtag);
+		console.log(session);
+		Session.set("questionGroup", session);
 		lib.hashtagSplashscreen.destroy();
 		sessionStorage.setItem("overrideValidQuestionRedirect", true);
 		lib.connectEventManager(hashtag);

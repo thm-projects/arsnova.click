@@ -25,6 +25,7 @@ import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
 import {getChangeEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onChangeEvent.js';
 import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onRemoveEvent.js';
+import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 
 const subsCache = new SubsManager({
 	cacheLimit: 8, // maximum number of cached subscriptions
@@ -98,10 +99,16 @@ Router.route('/hashtagmanagement', {
 	}
 });
 
+Router.route('/showMore', {
+	action: function () {
+		this.render('showMore');
+	}
+});
+
 // Routes for Footer-Links
 
-Router.route('/ueber', function () {
-	this.render('ueber');
+Router.route('/about', function () {
+	this.render('about');
 });
 
 Router.route('/agb', function () {

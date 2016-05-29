@@ -1,0 +1,3 @@
+
+Template.showMore.onCreated(function () {
+});

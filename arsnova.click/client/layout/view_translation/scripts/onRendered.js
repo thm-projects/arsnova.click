@@ -16,48 +16,15 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {Tracker} from 'meteor/tracker';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
-import * as lib from './lib.js';
 
-Template.createQuestionView.onRendered(function () {
-	lib.calculateWindow();
-	$(window).resize(lib.calculateWindow());
-
-	let index;
-	lib.subscriptionHandler = Tracker.autorun(()=> {
-		if (!EventManagerCollection.findOne()) {
-			return;
-		}
-		index = EventManagerCollection.findOne().questionIndex;
-	});
-	lib.checkForMarkdown();
-	var body = $('body');
-	body.on('click', '.questionIcon:not(.active)', function () {
-		var currentSession = QuestionGroupCollection.findOne();
-		if (!currentSession || index >= currentSession.questionList.length) {
-			return;
-		}
-
-		lib.addQuestion(index);
-		lib.checkForValidQuestionText();
-	});
-	body.on('click', '.removeQuestion', function () {
-		index = EventManagerCollection.findOne().questionIndex;
-		lib.checkForValidQuestionText();
-	});
-
-	lib.checkForValidQuestionText();
-
+Template.translate.onRendered(function () {
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.addFooterElement(footerElements.footerElemSound);
-	footerElements.addFooterElement(footerElements.footerElemTheme);
-	footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
 	footerElements.addFooterElement(footerElements.footerElemImprint);
+	footerElements.addFooterElement(footerElements.footerElemTheme);
 	footerElements.addFooterElement(footerElements.footerElemFullscreen);
+	footerElements.addFooterElement(footerElements.footerElemImport);
 	footerElements.addFooterElement(footerElements.footerElemAbout);
 	footerElements.addFooterElement(footerElements.footerElemTos);
 	footerElements.addFooterElement(footerElements.footerElemDataPrivacy);

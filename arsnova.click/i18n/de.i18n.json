@@ -10,12 +10,24 @@
   },
   "region": {
     "footer": {
+      "show-more": {
+        "show-more-elements": "Alle weiteren Optionen:"
+      },
       "footer_bar": {
         "about": "Über",
         "home": "Home",
         "tos": "AGB",
         "imprint": "Impressum",
-        "data_privacy": "Datenschutz"
+        "data_privacy": "Datenschutz",
+        "translation": "Übersetzung",
+        "theme": "Themen",
+        "import": "Importieren",
+        "sound": "Sound",
+        "reading-confirmation": "Lesebestätigung",
+        "fullscreen": "Vollbild",
+        "show_more": "Mehr",
+        "qr_code": "QR Code",
+        "go_to": "Gehe auf: "
       },
       "about": {
         "title": "Über die Quiz-App",
@@ -111,9 +123,6 @@
     },
     "header": {
       "new_question": "Neue Frage",
-      "sound": "Sound",
-      "qr_code": "QR Code",
-      "go_to": "Gehe auf: ",
       "reset": "Reset",
       "yes": "Ja",
       "no": "Nein",

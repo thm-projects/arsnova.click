@@ -19,6 +19,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.createTimerView.onRendered(function () {
@@ -45,4 +46,16 @@ Template.createTimerView.onRendered(function () {
 			forwardButton.attr("disabled", "disabled");
 		}
 	});
+
+	footerElements.removeFooterElements();
+	footerElements.addFooterElement(footerElements.footerElemHome);
+	footerElements.addFooterElement(footerElements.footerElemSound);
+	footerElements.addFooterElement(footerElements.footerElemTheme);
+	footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
+	footerElements.addFooterElement(footerElements.footerElemImprint);
+	footerElements.addFooterElement(footerElements.footerElemFullscreen);
+	footerElements.addFooterElement(footerElements.footerElemAbout);
+	footerElements.addFooterElement(footerElements.footerElemTos);
+	footerElements.addFooterElement(footerElements.footerElemDataPrivacy);
+	footerElements.calculateFooter();
 });

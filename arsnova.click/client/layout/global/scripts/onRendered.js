@@ -20,6 +20,7 @@ import  * as localData from '/lib/local_storage.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 
 Template.home.onRendered(function () {
 	if (localStorage.getItem("localStorageAvailable") && localData.getAllHashtags().length > 0) {
@@ -35,4 +36,14 @@ Template.home.onRendered(function () {
 			}
 		}
 	});
+	footerElements.removeFooterElements();
+	footerElements.addFooterElement(footerElements.footerElemImprint);
+	footerElements.addFooterElement(footerElements.footerElemTranslation);
+	footerElements.addFooterElement(footerElements.footerElemTheme);
+	footerElements.addFooterElement(footerElements.footerElemFullscreen);
+	footerElements.addFooterElement(footerElements.footerElemImport);
+	footerElements.addFooterElement(footerElements.footerElemAbout);
+	footerElements.addFooterElement(footerElements.footerElemTos);
+	footerElements.addFooterElement(footerElements.footerElemDataPrivacy);
+	footerElements.calculateFooter();
 });

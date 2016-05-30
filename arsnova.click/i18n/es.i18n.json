@@ -10,6 +10,7 @@
   },
   "region": {
     "footer": {
+      "go_to": "Ir: ",
       "show-more": {
         "show-more-elements": "Todas las opciones disponibles:",
         "onText": "Activado",
@@ -29,8 +30,7 @@
         "fullscreen": "Pantalla completa",
         "show_more": "Más",
         "sound": "Sonar",
-        "qr_code": "QR Code",
-        "go_to": "Ir: "
+        "qr_code": "QR Code"
       },
       "about": {
         "title": "About the quiz app",

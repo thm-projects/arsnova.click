@@ -64,12 +64,11 @@ Template.memberlist.onRendered(function () {
 	footerElements.removeFooterElements();
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		footerElements.addFooterElement(footerElements.footerElemHome);
-		footerElements.addFooterElement(footerElements.footerElemSound);
 		footerElements.addFooterElement(footerElements.footerElemQRCode);
-		footerElements.addFooterElement(footerElements.footerElemTheme);
+		footerElements.addFooterElement(footerElements.footerElemSound);
 		footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
-		footerElements.addFooterElement(footerElements.footerElemImprint);
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
+		footerElements.addFooterElement(footerElements.footerElemTheme);
 	}
 	footerElements.calculateFooter();
 });

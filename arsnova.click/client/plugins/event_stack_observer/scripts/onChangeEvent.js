@@ -5,6 +5,7 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as localData from '/lib/local_storage.js';
+import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
@@ -68,13 +69,13 @@ function addLiveresultsChangeEvents() {
 			if (localData.containsHashtag(Router.current().params.quizName)) {
 				new Splashscreen({
 					autostart: true,
-					instanceId: "answers_" + EventManagerCollection.findOne().questionIndex,
+					instanceId: "answers_" + value.questionIndex,
 					templateName: 'questionAndAnswerSplashscreen',
 					closeOnButton: '#js-btn-hideQuestionModal',
 					onRendered: function (instance) {
 						var content = "";
 						mathjaxMarkdown.initializeMarkdownAndLatex();
-						AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
+						AnswerOptionCollection.find({questionIndex: value.questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
 							if (!answerOption.answerText) {
 								answerOption.answerText = "";
 							}
@@ -89,6 +90,11 @@ function addLiveresultsChangeEvents() {
 						}, 10000);
 					}
 				});
+				if (value.questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
+					footerElements.removeFooterElement(footerElements.footerElemReadingConfirmation);
+				} else {
+					footerElements.addFooterElement(footerElements.footerElemReadingConfirmation, 2);
+				}
 			} else {
 				Router.go("/" + Router.current().params.quizName + "/onpolling");
 			}

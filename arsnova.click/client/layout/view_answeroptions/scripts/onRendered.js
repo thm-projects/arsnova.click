@@ -63,10 +63,5 @@ Template.createAnswerOptions.onRendered(function () {
 
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.addFooterElement(footerElements.footerElemSound);
-	footerElements.addFooterElement(footerElements.footerElemTheme);
-	footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
-	footerElements.addFooterElement(footerElements.footerElemImprint);
-	footerElements.addFooterElement(footerElements.footerElemFullscreen);
 	footerElements.calculateFooter();
 });

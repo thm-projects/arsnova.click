@@ -42,9 +42,9 @@ export const footerElemReadingConfirmation = {
 };
 export const footerElemTheme = {
 	id: "theme",
-	iconClass: "glyphicon glyphicon-blackboard",
+	iconClass: "glyphicon glyphicon-apple",
 	textClass: "footerElementText",
-	textName: "region.footer.footer_bar.theme"
+	textName: "region.footer.footer_bar.style"
 };
 export const footerElemImport = {
 	id: "import",
@@ -61,7 +61,7 @@ export const footerElemFullscreen = {
 };
 export const footerElemHome = {
 	id: "home",
-	iconClass: "glyphicon glyphicon-th-large",
+	iconClass: "glyphicon glyphicon-home",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.home"
 };
@@ -69,7 +69,7 @@ export const footerElemImprint = {
 	id: "imprint",
 	iconClass: "glyphicon glyphicon-info-sign",
 	textClass: "footerElementText",
-	textName: "region.footer.footer_bar.imprint"
+	textName: "region.footer.footer_bar.info"
 };
 export const footerElemQRCode = {
 	id: "qr-code",
@@ -90,7 +90,16 @@ const hiddenFooterElements = {
 };
 
 export function addFooterElement(footerElement, priority = 100) {
-	footerElements.splice(priority, 0, footerElement);
+	let hasItem = false;
+	$.each(footerElements, function (index, item) {
+		if (item.id === footerElement.id) {
+			hasItem = true;
+			return false;
+		}
+	});
+	if (!hasItem) {
+		footerElements.splice(priority, 0, footerElement);
+	}
 	Meteor.setTimeout(function () {
 		$('#' + footerElement.id).removeClass("error").removeClass("success");
 	}, 20);
@@ -162,6 +171,36 @@ export function generateFooterElements() {
 		updateStatefulFooterElements.invalidate();
 	}, 20);
 	return footerElements;
+}
+
+export function removeFooterElement(footerElement) {
+	let hasFoundItem = false;
+	$.each(footerElements, function (index, item) {
+		if (item.id === footerElement.id) {
+			footerElements.splice(index, 1);
+			hasFoundItem = true;
+			return false;
+		}
+	});
+	if (hasFoundItem) {
+		return;
+	}
+	$.each(hiddenFooterElements.selectable, function (index, item) {
+		if (item.id === footerElement.id) {
+			hiddenFooterElements.selectable.splice(index, 1);
+			hasFoundItem = true;
+			return false;
+		}
+	});
+	if (hasFoundItem) {
+		return;
+	}
+	$.each(hiddenFooterElements.linkable, function (index, item) {
+		if (item.id === footerElement.id) {
+			hiddenFooterElements.linkable.splice(index, 1);
+			return false;
+		}
+	});
 }
 
 export function removeFooterElements() {

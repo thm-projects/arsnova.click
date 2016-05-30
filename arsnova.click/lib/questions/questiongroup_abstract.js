@@ -95,7 +95,6 @@ export class AbstractQuestionGroup {
 		this.getQuestionList().forEach(function (question) { questionListSerialized.push(question.serialize()); });
 		return {
 			hashtag: this.getHashtag(),
-			type: this.constructor.name,
 			questionList: questionListSerialized
 		};
 	}
@@ -137,15 +136,6 @@ export class AbstractQuestionGroup {
 			}
 		}
 		return false;
-	}
-
-	/**
-	 * Part of EJSON interface.
-	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
-	 * @returns {String} The name of the instantiated subclass
-	 */
-	typeName () {
-		return this.constructor.name;
 	}
 
 	/**

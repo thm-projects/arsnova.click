@@ -9,6 +9,9 @@ export class DefaultQuestionGroup extends AbstractQuestionGroup {
 	 * @param options
 	 */
 	constructor (options) {
+		if (typeof options.type !== "undefined" && options.type !== "DefaultQuestionGroup") {
+			throw new TypeError("Invalid construction type while creating new DefaultQuestionGroup: " + options.type);
+		}
 		super(options);
 	}
 
@@ -19,6 +22,23 @@ export class DefaultQuestionGroup extends AbstractQuestionGroup {
 	 */
 	clone () {
 		return new DefaultQuestionGroup(this.serialize());
+	}
+
+	/**
+	 * Serialize the instance object to a JSON compatible object
+	 * @returns {{hashtag: String, type: String, questionList: Array}}
+	 */
+	serialize () {
+		return $.extend(super.serialize(), {type: "DefaultQuestionGroup"});
+	}
+
+	/**
+	 * Part of EJSON interface.
+	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
+	 * @returns {String} The name of the instantiated class
+	 */
+	typeName () {
+		return "DefaultQuestionGroup";
 	}
 }
 

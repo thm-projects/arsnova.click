@@ -121,7 +121,7 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
 	 * @returns {String} The name of the instantiated class
 	 */
-	static typeName () {
+	typeName () {
 		return "RangedQuestion";
 	}
 }

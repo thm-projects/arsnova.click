@@ -95,6 +95,7 @@ function addLiveresultsChangeEvents() {
 				} else {
 					footerElements.addFooterElement(footerElements.footerElemReadingConfirmation, 2);
 				}
+				footerElements.calculateFooter();
 			} else {
 				Router.go("/" + Router.current().params.quizName + "/onpolling");
 			}

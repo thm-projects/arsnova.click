@@ -118,7 +118,9 @@ export function generateFooterElements() {
 
 export function addFooterElement(footerElement, priority = 100) {
 	footerElements.splice(priority, 0, footerElement);
-	$('#' + footerElement.id).removeClass("error").removeClass("success");
+	Meteor.setTimeout(function () {
+		$('#' + footerElement.id).removeClass("error").removeClass("success");
+	}, 20);
 }
 
 export function removeFooterElements() {
@@ -134,7 +136,8 @@ export function updateStatefulFooterElements() {
 		$.each(footerElements, function (index, item) {
 			switch (item.id) {
 				case "sound":
-					if (HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).musicEnabled) {
+					const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+					if (hashtagDoc && hashtagDoc.musicEnabled) {
 						$('#sound').removeClass("error").addClass("success");
 					} else {
 						$('#sound').removeClass("success").addClass("error");
@@ -148,10 +151,11 @@ export function updateStatefulFooterElements() {
 					}
 					break;
 				case "fullscreen":
-					if ($("#fullscreen").find('.footerElemIcon').find(".glyphicon").hasClass("glyphicon-resize-small")) {
-						$('#fullscreen').removeClass("error").addClass("success");
+					const fullScreenItem = $("#fullscreen");
+					if (fullScreenItem.find('.footerElemIcon').find(".glyphicon").hasClass("glyphicon-resize-small")) {
+						fullScreenItem.removeClass("error").addClass("success");
 					} else {
-						$('#fullscreen').removeClass("success").addClass("error");
+						fullScreenItem.removeClass("success").addClass("error");
 					}
 					break;
 			}

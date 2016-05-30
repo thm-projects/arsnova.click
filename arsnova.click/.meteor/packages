@@ -27,7 +27,7 @@ flyandi:reactive-countdown
 rcy:nouislider
 perak:markdown
 brentjanderson:buzz
-#standard-minifier-js
+standard-minifier-js
 tap:i18n
 tap:i18n-ui
 fastclick
@@ -35,4 +35,3 @@ matb33:collection-hooks
 meteorhacks:subs-manager
 observe-sequence
 dschulz:jquery-qrcode
-raghav1086:uglify-js2

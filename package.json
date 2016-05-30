@@ -14,16 +14,5 @@
     "gulp-jshint": "^2.0.0",
     "gulp-watch": "^4.3.5",
     "jshint-stylish": "^2.1.0"
-  },
-  "uglifyJs2Options": {
-    "fromString": true,
-    "compress": {
-      "drop_debugger": false,
-      "unused": false,
-      "dead_code": false
-    },
-    "reserved": [
-      "DefaultQuestionGroup"
-    ]
   }
 }

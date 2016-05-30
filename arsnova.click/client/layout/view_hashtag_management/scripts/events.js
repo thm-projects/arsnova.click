@@ -103,7 +103,6 @@ Template.hashtagView.events({
 			if (reenter) {
 				sessionStorage.setItem("overrideValidQuestionRedirect", true);
 				const session = localData.reenterSession(hashtag);
-				console.log(session);
 				Session.set("questionGroup", session);
 				lib.connectEventManager(hashtag);
 			} else {
@@ -260,7 +259,6 @@ Template.showHashtagsSplashscreen.events({
 	"click .js-my-hash": function (event) {
 		var hashtag = $(event.currentTarget).text();
 		const session = localData.reenterSession(hashtag);
-		console.log(session);
 		Session.set("questionGroup", session);
 		lib.hashtagSplashscreen.destroy();
 		sessionStorage.setItem("overrideValidQuestionRedirect", true);

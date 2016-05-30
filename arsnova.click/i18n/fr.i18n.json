@@ -10,12 +10,26 @@
   },
   "region": {
     "footer": {
+      "show-more": {
+        "show-more-elements": "Toutes les options disponibles:",
+        "onText": "Activé",
+        "offText": "Désactivé"
+      },
       "footer_bar": {
         "about": "Sur",
         "home": "Accueil",
         "tos": "Conditions d'utilisation",
         "imprint": "Imprimer",
-        "data_privacy": "Confidentialité des données"
+        "data_privacy": "Confidentialité des données",
+        "translation": "Traductions",
+        "theme": "Thèmes",
+        "import": "Importer",
+        "reading-confirmation": "Confirmation de lecture",
+        "fullscreen": "Plein écran",
+        "show_more": "Plus",
+        "sound": "Sonner",
+        "qr_code": "QR Code",
+        "go_to": "Aller à: "
       },
       "about": {
         "title": "About the quiz app",
@@ -111,9 +125,6 @@
     },
     "header": {
       "new_question": "Nouvelle question",
-      "sound": "Sonner",
-      "qr_code": "QR Code",
-      "go_to": "Aller à: ",
       "reset": "Réinitialiser",
       "yes": "Oui",
       "no": "Non",

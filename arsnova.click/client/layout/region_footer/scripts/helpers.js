@@ -33,5 +33,8 @@ Template.showMore.helpers({
 Template.contactHeaderBar.helpers({
 	isCurrentRoute: function (route) {
 		return Router.current().url.indexOf(route) > -1;
+	},
+	isXsDevice: function () {
+		return $(document).width() <= 768;
 	}
 });

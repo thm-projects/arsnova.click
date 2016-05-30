@@ -75,15 +75,16 @@ const clickEvents = {
 			}
 		}
 	},
-	"click #import": function (event) {
+	"click #import": function () {
 		const importButton = $('.js-import-input-home');
 		importButton.click();
 		importButton.on("change", function () {
 			var fileList = importButton[0].files;
 			var fileReader = new FileReader();
 			fileReader.onload = function () {
+				let asJSON = null;
 				try {
-					var asJSON = JSON.parse(fileReader.result);
+					asJSON = JSON.parse(fileReader.result);
 				} catch (ex) {
 					new ErrorSplashscreen({
 						autostart: true,
@@ -111,7 +112,7 @@ const clickEvents = {
 			for (var i = 0; i < fileList.length; i++) {
 				fileReader.readAsBinaryString(fileList[i]);
 			}
-		})
+		});
 	},
 	'click #sound': function () {
 		new Splashscreen({

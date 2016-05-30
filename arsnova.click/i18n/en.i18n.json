@@ -270,7 +270,8 @@
           "answeroption_not_found": "There is no answer option with the given answerOptionNumber",
           "response_timeout": "Response was given out of time range",
           "insert_leaderboard_failed": "Error while adding response set to leaderboard",
-          "session_closed": "The quiz session has been closed"
+          "session_closed": "The quiz session has been closed",
+          "invalid_data": "The imported files are corrupt or the access is denied!"
         }
       }
     }

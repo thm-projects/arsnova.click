@@ -270,7 +270,8 @@
           "answeroption_not_found": "Es existiert keine Antwort mit diesem Index",
           "response_timeout": "Die Antwortzeit ist bereits abgelaufen",
           "insert_leaderboard_failed": "Fehler beim Hinzufügen der Antwort zur Rangliste",
-          "session_closed": "Die Quizrunde wurde beendet"
+          "session_closed": "Die Quizrunde wurde beendet",
+          "invalid_data": "Die importierten Daten sind ungültig oder fehlerhaft!"
         }
       }
     }

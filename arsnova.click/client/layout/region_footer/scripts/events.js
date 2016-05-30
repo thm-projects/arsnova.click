@@ -76,30 +76,42 @@ const clickEvents = {
 		}
 	},
 	"click #import": function (event) {
-		var fileList = event.target.files;
-		var fileReader = new FileReader();
-		fileReader.onload = function () {
-			var asJSON = JSON.parse(fileReader.result);
-			Meteor.call("HashtagsCollection.import",
-				{
-					privateKey: localData.getPrivateKey(),
-					data: asJSON
-				},
-				(err) => {
-					if (err) {
-						new ErrorSplashscreen({
-							autostart: true,
-							errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.session_exists")
-						});
-					} else {
-						localData.importFromFile(asJSON);
-					}
+		const importButton = $('.js-import-input-home');
+		importButton.click();
+		importButton.on("change", function () {
+			var fileList = importButton[0].files;
+			var fileReader = new FileReader();
+			fileReader.onload = function () {
+				try {
+					var asJSON = JSON.parse(fileReader.result);
+				} catch (ex) {
+					new ErrorSplashscreen({
+						autostart: true,
+						errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.invalid_data")
+					});
+					return;
 				}
-			);
-		};
-		for (var i = 0; i < fileList.length; i++) {
-			fileReader.readAsBinaryString(fileList[i]);
-		}
+				Meteor.call("HashtagsCollection.import",
+					{
+						privateKey: localData.getPrivateKey(),
+						data: asJSON
+					},
+					(err) => {
+						if (err) {
+							new ErrorSplashscreen({
+								autostart: true,
+								errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.session_exists")
+							});
+						} else {
+							localData.importFromFile(asJSON);
+						}
+					}
+				);
+			};
+			for (var i = 0; i < fileList.length; i++) {
+				fileReader.readAsBinaryString(fileList[i]);
+			}
+		})
 	},
 	'click #sound': function () {
 		new Splashscreen({

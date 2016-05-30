@@ -270,7 +270,8 @@
           "answeroption_not_found": "No hay ninguna opción de respuesta con el número de opción respuesta dada",
           "response_timeout": "La respuesta se da fuera del rango de tiempo",
           "insert_leaderboard_failed": "Error al añadir la respuesta se establece en la tabla de posiciones",
-          "session_closed": "La sesión se ha cerrado cuestionario"
+          "session_closed": "La sesión se ha cerrado cuestionario",
+          "invalid_data": "Los archivos importados son corruptos o el acceso es denegado!"
         }
       }
     }

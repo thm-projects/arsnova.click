@@ -16,7 +16,7 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="agb">
-    {{> contactHeaderBar currentRoute="agb"}}
+    {{> contactHeaderBar}}
 	<div class="text-light contentContainer">
 		{{> titel titelText="region.footer.tos.title"}}
 		<h3>{{_ "global.arsnova_slogan"}}</h3>
@@ -26,4 +26,5 @@
 		<h3>{{_ "region.footer.tos.warranty.title"}}</h3>
 		<p>{{_ "region.footer.tos.warranty.text"}}</p>
 	</div>
+    {{> footer_nav_buttons backId="backButton" }}
 </template>

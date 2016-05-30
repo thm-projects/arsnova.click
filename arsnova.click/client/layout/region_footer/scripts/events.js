@@ -205,16 +205,20 @@ const clickEvents = {
 	}
 };
 
+const defaultBackButtonBehavior = {
+	"click #backButton": function () {
+		history.back();
+	}
+};
+
 Template.footer.events($.extend({}, clickEvents, {
 	"click #show-more": function () {
 		Router.go("showMore");
 	}
 }));
 
-Template.showMore.events($.extend({}, clickEvents, {
-	"click #backButton": function () {
-		history.back();
-	}
+Template.showMore.events($.extend({}, clickEvents, defaultBackButtonBehavior, {
+
 }));
 
 Template.contactHeaderBar.events({
@@ -231,3 +235,19 @@ Template.contactHeaderBar.events({
 		Router.go("/datenschutz");
 	}
 });
+
+Template.about.events($.extend({}, defaultBackButtonBehavior, {
+
+}));
+
+Template.agb.events($.extend({}, defaultBackButtonBehavior, {
+
+}));
+
+Template.impressum.events($.extend({}, defaultBackButtonBehavior, {
+
+}));
+
+Template.datenschutz.events($.extend({}, defaultBackButtonBehavior, {
+
+}));

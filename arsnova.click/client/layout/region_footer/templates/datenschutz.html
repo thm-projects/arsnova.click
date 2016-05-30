@@ -16,7 +16,7 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="datenschutz">
-    {{> contactHeaderBar currentRoute="datenschutz"}}
+    {{> contactHeaderBar}}
 	<div class="text-light contentContainer">
 		{{> titel titelText="region.footer.data_privacy.title"}}
 
@@ -41,4 +41,5 @@
 		<h3>{{_ "region.footer.data_privacy.piwik.title"}}</h3>
 		<p>{{{_ "region.footer.data_privacy.piwik.text"}}}</p>
 	</div>
+    {{> footer_nav_buttons backId="backButton" }}
 </template>

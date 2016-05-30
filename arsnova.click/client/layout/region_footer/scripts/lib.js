@@ -16,6 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
+import * as headerLib from '/client/layout/region_header/lib.js';
 
 export const footerElemTranslation = {
 	id: "translation",
@@ -31,7 +32,7 @@ export const footerElemSound = {
 };
 export const footerElemReadingConfirmation = {
 	id: "reading-confirmation",
-	iconClass: "glyphicon glyphicon-music",
+	iconClass: "glyphicon glyphicon-ok",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.reading-confirmation",
 	selectable: true
@@ -57,31 +58,13 @@ export const footerElemFullscreen = {
 };
 export const footerElemHome = {
 	id: "home",
-	iconClass: "glyphicon glyphicon-import glyphicon-import-style",
+	iconClass: "glyphicon glyphicon-th-large",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.home"
 };
-export const footerElemAbout = {
-	id: "about",
-	iconClass: "glyphicon glyphicon-import glyphicon-import-style",
-	textClass: "footerElementText",
-	textName: "region.footer.footer_bar.about"
-};
-export const footerElemTos = {
-	id: "tos",
-	iconClass: "glyphicon glyphicon-import glyphicon-import-style",
-	textClass: "footerElementText",
-	textName: "region.footer.footer_bar.tos"
-};
-export const footerElemDataPrivacy = {
-	id: "data-privacy",
-	iconClass: "glyphicon glyphicon-import glyphicon-import-style",
-	textClass: "footerElementText",
-	textName: "region.footer.footer_bar.data_privacy"
-};
 export const footerElemImprint = {
 	id: "imprint",
-	iconClass: "glyphicon glyphicon-import glyphicon-import-style",
+	iconClass: "glyphicon glyphicon-info-sign",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.imprint"
 };
@@ -156,6 +139,7 @@ export function calculateFooterFontSize() {
 	fixedBottom.css("bottom", navbarFooter.height());
 	fixedBottom.show();
 	$("[name='switch']").bootstrapSwitch({size: "small"});
+	headerLib.calculateTitelHeight();
 	return {
 		icon: iconSize,
 		text: textSize

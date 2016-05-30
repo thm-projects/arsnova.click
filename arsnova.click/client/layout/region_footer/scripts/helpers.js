@@ -30,3 +30,9 @@ Template.showMore.helpers({
 		return Session.get("hiddenFooterElements");
 	}
 });
+
+Template.contactHeaderBar.helpers({
+	isCurrentRoute: function (route) {
+		return Router.current().url.indexOf(route) > -1;
+	}
+});

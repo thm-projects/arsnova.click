@@ -1,0 +1,16 @@
+<template name="contactHeaderBar">
+    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+            <button type="button" class="btn {{#if isCurrentRoute "about" }}btn-success{{else}}btn-default{{/if}}" id="about">Über</button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn {{#if isCurrentRoute "impressum" }}btn-success{{else}}btn-default{{/if}}" id="imprint">Impressum</button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn {{#if isCurrentRoute "datenschutz" }}btn-success{{else}}btn-default{{/if}}" id="data-privacy">Datenschutz</button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn {{#if isCurrentRoute "agb" }}btn-success{{else}}btn-default{{/if}}" id="tos">AGB</button>
+        </div>
+    </div>
+</template>

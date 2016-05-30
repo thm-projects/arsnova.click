@@ -24,23 +24,14 @@ import {buzzsound1, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 const clickEvents = {
+	"click #imprint": function () {
+		Router.go("/impressum");
+	},
 	"click #translation": function () {
 		Router.go("/translate");
 	},
 	"click #theme": function () {
 		Router.go("/theme");
-	},
-	"click #tos": function () {
-		Router.go("/agb");
-	},
-	"click #about": function () {
-		Router.go("/about");
-	},
-	"click #imprint": function () {
-		Router.go("/impressum");
-	},
-	"click #data-privacy": function () {
-		Router.go("/datenschutz");
 	},
 	"click #home": function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
@@ -225,3 +216,18 @@ Template.showMore.events($.extend({}, clickEvents, {
 		history.back();
 	}
 }));
+
+Template.contactHeaderBar.events({
+	"click #tos": function () {
+		Router.go("/agb");
+	},
+	"click #about": function () {
+		Router.go("/about");
+	},
+	"click #imprint": function () {
+		Router.go("/impressum");
+	},
+	"click #data-privacy": function () {
+		Router.go("/datenschutz");
+	}
+});

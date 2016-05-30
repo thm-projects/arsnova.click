@@ -36,7 +36,7 @@ export function addNewQuestion(callback) {
 export function calculateTitelHeight() {
 	var fixedTop = $(".navbar-fixed-top");
 	var container = $(".container");
-	var footerHeight = $("#footerBar").hasClass("hide") ? $(".fixed-bottom").outerHeight() + $(".footer-info-bar").outerHeight() : $(".fixed-bottom").outerHeight();
+	var footerHeight = $(".fixed-bottom").outerHeight() + $(".footer-info-bar").outerHeight();
 	var finalHeight = $(window).height() - fixedTop.outerHeight() - $(".navbar-fixed-bottom").outerHeight() - footerHeight;
 
 	container.css("height", finalHeight);

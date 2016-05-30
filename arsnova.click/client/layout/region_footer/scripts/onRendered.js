@@ -19,8 +19,18 @@ import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {calculateFooter} from './lib.js';
+import * as footerElements from "./lib.js";
 
-Template.footer.onRendered(calculateFooter);
+Template.footer.onRendered(footerElements.calculateFooter);
 
-Template.showMore.onRendered(calculateFooter);
+Template.showMore.onRendered(footerElements.calculateFooter);
+
+Template.contactHeaderBar.onRendered(function () {
+	footerElements.removeFooterElements();
+	footerElements.addFooterElement(footerElements.footerElemHome);
+	footerElements.addFooterElement(footerElements.footerElemTranslation);
+	footerElements.addFooterElement(footerElements.footerElemTheme);
+	footerElements.addFooterElement(footerElements.footerElemFullscreen);
+	footerElements.addFooterElement(footerElements.footerElemImport);
+	footerElements.calculateFooter();
+});

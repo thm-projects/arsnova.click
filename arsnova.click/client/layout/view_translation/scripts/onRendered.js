@@ -25,8 +25,5 @@ Template.translate.onRendered(function () {
 	footerElements.addFooterElement(footerElements.footerElemTheme);
 	footerElements.addFooterElement(footerElements.footerElemFullscreen);
 	footerElements.addFooterElement(footerElements.footerElemImport);
-	footerElements.addFooterElement(footerElements.footerElemAbout);
-	footerElements.addFooterElement(footerElements.footerElemTos);
-	footerElements.addFooterElement(footerElements.footerElemDataPrivacy);
 	footerElements.calculateFooter();
 });

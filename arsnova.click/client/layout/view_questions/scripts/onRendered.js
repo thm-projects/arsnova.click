@@ -58,8 +58,5 @@ Template.createQuestionView.onRendered(function () {
 	footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
 	footerElements.addFooterElement(footerElements.footerElemImprint);
 	footerElements.addFooterElement(footerElements.footerElemFullscreen);
-	footerElements.addFooterElement(footerElements.footerElemAbout);
-	footerElements.addFooterElement(footerElements.footerElemTos);
-	footerElements.addFooterElement(footerElements.footerElemDataPrivacy);
 	footerElements.calculateFooter();
 });

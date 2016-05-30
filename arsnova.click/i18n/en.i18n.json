@@ -11,7 +11,7 @@
   "region": {
     "footer": {
       "show-more": {
-        "show-more-elements": "Alle weiteren Optionen:",
+        "show-more-elements": "All available options:",
         "onText": "Activated",
         "offText": "Deactivated"
       },

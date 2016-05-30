@@ -17,6 +17,7 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Tracker} from 'meteor/tracker';
+import {Session} from 'meteor/session';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
 
@@ -88,47 +89,11 @@ const hiddenFooterElements = {
 	linkable: []
 };
 
-export function generateFooterElements() {
-	$.merge(footerElements, hiddenFooterElements.selectable);
-	$.merge(footerElements, hiddenFooterElements.linkable);
-	hiddenFooterElements.selectable.splice(0, hiddenFooterElements.selectable.length);
-	hiddenFooterElements.linkable.splice(0, hiddenFooterElements.linkable.length);
-	let maxElems = 4;
-	if ($(document).width() >= 1200) {
-		maxElems = 12;
-	} else if ($(document).width() >= 992) {
-		maxElems = 6;
-	}
-	const index = $.inArray(footerElemShowMore, footerElements);
-	if (index > 0) {
-		footerElements.splice(index, 1);
-	}
-	if (footerElements.length > maxElems) {
-		for (let i = footerElements.length - 1; i >= maxElems - 1; i--) {
-			hiddenFooterElements[footerElements[i].selectable ? "selectable" : "linkable"].push(footerElements[i]);
-			footerElements.splice(i, 1);
-		}
-		addFooterElement(footerElemShowMore);
-	}
-	Session.set("footerElements", footerElements);
-	Session.set("hiddenFooterElements", hiddenFooterElements);
-	Meteor.setTimeout(updateStatefulFooterElements, 20);
-	return footerElements;
-}
-
 export function addFooterElement(footerElement, priority = 100) {
 	footerElements.splice(priority, 0, footerElement);
 	Meteor.setTimeout(function () {
 		$('#' + footerElement.id).removeClass("error").removeClass("success");
 	}, 20);
-}
-
-export function removeFooterElements() {
-	footerElements.splice(0, footerElements.length);
-	hiddenFooterElements.selectable.splice(0, hiddenFooterElements.selectable.length);
-	hiddenFooterElements.linkable.splice(0, hiddenFooterElements.linkable.length);
-	Session.set("footerElements", footerElements);
-	Session.set("hiddenFooterElements", hiddenFooterElements);
 }
 
 export function updateStatefulFooterElements() {
@@ -163,6 +128,42 @@ export function updateStatefulFooterElements() {
 	});
 }
 
+export function generateFooterElements() {
+	$.merge(footerElements, hiddenFooterElements.selectable);
+	$.merge(footerElements, hiddenFooterElements.linkable);
+	hiddenFooterElements.selectable.splice(0, hiddenFooterElements.selectable.length);
+	hiddenFooterElements.linkable.splice(0, hiddenFooterElements.linkable.length);
+	let maxElems = 4;
+	if ($(document).width() >= 1200) {
+		maxElems = 12;
+	} else if ($(document).width() >= 992) {
+		maxElems = 6;
+	}
+	const index = $.inArray(footerElemShowMore, footerElements);
+	if (index > 0) {
+		footerElements.splice(index, 1);
+	}
+	if (footerElements.length > maxElems) {
+		for (let i = footerElements.length - 1; i >= maxElems - 1; i--) {
+			hiddenFooterElements[footerElements[i].selectable ? "selectable" : "linkable"].push(footerElements[i]);
+			footerElements.splice(i, 1);
+		}
+		addFooterElement(footerElemShowMore);
+	}
+	Session.set("footerElements", footerElements);
+	Session.set("hiddenFooterElements", hiddenFooterElements);
+	Meteor.setTimeout(updateStatefulFooterElements, 20);
+	return footerElements;
+}
+
+export function removeFooterElements() {
+	footerElements.splice(0, footerElements.length);
+	hiddenFooterElements.selectable.splice(0, hiddenFooterElements.selectable.length);
+	hiddenFooterElements.linkable.splice(0, hiddenFooterElements.linkable.length);
+	Session.set("footerElements", footerElements);
+	Session.set("hiddenFooterElements", hiddenFooterElements);
+}
+
 export function calculateFooterFontSize() {
 	let iconSize = "3vh", textSize = "2vh";
 	const navbarFooter = $(".navbar-footer");
@@ -181,7 +182,7 @@ export function calculateFooterFontSize() {
 	return {
 		icon: iconSize,
 		text: textSize
-	}
+	};
 }
 
 export function calculateFooter() {

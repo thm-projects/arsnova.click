@@ -17,6 +17,7 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
+import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
@@ -54,7 +55,6 @@ const clickEvents = {
 		}
 	},
 	"click #fullscreen": function () {
-		const elem = $('#fullscreen').find(".footerElemIcon").find(".glyphicon");
 		if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement) {
 			if (document.cancelFullScreen) {
 				document.cancelFullScreen();

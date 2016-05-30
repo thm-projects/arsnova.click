@@ -16,6 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
+import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {formatAnswerButtons} from './lib.js';
 
 Template.votingview.onRendered(function () {
@@ -23,4 +24,7 @@ Template.votingview.onRendered(function () {
 		formatAnswerButtons();
 	});
 	formatAnswerButtons();
+
+	footerElements.removeFooterElements();
+	footerElements.calculateFooter();
 });

@@ -17,6 +17,7 @@
 
 import {Template} from 'meteor/templating';
 import {MemberListCollection} from '/lib/member_list/collection.js';
+import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 
 Template.nick.onRendered(function () {
 	$("#forwardButton").attr("disabled", "disabled");
@@ -30,4 +31,7 @@ Template.nick.onRendered(function () {
 		localStorage.setItem(hashtag + "nick", MemberListCollection.findOne({hashtag: hashtag, privateKey: localStorage.getItem("privateKey")}).nick);
 		Router.go("/" + hashtag + "/memberlist");
 	}
+
+	footerElements.removeFooterElements();
+	footerElements.calculateFooter();
 });

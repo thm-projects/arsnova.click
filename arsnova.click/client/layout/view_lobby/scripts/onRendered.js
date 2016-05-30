@@ -17,6 +17,7 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import * as localData from '/lib/local_storage.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount} from './lib.js';
 
@@ -61,13 +62,15 @@ Template.memberlist.onRendered(function () {
 	$(window).resize(calculateFontSize);
 
 	footerElements.removeFooterElements();
-	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.addFooterElement(footerElements.footerElemSound);
-	footerElements.addFooterElement(footerElements.footerElemQRCode);
-	footerElements.addFooterElement(footerElements.footerElemTheme);
-	footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
-	footerElements.addFooterElement(footerElements.footerElemImprint);
-	footerElements.addFooterElement(footerElements.footerElemFullscreen);
+	if (localData.containsHashtag(Router.current().params.quizName)) {
+		footerElements.addFooterElement(footerElements.footerElemHome);
+		footerElements.addFooterElement(footerElements.footerElemSound);
+		footerElements.addFooterElement(footerElements.footerElemQRCode);
+		footerElements.addFooterElement(footerElements.footerElemTheme);
+		footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
+		footerElements.addFooterElement(footerElements.footerElemImprint);
+		footerElements.addFooterElement(footerElements.footerElemFullscreen);
+	}
 	footerElements.calculateFooter();
 });
 

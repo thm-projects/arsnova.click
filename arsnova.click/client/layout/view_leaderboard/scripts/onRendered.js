@@ -17,10 +17,21 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import * as localData from '/lib/local_storage.js';
+import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount} from './lib.js';
 
 Template.leaderBoard.onRendered(function () {
 	calculateButtonCount();
+
+	footerElements.removeFooterElements();
+	if (localData.containsHashtag(Router.current().params.quizName)) {
+		footerElements.addFooterElement(footerElements.footerElemHome);
+		footerElements.addFooterElement(footerElements.footerElemSound);
+		footerElements.addFooterElement(footerElements.footerElemFullscreen);
+		footerElements.addFooterElement(footerElements.footerElemImprint);
+	}
+	footerElements.calculateFooter();
 
 	$(window).resize(function () {
 		if (Session.get("responsesCountOverride") && (Session.get("allMembersCount") - Session.get("maxResponseButtons") === 0)) {

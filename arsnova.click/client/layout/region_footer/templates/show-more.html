@@ -1,0 +1,32 @@
+<template name="showMore">
+    {{> titel titelText = 'region.footer.show-more.show-more-elements' }}
+    <div class="row center-vertical">
+        <div class="col-md-12">
+            <div class="row">
+                {{#each hiddenFooterElements.selectable}}
+                    <div id="{{this.id}}">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <p class="col-xs-3 col-xs-offset-2 text-light showMoreCheckboxLabel">{{_ this.textName}}: </p>
+                                <input class="col-xs-7" type="checkbox" id="{{this.id}}_switch" name="switch" title="{{_ this.textName}}" />
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+                {{#each hiddenFooterElements.linkable}}
+                    <div id="{{this.id}}">
+                        <div class="col-xs-6 margin-title">
+                            <button class="button btn btn-default">
+                                <span>{{_ this.textName}}</span>
+                            </button>
+                        </div>
+                    </div>
+                {{/each}}
+                {{#unless hiddenFooterElements.linkable.length}}{{#unless hiddenFooterElements.selectable.length}}
+                    <p>Keine weiteren Optionen vorhanden</p>
+                {{/unless}}{{/unless}}
+            </div>
+        </div>
+    </div>
+    {{> footer_nav_buttons backId="backButton" }}
+</template>

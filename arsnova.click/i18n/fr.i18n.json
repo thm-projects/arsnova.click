@@ -10,12 +10,27 @@
   },
   "region": {
     "footer": {
+      "show-more": {
+        "show-more-elements": "Toutes les options disponibles:",
+        "onText": "Activé",
+        "offText": "Désactivé"
+      },
       "footer_bar": {
         "about": "Sur",
         "home": "Accueil",
         "tos": "Conditions d'utilisation",
         "imprint": "Imprimer",
-        "data_privacy": "Confidentialité des données"
+        "data_privacy": "Confidentialité des données",
+        "languages": "Langues",
+        "style": "Style",
+        "import": "Importer",
+        "info": "Infos",
+        "reading-confirmation": "Confirmation de lecture",
+        "fullscreen": "Plein écran",
+        "show_more": "Plus",
+        "sound": "Sonner",
+        "qr_code": "QR Code",
+        "go_to": "Aller à: "
       },
       "about": {
         "title": "About the quiz app",
@@ -111,9 +126,6 @@
     },
     "header": {
       "new_question": "Nouvelle question",
-      "sound": "Sonner",
-      "qr_code": "QR Code",
-      "go_to": "Aller à: ",
       "reset": "Réinitialiser",
       "yes": "Oui",
       "no": "Non",
@@ -258,7 +270,8 @@
           "answeroption_not_found": "Il n'y a aucune option de réponse avec la answerOptionNumber donnée",
           "response_timeout": "La réponse a été donnée hors de la plage de temps",
           "insert_leaderboard_failed": "Erreur lors de l'ajout d'une réponse réglée sur leaderboard",
-          "session_closed": "La session quiz a été fermé"
+          "session_closed": "La session quiz a été fermé",
+          "invalid_data": "Les fichiers importés sont corrompus ou l'accès est refusé!"
         }
       }
     }

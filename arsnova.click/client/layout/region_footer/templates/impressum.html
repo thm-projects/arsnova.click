@@ -16,6 +16,7 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="impressum">
+    {{> contactHeaderBar }}
 	<div class="text-light contentContainer">
 		{{> titel titelText="region.footer.imprint.title"}}
 		<h3>{{_ "region.footer.imprint.provider.title"}}</h3>
@@ -42,4 +43,5 @@
 			<li>{{_ "region.footer.imprint.provider.text.14"}}</li>
 		</ul>
 	</div>
+    {{> footer_nav_buttons backId="backButton" }}
 </template>

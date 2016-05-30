@@ -15,28 +15,15 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import * as localData from '/lib/local_storage.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
-import {calculateButtonCount} from './lib.js';
 
-Template.leaderBoard.onRendered(function () {
-	calculateButtonCount();
-
+Template.translate.onRendered(function () {
 	footerElements.removeFooterElements();
-	if (localData.containsHashtag(Router.current().params.quizName)) {
-		footerElements.addFooterElement(footerElements.footerElemHome);
-		footerElements.addFooterElement(footerElements.footerElemSound);
-		footerElements.addFooterElement(footerElements.footerElemFullscreen);
-		footerElements.addFooterElement(footerElements.footerElemAbout);
-	}
+	footerElements.addFooterElement(footerElements.footerElemHome);
+	footerElements.addFooterElement(footerElements.footerElemAbout);
+	footerElements.addFooterElement(footerElements.footerElemTheme);
+	footerElements.addFooterElement(footerElements.footerElemFullscreen);
+	footerElements.addFooterElement(footerElements.footerElemImport);
 	footerElements.calculateFooter();
-
-	$(window).resize(function () {
-		if (Session.get("responsesCountOverride") && (Session.get("allMembersCount") - Session.get("maxResponseButtons") === 0)) {
-			Session.get("responsesCountOverride", false);
-		}
-		calculateButtonCount();
-	});
 });

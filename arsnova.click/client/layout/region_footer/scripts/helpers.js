@@ -16,22 +16,25 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {MemberListCollection} from '/lib/member_list/collection.js';
-import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
+import {Session} from 'meteor/session';
 
-Template.nick.onRendered(function () {
-	$("#forwardButton").attr("disabled", "disabled");
-
-	if ($(window).width() >= 992) {
-		$('#nickname-input-field').focus();
+Template.footer.helpers({
+	footerElements: function () {
+		return Session.get("footerElements");
 	}
+});
 
-	var hashtag = Router.current().params.quizName;
-	if (MemberListCollection.findOne({hashtag: hashtag, privateKey: localStorage.getItem("privateKey")})) {
-		localStorage.setItem(hashtag + "nick", MemberListCollection.findOne({hashtag: hashtag, privateKey: localStorage.getItem("privateKey")}).nick);
-		Router.go("/" + hashtag + "/memberlist");
+Template.showMore.helpers({
+	hiddenFooterElements: function () {
+		return Session.get("hiddenFooterElements");
 	}
+});
 
-	footerElements.removeFooterElements();
-	footerElements.calculateFooter();
+Template.contactHeaderBar.helpers({
+	isCurrentRoute: function (route) {
+		return Router.current().url.indexOf(route) > -1;
+	},
+	isXsDevice: function () {
+		return $(document).width() <= 768;
+	}
 });

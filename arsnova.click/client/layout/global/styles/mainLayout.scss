@@ -22,13 +22,7 @@
 .contentPosition {
 	position: absolute;
 	width: 100%;
-	/* TODO: IE 8 and Opera 8 doesn't support calc*/
-	/*
-	 * -50px because of the header height
-	 * -20px because of the footer height
-	 */
-	/*height: calc(100% - 114px - 20px);*/
-	/*top: 10%;*/
+	background-color: steelblue;
 	height: 100%;
 	overflow-x: auto;
 }

@@ -98,10 +98,16 @@ Router.route('/hashtagmanagement', {
 	}
 });
 
+Router.route('/showMore', {
+	action: function () {
+		this.render('showMore');
+	}
+});
+
 // Routes for Footer-Links
 
-Router.route('/ueber', function () {
-	this.render('ueber');
+Router.route('/about', function () {
+	this.render('about');
 });
 
 Router.route('/agb', function () {

@@ -22,6 +22,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {buzzsound1, whistleSound, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 
 export let countdown = null;
@@ -82,6 +83,7 @@ export function startCountdown(index) {
 	}
 
 	countdown.start(function () {
+		$('.navbar-fixed-bottom').show();
 		if (Session.get("soundIsPlaying")) {
 			buzzsound1.stop();
 			whistleSound.play();
@@ -97,8 +99,13 @@ export function startCountdown(index) {
 					Router.go("/" + Router.current().params.quizName + "/statistics");
 				}, 7000);
 			}
+			footerElements.removeFooterElement(footerElements.footerElemReadingConfirmation);
+		} else {
+			footerElements.addFooterElement(footerElements.footerElemReadingConfirmation, 2);
 		}
+		footerElements.calculateFooter();
 	});
+	$('.navbar-fixed-bottom').hide();
 	Session.set("countdownInitialized", true);
 	$('.disableOnActiveCountdown').attr("disabled", "disabled");
 }

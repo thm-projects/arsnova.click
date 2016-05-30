@@ -50,6 +50,7 @@ iron:middleware-stack@1.1.0
 iron:router@1.0.12
 iron:url@1.0.11
 jquery@1.11.8
+jt6562:bootstrap-3-switch@3.3.2
 launch-screen@1.0.11
 livedata@1.0.18
 logging@1.0.12

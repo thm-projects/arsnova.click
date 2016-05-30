@@ -19,6 +19,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.createAnswerOptions.onRendered(function () {
@@ -59,4 +60,8 @@ Template.createAnswerOptions.onRendered(function () {
 			$(inputFieldElements[i]).closest(".input-group").addClass("invalidAnswerOption");
 		}
 	}
+
+	footerElements.removeFooterElements();
+	footerElements.addFooterElement(footerElements.footerElemHome);
+	footerElements.calculateFooter();
 });

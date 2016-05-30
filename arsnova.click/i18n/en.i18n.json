@@ -10,12 +10,27 @@
   },
   "region": {
     "footer": {
+      "show-more": {
+        "show-more-elements": "All available options:",
+        "onText": "Activated",
+        "offText": "Deactivated"
+      },
       "footer_bar": {
         "about": "About",
         "home": "Home",
         "tos": "ToS",
         "imprint": "Imprint",
-        "data_privacy": "Data Privacy"
+        "data_privacy": "Data Privacy",
+        "languages": "Languages",
+        "style": "Styles",
+        "import": "Import",
+        "info": "Info",
+        "reading-confirmation": "Reading confirmation",
+        "fullscreen": "Fullscreen",
+        "show_more": "More",
+        "sound": "Sound",
+        "qr_code": "QR Code",
+        "go_to": "Go to: "
       },
       "about": {
         "title": "About the quiz app",
@@ -111,9 +126,6 @@
     },
     "header": {
       "new_question": "New question",
-      "sound": "Sound",
-      "qr_code": "QR Code",
-      "go_to": "Go to: ",
       "reset": "Reset",
       "yes": "Yes",
       "no": "No",
@@ -258,7 +270,8 @@
           "answeroption_not_found": "There is no answer option with the given answerOptionNumber",
           "response_timeout": "Response was given out of time range",
           "insert_leaderboard_failed": "Error while adding response set to leaderboard",
-          "session_closed": "The quiz session has been closed"
+          "session_closed": "The quiz session has been closed",
+          "invalid_data": "The imported files are corrupt or the access is denied!"
         }
       }
     }

@@ -10,17 +10,32 @@
   },
   "region": {
     "footer": {
+      "show-more": {
+        "show-more-elements": "Alle weiteren Optionen:",
+        "onText": "Aktiviert",
+        "offText": "Deaktiviert"
+      },
       "footer_bar": {
         "about": "Über",
         "home": "Home",
         "tos": "AGB",
         "imprint": "Impressum",
-        "data_privacy": "Datenschutz"
+        "data_privacy": "Datenschutz",
+        "languages": "Sprache",
+        "style": "Stil",
+        "import": "Importieren",
+        "info": "Info",
+        "reading-confirmation": "Lesebestätigung",
+        "fullscreen": "Vollbild",
+        "show_more": "Mehr",
+        "sound": "Sound",
+        "qr_code": "QR Code",
+        "go_to": "Gehe auf: "
       },
       "about": {
         "title": "Über die Quiz-App",
         "declaration": "Ein bisschen <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, <br />ein bisschen <a href='https://arsnova.eu/' target='_blank'>ARSnova</a>!",
-        "ars": "First one is gamificated and the second one designed for educational use. Both are an <a href='https://de.wikipedia.org/wiki/Audience_Response_System' target='_blank'>Audience Response System (ARS)</a>.",
+        "ars": "Ersteres ist ein gamifiziertes, letzteres ein für die Lehre entwickeltes <a href='https://de.wikipedia.org/wiki/Audience_Response_System' target='_blank'>Audience Response System (ARS)</a>.",
         "developed_by": "Inspiriert durch <a href='https://getkahoot.com' target='_blank'>Kahoot!</a> entwickelte in nur 10 Tagen  ein <a href='http://www.scrumhub.com' target='_blank'>Scrum-Team</a> aus Bachelor- und Masterstudenten der <a href='http://www.thm.de/site/' target='_blank'>TH Mittelhessen</a> diese <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>gamifizierte</a> Alternative zu unserem ARSnova-Flaggschiff <a href='https://arsnova.eu/' target='_blank'>arsnova.eu</a>.",
         "met_requirements": "Die bereits eingelösten Anforderungen an arsnova.click:",
         "requirements": {
@@ -111,9 +126,6 @@
     },
     "header": {
       "new_question": "Neue Frage",
-      "sound": "Sound",
-      "qr_code": "QR Code",
-      "go_to": "Gehe auf: ",
       "reset": "Reset",
       "yes": "Ja",
       "no": "Nein",
@@ -258,7 +270,8 @@
           "answeroption_not_found": "Es existiert keine Antwort mit diesem Index",
           "response_timeout": "Die Antwortzeit ist bereits abgelaufen",
           "insert_leaderboard_failed": "Fehler beim Hinzufügen der Antwort zur Rangliste",
-          "session_closed": "Die Quizrunde wurde beendet"
+          "session_closed": "Die Quizrunde wurde beendet",
+          "invalid_data": "Die importierten Daten sind ungültig oder fehlerhaft!"
         }
       }
     }

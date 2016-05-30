@@ -15,23 +15,24 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import * as localData from '/lib/local_storage.js';
+import {TAPi18n} from 'meteor/tap:i18n';
+import {themes} from './lib.js';
 
 Template.themeSwitcher.events({
 	"change #select-theme": function (event) {
 		const theme = $(event.currentTarget).find("option:selected").attr("id");
-		const questionItem = Session.get("questionGroup");
-		questionItem.setTheme(theme);
-		Session.set("questionGroup", questionItem);
-		localData.addHashtag(Session.get("questionGroup"));
+		sessionStorage.setItem("theme", theme);
 		$('#theme-wrapper').removeClass().addClass(theme);
-	},
-	"click #forwardButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/settimer");
+
+		for (let i = 0; i < themes.length; i++) {
+			if (themes[i].id === theme) {
+				$('.theme-description').text(TAPi18n.__(themes[i].description));
+				i = themes.length;
+			}
+		}
 	},
 	"click #backButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/answeroptions");
+		history.back();
 	}
 });

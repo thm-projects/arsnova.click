@@ -114,8 +114,8 @@
 	$border-qr-code-container-close-icon: black;
 	$background-qr-code-container-close-icon: white;
 	$fg-qr-code-label: black;
-	$fg-sound-button-active: #00CC00;
-	$fg-sound-button-active-hovered: #33FF00;
+	$fg-footer-info-bar-active: #00CC00;
+	$fg-footer-info-bar-active-hovered: #33FF00;
 	$fg-sound-button-inactive: #b22222;
 	$fg-sound-button-inactive-hovered: red;
 	$fg-questionScrollPane-index-number: white;
@@ -128,6 +128,12 @@
 	$border-questionScrollPane-active-remove-question: black;
 	$bg-questionScrollPane-active-remove-question-hovered: red;
 	$fg-questionScrollPane-active-remove-question-hovered: white;
+	$fg-footer-element: white;
+	$fg-footer-element-hovered: white;
+	$fg-footer-element-deactivated: $warning;
+	$fg-footer-element-deactivated-hovered: red;
+	$fg-footer-element-activated: $success;
+	$fg-footer-element-activated-hovered: $success;
 
 	@if ($name == "theme-dark") {
 		$success: #00CD00; /* green */
@@ -172,8 +178,8 @@
 		$success-text-color: $thmgray;
 		$check-mark-unchecked: #aaaaaa;
 		$fg-theme_description: black;
-		$fg-sound-button-active: #33FF00;
-		$fg-sound-button-active-hovered: #A1FF8A;
+		$fg-footer-info-bar-active: #33FF00;
+		$fg-footer-info-bar-active-hovered: #A1FF8A;
 	}
 
 	@if ($name == "theme-elegant") {
@@ -203,11 +209,16 @@
 		$fg-text-light: black;
 		$fg_text-dark: black;
 		$fg-footer-info-bar: #394a59;
-		$fg-sound-button-active: #33FF00;
-		$fg-sound-button-active-hovered: #A1FF8A;
+		$fg-footer-info-bar-active: #459c2f;
+		$fg-footer-info-bar-active-hovered: #6aa05d;
 	}
 
 	.#{$name} {
+		*:fullscreen,
+		*:-webkit-full-screen,
+		*:-moz-full-screen {
+			background-color: $background-color;
+		}
 		.text-light, a.text-light, a:hover.text-light, a:active.text-light, a:visited.text-light, a:focus.text-light {
 			color: $fg-text-light;
 		}
@@ -284,12 +295,6 @@
 		}
 		.qr-code-label {
 			color: $fg-qr-code-label;
-		}
-		.sound-button-active {
-			color: $fg-sound-button-active;
-			&:hover {
-				color: $fg-sound-button-active-hovered;
-			}
 		}
 		.sound-button-inactive {
 			color: $fg-sound-button-inactive;
@@ -393,6 +398,28 @@
 			}
 			.progress {
 				background-color: $bg-button-result-progress;
+			}
+		}
+		.navbar-footer {
+			background-color: $bg-footer;
+			.footerElement {
+				color: $fg-footer-info-bar;
+				&:hover {
+					color: darken($fg-footer-info-bar, 30);
+				}
+				&.error {
+					color: $fg-footer-element-deactivated;
+					&:hover {
+						color: $fg-footer-element-deactivated-hovered;
+					}
+				}
+				&.success {
+					color: $fg-footer-info-bar-active;
+
+					&:hover {
+						color: $fg-footer-info-bar-active-hovered;
+					}
+				}
 			}
 		}
 		.progress-success {

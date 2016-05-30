@@ -37,7 +37,9 @@ Template.home.onRendered(function () {
 		}
 	});
 
-	$('#theme-wrapper').removeClass().addClass("theme-default");
+	if (!sessionStorage.getItem("theme")) {
+		sessionStorage.setItem("theme", "theme-default");
+	}
 
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemAbout);

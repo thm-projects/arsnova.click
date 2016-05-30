@@ -80,6 +80,10 @@ Router.onBeforeAction(function () {
 	this.next();
 });
 
+Router.onAfterAction(function () {
+	$('#theme-wrapper').removeClass().addClass(sessionStorage.getItem("theme"));
+});
+
 Router.route('/', {
 	action: function () {
 		try {
@@ -124,6 +128,12 @@ Router.route('/impressum', function () {
 
 Router.route('/translate', function () {
 	this.render('translate');
+});
+
+Router.route('/theme', {
+	action: function () {
+		this.render('themeSwitcher');
+	}
 });
 
 Router.route("/:quizName", {
@@ -220,20 +230,6 @@ Router.route('/:quizName/answeroptions', {
 			}
 			this.render('questionList', {to: 'header.questionList'});
 			this.render('createAnswerOptions');
-		} else {
-			Router.go("/");
-		}
-	}
-});
-
-Router.route('/:quizName/theme', {
-	action: function () {
-		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (!globalEventStackObserver.isRunning()) {
-				globalEventStackObserver.startObserving(Router.current().params.quizName);
-			}
-			this.render('questionList', {to: 'header.questionList'});
-			this.render('themeSwitcher');
 		} else {
 			Router.go("/");
 		}

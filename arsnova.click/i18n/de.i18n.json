@@ -205,8 +205,8 @@
       "ranged_question": "Quizfrage mit Antwortintervall"
     },
     "theme_switcher": {
-      "set_theme": "Theme für alle Teilnehmer wählen",
-      "select_a_theme_title": "Wähle ein Theme für alle Teilnehmer",
+      "set_theme": "Stil wählen",
+      "select_a_theme_title": "Wähle einen Stil",
       "themes": {
         "default": {
           "name": "ARSnova.click",

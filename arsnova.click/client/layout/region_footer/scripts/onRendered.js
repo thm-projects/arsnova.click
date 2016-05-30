@@ -21,7 +21,17 @@ import {Tracker} from 'meteor/tracker';
 import {TAPi18n} from 'meteor/tap:i18n';
 import * as footerElements from "./lib.js";
 
-Template.footer.onRendered(footerElements.calculateFooter);
+Template.footer.onRendered(function () {
+	footerElements.calculateFooter();
+	$(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange', function (e) {
+		const elem = $('#fullscreen').find(".footerElemIcon").find(".glyphicon");
+		if (elem.hasClass("glyphicon-resize-small")) {
+			elem.removeClass("glyphicon-resize-small").addClass("glyphicon-fullscreen");
+		} else {
+			elem.removeClass("glyphicon-fullscreen").addClass("glyphicon-resize-small");
+		}
+	});
+});
 
 Template.showMore.onRendered(footerElements.calculateFooter);
 

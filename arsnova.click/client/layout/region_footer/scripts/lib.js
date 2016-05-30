@@ -182,8 +182,8 @@ export function calculateFooterFontSize() {
 export function calculateFooter() {
 	$(window).on("resize", function () {
 		generateFooterElements();
-		Meteor.setTimeout(calculateFooterFontSize, 40);
+		Meteor.setTimeout(calculateFooterFontSize, 20);
 	});
 	generateFooterElements();
-	Meteor.setTimeout(calculateFooterFontSize, 40);
+	Meteor.setTimeout(calculateFooterFontSize, 20);
 }

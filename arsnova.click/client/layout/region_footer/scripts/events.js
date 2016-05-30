@@ -65,7 +65,6 @@ const clickEvents = {
 			} else if (document.webkitFullscreenElement) {
 				document.webkitCancelFullScreen();
 			}
-			elem.removeClass("glyphicon-resize-small").addClass("glyphicon-fullscreen");
 		} else {
 			if (document.documentElement.requestFullscreen) {
 				document.documentElement.requestFullscreen();
@@ -74,7 +73,6 @@ const clickEvents = {
 			} else if (document.documentElement.webkitRequestFullScreen) {
 				document.documentElement.webkitRequestFullScreen();
 			}
-			elem.removeClass("glyphicon-fullscreen").addClass("glyphicon-resize-small");
 		}
 	},
 	"click #import": function (event) {

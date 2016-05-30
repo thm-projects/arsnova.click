@@ -18,10 +18,14 @@
 @import "colors";
 @import "appearance";
 
-body,
-body:fullscreen,
-body:-webkit-full-screen,
-body:-moz-full-screen {
+body {
+  background-color: $background-color;
+  font-family: $font;
+}
+
+*:fullscreen,
+*:-webkit-full-screen,
+*:-moz-full-screen {
   background-color: $background-color;
   font-family: $font;
 }

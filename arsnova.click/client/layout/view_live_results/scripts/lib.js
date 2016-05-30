@@ -82,6 +82,7 @@ export function startCountdown(index) {
 	}
 
 	countdown.start(function () {
+		$('.navbar-fixed-bottom').show();
 		if (Session.get("soundIsPlaying")) {
 			buzzsound1.stop();
 			whistleSound.play();
@@ -99,6 +100,7 @@ export function startCountdown(index) {
 			}
 		}
 	});
+	$('.navbar-fixed-bottom').hide();
 	Session.set("countdownInitialized", true);
 	$('.disableOnActiveCountdown').attr("disabled", "disabled");
 }

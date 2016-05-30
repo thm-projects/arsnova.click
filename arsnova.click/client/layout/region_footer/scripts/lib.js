@@ -112,12 +112,13 @@ export function generateFooterElements() {
 	}
 	Session.set("footerElements", footerElements);
 	Session.set("hiddenFooterElements", hiddenFooterElements);
-	Meteor.setTimeout(updateStatefulFooterElements, 40);
+	Meteor.setTimeout(updateStatefulFooterElements, 20);
 	return footerElements;
 }
 
 export function addFooterElement(footerElement, priority = 100) {
 	footerElements.splice(priority, 0, footerElement);
+	$('#' + footerElement.id).removeClass("error").removeClass("success");
 }
 
 export function removeFooterElements() {

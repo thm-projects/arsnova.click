@@ -54,7 +54,7 @@ const clickEvents = {
 			Router.go("/");
 		}
 	},
-	"click #fullscreen": function () {
+	"click #fullscreen, switchChange.bootstrapSwitch .bootstrap-switch-id-fullscreen_switch ": function () {
 		if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement) {
 			if (document.cancelFullScreen) {
 				document.cancelFullScreen();

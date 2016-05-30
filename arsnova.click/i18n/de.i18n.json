@@ -11,7 +11,9 @@
   "region": {
     "footer": {
       "show-more": {
-        "show-more-elements": "Alle weiteren Optionen:"
+        "show-more-elements": "Alle weiteren Optionen:",
+        "onText": "Aktiviert",
+        "offText": "Deaktiviert"
       },
       "footer_bar": {
         "about": "Über",

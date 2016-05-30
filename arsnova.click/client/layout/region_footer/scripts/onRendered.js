@@ -16,6 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
+import {TAPi18n} from 'meteor/tap:i18n';
 import * as footerElements from "./lib.js";
 
 Template.footer.onRendered(function () {
@@ -30,7 +31,15 @@ Template.footer.onRendered(function () {
 	});
 });
 
-Template.showMore.onRendered(footerElements.calculateFooter);
+Template.showMore.onRendered(function () {
+	$("[name='switch']").bootstrapSwitch({
+		size: "small",
+		onText: TAPi18n.__("region.footer.show-more.onText"),
+		offText: TAPi18n.__("region.footer.show-more.offText")
+	});
+	footerElements.calculateFooter();
+	footerElements.updateStatefulFooterElements.invalidate();
+});
 
 Template.contactHeaderBar.onRendered(function () {
 	footerElements.removeFooterElements();

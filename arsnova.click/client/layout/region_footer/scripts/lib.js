@@ -96,37 +96,43 @@ export function addFooterElement(footerElement, priority = 100) {
 	}, 20);
 }
 
-export function updateStatefulFooterElements() {
-	Tracker.autorun(function () {
-		$.each(footerElements, function (index, item) {
-			switch (item.id) {
-				case "sound":
-					const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-					if (hashtagDoc && hashtagDoc.musicEnabled) {
-						$('#sound').removeClass("error").addClass("success");
-					} else {
-						$('#sound').removeClass("success").addClass("error");
-					}
-					break;
-				case "reading-confirmation":
-					if (HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled) {
-						$('#reading-confirmation').removeClass("error").addClass("success");
-					} else {
-						$('#reading-confirmation').removeClass("success").addClass("error");
-					}
-					break;
-				case "fullscreen":
-					const fullScreenItem = $("#fullscreen");
-					if (fullScreenItem.find('.footerElemIcon').find(".glyphicon").hasClass("glyphicon-resize-small")) {
-						fullScreenItem.removeClass("error").addClass("success");
-					} else {
-						fullScreenItem.removeClass("success").addClass("error");
-					}
-					break;
-			}
-		});
+export const updateStatefulFooterElements = Tracker.autorun(function () {
+	const allElements = $.merge([], footerElements);
+	$.merge(allElements, hiddenFooterElements.selectable);
+	$.each(allElements, function (index, item) {
+		let state = true;
+		switch (item.id) {
+			case "sound":
+				const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+				if (hashtagDoc && hashtagDoc.musicEnabled) {
+					$('#sound').removeClass("error").addClass("success");
+				} else {
+					state = false;
+					$('#sound').removeClass("success").addClass("error");
+				}
+				$('#sound_switch').bootstrapSwitch('state', state, true);
+				break;
+			case "reading-confirmation":
+				if (HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled) {
+					$('#reading-confirmation').removeClass("error").addClass("success");
+				} else {
+					state = false;
+					$('#reading-confirmation').removeClass("success").addClass("error");
+				}
+				$('#reading-confirmation_switch').bootstrapSwitch('state', state, true);
+				break;
+			case "fullscreen":
+				if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement) {
+					$("#fullscreen").removeClass("error").addClass("success");
+				} else {
+					state = false;
+					$("#fullscreen").removeClass("success").addClass("error");
+				}
+				$('#fullscreen_switch').bootstrapSwitch('state', state, true);
+				break;
+		}
 	});
-}
+});
 
 export function generateFooterElements() {
 	$.merge(footerElements, hiddenFooterElements.selectable);
@@ -152,7 +158,9 @@ export function generateFooterElements() {
 	}
 	Session.set("footerElements", footerElements);
 	Session.set("hiddenFooterElements", hiddenFooterElements);
-	Meteor.setTimeout(updateStatefulFooterElements, 20);
+	Meteor.setTimeout(function () {
+		updateStatefulFooterElements.invalidate();
+	}, 20);
 	return footerElements;
 }
 
@@ -177,7 +185,6 @@ export function calculateFooterFontSize() {
 	navbarFooter.css({"fontSize": iconSize});
 	fixedBottom.css("bottom", navbarFooter.height());
 	fixedBottom.show();
-	$("[name='switch']").bootstrapSwitch({size: "small"});
 	headerLib.calculateTitelHeight();
 	return {
 		icon: iconSize,

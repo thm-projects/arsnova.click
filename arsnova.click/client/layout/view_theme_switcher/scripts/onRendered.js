@@ -29,7 +29,7 @@ Template.themeSwitcher.onRendered(function () {
 	footerElements.addFooterElement(footerElements.footerElemImport);
 	footerElements.calculateFooter();
 
-	const theme = sessionStorage.getItem("theme");
+	const theme = localStorage.getItem("theme");
 	for (let i = 0; i < themes.length; i++) {
 		if (themes[i].id === theme) {
 			$('.theme-description').text(TAPi18n.__(themes[i].description));

@@ -23,6 +23,6 @@ Template.themeSwitcher.helpers({
 		return themes;
 	},
 	isThemeSelected: function (themeName) {
-		return sessionStorage.getItem("theme") === themeName ? "selected" : "";
+		return localStorage.getItem("theme") === themeName ? "selected" : "";
 	}
 });

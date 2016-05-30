@@ -81,7 +81,10 @@ Router.onBeforeAction(function () {
 });
 
 Router.onAfterAction(function () {
-	$('#theme-wrapper').removeClass().addClass(sessionStorage.getItem("theme"));
+	if (!localStorage.getItem("theme")) {
+		localStorage.setItem("theme", "theme-default");
+	}
+	$('#theme-wrapper').removeClass().addClass(localStorage.getItem("theme"));
 });
 
 Router.route('/', {

@@ -22,7 +22,7 @@ import {themes} from './lib.js';
 Template.themeSwitcher.events({
 	"change #select-theme": function (event) {
 		const theme = $(event.currentTarget).find("option:selected").attr("id");
-		sessionStorage.setItem("theme", theme);
+		localStorage.setItem("theme", theme);
 		$('#theme-wrapper').removeClass().addClass(theme);
 
 		for (let i = 0; i < themes.length; i++) {

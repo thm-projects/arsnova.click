@@ -37,10 +37,6 @@ Template.home.onRendered(function () {
 		}
 	});
 
-	if (!sessionStorage.getItem("theme")) {
-		sessionStorage.setItem("theme", "theme-default");
-	}
-
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemAbout);
 	footerElements.addFooterElement(footerElements.footerElemTranslation);

@@ -28,6 +28,6 @@ Template.createTimerView.events({
 		Router.go("/" + Router.current().params.quizName + "/memberlist");
 	},
 	"click #backButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/theme");
+		Router.go("/" + Router.current().params.quizName + "/answeroptions");
 	}
 });

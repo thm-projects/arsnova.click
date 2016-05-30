@@ -25,7 +25,7 @@ export const footerElemTranslation = {
 	id: "translation",
 	iconClass: "glyphicon glyphicon-globe",
 	textClass: "footerElementText",
-	textName: "region.footer.footer_bar.translation"
+	textName: "region.footer.footer_bar.languages"
 };
 export const footerElemSound = {
 	id: "sound",
@@ -65,8 +65,8 @@ export const footerElemHome = {
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.home"
 };
-export const footerElemImprint = {
-	id: "imprint",
+export const footerElemAbout = {
+	id: "about",
 	iconClass: "glyphicon glyphicon-info-sign",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.info"

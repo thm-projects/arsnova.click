@@ -28,7 +28,7 @@ Template.hashtagManagement.onRendered(function () {
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	footerElements.addFooterElement(footerElements.footerElemImport);
-	footerElements.addFooterElement(footerElements.footerElemImprint);
+	footerElements.addFooterElement(footerElements.footerElemAbout);
 	footerElements.addFooterElement(footerElements.footerElemTranslation);
 	footerElements.addFooterElement(footerElements.footerElemTheme);
 	footerElements.addFooterElement(footerElements.footerElemFullscreen);

@@ -21,7 +21,7 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 Template.translate.onRendered(function () {
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.addFooterElement(footerElements.footerElemImprint);
+	footerElements.addFooterElement(footerElements.footerElemAbout);
 	footerElements.addFooterElement(footerElements.footerElemTheme);
 	footerElements.addFooterElement(footerElements.footerElemFullscreen);
 	footerElements.addFooterElement(footerElements.footerElemImport);

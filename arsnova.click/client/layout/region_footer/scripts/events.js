@@ -25,8 +25,8 @@ import {buzzsound1, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 const clickEvents = {
-	"click #imprint": function () {
-		Router.go("/impressum");
+	"click #about": function () {
+		Router.go("/about");
 	},
 	"click #translation": function () {
 		Router.go("/translate");

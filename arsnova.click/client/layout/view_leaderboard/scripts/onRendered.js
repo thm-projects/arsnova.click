@@ -29,7 +29,7 @@ Template.leaderBoard.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemHome);
 		footerElements.addFooterElement(footerElements.footerElemSound);
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
-		footerElements.addFooterElement(footerElements.footerElemImprint);
+		footerElements.addFooterElement(footerElements.footerElemAbout);
 	}
 	footerElements.calculateFooter();
 

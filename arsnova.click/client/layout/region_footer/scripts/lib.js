@@ -147,7 +147,7 @@ export function updateStatefulFooterElements() {
 					}
 					break;
 				case "fullscreen":
-					if ((window.fullScreen) || (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
+					if ($("#fullscreen").find('.footerElemIcon').find(".glyphicon").hasClass("glyphicon-resize-small")) {
 						$('#fullscreen').removeClass("error").addClass("success");
 					} else {
 						$('#fullscreen').removeClass("success").addClass("error");

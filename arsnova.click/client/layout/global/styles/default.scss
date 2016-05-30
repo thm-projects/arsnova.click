@@ -18,7 +18,10 @@
 @import "colors";
 @import "appearance";
 
-body {
+body,
+body:fullscreen,
+body:-webkit-full-screen,
+body:-moz-full-screen {
   background-color: $background-color;
   font-family: $font;
 }
@@ -139,14 +142,7 @@ button:disabled {
   border-left: solid $footer-text-color 1px;
 }
 
-.navbar-transparent {
-  /*TODO: Umbruch bei größeren Content*/
-  // Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2972a3+0,2972a3+100&1+0,1+61,0+100
-  /*background: -moz-linear-gradient(top, rgba(41, 114, 163, 1) 0%, rgba(41, 114, 163, 1) 61%, rgba(41, 114, 163, 0) 100%);
-  background: -webkit-linear-gradient(top, rgba(41, 114, 163, 1) 0%, rgba(41, 114, 163, 1) 61%, rgba(41, 114, 163, 0) 100%);
-  background: linear-gradient(to bottom, rgba(41, 114, 163, 1) 0%, rgba(41, 114, 163, 1) 61%, rgba(41, 114, 163, 0) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2972a3', endColorstr='#002972a3', GradientType=0);*/
-
+.navbar {
   border: 0;
   background-color: $background-color;
   margin-bottom: 0;

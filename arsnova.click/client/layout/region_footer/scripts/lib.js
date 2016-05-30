@@ -16,6 +16,8 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
+import {Tracker} from 'meteor/tracker';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
 
 export const footerElemTranslation = {
@@ -110,6 +112,7 @@ export function generateFooterElements() {
 	}
 	Session.set("footerElements", footerElements);
 	Session.set("hiddenFooterElements", hiddenFooterElements);
+	Meteor.setTimeout(updateStatefulFooterElements, 40);
 	return footerElements;
 }
 
@@ -123,6 +126,36 @@ export function removeFooterElements() {
 	hiddenFooterElements.linkable.splice(0, hiddenFooterElements.linkable.length);
 	Session.set("footerElements", footerElements);
 	Session.set("hiddenFooterElements", hiddenFooterElements);
+}
+
+export function updateStatefulFooterElements() {
+	Tracker.autorun(function () {
+		$.each(footerElements, function (index, item) {
+			switch (item.id) {
+				case "sound":
+					if (HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).musicEnabled) {
+						$('#sound').removeClass("error").addClass("success");
+					} else {
+						$('#sound').removeClass("success").addClass("error");
+					}
+					break;
+				case "reading-confirmation":
+					if (HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled) {
+						$('#reading-confirmation').removeClass("error").addClass("success");
+					} else {
+						$('#reading-confirmation').removeClass("success").addClass("error");
+					}
+					break;
+				case "fullscreen":
+					if ((window.fullScreen) || (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
+						$('#fullscreen').removeClass("error").addClass("success");
+					} else {
+						$('#fullscreen').removeClass("success").addClass("error");
+					}
+					break;
+			}
+		});
+	});
 }
 
 export function calculateFooterFontSize() {

@@ -22,3 +22,5 @@ import {TAPi18n} from 'meteor/tap:i18n';
 import {calculateFooter} from './lib.js';
 
 Template.footer.onRendered(calculateFooter);
+
+Template.showMore.onRendered(calculateFooter);

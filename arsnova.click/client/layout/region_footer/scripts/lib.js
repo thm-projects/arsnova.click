@@ -1,3 +1,21 @@
+/*
+ * This file is part of ARSnova Click.
+ * Copyright (C) 2016 The ARSnova Team
+ *
+ * ARSnova Click is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ARSnova Click is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
+
+import {Meteor} from 'meteor/meteor';
 
 export const footerElemTranslation = {
 	id: "translation",
@@ -127,6 +145,7 @@ export function removeFooterElements() {
 export function calculateFooterFontSize() {
 	let iconSize = "3vh", textSize = "2vh";
 	const navbarFooter = $(".navbar-footer");
+	const fixedBottom = $('.fixed-bottom');
 
 	if ($(document).width() > $(document).height()) {
 		iconSize = "2vw";
@@ -134,7 +153,8 @@ export function calculateFooterFontSize() {
 	}
 	$(".footerElementText").css("fontSize", textSize);
 	navbarFooter.css({"fontSize": iconSize});
-	$('.fixed-bottom').css("bottom", navbarFooter.height());
+	fixedBottom.css("bottom", navbarFooter.height());
+	fixedBottom.show();
 	$("[name='switch']").bootstrapSwitch({size: "small"});
 	return {
 		icon: iconSize,

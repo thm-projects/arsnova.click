@@ -198,26 +198,13 @@
   text-decoration: underline;
 }
 
-@media (max-width:991px) {
-  .fixed-bottom {
-	position: fixed;
-	bottom: 4vw;
-	width: 100%;
-	left: 0;
-	background-color: steelblue;
-	padding: 10px 15px 25px 15px;
-  }
-}
-
-@media (min-width:992px) {
-  .fixed-bottom {
-	position: fixed;
-	bottom: 25px;
-	width: 100%;
-	left: 0;
-	background-color: steelblue;
-	padding: 10px 15px 25px 15px;
-  }
+.fixed-bottom {
+  position: fixed;
+  width: 100%;
+  display: none;
+  left: 0;
+  background-color: steelblue;
+  padding: 10px 15px 25px 15px;
 }
 
 .content-with-navigation-buttons {

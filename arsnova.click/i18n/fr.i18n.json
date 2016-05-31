@@ -204,6 +204,45 @@
       "survey_question": "Enquête",
       "ranged_question": "Question Quiz et réponses"
     },
+    "quiz_summary": {
+      "summary": "Résumé",
+      "quiz_name": "Nom du quiz",
+      "quiz_url": "URL pour les participants",
+      "question_amount": "Montant de toutes les questions",
+      "validation_question_group": "Test de validation pour le quiz complet",
+      "successful": "Réussi",
+      "failed": "Échoué",
+      "correct": "Correct",
+      "wrong": "Faux",
+      "question": "Question",
+      "text": "Texte",
+      "type": "Type",
+      "answer": "Répondre",
+      "answer_plural": "Réponses",
+      "timer": "Minuteur",
+      "second": "Seconde",
+      "second_plural": "Secondes",
+      "validation": "Validation",
+      "validation_errors": {
+        "types": {
+          "question": "Question",
+          "answerOption": "Répondre"
+        },
+        "reasons": {
+          "question_text_too_small": "Le texte de la question est trop courte",
+          "question_text_too_long": "Le texte de la question est trop long",
+          "timer_too_small": "La minuterie est trop court",
+          "timer_too_big": "La minuterie est trop long",
+          "no_valid_answers": "Il doit y avoir au moins une bonne réponse",
+          "one_valid_answer_required": "Il doit y avoir exactement une réponse correcte",
+          "no_valid_answer_required": "Il n'y a pas de réponses correctes permis",
+          "invalid_range": "La gamme minimale doit être inférieure à la portée maximale",
+          "answer_text_empty": "Le texte de la réponse ne peut pas être vide"
+        }
+      },
+      "edit_quiz": "Modifier quiz",
+      "start_quiz": "Démarrer quiz"
+    },
     "theme_switcher": {
       "set_theme": "Choisissez un thème pour tous les participants",
       "select_a_theme_title": "Choisissez le thème",

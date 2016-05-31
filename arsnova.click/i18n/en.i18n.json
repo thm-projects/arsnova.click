@@ -209,7 +209,7 @@
       "quiz_name": "Name of the quiz",
       "quiz_url": "URL for attendees",
       "question_amount": "Amount of all questions",
-      "validation_question_group": "Validationtest for the complete quiz",
+      "validation_question_group": "Validation for the complete quiz",
       "successful": "Successful",
       "failed": "Failed",
       "correct": "Correct",

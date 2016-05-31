@@ -209,7 +209,7 @@
       "quiz_name": "Nombre de la prueba",
       "quiz_url": "URL para los asistentes",
       "question_amount": "Cantidad de todas las preguntas",
-      "validation_question_group": "Prueba de validación de la prueba completa",
+      "validation_question_group": "Validación de la prueba completa",
       "successful": "Exitoso",
       "failed": "Ha fallado",
       "correct": "Correcto",

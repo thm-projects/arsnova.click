@@ -209,7 +209,7 @@
       "quiz_name": "Nom du quiz",
       "quiz_url": "URL pour les participants",
       "question_amount": "Montant de toutes les questions",
-      "validation_question_group": "Test de validation pour le quiz complet",
+      "validation_question_group": "Validation pour le quiz complet",
       "successful": "Réussi",
       "failed": "Échoué",
       "correct": "Correct",

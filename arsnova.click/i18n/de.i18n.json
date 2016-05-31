@@ -209,7 +209,7 @@
       "quiz_name": "Name der Quizrunde",
       "quiz_url": "URL für Teilnehmer",
       "question_amount": "Gesamtanzahl der Quizfragen",
-      "validation_question_group": "Validierungstest der gesamten Quizrunde",
+      "validation_question_group": "Validierung der gesamten Quizrunde",
       "successful": "Erfolgreich",
       "failed": "Fehlgeschlagen",
       "correct": "Richtig",

@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-xs-12">
                     <div class="validation">
-                        <h4>Validierung {{getValidationStatus this}}{{#unless this.isValid}}:{{/unless}}</h4>
+                        <h4>Validierung: {{getValidationStatus this}}</h4>
                         {{#unless this.isValid}}
                             <ul>
                                 {{#each getValidationErrors this}}
@@ -46,7 +46,9 @@
                     </div>
                 </div>
             </div>
-            <hr />
+            {{#unless (isLastItem @index)}}
+                <hr />
+            {{/unless}}
         {{/each}}
     </div>
     {{> footer_nav_buttons backId = 'backButton' backText = 'Quiz bearbeiten' forwardId = 'forwardButton' forwardText = 'Quiz starten' }}

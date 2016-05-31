@@ -54,5 +54,8 @@ Template.quizSummary.helpers({
 	},
 	getValidationErrors: function (question) {
 		return question.getValidationStackTrace();
+	},
+	isLastItem: function (index) {
+		return index === Session.get("questionGroup").getQuestionList().length - 1;
 	}
 });

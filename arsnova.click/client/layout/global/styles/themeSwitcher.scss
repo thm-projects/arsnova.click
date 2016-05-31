@@ -1,0 +1,1255 @@
+@mixin theme($name) {
+
+	/* Default Theme */
+	$fg-text-light: white;
+	$fg_text-dark: black;
+	$fg_a: #ffd700;
+	$fg_quiz-name: #ffd700;
+	$fg_titel: white;
+
+	$success: #008000;
+	$success-text-color: #ffffff;
+	$warning: #b22222;
+	$warning-text-color: #ffffff;
+	$info: #663399;
+	$info-text-color: #ffffff;
+	$default: #808080;
+	$default-text-color: #ffffff;
+
+	$background-color: #4682b4;
+	$button-shadow: black;
+
+	$bg-nav-row: $background-color;
+	$bg-container: $background-color;
+
+	$bg-questionList-row: $background-color;
+	$box-shadow-question-row-active: rebeccapurple;
+	$fg-questionScrollPane-index-number: white;
+	$fg-questionScrollPane-remove-question: white;
+	$bg-questionScrollPane-question-icon-valid-index-number: green;
+	$bg-questionScrollPane-question-icon-invalid-index-number: grey;
+	$border-questionScrollPane-active: beige;
+	$border-questionScrollPane-active-valid-remove-question: green;
+	$box-shadow-questionScrollPane-active-remove-question: none;
+	$border-questionScrollPane-active-remove-question: black;
+	$bg-questionScrollPane-active-remove-question-hovered: red;
+	$fg-questionScrollPane-active-remove-question-hovered: white;
+
+	$disabled-button-background: #808080;
+
+	$placeholder-color: #808080;
+	$input-background-color: #ffd700;
+	$input-foreground-color: black;
+	$input-group-letter-color: #2f4f4f;
+
+	$bg-footer: $background-color;
+	$footer-background-color: #dcdcdc;
+	$footer-text-color: #000000;
+	$fg-footer-info-bar: white;
+	$fg-footer-info-bar-hovered: darken($fg-footer-info-bar, 30);
+	$fg-footer-info-bar-active: #00CC00;
+	$fg-footer-info-bar-active-hovered: #33FF00;
+	$fg-footer-element: white;
+	$fg-footer-element-hovered: white;
+	$fg-footer-element-deactivated: $warning;
+	$fg-footer-element-deactivated-hovered: red;
+	$fg-footer-element-activated: $success;
+	$fg-footer-element-activated-hovered: $success;
+
+	$slider-color: #008000;
+
+	$progress-bar-success-color: green;
+	$progress-bar-read-confirmation: darkorange;
+	$progress-bar-failure-color: firebrick;
+	$progress-bar-default-color: grey;
+	$bg_progress-bar: white;
+	$fg_progress-bar: black;
+
+	$splash-screen-header-color: #2f4f4f;
+	$splash-screen-body-color: #2f4f4f;
+	$splashscreen-background-color: #98fb98;
+	$splashscreen-foreground-color: black;
+	$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+	$splashscreen-question-preview-background-color: $splashscreen-background-color;
+	$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+	$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+	$splashscreen-sound-config-background-color: $splashscreen-background-color;
+	$splashscreen-sound-config-button-background-color: $success;
+	$splashscreen-delete-background-color: $splashscreen-background-color;
+	$splash-screen-error-message-background-color: white;
+	$splash-screen-error-message-button-background-color: $success;
+	$splash-screen-error-message-button-foreground-color: white;
+
+	$check-mark-checked: #00882a;
+	$check-mark-unchecked: #aaaaaa;
+
+	$fg-theme_description: white;
+
+	$bg-button-leader: $input-background-color;
+	$fg-button-leader: $input-foreground-color;
+
+	$bg-button-result: #eeeeee;
+	$fg-button-result-percentage: #ffffff;
+	$bg-button-result-progress: LightSteelBlue;
+
+	$bg-previewText: white;
+
+	$fg-js-my-hash: black;
+	$bg-js-my-hash: #ffffe0;
+	$bg-js-my-hash-hovered: lighten($bg-js-my-hash, 20);
+	$bg-js-my-hash-active: darken($bg-js-my-hash, 10);
+
+	$colorChangingArs0: white;
+	$colorChangingArs25: $warning;
+	$colorChangingArs50: $info;
+	$colorChangingArs75: $input-background-color;
+	$colorChangingArs100: white;
+
+	$colorChangingNova0: $input-background-color;
+	$colorChangingNova25: white;
+	$colorChangingNova50: $warning;
+	$colorChangingNova75: $info;
+	$colorChangingNova100: $input-background-color;
+
+	$colorChangingDot0: $info;
+	$colorChangingDot25: $input-background-color;
+	$colorChangingDot50: white;
+	$colorChangingDot75: $warning;
+	$colorChangingDot100: $info;
+
+	$colorChangingClick0: $warning;
+	$colorChangingClick25: $info;
+	$colorChangingClick50: $input-background-color;
+	$colorChangingClick75: white;
+	$colorChangingClick100: $warning;
+
+	$bg-colorChangingOwnNick0: $input-background-color;
+	$fg-colorChangingOwnNick0: white;
+	$bg-colorChangingOwnNick25: $warning;
+	$fg-colorChangingOwnNick25: white;
+	$bg-colorChangingOwnNick50: $info;
+	$fg-colorChangingOwnNick50: white;
+	$bg-colorChangingOwnNick75: $default;
+	$fg-colorChangingOwnNick75: white;
+	$bg-colorChangingOwnNick100: #98fb98;
+	$fg-colorChangingOwnNick100: black;
+
+	$bg-btn-more-learners: rebeccapurple;
+	$fg-btn-more-learners: white;
+
+	$fg-formGroup-progress-percentage-label: white;
+
+	$bg-btn-file-input: white;
+
+	$fg-question-title: white;
+
+	$fg-glyphicon-style: #FFF;
+
+	$fg-qr-code-button: white;
+	$fg-qr-code-button-hovered: darken($fg-qr-code-button, 20);
+	$border-qr-code-container: white;
+	$bg-qr-code-container: white;
+	$fg-qr-code-container-close: black;
+	$fg-qr-code-container-close-hovered: lighten($fg-qr-code-container-close, 20);
+	$border-qr-code-container-close-icon: black;
+	$background-qr-code-container-close-icon: white;
+	$fg-qr-code-label: black;
+
+	$box-shadow-markdown: black;
+	$fg-hljs-comment: #006a00;
+	$fg-lockquote: #394a59;
+	$border-hljs-line-numbers: #ccc;
+	$fg-hljs: #f0f0f0;
+	$bg-hljs: black;
+	$fg-hljs-line-numbers: #999;
+	$bg-hljs-pre: white;
+	$fg-hljs_keyword: #aa0d91;
+	$fg-hljs_literal: #aa0d91;
+	$fg-hljs_nginx-title: #aa0d91;
+	$fg-hljs_method: #008;
+	$fg-hljs_list-title: #008;
+	$fg-hljs_tag-title: #008;
+	$fg-hljs_setting-value: #008;
+	$fg-hljs_winutils: #008;
+	$fg-hljs_tex-command: #008;
+	$fg-hljs_http-title: #008;
+	$fg-hljs_request: #008;
+	$fg-hljs_status: #008;
+	$fg-hljs_name: #008;
+	$fg-hljs_envvar: #660;
+	$fg-hljs_tex-special: #660;
+	$fg-hljs_string: #c41a16;
+	$fg-hljs_tag-value: #080;
+	$fg-hljs_cdata: #080;
+	$fg-hljs_filter-argument: #080;
+	$fg-hljs_attr_selector: #080;
+	$fg-hljs_apache-cbracket: #080;
+	$fg-hljs_date: #080;
+	$fg-hljs_regexp: #080;
+	$fg-hljs_sub-identifier: #1c00cf;
+	$fg-hljs_pi: #1c00cf;
+	$fg-hljs_tag: #1c00cf;
+	$fg-hljs_tag-keyword: #1c00cf;
+	$fg-hljs_decorator: #1c00cf;
+	$fg-hljs_ini-title: #1c00cf;
+	$fg-hljs_shebang: #1c00cf;
+	$fg-hljs_prompt: #1c00cf;
+	$fg-hljs_hexcolor: #1c00cf;
+	$fg-hljs_rule-value: #1c00cf;
+	$fg-hljs_symbol: #1c00cf;
+	$fg-hljs_symbol-string: #1c00cf;
+	$fg-hljs_number: #1c00cf;
+	$fg-hljs_css-function: #1c00cf;
+	$fg-hljs_function-title: #1c00cf;
+	$fg-hljs_coffeescript-attribute: #1c00cf;
+	$fg-hljs_class-title: #5c2699;
+	$fg-hljs_smalltalk-class: #5c2699;
+	$fg-hljs_type: #5c2699;
+	$fg-hljs_typename: #5c2699;
+	$fg-hljs_tag-attribute: #5c2699;
+	$fg-hljs_doctype: #5c2699;
+	$fg-hljs_class-id: #5c2699;
+	$fg-hljs_built_in: #5c2699;
+	$fg-hljs_setting: #5c2699;
+	$fg-hljs_params: #5c2699;
+	$fg-hljs_clojure-attribute: #5c2699;
+	$fg-hljs_variable: #3f6e74;
+	$fg-hljs_css-tag: #000;
+	$fg-hljs_rule-property: #000;
+	$fg-hljs_pseudo: #000;
+	$fg-hljs_subst: #000;
+	$fg-hljs_css-class: #9b703f;
+	$fg-hljs_css-id: #9b703f;
+	$fg-hljs_value-important: #ff7700;
+	$fg-hljs_rule-keyword: #c5af75;
+	$fg-hljs_annotation: #9b859d;
+	$fg-hljs_apache-sqbracket: #9b859d;
+	$fg-hljs_nginx-build_in: #9b859d;
+	$fg-hljs_preprocessor: #643820;
+	$fg-hljs_preprocessor-ALL: #643820;
+	$fg-hljs_pragma: #643820;
+	$fg-hljs_formula: #eee;
+	$fg-hljs_diff-header: #808080;
+	$fg-hljs_chunk: #808080;
+	$fg-hljs_pragma: #bccff9;
+	$fg-hljs_addition: #baeeba;
+	$fg-hljs_deletion: #ffc8bd;
+	$fg-hljs_method-id: #000;
+	$fg-hljs_projectorMode-SPAN: inherit;
+	$bg-hljs_projectorMode-SPAN: inherit;
+	$fg-hljs_projectorMode-pre: white;
+	$bg-hljs_projectorMode-pre: #333;
+	$fg-hljs_projectorMode-hljs: white;
+	$bg-hljs_projectorMode-hljs: #333;
+	$fg-hljs_projectorMode-tag: #62c8f3;
+	$fg-hljs_projectorMode-ini-title: #62c8f3;
+	$fg-hljs_projectorMode-id: #ade5fc;
+	$fg-hljs_projectorMode-cbracket: #ade5fc;
+	$fg-hljs_projectorMode-tag-value: #ade5fc;
+	$fg-hljs_projectorMode-string: #a2fca2;
+	$fg-hljs_projectorMode-bullet: #a2fca2;
+	$fg-hljs_projectorMode-type: #ffa;
+	$fg-hljs_projectorMode-variable: #ffa;
+	$fg-hljs_projectorMode-name: #ffa;
+	$fg-hljs_projectorMode-actionscript-title: #ffa;
+	$fg-hljs_projectorMode-aspectj-annotation: #ffa;
+	$fg-hljs_projectorMode-aspectj-title: #ffa;
+	$fg-hljs_projectorMode-attribute: #ffa;
+	$fg-hljs_projectorMode-change: #ffa;
+	$fg-hljs_projectorMode-blockquote: #ffa;
+	$fg-hljs_projectorMode-built_in: #ffa;
+	$fg-hljs_projectorMode-number: #d36363;
+	$fg-hljs_projectorMode-hexcolor: #d36363;
+	$fg-hljs_projectorMode-link_label: #d36363;
+	$fg-hljs_projectorMode-link_reference: #d36363;
+	$fg-hljs_projectorMode-keyword: #fcc28c;
+	$fg-hljs_projectorMode-literal: #fcc28c;
+	$fg-hljs_projectorMode-constant: #fcc28c;
+	$fg-hljs_projectorMode-css-tag: #fcc28c;
+	$fg-hljs_projectorMode-typename: #fcc28c;
+	$fg-hljs_projectorMode-winutils: #fcc28c;
+	$fg-hljs_projectorMode-comment: #888;
+	$fg-hljs_projectorMode-cdata: #888;
+	$fg-hljs_projectorMode-preprocessor: #888;
+	$fg-hljs_projectorMode-annotation: #888;
+	$fg-hljs_projectorMode-decorator: #888;
+	$fg-hljs_projectorMode-doctype: #888;
+	$fg-hljs_projectorMode-deletion: #888;
+	$fg-hljs_projectorMode-shebang: #888;
+	$fg-hljs_projectorMode-apache-sqbracket: #888;
+	$fg-hljs_projectorMode-text-formula: #888;
+	$fg-hljs_projectorMode-header: #888;
+	$fg-hljs_projectorMode-holzontal_rule: #888;
+	$fg-hljs_projectorMode-code: #888;
+	$fg-hljs_projectorMode-regexp: #fc9b9b;
+	$fg-hljs_projectorMode-attr_selector: #fc9b9b;
+	$fg-hljs_projectorMode-pi: #fc9b9b;
+	$fg-hljs_projectorMode-chunk: #fc9b9b;
+	$fg-hljs_projectorMode-actionscript-type: #fc9b9b;
+	$fg-hljs_projectorMode-pragma: #fc9b9b;
+	$fg-hljs_projectorMode-http-attribute: #fc9b9b;
+	$fg-hljs_projectorMode-addition: #333;
+	$bg-hljs_projectorMode-addition: #a2fca2;
+	$bg-hljs_projectorMode-deletion: #fc9b9b;
+	$fg-hljs_projectorMode-a: inherit;
+	$fg-hljs_projectorMode-tag-attribute: inherit;
+	$fg-hljs_projectorMode-a-focus: inherit;
+	$fg-hljs_projectorMode-a-hover: inherit;
+
+	@if ($name == "theme-dark") {
+		$success: #00CD00; /* green */
+		$warning: #FF2222; /* firebrick */
+		$info: #1C86EE; /* dodgerblue */
+		$background-color: #4a4a4a; /* grey */
+
+		$switch: #00CD00; /* green */
+		$switch-text-color: #ffffff;
+
+		$bg-nav-row: $background-color;
+
+		$bg-questionList-row: $bg-nav-row;
+
+		$bg-container: $background-color;
+
+		$bg-footer: $background-color;
+		$footer-text-color: #FFFFFF; /* white */
+
+		$disabled-button-background: darkgrey; /* darkgrey */
+		$placeholder-color: #FFFFFF ; /* white */
+		$input-background-color: #FF8C00; /* orange */
+		$input-group-letter-color: white; /* darkslategrey */
+
+		$check-mark-checked: $success;
+		$check-mark-unchecked: $warning;
+	}
+
+	@if ($name == "theme-thm") {
+		$thmred: #b5003f;
+		$thmorange: #ffb300;
+		$thmbabyblue: #4dffed;
+		$thmnavy: #003bd1;
+		$thmgreen: #80ba24;
+		$thmgray: #4a5c66;
+
+		$background-color: $thmgreen;
+
+		$fg_quiz-name: #b5003f;
+		$default: #d3d3d3; /* light grey */
+		$default-text-color: $thmgray;
+		$success: #a9f5a9; /*bright green*/
+		$success-text-color: $thmgray;
+
+		$placeholder-color: #ffffff ; /* white */
+		$input-background-color: #808080; /* grey */
+
+		$bg-footer: $background-color;
+		$footer-background-color: #000000; /*gainsboro */
+		$fg-footer-info-bar-active: #33FF00;
+		$fg-footer-info-bar-active-hovered: #A1FF8A;
+
+		$bg-nav-row: $background-color;
+
+		$bg-questionList-row: $bg-nav-row;
+
+		$bg-container: $background-color;
+
+		$disabled-button-background: #808080; /* grey */
+
+		$check-mark-unchecked: #aaaaaa;
+
+		$fg-theme_description: black;
+	}
+
+	@if ($name == "theme-elegant") {
+		$background-color: #dbe4e9;
+		$bg-nav-row: #002d47;
+		$bg-container: $background-color;
+		$bg-questionList-row: #B1C5D0;
+		$bg-footer: #374e5b;
+		$default-text-color: black;
+		$fg-text-light: black;
+		$fg_text-dark: black;
+		$fg_a: #ffd700;
+		$fg_quiz-name: #ffd700;
+		$fg_titel: black;
+		$fg-theme_description: black;
+	}
+
+	@if ($name == "theme-arsnova") {
+		$background-color: #dfe5e6;
+		$bg-nav-row: #3d9c19;
+		$bg-container: $background-color;
+		$bg-questionList-row: $bg-container;
+		$bg-footer: #dfe5e6;
+		$fg_a: white;
+		$fg_quiz-name: white;
+		$fg_titel: black;
+		$fg-theme_description: black;
+		$default-text-color: black;
+		$fg-text-light: black;
+		$fg_text-dark: black;
+		$fg-footer-info-bar: #394a59;
+		$fg-footer-info-bar-active: #459c2f;
+		$fg-footer-info-bar-active-hovered: #6aa05d;
+	}
+
+	body {
+		background-color: $background-color;
+	}
+	*:fullscreen,
+	*:-webkit-full-screen,
+	*:-moz-full-screen {
+		background-color: $background-color;
+	}
+
+	.#{$name} {
+		.text-light, a.text-light, a:hover.text-light, a:active.text-light, a:visited.text-light, a:focus.text-light {
+			color: $fg-text-light;
+		}
+		a.text-dark, a:hover.text-dark, a:active.text-dark, a:visited.text-dark, a:focus.text-dark {
+			color: $fg_text-dark !important;
+		}
+		a, a:hover, a:active, a:visited, a:focus {
+			color: $fg_a;
+		}
+		.titel {
+			color: $fg_titel;
+		}
+		.quizName {
+			color: $fg_quiz-name;
+		}
+		.container, .fixed-bottom {
+			background-color: $bg-container;
+		}
+		.footer-info-bar {
+			background-color: $bg-footer;
+			color: $fg-footer-info-bar;
+		}
+		.footer-gradient {
+			color: $footer-text-color;
+		}
+		.footer a {
+			color: $footer-text-color;
+			div {
+				border-left: solid $footer-text-color 1px;
+				color: $footer-text-color !important;
+			}
+		}
+		.navbar-fixed-top {
+			background-color: $bg-nav-row;
+			.questionList-row {
+				background-color: $bg-questionList-row;
+			}
+			.nav-row {
+				background-color: $bg-nav-row;
+			}
+		}
+		textarea::-moz-placeholder, textarea:-ms-input-placeholder, input::-webkit-input-placeholder, input[placeholder] {
+			color: $placeholder-color;
+			opacity: 1;
+		}
+		button:disabled {
+			background-color: $disabled-button-background;
+		}
+		.qr-code-button {
+			color: $fg-qr-code-button;
+			&:hover {
+				color: $fg-qr-code-button-hovered;
+			}
+		}
+		.qr-code-container {
+			border: 1px solid $border-qr-code-container;
+			background-color: $bg-qr-code-container;
+		}
+		.qr-code-container-close {
+			color: $fg-qr-code-container-close;
+			&:hover {
+				color: $fg-qr-code-container-close-hovered;
+			}
+			.glyphicon-remove {
+				border: 1px solid $border-qr-code-container-close-icon;
+				background-color: $background-qr-code-container-close-icon;
+			}
+		}
+		.qr-code-label {
+			color: $fg-qr-code-label;
+		}
+		.questionScrollPane {
+			.indexNumber {
+				color: $fg-questionScrollPane-index-number;
+			}
+			.removeQuestion {
+				color: $fg-questionScrollPane-remove-question;
+			}
+			.questionIcon {
+				&.valid {
+					.indexNumber {
+						background-color: $bg-questionScrollPane-question-icon-valid-index-number;
+					}
+					&:hover:not(.active) {
+						.indexNumber {
+							background-color: darken($bg-questionScrollPane-question-icon-valid-index-number, 5%);
+						}
+					}
+				}
+				&:not(.valid) {
+					.indexNumber {
+						background-color: $bg-questionScrollPane-question-icon-invalid-index-number;
+					}
+					&:hover:not(.active) {
+						.indexNumber {
+							background-color: darken($bg-questionScrollPane-question-icon-invalid-index-number, 10%);
+						}
+					}
+				}
+				&.active {
+					border: 1px solid $border-questionScrollPane-active;
+					&.valid {
+						.removeQuestion {
+							background-color: $border-questionScrollPane-active-valid-remove-question;
+						}
+					}
+					.removeQuestion {
+						box-shadow: $box-shadow-questionScrollPane-active-remove-question;
+						border-left: 10px solid $border-questionScrollPane-active-remove-question;
+						&:hover {
+							background-color: $bg-questionScrollPane-active-remove-question-hovered;
+							color: $fg-questionScrollPane-active-remove-question-hovered;
+						}
+					}
+				}
+			}
+		}
+		.progress-bar {
+			background: $bg_progress-bar;
+			color: $fg_progress-bar;
+		}
+		.slider, .slider .noUi-handle {
+			background-color: $slider-color;
+		}
+		.button-shadow, .button {
+			box-shadow: 1px 1px 5px $button-shadow;
+		}
+		.input-field {
+			color: $input-foreground-color !important;
+		}
+		.input-field-bg-color, .input-field {
+			background-color: $input-background-color;
+		}
+		.default-yellow-text-color {
+			color: $input-background-color;
+		}
+		.input-group-letter, .button-result-letter {
+			color: $input-group-letter-color;
+		}
+		.button-next, .button-success {
+			background-color: $success;
+			color: $success-text-color;
+		}
+		.button-warning, .button-back {
+			background-color: $warning;
+			color: $warning-text-color;
+		}
+		.button-purple {
+			background-color: $info;
+			color: $info-text-color;
+		}
+		.button-default {
+			background-color: $default;
+			color: $default-text-color;
+		}
+		.button-leader {
+			background-color: $bg-button-leader;
+			color: $fg-button-leader;
+		}
+		.button-result {
+			background-color: $bg-button-result;
+			.percentage {
+				color: $fg-button-result-percentage;
+			}
+			.progress {
+				background-color: $bg-button-result-progress;
+			}
+		}
+		.navbar-footer {
+			background-color: $bg-footer;
+			.footerElement {
+				color: $fg-footer-info-bar;
+				&:hover {
+					color: $fg-footer-info-bar-hovered;
+				}
+				&.error {
+					color: $fg-footer-element-deactivated;
+					&:hover {
+						color: $fg-footer-element-deactivated-hovered;
+					}
+				}
+				&.success {
+					color: $fg-footer-info-bar-active;
+
+					&:hover {
+						color: $fg-footer-info-bar-active-hovered;
+					}
+				}
+			}
+		}
+		.progress-success {
+			background-color: $progress-bar-success-color !important;
+		}
+		.progress-failure {
+			background-color: $progress-bar-failure-color !important;
+		}
+		.progress-default {
+			background-color: $input-background-color !important;
+		}
+		.textarea {
+			background-color: $input-background-color;
+		}
+		.previewText {
+			background-color: $bg-previewText;
+		}
+		.check-mark-checked {
+			color: $check-mark-checked;
+		}
+		.check-mark-unchecked {
+			color: $check-mark-unchecked;
+		}
+		.success input, .success textarea, input.success, textarea.success {
+			border: 3px solid $success;
+		}
+		.error input, .error textarea, input.error, textarea.error {
+			border: 3px solid $warning;
+		}
+		.popover-title, .popover.bottom {
+			background-color: $warning;
+			color: $warning-text-color;
+			border-color: $warning;
+		}
+		.popover.bottom > .arrow:after {
+			border-bottom-color: $warning;
+		}
+		.lockquote {
+			color: $fg-lockquote !important;
+		}
+		.hljs {
+			background: $bg-hljs;
+			color: $fg-hljs;
+		}
+		.hljs-line-numbers {
+			border-right: 1px solid $border-hljs-line-numbers;
+			color: $fg-hljs-line-numbers;
+		}
+		.hljs-pre {
+			background-color: $bg-hljs-pre;
+		}
+		.hljs-comment {
+			color: $fg-hljs-comment;
+		}
+		.hljs-keyword {
+			color: $fg-hljs_keyword;
+		}
+		.hljs-literal {
+			color: $fg-hljs_literal;
+		}
+		.nginx .hljs-title {
+			color: $fg-hljs_nginx-title;
+		}
+		.method {
+			color: $fg-hljs_method;
+		}
+		.hljs-list .hljs-title {
+			color: $fg-hljs_list-title;
+		}
+		.hljs-tag .hljs-title {
+			color: $fg-hljs_tag-title;
+		}
+		.setting .hljs-value {
+			color: $fg-hljs_setting-value;
+		}
+		.hljs-winutils {
+			color: $fg-hljs_winutils;
+		}
+		.tex .hljs-command {
+			color: $fg-hljs_tex-command;
+		}
+		.http .hljs-title {
+			color: $fg-hljs_http-title;
+		}
+		.hljs-request {
+			color: $fg-hljs_request;
+		}
+		.hljs-status {
+			color: $fg-hljs_status;
+		}
+		.hljs-name {
+			color: $fg-hljs_name;
+		}
+		.hljs-envvar {
+			color: $fg-hljs_envvar;
+		}
+		.tex .hljs-special {
+			color: $fg-hljs_tex-special;
+		}
+		.hljs-string {
+			color: $fg-hljs_string;
+		}
+		.hljs-tag .hljs-value {
+			color: $fg-hljs_tag-value;
+		}
+		.hljs-cdata {
+			color: $fg-hljs_cdata;
+		}
+		.hljs-filter .hljs-argument {
+			color: $fg-hljs_filter-argument;
+		}
+		.hljs-attr_selector {
+			color: $fg-hljs_attr_selector;
+		}
+		.apache .hljs-cbracket {
+			color: $fg-hljs_apache-cbracket;
+		}
+		.hljs-date {
+			color: $fg-hljs_date;
+		}
+		.hljs-regexp {
+			color: $fg-hljs_regexp;
+		}
+		.hljs-sub .hljs-identifier {
+			color: $fg-hljs_sub-identifier;
+		}
+		.hljs-pi {
+			color: $fg-hljs_pi;
+		}
+		.hljs-tag {
+			color: $fg-hljs_tag;
+		}
+		.hljs-tag .hljs-keyword {
+			color: $fg-hljs_tag-keyword;
+		}
+		.hljs-decorator {
+			color: $fg-hljs_decorator;
+		}
+		.ini .hljs-title {
+			color: $fg-hljs_ini-title;
+		}
+		.hljs-shebang {
+			color: $fg-hljs_shebang;
+		}
+		.hljs-prompt {
+			color: $fg-hljs_prompt;
+		}
+		.hljs-hexcolor {
+			color: $fg-hljs_hexcolor;
+		}
+		.hljs-rule .hljs-value {
+			color: $fg-hljs_rule-value;
+		}
+		.hljs-symbol {
+			color: $fg-hljs_symbol;
+		}
+		.hljs-symbol .hljs-string {
+			color: $fg-hljs_symbol-string;
+		}
+		.hljs-number {
+			color: $fg-hljs_number;
+		}
+		.css .hljs-function {
+			color: $fg-hljs_css-function;
+		}
+		.hljs-function .hljs-title {
+			color: $fg-hljs_function-title;
+		}
+		.coffeescript .hljs-attribute {
+			color: $fg-hljs_coffeescript-attribute;
+		}
+		.hljs-class .hljs-title {
+			color: $fg-hljs_class-title;
+		}
+		.smalltalk .hljs-class {
+			color: $fg-hljs_smalltalk-class;
+		}
+		.hljs-type {
+			color: $fg-hljs_type;
+		}
+		.hljs-typename {
+			color: $fg-hljs_typename;
+		}
+		.hljs-tag .hljs-attribute {
+			color: $fg-hljs_tag-attribute;
+		}
+		.hljs-doctype {
+			color: $fg-hljs_doctype;
+		}
+		.hljs-class .hljs-id {
+			color: $fg-hljs_class-id;
+		}
+		.hljs-built_in {
+			color: $fg-hljs_built_in;
+		}
+		.setting {
+			color: $fg-hljs_setting;
+		}
+		.hljs-params {
+			color: $fg-hljs_params;
+		}
+		.clojure .hljs-attribute {
+			color: $fg-hljs_clojure-attribute;
+		}
+		.hljs-variable {
+			color: #3f6e74;
+		}
+		.css .hljs-tag {
+			color: $fg-hljs_css-tag;
+		}
+		.hljs-rule .hljs-property {
+			color: $fg-hljs_rule-property;
+		}
+		.hljs-pseudo {
+			color: $fg-hljs_pseudo;
+		}
+		.hljs-subst {
+			color: $fg-hljs_subst;
+		}
+		.css .hljs-class {
+			color: $fg-hljs_css-class;
+		}
+		.css .hljs-id {
+			color: $fg-hljs_css-id;
+		}
+		.hljs-value .hljs-important {
+			color: $fg-hljs_value-important;
+			font-weight: bold;
+		}
+		.hljs-rule .hljs-keyword {
+			color: $fg-hljs_rule-keyword;
+		}
+		.hljs-annotation {
+			color: $fg-hljs_annotation;
+		}
+		.apache .hljs-sqbracket {
+			color: $fg-hljs_apache-sqbracket;
+		}
+		.nginx .hljs-built_in {
+			color: $fg-hljs_nginx-build_in;
+		}
+		.hljs-preprocessor {
+			color: $fg-hljs_preprocessor;
+		}
+		.hljs-preprocessor * {
+			color: $fg-hljs_preprocessor-ALL;
+		}
+		.hljs-pragma {
+			color: $fg-hljs_pragma;
+		}
+		.tex .hljs-formula {
+			background-color: $fg-hljs_formula;
+			font-style: italic;
+		}
+		.diff .hljs-header {
+			color: $fg-hljs_diff-header;
+			font-weight: bold;
+		}
+		.hljs-chunk {
+			color: $fg-hljs_chunk;
+			font-weight: bold;
+		}
+		.diff .hljs-change {
+			background-color: $fg-hljs_pragma;
+		}
+		.hljs-addition {
+			background-color: $fg-hljs_addition;
+		}
+		.hljs-deletion {
+			background-color: $fg-hljs_deletion;
+		}
+		.method .hljs-id {
+			color: $fg-hljs_method-id;
+		}
+		.projector-mode {
+			span[class^='hljs'], span[class*=' hljs'] {
+				color: $fg-hljs_projectorMode-SPAN;
+				background-color: $bg-hljs_projectorMode-SPAN;
+			}
+			.hljs-pre {
+				color: $fg-hljs_projectorMode-pre;
+				background-color: $bg-hljs_projectorMode-pre;
+			}
+			.hljs {
+				color: $fg-hljs_projectorMode-hljs;
+				background: $bg-hljs_projectorMode-hljs;
+				display: block;
+				overflow-x: auto;
+				padding: .5em;
+				-webkit-text-size-adjust: none;
+			}
+			.hljs-tag {
+				color: $fg-hljs_projectorMode-tag;
+			}
+			.ini .hljs-title {
+				color: $fg-hljs_projectorMode-ini-title;
+			}
+			.hljs-id {
+				color: $fg-hljs_projectorMode-id;
+			}
+			.hljs-cbracket {
+				color: $fg-hljs_projectorMode-cbracket;
+			}
+			.hljs-tag .hljs-value {
+				color: $fg-hljs_projectorMode-tag-value;
+			}
+			.hljs-string {
+				color: $fg-hljs_projectorMode-string;
+			}
+			.hljs-bullet {
+				color: $fg-hljs_projectorMode-bullet;
+			}
+			.hljs-type {
+				color: $fg-hljs_projectorMode-type;
+			}
+			.hljs-variable {
+				color: $fg-hljs_projectorMode-variable;
+			}
+			.hljs-name {
+				color: $fg-hljs_projectorMode-name;
+			}
+			.actionscript .hljs-title {
+				color: $fg-hljs_projectorMode-actionscript-title;
+			}
+			.aspectj .hljs-annotation {
+				color: $fg-hljs_projectorMode-aspectj-annotation;
+			}
+			.aspectj .hljs-title{
+				color: $fg-hljs_projectorMode-aspectj-title;
+			}
+			.hljs-attribute {
+				color: $fg-hljs_projectorMode-attribute;
+			}
+			.hljs-change {
+				color: $fg-hljs_projectorMode-change;
+			}
+			.hljs-blockquote {
+				color: $fg-hljs_projectorMode-blockquote;
+			}
+			.hljs-built_in {
+				color: $fg-hljs_projectorMode-built_in;
+			}
+			.hljs-number {
+				color: $fg-hljs_projectorMode-number;
+			}
+			.hljs-hexcolor {
+				color: $fg-hljs_projectorMode-hexcolor;
+			}
+			.hljs-link_label {
+				color: $fg-hljs_projectorMode-link_label;
+			}
+			.hljs-link_reference {
+				color: $fg-hljs_projectorMode-link_reference;
+			}
+			.hljs-keyword {
+				color: $fg-hljs_projectorMode-keyword;
+			}
+			.hljs-literal {
+				color: $fg-hljs_projectorMode-literal;
+			}
+			.hljs-constant {
+				color: $fg-hljs_projectorMode-constant;
+			}
+			.css .hljs-tag {
+				color: $fg-hljs_projectorMode-css-tag;
+			}
+			.hljs-typename {
+				color: $fg-hljs_projectorMode-typename;
+			}
+			.hljs-winutils {
+				color: $fg-hljs_projectorMode-winutils;
+			}
+			.hljs-comment {
+				color: $fg-hljs_projectorMode-comment;
+			}
+			.hljs-cdata {
+				color: $fg-hljs_projectorMode-cdata;
+			}
+			.hljs-preprocessor {
+				color: $fg-hljs_projectorMode-preprocessor;
+			}
+			.hljs-annotation {
+				color: $fg-hljs_projectorMode-annotation;
+			}
+			.hljs-decorator {
+				color: $fg-hljs_projectorMode-decorator;
+			}
+			.hljs-doctype {
+				color: $fg-hljs_projectorMode-doctype;
+			}
+			.hljs-deletion {
+				color: $fg-hljs_projectorMode-deletion;
+				background-color: $bg-hljs_projectorMode-deletion;
+			}
+			.hljs-shebang {
+				color: $fg-hljs_projectorMode-shebang;
+			}
+			.apache .hljs-sqbracket {
+				color: $fg-hljs_projectorMode-apache-sqbracket;
+			}
+			.tex .hljs-formula {
+				color: $fg-hljs_projectorMode-text-formula;
+			}
+			.hljs-header {
+				color: $fg-hljs_projectorMode-header;
+			}
+			.hljs-horizontal_rule {
+				color: $fg-hljs_projectorMode-holzontal_rule;
+			}
+			.hljs-code {
+				color: $fg-hljs_projectorMode-code;
+			}
+			.hljs-regexp {
+				color: $fg-hljs_projectorMode-regexp;
+			}
+			.hljs-attr_selector {
+				color: $fg-hljs_projectorMode-attr_selector;
+			}
+			.hljs-pi {
+				color: $fg-hljs_projectorMode-pi;
+			}
+			.hljs-chunk {
+				color: $fg-hljs_projectorMode-chunk;
+			}
+			.actionscript .hljs-type {
+				color: $fg-hljs_projectorMode-actionscript-type;
+			}
+			.hljs-pragma {
+				color: $fg-hljs_projectorMode-pragma;
+			}
+			.http .hljs-attribute {
+				color: $fg-hljs_projectorMode-http-attribute;
+			}
+			.hljs-addition {
+				color: $fg-hljs_projectorMode-addition;
+				background-color: $bg-hljs_projectorMode-addition;
+			}
+			.hljs a {
+				color: $fg-hljs_projectorMode-a;
+			}
+			.hljs-tag .hljs-attribute {
+				color: $fg-hljs_projectorMode-tag-attribute;
+			}
+			.hljs a:focus {
+				color: $fg-hljs_projectorMode-a-focus;
+				text-decoration: underline;
+			}
+			.hljs a:hover {
+				color: $fg-hljs_projectorMode-a-hover;
+				text-decoration: underline;
+			}
+		}
+		@keyframes colorChangingArs {
+			0% {
+				color: $colorChangingArs0;
+			}
+			25% {
+				color: $colorChangingArs25;
+			}
+			50% {
+				color: $colorChangingArs50;
+			}
+			75% {
+				color: $colorChangingArs75;
+			}
+			100% {
+				color: $colorChangingArs100;
+			}
+		}
+		@keyframes colorChangingNova {
+			0% {
+				color: $colorChangingNova0;
+			}
+			25% {
+				color: $colorChangingNova25;
+			}
+			50% {
+				color: $colorChangingNova50;
+			}
+			75% {
+				color: $colorChangingNova75;
+			}
+			100% {
+				color: $colorChangingNova100;
+			}
+		}
+		@keyframes colorChangingDot {
+			0% {
+				color: $colorChangingDot0;
+			}
+			25% {
+				color: $colorChangingDot25;
+			}
+			50% {
+				color: $colorChangingDot50;
+			}
+			75% {
+				color: $colorChangingDot75;
+			}
+			100% {
+				color: $colorChangingDot100;
+			}
+		}
+		@keyframes colorChangingClick {
+			0% {
+				color: $colorChangingClick0;
+			}
+			25% {
+				color: $colorChangingClick25;
+			}
+			50% {
+				color: $colorChangingClick50;
+			}
+			75% {
+				color: $colorChangingClick75;
+			}
+			100% {
+				color: $colorChangingClick100;
+			}
+		}
+		.btn-file input[type=file] {
+			background: $bg-btn-file-input;
+		}
+		.question-title {
+			color: $fg-question-title;
+		}
+		.glyphicon-style {
+			color: $fg-glyphicon-style;
+		}
+		.formGroupProgressRow {
+			.progress {
+				.percentage {
+					.label {
+						color: $fg-formGroup-progress-percentage-label;;
+					}
+				}
+			}
+		}
+		.question-row.active {
+			-webkit-box-shadow: 0 0 13px 3px $box-shadow-question-row-active;
+			-moz-box-shadow: 0 0 13px 3px $box-shadow-question-row-active;
+			box-shadow: 0 0 13px 3px $box-shadow-question-row-active;
+		}
+		.btn-more-learners {
+			background-color: $bg-btn-more-learners;
+			color: $fg-btn-more-learners;
+		}
+		@keyframes colorChangingOwnNick {
+			0% {
+				background-color: $bg-colorChangingOwnNick0;
+				color: $fg-colorChangingOwnNick0;
+				transform: translateY(0%);
+				-webkit-transform: translateY(0%);
+			}
+			25% {
+				background-color: $bg-colorChangingOwnNick25;
+				color: $fg-colorChangingOwnNick25;
+			}
+			50% {
+				background-color: $bg-colorChangingOwnNick50;
+				color: $fg-colorChangingOwnNick50;
+			}
+			75% {
+				background-color: $bg-colorChangingOwnNick75;
+				color: $fg-colorChangingOwnNick75;
+			}
+			100% {
+				background-color: $bg-colorChangingOwnNick100;
+				color: $fg-colorChangingOwnNick100;
+				transform: translateY(0%);
+				-webkit-transform: translateY(0%);
+			}
+		}
+		.button-markdown-shadow, .button-markdown {
+			box-shadow: 1px 1px 5px $box-shadow-markdown;
+		}
+		.input-label {
+			color: $input-group-letter-color;
+		}
+		.soundConfig {
+			.modal-content {
+				background-color: $splashscreen-sound-config-background-color;
+				button.down {
+					background: $splashscreen-sound-config-button-background-color;
+				}
+			}
+		}
+		.splashscreen {
+			.modal-header {
+				color: $splash-screen-header-color;
+			}
+			.modal-content {
+				background: $splashscreen-background-color;
+				color: $splashscreen-foreground-color;
+				a, a:hover, a:active, a:visited, a:focus {
+					color: $splashscreen-foreground-color;
+				}
+			}
+		}
+		.modal-backdrop {
+			background-color: $background-color;
+		}
+		.questionAndAnswerSplashscreen {
+			.modal-content {
+				background: $splashscreen-question-and-answer-background-color;
+			}
+		}
+		.deleteConfirmationSplashscreen {
+			.modal-content {
+				background: $splashscreen-delete-background-color;
+			}
+		}
+		.kickMemberSplashscreen {
+			.modal-content {
+				background: $splash-screen-error-message-background-color;
+			}
+		}
+		.showHashtagsSplashscreen {
+			.modal-content {
+				background: $splashscreen-show-hashtags-background-color;
+				.js-my-hash {
+					color: $fg-js-my-hash;
+					background-color: $bg-js-my-hash;
+					&:hover {
+						background-color: $bg-js-my-hash-hovered;
+					}
+					&:active {
+						background-color: $bg-js-my-hash-active;
+					}
+				}
+			}
+		}
+		.readingConfirmedSplashscreen {
+			.modal-content {
+				background: $splashscreen-reading-confirmed-background-color;
+			}
+		}
+		.questionPreviewSplashscreen {
+			.modal-content {
+				background: $splashscreen-question-preview-background-color;
+			}
+		}
+		.errorSplashscreen {
+			.modal-content {
+				background: $splash-screen-error-message-background-color;
+			}
+			.splash-button-error-message {
+				color: $splash-screen-error-message-button-foreground-color;
+				background-color: $splash-screen-error-message-button-background-color;
+			}
+		}
+		.theme-description {
+			color: $fg-theme_description;
+		}
+	}
+}
+
+@include theme(theme-default);
+@include theme(theme-dark);
+@include theme(theme-thm);
+@include theme(theme-elegant);
+@include theme(theme-arsnova);

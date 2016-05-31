@@ -119,7 +119,8 @@ Template.hashtagView.events({
 					hashtag: questionGroup.getHashtag(),
 					musicVolume: 80,
 					musicEnabled: 1,
-					musicTitle: "Song1"
+					musicTitle: "Song1",
+					theme: "theme-default"
 				}, function (err) {
 					if (!err) {
 						localData.addHashtag(questionGroup);

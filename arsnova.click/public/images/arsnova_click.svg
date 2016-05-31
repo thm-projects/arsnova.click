@@ -10,10 +10,6 @@
 	.st4{font-size:261.12px;}
 	.st5{fill:#FFD700;}
 </style>
-<g id="background">
-	<path class="st0" d="M921.6,1024H102.4C46.1,1024,0,977.9,0,921.6V102.4C0,46.1,46.1,0,102.4,0h819.2C977.9,0,1024,46.1,1024,102.4
-		v819.2C1024,977.9,977.9,1024,921.6,1024z"/>
-</g>
 <g id="text">
 	<text transform="matrix(1 0 0 1 52.3594 751.537)" class="st1 st2 st3">.click</text>
 	<text transform="matrix(1 0 0 1 68.9453 392.4433)" class="st1 st2 st4">ars</text>

@@ -36,51 +36,21 @@ $activeItemBackgroundLight: #86253E;
 
 	.indexNumber {
 	  font-size: 2.5em;
-	  color: white;
 	  padding: 0 20px;
 	  border-radius: 90%;
 	  line-height: 50px;
 	}
 	.removeQuestion {
 	  display: none;
-	  color: white;
-	}
-	&.valid {
-	  .indexNumber {
-		background-color: green;
-	  }
-	  &:hover:not(.active) {
-		.indexNumber {
-		  background-color: darken(green, 5%);
-		}
-	  }
-	}
-	&:not(.valid) {
-	  .indexNumber {
-		background-color: grey;
-	  }
-	  &:hover:not(.active) {
-		.indexNumber {
-		  background-color: darken(grey, 10%);
-		}
-	  }
 	}
 	&.active {
 	  border-radius: $corner-radius;
-	  border: 1px solid beige;
 
 	  .indexNumber {
 		border-radius: $corner-radius 0 0 $corner-radius;
 	  }
 
-	  &.valid {
-		.removeQuestion {
-		  background-color: green;
-		}
-	  }
 	  .removeQuestion {
-		box-shadow: none;
-		border-left: 10px solid black;
 		border-bottom-left-radius: 0;
 		border-top-left-radius: 0;
 		font-family: Georgia, serif;
@@ -89,11 +59,6 @@ $activeItemBackgroundLight: #86253E;
 
 		.glyphicon {
 		  top: 3px;
-		}
-
-		&:hover {
-		  background-color: red;
-		  color: white;
 		}
 	  }
 	}

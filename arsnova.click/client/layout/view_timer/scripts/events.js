@@ -24,6 +24,7 @@ Template.createTimerView.events({
 		Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
 		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
 		Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
+		Meteor.call("HashtagsCollection.setDefaultTheme", Router.current().params.quizName, localStorage.getItem("theme"));
 		Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
 		Router.go("/" + Router.current().params.quizName + "/memberlist");
 	},

@@ -80,6 +80,19 @@ Router.onBeforeAction(function () {
 	this.next();
 });
 
+Router.onAfterAction(function () {
+	if (!localStorage.getItem("theme")) {
+		localStorage.setItem("theme", "theme-default");
+	}
+	let theme = localStorage.getItem("theme");
+	const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+	if (hashtagDoc && hashtagDoc.theme) {
+		sessionStorage.setItem("quizTheme", hashtagDoc.theme);
+		theme = sessionStorage.getItem("quizTheme");
+	}
+	$('#theme-wrapper').removeClass().addClass(theme);
+});
+
 Router.route('/', {
 	action: function () {
 		try {
@@ -124,6 +137,12 @@ Router.route('/impressum', function () {
 
 Router.route('/translate', function () {
 	this.render('translate');
+});
+
+Router.route('/theme', {
+	action: function () {
+		this.render('themeSwitcher');
+	}
 });
 
 Router.route("/:quizName", {

@@ -90,7 +90,7 @@ export class Splashscreen {
 			throw new Error('Invalid template name');
 		}
 
-		this.templateInstance = Blaze.render(Template[this.options.templateName], document.body);
+		this.templateInstance = Blaze.render(Template[this.options.templateName], document.getElementById("theme-wrapper"));
 		$(this.templateInstance.firstNode()).addClass(this.options.templateName).attr("id", this.options.templateName + "_" + this.options.instanceId);
 		this.templateSelector = $('#' + this.options.templateName + "_" + this.options.instanceId);
 

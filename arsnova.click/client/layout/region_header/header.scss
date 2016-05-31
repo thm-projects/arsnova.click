@@ -25,6 +25,7 @@ p.header-layout {
 
 .arsnova-logo {
 	margin-left: 15px;
+	margin-bottom: 20px;
 	cursor: pointer;
 }
 
@@ -35,11 +36,6 @@ p.header-layout {
 .kill-session-switch-wrapper {
 	text-align: center;
 	cursor: pointer;
-	color: #b22222;
-}
-
-.kill-session-switch-wrapper:hover {
-	color: red;
 }
 
 .header-icon {
@@ -62,21 +58,12 @@ p.header-layout {
 	cursor: pointer;
 }
 
-.qr-code-button {
-	color: white;
-	&:hover {
-		color: darken(white, 20);
-	}
-}
-
 .qr-code-container {
 	top: 0;
 	left: 0;
 	z-index: 1050;
 	position: fixed;
 	border-radius: $corner-radius;
-	border: 1px solid white;
-	background-color: white;
 
 	canvas {
 		&:hover {
@@ -87,38 +74,16 @@ p.header-layout {
 .qr-code-container-close {
 	position: absolute;
 	font-size: 4vw;
-	color: black;
-
-	&:hover {
-		color: lighten(black, 20);
-	}
 
 	.glyphicon-remove {
-		border: 1px solid black;
-		background-color: white;
 		border-radius: $corner-radius;
 		cursor: pointer;
 	}
 }
 .qr-code-label {
 	font-size: 3vh;
-	color: black;
 	text-align: center;
 	line-height: 50px;
-}
-
-.sound-button-active {
-	color: #00CC00;
-	&:hover {
-		color: #33FF00;
-	}
-}
-
-.sound-button-inactive {
-	color: #b22222;
-	&:hover {
-		color: red;
-	}
 }
 
 .sound-button-text {

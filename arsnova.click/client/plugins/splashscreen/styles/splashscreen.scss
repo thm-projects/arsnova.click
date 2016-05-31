@@ -18,73 +18,20 @@
 @import "../../../layout/global/styles/colors";
 @import "../../../layout/global/styles/appearance";
 
-/*
- * library splashscreen colors
- */
-.splashscreen {
-  .modal-content {
-	background: $splashscreen-background-color;
-  }
-}
-
-.questionAndAnswerSplashscreen {
-  .modal-content {
-	background: $splashscreen-question-and-answer-background-color;
-  }
-}
-
-.deleteConfirmationSplashscreen {
-  .modal-content {
-    background: $splashscreen-delete-background-color;
-  }
-}
-
-.kickMemberSplashscreen {
-  .modal-content {
-    color: black;
-	background: $splash-screen-error-message-background-color;
-  }
-}
-
-.errorSplashscreen {
-  .modal-content {
-    color: black;
-	background: $splash-screen-error-message-background-color;
-  }
-}
-
-/*
- * Splash screen button appearance
- */
-.splash-button-error-message {
-  color: white;
-  background-color: $success;
-}
 
 /*
  * Splash screen appearance
  */
 .modal-content {
   font-size: 20px;
-  color: black;
   border-radius: $splash-screen-corner-radius;
   box-shadow: none;
 
   a, a:hover, a:active, a:visited, a:focus {
-	color: $background-color;
-
 	&:hover {
 	  text-decoration: underline;
 	}
   }
-}
-
-.modal-content-white-fonts {
-  font-size: 20px;
-  color: white;
-  text-align: left;
-  border-radius: $splash-screen-corner-radius;
-  box-shadow: none;
 }
 
 .modal-list ul {
@@ -109,16 +56,11 @@
 .modal-header {
   border-bottom: none;
   padding: 20px;
-  color: $splash-screen-header-color;
 }
 
 .modal-footer {
   border-top: none;
   padding: 20px;
-}
-
-.modal-backdrop {
-  background-color: $background-color;
 }
 
 .resizeableImage {

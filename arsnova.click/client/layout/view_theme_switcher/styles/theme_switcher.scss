@@ -1,0 +1,17 @@
+
+.theme-description {
+	margin: 0;
+	text-align: center;
+	font-size: 2vw;
+}
+
+select {
+	&.textarea {
+		text-align-last:center;
+		text-align: center;
+	}
+}
+
+option {
+	text-align: left;
+}

@@ -15,5 +15,30 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-@import "colors";
-
+export const themes = [
+	{
+		name: "view.theme_switcher.themes.default.name",
+		description: "view.theme_switcher.themes.default.description",
+		id: "theme-default"
+	},
+	{
+		name: "view.theme_switcher.themes.dark.name",
+		description: "view.theme_switcher.themes.dark.description",
+		id: "theme-dark"
+	},
+	{
+		name: "view.theme_switcher.themes.thm.name",
+		description: "view.theme_switcher.themes.thm.description",
+		id: "theme-thm"
+	},
+	{
+		name: "view.theme_switcher.themes.elegant.name",
+		description: "view.theme_switcher.themes.elegant.description",
+		id: "theme-elegant"
+	},
+	{
+		name: "view.theme_switcher.themes.arsnova.name",
+		description: "view.theme_switcher.themes.arsnova.description",
+		id: "theme-arsnova"
+	}
+];

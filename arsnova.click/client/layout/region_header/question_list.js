@@ -32,6 +32,7 @@ Template.questionList.onCreated(function () {
 	if (!Session.get("questionGroup")) {
 		Session.set("questionGroup", localData.reenterSession(Router.current().params.quizName));
 	}
+	$('#theme-wrapper').removeClass().addClass(Session.get("questionGroup").getTheme());
 });
 
 Template.questionList.onDestroyed(function () {

@@ -34,7 +34,7 @@
 					</div>
 				{{else}}
                     <div class="col-md-12 header-layout">
-                        <div class="row">
+                        <div class="row nav-row">
                             <div class="col-xs-2">
                                 <div class="arsnova-logo">
                                     <img src="/images/arsnova_click.svg" alt="arsnova_click_logo"/>
@@ -43,8 +43,8 @@
                             <div class="col-xs-8">
                                 <div class="text-center header-titel default-yellow-text-color">{{currentHashtag}}</div>
                             </div>
-                            {{> yield "header.questionList"}}
                         </div>
+                        {{> yield "header.questionList"}}
                     </div>
 				{{/if}}
 			</div>
@@ -56,7 +56,7 @@
 <template name="qrCodeDisplay">
     <div style="display:none;" class="qr-code-container">
         <div class="qr-code-container-close"><span class="glyphicon glyphicon-remove"></span></div>
-        <div class="qr-code-label">{{_ "region.header.go_to"}} {{getCurrentSessionName}}</div>
+        <div class="qr-code-label">{{_ "region.footer.go_to"}} {{getCurrentSessionName}}</div>
         <div class="qr-code-item"></div>
     </div>
 </template>

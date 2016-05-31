@@ -88,10 +88,6 @@
   box-shadow: none;
 }
 
-.button-markdown-shadow, .button-markdown {
-  box-shadow: 1px 1px 5px black;
-}
-
 .glyph-markdown {
   position: relative;
   margin-top: 4px;
@@ -157,7 +153,6 @@
 .input-label {
   font-size: 1em;
   font-weight: 600;
-  color: $input-group-letter-color;
   min-width: 20px;
   margin-left: 5px;
 }

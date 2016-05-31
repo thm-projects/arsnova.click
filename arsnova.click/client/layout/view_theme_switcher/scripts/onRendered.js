@@ -16,32 +16,24 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import  * as localData from '/lib/local_storage.js';
-import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {TAPi18n} from 'meteor/tap:i18n';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
+import {themes} from './lib.js';
 
-Template.home.onRendered(function () {
-	if (localStorage.getItem("localStorageAvailable") && localData.getAllHashtags().length > 0) {
-		hashtagLib.setHashtagSplashscreen(new Splashscreen({
-			autostart: true,
-			templateName: "showHashtagsSplashscreen"
-		}));
-	}
-	HashtagsCollection.find().observeChanges({
-		added: function (id, doc) {
-			if (doc.hashtag === $("#hashtag-input-field").val()) {
-				$("#addNewHashtag").attr("disabled", "disabled");
-			}
-		}
-	});
-
+Template.themeSwitcher.onRendered(function () {
 	footerElements.removeFooterElements();
+	footerElements.addFooterElement(footerElements.footerElemHome);
 	footerElements.addFooterElement(footerElements.footerElemAbout);
 	footerElements.addFooterElement(footerElements.footerElemTranslation);
-	footerElements.addFooterElement(footerElements.footerElemTheme);
 	footerElements.addFooterElement(footerElements.footerElemFullscreen);
 	footerElements.addFooterElement(footerElements.footerElemImport);
 	footerElements.calculateFooter();
+
+	const theme = localStorage.getItem("theme");
+	for (let i = 0; i < themes.length; i++) {
+		if (themes[i].id === theme) {
+			$('.theme-description').text(TAPi18n.__(themes[i].description));
+			i = themes.length;
+		}
+	}
 });

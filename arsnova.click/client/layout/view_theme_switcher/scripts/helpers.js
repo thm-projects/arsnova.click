@@ -15,5 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-@import "colors";
+import {Template} from 'meteor/templating';
+import {themes} from './lib.js';
 
+Template.themeSwitcher.helpers({
+	themes: function () {
+		return themes;
+	},
+	isThemeSelected: function (themeName) {
+		return localStorage.getItem("theme") === themeName ? "selected" : "";
+	}
+});

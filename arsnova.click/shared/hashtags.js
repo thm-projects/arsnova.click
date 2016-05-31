@@ -21,7 +21,7 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {HashtagsCollection, hashtagsCollectionSchema, hashtagSchema} from '/lib/hashtags/collection.js';
+import {HashtagsCollection, hashtagsCollectionSchema, hashtagSchema, themeSchema} from '/lib/hashtags/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
@@ -47,6 +47,31 @@ Meteor.methods({
 				eventStack: {
 					key: "HashtagsCollection.addHashtag",
 					value: {hashtag: sessionConfiguration.hashtag}
+				}
+			}
+		});
+	},
+	'HashtagsCollection.setDefaultTheme': function (hashtag, themeName = "theme-default") {
+		new SimpleSchema({hashtag: hashtagSchema, theme: themeSchema}).validate({hashtag: hashtag, theme: themeName});
+
+		if (!HashtagsCollection.findOne({hashtag: hashtag})) {
+			throw new Meteor.Error('HashtagsCollection.setDefaultTheme', 'session_not_exists');
+		}
+
+		let queryParam = {};
+		if (Meteor.isServer) {
+			queryParam.hashtag = hashtag;
+		}
+		HashtagsCollection.update(queryParam, {
+			$set: {
+				theme: themeName
+			}
+		});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "HashtagsCollection.setDefaultTheme",
+					value: {hashtag: hashtag, theme: themeName}
 				}
 			}
 		});

@@ -18,6 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Tracker} from 'meteor/tracker';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
@@ -95,5 +96,23 @@ Template.header.events({
 				}
 			});
 		}
+	}
+});
+
+let headerThemeTracker = null;
+
+Template.header.onRendered(function () {
+	headerThemeTracker = Tracker.autorun(function () {
+		if (!Session.get("questionGroup")) {
+			const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+			const theme = hashtagDoc ? hashtagDoc.theme : "theme-default";
+			$('#theme-wrapper').removeClass().addClass(theme);
+		}
+	});
+});
+
+Template.header.onDestroyed(function () {
+	if (headerThemeTracker) {
+		headerThemeTracker.stop();
 	}
 });

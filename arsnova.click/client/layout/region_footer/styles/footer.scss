@@ -21,38 +21,20 @@
 	text-align: center;
 	display: table;
 	width: 100%;
-	background-color: steelblue;
 	table-layout:fixed;
 
 	.footerElement {
 		cursor: pointer;
-		color: white;
 		padding: 0;
 		width: 100%;
 		display: table-cell;
 
-		&:hover {
-			color: darken(white, 30);
-		}
-
 		p {
 			margin: 0;
-			line-height: 30px;
-		}
+			line-height: 25px;
 
-		&.error {
-			color: $warning;
-
-			&:hover {
-				color: red;
-			}
-		}
-
-		&.success {
-			color: lighten($success, 30);
-
-			&:hover {
-				color: lighten($success, 50);
+			&.footerElemIcon {
+				margin-top: 5px;
 			}
 		}
 	}

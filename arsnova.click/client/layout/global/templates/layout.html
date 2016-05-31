@@ -80,13 +80,15 @@
 	<script src="//arsnova.thm.de/stats/piwik.js" async defer></script>
 </head>
 <template name="layout">
-	{{>header }}
-	<div class="container contentPosition">
-		<div class="row">
-			<div id="mainContentContainer" class="col-md-6 col-md-offset-3">
-				{{>yield}}
-			</div>
-		</div>
-	</div>
-	{{>footer }}
+    <div class="theme-default" id="theme-wrapper">
+        {{>header }}
+        <div class="container contentPosition">
+            <div class="row">
+                <div id="mainContentContainer" class="col-md-6 col-md-offset-3">
+                    {{>yield}}
+                </div>
+            </div>
+        </div>
+        {{>footer }}
+    </div>
 </template>

@@ -30,10 +30,6 @@
   border-radius: $corner-radius;
 }
 
-.slider, .slider .noUi-handle {
-  background-color: $slider-color;
-}
-
 .slider.noUi-target {
   border: 0;
   box-shadow: none;
@@ -46,12 +42,7 @@
   border-bottom-left-radius: 0;
 }
 
-.button-shadow, .button {
-  box-shadow: 1px 1px 5px black;
-}
-
 .input-field {
-  color: black !important;
   height: 50px;
   font-size: 1.5em;
   width: 100%;
@@ -61,12 +52,7 @@
 }
 
 .input-field-bg-color, .input-field {
-  background-color: $input-background-color;
   border: none;
-}
-
-.default-yellow-text-color {
-  color: $input-background-color;
 }
 
 .button {
@@ -93,7 +79,6 @@
 .input-group-letter, .button-result-letter {
   font-size: 2em;
   font-weight: 800;
-  color: $input-group-letter-color;
   min-width: 50px;
   margin-left: 10px;
 }
@@ -106,29 +91,7 @@
   box-shadow: none;
 }
 
-.button-next, .button-success {
-  background-color: $success;
-  color: $success-text-color;
-}
-
-.button-warning, .button-back {
-  background-color: $warning;
-  color: $warning-text-color;
-}
-
-.button-purple {
-  background-color: $info;
-  color: $info-text-color;
-}
-
-.button-default {
-  background-color: $default;
-  color: $default-text-color;
-}
-
 .button-leader {
-  background-color: $input-background-color;
-  color: black;
   box-shadow: none;
   cursor: default;
 }
@@ -146,10 +109,9 @@
 .button-result .percentage {
   position: absolute;
   text-align: center;
-  color: #ffffff;
-  font-weight: bolder;
   padding: 0 10px;
   line-height: 30px;
+  font-weight: bolder;
 }
 
 .button-result .progress {
@@ -157,19 +119,6 @@
   position: relative;
   margin-bottom: 10px;
   height: 30px;
-  background-color: LightSteelBlue;
-}
-
-.progress-success {
-  background-color: $progress-bar-success-color !important;
-}
-
-.progress-failure {
-  background-color: $progress-bar-failure-color !important;
-}
-
-.progress-default {
-  background-color: $input-background-color !important;
 }
 
 /*
@@ -203,8 +152,7 @@
   width: 100%;
   display: none;
   left: 0;
-  background-color: steelblue;
-  padding: 10px 15px 25px 15px;
+  height: 55px;
 }
 
 .content-with-navigation-buttons {
@@ -215,7 +163,6 @@
 
 .textarea {
   width: 100%;
-  background-color: gold;
   font-size: 1.5em;
   outline: none;
   resize: none;
@@ -223,9 +170,13 @@
   border: 0;
 }
 
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+}
+
 .previewText {
   width: 100%;
-  background-color: white;
   font-size: 1.5em;
   outline: none;
   resize: none;
@@ -234,12 +185,10 @@
 }
 
 .check-mark-checked {
-  color: $check-mark-checked;
   width: 30px;
 }
 
 .check-mark-unchecked {
-  color: $check-mark-unchecked;
   font-size: 0.8em;
   width: 30px;
 }
@@ -277,28 +226,13 @@
   animation-name: colorChangingClick;
 }
 
-.success input, .success textarea, input.success, textarea.success {
-  border: 3px solid $success;
-}
-
-.error input, .error textarea, input.error, textarea.error {
-  border: 3px solid $warning;
-}
-
-@media (max-width: 550px) {
-  .ansBtn {
-	display: none;
-  }
-}
-
 .popover-title, .popover.bottom {
-  background-color: $warning;
-  color: $warning-text-color;
-  border-color: $warning;
   font-family: $font;
   font-size: medium;
 }
 
-.popover.bottom > .arrow:after {
-  border-bottom-color: $warning;
+@media (max-width: 550px) {
+  .ansBtn {
+    display: none;
+  }
 }

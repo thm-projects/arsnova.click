@@ -10,6 +10,7 @@
   },
   "region": {
     "footer": {
+      "go_to": "Aller à: ",
       "show-more": {
         "show-more-elements": "Toutes les options disponibles:",
         "onText": "Activé",
@@ -29,8 +30,7 @@
         "fullscreen": "Plein écran",
         "show_more": "Plus",
         "sound": "Sonner",
-        "qr_code": "QR Code",
-        "go_to": "Aller à: "
+        "qr_code": "QR Code"
       },
       "about": {
         "title": "About the quiz app",
@@ -203,6 +203,32 @@
       "multiple_choice_question": "Choix multiple",
       "survey_question": "Enquête",
       "ranged_question": "Question Quiz et réponses"
+    },
+    "theme_switcher": {
+      "set_theme": "Choisissez un thème pour tous les participants",
+      "select_a_theme_title": "Choisissez le thème",
+      "themes": {
+        "default": {
+          "name": "ARSnova.click",
+          "description": "Le premier et le principal thème de ARSnova.click"
+        },
+        "dark": {
+          "name": "Version sombre",
+          "description": "Fond sombre avec un faible contraste"
+        },
+        "elegant": {
+          "name": "Élégant",
+          "description": "Thème élégant pour quizzers sophistiqués"
+        },
+        "thm": {
+          "name": "THM",
+          "description": "Corporate Design de l'Université des sciences appliquées (THM)"
+        },
+        "arsnova": {
+          "name": "ARSnova",
+          "description": "Vous connaissez ARS nova? Sentez-vous la maison!"
+        }
+      }
     },
     "timer": {
       "set_countdown": "Définir le compte à rebours",

@@ -10,6 +10,7 @@
   },
   "region": {
     "footer": {
+      "go_to": "Gehe auf: ",
       "show-more": {
         "show-more-elements": "Alle weiteren Optionen:",
         "onText": "Aktiviert",
@@ -29,8 +30,7 @@
         "fullscreen": "Vollbild",
         "show_more": "Mehr",
         "sound": "Sound",
-        "qr_code": "QR Code",
-        "go_to": "Gehe auf: "
+        "qr_code": "QR Code"
       },
       "about": {
         "title": "Über die Quiz-App",
@@ -203,6 +203,32 @@
       "multiple_choice_question": "Multiple-Choice",
       "survey_question": "Umfrage",
       "ranged_question": "Quizfrage mit Antwortintervall"
+    },
+    "theme_switcher": {
+      "set_theme": "Stil wählen",
+      "select_a_theme_title": "Wähle einen Stil",
+      "themes": {
+        "default": {
+          "name": "ARSnova.click",
+          "description": "Das Theme der ersten Stunde"
+        },
+        "dark": {
+          "name": "Dunkle Version",
+          "description": "Dunkler Hintergrund mit geringem Kontrast"
+        },
+        "elegant": {
+          "name": "Elegant",
+          "description": "Elegantes Theme für anspruchsvolle Quizrunden"
+        },
+        "thm": {
+          "name": "THM",
+          "description": "Corporate Design der Technischen Hochschule Mittelhessen"
+        },
+        "arsnova": {
+          "name": "ARSnova",
+          "description": "Du kennst ARSnova? Dann fühl' dich wie zu Hause!"
+        }
+      }
     },
     "timer": {
       "set_countdown": "Countdown einstellen",

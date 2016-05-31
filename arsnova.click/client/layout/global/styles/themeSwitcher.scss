@@ -331,6 +331,8 @@
 		$thmgreen: #80ba24;
 		$thmgray: #4a5c66;
 
+		$background-color: $thmgreen;
+
 		$fg_quiz-name: #b5003f;
 		$default: #d3d3d3; /* light grey */
 		$default-text-color: $thmgray;
@@ -344,8 +346,6 @@
 		$footer-background-color: #000000; /*gainsboro */
 		$fg-footer-info-bar-active: #33FF00;
 		$fg-footer-info-bar-active-hovered: #A1FF8A;
-
-		$background-color: $thmgreen;
 
 		$bg-nav-row: $background-color;
 
@@ -361,8 +361,9 @@
 	}
 
 	@if ($name == "theme-elegant") {
+		$background-color: #dbe4e9;
 		$bg-nav-row: #002d47;
-		$bg-container: #dbe4e9;
+		$bg-container: $background-color;
 		$bg-questionList-row: #B1C5D0;
 		$bg-footer: #374e5b;
 		$default-text-color: black;
@@ -375,8 +376,9 @@
 	}
 
 	@if ($name == "theme-arsnova") {
+		$background-color: #dfe5e6;
 		$bg-nav-row: #3d9c19;
-		$bg-container: #dfe5e6;
+		$bg-container: $background-color;
 		$bg-questionList-row: $bg-container;
 		$bg-footer: #dfe5e6;
 		$fg_a: white;

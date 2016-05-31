@@ -204,6 +204,45 @@
       "survey_question": "Umfrage",
       "ranged_question": "Quizfrage mit Antwortintervall"
     },
+    "quiz_summary": {
+      "summary": "Zusammenfassung",
+      "quiz_name": "Name der Quizrunde",
+      "quiz_url": "URL für Teilnehmer",
+      "question_amount": "Gesamtanzahl der Quizfragen",
+      "validation_question_group": "Validierungstest der gesamten Quizrunde",
+      "successfull": "Erfolgreich",
+      "failed": "Fehlgeschlagen",
+      "correct": "Richtig",
+      "wrong": "Falsch",
+      "question": "Frage",
+      "text": "Text",
+      "type": "Typ",
+      "answer": "Antwort",
+      "answer_plural": "Antworten",
+      "timer": "Timer",
+      "second": "Sekunde",
+      "second_plural": "Sekunden",
+      "validation": "Validierung",
+      "validation_errors": {
+        "types": {
+          "question": "Frage",
+          "answerOption": "Antwort"
+        },
+        "reasons": {
+          "question_text_too_small": "Text der Quizfrage ist zu kurz",
+          "question_text_too_long": "Text der Quizfrage ist zu lang",
+          "timer_too_small": "Timer ist zu kurz",
+          "timer_too_big": "Timer ist zu lang",
+          "no_valid_answers": "Mindestens eine richtige Antwort muss vorhanden sein",
+          "one_valid_answer_required": "Es muss exakt eine richtige Antwort vorhanden sein",
+          "no_valid_answer_required": "Keine richtige Antwort darf vorhanden sein",
+          "invalid_range": "Die minimale Reichweite muss geringer als die maximale Reichweite sein",
+          "answer_text_empty": "Text der Antwort darf nicht leer sein"
+        }
+      },
+      "edit_quiz": "Quiz bearbeiten",
+      "start_quiz": "Quiz starten"
+    },
     "theme_switcher": {
       "set_theme": "Stil wählen",
       "select_a_theme_title": "Wähle einen Stil",

@@ -36,7 +36,7 @@ Template.quizSummary.helpers({
 		return index + 1;
 	},
 	getIsCorrectAnswerOption: function (isCorrect) {
-		return isCorrect ? "Richtig" : "Falsch";
+		return isCorrect ? "view.quiz_summary.correct" : "view.quiz_summary.wrong";
 	},
 	getQuestionTypeTranslation: function (id) {
 		const questionTypes = getQuestionTypes();
@@ -46,16 +46,25 @@ Template.quizSummary.helpers({
 			}
 		}
 	},
+	isQuestionGroupValid: function () {
+		return Session.get("questionGroup").isValid();
+	},
 	getQuestionGroupValidation: function () {
-		return Session.get("questionGroup").isValid() ? "Erfolgreich" : "Fehlgeschlagen";
+		return Session.get("questionGroup").isValid() ? "view.quiz_summary.successfull" : "view.quiz_summary.failed";
 	},
 	getValidationStatus: function (question) {
-		return question.isValid() ? "Erfolgreich" : "Fehlgeschlagen";
+		return question.isValid() ? "view.quiz_summary.successfull" : "view.quiz_summary.failed";
 	},
 	getValidationErrors: function (question) {
 		return question.getValidationStackTrace();
 	},
 	isLastItem: function (index) {
 		return index === Session.get("questionGroup").getQuestionList().length - 1;
+	},
+	getTranslationForType: function (type) {
+		return "view.quiz_summary.validation_errors.types." + type;
+	},
+	getTranslationForReason: function (reason) {
+		return "view.quiz_summary.validation_errors.reasons." + reason;
 	}
 });

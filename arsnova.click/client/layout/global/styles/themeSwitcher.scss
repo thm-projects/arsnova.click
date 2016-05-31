@@ -620,6 +620,12 @@
 		.error input, .error textarea, input.error, textarea.error {
 			border: 3px solid $warning;
 		}
+		p.success, span.success {
+			color : $success;
+		}
+		p.failed, span.failed {
+			color : $warning;
+		}
 		.popover-title, .popover.bottom {
 			background-color: $warning;
 			color: $warning-text-color;

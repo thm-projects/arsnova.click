@@ -24,14 +24,22 @@
 						<div class="col-xs-{{#if forwardId}}6{{else}}12{{/if}}">
 							<button id="{{backId}}" class="button button-back">
 								<span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
-								{{_ 'global.back' }}
+                                {{#if backText}}
+                                    {{_ backText }}
+                                {{else}}
+                                    {{_ 'global.back' }}
+                                {{/if}}
 							</button>
 						</div>
 					{{/if}}
 					{{#if forwardId}}
 						<div class="col-xs-{{#if backId}}6{{else}}12{{/if}}">
 							<button id="{{forwardId}}" class="button button-next">
-								{{_ 'global.next' }}
+                                {{#if forwardText}}
+								    {{_ forwardText }}
+                                {{else}}
+                                    {{_ 'global.next' }}
+                                {{/if}}
 								<span class="glyphicon glyphicon-arrow-right glyph-right" aria-hidden="true"></span>
 							</button>
 						</div>

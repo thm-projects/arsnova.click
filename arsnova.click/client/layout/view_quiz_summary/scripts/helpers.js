@@ -50,10 +50,10 @@ Template.quizSummary.helpers({
 		return Session.get("questionGroup").isValid();
 	},
 	getQuestionGroupValidation: function () {
-		return Session.get("questionGroup").isValid() ? "view.quiz_summary.successfull" : "view.quiz_summary.failed";
+		return Session.get("questionGroup").isValid() ? "view.quiz_summary.successful" : "view.quiz_summary.failed";
 	},
 	getValidationStatus: function (question) {
-		return question.isValid() ? "view.quiz_summary.successfull" : "view.quiz_summary.failed";
+		return question.isValid() ? "view.quiz_summary.successful" : "view.quiz_summary.failed";
 	},
 	getValidationErrors: function (question) {
 		return question.getValidationStackTrace();

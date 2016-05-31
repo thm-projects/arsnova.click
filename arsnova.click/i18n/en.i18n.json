@@ -210,7 +210,7 @@
       "quiz_url": "URL for attendees",
       "question_amount": "Amount of all questions",
       "validation_question_group": "Validationtest for the complete quiz",
-      "successfull": "Successfull",
+      "successful": "Successful",
       "failed": "Failed",
       "correct": "Correct",
       "wrong": "Wrong",

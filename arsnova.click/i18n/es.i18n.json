@@ -204,6 +204,45 @@
       "survey_question": "Encuesta",
       "ranged_question": "Pregunta de examen y respuestas"
     },
+    "quiz_summary": {
+      "summary": "Resumen",
+      "quiz_name": "Nombre de la prueba",
+      "quiz_url": "URL para los asistentes",
+      "question_amount": "Cantidad de todas las preguntas",
+      "validation_question_group": "Prueba de validación de la prueba completa",
+      "successful": "Exitoso",
+      "failed": "Ha fallado",
+      "correct": "Correcto",
+      "wrong": "Incorrecto",
+      "question": "Pregunta",
+      "text": "Texto",
+      "type": "Tipo",
+      "answer": "Responder",
+      "answer_plural": "Respuestas",
+      "timer": "Minutero",
+      "second": "Segundo",
+      "second_plural": "Segundos",
+      "validation": "Validación",
+      "validation_errors": {
+        "types": {
+          "question": "Pregunta",
+          "answerOption": "Responder"
+        },
+        "reasons": {
+          "question_text_too_small": "El texto de la pregunta es demasiado corta",
+          "question_text_too_long": "El texto de la pregunta es demasiado largo",
+          "timer_too_small": "El contador de tiempo es demasiado corto",
+          "timer_too_big": "El contador de tiempo es demasiado largo",
+          "no_valid_answers": "Debe haber al menos una respuesta correcta",
+          "one_valid_answer_required": "Debe haber exactamente una respuesta correcta",
+          "no_valid_answer_required": "No existen respuestas correctas permitidos",
+          "invalid_range": "La distancia mínima debe ser menor que el rango máximo",
+          "answer_text_empty": "El texto de la respuesta no se le permite estar vacío"
+        }
+      },
+      "edit_quiz": "Editar concurso",
+      "start_quiz": "Inicio cuestionario"
+    },
     "theme_switcher": {
       "set_theme": "Elegir un tema para todos los asistentes",
       "select_a_theme_title": "Elegir el tema",

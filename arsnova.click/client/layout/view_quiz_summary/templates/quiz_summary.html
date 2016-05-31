@@ -1,0 +1,53 @@
+<template name="quizSummary">
+    {{> titel titelText="Zusammenfassung" }}
+    <div class="quizSummary">
+        <p>Name der Quizrunde: {{getSessionName}}</p>
+        <p>URL für Teilnehmer: {{getSessionUrl}}</p>
+        <p>Gesamtanzahl der Quizfragen: {{getQuestionCount}}</p>
+        <p>Validierungstest der gesamten Quizrunde: {{getQuestionGroupValidation}}</p>
+        <hr />
+        {{#each getQuestions}}
+            <div class="questionItem row">
+                <div class="col-xs-12">
+                    <div class="question">
+                        <h4>Frage {{getNormalizedIndex this.getQuestionIndex}}: </h4>
+                        <p>Text: {{this.getQuestionText}}</p>
+                        <p>Typ: {{_ (getQuestionTypeTranslation this.typeName)}}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="answers">
+                        <div>
+                            <h4>Antworten: </h4>
+                        </div>
+                        <div>
+                            {{#each this.getAnswerOptionList}}
+                                <p>Antwort {{getNormalizedIndex this.getAnswerOptionNumber}} ({{getIsCorrectAnswerOption this.getIsCorrect}}): {{this.getAnswerText}}</p>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="timer">
+                        <h4>Timer:</h4>
+                        <p>{{this.getTimer}} Sekunden</p>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="validation">
+                        <h4>Validierung {{getValidationStatus this}}{{#unless this.isValid}}:{{/unless}}</h4>
+                        {{#unless this.isValid}}
+                            <ul>
+                                {{#each getValidationErrors this}}
+                                    <li>{{this.occuredAt.type}} {{getNormalizedIndex this.occuredAt.id}}: {{this.reason}}</li>
+                                {{/each}}
+                            </ul>
+                        {{/unless}}
+                    </div>
+                </div>
+            </div>
+            <hr />
+        {{/each}}
+    </div>
+    {{> footer_nav_buttons backId = 'backButton' backText = 'Quiz bearbeiten' forwardId = 'forwardButton' forwardText = 'Quiz starten' }}
+</template>

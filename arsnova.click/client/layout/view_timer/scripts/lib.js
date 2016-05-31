@@ -18,8 +18,6 @@
 import {Session} from 'meteor/session';
 import * as localData from '/lib/local_storage.js';
 
-export let validationTrackerHandle = null;
-
 export function createSlider(index) {
 	const questionItem = Session.get("questionGroup");
 	if (questionItem.getQuestionList()[index].getTimer() === 0) {

@@ -259,6 +259,19 @@ Router.route('/:quizName/settimer', {
 	}
 });
 
+Router.route('/:quizName/quizSummary', {
+	action: function () {
+		if (localData.containsHashtag(Router.current().params.quizName)) {
+			if (!globalEventStackObserver.isRunning()) {
+				globalEventStackObserver.startObserving(Router.current().params.quizName);
+			}
+			this.render('quizSummary');
+		} else {
+			Router.go("/");
+		}
+	}
+});
+
 Router.route('/:quizName/memberlist', {
 	action: function () {
 		if (!globalEventStackObserver.isRunning()) {

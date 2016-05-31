@@ -15,13 +15,20 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 
-Template.createTimerView.events({
+Template.quizSummary.events({
 	"click #forwardButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/quizSummary");
+		Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
+		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
+		Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
+		Meteor.call("HashtagsCollection.setDefaultTheme", Router.current().params.quizName, localStorage.getItem("theme"));
+		Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
+		Router.go("/" + Router.current().params.quizName + "/memberlist");
 	},
 	"click #backButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/answeroptions");
+		Router.go("/" + Router.current().params.quizName + "/settimer");
 	}
 });

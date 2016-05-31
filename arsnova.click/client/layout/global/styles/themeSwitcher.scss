@@ -328,6 +328,8 @@
 
 		$check-mark-checked: $success;
 		$check-mark-unchecked: $warning;
+
+		$fg-warning: $warning;
 	}
 
 	@if ($name == "theme-thm") {
@@ -411,6 +413,7 @@
 		$fg-quiz-summary-H4: $default-text-color;
 		$fg-quiz-summary-P: $default-text-color;
 		$fg-quiz-summary-UL: $default-text-color;
+		$fg-success: darken($success, 5);
 	}
 
 	body {

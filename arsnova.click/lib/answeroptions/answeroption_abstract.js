@@ -121,6 +121,10 @@ export class AbstractAnswerOption {
 		return this.getAnswerText().length > 0;
 	}
 
+	getValidationStackTrace () {
+		return (this.getAnswerText().length === 0) ? [{occuredAt: {type: "answerOption", id: this.getAnswerOptionNumber()}, reason: "answer_text_empty"}] : [];
+	}
+
 	/**
 	 * Checks for equivalence relations to another AnswerOption instance. Also part of the EJSON interface
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-equals

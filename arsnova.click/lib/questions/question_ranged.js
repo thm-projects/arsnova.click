@@ -96,6 +96,15 @@ export class RangedQuestion extends AbstractQuestion {
 		return super.isValid() && this.getAnswerOptionList().length === 0 && this[rangeMin] < this[rangeMax];
 	}
 
+	getValidationStackTrace () {
+		const parentStackTrace = super.getValidationStackTrace();
+		const hasValidRange = this[rangeMin] < this[rangeMax];
+		if (!hasValidRange) {
+			parentStackTrace.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "invalid_range"});
+		}
+		return parentStackTrace;
+	}
+
 	/**
 	 * Checks for equivalence relations to another Question instance. Also part of the EJSON interface
 	 * @see AbstractQuestion.equals()

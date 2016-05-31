@@ -1275,7 +1275,7 @@
 		}
 		.quizSummary {
 			hr {
-				color: $quiz-summary-row-color;
+				border-color: $quiz-summary-row-color;
 			}
 			h4 {
 				color: $fg-quiz-summary-H4;

@@ -1,0 +1,57 @@
+<template name="quizSummary">
+    {{> titel titelText="view.quiz_summary.summary" }}
+    <div class="quizSummary margin-title">
+        <p>{{_ "view.quiz_summary.quiz_name"}}: {{getSessionName}}</p>
+        <p>{{_ "view.quiz_summary.quiz_url"}}: {{getSessionUrl}}</p>
+        <p>{{_ "view.quiz_summary.question_amount"}}: {{getQuestionCount}}</p>
+        <p>{{_ "view.quiz_summary.validation_question_group"}}: <span class="{{#if isQuestionGroupValid}}success{{else}}failed{{/if}}">{{_ getQuestionGroupValidation}}</span></p>
+        <hr />
+        {{#each getQuestions}}
+            <div class="questionItem row">
+                <div class="col-xs-12">
+                    <div class="question">
+                        <h4>{{_ "view.quiz_summary.question"}} {{getNormalizedIndex this.getQuestionIndex}}: </h4>
+                        <p>{{_ "view.quiz_summary.text"}}: {{this.getQuestionText}}</p>
+                        <p>{{_ "view.quiz_summary.type"}}: {{_ (getQuestionTypeTranslation this.typeName)}}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="answers">
+                        <div>
+                            <h4>{{_ "view.quiz_summary.answer" count=2}}: </h4>
+                        </div>
+                        <div>
+                            {{#each this.getAnswerOptionList}}
+                                <p>{{_ "view.quiz_summary.answer" count=1}} {{getNormalizedIndex this.getAnswerOptionNumber}} ({{_ (getIsCorrectAnswerOption this.getIsCorrect)}}): {{this.getAnswerText}}</p>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="timer">
+                        <h4>{{_ "view.quiz_summary.timer"}}:</h4>
+                        <p>{{this.getTimer}} {{_ "view.quiz_summary.second" count=this.getTimer}}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="validation">
+                        <h4>{{_ "view.quiz_summary.validation"}}: <span class="{{#if this.isValid}}success{{else}}failed{{/if}}">{{_ (getValidationStatus this)}}</span></h4>
+                        {{#unless this.isValid}}
+                            <ul>
+                                {{#each getValidationErrors this}}
+                                    <li>{{_ (getTranslationForType this.occuredAt.type)}} {{getNormalizedIndex this.occuredAt.id}}: {{_ (getTranslationForReason this.reason)}}</li>
+                                {{/each}}
+                            </ul>
+                        {{/unless}}
+                    </div>
+                </div>
+            </div>
+            {{#if (isLastItem @index)}}
+                <div style="padding: 10px;"></div>
+            {{else}}
+                <hr />
+            {{/if}}
+        {{/each}}
+    </div>
+    {{> footer_nav_buttons backId = 'backButton' backText = 'view.quiz_summary.edit_quiz' forwardId = 'forwardButton' forwardText = 'view.quiz_summary.start_quiz' }}
+</template>

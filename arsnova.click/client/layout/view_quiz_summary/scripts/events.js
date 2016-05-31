@@ -15,23 +15,20 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import * as lib from './lib.js';
 
-Template.createQuestionView.helpers({
-	//Get question from Sessions-Collection if it already exists
-	questionText: function () {
-		if (!EventManagerCollection.findOne()) {
-			return;
-		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
+Template.quizSummary.events({
+	"click #forwardButton": function () {
+		Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
+		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
+		Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
+		Meteor.call("HashtagsCollection.setDefaultTheme", Router.current().params.quizName, localStorage.getItem("theme"));
+		Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
+		Router.go("/" + Router.current().params.quizName + "/memberlist");
 	},
-	questionTypes: function () {
-		if (!EventManagerCollection.findOne()) {
-			return;
-		}
-		return lib.getQuestionTypes();
+	"click #backButton": function () {
+		Router.go("/" + Router.current().params.quizName + "/settimer");
 	}
 });

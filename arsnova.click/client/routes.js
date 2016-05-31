@@ -86,7 +86,7 @@ Router.onAfterAction(function () {
 	}
 	let theme = localStorage.getItem("theme");
 	const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-	if (hashtagDoc && hashtagDoc.theme) {
+	if (hashtagDoc && hashtagDoc.theme && !localData.containsHashtag(Router.current().params.quizName)) {
 		sessionStorage.setItem("quizTheme", hashtagDoc.theme);
 		theme = sessionStorage.getItem("quizTheme");
 	}
@@ -253,6 +253,19 @@ Router.route('/:quizName/settimer', {
 			}
 			this.render('questionList', {to: 'header.questionList'});
 			this.render('createTimerView');
+		} else {
+			Router.go("/");
+		}
+	}
+});
+
+Router.route('/:quizName/quizSummary', {
+	action: function () {
+		if (localData.containsHashtag(Router.current().params.quizName)) {
+			if (!globalEventStackObserver.isRunning()) {
+				globalEventStackObserver.startObserving(Router.current().params.quizName);
+			}
+			this.render('quizSummary');
 		} else {
 			Router.go("/");
 		}

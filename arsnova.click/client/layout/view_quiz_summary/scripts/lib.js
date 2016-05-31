@@ -15,23 +15,3 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Session} from 'meteor/session';
-import {Template} from 'meteor/templating';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import * as lib from './lib.js';
-
-Template.createQuestionView.helpers({
-	//Get question from Sessions-Collection if it already exists
-	questionText: function () {
-		if (!EventManagerCollection.findOne()) {
-			return;
-		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
-	},
-	questionTypes: function () {
-		if (!EventManagerCollection.findOne()) {
-			return;
-		}
-		return lib.getQuestionTypes();
-	}
-});

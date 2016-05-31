@@ -17,21 +17,10 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import * as lib from './lib.js';
+import * as localData from '/lib/local_storage.js';
 
-Template.createQuestionView.helpers({
-	//Get question from Sessions-Collection if it already exists
-	questionText: function () {
-		if (!EventManagerCollection.findOne()) {
-			return;
-		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
-	},
-	questionTypes: function () {
-		if (!EventManagerCollection.findOne()) {
-			return;
-		}
-		return lib.getQuestionTypes();
+Template.quizSummary.onCreated(function () {
+	if (!Session.get("questionGroup")) {
+		Session.set("questionGroup", localData.reenterSession(Router.current().params.quizName));
 	}
 });

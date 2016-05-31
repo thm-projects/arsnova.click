@@ -30,4 +30,22 @@ export class AbstractChoiceQuestion extends AbstractQuestion {
 		});
 		return super.isValid() && this.getAnswerOptionList().length > 0 && hasValidAnswer;
 	}
+
+	/**
+	 * Gets the validation error reason from the question and all included answerOptions as a stackable array
+	 * @returns {Array} Contains an Object which holds the number of the current question and the reason why the validation has failed
+	 */
+	getValidationStackTrace () {
+		const parentStackTrace = super.getValidationStackTrace();
+		let hasValidAnswer = false;
+		this.getAnswerOptionList().forEach(function (answeroption) {
+			if (answeroption.getIsCorrect()) {
+				hasValidAnswer = true;
+			}
+		});
+		if (!hasValidAnswer) {
+			parentStackTrace.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "no_valid_answers"});
+		}
+		return parentStackTrace;
+	}
 }

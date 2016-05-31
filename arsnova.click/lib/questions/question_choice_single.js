@@ -49,6 +49,24 @@ export class SingleChoiceQuestion extends AbstractChoiceQuestion {
 	}
 
 	/**
+	 * Gets the validation error reason from the question and all included answerOptions as a stackable array
+	 * @returns {Array} Contains an Object which holds the number of the current question and the reason why the validation has failed
+	 */
+	getValidationStackTrace () {
+		let hasValidAnswer = 0;
+		this.getAnswerOptionList().forEach(function (answeroption) {
+			if (answeroption.getIsCorrect()) {
+				hasValidAnswer++;
+			}
+		});
+		const parentStackTrace = super.getValidationStackTrace();
+		if (hasValidAnswer !== 1) {
+			parentStackTrace.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "one_valid_answer_required"});
+		}
+		return parentStackTrace;
+	}
+
+	/**
 	 * Part of EJSON interface.
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
 	 * @returns {String} The name of the instantiated class

@@ -17,26 +17,12 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
-import * as lib from './lib.js';
 
-Template.createTimerView.onRendered(function () {
-	let index = EventManagerCollection.findOne().questionIndex;
-	lib.createSlider(index);
-	lib.setSlider(index);
-	var body = $('body');
-	body.on('click', '.questionIcon:not(.active)', function () {
-		if (index >= Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList().length) {
-			return;
-		}
-
-		Router.go("/" + Router.current().params.quizName + "/question");
-	});
-	body.on('click', '.removeQuestion', function () {
-		index = EventManagerCollection.findOne().questionIndex;
-	});
-
+Template.quizSummary.onRendered(function () {
+	if (!Session.get("questionGroup").isValid()) {
+		$('#forwardButton').attr("disabled", "disabled");
+	}
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	footerElements.calculateFooter();

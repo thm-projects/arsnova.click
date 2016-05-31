@@ -243,6 +243,47 @@ export class AbstractQuestion {
 	}
 
 	/**
+	 * Gets the validation error reason from the question and all included answerOptions as a stackable array
+	 * @returns {Array} Contains an Object which holds the number of the current question and the reason why the validation has failed
+	 */
+	getValidationStackTrace () {
+		const result = [];
+		const markdownChars = this.getQuestionText().split().map(function (currentValue) {
+			let tmpValue = currentValue;
+			tmpValue = tmpValue.replace(/#/g,"");
+			tmpValue = tmpValue.replace(/\*/g,"");
+			tmpValue = tmpValue.replace(/1./g,"");
+			tmpValue = tmpValue.replace(/\[/g,"");
+			tmpValue = tmpValue.replace(/\]\(/g,"");
+			tmpValue = tmpValue.replace(/\)/g,"");
+			tmpValue = tmpValue.replace(/- /g,"");
+			tmpValue = tmpValue.replace(/\\\(/g,"");
+			tmpValue = tmpValue.replace(/\\\)/g,"");
+			tmpValue = tmpValue.replace(/$/g,"");
+			tmpValue = tmpValue.replace(/<hlcode>/g,"");
+			tmpValue = tmpValue.replace(/<\/hlcode>/g,"");
+			tmpValue = tmpValue.replace(/>/g,"");
+			return tmpValue.length;
+		});
+		if (markdownChars[0] < 5) {
+			result.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "question_text_too_small"});
+		} else if (markdownChars[0] > 1000) {
+			result.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "question_text_too_long"});
+		}
+		if (this.getTimer() < 6) {
+			result.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "timer_too_small"});
+		} else if (this.getTimer() > 260) {
+			result.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "timer_too_big"});
+		}
+		this.getAnswerOptionList().forEach(function (answerOption) {
+			if (!answerOption.isValid()) {
+				$.merge(result, answerOption.getValidationStackTrace());
+			}
+		});
+		return result;
+	}
+
+	/**
 	 * Checks for equivalence relations to another Question instance. Also part of the EJSON interface
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-equals
 	 * @param {AbstractQuestion} question The Question instance which should be checked

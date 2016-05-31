@@ -122,6 +122,14 @@ export class AbstractAnswerOption {
 	}
 
 	/**
+	 * Gets the validation error reason as a stackable array
+	 * @returns {Array} Contains an Object which holds the number of the current answerOption and the reason why the validation has failed
+	 */
+	getValidationStackTrace () {
+		return (this.getAnswerText().length === 0) ? [{occuredAt: {type: "answerOption", id: this.getAnswerOptionNumber()}, reason: "answer_text_empty"}] : [];
+	}
+
+	/**
 	 * Checks for equivalence relations to another AnswerOption instance. Also part of the EJSON interface
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-equals
 	 * @param {AbstractAnswerOption} answerOption The AnswerOption instance which should be checked

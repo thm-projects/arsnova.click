@@ -97,6 +97,19 @@ export class RangedQuestion extends AbstractQuestion {
 	}
 
 	/**
+	 * Gets the validation error reason from the question and all included answerOptions as a stackable array
+	 * @returns {Array} Contains an Object which holds the number of the current question and the reason why the validation has failed
+	 */
+	getValidationStackTrace () {
+		const parentStackTrace = super.getValidationStackTrace();
+		const hasValidRange = this[rangeMin] < this[rangeMax];
+		if (!hasValidRange) {
+			parentStackTrace.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "invalid_range"});
+		}
+		return parentStackTrace;
+	}
+
+	/**
 	 * Checks for equivalence relations to another Question instance. Also part of the EJSON interface
 	 * @see AbstractQuestion.equals()
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-equals

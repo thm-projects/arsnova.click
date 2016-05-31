@@ -1180,7 +1180,7 @@
 				background: $splashscreen-background-color;
 				color: $splashscreen-foreground-color;
 				a, a:hover, a:active, a:visited, a:focus {
-					color: $background-color;
+					color: $splashscreen-foreground-color;
 				}
 			}
 		}
@@ -1227,7 +1227,6 @@
 				background: $splashscreen-question-preview-background-color;
 			}
 		}
-
 		.errorSplashscreen {
 			.modal-content {
 				background: $splash-screen-error-message-background-color;

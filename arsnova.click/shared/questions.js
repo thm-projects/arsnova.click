@@ -51,7 +51,6 @@ Meteor.methods({
 				}
 			}
 		}
-		Meteor.call("HashtagsCollection.setThemeConfig", questionGroup.hashtag, questionGroup.theme);
 		EventManagerCollection.update({hashtag: questionGroup.hashtag}, {
 			$push: {
 				eventStack: {

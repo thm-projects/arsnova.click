@@ -84,7 +84,13 @@ Router.onAfterAction(function () {
 	if (!localStorage.getItem("theme")) {
 		localStorage.setItem("theme", "theme-default");
 	}
-	$('#theme-wrapper').removeClass().addClass(localStorage.getItem("theme"));
+	let theme = localStorage.getItem("theme");
+	const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+	if (hashtagDoc && hashtagDoc.theme) {
+		sessionStorage.setItem("quizTheme", hashtagDoc.theme);
+		theme = sessionStorage.getItem("quizTheme");
+	}
+	$('#theme-wrapper').removeClass().addClass(theme);
 });
 
 Router.route('/', {

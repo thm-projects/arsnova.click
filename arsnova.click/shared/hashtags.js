@@ -51,11 +51,11 @@ Meteor.methods({
 			}
 		});
 	},
-	'HashtagsCollection.setThemeConfig': function (hashtag, themeName) {
+	'HashtagsCollection.setDefaultTheme': function (hashtag, themeName = "theme-default") {
 		new SimpleSchema({hashtag: hashtagSchema, theme: themeSchema}).validate({hashtag: hashtag, theme: themeName});
 
 		if (!HashtagsCollection.findOne({hashtag: hashtag})) {
-			throw new Meteor.Error('HashtagsCollection.setThemeConfig', 'session_not_exists');
+			throw new Meteor.Error('HashtagsCollection.setDefaultTheme', 'session_not_exists');
 		}
 
 		let queryParam = {};
@@ -70,7 +70,7 @@ Meteor.methods({
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$push: {
 				eventStack: {
-					key: "HashtagsCollection.setThemeConfig",
+					key: "HashtagsCollection.setDefaultTheme",
 					value: {hashtag: hashtag, theme: themeName}
 				}
 			}

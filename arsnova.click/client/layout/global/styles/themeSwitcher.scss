@@ -9,8 +9,10 @@
 
 	$success: #008000;
 	$success-text-color: #ffffff;
+	$fg-success: lighten($success, 20);
 	$warning: #b22222;
 	$warning-text-color: #ffffff;
+	$fg-warning: $warning;
 	$info: #663399;
 	$info-text-color: #ffffff;
 	$default: #808080;
@@ -156,11 +158,11 @@
 	$fg-qr-code-label: black;
 
 	$box-shadow-markdown: black;
-	$fg-hljs-comment: #006a00;
 	$fg-lockquote: #394a59;
 	$border-hljs-line-numbers: #ccc;
 	$fg-hljs: #f0f0f0;
 	$bg-hljs: black;
+	$fg-hljs-comment: #006a00;
 	$fg-hljs-line-numbers: #999;
 	$bg-hljs-pre: white;
 	$fg-hljs_keyword: #aa0d91;
@@ -296,6 +298,11 @@
 	$fg-hljs_projectorMode-a-focus: inherit;
 	$fg-hljs_projectorMode-a-hover: inherit;
 
+	$quiz-summary-row-color: white;
+	$fg-quiz-summary-H4: white;
+	$fg-quiz-summary-P: white;
+	$fg-quiz-summary-UL: white;
+
 	@if ($name == "theme-dark") {
 		$success: #00CD00; /* green */
 		$warning: #FF2222; /* firebrick */
@@ -335,8 +342,7 @@
 
 		$fg_quiz-name: #b5003f;
 		$default: #d3d3d3; /* light grey */
-		$default-text-color: $thmgray;
-		$success: #a9f5a9; /*bright green*/
+		$default-text-color: black;
 		$success-text-color: $thmgray;
 
 		$placeholder-color: #ffffff ; /* white */
@@ -358,6 +364,11 @@
 		$check-mark-unchecked: #aaaaaa;
 
 		$fg-theme_description: black;
+		$quiz-summary-row-color: $default-text-color;
+		$fg-quiz-summary-H4: $default-text-color;
+		$fg-quiz-summary-P: $default-text-color;
+		$fg-quiz-summary-UL: $default-text-color;
+		$fg-success: $success;
 	}
 
 	@if ($name == "theme-elegant") {
@@ -373,6 +384,11 @@
 		$fg_quiz-name: #ffd700;
 		$fg_titel: black;
 		$fg-theme_description: black;
+		$quiz-summary-row-color: $default-text-color;
+		$fg-quiz-summary-H4: $default-text-color;
+		$fg-quiz-summary-P: $default-text-color;
+		$fg-quiz-summary-UL: $default-text-color;
+		$fg-success: $success;
 	}
 
 	@if ($name == "theme-arsnova") {
@@ -391,6 +407,10 @@
 		$fg-footer-info-bar: #394a59;
 		$fg-footer-info-bar-active: #459c2f;
 		$fg-footer-info-bar-active-hovered: #6aa05d;
+		$quiz-summary-row-color: $default-text-color;
+		$fg-quiz-summary-H4: $default-text-color;
+		$fg-quiz-summary-P: $default-text-color;
+		$fg-quiz-summary-UL: $default-text-color;
 	}
 
 	body {
@@ -411,9 +431,6 @@
 		}
 		a, a:hover, a:active, a:visited, a:focus {
 			color: $fg_a;
-		}
-		p, h4, ul {
-			color: $default-text-color;
 		}
 		.titel {
 			color: $fg_titel;
@@ -624,10 +641,10 @@
 			border: 3px solid $warning;
 		}
 		p.success, span.success {
-			color : $success;
+			color : $fg-success;
 		}
 		p.failed, span.failed {
-			color : $warning;
+			color : $fg-warning;
 		}
 		.popover-title, .popover.bottom {
 			background-color: $warning;
@@ -1188,14 +1205,16 @@
 			}
 		}
 		.splashscreen {
-			.modal-header {
-				color: $splash-screen-header-color;
-			}
 			.modal-content {
-				background: $splashscreen-background-color;
-				color: $splashscreen-foreground-color;
-				a, a:hover, a:active, a:visited, a:focus {
+				.modal-header {
+					color: $splash-screen-header-color;
+				}
+				.modal-body {
+					background: $splashscreen-background-color;
 					color: $splashscreen-foreground-color;
+					a, a:hover, a:active, a:visited, a:focus, p {
+						color: $splashscreen-foreground-color !important;
+					}
 				}
 			}
 		}
@@ -1253,6 +1272,20 @@
 		}
 		.theme-description {
 			color: $fg-theme_description;
+		}
+		.quizSummary {
+			hr {
+				color: $quiz-summary-row-color;
+			}
+			h4 {
+				color: $fg-quiz-summary-H4;
+			}
+			p {
+				color: $fg-quiz-summary-P;
+			}
+			ul {
+				color: $fg-quiz-summary-UL;
+			}
 		}
 	}
 }

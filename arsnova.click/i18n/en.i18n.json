@@ -204,6 +204,45 @@
       "survey_question": "Survey",
       "ranged_question": "Question with ranged answeroptions"
     },
+    "quiz_summary": {
+      "summary": "Summary",
+      "quiz_name": "Name of the quiz",
+      "quiz_url": "URL for attendees",
+      "question_amount": "Amount of all questions",
+      "validation_question_group": "Validationtest for the complete quiz",
+      "successfull": "Successfull",
+      "failed": "Failed",
+      "correct": "Correct",
+      "wrong": "Wrong",
+      "question": "Question",
+      "text": "Text",
+      "type": "Type",
+      "answer": "Answer",
+      "answer_plural": "Answers",
+      "timer": "Timer",
+      "second": "Second",
+      "second_plural": "Seconds",
+      "validation": "Validation",
+      "validation_errors": {
+        "types": {
+          "question": "Question",
+          "answerOption": "Answer"
+        },
+        "reasons": {
+          "question_text_too_small": "The question text is too short",
+          "question_text_too_long": "The question text is too long",
+          "timer_too_small": "The timer is too short",
+          "timer_too_big": "The timer is too long",
+          "no_valid_answers": "There must be at least one correct answer",
+          "one_valid_answer_required": "There must be exactly one correct answer",
+          "no_valid_answer_required": "There are no correct answers allowed",
+          "invalid_range": "The minimum range must be smaller than the maximum range",
+          "answer_text_empty": "The answer's text is not allowed to be empty"
+        }
+      },
+      "edit_quiz": "Edit quiz",
+      "start_quiz": "Start quiz"
+    },
     "theme_switcher": {
       "set_theme": "Choose a theme for all attendees",
       "select_a_theme_title": "Choose the theme",

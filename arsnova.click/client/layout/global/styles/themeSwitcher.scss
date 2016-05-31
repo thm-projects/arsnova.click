@@ -6,6 +6,7 @@
 	$fg_a: #ffd700;
 	$fg_quiz-name: #ffd700;
 	$fg_titel: white;
+
 	$success: #008000; /* green */
 	$success-text-color: #ffffff; /* white */
 	$warning: #b22222; /* firebrick */
@@ -14,26 +15,58 @@
 	$info-text-color: #ffffff; /* white */
 	$default: #808080; /* grey */
 	$default-text-color: #ffffff; /* white */
+
 	$background-color: #4682b4; /* steelblue */
+	$button-shadow: black;
+
 	$bg-nav-row: $background-color;
 	$bg-container: $background-color;
-	$bg-footer: $background-color;
+
 	$bg-questionList-row: $background-color;
+	$box-shadow-question-row-active: rebeccapurple;
+	$fg-questionScrollPane-index-number: white;
+	$fg-questionScrollPane-remove-question: white;
+	$bg-questionScrollPane-question-icon-valid-index-number: green;
+	$bg-questionScrollPane-question-icon-invalid-index-number: grey;
+	$border-questionScrollPane-active: beige;
+	$border-questionScrollPane-active-valid-remove-question: green;
+	$box-shadow-questionScrollPane-active-remove-question: none;
+	$border-questionScrollPane-active-remove-question: black;
+	$bg-questionScrollPane-active-remove-question-hovered: red;
+	$fg-questionScrollPane-active-remove-question-hovered: white;
+
 	$disabled-button-background: #808080; /* grey */
+
 	$placeholder-color: #808080; /* grey */
 	$input-background-color: #ffd700; /* gold */
 	$input-foreground-color: black;
 	$input-group-letter-color: #2f4f4f; /* darkslategrey */
+
+	$bg-footer: $background-color;
 	$footer-background-color: #dcdcdc; /*gainsboro */
 	$footer-text-color: #000000; /* black */
 	$fg-footer-info-bar: white;
-	$splash-screen-header-color: #2f4f4f; /* darkslategrey */
-	$splash-screen-body-color: #2f4f4f; /* darkslategrey */
+	$fg-footer-info-bar-hovered: darken($fg-footer-info-bar, 30);
+	$fg-footer-info-bar-active: #00CC00;
+	$fg-footer-info-bar-active-hovered: #33FF00;
+	$fg-footer-element: white;
+	$fg-footer-element-hovered: white;
+	$fg-footer-element-deactivated: $warning;
+	$fg-footer-element-deactivated-hovered: red;
+	$fg-footer-element-activated: $success;
+	$fg-footer-element-activated-hovered: $success;
+
 	$slider-color: #008000; /* green */
+
 	$progress-bar-success-color: green;
 	$progress-bar-read-confirmation: darkorange;
 	$progress-bar-failure-color: firebrick;
 	$progress-bar-default-color: grey;
+	$bg_progress-bar: white;
+	$fg_progress-bar: black;
+
+	$splash-screen-header-color: #2f4f4f; /* darkslategrey */
+	$splash-screen-body-color: #2f4f4f; /* darkslategrey */
 	$splashscreen-background-color: #98fb98; /* palegreen */
 	$splashscreen-foreground-color: black;
 	$splashscreen-question-and-answer-background-color: $splashscreen-background-color; /* palegreen */
@@ -46,18 +79,21 @@
 	$splash-screen-error-message-background-color: white;
 	$splash-screen-error-message-button-background-color: $success;
 	$splash-screen-error-message-button-foreground-color: white;
+
 	$check-mark-checked: #00882a;
 	$check-mark-unchecked: #aaaaaa;
-	$bg_progress-bar: white;
-	$fg_progress-bar: black;
+
 	$fg-theme_description: white;
-	$button-shadow: black;
+
 	$bg-button-leader: $input-background-color;
 	$fg-button-leader: $input-foreground-color;
+
 	$bg-button-result: #eeeeee;
 	$fg-button-result-percentage: #ffffff;
 	$bg-button-result-progress: LightSteelBlue;
+
 	$bg-previewText: white;
+
 	$fg-hljs: #f0f0f0;
 	$bg-hljs: black;
 	$border-hljs-line-numbers: #ccc;
@@ -68,26 +104,31 @@
 	$fg-js-my-hash: black;
 	$bg-js-my-hash: #ffffe0;
 	$box-shadow-markdown: black;
+
 	$colorChangingArs0: white;
 	$colorChangingArs25: $warning;
 	$colorChangingArs50: $info;
 	$colorChangingArs75: $input-background-color;
 	$colorChangingArs100: white;
+
 	$colorChangingNova0: $input-background-color;
 	$colorChangingNova25: white;
 	$colorChangingNova50: $warning;
 	$colorChangingNova75: $info;
 	$colorChangingNova100: $input-background-color;
+
 	$colorChangingDot0: $info;
 	$colorChangingDot25: $input-background-color;
 	$colorChangingDot50: white;
 	$colorChangingDot75: $warning;
 	$colorChangingDot100: $info;
+
 	$colorChangingClick0: $warning;
 	$colorChangingClick25: $info;
 	$colorChangingClick50: $input-background-color;
 	$colorChangingClick75: white;
 	$colorChangingClick100: $warning;
+
 	$bg-colorChangingOwnNick0: $input-background-color;
 	$fg-colorChangingOwnNick0: white;
 	$bg-colorChangingOwnNick25: $warning;
@@ -98,59 +139,51 @@
 	$fg-colorChangingOwnNick75: white;
 	$bg-colorChangingOwnNick100: #98fb98;
 	$fg-colorChangingOwnNick100: black;
+
 	$bg-btn-more-learners: rebeccapurple;
 	$fg-btn-more-learners: white;
-	$box-shadow-question-row-active: rebeccapurple;
+
 	$fg-formGroup-progress-percentage-label: white;
+
 	$bg-btn-file-input: white;
+
 	$fg-question-title: white;
+
 	$fg-glyphicon-style: #FFF;
-	$fg-kill-session-switch-wrapper: #b22222;
-	$fg-kill-session-switch-wrapper-hovered: red;
+
 	$fg-qr-code-button: white;
+	$fg-qr-code-button-hovered: darken($fg-qr-code-button, 20);
 	$border-qr-code-container: white;
 	$bg-qr-code-container: white;
 	$fg-qr-code-container-close: black;
+	$fg-qr-code-container-close-hovered: lighten($fg-qr-code-container-close, 20);
 	$border-qr-code-container-close-icon: black;
 	$background-qr-code-container-close-icon: white;
 	$fg-qr-code-label: black;
-	$fg-footer-info-bar-active: #00CC00;
-	$fg-footer-info-bar-active-hovered: #33FF00;
-	$fg-sound-button-inactive: #b22222;
-	$fg-sound-button-inactive-hovered: red;
-	$fg-questionScrollPane-index-number: white;
-	$fg-questionScrollPane-remove-question: white;
-	$bg-questionScrollPane-question-icon-valid-index-number: green;
-	$bg-questionScrollPane-question-icon-invalid-index-number: grey;
-	$border-questionScrollPane-active: beige;
-	$border-questionScrollPane-active-valid-remove-question: green;
-	$box-shadow-questionScrollPane-active-remove-question: none;
-	$border-questionScrollPane-active-remove-question: black;
-	$bg-questionScrollPane-active-remove-question-hovered: red;
-	$fg-questionScrollPane-active-remove-question-hovered: white;
-	$fg-footer-element: white;
-	$fg-footer-element-hovered: white;
-	$fg-footer-element-deactivated: $warning;
-	$fg-footer-element-deactivated-hovered: red;
-	$fg-footer-element-activated: $success;
-	$fg-footer-element-activated-hovered: $success;
 
 	@if ($name == "theme-dark") {
 		$success: #00CD00; /* green */
 		$warning: #FF2222; /* firebrick */
 		$info: #1C86EE; /* dodgerblue */
+		$background-color: #4a4a4a; /* grey */
+
 		$switch: #00CD00; /* green */
 		$switch-text-color: #ffffff;
-		$background-color: #4a4a4a; /* grey */
+
 		$bg-nav-row: $background-color;
+
 		$bg-questionList-row: $bg-nav-row;
+
 		$bg-container: $background-color;
+
 		$bg-footer: $background-color;
+		$footer-text-color: #FFFFFF; /* white */
+
 		$disabled-button-background: darkgrey; /* darkgrey */
 		$placeholder-color: #FFFFFF ; /* white */
 		$input-background-color: #FF8C00; /* orange */
 		$input-group-letter-color: white; /* darkslategrey */
-		$footer-text-color: #FFFFFF; /* white */
+
 		$check-mark-checked: $success;
 		$check-mark-unchecked: $warning;
 	}
@@ -162,24 +195,34 @@
 		$thmnavy: #003bd1;
 		$thmgreen: #80ba24;
 		$thmgray: #4a5c66;
+
 		$fg_quiz-name: #b5003f;
-		$placeholder-color: #ffffff ; /* white */
-		$input-background-color: #808080; /* grey */
-		$footer-background-color: #000000; /*gainsboro */
 		$default: #d3d3d3; /* light grey */
 		$default-text-color: $thmgray;
-		$background-color: $thmgreen;
-		$bg-nav-row: $background-color;
-		$bg-questionList-row: $bg-nav-row;
-		$bg-container: $background-color;
-		$bg-footer: $background-color;
-		$disabled-button-background: #808080; /* grey */
 		$success: #a9f5a9; /*bright green*/
 		$success-text-color: $thmgray;
-		$check-mark-unchecked: #aaaaaa;
-		$fg-theme_description: black;
+
+		$placeholder-color: #ffffff ; /* white */
+		$input-background-color: #808080; /* grey */
+
+		$bg-footer: $background-color;
+		$footer-background-color: #000000; /*gainsboro */
 		$fg-footer-info-bar-active: #33FF00;
 		$fg-footer-info-bar-active-hovered: #A1FF8A;
+
+		$background-color: $thmgreen;
+
+		$bg-nav-row: $background-color;
+
+		$bg-questionList-row: $bg-nav-row;
+
+		$bg-container: $background-color;
+
+		$disabled-button-background: #808080; /* grey */
+
+		$check-mark-unchecked: #aaaaaa;
+
+		$fg-theme_description: black;
 	}
 
 	@if ($name == "theme-elegant") {
@@ -267,16 +310,10 @@
 		button:disabled {
 			background-color: $disabled-button-background;
 		}
-		.kill-session-switch-wrapper {
-			color: $fg-kill-session-switch-wrapper;
-			&:hover {
-				color: $fg-kill-session-switch-wrapper-hovered;
-			}
-		}
 		.qr-code-button {
 			color: $fg-qr-code-button;
 			&:hover {
-				color: darken($fg-qr-code-button, 20);
+				color: $fg-qr-code-button-hovered;
 			}
 		}
 		.qr-code-container {
@@ -286,7 +323,7 @@
 		.qr-code-container-close {
 			color: $fg-qr-code-container-close;
 			&:hover {
-				color: lighten($fg-qr-code-container-close, 20);
+				color: $fg-qr-code-container-close-hovered;
 			}
 			.glyphicon-remove {
 				border: 1px solid $border-qr-code-container-close-icon;
@@ -295,12 +332,6 @@
 		}
 		.qr-code-label {
 			color: $fg-qr-code-label;
-		}
-		.sound-button-inactive {
-			color: $fg-sound-button-inactive;
-			&:hover {
-				color: $fg-sound-button-inactive-hovered;
-			}
 		}
 		.questionScrollPane {
 			.indexNumber {
@@ -394,7 +425,6 @@
 			background-color: $bg-button-result;
 			.percentage {
 				color: $fg-button-result-percentage;
-				font-weight: bolder;
 			}
 			.progress {
 				background-color: $bg-button-result-progress;
@@ -405,7 +435,7 @@
 			.footerElement {
 				color: $fg-footer-info-bar;
 				&:hover {
-					color: darken($fg-footer-info-bar, 30);
+					color: $fg-footer-info-bar-hovered;
 				}
 				&.error {
 					color: $fg-footer-element-deactivated;
@@ -474,95 +504,350 @@
 		.hljs-comment {
 			color: $fg-hljs-comment;
 		}
-		.hljs-keyword, .hljs-literal, .nginx .hljs-title {
-			color: #aa0d91;
+		$fg-hljs_keyword: #aa0d91;
+		$fg-hljs_literal: #aa0d91;
+		$fg-hljs_nginx-title: #aa0d91;
+		$fg-hljs_method: #008;
+		$fg-hljs_list-title: #008;
+		$fg-hljs_tag-title: #008;
+		$fg-hljs_setting-value: #008;
+		$fg-hljs_winutils: #008;
+		$fg-hljs_tex-command: #008;
+		$fg-hljs_http-title: #008;
+		$fg-hljs_request: #008;
+		$fg-hljs_status: #008;
+		$fg-hljs_name: #008;
+		$fg-hljs_envvar: #660;
+		$fg-hljs_tex-special: #660;
+		$fg-hljs_string: #c41a16;
+		$fg-hljs_tag-value: #080;
+		$fg-hljs_cdata: #080;
+		$fg-hljs_filter-argument: #080;
+		$fg-hljs_attr_selector: #080;
+		$fg-hljs_apache-cbracket: #080;
+		$fg-hljs_date: #080;
+		$fg-hljs_regexp: #080;
+		$fg-hljs_sub-identifier: #1c00cf;
+		$fg-hljs_pi: #1c00cf;
+		$fg-hljs_tag: #1c00cf;
+		$fg-hljs_tag-keyword: #1c00cf;
+		$fg-hljs_decorator: #1c00cf;
+		$fg-hljs_ini-title: #1c00cf;
+		$fg-hljs_shebang: #1c00cf;
+		$fg-hljs_prompt: #1c00cf;
+		$fg-hljs_hexcolor: #1c00cf;
+		$fg-hljs_rule-value: #1c00cf;
+		$fg-hljs_symbol: #1c00cf;
+		$fg-hljs_symbol-string: #1c00cf;
+		$fg-hljs_number: #1c00cf;
+		$fg-hljs_css-function: #1c00cf;
+		$fg-hljs_function-title: #1c00cf;
+		$fg-hljs_coffeescript-attribute: #1c00cf;
+		$fg-hljs_class-title: #5c2699;
+		$fg-hljs_smalltalk-class: #5c2699;
+		$fg-hljs_type: #5c2699;
+		$fg-hljs_typename: #5c2699;
+		$fg-hljs_tag-attribute: #5c2699;
+		$fg-hljs_doctype: #5c2699;
+		$fg-hljs_class-id: #5c2699;
+		$fg-hljs_built_in: #5c2699;
+		$fg-hljs_setting: #5c2699;
+		$fg-hljs_params: #5c2699;
+		$fg-hljs_clojure-attribute: #5c2699;
+		$fg-hljs_variable: #3f6e74;
+		$fg-hljs_css-tag: #000;
+		$fg-hljs_rule-property: #000;
+		$fg-hljs_pseudo: #000;
+		$fg-hljs_subst: #000;
+		$fg-hljs_css-class: #9b703f;
+		$fg-hljs_css-id: #9b703f;
+		$fg-hljs_value-important: #ff7700;
+		$fg-hljs_rule-keyword: #c5af75;
+		$fg-hljs_annotation: #9b859d;
+		$fg-hljs_apache-sqbracket: #9b859d;
+		$fg-hljs_nginx-build_in: #9b859d;
+		$fg-hljs_preprocessor: #643820;
+		$fg-hljs_preprocessor-ALL: #643820;
+		$fg-hljs_pragma: #643820;
+		$fg-hljs_formula: #eee;
+		$fg-hljs_diff-header: #808080;
+		$fg-hljs_chunk: #808080;
+		$fg-hljs_pragma: #bccff9;
+		$fg-hljs_addition: #baeeba;
+		$fg-hljs_deletion: #ffc8bd;
+		$fg-hljs_method-id: #000;
+		.hljs-keyword {
+			color: $fg-hljs_keyword;
 		}
-		.method, .hljs-list .hljs-title, .hljs-tag .hljs-title, .setting .hljs-value, .hljs-winutils, .tex .hljs-command, .http .hljs-title, .hljs-request, .hljs-status, .hljs-name {
-			color: #008;
+		.hljs-literal {
+			color: $fg-hljs_literal;
 		}
-		.hljs-envvar, .tex .hljs-special {
-			color: #660;
+		.nginx .hljs-title {
+			color: $fg-hljs_nginx-title;
+		}
+		.method {
+			color: $fg-hljs_method;
+		}
+		.hljs-list .hljs-title {
+			color: $fg-hljs_list-title;
+		}
+		.hljs-tag .hljs-title {
+			color: $fg-hljs_tag-title;
+		}
+		.setting .hljs-value {
+			color: $fg-hljs_setting-value;
+		}
+		.hljs-winutils {
+			color: $fg-hljs_winutils;
+		}
+		.tex .hljs-command {
+			color: $fg-hljs_tex-command;
+		}
+		.http .hljs-title {
+			color: $fg-hljs_http-title;
+		}
+		.hljs-request {
+			color: $fg-hljs_request;
+		}
+		.hljs-status {
+			color: $fg-hljs_status;
+		}
+		.hljs-name {
+			color: $fg-hljs_name;
+		}
+		.hljs-envvar {
+			color: $fg-hljs_envvar;
+		}
+		.tex .hljs-special {
+			color: $fg-hljs_tex-special;
 		}
 		.hljs-string {
-			color: #c41a16;
+			color: $fg-hljs_string;
 		}
-		.hljs-tag .hljs-value, .hljs-cdata, .hljs-filter .hljs-argument, .hljs-attr_selector, .apache .hljs-cbracket, .hljs-date, .hljs-regexp {
-			color: #080;
+		.hljs-tag .hljs-value {
+			color: $fg-hljs_tag-value;
 		}
-		.hljs-sub .hljs-identifier, .hljs-pi, .hljs-tag, .hljs-tag .hljs-keyword, .hljs-decorator, .ini .hljs-title, .hljs-shebang, .hljs-prompt, .hljs-hexcolor, .hljs-rule .hljs-value, .hljs-symbol, .hljs-symbol .hljs-string, .hljs-number, .css .hljs-function, .hljs-function .hljs-title, .coffeescript .hljs-attribute {
-			color: #1c00cf;
+		.hljs-cdata {
+			color: $fg-hljs_cdata;
 		}
-		.hljs-class .hljs-title, .smalltalk .hljs-class, .hljs-type, .hljs-typename, .hljs-tag .hljs-attribute, .hljs-doctype, .hljs-class .hljs-id, .hljs-built_in, .setting, .hljs-params, .clojure .hljs-attribute {
-			color: #5c2699;
+		.hljs-filter .hljs-argument {
+			color: $fg-hljs_filter-argument;
+		}
+		.hljs-attr_selector {
+			color: $fg-hljs_attr_selector;
+		}
+		.apache .hljs-cbracket {
+			color: $fg-hljs_apache-cbracket;
+		}
+		.hljs-date {
+			color: $fg-hljs_date;
+		}
+		.hljs-regexp {
+			color: $fg-hljs_regexp;
+		}
+		.hljs-sub .hljs-identifier {
+			color: $fg-hljs_sub-identifier;
+		}
+		.hljs-pi {
+			color: $fg-hljs_pi;
+		}
+		.hljs-tag {
+			color: $fg-hljs_tag;
+		}
+		.hljs-tag .hljs-keyword {
+			color: $fg-hljs_tag-keyword;
+		}
+		.hljs-decorator {
+			color: $fg-hljs_decorator;
+		}
+		.ini .hljs-title {
+			color: $fg-hljs_ini-title;
+		}
+		.hljs-shebang {
+			color: $fg-hljs_shebang;
+		}
+		.hljs-prompt {
+			color: $fg-hljs_prompt;
+		}
+		.hljs-hexcolor {
+			color: $fg-hljs_hexcolor;
+		}
+		.hljs-rule .hljs-value {
+			color: $fg-hljs_rule-value;
+		}
+		.hljs-symbol {
+			color: $fg-hljs_symbol;
+		}
+		.hljs-symbol .hljs-string {
+			color: $fg-hljs_symbol-string;
+		}
+		.hljs-number {
+			color: $fg-hljs_number;
+		}
+		.css .hljs-function {
+			color: $fg-hljs_css-function;
+		}
+		.hljs-function .hljs-title {
+			color: $fg-hljs_function-title;
+		}
+		.coffeescript .hljs-attribute {
+			color: $fg-hljs_coffeescript-attribute;
+		}
+		.hljs-class .hljs-title {
+			color: $fg-hljs_class-title;
+		}
+		.smalltalk .hljs-class {
+			color: $fg-hljs_smalltalk-class;
+		}
+		.hljs-type {
+			color: $fg-hljs_type;
+		}
+		.hljs-typename {
+			color: $fg-hljs_typename;
+		}
+		.hljs-tag .hljs-attribute {
+			color: $fg-hljs_tag-attribute;
+		}
+		.hljs-doctype {
+			color: $fg-hljs_doctype;
+		}
+		.hljs-class .hljs-id {
+			color: $fg-hljs_class-id;
+		}
+		.hljs-built_in {
+			color: $fg-hljs_built_in;
+		}
+		.setting {
+			color: $fg-hljs_setting;
+		}
+		.hljs-params {
+			color: $fg-hljs_params;
+		}
+		.clojure .hljs-attribute {
+			color: $fg-hljs_clojure-attribute;
 		}
 		.hljs-variable {
 			color: #3f6e74;
 		}
-		.css .hljs-tag, .hljs-rule .hljs-property, .hljs-pseudo, .hljs-subst {
-			color: #000;
+		.css .hljs-tag {
+			color: $fg-hljs_css-tag;
 		}
-		.css .hljs-class, .css .hljs-id {
-			color: #9b703f;
+		.hljs-rule .hljs-property {
+			color: $fg-hljs_rule-property;
+		}
+		.hljs-pseudo {
+			color: $fg-hljs_pseudo;
+		}
+		.hljs-subst {
+			color: $fg-hljs_subst;
+		}
+		.css .hljs-class {
+			color: $fg-hljs_css-class;
+		}
+		.css .hljs-id {
+			color: $fg-hljs_css-id;
 		}
 		.hljs-value .hljs-important {
-			color: #ff7700;
+			color: $fg-hljs_value-important;
 			font-weight: bold;
 		}
 		.hljs-rule .hljs-keyword {
-			color: #c5af75;
+			color: $fg-hljs_rule-keyword;
 		}
-		.hljs-annotation, .apache .hljs-sqbracket, .nginx .hljs-built_in {
-			color: #9b859d;
+		.hljs-annotation {
+			color: $fg-hljs_annotation;
 		}
-		.hljs-preprocessor, .hljs-preprocessor *, .hljs-pragma {
-			color: #643820;
+		.apache .hljs-sqbracket {
+			color: $fg-hljs_apache-sqbracket;
+		}
+		.nginx .hljs-built_in {
+			color: $fg-hljs_nginx-build_in;
+		}
+		.hljs-preprocessor {
+			color: $fg-hljs_preprocessor;
+		}
+		.hljs-preprocessor * {
+			color: $fg-hljs_preprocessor-ALL;
+		}
+		.hljs-pragma {
+			color: $fg-hljs_pragma;
 		}
 		.tex .hljs-formula {
-			background-color: #eee;
+			background-color: $fg-hljs_formula;
 			font-style: italic;
 		}
-		.diff .hljs-header, .hljs-chunk {
-			color: #808080;
+		.diff .hljs-header {
+			color: $fg-hljs_diff-header;
+			font-weight: bold;
+		}
+		.hljs-chunk {
+			color: $fg-hljs_chunk;
 			font-weight: bold;
 		}
 		.diff .hljs-change {
-			background-color: #bccff9;
+			background-color: $fg-hljs_pragma;
 		}
 		.hljs-addition {
-			background-color: #baeeba;
+			background-color: $fg-hljs_addition;
 		}
 		.hljs-deletion {
-			background-color: #ffc8bd;
+			background-color: $fg-hljs_deletion;
 		}
 		.method .hljs-id {
-			color: #000;
+			color: $fg-hljs_method-id;
 		}
+		$fg-hljs_projectorMode-SPAN: inherit;
+		$bg-hljs_projectorMode-SPAN: inherit;
+		$fg-hljs_projectorMode-pre: white;
+		$bg-hljs_projectorMode-pre: #333;
+		$fg-hljs_projectorMode-hljs: white;
+		$bg-hljs_projectorMode-hljs: #333;
+		$fg-hljs_projectorMode-tag: #62c8f3;
+		$fg-hljs_projectorMode-ini-title: #62c8f3;
 		.projector-mode {
 			span[class^='hljs'], span[class*=' hljs'] {
-				color: inherit;
-				background-color: inherit;
+				color: $fg-hljs_projectorMode-SPAN;
+				background-color: $bg-hljs_projectorMode-SPAN;
 			}
 			.hljs-pre {
-				color: white;
-				background-color: #333;
+				color: $fg-hljs_projectorMode-pre;
+				background-color: $bg-hljs_projectorMode-pre;
 			}
 			.hljs {
+				color: $fg-hljs_projectorMode-hljs;
+				background: $bg-hljs_projectorMode-hljs;
 				display: block;
 				overflow-x: auto;
 				padding: .5em;
-				background: #333;
-				color: white;
 				-webkit-text-size-adjust: none;
 			}
-			.hljs-tag, .ini .hljs-title {
-				color: #62c8f3;
+			.hljs-tag {
+				color: $fg-hljs_projectorMode-tag;
 			}
+			.ini .hljs-title {
+				color: $fg-hljs_projectorMode-ini-title;
+			}
+			$fg-hljs_projectorMode-pragma: #643820;
+			$fg-hljs_projectorMode-pragma: #643820;
+			$fg-hljs_projectorMode-pragma: #643820;
 			.hljs-id, .hljs-cbracket, .hljs-tag .hljs-value {
 				color: #ade5fc;
 			}
+			$fg-hljs_projectorMode-pragma: #643820;
+			$fg-hljs_projectorMode-pragma: #643820;
 			.hljs-string, .hljs-bullet {
 				color: #a2fca2;
 			}
+			$fg-hljs_projectorMode-pragma: #643820;
+			$fg-hljs_projectorMode-pragma: #643820;
+			$fg-hljs_projectorMode-pragma: #643820;
+			$fg-hljs_projectorMode-pragma: #643820;
+			$fg-hljs_projectorMode-pragma: #643820;
+			$fg-hljs_projectorMode-pragma: #643820;
+			$fg-hljs_projectorMode-pragma: #643820;
+			$fg-hljs_projectorMode-pragma: #643820;
+			$fg-hljs_projectorMode-pragma: #643820;
+			$fg-hljs_projectorMode-pragma: #643820;
 			.hljs-type, .hljs-variable, .hljs-name, .actionscript .hljs-title, .aspectj .hljs-annotation, .aspectj .hljs-title, .hljs-attribute, .hljs-change, .hljs-blockquote, .hljs-built_in {
 				color: #ffa;
 			}

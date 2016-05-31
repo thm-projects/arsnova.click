@@ -18,44 +18,14 @@
 @import "../global/styles/appearance.scss";
 @import "../global/styles/colors.scss";
 
-p.header-layout {
-	margin-left: 0;
-	margin-right: 0;
-}
-
 .arsnova-logo {
-	margin-left: 15px;
-	margin-bottom: 20px;
 	cursor: pointer;
 }
 
-.arsnova-logo img {
-	height: 8vw;
-}
-
-.kill-session-switch-wrapper {
-	text-align: center;
-	cursor: pointer;
-}
-
-.header-icon {
-	text-align: center;
-	font-size: 3vw;
-	margin-bottom: 10px;
-}
-
-.emergency-button-text {
-	position: relative;
-	top: -8px;
-	font-size: 2vw;
-	margin: 0;
-	line-height: 1em;
-	text-align: center;
-}
-
-.header-button {
-	text-align: center;
-	cursor: pointer;
+.header-titel {
+	p {
+		margin: 0;
+	}
 }
 
 .qr-code-container {
@@ -84,13 +54,4 @@ p.header-layout {
 	font-size: 3vh;
 	text-align: center;
 	line-height: 50px;
-}
-
-.sound-button-text {
-	position: relative;
-	top: -8px;
-	font-size: 2vw;
-	margin: 0;
-	line-height: 1em;
-	text-align: center;
 }

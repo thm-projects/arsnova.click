@@ -106,32 +106,6 @@ export function addQuestion(index) {
 	localData.addHashtag(questionItem);
 }
 
-export function calculateWindow() {
-	var hashtagLength = Router.current().params.quizName.length;
-	var headerTitel = $(".header-titel");
-	var fontSize = "";
-	var marginTopModifier = 0;
-
-	if (hashtagLength <= 10) {
-		if ($(document).width() < 1200) {
-			fontSize = "6vw";
-			marginTopModifier = 0.1;
-		} else {
-			fontSize = "5vw";
-			marginTopModifier = 0.2;
-		}
-	} else if (hashtagLength > 10 && hashtagLength <= 15) {
-		fontSize = "4vw";
-		marginTopModifier = 0.4;
-	} else {
-		fontSize = "2.5vw";
-		marginTopModifier = 0.6;
-	}
-
-	headerTitel.css("font-size", fontSize);
-	headerTitel.css("margin-top", $(".arsnova-logo").height() * marginTopModifier);
-}
-
 export function checkForValidQuestionText() {
 	var questionText = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
 	if (questionTextLengthWithoutMarkdownSyntax(questionText) < 5) {

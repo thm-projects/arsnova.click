@@ -18,6 +18,7 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import * as localData from '/lib/local_storage.js';
+import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount} from './lib.js';
 
@@ -33,10 +34,16 @@ Template.leaderBoard.onRendered(function () {
 	}
 	footerElements.calculateFooter();
 
+	if (localData.containsHashtag(Router.current().params.quizName)) {
+		calculateHeaderSize();
+	}
 	$(window).resize(function () {
 		if (Session.get("responsesCountOverride") && (Session.get("allMembersCount") - Session.get("maxResponseButtons") === 0)) {
 			Session.get("responsesCountOverride", false);
 		}
 		calculateButtonCount();
+		if (localData.containsHashtag(Router.current().params.quizName)) {
+			calculateHeaderSize();
+		}
 	});
 });

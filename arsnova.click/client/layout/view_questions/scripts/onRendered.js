@@ -19,12 +19,13 @@ import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.createQuestionView.onRendered(function () {
-	lib.calculateWindow();
-	$(window).resize(lib.calculateWindow());
+	calculateHeaderSize();
+	$(window).resize(calculateHeaderSize);
 
 	let index;
 	lib.subscriptionHandler = Tracker.autorun(()=> {

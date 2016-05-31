@@ -18,10 +18,13 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.createTimerView.onRendered(function () {
+	calculateHeaderSize();
+	$(window).resize(calculateHeaderSize);
 	let index = EventManagerCollection.findOne().questionIndex;
 	lib.createSlider(index);
 	lib.setSlider(index);

@@ -21,6 +21,7 @@ import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as localData from '/lib/local_storage.js';
+import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount} from './lib.js';
 
@@ -30,9 +31,15 @@ Template.liveResults.onRendered(()=> {
 	}
 	Session.set("LearnerCountOverride", false);
 	calculateButtonCount();
+	if (localData.containsHashtag(Router.current().params.quizName)) {
+		calculateHeaderSize();
+	}
 	$(window).resize(function () {
 		calculateButtonCount();
 		Session.set("LearnerCountOverride", false);
+		if (localData.containsHashtag(Router.current().params.quizName)) {
+			calculateHeaderSize();
+		}
 	});
 
 	footerElements.removeFooterElements();

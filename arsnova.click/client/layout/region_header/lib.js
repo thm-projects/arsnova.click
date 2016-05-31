@@ -47,3 +47,41 @@ export function calculateTitelHeight() {
 		marginTop: fixedTop.outerHeight()
 	};
 }
+
+export function calculateHeaderSize() {
+	var hashtagLength = Router.current().params.quizName.length;
+	var fontSize = "";
+	let logoHeight = 0;
+
+	if ($(document).width() > $(document).height()) {
+		logoHeight = "8vw";
+	} else {
+		logoHeight = "8vh";
+	}
+	$('.arsnova-logo img').css("height", logoHeight);
+
+	if (hashtagLength <= 15) {
+		if ($(document).width() > $(document).height()) {
+			if ($(document).width() < 1200) {
+				fontSize = "6vw";
+			} else {
+				fontSize = "5vw";
+			}
+		} else {
+			fontSize = "5vh";
+		}
+	} else if (hashtagLength <= 20) {
+		if ($(document).width() > $(document).height()) {
+			fontSize = "5.5vw";
+		} else {
+			fontSize = "4vh";
+		}
+	} else {
+		if ($(document).width() > $(document).height()) {
+			fontSize = "5vw";
+		} else {
+			fontSize = "3vh";
+		}
+	}
+	$(".header-titel").css({"font-size": fontSize, "line-height": $('.arsnova-logo').height() + "px"});
+}

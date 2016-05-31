@@ -18,6 +18,7 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import * as localData from '/lib/local_storage.js';
+import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount} from './lib.js';
 
@@ -25,41 +26,8 @@ Template.memberlist.onRendered(function () {
 	Session.set("learnerCountOverride", false);
 	calculateButtonCount();
 
-	var calculateFontSize = function () {
-		var hashtagLength = Router.current().params.quizName.length;
-		//take the hastag in the middle of the logo
-		var titelMarginTop = $(".arsnova-logo").height();
-
-		if (hashtagLength <= 10) {
-			if ($(document).width() < 992) {
-				$(".hashtag_in_title").css("font-size", "6vw");
-			} else {
-				$(".hashtag_in_title").css("font-size", "3vw");
-			}
-			$(".header-titel").css("font-size", "5vw");
-			if ($(document).width() >= 1200) {
-				$(".header-titel").css("margin-top", titelMarginTop * 0.2);
-			}
-		} else if (hashtagLength > 10 && hashtagLength <= 15) {
-			if ($(document).width() < 992) {
-				$(".hashtag_in_title").css("font-size", "6vw");
-			} else {
-				$(".hashtag_in_title").css("font-size", "3vw");
-			}
-			$(".header-titel").css("font-size", "4vw");
-			$(".header-titel").css("margin-top", titelMarginTop * 0.4);
-		} else {
-			if ($(document).width() < 992) {
-				$(".hashtag_in_title").css("font-size", "4vw");
-			} else {
-				$(".hashtag_in_title").css("font-size", "2vw");
-			}
-
-			$(".header-titel").css("font-size", "2.5vw");
-			$(".header-titel").css("margin-top", titelMarginTop * 0.6);
-		}
-	}();
-	$(window).resize(calculateFontSize);
+	calculateHeaderSize();
+	$(window).resize(calculateHeaderSize);
 
 	footerElements.removeFooterElements();
 	if (localData.containsHashtag(Router.current().params.quizName)) {

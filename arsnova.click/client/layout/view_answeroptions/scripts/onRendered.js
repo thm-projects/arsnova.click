@@ -19,6 +19,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
@@ -27,8 +28,8 @@ Template.createAnswerOptions.onRendered(function () {
 		var answerOptionsHeight = $(".container").height() - $(".row-landingpage-buttons").outerHeight(true) - $(".titel-relative").outerHeight(true);
 		$('.answer-options').css("height", answerOptionsHeight);
 	};
-	$(window).resize(calculateHeight);
-	calculateHeight();
+	calculateHeaderSize();
+	$(window).resize(calculateHeaderSize);
 
 	let index;
 	lib.subscriptionHandler = Tracker.autorun(()=> {

@@ -391,12 +391,16 @@
 		$fg-footer-info-bar-active-hovered: #6aa05d;
 	}
 
+	body {
+		background-color: $background-color;
+	}
+	*:fullscreen,
+	*:-webkit-full-screen,
+	*:-moz-full-screen {
+		background-color: $background-color;
+	}
+
 	.#{$name} {
-		*:fullscreen,
-		*:-webkit-full-screen,
-		*:-moz-full-screen {
-			background-color: $background-color;
-		}
 		.text-light, a.text-light, a:hover.text-light, a:active.text-light, a:visited.text-light, a:focus.text-light {
 			color: $fg-text-light;
 		}

@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {validationTrackerHandle} from './lib.js';
 
 Template.createTimerView.onDestroyed(function () {
 	var body = $('body');

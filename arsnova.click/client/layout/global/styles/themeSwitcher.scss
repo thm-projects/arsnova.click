@@ -1209,11 +1209,11 @@
 		}
 		.splashscreen {
 			.modal-content {
+				background: $splashscreen-background-color;
 				.modal-header {
 					color: $splash-screen-header-color;
 				}
 				.modal-body {
-					background: $splashscreen-background-color;
 					color: $splashscreen-foreground-color;
 					a, a:hover, a:active, a:visited, a:focus, p {
 						color: $splashscreen-foreground-color !important;

@@ -7,16 +7,16 @@
 	$fg_quiz-name: #ffd700;
 	$fg_titel: white;
 
-	$success: #008000; /* green */
-	$success-text-color: #ffffff; /* white */
-	$warning: #b22222; /* firebrick */
-	$warning-text-color: #ffffff; /* white */
-	$info: #663399; /* rebeccapurple */
-	$info-text-color: #ffffff; /* white */
-	$default: #808080; /* grey */
-	$default-text-color: #ffffff; /* white */
+	$success: #008000;
+	$success-text-color: #ffffff;
+	$warning: #b22222;
+	$warning-text-color: #ffffff;
+	$info: #663399;
+	$info-text-color: #ffffff;
+	$default: #808080;
+	$default-text-color: #ffffff;
 
-	$background-color: #4682b4; /* steelblue */
+	$background-color: #4682b4;
 	$button-shadow: black;
 
 	$bg-nav-row: $background-color;
@@ -35,16 +35,16 @@
 	$bg-questionScrollPane-active-remove-question-hovered: red;
 	$fg-questionScrollPane-active-remove-question-hovered: white;
 
-	$disabled-button-background: #808080; /* grey */
+	$disabled-button-background: #808080;
 
-	$placeholder-color: #808080; /* grey */
-	$input-background-color: #ffd700; /* gold */
+	$placeholder-color: #808080;
+	$input-background-color: #ffd700;
 	$input-foreground-color: black;
-	$input-group-letter-color: #2f4f4f; /* darkslategrey */
+	$input-group-letter-color: #2f4f4f;
 
 	$bg-footer: $background-color;
-	$footer-background-color: #dcdcdc; /*gainsboro */
-	$footer-text-color: #000000; /* black */
+	$footer-background-color: #dcdcdc;
+	$footer-text-color: #000000;
 	$fg-footer-info-bar: white;
 	$fg-footer-info-bar-hovered: darken($fg-footer-info-bar, 30);
 	$fg-footer-info-bar-active: #00CC00;
@@ -56,7 +56,7 @@
 	$fg-footer-element-activated: $success;
 	$fg-footer-element-activated-hovered: $success;
 
-	$slider-color: #008000; /* green */
+	$slider-color: #008000;
 
 	$progress-bar-success-color: green;
 	$progress-bar-read-confirmation: darkorange;
@@ -65,17 +65,17 @@
 	$bg_progress-bar: white;
 	$fg_progress-bar: black;
 
-	$splash-screen-header-color: #2f4f4f; /* darkslategrey */
-	$splash-screen-body-color: #2f4f4f; /* darkslategrey */
-	$splashscreen-background-color: #98fb98; /* palegreen */
+	$splash-screen-header-color: #2f4f4f;
+	$splash-screen-body-color: #2f4f4f;
+	$splashscreen-background-color: #98fb98;
 	$splashscreen-foreground-color: black;
-	$splashscreen-question-and-answer-background-color: $splashscreen-background-color; /* palegreen */
-	$splashscreen-question-preview-background-color: $splashscreen-background-color; /* palegreen */
-	$splashscreen-reading-confirmed-background-color: $splashscreen-background-color; /* palegreen */
-	$splashscreen-show-hashtags-background-color: $splashscreen-background-color; /* palegreen */
-	$splashscreen-sound-config-background-color: $splashscreen-background-color; /* palegreen */
+	$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+	$splashscreen-question-preview-background-color: $splashscreen-background-color;
+	$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+	$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+	$splashscreen-sound-config-background-color: $splashscreen-background-color;
 	$splashscreen-sound-config-button-background-color: $success;
-	$splashscreen-delete-background-color: $splashscreen-background-color; /* palegreen */
+	$splashscreen-delete-background-color: $splashscreen-background-color;
 	$splash-screen-error-message-background-color: white;
 	$splash-screen-error-message-button-background-color: $success;
 	$splash-screen-error-message-button-foreground-color: white;
@@ -94,16 +94,10 @@
 
 	$bg-previewText: white;
 
-	$fg-hljs: #f0f0f0;
-	$bg-hljs: black;
-	$border-hljs-line-numbers: #ccc;
-	$fg-hljs-line-numbers: #999;
-	$bg-hljs-pre: white;
-	$fg-hljs-comment: #006a00;
-	$fg-lockquote: #394a59;
 	$fg-js-my-hash: black;
 	$bg-js-my-hash: #ffffe0;
-	$box-shadow-markdown: black;
+	$bg-js-my-hash-hovered: lighten($bg-js-my-hash, 20);
+	$bg-js-my-hash-active: darken($bg-js-my-hash, 10);
 
 	$colorChangingArs0: white;
 	$colorChangingArs25: $warning;
@@ -160,6 +154,147 @@
 	$border-qr-code-container-close-icon: black;
 	$background-qr-code-container-close-icon: white;
 	$fg-qr-code-label: black;
+
+	$box-shadow-markdown: black;
+	$fg-hljs-comment: #006a00;
+	$fg-lockquote: #394a59;
+	$border-hljs-line-numbers: #ccc;
+	$fg-hljs: #f0f0f0;
+	$bg-hljs: black;
+	$fg-hljs-line-numbers: #999;
+	$bg-hljs-pre: white;
+	$fg-hljs_keyword: #aa0d91;
+	$fg-hljs_literal: #aa0d91;
+	$fg-hljs_nginx-title: #aa0d91;
+	$fg-hljs_method: #008;
+	$fg-hljs_list-title: #008;
+	$fg-hljs_tag-title: #008;
+	$fg-hljs_setting-value: #008;
+	$fg-hljs_winutils: #008;
+	$fg-hljs_tex-command: #008;
+	$fg-hljs_http-title: #008;
+	$fg-hljs_request: #008;
+	$fg-hljs_status: #008;
+	$fg-hljs_name: #008;
+	$fg-hljs_envvar: #660;
+	$fg-hljs_tex-special: #660;
+	$fg-hljs_string: #c41a16;
+	$fg-hljs_tag-value: #080;
+	$fg-hljs_cdata: #080;
+	$fg-hljs_filter-argument: #080;
+	$fg-hljs_attr_selector: #080;
+	$fg-hljs_apache-cbracket: #080;
+	$fg-hljs_date: #080;
+	$fg-hljs_regexp: #080;
+	$fg-hljs_sub-identifier: #1c00cf;
+	$fg-hljs_pi: #1c00cf;
+	$fg-hljs_tag: #1c00cf;
+	$fg-hljs_tag-keyword: #1c00cf;
+	$fg-hljs_decorator: #1c00cf;
+	$fg-hljs_ini-title: #1c00cf;
+	$fg-hljs_shebang: #1c00cf;
+	$fg-hljs_prompt: #1c00cf;
+	$fg-hljs_hexcolor: #1c00cf;
+	$fg-hljs_rule-value: #1c00cf;
+	$fg-hljs_symbol: #1c00cf;
+	$fg-hljs_symbol-string: #1c00cf;
+	$fg-hljs_number: #1c00cf;
+	$fg-hljs_css-function: #1c00cf;
+	$fg-hljs_function-title: #1c00cf;
+	$fg-hljs_coffeescript-attribute: #1c00cf;
+	$fg-hljs_class-title: #5c2699;
+	$fg-hljs_smalltalk-class: #5c2699;
+	$fg-hljs_type: #5c2699;
+	$fg-hljs_typename: #5c2699;
+	$fg-hljs_tag-attribute: #5c2699;
+	$fg-hljs_doctype: #5c2699;
+	$fg-hljs_class-id: #5c2699;
+	$fg-hljs_built_in: #5c2699;
+	$fg-hljs_setting: #5c2699;
+	$fg-hljs_params: #5c2699;
+	$fg-hljs_clojure-attribute: #5c2699;
+	$fg-hljs_variable: #3f6e74;
+	$fg-hljs_css-tag: #000;
+	$fg-hljs_rule-property: #000;
+	$fg-hljs_pseudo: #000;
+	$fg-hljs_subst: #000;
+	$fg-hljs_css-class: #9b703f;
+	$fg-hljs_css-id: #9b703f;
+	$fg-hljs_value-important: #ff7700;
+	$fg-hljs_rule-keyword: #c5af75;
+	$fg-hljs_annotation: #9b859d;
+	$fg-hljs_apache-sqbracket: #9b859d;
+	$fg-hljs_nginx-build_in: #9b859d;
+	$fg-hljs_preprocessor: #643820;
+	$fg-hljs_preprocessor-ALL: #643820;
+	$fg-hljs_pragma: #643820;
+	$fg-hljs_formula: #eee;
+	$fg-hljs_diff-header: #808080;
+	$fg-hljs_chunk: #808080;
+	$fg-hljs_pragma: #bccff9;
+	$fg-hljs_addition: #baeeba;
+	$fg-hljs_deletion: #ffc8bd;
+	$fg-hljs_method-id: #000;
+	$fg-hljs_projectorMode-SPAN: inherit;
+	$bg-hljs_projectorMode-SPAN: inherit;
+	$fg-hljs_projectorMode-pre: white;
+	$bg-hljs_projectorMode-pre: #333;
+	$fg-hljs_projectorMode-hljs: white;
+	$bg-hljs_projectorMode-hljs: #333;
+	$fg-hljs_projectorMode-tag: #62c8f3;
+	$fg-hljs_projectorMode-ini-title: #62c8f3;
+	$fg-hljs_projectorMode-id: #ade5fc;
+	$fg-hljs_projectorMode-cbracket: #ade5fc;
+	$fg-hljs_projectorMode-tag-value: #ade5fc;
+	$fg-hljs_projectorMode-string: #a2fca2;
+	$fg-hljs_projectorMode-bullet: #a2fca2;
+	$fg-hljs_projectorMode-type: #ffa;
+	$fg-hljs_projectorMode-variable: #ffa;
+	$fg-hljs_projectorMode-name: #ffa;
+	$fg-hljs_projectorMode-actionscript-title: #ffa;
+	$fg-hljs_projectorMode-aspectj-annotation: #ffa;
+	$fg-hljs_projectorMode-aspectj-title: #ffa;
+	$fg-hljs_projectorMode-attribute: #ffa;
+	$fg-hljs_projectorMode-change: #ffa;
+	$fg-hljs_projectorMode-blockquote: #ffa;
+	$fg-hljs_projectorMode-built_in: #ffa;
+	$fg-hljs_projectorMode-number: #d36363;
+	$fg-hljs_projectorMode-hexcolor: #d36363;
+	$fg-hljs_projectorMode-link_label: #d36363;
+	$fg-hljs_projectorMode-link_reference: #d36363;
+	$fg-hljs_projectorMode-keyword: #fcc28c;
+	$fg-hljs_projectorMode-literal: #fcc28c;
+	$fg-hljs_projectorMode-constant: #fcc28c;
+	$fg-hljs_projectorMode-css-tag: #fcc28c;
+	$fg-hljs_projectorMode-typename: #fcc28c;
+	$fg-hljs_projectorMode-winutils: #fcc28c;
+	$fg-hljs_projectorMode-comment: #888;
+	$fg-hljs_projectorMode-cdata: #888;
+	$fg-hljs_projectorMode-preprocessor: #888;
+	$fg-hljs_projectorMode-annotation: #888;
+	$fg-hljs_projectorMode-decorator: #888;
+	$fg-hljs_projectorMode-doctype: #888;
+	$fg-hljs_projectorMode-deletion: #888;
+	$fg-hljs_projectorMode-shebang: #888;
+	$fg-hljs_projectorMode-apache-sqbracket: #888;
+	$fg-hljs_projectorMode-text-formula: #888;
+	$fg-hljs_projectorMode-header: #888;
+	$fg-hljs_projectorMode-holzontal_rule: #888;
+	$fg-hljs_projectorMode-code: #888;
+	$fg-hljs_projectorMode-regexp: #fc9b9b;
+	$fg-hljs_projectorMode-attr_selector: #fc9b9b;
+	$fg-hljs_projectorMode-pi: #fc9b9b;
+	$fg-hljs_projectorMode-chunk: #fc9b9b;
+	$fg-hljs_projectorMode-actionscript-type: #fc9b9b;
+	$fg-hljs_projectorMode-pragma: #fc9b9b;
+	$fg-hljs_projectorMode-http-attribute: #fc9b9b;
+	$fg-hljs_projectorMode-addition: #333;
+	$bg-hljs_projectorMode-addition: #a2fca2;
+	$bg-hljs_projectorMode-deletion: #fc9b9b;
+	$fg-hljs_projectorMode-a: inherit;
+	$fg-hljs_projectorMode-tag-attribute: inherit;
+	$fg-hljs_projectorMode-a-focus: inherit;
+	$fg-hljs_projectorMode-a-hover: inherit;
 
 	@if ($name == "theme-dark") {
 		$success: #00CD00; /* green */
@@ -504,78 +639,6 @@
 		.hljs-comment {
 			color: $fg-hljs-comment;
 		}
-		$fg-hljs_keyword: #aa0d91;
-		$fg-hljs_literal: #aa0d91;
-		$fg-hljs_nginx-title: #aa0d91;
-		$fg-hljs_method: #008;
-		$fg-hljs_list-title: #008;
-		$fg-hljs_tag-title: #008;
-		$fg-hljs_setting-value: #008;
-		$fg-hljs_winutils: #008;
-		$fg-hljs_tex-command: #008;
-		$fg-hljs_http-title: #008;
-		$fg-hljs_request: #008;
-		$fg-hljs_status: #008;
-		$fg-hljs_name: #008;
-		$fg-hljs_envvar: #660;
-		$fg-hljs_tex-special: #660;
-		$fg-hljs_string: #c41a16;
-		$fg-hljs_tag-value: #080;
-		$fg-hljs_cdata: #080;
-		$fg-hljs_filter-argument: #080;
-		$fg-hljs_attr_selector: #080;
-		$fg-hljs_apache-cbracket: #080;
-		$fg-hljs_date: #080;
-		$fg-hljs_regexp: #080;
-		$fg-hljs_sub-identifier: #1c00cf;
-		$fg-hljs_pi: #1c00cf;
-		$fg-hljs_tag: #1c00cf;
-		$fg-hljs_tag-keyword: #1c00cf;
-		$fg-hljs_decorator: #1c00cf;
-		$fg-hljs_ini-title: #1c00cf;
-		$fg-hljs_shebang: #1c00cf;
-		$fg-hljs_prompt: #1c00cf;
-		$fg-hljs_hexcolor: #1c00cf;
-		$fg-hljs_rule-value: #1c00cf;
-		$fg-hljs_symbol: #1c00cf;
-		$fg-hljs_symbol-string: #1c00cf;
-		$fg-hljs_number: #1c00cf;
-		$fg-hljs_css-function: #1c00cf;
-		$fg-hljs_function-title: #1c00cf;
-		$fg-hljs_coffeescript-attribute: #1c00cf;
-		$fg-hljs_class-title: #5c2699;
-		$fg-hljs_smalltalk-class: #5c2699;
-		$fg-hljs_type: #5c2699;
-		$fg-hljs_typename: #5c2699;
-		$fg-hljs_tag-attribute: #5c2699;
-		$fg-hljs_doctype: #5c2699;
-		$fg-hljs_class-id: #5c2699;
-		$fg-hljs_built_in: #5c2699;
-		$fg-hljs_setting: #5c2699;
-		$fg-hljs_params: #5c2699;
-		$fg-hljs_clojure-attribute: #5c2699;
-		$fg-hljs_variable: #3f6e74;
-		$fg-hljs_css-tag: #000;
-		$fg-hljs_rule-property: #000;
-		$fg-hljs_pseudo: #000;
-		$fg-hljs_subst: #000;
-		$fg-hljs_css-class: #9b703f;
-		$fg-hljs_css-id: #9b703f;
-		$fg-hljs_value-important: #ff7700;
-		$fg-hljs_rule-keyword: #c5af75;
-		$fg-hljs_annotation: #9b859d;
-		$fg-hljs_apache-sqbracket: #9b859d;
-		$fg-hljs_nginx-build_in: #9b859d;
-		$fg-hljs_preprocessor: #643820;
-		$fg-hljs_preprocessor-ALL: #643820;
-		$fg-hljs_pragma: #643820;
-		$fg-hljs_formula: #eee;
-		$fg-hljs_diff-header: #808080;
-		$fg-hljs_chunk: #808080;
-		$fg-hljs_pragma: #bccff9;
-		$fg-hljs_addition: #baeeba;
-		$fg-hljs_deletion: #ffc8bd;
-		$fg-hljs_method-id: #000;
 		.hljs-keyword {
 			color: $fg-hljs_keyword;
 		}
@@ -796,14 +859,6 @@
 		.method .hljs-id {
 			color: $fg-hljs_method-id;
 		}
-		$fg-hljs_projectorMode-SPAN: inherit;
-		$bg-hljs_projectorMode-SPAN: inherit;
-		$fg-hljs_projectorMode-pre: white;
-		$bg-hljs_projectorMode-pre: #333;
-		$fg-hljs_projectorMode-hljs: white;
-		$bg-hljs_projectorMode-hljs: #333;
-		$fg-hljs_projectorMode-tag: #62c8f3;
-		$fg-hljs_projectorMode-ini-title: #62c8f3;
 		.projector-mode {
 			span[class^='hljs'], span[class*=' hljs'] {
 				color: $fg-hljs_projectorMode-SPAN;
@@ -827,58 +882,158 @@
 			.ini .hljs-title {
 				color: $fg-hljs_projectorMode-ini-title;
 			}
-			$fg-hljs_projectorMode-pragma: #643820;
-			$fg-hljs_projectorMode-pragma: #643820;
-			$fg-hljs_projectorMode-pragma: #643820;
-			.hljs-id, .hljs-cbracket, .hljs-tag .hljs-value {
-				color: #ade5fc;
+			.hljs-id {
+				color: $fg-hljs_projectorMode-id;
 			}
-			$fg-hljs_projectorMode-pragma: #643820;
-			$fg-hljs_projectorMode-pragma: #643820;
-			.hljs-string, .hljs-bullet {
-				color: #a2fca2;
+			.hljs-cbracket {
+				color: $fg-hljs_projectorMode-cbracket;
 			}
-			$fg-hljs_projectorMode-pragma: #643820;
-			$fg-hljs_projectorMode-pragma: #643820;
-			$fg-hljs_projectorMode-pragma: #643820;
-			$fg-hljs_projectorMode-pragma: #643820;
-			$fg-hljs_projectorMode-pragma: #643820;
-			$fg-hljs_projectorMode-pragma: #643820;
-			$fg-hljs_projectorMode-pragma: #643820;
-			$fg-hljs_projectorMode-pragma: #643820;
-			$fg-hljs_projectorMode-pragma: #643820;
-			$fg-hljs_projectorMode-pragma: #643820;
-			.hljs-type, .hljs-variable, .hljs-name, .actionscript .hljs-title, .aspectj .hljs-annotation, .aspectj .hljs-title, .hljs-attribute, .hljs-change, .hljs-blockquote, .hljs-built_in {
-				color: #ffa;
+			.hljs-tag .hljs-value {
+				color: $fg-hljs_projectorMode-tag-value;
 			}
-			.hljs-number, .hljs-hexcolor, .hljs-link_label, .hljs-link_reference {
-				color: #d36363;
+			.hljs-string {
+				color: $fg-hljs_projectorMode-string;
 			}
-			.hljs-keyword, .hljs-literal, .hljs-constant, .css .hljs-tag, .hljs-typename, .hljs-winutils {
-				color: #fcc28c;
+			.hljs-bullet {
+				color: $fg-hljs_projectorMode-bullet;
 			}
-			.hljs-comment, .hljs-cdata, .hljs-preprocessor, .hljs-annotation, .hljs-decorator, .hljs-doctype, .hljs-deletion, .hljs-shebang, .apache .hljs-sqbracket, .tex .hljs-formula, .hljs-header, .hljs-horizontal_rule, .hljs-code {
-				color: #888;
+			.hljs-type {
+				color: $fg-hljs_projectorMode-type;
 			}
-			.hljs-regexp, .hljs-attr_selector {
-				color: #c6b4f0;
+			.hljs-variable {
+				color: $fg-hljs_projectorMode-variable;
 			}
-			.hljs-important, .hljs-doctype, .hljs-pi, .hljs-chunk, .actionscript .hljs-type, .hljs-shebang, .hljs-pragma, .http .hljs-attribute {
-				color: #fc9b9b;
+			.hljs-name {
+				color: $fg-hljs_projectorMode-name;
+			}
+			.actionscript .hljs-title {
+				color: $fg-hljs_projectorMode-actionscript-title;
+			}
+			.aspectj .hljs-annotation {
+				color: $fg-hljs_projectorMode-aspectj-annotation;
+			}
+			.aspectj .hljs-title{
+				color: $fg-hljs_projectorMode-aspectj-title;
+			}
+			.hljs-attribute {
+				color: $fg-hljs_projectorMode-attribute;
+			}
+			.hljs-change {
+				color: $fg-hljs_projectorMode-change;
+			}
+			.hljs-blockquote {
+				color: $fg-hljs_projectorMode-blockquote;
+			}
+			.hljs-built_in {
+				color: $fg-hljs_projectorMode-built_in;
+			}
+			.hljs-number {
+				color: $fg-hljs_projectorMode-number;
+			}
+			.hljs-hexcolor {
+				color: $fg-hljs_projectorMode-hexcolor;
+			}
+			.hljs-link_label {
+				color: $fg-hljs_projectorMode-link_label;
+			}
+			.hljs-link_reference {
+				color: $fg-hljs_projectorMode-link_reference;
+			}
+			.hljs-keyword {
+				color: $fg-hljs_projectorMode-keyword;
+			}
+			.hljs-literal {
+				color: $fg-hljs_projectorMode-literal;
+			}
+			.hljs-constant {
+				color: $fg-hljs_projectorMode-constant;
+			}
+			.css .hljs-tag {
+				color: $fg-hljs_projectorMode-css-tag;
+			}
+			.hljs-typename {
+				color: $fg-hljs_projectorMode-typename;
+			}
+			.hljs-winutils {
+				color: $fg-hljs_projectorMode-winutils;
+			}
+			.hljs-comment {
+				color: $fg-hljs_projectorMode-comment;
+			}
+			.hljs-cdata {
+				color: $fg-hljs_projectorMode-cdata;
+			}
+			.hljs-preprocessor {
+				color: $fg-hljs_projectorMode-preprocessor;
+			}
+			.hljs-annotation {
+				color: $fg-hljs_projectorMode-annotation;
+			}
+			.hljs-decorator {
+				color: $fg-hljs_projectorMode-decorator;
+			}
+			.hljs-doctype {
+				color: $fg-hljs_projectorMode-doctype;
 			}
 			.hljs-deletion {
-				background-color: #fc9b9b;
-				color: #333;
+				color: $fg-hljs_projectorMode-deletion;
+				background-color: $bg-hljs_projectorMode-deletion;
+			}
+			.hljs-shebang {
+				color: $fg-hljs_projectorMode-shebang;
+			}
+			.apache .hljs-sqbracket {
+				color: $fg-hljs_projectorMode-apache-sqbracket;
+			}
+			.tex .hljs-formula {
+				color: $fg-hljs_projectorMode-text-formula;
+			}
+			.hljs-header {
+				color: $fg-hljs_projectorMode-header;
+			}
+			.hljs-horizontal_rule {
+				color: $fg-hljs_projectorMode-holzontal_rule;
+			}
+			.hljs-code {
+				color: $fg-hljs_projectorMode-code;
+			}
+			.hljs-regexp {
+				color: $fg-hljs_projectorMode-regexp;
+			}
+			.hljs-attr_selector {
+				color: $fg-hljs_projectorMode-attr_selector;
+			}
+			.hljs-pi {
+				color: $fg-hljs_projectorMode-pi;
+			}
+			.hljs-chunk {
+				color: $fg-hljs_projectorMode-chunk;
+			}
+			.actionscript .hljs-type {
+				color: $fg-hljs_projectorMode-actionscript-type;
+			}
+			.hljs-pragma {
+				color: $fg-hljs_projectorMode-pragma;
+			}
+			.http .hljs-attribute {
+				color: $fg-hljs_projectorMode-http-attribute;
 			}
 			.hljs-addition {
-				background-color: #a2fca2;
-				color: #333;
+				color: $fg-hljs_projectorMode-addition;
+				background-color: $bg-hljs_projectorMode-addition;
 			}
-			.hljs a, .hljs-tag .hljs-attribute {
-				color: inherit;
+			.hljs a {
+				color: $fg-hljs_projectorMode-a;
 			}
-			.hljs a:focus, .hljs a:hover {
-				color: inherit;
+			.hljs-tag .hljs-attribute {
+				color: $fg-hljs_projectorMode-tag-attribute;
+			}
+			.hljs a:focus {
+				color: $fg-hljs_projectorMode-a-focus;
+				text-decoration: underline;
+			}
+			.hljs a:hover {
+				color: $fg-hljs_projectorMode-a-hover;
 				text-decoration: underline;
 			}
 		}
@@ -1017,9 +1172,6 @@
 				}
 			}
 		}
-		/*
-		 * library splashscreen colors
-		 */
 		.splashscreen {
 			.modal-header {
 				color: $splash-screen-header-color;
@@ -1057,10 +1209,10 @@
 					color: $fg-js-my-hash;
 					background-color: $bg-js-my-hash;
 					&:hover {
-						background-color: lighten($bg-js-my-hash, 20);
+						background-color: $bg-js-my-hash-hovered;
 					}
 					&:active {
-						background-color: darken($bg-js-my-hash, 10);
+						background-color: $bg-js-my-hash-active;
 					}
 				}
 			}

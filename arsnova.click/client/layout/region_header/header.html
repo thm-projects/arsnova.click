@@ -19,20 +19,27 @@
 	<nav class="navbar navbar-fixed-top navbar-transparent navbar-gradient">
 		<div class="container-fluid">
 			<div class="row">
-				{{#if isInHomePathOrIsStudent}}
-					<div class="col-md-10 col-md-offset-1 header-title">
-						<div class="container-fluid center-block">
-							<div class="text-center text-size-medium logo-header-chars">
-								<a href="/{{getCurrentResetRoute}}">
-									<span class="color-changing-ars">a r s </span><span
-										class="color-changing-nova">n o v a </span>
-									<span class="color-changing-dot">.</span>
-									<span class="color-changing-click"> c l i c k</span>
-								</a>
-							</div>
-						</div>
-					</div>
-				{{else}}
+                {{#if isInHomePathOrIsStudent}}
+                    <div class="col-md-10 col-md-offset-1 header-title">
+                        <div class="container-fluid center-block">
+                            <div class="text-center text-size-medium logo-header-chars">
+                                {{#if isInActiveQuizAndIsStudent}}
+                                    <a href="/{{getCurrentResetRoute}}">
+                                        <span class="color-changing-ars">a r s </span>
+                                        <span class="color-changing-nova">n o v a </span>
+                                        <span class="color-changing-dot">.</span>
+                                        <span class="color-changing-click"> c l i c k</span>
+                                    </a>
+                                {{else}}
+                                    <span class="color-changing-ars">a r s </span>
+                                    <span class="color-changing-nova">n o v a </span>
+                                    <span class="color-changing-dot">.</span>
+                                    <span class="color-changing-click"> c l i c k</span>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                {{else}}
                     <div class="col-md-12 header-layout">
                         <div class="row nav-row">
                             <div class="col-xs-2">

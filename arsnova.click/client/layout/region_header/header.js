@@ -41,6 +41,9 @@ Template.header.helpers({
 		}
 		return !localData.containsHashtag(Router.current().params.quizName);
 	},
+	isInActiveQuizAndIsStudent: function () {
+		return Router.current().params.quizName && !localData.containsHashtag(Router.current().params.quizName);
+	},
 	currentHashtag: function () {
 		return Router.current().params.quizName;
 	},

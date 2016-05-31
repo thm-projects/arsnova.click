@@ -20,6 +20,7 @@ import {SubsManager} from 'meteor/meteorhacks:subs-manager';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
@@ -190,15 +191,19 @@ Router.route("/:quizName", {
 });
 
 Router.route('/:quizName/resetToHome', function () {
+	if (EventManagerCollection.findOne() && localData.containsHashtag(Router.current().params.quizName)) {
+		Meteor.call("EventManagerCollection.clear", Router.current().params.quizName);
+	}
+	if (!localData.containsHashtag(Router.current().params.quizName)) {
+		Meteor.call("MemberListCollection.removeLearner", Router.current().params.quizName, MemberListCollection.findOne({nick: localStorage[Router.current().params.quizName + "nick"]})._id);
+	}
+
 	delete localStorage[Router.current().params.quizName + "nick"];
 	delete localStorage.slider;
 	delete localStorage.lastPage;
 
 	delete sessionStorage.overrideValidQuestionRedirect;
 
-	if (EventManagerCollection.findOne() && localData.containsHashtag(Router.current().params.quizName)) {
-		Meteor.call("EventManagerCollection.clear", Router.current().params.quizName);
-	}
 	Router.go("/");
 });
 

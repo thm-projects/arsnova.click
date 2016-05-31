@@ -18,6 +18,7 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import * as lib from './lib.js';
 
 Template.createQuestionView.helpers({
 	//Get question from Sessions-Collection if it already exists
@@ -31,30 +32,6 @@ Template.createQuestionView.helpers({
 		if (!EventManagerCollection.findOne()) {
 			return;
 		}
-		return [
-			{
-				id: "SingleChoiceQuestion",
-				translationName: "view.questions.single_choice_question",
-				selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SingleChoiceQuestion" ? 'selected' : ""
-			},
-			{
-				id: "MultipleChoiceQuestion",
-				translationName: "view.questions.multiple_choice_question",
-				selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "MultipleChoiceQuestion" ? 'selected' : ""
-			},
-			/*
-			Disabled because not yet implemented!
-			{
-				id: "RangedQuestion",
-			 	translationName: "view.questions.ranged_question",
-				selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "RangedQuestion" ? 'selected' : ""
-			},
-			*/
-			{
-				id: "SurveyQuestion",
-				translationName: "view.questions.survey_question",
-				selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SurveyQuestion" ? 'selected' : ""
-			}
-		];
+		return lib.getQuestionTypes();
 	}
 });

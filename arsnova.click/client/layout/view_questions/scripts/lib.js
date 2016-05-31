@@ -180,3 +180,31 @@ export function checkForMarkdown() {
 		}
 	}
 }
+
+export function getQuestionTypes() {
+	return [
+		{
+			id: "SingleChoiceQuestion",
+			translationName: "view.questions.single_choice_question",
+			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SingleChoiceQuestion" ? 'selected' : ""
+		},
+		{
+			id: "MultipleChoiceQuestion",
+			translationName: "view.questions.multiple_choice_question",
+			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "MultipleChoiceQuestion" ? 'selected' : ""
+		},
+		/*
+		 Disabled because not yet implemented!
+		 {
+		 id: "RangedQuestion",
+		 translationName: "view.questions.ranged_question",
+		 selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "RangedQuestion" ? 'selected' : ""
+		 },
+		 */
+		{
+			id: "SurveyQuestion",
+			translationName: "view.questions.survey_question",
+			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SurveyQuestion" ? 'selected' : ""
+		}
+	];
+}

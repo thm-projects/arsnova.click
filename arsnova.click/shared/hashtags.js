@@ -54,13 +54,13 @@ Meteor.methods({
 	'HashtagsCollection.setDefaultTheme': function (hashtag, themeName = "theme-default") {
 		new SimpleSchema({hashtag: hashtagSchema, theme: themeSchema}).validate({hashtag: hashtag, theme: themeName});
 
-		if (!HashtagsCollection.findOne({hashtag: hashtag})) {
-			throw new Meteor.Error('HashtagsCollection.setDefaultTheme', 'session_not_exists');
-		}
-
 		let queryParam = {};
 		if (Meteor.isServer) {
 			queryParam.hashtag = hashtag;
+		}
+
+		if (!HashtagsCollection.findOne(queryParam)) {
+			throw new Meteor.Error('HashtagsCollection.setDefaultTheme', 'session_not_exists');
 		}
 		HashtagsCollection.update(queryParam, {
 			$set: {

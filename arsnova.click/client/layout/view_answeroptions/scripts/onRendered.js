@@ -24,10 +24,6 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.createAnswerOptions.onRendered(function () {
-	var calculateHeight = function calculateHeight() {
-		var answerOptionsHeight = $(".container").height() - $(".row-landingpage-buttons").outerHeight(true) - $(".titel-relative").outerHeight(true);
-		$('.answer-options').css("height", answerOptionsHeight);
-	};
 	calculateHeaderSize();
 	$(window).resize(calculateHeaderSize);
 

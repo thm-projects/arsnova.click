@@ -121,6 +121,10 @@ export class AbstractAnswerOption {
 		return this.getAnswerText().length > 0;
 	}
 
+	/**
+	 * Gets the validation error reason as a stackable array
+	 * @returns {Array} Contains an Object which holds the number of the current answerOption and the reason why the validation has failed
+	 */
 	getValidationStackTrace () {
 		return (this.getAnswerText().length === 0) ? [{occuredAt: {type: "answerOption", id: this.getAnswerOptionNumber()}, reason: "answer_text_empty"}] : [];
 	}

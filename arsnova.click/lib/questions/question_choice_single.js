@@ -48,6 +48,10 @@ export class SingleChoiceQuestion extends AbstractChoiceQuestion {
 		return super.isValid() && hasValidAnswer === 1;
 	}
 
+	/**
+	 * Gets the validation error reason from the question and all included answerOptions as a stackable array
+	 * @returns {Array} Contains an Object which holds the number of the current question and the reason why the validation has failed
+	 */
 	getValidationStackTrace () {
 		let hasValidAnswer = 0;
 		this.getAnswerOptionList().forEach(function (answeroption) {

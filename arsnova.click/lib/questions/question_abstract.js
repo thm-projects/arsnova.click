@@ -242,6 +242,10 @@ export class AbstractQuestion {
 		return answerOptionListValid && markdownChars[0] > 4 && markdownChars[0] < 10001 && this.getTimer() > 5 && this.getTimer() < 261;
 	}
 
+	/**
+	 * Gets the validation error reason from the question and all included answerOptions as a stackable array
+	 * @returns {Array} Contains an Object which holds the number of the current question and the reason why the validation has failed
+	 */
 	getValidationStackTrace () {
 		const result = [];
 		const markdownChars = this.getQuestionText().split().map(function (currentValue) {

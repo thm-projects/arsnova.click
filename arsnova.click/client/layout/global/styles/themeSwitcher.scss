@@ -412,6 +412,9 @@
 		a, a:hover, a:active, a:visited, a:focus {
 			color: $fg_a;
 		}
+		p, h4, ul {
+			color: $default-text-color;
+		}
 		.titel {
 			color: $fg_titel;
 		}

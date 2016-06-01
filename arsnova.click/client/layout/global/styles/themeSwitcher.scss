@@ -629,7 +629,8 @@
 			background-color: $input-background-color;
 		}
 		.previewText {
-			background-color: $bg-previewText;
+			background-color: $input-background-color;
+			height: 145px;
 		}
 		.check-mark-checked {
 			color: $check-mark-checked;

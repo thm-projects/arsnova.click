@@ -268,5 +268,9 @@ Template.showHashtagsSplashscreen.events({
 	"click #js-btn-showHashtagManagement": function () {
 		lib.hashtagSplashscreen.destroy();
 		Router.go("/hashtagmanagement");
+	},
+	"click #closeButton": function () {
+		$('.showHashtagsSplashscreen').remove();
+		$('.modal-backdrop').remove();
 	}
 });

@@ -31,11 +31,21 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button id="js-btn-showHashtagManagement" type="button"
-							class="btn btn-info btn-lg btn-answerOption">
-						<span class="glyphicon glyphicon-cog glyph-left" aria-hidden="true"></span>
-						<span class="ansBtn">{{_ "view.hashtag_management.session_management"}}</span>
-					</button>
+                    <div class="row">
+                        <div class="col-xs-6 hidden-sm hidden-md hidden-lg hidden-print">
+                            <button type="button" id="closeButton" class="btn btn-warning btn-lg btn-answerOption">
+                                <span class="ansBtn">{{_ "global.close_window"}}</span>
+                                <span class="glyphicon glyphicon-log-out glyph-right" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="col-xs-6 col-sm-12">
+                            <button id="js-btn-showHashtagManagement" type="button"
+                                    class="btn btn-info btn-lg btn-answerOption">
+                                <span class="glyphicon glyphicon-cog glyph-left" aria-hidden="true"></span>
+                                <span class="ansBtn">{{_ "view.hashtag_management.session_management"}}</span>
+                            </button>
+                        </div>
+                    </div>
 				</div>
 			</div>
 		</div>

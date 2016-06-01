@@ -303,6 +303,13 @@
 	$fg-quiz-summary-P: white;
 	$fg-quiz-summary-UL: white;
 
+	$bg-answer_row-answer_selected: #ffd700;
+	$fg-answer_row-answer_selected: black;
+	$bg-answer_row-button_purple_transition: #663399;
+	$fg-answer_row-button_purple_transition: white;
+	$bg-answer_row-button_green_transition: white;
+	$fg-answer_row-button_green_transition: #663399;
+
 	@if ($name == "theme-dark") {
 		$success: #00CD00; /* green */
 		$warning: #FF2222; /* firebrick */
@@ -330,6 +337,18 @@
 		$check-mark-unchecked: $warning;
 
 		$fg-warning: $warning;
+
+		$splashscreen-background-color: #6b6b6b;
+		$splashscreen-foreground-color: white;
+		$splash-screen-header-color: white;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-button-background-color: $success;
 	}
 
 	@if ($name == "theme-thm") {
@@ -341,6 +360,8 @@
 		$thmgray: #4a5c66;
 
 		$background-color: $thmgreen;
+		$bg-nav-row: $background-color;
+		$bg-container: $background-color;
 
 		$fg_quiz-name: #b5003f;
 		$default: #d3d3d3; /* light grey */
@@ -382,15 +403,25 @@
 		$default-text-color: black;
 		$fg-text-light: black;
 		$fg_text-dark: black;
-		$fg_a: #ffd700;
+		$fg_a: #337ab7;
 		$fg_quiz-name: #ffd700;
 		$fg_titel: black;
+		$fg-question-title: black;
 		$fg-theme_description: black;
 		$quiz-summary-row-color: $default-text-color;
 		$fg-quiz-summary-H4: $default-text-color;
 		$fg-quiz-summary-P: $default-text-color;
 		$fg-quiz-summary-UL: $default-text-color;
 		$fg-success: $success;
+		$splashscreen-background-color: #b3c8da;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-button-background-color: $success;
 	}
 
 	@if ($name == "theme-arsnova") {
@@ -402,6 +433,7 @@
 		$fg_a: white;
 		$fg_quiz-name: white;
 		$fg_titel: black;
+		$fg-question-title: black;
 		$fg-theme_description: black;
 		$default-text-color: black;
 		$fg-text-light: black;
@@ -416,16 +448,17 @@
 		$fg-success: darken($success, 5);
 	}
 
-	body {
-		background-color: $background-color;
-	}
-	*:fullscreen,
-	*:-webkit-full-screen,
-	*:-moz-full-screen {
-		background-color: $background-color;
-	}
-
 	.#{$name} {
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		background: $background-color;
+
+		*:fullscreen,
+		*:-webkit-full-screen,
+		*:-moz-full-screen {
+			background-color: $background-color;
+		}
 		.text-light, a.text-light, a:hover.text-light, a:active.text-light, a:visited.text-light, a:focus.text-light {
 			color: $fg-text-light;
 		}
@@ -1289,6 +1322,20 @@
 			}
 			ul {
 				color: $fg-quiz-summary-UL;
+			}
+		}
+		.answer-row {
+			.answer-selected{
+				background-color: $bg-answer_row-answer_selected !important;
+				color: $fg-answer_row-answer_selected !important;
+			}
+			.button-purple-transition {
+				background-color: $bg-answer_row-button_purple_transition;
+				color: $fg-answer_row-button_purple_transition;
+			}
+			.button-green-transition {
+				background-color: $bg-answer_row-button_green_transition;
+				color: $fg-answer_row-button_green_transition;
 			}
 		}
 	}

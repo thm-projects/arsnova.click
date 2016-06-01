@@ -24,14 +24,18 @@
 
 .question-title {
   font-size: 1.5em;
-  margin: 30px 0 0;
+  margin: 10px 0 0;
   padding: 5px 30px 0;
 }
 
 .question-wrapper {
-  overflow-x: hidden;
-  overflow-y: auto;
-  width: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	width: 100%;
+
+	.question-row {
+		margin-bottom: 20px;
+	}
 }
 
 .button-result-mc-letter {

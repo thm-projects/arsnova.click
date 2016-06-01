@@ -18,28 +18,30 @@
 <template name="liveResults">
 	{{> titel}}
 	<div id="liveResultsFrame">
-		<div class="row-padding-bottom">
-			{{#if isRunningQuestion}}{{#if isOwner}}
-				<div class="col-xs-3 top-bar-content">
-					<span class="glyphicon icon-top-bar glyphicon-user glyphicon-style center" aria-hidden="true">
-						<span class="titel">{{getCountStudents}}</span>
-					</span>
-				</div>
-				<div class="col-xs-6 text-center">
-					<div id="appTitle" class="titel subtitel-padding-top">{{_ votingText}}</div>
-				</div>
-				<div class="col-xs-3 top-bar-content">
-				<span class="glyphicon icon-top-bar glyphicon-hourglass glyphicon-style center" aria-hidden="true">
-					<span class="titel">{{getCountdown}}</span>
-				</span>
-				</div>
-			{{else}}
-				<div class=" titel-relative text-light text-center">
-					<div id="appTitle" class="titel margin-to-logo">{{votingText}}</div>
-				</div>
-			{{/if}}{{/if}}
-		</div>
-		<div class="question-wrapper">
+        {{#if isRunningQuestion}}
+            <div class="row-padding-bottom">
+                {{#if isOwner}}
+                    <div class="col-xs-3 top-bar-content">
+                        <span class="glyphicon icon-top-bar glyphicon-user glyphicon-style center" aria-hidden="true">
+                            <span class="titel">{{getCountStudents}}</span>
+                        </span>
+                    </div>
+                    <div class="col-xs-6 text-center">
+                        <div id="appTitle" class="titel subtitel-padding-top">{{_ votingText}}</div>
+                    </div>
+                    <div class="col-xs-3 top-bar-content">
+                    <span class="glyphicon icon-top-bar glyphicon-hourglass glyphicon-style center" aria-hidden="true">
+                        <span class="titel">{{getCountdown}}</span>
+                    </span>
+                    </div>
+                {{else}}
+                    <div class=" titel-relative text-light text-center">
+                        <div id="appTitle" class="titel margin-to-logo">{{votingText}}</div>
+                    </div>
+                {{/if}}
+            </div>
+        {{/if}}
+		<div class="col-xs-12 question-wrapper">
 			{{#each questionList}}
 				<div class="row question-row" id="question-row_{{displayIndex}}">
 					<div class="col-md-12">

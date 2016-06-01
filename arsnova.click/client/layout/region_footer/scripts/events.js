@@ -218,7 +218,7 @@ const clickEvents = {
 
 const defaultBackButtonBehavior = {
 	"click #backButton": function () {
-		history.back();
+		Router.go("/");
 	}
 };
 

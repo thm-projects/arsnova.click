@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
 import {Tracker} from 'meteor/tracker';
 import {Session} from 'meteor/session';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
@@ -100,7 +99,7 @@ export function addFooterElement(footerElement, priority = 100) {
 	if (!hasItem) {
 		footerElements.splice(priority, 0, footerElement);
 	}
-	Meteor.setTimeout(function () {
+	setTimeout(function () {
 		$('#' + footerElement.id).removeClass("error").removeClass("success");
 	}, 20);
 }
@@ -167,7 +166,7 @@ export function generateFooterElements() {
 	}
 	Session.set("footerElements", footerElements);
 	Session.set("hiddenFooterElements", hiddenFooterElements);
-	Meteor.setTimeout(function () {
+	setTimeout(function () {
 		updateStatefulFooterElements.invalidate();
 	}, 20);
 	return footerElements;
@@ -234,8 +233,8 @@ export function calculateFooterFontSize() {
 export function calculateFooter() {
 	$(window).on("resize", function () {
 		generateFooterElements();
-		Meteor.setTimeout(calculateFooterFontSize, 20);
+		setTimeout(calculateFooterFontSize, 20);
 	});
 	generateFooterElements();
-	Meteor.setTimeout(calculateFooterFontSize, 20);
+	setTimeout(calculateFooterFontSize, 20);
 }

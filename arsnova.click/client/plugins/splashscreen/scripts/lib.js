@@ -61,9 +61,10 @@ export class Splashscreen {
 		this.created();
 		this.isCreated = true;
 
-		let duplicateEntry = $('#' + options.templateName + "_" + options.instanceId);
+		let duplicateEntry = $('#' + this.options.templateName + "_" + this.options.instanceId);
 		if (duplicateEntry.length > 0) {
 			duplicateEntry.remove();
+			$('.modal-backdrop').remove();
 		}
 
 		this.rendered();
@@ -92,7 +93,7 @@ export class Splashscreen {
 
 		this.templateInstance = Blaze.render(Template[this.options.templateName], document.getElementById("theme-wrapper"));
 		$(this.templateInstance.firstNode()).addClass(this.options.templateName).attr("id", this.options.templateName + "_" + this.options.instanceId);
-		this.templateSelector = $('#' + this.options.templateName + "_" + this.options.instanceId);
+		this.templateSelector = $(this.templateInstance.firstNode());
 
 		this.isOpen = this.options.autostart;
 		if (this.isOpen) {

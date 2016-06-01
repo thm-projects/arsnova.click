@@ -393,6 +393,15 @@
 		$fg-quiz-summary-P: $default-text-color;
 		$fg-quiz-summary-UL: $default-text-color;
 		$fg-success: $success;
+		$splashscreen-background-color: #b3c8da;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-button-background-color: $success;
 	}
 
 	@if ($name == "theme-arsnova") {

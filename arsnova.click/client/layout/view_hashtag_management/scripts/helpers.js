@@ -30,5 +30,8 @@ Template.hashtagManagement.helpers({
 Template.showHashtagsSplashscreen.helpers({
 	hashtags: function () {
 		return localData.getAllHashtags();
+	},
+	isValid: function (sessionName) {
+		return localData.reenterSession(sessionName).isValid();
 	}
 });

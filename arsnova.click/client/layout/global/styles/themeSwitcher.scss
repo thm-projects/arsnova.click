@@ -94,7 +94,7 @@
 	$fg-button-result-percentage: #ffffff;
 	$bg-button-result-progress: LightSteelBlue;
 
-	$bg-previewText: white;
+	$bg-previewText: $input-background-color;
 
 	$fg-js-my-hash: black;
 	$bg-js-my-hash: #ffffe0;
@@ -662,7 +662,7 @@
 			background-color: $input-background-color;
 		}
 		.previewText {
-			background-color: $input-background-color;
+			background-color: $bg-previewText;
 			height: 145px;
 		}
 		.check-mark-checked {

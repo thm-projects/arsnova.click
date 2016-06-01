@@ -25,19 +25,7 @@
 	height: 100%;
 }
 
-.sendResponse {
-
-}
-
-.answer-row {
-  /*position: fixed;
-  bottom: 10px;*/
-  background-color: steelblue;
-}
-
 .answer-selected{
-	background-color: #ffd700 !important;
-	color: #000000 !important;
 	-webkit-transition: background 500ms ease-in-out;
 	-moz-transition: background 500ms ease-in-out;
 	-ms-transition: background 500ms ease-in-out;
@@ -46,8 +34,6 @@
 }
 
 .button-purple-transition {
-	background-color: #663399;
-	color: #FFFFFF;
 	-webkit-transition: background 2000ms ease-in-out;
 	-moz-transition: background 2000ms ease-in-out;
 	-ms-transition: background 2000ms ease-in-out;
@@ -56,8 +42,6 @@
 }
 
 .button-green-transition {
-	background-color: #FFFFFF;
-	color: #663399;
 	-webkit-transition: background 2000ms ease-in-out;
 	-moz-transition: background 2000ms ease-in-out;
 	-ms-transition: background 2000ms ease-in-out;

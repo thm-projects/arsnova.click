@@ -330,6 +330,18 @@
 		$check-mark-unchecked: $warning;
 
 		$fg-warning: $warning;
+
+		$splashscreen-background-color: #6b6b6b;
+		$splashscreen-foreground-color: white;
+		$splash-screen-header-color: white;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-button-background-color: $success;
 	}
 
 	@if ($name == "theme-thm") {

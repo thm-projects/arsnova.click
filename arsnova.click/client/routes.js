@@ -194,7 +194,7 @@ Router.route('/:quizName/resetToHome', function () {
 	if (EventManagerCollection.findOne() && localData.containsHashtag(Router.current().params.quizName)) {
 		Meteor.call("EventManagerCollection.clear", Router.current().params.quizName);
 	}
-	if (!localData.containsHashtag(Router.current().params.quizName)) {
+	if (!localData.containsHashtag(Router.current().params.quizName) && MemberListCollection.findOne({nick: localStorage[Router.current().params.quizName + "nick"]})) {
 		Meteor.call("MemberListCollection.removeLearner", Router.current().params.quizName, MemberListCollection.findOne({nick: localStorage[Router.current().params.quizName + "nick"]})._id);
 	}
 

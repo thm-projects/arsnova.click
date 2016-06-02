@@ -5,6 +5,9 @@ import {SingleChoiceQuestion} from './question_choice_single.js';
 const hashtag = Symbol("hashtag");
 const questionList = Symbol("questionList");
 const theme = Symbol("theme");
+const musicVolume = Symbol("musicVolume");
+const musicEnabled = Symbol("musicEnabled");
+const musicTitle = Symbol("musicTitle");
 
 export class AbstractQuestionGroup {
 
@@ -37,6 +40,9 @@ export class AbstractQuestionGroup {
 		}
 		this[hashtag] = options.hashtag;
 		this[theme] = options.theme || "theme-default";
+		this[musicVolume] = options.musicVolume || 80;
+		this[musicEnabled] = options.musicEnabled || "1";
+		this[musicTitle] = options.musicTitle || "Song1";
 	}
 
 	/**
@@ -98,7 +104,10 @@ export class AbstractQuestionGroup {
 		return {
 			hashtag: this.getHashtag(),
 			questionList: questionListSerialized,
-			theme: this.getTheme()
+			theme: this.getTheme(),
+			musicVolume: this.getMusicVolume(),
+			musicEnabled: this.getMusicEnabled(),
+			musicTitle: this.getMusicTitle()
 		};
 	}
 
@@ -188,5 +197,38 @@ export class AbstractQuestionGroup {
 			throw new Error("Invalid argument list for QuestionGroup.setTheme");
 		}
 		this[theme] = newTheme;
+	}
+
+	getMusicVolume () {
+		return this[musicVolume];
+	}
+
+	setMusicVolume (newMusicVolume) {
+		if (typeof newMusicVolume !== "number") {
+			throw new Error("Invalid argument list for QuestionGroup.setMusicVolume");
+		}
+		this[musicVolume] = newMusicVolume;
+	}
+
+	getMusicEnabled () {
+		return this[musicEnabled];
+	}
+
+	setMusicEnabled (newMusicEnabled) {
+		if (typeof newMusicEnabled !== "number") {
+			throw new Error("Invalid argument list for QuestionGroup.setMusicEnabled");
+		}
+		this[musicEnabled] = newMusicEnabled;
+	}
+
+	getMusicTitle () {
+		return this[musicTitle];
+	}
+
+	setMusicTitle (newMusicTitle) {
+		if (typeof newMusicTitle !== "string") {
+			throw new Error("Invalid argument list for QuestionGroup.setMusicTitle");
+		}
+		this[musicTitle] = newMusicTitle;
 	}
 }

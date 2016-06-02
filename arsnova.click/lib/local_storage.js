@@ -93,21 +93,6 @@ export function addQuestion(questionItem) {
 	}
 }
 
-export function updateMusicSettings(hashtag, musicVolume, musicEnabled, musicTitle) {
-	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
-		return;
-	}
-	const sessionDataString = localStorage.getItem(hashtag);
-	if (sessionDataString) {
-		const sessionData = JSON.parse(sessionDataString);
-		sessionData.musicVolume = musicVolume;
-		sessionData.musicEnabled = musicEnabled;
-		sessionData.musicTitle = musicTitle;
-
-		localStorage.setItem(hashtag, JSON.stringify(sessionData));
-	}
-}
-
 export function removeQuestion(hashtag, questionIndex) {
 	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
 		return;
@@ -169,7 +154,10 @@ export function reenterSession(hashtag) {
 		// Legacy mode -> Convert old session data to new OO style
 		const newQuestionGroup = new DefaultQuestionGroup({
 			hashtag: hashtag,
-			questionList: []
+			questionList: [],
+			musicEnabled: 1,
+			musicVolume: 80,
+			musicTitle: "Song1"
 		});
 		for (let i = 0; i < sessionData.questionList.length; i++) {
 			const answerOptions = [];
@@ -267,7 +255,7 @@ export function importFromFile(data) {
 	localStorage.setItem("hashtags", JSON.stringify(allHashtags));
 
 	var questionList = [];
-	data.sessionDoc.forEach(function (questionListDoc) {
+	data.questionListDoc.forEach(function (questionListDoc) {
 		questionList.push({
 			questionText: questionListDoc.questionText,
 			timer: questionListDoc.timer,
@@ -277,7 +265,12 @@ export function importFromFile(data) {
 
 	localStorage.setItem(hashtag, JSON.stringify({
 		hashtag: data.hashtagDoc.hashtag,
-		questionList: questionList
+		questionList: questionList,
+		theme: data.hashtagDoc.theme,
+		type: data.hashtagDoc.type,
+		musicVolume: data.hashtagDoc.musicVolume,
+		musicEnabled: data.hashtagDoc.musicEnabled,
+		musicTitle: data.hashtagDoc.musicTitle
 	}));
 }
 
@@ -286,19 +279,20 @@ export function exportFromLocalStorage(hashtag) {
 	if (localStorageData) {
 		var hashtagDoc = {
 			hashtag: localStorageData.hashtag,
-			sessionStatus: 0,
-			lastConnection: 0
+			theme: localStorageData.theme,
+			type: localStorageData.type,
+			musicVolume: localStorageData.musicVolume,
+			musicEnabled: localStorageData.musicEnabled,
+			musicTitle: localStorageData.musicTitle
 		};
-		var sessionDoc = [];
+		var questionListDoc = [];
 		localStorageData.questionList.forEach(function (question) {
-			sessionDoc.push(question);
+			questionListDoc.push(question);
 		});
 
 		return JSON.stringify({
 			hashtagDoc: hashtagDoc,
-			sessionDoc: sessionDoc,
-			memberListDoc: [],
-			responsesDoc: []
+			questionListDoc: questionListDoc
 		});
 	}
 }

@@ -149,7 +149,7 @@ Meteor.methods({
 		if (Meteor.isServer) {
 			var hashtag = data.hashtagDoc.hashtag;
 			var oldDoc = HashtagsCollection.findOne({hashtag: hashtag});
-			if (oldDoc) {
+			if (oldDoc && oldDoc.privateKey != data.privateKey) {
 				throw new Meteor.Error('HashtagsCollection.import', 'hashtag_exists');
 			}
 			var questionList = [];
@@ -177,6 +177,7 @@ Meteor.methods({
 				hashtag: hashtag,
 				questionList: questionList
 			});
+
 			EventManagerCollection.update({hashtag: data.hashtagDoc}, {
 				$push: {
 					eventStack: {

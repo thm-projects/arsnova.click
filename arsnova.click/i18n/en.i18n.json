@@ -221,9 +221,9 @@
       "type": "Type",
       "answer": "Answer",
       "answer_plural": "Answers",
-      "timer": "Timer",
-      "second": "Second",
-      "second_plural": "Seconds",
+      "timer": "Countdown",
+      "second": "second",
+      "second_plural": "seconds",
       "validation": "Validation",
       "validation_errors": {
         "types": {

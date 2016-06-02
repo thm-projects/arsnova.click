@@ -221,7 +221,7 @@
       "type": "Tipo",
       "answer": "Responder",
       "answer_plural": "Respuestas",
-      "timer": "Minutero",
+      "timer": "Cuenta regresiva",
       "second": "Segundo",
       "second_plural": "Segundos",
       "validation": "Validación",

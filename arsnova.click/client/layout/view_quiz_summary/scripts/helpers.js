@@ -61,6 +61,9 @@ Template.quizSummary.helpers({
 	isLastItem: function (index) {
 		return index === Session.get("questionGroup").getQuestionList().length - 1;
 	},
+	isQuestionType: function (type) {
+		return type === "question";
+	},
 	getTranslationForType: function (type) {
 		return "view.quiz_summary.validation_errors.types." + type;
 	},

@@ -82,6 +82,7 @@ p, ul.list-unstyled {
 }
 
 .logo-header-chars {
+	cursor: default;
 	font-size: 1.5em; /* Fallback for old devices */
 	font-size: 6vw;
 	margin: 10px 0;

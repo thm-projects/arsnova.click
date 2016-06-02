@@ -178,11 +178,6 @@ Template.hashtagManagement.events({
 	"click #backButton": function () {
 		Router.go("/");
 	},
-	"click .js-reactivate-hashtag": function (event) {
-		var hashtag = $(event.currentTarget).parent().parent()[0].id;
-		Session.set("questionGroup", localData.reenterSession(hashtag));
-		lib.connectEventManager(hashtag);
-	},
 	"click .js-export": function (event) {
 		var hashtag = $(event.currentTarget).parent().parent()[0].id;
 		var exportData = localData.exportFromLocalStorage(hashtag);

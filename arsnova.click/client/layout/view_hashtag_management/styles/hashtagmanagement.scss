@@ -17,6 +17,7 @@
 
 @import "../../../layout/global/styles/colors";
 @import "../../../layout/global/styles/appearance";
+@import "../../../layout/global/styles/themeSwitcher";
 
 .btn-file {
 	position: relative;
@@ -61,4 +62,10 @@
 .col-join-session,
 .col-create-session {
 	margin-bottom: 10px;
+}
+
+.hashtag-dummy-button {
+	cursor: default;
+	text-align: center;
+	border-radius: $corner-radius;
 }

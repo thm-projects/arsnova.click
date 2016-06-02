@@ -53,7 +53,7 @@
 
 	$disabled-button-background: #808080;
 
-	$placeholder-color: #808080;
+	$placeholder-color: #4D4D4D;
 	$input-background-color: #ffd700;
 	$input-foreground-color: black;
 	$input-group-letter-color: #2f4f4f;
@@ -520,6 +520,23 @@
 			color: $placeholder-color;
 			opacity: 1;
 		}
+
+		::-webkit-input-placeholder {
+			color: $placeholder-color;
+		}
+
+		:-moz-placeholder { /* Firefox 18- */
+			color: $placeholder-color;
+		}
+
+		::-moz-placeholder {  /* Firefox 19+ */
+			color: $placeholder-color;
+		}
+
+		:-ms-input-placeholder {
+			color: $placeholder-color;
+		}
+
 		button:disabled {
 			background-color: $disabled-button-background;
 		}

@@ -34,7 +34,7 @@ export const footerElemSound = {
 };
 export const footerElemReadingConfirmation = {
 	id: "reading-confirmation",
-	iconClass: "glyphicon glyphicon-ok",
+	iconClass: "glyphicon glyphicon-eye-open",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.reading-confirmation",
 	selectable: true

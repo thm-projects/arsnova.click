@@ -17,3 +17,9 @@
 
 @import "../../../layout/global/styles/colors";
 @import "../../../layout/global/styles/appearance";
+
+#previewQuestionText {
+  overflow: hidden;
+  resize: none;
+  height: 145px;
+}

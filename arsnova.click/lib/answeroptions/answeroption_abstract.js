@@ -118,7 +118,7 @@ export class AbstractAnswerOption {
 	 * @returns {boolean} True, if the complete Question instance is valid, False otherwise
 	 */
 	isValid () {
-		return this.getAnswerText().length > 0;
+		return this.getAnswerText().replace(/ /g,"").length > 0;
 	}
 
 	/**

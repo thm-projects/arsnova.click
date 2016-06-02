@@ -157,6 +157,9 @@ export function checkForMarkdown() {
 }
 
 export function getQuestionTypes() {
+	if (!Session.get("questionGroup") || !EventManagerCollection.findOne()) {
+		return [];
+	}
 	return [
 		{
 			id: "SingleChoiceQuestion",

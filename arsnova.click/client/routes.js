@@ -96,12 +96,6 @@ Router.onAfterAction(function () {
 
 Router.route('/', {
 	action: function () {
-		try {
-			localData.initializePrivateKey();
-			localStorage.setItem("localStorageAvailable", true);
-		} catch (err) {
-			localStorage.setItem("localStorageAvailable", false);
-		}
 		this.render('home');
 	}
 });
@@ -156,31 +150,19 @@ Router.route("/:quizName", {
 					// User joins a session
 					route = "/" + Router.current().params.quizName + "/nick";
 				} else {
-					try {
-						localData.initializePrivateKey();
-						localStorage.setItem("localStorageAvailable", true);
-						if (localData.containsHashtag(Router.current().params.quizName)) {
-							// User edits a session
-							route = "/" + Router.current().params.quizName + "/question";
-						}
-					} catch (err) {
-						localStorage.setItem("localStorageAvailable", false);
+					if (localData.containsHashtag(Router.current().params.quizName)) {
+						// User edits a session
+						route = "/" + Router.current().params.quizName + "/question";
 					}
 				}
 			} else {
-				try {
-					localData.initializePrivateKey();
-					localStorage.setItem("localStorageAvailable", true);
-					// If the user ownes the session he can edit it or create a new one
-					if (HashtagsCollection.findOne(Router.current().params.quizName)) {
-						if (localData.containsHashtag(Router.current().params.quizName)) {
-							route = "/" + Router.current().params.quizName + "/question";
-						}
-					} else {
+				// If the user ownes the session he can edit it or create a new one
+				if (HashtagsCollection.findOne(Router.current().params.quizName)) {
+					if (localData.containsHashtag(Router.current().params.quizName)) {
 						route = "/" + Router.current().params.quizName + "/question";
 					}
-				} catch (err) {
-					localStorage.setItem("localStorageAvailable", false);
+				} else {
+					route = "/" + Router.current().params.quizName + "/question";
 				}
 			}
 			Router.go(route);

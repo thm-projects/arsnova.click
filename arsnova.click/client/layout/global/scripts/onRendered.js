@@ -18,12 +18,29 @@
 import {Template} from 'meteor/templating';
 import  * as localData from '/lib/local_storage.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 
 Template.home.onRendered(function () {
-	if (localStorage.getItem("localStorageAvailable") && localData.getAllHashtags().length > 0) {
+	try {
+		if (!localStorage.getItem("localStorageAvailable")) {
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing")
+			});
+			return;
+		}
+	} catch (err) {
+		new ErrorSplashscreen({
+			autostart: true,
+			errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing")
+		});
+		return;
+	}
+
+	if (localData.getAllHashtags().length > 0) {
 		hashtagLib.setHashtagSplashscreen(new Splashscreen({
 			autostart: true,
 			templateName: "showHashtagsSplashscreen"

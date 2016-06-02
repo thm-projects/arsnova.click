@@ -85,13 +85,6 @@ Template.hashtagView.events({
 		}
 	},
 	"click #addNewHashtag": function () {
-		if (!localStorage.getItem("localStorageAvailable")) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing")
-			});
-			return;
-		}
 		var hashtag = $("#hashtag-input-field").val().trim();
 		var reenter = false;
 		if (hashtag.length > 0) {

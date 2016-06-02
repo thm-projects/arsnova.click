@@ -134,6 +134,7 @@ const clickEvents = {
 					const questionItem = Session.get("questionGroup");
 					questionItem.setMusicTitle($(event.target).val());
 					Session.set("questionGroup", questionItem);
+					localData.addHashtag(Session.get("questionGroup"));
 				});
 
 				instance.templateSelector.find("#js-btn-playStopMusic").on('click', function () {
@@ -166,6 +167,7 @@ const clickEvents = {
 					const questionItem = Session.get("questionGroup");
 					questionItem.setMusicEnabled(hashtagDoc.musicEnabled);
 					Session.set("questionGroup", questionItem);
+					localData.addHashtag(Session.get("questionGroup"));
 				});
 			},
 			onDestroyed: function () {
@@ -175,6 +177,7 @@ const clickEvents = {
 				const questionItem = Session.get("questionGroup");
 				questionItem.setMusicVolume(hashtagDoc.musicVolume);
 				Session.set("questionGroup", questionItem);
+				localData.addHashtag(Session.get("questionGroup"));
 			}
 		});
 	},

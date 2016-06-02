@@ -64,6 +64,8 @@
 	$progress-bar-read-confirmation: darkorange;
 	$progress-bar-failure-color: firebrick;
 	$progress-bar-default-color: grey;
+	$bg-progress-bar-reading_confirmation: purple;
+	$fg-progress-bar-reading_confirmation: white;
 	$bg_progress-bar: white;
 	$fg_progress-bar: black;
 
@@ -579,6 +581,10 @@
 		.progress-bar {
 			background: $bg_progress-bar;
 			color: $fg_progress-bar;
+		}
+		.progress-reading_confirmation {
+			background-color: $bg-progress-bar-reading_confirmation;
+			color: $fg-progress-bar-reading_confirmation;
 		}
 		.slider, .slider .noUi-handle {
 			background-color: $slider-color;

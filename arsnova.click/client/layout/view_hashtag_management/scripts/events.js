@@ -93,7 +93,6 @@ Template.hashtagView.events({
 			return;
 		}
 		var hashtag = $("#hashtag-input-field").val().trim();
-		hashtag = hashtag.replace(/ /g,"_");
 		var reenter = false;
 		if (hashtag.length > 0) {
 			var localHashtags = localData.getAllHashtags();

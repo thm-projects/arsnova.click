@@ -85,6 +85,7 @@ function questionTextLengthWithoutMarkdownSyntax(questionText) {
 	if (doesMarkdownSyntaxExist(questionText, '>')) {
 		questionTextLength -= 4;
 	}
+	questionTextLength = questionText.replace(/ /g,"").length;
 	return questionTextLength;
 }
 

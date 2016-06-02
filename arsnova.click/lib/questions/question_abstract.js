@@ -231,6 +231,7 @@ export class AbstractQuestion {
 			tmpValue = tmpValue.replace(/\]\(/g,"");
 			tmpValue = tmpValue.replace(/\)/g,"");
 			tmpValue = tmpValue.replace(/- /g,"");
+			tmpValue = tmpValue.replace(/ /g,"");
 			tmpValue = tmpValue.replace(/\\\(/g,"");
 			tmpValue = tmpValue.replace(/\\\)/g,"");
 			tmpValue = tmpValue.replace(/$/g,"");
@@ -257,6 +258,7 @@ export class AbstractQuestion {
 			tmpValue = tmpValue.replace(/\]\(/g,"");
 			tmpValue = tmpValue.replace(/\)/g,"");
 			tmpValue = tmpValue.replace(/- /g,"");
+			tmpValue = tmpValue.replace(/ /g,"");
 			tmpValue = tmpValue.replace(/\\\(/g,"");
 			tmpValue = tmpValue.replace(/\\\)/g,"");
 			tmpValue = tmpValue.replace(/$/g,"");

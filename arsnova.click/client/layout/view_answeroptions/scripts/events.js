@@ -65,11 +65,9 @@ Template.createAnswerOptions.events({
 		}
 	},
 	"click #backButton": function () {
-		parseAnswerOptionInput(EventManagerCollection.findOne().questionIndex);
 		Router.go("/" + Router.current().params.quizName + "/question");
 	},
 	"click #forwardButton": function () {
-		parseAnswerOptionInput(EventManagerCollection.findOne().questionIndex);
 		Router.go("/" + Router.current().params.quizName + "/settimer");
 	},
 	"keydown .input-field": function (event) {

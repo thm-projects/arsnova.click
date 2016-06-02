@@ -72,11 +72,11 @@ Template.createAnswerOptions.onRendered(function () {
 			const answerlist = questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex];
 			if (state) {
 				item.find('.bootstrap-switch-handle-off').addClass("hiddenImportant");
-				item.find(".bootstrap-switch-container").css({width: "116px"});
+				item.find(".bootstrap-switch-container").css({width: "auto"});
 				answerlist.getAnswerOptionList()[event.target.id.replace("answerOption-","")].setIsCorrect(true);
 			} else {
 				item.find('.bootstrap-switch-handle-off').removeClass("hiddenImportant");
-				item.find(".bootstrap-switch-container").css({width: "174px"});
+				item.find(".bootstrap-switch-container").css({width: "auto"});
 				answerlist.getAnswerOptionList()[event.target.id.replace("answerOption-","")].setIsCorrect(false);
 			}
 			Session.set("questionGroup", questionItem);

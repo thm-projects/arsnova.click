@@ -95,9 +95,13 @@ Template.questionList.events({
 		const id = parseInt($(event.target).closest(".questionIcon").attr("id").replace("questionIcon_", ""));
 		const questionItem = Session.get("questionGroup");
 		questionItem.removeQuestion(id);
+		if (questionItem.getQuestionList().length === 0) {
+			questionItem.addDefaultQuestion();
+		}
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(questionItem);
-		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, (id - 1));
+		const nextId = id === 0 ? 0 : id - 1;
+		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, nextId);
 	},
 	'click #addQuestion': function () {
 		lib.addNewQuestion(questionLib.checkForMarkdown);

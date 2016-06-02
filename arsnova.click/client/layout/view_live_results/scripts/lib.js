@@ -22,6 +22,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import * as localData from '/lib/local_storage.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {buzzsound1, whistleSound, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 
@@ -93,7 +94,7 @@ export function startCountdown(index) {
 		$('.disableOnActiveCountdown').removeAttr("disabled");
 		if (index + 1 >= QuestionGroupCollection.findOne().questionList.length) {
 			Session.set("sessionClosed", true);
-			if (Session.get("isOwner") && AnswerOptionCollection.find({isCorrect: true}).count() > 0) {
+			if (localData.containsHashtag(Router.current().params.quizName) && AnswerOptionCollection.find({isCorrect: true}).count() > 0) {
 				routeToLeaderboardTimer = setTimeout(() => {
 					Session.set("showGlobalRanking", true);
 					Router.go("/" + Router.current().params.quizName + "/statistics");

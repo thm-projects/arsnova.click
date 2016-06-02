@@ -160,16 +160,24 @@ Meteor.methods({
 				var question = data.questionListDoc[i];
 				questionList.push({
 					hashtag: question.hashtag,
-					questionIndex: question.questionIndex,
 					questionText: question.questionText,
-					startTime: question.startTime,
 					timer: question.timer,
+					startTime: question.startTime,
+					questionIndex: question.questionIndex,
+					answerOptionList: [],
 					type: question.type
 				});
-				console.log(question.answerOptionList);
 				for (var j = 0; j < question.answerOptionList.length; j++) {
 					var answer = question.answerOptionList[j];
 					AnswerOptionCollection.insert({
+						hashtag: answer.hashtag,
+						questionIndex: answer.questionIndex,
+						answerText: answer.answerText,
+						answerOptionNumber: answer.answerOptionNumber,
+						isCorrect: answer.isCorrect,
+						type: answer.type
+					});
+					questionList[i].answerOptionList.push({
 						hashtag: answer.hashtag,
 						questionIndex: answer.questionIndex,
 						answerText: answer.answerText,

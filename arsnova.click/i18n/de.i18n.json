@@ -308,7 +308,7 @@
       "info_content": "Sie können Texte innerhalb von ARSnova mithilfe von <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown Optionen werden in Form von Schaltflächen über den unterstützten Eingabefeldern angeboten. Zudem unterstützt ARSnova <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
     },
     "sound": {
-      "title": "Quizmusik",
+      "title": "Countdown Sound",
       "volume": "Lautstärke",
       "inactive": "Sound ist inaktiv",
       "active": "Sound ist aktiviert"

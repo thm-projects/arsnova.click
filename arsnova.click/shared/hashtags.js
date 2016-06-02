@@ -36,7 +36,6 @@ Meteor.methods({
 	},
 	'HashtagsCollection.addHashtag': function (sessionConfiguration) {
 		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag: sessionConfiguration.hashtag});
-
 		if (HashtagsCollection.findOne({hashtag: sessionConfiguration.hashtag})) {
 			throw new Meteor.Error('HashtagsCollection.addHashtag', 'session_exists');
 		}
@@ -145,31 +144,40 @@ Meteor.methods({
 			return JSON.stringify(exportData);
 		}
 	},
-	'HashtagsCollection.import': function ({data}) {
+	'HashtagsCollection.import': function ({privateKey, data}) {
 		if (Meteor.isServer) {
+			console.log(data.hashtagDoc);
+			console.log(privateKey);
+			console.log(data);
 			var hashtag = data.hashtagDoc.hashtag;
-			var oldDoc = HashtagsCollection.findOne({hashtag: hashtag});
-			if (oldDoc && oldDoc.privateKey != data.privateKey) {
+			var oldDoc = HashtagsCollection.findOne({hashtag: hashtag, privateKey: {$ne: privateKey}});
+			if (oldDoc) {
 				throw new Meteor.Error('HashtagsCollection.import', 'hashtag_exists');
 			}
 			var questionList = [];
 			var hashtagDoc = data.hashtagDoc;
+			hashtagDoc.privateKey = privateKey;
 			delete hashtagDoc._id;
 			HashtagsCollection.insert(hashtagDoc);
-			for (var i = 0; i < data.sessionDoc.length; i++) {
-				var question = data.sessionDoc[i];
+			for (var i = 0; i < data.questionListDoc.length; i++) {
+				var question = data.questionListDoc[i];
 				questionList.push({
+					hashtag: question.hashtag,
+					questionIndex: question.questionIndex,
 					questionText: question.questionText,
-					timer: question.timer
+					startTime: question.startTime,
+					timer: question.timer,
+					type: question.type
 				});
-				for (var j = 0; j < question.answers.length; j++) {
-					var answer = question.answers[j];
+				for (var j = 0; j < question.answerOptionList.length; j++) {
+					var answer = question.answerOptionList[j];
 					AnswerOptionCollection.insert({
 						hashtag: hashtag,
 						questionIndex: i,
 						answerText: answer.answerText,
 						answerOptionNumber: answer.answerOptionNumber,
-						isCorrect: answer.isCorrect
+						isCorrect: answer.isCorrect,
+						type: answer.type
 					});
 				}
 			}

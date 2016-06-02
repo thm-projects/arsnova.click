@@ -237,6 +237,7 @@ Template.hashtagManagement.events({
 		fileReader.onload = function () {
 			var asJSON = JSON.parse(fileReader.result);
 			Meteor.call("HashtagsCollection.import", {
+				privateKey: localData.getPrivateKey(),
 				data: asJSON
 			}, (err) => {
 				if (err) {

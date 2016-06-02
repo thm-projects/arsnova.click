@@ -257,9 +257,23 @@ export function importFromFile(data) {
 	var questionList = [];
 	data.questionListDoc.forEach(function (questionListDoc) {
 		questionList.push({
+			hashtag: questionListDoc.hashtag,
+			questionIndex: questionListDoc.questionIndex,
 			questionText: questionListDoc.questionText,
+			startTime: questionListDoc.startTime,
 			timer: questionListDoc.timer,
-			answers: questionListDoc.answers
+			type: questionListDoc.type
+		});
+		questionListDoc.answerOptionList.forEach(function (answerOptionListDoc) {
+			questionList.answerOptionList = [];
+			questionList.answerOptionList.push({
+				answerOptionNumber: answerOptionListDoc.answerOptionNumber,
+				answerText: answerOptionListDoc.answerText,
+				hashtag: answerOptionListDoc.hashtag,
+				isCorrect: answerOptionListDoc.isCorrect,
+				questionIndex: answerOptionListDoc.questionIndex,
+				type: answerOptionListDoc.type
+			});
 		});
 	});
 
@@ -285,14 +299,34 @@ export function exportFromLocalStorage(hashtag) {
 			musicEnabled: localStorageData.musicEnabled,
 			musicTitle: localStorageData.musicTitle
 		};
-		var questionListDoc = [];
-		localStorageData.questionList.forEach(function (question) {
-			questionListDoc.push(question);
+
+		var questionList =  [];
+
+		localStorageData.questionListDoc.forEach(function (questionListDoc) {
+			questionList.push({
+				hashtag: questionListDoc.hashtag,
+				questionIndex: questionListDoc.questionIndex,
+				questionText: questionListDoc.questionText,
+				startTime: questionListDoc.startTime,
+				timer: questionListDoc.timer,
+				type: questionListDoc.type
+			});
+			questionListDoc.answerOptionList.forEach(function (answerOptionListDoc) {
+				questionList.answerOptionList = [];
+				questionList.answerOptionList.push({
+					answerOptionNumber: answerOptionListDoc.answerOptionNumber,
+					answerText: answerOptionListDoc.answerText,
+					hashtag: answerOptionListDoc.hashtag,
+					isCorrect: answerOptionListDoc.isCorrect,
+					questionIndex: answerOptionListDoc.questionIndex,
+					type: answerOptionListDoc.type
+				});
+			});
 		});
 
 		return JSON.stringify({
 			hashtagDoc: hashtagDoc,
-			questionListDoc: questionListDoc
+			questionListDoc: questionList
 		});
 	}
 }

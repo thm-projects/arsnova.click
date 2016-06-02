@@ -49,6 +49,10 @@ export function calculateTitelHeight() {
 }
 
 export function calculateHeaderSize() {
+	if (!Router.current().params.quizName) {
+		return;
+	}
+
 	var hashtagLength = Router.current().params.quizName.length;
 	var fontSize = "";
 	let logoHeight = 0;

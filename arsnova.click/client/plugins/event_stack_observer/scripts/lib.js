@@ -193,5 +193,5 @@ export function setGlobalEventStackObserver() {
 	if (globalEventStackObserver) {
 		globalEventStackObserver.stop();
 	}
-	globalEventStackObserver = new EventStackObserver({verbose: false});
+	globalEventStackObserver = new EventStackObserver({verbose: true});
 }

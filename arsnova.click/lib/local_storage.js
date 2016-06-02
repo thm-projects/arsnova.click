@@ -267,7 +267,7 @@ export function importFromFile(data) {
 	localStorage.setItem("hashtags", JSON.stringify(allHashtags));
 
 	var questionList = [];
-	data.sessionDoc.forEach(function (questionListDoc) {
+	data.questionListDoc.forEach(function (questionListDoc) {
 		questionList.push({
 			questionText: questionListDoc.questionText,
 			timer: questionListDoc.timer,
@@ -277,7 +277,9 @@ export function importFromFile(data) {
 
 	localStorage.setItem(hashtag, JSON.stringify({
 		hashtag: data.hashtagDoc.hashtag,
-		questionList: questionList
+		questionList: questionList,
+		theme: data.hashtagDoc.theme,
+		type: data.hashtagDoc.type
 	}));
 }
 
@@ -286,19 +288,17 @@ export function exportFromLocalStorage(hashtag) {
 	if (localStorageData) {
 		var hashtagDoc = {
 			hashtag: localStorageData.hashtag,
-			sessionStatus: 0,
-			lastConnection: 0
+			theme: localStorageData.theme,
+			type: localStorageData.type
 		};
-		var sessionDoc = [];
+		var questionListDoc = [];
 		localStorageData.questionList.forEach(function (question) {
-			sessionDoc.push(question);
+			questionListDoc.push(question);
 		});
 
 		return JSON.stringify({
 			hashtagDoc: hashtagDoc,
-			sessionDoc: sessionDoc,
-			memberListDoc: [],
-			responsesDoc: []
+			questionListDoc: questionListDoc
 		});
 	}
 }

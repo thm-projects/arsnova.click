@@ -109,9 +109,9 @@ export function addQuestion(index) {
 export function checkForValidQuestionText() {
 	var questionText = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
 	if (questionTextLengthWithoutMarkdownSyntax(questionText) < 5) {
-		$('#questionText').addClass("invalidAnswerOption");
+		$('#questionText').addClass("invalidQuestion");
 	} else {
-		$('#questionText').removeClass("invalidAnswerOption");
+		$('#questionText').removeClass("invalidQuestion");
 	}
 }
 

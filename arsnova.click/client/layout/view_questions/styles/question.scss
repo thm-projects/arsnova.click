@@ -18,8 +18,14 @@
 @import "../../../layout/global/styles/colors";
 @import "../../../layout/global/styles/appearance";
 
+#editQuestionText {
+	.invalidQuestion {
+		border-radius: $corner-radius;
+	}
+}
+
 #previewQuestionText {
-  overflow: hidden;
-  resize: none;
-  height: 145px;
+	overflow: hidden;
+	resize: none;
+	height: 145px;
 }

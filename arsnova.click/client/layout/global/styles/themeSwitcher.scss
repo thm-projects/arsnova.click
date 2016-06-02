@@ -40,6 +40,7 @@
 	$fg-questionScrollPane-active-remove-question-hovered: white;
 
 	$border-answer_options-invalidAnswerOption: red;
+	$border-answer_options-invalidQuestion: red;
 	$bg-answer_options-bootstrap_switch: #ffd700;
 	$border-answer_options-bootstrap_switch: none;
 	$bg-answer_options-bootstrap_switch_handle_off: $warning;
@@ -611,6 +612,11 @@
 					box-shadow: $box-shadow-answer_options-bootstrap_switch_focused;
 					outline: $outline-answer_options-bootstrap_switch_focused;
 				}
+			}
+		}
+		#editQuestionText {
+			.invalidQuestion {
+				border: 2px solid $border-answer_options-invalidQuestion;
 			}
 		}
 		.progress-bar {

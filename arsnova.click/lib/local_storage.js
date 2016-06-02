@@ -257,9 +257,23 @@ export function importFromFile(data) {
 	var questionList = [];
 	data.questionListDoc.forEach(function (questionListDoc) {
 		questionList.push({
+			hashtag: questionListDoc.hashtag,
+			questionIndex: questionListDoc.questionIndex,
 			questionText: questionListDoc.questionText,
+			startTime: questionListDoc.startTime,
 			timer: questionListDoc.timer,
-			answers: questionListDoc.answers
+			type: questionListDoc.type
+		});
+		questionListDoc.answerOptionList.forEach(function (answerOptionListDoc) {
+			questionList.answerOptionList = [];
+			questionList.answerOptionList.push({
+				answerOptionNumber: answerOptionListDoc.answerOptionNumber,
+				answerText: answerOptionListDoc.answerText,
+				hashtag: answerOptionListDoc.hashtag,
+				isCorrect: answerOptionListDoc.isCorrect,
+				questionIndex: answerOptionListDoc.questionIndex,
+				type: answerOptionListDoc.type
+			});
 		});
 	});
 
@@ -285,14 +299,36 @@ export function exportFromLocalStorage(hashtag) {
 			musicEnabled: localStorageData.musicEnabled,
 			musicTitle: localStorageData.musicTitle
 		};
-		var questionListDoc = [];
-		localStorageData.questionList.forEach(function (question) {
-			questionListDoc.push(question);
-		});
+
+		var questionList =  [];
+
+		for (var i = 0; i < localStorageData.questionList.length; i++) {
+			var question = localStorageData.questionList[i];
+			questionList.push({
+				hashtag: question.hashtag,
+				questionIndex: question.questionIndex,
+				questionText: question.questionText,
+				startTime: question.startTime,
+				timer: question.timer,
+				type: question.type,
+				answerOptionList: []
+			});
+			for (var j = 0; j < question.answerOptionList.length; j++) {
+				var answer = question.answerOptionList[j];
+				questionList[i].answerOptionList.push({
+					hashtag: answer.hashtag,
+					questionIndex: answer.questionIndex,
+					answerText: answer.answerText,
+					answerOptionNumber: answer.answerOptionNumber,
+					isCorrect: answer.isCorrect,
+					type: answer.type
+				});
+			}
+		}
 
 		return JSON.stringify({
 			hashtagDoc: hashtagDoc,
-			questionListDoc: questionListDoc
+			questionListDoc: questionList
 		});
 	}
 }

@@ -203,10 +203,10 @@ Template.hashtagManagement.events({
 			a.download = hashtag + "-" + timestring + ".json";
 			a.innerHTML = '';
 			event.target.appendChild(a);
-			if (localStorage.getItem(Router.current().params.quizName + "exportReady")) {
-				localStorage.setItem(Router.current().params.quizName + "exportReady", undefined);
+			if (localStorage.getItem(hashtag + "exportReady")) {
+				localStorage.setItem(hashtag + "exportReady", undefined);
 			} else {
-				localStorage.setItem(Router.current().params.quizName + "exportReady", true);
+				localStorage.setItem(hashtag + "exportReady", true);
 				a.click();
 			}
 		}
@@ -237,6 +237,7 @@ Template.hashtagManagement.events({
 		fileReader.onload = function () {
 			var asJSON = JSON.parse(fileReader.result);
 			Meteor.call("HashtagsCollection.import", {
+				privateKey: localData.getPrivateKey(),
 				data: asJSON
 			}, (err) => {
 				if (err) {

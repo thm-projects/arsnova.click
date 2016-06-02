@@ -254,6 +254,14 @@ Template.liveResults.helpers({
 
 		return eventDoc.questionIndex < questionDoc.questionList.length - 1;
 	},
+	hasOnlyOneQuestion: ()=> {
+		var questionDoc = QuestionGroupCollection.findOne();
+		if (!questionDoc) {
+			return;
+		}
+
+		return questionDoc.questionList.length === 1;
+	},
 	hasReadConfirmationRequested: (index)=> {
 		let eventDoc = EventManagerCollection.findOne();
 		if (!eventDoc) {

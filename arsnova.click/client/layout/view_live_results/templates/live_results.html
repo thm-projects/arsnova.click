@@ -45,11 +45,13 @@
 			{{#each questionList}}
 				<div class="row question-row" id="question-row_{{displayIndex}}">
 					<div class="col-md-12">
-						<div class="row">
-							<div class="col-md-12">
-								<p class="question-title">{{_ "view.liveResults.question"}} {{getNormalizedIndex displayIndex}} / {{allQuestionCount}}</p>
-							</div>
-						</div>
+                        {{#unless hasOnlyOneQuestion}}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="question-title">{{_ "view.liveResults.question"}} {{getNormalizedIndex displayIndex}} / {{allQuestionCount}}</p>
+                                </div>
+                            </div>
+                        {{/unless}}
 						{{#if hasReadConfirmationRequested displayIndex}}
 							<div class="row">
 								<div class="col-md-12">
@@ -162,14 +164,14 @@
 										{{#if showNextQuestionButton}}
 											<button class="button button-next button-start disableOnActiveCountdown" id="showNextQuestionDialog">
 												<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-												<span class="ansBtn">{{_ "view.liveResults.show_question"}} {{nextReadingConfirmationIndex}}
-													/ {{allQuestionCount}}</span>
+												<span class="ansBtn">{{_ "view.liveResults.show_question" count=allQuestionCount}}{{#unless hasOnlyOneQuestion}} {{nextReadingConfirmationIndex}}
+													/ {{allQuestionCount}}{{/unless}}</span>
 											</button>
 										{{else}}
 											<button class="button button-next button-start disableOnActiveCountdown" id="startNextQuestion" disabled>
 												<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-												<span class="ansBtn">{{_ "view.liveResults.start_round"}} {{nextQuestionIndex}}
-													/ {{allQuestionCount}}</span>
+												<span class="ansBtn">{{_ "view.liveResults.start_round" count=allQuestionCount}}{{#unless hasOnlyOneQuestion}} {{nextQuestionIndex}}
+													/ {{allQuestionCount}}{{/unless}}</span>
 											</button>
 										{{/if}}
 									{{/if}}

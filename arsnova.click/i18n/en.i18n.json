@@ -134,7 +134,9 @@
   },
   "view": {
     "answeroptions": {
-      "answeroptiontext_placeholder": "Answer option required"
+      "answeroptiontext_placeholder": "Answer option required",
+      "correct": "Correct",
+      "wrong": "Wrong"
     },
     "choose_nickname": {
       "enter_nickname": "Take a nickname",

@@ -134,7 +134,9 @@
   },
   "view": {
     "answeroptions": {
-      "answeroptiontext_placeholder": "Option de réponse nécessaire"
+      "answeroptiontext_placeholder": "Option de réponse nécessaire",
+      "correct": "Correct",
+      "wrong": "Faux"
     },
     "choose_nickname": {
       "enter_nickname": "Prendre un surnom",

@@ -20,7 +20,7 @@ import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Template.createAnswerOptions.helpers({
-	answerOptions: function () {
+	getAnswerOptions: function () {
 		if (!EventManagerCollection.findOne()) {
 			return;
 		}

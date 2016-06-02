@@ -134,7 +134,9 @@
   },
   "view": {
     "answeroptions": {
-      "answeroptiontext_placeholder": "Antwortoption benötigt"
+      "answeroptiontext_placeholder": "Antwortoption benötigt",
+      "correct": "Richtig",
+      "wrong": "Falsch"
     },
     "choose_nickname": {
       "enter_nickname": "Gib dir einen Nicknamen",

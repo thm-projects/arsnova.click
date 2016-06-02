@@ -23,21 +23,6 @@ import * as localData from '/lib/local_storage.js';
 import {parseAnswerOptionInput, parseSingleAnswerOptionInput} from './lib.js';
 
 Template.createAnswerOptions.events({
-	"click .toggleCorrect": function (event) {
-		const questionItem = Session.get("questionGroup");
-		const answerlist = questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex];
-		if (this.getIsCorrect()) {
-			answerlist.getAnswerOptionList()[this.getAnswerOptionNumber()].setIsCorrect(false);
-			$(event.currentTarget.firstElementChild).removeClass("check-mark-checked");
-			$(event.currentTarget.firstElementChild).addClass("check-mark-unchecked");
-		} else {
-			answerlist.getAnswerOptionList()[this.getAnswerOptionNumber()].setIsCorrect(true);
-			$(event.currentTarget.firstElementChild).removeClass("check-mark-unchecked");
-			$(event.currentTarget.firstElementChild).addClass("check-mark-checked");
-		}
-		Session.set("questionGroup", questionItem);
-		localData.addHashtag(Session.get("questionGroup"));
-	},
 	"click #addAnswerOption": function () {
 		const questionItem = Session.get("questionGroup");
 		const answerlist = questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex];

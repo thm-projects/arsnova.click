@@ -39,6 +39,17 @@
 	$bg-questionScrollPane-active-remove-question-hovered: red;
 	$fg-questionScrollPane-active-remove-question-hovered: white;
 
+	$border-answer_options-invalidAnswerOption: red;
+	$bg-answer_options-bootstrap_switch: #ffd700;
+	$border-answer_options-bootstrap_switch: none;
+	$bg-answer_options-bootstrap_switch_handle_off: $warning;
+	$fg-answer_options-bootstrap_switch_handle_off: $warning-text-color;
+	$bg-answer_options-bootstrap_switch_handle_on: $success;
+	$fg-answer_options-bootstrap_switch_handle_on: $success-text-color;
+	$border-answer_options-bootstrap_switch_focused: none;
+	$box-shadow-answer_options-bootstrap_switch_focused: none;
+	$outline-answer_options-bootstrap_switch_focused: none;
+
 	$disabled-button-background: #808080;
 
 	$placeholder-color: #808080;
@@ -577,6 +588,28 @@
 							color: $fg-questionScrollPane-active-remove-question-hovered;
 						}
 					}
+				}
+			}
+		}
+		.answer-options {
+			.invalidAnswerOption {
+				border: 2px solid $border-answer_options-invalidAnswerOption;
+			}
+			.bootstrap-switch {
+				background-color: $bg-answer_options-bootstrap_switch;
+				border: $border-answer_options-bootstrap_switch;
+				.bootstrap-switch-handle-off {
+					background-color: $bg-answer_options-bootstrap_switch_handle_off;
+					color: $fg-answer_options-bootstrap_switch_handle_off;
+				}
+				.bootstrap-switch-handle-on {
+					background-color: $bg-answer_options-bootstrap_switch_handle_on;
+					color: $fg-answer_options-bootstrap_switch_handle_on;
+				}
+				&.bootstrap-switch-focused {
+					border: $border-answer_options-bootstrap_switch_focused;
+					box-shadow: $box-shadow-answer_options-bootstrap_switch_focused;
+					outline: $outline-answer_options-bootstrap_switch_focused;
 				}
 			}
 		}

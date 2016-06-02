@@ -134,7 +134,9 @@
   },
   "view": {
     "answeroptions": {
-      "answeroptiontext_placeholder": "Opción de respuesta necesario"
+      "answeroptiontext_placeholder": "Opción de respuesta necesario",
+      "correct": "Correcto",
+      "wrong": "Incorrecto"
     },
     "choose_nickname": {
       "enter_nickname": "Tome un apodo",

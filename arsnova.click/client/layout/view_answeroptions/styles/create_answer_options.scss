@@ -17,11 +17,23 @@
 
 @import "../../../layout/global/styles/appearance";
 
-#addAnswerOption, #deleteAnswerOption {
-	margin: 0 15px;
+.row-landingpage-buttons {
+	#addAnswerOption, #deleteAnswerOption {
+		margin: 0 15px;
+	}
 }
+.answer-options {
 
-.invalidAnswerOption {
-	border-radius: $corner-radius;
-	border: 2px solid red;
+	.invalidAnswerOption {
+		border-radius: $corner-radius;
+	}
+
+	.bootstrap-switch {
+		display: table-cell;
+		padding-right: 10px;
+
+		.hiddenImportant {
+			display: none !important;
+		}
+	}
 }

@@ -21,6 +21,7 @@ import {Tracker} from 'meteor/tracker';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
+import * as localData from '/lib/local_storage.js';
 import * as lib from './lib.js';
 
 Template.createAnswerOptions.onRendered(function () {
@@ -57,6 +58,41 @@ Template.createAnswerOptions.onRendered(function () {
 			$(inputFieldElements[i]).closest(".input-group").addClass("invalidAnswerOption");
 		}
 	}
+
+	$("[name='switch']").bootstrapSwitch({
+		size: "small",
+		onText: TAPi18n.__("view.answeroptions.correct"),
+		offText: TAPi18n.__("view.answeroptions.wrong"),
+		wrapperClass: "input-field",
+		animate: false,
+		onSwitchChange: function (event, state) {
+			const item = $('.bootstrap-switch-id-' + event.target.id);
+			const questionItem = Session.get("questionGroup");
+			const answerlist = questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex];
+			if (state) {
+				item.find('.bootstrap-switch-handle-off').addClass("hiddenImportant");
+				item.find(".bootstrap-switch-container").css({width: "116px"});
+				answerlist.getAnswerOptionList()[event.target.id.replace("answerOption-","")].setIsCorrect(true);
+			} else {
+				item.find('.bootstrap-switch-handle-off').removeClass("hiddenImportant");
+				item.find(".bootstrap-switch-container").css({width: "174px"});
+				answerlist.getAnswerOptionList()[event.target.id.replace("answerOption-","")].setIsCorrect(false)
+			}
+			Session.set("questionGroup", questionItem);
+			localData.addHashtag(Session.get("questionGroup"));
+		},
+		onInit: function (event, state) {
+			const item = $('.bootstrap-switch-id-' + event.target.id);
+			item.find("span").css({fontSize: "14px", "padding": "5px"});
+		}
+	});
+
+	Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().forEach(function (answerOption) {
+		if (answerOption.getIsCorrect()) {
+			const item = $('#answerOption-' + answerOption.getAnswerOptionNumber());
+			item.bootstrapSwitch('state', 'true');
+		}
+	});
 
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);

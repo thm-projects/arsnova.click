@@ -146,9 +146,6 @@ Meteor.methods({
 	},
 	'HashtagsCollection.import': function ({privateKey, data}) {
 		if (Meteor.isServer) {
-			console.log(data.hashtagDoc);
-			console.log(privateKey);
-			console.log(data);
 			var hashtag = data.hashtagDoc.hashtag;
 			var oldDoc = HashtagsCollection.findOne({hashtag: hashtag, privateKey: {$ne: privateKey}});
 			if (oldDoc) {
@@ -169,11 +166,12 @@ Meteor.methods({
 					timer: question.timer,
 					type: question.type
 				});
+				console.log(question.answerOptionList);
 				for (var j = 0; j < question.answerOptionList.length; j++) {
 					var answer = question.answerOptionList[j];
 					AnswerOptionCollection.insert({
-						hashtag: hashtag,
-						questionIndex: i,
+						hashtag: answer.hashtag,
+						questionIndex: answer.questionIndex,
 						answerText: answer.answerText,
 						answerOptionNumber: answer.answerOptionNumber,
 						isCorrect: answer.isCorrect,

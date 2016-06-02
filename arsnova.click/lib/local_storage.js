@@ -302,27 +302,29 @@ export function exportFromLocalStorage(hashtag) {
 
 		var questionList =  [];
 
-		localStorageData.questionListDoc.forEach(function (questionListDoc) {
+		for (var i = 0; i < localStorageData.questionList.length; i++) {
+			var question = localStorageData.questionList[i];
 			questionList.push({
-				hashtag: questionListDoc.hashtag,
-				questionIndex: questionListDoc.questionIndex,
-				questionText: questionListDoc.questionText,
-				startTime: questionListDoc.startTime,
-				timer: questionListDoc.timer,
-				type: questionListDoc.type
+				hashtag: question.hashtag,
+				questionIndex: question.questionIndex,
+				questionText: question.questionText,
+				startTime: question.startTime,
+				timer: question.timer,
+				type: question.type,
+				answerOptionList: []
 			});
-			questionListDoc.answerOptionList.forEach(function (answerOptionListDoc) {
-				questionList.answerOptionList = [];
-				questionList.answerOptionList.push({
-					answerOptionNumber: answerOptionListDoc.answerOptionNumber,
-					answerText: answerOptionListDoc.answerText,
-					hashtag: answerOptionListDoc.hashtag,
-					isCorrect: answerOptionListDoc.isCorrect,
-					questionIndex: answerOptionListDoc.questionIndex,
-					type: answerOptionListDoc.type
+			for (var j = 0; j < question.answerOptionList.length; j++) {
+				var answer = question.answerOptionList[j];
+				questionList[i].answerOptionList.push({
+					hashtag: answer.hashtag,
+					questionIndex: answer.questionIndex,
+					answerText: answer.answerText,
+					answerOptionNumber: answer.answerOptionNumber,
+					isCorrect: answer.isCorrect,
+					type: answer.type
 				});
-			});
-		});
+			}
+		}
 
 		return JSON.stringify({
 			hashtagDoc: hashtagDoc,

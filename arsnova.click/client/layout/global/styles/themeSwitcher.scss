@@ -30,10 +30,12 @@
 	$fg-questionScrollPane-remove-question: white;
 	$bg-questionScrollPane-question-icon-valid-index-number: green;
 	$bg-questionScrollPane-question-icon-invalid-index-number: grey;
+	$bg-questionScrollPane-question-icon-valid-index-number-hovered: darken($bg-questionScrollPane-question-icon-valid-index-number, 5%);
+	$bg-questionScrollPane-question-icon-invalid-index-number-hovered: darken($bg-questionScrollPane-question-icon-invalid-index-number, 10%);
 	$border-questionScrollPane-active: beige;
 	$border-questionScrollPane-active-valid-remove-question: green;
 	$box-shadow-questionScrollPane-active-remove-question: none;
-	$border-questionScrollPane-active-remove-question: black;
+	$border-questionScrollPane-active-remove-question: beige;
 	$bg-questionScrollPane-active-remove-question-hovered: red;
 	$fg-questionScrollPane-active-remove-question-hovered: white;
 
@@ -546,7 +548,7 @@
 					}
 					&:hover:not(.active) {
 						.indexNumber {
-							background-color: darken($bg-questionScrollPane-question-icon-valid-index-number, 5%);
+							background-color: $bg-questionScrollPane-question-icon-valid-index-number-hovered;
 						}
 					}
 				}
@@ -556,7 +558,7 @@
 					}
 					&:hover:not(.active) {
 						.indexNumber {
-							background-color: darken($bg-questionScrollPane-question-icon-invalid-index-number, 10%);
+							background-color: $bg-questionScrollPane-question-icon-invalid-index-number-hovered;
 						}
 					}
 				}
@@ -569,7 +571,7 @@
 					}
 					.removeQuestion {
 						box-shadow: $box-shadow-questionScrollPane-active-remove-question;
-						border-left: 10px solid $border-questionScrollPane-active-remove-question;
+						border-left: 1px solid $border-questionScrollPane-active-remove-question;
 						&:hover {
 							background-color: $bg-questionScrollPane-active-remove-question-hovered;
 							color: $fg-questionScrollPane-active-remove-question-hovered;

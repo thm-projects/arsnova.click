@@ -18,6 +18,7 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
+import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
@@ -76,12 +77,12 @@ Template.createAnswerOptions.onRendered(function () {
 			} else {
 				item.find('.bootstrap-switch-handle-off').removeClass("hiddenImportant");
 				item.find(".bootstrap-switch-container").css({width: "174px"});
-				answerlist.getAnswerOptionList()[event.target.id.replace("answerOption-","")].setIsCorrect(false)
+				answerlist.getAnswerOptionList()[event.target.id.replace("answerOption-","")].setIsCorrect(false);
 			}
 			Session.set("questionGroup", questionItem);
 			localData.addHashtag(Session.get("questionGroup"));
 		},
-		onInit: function (event, state) {
+		onInit: function (event) {
 			const item = $('.bootstrap-switch-id-' + event.target.id);
 			item.find("span").css({fontSize: "14px", "padding": "5px"});
 		}

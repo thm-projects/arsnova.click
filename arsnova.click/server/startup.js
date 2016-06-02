@@ -36,7 +36,8 @@ if (Meteor.isServer) {
 				lastConnection: (new Date()).getTime(),
 				musicVolume: 0,
 				musicEnabled: 0,
-				musicTitle: "noSong"
+				musicTitle: "noSong",
+				theme: "theme-default"
 			};
 			// block this hash / pk -> do not use and merge to production server!
 			var blockedHashtag2 = {
@@ -46,7 +47,8 @@ if (Meteor.isServer) {
 				lastConnection: (new Date()).getTime(),
 				musicVolume: 0,
 				musicEnabled: 0,
-				musicTitle: "noSong"
+				musicTitle: "noSong",
+				theme: "theme-default"
 			};
 
 			HashtagsCollection.insert(blockedHashtag1);

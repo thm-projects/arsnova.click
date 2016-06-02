@@ -37,5 +37,11 @@ Template.createAnswerOptions.helpers({
 	},
 	isValidAnswerOption: function (item) {
 		return item.isValid();
+	},
+	isSurveyQuestion: function () {
+		if (!EventManagerCollection.findOne()) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SurveyQuestion";
 	}
 });

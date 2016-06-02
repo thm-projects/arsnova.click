@@ -26,11 +26,22 @@
 
 	.invalidAnswerOption {
 		border-radius: $corner-radius;
+
+		.surveyQuestion {
+			border-bottom-right-radius: $corner-radius;
+			border-top-right-radius: $corner-radius;
+		}
 	}
 
 	.bootstrap-switch {
 		display: table-cell;
 		padding-right: 10px;
+		border-bottom-right-radius: $corner-radius;
+		border-top-right-radius: $corner-radius;
+
+		.bootstrap-switch-container {
+			margin-right: -10px;
+		}
 
 		.hiddenImportant {
 			display: none !important;

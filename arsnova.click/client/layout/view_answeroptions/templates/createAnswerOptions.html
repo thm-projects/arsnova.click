@@ -40,11 +40,11 @@
 							<div class="input-group {{#unless (isValidAnswerOption this)}}invalidAnswerOption{{/unless}}">
 								<div class="input-group-letter round-corners input-group-addon input-field-bg-color">{{answerOptionLetter getAnswerOptionNumber}}</div>
 								<input type="text"
-									   class="input-field"
+									   class="input-field {{#if isSurveyQuestion}}surveyQuestion{{/if}}"
 									   id="answerOptionText_Number{{getAnswerOptionNumber}}"
 									   placeholder="{{_ "view.answeroptions.answeroptiontext_placeholder"}}"
 									   value="{{getAnswerText}}">
-                                <input type="checkbox" id="answerOption-{{getAnswerOptionNumber}}" name="switch" />
+                                {{#unless isSurveyQuestion}}<input type="checkbox" id="answerOption-{{getAnswerOptionNumber}}" name="switch" />{{/unless}}
 							</div>
 						</div>
 					{{/each}}

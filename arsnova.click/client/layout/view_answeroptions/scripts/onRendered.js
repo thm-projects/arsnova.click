@@ -85,6 +85,7 @@ Template.createAnswerOptions.onRendered(function () {
 		onInit: function (event) {
 			const item = $('.bootstrap-switch-id-' + event.target.id);
 			item.find("span").css({fontSize: "14px", "padding": "5px"});
+			item.find(".bootstrap-switch-container").css({"width": "auto"});
 		}
 	});
 

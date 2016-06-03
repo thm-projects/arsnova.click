@@ -23,8 +23,6 @@ Template.translate.events({
 		$(event.target).removeClass('button-purple').addClass('button-success').css("box-shadow", "none !important")
 			.siblings('[type="button"]')
 			.removeClass('input-field-bg-color').addClass('button-purple').css("box-shadow", "1px 1px 5px black");
-		$(event.target).removeClass("")
-		$(event.target).css("box-shadow", 0);
 		return TAPi18n.setLanguageAmplify(this.tag);
 	},
 	'click #backButton': function () {

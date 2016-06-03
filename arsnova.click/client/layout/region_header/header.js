@@ -114,10 +114,9 @@ Template.header.onRendered(function () {
 			const theme = hashtagDoc ? hashtagDoc.theme : "theme-default";
 			$('#theme-wrapper').removeClass().addClass(theme);
 		}
-
 	});
-	$(window).resize(function(){
-		if ($(window).width() > 999){
+	$(window).resize(function () {
+		if ($(window).width() > 999) {
 			$(".thm-logo-background").show();
 		} else {
 			$(".thm-logo-background").hide();

@@ -1,13 +1,27 @@
+/*
+ * This file is part of ARSnova Click.
+ * Copyright (C) 2016 The ARSnova Team
+ *
+ * ARSnova Click is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ARSnova Click is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as localData from '/lib/local_storage.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
-import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {Splashscreen, ErrorSplashscreen, showReadingConfirmationSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
 
 function addDefaultChangeEvents() {
@@ -105,41 +119,8 @@ function addLiveresultsChangeEvents() {
 	globalEventStackObserver.onChange([
 		"EventManagerCollection.showReadConfirmedForIndex"
 	], function (key, value) {
-		if (!isNaN(value.readingConfirmationIndex) && value.readingConfirmationIndex > -1) {
-			var questionDoc = QuestionGroupCollection.findOne();
-			new Splashscreen({
-				autostart: true,
-				templateName: 'readingConfirmedSplashscreen',
-				closeOnButton: '#setReadConfirmed',
-				onRendered: function (instance) {
-					var content = "";
-					if (questionDoc) {
-						mathjaxMarkdown.initializeMarkdownAndLatex();
-						var questionText = questionDoc.questionList[EventManagerCollection.findOne().readingConfirmationIndex].questionText;
-						content = mathjaxMarkdown.getContent(questionText);
-					}
-					instance.templateSelector.find('#questionContent').html(content);
-
-					if (localData.containsHashtag(Router.current().params.quizName)) {
-						instance.templateSelector.find('#setReadConfirmed').text(TAPi18n.__("global.close_window"));
-					} else {
-						instance.templateSelector.find('#setReadConfirmed').parent().on('click', '#setReadConfirmed', function () {
-							Meteor.call("MemberListCollection.setReadConfirmed", {
-								hashtag: Router.current().params.quizName,
-								questionIndex: EventManagerCollection.findOne().readingConfirmationIndex,
-								nick: localStorage.getItem(Router.current().params.quizName + "nick")
-							}, (err)=> {
-								if (err) {
-									new ErrorSplashscreen({
-										autostart: true,
-										errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
-									});
-								}
-							});
-						});
-					}
-				}
-			});
+		if (!isNaN(value.readingConfirmationIndex) && value.readingConfirmationIndex > 0) {
+			showReadingConfirmationSplashscreen(value.readingConfirmationIndex);
 		}
 	});
 }

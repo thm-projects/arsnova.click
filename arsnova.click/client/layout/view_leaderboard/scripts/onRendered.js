@@ -30,8 +30,8 @@ Template.leaderBoard.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemSound);
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		footerElements.addFooterElement(footerElements.footerElemAbout);
-		footerElements.calculateFooter();
 	}
+	footerElements.calculateFooter();
 
 	setTimeout(calculateButtonCount, 30);
 

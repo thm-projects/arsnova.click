@@ -20,7 +20,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {parseSingleAnswerOptionInput} from './lib.js';
+import {parseSingleAnswerOptionInput, formatIsCorrectButtons} from './lib.js';
 
 Template.createAnswerOptions.events({
 	"click #addAnswerOption": function () {
@@ -41,6 +41,8 @@ Template.createAnswerOptions.events({
 
 			const answerOptionsField = $('.answer-options');
 			answerOptionsField.scrollTop(answerOptionsField[0].scrollHeight);
+
+			setTimeout(formatIsCorrectButtons, 20);
 		}
 	},
 	"click #deleteAnswerOption": function () {

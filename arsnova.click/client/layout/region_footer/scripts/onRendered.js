@@ -21,7 +21,7 @@ import * as footerElements from "./lib.js";
 
 Template.footer.onRendered(function () {
 	footerElements.calculateFooter();
-	
+
 	$('.navbar-footer').on("click", '#reading-confirmation', function () {
 		/*
 		Since the functionality is currently not implemented the state is set to enabled!

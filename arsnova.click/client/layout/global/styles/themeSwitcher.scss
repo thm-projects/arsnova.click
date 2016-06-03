@@ -412,8 +412,10 @@
 		$input-foreground-color: white;
 		$input-group-letter-color: white;
 		$footer-background-color: #000000; /*gainsboro */
-		$fg-footer-info-bar-active: #33FF00;
-		$fg-footer-info-bar-active-hovered: #A1FF8A;
+		$fg-footer-info-bar-active: #00CC00;
+		$fg-footer-info-bar-active-hovered: #00FF00;
+		$fg-footer-element-deactivated: #E00000;
+		$fg-footer-element-deactivated-hovered: #FF0000;
 
 		$bg-answer_options-bootstrap_switch: $thmgray;
 

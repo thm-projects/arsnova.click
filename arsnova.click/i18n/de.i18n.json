@@ -164,6 +164,8 @@
       },
       "no_attendee_correct": "Leider niemand",
       "question": "Frage",
+      "second": "Sekunde",
+      "second_plural": "Sekunden",
       "show_more": "Zeige 1 weiteren",
       "show_more_plural": "Zeige %s weitere",
       "show_less": "Zeige weniger"

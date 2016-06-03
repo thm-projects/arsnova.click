@@ -15,6 +15,21 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-.learner-list > .col-md-6 {
-	margin-top: 20px;
+@import "../../global/styles/appearance.scss";
+
+.learner-list {
+	.firstLeaderBordItem {
+		margin-bottom: 10px;
+		line-height: 4vh;
+		text-align: center;
+		padding: 10px 0;
+		font-size: 1.4em;
+		-webkit-border-radius: $corner-radius;
+		-moz-border-radius: $corner-radius;
+		border-radius: $corner-radius;
+	}
+
+	.col-md-6 {
+		margin-top: 20px;
+	}
 }

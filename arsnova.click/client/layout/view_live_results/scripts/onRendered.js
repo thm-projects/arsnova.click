@@ -27,7 +27,7 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount, startCountdown} from './lib.js';
 
 Template.liveResults.onRendered(()=> {
-	if (EventManagerCollection.findOne().readingConfirmationIndex === -1) {
+	if (EventManagerCollection.findOne().readingConfirmationIndex < 1 && EventManagerCollection.findOne().questionIndex < 0) {
 		showReadingConfirmationSplashscreen(0);
 	}
 	if (localData.containsHashtag(Router.current().params.quizName) && EventManagerCollection.findOne() && EventManagerCollection.findOne().readingConfirmationIndex === -1) {

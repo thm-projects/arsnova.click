@@ -73,6 +73,9 @@
 
 	$disabled-button-background: #808080;
 
+	$grey-button-background: #808080;
+	$grey-button-color: white;
+
 	$placeholder-color: #4D4D4D;
 	$input-background-color: #ffd700;
 	$input-foreground-color: black;
@@ -701,6 +704,10 @@
 		.button-purple {
 			background-color: $info;
 			color: $info-text-color;
+		}
+		.button-grey {
+			background-color: $grey-button-background;
+			color: $grey-button-color;
 		}
 		.button-default {
 			background-color: $default;

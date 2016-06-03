@@ -42,7 +42,7 @@
 }
 
 .modal-body {
-  padding: 0 50px;
+  padding: 0 30px;
   /* Currently not supported by Chrome and Opera! see http://caniuse.com/#feat=css-hyphens */
   /*
   -webkit-hyphens: auto;
@@ -53,6 +53,11 @@
   text-align: -webkit-left;
   */
   text-align: left;
+
+  p {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .modal-header {

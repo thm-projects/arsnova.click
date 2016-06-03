@@ -26,11 +26,11 @@
 
 	.invalidAnswerOption {
 		border-radius: $corner-radius;
+	}
 
-		.surveyQuestion {
-			border-bottom-right-radius: $corner-radius;
-			border-top-right-radius: $corner-radius;
-		}
+	.surveyQuestion {
+		border-bottom-right-radius: $corner-radius;
+		border-top-right-radius: $corner-radius;
 	}
 
 	.bootstrap-switch {

@@ -27,5 +27,13 @@
 
 	p {
 		margin: 0 20px 5px;
+
+		&.success, &.failed {
+			font-weight: bold;
+		}
+	}
+
+	span.success, span.failed {
+		font-weight: bold;
 	}
 }

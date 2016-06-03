@@ -34,7 +34,7 @@ export const footerElemSound = {
 };
 export const footerElemReadingConfirmation = {
 	id: "reading-confirmation",
-	iconClass: "glyphicon glyphicon-ok",
+	iconClass: "glyphicon glyphicon-eye-open",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.reading-confirmation",
 	selectable: true
@@ -121,6 +121,11 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 				$('#sound_switch').bootstrapSwitch('state', state, true);
 				break;
 			case "reading-confirmation":
+				$('#reading-confirmation').removeClass("error").addClass("success");
+				$('#reading-confirmation_switch').bootstrapSwitch('state', state, true);
+				/*
+				Since the functionality is currently not implemented the state is set to enabled!
+
 				if (HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled) {
 					$('#reading-confirmation').removeClass("error").addClass("success");
 				} else {
@@ -128,6 +133,7 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 					$('#reading-confirmation').removeClass("success").addClass("error");
 				}
 				$('#reading-confirmation_switch').bootstrapSwitch('state', state, true);
+				*/
 				break;
 			case "fullscreen":
 				if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement) {
@@ -232,8 +238,10 @@ export function calculateFooterFontSize() {
 
 export function calculateFooter() {
 	$(window).on("resize", function () {
-		generateFooterElements();
-		setTimeout(calculateFooterFontSize, 20);
+		if ($(window).height() > 400) {
+			generateFooterElements();
+			setTimeout(calculateFooterFontSize, 20);
+		}
 	});
 	generateFooterElements();
 	setTimeout(calculateFooterFontSize, 20);

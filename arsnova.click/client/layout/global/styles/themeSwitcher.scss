@@ -12,7 +12,7 @@
 	$fg-success: lighten($success, 20);
 	$warning: #b22222;
 	$warning-text-color: #ffffff;
-	$fg-warning: $warning;
+	$fg-warning: #a22c2c;
 	$info: #663399;
 	$info-text-color: #ffffff;
 	$default: #808080;
@@ -30,12 +30,26 @@
 	$fg-questionScrollPane-remove-question: white;
 	$bg-questionScrollPane-question-icon-valid-index-number: green;
 	$bg-questionScrollPane-question-icon-invalid-index-number: grey;
+	$bg-questionScrollPane-question-icon-valid-index-number-hovered: darken($bg-questionScrollPane-question-icon-valid-index-number, 5%);
+	$bg-questionScrollPane-question-icon-invalid-index-number-hovered: darken($bg-questionScrollPane-question-icon-invalid-index-number, 10%);
 	$border-questionScrollPane-active: beige;
 	$border-questionScrollPane-active-valid-remove-question: green;
 	$box-shadow-questionScrollPane-active-remove-question: none;
-	$border-questionScrollPane-active-remove-question: black;
+	$border-questionScrollPane-active-remove-question: beige;
 	$bg-questionScrollPane-active-remove-question-hovered: red;
 	$fg-questionScrollPane-active-remove-question-hovered: white;
+
+	$border-answer_options-invalidAnswerOption: red;
+	$border-answer_options-invalidQuestion: red;
+	$bg-answer_options-bootstrap_switch: #ffd700;
+	$border-answer_options-bootstrap_switch: none;
+	$bg-answer_options-bootstrap_switch_handle_off: $warning;
+	$fg-answer_options-bootstrap_switch_handle_off: $warning-text-color;
+	$bg-answer_options-bootstrap_switch_handle_on: $success;
+	$fg-answer_options-bootstrap_switch_handle_on: $success-text-color;
+	$border-answer_options-bootstrap_switch_focused: none;
+	$box-shadow-answer_options-bootstrap_switch_focused: none;
+	$outline-answer_options-bootstrap_switch_focused: none;
 
 	$disabled-button-background: #808080;
 
@@ -64,6 +78,8 @@
 	$progress-bar-read-confirmation: darkorange;
 	$progress-bar-failure-color: firebrick;
 	$progress-bar-default-color: grey;
+	$bg-progress-bar-reading_confirmation: purple;
+	$fg-progress-bar-reading_confirmation: white;
 	$bg_progress-bar: white;
 	$fg_progress-bar: black;
 
@@ -430,7 +446,7 @@
 		$bg-container: $background-color;
 		$bg-questionList-row: $bg-container;
 		$bg-footer: #dfe5e6;
-		$fg_a: white;
+		$fg_a: #3d9c19;
 		$fg_quiz-name: white;
 		$fg_titel: black;
 		$fg-question-title: black;
@@ -544,7 +560,7 @@
 					}
 					&:hover:not(.active) {
 						.indexNumber {
-							background-color: darken($bg-questionScrollPane-question-icon-valid-index-number, 5%);
+							background-color: $bg-questionScrollPane-question-icon-valid-index-number-hovered;
 						}
 					}
 				}
@@ -554,7 +570,7 @@
 					}
 					&:hover:not(.active) {
 						.indexNumber {
-							background-color: darken($bg-questionScrollPane-question-icon-invalid-index-number, 10%);
+							background-color: $bg-questionScrollPane-question-icon-invalid-index-number-hovered;
 						}
 					}
 				}
@@ -567,7 +583,7 @@
 					}
 					.removeQuestion {
 						box-shadow: $box-shadow-questionScrollPane-active-remove-question;
-						border-left: 10px solid $border-questionScrollPane-active-remove-question;
+						border-left: 1px solid $border-questionScrollPane-active-remove-question;
 						&:hover {
 							background-color: $bg-questionScrollPane-active-remove-question-hovered;
 							color: $fg-questionScrollPane-active-remove-question-hovered;
@@ -576,9 +592,40 @@
 				}
 			}
 		}
+		.answer-options {
+			.invalidAnswerOption {
+				border: 2px solid $border-answer_options-invalidAnswerOption;
+			}
+			.bootstrap-switch {
+				background-color: $bg-answer_options-bootstrap_switch;
+				border: $border-answer_options-bootstrap_switch;
+				.bootstrap-switch-handle-off {
+					background-color: $bg-answer_options-bootstrap_switch_handle_off;
+					color: $fg-answer_options-bootstrap_switch_handle_off;
+				}
+				.bootstrap-switch-handle-on {
+					background-color: $bg-answer_options-bootstrap_switch_handle_on;
+					color: $fg-answer_options-bootstrap_switch_handle_on;
+				}
+				&.bootstrap-switch-focused {
+					border: $border-answer_options-bootstrap_switch_focused;
+					box-shadow: $box-shadow-answer_options-bootstrap_switch_focused;
+					outline: $outline-answer_options-bootstrap_switch_focused;
+				}
+			}
+		}
+		#editQuestionText {
+			.invalidQuestion {
+				border: 2px solid $border-answer_options-invalidQuestion;
+			}
+		}
 		.progress-bar {
 			background: $bg_progress-bar;
 			color: $fg_progress-bar;
+		}
+		.progress-reading_confirmation {
+			background-color: $bg-progress-bar-reading_confirmation;
+			color: $fg-progress-bar-reading_confirmation;
 		}
 		.slider, .slider .noUi-handle {
 			background-color: $slider-color;

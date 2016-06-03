@@ -29,6 +29,19 @@ Template.footer.onRendered(function () {
 			elem.removeClass("glyphicon-fullscreen").addClass("glyphicon-resize-small");
 		}
 	});
+
+	$('.navbar-footer').on("click", '#reading-confirmation', function () {
+		/*
+		Since the functionality is currently not implemented the state is set to enabled!
+
+		const elem = $('#reading-confirmation').find(".footerElemIcon").find(".glyphicon");
+		if (elem.hasClass("glyphicon-eye-open")) {
+			elem.removeClass("glyphicon-eye-open").addClass("glyphicon-eye-close");
+		} else {
+			elem.removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open");
+		}
+		*/
+	});
 });
 
 Template.showMore.onRendered(function () {

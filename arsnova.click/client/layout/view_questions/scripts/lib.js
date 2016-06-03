@@ -85,6 +85,7 @@ function questionTextLengthWithoutMarkdownSyntax(questionText) {
 	if (doesMarkdownSyntaxExist(questionText, '>')) {
 		questionTextLength -= 4;
 	}
+	questionTextLength = questionText.replace(/ /g,"").length;
 	return questionTextLength;
 }
 
@@ -109,9 +110,9 @@ export function addQuestion(index) {
 export function checkForValidQuestionText() {
 	var questionText = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
 	if (questionTextLengthWithoutMarkdownSyntax(questionText) < 5) {
-		$('#questionText').addClass("invalidAnswerOption");
+		$('#questionText').addClass("invalidQuestion");
 	} else {
-		$('#questionText').removeClass("invalidAnswerOption");
+		$('#questionText').removeClass("invalidQuestion");
 	}
 }
 
@@ -156,6 +157,9 @@ export function checkForMarkdown() {
 }
 
 export function getQuestionTypes() {
+	if (!Session.get("questionGroup") || !EventManagerCollection.findOne()) {
+		return [];
+	}
 	return [
 		{
 			id: "SingleChoiceQuestion",

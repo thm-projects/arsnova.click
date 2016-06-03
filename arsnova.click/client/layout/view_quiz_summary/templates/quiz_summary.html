@@ -39,7 +39,7 @@
                         {{#unless this.isValid}}
                             <ul>
                                 {{#each getValidationErrors this}}
-                                    <li>{{_ (getTranslationForType this.occuredAt.type)}} {{getNormalizedIndex this.occuredAt.id}}: {{_ (getTranslationForReason this.reason)}}</li>
+                                    <li>{{#unless isQuestionType this.occuredAt.type}}{{_ (getTranslationForType this.occuredAt.type)}} {{getNormalizedIndex this.occuredAt.id}}: {{/unless}}{{_ (getTranslationForReason this.reason)}}</li>
                                 {{/each}}
                             </ul>
                         {{/unless}}

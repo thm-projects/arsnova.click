@@ -62,15 +62,13 @@
 		</div>
 	</div>
 	{{#if isOwner}}
-		<div class="fixed-bottom">
-			<div class="row">
-				<div class="col-xs-6 col-xs-offset-3">
-					<button id="startPolling" class="button button-next button-start" disabled="disabled">
-						{{_ "view.lobby.start_quiz" }}
-						<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-					</button>
-				</div>
-			</div>
-		</div>
+        <div class="row">
+            <div class="fixed-bottom col-xs-12 col-sm-6 col-sm-offset-3">
+                <button id="startPolling" class="button button-next button-start" disabled="disabled">
+                    {{_ "view.lobby.start_quiz" }}
+                    <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
 	{{/if}}
 </template>

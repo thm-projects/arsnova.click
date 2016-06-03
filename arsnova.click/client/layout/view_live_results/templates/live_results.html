@@ -20,36 +20,32 @@
 	<div id="liveResultsFrame">
         {{#if isRunningQuestion}}
             <div class="row-padding-bottom">
-                {{#if isOwner}}
-                    <div class="col-xs-3 top-bar-content">
-                        <span class="glyphicon icon-top-bar glyphicon-user glyphicon-style center" aria-hidden="true">
-                            <span class="titel">{{getCountStudents}}</span>
-                        </span>
-                    </div>
-                    <div class="col-xs-6 text-center">
-                        <div id="appTitle" class="titel subtitel-padding-top">{{_ votingText}}</div>
-                    </div>
-                    <div class="col-xs-3 top-bar-content">
+                <div class="col-xs-3 top-bar-content">
+                    <span class="glyphicon icon-top-bar glyphicon-user glyphicon-style center" aria-hidden="true">
+                        <span class="titel">{{getCountStudents}}</span>
+                    </span>
+                </div>
+                <div class="col-xs-6 text-center">
+                    <div id="appTitle" class="titel subtitel-padding-top">{{_ votingText}}</div>
+                </div>
+                <div class="col-xs-3 top-bar-content">
                     <span class="glyphicon icon-top-bar glyphicon-hourglass glyphicon-style center" aria-hidden="true">
                         <span class="titel">{{getCountdown}}</span>
                     </span>
-                    </div>
-                {{else}}
-                    <div class=" titel-relative text-light text-center">
-                        <div id="appTitle" class="titel margin-to-logo">{{votingText}}</div>
-                    </div>
-                {{/if}}
+                </div>
             </div>
         {{/if}}
 		<div class="col-xs-12 question-wrapper">
 			{{#each questionList}}
 				<div class="row question-row" id="question-row_{{displayIndex}}">
 					<div class="col-md-12">
-						<div class="row">
-							<div class="col-md-12">
-								<p class="question-title">{{_ "view.liveResults.question"}} {{getNormalizedIndex displayIndex}} / {{allQuestionCount}}</p>
-							</div>
-						</div>
+                        {{#unless hasOnlyOneQuestion}}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="question-title">{{_ "view.liveResults.question"}} {{getNormalizedIndex displayIndex}} / {{allQuestionCount}}</p>
+                                </div>
+                            </div>
+                        {{/unless}}
 						{{#if hasReadConfirmationRequested displayIndex}}
 							<div class="row">
 								<div class="col-md-12">
@@ -81,7 +77,7 @@
 							absolute = (getCurrentRead displayIndex)
 							base = getCountStudents
 							percent = (getPercentRead displayIndex)
-							backgroundStyle = (getCSSClassForPercent (getPercentRead displayIndex))
+                            backgroundClass = "progress-reading_confirmation"
 						}}
 						{{#if hasReadConfirmationRequested displayIndex}}
 							{{#each answerList displayIndex}}
@@ -140,46 +136,57 @@
 
 		{{#if isOwner}}
 			{{#unless isRunningQuestion}}
-				<div class="fixed-bottom" style="display: block;">
-					<div class="col-md-6 col-md-offset-3">
-						<div class="row">
-							<div class="col-xs-6">
-								<button id="backButton" class="button button-back disableOnActiveCountdown">
-									<span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
-									<span class="ansBtn">{{_ "view.liveResults.back_to_lobby"}}</span>
-								</button>
-							</div>
-							<div class="col-xs-6">
-								{{#if showGlobalLeaderboardButton}}
-									{{#if hasCorrectAnswerOptions}}
-										<button class="button button-next disableOnActiveCountdown" id="goGlobalRanking">
-											<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-											<span class="ansBtn">{{_ "view.liveResults.global_ranking"}}</span>
-										</button>
-									{{/if}}
-								{{else}}
-									{{#if hasNextQuestion}}
-										{{#if showNextQuestionButton}}
-											<button class="button button-next button-start disableOnActiveCountdown" id="showNextQuestionDialog">
-												<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-												<span class="ansBtn">{{_ "view.liveResults.show_question"}} {{nextReadingConfirmationIndex}}
-													/ {{allQuestionCount}}</span>
-											</button>
-										{{else}}
-											<button class="button button-next button-start disableOnActiveCountdown" id="startNextQuestion" disabled>
-												<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-												<span class="ansBtn">{{_ "view.liveResults.start_round"}} {{nextQuestionIndex}}
-													/ {{allQuestionCount}}</span>
-											</button>
-										{{/if}}
-									{{/if}}
-								{{/if}}
-							</div>
-						</div>
-					</div>
-				</div>
+                <div class="row">
+                    <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" style="display: block;">
+                        <div class="row">
+                            <div class="col-xs-{{#if showGlobalLeaderboardButton}}{{#if hasCorrectAnswerOptions}}6{{/if}}{{else}}{{#if hasNextQuestion}}6{{else}}12{{/if}}{{/if}}">
+                                <button id="backButton" class="button button-back disableOnActiveCountdown">
+                                    <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
+                                    <span class="ansBtn">{{_ "view.liveResults.back_to_lobby"}}</span>
+                                </button>
+                            </div>
+                            <div class="col-xs-6">
+                                {{#if showGlobalLeaderboardButton}}
+                                    {{#if hasCorrectAnswerOptions}}
+                                        <button class="button button-next disableOnActiveCountdown" id="goGlobalRanking">
+                                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                            <span class="ansBtn">{{_ "view.liveResults.global_ranking"}}</span>
+                                        </button>
+                                    {{/if}}
+                                {{else}}
+                                    {{#if hasNextQuestion}}
+                                        {{#if showNextQuestionButton}}
+                                            <button class="button button-next button-start disableOnActiveCountdown" id="showNextQuestionDialog">
+                                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+												<span class="ansBtn">{{_ "view.liveResults.show_question" count=allQuestionCount}}{{#unless hasOnlyOneQuestion}} {{nextReadingConfirmationIndex}}
+                                                    / {{allQuestionCount}}{{/unless}}</span>
+                                            </button>
+                                        {{else}}
+                                            <button class="button button-next button-start disableOnActiveCountdown" id="startNextQuestion" disabled>
+                                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+												<span class="ansBtn">{{_ "view.liveResults.start_round" count=allQuestionCount}}{{#unless hasOnlyOneQuestion}} {{nextQuestionIndex}}
+                                                    / {{allQuestionCount}}{{/unless}}</span>
+                                            </button>
+                                        {{/if}}
+                                    {{/if}}
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
 			{{/unless}}
+            {{> gamificationAnimation}}
+        {{else}}
+            {{#unless isRunningQuestion}}{{#if showGlobalLeaderboardButton}}{{#if hasCorrectAnswerOptions}}
+                <div class="row">
+                    <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" style="display: block;bottom: 30px !important;">
+                        <button class="button button-next disableOnActiveCountdown" id="goGlobalRanking">
+                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                            <span class="ansBtn">{{_ "view.liveResults.global_ranking"}}</span>
+                        </button>
+                    </div>
+                </div>
+            {{/if}}{{/if}}{{/unless}}
 		{{/if}}
-        {{> gamificationAnimation}}
 	</div>
 </template>

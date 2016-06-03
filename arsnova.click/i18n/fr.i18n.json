@@ -134,7 +134,9 @@
   },
   "view": {
     "answeroptions": {
-      "answeroptiontext_placeholder": "Option de réponse nécessaire"
+      "answeroptiontext_placeholder": "Option de réponse nécessaire",
+      "correct": "Correct",
+      "wrong": "Faux"
     },
     "choose_nickname": {
       "enter_nickname": "Prendre un surnom",
@@ -177,7 +179,9 @@
       "back_to_lobby": "Retour à l'entrée",
       "global_ranking": "Classement mondial",
       "show_question": "Voir question",
-      "start_round": "Commencez tour",
+      "show_question_plural": "Voir question",
+      "start_round": "Démarrer Quiz",
+      "start_round_plural": "Commencez tour",
       "confirm_read": "J'ai lu la question!",
       "game_over": "Jeu terminé",
       "countdown": "Compte à rebours",
@@ -219,7 +223,7 @@
       "type": "Type",
       "answer": "Répondre",
       "answer_plural": "Réponses",
-      "timer": "Minuteur",
+      "timer": "Compte à rebours",
       "second": "Seconde",
       "second_plural": "Secondes",
       "validation": "Validation",

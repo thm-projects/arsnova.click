@@ -134,7 +134,9 @@
   },
   "view": {
     "answeroptions": {
-      "answeroptiontext_placeholder": "Antwortoption benötigt"
+      "answeroptiontext_placeholder": "Antwortoption benötigt",
+      "correct": "Richtig",
+      "wrong": "Falsch"
     },
     "choose_nickname": {
       "enter_nickname": "Gib dir einen Nicknamen",
@@ -176,8 +178,10 @@
       "complete_wrong": "Ganz falsch",
       "back_to_lobby": "Zurück zur Lobby",
       "global_ranking": "Globale Rangliste",
-      "show_question": "Zeige Frage",
-      "start_round": "Starte Runde",
+      "show_question": "Zeige die Frage",
+      "show_question_plural": "Zeige Frage",
+      "start_round": "Starte Quiz",
+      "start_round_plural": "Starte Runde",
       "confirm_read": "Ich habe die Frage gelesen",
       "game_over": "Game over",
       "countdown": "Countdown",
@@ -219,7 +223,7 @@
       "type": "Typ",
       "answer": "Antwort",
       "answer_plural": "Antworten",
-      "timer": "Timer",
+      "timer": "Countdown",
       "second": "Sekunde",
       "second_plural": "Sekunden",
       "validation": "Validierung",

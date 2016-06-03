@@ -134,7 +134,9 @@
   },
   "view": {
     "answeroptions": {
-      "answeroptiontext_placeholder": "Answer option required"
+      "answeroptiontext_placeholder": "Answer option required",
+      "correct": "Correct",
+      "wrong": "Wrong"
     },
     "choose_nickname": {
       "enter_nickname": "Take a nickname",
@@ -177,7 +179,9 @@
       "back_to_lobby": "Back to the lobby",
       "global_ranking": "Global ranking",
       "show_question": "Show question",
-      "start_round": "Start round",
+      "show_question_plural": "Show question",
+      "start_round": "Start Quiz",
+      "start_round_plural": "Start round",
       "confirm_read": "Got that!",
       "game_over": "Game over",
       "countdown": "Countdown",
@@ -219,9 +223,9 @@
       "type": "Type",
       "answer": "Answer",
       "answer_plural": "Answers",
-      "timer": "Timer",
-      "second": "Second",
-      "second_plural": "Seconds",
+      "timer": "Countdown",
+      "second": "second",
+      "second_plural": "seconds",
       "validation": "Validation",
       "validation_errors": {
         "types": {

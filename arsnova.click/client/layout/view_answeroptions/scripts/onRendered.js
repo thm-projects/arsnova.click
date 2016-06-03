@@ -58,7 +58,14 @@ Template.createAnswerOptions.onRendered(function () {
 		}
 	}
 
+	lib.formatIsCorrectButtons();
+
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	footerElements.calculateFooter();
+
+	$(window).resize(function () {
+		setTimeout(lib.calculateXsViewport, 5);
+	});
+	setTimeout(lib.calculateXsViewport, 25);
 });

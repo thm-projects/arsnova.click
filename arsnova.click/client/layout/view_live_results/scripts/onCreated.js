@@ -15,19 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {deleteCountdown} from './lib.js';
 
 Template.liveResults.onCreated(function () {
-	var oldStartTimeValues = {};
 	deleteCountdown();
-
-	var doc = QuestionGroupCollection.findOne();
-	var i = 0;
-	for (i; i < doc.questionList.length; i++) {
-		oldStartTimeValues[i] = doc.questionList[i].startTime;
-	}
-	Session.set("oldStartTimeValues", oldStartTimeValues);
 });

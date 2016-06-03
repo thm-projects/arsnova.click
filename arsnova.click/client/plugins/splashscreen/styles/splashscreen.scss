@@ -28,9 +28,7 @@
   box-shadow: none;
 
   a, a:hover, a:active, a:visited, a:focus {
-	&:hover {
-	  text-decoration: underline;
-	}
+    text-decoration: underline;
   }
 }
 
@@ -45,12 +43,16 @@
 
 .modal-body {
   padding: 0 50px;
-  text-align: justify;
   /* Currently not supported by Chrome and Opera! see http://caniuse.com/#feat=css-hyphens */
+  /*
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   -ms-hyphens: auto;
   hyphens: auto;
+  text-align: justify;
+  text-align: -webkit-left;
+  */
+  text-align: left;
 }
 
 .modal-header {

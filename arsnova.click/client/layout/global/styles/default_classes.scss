@@ -22,7 +22,6 @@
   position: absolute;
   width: 100%;
   top: 50%;
-  /* TODO: IE 8 and Opera 8 doesn't support translateY*/
   transform: translateY(-50%);
 }
 
@@ -148,10 +147,29 @@
 }
 
 .fixed-bottom {
-  position: fixed;
+  position: fixed !important;
   display: none;
   left: 0;
-  height: 55px;
+  margin-bottom: 5px;
+
+  &.col-xxs-12 {
+    .fixed-bottom-item {
+      margin-bottom: 5px;
+    }
+  }
+
+  .fixed-bottom-item {
+    height: 55px;
+  }
+
+  .fixed-bottom-item-text {
+    display: none;
+  }
+  @media (max-width: 320px), (min-width: 425px) {
+    .fixed-bottom-item-text {
+      display: inline;
+    }
+  }
 }
 
 .content-with-navigation-buttons {
@@ -232,7 +250,9 @@ select:-moz-focusring {
 }
 
 @media (max-width: 550px) {
-  .ansBtn {
-    display: none;
+  .col-xs-6 {
+    .ansBtn {
+      display: none;
+    }
   }
 }

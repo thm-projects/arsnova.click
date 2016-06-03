@@ -117,7 +117,7 @@ Template.header.onRendered(function () {
 
 	});
 	$(window).resize(function(){
-		if ($(window).width() > 999 && !$(".thm-logo-background").is(":visible")){
+		if ($(window).width() > 999){
 			$(".thm-logo-background").show();
 		} else {
 			$(".thm-logo-background").hide();

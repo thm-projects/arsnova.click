@@ -375,24 +375,29 @@
 		$thmgreen: #80ba24;
 		$thmgray: #4a5c66;
 
-		$background-color: $thmgreen;
+		$background-color: #dfeec8;
 		$bg-nav-row: $background-color;
 		$bg-container: $background-color;
+		$bg-nav-row: $thmgreen;
+		$bg-footer: #4a5d66;
 
 		$fg_quiz-name: #b5003f;
 		$default: #d3d3d3; /* light grey */
-		$default-text-color: black;
-		$success-text-color: $thmgray;
+		$default-text-color: $thmgray;
+		$success-text-color: white;
+		//$fg-text-light: white;
+		//$fg_text-dark: white;
+		$fg_titel: $thmgray;
 
-		$placeholder-color: #ffffff ; /* white */
+		$placeholder-color: #d3d3d3; /* light grey */
 		$input-background-color: $thmgray;
-
-		$bg-footer: $background-color;
+		$input-foreground-color: white;
+		$input-group-letter-color: white;
 		$footer-background-color: #000000; /*gainsboro */
 		$fg-footer-info-bar-active: #33FF00;
 		$fg-footer-info-bar-active-hovered: #A1FF8A;
 
-		$bg-nav-row: $background-color;
+		$bg-answer_options-bootstrap_switch: $thmgray;
 
 		$bg-questionList-row: $bg-nav-row;
 
@@ -729,6 +734,8 @@
 		}
 		.textarea {
 			background-color: $input-background-color;
+			color: $input-foreground-color !important;
+
 		}
 		.previewText {
 			background-color: $bg-previewText;

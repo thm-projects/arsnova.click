@@ -29,7 +29,7 @@
                         {{#each leaderBoardSums}}
                             {{#if isFirstItem @index}}
                                 <div class="col-xs-12">
-                                    <div class="{{#if isOwnNick value}}color-changing-own-nick{{/if}}">
+                                    <div class="color-changing-own-nick firstLeaderBordItem">
                                         <span class="glyphicon glyphicon-education"></span>
                                         <span>{{getPosition @index}}. {{value}} - {{parseTimeToSeconds sumResponseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
                                     </div>

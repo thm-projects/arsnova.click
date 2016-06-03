@@ -23,7 +23,7 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
-import {calculateButtonCount} from './lib.js';
+import {calculateButtonCount, startCountdown} from './lib.js';
 
 Template.liveResults.onRendered(()=> {
 	if (localData.containsHashtag(Router.current().params.quizName) && EventManagerCollection.findOne() && EventManagerCollection.findOne().readingConfirmationIndex === -1) {
@@ -50,6 +50,8 @@ Template.liveResults.onRendered(()=> {
 			footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
 		}
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
+	} else {
+		startCountdown(EventManagerCollection.findOne().questionIndex);
 	}
 	footerElements.calculateFooter();
 });

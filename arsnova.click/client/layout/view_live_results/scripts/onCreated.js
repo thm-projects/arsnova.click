@@ -17,17 +17,8 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {deleteCountdown} from './lib.js';
 
 Template.liveResults.onCreated(function () {
-	var oldStartTimeValues = {};
 	deleteCountdown();
-
-	var doc = QuestionGroupCollection.findOne();
-	var i = 0;
-	for (i; i < doc.questionList.length; i++) {
-		oldStartTimeValues[i] = doc.questionList[i].startTime;
-	}
-	Session.set("oldStartTimeValues", oldStartTimeValues);
 });

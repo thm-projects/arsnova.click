@@ -68,30 +68,45 @@ export function checkIfIsCorrect(isCorrect) {
 }
 
 export function startCountdown(index) {
-	Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index);
 	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	var questionDoc = QuestionGroupCollection.findOne().questionList[index];
-	Session.set("sessionCountDown", questionDoc.timer);
-	countdown = new ReactiveCountdown(questionDoc.timer);
-
-	if (hashtagDoc.musicEnabled) {
-		if (buzzsound1 == null) {
-			setBuzzsound1(hashtagDoc.musicTitle);
-		}
-		buzzsound1.setVolume(hashtagDoc.musicVolume);
-		buzzsound1.play();
-		Session.set("soundIsPlaying", true);
+	if (!questionDoc) {
+		return;
 	}
+	const currentTime = new Date();
+	const currentCountdown = new Date(questionDoc.startTime);
+	const timeDiff = new Date(currentTime.getTime() - currentCountdown.getTime());
+	currentCountdown.setSeconds(currentCountdown.getSeconds() - timeDiff.getSeconds());
+	if (questionDoc.timer - timeDiff.getSeconds() <= 0) {
+		return;
+	}
+	if (localData.containsHashtag(Router.current().params.quizName)) {
+		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index);
+
+		if (hashtagDoc.musicEnabled) {
+			if (buzzsound1 == null) {
+				setBuzzsound1(hashtagDoc.musicTitle);
+			}
+			buzzsound1.setVolume(hashtagDoc.musicVolume);
+			buzzsound1.play();
+			Session.set("soundIsPlaying", true);
+		}
+	}
+	Session.set("sessionCountDown", questionDoc.timer - timeDiff.getSeconds());
+	countdown = new ReactiveCountdown(questionDoc.timer - timeDiff.getSeconds());
 
 	countdown.start(function () {
+		Session.set("countdownInitialized", false);
+		$('.disableOnActiveCountdown').removeAttr("disabled");
+		if (!localData.containsHashtag(Router.current().params.quizName)) {
+			return;
+		}
 		$('.navbar-fixed-bottom').show();
 		if (Session.get("soundIsPlaying")) {
 			buzzsound1.stop();
 			whistleSound.play();
 			Session.set("soundIsPlaying", false);
 		}
-		Session.set("countdownInitialized", false);
-		$('.disableOnActiveCountdown').removeAttr("disabled");
 		if (index + 1 >= QuestionGroupCollection.findOne().questionList.length) {
 			Session.set("sessionClosed", true);
 			if (localData.containsHashtag(Router.current().params.quizName) && AnswerOptionCollection.find({isCorrect: true}).count() > 0) {

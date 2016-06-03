@@ -45,21 +45,11 @@ Template.liveResults.helpers({
 		if (!eventDoc) {
 			return false;
 		}
-		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (Session.get("sessionClosed") || !Session.get("countdownInitialized") || eventDoc.questionIndex !== index) {
-				return true;
-			} else {
-				var timer = Math.round(countdown.get());
-				return timer <= 0;
-			}
+		if (Session.get("sessionClosed") || !Session.get("countdownInitialized") || eventDoc.questionIndex !== index) {
+			return true;
 		} else {
-			let questionDoc = QuestionGroupCollection.findOne();
-			if (!questionDoc) {
-				return false;
-			}
-			var question = questionDoc.questionList[eventDoc.questionIndex];
-
-			return eventDoc.questionIndex !== index || (new Date().getTime() - parseInt(question.startTime)) > (question.timer * 1000);
+			var timer = Math.round(countdown.get());
+			return timer <= 0;
 		}
 	},
 	getCountStudents: function () {

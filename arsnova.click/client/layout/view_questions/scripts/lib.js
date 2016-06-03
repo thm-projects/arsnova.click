@@ -105,7 +105,7 @@ export function addQuestion(index) {
 		if (questionType === "SurveyQuestion") {
 			questionItem.getQuestionList()[index].getAnswerOptionList().forEach(function (answerOption) {
 				answerOption.setIsCorrect(false);
-			})
+			});
 		}
 	}
 	questionItem.getQuestionList()[index].setQuestionText(questionText);

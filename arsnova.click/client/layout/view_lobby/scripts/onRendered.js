@@ -25,7 +25,8 @@ import {calculateButtonCount} from './lib.js';
 
 Template.memberlist.onRendered(function () {
 	Session.set("learnerCountOverride", false);
-	calculateButtonCount();
+	Session.set("allMembersCount", MemberListCollection.find().count());
+	calculateButtonCount(MemberListCollection.find().count());
 
 	calculateHeaderSize();
 	$(window).resize(calculateHeaderSize);
@@ -47,5 +48,5 @@ Template.memberlist.onRendered(function () {
 });
 
 Template.learner.onRendered(function () {
-	calculateButtonCount();
+	calculateButtonCount(MemberListCollection.find().count());
 });

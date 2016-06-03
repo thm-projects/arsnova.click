@@ -250,7 +250,7 @@ select:-moz-focusring {
 }
 
 @media (max-width: 550px) {
-  .col-xs-6 {
+  .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6 {
     .ansBtn {
       display: none;
     }

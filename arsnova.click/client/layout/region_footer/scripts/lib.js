@@ -55,8 +55,7 @@ export const footerElemFullscreen = {
 	id: "fullscreen",
 	iconClass: "glyphicon glyphicon-fullscreen",
 	textClass: "footerElementText",
-	textName: "region.footer.footer_bar.fullscreen",
-	selectable: true
+	textName: "region.footer.footer_bar.fullscreen"
 };
 export const footerElemHome = {
 	id: "home",
@@ -134,15 +133,6 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 				}
 				$('#reading-confirmation_switch').bootstrapSwitch('state', state, true);
 				*/
-				break;
-			case "fullscreen":
-				if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement) {
-					$("#fullscreen").removeClass("error").addClass("success");
-				} else {
-					state = false;
-					$("#fullscreen").removeClass("success").addClass("error");
-				}
-				$('#fullscreen_switch').bootstrapSwitch('state', state, true);
 				break;
 		}
 	});

@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-@import "../../../layout/global/styles/colors";
 @import "../../../layout/global/styles/appearance";
+@import "../../../layout/global/styles/themeSwitcher";
 
 .btn-file {
 	position: relative;
@@ -61,4 +61,10 @@
 .col-join-session,
 .col-create-session {
 	margin-bottom: 10px;
+}
+
+.hashtag-dummy-button {
+	cursor: default;
+	text-align: center;
+	border-radius: $corner-radius;
 }

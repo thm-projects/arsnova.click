@@ -64,7 +64,7 @@ Template.hashtagView.events({
 			});
 		}));
 		let addNewHashtagItem = $("#addNewHashtag");
-		addNewHashtagItem.html(TAPi18n.__("view.hashtag_management.create_session") + '<span class="glyphicon glyphicon-pencil glyph-right" aria-hidden="true"></span>');
+		addNewHashtagItem.html(TAPi18n.__("view.hashtag_management.create_session") + '<span class="glyphicon glyphicon-edit glyph-right" aria-hidden="true"></span>');
 		if (lib.trimIllegalChars(inputHashtag).length === 0) {
 			addNewHashtagItem.attr("disabled", "disabled");
 			return;
@@ -85,15 +85,7 @@ Template.hashtagView.events({
 		}
 	},
 	"click #addNewHashtag": function () {
-		if (!localStorage.getItem("localStorageAvailable")) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing")
-			});
-			return;
-		}
 		var hashtag = $("#hashtag-input-field").val().trim();
-		hashtag = hashtag.replace(/ /g,"_");
 		var reenter = false;
 		if (hashtag.length > 0) {
 			var localHashtags = localData.getAllHashtags();

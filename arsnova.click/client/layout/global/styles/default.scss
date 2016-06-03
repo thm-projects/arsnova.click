@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-@import "colors";
 @import "appearance";
+@import "themeSwitcher";
 
 body {
   font-family: $font;
@@ -90,4 +90,8 @@ button:disabled {
 
 #mainContentContainer {
   height: 100%;
+}
+
+.titel-relative {
+  cursor: default;
 }

@@ -16,16 +16,31 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 @import "../global/styles/appearance.scss";
-@import "../global/styles/colors.scss";
 
 .arsnova-logo {
 	cursor: pointer;
+}
+
+.thm-logo-background img {
+	max-width: 90%;
+	height: auto;
+	margin-left: 8px;
+	margin-right: 12px;
+}
+
+.thm-logo-background {
+	margin-top: 1.5vw;
+	background-color: #dfe5e6;
+	border-radius: $corner-radius;
+	margin-right: 12px;
+	width: 100%;
 }
 
 .header-titel {
 	p {
 		margin: 0;
 	}
+	cursor: default;
 }
 
 .qr-code-container {

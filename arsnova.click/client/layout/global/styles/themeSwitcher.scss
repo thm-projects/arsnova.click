@@ -1,3 +1,22 @@
+/*
+ * This file is part of ARSnova Click.
+ * Copyright (C) 2016 The ARSnova Team
+ *
+ * ARSnova Click is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ARSnova Click is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
+
+@import "appearance";
+
 @mixin theme($name) {
 
 	/* Default Theme */
@@ -43,6 +62,7 @@
 	$border-answer_options-invalidQuestion: red;
 	$bg-answer_options-bootstrap_switch: #ffd700;
 	$border-answer_options-bootstrap_switch: none;
+	$border-radius_answer_options-bootstrap_switch: 0px $corner-radius $corner-radius 0px !important;
 	$bg-answer_options-bootstrap_switch_handle_off: $warning;
 	$fg-answer_options-bootstrap_switch_handle_off: $warning-text-color;
 	$bg-answer_options-bootstrap_switch_handle_on: $success;
@@ -53,7 +73,10 @@
 
 	$disabled-button-background: #808080;
 
-	$placeholder-color: #808080;
+	$grey-button-background: #808080;
+	$grey-button-color: white;
+
+	$placeholder-color: #4D4D4D;
 	$input-background-color: #ffd700;
 	$input-foreground-color: black;
 	$input-group-letter-color: #2f4f4f;
@@ -368,31 +391,38 @@
 	}
 
 	@if ($name == "theme-thm") {
-		$thmred: #b5003f;
-		$thmorange: #ffb300;
-		$thmbabyblue: #4dffed;
-		$thmnavy: #003bd1;
+		$thmred: #971B2F;
+		$thmorange: #F2A900;
+		$thmbabyblue: #00B5E2;
+		$thmnavy: #012169;
 		$thmgreen: #80ba24;
 		$thmgray: #4a5c66;
 
-		$background-color: $thmgreen;
+		$background-color: #dfeec8;
 		$bg-nav-row: $background-color;
 		$bg-container: $background-color;
+		$bg-nav-row: $thmgreen;
+		$bg-footer: $thmgray;
 
+		$fg-text-light: black;
+		$fg_a: #009900;
 		$fg_quiz-name: #b5003f;
 		$default: #d3d3d3; /* light grey */
-		$default-text-color: black;
-		$success-text-color: $thmgray;
+		$default-text-color: $thmgray;
+		$success-text-color: white;
+		$fg_titel: $thmgray;
 
-		$placeholder-color: #ffffff ; /* white */
-		$input-background-color: #808080; /* grey */
-
-		$bg-footer: $background-color;
+		$placeholder-color: #d3d3d3; /* light grey */
+		$input-background-color: $thmgray;
+		$input-foreground-color: white;
+		$input-group-letter-color: white;
 		$footer-background-color: #000000; /*gainsboro */
-		$fg-footer-info-bar-active: #33FF00;
-		$fg-footer-info-bar-active-hovered: #A1FF8A;
+		$fg-footer-info-bar-active: #00CC00;
+		$fg-footer-info-bar-active-hovered: #00FF00;
+		$fg-footer-element-deactivated: #E00000;
+		$fg-footer-element-deactivated-hovered: #FF0000;
 
-		$bg-nav-row: $background-color;
+		$bg-answer_options-bootstrap_switch: $thmgray;
 
 		$bg-questionList-row: $bg-nav-row;
 
@@ -520,6 +550,23 @@
 			color: $placeholder-color;
 			opacity: 1;
 		}
+
+		::-webkit-input-placeholder {
+			color: $placeholder-color;
+		}
+
+		:-moz-placeholder { /* Firefox 18- */
+			color: $placeholder-color;
+		}
+
+		::-moz-placeholder {  /* Firefox 19+ */
+			color: $placeholder-color;
+		}
+
+		:-ms-input-placeholder {
+			color: $placeholder-color;
+		}
+
 		button:disabled {
 			background-color: $disabled-button-background;
 		}
@@ -599,6 +646,7 @@
 			.bootstrap-switch {
 				background-color: $bg-answer_options-bootstrap_switch;
 				border: $border-answer_options-bootstrap_switch;
+				border-radius: $border-radius_answer_options-bootstrap_switch;
 				.bootstrap-switch-handle-off {
 					background-color: $bg-answer_options-bootstrap_switch_handle_off;
 					color: $fg-answer_options-bootstrap_switch_handle_off;
@@ -657,6 +705,10 @@
 			background-color: $info;
 			color: $info-text-color;
 		}
+		.button-grey {
+			background-color: $grey-button-background;
+			color: $grey-button-color;
+		}
 		.button-default {
 			background-color: $default;
 			color: $default-text-color;
@@ -712,6 +764,8 @@
 		}
 		.textarea {
 			background-color: $input-background-color;
+			color: $input-foreground-color !important;
+
 		}
 		.previewText {
 			background-color: $bg-previewText;

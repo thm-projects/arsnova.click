@@ -44,6 +44,9 @@ Template.header.helpers({
 	isInActiveQuizAndIsStudent: function () {
 		return Router.current().params.quizName && !localData.containsHashtag(Router.current().params.quizName);
 	},
+	isTHMStyleSelectedAndGreaterThan999Pixels: function () {
+		return localStorage.getItem("theme") === "theme-thm" && $(window).width() > 999;
+	},
 	currentHashtag: function () {
 		return Router.current().params.quizName;
 	},
@@ -110,6 +113,13 @@ Template.header.onRendered(function () {
 			const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 			const theme = hashtagDoc ? hashtagDoc.theme : "theme-default";
 			$('#theme-wrapper').removeClass().addClass(theme);
+		}
+	});
+	$(window).resize(function () {
+		if ($(window).width() > 999) {
+			$(".thm-logo-background").show();
+		} else {
+			$(".thm-logo-background").hide();
 		}
 	});
 });

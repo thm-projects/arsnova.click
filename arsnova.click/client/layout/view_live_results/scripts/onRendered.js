@@ -50,10 +50,10 @@ Template.liveResults.onRendered(()=> {
 			footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
 		}
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
+		footerElements.calculateFooter();
 	} else {
 		startCountdown(EventManagerCollection.findOne().questionIndex);
 	}
-	footerElements.calculateFooter();
 });
 
 Template.readingConfirmedLearner.onRendered(function () {

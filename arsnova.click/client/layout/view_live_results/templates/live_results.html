@@ -176,6 +176,17 @@
                 </div>
 			{{/unless}}
             {{> gamificationAnimation}}
+        {{else}}
+            {{#unless isRunningQuestion}}{{#if showGlobalLeaderboardButton}}{{#if hasCorrectAnswerOptions}}
+                <div class="row">
+                    <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" style="display: block;bottom: 30px !important;">
+                        <button class="button button-next disableOnActiveCountdown" id="goGlobalRanking">
+                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                            <span class="ansBtn">{{_ "view.liveResults.global_ranking"}}</span>
+                        </button>
+                    </div>
+                </div>
+            {{/if}}{{/if}}{{/unless}}
 		{{/if}}
 	</div>
 </template>

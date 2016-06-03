@@ -37,7 +37,8 @@ export function calculateTitelHeight() {
 	var fixedTop = $(".navbar-fixed-top");
 	var container = $(".container");
 	var footerHeight = $(".fixed-bottom").outerHeight() + $(".footer-info-bar").outerHeight();
-	var finalHeight = $(window).height() - fixedTop.outerHeight() - $(".navbar-fixed-bottom").outerHeight() - footerHeight;
+	var navbarFooterHeight = $('.navbar-fixed-bottom').is(":visible") ? $(".navbar-fixed-bottom").outerHeight() : 0;
+	var finalHeight = $(window).height() - fixedTop.outerHeight() - navbarFooterHeight - footerHeight;
 
 	container.css("height", finalHeight);
 	container.css("margin-top", fixedTop.outerHeight());

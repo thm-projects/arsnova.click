@@ -31,6 +31,10 @@
 	margin: 0 10px;
 	cursor: pointer;
 
+	  @media (max-width: 320px) {
+		  margin: 0 3px;
+	  }
+
 	.indexNumber {
 	  font-size: 2.5em;
 	  padding: 0 20px;

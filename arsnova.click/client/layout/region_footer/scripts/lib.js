@@ -238,8 +238,10 @@ export function calculateFooterFontSize() {
 
 export function calculateFooter() {
 	$(window).on("resize", function () {
-		generateFooterElements();
-		setTimeout(calculateFooterFontSize, 20);
+		if ($(window).height() > 400) {
+			generateFooterElements();
+			setTimeout(calculateFooterFontSize, 20);
+		}
 	});
 	generateFooterElements();
 	setTimeout(calculateFooterFontSize, 20);

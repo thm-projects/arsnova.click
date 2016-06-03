@@ -17,6 +17,8 @@
 
 import {Session} from 'meteor/session';
 import * as localData from '/lib/local_storage.js';
+import {calculateHeaderSize, calculateTitelHeight} from '/client/layout/region_header/lib.js';
+import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 
 export var subscriptionHandler = null;
 
@@ -37,4 +39,20 @@ export function parseSingleAnswerOptionInput(questionIndex, answerOptionIndex) {
 	questionItem.getQuestionList()[questionIndex].getAnswerOptionList()[answerOptionIndex].setAnswerText($("#answerOptionText_Number" + answerOptionIndex).val());
 	Session.set("questionGroup", questionItem);
 	localData.addHashtag(Session.get("questionGroup"));
+}
+
+export function calculateXsViewport() {
+	if ($(window).height() < 400) {
+		$('.navbar-footer').hide();
+		$('#appTitle').hide();
+		$('.fixed-bottom').css("bottom", 0);
+		calculateHeaderSize();
+		calculateTitelHeight();
+	} else {
+		$('.navbar-footer').show();
+		$('#appTitle').show();
+		calculateHeaderSize();
+		calculateTitelHeight();
+		footerElements.calculateFooter();
+	}
 }

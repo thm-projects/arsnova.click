@@ -90,14 +90,14 @@ Template.questionList.events({
 	},
 	'click .removeQuestion': function (event) {
 		const id = parseInt($(event.target).closest(".questionIcon").attr("id").replace("questionIcon_", ""));
+		const nextId = id === 0 ? 0 : id - 1;
 		const questionItem = Session.get("questionGroup");
 		questionItem.removeQuestion(id);
-		if (questionItem.getQuestionList().length === 0) {
+		if (nextId === 0) {
 			questionItem.addDefaultQuestion();
 		}
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(questionItem);
-		const nextId = id === 0 ? 0 : id - 1;
 		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, nextId);
 	},
 	'click #addQuestion': function () {

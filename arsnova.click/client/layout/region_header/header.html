@@ -52,6 +52,13 @@
                                     <p>{{currentHashtag}}</p>
                                 </div>
                             </div>
+                            {{#if isTHMStyleSelected}}
+                            <div class="col-xs-2">
+                                <div>
+                                    <img src="/images/THM_Logo_454x170.png" alt="thm_logo"/>
+                                </div>
+                            </div>
+                            {{/if}}
                         </div>
                         {{> yield "header.questionList"}}
                     </div>

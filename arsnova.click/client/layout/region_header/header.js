@@ -44,6 +44,9 @@ Template.header.helpers({
 	isInActiveQuizAndIsStudent: function () {
 		return Router.current().params.quizName && !localData.containsHashtag(Router.current().params.quizName);
 	},
+	isTHMStyleSelected: function () {
+		return localStorage.getItem("theme") === "theme-thm";
+	},
 	currentHashtag: function () {
 		return Router.current().params.quizName;
 	},

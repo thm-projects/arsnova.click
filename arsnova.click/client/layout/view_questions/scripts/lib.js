@@ -101,6 +101,12 @@ export function addQuestion(index) {
 		const serialized = questionItem.getQuestionList()[index].serialize();
 		delete serialized.type;
 		questionItem.addQuestion(questionReflection[questionType](serialized), index);
+		// Check if we changed to the survey question -> remove isCorrect values then
+		if (questionType === "SurveyQuestion") {
+			questionItem.getQuestionList()[index].getAnswerOptionList().forEach(function (answerOption) {
+				answerOption.setIsCorrect(false);
+			})
+		}
 	}
 	questionItem.getQuestionList()[index].setQuestionText(questionText);
 	Session.set("questionGroup", questionItem);

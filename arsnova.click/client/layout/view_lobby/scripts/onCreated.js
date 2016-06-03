@@ -53,7 +53,5 @@ Template.memberlist.onCreated(function () {
 
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);
-		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
-		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, -1);
 	}
 });

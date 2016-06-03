@@ -27,19 +27,18 @@ Template.memberlist.onCreated(function () {
 	var oldStartTimeValues = {};
 
 	$(window).resize(function () {
-		var finalHeight = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
-		$(".container").css("height", finalHeight + "px");
-		Session.set("learnerCountOverride", false);
-		calculateButtonCount();
+		calculateButtonCount(MemberListCollection.find().count());
 	});
 
 	setMemberlistObserver({
 		added: function () {
-			calculateButtonCount();
+			calculateButtonCount(MemberListCollection.find().count());
+			Session.set("allMembersCount", MemberListCollection.find().count());
 			$('#startPolling').removeAttr("disabled");
 		},
 		removed: function () {
-			calculateButtonCount();
+			calculateButtonCount(MemberListCollection.find().count());
+			Session.set("allMembersCount", MemberListCollection.find().count());
 			if (MemberListCollection.find().count() === 0) {
 				$('#startPolling').attr("disabled", "disabled");
 			}

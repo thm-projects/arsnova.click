@@ -18,19 +18,15 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import {calculateButtonCount} from './lib.js';
 
 Template.memberlist.events({
-	"click .btn-more-learners": function () {
-		Session.set("learnerCount", MemberListCollection.find().count());
+	'click #showMore': ()=> {
 		Session.set("learnerCountOverride", true);
 	},
-	'click .btn-less-learners': function () {
+	'click #showLess': ()=> {
 		Session.set("learnerCountOverride", false);
-		calculateButtonCount();
 	},
 	'click .btn-learner': function (event) {
 		event.preventDefault();

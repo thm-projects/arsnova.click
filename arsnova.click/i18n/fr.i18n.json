@@ -164,6 +164,8 @@
       },
       "no_attendee_correct": "Malheureusement, personne ne",
       "question": "Question",
+      "second": "Seconde",
+      "second_plural": "Secondes",
       "show_more": "Voir 1 plus",
       "show_more_plural": "Voir %s plus",
       "show_less": "Montre moins"

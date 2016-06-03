@@ -23,20 +23,17 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount} from './lib.js';
 
 Template.leaderBoard.onRendered(function () {
-	if (localData.containsHashtag(Router.current().params.quizName)) {
-		calculateHeaderSize();
-	}
-
-	calculateButtonCount();
-
 	footerElements.removeFooterElements();
 	if (localData.containsHashtag(Router.current().params.quizName)) {
+		calculateHeaderSize();
 		footerElements.addFooterElement(footerElements.footerElemHome);
 		footerElements.addFooterElement(footerElements.footerElemSound);
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		footerElements.addFooterElement(footerElements.footerElemAbout);
 	}
 	footerElements.calculateFooter();
+
+	setTimeout(calculateButtonCount, 30);
 
 	$(window).resize(function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
@@ -45,6 +42,6 @@ Template.leaderBoard.onRendered(function () {
 		if (Session.get("responsesCountOverride") && (Session.get("allMembersCount") - Session.get("maxResponseButtons") === 0)) {
 			Session.set("responsesCountOverride", false);
 		}
-		calculateButtonCount();
+		setTimeout(calculateButtonCount, 30);
 	});
 });

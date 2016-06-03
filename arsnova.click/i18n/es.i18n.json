@@ -164,6 +164,8 @@
       },
       "no_attendee_correct": "Desafortunadamente nadie",
       "question": "Pregunta",
+      "second": "Segundo",
+      "second_plural": "Segundos",
       "show_more": "Desde el 1 más",
       "show_more_plural": "Mostrar %s más",
       "show_less": "Muestra menos"

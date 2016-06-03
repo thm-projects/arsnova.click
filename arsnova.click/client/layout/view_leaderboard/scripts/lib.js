@@ -41,16 +41,16 @@ export function calculateButtonCount(allMembersCount) {
 	 - subtract the appTitle height (the indicator for the question index)
 	 */
 	var viewport = $('.container'),
-		appTitle = $('#appTitle');
+		appTitle = $('#appTitle'),
+		firstItem = $('.firstLeaderBordItem');
 
-	var viewPortHeight = viewport.outerHeight() - appTitle.outerHeight();
+	var viewPortHeight = viewport.outerHeight() - appTitle.outerHeight() - firstItem.outerHeight();
 
 	/* The height of the learner button must be set manually if the html elements are not yet generated */
-	var btnLearnerHeight = $('.button-leader').first().parent().outerHeight(true) ? $('.button-leader').first().parent().outerHeight(true) : 70;
+	var btnLearnerHeight = $('.button-leader').first().outerHeight(true) ? $('.button-leader').first().outerHeight(true) : 50;
 
 	/* Calculate how much buttons we can place in the viewport until we need to scroll */
 	var queryLimiter = Math.floor(viewPortHeight / btnLearnerHeight);
-	queryLimiter--;
 
 	/*
 	 Multiply the displayed elements by 2 if on widescreen and reduce the max output of buttons by 1 row for the display

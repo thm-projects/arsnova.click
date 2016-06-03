@@ -164,6 +164,8 @@
       },
       "no_attendee_correct": "Unfortunately nobody",
       "question": "Question",
+      "second": "second",
+      "second_plural": "seconds",
       "show_more": "Show 1 more",
       "show_more_plural": "Show %s more",
       "show_less": "Show less"

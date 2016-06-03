@@ -15,9 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Blaze} from 'meteor/blaze';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
+import * as localData from '/lib/local_storage.js';
 
 /**
  * This class will construct an empty splashscreen which can be modified via JQuery.
@@ -182,4 +186,41 @@ export class ErrorSplashscreen extends Splashscreen {
 			throw new Error(TAPi18n.__("plugins.splashscreen.error.set_text_error"));
 		}
 	}
+}
+
+export function showReadingConfirmationSplashscreen(index) {
+	var questionDoc = QuestionGroupCollection.findOne();
+	new Splashscreen({
+		autostart: true,
+		templateName: 'readingConfirmedSplashscreen',
+		closeOnButton: '#setReadConfirmed',
+		onRendered: function (instance) {
+			var content = "";
+			if (questionDoc) {
+				mathjaxMarkdown.initializeMarkdownAndLatex();
+				var questionText = questionDoc.questionList[index].questionText;
+				content = mathjaxMarkdown.getContent(questionText);
+			}
+			instance.templateSelector.find('#questionContent').html(content);
+
+			if (localData.containsHashtag(Router.current().params.quizName)) {
+				instance.templateSelector.find('#setReadConfirmed').text(TAPi18n.__("global.close_window"));
+			} else {
+				instance.templateSelector.find('#setReadConfirmed').parent().on('click', '#setReadConfirmed', function () {
+					Meteor.call("MemberListCollection.setReadConfirmed", {
+						hashtag: Router.current().params.quizName,
+						questionIndex: index,
+						nick: localStorage.getItem(Router.current().params.quizName + "nick")
+					}, (err)=> {
+						if (err) {
+							new ErrorSplashscreen({
+								autostart: true,
+								errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+							});
+						}
+					});
+				});
+			}
+		}
+	});
 }

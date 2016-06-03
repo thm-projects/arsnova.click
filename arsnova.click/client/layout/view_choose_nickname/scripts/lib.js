@@ -41,7 +41,7 @@ export function transformForegroundColor(rgbObj) {
 }
 
 export function isNickAllowed(nick) {
-	return typeof BannedNicksCollection.findOne({userNick: {$regex: new RegExp(".*" + nick + ".*", "ig")}}) === "undefined";
+	return typeof BannedNicksCollection.findOne({userNick: {$regex: new RegExp(".*" + nick.replace(/ /g, "").replace(/[0-9]/g,"") + ".*", "ig")}}) === "undefined";
 }
 
 /**

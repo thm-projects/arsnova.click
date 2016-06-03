@@ -21,10 +21,19 @@
 	cursor: pointer;
 }
 
-.col-xs-2 img {
-	width: 100%;
+.thm-logo-background img {
+	max-width: 90%;
 	height: auto;
-	margin-top: 15px;
+	margin-left: 8px;
+	margin-right: 12px;
+}
+
+.thm-logo-background {
+	margin-top: 2vw;
+	background-color: #dfe5e6;
+	border-radius: $corner-radius;
+	margin-right: 12px;
+	width: 100%;
 }
 
 .header-titel {

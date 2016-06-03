@@ -70,7 +70,7 @@ export function checkIfIsCorrect(isCorrect) {
 export function startCountdown(index) {
 	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	var questionDoc = QuestionGroupCollection.findOne().questionList[index];
-	if (!questionDoc) {
+	if (!questionDoc || Session.get("countdownInitialized") || Session.get("sessionClosed")) {
 		return;
 	}
 	const currentTime = new Date();

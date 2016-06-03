@@ -21,14 +21,6 @@ import * as footerElements from "./lib.js";
 
 Template.footer.onRendered(function () {
 	footerElements.calculateFooter();
-	$(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange', function () {
-		const elem = $('#fullscreen').find(".footerElemIcon").find(".glyphicon");
-		if (elem.hasClass("glyphicon-resize-small")) {
-			elem.removeClass("glyphicon-resize-small").addClass("glyphicon-fullscreen");
-		} else {
-			elem.removeClass("glyphicon-fullscreen").addClass("glyphicon-resize-small");
-		}
-	});
 
 	$('.navbar-footer').on("click", '#reading-confirmation', function () {
 		/*

@@ -120,7 +120,7 @@ Meteor.methods({
 	'MemberListCollection.clearReadConfirmed': function (hashtag) {
 		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
 
-		MemberListCollection.update({hashtag: hashtag}, {$set: {readConfirmed: []}});
+		MemberListCollection.update({hashtag: hashtag}, {$set: {readConfirmed: []}}, {multi: true});
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$push: {
 				eventStack: {

@@ -55,6 +55,9 @@ Template.memberlist.events({
 	'click #startPolling': function () {
 		Session.set("sessionClosed", false);
 		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, -1);
+		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, -1);
+		Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);
+		Meteor.call('MemberListCollection.clearReadConfirmed', Router.current().params.quizName);
 		Meteor.call('EventManagerCollection.setSessionStatus', Router.current().params.quizName, 3);
 	}
 });

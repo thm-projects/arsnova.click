@@ -59,36 +59,29 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="fixed-bottom">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				<div class="row">
-					<div class="col-xs-6">
-						<button class="button button-back" id="js-btn-backToResults">
-							<span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
-							<span class="ansBtn">{{_ "global.back"}}</span>
-						</button>
-					</div>
-					{{#unless noLeaderBoardItems}}
-						{{#if hasTooMuchButtons}}
-							<div class="col-xs-6">
-								{{#if hasOverridenDefaultButtonCount }}
-									<button class="button button-success" id="showLess">
-										<span class="ansBtn">{{_ "view.leaderboard.show_less"}}</span>
-										<span class="glyphicon glyphicon-menu-up glyph-right"></span>
-									</button>
-								{{else}}
-									<button class="button button-success" id="showMore">
-										<span class="ansBtn">{{_ "view.leaderboard.show_more" invisibleResponsesCount count=invisibleResponsesCount}}</span>
-										<span class="glyphicon glyphicon-menu-down glyph-right"></span>
-									</button>
-								{{/if}}
-							</div>
-						{{/if}}
-					{{/unless}}
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3">
+        <div class="col-xs-{{#if noLeaderBoardItems}}12{{else}}{{#if hasTooMuchButtons}}6{{/if}}{{/if}}">
+            <button class="button button-back" id="js-btn-backToResults">
+                <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
+                <span class="ansBtn">{{_ "global.back"}}</span>
+            </button>
+        </div>
+        {{#unless noLeaderBoardItems}}
+            {{#if hasTooMuchButtons}}
+                <div class="col-xs-6">
+                    {{#if hasOverridenDefaultButtonCount }}
+                        <button class="button button-success" id="showLess">
+                            <span class="ansBtn">{{_ "view.leaderboard.show_less"}}</span>
+                            <span class="glyphicon glyphicon-menu-up glyph-right"></span>
+                        </button>
+                    {{else}}
+                        <button class="button button-success" id="showMore">
+                            <span class="ansBtn">{{_ "view.leaderboard.show_more" invisibleResponsesCount count=invisibleResponsesCount}}</span>
+                            <span class="glyphicon glyphicon-menu-down glyph-right"></span>
+                        </button>
+                    {{/if}}
+                </div>
+            {{/if}}
+        {{/unless}}
+    </div>
 </template>

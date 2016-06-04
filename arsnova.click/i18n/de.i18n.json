@@ -24,7 +24,7 @@
         "data_privacy": "Datenschutz",
         "languages": "Sprache",
         "style": "Stil",
-        "import": "Importieren",
+        "import": "Quiz importieren",
         "info": "Info",
         "reading-confirmation": "Lesebestätigung",
         "fullscreen": "Vollbild",
@@ -129,12 +129,15 @@
       "reset": "Reset",
       "yes": "Ja",
       "no": "Nein",
-      "reset_session_confirmation": "Beim Zurücksetzen der Session werden alle Studenten zu der Startseite zurückgeführt. Das aktuelle Ranking sowie die Quiz-Lobby werden gelöscht.<br><br> Die angelegte(n) Frage(n) sowie die zugehörigen Antwortoptionen und Zeitkonfigurationen werden im local storage des Browsers gesichert. Abgesehen von dem Hashtag-Namen werden alle Daten, die im Zusammmenhang mit Ihrer Session stehen, vom Server entfernt. Wollen Sie das wirklich?"
+      "reset_session_confirmation": "<h2>Soll das Quiz beendet werden?</h2>
+      Alle Teilnehmenden werden abgmeldet. Die Rangliste wird gelöscht.
+      Dein Quiz mit allen Einstellungen verbleibt in diesem Browser, solange er nicht zurückgesetzt wird.<br><br>
+      Fortfahren?"
     }
   },
   "view": {
     "answeroptions": {
-      "answeroptiontext_placeholder": "Antwortoption benötigt",
+      "answeroptiontext_placeholder": "Antwortoption eingeben",
       "correct": "Richtig",
       "wrong": "Falsch"
     },
@@ -142,10 +145,10 @@
       "enter_nickname": "Gib dir einen Nicknamen",
       "enter_nickname_here": "Gib deinen Nick ein",
       "nickname_na_popup": "Dieser Name ist nicht verfügbar!",
-      "nickname_blacklist_popup": "Dieser Name ist aufgrund seiner Bedeutung nicht zulässig!"
+      "nickname_blacklist_popup": "Dieser Name ist nicht zulässig!"
     },
     "hashtag_management": {
-      "enter_quiz_name": "Gib den Quiznamen ein",
+      "enter_quiz_name": "Gib hier den Quiznamen ein",
       "join_session": "Mach mit!",
       "edit_session": "Bearbeiten",
       "reenter_session": "Öffnen",
@@ -190,14 +193,14 @@
       "answer_option": "Antwort"
     },
     "lobby": {
-      "title": "Quiz-Lobby",
+      "title": "Quiz Lobby",
       "yes": "Ja",
       "no": "Nein",
       "ready": "Startklar fürs Quiz",
       "show_more": "Zeige 1 weiteren",
       "show_more_plural": "Zeige %s weitere",
       "start_quiz": "Los geht's!",
-      "kick_member_confirmation": "Soll der Teilnehmer '<span id=\"nickName\"></span>' aus dem Quiz entfernt werden?",
+      "kick_member_confirmation": "Soll die Person '<span id=\"nickName\"></span>' aus dem Quiz entfernt werden?",
       "add_kicked_member_to_ban_list": "Den Nicknamen permanent bannen"
     },
     "questions": {
@@ -205,15 +208,15 @@
       "format": "Format",
       "edit": "Bearbeiten",
       "preview": "Vorschau",
-      "single_choice_question": "Single-Choice",
-      "multiple_choice_question": "Multiple-Choice",
-      "survey_question": "Umfrage",
-      "ranged_question": "Quizfrage mit Antwortintervall"
+      "single_choice_question": "Single-Choice-Frage (nur eine Antwort ist richtig)",
+      "multiple_choice_question": "Multiple-Choice-Frage (eine oder mehrere Antworten sind richtig)",
+      "survey_question": "Umfrage (Antworten sind weder richtig noch falsch)",
+      "ranged_question": "Schätzfrage (Antworten im vorgegebenen Bereich sind richtig)"
     },
     "quiz_summary": {
       "summary": "Zusammenfassung",
       "quiz_name": "Name der Quizrunde",
-      "quiz_url": "URL für Teilnehmer",
+      "quiz_url": "URL für Teilnehmer/innen",
       "question_amount": "Gesamtanzahl der Quizfragen",
       "validation_question_group": "Validierung der gesamten Quizrunde",
       "successful": "Erfolgreich",
@@ -255,7 +258,7 @@
       "themes": {
         "default": {
           "name": "ARSnova.click",
-          "description": "Das Theme der ersten Stunde"
+          "description": "Der Stil der ersten Stunde"
         },
         "dark": {
           "name": "Dunkle Version",
@@ -263,11 +266,11 @@
         },
         "elegant": {
           "name": "Elegant",
-          "description": "Elegantes Theme für anspruchsvolle Quizrunden"
+          "description": "Eleganter Stil für anspruchsvolle Quizrunden"
         },
         "thm": {
           "name": "THM",
-          "description": "Corporate Design der Technischen Hochschule Mittelhessen"
+          "description": "Corporate Design der TH Mittelhessen"
         },
         "arsnova": {
           "name": "ARSnova",
@@ -311,7 +314,7 @@
         "youtube": "YouTube",
         "vimeo": "Vimeo"
       },
-      "info_content": "Sie können Texte innerhalb von ARSnova mithilfe von <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown Optionen werden in Form von Schaltflächen über den unterstützten Eingabefeldern angeboten. Zudem unterstützt ARSnova <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
+      "info_content": "Du kannst Texte innerhalb von ARSnova mithilfe von <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown Optionen werden in Form von Schaltflächen über den unterstützten Eingabefeldern angeboten. Zudem unterstützt ARSnova <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
     },
     "sound": {
       "title": "Countdown Sound",
@@ -328,18 +331,18 @@
           "update_failed": "Es ist ein Fehler bei der Aktualisierung deiner Frage aufgetreten.",
           "session_exists": "Diese Sitzung existiert bereits!",
           "session_not_exists": "Diese Sitzung existiert nicht!",
-          "hashtag_exists": "Dieser Hashtag existiert bereits!",
+          "hashtag_exists": "Dieser Quizname existiert bereits!",
           "session_not_available": "Dieser Quizrunde kann aktuell nicht beigetreten werden.",
           "private_browsing": "Im Privatmodus deines Browsers funktioniert ARSnova.click leider nur als Teilnehmer/in, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von ARSnova.click den Privatmodus deaktivieren und ARSnova erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.",
           "kicked_from_quiz": "Du wurdest aus dem Quiz geworfen!",
           "export_failed": "Konnte die Daten nicht exportieren! - %s",
           "not_authorized": "Entweder ist das Quiz nicht vorhanden oder du hast keine Berechtigung, diese Daten zu lesen",
           "maximum_answer_options_exceeded": "Die maximale Anzahl an Antwortoptionen wurde bereits erreicht",
-          "hashtag_not_found": "Dieser Hashtag wurde leider nicht gefunden",
+          "hashtag_not_found": "Dieser Quizname wurde leider nicht gefunden",
           "member_not_found": "Der Teilnehmer wurde leider nicht gefunden",
           "duplicate_response": "Der Teilnehmer hat bereits eine Antwort abgegeben",
           "answeroption_not_found": "Es existiert keine Antwort mit diesem Index",
-          "response_timeout": "Die Antwortzeit ist bereits abgelaufen",
+          "response_timeout": "Der Countdown ist bereits abgelaufen",
           "insert_leaderboard_failed": "Fehler beim Hinzufügen der Antwort zur Rangliste",
           "session_closed": "Die Quizrunde wurde beendet",
           "invalid_data": "Die importierten Daten sind ungültig oder fehlerhaft!"

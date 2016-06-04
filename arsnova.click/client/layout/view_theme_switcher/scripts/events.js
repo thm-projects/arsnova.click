@@ -42,6 +42,10 @@ Template.themeSwitcher.events({
 		}
 	},
 	"click #backButton": function () {
-		history.back();
+		if (Session.get("questionGroup")) {
+			Router.go("/" + Session.get("questionGroup").getHashtag() + "/memberlist");
+		} else {
+			history.back();
+		}
 	}
 });

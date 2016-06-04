@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
@@ -68,7 +69,6 @@ function addMemberlistChangeEvents() {
 	], function (key, value) {
 		if (value.theme) {
 			sessionStorage.setItem("quizTheme", value.theme);
-			theme = value.theme;
 			Session.set("theme", value.theme);
 		}
 	});

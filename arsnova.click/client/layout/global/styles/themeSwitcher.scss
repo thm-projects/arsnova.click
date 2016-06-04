@@ -116,6 +116,7 @@
 	$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
 	$splashscreen-sound-config-background-color: $splashscreen-background-color;
 	$splashscreen-sound-config-button-background-color: $success;
+	$splashscreen-sound-config-select-foreground-color: black;
 	$splashscreen-delete-background-color: $splashscreen-background-color;
 	$splash-screen-error-message-background-color: white;
 	$splash-screen-error-message-button-background-color: $success;
@@ -355,6 +356,8 @@
 		$info: #1C86EE; /* dodgerblue */
 		$background-color: #4a4a4a; /* grey */
 
+		$success-text-color: black;
+
 		$switch: #00CD00; /* green */
 		$switch-text-color: #ffffff;
 
@@ -377,6 +380,8 @@
 
 		$fg-warning: $warning;
 
+		$bg-answer_options-bootstrap_switch: $input-background-color;
+
 		$splashscreen-background-color: #6b6b6b;
 		$splashscreen-foreground-color: white;
 		$splash-screen-header-color: white;
@@ -388,8 +393,11 @@
 		$splashscreen-sound-config-background-color: $splashscreen-background-color;
 		$splashscreen-delete-background-color: $splashscreen-background-color;
 		$splashscreen-sound-config-button-background-color: $success;
+		$splashscreen-sound-config-select-foreground-color: black;
+		$splash-screen-error-message-background-color: #770000;
+		$splash-screen-error-message-button-background-color: $success;
+		$splash-screen-error-message-button-foreground-color: black;
 	}
-
 	@if ($name == "theme-thm") {
 		$thmred: #971B2F;
 		$thmorange: #F2A900;
@@ -438,6 +446,15 @@
 		$fg-quiz-summary-P: $default-text-color;
 		$fg-quiz-summary-UL: $default-text-color;
 		$fg-success: $success;
+
+		$splashscreen-background-color: #b9d68b;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
 	}
 
 	@if ($name == "theme-elegant") {
@@ -1342,6 +1359,9 @@
 		.soundConfig {
 			.modal-content {
 				background-color: $splashscreen-sound-config-background-color;
+				select {
+					color: $splashscreen-sound-config-select-foreground-color;
+				}
 				button.down {
 					background: $splashscreen-sound-config-button-background-color;
 				}

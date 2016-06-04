@@ -290,6 +290,18 @@ export function importFromFile(data) {
 
 export function exportFromLocalStorage(hashtag) {
 	var localStorageData = JSON.parse(localStorage.getItem(hashtag));
+	if (!localStorageData.theme) {
+		localStorageData.theme = "theme-dark";
+	}
+	if (!localStorageData.musicVolume) {
+		localStorageData.musicVolume = 80;
+	}
+	if (!localStorageData.musicEnabled) {
+		localStorageData.musicEnabled = 1;
+	}
+	if (!localStorageData.musicTitle) {
+		localStorageData.musicTitle = "Song1";
+	}
 	if (localStorageData) {
 		var hashtagDoc = {
 			hashtag: localStorageData.hashtag,

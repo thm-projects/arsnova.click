@@ -16,7 +16,7 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="resetSessionSplashscreen">
-    <div class="modal fade splashscreen" role="dialog">
+    <div class="modal {{#unless isMobileDevice}}fade {{/unless}}splashscreen" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

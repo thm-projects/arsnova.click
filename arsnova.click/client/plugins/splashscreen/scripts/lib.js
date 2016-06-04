@@ -224,3 +224,9 @@ export function showReadingConfirmationSplashscreen(index) {
 		}
 	});
 }
+
+export const isMobileDevice = {
+	isMobileDevice: function () {
+		return $(window).width() < 1024;
+	}
+};

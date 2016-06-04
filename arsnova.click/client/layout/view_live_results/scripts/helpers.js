@@ -45,7 +45,7 @@ Template.liveResults.helpers({
 		if (!eventDoc) {
 			return false;
 		}
-		if (Session.get("sessionClosed") || !Session.get("countdownInitialized") || eventDoc.questionIndex !== index) {
+		if (!countdown || Session.get("sessionClosed") || !Session.get("countdownInitialized") || eventDoc.questionIndex !== index) {
 			return true;
 		} else {
 			var timer = Math.round(countdown.get());

@@ -19,8 +19,13 @@ import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {ResponsesCollection} from '/lib/responses/collection.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as localData from '/lib/local_storage.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
+import * as liveResultsLib from "/client/layout/view_live_results/scripts/lib.js";
+import * as votingViewLib from "/client/layout/view_voting/scripts/lib.js";
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen, ErrorSplashscreen, showReadingConfirmationSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
@@ -135,6 +140,25 @@ function addLiveresultsChangeEvents() {
 	});
 }
 
+function addOnPollingChangeEvents () {
+	globalEventStackObserver.onChange([
+		"ResponsesCollection.addResponse"
+	], function (key, value) {
+		let allMemberResponses = ResponsesCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).fetch();
+		let memberWithGivenResponsesAmount = _.uniq(allMemberResponses, false, function (user) {
+			return user.userNick;
+		}).length;
+		let memberAmount = MemberListCollection.find().fetch().length;
+		if (memberWithGivenResponsesAmount === memberAmount) {
+			if (localData.containsHashtag(Router.current().params.quizName)) {
+				liveResultsLib.countdownFinish();
+			} else {
+				votingViewLib.countdownFinish();
+			}
+		}
+	});
+}
+
 export function getChangeEventsForRoute(route) {
 	if (typeof route === "undefined" || !route.startsWith(":quizName.") || !globalEventStackObserver || !globalEventStackObserver.isRunning()) {
 		return;
@@ -146,6 +170,7 @@ export function getChangeEventsForRoute(route) {
 			addMemberlistChangeEvents();
 			break;
 		case "results":
+				addOnPollingChangeEvents();
 		case "statistics":
 			addLiveresultsChangeEvents();
 			break;

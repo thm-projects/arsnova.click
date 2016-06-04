@@ -18,6 +18,7 @@
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import * as localData from '/lib/local_storage.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 
 Template.hashtagView.onRendered(function () {
@@ -51,4 +52,19 @@ Template.hashtagManagement.onRendered(function () {
 	footerElements.addFooterElement(footerElements.footerElemTheme);
 	footerElements.addFooterElement(footerElements.footerElemFullscreen);
 	footerElements.calculateFooter();
+	
+	$('.hashtagManagementRow').each(function (i, element) {
+		var hashtag = element.id;
+		var exportData = localData.exportFromLocalStorage(hashtag);
+		if (exportData) {
+			var exportDataJson = "text/json;charset=utf-8," + encodeURIComponent(exportData);
+			var a = document.createElement('a');
+			var time = new Date();
+			var timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
+			a.href = 'data:' + exportDataJson;
+			a.download = hashtag + "-" + timeString + ".json";
+			a.innerHTML = '<span class="glyphicon glyphicon-export glyph-left alignGlyphicon" aria-hidden="true"></span>';
+			$(element).find('.js-export').append(a);
+		}
+	});
 });

@@ -142,7 +142,9 @@
       "enter_nickname": "Take a nickname",
       "enter_nickname_here": "Enter your nickname here",
       "nickname_na_popup": "This name is not available!",
-      "nickname_blacklist_popup": "This name is (because of its meaning) not available!"
+      "nickname_blacklist_popup": "This name is (because of its meaning) not available!",
+      "nickname_too_long": "The name is too long",
+      "nickname_too_short": "The name is too short"
     },
     "hashtag_management": {
       "enter_quiz_name": "Enter the quiz name here",

@@ -53,7 +53,7 @@ Template.nick.events({
 		var member = MemberListCollection.findOne({nick: currentNickName});
 		var $inputField = $("#nickname-input-field");
 
-		if (currentNickName.length > 2 && !member) {
+		if (currentNickName.length > 2 && currentNickName.length < 26 && !member) {
 			if (lib.isNickAllowed(currentNickName)) {
 				$("#forwardButton").removeAttr("disabled");
 				$inputField.popover("destroy");
@@ -72,13 +72,29 @@ Template.nick.events({
 			if (currentNickName.length === 0 || !member) {
 				$inputField.popover("destroy");
 			}
-			if (currentNickName.length > 2) {
+			if (currentNickName.length < 3) {
 				$inputField.popover({
-					title: TAPi18n.__("view.choose_nickname.nickname_na_popup"),
+					title: TAPi18n.__("view.choose_nickname.nickname_too_short"),
 					trigger: 'manual',
 					placement: 'bottom'
 				});
 				$inputField.popover("show");
+			} else {
+				if (currentNickName.length > 25) {
+					$inputField.popover({
+						title: TAPi18n.__("view.choose_nickname.nickname_too_long"),
+						trigger: 'manual',
+						placement: 'bottom'
+					});
+					$inputField.popover("show");
+				} else {
+					$inputField.popover({
+						title: TAPi18n.__("view.choose_nickname.nickname_na_popup"),
+						trigger: 'manual',
+						placement: 'bottom'
+					});
+					$inputField.popover("show");
+				}
 			}
 		}
 	},

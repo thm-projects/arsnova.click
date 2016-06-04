@@ -77,14 +77,16 @@ Router.onBeforeAction(function () {
 });
 
 Router.onBeforeAction(function () {
+	let theme = "theme-dark";
 	if (!localStorage.getItem("theme")) {
-		localStorage.setItem("theme", "theme-default");
+		localStorage.setItem("theme", theme);
 	}
-	let theme = localStorage.getItem("theme");
-	const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-	if (hashtagDoc && hashtagDoc.theme && !localData.containsHashtag(Router.current().params.quizName)) {
-		sessionStorage.setItem("quizTheme", hashtagDoc.theme);
-		theme = sessionStorage.getItem("quizTheme");
+	if (Router.current().params.quizName) {
+		const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+		if (hashtagDoc && hashtagDoc.theme && !localData.containsHashtag(Router.current().params.quizName)) {
+			sessionStorage.setItem("quizTheme", hashtagDoc.theme);
+			theme = sessionStorage.getItem("quizTheme");
+		}
 	}
 	Session.set("theme", theme);
 	this.next();

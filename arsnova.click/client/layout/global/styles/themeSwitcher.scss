@@ -355,12 +355,11 @@
 	$fg-answer_row-button_green_transition: #663399;
 
 	@if ($name == "theme-dark") {
-		$success: #00CD00; /* green */
+		$success: #008000; /* green */
+		$success-text-color: white;
 		$warning: #FF2222; /* firebrick */
 		$info: #1C86EE; /* dodgerblue */
 		$background-color: #4a4a4a; /* grey */
-
-		$success-text-color: black;
 
 		$switch: #00CD00; /* green */
 		$switch-text-color: #ffffff;

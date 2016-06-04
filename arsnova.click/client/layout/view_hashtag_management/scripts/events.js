@@ -234,6 +234,9 @@ Template.hashtagManagement.events({
 		for (var i = 0; i < fileList.length; i++) {
 			fileReader.readAsBinaryString(fileList[i]);
 		}
+	},
+	"click .startQuiz": function (event) {
+		Router.go("/" + $(event.currentTarget).parents(".hashtagManagementRow").attr("id") + "/memberlist");
 	}
 });
 

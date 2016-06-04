@@ -30,7 +30,7 @@ import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scri
 
 const subsCache = new SubsManager({
 	cacheLimit: 8, // maximum number of cached subscriptions
-	expireIn: 15 // any subscription will be expire after 15 minutes, if it's not subscribed again
+	expireIn: 15 // any subscription will expire after 15 minutes, if it's not subscribed again
 });
 
 Router.configure({
@@ -60,6 +60,19 @@ Router.onStop(function () {
 		localStorage.setItem("lastPage", "/");
 	} else if (lastRoute !== "agb" && lastRoute !== "datenschutz" && lastRoute !== "impressum") {
 		localStorage.setItem("lastPage", lastRoute);
+	}
+});
+
+Router.onBeforeAction(function () {
+	try {
+		localData.initializePrivateKey();
+	} catch (ex) {
+		new ErrorSplashscreen({
+			autostart: true,
+			errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing")
+		});
+	} finally {
+		this.next();
 	}
 });
 

@@ -20,6 +20,7 @@ import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import * as localData from '/lib/local_storage.js';
 import * as lib from './lib.js';
 
 Template.nick.events({
@@ -30,7 +31,7 @@ Template.nick.events({
 		Meteor.call('MemberListCollection.addLearner', {
 			hashtag: Router.current().params.quizName,
 			nick: nickname,
-			privateKey: localStorage.getItem("privateKey"),
+			privateKey: localData.getPrivateKey(),
 			backgroundColor: bgColor,
 			foregroundColor: lib.transformForegroundColor(lib.hexToRgb(bgColor))
 		}, (err) => {

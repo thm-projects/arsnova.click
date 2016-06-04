@@ -19,43 +19,7 @@ import {Template} from 'meteor/templating';
 import * as localData from '/lib/local_storage.js';
 import {isMobileDevice} from './lib.js';
 
-Template.splashscreen.helpers($.extend(isMobileDevice, {
-
-}));
-
-Template.kickMemberSplashscreen.helpers($.extend(isMobileDevice, {
-
-}));
-
-Template.deleteConfirmationSplashscreen.helpers($.extend(isMobileDevice, {
-
-}));
-
-Template.resetSessionSplashscreen.helpers($.extend(isMobileDevice, {
-
-}));
-
-Template.errorSplashscreen.helpers($.extend(isMobileDevice, {
-
-}));
-
-Template.showHashtagsSplashscreen.helpers($.extend(isMobileDevice, {
-	hashtags: function () {
-		return localData.getAllHashtags();
-	},
-	isValid: function (sessionName) {
-		return localData.reenterSession(sessionName).isValid();
-	}
-}));
-
-Template.questionPreviewSplashscreen.helpers($.extend(isMobileDevice, {
-
-}));
-
-Template.readingConfirmedSplashscreen.helpers($.extend(isMobileDevice, {
-
-}));
-
-Template.questionAndAnswerSplashscreen.helpers($.extend(isMobileDevice, {
-
-}));
+Template.showHashtagsSplashscreen.onRendered(function () {
+	$('validQuestion').tooltip();
+	$('invalidQuestion').tooltip();
+});

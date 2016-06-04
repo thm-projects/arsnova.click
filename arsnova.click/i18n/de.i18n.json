@@ -129,10 +129,14 @@
       "reset": "Reset",
       "yes": "Ja",
       "no": "Nein",
-      "reset_session_confirmation": "<h2>Soll das Quiz beendet werden?</h2>
-      Alle Teilnehmenden werden abgmeldet. Die Rangliste wird gelöscht.
-      Dein Quiz mit allen Einstellungen verbleibt in diesem Browser, solange er nicht zurückgesetzt wird.<br><br>
-      Fortfahren?"
+      "reset_session_confirmation": {
+        "title": "Soll das Quiz beendet werden?",
+        "text": {
+          "1": "Alle Teilnehmenden werden abgmeldet. Die Rangliste wird gelöscht.",
+          "2": "Dein Quiz mit allen Einstellungen verbleibt in diesem Browser, solange er nicht zurückgesetzt wird.",
+          "3": "Fortfahren?"
+        }
+      }
     }
   },
   "view": {
@@ -161,7 +165,9 @@
       "import": "Quiz importieren",
       "delete_session": "Quiz löschen",
       "delete_session_confirmation": "Soll das Quiz '<span id=\"session_name\"></span>' unwiderruflich gelöscht werden?",
-      "export": "Quiz exportieren"
+      "export": "Quiz exportieren",
+      "valid_question": "Gültige Quizrunde",
+      "invalid_question": "Ungültige Quizrunde"
     },
     "leaderboard": {
       "title": {

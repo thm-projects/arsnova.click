@@ -26,12 +26,3 @@ Template.hashtagManagement.helpers({
 		return index === localData.getAllHashtags().length - 1;
 	}
 });
-
-Template.showHashtagsSplashscreen.helpers({
-	hashtags: function () {
-		return localData.getAllHashtags();
-	},
-	isValid: function (sessionName) {
-		return localData.reenterSession(sessionName).isValid();
-	}
-});

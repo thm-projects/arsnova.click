@@ -80,6 +80,8 @@ Router.onBeforeAction(function () {
 	let theme = "theme-dark";
 	if (!localStorage.getItem("theme")) {
 		localStorage.setItem("theme", theme);
+	} else {
+		theme = localStorage.getItem("theme");
 	}
 	if (Router.current().params.quizName) {
 		const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});

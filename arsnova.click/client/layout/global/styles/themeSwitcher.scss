@@ -118,9 +118,10 @@
 	$splashscreen-sound-config-button-background-color: $success;
 	$splashscreen-sound-config-select-foreground-color: black;
 	$splashscreen-delete-background-color: $splashscreen-background-color;
-	$splash-screen-error-message-background-color: white;
+	$splash-screen-error-message-background-color: #770000;
+	$splash-screen-error-message-foreground-color: white;
 	$splash-screen-error-message-button-background-color: $success;
-	$splash-screen-error-message-button-foreground-color: white;
+	$splash-screen-error-message-button-foreground-color: black;
 
 	$check-mark-checked: #00882a;
 	$check-mark-unchecked: #aaaaaa;
@@ -394,9 +395,6 @@
 		$splashscreen-delete-background-color: $splashscreen-background-color;
 		$splashscreen-sound-config-button-background-color: $success;
 		$splashscreen-sound-config-select-foreground-color: black;
-		$splash-screen-error-message-background-color: #770000;
-		$splash-screen-error-message-button-background-color: $success;
-		$splash-screen-error-message-button-foreground-color: black;
 	}
 	@if ($name == "theme-thm") {
 		$thmred: #971B2F;
@@ -1397,14 +1395,20 @@
 		.kickMemberSplashscreen {
 			.modal-content {
 				background: $splash-screen-error-message-background-color;
+				.modal-header {
+					color: $splash-screen-error-message-foreground-color;
+				}
+				.modal-body {
+					color: $splash-screen-error-message-foreground-color;
+				}
 			}
 		}
 		.showHashtagsSplashscreen {
 			.modal-content {
 				background: $splashscreen-show-hashtags-background-color;
 				.js-my-hash {
-					color: $fg-js-my-hash;
 					background-color: $bg-js-my-hash;
+					color: $fg-js-my-hash;
 					&:hover {
 						background-color: $bg-js-my-hash-hovered;
 					}
@@ -1427,10 +1431,16 @@
 		.errorSplashscreen {
 			.modal-content {
 				background: $splash-screen-error-message-background-color;
+				.modal-header {
+					color: $splash-screen-error-message-foreground-color;
+				}
+				.modal-body {
+					color: $splash-screen-error-message-foreground-color;
+				}
 			}
 			.splash-button-error-message {
-				color: $splash-screen-error-message-button-foreground-color;
 				background-color: $splash-screen-error-message-button-background-color;
+				color: $splash-screen-error-message-button-foreground-color;
 			}
 		}
 		.theme-description {

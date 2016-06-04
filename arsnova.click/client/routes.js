@@ -87,7 +87,7 @@ Router.onBeforeAction(function () {
 		const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 		if (hashtagDoc && hashtagDoc.theme && !localData.containsHashtag(Router.current().params.quizName)) {
 			sessionStorage.setItem("quizTheme", hashtagDoc.theme);
-			theme = sessionStorage.getItem("quizTheme");
+			theme = hashtagDoc.theme;
 		}
 	}
 	Session.set("theme", theme);

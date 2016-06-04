@@ -62,6 +62,16 @@ function addMemberlistChangeEvents() {
 			}
 		}
 	});
+
+	globalEventStackObserver.onChange([
+		"HashtagsCollection.setDefaultTheme"
+	], function (key, value) {
+		if (value.theme) {
+			sessionStorage.setItem("quizTheme", value.theme);
+			theme = value.theme;
+			Session.set("theme", value.theme);
+		}
+	});
 }
 
 function addLiveresultsChangeEvents() {

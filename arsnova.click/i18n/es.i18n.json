@@ -155,7 +155,8 @@
       "session_management": "Gestión de prueba",
       "import": "Cuestionario de importación",
       "delete_session": "Prueba clara",
-      "delete_session_confirmation": "Si elimina permanentemente el '<span id=\"session_name\"></span>' de cuestionarios?"
+      "delete_session_confirmation": "Si elimina permanentemente el '<span id=\"session_name\"></span>' de cuestionarios?",
+      "export": "Cuestionario de exportación"
     },
     "leaderboard": {
       "title": {

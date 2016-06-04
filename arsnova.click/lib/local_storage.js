@@ -277,6 +277,19 @@ export function importFromFile(data) {
 		});
 	});
 
+	if (!data.hashtagDoc.theme) {
+		data.hashtagDoc.theme = "theme-dark";
+	}
+	if (!data.hashtagDoc.musicVolume) {
+		data.hashtagDoc.musicVolume = 80;
+	}
+	if (!data.hashtagDoc.musicEnabled) {
+		data.hashtagDoc.musicEnabled = 1;
+	}
+	if (!data.hashtagDoc.musicTitle) {
+		data.hashtagDoc.musicTitle = "Song1";
+	}
+
 	localStorage.setItem(hashtag, JSON.stringify({
 		hashtag: data.hashtagDoc.hashtag,
 		questionList: questionList,
@@ -290,6 +303,18 @@ export function importFromFile(data) {
 
 export function exportFromLocalStorage(hashtag) {
 	var localStorageData = JSON.parse(localStorage.getItem(hashtag));
+	if (!localStorageData.theme) {
+		localStorageData.theme = "theme-dark";
+	}
+	if (!localStorageData.musicVolume) {
+		localStorageData.musicVolume = 80;
+	}
+	if (!localStorageData.musicEnabled) {
+		localStorageData.musicEnabled = 1;
+	}
+	if (!localStorageData.musicTitle) {
+		localStorageData.musicTitle = "Song1";
+	}
 	if (localStorageData) {
 		var hashtagDoc = {
 			hashtag: localStorageData.hashtag,

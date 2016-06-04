@@ -183,26 +183,6 @@ Template.hashtagManagement.events({
 		Session.set("questionGroup", localData.reenterSession(hashtag));
 		lib.connectEventManager(hashtag);
 	},
-	"click .js-export": function (event) {
-		var hashtag = $(event.currentTarget).parent().parent()[0].id;
-		var exportData = localData.exportFromLocalStorage(hashtag);
-		if (exportData) {
-			var exportDataJson = "text/json;charset=utf-8," + encodeURIComponent(exportData);
-			var a = document.createElement('a');
-			var time = new Date();
-			var timestring = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
-			a.href = 'data:' + exportDataJson;
-			a.download = hashtag + "-" + timestring + ".json";
-			a.innerHTML = '';
-			event.target.appendChild(a);
-			if (localStorage.getItem(hashtag + "exportReady")) {
-				localStorage.setItem(hashtag + "exportReady", undefined);
-			} else {
-				localStorage.setItem(hashtag + "exportReady", true);
-				a.click();
-			}
-		}
-	},
 	"click .js-delete": function (event) {
 		const hashtagRow = $(event.currentTarget).parent().parent();
 

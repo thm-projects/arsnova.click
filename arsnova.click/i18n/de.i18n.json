@@ -158,7 +158,8 @@
       "session_management": "Quizverwaltung",
       "import": "Quiz importieren",
       "delete_session": "Quiz löschen",
-      "delete_session_confirmation": "Soll das Quiz '<span id=\"session_name\"></span>' unwiderruflich gelöscht werden?"
+      "delete_session_confirmation": "Soll das Quiz '<span id=\"session_name\"></span>' unwiderruflich gelöscht werden?",
+      "export": "Quiz exportieren"
     },
     "leaderboard": {
       "title": {

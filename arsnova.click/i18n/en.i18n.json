@@ -155,7 +155,8 @@
       "session_management": "Quiz Management",
       "import": "Import quiz",
       "delete_session": "Delete quiz",
-      "delete_session_confirmation": "Shall the quiz '<span id=\"session_name\"></span>' be removed permanently?"
+      "delete_session_confirmation": "Shall the quiz '<span id=\"session_name\"></span>' be removed permanently?",
+      "export": "Export quiz"
     },
     "leaderboard": {
       "title": {

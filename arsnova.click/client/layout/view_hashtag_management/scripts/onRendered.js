@@ -52,7 +52,11 @@ Template.hashtagManagement.onRendered(function () {
 	footerElements.addFooterElement(footerElements.footerElemTheme);
 	footerElements.addFooterElement(footerElements.footerElemFullscreen);
 	footerElements.calculateFooter();
-	
+
+	$('.js-export').tooltip();
+	$('.js-delete').tooltip();
+	$('.js-reactivate-hashtag').tooltip();
+
 	$('.hashtagManagementRow').each(function (i, element) {
 		var hashtag = element.id;
 		var exportData = localData.exportFromLocalStorage(hashtag);

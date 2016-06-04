@@ -140,10 +140,10 @@ function addLiveresultsChangeEvents() {
 	});
 }
 
-function addOnPollingChangeEvents () {
+function addOnPollingChangeEvents() {
 	globalEventStackObserver.onChange([
 		"ResponsesCollection.addResponse"
-	], function (key, value) {
+	], function () {
 		let allMemberResponses = ResponsesCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).fetch();
 		let memberWithGivenResponsesAmount = _.uniq(allMemberResponses, false, function (user) {
 			return user.userNick;
@@ -170,7 +170,9 @@ export function getChangeEventsForRoute(route) {
 			addMemberlistChangeEvents();
 			break;
 		case "results":
-				addOnPollingChangeEvents();
+			addOnPollingChangeEvents();
+			addLiveresultsChangeEvents();
+			break;
 		case "statistics":
 			addLiveresultsChangeEvents();
 			break;

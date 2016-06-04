@@ -68,6 +68,35 @@ export function checkIfIsCorrect(isCorrect) {
 	return isCorrect > 0 ? 'progress-success' : isCorrect < 0 ? 'progress-default' : 'progress-failure';
 }
 
+export function countdownFinish() {
+	Session.set("countdownInitialized", false);
+	deleteCountdown();
+	$('.disableOnActiveCountdown').removeAttr("disabled");
+	if (!localData.containsHashtag(Router.current().params.quizName)) {
+		return;
+	}
+	$('.navbar-fixed-bottom').show();
+	if (Session.get("soundIsPlaying")) {
+		buzzsound1.stop();
+		whistleSound.play();
+		Session.set("soundIsPlaying", false);
+	}
+	if (questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
+		Session.set("sessionClosed", true);
+		if (localData.containsHashtag(Router.current().params.quizName) && AnswerOptionCollection.find({isCorrect: true}).count() > 0) {
+			routeToLeaderboardTimer = setTimeout(() => {
+				Session.set("showGlobalRanking", true);
+				Router.go("/" + Router.current().params.quizName + "/statistics");
+			}, 7000);
+		}
+		footerElements.removeFooterElement(footerElements.footerElemReadingConfirmation);
+	} else {
+		footerElements.addFooterElement(footerElements.footerElemReadingConfirmation, 2);
+	}
+	console.log("footerCalculation");
+	footerElements.calculateFooter();
+}
+
 export function startCountdown(index) {
 	questionIndex = index;
 	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
@@ -98,40 +127,11 @@ export function startCountdown(index) {
 	countdown = new ReactiveCountdown(questionDoc.timer - timeDiff.getSeconds());
 
 	countdown.start(function () {
-		countdownFinishActions();
+		countdownFinish();
 	});
 	$('.navbar-fixed-bottom').hide();
 	Session.set("countdownInitialized", true);
 	$('.disableOnActiveCountdown').attr("disabled", "disabled");
-}
-
-export function countdownFinish () {
-	Session.set("countdownInitialized", false);
-	deleteCountdown();
-	$('.disableOnActiveCountdown').removeAttr("disabled");
-	if (!localData.containsHashtag(Router.current().params.quizName)) {
-		return;
-	}
-	$('.navbar-fixed-bottom').show();
-	if (Session.get("soundIsPlaying")) {
-		buzzsound1.stop();
-		whistleSound.play();
-		Session.set("soundIsPlaying", false);
-	}
-	if (questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
-		Session.set("sessionClosed", true);
-		if (localData.containsHashtag(Router.current().params.quizName) && AnswerOptionCollection.find({isCorrect: true}).count() > 0) {
-			routeToLeaderboardTimer = setTimeout(() => {
-				Session.set("showGlobalRanking", true);
-				Router.go("/" + Router.current().params.quizName + "/statistics");
-			}, 7000);
-		}
-		footerElements.removeFooterElement(footerElements.footerElemReadingConfirmation);
-	} else {
-		footerElements.addFooterElement(footerElements.footerElemReadingConfirmation, 2);
-	}
-	console.log("footerCalculation");
-	footerElements.calculateFooter();
 }
 
 /**

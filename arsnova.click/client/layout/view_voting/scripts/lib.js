@@ -31,6 +31,16 @@ export function deleteCountdown() {
 	countdown = null;
 }
 
+export function countdownFinish() {
+	deleteCountdown();
+	if (questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
+		Session.set("sessionClosed", true);
+	}
+	Session.set("countdownInitialized", false);
+	Router.go("/" + Router.current().params.quizName + "/results");
+	countdownRunning = false;
+}
+
 export function startCountdown(index) {
 	questionIndex = index;
 	Session.set("hasSendResponse", false);
@@ -83,16 +93,6 @@ export function startCountdown(index) {
 		countdownFinish();
 	});
 	Session.set("countdownInitialized", true);
-}
-
-export function countdownFinish () {
-	deleteCountdown();
-	if (questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
-		Session.set("sessionClosed", true);
-	}
-	Session.set("countdownInitialized", false);
-	Router.go("/" + Router.current().params.quizName + "/results");
-	countdownRunning = false;
 }
 
 export function makeAndSendResponse(answerOptionNumber) {

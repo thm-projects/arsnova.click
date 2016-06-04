@@ -153,6 +153,20 @@ Meteor.methods({
 			}
 			var questionList = [];
 			var hashtagDoc = data.hashtagDoc;
+
+			if (!hashtagDoc.theme) {
+				hashtagDoc.theme = "theme-dark";
+			}
+			if (!hashtagDoc.musicVolume) {
+				hashtagDoc.musicVolume = 80;
+			}
+			if (!hashtagDoc.musicEnabled) {
+				hashtagDoc.musicEnabled = 1;
+			}
+			if (!hashtagDoc.musicTitle) {
+				hashtagDoc.musicTitle = "Song1";
+			}
+
 			hashtagDoc.privateKey = privateKey;
 			delete hashtagDoc._id;
 			HashtagsCollection.insert(hashtagDoc);

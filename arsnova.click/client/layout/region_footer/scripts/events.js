@@ -111,8 +111,6 @@ const clickEvents = {
 				}, function (err) {
 					if (!err) {
 						localData.addHashtag(instance);
-						Session.set("questionGroup", instance);
-						Router.go("/" + instance.getHashtag());
 					}
 				});
 			};

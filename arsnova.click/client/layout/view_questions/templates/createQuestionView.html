@@ -29,13 +29,13 @@
                 </div>
             </div>
             <div class="row distance-top">
-                <div id="previewQuestionText" class="col-md-12" style="display: none;">
-                    <div id="questionTextDisplay" class="round-corners previewText"></div>
+                <div id="previewQuestionText" class="col-md-12 {{#if isLargeWindow}}previewTextContainer-large{{else}}previewTextContainer-small{{/if}}" style="display: none;">
+                    <div id="questionTextDisplay" class="round-corners previewText {{#if isLargeWindow}}previewTextContainer-large{{else}}previewTextContainer-small{{/if}}"></div>
                 </div>
                 <div id="editQuestionText" class="col-md-12">
                     {{> markdownBar }}
                     <textarea class="round-corners textarea placeholder-align-center"
-                              maxlength="1000" rows="{{getRowCountBasedOnWindowHeight}}" id="questionText"
+                              maxlength="1000" rows="{{#if isLargeWindow}}8{{else}}4{{/if}}" id="questionText"
                               placeholder="{{_ "view.questions.enter_question_here"}}"
                     >{{questionText}}</textarea>
                 </div>

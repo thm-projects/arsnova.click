@@ -22,7 +22,7 @@
                         </div>
                         <div>
                             {{#each this.getAnswerOptionList}}
-                                <p>{{_ "view.quiz_summary.answer" count=1}} {{getNormalizedIndex this.getAnswerOptionNumber}} ({{_ (getIsCorrectAnswerOption this.getIsCorrect)}}): {{this.getAnswerText}}</p>
+                                <p>{{_ "view.quiz_summary.answer" count=1}} {{getNormalizedIndex this.getAnswerOptionNumber}}{{#unless isVotingQuestion ../typeName}} ({{_ (getIsCorrectAnswerOption this.getIsCorrect)}}){{/unless}}: {{this.getAnswerText}}</p>
                             {{/each}}
                         </div>
                     </div>

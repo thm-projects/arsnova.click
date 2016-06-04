@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import  * as localData from '/lib/local_storage.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
@@ -62,4 +63,10 @@ Template.home.onRendered(function () {
 	footerElements.addFooterElement(footerElements.footerElemFullscreen);
 	footerElements.addFooterElement(footerElements.footerElemImport);
 	footerElements.calculateFooter();
+});
+
+Template.layout.helpers({
+	getTheme: function () {
+		return Session.get("theme");
+	}
 });

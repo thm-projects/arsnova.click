@@ -69,5 +69,8 @@ Template.quizSummary.helpers({
 	},
 	getTranslationForReason: function (reason) {
 		return "view.quiz_summary.validation_errors.reasons." + reason;
+	},
+	isVotingQuestion: function (questionType) {
+		return questionType === "SurveyQuestion";
 	}
 });

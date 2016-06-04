@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
@@ -22,11 +23,13 @@ import {themes} from './lib.js';
 
 Template.themeSwitcher.onRendered(function () {
 	footerElements.removeFooterElements();
-	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.addFooterElement(footerElements.footerElemAbout);
-	footerElements.addFooterElement(footerElements.footerElemTranslation);
-	footerElements.addFooterElement(footerElements.footerElemFullscreen);
-	footerElements.addFooterElement(footerElements.footerElemImport);
+	if (!Session.get("questionGroup")) {
+		footerElements.addFooterElement(footerElements.footerElemHome);
+		footerElements.addFooterElement(footerElements.footerElemAbout);
+		footerElements.addFooterElement(footerElements.footerElemTranslation);
+		footerElements.addFooterElement(footerElements.footerElemFullscreen);
+		footerElements.addFooterElement(footerElements.footerElemImport);
+	}
 	footerElements.calculateFooter();
 
 	const theme = localStorage.getItem("theme");

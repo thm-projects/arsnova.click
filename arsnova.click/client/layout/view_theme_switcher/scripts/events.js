@@ -15,6 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {themes} from './lib.js';
@@ -23,7 +25,7 @@ Template.themeSwitcher.events({
 	"change #select-theme": function (event) {
 		const theme = $(event.currentTarget).find("option:selected").attr("id");
 		localStorage.setItem("theme", theme);
-		$('#theme-wrapper').removeClass().addClass(theme);
+		Session.set("theme", theme);
 
 		for (let i = 0; i < themes.length; i++) {
 			if (themes[i].id === theme) {
@@ -31,8 +33,19 @@ Template.themeSwitcher.events({
 				i = themes.length;
 			}
 		}
+
+		const quiz = Session.get("questionGroup");
+		if (quiz) {
+			quiz.setTheme(theme);
+			Session.set("questionGroup", quiz);
+			Meteor.call("HashtagsCollection.setDefaultTheme", Session.get("questionGroup").getHashtag(), theme);
+		}
 	},
 	"click #backButton": function () {
-		history.back();
+		if (Session.get("questionGroup")) {
+			Router.go("/" + Session.get("questionGroup").getHashtag() + "/memberlist");
+		} else {
+			history.back();
+		}
 	}
 });

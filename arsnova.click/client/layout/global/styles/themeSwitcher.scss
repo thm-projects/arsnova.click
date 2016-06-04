@@ -40,6 +40,9 @@
 	$background-color: #4682b4;
 	$button-shadow: black;
 
+	$fg-hashtag_management-hashtag_name: $default-text-color;
+	$border-hashtag_management-HR: $default-text-color;
+
 	$bg-nav-row: $background-color;
 	$bg-container: $background-color;
 
@@ -116,10 +119,12 @@
 	$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
 	$splashscreen-sound-config-background-color: $splashscreen-background-color;
 	$splashscreen-sound-config-button-background-color: $success;
+	$splashscreen-sound-config-select-foreground-color: black;
 	$splashscreen-delete-background-color: $splashscreen-background-color;
-	$splash-screen-error-message-background-color: white;
-	$splash-screen-error-message-button-background-color: $success;
-	$splash-screen-error-message-button-foreground-color: white;
+	$splash-screen-error-message-background-color: #770000;
+	$splash-screen-error-message-foreground-color: white;
+	$splash-screen-error-message-button-background-color: #ad9595;
+	$splash-screen-error-message-button-foreground-color: black;
 
 	$check-mark-checked: #00882a;
 	$check-mark-unchecked: #aaaaaa;
@@ -350,8 +355,9 @@
 	$fg-answer_row-button_green_transition: #663399;
 
 	@if ($name == "theme-dark") {
-		$success: #00CD00; /* green */
-		$warning: #FF2222; /* firebrick */
+		$success: #008000; /* green */
+		$success-text-color: white;
+		$warning: #b10d0d; /* firebrick */
 		$info: #1C86EE; /* dodgerblue */
 		$background-color: #4a4a4a; /* grey */
 
@@ -377,6 +383,8 @@
 
 		$fg-warning: $warning;
 
+		$bg-answer_options-bootstrap_switch: $input-background-color;
+
 		$splashscreen-background-color: #6b6b6b;
 		$splashscreen-foreground-color: white;
 		$splash-screen-header-color: white;
@@ -388,8 +396,8 @@
 		$splashscreen-sound-config-background-color: $splashscreen-background-color;
 		$splashscreen-delete-background-color: $splashscreen-background-color;
 		$splashscreen-sound-config-button-background-color: $success;
+		$splashscreen-sound-config-select-foreground-color: black;
 	}
-
 	@if ($name == "theme-thm") {
 		$thmred: #971B2F;
 		$thmorange: #F2A900;
@@ -411,6 +419,9 @@
 		$default-text-color: $thmgray;
 		$success-text-color: white;
 		$fg_titel: $thmgray;
+
+		$fg-hashtag_management-hashtag_name: $default-text-color;
+		$border-hashtag_management-HR: $default-text-color;
 
 		$placeholder-color: #d3d3d3; /* light grey */
 		$input-background-color: $thmgray;
@@ -438,6 +449,15 @@
 		$fg-quiz-summary-P: $default-text-color;
 		$fg-quiz-summary-UL: $default-text-color;
 		$fg-success: $success;
+
+		$splashscreen-background-color: #b9d68b;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
 	}
 
 	@if ($name == "theme-elegant") {
@@ -454,6 +474,8 @@
 		$fg_titel: black;
 		$fg-question-title: black;
 		$fg-theme_description: black;
+		$fg-hashtag_management-hashtag_name: $default-text-color;;
+		$border-hashtag_management-HR: $default-text-color;
 		$quiz-summary-row-color: $default-text-color;
 		$fg-quiz-summary-H4: $default-text-color;
 		$fg-quiz-summary-P: $default-text-color;
@@ -482,6 +504,8 @@
 		$fg-question-title: black;
 		$fg-theme_description: black;
 		$default-text-color: black;
+		$fg-hashtag_management-hashtag_name: $default-text-color;
+		$border-hashtag_management-HR: $default-text-color;
 		$fg-text-light: black;
 		$fg_text-dark: black;
 		$fg-footer-info-bar: #394a59;
@@ -546,27 +570,26 @@
 				background-color: $bg-nav-row;
 			}
 		}
-		textarea::-moz-placeholder, textarea:-ms-input-placeholder, input::-webkit-input-placeholder, input[placeholder] {
+		*::-webkit-input-placeholder {
 			color: $placeholder-color;
 			opacity: 1;
 		}
-
-		::-webkit-input-placeholder {
+		*:-moz-placeholder, *::-moz-placeholder {
 			color: $placeholder-color;
+			opacity: 1;
 		}
-
-		:-moz-placeholder { /* Firefox 18- */
+		*:-ms-input-placeholder {
 			color: $placeholder-color;
+			opacity: 1;
 		}
-
-		::-moz-placeholder {  /* Firefox 19+ */
-			color: $placeholder-color;
+		.hashtag-management {
+			hr {
+				border-color: $border-hashtag_management-HR;
+			}
+			.hashtag-name {
+				color: $fg-hashtag_management-hashtag_name;
+			}
 		}
-
-		:-ms-input-placeholder {
-			color: $placeholder-color;
-		}
-
 		button:disabled {
 			background-color: $disabled-button-background;
 		}
@@ -1342,6 +1365,9 @@
 		.soundConfig {
 			.modal-content {
 				background-color: $splashscreen-sound-config-background-color;
+				select {
+					color: $splashscreen-sound-config-select-foreground-color;
+				}
 				button.down {
 					background: $splashscreen-sound-config-button-background-color;
 				}
@@ -1377,14 +1403,20 @@
 		.kickMemberSplashscreen {
 			.modal-content {
 				background: $splash-screen-error-message-background-color;
+				.modal-header {
+					color: $splash-screen-error-message-foreground-color;
+				}
+				.modal-body {
+					color: $splash-screen-error-message-foreground-color;
+				}
 			}
 		}
 		.showHashtagsSplashscreen {
 			.modal-content {
 				background: $splashscreen-show-hashtags-background-color;
 				.js-my-hash {
-					color: $fg-js-my-hash;
 					background-color: $bg-js-my-hash;
+					color: $fg-js-my-hash;
 					&:hover {
 						background-color: $bg-js-my-hash-hovered;
 					}
@@ -1407,10 +1439,16 @@
 		.errorSplashscreen {
 			.modal-content {
 				background: $splash-screen-error-message-background-color;
+				.modal-header {
+					color: $splash-screen-error-message-foreground-color;
+				}
+				.modal-body {
+					color: $splash-screen-error-message-foreground-color;
+				}
 			}
 			.splash-button-error-message {
-				color: $splash-screen-error-message-button-foreground-color;
 				background-color: $splash-screen-error-message-button-background-color;
+				color: $splash-screen-error-message-button-foreground-color;
 			}
 		}
 		.theme-description {

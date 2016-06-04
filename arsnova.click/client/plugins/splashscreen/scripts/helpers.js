@@ -15,15 +15,41 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {isMobileDevice} from '/client/plugins/splashscreen/scripts/lib.js';
+import {isMobileDevice} from './lib.js';
 
-Template.soundConfig.helpers($.extend(isMobileDevice, {
-	slider2: function () {
-		return Session.get("slider2");
-	},
-	isSoundPlaying: function () {
-		return Session.get("soundIsPlaying");
-	}
+Template.splashscreen.helpers($.extend(isMobileDevice, {
+
+}));
+
+Template.kickMemberSplashscreen.helpers($.extend(isMobileDevice, {
+
+}));
+
+Template.deleteConfirmationSplashscreen.helpers($.extend(isMobileDevice, {
+
+}));
+
+Template.resetSessionSplashscreen.helpers($.extend(isMobileDevice, {
+
+}));
+
+Template.errorSplashscreen.helpers($.extend(isMobileDevice, {
+
+}));
+
+Template.showHashtagsSplashscreen.helpers($.extend(isMobileDevice, {
+
+}));
+
+Template.questionPreviewSplashscreen.helpers($.extend(isMobileDevice, {
+
+}));
+
+Template.readingConfirmedSplashscreen.helpers($.extend(isMobileDevice, {
+
+}));
+
+Template.questionAndAnswerSplashscreen.helpers($.extend(isMobileDevice, {
+
 }));

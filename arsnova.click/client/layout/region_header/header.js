@@ -109,10 +109,10 @@ let headerThemeTracker = null;
 
 Template.header.onRendered(function () {
 	headerThemeTracker = Tracker.autorun(function () {
-		if (!Session.get("questionGroup")) {
+		if (!Session.get("questionGroup") && HashtagsCollection.findOne({hashtag: Router.current().params.quizName})) {
 			const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 			const theme = hashtagDoc ? hashtagDoc.theme : "theme-default";
-			$('#theme-wrapper').removeClass().addClass(theme);
+			Session.set("theme", theme);
 		}
 	});
 	$(window).resize(function () {

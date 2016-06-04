@@ -16,6 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {SubsManager} from 'meteor/meteorhacks:subs-manager';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
@@ -29,7 +30,7 @@ import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scri
 
 const subsCache = new SubsManager({
 	cacheLimit: 8, // maximum number of cached subscriptions
-	expireIn: 15 // any subscription will be expire after 15 minutes, if it's not subscribed again
+	expireIn: 15 // any subscription will expire after 15 minutes, if it's not subscribed again
 });
 
 Router.configure({
@@ -63,6 +64,37 @@ Router.onStop(function () {
 });
 
 Router.onBeforeAction(function () {
+	try {
+		localData.initializePrivateKey();
+	} catch (ex) {
+		new ErrorSplashscreen({
+			autostart: true,
+			errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing")
+		});
+	} finally {
+		this.next();
+	}
+});
+
+Router.onBeforeAction(function () {
+	let theme = "theme-dark";
+	if (!localStorage.getItem("theme")) {
+		localStorage.setItem("theme", theme);
+	} else {
+		theme = localStorage.getItem("theme");
+	}
+	if (Router.current().params.quizName) {
+		const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+		if (hashtagDoc && hashtagDoc.theme && !localData.containsHashtag(Router.current().params.quizName)) {
+			sessionStorage.setItem("quizTheme", hashtagDoc.theme);
+			theme = hashtagDoc.theme;
+		}
+	}
+	Session.set("theme", theme);
+	this.next();
+});
+
+Router.onBeforeAction(function () {
 	if (!globalEventStackObserver) {
 		setGlobalEventStackObserver();
 	}
@@ -79,19 +111,6 @@ Router.onBeforeAction(function () {
 		getRemoveEventsForRoute(Router.current().route.getName());
 	}
 	this.next();
-});
-
-Router.onAfterAction(function () {
-	if (!localStorage.getItem("theme")) {
-		localStorage.setItem("theme", "theme-default");
-	}
-	let theme = localStorage.getItem("theme");
-	const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-	if (hashtagDoc && hashtagDoc.theme && !localData.containsHashtag(Router.current().params.quizName)) {
-		sessionStorage.setItem("quizTheme", hashtagDoc.theme);
-		theme = sessionStorage.getItem("quizTheme");
-	}
-	$('#theme-wrapper').removeClass().addClass(theme);
 });
 
 Router.route('/', {

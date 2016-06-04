@@ -50,7 +50,7 @@ Meteor.methods({
 			}
 		});
 	},
-	'HashtagsCollection.setDefaultTheme': function (hashtag, themeName = "theme-default") {
+	'HashtagsCollection.setDefaultTheme': function (hashtag, themeName = "theme-dark") {
 		new SimpleSchema({hashtag: hashtagSchema, theme: themeSchema}).validate({hashtag: hashtag, theme: themeName});
 
 		let queryParam = {};

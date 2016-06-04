@@ -28,6 +28,13 @@ Template.createQuestionView.helpers({
 		}
 		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
 	},
+	getRowCountBasedOnWindowHeight: function () {
+		if ($(window).height() > 699) {
+			return 8;
+		} else {
+			return 4;
+		}
+	},
 	questionTypes: function () {
 		if (!EventManagerCollection.findOne()) {
 			return;

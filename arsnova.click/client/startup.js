@@ -36,6 +36,7 @@ export function getUserLanguage() {
 		if (TAPi18n.languages_names[localStorageLang.data]) {
 			selectedLang = localStorageLang.data;
 		}
+		localData.initializePrivateKey();
 		localStorage.setItem("localStorageAvailable", true);
 	} catch (err) {
 		// Private mode enabled. Error splashscreen is shown in route.js

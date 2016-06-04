@@ -101,21 +101,9 @@ const clickEvents = {
 					default:
 						throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
 				}
-				/*Meteor.call('HashtagsCollection.addHashtag', {
-					privateKey: localData.getPrivateKey(),
-					hashtag: instance.getHashtag(),
-					musicVolume: 80,
-					musicEnabled: 1,
-					musicTitle: "Song1",
-					theme: "theme-dark"
-				}, function (err) {
-					if (!err) {
-						localData.addHashtag(instance);
-					}
-				});*/
+
 				localData.addHashtag(instance);
 				Router.go("/hashtagmanagement");
-
 			};
 			for (var i = 0; i < fileList.length; i++) {
 				fileReader.readAsBinaryString(fileList[i]);

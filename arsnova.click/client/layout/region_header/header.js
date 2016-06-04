@@ -90,14 +90,8 @@ Template.header.events({
 				closeOnButton: '#closeDialogButton, #resetSessionButton',
 				onRendered: function (instance) {
 					instance.templateSelector.find('#resetSessionButton').on('click', function () {
-						Meteor.call("Main.killAll", Router.current().params.quizName, function (err) {
-							if (err) {
-								new ErrorSplashscreen({
-									autostart: true,
-									errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
-								});
-							}
-						});
+						Meteor.call("Main.killAll", Router.current().params.quizName);
+						Router.go("/" + Router.current().params.quizName + "/resetToHome");
 					});
 				}
 			});

@@ -132,9 +132,8 @@
       "reset_session_confirmation": {
         "title": "Soll das Quiz beendet werden?",
         "text": {
-          "1": "Alle Teilnehmenden werden abgmeldet. Die Rangliste wird gelöscht.",
-          "2": "Dein Quiz mit allen Einstellungen verbleibt in diesem Browser, solange er nicht zurückgesetzt wird.",
-          "3": "Fortfahren?"
+          "1": "Alle Teilnehmenden werden abgmeldet. Die Rangliste wird gelöscht. Dein Quiz mit allen Einstellungen verbleibt in diesem Browser, solange er nicht zurückgesetzt wird.",
+          "2": "Fortfahren?"
         }
       }
     }

@@ -62,6 +62,9 @@ Template.questionList.onRendered(function () {
 
 Template.questionList.helpers({
 	question: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
 		return Session.get("questionGroup").getQuestionList();
 	},
 	getNormalizedIndex: function (index) {
@@ -74,7 +77,7 @@ Template.questionList.helpers({
 		return index === EventManagerCollection.findOne().questionIndex;
 	},
 	hasCompleteContent: function (index) {
-		if (index >= Session.get("questionGroup").getQuestionList().length) {
+		if (!Session.get("questionGroup") || index >= Session.get("questionGroup").getQuestionList().length) {
 			return;
 		}
 		return Session.get("questionGroup").getQuestionList()[index].isValid();

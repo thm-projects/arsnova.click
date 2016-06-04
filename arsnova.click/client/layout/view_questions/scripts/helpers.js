@@ -23,7 +23,7 @@ import * as lib from './lib.js';
 Template.createQuestionView.helpers({
 	//Get question from Sessions-Collection if it already exists
 	questionText: function () {
-		if (!EventManagerCollection.findOne()) {
+		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
 			return;
 		}
 		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();

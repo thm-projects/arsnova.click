@@ -40,6 +40,9 @@
 	$background-color: #4682b4;
 	$button-shadow: black;
 
+	$fg-hashtag_management-hashtag_name: $default-text-color;
+	$border-hashtag_management-HR: $default-text-color;
+
 	$bg-nav-row: $background-color;
 	$bg-container: $background-color;
 
@@ -418,6 +421,9 @@
 		$success-text-color: white;
 		$fg_titel: $thmgray;
 
+		$fg-hashtag_management-hashtag_name: $default-text-color;
+		$border-hashtag_management-HR: $default-text-color;
+
 		$placeholder-color: #d3d3d3; /* light grey */
 		$input-background-color: $thmgray;
 		$input-foreground-color: white;
@@ -469,6 +475,8 @@
 		$fg_titel: black;
 		$fg-question-title: black;
 		$fg-theme_description: black;
+		$fg-hashtag_management-hashtag_name: $default-text-color;;
+		$border-hashtag_management-HR: $default-text-color;
 		$quiz-summary-row-color: $default-text-color;
 		$fg-quiz-summary-H4: $default-text-color;
 		$fg-quiz-summary-P: $default-text-color;
@@ -497,6 +505,8 @@
 		$fg-question-title: black;
 		$fg-theme_description: black;
 		$default-text-color: black;
+		$fg-hashtag_management-hashtag_name: $default-text-color;
+		$border-hashtag_management-HR: $default-text-color;
 		$fg-text-light: black;
 		$fg_text-dark: black;
 		$fg-footer-info-bar: #394a59;
@@ -581,7 +591,14 @@
 		:-ms-input-placeholder {
 			color: $placeholder-color;
 		}
-
+		.hashtag-management {
+			hr {
+				border-color: $border-hashtag_management-HR;
+			}
+			.hashtag-name {
+				color: $fg-hashtag_management-hashtag_name;
+			}
+		}
 		button:disabled {
 			background-color: $disabled-button-background;
 		}

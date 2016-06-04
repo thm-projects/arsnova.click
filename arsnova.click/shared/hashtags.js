@@ -146,7 +146,7 @@ Meteor.methods({
 	},
 	'HashtagsCollection.import': function ({privateKey, data}) {
 		if (Meteor.isServer) {
-			var hashtag = data.hashtagDoc.hashtag;
+			var hashtag = data.hashtag;
 			var oldDoc = HashtagsCollection.findOne({hashtag: hashtag, privateKey: {$ne: privateKey}});
 			if (oldDoc) {
 				throw new Meteor.Error('HashtagsCollection.import', 'hashtag_exists');

@@ -208,18 +208,26 @@ Template.hashtagManagement.events({
 		var fileReader = new FileReader();
 		fileReader.onload = function () {
 			var asJSON = JSON.parse(fileReader.result);
-			Meteor.call("HashtagsCollection.import", {
+			let instance = null;
+			switch (asJSON.type) {
+				case "DefaultQuestionGroup":
+					instance = new DefaultQuestionGroup(asJSON);
+					break;
+				default:
+					throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
+			}
+			Meteor.call('HashtagsCollection.addHashtag', {
 				privateKey: localData.getPrivateKey(),
-				data: asJSON
-			}, (err) => {
-				if (err) {
-					new ErrorSplashscreen({
-						autostart: true,
-						errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
-					});
-				} else {
-					localData.importFromFile(asJSON);
-					lib.connectEventManager(asJSON.hashtagDoc.hashtag);
+				hashtag: instance.getHashtag(),
+				musicVolume: 80,
+				musicEnabled: 1,
+				musicTitle: "Song1",
+				theme: "theme-dark"
+			}, function (err) {
+				if (!err) {
+					localData.addHashtag(instance);
+					Session.set("questionGroup", instance);
+					lib.connectEventManager(instance.getHashtag());
 				}
 			});
 		};

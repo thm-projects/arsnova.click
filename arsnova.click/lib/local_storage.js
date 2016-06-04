@@ -242,118 +242,52 @@ export function getPrivateKey() {
 }
 
 export function importFromFile(data) {
-	var hashtag = data.hashtagDoc.hashtag;
+	var hashtag = data.hashtag;
 	if ((hashtag === "hashtags") || (hashtag === "privateKey")) {
 		return;
 	}
 
 	var allHashtags = JSON.parse(localStorage.getItem("hashtags"));
 	allHashtags = $.grep(allHashtags, function (value) {
-		return value !== data.hashtagDoc.hashtag;
+		return value !== data.hashtag;
 	});
 	allHashtags.push(hashtag);
 	localStorage.setItem("hashtags", JSON.stringify(allHashtags));
 
-	var questionList = [];
-	data.questionListDoc.forEach(function (questionListDoc) {
-		questionList.push({
-			hashtag: questionListDoc.hashtag,
-			questionIndex: questionListDoc.questionIndex,
-			questionText: questionListDoc.questionText,
-			startTime: questionListDoc.startTime,
-			timer: questionListDoc.timer,
-			type: questionListDoc.type
-		});
-		questionListDoc.answerOptionList.forEach(function (answerOptionListDoc) {
-			questionList.answerOptionList = [];
-			questionList.answerOptionList.push({
-				answerOptionNumber: answerOptionListDoc.answerOptionNumber,
-				answerText: answerOptionListDoc.answerText,
-				hashtag: answerOptionListDoc.hashtag,
-				isCorrect: answerOptionListDoc.isCorrect,
-				questionIndex: answerOptionListDoc.questionIndex,
-				type: answerOptionListDoc.type
-			});
-		});
-	});
-
-	if (!data.hashtagDoc.theme) {
-		data.hashtagDoc.theme = "theme-dark";
+	switch (data.type) {
+		case "DefaultQuestionGroup":
+			const instance = new DefaultQuestionGroup(data);
+			localStorage.setItem(instance.getHashtag(), JSON.stringify(instance.serialize()));
+			break;
+		default:
+			throw new TypeError("Undefined session type '" + data.type + "' while importing");
 	}
-	if (!data.hashtagDoc.musicVolume) {
-		data.hashtagDoc.musicVolume = 80;
-	}
-	if (!data.hashtagDoc.musicEnabled) {
-		data.hashtagDoc.musicEnabled = 1;
-	}
-	if (!data.hashtagDoc.musicTitle) {
-		data.hashtagDoc.musicTitle = "Song1";
-	}
-
-	localStorage.setItem(hashtag, JSON.stringify({
-		hashtag: data.hashtagDoc.hashtag,
-		questionList: questionList,
-		theme: data.hashtagDoc.theme,
-		type: data.hashtagDoc.type,
-		musicVolume: data.hashtagDoc.musicVolume,
-		musicEnabled: data.hashtagDoc.musicEnabled,
-		musicTitle: data.hashtagDoc.musicTitle
-	}));
 }
 
 export function exportFromLocalStorage(hashtag) {
-	var localStorageData = JSON.parse(localStorage.getItem(hashtag));
-	if (!localStorageData.theme) {
-		localStorageData.theme = "theme-dark";
+	const localStorageData = JSON.parse(localStorage.getItem(hashtag));
+	if (!localStorageData) {
+		throw new TypeError("Invalid local storage data while exporting");
 	}
-	if (!localStorageData.musicVolume) {
-		localStorageData.musicVolume = 80;
+	let quizItem = null;
+	switch (localStorageData.type) {
+		case "DefaultQuestionGroup":
+			quizItem = new DefaultQuestionGroup(localStorageData);
+			break;
+		default:
+			throw new TypeError("Undefined session type while exporting");
 	}
-	if (!localStorageData.musicEnabled) {
-		localStorageData.musicEnabled = 1;
+	if (!quizItem.theme) {
+		quizItem.theme = "theme-dark";
 	}
-	if (!localStorageData.musicTitle) {
-		localStorageData.musicTitle = "Song1";
+	if (!quizItem.musicVolume) {
+		quizItem.musicVolume = 80;
 	}
-	if (localStorageData) {
-		var hashtagDoc = {
-			hashtag: localStorageData.hashtag,
-			theme: localStorageData.theme,
-			type: localStorageData.type,
-			musicVolume: localStorageData.musicVolume,
-			musicEnabled: localStorageData.musicEnabled,
-			musicTitle: localStorageData.musicTitle
-		};
-
-		var questionList =  [];
-
-		for (var i = 0; i < localStorageData.questionList.length; i++) {
-			var question = localStorageData.questionList[i];
-			questionList.push({
-				hashtag: question.hashtag,
-				questionIndex: question.questionIndex,
-				questionText: question.questionText,
-				startTime: question.startTime,
-				timer: question.timer,
-				type: question.type,
-				answerOptionList: []
-			});
-			for (var j = 0; j < question.answerOptionList.length; j++) {
-				var answer = question.answerOptionList[j];
-				questionList[i].answerOptionList.push({
-					hashtag: answer.hashtag,
-					questionIndex: answer.questionIndex,
-					answerText: answer.answerText,
-					answerOptionNumber: answer.answerOptionNumber,
-					isCorrect: answer.isCorrect,
-					type: answer.type
-				});
-			}
-		}
-
-		return JSON.stringify({
-			hashtagDoc: hashtagDoc,
-			questionListDoc: questionList
-		});
+	if (!quizItem.musicEnabled) {
+		quizItem.musicEnabled = 1;
 	}
+	if (!quizItem.musicTitle) {
+		quizItem.musicTitle = "Song1";
+	}
+	return JSON.stringify(quizItem.serialize());
 }

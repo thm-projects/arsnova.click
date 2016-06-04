@@ -20,6 +20,7 @@ import {Template} from 'meteor/templating';
 import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {DefaultQuestionGroup} from '/lib/questions/questiongroup_default.js';
 import * as localData from '/lib/local_storage.js';
 import {buzzsound1, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
@@ -92,22 +93,28 @@ const clickEvents = {
 					});
 					return;
 				}
-				Meteor.call("HashtagsCollection.import",
-					{
-						privateKey: localData.getPrivateKey(),
-						data: asJSON
-					},
-					(err) => {
-						if (err) {
-							new ErrorSplashscreen({
-								autostart: true,
-								errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.session_exists")
-							});
-						} else {
-							localData.importFromFile(asJSON);
-						}
+				let instance = null;
+				switch (asJSON.type) {
+					case "DefaultQuestionGroup":
+						instance = new DefaultQuestionGroup(asJSON);
+						break;
+					default:
+						throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
+				}
+				Meteor.call('HashtagsCollection.addHashtag', {
+					privateKey: localData.getPrivateKey(),
+					hashtag: instance.getHashtag(),
+					musicVolume: 80,
+					musicEnabled: 1,
+					musicTitle: "Song1",
+					theme: "theme-dark"
+				}, function (err) {
+					if (!err) {
+						localData.addHashtag(instance);
+						Session.set("questionGroup", instance);
+						Router.go("/" + instance.getHashtag());
 					}
-				);
+				});
 			};
 			for (var i = 0; i < fileList.length; i++) {
 				fileReader.readAsBinaryString(fileList[i]);

@@ -716,6 +716,9 @@
 		.input-group-letter, .button-result-letter {
 			color: $input-group-letter-color;
 		}
+		.button-foreground-color {
+			color: $input-foreground-color !important;
+		}
 		.button-next, .button-success {
 			background-color: $success;
 			color: $success-text-color;

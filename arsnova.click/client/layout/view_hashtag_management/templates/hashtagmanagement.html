@@ -22,22 +22,22 @@
 			{{#each serverHashtags}}
 				<div class="row hashtagManagementRow" id="{{this}}">
 					<div class="col-md-6 col-sm-6 col-xs-12">
-						<div class="btn-lg btn-answerOption hashtag-dummy-button input-field ">
+						<div class="btn-lg btn-answerOption hashtag-management input-field ">
                             <p class="hashtag-name">{{this}}</p>
 						</div>
 					</div>
 					<div class="col-md-2 col-sm-2 col-xs-4">
-						<button type="button" class="js-reactivate-hashtag btn btn-info btn-lg btn-answerOption">
+						<button type="button" class="js-reactivate-hashtag btn btn-answerOption hashtag-management input-field btn-lg btn-cursor">
 							<span class="glyphicon glyphicon-edit glyph-left alignGlyphicon" aria-hidden="true"></span>
 						</button>
 					</div>
 					<div class="col-md-2 col-sm-2 col-xs-4">
-						<button type="button" class="js-delete btn btn-info btn-lg btn-answerOption">
+						<button type="button" class="js-delete btn btn-answerOption hashtag-management input-field btn-lg btn-cursor">
 							<span class="glyphicon glyphicon-trash glyph-left alignGlyphicon" aria-hidden="true"></span>
 						</button>
 					</div>
 					<div class="col-md-2 col-sm-2 col-xs-4">
-						<div class="js-export btn btn-info btn-lg btn-answerOption"></div>
+						<div class="js-export btn btn-answerOption hashtag-management input-field btn-lg"></div>
 					</div>
 				</div>
                 {{#unless isLastItem @index}}

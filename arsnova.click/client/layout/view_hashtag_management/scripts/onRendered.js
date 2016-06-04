@@ -63,7 +63,7 @@ Template.hashtagManagement.onRendered(function () {
 			var timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
 			a.href = 'data:' + exportDataJson;
 			a.download = hashtag + "-" + timeString + ".json";
-			a.innerHTML = '<span class="glyphicon glyphicon-export glyph-left alignGlyphicon" aria-hidden="true"></span>';
+			a.innerHTML = '<span class="glyphicon glyphicon-export glyph-left alignGlyphicon button-foreground-color" aria-hidden="true"></span>';
 			$(element).find('.js-export').append(a);
 		}
 	});

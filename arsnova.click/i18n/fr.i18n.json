@@ -142,7 +142,9 @@
       "enter_nickname": "Prendre un surnom",
       "enter_nickname_here": "Entrez votre nom ici",
       "nickname_na_popup": "Ce nom n'est pas disponible!",
-      "nickname_blacklist_popup": "Ce nom est (en raison de son sens) non disponible!"
+      "nickname_blacklist_popup": "Ce nom est (en raison de son sens) non disponible!",
+      "nickname_too_long": "Le nom est trop long",
+      "nickname_too_short": "Le nom est trop court"
     },
     "hashtag_management": {
       "enter_quiz_name": "Entrez le nom du jeu-questionnaire ici",

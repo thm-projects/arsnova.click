@@ -142,7 +142,9 @@
       "enter_nickname": "Tome un apodo",
       "enter_nickname_here": "Introduzca su apodo aquí",
       "nickname_na_popup": "Este nombre no está disponible!",
-      "nickname_blacklist_popup": "Este nombre es (debido a su significado) no disponible!"
+      "nickname_blacklist_popup": "Este nombre es (debido a su significado) no disponible!",
+      "nickname_too_long": "El nombre es demasiado largo",
+      "nickname_too_short": "El nombre es demasiado corto"
     },
     "hashtag_management": {
       "enter_quiz_name": "Introduzca el nombre del concurso aquí",

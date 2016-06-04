@@ -53,7 +53,7 @@ Template.nick.events({
 		var member = MemberListCollection.findOne({nick: currentNickName});
 		var $inputField = $("#nickname-input-field");
 
-		if (currentNickName.length > 2 && currentNickName.length < 26 && !member ) {
+		if (currentNickName.length > 2 && currentNickName.length < 26 && !member) {
 			if (lib.isNickAllowed(currentNickName)) {
 				$("#forwardButton").removeAttr("disabled");
 				$inputField.popover("destroy");

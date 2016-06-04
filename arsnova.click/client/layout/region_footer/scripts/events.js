@@ -46,12 +46,12 @@ const clickEvents = {
 				onRendered: function (instance) {
 					instance.templateSelector.find('#resetSessionButton').on('click', function () {
 						Meteor.call("Main.killAll", Router.current().params.quizName);
-						Router.go("/");
+						Router.go("/" + Router.current().params.quizName + "/resetToHome");
 					});
 				}
 			});
 		} else {
-			Router.go("/");
+			Router.go("/" + Router.current().params.quizName + "/resetToHome");
 		}
 	},
 	"click #fullscreen, switchChange.bootstrapSwitch .bootstrap-switch-id-fullscreen_switch ": function () {

@@ -200,6 +200,9 @@ Router.route('/:quizName/resetToHome', function () {
 		Meteor.call("MemberListCollection.removeLearner", Router.current().params.quizName, userId._id);
 	}
 
+	Session.set("questionGroup", undefined);
+	delete Session.keys.questionGroup;
+
 	delete localStorage[Router.current().params.quizName + "nick"];
 	delete localStorage.slider;
 	delete localStorage.lastPage;

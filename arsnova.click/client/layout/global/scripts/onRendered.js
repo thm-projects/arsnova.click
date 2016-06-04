@@ -63,3 +63,9 @@ Template.home.onRendered(function () {
 	footerElements.addFooterElement(footerElements.footerElemImport);
 	footerElements.calculateFooter();
 });
+
+Template.layout.helpers({
+	getTheme: function () {
+		return Session.get("theme");
+	}
+});

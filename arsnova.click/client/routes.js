@@ -78,10 +78,7 @@ Router.onBeforeAction(function () {
 		getChangeEventsForRoute(Router.current().route.getName());
 		getRemoveEventsForRoute(Router.current().route.getName());
 	}
-	this.next();
-});
 
-Router.onAfterAction(function () {
 	if (!localStorage.getItem("theme")) {
 		localStorage.setItem("theme", "theme-default");
 	}
@@ -91,7 +88,8 @@ Router.onAfterAction(function () {
 		sessionStorage.setItem("quizTheme", hashtagDoc.theme);
 		theme = sessionStorage.getItem("quizTheme");
 	}
-	$('#theme-wrapper').removeClass().addClass(theme);
+	Session.set("theme", theme);
+	this.next();
 });
 
 Router.route('/', {

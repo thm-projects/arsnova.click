@@ -23,7 +23,7 @@ Template.themeSwitcher.events({
 	"change #select-theme": function (event) {
 		const theme = $(event.currentTarget).find("option:selected").attr("id");
 		localStorage.setItem("theme", theme);
-		$('#theme-wrapper').removeClass().addClass(theme);
+		Session.set("theme", theme);
 
 		for (let i = 0; i < themes.length; i++) {
 			if (themes[i].id === theme) {

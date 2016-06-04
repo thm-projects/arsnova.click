@@ -93,7 +93,6 @@ export function countdownFinish() {
 	} else {
 		footerElements.addFooterElement(footerElements.footerElemReadingConfirmation, 2);
 	}
-	console.log("footerCalculation");
 	footerElements.calculateFooter();
 }
 

@@ -277,6 +277,19 @@ export function importFromFile(data) {
 		});
 	});
 
+	if (!data.hashtagDoc.theme) {
+		data.hashtagDoc.theme = "theme-dark";
+	}
+	if (!data.hashtagDoc.musicVolume) {
+		data.hashtagDoc.musicVolume = 80;
+	}
+	if (!data.hashtagDoc.musicEnabled) {
+		data.hashtagDoc.musicEnabled = 1;
+	}
+	if (!data.hashtagDoc.musicTitle) {
+		data.hashtagDoc.musicTitle = "Song1";
+	}
+
 	localStorage.setItem(hashtag, JSON.stringify({
 		hashtag: data.hashtagDoc.hashtag,
 		questionList: questionList,

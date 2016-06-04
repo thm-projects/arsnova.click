@@ -570,25 +570,17 @@
 				background-color: $bg-nav-row;
 			}
 		}
-		textarea::-moz-placeholder, textarea:-ms-input-placeholder, input::-webkit-input-placeholder, input[placeholder] {
+		*::-webkit-input-placeholder {
 			color: $placeholder-color;
 			opacity: 1;
 		}
-
-		::-webkit-input-placeholder {
+		*:-moz-placeholder, *::-moz-placeholder {
 			color: $placeholder-color;
+			opacity: 1;
 		}
-
-		:-moz-placeholder { /* Firefox 18- */
+		*:-ms-input-placeholder {
 			color: $placeholder-color;
-		}
-
-		::-moz-placeholder {  /* Firefox 19+ */
-			color: $placeholder-color;
-		}
-
-		:-ms-input-placeholder {
-			color: $placeholder-color;
+			opacity: 1;
 		}
 		.hashtag-management {
 			hr {

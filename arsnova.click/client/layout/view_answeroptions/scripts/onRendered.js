@@ -40,7 +40,6 @@ Template.createAnswerOptions.onRendered(function () {
 			return;
 		}
 
-		lib.parseAnswerOptionInput(index);
 		Router.go("/" + Router.current().params.quizName + "/question");
 	});
 	body.on('click', '.removeQuestion', function () {

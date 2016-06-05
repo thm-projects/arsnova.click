@@ -29,16 +29,19 @@ let questionIndex = -1;
 
 export function deleteCountdown() {
 	countdown = null;
+	countdownRunning = false;
 }
 
 export function countdownFinish() {
-	deleteCountdown();
-	if (questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
-		Session.set("sessionClosed", true);
+	if (Session.get("countdownInitialized") && countdownRunning) {
+		deleteCountdown();
+		if (questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
+			Session.set("sessionClosed", true);
+		}
+		Session.set("countdownInitialized", false);
+		Router.go("/" + Router.current().params.quizName + "/results");
+		countdownRunning = false;
 	}
-	Session.set("countdownInitialized", false);
-	Router.go("/" + Router.current().params.quizName + "/results");
-	countdownRunning = false;
 }
 
 export function startCountdown(index) {

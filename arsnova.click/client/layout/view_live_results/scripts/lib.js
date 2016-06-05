@@ -85,8 +85,12 @@ export function countdownFinish() {
 		Session.set("sessionClosed", true);
 		if (localData.containsHashtag(Router.current().params.quizName) && AnswerOptionCollection.find({isCorrect: true}).count() > 0) {
 			routeToLeaderboardTimer = setTimeout(() => {
-				Session.set("showGlobalRanking", true);
-				Router.go("/" + Router.current().params.quizName + "/statistics");
+				// don't reroute if the instructor already moved
+				var currentRoute = Router.current().route.getName().replace(":quizName.", "");
+				if (currentRoute === "results") {
+					Session.set("showGlobalRanking", true);
+					Router.go("/" + Router.current().params.quizName + "/statistics");
+				}
 			}, 7000);
 		}
 		footerElements.removeFooterElement(footerElements.footerElemReadingConfirmation);
@@ -112,7 +116,6 @@ export function startCountdown(index) {
 	}
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index);
-
 		if (hashtagDoc.musicEnabled) {
 			if (buzzsound1 == null) {
 				setBuzzsound1(hashtagDoc.musicTitle);

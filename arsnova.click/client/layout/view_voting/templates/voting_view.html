@@ -36,12 +36,26 @@
 	</div>
 
 	<div class="row answer-row">
-		{{#each answerOptions}}
-			<div class="buttonWrapper">
-				<button id="{{answerOptionNumber}}" class="sendResponse btn btn-answerOption btn-answerFont button-purple">
-					{{answerOptionLetter number=answerOptionNumber}}
-				</button>
-			</div>
-		{{/each}}
+		{{#if isRangedQuestion}}
+            <div class="col-xs-12 rangedValues">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h3>Manuelle Eingabe: </h3>
+                        <input type="number" id="rangeInput" class="input-field" placeholder="Manuelle Eingabe" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div id="rangeSlider" class="rangeSlider"></div>
+            </div>
+        {{else}}
+            {{#each answerOptions}}
+                <div class="buttonWrapper">
+                    <button id="{{answerOptionNumber}}" class="sendResponse btn btn-answerOption btn-answerFont button-purple">
+                        {{answerOptionLetter number=answerOptionNumber}}
+                    </button>
+                </div>
+            {{/each}}
+        {{/if}}
 	</div>
 </template>

@@ -42,12 +42,6 @@
   line-height: 40px;
 }
 
-.top-bar-content {
-  margin-top: 18px;
-  text-align: center;
-  font-family: Georgia, serif;
-}
-
 .glyphicon-style {
   font-size: 5vw;
 }
@@ -81,6 +75,11 @@
       background-repeat: no-repeat;
     }
   }
+	.top-bar-content {
+		margin-top: 18px;
+		text-align: center;
+		font-family: Georgia, serif;
+	}
 }
 
 .formGroupProgressRow {

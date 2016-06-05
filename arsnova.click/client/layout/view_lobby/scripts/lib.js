@@ -59,7 +59,7 @@ export function calculateButtonCount(allMembersCount) {
 	 Multiply the displayed elements by 3 if on widescreen and reduce the max output of buttons by 1 row for the display
 	 more button if necessary. Also make sure there is at least one row of buttons shown even if the user has to scroll
 	 */
-	var limitModifier = (viewport.outerWidth() >= 992) ? 3 : (viewport.outerWidth() >= 768 && viewport.outerWidth() < 992) ? 2 : 1;
+	var limitModifier = $(document).width() >= 992 ? 3 : $(document).width() >= 768 ? 2 : 1;
 
 	queryLimiter *= limitModifier;
 	if (queryLimiter <= 0) {

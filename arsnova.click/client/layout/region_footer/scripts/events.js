@@ -36,23 +36,27 @@ const clickEvents = {
 		Router.go("/theme");
 	},
 	"click #home": function () {
-		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (Session.get("soundIsPlaying")) {
-				buzzsound1.stop();
-			}
-			new Splashscreen({
-				autostart: true,
-				templateName: "resetSessionSplashscreen",
-				closeOnButton: '#closeDialogButton, #resetSessionButton',
-				onRendered: function (instance) {
-					instance.templateSelector.find('#resetSessionButton').on('click', function () {
-						Meteor.call("Main.killAll", Router.current().params.quizName);
-						Router.go("/" + Router.current().params.quizName + "/resetToHome");
-					});
+		if (Router.current().params.quizName) {
+			if (localData.containsHashtag(Router.current().params.quizName)) {
+				if (Session.get("soundIsPlaying")) {
+					buzzsound1.stop();
 				}
-			});
+				new Splashscreen({
+					autostart: true,
+					templateName: "resetSessionSplashscreen",
+					closeOnButton: '#closeDialogButton, #resetSessionButton',
+					onRendered: function (instance) {
+						instance.templateSelector.find('#resetSessionButton').on('click', function () {
+							Meteor.call("Main.killAll", Router.current().params.quizName);
+							Router.go("/" + Router.current().params.quizName + "/resetToHome");
+						});
+					}
+				});
+			} else {
+				Router.go("/" + Router.current().params.quizName + "/resetToHome");
+			}
 		} else {
-			Router.go("/" + Router.current().params.quizName + "/resetToHome");
+			Router.go("/");
 		}
 	},
 	"click #fullscreen, switchChange.bootstrapSwitch .bootstrap-switch-id-fullscreen_switch ": function () {

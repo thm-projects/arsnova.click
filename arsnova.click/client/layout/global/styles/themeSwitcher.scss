@@ -144,6 +144,12 @@
 	$bg-js-my-hash: #ffffe0;
 	$bg-js-my-hash-hovered: lighten($bg-js-my-hash, 20);
 	$bg-js-my-hash-active: darken($bg-js-my-hash, 10);
+	$bg-js-my-hash-validQuestion: $success;
+	$bg-js-my-hash-validQuestion-hovered: lighten($success, 10);
+	$fg-js-my-hash-validQuestion: $success-text-color;
+	$bg-js-my-hash-invalidQuestion: $warning;
+	$bg-js-my-hash-invalidQuestion-hovered: lighten($warning, 10);
+	$fg-js-my-hash-invalidQuestion: $warning-text-color;
 
 	$colorChangingArs0: white;
 	$colorChangingArs25: $warning;
@@ -723,7 +729,7 @@
 			background-color: $success;
 			color: $success-text-color;
 		}
-		.button-warning, .button-back {
+		.button-warning, .button-back, div.warning {
 			background-color: $warning;
 			color: $warning-text-color;
 		}
@@ -1424,6 +1430,20 @@
 					}
 					&:active {
 						background-color: $bg-js-my-hash-active;
+					}
+					&.validQuestion {
+						color: $fg-js-my-hash-validQuestion;
+						background-color: $bg-js-my-hash-validQuestion;
+						&:hover {
+							background-color: $bg-js-my-hash-validQuestion-hovered;
+						}
+					}
+					&.invalidQuestion {
+						color: $fg-js-my-hash-invalidQuestion;
+						background-color: $bg-js-my-hash-invalidQuestion;
+						&:hover {
+							background-color: $bg-js-my-hash-invalidQuestion-hovered;
+						}
 					}
 				}
 			}

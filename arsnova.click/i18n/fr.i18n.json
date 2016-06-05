@@ -129,7 +129,13 @@
       "reset": "Réinitialiser",
       "yes": "Oui",
       "no": "Non",
-      "reset_session_confirmation": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted.<br><br> The created Question(s), including the assigned answer options and timer configurations, will be stored in the local storage of your browser. Except the hashtag-name, all data of this session will be deleted from the server. Do you really want to reset the session?"
+      "reset_session_confirmation": {
+        "title": "Exit the quiz?",
+        "text": {
+          "1": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
+          "2": "Proceed?"
+        }
+      }
     }
   },
   "view": {
@@ -158,7 +164,9 @@
       "import": "Importer quiz",
       "delete_session": "Effacer Quiz",
       "delete_session_confirmation": "Si le '<span id=\"session_name\"></span>' quiz définitivement supprimé?",
-      "export": "Exporter quiz"
+      "export": "Exporter quiz",
+      "valid_question": "Questionnaire valide",
+      "invalid_question": "Quiz non valide"
     },
     "leaderboard": {
       "title": {

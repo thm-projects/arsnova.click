@@ -71,5 +71,9 @@ Template.hashtagManagement.onRendered(function () {
 			a.innerHTML = '<span class="glyphicon glyphicon-export glyph-left alignGlyphicon button-foreground-color" aria-hidden="true"></span>';
 			$(element).find('.js-export').append(a);
 		}
+		const session = localData.reenterSession(hashtag);
+		if (!session.isValid()) {
+			$(element).find(".startQuiz").attr("disabled", "disabled");
+		}
 	});
 });

@@ -17,9 +17,9 @@
 
 import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {noUiSlider} from 'meteor/arsnova.click:nouislider';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {calculateHeaderSize, calculateTitelHeight} from '/client/layout/region_header/lib.js';
-import {noUiSlider} from 'meteor/arsnova.click:nouislider';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as localData from '/lib/local_storage.js';
 

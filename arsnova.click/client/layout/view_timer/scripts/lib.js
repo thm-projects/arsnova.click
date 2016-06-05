@@ -16,8 +16,10 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Session} from 'meteor/session';
+import {noUiSlider} from 'meteor/arsnova.click:nouislider';
 import * as localData from '/lib/local_storage.js';
 
+let sliderObject = null;
 export function createSlider(index) {
 	const questionItem = Session.get("questionGroup");
 	if (questionItem.getQuestionList()[index].getTimer() === 0) {
@@ -25,17 +27,15 @@ export function createSlider(index) {
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
 	}
-	$("#slider").noUiSlider({
+	const plainSlider = document.getElementById('slider');
+	sliderObject = noUiSlider.create(plainSlider, {
 		start: questionItem.getQuestionList()[index].getTimer(),
 		range: {
 			'min': 6,
 			'max': 260
 		}
-	}).on('slide', function (ev, val) {
-		questionItem.getQuestionList()[index].setTimer(Math.round(val));
-		Session.set("questionGroup", questionItem);
-		localData.addHashtag(Session.get("questionGroup"));
-	}).on('change', function (ev, val) {
+	});
+	sliderObject.on('slide', function (val) {
 		questionItem.getQuestionList()[index].setTimer(Math.round(val));
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
@@ -44,5 +44,5 @@ export function createSlider(index) {
 
 export function setSlider(index) {
 	const questionItem = Session.get("questionGroup");
-	$("#slider").val((questionItem.getQuestionList()[index].getTimer()));
+	sliderObject.set(questionItem.getQuestionList()[index].getTimer());
 }

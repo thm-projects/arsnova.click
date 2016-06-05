@@ -116,7 +116,6 @@ Template.liveResults.events({
 
 		var questionDoc = QuestionGroupCollection.findOne();
 		if (!questionDoc) {
-			console.log("return");
 			return;
 		}
 

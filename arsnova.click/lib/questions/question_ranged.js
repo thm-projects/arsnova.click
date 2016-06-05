@@ -30,7 +30,7 @@ export class RangedQuestion extends AbstractQuestion {
 	 */
 	setMaxRange (max) {
 		if (typeof max !== "number" || max <= this.getMinRange()) {
-			throw new Error("Invalid argument list for RangedQuestion.setMaxRange");
+			throw new Error("Invalid argument list " + max + ", " + this.getMinRange() + " for RangedQuestion.setMaxRange");
 		}
 		this[rangeMax] = max;
 	}

@@ -16,13 +16,21 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="rangedAnswerOptionTemplate">
-    <div class="row center-vertical">
-        <div class="col-xs-12">
-            <div id="slider" class="slider"></div>
+    <div class="row center-vertical rangedAnswerOptions">
+        <div class="col-xs-12 rangedValues">
+            <div class="row">
+                <div class="col-xs-6">
+                    <p>Mindestwert: </p>
+                    <input type="number" id="minRangeInput" value="{{getMinValue}}" placeholder="Mindestwert" />
+                </div>
+                <div class="col-xs-6">
+                    <p>Maximalwert: </p>
+                    <input type="number" id="maxRangeInput" value="{{getMaxValue}}" placeholder="Maximalwert" />
+                </div>
+            </div>
         </div>
         <div class="col-xs-12">
-            <p>Mindestwert: {{getMinValue}}</p>
-            <p>Maximalwert: {{getMaxValue}}</p>
+            <div id="rangedSlider" class="rangedSlider"></div>
         </div>
     </div>
 </template>

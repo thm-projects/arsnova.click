@@ -101,33 +101,50 @@ export function formatIsCorrectButtons() {
 export function createSlider(index) {
 	const questionItem = Session.get("questionGroup");
 	const slider = $('#slider');
-	const plainSlider = document.getElementById('slider');
-	noUiSlider.create(plainSlider, {
+	const plainSlider = document.getElementById('rangedSlider');
+	let sliderObject = noUiSlider.create(plainSlider, {
 		step: 1,
+		margin: 1,
 		connect: true,
 		behaviour: 'tap-drag',
 		start: [questionItem.getQuestionList()[index].getMinRange(), questionItem.getQuestionList()[index].getMaxRange()],
 		range: {
-			'min': questionItem.getQuestionList()[index].getMinRange() * 1.5 || 0,
-			'max': questionItem.getQuestionList()[index].getMaxRange() * 1.5 || 100
+			'min': questionItem.getQuestionList()[index].getMinRange() - 50 < 0 ? 0 : questionItem.getQuestionList()[index].getMinRange() - 50,
+			'max': questionItem.getQuestionList()[index].getMaxRange() + 50 || 100
 		}
 	});
-	slider.on('slide', function (ev, val) {
-		questionItem.getQuestionList()[index].setMaxRange(parseInt(val[1]));
-		questionItem.getQuestionList()[index].setMinRange(parseInt(val[0]));
-		slider.noUiSlider({
-			step: 1,
-			connect: true,
-			behaviour: 'tap-drag',
-			start: [questionItem.getQuestionList()[index].getMinRange(), questionItem.getQuestionList()[index].getMaxRange()],
+	sliderObject.on('slide', function (val) {
+		const minRange = parseInt(val[0]);
+		const maxRange = parseInt(val[1]);
+		questionItem.getQuestionList()[index].setRange(minRange, maxRange);
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(questionItem);
+		$('#minRangeInput, #maxRangeInput').removeClass("invalid");
+		sliderObject.updateOptions({
 			range: {
-				'min': questionItem.getQuestionList()[index].getMinRange(),
-				'max': questionItem.getQuestionList()[index].getMaxRange() + 50
+				'min': minRange - 50 < 0 ? 0 : minRange - 50,
+				'max': maxRange + 50
 			}
-		}, true);
-		console.log(questionItem.getQuestionList()[index].getMaxRange() + 50);
-	}).on('change', function (ev, val) {
-
+		});
+	});
+	$('#minRangeInput, #maxRangeInput').on("input", function (event) {
+		const minRange = parseInt($('#minRangeInput').val());
+		const maxRange = parseInt($('#maxRangeInput').val());
+		try {
+			questionItem.getQuestionList()[index].setRange(minRange, maxRange);
+			Session.set("questionGroup", questionItem);
+			localData.addHashtag(questionItem);
+			$('#minRangeInput, #maxRangeInput').removeClass("invalid");
+			sliderObject.updateOptions({
+				range: {
+					'min': minRange - 50 < 0 ? 0 : minRange - 50,
+					'max': maxRange + 50
+				},
+				values: [minRange, maxRange]
+			});
+		} catch (ex) {
+			$(event.currentTarget).addClass("invalid");
+		}
 	});
 }
 

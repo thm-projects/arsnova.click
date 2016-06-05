@@ -173,7 +173,8 @@
         "single_question": "Question __questionId__ - Correct answers from...",
         "all_questions": "Correct answers from..."
       },
-      "no_attendee_correct": "Unfortunately nobody",
+      "no_attendee_correct": "No one has answered this question correctly",
+      "no_attendee_correct_global": "Nobody has answered all the questions correctly",
       "question": "Question",
       "second": "second",
       "second_plural": "seconds",

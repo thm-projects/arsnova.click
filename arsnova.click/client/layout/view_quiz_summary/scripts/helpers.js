@@ -93,5 +93,8 @@ Template.quizSummary.helpers({
 	},
 	isVotingQuestion: function (questionType) {
 		return questionType === "SurveyQuestion";
+	},
+	isRangedQuestion: function (questionType) {
+		return questionType === "RangedQuestion";
 	}
 });

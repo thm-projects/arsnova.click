@@ -34,6 +34,14 @@ export const startTimeSchema = {
 	type: String,
 	optional: true
 };
+export const rangeMinSchema = {
+	type: Number,
+	min: 0
+};
+export const rangeMaxSchema = {
+	type: Number,
+	min: 0
+};
 
 export const questionGroupSchema = new SimpleSchema({
 	hashtag: hashtagSchema,
@@ -67,6 +75,14 @@ export const questionGroupSchema = new SimpleSchema({
 	},
 	"questionList.$.startTime": {
 		type: startTimeSchema,
+		optional: true
+	},
+	"questionList.$.rangeMin": {
+		type: rangeMinSchema,
+		optional: true
+	},
+	"questionList.$.rangeMax": {
+		type: rangeMaxSchema,
 		optional: true
 	}
 });

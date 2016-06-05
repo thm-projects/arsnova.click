@@ -30,6 +30,10 @@ import * as lib from './lib.js';
 Template.hashtagView.events({
 	"input #hashtag-input-field": function (event) {
 		var inputHashtag = $(event.target).val();
+		if (["?", "/", "\\"].some(function (v) { return inputHashtag.indexOf(v) >= 0; })) {
+			$("#joinSession, #addNewHashtag").attr("disabled", "disabled");
+			return;
+		}
 		if (lib.eventManagerHandle) {
 			lib.eventManagerHandle.stop();
 		}

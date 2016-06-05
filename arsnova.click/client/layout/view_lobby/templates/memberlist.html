@@ -16,40 +16,46 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="memberlist">
-    {{> titel }}
-	{{#if isOwner}}
-		<div class="row row-padding-bottom">
-			<div class="col-xs-3 top-bar-content">
-				<span class="glyphicon icon-top-bar glyphicon-user glyphicon-style center" aria-hidden="true">
-					<span class="titel">{{memberlistCount}}</span>
-				</span>
-			</div>
-			<div class="col-xs-7 text-center">
-				<div id="appTitle" class="titel subtitel-padding-top">{{_ "view.lobby.title"}}</div>
-			</div>
-		</div>
-	{{/if}}
-	<div class="row">
-		<div class="col-md-12 contentFrame">
-			{{#unless isOwner}}
-				<div class="row">
-					<div class=" titel-relative text-light text-center" id="attendee-in-quiz-wrapper">
-						<div class="titel margin-to-logo">{{_ "view.lobby.ready"}}
-							<div class="hashtag_in_title">&laquo;{{hashtag}}&raquo;</div>
-						</div>
-					</div>
-				</div>
-			{{/unless}}
-			<div class="row learner-list margin-title"
-				 id="learner-list">
-				{{#each learners}}
-					{{#each this}}
-						{{>learner}}
-					{{/each}}
-				{{/each}} <!-- learners -->
-			</div>
-		</div>
-	</div>
+    <div id="memberlist">
+        <div class="hidden-xs">
+            {{> titel }}
+        </div>
+        {{#if isOwner}}
+            <div class="row row-padding-bottom">
+                <div class="col-xs-3">
+				    <div class="titel" id="memberListCounter">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        <span class="titel">{{memberlistCount}}</span>
+                    </div>
+                </div>
+                <div class="col-xs-7">
+                    <div id="lobbyTitle" class="titel">
+                        <span>{{_ "view.lobby.title"}}</span>
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+        <div class="row">
+            <div class="col-md-12 contentFrame">
+                {{#unless isOwner}}
+                    <div class="row">
+                        <div class=" titel-relative text-light text-center" id="attendee-in-quiz-wrapper">
+                            <div class="titel margin-to-logo">{{_ "view.lobby.ready"}}
+                                <div class="hashtag_in_title">&laquo;{{hashtag}}&raquo;</div>
+                            </div>
+                        </div>
+                    </div>
+                {{/unless}}
+                <div class="row learner-list"
+                     id="learner-list">
+                    {{#each learners}}
+                        {{#each this}}
+                            {{>learner}}
+                        {{/each}}
+                    {{/each}} <!-- learners -->
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="fixed-bottom col-xs-12 col-sm-6 col-sm-offset-3">
                 {{#if hasTooMuchButtons}}
@@ -77,4 +83,5 @@
                 {{/if}}
             </div>
         </div>
+    </div>
 </template>

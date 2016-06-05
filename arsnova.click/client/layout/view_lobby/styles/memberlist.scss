@@ -73,7 +73,7 @@
 
 .btn-more-learners,
 .btn-learner {
-	margin-bottom: 20px;
+	margin-top: 20px;
 	width: 100%;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -82,10 +82,6 @@
 
 .btn-learner {
 	outline: none !important;
-	transform: translateX(-100%);
-	transform: translateY(-100%);
-	-webkit-transform: translateX(-100%);
-	-webkit-transform: translateY(-100%);
 }
 
 .btn-more-learners {
@@ -124,5 +120,13 @@
 	animation-name: colorChangingOwnNick;
 }
 
-
-
+#memberlist {
+	#memberListCounter {
+		.glyphicon {
+			top: 1vh;
+		}
+		.titel {
+			margin-left: 10px;
+		}
+	}
+}

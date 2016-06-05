@@ -241,6 +241,7 @@ Template.hashtagManagement.events({
 	"click .startQuiz": function (event) {
 		var hashtag = $(event.currentTarget).parents(".hashtagManagementRow").attr("id");
 		Session.set("questionGroup", localData.reenterSession(hashtag));
+		sessionStorage.setItem("overrideValidQuestionRedirect", true);
 		lib.connectEventManager(hashtag);
 	}
 });
@@ -248,8 +249,7 @@ Template.hashtagManagement.events({
 Template.showHashtagsSplashscreen.events({
 	"click .js-my-hash": function (event) {
 		var hashtag = $(event.currentTarget).text();
-		const session = localData.reenterSession(hashtag);
-		Session.set("questionGroup", session);
+		Session.set("questionGroup", localData.reenterSession(hashtag));
 		lib.hashtagSplashscreen.destroy();
 		sessionStorage.setItem("overrideValidQuestionRedirect", true);
 		lib.connectEventManager(hashtag);

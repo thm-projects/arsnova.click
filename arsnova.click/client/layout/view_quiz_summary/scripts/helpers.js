@@ -21,15 +21,27 @@ import {getQuestionTypes} from '/client/layout/view_questions/scripts/lib.js';
 
 Template.quizSummary.helpers({
 	getSessionName: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
 		return Session.get("questionGroup").getHashtag();
 	},
 	getSessionUrl: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
 		return window.location.protocol + "//" + window.location.host + "/" + Session.get("questionGroup").getHashtag();
 	},
 	getQuestionCount: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
 		return Session.get("questionGroup").getQuestionList().length;
 	},
 	getQuestions: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
 		return Session.get("questionGroup").getQuestionList();
 	},
 	getNormalizedIndex: function (index) {
@@ -47,9 +59,15 @@ Template.quizSummary.helpers({
 		}
 	},
 	isQuestionGroupValid: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
 		return Session.get("questionGroup").isValid();
 	},
 	getQuestionGroupValidation: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
 		return Session.get("questionGroup").isValid() ? "view.quiz_summary.successful" : "view.quiz_summary.failed";
 	},
 	getValidationStatus: function (question) {
@@ -59,6 +77,9 @@ Template.quizSummary.helpers({
 		return question.getValidationStackTrace();
 	},
 	isLastItem: function (index) {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
 		return index === Session.get("questionGroup").getQuestionList().length - 1;
 	},
 	isQuestionType: function (type) {

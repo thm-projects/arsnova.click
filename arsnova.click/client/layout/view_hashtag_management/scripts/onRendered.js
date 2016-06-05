@@ -56,6 +56,7 @@ Template.hashtagManagement.onRendered(function () {
 	$('.js-export').tooltip();
 	$('.js-delete').tooltip();
 	$('.js-reactivate-hashtag').tooltip();
+	$('.startQuiz').tooltip();
 
 	$('.hashtagManagementRow').each(function (i, element) {
 		var hashtag = element.id;

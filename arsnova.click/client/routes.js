@@ -300,7 +300,6 @@ Router.route('/:quizName/votingview', {
 	}
 });
 
-
 Router.route('/:quizName/onpolling', {
 	action: function () {
 		if (!globalEventStackObserver.isRunning()) {

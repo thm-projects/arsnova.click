@@ -222,7 +222,7 @@ Template.liveResults.helpers({
 			return;
 		}
 
-		return Session.get("sessionClosed") && questionDoc.questionList.length > 1 && eventDoc.questionIndex >= questionDoc.questionList.length - 1;
+		return countdown === null && questionDoc.questionList.length > 1 && eventDoc.questionIndex >= questionDoc.questionList.length - 1;
 	},
 	hasCorrectAnswerOptions: ()=> {
 		return AnswerOptionCollection.find({isCorrect: true}).count() > 0;

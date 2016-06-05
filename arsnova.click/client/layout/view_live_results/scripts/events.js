@@ -116,6 +116,7 @@ Template.liveResults.events({
 
 		var questionDoc = QuestionGroupCollection.findOne();
 		if (!questionDoc) {
+			console.log("return");
 			return;
 		}
 
@@ -136,9 +137,7 @@ Template.liveResults.events({
 	},
 	'click #goGlobalRanking': (event)=> {
 		event.stopPropagation();
-		Session.set("showLeaderBoardId", undefined);
-		Session.set("showGlobalRanking", true);
-		Router.go("/" + Router.current().params.quizName + "/statistics");
+		Router.go("/" + Router.current().params.quizName + "/globalLeaderBoard");
 	},
 	'click #showNextQuestionDialog': (event)=> {
 		event.stopPropagation();

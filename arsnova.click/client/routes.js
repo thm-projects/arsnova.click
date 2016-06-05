@@ -317,6 +317,7 @@ Router.route('/:quizName/results', {
 		if (!globalEventStackObserver.isRunning()) {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
 		}
+		Session.set("countdownInitialized", false);
 		this.render('live_results');
 	}
 });
@@ -326,6 +327,17 @@ Router.route('/:quizName/statistics', {
 		if (!globalEventStackObserver.isRunning()) {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
 		}
+		this.render('leaderBoard');
+	}
+});
+
+Router.route('/:quizName/globalLeaderBoard', {
+	action: function () {
+		if (!globalEventStackObserver.isRunning()) {
+			globalEventStackObserver.startObserving(Router.current().params.quizName);
+		}
+		Session.set("showLeaderBoardId", undefined);
+		Session.set("showGlobalRanking", true);
 		this.render('leaderBoard');
 	}
 });

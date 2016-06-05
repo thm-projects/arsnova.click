@@ -88,8 +88,7 @@ export function countdownFinish() {
 				// don't reroute if the instructor already moved
 				var currentRoute = Router.current().route.getName().replace(":quizName.", "");
 				if (currentRoute === "results") {
-					Session.set("showGlobalRanking", true);
-					Router.go("/" + Router.current().params.quizName + "/statistics");
+					Router.go("/" + Router.current().params.quizName + "/globalLeaderBoard");
 				}
 			}, 7000);
 		}

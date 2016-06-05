@@ -106,11 +106,13 @@ const clickEvents = {
 					hashtag: instance.getHashtag(),
 					musicVolume: 80,
 					musicEnabled: 1,
+
 					musicTitle: "Song1",
 					theme: "theme-dark"
 				}, function (err) {
 					if (!err) {
 						localData.addHashtag(instance);
+						Router.go("/hashtagmanagement");
 					}
 				});
 			};

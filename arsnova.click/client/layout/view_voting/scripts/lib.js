@@ -25,12 +25,27 @@ import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 export let countdown = null;
 export let currentButton = 0;
 export let countdownRunning = false;
+let questionIndex = -1;
 
 export function deleteCountdown() {
 	countdown = null;
+	countdownRunning = false;
+}
+
+export function countdownFinish() {
+	if (Session.get("countdownInitialized") && countdownRunning) {
+		deleteCountdown();
+		if (questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
+			Session.set("sessionClosed", true);
+		}
+		Session.set("countdownInitialized", false);
+		Router.go("/" + Router.current().params.quizName + "/results");
+		countdownRunning = false;
+	}
 }
 
 export function startCountdown(index) {
+	questionIndex = index;
 	Session.set("hasSendResponse", false);
 	Session.set("hasToggledResponse", false);
 
@@ -78,12 +93,7 @@ export function startCountdown(index) {
 		}
 	});
 	countdown.start(function () {
-		if (index + 1 >= QuestionGroupCollection.findOne().questionList.length) {
-			Session.set("sessionClosed", true);
-		}
-		Session.set("countdownInitialized", false);
-		Router.go("/" + Router.current().params.quizName + "/results");
-		countdownRunning = false;
+		countdownFinish();
 	});
 	Session.set("countdownInitialized", true);
 }

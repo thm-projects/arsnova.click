@@ -20,6 +20,8 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {ResponsesCollection} from '/lib/responses/collection.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
 import {showReadingConfirmationSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
@@ -56,7 +58,14 @@ Template.liveResults.onRendered(()=> {
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		footerElements.calculateFooter();
 	} else {
-		startCountdown(EventManagerCollection.findOne().questionIndex);
+		let allMemberResponses = ResponsesCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).fetch();
+		let memberWithGivenResponsesAmount = _.uniq(allMemberResponses, false, function (user) {
+			return user.userNick;
+		}).length;
+		let memberAmount = MemberListCollection.find().fetch().length;
+		if (memberWithGivenResponsesAmount !== memberAmount) {
+			startCountdown(EventManagerCollection.findOne().questionIndex);
+		}
 	}
 });
 

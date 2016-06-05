@@ -65,7 +65,6 @@ export function calculateButtonCount(allMembersCount) {
 	if (queryLimiter <= 0) {
 		queryLimiter = limitModifier;
 	}
-	console.log(viewPortHeight, btnLearnerHeight, limitModifier, queryLimiter);
 
 	/*
 	 This session variable holds the amount of shown buttons and is used in the scripts function

@@ -29,6 +29,17 @@ Template.quizSummary.events({
 		Router.go("/" + Router.current().params.quizName + "/memberlist");
 	},
 	"click #backButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/settimer");
+		let firstFailedIndex = null;
+		Session.get("questionGroup").getQuestionList().forEach(function (questionItem) {
+			if (!firstFailedIndex && !questionItem.isValid()) {
+				firstFailedIndex = questionItem.getQuestionIndex();
+			}
+		});
+		if (firstFailedIndex) {
+			Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, firstFailedIndex);
+			Router.go("/" + Router.current().params.quizName + "/question");
+		} else {
+			Router.go("/" + Router.current().params.quizName + "/settimer");
+		}
 	}
 });

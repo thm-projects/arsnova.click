@@ -16,13 +16,19 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="leaderBoard">
-	{{> titel titelText = getTitleText}}
+    {{#unless noLeaderBoardItems}}
+	    {{> titel titelText = getTitleText}}
+    {{/unless}}
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row learner-list margin-title" id="learner-list">
 				{{#if noLeaderBoardItems}}
 					<div class="col-md-12">
-						<h2 class="titel" style="font-weight: bold;">{{_ "view.leaderboard.no_attendee_correct"}}</h2>
+                        {{#if isGlobalRanking}}
+                            <h2 class="titel" style="font-weight: bold;">{{_ "view.leaderboard.no_attendee_correct_global"}}</h2>
+                        {{else}}
+                            <h2 class="titel" style="font-weight: bold;">{{_ "view.leaderboard.no_attendee_correct"}}</h2>
+                        {{/if}}
 					</div>
 				{{ else }}
                     {{#if isGlobalRanking}}

@@ -173,7 +173,8 @@
         "single_question": "Pregunta __questionId__ - Las respuestas correctas a partir de...",
         "all_questions": "Las respuestas correctas a partir de..."
       },
-      "no_attendee_correct": "Desafortunadamente nadie",
+      "no_attendee_correct": "Nadie ha respondido a esta pregunta correctamente",
+      "no_attendee_correct_global": "Nadie ha respondido a todas las preguntas correctamente",
       "question": "Pregunta",
       "second": "Segundo",
       "second_plural": "Segundos",

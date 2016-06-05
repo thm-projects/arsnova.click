@@ -185,7 +185,7 @@
 
 	$fg-formGroup-progress-percentage-label: white;
 
-	$bg-btn-file-input: white;
+	$bg-btn-file-input: #f0ad4e;
 
 	$fg-question-title: white;
 
@@ -1305,7 +1305,7 @@
 				color: $colorChangingClick100;
 			}
 		}
-		.btn-file input[type=file] {
+		.button-import {
 			background: $bg-btn-file-input;
 		}
 		.question-title {

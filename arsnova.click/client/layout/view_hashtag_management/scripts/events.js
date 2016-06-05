@@ -203,6 +203,9 @@ Template.hashtagManagement.events({
 			}
 		});
 	},
+	"click #importFile": function () {
+		$('#js-import').trigger('click');
+	},
 	"change #js-import": function (event) {
 		var fileList = event.target.files;
 		var fileReader = new FileReader();
@@ -236,7 +239,9 @@ Template.hashtagManagement.events({
 		}
 	},
 	"click .startQuiz": function (event) {
-		Router.go("/" + $(event.currentTarget).parents(".hashtagManagementRow").attr("id") + "/memberlist");
+		var hashtag = $(event.currentTarget).parents(".hashtagManagementRow").attr("id");
+		Session.set("questionGroup", localData.reenterSession(hashtag));
+		lib.connectEventManager(hashtag);
 	}
 });
 

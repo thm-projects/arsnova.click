@@ -113,38 +113,53 @@ export function createSlider(index) {
 			'max': questionItem.getQuestionList()[index].getMaxRange() + 50 || 100
 		}
 	});
-	sliderObject.on('slide', function (val) {
+	sliderObject.on('update', function (val) {
 		const minRange = parseInt(val[0]);
 		const maxRange = parseInt(val[1]);
 		questionItem.getQuestionList()[index].setRange(minRange, maxRange);
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(questionItem);
 		$('#minRangeInput, #maxRangeInput').removeClass("invalid");
+	});
+	/*
+	 sliderObject.updateOptions({
+	 margin: 1,
+	 range: {
+	 'min': minRange - 50 < 0 ? 0 : minRange - 50,
+	 'max': maxRange + 50
+	 }
+	 });
+	 */
+	$('#minRangeInput, #maxRangeInput').on("input", function (event) {
+		const minRange = parseInt($('#minRangeInput').val());
+		const maxRange = parseInt($('#maxRangeInput').val());
 		sliderObject.updateOptions({
+			margin: 1,
 			range: {
 				'min': minRange - 50 < 0 ? 0 : minRange - 50,
 				'max': maxRange + 50
 			}
 		});
-	});
-	$('#minRangeInput, #maxRangeInput').on("input", function (event) {
-		const minRange = parseInt($('#minRangeInput').val());
-		const maxRange = parseInt($('#maxRangeInput').val());
-		try {
-			questionItem.getQuestionList()[index].setRange(minRange, maxRange);
-			Session.set("questionGroup", questionItem);
-			localData.addHashtag(questionItem);
-			$('#minRangeInput, #maxRangeInput').removeClass("invalid");
-			sliderObject.updateOptions({
-				range: {
-					'min': minRange - 50 < 0 ? 0 : minRange - 50,
-					'max': maxRange + 50
-				},
-				values: [minRange, maxRange]
-			});
-		} catch (ex) {
-			$(event.currentTarget).addClass("invalid");
-		}
+		sliderObject.set([minRange, maxRange]);
+		/*
+		 try {
+		 questionItem.getQuestionList()[index].setRange(minRange, maxRange);
+		 Session.set("questionGroup", questionItem);
+		 localData.addHashtag(questionItem);
+		 $('#minRangeInput, #maxRangeInput').removeClass("invalid");
+		 console.log(minRange - 50 < 0 ? 0 : minRange - 50, maxRange + 50);
+		 sliderObject.updateOptions({
+		 margin: 1,
+		 range: {
+		 'min': minRange - 50 < 0 ? 0 : minRange - 50,
+		 'max': maxRange + 50
+		 },
+		 values: [minRange, maxRange]
+		 });
+		 } catch (ex) {
+		 $(event.currentTarget).addClass("invalid");
+		 }
+		 */
 	});
 }
 

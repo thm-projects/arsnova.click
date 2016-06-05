@@ -15,36 +15,26 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-@import "../../../layout/global/styles/colors";
 @import "../../../layout/global/styles/appearance";
 
 #liveResultsFrame.fixed-bottom {
   bottom: 0;
 }
 
-.readingConfirmedSplashscreen {
-  .modal-content {
-	background: $splashscreen-reading-confirmed-background-color;
-  }
-}
-
 .question-title {
-  color: white;
   font-size: 1.5em;
-  margin: 30px 0 0;
+  margin: 10px 0 0;
   padding: 5px 30px 0;
 }
 
 .question-wrapper {
-  overflow-x: hidden;
-  overflow-y: auto;
-  width: 100%;
-}
+	overflow-x: hidden;
+	overflow-y: auto;
+	width: 100%;
 
-.question-row.active {
-  -webkit-box-shadow: 0 0 13px 3px rebeccapurple;
-  -moz-box-shadow: 0 0 13px 3px rebeccapurple;
-  box-shadow: 0 0 13px 3px rebeccapurple;
+	.question-row {
+		margin-bottom: 20px;
+	}
 }
 
 .button-result-mc-letter {
@@ -52,15 +42,8 @@
   line-height: 40px;
 }
 
-.top-bar-content {
-  margin-top: 18px;
-  text-align: center;
-  font-family: Georgia, serif;
-}
-
 .glyphicon-style {
   font-size: 5vw;
-  color: #FFF;
 }
 
 .row-padding-bottom {
@@ -92,6 +75,11 @@
       background-repeat: no-repeat;
     }
   }
+	.top-bar-content {
+		margin-top: 18px;
+		text-align: center;
+		font-family: Georgia, serif;
+	}
 }
 
 .formGroupProgressRow {
@@ -111,13 +99,12 @@
 		float: left;
 		margin: 0;
 		line-height: 28px;
-		font-size: 1.4em;
+		font-size: 1.3em;
 		font-weight: 800;
 		text-align: left;
 		display: block;
 		padding: 0;
 		border-radius: 0;
-		color: white;
 		vertical-align: middle;
 	  }
 

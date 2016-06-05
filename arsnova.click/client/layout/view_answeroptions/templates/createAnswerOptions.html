@@ -33,31 +33,18 @@
 
 	<div class="row answer-options distance-top">
 		<div class="col-md-12">
-
 			<div class="row">
 				<div class="col-md-12 ">
-					{{#each answerOptions}}
+					{{#each getAnswerOptions}}
 						<div class="form-group">
-							<div class="input-group">
-								<div class="input-group-letter round-corners input-group-addon input-field-bg-color">{{answerOptionLetter answerOptionNumber}}</div>
+							<div class="input-group {{#unless (isValidAnswerOption this)}}invalidAnswerOption{{/unless}}">
+								<div class="input-group-letter round-corners input-group-addon input-field-bg-color">{{answerOptionLetter getAnswerOptionNumber}}</div>
 								<input type="text"
-									   class="input-field"
-									   id="answerOptionText_Number{{answerOptionNumber}}"
+									   class="input-field {{#if isSurveyQuestion}}surveyQuestion{{/if}}"
+									   id="answerOptionText_Number{{getAnswerOptionNumber}}"
 									   placeholder="{{_ "view.answeroptions.answeroptiontext_placeholder"}}"
-									   value="{{answerText}}">
-
-								<div id="answerOption-{{answerOptionNumber}}"
-									 class="toggleCorrect round-corners input-group-addon input-field-bg-color input-group-letter">
-									{{#if isCorrect}}
-										<!--r-->
-										<div class="check-mark-checked success-color"><i
-												class="glyphicon glyphicon-ok"></i></div>
-									{{else}}
-										<!--f-->
-										<div class="check-mark-unchecked default-color"><i
-												class="glyphicon glyphicon-ok"></i></div>
-									{{/if}}
-								</div>
+									   value="{{getAnswerText}}">
+                                {{#unless isSurveyQuestion}}<input type="checkbox" id="answerOption-{{getAnswerOptionNumber}}" name="switch" />{{/unless}}
 							</div>
 						</div>
 					{{/each}}

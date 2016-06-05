@@ -15,12 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {questionReflection} from '/lib/questions/question_reflection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
-import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 
 function doesMarkdownSyntaxExist(questionText, syntaxStart, syntaxMiddle, syntaxEnd) {
@@ -86,61 +85,40 @@ function questionTextLengthWithoutMarkdownSyntax(questionText) {
 	if (doesMarkdownSyntaxExist(questionText, '>')) {
 		questionTextLength -= 4;
 	}
+	questionTextLength = questionText.replace(/ /g,"").length;
 	return questionTextLength;
 }
 
 export var subscriptionHandler = null;
 
 export function addQuestion(index) {
-	var questionText = $('#questionText').val();
-	Meteor.call("QuestionGroupCollection.addQuestion", {
-		hashtag: Router.current().params.quizName,
-		questionIndex: index,
-		questionText: questionText
-	}, (err) => {
-		if (err) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+	const questionText = $('#questionText').val() || "";
+	const questionType = $('#chooseQuestionType').find('option:selected').attr("id");
+	const questionItem = Session.get("questionGroup");
+
+	// Check if we need to change the type of the question
+	if (questionItem.getQuestionList()[index].constructor.name !== questionType) {
+		const serialized = questionItem.getQuestionList()[index].serialize();
+		delete serialized.type;
+		questionItem.addQuestion(questionReflection[questionType](serialized), index);
+		// Check if we changed to the survey question -> remove isCorrect values then
+		if (questionType === "SurveyQuestion") {
+			questionItem.getQuestionList()[index].getAnswerOptionList().forEach(function (answerOption) {
+				answerOption.setIsCorrect(false);
 			});
-		} else {
-			localData.addQuestion(Router.current().params.quizName, index, questionText);
 		}
-	});
-}
-
-export function calculateWindow() {
-	var hashtagLength = Router.current().params.quizName.length;
-	var headerTitel = $(".header-titel");
-	var fontSize = "";
-	var marginTopModifier = 0;
-
-	if (hashtagLength <= 10) {
-		if ($(document).width() < 1200) {
-			fontSize = "6vw";
-			marginTopModifier = 0.1;
-		} else {
-			fontSize = "5vw";
-			marginTopModifier = 0.2;
-		}
-	} else if (hashtagLength > 10 && hashtagLength <= 15) {
-		fontSize = "4vw";
-		marginTopModifier = 0.4;
-	} else {
-		fontSize = "2.5vw";
-		marginTopModifier = 0.6;
 	}
-
-	headerTitel.css("font-size", fontSize);
-	headerTitel.css("margin-top", $(".arsnova-logo").height() * marginTopModifier);
+	questionItem.getQuestionList()[index].setQuestionText(questionText);
+	Session.set("questionGroup", questionItem);
+	localData.addHashtag(questionItem);
 }
 
 export function checkForValidQuestionText() {
-	var questionText = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].questionText;
-	if (typeof questionText !== "undefined" && questionTextLengthWithoutMarkdownSyntax(questionText) < 5) {
-		$('#questionText').addClass("invalidAnswerOption");
+	var questionText = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
+	if (questionTextLengthWithoutMarkdownSyntax(questionText) < 5) {
+		$('#questionText').addClass("invalidQuestion");
 	} else {
-		$('#questionText').removeClass("invalidAnswerOption");
+		$('#questionText').removeClass("invalidQuestion");
 	}
 }
 
@@ -160,10 +138,10 @@ export function changePreviewButtonText(text) {
 }
 
 export function checkForMarkdown() {
-	if (EventManagerCollection.findOne().questionIndex < 0 || !QuestionGroupCollection.findOne()) {
+	if (EventManagerCollection.findOne().questionIndex < 0) {
 		return;
 	}
-	var questionText = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].questionText;
+	var questionText = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
 	if (questionText && questionContainsMarkdownSyntax(questionText)) {
 		changePreviewButtonText(TAPi18n.__("view.questions.edit"));
 
@@ -182,4 +160,35 @@ export function checkForMarkdown() {
 			$('#questionText').focus();
 		}
 	}
+}
+
+export function getQuestionTypes() {
+	if (!Session.get("questionGroup") || !EventManagerCollection.findOne()) {
+		return [];
+	}
+	return [
+		{
+			id: "SingleChoiceQuestion",
+			translationName: "view.questions.single_choice_question",
+			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SingleChoiceQuestion" ? 'selected' : ""
+		},
+		{
+			id: "MultipleChoiceQuestion",
+			translationName: "view.questions.multiple_choice_question",
+			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "MultipleChoiceQuestion" ? 'selected' : ""
+		},
+		/*
+		 Disabled because not yet implemented!
+		 {
+		 id: "RangedQuestion",
+		 translationName: "view.questions.ranged_question",
+		 selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "RangedQuestion" ? 'selected' : ""
+		 },
+		 */
+		{
+			id: "SurveyQuestion",
+			translationName: "view.questions.survey_question",
+			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SurveyQuestion" ? 'selected' : ""
+		}
+	];
 }

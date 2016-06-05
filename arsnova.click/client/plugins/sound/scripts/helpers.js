@@ -17,12 +17,13 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {isMobileDevice} from '/client/plugins/splashscreen/scripts/lib.js';
 
-Template.soundConfig.helpers({
+Template.soundConfig.helpers($.extend(isMobileDevice, {
 	slider2: function () {
 		return Session.get("slider2");
 	},
 	isSoundPlaying: function () {
 		return Session.get("soundIsPlaying");
 	}
-});
+}));

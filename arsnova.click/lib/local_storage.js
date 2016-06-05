@@ -15,8 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
+import {AbstractQuestionGroup} from "/lib/questions/questiongroup_abstract.js";
+import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
+import {AbstractQuestion} from "/lib/questions/question_abstract.js";
+import {DefaultAnswerOption} from "/lib/answeroptions/answeroption_default.js";
+import {MultipleChoiceQuestion} from "/lib/questions/question_choice_multiple.js";
 
 export function getLanguage() {
 	return $.parseJSON(localStorage.getItem("__amplify__tap-i18n-language"));
@@ -55,110 +59,37 @@ export function deleteHashtag(hashtag) {
 	}
 }
 
-export function addHashtag(hashtag) {
-	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
+export function addHashtag(questionGroup) {
+	if (!(questionGroup instanceof AbstractQuestionGroup)) {
 		return;
 	}
-	var questionObject = {
-		hashtag: hashtag,
-		musicVolume: 80,
-		musicEnabled: 1,
-		musicTitle: "Song1",
-		questionList: [
-			{
-				questionText: "",
-				timer: 40000,
-				answers: [
-					{
-						answerOptionNumber: 0,
-						answerText: "",
-						isCorrect: 0
-					},
-					{
-						answerOptionNumber: 1,
-						answerText: "",
-						isCorrect: 0
-					},
-					{
-						answerOptionNumber: 2,
-						answerText: "",
-						isCorrect: 0
-					},
-					{
-						answerOptionNumber: 3,
-						answerText: "",
-						isCorrect: 0
-					}
-				]
-			}
-		]
-	};
 	const hashtagString = localStorage.getItem("hashtags");
 	if (!hashtagString) {
-		localStorage.setItem("hashtags", JSON.stringify([hashtag]));
-		localStorage.setItem(hashtag, JSON.stringify(questionObject));
+		localStorage.setItem("hashtags", JSON.stringify([questionGroup.getHashtag()]));
+		localStorage.setItem(questionGroup.getHashtag(), JSON.stringify(questionGroup.serialize()));
 	} else {
 		const hashtags = JSON.parse(hashtagString);
-		hashtags.push(hashtag);
-
-		localStorage.setItem("hashtags", JSON.stringify(hashtags));
-		localStorage.setItem(hashtag, JSON.stringify(questionObject));
-	}
-}
-
-export function addQuestion(hashtag, questionIndex, questionText) {
-	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
-		return;
-	}
-	const sessionDataString = localStorage.getItem(hashtag);
-	if (sessionDataString) {
-		const sessionData = JSON.parse(sessionDataString);
-		if (questionIndex < sessionData.questionList.length) {
-			sessionData.questionList[questionIndex].questionText = questionText;
-		} else {
-			sessionData.questionList.push({
-				questionText: questionText,
-				timer: 40000,
-				answers: [
-					{
-						answerOptionNumber: 0,
-						answerText: "",
-						isCorrect: 0
-					},
-					{
-						answerOptionNumber: 1,
-						answerText: "",
-						isCorrect: 0
-					},
-					{
-						answerOptionNumber: 2,
-						answerText: "",
-						isCorrect: 0
-					},
-					{
-						answerOptionNumber: 3,
-						answerText: "",
-						isCorrect: 0
-					}
-				]
-			});
+		if (!containsHashtag(questionGroup.getHashtag())) {
+			hashtags.push(questionGroup.getHashtag());
+			localStorage.setItem("hashtags", JSON.stringify(hashtags));
 		}
-		localStorage.setItem(hashtag, JSON.stringify(sessionData));
+		localStorage.setItem(questionGroup.getHashtag(), JSON.stringify(questionGroup.serialize()));
 	}
 }
 
-export function updateMusicSettings(hashtag, musicVolume, musicEnabled, musicTitle) {
-	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
+export function addQuestion(questionItem) {
+	if (!(questionItem instanceof AbstractQuestion)) {
 		return;
 	}
-	const sessionDataString = localStorage.getItem(hashtag);
+	const sessionDataString = localStorage.getItem(questionItem.getHashtag());
 	if (sessionDataString) {
 		const sessionData = JSON.parse(sessionDataString);
-		sessionData.musicVolume = musicVolume;
-		sessionData.musicEnabled = musicEnabled;
-		sessionData.musicTitle = musicTitle;
-
-		localStorage.setItem(hashtag, JSON.stringify(sessionData));
+		if (questionItem.getQuestionIndex() < sessionData.questionList.length) {
+			sessionData.questionList[questionItem.getQuestionIndex()].questionText = questionItem.getQuestionText();
+		} else {
+			sessionData.questionList.push(questionItem.serialize());
+		}
+		localStorage.setItem(questionItem.getHashtag(), JSON.stringify(sessionData));
 	}
 }
 
@@ -207,58 +138,56 @@ export function addAnswers({hashtag, questionIndex, answerOptionNumber, answerTe
 
 export function reenterSession(hashtag) {
 	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
-		return;
+		throw new TypeError("Undefined or illegal hashtag provided");
 	}
 
 	const sessionDataString = localStorage.getItem(hashtag);
 	if (!sessionDataString) {
-		return;
+		throw new TypeError("Undefined session data");
 	}
 
-	const sessionData = JSON.parse(sessionDataString);
-
-	if (typeof sessionData === "object") {
-		/*
-		 This supports the "old" question format where one question was bound to one hashtag.
-		 It saves the content of the question to the new questionList and deletes the invalid keys.
-		 TODO: remove later when it is likely that there are no more sessions with the old question format
-		 */
-		if (typeof sessionData.questionList === "undefined") {
-			sessionData.questionList = [
-				{
-					questionText: sessionData.questionText,
-					timer: sessionData.timer,
-					answers: sessionData.answers
-				}
-			];
-			delete sessionData.questionText;
-			delete sessionData.timer;
-			delete sessionData.answers;
-			delete sessionData.isReadingConfirmationRequired;
-			localStorage.setItem(hashtag, JSON.stringify(sessionData));
-		}
-
-		for (var i = 0; i < sessionData.questionList.length; i++) {
-			if (!sessionData.questionList[i].answers) {
-				continue;
-			}
-			var answer = sessionData.questionList[i].answers;
-			delete sessionData.questionList[i].answers;
-			delete sessionData.questionList[i].isReadingConfirmationRequired;
-			for (var j = 0; j < answer.length; j++) {
-				Meteor.call("AnswerOptionCollection.addOption", {
+	let sessionData = JSON.parse(sessionDataString);
+	if (typeof sessionData !== "object") {
+		throw new TypeError("Illegal session data");
+	}
+	if (typeof sessionData.type === "undefined") {
+		// Legacy mode -> Convert old session data to new OO style
+		const newQuestionGroup = new DefaultQuestionGroup({
+			hashtag: hashtag,
+			questionList: [],
+			musicEnabled: 1,
+			musicVolume: 80,
+			musicTitle: "Song1"
+		});
+		for (let i = 0; i < sessionData.questionList.length; i++) {
+			const answerOptions = [];
+			for (let j = 0; j < sessionData.questionList[i].answers.length; j++) {
+				answerOptions.push(new DefaultAnswerOption({
 					hashtag: hashtag,
 					questionIndex: i,
-					answerText: answer[j].answerText,
-					answerOptionNumber: answer[j].answerOptionNumber,
-					isCorrect: answer[j].isCorrect
-				});
+					answerOptionNumber: j,
+					answerText: sessionData.questionList[i].answers[j].answerText,
+					isCorrect: sessionData.questionList[i].answers[j].isCorrect === 1
+				}));
 			}
+			newQuestionGroup.addQuestion(new MultipleChoiceQuestion({
+				hashtag: hashtag,
+				questionIndex: i,
+				questionText: sessionData.questionList[i].questionText,
+				timer: sessionData.questionList[i].timer / 1000,
+				startTime: 0,
+				answerOptionList: answerOptions
+			}));
 		}
-		Meteor.call("QuestionGroupCollection.insert", {
-			hashtag: hashtag,
-			questionList: sessionData.questionList
-		});
+		localStorage.setItem(newQuestionGroup.getHashtag(), JSON.stringify(newQuestionGroup.serialize()));
+		sessionData = newQuestionGroup.serialize();
+	}
+
+	switch (sessionData.type) {
+		case "DefaultQuestionGroup":
+			return new DefaultQuestionGroup(sessionData);
+		default:
+			throw new TypeError("Undefined session type while reentering");
 	}
 }
 
@@ -313,51 +242,52 @@ export function getPrivateKey() {
 }
 
 export function importFromFile(data) {
-	var hashtag = data.hashtagDoc.hashtag;
+	var hashtag = data.hashtag;
 	if ((hashtag === "hashtags") || (hashtag === "privateKey")) {
 		return;
 	}
 
 	var allHashtags = JSON.parse(localStorage.getItem("hashtags"));
 	allHashtags = $.grep(allHashtags, function (value) {
-		return value !== data.hashtagDoc.hashtag;
+		return value !== data.hashtag;
 	});
 	allHashtags.push(hashtag);
 	localStorage.setItem("hashtags", JSON.stringify(allHashtags));
 
-	var questionList = [];
-	data.sessionDoc.forEach(function (questionListDoc) {
-		questionList.push({
-			questionText: questionListDoc.questionText,
-			timer: questionListDoc.timer,
-			answers: questionListDoc.answers
-		});
-	});
-
-	localStorage.setItem(hashtag, JSON.stringify({
-		hashtag: data.hashtagDoc.hashtag,
-		questionList: questionList
-	}));
+	switch (data.type) {
+		case "DefaultQuestionGroup":
+			const instance = new DefaultQuestionGroup(data);
+			localStorage.setItem(instance.getHashtag(), JSON.stringify(instance.serialize()));
+			break;
+		default:
+			throw new TypeError("Undefined session type '" + data.type + "' while importing");
+	}
 }
 
 export function exportFromLocalStorage(hashtag) {
-	var localStorageData = JSON.parse(localStorage.getItem(hashtag));
-	if (localStorageData) {
-		var hashtagDoc = {
-			hashtag: localStorageData.hashtag,
-			sessionStatus: 0,
-			lastConnection: 0
-		};
-		var sessionDoc = [];
-		localStorageData.questionList.forEach(function (question) {
-			sessionDoc.push(question);
-		});
-
-		return JSON.stringify({
-			hashtagDoc: hashtagDoc,
-			sessionDoc: sessionDoc,
-			memberListDoc: [],
-			responsesDoc: []
-		});
+	const localStorageData = JSON.parse(localStorage.getItem(hashtag));
+	if (!localStorageData) {
+		throw new TypeError("Invalid local storage data while exporting");
 	}
+	let quizItem = null;
+	switch (localStorageData.type) {
+		case "DefaultQuestionGroup":
+			quizItem = new DefaultQuestionGroup(localStorageData);
+			break;
+		default:
+			throw new TypeError("Undefined session type while exporting");
+	}
+	if (!quizItem.theme) {
+		quizItem.theme = "theme-dark";
+	}
+	if (!quizItem.musicVolume) {
+		quizItem.musicVolume = 80;
+	}
+	if (!quizItem.musicEnabled) {
+		quizItem.musicEnabled = 1;
+	}
+	if (!quizItem.musicTitle) {
+		quizItem.musicTitle = "Song1";
+	}
+	return JSON.stringify(quizItem.serialize());
 }

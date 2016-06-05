@@ -28,22 +28,28 @@ Template.memberlist.helpers({
 		return localData.containsHashtag(Router.current().params.quizName);
 	},
 	learners: function () {
-		var sortParamObj = Session.get("learnerCountOverride") ? {lowerCaseNick: 1} : {insertDate: -1};
-		return [
+		const limit = localData.containsHashtag(Router.current().params.quizName) ? Session.get("maxLearnerButtons") : Session.get("maxLearnerButtons") - 2;
+		const sortParamObj = Session.get("learnerCountOverride") ? {lowerCaseNick: 1} : {limit: limit, sort: {insertDate: -1}};
+		const result = [
 			MemberListCollection.find({nick: localStorage.getItem(Router.current().params.quizName + "nick")}, {
 				limit: 1
-			}),
-			MemberListCollection.find({nick: {$ne: localStorage.getItem(Router.current().params.quizName + "nick")}}, {
-				limit: (Session.get("learnerCount") - 1),
-				sort: sortParamObj
 			})
 		];
+		if (Session.get("maxLearnerButtons") > 0 || localData.containsHashtag(Router.current().params.quizName)) {
+			result.push(
+				MemberListCollection.find({nick: {$ne: localStorage.getItem(Router.current().params.quizName + "nick")}}, sortParamObj)
+			);
+		}
+		return result;
 	},
-	showMoreButton: function () {
-		return ((MemberListCollection.find().count() - Session.get("learnerCount")) > 1);
+	hasOverridenDefaultButtonCount: function () {
+		return Session.get("learnerCountOverride");
+	},
+	hasTooMuchButtons: ()=> {
+		return Session.get("learnerCountOverride") || (Session.get("allMembersCount") - Session.get("maxLearnerButtons") > 0);
 	},
 	invisibleLearnerCount: function () {
-		return MemberListCollection.find().count() - Session.get("learnerCount");
+		return Session.get("allMembersCount") - Session.get("maxLearnerButtons");
 	},
 	memberlistCount: function () {
 		return MemberListCollection.find().count();

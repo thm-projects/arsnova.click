@@ -18,19 +18,15 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import {calculateButtonCount} from './lib.js';
 
 Template.memberlist.events({
-	"click .btn-more-learners": function () {
-		Session.set("learnerCount", MemberListCollection.find().count());
+	'click #showMore': ()=> {
 		Session.set("learnerCountOverride", true);
 	},
-	'click .btn-less-learners': function () {
+	'click #showLess': ()=> {
 		Session.set("learnerCountOverride", false);
-		calculateButtonCount();
 	},
 	'click .btn-learner': function (event) {
 		event.preventDefault();
@@ -45,6 +41,9 @@ Template.memberlist.events({
 				instance.templateSelector.find('#nickName').text($(event.currentTarget).text().replace(/(?:\r\n|\r| |\n)/g, ''));
 				instance.templateSelector.find('#kickMemberButton').on('click', function () {
 					Meteor.call('MemberListCollection.removeLearner', Router.current().params.quizName, $(event.currentTarget).attr("id"));
+					if (instance.templateSelector.find("#ban-nick").prop("checked")) {
+						Meteor.call('BannedNicksCollection.insert', instance.templateSelector.find('#nickName').text());
+					}
 				});
 			}
 		});
@@ -52,6 +51,16 @@ Template.memberlist.events({
 	'click #startPolling': function () {
 		Session.set("sessionClosed", false);
 		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, -1);
+		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, -1);
+		Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);
+		Meteor.call('MemberListCollection.clearReadConfirmed', Router.current().params.quizName);
 		Meteor.call('EventManagerCollection.setSessionStatus', Router.current().params.quizName, 3);
+	}
+});
+
+Template.kickMemberSplashscreen.events({
+	"click #ban-nick-label": function () {
+		const banNickInput = $('#ban-nick');
+		banNickInput.prop("checked",!banNickInput.prop("checked"));
 	}
 });

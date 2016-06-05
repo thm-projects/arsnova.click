@@ -18,8 +18,7 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {getLeaderBoardItems} from './lib.js';
-import {getAllNicksWhichAreAlwaysRight} from './lib.js';
+import {getLeaderBoardItems, getAllNicksWhichAreAlwaysRight} from './lib.js';
 
 Template.leaderBoard.helpers({
 	hashtag: ()=> {
@@ -35,10 +34,10 @@ Template.leaderBoard.helpers({
 		return nick === localStorage.getItem(Router.current().params.quizName + "nick");
 	},
 	getTitleText: ()=> {
-		if (Session.get("showLeaderBoardId") !== "undefined") {
-			return TAPi18n.__("view.leaderboard.title.single_question", {questionId: (Session.get("showLeaderBoardId") + 1)});
-		} else {
+		if (Session.get("showGlobalRanking")) {
 			return TAPi18n.__("view.leaderboard.title.all_questions");
+		} else {
+			return TAPi18n.__("view.leaderboard.title.single_question", {questionId: (Session.get("showLeaderBoardId") + 1)});
 		}
 	},
 	getPosition: function (index) {
@@ -65,21 +64,33 @@ Template.leaderBoard.helpers({
 		return getAllNicksWhichAreAlwaysRight();
 	},
 	noLeaderBoardItems: (index)=> {
-		var items = getLeaderBoardItems();
-		if (typeof index !== "undefined") {
-			if (items[index].value.length > 0) {
+		if (Session.get("showGlobalRanking")) {
+			var alwaysRightNicks = getAllNicksWhichAreAlwaysRight();
+			if (alwaysRightNicks.length > 0) {
 				return false;
+			} else {
+				return true;
 			}
 		} else {
-			for (var i = 0; i < items.length; i++) {
-				if (items[i].value.length > 0) {
+			var items = getLeaderBoardItems();
+			if (typeof index !== "undefined") {
+				if (items[index].value.length > 0) {
 					return false;
 				}
+			} else {
+				for (var i = 0; i < items.length; i++) {
+					if (items[i].value.length > 0) {
+						return false;
+					}
+				}
 			}
+			return true;
 		}
-		return true;
 	},
 	leaderBoardItems: ()=> {
 		return getLeaderBoardItems();
+	},
+	isFirstItem: function (index) {
+		return index === 0;
 	}
 });

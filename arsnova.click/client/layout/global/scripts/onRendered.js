@@ -15,14 +15,34 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import  * as localData from '/lib/local_storage.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {TAPi18n} from 'meteor/tap:i18n';
+import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 
 Template.home.onRendered(function () {
-	if (localStorage.getItem("localStorageAvailable") && localData.getAllHashtags().length > 0) {
+	try {
+		if (!localStorage.getItem("localStorageAvailable")) {
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing")
+			});
+			return;
+		}
+	} catch (err) {
+		new ErrorSplashscreen({
+			autostart: true,
+			errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing")
+		});
+		return;
+	}
+
+	if (localData.getAllHashtags().length > 0) {
 		hashtagLib.setHashtagSplashscreen(new Splashscreen({
 			autostart: true,
 			templateName: "showHashtagsSplashscreen"
@@ -35,4 +55,18 @@ Template.home.onRendered(function () {
 			}
 		}
 	});
+
+	footerElements.removeFooterElements();
+	footerElements.addFooterElement(footerElements.footerElemAbout);
+	footerElements.addFooterElement(footerElements.footerElemTranslation);
+	footerElements.addFooterElement(footerElements.footerElemTheme);
+	footerElements.addFooterElement(footerElements.footerElemFullscreen);
+	footerElements.addFooterElement(footerElements.footerElemImport);
+	footerElements.calculateFooter();
+});
+
+Template.layout.helpers({
+	getTheme: function () {
+		return Session.get("theme");
+	}
 });

@@ -21,11 +21,8 @@ import * as localData from '/lib/local_storage.js';
 Template.hashtagManagement.helpers({
 	serverHashtags: function () {
 		return localData.getAllHashtags();
-	}
-});
-
-Template.showHashtagsSplashscreen.helpers({
-	hashtags: function () {
-		return localData.getAllHashtags();
+	},
+	isLastItem: function (index) {
+		return index === localData.getAllHashtags().length - 1;
 	}
 });

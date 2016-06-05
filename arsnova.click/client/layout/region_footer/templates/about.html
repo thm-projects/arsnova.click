@@ -1,0 +1,47 @@
+<!--
+* This file is part of ARSnova Click.
+* Copyright (C) 2016 The ARSnova Team
+*
+* ARSnova Click is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* ARSnova Click is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
+
+<template name="about">
+    {{> contactHeaderBar}}
+	<div class="text-light contentContainer">
+		{{> titel titelText="region.footer.about.title"}}
+		<h3>{{{_ "region.footer.about.declaration"}}}</h3>
+		<p>{{{_ "region.footer.about.ars"}}}</p>
+		<p>{{{_ "region.footer.about.developed_by"}}}</p>
+		<p>{{_ "region.footer.about.met_requirements"}}</p>
+			<ul>
+				<li>{{{_ "region.footer.about.requirements.1"}}}</li>
+				<li>{{{_ "region.footer.about.requirements.2"}}}</li>
+				<li>{{{_ "region.footer.about.requirements.3"}}}</li>
+				<li>{{{_ "region.footer.about.requirements.4"}}}</li>
+				<li>{{{_ "region.footer.about.requirements.5"}}}</li>
+				<li>{{{_ "region.footer.about.requirements.6"}}}</li>
+				<li>{{{_ "region.footer.about.requirements.7"}}}</li>
+				<li>{{{_ "region.footer.about.requirements.8"}}}</li>
+				<li>{{{_ "region.footer.about.requirements.9"}}}</li>
+				<li>{{{_ "region.footer.about.requirements.10"}}}</li>
+				<li>{{{_ "region.footer.about.requirements.11"}}}</li>
+			</ul>
+		<h3>{{_ "region.footer.about.manual.title"}}</h3>
+		<p>{{_ "region.footer.about.manual.text.1"}}</p>
+		<ul>
+			<li>{{_ "region.footer.about.manual.text.2"}}</li>
+		</ul>
+		<p>{{_ "region.footer.about.manual.text.3"}}</p>
+	</div>
+    {{> footer_nav_buttons backId="backButton" }}
+</template>

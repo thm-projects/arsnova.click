@@ -18,12 +18,11 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {TAPi18n} from 'meteor/tap:i18n';
+import {Tracker} from 'meteor/tracker';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {buzzsound1, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
+import {buzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib";
-import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 Template.header.helpers({
 	getCurrentResetRoute: function () {
@@ -40,6 +39,12 @@ Template.header.helpers({
 		}
 		return !localData.containsHashtag(Router.current().params.quizName);
 	},
+	isInActiveQuizAndIsStudent: function () {
+		return Router.current().params.quizName && !localData.containsHashtag(Router.current().params.quizName);
+	},
+	isTHMStyleSelectedAndGreaterThan999Pixels: function () {
+		return localStorage.getItem("theme") === "theme-thm" && $(window).width() > 999;
+	},
 	currentHashtag: function () {
 		return Router.current().params.quizName;
 	},
@@ -53,8 +58,20 @@ Template.header.helpers({
 				return false;
 		}
 	},
+	isInLobby: function () {
+		return Router.current().route.getName() === ":quizName.memberlist";
+	},
 	isSoundEnabled: function () {
+		if (!HashtagsCollection.findOne({hashtag: Router.current().params.quizName})) {
+			return;
+		}
 		return HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).musicEnabled;
+	}
+});
+
+Template.qrCodeDisplay.helpers({
+	getCurrentSessionName: function () {
+		return window.location.host + "/" + Router.current().params.quizName;
 	}
 });
 
@@ -71,72 +88,36 @@ Template.header.events({
 				closeOnButton: '#closeDialogButton, #resetSessionButton',
 				onRendered: function (instance) {
 					instance.templateSelector.find('#resetSessionButton').on('click', function () {
-						Meteor.call("Main.killAll", Router.current().params.quizName, function (err) {
-							if (err) {
-								new ErrorSplashscreen({
-									autostart: true,
-									errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
-								});
-							}
-						});
+						Meteor.call("Main.killAll", Router.current().params.quizName);
+						Router.go("/" + Router.current().params.quizName + "/resetToHome");
 					});
 				}
 			});
 		}
-	},
-	'click .sound-button': function () {
-		new Splashscreen({
-			autostart: true,
-			templateName: "soundConfig",
-			closeOnButton: "#js-btn-hideSoundModal",
-			onRendered: function (instance) {
-				instance.templateSelector.find('#soundSelect').on('change', function (event) {
-					var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-					hashtagDoc.musicTitle = $(event.target).val();
-					if (Session.get("soundIsPlaying")) {
-						buzzsound1.stop();
-						setBuzzsound1($(event.target).val());
-						buzzsound1.play();
-					} else {
-						setBuzzsound1($(event.target).val());
-					}
-					Meteor.call('HashtagsCollection.updateMusicSettings', hashtagDoc);
-				});
+	}
+});
 
-				instance.templateSelector.find("#js-btn-playStopMusic").on('click', function () {
-					if (Session.get("soundIsPlaying")) {
-						buzzsound1.stop();
-						Session.set("soundIsPlaying", false);
-					} else {
-						buzzsound1.play();
-						Session.set("soundIsPlaying", true);
-					}
-				});
+let headerThemeTracker = null;
 
-				instance.templateSelector.find("#js-btn-hideSoundModal").on('click', function () {
-					buzzsound1.stop();
-					Session.set("soundIsPlaying", false);
-				});
+Template.header.onRendered(function () {
+	headerThemeTracker = Tracker.autorun(function () {
+		if (!Session.get("questionGroup") && HashtagsCollection.findOne({hashtag: Router.current().params.quizName})) {
+			const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+			const theme = hashtagDoc ? hashtagDoc.theme : "theme-default";
+			Session.set("theme", theme);
+		}
+	});
+	$(window).resize(function () {
+		if ($(window).width() > 999) {
+			$(".thm-logo-background").show();
+		} else {
+			$(".thm-logo-background").hide();
+		}
+	});
+});
 
-				instance.templateSelector.find('#isSoundOnButton').on('click', function () {
-					var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-					var btn = $('#isSoundOnButton');
-					btn.toggleClass("down");
-					if (btn.hasClass("down")) {
-						hashtagDoc.musicEnabled = 1;
-						btn.html(TAPi18n.__("plugins.sound.active"));
-					} else {
-						hashtagDoc.musicEnabled = 0;
-						btn.html(TAPi18n.__("plugins.sound.inactive"));
-					}
-					Meteor.call('HashtagsCollection.updateMusicSettings', hashtagDoc);
-				});
-			},
-			onDestroyed: function () {
-				var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-				hashtagDoc.musicVolume = Session.get("slider2");
-				Meteor.call('HashtagsCollection.updateMusicSettings', hashtagDoc);
-			}
-		});
+Template.header.onDestroyed(function () {
+	if (headerThemeTracker) {
+		headerThemeTracker.stop();
 	}
 });

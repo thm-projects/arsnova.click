@@ -16,9 +16,9 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="errorSplashscreen">
-	<div class="modal fade" role="dialog">
+	<div class="modal {{#unless isMobileDevice}}fade {{/unless}}splashscreen" role="dialog">
 		<div class="modal-dialog">
-			<div class="modal-content modal-content-white-fonts splash-screen-error-message">
+			<div class="modal-content splash-screen-error-message">
 				<div class="modal-header">
 					<h2>{{_ "plugins.splashscreen.error.title"}}</h2>
 				</div>

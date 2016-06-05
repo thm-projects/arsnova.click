@@ -10,12 +10,27 @@
   },
   "region": {
     "footer": {
+      "go_to": "Aller à: ",
+      "show-more": {
+        "show-more-elements": "Toutes les options disponibles:",
+        "onText": "Activé",
+        "offText": "Désactivé"
+      },
       "footer_bar": {
         "about": "Sur",
         "home": "Accueil",
         "tos": "Conditions d'utilisation",
         "imprint": "Imprimer",
-        "data_privacy": "Confidentialité des données"
+        "data_privacy": "Confidentialité des données",
+        "languages": "Langues",
+        "style": "Style",
+        "import": "Importer",
+        "info": "Infos",
+        "reading-confirmation": "Confirmation de lecture",
+        "fullscreen": "Plein écran",
+        "show_more": "Plus",
+        "sound": "Sonner",
+        "qr_code": "QR Code"
       },
       "about": {
         "title": "About the quiz app",
@@ -111,22 +126,31 @@
     },
     "header": {
       "new_question": "Nouvelle question",
-      "sound": "Sonner",
       "reset": "Réinitialiser",
       "yes": "Oui",
       "no": "Non",
-      "reset_session_confirmation": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted.<br><br> The created Question(s), including the assigned answer options and timer configurations, will be stored in the local storage of your browser. Except the hashtag-name, all data of this session will be deleted from the server. Do you really want to reset the session?"
+      "reset_session_confirmation": {
+        "title": "Exit the quiz?",
+        "text": {
+          "1": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
+          "2": "Proceed?"
+        }
+      }
     }
   },
   "view": {
     "answeroptions": {
-      "answeroptiontext_placeholder": "Option de réponse nécessaire"
+      "answeroptiontext_placeholder": "Option de réponse nécessaire",
+      "correct": "Correct",
+      "wrong": "Faux"
     },
     "choose_nickname": {
       "enter_nickname": "Prendre un surnom",
       "enter_nickname_here": "Entrez votre nom ici",
       "nickname_na_popup": "Ce nom n'est pas disponible!",
-      "nickname_blacklist_popup": "Ce nom est (en raison de son sens) non disponible!"
+      "nickname_blacklist_popup": "Ce nom est (en raison de son sens) non disponible!",
+      "nickname_too_long": "Le nom est trop long",
+      "nickname_too_short": "Le nom est trop court"
     },
     "hashtag_management": {
       "enter_quiz_name": "Entrez le nom du jeu-questionnaire ici",
@@ -137,15 +161,23 @@
       "quiz_management": "Questionnaires stockées",
       "available_sessions": "Ces questionnaires sont stockés dans votre navigateur:",
       "session_management": "Management Quiz",
-      "import": "Importer quiz"
+      "import": "Importer quiz",
+      "delete_session": "Effacer Quiz",
+      "delete_session_confirmation": "Si le '<span id=\"session_name\"></span>' quiz définitivement supprimé?",
+      "export": "Exporter quiz",
+      "valid_question": "Questionnaire valide",
+      "invalid_question": "Quiz non valide"
     },
     "leaderboard": {
       "title": {
         "single_question": "Question __questionId__ - Les réponses correctes de...",
         "all_questions": "Les réponses correctes de..."
       },
-      "no_attendee_correct": "Malheureusement, personne ne",
+      "no_attendee_correct": "Personne n'a répondu correctement à cette question",
+      "no_attendee_correct_global": "Personne n'a répondu correctement à toutes les questions",
       "question": "Question",
+      "second": "Seconde",
+      "second_plural": "Secondes",
       "show_more": "Voir 1 plus",
       "show_more_plural": "Voir %s plus",
       "show_less": "Montre moins"
@@ -161,7 +193,9 @@
       "back_to_lobby": "Retour à l'entrée",
       "global_ranking": "Classement mondial",
       "show_question": "Voir question",
-      "start_round": "Commencez tour",
+      "show_question_plural": "Voir question",
+      "start_round": "Démarrer Quiz",
+      "start_round_plural": "Commencez tour",
       "confirm_read": "J'ai lu la question!",
       "game_over": "Jeu terminé",
       "countdown": "Compte à rebours",
@@ -175,13 +209,83 @@
       "show_more": "Voir 1 plus",
       "show_more_plural": "Voir %s plus",
       "start_quiz": "Allons-y!",
-      "kick_member_confirmation": "Shall l'<span id=\"nickName\"></span> des participants être retiré de la session?"
+      "kick_member_confirmation": "Si les participants <span id=\"nickName\"></span> être retirés du jeu-questionnaire?",
+      "add_kicked_member_to_ban_list": "Bannir définitivement les surnoms"
     },
     "questions": {
       "enter_question_here": "Entrez votre question ici",
       "format": "Format",
       "edit": "Modifier",
-      "preview": "Aperçu"
+      "preview": "Aperçu",
+      "single_choice_question": "Choix unique",
+      "multiple_choice_question": "Choix multiple",
+      "survey_question": "Enquête",
+      "ranged_question": "Question Quiz et réponses"
+    },
+    "quiz_summary": {
+      "summary": "Résumé",
+      "quiz_name": "Nom du quiz",
+      "quiz_url": "URL pour les participants",
+      "question_amount": "Montant de toutes les questions",
+      "validation_question_group": "Validation pour le quiz complet",
+      "successful": "Réussi",
+      "failed": "Échoué",
+      "correct": "Correct",
+      "wrong": "Faux",
+      "question": "Question",
+      "text": "Texte",
+      "type": "Type",
+      "answer": "Répondre",
+      "answer_plural": "Réponses",
+      "timer": "Compte à rebours",
+      "second": "Seconde",
+      "second_plural": "Secondes",
+      "validation": "Validation",
+      "validation_errors": {
+        "types": {
+          "question": "Question",
+          "answerOption": "Répondre"
+        },
+        "reasons": {
+          "question_text_too_small": "Le texte de la question est trop courte",
+          "question_text_too_long": "Le texte de la question est trop long",
+          "timer_too_small": "La minuterie est trop court",
+          "timer_too_big": "La minuterie est trop long",
+          "no_valid_answers": "Il doit y avoir au moins une bonne réponse",
+          "one_valid_answer_required": "Il doit y avoir exactement une réponse correcte",
+          "no_valid_answer_required": "Il n'y a pas de réponses correctes permis",
+          "invalid_range": "La gamme minimale doit être inférieure à la portée maximale",
+          "answer_text_empty": "Le texte de la réponse ne peut pas être vide"
+        }
+      },
+      "edit_quiz": "Modifier quiz",
+      "start_quiz": "Démarrer quiz"
+    },
+    "theme_switcher": {
+      "set_theme": "Choisissez un thème pour tous les participants",
+      "select_a_theme_title": "Choisissez le thème",
+      "themes": {
+        "default": {
+          "name": "ARSnova.click",
+          "description": "Le premier et le principal thème de ARSnova.click"
+        },
+        "dark": {
+          "name": "Version sombre",
+          "description": "Fond sombre avec un faible contraste"
+        },
+        "elegant": {
+          "name": "Élégant",
+          "description": "Thème élégant pour quizzers sophistiqués"
+        },
+        "thm": {
+          "name": "THM",
+          "description": "Corporate Design de l'Université des sciences appliquées (THM)"
+        },
+        "arsnova": {
+          "name": "ARSnova",
+          "description": "Vous connaissez ARS nova? Sentez-vous la maison!"
+        }
+      }
     },
     "timer": {
       "set_countdown": "Définir le compte à rebours",
@@ -249,7 +353,8 @@
           "answeroption_not_found": "Il n'y a aucune option de réponse avec la answerOptionNumber donnée",
           "response_timeout": "La réponse a été donnée hors de la plage de temps",
           "insert_leaderboard_failed": "Erreur lors de l'ajout d'une réponse réglée sur leaderboard",
-          "session_closed": "La session quiz a été fermé"
+          "session_closed": "La session quiz a été fermé",
+          "invalid_data": "Les fichiers importés sont corrompus ou l'accès est refusé!"
         }
       }
     }

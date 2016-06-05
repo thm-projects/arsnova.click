@@ -21,7 +21,7 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {HashtagsCollection, hashtagsCollectionSchema, hashtagSchema} from '/lib/hashtags/collection.js';
+import {HashtagsCollection, hashtagsCollectionSchema, hashtagSchema, themeSchema} from '/lib/hashtags/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
@@ -34,19 +34,43 @@ Meteor.methods({
 		});
 		return Boolean(doc);
 	},
-	'HashtagsCollection.addHashtag': function (doc) {
-		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag: doc.hashtag});
-
-		if (HashtagsCollection.find({hashtag: doc.hashtag}).count() > 0) {
+	'HashtagsCollection.addHashtag': function (sessionConfiguration) {
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag: sessionConfiguration.hashtag});
+		if (HashtagsCollection.findOne({hashtag: sessionConfiguration.hashtag})) {
 			throw new Meteor.Error('HashtagsCollection.addHashtag', 'session_exists');
 		}
 
-		HashtagsCollection.insert(doc);
-		EventManagerCollection.update({hashtag: doc.hashtag}, {
+		HashtagsCollection.insert(sessionConfiguration);
+		EventManagerCollection.update({hashtag: sessionConfiguration.hashtag}, {
 			$push: {
 				eventStack: {
 					key: "HashtagsCollection.addHashtag",
-					value: {hashtag: doc.hashtag}
+					value: {hashtag: sessionConfiguration.hashtag}
+				}
+			}
+		});
+	},
+	'HashtagsCollection.setDefaultTheme': function (hashtag, themeName = "theme-dark") {
+		new SimpleSchema({hashtag: hashtagSchema, theme: themeSchema}).validate({hashtag: hashtag, theme: themeName});
+
+		let queryParam = {};
+		if (Meteor.isServer) {
+			queryParam.hashtag = hashtag;
+		}
+
+		if (!HashtagsCollection.findOne(queryParam)) {
+			throw new Meteor.Error('HashtagsCollection.setDefaultTheme', 'session_not_exists');
+		}
+		HashtagsCollection.update(queryParam, {
+			$set: {
+				theme: themeName
+			}
+		});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "HashtagsCollection.setDefaultTheme",
+					value: {hashtag: hashtag, theme: themeName}
 				}
 			}
 		});
@@ -120,31 +144,60 @@ Meteor.methods({
 			return JSON.stringify(exportData);
 		}
 	},
-	'HashtagsCollection.import': function ({data}) {
+	'HashtagsCollection.import': function ({privateKey, data}) {
 		if (Meteor.isServer) {
-			var hashtag = data.hashtagDoc.hashtag;
-			var oldDoc = HashtagsCollection.findOne({hashtag: hashtag});
+			var hashtag = data.hashtag;
+			var oldDoc = HashtagsCollection.findOne({hashtag: hashtag, privateKey: {$ne: privateKey}});
 			if (oldDoc) {
 				throw new Meteor.Error('HashtagsCollection.import', 'hashtag_exists');
 			}
 			var questionList = [];
 			var hashtagDoc = data.hashtagDoc;
+
+			if (!hashtagDoc.theme) {
+				hashtagDoc.theme = "theme-dark";
+			}
+			if (!hashtagDoc.musicVolume) {
+				hashtagDoc.musicVolume = 80;
+			}
+			if (!hashtagDoc.musicEnabled) {
+				hashtagDoc.musicEnabled = 1;
+			}
+			if (!hashtagDoc.musicTitle) {
+				hashtagDoc.musicTitle = "Song1";
+			}
+
+			hashtagDoc.privateKey = privateKey;
 			delete hashtagDoc._id;
 			HashtagsCollection.insert(hashtagDoc);
-			for (var i = 0; i < data.sessionDoc.length; i++) {
-				var question = data.sessionDoc[i];
+			for (var i = 0; i < data.questionListDoc.length; i++) {
+				var question = data.questionListDoc[i];
 				questionList.push({
+					hashtag: question.hashtag,
 					questionText: question.questionText,
-					timer: question.timer
+					timer: question.timer,
+					startTime: question.startTime,
+					questionIndex: question.questionIndex,
+					answerOptionList: [],
+					type: question.type
 				});
-				for (var j = 0; j < question.answers.length; j++) {
-					var answer = question.answers[j];
+				for (var j = 0; j < question.answerOptionList.length; j++) {
+					var answer = question.answerOptionList[j];
 					AnswerOptionCollection.insert({
-						hashtag: hashtag,
-						questionIndex: i,
+						hashtag: answer.hashtag,
+						questionIndex: answer.questionIndex,
 						answerText: answer.answerText,
 						answerOptionNumber: answer.answerOptionNumber,
-						isCorrect: answer.isCorrect
+						isCorrect: answer.isCorrect,
+						type: answer.type
+					});
+					questionList[i].answerOptionList.push({
+						hashtag: answer.hashtag,
+						questionIndex: answer.questionIndex,
+						answerText: answer.answerText,
+						answerOptionNumber: answer.answerOptionNumber,
+						isCorrect: answer.isCorrect,
+						type: answer.type
 					});
 				}
 			}
@@ -152,6 +205,7 @@ Meteor.methods({
 				hashtag: hashtag,
 				questionList: questionList
 			});
+
 			EventManagerCollection.update({hashtag: data.hashtagDoc}, {
 				$push: {
 					eventStack: {

@@ -25,6 +25,9 @@ export const hashtagSchema = {
 	min: 1,
 	max: 25
 };
+export const themeSchema = {
+	type: String
+};
 export const privateKeySchema = {
 	type: String,
 	min: 24,
@@ -46,6 +49,9 @@ export const musicTitleSchema = {
 export const hashtagsCollectionSchema = new SimpleSchema({
 	hashtag: {
 		type: hashtagSchema
+	},
+	theme: {
+		type: themeSchema
 	},
 	privateKey: {
 		type: privateKeySchema

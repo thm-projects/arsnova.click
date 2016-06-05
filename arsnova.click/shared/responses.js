@@ -54,7 +54,7 @@ Meteor.methods({
 		}
 		var responseTime = Number(timestamp) - Number(questionGroupDoc.questionList[responseDoc.questionIndex].startTime);
 
-		if (responseTime > questionGroupDoc.questionList[responseDoc.questionIndex].timer) {
+		if (responseTime > questionGroupDoc.questionList[responseDoc.questionIndex].timer * 1000) {
 			throw new Meteor.Error('ResponsesCollection.addResponse', 'response_timeout');
 		}
 		responseDoc.responseTime = responseTime;

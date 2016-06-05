@@ -15,23 +15,17 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-@import "colors";
 @import "appearance";
 
 .center-vertical {
   position: absolute;
   width: 100%;
   top: 50%;
-  /* TODO: IE 8 and Opera 8 doesn't support translateY*/
   transform: translateY(-50%);
 }
 
 .round-corners, .button {
   border-radius: $corner-radius;
-}
-
-.slider, .slider .noUi-handle {
-  background-color: $slider-color;
 }
 
 .slider.noUi-target {
@@ -46,12 +40,7 @@
   border-bottom-left-radius: 0;
 }
 
-.button-shadow, .button {
-  box-shadow: 1px 1px 5px black;
-}
-
 .input-field {
-  color: black !important;
   height: 50px;
   font-size: 1.5em;
   width: 100%;
@@ -61,12 +50,7 @@
 }
 
 .input-field-bg-color, .input-field {
-  background-color: $input-background-color;
   border: none;
-}
-
-.default-yellow-text-color {
-  color: $input-background-color;
 }
 
 .button {
@@ -93,7 +77,6 @@
 .input-group-letter, .button-result-letter {
   font-size: 2em;
   font-weight: 800;
-  color: $input-group-letter-color;
   min-width: 50px;
   margin-left: 10px;
 }
@@ -106,29 +89,7 @@
   box-shadow: none;
 }
 
-.button-next, .button-success {
-  background-color: $success;
-  color: $success-text-color;
-}
-
-.button-warning, .button-back {
-  background-color: $warning;
-  color: $warning-text-color;
-}
-
-.button-purple {
-  background-color: $info;
-  color: $info-text-color;
-}
-
-.button-default {
-  background-color: $default;
-  color: $default-text-color;
-}
-
 .button-leader {
-  background-color: $input-background-color;
-  color: black;
   box-shadow: none;
   cursor: default;
 }
@@ -146,10 +107,9 @@
 .button-result .percentage {
   position: absolute;
   text-align: center;
-  color: #ffffff;
-  font-weight: bolder;
   padding: 0 10px;
   line-height: 30px;
+  font-weight: bolder;
 }
 
 .button-result .progress {
@@ -157,19 +117,6 @@
   position: relative;
   margin-bottom: 10px;
   height: 30px;
-  background-color: LightSteelBlue;
-}
-
-.progress-success {
-  background-color: $progress-bar-success-color !important;
-}
-
-.progress-failure {
-  background-color: $progress-bar-failure-color !important;
-}
-
-.progress-default {
-  background-color: $input-background-color !important;
 }
 
 /*
@@ -198,25 +145,29 @@
   text-decoration: underline;
 }
 
-@media (max-width:991px) {
-  .fixed-bottom {
-	position: fixed;
-	bottom: 4vw;
-	width: 100%;
-	left: 0;
-	background-color: steelblue;
-	padding: 10px 15px 25px 15px;
-  }
-}
+.fixed-bottom {
+  position: fixed !important;
+  display: none;
+  left: 0;
+  margin-bottom: 5px;
 
-@media (min-width:992px) {
-  .fixed-bottom {
-	position: fixed;
-	bottom: 25px;
-	width: 100%;
-	left: 0;
-	background-color: steelblue;
-	padding: 10px 15px 25px 15px;
+  &.col-xxs-12 {
+    .fixed-bottom-item {
+      margin-bottom: 5px;
+    }
+  }
+
+  .fixed-bottom-item {
+    height: 55px;
+  }
+
+  .fixed-bottom-item-text {
+    display: none;
+  }
+  @media (max-width: 320px), (min-width: 425px) {
+    .fixed-bottom-item-text {
+      display: inline;
+    }
   }
 }
 
@@ -228,31 +179,33 @@
 
 .textarea {
   width: 100%;
-  background-color: gold;
   font-size: 1.5em;
   outline: none;
   resize: none;
   padding: 10px;
   border: 0;
+}
+
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
 }
 
 .previewText {
   width: 100%;
-  background-color: white;
   font-size: 1.5em;
   outline: none;
   resize: none;
   padding: 10px;
   border: 0;
+  overflow: auto;
 }
 
 .check-mark-checked {
-  color: $check-mark-checked;
   width: 30px;
 }
 
 .check-mark-unchecked {
-  color: $check-mark-unchecked;
   font-size: 0.8em;
   width: 30px;
 }
@@ -290,28 +243,15 @@
   animation-name: colorChangingClick;
 }
 
-.success input, .success textarea, input.success, textarea.success {
-  border: 3px solid $success;
-}
-
-.error input, .error textarea, input.error, textarea.error {
-  border: 3px solid $warning;
-}
-
-@media (max-width: 550px) {
-  .ansBtn {
-	display: none;
-  }
-}
-
 .popover-title, .popover.bottom {
-  background-color: $warning;
-  color: $warning-text-color;
-  border-color: $warning;
   font-family: $font;
   font-size: medium;
 }
 
-.popover.bottom > .arrow:after {
-  border-bottom-color: $warning;
+@media (max-width: 550px) {
+  .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6 {
+    .ansBtn {
+      display: none;
+    }
+  }
 }

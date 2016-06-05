@@ -19,6 +19,8 @@ import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {WebApp} from 'meteor/webapp';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {BannedNicksCollection} from '/lib/banned_nicks/collection.js';
+import {forbiddenNicks} from './forbiddenNicks.js';
 
 if (Meteor.isServer) {
 	Meteor.startup(function () {
@@ -31,18 +33,31 @@ if (Meteor.isServer) {
 				hashtag: "hashtags",
 				privateKey: new Mongo.ObjectID()._str,
 				sessionStatus: 0,
-				lastConnection: (new Date()).getTime()
+				lastConnection: (new Date()).getTime(),
+				musicVolume: 0,
+				musicEnabled: 0,
+				musicTitle: "noSong",
+				theme: "theme-default"
 			};
 			// block this hash / pk -> do not use and merge to production server!
 			var blockedHashtag2 = {
 				hashtag: "privateKey",
 				privateKey: new Mongo.ObjectID()._str,
 				sessionStatus: 0,
-				lastConnection: (new Date()).getTime()
+				lastConnection: (new Date()).getTime(),
+				musicVolume: 0,
+				musicEnabled: 0,
+				musicTitle: "noSong",
+				theme: "theme-default"
 			};
 
 			HashtagsCollection.insert(blockedHashtag1);
 			HashtagsCollection.insert(blockedHashtag2);
+		}
+		if (BannedNicksCollection && !BannedNicksCollection.findOne()) {
+			forbiddenNicks.forEach(function (item) {
+				BannedNicksCollection.insert({userNick: item});
+			});
 		}
 	});
 }

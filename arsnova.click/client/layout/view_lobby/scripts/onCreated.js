@@ -19,6 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {calculateButtonCount, setMemberlistObserver} from './lib.js';
 
@@ -26,18 +27,21 @@ Template.memberlist.onCreated(function () {
 	var oldStartTimeValues = {};
 
 	$(window).resize(function () {
-		var finalHeight = $(window).height() - $(".navbar-fixed-top").outerHeight() - $(".navbar-fixed-bottom").outerHeight() - $(".fixed-bottom").outerHeight();
-		$(".container").css("height", finalHeight + "px");
-		Session.set("learnerCountOverride", false);
-		calculateButtonCount();
+		calculateButtonCount(MemberListCollection.find().count());
 	});
 
 	setMemberlistObserver({
 		added: function () {
-			calculateButtonCount();
+			calculateButtonCount(MemberListCollection.find().count());
+			Session.set("allMembersCount", MemberListCollection.find().count());
+			$('#startPolling').removeAttr("disabled");
 		},
 		removed: function () {
-			calculateButtonCount();
+			calculateButtonCount(MemberListCollection.find().count());
+			Session.set("allMembersCount", MemberListCollection.find().count());
+			if (MemberListCollection.find().count() === 0) {
+				$('#startPolling').attr("disabled", "disabled");
+			}
 		}
 	});
 
@@ -48,7 +52,5 @@ Template.memberlist.onCreated(function () {
 
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);
-		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
-		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, -1);
 	}
 });

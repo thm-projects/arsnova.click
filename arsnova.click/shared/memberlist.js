@@ -18,17 +18,18 @@
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {EventManagerCollection, questionIndexSchema} from '/lib/eventmanager/collection.js';
-import {hashtagSchema} from '/lib/hashtags/collection.js';
+import {hashtagSchema, privateKeySchema} from '/lib/hashtags/collection.js';
 import {MemberListCollection, userNickSchema, backgroundColorSchema, foregroundColorSchema, userNickIdSchema} from '/lib/member_list/collection.js';
 
 Meteor.methods({
-	'MemberListCollection.addLearner': function ({hashtag, nick, backgroundColor, foregroundColor}) {
+	'MemberListCollection.addLearner': function ({hashtag, nick, privateKey, backgroundColor, foregroundColor}) {
 		new SimpleSchema({
 			hashtag: hashtagSchema,
 			nick: userNickSchema,
+			privateKey: privateKeySchema,
 			backgroundColor: backgroundColorSchema,
 			foregroundColor: foregroundColorSchema
-		}).validate({hashtag, nick, backgroundColor, foregroundColor});
+		}).validate({hashtag, nick, privateKey, backgroundColor, foregroundColor});
 
 		if (MemberListCollection.findOne({
 				hashtag: hashtag,
@@ -46,6 +47,7 @@ Meteor.methods({
 		MemberListCollection.insert({
 			hashtag: hashtag,
 			nick: nick,
+			privateKey: privateKey,
 			lowerCaseNick: nick.toLowerCase(),
 			backgroundColor: backgroundColor,
 			foregroundColor: foregroundColor,
@@ -118,7 +120,7 @@ Meteor.methods({
 	'MemberListCollection.clearReadConfirmed': function (hashtag) {
 		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
 
-		MemberListCollection.update({hashtag: hashtag}, {$set: {readConfirmed: []}});
+		MemberListCollection.update({hashtag: hashtag}, {$set: {readConfirmed: []}}, {multi: true});
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$push: {
 				eventStack: {

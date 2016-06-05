@@ -19,63 +19,61 @@
 	<nav class="navbar navbar-fixed-top navbar-transparent navbar-gradient">
 		<div class="container-fluid">
 			<div class="row">
-				{{#if isInHomePathOrIsStudent}}
-					<div class="col-md-10 col-md-offset-1 header-title">
-						<div class="container-fluid center-block">
-							<div class="text-center text-size-medium logo-header-chars">
-								<a href="/{{getCurrentResetRoute}}">
-									<span class="color-changing-ars">a r s </span><span
-										class="color-changing-nova">n o v a </span>
-									<span class="color-changing-dot">.</span>
-									<span class="color-changing-click"> c l i c k</span>
-								</a>
-							</div>
-						</div>
-					</div>
-
-				{{else}}
-
-					<div class="col-md-12 header-layout">
-						<div class="row">
-							<div class="col-xs-2">
-								<div class="arsnova-logo">
-									<img src="/images/arsnova_click.svg" alt="arsnova_click_logo"/>
-								</div>
-							</div>
-							<div class="col-xs-8">
-								<div class="text-center header-titel default-yellow-text-color">{{currentHashtag}}</div>
-							</div>
-							<div class="col-xs-2">
-								<div class="row">
-                                    {{#if isSoundEnabled}}
-                                        <div class="col-xs-6 sound-button sound-button-active">
-                                            <span class=" glyphicon glyphicon-music kill-session-switch"></span>
-                                            <p class="sound-button-text">{{_ "region.header.sound"}}</p>
-                                        </div>
-                                    {{else}}
-                                        <div class="col-xs-6 sound-button sound-button-inactive">
-                                            <span class=" glyphicon glyphicon-music kill-session-switch"></span>
-                                            <p class="sound-button-text">{{_ "region.header.sound"}}</p>
-                                        </div>
-                                    {{/if}}
-
-									<div class="col-xs-6">
-										<div class="kill-session-switch-wrapper">
-											<span class="glyphicon glyphicon-off kill-session-switch"></span>
-											<p class="emergency-button-text">{{_ "region.header.reset"}}</p>
-										</div>
-									</div>
-								</div>
-
-							</div>
-
-						</div>
+                {{#if isInHomePathOrIsStudent}}
+                    <div class="col-md-10 col-md-offset-1 header-title">
+                        <div class="container-fluid center-block">
+                            <div class="text-center text-size-medium logo-header-chars">
+                                {{#if isInActiveQuizAndIsStudent}}
+                                    <a href="/{{getCurrentResetRoute}}">
+                                        <span class="color-changing-ars">a r s </span>
+                                        <span class="color-changing-nova">n o v a </span>
+                                        <span class="color-changing-dot">.</span>
+                                        <span class="color-changing-click"> c l i c k</span>
+                                    </a>
+                                {{else}}
+                                    <span class="color-changing-ars">a r s </span>
+                                    <span class="color-changing-nova">n o v a </span>
+                                    <span class="color-changing-dot">.</span>
+                                    <span class="color-changing-click"> c l i c k</span>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                {{else}}
+                    <div class="col-md-12 header-layout">
+                        <div class="row nav-row">
+                            <div class="col-xs-2">
+                                <div class="arsnova-logo">
+                                    <img src="/images/arsnova_click.svg" alt="arsnova_click_logo"/>
+                                </div>
+                            </div>
+                            <div class="col-xs-8">
+                                <div class="text-center header-titel default-yellow-text-color">
+                                    <p>{{currentHashtag}}</p>
+                                </div>
+                            </div>
+                            {{#if isTHMStyleSelectedAndGreaterThan999Pixels}}
+                                <div class="col-xs-2">
+                                    <div class="thm-logo-background">
+                                        <img src="/images/THM_Logo_454x170.png" alt="thm_logo"/>
+                                    </div>
+                                </div>
+                            {{/if}}
+                        </div>
                         {{> yield "header.questionList"}}
-					</div>
-
+                    </div>
 				{{/if}}
 			</div>
 		</div> <!-- row -->
 	</nav>
+    {{> qrCodeDisplay}}
+</template>
+
+<template name="qrCodeDisplay">
+    <div style="display:none;" class="qr-code-container">
+        <div class="qr-code-container-close"><span class="glyphicon glyphicon-remove"></span></div>
+        <div class="qr-code-label">{{_ "region.footer.go_to"}} {{getCurrentSessionName}}</div>
+        <div class="qr-code-item"></div>
+    </div>
 </template>
 

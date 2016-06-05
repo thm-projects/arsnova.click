@@ -15,9 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Blaze} from 'meteor/blaze';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
+import * as localData from '/lib/local_storage.js';
 
 /**
  * This class will construct an empty splashscreen which can be modified via JQuery.
@@ -61,9 +65,10 @@ export class Splashscreen {
 		this.created();
 		this.isCreated = true;
 
-		let duplicateEntry = $('#' + options.templateName + "_" + options.instanceId);
+		let duplicateEntry = $('#' + this.options.templateName + "_" + this.options.instanceId);
 		if (duplicateEntry.length > 0) {
 			duplicateEntry.remove();
+			$('.modal-backdrop').remove();
 		}
 
 		this.rendered();
@@ -90,9 +95,9 @@ export class Splashscreen {
 			throw new Error('Invalid template name');
 		}
 
-		this.templateInstance = Blaze.render(Template[this.options.templateName], document.body);
+		this.templateInstance = Blaze.render(Template[this.options.templateName], document.getElementById("theme-wrapper"));
 		$(this.templateInstance.firstNode()).addClass(this.options.templateName).attr("id", this.options.templateName + "_" + this.options.instanceId);
-		this.templateSelector = $('#' + this.options.templateName + "_" + this.options.instanceId);
+		this.templateSelector = $(this.templateInstance.firstNode());
 
 		this.isOpen = this.options.autostart;
 		if (this.isOpen) {
@@ -182,3 +187,46 @@ export class ErrorSplashscreen extends Splashscreen {
 		}
 	}
 }
+
+export function showReadingConfirmationSplashscreen(index) {
+	var questionDoc = QuestionGroupCollection.findOne();
+	new Splashscreen({
+		autostart: true,
+		templateName: 'readingConfirmedSplashscreen',
+		closeOnButton: '#setReadConfirmed',
+		onRendered: function (instance) {
+			var content = "";
+			if (questionDoc) {
+				mathjaxMarkdown.initializeMarkdownAndLatex();
+				var questionText = questionDoc.questionList[index].questionText;
+				content = mathjaxMarkdown.getContent(questionText);
+			}
+			instance.templateSelector.find('#questionContent').html(content);
+
+			if (localData.containsHashtag(Router.current().params.quizName)) {
+				instance.templateSelector.find('#setReadConfirmed').text(TAPi18n.__("global.close_window"));
+			} else {
+				instance.templateSelector.find('#setReadConfirmed').parent().on('click', '#setReadConfirmed', function () {
+					Meteor.call("MemberListCollection.setReadConfirmed", {
+						hashtag: Router.current().params.quizName,
+						questionIndex: index,
+						nick: localStorage.getItem(Router.current().params.quizName + "nick")
+					}, (err)=> {
+						if (err) {
+							new ErrorSplashscreen({
+								autostart: true,
+								errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+							});
+						}
+					});
+				});
+			}
+		}
+	});
+}
+
+export const isMobileDevice = {
+	isMobileDevice: function () {
+		return $(window).width() < 1024;
+	}
+};

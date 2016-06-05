@@ -15,11 +15,22 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-@import "../../../layout/global/styles/colors";
 @import "../../../layout/global/styles/appearance";
 
-.questionPreviewSplashscreen {
-  .modal-content {
-	background: $splashscreen-question-preview-background-color;
-  }
+#editQuestionText {
+	.invalidQuestion {
+		border-radius: $corner-radius;
+	}
+}
+
+#previewQuestionText {
+	overflow: hidden;
+	resize: none;
+}
+
+.previewTextContainer-small {
+	height: 145px;
+}
+.previewTextContainer-large {
+	height: 290px;
 }

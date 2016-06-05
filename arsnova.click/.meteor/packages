@@ -15,6 +15,8 @@ tracker                 # Meteor's client-side reactive programming library
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 
+standard-minifier-css
+
 iron:router
 aldeed:simple-schema
 reywood:publish-composite
@@ -25,7 +27,6 @@ flyandi:reactive-countdown
 rcy:nouislider
 perak:markdown
 brentjanderson:buzz
-standard-minifier-css
 standard-minifier-js
 tap:i18n
 tap:i18n-ui
@@ -33,3 +34,5 @@ fastclick
 matb33:collection-hooks
 meteorhacks:subs-manager
 observe-sequence
+dschulz:jquery-qrcode
+jt6562:bootstrap-3-switch

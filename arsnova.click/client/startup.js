@@ -24,15 +24,22 @@ export function getUserLanguage() {
 	let userLang = navigator.language || navigator.userLanguage;
 	/* Provide a fallback language */
 	let selectedLang = "en";
-	/* Get the language setting from the local storage */
-	let localStorageLang = localData.getLanguage();
-	/* Override the default language with the browser language if available */
-	if (TAPi18n.languages_names[userLang]) {
-		selectedLang = userLang;
-	}
-	/* Override the browser language with the set language of the local storage if available */
-	if (TAPi18n.languages_names[localStorageLang.data]) {
-		selectedLang = localStorageLang.data;
+	// If private mode is enabled, the access to the local storage will fail.
+	try {
+		/* Get the language setting from the local storage */
+		let localStorageLang = localData.getLanguage();
+		/* Override the default language with the browser language if available */
+		if (TAPi18n.languages_names[userLang]) {
+			selectedLang = userLang;
+		}
+		/* Override the browser language with the set language of the local storage if available */
+		if (TAPi18n.languages_names[localStorageLang.data]) {
+			selectedLang = localStorageLang.data;
+		}
+		localData.initializePrivateKey();
+		localStorage.setItem("localStorageAvailable", true);
+	} catch (err) {
+		// Private mode enabled. Error splashscreen is shown in route.js
 	}
 	return selectedLang;
 }

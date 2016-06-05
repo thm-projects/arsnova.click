@@ -15,70 +15,34 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
-import {TAPi18n} from 'meteor/tap:i18n';
-import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 
-export let validationTrackerHandle = null;
-
-export function setTimer(index, callback) {
-	var hasError = false;
-	// timer is given in seconds
-	const timer = Session.get("slider") * 1000;
-	if (!isNaN(timer)) {
-		Meteor.call("Question.setTimer", {
-			hashtag: Router.current().params.quizName,
-			questionIndex: index,
-			timer: timer
-		}, (err) => {
-			if (err) {
-				hasError = err;
-			} else {
-				localData.addTimer(Router.current().params.quizName, index, timer);
-			}
-		});
-	} else {
-		hasError = {
-			reason: "Timer is not a number"
-		};
-	}
-
-	if (hasError) {
-		new ErrorSplashscreen({
-			autostart: true,
-			errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + hasError.reason)
-		});
-	} else if (typeof callback === "function") {
-		callback();
-	}
-}
-
 export function createSlider(index) {
-	if (typeof QuestionGroupCollection.findOne() === "undefined") {
-		setTimeout(createSlider, 50);
-		return;
-	}
-	if (QuestionGroupCollection.findOne().questionList[index].timer === 0) {
-		Session.set("slider", AnswerOptionCollection.find({questionIndex: index}).count() * 10);
+	const questionItem = Session.get("questionGroup");
+	if (questionItem.getQuestionList()[index].getTimer() === 0) {
+		questionItem.getQuestionList()[index].setTimer(questionItem.getQuestionList()[index].getAnswerOptionList().length * 10);
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
 	}
 	$("#slider").noUiSlider({
-		start: QuestionGroupCollection.findOne().questionList[index].timer / 1000,
+		start: questionItem.getQuestionList()[index].getTimer(),
 		range: {
 			'min': 6,
 			'max': 260
 		}
 	}).on('slide', function (ev, val) {
-		Session.set("slider", Math.round(val));
+		questionItem.getQuestionList()[index].setTimer(Math.round(val));
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
 	}).on('change', function (ev, val) {
-		Session.set("slider", Math.round(val));
+		questionItem.getQuestionList()[index].setTimer(Math.round(val));
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
 	});
 }
 
 export function setSlider(index) {
-	Session.set("slider", (QuestionGroupCollection.findOne().questionList[index].timer / 1000));
-	$("#slider").val((QuestionGroupCollection.findOne().questionList[index].timer / 1000));
+	const questionItem = Session.get("questionGroup");
+	$("#slider").val((questionItem.getQuestionList()[index].getTimer()));
 }

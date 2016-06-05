@@ -1,0 +1,55 @@
+<!--
+* This file is part of ARSnova Click.
+* Copyright (C) 2016 The ARSnova Team
+*
+* ARSnova Click is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* ARSnova Click is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
+
+<template name="showHashtagsSplashscreen">
+	<div class="modal {{#unless isMobileDevice}}fade {{/unless}}splashscreen" id={{instanceId}} role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2>{{_ "view.hashtag_management.quiz_management"}}</h2>
+				</div>
+				<div class="modal-body">
+					<p>{{_ "view.hashtag_management.available_sessions"}}</p><br/>
+					<div class="row">
+						{{#each hashtags}}
+							<div class="col-xs-12 js-my-hash {{#unless isValid this}}in{{/unless}}validQuestion"
+                                 data-toggle="tooltip"
+                                 title="{{#if isValid this}}{{_ "view.hashtag_management.valid_question"}}{{else}}{{_ "view.hashtag_management.invalid_question"}}{{/if}}">{{this}}</div>
+						{{/each}}
+					</div>
+				</div>
+				<div class="modal-footer">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <button type="button" id="closeButton" class="btn btn-warning btn-lg btn-answerOption">
+                                <span class="ansBtn">{{_ "global.close_window"}}</span>
+                                <span class="glyphicon glyphicon-log-out glyph-right" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button id="js-btn-showHashtagManagement" type="button"
+                                    class="btn btn-info btn-lg btn-answerOption">
+                                <span class="glyphicon glyphicon-cog glyph-left" aria-hidden="true"></span>
+                                <span class="ansBtn">{{_ "view.hashtag_management.session_management"}}</span>
+                            </button>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

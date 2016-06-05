@@ -27,7 +27,6 @@
 }
 
 @import "../../../layout/global/styles/appearance";
-@import "../../../layout/global/styles/colors";
 
 .round-corners-top {
   border-radius: $corner-radius $corner-radius 0 0;
@@ -86,10 +85,6 @@
 
 .button-markdown:hover, .button-markdown:active:focus {
   box-shadow: none;
-}
-
-.button-markdown-shadow, .button-markdown {
-  box-shadow: 1px 1px 5px black;
 }
 
 .glyph-markdown {
@@ -157,7 +152,6 @@
 .input-label {
   font-size: 1em;
   font-weight: 600;
-  color: $input-group-letter-color;
   min-width: 20px;
   margin-left: 5px;
 }

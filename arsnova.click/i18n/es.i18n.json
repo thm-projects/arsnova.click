@@ -10,12 +10,27 @@
   },
   "region": {
     "footer": {
+      "go_to": "Ir: ",
+      "show-more": {
+        "show-more-elements": "Todas las opciones disponibles:",
+        "onText": "Activado",
+        "offText": "Desactivado"
+      },
       "footer_bar": {
         "about": "Acerca de",
         "home": "Casa",
         "tos": "Términos de servicio",
         "imprint": "Imprimir",
-        "data_privacy": "Privacidad de datos"
+        "data_privacy": "Privacidad de datos",
+        "languages": "Idiomas",
+        "style": "Estilo",
+        "import": "Importar",
+        "info": "Info",
+        "reading-confirmation": "Confirmación de lectura",
+        "fullscreen": "Pantalla completa",
+        "show_more": "Más",
+        "sound": "Sonar",
+        "qr_code": "QR Code"
       },
       "about": {
         "title": "About the quiz app",
@@ -111,22 +126,31 @@
     },
     "header": {
       "new_question": "Nueva pregunta",
-      "sound": "Sonar",
       "reset": "Reiniciar",
       "yes": "Sí",
       "no": "No",
-      "reset_session_confirmation": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted.<br><br> The created Question(s), including the assigned answer options and timer configurations, will be stored in the local storage of your browser. Except the hashtag-name, all data of this session will be deleted from the server. Do you really want to reset the session?"
+      "reset_session_confirmation": {
+        "title": "Exit the quiz?",
+        "text": {
+          "1": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
+          "2": "Proceed?"
+        }
+      }
     }
   },
   "view": {
     "answeroptions": {
-      "answeroptiontext_placeholder": "Opción de respuesta necesario"
+      "answeroptiontext_placeholder": "Opción de respuesta necesario",
+      "correct": "Correcto",
+      "wrong": "Incorrecto"
     },
     "choose_nickname": {
       "enter_nickname": "Tome un apodo",
       "enter_nickname_here": "Introduzca su apodo aquí",
       "nickname_na_popup": "Este nombre no está disponible!",
-      "nickname_blacklist_popup": "Este nombre es (debido a su significado) no disponible!"
+      "nickname_blacklist_popup": "Este nombre es (debido a su significado) no disponible!",
+      "nickname_too_long": "El nombre es demasiado largo",
+      "nickname_too_short": "El nombre es demasiado corto"
     },
     "hashtag_management": {
       "enter_quiz_name": "Introduzca el nombre del concurso aquí",
@@ -137,15 +161,23 @@
       "quiz_management": "Tests almacenados",
       "available_sessions": "Estas pruebas se almacenan en el navegador:",
       "session_management": "Gestión de prueba",
-      "import": "Cuestionario de importación"
+      "import": "Cuestionario de importación",
+      "delete_session": "Prueba clara",
+      "delete_session_confirmation": "Si elimina permanentemente el '<span id=\"session_name\"></span>' de cuestionarios?",
+      "export": "Cuestionario de exportación",
+      "valid_question": "Prueba válida",
+      "invalid_question": "Cuestionario no válido"
     },
     "leaderboard": {
       "title": {
         "single_question": "Pregunta __questionId__ - Las respuestas correctas a partir de...",
         "all_questions": "Las respuestas correctas a partir de..."
       },
-      "no_attendee_correct": "Desafortunadamente nadie",
+      "no_attendee_correct": "Nadie ha respondido a esta pregunta correctamente",
+      "no_attendee_correct_global": "Nadie ha respondido a todas las preguntas correctamente",
       "question": "Pregunta",
+      "second": "Segundo",
+      "second_plural": "Segundos",
       "show_more": "Desde el 1 más",
       "show_more_plural": "Mostrar %s más",
       "show_less": "Muestra menos"
@@ -156,32 +188,104 @@
       "reading_confirmation": "Confirmación de lectura",
       "show_more": "Desde el 1 más",
       "show_more_plural": "Mostrar %s más",
-      "complete_correct": "Everything correct",
-      "complete_wrong": "Everything wrong",
-      "back_to_lobby": "Back to the lobby",
-      "global_ranking": "Global ranking",
-      "show_question": "Show question",
-      "start_round": "Start round",
-      "confirm_read": "Got that!",
-      "game_over": "Game over",
-      "countdown": "Countdown",
-      "answer_option": "Answer"
+      "complete_correct": "Todo correcto",
+      "complete_wrong": "Todo mal",
+      "back_to_lobby": "Volver al vestíbulo",
+      "global_ranking": "Ranking global",
+      "show_question": "Mostrar pregunta",
+      "show_question_plural": "Mostrar pregunta",
+      "start_round": "Inicio del concurso",
+      "start_round_plural": "Comience ronda",
+      "confirm_read": "Lo tengo!",
+      "game_over": "Juego terminado",
+      "countdown": "Cuenta regresiva",
+      "answer_option": "Responder"
     },
     "lobby": {
-      "title": "Quiz Lobby",
-      "yes": "Yes",
+      "title": "Prueba Vestíbulo",
+      "yes": "Sí",
       "no": "No",
-      "ready": "Ready for quizzing",
+      "ready": "Listo para interrogar",
       "show_more": "Desde el 1 más",
       "show_more_plural": "Mostrar %s más",
       "start_quiz": "Vamonos!",
-      "kick_member_confirmation": "Será el asistente '<span id=\"nickName\"></span>' ser retirado de la sesión?"
+      "kick_member_confirmation": "Será el asistente '<span id=\"nickName\"></span>' ser retirado de la sesión?",
+      "add_kicked_member_to_ban_list": "Desterrar definitivamente los apodos"
     },
     "questions": {
       "enter_question_here": "Introduzca su pregunta aquí",
       "format": "Formato",
       "edit": "Editar",
-      "preview": "Avance"
+      "preview": "Avance",
+      "single_choice_question": "Una única opción",
+      "multiple_choice_question": "Opción multiple",
+      "survey_question": "Encuesta",
+      "ranged_question": "Pregunta de examen y respuestas"
+    },
+    "quiz_summary": {
+      "summary": "Resumen",
+      "quiz_name": "Nombre de la prueba",
+      "quiz_url": "URL para los asistentes",
+      "question_amount": "Cantidad de todas las preguntas",
+      "validation_question_group": "Validación de la prueba completa",
+      "successful": "Exitoso",
+      "failed": "Ha fallado",
+      "correct": "Correcto",
+      "wrong": "Incorrecto",
+      "question": "Pregunta",
+      "text": "Texto",
+      "type": "Tipo",
+      "answer": "Responder",
+      "answer_plural": "Respuestas",
+      "timer": "Cuenta regresiva",
+      "second": "Segundo",
+      "second_plural": "Segundos",
+      "validation": "Validación",
+      "validation_errors": {
+        "types": {
+          "question": "Pregunta",
+          "answerOption": "Responder"
+        },
+        "reasons": {
+          "question_text_too_small": "El texto de la pregunta es demasiado corta",
+          "question_text_too_long": "El texto de la pregunta es demasiado largo",
+          "timer_too_small": "El contador de tiempo es demasiado corto",
+          "timer_too_big": "El contador de tiempo es demasiado largo",
+          "no_valid_answers": "Debe haber al menos una respuesta correcta",
+          "one_valid_answer_required": "Debe haber exactamente una respuesta correcta",
+          "no_valid_answer_required": "No existen respuestas correctas permitidos",
+          "invalid_range": "La distancia mínima debe ser menor que el rango máximo",
+          "answer_text_empty": "El texto de la respuesta no se le permite estar vacío"
+        }
+      },
+      "edit_quiz": "Editar concurso",
+      "start_quiz": "Inicio cuestionario"
+    },
+    "theme_switcher": {
+      "set_theme": "Elegir un tema para todos los asistentes",
+      "select_a_theme_title": "Elegir el tema",
+      "themes": {
+        "default": {
+          "name": "ARSnova.click",
+          "description": "La primera y principal tema de ARSnova.click"
+        },
+        "dark": {
+          "name": "Versión oscura",
+          "description": "Fondo oscuro con bajo contraste"
+        },
+        "elegant": {
+          "name": "Elegante",
+          "description": "Elegante tema para Quizzers sofisticados"
+        },
+        "thm": {
+          "name": "THM",
+          "description": "Diseño Corporativo de la Universidad de Ciencias Aplicadas (THM)"
+        },
+        "arsnova": {
+          "name": "ARSnova",
+          "description": "Ya sabes Ars Nova? Sentirse como en casa!"
+        }
+      }
     },
     "timer": {
       "set_countdown": "Ajuste de cuenta atrás",
@@ -249,7 +353,8 @@
           "answeroption_not_found": "No hay ninguna opción de respuesta con el número de opción respuesta dada",
           "response_timeout": "La respuesta se da fuera del rango de tiempo",
           "insert_leaderboard_failed": "Error al añadir la respuesta se establece en la tabla de posiciones",
-          "session_closed": "La sesión se ha cerrado cuestionario"
+          "session_closed": "La sesión se ha cerrado cuestionario",
+          "invalid_data": "Los archivos importados son corruptos o el acceso es denegado!"
         }
       }
     }

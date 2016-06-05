@@ -16,7 +16,9 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="hashtagView">
-	{{> titel titelText = 'global.arsnova_slogan' }}
+	<div id="landingPageSlogan">
+        {{> titel titelText = 'global.arsnova_slogan' }}
+    </div>
 	<div class="row center-vertical margin-title">
 		<div class="col-md-12">
 			<div class="row distance-top">
@@ -28,14 +30,14 @@
 				</div>
 			</div>
 			<div class="row distance-top">
-				<div class="col-xs-6 col-join-session">
-					<button id="joinSession" class="button button-purple" disabled><span
-							class="glyphicon glyphicon-share-alt glyph-left" aria-hidden="true"></span>{{_ "view.hashtag_management.join_session"}}
+				<div class="col-xxs-12 col-sm-6 col-join-session">
+					<button id="joinSession" class="button button-success" disabled="disabled"><span
+							class="glyphicon glyphicon-thumbs-up glyph-left" aria-hidden="true"></span>{{_ "view.hashtag_management.join_session"}}
 					</button>
 				</div>
-				<div class="col-xs-6 col-create-session">
-					<button id="addNewHashtag" class="button button-warning" disabled>{{_ "view.hashtag_management.create_session"}}<span
-							class="glyphicon glyphicon-plus glyph-right" aria-hidden="true"></span>
+				<div class="col-xxs-12 col-sm-6 col-create-session">
+					<button id="addNewHashtag" class="button button-success" disabled="disabled">{{_ "view.hashtag_management.create_session"}}<span
+							class="glyphicon glyphicon-edit glyph-right" aria-hidden="true"></span>
 					</button>
 				</div>
 			</div>

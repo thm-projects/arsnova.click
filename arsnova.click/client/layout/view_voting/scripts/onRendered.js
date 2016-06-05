@@ -16,11 +16,18 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {formatAnswerButtons} from './lib.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
+import {formatAnswerButtons, startCountdown} from './lib.js';
 
 Template.votingview.onRendered(function () {
 	$(window).resize(function () {
 		formatAnswerButtons();
 	});
 	formatAnswerButtons();
+
+	footerElements.removeFooterElements();
+	footerElements.calculateFooter();
+
+	startCountdown(EventManagerCollection.findOne().questionIndex);
 });

@@ -15,69 +15,58 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-p.header-layout {
-	margin-left: 0;
-	margin-right: 0;
-}
+@import "../global/styles/appearance.scss";
 
 .arsnova-logo {
-	margin-left: 15px;
 	cursor: pointer;
 }
 
-.arsnova-logo img {
-	height: 8vw;
+.thm-logo-background img {
+	max-width: 90%;
+	height: auto;
+	margin-left: 8px;
+	margin-right: 12px;
 }
 
-.kill-session-switch-wrapper {
-	text-align: center;
-	cursor: pointer;
-	color: #b22222;
+.thm-logo-background {
+	margin-top: 1.5vw;
+	background-color: #dfe5e6;
+	border-radius: $corner-radius;
+	margin-right: 12px;
+	width: 100%;
 }
 
-.kill-session-switch-wrapper:hover {
-	color: red;
+.header-titel {
+	p {
+		margin: 0;
+	}
+	cursor: default;
 }
 
-.kill-session-switch {
-	text-align: center;
-	font-size: 3vw;
-	margin-bottom:10px;
-}
+.qr-code-container {
+	top: 0;
+	left: 0;
+	z-index: 1050;
+	position: fixed;
+	border-radius: $corner-radius;
 
-.emergency-button-text {
-	position: relative;
-	top: -8px;
-	font-size: 2vw;
-	margin: 0;
-	line-height: 1em;
-	text-align: center;
-}
-
-.sound-button {
-	text-align: center;
-	cursor: pointer;
-}
-
-.sound-button-active {
-	color: #00CC00;
-	&:hover {
-		color: #33FF00;
+	canvas {
+		&:hover {
+			cursor: pointer;
+		}
 	}
 }
+.qr-code-container-close {
+	position: absolute;
+	font-size: 4vw;
 
-.sound-button-inactive {
-	color: #b22222;
-	&:hover {
-		color: red;
+	.glyphicon-remove {
+		border-radius: $corner-radius;
+		cursor: pointer;
 	}
 }
-
-.sound-button-text {
-	position: relative;
-	top: -8px;
-	font-size: 2vw;
-	margin: 0;
-	line-height: 1em;
+.qr-code-label {
+	font-size: 3vh;
 	text-align: center;
+	line-height: 50px;
 }

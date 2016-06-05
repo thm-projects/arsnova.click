@@ -16,22 +16,37 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="leaderBoard">
-	{{> titel titelText = getTitleText}}
+    {{#unless noLeaderBoardItems}}
+	    {{> titel titelText = getTitleText}}
+    {{/unless}}
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row learner-list margin-title" id="learner-list">
 				{{#if noLeaderBoardItems}}
 					<div class="col-md-12">
-						<h2 class="titel" style="font-weight: bold;">{{_ "view.leaderboard.no_attendee_correct"}}</h2>
+                        {{#if isGlobalRanking}}
+                            <h2 class="titel" style="font-weight: bold;">{{_ "view.leaderboard.no_attendee_correct_global"}}</h2>
+                        {{else}}
+                            <h2 class="titel" style="font-weight: bold;">{{_ "view.leaderboard.no_attendee_correct"}}</h2>
+                        {{/if}}
 					</div>
 				{{ else }}
                     {{#if isGlobalRanking}}
                         {{#each leaderBoardSums}}
-                            <div class="col-md-6">
-                                <button class="button button-leader {{#if isOwnNick value}}color-changing-own-nick{{/if}}">{{getPosition @index}}. {{value}}
-                                    - {{parseTimeToSeconds sumResponseTime}} s
-                                </button>
-                            </div>
+                            {{#if isFirstItem @index}}
+                                <div class="col-xs-12">
+                                    <div class="color-changing-own-nick firstLeaderBordItem">
+                                        <span class="glyphicon glyphicon-education"></span>
+                                        <span>{{getPosition @index}}. {{value}} - {{parseTimeToSeconds sumResponseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
+                                    </div>
+                                </div>
+                            {{else}}
+                                <div class="col-md-6">
+                                    <button class="button button-leader {{#if isOwnNick value}}color-changing-own-nick{{/if}}">{{getPosition @index}}. {{value}}
+                                        - {{parseTimeToSeconds sumResponseTime}} {{_ "view.leaderboard.second" count=2 }}
+                                    </button>
+                                </div>
+                            {{/if}}
                         {{/each}}
                     {{else}}
                         {{#each leaderBoardItems}}
@@ -46,11 +61,20 @@
                                 </div>
                             {{else}}
                                 {{#each value}}
-                                    <div class="col-md-6">
-                                        <button class="button button-leader {{#if isOwnNick nick}}color-changing-own-nick{{/if}}">{{getPosition @index}}. {{nick}}
-                                            - {{parseTimeToSeconds responseTime}} s
-                                        </button>
-                                    </div>
+                                    {{#if isFirstItem @index}}
+                                        <div class="col-xs-12">
+                                            <div class="color-changing-own-nick firstLeaderBordItem">
+                                                <span class="glyphicon glyphicon-education"></span>
+                                                <span>{{getPosition @index}}. {{nick}} - {{parseTimeToSeconds responseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
+                                            </div>
+                                        </div>
+                                    {{else}}
+                                        <div class="col-md-6">
+                                            <button class="button button-leader {{#if isOwnNick nick}}color-changing-own-nick{{/if}}">
+                                                <span>{{getPosition @index}}. {{nick}} - {{parseTimeToSeconds responseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
+                                            </button>
+                                        </div>
+                                    {{/if}}
                                 {{/each}}
                             {{/if}}
                         {{/each}}
@@ -59,36 +83,29 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="fixed-bottom">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				<div class="row distance-top">
-					<div class="col-xs-6">
-						<button class="button button-back" id="js-btn-backToResults">
-							<span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
-							<span class="ansBtn">{{_ "global.back"}}</span>
-						</button>
-					</div>
-					{{#unless noLeaderBoardItems}}
-						{{#if hasTooMuchButtons}}
-							<div class="col-xs-6">
-								{{#if hasOverridenDefaultButtonCount }}
-									<button class="button button-success" id="showLess">
-										<span class="ansBtn">{{_ "view.leaderboard.show_less"}}</span>
-										<span class="glyphicon glyphicon-menu-up glyph-right"></span>
-									</button>
-								{{else}}
-									<button class="button button-success" id="showMore">
-										<span class="ansBtn">{{_ "view.leaderboard.show_more" invisibleResponsesCount count=invisibleResponsesCount}}</span>
-										<span class="glyphicon glyphicon-menu-down glyph-right"></span>
-									</button>
-								{{/if}}
-							</div>
-						{{/if}}
-					{{/unless}}
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" style="display:block;">
+        <div class="col-xs-{{#if noLeaderBoardItems}}12{{else}}{{#if hasTooMuchButtons}}6{{/if}}{{/if}}">
+            <button class="button button-back" id="js-btn-backToResults">
+                <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
+                <span class="ansBtn">{{_ "global.back"}}</span>
+            </button>
+        </div>
+        {{#unless noLeaderBoardItems}}
+            {{#if hasTooMuchButtons}}
+                <div class="col-xs-6">
+                    {{#if hasOverridenDefaultButtonCount }}
+                        <button class="button button-success" id="showLess">
+                            <span class="ansBtn">{{_ "view.leaderboard.show_less"}}</span>
+                            <span class="glyphicon glyphicon-menu-up glyph-right"></span>
+                        </button>
+                    {{else}}
+                        <button class="button button-success" id="showMore">
+                            <span class="ansBtn">{{_ "view.leaderboard.show_more" invisibleResponsesCount count=invisibleResponsesCount}}</span>
+                            <span class="glyphicon glyphicon-menu-down glyph-right"></span>
+                        </button>
+                    {{/if}}
+                </div>
+            {{/if}}
+        {{/unless}}
+    </div>
 </template>

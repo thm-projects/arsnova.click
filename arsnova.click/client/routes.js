@@ -16,10 +16,12 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {SubsManager} from 'meteor/meteorhacks:subs-manager';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
@@ -27,8 +29,8 @@ import {getChangeEventsForRoute} from '/client/plugins/event_stack_observer/scri
 import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onRemoveEvent.js';
 
 const subsCache = new SubsManager({
-	cacheLimit: 7, // maximum number of cached subscriptions
-	expireIn: 15 // any subscription will be expire after 15 minutes, if it's not subscribed again
+	cacheLimit: 8, // maximum number of cached subscriptions
+	expireIn: 15 // any subscription will expire after 15 minutes, if it's not subscribed again
 });
 
 Router.configure({
@@ -36,7 +38,8 @@ Router.configure({
 	loadingTemplate: "loading",
 	waitOn: function () {
 		const subscriptions = [
-			subsCache.subscribe('HashtagsCollection.public')
+			subsCache.subscribe('HashtagsCollection.public'),
+			subsCache.subscribe('BannedNicksCollection.public')
 		];
 		if (typeof Router.current().params.quizName !== "undefined") {
 			subscriptions.push(subsCache.subscribe('ResponsesCollection.join', Router.current().params.quizName));
@@ -61,6 +64,37 @@ Router.onStop(function () {
 });
 
 Router.onBeforeAction(function () {
+	try {
+		localData.initializePrivateKey();
+	} catch (ex) {
+		new ErrorSplashscreen({
+			autostart: true,
+			errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing")
+		});
+	} finally {
+		this.next();
+	}
+});
+
+Router.onBeforeAction(function () {
+	let theme = "theme-dark";
+	if (!localStorage.getItem("theme")) {
+		localStorage.setItem("theme", theme);
+	} else {
+		theme = localStorage.getItem("theme");
+	}
+	if (Router.current().params.quizName) {
+		const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+		if (hashtagDoc && hashtagDoc.theme && !localData.containsHashtag(Router.current().params.quizName)) {
+			sessionStorage.setItem("quizTheme", hashtagDoc.theme);
+			theme = hashtagDoc.theme;
+		}
+	}
+	Session.set("theme", theme);
+	this.next();
+});
+
+Router.onBeforeAction(function () {
 	if (!globalEventStackObserver) {
 		setGlobalEventStackObserver();
 	}
@@ -81,12 +115,6 @@ Router.onBeforeAction(function () {
 
 Router.route('/', {
 	action: function () {
-		try {
-			localData.initializePrivateKey();
-			localStorage.setItem("localStorageAvailable", true);
-		} catch (err) {
-			localStorage.setItem("localStorageAvailable", false);
-		}
 		this.render('home');
 	}
 });
@@ -97,10 +125,16 @@ Router.route('/hashtagmanagement', {
 	}
 });
 
+Router.route('/showMore', {
+	action: function () {
+		this.render('showMore');
+	}
+});
+
 // Routes for Footer-Links
 
-Router.route('/ueber', function () {
-	this.render('ueber');
+Router.route('/about', function () {
+	this.render('about');
 });
 
 Router.route('/agb', function () {
@@ -119,6 +153,12 @@ Router.route('/translate', function () {
 	this.render('translate');
 });
 
+Router.route('/theme', {
+	action: function () {
+		this.render('themeSwitcher');
+	}
+});
+
 Router.route("/:quizName", {
 	action: function () {
 		if (this.ready()) {
@@ -129,31 +169,19 @@ Router.route("/:quizName", {
 					// User joins a session
 					route = "/" + Router.current().params.quizName + "/nick";
 				} else {
-					try {
-						localData.initializePrivateKey();
-						localStorage.setItem("localStorageAvailable", true);
-						if (localData.containsHashtag(Router.current().params.quizName)) {
-							// User edits a session
-							route = "/" + Router.current().params.quizName + "/question";
-						}
-					} catch (err) {
-						localStorage.setItem("localStorageAvailable", false);
+					if (localData.containsHashtag(Router.current().params.quizName)) {
+						// User edits a session
+						route = "/" + Router.current().params.quizName + "/question";
 					}
 				}
 			} else {
-				try {
-					localData.initializePrivateKey();
-					localStorage.setItem("localStorageAvailable", true);
-					// If the user ownes the session he can edit it or create a new one
-					if (HashtagsCollection.findOne(Router.current().params.quizName)) {
-						if (localData.containsHashtag(Router.current().params.quizName)) {
-							route = "/" + Router.current().params.quizName + "/question";
-						}
-					} else {
+				// If the user ownes the session he can edit it or create a new one
+				if (HashtagsCollection.findOne(Router.current().params.quizName)) {
+					if (localData.containsHashtag(Router.current().params.quizName)) {
 						route = "/" + Router.current().params.quizName + "/question";
 					}
-				} catch (err) {
-					localStorage.setItem("localStorageAvailable", false);
+				} else {
+					route = "/" + Router.current().params.quizName + "/question";
 				}
 			}
 			Router.go(route);
@@ -164,15 +192,23 @@ Router.route("/:quizName", {
 });
 
 Router.route('/:quizName/resetToHome', function () {
+	if (EventManagerCollection.findOne() && localData.containsHashtag(Router.current().params.quizName)) {
+		Meteor.call("EventManagerCollection.clear", Router.current().params.quizName);
+	}
+	const userId = MemberListCollection.findOne({nick: localStorage[Router.current().params.quizName + "nick"]});
+	if (!localData.containsHashtag(Router.current().params.quizName) && userId) {
+		Meteor.call("MemberListCollection.removeLearner", Router.current().params.quizName, userId._id);
+	}
+
+	Session.set("questionGroup", undefined);
+	delete Session.keys.questionGroup;
+
 	delete localStorage[Router.current().params.quizName + "nick"];
 	delete localStorage.slider;
 	delete localStorage.lastPage;
 
 	delete sessionStorage.overrideValidQuestionRedirect;
 
-	if (EventManagerCollection.findOne() && localData.containsHashtag(Router.current().params.quizName)) {
-		Meteor.call("EventManagerCollection.clear", Router.current().params.quizName);
-	}
 	Router.go("/");
 });
 
@@ -233,6 +269,19 @@ Router.route('/:quizName/settimer', {
 	}
 });
 
+Router.route('/:quizName/quizSummary', {
+	action: function () {
+		if (localData.containsHashtag(Router.current().params.quizName)) {
+			if (!globalEventStackObserver.isRunning()) {
+				globalEventStackObserver.startObserving(Router.current().params.quizName);
+			}
+			this.render('quizSummary');
+		} else {
+			Router.go("/");
+		}
+	}
+});
+
 Router.route('/:quizName/memberlist', {
 	action: function () {
 		if (!globalEventStackObserver.isRunning()) {
@@ -251,7 +300,6 @@ Router.route('/:quizName/votingview', {
 	}
 });
 
-
 Router.route('/:quizName/onpolling', {
 	action: function () {
 		if (!globalEventStackObserver.isRunning()) {
@@ -269,6 +317,7 @@ Router.route('/:quizName/results', {
 		if (!globalEventStackObserver.isRunning()) {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
 		}
+		Session.set("countdownInitialized", false);
 		this.render('live_results');
 	}
 });
@@ -278,6 +327,17 @@ Router.route('/:quizName/statistics', {
 		if (!globalEventStackObserver.isRunning()) {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
 		}
+		this.render('leaderBoard');
+	}
+});
+
+Router.route('/:quizName/globalLeaderBoard', {
+	action: function () {
+		if (!globalEventStackObserver.isRunning()) {
+			globalEventStackObserver.startObserving(Router.current().params.quizName);
+		}
+		Session.set("showLeaderBoardId", undefined);
+		Session.set("showGlobalRanking", true);
 		this.render('leaderBoard');
 	}
 });

@@ -17,41 +17,30 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {Tracker} from 'meteor/tracker';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
+import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.createTimerView.onRendered(function () {
+	calculateHeaderSize();
+	$(window).resize(calculateHeaderSize);
 	let index = EventManagerCollection.findOne().questionIndex;
 	lib.createSlider(index);
 	lib.setSlider(index);
 	var body = $('body');
 	body.on('click', '.questionIcon:not(.active)', function () {
-		var currentSession = QuestionGroupCollection.findOne();
-		if (!currentSession || index >= currentSession.questionList.length) {
+		if (index >= Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList().length) {
 			return;
 		}
 
-		lib.setTimer(index, function () {
-			Router.go("/" + Router.current().params.quizName + "/question");
-		});
+		Router.go("/" + Router.current().params.quizName + "/question");
 	});
 	body.on('click', '.removeQuestion', function () {
 		index = EventManagerCollection.findOne().questionIndex;
 	});
 
-	lib.validationTrackerHandle = Tracker.autorun(()=> {
-		var validQuestions = Session.get("validQuestions");
-		if (!validQuestions) {
-			return;
-		}
-		var forwardButton = $('#forwardButton');
-		forwardButton.removeAttr("disabled");
-		for (var i = 0; i < validQuestions.length; i++) {
-			if (!validQuestions[i]) {
-				forwardButton.attr("disabled", "disabled");
-			}
-		}
-	});
+	footerElements.removeFooterElements();
+	footerElements.addFooterElement(footerElements.footerElemHome);
+	footerElements.calculateFooter();
 });

@@ -27,6 +27,7 @@ ddp-common@1.2.5
 ddp-server@1.2.6
 deps@1.0.12
 diff-sequence@1.0.5
+dschulz:jquery-qrcode@1.0.2
 ecmascript@0.4.3
 ecmascript-runtime@0.2.10
 ejson@1.0.11
@@ -45,10 +46,11 @@ iron:core@1.0.11
 iron:dynamic-template@1.0.12
 iron:layout@1.0.12
 iron:location@1.0.11
-iron:middleware-stack@1.0.11
+iron:middleware-stack@1.1.0
 iron:router@1.0.12
 iron:url@1.0.11
 jquery@1.11.8
+jt6562:bootstrap-3-switch@3.3.2
 launch-screen@1.0.11
 livedata@1.0.18
 logging@1.0.12

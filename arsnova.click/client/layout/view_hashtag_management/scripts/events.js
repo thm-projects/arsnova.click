@@ -18,16 +18,22 @@
 import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
+import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
 import * as localData from '/lib/local_storage.js';
-import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as lib from './lib.js';
 
 Template.hashtagView.events({
 	"input #hashtag-input-field": function (event) {
 		var inputHashtag = $(event.target).val();
+		if (["?", "/", "\\"].some(function (v) { return inputHashtag.indexOf(v) >= 0; })) {
+			$("#joinSession, #addNewHashtag").attr("disabled", "disabled");
+			return;
+		}
 		if (lib.eventManagerHandle) {
 			lib.eventManagerHandle.stop();
 		}
@@ -62,8 +68,8 @@ Template.hashtagView.events({
 			});
 		}));
 		let addNewHashtagItem = $("#addNewHashtag");
-		addNewHashtagItem.html(TAPi18n.__("view.hashtag_management.create_session") + '<span class="glyphicon glyphicon-plus glyph-right" aria-hidden="true"></span>');
-		if (inputHashtag.length === 0) {
+		addNewHashtagItem.html(TAPi18n.__("view.hashtag_management.create_session") + '<span class="glyphicon glyphicon-edit glyph-right" aria-hidden="true"></span>');
+		if (lib.trimIllegalChars(inputHashtag).length === 0) {
 			addNewHashtagItem.attr("disabled", "disabled");
 			return;
 		}
@@ -83,63 +89,38 @@ Template.hashtagView.events({
 		}
 	},
 	"click #addNewHashtag": function () {
-		if (!localStorage.getItem("localStorageAvailable")) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing")
-			});
-			return;
-		}
 		var hashtag = $("#hashtag-input-field").val().trim();
-		hashtag = hashtag.replace(/ /g,"_");
 		var reenter = false;
 		if (hashtag.length > 0) {
 			var localHashtags = localData.getAllHashtags();
-			if ($.inArray(hashtag, localHashtags) > -1) {
-				var oldHashtagDoc = HashtagsCollection.findOne();
-				if (oldHashtagDoc) {
-					reenter = true;
-					sessionStorage.setItem("overrideValidQuestionRedirect", true);
-					localData.reenterSession(hashtag);
-					lib.connectEventManager(hashtag);
-				}
+			if ($.inArray(hashtag, localHashtags) > -1 && HashtagsCollection.findOne()) {
+				reenter = true;
 			}
-			if (!reenter) {
-				var doc = {
-					privateKey: localData.getPrivateKey(),
+			if (reenter) {
+				sessionStorage.setItem("overrideValidQuestionRedirect", true);
+				const session = localData.reenterSession(hashtag);
+				Session.set("questionGroup", session);
+				lib.connectEventManager(hashtag);
+			} else {
+				const questionGroup = new DefaultQuestionGroup({
 					hashtag: hashtag,
+					questionList: []
+				});
+				questionGroup.addDefaultQuestion(0);
+				for (let i = 0; i < 4; i++) {
+					questionGroup.getQuestionList()[0].addDefaultAnswerOption(i);
+				}
+				Meteor.call('HashtagsCollection.addHashtag', {
+					privateKey: localData.getPrivateKey(),
+					hashtag: questionGroup.getHashtag(),
 					musicVolume: 80,
 					musicEnabled: 1,
-					musicTitle: "Song1"
-				};
-				Meteor.call('HashtagsCollection.addHashtag', doc, (err) => {
-					if (err) {
-						$("#addNewHashtag").removeAttr("disabled");
-						new ErrorSplashscreen({
-							autostart: true,
-							errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
-						});
-					} else {
-						for (var i = 0; i < 4; i++) {
-							Meteor.call("AnswerOptionCollection.addOption", {
-								hashtag: hashtag,
-								questionIndex: 0,
-								answerText: "",
-								answerOptionNumber: i,
-								isCorrect: 0
-							});
-						}
-						Meteor.call("QuestionGroupCollection.insert", {
-							hashtag: hashtag,
-							questionList: [
-								{
-									questionText: "",
-									timer: 40000
-								}
-							]
-						});
-
-						localData.addHashtag(hashtag);
+					musicTitle: "Song1",
+					theme: "theme-default"
+				}, function (err) {
+					if (!err) {
+						localData.addHashtag(questionGroup);
+						Session.set("questionGroup", questionGroup);
 						lib.connectEventManager(hashtag);
 					}
 				});
@@ -203,66 +184,76 @@ Template.hashtagManagement.events({
 	},
 	"click .js-reactivate-hashtag": function (event) {
 		var hashtag = $(event.currentTarget).parent().parent()[0].id;
-		localData.reenterSession(hashtag);
+		Session.set("questionGroup", localData.reenterSession(hashtag));
 		lib.connectEventManager(hashtag);
 	},
-	"click .js-export": function (event) {
-		var hashtag = $(event.currentTarget).parent().parent()[0].id;
-		var exportData = localData.exportFromLocalStorage(hashtag);
-		if (exportData) {
-			var exportDataJson = "text/json;charset=utf-8," + encodeURIComponent(exportData);
-			var a = document.createElement('a');
-			var time = new Date();
-			var timestring = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
-			a.href = 'data:' + exportDataJson;
-			a.download = hashtag + "-" + timestring + ".json";
-			a.innerHTML = '';
-			event.target.appendChild(a);
-			if (localStorage.getItem(Router.current().params.quizName + "exportReady")) {
-				localStorage.setItem(Router.current().params.quizName + "exportReady", undefined);
-			} else {
-				localStorage.setItem(Router.current().params.quizName + "exportReady", true);
-				a.click();
-			}
-		}
-	},
 	"click .js-delete": function (event) {
-		var hashtagRow = $(event.currentTarget).parent().parent();
-		localData.deleteHashtag(hashtagRow[0].id);
-		Meteor.call('Main.deleteEverything', {
-			hashtag: hashtagRow[0].id
+		const hashtagRow = $(event.currentTarget).parent().parent();
+
+		new Splashscreen({
+			autostart: true,
+			templateName: "deleteConfirmationSplashscreen",
+			closeOnButton: "#closeDialogButton, #deleteSessionButton",
+			onRendered: function (instance) {
+				instance.templateSelector.find("#session_name").text(hashtagRow[0].id);
+
+				instance.templateSelector.find("#deleteSessionButton").on('click', function () {
+					localData.deleteHashtag(hashtagRow[0].id);
+					Meteor.call('Main.deleteEverything', {
+						hashtag: hashtagRow[0].id
+					});
+					hashtagRow.hide();
+				});
+			}
 		});
-		hashtagRow.hide();
+	},
+	"click #importFile": function () {
+		$('#js-import').trigger('click');
 	},
 	"change #js-import": function (event) {
 		var fileList = event.target.files;
 		var fileReader = new FileReader();
 		fileReader.onload = function () {
 			var asJSON = JSON.parse(fileReader.result);
-			Meteor.call("HashtagsCollection.import", {
-				data: asJSON
-			}, (err) => {
-				if (err) {
-					new ErrorSplashscreen({
-						autostart: true,
-						errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
-					});
-				} else {
-					localData.importFromFile(asJSON);
-					lib.connectEventManager(asJSON.hashtagDoc.hashtag);
+			let instance = null;
+			switch (asJSON.type) {
+				case "DefaultQuestionGroup":
+					instance = new DefaultQuestionGroup(asJSON);
+					break;
+				default:
+					throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
+			}
+			Meteor.call('HashtagsCollection.addHashtag', {
+				privateKey: localData.getPrivateKey(),
+				hashtag: instance.getHashtag(),
+				musicVolume: 80,
+				musicEnabled: 1,
+				musicTitle: "Song1",
+				theme: "theme-dark"
+			}, function (err) {
+				if (!err) {
+					localData.addHashtag(instance);
+					Session.set("questionGroup", instance);
+					lib.connectEventManager(instance.getHashtag());
 				}
 			});
 		};
 		for (var i = 0; i < fileList.length; i++) {
 			fileReader.readAsBinaryString(fileList[i]);
 		}
+	},
+	"click .startQuiz": function (event) {
+		var hashtag = $(event.currentTarget).parents(".hashtagManagementRow").attr("id");
+		Session.set("questionGroup", localData.reenterSession(hashtag));
+		sessionStorage.setItem("overrideValidQuestionRedirect", true);
+		lib.connectEventManager(hashtag);
 	}
 });
 
 Template.showHashtagsSplashscreen.events({
 	"click .js-my-hash": function (event) {
 		var hashtag = $(event.currentTarget).text();
-		localData.reenterSession(hashtag);
+		Session.set("questionGroup", localData.reenterSession(hashtag));
 		lib.hashtagSplashscreen.destroy();
 		sessionStorage.setItem("overrideValidQuestionRedirect", true);
 		lib.connectEventManager(hashtag);
@@ -270,5 +261,9 @@ Template.showHashtagsSplashscreen.events({
 	"click #js-btn-showHashtagManagement": function () {
 		lib.hashtagSplashscreen.destroy();
 		Router.go("/hashtagmanagement");
+	},
+	"click #closeButton": function () {
+		$('.showHashtagsSplashscreen').remove();
+		$('.modal-backdrop').remove();
 	}
 });

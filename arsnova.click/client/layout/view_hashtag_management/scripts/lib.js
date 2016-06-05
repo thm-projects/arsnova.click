@@ -48,7 +48,13 @@ export function connectEventManager(hashtag) {
 					Router.go("/" + hashtag + "/resetToHome");
 				}
 			});
+		} else {
+			Meteor.call("EventManagerCollection.setActiveQuestion", hashtag, 0);
 		}
 		Router.go("/" + hashtag + "/question");
 	});
+}
+
+export function trimIllegalChars(hashtag) {
+	return hashtag.replace(/ /g,"");
 }

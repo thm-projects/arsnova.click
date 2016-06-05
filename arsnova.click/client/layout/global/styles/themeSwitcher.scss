@@ -1391,12 +1391,7 @@
 			}
 			.rangedValues {
 				color: $default-text-color;
-				text-align: center;
-				margin-bottom: 30px;
 				input[type="number"] {
-					background-color: $background-color;
-					text-align: center;
-					width: 100%;
 					&.invalid {
 						border: 1px solid $bg-rangedSlider-invalid
 					}

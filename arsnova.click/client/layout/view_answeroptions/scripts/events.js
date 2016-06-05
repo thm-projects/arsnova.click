@@ -22,7 +22,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {parseSingleAnswerOptionInput, formatIsCorrectButtons} from './lib.js';
 
-Template.createAnswerOptions.events({
+Template.defaultAnswerOptionTemplate.events({
 	"click #addAnswerOption": function () {
 		const questionItem = Session.get("questionGroup");
 		const answerlist = questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex];

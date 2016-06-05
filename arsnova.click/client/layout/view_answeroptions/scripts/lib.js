@@ -113,53 +113,43 @@ export function createSlider(index) {
 			'max': questionItem.getQuestionList()[index].getMaxRange() + 50 || 100
 		}
 	});
-	sliderObject.on('update', function (val) {
+	sliderObject.on('set', function (val) {
 		const minRange = parseInt(val[0]);
 		const maxRange = parseInt(val[1]);
-		questionItem.getQuestionList()[index].setRange(minRange, maxRange);
-		Session.set("questionGroup", questionItem);
-		localData.addHashtag(questionItem);
-		$('#minRangeInput, #maxRangeInput').removeClass("invalid");
+		try {
+			questionItem.getQuestionList()[index].setRange(minRange, maxRange);
+			Session.set("questionGroup", questionItem);
+			localData.addHashtag(questionItem);
+			$('#minRangeInput, #maxRangeInput').removeClass("invalid");
+		} catch (ex) {
+			$('#minRangeInput, #maxRangeInput').addClass("invalid");
+		}
 	});
-	/*
-	 sliderObject.updateOptions({
-	 margin: 1,
-	 range: {
-	 'min': minRange - 50 < 0 ? 0 : minRange - 50,
-	 'max': maxRange + 50
-	 }
-	 });
-	 */
-	$('#minRangeInput, #maxRangeInput').on("input", function (event) {
+	sliderObject.on('slide', function (val) {
 		const minRange = parseInt($('#minRangeInput').val());
 		const maxRange = parseInt($('#maxRangeInput').val());
 		sliderObject.updateOptions({
 			margin: 1,
 			range: {
-				'min': minRange - 50 < 0 ? 0 : minRange - 50,
-				'max': maxRange + 50
+				'min': [minRange - 50 < 0 ? 0 : minRange - 50],
+				'max': [minRange > maxRange ? minRange + 50 : maxRange + 50]
 			}
 		});
-		sliderObject.set([minRange, maxRange]);
-		/*
-		 try {
-		 questionItem.getQuestionList()[index].setRange(minRange, maxRange);
-		 Session.set("questionGroup", questionItem);
-		 localData.addHashtag(questionItem);
-		 $('#minRangeInput, #maxRangeInput').removeClass("invalid");
-		 console.log(minRange - 50 < 0 ? 0 : minRange - 50, maxRange + 50);
-		 sliderObject.updateOptions({
-		 margin: 1,
-		 range: {
-		 'min': minRange - 50 < 0 ? 0 : minRange - 50,
-		 'max': maxRange + 50
-		 },
-		 values: [minRange, maxRange]
-		 });
-		 } catch (ex) {
-		 $(event.currentTarget).addClass("invalid");
-		 }
-		 */
+	});
+	$('#minRangeInput, #maxRangeInput').on("change", function (event) {
+		const minRange = parseInt($('#minRangeInput').val());
+		const maxRange = parseInt($('#maxRangeInput').val());
+		if (typeof minRange !== "undefined" && typeof maxRange !== "undefined") {
+			const newMaxRange = minRange > maxRange ? minRange + 50 : maxRange + 50;
+			sliderObject.updateOptions({
+				margin: 1,
+				range: {
+					'min': [minRange - 50 < 0 ? 0 : minRange - 50],
+					'max': [newMaxRange]
+				}
+			});
+			sliderObject.set([minRange, newMaxRange - 50]);
+		}
 	});
 }
 

@@ -68,3 +68,7 @@ Template.createAnswerOptions.onRendered(function () {
 	});
 	setTimeout(lib.calculateXsViewport, 25);
 });
+
+Template.rangedAnswerOptionTemplate.onRendered(function () {
+	lib.createSlider(EventManagerCollection.findOne().questionIndex);
+});

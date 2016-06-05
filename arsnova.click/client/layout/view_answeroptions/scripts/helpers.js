@@ -20,8 +20,24 @@ import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Template.createAnswerOptions.helpers({
+	renderTemplate: function () {
+		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+			return;
+		}
+		switch (Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName()) {
+			case "SingleChoiceQuestion":
+			case "MultipleChoiceQuestion":
+			case "SurveyQuestion":
+				return Template.defaultAnswerOptionTemplate;
+			case "RangedQuestion":
+				return Template.rangedAnswerOptionTemplate;
+		}
+	}
+});
+
+Template.defaultAnswerOptionTemplate.helpers({
 	getAnswerOptions: function () {
-		if (!EventManagerCollection.findOne()) {
+		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
 			return;
 		}
 		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList();
@@ -30,7 +46,7 @@ Template.createAnswerOptions.helpers({
 		return String.fromCharCode(Nr + 65);
 	},
 	showDeleteButtonOnStart: function () {
-		if (!EventManagerCollection.findOne()) {
+		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
 			return;
 		}
 		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().length === 1 ? "hide" : "";
@@ -39,9 +55,24 @@ Template.createAnswerOptions.helpers({
 		return item.isValid();
 	},
 	isSurveyQuestion: function () {
-		if (!EventManagerCollection.findOne()) {
+		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
 			return;
 		}
 		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SurveyQuestion";
+	}
+});
+
+Template.rangedAnswerOptionTemplate.helpers({
+	getMinValue: function () {
+		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getMinRange();
+	},
+	getMaxValue: function () {
+		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getMaxRange();
 	}
 });

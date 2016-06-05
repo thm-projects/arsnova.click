@@ -29,7 +29,7 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @throws {Error} If max is not a Number or max is smaller than or equal to the minimum range
 	 */
 	setMaxRange (max) {
-		if (typeof max !== "number" || max <= this[rangeMin]) {
+		if (typeof max !== "number" || max <= this.getMinRange()) {
 			throw new Error("Invalid argument list for RangedQuestion.setMaxRange");
 		}
 		this[rangeMax] = max;
@@ -41,8 +41,8 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @throws {Error} If min is not a Number or min is bigger than or equal to the maximum range
 	 */
 	setMinRange (min) {
-		if (typeof min !== "number" || min >= this[rangeMax]) {
-			throw new Error("Invalid argument list for RangedQuestion.setMinRange");
+		if (typeof min !== "number" || min >= this.getMaxRange()) {
+			throw new Error("Invalid argument list " + min + ", " + this.getMaxRange() + " for RangedQuestion.setMinRange");
 		}
 		this[rangeMin] = min;
 	}

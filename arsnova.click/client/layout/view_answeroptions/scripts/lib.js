@@ -19,6 +19,7 @@ import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {calculateHeaderSize, calculateTitelHeight} from '/client/layout/region_header/lib.js';
+import {noUiSlider} from 'meteor/arsnova.click:nouislider';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as localData from '/lib/local_storage.js';
 
@@ -95,4 +96,42 @@ export function formatIsCorrectButtons() {
 			item.bootstrapSwitch('state', 'true');
 		}
 	});
+}
+
+export function createSlider(index) {
+	const questionItem = Session.get("questionGroup");
+	const slider = $('#slider');
+	const plainSlider = document.getElementById('slider');
+	noUiSlider.create(plainSlider, {
+		step: 1,
+		connect: true,
+		behaviour: 'tap-drag',
+		start: [questionItem.getQuestionList()[index].getMinRange(), questionItem.getQuestionList()[index].getMaxRange()],
+		range: {
+			'min': questionItem.getQuestionList()[index].getMinRange() * 1.5 || 0,
+			'max': questionItem.getQuestionList()[index].getMaxRange() * 1.5 || 100
+		}
+	});
+	slider.on('slide', function (ev, val) {
+		questionItem.getQuestionList()[index].setMaxRange(parseInt(val[1]));
+		questionItem.getQuestionList()[index].setMinRange(parseInt(val[0]));
+		slider.noUiSlider({
+			step: 1,
+			connect: true,
+			behaviour: 'tap-drag',
+			start: [questionItem.getQuestionList()[index].getMinRange(), questionItem.getQuestionList()[index].getMaxRange()],
+			range: {
+				'min': questionItem.getQuestionList()[index].getMinRange(),
+				'max': questionItem.getQuestionList()[index].getMaxRange() + 50
+			}
+		}, true);
+		console.log(questionItem.getQuestionList()[index].getMaxRange() + 50);
+	}).on('change', function (ev, val) {
+
+	});
+}
+
+export function setSlider(index) {
+	const questionItem = Session.get("questionGroup");
+	$("#slider").val((questionItem.getQuestionList()[index].getTimer()));
 }

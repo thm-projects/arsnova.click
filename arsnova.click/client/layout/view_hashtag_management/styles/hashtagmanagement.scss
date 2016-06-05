@@ -64,18 +64,11 @@
 }
 
 .hashtag-management {
-
 	.hashtag-name {
 		font-size: 1.5em;
 		font-size: 3vh;
 		text-align: center;
 		margin: 10px 0 0;
-
-		@media (min-width: 768px) {
-			text-align: left;
-			line-height: 76px;
-			margin: 0;
-		}
 	}
 
 	.btn-hashtagOption {

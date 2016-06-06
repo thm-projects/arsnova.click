@@ -18,7 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {AnswerOptionCollection, answerOptionNumberSchema} from '/lib/answeroptions/collection.js';
-import {ResponsesCollection} from '/lib/responses/collection.js';
+import {ResponsesCollection, inputValueSchema} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {userNickSchema} from '/lib/member_list/collection.js';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
@@ -29,16 +29,31 @@ Meteor.methods({
 		new SimpleSchema({
 			hashtag: hashtagSchema,
 			questionIndex: questionIndexSchema,
-			answerOptionNumber: answerOptionNumberSchema,
 			userNick: userNickSchema
-		}).validate({hashtag: responseDoc.hashtag, questionIndex: responseDoc.questionIndex, answerOptionNumber: responseDoc.answerOptionNumber, userNick: responseDoc.userNick});
+		}).validate({hashtag: responseDoc.hashtag, questionIndex: responseDoc.questionIndex, userNick: responseDoc.userNick});
+
+		const responseValueObject = {};
+		if (typeof responseDoc.answerOptionNumber === "undefined") {
+			if (typeof responseDoc.value === "undefined") {
+				throw new Meteor.Error("ResponsesCollection.addResponse", "invalid_response_value");
+			} else {
+				new SimpleSchema({
+					inputValue: inputValueSchema
+				}).validate({inputValue: responseDoc.value});
+				responseValueObject.inputValue = responseDoc.value;
+			}
+		} else {
+			new SimpleSchema({
+				answerOptionNumber: answerOptionNumberSchema
+			}).validate({answerOptionNumber: responseDoc.answerOptionNumber});
+			responseValueObject.answerOptionNumber = responseDoc.answerOptionNumber;
+		}
 
 		var timestamp = new Date().getTime();
 		var hashtag = responseDoc.hashtag;
 		var dupDoc = ResponsesCollection.findOne({
 			hashtag: responseDoc.hashtag,
 			questionIndex: responseDoc.questionIndex,
-			answerOptionNumber: responseDoc.answerOptionNumber,
 			userNick: responseDoc.userNick
 		});
 		if (dupDoc) {
@@ -58,13 +73,19 @@ Meteor.methods({
 			throw new Meteor.Error('ResponsesCollection.addResponse', 'response_timeout');
 		}
 		responseDoc.responseTime = responseTime;
-		var answerOptionDoc = AnswerOptionCollection.findOne({
-			hashtag: hashtag,
-			questionIndex: responseDoc.questionIndex,
-			answerOptionNumber: responseDoc.answerOptionNumber
-		});
-		if (!answerOptionDoc) {
-			throw new Meteor.Error('ResponsesCollection.addResponse', 'answeroption_not_found');
+		var foundAnswerBase = null;
+		if (typeof responseValueObject.answerOptionNumber === "undefined") {
+			// We have a ranged input here - check if the values are set in the question
+			foundAnswerBase = questionGroupDoc.rangeMin && questionGroupDoc.rangeMax;
+		} else {
+			foundAnswerBase = AnswerOptionCollection.findOne({
+				hashtag: hashtag,
+				questionIndex: responseDoc.questionIndex,
+				answerOptionNumber: responseDoc.answerOptionNumber
+			});
+		}
+		if (!foundAnswerBase) {
+			throw new Meteor.Error('ResponsesCollection.addResponse', 'response_type_not_found');
 		}
 
 		ResponsesCollection.insert(responseDoc);

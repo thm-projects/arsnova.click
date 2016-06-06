@@ -142,7 +142,12 @@
     "answeroptions": {
       "answeroptiontext_placeholder": "Antwortoption eingeben",
       "correct": "Richtig",
-      "wrong": "Falsch"
+      "wrong": "Falsch",
+      "ranged_question": {
+        "title": "Reichweite der richtigen Antworten:",
+        "min_range": "Mindestwert",
+        "max_range": "Maximalwert"
+      }
     },
     "choose_nickname": {
       "enter_nickname": "Gib dir einen Nicknamen",
@@ -302,7 +307,11 @@
       "question": "Frage",
       "send": "Absenden",
       "seconds_left": "Noch 1 Sekunde!",
-      "seconds_left_plural": "Noch __value__ Sekunden!"
+      "seconds_left_plural": "Noch __value__ Sekunden!",
+      "ranged_question": {
+        "title": "Bitte die Antwort eingeben:",
+        "input_placeholder": "Antwort"
+      }
     }
   },
   "plugins": {

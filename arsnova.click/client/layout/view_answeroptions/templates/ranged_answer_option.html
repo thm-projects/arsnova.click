@@ -16,16 +16,17 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="rangedAnswerOptionTemplate">
+    {{> titel titelText = "view.answeroptions.ranged_question.title"}}
     <div class="row center-vertical rangedAnswerOptions">
         <div class="col-xs-12 rangedValues">
             <div class="row">
                 <div class="col-xs-6">
-                    <h3>Mindestwert: </h3>
-                    <input type="number" id="minRangeInput" class="input-field" value="{{getMinValue}}" placeholder="Mindestwert" />
+                    <h3>{{_ "view.answeroptions.ranged_question.min_range"}}:</h3>
+                    <input type="number" id="minRangeInput" class="input-field" value="{{getMinValue}}" placeholder="{{_ "view.answeroptions.ranged_question.min_range"}}" />
                 </div>
                 <div class="col-xs-6">
-                    <h3>Maximalwert: </h3>
-                    <input type="number" id="maxRangeInput" class="input-field" value="{{getMaxValue}}" placeholder="Maximalwert" />
+                    <h3>{{_ "view.answeroptions.ranged_question.max_range"}}: </h3>
+                    <input type="number" id="maxRangeInput" class="input-field" value="{{getMaxValue}}" placeholder="{{_ "view.answeroptions.ranged_question.max_range"}}" />
                 </div>
             </div>
         </div>

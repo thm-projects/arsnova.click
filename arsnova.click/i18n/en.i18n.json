@@ -142,7 +142,12 @@
     "answeroptions": {
       "answeroptiontext_placeholder": "Answer option required",
       "correct": "Correct",
-      "wrong": "Wrong"
+      "wrong": "Wrong",
+      "ranged_question": {
+        "title": "Range of correct answers:",
+        "min_range": "Minimum range",
+        "max_range": "Maximum range"
+      }
     },
     "choose_nickname": {
       "enter_nickname": "Take a nickname",
@@ -301,7 +306,11 @@
       "question": "Question",
       "send": "Send",
       "seconds_left": "1 Second left!",
-      "seconds_left_plural": "__value__ Seconds left"
+      "seconds_left_plural": "__value__ Seconds left",
+      "ranged_question": {
+        "title": "Please enter your answer:",
+        "input_placeholder": "Answer"
+      }
     }
   },
   "plugins": {

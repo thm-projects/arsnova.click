@@ -39,8 +39,8 @@
         <div class="row answer-row">
             {{#if isRangedQuestion}}
                 <div class="col-xs-12 rangedValues center-vertical">
-                    <h1>Bitte die Antwort eingeben: </h1>
-                    <input type="number" id="rangeInput" class="input-field" placeholder="Antwort" />
+                    <h1>{{_ "view.voting.ranged_question.title"}}</h1>
+                    <input type="number" id="rangeInput" class="input-field" placeholder="{{_ "view.voting.ranged_question.input_placeholder"}}" />
                 </div>
             {{else}}
                 {{#each answerOptions}}

@@ -28,6 +28,10 @@ export const responseTimeSchema = {
 	type: Number,
 	min: 0
 };
+export const inputValueSchema = {
+	type: Number,
+	min: 0
+};
 export const responsesCollectionSchema = new SimpleSchema({
 	hashtag: {
 		type: hashtagSchema
@@ -39,7 +43,12 @@ export const responsesCollectionSchema = new SimpleSchema({
 		type: userNickSchema
 	},
 	answerOptionNumber: {
-		type: answerOptionNumberSchema
+		type: answerOptionNumberSchema,
+		optional: true
+	},
+	inputValue: {
+		type: inputValueSchema,
+		optional: true
 	},
 	responseTime: {
 		type: responseTimeSchema

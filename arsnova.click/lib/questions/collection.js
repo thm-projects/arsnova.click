@@ -42,6 +42,10 @@ export const rangeMaxSchema = {
 	type: Number,
 	min: 0
 };
+export const correctValueSchema = {
+	type: Number,
+	min: 0
+};
 
 export const questionGroupSchema = new SimpleSchema({
 	hashtag: hashtagSchema,
@@ -83,6 +87,10 @@ export const questionGroupSchema = new SimpleSchema({
 	},
 	"questionList.$.rangeMax": {
 		type: rangeMaxSchema,
+		optional: true
+	},
+	"questionList.$.correctValue": {
+		type: correctValueSchema,
 		optional: true
 	}
 });

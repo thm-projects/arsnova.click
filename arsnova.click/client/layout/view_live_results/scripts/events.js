@@ -46,7 +46,8 @@ Template.liveResults.events({
 		if (questionElement.type === "RangedQuestion") {
 			hasEmptyAnswers = false;
 			answerContent += TAPi18n.__("view.answeroptions.ranged_question.min_range") + ": " + questionElement.rangeMin + "<br/>";
-			answerContent += TAPi18n.__("view.answeroptions.ranged_question.max_range") + ": " + questionElement.rangeMax + "<br/>";
+			answerContent += TAPi18n.__("view.answeroptions.ranged_question.max_range") + ": " + questionElement.rangeMax + "<br/><br/>";
+			answerContent += TAPi18n.__("view.answeroptions.ranged_question.correct_value") + ": " + questionElement.correctValue + "<br/>";
 		} else {
 			AnswerOptionCollection.find({questionIndex: targetId}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
 				if (!answerOption.answerText) {

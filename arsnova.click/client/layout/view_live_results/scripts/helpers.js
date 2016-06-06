@@ -189,7 +189,11 @@ Template.liveResults.helpers({
 				questionIndex: index,
 				userNick: user.nick
 			});
-			(response && response.inputValue && response.inputValue >= questionItem.rangeMin && response.inputValue <= questionItem.rangeMax) ? inCorrectRange++ : inWrongRange++;
+			if (response && response.inputValue && response.inputValue >= questionItem.rangeMin && response.inputValue <= questionItem.rangeMax) {
+				inCorrectRange++;
+			} else {
+				inWrongRange++;
+			}
 		});
 		return {
 			allCorrect: {

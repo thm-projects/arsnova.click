@@ -100,7 +100,6 @@ export function formatIsCorrectButtons() {
 
 export function createSlider(index) {
 	const questionItem = Session.get("questionGroup");
-	const slider = $('#slider');
 	const plainSlider = document.getElementById('rangedSlider');
 	let sliderObject = noUiSlider.create(plainSlider, {
 		step: 1,
@@ -125,7 +124,7 @@ export function createSlider(index) {
 			$('#minRangeInput, #maxRangeInput').addClass("invalid");
 		}
 	});
-	sliderObject.on('slide', function (val) {
+	sliderObject.on('slide', function () {
 		const minRange = parseInt($('#minRangeInput').val());
 		const maxRange = parseInt($('#maxRangeInput').val());
 		sliderObject.updateOptions({
@@ -136,7 +135,7 @@ export function createSlider(index) {
 			}
 		});
 	});
-	$('#minRangeInput, #maxRangeInput').on("change", function (event) {
+	$('#minRangeInput, #maxRangeInput').on("change", function () {
 		const minRange = parseInt($('#minRangeInput').val());
 		const maxRange = parseInt($('#maxRangeInput').val());
 		if (typeof minRange !== "undefined" && typeof maxRange !== "undefined") {

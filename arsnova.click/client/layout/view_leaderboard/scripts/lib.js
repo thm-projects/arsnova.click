@@ -152,7 +152,7 @@ function getAllNonPollingLeaderBoardItems() {
 			result.push({
 				index: i,
 				value: getLeaderBoardItemsByIndex(i)
-			})
+			});
 		}
 	}
 	return result;

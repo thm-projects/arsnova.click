@@ -112,9 +112,16 @@ export function createSlider(index) {
 			'max': questionItem.getQuestionList()[index].getMaxRange() + 50 || 100
 		}
 	});
-	sliderObject.on('set', function (val) {
-		const minRange = parseInt(val[0]);
-		const maxRange = parseInt(val[1]);
+	sliderObject.on('slide', function (val) {
+		const minRange = parseFloat(val[0]);
+		const maxRange = parseFloat(val[1]);
+		sliderObject.updateOptions({
+			margin: 1,
+			range: {
+				'min': [minRange - 50 < 0 ? 0 : minRange - 50],
+				'max': [minRange > maxRange ? minRange + 50 : maxRange + 50]
+			}
+		});
 		try {
 			questionItem.getQuestionList()[index].setRange(minRange, maxRange);
 			Session.set("questionGroup", questionItem);
@@ -124,20 +131,9 @@ export function createSlider(index) {
 			$('#minRangeInput, #maxRangeInput').addClass("invalid");
 		}
 	});
-	sliderObject.on('slide', function () {
-		const minRange = parseInt($('#minRangeInput').val());
-		const maxRange = parseInt($('#maxRangeInput').val());
-		sliderObject.updateOptions({
-			margin: 1,
-			range: {
-				'min': [minRange - 50 < 0 ? 0 : minRange - 50],
-				'max': [minRange > maxRange ? minRange + 50 : maxRange + 50]
-			}
-		});
-	});
 	$('#minRangeInput, #maxRangeInput').on("change", function () {
-		const minRange = parseInt($('#minRangeInput').val());
-		const maxRange = parseInt($('#maxRangeInput').val());
+		const minRange = parseFloat($('#minRangeInput').val());
+		const maxRange = parseFloat($('#maxRangeInput').val());
 		if (typeof minRange !== "undefined" && typeof maxRange !== "undefined") {
 			const newMaxRange = minRange > maxRange ? minRange + 50 : maxRange + 50;
 			sliderObject.updateOptions({
@@ -148,6 +144,14 @@ export function createSlider(index) {
 				}
 			});
 			sliderObject.set([minRange, newMaxRange - 50]);
+			try {
+				questionItem.getQuestionList()[index].setRange(minRange, maxRange);
+				Session.set("questionGroup", questionItem);
+				localData.addHashtag(questionItem);
+				$('#minRangeInput, #maxRangeInput').removeClass("invalid");
+			} catch (ex) {
+				$('#minRangeInput, #maxRangeInput').addClass("invalid");
+			}
 		}
 	});
 }

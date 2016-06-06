@@ -75,10 +75,10 @@ Template.votingview.events({
 		var responseArr = JSON.parse(Session.get("responses"));
 		if (responseArr.length === 0) {
 			const inputField = $("#rangeInput");
-			if (inputField.length === 0 || inputField.val().length === 0 || isNaN(parseInt(inputField.val()))) {
+			if (inputField.length === 0 || inputField.val().length === 0 || isNaN(parseFloat(inputField.val()))) {
 				return;
 			}
-			makeAndSendRangedResponse(parseInt(inputField.val()));
+			makeAndSendRangedResponse(parseFloat(inputField.val()));
 		} else {
 			AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).forEach(function (cursor) {
 				if (responseArr[cursor.answerOptionNumber]) {
@@ -107,7 +107,7 @@ Template.votingview.events({
 		}
 	},
 	"input #rangeInput": function (event) {
-		if ($(event.currentTarget).val().length > 0 && !isNaN(parseInt($(event.currentTarget).val()))) {
+		if ($(event.currentTarget).val().length > 0 && !isNaN(parseFloat($(event.currentTarget).val()))) {
 			Session.set("hasToggledResponse", true);
 		} else {
 			Session.set("hasToggledResponse", false);

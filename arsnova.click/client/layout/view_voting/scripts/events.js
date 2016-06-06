@@ -22,7 +22,7 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
-import {makeAndSendResponse} from './lib.js';
+import {makeAndSendResponse, makeAndSendRangedResponse} from './lib.js';
 
 Template.votingview.events({
 	'click #js-btn-showQuestionAndAnswerModal': function (event) {
@@ -72,12 +72,20 @@ Template.votingview.events({
 		}
 
 		Session.set("hasSendResponse", true);
-		var responseArr = JSON.parse(Session.get("responses"));
-		AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).forEach(function (cursor) {
-			if (responseArr[cursor.answerOptionNumber]) {
-				makeAndSendResponse(cursor.answerOptionNumber);
+		if (typeof Session.get("responses") === "undefined") {
+			const inputField = $("#rangeInput");
+			if (inputField.val().length === 0 || isNaN(parseInt(inputField))) {
+				return;
 			}
-		});
+			makeAndSendRangedResponse(parseInt(inputField));
+		} else {
+			var responseArr = JSON.parse(Session.get("responses"));
+			AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).forEach(function (cursor) {
+				if (responseArr[cursor.answerOptionNumber]) {
+					makeAndSendResponse(cursor.answerOptionNumber);
+				}
+			});
+		}
 		if (EventManagerCollection.findOne().questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
 			Session.set("sessionClosed", true);
 		}
@@ -96,6 +104,13 @@ Template.votingview.events({
 			Session.set("responses", JSON.stringify(responseArr));
 			Session.set("hasToggledResponse", JSON.stringify(responseArr).indexOf("true") > -1);
 			$(event.target).toggleClass("answer-selected");
+		}
+	},
+	"input #rangeInput": function (event) {
+		if ($(event.currentTarget).val().length > 0 && !isNaN(parseInt($(event.currentTarget).val()))) {
+			Session.set("hasToggledResponse", true);
+		} else {
+			Session.set("hasToggledResponse", false);
 		}
 	}
 });

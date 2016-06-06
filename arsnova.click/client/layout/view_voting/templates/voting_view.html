@@ -38,15 +38,8 @@
 	<div class="row answer-row">
 		{{#if isRangedQuestion}}
             <div class="col-xs-12 rangedValues">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <h3>Manuelle Eingabe: </h3>
-                        <input type="number" id="rangeInput" class="input-field" placeholder="Manuelle Eingabe" />
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12">
-                <div id="rangeSlider" class="rangeSlider"></div>
+                <h3>Bitte die Antwort eingeben: </h3>
+                <input type="number" id="rangeInput" class="input-field" placeholder="Antwort" />
             </div>
         {{else}}
             {{#each answerOptions}}

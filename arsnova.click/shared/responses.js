@@ -102,7 +102,7 @@ Meteor.methods({
 					key: "ResponsesCollection.addResponse",
 					value: {
 						questionIndex: responseDoc.questionIndex,
-						answerOptionNumber: responseDoc.answerOptionNumber,
+						responseValue: responseValueObject,
 						userNick: responseDoc.userNick
 					}
 				}

@@ -21,7 +21,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Template.createTimerView.helpers({
 	slider: function () {
-		if (!EventManagerCollection.findOne()) {
+		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
 			return;
 		}
 		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getTimer();

@@ -48,3 +48,15 @@
 		}
 	}
 }
+
+.rangedAnswerOptions {
+	.rangedValues {
+		text-align: center;
+		margin-bottom: 30px;
+		input[type="number"] {
+			text-align: center;
+			width: 100%;
+			border-radius: $corner-radius
+		}
+	}
+}

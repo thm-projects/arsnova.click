@@ -65,12 +65,7 @@ Template.leaderBoard.helpers({
 	},
 	noLeaderBoardItems: (index)=> {
 		if (Session.get("showGlobalRanking")) {
-			var alwaysRightNicks = getAllNicksWhichAreAlwaysRight();
-			if (alwaysRightNicks.length > 0) {
-				return false;
-			} else {
-				return true;
-			}
+			return getAllNicksWhichAreAlwaysRight().length <= 0;
 		} else {
 			var items = getLeaderBoardItems();
 			if (typeof index !== "undefined") {

@@ -3,6 +3,7 @@ import {AbstractQuestion} from './question_abstract.js';
 
 const rangeMin = Symbol("rangeMin");
 const rangeMax = Symbol("rangeMax");
+const correctValue = Symbol("correctValue");
 
 export class RangedQuestion extends AbstractQuestion {
 
@@ -21,6 +22,7 @@ export class RangedQuestion extends AbstractQuestion {
 		this.removeAllAnswerOptions();
 		this[rangeMin] = options.rangeMin || 0;
 		this[rangeMax] = options.rangeMax || 0;
+		this[correctValue] = options.correctValue || 0;
 	}
 
 	/**
@@ -29,8 +31,8 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @throws {Error} If max is not a Number or max is smaller than or equal to the minimum range
 	 */
 	setMaxRange (max) {
-		if (typeof max !== "number" || max <= this[rangeMin]) {
-			throw new Error("Invalid argument list for RangedQuestion.setMaxRange");
+		if (typeof max !== "number" || max <= this.getMinRange()) {
+			throw new Error("Invalid argument list " + max + ", " + this.getMinRange() + " for RangedQuestion.setMaxRange");
 		}
 		this[rangeMax] = max;
 	}
@@ -41,8 +43,8 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @throws {Error} If min is not a Number or min is bigger than or equal to the maximum range
 	 */
 	setMinRange (min) {
-		if (typeof min !== "number" || min >= this[rangeMax]) {
-			throw new Error("Invalid argument list for RangedQuestion.setMinRange");
+		if (typeof min !== "number" || min >= this.getMaxRange()) {
+			throw new Error("Invalid argument list " + min + ", " + this.getMaxRange() + " for RangedQuestion.setMinRange");
 		}
 		this[rangeMin] = min;
 	}
@@ -77,13 +79,24 @@ export class RangedQuestion extends AbstractQuestion {
 		return this[rangeMin];
 	}
 
+	setCorrectValue (value) {
+		if (typeof value !== "number") {
+			throw new Error("Invalid argument list for RangedQuestion.setCorrectValue");
+		}
+		this[correctValue] = value;
+	}
+
+	getCorrectValue () {
+		return this[correctValue];
+	}
+
 	/**
 	 * Serialized the instance object to a JSON compatible object
 	 * @see AbstractQuestion.serialize()
 	 * @returns {{hashtag, questionText, type, timer, startTime, questionIndex, answerOptionList}|{hashtag: String, questionText: String, type: AbstractQuestion, timer: Number, startTime: Number, questionIndex: Number, answerOptionList: Array}}
 	 */
 	serialize () {
-		return $.extend(super.serialize(), {type: "RangedQuestion", rangeMin: this.getMinRange(), rangeMax: this.getMaxRange()});
+		return $.extend(super.serialize(), {type: "RangedQuestion", rangeMin: this.getMinRange(), rangeMax: this.getMaxRange(), correctValue: this.getCorrectValue()});
 	}
 
 	/**
@@ -93,7 +106,11 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @returns {boolean} True, if the complete Question instance is valid, False otherwise
 	 */
 	isValid () {
-		return super.isValid() && this.getAnswerOptionList().length === 0 && this[rangeMin] < this[rangeMax];
+		return super.isValid() &&
+			this.getAnswerOptionList().length === 0 &&
+			this.getMinRange() < this.getMaxRange() &&
+			this.getCorrectValue() >= this.getMinRange() &&
+			this.getCorrectValue() <= this.getMaxRange();
 	}
 
 	/**
@@ -102,9 +119,13 @@ export class RangedQuestion extends AbstractQuestion {
 	 */
 	getValidationStackTrace () {
 		const parentStackTrace = super.getValidationStackTrace();
-		const hasValidRange = this[rangeMin] < this[rangeMax];
+		const hasValidRange = this.getMinRange() < this.getMaxRange();
+		const hasValidCorrectValue = this.getCorrectValue() >= this.getMinRange() && this.getCorrectValue() <= this.getMaxRange();
 		if (!hasValidRange) {
 			parentStackTrace.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "invalid_range"});
+		}
+		if (!hasValidCorrectValue) {
+			parentStackTrace.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "invalid_correct_value"});
 		}
 		return parentStackTrace;
 	}
@@ -117,7 +138,7 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @returns {boolean} True if both instances are completely equal, False otherwise
 	 */
 	equals (question) {
-		return super.equals(question) && question.getMaxRange() === this[rangeMax] && question.getMinRange() === this[rangeMin];
+		return super.equals(question) && question.getMaxRange() === this.getMaxRange() && question.getMinRange() === this.getMinRange() && question.getCorrectValue() === this.getCorrectValue();
 	}
 
 	/**

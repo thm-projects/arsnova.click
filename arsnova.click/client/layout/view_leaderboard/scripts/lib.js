@@ -20,6 +20,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
 
 export function setMaxResponseButtons(value) {
 	Session.set("maxResponseButtons", value);
@@ -83,23 +84,29 @@ function getLeaderBoardItemsByIndex(index) {
 		var userHasRightAnswers = true;
 		// only put member in leaderboard when he clicked the right amount, then check whether he clicked all the right ones
 		var totalResponseTime = 0;
-		if ((userResponses.count() === rightAnswerOptions.count()) && (userResponses.count() > 0) && userHasRightAnswers) {
+		const questionItem = QuestionGroupCollection.findOne().questionList[index];
+		if ((userResponses.count() === rightAnswerOptions.count() || questionItem.type === "RangedQuestion") && (userResponses.count() > 0) && userHasRightAnswers) {
 			userResponses.forEach(function (userResponse) {
 				param.isCorrect = true;
 				param.answerOptionNumber = userResponse.answerOptionNumber;
-				var checkAnswerOptionDoc = AnswerOptionCollection.findOne(param);
+				param.inputValue = userResponse.inputValue;
+				const checkAnswerOptionDoc = AnswerOptionCollection.findOne(param);
+				const checkQuestionDoc = param.inputValue >= questionItem.rangeMin && param.inputValue <= questionItem.rangeMax;
 				delete param.isCorrect;
 				delete param.answerOptionNumber;
-				if (!checkAnswerOptionDoc) {
+				delete param.inputValue;
+				if (!checkAnswerOptionDoc && !checkQuestionDoc) {
 					userHasRightAnswers = false;
 				} else {
 					totalResponseTime += userResponse.responseTime;
 				}
 			});
 			if (userHasRightAnswers) {
+				// rightAnswerOtions.count() will be 0 for RangedQuestions since they do not contain any answerOptions
+				const responseTime = rightAnswerOptions.count() === 0 ? 1 : rightAnswerOptions.count();
 				allGoodMembers.push({
 					nick: member.nick,
-					responseTime: totalResponseTime / rightAnswerOptions.count()
+					responseTime: totalResponseTime / responseTime
 				});
 			}
 		}
@@ -130,13 +137,18 @@ export function getLeaderBoardItems() {
 }
 
 function getAllNonPollingLeaderBoardItems() {
-	var result = [];
+	const result = [];
+	const questionGroup = QuestionGroupCollection.findOne();
 	for (var i = 0; i <= EventManagerCollection.findOne().questionIndex; i++) {
 		// just pick leaderBoardItems for sc & mc questions, pollings doesn't matter
-		if (AnswerOptionCollection.find({
-				questionIndex: i,
-				isCorrect: true
-			}).count() > 0) {
+		if (AnswerOptionCollection.find({questionIndex: i, isCorrect: true}).count() > 0) {
+			result.push({
+				index: i,
+				value: getLeaderBoardItemsByIndex(i)
+			});
+		}
+		// Now pick the leaderBoardItems for ranged questions aswell
+		if (questionGroup.questionList[i].type === "RangedQuestion") {
 			result.push({
 				index: i,
 				value: getLeaderBoardItemsByIndex(i)

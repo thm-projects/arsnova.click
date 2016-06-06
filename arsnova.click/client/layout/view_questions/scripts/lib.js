@@ -100,6 +100,9 @@ export function addQuestion(index) {
 	if (questionItem.getQuestionList()[index].constructor.name !== questionType) {
 		const serialized = questionItem.getQuestionList()[index].serialize();
 		delete serialized.type;
+		if (questionType === "RangedQuestion") {
+			serialized.timer = "10";
+		}
 		questionItem.addQuestion(questionReflection[questionType](serialized), index);
 		// Check if we changed to the survey question -> remove isCorrect values then
 		if (questionType === "SurveyQuestion") {
@@ -177,14 +180,11 @@ export function getQuestionTypes() {
 			translationName: "view.questions.multiple_choice_question",
 			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "MultipleChoiceQuestion" ? 'selected' : ""
 		},
-		/*
-		 Disabled because not yet implemented!
-		 {
-		 id: "RangedQuestion",
-		 translationName: "view.questions.ranged_question",
-		 selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "RangedQuestion" ? 'selected' : ""
-		 },
-		 */
+		{
+			id: "RangedQuestion",
+			translationName: "view.questions.ranged_question",
+			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "RangedQuestion" ? 'selected' : ""
+		},
 		{
 			id: "SurveyQuestion",
 			translationName: "view.questions.survey_question",

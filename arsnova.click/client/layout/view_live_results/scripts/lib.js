@@ -31,6 +31,9 @@ export let routeToLeaderboardTimer = null;
 let questionIndex = -1;
 
 export function deleteCountdown() {
+	if (countdown) {
+		countdown.stop();
+	}
 	countdown = null;
 }
 
@@ -40,6 +43,19 @@ export function deleteCountdown() {
 export function hslColPerc(percent, start, end) {
 	var a = percent / 100, b = end * a, c = b + start;
 	return 'hsl(' + c + ',100%,25%)';
+}
+
+export function isCountdownZero(index) {
+	let eventDoc = EventManagerCollection.findOne();
+	if (!eventDoc) {
+		return false;
+	}
+	if (!countdown || Session.get("sessionClosed") || !Session.get("countdownInitialized") || eventDoc.questionIndex !== index) {
+		return true;
+	} else {
+		var timer = Math.round(countdown.get());
+		return timer <= 0;
+	}
 }
 
 export function getPercentRead(index) {

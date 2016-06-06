@@ -23,6 +23,15 @@ import * as localData from '/lib/local_storage.js';
 import {parseSingleAnswerOptionInput, formatIsCorrectButtons} from './lib.js';
 
 Template.createAnswerOptions.events({
+	"click #backButton": function () {
+		Router.go("/" + Router.current().params.quizName + "/question");
+	},
+	"click #forwardButton": function () {
+		Router.go("/" + Router.current().params.quizName + "/settimer");
+	}
+});
+
+Template.defaultAnswerOptionTemplate.events({
 	"click #addAnswerOption": function () {
 		const questionItem = Session.get("questionGroup");
 		const answerlist = questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex];
@@ -65,12 +74,6 @@ Template.createAnswerOptions.events({
 				answerOptionsField.scrollTop(answerOptionsField[0].scrollHeight);
 			}
 		}
-	},
-	"click #backButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/question");
-	},
-	"click #forwardButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/settimer");
 	},
 	"keydown .input-field": function (event) {
 		if ((event.keyCode === 9 || event.keyCode === 13) && !event.shiftKey) {

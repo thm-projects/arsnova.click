@@ -18,8 +18,9 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {countdown} from './lib.js';
 
 Template.votingview.helpers({
@@ -36,5 +37,8 @@ Template.votingview.helpers({
 		if (Session.get("countdownInitialized")) {
 			return TAPi18n.__("view.voting.seconds_left", {value: countdown.get(), count: countdown.get()});
 		}
+	},
+	isRangedQuestion: function () {
+		return QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type === "RangedQuestion";
 	}
 });

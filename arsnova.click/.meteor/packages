@@ -24,7 +24,6 @@ aldeed:collection2
 twbs:bootstrap
 fourseven:scss
 flyandi:reactive-countdown
-rcy:nouislider
 perak:markdown
 brentjanderson:buzz
 standard-minifier-js
@@ -36,3 +35,4 @@ meteorhacks:subs-manager
 observe-sequence
 dschulz:jquery-qrcode
 jt6562:bootstrap-3-switch
+arsnova.click:nouislider

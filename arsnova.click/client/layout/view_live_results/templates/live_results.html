@@ -80,13 +80,34 @@
                             backgroundClass = "progress-reading_confirmation"
 						}}
 						{{#if hasReadConfirmationRequested displayIndex}}
-							{{#each answerList displayIndex}}
-								{{#if isCountdownZero questionIndex}}
-									{{> form_group name = name absolute = absolute percent = percent isCorrect = isCorrect backgroundClass = (getCSSClassForIsCorrect isCorrect) }}
-								{{else}}
-									{{> form_group name = name absolute = absolute percent = percent backgroundClass = (getCSSClassForIsCorrect -1) }}
-								{{/if}}
-							{{/each}}
+                            {{#if isRangedQuestion displayIndex}}
+                                {{#with rangedAnswerResult displayIndex}}
+                                    {{> form_group
+                                        name = "view.liveResults.guessed_correct"
+                                        absolute = allCorrect.absolute
+                                        percent = allCorrect.percent
+                                        isCorrect = 1
+                                        id = 0
+                                        backgroundClass = (hideCssIfCountdownRunning displayIndex (getCSSClassForIsCorrect 1))
+                                    }}
+                                    {{> form_group
+                                        name = "view.liveResults.guessed_wrong"
+                                        absolute = allWrong.absolute
+                                        percent = allWrong.percent
+                                        isCorrect = 0
+                                        id = 1
+                                        backgroundClass = (hideCssIfCountdownRunning displayIndex (getCSSClassForIsCorrect 0))
+                                    }}
+                                {{/with}}
+                            {{else}}
+                                {{#each answerList displayIndex}}
+                                    {{#if isCountdownZero questionIndex}}
+                                        {{> form_group name = name absolute = absolute percent = percent isCorrect = isCorrect backgroundClass = (getCSSClassForIsCorrect isCorrect) }}
+                                    {{else}}
+                                        {{> form_group name = name absolute = absolute percent = percent backgroundClass = (getCSSClassForIsCorrect -1) }}
+                                    {{/if}}
+                                {{/each}}
+                            {{/if}}
 						{{else}}
 							{{#if showMoreButton displayIndex}}
 								<div class="row more-learners-row">
@@ -139,7 +160,7 @@
                 <div class="row">
                     <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" style="display: block;">
                         <div class="row">
-                            <div class="col-xs-{{#if showGlobalLeaderboardButton}}{{#if hasCorrectAnswerOptions}}6{{/if}}{{else}}{{#if hasNextQuestion}}6{{else}}12{{/if}}{{/if}}">
+                            <div class="col-xs-{{#if showGlobalLeaderboardButton}}{{#if hasCorrectAnswerOptionsOrRangedQuestion}}6{{/if}}{{else}}{{#if hasNextQuestion}}6{{else}}12{{/if}}{{/if}}">
                                 <button id="backButton" class="button button-back disableOnActiveCountdown">
                                     <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
                                     <span class="ansBtn">{{_ "view.liveResults.back_to_lobby"}}</span>
@@ -147,7 +168,7 @@
                             </div>
                             <div class="col-xs-6">
                                 {{#if showGlobalLeaderboardButton}}
-                                    {{#if hasCorrectAnswerOptions}}
+                                    {{#if hasCorrectAnswerOptionsOrRangedQuestion}}
                                         <button class="button button-next disableOnActiveCountdown" id="goGlobalRanking">
                                             <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
                                             <span class="ansBtn">{{_ "view.liveResults.global_ranking"}}</span>
@@ -177,7 +198,7 @@
 			{{/unless}}
             {{> gamificationAnimation}}
         {{else}}
-            {{#unless isRunningQuestion}}{{#if showGlobalLeaderboardButton}}{{#if hasCorrectAnswerOptions}}
+            {{#unless isRunningQuestion}}{{#if showGlobalLeaderboardButton}}{{#if hasCorrectAnswerOptionsOrRangedQuestion}}
                 <div class="row">
                     <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" style="display: block;bottom:0 !important;padding-bottom: 30px;">
                         <button class="button button-next disableOnActiveCountdown" id="goGlobalRanking">

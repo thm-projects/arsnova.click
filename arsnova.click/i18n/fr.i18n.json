@@ -142,7 +142,13 @@
     "answeroptions": {
       "answeroptiontext_placeholder": "Option de réponse nécessaire",
       "correct": "Correct",
-      "wrong": "Faux"
+      "wrong": "Faux",
+      "ranged_question": {
+        "title": "Gamme de réponses correctes",
+        "correct_value": "La valeur correcte",
+        "min_range": "Portée minimale",
+        "max_range": "Portée maximale"
+      }
     },
     "choose_nickname": {
       "enter_nickname": "Prendre un surnom",
@@ -199,7 +205,9 @@
       "confirm_read": "J'ai lu la question!",
       "game_over": "Jeu terminé",
       "countdown": "Compte à rebours",
-      "answer_option": "Répondre"
+      "answer_option": "Répondre",
+      "guessed_correct": "Estimé correctement",
+      "guessed_wrong": "Mauvais estimé"
     },
     "lobby": {
       "title": "Quiz Lobby",
@@ -255,6 +263,7 @@
           "one_valid_answer_required": "Il doit y avoir exactement une réponse correcte",
           "no_valid_answer_required": "Il n'y a pas de réponses correctes permis",
           "invalid_range": "La gamme minimale doit être inférieure à la portée maximale",
+          "invalid_correct_value": "La valeur correcte doit être dans le cadre de la gamme",
           "answer_text_empty": "Le texte de la réponse ne peut pas être vide"
         }
       },
@@ -301,7 +310,11 @@
       "question": "Question",
       "send": "Envoyer",
       "seconds_left": "1 Secondes gauche!",
-      "seconds_left_plural": "__value__ Secondes gauche"
+      "seconds_left_plural": "__value__ Secondes gauche",
+      "ranged_question": {
+        "title": "S'il vous plaît entrer votre réponse!",
+        "input_placeholder": "Répondre"
+      }
     }
   },
   "plugins": {

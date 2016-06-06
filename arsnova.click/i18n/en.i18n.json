@@ -142,7 +142,13 @@
     "answeroptions": {
       "answeroptiontext_placeholder": "Answer option required",
       "correct": "Correct",
-      "wrong": "Wrong"
+      "wrong": "Wrong",
+      "ranged_question": {
+        "title": "Range of correct answers",
+        "correct_value": "Correct value",
+        "min_range": "Minimum range",
+        "max_range": "Maximum range"
+      }
     },
     "choose_nickname": {
       "enter_nickname": "Take a nickname",
@@ -199,7 +205,9 @@
       "confirm_read": "Got that!",
       "game_over": "Game over",
       "countdown": "Countdown",
-      "answer_option": "Answer"
+      "answer_option": "Answer",
+      "guessed_correct": "Correctly estimated",
+      "guessed_wrong": "Wrong estimated"
     },
     "lobby": {
       "title": "Quiz Lobby",
@@ -255,6 +263,7 @@
           "one_valid_answer_required": "There must be exactly one correct answer",
           "no_valid_answer_required": "There are no correct answers allowed",
           "invalid_range": "The minimum range must be smaller than the maximum range",
+          "invalid_correct_value": "The correct value must be in the scope of the range",
           "answer_text_empty": "The answer's text is not allowed to be empty"
         }
       },
@@ -301,7 +310,11 @@
       "question": "Question",
       "send": "Send",
       "seconds_left": "1 Second left!",
-      "seconds_left_plural": "__value__ Seconds left"
+      "seconds_left_plural": "__value__ Seconds left",
+      "ranged_question": {
+        "title": "Please enter your answer!",
+        "input_placeholder": "Answer"
+      }
     }
   },
   "plugins": {

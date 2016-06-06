@@ -67,6 +67,12 @@
 .modal-footer {
   border-top: none;
   padding: 20px;
+
+  .btn-answerOption {
+    margin: 15px 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .resizeableImage {

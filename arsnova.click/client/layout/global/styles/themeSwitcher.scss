@@ -76,6 +76,10 @@
 
 	$disabled-button-background: #808080;
 
+	$bg-rangedSlider-invalid: $warning;
+	$bg-rangedSlider-valid: $success;
+	$bg-rangedSlider-handle: rebeccapurple;
+
 	$grey-button-background: #808080;
 	$grey-button-color: white;
 
@@ -1371,6 +1375,28 @@
 		}
 		.input-label {
 			color: $input-group-letter-color;
+		}
+		.rangedAnswerOptions {
+			.rangedSlider {
+				background-color: $bg-rangedSlider-invalid;
+				.noUi-background {
+					background-color: $bg-rangedSlider-invalid;
+				}
+				.noUi-connect {
+					background-color: $bg-rangedSlider-valid;
+				}
+				.noUi-handle {
+					background-color: $bg-rangedSlider-handle;
+				}
+			}
+		}
+		.rangedValues {
+			color: $default-text-color;
+			input[type="number"] {
+				&.invalid {
+					border: 3px solid $bg-rangedSlider-invalid
+				}
+			}
 		}
 		.soundConfig {
 			.modal-content {

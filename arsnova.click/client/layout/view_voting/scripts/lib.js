@@ -114,6 +114,22 @@ export function makeAndSendResponse(answerOptionNumber) {
 	});
 }
 
+export function makeAndSendRangedResponse(value) {
+	Meteor.call('ResponsesCollection.addResponse', {
+		hashtag: Router.current().params.quizName,
+		questionIndex: EventManagerCollection.findOne().questionIndex,
+		inputValue: value,
+		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
+	}, (err) => {
+		if (err) {
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+			});
+		}
+	});
+}
+
 function calculateAnswerRowHeight() {
 	return $(window).height() - $('.header-title').height() - $('#appTitle').height() - $('.voting-scripts-buttons').height() - $('.navbar-fixed-bottom').height() - 15;
 }

@@ -96,29 +96,31 @@ function addLiveresultsChangeEvents() {
 	], function (key, value) {
 		if (!isNaN(value.questionIndex) && value.questionIndex !== -1) {
 			if (localData.containsHashtag(Router.current().params.quizName)) {
-				new Splashscreen({
-					autostart: true,
-					instanceId: "answers_" + value.questionIndex,
-					templateName: 'questionAndAnswerSplashscreen',
-					closeOnButton: '#js-btn-hideQuestionModal',
-					onRendered: function (instance) {
-						var content = "";
-						mathjaxMarkdown.initializeMarkdownAndLatex();
-						AnswerOptionCollection.find({questionIndex: value.questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
-							if (!answerOption.answerText) {
-								answerOption.answerText = "";
-							}
+				if (QuestionGroupCollection.findOne().questionList[value.questionIndex].type !== "RangedQuestion") {
+					new Splashscreen({
+						autostart: true,
+						instanceId: "answers_" + value.questionIndex,
+						templateName: 'questionAndAnswerSplashscreen',
+						closeOnButton: '#js-btn-hideQuestionModal',
+						onRendered: function (instance) {
+							var content = "";
+							mathjaxMarkdown.initializeMarkdownAndLatex();
+							AnswerOptionCollection.find({questionIndex: value.questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
+								if (!answerOption.answerText) {
+									answerOption.answerText = "";
+								}
 
-							content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
-							content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
-						});
+								content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+								content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+							});
 
-						instance.templateSelector.find('#answerContent').html(content);
-						setTimeout(function () {
-							instance.close();
-						}, 10000);
-					}
-				});
+							instance.templateSelector.find('#answerContent').html(content);
+							setTimeout(function () {
+								instance.close();
+							}, 10000);
+						}
+					});
+				}
 				if (value.questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
 					footerElements.removeFooterElement(footerElements.footerElemReadingConfirmation);
 				} else {
@@ -148,7 +150,7 @@ function addOnPollingChangeEvents() {
 		let memberWithGivenResponsesAmount = _.uniq(allMemberResponses, false, function (user) {
 			return user.userNick;
 		}).length;
-		let memberAmount = MemberListCollection.find().fetch().length;
+		let memberAmount = MemberListCollection.find().count();
 		if (memberWithGivenResponsesAmount === memberAmount) {
 			if (localData.containsHashtag(Router.current().params.quizName)) {
 				liveResultsLib.countdownFinish();

@@ -55,30 +55,37 @@
 }
 
 #liveResultsFrame {
-  #countdownAnimationWrapper {
-    z-index: 1070;
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
+	#countdownAnimationWrapper {
+		z-index: 1070;
+		position: fixed;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 100%;
 
-    #countdownAnimation {
-      z-index: 1070;
-      position: fixed;
-      top: 0;
-      left: calc(50% - 150px);
-      width: 100%;
-      height: 100%;
-      background-image: none;
-      background-position: 0 100%;
-      background-repeat: no-repeat;
-    }
-  }
+		#countdownAnimation {
+			z-index: 1070;
+			position: fixed;
+			top: 0;
+			left: calc(50% - 150px);
+			width: 100%;
+			height: 100%;
+			background-image: none;
+			background-position: 0 100%;
+			background-repeat: no-repeat;
+		}
+	}
+
 	.top-bar-content {
 		margin-top: 18px;
 		text-align: center;
 		font-family: Georgia, serif;
+	}
+
+	.btn-answerOption {
+		margin: 15px 0;
+		width: 100%;
+		height: 100%;
 	}
 }
 

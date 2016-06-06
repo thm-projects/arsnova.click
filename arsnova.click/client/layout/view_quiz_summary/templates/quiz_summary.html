@@ -21,9 +21,14 @@
                             <h4>{{_ "view.quiz_summary.answer" count=2}}: </h4>
                         </div>
                         <div>
-                            {{#each this.getAnswerOptionList}}
-                                <p>{{_ "view.quiz_summary.answer" count=1}} {{getNormalizedIndex this.getAnswerOptionNumber}}{{#unless isVotingQuestion ../typeName}} ({{_ (getIsCorrectAnswerOption this.getIsCorrect)}}){{/unless}}: {{this.getAnswerText}}</p>
-                            {{/each}}
+                            {{#if isRangedQuestion typeName}}
+                                <p>Mindestwert: {{getMinRange}}</p>
+                                <p>Maximalwert: {{getMaxRange}}</p>
+                            {{else}}
+                                {{#each this.getAnswerOptionList}}
+                                    <p>{{_ "view.quiz_summary.answer" count=1}} {{getNormalizedIndex this.getAnswerOptionNumber}}{{#unless isVotingQuestion ../typeName}} ({{_ (getIsCorrectAnswerOption this.getIsCorrect)}}){{/unless}}: {{this.getAnswerText}}</p>
+                                {{/each}}
+                            {{/if}}
                         </div>
                     </div>
                 </div>

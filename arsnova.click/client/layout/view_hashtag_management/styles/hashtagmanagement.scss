@@ -64,25 +64,35 @@
 }
 
 .hashtag-management {
-	.hashtag-name {
-		font-size: 1.5em;
-		font-size: 3vh;
-		text-align: center;
-		margin: 10px 0 0;
-	}
 
-	.btn-hashtagOption {
-		margin: 5px 0 15px;
-		width: 100%;
-		height: 100%;
+	.hashtagManagementRow {
 
-		@media (min-width: 768px) {
-			margin: 15px 0 15px;
+		.hashtag-name {
+			font-size: 1.5em;
+			font-size: 3vh;
+			text-align: center;
+			margin: 10px 0 0;
 		}
-	}
 
-	hr {
-		margin: 0;
+		.btn-hashtagOption {
+			margin: 5px 0 15px;
+			width: 100%;
+			height: 100%;
+
+			@media (min-width: 768px) {
+				margin: 15px 0 15px;
+			}
+		}
+
+		hr {
+			margin: 0;
+		}
+
+		.btn-answerOption {
+			margin: 15px 0;
+			width: 100%;
+			height: 100%;
+		}
 	}
 }
 

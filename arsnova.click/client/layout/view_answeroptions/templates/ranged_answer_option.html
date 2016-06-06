@@ -1,0 +1,41 @@
+<!--
+* This file is part of ARSnova Click.
+* Copyright (C) 2016 The ARSnova Team
+*
+* ARSnova Click is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* ARSnova Click is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
+
+<template name="rangedAnswerOptionTemplate">
+    {{> titel titelText = "view.answeroptions.ranged_question.title"}}
+    <div class="row center-vertical rangedAnswerOptions">
+        <div class="col-xs-12 rangedValues">
+            <div class="row">
+                <div class="col-xs-12 col-md-4">
+                    <h3>{{_ "view.answeroptions.ranged_question.min_range"}}</h3>
+                    <input type="number" id="minRangeInput" class="input-field" step="any" min="0" value="{{getMinValue}}" placeholder="{{_ "view.answeroptions.ranged_question.min_range"}}" />
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <h3>{{_ "view.answeroptions.ranged_question.correct_value"}}</h3>
+                    <input type="number" id="correctValueInput" class="input-field" step="any" min="0" value="{{getCorrectValue}}" placeholder="{{_ "view.answeroptions.ranged_question.min_range"}}" />
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <h3>{{_ "view.answeroptions.ranged_question.max_range"}}</h3>
+                    <input type="number" id="maxRangeInput" class="input-field" step="any" min="0" value="{{getMaxValue}}" placeholder="{{_ "view.answeroptions.ranged_question.max_range"}}" />
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div id="rangedSlider" class="rangedSlider"></div>
+        </div>
+    </div>
+</template>

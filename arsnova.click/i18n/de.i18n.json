@@ -142,7 +142,13 @@
     "answeroptions": {
       "answeroptiontext_placeholder": "Antwortoption eingeben",
       "correct": "Richtig",
-      "wrong": "Falsch"
+      "wrong": "Falsch",
+      "ranged_question": {
+        "title": "Reichweite der richtigen Antworten",
+        "correct_value": "Richtiger Wert",
+        "min_range": "Mindestwert",
+        "max_range": "Maximalwert"
+      }
     },
     "choose_nickname": {
       "enter_nickname": "Gib dir einen Nicknamen",
@@ -200,7 +206,9 @@
       "confirm_read": "Ich habe die Frage gelesen",
       "game_over": "Game over",
       "countdown": "Countdown",
-      "answer_option": "Antwort"
+      "answer_option": "Antwort",
+      "guessed_correct": "Richtig geschätzt",
+      "guessed_wrong": "Falsch geschätzt"
     },
     "lobby": {
       "title": "Quiz Lobby",
@@ -256,6 +264,7 @@
           "one_valid_answer_required": "Es muss exakt eine richtige Antwort vorhanden sein",
           "no_valid_answer_required": "Keine richtige Antwort darf vorhanden sein",
           "invalid_range": "Die minimale Reichweite muss geringer als die maximale Reichweite sein",
+          "invalid_correct_value": "Der richtige Wert muss innerhalb der Reichweite sein",
           "answer_text_empty": "Text der Antwort darf nicht leer sein"
         }
       },
@@ -302,7 +311,11 @@
       "question": "Frage",
       "send": "Absenden",
       "seconds_left": "Noch 1 Sekunde!",
-      "seconds_left_plural": "Noch __value__ Sekunden!"
+      "seconds_left_plural": "Noch __value__ Sekunden!",
+      "ranged_question": {
+        "title": "Gibt deinen Schätzwert ein!",
+        "input_placeholder": "Antwort"
+      }
     }
   },
   "plugins": {

@@ -25,7 +25,7 @@ import {MemberListCollection} from '/lib/member_list/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {ErrorSplashscreen, Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import {calculateButtonCount, startCountdown} from './lib.js';
+import {calculateButtonCount, startCountdown, isCountdownZero} from './lib.js';
 
 Template.liveResults.events({
 	'click #js-btn-showQuestionAndAnswerModal': function (event) {
@@ -38,20 +38,28 @@ Template.liveResults.events({
 		mathjaxMarkdown.initializeMarkdownAndLatex();
 		var targetId = parseInt($(event.currentTarget).parents(".question-row").attr("id").replace("question-row_", ""));
 		var answerContent = "";
-		let questionContent = mathjaxMarkdown.getContent(questionDoc.questionList[EventManagerCollection.findOne().questionIndex].questionText);
+		const questionElement = questionDoc.questionList[EventManagerCollection.findOne().questionIndex];
+		let questionContent = mathjaxMarkdown.getContent(questionElement.questionText);
 
 		let hasEmptyAnswers = true;
 
-		AnswerOptionCollection.find({questionIndex: targetId}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
-			if (!answerOption.answerText) {
-				answerOption.answerText = "";
-			} else {
-				hasEmptyAnswers = false;
-			}
+		if (questionElement.type === "RangedQuestion" && isCountdownZero(targetId)) {
+			hasEmptyAnswers = false;
+			answerContent += TAPi18n.__("view.answeroptions.ranged_question.min_range") + ": " + questionElement.rangeMin + "<br/>";
+			answerContent += TAPi18n.__("view.answeroptions.ranged_question.max_range") + ": " + questionElement.rangeMax + "<br/><br/>";
+			answerContent += TAPi18n.__("view.answeroptions.ranged_question.correct_value") + ": " + questionElement.correctValue + "<br/>";
+		} else {
+			AnswerOptionCollection.find({questionIndex: targetId}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
+				if (!answerOption.answerText) {
+					answerOption.answerText = "";
+				} else {
+					hasEmptyAnswers = false;
+				}
 
-			answerContent += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
-			answerContent += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
-		});
+				answerContent += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+				answerContent += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+			});
+		}
 
 		if (hasEmptyAnswers) {
 			answerContent = "";

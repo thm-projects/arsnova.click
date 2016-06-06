@@ -19,17 +19,15 @@
 	{{> titel titelText = getCountdown}}
 	<div id="votingView">
         <div class="row voting-helper-buttons">
-            {{#unless isRangedQuestion}}
-                <div class="col-xs-{{#if showForwardButton}}6{{else}}12{{/if}}">
-                    <button id="js-btn-showQuestionAndAnswerModal" type="button" class="btn btn-info btn-lg btn-answerOption">
-                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                        <span class="ansBtn">{{_ "view.voting.question"}}</span>
-                    </button>
-                </div>
-            {{/unless}}
+            <div class="col-xs-{{#if showForwardButton}}6{{else}}12{{/if}}">
+                <button id="js-btn-showQuestionAndAnswerModal" type="button" class="btn btn-info btn-lg btn-answerOption">
+                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    <span class="ansBtn">{{_ "view.voting.question"}}</span>
+                </button>
+            </div>
 
             {{#if showForwardButton}}
-                <div class="col-xs-{{#unless isRangedQuestion}}6{{else}}12{{/unless}}">
+                <div class="col-xs-6">
                     <button id="forwardButton" type="button" class="btn btn-success btn-lg btn-answerOption">
                         <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
                         <span class="ansBtn">{{_ "view.voting.send"}}</span>

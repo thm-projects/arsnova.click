@@ -312,7 +312,7 @@
       "seconds_left": "1 segundo a la izquierda!",
       "seconds_left_plural": "__value__ segundos en el reloj",
       "ranged_question": {
-        "title": "Por favor escriba su respuesta:",
+        "title": "Por favor escriba su respuesta!",
         "input_placeholder": "Responder"
       }
     }

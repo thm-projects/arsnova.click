@@ -263,6 +263,7 @@
           "one_valid_answer_required": "Il doit y avoir exactement une réponse correcte",
           "no_valid_answer_required": "Il n'y a pas de réponses correctes permis",
           "invalid_range": "La gamme minimale doit être inférieure à la portée maximale",
+          "invalid_correct_value": "La valeur correcte doit être dans le cadre de la gamme",
           "answer_text_empty": "Le texte de la réponse ne peut pas être vide"
         }
       },

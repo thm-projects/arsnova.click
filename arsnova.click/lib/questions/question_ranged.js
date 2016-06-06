@@ -119,11 +119,13 @@ export class RangedQuestion extends AbstractQuestion {
 	 */
 	getValidationStackTrace () {
 		const parentStackTrace = super.getValidationStackTrace();
-		const hasValidRange = this.getMinRange() < this.getMaxRange() &&
-			this.getCorrectValue() >= this.getMinRange() &&
-			this.getCorrectValue() <= this.getMaxRange();
+		const hasValidRange = this.getMinRange() < this.getMaxRange();
+		const hasValidCorrectValue = this.getCorrectValue() >= this.getMinRange() && this.getCorrectValue() <= this.getMaxRange();
 		if (!hasValidRange) {
 			parentStackTrace.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "invalid_range"});
+		}
+		if (!hasValidCorrectValue) {
+			parentStackTrace.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "invalid_correct_value"});
 		}
 		return parentStackTrace;
 	}

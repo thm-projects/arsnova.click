@@ -180,6 +180,10 @@ Template.liveResults.helpers({
 		return result;
 	},
 	rangedAnswerResult: function (index) {
+		var questionDoc = QuestionGroupCollection.findOne();
+		if (!questionDoc) {
+			return;
+		}
 		const memberAmount = ResponsesCollection.find({questionIndex: index}).count();
 		const questionItem = QuestionGroupCollection.findOne().questionList[index];
 		let inCorrectRange = 0;

@@ -264,6 +264,7 @@
           "one_valid_answer_required": "Es muss exakt eine richtige Antwort vorhanden sein",
           "no_valid_answer_required": "Keine richtige Antwort darf vorhanden sein",
           "invalid_range": "Die minimale Reichweite muss geringer als die maximale Reichweite sein",
+          "invalid_correct_value": "Der richtige Wert muss innerhalb der Reichweite sein",
           "answer_text_empty": "Text der Antwort darf nicht leer sein"
         }
       },

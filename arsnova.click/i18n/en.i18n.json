@@ -263,6 +263,7 @@
           "one_valid_answer_required": "There must be exactly one correct answer",
           "no_valid_answer_required": "There are no correct answers allowed",
           "invalid_range": "The minimum range must be smaller than the maximum range",
+          "invalid_correct_value": "The correct value must be in the scope of the range",
           "answer_text_empty": "The answer's text is not allowed to be empty"
         }
       },

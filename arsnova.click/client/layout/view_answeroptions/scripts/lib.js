@@ -156,7 +156,6 @@ export function createSlider(index) {
 	});
 	$('#correctValueInput').on("change", function () {
 		const correctValueInputField = $('#correctValueInput');
-		console.log(correctValueInputField);
 		const value = parseFloat(correctValueInputField.val());
 		try {
 			questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].setCorrectValue(value);

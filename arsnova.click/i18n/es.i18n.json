@@ -263,6 +263,7 @@
           "one_valid_answer_required": "Debe haber exactamente una respuesta correcta",
           "no_valid_answer_required": "No existen respuestas correctas permitidos",
           "invalid_range": "La distancia mínima debe ser menor que el rango máximo",
+          "invalid_correct_value": "El valor adecuado debe estar en el ámbito de aplicación de las filas",
           "answer_text_empty": "El texto de la respuesta no se le permite estar vacío"
         }
       },

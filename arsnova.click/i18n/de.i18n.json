@@ -144,7 +144,7 @@
       "correct": "Richtig",
       "wrong": "Falsch",
       "ranged_question": {
-        "title": "Reichweite der richtigen Antworten:",
+        "title": "Reichweite der richtigen Antworten",
         "min_range": "Mindestwert",
         "max_range": "Maximalwert"
       }

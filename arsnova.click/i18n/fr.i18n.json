@@ -144,7 +144,7 @@
       "correct": "Correct",
       "wrong": "Faux",
       "ranged_question": {
-        "title": "Gamme de réponses correctes:",
+        "title": "Gamme de réponses correctes",
         "min_range": "Portée minimale",
         "max_range": "Portée maximale"
       }

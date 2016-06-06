@@ -31,6 +31,9 @@ export let routeToLeaderboardTimer = null;
 let questionIndex = -1;
 
 export function deleteCountdown() {
+	if (countdown) {
+		countdown.stop();
+	}
 	countdown = null;
 }
 

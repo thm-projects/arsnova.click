@@ -51,11 +51,17 @@ Meteor.methods({
 
 		var timestamp = new Date().getTime();
 		var hashtag = responseDoc.hashtag;
-		var dupDoc = ResponsesCollection.findOne({
+		var duplicateResponseSearch = {
 			hashtag: responseDoc.hashtag,
 			questionIndex: responseDoc.questionIndex,
 			userNick: responseDoc.userNick
-		});
+		};
+		if (typeof responseValueObject.inputValue !== "undefined") {
+			duplicateResponseSearch.inputValue = responseValueObject.inputValue;
+		} else {
+			duplicateResponseSearch.answerOptionNumber = responseValueObject.answerOptionNumber;
+		}
+		var dupDoc = ResponsesCollection.findOne(duplicateResponseSearch);
 		if (dupDoc) {
 			throw new Meteor.Error('ResponsesCollection.addResponse', 'duplicate_response');
 		}

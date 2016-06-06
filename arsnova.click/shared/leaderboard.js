@@ -59,7 +59,6 @@ Meteor.methods({
 			});
 
 			var rightResponseAmount = responseAmount - falseResponseAmount;
-console.log(rightResponseAmount, responseAmount, falseResponseAmount);
 			var memberEntry = LeaderBoardCollection.findOne({
 				hashtag: hashtag,
 				questionIndex: questionIndex,

@@ -34,13 +34,13 @@ Meteor.methods({
 
 		const responseValueObject = {};
 		if (typeof responseDoc.answerOptionNumber === "undefined") {
-			if (typeof responseDoc.value === "undefined") {
+			if (typeof responseDoc.inputValue === "undefined") {
 				throw new Meteor.Error("ResponsesCollection.addResponse", "invalid_response_value");
 			} else {
 				new SimpleSchema({
 					inputValue: inputValueSchema
-				}).validate({inputValue: responseDoc.value});
-				responseValueObject.inputValue = responseDoc.value;
+				}).validate({inputValue: responseDoc.inputValue});
+				responseValueObject.inputValue = responseDoc.inputValue;
 			}
 		} else {
 			new SimpleSchema({
@@ -67,16 +67,17 @@ Meteor.methods({
 		if (!questionGroupDoc) {
 			throw new Meteor.Error('ResponsesCollection.addResponse', 'hashtag_not_found');
 		}
-		var responseTime = Number(timestamp) - Number(questionGroupDoc.questionList[responseDoc.questionIndex].startTime);
+		const questionItem = questionGroupDoc.questionList[responseDoc.questionIndex];
+		var responseTime = Number(timestamp) - Number(questionItem.startTime);
 
-		if (responseTime > questionGroupDoc.questionList[responseDoc.questionIndex].timer * 1000) {
+		if (responseTime > questionItem.timer * 1000) {
 			throw new Meteor.Error('ResponsesCollection.addResponse', 'response_timeout');
 		}
 		responseDoc.responseTime = responseTime;
-		var foundAnswerBase = null;
+		let foundAnswerBase = null;
 		if (typeof responseValueObject.answerOptionNumber === "undefined") {
 			// We have a ranged input here - check if the values are set in the question
-			foundAnswerBase = questionGroupDoc.rangeMin && questionGroupDoc.rangeMax;
+			foundAnswerBase = typeof questionItem.rangeMin !== "undefined" && typeof questionItem.rangeMax !== "undefined";
 		} else {
 			foundAnswerBase = AnswerOptionCollection.findOne({
 				hashtag: hashtag,

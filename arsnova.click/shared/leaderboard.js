@@ -52,14 +52,14 @@ Meteor.methods({
 				questionIndex: questionIndex,
 				userNick: nick
 			}).forEach(function (response) {
-				if (correctAnswers.indexOf(response.answerOptionNumber) === -1) {
+				if (typeof response.answerOptionNumber !== "undefined" && correctAnswers.indexOf(response.answerOptionNumber) === -1) {
 					falseResponseAmount++;
 				}
 				responseAmount++;
 			});
 
 			var rightResponseAmount = responseAmount - falseResponseAmount;
-
+console.log(rightResponseAmount, responseAmount, falseResponseAmount);
 			var memberEntry = LeaderBoardCollection.findOne({
 				hashtag: hashtag,
 				questionIndex: questionIndex,
@@ -85,13 +85,16 @@ Meteor.methods({
 					}
 				});
 			}
-			EventManagerCollection.update({hashtag: hashtag}, {$push: {eventStack: {key: "LeaderBoardCollection.addResponseSet",
-				value: {
-					nick: nick,
-					questionIndex: questionIndex
+			EventManagerCollection.update({hashtag: hashtag}, {
+				$push: {
+					eventStack: {
+						key: "LeaderBoardCollection.addResponseSet",
+						value: {
+							nick: nick,
+							questionIndex: questionIndex
+						}
+					}
 				}
-			}
-			}
 			});
 		}
 	}

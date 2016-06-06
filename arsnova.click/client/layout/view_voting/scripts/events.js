@@ -72,14 +72,14 @@ Template.votingview.events({
 		}
 
 		Session.set("hasSendResponse", true);
-		if (typeof Session.get("responses") === "undefined") {
+		var responseArr = JSON.parse(Session.get("responses"));
+		if (responseArr.length === 0) {
 			const inputField = $("#rangeInput");
-			if (inputField.val().length === 0 || isNaN(parseInt(inputField))) {
+			if (inputField.length === 0 || inputField.val().length === 0 || isNaN(parseInt(inputField.val()))) {
 				return;
 			}
-			makeAndSendRangedResponse(parseInt(inputField));
+			makeAndSendRangedResponse(parseInt(inputField.val()));
 		} else {
-			var responseArr = JSON.parse(Session.get("responses"));
 			AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).forEach(function (cursor) {
 				if (responseArr[cursor.answerOptionNumber]) {
 					makeAndSendResponse(cursor.answerOptionNumber);

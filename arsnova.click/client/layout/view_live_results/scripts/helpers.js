@@ -60,10 +60,17 @@ Template.liveResults.helpers({
 		return Session.get("sessionClosed");
 	},
 	showLeaderBoardButton: function (index) {
-		return !Session.get("countdownInitialized") && (AnswerOptionCollection.find({
-				questionIndex: index,
-				isCorrect: true
-			}).count() > 0);
+		const questionDoc = QuestionGroupCollection.findOne();
+		if (!questionDoc) {
+			return;
+		}
+		return !Session.get("countdownInitialized") && (
+				questionDoc.questionList[index].type === "RangedQuestion" ||
+				AnswerOptionCollection.find({
+					questionIndex: index,
+					isCorrect: true
+				}).count() > 0
+			);
 	},
 	isMC: function (index) {
 		return AnswerOptionCollection.find({
@@ -182,7 +189,7 @@ Template.liveResults.helpers({
 				questionIndex: index,
 				userNick: user.nick
 			});
-			(response.inputValue && response.inputValue >= questionItem.rangeMin && response.inputValue <= questionItem.rangeMax) ? inCorrectRange++ : inWrongRange++;
+			(response && response.inputValue && response.inputValue >= questionItem.rangeMin && response.inputValue <= questionItem.rangeMax) ? inCorrectRange++ : inWrongRange++;
 		});
 		return {
 			allCorrect: {
@@ -245,8 +252,36 @@ Template.liveResults.helpers({
 
 		return countdown === null && questionDoc.questionList.length > 1 && eventDoc.questionIndex >= questionDoc.questionList.length - 1;
 	},
+	hasCorrectAnswerOptionsOrRangedQuestion: ()=> {
+		const questionDoc = QuestionGroupCollection.findOne();
+		let hasRangedQuestion = false;
+		if (!questionDoc) {
+			return;
+		}
+		$.each(questionDoc.questionList, function (index, element) {
+			if (element.type === "RangedQuestion") {
+				hasRangedQuestion = true;
+				return false;
+			}
+		});
+		return AnswerOptionCollection.find({isCorrect: true}).count() > 0 || hasRangedQuestion;
+	},
 	hasCorrectAnswerOptions: ()=> {
 		return AnswerOptionCollection.find({isCorrect: true}).count() > 0;
+	},
+	hasRangedQuestion: ()=> {
+		const questionDoc = QuestionGroupCollection.findOne();
+		let hasRangedQuestion = false;
+		if (!questionDoc) {
+			return;
+		}
+		$.each(questionDoc.questionList, function (index, element) {
+			if (element.type === "RangedQuestion") {
+				hasRangedQuestion = true;
+				return false;
+			}
+		});
+		return hasRangedQuestion;
 	},
 	showQuestionDialog: ()=> {
 		let eventDoc = EventManagerCollection.findOne();
@@ -319,7 +354,7 @@ Template.liveResults.helpers({
 	},
 	getCSSClassForIsCorrect: checkIfIsCorrect,
 	hideCssIfCountdownRunning: function (index, cssClass) {
-		if (isCountdownZero(index)) {
+		if (!isCountdownZero(index)) {
 			return "progress-default";
 		}
 		return cssClass;

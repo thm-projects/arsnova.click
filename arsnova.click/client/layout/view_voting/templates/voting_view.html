@@ -17,38 +17,40 @@
 
 <template name="votingview">
 	{{> titel titelText = getCountdown}}
-	<div class="row voting-helper-buttons">
-		<div class="col-xs-{{#if showForwardButton}}6{{else}}12{{/if}}">
-			<button id="js-btn-showQuestionAndAnswerModal" type="button" class="btn btn-info btn-lg btn-answerOption">
-				<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-				<span class="ansBtn">{{_ "view.voting.question"}}</span>
-			</button>
-		</div>
-
-		{{#if showForwardButton}}
-			<div class="col-xs-6">
-				<button id="forwardButton" type="button" class="btn btn-success btn-lg btn-answerOption">
-					<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-					<span class="ansBtn">{{_ "view.voting.send"}}</span>
-				</button>
-			</div>
-		{{/if}}
-	</div>
-
-	<div class="row answer-row">
-		{{#if isRangedQuestion}}
-            <div class="col-xs-12 rangedValues">
-                <h3>Bitte die Antwort eingeben: </h3>
-                <input type="number" id="rangeInput" class="input-field" placeholder="Antwort" />
+	<div id="votingView">
+        <div class="row voting-helper-buttons">
+            <div class="col-xs-{{#if showForwardButton}}6{{else}}12{{/if}}">
+                <button id="js-btn-showQuestionAndAnswerModal" type="button" class="btn btn-info btn-lg btn-answerOption">
+                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    <span class="ansBtn">{{_ "view.voting.question"}}</span>
+                </button>
             </div>
-        {{else}}
-            {{#each answerOptions}}
-                <div class="buttonWrapper">
-                    <button id="{{answerOptionNumber}}" class="sendResponse btn btn-answerOption btn-answerFont button-purple">
-                        {{answerOptionLetter number=answerOptionNumber}}
+
+            {{#if showForwardButton}}
+                <div class="col-xs-6">
+                    <button id="forwardButton" type="button" class="btn btn-success btn-lg btn-answerOption">
+                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                        <span class="ansBtn">{{_ "view.voting.send"}}</span>
                     </button>
                 </div>
-            {{/each}}
-        {{/if}}
-	</div>
+            {{/if}}
+        </div>
+
+        <div class="row answer-row">
+            {{#if isRangedQuestion}}
+                <div class="col-xs-12 rangedValues center-vertical">
+                    <h1>Bitte die Antwort eingeben: </h1>
+                    <input type="number" id="rangeInput" class="input-field" placeholder="Antwort" />
+                </div>
+            {{else}}
+                {{#each answerOptions}}
+                    <div class="buttonWrapper">
+                        <button id="{{answerOptionNumber}}" class="sendResponse btn btn-answerOption btn-answerFont button-purple">
+                            {{answerOptionLetter number=answerOptionNumber}}
+                        </button>
+                    </div>
+                {{/each}}
+            {{/if}}
+        </div>
+    </div>
 </template>

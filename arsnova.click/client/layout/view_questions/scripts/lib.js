@@ -100,6 +100,9 @@ export function addQuestion(index) {
 	if (questionItem.getQuestionList()[index].constructor.name !== questionType) {
 		const serialized = questionItem.getQuestionList()[index].serialize();
 		delete serialized.type;
+		if (questionType === "RangedQuestion") {
+			serialized.timer = "10";
+		}
 		questionItem.addQuestion(questionReflection[questionType](serialized), index);
 		// Check if we changed to the survey question -> remove isCorrect values then
 		if (questionType === "SurveyQuestion") {

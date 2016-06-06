@@ -145,6 +145,7 @@
       "wrong": "Incorrecto",
       "ranged_question": {
         "title": "Gama de respuestas correctas",
+        "correct_value": "Valor correcto",
         "min_range": "Rango mínimo",
         "max_range": "Rango maximo"
       }

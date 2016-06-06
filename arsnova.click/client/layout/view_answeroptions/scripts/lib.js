@@ -154,6 +154,19 @@ export function createSlider(index) {
 			}
 		}
 	});
+	$('#correctValueInput').on("change", function () {
+		const correctValueInputField = $('#correctValueInput');
+		console.log(correctValueInputField);
+		const value = parseFloat(correctValueInputField.val());
+		try {
+			questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].setCorrectValue(value);
+			Session.set("questionGroup", questionItem);
+			localData.addHashtag(questionItem);
+			correctValueInputField.removeClass("invalid");
+		} catch (ex) {
+			correctValueInputField.addClass("invalid");
+		}
+	});
 }
 
 export function setSlider(index) {

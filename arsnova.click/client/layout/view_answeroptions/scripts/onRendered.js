@@ -27,25 +27,22 @@ Template.createAnswerOptions.onRendered(function () {
 	calculateHeaderSize();
 	$(window).resize(calculateHeaderSize);
 
-	let index;
-	lib.subscriptionHandler = Tracker.autorun(()=> {
-		if (!EventManagerCollection.findOne()) {
-			return;
-		}
-		index = EventManagerCollection.findOne().questionIndex;
-	});
 	var body = $('body');
 	body.on('click', '.questionIcon:not(.active)', function () {
-		if (index >= Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList().length) {
-			return;
-		}
-
 		Router.go("/" + Router.current().params.quizName + "/question");
 	});
-	body.on('click', '.removeQuestion', function () {
-		index = EventManagerCollection.findOne().questionIndex;
-	});
 
+	footerElements.removeFooterElements();
+	footerElements.addFooterElement(footerElements.footerElemHome);
+	footerElements.calculateFooter();
+
+	$(window).resize(function () {
+		setTimeout(lib.calculateXsViewport, 5);
+	});
+	setTimeout(lib.calculateXsViewport, 25);
+});
+
+Template.defaultAnswerOptionTemplate.onRendered(function () {
 	if ($(window).width() >= 992) {
 		$('#answerOptionText_Number0').focus();
 	}
@@ -58,15 +55,6 @@ Template.createAnswerOptions.onRendered(function () {
 	}
 
 	lib.formatIsCorrectButtons();
-
-	footerElements.removeFooterElements();
-	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.calculateFooter();
-
-	$(window).resize(function () {
-		setTimeout(lib.calculateXsViewport, 5);
-	});
-	setTimeout(lib.calculateXsViewport, 25);
 });
 
 Template.rangedAnswerOptionTemplate.onRendered(function () {

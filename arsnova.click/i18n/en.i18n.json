@@ -145,6 +145,7 @@
       "wrong": "Wrong",
       "ranged_question": {
         "title": "Range of correct answers",
+        "correct_value": "Correct value",
         "min_range": "Minimum range",
         "max_range": "Maximum range"
       }

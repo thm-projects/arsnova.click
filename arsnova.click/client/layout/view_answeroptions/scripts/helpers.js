@@ -74,5 +74,11 @@ Template.rangedAnswerOptionTemplate.helpers({
 			return;
 		}
 		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getMaxRange();
+	},
+	getCorrectValue: function () {
+		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getCorrectValue();
 	}
 });

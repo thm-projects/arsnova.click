@@ -80,7 +80,7 @@ export class RangedQuestion extends AbstractQuestion {
 	}
 
 	setCorrectValue (value) {
-		if (typeof value !== "number" || value < this.getMinRange() || value > this.getMaxRange()) {
+		if (typeof value !== "number") {
 			throw new Error("Invalid argument list for RangedQuestion.setCorrectValue");
 		}
 		this[correctValue] = value;
@@ -106,7 +106,11 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @returns {boolean} True, if the complete Question instance is valid, False otherwise
 	 */
 	isValid () {
-		return super.isValid() && this.getAnswerOptionList().length === 0 && this.getMinRange() < this.getMaxRange() && this.getCorrectValue() >= this.getMinRange() && this.getCorrectValue() <= this.getMaxRange();
+		return super.isValid() &&
+			this.getAnswerOptionList().length === 0 &&
+			this.getMinRange() < this.getMaxRange() &&
+			this.getCorrectValue() >= this.getMinRange() &&
+			this.getCorrectValue() <= this.getMaxRange();
 	}
 
 	/**
@@ -115,7 +119,9 @@ export class RangedQuestion extends AbstractQuestion {
 	 */
 	getValidationStackTrace () {
 		const parentStackTrace = super.getValidationStackTrace();
-		const hasValidRange = this.getMinRange() < this.getMaxRange();
+		const hasValidRange = this.getMinRange() < this.getMaxRange() &&
+			this.getCorrectValue() >= this.getMinRange() &&
+			this.getCorrectValue() <= this.getMaxRange();
 		if (!hasValidRange) {
 			parentStackTrace.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "invalid_range"});
 		}
@@ -130,7 +136,7 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @returns {boolean} True if both instances are completely equal, False otherwise
 	 */
 	equals (question) {
-		return super.equals(question) && question.getMaxRange() === this.getMaxRange() && question.getMinRange() === this.getMinRange();
+		return super.equals(question) && question.getMaxRange() === this.getMaxRange() && question.getMinRange() === this.getMinRange() && question.getCorrectValue() === this.getCorrectValue();
 	}
 
 	/**

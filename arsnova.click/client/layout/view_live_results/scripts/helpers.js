@@ -24,7 +24,7 @@ import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {countdown, getPercentRead, getCurrentRead, hslColPerc, checkIfIsCorrect} from './lib.js';
+import {countdown, getPercentRead, getCurrentRead, hslColPerc, checkIfIsCorrect, isCountdownZero} from './lib.js';
 
 Template.liveResults.helpers({
 	votingText: function () {
@@ -41,16 +41,7 @@ Template.liveResults.helpers({
 		return 0;
 	},
 	isCountdownZero: function (index) {
-		let eventDoc = EventManagerCollection.findOne();
-		if (!eventDoc) {
-			return false;
-		}
-		if (!countdown || Session.get("sessionClosed") || !Session.get("countdownInitialized") || eventDoc.questionIndex !== index) {
-			return true;
-		} else {
-			var timer = Math.round(countdown.get());
-			return timer <= 0;
-		}
+		return isCountdownZero(index);
 	},
 	getCountStudents: function () {
 		return MemberListCollection.find().count();
@@ -181,6 +172,36 @@ Template.liveResults.helpers({
 		});
 		return result;
 	},
+	rangedAnswerResult: function (index) {
+		const memberAmount = ResponsesCollection.find({questionIndex: index}).count();
+		const questionItem = QuestionGroupCollection.findOne().questionList[index];
+		let inCorrectRange = 0;
+		let inWrongRange = 0;
+		MemberListCollection.find().forEach(function (user) {
+			const response = ResponsesCollection.findOne({
+				questionIndex: index,
+				userNick: user.nick
+			});
+			(response.inputValue && response.inputValue >= questionItem.rangeMin && response.inputValue <= questionItem.rangeMax) ? inCorrectRange++ : inWrongRange++;
+		});
+		return {
+			allCorrect: {
+				absolute: inCorrectRange,
+				percent: memberAmount ? Math.floor((inCorrectRange * 100) / memberAmount) : 0
+			},
+			allWrong: {
+				absolute: inWrongRange,
+				percent: memberAmount ? Math.floor((inWrongRange * 100) / memberAmount) : 0
+			}
+		};
+	},
+	isRangedQuestion: function (index) {
+		const questionDoc = QuestionGroupCollection.findOne();
+		if (!questionDoc) {
+			return;
+		}
+		return questionDoc.questionList[index].type === "RangedQuestion";
+	},
 	isActiveQuestion: function (index) {
 		let eventDoc = EventManagerCollection.findOne();
 		if (!eventDoc) {
@@ -296,7 +317,13 @@ Template.liveResults.helpers({
 		});
 		return result.length - Session.get("LearnerCount");
 	},
-	getCSSClassForIsCorrect: checkIfIsCorrect
+	getCSSClassForIsCorrect: checkIfIsCorrect,
+	hideCssIfCountdownRunning: function (index, cssClass) {
+		if (isCountdownZero(index)) {
+			return "progress-default";
+		}
+		return cssClass;
+	}
 });
 
 Template.readingConfirmedLearner.helpers({

@@ -42,6 +42,19 @@ export function hslColPerc(percent, start, end) {
 	return 'hsl(' + c + ',100%,25%)';
 }
 
+export function isCountdownZero(index) {
+	let eventDoc = EventManagerCollection.findOne();
+	if (!eventDoc) {
+		return false;
+	}
+	if (!countdown || Session.get("sessionClosed") || !Session.get("countdownInitialized") || eventDoc.questionIndex !== index) {
+		return true;
+	} else {
+		var timer = Math.round(countdown.get());
+		return timer <= 0;
+	}
+}
+
 export function getPercentRead(index) {
 	var sumRead = 0;
 	var count = 0;

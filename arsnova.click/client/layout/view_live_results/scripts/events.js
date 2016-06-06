@@ -38,20 +38,27 @@ Template.liveResults.events({
 		mathjaxMarkdown.initializeMarkdownAndLatex();
 		var targetId = parseInt($(event.currentTarget).parents(".question-row").attr("id").replace("question-row_", ""));
 		var answerContent = "";
-		let questionContent = mathjaxMarkdown.getContent(questionDoc.questionList[EventManagerCollection.findOne().questionIndex].questionText);
+		const questionElement = questionDoc.questionList[EventManagerCollection.findOne().questionIndex];
+		let questionContent = mathjaxMarkdown.getContent(questionElement.questionText);
 
 		let hasEmptyAnswers = true;
 
-		AnswerOptionCollection.find({questionIndex: targetId}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
-			if (!answerOption.answerText) {
-				answerOption.answerText = "";
-			} else {
-				hasEmptyAnswers = false;
-			}
+		if (questionElement.type === "RangedQuestion") {
+			hasEmptyAnswers = false;
+			answerContent += TAPi18n.__("view.answeroptions.ranged_question.min_range") + ": " + questionElement.rangeMin + "<br/>";
+			answerContent += TAPi18n.__("view.answeroptions.ranged_question.max_range") + ": " + questionElement.rangeMax + "<br/>";
+		} else {
+			AnswerOptionCollection.find({questionIndex: targetId}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
+				if (!answerOption.answerText) {
+					answerOption.answerText = "";
+				} else {
+					hasEmptyAnswers = false;
+				}
 
-			answerContent += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
-			answerContent += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
-		});
+				answerContent += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+				answerContent += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+			});
+		}
 
 		if (hasEmptyAnswers) {
 			answerContent = "";

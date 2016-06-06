@@ -157,14 +157,16 @@ export function createSlider(index) {
 	$('#correctValueInput').on("change", function () {
 		const correctValueInputField = $('#correctValueInput');
 		const value = parseFloat(correctValueInputField.val());
-		try {
-			questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].setCorrectValue(value);
-			Session.set("questionGroup", questionItem);
-			localData.addHashtag(questionItem);
-			correctValueInputField.removeClass("invalid");
-		} catch (ex) {
-			correctValueInputField.addClass("invalid");
-		}
+		questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].setCorrectValue(value);
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(questionItem);
+		correctValueInputField.removeClass("invalid");
+		$.each(Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getValidationStackTrace(), function (index, element) {
+			if (element.reason === "invalid_correct_value") {
+				correctValueInputField.addClass("invalid");
+				return false;
+			}
+		});
 	});
 }
 

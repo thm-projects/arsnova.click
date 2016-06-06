@@ -1394,7 +1394,7 @@
 			color: $default-text-color;
 			input[type="number"] {
 				&.invalid {
-					border: 1px solid $bg-rangedSlider-invalid
+					border: 3px solid $bg-rangedSlider-invalid
 				}
 			}
 		}

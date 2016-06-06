@@ -205,7 +205,9 @@
       "confirm_read": "Ich habe die Frage gelesen",
       "game_over": "Game over",
       "countdown": "Countdown",
-      "answer_option": "Antwort"
+      "answer_option": "Antwort",
+      "guessed_correct": "Richtig geschätzt",
+      "guessed_wrong": "Falsch geschätzt"
     },
     "lobby": {
       "title": "Quiz Lobby",

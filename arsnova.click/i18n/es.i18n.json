@@ -204,7 +204,9 @@
       "confirm_read": "Lo tengo!",
       "game_over": "Juego terminado",
       "countdown": "Cuenta regresiva",
-      "answer_option": "Responder"
+      "answer_option": "Responder",
+      "guessed_correct": "Estimada correctamente",
+      "guessed_wrong": "Mal estimada"
     },
     "lobby": {
       "title": "Prueba Vestíbulo",

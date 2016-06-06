@@ -204,7 +204,9 @@
       "confirm_read": "Got that!",
       "game_over": "Game over",
       "countdown": "Countdown",
-      "answer_option": "Answer"
+      "answer_option": "Answer",
+      "guessed_correct": "Correctly estimated",
+      "guessed_wrong": "Wrong estimated"
     },
     "lobby": {
       "title": "Quiz Lobby",

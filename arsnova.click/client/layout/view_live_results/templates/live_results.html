@@ -83,7 +83,7 @@
                             {{#if isRangedQuestion displayIndex}}
                                 {{#with rangedAnswerResult displayIndex}}
                                     {{> form_group
-                                        name = "view.liveResults.complete_correct"
+                                        name = "view.liveResults.guessed_correct"
                                         absolute = allCorrect.absolute
                                         percent = allCorrect.percent
                                         isCorrect = 1
@@ -91,7 +91,7 @@
                                         backgroundClass = (hideCssIfCountdownRunning displayIndex (getCSSClassForIsCorrect 1))
                                     }}
                                     {{> form_group
-                                        name = "view.liveResults.complete_wrong"
+                                        name = "view.liveResults.guessed_wrong"
                                         absolute = allWrong.absolute
                                         percent = allWrong.percent
                                         isCorrect = 0

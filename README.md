@@ -6,7 +6,7 @@ While Kahoot! is a small game-based audience-response app, ARSnova is a full-gro
 
 arsnova.click is somewhere in the feature range of both:
 
-[![Landing Page](https://arsnova.thm.de/blog/wp-content/uploads/2016/03/Bildschirmfoto-2016-06-05-um-11.19.21.png)](http://staging.arsnova.click)
+[![Landing Page](https://arsnova.thm.de/blog/wp-content/uploads/2016/03/arsnova_gamified.jpeg)](http://staging.arsnova.click)
 
 * It is a free competition-based quiz webapp
 * Everybody may create and play quizzes, as many as you like, at any time

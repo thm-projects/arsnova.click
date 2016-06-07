@@ -120,6 +120,11 @@ const clickEvents = {
 						} else {
 							Router.go("/hashtagmanagement");
 						}
+					} else {
+						new ErrorSplashscreen({
+							autostart: true,
+							errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.hashtag_exists")
+						});
 					}
 				});
 			};

@@ -138,6 +138,7 @@ Template.liveResults.events({
 				});
 				Session.set("sessionClosed", true);
 			} else {
+				Session.set("sessionClosed", false);
 				startCountdown(EventManagerCollection.findOne().questionIndex + 1);
 			}
 		});

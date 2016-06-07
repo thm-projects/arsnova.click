@@ -84,6 +84,7 @@ const clickEvents = {
 	"click #import": function () {
 		const importButton = $('.js-import-input-home');
 		importButton.click();
+		importButton[0].value = null;
 		importButton.on("change", function () {
 			var fileList = importButton[0].files;
 			var fileReader = new FileReader();
@@ -98,83 +99,85 @@ const clickEvents = {
 					});
 					return;
 				}
-				let instance = null;
+				let questionInstance = null;
 				switch (asJSON.type) {
 					case "DefaultQuestionGroup":
-						instance = new DefaultQuestionGroup(asJSON);
+						questionInstance = new DefaultQuestionGroup(asJSON);
 						break;
 					default:
 						throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
 				}
-				Meteor.call('HashtagsCollection.addHashtag', {
-					privateKey: localData.getPrivateKey(),
-					hashtag: instance.getHashtag(),
-					musicVolume: 80,
-					musicEnabled: 1,
-					musicTitle: "Song1",
-					theme: "theme-dark"
-				}, function (err) {
-					if (!err) {
-						localData.addHashtag(instance);
+				if (!HashtagsCollection.findOne({hashtag: questionInstance.getHashtag()})) {
+					Meteor.call('HashtagsCollection.addHashtag', {
+						privateKey: localData.getPrivateKey(),
+						hashtag: questionInstance.getHashtag(),
+						musicVolume: questionInstance.getMusicVolume(),
+						musicEnabled: questionInstance.getMusicEnabled(),
+						musicTitle: questionInstance.getMusicTitle(),
+						theme: questionInstance.getTheme()
+					}, function (err) {
+						if (err) {
+							new ErrorSplashscreen({
+								autostart: true,
+								errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.invalid_data")
+							});
+							return;
+						}
+						localData.addHashtag(questionInstance);
 						if (Router.current().route.path() === "/hashtagmanagement") {
 							location.reload();
 						} else {
 							Router.go("/hashtagmanagement");
 						}
-					} else {
-						if (err.reason === "session_exists") {
-							new Splashscreen({
-								autostart: true,
-								templateName: "renameHashtagSplashscreen",
-								closeOnButton: "#js-btn-closeRenameHashtag, #js-btn-importSession",
-								onRendered: function (instance) {
-									$('#js-btn-importSession').on('click', function () {
-										var hashtag = $("#hashtagRename-input-field").val().trim();
-										Meteor.call('HashtagsCollection.addHashtag', {
-											privateKey: localData.getPrivateKey(),
-											hashtag: hashtag,
-											musicVolume: 80,
-											musicEnabled: 1,
-											musicTitle: "Song1",
-											theme: "theme-dark"
-										});
-										instance.hashtag = hashtag;
-										instance.questionList.forEach(function (questionListDoc) {
-											questionListDoc.hashtag = hashtag;
-											questionListDoc.answerOptionList.forEach(function (answerOptionListDoc) {
-												answerOptionListDoc.hashtag = hashtag;
-											});
-										});
-
-										localData.addHashtag(instance);
-									});
-									$('#hashtagRename-input-field').on('input', function () {
-										var inputHashtag = $(event.target).val();
-										if (["?", "/", "\\"].some(function (v) { return inputHashtag.indexOf(v) >= 0; })) {
-											$("#js-btn-importSession").attr("disabled", "disabled");
-											return;
-										}
-										if (hashtagLib.trimIllegalChars(inputHashtag).length === 0) {
-											$("#js-btn-importSession").attr("disabled", "disabled");
-											return;
-										}
-										var hashtagDoc = HashtagsCollection.findOne({hashtag: inputHashtag});
-										if (!hashtagDoc) {
-											$("#js-btn-importSession").removeAttr("disabled");
-										} else {
-											$("#js-btn-importSession").attr("disabled", "disabled");
-										}
-									});
+					});
+				} else {
+					new Splashscreen({
+						autostart: true,
+						templateName: "renameHashtagSplashscreen",
+						closeOnButton: "#js-btn-closeRenameHashtag, #js-btn-importSession",
+						onRendered: function (instance) {
+							$('#js-btn-importSession').on('click', function () {
+								var hashtag = $("#hashtagRename-input-field").val().trim();
+								var hashtagDoc = HashtagsCollection.findOne({hashtag: hashtag});
+								if (hashtagDoc) {
+									return;
+								}
+								questionInstance.setHashtag(hashtag);
+								Meteor.call('HashtagsCollection.addHashtag', {
+									privateKey: localData.getPrivateKey(),
+									hashtag: questionInstance.getHashtag(),
+									musicVolume: questionInstance.getMusicVolume(),
+									musicEnabled: questionInstance.getMusicEnabled(),
+									musicTitle: questionInstance.getMusicTitle(),
+									theme: questionInstance.getTheme()
+								});
+								localData.addHashtag(questionInstance);
+								if (Router.current().route.path() === "/hashtagmanagement") {
+									location.reload();
+								} else {
+									Router.go("/hashtagmanagement");
 								}
 							});
-						} else {
-							new ErrorSplashscreen({
-								autostart: true,
-								errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.invalid_data")
+							$('#hashtagRename-input-field').on('input', function () {
+								var inputHashtag = $(event.target).val();
+								if (["?", "/", "\\"].some(function (v) { return inputHashtag.indexOf(v) >= 0; })) {
+									$("#js-btn-importSession").attr("disabled", "disabled");
+									return;
+								}
+								if (hashtagLib.trimIllegalChars(inputHashtag).length === 0) {
+									$("#js-btn-importSession").attr("disabled", "disabled");
+									return;
+								}
+								var hashtagDoc = HashtagsCollection.findOne({hashtag: inputHashtag});
+								if (!hashtagDoc) {
+									$("#js-btn-importSession").removeAttr("disabled");
+								} else {
+									$("#js-btn-importSession").attr("disabled", "disabled");
+								}
 							});
 						}
-					}
-				});
+					});
+				}
 			};
 			for (var i = 0; i < fileList.length; i++) {
 				fileReader.readAsText(fileList[i], "UTF-8");

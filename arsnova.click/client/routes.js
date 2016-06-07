@@ -317,7 +317,6 @@ Router.route('/:quizName/results', {
 		if (!globalEventStackObserver.isRunning()) {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
 		}
-		Session.set("countdownInitialized", false);
 		this.render('live_results');
 	}
 });

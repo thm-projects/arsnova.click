@@ -99,11 +99,16 @@ export function countdownFinish() {
 	footerElements.calculateFooter();
 }
 
-export function startCountdown(index) {
+export function startCountdown (index, retry = 0) {
 	questionIndex = index;
 	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	var questionDoc = QuestionGroupCollection.findOne().questionList[index];
 	if (!questionDoc || Session.get("countdownInitialized") || Session.get("sessionClosed")) {
+		if (retry >= 5) {
+			console.log("WARNING: Max retry in live results exceeded");
+		} else {
+			setTimeout(startCountdown(index, retry++), 50);
+		}
 		return;
 	}
 	const currentTime = new Date();

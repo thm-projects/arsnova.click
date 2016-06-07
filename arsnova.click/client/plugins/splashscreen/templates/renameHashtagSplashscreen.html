@@ -1,0 +1,54 @@
+<!--
+* This file is part of ARSnova Click.
+* Copyright (C) 2016 The ARSnova Team
+*
+* ARSnova Click is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* ARSnova Click is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
+
+<template name="renameHashtagSplashscreen">
+	<div class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+                <div class="modal-header">
+                    <p>{{{_ "view.hashtag_management.import"}}}</p>
+                </div>
+				<div class="modal-body">
+                    <p>{{{_ "plugins.splashscreen.error.error_messages.session_exists_new"}}}</p>
+					<div class="form-group">
+                        <input type="text"
+                               class="input-field round-corners hashtag-field text-center"
+                               id="hashtagRename-input-field" placeholder="{{_ "view.hashtag_management.enter_quiz_name" }}"
+                               aria-describedby="basic-addon1" maxlength="25">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="row">
+						<div class="col-xs-6">
+							<button id="js-btn-closeRenameHashtag" type="button"
+									class="btn btn-warning btn-lg btn-answerOption">
+								<span class="glyphicon glyphicon-remove glyph-left" aria-hidden="true"></span>
+								<span class="ansBtn">{{_ "global.abort"}}</span>
+							</button>
+						</div>
+						<div class="col-xs-6">
+							<button id="js-btn-importSession" type="button" class="btn btn-success btn-lg btn-answerOption">
+								<span class="glyphicon glyphicon-ok glyph-left" aria-hidden="true"></span>
+								<span class="ansBtn">{{_ "global.save"}}</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

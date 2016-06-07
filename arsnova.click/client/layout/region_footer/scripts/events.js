@@ -22,6 +22,7 @@ import {TAPi18n} from 'meteor/tap:i18n';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {DefaultQuestionGroup} from '/lib/questions/questiongroup_default.js';
 import * as localData from '/lib/local_storage.js';
+import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
 import {buzzsound1, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
@@ -121,10 +122,57 @@ const clickEvents = {
 							Router.go("/hashtagmanagement");
 						}
 					} else {
-						new ErrorSplashscreen({
-							autostart: true,
-							errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.hashtag_exists")
-						});
+						if (err.reason === "session_exists") {
+							new Splashscreen({
+								autostart: true,
+								templateName: "renameHashtagSplashscreen",
+								closeOnButton: "#js-btn-closeRenameHashtag, #js-btn-importSession",
+								onRendered: function (instance) {
+									$('#js-btn-importSession').on('click', function () {
+										var hashtag = $("#hashtagRename-input-field").val().trim();
+										Meteor.call('HashtagsCollection.addHashtag', {
+											privateKey: localData.getPrivateKey(),
+											hashtag: hashtag,
+											musicVolume: 80,
+											musicEnabled: 1,
+											musicTitle: "Song1",
+											theme: "theme-dark"
+										});
+										instance.hashtag = hashtag;
+										instance.questionList.forEach(function (questionListDoc) {
+											questionListDoc.hashtag = hashtag;
+											questionListDoc.answerOptionList.forEach(function (answerOptionListDoc) {
+												answerOptionListDoc.hashtag = hashtag;
+											});
+										});
+
+										localData.addHashtag(instance);
+									});
+									$('#hashtagRename-input-field').on('input', function () {
+										var inputHashtag = $(event.target).val();
+										if (["?", "/", "\\"].some(function (v) { return inputHashtag.indexOf(v) >= 0; })) {
+											$("#js-btn-importSession").attr("disabled", "disabled");
+											return;
+										}
+										if (hashtagLib.trimIllegalChars(inputHashtag).length === 0) {
+											$("#js-btn-importSession").attr("disabled", "disabled");
+											return;
+										}
+										var hashtagDoc = HashtagsCollection.findOne({hashtag: inputHashtag});
+										if (!hashtagDoc) {
+											$("#js-btn-importSession").removeAttr("disabled");
+										} else {
+											$("#js-btn-importSession").attr("disabled", "disabled");
+										}
+									});
+								}
+							});
+						} else {
+							new ErrorSplashscreen({
+								autostart: true,
+								errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.invalid_data")
+							});
+						}
 					}
 				});
 			};

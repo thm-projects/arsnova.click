@@ -353,6 +353,7 @@
           "Internal Server Error": "Interner Serverfehler",
           "update_failed": "Es ist ein Fehler bei der Aktualisierung deiner Frage aufgetreten.",
           "session_exists": "Diese Sitzung existiert bereits!",
+          "session_exists_new": "Diese Sitzung existiert bereits! Neuer Hashtag:",
           "session_not_exists": "Diese Sitzung existiert nicht!",
           "hashtag_exists": "Dieser Quizname existiert bereits!",
           "session_not_available": "Dieser Quizrunde kann aktuell nicht beigetreten werden.",

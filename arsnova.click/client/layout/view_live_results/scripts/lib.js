@@ -99,7 +99,7 @@ export function countdownFinish() {
 	footerElements.calculateFooter();
 }
 
-export function startCountdown (index, retry = 0) {
+export function startCountdown(index, retry = 0) {
 	questionIndex = index;
 	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	var questionDoc = QuestionGroupCollection.findOne().questionList[index];

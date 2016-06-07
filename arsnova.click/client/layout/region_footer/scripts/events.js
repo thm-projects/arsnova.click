@@ -116,7 +116,11 @@ const clickEvents = {
 				}, function (err) {
 					if (!err) {
 						localData.addHashtag(instance);
-						Router.go("/hashtagmanagement");
+						if (Router.current().route.path() === "/hashtagmanagement") {
+							location.reload();
+						} else {
+							Router.go("/hashtagmanagement");
+						}
 					}
 				});
 			};

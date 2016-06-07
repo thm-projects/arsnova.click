@@ -89,7 +89,7 @@ const clickEvents = {
 			fileReader.onload = function () {
 				let asJSON = null;
 				try {
-					asJSON = JSON.parse(fileReader.result);
+					asJSON = $.parseJSON(fileReader.result);
 				} catch (ex) {
 					new ErrorSplashscreen({
 						autostart: true,
@@ -110,18 +110,21 @@ const clickEvents = {
 					hashtag: instance.getHashtag(),
 					musicVolume: 80,
 					musicEnabled: 1,
-
 					musicTitle: "Song1",
 					theme: "theme-dark"
 				}, function (err) {
 					if (!err) {
 						localData.addHashtag(instance);
-						Router.go("/hashtagmanagement");
+						if (Router.current().route.path() === "/hashtagmanagement") {
+							location.reload();
+						} else {
+							Router.go("/hashtagmanagement");
+						}
 					}
 				});
 			};
 			for (var i = 0; i < fileList.length; i++) {
-				fileReader.readAsBinaryString(fileList[i]);
+				fileReader.readAsText(fileList[i], "UTF-8");
 			}
 		});
 	},

@@ -164,7 +164,7 @@
   .fixed-bottom-item-text {
     display: none;
   }
-  @media (max-width: 320px), (min-width: 425px) {
+  @media (min-width: 425px) {
     .fixed-bottom-item-text {
       display: inline;
     }

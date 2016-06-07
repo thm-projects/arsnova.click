@@ -207,41 +207,6 @@ Template.hashtagManagement.events({
 			}
 		});
 	},
-	"click #importFile": function () {
-		$('#js-import').trigger('click');
-	},
-	"change #js-import": function (event) {
-		var fileList = event.target.files;
-		var fileReader = new FileReader();
-		fileReader.onload = function () {
-			var asJSON = JSON.parse(fileReader.result);
-			let instance = null;
-			switch (asJSON.type) {
-				case "DefaultQuestionGroup":
-					instance = new DefaultQuestionGroup(asJSON);
-					break;
-				default:
-					throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
-			}
-			Meteor.call('HashtagsCollection.addHashtag', {
-				privateKey: localData.getPrivateKey(),
-				hashtag: instance.getHashtag(),
-				musicVolume: 80,
-				musicEnabled: 1,
-				musicTitle: "Song1",
-				theme: "theme-dark"
-			}, function (err) {
-				if (!err) {
-					localData.addHashtag(instance);
-					Session.set("questionGroup", instance);
-					lib.connectEventManager(instance.getHashtag());
-				}
-			});
-		};
-		for (var i = 0; i < fileList.length; i++) {
-			fileReader.readAsBinaryString(fileList[i]);
-		}
-	},
 	"click .startQuiz": function (event) {
 		var hashtag = $(event.currentTarget).parents(".hashtagManagementRow").attr("id");
 		Session.set("questionGroup", localData.reenterSession(hashtag));

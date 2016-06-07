@@ -16,26 +16,28 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="renameHashtagSplashscreen">
-	<div class="modal fade" role="dialog">
+	<div class="modal fade splashscreen" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
                 <div class="modal-header">
-                    <p>{{{_ "view.hashtag_management.import"}}}</p>
+                    <h2>{{{_ "view.hashtag_management.import"}}}</h2>
                 </div>
 				<div class="modal-body">
-                    <p>{{{_ "plugins.splashscreen.error.error_messages.session_exists_new"}}}</p>
-					<div class="form-group">
+                    <p>{{_ "plugins.splashscreen.error.error_messages.session_exists_warning"}}</p>
+                    <p>{{_ "plugins.splashscreen.error.error_messages.session_exists_new"}}</p>
+                    <div class="form-group">
                         <input type="text"
                                class="input-field round-corners hashtag-field text-center"
-                               id="hashtagRename-input-field" placeholder="{{_ "view.hashtag_management.enter_quiz_name" }}"
-                               aria-describedby="basic-addon1" maxlength="25">
+                               id="hashtagRename-input-field"
+                               placeholder="{{_ "view.hashtag_management.enter_quiz_name" }}"
+                               aria-describedby="basic-addon1"
+                               maxlength="25" />
 					</div>
 				</div>
 				<div class="modal-footer">
 					<div class="row">
 						<div class="col-xs-6">
-							<button id="js-btn-closeRenameHashtag" type="button"
-									class="btn btn-warning btn-lg btn-answerOption">
+							<button id="js-btn-closeRenameHashtag" class="btn btn-warning btn-lg btn-answerOption" type="button">
 								<span class="glyphicon glyphicon-remove glyph-left" aria-hidden="true"></span>
 								<span class="ansBtn">{{_ "global.abort"}}</span>
 							</button>

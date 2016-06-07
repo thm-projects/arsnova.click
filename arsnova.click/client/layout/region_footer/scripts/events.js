@@ -158,7 +158,7 @@ const clickEvents = {
 									Router.go("/hashtagmanagement");
 								}
 							});
-							$('#hashtagRename-input-field').on('input', function () {
+							$('#hashtagRename-input-field').on('input', function (event) {
 								var inputHashtag = $(event.target).val();
 								if (["?", "/", "\\"].some(function (v) { return inputHashtag.indexOf(v) >= 0; })) {
 									$("#js-btn-importSession").attr("disabled", "disabled");

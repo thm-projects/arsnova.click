@@ -202,7 +202,8 @@ Template.hashtagManagement.events({
 					Meteor.call('Main.deleteEverything', {
 						hashtag: hashtagRow[0].id
 					});
-					hashtagRow.hide();
+					hashtagRow.prev("hr").remove();
+					hashtagRow.remove();
 				});
 			}
 		});

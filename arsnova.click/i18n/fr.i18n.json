@@ -352,6 +352,8 @@
           "Internal Server Error": "Erreur interne du serveur",
           "update_failed": "La mise à jour de la question n'a pas.",
           "session_exists": "Cette session existe déjà!",
+          "session_exists_warning": "Cette session existe déjà sur le serveur!",
+          "session_exists_new": "Pour l'importer, il est nécessaire de renommer la session:",
           "session_not_exists": "N'existe pas Cette session",
           "hashtag_exists": "Ce hashtag existe déjà!",
           "session_not_available": "Session est actuellement pas disponible pour rejoindre",

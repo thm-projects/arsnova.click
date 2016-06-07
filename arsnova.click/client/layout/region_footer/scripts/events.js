@@ -135,7 +135,7 @@ const clickEvents = {
 						autostart: true,
 						templateName: "renameHashtagSplashscreen",
 						closeOnButton: "#js-btn-closeRenameHashtag, #js-btn-importSession",
-						onRendered: function (instance) {
+						onRendered: function () {
 							$('#js-btn-importSession').on('click', function () {
 								var hashtag = $("#hashtagRename-input-field").val().trim();
 								var hashtagDoc = HashtagsCollection.findOne({hashtag: hashtag});

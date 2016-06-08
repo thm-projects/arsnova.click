@@ -18,7 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {MemberListCollection} from '/lib/member_list/collection.js';
+import {MemberListCollection, userNickSchema} from '/lib/member_list/collection.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 import * as lib from './lib.js';
@@ -27,23 +27,35 @@ Template.nick.events({
 	"click #forwardButton": function (event) {
 		event.stopPropagation();
 		var nickname = $("#nickname-input-field").val();
-		var bgColor = lib.rgbToHex(lib.getRandomInt(0, 255), lib.getRandomInt(0, 255), lib.getRandomInt(0, 255));
-		Meteor.call('MemberListCollection.addLearner', {
-			hashtag: Router.current().params.quizName,
-			nick: nickname,
-			privateKey: localData.getPrivateKey(),
-			backgroundColor: bgColor,
-			foregroundColor: lib.transformForegroundColor(lib.hexToRgb(bgColor))
-		}, (err) => {
-			if (err) {
-				$("#forwardButton").attr("disabled", "disabled");
-				ErrorSplashscreen.setErrorText(TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason));
-				ErrorSplashscreen.open();
-			} else {
-				localStorage.setItem(Router.current().params.quizName + "nick", nickname);
-				Router.go("/" + Router.current().params.quizName + "/memberlist");
-			}
-		});
+		try {
+			new SimpleSchema({
+				userNick: userNickSchema
+			}).validate({userNick: nickname});
+			var bgColor = lib.rgbToHex(lib.getRandomInt(0, 255), lib.getRandomInt(0, 255), lib.getRandomInt(0, 255));
+			Meteor.call('MemberListCollection.addLearner', {
+				hashtag: Router.current().params.quizName,
+				nick: nickname,
+				privateKey: localData.getPrivateKey(),
+				backgroundColor: bgColor,
+				foregroundColor: lib.transformForegroundColor(lib.hexToRgb(bgColor))
+			}, (err) => {
+				if (err) {
+					$("#forwardButton").attr("disabled", "disabled");
+					new ErrorSplashscreen({
+						autorun: true,
+						errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
+					});
+				} else {
+					localStorage.setItem(Router.current().params.quizName + "nick", nickname);
+					Router.go("/" + Router.current().params.quizName + "/memberlist");
+				}
+			});
+		} catch (ex) {
+			new ErrorSplashscreen({
+				autorun: true,
+				errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
+			})
+		}
 	},
 	"click #backButton": function () {
 		Router.go("/" + Router.current().params.quizName + "/resetToHome");

@@ -78,7 +78,7 @@ Template.markdownBar.events({
 						new ErrorSplashscreen({
 							autostart: true,
 							errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
-						})
+						});
 					}
 				});
 			}
@@ -142,7 +142,7 @@ Template.markdownBar.events({
 						new ErrorSplashscreen({
 							autostart: true,
 							errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
-						})
+						});
 					}
 				});
 			}
@@ -178,7 +178,7 @@ Template.markdownBar.events({
 						new ErrorSplashscreen({
 							autostart: true,
 							errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
-						})
+						});
 					}
 				});
 			}
@@ -216,7 +216,7 @@ Template.markdownBar.events({
 						new ErrorSplashscreen({
 							autostart: true,
 							errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
-						})
+						});
 					}
 				});
 			}

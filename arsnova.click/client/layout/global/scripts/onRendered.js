@@ -19,7 +19,6 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import  * as localData from '/lib/local_storage.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';

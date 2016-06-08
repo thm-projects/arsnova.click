@@ -18,7 +18,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {SubsManager} from 'meteor/meteorhacks:subs-manager';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
@@ -29,8 +28,10 @@ import {getChangeEventsForRoute} from '/client/plugins/event_stack_observer/scri
 import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onRemoveEvent.js';
 
 const subsCache = new SubsManager({
-	cacheLimit: 8, // maximum number of cached subscriptions
-	expireIn: 15 // any subscription will expire after 15 minutes, if it's not subscribed again
+	/* maximum number of cached subscriptions */
+	cacheLimit: 8,
+	/* any subscription will expire after 15 minutes, if it's not subscribed again */
+	expireIn: 15
 });
 
 Router.configure({

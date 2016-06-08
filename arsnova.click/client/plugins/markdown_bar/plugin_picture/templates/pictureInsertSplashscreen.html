@@ -24,12 +24,12 @@
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-label round-corners-top-left input-group-addon input-field-bg-color">{{_ "plugins.markdown_bar.link_text"}}:</div>
-							<input type="text" class="input-field round-corners-top-right" id="pictureText" placeholder="{{_ "plugins.markdown_bar.visible_text"}}">
+							<input type="text" class="input-field round-corners-top-right" id="pictureText" placeholder="{{_ "plugins.markdown_bar.visible_text"}}" maxlength="{{getUrlSchema.max}}">
 						</div>
 						<hr class="hr-without-margin">
 						<div class="input-group">
 							<div class="input-label round-corners-bottom-left input-group-addon input-field-bg-color">{{_ "plugins.markdown_bar.link_destination"}}:</div>
-							<input type="text" class="input-field round-corners-bottom-right" id="pictureDestination" placeholder="http://">
+							<input type="text" class="input-field round-corners-bottom-right" id="pictureDestination" placeholder="http://" maxlength="{{getUrlSchema.max}}">
 						</div>
 					</div>
 				</div>

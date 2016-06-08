@@ -76,7 +76,7 @@ Template.markdownBar.events({
 						insertInQuestionText('[' + linkText + '](' + linkDestination + ')');
 					} catch (ex) {
 						new ErrorSplashscreen({
-							autorun: true,
+							autostart: true,
 							errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
 						})
 					}
@@ -140,7 +140,7 @@ Template.markdownBar.events({
 						insertInQuestionText('![' + linkText + '](' + linkDestination + ' "autoxautoxleft")');
 					} catch (ex) {
 						new ErrorSplashscreen({
-							autorun: true,
+							autostart: true,
 							errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
 						})
 					}
@@ -176,7 +176,7 @@ Template.markdownBar.events({
 						insertInQuestionText('[![' + linkText + '](' + picUrl + ')](' + linkDestination + ')');
 					} catch (ex) {
 						new ErrorSplashscreen({
-							autorun: true,
+							autostart: true,
 							errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
 						})
 					}
@@ -214,7 +214,7 @@ Template.markdownBar.events({
 						insertInQuestionText('[![' + linkText + '](' + picUrl + ')](' + videoUrl + ')');
 					} catch (ex) {
 						new ErrorSplashscreen({
-							autorun: true,
+							autostart: true,
 							errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
 						})
 					}

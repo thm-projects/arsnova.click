@@ -108,7 +108,7 @@ export function makeAndSendResponse(answerOptionNumber) {
 		if (err) {
 			new ErrorSplashscreen({
 				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+				errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
 			});
 		}
 	});
@@ -124,7 +124,7 @@ export function makeAndSendRangedResponse(value) {
 		if (err) {
 			new ErrorSplashscreen({
 				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+				errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
 			});
 		}
 	});

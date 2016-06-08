@@ -37,7 +37,7 @@ function addDefaultChangeEvents() {
 		if (!localData.containsHashtag(Router.current().params.quizName)) {
 			new ErrorSplashscreen({
 				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.session_closed")
+				errorMessage: "plugins.splashscreen.error.error_messages.session_closed"
 			});
 		}
 		Router.go("/" + Router.current().params.quizName + "/resetToHome");
@@ -62,7 +62,7 @@ function addMemberlistChangeEvents() {
 			if (value.user === localStorage.getItem(Router.current().params.quizName + "nick")) {
 				new ErrorSplashscreen({
 					autostart: true,
-					errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.kicked_from_quiz")
+					errorMessage: "plugins.splashscreen.error.error_messages.kicked_from_quiz"
 				});
 				Router.go("/" + Router.current().params.quizName + "/resetToHome");
 			}

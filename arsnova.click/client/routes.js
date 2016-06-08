@@ -69,7 +69,7 @@ Router.onBeforeAction(function () {
 	} catch (ex) {
 		new ErrorSplashscreen({
 			autostart: true,
-			errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing")
+			errorMessage: "plugins.splashscreen.error.error_messages.private_browsing"
 		});
 	} finally {
 		this.next();
@@ -102,7 +102,7 @@ Router.onBeforeAction(function () {
 		if (!localData.containsHashtag(Router.current().params.quizName)) {
 			new ErrorSplashscreen({
 				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.session_closed")
+				errorMessage: "plugins.splashscreen.error.error_messages.session_closed"
 			});
 		}
 		Router.go("/" + Router.current().params.quizName + "/resetToHome");

@@ -91,7 +91,7 @@ Template.liveResults.events({
 			if (err) {
 				new ErrorSplashscreen({
 					autostart: true,
-					errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.export_failed") + err.reason
+					errorMessage: "plugins.splashscreen.error.error_messages.export_failed"
 				});
 			} else {
 				var exportData = "text/json;charset=utf-8," + encodeURIComponent(res);
@@ -134,7 +134,7 @@ Template.liveResults.events({
 			if (err) {
 				new ErrorSplashscreen({
 					autostart: true,
-					errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+					errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
 				});
 				Session.set("sessionClosed", true);
 			} else {

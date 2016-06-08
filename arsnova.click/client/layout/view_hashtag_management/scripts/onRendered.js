@@ -26,14 +26,14 @@ Template.hashtagView.onRendered(function () {
 		if (!localStorage.getItem("localStorageAvailable")) {
 			new ErrorSplashscreen({
 				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing")
+				errorMessage: "plugins.splashscreen.error.error_messages.private_browsing"
 			});
 			return;
 		}
 	} catch (err) {
 		new ErrorSplashscreen({
 			autostart: true,
-			errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing")
+			errorMessage: "plugins.splashscreen.error.error_messages.private_browsing"
 		});
 		return;
 	}

@@ -42,7 +42,7 @@ Template.nick.events({
 				if (err) {
 					$("#forwardButton").attr("disabled", "disabled");
 					new ErrorSplashscreen({
-						autorun: true,
+						autostart: true,
 						errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
 					});
 				} else {
@@ -52,9 +52,9 @@ Template.nick.events({
 			});
 		} catch (ex) {
 			new ErrorSplashscreen({
-				autorun: true,
+				autostart: true,
 				errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
-			})
+			});
 		}
 	},
 	"click #backButton": function () {

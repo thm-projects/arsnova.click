@@ -16,7 +16,7 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="renameHashtagSplashscreen">
-	<div class="modal fade splashscreen" role="dialog">
+	<div class="modal {{#unless isMobileDevice}}fade {{/unless}}splashscreen" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
                 <div class="modal-header">
@@ -31,7 +31,7 @@
                                id="hashtagRename-input-field"
                                placeholder="{{_ "view.hashtag_management.enter_quiz_name" }}"
                                aria-describedby="basic-addon1"
-                               maxlength="25" />
+                               maxlength="{{getHashtagSchema.max}}" />
 					</div>
 				</div>
 				<div class="modal-footer">

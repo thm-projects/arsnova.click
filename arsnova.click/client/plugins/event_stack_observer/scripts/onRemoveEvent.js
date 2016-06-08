@@ -9,7 +9,7 @@ function addDefaultRemoveEvents() {
 		if (!localData.containsHashtag(Router.current().params.quizName)) {
 			new ErrorSplashscreen({
 				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.session_closed")
+				errorMessage: "plugins.splashscreen.error.error_messages.session_closed"
 			});
 		}
 		Router.go("/" + Router.current().params.quizName + "/resetToHome");

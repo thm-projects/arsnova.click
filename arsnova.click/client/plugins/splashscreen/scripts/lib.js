@@ -181,7 +181,7 @@ export class ErrorSplashscreen extends Splashscreen {
 	setErrorText (text) {
 		if (this.isRendered) {
 			$(this.templateSelector).find(".modal-header>h2").text(TAPi18n.__("plugins.splashscreen.error.title"));
-			$(this.templateSelector).find(".modal-body").text(text);
+			$(this.templateSelector).find(".modal-body").text(TAPi18n.__(text));
 		} else {
 			throw new Error(TAPi18n.__("plugins.splashscreen.error.set_text_error"));
 		}
@@ -215,7 +215,7 @@ export function showReadingConfirmationSplashscreen(index) {
 						if (err) {
 							new ErrorSplashscreen({
 								autostart: true,
-								errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+								errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
 							});
 						}
 					});

@@ -21,7 +21,7 @@ import {Tracker} from 'meteor/tracker';
 import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {HashtagsCollection, hashtagSchema} from '/lib/hashtags/collection.js';
 import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
 import * as localData from '/lib/local_storage.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
@@ -89,42 +89,51 @@ Template.hashtagView.events({
 		}
 	},
 	"click #addNewHashtag": function () {
-		var hashtag = $("#hashtag-input-field").val().trim();
-		var reenter = false;
-		if (hashtag.length > 0) {
-			var localHashtags = localData.getAllHashtags();
-			if ($.inArray(hashtag, localHashtags) > -1 && HashtagsCollection.findOne()) {
-				reenter = true;
+		const hashtag = $("#hashtag-input-field").val().trim();
+		let reenter = false;
+		try {
+			new SimpleSchema({
+				hashtag: hashtagSchema
+			}).validate({hashtag: hashtag});
+		} catch (ex) {
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
+			});
+			return;
+		}
+		const localHashtags = localData.getAllHashtags();
+		if ($.inArray(hashtag, localHashtags) > -1 && HashtagsCollection.findOne()) {
+			reenter = true;
+		}
+		if (reenter) {
+			sessionStorage.setItem("overrideValidQuestionRedirect", true);
+			const session = localData.reenterSession(hashtag);
+			Session.set("questionGroup", session);
+			lib.connectEventManager(hashtag);
+		} else {
+			const questionGroup = new DefaultQuestionGroup({
+				hashtag: hashtag,
+				questionList: []
+			});
+			questionGroup.addDefaultQuestion(0);
+			for (let i = 0; i < 4; i++) {
+				questionGroup.getQuestionList()[0].addDefaultAnswerOption(i);
 			}
-			if (reenter) {
-				sessionStorage.setItem("overrideValidQuestionRedirect", true);
-				const session = localData.reenterSession(hashtag);
-				Session.set("questionGroup", session);
-				lib.connectEventManager(hashtag);
-			} else {
-				const questionGroup = new DefaultQuestionGroup({
-					hashtag: hashtag,
-					questionList: []
-				});
-				questionGroup.addDefaultQuestion(0);
-				for (let i = 0; i < 4; i++) {
-					questionGroup.getQuestionList()[0].addDefaultAnswerOption(i);
+			Meteor.call('HashtagsCollection.addHashtag', {
+				privateKey: localData.getPrivateKey(),
+				hashtag: questionGroup.getHashtag(),
+				musicVolume: 80,
+				musicEnabled: 1,
+				musicTitle: "Song1",
+				theme: "theme-default"
+			}, function (err) {
+				if (!err) {
+					localData.addHashtag(questionGroup);
+					Session.set("questionGroup", questionGroup);
+					lib.connectEventManager(hashtag);
 				}
-				Meteor.call('HashtagsCollection.addHashtag', {
-					privateKey: localData.getPrivateKey(),
-					hashtag: questionGroup.getHashtag(),
-					musicVolume: 80,
-					musicEnabled: 1,
-					musicTitle: "Song1",
-					theme: "theme-default"
-				}, function (err) {
-					if (!err) {
-						localData.addHashtag(questionGroup);
-						Session.set("questionGroup", questionGroup);
-						lib.connectEventManager(hashtag);
-					}
-				});
-			}
+			});
 		}
 	},
 	"click #joinSession": function () {
@@ -136,7 +145,7 @@ Template.hashtagView.events({
 			$("#joinSession").attr("disabled", "disabled");
 			new ErrorSplashscreen({
 				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.session_not_available")
+				errorMessage: "plugins.splashscreen.error.error_messages.session_not_available"
 			});
 		}
 	},

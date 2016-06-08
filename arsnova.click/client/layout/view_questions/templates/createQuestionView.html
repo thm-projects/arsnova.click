@@ -35,7 +35,7 @@
                 <div id="editQuestionText" class="col-md-12">
                     {{> markdownBar }}
                     <textarea class="round-corners textarea placeholder-align-center"
-                              maxlength="1000" rows="{{#if isLargeWindow}}8{{else}}4{{/if}}" id="questionText"
+                              maxlength="{{getQuestionTextSchema.max}}" rows="{{#if isLargeWindow}}8{{else}}4{{/if}}" id="questionText"
                               placeholder="{{_ "view.questions.enter_question_here"}}"
                     >{{questionText}}</textarea>
                 </div>

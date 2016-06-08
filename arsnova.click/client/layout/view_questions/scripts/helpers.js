@@ -18,9 +18,11 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {questionTextSchema} from '/lib/questions/collection.js';
 import * as lib from './lib.js';
 
 Template.createQuestionView.helpers({
+	getQuestionTextSchema: questionTextSchema,
 	//Get question from Sessions-Collection if it already exists
 	questionText: function () {
 		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {

@@ -16,10 +16,13 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Session} from 'meteor/session';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {questionReflection} from '/lib/questions/question_reflection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {questionTextSchema} from '/lib/questions/collection.js';
+import {questionReflection} from '/lib/questions/question_reflection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
+import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 
 function doesMarkdownSyntaxExist(questionText, syntaxStart, syntaxMiddle, syntaxEnd) {
@@ -95,6 +98,18 @@ export function addQuestion(index) {
 	const questionText = $('#questionText').val() || "";
 	const questionType = $('#chooseQuestionType').find('option:selected').attr("id");
 	const questionItem = Session.get("questionGroup");
+
+	try {
+		new SimpleSchema({
+			questionText: questionTextSchema
+		}).validate({questionText: questionText});
+	} catch (ex) {
+		new ErrorSplashscreen({
+			autostart: true,
+			errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
+		});
+		return;
+	}
 
 	// Check if we need to change the type of the question
 	if (questionItem.getQuestionList()[index].constructor.name !== questionType) {

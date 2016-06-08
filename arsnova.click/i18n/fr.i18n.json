@@ -369,7 +369,8 @@
           "response_timeout": "La réponse a été donnée hors de la plage de temps",
           "insert_leaderboard_failed": "Erreur lors de l'ajout d'une réponse réglée sur leaderboard",
           "session_closed": "La session quiz a été fermé",
-          "invalid_data": "Les fichiers importés sont corrompus ou l'accès est refusé!"
+          "invalid_data": "Les fichiers importés sont corrompus ou l'accès est refusé!",
+          "invalid_input_data": "Les données saisies est soit invalide ou l'accès est refusé!"
         }
       }
     }

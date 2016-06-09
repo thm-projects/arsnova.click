@@ -30,7 +30,7 @@ import * as lib from './lib.js';
 
 Template.hashtagView.events({
 	"input #hashtag-input-field": function (event) {
-		var inputHashtag = $(event.target).val();
+		var inputHashtag = $(event.target).val().trim();
 		if (["?", "/", "\\"].some(function (v) { return inputHashtag.indexOf(v) >= 0; })) {
 			$("#joinSession, #addNewHashtag").attr("disabled", "disabled");
 			return;
@@ -46,7 +46,7 @@ Template.hashtagView.events({
 				if (!EventManagerCollection.findOne() || localData.containsHashtag($("#hashtag-input-field").val())) {
 					$("#joinSession").attr("disabled", "disabled");
 				}
-				lib.setEventManagerHandle(EventManagerCollection.find({hashtag: $("#hashtag-input-field").val()}).observeChanges({
+				lib.setEventManagerHandle(EventManagerCollection.find({hashtag: {'$regex': $("#hashtag-input-field").val(), $options: 'i'}}).observeChanges({
 					changed: function (id, changedFields) {
 						if (!isNaN(changedFields.sessionStatus)) {
 							if (changedFields.sessionStatus === 2) {
@@ -75,13 +75,13 @@ Template.hashtagView.events({
 			return;
 		}
 
-		var hashtagDoc = HashtagsCollection.findOne({hashtag: inputHashtag});
+		var hashtagDoc = HashtagsCollection.findOne({hashtag: {'$regex': inputHashtag, $options: 'i'}});
 		if (!hashtagDoc) {
 			$("#joinSession").attr("disabled", "disabled");
 			addNewHashtagItem.removeAttr("disabled");
 		} else {
-			var localHashtags = localData.getAllHashtags();
-			if ($.inArray(inputHashtag, localHashtags) > -1) {
+			var localLoweredHashtags = localData.getAllLoweredHashtags();
+			if ($.inArray(inputHashtag.toLowerCase(), localLoweredHashtags) > -1) {
 				addNewHashtagItem.html(TAPi18n.__("view.hashtag_management.reenter_session") + '<span class="glyphicon glyphicon-log-in glyph-right" aria-hidden="true"></span>');
 				addNewHashtagItem.removeAttr("disabled");
 			} else {
@@ -103,8 +103,8 @@ Template.hashtagView.events({
 			});
 			return;
 		}
-		const localHashtags = localData.getAllHashtags();
-		if ($.inArray(hashtag, localHashtags) > -1 && HashtagsCollection.findOne()) {
+		const localLoweredHashtags = localData.getAllLoweredHashtags();
+		if ($.inArray(hashtag.toLowerCase(), localLoweredHashtags) > -1 && HashtagsCollection.findOne()) {
 			reenter = true;
 		}
 		if (reenter) {

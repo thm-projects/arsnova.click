@@ -17,7 +17,6 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
@@ -108,7 +107,7 @@ export function makeAndSendResponse(answerOptionNumber) {
 		if (err) {
 			new ErrorSplashscreen({
 				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+				errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
 			});
 		}
 	});
@@ -124,7 +123,7 @@ export function makeAndSendRangedResponse(value) {
 		if (err) {
 			new ErrorSplashscreen({
 				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+				errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
 			});
 		}
 	});

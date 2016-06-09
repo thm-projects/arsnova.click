@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
@@ -26,14 +25,14 @@ Template.hashtagView.onRendered(function () {
 		if (!localStorage.getItem("localStorageAvailable")) {
 			new ErrorSplashscreen({
 				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing")
+				errorMessage: "plugins.splashscreen.error.error_messages.private_browsing"
 			});
 			return;
 		}
 	} catch (err) {
 		new ErrorSplashscreen({
 			autostart: true,
-			errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.private_browsing")
+			errorMessage: "plugins.splashscreen.error.error_messages.private_browsing"
 		});
 		return;
 	}

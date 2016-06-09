@@ -15,6 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+export const urlSchema = {
+	type: String,
+	min: 1,
+	max: 2048
+};
+
 export function insertInQuestionText(textStart, textEnd) {
 	textEnd = typeof textEnd !== 'undefined' ? textEnd : '';
 	let textarea = document.getElementById('questionText');

@@ -16,18 +16,10 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {hashtagSchema} from '/lib/hashtags/collection.js';
-import * as localData from '/lib/local_storage.js';
+import {userNickSchema} from "/lib/member_list/collection.js";
 
-Template.hashtagManagement.helpers({
-	serverHashtags: function () {
-		return localData.getAllHashtags();
-	},
-	isLastItem: function (index) {
-		return index === localData.getAllHashtags().length - 1;
+Template.nick.helpers({
+	getUserNickSchema: function () {
+		return userNickSchema;
 	}
 });
-
-Template.hashtagView.helpers($.extend({getHashtagSchema: hashtagSchema}, {
-
-}));

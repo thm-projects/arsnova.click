@@ -16,9 +16,10 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import {markdownAlreadyExistsAndAutoRemove, insertInQuestionText} from './lib.js';
+import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {markdownAlreadyExistsAndAutoRemove, insertInQuestionText, urlSchema} from './lib.js';
 
 Template.markdownBar.events({
 	"click #infoMarkdownButton": function () {
@@ -68,7 +69,17 @@ Template.markdownBar.events({
 				$('#js-btn-saveHyperlink').on('click', function () {
 					var linkText = document.getElementById('hyperlinkText').value;
 					var linkDestination = document.getElementById('hyperlinkDestination').value;
-					insertInQuestionText('[' + linkText + '](' + linkDestination + ')');
+					try {
+						new SimpleSchema({
+							hyperlink: urlSchema
+						}).validate({hyperlink: linkDestination});
+						insertInQuestionText('[' + linkText + '](' + linkDestination + ')');
+					} catch (ex) {
+						new ErrorSplashscreen({
+							autostart: true,
+							errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
+						});
+					}
 				});
 			}
 		});
@@ -122,7 +133,17 @@ Template.markdownBar.events({
 				$('#js-btn-savePicture').on('click', function () {
 					var linkText = document.getElementById('pictureText').value;
 					var linkDestination = document.getElementById('pictureDestination').value;
-					insertInQuestionText('![' + linkText + '](' + linkDestination + ' "autoxautoxleft")');
+					try {
+						new SimpleSchema({
+							hyperlink: urlSchema
+						}).validate({hyperlink: linkDestination});
+						insertInQuestionText('![' + linkText + '](' + linkDestination + ' "autoxautoxleft")');
+					} catch (ex) {
+						new ErrorSplashscreen({
+							autostart: true,
+							errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
+						});
+					}
 				});
 			}
 		});
@@ -148,7 +169,17 @@ Template.markdownBar.events({
 					var linkText = document.getElementById('youtubeText').value;
 					var linkDestination = document.getElementById('youtubeDestination').value;
 					var picUrl = linkDestination.replace("www.", "img.").replace("watch?v=", "vi/").concat("/0.jpg");
-					insertInQuestionText('[![' + linkText + '](' + picUrl + ')](' + linkDestination + ')');
+					try {
+						new SimpleSchema({
+							hyperlink: urlSchema
+						}).validate({hyperlink: linkDestination});
+						insertInQuestionText('[![' + linkText + '](' + picUrl + ')](' + linkDestination + ')');
+					} catch (ex) {
+						new ErrorSplashscreen({
+							autostart: true,
+							errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
+						});
+					}
 				});
 			}
 		});
@@ -176,7 +207,17 @@ Template.markdownBar.events({
 					var videoId = linkDestination.substr(linkDestination.lastIndexOf("/") + 1);
 					var picUrl = 'https://i.vimeocdn.com/video/' + videoId + '_200x150.jpg';
 					var videoUrl = 'https://player.vimeo.com/video/' + videoId;
-					insertInQuestionText('[![' + linkText + '](' + picUrl + ')](' + videoUrl + ')');
+					try {
+						new SimpleSchema({
+							hyperlink: urlSchema
+						}).validate({hyperlink: linkDestination});
+						insertInQuestionText('[![' + linkText + '](' + picUrl + ')](' + videoUrl + ')');
+					} catch (ex) {
+						new ErrorSplashscreen({
+							autostart: true,
+							errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
+						});
+					}
 				});
 			}
 		});

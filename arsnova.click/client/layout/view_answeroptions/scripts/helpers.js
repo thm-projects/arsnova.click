@@ -17,6 +17,7 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {answerTextSchema} from '/lib/answeroptions/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Template.createAnswerOptions.helpers({
@@ -36,6 +37,7 @@ Template.createAnswerOptions.helpers({
 });
 
 Template.defaultAnswerOptionTemplate.helpers({
+	getAnswerTextSchema: answerTextSchema,
 	getAnswerOptions: function () {
 		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
 			return;

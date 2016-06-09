@@ -95,7 +95,7 @@ const clickEvents = {
 				} catch (ex) {
 					new ErrorSplashscreen({
 						autostart: true,
-						errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.invalid_data")
+						errorMessage: "plugins.splashscreen.error.error_messages.invalid_data"
 					});
 					return;
 				}
@@ -119,7 +119,7 @@ const clickEvents = {
 						if (err) {
 							new ErrorSplashscreen({
 								autostart: true,
-								errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.invalid_data")
+								errorMessage: "plugins.splashscreen.error.error_messages.invalid_data"
 							});
 							return;
 						}

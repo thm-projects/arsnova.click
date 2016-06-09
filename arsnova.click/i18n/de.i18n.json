@@ -370,7 +370,8 @@
           "response_timeout": "Der Countdown ist bereits abgelaufen",
           "insert_leaderboard_failed": "Fehler beim Hinzufügen der Antwort zur Rangliste",
           "session_closed": "Die Quizrunde wurde beendet",
-          "invalid_data": "Die importierten Daten sind ungültig oder fehlerhaft!"
+          "invalid_data": "Die importierten Daten sind ungültig oder fehlerhaft!",
+          "invalid_input_data": "Die eingegebenen Daten sind ungültig oder fehlerhaft!"
         }
       }
     }

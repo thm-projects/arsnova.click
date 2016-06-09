@@ -16,18 +16,26 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {hashtagSchema} from '/lib/hashtags/collection.js';
-import * as localData from '/lib/local_storage.js';
+import {urlSchema} from '../scripts/lib.js';
 
-Template.hashtagManagement.helpers({
-	serverHashtags: function () {
-		return localData.getAllHashtags();
-	},
-	isLastItem: function (index) {
-		return index === localData.getAllHashtags().length - 1;
+const urlSchemaHelper = {
+	getUrlSchema: function () {
+		return urlSchema;
 	}
-});
+};
 
-Template.hashtagView.helpers($.extend({getHashtagSchema: hashtagSchema}, {
+Template.hyperlinkInsertSplashscreen.helpers($.extend({}, urlSchemaHelper, {
+
+}));
+
+Template.pictureInsertSplashscreen.helpers($.extend({}, urlSchemaHelper, {
+
+}));
+
+Template.vimeoInsertSplashscreen.helpers($.extend({}, urlSchemaHelper, {
+
+}));
+
+Template.youtubeInsertSplashscreen.helpers($.extend({}, urlSchemaHelper, {
 
 }));

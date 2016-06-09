@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
@@ -43,7 +42,7 @@ export function connectEventManager(hashtag) {
 				if (err) {
 					new ErrorSplashscreen({
 						autostart: true,
-						errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages." + err.reason)
+						errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
 					});
 					Router.go("/" + hashtag + "/resetToHome");
 				}

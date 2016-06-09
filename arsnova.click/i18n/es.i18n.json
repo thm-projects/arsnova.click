@@ -369,7 +369,8 @@
           "response_timeout": "La respuesta se da fuera del rango de tiempo",
           "insert_leaderboard_failed": "Error al añadir la respuesta se establece en la tabla de posiciones",
           "session_closed": "La sesión se ha cerrado cuestionario",
-          "invalid_data": "Los archivos importados son corruptos o el acceso es denegado!"
+          "invalid_data": "Los archivos importados son corruptos o el acceso es denegado!",
+          "invalid_input_data": "Los datos introducidos no es válida o el acceso es denegado!"
         }
       }
     }

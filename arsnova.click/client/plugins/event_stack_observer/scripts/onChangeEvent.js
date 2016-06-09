@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Session} from 'meteor/session';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
@@ -37,7 +36,7 @@ function addDefaultChangeEvents() {
 		if (!localData.containsHashtag(Router.current().params.quizName)) {
 			new ErrorSplashscreen({
 				autostart: true,
-				errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.session_closed")
+				errorMessage: "plugins.splashscreen.error.error_messages.session_closed"
 			});
 		}
 		Router.go("/" + Router.current().params.quizName + "/resetToHome");
@@ -62,7 +61,7 @@ function addMemberlistChangeEvents() {
 			if (value.user === localStorage.getItem(Router.current().params.quizName + "nick")) {
 				new ErrorSplashscreen({
 					autostart: true,
-					errorMessage: TAPi18n.__("plugins.splashscreen.error.error_messages.kicked_from_quiz")
+					errorMessage: "plugins.splashscreen.error.error_messages.kicked_from_quiz"
 				});
 				Router.go("/" + Router.current().params.quizName + "/resetToHome");
 			}

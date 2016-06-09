@@ -16,14 +16,15 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Session} from 'meteor/session';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {noUiSlider} from 'meteor/arsnova.click:nouislider';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {TAPi18n} from 'meteor/tap:i18n';
+import {answerTextSchema} from '/lib/answeroptions/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {calculateHeaderSize, calculateTitelHeight} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
+import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
-
-export var subscriptionHandler = null;
 
 export function parseAnswerOptionInput(index) {
 	const questionItem = Session.get("questionGroup");
@@ -38,8 +39,20 @@ export function parseAnswerOptionInput(index) {
 }
 
 export function parseSingleAnswerOptionInput(questionIndex, answerOptionIndex) {
+	const answerText = $("#answerOptionText_Number" + answerOptionIndex).val();
+	try {
+		new SimpleSchema({
+			answerText: answerTextSchema
+		}).validate({answerText: answerText});
+	} catch (ex) {
+		new ErrorSplashscreen({
+			autostart: true,
+			errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
+		});
+		return;
+	}
 	const questionItem = Session.get("questionGroup");
-	questionItem.getQuestionList()[questionIndex].getAnswerOptionList()[answerOptionIndex].setAnswerText($("#answerOptionText_Number" + answerOptionIndex).val());
+	questionItem.getQuestionList()[questionIndex].getAnswerOptionList()[answerOptionIndex].setAnswerText(answerText);
 	Session.set("questionGroup", questionItem);
 	localData.addHashtag(Session.get("questionGroup"));
 }

@@ -369,7 +369,8 @@
           "response_timeout": "Response was given out of time range",
           "insert_leaderboard_failed": "Error while adding response set to leaderboard",
           "session_closed": "The quiz session has been closed",
-          "invalid_data": "The imported files are corrupt or the access is denied!"
+          "invalid_data": "The imported files are corrupt or the access is denied!",
+          "invalid_input_data": "The entered data is either invalid or the access is denied!"
         }
       }
     }

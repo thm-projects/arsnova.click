@@ -16,6 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
+import {hashtagSchema} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {isMobileDevice} from './lib.js';
 
@@ -57,5 +58,9 @@ Template.readingConfirmedSplashscreen.helpers($.extend(isMobileDevice, {
 }));
 
 Template.questionAndAnswerSplashscreen.helpers($.extend(isMobileDevice, {
+
+}));
+
+Template.renameHashtagSplashscreen.helpers($.extend(isMobileDevice, {getHashtagSchema: hashtagSchema}, {
 
 }));

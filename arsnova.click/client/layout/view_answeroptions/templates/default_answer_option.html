@@ -41,7 +41,9 @@
                                        class="input-field {{#if isSurveyQuestion}}surveyQuestion{{/if}}"
                                        id="answerOptionText_Number{{getAnswerOptionNumber}}"
                                        placeholder="{{_ "view.answeroptions.answeroptiontext_placeholder"}}"
-                                       value="{{getAnswerText}}">
+                                       value="{{getAnswerText}}"
+                                       maxlength="{{getAnswerTextSchema.max}}"
+                                />
                                 {{#unless isSurveyQuestion}}<input type="checkbox" id="answerOption-{{getAnswerOptionNumber}}" name="switch" />{{/unless}}
                             </div>
                         </div>

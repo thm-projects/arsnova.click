@@ -364,15 +364,15 @@
 	$bg-answer_row-button_green_transition: white;
 	$fg-answer_row-button_green_transition: #663399;
 
-	@if ($name == "theme-colorBlindRedGreen") {
-		$standardBlue: #8d55e2;
-		$standardPurple: #5775e1;
+	@if ($name == "theme-darkPastel") {
+		$standardPurple: #8d55e2;
+		$standardBlue: #5775e1;
 		$standardGreen: #61a754;
 		$background-color: #111111;
 		$success-text-color: white;
 		$info: #757575;
-		$input-background-color: $standardPurple;
-		$warning: $standardBlue;
+		$input-background-color: $standardBlue;
+		$warning: $standardPurple;
 		$fg-warning: #4051a2;
 		$success: $standardGreen;
 		$button-shadow: $info;
@@ -380,12 +380,12 @@
 		$grey-button-color: black;
 		$switch: #7ccd6a;
 		$switch-text-color: #000000;
-		$bg-btn-file-input: $standardBlue;
+		$bg-btn-file-input: $standardPurple;
 		$bg-nav-row: $background-color;
 		$progress-bar-success-color: $standardGreen;
-		$progress-bar-read-confirmation: $standardPurple;
-		$progress-bar-failure-color: $standardBlue;
-		$bg-progress-bar-reading_confirmation: $standardPurple;
+		$progress-bar-read-confirmation: $standardBlue;
+		$progress-bar-failure-color: ;
+		$bg-progress-bar-reading_confirmation: $standardBlue;
 		$bg-questionList-row: $bg-nav-row;
 		$bg-container: $background-color;
 		$bg-footer: $background-color;
@@ -393,21 +393,21 @@
 		$disabled-button-background: $info;
 		$placeholder-color: #FFFFFF;
 		$input-group-letter-color: white;
-		$fg-footer-element-deactivated: $standardBlue;
+		$fg-footer-element-deactivated: $standardPurple;
 		$fg-footer-element-deactivated-hovered: #809bff;
 		$fg-footer-info-bar-active: $standardGreen;
 		$fg-footer-info-bar-active-hovered: #aeff9b;
 		$check-mark-checked: $success;
-		$check-mark-unchecked: $standardBlue;
-		$bg-questionScrollPane-active-remove-question-hovered: $standardPurple;
+		$check-mark-unchecked: $standardPurple;
+		$bg-questionScrollPane-active-remove-question-hovered: $standardBlue;
 		$bg-rangedSlider-invalid: $warning;
 		$bg-rangedSlider-valid: $success;
 		$border-answer_options-invalidAnswerOption: white;
 		$border-answer_options-invalidQuestion: white;
-		$bg-questionScrollPane-active-remove-question-hovered: $standardBlue;
+		$bg-questionScrollPane-active-remove-question-hovered: $standardPurple;
 		$slider-color: $info;
-		$fg-warning: $standardBlue;
-		$bg-answer_options-bootstrap_switch: $standardPurple;
+		$fg-warning: $standardPurple;
+		$bg-answer_options-bootstrap_switch: $standardBlue;
 		$bg-answer_options-bootstrap_switch_handle_off: lighten($background-color, 7);
 		$fg-answer_options-bootstrap_switch_handle_off: $warning;
 		$bg-answer_options-bootstrap_switch_handle_on: lighten($background-color, 7);
@@ -424,7 +424,7 @@
 		$splashscreen-delete-background-color: $splashscreen-background-color;
 		$splashscreen-sound-config-button-background-color: $success;
 		$splashscreen-sound-config-select-foreground-color: black;
-		$splash-screen-error-message-background-color: $standardBlue;
+		$splash-screen-error-message-background-color: ;
 		$splash-screen-error-message-foreground-color: white;
 		$splash-screen-error-message-button-background-color: $splashscreen-background-color;
 		$splash-screen-error-message-button-foreground-color: white;
@@ -435,25 +435,25 @@
 		$bg-js-my-hash-invalidQuestion-hovered: lighten($warning, 10);
 		$fg-js-my-hash-invalidQuestion: $warning-text-color;
 		$colorChangingArs0: white;
-		$colorChangingArs25: $standardBlue;
+		$colorChangingArs25: $standardPurple;
 		$colorChangingArs50: $standardGreen;
-		$colorChangingArs75: $standardPurple;
+		$colorChangingArs75: $standardBlue;
 		$colorChangingArs100: white;
-		$colorChangingNova0: $standardPurple;
+		$colorChangingNova0: $standardBlue;
 		$colorChangingNova25: white;
-		$colorChangingNova50: $standardBlue;
+		$colorChangingNova50: $standardPurple;
 		$colorChangingNova75: $standardGreen;
-		$colorChangingNova100: $standardPurple;
+		$colorChangingNova100: $standardBlue;
 		$colorChangingDot0: $standardGreen;
-		$colorChangingDot25: $standardPurple;
+		$colorChangingDot25: $standardBlue;
 		$colorChangingDot50: white;
-		$colorChangingDot75: $standardBlue;
+		$colorChangingDot75: $standardPurple;
 		$colorChangingDot100: $standardGreen;
-		$colorChangingClick0: $standardBlue;
+		$colorChangingClick0: $standardPurple;
 		$colorChangingClick25: $standardGreen;
-		$colorChangingClick50: $standardPurple;
+		$colorChangingClick50: $standardBlue;
 		$colorChangingClick75: white;
-		$colorChangingClick100: $standardBlue;
+		$colorChangingClick100: $standardPurple;
 
 	}
 
@@ -1670,3 +1670,4 @@
 @include theme(theme-arsnova);
 @include theme(theme-colorBlindRedGreen);
 @include theme(theme-blackbeauty);
+@include theme(theme-darkPastel);

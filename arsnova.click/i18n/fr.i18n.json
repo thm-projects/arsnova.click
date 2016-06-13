@@ -294,6 +294,9 @@
           "name": "ARSnova",
           "description": "Vous connaissez ARS nova? Sentez-vous la maison!"
         },
+        "darkPastel": {
+          "name": "Pastel foncé",
+          "description": "Pour ceux qui aiment se détendre leurs yeux..."
         "blackbeauty": {
           "name" : "BlackBeauty",
           "description": "L'obscurité"

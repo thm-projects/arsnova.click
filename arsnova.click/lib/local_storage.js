@@ -161,6 +161,19 @@ export function addAnswers({hashtag, questionIndex, answerOptionNumber, answerTe
 	}
 }
 
+export function findHashtagCaseInsensitive(hashtag) {
+	var loweredHashtag = hashtag.toLowerCase();
+	var hashtagString = localStorage.getItem("hashtags");
+	var allHashtags = JSON.parse(hashtagString);
+	var result = "";
+	$.each(allHashtags, function (i, originalHashtag) {
+		if (originalHashtag.toLowerCase() === loweredHashtag) {
+			result = originalHashtag;
+		}
+	});
+	return result;
+}
+
 export function reenterSession(hashtag) {
 	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
 		throw new TypeError("Undefined or illegal hashtag provided");

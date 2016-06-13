@@ -105,13 +105,10 @@ Template.hashtagView.events({
 		}
 		const localLoweredHashtags = localData.getAllLoweredHashtags();
 		if ($.inArray(hashtag.toLowerCase(), localLoweredHashtags) > -1 && HashtagsCollection.findOne()) {
-			reenter = true;
-		}
-		if (reenter) {
 			sessionStorage.setItem("overrideValidQuestionRedirect", true);
 			const session = localData.reenterSession(hashtag);
 			Session.set("questionGroup", session);
-			lib.connectEventManager(hashtag);
+			lib.connectEventManager(localData.findHashtagCaseInsensitive(hashtag));
 		} else {
 			const questionGroup = new DefaultQuestionGroup({
 				hashtag: hashtag,

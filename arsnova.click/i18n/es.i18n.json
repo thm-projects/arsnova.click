@@ -297,6 +297,10 @@
         "blackbeauty": {
           "name" : "BlackBeauty",
           "description": "la oscuridad"
+        },
+        "colorBlindRedGreen": {
+          "name": "daltoniano rojo-verde",
+          "description": "Para todos los que tienen una debilidad rojo-verde..."
         }
       }
     },

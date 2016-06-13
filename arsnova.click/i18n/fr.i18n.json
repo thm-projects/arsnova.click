@@ -297,6 +297,10 @@
         "blackbeauty": {
           "name" : "BlackBeauty",
           "description": "L'obscurité"
+        },
+        "colorBlindRedGreen": {
+          "name": "daltonien rouge-vert",
+          "description": "Pour tous ceux qui ont un Schache rouge-vert..."
         }
       }
     },

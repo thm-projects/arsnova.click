@@ -297,6 +297,10 @@
         "blackbeauty": {
           "name" : "BlackBeauty",
           "description": "Dark, dark and even darker"
+        },
+        "colorBlindRedGreen": {
+          "name": "Colorblind red-green",
+          "description": "For everyone with a red-green weakness..."
         }
       }
     },

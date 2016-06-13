@@ -298,6 +298,10 @@
         "blackbeauty": {
           "name" : "BlackBeauty",
           "description": "Dunkel, dunkler und noch dunkler"
+        },
+        "colorBlindRedGreen": {
+          "name": "Farbenblind Rot-Grün",
+          "description": "Für alle die eine Rot-Grün Schwäche haben..."
         }
       }
     },

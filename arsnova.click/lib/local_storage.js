@@ -161,7 +161,7 @@ export function addAnswers({hashtag, questionIndex, answerOptionNumber, answerTe
 	}
 }
 
-export function findHashtagCaseInsensitive(hashtag) {
+export function findHashtagCaseInsensitiveFromLocalStorage(hashtag) {
 	var loweredHashtag = hashtag.toLowerCase();
 	var hashtagString = localStorage.getItem("hashtags");
 	var allHashtags = JSON.parse(hashtagString);

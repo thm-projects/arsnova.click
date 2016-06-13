@@ -42,11 +42,15 @@ Template.hashtagView.events({
 			lib.eventManagerTracker.stop();
 		}
 		lib.setEventManagerTracker(Tracker.autorun(function () {
-			Meteor.subscribe("EventManagerCollection.join", $("#hashtag-input-field").val(), function () {
-				if (!EventManagerCollection.findOne() || localData.containsHashtag($("#hashtag-input-field").val())) {
+			Meteor.subscribe("EventManagerCollection.join", inputHashtag, function () {
+				if (!EventManagerCollection.findOne() || localData.containsHashtag(inputHashtag)) {
 					$("#joinSession").attr("disabled", "disabled");
 				}
-				lib.setEventManagerHandle(EventManagerCollection.find({hashtag: {'$regex': $("#hashtag-input-field").val(), $options: 'i'}}).observeChanges({
+
+				const originalHashtag = lib.findOriginalHashtag(inputHashtag);
+				console.log(originalHashtag.length);
+				console.log(EventManagerCollection.find({hashtag: originalHashtag}).fetch());
+				lib.setEventManagerHandle(EventManagerCollection.find({hashtag: originalHashtag}).observeChanges({
 					changed: function (id, changedFields) {
 						if (!isNaN(changedFields.sessionStatus)) {
 							if (changedFields.sessionStatus === 2) {
@@ -75,7 +79,9 @@ Template.hashtagView.events({
 			return;
 		}
 
-		var hashtagDoc = HashtagsCollection.findOne({hashtag: {'$regex': inputHashtag, $options: 'i'}});
+		const originalHashtag = lib.findOriginalHashtag(inputHashtag);
+
+		var hashtagDoc = HashtagsCollection.findOne({hashtag: originalHashtag});
 		if (!hashtagDoc) {
 			$("#joinSession").attr("disabled", "disabled");
 			addNewHashtagItem.removeAttr("disabled");
@@ -108,7 +114,7 @@ Template.hashtagView.events({
 			sessionStorage.setItem("overrideValidQuestionRedirect", true);
 			const session = localData.reenterSession(hashtag);
 			Session.set("questionGroup", session);
-			lib.connectEventManager(localData.findHashtagCaseInsensitive(hashtag));
+			lib.connectEventManager(localData.findHashtagCaseInsensitiveFromLocalStorage(hashtag));
 		} else {
 			const questionGroup = new DefaultQuestionGroup({
 				hashtag: hashtag,
@@ -135,10 +141,10 @@ Template.hashtagView.events({
 		}
 	},
 	"click #joinSession": function () {
-		var hashtag = $("#hashtag-input-field").val();
-
-		if (EventManagerCollection.findOne().sessionStatus === 2) {
-			Router.go("/" + hashtag + "/nick");
+		var hashtag = $("#hashtag-input-field").val().trim();
+		var session = EventManagerCollection.findOne({hashtag: {'$regex': hashtag, $options: 'i'}});
+		if (session.sessionStatus === 2) {
+			Router.go("/" + session.hashtag + "/nick");
 		} else {
 			$("#joinSession").attr("disabled", "disabled");
 			new ErrorSplashscreen({

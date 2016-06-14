@@ -80,5 +80,10 @@ export const themes = [
 		name: "view.theme_switcher.themes.smooth.name",
 		description: "view.theme_switcher.themes.smooth.description",
 		id: "theme-smooth"
+	},
+	{
+		name: "view.theme_switcher.themes.ironman.name",
+		description: "view.theme_switcher.themes.ironman.description",
+		id: "theme-ironman"
 	}
 ];

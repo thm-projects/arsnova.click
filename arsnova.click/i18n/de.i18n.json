@@ -326,6 +326,10 @@
         "smooth": {
           "name": "Smooth",
           "description": "Du kennst ARSnova? Dann fühl' dich wie zu Hause!"
+        },
+        "ironman": {
+          "name": "Iron Man",
+          "description": "Iron Man inspiriertes Design"
         }
       }
     },

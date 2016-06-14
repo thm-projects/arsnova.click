@@ -325,6 +325,10 @@
         "smooth": {
           "name": "Smooth",
           "description": "Smooth-Design from Qendrim Grainca"
+        },
+        "ironman": {
+          "name": "Iron Man",
+          "description": "Iron Man inspired design"
         }
       }
     },

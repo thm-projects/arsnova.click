@@ -1138,6 +1138,32 @@
 		$splashscreen-sound-config-select-foreground-color: black;
 	}
 
+	@if ($name == "theme-fresh") {
+		$background-color: #00bfff;
+		$bg-nav-row: #1e90ff;
+		$bg-container: $background-color;
+		$bg-questionList-row: $bg-container;
+		$bg-footer: #1e90ff;
+		$fg_a: #3d9c19;
+		$fg_quiz-name: white;
+		$fg_titel: black;
+		$fg-question-title: black;
+		$fg-theme_description: black;
+		$default-text-color: black;
+		$fg-hashtag_management-hashtag_name: $default-text-color;
+		$border-hashtag_management-HR: $default-text-color;
+		$fg-text-light: black;
+		$fg_text-dark: black;
+		$fg-footer-info-bar: #000080;
+		$fg-footer-info-bar-active: #459c2f;
+		$fg-footer-info-bar-active-hovered: #6aa05d;
+		$quiz-summary-row-color: $default-text-color;
+		$fg-quiz-summary-H4: $default-text-color;
+		$fg-quiz-summary-P: $default-text-color;
+		$fg-quiz-summary-UL: $default-text-color;
+		$fg-success: darken($success, 5);
+	}
+
 	.#{$name} {
 		height: 100%;
 		width: 100%;
@@ -2159,3 +2185,4 @@
 @include theme(theme-ironman);
 @include theme(theme-bluetouch);
 @include theme(theme-green);
+@include theme(theme-fresh);

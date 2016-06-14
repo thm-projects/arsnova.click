@@ -335,9 +335,14 @@
           "name": "Hauch von Blau",
           "description": "Ein angenehmes blaues Farbschema."
         },
+        "fresh": {
+          "name": "Frisches Design",
+          "description": "Cooles frisches Design für den Sommer"
+        },
         "green": {
           "name": "Simples Grün",
           "description": "Grüner Stil für ARSnova.click"
+        }
       }
     },
     "timer": {

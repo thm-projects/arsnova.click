@@ -334,9 +334,14 @@
           "name": "Touche de Bleu",
           "description": "Un jeu de couleurs bleu agréable."
         },
+        "fresh": {
+          "name": "Fresh",
+          "description": "nouveau design frais pour l'été"
+        },
         "green": {
           "name": "vert simple",
           "description": "vert style simple pour ARSnova.click"
+        }
       }
     },
     "timer": {

@@ -334,6 +334,10 @@
           "name": "Toque de Azul",
           "description": "Un esquema de color azul agradable."
         },
+        "fresh": {
+          "name": "Fresh",
+          "description": "fresco diseño fresco para el verano"
+        },
         "green": {
           "name": "verde sencilla",
           "description": "verde estilo para ARSnova.click"

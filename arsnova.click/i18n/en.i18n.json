@@ -334,6 +334,10 @@
           "name": "Touch of blue",
           "description": "A pleasant blue color scheme."
         },
+        "fresh": {
+          "name": "Fresh Theme",
+          "description": "Cool fresh design for the Summer"
+        },
         "green": {
           "name": "simple green",
           "description": "green style for ARSnova.click"

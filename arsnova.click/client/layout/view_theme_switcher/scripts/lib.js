@@ -100,5 +100,10 @@ export const themes = [
 		name: "view.theme_switcher.themes.green.name",
 		description: "view.theme_switcher.themes.green.description",
 		id: "theme-green"
+	},
+	{
+		name: "view.theme_switcher.themes.action.name",
+		description: "view.theme_switcher.themes.action.description",
+		id: "theme-action"
 	}
 ];

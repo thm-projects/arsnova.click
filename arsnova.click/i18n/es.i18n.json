@@ -341,6 +341,10 @@
         "green": {
           "name": "verde sencilla",
           "description": "verde estilo para ARSnova.click"
+        },
+        "action": {
+          "name": "Action",
+          "description": "Para Quizrounds rápidas y con calefacción!"
         }
       }
     },

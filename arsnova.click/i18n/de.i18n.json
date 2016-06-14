@@ -342,6 +342,10 @@
         "green": {
           "name": "Simples Grün",
           "description": "Grüner Stil für ARSnova.click"
+        },
+        "action": {
+          "name": "Action",
+          "description": "Für schnelle und hitzige Quizrunden!"
         }
       }
     },

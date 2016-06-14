@@ -47,13 +47,83 @@ export const themes = [
 		id: "theme-colorBlindRedGreen"
 	},
 	{
-		name: "view.theme_switcher.themes.blackbeauty.name",
-		description: "view.theme_switcher.themes.blackbeauty.description",
+		name: "view.theme_switcher.themes.black_beauty.name",
+		description: "view.theme_switcher.themes.black_beauty.description",
 		id: "theme-blackbeauty"
 	},
 	{
-		name: "view.theme_switcher.themes.darkPastel.name",
-		description: "view.theme_switcher.themes.darkPastel.description",
+		name: "view.theme_switcher.themes.living_room.name",
+		description: "view.theme_switcher.themes.living_room.description",
+		id: "theme-hell"
+	},
+	{
+		name: "view.theme_switcher.themes.dark_pastel.name",
+		description: "view.theme_switcher.themes.dark_pastel.description",
 		id: "theme-darkPastel"
+	},
+	{
+		name: "view.theme_switcher.themes.darcula.name",
+		description: "view.theme_switcher.themes.darcula.description",
+		id: "theme-darcula"
+	},
+	{
+		name: "view.theme_switcher.themes.pastel.name",
+		description: "view.theme_switcher.themes.pastel.description",
+		id: "theme-pastel"
+	},
+	{
+		name: "view.theme_switcher.themes.neongrey.name",
+		description: "view.theme_switcher.themes.neongrey.description",
+		id: "theme-neongrey"
+	},
+	{
+		name: "view.theme_switcher.themes.smooth.name",
+		description: "view.theme_switcher.themes.smooth.description",
+		id: "theme-smooth"
+	},
+	{
+		name: "view.theme_switcher.themes.ironman.name",
+		description: "view.theme_switcher.themes.ironman.description",
+		id: "theme-ironman"
+	},
+	{
+		name: "view.theme_switcher.themes.bluetouch.name",
+		description: "view.theme_switcher.themes.bluetouch.description",
+		id: "theme-bluetouch"
+	},
+	{
+		name: "view.theme_switcher.themes.fresh.name",
+		description: "view.theme_switcher.themes.fresh.description",
+		id: "theme-fresh"
+	},
+	{
+		name: "view.theme_switcher.themes.green.name",
+		description: "view.theme_switcher.themes.green.description",
+		id: "theme-green"
+	},
+	{
+		name: "view.theme_switcher.themes.psychology.name",
+		description: "view.theme_switcher.themes.psychology.description",
+		id: "theme-Psychology-Correct-Colours"
+	},
+	{
+		name: "view.theme_switcher.themes.new.name",
+		description: "view.theme_switcher.themes.new.description",
+		id: "new-theme"
+	},
+	{
+		name: "view.theme_switcher.themes.action.name",
+		description: "view.theme_switcher.themes.action.description",
+		id: "theme-action"
+	},
+	{
+		name: "view.theme_switcher.themes.colored.name",
+		description: "view.theme_switcher.themes.colored.description",
+		id: "theme-colored"
+	},
+	{
+		name: "view.theme_switcher.themes.sugar.name",
+		description: "view.theme_switcher.themes.sugar.description",
+		id: "theme-sugar"
 	}
 ];

@@ -294,17 +294,73 @@
           "name": "ARSnova",
           "description": "You know ARSnova? Feel home!"
         },
-        "darkPastel": {
+        "dark_pastel": {
           "name": "Dark Pastel",
           "description": "For those who like to relax their eyes..."
         },
-        "blackbeauty": {
-          "name" : "BlackBeauty",
+        "black_beauty": {
+          "name" : "Black Beauty",
           "description": "Dark, dark and even darker"
+        },
+        "living_room": {
+          "name" : "Living Room",
+          "description": "Bright Living Room atmosphere"
         },
         "colorBlindRedGreen": {
           "name": "Colorblind red-green",
           "description": "For everyone with a red-green weakness..."
+        },
+        "darcula": {
+          "name": "Darcula",
+          "description": "Black background and colorful colors."
+        },
+        "pastel": {
+          "name": "Pastel",
+          "description": "Elegant pastel tints for a harmonious mood."
+        },
+        "neongrey": {
+          "name": "Neon grey",
+          "description": "Elegance combined with vibrant colors"
+        },
+        "smooth": {
+          "name": "Smooth",
+          "description": "Smooth-Design from Qendrim Grainca"
+        },
+        "ironman": {
+          "name": "Iron Man",
+          "description": "Iron Man inspired design"
+        },
+        "bluetouch": {
+          "name": "Touch of blue",
+          "description": "A pleasant blue color scheme."
+        },
+        "fresh": {
+          "name": "Fresh Theme",
+          "description": "Cool fresh design for the Summer"
+        },
+        "green": {
+          "name": "simple green",
+          "description": "green style for ARSnova.click"
+        },
+        "action": {
+          "name": "Action",
+          "description": "For fast and fiery Quizzes!"
+        },
+        "psychology": {
+          "name": "Psychology-Correct-Colours",
+          "description": "A bit of purple. After the color psychology of Nick Kolenda."
+        },
+        "new": {
+          "name": "New-Theme",
+          "description": "A new Fresh Theme!"
+        },
+        "sugar": {
+          "name": "Sugar",
+          "description": "A design in pastel shades"
+        },
+        "colored": {
+          "name": "Colored",
+          "description": "A new colorful version!"
         }
       }
     },

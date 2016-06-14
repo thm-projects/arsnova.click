@@ -294,17 +294,73 @@
           "name": "ARSnova",
           "description": "Vous connaissez ARS nova? Sentez-vous la maison!"
         },
-        "darkPastel": {
+        "dark_pastel": {
           "name": "Pastel foncé",
           "description": "Pour ceux qui aiment se détendre leurs yeux..."
         },
-        "blackbeauty": {
-          "name" : "BlackBeauty",
+        "black_beauty": {
+          "name" : "Black Beauty",
           "description": "L'obscurité"
         },
         "colorBlindRedGreen": {
           "name": "daltonien rouge-vert",
           "description": "Pour tous ceux qui ont un Schache rouge-vert..."
+        },
+        "living_room": {
+          "name" : "Lumineux atmosphère de salon",
+          "description": "Lumineux atmosphère de salon"
+        },
+        "darcula": {
+          "name": "Darcula",
+          "description": "Fond noir et des couleurs vives."
+        },
+        "pastel": {
+          "name": "Couleurs Pastel",
+          "description": "Couleurs pastel elgeante pour eien humeur harmonieuse."
+        },
+        "neongrey": {
+          "name": "Gris néon ",
+          "description": "Élégance unit avec des couleurs vives"
+        },
+        "smooth": {
+          "name": "Smooth",
+          "description": "Smooth-Design est Qendrim Grainca"
+        },
+        "ironman": {
+          "name": "Iron Man",
+          "description": "Iron Man a inspiré la conception"
+        },
+        "bluetouch": {
+          "name": "Touche de Bleu",
+          "description": "Un jeu de couleurs bleu agréable."
+        },
+        "fresh": {
+          "name": "Fresh",
+          "description": "nouveau design frais pour l'été"
+        },
+        "green": {
+          "name": "vert simple",
+          "description": "vert style simple pour ARSnova.click"
+        },
+        "action": {
+          "name": "Action",
+          "description": "Pour Quizrounds rapides et chauffées!"
+        },
+        "psychology": {
+          "name": "Couleurs correctes psychologiques",
+          "description": "Un peu de pourpre. Après la psychologie de la couleur de Nick Kolenda."
+        },
+        "new": {
+          "name": "Nouveau design",
+          "description": "Une nouvelle frais conception"
+        },
+        "sugar": {
+          "name": "Sugar",
+          "description": "Un design dans les tons pastel"
+        },
+        "colored": {
+          "name": "Colored",
+          "description": "Une nouvelle version de couleur!"
         }
       }
     },

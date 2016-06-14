@@ -294,17 +294,73 @@
           "name": "ARSnova",
           "description": "Ya sabes Ars Nova? Sentirse como en casa!"
         },
-        "darkPastel": {
+        "dark_pastel": {
           "name": "Pastel oscuro",
           "description": "Para aquellos que gustan de relajarse sus ojos..."
         },
-        "blackbeauty": {
-          "name" : "BlackBeauty",
+        "black_beauty": {
+          "name" : "Black Beauty",
           "description": "la oscuridad"
         },
         "colorBlindRedGreen": {
           "name": "daltoniano rojo-verde",
           "description": "Para todos los que tienen una debilidad rojo-verde..."
+        },
+        "living_room": {
+          "name" : "Brillante Living Room atmósfera",
+          "description": "Brillante Living Room atmósfera"
+        },
+        "darcula": {
+          "name": "Darcula",
+          "description": "Fondo negro y colores brillantes."
+        },
+        "pastel": {
+          "name": "Color Pastel",
+          "description": "Colores pastel elgeante para eien estado de ánimo armónico."
+        },
+        "neongray": {
+          "name": "Gris néon",
+          "description": "Elegancia unido con colores brilliantes"
+        },
+        "smooth": {
+          "name": "Smooth",
+          "description": "Smooth-Design de la Qendrim Grainca"
+        },
+        "ironman": {
+          "name": "Iron Man",
+          "description": "Iron Man diseño inspirado"
+        },
+        "bluetouch": {
+          "name": "Toque de Azul",
+          "description": "Un esquema de color azul agradable."
+        },
+        "fresh": {
+          "name": "Fresh",
+          "description": "fresco diseño fresco para el verano"
+        },
+        "green": {
+          "name": "verde sencilla",
+          "description": "verde estilo para ARSnova.click"
+        },
+        "action": {
+          "name": "Action",
+          "description": "Para Quizrounds rápidas y con calefacción!"
+        },
+        "psychology": {
+          "name": "Colores correctos psicológicos",
+          "description": "Un poco de color púrpura. Después de la psicología del color de Nick Kolenda."
+        },
+        "new": {
+          "name": "Nuevo-diseño",
+          "description": "Un nuevo diseño fresco!"
+        },
+        "sugar": {
+          "name": "Sugar",
+          "description": "Un diseño en tonos pastel"
+        },
+        "colored": {
+          "name": "Colored",
+          "description": "Una nueva versión del color!"
         }
       }
     },

@@ -115,7 +115,7 @@
 
 	$splash-screen-header-color: #2f4f4f;
 	$splash-screen-body-color: #2f4f4f;
-	$splashscreen-background-color: #98fb98;
+	$splashscreen-background-color: #000000;
 	$splashscreen-foreground-color: black;
 	$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
 	$splashscreen-question-preview-background-color: $splashscreen-background-color;
@@ -369,7 +369,7 @@
 		$success-text-color: white;
 		$warning: #b10d0d; /* firebrick */
 		$info: #1C86EE; /* dodgerblue */
-		$background-color: #4a4a4a; /* grey */
+		$background-color: #000000; /* grey */
 
 		$switch: #00CD00; /* green */
 		$switch-text-color: #ffffff;
@@ -416,7 +416,7 @@
 		$thmgreen: #80ba24;
 		$thmgray: #4a5c66;
 
-		$background-color: #dfeec8;
+		$background-color: #000000;
 		$bg-nav-row: $background-color;
 		$bg-container: $background-color;
 		$bg-nav-row: $thmgreen;
@@ -473,7 +473,7 @@
 	}
 
 	@if ($name == "theme-elegant") {
-		$background-color: #dbe4e9;
+		$background-color: #000000;
 		$bg-nav-row: #002d47;
 		$bg-container: $background-color;
 		$bg-questionList-row: #B1C5D0;

@@ -409,10 +409,10 @@
 		$splashscreen-sound-config-select-foreground-color: black;
 	}
 	@if ($name == "theme-blackbeauty") {
-		$success: #008000; /* green */
-		$success-text-color: green;
+		$success: #00A000; /* green */
+		$success-text-color: white;
 		$warning: #b10d0d; /* firebrick */
-		$info: #0009EE; /* oceanblue */
+		$info: #444444; /* oceanblue */
 		$background-color: #010101; /* black */
 
 		$switch: #444444; /* grey */

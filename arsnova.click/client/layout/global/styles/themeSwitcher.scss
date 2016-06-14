@@ -1187,6 +1187,39 @@
 		$splashscreen-delete-background-color: $splashscreen-background-color;
 	}
 
+	@if ($name == "theme-Psychology-Correct-Colours") {
+		$background-color: #D96C6C;
+		$bg-nav-row: #918477;
+		$bg-container: $background-color;
+		$bg-questionList-row: #918477;
+		$bg-footer: #918477;
+		$input-background-color: #f6f4f4;
+		$default-text-color: black;
+		$fg-text-light: white;
+		$fg_text-dark: white;
+		$fg_a: #337ab7;
+		$fg_quiz-name: #ffd700;
+		$fg_titel: white;
+		$fg-question-title: white;
+		$fg-theme_description: white;
+		$fg-hashtag_management-hashtag_name: $default-text-color;;
+		$border-hashtag_management-HR: $default-text-color;
+		$quiz-summary-row-color: $default-text-color;
+		$fg-quiz-summary-H4: $default-text-color;
+		$fg-quiz-summary-P: $default-text-color;
+		$fg-quiz-summary-UL: $default-text-color;
+		$fg-success: $success;
+		$splashscreen-background-color: #b3c8da;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-button-background-color: $success;
+	}
+
 	.#{$name} {
 		height: 100%;
 		width: 100%;
@@ -2210,3 +2243,4 @@
 @include theme(theme-green);
 @include theme(theme-fresh);
 @include theme(theme-action);
+@include theme(theme-Psychology-Correct-Colours);

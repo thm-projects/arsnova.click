@@ -346,6 +346,10 @@
         "action": {
           "name": "Action",
           "description": "Für schnelle und hitzige Quizrunden!"
+        },
+        "psychology": {
+          "name": "Psychologisch korrekte Farben",
+          "description": "Ein bisschen lila. Nach der Farbenpsychology von Nick Kolenda."
         }
       }
     },

@@ -345,6 +345,10 @@
         "action": {
           "name": "Action",
           "description": "Pour Quizrounds rapides et chauffées!"
+        },
+        "psychology": {
+          "name": "Couleurs correctes psychologiques",
+          "description": "Un peu de pourpre. Après la psychologie de la couleur de Nick Kolenda."
         }
       }
     },

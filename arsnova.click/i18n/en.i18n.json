@@ -345,6 +345,10 @@
         "action": {
           "name": "Action",
           "description": "For fast and fiery Quizzes!"
+        },
+        "psychology": {
+          "name": "Psychology-Correct-Colours",
+          "description": "A bit of purple. After the color psychology of Nick Kolenda."
         }
       }
     },

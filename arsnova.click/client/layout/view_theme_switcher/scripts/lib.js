@@ -102,6 +102,11 @@ export const themes = [
 		id: "theme-green"
 	},
 	{
+		name: "view.theme_switcher.themes.psychology.name",
+		description: "view.theme_switcher.themes.psychology.description",
+		id: "theme-Psychology-Correct-Colours"
+	},
+	{
 		name: "view.theme_switcher.themes.action.name",
 		description: "view.theme_switcher.themes.action.description",
 		id: "theme-action"

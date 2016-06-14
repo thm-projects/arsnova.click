@@ -42,17 +42,13 @@ export const themes = [
 		id: "theme-arsnova"
 	},
 	{
-		name: "view.theme_switcher.themes.black_beauty.name",
-		description: "view.theme_switcher.themes.black_beauty.description",
-	},
-	{
 		name: "view.theme_switcher.themes.colorBlindRedGreen.name",
 		description: "view.theme_switcher.themes.colorBlindRedGreen.description",
 		id: "theme-colorBlindRedGreen"
 	},
 	{
-		name: "view.theme_switcher.themes.blackbeauty.name",
-		description: "view.theme_switcher.themes.blackbeauty.description",
+		name: "view.theme_switcher.themes.black_beauty.name",
+		description: "view.theme_switcher.themes.black_beauty.description",
 		id: "theme-blackbeauty"
 	},
 	{
@@ -61,8 +57,8 @@ export const themes = [
 		id: "theme-hell"
 	},
 	{
-		name: "view.theme_switcher.themes.darkPastel.name",
-		description: "view.theme_switcher.themes.darkPastel.description",
+		name: "view.theme_switcher.themes.dark_pastel.name",
+		description: "view.theme_switcher.themes.dark_pastel.description",
 		id: "theme-darkPastel"
 	}
 ];

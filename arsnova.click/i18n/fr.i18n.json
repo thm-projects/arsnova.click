@@ -294,14 +294,12 @@
           "name": "ARSnova",
           "description": "Vous connaissez ARS nova? Sentez-vous la maison!"
         },
-        "black_beauty": {
-          "name" : "Black beauty",
-        "darkPastel": {
+        "dark_pastel": {
           "name": "Pastel foncé",
           "description": "Pour ceux qui aiment se détendre leurs yeux..."
         },
-        "blackbeauty": {
-          "name" : "BlackBeauty",
+        "black_beauty": {
+          "name" : "Black Beauty",
           "description": "L'obscurité"
         },
         "colorBlindRedGreen": {

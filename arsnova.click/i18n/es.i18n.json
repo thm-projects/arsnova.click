@@ -294,12 +294,11 @@
           "name": "ARSnova",
           "description": "Ya sabes Ars Nova? Sentirse como en casa!"
         },
-        "black_beauty": {
-        "darkPastel": {
+        "dark_pastel": {
           "name": "Pastel oscuro",
           "description": "Para aquellos que gustan de relajarse sus ojos..."
         },
-        "blackbeauty": {
+        "black_beauty": {
           "name" : "Black Beauty",
           "description": "la oscuridad"
         },

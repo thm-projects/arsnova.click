@@ -41,4 +41,9 @@ export const themes = [
 		description: "view.theme_switcher.themes.arsnova.description",
 		id: "theme-arsnova"
 	}
+	{
+		name: "view.theme_switcher.themes.arsnova.name",
+		description: "view.theme_switcher.themes.arsnova.description",
+		id: "theme-blackbeauty"
+	}
 ];

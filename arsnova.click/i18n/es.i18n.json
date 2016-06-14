@@ -293,6 +293,10 @@
         "arsnova": {
           "name": "ARSnova",
           "description": "Ya sabes Ars Nova? Sentirse como en casa!"
+        },
+        "blackbeauty": {
+          "name" : "BlackBeauty",
+          "description": "la oscuridad"
         }
       }
     },

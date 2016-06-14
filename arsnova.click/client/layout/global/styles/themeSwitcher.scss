@@ -115,7 +115,7 @@
 
 	$splash-screen-header-color: #2f4f4f;
 	$splash-screen-body-color: #2f4f4f;
-	$splashscreen-background-color: #000000;
+	$splashscreen-background-color: #98fb98;
 	$splashscreen-foreground-color: black;
 	$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
 	$splashscreen-question-preview-background-color: $splashscreen-background-color;
@@ -369,9 +369,53 @@
 		$success-text-color: white;
 		$warning: #b10d0d; /* firebrick */
 		$info: #1C86EE; /* dodgerblue */
-		$background-color: #000000; /* grey */
+		$background-color: #4a4a4a; /* grey */
 
 		$switch: #00CD00; /* green */
+		$switch-text-color: #ffffff;
+
+		$bg-nav-row: $background-color;
+
+		$bg-questionList-row: $bg-nav-row;
+
+		$bg-container: $background-color;
+
+		$bg-footer: $background-color;
+		$footer-text-color: #FFFFFF; /* white */
+
+		$disabled-button-background: darkgrey; /* darkgrey */
+		$placeholder-color: #FFFFFF ; /* white */
+		$input-background-color: #FF8C00; /* orange */
+		$input-group-letter-color: white; /* darkslategrey */
+
+		$check-mark-checked: $success;
+		$check-mark-unchecked: $warning;
+
+		$fg-warning: $warning;
+
+		$bg-answer_options-bootstrap_switch: $input-background-color;
+
+		$splashscreen-background-color: #6b6b6b;
+		$splashscreen-foreground-color: white;
+		$splash-screen-header-color: white;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-button-background-color: $success;
+		$splashscreen-sound-config-select-foreground-color: black;
+	}
+	@if ($name == "theme-blackbeauty") {
+		$success: #008000; /* green */
+		$success-text-color: green;
+		$warning: #b10d0d; /* firebrick */
+		$info: #0009EE; /* oceanblue */
+		$background-color: #010101; /* black */
+
+		$switch: #444444; /* grey */
 		$switch-text-color: #ffffff;
 
 		$bg-nav-row: $background-color;
@@ -416,7 +460,7 @@
 		$thmgreen: #80ba24;
 		$thmgray: #4a5c66;
 
-		$background-color: #000000;
+		$background-color: #dfeec8;
 		$bg-nav-row: $background-color;
 		$bg-container: $background-color;
 		$bg-nav-row: $thmgreen;
@@ -473,7 +517,7 @@
 	}
 
 	@if ($name == "theme-elegant") {
-		$background-color: #000000;
+		$background-color: #dbe4e9;
 		$bg-nav-row: #002d47;
 		$bg-container: $background-color;
 		$bg-questionList-row: #B1C5D0;
@@ -1540,3 +1584,4 @@
 @include theme(theme-thm);
 @include theme(theme-elegant);
 @include theme(theme-arsnova);
+@include theme(theme-blackbeauty);

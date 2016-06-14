@@ -42,6 +42,10 @@ export const themes = [
 		id: "theme-arsnova"
 	},
 	{
+		name: "view.theme_switcher.themes.black_beauty.name",
+		description: "view.theme_switcher.themes.black_beauty.description",
+	},
+	{
 		name: "view.theme_switcher.themes.colorBlindRedGreen.name",
 		description: "view.theme_switcher.themes.colorBlindRedGreen.description",
 		id: "theme-colorBlindRedGreen"

@@ -295,12 +295,13 @@
           "name": "ARSnova",
           "description": "Du kennst ARSnova? Dann fühl' dich wie zu Hause!"
         },
+        "black_beauty": {
         "darkPastel": {
           "name": "Dunkel Pastel",
           "description": "Für alle, die gerne ihre Augen entspannen..."
         },
         "blackbeauty": {
-          "name" : "BlackBeauty",
+          "name" : "Black Beauty",
           "description": "Dunkel, dunkler und noch dunkler"
         },
         "colorBlindRedGreen": {

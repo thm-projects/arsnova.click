@@ -354,6 +354,10 @@
           "name": "New-Theme",
           "description": "A new Fresh Theme!"
         },
+        "sugar": {
+          "name": "Sugar",
+          "description": "A design in pastel shades"
+        },
         "colored": {
           "name": "Colored",
           "description": "A new colorful version!"

@@ -120,5 +120,10 @@ export const themes = [
 		name: "view.theme_switcher.themes.colored.name",
 		description: "view.theme_switcher.themes.colored.description",
 		id: "theme-colored"
+	},
+	{
+		name: "view.theme_switcher.themes.sugar.name",
+		description: "view.theme_switcher.themes.sugar.description",
+		id: "theme-sugar"
 	}
 ];

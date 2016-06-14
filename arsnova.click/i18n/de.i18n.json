@@ -330,6 +330,10 @@
         "ironman": {
           "name": "Iron Man",
           "description": "Iron Man inspiriertes Design"
+        },
+        "bluetouch": {
+          "name": "Hauch von Blau",
+          "description": "Ein angenehmes blaues Farbschema."
         }
       }
     },

@@ -1030,6 +1030,71 @@
 		$border-questionScrollPane-active-valid-remove-question: $success;
 	}
 
+	@if ($name == "theme-bluetouch") {
+		$green: #80ba24;
+		$red: #971B2F;
+		$success: $green;
+		$failure: $red;
+		$warning: $red;
+
+		$background-color: #294a6b;
+		$bg-nav-row: #2a386d;
+		$bg-container: $background-color;
+		$bg-questionList-row: $bg-container;
+		$bg-footer: #2a386d;
+		$fg_a: #0DA292;
+		$fg_quiz-name: white;
+		$fg_titel: white;
+		$fg_quiz-name: #white;
+		$fg-question-title: white;
+		$fg-theme_description: white;
+		$default-text-color: white;
+		$fg-hashtag_management-hashtag_name: $default-text-color;
+		$border-hashtag_management-HR: $default-text-color;
+		$fg-text-light: white;
+		$fg_text-dark: white;
+		$fg-footer-info-bar: white;
+		$fg-footer-info-bar-active: #8dbfb9;
+		$fg-footer-info-bar-active-hovered: #8dbfb9;
+		$quiz-summary-row-color: $default-text-color;
+		$fg-quiz-summary-H4: $default-text-color;
+		$fg-quiz-summary-P: $default-text-color;
+		$fg-quiz-summary-UL: $default-text-color;
+		$fg-success: darken($success, 5);
+		$bg-answer_options-bootstrap_switch: #8dbfb9;
+		$input-background-color: #8dbfb9;
+
+		$bg-questionScrollPane-question-icon-valid-index-number: $green;
+		$border-questionScrollPane-active-valid-remove-question: $green;
+		$slider-color: $green;
+		$bg-answer_options-bootstrap_switch_handle_on: $success;
+
+		$bg-rangedSlider-invalid: $warning;
+		$bg-rangedSlider-valid: $success;
+
+		$border-answer_options-invalidAnswerOption: $red;
+		$border-answer_options-invalidQuestion: $red;
+
+		$splash-screen-header-color: white;
+		$splash-screen-body-color: white;
+		$splashscreen-background-color: $bg-nav-row;
+		$splashscreen-foreground-color: white;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
+		$splash-screen-error-message-background-color: #971B2F;
+		$splashscreen-sound-config-button-background-color: $green;
+
+		$bg-js-my-hash-validQuestion: $green;
+		$bg-js-my-hash-invalidQuestion: $red;
+		$button-warning: $red;
+		$progress-bar-success-color: $green;
+	}
+
 	.#{$name} {
 		height: 100%;
 		width: 100%;
@@ -2049,3 +2114,4 @@
 @include theme(theme-neongrey);
 @include theme(theme-smooth);
 @include theme(theme-ironman);
+@include theme(theme-bluetouch);

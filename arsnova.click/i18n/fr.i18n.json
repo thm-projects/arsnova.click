@@ -329,6 +329,10 @@
         "ironman": {
           "name": "Iron Man",
           "description": "Iron Man a inspiré la conception"
+        },
+        "bluetouch": {
+          "name": "Touche de Bleu",
+          "description": "Un jeu de couleurs bleu agréable."
         }
       }
     },

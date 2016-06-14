@@ -85,5 +85,10 @@ export const themes = [
 		name: "view.theme_switcher.themes.ironman.name",
 		description: "view.theme_switcher.themes.ironman.description",
 		id: "theme-ironman"
+	},
+	{
+		name: "view.theme_switcher.themes.bluetouch.name",
+		description: "view.theme_switcher.themes.bluetouch.description",
+		id: "theme-bluetouch"
 	}
 ];

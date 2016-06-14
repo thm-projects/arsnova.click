@@ -329,6 +329,10 @@
         "ironman": {
           "name": "Iron Man",
           "description": "Iron Man inspired design"
+        },
+        "bluetouch": {
+          "name": "Touch of blue",
+          "description": "A pleasant blue color scheme."
         }
       }
     },

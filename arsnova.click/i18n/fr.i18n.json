@@ -313,6 +313,10 @@
         "darcula": {
           "name": "Darcula",
           "description": "Fond noir et des couleurs vives."
+        },
+        "pastel": {
+          "name": "Couleurs Pastel",
+          "description": "Couleurs pastel elgeante pour eien humeur harmonieuse."
         }
       }
     },

@@ -65,5 +65,10 @@ export const themes = [
 		name: "view.theme_switcher.themes.darcula.name",
 		description: "view.theme_switcher.themes.darcula.description",
 		id: "theme-darcula"
+	},
+	{
+		name: "view.theme_switcher.themes.pastel.name",
+		description: "view.theme_switcher.themes.pastel.description",
+		id: "theme-pastel"
 	}
 ];

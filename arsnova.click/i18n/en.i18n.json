@@ -313,6 +313,10 @@
         "darcula": {
           "name": "Darcula",
           "description": "Black background and colorful colors."
+        },
+        "pastel": {
+          "name": "Pastel",
+          "description": "Elegant pastel tints for a harmonious mood."
         }
       }
     },

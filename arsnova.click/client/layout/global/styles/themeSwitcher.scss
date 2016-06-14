@@ -611,6 +611,73 @@
 
 	}
 
+	@if ($name == "theme-pastel") {
+		$background-color: #f1ece3;
+		$bg-nav-row: #f1ece3;
+		$bg-footer: #f1ece3;
+		$bg-container: $background-color;
+		$bg-questionList-row: $bg-container;
+		$input-background-color: #bf91d3;
+
+		$success: #74a05e;
+		$warning: #b46a82;
+		$btn-success: #9474a3;
+		$btn-success-hover: #bf91d3;
+		$btn-success-border: #bf91d3;
+		$disabled-button-background: #cfbfd6;
+		$info: #9292b7;
+		$fg-footer-info-bar: #394a59;
+		$fg-footer-info-bar-active: #7a528c;
+		$fg-footer-info-bar-active-hovered: #bf91d3;
+
+		$slider-color: #517041;
+		$progress-bar-success-color: #74a05e;
+		$bg-progress-bar-reading_confirmation: #9292b7;
+		$progress-bar-read-confirmation: #ffba66;
+		$progress-bar-failure-color: #b46a82 ;
+
+		$bg-answer_options-bootstrap_switch: #bf91d3;
+		$border-answer_options-invalidAnswerOption: #b20000;
+		$border-answer_options-invalidQuestion: #b20000;
+		$bg-answer_options-bootstrap_switch_handle_off: #9c4f68;
+		$bg-answer_options-bootstrap_switch_handle_on: #74a05e;
+		$border-questionScrollPane-active-valid-remove-question: #74a05e;
+		$bg-questionScrollPane-question-icon-valid-index-number: #74a05e;
+
+		$fg_quiz-name: #7a528c;
+		$fg_titel: #7a528c;
+		$fg-question-title: black;
+		$fg-theme_description: black;
+		$default-text-color: black;
+		$fg_a: #7a528c;
+		$fg-hashtag_management-hashtag_name: $default-text-color;
+		$border-hashtag_management-HR: $default-text-color;
+		$fg-text-light: black;
+		$fg_text-dark: black;
+		$quiz-summary-row-color: $default-text-color;
+		$fg-quiz-summary-H4: $default-text-color;
+		$fg-quiz-summary-P: $default-text-color;
+		$fg-quiz-summary-UL: $default-text-color;
+		$fg-success: darken($success, 5);
+
+		$splashscreen-background-color: #e7d5ee;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-button-background-color: $success;
+
+		$bg-js-my-hash-validQuestion: $success;
+		$bg-js-my-hash-validQuestion-hovered: lighten($success, 10);
+		$fg-js-my-hash-validQuestion: $success-text-color;
+		$bg-js-my-hash-invalidQuestion: $warning;
+		$bg-js-my-hash-invalidQuestion-hovered: lighten($warning, 10);
+		$fg-js-my-hash-invalidQuestion: $warning-text-color;
+	}
+
 	@if ($name == "theme-blackbeauty") {
 		$success: #00A000; /* green */
 		$success-text-color: white;
@@ -1819,3 +1886,4 @@
 @include theme(theme-darkPastel);
 @include theme(theme-hell);
 @include theme(theme-darcula);
+@include theme(theme-pastel);

@@ -353,6 +353,10 @@
         "new": {
           "name": "Nouveau design",
           "description": "Une nouvelle frais conception"
+        },
+        "colored": {
+          "name": "Colored",
+          "description": "Une nouvelle version de couleur!"
         }
       }
     },

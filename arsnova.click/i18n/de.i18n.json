@@ -354,6 +354,10 @@
         "new": {
           "name": "New-Theme",
           "description": "Ein neues Frisches Theme!"
+        },
+        "colored": {
+          "name": "Colored",
+          "description": "Eine neue farbige Variante!"
         }
       }
     },

@@ -353,6 +353,10 @@
         "new": {
           "name": "New-Theme",
           "description": "A new Fresh Theme!"
+        },
+        "colored": {
+          "name": "Colored",
+          "description": "A new colorful version!"
         }
       }
     },

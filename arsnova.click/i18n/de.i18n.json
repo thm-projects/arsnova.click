@@ -294,6 +294,10 @@
         "arsnova": {
           "name": "ARSnova",
           "description": "Du kennst ARSnova? Dann fühl' dich wie zu Hause!"
+        },
+        "blackbeauty": {
+          "name" : "BlackBeauty",
+          "description": "Dunkel, dunkler und noch dunkler"
         }
       }
     },

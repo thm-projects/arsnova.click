@@ -408,6 +408,50 @@
 		$splashscreen-sound-config-button-background-color: $success;
 		$splashscreen-sound-config-select-foreground-color: black;
 	}
+	@if ($name == "theme-blackbeauty") {
+		$success: #00A000; /* green */
+		$success-text-color: white;
+		$warning: #b10d0d; /* firebrick */
+		$info: #444444; /* oceanblue */
+		$background-color: #010101; /* black */
+
+		$switch: #444444; /* grey */
+		$switch-text-color: #ffffff;
+
+		$bg-nav-row: $background-color;
+
+		$bg-questionList-row: $bg-nav-row;
+
+		$bg-container: $background-color;
+
+		$bg-footer: $background-color;
+		$footer-text-color: #FFFFFF; /* white */
+
+		$disabled-button-background: darkgrey; /* darkgrey */
+		$placeholder-color: #FFFFFF ; /* white */
+		$input-background-color: #FF8C00; /* orange */
+		$input-group-letter-color: white; /* darkslategrey */
+
+		$check-mark-checked: $success;
+		$check-mark-unchecked: $warning;
+
+		$fg-warning: $warning;
+
+		$bg-answer_options-bootstrap_switch: $input-background-color;
+
+		$splashscreen-background-color: #6b6b6b;
+		$splashscreen-foreground-color: white;
+		$splash-screen-header-color: white;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-button-background-color: $success;
+		$splashscreen-sound-config-select-foreground-color: black;
+	}
 	@if ($name == "theme-thm") {
 		$thmred: #971B2F;
 		$thmorange: #F2A900;
@@ -1540,3 +1584,4 @@
 @include theme(theme-thm);
 @include theme(theme-elegant);
 @include theme(theme-arsnova);
+@include theme(theme-blackbeauty);

@@ -70,5 +70,15 @@ export const themes = [
 		name: "view.theme_switcher.themes.pastel.name",
 		description: "view.theme_switcher.themes.pastel.description",
 		id: "theme-pastel"
+	},
+	{
+		name: "view.theme_switcher.themes.neongrey.name",
+		description: "view.theme_switcher.themes.neongrey.description",
+		id: "theme-neongrey"
+	},
+	{
+		name: "view.theme_switcher.themes.smooth.name",
+		description: "view.theme_switcher.themes.smooth.description",
+		id: "theme-smooth"
 	}
 ];

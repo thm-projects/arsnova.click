@@ -871,6 +871,120 @@
 		$fg-success: darken($success, 5);
 	}
 
+	@if ($name == "theme-neongrey") {
+		$background-color: #cccccc;
+		$default-text-color: black;
+		$success: #00ff00;
+		$success-text-color: black;
+		$success-hovered: #4dff4d;
+		$warning: #ff0066;
+		$warning-hovered: #ff4d94;
+		$info: #00e6e6;
+		$disabled-button-background: #e6e6e6;
+		$bg-nav-row: $background-color;
+		$bg-container: $background-color;
+
+		$bg-footer: #4d4d4d;
+		$bg-answer_options-bootstrap_switch: $input-background-color;
+		$bg-questionList-row: $bg-container;
+
+		$placeholder-color: #595959;
+		$input-background-color: white;
+		$input-foreground-color: black;
+		$input-group-letter-color: black;
+
+		$bg-questionScrollPane-question-icon-valid-index-number: $success;
+		$border-questionScrollPane-active-valid-remove-question: $warning;
+		$bg-questionScrollPane-active-remove-question-hovered: $warning;
+		$fg-questionScrollPane-active-remove-question-hovered: white;
+		$fg-questionScrollPane-index-number: black;
+		$fg-questionScrollPane-remove-question: black;
+
+		$slider-color: #6600ff;
+
+		$box-shadow-question-row-active: #6600ff;
+		$progress-bar-failure-color: $warning;
+		$progress-bar-success-color: $success;
+
+		$fg-text-light: black;
+		$fg_text-dark: black;
+		$fg_a: $info;
+		$fg_quiz-name: #6600ff;
+		$fg_titel: black;
+		$fg-question-title: black;
+		$fg-theme_description: black;
+		$fg-success: $success;
+		$fg-warning: $warning;
+
+		$fg-hashtag_management-hashtag_name: $default-text-color;
+		$border-hashtag_management-HR: $default-text-color;
+
+		$fg-js-my-hash: black;
+		$bg-js-my-hash: #ffffe0;
+		$bg-js-my-hash-hovered: lighten($bg-js-my-hash, 20);
+		$bg-js-my-hash-active: darken($bg-js-my-hash, 10);
+		$bg-js-my-hash-validQuestion: $success;
+		$bg-js-my-hash-validQuestion-hovered: lighten($success, 10);
+		$fg-js-my-hash-validQuestion: $success-text-color;
+		$bg-js-my-hash-invalidQuestion: $warning;
+		$bg-js-my-hash-invalidQuestion-hovered: lighten($warning, 10);
+		$fg-js-my-hash-invalidQuestion: $warning-text-color;
+
+		$bg-answer_options-bootstrap_switch: $input-background-color;
+		$bg-answer_options-bootstrap_switch_handle_off: $warning;
+		$fg-answer_options-bootstrap_switch_handle_off: $warning-text-color;
+		$bg-answer_options-bootstrap_switch_handle_on: $success;
+		$fg-answer_options-bootstrap_switch_handle_on: $success-text-color;
+
+		$check-mark-checked: $success;
+		$check-mark-unchecked: $warning;
+		$border-answer_options-invalidAnswerOption: $warning;
+		$border-answer_options-invalidQuestion: $warning;
+
+		$fg-footer-info-bar-active: $success;
+		$fg-footer-info-bar-active-hovered: $success-hovered;
+		$fg-footer-element-deactivated: $warning;
+		$fg-footer-element-deactivated-hovered: $warning-hovered;
+
+		$splashscreen-background-color: #d9d9d9 ;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-button-background-color: $success;
+	}
+
+	@if ($name == "theme-smooth") {
+		$background-color: #8d1111 ;
+		$input-background-color: #e8e5e5;
+		$input-group-letter-color: #7e0808;
+		$placeholder-color: #000000 ; /* white */
+		$bg-nav-row: #8d1111 ;
+		$bg-footer: #2d2d2d;
+		$fg_a: #3d9c19;
+		$fg_quiz-name: white;
+
+		$fg_titel: 3e3e3e;
+		$fg-question-title: white;
+		$fg-theme_description: white;
+		$default-text-color: 3e3e3e;
+		$fg-hashtag_management-hashtag_name: $default-text-color;
+		$border-hashtag_management-HR: $default-text-color;
+		$fg-text-light: #2a2a2a;
+		$fg_text-dark: #2a2a2a;
+		$fg-footer-info-bar: #394a59;
+		$bg-container: $background-color;
+		$bg-questionList-row: $bg-container;
+		$fg-success: darken($success, 5);
+		$splash-screen-header-color: orange;
+		$splash-screen-body-color: black;
+		$splashscreen-background-color: #ffc0cb;
+		$splashscreen-foreground-color: black;
+	}
+
 	.#{$name} {
 		height: 100%;
 		width: 100%;
@@ -1887,3 +2001,5 @@
 @include theme(theme-hell);
 @include theme(theme-darcula);
 @include theme(theme-pastel);
+@include theme(theme-neongrey);
+@include theme(theme-smooth);

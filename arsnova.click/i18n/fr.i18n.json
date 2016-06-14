@@ -317,6 +317,14 @@
         "pastel": {
           "name": "Couleurs Pastel",
           "description": "Couleurs pastel elgeante pour eien humeur harmonieuse."
+        },
+        "neongrey": {
+          "name": "Gris néon ",
+          "description": "Élégance unit avec des couleurs vives"
+        },
+        "smooth": {
+          "name": "Smooth",
+          "description": "Smooth-Design est Qendrim Grainca"
         }
       }
     },

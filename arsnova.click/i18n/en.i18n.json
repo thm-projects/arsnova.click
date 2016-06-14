@@ -317,6 +317,14 @@
         "pastel": {
           "name": "Pastel",
           "description": "Elegant pastel tints for a harmonious mood."
+        },
+        "neongrey": {
+          "name": "Neon grey",
+          "description": "Elegance combined with vibrant colors"
+        },
+        "smooth": {
+          "name": "Smooth",
+          "description": "Smooth-Design from Qendrim Grainca"
         }
       }
     },

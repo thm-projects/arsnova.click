@@ -333,7 +333,10 @@
         "bluetouch": {
           "name": "Touche de Bleu",
           "description": "Un jeu de couleurs bleu agréable."
-        }
+        },
+        "green": {
+          "name": "vert simple",
+          "description": "vert style simple pour ARSnova.click"
       }
     },
     "timer": {

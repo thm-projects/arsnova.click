@@ -334,7 +334,10 @@
         "bluetouch": {
           "name": "Hauch von Blau",
           "description": "Ein angenehmes blaues Farbschema."
-        }
+        },
+        "green": {
+          "name": "Simples Grün",
+          "description": "Grüner Stil für ARSnova.click"
       }
     },
     "timer": {

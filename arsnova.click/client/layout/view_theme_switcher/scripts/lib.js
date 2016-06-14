@@ -90,5 +90,10 @@ export const themes = [
 		name: "view.theme_switcher.themes.bluetouch.name",
 		description: "view.theme_switcher.themes.bluetouch.description",
 		id: "theme-bluetouch"
+	},
+	{
+		name: "view.theme_switcher.themes.green.name",
+		description: "view.theme_switcher.themes.green.description",
+		id: "theme-green"
 	}
 ];

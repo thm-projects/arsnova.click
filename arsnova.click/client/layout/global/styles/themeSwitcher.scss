@@ -1095,6 +1095,49 @@
 		$progress-bar-success-color: $green;
 	}
 
+	@if ($name == "theme-green") {
+
+		$success: #ff9009;
+		$success-text-color: black;
+		$warning: #b10d0d;
+		$info: #1C86EE;
+		$background-color: #118c4e;
+		$switch: #00CD00;
+		$switch-text-color: black;
+		$bg-nav-row: $background-color;
+
+		$bg-questionList-row: $bg-nav-row;
+
+		$bg-container: $background-color;
+
+		$bg-footer: $background-color;
+		$footer-text-color: black;
+
+		$disabled-button-background: #aaaaaa;
+		$placeholder-color: black;
+		$input-background-color: #ff9009;
+		$input-group-letter-color: #2f4f4f;
+
+		$check-mark-checked: $success;
+		$check-mark-unchecked: $warning;
+
+
+		$bg-answer_options-bootstrap_switch: $input-background-color;
+
+		$splashscreen-background-color: #b6b480;
+		$splashscreen-foreground-color: white;
+		$splash-screen-header-color: white;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-button-background-color: $success;
+		$splashscreen-sound-config-select-foreground-color: black;
+	}
+
 	.#{$name} {
 		height: 100%;
 		width: 100%;
@@ -2115,3 +2158,4 @@
 @include theme(theme-smooth);
 @include theme(theme-ironman);
 @include theme(theme-bluetouch);
+@include theme(theme-green);

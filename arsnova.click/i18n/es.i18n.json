@@ -333,6 +333,10 @@
         "bluetouch": {
           "name": "Toque de Azul",
           "description": "Un esquema de color azul agradable."
+        },
+        "green": {
+          "name": "verde sencilla",
+          "description": "verde estilo para ARSnova.click"
         }
       }
     },

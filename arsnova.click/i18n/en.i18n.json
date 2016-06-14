@@ -333,6 +333,10 @@
         "bluetouch": {
           "name": "Touch of blue",
           "description": "A pleasant blue color scheme."
+        },
+        "green": {
+          "name": "simple green",
+          "description": "green style for ARSnova.click"
         }
       }
     },

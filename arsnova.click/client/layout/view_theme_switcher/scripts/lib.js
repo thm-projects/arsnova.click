@@ -108,7 +108,7 @@ export const themes = [
 	},
 	{
 		name: "view.theme_switcher.themes.new.name",
-		description:"view.theme_switcher.themes.new.description",
+		description: "view.theme_switcher.themes.new.description",
 		id: "new-theme"
 	},
 	{

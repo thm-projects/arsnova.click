@@ -116,17 +116,18 @@ export function countdownFinish() {
 }
 
 export function startCountdown(index, retry = 0) {
-	questionIndex = index;
-	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-	var questionDoc = QuestionGroupCollection.findOne().questionList[index];
-	if (!questionDoc || Session.get("countdownInitialized") || Session.get("sessionClosed")) {
-		if (retry >= 5) {
-			console.log("WARNING: Max retry in live results exceeded");
-		} else {
-			setTimeout(startCountdown(index, retry++), 50);
+	if (Session.get("countdownInitialized") || Session.get("sessionClosed")) {
+		return;
+	}
+	const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+	const questionDoc = QuestionGroupCollection.findOne().questionList[index];
+	if (!questionDoc) {
+		if (retry < 5) {
+			setTimeout(startCountdown(index, ++retry), 20);
 		}
 		return;
 	}
+	questionIndex = index;
 	const currentTime = new Date();
 	const currentCountdown = new Date(questionDoc.startTime);
 	const timeDiff = new Date(currentTime.getTime() - currentCountdown.getTime());

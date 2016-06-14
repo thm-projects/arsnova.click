@@ -42,8 +42,18 @@ export const themes = [
 		id: "theme-arsnova"
 	},
 	{
+		name: "view.theme_switcher.themes.colorBlindRedGreen.name",
+		description: "view.theme_switcher.themes.colorBlindRedGreen.description",
+		id: "theme-colorBlindRedGreen"
+	},
+	{
 		name: "view.theme_switcher.themes.blackbeauty.name",
 		description: "view.theme_switcher.themes.blackbeauty.description",
 		id: "theme-blackbeauty"
+	},
+	{
+		name: "view.theme_switcher.themes.darkPastel.name",
+		description: "view.theme_switcher.themes.darkPastel.description",
+		id: "theme-darkPastel"
 	}
 ];

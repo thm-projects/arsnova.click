@@ -349,6 +349,10 @@
         "psychology": {
           "name": "Colores correctos psicológicos",
           "description": "Un poco de color púrpura. Después de la psicología del color de Nick Kolenda."
+        },
+        "new": {
+          "name": "Nuevo-diseño",
+          "description": "Un nuevo diseño fresco!"
         }
       }
     },

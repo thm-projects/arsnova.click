@@ -461,21 +461,31 @@
 		$warning: #b10d0d; /* firebrick */
 		$info: #1C86EE; /* dodgerblue */
 		$background-color: #4a4a4a; /* grey */
+
 		$switch: #00CD00; /* green */
 		$switch-text-color: #ffffff;
+
 		$bg-nav-row: $background-color;
+
 		$bg-questionList-row: $bg-nav-row;
+
 		$bg-container: $background-color;
+
 		$bg-footer: $background-color;
 		$footer-text-color: #FFFFFF; /* white */
+
 		$disabled-button-background: darkgrey; /* darkgrey */
 		$placeholder-color: #FFFFFF ; /* white */
 		$input-background-color: #FF8C00; /* orange */
 		$input-group-letter-color: white; /* darkslategrey */
+
 		$check-mark-checked: $success;
 		$check-mark-unchecked: $warning;
+
 		$fg-warning: $warning;
+
 		$bg-answer_options-bootstrap_switch: $input-background-color;
+
 		$splashscreen-background-color: #6b6b6b;
 		$splashscreen-foreground-color: white;
 		$splash-screen-header-color: white;
@@ -649,6 +659,32 @@
 		$fg-footer-info-bar: #394a59;
 		$fg-footer-info-bar-active: #459c2f;
 		$fg-footer-info-bar-active-hovered: #6aa05d;
+		$quiz-summary-row-color: $default-text-color;
+		$fg-quiz-summary-H4: $default-text-color;
+		$fg-quiz-summary-P: $default-text-color;
+		$fg-quiz-summary-UL: $default-text-color;
+		$fg-success: darken($success, 5);
+	}
+
+	@if ($name == "theme-hell") {
+		$background-color: #FC954B;
+		$bg-nav-row: #FC954B;
+		$bg-container: $background-color;
+		$bg-questionList-row: $bg-container;
+		$bg-footer: #C9C9C9;
+		$fg_a: #3d9c19;
+		$fg_quiz-name: F08080;
+		$fg_titel: #232737;
+		$fg-question-title: #292929;
+		$fg-theme_description: black;
+		$default-text-color: #292929;
+		$fg-hashtag_management-hashtag_name: $default-text-color;
+		$border-hashtag_management-HR: $default-text-color;
+		$fg-text-light: black;
+		$fg_text-dark: black;
+		$fg-footer-info-bar: #394a59;
+		$fg-footer-info-bar-active: #F90840;
+		$fg-footer-info-bar-active-hovered: #C4D200;
 		$quiz-summary-row-color: $default-text-color;
 		$fg-quiz-summary-H4: $default-text-color;
 		$fg-quiz-summary-P: $default-text-color;
@@ -1669,3 +1705,4 @@
 @include theme(theme-colorBlindRedGreen);
 @include theme(theme-blackbeauty);
 @include theme(theme-darkPastel);
+@include theme(theme-hell);

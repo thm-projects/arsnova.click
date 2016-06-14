@@ -306,6 +306,10 @@
         "colorBlindRedGreen": {
           "name": "Farbenblind Rot-Grün",
           "description": "Für alle die eine Rot-Grün Schwäche haben..."
+        },
+        "living_room": {
+          "name" : "Wohnzimmer",
+          "description": "Helle Wohnzimmer-Atmosphäre"
         }
       }
     },

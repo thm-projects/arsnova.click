@@ -302,6 +302,10 @@
           "name" : "BlackBeauty",
           "description": "Dark, dark and even darker"
         },
+        "living_room": {
+          "name" : "Living Room",
+          "description": "Bright Living Room atmosphere"
+        },
         "colorBlindRedGreen": {
           "name": "Colorblind red-green",
           "description": "For everyone with a red-green weakness..."

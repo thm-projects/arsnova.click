@@ -52,6 +52,11 @@ export const themes = [
 		id: "theme-blackbeauty"
 	},
 	{
+		name: "view.theme_switcher.themes.living_room.name",
+		description: "view.theme_switcher.themes.living_room.description",
+		id: "theme-hell"
+	},
+	{
 		name: "view.theme_switcher.themes.darkPastel.name",
 		description: "view.theme_switcher.themes.darkPastel.description",
 		id: "theme-darkPastel"

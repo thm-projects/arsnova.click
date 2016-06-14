@@ -305,6 +305,10 @@
         "colorBlindRedGreen": {
           "name": "daltonien rouge-vert",
           "description": "Pour tous ceux qui ont un Schache rouge-vert..."
+        },
+        "living_room": {
+          "name" : "Lumineux atmosphère de salon",
+          "description": "Lumineux atmosphère de salon"
         }
       }
     },

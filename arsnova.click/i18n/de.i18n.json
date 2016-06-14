@@ -310,6 +310,10 @@
         "living_room": {
           "name" : "Wohnzimmer",
           "description": "Helle Wohnzimmer-Atmosphäre"
+        },
+        "darcula": {
+          "name": "Darcula",
+          "description": "Schwarzer Hintergrund und bunte Farben"
         }
       }
     },

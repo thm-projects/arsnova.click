@@ -309,6 +309,10 @@
         "living_room": {
           "name" : "Lumineux atmosphère de salon",
           "description": "Lumineux atmosphère de salon"
+        },
+        "darcula": {
+          "name": "Darcula",
+          "description": "Fond noir et des couleurs vives."
         }
       }
     },

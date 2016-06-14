@@ -309,6 +309,10 @@
         "living_room": {
           "name" : "Brillante Living Room atmósfera",
           "description": "Brillante Living Room atmósfera"
+        },
+        "darcula": {
+          "name": "Darcula",
+          "description": "Fondo negro y colores brillantes."
         }
       }
     },

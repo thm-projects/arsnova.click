@@ -147,6 +147,7 @@ export class Splashscreen {
 				if (!hasClickedOnCloseButton) {
 					event.stopPropagation();
 					event.preventDefault();
+					self.close();
 				}
 			});
 

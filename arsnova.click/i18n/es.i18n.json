@@ -303,10 +303,6 @@
           "name" : "Black Beauty",
           "description": "la oscuridad"
         },
-        "colorBlindRedGreen": {
-          "name": "daltoniano rojo-verde",
-          "description": "Para todos los que tienen una debilidad rojo-verde..."
-        },
         "living_room": {
           "name" : "Brillante Living Room atmósfera",
           "description": "Brillante Living Room atmósfera"

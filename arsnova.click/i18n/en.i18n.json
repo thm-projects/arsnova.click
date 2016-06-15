@@ -307,10 +307,6 @@
           "name" : "Living Room",
           "description": "Bright Living Room atmosphere"
         },
-        "colorBlindRedGreen": {
-          "name": "Colorblind red-green",
-          "description": "For everyone with a red-green weakness..."
-        },
         "darcula": {
           "name": "Darcula",
           "description": "Black background and colorful colors."

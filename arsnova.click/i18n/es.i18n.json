@@ -161,7 +161,8 @@
     "hashtag_management": {
       "enter_quiz_name": "Introduzca el nombre del concurso aquí",
       "join_session": "Únete ahora!",
-      "edit_session": "Editar",
+      "start_session": "Empezar la prueba",
+      "edit_session": "Editar el cuestionario",
       "reenter_session": "Abierto",
       "create_session": "Hacer una nueva!",
       "quiz_management": "Tests almacenados",

@@ -161,7 +161,8 @@
     "hashtag_management": {
       "enter_quiz_name": "Entrez le nom du jeu-questionnaire ici",
       "join_session": "Inscrivez-vous maintenant!",
-      "edit_session": "Modifier",
+      "start_session": "Commencez le quiz",
+      "edit_session": "Modifier le quiz",
       "reenter_session": "Ouvrir",
       "create_session": "Faire un nouveau!",
       "quiz_management": "Questionnaires stockées",

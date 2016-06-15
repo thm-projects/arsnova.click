@@ -161,7 +161,8 @@
     "hashtag_management": {
       "enter_quiz_name": "Enter the quiz name here",
       "join_session": "Join now!",
-      "edit_session": "Edit",
+      "start_session": "Start the quiz",
+      "edit_session": "Edit the quiz",
       "reenter_session": "Open",
       "create_session": "Make a new one!",
       "quiz_management": "Stored Quizzes",

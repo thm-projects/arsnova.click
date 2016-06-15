@@ -44,9 +44,8 @@ Template.leaderBoard.helpers({
 		return (index + 1);
 	},
 	parseTimeToSeconds: function (milliseconds) {
-		let seconds = String(((milliseconds / 1000) % 60).toFixed(2)).replace(".",",");
-		seconds = parseInt(seconds) < 10 ? "0" + seconds : seconds;
-		return seconds;
+		let seconds = (milliseconds / 1000).toFixed(2);
+		return String((seconds < 10 ? "0" + seconds : seconds)).replace(".",",");
 	},
 	invisibleResponsesCount: ()=> {
 		return Session.get("allMembersCount") - Session.get("maxResponseButtons");

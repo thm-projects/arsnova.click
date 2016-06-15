@@ -35,11 +35,36 @@ export function getAllHashtags() {
 	return JSON.parse(hashtagString).sort();
 }
 
+export function getAllLoweredHashtags() {
+	var hashtagString = localStorage.getItem("hashtags");
+	if (!hashtagString) {
+		localStorage.setItem("hashtags", JSON.stringify([]));
+		return [];
+	}
+	var sortedHashtags = JSON.parse(hashtagString).sort();
+	var loweredSortedHastags = [];
+	$.each(sortedHashtags, function (i, hashtag) {
+		loweredSortedHastags.push(hashtag.toLowerCase());
+	});
+	return loweredSortedHastags;
+}
+
 export function containsHashtag(hashtag) {
 	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
 		return;
 	}
 	const hashtagString = localStorage.getItem("hashtags");
+
+	if (hashtagString) {
+		var loweredHashtags = [];
+		$.each(JSON.parse(hashtagString), function (i, hashtagElement) {
+			loweredHashtags.push(hashtagElement.toLowerCase());
+		});
+		return $.inArray(hashtag, loweredHashtags) > -1;
+	} else {
+		return false;
+	}
+
 	return hashtagString ? $.inArray(hashtag, JSON.parse(hashtagString)) > -1 : false;
 }
 
@@ -136,10 +161,31 @@ export function addAnswers({hashtag, questionIndex, answerOptionNumber, answerTe
 	}
 }
 
+export function findHashtagCaseInsensitiveFromLocalStorage(hashtag) {
+	var loweredHashtag = hashtag.toLowerCase();
+	var hashtagString = localStorage.getItem("hashtags");
+	var allHashtags = JSON.parse(hashtagString);
+	var result = "";
+	$.each(allHashtags, function (i, originalHashtag) {
+		if (originalHashtag.toLowerCase() === loweredHashtag) {
+			result = originalHashtag;
+		}
+	});
+	return result;
+}
+
 export function reenterSession(hashtag) {
 	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
 		throw new TypeError("Undefined or illegal hashtag provided");
 	}
+
+	var hashtagString = localStorage.getItem("hashtags");
+	var hashtags = JSON.parse(hashtagString);
+	$.each(hashtags, function (i, hashtagElement) {
+		if (hashtag.toLowerCase() === hashtagElement.toLowerCase()) {
+			hashtag = hashtagElement;
+		}
+	});
 
 	const sessionDataString = localStorage.getItem(hashtag);
 	if (!sessionDataString) {

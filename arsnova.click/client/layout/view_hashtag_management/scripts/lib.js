@@ -17,6 +17,7 @@
 
 import {Meteor} from 'meteor/meteor';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 export let hashtagSplashscreen = null;
@@ -33,6 +34,18 @@ export function setEventManagerHandle(handle) {
 
 export function setEventManagerTracker(handle) {
 	eventManagerTracker = handle;
+}
+
+export function findOriginalHashtag(inputHashtag) {
+	var loweredHashtag = inputHashtag.toLowerCase();
+	var allHashtags = HashtagsCollection.find().fetch();
+	var result = "";
+	$.each(allHashtags, function (i, originalHashtag) {
+		if (originalHashtag.hashtag.toLowerCase() === loweredHashtag) {
+			result = originalHashtag.hashtag;
+		}
+	});
+	return result;
 }
 
 export function connectEventManager(hashtag) {

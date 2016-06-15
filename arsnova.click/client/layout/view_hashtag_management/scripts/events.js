@@ -30,7 +30,7 @@ import * as lib from './lib.js';
 
 Template.hashtagView.events({
 	"input #hashtag-input-field": function (event) {
-		var inputHashtag = $(event.target).val();
+		var inputHashtag = $(event.target).val().trim();
 		if (["?", "/", "\\"].some(function (v) { return inputHashtag.indexOf(v) >= 0; })) {
 			$("#joinSession, #addNewHashtag").attr("disabled", "disabled");
 			return;
@@ -42,11 +42,12 @@ Template.hashtagView.events({
 			lib.eventManagerTracker.stop();
 		}
 		lib.setEventManagerTracker(Tracker.autorun(function () {
-			Meteor.subscribe("EventManagerCollection.join", $("#hashtag-input-field").val(), function () {
-				if (!EventManagerCollection.findOne() || localData.containsHashtag($("#hashtag-input-field").val())) {
+			const originalHashtag = lib.findOriginalHashtag(inputHashtag);
+			Meteor.subscribe("EventManagerCollection.join", originalHashtag, function () {
+				if (!EventManagerCollection.findOne() || localData.containsHashtag(originalHashtag)) {
 					$("#joinSession").attr("disabled", "disabled");
 				}
-				lib.setEventManagerHandle(EventManagerCollection.find({hashtag: $("#hashtag-input-field").val()}).observeChanges({
+				lib.setEventManagerHandle(EventManagerCollection.find({hashtag: originalHashtag}).observeChanges({
 					changed: function (id, changedFields) {
 						if (!isNaN(changedFields.sessionStatus)) {
 							if (changedFields.sessionStatus === 2) {
@@ -75,13 +76,15 @@ Template.hashtagView.events({
 			return;
 		}
 
-		var hashtagDoc = HashtagsCollection.findOne({hashtag: inputHashtag});
+		const originalHashtag = lib.findOriginalHashtag(inputHashtag);
+
+		var hashtagDoc = HashtagsCollection.findOne({hashtag: originalHashtag});
 		if (!hashtagDoc) {
 			$("#joinSession").attr("disabled", "disabled");
 			addNewHashtagItem.removeAttr("disabled");
 		} else {
-			var localHashtags = localData.getAllHashtags();
-			if ($.inArray(inputHashtag, localHashtags) > -1) {
+			var localLoweredHashtags = localData.getAllLoweredHashtags();
+			if ($.inArray(inputHashtag.toLowerCase(), localLoweredHashtags) > -1) {
 				addNewHashtagItem.html(TAPi18n.__("view.hashtag_management.reenter_session") + '<span class="glyphicon glyphicon-log-in glyph-right" aria-hidden="true"></span>');
 				addNewHashtagItem.removeAttr("disabled");
 			} else {
@@ -91,7 +94,6 @@ Template.hashtagView.events({
 	},
 	"click #addNewHashtag": function () {
 		const hashtag = $("#hashtag-input-field").val().trim();
-		let reenter = false;
 		try {
 			new SimpleSchema({
 				hashtag: hashtagSchema
@@ -103,15 +105,12 @@ Template.hashtagView.events({
 			});
 			return;
 		}
-		const localHashtags = localData.getAllHashtags();
-		if ($.inArray(hashtag, localHashtags) > -1 && HashtagsCollection.findOne()) {
-			reenter = true;
-		}
-		if (reenter) {
+		const localLoweredHashtags = localData.getAllLoweredHashtags();
+		if ($.inArray(hashtag.toLowerCase(), localLoweredHashtags) > -1 && HashtagsCollection.findOne()) {
 			sessionStorage.setItem("overrideValidQuestionRedirect", true);
 			const session = localData.reenterSession(hashtag);
 			Session.set("questionGroup", session);
-			lib.connectEventManager(hashtag);
+			lib.connectEventManager(localData.findHashtagCaseInsensitiveFromLocalStorage(hashtag));
 		} else {
 			const questionGroup = new DefaultQuestionGroup({
 				hashtag: hashtag,
@@ -138,10 +137,10 @@ Template.hashtagView.events({
 		}
 	},
 	"click #joinSession": function () {
-		var hashtag = $("#hashtag-input-field").val();
-
-		if (EventManagerCollection.findOne().sessionStatus === 2) {
-			Router.go("/" + hashtag + "/nick");
+		var hashtag = $("#hashtag-input-field").val().trim();
+		var session = EventManagerCollection.findOne({hashtag: {'$regex': hashtag, $options: 'i'}});
+		if (session.sessionStatus === 2) {
+			Router.go("/" + session.hashtag + "/nick");
 		} else {
 			$("#joinSession").attr("disabled", "disabled");
 			new ErrorSplashscreen({

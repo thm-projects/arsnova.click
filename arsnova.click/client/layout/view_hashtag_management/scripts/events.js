@@ -42,14 +42,12 @@ Template.hashtagView.events({
 			lib.eventManagerTracker.stop();
 		}
 		lib.setEventManagerTracker(Tracker.autorun(function () {
-			Meteor.subscribe("EventManagerCollection.join", inputHashtag, function () {
-				if (!EventManagerCollection.findOne() || localData.containsHashtag(inputHashtag)) {
+			const originalHashtag = lib.findOriginalHashtag(inputHashtag);
+			Meteor.subscribe("EventManagerCollection.join", originalHashtag, function () {
+				if (!EventManagerCollection.findOne() || localData.containsHashtag(originalHashtag)) {
 					$("#joinSession").attr("disabled", "disabled");
 				}
-
-				const originalHashtag = lib.findOriginalHashtag(inputHashtag);
-				console.log(originalHashtag.length);
-				console.log(EventManagerCollection.find({hashtag: originalHashtag}).fetch());
+				
 				lib.setEventManagerHandle(EventManagerCollection.find({hashtag: originalHashtag}).observeChanges({
 					changed: function (id, changedFields) {
 						if (!isNaN(changedFields.sessionStatus)) {

@@ -47,7 +47,6 @@ Template.hashtagView.events({
 				if (!EventManagerCollection.findOne() || localData.containsHashtag(originalHashtag)) {
 					$("#joinSession").attr("disabled", "disabled");
 				}
-				
 				lib.setEventManagerHandle(EventManagerCollection.find({hashtag: originalHashtag}).observeChanges({
 					changed: function (id, changedFields) {
 						if (!isNaN(changedFields.sessionStatus)) {
@@ -95,7 +94,6 @@ Template.hashtagView.events({
 	},
 	"click #addNewHashtag": function () {
 		const hashtag = $("#hashtag-input-field").val().trim();
-		let reenter = false;
 		try {
 			new SimpleSchema({
 				hashtag: hashtagSchema

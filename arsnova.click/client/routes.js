@@ -59,7 +59,7 @@ Router.onStop(function () {
 	if (lastRoute === undefined) {
 		//homeView
 		localStorage.setItem("lastPage", "/");
-	} else if (lastRoute !== "agb" && lastRoute !== "datenschutz" && lastRoute !== "impressum") {
+	} else if (lastRoute !== "agb" && lastRoute !== "dataprivacy" && lastRoute !== "imprint") {
 		localStorage.setItem("lastPage", lastRoute);
 	}
 });
@@ -142,12 +142,12 @@ Router.route('/agb', function () {
 	this.render('agb');
 });
 
-Router.route('/datenschutz', function () {
-	this.render('datenschutz');
+Router.route('/dataprivacy', function () {
+	this.render('dataprivacy');
 });
 
-Router.route('/impressum', function () {
-	this.render('impressum');
+Router.route('/imprint', function () {
+	this.render('imprint');
 });
 
 Router.route('/translate', function () {

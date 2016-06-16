@@ -19,23 +19,14 @@
 	<nav class="navbar navbar-fixed-top navbar-transparent navbar-gradient">
 		<div class="container-fluid">
 			<div class="row">
-                {{#if isInHomePathOrIsStudent}}
+                {{#if isInHomePath}}
                     <div class="col-md-10 col-md-offset-1 header-title">
                         <div class="container-fluid center-block">
                             <div class="text-center text-size-medium logo-header-chars">
-                                {{#if isInActiveQuizAndIsStudent}}
-                                    <a href="/{{getCurrentResetRoute}}">
-                                        <span class="color-changing-ars">a r s </span>
-                                        <span class="color-changing-nova">n o v a </span>
-                                        <span class="color-changing-dot">.</span>
-                                        <span class="color-changing-click"> c l i c k</span>
-                                    </a>
-                                {{else}}
-                                    <span class="color-changing-ars">a r s </span>
-                                    <span class="color-changing-nova">n o v a </span>
-                                    <span class="color-changing-dot">.</span>
-                                    <span class="color-changing-click"> c l i c k</span>
-                                {{/if}}
+                                <span class="color-changing-ars">a r s </span>
+                                <span class="color-changing-nova">n o v a </span>
+                                <span class="color-changing-dot">.</span>
+                                <span class="color-changing-click"> c l i c k</span>
                             </div>
                         </div>
                     </div>
@@ -49,7 +40,7 @@
                             </div>
                             <div class="col-xs-8">
                                 <div class="text-center header-titel default-yellow-text-color">
-                                    <p>{{currentHashtag}}</p>
+                                    <p>{{getCurrentTitle}}</p>
                                 </div>
                             </div>
                             {{#if isTHMStyleSelectedAndGreaterThan999Pixels}}

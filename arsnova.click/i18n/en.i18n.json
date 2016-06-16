@@ -140,11 +140,12 @@
   },
   "view": {
     "answeroptions": {
+      "title": "2/4 Define answers...",
       "answeroptiontext_placeholder": "Answer option required",
       "correct": "Correct",
       "wrong": "Wrong",
       "ranged_question": {
-        "title": "Range of correct answers",
+        "title": "Interval of correct answers",
         "correct_value": "Correct value",
         "min_range": "Minimum range",
         "max_range": "Maximum range"
@@ -176,6 +177,8 @@
       "invalid_question": "Invalid Quiz"
     },
     "leaderboard": {
+      "header": "Leaderboard",
+      "global_header": "Global leaderboard",
       "title": {
         "single_question": "Question __questionId__ - Correct answers from...",
         "all_questions": "Correct answers from..."
@@ -190,6 +193,7 @@
       "show_less": "Show less"
     },
     "liveResults": {
+      "title": "Results",
       "question": "Question",
       "ranking": "Ranking",
       "reading_confirmation": "Reading confirmation",
@@ -222,6 +226,8 @@
       "add_kicked_member_to_ban_list": "Ban nickname permanently"
     },
     "questions": {
+      "title": "1/4 Enter questiontext...",
+      "choose_format": "Choose question format:",
       "enter_question_here": "Enter your question here",
       "format": "Format",
       "edit": "Edit",
@@ -232,7 +238,7 @@
       "ranged_question": "Question with ranged answeroptions"
     },
     "quiz_summary": {
-      "summary": "Summary",
+      "title": "4/4 Summary...",
       "quiz_name": "Name of the quiz",
       "quiz_url": "URL for attendees",
       "question_amount": "Amount of all questions",
@@ -338,7 +344,7 @@
       }
     },
     "timer": {
-      "set_countdown": "Set countdown",
+      "title": "3/4 Set countdown...",
       "second": "Second",
       "second_plural": "Seconds"
     },
@@ -348,6 +354,7 @@
       "beta": "Beta"
     },
     "voting": {
+      "title": "Voting",
       "question": "Question",
       "send": "Send",
       "seconds_left": "1 Second left!",

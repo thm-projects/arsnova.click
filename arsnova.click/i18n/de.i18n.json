@@ -280,8 +280,8 @@
           "description": "Der Stil der ersten Stunde."
         },
         "dark": {
-          "name": "Dunkle Version",
-          "description": "Dunkler Hintergrund mit geringem Kontrast."
+          "name": "Standard-Stil (beamertauglich)",
+          "description": "Dunkler Hintergrund sorgt für hohen Kontrast."
         },
         "elegant": {
           "name": "Elegant",
@@ -292,7 +292,7 @@
           "description": "Corporate Design der TH Mittelhessen."
         },
         "arsnova": {
-          "name": "ARSnova",
+          "name": "ARSnova.eu",
           "description": "Du kennst ARSnova? Dann fühl' dich wie zu Hause!"
         },
         "black_beauty": {

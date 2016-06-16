@@ -324,8 +324,8 @@
           "description": "A refreshing and bright blue tint."
         },
         "green": {
-          "name": "simple green",
-          "description": "green style for ARSnova.click"
+          "name": "Simple green",
+          "description": "A simple green style."
         },
         "action": {
           "name": "Action",

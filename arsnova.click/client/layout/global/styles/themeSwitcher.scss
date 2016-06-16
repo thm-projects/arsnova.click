@@ -983,92 +983,6 @@
 		$splashscreen-sound-config-button-background-color: $success;
 	}
 
-	@if ($name == "theme-sugar") {
-		$fg-text-light: #526f8b;
-		$fg-text-dark: #203040;
-		$warning: #cc4a4f;
-		$warning-text-color: $fg-text-dark;
-		$warning-hovered: #832f32;
-		$success: #67d467;
-		$success-text-color: $fg-text-dark;
-		$success-hovered: #468946;
-		$info: #f4c0ff;
-		$info-text-color: $fg-text-dark;
-		$background-color: #c0fff4;
-		$bg-nav-row: $background-color;
-		$bg-container: $background-color;
-		$bg-nav-row: $info;
-		$bg-footer: $info;
-		$fg-footer-info-bar: $fg-text-light;
-		$fg-footer-info-bar-active: $fg-text-dark;
-		$fg-footer-info-bar-active-hovered: $fg-text-dark;
-
-		$fg-question-title: $fg-text-dark;
-		$fg_a: $fg-text-dark;
-		$fg_quiz-name: $fg-text-dark;
-		$default: $fg-text-light;
-		$default-text-color: $fg-text-light;
-		$fg_titel: $fg-text-dark;
-
-		$fg-hashtag_management-hashtag_name: $default-text-color;
-		$border-hashtag_management-HR: $default-text-color;
-
-		$placeholder-color: $info;
-		$input-background-color: $fg-text-dark;
-		$input-foreground-color: $info;
-		$input-group-letter-color: $info;
-		$footer-background-color: white;
-		$fg-footer-info-bar-hovered: $fg-text-dark;
-		$fg-footer-info-bar-active: $success;
-		$fg-footer-info-bar-active-hovered: $success-hovered;
-		$fg-footer-element-deactivated: $warning;
-		$fg-footer-element-deactivated-hovered: $warning-hovered;
-
-		$bg-answer_options-bootstrap_switch: $fg-text-dark;
-		$bg-answer_options-bootstrap_switch_handle_off: $warning;
-		$fg-answer_options-bootstrap_switch_handle_off: $warning-text-color;
-		$bg-answer_options-bootstrap_switch_handle_on: $success;
-		$fg-answer_options-bootstrap_switch_handle_on: $success-text-color;
-
-		$bg-questionList-row: $bg-nav-row;
-
-		$bg-qr-code-container: $background-color;
-
-		$bg-container: $background-color;
-
-		$disabled-button-background: #df727d;
-
-		$check-mark-unchecked: black;
-
-		$bg-button-result: $info;
-		$bg-button-result-progress: $background-color;
-		$fg-button-result-percentage: $fg-text-dark;
-		$progress-bar-success-color: $success;
-		$progress-bar-failure-color: $warning;
-		$bg_progress-bar: $background-color;
-		$fg_progress-bar: $fg-text-dark;
-		$bg-progress-bar-reading_confirmation: $fg-text-light;
-		$fg-progress-bar-reading_confirmation: $fg-text-dark;
-		$fg-formGroup-progress-percentage-label: $fg-text-dark;
-
-		$fg-theme_description: $fg-text-light;
-		$quiz-summary-row-color: $default-text-color;
-		$fg-quiz-summary-H4: $default-text-color;
-		$fg-quiz-summary-P: $default-text-color;
-		$fg-quiz-summary-UL: $default-text-color;
-		$fg-success: $success;
-
-		$splashscreen-background-color: $fg-text-light;
-		$splashscreen-foreground-color: $info;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
-		$splashscreen-question-preview-background-color: $splashscreen-background-color;
-		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-background-color: $splashscreen-background-color;
-		$splashscreen-delete-background-color: $splashscreen-background-color;
-	}
-
 	.#{$name} {
 		height: 100%;
 		width: 100%;
@@ -2088,4 +2002,3 @@
 @include theme(theme-fresh);
 @include theme(theme-action);
 @include theme(theme-Psychology-Correct-Colours);
-@include theme(theme-sugar);

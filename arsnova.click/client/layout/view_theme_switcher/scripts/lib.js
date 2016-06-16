@@ -90,10 +90,5 @@ export const themes = [
 		name: "view.theme_switcher.themes.action.name",
 		description: "view.theme_switcher.themes.action.description",
 		id: "theme-action"
-	},
-	{
-		name: "view.theme_switcher.themes.sugar.name",
-		description: "view.theme_switcher.themes.sugar.description",
-		id: "theme-sugar"
 	}
 ];

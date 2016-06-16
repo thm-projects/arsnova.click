@@ -304,8 +304,8 @@
           "description": "Ambiente luminoso de la sala"
         },
         "pastel": {
-          "name": "Color Pastel",
-          "description": "Colores pastel elgeante para eien estado de ánimo armónico."
+          "name": "Colores pastel",
+          "description": "Tintes pastel elegantes para un estado de ánimo armónico"
         },
         "neongray": {
           "name": "Gris néon",

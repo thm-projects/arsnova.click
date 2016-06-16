@@ -301,10 +301,10 @@
         },
         "living_room": {
           "name" : "Living Room",
-          "description": "Bright Living Room atmosphere"
+          "description": "Bright living room atmosphere"
         },
         "pastel": {
-          "name": "Pastel",
+          "name": "Pastel colors",
           "description": "Elegant pastel tints for a harmonious mood."
         },
         "neongrey": {

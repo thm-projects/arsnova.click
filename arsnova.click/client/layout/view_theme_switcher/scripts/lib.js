@@ -87,11 +87,6 @@ export const themes = [
 		id: "theme-Psychology-Correct-Colours"
 	},
 	{
-		name: "view.theme_switcher.themes.new.name",
-		description: "view.theme_switcher.themes.new.description",
-		id: "new-theme"
-	},
-	{
 		name: "view.theme_switcher.themes.action.name",
 		description: "view.theme_switcher.themes.action.description",
 		id: "theme-action"

@@ -793,51 +793,6 @@
 		$splashscreen-foreground-color: black;
 	}
 
-	@if ($name == "theme-ironman") {
-		$warning : red;
-		$success: #3fdaff;
-		$background-color:   #ffee58 ;
-		$bg-nav-row: #ff4c3e;
-		$bg-container: $background-color;
-		$bg-questionList-row: $bg-container;
-		$bg-footer: #ff4c3e;
-		$fg_a: #4cebff;
-		$fg_quiz-name: white;
-		$fg_titel: #ff4c3e;
-		$fg-question-title: black;
-		$fg-theme_description: black;
-		$default-text-color: #ff4c3e;
-		$fg-hashtag_management-hashtag_name: $default-text-color;
-		$border-hashtag_management-HR: $default-text-color;
-		$fg-text-light: black;
-		$fg_text-dark: black;
-		$fg-footer-info-bar: #C0C0C0;
-		$fg-footer-info-bar-active: #3fdaff;
-		$fg-footer-info-bar-active-hovered: #3fdaff;
-		$quiz-summary-row-color: $default-text-color;
-		$fg-quiz-summary-H4: $default-text-color;
-		$fg-quiz-summary-P: $default-text-color;
-		$fg-quiz-summary-UL: $default-text-color;
-		$fg-success: darken($success, 5);
-		$splashscreen-background-color: #ffee58;
-		$splashscreen-foreground-color: #ff4c3e;
-		$splash-screen-header-color: #ff4c3e;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
-		$splashscreen-question-preview-background-color: $splashscreen-background-color;
-		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-background-color: $splashscreen-background-color;
-		$splashscreen-delete-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-button-background-color: $success;
-		$splashscreen-sound-config-select-foreground-color: black;
-		$bg-questionScrollPane-question-icon-valid-index-number: $success;
-		$bg-questionScrollPane-question-icon-invalid-index-number: grey;
-		$bg-questionScrollPane-question-icon-valid-index-number-hovered: darken($bg-questionScrollPane-question-icon-valid-index-number, 5%);
-		$bg-questionScrollPane-question-icon-invalid-index-number-hovered: darken($bg-questionScrollPane-question-icon-invalid-index-number, 10%);
-		$border-questionScrollPane-active-valid-remove-question: $success;
-	}
-
 	@if ($name == "theme-bluetouch") {
 		$green: #80ba24;
 		$red: #971B2F;
@@ -2183,7 +2138,6 @@
 @include theme(theme-pastel);
 @include theme(theme-neongrey);
 @include theme(theme-smooth);
-@include theme(theme-ironman);
 @include theme(theme-bluetouch);
 @include theme(theme-green);
 @include theme(theme-fresh);

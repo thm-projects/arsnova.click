@@ -300,8 +300,8 @@
           "description": "Sombre, plus sombre et plus sombre encore"
         },
         "living_room": {
-          "name" : "Lumineux atmosphère de salon",
-          "description": "Lumineux atmosphère de salon"
+          "name" : "Salon",
+          "description": "ambiance lumineuse Salon"
         },
         "pastel": {
           "name": "Couleurs Pastel",

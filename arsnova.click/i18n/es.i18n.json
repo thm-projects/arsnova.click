@@ -300,8 +300,8 @@
           "description": "Oscuro, más oscuro y más oscuro"
         },
         "living_room": {
-          "name" : "Brillante Living Room atmósfera",
-          "description": "Brillante Living Room atmósfera"
+          "name" : "Sala",
+          "description": "Ambiente luminoso de la sala"
         },
         "pastel": {
           "name": "Color Pastel",

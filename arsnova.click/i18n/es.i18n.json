@@ -295,69 +295,45 @@
           "name": "ARSnova",
           "description": "Ya sabes Ars Nova? Sentirse como en casa!"
         },
-        "dark_pastel": {
-          "name": "Pastel oscuro",
-          "description": "Para aquellos que gustan de relajarse sus ojos..."
-        },
         "black_beauty": {
-          "name" : "Black Beauty",
-          "description": "la oscuridad"
+          "name" : "Belleza negro",
+          "description": "Oscuro, más oscuro y más oscuro"
         },
         "living_room": {
-          "name" : "Brillante Living Room atmósfera",
-          "description": "Brillante Living Room atmósfera"
-        },
-        "darcula": {
-          "name": "Darcula",
-          "description": "Fondo negro y colores brillantes."
+          "name" : "Sala",
+          "description": "Ambiente luminoso de la sala"
         },
         "pastel": {
-          "name": "Color Pastel",
-          "description": "Colores pastel elgeante para eien estado de ánimo armónico."
+          "name": "Colores pastel",
+          "description": "Tintes pastel elegantes para un estado de ánimo armónico"
         },
         "neongray": {
-          "name": "Gris néon",
-          "description": "Elegancia unido con colores brilliantes"
+          "name": "Gris de neón",
+          "description": "La elegancia se combina con colores brillantes"
         },
         "smooth": {
-          "name": "Smooth",
-          "description": "Smooth-Design de la Qendrim Grainca"
-        },
-        "ironman": {
-          "name": "Iron Man",
-          "description": "Iron Man diseño inspirado"
+          "name": "Rojo oscuro",
+          "description": "El color de advertencia garantiza la atención"
         },
         "bluetouch": {
-          "name": "Toque de Azul",
-          "description": "Un esquema de color azul agradable."
+          "name": "Bajo el mar",
+          "description": "Un estilo azul marino con detalles brillantes."
         },
         "fresh": {
-          "name": "Fresh",
-          "description": "fresco diseño fresco para el verano"
+          "name": "Azul fresca",
+          "description": "Un tinte azul refrescante y brillante."
         },
         "green": {
-          "name": "verde sencilla",
-          "description": "verde estilo para ARSnova.click"
+          "name": "Verde sencilla",
+          "description": "Un estilo sencillo verde."
         },
         "action": {
-          "name": "Action",
-          "description": "Para Quizrounds rápidas y con calefacción!"
+          "name": "Relámpago",
+          "description": "Quizzes rápido y furioso."
         },
         "psychology": {
-          "name": "Colores correctos psicológicos",
-          "description": "Un poco de color púrpura. Después de la psicología del color de Nick Kolenda."
-        },
-        "new": {
-          "name": "Nuevo-diseño",
-          "description": "Un nuevo diseño fresco!"
-        },
-        "sugar": {
-          "name": "Sugar",
-          "description": "Un diseño en tonos pastel"
-        },
-        "colored": {
-          "name": "Colored",
-          "description": "Una nueva versión del color!"
+          "name": "Un poco de moda",
+          "description": "Pink mezclado con colores sutiles."
         }
       }
     },

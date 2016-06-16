@@ -295,69 +295,45 @@
           "name": "ARSnova",
           "description": "Vous connaissez ARS nova? Sentez-vous la maison!"
         },
-        "dark_pastel": {
-          "name": "Pastel foncé",
-          "description": "Pour ceux qui aiment se détendre leurs yeux..."
-        },
         "black_beauty": {
-          "name" : "Black Beauty",
-          "description": "L'obscurité"
+          "name" : "Beauté noire",
+          "description": "Sombre, plus sombre et plus sombre encore"
         },
         "living_room": {
-          "name" : "Lumineux atmosphère de salon",
-          "description": "Lumineux atmosphère de salon"
-        },
-        "darcula": {
-          "name": "Darcula",
-          "description": "Fond noir et des couleurs vives."
+          "name" : "Salon",
+          "description": "ambiance lumineuse Salon"
         },
         "pastel": {
-          "name": "Couleurs Pastel",
-          "description": "Couleurs pastel elgeante pour eien humeur harmonieuse."
+          "name": "Couleurs pastel",
+          "description": "Teintes pastel élégantes pour une ambiance harmonieuse"
         },
         "neongrey": {
-          "name": "Gris néon ",
-          "description": "Élégance unit avec des couleurs vives"
+          "name": "Neon gris",
+          "description": "Élégance combinée avec des couleurs brillantes"
         },
         "smooth": {
-          "name": "Smooth",
-          "description": "Smooth-Design est Qendrim Grainca"
-        },
-        "ironman": {
-          "name": "Iron Man",
-          "description": "Iron Man a inspiré la conception"
+          "name": "Rouge sombre",
+          "description": "La couleur d'avertissement assure une attention"
         },
         "bluetouch": {
-          "name": "Touche de Bleu",
-          "description": "Un jeu de couleurs bleu agréable."
+          "name": "Sous la mer",
+          "description": "Un style bleu foncé avec des accents lumineux."
         },
         "fresh": {
-          "name": "Fresh",
-          "description": "nouveau design frais pour l'été"
+          "name": "Bleu frais",
+          "description": "Une teinte bleue rafraîchissante et lumineuse."
         },
         "green": {
-          "name": "vert simple",
-          "description": "vert style simple pour ARSnova.click"
+          "name": "Vert simple",
+          "description": "Un style vert simple."
         },
         "action": {
-          "name": "Action",
-          "description": "Pour Quizrounds rapides et chauffées!"
+          "name": "Foudre",
+          "description": "Pour Questionnaires rapide et furieux."
         },
         "psychology": {
-          "name": "Couleurs correctes psychologiques",
-          "description": "Un peu de pourpre. Après la psychologie de la couleur de Nick Kolenda."
-        },
-        "new": {
-          "name": "Nouveau design",
-          "description": "Une nouvelle frais conception"
-        },
-        "sugar": {
-          "name": "Sugar",
-          "description": "Un design dans les tons pastel"
-        },
-        "colored": {
-          "name": "Colored",
-          "description": "Une nouvelle version de couleur!"
+          "name": "Un peu original",
+          "description": "Rose mélangé avec des couleurs subtiles."
         }
       }
     },

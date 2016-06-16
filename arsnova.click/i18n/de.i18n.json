@@ -277,87 +277,63 @@
       "themes": {
         "default": {
           "name": "ARSnova.click",
-          "description": "Der Stil der ersten Stunde"
+          "description": "Der Stil der ersten Stunde."
         },
         "dark": {
           "name": "Dunkle Version",
-          "description": "Dunkler Hintergrund mit geringem Kontrast"
+          "description": "Dunkler Hintergrund mit geringem Kontrast."
         },
         "elegant": {
           "name": "Elegant",
-          "description": "Eleganter Stil für anspruchsvolle Quizrunden"
+          "description": "Eleganter Stil für anspruchsvolle Quizrunden."
         },
         "thm": {
           "name": "THM",
-          "description": "Corporate Design der TH Mittelhessen"
+          "description": "Corporate Design der TH Mittelhessen."
         },
         "arsnova": {
           "name": "ARSnova",
           "description": "Du kennst ARSnova? Dann fühl' dich wie zu Hause!"
         },
-        "dark_pastel": {
-          "name": "Dunkel Pastel",
-          "description": "Für alle, die gerne ihre Augen entspannen..."
-        },
         "black_beauty": {
-          "name" : "Black Beauty",
-          "description": "Dunkel, dunkler und noch dunkler"
+          "name" : "Schwarze Schönheit",
+          "description": "Dunkel, dunkler und noch dunkler."
         },
         "living_room": {
           "name" : "Wohnzimmer",
-          "description": "Helle Wohnzimmer-Atmosphäre"
-        },
-        "darcula": {
-          "name": "Darcula",
-          "description": "Schwarzer Hintergrund und bunte Farben"
+          "description": "Helle Wohnzimmer-Atmosphäre."
         },
         "pastel": {
-          "name": "Pastell",
+          "name": "Pastellfarben",
           "description": "Geschmackvolle Pastell-Töne für eine harmonische Stimmung."
         },
         "neongrey": {
           "name": "Neongrau",
-          "description": "Eleganz vereint mit leuchtenden Farben"
+          "description": "Eleganz vereint mit leuchtenden Farben."
         },
         "smooth": {
-          "name": "Smooth",
-          "description": "Du kennst ARSnova? Dann fühl' dich wie zu Hause!"
-        },
-        "ironman": {
-          "name": "Iron Man",
-          "description": "Iron Man inspiriertes Design"
+          "name": "Dunkelrot",
+          "description": "Die Warnfarbe sorgt für Aufmerksamkeit."
         },
         "bluetouch": {
-          "name": "Hauch von Blau",
-          "description": "Ein angenehmes blaues Farbschema."
+          "name": "Unter dem Meer",
+          "description": "Ein dunkelblaues Farbschema mit hellen Akzenten."
         },
         "fresh": {
-          "name": "Frisches Design",
-          "description": "Cooles frisches Design für den Sommer"
+          "name": "Frisches Blau",
+          "description": "Ein erfrischender und heller Blaustich."
         },
         "green": {
           "name": "Simples Grün",
-          "description": "Grüner Stil für ARSnova.click"
+          "description": "Ein einfacher Grün-Stil."
         },
         "action": {
-          "name": "Action",
-          "description": "Für schnelle und hitzige Quizrunden!"
+          "name": "Blitz",
+          "description": "Für schnelle und wilde Quizrunden."
         },
         "psychology": {
-          "name": "Psychologisch korrekte Farben",
-          "description": "Ein bisschen lila. Nach der Farbenpsychology von Nick Kolenda."
-        },
-        "new": {
-          "name": "New-Theme",
-          "description": "Ein neues Frisches Theme!"
-        },
-        "sugar": {
-          "name": "Sugar",
-          "description": "Ein Design in Pasteltönen"
-        },
-        "colored": {
-          "name": "Colored",
-          "description": "Eine neue farbige Variante!"
+          "name": "Etwas unkonventionell",
+          "description": "Pink gemischt mit dezenten Farben."
         }
       }
     },

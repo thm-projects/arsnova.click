@@ -316,12 +316,12 @@
           "description": "The warning color ensures attention"
         },
         "bluetouch": {
-          "name": "Under the see",
+          "name": "Under the sea",
           "description": "A dark blue style with bright accents."
         },
         "fresh": {
-          "name": "Fresh Theme",
-          "description": "Cool fresh design for the Summer"
+          "name": "Fresh blue",
+          "description": "A refreshing and bright blue tint."
         },
         "green": {
           "name": "simple green",

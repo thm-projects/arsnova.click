@@ -280,8 +280,8 @@
           "description": "La primera y principal tema de ARSnova.click"
         },
         "dark": {
-          "name": "Versión oscura",
-          "description": "Fondo oscuro con bajo contraste"
+          "name": "Estilo por defecto (Beamer-adecuado).",
+          "description": "Fondo oscuro asegura al alto contraste."
         },
         "elegant": {
           "name": "Elegante",
@@ -292,7 +292,7 @@
           "description": "Diseño Corporativo de la Universidad de Ciencias Aplicadas (THM)"
         },
         "arsnova": {
-          "name": "ARSnova",
+          "name": "ARSnova.eu",
           "description": "Ya sabes Ars Nova? Sentirse como en casa!"
         },
         "black_beauty": {

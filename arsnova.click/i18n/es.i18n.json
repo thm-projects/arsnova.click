@@ -311,17 +311,9 @@
           "name": "Gris de neón",
           "description": "La elegancia se combina con colores brillantes"
         },
-        "smooth": {
-          "name": "Rojo oscuro",
-          "description": "El color de advertencia garantiza la atención"
-        },
         "bluetouch": {
           "name": "Bajo el mar",
           "description": "Un estilo azul marino con detalles brillantes."
-        },
-        "fresh": {
-          "name": "Azul fresca",
-          "description": "Un tinte azul refrescante y brillante."
         },
         "green": {
           "name": "Verde sencilla",

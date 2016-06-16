@@ -62,19 +62,9 @@ export const themes = [
 		id: "theme-neongrey"
 	},
 	{
-		name: "view.theme_switcher.themes.smooth.name",
-		description: "view.theme_switcher.themes.smooth.description",
-		id: "theme-smooth"
-	},
-	{
 		name: "view.theme_switcher.themes.bluetouch.name",
 		description: "view.theme_switcher.themes.bluetouch.description",
 		id: "theme-bluetouch"
-	},
-	{
-		name: "view.theme_switcher.themes.fresh.name",
-		description: "view.theme_switcher.themes.fresh.description",
-		id: "theme-fresh"
 	},
 	{
 		name: "view.theme_switcher.themes.green.name",

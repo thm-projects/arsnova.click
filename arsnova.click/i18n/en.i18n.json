@@ -311,17 +311,9 @@
           "name": "Neon grey",
           "description": "Elegance combined with shiny colors"
         },
-        "smooth": {
-          "name": "Dark red",
-          "description": "The warning color ensures attention"
-        },
         "bluetouch": {
           "name": "Under the sea",
           "description": "A dark blue style with bright accents."
-        },
-        "fresh": {
-          "name": "Fresh blue",
-          "description": "A refreshing and bright blue tint."
         },
         "green": {
           "name": "Simple green",

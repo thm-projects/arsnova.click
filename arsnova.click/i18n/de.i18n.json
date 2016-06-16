@@ -277,19 +277,19 @@
       "themes": {
         "default": {
           "name": "ARSnova.click",
-          "description": "Der Stil der ersten Stunde"
+          "description": "Der Stil der ersten Stunde."
         },
         "dark": {
           "name": "Dunkle Version",
-          "description": "Dunkler Hintergrund mit geringem Kontrast"
+          "description": "Dunkler Hintergrund mit geringem Kontrast."
         },
         "elegant": {
           "name": "Elegant",
-          "description": "Eleganter Stil für anspruchsvolle Quizrunden"
+          "description": "Eleganter Stil für anspruchsvolle Quizrunden."
         },
         "thm": {
           "name": "THM",
-          "description": "Corporate Design der TH Mittelhessen"
+          "description": "Corporate Design der TH Mittelhessen."
         },
         "arsnova": {
           "name": "ARSnova",
@@ -297,11 +297,11 @@
         },
         "black_beauty": {
           "name" : "Schwarze Schönheit",
-          "description": "Dunkel, dunkler und noch dunkler"
+          "description": "Dunkel, dunkler und noch dunkler."
         },
         "living_room": {
           "name" : "Wohnzimmer",
-          "description": "Helle Wohnzimmer-Atmosphäre"
+          "description": "Helle Wohnzimmer-Atmosphäre."
         },
         "pastel": {
           "name": "Pastellfarben",
@@ -309,15 +309,15 @@
         },
         "neongrey": {
           "name": "Neongrau",
-          "description": "Eleganz vereint mit leuchtenden Farben"
+          "description": "Eleganz vereint mit leuchtenden Farben."
         },
         "smooth": {
           "name": "Dunkelrot",
           "description": "Die Warnfarbe sorgt für Aufmerksamkeit."
         },
         "bluetouch": {
-          "name": "Hauch von Blau",
-          "description": "Ein angenehmes blaues Farbschema."
+          "name": "Unter dem Meer",
+          "description": "Ein dunkelblaues Farbschema mit hellen Akzenten."
         },
         "fresh": {
           "name": "Frisches Design",

@@ -983,35 +983,6 @@
 		$splashscreen-sound-config-button-background-color: $success;
 	}
 
-	@if ($name == "theme-colored") {
-		$input-background-color: white;
-		$background-color: #D5CD33;
-		$bg-nav-row: #D58C33;
-		$bg-container: $background-color;
-		$bg-questionList-row: $bg-container;
-		$bg-footer: #D58C33;
-		$fg_a: #9733D5;
-		$fg_titel: black;
-		$fg-question-title: black;
-		$fg-theme_description: black;
-		$default-text-color: black;
-		$fg-hashtag_management-hashtag_name: $default-text-color;
-		$border-hashtag_management-HR: $default-text-color;
-		$fg-text-light: black;
-		$fg_text-dark: black;
-		$fg-footer-info-bar: white;
-		$fg-footer-info-bar-hovered: black;
-		$fg-footer-info-bar-active: #459c2f;
-		$fg-footer-info-bar-active-hovered: red;
-		$quiz-summary-row-color: $default-text-color;
-		$fg-quiz-summary-H4: $default-text-color;
-		$fg-quiz-summary-P: $default-text-color;
-		$fg-quiz-summary-UL: $default-text-color;
-		$fg-success: darken($success, 5);
-		$bg-answer_options-bootstrap_switch: grey;
-		$bg-progress-bar-reading_confirmation: #D58C33;
-	}
-
 	@if ($name == "theme-sugar") {
 		$fg-text-light: #526f8b;
 		$fg-text-dark: #203040;
@@ -2117,5 +2088,4 @@
 @include theme(theme-fresh);
 @include theme(theme-action);
 @include theme(theme-Psychology-Correct-Colours);
-@include theme(theme-colored);
 @include theme(theme-sugar);

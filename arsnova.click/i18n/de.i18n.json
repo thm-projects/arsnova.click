@@ -338,10 +338,6 @@
         "sugar": {
           "name": "Sugar",
           "description": "Ein Design in Pasteltönen"
-        },
-        "colored": {
-          "name": "Colored",
-          "description": "Eine neue farbige Variante!"
         }
       }
     },

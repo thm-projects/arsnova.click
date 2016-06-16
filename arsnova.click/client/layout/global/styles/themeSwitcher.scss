@@ -419,108 +419,6 @@
 		$splashscreen-sound-config-select-foreground-color: black;
 	}
 
-	@if ($name == "theme-darcula") {
-		$background-color: black;
-		$bg-nav-row: black;
-		$bg-container: black;
-		$bg-questionList-row: black;
-		$bg-footer: black;
-
-		$default-text-color: white;
-
-		$fg-text-light: white;
-		$fg_text-dark: white;
-		$fg_a: $theme_blue;
-		$fg_quiz-name: $theme_blue;
-		$fg_titel: white;
-		$fg-question-title: white;
-		$fg-theme_description: white;
-		$fg-hashtag_management-hashtag_name: $default-text-color;
-
-		$input-background-color: $theme_blue;
-
-		$border-hashtag_management-HR: $default-text-color;
-		$quiz-summary-row-color: $default-text-color;
-
-		$fg-quiz-summary-H4: $default-text-color;
-		$fg-quiz-summary-P: $default-text-color;
-		$fg-quiz-summary-UL: $default-text-color;
-		$fg-success: $success;
-
-		$splashscreen-background-color: $theme_yellow;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
-		$splashscreen-question-preview-background-color: $splashscreen-background-color;
-		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-background-color: $splashscreen-background-color;
-		$splashscreen-delete-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-button-background-color: $success;
-
-		$slider-color: $theme_green;
-
-		$colorChangingArs0: $theme_red;
-		$colorChangingArs25: $theme_green;
-		$colorChangingArs50: $theme_blue;
-		$colorChangingArs75: $theme_yellow;
-		$colorChangingArs100: $theme_red;
-
-		$colorChangingNova0: $theme_yellow;
-		$colorChangingNova25: $theme_red;
-		$colorChangingNova50: $theme_green;
-		$colorChangingNova75: $theme_blue;
-		$colorChangingNova100: $theme_yellow;
-
-		$colorChangingDot0: $theme_blue;
-		$colorChangingDot25: $theme_yellow;
-		$colorChangingDot50: $theme_red;
-		$colorChangingDot75: $theme_green;
-		$colorChangingDot100: $theme_blue;
-
-		$colorChangingClick0: $theme_green;
-		$colorChangingClick25: $theme_blue;
-		$colorChangingClick50: $theme_yellow;
-		$colorChangingClick75: $theme_red;
-		$colorChangingClick100: $theme_green;
-
-		$bg-colorChangingOwnNick0: $theme_red;
-		$fg-colorChangingOwnNick0: white;
-		$bg-colorChangingOwnNick25: $theme_green;
-		$fg-colorChangingOwnNick25: white;
-		$bg-colorChangingOwnNick50: $theme_blue;
-		$fg-colorChangingOwnNick50: white;
-		$bg-colorChangingOwnNick75: $theme_green;
-		$fg-colorChangingOwnNick75: white;
-		$bg-colorChangingOwnNick100: $theme_red;
-		$fg-colorChangingOwnNick100: white;
-
-		$bg-btn-more-learners: $theme_blue;
-		$fg-btn-more-learners: white;
-
-		$progress-bar-success-color: $theme_green;
-		$progress-bar-read-confirmation: darkorange;
-		$progress-bar-failure-color: firebrick;
-		$progress-bar-default-color: grey;
-		$bg-progress-bar-reading_confirmation: purple;
-		$fg-progress-bar-reading_confirmation: white;
-		$bg_progress-bar: white;
-		$fg_progress-bar: black;
-
-		$border-answer_options-invalidAnswerOption: $theme_red;
-		$border-answer_options-invalidQuestion: $theme_red;
-		$bg-answer_options-bootstrap_switch: #ffd700;
-		$border-answer_options-bootstrap_switch: none;
-		$border-radius_answer_options-bootstrap_switch: 0px $corner-radius $corner-radius 0px !important;
-		$bg-answer_options-bootstrap_switch_handle_off: $theme_red;
-		$fg-answer_options-bootstrap_switch_handle_off: $warning-text-color;
-		$bg-answer_options-bootstrap_switch_handle_on: $success;
-		$fg-answer_options-bootstrap_switch_handle_on: $success-text-color;
-		$border-answer_options-bootstrap_switch_focused: none;
-		$box-shadow-answer_options-bootstrap_switch_focused: none;
-		$outline-answer_options-bootstrap_switch_focused: none;
-
-	}
-
 	@if ($name == "theme-pastel") {
 		$background-color: #f1ece3;
 		$bg-nav-row: #f1ece3;
@@ -2282,7 +2180,6 @@
 @include theme(theme-arsnova);
 @include theme(theme-blackbeauty);
 @include theme(theme-hell);
-@include theme(theme-darcula);
 @include theme(theme-pastel);
 @include theme(theme-neongrey);
 @include theme(theme-smooth);

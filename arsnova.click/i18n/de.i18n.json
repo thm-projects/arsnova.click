@@ -303,10 +303,6 @@
           "name" : "Wohnzimmer",
           "description": "Helle Wohnzimmer-Atmosphäre"
         },
-        "darcula": {
-          "name": "Darcula",
-          "description": "Schwarzer Hintergrund und bunte Farben"
-        },
         "pastel": {
           "name": "Pastell",
           "description": "Geschmackvolle Pastell-Töne für eine harmonische Stimmung."

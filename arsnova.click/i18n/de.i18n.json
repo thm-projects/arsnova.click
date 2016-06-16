@@ -284,8 +284,8 @@
           "description": "Dunkler Hintergrund sorgt für hohen Kontrast."
         },
         "elegant": {
-          "name": "Elegant",
-          "description": "Eleganter Stil für anspruchsvolle Quizrunden."
+          "name": "Eleganzq",
+          "description": "Für anspruchsvolle Quizrunden."
         },
         "thm": {
           "name": "THM",
@@ -293,7 +293,7 @@
         },
         "arsnova": {
           "name": "ARSnova.eu",
-          "description": "Du kennst ARSnova? Dann fühl' dich wie zu Hause!"
+          "description": "Du kennst ARSnova.eu? Dann fühl' dich daheim!"
         },
         "black_beauty": {
           "name" : "Schwarze Schönheit",
@@ -305,35 +305,27 @@
         },
         "pastel": {
           "name": "Pastellfarben",
-          "description": "Geschmackvolle Pastell-Töne für eine harmonische Stimmung."
+          "description": "Für eine harmonische Stimmung."
         },
         "neongrey": {
           "name": "Neongrau",
           "description": "Eleganz vereint mit leuchtenden Farben."
         },
-        "smooth": {
-          "name": "Dunkelrot",
-          "description": "Die Warnfarbe sorgt für Aufmerksamkeit."
-        },
         "bluetouch": {
           "name": "Unter dem Meer",
-          "description": "Ein dunkelblaues Farbschema mit hellen Akzenten."
-        },
-        "fresh": {
-          "name": "Frisches Blau",
-          "description": "Ein erfrischender und heller Blaustich."
+          "description": "Tiefblau mit hellen Akzenten."
         },
         "green": {
           "name": "Simples Grün",
-          "description": "Ein einfacher Grün-Stil."
+          "description": "Grün halt."
         },
         "action": {
           "name": "Blitz",
           "description": "Für schnelle und wilde Quizrunden."
         },
         "psychology": {
-          "name": "Etwas unkonventionell",
-          "description": "Pink gemischt mit dezenten Farben."
+          "name": "1950er Jahre",
+          "description": "Altrosa gemischt mit dezenten Farben."
         }
       }
     },

@@ -311,17 +311,9 @@
           "name": "Neon gris",
           "description": "Élégance combinée avec des couleurs brillantes"
         },
-        "smooth": {
-          "name": "Rouge sombre",
-          "description": "La couleur d'avertissement assure une attention"
-        },
         "bluetouch": {
           "name": "Sous la mer",
           "description": "Un style bleu foncé avec des accents lumineux."
-        },
-        "fresh": {
-          "name": "Bleu frais",
-          "description": "Une teinte bleue rafraîchissante et lumineuse."
         },
         "green": {
           "name": "Vert simple",

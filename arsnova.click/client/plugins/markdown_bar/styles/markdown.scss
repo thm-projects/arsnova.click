@@ -59,11 +59,17 @@
 
   .row-create-question-buttons {
 	display: none;
+    height: 55px;
+    margin-bottom: 5px;
   }
 
   .round-corners-markdown {
 	border-radius: $corner-radius;
   }
+}
+
+#formatPreviewButton {
+  margin-bottom: 5px;
 }
 
 .markdown-box {

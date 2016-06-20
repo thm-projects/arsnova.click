@@ -22,6 +22,19 @@
   width: 100%;
   top: 50%;
   transform: translateY(-50%);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.center-vertical-non-scrollable {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.full-screen-content {
+  height: 100%;
 }
 
 .round-corners, .button {
@@ -151,6 +164,7 @@
   display: none;
   left: 0;
   margin-bottom: 5px;
+  margin-top: 5px;
 
   &.col-xxs-12 {
     .fixed-bottom-item {

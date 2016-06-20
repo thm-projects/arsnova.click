@@ -1801,7 +1801,7 @@
 				select {
 					color: $splashscreen-sound-config-select-foreground-color;
 				}
-				button.down {
+				#isSoundOnButton.down {
 					background: $splashscreen-sound-config-button-background-color;
 				}
 			}

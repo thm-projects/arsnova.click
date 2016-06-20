@@ -211,9 +211,15 @@ const clickEvents = {
 					if (Session.get("soundIsPlaying")) {
 						buzzsound1.stop();
 						Session.set("soundIsPlaying", false);
+						$('#js-btn-playStopMusic').toggleClass("down");
+						$('#js-btn-playStopMusic').removeClass("button-warning");
+						$('#js-btn-playStopMusic').addClass("button-success");
 					} else {
 						buzzsound1.play();
 						Session.set("soundIsPlaying", true);
+						$('#js-btn-playStopMusic').toggleClass("down");
+						$('#js-btn-playStopMusic').removeClass("button-success");
+						$('#js-btn-playStopMusic').addClass("button-warning");
 					}
 				});
 

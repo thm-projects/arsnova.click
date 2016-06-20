@@ -18,21 +18,22 @@
 @import "../../../layout/global/styles/appearance";
 
 .soundConfig {
-  .modal-content {
-	#soundSelect {
-	  width: 100%;
-	  border-radius: $corner-radius;
-	  height: 46px;
-	  padding: 0 10px;
-	  outline: none;
-	}
+	.modal-content {
+		#soundSelect {
+			width: 100%;
+			border-radius: $corner-radius;
+			height: 46px;
+			padding: 0 10px;
+			outline: none;
+			margin-top: 15px;
+		}
 
-	button.down {
-	  box-shadow: none;
-	}
+		button.down {
+			box-shadow: none;
+		}
 
-	#isSoundOnButton {
-	  margin: 15px 0;
+		#isSoundOnButton {
+			margin: 15px 0;
+		}
 	}
-  }
 }

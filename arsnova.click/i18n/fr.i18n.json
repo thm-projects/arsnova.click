@@ -218,7 +218,7 @@
       "title": "Quiz Lobby",
       "yes": "Oui",
       "no": "Non",
-      "ready": "Prêt pour Quiz",
+      "ready": "Attendez que début...",
       "show_more": "Voir 1 plus",
       "show_more_plural": "Voir %s plus",
       "start_quiz": "Allons-y!",

@@ -218,7 +218,7 @@
       "title": "Quiz Lobby",
       "yes": "Yes",
       "no": "No",
-      "ready": "Ready for quizzing",
+      "ready": "Wait until start...",
       "show_more": "Show 1 more",
       "show_more_plural": "Show %s more",
       "start_quiz": "Let's go!",

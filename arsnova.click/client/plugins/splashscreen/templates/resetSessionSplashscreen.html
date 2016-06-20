@@ -23,8 +23,12 @@
                     <h2>{{_ "region.header.reset_session_confirmation.title"}}</h2>
                 </div>
                 <div class="modal-body">
-                    <p>{{_ "region.header.reset_session_confirmation.text.1"}}</p>
-                    <p style="margin-top:20px;">{{_ "region.header.reset_session_confirmation.text.2"}}</p>
+                    {{#if isSessionRunning}}
+                        <p>{{_ "region.header.reset_session_confirmation.text.running_question"}}</p>
+                    {{else}}
+                        <p>{{_ "region.header.reset_session_confirmation.text.empty_lobby"}}</p>
+                    {{/if}}
+                    <p style="margin-top:20px;">{{_ "region.header.reset_session_confirmation.text.continue"}}</p>
                 </div>
                 <div class="modal-footer">
                     <div class="row">

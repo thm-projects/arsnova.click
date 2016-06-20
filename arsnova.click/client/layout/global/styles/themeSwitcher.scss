@@ -151,8 +151,6 @@
 	$fg-button-result-percentage: #ffffff;
 	$bg-button-result-progress: LightSteelBlue;
 
-	$bg-previewText: $input-background-color;
-
 	$fg-js-my-hash: black;
 	$bg-js-my-hash: #ffffe0;
 	$bg-js-my-hash-hovered: lighten($bg-js-my-hash, 20);
@@ -1204,7 +1202,8 @@
 			color: $input-foreground-color !important;
 		}
 		.previewText {
-			background-color: $bg-previewText;
+			background-color: $input-background-color;
+			color: $input-foreground-color !important;
 		}
 		.check-mark-checked {
 			color: $check-mark-checked;

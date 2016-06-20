@@ -140,11 +140,12 @@
   },
   "view": {
     "answeroptions": {
+      "title": "2/4 Définir des réponses...",
       "answeroptiontext_placeholder": "Option de réponse nécessaire",
       "correct": "Correct",
       "wrong": "Faux",
       "ranged_question": {
-        "title": "Gamme de réponses correctes",
+        "title": "Intervalle de réponses correctes",
         "correct_value": "La valeur correcte",
         "min_range": "Portée minimale",
         "max_range": "Portée maximale"
@@ -176,6 +177,8 @@
       "invalid_question": "Quiz non valide"
     },
     "leaderboard": {
+      "header": "Leaderboard",
+      "global_header": "Leaderboard mondiale",
       "title": {
         "single_question": "Question __questionId__ - Les réponses correctes de...",
         "all_questions": "Les réponses correctes de..."
@@ -190,6 +193,7 @@
       "show_less": "Montre moins"
     },
     "liveResults": {
+      "title": "Résultats",
       "question": "Question",
       "ranking": "Classement",
       "reading_confirmation": "Confirmation de lecture",
@@ -214,7 +218,7 @@
       "title": "Quiz Lobby",
       "yes": "Oui",
       "no": "Non",
-      "ready": "Prêt pour Quiz",
+      "ready": "Attendez que début...",
       "show_more": "Voir 1 plus",
       "show_more_plural": "Voir %s plus",
       "start_quiz": "Allons-y!",
@@ -222,6 +226,8 @@
       "add_kicked_member_to_ban_list": "Bannir définitivement les surnoms"
     },
     "questions": {
+      "title": "1/4 Entrez texte de la question...",
+      "choose_format": "Choisissez le format de question:",
       "enter_question_here": "Entrez votre question ici",
       "format": "Format",
       "edit": "Modifier",
@@ -232,7 +238,7 @@
       "ranged_question": "Question Quiz et réponses"
     },
     "quiz_summary": {
-      "summary": "Résumé",
+      "title": "4/4 Résumé...",
       "quiz_name": "Nom du quiz",
       "quiz_url": "URL pour les participants",
       "question_amount": "Montant de toutes les questions",
@@ -330,7 +336,7 @@
       }
     },
     "timer": {
-      "set_countdown": "Définir le compte à rebours",
+      "title": "3/4 Définir le compte à rebours...",
       "second": "Seconde",
       "second_plural": "Secondes"
     },
@@ -340,6 +346,7 @@
       "beta": "Beta"
     },
     "voting": {
+      "title": "Vote",
       "question": "Question",
       "send": "Envoyer",
       "seconds_left": "1 Secondes gauche!",

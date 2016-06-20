@@ -322,10 +322,10 @@ Template.contactHeaderBar.events({
 		Router.go("/about");
 	},
 	"click #imprint": function () {
-		Router.go("/impressum");
+		Router.go("/imprint");
 	},
 	"click #data-privacy": function () {
-		Router.go("/datenschutz");
+		Router.go("/dataprivacy");
 	}
 });
 
@@ -337,10 +337,10 @@ Template.agb.events($.extend({}, defaultBackButtonBehavior, {
 
 }));
 
-Template.impressum.events($.extend({}, defaultBackButtonBehavior, {
+Template.imprint.events($.extend({}, defaultBackButtonBehavior, {
 
 }));
 
-Template.datenschutz.events($.extend({}, defaultBackButtonBehavior, {
+Template.dataprivacy.events($.extend({}, defaultBackButtonBehavior, {
 
 }));

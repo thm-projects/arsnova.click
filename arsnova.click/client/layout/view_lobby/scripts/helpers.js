@@ -21,9 +21,6 @@ import * as localData from '/lib/local_storage.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 
 Template.memberlist.helpers({
-	hashtag: function () {
-		return Router.current().params.quizName;
-	},
 	isOwner: function () {
 		return localData.containsHashtag(Router.current().params.quizName);
 	},

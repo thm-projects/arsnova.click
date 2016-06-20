@@ -17,6 +17,7 @@
 
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "./lib.js";
 
 Template.footer.onRendered(function () {
@@ -54,4 +55,24 @@ Template.contactHeaderBar.onRendered(function () {
 	footerElements.addFooterElement(footerElements.footerElemFullscreen);
 	footerElements.addFooterElement(footerElements.footerElemImport);
 	footerElements.calculateFooter();
+});
+
+Template.about.onRendered(function () {
+	calculateHeaderSize();
+	$(window).resize(calculateHeaderSize);
+});
+
+Template.agb.onRendered(function () {
+	calculateHeaderSize();
+	$(window).resize(calculateHeaderSize);
+});
+
+Template.dataprivacy.onRendered(function () {
+	calculateHeaderSize();
+	$(window).resize(calculateHeaderSize);
+});
+
+Template.imprint.onRendered(function () {
+	calculateHeaderSize();
+	$(window).resize(calculateHeaderSize);
 });

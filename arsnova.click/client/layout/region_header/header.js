@@ -22,31 +22,64 @@ import {Tracker} from 'meteor/tracker';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {buzzsound1} from '/client/plugins/sound/scripts/lib.js';
+import {TAPi18n} from 'meteor/tap:i18n';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib";
 
 Template.header.helpers({
 	getCurrentResetRoute: function () {
 		return Router.current().params.quizName ? Router.current().params.quizName + "/resetToHome" : "";
 	},
-	isInHomePathOrIsStudent: function () {
+	isInHomePath: function () {
 		switch (Router.current().route.path()) {
 			case '/':
-			case '/ueber':
-			case '/agb':
-			case '/datenschutz':
-			case '/impressum':
 				return true;
+			default:
+				return false;
 		}
-		return !localData.containsHashtag(Router.current().params.quizName);
-	},
-	isInActiveQuizAndIsStudent: function () {
-		return Router.current().params.quizName && !localData.containsHashtag(Router.current().params.quizName);
 	},
 	isTHMStyleSelectedAndGreaterThan999Pixels: function () {
 		return localStorage.getItem("theme") === "theme-thm" && $(window).width() > 999;
 	},
-	currentHashtag: function () {
-		return Router.current().params.quizName;
+	getCurrentTitle: function () {
+		switch (Router.current().route.path()) {
+			case "/about":
+				return TAPi18n.__("region.footer.about.title");
+			case "/imprint":
+				return TAPi18n.__("region.footer.imprint.title");
+			case "/dataprivacy":
+				return TAPi18n.__("region.footer.data_privacy.title");
+			case "/agb":
+				return TAPi18n.__("region.footer.tos.title");
+			case "/theme":
+				return TAPi18n.__("view.theme_switcher.set_theme");
+			case "/translate":
+				return TAPi18n.__("view.translation.translations");
+			case "/hashtagmanagement":
+				return TAPi18n.__("view.hashtag_management.session_management");
+		}
+		let currentPath = Router.current().route.getName().replace(":quizName.", "");
+		switch (currentPath) {
+			case "question":
+				return TAPi18n.__("view.questions.title");
+			case "answeroptions":
+				return TAPi18n.__("view.answeroptions.title");
+			case "settimer":
+				return TAPi18n.__("view.timer.title");
+			case "quizSummary":
+				return TAPi18n.__("view.quiz_summary.title");
+			case "memberlist":
+				return Router.current().params.quizName;
+			case "results":
+				return TAPi18n.__("view.liveResults.title");
+			case "onpolling":
+				return TAPi18n.__("view.voting.title");
+			case "statistics":
+				return TAPi18n.__("view.leaderboard.header");
+			case "globalLeaderBoard":
+				return TAPi18n.__("view.leaderboard.global_header");
+			case "nick":
+				return TAPi18n.__("view.choose_nickname.enter_nickname");
+		}
 	},
 	isEditingQuestion: function () {
 		switch (Router.current().route.getName()) {
@@ -93,6 +126,17 @@ Template.header.events({
 					});
 				}
 			});
+		} else {
+			Session.set("questionGroup", undefined);
+			delete Session.keys.questionGroup;
+
+			delete localStorage[Router.current().params.quizName + "nick"];
+			delete localStorage.slider;
+			delete localStorage.lastPage;
+
+			delete sessionStorage.overrideValidQuestionRedirect;
+
+			Router.go("/");
 		}
 	}
 });

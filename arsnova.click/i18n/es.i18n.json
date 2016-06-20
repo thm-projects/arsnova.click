@@ -140,11 +140,12 @@
   },
   "view": {
     "answeroptions": {
+      "title": "2/4 Definir respuestas...",
       "answeroptiontext_placeholder": "Opción de respuesta necesario",
       "correct": "Correcto",
       "wrong": "Incorrecto",
       "ranged_question": {
-        "title": "Gama de respuestas correctas",
+        "title": "Intervalo de respuestas correctas",
         "correct_value": "Valor correcto",
         "min_range": "Rango mínimo",
         "max_range": "Rango maximo"
@@ -176,6 +177,8 @@
       "invalid_question": "Cuestionario no válido"
     },
     "leaderboard": {
+      "header": "La tabla de posiciones",
+      "global_header": "Clasificación mundial",
       "title": {
         "single_question": "Pregunta __questionId__ - Las respuestas correctas a partir de...",
         "all_questions": "Las respuestas correctas a partir de..."
@@ -190,6 +193,7 @@
       "show_less": "Muestra menos"
     },
     "liveResults": {
+      "title": "Resultados",
       "question": "Pregunta",
       "ranking": "Clasificación",
       "reading_confirmation": "Confirmación de lectura",
@@ -211,10 +215,11 @@
       "guessed_wrong": "Mal estimada"
     },
     "lobby": {
+      "title": "1/4 Introduzca texto de la pregunta...",
       "title": "Prueba Vestíbulo",
       "yes": "Sí",
       "no": "No",
-      "ready": "Listo para interrogar",
+      "ready": "Esperar hasta el inicio...",
       "show_more": "Desde el 1 más",
       "show_more_plural": "Mostrar %s más",
       "start_quiz": "Vamonos!",
@@ -223,6 +228,7 @@
     },
     "questions": {
       "enter_question_here": "Introduzca su pregunta aquí",
+      "choose_format": "Elegir el formato de pregunta:",
       "format": "Formato",
       "edit": "Editar",
       "preview": "Avance",
@@ -232,7 +238,7 @@
       "ranged_question": "Pregunta de examen y respuestas"
     },
     "quiz_summary": {
-      "summary": "Resumen",
+      "title": "4/4 Resumen...",
       "quiz_name": "Nombre de la prueba",
       "quiz_url": "URL para los asistentes",
       "question_amount": "Cantidad de todas las preguntas",
@@ -330,7 +336,7 @@
       }
     },
     "timer": {
-      "set_countdown": "Ajuste de cuenta atrás",
+      "title": "3/4 Ajuste de cuenta atrás...",
       "second": "Segundo",
       "second_plural": "Segundos"
     },
@@ -340,6 +346,7 @@
       "beta": "Bêta"
     },
     "voting": {
+      "title": "Votación",
       "question": "Pregunta",
       "send": "Enviar",
       "seconds_left": "1 segundo a la izquierda!",

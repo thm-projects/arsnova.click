@@ -175,6 +175,11 @@ const clickEvents = {
 									$("#js-btn-importSession").attr("disabled", "disabled");
 								}
 							});
+							$('#hashtagRename-input-field').on('keydown', function (event) {
+								if (event.keyCode == 13 && !$('#js-btn-importSession').is(':disabled')) {
+									$('#js-btn-importSession').click();
+								}
+							});
 						}
 					});
 				}

@@ -37,15 +37,11 @@ Template.liveResults.onRendered(()=> {
 	}
 	Session.set("LearnerCountOverride", false);
 	calculateButtonCount();
-	if (localData.containsHashtag(Router.current().params.quizName)) {
-		calculateHeaderSize();
-	}
+	calculateHeaderSize();
 	$(window).resize(function () {
 		calculateButtonCount();
 		Session.set("LearnerCountOverride", false);
-		if (localData.containsHashtag(Router.current().params.quizName)) {
-			calculateHeaderSize();
-		}
+		calculateHeaderSize();
 	});
 
 	footerElements.removeFooterElements();

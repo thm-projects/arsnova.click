@@ -126,6 +126,17 @@ Template.header.events({
 					});
 				}
 			});
+		} else {
+			Session.set("questionGroup", undefined);
+			delete Session.keys.questionGroup;
+
+			delete localStorage[Router.current().params.quizName + "nick"];
+			delete localStorage.slider;
+			delete localStorage.lastPage;
+
+			delete sessionStorage.overrideValidQuestionRedirect;
+
+			Router.go("/");
 		}
 	}
 });

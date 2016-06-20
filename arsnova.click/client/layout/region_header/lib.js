@@ -50,11 +50,9 @@ export function calculateTitelHeight() {
 }
 
 export function calculateHeaderSize() {
-	if (!Router.current().params.quizName) {
-		return;
-	}
+	var titel = $('.header-titel').text().trim();
+	var titleLength = titel.length;
 
-	var hashtagLength = Router.current().params.quizName.length;
 	var fontSize = "";
 	let logoHeight = 0;
 
@@ -65,7 +63,7 @@ export function calculateHeaderSize() {
 	}
 	$('.arsnova-logo img').css("height", logoHeight);
 
-	if (hashtagLength <= 15) {
+	if (titleLength <= 15) {
 		if ($(document).width() > $(document).height()) {
 			if ($(document).width() < 1200) {
 				fontSize = "6vw";
@@ -75,7 +73,7 @@ export function calculateHeaderSize() {
 		} else {
 			fontSize = "5vh";
 		}
-	} else if (hashtagLength <= 20) {
+	} else if (titleLength <= 20) {
 		if ($(document).width() > $(document).height()) {
 			fontSize = "5.5vw";
 		} else {

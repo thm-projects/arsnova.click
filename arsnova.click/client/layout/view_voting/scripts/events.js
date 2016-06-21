@@ -106,7 +106,7 @@ Template.votingview.events({
 			$(event.target).toggleClass("answer-selected");
 		}
 	},
-	"keydown #rangeInput": function (event) {
+	"change #rangeInput": function (event) {
 		if ($(event.currentTarget).val().length > 0 && !isNaN(parseFloat($(event.currentTarget).val()))) {
 			Session.set("hasToggledResponse", true);
 			if (event.keyCode == 13) {

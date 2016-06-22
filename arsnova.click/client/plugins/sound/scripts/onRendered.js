@@ -17,6 +17,7 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {noUiSlider} from 'meteor/arsnova.click:nouislider';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {buzzsound1, setBuzzsound1} from './lib.js';
 import {TAPi18n} from 'meteor/tap:i18n';
@@ -34,17 +35,16 @@ Template.soundConfig.onRendered(function () {
 		$('#isSoundOnButton').html(TAPi18n.__("plugins.sound.active"));
 	}
 
-	this.$("#slider2").noUiSlider({
-		start: Session.get("slider2"),
+	var soundVolumneSlider = document.getElementById("slider2");
+	var sliderObject = noUiSlider.create(soundVolumneSlider, {
+		start: hashtagDoc.musicVolume,
 		range: {
 			'min': 0,
 			'max': 100
 		}
-	}).on('slide', function (ev, val) {
-		var musicVolume = Math.round(val);
-		Session.set('slider2', musicVolume);
-		buzzsound1.setVolume(musicVolume);
-	}).on('change', function (ev, val) {
+	});
+
+	sliderObject.on('slide', function (val) {
 		var musicVolume = Math.round(val);
 		Session.set('slider2', musicVolume);
 		buzzsound1.setVolume(musicVolume);

@@ -26,21 +26,25 @@
 					<div class="row">
 						<div id="slider2"></div>
 						<p>{{_ "plugins.sound.volume"}}: {{slider2}} %</p>
-						<button id="js-btn-playStopMusic" type="button" class="btn btn-success btn-answerOption btn-lg ">
-							<span class="glyphicon glyphicon-{{#if isSoundPlaying}}stop{{ else }}play{{/if}}"></span>
-						</button>
-						<select id="soundSelect" title="soundSelect">
-							<option value="Song1">Relax mood: "The Lounge" | Bensound.com</option>
-							<option value="Song2">Ukulele: "Cute" | Bensound.com</option>
-							<option value="Song3">Driving tune: "Epic" | Bensound.com</option>
-						</select>
+                        <div class="col-md-12">
+                            <button id="js-btn-playStopMusic" class="button button-success">
+                                <span class="glyphicon glyphicon-{{#if isSoundPlaying}}stop{{ else }}play{{/if}}" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="col-md-12">
+                            <select id="soundSelect" title="soundSelect">
+                                <option value="Song1">Relax mood: "The Lounge" | Bensound.com</option>
+                                <option value="Song2">Ukulele: "Cute" | Bensound.com</option>
+                                <option value="Song3">Driving tune: "Epic" | Bensound.com</option>
+                            </select>
+                        </div>
 						<div class="col-md-12">
                             <button id="isSoundOnButton" class="button button-warning">{{_ "plugins.sound.inactive"}}</button>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button id="js-btn-hideSoundModal" type="button" class="btn btn-success btn-answerOption btn-lg ">
+					<button id="js-btn-hideSoundModal" type="button" class="btn btn-success btn-answerOption btn-lg">
 						<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 						{{_ "global.close_window"}}
 					</button>

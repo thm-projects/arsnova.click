@@ -121,7 +121,7 @@ export function createSlider(index) {
 		behaviour: 'tap-drag',
 		start: [questionItem.getQuestionList()[index].getMinRange(), questionItem.getQuestionList()[index].getMaxRange()],
 		range: {
-			'min': questionItem.getQuestionList()[index].getMinRange() - 50 < 0 ? 0 : questionItem.getQuestionList()[index].getMinRange() - 50,
+			'min': 0,
 			'max': questionItem.getQuestionList()[index].getMaxRange() + 50 || 100
 		}
 	});
@@ -131,7 +131,7 @@ export function createSlider(index) {
 		sliderObject.updateOptions({
 			margin: 1,
 			range: {
-				'min': [minRange - 50 < 0 ? 0 : minRange - 50],
+				'min': [0],
 				'max': [minRange > maxRange ? minRange + 50 : maxRange + 50]
 			}
 		});
@@ -143,6 +143,12 @@ export function createSlider(index) {
 		} catch (ex) {
 			$('#minRangeInput, #maxRangeInput').addClass("invalid");
 		}
+		const correctValue = $('#correctValueInput');
+		if (correctValue.val() < minRange || correctValue.val() > maxRange) {
+			correctValue.addClass("invalid");
+		} else {
+			correctValue.removeClass("invalid");
+		}
 	});
 	$('#minRangeInput, #maxRangeInput').on("change", function () {
 		const minRange = parseFloat($('#minRangeInput').val());
@@ -152,7 +158,7 @@ export function createSlider(index) {
 			sliderObject.updateOptions({
 				margin: 1,
 				range: {
-					'min': [minRange - 50 < 0 ? 0 : minRange - 50],
+					'min': [0],
 					'max': [newMaxRange]
 				}
 			});
@@ -164,6 +170,12 @@ export function createSlider(index) {
 				$('#minRangeInput, #maxRangeInput').removeClass("invalid");
 			} catch (ex) {
 				$('#minRangeInput, #maxRangeInput').addClass("invalid");
+			}
+			const correctValue = $('#correctValueInput');
+			if (correctValue.val() < minRange || correctValue.val() > maxRange) {
+				correctValue.addClass("invalid");
+			} else {
+				correctValue.removeClass("invalid");
 			}
 		}
 	});

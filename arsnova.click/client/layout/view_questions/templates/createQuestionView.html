@@ -16,10 +16,10 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="createQuestionView">
-	{{> titel titelText="view.questions.choose_format"}}
-	<div class="row center-vertical">
+	<div class="row center-vertical full-screen-content">
 		<div class="col-md-12">
-            <div class="row">
+            {{> titel titelText="view.questions.choose_format"}}
+            <div class="row distance-top">
                 <div class="col-xs-12">
                     <select title="chooseQuestionType" class="round-corners textarea" id="chooseQuestionType">
                         {{#each questionTypes }}

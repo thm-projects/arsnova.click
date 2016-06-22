@@ -35,14 +35,6 @@ Template.liveResults.onRendered(()=> {
 	if (localData.containsHashtag(Router.current().params.quizName) && EventManagerCollection.findOne() && EventManagerCollection.findOne().readingConfirmationIndex === -1) {
 		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, 0);
 	}
-	Session.set("LearnerCountOverride", false);
-	calculateButtonCount();
-	calculateHeaderSize();
-	$(window).resize(function () {
-		calculateButtonCount();
-		Session.set("LearnerCountOverride", false);
-		calculateHeaderSize();
-	});
 
 	footerElements.removeFooterElements();
 	if (localData.containsHashtag(Router.current().params.quizName)) {
@@ -63,6 +55,15 @@ Template.liveResults.onRendered(()=> {
 			startCountdown(EventManagerCollection.findOne().questionIndex);
 		}
 	}
+
+	calculateButtonCount();
+	Session.set("LearnerCountOverride", false);
+	calculateHeaderSize();
+	$(window).resize(function () {
+		calculateButtonCount();
+		Session.set("LearnerCountOverride", false);
+		calculateHeaderSize();
+	});
 });
 
 Template.readingConfirmedLearner.onRendered(function () {

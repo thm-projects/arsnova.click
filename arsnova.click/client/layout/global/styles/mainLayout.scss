@@ -19,6 +19,12 @@
 	margin-bottom: 35px;
 }
 
+.scrollBarYContainer {
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: 92%;
+}
+
 .contentPosition {
 	position: absolute;
 	width: 100%;

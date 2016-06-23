@@ -156,7 +156,7 @@ export class AbstractQuestion {
 	 */
 	addAnswerOption (answerOption, index) {
 		if (typeof answerOption === "undefined" || !(answerOption instanceof AbstractAnswerOption)) {
-			throw new Error("Invalid argument for Question.removeAnswerOption");
+			throw new Error("Invalid argument for Question.addAnswerOption");
 		}
 		if (typeof index === "undefined" || index < 0 || index >= this.getAnswerOptionList().length) {
 			this[answerOptionList].push(answerOption);

@@ -13,6 +13,7 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @param options @see AbstractQuestion.constructor().options
 	 * @param options.rangeMin The minimum range which will be accepted as correct
 	 * @param options.rangeMax The maximum range which will be accepted as correct
+	 * @param options.correctValue The absolute correct value
 	 */
 	constructor (options) {
 		if (typeof options.type !== "undefined" && options.type !== "RangedQuestion") {

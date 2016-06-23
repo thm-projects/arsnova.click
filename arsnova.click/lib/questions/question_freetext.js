@@ -57,12 +57,19 @@ export class FreeTextQuestion extends AbstractQuestion {
 	}
 
 	addAnswerOption (answerOption) {
-		if (this.getAnswerOptionList().length > 0) {
-			throw new Error("Instances of type FreeTextQuestion can only hold one AnswerOption");
-		}
 		if (typeof answerOption !== FreeTextAnswerOption) {
-			throw new Error("Instances of type FreeTextQuestion can only hold an AnswerOption of type FreeTextAnswerOption");
+			answerOption = new FreeTextAnswerOption({
+				hashtag: answerOption.getHashtag(),
+				questionIndex: answerOption.getQuestionIndex(),
+				answerText: "",
+				answerOptionNumber: 0,
+				configCaseSensitive: false,
+				configTrimWhitespaces: false,
+				configUseKeywords: false,
+				configUsePunctuation: false
+			});
 		}
+		this.removeAllAnswerOptions();
 		super.addAnswerOption(answerOption);
 	}
 

@@ -1,5 +1,6 @@
 import {AbstractAnswerOption} from '../answeroptions/answeroption_abstract.js';
 import {DefaultAnswerOption} from '../answeroptions/answeroption_default.js';
+import {FreeTextAnswerOption} from '../answeroptions/answeroption_freetext.js';
 
 const hashtag = Symbol("hashtag");
 const questionText = Symbol("questionText");
@@ -22,7 +23,7 @@ export class AbstractQuestion {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
 		if (typeof options.hashtag === "undefined" || typeof options.questionText === "undefined" || typeof options.timer === "undefined" || typeof options.startTime === "undefined" || typeof options.questionIndex === "undefined") {
-			throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
+			throw new Error("Invalid argument list for Question instantiation");
 		}
 		this[hashtag] = options.hashtag;
 		this[questionText] = options.questionText;
@@ -49,6 +50,9 @@ export class AbstractQuestion {
 				} else {
 					if (options.answerOptionList[i] instanceof Object) {
 						switch (options.answerOptionList[i].type) {
+							case "FreeTextAnswerOption":
+								this.addAnswerOption(new FreeTextAnswerOption(options.answerOptionList[i]));
+								break;
 							case "DefaultAnswerOption":
 								this.addAnswerOption(new DefaultAnswerOption(options.answerOptionList[i]));
 								break;

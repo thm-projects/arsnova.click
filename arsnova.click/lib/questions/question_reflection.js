@@ -5,6 +5,7 @@ import {TrueFalseSingleChoiceQuestion} from "./question_choice_single_true_false
 import {MultipleChoiceQuestion} from "./question_choice_multiple.js";
 import {RangedQuestion} from "./question_ranged.js";
 import {SurveyQuestion} from "./question_survey.js";
+import {FreeTextQuestion} from "./question_freetext.js";
 
 export const questionReflection = {
 	SingleChoiceQuestion: function (options) {
@@ -24,6 +25,9 @@ export const questionReflection = {
 	},
 	RangedQuestion: function (options) {
 		return new RangedQuestion(options);
+	},
+	FreeTextQuestion: function (options) {
+		return new FreeTextQuestion(options);
 	}
 };
 

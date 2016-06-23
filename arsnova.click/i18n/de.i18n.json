@@ -141,7 +141,7 @@
   },
   "view": {
     "answeroptions": {
-      "title": "2/4 Antworten festlegen...",
+      "title": "2/4 Antworten festlegen",
       "answeroptiontext_placeholder": "Antwortoption eingeben",
       "correct": "Richtig",
       "wrong": "Falsch",
@@ -227,7 +227,7 @@
       "add_kicked_member_to_ban_list": "Den Nicknamen permanent bannen"
     },
     "questions": {
-      "title": "1/4 Fragetext eingeben...",
+      "title": "1/4 Fragetext eingeben",
       "choose_format": "Frageformat wählen:",
       "enter_question_here": "Gib hier die Frage ein",
       "format": "Format",
@@ -239,7 +239,7 @@
       "ranged_question": "Schätzfrage (Antworten im vorgegebenen Bereich sind richtig)"
     },
     "quiz_summary": {
-      "title": "4/4 Zusammenfassung...",
+      "title": "4/4 Zusammenfassung",
       "quiz_name": "Name der Quizrunde",
       "quiz_url": "URL für Teilnehmer/innen",
       "question_amount": "Gesamtanzahl der Quizfragen",
@@ -337,7 +337,7 @@
       }
     },
     "timer": {
-      "title": "3/4 Countdown einstellen...",
+      "title": "3/4 Countdown einstellen",
       "second": "Sekunde",
       "second_plural": "Sekunden"
     },

@@ -141,7 +141,7 @@
   },
   "view": {
     "answeroptions": {
-      "title": "2/4 Define answers...",
+      "title": "2/4 Define answers",
       "answeroptiontext_placeholder": "Answer option required",
       "correct": "Correct",
       "wrong": "Wrong",
@@ -219,7 +219,7 @@
       "title": "Quiz Lobby",
       "yes": "Yes",
       "no": "No",
-      "ready": "Wait until start...",
+      "ready": "Waiting for countdown...",
       "show_more": "Show 1 more",
       "show_more_plural": "Show %s more",
       "start_quiz": "Let's go!",
@@ -227,7 +227,7 @@
       "add_kicked_member_to_ban_list": "Ban nickname permanently"
     },
     "questions": {
-      "title": "1/4 Enter questiontext...",
+      "title": "1/4 Enter question text",
       "choose_format": "Choose question format:",
       "enter_question_here": "Enter your question here",
       "format": "Format",
@@ -239,7 +239,7 @@
       "ranged_question": "Question with ranged answeroptions"
     },
     "quiz_summary": {
-      "title": "4/4 Summary...",
+      "title": "4/4 Summary",
       "quiz_name": "Name of the quiz",
       "quiz_url": "URL for attendees",
       "question_amount": "Amount of all questions",
@@ -337,7 +337,7 @@
       }
     },
     "timer": {
-      "title": "3/4 Set countdown...",
+      "title": "3/4 Set countdown",
       "second": "Second",
       "second_plural": "Seconds"
     },

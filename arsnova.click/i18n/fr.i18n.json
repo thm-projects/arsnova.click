@@ -141,7 +141,7 @@
   },
   "view": {
     "answeroptions": {
-      "title": "2/4 Définir des réponses...",
+      "title": "2/4 Définir des réponses",
       "answeroptiontext_placeholder": "Option de réponse nécessaire",
       "correct": "Correct",
       "wrong": "Faux",
@@ -227,7 +227,7 @@
       "add_kicked_member_to_ban_list": "Bannir définitivement les surnoms"
     },
     "questions": {
-      "title": "1/4 Entrez texte de la question...",
+      "title": "1/4 Entrez texte de la question",
       "choose_format": "Choisissez le format de question:",
       "enter_question_here": "Entrez votre question ici",
       "format": "Format",
@@ -239,7 +239,7 @@
       "ranged_question": "Question Quiz et réponses"
     },
     "quiz_summary": {
-      "title": "4/4 Résumé...",
+      "title": "4/4 Résumé",
       "quiz_name": "Nom du quiz",
       "quiz_url": "URL pour les participants",
       "question_amount": "Montant de toutes les questions",
@@ -337,7 +337,7 @@
       }
     },
     "timer": {
-      "title": "3/4 Définir le compte à rebours...",
+      "title": "3/4 Définir le compte à rebours",
       "second": "Seconde",
       "second_plural": "Secondes"
     },

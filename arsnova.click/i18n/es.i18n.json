@@ -141,7 +141,7 @@
   },
   "view": {
     "answeroptions": {
-      "title": "2/4 Definir respuestas...",
+      "title": "2/4 Definir respuestas",
       "answeroptiontext_placeholder": "Opción de respuesta necesario",
       "correct": "Correcto",
       "wrong": "Incorrecto",
@@ -216,7 +216,7 @@
       "guessed_wrong": "Mal estimada"
     },
     "lobby": {
-      "title": "1/4 Introduzca texto de la pregunta...",
+      "title": "1/4 Introduzca texto de la pregunta",
       "title": "Prueba Vestíbulo",
       "yes": "Sí",
       "no": "No",
@@ -239,7 +239,7 @@
       "ranged_question": "Pregunta de examen y respuestas"
     },
     "quiz_summary": {
-      "title": "4/4 Resumen...",
+      "title": "4/4 Resumen",
       "quiz_name": "Nombre de la prueba",
       "quiz_url": "URL para los asistentes",
       "question_amount": "Cantidad de todas las preguntas",
@@ -337,7 +337,7 @@
       }
     },
     "timer": {
-      "title": "3/4 Ajuste de cuenta atrás...",
+      "title": "3/4 Ajuste de cuenta atrás",
       "second": "Segundo",
       "second_plural": "Segundos"
     },

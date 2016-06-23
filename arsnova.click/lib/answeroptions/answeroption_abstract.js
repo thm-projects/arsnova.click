@@ -8,7 +8,7 @@ export class AbstractAnswerOption {
 	/**
 	 * Constructor super method for creating a AnswerOption instance
 	 * This method cannot be invoked directly.
-	 * @param {{hashtag:String,questionIndex:Number,answerText:String,answerOptionNumber:Number,isCorrect:Boolean,type:Number}} options An object containing the parameters for creating an AnswerOption instance. The type attribute is optional.
+	 * @param {{hashtag:String,questionIndex:Number,answerText:String,answerOptionNumber:Number,type:String}} options An object containing the parameters for creating an AnswerOption instance. The type attribute is optional.
 	 * @throws {TypeError} If this method is invoked directly, the options Object is undefined or the optional type attribute is not matching the constructor name
 	 * @throws {Error} If the hashtag, the questionIndex, the answerText, the answerOptionNumber or the isCorrect attributes of the options Object are missing
 	 */
@@ -19,8 +19,7 @@ export class AbstractAnswerOption {
 		if (typeof options.hashtag === "undefined" ||
 			typeof options.questionIndex === "undefined" ||
 			typeof options.answerText === "undefined" ||
-			typeof options.answerOptionNumber === "undefined" ||
-			typeof options.isCorrect === "undefined") {
+			typeof options.answerOptionNumber === "undefined") {
 			throw new Error("Invalid argument list for AnswerOption instantiation");
 		}
 		this[hashtag] = options.hashtag;

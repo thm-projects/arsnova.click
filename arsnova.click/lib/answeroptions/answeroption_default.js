@@ -10,7 +10,7 @@ export class DefaultAnswerOption extends AbstractAnswerOption {
 	/**
 	 * Constructs a DefaultAnswerOption instance
 	 * @see AbstractAnswerOption.constructor()
-	 * @param options
+	 * @param {{hashtag:String,questionIndex:Number,answerText:String,answerOptionNumber:Number,isCorrect:Boolean,type:String}} options An object containing the parameters for creating an AnswerOption instance. The type attribute is optional.
 	 */
 	constructor (options) {
 		if (typeof options.type !== "undefined" && options.type !== TYPE) {

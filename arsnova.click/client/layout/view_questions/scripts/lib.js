@@ -112,10 +112,14 @@ export function addQuestion(index) {
 	}
 
 	// Check if we need to change the type of the question
-	if (questionItem.getQuestionList()[index].constructor.name !== questionType) {
+	if (questionItem.getQuestionList()[index].typeName() !== questionType) {
 		if (questionItem.getQuestionList()[index].typeName() === "YesNoSingleChoiceQuestion" ||
 			questionItem.getQuestionList()[index].typeName() === "TrueFalseSingleChoiceQuestion") {
 			questionItem.getQuestionList()[index].removeAllAnswerOptions();
+		}
+		if (questionType === "FreeTextQuestion") {
+			questionItem.getQuestionList()[index].removeAllAnswerOptions();
+			questionItem.getQuestionList()[index].addDefaultAnswerOption();
 		}
 		const serialized = questionItem.getQuestionList()[index].serialize();
 		delete serialized.type;
@@ -213,6 +217,11 @@ export function getQuestionTypes() {
 			id: "RangedQuestion",
 			translationName: "view.questions.ranged_question",
 			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "RangedQuestion" ? 'selected' : ""
+		},
+		{
+			id: "FreeTextQuestion",
+			translationName: "view.questions.free_text_question",
+			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "FreeTextQuestion" ? 'selected' : ""
 		},
 		{
 			id: "SurveyQuestion",

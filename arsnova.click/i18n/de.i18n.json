@@ -35,17 +35,17 @@
       "about": {
         "title": "Über die Quiz-App",
         "declaration": "Ein bisschen <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, <br />ein bisschen <a href='https://arsnova.eu/' target='_blank'>ARSnova</a>!",
-        "ars": "Ersteres ist ein gamifiziertes, letzteres ein für die Lehre entwickeltes <a href='https://de.wikipedia.org/wiki/Audience_Response_System' target='_blank'>Audience Response System (ARS)</a>.",
+        "ars": "arsnova.click ist ein innovatives <a href='https://de.wikipedia.org/wiki/Audience_Response_System' target='_blank'>Audience Response System (ARS)</a>.",
         "developed_by": "Inspiriert durch <a href='https://getkahoot.com' target='_blank'>Kahoot!</a> entwickelte in nur 10 Tagen  ein <a href='http://www.scrumhub.com' target='_blank'>Scrum-Team</a> aus Bachelor- und Masterstudenten der <a href='http://www.thm.de/site/' target='_blank'>TH Mittelhessen</a> diese <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>gamifizierte</a> Alternative zu unserem ARSnova-Flaggschiff <a href='https://arsnova.eu/' target='_blank'>arsnova.eu</a>.",
         "met_requirements": "Die bereits eingelösten Anforderungen an arsnova.click:",
         "requirements": {
           "1": "Absoluter Datenschutz: keine personenbezogenen Daten auf dem Server, alle Quizdaten liegen im Browser der Quizerstellerin oder des Quizerstellers (<a href='http://www.w3schools.com/html/html5_webstorage.asp' target='_blank'>HTML5 Local Storage</a>)",
-          "2": "Keine Registrierung, keine Anmeldung, keine Installation, keine Kosten",
-          "3": "Dieselbe Startseite ARSnova.click für beide Rollen: Quizmaster und Kandidat/in",
+          "2": "Keine Registrierung, keine Anmeldung, keine Installation, keine Werbung, keine Kosten",
+          "3": "Dieselbe Startseite arsnova.click für beide Rollen: Quizmaster und Kandidat/in",
           "4": "Jeder darf Quizze erstellen: sofort und beliebig viele!",
           "5": "Extrem einfache und beamertaugliche Bedienoberfläche",
           "6": "<a href='https://de.wikipedia.org/wiki/TeX' target='_blank'>TeX</a>-Formelsatz und Textformatierung mit <a href='https://guides.github.com/features/mastering-markdown/' target='_blank'>Markdown</a> in Fragen und Antwortoptionen",
-          "7": "Mit nur einem Dialog beliebig viele Antwortoptionen als Multiple Choice, Single Choice und Umfrage",
+          "7": "Viele Frageformate: Multiple Choice, Single Choice, Schätzfrage und Umfrage, alle mit beliebig vielen Antwortoptionen",
           "8": "Edutainment: Lernspaß durch Live-Wettbewerb mit Sound gegen die Uhr und die Mitspieler/innen",
           "9": "<a href='https://de.wikipedia.org/wiki/Responsive_Webdesign' target='_blank'>Responsives Webdesign</a>: egal ob Smartphone oder Wide Screen, das Design skaliert dank <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>",
           "10": "Modernste reaktive Web-Technologie: <a href='https://www.meteor.com' target='_blank'>Meteor</a>",
@@ -54,8 +54,8 @@
         "manual": {
           "title": "Bedienungshandbuch?",
           "text": {
-            "1": "Braucht man nicht!",
-            "2": "Tippen Sie den Namen des Quiz ein. Die Buttons verfärben sich, sobald Sie entweder den Namen eines freigeschalteten Quiz eingeben (Mach mit!) oder ein neues Quiz mit dem eingegebenen Namen erstellen können (Mach neu!).",
+            "1": "Brauchst Du nicht!",
+            "2": "Tipp einfach den Namen des Quiz ein. Die Buttons verfärben sich, sobald Du entweder den Namen eines freigeschalteten Quiz eingibst (Mach mit!) oder ein neues Quiz mit dem eingegebenen Namen erstellen kannst (Mach neu!).",
             "3": "Danach heißt es: Klicken. Schauen. Quizzen."
           }
         }
@@ -401,7 +401,7 @@
           "private_browsing": "Im Privatmodus deines Browsers funktioniert ARSnova.click leider nur als Teilnehmer/in, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von ARSnova.click den Privatmodus deaktivieren und ARSnova erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.",
           "kicked_from_quiz": "Du wurdest aus dem Quiz geworfen!",
           "export_failed": "Konnte die Daten nicht exportieren! - %s",
-          "not_authorized": "Entweder ist das Quiz nicht vorhanden oder du hast keine Berechtigung, diese Daten zu lesen",
+          "not_authorized": "Entweder ist das Quiz nicht vorhanden oder Du hast keine Berechtigung, diese Daten zu lesen",
           "maximum_answer_options_exceeded": "Die maximale Anzahl an Antwortoptionen wurde bereits erreicht",
           "hashtag_not_found": "Dieser Quizname wurde leider nicht gefunden",
           "member_not_found": "Der Teilnehmer wurde leider nicht gefunden",

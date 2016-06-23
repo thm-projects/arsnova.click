@@ -175,6 +175,13 @@
         "correct_value": "Richtiger Wert",
         "min_range": "Mindestwert",
         "max_range": "Maximalwert"
+      },
+      "free_text_question": {
+        "title": "Freitext Antwort",
+        "config_case_sensitive": "Groß- und Kleinschreibung berücksichtigen",
+        "config_trim_whitespaces": "Ignoriere Leerzeichen",
+        "config_use_keywords": "Ignoriere Reihenfolge der Wörter",
+        "config_use_punctuation": "Interpunktion berücksichtigen"
       }
     },
     "choose_nickname": {
@@ -263,7 +270,8 @@
       "single_choice_question_true_false": "Wahr-Falsch-Frage (nur eine Antwort ist richtig / Antwortoptionen sind auf Wahr und Falsch vordefiniert)",
       "multiple_choice_question": "Multiple-Choice-Frage (eine oder mehrere Antworten sind richtig)",
       "survey_question": "Umfrage (Antworten sind weder richtig noch falsch)",
-      "ranged_question": "Schätzfrage (Antworten im vorgegebenen Bereich sind richtig)"
+      "ranged_question": "Schätzfrage (Antworten im vorgegebenen Bereich sind richtig)",
+      "free_text_question": "Freitextfrage (Antwort ist ein Blocktext)"
     },
     "quiz_summary": {
       "title": "4/4: Zusammenfassung",

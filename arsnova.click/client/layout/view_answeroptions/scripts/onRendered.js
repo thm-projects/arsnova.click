@@ -66,3 +66,7 @@ Template.rangedAnswerOptionTemplate.onRendered(function () {
 		}
 	});
 });
+
+Template.freeTextAnswerOptionTemplate.onRendered(function () {
+	$('input[type=checkbox]').bootstrapSwitch('state', false, true);
+});

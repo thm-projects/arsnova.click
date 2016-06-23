@@ -231,3 +231,55 @@ export const isMobileDevice = {
 		return $(window).width() < 1024;
 	}
 };
+
+export function showFullscreenPicture(event) {
+	var pictureElement = event.target;
+	var src = pictureElement.src;
+	var title = pictureElement.title;
+	new Splashscreen({
+		autostart: true,
+		templateName: 'splashscreen',
+		closeOnButton: '#btn-hidePreviewModal',
+		instanceId: "resizeableImage_" + title,
+		onRendered: function (instance) {
+			var img = new Image();
+			var body = instance.templateSelector.find('.modal-body');
+			img.onload = function () {
+				body.append(img);
+			};
+
+			img.title = title;
+			img.src = src;
+
+			instance.templateSelector.find('.modal-dialog').css('width', 'auto');
+			instance.templateSelector.find('.modal-header').html(title);
+			var oldImgWidth = img.width;
+			var oldImgHeight = img.height;
+			var imageWidth = img.width + 60;
+			var windowWidth = $(window).width() - 80;
+			var imageHeight = img.height + 160;
+			var windowHeight = $(window).height() - 70;
+
+			if (imageWidth >  windowWidth) {
+				img.width = windowWidth - 30;
+				// scale the height
+				var widthProp = oldImgWidth / img.width;
+				img.height = oldImgHeight / widthProp;
+				imageHeight = img.height;
+			}
+			if (imageHeight > windowHeight) {
+				img.height = windowHeight - 160;
+				// scale the width
+				var heightProp = oldImgHeight / img.height;
+				img.width = oldImgWidth / heightProp;
+			}
+
+			var modalContentDiv = instance.templateSelector.find('.modal-content');
+			modalContentDiv.width(img.width + 60);
+			modalContentDiv.height(img.height + 170);
+			var leftMargin = ($(window).width() - (img.width + 60)) / 2;
+			modalContentDiv.css("margin-left", leftMargin);
+			img.style.textAlign = "center";
+		}
+	});
+}

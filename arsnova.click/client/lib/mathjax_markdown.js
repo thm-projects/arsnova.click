@@ -191,9 +191,9 @@ export const mathjaxMarkdown = {
 		var size = '', alignment = 'center';
 
 		if (!isVideoElement) {
-			return '<a target="_blank" class="hyperlink" href="' + href + '"><div style="text-align:' + alignment + '">' +
+			return '<div style="text-align:' + alignment + '">' + // <a target="_blank" class="hyperlink" href="' + href + '">
 				'<img class="resizeableImage img-responsive" title="' + text + '" src="' + href + '" alt="' + text + '" style=' + size + '>' +
-				'</div></a>';
+				'</div>'; // </a>
 		}
 
 		return '<img class="resizeableImage" title="' + text + '" src="' + href + '" alt="' + text + '" style="width: 100%">';

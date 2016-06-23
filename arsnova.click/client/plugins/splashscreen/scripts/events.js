@@ -16,10 +16,24 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
+import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {showFullscreenPicture} from './lib.js';
 
 Template.splashscreen.events({
 	"click #btn-hidePreviewModal": function (event) {
 		$(event.currentTarget).parents(".splashscreen").remove();
 		$('.modal-backdrop').remove();
+	}
+});
+
+Template.questionPreviewSplashscreen.events({
+	"click .resizeableImage": function (event) {
+		showFullscreenPicture(event);
+	}
+});
+
+Template.readingConfirmedSplashscreen.events({
+	"click .resizeableImage": function (event) {
+		showFullscreenPicture(event);
 	}
 });

@@ -1,6 +1,10 @@
 import {EJSON} from 'meteor/ejson';
 import {AbstractAnswerOption} from './answeroption_abstract.js';
 
+const isCorrect = Symbol("isCorrect");
+
+const TYPE = "DefaultAnswerOption";
+
 export class DefaultAnswerOption extends AbstractAnswerOption {
 
 	/**
@@ -9,10 +13,34 @@ export class DefaultAnswerOption extends AbstractAnswerOption {
 	 * @param options
 	 */
 	constructor (options) {
-		if (typeof options.type !== "undefined" && options.type !== "DefaultAnswerOption") {
-			throw new TypeError("Invalid construction type while creating new DefaultAnswerOption");
+		if (typeof options.type !== "undefined" && options.type !== TYPE) {
+			throw new TypeError("Invalid construction type while creating new " + TYPE);
+		}
+		if (typeof options.isCorrect === "undefined") {
+			throw new Error("Invalid argument list for new " + TYPE + ", got: ", options);
 		}
 		super(options);
+		this[isCorrect] = options.isCorrect;
+	}
+
+	/**
+	 * Returns whether this AnswerOption instance is currently marked as correct
+	 * @returns {Boolean} True if this AnswerOption instance is marked as correct, False otherwise
+	 */
+	getIsCorrect () {
+		return this[isCorrect];
+	}
+
+	/**
+	 * Set the correct-mark for this AnswerOption instance
+	 * @param {Boolean} value True, if this AnswerOption shall be marked as correct, False otherwise
+	 * @throws {Error} If the value is not of type Boolean
+	 */
+	setIsCorrect (value) {
+		if (typeof value !== "boolean") {
+			throw new Error("Invalid argument for " + TYPE + ".setIsCorrect");
+		}
+		this[isCorrect] = value;
 	}
 
 	/**
@@ -26,10 +54,25 @@ export class DefaultAnswerOption extends AbstractAnswerOption {
 
 	/**
 	 * Serialize the instance object to a JSON compatible object
-	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
+	 * @returns {{hashtag: String, type: String, questionIndex: Number, answerText: String, answerOptionNumber: Number, isCorrect: Boolean}}
 	 */
 	serialize () {
-		return $.extend(super.serialize(), {type: "DefaultAnswerOption"});
+		return $.extend(super.serialize(), {
+			isCorrect: this.getIsCorrect(),
+			type: TYPE
+		});
+	}
+
+	/**
+	 * Checks for equivalence relations to another AnswerOption instance. Also part of the EJSON interface
+	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-equals
+	 * @param {AbstractAnswerOption} answerOption The AnswerOption instance which should be checked
+	 * @returns {boolean} True if both instances are completely equal, False otherwise
+	 */
+	equals (answerOption) {
+		return super.equals(answerOption) &&
+			answerOption instanceof DefaultAnswerOption &&
+			answerOption.getIsCorrect() === this.getIsCorrect();
 	}
 
 	/**
@@ -38,7 +81,17 @@ export class DefaultAnswerOption extends AbstractAnswerOption {
 	 * @returns {String} The name of the instantiated class
 	 */
 	typeName () {
-		return "DefaultAnswerOption";
+		return TYPE;
+	}
+
+	/**
+	 * Part of EJSON interface
+	 * @see AbstractAnswerOption.serialize()
+	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-toJSONValue
+	 * @returns {{hashtag: String, type: String, questionIndex: Number, answerText: String, answerOptionNumber: Number, isCorrect: Boolean}}
+	 */
+	toJSONValue () {
+		return this.serialize();
 	}
 }
 
@@ -46,6 +99,6 @@ export class DefaultAnswerOption extends AbstractAnswerOption {
  * Adds a custom type to Meteor's EJSON
  * @see http://docs.meteor.com/api/ejson.html#EJSON-addType
  */
-EJSON.addType("DefaultAnswerOption", function (value) {
+EJSON.addType(TYPE, function (value) {
 	return new DefaultAnswerOption(value);
 });

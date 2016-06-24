@@ -181,7 +181,9 @@
         "config_case_sensitive": "Groß- und Kleinschreibung berücksichtigen",
         "config_trim_whitespaces": "Ignoriere Leerzeichen",
         "config_use_keywords": "Ignoriere Reihenfolge der Wörter",
-        "config_use_punctuation": "Interpunktion berücksichtigen"
+        "config_use_punctuation": "Interpunktion berücksichtigen",
+        "onText": "Aktiviert",
+        "offText": "Deaktiviert"
       }
     },
     "choose_nickname": {

@@ -121,6 +121,7 @@ export function addQuestion(index) {
 			questionItem.getQuestionList()[index].removeAllAnswerOptions();
 			questionItem.getQuestionList()[index].addDefaultAnswerOption();
 		}
+		console.log(questionType, questionItem)
 		const serialized = questionItem.getQuestionList()[index].serialize();
 		delete serialized.type;
 		if (questionType === "RangedQuestion") {

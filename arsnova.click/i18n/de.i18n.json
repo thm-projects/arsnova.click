@@ -1,6 +1,6 @@
 {
   "global": {
-    "arsnova_slogan": "Quiz für alle(s)",
+    "arsnova_slogan": "Quiz-App für alle(s)",
     "back": "Zurück",
     "next": "Weiter",
     "delete": "Löschen",
@@ -55,7 +55,7 @@
           "title": "Bedienungshandbuch?",
           "text": {
             "1": "Brauchst Du nicht!",
-            "2": "Tipp einfach den Namen des Quiz ein. Die Buttons verfärben sich, sobald Du entweder den Namen eines freigeschalteten Quiz eingibst (Mach mit!) oder ein neues Quiz mit dem eingegebenen Namen erstellen kannst (Mach neu!).",
+            "2": "Tipp einfach den Namen des Quiz ein. Die Buttons werden aktiviert, sobald Du entweder den Namen eines freigeschalteten Quiz eingibst (Mach mit!) oder ein neues Quiz mit dem eingegebenen Namen erstellen kannst (Mach neu!).",
             "3": "Danach heißt es: Klicken. Schauen. Quizzen."
           }
         }
@@ -141,7 +141,7 @@
   },
   "view": {
     "answeroptions": {
-      "title": "2/4 Antworten festlegen",
+      "title": "2/4: Antworten festlegen",
       "answeroptiontext_placeholder": "Antwortoption eingeben",
       "correct": "Richtig",
       "wrong": "Falsch",
@@ -227,7 +227,7 @@
       "add_kicked_member_to_ban_list": "Den Nicknamen permanent bannen"
     },
     "questions": {
-      "title": "1/4 Fragetext eingeben",
+      "title": "1/4: Fragetext eingeben",
       "choose_format": "Frageformat wählen:",
       "enter_question_here": "Gib hier die Frage ein",
       "format": "Format",
@@ -239,7 +239,7 @@
       "ranged_question": "Schätzfrage (Antworten im vorgegebenen Bereich sind richtig)"
     },
     "quiz_summary": {
-      "title": "4/4 Zusammenfassung",
+      "title": "4/4: Zusammenfassung",
       "quiz_name": "Name der Quizrunde",
       "quiz_url": "URL für Teilnehmer/innen",
       "question_amount": "Gesamtanzahl der Quizfragen",
@@ -267,12 +267,12 @@
           "question_text_too_long": "Text der Quizfrage ist zu lang",
           "timer_too_small": "Timer ist zu kurz",
           "timer_too_big": "Timer ist zu lang",
-          "no_valid_answers": "Mindestens eine richtige Antwort muss vorhanden sein",
-          "one_valid_answer_required": "Es muss exakt eine richtige Antwort vorhanden sein",
-          "no_valid_answer_required": "Keine richtige Antwort darf vorhanden sein",
+          "no_valid_answers": "Mindestens eine Antwort muss als richtig markiert sein",
+          "one_valid_answer_required": "Es muss exakt eine Antwort als richtig markiert sein",
+          "no_valid_answer_required": "Bei einer Umfrage sind Antworten weder richtig noch falsch",
           "invalid_range": "Die minimale Reichweite muss geringer als die maximale Reichweite sein",
-          "invalid_correct_value": "Der richtige Wert muss innerhalb der Reichweite sein",
-          "answer_text_empty": "Text der Antwort darf nicht leer sein"
+          "invalid_correct_value": "Der richtige Wert muss innerhalb der Reichweite liegen",
+          "answer_text_empty": "Der Text der Antwort darf nicht leer sein"
         }
       },
       "edit_quiz": "Quiz bearbeiten",
@@ -337,7 +337,7 @@
       }
     },
     "timer": {
-      "title": "3/4 Countdown einstellen",
+      "title": "3/4: Countdown einstellen",
       "second": "Sekunde",
       "second_plural": "Sekunden"
     },
@@ -380,8 +380,8 @@
       "info_content": "Du kannst Texte innerhalb von ARSnova mithilfe von <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown Optionen werden in Form von Schaltflächen über den unterstützten Eingabefeldern angeboten. Zudem unterstützt ARSnova <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
     },
     "sound": {
-      "title": "Countdown Sound",
-      "volume": "Lautstärke",
+      "title": "Sound während des Countdowns",
+      "volume": "Lautstärke vorgeben",
       "inactive": "Sound ist inaktiv",
       "active": "Sound ist aktiviert"
     },

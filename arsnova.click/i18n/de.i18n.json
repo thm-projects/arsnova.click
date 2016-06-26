@@ -55,7 +55,7 @@
           "title": "Bedienungshandbuch?",
           "text": {
             "1": "Brauchst Du nicht! Tipp einfach den Namen des Quiz ein. Die Buttons werden aktiviert, sobald Du entweder den Namen eines freigeschalteten Quiz eingibst (Mach mit!) oder ein neues Quiz mit dem eingegebenen Namen erstellen kannst (Mach neu!).",
-            "2": "Oder probier einen fertigen Quiz aus: Lade <a href='https://git.thm.de/arsnova/arsnova.click/raw/staging/test_data/quiz_with_3_questions.json' target='_blank'>diese Quizdatei</a> herunter (Kontextmenü rechte Maustaste) und importiere sie mit dem Button unten rechts in der Fußzeile.",
+            "2": "Oder probier ein fertiges Quiz aus: Lade <a href='https://git.thm.de/arsnova/arsnova.click/raw/staging/test_data/quiz_with_3_questions.json' target='_blank'>diese Quizdatei</a> herunter (Kontextmenü rechte Maustaste) und importiere sie mit dem Button unten rechts in der Fußzeile.",
             "3": "Danach heißt es: Klicken. Schauen. Quizzen."
           }
         }
@@ -392,15 +392,15 @@
         "error_messages": {
           "Internal Server Error": "Interner Serverfehler",
           "update_failed": "Es ist ein Fehler bei der Aktualisierung deiner Frage aufgetreten.",
-          "session_exists": "Diese Sitzung existiert bereits!",
-          "session_exists_warning": "Diese Sitzung existiert bereits auf dem Server!",
-          "session_exists_new": "Es muss ein neuer Name vergeben werden, um die Daten importieren zu können:",
-          "session_not_exists": "Diese Sitzung existiert nicht!",
+          "session_exists": "Dieses Quiz existiert bereits!",
+          "session_exists_warning": "Der Name dieses Quiz ist bereits vergeben.",
+          "session_exists_new": "Gib einen neuen ein:",
+          "session_not_exists": "Dieses Quiz existiert nicht!",
           "hashtag_exists": "Dieser Quizname existiert bereits!",
           "session_not_available": "Dieser Quizrunde kann aktuell nicht beigetreten werden.",
           "private_browsing": "Im Privatmodus deines Browsers funktioniert ARSnova.click leider nur als Teilnehmer/in, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von ARSnova.click den Privatmodus deaktivieren und ARSnova erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.",
           "kicked_from_quiz": "Du wurdest aus dem Quiz geworfen!",
-          "export_failed": "Konnte die Daten nicht exportieren! - %s",
+          "export_failed": "Konnte die Quizdaten nicht exportieren! - %s",
           "not_authorized": "Entweder ist das Quiz nicht vorhanden oder Du hast keine Berechtigung, diese Daten zu lesen",
           "maximum_answer_options_exceeded": "Die maximale Anzahl an Antwortoptionen wurde bereits erreicht",
           "hashtag_not_found": "Dieser Quizname wurde leider nicht gefunden",
@@ -410,7 +410,7 @@
           "response_timeout": "Der Countdown ist bereits abgelaufen",
           "insert_leaderboard_failed": "Fehler beim Hinzufügen der Antwort zur Rangliste",
           "session_closed": "Die Quizrunde wurde beendet",
-          "invalid_data": "Die importierten Daten sind ungültig oder fehlerhaft!",
+          "invalid_data": "Die zu importierenden Daten sind fehlerhaft!",
           "invalid_input_data": "Die eingegebenen Daten sind ungültig oder fehlerhaft!"
         }
       }

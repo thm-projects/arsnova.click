@@ -54,8 +54,8 @@
         "manual": {
           "title": "Bedienungshandbuch?",
           "text": {
-            "1": "Brauchst Du nicht!",
-            "2": "Tipp einfach den Namen des Quiz ein. Die Buttons werden aktiviert, sobald Du entweder den Namen eines freigeschalteten Quiz eingibst (Mach mit!) oder ein neues Quiz mit dem eingegebenen Namen erstellen kannst (Mach neu!).",
+            "1": "Brauchst Du nicht! Tipp einfach den Namen des Quiz ein. Die Buttons werden aktiviert, sobald Du entweder den Namen eines freigeschalteten Quiz eingibst (Mach mit!) oder ein neues Quiz mit dem eingegebenen Namen erstellen kannst (Mach neu!).",
+            "2": "Oder probier einen fertigen Quiz aus: Lade <a href='https://git.thm.de/arsnova/arsnova.click/raw/staging/test_data/quiz_with_3_questions.json' target='_blank'>diese Quizdatei</a> herunter (Kontextmenü rechte Maustaste) und importiere sie mit dem Button unten rechts in der Fußzeile.",
             "3": "Danach heißt es: Klicken. Schauen. Quizzen."
           }
         }

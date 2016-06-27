@@ -127,14 +127,13 @@
     "header": {
       "new_question": "Nueva pregunta",
       "reset": "Reiniciar",
-      "yes": "Sí",
+      "yes": "Si",
       "no": "No",
       "reset_session_confirmation": {
-        "title": "Exit the quiz?",
+        "title": "¿Quiéres salir del cuestionario?",
         "text": {
-          "running_question": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
-          "empty_lobby": "You will be logged out. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
-          "continue": "Proceed?"
+          "1": "La sesión de todos los participantes será cerrada. La lista del ranking será borrada. Tu cuestionario con todos los ajustes permanecerá en este navegador, siempre y cuando no sea reiniciado.",
+          "2": "¿Continuar?"
         }
       }
     }
@@ -146,141 +145,140 @@
       "correct": "Correcto",
       "wrong": "Incorrecto",
       "ranged_question": {
-        "title": "Intervalo de respuestas correctas",
+        "title": "Rango de respuestas correctas",
         "correct_value": "Valor correcto",
-        "min_range": "Rango mínimo",
-        "max_range": "Rango maximo"
+        "min_range": "Valor mínimo",
+        "max_range": "Valor máximo"
       }
     },
     "choose_nickname": {
-      "enter_nickname": "Tome un apodo",
-      "enter_nickname_here": "Introduzca su apodo aquí",
-      "nickname_na_popup": "Este nombre no está disponible!",
-      "nickname_blacklist_popup": "Este nombre es (debido a su significado) no disponible!",
+      "enter_nickname": "Elije un nombre de usario",
+      "enter_nickname_here": "Ingresa tu nombre de usario",
+      "nickname_na_popup": "¡Este nombre no está disponible!",
+      "nickname_blacklist_popup": "¡Este nombre no está permitido!",
       "nickname_too_long": "El nombre es demasiado largo",
       "nickname_too_short": "El nombre es demasiado corto"
     },
     "hashtag_management": {
-      "enter_quiz_name": "Introduzca el nombre del concurso aquí",
-      "join_session": "Únete ahora!",
-      "start_session": "Empezar la prueba",
-      "edit_session": "Editar el cuestionario",
-      "reenter_session": "Abierto",
-      "create_session": "Hacer una nueva!",
-      "quiz_management": "Tests almacenados",
-      "available_sessions": "Estas pruebas se almacenan en el navegador:",
-      "session_management": "Gestión de prueba",
-      "import": "Cuestionario de importación",
-      "delete_session": "Prueba clara",
-      "delete_session_confirmation": "Si elimina permanentemente el '<span id=\"session_name\"></span>' de cuestionarios?",
-      "export": "Cuestionario de exportación",
-      "valid_question": "Prueba válida",
-      "invalid_question": "Cuestionario no válido"
+      "enter_quiz_name": "Ingresa el nombre del cuestionario",
+      "join_session": "¡Participa!",
+      "start_session": "Iniciar cuestionario",
+      "edit_session": "Editar cuestionario",
+      "reenter_session": "Abrir",
+      "create_session": "¡Crea uno nuevo!",
+      "quiz_management": "cuestionarios guardados",
+      "available_sessions": "Estos cuestionarios se encuentran en tu navegador:",
+      "session_management": "Adminitración de cuestionario",
+      "import": "Importar cuestionario",
+      "delete_session": "Borrar cuestionario",
+      "delete_session_confirmation": "¿Seguro que quieres borrar el cuestionario '<span id=\"session_name\"></span>' definitivamente?",
+      "export": "Exportar cuestionario",
+      "valid_question": "Pregunta valida",
+      "invalid_question": "Pregunta invalida"
     },
     "leaderboard": {
       "header": "La tabla de posiciones",
       "global_header": "Clasificación mundial",
       "title": {
-        "single_question": "Pregunta __questionId__ - Las respuestas correctas a partir de...",
-        "all_questions": "Las respuestas correctas a partir de..."
+        "single_question": "Pregunta de cuestionario __questionId__ - Tener todas correctas...",
+        "all_questions": "Tener todas correctas..."
       },
       "no_attendee_correct": "Nadie ha respondido a esta pregunta correctamente",
       "no_attendee_correct_global": "Nadie ha respondido a todas las preguntas correctamente",
       "question": "Pregunta",
       "second": "Segundo",
       "second_plural": "Segundos",
-      "show_more": "Desde el 1 más",
-      "show_more_plural": "Mostrar %s más",
-      "show_less": "Muestra menos"
+      "show_more": "Ver 1 más",
+      "show_more_plural": "Ver %s más",
+      "show_less": "Ver menos"
     },
     "liveResults": {
       "title": "Resultados",
       "question": "Pregunta",
-      "ranking": "Clasificación",
+      "ranking": "Lista de ranking",
       "reading_confirmation": "Confirmación de lectura",
-      "show_more": "Desde el 1 más",
-      "show_more_plural": "Mostrar %s más",
-      "complete_correct": "Todo correcto",
-      "complete_wrong": "Todo mal",
-      "back_to_lobby": "Volver al vestíbulo",
-      "global_ranking": "Ranking global",
-      "show_question": "Mostrar pregunta",
-      "show_question_plural": "Mostrar pregunta",
-      "start_round": "Inicio del concurso",
-      "start_round_plural": "Comience ronda",
-      "confirm_read": "Lo tengo!",
-      "game_over": "Juego terminado",
-      "countdown": "Cuenta regresiva",
-      "answer_option": "Responder",
-      "guessed_correct": "Estimada correctamente",
-      "guessed_wrong": "Mal estimada"
+      "show_more": "Ver 1 más",
+      "show_more_plural": "Ver %s más",
+      "complete_correct": "Totalmente correcto",
+      "complete_wrong": "Totalmente incorrecto",
+      "back_to_lobby": "Volver al lobby",
+      "global_ranking": "Lista de ranking global",
+      "show_question": "Ver la pregunta",
+      "show_question_plural": "Ver preguntas",
+      "start_round": "Iniciar cuestionario",
+      "start_round_plural": "Iniciar ronda",
+      "confirm_read": "He leído la pregunta",
+      "game_over": "Fin del juego",
+      "countdown": "Cuenta atrás",
+      "answer_option": "Respuesta",
+      "guessed_correct": "Has adivinado",
+      "guessed_wrong": "No has adivinado"
     },
     "lobby": {
-      "title": "1/4 Introduzca texto de la pregunta",
-      "title": "Prueba Vestíbulo",
-      "yes": "Sí",
+      "title": "1/4 Lobby del cuestionario",
+      "yes": "Si",
       "no": "No",
-      "ready": "Esperar hasta el inicio...",
-      "show_more": "Desde el 1 más",
-      "show_more_plural": "Mostrar %s más",
-      "start_quiz": "Vamonos!",
-      "kick_member_confirmation": "Será el asistente '<span id=\"nickName\"></span>' ser retirado de la sesión?",
-      "add_kicked_member_to_ban_list": "Desterrar definitivamente los apodos"
+      "ready": "Listo para el cuestionario",
+      "show_more": "Ver 1 más",
+      "show_more_plural": "Ver %s más",
+      "start_quiz": "¡Comenzar!",
+      "kick_member_confirmation": "¿Eliminar a esta persona '<span id=\"nickName\"></span>' del cuestionario?",
+      "add_kicked_member_to_ban_list": "¿Bloquear este nick permanentemente?"
     },
     "questions": {
       "enter_question_here": "Introduzca su pregunta aquí",
       "choose_format": "Elegir el formato de pregunta:",
       "format": "Formato",
       "edit": "Editar",
-      "preview": "Avance",
-      "single_choice_question": "Una única opción",
-      "multiple_choice_question": "Opción multiple",
-      "survey_question": "Encuesta",
-      "ranged_question": "Pregunta de examen y respuestas"
+      "preview": "Previsualizar",
+      "single_choice_question": "Pregunta de selección única (solo una respuesta es la correcta)",
+      "multiple_choice_question": "Pregunta de selección múltiple (una o más respuestas son correctas)",
+      "survey_question": "Encuesta (No hay respuestas correctas ni incorrectas)",
+      "ranged_question": "Pregunta de estimación (Respuestas dentro del área predeterminada son correctas)"
     },
     "quiz_summary": {
-      "title": "4/4 Resumen",
-      "quiz_name": "Nombre de la prueba",
-      "quiz_url": "URL para los asistentes",
-      "question_amount": "Cantidad de todas las preguntas",
-      "validation_question_group": "Validación de la prueba completa",
+      "summary": "Resúmen",
+      "quiz_name": "Nombre de la ronda",
+      "quiz_url": "URL para participantes",
+      "question_amount": "Cantidad total de preguntas del cuestionario",
+      "validation_question_group": "Validación del total de la ronda",
       "successful": "Exitoso",
-      "failed": "Ha fallado",
+      "failed": "Fallido",
       "correct": "Correcto",
       "wrong": "Incorrecto",
       "question": "Pregunta",
       "text": "Texto",
       "type": "Tipo",
-      "answer": "Responder",
+      "answer": "Respuesta",
       "answer_plural": "Respuestas",
-      "timer": "Cuenta regresiva",
+      "timer": "Cuenta atrás",
       "second": "Segundo",
       "second_plural": "Segundos",
       "validation": "Validación",
       "validation_errors": {
         "types": {
           "question": "Pregunta",
-          "answerOption": "Responder"
+          "answerOption": "Respuesta"
         },
         "reasons": {
-          "question_text_too_small": "El texto de la pregunta es demasiado corta",
+          "question_text_too_small": "El texto de la pregunta es demasiado corto",
           "question_text_too_long": "El texto de la pregunta es demasiado largo",
-          "timer_too_small": "El contador de tiempo es demasiado corto",
-          "timer_too_big": "El contador de tiempo es demasiado largo",
-          "no_valid_answers": "Debe haber al menos una respuesta correcta",
-          "one_valid_answer_required": "Debe haber exactamente una respuesta correcta",
-          "no_valid_answer_required": "No existen respuestas correctas permitidos",
-          "invalid_range": "La distancia mínima debe ser menor que el rango máximo",
-          "invalid_correct_value": "El valor adecuado debe estar en el ámbito de aplicación de las filas",
-          "answer_text_empty": "El texto de la respuesta no se le permite estar vacío"
+          "timer_too_small": "Temporizador es demasiado corto",
+          "timer_too_big": "Temporizador es demasiado largo",
+          "no_valid_answers": "Se debe ingresar al menos una respuesta correcta",
+          "one_valid_answer_required": "Se debe ingresar solo una respuesta correcta",
+          "no_valid_answer_required": "No se deben ingresar respuestas correctas",
+          "invalid_range": "El rango mínimo no debe sobrepasar el rango máximo",
+          "invalid_correct_value": "El valor corrrecto debe estar dentro de los parámetros del rango",
+          "answer_text_empty": "El texto de la respuesta no puede quedar vacio"
         }
       },
-      "edit_quiz": "Editar concurso",
-      "start_quiz": "Inicio cuestionario"
+      "edit_quiz": "Editar cuestionario",
+      "start_quiz": "Comenzar cuestionario"
     },
     "theme_switcher": {
-      "set_theme": "Elegir un tema para todos los asistentes",
-      "select_a_theme_title": "Elegir el tema",
+      "set_theme": "Elegir estilo",
+      "select_a_theme_title": "Elige un estilo",
       "themes": {
         "default": {
           "name": "ARSnova.click",
@@ -337,81 +335,80 @@
       }
     },
     "timer": {
-      "title": "3/4 Ajuste de cuenta atrás",
+      "title": "3/4 Ajustar el temporizador",
       "second": "Segundo",
       "second_plural": "Segundos"
     },
     "translation": {
-      "translations": "Estas traducciones están disponibles:",
-      "i18n_currently_not_available": "I18n actualmente no está disponible!",
-      "beta": "Bêta"
+      "translations": "Estos idiomas están disponibles:",
+      "i18n_currently_not_available": "i18n no se encuentra disponible!",
+      "beta": "Beta"
     },
     "voting": {
       "title": "Votación",
       "question": "Pregunta",
       "send": "Enviar",
-      "seconds_left": "1 segundo a la izquierda!",
-      "seconds_left_plural": "__value__ segundos en el reloj",
+      "seconds_left": "Sólo queda 1 segundo!",
+      "seconds_left_plural": "Sólo quedan __valor__ segundos!",
       "ranged_question": {
-        "title": "Por favor escriba su respuesta!",
-        "input_placeholder": "Responder"
+        "title": "¡Ingresa tu valor estimado!",
+        "input_placeholder": "Respuesta"
       }
     }
   },
   "plugins": {
     "markdown_bar": {
       "visible_text": "Texto visible",
-      "link_text": "Texto del enlace",
-      "link_destination": "Destino del enlace",
+      "link_text": "Enlace",
+      "link_destination": "Enlace de destino",
       "tooltip": {
-        "info": "Información",
+        "info": "Info",
         "bold": "Negrita",
-        "heading": "Titular",
-        "hyperlink": "Hiperenlace",
+        "heading": "Encabezado",
+        "hyperlink": "Hipervínculo",
         "unordered_list": "Lista desordenada",
         "ordered_list": "Lista ordenada",
-        "latex": "LaTex Markup",
-        "code": "Code Markup",
-        "citation": "Citación",
+        "latex": "LaTeX-marcadores",
+        "code": "Code-marcadores",
+        "citation": "Cita",
         "image": "Imagen",
         "youtube": "YouTube",
         "vimeo": "Vimeo"
       },
-      "info_content": "You can use <a target='_blank' class='hyperlink' href='https://en.wikipedia.org/wiki/Markdown'>Markdown</a> markup for your text in ARSnova.click. Frequently used markup options are available via the button bar which is visible on all supported input fields. Additionally ARSnova.click supports <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
+      "info_content": "Tú puedes marcar textos que estén en ARSnova a través de <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a>. Las opciones de Markdown utilizadas con mayor frecuencia están disponibles en forma de botones sobre la casilla de apoyo. De igual modo, ARSnova soporta <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
     },
     "sound": {
-      "title": "Music Quiz",
+      "title": "Sonido de cuenta atrás",
       "volume": "Volumen",
-      "inactive": "El sonido es inactiva",
-      "active": "El sonido es activa"
+      "inactive": "Sonido está desactivado",
+      "active": "Sonido está activado"
     },
     "splashscreen": {
       "error": {
-        "title": "Notificación",
-        "set_text_error": "El texto de la pantalla de bienvenida de error sólo puede establecerse después de que se ha prestado!",
+        "title": "Pista",
+        "set_text_error": "¡El texto de la página inicial sólo pueder ser colocado después de haber sido renderizado!",
         "error_messages": {
-          "Internal Server Error": "Error de servidor interno",
-          "update_failed": "El estado de la cuestión no.",
-          "session_exists": "Esta sesión ya existe!",
-          "session_exists_warning": "Esta sesión tiene ya existe en el servidor!",
-          "session_exists_new": "Para importar que se requiere para cambiar el nombre de la sesión:",
-          "session_not_exists": "Esta sesión no existe",
-          "hashtag_exists": "Este hashtag ya existe!",
-          "session_not_available": "La sesión no está actualmente disponible para unirse",
-          "private_browsing": "If you use ARSnova.click in private browsing you can only join a quiz as an attendee. Unfortunately your browser seems to reject any write access to the local storage. Please use ARSnova.click only via a normal browser tab. Your anonymity will be respected even without using the private mode.",
-          "kicked_from_quiz": "Usted ha sido expulsado de la prueba!",
-          "export_failed": "No se pudo exportar! - %s",
-          "not_authorized": "O bien no hay prueba o que no tiene acceso de escritura",
-          "maximum_answer_options_exceeded": "El número máximo de posibles opciones de respuesta superó",
-          "hashtag_not_found": "No existe el hashtag con la clave dada",
-          "member_not_found": "Miembro no encontrado",
-          "duplicate_response": "El usuario ya ha dado una respuesta",
-          "answeroption_not_found": "No hay ninguna opción de respuesta con el número de opción respuesta dada",
-          "response_timeout": "La respuesta se da fuera del rango de tiempo",
-          "insert_leaderboard_failed": "Error al añadir la respuesta se establece en la tabla de posiciones",
-          "session_closed": "La sesión se ha cerrado cuestionario",
-          "invalid_data": "Los archivos importados son corruptos o el acceso es denegado!",
-          "invalid_input_data": "Los datos introducidos no es válida o el acceso es denegado!"
+          "Internal Server Error": "Error interno del servidor",
+          "update_failed": "Error al actualizar la pregunta.",
+          "session_exists": "¡Esta sesión ya existe!",
+          "session_exists_warning": "¡Esta seción ya existe en el servidor!",
+          "session_exists_new": "Es necesario ingresar un nuevo nombre para poder importar los datos:",
+          "session_not_exists": "¡Esta sesión no existe!",
+          "hashtag_exists": "¡El nombre del cuestionario ya existe!",
+          "session_not_available": "En este momento no es posible ingresar al cuestionario.",
+          "private_browsing": "Cuando tu navegador esté en modo privado, ARSnova.click funcionará lamentablemente solo como participante, ya que el navegador rechazará la descripción de la memoria de la aplicación. Por favor desactiva el modo privado mientras utilices ARSnova.click y reinicia ARSnova. Tú anonimato se mantiene aunque el modo privado esté desactivado.",
+          "kicked_from_quiz": "¡Has sido sacado del cuestionario!",
+          "export_failed": "¡Los datos no pudieron ser exportados! - %s",
+          "not_authorized": "El cuestionario no está disponible o no has sido autorizado para leer estos datos",
+          "maximum_answer_options_exceeded": "La cantidad máxima de opciones de respuesta ya ha sido alcanzada",
+          "hashtag_not_found": "El nombre de este cuestionario lamentablemente no ha sido encontrado",
+          "member_not_found": "El participante lamentablemente no ha sido encontrado",
+          "duplicate_response": "El participante ya ha respondido",
+          "answeroption_not_found": "No existe una respuesta con este índice",
+          "response_timeout": "La cuenta atrás ya ha finalizado",
+          "insert_leaderboard_failed": "Error al añadir la respuesta a la lista del Ranking",
+          "session_closed": "Esta ronda ha sido finalizada",
+          "invalid_data": "¡La importación de datos es invalida o incorrecta!"
         }
       }
     }

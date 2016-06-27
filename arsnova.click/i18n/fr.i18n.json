@@ -140,7 +140,7 @@
   },
   "view": {
     "answeroptions": {
-      "answeroptiontext_placeholder": "Option de réponse",
+      "answeroptiontext_placeholder": "2/4 Option de réponse",
       "correct": "Vrai",
       "wrong": "Faux",
       "ranged_question": {
@@ -214,7 +214,7 @@
       "guessed_wrong": "Mal estimé"
     },
     "lobby": {
-      "title": "Lobby du quiz",
+      "title": "1/4 Lobby du quiz",
       "yes": "Oui",
       "no": "Non",
       "ready": "Prêt/e pour le quiz",
@@ -333,7 +333,7 @@
       }
     },
     "timer": {
-      "set_countdown": "Régler le compte à rebours",
+      "set_countdown": "3/4 Régler le compte à rebours",
       "second": "seconde",
       "second_plural": "secondes"
     },

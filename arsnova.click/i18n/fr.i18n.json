@@ -131,16 +131,16 @@
       "no": "Non",
       "reset_session_confirmation": {
         "title": "Finir le quiz?",
-        "text": {
-          "1": "Tous les participants seront déconnectés. Le classement sera supprimé. Ton quiz avec tout ses paramètres reste dans ce browser, tant qu'il n'est pas réinitialisé.",
-          "2": "Continuer?"
-        }
+        "running_question": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
+        "empty_lobby": "You will be logged out. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
+        "continue": "Proceed?"
       }
     }
   },
   "view": {
     "answeroptions": {
-      "answeroptiontext_placeholder": "2/4 Option de réponse",
+      "title": "2/4 Définir des réponses",
+      "answeroptiontext_placeholder": "Option de réponse",
       "correct": "Vrai",
       "wrong": "Faux",
       "ranged_question": {
@@ -225,6 +225,7 @@
       "add_kicked_member_to_ban_list": "Bannir le pseudo de manière permanente"
     },
     "questions": {
+      "title": "1/4 Entrez texte de la question",
       "enter_question_here": "Entre la question",
       "format": "Format",
       "edit": "Modifier",
@@ -343,6 +344,7 @@
       "beta": "beta"
     },
     "voting": {
+      "title": "Vote",
       "question": "Question",
       "send": "Envoyer",
       "seconds_left": "Plus qu'une seconde!",

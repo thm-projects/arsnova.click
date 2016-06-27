@@ -409,7 +409,7 @@
           "insert_leaderboard_failed": "Erreur pendant l'intégration de la réponse dans le classement",
           "session_closed": "La tournée de quiz est terminée",
           "invalid_data": "Les données importées sont caduques ou défecteuses!",
-          "invalid_input_data": "Les données saisies est soit invalide ou l'accès est refusé!" // TODO (still beta translation)
+          "invalid_input_data": "Les données saisies est soit invalide ou l'accès est refusé!"
         }
       }
     }

@@ -118,10 +118,20 @@ export function formatFreeTextSettingsButtons() {
 		offText: TAPi18n.__("view.answeroptions.free_text_question.offText"),
 		wrapperClass: "input-field",
 		animate: false,
-		onSwitchChange: function (event, state) {
-			const item = $('.bootstrap-switch-id-' + event.target.id);
+		onSwitchChange: function (event) {
 			const questionItem = Session.get("questionGroup");
 			questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].setConfig(event.target.id, $('#' + event.target.id).prop("checked"));
+			if (event.target.id === "config_use_keywords_switch") {
+				if ($('#config_use_keywords_switch').prop("checked")) {
+					$('#config_trim_whitespaces_switch').bootstrapSwitch('disabled',false);
+					$('#config_use_punctuation_switch').bootstrapSwitch('disabled',false);
+				} else {
+					$('#config_trim_whitespaces_switch').bootstrapSwitch('state', false).bootstrapSwitch('disabled',true);
+					$('#config_use_punctuation_switch').bootstrapSwitch('state', false).bootstrapSwitch('disabled',true);
+					questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].setConfig("config_trim_whitespaces_switch", false);
+					questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].setConfig("config_use_punctuation_switch", false);
+				}
+			}
 			Session.set("questionGroup", questionItem);
 			localData.addHashtag(questionItem);
 		},
@@ -134,9 +144,9 @@ export function formatFreeTextSettingsButtons() {
 
 	Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().forEach(function (answerOption) {
 		$('#config_case_sensitive_switch').bootstrapSwitch('state', answerOption.getConfigCaseSensitive());
-		$('#config_trim_whitespaces_switch').bootstrapSwitch('state', answerOption.getConfigTrimWhitespaces());
+		$('#config_trim_whitespaces_switch').bootstrapSwitch('state', answerOption.getConfigTrimWhitespaces()).bootstrapSwitch('disabled',!answerOption.getConfigUseKeywords());
 		$('#config_use_keywords_switch').bootstrapSwitch('state', answerOption.getConfigUseKeywords());
-		$('#config_use_punctuation_switch').bootstrapSwitch('state', answerOption.getConfigUsePunctuation());
+		$('#config_use_punctuation_switch').bootstrapSwitch('state', answerOption.getConfigUsePunctuation()).bootstrapSwitch('disabled',!answerOption.getConfigUseKeywords());
 	});
 }
 

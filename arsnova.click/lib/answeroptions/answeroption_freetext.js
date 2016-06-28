@@ -62,6 +62,31 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	}
 
 	/**
+	 * Gets the currently set configuration as an array containing the values as object
+	 * @returns {*[]} The currently set configuration. The Objects contain the configTitle as localized config name and the configEnabled as localized true or false values
+	 */
+	getConfig () {
+		return [
+			{
+				configTitle: "view.answeroptions.free_text_question.config_case_sensitive",
+				configEnabled: "view.answeroptions.free_text_question." + (this.getConfigCaseSensitive() ? "onText" : "offText")
+			},
+			{
+				configTitle: "view.answeroptions.free_text_question.config_trim_whitespaces",
+				configEnabled: "view.answeroptions.free_text_question." + (this.getConfigTrimWhitespaces() ? "onText" : "offText")
+			},
+			{
+				configTitle: "view.answeroptions.free_text_question.config_use_keywords",
+				configEnabled: "view.answeroptions.free_text_question." + (this.getConfigUseKeywords() ? "onText" : "offText")
+			},
+			{
+				configTitle: "view.answeroptions.free_text_question.config_use_punctuation",
+				configEnabled: "view.answeroptions.free_text_question." + (this.getConfigUsePunctuation() ? "onText" : "offText")
+			}
+		]
+	}
+
+	/**
 	 * Returns the currently set configuration if the match of the correct answer is case sensitive
 	 * @returns {Boolean} The currently set configuration for the case sensitive check
 	 */

@@ -293,6 +293,8 @@
       "type": "Typ",
       "answer": "Antwort",
       "answer_plural": "Antworten",
+      "answer_configuration": "Konfiguration der Antwort",
+      "answer_configuration_plural": "Konfiguration der Antworten",
       "timer": "Countdown",
       "second": "Sekunde",
       "second_plural": "Sekunden",

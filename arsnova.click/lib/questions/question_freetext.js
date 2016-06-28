@@ -88,10 +88,10 @@ export class FreeTextQuestion extends AbstractQuestion {
 				questionIndex: this.getQuestionIndex(),
 				answerText: "",
 				answerOptionNumber: 0,
-				configCaseSensitive: false,
-				configTrimWhitespaces: false,
-				configUseKeywords: false,
-				configUsePunctuation: false
+				configCaseSensitive: true,
+				configTrimWhitespaces: true,
+				configUseKeywords: true,
+				configUsePunctuation: true
 			})
 		);
 	}

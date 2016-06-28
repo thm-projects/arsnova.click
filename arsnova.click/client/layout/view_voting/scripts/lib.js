@@ -174,13 +174,3 @@ export function formatAnswerButtons() {
 
 	answerRow.find('button').css('height', $('#0').width() + 'px');
 }
-
-export function formatFreeTextArea() {
-	const formatFunc = function () {
-		Meteor.setTimeout(function () {
-			$('#answerTextArea').height($('.contentPosition').outerHeight() - 30 - $('#freeTextFrameTitle').outerHeight(true) - $('.distance-top').outerHeight(true) - $('.voting-helper-buttons').outerHeight(true));
-		},50);
-	};
-	$(window).on("resize", formatFunc);
-	formatFunc();
-}

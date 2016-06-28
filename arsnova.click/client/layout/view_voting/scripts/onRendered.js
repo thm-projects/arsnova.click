@@ -31,10 +31,6 @@ Template.votingview.onRendered(function () {
 		formatAnswerButtons();
 	}
 
-	if (QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].answerOptionList[0].type === "FreeTextAnswerOption") {
-		formatFreeTextArea();
-	}
-
 	footerElements.removeFooterElements();
 	footerElements.calculateFooter();
 

@@ -16,8 +16,7 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="freeTextAnswerOptionTemplate">
-    {{> titel titelText = "view.answeroptions.free_text_question.title"}}
-    <div class="row center-vertical-non-scrollable freeTextAnswerOptions">
+    <div class="row center-vertical full-screen-content freeTextAnswerOptions">
         <div class="col-xs-12">
             <div class="row">
                 {{#each configOptions}}
@@ -31,6 +30,7 @@
         <div class="col-xs-12">
             <textarea id="answerTextArea"
                       class="round-corners textarea placeholder-align-center"
+                      rows="3"
                       placeholder="{{_ "view.answeroptions.free_text_question.text_placeholder" }}">{{answerText}}</textarea>
         </div>
     </div>

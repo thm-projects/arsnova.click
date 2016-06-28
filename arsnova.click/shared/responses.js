@@ -66,6 +66,7 @@ Meteor.methods({
 			duplicateResponseSearch.rangedInputValue = responseValueObject.rangedInputValue;
 		} else if (typeof responseValueObject.freeTextInputValue !== "undefined") {
 			duplicateResponseSearch.freeTextInputValue = responseValueObject.freeTextInputValue;
+			duplicateResponseSearch.answerOptionNumber = responseValueObject.answerOptionNumber;
 		} else {
 			duplicateResponseSearch.answerOptionNumber = responseValueObject.answerOptionNumber;
 		}
@@ -100,6 +101,7 @@ Meteor.methods({
 				answerOptionNumber: responseDoc.answerOptionNumber
 			});
 		}
+		console.log(foundAnswerBase, AnswerOptionCollection.find().fetch(), hashtag, responseDoc.questionIndex, responseDoc.answerOptionNumber);
 		if (!foundAnswerBase) {
 			throw new Meteor.Error('ResponsesCollection.addResponse', 'response_type_not_found');
 		}

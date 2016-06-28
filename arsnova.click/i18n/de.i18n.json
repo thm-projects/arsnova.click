@@ -235,6 +235,8 @@
       "reading_confirmation": "Lesebestätigung",
       "show_more": "Zeige 1 weiteren",
       "show_more_plural": "Zeige %s weitere",
+      "correct": "Richtig",
+      "wrong": "Falsch",
       "complete_correct": "Ganz richtig",
       "complete_wrong": "Ganz falsch",
       "back_to_lobby": "Zurück zur Lobby",
@@ -392,6 +394,10 @@
       "seconds_left_plural": "Noch __value__ Sekunden!",
       "ranged_question": {
         "title": "Gibt deinen Schätzwert ein!",
+        "input_placeholder": "Antwort"
+      },
+      "free_text_question": {
+        "title": "Gib deine Antwort ein!",
         "input_placeholder": "Antwort"
       }
     }

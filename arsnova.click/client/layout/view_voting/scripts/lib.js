@@ -117,7 +117,24 @@ export function makeAndSendRangedResponse(value) {
 	Meteor.call('ResponsesCollection.addResponse', {
 		hashtag: Router.current().params.quizName,
 		questionIndex: EventManagerCollection.findOne().questionIndex,
-		inputValue: value,
+		rangedInputValue: value,
+		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
+	}, (err) => {
+		if (err) {
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
+			});
+		}
+	});
+}
+
+export function makeAndSendFreeTextResponse(value) {
+	Meteor.call('ResponsesCollection.addResponse', {
+		hashtag: Router.current().params.quizName,
+		questionIndex: EventManagerCollection.findOne().questionIndex,
+		freeTextInputValue: value,
+		answerOptionNumber: 0,
 		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
 	}, (err) => {
 		if (err) {

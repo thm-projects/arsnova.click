@@ -179,6 +179,69 @@ Template.liveResults.helpers({
 		});
 		return result;
 	},
+	freeTextAnswerResult: function (index) {
+		let memberAmount = ResponsesCollection.find({questionIndex: index}).fetch();
+		memberAmount = _.uniq(memberAmount, false, function (user) {
+			return user.userNick;
+		}).length;
+		let correctAnswerCount = 0;
+		let wrongAnswerCount = 0;
+		let answerOption = AnswerOptionCollection.findOne({questionIndex: index});
+
+		if (!answerOption.configCaseSensitive) {
+			answerOption.answerText = answerOption.answerText.toLowerCase();
+		}
+		if (!answerOption.configTrimWhitespaces) {
+			answerOption.answerText = answerOption.answerText.replace(/ /g, "");
+		}
+		if (!answerOption.configUsePunctuation) {
+			answerOption.answerText = answerOption.answerText.replace(/(\.)*(,)*(!)*(")*(;)*(\?)*/g, "");
+		}
+		ResponsesCollection.find({
+			questionIndex: index,
+			answerOptionNumber: 0
+		}).forEach(function (value) {
+			if (!answerOption.configCaseSensitive) {
+				value.freeTextInputValue = value.freeTextInputValue.toLowerCase();
+			}
+			if (!answerOption.configTrimWhitespaces) {
+				value.freeTextInputValue = value.freeTextInputValue.replace(/ /g, "");
+			}
+			if (!answerOption.configUsePunctuation) {
+				value.freeTextInputValue = value.freeTextInputValue.replace(/(\.)*(,)*(!)*(")*(;)*(\?)*/g, "");
+			}
+			if (answerOption.configUseKeywords) {
+				if (answerOption.answerText === value.freeTextInputValue) {
+					correctAnswerCount++;
+				} else {
+					wrongAnswerCount++;
+				}
+			} else {
+				let hasCorrectKeywords = true;
+				answerOption.answerText.split(" ").forEach(function (keyword) {
+					if (value.freeTextInputValue.indexOf(keyword) === -1) {
+						hasCorrectKeywords = false;
+					}
+				});
+				if (hasCorrectKeywords) {
+					correctAnswerCount++;
+				} else {
+					wrongAnswerCount++;
+				}
+			}
+		});
+
+		return {
+			correct: {
+				absolute: correctAnswerCount,
+				percent: memberAmount ? Math.floor((correctAnswerCount * 100) / memberAmount) : 0
+			},
+			wrong: {
+				absolute: wrongAnswerCount,
+				percent: memberAmount ? Math.floor((wrongAnswerCount * 100) / memberAmount) : 0
+			}
+		};
+	},
 	rangedAnswerResult: function (index) {
 		var questionDoc = QuestionGroupCollection.findOne();
 		if (!questionDoc) {
@@ -216,6 +279,13 @@ Template.liveResults.helpers({
 			return;
 		}
 		return questionDoc.questionList[index].type === "RangedQuestion";
+	},
+	isFreeTextQuestion: function (index) {
+		const questionDoc = QuestionGroupCollection.findOne();
+		if (!questionDoc) {
+			return;
+		}
+		return questionDoc.questionList[index].type === "FreeTextQuestion";
 	},
 	isActiveQuestion: function (index) {
 		let eventDoc = EventManagerCollection.findOne();

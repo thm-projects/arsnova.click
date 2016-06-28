@@ -136,31 +136,31 @@
           "empty_lobby": "You will be logged out. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
           "continue": "Proceed?"
         }
-      }
-    },
-    "connection_status": {
-      "title": "Connection status",
-      "show_result": "Details",
-      "pending": "Pending...",
-      "finished_with_errors": "Finished with errors",
-      "finished_with_warning": "Finished with warnings",
-      "finished_without_warnings": "Successful",
-      "websocket_status": {
-        "connected": "Connected",
-        "disconnected": "Disconnected"
       },
-      "localStorage_status": {
-        "writable": "Writable",
-        "non_writable": "Not writable"
-      },
-      "sessionStorage_status": {
-        "writable": "Writable",
-        "non_writable": "Not writable"
-      },
-      "dbConnection_status": {
-        "very_slow": "Very slowly",
-        "slow": "Poor",
-        "ok": "Good"
+      "connection_status": {
+        "title": "Connection status",
+        "show_result": "Details",
+        "pending": "Pending...",
+        "finished_with_errors": "Finished with errors",
+        "finished_with_warning": "Finished with warnings",
+        "finished_without_warnings": "Successful",
+        "websocket_status": {
+          "connected": "Connected",
+          "disconnected": "Disconnected"
+        },
+        "localStorage_status": {
+          "writable": "Writable",
+          "non_writable": "Not writable"
+        },
+        "sessionStorage_status": {
+          "writable": "Writable",
+          "non_writable": "Not writable"
+        },
+        "dbConnection_status": {
+          "very_slow": "Very slowly",
+          "slow": "Poor",
+          "ok": "Good"
+        }
       }
     }
   },

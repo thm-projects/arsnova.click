@@ -135,6 +135,31 @@
           "1": "La sesión de todos los participantes será cerrada. La lista del ranking será borrada. Tu cuestionario con todos los ajustes permanecerá en este navegador, siempre y cuando no sea reiniciado.",
           "2": "¿Continuar?"
         }
+      },
+      "connection_status": {
+        "title": "Estado de la conexión",
+        "show_result": "Detalles",
+        "pending": "Pendiente...",
+        "finished_with_errors": "Acabado con errores",
+        "finished_with_warning": "Acabado con advertencias",
+        "finished_without_warnings": "Exitoso",
+        "websocket_status": {
+          "connected": "Conectado",
+          "disconnected": "Desconectado"
+        },
+        "localStorage_status": {
+          "writable": "Grabable",
+          "non_writable": "No se puede escribir"
+        },
+        "sessionStorage_status": {
+          "writable": "Grabable",
+          "non_writable": "No se puede escribir"
+        },
+        "dbConnection_status": {
+          "very_slow": "Muy lentamente",
+          "slow": "Pobre",
+          "ok": "Bueno"
+        }
       }
     }
   },

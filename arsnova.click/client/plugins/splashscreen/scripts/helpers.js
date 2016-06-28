@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
@@ -66,4 +67,33 @@ Template.questionAndAnswerSplashscreen.helpers($.extend(isMobileDevice, {
 
 Template.renameHashtagSplashscreen.helpers($.extend(isMobileDevice, {getHashtagSchema: hashtagSchema}, {
 
+}));
+
+Template.connectionQualitySplashscreen.helpers($.extend(isMobileDevice, {
+	websocketStatus: function () {
+		return {
+			text: Session.get("connectionStatus").webSocket.connected ? "region.header.connection_status.websocket_status.connected" : "region.header.connection_status.websocket_status.disconnected"
+		};
+	},
+	localStorageStatus: function () {
+		return {
+			text: Session.get("connectionStatus").localStorage ? "region.header.connection_status.localStorage_status.writable" : "region.header.connection_status.localStorage_status.non_writable"
+		};
+	},
+	sessionStorageStatus: function () {
+		return {
+			text: Session.get("connectionStatus").sessionStorage ? "region.header.connection_status.sessionStorage_status.writable" : "region.header.connection_status.sessionStorage_status.non_writable"
+		};
+	},
+	dbConnectionStatus: function () {
+		return {
+			text: Session.get("connectionStatus").dbConnection.currentCount < Session.get("connectionStatus").dbConnection.totalCount ? "region.header.connection_status.pending" :
+					Session.get("connectionStatus").dbConnection.serverRTT > 20 ? "region.header.connection_status.dbConnection_status.very_slow" :
+					Session.get("connectionStatus").dbConnection.serverRTT > 10 ? "region.header.connection_status.dbConnection_status.slow" :
+					"region.header.connection_status.dbConnection_status.ok",
+			averageTime: Session.get("connectionStatus").dbConnection.serverRTT.toFixed(2).replace(".", ","),
+			current: Session.get("connectionStatus").dbConnection.currentCount,
+			max: Session.get("connectionStatus").dbConnection.totalCount
+		};
+	}
 }));

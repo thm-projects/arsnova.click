@@ -15,7 +15,9 @@
 * You should have received a copy of the GNU General Public License
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
-<template name="home">
-    {{> connectionQualityHeader}}
-	{{> hashtagView}}
+<template name="connectionQualityHeader">
+    <div class="connection{{#if status.finishedWithErrors}}Error{{/if}}{{#if status.finishedWithWarnings}}Warning{{/if}}{{#if status.finishedWithoutWarnings}}Ok{{/if}}{{#if status.pending}}Pending{{/if}}"
+         id="connectionQualityHeader">
+        <p>{{_ "region.header.connection_status.title"}}: {{_ status.resultString}} <span id="detailsLink">{{_ "region.header.connection_status.show_result"}}</span></p>
+    </div>
 </template>

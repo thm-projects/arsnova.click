@@ -113,6 +113,10 @@ export function addQuestion(index) {
 
 	// Check if we need to change the type of the question
 	if (questionItem.getQuestionList()[index].constructor.name !== questionType) {
+		if (questionItem.getQuestionList()[index].typeName() === "YesNoSingleChoiceQuestion" ||
+			questionItem.getQuestionList()[index].typeName() === "TrueFalseSingleChoiceQuestion") {
+			questionItem.getQuestionList()[index].removeAllAnswerOptions();
+		}
 		const serialized = questionItem.getQuestionList()[index].serialize();
 		delete serialized.type;
 		if (questionType === "RangedQuestion") {
@@ -189,6 +193,16 @@ export function getQuestionTypes() {
 			id: "SingleChoiceQuestion",
 			translationName: "view.questions.single_choice_question",
 			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SingleChoiceQuestion" ? 'selected' : ""
+		},
+		{
+			id: "YesNoSingleChoiceQuestion",
+			translationName: "view.questions.single_choice_question_yes_no",
+			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "YesNoSingleChoiceQuestion" ? 'selected' : ""
+		},
+		{
+			id: "TrueFalseSingleChoiceQuestion",
+			translationName: "view.questions.single_choice_question_true_false",
+			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "TrueFalseSingleChoiceQuestion" ? 'selected' : ""
 		},
 		{
 			id: "MultipleChoiceQuestion",

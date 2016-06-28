@@ -19,18 +19,20 @@
     <div class="row center-vertical full-screen-content">
         <div class="col-md-12">
             {{> titel titelText = ""}}
-            <div class="row row-landingpage-buttons">
-                <div class="col-md-12 text-center">
-                    <button type="button" id="addAnswerOption"
-                            class="button btn-add-remove-ans_opt round-corners button-shadow button-success">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                    <button type="button" id="deleteAnswerOption"
-                            class="button btn-add-remove-ans_opt round-corners button-shadow button-warning {{showDeleteButtonOnStart}}">
-                        <span class="glyphicon glyphicon-minus"></span>
-                    </button>
+            {{#unless isSpecialSingleChoiceQuestion}}
+                <div class="row row-landingpage-buttons">
+                    <div class="col-md-12 text-center">
+                        <button type="button" id="addAnswerOption"
+                                class="button btn-add-remove-ans_opt round-corners button-shadow button-success">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                        <button type="button" id="deleteAnswerOption"
+                                class="button btn-add-remove-ans_opt round-corners button-shadow button-warning {{showDeleteButtonOnStart}}">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </button>
+                    </div>
                 </div>
-            </div>
+            {{/unless}}
             <div class="row answer-options distance-top">
                 <div class="col-md-12">
                     <div class="row">

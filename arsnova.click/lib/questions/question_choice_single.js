@@ -4,7 +4,7 @@ import {AbstractChoiceQuestion} from './question_choice_abstract.js';
 export class SingleChoiceQuestion extends AbstractChoiceQuestion {
 
 	/**
-	 * Constructs a MultipleChoiceQuestion instance
+	 * Constructs a SingleChoiceQuestion instance
 	 * @see AbstractChoiceQuestion.constructor()
 	 * @param options
 	 */
@@ -18,7 +18,7 @@ export class SingleChoiceQuestion extends AbstractChoiceQuestion {
 	/**
 	 * Part of EJSON interface
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-clone
-	 * @returns {MultipleChoiceQuestion} An independent deep copy of the current instance
+	 * @returns {SingleChoiceQuestion} An independent deep copy of the current instance
 	 */
 	clone () {
 		return new SingleChoiceQuestion(this.serialize());

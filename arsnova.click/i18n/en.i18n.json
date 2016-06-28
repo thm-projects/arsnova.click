@@ -259,6 +259,8 @@
       "edit": "Edit",
       "preview": "Preview",
       "single_choice_question": "Single-Choice",
+      "single_choice_question_yes_no": "Yes-No Single-Choice question",
+      "single_choice_question_true_false": "True-False Single-Choice question",
       "multiple_choice_question": "Multiple-Choice",
       "survey_question": "Survey",
       "ranged_question": "Question with ranged answeroptions"
@@ -438,6 +440,18 @@
           "invalid_data": "The imported files are corrupt or the access is denied!",
           "invalid_input_data": "The entered data is either invalid or the access is denied!"
         }
+      }
+    }
+  },
+  "lib": {
+    "questions": {
+      "question_choice_single_yes_no": {
+        "yes": "Yes",
+        "no": "No"
+      },
+      "question_choice_single_true_false": {
+        "true": "True",
+        "false": "False"
       }
     }
   }

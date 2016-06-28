@@ -15,38 +15,64 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {ConnectionStatusCollection} from '/lib/connection/collection.js';
+import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import  * as localData from '/lib/local_storage.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 
 Template.home.onRendered(function () {
-	try {
-		if (!localStorage.getItem("localStorageAvailable")) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: "plugins.splashscreen.error.error_messages.private_browsing"
-			});
-			return;
+	const connectionStatus = {
+		webSocket: Meteor.status(),
+		localStorage: false,
+		sessionStorage: false,
+		dbConnection: {
+			totalCount: 30,
+			currentCount: 1,
+			serverRTT: 0,
+			serverRTTtotal: 0
 		}
-	} catch (err) {
-		new ErrorSplashscreen({
-			autostart: true,
-			errorMessage: "plugins.splashscreen.error.error_messages.private_browsing"
-		});
-		return;
+	};
+	try {
+		localStorage.setItem("localStorageAvailable", true);
+		connectionStatus.localStorage = true;
+	} catch (ex) {
+		connectionStatus.localStorage = false;
 	}
+	try {
+		sessionStorage.setItem("sessionStorageAvailable", true);
+		connectionStatus.sessionStorage = true;
+	} catch (ex) {
+		connectionStatus.sessionStorage = false;
+	}
+	let startTime = 0;
+	let randomKey = 0;
+	const getRTT = function () {
+		randomKey = Math.random().toString(36).replace(/[^a-z]+/g, '');
+		startTime = new Date().getTime();
+		Meteor.call("Connection.sendConnectionStatus", randomKey);
+	};
+	ConnectionStatusCollection.find().observeChanges({
+		added: function (id, doc) {
+			if (doc.key === randomKey) {
+				connectionStatus.dbConnection.serverRTTtotal = (connectionStatus.dbConnection.serverRTTtotal + (new Date().getTime() - startTime));
+				connectionStatus.dbConnection.serverRTT = 1 / connectionStatus.dbConnection.currentCount * connectionStatus.dbConnection.serverRTTtotal;
+				Meteor.call("Connection.receivedConnectionStatus", randomKey);
+				if (connectionStatus.dbConnection.currentCount < connectionStatus.dbConnection.totalCount) {
+					connectionStatus.dbConnection.currentCount++;
+					setTimeout(getRTT, 200);
+				}
+				Session.set("connectionStatus", connectionStatus);
+			}
+		}
+	});
+	Session.set("connectionStatus", connectionStatus);
+	getRTT();
 
-	if (localData.getAllHashtags().length > 0) {
-		hashtagLib.setHashtagSplashscreen(new Splashscreen({
-			autostart: true,
-			templateName: "showHashtagsSplashscreen"
-		}));
-	}
 	HashtagsCollection.find().observeChanges({
 		added: function (id, doc) {
 			if (doc.hashtag === $("#hashtag-input-field").val()) {
@@ -54,6 +80,12 @@ Template.home.onRendered(function () {
 			}
 		}
 	});
+	if (localData.getAllHashtags().length > 0) {
+		hashtagLib.setHashtagSplashscreen(new Splashscreen({
+			autostart: true,
+			templateName: "showHashtagsSplashscreen"
+		}));
+	}
 
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemAbout);

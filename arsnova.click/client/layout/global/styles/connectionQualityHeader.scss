@@ -1,0 +1,35 @@
+
+#connectionQualityHeader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1100;
+  width: 100%;
+  height: 25px;
+  line-height: 25px;
+  font-size: 20px;
+
+  &.connectionPending {
+	background: grey;
+	color: white;
+  }
+  &.connectionOk {
+	background: green;
+	color: white;
+  }
+  &.connectionWarning {
+	background: orange;
+	color: white;
+  }
+  &.connectionError {
+	background: red;
+	color: white;
+  }
+
+  #detailsLink {
+	color: white;
+	cursor: pointer;
+	text-decoration: underline;
+	float: right;
+  }
+}

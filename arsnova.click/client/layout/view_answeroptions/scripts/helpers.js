@@ -106,5 +106,11 @@ Template.freeTextAnswerOptionTemplate.helpers({
 			{id: "config_use_keywords", textName: "view.answeroptions.free_text_question.config_use_keywords"},
 			{id: "config_use_punctuation", textName: "view.answeroptions.free_text_question.config_use_punctuation"}
 		];
+	},
+	answerText: function () {
+		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].getAnswerText();
 	}
 });

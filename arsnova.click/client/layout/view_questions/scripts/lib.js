@@ -53,13 +53,7 @@ function doesMarkdownSyntaxExist(questionText, syntaxStart, syntaxMiddle, syntax
 	return questionText.indexOf(syntaxEnd) != -1;
 }
 
-function questionContainsMarkdownSyntax(questionText) {
-	return !!(doesMarkdownSyntaxExist(questionText, '**', '**') || doesMarkdownSyntaxExist(questionText, '#', '#') || doesMarkdownSyntaxExist(questionText, '[', '](', ')') ||
-	doesMarkdownSyntaxExist(questionText, '- ') || doesMarkdownSyntaxExist(questionText, '1. ') || doesMarkdownSyntaxExist(questionText, '\\(', '\\)') ||
-	doesMarkdownSyntaxExist(questionText, '$$', '$$') || doesMarkdownSyntaxExist(questionText, '<hlcode>', '</hlcode>') || doesMarkdownSyntaxExist(questionText, '>'));
-}
-
-function questionTextLengthWithoutMarkdownSyntax(questionText) {
+function questionTextLengthWithoutMarkdownSyntax(questionText, trimWhiteSpaces = true) {
 	var questionTextLength = questionText.length;
 	if (doesMarkdownSyntaxExist(questionText, '**', '**')) {
 		questionTextLength -= 4;
@@ -88,8 +82,14 @@ function questionTextLengthWithoutMarkdownSyntax(questionText) {
 	if (doesMarkdownSyntaxExist(questionText, '>')) {
 		questionTextLength -= 4;
 	}
-	questionTextLength = questionText.replace(/ /g,"").length;
+	if (trimWhiteSpaces) {
+		questionTextLength = questionText.replace(/ /g,"").length;
+	}
 	return questionTextLength;
+}
+
+function questionContainsMarkdownSyntax(questionText) {
+	return questionText.length !== questionTextLengthWithoutMarkdownSyntax(questionText, false);
 }
 
 export var subscriptionHandler = null;

@@ -124,7 +124,6 @@ export function formatFreeTextSettingsButtons() {
 			questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].setConfig(event.target.id, $('#' + event.target.id).prop("checked"));
 			Session.set("questionGroup", questionItem);
 			localData.addHashtag(questionItem);
-			console.log(Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0]);
 		},
 		onInit: function (event) {
 			const item = $('.bootstrap-switch-id-' + event.target.id);

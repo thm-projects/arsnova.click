@@ -183,7 +183,8 @@
         "config_use_keywords": "Reihenfolge der Wörter beachten",
         "config_use_punctuation": "Satzzeichen in Antwort beachten",
         "onText": "Ja",
-        "offText": "Nein"
+        "offText": "Nein",
+        "text_placeholder": "Gib hier die Antwort ein"
       }
     },
     "choose_nickname": {

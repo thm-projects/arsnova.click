@@ -41,13 +41,7 @@ Meteor.methods({
 				const questionItem = questionGroup.questionList[i];
 				for (let j = 0; j < questionItem.answerOptionList.length; j++) {
 					const answerItem = questionItem.answerOptionList[j];
-					Meteor.call("AnswerOptionCollection.addOption", {
-						hashtag: questionGroup.hashtag,
-						questionIndex: questionItem.questionIndex,
-						answerText: answerItem.answerText,
-						answerOptionNumber: answerItem.answerOptionNumber,
-						isCorrect: answerItem.isCorrect
-					});
+					Meteor.call("AnswerOptionCollection.addOption", answerItem);
 				}
 			}
 		}

@@ -42,22 +42,6 @@ export class FreeTextQuestion extends AbstractQuestion {
 			this.getAnswerOptionList()[0].isValid();
 	}
 
-	/**
-	 * Gets the validation error reason from the question and all included answerOptions as a stackable array
-	 * @returns {Array} Contains an Object which holds the number of the current question and the reason why the validation has failed
-	 */
-	getValidationStackTrace () {
-		const parentStackTrace = super.getValidationStackTrace();
-		if (this.getAnswerOptionList().length === 0) {
-			parentStackTrace.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "no_answer_options_set"});
-		} else {
-			if (!this.getAnswerOptionList()[0].isValid()) {
-				$.merge(parentStackTrace, this.getAnswerOptionList()[0].getValidationStackTrace());
-			}
-		}
-		return parentStackTrace;
-	}
-
 	addAnswerOption (answerOption) {
 		if (typeof answerOption === "undefined" || !(answerOption instanceof FreeTextAnswerOption)) {
 			throw new Error("AnswerOptionType must match FreeTextAnswerOption, got: ", answerOption);

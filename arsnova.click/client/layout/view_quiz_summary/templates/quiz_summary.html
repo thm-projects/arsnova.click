@@ -19,16 +19,21 @@
                         <div class="col-xs-12">
                             <div class="answers">
                                 <div>
-                                    <h4>{{_ "view.quiz_summary.answer" count=2}}: </h4>
+                                    <h4>{{_ "view.quiz_summary.answer" count=this.getAnswerOptionList.length}}: </h4>
                                 </div>
                                 <div>
                                     {{#if isRangedQuestion typeName}}
-                                        <p>Mindestwert: {{getMinRange}}</p>
-                                        <p>Maximalwert: {{getMaxRange}}</p>
+                                        <p>{{_ "view.answeroptions.ranged_question.correct_value"}}: {{getCorrectValue}}</p>
+                                        <p>{{_ "view.answeroptions.ranged_question.min_range"}}: {{getMinRange}}</p>
+                                        <p>{{_ "view.answeroptions.ranged_question.max_range"}}: {{getMaxRange}}</p>
                                     {{else}}
-                                        {{#each this.getAnswerOptionList}}
-                                            <p>{{_ "view.quiz_summary.answer" count=1}} {{getNormalizedIndex this.getAnswerOptionNumber}}{{#unless isVotingQuestion ../typeName}} ({{_ (getIsCorrectAnswerOption this.getIsCorrect)}}){{/unless}}: {{this.getAnswerText}}</p>
-                                        {{/each}}
+                                        {{#if isFreeTextQuestion typeName}}
+                                            <p>{{this.getAnswerOptionList.[0].getAnswerText}}</p>
+                                        {{else}}
+                                            {{#each this.getAnswerOptionList}}
+                                                <p>{{_ "view.quiz_summary.answer" count=1}} {{getNormalizedIndex this.getAnswerOptionNumber}}{{#unless isVotingQuestion ../typeName}} ({{_ (getIsCorrectAnswerOption this.getIsCorrect)}}){{/unless}}: {{this.getAnswerText}}</p>
+                                            {{/each}}
+                                        {{/if}}
                                     {{/if}}
                                 </div>
                             </div>

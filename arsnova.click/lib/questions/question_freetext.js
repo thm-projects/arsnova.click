@@ -15,7 +15,11 @@ export class FreeTextQuestion extends AbstractQuestion {
 		}
 		super(options);
 		if (options.answerOptionList[0] instanceof Object) {
-			this.addAnswerOption(new FreeTextAnswerOption(options.answerOptionList[0]));
+			if (options.answerOptionList[0].type === "FreeTextAnswerOption") {
+				this.addAnswerOption(new FreeTextAnswerOption(options.answerOptionList[0]));
+			} else {
+				this.addDefaultAnswerOption();
+			}
 		}
 	}
 

@@ -17,7 +17,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 */
 	constructor (options) {
 		if (typeof options.type !== "undefined" && options.type !== TYPE) {
-			throw new TypeError("Invalid construction type while creating new " + TYPE);
+			throw new TypeError("Invalid construction type while creating new " + TYPE + ", got: " + options.type);
 		}
 		if (typeof options.configCaseSensitive === "undefined" ||
 			typeof options.configTrimWhitespaces === "undefined" ||

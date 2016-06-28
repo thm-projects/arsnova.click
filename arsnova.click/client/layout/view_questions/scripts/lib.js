@@ -117,11 +117,11 @@ export function addQuestion(index) {
 			questionItem.getQuestionList()[index].typeName() === "TrueFalseSingleChoiceQuestion") {
 			questionItem.getQuestionList()[index].removeAllAnswerOptions();
 		}
-		if (questionType === "FreeTextQuestion") {
-			questionItem.getQuestionList()[index].removeAllAnswerOptions();
-			questionItem.getQuestionList()[index].addDefaultAnswerOption();
+		switch (questionItem.getQuestionList()[index].typeName()) {
+			case "FreeTextQuestion":
+				questionItem.getQuestionList()[index].removeAllAnswerOptions();
+				break;
 		}
-		console.log(questionType, questionItem)
 		const serialized = questionItem.getQuestionList()[index].serialize();
 		delete serialized.type;
 		questionItem.addQuestion(questionReflection[questionType](serialized), index);

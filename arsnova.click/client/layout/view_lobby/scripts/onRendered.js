@@ -47,8 +47,6 @@ Template.memberlist.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemTheme);
 	}
 	footerElements.calculateFooter();
-
-	console.log(QuestionGroupCollection.find().fetch(), AnswerOptionCollection.find().fetch());
 });
 
 Template.learner.onRendered(function () {

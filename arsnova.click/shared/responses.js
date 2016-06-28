@@ -101,7 +101,6 @@ Meteor.methods({
 				answerOptionNumber: responseDoc.answerOptionNumber
 			});
 		}
-		console.log(foundAnswerBase, AnswerOptionCollection.find().fetch(), hashtag, responseDoc.questionIndex, responseDoc.answerOptionNumber);
 		if (!foundAnswerBase) {
 			throw new Meteor.Error('ResponsesCollection.addResponse', 'response_type_not_found');
 		}

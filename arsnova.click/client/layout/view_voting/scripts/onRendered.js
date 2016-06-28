@@ -20,14 +20,19 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
-import {formatAnswerButtons, startCountdown} from './lib.js';
+import {formatAnswerButtons, formatFreeTextArea, startCountdown} from './lib.js';
 
 Template.votingview.onRendered(function () {
-	if (QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type !== "RangedQuestion") {
+	if (QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type !== "RangedQuestion" &&
+		QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].answerOptionList[0].type !== "FreeTextAnswerOption") {
 		$(window).resize(function () {
 			formatAnswerButtons();
 		});
 		formatAnswerButtons();
+	}
+
+	if (QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].answerOptionList[0].type === "FreeTextAnswerOption") {
+		formatFreeTextArea();
 	}
 
 	footerElements.removeFooterElements();

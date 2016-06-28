@@ -38,16 +38,18 @@ Template.votingview.events({
 
 		let hasEmptyAnswers = true;
 
-		AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
-			if (!answerOption.answerText) {
-				answerOption.answerText = "";
-			} else {
-				hasEmptyAnswers = false;
-			}
+		if (questionDoc.questionList[EventManagerCollection.findOne().questionIndex].type !== "FreeTextQuestion") {
+			AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
+				if (!answerOption.answerText) {
+					answerOption.answerText = "";
+				} else {
+					hasEmptyAnswers = false;
+				}
 
-			answerContent += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
-			answerContent += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
-		});
+				answerContent += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+				answerContent += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+			});
+		}
 
 		if (hasEmptyAnswers) {
 			answerContent = "";

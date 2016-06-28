@@ -50,7 +50,9 @@
 }
 
 .rangedAnswerOptions {
-	.rangedValues {
+  	padding-bottom: 30px;
+
+  	.rangedValues {
 		text-align: center;
 		margin-bottom: 30px;
 		input[type="number"] {

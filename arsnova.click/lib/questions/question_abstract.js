@@ -1,6 +1,5 @@
 import {AbstractAnswerOption} from '../answeroptions/answeroption_abstract.js';
 import {DefaultAnswerOption} from '../answeroptions/answeroption_default.js';
-import {FreeTextAnswerOption} from '../answeroptions/answeroption_freetext.js';
 
 const hashtag = Symbol("hashtag");
 const questionText = Symbol("questionText");

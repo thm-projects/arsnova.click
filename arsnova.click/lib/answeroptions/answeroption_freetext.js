@@ -83,7 +83,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 				configTitle: "view.answeroptions.free_text_question.config_use_punctuation",
 				configEnabled: "view.answeroptions.free_text_question." + (this.getConfigUsePunctuation() ? "onText" : "offText")
 			}
-		]
+		];
 	}
 
 	/**

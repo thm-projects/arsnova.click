@@ -18,8 +18,6 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {MemberListCollection} from '/lib/member_list/collection.js';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";

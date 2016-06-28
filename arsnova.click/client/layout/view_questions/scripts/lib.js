@@ -113,11 +113,9 @@ export function addQuestion(index) {
 
 	// Check if we need to change the type of the question
 	if (questionItem.getQuestionList()[index].typeName() !== questionType) {
-		if (questionItem.getQuestionList()[index].typeName() === "YesNoSingleChoiceQuestion" ||
-			questionItem.getQuestionList()[index].typeName() === "TrueFalseSingleChoiceQuestion") {
-			questionItem.getQuestionList()[index].removeAllAnswerOptions();
-		}
 		switch (questionItem.getQuestionList()[index].typeName()) {
+			case "YesNoSingleChoiceQuestion":
+			case "TrueFalseSingleChoiceQuestion":
 			case "FreeTextQuestion":
 				questionItem.getQuestionList()[index].removeAllAnswerOptions();
 				break;

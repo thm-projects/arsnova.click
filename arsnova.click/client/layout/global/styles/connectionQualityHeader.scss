@@ -9,25 +9,7 @@
   line-height: 25px;
   font-size: 20px;
 
-  &.connectionPending {
-	background: grey;
-	color: white;
-  }
-  &.connectionOk {
-	background: green;
-	color: white;
-  }
-  &.connectionWarning {
-	background: orange;
-	color: white;
-  }
-  &.connectionError {
-	background: red;
-	color: white;
-  }
-
   #detailsLink {
-	color: white;
 	cursor: pointer;
 	text-decoration: underline;
 	float: right;

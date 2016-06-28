@@ -122,6 +122,16 @@
 	$bg_progress-bar: white;
 	$fg_progress-bar: black;
 
+	$bg-connection-quality-header_connection-pending: grey;
+	$fg-connection-quality-header_connection-pending: white;
+	$bg-connection-quality-header_connection-ok: green;
+	$fg-connection-quality-header_connection-ok: white;
+	$bg-connection-quality-header_connection-warning: orange;
+	$fg-connection-quality-header_connection-warning: white;
+	$bg-connection-quality-header_connection-error: red;
+	$fg-connection-quality-header_connection-error: white;
+	$fg-connection-quality-header_details-link: white;
+
 	$splash-screen-header-color: #2f4f4f;
 	$splash-screen-body-color: #2f4f4f;
 	$splashscreen-background-color: #98fb98;
@@ -1913,6 +1923,28 @@
 			}
 			ul {
 				color: $fg-quiz-summary-UL;
+			}
+		}
+		#connectionQualityHeader {
+			&.connectionPending {
+				background: $bg-connection-quality-header_connection-pending;
+				color: $fg-connection-quality-header_connection-pending;
+			}
+			&.connectionOk {
+				background: $bg-connection-quality-header_connection-ok;
+				color: $fg-connection-quality-header_connection-ok;
+			}
+			&.connectionWarning {
+				background: $bg-connection-quality-header_connection-warning;
+				color: $fg-connection-quality-header_connection-warning;
+			}
+			&.connectionError {
+				background: $bg-connection-quality-header_connection-error;
+				color: $fg-connection-quality-header_connection-error;
+			}
+
+			#detailsLink {
+			  	color: $fg-connection-quality-header_details-link;
 			}
 		}
 		.answer-row {

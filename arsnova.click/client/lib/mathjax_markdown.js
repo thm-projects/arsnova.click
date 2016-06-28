@@ -191,9 +191,9 @@ export const mathjaxMarkdown = {
 		var size = '', alignment = 'center';
 
 		if (!isVideoElement) {
-			return '<div style="text-align:' + alignment + '">' + // <a target="_blank" class="hyperlink" href="' + href + '">
+			return '<div style="text-align:' + alignment + '">' +
 				'<img class="resizeableImage img-responsive" title="' + text + '" src="' + href + '" alt="' + text + '" style=' + size + '>' +
-				'</div>'; // </a>
+				'</div>';
 		}
 
 		return '<img class="resizeableImage" title="' + text + '" src="' + href + '" alt="' + text + '" style="width: 100%">';
@@ -225,9 +225,9 @@ export const mathjaxMarkdown = {
 					href.match(delimiters.videoIdDel)[2];
 
 				var title = element.match(delimiters.titleDel)[1];
-				return '<p class="videoImageParagraph"><a target="_blank" class="hyperlink" href="' + delimiters.videoURI +
-					videoId + '"><span class="videoImageContainer" id="' + videoId + '" accesskey="' +
-					delimiters.accessKey + '" title="' + title + '">' + text + '</span></a></p>';
+				return '<p class="videoImageParagraph">' +
+							'<span class="videoImageContainer" id="' + videoId + '" accesskey="' + delimiters.accessKey + '" title="' + title + '">' + text + '</span>' +
+					'</p>';
 			});
 		};
 

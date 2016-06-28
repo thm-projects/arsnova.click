@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {showFullscreenPicture} from './lib.js';
+import {showFullscreenPicture, showVideo} from './lib.js';
 
 Template.splashscreen.events({
 	"click #btn-hidePreviewModal": function (event) {
@@ -26,13 +26,24 @@ Template.splashscreen.events({
 });
 
 Template.questionPreviewSplashscreen.events({
-	"click .resizeableImage": function (event) {
+	"click .img-responsive": function (event) {
 		showFullscreenPicture(event);
+	},
+	"click .videoImageParagraph": function (event) {
+		var targetElement = event.target;
+		if (targetElement.localName === "span") {
+			targetElement = event.target.firstChild;
+		}
+
+		showVideo({id: targetElement.offsetParent.id, accessKey: targetElement.offsetParent.accessKey, title: targetElement.offsetParent.title, width: targetElement.clientWidth, height: targetElement.clientHeight});
 	}
 });
 
 Template.readingConfirmedSplashscreen.events({
-	"click .resizeableImage": function (event) {
+	"click .img-responsive": function (event) {
 		showFullscreenPicture(event);
+	},
+	"click .videoImageParagraph": function (event) {
+		showVideo({id: event.target.offsetParent.id, accessKey: event.target.offsetParent.accessKey, title: event.target.offsetParent.title, width: event.target.clientWidth, height: event.target.clientHeight});
 	}
 });

@@ -28,7 +28,7 @@ export class AbstractChoiceQuestion extends AbstractQuestion {
 			}
 		} else {
 			for (let i = 0; i < options.answerOptionList.length; i++) {
-				if (options.answerOptionList[i] instanceof AbstractChoiceQuestion) {
+				if (options.answerOptionList[i] instanceof DefaultAnswerOption) {
 					this.addAnswerOption(options.answerOptionList[i]);
 				} else {
 					if (options.answerOptionList[i] instanceof Object) {

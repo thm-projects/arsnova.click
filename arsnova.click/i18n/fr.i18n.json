@@ -232,6 +232,8 @@
       "edit": "Modifier",
       "preview": "Aperçu",
       "single_choice_question": "Question choix simple (une seule réponse est juste)",
+      "single_choice_question_yes_no": "Oui-Aucune question à choix unique",
+      "single_choice_question_true_false": "Question Vrai-Faux Single-Choix",
       "multiple_choice_question": "Question choix multiple (une ou plusieurs réponses sont justes)",
       "survey_question": "Sondage (Réponses ne sont ni vrai ni fausse)",
       "ranged_question": "Question d'éstimation (Réponses comprises dans la fourchette donné sont justes)"
@@ -411,6 +413,18 @@
           "invalid_data": "Les données importées sont caduques ou défecteuses!",
           "invalid_input_data": "Les données saisies est soit invalide ou l'accès est refusé!"
         }
+      }
+    }
+  },
+  "lib": {
+    "questions": {
+      "question_choice_single_yes_no": {
+        "yes": "Oui",
+        "no": "Non"
+      },
+      "question_choice_single_true_false": {
+        "true": "Vrai",
+        "false": "Faux"
       }
     }
   }

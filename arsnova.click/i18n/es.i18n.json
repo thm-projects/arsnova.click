@@ -232,6 +232,8 @@
       "edit": "Editar",
       "preview": "Previsualizar",
       "single_choice_question": "Pregunta de selección única (solo una respuesta es la correcta)",
+      "single_choice_question_yes_no": "Sí-No se trata de una sola elección",
+      "single_choice_question_true_false": "Verdadero-Falso de opción única pregunta",
       "multiple_choice_question": "Pregunta de selección múltiple (una o más respuestas son correctas)",
       "survey_question": "Encuesta (No hay respuestas correctas ni incorrectas)",
       "ranged_question": "Pregunta de estimación (Respuestas dentro del área predeterminada son correctas)"
@@ -410,6 +412,18 @@
           "session_closed": "Esta ronda ha sido finalizada",
           "invalid_data": "¡La importación de datos es invalida o incorrecta!"
         }
+      }
+    }
+  },
+  "lib": {
+    "questions": {
+      "question_choice_single_yes_no": {
+        "yes": "Sí",
+        "no": "No"
+      },
+      "question_choice_single_true_false": {
+        "true": "Verdadero",
+        "false": "Falso"
       }
     }
   }

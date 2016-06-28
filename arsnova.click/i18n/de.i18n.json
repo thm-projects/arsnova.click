@@ -234,6 +234,8 @@
       "edit": "Bearbeiten",
       "preview": "Vorschau",
       "single_choice_question": "Single-Choice-Frage (nur eine Antwort ist richtig)",
+      "single_choice_question_yes_no": "Ja-Nein-Frage (nur eine Antwort ist richtig / Antwortoptionen sind auf Ja und Nein vordefiniert)",
+      "single_choice_question_true_false": "Wahr-Falsch-Frage (nur eine Antwort ist richtig / Antwortoptionen sind auf Wahr und Falsch vordefiniert)",
       "multiple_choice_question": "Multiple-Choice-Frage (eine oder mehrere Antworten sind richtig)",
       "survey_question": "Umfrage (Antworten sind weder richtig noch falsch)",
       "ranged_question": "Schätzfrage (Antworten im vorgegebenen Bereich sind richtig)"
@@ -413,6 +415,18 @@
           "invalid_data": "Die zu importierenden Daten sind fehlerhaft!",
           "invalid_input_data": "Die eingegebenen Daten sind ungültig oder fehlerhaft!"
         }
+      }
+    }
+  },
+  "lib": {
+    "questions": {
+      "question_choice_single_yes_no": {
+        "yes": "Ja",
+        "no": "Nein"
+      },
+      "question_choice_single_true_false": {
+        "true": "Wahr",
+        "false": "Falsch"
       }
     }
   }

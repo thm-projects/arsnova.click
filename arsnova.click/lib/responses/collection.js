@@ -28,9 +28,12 @@ export const responseTimeSchema = {
 	type: Number,
 	min: 0
 };
-export const inputValueSchema = {
+export const rangedInputValueSchema = {
 	type: Number,
 	min: 0
+};
+export const freeTextInputValueSchema = {
+	type: String
 };
 export const responsesCollectionSchema = new SimpleSchema({
 	hashtag: {
@@ -46,8 +49,12 @@ export const responsesCollectionSchema = new SimpleSchema({
 		type: answerOptionNumberSchema,
 		optional: true
 	},
-	inputValue: {
-		type: inputValueSchema,
+	rangedInputValue: {
+		type: rangedInputValueSchema,
+		optional: true
+	},
+	freeTextInputValue: {
+		type: freeTextInputValueSchema,
 		optional: true
 	},
 	responseTime: {

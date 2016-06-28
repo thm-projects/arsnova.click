@@ -18,7 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {AnswerOptionCollection, answerOptionNumberSchema} from '/lib/answeroptions/collection.js';
-import {ResponsesCollection, inputValueSchema} from '/lib/responses/collection.js';
+import {ResponsesCollection, rangedInputValueSchema, freeTextInputValueSchema} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {userNickSchema} from '/lib/member_list/collection.js';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
@@ -34,13 +34,19 @@ Meteor.methods({
 
 		const responseValueObject = {};
 		if (typeof responseDoc.answerOptionNumber === "undefined") {
-			if (typeof responseDoc.inputValue === "undefined") {
-				throw new Meteor.Error("ResponsesCollection.addResponse", "invalid_response_value");
-			} else {
+			if (typeof responseDoc.rangedInputValue !== "undefined") {
 				new SimpleSchema({
-					inputValue: inputValueSchema
-				}).validate({inputValue: responseDoc.inputValue});
-				responseValueObject.inputValue = responseDoc.inputValue;
+					rangedInputValue: rangedInputValueSchema
+				}).validate({rangedInputValue: responseDoc.rangedInputValue});
+				responseValueObject.rangedInputValue = responseDoc.rangedInputValue;
+			} else if (typeof responseDoc.freeTextInputValue !== "undefined") {
+				new SimpleSchema({
+					freeTextInputValue: freeTextInputValueSchema
+				}).validate({freeTextInputValue: responseDoc.freeTextInputValue});
+				responseValueObject.freeTextInputValue = responseDoc.freeTextInputValue;
+				responseValueObject.answerOptionNumber = 0;
+			} else {
+				throw new Meteor.Error("ResponsesCollection.addResponse", "invalid_response_value");
 			}
 		} else {
 			new SimpleSchema({
@@ -56,8 +62,10 @@ Meteor.methods({
 			questionIndex: responseDoc.questionIndex,
 			userNick: responseDoc.userNick
 		};
-		if (typeof responseValueObject.inputValue !== "undefined") {
-			duplicateResponseSearch.inputValue = responseValueObject.inputValue;
+		if (typeof responseValueObject.rangedInputValue !== "undefined") {
+			duplicateResponseSearch.rangedInputValue = responseValueObject.rangedInputValue;
+		} else if (typeof responseValueObject.freeTextInputValue !== "undefined") {
+			duplicateResponseSearch.freeTextInputValue = responseValueObject.freeTextInputValue;
 		} else {
 			duplicateResponseSearch.answerOptionNumber = responseValueObject.answerOptionNumber;
 		}
@@ -85,6 +93,7 @@ Meteor.methods({
 			// We have a ranged input here - check if the values are set in the question
 			foundAnswerBase = typeof questionItem.rangeMin !== "undefined" && typeof questionItem.rangeMax !== "undefined";
 		} else {
+			// This will fetch either DefaultAnswerOptions and FreeTextAnswerOptions matching the current question
 			foundAnswerBase = AnswerOptionCollection.findOne({
 				hashtag: hashtag,
 				questionIndex: responseDoc.questionIndex,

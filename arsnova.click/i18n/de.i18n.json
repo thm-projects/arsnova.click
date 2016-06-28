@@ -178,12 +178,12 @@
       },
       "free_text_question": {
         "title": "Freitext Antwort",
-        "config_case_sensitive": "Groß- und Kleinschreibung berücksichtigen",
-        "config_trim_whitespaces": "Ignoriere Leerzeichen",
-        "config_use_keywords": "Ignoriere Reihenfolge der Wörter",
-        "config_use_punctuation": "Interpunktion berücksichtigen",
-        "onText": "Aktiviert",
-        "offText": "Deaktiviert"
+        "config_case_sensitive": "Groß- und Kleinschreibung beachten",
+        "config_trim_whitespaces": "Leerzeichen in Antwort beachten",
+        "config_use_keywords": "Reihenfolge der Wörter beachten",
+        "config_use_punctuation": "Satzzeichen in Antwort beachten",
+        "onText": "Ja",
+        "offText": "Nein"
       }
     },
     "choose_nickname": {
@@ -273,7 +273,7 @@
       "multiple_choice_question": "Multiple-Choice-Frage (eine oder mehrere Antworten sind richtig)",
       "survey_question": "Umfrage (Antworten sind weder richtig noch falsch)",
       "ranged_question": "Schätzfrage (Antworten im vorgegebenen Bereich sind richtig)",
-      "free_text_question": "Freitextfrage (Antwort ist ein Blocktext)"
+      "free_text_question": "Kurzantwort-Frage (Antwort ist bei Übereinstimmung mit der Musterantwort richtig)"
     },
     "quiz_summary": {
       "title": "4/4: Zusammenfassung",

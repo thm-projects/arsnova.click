@@ -1,7 +1,7 @@
 import {EJSON} from 'meteor/ejson';
-import {AbstractQuestion} from './question_abstract.js';
+import {AbstractChoiceQuestion} from './question_choice_abstract.js';
 
-export class SurveyQuestion extends AbstractQuestion {
+export class SurveyQuestion extends AbstractChoiceQuestion {
 
 	/**
 	 * Constructs a RangedQuestion instance

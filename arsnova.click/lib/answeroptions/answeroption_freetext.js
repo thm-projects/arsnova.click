@@ -33,6 +33,35 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	}
 
 	/**
+	 * Sets a specified configuration value
+	 * @param configIdentifier {String} The identifier of the config which shall be changed. Must match the config Symbol in snake case
+	 * @param configValue {Boolean} The new value of the configuration
+	 * @throws ConfigNotFoundError If the specified configIdentifier does not exist
+	 * @throws InvalidParameterError If the specified configValue is not of type Boolean
+	 */
+	setConfig (configIdentifier, configValue) {
+		if (typeof configValue !== "boolean") {
+			throw new Error("Invalid Parameter");
+		}
+		switch (configIdentifier) {
+			case "config_case_sensitive_switch":
+				this.setConfigCaseSensitive(configValue);
+				break;
+			case "config_trim_whitespaces_switch":
+				this.setConfigTrimWhitespaces(configValue);
+				break;
+			case "config_use_keywords_switch":
+				this.setConfigUseKeywords(configValue);
+				break;
+			case "config_use_punctuation_switch":
+				this.setConfigUsePunctuation(configValue);
+				break;
+			default:
+				throw Error("Config not found");
+		}
+	}
+
+	/**
 	 * Returns the currently set configuration if the match of the correct answer is case sensitive
 	 * @returns {Boolean} The currently set configuration for the case sensitive check
 	 */
@@ -52,15 +81,15 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	}
 
 	/**
-	 * Returns the currently set configuration if the match of the correct answer is case sensitive
-	 * @returns {Boolean} The currently set configuration for the case sensitive check
+	 * Returns the currently set configuration if the match of the correct answer shall trim all whitespaces in the given answer
+	 * @returns {Boolean} The currently set configuration for the trim whitespaces check
 	 */
 	getConfigTrimWhitespaces () {
 		return this[configTrimWhitespaces];
 	}
 
 	/**
-	 * Sets the currently set configuration if the match of the correct answer is case sensitive
+	 * Sets the currently set configuration if the match of the correct answer shall trim all whitespaces in the given answer
 	 * @param {Boolean} newVal The new configuration setting
 	 */
 	setConfigTrimWhitespaces (newVal) {
@@ -71,15 +100,15 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	}
 
 	/**
-	 * Returns the currently set configuration if the match of the correct answer is case sensitive
-	 * @returns {Boolean} The currently set configuration for the case sensitive check
+	 * Returns the currently set configuration if the match of the correct answer shall only check the keywords
+	 * @returns {Boolean} The currently set configuration if the answer should only check keywords
 	 */
 	getConfigUseKeywords () {
 		return this[configUseKeywords];
 	}
 
 	/**
-	 * Sets the currently set configuration if the match of the correct answer is case sensitive
+	 * Sets the currently set configuration if the match of the correct answer shall only check the keywords
 	 * @param {Boolean} newVal The new configuration setting
 	 */
 	setConfigUseKeywords (newVal) {
@@ -90,15 +119,15 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	}
 
 	/**
-	 * Returns the currently set configuration if the match of the correct answer is case sensitive
-	 * @returns {Boolean} The currently set configuration for the case sensitive check
+	 * Returns the currently set configuration if the match of the correct answer shall check the punctuation aswell
+	 * @returns {Boolean} The currently set configuration for the use punctuation check
 	 */
 	getConfigUsePunctuation () {
 		return this[configUsePunctuation];
 	}
 
 	/**
-	 * Sets the currently set configuration if the match of the correct answer is case sensitive
+	 * Sets the currently set configuration if the match of the correct answer shall check the punctuation aswell
 	 * @param {Boolean} newVal The new configuration setting
 	 */
 	setConfigUsePunctuation (newVal) {
@@ -140,7 +169,10 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	equals (answerOption) {
 		return super.equals(answerOption) &&
 			answerOption instanceof FreeTextAnswerOption &&
-			answerOption.getIsCorrect() === this.getIsCorrect();
+			answerOption.getConfigCaseSensitive() === this.getConfigCaseSensitive() &&
+			answerOption.getConfigTrimWhitespaces() === this.getConfigTrimWhitespaces() &&
+			answerOption.getConfigUseKeywords() === this.getConfigUseKeywords() &&
+			answerOption.getConfigUsePunctuation() === this.getConfigUsePunctuation();
 	}
 
 	/**

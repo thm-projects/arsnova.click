@@ -124,15 +124,19 @@ export function addQuestion(index) {
 		console.log(questionType, questionItem)
 		const serialized = questionItem.getQuestionList()[index].serialize();
 		delete serialized.type;
-		if (questionType === "RangedQuestion") {
-			serialized.timer = "10";
-		}
 		questionItem.addQuestion(questionReflection[questionType](serialized), index);
-		// Check if we changed to the survey question -> remove isCorrect values then
-		if (questionType === "SurveyQuestion") {
-			questionItem.getQuestionList()[index].getAnswerOptionList().forEach(function (answerOption) {
-				answerOption.setIsCorrect(false);
-			});
+		switch (questionType) {
+			case "RangedQuestion":
+				questionItem.getQuestionList()[index].setTimer(10);
+				break;
+			case "FreeTextQuestion":
+				questionItem.getQuestionList()[index].addDefaultAnswerOption();
+				break;
+			case "SurveyQuestion":
+				questionItem.getQuestionList()[index].getAnswerOptionList().forEach(function (answerOption) {
+					answerOption.setIsCorrect(false);
+				});
+				break;
 		}
 	}
 	questionItem.getQuestionList()[index].setQuestionText(questionText);

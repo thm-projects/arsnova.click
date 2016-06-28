@@ -97,3 +97,7 @@ Template.defaultAnswerOptionTemplate.events({
 		parseSingleAnswerOptionInput(EventManagerCollection.findOne().questionIndex, $(event.currentTarget).attr("id").replace("answerOptionText_Number",""));
 	}
 });
+
+Template.freeTextAnswerOptionTemplate.events({
+
+});

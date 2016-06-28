@@ -14,7 +14,9 @@ export class FreeTextQuestion extends AbstractQuestion {
 			throw new TypeError("Invalid construction type while creating new FreeTextQuestion");
 		}
 		super(options);
-		this.removeAllAnswerOptions();
+		if (options.answerOptionList[0] instanceof Object) {
+			this.addAnswerOption(new FreeTextAnswerOption(options.answerOptionList[0]));
+		}
 	}
 
 	/**
@@ -57,20 +59,10 @@ export class FreeTextQuestion extends AbstractQuestion {
 	}
 
 	addAnswerOption (answerOption) {
-		if (typeof answerOption !== FreeTextAnswerOption) {
-			answerOption = new FreeTextAnswerOption({
-				hashtag: answerOption.getHashtag(),
-				questionIndex: answerOption.getQuestionIndex(),
-				answerText: "",
-				answerOptionNumber: 0,
-				configCaseSensitive: false,
-				configTrimWhitespaces: false,
-				configUseKeywords: false,
-				configUsePunctuation: false
-			});
+		if (typeof answerOption === "undefined" || !(answerOption instanceof FreeTextAnswerOption)) {
+			throw new Error("AnswerOptionType must match FreeTextAnswerOption, got: ", answerOption);
 		}
-		this.removeAllAnswerOptions();
-		super.addAnswerOption(answerOption);
+		super.addAnswerOption(answerOption, 0);
 	}
 
 	/**

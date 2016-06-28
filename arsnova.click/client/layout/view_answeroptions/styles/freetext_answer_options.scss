@@ -34,6 +34,13 @@
 	  outline: 0;
 	  box-shadow: none;
 	  float: right;
+
+	  .bootstrap-switch-container {
+		display: inline-flex;
+	  }
+	  .bootstrap-switch-label {
+		margin-top: 0;
+	  }
 	}
   }
 

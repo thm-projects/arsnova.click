@@ -1,4 +1,5 @@
 import {AbstractQuestion} from './question_abstract.js';
+import {DefaultAnswerOption} from '../answeroptions/answeroption_default.js';
 
 export class AbstractChoiceQuestion extends AbstractQuestion {
 
@@ -12,6 +13,31 @@ export class AbstractChoiceQuestion extends AbstractQuestion {
 		super(options);
 		if (this.constructor === AbstractChoiceQuestion) {
 			throw new TypeError("Cannot construct Abstract instances directly");
+		}
+		if (typeof options.answerOptionList === "undefined" || options.answerOptionList.length === 0) {
+			for (let i = 0; i < 4; i++) {
+				this.addAnswerOption(
+					new DefaultAnswerOption({
+						hashtag: options.hashtag,
+						questionIndex: options.questionIndex,
+						answerText: "",
+						answerOptionNumber: i,
+						isCorrect: false
+					})
+				);
+			}
+		} else {
+			for (let i = 0; i < options.answerOptionList.length; i++) {
+				if (options.answerOptionList[i] instanceof AbstractChoiceQuestion) {
+					this.addAnswerOption(options.answerOptionList[i]);
+				} else {
+					if (options.answerOptionList[i] instanceof Object) {
+						this.addAnswerOption(new DefaultAnswerOption(options.answerOptionList[i]));
+					} else {
+						throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
+					}
+				}
+			}
 		}
 	}
 

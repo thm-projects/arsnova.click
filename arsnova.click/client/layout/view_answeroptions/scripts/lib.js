@@ -121,18 +121,10 @@ export function formatFreeTextSettingsButtons() {
 		onSwitchChange: function (event, state) {
 			const item = $('.bootstrap-switch-id-' + event.target.id);
 			const questionItem = Session.get("questionGroup");
-			const answerlist = questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex];
-			if (state) {
-				item.find('.bootstrap-switch-handle-off').addClass("hiddenImportant");
-				item.find(".bootstrap-switch-container").css({width: "auto"});
-				answerlist.getAnswerOptionList()[event.target.id.replace("answerOption-","")].setIsCorrect(true);
-			} else {
-				item.find('.bootstrap-switch-handle-off').removeClass("hiddenImportant");
-				item.find(".bootstrap-switch-container").css({width: "auto"});
-				answerlist.getAnswerOptionList()[event.target.id.replace("answerOption-","")].setIsCorrect(false);
-			}
+			questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].setConfig(event.target.id, $('#' + event.target.id).prop("checked"));
 			Session.set("questionGroup", questionItem);
-			localData.addHashtag(Session.get("questionGroup"));
+			localData.addHashtag(questionItem);
+			console.log(Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0]);
 		},
 		onInit: function (event) {
 			const item = $('.bootstrap-switch-id-' + event.target.id);

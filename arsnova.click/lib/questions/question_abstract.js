@@ -31,38 +31,6 @@ export class AbstractQuestion {
 		this[startTime] = options.startTime;
 		this[questionIndex] = options.questionIndex;
 		this[answerOptionList] = [];
-		if (typeof options.answerOptionList === "undefined" || options.answerOptionList.length === 0) {
-			for (let i = 0; i < 4; i++) {
-				this.addAnswerOption(
-					new DefaultAnswerOption({
-						hashtag: options.hashtag,
-						questionIndex: options.questionIndex,
-						answerText: "",
-						answerOptionNumber: i,
-						isCorrect: false
-					})
-				);
-			}
-		} else {
-			for (let i = 0; i < options.answerOptionList.length; i++) {
-				if (options.answerOptionList[i] instanceof AbstractAnswerOption) {
-					this.addAnswerOption(options.answerOptionList[i]);
-				} else {
-					if (options.answerOptionList[i] instanceof Object) {
-						switch (options.answerOptionList[i].type) {
-							case "FreeTextAnswerOption":
-								this.addAnswerOption(new FreeTextAnswerOption(options.answerOptionList[i]));
-								break;
-							case "DefaultAnswerOption":
-								this.addAnswerOption(new DefaultAnswerOption(options.answerOptionList[i]));
-								break;
-						}
-					} else {
-						throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
-					}
-				}
-			}
-		}
 	}
 
 	/**

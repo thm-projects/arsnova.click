@@ -142,7 +142,7 @@
         "show_result": "Details",
         "pending": "Pending...",
         "finished_with_errors": "Finished with errors",
-        "finished_with_warning": "Finished with warnings",
+        "finished_with_warnings": "Finished with warnings",
         "finished_without_warnings": "Successful",
         "websocket_status": {
           "connected": "Connected",

@@ -27,6 +27,8 @@ Template.createAnswerOptions.helpers({
 		}
 		switch (Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName()) {
 			case "SingleChoiceQuestion":
+			case "YesNoSingleChoiceQuestion":
+			case "TrueFalseSingleChoiceQuestion":
 			case "MultipleChoiceQuestion":
 			case "SurveyQuestion":
 				return Template.defaultAnswerOptionTemplate;
@@ -61,6 +63,15 @@ Template.defaultAnswerOptionTemplate.helpers({
 			return;
 		}
 		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SurveyQuestion";
+	},
+	isSpecialSingleChoiceQuestion: function () {
+		switch (Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName()) {
+			case "YesNoSingleChoiceQuestion":
+			case "TrueFalseSingleChoiceQuestion":
+				return true;
+			default:
+				return false;
+		}
 	}
 });
 

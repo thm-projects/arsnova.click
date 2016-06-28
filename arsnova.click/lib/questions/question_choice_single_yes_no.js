@@ -1,4 +1,5 @@
 import {EJSON} from 'meteor/ejson';
+import {TAPi18n} from 'meteor/tap:i18n';
 import {SingleChoiceQuestion} from './question_choice_single.js';
 import {DefaultAnswerOption} from '../answeroptions/answeroption_default.js';
 
@@ -13,22 +14,25 @@ export class YesNoSingleChoiceQuestion extends SingleChoiceQuestion {
 		if (typeof options.type !== "undefined" && options.type !== "YesNoSingleChoiceQuestion") {
 			throw new TypeError("Invalid construction type while creating new YesNoSingleChoiceQuestion");
 		}
-		options.answerOptionList = [
-			new DefaultAnswerOption({
-				hashtag: options.hashtag,
-				questionIndex: options.questionIndex,
-				answerText: "lib.questions.question_choice_single_yes_no.yes",
-				answerOptionNumber: 0,
-				isCorrect: true
-			}),
-			new DefaultAnswerOption({
-				hashtag: options.hashtag,
-				questionIndex: options.questionIndex,
-				answerText: "lib.questions.question_choice_single_yes_no.no",
-				answerOptionNumber: 1,
-				isCorrect: false
-			})
-		];
+		if (options.type !== "YesNoSingleChoiceQuestion") {
+			options.answerOptionList = [
+				new DefaultAnswerOption({
+					hashtag: options.hashtag,
+					questionIndex: options.questionIndex,
+					answerText: TAPi18n.__("lib.questions.question_choice_single_yes_no.yes"),
+					answerOptionNumber: 0,
+					isCorrect: true
+				}),
+				new DefaultAnswerOption({
+					hashtag: options.hashtag,
+					questionIndex: options.questionIndex,
+					answerText: TAPi18n.__("lib.questions.question_choice_single_yes_no.no"),
+					answerOptionNumber: 1,
+					isCorrect: false
+				})
+			];
+		}
+		delete options.type;
 		super(options);
 	}
 
@@ -56,10 +60,6 @@ export class YesNoSingleChoiceQuestion extends SingleChoiceQuestion {
 	 */
 	typeName () {
 		return "YesNoSingleChoiceQuestion";
-	}
-
-	addAnswerOption () {
-		throw Error("AnswerOptions cannot be modified for this type of Question!");
 	}
 
 	removeAnswerOption () {

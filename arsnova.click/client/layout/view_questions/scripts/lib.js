@@ -53,13 +53,7 @@ function doesMarkdownSyntaxExist(questionText, syntaxStart, syntaxMiddle, syntax
 	return questionText.indexOf(syntaxEnd) != -1;
 }
 
-function questionContainsMarkdownSyntax(questionText) {
-	return !!(doesMarkdownSyntaxExist(questionText, '**', '**') || doesMarkdownSyntaxExist(questionText, '#', '#') || doesMarkdownSyntaxExist(questionText, '[', '](', ')') ||
-	doesMarkdownSyntaxExist(questionText, '- ') || doesMarkdownSyntaxExist(questionText, '1. ') || doesMarkdownSyntaxExist(questionText, '\\(', '\\)') ||
-	doesMarkdownSyntaxExist(questionText, '$$', '$$') || doesMarkdownSyntaxExist(questionText, '<hlcode>', '</hlcode>') || doesMarkdownSyntaxExist(questionText, '>'));
-}
-
-function questionTextLengthWithoutMarkdownSyntax(questionText) {
+function questionTextLengthWithoutMarkdownSyntax(questionText, trimWhiteSpaces = true) {
 	var questionTextLength = questionText.length;
 	if (doesMarkdownSyntaxExist(questionText, '**', '**')) {
 		questionTextLength -= 4;
@@ -88,8 +82,14 @@ function questionTextLengthWithoutMarkdownSyntax(questionText) {
 	if (doesMarkdownSyntaxExist(questionText, '>')) {
 		questionTextLength -= 4;
 	}
-	questionTextLength = questionText.replace(/ /g,"").length;
+	if (trimWhiteSpaces) {
+		questionTextLength = questionText.replace(/ /g,"").length;
+	}
 	return questionTextLength;
+}
+
+function questionContainsMarkdownSyntax(questionText) {
+	return questionText.length !== questionTextLengthWithoutMarkdownSyntax(questionText, false);
 }
 
 export var subscriptionHandler = null;
@@ -112,22 +112,29 @@ export function addQuestion(index) {
 	}
 
 	// Check if we need to change the type of the question
-	if (questionItem.getQuestionList()[index].constructor.name !== questionType) {
-		if (questionItem.getQuestionList()[index].typeName() === "YesNoSingleChoiceQuestion" ||
-			questionItem.getQuestionList()[index].typeName() === "TrueFalseSingleChoiceQuestion") {
-			questionItem.getQuestionList()[index].removeAllAnswerOptions();
+	if (questionItem.getQuestionList()[index].typeName() !== questionType) {
+		switch (questionItem.getQuestionList()[index].typeName()) {
+			case "YesNoSingleChoiceQuestion":
+			case "TrueFalseSingleChoiceQuestion":
+			case "FreeTextQuestion":
+				questionItem.getQuestionList()[index].removeAllAnswerOptions();
+				break;
 		}
 		const serialized = questionItem.getQuestionList()[index].serialize();
 		delete serialized.type;
-		if (questionType === "RangedQuestion") {
-			serialized.timer = "10";
-		}
 		questionItem.addQuestion(questionReflection[questionType](serialized), index);
-		// Check if we changed to the survey question -> remove isCorrect values then
-		if (questionType === "SurveyQuestion") {
-			questionItem.getQuestionList()[index].getAnswerOptionList().forEach(function (answerOption) {
-				answerOption.setIsCorrect(false);
-			});
+		switch (questionType) {
+			case "RangedQuestion":
+				questionItem.getQuestionList()[index].setTimer(10);
+				break;
+			case "FreeTextQuestion":
+				questionItem.getQuestionList()[index].addDefaultAnswerOption();
+				break;
+			case "SurveyQuestion":
+				questionItem.getQuestionList()[index].getAnswerOptionList().forEach(function (answerOption) {
+					answerOption.setIsCorrect(false);
+				});
+				break;
 		}
 	}
 	questionItem.getQuestionList()[index].setQuestionText(questionText);
@@ -213,6 +220,11 @@ export function getQuestionTypes() {
 			id: "RangedQuestion",
 			translationName: "view.questions.ranged_question",
 			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "RangedQuestion" ? 'selected' : ""
+		},
+		{
+			id: "FreeTextQuestion",
+			translationName: "view.questions.free_text_question",
+			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "FreeTextQuestion" ? 'selected' : ""
 		},
 		{
 			id: "SurveyQuestion",

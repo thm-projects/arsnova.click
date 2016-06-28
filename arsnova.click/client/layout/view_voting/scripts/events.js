@@ -22,7 +22,7 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
-import {makeAndSendResponse, makeAndSendRangedResponse} from './lib.js';
+import {makeAndSendResponse, makeAndSendRangedResponse, makeAndSendFreeTextResponse} from './lib.js';
 
 Template.votingview.events({
 	'click #js-btn-showQuestionAndAnswerModal': function (event) {
@@ -38,16 +38,18 @@ Template.votingview.events({
 
 		let hasEmptyAnswers = true;
 
-		AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
-			if (!answerOption.answerText) {
-				answerOption.answerText = "";
-			} else {
-				hasEmptyAnswers = false;
-			}
+		if (questionDoc.questionList[EventManagerCollection.findOne().questionIndex].type !== "FreeTextQuestion") {
+			AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
+				if (!answerOption.answerText) {
+					answerOption.answerText = "";
+				} else {
+					hasEmptyAnswers = false;
+				}
 
-			answerContent += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
-			answerContent += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
-		});
+				answerContent += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+				answerContent += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+			});
+		}
 
 		if (hasEmptyAnswers) {
 			answerContent = "";
@@ -74,17 +76,27 @@ Template.votingview.events({
 		Session.set("hasSendResponse", true);
 		var responseArr = JSON.parse(Session.get("responses"));
 		if (responseArr.length === 0) {
-			const inputField = $("#rangeInput");
-			if (inputField.length === 0 || inputField.val().length === 0 || isNaN(parseFloat(inputField.val()))) {
-				return;
-			}
-			makeAndSendRangedResponse(parseFloat(inputField.val()));
-		} else {
-			AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).forEach(function (cursor) {
-				if (responseArr[cursor.answerOptionNumber]) {
-					makeAndSendResponse(cursor.answerOptionNumber);
+			const rangeInputField = $("#rangeInput");
+			if (rangeInputField.length > 0) {
+				if (rangeInputField.val().length === 0 || isNaN(parseFloat(rangeInputField.val()))) {
+					return;
 				}
-			});
+				makeAndSendRangedResponse(parseFloat(rangeInputField.val()));
+			}
+		} else {
+			const freeTextInputField = $("#answerTextArea");
+			if (freeTextInputField.length > 0) {
+				if (freeTextInputField.val().length === 0) {
+					return;
+				}
+				makeAndSendFreeTextResponse(freeTextInputField.val());
+			} else {
+				AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).forEach(function (cursor) {
+					if (responseArr[cursor.answerOptionNumber]) {
+						makeAndSendResponse(cursor.answerOptionNumber);
+					}
+				});
+			}
 		}
 		if (EventManagerCollection.findOne().questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
 			Session.set("sessionClosed", true);
@@ -115,5 +127,8 @@ Template.votingview.events({
 		} else {
 			Session.set("hasToggledResponse", false);
 		}
+	},
+	"input #answerTextArea": function (event) {
+		Session.set("hasToggledResponse", $(event.currentTarget).val().length > 0);
 	}
 });

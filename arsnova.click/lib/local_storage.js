@@ -19,8 +19,8 @@ import {Mongo} from 'meteor/mongo';
 import {AbstractQuestionGroup} from "/lib/questions/questiongroup_abstract.js";
 import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
 import {AbstractQuestion} from "/lib/questions/question_abstract.js";
-import {DefaultAnswerOption} from "/lib/answeroptions/answeroption_default.js";
 import {MultipleChoiceQuestion} from "/lib/questions/question_choice_multiple.js";
+import {DefaultAnswerOption} from "/lib/answeroptions/answeroption_default.js";
 
 export function getLanguage() {
 	return $.parseJSON(localStorage.getItem("__amplify__tap-i18n-language"));
@@ -55,17 +55,15 @@ export function containsHashtag(hashtag) {
 	}
 	const hashtagString = localStorage.getItem("hashtags");
 
-	if (hashtagString) {
+	if (!hashtagString) {
+		return false;
+	} else {
 		var loweredHashtags = [];
 		$.each(JSON.parse(hashtagString), function (i, hashtagElement) {
 			loweredHashtags.push(hashtagElement.toLowerCase());
 		});
 		return $.inArray(hashtag, loweredHashtags) > -1;
-	} else {
-		return false;
 	}
-
-	return hashtagString ? $.inArray(hashtag, JSON.parse(hashtagString)) > -1 : false;
 }
 
 export function deleteHashtag(hashtag) {

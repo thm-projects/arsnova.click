@@ -66,3 +66,7 @@ Template.rangedAnswerOptionTemplate.onRendered(function () {
 		}
 	});
 });
+
+Template.freeTextAnswerOptionTemplate.onRendered(function () {
+	lib.formatFreeTextSettingsButtons();
+});

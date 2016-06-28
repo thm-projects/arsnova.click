@@ -35,6 +35,18 @@ export const answerOptionNumberSchema = {
 export const isCorrectSchema = {
 	type: Boolean
 };
+export const configCaseSensitiveSchema = {
+	type: Boolean
+};
+export const configTrimWhitespacesSchema = {
+	type: Boolean
+};
+export const configUseKeywordsSchema = {
+	type: Boolean
+};
+export const configUsePunctuationSchema = {
+	type: Boolean
+};
 export const answerOptionsCollectionSchema = new SimpleSchema({
 	hashtag: {
 		type: hashtagSchema
@@ -50,7 +62,24 @@ export const answerOptionsCollectionSchema = new SimpleSchema({
 		type: answerOptionNumberSchema
 	},
 	isCorrect: {
-		type: isCorrectSchema
+		type: isCorrectSchema,
+		optional: true
+	},
+	configCaseSensitive: {
+		type: configCaseSensitiveSchema,
+		optional: true
+	},
+	configTrimWhitespaces: {
+		type: configTrimWhitespacesSchema,
+		optional: true
+	},
+	configUseKeywords: {
+		type: configUseKeywordsSchema,
+		optional: true
+	},
+	configUsePunctuation: {
+		type: configUsePunctuationSchema,
+		optional: true
 	}
 });
 

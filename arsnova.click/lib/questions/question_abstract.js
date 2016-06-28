@@ -22,7 +22,7 @@ export class AbstractQuestion {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
 		if (typeof options.hashtag === "undefined" || typeof options.questionText === "undefined" || typeof options.timer === "undefined" || typeof options.startTime === "undefined" || typeof options.questionIndex === "undefined") {
-			throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
+			throw new Error("Invalid argument list for Question instantiation");
 		}
 		this[hashtag] = options.hashtag;
 		this[questionText] = options.questionText;
@@ -30,35 +30,6 @@ export class AbstractQuestion {
 		this[startTime] = options.startTime;
 		this[questionIndex] = options.questionIndex;
 		this[answerOptionList] = [];
-		if (typeof options.answerOptionList === "undefined" || options.answerOptionList.length === 0) {
-			for (let i = 0; i < 4; i++) {
-				this.addAnswerOption(
-					new DefaultAnswerOption({
-						hashtag: options.hashtag,
-						questionIndex: options.questionIndex,
-						answerText: "",
-						answerOptionNumber: i,
-						isCorrect: false
-					})
-				);
-			}
-		} else {
-			for (let i = 0; i < options.answerOptionList.length; i++) {
-				if (options.answerOptionList[i] instanceof AbstractAnswerOption) {
-					this.addAnswerOption(options.answerOptionList[i]);
-				} else {
-					if (options.answerOptionList[i] instanceof Object) {
-						switch (options.answerOptionList[i].type) {
-							case "DefaultAnswerOption":
-								this.addAnswerOption(new DefaultAnswerOption(options.answerOptionList[i]));
-								break;
-						}
-					} else {
-						throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
-					}
-				}
-			}
-		}
 	}
 
 	/**
@@ -156,7 +127,7 @@ export class AbstractQuestion {
 	 */
 	addAnswerOption (answerOption, index) {
 		if (typeof answerOption === "undefined" || !(answerOption instanceof AbstractAnswerOption)) {
-			throw new Error("Invalid argument for Question.removeAnswerOption");
+			throw new Error("Invalid argument for Question.addAnswerOption");
 		}
 		if (typeof index === "undefined" || index < 0 || index >= this.getAnswerOptionList().length) {
 			this[answerOptionList].push(answerOption);

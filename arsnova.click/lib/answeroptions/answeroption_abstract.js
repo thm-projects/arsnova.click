@@ -2,29 +2,30 @@ const hashtag = Symbol("hashtag");
 const questionIndex = Symbol("questionIndex");
 const answerText = Symbol("answerText");
 const answerOptionNumber = Symbol("answerOptionNumber");
-const isCorrect = Symbol("isCorrect");
 
 export class AbstractAnswerOption {
 
 	/**
 	 * Constructor super method for creating a AnswerOption instance
 	 * This method cannot be invoked directly.
-	 * @param {{hashtag:String,questionIndex:Number,answerText:String,answerOptionNumber:Number,isCorrect:Boolean,type:Number}} options An object containing the parameters for creating an AnswerOption instance. The type attribute is optional.
+	 * @param {{hashtag:String,questionIndex:Number,answerText:String,answerOptionNumber:Number,type:String}} options An object containing the parameters for creating an AnswerOption instance. The type attribute is optional.
 	 * @throws {TypeError} If this method is invoked directly, the options Object is undefined or the optional type attribute is not matching the constructor name
 	 * @throws {Error} If the hashtag, the questionIndex, the answerText, the answerOptionNumber or the isCorrect attributes of the options Object are missing
 	 */
 	constructor (options) {
 		if (this.constructor === AbstractAnswerOption) {
-			throw new TypeError("Cannot construct Abstract instances directly");
+			throw new TypeError("Cannot construct abstract instances directly");
 		}
-		if (typeof options.hashtag === "undefined" || typeof options.questionIndex === "undefined" || typeof options.answerText === "undefined" || typeof options.answerOptionNumber === "undefined" || typeof options.isCorrect === "undefined") {
+		if (typeof options.hashtag === "undefined" ||
+			typeof options.questionIndex === "undefined" ||
+			typeof options.answerText === "undefined" ||
+			typeof options.answerOptionNumber === "undefined") {
 			throw new Error("Invalid argument list for AnswerOption instantiation");
 		}
 		this[hashtag] = options.hashtag;
 		this[questionIndex] = options.questionIndex;
 		this[answerText] = options.answerText;
 		this[answerOptionNumber] = options.answerOptionNumber;
-		this[isCorrect] = options.isCorrect;
 	}
 
 	/**
@@ -80,36 +81,15 @@ export class AbstractAnswerOption {
 	}
 
 	/**
-	 * Returns whether this AnswerOption instance is currently marked as correct
-	 * @returns {Boolean} True if this AnswerOption instance is marked as correct, False otherwise
-	 */
-	getIsCorrect () {
-		return this[isCorrect];
-	}
-
-	/**
-	 * Set the correct-mark for this AnswerOption instance
-	 * @param {Boolean} value True, if this AnswerOption shall be marked as correct, False otherwise
-	 * @throws {Error} If the value is not of type Boolean
-	 */
-	setIsCorrect (value) {
-		if (typeof value !== "boolean") {
-			throw new Error("Invalid argument for AnswerOption.setIsCorrect");
-		}
-		this[isCorrect] = value;
-	}
-
-	/**
 	 * Serialize the instance object to a JSON compatible object
-	 * @returns {{hashtag: String, type: String, questionIndex: Number, answerText: String, answerOptionNumber: Number, isCorrect: Boolean}}
+	 * @returns {{hashtag: String, type: String, questionIndex: Number, answerText: String, answerOptionNumber: Number}}
 	 */
 	serialize () {
 		return {
 			hashtag: this.getHashtag(),
 			questionIndex: this.getQuestionIndex(),
 			answerText: this.getAnswerText(),
-			answerOptionNumber: this.getAnswerOptionNumber(),
-			isCorrect: this.getIsCorrect()
+			answerOptionNumber: this.getAnswerOptionNumber()
 		};
 	}
 
@@ -139,23 +119,16 @@ export class AbstractAnswerOption {
 		return answerOption instanceof AbstractAnswerOption &&
 			answerOption.getQuestionIndex() === this.getQuestionIndex() &&
 			answerOption.getAnswerText() === this.getAnswerText() &&
-			answerOption.getAnswerOptionNumber() === this.getAnswerOptionNumber() &&
-			answerOption.getIsCorrect() === this.getIsCorrect();
+			answerOption.getAnswerOptionNumber() === this.getAnswerOptionNumber();
 	}
 
 	/**
 	 * Part of EJSON interface
 	 * @see AbstractAnswerOption.serialize()
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-toJSONValue
-	 * @returns {{hashtag: String, questionIndex: Number, answerText: String, answerOptionNumber: Number, isCorrect: Boolean}}
+	 * @returns {{hashtag: String, questionIndex: Number, answerText: String, answerOptionNumber: Number}}
 	 */
 	toJSONValue () {
-		return {
-			hashtag: this.getHashtag(),
-			questionIndex: this.getQuestionIndex(),
-			answerText: this.getAnswerText(),
-			answerOptionNumber: this.getAnswerOptionNumber(),
-			isCorrect: this.getIsCorrect()
-		};
+		return this.serialize();
 	}
 }

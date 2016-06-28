@@ -1,0 +1,37 @@
+<!--
+* This file is part of ARSnova Click.
+* Copyright (C) 2016 The ARSnova Team
+*
+* ARSnova Click is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* ARSnova Click is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
+
+<template name="freeTextAnswerOptionTemplate">
+    <div class="row center-vertical full-screen-content freeTextAnswerOptions">
+        <div class="col-xs-12">
+            <div class="row">
+                {{#each configOptions}}
+                    <div class="col-xs-12 col-sm-6 configOptionContainer">
+                        <p class="text-light checkboxLabel">{{_ this.textName}}: </p>
+                        <input type="checkbox" id="{{this.id}}_switch" name="switch" title="{{_ this.textName}}" />
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <textarea id="answerTextArea"
+                      class="round-corners textarea placeholder-align-center"
+                      rows="3"
+                      placeholder="{{_ "view.answeroptions.free_text_question.text_placeholder" }}">{{answerText}}</textarea>
+        </div>
+    </div>
+</template>

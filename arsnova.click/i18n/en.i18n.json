@@ -142,7 +142,7 @@
         "show_result": "Details",
         "pending": "Pending...",
         "finished_with_errors": "Finished with errors",
-        "finished_with_warning": "Finished with warnings",
+        "finished_with_warnings": "Finished with warnings",
         "finished_without_warnings": "Successful",
         "websocket_status": {
           "connected": "Connected",
@@ -175,6 +175,16 @@
         "correct_value": "Correct value",
         "min_range": "Minimum range",
         "max_range": "Maximum range"
+      },
+      "free_text_question": {
+        "title": "Free text answer",
+        "config_case_sensitive": "Observe upper and lower case",
+        "config_trim_whitespaces": "Observe white spaces in the answer",
+        "config_use_keywords": "Observe sequence of the words",
+        "config_use_punctuation": "Observe punctuation marks",
+        "onText": "Yes",
+        "offText": "No",
+        "text_placeholder": "Enter your answer here"
       }
     },
     "choose_nickname": {
@@ -225,6 +235,8 @@
       "reading_confirmation": "Reading confirmation",
       "show_more": "Show 1 more",
       "show_more_plural": "Show %s more",
+      "correct": "Correct",
+      "wrong": "Wrong",
       "complete_correct": "Everything correct",
       "complete_wrong": "Everything wrong",
       "back_to_lobby": "Back to the lobby",
@@ -263,7 +275,8 @@
       "single_choice_question_true_false": "True-False Single-Choice question",
       "multiple_choice_question": "Multiple-Choice",
       "survey_question": "Survey",
-      "ranged_question": "Question with ranged answeroptions"
+      "ranged_question": "Question with ranged answeroptions",
+      "free_text_question": "Free text question (response is correct in accordance with the provided sample)"
     },
     "quiz_summary": {
       "title": "4/4 Summary",
@@ -280,6 +293,8 @@
       "type": "Type",
       "answer": "Answer",
       "answer_plural": "Answers",
+      "answer_configuration": "Configuration of the answer",
+      "answer_configuration_plural": "Configuration of the answers",
       "timer": "Countdown",
       "second": "second",
       "second_plural": "seconds",
@@ -381,6 +396,10 @@
       "seconds_left_plural": "__value__ Seconds left",
       "ranged_question": {
         "title": "Please enter your answer!",
+        "input_placeholder": "Answer"
+      },
+      "free_text_question": {
+        "title": "Provide your answer!",
         "input_placeholder": "Answer"
       }
     }

@@ -45,13 +45,23 @@
                             <input type="number" id="rangeInput" class="input-field" step="any" min="0" placeholder="{{_ "view.voting.ranged_question.input_placeholder"}}" />
                         </div>
                     {{else}}
-                        {{#each answerOptions}}
-                            <div class="buttonWrapper">
-                                <button id="{{answerOptionNumber}}" class="sendResponse btn btn-answerOption btn-answerFont button-purple">
-                                    {{answerOptionLetter number=answerOptionNumber}}
-                                </button>
+                        {{#if isFreeTextQuestion}}
+                            <div class="col-xs-12 freeTextFrame">
+                                <h1 id="freeTextFrameTitle">{{_ "view.voting.free_text_question.title"}}</h1>
+                                <textarea id="answerTextArea"
+                                          class="round-corners textarea placeholder-align-center"
+                                          rows="3"
+                                          placeholder="{{_ "view.voting.free_text_question.input_placeholder"}}" ></textarea>
                             </div>
-                        {{/each}}
+                        {{else}}
+                            {{#each answerOptions}}
+                                <div class="buttonWrapper">
+                                    <button id="{{answerOptionNumber}}" class="sendResponse btn btn-answerOption btn-answerFont button-purple">
+                                        {{answerOptionLetter number=answerOptionNumber}}
+                                    </button>
+                                </div>
+                            {{/each}}
+                        {{/if}}
                     {{/if}}
                 </div>
             </div>

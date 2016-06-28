@@ -381,6 +381,8 @@
 	$bg-answer_row-button_green_transition: white;
 	$fg-answer_row-button_green_transition: #663399;
 
+	$fg-free-text-header-color: $default-text-color;
+
 	@if ($name == "theme-dark") {
 		$colorChangingArs0: white;
 		$success: #008000; /* green */
@@ -1959,6 +1961,11 @@
 			.button-green-transition {
 				background-color: $bg-answer_row-button_green_transition;
 				color: $fg-answer_row-button_green_transition;
+			}
+		  	.freeTextFrame {
+				h1 {
+				  	color: $fg-free-text-header-color;
+				}
 			}
 		}
 	}

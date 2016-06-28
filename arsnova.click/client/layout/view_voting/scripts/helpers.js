@@ -40,5 +40,8 @@ Template.votingview.helpers({
 	},
 	isRangedQuestion: function () {
 		return QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type === "RangedQuestion";
+	},
+	isFreeTextQuestion: function () {
+		return QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type === "FreeTextQuestion";
 	}
 });

@@ -49,16 +49,20 @@ Template.liveResults.events({
 			answerContent += TAPi18n.__("view.answeroptions.ranged_question.max_range") + ": " + questionElement.rangeMax + "<br/><br/>";
 			answerContent += TAPi18n.__("view.answeroptions.ranged_question.correct_value") + ": " + questionElement.correctValue + "<br/>";
 		} else {
-			AnswerOptionCollection.find({questionIndex: targetId}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
-				if (!answerOption.answerText) {
-					answerOption.answerText = "";
-				} else {
-					hasEmptyAnswers = false;
-				}
+			if (questionElement.type !== "FreeTextQuestion" || isCountdownZero(targetId)) {
+				AnswerOptionCollection.find({questionIndex: targetId}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
+					if (!answerOption.answerText) {
+						answerOption.answerText = "";
+					} else {
+						hasEmptyAnswers = false;
+					}
 
-				answerContent += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
-				answerContent += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
-			});
+					if (questionElement.type !== "FreeTextQuestion") {
+						answerContent += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+					}
+					answerContent += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+				});
+			}
 		}
 
 		if (hasEmptyAnswers) {

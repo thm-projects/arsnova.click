@@ -132,8 +132,9 @@
       "reset_session_confirmation": {
         "title": "¿Quiéres salir del cuestionario?",
         "text": {
-          "1": "La sesión de todos los participantes será cerrada. La lista del ranking será borrada. Tu cuestionario con todos los ajustes permanecerá en este navegador, siempre y cuando no sea reiniciado.",
-          "2": "¿Continuar?"
+          "running_question": "La sesión de todos los participantes será cerrada. La lista del ranking será borrada. Tu cuestionario con todos los ajustes permanecerá en este navegador, siempre y cuando no sea reiniciado.",
+          "empty_lobby": "You will be logged out. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
+          "continue": "¿Continuar?"
         }
       },
       "connection_status": {
@@ -141,7 +142,7 @@
         "show_result": "Detalles",
         "pending": "Pendiente...",
         "finished_with_errors": "Acabado con errores",
-        "finished_with_warning": "Acabado con advertencias",
+        "finished_with_warnings": "Acabado con advertencias",
         "finished_without_warnings": "Exitoso",
         "websocket_status": {
           "connected": "Conectado",
@@ -174,6 +175,16 @@
         "correct_value": "Valor correcto",
         "min_range": "Valor mínimo",
         "max_range": "Valor máximo"
+      },
+      "free_text_question": {
+        "title": "Respuesta de texto libre",
+        "config_case_sensitive": "Observe las mayúsculas y minúsculas",
+        "config_trim_whitespaces": "Observe los espacios en blanco en la respuesta",
+        "config_use_keywords": "Observe secuencia de las palabras",
+        "config_use_punctuation": "Observar los signos de puntuación",
+        "onText": "Sí",
+        "offText": "No",
+        "text_placeholder": "Escriba su respuesta aquí"
       }
     },
     "choose_nickname": {
@@ -224,6 +235,8 @@
       "reading_confirmation": "Confirmación de lectura",
       "show_more": "Ver 1 más",
       "show_more_plural": "Ver %s más",
+      "correct": "Correcto",
+      "wrong": "Mal",
       "complete_correct": "Totalmente correcto",
       "complete_wrong": "Totalmente incorrecto",
       "back_to_lobby": "Volver al lobby",
@@ -251,6 +264,7 @@
       "add_kicked_member_to_ban_list": "¿Bloquear este nick permanentemente?"
     },
     "questions": {
+      "title": "1/4 Introduzca texto de la pregunta",
       "enter_question_here": "Introduzca su pregunta aquí",
       "choose_format": "Elegir el formato de pregunta:",
       "format": "Formato",
@@ -261,7 +275,8 @@
       "single_choice_question_true_false": "Verdadero-Falso de opción única pregunta",
       "multiple_choice_question": "Pregunta de selección múltiple (una o más respuestas son correctas)",
       "survey_question": "Encuesta (No hay respuestas correctas ni incorrectas)",
-      "ranged_question": "Pregunta de estimación (Respuestas dentro del área predeterminada son correctas)"
+      "ranged_question": "Pregunta de estimación (Respuestas dentro del área predeterminada son correctas)",
+      "free_text_question": "Pregunta de texto libre (la respuesta es correcta de acuerdo con el ejemplo proporcionado)"
     },
     "quiz_summary": {
       "summary": "Resúmen",
@@ -278,6 +293,8 @@
       "type": "Tipo",
       "answer": "Respuesta",
       "answer_plural": "Respuestas",
+      "answer_configuration": "La configuración de la respuesta",
+      "answer_configuration_plural": "Configuración de las respuestas",
       "timer": "Cuenta atrás",
       "second": "Segundo",
       "second_plural": "Segundos",
@@ -380,6 +397,10 @@
       "ranged_question": {
         "title": "¡Ingresa tu valor estimado!",
         "input_placeholder": "Respuesta"
+      },
+      "free_text_question": {
+        "title": "Proporcionar su respuesta!",
+        "input_placeholder": "Responder"
       }
     }
   },
@@ -435,7 +456,8 @@
           "response_timeout": "La cuenta atrás ya ha finalizado",
           "insert_leaderboard_failed": "Error al añadir la respuesta a la lista del Ranking",
           "session_closed": "Esta ronda ha sido finalizada",
-          "invalid_data": "¡La importación de datos es invalida o incorrecta!"
+          "invalid_data": "¡La importación de datos es invalida o incorrecta!",
+          "invalid_input_data": "The entered data is either invalid or the access is denied!"
         }
       }
     }

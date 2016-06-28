@@ -103,13 +103,34 @@
                                         }}
                                     {{/with}}
                                 {{else}}
-                                    {{#each answerList displayIndex}}
-                                        {{#if isCountdownZero questionIndex}}
-                                            {{> form_group name = name absolute = absolute percent = percent isCorrect = isCorrect backgroundClass = (getCSSClassForIsCorrect isCorrect) }}
-                                        {{else}}
-                                            {{> form_group name = name absolute = absolute percent = percent backgroundClass = (getCSSClassForIsCorrect -1) }}
-                                        {{/if}}
-                                    {{/each}}
+                                    {{#if isFreeTextQuestion displayIndex}}
+                                        {{#with freeTextAnswerResult displayIndex}}
+                                            {{> form_group
+                                                name = "view.liveResults.correct"
+                                                absolute = correct.absolute
+                                                percent = correct.percent
+                                                isCorrect = 1
+                                                id = 0
+                                                backgroundClass = (hideCssIfCountdownRunning displayIndex (getCSSClassForIsCorrect 1))
+                                            }}
+                                            {{> form_group
+                                                name = "view.liveResults.wrong"
+                                                absolute = wrong.absolute
+                                                percent = wrong.percent
+                                                isCorrect = 0
+                                                id = 1
+                                                backgroundClass = (hideCssIfCountdownRunning displayIndex (getCSSClassForIsCorrect 0))
+                                            }}
+                                        {{/with}}
+                                    {{else}}
+                                        {{#each answerList displayIndex}}
+                                            {{#if isCountdownZero questionIndex}}
+                                                {{> form_group name = name absolute = absolute percent = percent isCorrect = isCorrect backgroundClass = (getCSSClassForIsCorrect isCorrect) }}
+                                            {{else}}
+                                                {{> form_group name = name absolute = absolute percent = percent backgroundClass = (getCSSClassForIsCorrect -1) }}
+                                            {{/if}}
+                                        {{/each}}
+                                    {{/if}}
                                 {{/if}}
                             {{else}}
                                 {{#if showMoreButton displayIndex}}
@@ -215,5 +236,5 @@
                 </div>
             </div>
         {{/if}}{{/if}}{{/unless}}
-        {{/if}}
+    {{/if}}
 </template>

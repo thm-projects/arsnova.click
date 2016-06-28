@@ -131,16 +131,18 @@
       "no": "Non",
       "reset_session_confirmation": {
         "title": "Finir le quiz?",
-        "running_question": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
-        "empty_lobby": "You will be logged out. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
-        "continue": "Proceed?"
+        "text": {
+          "running_question": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
+          "empty_lobby": "You will be logged out. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
+          "continue": "Proceed?"
+        }
       },
       "connection_status": {
         "title": "Statut de connexion",
         "show_result": "Détails",
         "pending": "En attendant...",
         "finished_with_errors": "Fini avec des erreurs",
-        "finished_with_warning": "Fini avec des avertissements",
+        "finished_with_warnings": "Fini avec des avertissements",
         "finished_without_warnings": "Réussi",
         "websocket_status": {
           "connected": "Connecté",
@@ -173,6 +175,16 @@
         "correct_value": "Valeur correcte",
         "min_range": "Valeur minimale",
         "max_range": "Valeur maximale"
+      },
+      "free_text_question": {
+        "title": "Texte libre réponse",
+        "config_case_sensitive": "Respecter les majuscules et minuscules",
+        "config_trim_whitespaces": "Observer les espaces blancs dans la réponse",
+        "config_use_keywords": "Observez la séquence des mots",
+        "config_use_punctuation": "Observer les signes de ponctuation",
+        "onText": "Oui",
+        "offText": "Non",
+        "text_placeholder": "Entrez votre réponse ici"
       }
     },
     "choose_nickname": {
@@ -223,6 +235,8 @@
       "reading_confirmation": "Confirmation de lecture",
       "show_more": "Montre 1 de plus",
       "show_more_plural": "Montre %s de plus",
+      "correct": "Correct",
+      "wrong": "Mauvais",
       "complete_correct": "Tout juste",
       "complete_wrong": "Tout faux",
       "back_to_lobby": "Retour au lobby",
@@ -261,7 +275,8 @@
       "single_choice_question_true_false": "Question Vrai-Faux Single-Choix",
       "multiple_choice_question": "Question choix multiple (une ou plusieurs réponses sont justes)",
       "survey_question": "Sondage (Réponses ne sont ni vrai ni fausse)",
-      "ranged_question": "Question d'éstimation (Réponses comprises dans la fourchette donné sont justes)"
+      "ranged_question": "Question d'éstimation (Réponses comprises dans la fourchette donné sont justes)",
+      "free_text_question": "Texte libre question (réponse est correcte, conformément à l'échantillon fourni)"
     },
     "quiz_summary": {
       "title": "4/4 Résumé",
@@ -278,6 +293,8 @@
       "type": "Type",
       "answer": "Réponse",
       "answer_plural": "Réponses",
+      "answer_configuration": "La configuration de la réponse",
+      "answer_configuration_plural": "La configuration des réponses",
       "timer": "Compte à rebours",
       "second": "seconde",
       "second_plural": "secondes",
@@ -380,6 +397,10 @@
       "ranged_question": {
         "title": "Entre ta valeur d'estimation!",
         "input_placeholder": "Réponse"
+      },
+      "free_text_question": {
+        "title": "Fournir votre réponse!",
+        "input_placeholder": "Répondre"
       }
     }
   },

@@ -136,6 +136,31 @@
           "empty_lobby": "Du wirst abgemeldet. Dein Quiz mit allen Einstellungen verbleibt in diesem Browser, solange er nicht zurückgesetzt wird.",
           "continue": "Fortfahren?"
         }
+      },
+      "connection_status": {
+        "title": "Verbindungsstatus",
+        "show_result": "Details",
+        "pending": "Prüfe...",
+        "finished_with_errors": "Mit Fehlern beendet",
+        "finished_with_warning": "Mit Warnungen beendet",
+        "finished_without_warnings": "Erfolgreich",
+        "websocket_status": {
+          "connected": "Verbunden",
+          "disconnected": "Getrennt"
+        },
+        "localStorage_status": {
+          "writable": "Beschreibbar",
+          "non_writable": "Nicht beschreibbar"
+        },
+        "sessionStorage_status": {
+          "writable": "Beschreibbar",
+          "non_writable": "Nicht beschreibbar"
+        },
+        "dbConnection_status": {
+          "very_slow": "Sehr langsam",
+          "slow": "Langsam",
+          "ok": "Gut"
+        }
       }
     }
   },

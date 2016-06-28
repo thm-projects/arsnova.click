@@ -135,6 +135,31 @@
         "empty_lobby": "You will be logged out. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
         "continue": "Proceed?"
       }
+    },
+    "connection_status": {
+      "title": "Statut de connexion",
+      "show_result": "Détails",
+      "pending": "En attendant...",
+      "finished_with_errors": "Fini avec des erreurs",
+      "finished_with_warning": "Fini avec des avertissements",
+      "finished_without_warnings": "Réussi",
+      "websocket_status": {
+        "connected": "Connecté",
+        "disconnected": "Coupé"
+      },
+      "localStorage_status": {
+        "writable": "Inscriptibles",
+        "non_writable": "Non inscriptible"
+      },
+      "sessionStorage_status": {
+        "writable": "Inscriptibles",
+        "non_writable": "Non inscriptible"
+      },
+      "dbConnection_status": {
+        "very_slow": "Très lentement",
+        "slow": "Pauvre",
+        "ok": "Bien"
+      }
     }
   },
   "view": {

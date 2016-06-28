@@ -132,8 +132,9 @@
       "reset_session_confirmation": {
         "title": "¿Quiéres salir del cuestionario?",
         "text": {
-          "1": "La sesión de todos los participantes será cerrada. La lista del ranking será borrada. Tu cuestionario con todos los ajustes permanecerá en este navegador, siempre y cuando no sea reiniciado.",
-          "2": "¿Continuar?"
+          "running_question": "La sesión de todos los participantes será cerrada. La lista del ranking será borrada. Tu cuestionario con todos los ajustes permanecerá en este navegador, siempre y cuando no sea reiniciado.",
+          "empty_lobby": "You will be logged out. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
+          "continue": "¿Continuar?"
         }
       },
       "connection_status": {
@@ -455,7 +456,8 @@
           "response_timeout": "La cuenta atrás ya ha finalizado",
           "insert_leaderboard_failed": "Error al añadir la respuesta a la lista del Ranking",
           "session_closed": "Esta ronda ha sido finalizada",
-          "invalid_data": "¡La importación de datos es invalida o incorrecta!"
+          "invalid_data": "¡La importación de datos es invalida o incorrecta!",
+          "invalid_input_data": "The entered data is either invalid or the access is denied!"
         }
       }
     }

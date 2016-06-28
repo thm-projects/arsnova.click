@@ -131,9 +131,11 @@
       "no": "Non",
       "reset_session_confirmation": {
         "title": "Finir le quiz?",
-        "running_question": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
-        "empty_lobby": "You will be logged out. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
-        "continue": "Proceed?"
+        "text": {
+          "running_question": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
+          "empty_lobby": "You will be logged out. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
+          "continue": "Proceed?"
+        }
       },
       "connection_status": {
         "title": "Statut de connexion",
@@ -273,7 +275,7 @@
       "single_choice_question_true_false": "Question Vrai-Faux Single-Choix",
       "multiple_choice_question": "Question choix multiple (une ou plusieurs réponses sont justes)",
       "survey_question": "Sondage (Réponses ne sont ni vrai ni fausse)",
-      "ranged_question": "Question d'éstimation (Réponses comprises dans la fourchette donné sont justes)"
+      "ranged_question": "Question d'éstimation (Réponses comprises dans la fourchette donné sont justes)",
       "free_text_question": "Texte libre question (réponse est correcte, conformément à l'échantillon fourni)"
     },
     "quiz_summary": {

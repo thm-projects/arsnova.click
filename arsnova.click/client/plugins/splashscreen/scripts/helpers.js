@@ -88,8 +88,8 @@ Template.connectionQualitySplashscreen.helpers($.extend(isMobileDevice, {
 	dbConnectionStatus: function () {
 		return {
 			text: Session.get("connectionStatus").dbConnection.currentCount < Session.get("connectionStatus").dbConnection.totalCount ? "region.header.connection_status.pending" :
-					Session.get("connectionStatus").dbConnection.serverRTT > 20 ? "region.header.connection_status.dbConnection_status.very_slow" :
-					Session.get("connectionStatus").dbConnection.serverRTT > 10 ? "region.header.connection_status.dbConnection_status.slow" :
+					Session.get("connectionStatus").dbConnection.serverRTT > 100 ? "region.header.connection_status.dbConnection_status.very_slow" :
+					Session.get("connectionStatus").dbConnection.serverRTT > 60 ? "region.header.connection_status.dbConnection_status.slow" :
 					"region.header.connection_status.dbConnection_status.ok",
 			averageTime: Session.get("connectionStatus").dbConnection.serverRTT.toFixed(2).replace(".", ","),
 			current: Session.get("connectionStatus").dbConnection.currentCount,

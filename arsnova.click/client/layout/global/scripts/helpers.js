@@ -44,9 +44,9 @@ Template.connectionQualityHeader.helpers({
 			result.errors.push("sessionStorage");
 		}
 		if (Session.get("connectionStatus").dbConnection.currentCount < Session.get("connectionStatus").dbConnection.totalCount) {
-			if (Session.get("connectionStatus").dbConnection.serverRTT > 20) {
+			if (Session.get("connectionStatus").dbConnection.serverRTT > 100) {
 				result.errors.push("dbConnection");
-			} else if (Session.get("connectionStatus").dbConnection.serverRTT > 10) {
+			} else if (Session.get("connectionStatus").dbConnection.serverRTT > 60) {
 				result.warnings.push("dbConnection");
 			}
 		}

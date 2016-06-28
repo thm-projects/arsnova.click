@@ -43,12 +43,10 @@ Template.connectionQualityHeader.helpers({
 		if (!Session.get("connectionStatus").sessionStorage) {
 			result.errors.push("sessionStorage");
 		}
-		if (Session.get("connectionStatus").dbConnection.currentCount < Session.get("connectionStatus").dbConnection.totalCount) {
-			if (Session.get("connectionStatus").dbConnection.serverRTT > 100) {
-				result.errors.push("dbConnection");
-			} else if (Session.get("connectionStatus").dbConnection.serverRTT > 60) {
-				result.warnings.push("dbConnection");
-			}
+		if (Session.get("connectionStatus").dbConnection.serverRTT > 100) {
+			result.errors.push("dbConnection");
+		} else if (Session.get("connectionStatus").dbConnection.serverRTT > 60) {
+			result.warnings.push("dbConnection");
 		}
 		if (result.errors.length > 0) {
 			return $.extend({resultString: "region.header.connection_status.finished_with_errors"}, result, {finishedWithErrors: true});

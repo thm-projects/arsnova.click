@@ -331,7 +331,11 @@
         }
       },
       "edit_quiz": "Edit quiz",
-      "start_quiz": "Start quiz"
+      "start_quiz": "Start quiz",
+      "selected_nicks": "Valid nicknames",
+      "no_selected_nicks": "No nicknames selected. All nicknames are valid.",
+      "hide_selected_nicks": "Hide nicknames",
+      "show_selected_nicks": "Show nicknames"
     },
     "theme_switcher": {
       "set_theme": "Choose a theme for all attendees",

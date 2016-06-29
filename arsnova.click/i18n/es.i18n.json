@@ -331,7 +331,11 @@
         }
       },
       "edit_quiz": "Editar cuestionario",
-      "start_quiz": "Comenzar cuestionario"
+      "start_quiz": "Comenzar cuestionario",
+      "selected_nicks": "Apodos válidos",
+      "no_selected_nicks": "No hay apodos seleccionados. Todos los nombres son válidos.",
+      "hide_selected_nicks": "Ocultar apodos",
+      "show_selected_nicks": "Mostrar apodos"
     },
     "theme_switcher": {
       "set_theme": "Elegir estilo",

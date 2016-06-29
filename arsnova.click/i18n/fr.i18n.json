@@ -331,7 +331,11 @@
         }
       },
       "edit_quiz": "Modifier quiz",
-      "start_quiz": "Commencer quiz"
+      "start_quiz": "Commencer quiz",
+      "selected_nicks": "Surnoms valides",
+      "no_selected_nicks": "Aucun surnoms sélectionnés. Tous les noms sont valides.",
+      "hide_selected_nicks": "Masquer les surnoms",
+      "show_selected_nicks": "Afficher les surnoms"
     },
     "theme_switcher": {
       "set_theme": "Choisir un style",

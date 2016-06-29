@@ -17,6 +17,13 @@
 
 <template name="freeTextAnswerOptionTemplate">
     <div class="row center-vertical full-screen-content freeTextAnswerOptions">
+        {{> titel titelText = "view.answeroptions.free_text_question.title"}}
+        <div class="col-xs-12">
+            <textarea id="answerTextArea"
+                      class="round-corners textarea placeholder-align-center"
+                      rows="3"
+                      placeholder="{{_ "view.answeroptions.free_text_question.text_placeholder" }}">{{answerText}}</textarea>
+        </div>
         <div class="col-xs-12">
             <div class="row">
                 {{#each configOptions}}
@@ -26,12 +33,6 @@
                     </div>
                 {{/each}}
             </div>
-        </div>
-        <div class="col-xs-12">
-            <textarea id="answerTextArea"
-                      class="round-corners textarea placeholder-align-center"
-                      rows="3"
-                      placeholder="{{_ "view.answeroptions.free_text_question.text_placeholder" }}">{{answerText}}</textarea>
         </div>
     </div>
 </template>

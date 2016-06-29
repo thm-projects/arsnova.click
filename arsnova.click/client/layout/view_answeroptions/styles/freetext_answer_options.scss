@@ -19,6 +19,10 @@
 
 .freeTextAnswerOptions {
 
+  .distance-top {
+	margin-bottom: 20px;
+  }
+
   .configOptionContainer {
 	display: table;
 	height: 50px;
@@ -47,6 +51,5 @@
   textarea {
 	border-radius: $corner-radius;
 	width: 100%;
-	height: 30vh;
   }
 }

@@ -15,13 +15,22 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 
-Template.createTimerView.events({
+Template.nicknameCategories.events({
 	"click #forwardButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/nicknameCategories");
+		Router.go("/" + Router.current().params.quizName + "/quizSummary");
 	},
 	"click #backButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/answeroptions");
+		Router.go("/" + Router.current().params.quizName + "/setTimer");
+	},
+	"click .nickCategory": function (event) {
+		$('.nickCategory').removeClass("selectedCategory");
+		$(event.currentTarget).addClass("selectedCategory");
+		Session.set("selectedCategory", $(event.currentTarget).attr("id").replace("nickCategory_", ""));
+	},
+	"click .nickName": function (event) {
+		$(event.currentTarget).toggleClass("selectedNickName");
 	}
 });

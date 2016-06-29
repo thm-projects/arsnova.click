@@ -263,6 +263,13 @@
       "kick_member_confirmation": "Soll die Person '<span id=\"nickName\"></span>' aus dem Quiz entfernt werden?",
       "add_kicked_member_to_ban_list": "Den Nicknamen permanent bannen"
     },
+    "nickname_categories": {
+      "title": "Nicknamen begrenzen",
+      "category": {
+        "disney": "Disney",
+        "science": "Wissenschaft"
+      }
+    },
     "questions": {
       "title": "1/4: Fragetext eingeben",
       "choose_format": "Frageformat wählen:",

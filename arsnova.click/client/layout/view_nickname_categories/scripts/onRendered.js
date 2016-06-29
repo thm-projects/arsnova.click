@@ -15,13 +15,18 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
+import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 
-Template.createTimerView.events({
-	"click #forwardButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/nicknameCategories");
-	},
-	"click #backButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/answeroptions");
-	}
+Template.nicknameCategories.onRendered(function () {
+	calculateHeaderSize();
+	$(window).resize(calculateHeaderSize);
+
+	$(document.getElementById('nickCategory_' + Session.get("selectedCategory"))).addClass("selectedCategory");
+
+	footerElements.removeFooterElements();
+	footerElements.addFooterElement(footerElements.footerElemHome);
+	footerElements.calculateFooter();
 });

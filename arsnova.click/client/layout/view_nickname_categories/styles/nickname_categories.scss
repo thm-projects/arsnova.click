@@ -1,0 +1,81 @@
+/*
+ * This file is part of ARSnova Click.
+ * Copyright (C) 2016 The ARSnova Team
+ *
+ * ARSnova Click is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ARSnova Click is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
+
+@import "../../../layout/global/styles/appearance";
+
+.nicknameCategories {
+  .nickCategoryWrapper {
+	display: flex;
+	justify-content: center;
+	align-content: stretch;
+	flex-flow: row wrap;
+  }
+
+  h3 {
+	color: white;
+	text-align: center;
+  }
+
+  .nickStyle {
+	border-radius: $corner-radius;
+	padding: 10px;
+	margin: 10px;
+	cursor: pointer;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+
+	p {
+	  margin: 0;
+	  width: 100%;
+	}
+
+	&.nickCategory {
+	  display: flex;
+	  flex: 2 1 auto;
+
+	  p {
+		text-align: center;
+	  }
+
+	  &:hover {
+		background-color: lightgrey;
+	  }
+	  &:active {
+		background-color: grey;
+	  }
+	  &.selectedCategory {
+		background-color: lightgreen;
+	  }
+	  background-color: white;
+	}
+
+	&.nickName {
+	  &:hover {
+		background-color: lightgrey;
+	  }
+	  &:active {
+		background-color: grey;
+	  }
+	  &.selectedNickName {
+		background-color: lightgreen;
+	  }
+	  background-color: white;
+	}
+  }
+}

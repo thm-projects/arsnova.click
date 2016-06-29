@@ -20,7 +20,9 @@ import {Mongo} from 'meteor/mongo';
 import {WebApp} from 'meteor/webapp';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {BannedNicksCollection} from '/lib/banned_nicks/collection.js';
+import {NicknameCategoriesCollection} from '/lib/nickname_categories/collection.js';
 import {forbiddenNicks} from './forbiddenNicks.js';
+import {nickCategories} from './nickCategories.js';
 
 if (Meteor.isServer) {
 	Meteor.startup(function () {
@@ -57,6 +59,12 @@ if (Meteor.isServer) {
 		if (BannedNicksCollection && !BannedNicksCollection.findOne()) {
 			forbiddenNicks.forEach(function (item) {
 				BannedNicksCollection.insert({userNick: item});
+			});
+		}
+		NicknameCategoriesCollection.remove({});
+		if (NicknameCategoriesCollection && !NicknameCategoriesCollection.findOne()) {
+			nickCategories.forEach(function (item) {
+				NicknameCategoriesCollection.insert({nick: item.nick, nickCategory: item.nickCategory, insertDate: new Date(), lastUsedDate: new Date()});
 			});
 		}
 	});

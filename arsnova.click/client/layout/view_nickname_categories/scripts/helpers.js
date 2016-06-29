@@ -28,8 +28,8 @@ Template.nicknameCategories.helpers({
 		}), true);
 	},
 	nickNames: function () {
-		if (!Session.get("selectedCategory")) {
-			return;
+		if (!Session.get("selectedCategory") || Session.get("selectedCategory") === "undefined") {
+			return false;
 		}
 		return NicknameCategoriesCollection.find({nickCategory: Session.get("selectedCategory")}, {sort: {nick: 1}, fields: {nick: 1}});
 	},

@@ -31,10 +31,10 @@
                 <div class="col-xs-12 col-sm-6">
                     {{#if nickNames}}
                         <h3>Verfügbare Nicknamen</h3>
+                        <div class="nickStyle nickName {{#if hasSelectedAll}}selectedNickName{{/if}}" id="select_all">
+                            <p>Alle Auswählen</p>
+                        </div>
                     {{/if}}
-                    <div class="nickStyle nickName {{#if hasSelectedAll}}selectedNickName{{/if}}" id="select_all">
-                        <p>Alle Auswählen</p>
-                    </div>
                     {{#each nickNames}}
                         <div class="nickStyle nickName {{#if isSelectedNick this.nick}}selectedNickName{{/if}}" id="nickName_{{this.nick}}">
                             <p>{{_ this.nick}}</p>

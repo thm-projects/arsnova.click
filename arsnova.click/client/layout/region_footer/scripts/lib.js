@@ -75,6 +75,12 @@ export const footerElemQRCode = {
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.qr_code"
 };
+export const footerElemNicknames = {
+	id: "nicknames",
+	iconClass: "glyphicon glyphicon-user",
+	textClass: "footerElementText",
+	textName: "region.footer.footer_bar.nicknames"
+};
 const footerElemShowMore = {
 	id: "show-more",
 	iconClass: "glyphicon glyphicon-menu-hamburger",

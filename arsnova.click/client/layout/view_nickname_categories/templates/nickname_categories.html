@@ -1,0 +1,61 @@
+<!--
+* This file is part of ARSnova Click.
+* Copyright (C) 2016 The ARSnova Team
+*
+* ARSnova Click is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* ARSnova Click is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
+
+<template name="nicknameCategories">
+    <div class="row center-vertical full-screen-content nicknameCategories">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-12 nickCategoryWrapper">
+                    {{#each nickNameCategories}}
+                        <div class="nickStyle nickCategory" id="nickCategory_{{this}}">
+                            <p>{{_ this}}</p>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    {{#if nickNames}}
+                        <h3>Verfügbare Nicknamen</h3>
+                        <div class="nickStyle nickName {{#if hasSelectedAll}}selectedNickName{{/if}}" id="select_all">
+                            <p>Alle Auswählen</p>
+                        </div>
+                    {{/if}}
+                    {{#each nickNames}}
+                        <div class="nickStyle nickName {{#if isSelectedNick this.nick}}selectedNickName{{/if}}" id="nickName_{{this.nick}}">
+                            <p>{{_ this.nick}}</p>
+                        </div>
+                    {{/each}}
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <h3>Ausgewählte Nicknamen</h3>
+                    {{#unless chosenNickNames.count}}
+                        <div class="nickStyle chosenNickName" id="no_nick_selected">
+                            <p>Keine Nicks ausgewählt, alle Nicks sind erlaubt.</p>
+                        </div>
+                    {{/unless}}
+                    {{#each chosenNickNames}}
+                        <div class="nickStyle chosenNickName" id="chosen_nickName_{{this.nick}}">
+                            <p>{{_ this.nick}}</p>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{> footer_nav_buttons forwardId = 'forwardButton' forwardText = 'view.nickname_categories.save' }}
+</template>

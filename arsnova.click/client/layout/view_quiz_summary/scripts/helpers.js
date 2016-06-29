@@ -17,6 +17,7 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {NicknameCategoriesCollection} from '/lib/nickname_categories/collection.js';
 import {getQuestionTypes} from '/client/layout/view_questions/scripts/lib.js';
 
 Template.quizSummary.helpers({
@@ -90,6 +91,32 @@ Template.quizSummary.helpers({
 	},
 	getTranslationForReason: function (reason) {
 		return "view.quiz_summary.validation_errors.reasons." + reason;
+	},
+	selectedNicks: function () {
+		if (!Session.get("questionGroup") || !Session.get("showSelectedNicks")) {
+			return;
+		}
+		let result = "";
+		NicknameCategoriesCollection.find({_id: {$in: Session.get("questionGroup").getSelectedNicks()}}, {sort: {nick: 1}}).fetch().forEach(function (item) {
+			result += item.nick + ", ";
+		});
+		return result.slice(0, result.length - 2);
+	},
+	noSelectedNicks: function () {
+		return Session.get("questionGroup").getSelectedNicks().length === 0;
+	},
+	getShowSelectedNicksText: function () {
+		if (Session.get("showSelectedNicks") === true) {
+			return "view.quiz_summary.hide_selected_nicks";
+		} else {
+			return "view.quiz_summary.show_selected_nicks";
+		}
+	},
+	selectedNicksCount: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		return Session.get("questionGroup").getSelectedNicks().length;
 	},
 	isVotingQuestion: function (questionType) {
 		return questionType === "SurveyQuestion";

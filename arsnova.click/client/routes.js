@@ -29,7 +29,7 @@ import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scri
 
 const subsCache = new SubsManager({
 	/* maximum number of cached subscriptions */
-	cacheLimit: 8,
+	cacheLimit: 9,
 	/* any subscription will expire after 15 minutes, if it's not subscribed again */
 	expireIn: 15
 });
@@ -49,7 +49,9 @@ Router.configure({
 			subscriptions.push(subsCache.subscribe('MemberListCollection.join', Router.current().params.quizName));
 			subscriptions.push(subsCache.subscribe('LeaderBoardCollection.join', Router.current().params.quizName));
 			subscriptions.push(subsCache.subscribe('EventManagerCollection.join', Router.current().params.quizName));
+			subscriptions.push(subsCache.subscribe('NicknameCategoriesCollection.join'));
 		} else {
+			/* Do not use subscription cache here to prevent false results in the connection quality check on the landing page */
 			subscriptions.push(Meteor.subscribe("ConnectionStatusCollection.join"));
 		}
 		return subscriptions;
@@ -222,7 +224,7 @@ Router.route('/:quizName/nick', {
 				globalEventStackObserver.startObserving(Router.current().params.quizName);
 			}
 			if (this.ready()) {
-				this.render('nick');
+				this.render('nickViewWrapper');
 			}
 		} else {
 			Router.go("/");
@@ -266,6 +268,19 @@ Router.route('/:quizName/settimer', {
 			}
 			this.render('questionList', {to: 'header.questionList'});
 			this.render('createTimerView');
+		} else {
+			Router.go("/");
+		}
+	}
+});
+
+Router.route('/:quizName/nicknameCategories', {
+	action: function () {
+		if (localData.containsHashtag(Router.current().params.quizName)) {
+			if (!globalEventStackObserver.isRunning()) {
+				globalEventStackObserver.startObserving(Router.current().params.quizName);
+			}
+			this.render('nicknameCategories');
 		} else {
 			Router.go("/");
 		}

@@ -30,7 +30,8 @@
         "fullscreen": "Fullscreen",
         "show_more": "More",
         "sound": "Sound",
-        "qr_code": "QR Code"
+        "qr_code": "QR Code",
+        "nicknames": "Nicknames"
       },
       "about": {
         "title": "About the quiz app",
@@ -193,7 +194,11 @@
       "nickname_na_popup": "This name is not available!",
       "nickname_blacklist_popup": "This name is (because of its meaning) not available!",
       "nickname_too_long": "The name is too long",
-      "nickname_too_short": "The name is too short"
+      "nickname_too_short": "The name is too short",
+      "no_selectable_nick_available": {
+        "1": "All available nicknames have been chosen.",
+        "2": "It is not possible to join the quiz."
+      }
     },
     "hashtag_management": {
       "enter_quiz_name": "Enter the quiz name here",
@@ -263,6 +268,14 @@
       "kick_member_confirmation": "Shall the attendee '<span id=\"nickName\"></span>' be removed from the session?",
       "add_kicked_member_to_ban_list": "Ban nickname permanently"
     },
+    "nickname_categories": {
+      "title": "Limit available nicknames",
+      "save": "Save",
+      "category": {
+        "disney": "Disney",
+        "science": "Science"
+      }
+    },
     "questions": {
       "title": "1/4 Enter question text",
       "choose_format": "Choose question format:",
@@ -318,7 +331,11 @@
         }
       },
       "edit_quiz": "Edit quiz",
-      "start_quiz": "Start quiz"
+      "start_quiz": "Start quiz",
+      "selected_nicks": "Valid nicknames",
+      "no_selected_nicks": "No nicknames selected. All nicknames are valid.",
+      "hide_selected_nicks": "Hide nicknames",
+      "show_selected_nicks": "Show nicknames"
     },
     "theme_switcher": {
       "set_theme": "Choose a theme for all attendees",

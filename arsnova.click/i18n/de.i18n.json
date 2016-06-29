@@ -30,7 +30,8 @@
         "fullscreen": "Vollbild",
         "show_more": "Mehr",
         "sound": "Sound",
-        "qr_code": "QR Code"
+        "qr_code": "QR Code",
+        "nicknames": "Benutzernamen"
       },
       "about": {
         "title": "Über die Quiz-App",
@@ -193,7 +194,11 @@
       "nickname_na_popup": "Dieser Name ist nicht verfügbar!",
       "nickname_blacklist_popup": "Dieser Name ist nicht zulässig!",
       "nickname_too_long": "Der Name ist zu lang",
-      "nickname_too_short": "Der Name ist zu kurz"
+      "nickname_too_short": "Der Name ist zu kurz",
+      "no_selectable_nick_available": {
+        "1": "Alle verfügbaren Nicknamen wurden bereits gewählt.",
+        "2": "Eine Teilnahme am Quiz ist nicht möglich."
+      }
     },
     "hashtag_management": {
       "enter_quiz_name": "Gib hier den Quiznamen ein",
@@ -263,6 +268,14 @@
       "kick_member_confirmation": "Soll die Person '<span id=\"nickName\"></span>' aus dem Quiz entfernt werden?",
       "add_kicked_member_to_ban_list": "Den Nicknamen permanent bannen"
     },
+    "nickname_categories": {
+      "title": "Nicknamen begrenzen",
+      "save": "Speichern",
+      "category": {
+        "disney": "Disney",
+        "science": "Wissenschaft"
+      }
+    },
     "questions": {
       "title": "1/4: Fragetext eingeben",
       "choose_format": "Format:",
@@ -318,7 +331,11 @@
         }
       },
       "edit_quiz": "Quiz bearbeiten",
-      "start_quiz": "Quiz starten"
+      "start_quiz": "Quiz starten",
+      "selected_nicks": "Gültige Benutzernamen",
+      "no_selected_nicks": "Keine Benutzernamen ausgewählt. Alle Namen sind gültig.",
+      "hide_selected_nicks": "Verberge Benutzernamen",
+      "show_selected_nicks": "Zeige Benutzernamen"
     },
     "theme_switcher": {
       "set_theme": "Stil wählen",

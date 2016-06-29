@@ -122,3 +122,30 @@ Template.nick.events({
 		}
 	}
 });
+
+Template.nickLimited.events({
+	"click #backButton": function () {
+		Router.go("/" + Router.current().params.quizName + "/resetToHome");
+	},
+	"click .selectableNick": function (event) {
+		const nickname = $(event.currentTarget).attr("id").replace("selectableNick_", "");
+		const bgColor = lib.rgbToHex(lib.getRandomInt(0, 255), lib.getRandomInt(0, 255), lib.getRandomInt(0, 255));
+		Meteor.call('MemberListCollection.addLearner', {
+			hashtag: Router.current().params.quizName,
+			nick: nickname,
+			privateKey: localData.getPrivateKey(),
+			backgroundColor: bgColor,
+			foregroundColor: lib.transformForegroundColor(lib.hexToRgb(bgColor))
+		}, (err) => {
+			if (err) {
+				new ErrorSplashscreen({
+					autostart: true,
+					errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
+				});
+			} else {
+				localStorage.setItem(Router.current().params.quizName + "nick", nickname);
+				Router.go("/" + Router.current().params.quizName + "/memberlist");
+			}
+		});
+	}
+});

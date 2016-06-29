@@ -19,7 +19,6 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {showReadingConfirmationSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
@@ -40,9 +39,12 @@ Template.liveResults.onRendered(()=> {
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		footerElements.addFooterElement(footerElements.footerElemHome);
 		footerElements.addFooterElement(footerElements.footerElemSound);
+		/*
+		Not yet implemented!
 		if (EventManagerCollection.findOne().readingConfirmationIndex < QuestionGroupCollection.findOne().questionList.length) {
 			footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
 		}
+		*/
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		footerElements.calculateFooter();
 	} else {

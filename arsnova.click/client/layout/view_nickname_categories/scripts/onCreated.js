@@ -17,17 +17,13 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
-import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
+import * as localData from '/lib/local_storage.js';
 
-Template.quizSummary.onRendered(function () {
-	if (!Session.get("questionGroup").isValid()) {
-		$('#forwardButton').attr("disabled", "disabled");
+Template.nicknameCategories.onCreated(function () {
+	if (!Session.get("questionGroup")) {
+		Session.set("questionGroup", localData.reenterSession(Router.current().params.quizName));
 	}
-	calculateHeaderSize();
-	$(window).resize(calculateHeaderSize);
-	footerElements.removeFooterElements();
-	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.addFooterElement(footerElements.footerElemNicknames);
-	footerElements.calculateFooter();
+	if (!Session.get("selectedCategory")) {
+		Session.set("selectedCategory", sessionStorage.getItem(Router.current().params.quizName + "_selectedCategory"));
+	}
 });

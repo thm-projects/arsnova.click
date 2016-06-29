@@ -18,6 +18,4 @@
 import {Template} from 'meteor/templating';
 
 Template.nick.onCreated(function () {
-	this.subscribe('MemberListCollection.members', Router.current().params.quizName);
-	this.subscribe("EventManagerCollection.join", Router.current().params.quizName);
 });

@@ -1,0 +1,44 @@
+
+@import "../../../layout/global/styles/appearance";
+
+.nickLimited {
+  .selectableNickWrapper {
+	display: flex;
+	justify-content: flex-start;;
+	align-content: stretch;
+	flex-flow: row wrap;
+
+	h3 {
+	  text-align: center;
+	  color: white;
+	  width: 100%;
+	}
+
+	.selectableNick {
+	  border-radius: $corner-radius;
+	  padding: 10px;
+	  margin: 10px;
+	  cursor: pointer;
+	  user-select: none;
+	  -moz-user-select: none;
+	  -webkit-user-select: none;
+	  -ms-user-select: none;
+	  display: flex;
+	  flex: 0 1 30%;
+
+	  p {
+		margin: 0;
+		width: 100%;
+		text-align: center;
+	  }
+
+	  &:hover {
+		background-color: lightgrey;
+	  }
+	  &:active {
+		background-color: grey;
+	  }
+	  background-color: white;
+	}
+  }
+}

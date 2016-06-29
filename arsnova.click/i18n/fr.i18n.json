@@ -30,7 +30,8 @@
         "fullscreen": "Plein-écran",
         "show_more": "Plus",
         "sound": "Son",
-        "qr_code": "Code QR"
+        "qr_code": "Code QR",
+        "nicknames": "Surnoms"
       },
       "about": {
         "title": "À propos de l'application quiz",
@@ -193,7 +194,11 @@
       "nickname_na_popup": "Ce pseudo est déjà prit!",
       "nickname_blacklist_popup": "Ce pseudo n'est pas autorisé!",
       "nickname_too_long": "Ce pseudo est trop long",
-      "nickname_too_short": "Ce pseudo est trop court"
+      "nickname_too_short": "Ce pseudo est trop court",
+      "no_selectable_nick_available": {
+        "1": "Tous les surnoms disponibles ont été choisis.",
+        "2": "Il est impossible de se joindre au quiz."
+      }
     },
     "hashtag_management": {
       "enter_quiz_name": "Entres le nom du quiz",
@@ -263,6 +268,14 @@
       "kick_member_confirmation": "Voulez-vous supprimer la personne '<span id=\"nickName\"></span>' du quiz?",
       "add_kicked_member_to_ban_list": "Bannir le pseudo de manière permanente"
     },
+    "nickname_categories": {
+      "title": "Limite disponibles surnoms",
+      "save": "Sauvegarder",
+      "category": {
+        "disney": "Disney",
+        "science": "Science"
+      }
+    },
     "questions": {
       "title": "1/4 Entrez texte de la question",
       "enter_question_here": "Entre la question",
@@ -318,7 +331,11 @@
         }
       },
       "edit_quiz": "Modifier quiz",
-      "start_quiz": "Commencer quiz"
+      "start_quiz": "Commencer quiz",
+      "selected_nicks": "Surnoms valides",
+      "no_selected_nicks": "Aucun surnoms sélectionnés. Tous les noms sont valides.",
+      "hide_selected_nicks": "Masquer les surnoms",
+      "show_selected_nicks": "Afficher les surnoms"
     },
     "theme_switcher": {
       "set_theme": "Choisir un style",

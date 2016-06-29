@@ -15,19 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
-import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 
-Template.quizSummary.onRendered(function () {
-	if (!Session.get("questionGroup").isValid()) {
-		$('#forwardButton').attr("disabled", "disabled");
-	}
-	calculateHeaderSize();
-	$(window).resize(calculateHeaderSize);
-	footerElements.removeFooterElements();
-	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.addFooterElement(footerElements.footerElemNicknames);
-	footerElements.calculateFooter();
+Template.nicknameCategories.onDestroyed(function () {
+	sessionStorage.setItem(Router.current().params.quizName + "_selectedCategory", undefined);
 });

@@ -28,5 +28,6 @@ Template.quizSummary.onRendered(function () {
 	$(window).resize(calculateHeaderSize);
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
+	footerElements.addFooterElement(footerElements.footerElemNicknames);
 	footerElements.calculateFooter();
 });

@@ -18,7 +18,6 @@
 <template name="nicknameCategories">
     <div class="row center-vertical full-screen-content nicknameCategories">
         <div class="col-xs-12">
-            {{> titel titelText="view.nickname_categories.title"}}
             <div class="row">
                 <div class="col-xs-12 nickCategoryWrapper">
                     {{#each nickNameCategories}}
@@ -30,17 +29,27 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
-                    <h3>Verfügbare Nicknamen</h3>
+                    {{#if nickNames}}
+                        <h3>Verfügbare Nicknamen</h3>
+                    {{/if}}
+                    <div class="nickStyle nickName {{#if hasSelectedAll}}selectedNickName{{/if}}" id="select_all">
+                        <p>Alle Auswählen</p>
+                    </div>
                     {{#each nickNames}}
-                        <div class="nickStyle nickName" id="nickName_{{this.nick}}">
+                        <div class="nickStyle nickName {{#if isSelectedNick this.nick}}selectedNickName{{/if}}" id="nickName_{{this.nick}}">
                             <p>{{_ this.nick}}</p>
                         </div>
                     {{/each}}
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <h3>Ausgewählte Nicknamen</h3>
+                    {{#unless chosenNickNames.count}}
+                        <div class="nickStyle chosenNickName" id="no_nick_selected">
+                            <p>Keine Nicks ausgewählt, alle Nicks sind erlaubt.</p>
+                        </div>
+                    {{/unless}}
                     {{#each chosenNickNames}}
-                        <div class="nickStyle nickName" id="chosen_nickName_{{this.nick}}">
+                        <div class="nickStyle chosenNickName" id="chosen_nickName_{{this.nick}}">
                             <p>{{_ this.nick}}</p>
                         </div>
                     {{/each}}
@@ -48,4 +57,5 @@
             </div>
         </div>
     </div>
+    {{> footer_nav_buttons forwardId = 'forwardButton' forwardText = 'view.nickname_categories.save' }}
 </template>

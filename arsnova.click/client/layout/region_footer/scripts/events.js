@@ -306,6 +306,9 @@ const clickEvents = {
 			$(window).off("resize", windowResizeHandler);
 			qrCodeContainer.hide();
 		});
+	},
+	"click #nicknames": function () {
+		Router.go("/" + Router.current().params.quizName + "/nicknameCategories");
 	}
 };
 

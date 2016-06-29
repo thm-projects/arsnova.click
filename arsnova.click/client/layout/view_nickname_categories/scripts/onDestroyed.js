@@ -17,11 +17,6 @@
 
 import {Template} from 'meteor/templating';
 
-Template.createTimerView.events({
-	"click #forwardButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/quizSummary");
-	},
-	"click #backButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/answeroptions");
-	}
+Template.nicknameCategories.onDestroyed(function () {
+	sessionStorage.setItem(Router.current().params.quizName + "_selectedCategory", undefined);
 });

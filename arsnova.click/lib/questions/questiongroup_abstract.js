@@ -27,6 +27,7 @@ const theme = Symbol("theme");
 const musicVolume = Symbol("musicVolume");
 const musicEnabled = Symbol("musicEnabled");
 const musicTitle = Symbol("musicTitle");
+const selectedNicks = Symbol("selectedNicks");
 
 export class AbstractQuestionGroup {
 
@@ -62,6 +63,7 @@ export class AbstractQuestionGroup {
 		this[musicVolume] = options.musicVolume || 80;
 		this[musicEnabled] = options.musicEnabled || "1";
 		this[musicTitle] = options.musicTitle || "Song1";
+		this[selectedNicks] = options.selectedNicks || [];
 	}
 
 	/**
@@ -133,7 +135,8 @@ export class AbstractQuestionGroup {
 			theme: this.getTheme(),
 			musicVolume: this.getMusicVolume(),
 			musicEnabled: this.getMusicEnabled(),
-			musicTitle: this.getMusicTitle()
+			musicTitle: this.getMusicTitle(),
+			selectedNicks: this.getSelectedNicks()
 		};
 	}
 
@@ -164,6 +167,18 @@ export class AbstractQuestionGroup {
 				return false;
 			}
 			if (questionGroup.getTheme() !== this.getTheme()) {
+				return false;
+			}
+			if (questionGroup.getSelectedNicks() !== this.getSelectedNicks()) {
+				return false;
+			}
+			if (questionGroup.getMusicEnabled() !== this.getMusicEnabled()) {
+				return false;
+			}
+			if (questionGroup.getMusicTitle() !== this.getMusicTitle()) {
+				return false;
+			}
+			if (questionGroup.getMusicVolume() !== this.getMusicVolume()) {
 				return false;
 			}
 			if (questionGroup.getQuestionList().length === this.getQuestionList().length) {
@@ -256,5 +271,45 @@ export class AbstractQuestionGroup {
 			throw new Error("Invalid argument list for QuestionGroup.setMusicTitle");
 		}
 		this[musicTitle] = newMusicTitle;
+	}
+
+	getSelectedNicks () {
+		return this[selectedNicks];
+	}
+
+	setSelectedNicks (newSelectedNicks) {
+		if (!(newSelectedNicks instanceof Array) || newSelectedNicks.length === 0) {
+			throw new Error("Invalid argument list for QuestionGroup.setSelectedNicks");
+		}
+		this[selectedNicks] = newSelectedNicks;
+	}
+
+	addSelectedNick (newSelectedNick) {
+		if (typeof newSelectedNick !== "string") {
+			throw new Error("Invalid argument list for QuestionGroup.addSelectedNick");
+		}
+		if (this.getSelectedNicks().indexOf(newSelectedNick) !== -1) {
+			return;
+		}
+		this[selectedNicks].push(newSelectedNick);
+	}
+
+	removeSelectedNickByName (selectedNick) {
+		if (typeof selectedNick !== "string") {
+			throw new Error("Invalid argument list for QuestionGroup.removeSelectedNickByName");
+		}
+		for (let i = 0; i < this.getSelectedNicks().length; i++) {
+			if (this.getSelectedNicks()[i] === selectedNick) {
+				this[selectedNicks].splice(i, 1);
+				return;
+			}
+		}
+	}
+
+	removeSelectedNickById (id) {
+		if (typeof id !== "number" || id < 0 || id > this.getSelectedNicks().length) {
+			throw new Error("Invalid argument list for QuestionGroup.removeSelectedNickById");
+		}
+		this[selectedNicks].splice(id, 1);
 	}
 }

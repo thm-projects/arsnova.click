@@ -15,13 +15,15 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import * as localData from '/lib/local_storage.js';
 
-Template.createTimerView.events({
-	"click #forwardButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/quizSummary");
-	},
-	"click #backButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/answeroptions");
+Template.nicknameCategories.onCreated(function () {
+	if (!Session.get("questionGroup")) {
+		Session.set("questionGroup", localData.reenterSession(Router.current().params.quizName));
+	}
+	if (!Session.get("selectedCategory")) {
+		Session.set("selectedCategory", sessionStorage.getItem(Router.current().params.quizName + "_selectedCategory"));
 	}
 });

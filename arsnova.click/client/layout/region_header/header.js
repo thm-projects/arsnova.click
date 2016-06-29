@@ -63,6 +63,8 @@ Template.header.helpers({
 				return TAPi18n.__("view.questions.title");
 			case "answeroptions":
 				return TAPi18n.__("view.answeroptions.title");
+			case "nicknameCategories":
+				return TAPi18n.__("view.nickname_categories.title");
 			case "settimer":
 				return TAPi18n.__("view.timer.title");
 			case "quizSummary":

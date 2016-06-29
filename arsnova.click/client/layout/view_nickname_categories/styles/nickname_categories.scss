@@ -65,7 +65,8 @@
 	  background-color: white;
 	}
 
-	&.nickName {
+	&.nickName,
+	&.chosenNickName {
 	  &:hover {
 		background-color: lightgrey;
 	  }
@@ -76,6 +77,13 @@
 		background-color: lightgreen;
 	  }
 	  background-color: white;
+	}
+	&#select_all,
+	&#no_nick_selected {
+	  p {
+		text-align: center;
+		text-decoration: underline;
+	  }
 	}
   }
 }

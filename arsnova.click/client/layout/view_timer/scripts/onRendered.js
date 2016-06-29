@@ -42,5 +42,6 @@ Template.createTimerView.onRendered(function () {
 
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
+	footerElements.addFooterElement(footerElements.footerElemNicknames);
 	footerElements.calculateFooter();
 });

@@ -30,7 +30,8 @@
         "fullscreen": "Vollbild",
         "show_more": "Mehr",
         "sound": "Sound",
-        "qr_code": "QR Code"
+        "qr_code": "QR Code",
+        "nicknames": "Benutzernamen"
       },
       "about": {
         "title": "Über die Quiz-App",
@@ -265,6 +266,7 @@
     },
     "nickname_categories": {
       "title": "Nicknamen begrenzen",
+      "save": "Speichern",
       "category": {
         "disney": "Disney",
         "science": "Wissenschaft"

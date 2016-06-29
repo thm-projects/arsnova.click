@@ -94,7 +94,7 @@ export class FreeTextQuestion extends AbstractQuestion {
 				answerOptionNumber: 0,
 				configCaseSensitive: false,
 				configTrimWhitespaces: false,
-				configUseKeywords: false,
+				configUseKeywords: true,
 				configUsePunctuation: false
 			})
 		);

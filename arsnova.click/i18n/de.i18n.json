@@ -265,18 +265,18 @@
     },
     "questions": {
       "title": "1/4: Fragetext eingeben",
-      "choose_format": "Frageformat wählen:",
+      "choose_format": "Format wählen:",
       "enter_question_here": "Gib hier die Frage ein",
       "format": "Format",
       "edit": "Bearbeiten",
       "preview": "Vorschau",
-      "single_choice_question": "Single-Choice-Frage (nur eine Antwort ist richtig)",
-      "single_choice_question_yes_no": "Ja-Nein-Frage (nur eine Antwort ist richtig / Antwortoptionen sind auf Ja und Nein vordefiniert)",
-      "single_choice_question_true_false": "Wahr-Falsch-Frage (nur eine Antwort ist richtig / Antwortoptionen sind auf Wahr und Falsch vordefiniert)",
+      "single_choice_question": "Single-Choice-Frage (eine von mehreren Antworten ist richtig)",
+      "single_choice_question_yes_no": "Ja|Nein-Frage",
+      "single_choice_question_true_false": "Wahr|Falsch-Frage",
       "multiple_choice_question": "Multiple-Choice-Frage (eine oder mehrere Antworten sind richtig)",
       "survey_question": "Umfrage (Antworten sind weder richtig noch falsch)",
-      "ranged_question": "Schätzfrage (Antworten im vorgegebenen Bereich sind richtig)",
-      "free_text_question": "Kurzantwort-Frage (Antwort ist bei Übereinstimmung mit der Musterantwort richtig)"
+      "ranged_question": "Schätzfrage (Zahlen im vorgegebenen Bereich sind richtig)",
+      "free_text_question": "Kurzantwort (Text bei Übereinstimmung mit Vorgaben ist richtig)"
     },
     "quiz_summary": {
       "title": "4/4: Zusammenfassung",

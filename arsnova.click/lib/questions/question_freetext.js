@@ -92,10 +92,10 @@ export class FreeTextQuestion extends AbstractQuestion {
 				questionIndex: this.getQuestionIndex(),
 				answerText: "",
 				answerOptionNumber: 0,
-				configCaseSensitive: true,
-				configTrimWhitespaces: true,
-				configUseKeywords: true,
-				configUsePunctuation: true
+				configCaseSensitive: false,
+				configTrimWhitespaces: false,
+				configUseKeywords: false,
+				configUsePunctuation: false
 			})
 		);
 	}

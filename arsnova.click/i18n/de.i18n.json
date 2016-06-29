@@ -265,8 +265,8 @@
     },
     "questions": {
       "title": "1/4: Fragetext eingeben",
-      "choose_format": "Format wählen:",
-      "enter_question_here": "Gib hier die Frage ein",
+      "choose_format": "Format:",
+      "enter_question_here": "Gib hier den Text der Frage ein",
       "format": "Format",
       "edit": "Bearbeiten",
       "preview": "Vorschau",

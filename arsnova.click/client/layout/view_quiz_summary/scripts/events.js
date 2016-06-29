@@ -25,6 +25,7 @@ Template.quizSummary.events({
 		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
 		Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
 		Meteor.call("HashtagsCollection.setDefaultTheme", Router.current().params.quizName, localStorage.getItem("theme"));
+		Meteor.call("HashtagsCollection.setSelectedNicks", Router.current().params.quizName, Session.get("questionGroup").getSelectedNicks());
 		Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
 		Router.go("/" + Router.current().params.quizName + "/memberlist");
 	},

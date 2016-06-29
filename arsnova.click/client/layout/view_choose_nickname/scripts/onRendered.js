@@ -38,3 +38,10 @@ Template.nick.onRendered(function () {
 	calculateHeaderSize();
 	$(window).resize(calculateHeaderSize);
 });
+
+Template.nickLimited.onRendered(function () {
+	footerElements.removeFooterElements();
+	footerElements.calculateFooter();
+	calculateHeaderSize();
+	$(window).resize(calculateHeaderSize);
+});

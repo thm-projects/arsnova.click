@@ -224,7 +224,7 @@ Router.route('/:quizName/nick', {
 				globalEventStackObserver.startObserving(Router.current().params.quizName);
 			}
 			if (this.ready()) {
-				this.render('nick');
+				this.render('nickViewWrapper');
 			}
 		} else {
 			Router.go("/");

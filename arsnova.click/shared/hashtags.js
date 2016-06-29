@@ -21,7 +21,7 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {HashtagsCollection, hashtagsCollectionSchema, hashtagSchema, themeSchema} from '/lib/hashtags/collection.js';
+import {HashtagsCollection, hashtagsCollectionSchema, hashtagSchema, themeSchema, selectedNicksSchema} from '/lib/hashtags/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
@@ -71,6 +71,31 @@ Meteor.methods({
 				eventStack: {
 					key: "HashtagsCollection.setDefaultTheme",
 					value: {hashtag: hashtag, theme: themeName}
+				}
+			}
+		});
+	},
+	'HashtagsCollection.setSelectedNicks': function (hashtag, nicks) {
+		new SimpleSchema({hashtag: hashtagSchema, selectedNicks: selectedNicksSchema}).validate({hashtag: hashtag, selectedNicks: nicks});
+
+		let queryParam = {};
+		if (Meteor.isServer) {
+			queryParam.hashtag = hashtag;
+		}
+
+		if (!HashtagsCollection.findOne(queryParam)) {
+			throw new Meteor.Error('HashtagsCollection.setSelectedNicks', 'session_not_exists');
+		}
+		HashtagsCollection.update(queryParam, {
+			$set: {
+				selectedNicks: nicks
+			}
+		});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "HashtagsCollection.setSelectedNicks",
+					value: {hashtag: hashtag, selectedNicks: nicks}
 				}
 			}
 		});

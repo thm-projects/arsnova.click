@@ -30,7 +30,8 @@
         "fullscreen": "Pantalla completa",
         "show_more": "Más",
         "sound": "Sonido",
-        "qr_code": "Código QR"
+        "qr_code": "Código QR",
+        "nicknames": "Apodos"
       },
       "about": {
         "title": "Sobre la aplicación",
@@ -193,7 +194,11 @@
       "nickname_na_popup": "¡Este nombre no está disponible!",
       "nickname_blacklist_popup": "¡Este nombre no está permitido!",
       "nickname_too_long": "El nombre es demasiado largo",
-      "nickname_too_short": "El nombre es demasiado corto"
+      "nickname_too_short": "El nombre es demasiado corto",
+      "no_selectable_nick_available": {
+        "1": "Todos los apodos disponibles han sido elegidos.",
+        "2": "No es posible unirse a la prueba."
+      }
     },
     "hashtag_management": {
       "enter_quiz_name": "Ingresa el nombre del cuestionario",
@@ -262,6 +267,14 @@
       "start_quiz": "¡Comenzar!",
       "kick_member_confirmation": "¿Eliminar a esta persona '<span id=\"nickName\"></span>' del cuestionario?",
       "add_kicked_member_to_ban_list": "¿Bloquear este nick permanentemente?"
+    },
+    "nickname_categories": {
+      "title": "Límite apodos disponibles",
+      "save": "Salvar",
+      "category": {
+        "disney": "Disney",
+        "science": "Ciencia"
+      }
     },
     "questions": {
       "title": "1/4 Introduzca texto de la pregunta",

@@ -177,7 +177,7 @@
         "max_range": "Maximalwert"
       },
       "free_text_question": {
-        "title": "Freitext Antwort",
+        "title": "Richtige Antwort:",
         "config_case_sensitive": "Groß- und Kleinschreibung beachten",
         "config_trim_whitespaces": "Leerzeichen in Antwort beachten",
         "config_use_keywords": "Reihenfolge der Wörter beachten",

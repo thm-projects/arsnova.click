@@ -39,7 +39,7 @@ Template.nick.helpers({
 
 Template.nickLimited.helpers({
 	getSelectableNicks: function () {
-		return names = NicknameCategoriesCollection.find({
+		return NicknameCategoriesCollection.find({
 			_id: {
 				$in: HashtagsCollection.findOne({hashtag: Router.current().params.quizName}, {fields: {selectedNicks: 1}}).selectedNicks
 			}

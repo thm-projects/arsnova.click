@@ -76,7 +76,7 @@ Meteor.methods({
 		});
 	},
 	'HashtagsCollection.setSelectedNicks': function (hashtag, nicks) {
-		new SimpleSchema({hashtag: hashtagSchema, selectedNicks: selectedNicksSchema}).validate({hashtag: hashtag, selectedNicks: nicks});
+		new SimpleSchema({hashtag: hashtagSchema, selectedNicks: {type: [selectedNicksSchema]}}).validate({hashtag: hashtag, selectedNicks: nicks});
 
 		let queryParam = {};
 		if (Meteor.isServer) {

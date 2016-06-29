@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {NicknameCategoriesCollection} from '/lib/nickname_categories/collection.js';
@@ -22,6 +23,9 @@ import * as localData from '/lib/local_storage.js';
 
 Template.nicknameCategories.events({
 	"click #forwardButton": function () {
+		if (localStorage.getItem("lastPage") === ":quizName.memberlist") {
+			Meteor.call("HashtagsCollection.setSelectedNicks", Router.current().params.quizName, Session.get("questionGroup").getSelectedNicks());
+		}
 		history.back();
 	},
 	"click .nickCategory": function (event) {

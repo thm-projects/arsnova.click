@@ -68,9 +68,7 @@ export const hashtagsCollectionSchema = new SimpleSchema({
 	musicTitle: {
 		type: musicTitleSchema
 	},
-	selectedNicks: {
-		type: [selectedNicksSchema]
-	}
+	selectedNicks: selectedNicksSchema
 });
 
 HashtagsCollection.attachSchema(hashtagsCollectionSchema);

@@ -40,9 +40,12 @@ Template.liveResults.onRendered(()=> {
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		footerElements.addFooterElement(footerElements.footerElemHome);
 		footerElements.addFooterElement(footerElements.footerElemSound);
+		/*
+		Not yet implemented!
 		if (EventManagerCollection.findOne().readingConfirmationIndex < QuestionGroupCollection.findOne().questionList.length) {
 			footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
 		}
+		*/
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		footerElements.calculateFooter();
 	} else {

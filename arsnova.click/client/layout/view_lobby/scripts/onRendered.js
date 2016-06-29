@@ -40,7 +40,11 @@ Template.memberlist.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemHome);
 		footerElements.addFooterElement(footerElements.footerElemQRCode);
 		footerElements.addFooterElement(footerElements.footerElemSound);
+		/*
+		 Not yet implemented!
 		footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
+		*/
+		footerElements.addFooterElement(footerElements.footerElemNicknames);
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		footerElements.addFooterElement(footerElements.footerElemTheme);
 	}

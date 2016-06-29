@@ -327,7 +327,11 @@
         }
       },
       "edit_quiz": "Quiz bearbeiten",
-      "start_quiz": "Quiz starten"
+      "start_quiz": "Quiz starten",
+      "selected_nicks": "Gültige Benutzernamen",
+      "no_selected_nicks": "Keine Benutzernamen ausgewählt. Alle Namen sind gültig.",
+      "hide_selected_nicks": "Verberge Benutzernamen",
+      "show_selected_nicks": "Zeige Benutzernamen"
     },
     "theme_switcher": {
       "set_theme": "Stil wählen",

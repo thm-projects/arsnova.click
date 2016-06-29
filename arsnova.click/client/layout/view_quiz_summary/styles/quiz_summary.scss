@@ -36,4 +36,15 @@
 	span.success, span.failed {
 		font-weight: bold;
 	}
+
+  #showSelectedNicks {
+	text-decoration: underline;
+	margin-left: 50px;
+	cursor: pointer;
+	float: right;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+  }
 }

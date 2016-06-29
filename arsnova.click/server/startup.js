@@ -61,7 +61,6 @@ if (Meteor.isServer) {
 				BannedNicksCollection.insert({userNick: item});
 			});
 		}
-		NicknameCategoriesCollection.remove({});
 		if (NicknameCategoriesCollection && !NicknameCategoriesCollection.findOne()) {
 			nickCategories.forEach(function (item) {
 				NicknameCategoriesCollection.insert({nick: item.nick, nickCategory: item.nickCategory, insertDate: new Date(), lastUsedDate: new Date()});

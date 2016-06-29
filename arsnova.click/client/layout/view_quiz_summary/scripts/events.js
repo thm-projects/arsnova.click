@@ -41,5 +41,12 @@ Template.quizSummary.events({
 		} else {
 			Router.go("/" + Router.current().params.quizName + "/settimer");
 		}
+	},
+	"click #showSelectedNicks": function () {
+		if (Session.get("showSelectedNicks") === true) {
+			Session.set("showSelectedNicks", false);
+		} else {
+			Session.set("showSelectedNicks", true);
+		}
 	}
 });

@@ -55,7 +55,7 @@ Template.nicknameCategories.events({
 		localData.addHashtag(Session.get("questionGroup"));
 	},
 	"click .chosenNickName": function (event) {
-		if (typeof $(event.currentTarget).attr("id") === "no_nick_selected") {
+		if ($(event.currentTarget).attr("id") === "no_nick_selected") {
 			return;
 		}
 		const nickname = $(event.currentTarget).attr("id").replace("chosen_nickName_", "");

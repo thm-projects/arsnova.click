@@ -6,6 +6,8 @@
                 <p>{{_ "view.quiz_summary.quiz_url"}}: {{getSessionUrl}}</p>
                 <p>{{_ "view.quiz_summary.question_amount"}}: {{getQuestionCount}}</p>
                 <p>{{_ "view.quiz_summary.validation_question_group"}}: <span class="{{#if isQuestionGroupValid}}success{{else}}failed{{/if}}">{{_ getQuestionGroupValidation}}</span></p>
+                <p>{{_ "view.quiz_summary.selected_nicks"}}: {{#if noSelectedNicks}}{{_ "view.quiz_summary.no_selected_nicks"}}{{else}}{{selectedNicksCount}} <span id="showSelectedNicks">{{_ getShowSelectedNicksText}}</span>{{/if}}</p>
+                <p>{{selectedNicks}}</p>
                 <hr />
                 {{#each getQuestions}}
                     <div class="questionItem row">

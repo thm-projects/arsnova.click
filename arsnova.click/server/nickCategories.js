@@ -12,7 +12,7 @@ export var nickCategories = [
 	{nick: "Johannes Kepler", nickCategory: "view.nickname_categories.category.science"},
 	{nick: "Blaise Pascal", nickCategory: "view.nickname_categories.category.science"},
 	{nick: "Christiaan Huygens", nickCategory: "view.nickname_categories.category.science"},
-	{nick: "Irene Joliot-Curie", nickCategory: "view.nickname_categories.category.science"},
+	{nick: "Marie Curie", nickCategory: "view.nickname_categories.category.science"},
 	{nick: "Isaac Newton", nickCategory: "view.nickname_categories.category.science"},
 	{nick: "Robert Boyle", nickCategory: "view.nickname_categories.category.science"},
 	{nick: "Gottfried Leibniz", nickCategory: "view.nickname_categories.category.science"},

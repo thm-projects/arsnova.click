@@ -61,10 +61,22 @@ if (Meteor.isServer) {
 				BannedNicksCollection.insert({userNick: item});
 			});
 		}
-		if (NicknameCategoriesCollection && !NicknameCategoriesCollection.findOne()) {
-			nickCategories.forEach(function (item) {
+		nickCategories.forEach(function (item) {
+			if (!NicknameCategoriesCollection.findOne({nick: item.nick})) {
 				NicknameCategoriesCollection.insert({nick: item.nick, nickCategory: item.nickCategory, insertDate: new Date(), lastUsedDate: new Date()});
-			});
-		}
+			}
+		});
+		NicknameCategoriesCollection.find().fetch().forEach(function (item) {
+			let foundItem = false;
+			for (let i = 0; i < nickCategories.length; i++) {
+				if (nickCategories[i].nick === item.nick) {
+					foundItem = true;
+					i = nickCategories.length;
+				}
+			}
+			if (!foundItem) {
+				NicknameCategoriesCollection.remove({nick: item.nick});
+			}
+		});
 	});
 }

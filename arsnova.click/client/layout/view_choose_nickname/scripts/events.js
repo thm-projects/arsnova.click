@@ -124,6 +124,9 @@ Template.nick.events({
 });
 
 Template.nickLimited.events({
+	"click #backButton": function () {
+		Router.go("/" + Router.current().params.quizName + "/resetToHome");
+	},
 	"click .selectableNick": function (event) {
 		const nickname = $(event.currentTarget).attr("id").replace("selectableNick_", "");
 		const bgColor = lib.rgbToHex(lib.getRandomInt(0, 255), lib.getRandomInt(0, 255), lib.getRandomInt(0, 255));

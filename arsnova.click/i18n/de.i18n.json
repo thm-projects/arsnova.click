@@ -194,7 +194,11 @@
       "nickname_na_popup": "Dieser Name ist nicht verfügbar!",
       "nickname_blacklist_popup": "Dieser Name ist nicht zulässig!",
       "nickname_too_long": "Der Name ist zu lang",
-      "nickname_too_short": "Der Name ist zu kurz"
+      "nickname_too_short": "Der Name ist zu kurz",
+      "no_selectable_nick_available": {
+        "1": "Alle verfügbaren Nicknamen wurden bereits gewählt.",
+        "2": "Eine Teilnahme am Quiz ist nicht möglich."
+      }
     },
     "hashtag_management": {
       "enter_quiz_name": "Gib hier den Quiznamen ein",

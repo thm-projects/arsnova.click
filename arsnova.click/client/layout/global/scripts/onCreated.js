@@ -15,21 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import {restartConnectionIndication} from './lib.js';
+import {connectionStatus} from './lib.js';
 
-Template.connectionQualityHeader.events({
-	"click #connectionQualityHeader": function () {
-		new Splashscreen({
-			autostart: true,
-			templateName: "connectionQualitySplashscreen",
-			onRendered: function (template) {
-				template.templateSelector.find('#btn-hidePreviewModal').on('click', function () {
-					template.destroy();
-				});
-			}
-		});
-		restartConnectionIndication();
-	}
+Template.layout.onCreated(function () {
+	Session.set("connectionStatus", connectionStatus);
 });

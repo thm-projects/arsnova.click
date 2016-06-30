@@ -19,6 +19,12 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import * as lib from './lib.js';
 
+Template.layout.helpers({
+	getTheme: function () {
+		return Session.get("theme");
+	}
+});
+
 Template.connectionQualityHeader.helpers({
 	status: function () {
 		if (!Session.get("connectionStatus") || Session.get("connectionStatus").dbConnection.currentCount < Session.get("connectionStatus").dbConnection.totalCount) {

@@ -92,6 +92,8 @@ export function resetConnectionIndication() {
 	connectionStatus.dbConnection.serverRTTtotal = 0;
 	hasRunConnectionStatus = false;
 	hasRestarted = false;
+	clearTimeout(restartTimeout);
+	restartTimeout = null;
 }
 
 export function startConnectionIndication() {

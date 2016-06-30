@@ -209,7 +209,7 @@
       "create_session": "¡Crea uno nuevo!",
       "quiz_management": "cuestionarios guardados",
       "available_sessions": "Estos cuestionarios se encuentran en tu navegador:",
-      "session_management": "Adminitración de cuestionario",
+      "session_management": "Administración",
       "import": "Importar cuestionario",
       "delete_session": "Borrar cuestionario",
       "delete_session_confirmation": "¿Seguro que quieres borrar el cuestionario '<span id=\"session_name\"></span>' definitivamente?",

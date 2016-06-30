@@ -273,7 +273,12 @@
       "save": "Sauvegarder",
       "category": {
         "disney": "Disney",
-        "science": "Science"
+        "science": "Science",
+        "fantasy": "Fantaisie",
+        "literature": "Littérature",
+        "mythology": "Mythologie",
+        "actor": "Acteurs",
+        "politics": "Politiciens"
       }
     },
     "questions": {

@@ -54,7 +54,6 @@ export function containsHashtag(hashtag) {
 		return;
 	}
 	const hashtagString = localStorage.getItem("hashtags");
-
 	if (!hashtagString) {
 		return false;
 	} else {
@@ -62,7 +61,8 @@ export function containsHashtag(hashtag) {
 		$.each(JSON.parse(hashtagString), function (i, hashtagElement) {
 			loweredHashtags.push(hashtagElement.toLowerCase());
 		});
-		return $.inArray(hashtag, loweredHashtags) > -1;
+		var loweredHashtag = hashtag.toLowerCase();
+		return $.inArray(loweredHashtag, loweredHashtags) > -1;
 	}
 }
 

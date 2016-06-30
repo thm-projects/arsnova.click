@@ -271,6 +271,10 @@
     "nickname_categories": {
       "title": "Limite disponibles surnoms",
       "save": "Sauvegarder",
+      "available_nicknames": "Surnoms disponibles",
+      "choose_all": "Sélectionner tout",
+      "chosen_nicknames": "Surnoms sélectionnés",
+      "no_nicks_selected": "Aucun surnoms sélectionnés. Tous les noms sont autorisés.",
       "category": {
         "disney": "Disney",
         "science": "Science",

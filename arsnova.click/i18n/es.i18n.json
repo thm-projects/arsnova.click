@@ -271,6 +271,10 @@
     "nickname_categories": {
       "title": "Límite apodos disponibles",
       "save": "Salvar",
+      "available_nicknames": "Apodos disponibles",
+      "choose_all": "Seleccionar todo",
+      "chosen_nicknames": "Apodos seleccionados",
+      "no_nicks_selected": "No hay apodos seleccionados. Se permiten todos los nombres.",
       "category": {
         "disney": "Disney",
         "science": "Ciencia",

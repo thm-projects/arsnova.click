@@ -271,6 +271,10 @@
     "nickname_categories": {
       "title": "Limit available nicknames",
       "save": "Save",
+      "available_nicknames": "Available nicknames",
+      "choose_all": "Select all",
+      "chosen_nicknames": "Selected nicknames",
+      "no_nicks_selected": "No nicknames selected. All nicknames are allowed.",
       "category": {
         "disney": "Disney",
         "science": "Science",

@@ -4,10 +4,10 @@
   cursor: pointer;
 
   @media (orientation: portrait) {
-	right: 8vh;
+	right: 1vh;
   }
   @media (orientation: landscape) {
-	right: 8vw;
+	right: 0;
   }
 
   #connectionQualityImage {

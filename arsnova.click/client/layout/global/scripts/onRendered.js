@@ -51,6 +51,7 @@ Template.home.onRendered(function () {
 	}
 	let startTime = 0;
 	let randomKey = 0;
+	let hasRestartRequested = false;
 	const getRTT = function () {
 		randomKey = Math.random().toString(36).replace(/[^a-z]+/g, '');
 		startTime = new Date().getTime();
@@ -65,9 +66,11 @@ Template.home.onRendered(function () {
 				if (connectionStatus.dbConnection.currentCount < connectionStatus.dbConnection.totalCount) {
 					connectionStatus.dbConnection.currentCount++;
 					setTimeout(getRTT, 200);
-				} else {
+				} else if (!hasRestartRequested) {
 					/* Restart the countdown process every minute and fire 5 insertion events */
+					hasRestartRequested = true;
 					setTimeout(function () {
+						hasRestartRequested = false;
 						connectionStatus.dbConnection.totalCount = 15;
 						connectionStatus.dbConnection.currentCount = 1;
 						connectionStatus.dbConnection.serverRTT = 0;

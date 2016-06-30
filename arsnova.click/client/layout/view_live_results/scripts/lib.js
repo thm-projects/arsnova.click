@@ -122,6 +122,8 @@ export function startCountdown(index, retry = 0) {
 	const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	const questionDoc = QuestionGroupCollection.findOne().questionList[index];
 	if (!questionDoc) {
+		console.log("questionDoc: " + questionDoc);
+		console.log("on retry: " + retry);
 		if (retry < 5) {
 			setTimeout(startCountdown(index, ++retry), 20);
 		}

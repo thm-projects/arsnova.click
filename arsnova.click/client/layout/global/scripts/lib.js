@@ -35,7 +35,7 @@ export const connectionStatus = {
 		serverRTTtotal: 0
 	}
 };
-export let hasRunConnectionStatus = false;
+let hasRunConnectionStatus = false;
 let startTime = 0;
 let randomKey = 0;
 
@@ -84,6 +84,9 @@ export function stopPendingAnimation() {
 }
 
 export function startConnectionIndication() {
+	if (hasRunConnectionStatus) {
+		return;
+	}
 	hasRunConnectionStatus = true;
 	try {
 		localStorage.setItem("localStorageAvailable", true);
@@ -120,5 +123,6 @@ export function restartConnectionIndication() {
 	connectionStatus.dbConnection.currentCount = 1;
 	connectionStatus.dbConnection.serverRTT = 0;
 	connectionStatus.dbConnection.serverRTTtotal = 0;
+	hasRunConnectionStatus = false;
 	startConnectionIndication();
 }

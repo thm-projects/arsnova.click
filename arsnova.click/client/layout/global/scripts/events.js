@@ -19,7 +19,7 @@ import {Template} from 'meteor/templating';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 Template.connectionQualityHeader.events({
-	"click #detailsLink": function () {
+	"click #connectionQualityHeader": function () {
 		new Splashscreen({
 			autostart: true,
 			templateName: "connectionQualitySplashscreen",

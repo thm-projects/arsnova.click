@@ -17,16 +17,16 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import * as lib from './lib.js';
 
 Template.connectionQualityHeader.helpers({
 	status: function () {
-		if (!Session.get("connectionStatus")) {
-			return;
-		}
-		if (Session.get("connectionStatus").dbConnection.currentCount < Session.get("connectionStatus").dbConnection.totalCount) {
+		if (!Session.get("connectionStatus") || Session.get("connectionStatus").dbConnection.currentCount < Session.get("connectionStatus").dbConnection.totalCount) {
+			lib.startPendingAnimation();
 			return {
 				resultString: "region.header.connection_status.pending",
-				pending: true
+				pending: true,
+				statusColor: "lightgrey"
 			};
 		}
 		const result = {
@@ -48,13 +48,13 @@ Template.connectionQualityHeader.helpers({
 		} else if (Session.get("connectionStatus").dbConnection.serverRTT > 60) {
 			result.warnings.push("dbConnection");
 		}
+		lib.stopPendingAnimation();
 		if (result.errors.length > 0) {
-			return $.extend({resultString: "region.header.connection_status.finished_with_errors"}, result, {finishedWithErrors: true});
+			return $.extend({resultString: "region.header.connection_status.finished_with_errors"}, result, {finishedWithErrors: true, statusColor: "red"});
 		}
 		if (result.warnings.length > 0) {
-			return $.extend({resultString: "region.header.connection_status.finished_with_warnings"}, result, {finishedWithWarnings: true});
+			return $.extend({resultString: "region.header.connection_status.finished_with_warnings"}, result, {finishedWithWarnings: true, statusColor: "orange"});
 		}
-		$('#connectionQualityHeader').delay(3000).fadeOut(1000);
-		return {resultString: "region.header.connection_status.finished_without_warnings", finishedWithoutWarnings: true};
+		return {resultString: "region.header.connection_status.finished_without_warnings", finishedWithoutWarnings: true, statusColor: "green"};
 	}
 });

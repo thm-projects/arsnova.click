@@ -31,7 +31,7 @@ Template.home.onRendered(function () {
 		localStorage: false,
 		sessionStorage: false,
 		dbConnection: {
-			totalCount: 30,
+			totalCount: 15,
 			currentCount: 1,
 			serverRTT: 0,
 			serverRTTtotal: 0
@@ -65,6 +65,15 @@ Template.home.onRendered(function () {
 				if (connectionStatus.dbConnection.currentCount < connectionStatus.dbConnection.totalCount) {
 					connectionStatus.dbConnection.currentCount++;
 					setTimeout(getRTT, 200);
+				} else {
+					/* Restart the countdown process every minute and fire 5 insertion events */
+					setTimeout(function () {
+						connectionStatus.dbConnection.totalCount = 15;
+						connectionStatus.dbConnection.currentCount = 1;
+						connectionStatus.dbConnection.serverRTT = 0;
+						connectionStatus.dbConnection.serverRTTtotal = 0;
+						getRTT();
+					}, 30000);
 				}
 				Session.set("connectionStatus", connectionStatus);
 			}

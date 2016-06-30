@@ -116,6 +116,7 @@ export function countdownFinish() {
 }
 
 export function startCountdown(index, retry = 0) {
+	console.log("startcountdown");
 	if (Session.get("countdownInitialized") || Session.get("sessionClosed")) {
 		return;
 	}

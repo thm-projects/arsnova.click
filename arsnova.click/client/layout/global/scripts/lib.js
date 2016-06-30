@@ -35,6 +35,7 @@ export const connectionStatus = {
 		serverRTTtotal: 0
 	}
 };
+export let hasRunConnectionStatus = false;
 let startTime = 0;
 let randomKey = 0;
 
@@ -83,6 +84,7 @@ export function stopPendingAnimation() {
 }
 
 export function startConnectionIndication() {
+	hasRunConnectionStatus = true;
 	try {
 		localStorage.setItem("localStorageAvailable", true);
 		connectionStatus.localStorage = true;

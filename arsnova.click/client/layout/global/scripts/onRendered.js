@@ -19,7 +19,6 @@ import {Template} from 'meteor/templating';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import  * as localData from '/lib/local_storage.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import {startConnectionIndication} from './lib.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 
@@ -45,8 +44,4 @@ Template.home.onRendered(function () {
 	footerElements.addFooterElement(footerElements.footerElemFullscreen);
 	footerElements.addFooterElement(footerElements.footerElemImport);
 	footerElements.calculateFooter();
-});
-
-Template.layout.onRendered(function () {
-	startConnectionIndication();
 });

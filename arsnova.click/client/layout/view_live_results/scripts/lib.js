@@ -140,7 +140,7 @@ export function startCountdown(index, retry = 0) {
 	console.log("currentCountdown: " + currentCountdown);
 	console.log("questionTimer: " + questionDoc.timer);
 	console.log("questionTimerDiff: " + (questionDoc.timer - timeDiff.getTime() / 1000));
-	if (questionDoc.timer - timeDiff.getSeconds() <= 0) {
+	if ((questionDoc.timer - (timeDiff.getTime() / 1000)) <= 0) {
 		return;
 	}
 	if (localData.containsHashtag(Router.current().params.quizName)) {

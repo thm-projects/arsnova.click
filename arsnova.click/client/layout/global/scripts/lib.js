@@ -36,6 +36,8 @@ export const connectionStatus = {
 	}
 };
 let hasRunConnectionStatus = false;
+let hasRestarted = false;
+let restartTimeout = null;
 let startTime = 0;
 let randomKey = 0;
 
@@ -109,6 +111,9 @@ export function startConnectionIndication() {
 				if (connectionStatus.dbConnection.currentCount < connectionStatus.dbConnection.totalCount) {
 					connectionStatus.dbConnection.currentCount++;
 					setTimeout(getRTT, 200);
+				} else if (!hasRestarted && !restartTimeout) {
+					hasRestarted = true;
+					restartTimeout = setTimeout(restartConnectionIndication, 30000);
 				}
 				Session.set("connectionStatus", connectionStatus);
 			}
@@ -124,5 +129,6 @@ export function restartConnectionIndication() {
 	connectionStatus.dbConnection.serverRTT = 0;
 	connectionStatus.dbConnection.serverRTTtotal = 0;
 	hasRunConnectionStatus = false;
+	hasRestarted = false;
 	startConnectionIndication();
 }

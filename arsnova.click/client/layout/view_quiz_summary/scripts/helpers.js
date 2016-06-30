@@ -103,6 +103,9 @@ Template.quizSummary.helpers({
 		return result.slice(0, result.length - 2);
 	},
 	noSelectedNicks: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
 		return Session.get("questionGroup").getSelectedNicks().length === 0;
 	},
 	getShowSelectedNicksText: function () {

@@ -30,9 +30,9 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
                     {{#if nickNames}}
-                        <h3>Verfügbare Nicknamen</h3>
+                        <h3>{{_ "view.nickname_categories.available_nicknames"}}</h3>
                         <div class="nickStyle nickName {{#if hasSelectedAll}}selectedNickName{{/if}}" id="select_all">
-                            <p>Alle Auswählen</p>
+                            <p>{{_ "view.nickname_categories.choose_all"}}</p>
                         </div>
                     {{/if}}
                     {{#each nickNames}}
@@ -42,10 +42,10 @@
                     {{/each}}
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                    <h3>Ausgewählte Nicknamen</h3>
+                    <h3>{{_ "view.nickname_categories.chosen_nicknames"}}</h3>
                     {{#unless chosenNickNames.count}}
                         <div class="nickStyle chosenNickName" id="no_nick_selected">
-                            <p>Keine Nicks ausgewählt, alle Nicks sind erlaubt.</p>
+                            <p>{{_ "view.nickname_categories.no_nicks_selected"}}</p>
                         </div>
                     {{/unless}}
                     {{#each chosenNickNames}}

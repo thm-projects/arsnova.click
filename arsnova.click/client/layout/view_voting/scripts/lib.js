@@ -32,6 +32,7 @@ export function deleteCountdown() {
 }
 
 export function countdownFinish() {
+	console.log("countdownFinish");
 	if (Session.get("countdownInitialized") && countdownRunning) {
 		deleteCountdown();
 		if (questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {

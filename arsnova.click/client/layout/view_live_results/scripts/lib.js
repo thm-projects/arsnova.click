@@ -135,6 +135,7 @@ export function startCountdown(index, retry = 0) {
 	const currentCountdown = new Date(questionDoc.startTime);
 	const timeDiff = new Date(currentTime.getTime() - currentCountdown.getTime());
 	currentCountdown.setSeconds(currentCountdown.getSeconds() - timeDiff.getSeconds());
+	console.log("questionTimer: " + questionDoc.timer - timeDiff.getSeconds());
 	if (questionDoc.timer - timeDiff.getSeconds() <= 0) {
 		return;
 	}

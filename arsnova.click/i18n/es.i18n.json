@@ -258,7 +258,7 @@
       "guessed_wrong": "No has adivinado"
     },
     "lobby": {
-      "title": "1/4 Lobby del cuestionario",
+      "title": "Lobby del cuestionario",
       "yes": "Si",
       "no": "No",
       "ready": "Listo para el cuestionario",
@@ -292,7 +292,7 @@
       "free_text_question": "Pregunta de texto libre (la respuesta es correcta de acuerdo con el ejemplo proporcionado)"
     },
     "quiz_summary": {
-      "summary": "Resúmen",
+      "title": "4/4 Resúmen",
       "quiz_name": "Nombre de la ronda",
       "quiz_url": "URL para participantes",
       "question_amount": "Cantidad total de preguntas del cuestionario",

@@ -273,7 +273,12 @@
       "save": "Speichern",
       "category": {
         "disney": "Disney",
-        "science": "Wissenschaft"
+        "science": "Wissenschaft",
+        "fantasy": "Fantasy",
+        "literature": "Literatur",
+        "mythology": "Mythologie",
+        "actor": "Schauspieler",
+        "politics": "Politiker"
       }
     },
     "questions": {

@@ -20,7 +20,7 @@
 .nicknameCategories {
   .nickCategoryWrapper {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;;
 	align-content: stretch;
 	flex-flow: row wrap;
   }
@@ -47,7 +47,7 @@
 
 	&.nickCategory {
 	  display: flex;
-	  flex: 2 1 auto;
+	  flex: 0 1 30%;
 
 	  p {
 		text-align: center;

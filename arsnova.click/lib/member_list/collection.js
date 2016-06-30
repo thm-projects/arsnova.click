@@ -24,12 +24,12 @@ export const MemberListCollection = new Mongo.Collection("memberlist");
 export const userNickSchema = {
 	type: String,
 	min: 3,
-	max: 25
+	max: 30
 };
 export const lowerCaseNickSchema = {
 	type: String,
 	min: 3,
-	max: 25
+	max: 30
 };
 export const userNickIdSchema = {
 	type: String

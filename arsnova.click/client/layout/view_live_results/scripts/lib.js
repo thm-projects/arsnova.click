@@ -134,10 +134,12 @@ export function startCountdown(index, retry = 0) {
 	const currentTime = new Date();
 	const currentCountdown = new Date(questionDoc.startTime);
 	const timeDiff = new Date(currentTime.getTime() - currentCountdown.getTime());
-	currentCountdown.setSeconds(currentCountdown.getSeconds() - timeDiff.getSeconds());
-	console.log("timeDiff: " + timeDiff.getSeconds());
+	currentCountdown.setTime(currentCountdown.getTime() - timeDiff.getTime());
+	console.log("currentTime: " + currentTime);
+	console.log("timeDiff: " + timeDiff);
+	console.log("currentCountdown: " + currentCountdown);
 	console.log("questionTimer: " + questionDoc.timer);
-	console.log("questionTimerDiff: " + (questionDoc.timer - timeDiff.getSeconds()));
+	console.log("questionTimerDiff: " + (questionDoc.timer - timeDiff.getTime() / 1000));
 	if (questionDoc.timer - timeDiff.getSeconds() <= 0) {
 		return;
 	}

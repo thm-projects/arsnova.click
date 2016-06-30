@@ -111,7 +111,7 @@ Template.qrCodeDisplay.helpers({
 });
 
 Template.header.events({
-	'click .kill-session-switch-wrapper, click .arsnova-logo': function () {
+	'click .arsnova-logo': function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			if (Session.get("soundIsPlaying")) {
 				buzzsound1.stop();

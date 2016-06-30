@@ -81,7 +81,7 @@ export function calculateHeaderSize() {
 		}
 	} else {
 		if ($(document).width() > $(document).height()) {
-			fontSize = "5vw";
+			fontSize = "4vw";
 		} else {
 			fontSize = "3vh";
 		}

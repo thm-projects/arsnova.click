@@ -40,7 +40,8 @@ Router.configure({
 	waitOn: function () {
 		const subscriptions = [
 			subsCache.subscribe('HashtagsCollection.public'),
-			subsCache.subscribe('BannedNicksCollection.public')
+			subsCache.subscribe('BannedNicksCollection.public'),
+			Meteor.subscribe("ConnectionStatusCollection.join")
 		];
 		if (typeof Router.current().params.quizName !== "undefined") {
 			subscriptions.push(subsCache.subscribe('ResponsesCollection.join', Router.current().params.quizName));
@@ -50,9 +51,6 @@ Router.configure({
 			subscriptions.push(subsCache.subscribe('LeaderBoardCollection.join', Router.current().params.quizName));
 			subscriptions.push(subsCache.subscribe('EventManagerCollection.join', Router.current().params.quizName));
 			subscriptions.push(subsCache.subscribe('NicknameCategoriesCollection.join'));
-		} else {
-			/* Do not use subscription cache here to prevent false results in the connection quality check on the landing page */
-			subscriptions.push(Meteor.subscribe("ConnectionStatusCollection.join"));
 		}
 		return subscriptions;
 	}

@@ -1,17 +1,25 @@
 
 #connectionQualityHeader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1100;
-  width: 100%;
-  height: 25px;
-  line-height: 25px;
-  font-size: 20px;
+  position: absolute;
+  cursor: pointer;
 
-  #detailsLink {
-	cursor: pointer;
-	text-decoration: underline;
-	float: right;
+  @media (orientation: portrait) {
+	right: 8vh;
+  }
+  @media (orientation: landscape) {
+	right: 8vw;
+  }
+
+  #connectionQualityImage {
+	position: absolute;
+
+	@media (orientation: portrait) {
+	  height: 8vh;
+	  width: 8vh;
+	}
+  	@media (orientation: landscape) {
+	  height: 8vw;
+	  width: 8vw;
+	}
   }
 }

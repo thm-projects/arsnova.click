@@ -17,7 +17,7 @@
 
 import {Template} from 'meteor/templating';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import {restartConnectionIndication} from './lib.js';
+import {resetConnectionIndication, startConnectionIndication} from './lib.js';
 
 Template.connectionQualityHeader.events({
 	"click #connectionQualityHeader": function () {
@@ -30,6 +30,7 @@ Template.connectionQualityHeader.events({
 				});
 			}
 		});
-		restartConnectionIndication();
+		resetConnectionIndication();
+		startConnectionIndication();
 	}
 });

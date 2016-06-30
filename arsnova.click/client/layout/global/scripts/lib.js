@@ -85,6 +85,15 @@ export function stopPendingAnimation() {
 	$('#secondRow, #thirdRow, #fourthRow').show();
 }
 
+export function resetConnectionIndication() {
+	connectionStatus.dbConnection.totalCount = 15;
+	connectionStatus.dbConnection.currentCount = 1;
+	connectionStatus.dbConnection.serverRTT = 0;
+	connectionStatus.dbConnection.serverRTTtotal = 0;
+	hasRunConnectionStatus = false;
+	hasRestarted = false;
+}
+
 export function startConnectionIndication() {
 	if (hasRunConnectionStatus) {
 		return;
@@ -113,7 +122,10 @@ export function startConnectionIndication() {
 					setTimeout(getRTT, 200);
 				} else if (!hasRestarted && !restartTimeout) {
 					hasRestarted = true;
-					restartTimeout = setTimeout(restartConnectionIndication, 30000);
+					restartTimeout = setTimeout(function () {
+						resetConnectionIndication();
+						startConnectionIndication();
+					}, 30000);
 				}
 				Session.set("connectionStatus", connectionStatus);
 			}
@@ -123,12 +135,3 @@ export function startConnectionIndication() {
 	getRTT();
 }
 
-export function restartConnectionIndication() {
-	connectionStatus.dbConnection.totalCount = 15;
-	connectionStatus.dbConnection.currentCount = 1;
-	connectionStatus.dbConnection.serverRTT = 0;
-	connectionStatus.dbConnection.serverRTTtotal = 0;
-	hasRunConnectionStatus = false;
-	hasRestarted = false;
-	startConnectionIndication();
-}

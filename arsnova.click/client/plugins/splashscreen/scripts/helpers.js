@@ -20,29 +20,29 @@ import {Template} from 'meteor/templating';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
-import {isMobileDevice} from './lib.js';
+import {isMobileDevice, getTabIndex} from './lib.js';
 
-Template.splashscreen.helpers($.extend(isMobileDevice, {
-
-}));
-
-Template.kickMemberSplashscreen.helpers($.extend(isMobileDevice, {
+Template.splashscreen.helpers($.extend(isMobileDevice, getTabIndex, {
 
 }));
 
-Template.deleteConfirmationSplashscreen.helpers($.extend(isMobileDevice, {
+Template.kickMemberSplashscreen.helpers($.extend(isMobileDevice, getTabIndex, {
 
 }));
 
-Template.resetSessionSplashscreen.helpers($.extend(isMobileDevice, {
+Template.deleteConfirmationSplashscreen.helpers($.extend(isMobileDevice, getTabIndex, {
+
+}));
+
+Template.resetSessionSplashscreen.helpers($.extend(isMobileDevice, getTabIndex, {
 	isEditingQuestion: headerLib.isEditingQuestion
 }));
 
-Template.errorSplashscreen.helpers($.extend(isMobileDevice, {
+Template.errorSplashscreen.helpers($.extend(isMobileDevice, getTabIndex, {
 
 }));
 
-Template.showHashtagsSplashscreen.helpers($.extend(isMobileDevice, {
+Template.showHashtagsSplashscreen.helpers($.extend(isMobileDevice, getTabIndex, {
 	hashtags: function () {
 		return localData.getAllHashtags();
 	},
@@ -51,23 +51,23 @@ Template.showHashtagsSplashscreen.helpers($.extend(isMobileDevice, {
 	}
 }));
 
-Template.questionPreviewSplashscreen.helpers($.extend(isMobileDevice, {
+Template.questionPreviewSplashscreen.helpers($.extend(isMobileDevice, getTabIndex, {
 
 }));
 
-Template.readingConfirmedSplashscreen.helpers($.extend(isMobileDevice, {
+Template.readingConfirmedSplashscreen.helpers($.extend(isMobileDevice, getTabIndex, {
 
 }));
 
-Template.questionAndAnswerSplashscreen.helpers($.extend(isMobileDevice, {
+Template.questionAndAnswerSplashscreen.helpers($.extend(isMobileDevice, getTabIndex, {
 
 }));
 
-Template.renameHashtagSplashscreen.helpers($.extend(isMobileDevice, {getHashtagSchema: hashtagSchema}, {
+Template.renameHashtagSplashscreen.helpers($.extend(isMobileDevice, getTabIndex, {getHashtagSchema: hashtagSchema}, {
 
 }));
 
-Template.connectionQualitySplashscreen.helpers($.extend(isMobileDevice, {
+Template.connectionQualitySplashscreen.helpers($.extend(isMobileDevice, getTabIndex, {
 	websocketStatus: function () {
 		return {
 			text: Session.get("connectionStatus").webSocket.connected ? "region.header.connection_status.websocket_status.connected" : "region.header.connection_status.websocket_status.disconnected"

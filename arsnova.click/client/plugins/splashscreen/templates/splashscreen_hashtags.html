@@ -16,7 +16,7 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="showHashtagsSplashscreen">
-	<div class="modal {{#unless isMobileDevice}}fade {{/unless}}splashscreen" id={{instanceId}} role="dialog">
+	<div class="modal {{#unless isMobileDevice}}fade {{/unless}}splashscreen" id="{{instanceId}}" role="dialog" aria-describedby="splashscreen-{{instanceId}}-description">
 		<div class="modal-dialog">
             <div class="noSplashscreenPadding col-md-11 col-sm-11 col-xs-10">
                 <div class="modal-content">
@@ -25,10 +25,13 @@
                     </div>
                     <div class="modal-body">
                         <p>{{_ "view.hashtag_management.available_sessions"}}</p><br/>
-                        <div class="row">
+                        <div class="row" role="list">
                             {{#each hashtags}}
                                 <div class="col-xs-12 js-my-hash {{#unless isValid this}}in{{/unless}}validQuestion"
                                      data-toggle="tooltip"
+                                     role="listitem"
+                                     tabindex="{{getTabIndex}}"
+                                     aria-label="{{#if isValid this}}{{_ "view.hashtag_management.valid_question"}}{{else}}{{_ "view.hashtag_management.invalid_question"}}{{/if}}"
                                      title="{{#if isValid this}}{{_ "view.hashtag_management.valid_question"}}{{else}}{{_ "view.hashtag_management.invalid_question"}}{{/if}}">{{this}}</div>
                             {{/each}}
                         </div>
@@ -36,14 +39,21 @@
                     <div class="modal-footer">
                         <div class="row">
                             <div class="col-xs-6">
-                                <button type="button" id="closeButton" class="btn button-back btn-lg btn-answerOption">
+                                <button type="button"
+                                        id="closeButton"
+                                        class="btn btn-warning btn-lg btn-answerOption"
+                                        tabindex="{{getTabIndex}}"
+                                        aria-label="{{_ "global.close_window"}}">
                                     <span class="ansBtn">{{_ "global.close_window"}}</span>
                                     <span class="glyphicon glyphicon-log-out glyph-right" aria-hidden="true"></span>
                                 </button>
                             </div>
                             <div class="col-xs-6">
-                                <button id="js-btn-showHashtagManagement" type="button"
-                                        class="btn btn-info btn-lg btn-answerOption">
+                                <button type="button"
+                                        id="js-btn-showHashtagManagement"
+                                        class="btn btn-info btn-lg btn-answerOption"
+                                        tabindex="{{getTabIndex}}"
+                                        aria-label="{{_ "view.hashtag_management.session_management"}}">
                                     <span class="glyphicon glyphicon-cog glyph-left" aria-hidden="true"></span>
                                     <span class="ansBtn">{{_ "view.hashtag_management.session_management"}}</span>
                                 </button>
@@ -56,5 +66,8 @@
                 <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
             </div>
 		</div>
+        <div id="splashscreen-{{instanceId}}-description">
+            {{_ "view.hashtag_management.aria_description.splashscreen_description"}}
+        </div>
 	</div>
 </template>

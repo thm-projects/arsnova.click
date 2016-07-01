@@ -10,7 +10,7 @@
   },
   "region": {
     "footer": {
-      "go_to": "Gehe auf: ",
+      "go_to": "Gehe zu: ",
       "show-more": {
         "show-more-elements": "Alle weiteren Optionen:",
         "onText": "Aktiviert",
@@ -28,10 +28,10 @@
         "info": "Info",
         "reading-confirmation": "Lesebestätigung",
         "fullscreen": "Vollbild",
-        "show_more": "Mehr",
+        "show_more": "Mehr...",
         "sound": "Sound",
         "qr_code": "QR Code",
-        "nicknames": "Benutzernamen"
+        "nicknames": "Nicknamen"
       },
       "about": {
         "title": "Über die Quiz-App",
@@ -46,8 +46,8 @@
           "4": "Jeder darf Quizze erstellen: sofort und beliebig viele!",
           "5": "Extrem einfache und beamertaugliche Bedienoberfläche",
           "6": "<a href='https://de.wikipedia.org/wiki/TeX' target='_blank'>TeX</a>-Formelsatz und Textformatierung mit <a href='https://guides.github.com/features/mastering-markdown/' target='_blank'>Markdown</a> in Fragen und Antwortoptionen",
-          "7": "Viele Frageformate: Multiple Choice, Single Choice, Schätzfrage und Umfrage, alle mit beliebig vielen Antwortoptionen",
-          "8": "Edutainment: Lernspaß durch Live-Wettbewerb mit Sound gegen die Uhr und die Mitspieler/innen",
+          "7": "Viele Frageformate: Multiple Choice, Single Choice, Schätzfrage, Kurzantwort und Umfrage. MC/SC-Fragen mit beliebig vielen Antwortoptionen",
+          "8": "Edutainment: Lernmotivation durch Live-Wettbewerb mit Sound gegen die Uhr und die Mitspieler/innen",
           "9": "<a href='https://de.wikipedia.org/wiki/Responsive_Webdesign' target='_blank'>Responsives Webdesign</a>: egal ob Smartphone oder Wide Screen, das Design skaliert dank <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>",
           "10": "Modernste reaktive Web-Technologie: <a href='https://www.meteor.com' target='_blank'>Meteor</a>",
           "11": "<a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a>"
@@ -63,14 +63,14 @@
       },
       "tos": {
         "title": "Allgemeine Geschäftsbedingungen",
-        "declaration": "Alle dürfen die Quiz-App ARSnova.click für ihre Zwecke verwenden, solange dabei nicht gegen geltendes deutsches oder europäisches Recht verstoßen wird.",
+        "declaration": "Alle dürfen die Quiz-App arsnova.click für ihre Zwecke verwenden, solange dabei nicht gegen geltendes deutsches oder europäisches Recht verstoßen wird.",
         "license": {
           "title": "Lizenz",
-          "text": "ARSnova.click ist ein kostenloser Webservice (Software as a Service). Die Software ist <a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a> und steht unter der <a href='http://www.gnu.org/licenses/gpl-3.0-standalone.html' target='_blank'>GNU General Public License Version 3</a>."
+          "text": "arsnova.click ist ein kostenloser Webservice (Software as a Service). Die Software ist <a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a> und steht unter der <a href='http://www.gnu.org/licenses/gpl-3.0-standalone.html' target='_blank'>GNU General Public License Version 3</a>."
         },
         "warranty": {
           "title": "Gewährleistung",
-          "text": "Wir sind bemüht, den Online-Dienst ARSnova.click zuverlässig und störungsfrei zu betreiben, können dies aber nicht garantieren. Alle Quizdaten liegen ausschließlich im Browser-Speicher der Quizerstellerin oder des Quizerstellers. Wir übernehmen keine Haftung für den Verlust der Daten, zum Beispiel durch Löschen des Browser-Speichers, oder bei rechtswidriger Nutzung des Dienstes."
+          "text": "Wir sind bemüht, den Online-Dienst arsnova.click zuverlässig und störungsfrei zu betreiben, können dies aber nicht garantieren. Alle Quizdaten liegen ausschließlich im Browser-Speicher der Quizerstellerin oder des Quizerstellers. Wir übernehmen keine Haftung für den Verlust der Daten, zum Beispiel durch Löschen des Browser-Speichers, oder bei rechtswidriger Nutzung des Dienstes."
         }
       },
       "data_privacy": {
@@ -221,7 +221,7 @@
       "header": "Rangliste",
       "global_header": "Globale Rangliste",
       "title": {
-        "single_question": "Quizfrage __questionId__ - Alles richtig haben...",
+        "single_question": "Frage __questionId__ - Alles richtig haben...",
         "all_questions": "Alles richtig haben..."
       },
       "no_attendee_correct": "Niemand hat diese Frage richtig beantwortet",
@@ -266,23 +266,23 @@
       "show_more_plural": "Zeige %s weitere",
       "start_quiz": "Los geht's!",
       "kick_member_confirmation": "Soll die Person '<span id=\"nickName\"></span>' aus dem Quiz entfernt werden?",
-      "add_kicked_member_to_ban_list": "Den Nicknamen permanent bannen"
+      "add_kicked_member_to_ban_list": "Den Nicknamen für immer bannen"
     },
     "nickname_categories": {
-      "title": "Nicknamen begrenzen",
+      "title": "Nicknamen vorgeben",
       "save": "Speichern",
       "available_nicknames": "Verfügbare Nicknamen",
-      "choose_all": "Alle Auswählen",
+      "choose_all": "Alle auswählen",
       "chosen_nicknames": "Ausgewählte Nicknamen",
-      "no_nicks_selected": "Keine Nicknamen ausgewählt, alle Nicknamen sind erlaubt.",
+      "no_nicks_selected": "Keine Nicknamen ausgewählt, somit können die Teilnehmenden ihre Nicknamen frei wählen.",
       "category": {
-        "disney": "Disney",
+        "disney": "Disney-Figuren",
         "science": "Wissenschaft",
         "fantasy": "Fantasy",
         "literature": "Literatur",
         "mythology": "Mythologie",
-        "actor": "Schauspieler",
-        "politics": "Politiker"
+        "actor": "Schauspiel",
+        "politics": "Politik"
       }
     },
     "questions": {
@@ -329,8 +329,8 @@
         "reasons": {
           "question_text_too_small": "Text der Quizfrage ist zu kurz",
           "question_text_too_long": "Text der Quizfrage ist zu lang",
-          "timer_too_small": "Timer ist zu kurz",
-          "timer_too_big": "Timer ist zu lang",
+          "timer_too_small": "Countdown ist zu kurz",
+          "timer_too_big": "Countdown ist zu lang",
           "no_valid_answers": "Mindestens eine Antwort muss als richtig markiert sein",
           "one_valid_answer_required": "Es muss exakt eine Antwort als richtig markiert sein",
           "no_valid_answer_required": "Bei einer Umfrage sind Antworten weder richtig noch falsch",
@@ -341,17 +341,17 @@
       },
       "edit_quiz": "Quiz bearbeiten",
       "start_quiz": "Quiz starten",
-      "selected_nicks": "Gültige Benutzernamen",
-      "no_selected_nicks": "Keine Benutzernamen ausgewählt. Alle Namen sind gültig.",
-      "hide_selected_nicks": "Verberge Benutzernamen",
-      "show_selected_nicks": "Zeige Benutzernamen"
+      "selected_nicks": "Vorgegebene Nicknamen",
+      "no_selected_nicks": "Keine Nicknamen vorgegeben. Alle Namen sind erlaubt.",
+      "hide_selected_nicks": "Verberge Nicknamen",
+      "show_selected_nicks": "Zeige Nicknamen"
     },
     "theme_switcher": {
       "set_theme": "Stil wählen",
       "select_a_theme_title": "Wähle einen Stil",
       "themes": {
         "default": {
-          "name": "ARSnova.click",
+          "name": "arsnova.click",
           "description": "Der Stil der ersten Stunde."
         },
         "dark": {
@@ -367,8 +367,8 @@
           "description": "Corporate Design der TH Mittelhessen."
         },
         "arsnova": {
-          "name": "ARSnova.eu",
-          "description": "Du kennst ARSnova.eu? Fühl dich daheim!"
+          "name": "arsnova.eu",
+          "description": "Du kennst arsnova.eu? Fühl dich daheim!"
         },
         "black_beauty": {
           "name" : "Schwarze Schönheit",
@@ -449,12 +449,12 @@
         "youtube": "YouTube",
         "vimeo": "Vimeo"
       },
-      "info_content": "Du kannst Texte innerhalb von ARSnova mithilfe von <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown Optionen werden in Form von Schaltflächen über den unterstützten Eingabefeldern angeboten. Zudem unterstützt ARSnova <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
+      "info_content": "Du kannst Text mit <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown-Optionen werden in Form von Schaltflächen über dem Eingabefeld angeboten. Zudem unterstützt arsnova.click <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown.</a>"
     },
     "sound": {
       "title": "Sound während des Countdowns",
       "volume": "Lautstärke vorgeben",
-      "inactive": "Sound ist inaktiv",
+      "inactive": "Sound ist abgeschaltet",
       "active": "Sound ist aktiviert"
     },
     "splashscreen": {
@@ -470,7 +470,7 @@
           "session_not_exists": "Dieses Quiz existiert nicht!",
           "hashtag_exists": "Dieser Quizname existiert bereits!",
           "session_not_available": "Dieser Quizrunde kann aktuell nicht beigetreten werden.",
-          "private_browsing": "Im Privatmodus deines Browsers funktioniert ARSnova.click leider nur als Teilnehmer/in, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von ARSnova.click den Privatmodus deaktivieren und ARSnova erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.",
+          "private_browsing": "Im Privatmodus deines Browsers funktioniert arsnova.click leider nur als Teilnehmer/in, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von arsnova.click den Privatmodus deaktivieren und arsnova.click erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.",
           "kicked_from_quiz": "Du wurdest aus dem Quiz geworfen!",
           "export_failed": "Konnte die Quizdaten nicht exportieren! - %s",
           "not_authorized": "Entweder ist das Quiz nicht vorhanden oder Du hast keine Berechtigung, diese Daten zu lesen",

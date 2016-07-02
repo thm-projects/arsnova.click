@@ -36,17 +36,17 @@
       "about": {
         "title": "Über die Quiz-App",
         "declaration": "Ein bisschen <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, <br />ein bisschen <a href='https://arsnova.eu/' target='_blank'>ARSnova</a>!",
-        "ars": "arsnova.click ist ein innovatives <a href='https://de.wikipedia.org/wiki/Audience_Response_System' target='_blank'>Audience Response System (ARS)</a>.",
-        "developed_by": "Inspiriert durch <a href='https://getkahoot.com' target='_blank'>Kahoot!</a> entwickelte in nur 10 Tagen  ein <a href='http://www.scrumhub.com' target='_blank'>Scrum-Team</a> aus Bachelor- und Masterstudenten der <a href='http://www.thm.de/site/' target='_blank'>TH Mittelhessen</a> diese <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>gamifizierte</a> Alternative zu unserem ARSnova-Flaggschiff <a href='https://arsnova.eu/' target='_blank'>arsnova.eu</a>.",
-        "met_requirements": "Die bereits eingelösten Anforderungen an arsnova.click:",
+        "ars": "arsnova.click ist ein innovatives <a href='https://de.wikipedia.org/wiki/Audience_Response_System' target='_blank'>Audience Response System (ARS)</a> für Bildungseinrichtungen.",
+        "developed_by": "Inspiriert durch <a href='https://getkahoot.com' target='_blank'>Kahoot!</a> entwickelte in nur 10 Tagen  ein <a href='http://www.scrumhub.com' target='_blank'>Scrum-Team</a> aus Bachelor- und Masterstudenten der <a href='http://www.thm.de/site/' target='_blank'>TH Mittelhessen</a> die erste Version dieser <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>gamifizierten</a> Alternative zum ARSnova-Flaggschiff <a href='https://arsnova.eu/' target='_blank'>arsnova.eu</a>.",
+        "met_requirements": "Die folgenden von einem Hochschullehrer aufgestellten Anforderungen an arsnova.click wurden implementiert:",
         "requirements": {
           "1": "Absoluter Datenschutz: keine personenbezogenen Daten auf dem Server, alle Quizdaten liegen im Browser der Quizerstellerin oder des Quizerstellers (<a href='http://www.w3schools.com/html/html5_webstorage.asp' target='_blank'>HTML5 Local Storage</a>)",
           "2": "Keine Registrierung, keine Anmeldung, keine Installation, keine Werbung, keine Kosten",
           "3": "Dieselbe Startseite arsnova.click für beide Rollen: Quizmaster und Kandidat/in",
           "4": "Jeder darf Quizze erstellen: sofort und beliebig viele!",
-          "5": "Extrem einfache und beamertaugliche Bedienoberfläche",
-          "6": "<a href='https://de.wikipedia.org/wiki/TeX' target='_blank'>TeX</a>-Formelsatz und Textformatierung mit <a href='https://guides.github.com/features/mastering-markdown/' target='_blank'>Markdown</a> in Fragen und Antwortoptionen",
-          "7": "Viele Frageformate: Multiple Choice, Single Choice, Schätzfrage, Kurzantwort und Umfrage. MC/SC-Fragen mit beliebig vielen Antwortoptionen",
+          "5": "Extrem einfache, barrierefreie und beamertaugliche Bedienoberfläche",
+          "6": "Frageformate: Multiple/Single Choice, Schätzfrage, Kurzantwort, Umfrage. MC/SC-Fragen mit beliebig vielen Antwortoptionen",
+          "7": "<a href='https://de.wikipedia.org/wiki/TeX' target='_blank'>TeX</a>-Formelsatz und Textformatierung mit <a href='https://guides.github.com/features/mastering-markdown/' target='_blank'>Markdown</a> und eingebetteten Videos im Fragetext und in den Antwortoptionen",
           "8": "Edutainment: Lernmotivation durch Live-Wettbewerb mit Sound gegen die Uhr und die Mitspieler/innen",
           "9": "<a href='https://de.wikipedia.org/wiki/Responsive_Webdesign' target='_blank'>Responsives Webdesign</a>: egal ob Smartphone oder Wide Screen, das Design skaliert dank <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>",
           "10": "Modernste reaktive Web-Technologie: <a href='https://www.meteor.com' target='_blank'>Meteor</a>",
@@ -56,7 +56,7 @@
           "title": "Bedienungshandbuch?",
           "text": {
             "1": "Brauchst Du nicht! Tipp einfach den Namen des Quiz ein. Die Buttons werden aktiviert, sobald Du entweder den Namen eines freigeschalteten Quiz eingibst (Mach mit!) oder ein neues Quiz mit dem eingegebenen Namen erstellen kannst (Mach neu!).",
-            "2": "Oder probier ein fertiges Quiz aus: Lade <a href='https://git.thm.de/arsnova/arsnova.click/raw/staging/test_data/quiz_with_3_questions.json' target='_blank'>diese Quizdatei</a> herunter (Kontextmenü rechte Maustaste) und importiere sie mit dem Button unten rechts in der Fußzeile.",
+            "2": "Oder probier ein fertiges Quiz mit allen Frageformaten aus: Lade <a href='https://git.thm.de/arsnova/arsnova.click/raw/staging/test_data/quiz_with_3_questions.json' target='_blank'>diese Quizdatei</a> herunter (Kontextmenü rechte Maustaste) und importiere sie mit dem Button unten rechts in der Fußzeile.",
             "3": "Danach heißt es: Klicken. Schauen. Quizzen."
           }
         }

@@ -116,15 +116,12 @@ export function countdownFinish() {
 }
 
 export function startCountdown(index, retry = 0) {
-	console.log("startcountdown with index: ", index, " and retry: ", retry);
 	if (Session.get("countdownInitialized") || Session.get("sessionClosed")) {
 		return;
 	}
 	const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	const questionDoc = QuestionGroupCollection.findOne().questionList[index];
 	if (!questionDoc) {
-		console.log("questionDoc: " + questionDoc);
-		console.log("on retry: " + retry);
 		if (retry < 5) {
 			setTimeout(startCountdown(index, ++retry), 20);
 		}
@@ -135,11 +132,7 @@ export function startCountdown(index, retry = 0) {
 	const currentCountdown = new Date(questionDoc.startTime);
 	const timeDiff = new Date(currentTime.getTime() - currentCountdown.getTime());
 	currentCountdown.setTime(currentCountdown.getTime() - timeDiff.getTime());
-	console.log("currentTime: " + currentTime);
-	console.log("timeDiff: " + timeDiff);
-	console.log("currentCountdown: " + currentCountdown);
-	console.log("questionTimer: " + questionDoc.timer);
-	console.log("questionTimerDiff: " + (questionDoc.timer - timeDiff.getTime() / 1000));
+
 	if ((questionDoc.timer - (timeDiff.getTime() / 1000)) <= 0) {
 		return;
 	}

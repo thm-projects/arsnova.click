@@ -26,7 +26,7 @@ import {nickCategories} from './nickCategories.js';
 
 if (Meteor.isServer) {
 	Meteor.startup(function () {
-		console.log("Running server startup...")
+		console.log("Running server startup...");
 		console.log("create htmlAttributeHook...");
 		WebApp.addHtmlAttributeHook(function () {
 			return {"lang": "de"};
@@ -76,7 +76,7 @@ if (Meteor.isServer) {
 				NicknameCategoriesCollection.insert({nick: item.nick, nickCategory: item.nickCategory, insertDate: new Date(), lastUsedDate: new Date()});
 			}
 		});
-		console.log("manipulating nicknames on selected nickname categories...")
+		console.log("manipulating nicknames on selected nickname categories...");
 		NicknameCategoriesCollection.find().fetch().forEach(function (item) {
 			let foundItem = false;
 			for (let i = 0; i < nickCategories.length; i++) {
@@ -90,6 +90,6 @@ if (Meteor.isServer) {
 			}
 		});
 		console.log("inserted nick categories successfully");
-		console.log("Server startup successful.")
+		console.log("Server startup successful.");
 	});
 }

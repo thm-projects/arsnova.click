@@ -18,6 +18,6 @@
 import {Meteor} from 'meteor/meteor';
 import {ConnectionStatusCollection} from '/lib/connection/collection.js';
 
-Meteor.publish('ConnectionStatusCollection.join', function () {
-	return ConnectionStatusCollection.find();
+Meteor.publish('ConnectionStatusCollection.join', function (privateKey) {
+	return ConnectionStatusCollection.find({privateKey: privateKey});
 });

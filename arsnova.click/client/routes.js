@@ -41,7 +41,7 @@ Router.configure({
 		const subscriptions = [
 			subsCache.subscribe('HashtagsCollection.public'),
 			subsCache.subscribe('BannedNicksCollection.public'),
-			Meteor.subscribe("ConnectionStatusCollection.join")
+			Meteor.subscribe("ConnectionStatusCollection.join", localData.getPrivateKey())
 		];
 		if (typeof Router.current().params.quizName !== "undefined") {
 			subscriptions.push(subsCache.subscribe('ResponsesCollection.join', Router.current().params.quizName));

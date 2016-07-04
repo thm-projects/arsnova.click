@@ -18,6 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {ConnectionStatusCollection} from '/lib/connection/collection.js';
+import * as localData from '/lib/local_storage.js';
 
 let pendingAnimationRunning = false;
 const standardAnimationDelay = 200;
@@ -63,7 +64,7 @@ function runPendingAnimation() {
 function getRTT() {
 	randomKey = Math.random().toString(36).replace(/[^a-z]+/g, '');
 	startTime = new Date().getTime();
-	Meteor.call("Connection.sendConnectionStatus", randomKey);
+	Meteor.call("Connection.sendConnectionStatus", localData.getPrivateKey(), randomKey);
 }
 
 export function startPendingAnimation() {
@@ -118,7 +119,7 @@ export function startConnectionIndication() {
 			if (doc.key === randomKey) {
 				connectionStatus.dbConnection.serverRTTtotal = (connectionStatus.dbConnection.serverRTTtotal + (new Date().getTime() - startTime));
 				connectionStatus.dbConnection.serverRTT = 1 / connectionStatus.dbConnection.currentCount * connectionStatus.dbConnection.serverRTTtotal;
-				Meteor.call("Connection.receivedConnectionStatus", randomKey);
+				Meteor.call("Connection.receivedConnectionStatus", localData.getPrivateKey(), randomKey);
 				if (connectionStatus.dbConnection.currentCount < connectionStatus.dbConnection.totalCount) {
 					connectionStatus.dbConnection.currentCount++;
 					setTimeout(getRTT, 200);

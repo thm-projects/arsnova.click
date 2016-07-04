@@ -44,16 +44,16 @@ Meteor.methods({
 		ResponsesCollection.remove({hashtag: hashtag});
 		QuestionGroupCollection.remove({hashtag: hashtag});
 		EventManagerCollection.remove({hashtag: hashtag});
+	},
+	'Connection.receivedConnectionStatus': function (privateKey, key) {
+		ConnectionStatusCollection.remove({privateKey: privateKey, key: key});
 	}
 });
 
 if (Meteor.isServer) {
 	Meteor.methods({
-		'Connection.sendConnectionStatus': function (key) {
-			ConnectionStatusCollection.insert({key: key});
-		},
-		'Connection.receivedConnectionStatus': function (key) {
-			ConnectionStatusCollection.remove({key: key});
+		'Connection.sendConnectionStatus': function (privateKey, key) {
+			ConnectionStatusCollection.insert({privateKey: privateKey, key: key});
 		}
 	});
 }

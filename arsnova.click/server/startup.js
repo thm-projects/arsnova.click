@@ -42,7 +42,8 @@ if (Meteor.isServer) {
 				musicVolume: 0,
 				musicEnabled: 0,
 				musicTitle: "noSong",
-				theme: "theme-default"
+				theme: "theme-default",
+				selectedNicks: []
 			};
 			// block this hash / pk -> do not use and merge to production server!
 			var blockedHashtag2 = {
@@ -53,7 +54,8 @@ if (Meteor.isServer) {
 				musicVolume: 0,
 				musicEnabled: 0,
 				musicTitle: "noSong",
-				theme: "theme-default"
+				theme: "theme-default",
+				selectedNicks: []
 			};
 			console.log("inserting blocking hashtags...");
 			HashtagsCollection.insert(blockedHashtag1);

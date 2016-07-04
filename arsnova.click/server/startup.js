@@ -26,9 +26,12 @@ import {nickCategories} from './nickCategories.js';
 
 if (Meteor.isServer) {
 	Meteor.startup(function () {
+		console.log("Running server startup...")
+		console.log("create htmlAttributeHook...");
 		WebApp.addHtmlAttributeHook(function () {
 			return {"lang": "de"};
 		});
+		console.log("htmlAttributeHook created successfully");
 		if (HashtagsCollection && !HashtagsCollection.findOne()) {
 			// block this hash / pk -> do not use and merge to production server!
 			var blockedHashtag1 = {
@@ -52,20 +55,26 @@ if (Meteor.isServer) {
 				musicTitle: "noSong",
 				theme: "theme-default"
 			};
-
+			console.log("inserting blocking hashtags...");
 			HashtagsCollection.insert(blockedHashtag1);
 			HashtagsCollection.insert(blockedHashtag2);
+
+			console.log("inserted blocking hashtags successfully");
 		}
+		console.log("inserting banned nicknames...");
 		if (BannedNicksCollection && !BannedNicksCollection.findOne()) {
 			forbiddenNicks.forEach(function (item) {
 				BannedNicksCollection.insert({userNick: item});
 			});
 		}
+		console.log("inserted banned nicknames successfully");
+		console.log("inserting nick categories...");
 		nickCategories.forEach(function (item) {
 			if (!NicknameCategoriesCollection.findOne({nick: item.nick})) {
 				NicknameCategoriesCollection.insert({nick: item.nick, nickCategory: item.nickCategory, insertDate: new Date(), lastUsedDate: new Date()});
 			}
 		});
+		console.log("manipulating nicknames on selected nickname categories...")
 		NicknameCategoriesCollection.find().fetch().forEach(function (item) {
 			let foundItem = false;
 			for (let i = 0; i < nickCategories.length; i++) {
@@ -78,5 +87,7 @@ if (Meteor.isServer) {
 				NicknameCategoriesCollection.remove({nick: item.nick});
 			}
 		});
+		console.log("inserted nick categories successfully");
+		console.log("Server startup successful.")
 	});
 }

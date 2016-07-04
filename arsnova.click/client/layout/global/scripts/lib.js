@@ -37,10 +37,8 @@ export const connectionStatus = {
 	}
 };
 let hasRunConnectionStatus = false;
-let hasRestarted = false;
 let restartTimeout = null;
 let startTime = 0;
-let randomKey = 0;
 
 function runPendingAnimation() {
 	if (!pendingAnimationRunning) {
@@ -62,9 +60,8 @@ function runPendingAnimation() {
 }
 
 function getRTT() {
-	randomKey = Math.random().toString(36).replace(/[^a-z]+/g, '');
 	startTime = new Date().getTime();
-	Meteor.call("Connection.sendConnectionStatus", localData.getPrivateKey(), randomKey);
+	Meteor.call("Connection.sendConnectionStatus", localData.getPrivateKey());
 }
 
 export function startPendingAnimation() {
@@ -92,7 +89,6 @@ export function resetConnectionIndication() {
 	connectionStatus.dbConnection.serverRTT = 0;
 	connectionStatus.dbConnection.serverRTTtotal = 0;
 	hasRunConnectionStatus = false;
-	hasRestarted = false;
 	clearTimeout(restartTimeout);
 	restartTimeout = null;
 }
@@ -116,15 +112,14 @@ export function startConnectionIndication() {
 	}
 	ConnectionStatusCollection.find().observeChanges({
 		added: function (id, doc) {
-			if (doc.key === randomKey) {
+			if (doc.key === localData.getPrivateKey()) {
 				connectionStatus.dbConnection.serverRTTtotal = (connectionStatus.dbConnection.serverRTTtotal + (new Date().getTime() - startTime));
 				connectionStatus.dbConnection.serverRTT = 1 / connectionStatus.dbConnection.currentCount * connectionStatus.dbConnection.serverRTTtotal;
-				Meteor.call("Connection.receivedConnectionStatus", localData.getPrivateKey(), randomKey);
+				Meteor.call("Connection.receivedConnectionStatus", localData.getPrivateKey());
 				if (connectionStatus.dbConnection.currentCount < connectionStatus.dbConnection.totalCount) {
 					connectionStatus.dbConnection.currentCount++;
 					setTimeout(getRTT, 200);
-				} else if (!hasRestarted && !restartTimeout) {
-					hasRestarted = true;
+				} else if (!restartTimeout) {
 					restartTimeout = setTimeout(function () {
 						resetConnectionIndication();
 						startConnectionIndication();

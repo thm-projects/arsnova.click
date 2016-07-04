@@ -45,15 +45,15 @@ Meteor.methods({
 		QuestionGroupCollection.remove({hashtag: hashtag});
 		EventManagerCollection.remove({hashtag: hashtag});
 	},
-	'Connection.receivedConnectionStatus': function (privateKey, key) {
-		ConnectionStatusCollection.remove({privateKey: privateKey, key: key});
+	'Connection.receivedConnectionStatus': function (key) {
+		ConnectionStatusCollection.remove({key: key});
 	}
 });
 
 if (Meteor.isServer) {
 	Meteor.methods({
-		'Connection.sendConnectionStatus': function (privateKey, key) {
-			ConnectionStatusCollection.insert({privateKey: privateKey, key: key});
+		'Connection.sendConnectionStatus': function (key) {
+			ConnectionStatusCollection.insert({key: key});
 		}
 	});
 }

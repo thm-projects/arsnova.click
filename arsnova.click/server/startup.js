@@ -21,6 +21,7 @@ import {WebApp} from 'meteor/webapp';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {BannedNicksCollection} from '/lib/banned_nicks/collection.js';
 import {NicknameCategoriesCollection} from '/lib/nickname_categories/collection.js';
+import {ConnectionStatusCollection} from '/lib/connection/collection.js';
 import {forbiddenNicks} from './forbiddenNicks.js';
 import {nickCategories} from './nickCategories.js';
 
@@ -90,6 +91,9 @@ if (Meteor.isServer) {
 			}
 		});
 		console.log("inserted nick categories successfully");
+		console.log("removing old connection status documents");
+		ConnectionStatusCollection.remove({});
+		console.log("removed old connection status documents successfully");
 		console.log("Server startup successful.");
 	});
 }

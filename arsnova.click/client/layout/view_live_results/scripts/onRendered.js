@@ -58,6 +58,12 @@ Template.liveResults.onRendered(()=> {
 		}
 	}
 
+	var eventDoc = EventManagerCollection.findOne();
+	console.log(eventDoc);
+	if (eventDoc.readingConfirmationIndex !== 0) {
+		$('.header-titel').text(TAPi18n.__("view.liveResults.title"));
+	}
+
 	calculateButtonCount();
 	Session.set("LearnerCountOverride", false);
 	calculateHeaderSize();

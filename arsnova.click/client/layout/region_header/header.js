@@ -72,7 +72,7 @@ Template.header.helpers({
 			case "memberlist":
 				return Router.current().params.quizName;
 			case "results":
-				return TAPi18n.__("view.liveResults.title");
+				return TAPi18n.__("region.footer.footer_bar.reading-confirmation");
 			case "onpolling":
 				return TAPi18n.__("view.voting.title");
 			case "statistics":

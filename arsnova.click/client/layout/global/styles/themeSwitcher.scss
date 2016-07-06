@@ -1872,6 +1872,16 @@
 				}
 			}
 		}
+		.splashscreen-container-close {
+			color: $fg-qr-code-container-close;
+			&:hover {
+				color: $fg-qr-code-container-close-hovered;
+			}
+			.glyphicon-remove {
+				border: 1px solid $border-qr-code-container-close-icon;
+				background-color: $background-qr-code-container-close-icon;
+			}
+		}
 		.modal-backdrop {
 			background-color: $background-color;
 		}

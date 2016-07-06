@@ -302,3 +302,8 @@ export function showFullscreenPicture(event) {
 		}
 	});
 }
+
+export function closeSplashscreen(event) {
+	$(event.currentTarget).parents(".splashscreen").remove();
+	$('.modal-backdrop').remove();
+}

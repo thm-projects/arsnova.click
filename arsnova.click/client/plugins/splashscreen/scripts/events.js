@@ -16,12 +16,17 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {showFullscreenPicture, showVideo} from './lib.js';
+import {showFullscreenPicture, showVideo, closeSplashscreen} from './lib.js';
+
+Template.connectionQualitySplashscreen.events({
+	"click .splashscreen-container-close": function (event) {
+		closeSplashscreen(event);
+	}
+});
 
 Template.splashscreen.events({
 	"click #btn-hidePreviewModal": function (event) {
-		$(event.currentTarget).parents(".splashscreen").remove();
-		$('.modal-backdrop').remove();
+		closeSplashscreen(event);
 	}
 });
 

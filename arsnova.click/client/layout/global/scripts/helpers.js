@@ -49,9 +49,9 @@ Template.connectionQualityHeader.helpers({
 		if (!Session.get("connectionStatus").sessionStorage) {
 			result.errors.push("sessionStorage");
 		}
-		if (Session.get("connectionStatus").dbConnection.serverRTT > 100) {
+		if (Session.get("connectionStatus").dbConnection.serverRTT > 2000) {
 			result.errors.push("dbConnection");
-		} else if (Session.get("connectionStatus").dbConnection.serverRTT > 60) {
+		} else if (Session.get("connectionStatus").dbConnection.serverRTT > 1000) {
 			result.warnings.push("dbConnection");
 		}
 		lib.stopPendingAnimation();

@@ -17,8 +17,6 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
-import {ConnectionStatusCollection} from '/lib/connection/collection.js';
-import * as localData from '/lib/local_storage.js';
 
 let pendingAnimationRunning = false;
 const standardAnimationDelay = 200;
@@ -57,11 +55,6 @@ function runPendingAnimation() {
 			}, standardAnimationDelay));
 		}, standardAnimationDelay));
 	}, standardAnimationDelay));
-}
-
-function getRTT() {
-	startTime = new Date().getTime();
-	Meteor.call("Connection.sendConnectionStatus", localData.getPrivateKey());
 }
 
 export function startPendingAnimation() {
@@ -110,26 +103,40 @@ export function startConnectionIndication() {
 	} catch (ex) {
 		connectionStatus.sessionStorage = false;
 	}
-	ConnectionStatusCollection.find().observeChanges({
-		added: function (id, doc) {
-			if (doc.key === localData.getPrivateKey()) {
-				connectionStatus.dbConnection.serverRTTtotal = (connectionStatus.dbConnection.serverRTTtotal + (new Date().getTime() - startTime));
-				connectionStatus.dbConnection.serverRTT = 1 / connectionStatus.dbConnection.currentCount * connectionStatus.dbConnection.serverRTTtotal;
-				Meteor.call("Connection.receivedConnectionStatus", localData.getPrivateKey());
-				if (connectionStatus.dbConnection.currentCount < connectionStatus.dbConnection.totalCount) {
-					connectionStatus.dbConnection.currentCount++;
-					setTimeout(getRTT, 200);
-				} else if (!restartTimeout) {
-					restartTimeout = setTimeout(function () {
-						resetConnectionIndication();
-						startConnectionIndication();
-					}, 30000);
-				}
-				Session.set("connectionStatus", connectionStatus);
-			}
-		}
-	});
+	/*
+	 ConnectionStatusCollection.find().observeChanges({
+	 added: function (id, doc) {
+	 if (doc.key === localData.getPrivateKey()) {
+	 connectionStatus.dbConnection.serverRTTtotal = (connectionStatus.dbConnection.serverRTTtotal + (new Date().getTime() - startTime));
+	 connectionStatus.dbConnection.serverRTT = 1 / connectionStatus.dbConnection.currentCount * connectionStatus.dbConnection.serverRTTtotal;
+	 Meteor.call("Connection.receivedConnectionStatus", localData.getPrivateKey());
+	 if (connectionStatus.dbConnection.currentCount < connectionStatus.dbConnection.totalCount) {
+	 connectionStatus.dbConnection.currentCount++;
+	 setTimeout(startRTT, 200);
+	 }
+	 Session.set("connectionStatus", connectionStatus);
+	 }
+	 }
+	 });
+	 */
 	Session.set("connectionStatus", connectionStatus);
-	getRTT();
 }
 
+export function getRTT() {
+	startTime = new Date().getTime();
+	/*Meteor.call("Connection.sendConnectionStatus", localData.getPrivateKey());*/
+	$.get("/robots.txt", function () {
+		connectionStatus.dbConnection.serverRTTtotal = (connectionStatus.dbConnection.serverRTTtotal + (new Date().getTime() - startTime));
+		connectionStatus.dbConnection.serverRTT = 1 / connectionStatus.dbConnection.currentCount * connectionStatus.dbConnection.serverRTTtotal;
+		if (connectionStatus.dbConnection.currentCount < connectionStatus.dbConnection.totalCount) {
+			connectionStatus.dbConnection.currentCount++;
+			setTimeout(getRTT, 200);
+		} else if (!restartTimeout) {
+			restartTimeout = setTimeout(function () {
+				resetConnectionIndication();
+				startConnectionIndication();
+			}, 180000);
+		}
+		Session.set("connectionStatus", connectionStatus);
+	});
+}

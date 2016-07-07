@@ -114,6 +114,7 @@ const clickEvents = {
 						musicVolume: questionInstance.getMusicVolume(),
 						musicEnabled: questionInstance.getMusicEnabled(),
 						musicTitle: questionInstance.getMusicTitle(),
+						selectedNicks: questionInstance.getSelectedNicks(),
 						theme: questionInstance.getTheme()
 					}, function (err) {
 						if (err) {
@@ -149,6 +150,7 @@ const clickEvents = {
 									musicVolume: questionInstance.getMusicVolume(),
 									musicEnabled: questionInstance.getMusicEnabled(),
 									musicTitle: questionInstance.getMusicTitle(),
+									selectedNicks: questionInstance.getSelectedNicks(),
 									theme: questionInstance.getTheme()
 								});
 								localData.addHashtag(questionInstance);
@@ -174,8 +176,7 @@ const clickEvents = {
 								} else {
 									$("#js-btn-importSession").attr("disabled", "disabled");
 								}
-							});
-							$('#hashtagRename-input-field').on('keydown', function (event) {
+							}).on('keydown', function (event) {
 								if (event.keyCode == 13 && !$('#js-btn-importSession').is(':disabled')) {
 									$('#js-btn-importSession').click();
 								}

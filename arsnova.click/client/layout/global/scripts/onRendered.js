@@ -43,7 +43,7 @@ Template.home.onRendered(function () {
 	footerElements.addFooterElement(footerElements.footerElemTranslation);
 	footerElements.addFooterElement(footerElements.footerElemTheme);
 	footerElements.addFooterElement(footerElements.footerElemFullscreen);
-	footerElements.addFooterElement(footerElements.footerElemImport);
+	footerElements.addFooterElement(footerElements.footerElemHashtagManagement);
 	footerElements.calculateFooter();
 });
 

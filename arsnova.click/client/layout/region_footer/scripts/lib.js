@@ -51,6 +51,12 @@ export const footerElemImport = {
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.import"
 };
+export const footerElemHashtagManagement = {
+	id: "hashtagManagement",
+	iconClass: "glyphicon glyphicon-cog",
+	textClass: "footerElementText",
+	textName: "view.hashtag_management.session_management"
+};
 export const footerElemFullscreen = {
 	id: "fullscreen",
 	iconClass: "glyphicon glyphicon-fullscreen",

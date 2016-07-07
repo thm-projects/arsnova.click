@@ -36,6 +36,9 @@ const clickEvents = {
 	"click #theme": function () {
 		Router.go("/theme");
 	},
+	"click #hashtagManagement": function () {
+		Router.go("/hashtagmanagement");
+	},
 	"click #home": function () {
 		if (Router.current().params.quizName) {
 			if (localData.containsHashtag(Router.current().params.quizName)) {

@@ -23,6 +23,9 @@ import {showFullscreenPicture, showVideo, closeSplashscreen} from './lib.js';
 Template.splashscreen.events({
 	"click #btn-hidePreviewModal": function (event) {
 		closeSplashscreen(event);
+	},
+	"click .splashscreen-container-close": function (event) {
+		closeSplashscreen(event);
 	}
 });
 

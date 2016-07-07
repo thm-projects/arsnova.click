@@ -18,36 +18,40 @@
 <template name="resetSessionSplashscreen">
     <div class="modal {{#unless isMobileDevice}}fade {{/unless}}splashscreen" role="dialog">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>{{_ "region.header.reset_session_confirmation.title"}}</h2>
-                </div>
-                <div class="modal-body">
-                    {{#if isSessionRunning}}
-                        <p>{{_ "region.header.reset_session_confirmation.text.running_question"}}</p>
-                    {{else}}
-                        <p>{{_ "region.header.reset_session_confirmation.text.empty_lobby"}}</p>
-                    {{/if}}
-                    <p style="margin-top:20px;">{{_ "region.header.reset_session_confirmation.text.continue"}}</p>
-                </div>
-                <div class="modal-footer">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <button id="closeDialogButton" class="button button-back">
-                                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                                {{_ "global.abort"}}
-                            </button>
-                        </div>
-                        <div class="col-xs-6">
-                            <button id="resetSessionButton" class="button button-next">
-                                {{_ "region.header.yes"}}
-                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                            </button>
+            <div class="noSplashscreenPadding col-md-11 col-sm-11 col-xs-16">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>{{_ "region.header.reset_session_confirmation.title"}}</h2>
+                    </div>
+                    <div class="modal-body">
+                        {{#if isSessionRunning}}
+                            <p>{{_ "region.header.reset_session_confirmation.text.running_question"}}</p>
+                        {{else}}
+                            <p>{{_ "region.header.reset_session_confirmation.text.empty_lobby"}}</p>
+                        {{/if}}
+                        <p style="margin-top:20px;">{{_ "region.header.reset_session_confirmation.text.continue"}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button id="closeDialogButton" class="button button-back">
+                                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                                    {{_ "global.abort"}}
+                                </button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button id="resetSessionButton" class="button button-next">
+                                    {{_ "region.header.yes"}}
+                                    <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
+            <div class="noSplashscreenPadding col-md-1 col-sm-1 col-xs-2">
+                <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
+            </div>
         </div>
     </div>
 </template>

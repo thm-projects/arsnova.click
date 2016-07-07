@@ -18,14 +18,58 @@
 import {Template} from 'meteor/templating';
 import {showFullscreenPicture, showVideo, closeSplashscreen} from './lib.js';
 
-Template.connectionQualitySplashscreen.events({
+
+
+Template.splashscreen.events({
+	"click #btn-hidePreviewModal": function (event) {
+		closeSplashscreen(event);
+	}
+});
+
+Template.questionAndAnswerSplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
 	}
 });
 
-Template.splashscreen.events({
-	"click #btn-hidePreviewModal": function (event) {
+Template.showHashtagsSplashscreen.events({
+	"click .splashscreen-container-close": function (event) {
+		closeSplashscreen(event);
+	}
+});
+
+Template.errorSplashscreen.events({
+	"click .splashscreen-container-close": function (event) {
+		closeSplashscreen(event);
+	}
+});
+
+Template.deleteConfirmationSplashscreen.events({
+	"click .splashscreen-container-close": function (event) {
+		closeSplashscreen(event);
+	}
+});
+
+Template.resetSessionSplashscreen.events({
+	"click .splashscreen-container-close": function (event) {
+		closeSplashscreen(event);
+	}
+});
+
+Template.renameHashtagSplashscreen.events({
+	"click .splashscreen-container-close": function (event) {
+		closeSplashscreen(event);
+	}
+});
+
+Template.readingConfirmedSplashscreen.events({
+	"click .img-responsive": function (event) {
+		showFullscreenPicture(event);
+	},
+	"click .videoImageParagraph": function (event) {
+		showVideo({id: event.target.offsetParent.id, accessKey: event.target.offsetParent.accessKey, title: event.target.offsetParent.title, width: event.target.clientWidth, height: event.target.clientHeight});
+	},
+	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
 	}
 });
@@ -41,14 +85,20 @@ Template.questionPreviewSplashscreen.events({
 		}
 
 		showVideo({id: targetElement.offsetParent.id, accessKey: targetElement.offsetParent.accessKey, title: targetElement.offsetParent.title, width: targetElement.clientWidth, height: targetElement.clientHeight});
+	},
+	"click .splashscreen-container-close": function (event) {
+		closeSplashscreen(event);
 	}
 });
 
-Template.readingConfirmedSplashscreen.events({
-	"click .img-responsive": function (event) {
-		showFullscreenPicture(event);
-	},
-	"click .videoImageParagraph": function (event) {
-		showVideo({id: event.target.offsetParent.id, accessKey: event.target.offsetParent.accessKey, title: event.target.offsetParent.title, width: event.target.clientWidth, height: event.target.clientHeight});
+Template.kickMemberSplashscreen.events({
+	"click .splashscreen-container-close": function (event) {
+		closeSplashscreen(event);
+	}
+});
+
+Template.connectionQualitySplashscreen.events({
+	"click .splashscreen-container-close": function (event) {
+		closeSplashscreen(event);
 	}
 });

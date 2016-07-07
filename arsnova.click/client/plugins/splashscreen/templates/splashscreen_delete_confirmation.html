@@ -18,31 +18,35 @@
 <template name="deleteConfirmationSplashscreen">
 	<div class="modal {{#unless isMobileDevice}}fade {{/unless}}splashscreen" id={{instanceId}} role="dialog">
 		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h2>{{_ "view.hashtag_management.delete_session"}}</h2>
-				</div>
-				<div class="modal-body">
-					<p>{{{_ "view.hashtag_management.delete_session_confirmation" }}}</p>
-				</div>
-                <div class="modal-footer">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <button id="closeDialogButton" class="button">
-                                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                                {{_ "region.header.no"}}
-                            </button>
-                        </div>
-                        <div class="col-xs-6">
-                            <button id="deleteSessionButton" class="button button-next">
-                                {{_ "region.header.yes"}}
-                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                            </button>
+            <div class="noSplashscreenPadding col-md-11 col-sm-11 col-xs-16">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>{{_ "view.hashtag_management.delete_session"}}</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{{_ "view.hashtag_management.delete_session_confirmation" }}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button id="closeDialogButton" class="button">
+                                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                                    {{_ "region.header.no"}}
+                                </button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button id="deleteSessionButton" class="button button-next">
+                                    {{_ "region.header.yes"}}
+                                    <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-			</div>
-            <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
+            </div>
+            <div class="noSplashscreenPadding col-md-1 col-sm-1 col-xs-2">
+                <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
+            </div>
 		</div>
 	</div>
 </template>

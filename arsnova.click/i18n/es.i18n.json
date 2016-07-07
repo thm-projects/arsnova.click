@@ -383,14 +383,6 @@
           "name" : "Sala",
           "description": "Ambiente luminoso de la sala"
         },
-        "pastel": {
-          "name": "Colores pastel",
-          "description": "Tintes pastel elegantes para un estado de ánimo armónico"
-        },
-        "neongray": {
-          "name": "Gris de neón",
-          "description": "La elegancia se combina con colores brillantes"
-        },
         "bluetouch": {
           "name": "Bajo el mar",
           "description": "Un estilo azul marino con detalles brillantes."

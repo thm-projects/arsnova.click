@@ -57,16 +57,6 @@ export const themes = [
 		id: "theme-hell"
 	},
 	{
-		name: "view.theme_switcher.themes.pastel.name",
-		description: "view.theme_switcher.themes.pastel.description",
-		id: "theme-pastel"
-	},
-	{
-		name: "view.theme_switcher.themes.neongrey.name",
-		description: "view.theme_switcher.themes.neongrey.description",
-		id: "theme-neongrey"
-	},
-	{
 		name: "view.theme_switcher.themes.bluetouch.name",
 		description: "view.theme_switcher.themes.bluetouch.description",
 		id: "theme-bluetouch"

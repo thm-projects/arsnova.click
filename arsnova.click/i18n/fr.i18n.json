@@ -383,14 +383,6 @@
           "name" : "Salon",
           "description": "ambiance lumineuse Salon"
         },
-        "pastel": {
-          "name": "Couleurs pastel",
-          "description": "Teintes pastel élégantes pour une ambiance harmonieuse"
-        },
-        "neongrey": {
-          "name": "Neon gris",
-          "description": "Élégance combinée avec des couleurs brillantes"
-        },
         "bluetouch": {
           "name": "Sous la mer",
           "description": "Un style bleu foncé avec des accents lumineux."

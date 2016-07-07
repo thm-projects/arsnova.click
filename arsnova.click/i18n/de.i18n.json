@@ -383,14 +383,6 @@
           "name" : "Wohnzimmer",
           "description": "Helle Wohnzimmer-Atmosphäre."
         },
-        "pastel": {
-          "name": "Pastellfarben",
-          "description": "Für eine harmonische Stimmung."
-        },
-        "neongrey": {
-          "name": "Neongrau",
-          "description": "Eleganz vereint mit leuchtenden Farben."
-        },
         "bluetouch": {
           "name": "Unter dem Meer",
           "description": "Tiefblau mit hellen Akzenten."

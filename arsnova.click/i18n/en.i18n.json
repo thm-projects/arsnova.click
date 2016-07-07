@@ -383,14 +383,6 @@
           "name" : "Living Room",
           "description": "Bright living room atmosphere"
         },
-        "pastel": {
-          "name": "Pastel colors",
-          "description": "Elegant pastel tints for a harmonious mood."
-        },
-        "neongrey": {
-          "name": "Neon grey",
-          "description": "Elegance combined with shiny colors"
-        },
         "bluetouch": {
           "name": "Under the sea",
           "description": "A dark blue style with bright accents."

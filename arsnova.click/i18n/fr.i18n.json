@@ -352,7 +352,7 @@
       "select_a_theme_title": "Choisis un style",
       "themes": {
         "default": {
-          "name": "ARSnova.click",
+          "name": "ARSnova.click (beamer-adapté)",
           "description": "Le premier et le principal thème de ARSnova.click"
         },
         "theme-arsnova-dot-click-contrast": {
@@ -368,15 +368,15 @@
           "description": "Thème élégant pour quizzers sophistiqués"
         },
         "thm": {
-          "name": "THM",
+          "name": "THM (beamer-adapté)",
           "description": "Corporate Design de l'Université des sciences appliquées (THM)"
         },
         "arsnova": {
-          "name": "ARSnova.eu",
+          "name": "ARSnova.eu (beamer-adapté)",
           "description": "Vous connaissez ARS nova? Sentez-vous la maison!"
         },
         "black_beauty": {
-          "name" : "Beauté noire",
+          "name" : "Beauté noire (beamer-adapté)",
           "description": "Sombre, plus sombre et plus sombre encore"
         },
         "living_room": {

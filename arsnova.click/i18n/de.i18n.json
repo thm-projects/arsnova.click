@@ -352,7 +352,7 @@
       "select_a_theme_title": "Wähle einen Stil",
       "themes": {
         "default": {
-          "name": "arsnova.click",
+          "name": "arsnova.click (beamertauglich)",
           "description": "Der Stil der ersten Stunde."
         },
         "theme-arsnova-dot-click-contrast": {
@@ -368,15 +368,15 @@
           "description": "Für anspruchsvolle Quizrunden."
         },
         "thm": {
-          "name": "THM",
+          "name": "THM (beamertauglich)",
           "description": "Corporate Design der TH Mittelhessen."
         },
         "arsnova": {
-          "name": "arsnova.eu",
+          "name": "arsnova.eu (beamertauglich)",
           "description": "Du kennst arsnova.eu? Fühl dich daheim!"
         },
         "black_beauty": {
-          "name" : "Schwarze Schönheit",
+          "name" : "Schwarze Schönheit (beamertauglich)",
           "description": "Dunkel, dunkler und noch dunkler."
         },
         "living_room": {

@@ -17,7 +17,6 @@
 
 import {Template} from 'meteor/templating';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
-import {TAPi18n} from 'meteor/tap:i18n';
 import * as localData from '/lib/local_storage.js';
 
 Template.hashtagManagement.helpers({

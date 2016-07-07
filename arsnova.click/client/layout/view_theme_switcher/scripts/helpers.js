@@ -29,7 +29,7 @@ Template.themeSwitcher.helpers({
 	themeName: function () {
 		var currentTheme = localStorage.getItem("theme");
 		var currentThemeName = "";
-		Array.prototype.forEach.call(themes, function (theme, i) {
+		Array.prototype.forEach.call(themes, function (theme) {
 			if (theme.id === currentTheme) {
 				currentThemeName = theme.name;
 			}

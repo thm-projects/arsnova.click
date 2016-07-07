@@ -133,7 +133,7 @@ Template.liveResults.events({
 		}
 
 		var eventDoc = EventManagerCollection.findOne();
-		if (eventDoc.readingConfirmationIndex == 0) {
+		if (eventDoc.readingConfirmationIndex === 0) {
 			$('.header-titel').text(TAPi18n.__("view.liveResults.title"));
 			calculateHeaderSize();
 		}

@@ -18,7 +18,7 @@
 import {Template} from 'meteor/templating';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {Splashscreen, ErrorSplashscreen, closeSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {markdownAlreadyExistsAndAutoRemove, insertInQuestionText, urlSchema} from './lib.js';
 
 Template.markdownBar.events({

@@ -215,7 +215,8 @@
       "delete_session_confirmation": "Shall the quiz '<span id=\"session_name\"></span>' be removed permanently?",
       "export": "Export quiz",
       "valid_question": "Valid Quiz",
-      "invalid_question": "Invalid Quiz"
+      "invalid_question": "Invalid Quiz",
+      "no_sessions": "There are no quizzes stored in your browser."
     },
     "leaderboard": {
       "header": "Leaderboard",

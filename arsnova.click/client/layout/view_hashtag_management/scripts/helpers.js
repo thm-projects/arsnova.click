@@ -17,6 +17,7 @@
 
 import {Template} from 'meteor/templating';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
+import {TAPi18n} from 'meteor/tap:i18n';
 import * as localData from '/lib/local_storage.js';
 
 Template.hashtagManagement.helpers({
@@ -25,6 +26,10 @@ Template.hashtagManagement.helpers({
 	},
 	isLastItem: function (index) {
 		return index === localData.getAllHashtags().length - 1;
+	},
+	noHashtagsAvailable: function () {
+		console.log(localData.getAllHashtags().length);
+		return localData.getAllHashtags().length === undefined || localData.getAllHashtags().length === 0;
 	}
 });
 

@@ -215,7 +215,8 @@
       "delete_session_confirmation": "¿Seguro que quieres borrar el cuestionario '<span id=\"session_name\"></span>' definitivamente?",
       "export": "Exportar cuestionario",
       "valid_question": "Pregunta valida",
-      "invalid_question": "Pregunta invalida"
+      "invalid_question": "Pregunta invalida",
+      "no_sessions": "No hay pruebas almacenadas en su navegador."
     },
     "leaderboard": {
       "header": "La tabla de posiciones",

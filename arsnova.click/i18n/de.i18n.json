@@ -215,7 +215,8 @@
       "delete_session_confirmation": "Soll das Quiz '<span id=\"session_name\"></span>' unwiderruflich gelöscht werden?",
       "export": "Quiz exportieren",
       "valid_question": "Gültige Quizrunde",
-      "invalid_question": "Ungültige Quizrunde"
+      "invalid_question": "Ungültige Quizrunde",
+      "no_sessions": "Es sind keine Quizze in diesem Browser gespeichert."
     },
     "leaderboard": {
       "header": "Rangliste",

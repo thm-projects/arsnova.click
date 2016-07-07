@@ -244,19 +244,15 @@ Template.liveResults.helpers({
 	},
 	rangedAnswerResult: function (index) {
 		var questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc) {
+		const memberAmount = ResponsesCollection.find({questionIndex: index}).count();
+		if (!questionDoc || !memberAmount) {
 			return;
 		}
-		const memberAmount = ResponsesCollection.find({questionIndex: index}).count();
 		const questionItem = QuestionGroupCollection.findOne().questionList[index];
 		let inCorrectRange = 0;
 		let inWrongRange = 0;
-		MemberListCollection.find().forEach(function (user) {
-			const response = ResponsesCollection.findOne({
-				questionIndex: index,
-				userNick: user.nick
-			});
-			if (response && response.inputValue && response.inputValue >= questionItem.rangeMin && response.inputValue <= questionItem.rangeMax) {
+		ResponsesCollection.find({questionIndex: index}).forEach(function (response) {
+			if (response && typeof response.rangedInputValue !== "undefined" && response.rangedInputValue >= questionItem.rangeMin && response.rangedInputValue <= questionItem.rangeMax) {
 				inCorrectRange++;
 			} else {
 				inWrongRange++;

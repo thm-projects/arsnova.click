@@ -28,7 +28,7 @@ export class SurveyQuestion extends AbstractChoiceQuestion {
 				hasValidAnswer++;
 			}
 		});
-		return super.isValid() && hasValidAnswer === 0;
+		return super.isParentValid && hasValidAnswer === 0;
 	}
 
 	/**

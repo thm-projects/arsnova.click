@@ -57,6 +57,10 @@ export class AbstractChoiceQuestion extends AbstractQuestion {
 		return super.isValid() && this.getAnswerOptionList().length > 0 && hasValidAnswer;
 	}
 
+	isParentValid () {
+		return super.isValid();
+	}
+
 	/**
 	 * Gets the validation error reason from the question and all included answerOptions as a stackable array
 	 * @returns {Array} Contains an Object which holds the number of the current question and the reason why the validation has failed

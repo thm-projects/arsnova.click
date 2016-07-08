@@ -421,7 +421,7 @@
       "seconds_left": "Noch 1 Sekunde!",
       "seconds_left_plural": "Noch __value__ Sekunden!",
       "ranged_question": {
-        "title": "Gibt deinen Schätzwert ein!",
+        "title": "Gib deinen Schätzwert ein!",
         "input_placeholder": "Antwort"
       },
       "free_text_question": {

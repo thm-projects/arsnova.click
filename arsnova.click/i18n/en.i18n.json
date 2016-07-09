@@ -354,6 +354,14 @@
           "name": "ARSnova.click",
           "description": "The first and main theme of ARSnova.click"
         },
+        "theme-arsnova-dot-click-contrast": {
+          "name": "arsnova.click (high-contrast)",
+          "description": "High contrast theme based on ARSnova.click"
+        },
+        "theme-achromatic": {
+          "name": "Achromatic",
+          "description": "A Theme based on achromatic colors."
+        },
         "dark": {
           "name": "Default style (beamer-suitable)",
           "description": "Dark background ensures to high contrast."

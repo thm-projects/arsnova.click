@@ -383,6 +383,185 @@
 
 	$fg-free-text-header-color: $default-text-color;
 
+	@if ($name == "theme-achromatic"){
+			$bg-js-my-hash-validQuestion: #000000;
+			$bg-js-my-hash-validQuestion-hovered: #2e2e2e;
+			$fg-footer-info-bar-active: #000000;
+			$fg-footer-info-bar-active-hovered: #4c4c4c;
+			$fg-hashtag_management-hashtag_name: #000000;
+			$fg-quiz-summary-UL: #000000;
+			$fg-quiz-summary-P: #000000;
+			$fg-quiz-summary-H4: #000000;
+			$quiz-summary-row-color: #000000;
+			$fg-warning: #4c4c4c;
+			$fg-success: #000000;
+
+				$bg-questionScrollPane-active-remove-question-hovered: #000000;
+
+			$border-answer_options-invalidAnswerOption: #000000;
+			$border-answer_options-invalidQuestion: #000000;
+
+			$fg-answer_options-bootstrap_switch_handle_on: #000000;
+			$bg-answer_options-bootstrap_switch_handle_on: #4c4c4c;
+
+			$background-color: #ffffff;
+
+			$fg_titel: #000000;
+
+			$warning: #000000;
+
+			$fg_a: #4c4c4c;
+			$fg_quiz-name: #4c4c4c;
+			$bg-answer_options-bootstrap_switch: #4c4c4c;
+			$input-background-color: #4c4c4c;
+			$bg-answer_row-answer_selected: #4c4c4c;
+
+			$bg-connection-quality-header_connection-pending: #4c4c4c;
+			$fg-connection-quality-header_connection-pending: #4c4c4c;
+			$bg-connection-quality-header_connection-ok: #000000;
+			$fg-connection-quality-header_connection-ok: #4c4c4c;
+			$bg-connection-quality-header_connection-warning: #efefef;
+			$fg-connection-quality-header_connection-warning: #4c4c4c;
+			$bg-connection-quality-header_connection-error: #efefef;
+			$fg-connection-quality-header_connection-error: #4c4c4c;
+			$fg-connection-quality-header_details-link: #4c4c4c;
+
+			$splash-screen-header-color: #ffffff;
+			$splash-screen-body-color: #2f4f4f;
+			$splashscreen-background-color: #98fb98;
+			$splashscreen-foreground-color: black;
+			$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+			$splashscreen-question-preview-background-color: $splashscreen-background-color;
+			$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+			$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+			$splashscreen-sound-config-background-color: $splashscreen-background-color;
+			$splashscreen-sound-config-button-background-color: $success;
+			$splashscreen-sound-config-select-foreground-color: black;
+			$splashscreen-delete-background-color: $splashscreen-background-color;
+			$splash-screen-error-message-background-color: #770000;
+			$splash-screen-error-message-foreground-color: white;
+			$splash-screen-error-message-button-background-color: #ad9595;
+			$splash-screen-error-message-button-foreground-color: black;
+
+			$fg-theme_description: #000000;
+			$info-text-color: #ffffff;
+			$fg-footer-info-bar: #000000;
+			$fg-footer-info-bar-hovered: #4c4c4c;
+
+			$success-text-color: #ffffff;
+			$warning-text-color: #ffffff;
+			$default-text-color: #ffffff;
+			$fg-button-result-percentage: #ffffff;
+
+			$splashscreen-background-color: #4c4c4c;
+
+			$success: #2f2f2f;
+			$bg-success : #000000;
+			$slider-color: #2f2f2f;
+
+			$default: #efefef;
+			$disabled-button-background: #808080;
+			$grey-button-background: #efefef;
+
+			$bg-btn-file-input: #3e3e3e;
+
+			$info: #000000;
+			$bg-answer_row-button_purple_transition: #000000;
+			$fg-answer_row-button_green_transition: #000000;
+
+			$colorChangingArs0: #000000;
+			$colorChangingArs25: #4c4c4c;
+			$colorChangingArs50: #2f2f2f;
+			$colorChangingArs75: #efefef;
+			$colorChangingArs100: #000000;
+
+			$colorChangingNova0: #efefef;
+			$colorChangingNova25: #000000;
+			$colorChangingNova50: #4c4c4c;
+			$colorChangingNova75: #2f2f2f;
+			$colorChangingNova100: #efefef;
+
+			$colorChangingDot0: #2f2f2f;
+			$colorChangingDot25: #efefef;
+			$colorChangingDot50: #000000;
+			$colorChangingDot75: #4c4c4c;
+			$colorChangingDot100: #2f2f2f;
+
+			$colorChangingClick0: #4c4c4c;
+			$colorChangingClick25: #2f2f2f;
+			$colorChangingClick50: #efefef;
+			$colorChangingClick75: #000000;
+			$colorChangingClick100: #4c4c4c;
+
+			$bg-nav-row: $background-color;
+			$bg-container: $background-color;
+			$bg-questionList-row: $background-color;
+			$bg-footer: $background-color;
+
+			$bg-answer_options-bootstrap_switch_handle_off: $warning;
+			$bg-rangedSlider-invalid: $warning;
+			$fg-footer-element-deactivated: $warning;
+			$bg-js-my-hash-invalidQuestion: $warning;
+			$bg-js-my-hash-invalidQuestion-hovered: lighten($warning, 10);
+			$bg-colorChangingOwnNick25: $warning;
+			$colorChangingClick100: $warning;
+			$colorChangingClick0: $warning;
+			$colorChangingDot75: $warning;
+			$colorChangingNova50: $warning;
+			$colorChangingArs25: $warning;
+
+			$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+			$splashscreen-question-preview-background-color: $splashscreen-background-color;
+			$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+			$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+			$splashscreen-sound-config-background-color: $splashscreen-background-color;
+			$splashscreen-delete-background-color: $splashscreen-background-color;
+			$placeholder-color: #efefef;
+			$input-foreground-color: #ffffff;
+			$bg-questionScrollPane-question-icon-valid-index-number: $bg-questionScrollPane-question-icon-invalid-index-number;
+			$border-questionScrollPane-active-valid-remove-question: $bg-questionScrollPane-question-icon-invalid-index-number-hovered;
+	}
+
+	@if ($name == "theme-arsnova-dot-click-contrast"){
+		$background-color: #23425b;
+		$warning: #991d1d;
+		$splashscreen-background-color: #b6fcb6;
+		$default: #424242;
+		$disabled-button-background: #424242;
+		$grey-button-background: #424242;
+		$disabled-button-background: #424242;
+		$success: #006000;
+		$slider-color: #006000;
+		$bg-btn-file-input: #5c3909;
+		$info: #562b81;
+		$bg-answer_row-button_purple_transition: #562b81;
+		$fg-answer_row-button_green_transition: #562b81;
+
+		$bg-nav-row: $background-color;
+		$bg-container: $background-color;
+		$bg-questionList-row: $background-color;
+		$bg-footer: $background-color;
+
+		$bg-answer_options-bootstrap_switch_handle_off: $warning;
+		$bg-rangedSlider-invalid: $warning;
+		$fg-footer-element-deactivated: $warning;
+		$bg-js-my-hash-invalidQuestion: $warning;
+		$bg-js-my-hash-invalidQuestion-hovered: lighten($warning, 10);
+		$bg-colorChangingOwnNick25: $warning;
+		$colorChangingClick100: $warning;
+		$colorChangingClick0: $warning;
+		$colorChangingDot75: $warning;
+		$colorChangingNova50: $warning;
+		$colorChangingArs25: $warning;
+
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
+	}
+
 	@if ($name == "theme-dark") {
 		$colorChangingArs0: white;
 		$success: #008000; /* green */
@@ -1984,3 +2163,5 @@
 @include theme(theme-green);
 @include theme(theme-action);
 @include theme(theme-Psychology-Correct-Colours);
+@include theme(theme-arsnova-dot-click-contrast);
+@include theme(theme-achromatic);

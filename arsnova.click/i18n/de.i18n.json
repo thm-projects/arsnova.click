@@ -354,6 +354,14 @@
           "name": "arsnova.click",
           "description": "Der Stil der ersten Stunde."
         },
+        "theme-arsnova-dot-click-contrast": {
+          "name": "arsnova.click (kontrastreich)",
+          "description": "Kontrastreicher Stil auf Basis von ARSnova.click"
+        },
+        "theme-achromatic": {
+          "name": "Achromatisch",
+          "description": "Ein Stil auf Grundlage der Farbtöne schwarz, weiß sowie deren Abstufungen."
+        },
         "dark": {
           "name": "Standard-Stil (beamertauglich)",
           "description": "Dunkler Hintergrund sorgt für hohen Kontrast."
@@ -421,7 +429,7 @@
       "seconds_left": "Noch 1 Sekunde!",
       "seconds_left_plural": "Noch __value__ Sekunden!",
       "ranged_question": {
-        "title": "Gib deinen Schätzwert ein!",
+        "title": "Gibt deinen Schätzwert ein!",
         "input_placeholder": "Antwort"
       },
       "free_text_question": {

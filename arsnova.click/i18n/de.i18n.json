@@ -354,6 +354,10 @@
           "name": "arsnova.click",
           "description": "Der Stil der ersten Stunde."
         },
+        "theme-arsnova-dot-click-contrast": {
+          "name": "arsnova.click (kontrastreich)",
+          "description": "Kontrastreicher Stil auf Basis von ARSnova.click"
+        },
         "dark": {
           "name": "Standard-Stil (beamertauglich)",
           "description": "Dunkler Hintergrund sorgt für hohen Kontrast."

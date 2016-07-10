@@ -383,6 +383,46 @@
 
 	$fg-free-text-header-color: $default-text-color;
 
+	@if ($name == "theme-arsnova-dot-click-contrast"){
+		$background-color: #23425b;
+		$warning: #991d1d;
+		$splashscreen-background-color: #b6fcb6;
+		$default: #424242;
+		$disabled-button-background: #424242;
+		$grey-button-background: #424242;
+		$disabled-button-background: #424242;
+		$success: #006000;
+		$slider-color: #006000;
+		$bg-btn-file-input: #5c3909;
+		$info: #562b81;
+		$bg-answer_row-button_purple_transition: #562b81;
+		$fg-answer_row-button_green_transition: #562b81;
+
+		$bg-nav-row: $background-color;
+		$bg-container: $background-color;
+		$bg-questionList-row: $background-color;
+		$bg-footer: $background-color;
+
+		$bg-answer_options-bootstrap_switch_handle_off: $warning;
+		$bg-rangedSlider-invalid: $warning;
+		$fg-footer-element-deactivated: $warning;
+		$bg-js-my-hash-invalidQuestion: $warning;
+		$bg-js-my-hash-invalidQuestion-hovered: lighten($warning, 10);
+		$bg-colorChangingOwnNick25: $warning;
+		$colorChangingClick100: $warning;
+		$colorChangingClick0: $warning;
+		$colorChangingDot75: $warning;
+		$colorChangingNova50: $warning;
+		$colorChangingArs25: $warning;
+
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
+	}
+
 	@if ($name == "theme-dark") {
 		$colorChangingArs0: white;
 		$success: #008000; /* green */
@@ -1984,3 +2024,4 @@
 @include theme(theme-green);
 @include theme(theme-action);
 @include theme(theme-Psychology-Correct-Colours);
+@include theme(theme-arsnova-dot-click-contrast);

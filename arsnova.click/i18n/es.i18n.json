@@ -354,10 +354,6 @@
           "name": "ARSnova.click",
           "description": "La primera y principal tema de ARSnova.click"
         },
-        "theme-arsnova-dot-click-contrast": {
-          "name": "arsnova.click (alto contraste)",
-          "description": "Tema de alto contraste basado en ARSnova.click"
-        },
         "dark": {
           "name": "Estilo por defecto (Beamer-adecuado).",
           "description": "Fondo oscuro asegura al alto contraste."

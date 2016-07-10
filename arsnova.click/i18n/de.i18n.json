@@ -354,14 +354,6 @@
           "name": "arsnova.click",
           "description": "Der Stil der ersten Stunde."
         },
-        "theme-arsnova-dot-click-contrast": {
-          "name": "arsnova.click (kontrastreich)",
-          "description": "Kontrastreicher Stil auf Basis von ARSnova.click"
-        },
-        "theme-achromatic": {
-          "name": "Achromatisch",
-          "description": "Ein Stil auf Grundlage der Farbtöne schwarz, weiß sowie deren Abstufungen."
-        },
         "dark": {
           "name": "Standard-Stil (beamertauglich)",
           "description": "Dunkler Hintergrund sorgt für hohen Kontrast."

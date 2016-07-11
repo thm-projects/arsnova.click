@@ -151,38 +151,19 @@ export function checkForValidQuestionText() {
 	}
 }
 
-export function changePreviewButtonText(text) {
-	$('#formatPreviewText').text(text);
-
-	if (text === TAPi18n.__("view.questions.preview")) {
-		$('#formatPreviewGlyphicon').removeClass("glyphicon-cog").addClass("glyphicon-phone");
-		$('#markdownBarDiv').removeClass('hide');
-		$('#questionText').removeClass('round-corners').addClass('round-corners-markdown');
-	} else {
-		checkForValidQuestionText();
-		$('#formatPreviewGlyphicon').removeClass("glyphicon-phone").addClass("glyphicon-cog");
-		$('#markdownBarDiv').addClass('hide');
-		$('#questionText').removeClass('round-corners-markdown').addClass('round-corners');
-	}
-}
-
 export function checkForMarkdown() {
 	if (EventManagerCollection.findOne().questionIndex < 0) {
 		return;
 	}
 	var questionText = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
 	if (questionText && questionContainsMarkdownSyntax(questionText)) {
-		changePreviewButtonText(TAPi18n.__("view.questions.edit"));
-
 		mathjaxMarkdown.initializeMarkdownAndLatex();
-
 		questionText = mathjaxMarkdown.getContent(questionText);
 
 		$("#questionTextDisplay").html(questionText);
 		$('#editQuestionText').hide();
 		$('#previewQuestionText').show();
 	} else {
-		changePreviewButtonText(TAPi18n.__("view.questions.format"));
 		$('#previewQuestionText').hide();
 		$('#editQuestionText').show();
 		if ($(window).width() >= 992) {

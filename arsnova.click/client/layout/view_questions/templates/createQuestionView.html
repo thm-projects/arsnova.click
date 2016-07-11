@@ -18,7 +18,26 @@
 <template name="createQuestionView">
 	<div class="row center-vertical full-screen-content">
 		<div class="col-md-12">
-            {{> titel titelText="view.questions.choose_format"}}
+            <div class="row distance-top row-create-question-buttons">
+                <div class="col-xs-4">
+                    <button id="editButton" class="formatPreviewButton button button-purple">
+                        <span>{{_ "view.questions.edit"}}</span>
+                        <span class="glyphicon glyphicon-pencil glyph-right"></span>
+                    </button>
+                </div>
+                <div class="col-xs-4">
+                    <button id="formatButton" class="formatPreviewButton button button-purple">
+                        <span>{{_ "view.questions.format"}}</span>
+                        <span class="glyphicon glyphicon-cog glyph-right"></span>
+                    </button>
+                </div>
+                <div class="col-xs-4">
+                    <button id="previewButton" class="formatPreviewButton button button-purple">
+                        <span>{{_ "view.questions.preview"}}</span>
+                        <span class="glyphicon glyphicon-phone glyph-right"></span>
+                    </button>
+                </div>
+            </div>
             <div class="row distance-top">
                 <div class="col-xs-12">
                     <select title="chooseQuestionType" class="round-corners textarea" id="chooseQuestionType">
@@ -38,18 +57,6 @@
                               maxlength="{{getQuestionTextSchema.max}}" rows="{{#if isLargeWindow}}8{{else}}4{{/if}}" id="questionText"
                               placeholder="{{_ "view.questions.enter_question_here"}}"
                     >{{questionText}}</textarea>
-                </div>
-            </div>
-            <div class="row distance-top">
-                <div class="col-md-12">
-                    <div class="row row-create-question-buttons">
-                        <div class="col-xs-6 col-xs-offset-3">
-                            <button id="formatPreviewButton" class="button button-purple">
-                                <span id="formatPreviewText">{{_ "view.questions.format"}}</span>
-                                <span id="formatPreviewGlyphicon" class="glyphicon glyphicon-cog glyph-right"></span>
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
 		</div>

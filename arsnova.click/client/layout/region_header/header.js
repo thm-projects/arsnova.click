@@ -72,7 +72,7 @@ Template.header.helpers({
 			case "memberlist":
 				return Router.current().params.quizName;
 			case "results":
-				return TAPi18n.__("view.liveResults.title");
+				return TAPi18n.__("region.footer.footer_bar.reading-confirmation");
 			case "onpolling":
 				return TAPi18n.__("view.voting.title");
 			case "statistics":
@@ -149,7 +149,7 @@ Template.header.onRendered(function () {
 	headerThemeTracker = Tracker.autorun(function () {
 		if (!Session.get("questionGroup") && HashtagsCollection.findOne({hashtag: Router.current().params.quizName})) {
 			const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-			const theme = hashtagDoc ? hashtagDoc.theme : "theme-default";
+			const theme = hashtagDoc ? hashtagDoc.theme : "theme-blackbeauty";
 			Session.set("theme", theme);
 		}
 	});

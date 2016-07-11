@@ -322,7 +322,7 @@ export function exportFromLocalStorage(hashtag) {
 			throw new TypeError("Undefined session type while exporting");
 	}
 	if (!quizItem.theme) {
-		quizItem.theme = "theme-dark";
+		quizItem.theme = "theme-blackbeauty";
 	}
 	if (!quizItem.musicVolume) {
 		quizItem.musicVolume = 80;

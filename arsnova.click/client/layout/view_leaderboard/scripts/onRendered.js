@@ -17,6 +17,7 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {TAPi18n} from 'meteor/tap:i18n';
 import * as localData from '/lib/local_storage.js';
 import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
@@ -30,6 +31,13 @@ Template.leaderBoard.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		footerElements.addFooterElement(footerElements.footerElemAbout);
 	}
+
+	if (Session.get("showGlobalRanking")) {
+		$('.header-titel').text(TAPi18n.__("view.leaderboard.global_header"));
+	} else {
+		$('.header-titel').text(TAPi18n.__("view.leaderboard.header"));
+	}
+
 	calculateHeaderSize();
 	footerElements.calculateFooter();
 

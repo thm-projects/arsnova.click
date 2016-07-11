@@ -16,6 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
+import {TAPi18n} from 'meteor/tap:i18n';
 import {themes} from './lib.js';
 
 Template.themeSwitcher.helpers({
@@ -24,5 +25,26 @@ Template.themeSwitcher.helpers({
 	},
 	isThemeSelected: function (themeName) {
 		return localStorage.getItem("theme") === themeName ? "selected" : "";
+	},
+	themeName: function () {
+		var currentTheme = localStorage.getItem("theme");
+		var currentThemeName = "";
+		Array.prototype.forEach.call(themes, function (theme) {
+			if (theme.id === currentTheme) {
+				currentThemeName = theme.name;
+			}
+		});
+		return TAPi18n.__(currentThemeName);
+	},
+	isBeamerFriendly: function (themeName) {
+		if (themeName === "theme-dark" ||
+			themeName === "theme-blackbeauty" ||
+			themeName === "theme-arsnova" ||
+			themeName === "theme-thm" ||
+			themeName === "theme-default") {
+			return true;
+		} else {
+			return false;
+		}
 	}
 });

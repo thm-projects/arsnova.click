@@ -25,6 +25,7 @@ import {MemberListCollection} from '/lib/member_list/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {ErrorSplashscreen, Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import {calculateButtonCount, startCountdown, isCountdownZero} from './lib.js';
 
 Template.liveResults.events({
@@ -130,6 +131,9 @@ Template.liveResults.events({
 		if (!questionDoc) {
 			return;
 		}
+
+		$('.header-titel').text(TAPi18n.__("view.liveResults.title"));
+		calculateHeaderSize();
 
 		Meteor.call('Question.startTimer', {
 			hashtag: Router.current().params.quizName,

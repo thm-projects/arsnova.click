@@ -25,6 +25,10 @@ Template.hashtagManagement.helpers({
 	},
 	isLastItem: function (index) {
 		return index === localData.getAllHashtags().length - 1;
+	},
+	noHashtagsAvailable: function () {
+		console.log(localData.getAllHashtags().length);
+		return localData.getAllHashtags().length === undefined || localData.getAllHashtags().length === 0;
 	}
 });
 

@@ -59,7 +59,7 @@ export class AbstractQuestionGroup {
 			}
 		}
 		this[hashtag] = options.hashtag;
-		this[theme] = options.theme || "theme-dark";
+		this[theme] = options.theme || "theme-blackbeauty";
 		this[musicVolume] = options.musicVolume || 80;
 		this[musicEnabled] = options.musicEnabled || "1";
 		this[musicTitle] = options.musicTitle || "Song1";

@@ -215,7 +215,8 @@
       "delete_session_confirmation": "¿Seguro que quieres borrar el cuestionario '<span id=\"session_name\"></span>' definitivamente?",
       "export": "Exportar cuestionario",
       "valid_question": "Pregunta valida",
-      "invalid_question": "Pregunta invalida"
+      "invalid_question": "Pregunta invalida",
+      "no_sessions": "No hay pruebas almacenadas en su navegador."
     },
     "leaderboard": {
       "header": "La tabla de posiciones",
@@ -351,7 +352,7 @@
       "select_a_theme_title": "Elige un estilo",
       "themes": {
         "default": {
-          "name": "ARSnova.click",
+          "name": "ARSnova.click (Beamer-adecuado)",
           "description": "La primera y principal tema de ARSnova.click"
         },
         "theme-arsnova-dot-click-contrast": {
@@ -367,28 +368,20 @@
           "description": "Elegante tema para Quizzers sofisticados"
         },
         "thm": {
-          "name": "THM",
+          "name": "THM (Beamer-adecuado)",
           "description": "Diseño Corporativo de la Universidad de Ciencias Aplicadas (THM)"
         },
         "arsnova": {
-          "name": "ARSnova.eu",
+          "name": "ARSnova.eu (Beamer-adecuado)",
           "description": "Ya sabes Ars Nova? Sentirse como en casa!"
         },
         "black_beauty": {
-          "name" : "Belleza negro",
+          "name" : "Belleza negro (Beamer-adecuado)",
           "description": "Oscuro, más oscuro y más oscuro"
         },
         "living_room": {
           "name" : "Sala",
           "description": "Ambiente luminoso de la sala"
-        },
-        "pastel": {
-          "name": "Colores pastel",
-          "description": "Tintes pastel elegantes para un estado de ánimo armónico"
-        },
-        "neongray": {
-          "name": "Gris de neón",
-          "description": "La elegancia se combina con colores brillantes"
         },
         "bluetouch": {
           "name": "Bajo el mar",

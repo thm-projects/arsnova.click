@@ -80,7 +80,7 @@ Router.onBeforeAction(function () {
 });
 
 Router.onBeforeAction(function () {
-	let theme = "theme-dark";
+	let theme = "theme-blackbeauty";
 	if (!localStorage.getItem("theme")) {
 		localStorage.setItem("theme", theme);
 	} else {

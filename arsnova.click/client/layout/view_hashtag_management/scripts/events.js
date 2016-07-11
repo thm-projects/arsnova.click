@@ -126,7 +126,7 @@ Template.hashtagView.events({
 				musicVolume: 80,
 				musicEnabled: 1,
 				musicTitle: "Song1",
-				theme: "theme-default",
+				theme: "theme-blackbeauty",
 				selectedNicks: []
 			}, function (err) {
 				if (!err) {

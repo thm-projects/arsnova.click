@@ -190,6 +190,7 @@ export class ErrorSplashscreen extends Splashscreen {
 }
 
 export function showReadingConfirmationSplashscreen(index) {
+	$('.header-titel').text(TAPi18n.__("region.footer.footer_bar.reading-confirmation"));
 	var questionDoc = QuestionGroupCollection.findOne();
 	new Splashscreen({
 		autostart: true,
@@ -301,4 +302,9 @@ export function showFullscreenPicture(event) {
 			img.style.textAlign = "center";
 		}
 	});
+}
+
+export function closeSplashscreen(event) {
+	$(event.currentTarget).parents(".splashscreen").remove();
+	$('.modal-backdrop').remove();
 }

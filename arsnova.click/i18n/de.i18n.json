@@ -215,7 +215,8 @@
       "delete_session_confirmation": "Soll das Quiz '<span id=\"session_name\"></span>' unwiderruflich gelöscht werden?",
       "export": "Quiz exportieren",
       "valid_question": "Gültige Quizrunde",
-      "invalid_question": "Ungültige Quizrunde"
+      "invalid_question": "Ungültige Quizrunde",
+      "no_sessions": "Es sind keine Quizze in diesem Browser gespeichert."
     },
     "leaderboard": {
       "header": "Rangliste",
@@ -351,7 +352,7 @@
       "select_a_theme_title": "Wähle einen Stil",
       "themes": {
         "default": {
-          "name": "arsnova.click",
+          "name": "arsnova.click (beamertauglich)",
           "description": "Der Stil der ersten Stunde."
         },
         "theme-arsnova-dot-click-contrast": {
@@ -367,28 +368,20 @@
           "description": "Für anspruchsvolle Quizrunden."
         },
         "thm": {
-          "name": "THM",
+          "name": "THM (beamertauglich)",
           "description": "Corporate Design der TH Mittelhessen."
         },
         "arsnova": {
-          "name": "arsnova.eu",
+          "name": "arsnova.eu (beamertauglich)",
           "description": "Du kennst arsnova.eu? Fühl dich daheim!"
         },
         "black_beauty": {
-          "name" : "Schwarze Schönheit",
+          "name" : "Schwarze Schönheit (beamertauglich)",
           "description": "Dunkel, dunkler und noch dunkler."
         },
         "living_room": {
           "name" : "Wohnzimmer",
           "description": "Helle Wohnzimmer-Atmosphäre."
-        },
-        "pastel": {
-          "name": "Pastellfarben",
-          "description": "Für eine harmonische Stimmung."
-        },
-        "neongrey": {
-          "name": "Neongrau",
-          "description": "Eleganz vereint mit leuchtenden Farben."
         },
         "bluetouch": {
           "name": "Unter dem Meer",

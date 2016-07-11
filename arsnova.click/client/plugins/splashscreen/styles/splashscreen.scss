@@ -22,9 +22,11 @@
  * Splash screen appearance
  */
 .modal-content {
+  display: inline-block;
   font-size: 20px;
   border-radius: $splash-screen-corner-radius;
   box-shadow: none;
+  width: 100%;
 
   a, a:hover, a:active, a:visited, a:focus {
     text-decoration: underline;
@@ -77,4 +79,30 @@
 
 .resizeableImage {
   cursor: pointer;
+}
+
+@media (max-width: 1299px) {
+  .splashscreen-container-close {
+    font-size: 4vw;
+  }
+}
+@media (min-width: 1300px) {
+  .splashscreen-container-close {
+    font-size: 50px;
+  }
+}
+
+.splashscreen-container-close {
+  display: inline-block;
+  position: absolute;
+
+
+  .glyphicon-remove {
+    border-radius: $corner-radius;
+    cursor: pointer;
+  }
+}
+
+.noSplashscreenPadding {
+  padding: 0px 0px 15px 0px;
 }

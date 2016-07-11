@@ -53,7 +53,7 @@ Template.markdownBar.events({
 		new Splashscreen({
 			autostart: true,
 			templateName: "hyperlinkInsertSplashscreen",
-			closeOnButton: "#js-btn-closeHyperlink, #js-btn-saveHyperlink",
+			closeOnButton: "#js-btn-closeHyperlink, #js-btn-saveHyperlink, .splashscreen-container-close",
 			onRendered: function (instance) {
 				var textarea = document.getElementById('questionText');
 				if (textarea.selectionStart != textarea.selectionEnd) {
@@ -117,7 +117,7 @@ Template.markdownBar.events({
 		new Splashscreen({
 			autostart: true,
 			templateName: "pictureInsertSplashscreen",
-			closeOnButton: "#js-btn-closePicture, #js-btn-savePicture",
+			closeOnButton: "#js-btn-closePicture, #js-btn-savePicture, .splashscreen-container-close",
 			onRendered: function (instance) {
 				var textarea = document.getElementById('questionText');
 				if (textarea.selectionStart != textarea.selectionEnd) {
@@ -152,7 +152,7 @@ Template.markdownBar.events({
 		new Splashscreen({
 			autostart: true,
 			templateName: "youtubeInsertSplashscreen",
-			closeOnButton: "#js-btn-closeYoutube, #js-btn-saveYoutube",
+			closeOnButton: "#js-btn-closeYoutube, #js-btn-saveYoutube, .splashscreen-container-close",
 			onRendered: function (instance) {
 				var textarea = document.getElementById('questionText');
 				if (textarea.selectionStart != textarea.selectionEnd) {
@@ -188,7 +188,7 @@ Template.markdownBar.events({
 		new Splashscreen({
 			autostart: true,
 			templateName: "vimeoInsertSplashscreen",
-			closeOnButton: "#js-btn-closeVimeo, #js-btn-saveVimeo",
+			closeOnButton: "#js-btn-closeVimeo, #js-btn-saveVimeo, .splashscreen-container-close",
 			onRendered: function (instance) {
 				var textarea = document.getElementById('questionText');
 				if (textarea.selectionStart != textarea.selectionEnd) {

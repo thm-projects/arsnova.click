@@ -22,6 +22,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {showReadingConfirmationSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {TAPi18n} from 'meteor/tap:i18n';
 import * as localData from '/lib/local_storage.js';
 import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
@@ -30,6 +31,9 @@ import {calculateButtonCount, startCountdown} from './lib.js';
 Template.liveResults.onRendered(()=> {
 	if (EventManagerCollection.findOne().readingConfirmationIndex < 1 && EventManagerCollection.findOne().questionIndex < 0) {
 		showReadingConfirmationSplashscreen(0);
+		$('.header-titel').text(TAPi18n.__("view.liveResults.reading_confirmation"));
+	} else {
+		$('.header-titel').text(TAPi18n.__("view.liveResults.title"));
 	}
 	if (localData.containsHashtag(Router.current().params.quizName) && EventManagerCollection.findOne() && EventManagerCollection.findOne().readingConfirmationIndex === -1) {
 		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, 0);

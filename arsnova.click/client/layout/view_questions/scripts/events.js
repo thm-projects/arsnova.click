@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
@@ -38,25 +37,31 @@ Template.createQuestionView.events({
 	"click #backButton": function () {
 		Router.go("/" + Router.current().params.quizName + "/resetToHome");
 	},
-	"click #formatPreviewButton": function () {
-		var formatPreviewText = $('#formatPreviewText');
-		if (formatPreviewText.text() === TAPi18n.__("view.questions.edit")) {
-			lib.changePreviewButtonText(TAPi18n.__("view.questions.format"));
+	"click #editButton": function () {
+		if ($('#previewQuestionText').is(':visible')) {
 			$('#previewQuestionText').hide();
 			$('#editQuestionText').show();
-		} else if (formatPreviewText.text() === TAPi18n.__("view.questions.format")) {
-			lib.changePreviewButtonText(TAPi18n.__("view.questions.preview"));
+		}
+	},
+	"click #previewButton": function () {
+		new Splashscreen({
+			autostart: true,
+			templateName: "questionPreviewSplashscreen",
+			closeOnButton: '#js-btn-hidePreviewModal',
+			onRendered: function (instance) {
+				mathjaxMarkdown.initializeMarkdownAndLatex();
+				let content = mathjaxMarkdown.getContent($('#questionText').val());
+				instance.templateSelector.find('.modal-body').html(content).find('p').css("margin-left", "0px");
+			}
+		});
+	},
+	"click #formatButton": function () {
+		if ($('#markdownBarDiv').hasClass('hide')) {
+			$('#markdownBarDiv').removeClass('hide');
+			$('#questionText').removeClass('round-corners').addClass('round-corners-markdown');
 		} else {
-			new Splashscreen({
-				autostart: true,
-				templateName: "questionPreviewSplashscreen",
-				closeOnButton: '#js-btn-hidePreviewModal',
-				onRendered: function (instance) {
-					mathjaxMarkdown.initializeMarkdownAndLatex();
-					let content = mathjaxMarkdown.getContent($('#questionText').val());
-					instance.templateSelector.find('.modal-body').html(content).find('p').css("margin-left", "0px");
-				}
-			});
+			$('#markdownBarDiv').addClass('hide');
+			$('#questionText').removeClass('round-corners-markdown').addClass('round-corners');
 		}
 	}
 });

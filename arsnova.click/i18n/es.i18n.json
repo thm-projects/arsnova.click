@@ -289,7 +289,6 @@
     "questions": {
       "title": "1/4 Introduzca texto de la pregunta",
       "enter_question_here": "Introduzca su pregunta aquí",
-      "choose_format": "Elegir el formato de pregunta:",
       "format": "Formato",
       "edit": "Editar",
       "preview": "Previsualizar",

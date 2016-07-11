@@ -27,7 +27,7 @@ Template.memberlist.onRendered(function () {
 	Session.set("learnerCountOverride", false);
 	Session.set("allMembersCount", MemberListCollection.find().count());
 	calculateButtonCount(MemberListCollection.find().count());
-	$('.header-titel').text(Router.current().params.quizName);
+	$('.header-title').text(Router.current().params.quizName);
 	calculateHeaderSize();
 	$(window).resize(calculateHeaderSize);
 

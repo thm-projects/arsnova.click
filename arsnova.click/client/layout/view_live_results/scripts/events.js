@@ -132,7 +132,7 @@ Template.liveResults.events({
 			return;
 		}
 
-		$('.header-titel').text(TAPi18n.__("view.liveResults.title"));
+		$('.header-title').text(TAPi18n.__("view.liveResults.title"));
 		calculateHeaderSize();
 
 		Meteor.call('Question.startTimer', {

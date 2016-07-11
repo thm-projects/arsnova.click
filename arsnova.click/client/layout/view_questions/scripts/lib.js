@@ -17,7 +17,6 @@
 
 import {Session} from 'meteor/session';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {questionTextSchema} from '/lib/questions/collection.js';
 import {questionReflection} from '/lib/questions/question_reflection.js';

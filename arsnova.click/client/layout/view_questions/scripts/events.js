@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
@@ -64,5 +63,5 @@ Template.createQuestionView.events({
 			$('#markdownBarDiv').addClass('hide');
 			$('#questionText').removeClass('round-corners-markdown').addClass('round-corners');
 		}
-	},
+	}
 });

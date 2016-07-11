@@ -31,6 +31,9 @@ import {calculateButtonCount, startCountdown} from './lib.js';
 Template.liveResults.onRendered(()=> {
 	if (EventManagerCollection.findOne().readingConfirmationIndex < 1 && EventManagerCollection.findOne().questionIndex < 0) {
 		showReadingConfirmationSplashscreen(0);
+		$('.header-titel').text(TAPi18n.__("view.liveResults.reading_confirmation"));
+	} else {
+		$('.header-titel').text(TAPi18n.__("view.liveResults.title"));
 	}
 	if (localData.containsHashtag(Router.current().params.quizName) && EventManagerCollection.findOne() && EventManagerCollection.findOne().readingConfirmationIndex === -1) {
 		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, 0);
@@ -57,12 +60,6 @@ Template.liveResults.onRendered(()=> {
 		if (memberWithGivenResponsesAmount !== memberAmount) {
 			startCountdown(EventManagerCollection.findOne().questionIndex);
 		}
-	}
-
-	var eventDoc = EventManagerCollection.findOne();
-	console.log(eventDoc);
-	if (eventDoc.readingConfirmationIndex !== 0) {
-		$('.header-titel').text(TAPi18n.__("view.liveResults.title"));
 	}
 
 	calculateButtonCount();

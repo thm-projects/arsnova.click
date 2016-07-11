@@ -132,11 +132,8 @@ Template.liveResults.events({
 			return;
 		}
 
-		var eventDoc = EventManagerCollection.findOne();
-		if (eventDoc.readingConfirmationIndex === 0) {
-			$('.header-titel').text(TAPi18n.__("view.liveResults.title"));
-			calculateHeaderSize();
-		}
+		$('.header-titel').text(TAPi18n.__("view.liveResults.title"));
+		calculateHeaderSize();
 
 		Meteor.call('Question.startTimer', {
 			hashtag: Router.current().params.quizName,

@@ -30,6 +30,13 @@ Template.leaderBoard.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		footerElements.addFooterElement(footerElements.footerElemAbout);
 	}
+
+	if (Session.get("showGlobalRanking")){
+		$('.header-titel').text(TAPi18n.__("view.leaderboard.global_header"));
+	} else {
+		$('.header-titel').text(TAPi18n.__("view.leaderboard.header"));
+	}
+
 	calculateHeaderSize();
 	footerElements.calculateFooter();
 

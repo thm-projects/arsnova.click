@@ -50,7 +50,7 @@ export function calculateTitelHeight() {
 }
 
 export function calculateHeaderSize() {
-	var titel = $('.header-titel').text().trim();
+	var titel = $('.header-title').text().trim();
 	var titleLength = titel.length;
 
 	var fontSize = "";
@@ -86,5 +86,5 @@ export function calculateHeaderSize() {
 			fontSize = "3vh";
 		}
 	}
-	$(".header-titel").css({"font-size": fontSize, "line-height": $('.arsnova-logo').height() + "px"});
+	$(".header-title").css({"font-size": fontSize, "line-height": $('.arsnova-logo').height() + "px"});
 }

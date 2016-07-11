@@ -35,7 +35,7 @@ Template.votingview.onRendered(function () {
 	footerElements.removeFooterElements();
 	footerElements.calculateFooter();
 
-	$('.header-titel').text(TAPi18n.__("view.voting.title"));
+	$('.header-title').text(TAPi18n.__("view.voting.title"));
 	startCountdown(EventManagerCollection.findOne().questionIndex);
 	calculateHeaderSize();
 	$(window).resize(calculateHeaderSize);

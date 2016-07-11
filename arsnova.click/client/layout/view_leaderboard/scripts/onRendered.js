@@ -33,9 +33,9 @@ Template.leaderBoard.onRendered(function () {
 	}
 
 	if (Session.get("showGlobalRanking")) {
-		$('.header-titel').text(TAPi18n.__("view.leaderboard.global_header"));
+		$('.header-title').text(TAPi18n.__("view.leaderboard.global_header"));
 	} else {
-		$('.header-titel').text(TAPi18n.__("view.leaderboard.header"));
+		$('.header-title').text(TAPi18n.__("view.leaderboard.header"));
 	}
 
 	calculateHeaderSize();

@@ -43,7 +43,7 @@ if (Meteor.isServer) {
 				musicVolume: 0,
 				musicEnabled: 0,
 				musicTitle: "noSong",
-				theme: "theme-default",
+				theme: "theme-blackbeauty",
 				selectedNicks: []
 			};
 			// block this hash / pk -> do not use and merge to production server!
@@ -55,7 +55,7 @@ if (Meteor.isServer) {
 				musicVolume: 0,
 				musicEnabled: 0,
 				musicTitle: "noSong",
-				theme: "theme-default",
+				theme: "theme-blackbeauty",
 				selectedNicks: []
 			};
 			console.log("inserting blocking hashtags...");

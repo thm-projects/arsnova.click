@@ -149,7 +149,7 @@ Template.header.onRendered(function () {
 	headerThemeTracker = Tracker.autorun(function () {
 		if (!Session.get("questionGroup") && HashtagsCollection.findOne({hashtag: Router.current().params.quizName})) {
 			const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-			const theme = hashtagDoc ? hashtagDoc.theme : "theme-default";
+			const theme = hashtagDoc ? hashtagDoc.theme : "theme-blackbeauty";
 			Session.set("theme", theme);
 		}
 	});

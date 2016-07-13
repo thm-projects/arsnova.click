@@ -19,7 +19,7 @@
       "footer_bar": {
         "about": "À propos de",
         "home": "Accueil",
-        "tos": "CG", // do we want those shortcuts?
+        "tos": "CG",
         "imprint": "Mentions légales",
         "data_privacy": "Protection des données",
         "languages": "Langues",
@@ -56,7 +56,7 @@
           "title": "Manuel?",
           "text": {
             "1": "Pas besoin!",
-            "2": "Entrez le nom du quiz. Les boutons se colorent dés que vous entrez le nom d'un quiz déverrouillé (Participe!) ou que vous pouvez utiliser ce nom pour créer un nouveau quiz (Édite!).",
+            "2": "Entre le nom du quiz. Les boutons se colorent dés que tu entre le nom d'un quiz déverrouillé (Participe!) ou que tu peux utiliser ce nom pour créer un nouveau quiz (Édite!).",
             "3": "Il n'y a plus qu'à: Cliquer. Regarder. Quizzer."
           }
         }
@@ -190,7 +190,7 @@
     },
     "choose_nickname": {
       "enter_nickname": "Choisis un pseudo",
-      "enter_nickname_here": "Entres ton pseudo",
+      "enter_nickname_here": "Entre ton pseudo",
       "nickname_na_popup": "Ce pseudo est déjà prit!",
       "nickname_blacklist_popup": "Ce pseudo n'est pas autorisé!",
       "nickname_too_long": "Ce pseudo est trop long",
@@ -201,7 +201,7 @@
       }
     },
     "hashtag_management": {
-      "enter_quiz_name": "Entres le nom du quiz",
+      "enter_quiz_name": "Entre le nom du quiz",
       "join_session": "Participe!",
       "start_session": "Commencer quiz",
       "edit_session": "Modifier quiz",
@@ -266,7 +266,7 @@
       "show_more": "Montre 1 de plus",
       "show_more_plural": "Montre %s de plus",
       "start_quiz": "C'est parti!",
-      "kick_member_confirmation": "Voulez-vous supprimer la personne '<span id=\"nickName\"></span>' du quiz?",
+      "kick_member_confirmation": "Veux-tu supprimer la personne '<span id=\"nickName\"></span>' du quiz?",
       "add_kicked_member_to_ban_list": "Bannir le pseudo de manière permanente"
     },
     "nickname_categories": {

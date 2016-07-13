@@ -56,7 +56,7 @@
           "title": "¿Manual de usuario?",
           "text": {
             "1": "¡No hace falta!",
-            "2": "Ingrese el nombre del cuestionario. Los botones se desteñiran al ingresar el nombre de un cuestionario ya activado (¡Participa!) o al crear un nuevo cuestionario con un nombre ya existente (¡Hazlo de nuevo!).",
+            "2": "Ingrese el nombre del cuestionario. Los botones se desteñirán al ingresar el nombre de un cuestionario ya activado (¡Participa!) o al crear un nuevo cuestionario con un nombre ya existente (¡Hazlo de nuevo!).",
             "3": "Y ahora: A jugar"
           }
         }
@@ -76,10 +76,10 @@
       "data_privacy": {
         "title": "Protección de datos",
         "scope": "Ambito de aplicación",
-        "declaration": "Esta declaración de protección datos le explica a los usuarios de arsnova.click sobre la forma, alcance y finalidad de la recolección y utilización de datos personales a través de un proevedor responsable. Los fundamentos jurídicos de la protección de datos se encuentran en la ley federal de protección de datos(BDSG) y la ley de telemedia alemana (TMG).",
+        "declaration": "Esta declaración de protección datos le explica a los usuarios de arsnova.click sobre la forma, alcance y finalidad de la recolección y utilización de datos personales a través de un proveedor responsable. Los fundamentos jurídicos de la protección de datos se encuentran en la ley federal de protección de datos(BDSG) y la ley de telemedia alemana (TMG).",
         "app_data": {
           "title": "Datos del programa",
-          "text": "Todas las preguntas del cuestionario y sus respectivas alternativas de respuestas serán únicamente almacendas en la memoria del navegador del usuario que crea el cuestionario (localStorage) ."
+          "text": "Todas las preguntas del cuestionario y sus respectivas alternativas de respuestas serán únicamente almacenadas en la memoria del navegador del usuario que crea el cuestionario (localStorage) ."
         },
         "access_data": {
           "title": "Acceso de datos",
@@ -95,7 +95,7 @@
         },
         "cookies": {
           "title": "Cookies",
-          "text": "Cookies son archivos pequeños que permiten almacenar en el dispositivo de acceso del usuario información específica sobre dicho dispositivo. Arsnova.click utiliza cookies para registrar datos estadísticos relacionados al uso del sito web con Piwik (ver abajo) y con el objetivo de analizar mejoras en el servicio. Los usuarios pueden influir en el uso de cookies. La mayoría de los navegadores cuenta con una opción que restringe o impide totalmente el almacenamiento de cookies."
+          "text": "Cookies son archivos pequeños que permiten almacenar en el dispositivo de acceso del usuario información específica sobre dicho dispositivo. Arsnova.click utiliza cookies para registrar datos estadísticos relacionados al uso del sitio web con Piwik (ver abajo) y con el objetivo de analizar mejoras en el servicio. Los usuarios pueden influir en el uso de cookies. La mayoría de los navegadores cuenta con una opción que restringe o impide totalmente el almacenamiento de cookies."
         },
         "piwik": {
           "title": "Piwik",
@@ -131,7 +131,7 @@
       "yes": "Si",
       "no": "No",
       "reset_session_confirmation": {
-        "title": "¿Quiéres salir del cuestionario?",
+        "title": "¿Quieres salir del cuestionario?",
         "text": {
           "running_question": "La sesión de todos los participantes será cerrada. La lista del ranking será borrada. Tu cuestionario con todos los ajustes permanecerá en este navegador, siempre y cuando no sea reiniciado.",
           "empty_lobby": "You will be logged out. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
@@ -335,8 +335,8 @@
           "one_valid_answer_required": "Se debe ingresar solo una respuesta correcta",
           "no_valid_answer_required": "No se deben ingresar respuestas correctas",
           "invalid_range": "El rango mínimo no debe sobrepasar el rango máximo",
-          "invalid_correct_value": "El valor corrrecto debe estar dentro de los parámetros del rango",
-          "answer_text_empty": "El texto de la respuesta no puede quedar vacio"
+          "invalid_correct_value": "El valor correcto debe estar dentro de los parámetros del rango",
+          "answer_text_empty": "El texto de la respuesta no puede quedar vacío"
         }
       },
       "edit_quiz": "Editar cuestionario",

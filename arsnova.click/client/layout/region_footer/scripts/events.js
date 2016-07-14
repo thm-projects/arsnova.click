@@ -21,6 +21,7 @@ import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {DefaultQuestionGroup} from '/lib/questions/questiongroup_default.js';
+import {RangedQuestion} from "/lib/questions/question_ranged.js";
 import * as localData from '/lib/local_storage.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
 import {buzzsound1, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
@@ -146,7 +147,25 @@ const clickEvents = {
 								if (hashtagDoc) {
 									return;
 								}
-								questionInstance.setHashtag(hashtag);
+
+								asJSON.hashtag = hashtag;
+								$.each(asJSON.questionList, function (index, question) {
+									question.hashtag = hashtag;
+									if (question.answerOptionList !== undefined && question.answerOptionList.length > 0) {
+										$.each(question.answerOptionList, function (index, answerOption) {
+											answerOption.hashtag = hashtag;
+										})
+									}
+								});
+
+								switch (asJSON.type) {
+									case "DefaultQuestionGroup":
+										questionInstance = new DefaultQuestionGroup(asJSON);
+										break;
+									default:
+										throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
+								}
+
 								Meteor.call('HashtagsCollection.addHashtag', {
 									privateKey: localData.getPrivateKey(),
 									hashtag: questionInstance.getHashtag(),

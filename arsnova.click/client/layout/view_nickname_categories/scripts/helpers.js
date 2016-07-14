@@ -34,10 +34,10 @@ Template.nicknameCategories.helpers({
 		return NicknameCategoriesCollection.find({nickCategory: Session.get("selectedCategory")}, {sort: {nick: 1}, fields: {nick: 1}});
 	},
 	isSelectedNick: function (nick) {
-		return Session.get("questionGroup").getSelectedNicks().indexOf(NicknameCategoriesCollection.findOne({nick: nick})._id) !== -1;
+		return Session.get("questionGroup").getSelectedNicks().indexOf(NicknameCategoriesCollection.findOne({nick: nick}).nick) !== -1;
 	},
 	chosenNickNames: function () {
-		return NicknameCategoriesCollection.find({'_id': {$in: Session.get("questionGroup").getSelectedNicks()}}, {sort: {nick: 1}});
+		return NicknameCategoriesCollection.find({'nick': {$in: Session.get("questionGroup").getSelectedNicks()}}, {sort: {nick: 1}});
 	},
 	hasSelectedAll: function () {
 		if (!Session.get("selectedCategory")) {
@@ -45,7 +45,7 @@ Template.nicknameCategories.helpers({
 		}
 		let hasAll = true;
 		$.each(NicknameCategoriesCollection.find({nickCategory: Session.get("selectedCategory")}).fetch(), function (index, item) {
-			if (Session.get("questionGroup").getSelectedNicks().indexOf(item._id) === -1) {
+			if (Session.get("questionGroup").getSelectedNicks().indexOf(item.nick) === -1) {
 				hasAll = false;
 				return false;
 			}

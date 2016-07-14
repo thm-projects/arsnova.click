@@ -127,7 +127,7 @@ export class AbstractQuestionGroup {
 	 * @returns {{hashtag: String, type: String, questionList: Array}}
 	 */
 	serialize () {
-		let questionListSerialized = [];
+		const questionListSerialized = [];
 		this.getQuestionList().forEach(function (question) { questionListSerialized.push(question.serialize()); });
 		return {
 			hashtag: this.getHashtag(),
@@ -304,12 +304,5 @@ export class AbstractQuestionGroup {
 				return;
 			}
 		}
-	}
-
-	removeSelectedNickById (id) {
-		if (typeof id !== "number" || id < 0 || id > this.getSelectedNicks().length) {
-			throw new Error("Invalid argument list for QuestionGroup.removeSelectedNickById");
-		}
-		this[selectedNicks].splice(id, 1);
 	}
 }

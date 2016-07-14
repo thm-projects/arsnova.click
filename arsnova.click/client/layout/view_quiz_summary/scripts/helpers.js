@@ -97,7 +97,7 @@ Template.quizSummary.helpers({
 			return;
 		}
 		let result = "";
-		NicknameCategoriesCollection.find({_id: {$in: Session.get("questionGroup").getSelectedNicks()}}, {sort: {nick: 1}}).fetch().forEach(function (item) {
+		NicknameCategoriesCollection.find({nick: {$in: Session.get("questionGroup").getSelectedNicks()}}, {sort: {nick: 1}}).fetch().forEach(function (item) {
 			result += item.nick + ", ";
 		});
 		return result.slice(0, result.length - 2);

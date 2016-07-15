@@ -182,34 +182,37 @@ export function generateFooterElements() {
 
 export function removeFooterElement(footerElement) {
 	let hasFoundItem = false;
-	$.each(footerElements, function (index, item) {
-		if (item.id === footerElement.id) {
-			footerElements.splice(index, 1);
-			hasFoundItem = true;
-			return false;
-		}
-	});
+	$.each(footerElements,isID(footerElement,index,item) );
 	if (hasFoundItem) {
 		return;
 	}
-	$.each(hiddenFooterElements.selectable, function (index, item) {
-		if (item.id === footerElement.id) {
-			hiddenFooterElements.selectable.splice(index, 1);
-			hasFoundItem = true;
-			return false;
-		}
-	});
+	$.each(hiddenFooterElements.selectable, isIDselecteable(footerElement,index,item)
+	);
 	if (hasFoundItem) {
 		return;
 	}
-	$.each(hiddenFooterElements.linkable, function (index, item) {
-		if (item.id === footerElement.id) {
-			hiddenFooterElements.linkable.splice(index, 1);
-			return false;
-		}
-	});
+	$.each(hiddenFooterElements.linkable, isIDlinkable(footerElement,index,item));
 }
-
+function isIDlinkable(footerelement, index, item) {
+	if (item.id === footerElement.id) {
+		hiddenFooterElements.linkable.splice(index, 1);
+		return false;
+	}
+}
+function isIDselectable(footerElement, index, item) {
+	if (item.id === footerElement.id) {
+		hiddenFooterElements.selectable.splice(index, 1);
+		hasFoundItem = true;
+		return false;
+	}
+};
+function isID (footerElemt,index, item) {
+	if (item.id === footerElement.id) {
+		footerElements.splice(index, 1);
+		hasFoundItem = true;
+		return false;
+	}
+}
 export function removeFooterElements() {
 	footerElements.splice(0, footerElements.length);
 	hiddenFooterElements.selectable.splice(0, hiddenFooterElements.selectable.length);

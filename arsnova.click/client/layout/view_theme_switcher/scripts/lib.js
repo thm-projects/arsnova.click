@@ -22,11 +22,6 @@ export const themes = [
 		id: "theme-blackbeauty"
 	},
 	{
-		name: "view.theme_switcher.themes.default.name",
-		description: "view.theme_switcher.themes.default.description",
-		id: "theme-default"
-	},
-	{
 		name: "view.theme_switcher.themes.theme-arsnova-dot-click-contrast.name",
 		description: "view.theme_switcher.themes.theme-arsnova-dot-click-contrast.description",
 		id: "theme-arsnova-dot-click-contrast"
@@ -35,11 +30,6 @@ export const themes = [
 		name: "view.theme_switcher.themes.arsnova.name",
 		description: "view.theme_switcher.themes.arsnova.description",
 		id: "theme-arsnova"
-	},
-	{
-		name: "view.theme_switcher.themes.dark.name",
-		description: "view.theme_switcher.themes.dark.description",
-		id: "theme-dark"
 	},
 	{
 		name: "view.theme_switcher.themes.thm.name",

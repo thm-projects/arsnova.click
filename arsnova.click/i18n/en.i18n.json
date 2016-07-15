@@ -350,37 +350,29 @@
       "set_theme": "Choose a theme for all attendees",
       "select_a_theme_title": "Choose the theme",
       "themes": {
-        "default": {
-          "name": "ARSnova.click (beamer-suitable)",
-          "description": "The first and main theme of ARSnova.click"
-        },
         "theme-arsnova-dot-click-contrast": {
-          "name": "arsnova.click (high-contrast)",
-          "description": "High contrast theme based on ARSnova.click"
-        },
-        "dark": {
-          "name": "Default style (beamer-suitable)",
-          "description": "Dark background ensures to high contrast."
+          "name": "arsnova.click (high contrast)",
+          "description": "First theme of arsnova.click"
         },
         "elegant": {
           "name": "Elegant",
-          "description": "Elegant theme for sophisticated Quizzers"
+          "description": "Elegant theme for sophisticated Quizzers."
         },
         "thm": {
           "name": "THM (beamer-suitable)",
-          "description": "Corporate Design of the University of Applied Science (THM)"
+          "description": "Corporate Design of the University of Applied Science (THM)."
         },
         "arsnova": {
-          "name": "ARSnova.eu (beamer-suitable)",
-          "description": "You know ARSnova? Feel home!"
+          "name": "arsnova.eu (beamer-suitable)",
+          "description": "You know arsnova.eu? Feel home!"
         },
         "black_beauty": {
-          "name" : "Black beauty (beamer-suitable)",
-          "description": "Dark, darker and even darker"
+          "name" : "Standard (beamer-suitable)",
+          "description": "Dark, darker and even darker."
         },
         "living_room": {
           "name" : "Living Room",
-          "description": "Bright living room atmosphere"
+          "description": "Bright living room atmosphere."
         },
         "bluetouch": {
           "name": "Under the sea",
@@ -406,7 +398,7 @@
       "second_plural": "Seconds"
     },
     "translation": {
-      "translations": "These translations are available:",
+      "translations": "Select your language:",
       "i18n_currently_not_available": "I18n is currently not available!",
       "beta": "Beta"
     },

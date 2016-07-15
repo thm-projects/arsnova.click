@@ -350,17 +350,9 @@
       "set_theme": "Stil wählen",
       "select_a_theme_title": "Wähle einen Stil",
       "themes": {
-        "default": {
-          "name": "arsnova.click (beamertauglich)",
-          "description": "Der Stil der ersten Stunde."
-        },
         "theme-arsnova-dot-click-contrast": {
           "name": "arsnova.click (kontrastreich)",
-          "description": "Kontrastreicher Stil auf Basis von ARSnova.click"
-        },
-        "dark": {
-          "name": "Standard-Stil (beamertauglich)",
-          "description": "Dunkler Hintergrund sorgt für hohen Kontrast."
+          "description": "Stil der ersten Stunde."
         },
         "elegant": {
           "name": "Eleganz",
@@ -375,7 +367,7 @@
           "description": "Du kennst arsnova.eu? Fühl dich daheim!"
         },
         "black_beauty": {
-          "name" : "Schwarze Schönheit (beamertauglich)",
+          "name" : "Standard (beamertauglich)",
           "description": "Dunkel, dunkler und noch dunkler."
         },
         "living_room": {
@@ -406,7 +398,7 @@
       "second_plural": "Sekunden"
     },
     "translation": {
-      "translations": "Diese Sprachen sind verfügbar:",
+      "translations": "Sprachauswahl:",
       "i18n_currently_not_available": "i18n ist aktuell nicht verfügbar!",
       "beta": "Beta"
     },

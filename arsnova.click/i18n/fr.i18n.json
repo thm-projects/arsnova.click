@@ -350,37 +350,29 @@
       "set_theme": "Choisir un style",
       "select_a_theme_title": "Choisis un style",
       "themes": {
-        "default": {
-          "name": "ARSnova.click (beamer-adapté)",
-          "description": "Le premier et le principal thème de ARSnova.click"
-        },
         "theme-arsnova-dot-click-contrast": {
-          "name": "arsnova.click (hcontraste élevé)",
-          "description": "Thème de contraste élevé basé sur ARSnova.click"
-        },
-        "dark": {
-          "name": "Style par défaut (beamer-adapté)",
-          "description": "Fond sombre assure à contraste élevé."
+          "name": "arsnova.click (contraste élevé)",
+          "description": "Le premier thème de arsnova.click"
         },
         "elegant": {
           "name": "Élégant",
-          "description": "Thème élégant pour quizzers sophistiqués"
+          "description": "Thème élégant pour quizzers sophistiqués."
         },
         "thm": {
           "name": "THM (beamer-adapté)",
-          "description": "Corporate Design de l'Université des sciences appliquées (THM)"
+          "description": "Corporate Design de l'Université des sciences appliquées (THM)."
         },
         "arsnova": {
-          "name": "ARSnova.eu (beamer-adapté)",
-          "description": "Vous connaissez ARS nova? Sentez-vous la maison!"
+          "name": "arsnova.eu (beamer-adapté)",
+          "description": "Vous connaissez arsnova.eu? Sentez-vous la maison!"
         },
         "black_beauty": {
-          "name" : "Beauté noire (beamer-adapté)",
-          "description": "Sombre, plus sombre et plus sombre encore"
+          "name" : "Style par défaut (beamer-adapté)",
+          "description": "Sombre, plus sombre et plus sombre encore."
         },
         "living_room": {
           "name" : "Salon",
-          "description": "ambiance lumineuse Salon"
+          "description": "Ambiance lumineuse Salon."
         },
         "bluetouch": {
           "name": "Sous la mer",

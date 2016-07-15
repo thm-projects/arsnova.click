@@ -146,21 +146,21 @@
         "finished_with_warnings": "Finished with warnings",
         "finished_without_warnings": "Successful",
         "websocket_status": {
-          "connected": "Connected",
-          "disconnected": "Disconnected"
+          "connected": "connected",
+          "disconnected": "disconnected"
         },
         "localStorage_status": {
-          "writable": "Writable",
-          "non_writable": "Not writable"
+          "writable": "writable",
+          "non_writable": "not writable"
         },
         "sessionStorage_status": {
-          "writable": "Writable",
-          "non_writable": "Not writable"
+          "writable": "writable",
+          "non_writable": "not writable"
         },
         "dbConnection_status": {
-          "very_slow": "Very slowly",
-          "slow": "Poor",
-          "ok": "Good"
+          "very_slow": "very slowly",
+          "slow": "poor",
+          "ok": "good"
         }
       }
     }

@@ -146,21 +146,21 @@
         "finished_with_warnings": "Fini avec des avertissements",
         "finished_without_warnings": "Réussi",
         "websocket_status": {
-          "connected": "Connecté",
-          "disconnected": "Coupé"
+          "connected": "connecté",
+          "disconnected": "coupé"
         },
         "localStorage_status": {
-          "writable": "Inscriptibles",
-          "non_writable": "Non inscriptible"
+          "writable": "inscriptibles",
+          "non_writable": "non inscriptible"
         },
         "sessionStorage_status": {
-          "writable": "Inscriptibles",
-          "non_writable": "Non inscriptible"
+          "writable": "inscriptibles",
+          "non_writable": "non inscriptible"
         },
         "dbConnection_status": {
-          "very_slow": "Très lentement",
-          "slow": "Pauvre",
-          "ok": "Bien"
+          "very_slow": "très lentement",
+          "slow": "pauvre",
+          "ok": "bien"
         }
       }
     }

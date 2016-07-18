@@ -41,6 +41,6 @@ Template.themeSwitcher.helpers({
 			themeName === "theme-blackbeauty" ||
 			themeName === "theme-arsnova" ||
 			themeName === "theme-thm" ||
-			themeName === "theme-default"
+			themeName === "theme-default";
 	}
 });

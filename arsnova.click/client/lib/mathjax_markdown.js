@@ -112,7 +112,7 @@ export const mathjaxMarkdown = {
 		// all lines between the tags to this array
 		var result = []; // [start, end]
 
-		var idxStart = 0;
+		var idxStart;
 		var idxEnd = -delimiter.length;
 		var run = true;
 

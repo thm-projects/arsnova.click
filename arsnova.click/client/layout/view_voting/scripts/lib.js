@@ -64,7 +64,7 @@ export function startCountdown(index) {
 	countdown = new ReactiveCountdown(questionDoc.timer, {
 		tick: function () {
 			var buttonsCount = $('.answer-row').children().length;
-			var lastButton = 0;
+			var lastButton;
 			var secondsUntilNextRound = 3;
 
 			if (currentButton <= 0) {

@@ -227,11 +227,10 @@ export function reenterSession(hashtag) {
 		sessionData = newQuestionGroup.serialize();
 	}
 
-	switch (sessionData.type) {
-		case "DefaultQuestionGroup":
-			return new DefaultQuestionGroup(sessionData);
-		default:
-			throw new TypeError("Undefined session type while reentering");
+	if (typeof sessionData.type == "DefaultQuestionGroup") {
+		return new DefaultQuestionGroup(sessionData);
+	} else {
+		throw new TypeError("Undefined session type while reentering")
 	}
 }
 
@@ -298,13 +297,11 @@ export function importFromFile(data) {
 	allHashtags.push(hashtag);
 	localStorage.setItem("hashtags", JSON.stringify(allHashtags));
 
-	switch (data.type) {
-		case "DefaultQuestionGroup":
-			const instance = new DefaultQuestionGroup(data);
-			localStorage.setItem(instance.getHashtag(), JSON.stringify(instance.serialize()));
-			break;
-		default:
-			throw new TypeError("Undefined session type '" + data.type + "' while importing");
+	if (typeof data.type == "DefaultQuestionGroup") {
+		const instance = new DefaultQuestionGroup(data);
+		localStorage.setItem(instance.getHashtag(), JSON.stringify(instance.serialize()));
+	} else {
+		throw new TypeError("Undefined session type '" + data.type + "' while importing");
 	}
 }
 
@@ -313,13 +310,12 @@ export function exportFromLocalStorage(hashtag) {
 	if (!localStorageData) {
 		throw new TypeError("Invalid local storage data while exporting");
 	}
-	let quizItem = null;
-	switch (localStorageData.type) {
-		case "DefaultQuestionGroup":
-			quizItem = new DefaultQuestionGroup(localStorageData);
-			break;
-		default:
-			throw new TypeError("Undefined session type while exporting");
+	let quizItem;
+
+	if (typeof localStorageData.type == "DefaultQuestionGroup") {
+		quizItem = new DefaultQuestionGroup(localStorageData);
+	} else {
+		throw new TypeError("Undefined session type while exporting");
 	}
 	if (!quizItem.theme) {
 		quizItem.theme = "theme-blackbeauty";

@@ -95,8 +95,6 @@ export const questionGroupSchema = new SimpleSchema({
 	}
 });
 
-//QuestionGroupCollection.attachSchema(questionGroupSchema);
-
 QuestionGroupCollection.deny({
 	insert: function () {
 		return true;

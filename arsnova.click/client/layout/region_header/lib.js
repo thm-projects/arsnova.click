@@ -54,7 +54,7 @@ export function calculateHeaderSize() {
 	var titleLength = titel.length;
 
 	var fontSize = "";
-	let logoHeight = 0;
+	let logoHeight;
 
 	if ($(document).width() > $(document).height()) {
 		logoHeight = "8vw";

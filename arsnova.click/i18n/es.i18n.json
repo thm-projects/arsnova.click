@@ -425,6 +425,7 @@
       "link_destination": "Enlace de destino",
       "tooltip": {
         "info": "Info",
+        "preview": "Previsualizar",
         "bold": "Negrita",
         "heading": "Encabezado",
         "hyperlink": "Hipervínculo",

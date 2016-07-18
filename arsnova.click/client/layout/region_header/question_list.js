@@ -87,7 +87,6 @@ Template.questionList.helpers({
 Template.questionList.events({
 	'click .questionIcon:not(.active)': function (event) {
 		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, parseInt($(event.target).closest(".questionIcon").attr("id").replace("questionIcon_", "")), function () {
-			questionLib.checkForMarkdown();
 			questionLib.checkForValidQuestionText();
 		});
 	},
@@ -104,7 +103,7 @@ Template.questionList.events({
 		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, nextId);
 	},
 	'click #addQuestion': function () {
-		lib.addNewQuestion(questionLib.checkForMarkdown);
+		lib.addNewQuestion();
 		questionLib.checkForValidQuestionText();
 		setTimeout(()=> {
 			let scrollPane = $(".questionScrollPane");

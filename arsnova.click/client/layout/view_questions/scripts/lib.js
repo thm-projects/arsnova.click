@@ -150,27 +150,6 @@ export function checkForValidQuestionText() {
 	}
 }
 
-export function checkForMarkdown() {
-	if (EventManagerCollection.findOne().questionIndex < 0) {
-		return;
-	}
-	var questionText = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
-	if (questionText && questionContainsMarkdownSyntax(questionText)) {
-		mathjaxMarkdown.initializeMarkdownAndLatex();
-		questionText = mathjaxMarkdown.getContent(questionText);
-
-		$("#questionTextDisplay").html(questionText);
-		$('#editQuestionText').hide();
-		$('#previewQuestionText').show();
-	} else {
-		$('#previewQuestionText').hide();
-		$('#editQuestionText').show();
-		if ($(window).width() >= 992) {
-			$('#questionText').focus();
-		}
-	}
-}
-
 export function getQuestionTypes() {
 	if (!Session.get("questionGroup") || !EventManagerCollection.findOne()) {
 		return [];

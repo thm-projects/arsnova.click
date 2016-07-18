@@ -17,8 +17,6 @@
 
 import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
-import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as lib from './lib.js';
 
 Template.createQuestionView.events({

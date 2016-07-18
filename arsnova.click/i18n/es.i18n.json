@@ -146,21 +146,21 @@
         "finished_with_warnings": "Finalizado con advertencia",
         "finished_without_warnings": "Exitoso",
         "websocket_status": {
-          "connected": "Conectado",
-          "disconnected": "Desconectado"
+          "connected": "conectado",
+          "disconnected": "desconectado"
         },
         "localStorage_status": {
-          "writable": "Descriptible",
-          "non_writable": "Indescriptible"
+          "writable": "descriptible",
+          "non_writable": "indescriptible"
         },
         "sessionStorage_status": {
-          "writable": "Descriptible",
-          "non_writable": "Indescriptible"
+          "writable": "descriptible",
+          "non_writable": "indescriptible"
         },
         "dbConnection_status": {
-          "very_slow": "Muy lento",
-          "slow": "Lento",
-          "ok": "Bien"
+          "very_slow": "muy lento",
+          "slow": "lento",
+          "ok": "bien"
         }
       }
     }
@@ -350,37 +350,29 @@
       "set_theme": "Elegir estilo",
       "select_a_theme_title": "Elige un estilo",
       "themes": {
-        "default": {
-          "name": "ARSnova.click (Beamer-adecuado)",
-          "description": "La primera y principal tema de ARSnova.click"
-        },
         "theme-arsnova-dot-click-contrast": {
           "name": "arsnova.click (alto contraste)",
-          "description": "Tema de alto contraste basado en ARSnova.click"
-        },
-        "dark": {
-          "name": "Estilo por defecto (Beamer-adecuado).",
-          "description": "Trasfondo oscuro permite un contraste alto."
+          "description": "La primera tema de arsnova.click"
         },
         "elegant": {
           "name": "Elegante",
-          "description": "Para rondas de cuestionarios exigentes"
+          "description": "Para rondas de cuestionarios exigentes."
         },
         "thm": {
           "name": "THM (Beamer-adecuado)",
-          "description": "Diseño Corporativo de la Universidad de Ciencias Aplicadas (THM)"
+          "description": "Diseño Corporativo de la Universidad de Ciencias Aplicadas (THM)."
         },
         "arsnova": {
-          "name": "ARSnova.eu (Beamer-adecuado)",
+          "name": "arsnova.eu (Beamer-adecuado)",
           "description": "¿Conoces arsnova.eu? ¡Entonces siéntete como en casa!"
         },
         "black_beauty": {
-          "name" : "Belleza negra (Beamer-adecuado)",
-          "description": "Oscuro, más oscuro y aún más oscuro"
+          "name" : "Estándar (Beamer-adecuado)",
+          "description": "Oscuro, más oscuro y aún más oscuro."
         },
         "living_room": {
           "name" : "Sala de estar",
-          "description": "Sala de estar con atmósfera clara"
+          "description": "Sala de estar con atmósfera clara."
         },
         "bluetouch": {
           "name": "Bajo el mar",

@@ -28,7 +28,7 @@ export const connectionStatus = {
 	localStorage: false,
 	sessionStorage: false,
 	dbConnection: {
-		totalCount: 1,
+		totalCount: 2,
 		currentCount: 1,
 		serverRTT: 0,
 		serverRTTtotal: 0
@@ -77,7 +77,7 @@ export function stopPendingAnimation() {
 }
 
 export function resetConnectionIndication() {
-	connectionStatus.dbConnection.totalCount = 1;
+	connectionStatus.dbConnection.totalCount = 2;
 	connectionStatus.dbConnection.currentCount = 1;
 	connectionStatus.dbConnection.serverRTT = 0;
 	connectionStatus.dbConnection.serverRTTtotal = 0;

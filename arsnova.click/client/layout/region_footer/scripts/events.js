@@ -146,7 +146,25 @@ const clickEvents = {
 								if (hashtagDoc) {
 									return;
 								}
-								questionInstance.setHashtag(hashtag);
+
+								asJSON.hashtag = hashtag;
+								$.each(asJSON.questionList, function (index, question) {
+									question.hashtag = hashtag;
+									if (question.answerOptionList !== undefined && question.answerOptionList.length > 0) {
+										$.each(question.answerOptionList, function (index, answerOption) {
+											answerOption.hashtag = hashtag;
+										});
+									}
+								});
+
+								switch (asJSON.type) {
+									case "DefaultQuestionGroup":
+										questionInstance = new DefaultQuestionGroup(asJSON);
+										break;
+									default:
+										throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
+								}
+
 								Meteor.call('HashtagsCollection.addHashtag', {
 									privateKey: localData.getPrivateKey(),
 									hashtag: questionInstance.getHashtag(),

@@ -17,7 +17,7 @@
 
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {hashtagSchema, privateKeySchema} from '../hashtags/collection.js';
+import {hashtagSchema, privateKeySchema} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
 
 export const MemberListCollection = new Mongo.Collection("memberlist");

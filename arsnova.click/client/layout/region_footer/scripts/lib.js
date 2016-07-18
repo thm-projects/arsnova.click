@@ -120,32 +120,31 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 	$.merge(allElements, hiddenFooterElements.selectable);
 	$.each(allElements, function (index, item) {
 		let state = true;
-		switch (item.id) {
-			case "sound":
-				const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-				if (hashtagDoc && hashtagDoc.musicEnabled) {
-					$('#sound').removeClass("error").addClass("success");
-				} else {
-					state = false;
-					$('#sound').removeClass("success").addClass("error");
-				}
-				$('#sound_switch').bootstrapSwitch('state', state, true);
-				break;
-			case "reading-confirmation":
-				$('#reading-confirmation').removeClass("error").addClass("success");
-				$('#reading-confirmation_switch').bootstrapSwitch('state', state, true);
-				/*
-				Since the functionality is currently not implemented the state is set to enabled!
+		if (item.id === "sound") {
+			const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+			if (hashtagDoc && hashtagDoc.musicEnabled) {
+				$('#sound').removeClass("error").addClass("success");
+			} else {
+				state = false;
+				$('#sound').removeClass("success").addClass("error");
+			}
+			$('#sound_switch').bootstrapSwitch('state', state, true);
+		}
 
-				if (HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled) {
-					$('#reading-confirmation').removeClass("error").addClass("success");
-				} else {
-					state = false;
-					$('#reading-confirmation').removeClass("success").addClass("error");
-				}
-				$('#reading-confirmation_switch').bootstrapSwitch('state', state, true);
-				*/
-				break;
+		if (item.id === 'reading-confirmation'){
+			$('#reading-confirmation').removeClass("error").addClass("success");
+			$('#reading-confirmation_switch').bootstrapSwitch('state', state, true);
+			/*
+			 Since the functionality is currently not implemented the state is set to enabled!
+
+			 if (HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled) {
+			 $('#reading-confirmation').removeClass("error").addClass("success");
+			 } else {
+			 state = false;
+			 $('#reading-confirmation').removeClass("success").addClass("error");
+			 }
+			 $('#reading-confirmation_switch').bootstrapSwitch('state', state, true);
+			 */
 		}
 	});
 });

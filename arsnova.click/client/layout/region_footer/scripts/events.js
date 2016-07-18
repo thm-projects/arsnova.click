@@ -103,13 +103,13 @@ const clickEvents = {
 					return;
 				}
 				let questionInstance = null;
-				switch (asJSON.type) {
-					case "DefaultQuestionGroup":
-						questionInstance = new DefaultQuestionGroup(asJSON);
-						break;
-					default:
-						throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
+
+				if (asJSON.type === "DefaultQuestionGroup") {
+					questionInstance = new DefaultQuestionGroup(asJSON);
+				} else {
+					throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
 				}
+
 				if (!HashtagsCollection.findOne({hashtag: questionInstance.getHashtag()})) {
 					Meteor.call('HashtagsCollection.addHashtag', {
 						privateKey: localData.getPrivateKey(),
@@ -180,7 +180,7 @@ const clickEvents = {
 									$("#js-btn-importSession").attr("disabled", "disabled");
 								}
 							}).on('keydown', function (event) {
-								if (event.keyCode == 13 && !$('#js-btn-importSession').is(':disabled')) {
+								if (event.keyCode === 13 && !$('#js-btn-importSession').is(':disabled')) {
 									$('#js-btn-importSession').click();
 								}
 							});

@@ -112,7 +112,7 @@ Template.nick.events({
 		}
 	},
 	"keydown #nickname-input-field": function (event) {
-		if (event.keyCode == 13) {
+		if (event.keyCode === 13) {
 			var currentNickName = event.currentTarget.value;
 			var member = MemberListCollection.findOne({nick: currentNickName});
 

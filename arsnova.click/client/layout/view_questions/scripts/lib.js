@@ -29,7 +29,7 @@ function doesMarkdownSyntaxExist(questionText, syntaxStart, syntaxMiddle, syntax
 		return false;
 	}
 
-	if (questionText.indexOf(syntaxStart) != -1) {
+	if (questionText.indexOf(syntaxStart) !== -1) {
 		if (!syntaxMiddle && !syntaxEnd) {
 			return true;
 		}
@@ -39,7 +39,7 @@ function doesMarkdownSyntaxExist(questionText, syntaxStart, syntaxMiddle, syntax
 
 	questionText = questionText.substring(questionText.indexOf(syntaxStart) + syntaxStart.length, questionText.length);
 
-	if (questionText.indexOf(syntaxMiddle) != -1) {
+	if (questionText.indexOf(syntaxMiddle) !== -1) {
 		if (!syntaxEnd) {
 			return true;
 		}
@@ -49,7 +49,7 @@ function doesMarkdownSyntaxExist(questionText, syntaxStart, syntaxMiddle, syntax
 
 	questionText = questionText.substring(questionText.indexOf(syntaxMiddle) + syntaxMiddle.length, questionText.length);
 
-	return questionText.indexOf(syntaxEnd) != -1;
+	return questionText.indexOf(syntaxEnd) !== -1;
 }
 
 function questionTextLengthWithoutMarkdownSyntax(questionText, trimWhiteSpaces = true) {

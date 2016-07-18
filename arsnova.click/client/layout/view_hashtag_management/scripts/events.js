@@ -159,12 +159,12 @@ Template.hashtagView.events({
 			13
 		]; //left, right, delete, entf
 		var charCount = $(event.currentTarget).val().length;
-		if (charCount >= 25 && keyWhiteList.indexOf(event.keyCode) == -1) {
+		if (charCount >= 25 && keyWhiteList.indexOf(event.keyCode) === -1) {
 			event.preventDefault();
 		}
 
 		//Select option on enter
-		if (event.keyCode == 13) {
+		if (event.keyCode === 13) {
 			var inputHashtag = $(event.target).val();
 			if (inputHashtag.length === 0) {
 				return;

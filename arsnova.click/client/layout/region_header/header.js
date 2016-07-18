@@ -56,6 +56,8 @@ Template.header.helpers({
 				return TAPi18n.__("view.translation.translations");
 			case "/hashtagmanagement":
 				return TAPi18n.__("view.hashtag_management.session_management");
+			default:
+				return "arsnova.click";
 		}
 		let currentPath = Router.current().route.getName().replace(":quizName.", "");
 		switch (currentPath) {
@@ -81,6 +83,8 @@ Template.header.helpers({
 				return TAPi18n.__("view.leaderboard.global_header");
 			case "nick":
 				return TAPi18n.__("view.choose_nickname.enter_nickname");
+			default:
+				return "arsnova.click";
 		}
 	},
 	isEditingQuestion: function () {

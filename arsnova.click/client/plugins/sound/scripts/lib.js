@@ -35,6 +35,8 @@ export function setBuzzsound1(songName) {
 		case "Song3":
 			fileName = "bensound-epic.mp3";
 			break;
+		default:
+			break;
 	}
 
 	buzzsound1 = new buzz.sound('/sounds/' + fileName, {

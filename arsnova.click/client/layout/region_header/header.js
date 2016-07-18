@@ -30,12 +30,7 @@ Template.header.helpers({
 		return Router.current().params.quizName ? Router.current().params.quizName + "/resetToHome" : "";
 	},
 	isInHomePath: function () {
-		switch (Router.current().route.path()) {
-			case '/':
-				return true;
-			default:
-				return false;
-		}
+		return Router.current().route.path() === '/';
 	},
 	isTHMStyleSelectedAndGreaterThan999Pixels: function () {
 		return localStorage.getItem("theme") === "theme-thm" && $(window).width() > 999;

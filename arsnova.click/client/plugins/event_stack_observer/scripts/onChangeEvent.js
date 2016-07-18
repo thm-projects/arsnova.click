@@ -57,14 +57,12 @@ function addMemberlistChangeEvents() {
 	globalEventStackObserver.onChange([
 		"MemberListCollection.removeLearner"
 	], function (key, value) {
-		if (value.user) {
-			if (value.user === localStorage.getItem(Router.current().params.quizName + "nick")) {
-				new ErrorSplashscreen({
-					autostart: true,
-					errorMessage: "plugins.splashscreen.error.error_messages.kicked_from_quiz"
-				});
-				Router.go("/" + Router.current().params.quizName + "/resetToHome");
-			}
+		if (value.user === localStorage.getItem(Router.current().params.quizName + "nick")) {
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: "plugins.splashscreen.error.error_messages.kicked_from_quiz"
+			});
+			Router.go("/" + Router.current().params.quizName + "/resetToHome");
 		}
 	});
 
@@ -82,11 +80,9 @@ function addLiveresultsChangeEvents() {
 	globalEventStackObserver.onChange([
 		"EventManagerCollection.setSessionStatus"
 	], function (key, value) {
-		if (!isNaN(value.sessionStatus)) {
-			if (value.sessionStatus === 2) {
-				$('.modal-backdrop').remove();
-				Router.go("/" + Router.current().params.quizName + "/memberlist");
-			}
+		if (!isNaN(value.sessionStatus) && value.sessionStatus === 2) {
+			$('.modal-backdrop').remove();
+			Router.go("/" + Router.current().params.quizName + "/memberlist");
 		}
 	});
 
@@ -176,6 +172,8 @@ export function getChangeEventsForRoute(route) {
 			break;
 		case "statistics":
 			addLiveresultsChangeEvents();
+			break;
+		default:
 			break;
 	}
 	addDefaultChangeEvents();

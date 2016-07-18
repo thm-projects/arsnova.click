@@ -37,7 +37,7 @@ Template.createAnswerOptions.helpers({
 			case "FreeTextQuestion":
 				return Template.freeTextAnswerOptionTemplate;
 			default:
-				throw new EventException("Template for unknown question group is requested.");
+				console.log("Template for unknown question group is requested.");
 		}
 	}
 });

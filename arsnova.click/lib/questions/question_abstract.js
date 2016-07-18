@@ -263,25 +263,26 @@ export class AbstractQuestion {
 	 * @returns {boolean} True if both instances are completely equal, False otherwise
 	 */
 	equals (question) {
-		if (question instanceof AbstractQuestion) {
-			let questionAnswerOptionList = question.getAnswerOptionList();
-			if (questionAnswerOptionList.length === this.getAnswerOptionList().length) {
-				let isEqual = true;
-				for (let i = 0; i < this.getAnswerOptionList().length; i++) {
-					if (isEqual && !this.getAnswerOptionList()[i].equals(questionAnswerOptionList[i])) {
-						isEqual = false;
-					}
-				}
-				if (question.getTimer() !== this.getTimer() ||
-					question.getStartTime() !== this.getStartTime() ||
-					question.getHashtag() !== this.getHashtag() ||
-					question.getQuestionText() !== this.getQuestionText()) {
+		if (!(question instanceof AbstractQuestion)) {
+			return false;
+		}
+
+		let questionAnswerOptionList = question.getAnswerOptionList();
+		if (questionAnswerOptionList.length === this.getAnswerOptionList().length) {
+			let isEqual = true;
+			for (let i = 0; i < this.getAnswerOptionList().length; i++) {
+				if (isEqual && !this.getAnswerOptionList()[i].equals(questionAnswerOptionList[i])) {
 					isEqual = false;
 				}
-				return isEqual;
 			}
+			if (question.getTimer() !== this.getTimer() ||
+				question.getStartTime() !== this.getStartTime() ||
+				question.getHashtag() !== this.getHashtag() ||
+				question.getQuestionText() !== this.getQuestionText()) {
+				isEqual = false;
+			}
+			return isEqual;
 		}
-		return false;
 	}
 
 	/**

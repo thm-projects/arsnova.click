@@ -30,12 +30,10 @@ export class AbstractChoiceQuestion extends AbstractQuestion {
 			for (let i = 0; i < options.answerOptionList.length; i++) {
 				if (options.answerOptionList[i] instanceof DefaultAnswerOption) {
 					this.addAnswerOption(options.answerOptionList[i]);
+				} else if (options.answerOptionList[i] instanceof Object) {
+					this.addAnswerOption(new DefaultAnswerOption(options.answerOptionList[i]));
 				} else {
-					if (options.answerOptionList[i] instanceof Object) {
-						this.addAnswerOption(new DefaultAnswerOption(options.answerOptionList[i]));
-					} else {
-						throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
-					}
+					throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
 				}
 			}
 		}

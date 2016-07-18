@@ -65,21 +65,20 @@ Template.leaderBoard.helpers({
 	noLeaderBoardItems: (index)=> {
 		if (Session.get("showGlobalRanking")) {
 			return getAllNicksWhichAreAlwaysRight().length <= 0;
+		}
+		var items = getLeaderBoardItems();
+		if (typeof index !== "undefined") {
+			if (items[index].value.length > 0) {
+				return false;
+			}
 		} else {
-			var items = getLeaderBoardItems();
-			if (typeof index !== "undefined") {
-				if (items[index].value.length > 0) {
+			for (var i = 0; i < items.length; i++) {
+				if (items[i].value.length > 0) {
 					return false;
 				}
-			} else {
-				for (var i = 0; i < items.length; i++) {
-					if (items[i].value.length > 0) {
-						return false;
-					}
-				}
 			}
-			return true;
 		}
+		return true;
 	},
 	leaderBoardItems: ()=> {
 		return getLeaderBoardItems();

@@ -29,22 +29,18 @@ function doesMarkdownSyntaxExist(questionText, syntaxStart, syntaxMiddle, syntax
 		return false;
 	}
 
-	if (questionText.indexOf(syntaxStart) !== -1) {
-		if (!syntaxMiddle && !syntaxEnd) {
-			return true;
-		}
-	} else {
+	if (questionText.indexOf(syntaxStart) === -1) {
 		return false;
+	} else if (!syntaxMiddle && !syntaxEnd) {
+		return true;
 	}
 
 	questionText = questionText.substring(questionText.indexOf(syntaxStart) + syntaxStart.length, questionText.length);
 
-	if (questionText.indexOf(syntaxMiddle) !== -1) {
-		if (!syntaxEnd) {
-			return true;
-		}
-	} else {
+	if (questionText.indexOf(syntaxMiddle) === -1) {
 		return false;
+	} else if (!syntaxEnd) {
+		return true;
 	}
 
 	questionText = questionText.substring(questionText.indexOf(syntaxMiddle) + syntaxMiddle.length, questionText.length);

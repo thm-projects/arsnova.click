@@ -48,14 +48,14 @@ export class AbstractQuestionGroup {
 		this[questionList] = [];
 		if (options.questionList instanceof Array) {
 			for (let i = 0; i < options.questionList.length; i++) {
-				if (!(options.questionList[i] instanceof AbstractQuestion)) {
-					if (options.questionList[i] instanceof Object) {
-						options.questionList[i] = questionReflection[options.questionList[i].type](options.questionList[i]);
-					} else {
-						throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
-					}
+				if (options.questionList[i] instanceof AbstractQuestion) {
+					this[questionList].push(options.questionList[i]);
+				} else if (options.questionList[i] instanceof Object) {
+					options.questionList[i] = questionReflection[options.questionList[i].type](options.questionList[i]);
+				} else {
+					throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
+
 				}
-				this[questionList].push(options.questionList[i]);
 			}
 		}
 		this[hashtag] = options.hashtag;
@@ -163,22 +163,14 @@ export class AbstractQuestionGroup {
 	 */
 	equals (questionGroup) {
 		if (questionGroup instanceof AbstractQuestionGroup) {
-			if (questionGroup.getHashtag() !== this.getHashtag()) {
+			if (questionGroup.getHashtag() !== this.getHashtag() ||
+				questionGroup.getTheme() !== this.getTheme() ||
+				questionGroup.getSelectedNicks() !== this.getSelectedNicks()) {
 				return false;
 			}
-			if (questionGroup.getTheme() !== this.getTheme()) {
-				return false;
-			}
-			if (questionGroup.getSelectedNicks() !== this.getSelectedNicks()) {
-				return false;
-			}
-			if (questionGroup.getMusicEnabled() !== this.getMusicEnabled()) {
-				return false;
-			}
-			if (questionGroup.getMusicTitle() !== this.getMusicTitle()) {
-				return false;
-			}
-			if (questionGroup.getMusicVolume() !== this.getMusicVolume()) {
+			if (questionGroup.getMusicEnabled() !== this.getMusicEnabled() ||
+				questionGroup.getMusicTitle() !== this.getMusicTitle() ||
+				questionGroup.getMusicVolume() !== this.getMusicVolume()) {
 				return false;
 			}
 			if (questionGroup.getQuestionList().length === this.getQuestionList().length) {

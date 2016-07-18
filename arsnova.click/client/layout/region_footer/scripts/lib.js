@@ -131,7 +131,7 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 			$('#sound_switch').bootstrapSwitch('state', state, true);
 		}
 
-		if (item.id === 'reading-confirmation'){
+		if (item.id === 'reading-confirmation') {
 			$('#reading-confirmation').removeClass("error").addClass("success");
 			$('#reading-confirmation_switch').bootstrapSwitch('state', state, true);
 			/*

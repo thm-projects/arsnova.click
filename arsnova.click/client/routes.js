@@ -178,14 +178,7 @@ Router.route("/:quizName", {
 					}
 				}
 			} else {
-				// If the user ownes the session he can edit it or create a new one
-				if (HashtagsCollection.findOne(Router.current().params.quizName)) {
-					if (localData.containsHashtag(Router.current().params.quizName)) {
-						route = "/" + Router.current().params.quizName + "/question";
-					}
-				} else {
-					route = "/" + Router.current().params.quizName + "/question";
-				}
+				route = "/" + Router.current().params.quizName + "/question";
 			}
 			Router.go(route);
 		} else {

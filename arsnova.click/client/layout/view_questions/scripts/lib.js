@@ -20,7 +20,6 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {questionTextSchema} from '/lib/questions/collection.js';
 import {questionReflection} from '/lib/questions/question_reflection.js';
-import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 
@@ -78,13 +77,9 @@ function questionTextLengthWithoutMarkdownSyntax(questionText, trimWhiteSpaces =
 		questionTextLength -= 4;
 	}
 	if (trimWhiteSpaces) {
-		questionTextLength = questionText.replace(/ /g,"").length;
+		questionTextLength = questionText.replace(/ /g, "").length;
 	}
 	return questionTextLength;
-}
-
-function questionContainsMarkdownSyntax(questionText) {
-	return questionText.length !== questionTextLengthWithoutMarkdownSyntax(questionText, false);
 }
 
 export var subscriptionHandler = null;
@@ -143,27 +138,6 @@ export function checkForValidQuestionText() {
 		$('#questionText').addClass("invalidQuestion");
 	} else {
 		$('#questionText').removeClass("invalidQuestion");
-	}
-}
-
-export function checkForMarkdown() {
-	if (EventManagerCollection.findOne().questionIndex < 0) {
-		return;
-	}
-	var questionText = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
-	if (questionText && questionContainsMarkdownSyntax(questionText)) {
-		mathjaxMarkdown.initializeMarkdownAndLatex();
-		questionText = mathjaxMarkdown.getContent(questionText);
-
-		$("#questionTextDisplay").html(questionText);
-		$('#editQuestionText').hide();
-		$('#previewQuestionText').show();
-	} else {
-		$('#previewQuestionText').hide();
-		$('#editQuestionText').show();
-		if ($(window).width() >= 992) {
-			$('#questionText').focus();
-		}
 	}
 }
 

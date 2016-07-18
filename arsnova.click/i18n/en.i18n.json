@@ -425,6 +425,7 @@
       "link_destination": "Link target",
       "tooltip": {
         "info": "Info",
+        "preview": "Preview",
         "bold": "Bold",
         "heading": "Headline",
         "hyperlink": "Hyperlink",

@@ -19,7 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import * as localData from '/lib/local_storage.js';
 
-export function addNewQuestion(callback) {
+export function addNewQuestion() {
 	const questionItem = Session.get("questionGroup");
 	const index = questionItem.getQuestionList().length;
 	questionItem.addDefaultQuestion();
@@ -27,9 +27,6 @@ export function addNewQuestion(callback) {
 	localData.addHashtag(questionItem);
 	Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index, function () {
 		Router.go("/" + Router.current().params.quizName + "/question");
-		if (callback) {
-			callback();
-		}
 	});
 }
 

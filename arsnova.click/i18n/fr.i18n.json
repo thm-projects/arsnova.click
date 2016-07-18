@@ -425,6 +425,7 @@
       "link_destination": "Déstination du lien",
       "tooltip": {
         "info": "Info",
+        "preview": "Aperçu",
         "bold": "Gras",
         "heading": "Titre",
         "hyperlink": "Lien hypertexte",

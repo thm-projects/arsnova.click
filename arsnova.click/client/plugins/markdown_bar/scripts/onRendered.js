@@ -19,6 +19,7 @@ import {Template} from 'meteor/templating';
 
 Template.markdownBar.onRendered(function () {
 	$('#infoMarkdownButton').tooltip();
+	$('#previewMarkdownButton').tooltip();
 	$('#boldMarkdownButton').tooltip();
 	$('#headerMarkdownButton').tooltip();
 	$('#hyperlinkMarkdownButton').tooltip();

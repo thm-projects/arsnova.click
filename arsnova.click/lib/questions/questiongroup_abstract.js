@@ -54,7 +54,6 @@ export class AbstractQuestionGroup {
 					options.questionList[i] = questionReflection[options.questionList[i].type](options.questionList[i]);
 				} else {
 					throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
-
 				}
 			}
 		}

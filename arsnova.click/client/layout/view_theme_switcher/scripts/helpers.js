@@ -37,14 +37,10 @@ Template.themeSwitcher.helpers({
 		return TAPi18n.__(currentThemeName);
 	},
 	isBeamerFriendly: function (themeName) {
-		if (themeName === "theme-dark" ||
+		return themeName === "theme-dark" ||
 			themeName === "theme-blackbeauty" ||
 			themeName === "theme-arsnova" ||
 			themeName === "theme-thm" ||
-			themeName === "theme-default") {
-			return true;
-		} else {
-			return false;
-		}
+			themeName === "theme-default"
 	}
 });

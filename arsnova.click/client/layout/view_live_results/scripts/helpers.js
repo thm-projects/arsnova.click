@@ -43,8 +43,23 @@ Template.liveResults.helpers({
 	isCountdownZero: function (index) {
 		return isCountdownZero(index);
 	},
-	getCountStudents: function () {
-		return MemberListCollection.find().count();
+	getCountVotings: function () {
+		let eventDoc = EventManagerCollection.findOne();
+		if (!eventDoc) {
+			return 0;
+		}
+
+		var sumVoted = 0;
+		MemberListCollection.find().map(function (member) {
+			var responseDoc = ResponsesCollection.findOne({
+				questionIndex: eventDoc.questionIndex,
+				userNick: member.nick
+			});
+			if (responseDoc !== undefined) {
+				sumVoted++;
+			}
+		});
+		return sumVoted;
 	},
 	getPercentRead: (index)=> {
 		return getPercentRead(index);

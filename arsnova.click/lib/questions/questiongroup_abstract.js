@@ -48,13 +48,14 @@ export class AbstractQuestionGroup {
 		this[questionList] = [];
 		if (options.questionList instanceof Array) {
 			for (let i = 0; i < options.questionList.length; i++) {
-				if (options.questionList[i] instanceof AbstractQuestion) {
-					this[questionList].push(options.questionList[i]);
-				} else if (options.questionList[i] instanceof Object) {
-					options.questionList[i] = questionReflection[options.questionList[i].type](options.questionList[i]);
-				} else {
-					throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
+				if (!(options.questionList[i] instanceof AbstractQuestion)) {
+					if (options.questionList[i] instanceof Object) {
+						options.questionList[i] = questionReflection[options.questionList[i].type](options.questionList[i]);
+					} else {
+						throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
+					}
 				}
+				this[questionList].push(options.questionList[i]);
 			}
 		}
 		this[hashtag] = options.hashtag;

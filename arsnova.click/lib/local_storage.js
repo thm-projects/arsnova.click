@@ -227,7 +227,7 @@ export function reenterSession(hashtag) {
 		sessionData = newQuestionGroup.serialize();
 	}
 
-	if (typeof sessionData.type == "DefaultQuestionGroup") {
+	if (sessionData.type == "DefaultQuestionGroup") {
 		return new DefaultQuestionGroup(sessionData);
 	} else {
 		throw new TypeError("Undefined session type while reentering")

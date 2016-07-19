@@ -173,6 +173,9 @@ export function getChangeEventsForRoute(route) {
 		case "statistics":
 			addLiveresultsChangeEvents();
 			break;
+		case "globalLeaderBoard":
+			addLiveresultsChangeEvents();
+			break;
 		default:
 			break;
 	}

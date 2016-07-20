@@ -46,11 +46,15 @@ Template.hashtagView.onRendered(function () {
 Template.hashtagManagement.onRendered(function () {
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.addFooterElement(footerElements.footerElemImport);
+	if (navigator.userAgent.match(/iPad/i) != null) {
+		footerElements.addFooterElement(footerElements.footerElemImport);
+	}
 	footerElements.addFooterElement(footerElements.footerElemAbout);
 	footerElements.addFooterElement(footerElements.footerElemTranslation);
 	footerElements.addFooterElement(footerElements.footerElemTheme);
-	footerElements.addFooterElement(footerElements.footerElemFullscreen);
+	if (navigator.userAgent.match(/iPad/i) != null) {
+		footerElements.addFooterElement(footerElements.footerElemFullscreen);
+	}
 	footerElements.calculateFooter();
 
 	calculateHeaderSize();

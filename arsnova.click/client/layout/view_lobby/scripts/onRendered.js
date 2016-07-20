@@ -45,7 +45,9 @@ Template.memberlist.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
 		*/
 		footerElements.addFooterElement(footerElements.footerElemNicknames);
-		footerElements.addFooterElement(footerElements.footerElemFullscreen);
+		if (navigator.userAgent.match(/iPad/i) != null) {
+			footerElements.addFooterElement(footerElements.footerElemFullscreen);
+		}
 		footerElements.addFooterElement(footerElements.footerElemTheme);
 	}
 	footerElements.calculateFooter();

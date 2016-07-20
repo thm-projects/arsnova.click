@@ -42,7 +42,9 @@ Template.home.onRendered(function () {
 	footerElements.addFooterElement(footerElements.footerElemAbout);
 	footerElements.addFooterElement(footerElements.footerElemTranslation);
 	footerElements.addFooterElement(footerElements.footerElemTheme);
-	footerElements.addFooterElement(footerElements.footerElemFullscreen);
+	if (navigator.userAgent.match(/iPad/i) == null) {
+		footerElements.addFooterElement(footerElements.footerElemFullscreen);
+	}
 	footerElements.addFooterElement(footerElements.footerElemHashtagManagement);
 	footerElements.calculateFooter();
 });

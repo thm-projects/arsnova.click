@@ -28,7 +28,9 @@ Template.leaderBoard.onRendered(function () {
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		footerElements.addFooterElement(footerElements.footerElemHome);
 		footerElements.addFooterElement(footerElements.footerElemSound);
-		footerElements.addFooterElement(footerElements.footerElemFullscreen);
+		if (navigator.userAgent.match(/iPad/i) != null) {
+			footerElements.addFooterElement(footerElements.footerElemFullscreen);
+		}
 		footerElements.addFooterElement(footerElements.footerElemAbout);
 	}
 

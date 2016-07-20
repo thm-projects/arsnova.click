@@ -274,6 +274,8 @@
       "save": "Guardar",
       "available_nicknames": "Nombres de usuario disponibles",
       "choose_all": "Elegir todo",
+      "remove_all": "Eliminar todo",
+      "free_choice": "Libre elección",
       "chosen_nicknames": "Nombres de usuario elegidos",
       "no_nicks_selected": "Ningún nombre de usuario elegido, así los participantes pueden elegir sus propios nombres de usuario.",
       "category": {

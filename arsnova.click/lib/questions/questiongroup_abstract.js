@@ -297,4 +297,8 @@ export class AbstractQuestionGroup {
 			}
 		}
 	}
+
+	removeSelectedNicks () {
+		this[selectedNicks] = [];
+	}
 }

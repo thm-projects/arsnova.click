@@ -15,8 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Tracker} from 'meteor/tracker';
 import {Session} from 'meteor/session';
+import {Tracker} from 'meteor/tracker';
+import {TAPi18n} from 'meteor/tap:i18n';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
 
@@ -85,7 +86,8 @@ export const footerElemNicknames = {
 	id: "nicknames",
 	iconClass: "glyphicon glyphicon-user",
 	textClass: "footerElementText",
-	textName: "region.footer.footer_bar.nicknames"
+	textName: "region.footer.footer_bar.nicknames",
+	selectable: true
 };
 const footerElemShowMore = {
 	id: "show-more",
@@ -145,6 +147,14 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 			 }
 			 $('#reading-confirmation_switch').bootstrapSwitch('state', state, true);
 			 */
+		}
+
+		if (item.id === "nicknames") {
+			if (Session.get("questionGroup").getSelectedNicks().length === 0) {
+				$('#nicknames').removeClass("success").parent().find(".footerElemText").find("span").text(TAPi18n.__("view.nickname_categories.free_choice"));
+			} else {
+				$('#nicknames').addClass("success").parent().find(".footerElemText").find("span").text(TAPi18n.__("region.footer.footer_bar.nicknames"));
+			}
 		}
 	});
 });

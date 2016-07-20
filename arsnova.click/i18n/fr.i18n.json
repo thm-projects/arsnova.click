@@ -274,6 +274,8 @@
       "save": "Sauvegarder",
       "available_nicknames": "Surnoms disponibles",
       "choose_all": "Sélectionner tout",
+      "remove_all": "Enlever tout",
+      "free_choice": "Choix libre",
       "chosen_nicknames": "Surnoms sélectionnés",
       "no_nicks_selected": "Aucun surnoms sélectionnés. Tous les noms sont autorisés.",
       "category": {

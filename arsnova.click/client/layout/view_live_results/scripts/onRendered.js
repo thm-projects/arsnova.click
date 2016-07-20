@@ -49,7 +49,9 @@ Template.liveResults.onRendered(()=> {
 			footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
 		}
 		*/
-		footerElements.addFooterElement(footerElements.footerElemFullscreen);
+		if (navigator.userAgent.match(/iPad/i) == null) {
+			footerElements.addFooterElement(footerElements.footerElemFullscreen);
+		}
 		footerElements.calculateFooter();
 	} else {
 		let allMemberResponses = ResponsesCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).fetch();

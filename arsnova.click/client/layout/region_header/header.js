@@ -52,34 +52,33 @@ Template.header.helpers({
 			case "/hashtagmanagement":
 				return TAPi18n.__("view.hashtag_management.session_management");
 			default:
-				return "arsnova.click";
-		}
-		let currentPath = Router.current().route.getName().replace(":quizName.", "");
-		switch (currentPath) {
-			case "question":
-				return TAPi18n.__("view.questions.title");
-			case "answeroptions":
-				return TAPi18n.__("view.answeroptions.title");
-			case "nicknameCategories":
-				return TAPi18n.__("view.nickname_categories.title");
-			case "settimer":
-				return TAPi18n.__("view.timer.title");
-			case "quizSummary":
-				return TAPi18n.__("view.quiz_summary.title");
-			case "memberlist":
-				return Router.current().params.quizName;
-			case "results":
-				return TAPi18n.__("region.footer.footer_bar.reading-confirmation");
-			case "onpolling":
-				return TAPi18n.__("view.voting.title");
-			case "statistics":
-				return TAPi18n.__("view.leaderboard.header");
-			case "globalLeaderBoard":
-				return TAPi18n.__("view.leaderboard.global_header");
-			case "nick":
-				return TAPi18n.__("view.choose_nickname.enter_nickname");
-			default:
-				return "arsnova.click";
+				let currentPath = Router.current().route.getName().replace(":quizName.", "");
+				switch (currentPath) {
+					case "question":
+						return TAPi18n.__("view.questions.title");
+					case "answeroptions":
+						return TAPi18n.__("view.answeroptions.title");
+					case "nicknameCategories":
+						return TAPi18n.__("view.nickname_categories.title");
+					case "settimer":
+						return TAPi18n.__("view.timer.title");
+					case "quizSummary":
+						return TAPi18n.__("view.quiz_summary.title");
+					case "memberlist":
+						return Router.current().params.quizName;
+					case "results":
+						return TAPi18n.__("region.footer.footer_bar.reading-confirmation");
+					case "onpolling":
+						return TAPi18n.__("view.voting.title");
+					case "statistics":
+						return TAPi18n.__("view.leaderboard.header");
+					case "globalLeaderBoard":
+						return TAPi18n.__("view.leaderboard.global_header");
+					case "nick":
+						return TAPi18n.__("view.choose_nickname.enter_nickname");
+					default:
+						return "arsnova.click";
+				}
 		}
 	},
 	isEditingQuestion: function () {

@@ -28,7 +28,7 @@ Template.themeSwitcher.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemHome);
 		footerElements.addFooterElement(footerElements.footerElemAbout);
 		footerElements.addFooterElement(footerElements.footerElemTranslation);
-		if (navigator.userAgent.match(/iPad/i) != null) {
+		if (navigator.userAgent.match(/iPad/i) == null) {
 			footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		}
 		footerElements.addFooterElement(footerElements.footerElemHashtagManagement);

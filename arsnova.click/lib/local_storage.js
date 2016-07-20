@@ -312,7 +312,7 @@ export function exportFromLocalStorage(hashtag) {
 	}
 	let quizItem;
 
-	if (typeof localStorageData.type == "DefaultQuestionGroup") {
+	if (localStorageData.type == "DefaultQuestionGroup") {
 		quizItem = new DefaultQuestionGroup(localStorageData);
 	} else {
 		throw new TypeError("Undefined session type while exporting");

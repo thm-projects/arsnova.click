@@ -49,7 +49,7 @@ Template.liveResults.onRendered(()=> {
 			footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
 		}
 		*/
-		if (navigator.userAgent.match(/iPad/i) != null) {
+		if (navigator.userAgent.match(/iPad/i) == null) {
 			footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		}
 		footerElements.calculateFooter();

@@ -50,7 +50,11 @@ Router.configure({
 			subscriptions.push(subsCache.subscribe('MemberListCollection.join', Router.current().params.quizName));
 			subscriptions.push(subsCache.subscribe('LeaderBoardCollection.join', Router.current().params.quizName));
 			subscriptions.push(subsCache.subscribe('EventManagerCollection.join', Router.current().params.quizName));
-			subscriptions.push(subsCache.subscribe('NicknameCategoriesCollection.join'));
+
+			var currentHashtag = Router.current().params.quizName;
+			if (localData.containsHashtag(Router.current().params.quizName) || HashtagsCollection.findOne({hashtag: currentHashtag}).selectedNicks.length > 0) {
+				subscriptions.push(subsCache.subscribe('NicknameCategoriesCollection.join'));
+			}
 		}
 		return subscriptions;
 	}

@@ -274,6 +274,8 @@
       "save": "Save",
       "available_nicknames": "Available nicknames",
       "choose_all": "Select all",
+      "remove_all": "Remove all",
+      "free_choice": "Free Choice",
       "chosen_nicknames": "Selected nicknames",
       "no_nicks_selected": "No nicknames selected. All nicknames are allowed.",
       "category": {

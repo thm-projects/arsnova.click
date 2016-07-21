@@ -62,6 +62,13 @@ Template.nicknameCategories.events({
 		if ($(event.currentTarget).attr("id") === "no_nick_selected") {
 			return;
 		}
+		if ($(event.currentTarget).attr("id") === "remove_all") {
+			const questionGroup = Session.get("questionGroup");
+			questionGroup.removeSelectedNicks();
+			Session.set("questionGroup", questionGroup);
+			localData.addHashtag(questionGroup);
+			return;
+		}
 		const nickname = $(event.currentTarget).attr("id").replace("chosen_nickName_", "");
 		$('#nickName_' + nickname).removeClass("selectedNickName");
 		const questionGroup = Session.get("questionGroup");

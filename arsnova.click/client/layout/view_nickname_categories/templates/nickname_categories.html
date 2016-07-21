@@ -47,6 +47,10 @@
                         <div class="nickStyle chosenNickName" id="no_nick_selected">
                             <p>{{_ "view.nickname_categories.no_nicks_selected"}}</p>
                         </div>
+                    {{else}}
+                        <div class="nickStyle chosenNickName" id="remove_all">
+                            <p>{{_ "view.nickname_categories.remove_all"}}</p>
+                        </div>
                     {{/unless}}
                     {{#each chosenNickNames}}
                         <div class="nickStyle chosenNickName" id="chosen_nickName_{{this.nick}}">

@@ -274,6 +274,8 @@
       "save": "Speichern",
       "available_nicknames": "Verfügbare Nicknamen",
       "choose_all": "Alle auswählen",
+      "remove_all": "Alle entfernen",
+      "free_choice": "Freie Auswahl",
       "chosen_nicknames": "Ausgewählte Nicknamen",
       "no_nicks_selected": "Keine Nicknamen ausgewählt, somit können die Teilnehmenden ihre Nicknamen frei wählen.",
       "category": {

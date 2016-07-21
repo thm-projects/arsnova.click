@@ -125,18 +125,23 @@ export function startConnectionIndication() {
 export function getRTT() {
 	startTime = new Date().getTime();
 	/*Meteor.call("Connection.sendConnectionStatus", localData.getPrivateKey());*/
-	$.get("/robots.txt", function () {
-		connectionStatus.dbConnection.serverRTTtotal = (connectionStatus.dbConnection.serverRTTtotal + (new Date().getTime() - startTime));
-		connectionStatus.dbConnection.serverRTT = 1 / connectionStatus.dbConnection.currentCount * connectionStatus.dbConnection.serverRTTtotal;
-		if (connectionStatus.dbConnection.currentCount < connectionStatus.dbConnection.totalCount) {
-			connectionStatus.dbConnection.currentCount++;
-			setTimeout(getRTT, 200);
-		} else if (!restartTimeout) {
-			restartTimeout = setTimeout(function () {
-				resetConnectionIndication();
-				startConnectionIndication();
-			}, 180000);
+	$.ajax({
+		url: "/robots.txt",
+		timeout: 10000,
+		success: function () {
+			connectionStatus.dbConnection.serverRTTtotal = (connectionStatus.dbConnection.serverRTTtotal + (new Date().getTime() - startTime));
+			connectionStatus.dbConnection.serverRTT = 1 / connectionStatus.dbConnection.currentCount * connectionStatus.dbConnection.serverRTTtotal;
+			if (connectionStatus.dbConnection.currentCount < connectionStatus.dbConnection.totalCount) {
+				connectionStatus.dbConnection.currentCount++;
+				setTimeout(getRTT, 200);
+			} else if (!restartTimeout) {
+				restartTimeout = setTimeout(function () {
+					resetConnectionIndication();
+					startConnectionIndication();
+					getRTT();
+				}, 180000);
+			}
+			Session.set("connectionStatus", connectionStatus);
 		}
-		Session.set("connectionStatus", connectionStatus);
 	});
 }

@@ -131,11 +131,13 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 				$('#sound').removeClass("success").addClass("error");
 			}
 			$('#sound_switch').bootstrapSwitch('state', state, true);
+			return;
 		}
 
 		if (item.id === 'reading-confirmation') {
 			$('#reading-confirmation').removeClass("error").addClass("success");
 			$('#reading-confirmation_switch').bootstrapSwitch('state', state, true);
+			return;
 			/*
 			 Since the functionality is currently not implemented the state is set to enabled!
 
@@ -149,13 +151,16 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 			 */
 		}
 
-		if (item.id === "nicknames") {
+		if (item.id === "nicknames" && typeof Session.get("questionGroup") !== "undefined") {
 			if (Session.get("questionGroup").getSelectedNicks().length === 0) {
-				$('#nicknames').removeClass("success").parent().find(".footerElemText").find("span").text(TAPi18n.__("view.nickname_categories.free_choice"));
+				$('#nicknames').removeClass("success").find(".footerElemText").find("span").text(TAPi18n.__("view.nickname_categories.free_choice"));
 			} else {
-				$('#nicknames').addClass("success").parent().find(".footerElemText").find("span").text(TAPi18n.__("region.footer.footer_bar.nicknames"));
+				$('#nicknames').addClass("success").find(".footerElemText").find("span").text(TAPi18n.__("region.footer.footer_bar.nicknames"));
 			}
+			return;
 		}
+
+		$('#' + item.id).find(".footerElemText").find("span").text(TAPi18n.__(item.textName));
 	});
 });
 

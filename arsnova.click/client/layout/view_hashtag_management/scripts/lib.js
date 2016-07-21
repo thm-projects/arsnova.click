@@ -16,9 +16,11 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import * as localData from '/lib/local_storage.js';
 
 export let hashtagSplashscreen = null;
 export let eventManagerHandle = null;
@@ -48,6 +50,10 @@ export function findOriginalHashtag(inputHashtag) {
 	return result;
 }
 
+export function getNewDemoQuizName() {
+	return "Demo Quiz " + (HashtagsCollection.find({hashtag: {$regex: "demo quiz *", $options: 'i'}}).count() + 1);
+}
+
 export function connectEventManager(hashtag) {
 	Meteor.subscribe("EventManagerCollection.join", hashtag, function () {
 		if (!EventManagerCollection.findOne()) {
@@ -64,6 +70,24 @@ export function connectEventManager(hashtag) {
 			Meteor.call("EventManagerCollection.setActiveQuestion", hashtag, 0);
 		}
 		Router.go("/" + hashtag + "/question");
+	});
+}
+
+export function addHashtag(questionGroup) {
+	Meteor.call('HashtagsCollection.addHashtag', {
+		privateKey: localData.getPrivateKey(),
+		hashtag: questionGroup.getHashtag(),
+		musicVolume: questionGroup.getMusicVolume(),
+		musicEnabled: questionGroup.getMusicEnabled(),
+		musicTitle: questionGroup.getMusicTitle(),
+		theme: questionGroup.getTheme(),
+		selectedNicks: questionGroup.getSelectedNicks()
+	}, function (err) {
+		if (!err) {
+			localData.addHashtag(questionGroup);
+			Session.set("questionGroup", questionGroup);
+			connectEventManager(questionGroup.getHashtag());
+		}
 	});
 }
 

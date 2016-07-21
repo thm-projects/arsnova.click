@@ -41,8 +41,11 @@ Template.hashtagView.events({
 		if (lib.eventManagerTracker) {
 			lib.eventManagerTracker.stop();
 		}
+		if (inputHashtag === "Demo Quiz") {
+			lib.getNewDemoQuizName();
+		}
+		let originalHashtag = lib.findOriginalHashtag(inputHashtag);
 		lib.setEventManagerTracker(Tracker.autorun(function () {
-			const originalHashtag = lib.findOriginalHashtag(inputHashtag);
 			Meteor.subscribe("EventManagerCollection.join", originalHashtag, function () {
 				if (!EventManagerCollection.findOne() || localData.containsHashtag(originalHashtag)) {
 					$("#joinSession").attr("disabled", "disabled");
@@ -59,6 +62,8 @@ Template.hashtagView.events({
 					},
 					added: function (id, doc) {
 						if (!isNaN(doc.sessionStatus)) {
+							inputHashtag = lib.getNewDemoQuizName();
+							originalHashtag = lib.findOriginalHashtag(inputHashtag);
 							if (doc.sessionStatus === 2) {
 								$("#joinSession").removeAttr("disabled");
 							} else {
@@ -76,8 +81,6 @@ Template.hashtagView.events({
 			return;
 		}
 
-		const originalHashtag = lib.findOriginalHashtag(inputHashtag);
-
 		var hashtagDoc = HashtagsCollection.findOne({hashtag: originalHashtag});
 		if (!hashtagDoc) {
 			$("#joinSession").attr("disabled", "disabled");
@@ -93,7 +96,10 @@ Template.hashtagView.events({
 		}
 	},
 	"click #addNewHashtag": function () {
-		const hashtag = $("#hashtag-input-field").val().trim();
+		let hashtag = $("#hashtag-input-field").val().trim();
+		if (hashtag === "Demo Quiz") {
+			hashtag = lib.getNewDemoQuizName();
+		}
 		try {
 			new SimpleSchema({
 				hashtag: hashtagSchema
@@ -112,29 +118,29 @@ Template.hashtagView.events({
 			Session.set("questionGroup", session);
 			lib.connectEventManager(localData.findHashtagCaseInsensitiveFromLocalStorage(hashtag));
 		} else {
-			const questionGroup = new DefaultQuestionGroup({
-				hashtag: hashtag,
-				questionList: []
-			});
-			questionGroup.addDefaultQuestion(0);
-			for (let i = 0; i < 4; i++) {
-				questionGroup.getQuestionList()[0].addDefaultAnswerOption(i);
-			}
-			Meteor.call('HashtagsCollection.addHashtag', {
-				privateKey: localData.getPrivateKey(),
-				hashtag: questionGroup.getHashtag(),
-				musicVolume: 80,
-				musicEnabled: 1,
-				musicTitle: "Song1",
-				theme: "theme-blackbeauty",
-				selectedNicks: []
-			}, function (err) {
-				if (!err) {
-					localData.addHashtag(questionGroup);
-					Session.set("questionGroup", questionGroup);
-					lib.connectEventManager(hashtag);
+			let questionGroup = null;
+			if (hashtag.indexOf("Demo Quiz") !== -1) {
+				$.ajax({
+					type: "GET",
+					url: "/test_data/quiz_with_3_questions.json",
+					dataType: 'json',
+					success: function (data) {
+						questionGroup = new DefaultQuestionGroup(data);
+						questionGroup.setHashtag(hashtag);
+						lib.addHashtag(questionGroup);
+					}
+				});
+			} else {
+				questionGroup = new DefaultQuestionGroup({
+					hashtag: hashtag,
+					questionList: []
+				});
+				questionGroup.addDefaultQuestion(0);
+				for (let i = 0; i < 4; i++) {
+					questionGroup.getQuestionList()[0].addDefaultAnswerOption(i);
 				}
-			});
+				lib.addHashtag(questionGroup);
+			}
 		}
 	},
 	"click #joinSession": function () {

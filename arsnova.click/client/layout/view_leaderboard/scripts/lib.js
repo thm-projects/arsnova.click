@@ -89,13 +89,14 @@ function getLeaderBoardItemsByIndex(index) {
 			userResponses.forEach(function (userResponse) {
 				param.isCorrect = true;
 				param.answerOptionNumber = userResponse.answerOptionNumber;
-				param.inputValue = userResponse.inputValue;
+				param.inputValue = questionItem.type === "RangedQuestion" ? userResponse.rangedInputValue : userResponse.inputValue;
 				const checkAnswerOptionDoc = AnswerOptionCollection.findOne(param);
 				const checkQuestionDoc = param.inputValue >= questionItem.rangeMin && param.inputValue <= questionItem.rangeMax;
 				delete param.isCorrect;
 				delete param.answerOptionNumber;
 				delete param.inputValue;
-				if (!checkAnswerOptionDoc && !checkQuestionDoc) {
+				if (((questionItem.type !== "RangedQuestion" && !checkAnswerOptionDoc) || questionItem.type === "RangedQuestion") &&
+					!checkQuestionDoc) {
 					userHasRightAnswers = false;
 				} else {
 					totalResponseTime += userResponse.responseTime;

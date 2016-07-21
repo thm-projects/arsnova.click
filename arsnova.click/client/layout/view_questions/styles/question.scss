@@ -19,7 +19,7 @@
 
 #editQuestionText {
 	.invalidQuestion {
-		border-radius: $corner-radius;
+		border-radius: 0px, 0px, $corner-radius, $corner-radius;
 	}
 }
 

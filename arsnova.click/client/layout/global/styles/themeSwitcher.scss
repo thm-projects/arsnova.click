@@ -35,6 +35,8 @@
 	$fg_quiz-name: #ffd700;
 	$fg_titel: white;
 
+	$fg_demo-quiz-description: $fg_titel;
+
 	$success: #008000;
 	$success-text-color: #ffffff;
 	$fg-success: lighten($success, 20);
@@ -492,6 +494,8 @@
 		$success-text-color: white;
 		$fg_titel: $thmgray;
 
+		$fg_demo-quiz-description: $fg_titel;
+
 		$fg-hashtag_management-hashtag_name: $default-text-color;
 		$border-hashtag_management-HR: $default-text-color;
 
@@ -544,6 +548,7 @@
 		$fg_a: #337ab7;
 		$fg_quiz-name: #ffd700;
 		$fg_titel: black;
+		$fg_demo-quiz-description: $fg_titel;
 		$fg-question-title: black;
 		$fg-theme_description: black;
 		$fg-hashtag_management-hashtag_name: $default-text-color;;
@@ -573,6 +578,7 @@
 		$fg_a: #3d9c19;
 		$fg_quiz-name: white;
 		$fg_titel: black;
+		$fg_demo-quiz-description: $fg_titel;
 		$fg-question-title: black;
 		$fg-theme_description: black;
 		$default-text-color: black;
@@ -599,6 +605,7 @@
 		$fg_a: #3d9c19;
 		$fg_quiz-name: F08080;
 		$fg_titel: #232737;
+		$fg_demo-quiz-description: $fg_titel;
 		$fg-question-title: #292929;
 		$fg-theme_description: black;
 		$default-text-color: #292929;
@@ -631,6 +638,7 @@
 		$fg_a: #0DA292;
 		$fg_quiz-name: white;
 		$fg_titel: white;
+		$fg_demo-quiz-description: $fg_titel;
 		$fg_quiz-name: #white;
 		$fg-question-title: white;
 		$fg-theme_description: white;
@@ -760,6 +768,7 @@
 		$fg_a: #337ab7;
 		$fg_quiz-name: #ffd700;
 		$fg_titel: white;
+		$fg_demo-quiz-description: $fg_titel;
 		$fg-question-title: white;
 		$fg-theme_description: white;
 		$fg-hashtag_management-hashtag_name: $default-text-color;;
@@ -802,6 +811,11 @@
 		}
 		.titel {
 			color: $fg_titel;
+		}
+	  	#landingPageContent {
+			#demo-quiz-description {
+				color: $fg_demo-quiz-description;
+			}
 		}
 		.quizName {
 			color: $fg_quiz-name;

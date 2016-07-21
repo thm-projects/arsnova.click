@@ -218,6 +218,14 @@
       "invalid_question": "Tournée de quiz non-valable",
       "no_sessions": "Il n'y a pas des quiz stockés dans votre navigateur."
     },
+    "hashtag_view": {
+      "demo_quiz": {
+        "title": {
+          "1": "Je ne sais pas où commencer?",
+          "2": "Entrez \"Demo Quiz\" et appuyez sur \"Édite!\""
+        }
+      }
+    },
     "leaderboard": {
       "header": "Leaderboard",
       "global_header": "Leaderboard mondiale",

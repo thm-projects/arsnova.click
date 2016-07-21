@@ -218,6 +218,14 @@
       "invalid_question": "Ungültige Quizrunde",
       "no_sessions": "Es sind keine Quizze in diesem Browser gespeichert."
     },
+    "hashtag_view": {
+      "demo_quiz": {
+        "title": {
+          "1": "Nicht sicher, wo du anfangen sollst?",
+          "2": "Gib \"Demo Quiz\" ein und drücke auf \"Mach neu!\""
+        }
+      }
+    },
     "leaderboard": {
       "header": "Rangliste",
       "global_header": "Globale Rangliste",

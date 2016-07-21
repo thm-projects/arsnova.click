@@ -1,8 +1,9 @@
 # Changelog
 
-## Changelog v1.4
+## 1.4
 
 #### User Experience
+* Full support for spanish. A complete french version will be launched in late august.
 * Performance (Reduced amount of calls on connection testing and less nickname-traffic for students)
 * Question-View: The view starts in format mode, the preview-button is moved to the markdown-bar.
 * The number of current votes is displayed during voting, not the number of all session-members.
@@ -22,7 +23,7 @@ Project management: Klaus Quibeldey-Cirkel
 Lead programming: Tjark Wilhelm Hoeck, Christopher Fullarton, Daniel Gerhardt
 
 
-## Changelog v1.3.1
+## 1.3.1
 
 #### Bugfixes
 * Imports of old sessions might failed due to database changes. With v1.3.1, they can be imported again.
@@ -35,7 +36,7 @@ Project management: Klaus Quibeldey-Cirkel
 Lead programming: Tjark Wilhelm Hoeck, Christopher Fullarton, Daniel Gerhardt, Tom Käsler
 
 
-## Changelog v1.3
+## 1.3
 
 #### Features
 * New Question formats:
@@ -60,7 +61,7 @@ Project management: Klaus Quibeldey-Cirkel
 Lead programming: Tjark Wilhelm Hoeck, Christopher Fullarton, Daniel Gerhardt, Tom Käsler
 
 
-## Changelog v1.2.1
+## 1.2.1
 
 #### Features
 * New question type: Ranged questions.
@@ -77,7 +78,7 @@ Project management: Klaus Quibeldey-Cirkel
 Lead programming: Tjark Wilhelm Hoeck, Christopher Fullarton
 
 
-## Changelog v1.2
+## 1.2
 
 #### Features
 * Choosable designs

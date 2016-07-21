@@ -3,6 +3,7 @@
 ## 1.4
 
 #### User Experience
+* Full support for spanish. A complete french version will be launched in late august.
 * Performance (Reduced amount of calls on connection testing and less nickname-traffic for students)
 * Question-View: The view starts in format mode, the preview-button is moved to the markdown-bar.
 * The number of current votes is displayed during voting, not the number of all session-members.

@@ -230,7 +230,7 @@ export function reenterSession(hashtag) {
 	if (sessionData.type == "DefaultQuestionGroup") {
 		return new DefaultQuestionGroup(sessionData);
 	} else {
-		throw new TypeError("Undefined session type while reentering")
+		throw new TypeError("Undefined session type while reentering");
 	}
 }
 
@@ -297,7 +297,7 @@ export function importFromFile(data) {
 	allHashtags.push(hashtag);
 	localStorage.setItem("hashtags", JSON.stringify(allHashtags));
 
-	if (typeof data.type == "DefaultQuestionGroup") {
+	if (data.type === "DefaultQuestionGroup") {
 		const instance = new DefaultQuestionGroup(data);
 		localStorage.setItem(instance.getHashtag(), JSON.stringify(instance.serialize()));
 	} else {

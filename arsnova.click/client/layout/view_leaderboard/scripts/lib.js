@@ -140,15 +140,8 @@ function getAllNonPollingLeaderBoardItems() {
 	const result = [];
 	const questionGroup = QuestionGroupCollection.findOne();
 	for (var i = 0; i <= EventManagerCollection.findOne().questionIndex; i++) {
-		// just pick leaderBoardItems for sc & mc questions, pollings doesn't matter
-		if (AnswerOptionCollection.find({questionIndex: i, isCorrect: true}).count() > 0) {
-			result.push({
-				index: i,
-				value: getLeaderBoardItemsByIndex(i)
-			});
-		}
-		// Now pick the leaderBoardItems for ranged questions aswell
-		if (questionGroup.questionList[i].type === "RangedQuestion") {
+		// pollings / surveys doesn't matter - just pick all others
+		if (questionGroup.questionList[i].type !== "SurveyQuestion") {
 			result.push({
 				index: i,
 				value: getLeaderBoardItemsByIndex(i)
@@ -160,6 +153,16 @@ function getAllNonPollingLeaderBoardItems() {
 
 export function getAllNicksWhichAreAlwaysRight() {
 	var leaderBoardItems = getAllNonPollingLeaderBoardItems();
+	var amountQuestions = EventManagerCollection.findOne().questionIndex + 1;
+	var amountSurveys = 0;
+	const questionGroup = QuestionGroupCollection.findOne();
+	for (var i = 0; i <= amountQuestions - 1; i++) {
+		if (questionGroup.questionList[i].type === "SurveyQuestion") {
+			amountSurveys++;
+		}
+	}
+	const amountRatableQuestions = amountQuestions - amountSurveys;
+
 	var allNicksAndTimes = [];
 	$.each(leaderBoardItems, function (index, value) {
 		$.each(value.value, function (i2, v2) {
@@ -176,7 +179,7 @@ export function getAllNicksWhichAreAlwaysRight() {
 				nickSumTime += v2.time;
 			}
 		});
-		if (nickOccuresAmount === leaderBoardItems.length) {
+		if (nickOccuresAmount === amountRatableQuestions) {
 			var alreadyExists = false;
 			$.each(allTimeWinners, function (i3, v3) {
 				if (v3.value === value.nick) {

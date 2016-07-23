@@ -275,7 +275,8 @@
       "show_more_plural": "Ver %s más",
       "start_quiz": "¡Comenzar!",
       "kick_member_confirmation": "¿Eliminar a esta persona '<span id=\"nickName\"></span>' del cuestionario?",
-      "add_kicked_member_to_ban_list": "¿Bloquear el nombre de usuario definitivamente?"
+      "add_kicked_member_to_ban_list": "¿Bloquear el nombre de usuario definitivamente?",
+      "waiting_for_players": "A la espera de los jugadores"
     },
     "nickname_categories": {
       "title": "Predeterminar nombres de usuario",

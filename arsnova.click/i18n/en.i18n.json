@@ -218,6 +218,14 @@
       "invalid_question": "Invalid Quiz",
       "no_sessions": "There are no quizzes stored in your browser."
     },
+    "hashtag_view": {
+      "demo_quiz": {
+        "title": {
+          "1": "Not sure where to start?",
+          "2": "Enter \"Demo Quiz\" and press \"Make a new one!\""
+        }
+      }
+    },
     "leaderboard": {
       "header": "Leaderboard",
       "global_header": "Global leaderboard",
@@ -267,7 +275,8 @@
       "show_more_plural": "Show %s more",
       "start_quiz": "Let's go!",
       "kick_member_confirmation": "Shall the attendee '<span id=\"nickName\"></span>' be removed from the session?",
-      "add_kicked_member_to_ban_list": "Ban nickname permanently"
+      "add_kicked_member_to_ban_list": "Ban nickname permanently",
+      "waiting_for_players": "Waiting for players"
     },
     "nickname_categories": {
       "title": "Limit available nicknames",

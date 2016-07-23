@@ -24,6 +24,9 @@ Template.memberlist.helpers({
 	isOwner: function () {
 		return localData.containsHashtag(Router.current().params.quizName);
 	},
+	hasPlayers: function () {
+		return MemberListCollection.find().count() > 0;
+	},
 	learners: function () {
 		const limit = localData.containsHashtag(Router.current().params.quizName) ? Session.get("maxLearnerButtons") : Session.get("maxLearnerButtons") - 2;
 		const sortParamObj = Session.get("learnerCountOverride") ? {lowerCaseNick: 1} : {limit: limit, sort: {insertDate: -1}};

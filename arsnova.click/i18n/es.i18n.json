@@ -218,6 +218,14 @@
       "invalid_question": "Pregunta invalida",
       "no_sessions": "No hay pruebas almacenadas en su navegador."
     },
+    "hashtag_view": {
+      "demo_quiz": {
+        "title": {
+          "1": "No estás seguro por dónde empezar?",
+          "2": "Introduzca \"Demo Quiz\" y pulse \"¡Crea uno nuevo!\""
+        }
+      }
+    },
     "leaderboard": {
       "header": "Lista del ranking",
       "global_header": "Lista de ranking global",
@@ -267,7 +275,8 @@
       "show_more_plural": "Ver %s más",
       "start_quiz": "¡Comenzar!",
       "kick_member_confirmation": "¿Eliminar a esta persona '<span id=\"nickName\"></span>' del cuestionario?",
-      "add_kicked_member_to_ban_list": "¿Bloquear el nombre de usuario definitivamente?"
+      "add_kicked_member_to_ban_list": "¿Bloquear el nombre de usuario definitivamente?",
+      "waiting_for_players": "A la espera de los jugadores"
     },
     "nickname_categories": {
       "title": "Predeterminar nombres de usuario",

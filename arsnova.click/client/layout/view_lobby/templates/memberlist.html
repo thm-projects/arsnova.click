@@ -44,6 +44,13 @@
                         </div>
                     </div>
                 {{/unless}}
+                {{#unless hasPlayers}}
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2 class="text-center" id="waiting_for_players_notifier">{{_ "view.lobby.waiting_for_players"}}</h2>
+                        </div>
+                    </div>
+                {{/unless}}
                 <div class="row learner-list"
                      id="learner-list">
                     {{#each learners}}
@@ -71,14 +78,14 @@
                         {{/if}}
                     </div>
                 {{/if}}
-                {{#if isOwner}}
+                {{#if isOwner}}{{#if hasPlayers}}
                     <div class="col-xs-{{#if hasTooMuchButtons}}8{{else}}12{{/if}} col-sm-{{#if hasTooMuchButtons}}6{{else}}12{{/if}}">
                         <button id="startPolling" class="button button-next button-start" disabled="disabled">
                             {{_ "view.lobby.start_quiz" }}
                             <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
                         </button>
                     </div>
-                {{/if}}
+                {{/if}}{{/if}}
             </div>
         </div>
     </div>

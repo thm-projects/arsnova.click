@@ -218,6 +218,14 @@
       "invalid_question": "Ungültige Quizrunde",
       "no_sessions": "Es sind keine Quizze in diesem Browser gespeichert."
     },
+    "hashtag_view": {
+      "demo_quiz": {
+        "title": {
+          "1": "Nicht sicher, wo du anfangen sollst?",
+          "2": "Gib \"Demo Quiz\" ein und drücke auf \"Mach neu!\""
+        }
+      }
+    },
     "leaderboard": {
       "header": "Rangliste",
       "global_header": "Globale Rangliste",
@@ -267,7 +275,8 @@
       "show_more_plural": "Zeige %s weitere",
       "start_quiz": "Los geht's!",
       "kick_member_confirmation": "Soll die Person '<span id=\"nickName\"></span>' aus dem Quiz entfernt werden?",
-      "add_kicked_member_to_ban_list": "Den Nicknamen für immer bannen"
+      "add_kicked_member_to_ban_list": "Den Nicknamen für immer bannen",
+      "waiting_for_players": "Warte auf Mitspieler"
     },
     "nickname_categories": {
       "title": "Nicknamen vorgeben",

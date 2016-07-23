@@ -19,7 +19,7 @@
 	<div id="landingPageSlogan">
         {{> titel titelText = 'global.arsnova_slogan' }}
     </div>
-	<div class="row center-vertical margin-title">
+	<div class="row center-vertical margin-title" id="landingPageContent">
 		<div class="col-md-12">
 			<div class="row distance-top">
 				<div class="col-md-12">
@@ -44,6 +44,12 @@
 					</button>
 				</div>
 			</div>
+            {{#unless hasDemoQuiz}}
+                <div class="row" id="demo-quiz-description">
+                    <p>{{_ "view.hashtag_view.demo_quiz.title.1" }}</p>
+                    <p>{{_ "view.hashtag_view.demo_quiz.title.2" }}</p>
+                </div>
+            {{/unless}}
 		</div>
 	</div>
 </template>

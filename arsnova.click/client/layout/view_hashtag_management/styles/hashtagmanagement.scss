@@ -49,14 +49,24 @@
 }
 .js-my-hash {
 	border-radius: $corner-radius;
-  cursor: pointer;
-  padding: 5px;
-  margin: 10px 0;
-  text-align: center;
+  	cursor: pointer;
+  	padding: 5px;
+  	margin: 10px 0;
+  	text-align: center;
 }
 #landingPageSlogan {
 	position: relative;
 	margin-top: 10%;
+}
+#landingPageContent {
+  	#demo-quiz-description {
+		text-align: center;
+		margin-top: 1vh;
+		font-size: 2.5vh;
+		p {
+			margin: 0;
+		}
+  	}
 }
 .col-join-session,
 .col-create-session {

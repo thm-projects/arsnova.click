@@ -34,14 +34,10 @@ Template.memberlist.onCreated(function () {
 		added: function () {
 			calculateButtonCount(MemberListCollection.find().count());
 			Session.set("allMembersCount", MemberListCollection.find().count());
-			$('#startPolling').removeAttr("disabled");
 		},
 		removed: function () {
 			calculateButtonCount(MemberListCollection.find().count());
 			Session.set("allMembersCount", MemberListCollection.find().count());
-			if (MemberListCollection.find().count() === 0) {
-				$('#startPolling').attr("disabled", "disabled");
-			}
 		}
 	});
 

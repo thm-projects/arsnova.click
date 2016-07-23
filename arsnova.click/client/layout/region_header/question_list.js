@@ -48,7 +48,7 @@ Template.questionList.onRendered(function () {
 				redirectTracker.stop();
 			}
 		} else {
-			if (Session.get("questionGroup").isValid() && handleRedirect) {
+			if (Session.get("questionGroup").isValid() && (handleRedirect || Session.get("questionGroup").getHashtag().toLowerCase().indexOf("demo quiz") !== -1)) {
 				Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
 				Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
 				Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);

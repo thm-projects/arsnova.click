@@ -69,6 +69,9 @@ export function connectEventManager(hashtag) {
 		} else {
 			Meteor.call("EventManagerCollection.setActiveQuestion", hashtag, 0);
 		}
+		if (hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
+			sessionStorage.setItem("overrideValidQuestionRedirect", true);
+		}
 		Router.go("/" + hashtag + "/question");
 	});
 }

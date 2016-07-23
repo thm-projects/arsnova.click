@@ -31,10 +31,6 @@ Template.memberlist.onRendered(function () {
 	calculateHeaderSize();
 	$(window).resize(calculateHeaderSize);
 
-	if (MemberListCollection.find().count() > 0) {
-		$('#startPolling').removeAttr("disabled");
-	}
-
 	footerElements.removeFooterElements();
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		footerElements.addFooterElement(footerElements.footerElemHome);

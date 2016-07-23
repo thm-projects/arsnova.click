@@ -127,6 +127,9 @@ Template.hashtagView.events({
 					success: function (data) {
 						questionGroup = new DefaultQuestionGroup(data);
 						questionGroup.setHashtag(hashtag);
+						if (hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
+							sessionStorage.setItem("overrideValidQuestionRedirect", true);
+						}
 						lib.addHashtag(questionGroup);
 					}
 				});

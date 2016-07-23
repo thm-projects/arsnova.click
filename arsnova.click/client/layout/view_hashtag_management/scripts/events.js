@@ -41,7 +41,7 @@ Template.hashtagView.events({
 		if (lib.eventManagerTracker) {
 			lib.eventManagerTracker.stop();
 		}
-		if (inputHashtag === "Demo Quiz") {
+		if (inputHashtag.toLowerCase() === "demo quiz") {
 			lib.getNewDemoQuizName();
 		}
 		let originalHashtag = lib.findOriginalHashtag(inputHashtag);
@@ -97,7 +97,7 @@ Template.hashtagView.events({
 	},
 	"click #addNewHashtag": function () {
 		let hashtag = $("#hashtag-input-field").val().trim();
-		if (hashtag === "Demo Quiz") {
+		if (hashtag.toLowerCase() === "demo quiz") {
 			hashtag = lib.getNewDemoQuizName();
 		}
 		try {
@@ -119,7 +119,7 @@ Template.hashtagView.events({
 			lib.connectEventManager(localData.findHashtagCaseInsensitiveFromLocalStorage(hashtag));
 		} else {
 			let questionGroup = null;
-			if (hashtag.indexOf("Demo Quiz") !== -1) {
+			if (hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
 				$.ajax({
 					type: "GET",
 					url: "/test_data/quiz_with_3_questions.json",

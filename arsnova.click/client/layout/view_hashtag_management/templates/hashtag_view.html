@@ -44,10 +44,12 @@
 					</button>
 				</div>
 			</div>
-            <div class="row" id="demo-quiz-description">
-                <p>{{_ "view.hashtag_view.demo_quiz.title.1" }}</p>
-                <p>{{_ "view.hashtag_view.demo_quiz.title.2" }}</p>
-            </div>
+            {{#unless hasDemoQuiz}}
+                <div class="row" id="demo-quiz-description">
+                    <p>{{_ "view.hashtag_view.demo_quiz.title.1" }}</p>
+                    <p>{{_ "view.hashtag_view.demo_quiz.title.2" }}</p>
+                </div>
+            {{/unless}}
 		</div>
 	</div>
 </template>

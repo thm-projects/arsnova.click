@@ -32,5 +32,14 @@ Template.hashtagManagement.helpers({
 });
 
 Template.hashtagView.helpers($.extend({getHashtagSchema: hashtagSchema}, {
-
+	hasDemoQuiz: function () {
+		let hasDemoQuiz = false;
+		$.each(localData.getAllHashtags(), function (index, item) {
+			if (item.toLowerCase().indexOf("demo quiz") !== -1) {
+				hasDemoQuiz = true;
+				return false;
+			}
+		});
+		return hasDemoQuiz;
+	}
 }));

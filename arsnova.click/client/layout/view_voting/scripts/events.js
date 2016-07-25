@@ -118,10 +118,10 @@ Template.votingview.events({
 			$(event.target).toggleClass("answer-selected");
 		}
 	},
-	"change #rangeInput": function (event) {
+	"keydown #rangeInput": function (event) {
 		if ($(event.currentTarget).val().length > 0 && !isNaN(parseFloat($(event.currentTarget).val()))) {
 			Session.set("hasToggledResponse", true);
-			if (event.keyCode == 13) {
+			if (event.keyCode === 13) {
 				$('#forwardButton').click();
 			}
 		} else {

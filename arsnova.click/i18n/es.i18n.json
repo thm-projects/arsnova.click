@@ -55,8 +55,8 @@
         "manual": {
           "title": "¿Manual de usuario?",
           "text": {
-            "1": "¡No es necesario! Solo ingresa el nombre del cuestionario. Los botones se activarán al ingresar el nombre de un cuestionario ya liberado (¡Participa!) o al crear un nuevo cuestionario con un nombre ya existente (¡Hazlo de nuevo!)",
-            "2": "O prueba un cuestionario listo con todos los formatos de respuestas: Baja este <a href='https://git.thm.de/arsnova/arsnova.click/raw/staging/test_data/quiz_with_3_questions.json' target='_blank'>cuestionario</a> (menú contextual botón derecho del mouse) e impórtalo con el botón derecho de abajo en el pie de página.",
+            "1": "¡No es necesario!",
+            "2": "Solo ingresa el nombre del cuestionario. Los botones se activarán al ingresar el nombre de un cuestionario ya liberado (¡Participa!) o al crear un nuevo cuestionario con un nombre ya existente (¡Hazlo de nuevo!)",
             "3": "Y ahora: A jugar"
           }
         }

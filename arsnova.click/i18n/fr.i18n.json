@@ -209,7 +209,7 @@
       "create_session": "Édite!",
       "quiz_management": "Quiz enregistrés",
       "available_sessions": "Ces quiz sont dans ton browser:",
-      "session_management": "Administration du quiz",
+      "session_management": "Administration",
       "import": "Importer quiz",
       "delete_session": "Supprimer quiz",
       "delete_session_confirmation": "Est-ce que le quiz '<span id=\"session_name\"></span>' peut être irrévocablement supprimé?",

@@ -23,7 +23,7 @@ import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {DefaultQuestionGroup} from '/lib/questions/questiongroup_default.js';
 import * as localData from '/lib/local_storage.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
-import {buzzsound1, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
+import {buzzsound1, setBuzzsound1, lobbySound, setLobbySound} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 const clickEvents = {
@@ -233,20 +233,36 @@ const clickEvents = {
 					Session.set("questionGroup", questionItem);
 					localData.addHashtag(Session.get("questionGroup"));
 				});
+				instance.templateSelector.find('#lobbySoundSelect').on('change', function (event) {
+					if (Session.get("lobbySoundIsPlaying")) {
+						lobbySound.stop();
+						setLobbySound($(event.target).val());
+						lobbySound.play();
+					} else {
+						setLobbySound($(event.target).val());
+					}
+				});
 
 				instance.templateSelector.find("#js-btn-playStopMusic").on('click', function () {
 					if (Session.get("soundIsPlaying")) {
 						buzzsound1.stop();
 						Session.set("soundIsPlaying", false);
-						$('#js-btn-playStopMusic').toggleClass("down");
-						$('#js-btn-playStopMusic').removeClass("button-warning");
-						$('#js-btn-playStopMusic').addClass("button-success");
+						$('#js-btn-playStopMusic').toggleClass("down").removeClass("button-warning").addClass("button-success");
 					} else {
 						buzzsound1.play();
 						Session.set("soundIsPlaying", true);
-						$('#js-btn-playStopMusic').toggleClass("down");
-						$('#js-btn-playStopMusic').removeClass("button-success");
-						$('#js-btn-playStopMusic').addClass("button-warning");
+						$('#js-btn-playStopMusic').toggleClass("down").removeClass("button-success").addClass("button-warning");
+					}
+				});
+				instance.templateSelector.find("#playStopLobbyMusic").on('click', function () {
+					if (Session.get("lobbySoundIsPlaying")) {
+						lobbySound.stop();
+						Session.set("lobbySoundIsPlaying", false);
+						$('#playStopLobbyMusic').toggleClass("down").removeClass("button-warning").addClass("button-success");
+					} else {
+						lobbySound.play();
+						Session.set("lobbySoundIsPlaying", true);
+						$('#playStopLobbyMusic').toggleClass("down").removeClass("button-success").addClass("button-warning");
 					}
 				});
 

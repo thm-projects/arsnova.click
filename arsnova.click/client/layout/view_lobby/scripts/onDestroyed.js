@@ -17,12 +17,14 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {lobbySound} from '/client/plugins/sound/scripts/lib.js';
 import {memberlistObserver} from './lib.js';
 
 Template.memberlist.onDestroyed(function () {
 	if (memberlistObserver) {
 		memberlistObserver.stop();
 	}
+	lobbySound.stop();
 	Session.set("allMembersCount", undefined);
 	Session.set("maxLearnerButtons", undefined);
 	Session.set("learnerCountOverride", undefined);

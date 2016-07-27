@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {BannedNicksCollection} from '/lib/banned_nicks/collection.js';
 
 function componentToHex(c) {
@@ -41,6 +42,9 @@ export function transformForegroundColor(rgbObj) {
 }
 
 export function isNickAllowed(nick) {
+	if (!QuestionGroupCollection.findOne().blockIllegalNicks) {
+		return true;
+	}
 	return typeof BannedNicksCollection.findOne({userNick: {$regex: new RegExp(".*" + nick.replace(/ /g, "").replace(/[0-9]/g,"") + ".*", "ig")}}) === "undefined";
 }
 

@@ -53,7 +53,6 @@ export function findOriginalHashtag(inputHashtag) {
 export function getNewDemoQuizName() {
 	const hashtags = HashtagsCollection.find({hashtag: {$regex: "demo quiz *", $options: 'i'}}).fetch();
 	const newIndex = parseInt(hashtags[hashtags.length - 1].hashtag.split(" ")[2]) + 1;
-	console.log(newIndex);
 	return "Demo Quiz " + newIndex;
 }
 

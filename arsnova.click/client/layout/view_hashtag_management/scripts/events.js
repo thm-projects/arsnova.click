@@ -42,7 +42,7 @@ Template.hashtagView.events({
 			lib.eventManagerTracker.stop();
 		}
 		if (inputHashtag.toLowerCase() === "demo quiz") {
-			lib.getNewDemoQuizName();
+			inputHashtag = lib.getNewDemoQuizName();
 		}
 		let originalHashtag = lib.findOriginalHashtag(inputHashtag);
 		lib.setEventManagerTracker(Tracker.autorun(function () {

@@ -287,6 +287,7 @@
       "free_choice": "Freie Auswahl",
       "chosen_nicknames": "Ausgewählte Nicknamen",
       "no_nicks_selected": "Keine Nicknamen ausgewählt, somit können die Teilnehmenden ihre Nicknamen frei wählen.",
+      "block_illegal_nicks": "Blockiere unangemessene Nicknamen",
       "category": {
         "disney": "Disney-Figuren",
         "science": "Wissenschaft",

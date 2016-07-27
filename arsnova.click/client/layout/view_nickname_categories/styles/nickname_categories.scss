@@ -14,77 +14,89 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
-
 @import "../../../layout/global/styles/appearance";
 
 .nicknameCategories {
-  .nickCategoryWrapper {
-	display: flex;
-	justify-content: flex-start;;
-	align-content: stretch;
-	flex-flow: row wrap;
-  }
-
-  h3 {
-	color: white;
-	text-align: center;
-  }
-
-  .nickStyle {
-	border-radius: $corner-radius;
-	padding: 10px;
-	margin: 10px;
-	cursor: pointer;
-	user-select: none;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-
-	p {
-	  margin: 0;
-	  width: 100%;
+	.nickCategoryWrapper {
+		display: flex;
+		justify-content: flex-start;;
+		align-content: stretch;
+		flex-flow: row wrap;
 	}
 
-	&.nickCategory {
-	  display: flex;
-	  flex: 0 1 30%;
-
-	  p {
+	h3 {
+		color: white;
 		text-align: center;
-	  }
-
-	  &:hover {
-		background-color: lightgrey;
-	  }
-	  &:active {
-		background-color: grey;
-	  }
-	  &.selectedCategory {
-		background-color: lightgreen;
-	  }
-	  background-color: white;
 	}
 
-	&.nickName,
-	&.chosenNickName {
-	  &:hover {
-		background-color: lightgrey;
-	  }
-	  &:active {
-		background-color: grey;
-	  }
-	  &.selectedNickName {
-		background-color: lightgreen;
-	  }
-	  background-color: white;
+	.nickStyle {
+		border-radius: $corner-radius;
+		padding: 10px;
+		margin: 10px;
+		cursor: pointer;
+		user-select: none;
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+
+		p {
+			margin: 0;
+			width: 100%;
+		}
+
+		&.nickCategory {
+			display: flex;
+			flex: 0 1 30%;
+
+			p {
+				text-align: center;
+			}
+
+			&:hover {
+				background-color: lightgrey;
+			}
+			&:active {
+				background-color: grey;
+			}
+			&.selectedCategory {
+				background-color: lightgreen;
+			}
+			background-color: white;
+		}
+
+		&.nickName,
+		&.chosenNickName {
+			&:hover {
+				background-color: lightgrey;
+			}
+			&:active {
+				background-color: grey;
+			}
+			&.selectedNickName {
+				background-color: lightgreen;
+			}
+			background-color: white;
+		}
+		&#select_all,
+		&#remove_all,
+		&#no_nick_selected {
+			p {
+				text-align: center;
+				text-decoration: underline;
+			}
+		}
+		&#block_illegal_nicks_wrapper {
+			p {
+				color: white;
+				line-height: 30px;
+				position: absolute;
+				width: auto;
+				margin-left: 100px;
+			}
+			.bootstrap-switch-id-block_illegal_nicks_switch {
+				float: left;
+				margin-right: 20px;
+			}
+		}
 	}
-	&#select_all,
-	&#remove_all,
-	&#no_nick_selected {
-	  p {
-		text-align: center;
-		text-decoration: underline;
-	  }
-	}
-  }
 }

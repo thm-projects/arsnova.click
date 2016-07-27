@@ -16,7 +16,9 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
+import * as lib from './lib.js';
 
 Template.nicknameCategories.onDestroyed(function () {
 	sessionStorage.setItem(Router.current().params.quizName + "_selectedCategory", undefined);
+	lib.setFormatBootstrapSwitchTracker(null);
 });

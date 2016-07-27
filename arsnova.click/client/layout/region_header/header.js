@@ -104,6 +104,9 @@ Template.header.helpers({
 
 Template.qrCodeDisplay.helpers({
 	getCurrentSessionName: function () {
+		if (!Router.current().params.quizName) {
+			return;
+		}
 		return window.location.host + "/" + Router.current().params.quizName.replace(/ /g,"+");
 	}
 });

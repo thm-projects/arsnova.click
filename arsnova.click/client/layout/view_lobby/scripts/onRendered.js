@@ -27,7 +27,7 @@ import {calculateButtonCount} from './lib.js';
 Template.memberlist.onRendered(function () {
 	Session.set("learnerCountOverride", false);
 	Session.set("allMembersCount", MemberListCollection.find().count());
-	Session.set("lobbySoundIsPlaying", true);
+	Session.set("lobbySoundIsPlaying", "LobbySong1");
 	setLobbySound("LobbySong1");
 	lobbySound.play();
 	calculateButtonCount(MemberListCollection.find().count());

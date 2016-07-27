@@ -63,6 +63,7 @@ export function setLobbySound(songName) {
 		default:
 			break;
 	}
+	Session.set("lobbySoundIsPlaying", songName);
 	lobbySound = new buzz.sound("/sounds/" + fileName, {
 		loop: true
 	});

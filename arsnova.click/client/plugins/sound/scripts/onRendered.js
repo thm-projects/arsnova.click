@@ -28,6 +28,7 @@ Template.soundConfig.onRendered(function () {
 	if (buzzsound1 == null) {
 		setBuzzsound1(hashtagDoc.musicTitle);
 	}
+	$('#lobbySoundSelect').val(Session.get("lobbySoundIsPlaying") || "LobbySong1");
 	$('#soundSelect').val(hashtagDoc.musicTitle);
 
 	if (hashtagDoc.musicEnabled) {

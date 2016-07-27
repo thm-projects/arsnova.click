@@ -454,6 +454,7 @@
     },
     "sound": {
       "title": "Countdown Sound",
+      "lobby_music": "Sound in the quiz lobby",
       "volume": "Volume",
       "inactive": "Sound is inactive",
       "active": "Sound is active"

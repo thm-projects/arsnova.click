@@ -454,6 +454,7 @@
     },
     "sound": {
       "title": "Sound während des Countdowns",
+      "lobby_music": "Sound in der Quiz Lobby",
       "volume": "Lautstärke vorgeben",
       "inactive": "Sound ist abgeschaltet",
       "active": "Sound ist aktiviert"

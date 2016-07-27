@@ -114,6 +114,9 @@ export class AbstractQuestionGroup {
 			hashtag: hashtagSchema
 		}).validate({hashtag: newHashtag});
 		this[hashtag] = newHashtag;
+		this.getQuestionList().forEach(function (item) {
+			item.setHashtag(newHashtag);
+		});
 	}
 
 	/**

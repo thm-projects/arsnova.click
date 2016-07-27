@@ -36,6 +36,10 @@ export class AbstractAnswerOption {
 		return this[hashtag];
 	}
 
+	setHashtag (newHashtag) {
+		this[hashtag] = newHashtag;
+	}
+
 	/**
 	 * Returns the questionIndex this AnswerOption belongs to
 	 * @returns {Number} The question index

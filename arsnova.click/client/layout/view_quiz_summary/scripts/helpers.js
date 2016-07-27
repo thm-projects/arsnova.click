@@ -31,7 +31,7 @@ Template.quizSummary.helpers({
 		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return window.location.protocol + "//" + window.location.host + "/" + Session.get("questionGroup").getHashtag();
+		return window.location.protocol + "//" + window.location.host + "/" + Session.get("questionGroup").getHashtag().replace(/ /g,"+");
 	},
 	getQuestionCount: function () {
 		if (!Session.get("questionGroup")) {

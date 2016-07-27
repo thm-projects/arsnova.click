@@ -25,5 +25,8 @@ Template.soundConfig.helpers($.extend(isMobileDevice, {
 	},
 	isSoundPlaying: function () {
 		return Session.get("soundIsPlaying");
+	},
+	isLobbySoundPlaying: function () {
+		return Session.get("lobbySoundIsPlaying");
 	}
 }));

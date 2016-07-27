@@ -51,7 +51,9 @@ export function findOriginalHashtag(inputHashtag) {
 }
 
 export function getNewDemoQuizName() {
-	return "Demo Quiz " + (HashtagsCollection.find({hashtag: {$regex: "demo quiz *", $options: 'i'}}).count() + 1);
+	const hashtags = HashtagsCollection.find({hashtag: {$regex: "demo quiz *", $options: 'i'}}).fetch();
+	const newIndex = parseInt(hashtags[hashtags.length - 1].split(" ")[2]) + 1;
+	return "Demo Quiz " + newIndex;
 }
 
 export function connectEventManager(hashtag) {

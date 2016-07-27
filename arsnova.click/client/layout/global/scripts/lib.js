@@ -28,7 +28,7 @@ export const connectionStatus = {
 	localStorage: false,
 	sessionStorage: false,
 	dbConnection: {
-		totalCount: 2,
+		totalCount: 5,
 		currentCount: 1,
 		serverRTT: 0,
 		serverRTTtotal: 0

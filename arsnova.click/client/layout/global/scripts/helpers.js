@@ -37,6 +37,7 @@ Template.connectionQualityHeader.helpers({
 		}
 		const result = {
 			ready: true,
+			failures: [],
 			errors: [],
 			warnings: []
 		};
@@ -49,12 +50,17 @@ Template.connectionQualityHeader.helpers({
 		if (!Session.get("connectionStatus").sessionStorage) {
 			result.errors.push("sessionStorage");
 		}
-		if (Session.get("connectionStatus").dbConnection.serverRTT > 2000) {
+		if (Session.get("connectionStatus").dbConnection.serverRTT > 150) {
+			result.failures.push("dbConnection");
+		} else if (Session.get("connectionStatus").dbConnection.serverRTT > 100) {
 			result.errors.push("dbConnection");
-		} else if (Session.get("connectionStatus").dbConnection.serverRTT > 1000) {
+		} else if (Session.get("connectionStatus").dbConnection.serverRTT > 50) {
 			result.warnings.push("dbConnection");
 		}
 		lib.stopPendingAnimation();
+		if (result.failures.length > 0) {
+			return $.extend({resultString: "region.header.connection_status.finished_with_errors"}, result, {finishedWithErrors: true, statusColor: "grey"});
+		}
 		if (result.errors.length > 0) {
 			return $.extend({resultString: "region.header.connection_status.finished_with_errors"}, result, {finishedWithErrors: true, statusColor: "red"});
 		}

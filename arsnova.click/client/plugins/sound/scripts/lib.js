@@ -67,4 +67,6 @@ export function setLobbySound(songName) {
 	lobbySound = new buzz.sound("/sounds/" + fileName, {
 		loop: true
 	});
+	lobbySound.play();
+	$('#playStopLobbyMusic').toggleClass("down").removeClass("button-success").addClass("button-warning");
 }

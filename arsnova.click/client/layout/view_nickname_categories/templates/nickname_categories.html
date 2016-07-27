@@ -47,6 +47,10 @@
                         <div class="nickStyle chosenNickName" id="no_nick_selected">
                             <p>{{_ "view.nickname_categories.no_nicks_selected"}}</p>
                         </div>
+                        <div class="nickStyle" id="block_illegal_nicks_wrapper">
+                            <p>{{_ "view.nickname_categories.block_illegal_nicks"}}</p>
+                            <input type="checkbox" name='switch' id="block_illegal_nicks_switch" title="{{_ "view.nickname_categories.block_illegal_nicks"}}" />
+                        </div>
                     {{else}}
                         <div class="nickStyle chosenNickName" id="remove_all">
                             <p>{{_ "view.nickname_categories.remove_all"}}</p>

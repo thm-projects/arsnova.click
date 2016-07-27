@@ -287,6 +287,7 @@
       "free_choice": "Free Choice",
       "chosen_nicknames": "Selected nicknames",
       "no_nicks_selected": "No nicknames selected. All nicknames are allowed.",
+      "block_illegal_nicks": "Block inappropriate nicknames",
       "category": {
         "disney": "Disney",
         "science": "Science",

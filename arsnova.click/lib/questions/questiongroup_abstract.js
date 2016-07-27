@@ -28,6 +28,7 @@ const musicVolume = Symbol("musicVolume");
 const musicEnabled = Symbol("musicEnabled");
 const musicTitle = Symbol("musicTitle");
 const selectedNicks = Symbol("selectedNicks");
+const blockIllegalNicks = Symbol("blockIllegalNicks");
 
 export class AbstractQuestionGroup {
 
@@ -64,6 +65,7 @@ export class AbstractQuestionGroup {
 		this[musicEnabled] = options.musicEnabled || "1";
 		this[musicTitle] = options.musicTitle || "Song1";
 		this[selectedNicks] = options.selectedNicks || [];
+		this[blockIllegalNicks] = typeof options.blockIllegalNicks !== "undefined" ? options.blockIllegalNicks : true;
 	}
 
 	/**
@@ -136,7 +138,8 @@ export class AbstractQuestionGroup {
 			musicVolume: this.getMusicVolume(),
 			musicEnabled: this.getMusicEnabled(),
 			musicTitle: this.getMusicTitle(),
-			selectedNicks: this.getSelectedNicks()
+			selectedNicks: this.getSelectedNicks(),
+			blockIllegalNicks: this.getBlockIllegalNicks()
 		};
 	}
 
@@ -165,7 +168,8 @@ export class AbstractQuestionGroup {
 		if (questionGroup instanceof AbstractQuestionGroup) {
 			if (questionGroup.getHashtag() !== this.getHashtag() ||
 				questionGroup.getTheme() !== this.getTheme() ||
-				questionGroup.getSelectedNicks() !== this.getSelectedNicks()) {
+				questionGroup.getSelectedNicks() !== this.getSelectedNicks() ||
+				questionGroup.getBlockIllegalNicks() !== this.getBlockIllegalNicks()) {
 				return false;
 			}
 			if (questionGroup.getMusicEnabled() !== this.getMusicEnabled() ||
@@ -300,5 +304,16 @@ export class AbstractQuestionGroup {
 
 	removeSelectedNicks () {
 		this[selectedNicks] = [];
+	}
+
+	getBlockIllegalNicks () {
+		return this[blockIllegalNicks];
+	}
+
+	setBlockIllegalNicks (value) {
+		if (typeof value !== "boolean") {
+			throw new Error("Invalid argument list for QuestionGroup.setBlockIllegalNicks");
+		}
+		this[blockIllegalNicks] = value;
 	}
 }

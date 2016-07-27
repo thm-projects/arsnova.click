@@ -1,3 +1,5 @@
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {hashtagSchema} from '/lib/hashtags/collection.js';
 import {AbstractAnswerOption} from '../answeroptions/answeroption_abstract.js';
 import {DefaultAnswerOption} from '../answeroptions/answeroption_default.js';
 
@@ -38,6 +40,16 @@ export class AbstractQuestion {
 	 */
 	getHashtag () {
 		return this[hashtag];
+	}
+
+	setHashtag (newHashtag) {
+		new SimpleSchema({
+			hashtag: hashtagSchema
+		}).validate({hashtag: newHashtag});
+		this[hashtag] = newHashtag;
+		this.getAnswerOptionList().forEach(function (item) {
+			item.setHashtag(newHashtag);
+		});
 	}
 
 	/**

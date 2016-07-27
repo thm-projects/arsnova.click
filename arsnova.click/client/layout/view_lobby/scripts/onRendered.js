@@ -27,9 +27,11 @@ import {calculateButtonCount} from './lib.js';
 Template.memberlist.onRendered(function () {
 	Session.set("learnerCountOverride", false);
 	Session.set("allMembersCount", MemberListCollection.find().count());
-	Session.set("lobbySoundIsPlaying", "LobbySong1");
-	setLobbySound("LobbySong1");
-	lobbySound.play();
+	if (localData.containsHashtag(Router.current().params.quizName)) {
+		Session.set("lobbySoundIsPlaying", "LobbySong1");
+		setLobbySound("LobbySong1");
+		lobbySound.play();
+	}
 	calculateButtonCount(MemberListCollection.find().count());
 	$('.header-title').text(Router.current().params.quizName);
 	calculateHeaderSize();

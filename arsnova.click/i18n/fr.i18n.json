@@ -454,6 +454,7 @@
     },
     "sound": {
       "title": "Son du compte à rebours",
+      "lobby_music": "Son dans le hall quiz",
       "volume": "Volume",
       "inactive": "Son inactif",
       "active": "Son activé"

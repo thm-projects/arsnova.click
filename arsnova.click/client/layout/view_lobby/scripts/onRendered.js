@@ -20,12 +20,18 @@ import {Template} from 'meteor/templating';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
+import {lobbySound, setLobbySound} from '/client/plugins/sound/scripts/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount} from './lib.js';
 
 Template.memberlist.onRendered(function () {
 	Session.set("learnerCountOverride", false);
 	Session.set("allMembersCount", MemberListCollection.find().count());
+	if (localData.containsHashtag(Router.current().params.quizName)) {
+		Session.set("lobbySoundIsPlaying", "LobbySong1");
+		setLobbySound("LobbySong1");
+		lobbySound.play();
+	}
 	calculateButtonCount(MemberListCollection.find().count());
 	$('.header-title').text(Router.current().params.quizName);
 	calculateHeaderSize();

@@ -19,7 +19,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {noUiSlider} from 'meteor/arsnova.click:nouislider';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
-import {buzzsound1, setBuzzsound1} from './lib.js';
+import {buzzsound1, setBuzzsound1, lobbySound} from './lib.js';
 import {TAPi18n} from 'meteor/tap:i18n';
 
 Template.soundConfig.onRendered(function () {
@@ -28,11 +28,11 @@ Template.soundConfig.onRendered(function () {
 	if (buzzsound1 == null) {
 		setBuzzsound1(hashtagDoc.musicTitle);
 	}
+	$('#lobbySoundSelect').val(Session.get("lobbySoundIsPlaying") || "LobbySong1");
 	$('#soundSelect').val(hashtagDoc.musicTitle);
 
 	if (hashtagDoc.musicEnabled) {
-		$('#isSoundOnButton').toggleClass("down");
-		$('#isSoundOnButton').html(TAPi18n.__("plugins.sound.active"));
+		$('#isSoundOnButton').toggleClass("down").html(TAPi18n.__("plugins.sound.active"));
 	}
 
 	var soundVolumneSlider = document.getElementById("slider2");
@@ -48,5 +48,6 @@ Template.soundConfig.onRendered(function () {
 		var musicVolume = Math.round(val);
 		Session.set('slider2', musicVolume);
 		buzzsound1.setVolume(musicVolume);
+		lobbySound.setVolume(musicVolume);
 	});
 });

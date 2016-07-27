@@ -43,6 +43,26 @@
 						</div>
 					</div>
 				</div>
+                <div class="modal-header">
+                    <h2>{{_ "plugins.sound.lobby_music"}}</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <select id="lobbySoundSelect" title="soundSelect">
+                                <option value="LobbySong1">"Clearday" | Bensound.com</option>
+                                <option value="LobbySong2">"House" | Bensound.com</option>
+                                <option value="LobbySong3">"Jazzyfrenchy" | Bensound.com</option>
+                                <option value="LobbySong4">"Littleidea" | Bensound.com</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <button id="playStopLobbyMusic" class="button button-warning down">
+                                <span class="glyphicon glyphicon-{{#if isLobbySoundPlaying}}stop{{ else }}play{{/if}}" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 				<div class="modal-footer">
 					<button id="js-btn-hideSoundModal" type="button" class="btn btn-success btn-answerOption btn-lg">
 						<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>

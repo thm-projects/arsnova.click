@@ -18,6 +18,7 @@
 import {Session} from 'meteor/session';
 
 export let buzzsound1 = null;
+export let lobbySound = null;
 
 export const whistleSound = new buzz.sound('/sounds/whistle.mp3', {
 	volume: Session.get("slider2") || 40
@@ -42,4 +43,30 @@ export function setBuzzsound1(songName) {
 	buzzsound1 = new buzz.sound('/sounds/' + fileName, {
 		loop: true
 	});
+}
+
+export function setLobbySound(songName) {
+	var fileName = "";
+	switch (songName) {
+		case "LobbySong1":
+			fileName = "bensound-clearday.mp3";
+			break;
+		case "LobbySong2":
+			fileName = "bensound-house.mp3";
+			break;
+		case "LobbySong3":
+			fileName = "bensound-jazzyfrenchy.mp3";
+			break;
+		case "LobbySong4":
+			fileName = "bensound-littleidea.mp3";
+			break;
+		default:
+			break;
+	}
+	Session.set("lobbySoundIsPlaying", songName);
+	lobbySound = new buzz.sound("/sounds/" + fileName, {
+		loop: true
+	});
+	lobbySound.play();
+	$('#playStopLobbyMusic').toggleClass("down").removeClass("button-success").addClass("button-warning");
 }

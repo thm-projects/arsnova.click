@@ -19,16 +19,25 @@
 
 .soundConfig {
 	.modal-content {
-		#soundSelect {
+		#soundSelect,
+		#lobbySoundSelect {
 			width: 100%;
 			border-radius: $corner-radius;
 			height: 46px;
 			padding: 0 10px;
 			outline: none;
+		}
+
+		#soundSelect {
 			margin-top: 15px;
 		}
 
-		#isSoundOnButton {
+		#lobbySoundSelect {
+			margin-bottom: 15px;
+		}
+
+		#isSoundOnButton,
+		#isLobbySoundOnButton {
 			margin: 15px 0;
 		}
 	}

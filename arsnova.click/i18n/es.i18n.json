@@ -454,6 +454,7 @@
     },
     "sound": {
       "title": "Sonido durante cuenta atrás",
+      "lobby_music": "El sonido en el vestíbulo concurso",
       "volume": "Predeterminar volumen",
       "inactive": "Sonido está desactivado",
       "active": "Sonido está activado"

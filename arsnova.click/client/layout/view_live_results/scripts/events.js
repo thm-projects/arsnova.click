@@ -39,7 +39,7 @@ Template.liveResults.events({
 		mathjaxMarkdown.initializeMarkdownAndLatex();
 		var targetId = parseInt($(event.currentTarget).parents(".question-row").attr("id").replace("question-row_", ""));
 		var answerContent = "";
-		const questionElement = questionDoc.questionList[EventManagerCollection.findOne().questionIndex];
+		const questionElement = questionDoc.questionList[targetId];
 		let questionContent = mathjaxMarkdown.getContent(questionElement.questionText);
 
 		let hasEmptyAnswers = true;
@@ -75,7 +75,7 @@ Template.liveResults.events({
 			autostart: true,
 			templateName: 'questionAndAnswerSplashscreen',
 			closeOnButton: '#js-btn-hideQuestionModal',
-			instanceId: "questionAndAnswers_" + EventManagerCollection.findOne().questionIndex,
+			instanceId: "questionAndAnswers_" + targetId,
 			onRendered: function (instance) {
 				instance.templateSelector.find('#questionContent').html(questionContent);
 				instance.templateSelector.find('#answerContent').html(answerContent);

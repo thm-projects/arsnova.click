@@ -39,7 +39,7 @@
 					</button>
 				</div>
 				<div class="col-xxs-12 col-sm-6 col-create-session">
-					<button id="addNewHashtag" class="button button-success" disabled="disabled">{{_ "view.hashtag_management.create_session"}}<span
+					<button id="addNewHashtag" class="button button-success" disabled="disabled">{{#if isAddingDemoQuiz}}{{_ "view.hashtag_management.create_demo_session"}}{{else}}{{_ "view.hashtag_management.create_session"}}{{/if}}<span
 							class="glyphicon glyphicon-edit glyph-right" aria-hidden="true"></span>
 					</button>
 				</div>

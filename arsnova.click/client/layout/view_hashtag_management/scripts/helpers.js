@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
@@ -32,6 +33,9 @@ Template.hashtagManagement.helpers({
 });
 
 Template.hashtagView.helpers($.extend({getHashtagSchema: hashtagSchema}, {
+	isAddingDemoQuiz: function () {
+		return Session.get("isAddingDemoQuiz");
+	},
 	hasDemoQuiz: function () {
 		let hasDemoQuiz = false;
 		$.each(localData.getAllHashtags(), function (index, item) {

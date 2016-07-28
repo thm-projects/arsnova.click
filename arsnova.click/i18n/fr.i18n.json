@@ -207,6 +207,7 @@
       "edit_session": "Modifier quiz",
       "reenter_session": "Ouvrir",
       "create_session": "Crée un nouveau quiz!",
+      "create_demo_session": "Lancer démo quizz!",
       "quiz_management": "Quiz enregistrés",
       "available_sessions": "Ces quiz sont dans ton browser:",
       "session_management": "Administration",

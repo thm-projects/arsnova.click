@@ -131,7 +131,8 @@ export function startCountdown(index, retry = 0) {
 	const currentTime = new Date();
 	const timeDiff = new Date(currentTime.getTime() - questionDoc.startTime);
 	console.log("Question timer: ", questionDoc.timer);
-	console.log("Question startTime: ", questionDoc.startTime / 1000);
+	console.log("Question startTime: ", new Date(questionDoc.startTime).toLocaleTimeString());
+	console.log("Current time: ", currentTime.toLocaleTimeString());
 	console.log("timeDiff: ", timeDiff.getTime() / 1000);
 
 	if ((questionDoc.timer - (timeDiff.getTime() / 1000)) <= 0) {

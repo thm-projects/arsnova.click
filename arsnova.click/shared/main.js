@@ -54,6 +54,9 @@ if (Meteor.isServer) {
 	Meteor.methods({
 		'Connection.sendConnectionStatus': function (key) {
 			ConnectionStatusCollection.insert({key: key});
+		},
+		'Main.getCurrentTimeStamp': function () {
+			return new Date().getTime();
 		}
 	});
 }

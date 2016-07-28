@@ -128,36 +128,34 @@ export function startCountdown(index, retry = 0) {
 		return;
 	}
 	questionIndex = index;
-	const currentTime = new Date();
-	const timeDiff = new Date(currentTime.getTime() - questionDoc.startTime);
-	console.log("Question timer: ", questionDoc.timer);
-	console.log("Question startTime: ", new Date(questionDoc.startTime).toLocaleTimeString());
-	console.log("Current time: ", currentTime.toLocaleTimeString());
-	console.log("timeDiff: ", timeDiff.getTime() / 1000);
+	Meteor.call("Main.getCurrentTimeStamp", function (error, response) {
+		const currentTime = new Date(response);
+		const timeDiff = new Date(currentTime.getTime() - questionDoc.startTime);
 
-	if ((questionDoc.timer - (timeDiff.getTime() / 1000)) <= 0) {
-		return;
-	}
-	if (localData.containsHashtag(Router.current().params.quizName)) {
-		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index);
-		if (hashtagDoc.musicEnabled) {
-			if (buzzsound1 == null) {
-				setBuzzsound1(hashtagDoc.musicTitle);
-			}
-			buzzsound1.setVolume(hashtagDoc.musicVolume);
-			buzzsound1.play();
-			Session.set("soundIsPlaying", true);
+		if ((questionDoc.timer - (timeDiff.getTime() / 1000)) <= 0) {
+			return;
 		}
-	}
-	Session.set("sessionCountDown", questionDoc.timer - (timeDiff.getTime() / 1000));
-	countdown = new ReactiveCountdown(questionDoc.timer - (timeDiff.getTime() / 1000));
+		if (localData.containsHashtag(Router.current().params.quizName)) {
+			Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index);
+			if (hashtagDoc.musicEnabled) {
+				if (buzzsound1 == null) {
+					setBuzzsound1(hashtagDoc.musicTitle);
+				}
+				buzzsound1.setVolume(hashtagDoc.musicVolume);
+				buzzsound1.play();
+				Session.set("soundIsPlaying", true);
+			}
+		}
+		Session.set("sessionCountDown", questionDoc.timer - (timeDiff.getTime() / 1000));
+		countdown = new ReactiveCountdown(questionDoc.timer - (timeDiff.getTime() / 1000));
 
-	countdown.start(function () {
-		countdownFinish();
+		countdown.start(function () {
+			countdownFinish();
+		});
+		$('.navbar-fixed-bottom').hide();
+		Session.set("countdownInitialized", true);
+		$('.disableOnActiveCountdown').attr("disabled", "disabled");
 	});
-	$('.navbar-fixed-bottom').hide();
-	Session.set("countdownInitialized", true);
-	$('.disableOnActiveCountdown').attr("disabled", "disabled");
 }
 
 /**

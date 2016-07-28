@@ -129,12 +129,9 @@ export function startCountdown(index, retry = 0) {
 	}
 	questionIndex = index;
 	const currentTime = new Date();
-	const currentCountdown = new Date(questionDoc.startTime);
-	const timeDiff = new Date(currentTime.getTime() - currentCountdown.getTime());
-	currentCountdown.setTime(currentCountdown.getTime() - timeDiff.getTime());
+	const timeDiff = new Date(currentTime.getTime() - questionDoc.startTime);
 	console.log("Question timer: ", questionDoc.timer);
 	console.log("Question startTime: ", questionDoc.startTime / 1000);
-	console.log("currentCountdown: ", currentCountdown.getTime() / 1000);
 	console.log("timeDiff: ", timeDiff.getTime() / 1000);
 
 	if ((questionDoc.timer - (timeDiff.getTime() / 1000)) <= 0) {

@@ -147,16 +147,6 @@ const clickEvents = {
 									return;
 								}
 
-								asJSON.hashtag = hashtag;
-								$.each(asJSON.questionList, function (index, question) {
-									question.hashtag = hashtag;
-									if (question.answerOptionList !== undefined && question.answerOptionList.length > 0) {
-										$.each(question.answerOptionList, function (index, answerOption) {
-											answerOption.hashtag = hashtag;
-										});
-									}
-								});
-
 								switch (asJSON.type) {
 									case "DefaultQuestionGroup":
 										questionInstance = new DefaultQuestionGroup(asJSON);
@@ -164,6 +154,7 @@ const clickEvents = {
 									default:
 										throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
 								}
+								questionInstance.setHashtag(hashtag);
 
 								Meteor.call('HashtagsCollection.addHashtag', {
 									privateKey: localData.getPrivateKey(),

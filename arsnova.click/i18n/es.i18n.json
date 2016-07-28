@@ -207,7 +207,7 @@
       "edit_session": "Editar cuestionario",
       "reenter_session": "Abrir",
       "create_session": "¡Crea uno nuevo!",
-      "create_demo_session": "Iniciar la prueba de demostración!",
+      "create_demo_session": "¡Iniciar la prueba de demostración!",
       "quiz_management": "cuestionarios guardados",
       "available_sessions": "Estos cuestionarios se encuentran en tu navegador:",
       "session_management": "Administración",
@@ -222,8 +222,8 @@
     "hashtag_view": {
       "demo_quiz": {
         "title": {
-          "1": "No estás seguro por dónde empezar?",
-          "2": "Introduzca \"Demo Quiz\" y pulse \"¡Crea uno nuevo!\""
+          "1": "¿No estás seguro por dónde empezar?",
+          "2": "¡Introduzca \"Demo Quiz\"!"
         }
       }
     },

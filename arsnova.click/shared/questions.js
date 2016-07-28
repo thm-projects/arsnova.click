@@ -171,6 +171,9 @@ Meteor.methods({
 		});
 	},
 	"Question.startTimer": function ({hashtag, questionIndex}) {
+		if (Meteor.isClient) {
+			return;
+		}
 		new SimpleSchema({
 			hashtag: hashtagSchema,
 			questionIndex: questionIndexSchema

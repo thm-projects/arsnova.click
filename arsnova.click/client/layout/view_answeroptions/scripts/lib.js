@@ -174,19 +174,16 @@ export function createSlider(index) {
 				'max': [minRange > maxRange ? minRange + 50 : maxRange + 50]
 			}
 		});
+		const correctValue = $('#correctValueInput');
 		try {
+			correctValue.val(Math.round((minRange + maxRange) / 2));
+			questionItem.getQuestionList()[index].setCorrectValue(parseInt(correctValue.val()));
 			questionItem.getQuestionList()[index].setRange(minRange, maxRange);
 			Session.set("questionGroup", questionItem);
 			localData.addHashtag(questionItem);
 			$('#minRangeInput, #maxRangeInput').removeClass("invalid");
 		} catch (ex) {
 			$('#minRangeInput, #maxRangeInput').addClass("invalid");
-		}
-		const correctValue = $('#correctValueInput');
-		if (correctValue.val() < minRange || correctValue.val() > maxRange) {
-			correctValue.addClass("invalid");
-		} else {
-			correctValue.removeClass("invalid");
 		}
 	});
 	$('#minRangeInput, #maxRangeInput').on("change", function () {

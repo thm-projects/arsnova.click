@@ -147,8 +147,8 @@ export function startCountdown(index, retry = 0) {
 			Session.set("soundIsPlaying", true);
 		}
 	}
-	Session.set("sessionCountDown", questionDoc.timer - timeDiff.getSeconds());
-	countdown = new ReactiveCountdown(questionDoc.timer - timeDiff.getSeconds());
+	Session.set("sessionCountDown", questionDoc.timer - (timeDiff.getTime() / 1000));
+	countdown = new ReactiveCountdown(questionDoc.timer - (timeDiff.getTime() / 1000));
 
 	countdown.start(function () {
 		countdownFinish();

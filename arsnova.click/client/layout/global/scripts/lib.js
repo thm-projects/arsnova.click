@@ -126,7 +126,7 @@ export function getRTT() {
 	startTime = new Date().getTime();
 	/*Meteor.call("Connection.sendConnectionStatus", localData.getPrivateKey());*/
 	$.ajax({
-		url: "/robots.txt",
+		url: "/connection-test",
 		cache: false,
 		timeout: 10000,
 		success: function () {

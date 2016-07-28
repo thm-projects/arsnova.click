@@ -207,7 +207,7 @@
       "edit_session": "Modifier quiz",
       "reenter_session": "Ouvrir",
       "create_session": "Crée un nouveau quiz!",
-      "create_demo_session": "Lancer démo quizz!",
+      "create_demo_session": "Lancer démo quiz!",
       "quiz_management": "Quiz enregistrés",
       "available_sessions": "Ces quiz sont dans ton browser:",
       "session_management": "Administration",
@@ -223,7 +223,7 @@
       "demo_quiz": {
         "title": {
           "1": "Tu ne sais pas par où commencer?",
-          "2": "Insère \"Demo Quiz\" et clique sur \"Crée un nouveau quiz!\""
+          "2": "Insère \"Demo Quiz\"!"
         }
       }
     },

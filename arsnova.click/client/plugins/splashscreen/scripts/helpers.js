@@ -95,5 +95,8 @@ Template.connectionQualitySplashscreen.helpers($.extend(isMobileDevice, {
 			current: Session.get("connectionStatus").dbConnection.currentCount,
 			max: Session.get("connectionStatus").dbConnection.totalCount
 		};
+	},
+	hasNetworkConnection: function () {
+		return Session.get("connectionStatus").webSocket.connected;
 	}
 }));

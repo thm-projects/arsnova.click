@@ -27,7 +27,11 @@
                         <p>WebSocket: <span>{{_ websocketStatus.text}}</span> </p>
                         <p>LocalStorage: <span>{{_ localStorageStatus.text}}</span> </p>
                         <p>SessionStorage: <span>{{_ sessionStorageStatus.text}}</span> </p>
-                        <p>Round-trip time ({{dbConnectionStatus.current}} / {{dbConnectionStatus.max}}): <span>{{_ dbConnectionStatus.text}} (~{{dbConnectionStatus.averageTime}} ms)</span> </p>
+                        {{#if hasNetworkConnection}}
+                            <p>Round-trip time ({{dbConnectionStatus.current}} / {{dbConnectionStatus.max}}): <span>{{_ dbConnectionStatus.text}} (~{{dbConnectionStatus.averageTime}} ms)</span> </p>
+                        {{else}}
+                            <p>Round-trip time: {{_ "region.header.connection_status.websocket_status.disconnected"}}</p>
+                        {{/if}}
                     </div>
                     <div class="modal-footer">
                         <button id="btn-hidePreviewModal" type="button" class="btn btn-success btn-answerOption btn-lg ">

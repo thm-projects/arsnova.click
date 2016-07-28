@@ -134,7 +134,7 @@
         "title": "Soll das Quiz beendet werden?",
         "text": {
           "running_question": "Alle Teilnehmenden werden abgmeldet. Die Rangliste wird gelöscht. Dein Quiz mit allen Einstellungen verbleibt in diesem Browser, solange er nicht zurückgesetzt wird.",
-          "empty_lobby": "Du wirst abgemeldet. Dein Quiz mit allen Einstellungen verbleibt in diesem Browser, solange er nicht zurückgesetzt wird.",
+          "empty_lobby": "Dein Quiz mit allen Einstellungen verbleibt in diesem Browser, solange er nicht zurückgesetzt wird.",
           "continue": "Fortfahren?"
         }
       },
@@ -276,7 +276,7 @@
       "start_quiz": "Los geht's!",
       "kick_member_confirmation": "Soll die Person '<span id=\"nickName\"></span>' aus dem Quiz entfernt werden?",
       "add_kicked_member_to_ban_list": "Den Nicknamen für immer bannen",
-      "waiting_for_players": "Warte auf Mitspieler"
+      "waiting_for_players": "Warten auf die Mitspielerinnen und Mitspieler..."
     },
     "nickname_categories": {
       "title": "Nicknamen vorgeben",
@@ -309,7 +309,7 @@
       "single_choice_question_true_false": "Wahr|Falsch-Frage",
       "multiple_choice_question": "Multiple-Choice-Frage (eine oder mehrere Antworten sind richtig)",
       "survey_question": "Umfrage (Antworten sind weder richtig noch falsch)",
-      "ranged_question": "Schätzfrage (Zahlen im vorgegebenen Bereich sind richtig)",
+      "ranged_question": "Schätzfrage (alle Zahlen im vorgegebenen Bereich sind richtig)",
       "free_text_question": "Kurzantwort (Text bei Übereinstimmung mit Vorgaben ist richtig)"
     },
     "quiz_summary": {
@@ -410,7 +410,7 @@
       "second_plural": "Sekunden"
     },
     "translation": {
-      "translations": "Sprachauswahl:",
+      "translations": "Wähle Deine Sprache:",
       "i18n_currently_not_available": "i18n ist aktuell nicht verfügbar!",
       "beta": "Beta"
     },

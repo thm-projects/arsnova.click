@@ -276,7 +276,7 @@
       "start_quiz": "Let's go!",
       "kick_member_confirmation": "Shall the attendee '<span id=\"nickName\"></span>' be removed from the session?",
       "add_kicked_member_to_ban_list": "Ban nickname permanently",
-      "waiting_for_players": "Waiting for players"
+      "waiting_for_players": "Waiting for the players..."
     },
     "nickname_categories": {
       "title": "Limit available nicknames",

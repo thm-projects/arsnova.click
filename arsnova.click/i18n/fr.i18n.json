@@ -276,7 +276,7 @@
       "start_quiz": "C'est parti!",
       "kick_member_confirmation": "Veux-tu supprimer la personne '<span id=\"nickName\"></span>' du quiz?",
       "add_kicked_member_to_ban_list": "Bannir le pseudo de manière permanente",
-      "waiting_for_players": "En attente de joueurs"
+      "waiting_for_players": "En attente de joueurs..."
     },
     "nickname_categories": {
       "title": "Limite disponibles surnoms",

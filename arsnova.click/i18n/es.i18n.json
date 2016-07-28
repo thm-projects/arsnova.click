@@ -276,7 +276,7 @@
       "start_quiz": "¡Comenzar!",
       "kick_member_confirmation": "¿Eliminar a esta persona '<span id=\"nickName\"></span>' del cuestionario?",
       "add_kicked_member_to_ban_list": "¿Bloquear el nombre de usuario definitivamente?",
-      "waiting_for_players": "A la espera de los jugadores"
+      "waiting_for_players": "A la espera de los jugadores..."
     },
     "nickname_categories": {
       "title": "Predeterminar nombres de usuario",
@@ -410,7 +410,7 @@
       "second_plural": "Segundos"
     },
     "translation": {
-      "translations": "Estos idiomas están disponibles:",
+      "translations": "Idiomas disponibles:",
       "i18n_currently_not_available": "i18n no se encuentra disponible!",
       "beta": "Beta"
     },

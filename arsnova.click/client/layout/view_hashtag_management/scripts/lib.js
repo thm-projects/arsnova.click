@@ -39,12 +39,16 @@ export function setEventManagerTracker(handle) {
 }
 
 export function findOriginalHashtag(inputHashtag) {
-	var loweredHashtag = inputHashtag.toLowerCase();
-	var allHashtags = HashtagsCollection.find().fetch();
-	var result = "";
+	const loweredHashtag = inputHashtag.toLowerCase();
+	let result = "";
+	if (loweredHashtag.indexOf("demo quiz") !== -1) {
+		return inputHashtag;
+	}
+	const allHashtags = HashtagsCollection.find().fetch();
 	$.each(allHashtags, function (i, originalHashtag) {
 		if (originalHashtag.hashtag.toLowerCase() === loweredHashtag) {
 			result = originalHashtag.hashtag;
+			return false;
 		}
 	});
 	return result;
@@ -52,7 +56,8 @@ export function findOriginalHashtag(inputHashtag) {
 
 export function getNewDemoQuizName() {
 	const hashtags = HashtagsCollection.find({hashtag: {$regex: "demo quiz *", $options: 'i'}}).fetch();
-	const newIndex = parseInt(hashtags[hashtags.length - 1].hashtag.split(" ")[2]) + 1;
+	const newIndex = hashtags.length === 0 ? 1 : parseInt(hashtags[hashtags.length - 1].hashtag.split(" ")[2]) + 1;
+	console.log("new demo quiz: Demo Quiz " + newIndex, hashtags, HashtagsCollection.find().fetch());
 	return "Demo Quiz " + newIndex;
 }
 

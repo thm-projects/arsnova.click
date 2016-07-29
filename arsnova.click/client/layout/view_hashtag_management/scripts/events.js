@@ -65,7 +65,9 @@ Template.hashtagView.events({
 					},
 					added: function (id, doc) {
 						if (!isNaN(doc.sessionStatus)) {
-							inputHashtag = lib.getNewDemoQuizName();
+							if (Session.get("isAddingDemoQuiz")) {
+								inputHashtag = lib.getNewDemoQuizName();
+							}
 							originalHashtag = lib.findOriginalHashtag(inputHashtag);
 							if (doc.sessionStatus === 2) {
 								$("#joinSession").removeAttr("disabled");
@@ -129,9 +131,7 @@ Template.hashtagView.events({
 					success: function (data) {
 						questionGroup = new DefaultQuestionGroup(data);
 						questionGroup.setHashtag(hashtag);
-						if (hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
-							sessionStorage.setItem("overrideValidQuestionRedirect", true);
-						}
+						sessionStorage.setItem("overrideValidQuestionRedirect", true);
 						lib.addHashtag(questionGroup);
 					}
 				});
@@ -140,10 +140,7 @@ Template.hashtagView.events({
 					hashtag: hashtag,
 					questionList: []
 				});
-				questionGroup.addDefaultQuestion(0);
-				for (let i = 0; i < 4; i++) {
-					questionGroup.getQuestionList()[0].addDefaultAnswerOption(i);
-				}
+				questionGroup.addDefaultQuestion();
 				lib.addHashtag(questionGroup);
 			}
 		}
@@ -181,19 +178,12 @@ Template.hashtagView.events({
 				return;
 			}
 
-			var hashtagDoc = HashtagsCollection.findOne({hashtag: inputHashtag});
-			if (!hashtagDoc) {
-				//Add new Hashtag
-				$("#addNewHashtag").click();
-			} else {
-				var localHashtags = localData.getAllHashtags();
-				if ($.inArray(inputHashtag, localHashtags) > -1) {
-					//Edit own Hashtag
-					$("#addNewHashtag").click();
-				} else if (EventManagerCollection.findOne() && EventManagerCollection.findOne().sessionStatus === 2) {
-					//Join session
-					$("#joinSession").click();
-				}
+			const addNewHashtagElement = $("#addNewHashtag");
+			const joinSessionElement = $("#joinSession");
+			if (!addNewHashtagElement.attr("disabled")) { // Add new Hashtag / edit own hashtag
+				addNewHashtagElement.click();
+			} else if (!joinSessionElement.attr("disabled")) { // Join existing session
+				joinSessionElement.click();
 			}
 		}
 	}

@@ -146,8 +146,9 @@ export function startCountdown(index, retry = 0) {
 				Session.set("soundIsPlaying", true);
 			}
 		}
-		Session.set("sessionCountDown", questionDoc.timer - (timeDiff.getTime() / 1000));
-		countdown = new ReactiveCountdown(questionDoc.timer - (timeDiff.getTime() / 1000));
+		const countdownValue = Math.round(questionDoc.timer - (timeDiff.getTime() / 1000));
+		Session.set("sessionCountDown", countdownValue);
+		countdown = new ReactiveCountdown(countdownValue);
 
 		countdown.start(function () {
 			countdownFinish();

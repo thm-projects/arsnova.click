@@ -605,7 +605,7 @@
 		$bg-nav-row: #FC954B;
 		$bg-container: $background-color;
 		$bg-questionList-row: $bg-container;
-		$bg-footer: #C9C9C9;
+		$bg-footer: #FC954B;
 		$fg_a: #3d9c19;
 		$fg_quiz-name: F08080;
 		$fg_titel: #232737;
@@ -635,7 +635,7 @@
 		$failure: $red;
 		$warning: $red;
 
-		$background-color: #294a6b;
+		$background-color: #2a386d;
 		$bg-nav-row: #2a386d;
 		$bg-container: $background-color;
 		$bg-questionList-row: $bg-container;
@@ -742,7 +742,7 @@
 		$fg_quiz-name: black;
 		$background-color: darkorange;
 		$bg-nav-row: #B40404;  /*dark-red*/
-		$bg-footer: #FACC2E;  /*dark-yellow*/
+		$bg-footer: darkorange;
 
 		$bg-container: $background-color;
 		$bg-questionList-row: $bg-container;
@@ -763,10 +763,10 @@
 
 	@if ($name == "theme-Psychology-Correct-Colours") {
 		$background-color: #D96C6C;
-		$bg-nav-row: #918477;
+		$bg-nav-row: #D96C6C;
 		$bg-container: $background-color;
 		$bg-questionList-row: #918477;
-		$bg-footer: #918477;
+		$bg-footer: #D96C6C;
 		$input-background-color: #f6f4f4;
 		$default-text-color: black;
 		$fg-text-light: white;

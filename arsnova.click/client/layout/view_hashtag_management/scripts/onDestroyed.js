@@ -25,5 +25,7 @@ Template.hashtagView.onDestroyed(function () {
 		$("#joinSession").attr("disabled", "disabled");
 	}
 	Session.set("isAddingDemoQuiz", undefined);
+	Session.set("isEditingQuiz", undefined);
 	delete Session.keys.isAddingDemoQuiz;
+	delete Session.keys.isEditingQuiz;
 });

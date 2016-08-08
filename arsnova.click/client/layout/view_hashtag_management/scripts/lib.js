@@ -25,6 +25,7 @@ import * as localData from '/lib/local_storage.js';
 export let hashtagSplashscreen = null;
 export let eventManagerHandle = null;
 export let eventManagerTracker = null;
+export let eventManagerCollectionObserver = null;
 
 export function setHashtagSplashscreen(instance) {
 	hashtagSplashscreen = instance;
@@ -36,6 +37,10 @@ export function setEventManagerHandle(handle) {
 
 export function setEventManagerTracker(handle) {
 	eventManagerTracker = handle;
+}
+
+export function setEventManagerCollectionObserver(handle) {
+	eventManagerCollectionObserver = handle;
 }
 
 export function findOriginalHashtag(inputHashtag) {

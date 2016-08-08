@@ -20,7 +20,6 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection, hashtagSchema} from '/lib/hashtags/collection.js';
 import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
@@ -35,50 +34,57 @@ Template.hashtagView.events({
 			$("#joinSession, #addNewHashtag").attr("disabled", "disabled");
 			return;
 		}
-		if (lib.eventManagerHandle) {
-			lib.eventManagerHandle.stop();
-		}
-		if (lib.eventManagerTracker) {
-			lib.eventManagerTracker.stop();
-		}
 		if (inputHashtag.toLowerCase() === "demo quiz") {
 			Session.set("isAddingDemoQuiz", true);
 			inputHashtag = lib.getNewDemoQuizName();
 		} else {
 			Session.set("isAddingDemoQuiz", false);
 		}
+		if (lib.eventManagerTracker) {
+			lib.eventManagerTracker.stop();
+		}
+		if (lib.eventManagerHandle) {
+			lib.eventManagerHandle.stop();
+		}
+		if (lib.eventManagerCollectionObserver) {
+			lib.eventManagerCollectionObserver.stop();
+		}
 		let originalHashtag = lib.findOriginalHashtag(inputHashtag);
-		lib.setEventManagerTracker(Tracker.autorun(function () {
-			Meteor.subscribe("EventManagerCollection.join", originalHashtag, function () {
-				if (!EventManagerCollection.findOne() || localData.containsHashtag(originalHashtag)) {
-					$("#joinSession").attr("disabled", "disabled");
-				}
-				lib.setEventManagerHandle(EventManagerCollection.find({hashtag: originalHashtag}).observeChanges({
-					changed: function (id, changedFields) {
-						if (!isNaN(changedFields.sessionStatus)) {
-							if (changedFields.sessionStatus === 2) {
-								$("#joinSession").removeAttr("disabled");
-							} else {
-								$("#joinSession").attr("disabled", "disabled");
-							}
-						}
-					},
-					added: function (id, doc) {
-						if (!isNaN(doc.sessionStatus)) {
-							if (Session.get("isAddingDemoQuiz")) {
-								inputHashtag = lib.getNewDemoQuizName();
-							}
-							originalHashtag = lib.findOriginalHashtag(inputHashtag);
-							if (doc.sessionStatus === 2) {
-								$("#joinSession").removeAttr("disabled");
-							} else {
-								$("#joinSession").attr("disabled", "disabled");
-							}
-						}
+		if (originalHashtag === "") {
+			Session.set("isEditingQuiz", false);
+		} else {
+			lib.setEventManagerTracker(Tracker.autorun(function () {
+				lib.setEventManagerHandle(Meteor.subscribe("EventManagerCollection.join", originalHashtag, function () {
+					if (!EventManagerCollection.findOne() || localData.containsHashtag(originalHashtag)) {
+						$("#joinSession").attr("disabled", "disabled");
 					}
+					lib.setEventManagerCollectionObserver(EventManagerCollection.find({hashtag: originalHashtag}).observeChanges({
+						changed: function (id, changedFields) {
+							if (!isNaN(changedFields.sessionStatus)) {
+								if (changedFields.sessionStatus === 2) {
+									$("#joinSession").removeAttr("disabled");
+								} else {
+									$("#joinSession").attr("disabled", "disabled");
+								}
+							}
+						},
+						added: function (id, doc) {
+							if (!isNaN(doc.sessionStatus)) {
+								if (Session.get("isAddingDemoQuiz")) {
+									inputHashtag = lib.getNewDemoQuizName();
+								}
+								originalHashtag = lib.findOriginalHashtag(inputHashtag);
+								if (doc.sessionStatus === 2) {
+									$("#joinSession").removeAttr("disabled");
+								} else {
+									$("#joinSession").attr("disabled", "disabled");
+								}
+							}
+						}
+					}));
 				}));
-			});
-		}));
+			}));
+		}
 		let addNewHashtagItem = $("#addNewHashtag");
 		if (lib.trimIllegalChars(inputHashtag).length === 0) {
 			addNewHashtagItem.attr("disabled", "disabled");
@@ -92,9 +98,10 @@ Template.hashtagView.events({
 		} else {
 			var localLoweredHashtags = localData.getAllLoweredHashtags();
 			if ($.inArray(inputHashtag.toLowerCase(), localLoweredHashtags) > -1) {
-				addNewHashtagItem.html(TAPi18n.__("view.hashtag_management.reenter_session") + '<span class="glyphicon glyphicon-log-in glyph-right" aria-hidden="true"></span>');
+				Session.set("isEditingQuiz", true);
 				addNewHashtagItem.removeAttr("disabled");
 			} else {
+				Session.set("isEditingQuiz", false);
 				addNewHashtagItem.attr("disabled", "disabled");
 			}
 		}

@@ -36,6 +36,9 @@ Template.hashtagView.helpers($.extend({getHashtagSchema: hashtagSchema}, {
 	isAddingDemoQuiz: function () {
 		return Session.get("isAddingDemoQuiz");
 	},
+	isEditingQuiz: function () {
+		return Session.get("isEditingQuiz");
+	},
 	hasDemoQuiz: function () {
 		let hasDemoQuiz = false;
 		$.each(localData.getAllHashtags(), function (index, item) {

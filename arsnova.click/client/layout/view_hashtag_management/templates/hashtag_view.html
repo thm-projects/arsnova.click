@@ -34,13 +34,15 @@
 			</div>
 			<div class="row distance-top">
 				<div class="col-xxs-12 col-sm-6 col-join-session">
-					<button id="joinSession" class="button button-success" disabled="disabled"><span
-							class="glyphicon glyphicon-thumbs-up glyph-left" aria-hidden="true"></span>{{_ "view.hashtag_management.join_session"}}
+					<button id="joinSession" class="button button-success" disabled="disabled">
+                        <span class="glyphicon glyphicon-thumbs-up glyph-left" aria-hidden="true"></span>
+                        <span>{{_ "view.hashtag_management.join_session"}}</span>
 					</button>
 				</div>
 				<div class="col-xxs-12 col-sm-6 col-create-session">
-					<button id="addNewHashtag" class="button button-success" disabled="disabled">{{#if isAddingDemoQuiz}}{{_ "view.hashtag_management.create_demo_session"}}{{else}}{{_ "view.hashtag_management.create_session"}}{{/if}}<span
-							class="glyphicon glyphicon-{{#if isAddingDemoQuiz}}send{{else}}edit{{/if}} glyph-right" aria-hidden="true"></span>
+					<button id="addNewHashtag" class="button button-success" disabled="disabled">
+                        <span>{{#if isEditingQuiz}}{{_ "view.hashtag_management.reenter_session"}}{{else}}{{#if isAddingDemoQuiz}}{{_ "view.hashtag_management.create_demo_session"}}{{else}}{{_ "view.hashtag_management.create_session"}}{{/if}}{{/if}}</span>
+                        <span class="glyphicon glyphicon-{{#if isEditingQuiz}}log-in{{else}}{{#if isAddingDemoQuiz}}send{{else}}edit{{/if}}{{/if}} glyph-right" aria-hidden="true"></span>
 					</button>
 				</div>
 			</div>

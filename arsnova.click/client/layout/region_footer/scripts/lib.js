@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
 import {TAPi18n} from 'meteor/tap:i18n';
@@ -112,9 +113,7 @@ export function addFooterElement(footerElement, priority = 100) {
 	if (!hasItem) {
 		footerElements.splice(priority, 0, footerElement);
 	}
-	setTimeout(function () {
-		$('#' + footerElement.id).removeClass("error").removeClass("success");
-	}, 20);
+	$('#' + footerElement.id).removeClass("error").removeClass("success");
 }
 
 export const updateStatefulFooterElements = Tracker.autorun(function () {
@@ -164,6 +163,27 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 	});
 });
 
+export function calculateFooterFontSize() {
+	let iconSize = "3vh", textSize = "2vh";
+	const navbarFooter = $(".navbar-footer");
+	const fixedBottom = $('.fixed-bottom');
+
+	if ($(document).width() > $(document).height()) {
+		iconSize = "2vw";
+		textSize = "1vw";
+	}
+	$(".footerElementText").css("fontSize", textSize);
+	navbarFooter.css({"fontSize": iconSize});
+	fixedBottom.css("bottom", navbarFooter.height());
+	fixedBottom.show();
+	headerLib.calculateTitelHeight();
+	updateStatefulFooterElements.invalidate();
+	return {
+		icon: iconSize,
+		text: textSize
+	};
+}
+
 export function generateFooterElements() {
 	$.merge(footerElements, hiddenFooterElements.selectable);
 	$.merge(footerElements, hiddenFooterElements.linkable);
@@ -188,9 +208,7 @@ export function generateFooterElements() {
 	}
 	Session.set("footerElements", footerElements);
 	Session.set("hiddenFooterElements", hiddenFooterElements);
-	setTimeout(function () {
-		updateStatefulFooterElements.invalidate();
-	}, 20);
+	Meteor.defer(calculateFooterFontSize);
 	return footerElements;
 }
 
@@ -232,33 +250,11 @@ export function removeFooterElements() {
 	Session.set("hiddenFooterElements", hiddenFooterElements);
 }
 
-export function calculateFooterFontSize() {
-	let iconSize = "3vh", textSize = "2vh";
-	const navbarFooter = $(".navbar-footer");
-	const fixedBottom = $('.fixed-bottom');
-
-	if ($(document).width() > $(document).height()) {
-		iconSize = "2vw";
-		textSize = "1vw";
-	}
-	$(".footerElementText").css("fontSize", textSize);
-	navbarFooter.css({"fontSize": iconSize});
-	fixedBottom.css("bottom", navbarFooter.height());
-	fixedBottom.show();
-	headerLib.calculateTitelHeight();
-	return {
-		icon: iconSize,
-		text: textSize
-	};
-}
-
 export function calculateFooter() {
 	$(window).on("resize", function () {
 		if ($(window).height() > 400) {
-			generateFooterElements();
-			setTimeout(calculateFooterFontSize, 20);
+			Meteor.defer(generateFooterElements);
 		}
 	});
-	generateFooterElements();
-	setTimeout(calculateFooterFontSize, 20);
+	Meteor.defer(generateFooterElements);
 }

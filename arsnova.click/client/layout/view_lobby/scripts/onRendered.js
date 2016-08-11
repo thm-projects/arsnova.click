@@ -53,6 +53,11 @@ Template.memberlist.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemTheme);
 	}
 	footerElements.calculateFooter();
+
+	/* Auto-Open the QR-Code Window */
+	setTimeout(function () {
+		$('#qr-code').click();
+	}, 100);
 });
 
 Template.learner.onRendered(function () {

@@ -201,7 +201,7 @@
       }
     },
     "hashtag_management": {
-      "enter_quiz_name": "Gib hier den Quiznamen ein",
+      "enter_quiz_name": "Gib den Quiznamen ein...",
       "join_session": "Mach mit!",
       "start_session": "Quiz starten",
       "edit_session": "Quiz bearbeiten",

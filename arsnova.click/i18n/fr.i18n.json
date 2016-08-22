@@ -1,6 +1,6 @@
 {
   "global": {
-    "arsnova_slogan": "Quiz sur tout et pour tous",
+    "arsnova_slogan": "Application quiz pour tout/tous",
     "back": "Retour",
     "next": "Suivant",
     "delete": "Supprimer",
@@ -10,7 +10,7 @@
   },
   "region": {
     "footer": {
-      "go_to": "Aller à:",
+      "go_to": "Aller vers:",
       "show-more": {
         "show-more-elements": "Options supplémentaires",
         "onText": "Activé",
@@ -31,23 +31,23 @@
         "show_more": "Plus",
         "sound": "Son",
         "qr_code": "Code QR",
-        "nicknames": "Surnoms"
+        "nicknames": "Pseudos"
       },
       "about": {
         "title": "À propos de l'application quiz",
         "declaration": "Un peu de <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, <br />un peu de <a href='https://arsnova.eu/' target='_blank'>ARSnova</a>!",
-        "ars": "Des <a href='https://de.wikipedia.org/wiki/Audience_Response_System' target='_blank'>Systèmes de réponse d'audience (SRA)</a> dont le premier est ludique, le dernier developpé pour l'enseignement.",
-        "developed_by": "Inspiré de <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, un <a href='http://www.scrumhub.com' target='_blank'>Scrum-Team</a> composé d'étudiants en Bachelor et Master de l'<a href='http://www.thm.de/site/' target='_blank'>école polytechnique de Mittelhessen</a> a developpé en seulement 10 jours cette alternative <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>ludique</a> à notre produit-phare ARSnova <a href='https://arsnova.eu/' target='_blank'>arsnova.eu</a>.",
-        "met_requirements": "Les demandes déjà résolues par arsnova.click:",
+        "ars": "arsnova.click es tun <a href='https://en.wikipedia.org/wiki/Audience_response#Audience_response_systems' target='_blank'>système de réponse d’audience (SRA)</a> innovatif pour des institutions d’éducation publiques.",
+        "developed_by": "Inspiré de <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, un <a href='http://www.scrumhub.com' target='_blank'>Scrum-Team</a> composé d'étudiants en Bachelor et Master de l'<a href='http://www.thm.de/site/' target='_blank'>école polytechnique de Mittelhessen</a> a developpé en seulement 10 jours la première version de cette alternative <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>ludique</a> au produit-phare de ARSnova <a href='https://arsnova.eu/' target='_blank'>arsnova.eu</a>.",
+        "met_requirements": "Jusqu’à présent les demandes suivantes, mises en place d’un point de vue didactique d’un professeur universitaire, ont été implementés à arsnova.click:",
         "requirements": {
           "1": "Protéction des données absolue: aucunes données personelles sur le serveur, toutes données du quiz se trouvent sur le browser du concepteur/de la conceptrice du quiz (<a href='http://www.w3schools.com/html/html5_webstorage.asp' target='_blank'>HTML5 Local Storage</a>)",
-          "2": "Pas d'inscription, pas de connexion, pas d'installation, pas de frais",
-          "3": "La même page de démarrage ARSnova.click pour les deux rôles: quizmaster et candidat/e",
+          "2": "Pas d’inscription, pas de connexion, pas d’installation BYOD), pas de pub, gratuit",
+          "3": "La même page de démarrage arsnova.click pour les deux rôles: quizmaster et candidat/e",
           "4": "Chacun a le droit d'élaborer des quiz: tout de suite et autant qu'il veut!",
-          "5": "La surface d'utilisation est extrement facile et vidéo-projetable",
-          "6": "Formule <a href='https://de.wikipedia.org/wiki/TeX' target='_blank'>TeX</a> et mise en forme de textes avec <a href='https://guides.github.com/features/mastering-markdown/' target='_blank'>Markdown</a> pour les options de questions et réponses",
-          "7": "Dans une seule page de nombreuses options de réponse sous forme de choix multiple, choix simple ou sondage",
-          "8": "Édumusement: plaisir d'apprendre par la compétition en direct avec son, contre la montre et les autres joueurs/joueuses",
+          "5": "Une surface d’utilisation extrêmement facile, accessible à tous, video-projetable et complètement traduite en anglais, espagnol et francais",
+          "6": "Formats de question: choix simple/multiple (avec des options de réponses sans limite), question d’estimation, réponse courte, sondage",
+          "7": "Formule <a href='https://fr.wikipedia.org/wiki/TeX' target='_blank'>TeX</a> et mise en forme de textes avec <a href='https://guides.github.com/features/mastering-markdown/' target='_blank'>Markdown</a> et vidéos encastrées dans l’énoncé de la question et les options de réponses",
+          "8": "Édumusement: motivation d’apprendre par la compétition en direct avec son, contre la montre et les autres joueurs/joueuses",
           "9": "<a href='https://de.wikipedia.org/wiki/Responsive_Webdesign' target='_blank'>Design du web réactif</a>: peu importe si smartphone ou grand-écran, le design est converti grâce à <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>",
           "10": "La plus moderne et réactive des technologies web: <a href='https://www.meteor.com' target='_blank'>Meteor</a>",
           "11": "<a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a>"
@@ -63,14 +63,14 @@
       },
       "tos": {
         "title": "Conditions générales",
-        "declaration": "Tout le monde a le droit d'utiliser l'application ARSnova.click pour ses propres besoins, tant que les lois allemandes et européennes ne soit pas transgressées.",
+        "declaration": "Tout le monde a le droit d’utiliser l’application quiz arsnova.click pour ses propres besoins, tant que les lois allemandes et européennes ne soit pas transgressées.",
         "license": {
           "title": "Licence",
-          "text": "ARSnova.click est un service web gratuit (software comme service). Ce logiciel est <a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a> et est sous la <a href='http://www.gnu.org/licenses/gpl-3.0-standalone.html' target='_blank'>GNU General Public License Version 3</a>."
+          "text": "arsnova.click es tun service web gratuit (software comme service). Le logiciel est <a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a> et est sous la license <a href='http://www.gnu.org/licenses/gpl-3.0-standalone.html' target='_blank'>GNU General Public Version 3</a>."
         },
         "warranty": {
           "title": "Garantie",
-          "text": "Nous nous sommes efforcés d'exploiter le service en ligne ARSnova.click afin qu'il soit fiable et sans bug, par contre nous ne pouvons pas le garantir. Toutes les données du quiz se trouvent exclusivement dans la mémoire du browser du créateur/de la créatrice du quiz. Nous déclinons toute responsabilité quant à la perte des données, par exemple par l'effacement de la mémoire du browser ou par l'utilisation illégale du service."
+          "text": "Nous nous sommes efforcés d'exploiter le service en ligne arsnova.click afin qu'il soit fiable et sans bug, par contre nous ne pouvons pas le garantir. Toutes les données du quiz se trouvent exclusivement dans la mémoire du browser du créateur/de la créatrice du quiz. Nous déclinons toute responsabilité quant à la perte des données, par exemple par l'effacement de la mémoire du browser sans avoir exporté les quiz ou par l'utilisation illégale du service."
         }
       },
       "data_privacy": {
@@ -133,33 +133,33 @@
       "reset_session_confirmation": {
         "title": "Finir le quiz?",
         "text": {
-          "running_question": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
-          "empty_lobby": "You will be logged out. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
-          "continue": "Proceed?"
+          "running_question": "Tous les participants seront déconnectés. Le classement sera supprimé. Ton quiz avec tout 	ses paramètres reste dans ce browser, tant qu'il n'est pas réinitialisé.",
+          "empty_lobby": "Ton quiz avec tous ses paramètres reste dans ce browser, tant qu’il n’est pas réinitialisé.",
+          "continue": "Continuer?"
         }
       },
       "connection_status": {
-        "title": "Statut de connexion",
+        "title": "Statut de connection",
         "show_result": "Détails",
-        "pending": "En attendant...",
-        "finished_with_errors": "Fini avec des erreurs",
-        "finished_with_warnings": "Fini avec des avertissements",
-        "finished_without_warnings": "Réussi",
+        "pending": "Vérifie...",
+        "finished_with_errors": "Terminé avec des erreurs",
+        "finished_with_warnings": "Terminé avec des alertes",
+        "finished_without_warnings": "Avec succès",
         "websocket_status": {
-          "connected": "connecté",
-          "disconnected": "coupé"
+          "connected": "Connecté",
+          "disconnected": "Déconnecté"
         },
         "localStorage_status": {
-          "writable": "inscriptibles",
-          "non_writable": "non inscriptible"
+          "writable": "descriptible",
+          "non_writable": "indescriptible"
         },
         "sessionStorage_status": {
-          "writable": "inscriptibles",
-          "non_writable": "non inscriptible"
+          "writable": "descriptible",
+          "non_writable": "indescriptible"
         },
         "dbConnection_status": {
-          "very_slow": "très lentement",
-          "slow": "pauvre",
+          "very_slow": "très lent",
+          "slow": "lent",
           "ok": "bien"
         }
       }
@@ -167,25 +167,25 @@
   },
   "view": {
     "answeroptions": {
-      "title": "2/4 Définir des réponses",
+      "title": "2/4 Définir les réponses",
       "answeroptiontext_placeholder": "Option de réponse",
       "correct": "Vrai",
       "wrong": "Faux",
       "ranged_question": {
-        "title": "Fourchette de réponses justes",
+        "title": "Intervalle des réponses correctes",
         "correct_value": "Valeur correcte",
         "min_range": "Valeur minimale",
         "max_range": "Valeur maximale"
       },
       "free_text_question": {
-        "title": "Texte libre réponse",
-        "config_case_sensitive": "Respecter les majuscules et minuscules",
-        "config_trim_whitespaces": "Observer les espaces blancs dans la réponse",
-        "config_use_keywords": "Observez la séquence des mots",
-        "config_use_punctuation": "Observer les signes de ponctuation",
+        "title": "Réponse correcte:",
+        "config_case_sensitive": "Respecter l’emploi de minuscule/majuscule",
+        "config_trim_whitespaces": "Respecter les espaces dans les réponses",
+        "config_use_keywords": "Respecter l’ordre des mots",
+        "config_use_punctuation": "Respecter la ponctuation dans les réponses",
         "onText": "Oui",
         "offText": "Non",
-        "text_placeholder": "Entrez votre réponse ici"
+        "text_placeholder": "Donne la réponse ici"
       }
     },
     "choose_nickname": {
@@ -196,8 +196,8 @@
       "nickname_too_long": "Ce pseudo est trop long",
       "nickname_too_short": "Ce pseudo est trop court",
       "no_selectable_nick_available": {
-        "1": "Tous les surnoms disponibles ont été choisis.",
-        "2": "Il est impossible de se joindre au quiz."
+        "1": "Tous les pseudos disponibles ont déjà été choisis.",
+        "2": "Une participation au quiz n’est pas possible."
       }
     },
     "hashtag_management": {
@@ -228,8 +228,8 @@
       }
     },
     "leaderboard": {
-      "header": "Leaderboard",
-      "global_header": "Leaderboard mondiale",
+      "header": "Classement",
+      "global_header": "Classement général",
       "title": {
         "single_question": "Question __questionId__ - Ils/Elles ont juste...",
         "all_questions": "Ils/Elles ont tout juste..."
@@ -271,47 +271,47 @@
       "title": "Lobby du quiz",
       "yes": "Oui",
       "no": "Non",
-      "ready": "Prêt/e pour le quiz",
+      "ready": "Attendre que ca commence...",
       "show_more": "Montre 1 de plus",
       "show_more_plural": "Montre %s de plus",
       "start_quiz": "C'est parti!",
       "kick_member_confirmation": "Veux-tu supprimer la personne '<span id=\"nickName\"></span>' du quiz?",
-      "add_kicked_member_to_ban_list": "Bannir le pseudo de manière permanente",
+      "add_kicked_member_to_ban_list": "Bânir ce pseudo à jamais",
       "waiting_for_players": "En attente de joueurs..."
     },
     "nickname_categories": {
-      "title": "Limite disponibles surnoms",
-      "save": "Sauvegarder",
-      "available_nicknames": "Surnoms disponibles",
-      "choose_all": "Sélectionner tout",
+      "title": "Attribuer des pseudos",
+      "save": "Enregistrer",
+      "available_nicknames": "Pseudos disponibles",
+      "choose_all": "Tout sélectionner",
       "remove_all": "Enlever tout",
       "free_choice": "Choix libre",
-      "chosen_nicknames": "Surnoms sélectionnés",
-      "no_nicks_selected": "Aucun surnoms sélectionnés. Tous les noms sont autorisés.",
+      "chosen_nicknames": "Pseudos sélectionnés",
+      "no_nicks_selected": "Pas de pseudos sélectionnés, ainsi les participants peuvent choisir leur pseudo de manière 	libre.",
       "block_illegal_nicks": "Bloquer surnoms inappropriés",
       "category": {
-        "disney": "Disney",
+        "disney": "Caractères Disney",
         "science": "Science",
-        "fantasy": "Fantaisie",
+        "fantasy": "Fantasy",
         "literature": "Littérature",
         "mythology": "Mythologie",
-        "actor": "Acteurs",
-        "politics": "Politiciens"
+        "actor": "Spectacle",
+        "politics": "Politique"
       }
     },
     "questions": {
-      "title": "1/4 Entrez texte de la question",
-      "enter_question_here": "Entre la question",
+      "title": "1/4 Entrer le texte de la question",
+      "enter_question_here": "Donne ici le texte de la question",
       "format": "Format",
       "edit": "Modifier",
       "preview": "Aperçu",
-      "single_choice_question": "Question choix simple (une seule réponse est juste)",
-      "single_choice_question_yes_no": "Oui-Aucune question à choix unique",
-      "single_choice_question_true_false": "Question Vrai-Faux Single-Choix",
+      "single_choice_question": "Question choix simple (parmi toutes, une réponse est correcte)",
+      "single_choice_question_yes_no": "Question Oui|Non",
+      "single_choice_question_true_false": "Question Vrai|Faux",
       "multiple_choice_question": "Question choix multiple (une ou plusieurs réponses sont justes)",
       "survey_question": "Sondage (Réponses ne sont ni vrai ni fausse)",
-      "ranged_question": "Question d'éstimation (Réponses comprises dans la fourchette donné sont justes)",
-      "free_text_question": "Texte libre question (réponse est correcte, conformément à l'échantillon fourni)"
+      "ranged_question": "Question d’estimation (chiffres dans la fourchette de valeur sont correctes)",
+      "free_text_question": "Réponse courte (texte correcte si identique aux prescriptions)"
     },
     "quiz_summary": {
       "title": "4/4 Résumé",
@@ -328,8 +328,8 @@
       "type": "Type",
       "answer": "Réponse",
       "answer_plural": "Réponses",
-      "answer_configuration": "La configuration de la réponse",
-      "answer_configuration_plural": "La configuration des réponses",
+      "answer_configuration": "Configuration de la réponse",
+      "answer_configuration_plural": "Configuration des réponses",
       "timer": "Compte à rebours",
       "second": "seconde",
       "second_plural": "secondes",
@@ -342,22 +342,22 @@
         "reasons": {
           "question_text_too_small": "Texte de la question est trop court",
           "question_text_too_long": "Texte de la question est trop long",
-          "timer_too_small": "Minuterie est trop courte",
-          "timer_too_big": "Minuterie est trop longue",
-          "no_valid_answers": "Au moins une réponse juste doit être donnée",
-          "one_valid_answer_required": "Exactement une réponse doit être juste",
-          "no_valid_answer_required": "Aucune réponse juste ne doit être donnée",
+          "timer_too_small": "Le compte à rebours est trop court",
+          "timer_too_big": "Le compte à rebours est trop long",
+          "no_valid_answers": "Au minimum une réponse doit être identifiée comme correcte",
+          "one_valid_answer_required": "Exactement une réponse doit être identifiée comme correcte",
+          "no_valid_answer_required": "Dans un sondage, les réponses ne sont ni correctes ni fausses",
           "invalid_range": "La valeur minimale doit être inférieure à la valeur maximale",
-          "invalid_correct_value": "La réponse juste doit être comprise dans la fourchette de valeurs",
-          "answer_text_empty": "Texte de réponse doit être rempli"
+          "invalid_correct_value": "La valeur correcte doit être comprise dans la fourchette des valeurs",
+          "answer_text_empty": "Le texte de la réponse ne doit pas être vide"
         }
       },
       "edit_quiz": "Modifier quiz",
       "start_quiz": "Commencer quiz",
-      "selected_nicks": "Surnoms valides",
-      "no_selected_nicks": "Aucun surnoms sélectionnés. Tous les noms sont valides.",
-      "hide_selected_nicks": "Masquer les surnoms",
-      "show_selected_nicks": "Afficher les surnoms"
+      "selected_nicks": "Pseudos attribués",
+      "no_selected_nicks": "Pas de pseudos attribués. Tous les noms sont autorisés.",
+      "hide_selected_nicks": "Cache pseudos",
+      "show_selected_nicks": "Montre pseudos"
     },
     "theme_switcher": {
       "set_theme": "Choisir un style",
@@ -369,7 +369,7 @@
         },
         "elegant": {
           "name": "Élégant",
-          "description": "Thème élégant pour quizzers sophistiqués."
+          "description": "Pour des tournées de quiz exigeantes."
         },
         "thm": {
           "name": "THM (beamer-adapté)",
@@ -377,31 +377,31 @@
         },
         "arsnova": {
           "name": "arsnova.eu (beamer-adapté)",
-          "description": "Vous connaissez arsnova.eu? Sentez-vous la maison!"
+          "description": "Tu connais arsnova.eu? Fais comme chez toi!"
         },
         "black_beauty": {
-          "name" : "Style par défaut (beamer-adapté)",
-          "description": "Sombre, plus sombre et plus sombre encore."
+          "name" : "Beauté noire",
+          "description": "sombre, plus sombre et encore plus sombre."
         },
         "living_room": {
           "name" : "Salon",
-          "description": "Ambiance lumineuse Salon."
+          "description": "Atmosphère de salon lumineux."
         },
         "bluetouch": {
           "name": "Sous la mer",
-          "description": "Un style bleu foncé avec des accents lumineux."
+          "description": "Bleu profond avec accents clairs."
         },
         "green": {
           "name": "Vert simple",
-          "description": "Un style vert simple."
+          "description": "Simplement vert."
         },
         "action": {
-          "name": "Foudre",
-          "description": "Pour Questionnaires rapide et furieux."
+          "name": "Éclair",
+          "description": "Pour des tournées de quiz rapides et sauvages."
         },
         "psychology": {
-          "name": "Un peu original",
-          "description": "Rose mélangé avec des couleurs subtiles."
+          "name": "Années 50",
+          "description": "Vieux rose mélangé avec des couleurs délicates."
         }
       }
     },
@@ -426,8 +426,8 @@
         "input_placeholder": "Réponse"
       },
       "free_text_question": {
-        "title": "Fournir votre réponse!",
-        "input_placeholder": "Répondre"
+        "title": "Donne ta réponse!",
+        "input_placeholder": "Réponse"
       }
     }
   },
@@ -451,13 +451,13 @@
         "youtube": "YouTube",
         "vimeo": "Vimeo"
       },
-      "info_content": "Tu peux caractériser des textes sur ARSnova à l'aide de <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a>. Les options de Markdown les plus utilisées sont présentées sous forme d'icônes au dessus du champ de saisie dans la barre de tâches. De plus, ARSnova soutient <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
+      "info_content": "Tu peux caractériser des textes à l'aide de <a target='_blank' class='hyperlink' href='https://fr.wikipedia.org/wiki/Markdown'>Markdown</a>. Les options de Markdown les plus utilisées sont présentées sous forme d'icônes au dessus du champ de saisie. De plus, arsnova.click soutient <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
     },
     "sound": {
-      "title": "Son du compte à rebours",
+      "title": "Son pendant le compte à rebours",
       "lobby_music": "Son dans le hall quiz",
-      "volume": "Volume",
-      "inactive": "Son inactif",
+      "volume": "Attribuer le volume",
+      "inactive": "Son désactivé",
       "active": "Son activé"
     },
     "splashscreen": {
@@ -467,16 +467,16 @@
         "error_messages": {
           "Internal Server Error": "Erreur interne du serveur",
           "update_failed": "Il y a eu une erreur pendant l'actualisation de ta question.",
-          "session_exists": "Cette session existe déjà!",
-          "session_exists_warning": "Cette session existe déjà sur le serveur!",
-          "session_exists_new": "Un nouveau nom doit être donné afin de pouvoir importer les données:",
-          "session_not_exists": "Cette session n'existe pas!",
+          "session_exists": "Ce quiz existe déjà!",
+          "session_exists_warning": "Le nom de ce quiz est déjà utilisé!",
+          "session_exists_new": "Donne un nouveau:",
+          "session_not_exists": "Ce quiz n’existe pas!",
           "hashtag_exists": "Ce nom de quiz existe déjà!",
           "session_not_available": "Cette tournée de quiz ne peut actuellement pas être rejointe.",
-          "private_browsing": "En mode privé de ton browser, ARSnova.click ne fonctionne malheureusement qu'en tant que participant/e, parce que ton browser refuse la description de la mémoire de l'application. Désactive le mode privé du browser pendant la durée d'utilisation de ARSnova.click et rafraîchis le site. Même avec le mode privé désactivé ton anonymat reste maintenu.",
+          "private_browsing": "En mode privé de ton browser, arsnova.click ne fonctionne malheureusement qu'en tant que participant/e, parce que ton browser refuse la description de la mémoire de l'application. S’il te plaît, désactive le mode privé du browser pendant la durée d'utilisation de arsnova.click et rafraîchis le site. Ton anonymat reste maintenu même avec le mode privé désactivé.",
           "kicked_from_quiz": "Tu as été radié du quiz!",
-          "export_failed": "Ne pouvait pas exporter les données! - %s",
-          "not_authorized": "Soit ce quiz n'existe pas, soit tu n'as pas le droit de lecture.",
+          "export_failed": "Les données du quiz ne pouvaient pas être exportées! - %s",
+          "not_authorized": "Soit ce quiz n’existe pas, soit tu n’as pas le droit de lire ces données.",
           "maximum_answer_options_exceeded": "Le nombre maximale d'options de réponse est déjà atteint",
           "hashtag_not_found": "Le nom de ce quiz est malheureusement introuvable",
           "member_not_found": "Le participant est malheureusement introuvable",
@@ -485,8 +485,8 @@
           "response_timeout": "Le compte à rebours est échu",
           "insert_leaderboard_failed": "Erreur pendant l'intégration de la réponse dans le classement",
           "session_closed": "La tournée de quiz est terminée",
-          "invalid_data": "Les données importées sont caduques ou défecteuses!",
-          "invalid_input_data": "Les données saisies est soit invalide ou l'accès est refusé!"
+          "invalid_data": "Les données à importer sont défectueuses!",
+          "invalid_input_data": "Les données entrées sont non conformes ou défectueuses!"
         }
       }
     }

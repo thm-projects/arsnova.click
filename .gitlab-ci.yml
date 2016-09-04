@@ -69,6 +69,7 @@ deploy_staging:
     - mkdir ~/.ssh && echo "$STAGING_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - ssh-add <(echo "$STAGING_SSH_PRIVATE_KEY")
     - scp -r "$PROJECT_PATH/build/bundle/"* "$STAGING_SSH_URL"
+  environment: staging
 
 deploy_production:
   stage: deploy
@@ -84,6 +85,7 @@ deploy_production:
     - mkdir ~/.ssh && echo "$PRODUCTION_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - ssh-add <(echo "$PRODUCTION_SSH_PRIVATE_KEY")
     - scp -r "$PROJECT_PATH/build/bundle/"* "$PRODUCTION_SSH_URL"
+  environment: production
 
 sync_mirror:
   stage: deploy
@@ -99,3 +101,4 @@ sync_mirror:
     - git clone --bare "$CI_BUILD_REPO" mirror.git
     - cd mirror.git
     - git push --mirror "$MIRROR_REPO"
+  environment: GitHub

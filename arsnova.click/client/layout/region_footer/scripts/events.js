@@ -111,14 +111,14 @@ const clickEvents = {
 				}
 
 				if (!HashtagsCollection.findOne({hashtag: questionInstance.getHashtag()})) {
+					Meteor.call('SessionConfiguration.setMusic', questionInstance.getConfiguration().getMusicSettings());
+					Meteor.call('SessionConfiguration.setNicks', questionInstance.getConfiguration().getNickSettings());
+					Meteor.call('SessionConfiguration.setTheme', questionInstance.getHashtag(), questionInstance.getConfiguration().getTheme());
+					Meteor.call('SessionConfiguration.setReadingConfirmationEnabled', questionInstance.getHashtag(), questionInstance.getConfiguration().getReadingConfirmationEnabled());
+
 					Meteor.call('HashtagsCollection.addHashtag', {
 						privateKey: localData.getPrivateKey(),
-						hashtag: questionInstance.getHashtag(),
-						musicVolume: questionInstance.getMusicVolume(),
-						musicEnabled: questionInstance.getMusicEnabled(),
-						musicTitle: questionInstance.getMusicTitle(),
-						selectedNicks: questionInstance.getSelectedNicks(),
-						theme: questionInstance.getTheme()
+						hashtag: questionInstance.getHashtag()
 					}, function (err) {
 						if (err) {
 							new ErrorSplashscreen({
@@ -156,14 +156,13 @@ const clickEvents = {
 								}
 								questionInstance.setHashtag(hashtag);
 
+								Meteor.call('SessionConfiguration.setMusic', questionInstance.getConfiguration().getMusicSettings());
+								Meteor.call('SessionConfiguration.setNicks', questionInstance.getConfiguration().getNickSettings());
+								Meteor.call('SessionConfiguration.setTheme', questionInstance.getHashtag(), questionInstance.getConfiguration().getTheme());
+								Meteor.call('SessionConfiguration.setReadingConfirmationEnabled', questionInstance.getHashtag(), questionInstance.getConfiguration().getReadingConfirmationEnabled());
 								Meteor.call('HashtagsCollection.addHashtag', {
 									privateKey: localData.getPrivateKey(),
-									hashtag: questionInstance.getHashtag(),
-									musicVolume: questionInstance.getMusicVolume(),
-									musicEnabled: questionInstance.getMusicEnabled(),
-									musicTitle: questionInstance.getMusicTitle(),
-									selectedNicks: questionInstance.getSelectedNicks(),
-									theme: questionInstance.getTheme()
+									hashtag: questionInstance.getHashtag()
 								});
 								localData.addHashtag(questionInstance);
 								if (Router.current().route.path() === "/hashtagmanagement") {

@@ -85,14 +85,13 @@ export function connectEventManager(hashtag) {
 }
 
 export function addHashtag(questionGroup) {
+	Meteor.call('SessionConfiguration.setMusic', questionGroup.getConfiguration().getMusicSettings());
+	Meteor.call('SessionConfiguration.setNicks', questionGroup.getConfiguration().getNickSettings());
+	Meteor.call('SessionConfiguration.setTheme', questionGroup.getHashtag(), questionGroup.getConfiguration().getTheme());
+	Meteor.call('SessionConfiguration.setReadingConfirmationEnabled', questionGroup.getHashtag(), questionGroup.getConfiguration().getReadingConfirmationEnabled());
 	Meteor.call('HashtagsCollection.addHashtag', {
 		privateKey: localData.getPrivateKey(),
-		hashtag: questionGroup.getHashtag(),
-		musicVolume: questionGroup.getMusicVolume(),
-		musicEnabled: questionGroup.getMusicEnabled(),
-		musicTitle: questionGroup.getMusicTitle(),
-		theme: questionGroup.getTheme(),
-		selectedNicks: questionGroup.getSelectedNicks()
+		hashtag: questionGroup.getHashtag()
 	}, function (err) {
 		if (!err) {
 			localData.addHashtag(questionGroup);

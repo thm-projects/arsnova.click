@@ -151,7 +151,7 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 		}
 
 		if (item.id === "nicknames" && typeof Session.get("questionGroup") !== "undefined") {
-			if (Session.get("questionGroup").getSelectedNicks().length === 0) {
+			if (Session.get("questionGroup").getConfiguration().getNickSettings().getSelectedValues().length === 0) {
 				$('#nicknames').removeClass("success").find(".footerElemText").find("span").text(TAPi18n.__("view.nickname_categories.free_choice"));
 			} else {
 				$('#nicknames').addClass("success").find(".footerElemText").find("span").text(TAPi18n.__("region.footer.footer_bar.nicknames"));

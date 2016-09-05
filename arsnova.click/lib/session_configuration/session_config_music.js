@@ -20,7 +20,7 @@ const volume = Symbol("volume");
 const title = Symbol("title");
 
 export class MusicSessionConfiguration {
-	constructor (options) {
+	constructor (options = {}) {
 		this[isEnabled] = options.isEnabled || [];
 		this[volume] = options.volume || true;
 		this[title] = options.title || false;

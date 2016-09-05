@@ -20,7 +20,7 @@ const blockIllegal = Symbol("blockIllegal");
 const restrictToCASLogin = Symbol("restrictToCASLogin");
 
 export class NickSessionConfiguration {
-	constructor (options) {
+	constructor (options = {}) {
 		this[selectedValues] = options.selectedValues || [];
 		this[blockIllegal] = options.blockIllegal || true;
 		this[restrictToCASLogin] = options.restrictToCASLogin || false;

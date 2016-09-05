@@ -56,7 +56,9 @@ export class AbstractQuestionGroup {
 			}
 		}
 		this[hashtag] = options.hashtag;
-		this[sessionConfig] = options.sessionConfiguration || new SessionConfiguration();
+		this[sessionConfig] = options.sessionConfiguration || new SessionConfiguration({
+			hashtag: options.hashtag
+		});
 	}
 
 	/**

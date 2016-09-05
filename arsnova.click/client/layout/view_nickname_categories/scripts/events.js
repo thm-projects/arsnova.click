@@ -24,7 +24,7 @@ import * as localData from '/lib/local_storage.js';
 Template.nicknameCategories.events({
 	"click #forwardButton": function () {
 		if (localStorage.getItem("lastPage") === ":quizName.memberlist") {
-			Meteor.call("HashtagsCollection.setSelectedNicks", Router.current().params.quizName, Session.get("questionGroup").getSelectedNicks());
+			Meteor.call("HashtagsCollection.setSelectedNicks", Router.current().params.quizName, Session.get("questionGroup").getConfiguration().getNickSettings().getSelectedValues());
 		}
 		history.back();
 	},

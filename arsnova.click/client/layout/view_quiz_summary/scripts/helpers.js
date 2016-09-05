@@ -97,7 +97,7 @@ Template.quizSummary.helpers({
 			return;
 		}
 		let result = "";
-		NicknameCategoriesCollection.find({nick: {$in: Session.get("questionGroup").getSelectedNicks()}}, {sort: {nick: 1}}).fetch().forEach(function (item) {
+		NicknameCategoriesCollection.find({nick: {$in: Session.get("questionGroup").getConfiguration().getNickSettings().getSelectedValues()}}, {sort: {nick: 1}}).fetch().forEach(function (item) {
 			result += item.nick + ", ";
 		});
 		return result.slice(0, result.length - 2);
@@ -106,7 +106,7 @@ Template.quizSummary.helpers({
 		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getSelectedNicks().length === 0;
+		return Session.get("questionGroup").getConfiguration().getNickSettings().getSelectedValues().length === 0;
 	},
 	getShowSelectedNicksText: function () {
 		if (Session.get("showSelectedNicks") === true) {
@@ -119,7 +119,7 @@ Template.quizSummary.helpers({
 		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getSelectedNicks().length;
+		return Session.get("questionGroup").getConfiguration().getNickSettings().getSelectedValues().length;
 	},
 	isVotingQuestion: function (questionType) {
 		return questionType === "SurveyQuestion";

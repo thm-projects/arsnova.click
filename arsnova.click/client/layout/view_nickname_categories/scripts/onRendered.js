@@ -30,7 +30,7 @@ Template.nicknameCategories.onRendered(function () {
 
 	lib.formatBootstrapSwitch();
 	lib.setFormatBootstrapSwitchTracker(Tracker.autorun(function () {
-		if (Session.get("questionGroup").getSelectedNicks().length === 0) {
+		if (Session.get("questionGroup").getConfiguration().getNickSettings().getSelectedValues().length === 0) {
 			setTimeout(function () {
 				lib.formatBootstrapSwitch();
 			}, 30);

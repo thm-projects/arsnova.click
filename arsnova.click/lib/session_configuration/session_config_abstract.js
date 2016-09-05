@@ -25,7 +25,7 @@ const theme = Symbol("theme");
 const readingConfirmationEnabled = Symbol("readingConfirmationEnabled");
 
 export class AbstractSessionConfiguration {
-	constructor(options) {
+	constructor (options) {
 		if (this.constructor === AbstractSessionConfiguration) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
@@ -45,22 +45,22 @@ export class AbstractSessionConfiguration {
 		this[readingConfirmationEnabled] = options.readingConfirmationEnabled || true;
 	}
 
-	serialize() {
+	serialize () {
 		return {
 			hashtag: this.getHashtag(),
 			music: this.getMusicSettings().serialize(),
 			nicks: this.getNickSettings().serialize(),
 			theme: this.getTheme(),
 			readingConfirmationEnabled: this.getReadingConfirmationEnabled()
-		}
+		};
 	}
 
-	equals(value) {
+	equals (value) {
 		return this.getHashtag() === value.getHashtag() &&
 				this.getMusicSettings().equals(value.getMusicSettings()) &&
 				this.getNickSettings().equals(value.getNickSettings()) &&
 				this.getTheme() === value.getTheme() &&
-				this.getReadingConfirmationEnabled() === value.getReadingConfirmationEnabled()
+				this.getReadingConfirmationEnabled() === value.getReadingConfirmationEnabled();
 	}
 
 	/**
@@ -73,49 +73,49 @@ export class AbstractSessionConfiguration {
 		return this.serialize();
 	}
 
-	getHashtag() {
+	getHashtag () {
 		return this[hashtag];
 	}
 
-	setHashtag(value) {
+	setHashtag (value) {
 		this[hashtag] = value;
 	}
 
-	getTheme() {
+	getTheme () {
 		return this[theme];
 	}
 
-	setTheme(value) {
+	setTheme (value) {
 		this[theme] = value;
 	}
 
-	getMusicSettings() {
+	getMusicSettings () {
 		return this[music];
 	}
 
-	setMusicSettings(value) {
+	setMusicSettings (value) {
 		if (value instanceof Object && !(value instanceof MusicSessionConfiguration)) {
 			value = new MusicSessionConfiguration(value);
 		}
 		this[music] = value;
 	}
 
-	getNickSettings() {
+	getNickSettings () {
 		return this[nicks];
 	}
 
-	setNickSettings(value) {
+	setNickSettings (value) {
 		if (value instanceof Object && !(value instanceof NickSessionConfiguration)) {
 			value = new NickSessionConfiguration(value);
 		}
 		this[nicks] = value;
 	}
 
-	getReadingConfirmationEnabled() {
+	getReadingConfirmationEnabled () {
 		return this[readingConfirmationEnabled];
 	}
 
-	setReadingConfirmationEnabled(value) {
+	setReadingConfirmationEnabled (value) {
 		this[readingConfirmationEnabled] = value;
 	}
 }

@@ -15,12 +15,19 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {EJSON} from 'meteor/ejson';
+import {AbstractSessionConfiguration} from './session_config_abstract.js';
+
 export class SessionConfiguration extends AbstractSessionConfiguration {
-	constructor(options) {
+	constructor (options) {
 		super(options);
 	}
 
-	typeName() {
+	clone () {
+		return new SessionConfiguration(this.serialize());
+	}
+
+	typeName () {
 		return "SessionConfiguration";
 	}
 }

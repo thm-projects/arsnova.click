@@ -20,6 +20,7 @@ import {hashtagSchema} from '/lib/hashtags/collection.js';
 import {AbstractQuestion} from './question_abstract.js';
 import {questionReflection} from "./question_reflection.js";
 import {SingleChoiceQuestion} from './question_choice_single.js';
+import {SessionConfiguration} from '../session_configuration/session_config.js';
 
 const hashtag = Symbol("hashtag");
 const questionList = Symbol("questionList");
@@ -117,6 +118,14 @@ export class AbstractQuestionGroup {
 		return this[questionList];
 	}
 
+	getConfiguration () {
+		return this[sessionConfig];
+	}
+
+	setConfiguration (value) {
+		this[sessionConfig] = value;
+	}
+
 	/**
 	 * Serialize the instance object to a JSON compatible object
 	 * @returns {{hashtag: String, type: String, questionList: Array}}
@@ -127,12 +136,7 @@ export class AbstractQuestionGroup {
 		return {
 			hashtag: this.getHashtag(),
 			questionList: questionListSerialized,
-			theme: this.getTheme(),
-			musicVolume: this.getMusicVolume(),
-			musicEnabled: this.getMusicEnabled(),
-			musicTitle: this.getMusicTitle(),
-			selectedNicks: this.getSelectedNicks(),
-			blockIllegalNicks: this.getBlockIllegalNicks()
+			configuration: this.getConfiguration()
 		};
 	}
 
@@ -160,14 +164,7 @@ export class AbstractQuestionGroup {
 	equals (questionGroup) {
 		if (questionGroup instanceof AbstractQuestionGroup) {
 			if (questionGroup.getHashtag() !== this.getHashtag() ||
-				questionGroup.getTheme() !== this.getTheme() ||
-				questionGroup.getSelectedNicks() !== this.getSelectedNicks() ||
-				questionGroup.getBlockIllegalNicks() !== this.getBlockIllegalNicks()) {
-				return false;
-			}
-			if (questionGroup.getMusicEnabled() !== this.getMusicEnabled() ||
-				questionGroup.getMusicTitle() !== this.getMusicTitle() ||
-				questionGroup.getMusicVolume() !== this.getMusicVolume()) {
+				!questionGroup.getConfiguration().equals(this.getConfiguration())) {
 				return false;
 			}
 			if (questionGroup.getQuestionList().length === this.getQuestionList().length) {

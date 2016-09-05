@@ -31,7 +31,7 @@ export class MusicSessionConfiguration {
 			isEnabled: this.isEnabled(),
 			volume: this.getVolume(),
 			title: this.getTitle()
-		}
+		};
 	}
 
 	equals (value) {

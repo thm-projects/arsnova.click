@@ -31,7 +31,7 @@ export class NickSessionConfiguration {
 			selectedValues: this.getSelectedValues(),
 			blockIllegal: this.getBlockIllegal(),
 			restrictToCASLogin: this.getRestrictToCASLogin()
-		}
+		};
 	}
 
 	equals (value) {

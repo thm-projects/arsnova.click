@@ -19,7 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 
 Meteor.methods({
-	"SessionConfiguration.setMusic", function(configObject) {
+	"SessionConfiguration.setMusic": function (configObject) {
 		if (Meteor.isClient) {
 			configObject = configObject.serialize();
 		}
@@ -27,7 +27,7 @@ Meteor.methods({
 		delete configObject.hashtag;
 		SessionConfigurationCollection.update(hashtag, {$set: {"music": configObject}});
 	},
-	"SessionConfiguration.setNicks", function(configObject) {
+	"SessionConfiguration.setNicks": function (configObject) {
 		if (Meteor.isClient) {
 			configObject = configObject.serialize();
 		}
@@ -35,10 +35,10 @@ Meteor.methods({
 		delete configObject.hashtag;
 		SessionConfigurationCollection.update(hashtag, {$set: {"nicks": configObject}});
 	},
-	"SessionConfiguration.setTheme", function(hashtag, theme) {
+	"SessionConfiguration.setTheme": function (hashtag, theme) {
 		SessionConfigurationCollection.update(hashtag, {$set: {"theme": theme}});
 	},
-	"SessionConfiguration.setReadingConfirmationEnabled", function(hashtag, readingConfirmationEnabled) {
+	"SessionConfiguration.setReadingConfirmationEnabled": function (hashtag, readingConfirmationEnabled) {
 		SessionConfigurationCollection.update(hashtag, {$set: {"readingConfirmationEnabled": readingConfirmationEnabled}});
 	}
 });

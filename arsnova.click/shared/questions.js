@@ -19,6 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {QuestionGroupCollection, questionGroupSchema, questionTextSchema, timerSchema} from '/lib/questions/collection.js';
 import {EventManagerCollection, questionIndexSchema} from '/lib/eventmanager/collection.js';
 
@@ -37,6 +38,7 @@ Meteor.methods({
 			QuestionGroupCollection.update(query, questionGroup);
 		} else {
 			QuestionGroupCollection.insert(questionGroup);
+			SessionConfigurationCollection.insert(questionGroup.configuration);
 			for (let i = 0; i < questionGroup.questionList.length; i++) {
 				const questionItem = questionGroup.questionList[i];
 				for (let j = 0; j < questionItem.answerOptionList.length; j++) {

@@ -27,7 +27,7 @@ Meteor.methods({
 		}
 		const hashtag = configObject.hashtag;
 		delete configObject.hashtag;
-		SessionConfigurationCollection.update(hashtag, {$set: {"music": configObject}});
+		SessionConfigurationCollection.update(hashtag, {$set: {"music": configObject}}, {upsert: true});
 	},
 	"SessionConfiguration.setNicks": function (configObject) {
 		if (Meteor.isClient && configObject instanceof NickSessionConfiguration) {
@@ -35,12 +35,12 @@ Meteor.methods({
 		}
 		const hashtag = configObject.hashtag;
 		delete configObject.hashtag;
-		SessionConfigurationCollection.update(hashtag, {$set: {"nicks": configObject}});
+		SessionConfigurationCollection.update(hashtag, {$set: {"nicks": configObject}}, {upsert: true});
 	},
 	"SessionConfiguration.setTheme": function (hashtag, theme) {
-		SessionConfigurationCollection.update(hashtag, {$set: {"theme": theme}});
+		SessionConfigurationCollection.update(hashtag, {$set: {"theme": theme}}, {upsert: true});
 	},
 	"SessionConfiguration.setReadingConfirmationEnabled": function (hashtag, readingConfirmationEnabled) {
-		SessionConfigurationCollection.update(hashtag, {$set: {"readingConfirmationEnabled": readingConfirmationEnabled}});
+		SessionConfigurationCollection.update(hashtag, {$set: {"readingConfirmationEnabled": readingConfirmationEnabled}}, {upsert: true});
 	}
 });

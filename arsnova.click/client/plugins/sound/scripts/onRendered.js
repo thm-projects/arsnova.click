@@ -27,20 +27,20 @@ Template.soundConfig.onRendered(function () {
 	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 	console.log(configDoc);
-	Session.set("slider2", hashtagDoc.musicVolume);
+	Session.set("slider2", configDoc.music.volume);
 	if (buzzsound1 == null) {
-		setBuzzsound1(hashtagDoc.musicTitle);
+		setBuzzsound1(configDoc.music.title);
 	}
 	$('#lobbySoundSelect').val(Session.get("lobbySoundIsPlaying") || "LobbySong1");
-	$('#soundSelect').val(hashtagDoc.musicTitle);
+	$('#soundSelect').val(configDoc.music.title);
 
-	if (hashtagDoc.musicEnabled) {
+	if (configDoc.music.isEnabled) {
 		$('#isSoundOnButton').toggleClass("down").html(TAPi18n.__("plugins.sound.active"));
 	}
 
 	var soundVolumneSlider = document.getElementById("slider2");
 	var sliderObject = noUiSlider.create(soundVolumneSlider, {
-		start: hashtagDoc.musicVolume,
+		start: configDoc.music.volume,
 		range: {
 			'min': 0,
 			'max': 100

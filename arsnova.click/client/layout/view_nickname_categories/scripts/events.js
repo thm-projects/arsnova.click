@@ -24,7 +24,7 @@ import * as localData from '/lib/local_storage.js';
 Template.nicknameCategories.events({
 	"click #forwardButton": function () {
 		if (localStorage.getItem("lastPage") === ":quizName.memberlist") {
-			Meteor.call("HashtagsCollection.setSelectedNicks", Router.current().params.quizName, Session.get("questionGroup").getConfiguration().getNickSettings().getSelectedValues());
+			Meteor.call("SessionConfigurationCollection.setNicks", Session.get("questionGroup").getConfiguration().serialize());
 		}
 		history.back();
 	},
@@ -39,19 +39,19 @@ Template.nicknameCategories.events({
 		if ($(event.currentTarget).attr("id") === "select_all") {
 			if ($(event.currentTarget).hasClass("selectedNickName")) {
 				NicknameCategoriesCollection.find({nickCategory: Session.get("selectedCategory")}).fetch().forEach(function (item) {
-					questionGroup.removeSelectedNickByName(item.nick);
+					questionGroup.getConfiguration().getNickSettings().removeSelectedNickByName(item.nick);
 				});
 			} else {
 				NicknameCategoriesCollection.find({nickCategory: Session.get("selectedCategory")}).fetch().forEach(function (item) {
-					questionGroup.addSelectedNick(item.nick);
+					questionGroup.getConfiguration().getNickSettings().addSelectedNick(item.nick);
 				});
 			}
 		} else {
 			if ($(event.currentTarget).hasClass("selectedNickName")) {
-				questionGroup.removeSelectedNickByName(NicknameCategoriesCollection.findOne({nick: $(event.currentTarget).attr("id").replace("nickName_", "")}).nick);
+				questionGroup.getConfiguration().getNickSettings().removeSelectedNickByName(NicknameCategoriesCollection.findOne({nick: $(event.currentTarget).attr("id").replace("nickName_", "")}).nick);
 				$(event.currentTarget).removeClass("selectedNickName");
 			} else {
-				questionGroup.addSelectedNick(NicknameCategoriesCollection.findOne({nick: $(event.currentTarget).attr("id").replace("nickName_", "")}).nick);
+				questionGroup.getConfiguration().getNickSettings().addSelectedNick(NicknameCategoriesCollection.findOne({nick: $(event.currentTarget).attr("id").replace("nickName_", "")}).nick);
 				$(event.currentTarget).addClass("selectedNickName");
 			}
 		}
@@ -64,7 +64,7 @@ Template.nicknameCategories.events({
 		}
 		if ($(event.currentTarget).attr("id") === "remove_all") {
 			const questionGroup = Session.get("questionGroup");
-			questionGroup.removeSelectedNicks();
+			questionGroup.getConfiguration().getNickSettings().removeSelectedNicks();
 			Session.set("questionGroup", questionGroup);
 			localData.addHashtag(questionGroup);
 			return;
@@ -72,7 +72,7 @@ Template.nicknameCategories.events({
 		const nickname = $(event.currentTarget).attr("id").replace("chosen_nickName_", "");
 		$('#nickName_' + nickname).removeClass("selectedNickName");
 		const questionGroup = Session.get("questionGroup");
-		questionGroup.removeSelectedNickByName(NicknameCategoriesCollection.findOne({nick: nickname}).nick);
+		questionGroup.getConfiguration().getNickSettings().removeSelectedNickByName(NicknameCategoriesCollection.findOne({nick: nickname}).nick);
 		Session.set("questionGroup", questionGroup);
 		localData.addHashtag(Session.get("questionGroup"));
 	}

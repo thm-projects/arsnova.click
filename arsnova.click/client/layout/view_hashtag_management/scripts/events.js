@@ -145,7 +145,10 @@ Template.hashtagView.events({
 			} else {
 				questionGroup = new DefaultQuestionGroup({
 					hashtag: hashtag,
-					questionList: []
+					questionList: [],
+					configuration: {
+						hashtag: hashtag
+					}
 				});
 				questionGroup.addDefaultQuestion();
 				lib.addHashtag(questionGroup);

@@ -7,14 +7,14 @@ let formatBootstrapSwitchTracker = null;
 export function formatBootstrapSwitch() {
 	$("#block_illegal_nicks_switch").bootstrapSwitch({
 		size: "small",
-		state: Session.get("questionGroup").getBlockIllegalNicks(),
+		state: Session.get("questionGroup").getConfiguration().getNickSettings().getBlockIllegal(),
 		onText: TAPi18n.__("region.header.yes"),
 		offText: TAPi18n.__("region.header.no"),
 		wrapperClass: "input-field",
 		animate: false,
 		onSwitchChange: function (event, state) {
 			var questionItem = Session.get("questionGroup");
-			questionItem.setBlockIllegalNicks(state);
+			questionItem.getConfiguration().getNickSettings().setBlockIllegal(state);
 			Session.set("questionGroup", questionItem);
 			localData.addHashtag(Session.get("questionGroup"));
 		}

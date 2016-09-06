@@ -21,6 +21,7 @@ import {AbstractQuestion} from './question_abstract.js';
 import {questionReflection} from "./question_reflection.js";
 import {SingleChoiceQuestion} from './question_choice_single.js';
 import {SessionConfiguration} from '../session_configuration/session_config.js';
+import {AbstractSessionConfiguration} from '../session_configuration/session_config_abstract.js';
 
 const hashtag = Symbol("hashtag");
 const questionList = Symbol("questionList");
@@ -56,9 +57,7 @@ export class AbstractQuestionGroup {
 			}
 		}
 		this[hashtag] = options.hashtag;
-		this[sessionConfig] = options.sessionConfiguration || new SessionConfiguration({
-			hashtag: options.hashtag
-		});
+		this[sessionConfig] = new SessionConfiguration(options.configuration);
 	}
 
 	/**
@@ -139,7 +138,7 @@ export class AbstractQuestionGroup {
 		return {
 			hashtag: this.getHashtag(),
 			questionList: questionListSerialized,
-			configuration: this.getConfiguration()
+			configuration: this.getConfiguration().serialize()
 		};
 	}
 

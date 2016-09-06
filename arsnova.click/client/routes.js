@@ -52,7 +52,7 @@ Router.configure({
 			subscriptions.push(subsCache.subscribe('EventManagerCollection.join', Router.current().params.quizName));
 			subscriptions.push(subsCache.subscribe('SessionConfigurationCollection.join', Router.current().params.quizName));
 
-			if (localData.containsHashtag(Router.current().params.quizName) || HashtagsCollection.findOne({hashtag: currentHashtag}).selectedNicks.length > 0) {
+			if (localData.containsHashtag(Router.current().params.quizName) || HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).selectedNicks.length > 0) {
 				subscriptions.push(subsCache.subscribe('NicknameCategoriesCollection.join'));
 			}
 		}

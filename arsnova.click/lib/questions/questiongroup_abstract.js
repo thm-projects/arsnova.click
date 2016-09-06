@@ -21,7 +21,6 @@ import {AbstractQuestion} from './question_abstract.js';
 import {questionReflection} from "./question_reflection.js";
 import {SingleChoiceQuestion} from './question_choice_single.js';
 import {SessionConfiguration} from '../session_configuration/session_config.js';
-import {AbstractSessionConfiguration} from '../session_configuration/session_config_abstract.js';
 
 const hashtag = Symbol("hashtag");
 const questionList = Symbol("questionList");

@@ -25,7 +25,7 @@ export class MusicSessionConfiguration {
 		this[hashtag] = options.hashtag;
 		this[isEnabled] = options.music.isEnabled || true;
 		this[volume] = options.music.volume || 80;
-		this[title] = options.music.title || "Song 1";
+		this[title] = options.music.title || "Song1";
 	}
 
 	serialize () {

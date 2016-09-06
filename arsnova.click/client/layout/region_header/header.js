@@ -154,6 +154,9 @@ Template.header.onRendered(function () {
 			Session.set("theme", theme);
 		}
 	});
+	if (!Session.get("questionGroup") && Router.current().params.quizName) {
+		Session.set("questionGroup", localData.reenterSession(Router.current().params.quizName));
+	}
 	$(window).resize(function () {
 		if ($(window).width() > 999) {
 			$(".thm-logo-background").show();

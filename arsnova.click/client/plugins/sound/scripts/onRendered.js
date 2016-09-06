@@ -24,9 +24,7 @@ import {buzzsound1, setBuzzsound1, lobbySound} from './lib.js';
 import {TAPi18n} from 'meteor/tap:i18n';
 
 Template.soundConfig.onRendered(function () {
-	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-	console.log(configDoc);
 	Session.set("slider2", configDoc.music.volume);
 	if (buzzsound1 == null) {
 		setBuzzsound1(configDoc.music.title);
@@ -38,8 +36,7 @@ Template.soundConfig.onRendered(function () {
 		$('#isSoundOnButton').toggleClass("down").html(TAPi18n.__("plugins.sound.active"));
 	}
 
-	var soundVolumneSlider = document.getElementById("slider2");
-	var sliderObject = noUiSlider.create(soundVolumneSlider, {
+	var sliderObject = noUiSlider.create(document.getElementById("slider2"), {
 		start: configDoc.music.volume,
 		range: {
 			'min': 0,

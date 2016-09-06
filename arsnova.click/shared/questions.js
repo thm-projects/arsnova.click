@@ -38,7 +38,6 @@ Meteor.methods({
 			QuestionGroupCollection.update(query, questionGroup);
 		} else {
 			QuestionGroupCollection.insert(questionGroup);
-			SessionConfigurationCollection.insert(questionGroup.configuration);
 			for (let i = 0; i < questionGroup.questionList.length; i++) {
 				const questionItem = questionGroup.questionList[i];
 				for (let j = 0; j < questionItem.answerOptionList.length; j++) {

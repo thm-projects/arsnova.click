@@ -21,26 +21,25 @@ import {MusicSessionConfiguration} from '/lib/session_configuration/session_conf
 import {NickSessionConfiguration} from '/lib/session_configuration/session_config_nicks.js';
 
 Meteor.methods({
+	"SessionConfiguration.addConfig": function (sessionConfigObject) {
+		SessionConfigurationCollection.insert(sessionConfigObject);
+	},
 	"SessionConfiguration.setMusic": function (configObject) {
 		if (Meteor.isClient && configObject instanceof MusicSessionConfiguration) {
 			configObject = configObject.serialize();
 		}
-		const hashtag = configObject.hashtag;
-		delete configObject.hashtag;
-		SessionConfigurationCollection.update(hashtag, {$set: {"music": configObject}}, {upsert: true});
+		SessionConfigurationCollection.update({hashtag: configObject.hashtag}, {$set: {music: configObject.music}});
 	},
 	"SessionConfiguration.setNicks": function (configObject) {
 		if (Meteor.isClient && configObject instanceof NickSessionConfiguration) {
 			configObject = configObject.serialize();
 		}
-		const hashtag = configObject.hashtag;
-		delete configObject.hashtag;
-		SessionConfigurationCollection.update(hashtag, {$set: {"nicks": configObject}}, {upsert: true});
+		SessionConfigurationCollection.update({hashtag: configObject.hashtag}, {$set: {nicks: configObject.nicks}});
 	},
 	"SessionConfiguration.setTheme": function (hashtag, theme) {
-		SessionConfigurationCollection.update(hashtag, {$set: {"theme": theme}}, {upsert: true});
+		SessionConfigurationCollection.update({hashtag: hashtag}, {$set: {"theme": theme}});
 	},
 	"SessionConfiguration.setReadingConfirmationEnabled": function (hashtag, readingConfirmationEnabled) {
-		SessionConfigurationCollection.update(hashtag, {$set: {"readingConfirmationEnabled": readingConfirmationEnabled}}, {upsert: true});
+		SessionConfigurationCollection.update({hashtag: hashtag}, {$set: {"readingConfirmationEnabled": readingConfirmationEnabled}});
 	}
 });

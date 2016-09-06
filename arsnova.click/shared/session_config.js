@@ -17,10 +17,12 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
+import {MusicSessionConfiguration} from '/lib/session_configuration/session_config_music.js';
+import {NickSessionConfiguration} from '/lib/session_configuration/session_config_nicks.js';
 
 Meteor.methods({
 	"SessionConfiguration.setMusic": function (configObject) {
-		if (Meteor.isClient) {
+		if (Meteor.isClient && configObject instanceof MusicSessionConfiguration) {
 			configObject = configObject.serialize();
 		}
 		const hashtag = configObject.hashtag;
@@ -28,7 +30,7 @@ Meteor.methods({
 		SessionConfigurationCollection.update(hashtag, {$set: {"music": configObject}});
 	},
 	"SessionConfiguration.setNicks": function (configObject) {
-		if (Meteor.isClient) {
+		if (Meteor.isClient && configObject instanceof NickSessionConfiguration) {
 			configObject = configObject.serialize();
 		}
 		const hashtag = configObject.hashtag;

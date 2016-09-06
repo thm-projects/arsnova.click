@@ -56,6 +56,8 @@ export const SessionConfigurationSchema = new SimpleSchema({
 	}
 });
 
+SessionConfigurationCollection.attachSchema(SessionConfigurationSchema);
+
 SessionConfigurationCollection.deny({
 	insert: function () {
 		return true;

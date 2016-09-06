@@ -15,19 +15,22 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+const hashtag = Symbol("hashtag");
 const isEnabled = Symbol("isEnabled");
 const volume = Symbol("volume");
 const title = Symbol("title");
 
 export class MusicSessionConfiguration {
 	constructor (options = {}) {
-		this[isEnabled] = options.isEnabled || [];
-		this[volume] = options.volume || true;
-		this[title] = options.title || false;
+		this[hashtag] = options.hashtag;
+		this[isEnabled] = options.music.isEnabled || true;
+		this[volume] = options.music.volume || 80;
+		this[title] = options.music.title || "Song 1";
 	}
 
 	serialize () {
 		return {
+			hashtag: this.getHashtag(),
 			isEnabled: this.isEnabled(),
 			volume: this.getVolume(),
 			title: this.getTitle()
@@ -38,6 +41,14 @@ export class MusicSessionConfiguration {
 		return this.isEnabled() === value.isEnabled() &&
 				this.getTitle() === value.getTitle() &&
 				this.getVolume() === value.getVolume();
+	}
+
+	getHashtag () {
+		return this[hashtag];
+	}
+
+	setHashtag (value) {
+		this[hashtag] = value;
 	}
 
 	isEnabled () {

@@ -32,15 +32,25 @@ export class AbstractSessionConfiguration {
 		if (typeof options.hashtag === "undefined") {
 			throw new Error("Invalid argument list for SessionConfiguration instantiation");
 		}
+		if (options.music instanceof Object) {
+			if (!(options.music instanceof MusicSessionConfiguration)) {
+				options.music = new MusicSessionConfiguration(options);
+			}
+		} else {
+			options.music = {};
+			options.music = new MusicSessionConfiguration(options);
+		}
+		if (options.nicks instanceof Object) {
+			if (!(options.nicks instanceof NickSessionConfiguration)) {
+				options.nicks = new NickSessionConfiguration(options);
+			}
+		} else {
+			options.nicks = {};
+			options.nicks = new NickSessionConfiguration(options);
+		}
 		this[hashtag] = options.hashtag;
-		if (options.music instanceof Object && !(options.music instanceof MusicSessionConfiguration)) {
-			options.music = new MusicSessionConfiguration(options.music);
-		}
-		this[music] = options.music || new MusicSessionConfiguration();
-		if (options.nicks instanceof Object && !(options.nicks instanceof NickSessionConfiguration)) {
-			options.nicks = new NickSessionConfiguration(options.nicks);
-		}
-		this[nicks] = options.nicks || new NickSessionConfiguration();
+		this[music] = options.music;
+		this[nicks] = options.nicks;
 		this[theme] = options.theme || "theme-blackbeauty";
 		this[readingConfirmationEnabled] = options.readingConfirmationEnabled || true;
 	}
@@ -79,6 +89,8 @@ export class AbstractSessionConfiguration {
 
 	setHashtag (value) {
 		this[hashtag] = value;
+		this.getMusicSettings().setHashtag(value);
+		this.getNickSettings().setHashtag(value);
 	}
 
 	getTheme () {

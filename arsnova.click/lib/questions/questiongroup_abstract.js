@@ -110,6 +110,7 @@ export class AbstractQuestionGroup {
 		this.getQuestionList().forEach(function (item) {
 			item.setHashtag(newHashtag);
 		});
+		this.getConfiguration().setHashtag(newHashtag);
 	}
 
 	/**

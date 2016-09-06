@@ -15,19 +15,22 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+const hashtag = Symbol("hashtag");
 const selectedValues = Symbol("selectedValues");
 const blockIllegal = Symbol("blockIllegal");
 const restrictToCASLogin = Symbol("restrictToCASLogin");
 
 export class NickSessionConfiguration {
 	constructor (options = {}) {
-		this[selectedValues] = options.selectedValues || [];
-		this[blockIllegal] = options.blockIllegal || true;
-		this[restrictToCASLogin] = options.restrictToCASLogin || false;
+		this[hashtag] = options.hashtag;
+		this[selectedValues] = options.nicks.selectedValues || [];
+		this[blockIllegal] = options.nicks.blockIllegal || true;
+		this[restrictToCASLogin] = options.nicks.restrictToCASLogin || false;
 	}
 
 	serialize () {
 		return {
+			hashtag: this.getHashtag(),
 			selectedValues: this.getSelectedValues(),
 			blockIllegal: this.getBlockIllegal(),
 			restrictToCASLogin: this.getRestrictToCASLogin()
@@ -38,6 +41,14 @@ export class NickSessionConfiguration {
 		return this.getSelectedValues() === value.getSelectedValues() &&
 			this.getBlockIllegal() === value.getBlockIllegal() &&
 			this.getRestrictToCASLogin() === value.getRestrictToCASLogin();
+	}
+
+	getHashtag () {
+		return this[hashtag];
+	}
+
+	setHashtag (value) {
+		this[hashtag] = value;
 	}
 
 	getSelectedValues () {

@@ -19,7 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 
-Meteor.publish('SessionConfiguration.join', function (hashtag) {
+Meteor.publish('SessionConfigurationCollection.join', function (hashtag) {
 	new SimpleSchema({
 		hashtag: {type: String}
 	}).validate({hashtag});

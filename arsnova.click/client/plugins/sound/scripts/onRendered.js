@@ -19,11 +19,14 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {noUiSlider} from 'meteor/arsnova.click:nouislider';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {buzzsound1, setBuzzsound1, lobbySound} from './lib.js';
 import {TAPi18n} from 'meteor/tap:i18n';
 
 Template.soundConfig.onRendered(function () {
 	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+	var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+	console.log(configDoc);
 	Session.set("slider2", hashtagDoc.musicVolume);
 	if (buzzsound1 == null) {
 		setBuzzsound1(hashtagDoc.musicTitle);

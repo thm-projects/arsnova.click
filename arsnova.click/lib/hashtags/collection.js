@@ -25,50 +25,18 @@ export const hashtagSchema = {
 	min: 1,
 	max: 25
 };
-export const themeSchema = {
-	type: String
-};
 export const privateKeySchema = {
 	type: String,
 	min: 24,
 	max: 24
 };
-export const musicVolumeSchema = {
-	type: Number,
-	min: 0,
-	max: 100
-};
-export const musicEnabledSchema = {
-	type: Number,
-	min: 0,
-	max: 1
-};
-export const musicTitleSchema = {
-	type: String
-};
-export const selectedNicksSchema = {
-	type: [String]
-};
 export const hashtagsCollectionSchema = new SimpleSchema({
 	hashtag: {
 		type: hashtagSchema
 	},
-	theme: {
-		type: themeSchema
-	},
 	privateKey: {
 		type: privateKeySchema
-	},
-	musicVolume: {
-		type: musicVolumeSchema
-	},
-	musicEnabled: {
-		type: musicEnabledSchema
-	},
-	musicTitle: {
-		type: musicTitleSchema
-	},
-	selectedNicks: selectedNicksSchema
+	}
 });
 
 HashtagsCollection.attachSchema(hashtagsCollectionSchema);

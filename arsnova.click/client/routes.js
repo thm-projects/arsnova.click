@@ -29,7 +29,7 @@ import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scri
 
 const subsCache = new SubsManager({
 	/* maximum number of cached subscriptions */
-	cacheLimit: 9,
+	cacheLimit: 10,
 	/* any subscription will expire after 15 minutes, if it's not subscribed again */
 	expireIn: 15
 });
@@ -50,8 +50,8 @@ Router.configure({
 			subscriptions.push(subsCache.subscribe('MemberListCollection.join', Router.current().params.quizName));
 			subscriptions.push(subsCache.subscribe('LeaderBoardCollection.join', Router.current().params.quizName));
 			subscriptions.push(subsCache.subscribe('EventManagerCollection.join', Router.current().params.quizName));
+			subscriptions.push(subsCache.subscribe('SessionConfigurationCollection.join', Router.current().params.quizName));
 
-			var currentHashtag = Router.current().params.quizName;
 			if (localData.containsHashtag(Router.current().params.quizName) || HashtagsCollection.findOne({hashtag: currentHashtag}).selectedNicks.length > 0) {
 				subscriptions.push(subsCache.subscribe('NicknameCategoriesCollection.join'));
 			}

@@ -20,6 +20,7 @@ import {Session} from 'meteor/session';
 import {SubsManager} from 'meteor/meteorhacks:subs-manager';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
@@ -43,18 +44,16 @@ Router.configure({
 			subsCache.subscribe('BannedNicksCollection.public'),
 			Meteor.subscribe("ConnectionStatusCollection.join", localData.getPrivateKey())
 		];
-		if (typeof Router.current().params.quizName !== "undefined") {
-			subscriptions.push(subsCache.subscribe('ResponsesCollection.join', Router.current().params.quizName));
-			subscriptions.push(subsCache.subscribe('AnswerOptionCollection.join', Router.current().params.quizName));
-			subscriptions.push(subsCache.subscribe('QuestionGroupCollection.join', Router.current().params.quizName));
-			subscriptions.push(subsCache.subscribe('MemberListCollection.join', Router.current().params.quizName));
-			subscriptions.push(subsCache.subscribe('LeaderBoardCollection.join', Router.current().params.quizName));
-			subscriptions.push(subsCache.subscribe('EventManagerCollection.join', Router.current().params.quizName));
-			subscriptions.push(subsCache.subscribe('SessionConfigurationCollection.join', Router.current().params.quizName));
-
-			if (localData.containsHashtag(Router.current().params.quizName) || HashtagsCollection.findOne({hashtag: currentHashtag}).selectedNicks.length > 0) {
-				subscriptions.push(subsCache.subscribe('NicknameCategoriesCollection.join'));
-			}
+		const currentHashtag = Router.current().params.quizName;
+		if (typeof currentHashtag !== "undefined") {
+			subscriptions.push(subsCache.subscribe('ResponsesCollection.join', currentHashtag));
+			subscriptions.push(subsCache.subscribe('AnswerOptionCollection.join', currentHashtag));
+			subscriptions.push(subsCache.subscribe('QuestionGroupCollection.join', currentHashtag));
+			subscriptions.push(subsCache.subscribe('MemberListCollection.join', currentHashtag));
+			subscriptions.push(subsCache.subscribe('LeaderBoardCollection.join', currentHashtag));
+			subscriptions.push(subsCache.subscribe('EventManagerCollection.join', currentHashtag));
+			subscriptions.push(subsCache.subscribe('SessionConfigurationCollection.join', currentHashtag));
+			subscriptions.push(subsCache.subscribe('NicknameCategoriesCollection.join'));
 		}
 		return subscriptions;
 	}

@@ -116,12 +116,14 @@ function addLiveresultsChangeEvents() {
 						}
 					});
 				}
+				/*
 				if (value.questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
 					footerElements.removeFooterElement(footerElements.footerElemReadingConfirmation);
 				} else {
 					footerElements.addFooterElement(footerElements.footerElemReadingConfirmation, 2);
 				}
 				footerElements.calculateFooter();
+				*/
 			} else {
 				Router.go("/" + Router.current().params.quizName + "/onpolling");
 			}

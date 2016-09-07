@@ -24,7 +24,9 @@ Template.memberlist.onDestroyed(function () {
 	if (memberlistObserver) {
 		memberlistObserver.stop();
 	}
-	lobbySound.stop();
+	if (lobbySound) {
+		lobbySound.stop();
+	}
 	Session.set("allMembersCount", undefined);
 	Session.set("maxLearnerButtons", undefined);
 	Session.set("learnerCountOverride", undefined);

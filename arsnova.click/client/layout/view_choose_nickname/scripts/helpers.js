@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {HashtagsCollection} from "/lib/hashtags/collection.js";
 import {SessionConfigurationCollection} from "/lib/session_configuration/collection.js";
 import {NicknameCategoriesCollection} from "/lib/nickname_categories/collection.js";
 import {MemberListCollection, userNickSchema} from "/lib/member_list/collection.js";

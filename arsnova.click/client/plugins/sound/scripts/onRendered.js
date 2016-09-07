@@ -18,7 +18,6 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {noUiSlider} from 'meteor/arsnova.click:nouislider';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {buzzsound1, setBuzzsound1, lobbySound} from './lib.js';
 import {TAPi18n} from 'meteor/tap:i18n';

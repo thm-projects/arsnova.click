@@ -1,0 +1,14 @@
+{
+  "public": {
+    "cas": {
+      "loginUrl": "https://cas.thm.de/cas/login",
+      "serviceParam": "service",
+      "popupWidth": 810,
+      "popupHeight": 610
+    }
+  },
+  "cas": {
+    "baseUrl": "https://cas.thm.de/cas",
+    "autoClose": true
+  }
+}

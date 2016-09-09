@@ -55,3 +55,11 @@ export function isNickAllowed(nick) {
 export function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+export function loginWithCas() {
+	Meteor.loginWithCas({}, function (err) {
+		if (err) {
+			throw new Meteor.Error("CAS login failed");
+		}
+	});
+}

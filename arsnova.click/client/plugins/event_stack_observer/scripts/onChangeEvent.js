@@ -22,7 +22,6 @@ import {ResponsesCollection} from '/lib/responses/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as localData from '/lib/local_storage.js';
-import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as liveResultsLib from "/client/layout/view_live_results/scripts/lib.js";
 import * as votingViewLib from "/client/layout/view_voting/scripts/lib.js";
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
@@ -116,12 +115,14 @@ function addLiveresultsChangeEvents() {
 						}
 					});
 				}
+				/*
 				if (value.questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
 					footerElements.removeFooterElement(footerElements.footerElemReadingConfirmation);
 				} else {
 					footerElements.addFooterElement(footerElements.footerElemReadingConfirmation, 2);
 				}
 				footerElements.calculateFooter();
+				*/
 			} else {
 				Router.go("/" + Router.current().params.quizName + "/onpolling");
 			}

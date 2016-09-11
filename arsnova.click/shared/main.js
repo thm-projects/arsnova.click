@@ -23,6 +23,7 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {HashtagsCollection, hashtagSchema} from '/lib/hashtags/collection.js';
 
 Meteor.methods({
@@ -33,6 +34,7 @@ Meteor.methods({
 		MemberListCollection.remove({hashtag: hashtag});
 		ResponsesCollection.remove({hashtag: hashtag});
 		QuestionGroupCollection.remove({hashtag: hashtag});
+		SessionConfigurationCollection.remove({hashtag: hashtag});
 		Meteor.call("EventManagerCollection.beforeClear", hashtag);
 	},
 	'Main.deleteEverything': function ({hashtag}) {
@@ -44,6 +46,7 @@ Meteor.methods({
 		ResponsesCollection.remove({hashtag: hashtag});
 		QuestionGroupCollection.remove({hashtag: hashtag});
 		EventManagerCollection.remove({hashtag: hashtag});
+		SessionConfigurationCollection.remove({hashtag: hashtag});
 	},
 	'Connection.receivedConnectionStatus': function (key) {
 		ConnectionStatusCollection.remove({key: key});

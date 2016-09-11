@@ -85,14 +85,10 @@ export function connectEventManager(hashtag) {
 }
 
 export function addHashtag(questionGroup) {
+	Meteor.call('SessionConfiguration.addConfig', questionGroup.getConfiguration().serialize());
 	Meteor.call('HashtagsCollection.addHashtag', {
 		privateKey: localData.getPrivateKey(),
-		hashtag: questionGroup.getHashtag(),
-		musicVolume: questionGroup.getMusicVolume(),
-		musicEnabled: questionGroup.getMusicEnabled(),
-		musicTitle: questionGroup.getMusicTitle(),
-		theme: questionGroup.getTheme(),
-		selectedNicks: questionGroup.getSelectedNicks()
+		hashtag: questionGroup.getHashtag()
 	}, function (err) {
 		if (!err) {
 			localData.addHashtag(questionGroup);

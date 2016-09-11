@@ -15,22 +15,27 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Session} from 'meteor/session';
-import {Template} from 'meteor/templating';
-import {lobbySound} from '/client/plugins/sound/scripts/lib.js';
-import {memberlistObserver} from './lib.js';
+import {EJSON} from 'meteor/ejson';
+import {AbstractSessionConfiguration} from './session_config_abstract.js';
 
-Template.memberlist.onDestroyed(function () {
-	if (memberlistObserver) {
-		memberlistObserver.stop();
+export class SessionConfiguration extends AbstractSessionConfiguration {
+	constructor (options) {
+		super(options);
 	}
-	if (lobbySound) {
-		lobbySound.stop();
+
+	clone () {
+		return new SessionConfiguration(this.serialize());
 	}
-	Session.set("allMembersCount", undefined);
-	Session.set("maxLearnerButtons", undefined);
-	Session.set("learnerCountOverride", undefined);
-	delete Session.keys.allMembersCount;
-	delete Session.keys.maxLearnerButtons;
-	delete Session.keys.learnerCountOverride;
+
+	typeName () {
+		return "SessionConfiguration";
+	}
+}
+
+/**
+ * Adds a custom type to Meteor's EJSON
+ * @see http://docs.meteor.com/api/ejson.html#EJSON-addType
+ */
+EJSON.addType("SessionConfiguration", function (value) {
+	return new SessionConfiguration(value);
 });

@@ -15,22 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Session} from 'meteor/session';
-import {Template} from 'meteor/templating';
-import {lobbySound} from '/client/plugins/sound/scripts/lib.js';
-import {memberlistObserver} from './lib.js';
+import {Meteor} from 'meteor/meteor';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 
-Template.memberlist.onDestroyed(function () {
-	if (memberlistObserver) {
-		memberlistObserver.stop();
-	}
-	if (lobbySound) {
-		lobbySound.stop();
-	}
-	Session.set("allMembersCount", undefined);
-	Session.set("maxLearnerButtons", undefined);
-	Session.set("learnerCountOverride", undefined);
-	delete Session.keys.allMembersCount;
-	delete Session.keys.maxLearnerButtons;
-	delete Session.keys.learnerCountOverride;
+Meteor.publish('SessionConfigurationCollection.join', function (hashtag) {
+	new SimpleSchema({
+		hashtag: {type: String}
+	}).validate({hashtag});
+	return SessionConfigurationCollection.find({hashtag: hashtag});
 });

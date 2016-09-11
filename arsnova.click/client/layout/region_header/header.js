@@ -20,6 +20,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {buzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {TAPi18n} from 'meteor/tap:i18n';
@@ -148,12 +149,15 @@ let headerThemeTracker = null;
 
 Template.header.onRendered(function () {
 	headerThemeTracker = Tracker.autorun(function () {
-		if (!Session.get("questionGroup") && HashtagsCollection.findOne({hashtag: Router.current().params.quizName})) {
-			const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-			const theme = hashtagDoc ? hashtagDoc.theme : "theme-blackbeauty";
+		if (!Session.get("questionGroup") && SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName})) {
+			const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+			const theme = configDoc ? SessionConfigurationCollection.theme : "theme-blackbeauty";
 			Session.set("theme", theme);
 		}
 	});
+	if (!Session.get("questionGroup") && Router.current().params.quizName) {
+		Session.set("questionGroup", localData.reenterSession(Router.current().params.quizName));
+	}
 	$(window).resize(function () {
 		if ($(window).width() > 999) {
 			$(".thm-logo-background").show();

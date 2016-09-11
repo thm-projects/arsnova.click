@@ -20,6 +20,7 @@ import {Template} from 'meteor/templating';
 import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {DefaultQuestionGroup} from '/lib/questions/questiongroup_default.js';
 import * as localData from '/lib/local_storage.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
@@ -111,14 +112,10 @@ const clickEvents = {
 				}
 
 				if (!HashtagsCollection.findOne({hashtag: questionInstance.getHashtag()})) {
+					Meteor.call('SessionConfiguration.addConfig', questionInstance.getConfiguration().serialize());
 					Meteor.call('HashtagsCollection.addHashtag', {
 						privateKey: localData.getPrivateKey(),
-						hashtag: questionInstance.getHashtag(),
-						musicVolume: questionInstance.getMusicVolume(),
-						musicEnabled: questionInstance.getMusicEnabled(),
-						musicTitle: questionInstance.getMusicTitle(),
-						selectedNicks: questionInstance.getSelectedNicks(),
-						theme: questionInstance.getTheme()
+						hashtag: questionInstance.getHashtag()
 					}, function (err) {
 						if (err) {
 							new ErrorSplashscreen({
@@ -155,15 +152,10 @@ const clickEvents = {
 										throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
 								}
 								questionInstance.setHashtag(hashtag);
-
+								Meteor.call('SessionConfiguration.addConfig', questionInstance.getConfiguration().serialize());
 								Meteor.call('HashtagsCollection.addHashtag', {
 									privateKey: localData.getPrivateKey(),
-									hashtag: questionInstance.getHashtag(),
-									musicVolume: questionInstance.getMusicVolume(),
-									musicEnabled: questionInstance.getMusicEnabled(),
-									musicTitle: questionInstance.getMusicTitle(),
-									selectedNicks: questionInstance.getSelectedNicks(),
-									theme: questionInstance.getTheme()
+									hashtag: questionInstance.getHashtag()
 								});
 								localData.addHashtag(questionInstance);
 								if (Router.current().route.path() === "/hashtagmanagement") {
@@ -209,8 +201,8 @@ const clickEvents = {
 			closeOnButton: "#js-btn-hideSoundModal",
 			onRendered: function (instance) {
 				instance.templateSelector.find('#soundSelect').on('change', function (event) {
-					var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-					hashtagDoc.musicTitle = $(event.target).val();
+					var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+					configDoc.music.title = $(event.target).val();
 					if (Session.get("soundIsPlaying")) {
 						buzzsound1.stop();
 						setBuzzsound1($(event.target).val());
@@ -218,9 +210,9 @@ const clickEvents = {
 					} else {
 						setBuzzsound1($(event.target).val());
 					}
-					Meteor.call('HashtagsCollection.updateMusicSettings', hashtagDoc);
+					Meteor.call('SessionConfiguration.setMusic', configDoc);
 					const questionItem = Session.get("questionGroup");
-					questionItem.setMusicTitle($(event.target).val());
+					questionItem.getConfiguration().getMusicSettings().setTitle($(event.target).val());
 					Session.set("questionGroup", questionItem);
 					localData.addHashtag(Session.get("questionGroup"));
 				});
@@ -263,29 +255,29 @@ const clickEvents = {
 				});
 
 				instance.templateSelector.find('#isSoundOnButton').on('click', function () {
-					var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
+					var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 					var btn = $('#isSoundOnButton');
 					btn.toggleClass("down");
 					if (btn.hasClass("down")) {
-						hashtagDoc.musicEnabled = 1;
+						configDoc.music.isEnabled = true;
 						btn.html(TAPi18n.__("plugins.sound.active"));
 					} else {
-						hashtagDoc.musicEnabled = 0;
+						configDoc.music.isEnabled = false;
 						btn.html(TAPi18n.__("plugins.sound.inactive"));
 					}
-					Meteor.call('HashtagsCollection.updateMusicSettings', hashtagDoc);
+					Meteor.call('SessionConfiguration.setMusic', configDoc);
 					const questionItem = Session.get("questionGroup");
-					questionItem.setMusicEnabled(hashtagDoc.musicEnabled);
+					questionItem.getConfiguration().getMusicSettings().setEnabled(configDoc.music.isEnabled);
 					Session.set("questionGroup", questionItem);
 					localData.addHashtag(Session.get("questionGroup"));
 				});
 			},
 			onDestroyed: function () {
-				var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-				hashtagDoc.musicVolume = Session.get("slider2");
-				Meteor.call('HashtagsCollection.updateMusicSettings', hashtagDoc);
+				var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+				configDoc.music.volume = Session.get("slider2");
+				Meteor.call('SessionConfiguration.setMusic', configDoc);
 				const questionItem = Session.get("questionGroup");
-				questionItem.setMusicVolume(hashtagDoc.musicVolume);
+				questionItem.getConfiguration().getMusicSettings().setVolume(configDoc.music.volume);
 				Session.set("questionGroup", questionItem);
 				localData.addHashtag(Session.get("questionGroup"));
 			}

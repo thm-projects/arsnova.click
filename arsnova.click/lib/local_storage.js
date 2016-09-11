@@ -198,10 +198,7 @@ export function reenterSession(hashtag) {
 		// Legacy mode -> Convert old session data to new OO style
 		const newQuestionGroup = new DefaultQuestionGroup({
 			hashtag: hashtag,
-			questionList: [],
-			musicEnabled: 1,
-			musicVolume: 80,
-			musicTitle: "Song1"
+			questionList: []
 		});
 		for (let i = 0; i < sessionData.questionList.length; i++) {
 			const answerOptions = [];

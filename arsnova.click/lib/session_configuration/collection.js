@@ -17,31 +17,48 @@
 
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {hashtagSchema} from '../hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
 
-export const HashtagsCollection = new Mongo.Collection("hashtags");
-export const hashtagSchema = {
-	type: String,
-	min: 1,
-	max: 25
-};
-export const privateKeySchema = {
-	type: String,
-	min: 24,
-	max: 24
-};
-export const hashtagsCollectionSchema = new SimpleSchema({
-	hashtag: {
-		type: hashtagSchema
+export const SessionConfigurationCollection = new Mongo.Collection("sessionConfiguration");
+
+export const SessionConfigurationSchema = new SimpleSchema({
+	hashtag: hashtagSchema,
+	theme: {
+		type: String
 	},
-	privateKey: {
-		type: privateKeySchema
+	music: {
+		type: Object
+	},
+	"music.volume": {
+		type: Number
+	},
+	"music.isEnabled": {
+		type: Boolean
+	},
+	"music.title": {
+		type: String
+	},
+	nicks: {
+		type: Object
+	},
+	"nicks.selectedValues": {
+		type: [String]
+	},
+	"nicks.blockIllegal": {
+		type: Boolean
+	},
+	"nicks.restrictToCASLogin": {
+		type: Boolean
+	},
+	"readingConfirmationEnabled": {
+		type: Boolean
 	}
 });
 
-HashtagsCollection.attachSchema(hashtagsCollectionSchema);
+SessionConfigurationCollection.attachSchema(SessionConfigurationSchema);
 
-HashtagsCollection.deny({
+SessionConfigurationCollection.deny({
 	insert: function () {
 		return true;
 	},
@@ -53,11 +70,14 @@ HashtagsCollection.deny({
 	}
 });
 
-HashtagsCollection.allow({
+SessionConfigurationCollection.allow({
 	insert: function (userId, doc) {
-		return doc.privateKey === localData.getPrivateKey();
+		return localData.containsHashtag(doc.hashtag);
+	},
+	update: function (userId, doc) {
+		return localData.containsHashtag(doc.hashtag);
 	},
 	remove: function (userId, doc) {
-		return doc.privateKey === localData.getPrivateKey();
+		return localData.containsHashtag(doc.hashtag);
 	}
 });

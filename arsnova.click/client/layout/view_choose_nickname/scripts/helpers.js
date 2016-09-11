@@ -16,13 +16,13 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {HashtagsCollection} from "/lib/hashtags/collection.js";
+import {SessionConfigurationCollection} from "/lib/session_configuration/collection.js";
 import {NicknameCategoriesCollection} from "/lib/nickname_categories/collection.js";
 import {MemberListCollection, userNickSchema} from "/lib/member_list/collection.js";
 
 Template.nickViewWrapper.helpers({
 	getRequiredNickView: function () {
-		const selectedNicks = HashtagsCollection.findOne({hashtag: Router.current().params.quizName}, {fields: {selectedNicks: 1}}).selectedNicks;
+		const selectedNicks = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}, {fields: {nicks: 1}}).nicks.selectedValues;
 		if (selectedNicks.length === 0) {
 			return Template.nick;
 		} else {
@@ -41,7 +41,7 @@ Template.nickLimited.helpers({
 	getSelectableNicks: function () {
 		return NicknameCategoriesCollection.find({
 			nick: {
-				$in: HashtagsCollection.findOne({hashtag: Router.current().params.quizName}, {fields: {selectedNicks: 1}}).selectedNicks
+				$in: SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}, {fields: {nicks: 1}}).nicks.selectedValues
 			}
 		}, {
 			sort: {

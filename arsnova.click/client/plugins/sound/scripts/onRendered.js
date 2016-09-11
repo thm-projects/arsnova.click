@@ -18,26 +18,25 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {noUiSlider} from 'meteor/arsnova.click:nouislider';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {buzzsound1, setBuzzsound1, lobbySound} from './lib.js';
 import {TAPi18n} from 'meteor/tap:i18n';
 
 Template.soundConfig.onRendered(function () {
-	var hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-	Session.set("slider2", hashtagDoc.musicVolume);
+	var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+	Session.set("slider2", configDoc.music.volume);
 	if (buzzsound1 == null) {
-		setBuzzsound1(hashtagDoc.musicTitle);
+		setBuzzsound1(configDoc.music.title);
 	}
 	$('#lobbySoundSelect').val(Session.get("lobbySoundIsPlaying") || "LobbySong1");
-	$('#soundSelect').val(hashtagDoc.musicTitle);
+	$('#soundSelect').val(configDoc.music.title);
 
-	if (hashtagDoc.musicEnabled) {
+	if (configDoc.music.isEnabled) {
 		$('#isSoundOnButton').toggleClass("down").html(TAPi18n.__("plugins.sound.active"));
 	}
 
-	var soundVolumneSlider = document.getElementById("slider2");
-	var sliderObject = noUiSlider.create(soundVolumneSlider, {
-		start: hashtagDoc.musicVolume,
+	var sliderObject = noUiSlider.create(document.getElementById("slider2"), {
+		start: configDoc.music.volume,
 		range: {
 			'min': 0,
 			'max': 100

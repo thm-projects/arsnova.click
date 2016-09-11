@@ -20,15 +20,11 @@ import {hashtagSchema} from '/lib/hashtags/collection.js';
 import {AbstractQuestion} from './question_abstract.js';
 import {questionReflection} from "./question_reflection.js";
 import {SingleChoiceQuestion} from './question_choice_single.js';
+import {SessionConfiguration} from '../session_configuration/session_config.js';
 
 const hashtag = Symbol("hashtag");
 const questionList = Symbol("questionList");
-const theme = Symbol("theme");
-const musicVolume = Symbol("musicVolume");
-const musicEnabled = Symbol("musicEnabled");
-const musicTitle = Symbol("musicTitle");
-const selectedNicks = Symbol("selectedNicks");
-const blockIllegalNicks = Symbol("blockIllegalNicks");
+const sessionConfig = Symbol("sessionConfig");
 
 export class AbstractQuestionGroup {
 
@@ -60,12 +56,7 @@ export class AbstractQuestionGroup {
 			}
 		}
 		this[hashtag] = options.hashtag;
-		this[theme] = options.theme || "theme-blackbeauty";
-		this[musicVolume] = options.musicVolume || 80;
-		this[musicEnabled] = options.musicEnabled || "1";
-		this[musicTitle] = options.musicTitle || "Song1";
-		this[selectedNicks] = options.selectedNicks || [];
-		this[blockIllegalNicks] = typeof options.blockIllegalNicks !== "undefined" ? options.blockIllegalNicks : true;
+		this[sessionConfig] = new SessionConfiguration(options.configuration);
 	}
 
 	/**
@@ -117,6 +108,7 @@ export class AbstractQuestionGroup {
 		this.getQuestionList().forEach(function (item) {
 			item.setHashtag(newHashtag);
 		});
+		this.getConfiguration().setHashtag(newHashtag);
 	}
 
 	/**
@@ -125,6 +117,14 @@ export class AbstractQuestionGroup {
 	 */
 	getQuestionList () {
 		return this[questionList];
+	}
+
+	getConfiguration () {
+		return this[sessionConfig];
+	}
+
+	setConfiguration (value) {
+		this[sessionConfig] = value;
 	}
 
 	/**
@@ -137,12 +137,7 @@ export class AbstractQuestionGroup {
 		return {
 			hashtag: this.getHashtag(),
 			questionList: questionListSerialized,
-			theme: this.getTheme(),
-			musicVolume: this.getMusicVolume(),
-			musicEnabled: this.getMusicEnabled(),
-			musicTitle: this.getMusicTitle(),
-			selectedNicks: this.getSelectedNicks(),
-			blockIllegalNicks: this.getBlockIllegalNicks()
+			configuration: this.getConfiguration().serialize()
 		};
 	}
 
@@ -170,14 +165,7 @@ export class AbstractQuestionGroup {
 	equals (questionGroup) {
 		if (questionGroup instanceof AbstractQuestionGroup) {
 			if (questionGroup.getHashtag() !== this.getHashtag() ||
-				questionGroup.getTheme() !== this.getTheme() ||
-				questionGroup.getSelectedNicks() !== this.getSelectedNicks() ||
-				questionGroup.getBlockIllegalNicks() !== this.getBlockIllegalNicks()) {
-				return false;
-			}
-			if (questionGroup.getMusicEnabled() !== this.getMusicEnabled() ||
-				questionGroup.getMusicTitle() !== this.getMusicTitle() ||
-				questionGroup.getMusicVolume() !== this.getMusicVolume()) {
+				!questionGroup.getConfiguration().equals(this.getConfiguration())) {
 				return false;
 			}
 			if (questionGroup.getQuestionList().length === this.getQuestionList().length) {
@@ -226,97 +214,5 @@ export class AbstractQuestionGroup {
 			questionItem,
 			index
 		);
-	}
-
-	getTheme () {
-		return this[theme];
-	}
-
-	setTheme (newTheme) {
-		if (typeof newTheme !== "string") {
-			throw new Error("Invalid argument list for QuestionGroup.setTheme");
-		}
-		this[theme] = newTheme;
-	}
-
-	getMusicVolume () {
-		return this[musicVolume];
-	}
-
-	setMusicVolume (newMusicVolume) {
-		if (typeof newMusicVolume !== "number") {
-			throw new Error("Invalid argument list for QuestionGroup.setMusicVolume");
-		}
-		this[musicVolume] = newMusicVolume;
-	}
-
-	getMusicEnabled () {
-		return this[musicEnabled];
-	}
-
-	setMusicEnabled (newMusicEnabled) {
-		if (typeof newMusicEnabled !== "number") {
-			throw new Error("Invalid argument list for QuestionGroup.setMusicEnabled");
-		}
-		this[musicEnabled] = newMusicEnabled;
-	}
-
-	getMusicTitle () {
-		return this[musicTitle];
-	}
-
-	setMusicTitle (newMusicTitle) {
-		if (typeof newMusicTitle !== "string") {
-			throw new Error("Invalid argument list for QuestionGroup.setMusicTitle");
-		}
-		this[musicTitle] = newMusicTitle;
-	}
-
-	getSelectedNicks () {
-		return this[selectedNicks];
-	}
-
-	setSelectedNicks (newSelectedNicks) {
-		if (!(newSelectedNicks instanceof Array) || newSelectedNicks.length === 0) {
-			throw new Error("Invalid argument list for QuestionGroup.setSelectedNicks");
-		}
-		this[selectedNicks] = newSelectedNicks;
-	}
-
-	addSelectedNick (newSelectedNick) {
-		if (typeof newSelectedNick !== "string") {
-			throw new Error("Invalid argument list for QuestionGroup.addSelectedNick");
-		}
-		if (this.getSelectedNicks().indexOf(newSelectedNick) !== -1) {
-			return;
-		}
-		this[selectedNicks].push(newSelectedNick);
-	}
-
-	removeSelectedNickByName (selectedNick) {
-		if (typeof selectedNick !== "string") {
-			throw new Error("Invalid argument list for QuestionGroup.removeSelectedNickByName");
-		}
-		for (let i = 0; i < this.getSelectedNicks().length; i++) {
-			if (this.getSelectedNicks()[i] === selectedNick) {
-				this[selectedNicks].splice(i, 1);
-				return;
-			}
-		}
-	}
-
-	removeSelectedNicks () {
-		this[selectedNicks] = [];
-	}
-
-	getBlockIllegalNicks () {
-		return this[blockIllegalNicks];
-	}
-
-	setBlockIllegalNicks (value) {
-		if (typeof value !== "boolean") {
-			throw new Error("Invalid argument list for QuestionGroup.setBlockIllegalNicks");
-		}
-		this[blockIllegalNicks] = value;
 	}
 }

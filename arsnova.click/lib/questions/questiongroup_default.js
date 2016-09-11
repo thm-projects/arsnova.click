@@ -49,4 +49,3 @@ export class DefaultQuestionGroup extends AbstractQuestionGroup {
 EJSON.addType("DefaultQuestionGroup", function (value) {
 	return new DefaultQuestionGroup(value);
 });
-

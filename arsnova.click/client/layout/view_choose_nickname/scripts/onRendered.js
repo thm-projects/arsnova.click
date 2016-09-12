@@ -48,11 +48,9 @@ Template.nickLimited.onRendered(function () {
 });
 
 Template.nickCasLogin.onRendered(function () {
-	Tracker.autorun(function () {
-		if (lib.loginWithCas()) {
-			console.log(Meteor.user);
-			//localStorage.setItem(hashtag + "nick", );
-			Router.go("/" + hashtag + "/memberlist");
-		}
-	});
+	if (lib.loginWithCas()) {
+		var hashtag = Router.current().params.quizName;
+		localStorage.setItem(hashtag + "nick", Meteor.user().profile.name);
+		Router.go("/" + hashtag + "/memberlist");
+	}
 });

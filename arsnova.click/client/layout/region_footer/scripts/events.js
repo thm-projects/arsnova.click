@@ -151,6 +151,8 @@ const clickEvents = {
 									default:
 										throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
 								}
+
+								const oldSessionName = questionInstance.getHashtag();
 								questionInstance.setHashtag(hashtag);
 								Meteor.call('SessionConfiguration.addConfig', questionInstance.getConfiguration().serialize());
 								Meteor.call('HashtagsCollection.addHashtag', {
@@ -158,7 +160,10 @@ const clickEvents = {
 									hashtag: questionInstance.getHashtag()
 								});
 								localData.addHashtag(questionInstance);
-								if (Router.current().route.path() === "/hashtagmanagement") {
+								if (oldSessionName === "ImportFromARSnova") {
+									sessionStorage.setItem("overrideValidQuestionRedirect", true);
+									hashtagLib.connectEventManager(hashtag);
+								} else if (Router.current().route.path() === "/hashtagmanagement") {
 									location.reload();
 								} else {
 									Router.go("/hashtagmanagement");

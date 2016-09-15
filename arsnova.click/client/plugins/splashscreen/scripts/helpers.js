@@ -19,7 +19,6 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
 import {isMobileDevice} from './lib.js';
 

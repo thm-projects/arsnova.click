@@ -19,10 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import * as localData from '/lib/local_storage.js';
 
-export function isEditingQuestion () {
-	if (!Router.current()) {
-		return;
-	}
+export function isEditingQuestion() {
 	switch (Router.current().route.getName()) {
 		case ":quizName.question":
 		case ":quizName.answeroptions":

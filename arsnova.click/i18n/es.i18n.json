@@ -31,7 +31,8 @@
         "show_more": "Más",
         "sound": "Sonido",
         "qr_code": "Código QR",
-        "nicknames": "Nombres de usuario"
+        "nicknames": "Nombres de usuario",
+        "edit_quiz": "Edición del concurso"
       },
       "about": {
         "title": "Sobre la aplicación",

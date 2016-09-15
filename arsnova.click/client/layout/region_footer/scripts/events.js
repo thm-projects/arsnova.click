@@ -330,6 +330,9 @@ const clickEvents = {
 	},
 	"click #nicknames": function () {
 		Router.go("/" + Router.current().params.quizName + "/nicknameCategories");
+	},
+	"click #edit-quiz": function () {
+		Router.go("/" + Router.current().params.quizName + "/question");
 	}
 };
 

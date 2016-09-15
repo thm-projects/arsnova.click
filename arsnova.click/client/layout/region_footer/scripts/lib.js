@@ -85,10 +85,16 @@ export const footerElemQRCode = {
 };
 export const footerElemNicknames = {
 	id: "nicknames",
-	iconClass: "glyphicon glyphicon-user",
+	iconClass: "glyphicon glyphicon-sunglasses",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.nicknames",
 	selectable: true
+};
+export const footerElemEditQuiz = {
+	id: "edit-quiz",
+	iconClass: "glyphicon glyphicon-edit",
+	textClass: "footerElementText",
+	textName: "region.footer.footer_bar.edit_quiz"
 };
 const footerElemShowMore = {
 	id: "show-more",

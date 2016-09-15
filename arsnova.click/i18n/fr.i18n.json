@@ -31,7 +31,8 @@
         "show_more": "Plus",
         "sound": "Son",
         "qr_code": "Code QR",
-        "nicknames": "Pseudos"
+        "nicknames": "Pseudos",
+        "edit_quiz": "Modifier Quiz"
       },
       "about": {
         "title": "À propos de l'application quiz",

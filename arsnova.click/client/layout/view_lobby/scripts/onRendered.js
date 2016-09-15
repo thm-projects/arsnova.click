@@ -39,6 +39,7 @@ Template.memberlist.onRendered(function () {
 
 	footerElements.removeFooterElements();
 	if (localData.containsHashtag(Router.current().params.quizName)) {
+		footerElements.addFooterElement((footerElements.footerElemEditQuiz));
 		footerElements.addFooterElement(footerElements.footerElemHome);
 		footerElements.addFooterElement(footerElements.footerElemQRCode);
 		footerElements.addFooterElement(footerElements.footerElemSound);

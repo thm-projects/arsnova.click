@@ -52,7 +52,7 @@ export class AbstractSessionConfiguration {
 		this[music] = options.music;
 		this[nicks] = options.nicks;
 		this[theme] = options.theme || "theme-blackbeauty";
-		this[readingConfirmationEnabled] = options.readingConfirmationEnabled || true;
+		this[readingConfirmationEnabled] = options.readingConfirmationEnabled !== false;
 	}
 
 	serialize () {

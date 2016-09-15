@@ -21,7 +21,9 @@ import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
-import {showReadingConfirmationSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {showReadingConfirmationSplashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {TAPi18n} from 'meteor/tap:i18n';
 import * as localData from '/lib/local_storage.js';
 import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
@@ -29,11 +31,35 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount, startCountdown} from './lib.js';
 
 Template.liveResults.onRendered(()=> {
-	if (EventManagerCollection.findOne().readingConfirmationIndex < 1 && EventManagerCollection.findOne().questionIndex < 0) {
+	if (EventManagerCollection.findOne().readingConfirmationIndex < 1 &&
+		EventManagerCollection.findOne().questionIndex < 0 &&
+		SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled !== false) {
 		showReadingConfirmationSplashscreen(0);
 		$('.header-title').text(TAPi18n.__("view.liveResults.reading_confirmation"));
 	} else {
 		$('.header-title').text(TAPi18n.__("view.liveResults.title"));
+	}
+	if (SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled === false) {
+		if (EventManagerCollection.findOne().readingConfirmationIndex < 1 &&
+			EventManagerCollection.findOne().questionIndex < 0 &&
+			localData.containsHashtag(Router.current().params.quizName)) {
+			Meteor.call('Question.startTimer', {
+				hashtag: Router.current().params.quizName,
+				questionIndex: EventManagerCollection.findOne().questionIndex + 1
+			}, (err) => {
+				if (err) {
+					new ErrorSplashscreen({
+						autostart: true,
+						errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
+					});
+					Session.set("sessionClosed", true);
+				} else {
+					Session.set("sessionClosed", false);
+					startCountdown(EventManagerCollection.findOne().questionIndex + 1);
+				}
+			});
+		}
+		$('#startNextQuestion').removeAttr("disabled");
 	}
 	if (localData.containsHashtag(Router.current().params.quizName) && EventManagerCollection.findOne() && EventManagerCollection.findOne().readingConfirmationIndex === -1) {
 		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, 0);
@@ -43,12 +69,9 @@ Template.liveResults.onRendered(()=> {
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		footerElements.addFooterElement(footerElements.footerElemHome);
 		footerElements.addFooterElement(footerElements.footerElemSound);
-		/*
-		Not yet implemented!
 		if (EventManagerCollection.findOne().readingConfirmationIndex < QuestionGroupCollection.findOne().questionList.length) {
 			footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
 		}
-		*/
 		if (navigator.userAgent.match(/iPad/i) == null) {
 			footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		}

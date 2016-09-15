@@ -21,6 +21,7 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
 import * as liveResultsLib from "/client/layout/view_live_results/scripts/lib.js";
 import * as votingViewLib from "/client/layout/view_voting/scripts/lib.js";
@@ -132,7 +133,9 @@ function addLiveresultsChangeEvents() {
 	globalEventStackObserver.onChange([
 		"EventManagerCollection.showReadConfirmedForIndex"
 	], function (key, value) {
-		if (!isNaN(value.readingConfirmationIndex) && value.readingConfirmationIndex > 0) {
+		if (!isNaN(value.readingConfirmationIndex) &&
+			value.readingConfirmationIndex > 0 &&
+			SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled !== false) {
 			showReadingConfirmationSplashscreen(value.readingConfirmationIndex);
 		}
 	});

@@ -19,7 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
 
 export const footerElemTranslation = {
@@ -128,8 +128,8 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 	$.each(allElements, function (index, item) {
 		let state = true;
 		if (item.id === "sound") {
-			const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-			if (hashtagDoc && hashtagDoc.musicEnabled) {
+			const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+			if (configDoc && configDoc.music.isEnabled) {
 				$('#sound').removeClass("error").addClass("success");
 			} else {
 				state = false;
@@ -140,20 +140,14 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 		}
 
 		if (item.id === 'reading-confirmation') {
-			$('#reading-confirmation').removeClass("error").addClass("success");
+			if (SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled) {
+				$("#" + item.id).removeClass("error").addClass("success").find(".footerElemIcon").find("span").removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open");
+			} else {
+				state = false;
+				$("#" + item.id).removeClass("success").addClass("error").find(".footerElemIcon").find("span").removeClass("glyphicon-eye-open").addClass("glyphicon-eye-close");
+			}
 			$('#reading-confirmation_switch').bootstrapSwitch('state', state, true);
 			return;
-			/*
-			 Since the functionality is currently not implemented the state is set to enabled!
-
-			 if (HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled) {
-			 $('#reading-confirmation').removeClass("error").addClass("success");
-			 } else {
-			 state = false;
-			 $('#reading-confirmation').removeClass("success").addClass("error");
-			 }
-			 $('#reading-confirmation_switch').bootstrapSwitch('state', state, true);
-			 */
 		}
 
 		if (item.id === "nicknames" && typeof Session.get("questionGroup") !== "undefined") {

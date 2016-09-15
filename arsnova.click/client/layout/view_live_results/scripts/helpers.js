@@ -23,6 +23,7 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {countdown, getPercentRead, getCurrentRead, hslColPerc, checkIfIsCorrect, isCountdownZero} from './lib.js';
 
@@ -66,8 +67,8 @@ Template.liveResults.helpers({
 	},
 	getCurrentRead: (index)=> {
 		var currentReadAmount = getCurrentRead(index);
-		if (currentReadAmount > 0) {
-			$('#startNextQuestion').prop('disabled', false);
+		if (currentReadAmount > 0 || SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled === false) {
+			$('#startNextQuestion').removeAttr('disabled');
 		}
 		return currentReadAmount;
 	},
@@ -310,10 +311,11 @@ Template.liveResults.helpers({
 	},
 	showNextQuestionButton: ()=> {
 		let eventDoc = EventManagerCollection.findOne();
-		if (!eventDoc) {
+		const configDoc = SessionConfigurationCollection.findOne();
+		if (!eventDoc || !configDoc) {
 			return;
 		}
-		return eventDoc.readingConfirmationIndex <= eventDoc.questionIndex;
+		return configDoc.readingConfirmationEnabled !== false && eventDoc.readingConfirmationIndex <= eventDoc.questionIndex;
 	},
 	nextQuestionIndex: ()=> {
 		let eventDoc = EventManagerCollection.findOne();
@@ -398,11 +400,12 @@ Template.liveResults.helpers({
 		return questionDoc.questionList.length === 1;
 	},
 	hasReadConfirmationRequested: (index)=> {
-		let eventDoc = EventManagerCollection.findOne();
+		const eventDoc = EventManagerCollection.findOne();
+		const configDoc = SessionConfigurationCollection.findOne();
 		if (!eventDoc) {
 			return;
 		}
-		return index <= eventDoc.questionIndex;
+		return index <= eventDoc.questionIndex || configDoc.readingConfirmationEnabled === false;
 	},
 	readingConfirmationListForQuestion: (index)=> {
 		let result = [];

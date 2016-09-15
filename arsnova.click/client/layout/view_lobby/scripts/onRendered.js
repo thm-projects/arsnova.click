@@ -43,10 +43,7 @@ Template.memberlist.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemHome);
 		footerElements.addFooterElement(footerElements.footerElemQRCode);
 		footerElements.addFooterElement(footerElements.footerElemSound);
-		/*
-		 Not yet implemented!
 		footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
-		*/
 		footerElements.addFooterElement(footerElements.footerElemNicknames);
 		if (navigator.userAgent.match(/iPad/i) == null) {
 			footerElements.addFooterElement(footerElements.footerElemFullscreen);

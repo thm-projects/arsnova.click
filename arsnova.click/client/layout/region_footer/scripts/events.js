@@ -333,6 +333,23 @@ const clickEvents = {
 	},
 	"click #edit-quiz": function () {
 		Router.go("/" + Router.current().params.quizName + "/question");
+	},
+	"click #reading-confirmation": function () {
+		const elem = $('#reading-confirmation').find(".footerElemIcon").find(".glyphicon");
+		const questionGroup = Session.get("questionGroup");
+		if (elem.hasClass("glyphicon-eye-open")) {
+			elem.removeClass("glyphicon-eye-open").addClass("glyphicon-eye-close");
+			questionGroup.getConfiguration().setReadingConfirmationEnabled(false);
+		} else {
+			elem.removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open");
+			questionGroup.getConfiguration().setReadingConfirmationEnabled(true);
+		}
+		Session.set("questionGroup", questionGroup);
+		localData.addHashtag(questionGroup);
+		Meteor.call("SessionConfiguration.setReadingConfirmationEnabled",
+			Session.get("questionGroup").getHashtag(),
+			Session.get("questionGroup").getConfiguration().getReadingConfirmationEnabled()
+		);
 	}
 };
 

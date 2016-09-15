@@ -132,12 +132,15 @@
       "yes": "Ja",
       "no": "Nein",
       "reset_session_confirmation": {
-        "title": "Soll das Quiz beendet werden?",
-        "text": {
-          "running_question": "Alle Teilnehmenden werden abgmeldet. Die Rangliste wird gelöscht. Dein Quiz mit allen Einstellungen verbleibt in diesem Browser, solange er nicht zurückgesetzt wird.",
-          "empty_lobby": "Dein Quiz mit allen Einstellungen verbleibt in diesem Browser, solange er nicht zurückgesetzt wird.",
-          "continue": "Fortfahren?"
-        }
+        "empty_lobby": {
+          "title": "Edit-Modus verlassen?",
+          "text": "Dein Quiz mit allen Einstellungen verbleibt in diesem Browser, solange er nicht zurückgesetzt wird."
+        },
+        "active_quiz": {
+          "title": "Soll das Quiz beendet werden?",
+          "text": "Alle Teilnehmenden werden abgemeldet. Die Rangliste wird gelöscht. Dein Quiz mit allen Einstellungen verbleibt in diesem Browser, solange er nicht zurückgesetzt wird."
+        },
+        "continue": "Fortfahren?"
       },
       "connection_status": {
         "title": "Verbindungsstatus",

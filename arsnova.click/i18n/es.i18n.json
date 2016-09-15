@@ -132,12 +132,15 @@
       "yes": "Si",
       "no": "No",
       "reset_session_confirmation": {
-        "title": "¿Quieres salir del cuestionario?",
-        "text": {
-          "running_question": "La sesión de todos los participantes será cerrada. La lista del ranking será borrada. Tu cuestionario con todos los ajustes permanecerá en este navegador, siempre y cuando no sea reiniciado.",
-          "empty_lobby": "Tu sesión será cerrada. Tu cuestionario con todos los ajustes permanecerá en este navegador, siempre y cuando no sea reiniciado.",
-          "continue": "¿Avanzar?"
-        }
+        "empty_lobby": {
+          "title": "Deje el modo de edición?",
+          "text": "Tu sesión será cerrada. Tu cuestionario con todos los ajustes permanecerá en este navegador, siempre y cuando no sea reiniciado."
+        },
+        "active_quiz": {
+          "title": "¿Quieres salir del cuestionario?",
+          "text": "La sesión de todos los participantes será cerrada. La lista del ranking será borrada. Tu cuestionario con todos los ajustes permanecerá en este navegador, siempre y cuando no sea reiniciado."
+        },
+        "continue": "¿Avanzar?"
       },
       "connection_status": {
         "title": "Estado de conexión",

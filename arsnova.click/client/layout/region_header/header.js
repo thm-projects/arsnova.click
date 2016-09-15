@@ -25,6 +25,7 @@ import * as localData from '/lib/local_storage.js';
 import {buzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib";
+import * as lib from './lib.js';
 
 Template.header.helpers({
 	getCurrentResetRoute: function () {
@@ -82,16 +83,7 @@ Template.header.helpers({
 				}
 		}
 	},
-	isEditingQuestion: function () {
-		switch (Router.current().route.getName()) {
-			case ":quizName.question":
-			case ":quizName.answeroptions":
-			case ":quizName.settimer":
-				return true;
-			default:
-				return false;
-		}
-	},
+	isEditingQuestion: lib.isEditingQuestion,
 	isInLobby: function () {
 		return Router.current().route.getName() === ":quizName.memberlist";
 	},

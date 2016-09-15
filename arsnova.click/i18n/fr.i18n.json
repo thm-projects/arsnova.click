@@ -131,12 +131,15 @@
       "yes": "Oui",
       "no": "Non",
       "reset_session_confirmation": {
-        "title": "Finir le quiz?",
-        "text": {
-          "running_question": "Tous les participants seront déconnectés. Le classement sera supprimé. Ton quiz avec tout ses paramètres reste dans ce browser, tant qu'il n'est pas réinitialisé.",
-          "empty_lobby": "Ton quiz avec tous ses paramètres reste dans ce browser, tant qu’il n’est pas réinitialisé.",
-          "continue": "Continuer?"
-        }
+        "empty_lobby": {
+          "title": "Quittez le mode d'édition?",
+          "text": "Ton quiz avec tous ses paramètres reste dans ce browser, tant qu’il n’est pas réinitialisé."
+        },
+        "active_quiz": {
+          "title": "Finir le quiz?",
+          "text": "Tous les participants seront déconnectés. Le classement sera supprimé. Ton quiz avec tout ses paramètres reste dans ce browser, tant qu'il n'est pas réinitialisé."
+        },
+        "continue": "Continuer?"
       },
       "connection_status": {
         "title": "Statut de connection",

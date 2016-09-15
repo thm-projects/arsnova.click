@@ -131,12 +131,15 @@
       "yes": "Yes",
       "no": "No",
       "reset_session_confirmation": {
-        "title": "Exit the quiz?",
-        "text": {
-          "running_question": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
-          "empty_lobby": "You will be logged out. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server.",
-          "continue": "Proceed?"
-        }
+        "empty_lobby": {
+          "title": "Leave the edit mode?",
+          "text": "You will be logged out. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server."
+        },
+        "active_quiz": {
+          "title": "Exit the quiz?",
+          "text": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server."
+        },
+        "continue": "Proceed?"
       },
       "connection_status": {
         "title": "Connection status",

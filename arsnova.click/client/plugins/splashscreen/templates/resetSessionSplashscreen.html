@@ -21,15 +21,21 @@
             <div class="noSplashscreenPadding col-md-11 col-sm-11 col-xs-10">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2>{{_ "region.header.reset_session_confirmation.title"}}</h2>
+                        <h2>
+                            {{#if isEditingQuestion}}
+                                {{_ "region.header.reset_session_confirmation.empty_lobby.title"}}
+                            {{else}}
+                                {{_ "region.header.reset_session_confirmation.active_quiz.title"}}
+                            {{/if}}
+                        </h2>
                     </div>
                     <div class="modal-body">
-                        {{#if isSessionRunning}}
-                            <p>{{_ "region.header.reset_session_confirmation.text.running_question"}}</p>
+                        {{#if isEditingQuestion}}
+                            <p>{{_ "region.header.reset_session_confirmation.empty_lobby.text"}}</p>
                         {{else}}
-                            <p>{{_ "region.header.reset_session_confirmation.text.empty_lobby"}}</p>
+                            <p>{{_ "region.header.reset_session_confirmation.active_quiz.text"}}</p>
                         {{/if}}
-                        <p style="margin-top:20px;">{{_ "region.header.reset_session_confirmation.text.continue"}}</p>
+                        <p style="margin-top:20px;">{{_ "region.header.reset_session_confirmation.continue"}}</p>
                     </div>
                     <div class="modal-footer">
                         <div class="row">

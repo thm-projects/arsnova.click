@@ -19,7 +19,8 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {MemberListCollection} from '/lib/member_list/collection.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import * as headerLib from '/client/layout/region_header/lib.js';
 import {isMobileDevice} from './lib.js';
 
 Template.splashscreen.helpers($.extend(isMobileDevice, {
@@ -35,9 +36,7 @@ Template.deleteConfirmationSplashscreen.helpers($.extend(isMobileDevice, {
 }));
 
 Template.resetSessionSplashscreen.helpers($.extend(isMobileDevice, {
-	isSessionRunning: function () {
-		return MemberListCollection.find().count() !== 0;
-	}
+	isEditingQuestion: headerLib.isEditingQuestion
 }));
 
 Template.errorSplashscreen.helpers($.extend(isMobileDevice, {

@@ -21,6 +21,7 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {HashtagsCollection, hashtagsCollectionSchema, hashtagSchema, themeSchema, selectedNicksSchema} from '/lib/hashtags/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
@@ -144,6 +145,11 @@ Meteor.methods({
 					_id: 0
 				}
 			});
+			var configDoc = SessionConfigurationCollection.findOne({hashtag: hashtag}, {
+				fields: {
+					_id: 0
+				}
+			});
 			var answerOptionsDoc = AnswerOptionCollection.find({hashtag: hashtag}, {
 				fields: {
 					_id: 0
@@ -161,6 +167,7 @@ Meteor.methods({
 			}).fetch();
 			var exportData = {
 				hashtagDoc: hashtagDoc,
+				configDoc: configDoc,
 				questionGroupDoc: questionGroupDoc,
 				answerOptionsDoc: answerOptionsDoc,
 				memberListDoc: memberListDoc,

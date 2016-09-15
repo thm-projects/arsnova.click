@@ -314,17 +314,5 @@ export function exportFromLocalStorage(hashtag) {
 	} else {
 		throw new TypeError("Undefined session type while exporting");
 	}
-	if (!quizItem.theme) {
-		quizItem.theme = "theme-blackbeauty";
-	}
-	if (!quizItem.musicVolume) {
-		quizItem.musicVolume = 80;
-	}
-	if (!quizItem.musicEnabled) {
-		quizItem.musicEnabled = 1;
-	}
-	if (!quizItem.musicTitle) {
-		quizItem.musicTitle = "Song1";
-	}
 	return JSON.stringify(quizItem.serialize());
 }

@@ -39,28 +39,24 @@ if (Meteor.isServer) {
 				hashtag: "hashtags",
 				privateKey: new Mongo.ObjectID()._str,
 				sessionStatus: 0,
-				lastConnection: (new Date()).getTime(),
-				musicVolume: 0,
-				musicEnabled: 0,
-				musicTitle: "noSong",
-				theme: "theme-blackbeauty",
-				selectedNicks: []
+				lastConnection: (new Date()).getTime()
 			};
-			// block this hash / pk -> do not use and merge to production server!
 			var blockedHashtag2 = {
 				hashtag: "privateKey",
 				privateKey: new Mongo.ObjectID()._str,
 				sessionStatus: 0,
-				lastConnection: (new Date()).getTime(),
-				musicVolume: 0,
-				musicEnabled: 0,
-				musicTitle: "noSong",
-				theme: "theme-blackbeauty",
-				selectedNicks: []
+				lastConnection: (new Date()).getTime()
+			};
+			var blockedHashtag3 = {
+				hashtag: "ImportFromARSnova",
+				privateKey: new Mongo.ObjectID()._str,
+				sessionStatus: 0,
+				lastConnection: (new Date()).getTime()
 			};
 			console.log("inserting blocking hashtags...");
 			HashtagsCollection.insert(blockedHashtag1);
 			HashtagsCollection.insert(blockedHashtag2);
+			HashtagsCollection.insert(blockedHashtag3);
 
 			console.log("inserted blocking hashtags successfully");
 		}

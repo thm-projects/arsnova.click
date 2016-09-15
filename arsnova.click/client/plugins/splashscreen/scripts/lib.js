@@ -23,6 +23,16 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import * as localData from '/lib/local_storage.js';
 
+export function closeSplashscreen() {
+	const qrCodeContainer = $('.qr-code-container');
+	if (qrCodeContainer.is(":visible")) {
+		qrCodeContainer.hide();
+	} else {
+		$(".splashscreen").remove();
+		$('.modal-backdrop').remove();
+	}
+}
+
 /**
  * This class will construct an empty splashscreen which can be modified via JQuery.
  *
@@ -73,6 +83,12 @@ export class Splashscreen {
 
 		this.rendered();
 		this.isRendered = true;
+
+		$(document).on('keyup',function (event) {
+			if (event.keyCode === 27) {
+				closeSplashscreen(event);
+			}
+		});
 	}
 
 	/**
@@ -302,9 +318,4 @@ export function showFullscreenPicture(event) {
 			img.style.textAlign = "center";
 		}
 	});
-}
-
-export function closeSplashscreen(event) {
-	$(event.currentTarget).parents(".splashscreen").remove();
-	$('.modal-backdrop').remove();
 }

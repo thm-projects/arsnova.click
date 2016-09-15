@@ -56,6 +56,12 @@ Template.memberlist.onRendered(function () {
 	setTimeout(function () {
 		$('#qr-code').click();
 	}, 100);
+
+	$(document).on('keyup',function (event) {
+		if (event.keyCode === 27) {
+			$('.qr-code-container').hide();
+		}
+	});
 });
 
 Template.learner.onRendered(function () {

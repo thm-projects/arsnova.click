@@ -45,7 +45,13 @@ Template.home.onRendered(function () {
 	if (navigator.userAgent.match(/iPad/i) == null) {
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
 	}
-	footerElements.addFooterElement(footerElements.footerElemHashtagManagement);
+
+	if (localData.getAllHashtags().length > 0) {
+		footerElements.addFooterElement(footerElements.footerElemHashtagManagement);
+	} else {
+		footerElements.addFooterElement(footerElements.footerElemImport);
+	}
+
 	footerElements.calculateFooter();
 });
 

@@ -26,10 +26,7 @@ import {HashtagsCollection, hashtagsCollectionSchema, hashtagSchema, themeSchema
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
-	/**
-	 * @return {boolean}
-	 */
-	'HashtagsCollection.checkPrivateKey': function (privateKey, hashtag) {
+	'HashtagsCollection.checkPrivateKey': (privateKey, hashtag) => {
 		hashtagsCollectionSchema.validate({hashtag, privateKey});
 
 		const doc = HashtagsCollection.findOne({
@@ -38,7 +35,7 @@ Meteor.methods({
 		});
 		return Boolean(doc);
 	},
-	'HashtagsCollection.addHashtag': function (sessionConfiguration) {
+	'HashtagsCollection.addHashtag': (sessionConfiguration) => {
 		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag: sessionConfiguration.hashtag});
 		if (HashtagsCollection.findOne({hashtag: sessionConfiguration.hashtag})) {
 			throw new Meteor.Error('HashtagsCollection.addHashtag', 'session_exists');
@@ -54,7 +51,7 @@ Meteor.methods({
 			}
 		});
 	},
-	'HashtagsCollection.setDefaultTheme': function (hashtag, themeName = "theme-arsnova-dot-click-contrast") {
+	'HashtagsCollection.setDefaultTheme': (hashtag, themeName = "theme-arsnova-dot-click-contrast") => {
 		new SimpleSchema({hashtag: hashtagSchema, theme: themeSchema}).validate({hashtag: hashtag, theme: themeName});
 
 		let queryParam = {};
@@ -79,8 +76,11 @@ Meteor.methods({
 			}
 		});
 	},
-	'HashtagsCollection.setSelectedNicks': function (hashtag, nicks) {
-		new SimpleSchema({hashtag: hashtagSchema, selectedNicks: {type: [selectedNicksSchema]}}).validate({hashtag: hashtag, selectedNicks: nicks});
+	'HashtagsCollection.setSelectedNicks': (hashtag, nicks) => {
+		new SimpleSchema({
+			hashtag: hashtagSchema,
+			selectedNicks: {type: [selectedNicksSchema]}
+		}).validate({hashtag: hashtag, selectedNicks: nicks});
 
 		let queryParam = {};
 		if (Meteor.isServer) {
@@ -104,8 +104,8 @@ Meteor.methods({
 			}
 		});
 	},
-	'HashtagsCollection.updateMusicSettings': function (doc) {
-		const hashtagDoc = HashtagsCollection.findOne({hashtag: doc.hashtag});
+	'HashtagsCollection.updateMusicSettings': (doc) => {
+		var hashtagDoc = HashtagsCollection.findOne({hashtag: doc.hashtag});
 
 		if (!hashtagDoc) {
 			throw new Meteor.Error('HashtagsCollection.updateMusicSettings', 'session_not_exists');
@@ -128,7 +128,7 @@ Meteor.methods({
 			});
 		}
 	},
-	'HashtagsCollection.export': function ({hashtag}) {
+	'HashtagsCollection.export': ({hashtag}) => {
 		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
 
 		if (Meteor.isServer) {
@@ -179,7 +179,7 @@ Meteor.methods({
 			return JSON.stringify(exportData);
 		}
 	},
-	'HashtagsCollection.import': function ({privateKey, data}) {
+	'HashtagsCollection.import': ({privateKey, data}) => {
 		if (Meteor.isServer) {
 			const hashtag = data.hashtag;
 			const oldDoc = HashtagsCollection.findOne({hashtag: hashtag, privateKey: {$ne: privateKey}});
@@ -249,6 +249,5 @@ Meteor.methods({
 					}
 				}
 			});
-		}
-	}
+		}}
 });

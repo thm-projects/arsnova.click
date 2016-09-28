@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {showFullscreenPicture, showVideo, closeSplashscreen, forceFeedback} from './lib.js';
+import {showFullscreenPicture, showVideo, closeSplashscreen} from './lib.js';
 
 Template.splashscreen.events({
 	"click #btn-hidePreviewModal": function (event) {

@@ -30,6 +30,9 @@ export function closeSplashscreen() {
 	} else {
 		$(".splashscreen").remove();
 		$('.modal-backdrop').remove();
+		if (navigator.vibrate) {
+			navigator.vibrate(500);
+		}
 	}
 }
 

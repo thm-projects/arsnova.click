@@ -49,5 +49,6 @@ Meteor.startup(function () {
 		$.getScript('/lib/highlight.pack.min.js');
 		$.getScript('/lib/marked.min.js');
 		TAPi18n.setLanguage(getUserLanguage());
+		navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 	}
 });

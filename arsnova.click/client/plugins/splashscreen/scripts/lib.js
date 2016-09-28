@@ -23,6 +23,12 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import * as localData from '/lib/local_storage.js';
 
+export function forceFeedback() {
+	if (navigator.vibrate) {
+		navigator.vibrate(500);
+	}
+}
+
 export function closeSplashscreen() {
 	const qrCodeContainer = $('.qr-code-container');
 	if (qrCodeContainer.is(":visible")) {
@@ -30,6 +36,7 @@ export function closeSplashscreen() {
 	} else {
 		$(".splashscreen").remove();
 		$('.modal-backdrop').remove();
+		forceFeedback();
 	}
 }
 
@@ -149,9 +156,6 @@ export class Splashscreen {
 		this.templateSelector.off('hide.bs.modal').off('click', this.options.closeOnButton);
 		this.templateSelector.modal("hide");
 		this.isOpen = false;
-		if (navigator.vibrate) {
-			navigator.vibrate(500);
-		}
 		this.destroy();
 	}
 

@@ -16,9 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {showFullscreenPicture, showVideo, closeSplashscreen} from './lib.js';
-
-
+import {showFullscreenPicture, showVideo, closeSplashscreen, forceFeedback} from './lib.js';
 
 Template.splashscreen.events({
 	"click #btn-hidePreviewModal": function (event) {
@@ -26,42 +24,63 @@ Template.splashscreen.events({
 	},
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
+	},
+	"click button": function (event) {
+		forceFeedback();
 	}
 });
 
 Template.questionAndAnswerSplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
+	},
+	"click button": function (event) {
+		forceFeedback();
 	}
 });
 
 Template.showHashtagsSplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
+	},
+	"click button": function (event) {
+		forceFeedback();
 	}
 });
 
 Template.errorSplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
+	},
+	"click button": function (event) {
+		forceFeedback();
 	}
 });
 
 Template.deleteConfirmationSplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
+	},
+	"click button": function (event) {
+		forceFeedback();
 	}
 });
 
 Template.resetSessionSplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
+	},
+	"click button": function (event) {
+		forceFeedback();
 	}
 });
 
 Template.renameHashtagSplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
+	},
+	"click button": function (event) {
+		forceFeedback();
 	}
 });
 
@@ -74,6 +93,9 @@ Template.readingConfirmedSplashscreen.events({
 	},
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
+	},
+	"click button": function (event) {
+		forceFeedback();
 	}
 });
 
@@ -91,17 +113,26 @@ Template.questionPreviewSplashscreen.events({
 	},
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
+	},
+	"click button": function (event) {
+		forceFeedback();
 	}
 });
 
 Template.kickMemberSplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
+	},
+	"click button": function (event) {
+		forceFeedback();
 	}
 });
 
 Template.connectionQualitySplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
+	},
+	"click button": function (event) {
+		forceFeedback();
 	}
 });

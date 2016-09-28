@@ -24,63 +24,42 @@ Template.splashscreen.events({
 	},
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
-	},
-	"click button": function (event) {
-		forceFeedback();
 	}
 });
 
 Template.questionAndAnswerSplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
-	},
-	"click button": function (event) {
-		forceFeedback();
 	}
 });
 
 Template.showHashtagsSplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
-	},
-	"click button": function (event) {
-		forceFeedback();
 	}
 });
 
 Template.errorSplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
-	},
-	"click button": function (event) {
-		forceFeedback();
 	}
 });
 
 Template.deleteConfirmationSplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
-	},
-	"click button": function (event) {
-		forceFeedback();
 	}
 });
 
 Template.resetSessionSplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
-	},
-	"click button": function (event) {
-		forceFeedback();
 	}
 });
 
 Template.renameHashtagSplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
-	},
-	"click button": function (event) {
-		forceFeedback();
 	}
 });
 
@@ -93,9 +72,6 @@ Template.readingConfirmedSplashscreen.events({
 	},
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
-	},
-	"click button": function (event) {
-		forceFeedback();
 	}
 });
 
@@ -113,26 +89,17 @@ Template.questionPreviewSplashscreen.events({
 	},
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
-	},
-	"click button": function (event) {
-		forceFeedback();
 	}
 });
 
 Template.kickMemberSplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
-	},
-	"click button": function (event) {
-		forceFeedback();
 	}
 });
 
 Template.connectionQualitySplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
-	},
-	"click button": function (event) {
-		forceFeedback();
 	}
 });

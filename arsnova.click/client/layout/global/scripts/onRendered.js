@@ -21,7 +21,7 @@ import  * as localData from '/lib/local_storage.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
-import {startConnectionIndication, getRTT} from '/client/layout/global/scripts/lib.js';
+import {startConnectionIndication, getRTT, forceFeedback} from '/client/layout/global/scripts/lib.js';
 
 Template.home.onRendered(function () {
 	HashtagsCollection.find().observeChanges({
@@ -58,4 +58,7 @@ Template.home.onRendered(function () {
 Template.layout.onRendered(function () {
 	startConnectionIndication();
 	getRTT();
+	$.on("click", "button", function () {
+		forceFeedback();
+	});
 });

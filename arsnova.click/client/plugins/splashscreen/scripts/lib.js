@@ -21,13 +21,8 @@ import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
+import {forceFeedback} from '/client/layout/global/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
-
-export function forceFeedback() {
-	if (navigator.vibrate) {
-		navigator.vibrate(500);
-	}
-}
 
 export function closeSplashscreen() {
 	const qrCodeContainer = $('.qr-code-container');

@@ -30,9 +30,6 @@ export function closeSplashscreen() {
 	} else {
 		$(".splashscreen").remove();
 		$('.modal-backdrop').remove();
-		if (navigator.vibrate) {
-			navigator.vibrate(500);
-		}
 	}
 }
 
@@ -152,6 +149,9 @@ export class Splashscreen {
 		this.templateSelector.off('hide.bs.modal').off('click', this.options.closeOnButton);
 		this.templateSelector.modal("hide");
 		this.isOpen = false;
+		if (navigator.vibrate) {
+			navigator.vibrate(500);
+		}
 		this.destroy();
 	}
 

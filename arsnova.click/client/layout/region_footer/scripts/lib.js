@@ -159,7 +159,7 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 			return;
 		}
 
-		$('#' + item.id).find(".footerElemText").find("span").text(TAPi18n.__(item.textName));
+		$('#' + item.id).find(".footerElemText").text(TAPi18n.__(item.textName));
 	});
 });
 

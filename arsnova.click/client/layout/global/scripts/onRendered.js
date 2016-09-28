@@ -58,5 +58,5 @@ Template.home.onRendered(function () {
 Template.layout.onRendered(function () {
 	startConnectionIndication();
 	getRTT();
-	$( "body" ).on( "click", "button", forceFeedback );
+	$("body").on("click", "button", forceFeedback);
 });

@@ -26,6 +26,7 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {HashtagsCollection, hashtagSchema} from '/lib/hashtags/collection.js';
 
+
 Meteor.methods({
 	'Main.killAll': function (hashtag) {
 		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});

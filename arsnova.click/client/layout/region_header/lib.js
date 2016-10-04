@@ -47,7 +47,7 @@ export function calculateTitelHeight() {
 	var container = $(".container");
 	var footerHeight = $(".fixed-bottom").outerHeight(true) + $(".footer-info-bar").outerHeight();
 	var navbarFooterHeight = $('.navbar-fixed-bottom').is(":visible") ? $(".navbar-fixed-bottom").outerHeight() : 0;
-	var finalHeight = $(window).height() - fixedTop.outerHeight() - navbarFooterHeight - footerHeight;
+	var finalHeight = $(window).height() - fixedTop.outerHeight() - footerHeight;
 
 	container.css("height", finalHeight);
 	container.css("margin-top", fixedTop.outerHeight());

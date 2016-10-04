@@ -19,7 +19,6 @@ import {Template} from 'meteor/templating';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
-import * as lib from './lib.js';
 
 Template.nick.onRendered(function () {
 	$("#forwardButton").attr("disabled", "disabled");

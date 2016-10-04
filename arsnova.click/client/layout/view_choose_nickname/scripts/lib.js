@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {BannedNicksCollection} from '/lib/banned_nicks/collection.js';
 

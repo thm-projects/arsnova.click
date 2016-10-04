@@ -57,9 +57,5 @@ export function getRandomInt(min, max) {
 }
 
 export function loginWithCas() {
-	Meteor.loginWithCas({}, function (err) {
-		if (err) {
-			throw new Meteor.Error("CAS login failed");
-		}
-	});
+	Meteor.loginWithCas();
 }

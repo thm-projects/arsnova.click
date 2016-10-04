@@ -50,6 +50,10 @@ export const foregroundColorSchema = {
 export const insertDateSchema = {
 	type: String
 };
+export const userRefSchema = {
+	type: String,
+	optional: true
+};
 export const memberListCollectionSchema = new SimpleSchema({
 	hashtag: hashtagSchema,
 	nick: userNickSchema,
@@ -58,7 +62,8 @@ export const memberListCollectionSchema = new SimpleSchema({
 	readConfirmed: readConfirmedSchema,
 	backgroundColor: backgroundColorSchema,
 	foregroundColor: foregroundColorSchema,
-	insertDate: insertDateSchema
+	insertDate: insertDateSchema,
+	userRef: userRefSchema
 });
 
 MemberListCollection.attachSchema(memberListCollectionSchema);

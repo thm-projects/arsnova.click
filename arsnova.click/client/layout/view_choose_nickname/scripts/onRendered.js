@@ -48,9 +48,9 @@ Template.nickLimited.onRendered(function () {
 });
 
 Template.nickCasLogin.onRendered(function () {
-	if (lib.loginWithCas()) {
-		var hashtag = Router.current().params.quizName;
-		localStorage.setItem(hashtag + "nick", Meteor.user().profile.name);
-		Router.go("/" + hashtag + "/memberlist");
-	}
+	footerElements.removeFooterElements();
+	footerElements.calculateFooter();
+	calculateHeaderSize();
+	$(window).resize(calculateHeaderSize);
 });
+

@@ -1,3 +1,15 @@
 <template name="nickCasLogin">
-    {{ loading}}
+    <div class="row center-vertical-non-scrollable">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="text"
+                           class="round-corners input-field"
+                           id="nickname-input-field" placeholder="{{_ "view.choose_nickname.enter_nickname_here"}}"
+                           aria-describedby="basic-addon1" maxlength="{{getUserNickSchema.max}}">
+                </div>
+            </div>
+        </div>
+    </div>
+    {{> footer_nav_buttons backId="backButton" forwardId="loginViaCas" forwardText="Login via CAS"}}
 </template>

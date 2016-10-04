@@ -17,6 +17,7 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
+import {Tracker} from 'meteor/tracker';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {MemberListCollection, userNickSchema} from '/lib/member_list/collection.js';
@@ -145,6 +146,40 @@ Template.nickLimited.events({
 			} else {
 				localStorage.setItem(Router.current().params.quizName + "nick", nickname);
 				Router.go("/" + Router.current().params.quizName + "/memberlist");
+			}
+		});
+	}
+});
+
+Template.nickCasLogin.events({
+	"click #loginViaCas": function () {
+		lib.loginWithCas();
+		const loginTracker = Tracker.autorun(function () {
+			if (Meteor.user().profile.mail[0].indexOf("thm") > -1) {
+				const hashtag = Router.current().params.quizName;
+				const nickname = $("#nickname-input-field").val() || Meteor.user().profile.id;
+				const bgColor = lib.rgbToHex(lib.getRandomInt(0, 255), lib.getRandomInt(0, 255), lib.getRandomInt(0, 255));
+				Meteor.call('MemberListCollection.addLearner', {
+					hashtag: hashtag,
+					nick: nickname,
+					userRef: Meteor.user()._id,
+					privateKey: localData.getPrivateKey(),
+					backgroundColor: bgColor,
+					foregroundColor: lib.transformForegroundColor(lib.hexToRgb(bgColor))
+				}, (err) => {
+					if (err) {
+						new ErrorSplashscreen({
+							autostart: true,
+							errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
+						});
+					} else {
+						localStorage.setItem(hashtag + "nick", nickname);
+						Router.go("/" + hashtag + "/memberlist");
+					}
+				});
+				if (loginTracker) {
+					loginTracker.stop();
+				}
 			}
 		});
 	}

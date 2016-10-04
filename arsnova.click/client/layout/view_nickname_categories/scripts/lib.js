@@ -19,6 +19,20 @@ export function formatBootstrapSwitch() {
 			localData.addHashtag(Session.get("questionGroup"));
 		}
 	});
+	$('#restrict_to_cas_switch').bootstrapSwitch({
+		size: "small",
+		state: Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin(),
+		onText: TAPi18n.__("region.header.yes"),
+		offText: TAPi18n.__("region.header.no"),
+		wrapperClass: "input-field",
+		animate: false,
+		onSwitchChange: function (event, state) {
+			var questionItem = Session.get("questionGroup");
+			questionItem.getConfiguration().getNickSettings().setRestrictToCASLogin(state);
+			Session.set("questionGroup", questionItem);
+			localData.addHashtag(Session.get("questionGroup"));
+		}
+	});
 }
 
 export function setFormatBootstrapSwitchTracker(value) {

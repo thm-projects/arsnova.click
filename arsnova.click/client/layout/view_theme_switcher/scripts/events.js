@@ -25,7 +25,6 @@ Template.themeSwitcher.events({
 	"change #select-theme": function (event) {
 		const theme = $(event.currentTarget).find("option:selected").attr("id");
 		localStorage.setItem("theme", theme);
-		Session.set("theme", theme);
 
 		for (let i = 0; i < themes.length; i++) {
 			if (themes[i].id === theme) {
@@ -38,7 +37,8 @@ Template.themeSwitcher.events({
 		if (quiz) {
 			quiz.getConfiguration().setTheme(theme);
 			Session.set("questionGroup", quiz);
-			Meteor.call("HashtagsCollection.setDefaultTheme", Session.get("questionGroup").getHashtag(), theme);
+			Meteor.call("SessionConfiguration.setTheme", Session.get("questionGroup").getHashtag(), theme);
+			Session.set("theme", theme);
 		}
 	},
 	"click #backButton": function () {

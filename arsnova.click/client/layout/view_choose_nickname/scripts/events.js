@@ -63,54 +63,7 @@ Template.nick.events({
 		Router.go("/" + Router.current().params.quizName + "/resetToHome");
 	},
 	'input #nickname-input-field': function (event) {
-		var currentNickName = event.currentTarget.value;
-		var member = MemberListCollection.findOne({nick: currentNickName});
-		var $inputField = $("#nickname-input-field");
-
-		if (currentNickName.length > 2 && currentNickName.length < 26 && !member) {
-			if (lib.isNickAllowed(currentNickName)) {
-				$("#forwardButton").removeAttr("disabled");
-				$inputField.popover("destroy");
-			} else {
-				$("#forwardButton").attr("disabled", "disabled");
-				$inputField.popover("destroy");
-				$inputField.popover({
-					title: TAPi18n.__("view.choose_nickname.nickname_blacklist_popup"),
-					trigger: 'manual',
-					placement: 'bottom'
-				});
-				$inputField.popover("show");
-			}
-		} else {
-			$("#forwardButton").attr("disabled", "disabled");
-			if (currentNickName.length === 0 || !member) {
-				$inputField.popover("destroy");
-			}
-			if (currentNickName.length < 3) {
-				$inputField.popover({
-					title: TAPi18n.__("view.choose_nickname.nickname_too_short"),
-					trigger: 'manual',
-					placement: 'bottom'
-				});
-				$inputField.popover("show");
-			} else {
-				if (currentNickName.length > 25) {
-					$inputField.popover({
-						title: TAPi18n.__("view.choose_nickname.nickname_too_long"),
-						trigger: 'manual',
-						placement: 'bottom'
-					});
-					$inputField.popover("show");
-				} else {
-					$inputField.popover({
-						title: TAPi18n.__("view.choose_nickname.nickname_na_popup"),
-						trigger: 'manual',
-						placement: 'bottom'
-					});
-					$inputField.popover("show");
-				}
-			}
-		}
+		lib.parseEnteredNickname(event);
 	},
 	"keydown #nickname-input-field": function (event) {
 		if (event.keyCode === 13) {
@@ -152,35 +105,32 @@ Template.nickLimited.events({
 });
 
 Template.nickCasLogin.events({
+	'input #nickname-input-field': function (event) {
+		lib.parseEnteredNickname(event);
+	},
 	"click #loginViaCas": function () {
 		lib.loginWithCas();
 		const loginTracker = Tracker.autorun(function () {
-			if (Meteor.user().profile.mail[0].indexOf("thm") > -1) {
-				const hashtag = Router.current().params.quizName;
-				const nickname = $("#nickname-input-field").val() || Meteor.user().profile.id;
-				const bgColor = lib.rgbToHex(lib.getRandomInt(0, 255), lib.getRandomInt(0, 255), lib.getRandomInt(0, 255));
-				Meteor.call('MemberListCollection.addLearner', {
-					hashtag: hashtag,
-					nick: nickname,
-					userRef: Meteor.user()._id,
-					privateKey: localData.getPrivateKey(),
-					backgroundColor: bgColor,
-					foregroundColor: lib.transformForegroundColor(lib.hexToRgb(bgColor))
-				}, (err) => {
-					if (err) {
-						new ErrorSplashscreen({
-							autostart: true,
-							errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
-						});
-					} else {
-						localStorage.setItem(hashtag + "nick", nickname);
-						Router.go("/" + hashtag + "/memberlist");
-					}
-				});
-				if (loginTracker) {
-					loginTracker.stop();
-				}
+			if (!Meteor.user() || !Meteor.user().profile || Meteor.user().profile.mail[0].indexOf("thm") === -1) {
+				return;
 			}
+			if (loginTracker) {
+				loginTracker.stop();
+			}
+
+			const hashtag = Router.current().params.quizName;
+			const nickname = $("#nickname-input-field").val();
+			const bgColor = lib.rgbToHex(lib.getRandomInt(0, 255), lib.getRandomInt(0, 255), lib.getRandomInt(0, 255));
+			Meteor.call('MemberListCollection.addLearner', {
+				hashtag: hashtag,
+				nick: nickname,
+				userRef: Meteor.user()._id,
+				privateKey: localData.getPrivateKey(),
+				backgroundColor: bgColor,
+				foregroundColor: lib.transformForegroundColor(lib.hexToRgb(bgColor))
+			});
+			localStorage.setItem(hashtag + "nick", nickname);
+			Router.go("/" + hashtag + "/memberlist");
 		});
 	}
 });

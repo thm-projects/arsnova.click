@@ -88,10 +88,10 @@ Template.header.helpers({
 		return Router.current().route.getName() === ":quizName.memberlist";
 	},
 	isSoundEnabled: function () {
-		if (!HashtagsCollection.findOne({hashtag: Router.current().params.quizName})) {
-			return;
+		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+		if (configDoc) {
+			return configDoc.music.isEnabled;
 		}
-		return HashtagsCollection.findOne({hashtag: Router.current().params.quizName}).musicEnabled;
 	}
 });
 
@@ -141,15 +141,16 @@ let headerThemeTracker = null;
 
 Template.header.onRendered(function () {
 	headerThemeTracker = Tracker.autorun(function () {
-		if (!Session.get("questionGroup") && SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName})) {
-			const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-			const theme = configDoc ? SessionConfigurationCollection.theme : "theme-blackbeauty";
-			Session.set("theme", theme);
+		if (!Session.get("questionGroup")) {
+			if (localData.containsHashtag(Router.current().params.quizName)) {
+				Session.set("questionGroup", localData.reenterSession(Router.current().params.quizName));
+			}
+		}
+		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+		if (configDoc) {
+			Session.set("theme", configDoc.theme);
 		}
 	});
-	if (!Session.get("questionGroup") && Router.current().params.quizName) {
-		Session.set("questionGroup", localData.reenterSession(Router.current().params.quizName));
-	}
 	$(window).resize(function () {
 		if ($(window).width() > 999) {
 			$(".thm-logo-background").show();

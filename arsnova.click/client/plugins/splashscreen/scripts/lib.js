@@ -222,6 +222,7 @@ export function showReadingConfirmationSplashscreen(index) {
 				content = mathjaxMarkdown.getContent(questionText);
 			}
 			instance.templateSelector.find('#questionContent').html(content);
+			mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#questionContent'));
 
 			if (localData.containsHashtag(Router.current().params.quizName)) {
 				instance.templateSelector.find('#setReadConfirmed').text(TAPi18n.__("global.close_window"));

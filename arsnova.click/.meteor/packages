@@ -21,7 +21,6 @@ iron:router
 aldeed:simple-schema
 reywood:publish-composite
 aldeed:collection2
-twbs:bootstrap
 fourseven:scss
 flyandi:reactive-countdown
 perak:markdown
@@ -39,3 +38,4 @@ arsnova.click:nouislider
 appcache
 atoy40:accounts-cas
 random
+twbs:bootstrap

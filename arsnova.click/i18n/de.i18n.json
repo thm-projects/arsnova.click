@@ -245,7 +245,8 @@
       "second_plural": "Sekunden",
       "show_more": "Zeige 1 weiteren",
       "show_more_plural": "Zeige %s weitere",
-      "show_less": "Zeige weniger"
+      "show_less": "Zeige weniger",
+      "export": "Export (.csv)"
     },
     "liveResults": {
       "title": "Ergebnisse",

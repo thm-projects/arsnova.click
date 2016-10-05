@@ -18,6 +18,8 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {MemberListCollection} from '/lib/member_list/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {getLeaderBoardItems, getAllNicksWhichAreAlwaysRight} from './lib.js';
 
 Template.leaderBoard.helpers({
@@ -85,5 +87,39 @@ Template.leaderBoard.helpers({
 	},
 	isFirstItem: function (index) {
 		return index === 0;
+	},
+	isRestrictedToCAS: function () {
+		return SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).nicks.restrictToCASLogin;
+	},
+	exportData: function () {
+		const hashtag = Router.current().params.quizName;
+		const time = new Date();
+		const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
+		const memberlistResult = MemberListCollection.find({hashtag: hashtag}, {fields: {userRef: 1, nick: 1}}).fetch();
+		const responseResult = getLeaderBoardItems();
+		let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";
+
+		memberlistResult.forEach(function (item) {
+			const user = Meteor.users.findOne({_id: item.userRef});
+			let responseTime = 0;
+			let responseCount = 0;
+			responseResult.forEach(function (responseItem) {
+				responseItem.value.forEach(function (responseValue) {
+					if (responseValue.nick === item.nick) {
+						responseTime += responseValue.responseTime;
+						responseCount++;
+					}
+				});
+			});
+			if (responseTime !== 0) {
+				responseTime = responseTime / responseCount;
+				csvString += item.nick + "," + responseTime + "," + user.profile.id + "," + user.profile.mail.join(",") + "\n";
+			}
+		});
+
+		return {
+			href: 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvString),
+			name: hashtag + "_evaluated_" + timeString + ".csv"
+		}
 	}
 });

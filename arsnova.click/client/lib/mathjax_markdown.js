@@ -32,7 +32,8 @@ export const mathjaxMarkdown = {
 				return "<pre class='hljs-pre'><code class='hljs-highlight'>" +
 					hljs.highlightAuto(code).value + "</code></pre>";
 			},
-			sanitize: true
+			sanitize: true,
+			breaks: true
 		});
 
 		this.lexer = new marked.Lexer();
@@ -105,6 +106,17 @@ export const mathjaxMarkdown = {
 		} else {
 			return "";
 		}
+	},
+
+	// add line numbers for syntax highlighted text
+	addSyntaxHighlightLineNumbers(element) {
+		element.find('.hljs-line-numbers').each(function (index, el) {
+			el.parentNode.removeChild(el);
+		});
+
+		element.find('.hljs-highlight').each(function (index, el) {
+			hljs.lineNumbersBlock(el);
+		});
 	},
 
 	// get all delimiter indices as array of [start(incl), end(excl)] elements

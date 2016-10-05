@@ -164,15 +164,10 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 });
 
 export function calculateFooterFontSize() {
-	let iconSize = "3vh", textSize = "2vh";
+	let iconSize = "2rem", textSize = "1.5rem";
 	const navbarFooter = $(".navbar-footer");
 	const fixedBottom = $('.fixed-bottom');
-
-	if ($(document).width() > $(document).height()) {
-		iconSize = "2vw";
-		textSize = "1vw";
-	}
-	$(".footerElementText").css("fontSize", textSize);
+	$(".footerElemText").css("fontSize", textSize);
 	navbarFooter.css({"fontSize": iconSize});
 	fixedBottom.css("bottom", navbarFooter.height());
 	fixedBottom.show();

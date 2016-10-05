@@ -110,6 +110,7 @@ function addLiveresultsChangeEvents() {
 							});
 
 							instance.templateSelector.find('#answerContent').html(content);
+							mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#answerContent'));
 							setTimeout(function () {
 								instance.close();
 							}, 10000);

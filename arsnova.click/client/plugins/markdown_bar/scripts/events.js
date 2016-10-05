@@ -40,8 +40,8 @@ Template.markdownBar.events({
 				mathjaxMarkdown.initializeMarkdownAndLatex();
 				let content = mathjaxMarkdown.getContent($('#questionText').val());
 
-				instance.templateSelector.find('.modal-body').html(content).find('p').css("margin-left", "0px");
-				mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('.modal-body'));
+				instance.templateSelector.find('.modal-markdown-body').html(content).find('p').css("margin-left", "0px");
+				mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('.modal-markdown-body'));
 			}
 		});
 	},

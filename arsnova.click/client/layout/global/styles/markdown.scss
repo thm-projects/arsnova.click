@@ -31,6 +31,9 @@ code {
   color: inherit;
   background-color: transparent;
   border-radius: 0px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 
 .markdown-content {

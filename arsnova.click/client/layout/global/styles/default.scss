@@ -97,3 +97,21 @@ button:disabled {
 .titel-relative {
   cursor: default;
 }
+
+pre {
+  padding: 0px;
+  margin: 0 0 0 0;
+  font-size: 16px;
+  background-color: transparent;
+  border: 0px solid #ccc;
+  border-radius: 0px;
+  width: 100%;
+}
+
+code {
+  padding: 0px 0px;
+  font-size: 100%;
+  color: inherit;
+  background-color: transparent;
+  border-radius: 0px;
+}

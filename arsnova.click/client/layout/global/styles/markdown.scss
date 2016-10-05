@@ -17,7 +17,7 @@
 
 pre {
   padding: 0px;
-  margin: 0 0 0 0;
+  margin: 0 0 0 0!important;
   font-size: 16px;
   background-color: transparent;
   border: 0px solid #ccc;
@@ -43,6 +43,11 @@ code {
 .markdown-content hr {
   margin-top: 0.5em;
   margin-bottom: 0.5em;
+  color: #394a59!important;
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  border: 1px inset;
 }
 
 /* line 51, /Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/_typography.scss */

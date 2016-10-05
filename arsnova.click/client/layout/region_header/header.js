@@ -19,7 +19,6 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {buzzsound1} from '/client/plugins/sound/scripts/lib.js';

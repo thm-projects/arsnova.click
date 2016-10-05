@@ -129,6 +129,9 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 		let state = true;
 		if (item.id === "sound") {
 			const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+			if (!configDoc) {
+				return;
+			}
 			if (configDoc && configDoc.music.isEnabled) {
 				$('#sound').removeClass("error").addClass("success");
 			} else {
@@ -140,7 +143,11 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 		}
 
 		if (item.id === 'reading-confirmation') {
-			if (SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled) {
+			const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+			if (!configDoc) {
+				return;
+			}
+			if (configDoc.readingConfirmationEnabled) {
 				$("#" + item.id).removeClass("error").addClass("success").find(".footerElemIcon").find("span").removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open");
 			} else {
 				state = false;

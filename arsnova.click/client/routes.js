@@ -29,7 +29,7 @@ import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scri
 
 const subsCache = new SubsManager({
 	/* maximum number of cached subscriptions */
-	cacheLimit: 10,
+	cacheLimit: 9,
 	/* any subscription will expire after 15 minutes, if it's not subscribed again */
 	expireIn: 15
 });
@@ -45,13 +45,13 @@ Router.configure({
 		];
 		const currentHashtag = Router.current().params.quizName;
 		if (typeof currentHashtag !== "undefined") {
+			Meteor.subscribe('SessionConfigurationCollection.join', currentHashtag);
 			subscriptions.push(subsCache.subscribe('ResponsesCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('AnswerOptionCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('QuestionGroupCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('MemberListCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('LeaderBoardCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('EventManagerCollection.join', currentHashtag));
-			subscriptions.push(subsCache.subscribe('SessionConfigurationCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('NicknameCategoriesCollection.join'));
 		}
 		return subscriptions;

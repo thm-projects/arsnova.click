@@ -15,9 +15,18 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-.markdown-dialog {
-  width: 80%!important;
-  position: center!important;
+@media (max-width: 767px) {
+  .markdown-dialog {
+    width: 100%!important;
+    position: center!important;
+  }
+}
+
+@media (min-width: 768px) {
+  .markdown-dialog {
+    width: 55%!important;
+    position: center!important;
+  }
 }
 
 pre {

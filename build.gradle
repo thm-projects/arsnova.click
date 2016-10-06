@@ -1,7 +1,7 @@
 /* This Gradle build script is currently only used for SonarQube Scanner */
 
 plugins {
-	id "org.sonarqube" version "1.2"
+	id "org.sonarqube" version "2.1"
 }
 
 group = "de.thm.arsnova"

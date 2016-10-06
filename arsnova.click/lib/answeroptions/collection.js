@@ -25,7 +25,7 @@ export const AnswerOptionCollection = new Mongo.Collection("answeroptions");
 export const answerTextSchema = {
 	type: String,
 	min: 0,
-	max: 500,
+	max: 10000,
 	optional: true
 };
 export const answerOptionNumberSchema = {

@@ -19,8 +19,8 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {SubsManager} from 'meteor/meteorhacks:subs-manager';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
@@ -89,10 +89,10 @@ Router.onBeforeAction(function () {
 		theme = localStorage.getItem("theme");
 	}
 	if (Router.current().params.quizName) {
-		const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-		if (hashtagDoc && hashtagDoc.theme && !localData.containsHashtag(Router.current().params.quizName)) {
-			sessionStorage.setItem("quizTheme", hashtagDoc.theme);
-			theme = hashtagDoc.theme;
+		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+		if (configDoc && configDoc.theme && !localData.containsHashtag(Router.current().params.quizName)) {
+			sessionStorage.setItem("quizTheme", configDoc.theme);
+			theme = configDoc.theme;
 		}
 	}
 	Session.set("theme", theme);

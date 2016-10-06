@@ -38,7 +38,7 @@ Template.themeSwitcher.events({
 		if (quiz) {
 			quiz.getConfiguration().setTheme(theme);
 			Session.set("questionGroup", quiz);
-			Meteor.call("HashtagsCollection.setDefaultTheme", Session.get("questionGroup").getHashtag(), theme);
+			Meteor.call("SessionConfiguration.setTheme", Session.get("questionGroup").getHashtag(), theme);
 		}
 	},
 	"click #backButton": function () {

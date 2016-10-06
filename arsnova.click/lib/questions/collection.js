@@ -24,7 +24,7 @@ export const QuestionGroupCollection = new Mongo.Collection("questionGroup");
 export const questionTextSchema = {
 	type: String,
 	optional: true,
-	max: 10000
+	max: 25000
 };
 export const timerSchema = {
 	type: Number,

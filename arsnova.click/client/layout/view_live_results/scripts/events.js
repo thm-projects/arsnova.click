@@ -78,7 +78,9 @@ Template.liveResults.events({
 			instanceId: "questionAndAnswers_" + targetId,
 			onRendered: function (instance) {
 				instance.templateSelector.find('#questionContent').html(questionContent);
+				mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#questionContent'));
 				instance.templateSelector.find('#answerContent').html(answerContent);
+				mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#answerContent'));
 			}
 		});
 	},

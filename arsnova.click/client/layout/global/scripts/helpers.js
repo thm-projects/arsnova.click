@@ -17,10 +17,16 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as lib from './lib.js';
 
 Template.layout.helpers({
 	getTheme: function () {
+		const configDoc = SessionConfigurationCollection.findOne();
+		if (configDoc) {
+			const theme = configDoc.theme;
+			Session.set("theme", theme);
+		}
 		return Session.get("theme");
 	}
 });

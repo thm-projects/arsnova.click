@@ -88,10 +88,9 @@ Template.header.helpers({
 	},
 	isSoundEnabled: function () {
 		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-		if (!configDoc) {
-			return;
+		if (configDoc) {
+			return configDoc.music.isEnabled;
 		}
-		return configDoc.music.isEnabled;
 	}
 });
 
@@ -143,7 +142,6 @@ Template.header.onRendered(function () {
 	headerThemeTracker = Tracker.autorun(function () {
 		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 		if (configDoc) {
-			console.log(configDoc.theme);
 			Session.set("theme", configDoc.theme);
 		}
 	});

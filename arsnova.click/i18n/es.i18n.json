@@ -445,6 +445,9 @@
       "option_width": "Max. anchura (pixel)",
       "option_height": "Max. altura (pixel)",
       "option_position": "Posición",
+      "option_left": "izquierda",
+      "option_centered": "centrado",
+      "option_right": "derecho",
       "tooltip": {
         "info": "Info",
         "preview": "Previsualizar",

@@ -445,6 +445,9 @@
       "option_width": "Max. Breite (Pixel)",
       "option_height": "Max. Höhe (Pixel)",
       "option_position": "Position",
+      "option_left": "links",
+      "option_centered": "zentriert",
+      "option_right": "rechts",
       "tooltip": {
         "info": "Info",
         "preview": "Vorschau",

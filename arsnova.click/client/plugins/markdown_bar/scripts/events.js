@@ -163,8 +163,8 @@ Template.markdownBar.events({
 							hyperlink: urlSchema
 						}).validate({hyperlink: linkDestination});
 
-						var width = $('#pictureWidth').val() == "" ? "auto" : $('#pictureWidth').val();
-						var height = $('#pictureHeight').val() == "" ? "auto" : $('#pictureHeight').val();
+						var width = $('#pictureWidth').val() === "" ? "auto" : $('#pictureWidth').val();
+						var height = $('#pictureHeight').val() === "" ? "auto" : $('#pictureHeight').val();
 						var position = $("#picturePosition option:selected").val();
 
 						insertInQuestionText('![' + linkText + '](' + linkDestination + ' "' + width + 'x' + height + 'x' + position + '")');

@@ -162,7 +162,12 @@ Template.markdownBar.events({
 						new SimpleSchema({
 							hyperlink: urlSchema
 						}).validate({hyperlink: linkDestination});
-						insertInQuestionText('![' + linkText + '](' + linkDestination + ' "autoxautoxleft")');
+
+						var width = $('#pictureWidth').val() == "" ? "auto" : $('#pictureWidth').val();
+						var height = $('#pictureHeight').val() == "" ? "auto" : $('#pictureHeight').val();
+						var position = $("#picturePosition option:selected").val();
+
+						insertInQuestionText('![' + linkText + '](' + linkDestination + ' "' + width + 'x' + height + 'x' + position + '")');
 					} catch (ex) {
 						new ErrorSplashscreen({
 							autostart: true,

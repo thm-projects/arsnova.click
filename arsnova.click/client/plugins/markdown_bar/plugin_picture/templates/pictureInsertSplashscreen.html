@@ -29,8 +29,13 @@
                             </div>
                             <hr class="hr-without-margin">
                             <div class="input-group">
-                                <div class="input-label round-corners-bottom-left input-group-addon input-field-bg-color">{{_ "plugins.markdown_bar.link_destination"}}:</div>
+                                <div class="input-label no-round-corners input-group-addon input-field-bg-color">{{_ "plugins.markdown_bar.link_destination"}}:</div>
                                 <input type="text" class="input-field round-corners-bottom-right" id="pictureDestination" placeholder="http://" maxlength="{{getUrlSchema.max}}">
+                            </div>
+                            <hr class="hr-without-margin">
+                            <div class="input-group">
+                                <div class="input-label round-corners-bottom-left input-group-addon input-field-bg-color">{{_ "plugins.markdown_bar.advanced_options"}}:</div>
+                                <input type="checkbox" id="advancedOptionSwitch" class="round-corners-bottom-right" name="switch" />
                             </div>
                         </div>
                     </div>

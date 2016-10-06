@@ -441,6 +441,10 @@
       "visible_text": "Visible text",
       "link_text": "Link text",
       "link_destination": "Link target",
+      "advanced_options": "Advanced options",
+      "option_width": "Max. width (pixel)",
+      "option_height": "Max. height (pixel)",
+      "option_position": "Position",
       "tooltip": {
         "info": "Info",
         "preview": "Preview",

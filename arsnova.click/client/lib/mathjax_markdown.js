@@ -15,14 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-var defaultHyperLinkRenderer;
-
 export const mathjaxMarkdown = {
 	initializeMarkdownAndLatex: function () {
 		// markdown setup
 		var markedRenderer = marked.Renderer;
-
-		defaultHyperLinkRenderer = markedRenderer.prototype.link;
 
 		markedRenderer.prototype.link = this.hyperlinkRenderer;
 		markedRenderer.prototype.image = this.imageRenderer;
@@ -202,9 +198,18 @@ export const mathjaxMarkdown = {
 		var isVideoElement = href.indexOf('://i.vimeocdn') > -1 || href.indexOf('://img.youtube') > -1;
 		var size = '', alignment = 'center';
 
-		if (!isVideoElement) {
+		if (title && !isVideoElement) {
+			size = title.split('x');
+			size[0] = isNaN(size[0]) ? 'initial;' : size[0] + 'px;';
+			size[1] = isNaN(size[1]) ? 'initial;' : size[1] + 'px;';
+			alignment = size[2] ? size[2] : alignment;
+
+			size = size[1] && size[1] !== 'inital;' ?
+			'"max-width:' + size[0] + 'max-height:' + size[1] + '"' :
+			'"max-width:' + size[0] + '"';
+
 			return '<div style="text-align:' + alignment + '">' +
-				'<img class="resizeableImage img-responsive" title="' + text + '" src="' + href + '" alt="' + text + '" style=' + size + '>' +
+				'<img class="resizeableImage" title="' + text + '" src="' + href + '" alt="' + text + '" style=' + size + '>' +
 				'</div>';
 		}
 

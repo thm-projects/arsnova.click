@@ -133,6 +133,8 @@ Template.markdownBar.events({
 			templateName: "pictureInsertSplashscreen",
 			closeOnButton: "#js-btn-closePicture, #js-btn-savePicture, .splashscreen-container-close",
 			onRendered: function (instance) {
+				$("[name='toggleAdvancedOptions']").bootstrapSwitch();
+
 				var textarea = document.getElementById('questionText');
 				if (textarea.selectionStart != textarea.selectionEnd) {
 					var strPosBegin = textarea.selectionStart;
@@ -144,6 +146,15 @@ Template.markdownBar.events({
 					instance.templateSelector.find('#hyperlinkText').val(middleText);
 					textarea.value = frontText + backText;
 				}
+
+				$('input[name="toggleAdvancedOptions"]').on('switchChange.bootstrapSwitch', function (event, state) {
+					if (state) {
+						$("#advancedOptionsDiv").removeClass("hidden");
+					} else {
+						$("#advancedOptionsDiv").addClass("hidden");
+					}
+				});
+
 				$('#js-btn-savePicture').on('click', function () {
 					var linkText = document.getElementById('pictureText').value;
 					var linkDestination = document.getElementById('pictureDestination').value;
@@ -151,7 +162,12 @@ Template.markdownBar.events({
 						new SimpleSchema({
 							hyperlink: urlSchema
 						}).validate({hyperlink: linkDestination});
-						insertInQuestionText('![' + linkText + '](' + linkDestination + ' "autoxautoxleft")');
+
+						var width = $('#pictureWidth').val() === "" ? "auto" : $('#pictureWidth').val();
+						var height = $('#pictureHeight').val() === "" ? "auto" : $('#pictureHeight').val();
+						var position = $("#picturePosition option:selected").val();
+
+						insertInQuestionText('![' + linkText + '](' + linkDestination + ' "' + width + 'x' + height + 'x' + position + '")');
 					} catch (ex) {
 						new ErrorSplashscreen({
 							autostart: true,

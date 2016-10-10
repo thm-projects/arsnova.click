@@ -29,8 +29,34 @@
                             </div>
                             <hr class="hr-without-margin">
                             <div class="input-group">
-                                <div class="input-label round-corners-bottom-left input-group-addon input-field-bg-color">{{_ "plugins.markdown_bar.link_destination"}}:</div>
-                                <input type="text" class="input-field round-corners-bottom-right" id="pictureDestination" placeholder="http://" maxlength="{{getUrlSchema.max}}">
+                                <div class="input-label no-round-corners input-group-addon input-field-bg-color">{{_ "plugins.markdown_bar.link_destination"}}:</div>
+                                <input type="text" class="input-field" id="pictureDestination" placeholder="http://" maxlength="{{getUrlSchema.max}}">
+                            </div>
+                            <hr class="hr-without-margin">
+                            <div class="input-group advancedOptionsSwitch">
+                                <div class="input-label round-corners-bottom-left input-group-addon input-field-bg-color input-label-full-width">{{_ "plugins.markdown_bar.advanced_options"}}:</div>
+                                <input type="checkbox" name="toggleAdvancedOptions">
+                            </div>
+                        </div>
+
+                        <div class="form-group hidden" id="advancedOptionsDiv">
+                            <div class="input-group">
+                                <div class="input-label round-corners-top-left input-group-addon input-field-bg-color">{{_ "plugins.markdown_bar.option_width"}}:</div>
+                                <input type="number" class="input-field round-corners-top-right" id="pictureWidth" placeholder="auto" maxlength="4">
+                            </div>
+                            <hr class="hr-without-margin">
+                            <div class="input-group">
+                                <div class="input-label no-round-corners input-group-addon input-field-bg-color">{{_ "plugins.markdown_bar.option_height"}}:</div>
+                                <input type="number" class="input-field" id="pictureHeight" placeholder=" auto" maxlength="4">
+                            </div>
+                            <hr class="hr-without-margin">
+                            <div class="input-group">
+                                <div class="input-label round-corners-bottom-left input-group-addon input-field-bg-color input-label-full-width">{{_ "plugins.markdown_bar.option_position"}}:</div>
+                                <select id="picturePosition" name="position" class="round-corners-bottom-right input-field dropdown-field-width">
+                                    <option selected="yes" value="left">{{_ "plugins.markdown_bar.option_left"}}</option>
+                                    <option value="center">{{_ "plugins.markdown_bar.option_centered"}}</option>
+                                    <option value="right">{{_ "plugins.markdown_bar.option_right"}}</option>
+                                </select>
                             </div>
                         </div>
                     </div>

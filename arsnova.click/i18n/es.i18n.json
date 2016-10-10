@@ -245,7 +245,8 @@
       "second_plural": "Segundos",
       "show_more": "Ver 1 más",
       "show_more_plural": "Ver %s más",
-      "show_less": "Ver menos"
+      "show_less": "Ver menos",
+      "export": "Exportar (.csv)"
     },
     "liveResults": {
       "title": "Resultados",
@@ -440,6 +441,13 @@
       "visible_text": "Texto visible",
       "link_text": "Enlace",
       "link_destination": "Enlace de destino",
+      "advanced_options": "Opciones avanzadas",
+      "option_width": "Max. anchura (pixel)",
+      "option_height": "Max. altura (pixel)",
+      "option_position": "Posición",
+      "option_left": "izquierda",
+      "option_centered": "centrado",
+      "option_right": "derecho",
       "tooltip": {
         "info": "Info",
         "preview": "Previsualizar",

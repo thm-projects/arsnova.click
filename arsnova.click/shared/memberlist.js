@@ -22,7 +22,7 @@ import {hashtagSchema, privateKeySchema} from '/lib/hashtags/collection.js';
 import {MemberListCollection, userNickSchema, backgroundColorSchema, foregroundColorSchema, userNickIdSchema} from '/lib/member_list/collection.js';
 
 Meteor.methods({
-	'MemberListCollection.addLearner': function ({hashtag, nick, privateKey, backgroundColor, foregroundColor}) {
+	'MemberListCollection.addLearner': function ({hashtag, nick, privateKey, backgroundColor, foregroundColor, userRef}) {
 		new SimpleSchema({
 			hashtag: hashtagSchema,
 			nick: userNickSchema,
@@ -47,6 +47,7 @@ Meteor.methods({
 		MemberListCollection.insert({
 			hashtag: hashtag,
 			nick: nick,
+			userRef: userRef,
 			privateKey: privateKey,
 			lowerCaseNick: nick.toLowerCase(),
 			backgroundColor: backgroundColor,
@@ -142,5 +143,18 @@ Meteor.methods({
 				}
 			}
 		});
+	},
+	"MemberListCollection.getCASUsers": function (hashtag) {
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
+
+		const result = MemberListCollection.find({hashtag: hashtag}).fetch();
+		result.forEach(function (item) {
+			console.log(item);
+			const user = Meteor.users.findOne({_id: item.userRef});
+			delete user._id;
+			item.userRef = user;
+		});
+
+		return result;
 	}
 });

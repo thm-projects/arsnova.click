@@ -21,6 +21,7 @@ import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
+import {forceFeedback} from '/client/layout/global/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 
 export function closeSplashscreen() {
@@ -30,6 +31,7 @@ export function closeSplashscreen() {
 	} else {
 		$(".splashscreen").remove();
 		$('.modal-backdrop').remove();
+		forceFeedback();
 	}
 }
 
@@ -220,6 +222,7 @@ export function showReadingConfirmationSplashscreen(index) {
 				content = mathjaxMarkdown.getContent(questionText);
 			}
 			instance.templateSelector.find('#questionContent').html(content);
+			mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#questionContent'));
 
 			if (localData.containsHashtag(Router.current().params.quizName)) {
 				instance.templateSelector.find('#setReadConfirmed').text(TAPi18n.__("global.close_window"));

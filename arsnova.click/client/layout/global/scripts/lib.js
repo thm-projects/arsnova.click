@@ -146,3 +146,9 @@ export function getRTT() {
 		}
 	});
 }
+
+export function forceFeedback() {
+	if (navigator.vibrate) {
+		navigator.vibrate(100);
+	}
+}

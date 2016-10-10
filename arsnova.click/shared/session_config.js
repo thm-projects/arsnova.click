@@ -24,6 +24,16 @@ Meteor.methods({
 	"SessionConfiguration.addConfig": function (sessionConfigObject) {
 		SessionConfigurationCollection.insert(sessionConfigObject);
 	},
+	"SessionConfiguration.setConfig": function (sessionConfigObject) {
+		if (Meteor.isClient && sessionConfigObject instanceof NickSessionConfiguration) {
+			sessionConfigObject = sessionConfigObject.serialize();
+		}
+		SessionConfigurationCollection.update({hashtag: sessionConfigObject.hashtag}, {$set: {
+			music: sessionConfigObject.music,
+			nicks: sessionConfigObject.nicks,
+			readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled
+		}});
+	},
 	"SessionConfiguration.setMusic": function (configObject) {
 		if (Meteor.isClient && configObject instanceof MusicSessionConfiguration) {
 			configObject = configObject.serialize();

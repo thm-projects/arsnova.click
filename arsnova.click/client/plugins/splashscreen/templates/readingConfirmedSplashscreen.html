@@ -17,12 +17,12 @@
 
 <template name="readingConfirmedSplashscreen">
 	<div class="modal {{#unless isMobileDevice}}fade {{/unless}}splashscreen" role="dialog">
-		<div class="modal-dialog">
+		<div class="modal-dialog markdown-dialog">
             <div class="noSplashscreenPadding col-md-11 col-sm-11 col-xs-10">
                 <div class="modal-content">
                     <div class="modal-header"></div>
-                    <div class="modal-body">
-                        <div id="questionContent"></div>
+                    <div class="modal-markdown-body">
+                        <div id="questionContent" class="markdown-content"></div>
                     </div>
                     <div class="modal-footer">
                         <button id="setReadConfirmed" class="btn btn-success btn-answerOption btn-lg">

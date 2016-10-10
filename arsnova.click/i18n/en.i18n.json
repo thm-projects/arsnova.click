@@ -245,7 +245,8 @@
       "second_plural": "seconds",
       "show_more": "Show 1 more",
       "show_more_plural": "Show %s more",
-      "show_less": "Show less"
+      "show_less": "Show less",
+      "export": "Export (.csv)"
     },
     "liveResults": {
       "title": "Results",
@@ -440,6 +441,13 @@
       "visible_text": "Visible text",
       "link_text": "Link text",
       "link_destination": "Link target",
+      "advanced_options": "Advanced options",
+      "option_width": "Max. width (pixel)",
+      "option_height": "Max. height (pixel)",
+      "option_position": "Position",
+      "option_left": "left",
+      "option_centered": "centered",
+      "option_right": "right",
       "tooltip": {
         "info": "Info",
         "preview": "Preview",

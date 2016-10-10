@@ -19,8 +19,8 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {SubsManager} from 'meteor/meteorhacks:subs-manager';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
@@ -29,7 +29,7 @@ import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scri
 
 const subsCache = new SubsManager({
 	/* maximum number of cached subscriptions */
-	cacheLimit: 10,
+	cacheLimit: 9,
 	/* any subscription will expire after 15 minutes, if it's not subscribed again */
 	expireIn: 15
 });
@@ -45,13 +45,13 @@ Router.configure({
 		];
 		const currentHashtag = Router.current().params.quizName;
 		if (typeof currentHashtag !== "undefined") {
+			Meteor.subscribe('SessionConfigurationCollection.join', currentHashtag);
 			subscriptions.push(subsCache.subscribe('ResponsesCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('AnswerOptionCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('QuestionGroupCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('MemberListCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('LeaderBoardCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('EventManagerCollection.join', currentHashtag));
-			subscriptions.push(subsCache.subscribe('SessionConfigurationCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('NicknameCategoriesCollection.join'));
 		}
 		return subscriptions;
@@ -89,10 +89,10 @@ Router.onBeforeAction(function () {
 		theme = localStorage.getItem("theme");
 	}
 	if (Router.current().params.quizName) {
-		const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
-		if (hashtagDoc && hashtagDoc.theme && !localData.containsHashtag(Router.current().params.quizName)) {
-			sessionStorage.setItem("quizTheme", hashtagDoc.theme);
-			theme = hashtagDoc.theme;
+		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+		if (configDoc && configDoc.theme && !localData.containsHashtag(Router.current().params.quizName)) {
+			sessionStorage.setItem("quizTheme", configDoc.theme);
+			theme = configDoc.theme;
 		}
 	}
 	Session.set("theme", theme);

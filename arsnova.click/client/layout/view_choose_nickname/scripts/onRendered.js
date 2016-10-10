@@ -45,3 +45,11 @@ Template.nickLimited.onRendered(function () {
 	calculateHeaderSize();
 	$(window).resize(calculateHeaderSize);
 });
+
+Template.nickCasLogin.onRendered(function () {
+	footerElements.removeFooterElements();
+	footerElements.calculateFooter();
+	calculateHeaderSize();
+	$(window).resize(calculateHeaderSize);
+});
+

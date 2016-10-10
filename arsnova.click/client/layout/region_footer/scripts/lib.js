@@ -129,6 +129,9 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 		let state = true;
 		if (item.id === "sound") {
 			const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+			if (!configDoc) {
+				return;
+			}
 			if (configDoc && configDoc.music.isEnabled) {
 				$('#sound').removeClass("error").addClass("success");
 			} else {
@@ -140,7 +143,11 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 		}
 
 		if (item.id === 'reading-confirmation') {
-			if (SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled) {
+			const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+			if (!configDoc) {
+				return;
+			}
+			if (configDoc.readingConfirmationEnabled) {
 				$("#" + item.id).removeClass("error").addClass("success").find(".footerElemIcon").find("span").removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open");
 			} else {
 				state = false;
@@ -159,20 +166,15 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 			return;
 		}
 
-		$('#' + item.id).find(".footerElemText").find("span").text(TAPi18n.__(item.textName));
+		$('#' + item.id).find(".footerElemText").text(TAPi18n.__(item.textName));
 	});
 });
 
 export function calculateFooterFontSize() {
-	let iconSize = "3vh", textSize = "2vh";
+	let iconSize = "2rem", textSize = "1.5rem";
 	const navbarFooter = $(".navbar-footer");
 	const fixedBottom = $('.fixed-bottom');
-
-	if ($(document).width() > $(document).height()) {
-		iconSize = "2vw";
-		textSize = "1vw";
-	}
-	$(".footerElementText").css("fontSize", textSize);
+	$(".footerElemText").css("fontSize", textSize);
 	navbarFooter.css({"fontSize": iconSize});
 	fixedBottom.css("bottom", navbarFooter.height());
 	fixedBottom.show();

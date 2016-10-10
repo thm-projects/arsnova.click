@@ -52,6 +52,10 @@
   border-radius: 0 0 $corner-radius $corner-radius;
 }
 
+.no-round-corners {
+  border-radius: 0 0 0 0;
+}
+
 @media (max-width: 500px) {
   .markdown-box {
 	display: none;

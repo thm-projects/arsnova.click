@@ -22,7 +22,14 @@ import {NickSessionConfiguration} from '/lib/session_configuration/session_confi
 
 Meteor.methods({
 	"SessionConfiguration.addConfig": function (sessionConfigObject) {
-		SessionConfigurationCollection.insert(sessionConfigObject);
+		if (Meteor.isClient && sessionConfigObject instanceof NickSessionConfiguration) {
+			sessionConfigObject = sessionConfigObject.serialize();
+		}
+		SessionConfigurationCollection.update({hashtag: sessionConfigObject.hashtag}, {$set: {
+			music: sessionConfigObject.music,
+			nicks: sessionConfigObject.nicks,
+			readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled
+		}}, {upsert: true});
 	},
 	"SessionConfiguration.setConfig": function (sessionConfigObject) {
 		if (Meteor.isClient && sessionConfigObject instanceof NickSessionConfiguration) {

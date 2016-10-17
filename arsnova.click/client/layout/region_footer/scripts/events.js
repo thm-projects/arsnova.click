@@ -337,6 +337,7 @@ const clickEvents = {
 		Router.go("/" + Router.current().params.quizName + "/nicknameCategories");
 	},
 	"click #edit-quiz": function () {
+		Meteor.call('EventManagerCollection.setSessionStatus', Router.current().params.quizName, 1);
 		Router.go("/" + Router.current().params.quizName + "/question");
 	},
 	"click #reading-confirmation": function () {

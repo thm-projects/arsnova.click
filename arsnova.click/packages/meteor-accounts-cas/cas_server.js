@@ -62,10 +62,7 @@ var casTicket = function (req, res, token, callback) {
 	// get configuration
 	if (!Meteor.settings.cas && !Meteor.settings.cas.validate) {
 		console.log("accounts-cas: unable to get configuration");
-
-		Meteor.bindEnvironment(function () {
-			callback();
-		});
+		callback();
 	}
 
 	// get ticket and validate.
@@ -92,10 +89,7 @@ var casTicket = function (req, res, token, callback) {
 				console.log("accounts-cas: unable to validate " + ticketId);
 			}
 		}
-
-		Meteor.bindEnvironment(function () {
-			callback();
-		});
+		callback();
 	});
 };
 
@@ -135,7 +129,10 @@ var _retrieveCredential = function (credentialToken) {
 };
 
 var closePopup = function (res) {
-	res.writeHead(200, {'Content-Type': 'text/html'});
-	var content = '<html><body><div id="popupCanBeClosed"></div></body></html>';
-	res.end(content, 'utf-8');
+
+	Meteor.bindEnvironment(function () {
+		res.writeHead(200, {'Content-Type': 'text/html'});
+		var content = '<html><body><div id="popupCanBeClosed"></div></body></html>';
+		res.end(content, 'utf-8');
+	});
 };

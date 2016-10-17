@@ -78,7 +78,7 @@ var casTicket = function (req, res, token, callback) {
 		cas_version: "2.0"
 	});
 
-	cas.authenticate(req, res, function (err, status, profile, sections) {
+	cas.authenticate(req, res, Meteor.bindEnvironment(function (err, status, profile, sections) {
 		if (err) {
 			console.log("accounts-cas: error when trying to validate " + err);
 		} else {
@@ -90,7 +90,7 @@ var casTicket = function (req, res, token, callback) {
 			}
 		}
 		callback();
-	});
+	}));
 };
 
 /*

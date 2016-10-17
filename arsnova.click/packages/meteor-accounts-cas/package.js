@@ -1,6 +1,6 @@
 Package.describe({
   summary: "CAS support for accounts",
-  version: "0.0.3",
+  version: "0.0.4",
   name: "atoy40:accounts-cas",
   git: "https://github.com/atoy40/meteor-accounts-cas"
 });

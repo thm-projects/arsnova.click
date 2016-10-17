@@ -91,32 +91,41 @@ function addLiveresultsChangeEvents() {
 	], function (key, value) {
 		if (!isNaN(value.questionIndex) && value.questionIndex !== -1) {
 			if (localData.containsHashtag(Router.current().params.quizName)) {
-				if (QuestionGroupCollection.findOne().questionList[value.questionIndex].type !== "RangedQuestion") {
-					new Splashscreen({
-						autostart: true,
-						instanceId: "answers_" + value.questionIndex,
-						templateName: 'questionAndAnswerSplashscreen',
-						closeOnButton: '#js-btn-hideQuestionModal',
-						onRendered: function (instance) {
-							var content = "";
-							mathjaxMarkdown.initializeMarkdownAndLatex();
+				new Splashscreen({
+					autostart: true,
+					instanceId: "answers_" + value.questionIndex,
+					templateName: 'questionAndAnswerSplashscreen',
+					closeOnButton: '#js-btn-hideQuestionModal',
+					onRendered: function (instance) {
+						var answerContent = "";
+						var questionContent = "";
+						mathjaxMarkdown.initializeMarkdownAndLatex();
+						if (SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled === false) {
+							var questionDoc = QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName});
+							if (questionDoc) {
+								questionContent = mathjaxMarkdown.getContent(questionDoc.questionList[value.questionIndex].questionText);
+							}
+						}
+						if (QuestionGroupCollection.findOne().questionList[value.questionIndex].type !== "RangedQuestion") {
 							AnswerOptionCollection.find({questionIndex: value.questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
 								if (!answerOption.answerText) {
 									answerOption.answerText = "";
 								}
 
-								content += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
-								content += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+								answerContent += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+								answerContent += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
 							});
-
-							instance.templateSelector.find('#answerContent').html(content);
-							mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#answerContent'));
-							setTimeout(function () {
-								instance.close();
-							}, 10000);
 						}
-					});
-				}
+
+						instance.templateSelector.find('#questionContent').html(questionContent);
+						mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#questionContent'));
+						instance.templateSelector.find('#answerContent').html(answerContent);
+						mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#answerContent'));
+						setTimeout(function () {
+							instance.close();
+						}, 10000);
+					}
+				});
 				/*
 				if (value.questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
 					footerElements.removeFooterElement(footerElements.footerElemReadingConfirmation);

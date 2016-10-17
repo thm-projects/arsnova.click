@@ -62,7 +62,10 @@ var casTicket = function (req, res, token, callback) {
 	// get configuration
 	if (!Meteor.settings.cas && !Meteor.settings.cas.validate) {
 		console.log("accounts-cas: unable to get configuration");
-		callback();
+
+		Meteor.bindEnvironment(function () {
+			callback();
+		});
 	}
 
 	// get ticket and validate.
@@ -90,7 +93,9 @@ var casTicket = function (req, res, token, callback) {
 			}
 		}
 
-		callback();
+		Meteor.bindEnvironment(function () {
+			callback();
+		});
 	});
 };
 

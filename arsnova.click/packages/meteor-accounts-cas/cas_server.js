@@ -71,7 +71,7 @@ var casTicket = function (req, res, token, callback) {
 
 	var cas = new CAS({
 		cas_url: Meteor.settings.cas.baseUrl,
-		service_url: Meteor.absoluteUrl() + "_cas/" + token,
+		service_url: Meteor.absoluteUrl(),
 		cas_version: "2.0"
 	});
 

@@ -8,7 +8,7 @@ allow-deny@1.0.5
 amplify@1.0.0
 appcache@1.0.11
 arsnova.click:nouislider@8.5.1
-atoy40:accounts-cas@0.0.2
+atoy40:accounts-cas@0.0.3
 autoupdate@1.2.11
 babel-compiler@6.8.5
 babel-runtime@0.1.9_1

@@ -26,8 +26,10 @@ Meteor.methods({
 			sessionConfigObject = sessionConfigObject.serialize();
 		}
 		SessionConfigurationCollection.update({hashtag: sessionConfigObject.hashtag}, {$set: {
+			hashtag: sessionConfigObject.hashtag,
 			music: sessionConfigObject.music,
 			nicks: sessionConfigObject.nicks,
+			theme: sessionConfigObject.theme,
 			readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled
 		}}, {upsert: true});
 	},
@@ -36,8 +38,10 @@ Meteor.methods({
 			sessionConfigObject = sessionConfigObject.serialize();
 		}
 		SessionConfigurationCollection.update({hashtag: sessionConfigObject.hashtag}, {$set: {
+			hashtag: sessionConfigObject.hashtag,
 			music: sessionConfigObject.music,
 			nicks: sessionConfigObject.nicks,
+			theme: sessionConfigObject.theme,
 			readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled
 		}});
 	},

@@ -1,4 +1,4 @@
-atoy40:accounts-cas
+arsnova.click:accounts-cas
 ===================
 
 CAS login support.

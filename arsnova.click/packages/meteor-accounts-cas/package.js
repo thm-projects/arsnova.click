@@ -1,12 +1,11 @@
 Package.describe({
   summary: "CAS support for accounts",
   version: "0.0.4",
-  name: "atoy40:accounts-cas",
-  git: "https://github.com/atoy40/meteor-accounts-cas"
+  name: "arsnova.click:accounts-cas"
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('METEOR@0.9.0');
+  api.versionsFrom('METEOR@1.3.0');
   api.use('routepolicy', 'server');
   api.use('webapp', 'server');
   api.use('accounts-base', ['client', 'server']);

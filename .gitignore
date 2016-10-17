@@ -52,6 +52,6 @@ crashlytics-build.properties
 # node modules
 node_modules
 
-../arsnova.click-build/
-../.build_local.sh.swp
+arsnova.click-build/
+.build_local.sh.swp
 

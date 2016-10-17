@@ -5,7 +5,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('METEOR@1.3.0');
+  api.versionsFrom('METEOR@1.3.5');
   api.use('routepolicy', 'server');
   api.use('webapp', 'server');
   api.use('accounts-base', ['client', 'server']);

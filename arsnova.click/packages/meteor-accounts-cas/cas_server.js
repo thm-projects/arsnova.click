@@ -129,10 +129,7 @@ var _retrieveCredential = function (credentialToken) {
 };
 
 var closePopup = function (res) {
-
-	Meteor.bindEnvironment(function () {
-		res.writeHead(200, {'Content-Type': 'text/html'});
-		var content = '<html><body><div id="popupCanBeClosed"></div></body></html>';
-		res.end(content, 'utf-8');
-	});
+	res.writeHead(200, {'Content-Type': 'text/html'});
+	var content = '<html><body><div id="popupCanBeClosed"></div></body></html>';
+	res.end(content, 'utf-8');
 };

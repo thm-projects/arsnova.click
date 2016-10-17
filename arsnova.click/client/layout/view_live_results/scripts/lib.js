@@ -17,7 +17,7 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
-import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
@@ -119,8 +119,8 @@ export function startCountdown(index, retry = 0) {
 	if (Session.get("countdownInitialized") || Session.get("sessionClosed")) {
 		return;
 	}
-	const hashtagDoc = HashtagsCollection.findOne({hashtag: Router.current().params.quizName});
 	const questionDoc = QuestionGroupCollection.findOne().questionList[index];
+	const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 	if (!questionDoc) {
 		if (retry < 5) {
 			setTimeout(startCountdown(index, ++retry), 20);
@@ -137,11 +137,11 @@ export function startCountdown(index, retry = 0) {
 		}
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index);
-			if (hashtagDoc.musicEnabled) {
+			if (configDoc.music.isEnabled) {
 				if (buzzsound1 == null) {
-					setBuzzsound1(hashtagDoc.musicTitle);
+					setBuzzsound1(configDoc.music.title);
 				}
-				buzzsound1.setVolume(hashtagDoc.musicVolume);
+				buzzsound1.setVolume(configDoc.music.volume);
 				buzzsound1.play();
 				Session.set("soundIsPlaying", true);
 			}

@@ -21,6 +21,7 @@ import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
+import * as localData from '/lib/local_storage.js';
 import {getLeaderBoardItems, getAllNicksWhichAreAlwaysRight} from './lib.js';
 
 Template.leaderBoard.helpers({
@@ -90,7 +91,7 @@ Template.leaderBoard.helpers({
 		return index === 0;
 	},
 	isRestrictedToCAS: function () {
-		return SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).nicks.restrictToCASLogin;
+		return localData.containsHashtag(Router.current().params.quizName) && SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).nicks.restrictToCASLogin;
 	},
 	exportData: function () {
 		const hashtag = Router.current().params.quizName;
@@ -98,6 +99,7 @@ Template.leaderBoard.helpers({
 		const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
 		const memberlistResult = MemberListCollection.find({hashtag: hashtag}, {fields: {userRef: 1, nick: 1}}).fetch();
 		const responseResult = getLeaderBoardItems();
+		Meteor.subscribe("users");
 		let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";
 
 		memberlistResult.forEach(function (item) {

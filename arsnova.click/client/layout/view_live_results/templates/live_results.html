@@ -75,13 +75,15 @@
                                     </div>
                                 </div>
                             {{/if}}
-                            {{> form_group
-                                name = "view.liveResults.reading_confirmation"
-                                absolute = (getCurrentRead displayIndex)
-                                base = getCountStudents
-                                percent = (getPercentRead displayIndex)
-                                backgroundClass = "progress-reading_confirmation"
-                            }}
+                            {{#if isReadingConfirmationEnabled}}
+                                {{> form_group
+                                        name = "view.liveResults.reading_confirmation"
+                                        absolute = (getCurrentRead displayIndex)
+                                        base = getCountStudents
+                                        percent = (getPercentRead displayIndex)
+                                        backgroundClass = "progress-reading_confirmation"
+                                }}
+                            {{/if}}
                             {{#if hasReadConfirmationRequested displayIndex}}
                                 {{#if isRangedQuestion displayIndex}}
                                     {{#with rangedAnswerResult displayIndex}}

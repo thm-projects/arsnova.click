@@ -407,6 +407,13 @@ Template.liveResults.helpers({
 		}
 		return index <= eventDoc.questionIndex || configDoc.readingConfirmationEnabled === false;
 	},
+	isReadingConfirmationEnabled: ()=> {
+		const configDoc = SessionConfigurationCollection.findOne();
+		if (!configDoc) {
+			return;
+		}
+		return configDoc.readingConfirmationEnabled !== false;
+	},
 	readingConfirmationListForQuestion: (index)=> {
 		let result = [];
 		let sortParamObj = Session.get('LearnerCountOverride') ? {lowerCaseNick: 1} : {insertDate: -1};

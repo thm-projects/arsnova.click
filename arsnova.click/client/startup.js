@@ -46,14 +46,8 @@ export function getUserLanguage() {
 	return selectedLang;
 }
 
-export function resetTabIndex() {
-	$('.tabbable').each(function (itemIndex, item) {
-		$(item).removeAttr("tabindex");
-	});
-}
 export function createTabIndices() {
 	Meteor.defer(function () {
-		resetTabIndex();
 		let index = 1;
 		$('.tabbable').each(function (itemIndex, item) {
 			$(item).attr("tabindex", index++);

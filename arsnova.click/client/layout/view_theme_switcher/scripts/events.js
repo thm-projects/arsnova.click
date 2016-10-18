@@ -24,7 +24,6 @@ import {themes} from './lib.js';
 Template.themeSwitcher.events({
 	"change #select-theme": function (event) {
 		const theme = $(event.currentTarget).find("option:selected").attr("id");
-		localStorage.setItem("theme", theme);
 
 		for (let i = 0; i < themes.length; i++) {
 			if (themes[i].id === theme) {
@@ -39,8 +38,9 @@ Template.themeSwitcher.events({
 			Session.set("questionGroup", quiz);
 			Meteor.call("SessionConfiguration.setTheme", Session.get("questionGroup").getHashtag(), theme);
 			Meteor.call("SessionConfiguration.setTheme", Session.get("questionGroup").getHashtag(), theme);
-			Session.set("theme", theme);
 		}
+		localStorage.setItem("theme", theme);
+		Session.set("theme", theme);
 	},
 	"click #backButton": function () {
 		if (Session.get("questionGroup")) {

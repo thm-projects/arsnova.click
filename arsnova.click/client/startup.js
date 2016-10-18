@@ -71,6 +71,10 @@ Meteor.startup(function () {
 				if ($(document.activeElement).hasClass("questionIcon")) {
 					$(document.activeElement).find(".removeQuestion").css("height", "44px");
 				}
+				$('.smallGlyphicon').removeClass("smallGlyphicon");
+				if ($(document.activeElement).hasClass("button-markdown")) {
+					$(document.activeElement).find(".glyphicon").addClass("smallGlyphicon");
+				}
 				calculateTitelHeight();
 				calculateFooterFontSize();
 			}

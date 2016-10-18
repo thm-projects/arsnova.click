@@ -23,6 +23,9 @@ import {MemberListCollection, userNickSchema} from "/lib/member_list/collection.
 Template.nickViewWrapper.helpers({
 	getRequiredNickView: function () {
 		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+		if (!configDoc) {
+			return;
+		}
 		if (configDoc.nicks.restrictToCASLogin) {
 			return Template.nickCasLogin;
 		} else if (configDoc.nicks.selectedValues.length === 0) {

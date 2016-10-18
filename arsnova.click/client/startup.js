@@ -46,14 +46,6 @@ export function getUserLanguage() {
 	return selectedLang;
 }
 
-export let tabIndex = 1;
-export const tabIndexMap = [];
-export const getTabIndex = {
-	getTabIndex: function (selector) {
-		tabIndexMap.push({selector: selector, tabIndex: tabIndex});
-		return tabIndex++;
-	}
-};
 export function resetTabIndex() {
 	$('.tabbable').each(function (itemIndex, item) {
 		$(item).removeAttr("tabindex");

@@ -334,7 +334,7 @@ Router.route('/:quizName/results', {
 
 Router.route('/:quizName/statistics', {
 	waitOn: function () {
-		Meteor.subscribe('userMails', Router.current().params.quizName, localData.getPrivateKey());
+		Meteor.subscribe('AllAttendeeUsersList', Router.current().params.quizName, localData.getPrivateKey());
 	},
 	action: function () {
 		if (!globalEventStackObserver.isRunning()) {
@@ -346,7 +346,7 @@ Router.route('/:quizName/statistics', {
 
 Router.route('/:quizName/globalLeaderBoard', {
 	waitOn: function () {
-		Meteor.subscribe('userMails', Router.current().params.quizName, localData.getPrivateKey());
+		Meteor.subscribe('AllAttendeeUsersList', Router.current().params.quizName, localData.getPrivateKey());
 	},
 	action: function () {
 		if (!globalEventStackObserver.isRunning()) {

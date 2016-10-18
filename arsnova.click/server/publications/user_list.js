@@ -20,19 +20,17 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 
-Meteor.publish('userMails', function (hashtag, privateKey) {
+Meteor.publish('AllAttendeeUsersList', function (hashtag, privateKey) {
 	new SimpleSchema({
 		hashtag: {type: String},
 		privateKey: {type: String}
 	}).validate({hashtag, privateKey});
 	if (HashtagsCollection.findOne({hashtag: hashtag}).privateKey !== privateKey) {
-		return;
+		return null;
 	}
-	const allUsers = MemberListCollection.find({hashtag: hashtag}).fetch();
-	allUsers.forEach(function (item) {
-		const user = Meteor.users.findOne({_id: item.userRef});
-		item.id = user.profile.id;
-		item.mail = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
+	const userRefs = [];
+	MemberListCollection.find({hashtag: hashtag}).fetch().forEach(function (item) {
+		userRefs.push(item.userRef);
 	});
-	return allUsers;
+	return Meteor.users.find({_id: {$in: userRefs}});
 });

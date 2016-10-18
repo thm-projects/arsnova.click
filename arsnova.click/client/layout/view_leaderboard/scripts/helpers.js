@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
@@ -111,8 +112,11 @@ Template.leaderBoard.helpers({
 					}
 				});
 			});
+			const user = Meteor.users.findOne({_id: item.userRef});
 			if (responseTime !== 0) {
 				responseTime = responseTime / responseCount;
+				item.id = user.profile.id;
+				item.mail = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
 				csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
 			}
 		});

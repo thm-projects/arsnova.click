@@ -110,7 +110,7 @@ Template.nickCasLogin.events({
 	"click #loginViaCas": function () {
 		lib.loginWithCas();
 		const loginTracker = Tracker.autorun(function () {
-			if (!Meteor.user() || !Meteor.user().profile || Meteor.user().profile.mail[0].indexOf("thm") === -1) {
+			if (!Meteor.user() || !Meteor.user().profile || Meteor.user().profile.mail[0].indexOf("thm") === -1 || Meteor.user().profile.mail.indexOf("thm") === -1) {
 				return;
 			}
 			if (loginTracker) {

@@ -68,13 +68,14 @@ var casTicket = function (req, res, token, callback) {
 	// get ticket and validate.
 	var parsedUrl = url.parse(req.url, true);
 	var ticketId = parsedUrl.query.ticket;
-	var str = Meteor.absoluteUrl();
-	var lIndex  = str.lastIndexOf("/");
-	str = str.substring(0, lIndex);
+	var absolute_url = Meteor.absoluteUrl();
+	var lIndex  = absolute_url.lastIndexOf("/");
+	absolute_url = absolute_url.substring(0, lIndex);
 
+	console.log(absolute_url, parsedUrl);
 	var cas = new CAS({
 		cas_url: Meteor.settings.cas.baseUrl,
-		service_url: str,
+		service_url: absolute_url + parsedUrl.pathname,
 		cas_version: "2.0"
 	});
 

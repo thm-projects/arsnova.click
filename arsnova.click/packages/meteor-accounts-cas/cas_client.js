@@ -9,7 +9,7 @@ Meteor.loginWithCas = function (callback) {
 	var settings = Meteor.settings.public.cas;
 
 	var loginUrl = settings.loginUrl +
-		"?" + (settings.service || "service") + "=" +
+		"?" + (settings.serviceParam || "service") + "=" +
 		Meteor.absoluteUrl('_cas/') +
 		credentialToken;
 

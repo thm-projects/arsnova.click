@@ -76,7 +76,7 @@ Template.defaultAnswerOptionTemplate.events({
 		}
 	},
 	"keydown .input-field": function (event) {
-		if ((event.keyCode === 9 || event.keyCode === 13) && !event.shiftKey) {
+		if ((event.keyCode === 9) && !event.shiftKey) {
 			var nextElement = $(event.currentTarget).closest(".form-group").next();
 			if (nextElement.length <= 0) {
 				event.preventDefault();

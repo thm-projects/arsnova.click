@@ -18,7 +18,8 @@
 <template name="questionList">
 	<div class="row questionList-row">
 		<div class="col-xs-6 col-sm-3 col-md-2">
-			<button id="addQuestion" class="button button-success">
+			<button id="addQuestion"
+                    class="button button-success tabbable">
 				<span class="glyphicon glyphicon-plus"></span>
 				{{_ "region.header.new_question"}}
 			</button>
@@ -26,10 +27,10 @@
 		<div class="col-xs-6 col-sm-9 col-md-10">
 			<div class="questionScrollPane">
 				{{#each question}}
-					<div class="{{#if isActiveIndex @index}}active {{/if}}{{#if hasCompleteContent @index}} valid {{/if}}questionIcon "
+					<div class="{{#if isActiveIndex @index}}active {{/if}}{{#if hasCompleteContent @index}} valid {{/if}}questionIcon tabbable"
 						 id="questionIcon_{{@index}}">
 						<span class="indexNumber">{{getNormalizedIndex @index}}.</span>
-						<button class="removeQuestion button button-default">
+						<button class="removeQuestion button button-default tabbable">
 							<span class="glyphicon glyphicon-trash"></span>
 							<span class="hidden-xs hidden-sm">{{_ "global.delete"}}</span>
 						</button>

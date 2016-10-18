@@ -55,8 +55,9 @@
                                         <div class="row">
                                             {{#if showLeaderBoardButton displayIndex}}
                                                 <div class="col-xs-6">
-                                                    <button id="js-btn-showLeaderBoard_{{displayIndex}}" type="button"
-                                                            class="btn btn-info btn-lg btn-answerOption btn-showLeaderBoard disableOnActiveCountdown">
+                                                    <button id="js-btn-showLeaderBoard_{{displayIndex}}"
+                                                            type="button"
+                                                            class="btn btn-info btn-lg btn-answerOption btn-showLeaderBoard disableOnActiveCountdown tabbable">
                                                         <span class="glyphicon glyphicon-flag glyph-left"
                                                               aria-hidden="true"></span>
                                                         <span class="ansBtn">{{_ "view.liveResults.ranking"}}</span>
@@ -64,8 +65,9 @@
                                                 </div>
                                             {{/if}}
                                             <div class="col-xs-{{#if showLeaderBoardButton displayIndex}}6{{else}}12{{/if}}">
-                                                <button id="js-btn-showQuestionAndAnswerModal" type="button"
-                                                        class="btn btn-info btn-lg btn-answerOption">
+                                                <button id="js-btn-showQuestionAndAnswerModal"
+                                                        type="button"
+                                                        class="btn btn-info btn-lg btn-answerOption tabbable">
                                                     <span class="glyphicon glyphicon-question-sign glyph-left"
                                                           aria-hidden="true"></span>
                                                     <span class="ansBtn">{{_ "view.liveResults.question"}}</span>
@@ -138,7 +140,8 @@
                                 {{#if showMoreButton displayIndex}}
                                     <div class="row more-learners-row">
                                         <div class="col-xs-12">
-                                            <button class="btn btn-more-learners">
+                                            <button class="btn btn-more-learners tabbable"
+                                                    id="more-learners">
                                                 <span class="glyphicon glyphicon-align-justify"></span>
                                                 ({{_ "view.liveResults.show_more" (invisibleLearnerCount displayIndex) count=(invisibleLearnerCount displayIndex)}})
                                             </button>
@@ -188,7 +191,8 @@
                 <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" style="display: block; bottom: 75px;">
                     <div class="row">
                         <div class="fixed-bottom-item col-xs-{{#if showGlobalLeaderboardButton}}{{#if hasCorrectAnswerOptionsOrRangedQuestion}}6{{/if}}{{else}}{{#if hasNextQuestion}}6{{else}}12{{/if}}{{/if}}">
-                            <button id="backButton" class="button button-back disableOnActiveCountdown">
+                            <button id="backButton"
+                                    class="button button-back disableOnActiveCountdown tabbable">
                                 <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
                                 <span class="ansBtn">{{_ "view.liveResults.back_to_lobby"}}</span>
                             </button>
@@ -196,7 +200,8 @@
                         <div class="fixed-bottom-item col-xs-6">
                             {{#if showGlobalLeaderboardButton}}
                                 {{#if hasCorrectAnswerOptionsOrRangedQuestion}}
-                                    <button class="button button-next disableOnActiveCountdown" id="goGlobalRanking">
+                                    <button class="button button-next disableOnActiveCountdown tabbable"
+                                            id="goGlobalRanking">
                                         <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
                                         <span class="ansBtn">{{_ "view.liveResults.global_ranking"}}</span>
                                     </button>
@@ -204,13 +209,15 @@
                             {{else}}
                                 {{#if hasNextQuestion}}
                                     {{#if showNextQuestionButton}}
-                                        <button class="button button-next button-start disableOnActiveCountdown" id="showNextQuestionDialog">
+                                        <button class="button button-next button-start disableOnActiveCountdown tabbable"
+                                                id="showNextQuestionDialog">
                                             <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
                                             <span class="ansBtn">{{_ "view.liveResults.show_question" count=allQuestionCount}}{{#unless hasOnlyOneQuestion}} {{nextReadingConfirmationIndex}}
                                                 / {{allQuestionCount}}{{/unless}}</span>
                                         </button>
                                     {{else}}
-                                        <button class="button button-next button-start disableOnActiveCountdown" id="startNextQuestion">
+                                        <button class="button button-next button-start disableOnActiveCountdown tabbable"
+                                                id="startNextQuestion">
                                             <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
                                             <span class="ansBtn">{{_ "view.liveResults.start_round" count=allQuestionCount}}{{#unless hasOnlyOneQuestion}} {{nextQuestionIndex}}
                                                 / {{allQuestionCount}}{{/unless}}</span>
@@ -229,7 +236,8 @@
                 <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" style="display: block;bottom:0 !important;padding-bottom: 30px;">
                     <div class="row">
                         <div class="fixed-bottom-item col-xs-12">
-                            <button class="button button-next disableOnActiveCountdown" id="goGlobalRanking">
+                            <button class="button button-next disableOnActiveCountdown tabbable"
+                                    id="goGlobalRanking">
                                 <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
                                 <span class="ansBtn">{{_ "view.liveResults.global_ranking"}}</span>
                             </button>

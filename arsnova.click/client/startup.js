@@ -18,6 +18,8 @@
 import {Meteor} from 'meteor/meteor';
 import {TAPi18n} from 'meteor/tap:i18n';
 import * as localData from '/lib/local_storage.js';
+import {calculateTitelHeight} from '/client/layout/region_header/lib.js';
+import {calculateFooterFontSize} from '/client/layout/region_footer/scripts/lib.js';
 
 export function getUserLanguage() {
 	/* Get the language of the browser */
@@ -44,11 +46,57 @@ export function getUserLanguage() {
 	return selectedLang;
 }
 
+export let tabIndex = 1;
+export const tabIndexMap = [];
+export const getTabIndex = {
+	getTabIndex: function (selector) {
+		tabIndexMap.push({selector: selector, tabIndex: tabIndex});
+		return tabIndex++;
+	}
+};
+export function resetTabIndex() {
+	$('.tabbable').each(function (itemIndex, item) {
+		$(item).removeAttr("tabindex");
+	});
+}
+export function createTabIndices() {
+	Meteor.defer(function () {
+		resetTabIndex();
+		let index = 1;
+		$('.tabbable').each(function (itemIndex, item) {
+			$(item).attr("tabindex", index++);
+		});
+	});
+}
+
 Meteor.startup(function () {
 	if (Meteor.isClient) {
 		$.getScript('/lib/highlight.pack.min.js');
 		$.getScript('/lib/marked.min.js');
 		TAPi18n.setLanguage(getUserLanguage());
 		navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+		document.onkeyup = function (event) {
+			if (event.keyCode === 9) {
+				$(".focused").removeClass("focused");
+				if ($(document.activeElement).prop("tagName") !== "BODY") {
+					$(document.activeElement).addClass("focused");
+				}
+				$('.removeQuestion').css("height", "initial");
+				if ($(document.activeElement).hasClass("questionIcon")) {
+					$(document.activeElement).find(".removeQuestion").css("height", "44px");
+				}
+				calculateTitelHeight();
+				calculateFooterFontSize();
+			}
+		};
+		$(document).on("keyup", ".focused", function () {
+			if (event.keyCode === 13) {
+				$(".focused").click();
+			}
+		});
+		document.onmousedown = function () {
+			$(".focused").removeClass("focused");
+			calculateTitelHeight();
+		};
 	}
 });

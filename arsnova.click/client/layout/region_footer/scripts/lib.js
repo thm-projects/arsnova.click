@@ -21,6 +21,7 @@ import {Tracker} from 'meteor/tracker';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
+import {createTabIndices} from '/client/startup.js';
 
 export const footerElemTranslation = {
 	id: "translation",
@@ -167,6 +168,7 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 		}
 
 		$('#' + item.id).find(".footerElemText").text(TAPi18n.__(item.textName));
+		createTabIndices();
 	});
 });
 

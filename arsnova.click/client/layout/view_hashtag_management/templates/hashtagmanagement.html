@@ -28,32 +28,39 @@
                                 <p class="hashtag-name">{{this}}</p>
                             </div>
                             <div class="col-xs-3">
-                                <button type="button" class="startQuiz btn btn-answerOption hashtag-management input-field btn-lg btn-cursor"
+                                <button type="button"
+                                        class="startQuiz btn btn-answerOption hashtag-management input-field btn-lg btn-cursor tabbable"
                                         data-toggle="tooltip"
+                                        id="startQuiz_{{@index}}"
                                         title="{{_ "view.hashtag_management.start_session"}}"
                                         data-animation="false">
                                     <span class="glyphicon glyphicon-play-circle glyph-left alignGlyphicon" aria-hidden="true"></span>
                                 </button>
                             </div>
                             <div class="col-xs-3">
-                                <button type="button" class="js-reactivate-hashtag btn btn-answerOption hashtag-management input-field btn-lg btn-cursor"
+                                <button type="button"
+                                        class="editQuiz js-reactivate-hashtag btn btn-answerOption hashtag-management input-field btn-lg btn-cursor tabbable"
                                         data-toggle="tooltip"
+                                        id="editQuiz_{{@index}}"
                                         title="{{_ "view.hashtag_management.edit_session"}}"
                                         data-animation="false">
                                     <span class="glyphicon glyphicon-edit glyph-left alignGlyphicon" aria-hidden="true"></span>
                                 </button>
                             </div>
                             <div class="col-xs-3">
-                                <button type="button" class="js-delete btn btn-answerOption hashtag-management input-field btn-lg btn-cursor"
+                                <button type="button"
+                                        class="deleteQuiz js-delete btn btn-answerOption hashtag-management input-field btn-lg btn-cursor tabbable"
                                         data-toggle="tooltip"
+                                        id="deleteQuiz_{{@index}}"
                                         title="{{_ "view.hashtag_management.delete_session"}}"
                                         data-animation="false">
                                     <span class="glyphicon glyphicon-trash glyph-left alignGlyphicon" aria-hidden="true"></span>
                                 </button>
                             </div>
                             <div class="col-xs-3">
-                                <div class="js-export btn btn-answerOption hashtag-management input-field btn-lg"
+                                <div class="exportQuiz js-export btn btn-answerOption hashtag-management input-field btn-lg tabbable"
                                      data-toggle="tooltip"
+                                     id="exportQuiz_{{@index}}"
                                      title="{{_ "view.hashtag_management.export"}}"
                                      data-animation="false"></div>
                             </div>
@@ -68,7 +75,8 @@
         <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" style="display: block;bottom:0 !important;">
             <div class="row">
                 <div class="col-xs-12">
-                    <button class="button button-back" id="backButton">
+                    <button class="button button-back tabbable"
+                            id="backButton">
                         <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                         <span class="fixed-bottom-item-text">{{_ "global.back"}}</span>
                     </button>

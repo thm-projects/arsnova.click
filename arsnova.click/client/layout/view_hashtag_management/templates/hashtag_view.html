@@ -24,9 +24,12 @@
 			<div class="row distance-top">
 				<div class="col-md-12">
 					<input type="text"
-						   class="input-field round-corners hashtag-field text-center"
+						   class="input-field round-corners hashtag-field text-center tabbable"
 						   id="hashtag-input-field"
-                           autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+                           autocomplete="off"
+                           autocorrect="off"
+                           autocapitalize="off"
+                           spellcheck="false"
                            placeholder="{{_ "view.hashtag_management.enter_quiz_name" }}"
                            aria-describedby="aria-description-hashtag-input-field"
                            maxlength="{{getHashtagSchema.max}}" />
@@ -35,7 +38,7 @@
 			<div class="row distance-top">
 				<div class="col-xxs-12 col-sm-6 col-join-session">
                     <button id="joinSession"
-                            class="button button-success"
+                            class="button button-success tabbable"
                             disabled="disabled"
                             aria-describedby="aria-description-joinSession">
                         <span class="glyphicon glyphicon-thumbs-up glyph-left"></span>
@@ -44,7 +47,7 @@
 				</div>
 				<div class="col-xxs-12 col-sm-6 col-create-session">
                     <button id="addNewHashtag"
-                            class="button button-success"
+                            class="button button-success tabbable"
                             disabled="disabled"
                             aria-describedby="aria-description-addNewHashtag">
                         <span>{{#if isEditingQuiz}}{{_ "view.hashtag_management.reenter_session"}}{{else}}{{#if isAddingDemoQuiz}}{{_ "view.hashtag_management.create_demo_session"}}{{else}}{{_ "view.hashtag_management.create_session"}}{{/if}}{{/if}}</span>

@@ -252,14 +252,6 @@ export const isMobileDevice = {
 	}
 };
 
-let tabIndex = 0;
-
-export const getTabIndex = {
-	getTabIndex: function () {
-		return tabIndex++;
-	}
-};
-
 export function showVideo(videoImageContainer) {
 	var sourceURI = videoImageContainer.accessKey === "youtube" ? 'https://youtube.com/embed/' : 'https://player.vimeo.com/video/';
 	sourceURI += videoImageContainer.id + '?autoplay=1';

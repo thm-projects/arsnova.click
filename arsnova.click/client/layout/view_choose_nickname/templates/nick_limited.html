@@ -24,7 +24,8 @@
                     <h3>{{_ "view.choose_nickname.no_selectable_nick_available.2"}}</h3>
                 {{/unless}}
                 {{#each getSelectableNicks}}
-                    <div class="selectableNick" id="selectableNick_{{this.nick}}">
+                    <div class="selectableNick tabbable"
+                         id="selectableNick_{{this.nick}}">
                         <p>{{this.nick}}</p>
                     </div>
                 {{/each}}

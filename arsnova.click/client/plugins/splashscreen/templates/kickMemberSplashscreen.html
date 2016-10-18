@@ -25,19 +25,24 @@
                         <p>{{{_ "view.lobby.kick_member_confirmation"}}}</p>
                     </div>
                     <div class="modal-body">
-                        <input type="checkbox" id="ban-nick"/>
+                        <input type="checkbox"
+                               id="ban-nick"
+                               title="{{_ "view.lobby.add_kicked_member_to_ban_list"}}"
+                               class="tabbable"/>
                         <label id="ban-nick-label">{{_ "view.lobby.add_kicked_member_to_ban_list"}}</label>
                     </div>
                     <div class="modal-footer">
                         <div class="row">
                             <div class="col-xs-6">
-                                <button id="closeDialogButton" class="button button-back">
+                                <button id="closeDialogButton"
+                                        class="button button-back tabbable">
                                     <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                                     {{_ "view.lobby.no"}}
                                 </button>
                             </div>
                             <div class="col-xs-6">
-                                <button id="kickMemberButton" class="button button-next">
+                                <button id="kickMemberButton"
+                                        class="button button-next tabbable">
                                     {{_ "view.lobby.yes"}}
                                     <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
                                 </button>

@@ -28,10 +28,10 @@
                         <p>{{_ "view.hashtag_management.available_sessions"}}</p><br/>
                         <div class="row" role="list">
                             {{#each hashtags}}
-                                <div class="col-xs-12 js-my-hash {{#unless isValid this}}in{{/unless}}validQuestion"
+                                <div class="col-xs-12 js-my-hash {{#unless isValid this}}in{{/unless}}validQuestion tabbable"
                                      data-toggle="tooltip"
                                      role="listitem"
-                                     tabindex="{{getTabIndex}}"
+                                     id="quiz_{{@index}}"
                                      aria-label="{{#if isValid this}}{{_ "view.hashtag_management.valid_question"}}{{else}}{{_ "view.hashtag_management.invalid_question"}}{{/if}}"
                                      title="{{#if isValid this}}{{_ "view.hashtag_management.valid_question"}}{{else}}{{_ "view.hashtag_management.invalid_question"}}{{/if}}">{{this}}</div>
                             {{/each}}
@@ -42,8 +42,7 @@
                             <div class="col-xs-6">
                                 <button type="button"
                                         id="closeButton"
-                                        class="btn btn-warning btn-lg btn-answerOption"
-                                        tabindex="{{getTabIndex}}"
+                                        class="btn btn-warning btn-lg btn-answerOption tabbable"
                                         aria-label="{{_ "global.close_window"}}">
                                     <span class="ansBtn">{{_ "global.close_window"}}</span>
                                     <span class="glyphicon glyphicon-log-out glyph-right" aria-hidden="true"></span>
@@ -52,8 +51,7 @@
                             <div class="col-xs-6">
                                 <button type="button"
                                         id="js-btn-showHashtagManagement"
-                                        class="btn btn-info btn-lg btn-answerOption"
-                                        tabindex="{{getTabIndex}}"
+                                        class="btn btn-info btn-lg btn-answerOption tabbable"
                                         aria-label="{{_ "view.hashtag_management.session_management"}}">
                                     <span class="glyphicon glyphicon-cog glyph-left" aria-hidden="true"></span>
                                     <span class="ansBtn">{{_ "view.hashtag_management.session_management"}}</span>

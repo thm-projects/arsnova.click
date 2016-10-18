@@ -86,6 +86,8 @@ Meteor.startup(function () {
 		});
 		document.onmousedown = function () {
 			$(".focused").removeClass("focused");
+			$('.removeQuestion').css("height", "initial");
+			$('.smallGlyphicon').removeClass("smallGlyphicon");
 			calculateTitelHeight();
 		};
 	}

@@ -18,7 +18,7 @@
 <template name="showHashtagsSplashscreen">
 	<div class="modal {{#unless isMobileDevice}}fade {{/unless}}splashscreen" id="{{instanceId}}" role="dialog" aria-describedby="splashscreen-{{instanceId}}-description">
 		<div class="modal-dialog">
-            <div class="noSplashscreenPadding col-md-11 col-sm-11 col-xs-10">
+            <div class="noSplashscreenPadding">
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
@@ -64,7 +64,7 @@
                 </div>
             </div>
 		</div>
-        <div id="splashscreen-{{instanceId}}-description">
+        <div class="aria-item" id="splashscreen-{{instanceId}}-description">
             {{_ "view.hashtag_management.aria_description.splashscreen_description"}}
         </div>
 	</div>

@@ -99,12 +99,10 @@ Template.leaderBoard.helpers({
 		const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
 		const memberlistResult = MemberListCollection.find({hashtag: hashtag}, {fields: {userRef: 1, nick: 1}}).fetch();
 		const responseResult = getLeaderBoardItems();
-		Meteor.subscribe("users");
 		let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";
 
 		memberlistResult.forEach(function (item) {
 			const user = Meteor.users.findOne({_id: item.userRef});
-			console.log(Meteor.users.find().fetch(), user);
 			let responseTime = 0;
 			let responseCount = 0;
 			responseResult.forEach(function (responseItem) {

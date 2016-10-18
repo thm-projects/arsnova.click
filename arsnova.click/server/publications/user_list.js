@@ -30,6 +30,7 @@ Meteor.publish('userMails', function (hashtag, privateKey){
 	}
 	const allUsers = MemberListCollection.find({hashtag: hashtag}).fetch();
 	allUsers.forEach(function(item) {
+		const user = Meteor.users.findOne({_id: item.userRef});
 		item.id = user.profile.id;
 		item.mail = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
 	});

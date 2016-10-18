@@ -102,7 +102,6 @@ Template.leaderBoard.helpers({
 		let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";
 
 		memberlistResult.forEach(function (item) {
-			const user = Meteor.users.findOne({_id: item.userRef});
 			let responseTime = 0;
 			let responseCount = 0;
 			responseResult.forEach(function (responseItem) {

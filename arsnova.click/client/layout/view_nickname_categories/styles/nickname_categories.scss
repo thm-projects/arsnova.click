@@ -85,7 +85,10 @@
 				text-decoration: underline;
 			}
 		}
-		&#block_illegal_nicks_wrapper {
+		&#block_illegal_nicks_wrapper,
+		&#restrict_to_cas_wrapper {
+			height: 50px;
+
 			p {
 				color: white;
 				line-height: 30px;
@@ -93,7 +96,8 @@
 				width: auto;
 				margin-left: 100px;
 			}
-			.bootstrap-switch-id-block_illegal_nicks_switch {
+			.bootstrap-switch-id-block_illegal_nicks_switch,
+			.bootstrap-switch-id-restrict_to_cas_switch {
 				float: left;
 				margin-right: 20px;
 			}

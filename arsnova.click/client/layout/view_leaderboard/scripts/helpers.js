@@ -115,8 +115,7 @@ Template.leaderBoard.helpers({
 			});
 			if (responseTime !== 0) {
 				responseTime = responseTime / responseCount;
-				const mail = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
-				csvString += item.nick + "," + responseTime + "," + user.profile.id + "," + mail + "\n";
+				csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
 			}
 		});
 

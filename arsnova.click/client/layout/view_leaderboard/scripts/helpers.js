@@ -102,6 +102,7 @@ Template.leaderBoard.helpers({
 
 		memberlistResult.forEach(function (item) {
 			const user = Meteor.users.findOne({_id: item.userRef});
+			console.log(Meteor.users.find().fetch(), user);
 			let responseTime = 0;
 			let responseCount = 0;
 			responseResult.forEach(function (responseItem) {

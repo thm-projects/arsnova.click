@@ -334,7 +334,7 @@ Router.route('/:quizName/results', {
 
 Router.route('/:quizName/leaderBoard/:id', {
 	waitOn: function () {
-		Meteor.subscribe('AllAttendeeUsersList', Router.current().params.quizName, localData.getPrivateKey(), Router.current().params.id);
+		Meteor.subscribe('AllAttendeeUsersList', Router.current().params.quizName, localData.getPrivateKey());
 	},
 	action: function () {
 		if (!globalEventStackObserver.isRunning()) {

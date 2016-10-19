@@ -21,7 +21,7 @@ import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 
-Meteor.publish('AllAttendeeUsersList', function (hashtag, privateKey, questionIndex) {
+Meteor.publish('AllAttendeeUsersList', function (hashtag, privateKey) {
 	new SimpleSchema({
 		hashtag: {type: String},
 		privateKey: {type: String}

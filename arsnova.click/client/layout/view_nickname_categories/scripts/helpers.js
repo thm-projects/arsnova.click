@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {NicknameCategoriesCollection} from '/lib/nickname_categories/collection.js';
@@ -53,6 +54,6 @@ Template.nicknameCategories.helpers({
 		return hasAll;
 	},
 	hasCASConfig: function () {
-		return !!Meteor.settings.public && !!Meteor.settings.public.cas
+		return !!Meteor.settings.public && !!Meteor.settings.public.cas;
 	}
 });

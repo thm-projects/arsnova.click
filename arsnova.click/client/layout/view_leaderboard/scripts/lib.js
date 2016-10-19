@@ -79,13 +79,13 @@ function getLeaderBoardItemsByIndex(index) {
 
 	MemberListCollection.find({}, {fields: {nick: 1}}).forEach(function (member) {
 		param.userNick = member.nick;
-		var userResponses = ResponsesCollection.find(param);
+		var userResponses = ResponsesCollection.find(param).fetch();
 		delete param.userNick;
 		var userHasRightAnswers = true;
 		// only put member in leaderboard when he clicked the right amount, then check whether he clicked all the right ones
 		var totalResponseTime = 0;
 		const questionItem = QuestionGroupCollection.findOne().questionList[index];
-		if ((userResponses.count() === rightAnswerOptions.count() || questionItem.type === "RangedQuestion") && (userResponses.count() > 0) && userHasRightAnswers) {
+		if ((userResponses.length === rightAnswerOptions.count() || questionItem.type === "RangedQuestion") && (userResponses.length > 0) && userHasRightAnswers) {
 			userResponses.forEach(function (userResponse) {
 				param.isCorrect = true;
 				param.answerOptionNumber = userResponse.answerOptionNumber;
@@ -119,8 +119,8 @@ function getLeaderBoardItemsByIndex(index) {
 }
 
 export function getLeaderBoardItems() {
-	if (typeof Session.get("showLeaderBoardId") !== "undefined") {
-		return [{value: getLeaderBoardItemsByIndex(Session.get("showLeaderBoardId"))}];
+	if (Router.current().params.id !== "all") {
+		return [{value: getLeaderBoardItemsByIndex(parseInt(Router.current().params.id))}];
 	} else {
 		if (!EventManagerCollection.findOne()) {
 			return [];

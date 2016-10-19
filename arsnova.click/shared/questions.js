@@ -33,16 +33,12 @@ Meteor.methods({
 		if (Meteor.isServer) {
 			query.hashtag = questionGroup.hashtag;
 		}
-		if (QuestionGroupCollection.find(query).count() > 0) {
-			QuestionGroupCollection.update(query, questionGroup);
-		} else {
-			QuestionGroupCollection.insert(questionGroup);
-			for (let i = 0; i < questionGroup.questionList.length; i++) {
-				const questionItem = questionGroup.questionList[i];
-				for (let j = 0; j < questionItem.answerOptionList.length; j++) {
-					const answerItem = questionItem.answerOptionList[j];
-					Meteor.call("AnswerOptionCollection.addOption", answerItem);
-				}
+		QuestionGroupCollection.update(query, questionGroup);
+		for (let i = 0; i < questionGroup.questionList.length; i++) {
+			const questionItem = questionGroup.questionList[i];
+			for (let j = 0; j < questionItem.answerOptionList.length; j++) {
+				const answerItem = questionItem.answerOptionList[j];
+				Meteor.call("AnswerOptionCollection.addOption", answerItem);
 			}
 		}
 		EventManagerCollection.update({hashtag: questionGroup.hashtag}, {

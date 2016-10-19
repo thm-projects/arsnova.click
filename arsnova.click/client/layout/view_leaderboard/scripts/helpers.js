@@ -38,11 +38,7 @@ Template.leaderBoard.helpers({
 		return nick === localStorage.getItem(Router.current().params.quizName + "nick");
 	},
 	getTitleText: ()=> {
-		if (Session.get("showGlobalRanking")) {
-			return TAPi18n.__("view.leaderboard.title.all_questions");
-		} else {
-			return TAPi18n.__("view.leaderboard.title.single_question", {questionId: (Session.get("showLeaderBoardId") + 1)});
-		}
+		return Router.current().params.id === "all" ? TAPi18n.__("view.leaderboard.title.all_questions") : TAPi18n.__("view.leaderboard.title.single_question", {questionId: (parseInt(Router.current().params.id) + 1)});
 	},
 	getPosition: function (index) {
 		return (index + 1);
@@ -61,13 +57,13 @@ Template.leaderBoard.helpers({
 		return Session.get("responsesCountOverride") || (Session.get("allMembersCount") - Session.get("maxResponseButtons") > 0);
 	},
 	isGlobalRanking: function () {
-		return Session.get("showGlobalRanking");
+		return Router.current().params.id === "all";
 	},
 	leaderBoardSums: function () {
 		return getAllNicksWhichAreAlwaysRight();
 	},
 	noLeaderBoardItems: (index)=> {
-		if (Session.get("showGlobalRanking")) {
+		if (Router.current().params.id === "all") {
 			return getAllNicksWhichAreAlwaysRight().length <= 0;
 		}
 		var items = getLeaderBoardItems();
@@ -98,19 +94,29 @@ Template.leaderBoard.helpers({
 		const time = new Date();
 		const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
 		const memberlistResult = MemberListCollection.find({hashtag: hashtag}, {fields: {userRef: 1, nick: 1}}).fetch();
-		const responseResult = getLeaderBoardItems();
+		let responseResult;
+		if (Router.current().params.id === "all") {
+			responseResult = getAllNicksWhichAreAlwaysRight();
+		} else {
+			responseResult = getLeaderBoardItems();
+		}
 		let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";
 
 		memberlistResult.forEach(function (item) {
 			let responseTime = 0;
 			let responseCount = 0;
 			responseResult.forEach(function (responseItem) {
-				responseItem.value.forEach(function (responseValue) {
-					if (responseValue.nick === item.nick) {
-						responseTime += responseValue.responseTime;
-						responseCount++;
-					}
-				});
+				if (responseItem.value === item.nick) {
+					responseTime += responseItem.sumResponseTime;
+					responseCount++;
+				} else if (responseItem.value instanceof Array) {
+					responseItem.value.forEach(function (responseValue) {
+						if (responseValue.nick === item.nick) {
+							responseTime += responseValue.responseTime;
+							responseCount++;
+						}
+					});
+				}
 			});
 			const user = Meteor.users.findOne({_id: item.userRef});
 			if (responseTime !== 0) {
@@ -123,7 +129,7 @@ Template.leaderBoard.helpers({
 
 		return {
 			href: 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvString),
-			name: hashtag + "_evaluated_" + timeString + ".csv"
+			name: hashtag + "_evaluated_" + Router.current().params.id + "_" + timeString + ".csv"
 		};
 	}
 });

@@ -19,8 +19,9 @@ import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
+import {ResponsesCollection} from '/lib/responses/collection.js';
 
-Meteor.publish('AllAttendeeUsersList', function (hashtag, privateKey) {
+Meteor.publish('AllAttendeeUsersList', function (hashtag, privateKey, questionIndex) {
 	new SimpleSchema({
 		hashtag: {type: String},
 		privateKey: {type: String}
@@ -30,7 +31,10 @@ Meteor.publish('AllAttendeeUsersList', function (hashtag, privateKey) {
 	}
 	const userRefs = [];
 	MemberListCollection.find({hashtag: hashtag}).fetch().forEach(function (item) {
-		userRefs.push(item.userRef);
+		const response = ResponsesCollection.findOne({userNick: item.nick});
+		if (response) {
+			userRefs.push(item.userRef);
+		}
 	});
 	return Meteor.users.find({_id: {$in: userRefs}});
 });

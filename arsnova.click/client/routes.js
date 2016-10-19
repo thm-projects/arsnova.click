@@ -332,28 +332,14 @@ Router.route('/:quizName/results', {
 	}
 });
 
-Router.route('/:quizName/statistics', {
+Router.route('/:quizName/leaderBoard/:id', {
 	waitOn: function () {
-		Meteor.subscribe('AllAttendeeUsersList', Router.current().params.quizName, localData.getPrivateKey());
+		Meteor.subscribe('AllAttendeeUsersList', Router.current().params.quizName, localData.getPrivateKey(), Router.current().params.id);
 	},
 	action: function () {
 		if (!globalEventStackObserver.isRunning()) {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
 		}
-		this.render('leaderBoard');
-	}
-});
-
-Router.route('/:quizName/globalLeaderBoard', {
-	waitOn: function () {
-		Meteor.subscribe('AllAttendeeUsersList', Router.current().params.quizName, localData.getPrivateKey());
-	},
-	action: function () {
-		if (!globalEventStackObserver.isRunning()) {
-			globalEventStackObserver.startObserving(Router.current().params.quizName);
-		}
-		Session.set("showLeaderBoardId", undefined);
-		Session.set("showGlobalRanking", true);
 		this.render('leaderBoard');
 	}
 });

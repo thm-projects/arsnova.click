@@ -33,7 +33,7 @@ Meteor.methods({
 		if (Meteor.isServer) {
 			query.hashtag = questionGroup.hashtag;
 		}
-		QuestionGroupCollection.update(query, questionGroup);
+		QuestionGroupCollection.update(query, questionGroup, {upsert: true});
 		for (let i = 0; i < questionGroup.questionList.length; i++) {
 			const questionItem = questionGroup.questionList[i];
 			for (let j = 0; j < questionItem.answerOptionList.length; j++) {

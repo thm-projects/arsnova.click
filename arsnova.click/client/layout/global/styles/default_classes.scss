@@ -106,6 +106,12 @@
 .button-leader {
   box-shadow: none;
   cursor: default;
+  span {
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    text-overflow: ellipsis;
+  }
 }
 
 .distance-top {

@@ -42,8 +42,9 @@
                                 </div>
                             {{else}}
                                 <div class="col-md-6">
-                                    <button class="button button-leader {{#if isOwnNick value}}color-changing-own-nick{{/if}}">{{getPosition @index}}. {{value}}
-                                        - {{parseTimeToSeconds sumResponseTime}} {{_ "view.leaderboard.second" count=2 }}
+                                    <button class="button button-leader {{#if isOwnNick value}}color-changing-own-nick{{/if}}">
+                                        <span>{{getPosition @index}}. {{value}}
+                                            - {{parseTimeToSeconds sumResponseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
                                     </button>
                                 </div>
                             {{/if}}

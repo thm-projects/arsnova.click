@@ -33,7 +33,6 @@ Template.memberlist.onRendered(function () {
 		lobbySound.play();
 	}
 	calculateButtonCount(MemberListCollection.find().count());
-	$('.header-title').text(Router.current().params.quizName);
 	calculateHeaderSize();
 	$(window).resize(calculateHeaderSize);
 

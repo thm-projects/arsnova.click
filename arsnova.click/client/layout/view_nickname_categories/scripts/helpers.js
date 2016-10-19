@@ -51,5 +51,8 @@ Template.nicknameCategories.helpers({
 			}
 		});
 		return hasAll;
+	},
+	hasCASConfig: function () {
+		return !!Meteor.settings.public && !!Meteor.settings.public.cas
 	}
 });

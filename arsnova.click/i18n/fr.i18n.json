@@ -286,7 +286,7 @@
     },
     "nickname_categories": {
       "title": "Attribuer des pseudos",
-      "save": "Enregistrer",
+      "save": "Retour",
       "available_nicknames": "Pseudos disponibles",
       "choose_all": "Tout sélectionner",
       "remove_all": "Enlever tout",

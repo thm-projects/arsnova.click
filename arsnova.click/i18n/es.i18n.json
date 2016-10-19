@@ -286,7 +286,7 @@
     },
     "nickname_categories": {
       "title": "Predeterminar nombres de usuario",
-      "save": "Guardar",
+      "back": "Volver",
       "available_nicknames": "Nombres de usuario disponibles",
       "choose_all": "Elegir todo",
       "remove_all": "Eliminar todo",

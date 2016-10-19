@@ -286,7 +286,7 @@
     },
     "nickname_categories": {
       "title": "Limit available nicknames",
-      "save": "Save",
+      "back": "Back",
       "available_nicknames": "Available nicknames",
       "choose_all": "Select all",
       "remove_all": "Remove all",

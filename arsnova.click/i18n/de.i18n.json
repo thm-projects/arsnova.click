@@ -286,7 +286,7 @@
     },
     "nickname_categories": {
       "title": "Nicknamen vorgeben",
-      "save": "Speichern",
+      "back": "Zurück",
       "available_nicknames": "Verfügbare Nicknamen",
       "choose_all": "Alle auswählen",
       "remove_all": "Alle entfernen",

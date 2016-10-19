@@ -18,14 +18,11 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {calculateButtonCount, setMemberlistObserver} from './lib.js';
 
 Template.memberlist.onCreated(function () {
-	var oldStartTimeValues = {};
-
 	$(window).resize(function () {
 		calculateButtonCount(MemberListCollection.find().count());
 	});
@@ -40,11 +37,6 @@ Template.memberlist.onCreated(function () {
 			Session.set("allMembersCount", MemberListCollection.find().count());
 		}
 	});
-
-	var doc = QuestionGroupCollection.findOne();
-	for (var i = 0; i < doc.questionList.length; i++) {
-		oldStartTimeValues[i] = doc.questionList[i].startTime;
-	}
 
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);

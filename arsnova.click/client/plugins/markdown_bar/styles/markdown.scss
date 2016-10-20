@@ -56,6 +56,12 @@
   border-radius: 0 0 0 0;
 }
 
+.smallGlyphicon {
+  font-size: 16px !important;
+  top: 3px !important;
+  position: absolute !important;
+}
+
 @media (max-width: 500px) {
   .markdown-box {
 	display: none;

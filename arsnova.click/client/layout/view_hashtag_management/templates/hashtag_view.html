@@ -16,7 +16,7 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="hashtagView">
-	<div id="landingPageSlogan">
+    <div id="landingPageSlogan">
         {{> titel titelText = 'global.arsnova_slogan' }}
     </div>
 	<div class="row center-vertical margin-title" id="landingPageContent">
@@ -24,23 +24,32 @@
 			<div class="row distance-top">
 				<div class="col-md-12">
 					<input type="text"
-						   class="input-field round-corners hashtag-field text-center"
+						   class="input-field round-corners hashtag-field text-center tabbable"
 						   id="hashtag-input-field"
-                           autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+                           autocomplete="off"
+                           autocorrect="off"
+                           autocapitalize="off"
+                           spellcheck="false"
                            placeholder="{{_ "view.hashtag_management.enter_quiz_name" }}"
-						   aria-describedby="basic-addon1"
+                           aria-describedby="aria-description-hashtag-input-field"
                            maxlength="{{getHashtagSchema.max}}" />
 				</div>
 			</div>
 			<div class="row distance-top">
 				<div class="col-xxs-12 col-sm-6 col-join-session">
-					<button id="joinSession" class="button button-success" disabled="disabled">
-                        <span class="glyphicon glyphicon-thumbs-up glyph-left" aria-hidden="true"></span>
+                    <button id="joinSession"
+                            class="button button-success tabbable"
+                            disabled="disabled"
+                            aria-describedby="aria-description-joinSession">
+                        <span class="glyphicon glyphicon-thumbs-up glyph-left"></span>
                         <span>{{_ "view.hashtag_management.join_session"}}</span>
 					</button>
 				</div>
 				<div class="col-xxs-12 col-sm-6 col-create-session">
-					<button id="addNewHashtag" class="button button-success" disabled="disabled">
+                    <button id="addNewHashtag"
+                            class="button button-success tabbable"
+                            disabled="disabled"
+                            aria-describedby="aria-description-addNewHashtag">
                         <span>{{#if isEditingQuiz}}{{_ "view.hashtag_management.reenter_session"}}{{else}}{{#if isAddingDemoQuiz}}{{_ "view.hashtag_management.create_demo_session"}}{{else}}{{_ "view.hashtag_management.create_session"}}{{/if}}{{/if}}</span>
                         <span class="glyphicon glyphicon-{{#if isEditingQuiz}}log-in{{else}}{{#if isAddingDemoQuiz}}send{{else}}edit{{/if}}{{/if}} glyph-right" aria-hidden="true"></span>
 					</button>
@@ -54,4 +63,10 @@
             {{/unless}}
 		</div>
 	</div>
+    <div class="aria-item" id="aria-description-joinSession">
+        {{_ "view.hashtag_management.aria_description.joinSession"}}
+    </div>
+    <div class="aria-item" id="aria-description-addNewHashtag">
+        {{_ "view.hashtag_management.aria_description.addNewHashtag"}}
+    </div>
 </template>

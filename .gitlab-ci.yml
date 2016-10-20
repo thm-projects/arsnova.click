@@ -101,4 +101,3 @@ sync_mirror:
     - git clone --bare "$CI_BUILD_REPO" mirror.git
     - cd mirror.git
     - git push --mirror "$MIRROR_REPO"
-  environment: GitHub

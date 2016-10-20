@@ -286,7 +286,7 @@
     },
     "nickname_categories": {
       "title": "Attribuer des pseudos",
-      "save": "Enregistrer",
+      "save": "Retour",
       "available_nicknames": "Pseudos disponibles",
       "choose_all": "Tout sélectionner",
       "remove_all": "Enlever tout",
@@ -294,6 +294,7 @@
       "chosen_nicknames": "Pseudos sélectionnés",
       "no_nicks_selected": "Pas de pseudos sélectionnés, ainsi les participants peuvent choisir leur pseudo de manière libre.",
       "block_illegal_nicks": "Bloquer surnoms inappropriés",
+      "restrict_to_cas": "Restreindre aux utilisateurs de CAS",
       "category": {
         "disney": "Caractères Disney",
         "science": "Science",
@@ -362,7 +363,11 @@
       "selected_nicks": "Pseudos attribués",
       "no_selected_nicks": "Pas de pseudos attribués. Tous les noms sont autorisés.",
       "hide_selected_nicks": "Cache pseudos",
-      "show_selected_nicks": "Montre pseudos"
+      "show_selected_nicks": "Montre pseudos",
+      "isRestrictingRudeNicks": "Bloquer surnoms inappropriés",
+      "isRestrictingToCAS": "Les participants doivent authentifier via CAS",
+      "true": "Oui",
+      "false": "Non"
     },
     "theme_switcher": {
       "set_theme": "Choisir un style",

@@ -292,12 +292,8 @@ const clickEvents = {
 		const url = window.location.protocol + "//" + window.location.host + "/" + Router.current().params.quizName;
 		const qrCodeContainer = $(".qr-code-container");
 		const qrCodeSize = function () {
-			let width = $(window).outerWidth();
-			const height = $(window).outerHeight();
-			if (width > height) {
-				return height * 0.8;
-			}
-			return width * 0.7;
+			const height = $(window).outerHeight() - $('.navbar-fixed-top').outerHeight() - $('.navbar-fixed-bottom').outerHeight();
+			return height * 0.9;
 		};
 		const calcQrCodeContainerSize = function () {
 			qrCodeContainer.find("canvas").remove();
@@ -317,10 +313,10 @@ const clickEvents = {
 			});
 			img.setAttribute("src", "/images/icons/arsNovaClick-192.png");
 			qrCodeContainer.css({
-				top: $(window).outerHeight() / 2 - (qrCodeSize() + 50) / 2,
+				top: $('.navbar-fixed-top').outerHeight(),
 				left: $(window).outerWidth() / 2 - qrCodeSize() / 2
 			});
-			$('.qr-code-container-close').css("left", qrCodeSize() + 5);
+			$('.qr-code-container-close').css("left", qrCodeSize() - 45);
 			qrCodeContainer.show();
 		};
 		const windowResizeHandler = function () {
@@ -337,6 +333,7 @@ const clickEvents = {
 		Router.go("/" + Router.current().params.quizName + "/nicknameCategories");
 	},
 	"click #edit-quiz": function () {
+		Meteor.call('EventManagerCollection.setSessionStatus', Router.current().params.quizName, 1);
 		Router.go("/" + Router.current().params.quizName + "/question");
 	},
 	"click #reading-confirmation": function () {

@@ -286,7 +286,7 @@
     },
     "nickname_categories": {
       "title": "Limit available nicknames",
-      "save": "Save",
+      "back": "Back",
       "available_nicknames": "Available nicknames",
       "choose_all": "Select all",
       "remove_all": "Remove all",
@@ -294,6 +294,7 @@
       "chosen_nicknames": "Selected nicknames",
       "no_nicks_selected": "No nicknames selected. All nicknames are allowed.",
       "block_illegal_nicks": "Block inappropriate nicknames",
+      "restrict_to_cas": "Restrict to CAS users",
       "category": {
         "disney": "Disney",
         "science": "Science",
@@ -362,7 +363,11 @@
       "selected_nicks": "Valid nicknames",
       "no_selected_nicks": "No nicknames selected. All nicknames are valid.",
       "hide_selected_nicks": "Hide nicknames",
-      "show_selected_nicks": "Show nicknames"
+      "show_selected_nicks": "Show nicknames",
+      "isRestrictingRudeNicks": "Block inappropriate nicknames",
+      "isRestrictingToCAS": "Attendees must authenticate via CAS",
+      "true": "Yes",
+      "false": "No"
     },
     "theme_switcher": {
       "set_theme": "Choose a theme for all attendees",

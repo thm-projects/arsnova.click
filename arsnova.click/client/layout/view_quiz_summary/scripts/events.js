@@ -26,7 +26,13 @@ Template.quizSummary.events({
 		Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
 		Meteor.call('SessionConfiguration.addConfig', Session.get("questionGroup").getConfiguration().serialize());
 		Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
-		Router.go("/" + Router.current().params.quizName + "/memberlist");
+		if (Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin()) {
+			Meteor.loginWithCas(function () {
+				Router.go("/" + Router.current().params.quizName + "/memberlist");
+			});
+		} else {
+			Router.go("/" + Router.current().params.quizName + "/memberlist");
+		}
 	},
 	"click #backButton": function () {
 		let firstFailedIndex = null;

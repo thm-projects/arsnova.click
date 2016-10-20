@@ -87,8 +87,7 @@ Template.liveResults.events({
 	"click .btn-showLeaderBoard": function (event) {
 		event.stopPropagation();
 		var targetId = parseInt($(event.currentTarget).attr("id").replace("js-btn-showLeaderBoard_", ""));
-		Session.set("showLeaderBoardId", targetId);
-		Router.go("/" + Router.current().params.quizName + "/statistics");
+		Router.go("/" + Router.current().params.quizName + "/leaderBoard/" + targetId);
 	},
 	"click #js-btn-export": function (event) {
 		event.stopPropagation();
@@ -155,7 +154,7 @@ Template.liveResults.events({
 	},
 	'click #goGlobalRanking': (event)=> {
 		event.stopPropagation();
-		Router.go("/" + Router.current().params.quizName + "/globalLeaderBoard");
+		Router.go("/" + Router.current().params.quizName + "/leaderBoard/all");
 	},
 	'click #showNextQuestionDialog': (event)=> {
 		event.stopPropagation();

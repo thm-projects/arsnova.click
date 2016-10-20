@@ -99,21 +99,12 @@
   cursor: pointer;
 }
 
-@media (max-width: 1299px) {
-  .splashscreen-container-close {
-    font-size: 4vw;
-  }
-}
-@media (min-width: 1300px) {
-  .splashscreen-container-close {
-    font-size: 50px;
-  }
-}
-
 .splashscreen-container-close {
+  font-size: 4rem;
   display: inline-block;
   position: absolute;
-
+  right: 10px;
+  margin-top: 10px;
 
   .glyphicon-remove {
     border-radius: $corner-radius;

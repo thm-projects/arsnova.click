@@ -286,7 +286,7 @@
     },
     "nickname_categories": {
       "title": "Predeterminar nombres de usuario",
-      "save": "Guardar",
+      "back": "Volver",
       "available_nicknames": "Nombres de usuario disponibles",
       "choose_all": "Elegir todo",
       "remove_all": "Eliminar todo",
@@ -294,6 +294,7 @@
       "chosen_nicknames": "Nombres de usuario elegidos",
       "no_nicks_selected": "Ningún nombre de usuario elegido, así los participantes pueden elegir sus propios nombres de usuario.",
       "block_illegal_nicks": "Bloquear apodos inapropiados",
+      "restrict_to_cas": "Restringir a los usuarios CAS",
       "category": {
         "disney": "Personajes Disney",
         "science": "Ciencia",
@@ -362,7 +363,11 @@
       "selected_nicks": "Nombres de usuario predeterminados",
       "no_selected_nicks": "No hay nombres de usuario predeterminados. Todos los nombres están permitidos.",
       "hide_selected_nicks": "Ocultar nombres de usuario",
-      "show_selected_nicks": "Mostrar nombres de usuarios"
+      "show_selected_nicks": "Mostrar nombres de usuarios",
+      "isRestrictingRudeNicks": "Bloquear apodos inapropiados",
+      "isRestrictingToCAS": "Los asistentes deben autenticarse a través de CAS",
+      "true": "Sí",
+      "false": "No"
     },
     "theme_switcher": {
       "set_theme": "Elegir estilo",

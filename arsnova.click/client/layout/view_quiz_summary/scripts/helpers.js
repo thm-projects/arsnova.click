@@ -121,6 +121,18 @@ Template.quizSummary.helpers({
 		}
 		return Session.get("questionGroup").getConfiguration().getNickSettings().getSelectedValues().length;
 	},
+	getIsRestrictingRudeNicks: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		return "view.quiz_summary." + Session.get("questionGroup").getConfiguration().getNickSettings().getBlockIllegal();
+	},
+	getIsRestrictingToCAS: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		return "view.quiz_summary." + Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin();
+	},
 	isVotingQuestion: function (questionType) {
 		return questionType === "SurveyQuestion";
 	},

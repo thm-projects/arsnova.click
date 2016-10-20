@@ -21,6 +21,7 @@ import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
+import * as localData from '/lib/local_storage.js';
 import {getLeaderBoardItems, getAllNicksWhichAreAlwaysRight} from './lib.js';
 
 Template.leaderBoard.helpers({
@@ -37,11 +38,7 @@ Template.leaderBoard.helpers({
 		return nick === localStorage.getItem(Router.current().params.quizName + "nick");
 	},
 	getTitleText: ()=> {
-		if (Session.get("showGlobalRanking")) {
-			return TAPi18n.__("view.leaderboard.title.all_questions");
-		} else {
-			return TAPi18n.__("view.leaderboard.title.single_question", {questionId: (Session.get("showLeaderBoardId") + 1)});
-		}
+		return Router.current().params.id === "all" ? TAPi18n.__("view.leaderboard.title.all_questions") : TAPi18n.__("view.leaderboard.title.single_question", {questionId: (parseInt(Router.current().params.id) + 1)});
 	},
 	getPosition: function (index) {
 		return (index + 1);
@@ -60,13 +57,13 @@ Template.leaderBoard.helpers({
 		return Session.get("responsesCountOverride") || (Session.get("allMembersCount") - Session.get("maxResponseButtons") > 0);
 	},
 	isGlobalRanking: function () {
-		return Session.get("showGlobalRanking");
+		return Router.current().params.id === "all";
 	},
 	leaderBoardSums: function () {
 		return getAllNicksWhichAreAlwaysRight();
 	},
 	noLeaderBoardItems: (index)=> {
-		if (Session.get("showGlobalRanking")) {
+		if (Router.current().params.id === "all") {
 			return getAllNicksWhichAreAlwaysRight().length <= 0;
 		}
 		var items = getLeaderBoardItems();
@@ -90,37 +87,49 @@ Template.leaderBoard.helpers({
 		return index === 0;
 	},
 	isRestrictedToCAS: function () {
-		return SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).nicks.restrictToCASLogin;
+		return localData.containsHashtag(Router.current().params.quizName) && SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).nicks.restrictToCASLogin;
 	},
 	exportData: function () {
 		const hashtag = Router.current().params.quizName;
 		const time = new Date();
 		const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
 		const memberlistResult = MemberListCollection.find({hashtag: hashtag}, {fields: {userRef: 1, nick: 1}}).fetch();
-		const responseResult = getLeaderBoardItems();
+		let responseResult;
+		if (Router.current().params.id === "all") {
+			responseResult = getAllNicksWhichAreAlwaysRight();
+		} else {
+			responseResult = getLeaderBoardItems();
+		}
 		let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";
 
 		memberlistResult.forEach(function (item) {
-			const user = Meteor.users.findOne({_id: item.userRef});
 			let responseTime = 0;
 			let responseCount = 0;
 			responseResult.forEach(function (responseItem) {
-				responseItem.value.forEach(function (responseValue) {
-					if (responseValue.nick === item.nick) {
-						responseTime += responseValue.responseTime;
-						responseCount++;
-					}
-				});
+				if (responseItem.value === item.nick) {
+					responseTime += responseItem.sumResponseTime;
+					responseCount++;
+				} else if (responseItem.value instanceof Array) {
+					responseItem.value.forEach(function (responseValue) {
+						if (responseValue.nick === item.nick) {
+							responseTime += responseValue.responseTime;
+							responseCount++;
+						}
+					});
+				}
 			});
+			const user = Meteor.users.findOne({_id: item.userRef});
 			if (responseTime !== 0) {
 				responseTime = responseTime / responseCount;
-				csvString += item.nick + "," + responseTime + "," + user.profile.id + "," + user.profile.mail.join(",") + "\n";
+				item.id = user.profile.id;
+				item.mail = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
+				csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
 			}
 		});
 
 		return {
 			href: 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvString),
-			name: hashtag + "_evaluated_" + timeString + ".csv"
+			name: hashtag + "_evaluated_" + Router.current().params.id + "_" + timeString + ".csv"
 		};
 	}
 });

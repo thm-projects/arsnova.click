@@ -18,9 +18,10 @@
 <template name="resetSessionSplashscreen">
     <div class="modal {{#unless isMobileDevice}}fade {{/unless}}splashscreen" role="dialog">
         <div class="modal-dialog">
-            <div class="noSplashscreenPadding col-md-11 col-sm-11 col-xs-10">
+            <div class="noSplashscreenPadding">
                 <div class="modal-content">
                     <div class="modal-header">
+                        <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
                         <h2>
                             {{#if isEditingQuestion}}
                                 {{_ "region.header.reset_session_confirmation.empty_lobby.title"}}
@@ -40,13 +41,15 @@
                     <div class="modal-footer">
                         <div class="row">
                             <div class="col-xs-6">
-                                <button id="closeDialogButton" class="button button-back">
+                                <button id="closeDialogButton"
+                                        class="button button-back tabbable">
                                     <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                                     {{_ "global.abort"}}
                                 </button>
                             </div>
                             <div class="col-xs-6">
-                                <button id="resetSessionButton" class="button button-next">
+                                <button id="resetSessionButton"
+                                        class="button button-next tabbable">
                                     {{_ "region.header.yes"}}
                                     <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
                                 </button>
@@ -54,9 +57,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="noSplashscreenPadding col-md-1 col-sm-1 col-xs-2">
-                <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
             </div>
         </div>
     </div>

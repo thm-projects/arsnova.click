@@ -20,7 +20,9 @@
 		<div class="col-md-12">
             <div class="row distance-top">
                 <div class="col-xs-12">
-                    <select title="chooseQuestionType" class="round-corners textarea" id="chooseQuestionType">
+                    <select title="chooseQuestionType"
+                            class="round-corners textarea tabbable"
+                            id="chooseQuestionType">
                         {{#each questionTypes }}
                             <option id="{{this.id}}" {{this.selected}}>{{_ this.translationName}}</option>
                         {{/each}}
@@ -30,8 +32,10 @@
             <div class="row distance-top">
                 <div id="editQuestionText" class="col-md-12">
                     {{> markdownBar }}
-                    <textarea class="round-corners-markdown textarea placeholder-align-center"
-                              maxlength="{{getQuestionTextSchema.max}}" rows="{{#if isLargeWindow}}8{{else}}4{{/if}}" id="questionText"
+                    <textarea class="round-corners-markdown textarea placeholder-align-center tabbable"
+                              maxlength="{{getQuestionTextSchema.max}}"
+                              rows="{{#if isLargeWindow}}8{{else}}4{{/if}}"
+                              id="questionText"
                               placeholder="{{_ "view.questions.enter_question_here"}}"
                     >{{questionText}}</textarea>
                 </div>

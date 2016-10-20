@@ -21,7 +21,8 @@
             <div class="row">
                 <div class="col-xs-12 nickCategoryWrapper">
                     {{#each nickNameCategories}}
-                        <div class="nickStyle nickCategory" id="nickCategory_{{this}}">
+                        <div class="nickStyle nickCategory tabbable"
+                             id="nickCategory_{{this}}">
                             <p>{{_ this}}</p>
                         </div>
                     {{/each}}
@@ -31,12 +32,14 @@
                 <div class="col-xs-12 col-sm-6">
                     {{#if nickNames}}
                         <h3>{{_ "view.nickname_categories.available_nicknames"}}</h3>
-                        <div class="nickStyle nickName {{#if hasSelectedAll}}selectedNickName{{/if}}" id="select_all">
+                        <div class="nickStyle nickName {{#if hasSelectedAll}}selectedNickName{{/if}} tabbable"
+                             id="select_all">
                             <p>{{_ "view.nickname_categories.choose_all"}}</p>
                         </div>
                     {{/if}}
                     {{#each nickNames}}
-                        <div class="nickStyle nickName {{#if isSelectedNick this.nick}}selectedNickName{{/if}}" id="nickName_{{this.nick}}">
+                        <div class="nickStyle nickName {{#if isSelectedNick this.nick}}selectedNickName{{/if}} tabbable"
+                             id="nickName_{{this.nick}}">
                             <p>{{_ this.nick}}</p>
                         </div>
                     {{/each}}
@@ -49,19 +52,31 @@
                         </div>
                         <div class="nickStyle" id="block_illegal_nicks_wrapper">
                             <p>{{_ "view.nickname_categories.block_illegal_nicks"}}</p>
-                            <input type="checkbox" name='switch' id="block_illegal_nicks_switch" title="{{_ "view.nickname_categories.block_illegal_nicks"}}" />
+                            <input type="checkbox"
+                                   name='switch'
+                                   id="block_illegal_nicks_switch"
+                                   class="tabbable"
+                                   title="{{_ "view.nickname_categories.block_illegal_nicks"}}"/>
                         </div>
-                        <div class="nickStyle" id="restrict_to_cas_wrapper">
-                            <p>{{_ "view.nickname_categories.restrict_to_cas"}}</p>
-                            <input type="checkbox" name='switch' id="restrict_to_cas_switch" title="{{_ "view.nickname_categories.restrict_to_cas"}}" />
-                        </div>
+                        {{#if hasCASConfig}}
+                            <div class="nickStyle" id="restrict_to_cas_wrapper">
+                                <p>{{_ "view.nickname_categories.restrict_to_cas"}}</p>
+                                <input type="checkbox"
+                                       name='switch'
+                                       id="restrict_to_cas_switch"
+                                       class="tabbable"
+                                       title="{{_ "view.nickname_categories.restrict_to_cas"}}"/>
+                            </div>
+                        {{/if}}
                     {{else}}
-                        <div class="nickStyle chosenNickName" id="remove_all">
+                        <div class="nickStyle chosenNickName tabbable"
+                             id="remove_all">
                             <p>{{_ "view.nickname_categories.remove_all"}}</p>
                         </div>
                     {{/unless}}
                     {{#each chosenNickNames}}
-                        <div class="nickStyle chosenNickName" id="chosen_nickName_{{this.nick}}">
+                        <div class="nickStyle chosenNickName tabbable"
+                             id="chosen_nickName_{{this.nick}}">
                             <p>{{_ this.nick}}</p>
                         </div>
                     {{/each}}
@@ -69,5 +84,5 @@
             </div>
         </div>
     </div>
-    {{> footer_nav_buttons forwardId = 'forwardButton' forwardText = 'view.nickname_categories.save' }}
+    {{> footer_nav_buttons backId = 'backButton' forwardText = 'view.nickname_categories.back' }}
 </template>

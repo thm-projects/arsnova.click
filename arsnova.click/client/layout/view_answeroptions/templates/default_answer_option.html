@@ -23,11 +23,11 @@
                 <div class="row row-landingpage-buttons">
                     <div class="col-md-12 text-center">
                         <button type="button" id="addAnswerOption"
-                                class="button btn-add-remove-ans_opt round-corners button-shadow button-success">
+                                class="button btn-add-remove-ans_opt round-corners button-shadow button-success tabbable">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                         <button type="button" id="deleteAnswerOption"
-                                class="button btn-add-remove-ans_opt round-corners button-shadow button-warning {{showDeleteButtonOnStart}}">
+                                class="button btn-add-remove-ans_opt round-corners button-shadow button-warning {{showDeleteButtonOnStart}} tabbable">
                             <span class="glyphicon glyphicon-minus"></span>
                         </button>
                     </div>
@@ -42,13 +42,19 @@
                                     <div class="input-group {{#unless (isValidAnswerOption this)}}invalidAnswerOption{{/unless}}">
                                         <div class="input-group-letter round-corners input-group-addon input-field-bg-color">{{answerOptionLetter getAnswerOptionNumber}}</div>
                                         <input type="text"
-                                               class="input-field {{#if isSurveyQuestion}}surveyQuestion{{/if}}"
+                                               class="input-field {{#if isSurveyQuestion}}surveyQuestion{{/if}} tabbable"
                                                id="answerOptionText_Number{{getAnswerOptionNumber}}"
                                                placeholder="{{_ "view.answeroptions.answeroptiontext_placeholder"}}"
                                                value="{{getAnswerText}}"
                                                maxlength="{{getAnswerTextSchema.max}}"
                                         />
-                                        {{#unless isSurveyQuestion}}<input type="checkbox" id="answerOption-{{getAnswerOptionNumber}}" name="switch" />{{/unless}}
+                                        {{#unless isSurveyQuestion}}
+                                            <input type="checkbox"
+                                                   id="answerOption-{{getAnswerOptionNumber}}"
+                                                   name="switch"
+                                                   title="answerOption-{{getAnswerOptionNumber}}"
+                                                   class="tabbable"/>
+                                        {{/unless}}
                                     </div>
                                 </div>
                             {{/each}}

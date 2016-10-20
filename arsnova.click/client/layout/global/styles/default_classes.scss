@@ -106,6 +106,12 @@
 .button-leader {
   box-shadow: none;
   cursor: default;
+  span {
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    text-overflow: ellipsis;
+  }
 }
 
 .distance-top {
@@ -269,4 +275,16 @@ select:-moz-focusring {
       display: none;
     }
   }
+}
+
+.aria-item {
+  display: none;
+}
+
+.focused {
+  border: 3px solid red !important;
+}
+
+* {
+  outline: none !important;
 }

@@ -23,7 +23,7 @@ const title = Symbol("title");
 export class MusicSessionConfiguration {
 	constructor (options = {}) {
 		this[hashtag] = options.hashtag;
-		this[isEnabled] = options.music.isEnabled || true;
+		this[isEnabled] = typeof options.music.isEnabled === "undefined" ? true : options.music.isEnabled;
 		this[volume] = options.music.volume || 80;
 		this[title] = options.music.title || "Song1";
 	}

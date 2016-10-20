@@ -104,7 +104,7 @@ export function countdownFinish() {
 				// don't reroute if the instructor already moved
 				var currentRoute = Router.current().route.getName().replace(":quizName.", "");
 				if (currentRoute === "results") {
-					Router.go("/" + Router.current().params.quizName + "/globalLeaderBoard");
+					Router.go("/" + Router.current().params.quizName + "/leaderBoard/all");
 				}
 			}, 7000);
 		}

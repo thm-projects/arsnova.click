@@ -104,13 +104,26 @@ Template.nickLimited.events({
 });
 
 Template.nickCasLogin.events({
+	"click #backButton": function () {
+		Router.go("/" + Router.current().params.quizName + "/resetToHome");
+	},
 	'input #nickname-input-field': function (event) {
 		lib.parseEnteredNickname(event);
+	},
+	"keydown #nickname-input-field": function (event) {
+		if (event.keyCode === 13) {
+			var currentNickName = event.currentTarget.value;
+			var member = MemberListCollection.findOne({nick: currentNickName});
+
+			if (currentNickName.length > 2 && !member) {
+				$("#loginViaCas").click();
+			}
+		}
 	},
 	"click #loginViaCas": function () {
 		lib.loginWithCas();
 		const loginTracker = Tracker.autorun(function () {
-			if (!Meteor.user() || !Meteor.user().profile || Meteor.user().profile.mail[0].indexOf("thm") === -1) {
+			if (!Meteor.user() || !Meteor.user().profile || (Meteor.user().profile.mail[0].indexOf("thm") === -1 && Meteor.user().profile.mail.indexOf("thm") === -1)) {
 				return;
 			}
 			if (loginTracker) {

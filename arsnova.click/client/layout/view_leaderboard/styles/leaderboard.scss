@@ -19,6 +19,10 @@
 
 .learner-list {
 	.firstLeaderBordItem {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		padding: 0 10px;
 		margin-bottom: 10px;
 		line-height: 50px;
 		text-align: center;

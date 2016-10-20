@@ -35,3 +35,12 @@ Template.titel.onDestroyed(function () {
 		titelHeightTracker.stop();
 	}
 });
+
+Template.titel.helpers({
+	getAriaDescription: function (text) {
+		if (!text) {
+			return;
+		}
+		return text.substr(0, text.lastIndexOf(".")) + ".aria_description" + text.substr(text.lastIndexOf("."), text.length);
+	}
+});

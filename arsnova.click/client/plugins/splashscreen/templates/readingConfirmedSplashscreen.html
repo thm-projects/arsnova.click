@@ -18,22 +18,22 @@
 <template name="readingConfirmedSplashscreen">
 	<div class="modal {{#unless isMobileDevice}}fade {{/unless}}splashscreen" role="dialog">
 		<div class="modal-dialog markdown-dialog">
-            <div class="noSplashscreenPadding col-md-11 col-sm-11 col-xs-10">
+            <div class="noSplashscreenPadding">
                 <div class="modal-content">
-                    <div class="modal-header"></div>
+                    <div class="modal-header">
+                        <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
+                    </div>
                     <div class="modal-markdown-body">
                         <div id="questionContent" class="markdown-content"></div>
                     </div>
                     <div class="modal-footer">
-                        <button id="setReadConfirmed" class="btn btn-success btn-answerOption btn-lg">
+                        <button id="setReadConfirmed"
+                                class="btn btn-success btn-answerOption btn-lg tabbable">
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                             <span id="readConfirmedText">{{_ "view.liveResults.confirm_read"}}</span>
                         </button>
                     </div>
                 </div>
-            </div>
-            <div class="noSplashscreenPadding col-md-1 col-sm-1 col-xs-2">
-                <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
             </div>
 		</div>
 	</div>

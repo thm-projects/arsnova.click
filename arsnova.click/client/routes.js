@@ -26,6 +26,7 @@ import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
 import {getChangeEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onChangeEvent.js';
 import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onRemoveEvent.js';
+import {createTabIndices} from '/client/startup.js';
 
 const subsCache = new SubsManager({
 	/* maximum number of cached subscriptions */
@@ -116,6 +117,10 @@ Router.onBeforeAction(function () {
 		getRemoveEventsForRoute(Router.current().route.getName());
 	}
 	this.next();
+});
+
+Router.onAfterAction(function () {
+	createTabIndices();
 });
 
 Router.route('/', {

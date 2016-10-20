@@ -18,20 +18,22 @@
 <template name="questionPreviewSplashscreen">
 	<div class="modal {{#unless isMobileDevice}}fade {{/unless}}splashscreen" role="dialog">
 		<div class="modal-dialog markdown-dialog">
-            <div class="noSplashscreenPadding col-md-11 col-sm-11 col-xs-10">
+            <div class="noSplashscreenPadding">
                 <div class="modal-content">
-                    <div class="modal-header"></div>
+                    <div class="modal-header">
+                        <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
+                        <h2>{{_ "view.questions.preview"}}</h2>
+                    </div>
                     <div class="modal-markdown-body markdown-content"></div>
                     <div class="modal-footer">
-                        <button id="js-btn-hidePreviewModal" type="button" class="btn btn-success btn-answerOption btn-lg ">
+                        <button id="js-btn-hidePreviewModal"
+                                type="button"
+                                class="btn btn-success btn-answerOption btn-lg tabbable">
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                             {{_ "global.close_window"}}
                         </button>
                     </div>
                 </div>
-            </div>
-            <div class="noSplashscreenPadding col-md-1 col-sm-1 col-xs-2">
-                <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
             </div>
 		</div>
 	</div>

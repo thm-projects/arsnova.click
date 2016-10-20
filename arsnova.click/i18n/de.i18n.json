@@ -6,7 +6,10 @@
     "delete": "Löschen",
     "save": "Speichern",
     "abort": "Abbrechen",
-    "close_window": "Fenster schließen"
+    "close_window": "Fenster schließen",
+    "aria_description": {
+      "arsnova_slogan": "Quiz-App für alles und jeden"
+    }
   },
   "region": {
     "footer": {
@@ -166,6 +169,9 @@
           "slow": "langsam",
           "ok": "gut"
         }
+      },
+      "aria_description": {
+        "logo-header-chars": "arsnova.click"
       }
     }
   },
@@ -221,7 +227,13 @@
       "export": "Quiz exportieren",
       "valid_question": "Gültige Quizrunde",
       "invalid_question": "Ungültige Quizrunde",
-      "no_sessions": "Es sind keine Quizze in diesem Browser gespeichert."
+      "no_sessions": "Es sind keine Quizze in diesem Browser gespeichert.",
+      "aria_description": {
+        "hashtag-input-field": "Gib hier den Quiznamen ein",
+        "joinSession": "Nimm an einem bestehenden Quiz teil",
+        "addNewHashtag": "Erstelle ein neues Quiz",
+        "splashscreen_description": "Liste aller gültigen und ungültigen Quizze in deinem Browser"
+      }
     },
     "hashtag_view": {
       "demo_quiz": {

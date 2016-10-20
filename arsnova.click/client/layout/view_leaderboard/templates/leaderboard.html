@@ -86,7 +86,8 @@
 	</div>
     <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" style="display:block;">
         <div class="col-xs-{{#unless noLeaderBoardItems}}{{#if hasTooMuchButtons}}{{#if isRestrictedToCAS}}4{{/if}}{{else}}6{{/if}}{{else}}12{{/unless}}">
-            <button class="button button-back" id="js-btn-backToResults">
+            <button class="button button-back tabbable"
+                    id="js-btn-backToResults">
                 <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
                 <span class="ansBtn">{{_ "global.back"}}</span>
             </button>
@@ -95,12 +96,14 @@
             {{#if hasTooMuchButtons}}
                 <div class="col-xs-4">
                     {{#if hasOverridenDefaultButtonCount }}
-                        <button class="button button-success" id="showLess">
+                        <button class="button button-success tabbable"
+                                id="showLess">
                             <span class="glyphicon glyphicon-menu-up glyph-left"></span>
                             <span class="ansBtn">{{_ "view.leaderboard.show_less"}}</span>
                         </button>
                     {{else}}
-                        <button class="button button-success" id="showMore">
+                        <button class="button button-success tabbable"
+                                id="showMore">
                             <span class="ansBtn">{{_ "view.leaderboard.show_more" invisibleResponsesCount count=invisibleResponsesCount}}</span>
                             <span class="glyphicon glyphicon-menu-down glyph-right"></span>
                         </button>
@@ -111,7 +114,8 @@
                 <div class="col-xs-{{#if hasTooMuchButtons}}4{{else}}6{{/if}}">
                     {{#with exportData}}
                         <a href="{{this.href}}" download="{{this.name}}">
-                            <button class="button button-purple">
+                            <button class="button button-purple tabbable"
+                                    id="exportToCSV">
                                 <span class="ansBtn">{{_ "view.leaderboard.export"}}</span>
                                 <span class="glyphicon glyphicon-export glyph-right"></span>
                             </button>

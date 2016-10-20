@@ -316,7 +316,7 @@ const clickEvents = {
 				top: $('.navbar-fixed-top').outerHeight(),
 				left: $(window).outerWidth() / 2 - qrCodeSize() / 2
 			});
-			$('.qr-code-container-close').css("left", qrCodeSize() - 60);
+			$('.qr-code-container-close').css("left", qrCodeSize() - 45);
 			qrCodeContainer.show();
 		};
 		const windowResizeHandler = function () {

@@ -24,7 +24,7 @@ export class NickSessionConfiguration {
 	constructor (options = {}) {
 		this[hashtag] = options.hashtag;
 		this[selectedValues] = options.nicks.selectedValues || [];
-		this[blockIllegal] = options.nicks.blockIllegal || true;
+		this[blockIllegal] = typeof options.nicks.blockIllegal === "undefined" ? true : options.nicks.blockIllegal;
 		this[restrictToCASLogin] = options.nicks.restrictToCASLogin || false;
 	}
 

@@ -363,7 +363,11 @@
       "selected_nicks": "Nombres de usuario predeterminados",
       "no_selected_nicks": "No hay nombres de usuario predeterminados. Todos los nombres están permitidos.",
       "hide_selected_nicks": "Ocultar nombres de usuario",
-      "show_selected_nicks": "Mostrar nombres de usuarios"
+      "show_selected_nicks": "Mostrar nombres de usuarios",
+      "isRestrictingRudeNicks": "Bloquear apodos inapropiados",
+      "isRestrictingToCAS": "Los asistentes deben autenticarse a través de CAS",
+      "true": "Sí",
+      "false": "No"
     },
     "theme_switcher": {
       "set_theme": "Elegir estilo",

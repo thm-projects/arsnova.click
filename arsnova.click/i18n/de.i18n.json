@@ -363,7 +363,11 @@
       "selected_nicks": "Vorgegebene Nicknamen",
       "no_selected_nicks": "Keine Nicknamen vorgegeben. Alle Namen sind erlaubt.",
       "hide_selected_nicks": "Verberge Nicknamen",
-      "show_selected_nicks": "Zeige Nicknamen"
+      "show_selected_nicks": "Zeige Nicknamen",
+      "isRestrictingRudeNicks": "Blockiere unangemessene Nicknamen",
+      "isRestrictingToCAS": "Teilnehmer müssen sich per CAS authentifizieren",
+      "true": "Ja",
+      "false": "Nein"
     },
     "theme_switcher": {
       "set_theme": "Stil wählen",

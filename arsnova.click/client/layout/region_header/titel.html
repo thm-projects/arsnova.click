@@ -18,7 +18,12 @@
 <template name="titel">
     <div class="row distance-top">
         <div class="titel-relative text-light text-center">
-            <div id="appTitle" class="titel margin-to-logo">{{#if titelText}}{{_ titelText}}{{/if}}</div>
+            <div id="appTitle"
+                 class="titel margin-to-logo"
+                 aria-describedby="aria-description-appTitle">{{#if titelText}}{{_ titelText}}{{/if}}</div>
         </div>
+    </div>
+    <div class="aria-item" id="aria-description-appTitle">
+        {{_ (getAriaDescription titelText)}}
     </div>
 </template>

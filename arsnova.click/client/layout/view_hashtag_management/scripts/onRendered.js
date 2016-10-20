@@ -38,7 +38,7 @@ Template.hashtagView.onRendered(function () {
 		return;
 	}
 
-	if ($(window).width() >= 992) {
+	if ($(window).width() >= 992 && localData.getAllHashtags().length === 0) {
 		$('#hashtag-input-field').focus();
 	}
 });

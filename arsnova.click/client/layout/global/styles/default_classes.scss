@@ -276,3 +276,15 @@ select:-moz-focusring {
     }
   }
 }
+
+.aria-item {
+  display: none;
+}
+
+.focused {
+  border: 3px solid red !important;
+}
+
+* {
+  outline: none !important;
+}

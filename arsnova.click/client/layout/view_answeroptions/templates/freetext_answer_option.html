@@ -20,7 +20,7 @@
         {{> titel titelText = "view.answeroptions.free_text_question.title"}}
         <div class="col-xs-12">
             <textarea id="answerTextArea"
-                      class="round-corners textarea placeholder-align-center"
+                      class="round-corners textarea placeholder-align-center tabbable"
                       rows="3"
                       placeholder="{{_ "view.answeroptions.free_text_question.text_placeholder" }}">{{answerText}}</textarea>
         </div>
@@ -29,7 +29,11 @@
                 {{#each configOptions}}
                     <div class="col-xs-12 col-sm-6 configOptionContainer">
                         <p class="text-light checkboxLabel">{{_ this.textName}}: </p>
-                        <input type="checkbox" id="{{this.id}}_switch" name="switch" title="{{_ this.textName}}" />
+                        <input type="checkbox"
+                               id="{{this.id}}_switch"
+                               name="switch"
+                               title="{{_ this.textName}}"
+                               class="tabbable">
                     </div>
                 {{/each}}
             </div>

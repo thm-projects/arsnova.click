@@ -20,7 +20,8 @@
 		<div class="row">
             {{#if backId}}
                 <div class="col-xxs-12 col-xs-{{#if forwardId}}6{{else}}12{{/if}} fixed-bottom-item">
-                    <button id="{{backId}}" class="button button-back">
+                    <button id="{{backId}}"
+                            class="button button-back tabbable">
                         <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
                         <span class="fixed-bottom-item-text">{{#if backText}} {{_ backText }} {{else}} {{_ 'global.back' }} {{/if}}</span>
                     </button>
@@ -28,7 +29,8 @@
             {{/if}}
             {{#if forwardId}}
                 <div class="col-xxs-12 col-xs-{{#if backId}}6{{else}}12{{/if}} fixed-bottom-item">
-                    <button id="{{forwardId}}" class="button button-next">
+                    <button id="{{forwardId}}"
+                            class="button button-next tabbable">
                         <span class="fixed-bottom-item-text">{{#if forwardText}} {{_ forwardText }} {{else}} {{_ 'global.next' }} {{/if}}</span>
                         <span class="glyphicon glyphicon-arrow-right glyph-right" aria-hidden="true"></span>
                     </button>

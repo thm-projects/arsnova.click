@@ -363,7 +363,11 @@
       "selected_nicks": "Pseudos attribués",
       "no_selected_nicks": "Pas de pseudos attribués. Tous les noms sont autorisés.",
       "hide_selected_nicks": "Cache pseudos",
-      "show_selected_nicks": "Montre pseudos"
+      "show_selected_nicks": "Montre pseudos",
+      "isRestrictingRudeNicks": "Bloquer surnoms inappropriés",
+      "isRestrictingToCAS": "Les participants doivent authentifier via CAS",
+      "true": "Oui",
+      "false": "Non"
     },
     "theme_switcher": {
       "set_theme": "Choisir un style",

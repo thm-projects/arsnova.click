@@ -124,7 +124,7 @@ function addLiveresultsChangeEvents() {
 						mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#answerContent'));
 						setTimeout(function () {
 							instance.close();
-						}, 10000);
+						}, questionElement.timer * 0.75 * 1000);
 					}
 				});
 				/*

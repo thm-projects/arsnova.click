@@ -270,7 +270,8 @@
       "countdown": "Countdown",
       "answer_option": "Answer",
       "guessed_correct": "Correctly estimated",
-      "guessed_wrong": "Wrong estimated"
+      "guessed_wrong": "Wrong estimated",
+      "correct_answer": "Correct answer"
     },
     "lobby": {
       "title": "Quiz Lobby",

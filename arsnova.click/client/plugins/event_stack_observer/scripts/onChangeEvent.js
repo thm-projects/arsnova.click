@@ -99,6 +99,7 @@ function addLiveresultsChangeEvents() {
 					onRendered: function (instance) {
 						var answerContent = "";
 						var questionContent = "";
+						const questionElement = QuestionGroupCollection.findOne().questionList[value.questionIndex];
 						mathjaxMarkdown.initializeMarkdownAndLatex();
 						if (SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled === false) {
 							var questionDoc = QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName});
@@ -106,7 +107,7 @@ function addLiveresultsChangeEvents() {
 								questionContent = mathjaxMarkdown.getContent(questionDoc.questionList[value.questionIndex].questionText);
 							}
 						}
-						if (QuestionGroupCollection.findOne().questionList[value.questionIndex].type !== "RangedQuestion") {
+						if (questionElement.type !== "RangedQuestion" && questionElement.type !== "FreeTextQuestion") {
 							AnswerOptionCollection.find({questionIndex: value.questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
 								if (!answerOption.answerText) {
 									answerOption.answerText = "";

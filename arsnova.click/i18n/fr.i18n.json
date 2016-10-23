@@ -270,7 +270,8 @@
       "countdown": "Compte à rebours",
       "answer_option": "Réponse",
       "guessed_correct": "Bien estimé",
-      "guessed_wrong": "Mal estimé"
+      "guessed_wrong": "Mal estimé",
+      "correct_answer": "Bonne réponse"
     },
     "lobby": {
       "title": "Lobby du quiz",

@@ -35,9 +35,6 @@ Template.liveResults.onRendered(()=> {
 		EventManagerCollection.findOne().questionIndex < 0 &&
 		SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled !== false) {
 		showReadingConfirmationSplashscreen(0);
-		$('.header-title').text(TAPi18n.__("view.liveResults.reading_confirmation"));
-	} else {
-		$('.header-title').text(TAPi18n.__("view.liveResults.title"));
 	}
 	if (SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled === false) {
 		if (EventManagerCollection.findOne().readingConfirmationIndex < 1 &&

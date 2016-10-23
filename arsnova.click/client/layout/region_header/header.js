@@ -145,7 +145,7 @@ Template.header.onRendered(function () {
 			Session.set("theme", configDoc.theme);
 		}
 	});
-	if (!Session.get("questionGroup") && Router.current().params.quizName) {
+	if (!Session.get("questionGroup") && Router.current().params.quizName && localData.containsHashtag(Router.current().params.quizName)) {
 		Session.set("questionGroup", localData.reenterSession(Router.current().params.quizName));
 	}
 	$(window).resize(function () {

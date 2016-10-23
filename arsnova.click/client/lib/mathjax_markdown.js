@@ -252,7 +252,7 @@ export const mathjaxMarkdown = {
 		content = videoElementReplace(content, vimeoDelimiters);
 
 		if (text === content) {
-			content = '<p><a target="_blank" class=hyperlink" href="' + href + '">' + text + '</a></p>';
+			content = '<a target="_blank" class=hyperlink" href="' + href + '">' + text + '</a>';
 		}
 
 		return content;

@@ -82,6 +82,7 @@ Template.liveResults.helpers({
 		}
 		return !Session.get("countdownInitialized") && (
 				questionDoc.questionList[index].type === "RangedQuestion" ||
+				questionDoc.questionList[index].type === "FreeTextQuestion" ||
 				AnswerOptionCollection.find({
 					questionIndex: index,
 					isCorrect: true
@@ -350,7 +351,7 @@ Template.liveResults.helpers({
 			return;
 		}
 		$.each(questionDoc.questionList, function (index, element) {
-			if (element.type === "RangedQuestion") {
+			if (element.type === "RangedQuestion" || element.type === "FreeTextQuestion") {
 				hasRangedQuestion = true;
 				return false;
 			}
@@ -367,7 +368,7 @@ Template.liveResults.helpers({
 			return;
 		}
 		$.each(questionDoc.questionList, function (index, element) {
-			if (element.type === "RangedQuestion") {
+			if (element.type === "RangedQuestion" || element.type === "FreeTextQuestion") {
 				hasRangedQuestion = true;
 				return false;
 			}

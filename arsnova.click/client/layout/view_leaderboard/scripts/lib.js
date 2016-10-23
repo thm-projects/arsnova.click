@@ -85,7 +85,8 @@ function getLeaderBoardItemsByIndex(index) {
 		// only put member in leaderboard when he clicked the right amount, then check whether he clicked all the right ones
 		var totalResponseTime = 0;
 		const questionItem = QuestionGroupCollection.findOne().questionList[index];
-		if ((userResponses.length === rightAnswerOptions.count() || questionItem.type === "RangedQuestion") && (userResponses.length > 0) && userHasRightAnswers) {
+		if ((userResponses.length === rightAnswerOptions.count() || questionItem.type === "RangedQuestion") &&
+			(userResponses.length > 0) && userHasRightAnswers && questionItem.type !== "FreeTextQuestion") {
 			userResponses.forEach(function (userResponse) {
 				param.isCorrect = true;
 				param.answerOptionNumber = userResponse.answerOptionNumber;
@@ -108,6 +109,48 @@ function getLeaderBoardItemsByIndex(index) {
 				allGoodMembers.push({
 					nick: member.nick,
 					responseTime: totalResponseTime / responseTime
+				});
+			}
+		} else if (questionItem.type === "FreeTextQuestion") {
+			let answerOption = AnswerOptionCollection.findOne({questionIndex: index});
+			if (!answerOption.configCaseSensitive) {
+				answerOption.answerText = answerOption.answerText.toLowerCase();
+			}
+			if (!answerOption.configTrimWhitespaces) {
+				answerOption.answerText = answerOption.answerText.replace(/ /g, "");
+			}
+			if (!answerOption.configUsePunctuation) {
+				answerOption.answerText = answerOption.answerText.replace(/(\.)*(,)*(!)*(")*(;)*(\?)*/g, "");
+			}
+			const responseValue = ResponsesCollection.findOne({
+				questionIndex: index,
+				answerOptionNumber: 0,
+				userNick: member.nick
+			});
+			if (!answerOption.configCaseSensitive) {
+				responseValue.freeTextInputValue = responseValue.freeTextInputValue.toLowerCase();
+			}
+			if (!answerOption.configTrimWhitespaces) {
+				responseValue.freeTextInputValue = responseValue.freeTextInputValue.replace(/ /g, "");
+			}
+			if (!answerOption.configUsePunctuation) {
+				responseValue.freeTextInputValue = responseValue.freeTextInputValue.replace(/(\.)*(,)*(!)*(")*(;)*(\?)*/g, "");
+			}
+			if (answerOption.configUseKeywords) {
+				userHasRightAnswers = answerOption.answerText === responseValue.freeTextInputValue;
+			} else {
+				let hasCorrectKeywords = true;
+				answerOption.answerText.split(" ").forEach(function (keyword) {
+					if (responseValue.freeTextInputValue.indexOf(keyword) === -1) {
+						hasCorrectKeywords = false;
+					}
+				});
+				userHasRightAnswers = hasCorrectKeywords;
+			}
+			if (userHasRightAnswers) {
+				allGoodMembers.push({
+					nick: member.nick,
+					responseTime: responseValue.responseTime
 				});
 			}
 		}

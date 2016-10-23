@@ -68,7 +68,7 @@ Template.header.helpers({
 					case "memberlist":
 						return Router.current().params.quizName;
 					case "results":
-						return TAPi18n.__("region.footer.footer_bar.reading-confirmation");
+						return TAPi18n.__("view.liveResults.title");
 					case "onpolling":
 						return TAPi18n.__("view.voting.title");
 					case "statistics":
@@ -145,7 +145,7 @@ Template.header.onRendered(function () {
 			Session.set("theme", configDoc.theme);
 		}
 	});
-	if (!Session.get("questionGroup") && Router.current().params.quizName) {
+	if (!Session.get("questionGroup") && Router.current().params.quizName && localData.containsHashtag(Router.current().params.quizName)) {
 		Session.set("questionGroup", localData.reenterSession(Router.current().params.quizName));
 	}
 	$(window).resize(function () {

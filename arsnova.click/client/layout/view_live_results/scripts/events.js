@@ -60,6 +60,8 @@ Template.liveResults.events({
 
 					if (questionElement.type !== "FreeTextQuestion") {
 						answerContent += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+					} else {
+						answerContent += TAPi18n.__("view.liveResults.correct_answer") + ":<br/>";
 					}
 					answerContent += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
 				});
@@ -133,7 +135,7 @@ Template.liveResults.events({
 			return;
 		}
 
-		$('.header-title').text(TAPi18n.__("view.liveResults.title"));
+		//$('.header-title').text(TAPi18n.__("view.liveResults.title"));
 		calculateHeaderSize();
 
 		Meteor.call('Question.startTimer', {

@@ -282,7 +282,8 @@
       "countdown": "Countdown",
       "answer_option": "Antwort",
       "guessed_correct": "Richtig geschätzt",
-      "guessed_wrong": "Falsch geschätzt"
+      "guessed_wrong": "Falsch geschätzt",
+      "correct_answer": "Richtige Antwort"
     },
     "lobby": {
       "title": "Quiz Lobby",

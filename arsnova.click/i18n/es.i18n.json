@@ -270,7 +270,8 @@
       "countdown": "Cuenta atrás",
       "answer_option": "Respuesta",
       "guessed_correct": "Has adivinado",
-      "guessed_wrong": "No has adivinado"
+      "guessed_wrong": "No has adivinado",
+      "correct_answer": "Respuesta correcta"
     },
     "lobby": {
       "title": "Lobby del cuestionario",

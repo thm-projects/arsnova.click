@@ -34,12 +34,6 @@ Template.leaderBoard.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemAbout);
 	}
 
-	if (Session.get("showGlobalRanking")) {
-		$('.header-title').text(TAPi18n.__("view.leaderboard.global_header"));
-	} else {
-		$('.header-title').text(TAPi18n.__("view.leaderboard.header"));
-	}
-
 	calculateHeaderSize();
 	footerElements.calculateFooter();
 

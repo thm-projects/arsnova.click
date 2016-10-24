@@ -18,13 +18,10 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {Tracker} from 'meteor/tracker';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 import * as lib from './lib.js';
-
-var redirectTracker = null;
 
 Template.questionList.onCreated(function () {
 	if (!Session.get("questionGroup")) {
@@ -33,9 +30,6 @@ Template.questionList.onCreated(function () {
 });
 
 Template.questionList.onDestroyed(function () {
-	if (redirectTracker) {
-		redirectTracker.stop();
-	}
 	delete sessionStorage.overrideValidQuestionRedirect;
 });
 

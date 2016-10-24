@@ -24,7 +24,7 @@ Template.nickViewWrapper.helpers({
 	getRequiredNickView: function () {
 		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 		if (!configDoc) {
-			return;
+			return null;
 		}
 		if (configDoc.nicks.restrictToCASLogin) {
 			return Template.nickCasLogin;

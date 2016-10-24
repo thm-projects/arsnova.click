@@ -72,7 +72,7 @@ Template.header.helpers({
 					case "onpolling":
 						return TAPi18n.__("view.voting.title");
 					case "leaderBoard":
-						return typeof Router.current().params.id !== "undefined" ? TAPi18n.__("view.leaderboard.global_header") : TAPi18n.__("view.leaderboard.header");
+						return Router.current().params.id === "all" ? TAPi18n.__("view.leaderboard.global_header") : TAPi18n.__("view.leaderboard.header");
 					case "nick":
 						return TAPi18n.__("view.choose_nickname.enter_nickname");
 					default:

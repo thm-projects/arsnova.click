@@ -39,34 +39,6 @@ Template.questionList.onDestroyed(function () {
 	delete sessionStorage.overrideValidQuestionRedirect;
 });
 
-Template.questionList.onRendered(function () {
-	let handleRedirect = true;
-	redirectTracker = Tracker.autorun(function () {
-		if (!sessionStorage.getItem("overrideValidQuestionRedirect")) {
-			handleRedirect = false;
-			if (redirectTracker) {
-				redirectTracker.stop();
-			}
-		} else {
-			if (Session.get("questionGroup").isValid() && (handleRedirect || Session.get("questionGroup").getHashtag().toLowerCase().indexOf("demo quiz") !== -1)) {
-				Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
-				Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
-				Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
-				Meteor.call('SessionConfiguration.addConfig', Session.get("questionGroup").getConfiguration().serialize());
-				Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
-				if (Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin()) {
-					Meteor.loginWithCas(function () {
-						Router.go("/" + Router.current().params.quizName + "/memberlist");
-					});
-				} else {
-					Router.go("/" + Router.current().params.quizName + "/memberlist");
-				}
-			}
-		}
-		delete sessionStorage.overrideValidQuestionRedirect;
-	});
-});
-
 Template.questionList.helpers({
 	question: function () {
 		if (!Session.get("questionGroup")) {

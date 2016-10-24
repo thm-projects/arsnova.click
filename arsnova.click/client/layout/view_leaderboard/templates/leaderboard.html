@@ -85,7 +85,8 @@
 		</div>
 	</div>
     <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" style="display:block;">
-        <div class="col-xs-{{#unless noLeaderBoardItems}}{{#if hasTooMuchButtons}}{{#if isRestrictedToCAS}}4{{/if}}{{else}}6{{/if}}{{else}}12{{/unless}}">
+
+        <div class="col-xs-{{getButtonCols}}">
             <button class="button button-back tabbable"
                     id="js-btn-backToResults">
                 <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
@@ -111,7 +112,7 @@
                 </div>
             {{/if}}
             {{#if isRestrictedToCAS}}
-                <div class="col-xs-{{#if hasTooMuchButtons}}4{{else}}6{{/if}}">
+                <div class="col-xs-{{getButtonCols}}">
                     {{#with exportData}}
                         <a href="{{this.href}}" download="{{this.name}}">
                             <button class="button button-purple tabbable"

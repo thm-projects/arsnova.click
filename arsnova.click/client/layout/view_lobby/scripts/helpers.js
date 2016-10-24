@@ -57,6 +57,9 @@ Template.memberlist.helpers({
 });
 
 Template.learner.helpers({
+	isOwner: function () {
+		return localData.containsHashtag(Router.current().params.quizName);
+	},
 	isOwnNick: function (nickname) {
 		return nickname === localStorage.getItem(Router.current().params.quizName + "nick");
 	}

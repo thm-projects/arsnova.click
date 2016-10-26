@@ -303,7 +303,8 @@
         "literature": "Literatura",
         "mythology": "Mitología",
         "actor": "Actuación",
-        "politics": "Política"
+        "politics": "Política",
+        "turing_award": "Turing-Award"
       }
     },
     "questions": {

@@ -13,7 +13,7 @@
   },
   "region": {
     "footer": {
-      "go_to": "Gehe zu: ",
+      "go_to": "➝",
       "show-more": {
         "show-more-elements": "Alle weiteren Optionen:",
         "onText": "Aktiviert",
@@ -314,8 +314,9 @@
         "fantasy": "Fantasy",
         "literature": "Literatur",
         "mythology": "Mythologie",
-        "actor": "Schauspiel",
-        "politics": "Politik"
+        "actor": "Film",
+        "politics": "Politik",
+        "turing_award": "Turing-Award"
       }
     },
     "questions": {

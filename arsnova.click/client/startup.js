@@ -117,6 +117,12 @@ Meteor.startup(function () {
 							foregroundColor: nicknameLib.transformForegroundColor(nicknameLib.hexToRgb(bgColor))
 						});
 					}
+				},
+				removeMembers: function () {
+					if (!Session.get("questionGroup") || !localData.containsHashtag(Session.get("questionGroup").getHashtag())) {
+						throw new Error("Unsupported Operation: Invalid credentials");
+					}
+					Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
 				}
 			};
 		}

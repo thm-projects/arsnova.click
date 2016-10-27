@@ -17,9 +17,11 @@
 
 import {Meteor} from 'meteor/meteor';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {calculateTitelHeight} from '/client/layout/region_header/lib.js';
 import {calculateFooterFontSize} from '/client/layout/region_footer/scripts/lib.js';
+import * as nicknameLib from '/client/layout/view_choose_nickname/scripts/lib.js';
 
 export function getUserLanguage() {
 	/* Get the language of the browser */
@@ -90,5 +92,29 @@ Meteor.startup(function () {
 			$('.smallGlyphicon').removeClass("smallGlyphicon");
 			calculateTitelHeight();
 		};
+		if (location.origin.indexOf("staging.arsnova.click") > -1 || location.origin.indexOf("localhost") > -1) {
+			// Enable Debug object
+			Debug = {
+				addMembers: function (amount) {
+					if (amount > 50) {
+						throw new Error("Only 50 Members may be added per command call");
+					}
+					const debugMemberCount = MemberListCollection.find({nick: {$regex: "debug_user_*", $options: "i"}}).count();
+					for (let i = 1; i < amount + 1; i++) {
+						const hashtag  = Router.current().params.quizName;
+						const nickname = "debug_user_" + (i + debugMemberCount);
+						const bgColor  = nicknameLib.rgbToHex(nicknameLib.getRandomInt(0, 255), nicknameLib.getRandomInt(0, 255), nicknameLib.getRandomInt(0, 255));
+						Meteor.call('MemberListCollection.addLearner', {
+							hashtag: hashtag,
+							nick: nickname,
+							userRef: Meteor.user()._id,
+							privateKey: localData.getPrivateKey(),
+							backgroundColor: bgColor,
+							foregroundColor: nicknameLib.transformForegroundColor(nicknameLib.hexToRgb(bgColor))
+						});
+					}
+				}
+			};
+		}
 	}
 });

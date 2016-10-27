@@ -135,12 +135,6 @@ Router.route('/hashtagmanagement', {
 	}
 });
 
-Router.route('/showMore', {
-	action: function () {
-		this.render('showMore');
-	}
-});
-
 // Routes for Footer-Links
 
 Router.route('/about', function () {
@@ -191,6 +185,12 @@ Router.route("/:quizName", {
 		} else {
 			this.render("loading");
 		}
+	}
+});
+
+Router.route('/:quizName/showMore', {
+	action: function () {
+		this.render('showMore');
 	}
 });
 

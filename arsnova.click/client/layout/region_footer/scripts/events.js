@@ -363,12 +363,14 @@ const defaultBackButtonBehavior = {
 
 Template.footer.events($.extend({}, clickEvents, {
 	"click #show-more": function () {
-		Router.go("showMore");
+		Router.go("/" + Router.current().params.quizName + "/showMore");
 	}
 }));
 
-Template.showMore.events($.extend({}, clickEvents, defaultBackButtonBehavior, {
-
+Template.showMore.events($.extend({}, clickEvents, {
+	"click #backButton": function () {
+		history.back();
+	}
 }));
 
 Template.contactHeaderBar.events({

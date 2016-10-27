@@ -26,12 +26,21 @@ Template.nickViewWrapper.helpers({
 		if (!configDoc) {
 			return null;
 		}
-		if (configDoc.nicks.restrictToCASLogin) {
-			return Template.nickCasLogin;
-		} else if (configDoc.nicks.selectedValues.length === 0) {
+		if (configDoc.nicks.selectedValues.length === 0) {
 			return Template.nick;
 		} else {
 			return Template.nickLimited;
+		}
+	},
+	getRequiredFooterButtons: function () {
+		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+		if (!configDoc) {
+			return null;
+		}
+		if (configDoc.nicks.selectedValues.length === 0) {
+			return Template.nickStandardFooter;
+		} else {
+			return Template.nickLimitedFooter;
 		}
 	}
 });
@@ -39,6 +48,16 @@ Template.nickViewWrapper.helpers({
 Template.nick.helpers({
 	getUserNickSchema: function () {
 		return userNickSchema;
+	}
+});
+
+Template.nickStandardFooter.helpers({
+	isCASLogin: function () {
+		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+		if (!configDoc) {
+			return null;
+		}
+		return configDoc.nicks.restrictToCASLogin;
 	}
 });
 

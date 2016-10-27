@@ -66,7 +66,7 @@ export function getNewDemoQuizName() {
 }
 
 export function connectEventManager(hashtag) {
-	const connect = function () {
+	const connect = function (hashtag) {
 		Meteor.subscribe("EventManagerCollection.join", hashtag, function () {
 			if (!EventManagerCollection.findOne()) {
 				Meteor.call('EventManagerCollection.add', hashtag, function (err) {
@@ -92,16 +92,18 @@ export function connectEventManager(hashtag) {
 				} else {
 					Router.go("/" + hashtag + "/question");
 				}
+			} else {
+				Router.go("/" + hashtag + "/question");
 			}
 			delete sessionStorage.overrideValidQuestionRedirect;
 		});
 	};
 	if (Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin()) {
 		Meteor.loginWithCas(function () {
-			connect();
+			connect(hashtag);
 		});
 	} else {
-		connect();
+		connect(hashtag);
 	}
 }
 

@@ -59,6 +59,23 @@ export function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+export function hasTHMMail() {
+	let hasTHMMail = false;
+	if (!Meteor.user() || !Meteor.user().profile) {
+		return false;
+	}
+	if (Meteor.user().profile.mail instanceof Array) {
+		Meteor.user().profile.mail.forEach(function (item) {
+			if (item.indexOf("thm") !== -1) {
+				hasTHMMail = true;
+			}
+		});
+	} else {
+		hasTHMMail = Meteor.user().profile.mail.indexOf("thm") !== -1;
+	}
+	return hasTHMMail;
+}
+
 export function loginWithCas() {
 	Meteor.loginWithCas();
 }

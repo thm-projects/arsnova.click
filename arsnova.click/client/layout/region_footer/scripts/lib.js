@@ -165,7 +165,7 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 
 		if (item.id === 'reading-confirmation') {
 			const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-			if (configDoc.readingConfirmationEnabled) {
+			if (configDoc && configDoc.readingConfirmationEnabled) {
 				$("#" + item.id).removeClass("error").addClass("success").find(".footerElemIcon").find("span").removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open");
 			} else {
 				state = false;

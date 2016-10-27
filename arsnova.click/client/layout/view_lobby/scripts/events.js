@@ -18,8 +18,10 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import * as lib from './lib.js';
 
 Template.memberlist.events({
 	'click #showMore': ()=> {
@@ -27,6 +29,7 @@ Template.memberlist.events({
 	},
 	'click #showLess': ()=> {
 		Session.set("learnerCountOverride", false);
+		lib.calculateButtonCount(MemberListCollection.find().count());
 	},
 	'click .btn-learner': function (event) {
 		event.preventDefault();

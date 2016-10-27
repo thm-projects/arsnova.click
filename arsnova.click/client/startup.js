@@ -16,6 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
@@ -98,6 +99,9 @@ Meteor.startup(function () {
 				addMembers: function (amount) {
 					if (amount > 50) {
 						throw new Error("Only 50 Members may be added per command call");
+					}
+					if (!Session.get("questionGroup") || !localData.containsHashtag(Session.get("questionGroup").getHashtag())) {
+						throw new Error("Unsupported Operation: Invalid credentials");
 					}
 					const debugMemberCount = MemberListCollection.find({nick: {$regex: "debug_user_*", $options: "i"}}).count();
 					for (let i = 1; i < amount + 1; i++) {

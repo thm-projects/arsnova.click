@@ -27,6 +27,10 @@ Template.memberlist.onDestroyed(function () {
 	if (lobbySound) {
 		lobbySound.stop();
 	}
+	const qrCodeContainer = $('.qr-code-container');
+	if (qrCodeContainer.is(":visible")) {
+		qrCodeContainer.hide();
+	}
 	Session.set("allMembersCount", undefined);
 	Session.set("maxLearnerButtons", undefined);
 	Session.set("learnerCountOverride", undefined);

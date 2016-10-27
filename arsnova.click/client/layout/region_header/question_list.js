@@ -18,13 +18,10 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {Tracker} from 'meteor/tracker';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 import * as lib from './lib.js';
-
-var redirectTracker = null;
 
 Template.questionList.onCreated(function () {
 	if (!Session.get("questionGroup")) {
@@ -33,38 +30,7 @@ Template.questionList.onCreated(function () {
 });
 
 Template.questionList.onDestroyed(function () {
-	if (redirectTracker) {
-		redirectTracker.stop();
-	}
 	delete sessionStorage.overrideValidQuestionRedirect;
-});
-
-Template.questionList.onRendered(function () {
-	let handleRedirect = true;
-	redirectTracker = Tracker.autorun(function () {
-		if (!sessionStorage.getItem("overrideValidQuestionRedirect")) {
-			handleRedirect = false;
-			if (redirectTracker) {
-				redirectTracker.stop();
-			}
-		} else {
-			if (Session.get("questionGroup").isValid() && (handleRedirect || Session.get("questionGroup").getHashtag().toLowerCase().indexOf("demo quiz") !== -1)) {
-				Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
-				Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
-				Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
-				Meteor.call('SessionConfiguration.addConfig', Session.get("questionGroup").getConfiguration().serialize());
-				Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
-				if (Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin()) {
-					Meteor.loginWithCas(function () {
-						Router.go("/" + Router.current().params.quizName + "/memberlist");
-					});
-				} else {
-					Router.go("/" + Router.current().params.quizName + "/memberlist");
-				}
-			}
-		}
-		delete sessionStorage.overrideValidQuestionRedirect;
-	});
 });
 
 Template.questionList.helpers({

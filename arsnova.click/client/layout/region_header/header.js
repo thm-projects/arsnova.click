@@ -53,7 +53,7 @@ Template.header.helpers({
 			case "/hashtagmanagement":
 				return TAPi18n.__("view.hashtag_management.session_management");
 			default:
-				let currentPath = Router.current().route.getName().replace(":quizName.", "");
+				let currentPath = Router.current().route.getName().replace(/(:quizName.)*(.:id)*/g, "");
 				switch (currentPath) {
 					case "question":
 						return TAPi18n.__("view.questions.title");
@@ -71,10 +71,8 @@ Template.header.helpers({
 						return TAPi18n.__("view.liveResults.title");
 					case "onpolling":
 						return TAPi18n.__("view.voting.title");
-					case "statistics":
-						return TAPi18n.__("view.leaderboard.header");
-					case "globalLeaderBoard":
-						return TAPi18n.__("view.leaderboard.global_header");
+					case "leaderBoard":
+						return Router.current().params.id === "all" ? TAPi18n.__("view.leaderboard.global_header") : TAPi18n.__("view.leaderboard.header");
 					case "nick":
 						return TAPi18n.__("view.choose_nickname.enter_nickname");
 					default:

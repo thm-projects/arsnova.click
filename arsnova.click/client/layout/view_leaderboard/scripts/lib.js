@@ -127,31 +127,33 @@ function getLeaderBoardItemsByIndex(index) {
 				answerOptionNumber: 0,
 				userNick: member.nick
 			});
-			if (!answerOption.configCaseSensitive) {
-				responseValue.freeTextInputValue = responseValue.freeTextInputValue.toLowerCase();
-			}
-			if (!answerOption.configTrimWhitespaces) {
-				responseValue.freeTextInputValue = responseValue.freeTextInputValue.replace(/ /g, "");
-			}
-			if (!answerOption.configUsePunctuation) {
-				responseValue.freeTextInputValue = responseValue.freeTextInputValue.replace(/(\.)*(,)*(!)*(")*(;)*(\?)*/g, "");
-			}
-			if (answerOption.configUseKeywords) {
-				userHasRightAnswers = answerOption.answerText === responseValue.freeTextInputValue;
-			} else {
-				let hasCorrectKeywords = true;
-				answerOption.answerText.split(" ").forEach(function (keyword) {
-					if (responseValue.freeTextInputValue.indexOf(keyword) === -1) {
-						hasCorrectKeywords = false;
-					}
-				});
-				userHasRightAnswers = hasCorrectKeywords;
-			}
-			if (userHasRightAnswers) {
-				allGoodMembers.push({
-					nick: member.nick,
-					responseTime: responseValue.responseTime
-				});
+			if (responseValue) {
+				if (!answerOption.configCaseSensitive) {
+					responseValue.freeTextInputValue = responseValue.freeTextInputValue.toLowerCase();
+				}
+				if (!answerOption.configTrimWhitespaces) {
+					responseValue.freeTextInputValue = responseValue.freeTextInputValue.replace(/ /g, "");
+				}
+				if (!answerOption.configUsePunctuation) {
+					responseValue.freeTextInputValue = responseValue.freeTextInputValue.replace(/(\.)*(,)*(!)*(")*(;)*(\?)*/g, "");
+				}
+				if (answerOption.configUseKeywords) {
+					userHasRightAnswers = answerOption.answerText === responseValue.freeTextInputValue;
+				} else {
+					let hasCorrectKeywords = true;
+					answerOption.answerText.split(" ").forEach(function (keyword) {
+						if (responseValue.freeTextInputValue.indexOf(keyword) === -1) {
+							hasCorrectKeywords = false;
+						}
+					});
+					userHasRightAnswers = hasCorrectKeywords;
+				}
+				if (userHasRightAnswers) {
+					allGoodMembers.push({
+						nick: member.nick,
+						responseTime: responseValue.responseTime
+					});
+				}
 			}
 		}
 	});

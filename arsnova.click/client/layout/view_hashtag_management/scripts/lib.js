@@ -66,22 +66,45 @@ export function getNewDemoQuizName() {
 }
 
 export function connectEventManager(hashtag) {
-	Meteor.subscribe("EventManagerCollection.join", hashtag, function () {
-		if (!EventManagerCollection.findOne()) {
-			Meteor.call('EventManagerCollection.add', hashtag, function (err) {
-				if (err) {
-					new ErrorSplashscreen({
-						autostart: true,
-						errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
-					});
-					Router.go("/" + hashtag + "/resetToHome");
+	const connect = function (hashtag) {
+		Meteor.subscribe("EventManagerCollection.join", hashtag, function () {
+			if (!EventManagerCollection.findOne()) {
+				Meteor.call('EventManagerCollection.add', hashtag, function (err) {
+					if (err) {
+						new ErrorSplashscreen({
+							autostart: true,
+							errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
+						});
+						Router.go("/" + hashtag + "/resetToHome");
+					}
+				});
+			} else {
+				Meteor.call("EventManagerCollection.setActiveQuestion", hashtag, 0);
+			}
+			if (sessionStorage.getItem("overrideValidQuestionRedirect")) {
+				if (Session.get("questionGroup").isValid() || Session.get("questionGroup").getHashtag().toLowerCase().indexOf("demo quiz") !== -1) {
+					Meteor.call("MemberListCollection.removeFromSession", hashtag);
+					Meteor.call("EventManagerCollection.setActiveQuestion", hashtag, 0);
+					Meteor.call("EventManagerCollection.setSessionStatus", hashtag, 2);
+					Meteor.call('SessionConfiguration.addConfig', Session.get("questionGroup").getConfiguration().serialize());
+					Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
+					Router.go("/" + hashtag + "/memberlist");
+				} else {
+					Router.go("/" + hashtag + "/question");
 				}
-			});
-		} else {
-			Meteor.call("EventManagerCollection.setActiveQuestion", hashtag, 0);
-		}
-		Router.go("/" + hashtag + "/question");
-	});
+			} else {
+				Router.go("/" + hashtag + "/question");
+			}
+			delete sessionStorage.overrideValidQuestionRedirect;
+		});
+	};
+	if (Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin()) {
+		Meteor.loginWithCas(function () {
+			connect(hashtag);
+		});
+	} else {
+		connect(hashtag);
+	}
 }
 
 export function addHashtag(questionGroup) {

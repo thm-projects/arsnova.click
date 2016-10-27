@@ -175,7 +175,7 @@ export function getChangeEventsForRoute(route) {
 	if (typeof route === "undefined" || !route.startsWith(":quizName.") || !globalEventStackObserver || !globalEventStackObserver.isRunning()) {
 		return;
 	}
-	route = route.replace(":quizName.", "");
+	route = route.replace(/(:quizName.)*(.:id)*/g, "");
 
 	switch (route) {
 		case "memberlist":
@@ -188,7 +188,7 @@ export function getChangeEventsForRoute(route) {
 		case "statistics":
 			addLiveresultsChangeEvents();
 			break;
-		case "globalLeaderBoard":
+		case "leaderBoard":
 			addLiveresultsChangeEvents();
 			break;
 		default:

@@ -154,23 +154,4 @@ export function formatAnswerButtons() {
 	var answerRow = $('.answer-row');
 	var answerButtonContainerHeight = calculateAnswerRowHeight();
 	answerRow.css('height', answerButtonContainerHeight + 'px');
-
-	var answerOptionsCount = answerRow.children().length;
-	if (answerOptionsCount === 0) {
-		setTimeout(function () {
-			formatAnswerButtons();
-		}, 100);
-		return;
-	}
-
-	answerRow.children().removeClass('col-xs-12').removeClass('col-xs-6').removeClass('col-xs-4');
-	if ($(window).width() < 300) {
-		answerRow.children().addClass('col-xs-12');
-	} else if (answerOptionsCount <= 6 || $(window).width() < 500) {
-		answerRow.children().addClass('col-xs-6');
-	} else {
-		answerRow.children().addClass('col-xs-4');
-	}
-
-	answerRow.find('button').css('height', $('#0').width() + 'px');
 }

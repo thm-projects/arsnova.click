@@ -125,7 +125,7 @@ Template.leaderBoard.helpers({
 				}
 			});
 			const user = Meteor.users.findOne({_id: item.userRef});
-			if (responseTime !== 0) {
+			if (responseTime !== 0 && typeof user !== "undefined") {
 				responseTime = responseTime / responseCount;
 				item.id = user.profile.id;
 				item.mail = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;

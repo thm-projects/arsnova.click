@@ -16,6 +16,8 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 export const mathjaxMarkdown = {
+	scriptUrl: "https://arsnova.thm.de/mathjax/MathJax.js",
+
 	initializeMarkdownAndLatex: function () {
 		// markdown setup
 		var markedRenderer = marked.Renderer;
@@ -52,7 +54,7 @@ export const mathjaxMarkdown = {
 			showMathMenu: false
 		};
 
-		var mathjaxScriptLen = $('scripts[src*="https://cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=TeX-MML-AM_CHTML"]').length;
+		var mathjaxScriptLen = $('scripts[src*="' + this.scriptUrl + '"]').length;
 
 		if (mathjaxScriptLen === 0) {
 			// mathjax config
@@ -60,7 +62,7 @@ export const mathjaxMarkdown = {
 
 			script = document.createElement("script");
 			script.type = "text/javascript";
-			script.src = "https://cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=TeX-MML-AM_CHTML";
+			script.src = this.scriptUrl;
 			head.appendChild(script);
 		}
 	},

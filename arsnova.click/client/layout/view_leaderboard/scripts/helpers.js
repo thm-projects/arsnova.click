@@ -101,11 +101,7 @@ Template.leaderBoard.helpers({
 		const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
 		const memberlistResult = MemberListCollection.find({hashtag: hashtag}, {fields: {userRef: 1, nick: 1}}).fetch();
 		let responseResult;
-		if (Router.current().params.id === "all") {
-			responseResult = getAllNicksWhichAreAlwaysRight();
-		} else {
-			responseResult = getLeaderBoardItems();
-		}
+		responseResult = Router.current().params.id === "all" ? getAllNicksWhichAreAlwaysRight() : getLeaderBoardItems();
 		let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";
 
 		memberlistResult.forEach(function (item) {

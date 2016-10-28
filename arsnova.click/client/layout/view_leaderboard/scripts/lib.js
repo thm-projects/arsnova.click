@@ -164,9 +164,7 @@ function getLeaderBoardItemsByIndex(index) {
 }
 
 export function getLeaderBoardItems() {
-	if (Router.current().params.id !== "all") {
-		return [{value: getLeaderBoardItemsByIndex(parseInt(Router.current().params.id))}];
-	} else {
+	if (Router.current().params.id === "all") {
 		if (!EventManagerCollection.findOne()) {
 			return [];
 		}
@@ -179,6 +177,8 @@ export function getLeaderBoardItems() {
 		}
 
 		return result;
+	} else {
+		return [{value: getLeaderBoardItemsByIndex(parseInt(Router.current().params.id))}];
 	}
 }
 

@@ -30,9 +30,9 @@
         "fullscreen": "Pantalla completa",
         "show_more": "Más",
         "sound": "Sonido",
-        "qr_code": "Código QR",
+        "qr_code": "QR",
         "nicknames": "Nombres de usuario",
-        "edit_quiz": "Edición del concurso"
+        "edit_quiz": "Editar"
       },
       "about": {
         "title": "Sobre la aplicación",

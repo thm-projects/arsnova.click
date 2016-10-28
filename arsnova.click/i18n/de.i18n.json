@@ -33,9 +33,9 @@
         "fullscreen": "Vollbild",
         "show_more": "Mehr",
         "sound": "Sound",
-        "qr_code": "QR Code",
+        "qr_code": "QR",
         "nicknames": "Nicknamen",
-        "edit_quiz": "Quiz bearbeiten"
+        "edit_quiz": "Bearbeiten"
       },
       "about": {
         "title": "Über die Quiz-App",

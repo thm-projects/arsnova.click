@@ -30,9 +30,9 @@
         "fullscreen": "Plein-écran",
         "show_more": "Plus",
         "sound": "Son",
-        "qr_code": "Code QR",
+        "qr_code": "QR",
         "nicknames": "Pseudos",
-        "edit_quiz": "Modifier Quiz"
+        "edit_quiz": "Modifier"
       },
       "about": {
         "title": "À propos de l'application quiz",

@@ -117,6 +117,17 @@ export function countdownFinish() {
 	footerElements.calculateFooter();
 }
 
+/**
+ * @see http://stackoverflow.com/a/7228322
+ * @param min Minimum range
+ * @param max Maximum range
+ * @returns {number} A random integer between min and max
+ */
+function randomIntFromInterval(min,max)
+{
+	return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 export function startCountdown(index, retry = 0) {
 	if (Session.get("countdownInitialized") || Session.get("sessionClosed")) {
 		return;
@@ -210,19 +221,8 @@ export function startCountdown(index, retry = 0) {
 					}
 				}
 			}, replyTimer * 1000);
-		})
+		});
 	});
-}
-
-/**
- * @see http://stackoverflow.com/a/7228322
- * @param min
- * @param max
- * @returns {number}
- */
-function randomIntFromInterval(min,max)
-{
-	return Math.floor(Math.random()*(max-min+1)+min);
 }
 
 /**

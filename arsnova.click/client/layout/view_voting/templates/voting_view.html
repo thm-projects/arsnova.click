@@ -63,14 +63,16 @@
                                           placeholder="{{_ "view.voting.free_text_question.input_placeholder"}}" ></textarea>
                             </div>
                         {{else}}
-                            {{#each answerOptions}}
-                                <div class="buttonWrapper col-xs-6">
-                                    <button id="{{answerOptionNumber}}"
-                                            class="sendResponse btn btn-answerOption btn-answerFont button-purple tabbable">
-                                        {{answerOptionLetter number=answerOptionNumber}}
-                                    </button>
-                                </div>
-                            {{/each}}
+                            <div id="buttonContainer">
+                                {{#each answerOptions}}
+                                    <div class="buttonWrapper">
+                                        <button id="{{answerOptionNumber}}"
+                                                class="sendResponse btn btn-answerOption btn-answerFont button-purple tabbable">
+                                            {{answerOptionLetter number=answerOptionNumber}}
+                                        </button>
+                                    </div>
+                                {{/each}}
+                            </div>
                         {{/if}}
                     {{/if}}
                 </div>

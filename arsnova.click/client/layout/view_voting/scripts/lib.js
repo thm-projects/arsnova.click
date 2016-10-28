@@ -19,6 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 export let countdown = null;
@@ -151,7 +152,35 @@ function calculateAnswerRowHeight() {
 }
 
 export function formatAnswerButtons() {
-	var answerRow = $('.answer-row');
-	var answerButtonContainerHeight = calculateAnswerRowHeight();
-	answerRow.css('height', answerButtonContainerHeight + 'px');
+	const answerRow = $('.answer-row');
+	const buttonElements = $('.buttonWrapper');
+	const buttonContainer = $('#buttonContainer');
+	buttonContainer.css({width: ""});
+	buttonElements.removeClass("col-xs-6").css({float: "", margin: "", width: "", height: ""});
+	const contentHeight = calculateAnswerRowHeight();
+	answerRow.css({height: contentHeight + 'px'});
+	const contentWidth = answerRow.outerWidth();
+	const containerWidth = $(window).outerWidth();
+	if (containerWidth <= 768) {
+		buttonElements.find("button").css({margin: "5px 0"});
+		buttonElements.addClass("col-xs-6");
+	} else {
+		let scaleBaseWidth = 100;
+		let scaleBaseHeight = 100;
+		const answerOptionElements = AnswerOptionCollection.find({hashtag: Router.current().params.quizName, questionIndex: EventManagerCollection.findOne().questionIndex}).count();
+		const calculateButtons = function (width, height) {
+			const maxButtonsPerRow = Math.floor(contentWidth / width);
+			let maxRows = Math.floor((contentHeight) / height);
+			maxRows = Math.floor((contentHeight - maxRows * 10) / height);
+			return {maxButtons: maxButtonsPerRow * maxRows, maxButtonsPerRow: maxButtonsPerRow, maxRows: maxRows};
+		};
+		let maxButtons = calculateButtons(scaleBaseWidth, scaleBaseHeight).maxButtons;
+		while (calculateButtons(scaleBaseWidth + 1, scaleBaseHeight + 1).maxButtons > answerOptionElements) {
+			maxButtons = calculateButtons(++scaleBaseWidth, ++scaleBaseHeight).maxButtons;
+		}
+		const calculateResult = calculateButtons(scaleBaseWidth, scaleBaseHeight);
+		const strechedWidth = ((contentWidth / calculateResult.maxButtonsPerRow) - calculateResult.maxButtonsPerRow * 10);
+		buttonElements.css({float: "left", margin: "5px", width: strechedWidth + "px", height: scaleBaseHeight});
+		buttonContainer.css({width: strechedWidth * calculateResult.maxButtonsPerRow + (calculateResult.maxButtonsPerRow * 10)});
+	}
 }

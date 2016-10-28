@@ -179,7 +179,7 @@ export function formatAnswerButtons() {
 			maxButtons = calculateButtons(++scaleBaseWidth, ++scaleBaseHeight).maxButtons;
 		}
 		const calculateResult = calculateButtons(scaleBaseWidth, scaleBaseHeight);
-		const strechedWidth = ((contentWidth / calculateResult.maxButtonsPerRow) - calculateResult.maxButtonsPerRow * 10);
+		const strechedWidth = ((contentWidth / calculateResult.maxButtonsPerRow) - 10);
 		buttonElements.css({float: "left", margin: "5px", width: strechedWidth + "px", height: scaleBaseHeight});
 		buttonContainer.css({width: strechedWidth * calculateResult.maxButtonsPerRow + (calculateResult.maxButtonsPerRow * 10)});
 	}

@@ -95,7 +95,7 @@ export function connectEventManager(hashtag) {
 			} else {
 				Router.go("/" + hashtag + "/question");
 			}
-			delete sessionStorage.overrideValidQuestionRedirect;
+			sessionStorage.removeItem("overrideValidQuestionRedirect");
 		});
 	};
 	if (Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin()) {

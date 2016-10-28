@@ -131,8 +131,10 @@ Meteor.startup(function () {
 		 * @see http://stackoverflow.com/a/26275621
 		 */
 		const confirmLeave = function () {
-			cleanUp();
-			return "";
+			if (typeof Router.current().params.quizName !== "undefined" && !localData.containsHashtag(Router.current().params.quizName)) {
+				cleanUp();
+				return "";
+			}
 		};
 		$(window).on('mouseover', (function () {
 			window.onbeforeunload = null;
@@ -142,9 +144,7 @@ Meteor.startup(function () {
 		}));
 		var prevKey = "";
 		$(document).keydown(function (e) {
-			if (e.key === "F5") {
-				window.onbeforeunload = confirmLeave;
-			} else if (e.key.toUpperCase() == "W" && prevKey == "CONTROL") {
+			if (e.key.toUpperCase() == "W" && prevKey == "CONTROL") {
 				window.onbeforeunload = confirmLeave;
 			} else if (e.key.toUpperCase() == "R" && prevKey == "CONTROL") {
 				window.onbeforeunload = confirmLeave;

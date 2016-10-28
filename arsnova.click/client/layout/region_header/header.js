@@ -120,16 +120,16 @@ Template.header.events({
 				}
 			});
 		} else {
-			Session.set("questionGroup", undefined);
-			delete Session.keys.questionGroup;
-
-			delete localStorage[Router.current().params.quizName + "nick"];
-			delete localStorage.slider;
-			delete localStorage.lastPage;
-
-			delete sessionStorage.overrideValidQuestionRedirect;
-
-			Router.go("/");
+			new Splashscreen({
+				autostart: true,
+				templateName: "exitSessionSplashscreen",
+				closeOnButton: '#closeDialogButton, #exitSessionButton',
+				onRendered: function (instance) {
+					instance.templateSelector.find('#exitSessionButton').on('click', function () {
+						Router.go("/" + Router.current().params.quizName + "/resetToHome");
+					});
+				}
+			});
 		}
 	}
 });

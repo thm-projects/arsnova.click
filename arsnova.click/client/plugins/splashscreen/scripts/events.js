@@ -57,6 +57,12 @@ Template.resetSessionSplashscreen.events({
 	}
 });
 
+Template.exitSessionSplashscreen.events({
+	"click .splashscreen-container-close": function (event) {
+		closeSplashscreen(event);
+	}
+});
+
 Template.renameHashtagSplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);

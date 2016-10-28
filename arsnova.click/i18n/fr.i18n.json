@@ -142,6 +142,11 @@
         },
         "continue": "Continuer?"
       },
+      "exit_session_confirmation": {
+        "title": "Laissez le quiz?",
+        "text": "Vous serez retiré du jeu-questionnaire et vos progrès seront perdus!",
+        "continue": "Continuer?"
+      },
       "connection_status": {
         "title": "Statut de connection",
         "show_result": "Détails",

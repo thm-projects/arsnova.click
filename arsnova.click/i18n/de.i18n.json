@@ -145,6 +145,11 @@
         },
         "continue": "Fortfahren?"
       },
+      "exit_session_confirmation": {
+        "title": "Möchtest du das Quiz verlassen?",
+        "text": "Du wirst aus dem Quiz entfernt und dein gesamter Fortschritt wird gelöscht.",
+        "continue": "Fortfahren?"
+      },
       "connection_status": {
         "title": "Verbindungsstatus",
         "show_result": "Details",

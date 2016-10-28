@@ -93,7 +93,7 @@ Template.nick.events({
 			var member = MemberListCollection.findOne({nick: currentNickName});
 
 			if (currentNickName.length > 2 && !member) {
-				$("#forwardButton").click();
+				$("#forwardButton, #loginViaCas").click();
 			}
 		}
 	}

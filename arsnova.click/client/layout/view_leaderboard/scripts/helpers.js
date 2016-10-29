@@ -26,10 +26,9 @@ import {getLeaderBoardItems, getAllNicksWhichAreAlwaysRight} from './lib.js';
 
 Template.leaderBoard.helpers({
 	getButtonCols: ()=> {
-		const items = getAllNicksWhichAreAlwaysRight();
 		const isCasQuiz = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).nicks.restrictToCASLogin;
 		const hasTooMuchButtons = Session.get("responsesCountOverride") || (Session.get("allMembersCount") - Session.get("maxResponseButtons") > 0);
-		return items === 0 || (!isCasQuiz && !hasTooMuchButtons) ? 12 : isCasQuiz && !hasTooMuchButtons ? 6 : isCasQuiz && hasTooMuchButtons ? 4 : 6;
+		return (!isCasQuiz && !hasTooMuchButtons) ? 12 : (isCasQuiz && !hasTooMuchButtons) || (!isCasQuiz && hasTooMuchButtons) ? 6 : isCasQuiz && hasTooMuchButtons ? 4 : 12;
 	},
 	hashtag: ()=> {
 		return Router.current().params.quizName;

@@ -115,6 +115,7 @@ Template.nickLimited.events({
 			Meteor.call('MemberListCollection.addLearner', {
 				hashtag: Router.current().params.quizName,
 				nick: nickname,
+				userRef: Meteor.user()._id,
 				privateKey: localData.getPrivateKey(),
 				backgroundColor: bgColor,
 				foregroundColor: lib.transformForegroundColor(lib.hexToRgb(bgColor))

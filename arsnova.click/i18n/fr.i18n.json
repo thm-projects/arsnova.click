@@ -504,6 +504,7 @@
           "session_not_available": "Cette tournée de quiz ne peut actuellement pas être rejointe.",
           "private_browsing": "En mode privé de ton browser, arsnova.click ne fonctionne malheureusement qu'en tant que participant/e, parce que ton browser refuse la description de la mémoire de l'application. S’il te plaît, désactive le mode privé du browser pendant la durée d'utilisation de arsnova.click et rafraîchis le site. Ton anonymat reste maintenu même avec le mode privé désactivé.",
           "kicked_from_quiz": "Tu as été radié du quiz!",
+          "nick_already_exists": "Ce surnom est existent déjà",
           "export_failed": "Les données du quiz ne pouvaient pas être exportées! - %s",
           "not_authorized": "Soit ce quiz n’existe pas, soit tu n’as pas le droit de lire ces données.",
           "maximum_answer_options_exceeded": "Le nombre maximale d'options de réponse est déjà atteint",

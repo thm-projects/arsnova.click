@@ -516,6 +516,7 @@
           "session_not_available": "Dieser Quizrunde kann aktuell nicht beigetreten werden.",
           "private_browsing": "Im Privatmodus deines Browsers funktioniert arsnova.click leider nur als Teilnehmer/in, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von arsnova.click den Privatmodus deaktivieren und arsnova.click erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.",
           "kicked_from_quiz": "Du wurdest aus dem Quiz geworfen!",
+          "nick_already_exists": "Dieser Benutzername existiert bereits",
           "export_failed": "Konnte die Quizdaten nicht exportieren! - %s",
           "not_authorized": "Entweder ist das Quiz nicht vorhanden oder Du hast keine Berechtigung, diese Daten zu lesen",
           "maximum_answer_options_exceeded": "Die maximale Anzahl an Antwortoptionen wurde bereits erreicht",

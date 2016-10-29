@@ -504,6 +504,7 @@
           "session_not_available": "Session is currently not available for joining",
           "private_browsing": "If you use ARSnova.click in private browsing you can only join a quiz as an attendee. Unfortunately your browser seems to reject any write access to the local storage. Please use ARSnova.click only via a normal browser tab. Your anonymity will be respected even without using the private mode.",
           "kicked_from_quiz": "You've been kicked from the quiz!",
+          "nick_already_exists": "This nickname does already exist in the quiz",
           "export_failed": "Could not export! - %s",
           "not_authorized": "Either there is no quiz or you don't have write access",
           "maximum_answer_options_exceeded": "Maximum number of possible answer options exceeded",

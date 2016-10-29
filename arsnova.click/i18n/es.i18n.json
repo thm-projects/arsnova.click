@@ -485,6 +485,11 @@
       "active": "Sonido está activado"
     },
     "splashscreen": {
+      "edit_session_confirmation": {
+        "title": "¿Quieres editar el cuestionario?",
+        "text": "Todos los asistentes serán eliminados y se eliminarán la tabla de clasificación.",
+        "continue": "¿Continuar?"
+      },
       "error": {
         "title": "Pista",
         "set_text_error": "¡El texto de la página inicial sólo pueder ser colocado después de haber sido renderizado!",

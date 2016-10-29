@@ -58,7 +58,7 @@ export class EventStackObserver {
 			changedAt: function (id,newDocument, oldDocument) {
 				if (Router.current().route.getName()) {
 					for (let i = oldDocument.eventStack.length; i < newDocument.eventStack.length; i++) {
-						let currentPath = Router.current().route.getName().replace(":quizName.", "");
+						let currentPath = Router.current().route.getName().replace(/(:quizName.)*(.:id)*/g, "");
 						if (observerInstance.onChangeCallbacks[currentPath] && observerInstance.onChangeCallbacks[currentPath].length > 0) {
 							let item = newDocument.eventStack[i];
 							if (observerInstance.verbose) {
@@ -90,7 +90,7 @@ export class EventStackObserver {
 		});
 		this.hooks.after.remove = EventManagerCollection.after.remove(function () {
 			if (Router.current().route.getName()) {
-				let currentPath = Router.current().route.getName().replace(":quizName.", "");
+				let currentPath = Router.current().route.getName().replace(/(:quizName.)*(.:id)*/g, "");
 				if (observerInstance.onRemoveCallbacks[currentPath] && observerInstance.onRemoveCallbacks[currentPath].length > 0) {
 					if (observerInstance.verbose) {
 						console.log("EventStackObserver: Remove event fired");
@@ -138,7 +138,7 @@ export class EventStackObserver {
 		if (typeof callback !== 'function') {
 			throw new Error("invalid callback!");
 		}
-		let currentPath = Router.current().route.getName().replace(":quizName.", "");
+		let currentPath = Router.current().route.getName().replace(/(:quizName.)*(.:id)*/g, "");
 		if (!(this.onChangeCallbacks[currentPath] instanceof Array)) {
 			this.onChangeCallbacks[currentPath] = [];
 		}
@@ -163,7 +163,7 @@ export class EventStackObserver {
 		if (typeof callback !== 'function') {
 			throw new Error("invalid callback!");
 		}
-		let currentPath = Router.current().route.getName().replace(":quizName.", "");
+		let currentPath = Router.current().route.getName().replace(/(:quizName.)*(.:id)*/g, "");
 		if (!(this.onRemoveCallbacks[currentPath] instanceof Array)) {
 			this.onRemoveCallbacks[currentPath] = [];
 		}

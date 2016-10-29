@@ -485,6 +485,11 @@
       "active": "Son activé"
     },
     "splashscreen": {
+      "edit_session_confirmation": {
+        "title": "Voulez-vous modifier le quiz?",
+        "text": "Tous les participants seront supprimés et le classement seront supprimés.",
+        "continue": "Continuer?"
+      },
       "error": {
         "title": "Message d'erreur",
         "set_text_error": "Le texte du splashscreen ne peut que être mit, après avoir été soumis au rendu!",

@@ -333,9 +333,18 @@ const clickEvents = {
 		Router.go("/" + Router.current().params.quizName + "/nicknameCategories");
 	},
 	"click #edit-quiz": function () {
-		Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
-		Meteor.call('EventManagerCollection.setSessionStatus', Router.current().params.quizName, 1);
-		Router.go("/" + Router.current().params.quizName + "/question");
+		new Splashscreen({
+			autostart: true,
+			templateName: "editSessionSplashscreen",
+			closeOnButton: '#closeDialogButton, #editSessionButton',
+			onRendered: function (instance) {
+				instance.templateSelector.find('#editSessionButton').on('click', function () {
+					Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
+					Meteor.call('EventManagerCollection.setSessionStatus', Router.current().params.quizName, 1);
+					Router.go("/" + Router.current().params.quizName + "/question");
+				});
+			}
+		});
 	},
 	"click #reading-confirmation": function () {
 		const elem = $('#reading-confirmation').find(".footerElemIcon").find(".glyphicon");

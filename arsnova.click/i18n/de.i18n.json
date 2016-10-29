@@ -492,6 +492,11 @@
       "active": "Sound ist aktiviert"
     },
     "splashscreen": {
+      "edit_session_confirmation": {
+        "title": "Möchtest du das Quiz bearbeiten?",
+        "text": "Alle Teilnehmenden werden abgemeldet und die Rangliste wird gelöscht.",
+        "continue": "Fortfahren?"
+      },
       "error": {
         "title": "Hinweis",
         "set_text_error": "Der Text des Splashscreens kann nur gesetzt werden, nachdem er gerendered wurde!",

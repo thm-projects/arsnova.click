@@ -480,6 +480,11 @@
       "active": "Sound is active"
     },
     "splashscreen": {
+      "edit_session_confirmation": {
+        "title": "Do you want to edit the quiz?",
+        "text": "All attendees will be removed and the leaderboard will be deleted.",
+        "continue": "Continue?"
+      },
       "error": {
         "title": "Notification",
         "set_text_error": "The text of the error splashscreen can only be set after it has been rendered!",

@@ -23,6 +23,7 @@ import * as localData from '/lib/local_storage.js';
 import {calculateTitelHeight} from '/client/layout/region_header/lib.js';
 import {calculateFooterFontSize} from '/client/layout/region_footer/scripts/lib.js';
 import * as nicknameLib from '/client/layout/view_choose_nickname/scripts/lib.js';
+import {cleanUp} from "./routes.js";
 
 export function getUserLanguage() {
 	/* Get the language of the browser */
@@ -126,5 +127,31 @@ Meteor.startup(function () {
 				}
 			};
 		}
+		/* Triggers the session cleanup if the user closes the tab or the browser
+		 * @see http://stackoverflow.com/a/26275621
+		 */
+		const confirmLeave = function () {
+			if (typeof Router.current().params.quizName !== "undefined" && !localData.containsHashtag(Router.current().params.quizName)) {
+				cleanUp();
+				return "";
+			}
+		};
+		$(window).on('mouseover', (function () {
+			window.onbeforeunload = null;
+		}));
+		$(window).on('mouseout', (function () {
+			window.onbeforeunload = confirmLeave;
+		}));
+		var prevKey = "";
+		$(document).keydown(function (e) {
+			if (e.key.toUpperCase() == "W" && prevKey == "CONTROL") {
+				window.onbeforeunload = confirmLeave;
+			} else if (e.key.toUpperCase() == "R" && prevKey == "CONTROL") {
+				window.onbeforeunload = confirmLeave;
+			} else if (e.key.toUpperCase() == "F4" && (prevKey == "ALT" || prevKey == "CONTROL")) {
+				window.onbeforeunload = confirmLeave;
+			}
+			prevKey = e.key.toUpperCase();
+		});
 	}
 });

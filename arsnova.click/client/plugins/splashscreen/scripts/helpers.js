@@ -38,6 +38,10 @@ Template.resetSessionSplashscreen.helpers($.extend(isMobileDevice, {
 	isEditingQuestion: headerLib.isEditingQuestion
 }));
 
+Template.exitSessionSplashscreen.helpers($.extend(isMobileDevice, {
+
+}));
+
 Template.errorSplashscreen.helpers($.extend(isMobileDevice, {
 
 }));

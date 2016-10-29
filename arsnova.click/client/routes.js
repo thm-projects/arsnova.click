@@ -35,6 +35,26 @@ const subsCache = new SubsManager({
 	expireIn: 15
 });
 
+export function cleanUp() {
+	if (EventManagerCollection.findOne() && localData.containsHashtag(Router.current().params.quizName)) {
+		Meteor.call("EventManagerCollection.clear", Router.current().params.quizName);
+	}
+	const userId = MemberListCollection.findOne({nick: localStorage[Router.current().params.quizName + "nick"]});
+	if (!localData.containsHashtag(Router.current().params.quizName) && userId) {
+		Meteor.call("MemberListCollection.removeLearner", Router.current().params.quizName, userId._id);
+	}
+
+	Session.set("questionGroup", undefined);
+	delete Session.keys.questionGroup;
+
+	Meteor.logout();
+
+	localStorage.removeItem(Router.current().params.quizName + "nick");
+	localStorage.removeItem("slider");
+	localStorage.removeItem("lastPage");
+	sessionStorage.removeItem("overrideValidQuestionRedirect");
+}
+
 Router.configure({
 	layoutTemplate: "layout",
 	loadingTemplate: "loading",
@@ -195,23 +215,7 @@ Router.route('/:quizName/showMore', {
 });
 
 Router.route('/:quizName/resetToHome', function () {
-	if (EventManagerCollection.findOne() && localData.containsHashtag(Router.current().params.quizName)) {
-		Meteor.call("EventManagerCollection.clear", Router.current().params.quizName);
-	}
-	const userId = MemberListCollection.findOne({nick: localStorage[Router.current().params.quizName + "nick"]});
-	if (!localData.containsHashtag(Router.current().params.quizName) && userId) {
-		Meteor.call("MemberListCollection.removeLearner", Router.current().params.quizName, userId._id);
-	}
-
-	Session.set("questionGroup", undefined);
-	delete Session.keys.questionGroup;
-
-	delete localStorage[Router.current().params.quizName + "nick"];
-	delete localStorage.slider;
-	delete localStorage.lastPage;
-
-	delete sessionStorage.overrideValidQuestionRedirect;
-
+	cleanUp();
 	Router.go("/");
 });
 

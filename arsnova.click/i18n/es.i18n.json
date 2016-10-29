@@ -142,6 +142,11 @@
         },
         "continue": "¿Avanzar?"
       },
+      "exit_session_confirmation": {
+        "title": "Deje el concurso?",
+        "text": "YouSe le quitó de la prueba y se perderá su progreso!",
+        "continue": "¿Avanzar?"
+      },
       "connection_status": {
         "title": "Estado de conexión",
         "show_result": "Detalles",

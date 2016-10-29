@@ -40,7 +40,9 @@ Template.memberlist.onRendered(function () {
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		footerElements.addFooterElement((footerElements.footerElemEditQuiz));
 		footerElements.addFooterElement(footerElements.footerElemHome);
-		footerElements.addFooterElement(footerElements.footerElemQRCode);
+		if ($(window).outerWidth() >= 1024) {
+			footerElements.addFooterElement(footerElements.footerElemQRCode);
+		}
 		footerElements.addFooterElement(footerElements.footerElemSound);
 		footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
 		footerElements.addFooterElement(footerElements.footerElemNicknames);

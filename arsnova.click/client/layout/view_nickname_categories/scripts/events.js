@@ -25,10 +25,8 @@ Template.nicknameCategories.events({
 	"click #backButton": function () {
 		if (Session.get("questionGroup")) {
 			Meteor.call("SessionConfiguration.setConfig", Session.get("questionGroup").getConfiguration().serialize());
-			Router.go("/" + Session.get("questionGroup").getHashtag() + "/memberlist");
-		} else {
-			history.back();
 		}
+		history.back();
 	},
 	"click .nickCategory": function (event) {
 		$('.nickCategory').removeClass("selectedCategory");

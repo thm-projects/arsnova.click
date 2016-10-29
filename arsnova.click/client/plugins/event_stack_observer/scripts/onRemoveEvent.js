@@ -31,11 +31,32 @@ function addDefaultRemoveEvents() {
 	});
 }
 
+function addMemberlistRemoveEvents() {
+	globalEventStackObserver.onChange([
+		"MemberListCollection.removeFromSession"
+	], function () {
+		if (!localData.containsHashtag(Router.current().params.quizName)) {
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: "plugins.splashscreen.error.error_messages.session_closed"
+			});
+			Router.go("/" + Router.current().params.quizName + "/resetToHome");
+		}
+	});
+}
+
 export function getRemoveEventsForRoute(route) {
 	if (typeof route === "undefined" || !route.startsWith(":quizName.") || !globalEventStackObserver || !globalEventStackObserver.isRunning()) {
 		return;
 	}
-	route = route.replace(":quizName.", "");
+	route = route.replace(/(:quizName.)*(.:id)*/g, "");
 
+	switch (route) {
+		case "memberlist":
+			addMemberlistRemoveEvents();
+			break;
+		default:
+			break;
+	}
 	addDefaultRemoveEvents();
 }

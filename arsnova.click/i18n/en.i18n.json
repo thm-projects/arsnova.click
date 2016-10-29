@@ -30,9 +30,9 @@
         "fullscreen": "Fullscreen",
         "show_more": "More",
         "sound": "Sound",
-        "qr_code": "QR Code",
+        "qr_code": "QR",
         "nicknames": "Nicknames",
-        "edit_quiz": "Edit quiz"
+        "edit_quiz": "Edit"
       },
       "about": {
         "title": "About the quiz app",

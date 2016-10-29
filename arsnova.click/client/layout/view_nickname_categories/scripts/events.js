@@ -23,7 +23,7 @@ import * as localData from '/lib/local_storage.js';
 
 Template.nicknameCategories.events({
 	"click #backButton": function () {
-		if (localStorage.getItem("lastPage") === ":quizName.memberlist") {
+		if (Session.get("questionGroup")) {
 			Meteor.call("SessionConfiguration.setConfig", Session.get("questionGroup").getConfiguration().serialize());
 		}
 		history.back();

@@ -30,9 +30,9 @@
         "fullscreen": "Pantalla completa",
         "show_more": "Más",
         "sound": "Sonido",
-        "qr_code": "Código QR",
+        "qr_code": "QR",
         "nicknames": "Nombres de usuario",
-        "edit_quiz": "Edición del concurso"
+        "edit_quiz": "Editar"
       },
       "about": {
         "title": "Sobre la aplicación",
@@ -140,6 +140,11 @@
           "title": "¿Quieres salir del cuestionario?",
           "text": "La sesión de todos los participantes será cerrada. La lista del ranking será borrada. Tu cuestionario con todos los ajustes permanecerá en este navegador, siempre y cuando no sea reiniciado."
         },
+        "continue": "¿Avanzar?"
+      },
+      "exit_session_confirmation": {
+        "title": "Deje el concurso?",
+        "text": "YouSe le quitó de la prueba y se perderá su progreso!",
         "continue": "¿Avanzar?"
       },
       "connection_status": {
@@ -480,6 +485,11 @@
       "active": "Sonido está activado"
     },
     "splashscreen": {
+      "edit_session_confirmation": {
+        "title": "¿Quieres editar el cuestionario?",
+        "text": "Todos los asistentes serán eliminados y se eliminarán la tabla de clasificación.",
+        "continue": "¿Continuar?"
+      },
       "error": {
         "title": "Pista",
         "set_text_error": "¡El texto de la página inicial sólo pueder ser colocado después de haber sido renderizado!",

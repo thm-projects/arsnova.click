@@ -124,9 +124,11 @@ Template.hashtagView.events({
 		}
 		const localLoweredHashtags = localData.getAllLoweredHashtags();
 		if ($.inArray(hashtag.toLowerCase(), localLoweredHashtags) > -1 && HashtagsCollection.findOne()) {
-			sessionStorage.setItem("overrideValidQuestionRedirect", true);
 			const session = localData.reenterSession(hashtag);
 			Session.set("questionGroup", session);
+			if (Session.get("questionGroup").isValid()) {
+				sessionStorage.setItem("overrideValidQuestionRedirect", true);
+			}
 			lib.connectEventManager(localData.findHashtagCaseInsensitiveFromLocalStorage(hashtag));
 		} else {
 			let questionGroup = null;
@@ -138,7 +140,9 @@ Template.hashtagView.events({
 					success: function (data) {
 						questionGroup = new DefaultQuestionGroup(data);
 						questionGroup.setHashtag(hashtag);
-						sessionStorage.setItem("overrideValidQuestionRedirect", true);
+						if (questionGroup.isValid()) {
+							sessionStorage.setItem("overrideValidQuestionRedirect", true);
+						}
 						lib.addHashtag(questionGroup);
 					}
 				});
@@ -232,7 +236,9 @@ Template.hashtagManagement.events({
 	"click .startQuiz": function (event) {
 		var hashtag = $(event.currentTarget).parents(".hashtagManagementRow").attr("id");
 		Session.set("questionGroup", localData.reenterSession(hashtag));
-		sessionStorage.setItem("overrideValidQuestionRedirect", true);
+		if (Session.get("questionGroup").isValid()) {
+			sessionStorage.setItem("overrideValidQuestionRedirect", true);
+		}
 		lib.connectEventManager(hashtag);
 	}
 });
@@ -242,7 +248,9 @@ Template.showHashtagsSplashscreen.events({
 		var hashtag = $(event.currentTarget).text();
 		Session.set("questionGroup", localData.reenterSession(hashtag));
 		lib.hashtagSplashscreen.destroy();
-		sessionStorage.setItem("overrideValidQuestionRedirect", true);
+		if (Session.get("questionGroup").isValid()) {
+			sessionStorage.setItem("overrideValidQuestionRedirect", true);
+		}
 		lib.connectEventManager(hashtag);
 	},
 	"click #js-btn-showHashtagManagement": function () {

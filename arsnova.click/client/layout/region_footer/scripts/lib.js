@@ -88,8 +88,7 @@ export const footerElemNicknames = {
 	id: "nicknames",
 	iconClass: "glyphicon glyphicon-sunglasses",
 	textClass: "footerElementText",
-	textName: "region.footer.footer_bar.nicknames",
-	selectable: true
+	textName: "region.footer.footer_bar.nicknames"
 };
 export const footerElemEditQuiz = {
 	id: "edit-quiz",
@@ -123,6 +122,31 @@ export function addFooterElement(footerElement, priority = 100) {
 	$('#' + footerElement.id).removeClass("error").removeClass("success");
 }
 
+export function getCurrentFooterElements() {
+	const allElements = $.merge([], footerElements);
+	$.merge(allElements, hiddenFooterElements.selectable);
+	$.merge(allElements, hiddenFooterElements.linkable);
+	return allElements;
+}
+
+export function getFooterElementById(id) {
+	switch (id) {
+		case "translation": return footerElemTranslation;
+		case "sound": return footerElemSound;
+		case "reading-confirmation": return footerElemReadingConfirmation;
+		case "theme": return footerElemTheme;
+		case "import": return footerElemImport;
+		case "hashtagManagement": return footerElemHashtagManagement;
+		case "fullscreen": return footerElemFullscreen;
+		case "home": return footerElemHome;
+		case "about": return footerElemAbout;
+		case "qr-code": return footerElemQRCode;
+		case "nicknames": return footerElemNicknames;
+		case "edit-quiz": return footerElemEditQuiz;
+		case "show-more": return footerElemShowMore;
+	}
+}
+
 export const updateStatefulFooterElements = Tracker.autorun(function () {
 	const allElements = $.merge([], footerElements);
 	$.merge(allElements, hiddenFooterElements.selectable);
@@ -130,9 +154,6 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 		let state = true;
 		if (item.id === "sound") {
 			const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-			if (!configDoc) {
-				return;
-			}
 			if (configDoc && configDoc.music.isEnabled) {
 				$('#sound').removeClass("error").addClass("success");
 			} else {
@@ -140,29 +161,24 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 				$('#sound').removeClass("success").addClass("error");
 			}
 			$('#sound_switch').bootstrapSwitch('state', state, true);
-			return;
 		}
 
 		if (item.id === 'reading-confirmation') {
 			const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-			if (!configDoc) {
-				return;
-			}
-			if (configDoc.readingConfirmationEnabled) {
+			if (configDoc && configDoc.readingConfirmationEnabled) {
 				$("#" + item.id).removeClass("error").addClass("success").find(".footerElemIcon").find("span").removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open");
 			} else {
 				state = false;
 				$("#" + item.id).removeClass("success").addClass("error").find(".footerElemIcon").find("span").removeClass("glyphicon-eye-open").addClass("glyphicon-eye-close");
 			}
 			$('#reading-confirmation_switch').bootstrapSwitch('state', state, true);
-			return;
 		}
 
 		if (item.id === "nicknames" && typeof Session.get("questionGroup") !== "undefined") {
 			if (Session.get("questionGroup").getConfiguration().getNickSettings().getSelectedValues().length === 0) {
-				$('#nicknames').removeClass("success").find(".footerElemText").find("span").text(TAPi18n.__("view.nickname_categories.free_choice"));
+				$('#nicknames').removeClass("success").find(".footerElemText").text(TAPi18n.__("view.nickname_categories.free_choice"));
 			} else {
-				$('#nicknames').addClass("success").find(".footerElemText").find("span").text(TAPi18n.__("region.footer.footer_bar.nicknames"));
+				$('#nicknames').addClass("success").find(".footerElemText").text(TAPi18n.__("region.footer.footer_bar.nicknames"));
 			}
 			return;
 		}

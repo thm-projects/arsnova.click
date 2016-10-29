@@ -30,9 +30,9 @@
         "fullscreen": "Plein-écran",
         "show_more": "Plus",
         "sound": "Son",
-        "qr_code": "Code QR",
+        "qr_code": "QR",
         "nicknames": "Pseudos",
-        "edit_quiz": "Modifier Quiz"
+        "edit_quiz": "Modifier"
       },
       "about": {
         "title": "À propos de l'application quiz",
@@ -140,6 +140,11 @@
           "title": "Finir le quiz?",
           "text": "Tous les participants seront déconnectés. Le classement sera supprimé. Ton quiz avec tout ses paramètres reste dans ce browser, tant qu'il n'est pas réinitialisé."
         },
+        "continue": "Continuer?"
+      },
+      "exit_session_confirmation": {
+        "title": "Laissez le quiz?",
+        "text": "Vous serez retiré du jeu-questionnaire et vos progrès seront perdus!",
         "continue": "Continuer?"
       },
       "connection_status": {
@@ -480,6 +485,11 @@
       "active": "Son activé"
     },
     "splashscreen": {
+      "edit_session_confirmation": {
+        "title": "Voulez-vous modifier le quiz?",
+        "text": "Tous les participants seront supprimés et le classement seront supprimés.",
+        "continue": "Continuer?"
+      },
       "error": {
         "title": "Message d'erreur",
         "set_text_error": "Le texte du splashscreen ne peut que être mit, après avoir été soumis au rendu!",

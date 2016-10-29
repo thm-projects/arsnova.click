@@ -30,9 +30,9 @@
         "fullscreen": "Fullscreen",
         "show_more": "More",
         "sound": "Sound",
-        "qr_code": "QR Code",
+        "qr_code": "QR",
         "nicknames": "Nicknames",
-        "edit_quiz": "Edit quiz"
+        "edit_quiz": "Edit"
       },
       "about": {
         "title": "About the quiz app",
@@ -140,6 +140,11 @@
           "title": "Exit the quiz?",
           "text": "On resetting the session, all students will be redirected to the landing page. The current ranking and the quiz-lobby will be deleted. The created Question(s), including the assigned answer options and timer configurations, are stored in the local storage of your browser. Except the quiz name, all data of this session will be removed from the server."
         },
+        "continue": "Proceed?"
+      },
+      "exit_session_confirmation": {
+        "title": "Leave the quiz?",
+        "text": "You will be removed from the quiz and your progress will be lost!",
         "continue": "Proceed?"
       },
       "connection_status": {
@@ -480,6 +485,11 @@
       "active": "Sound is active"
     },
     "splashscreen": {
+      "edit_session_confirmation": {
+        "title": "Do you want to edit the quiz?",
+        "text": "All attendees will be removed and the leaderboard will be deleted.",
+        "continue": "Continue?"
+      },
       "error": {
         "title": "Notification",
         "set_text_error": "The text of the error splashscreen can only be set after it has been rendered!",

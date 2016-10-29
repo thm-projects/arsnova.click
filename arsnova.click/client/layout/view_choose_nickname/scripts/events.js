@@ -93,7 +93,7 @@ Template.nick.events({
 			var member = MemberListCollection.findOne({nick: currentNickName});
 
 			if (currentNickName.length > 2 && !member) {
-				$("#forwardButton").click();
+				$("#forwardButton, #loginViaCas").click();
 			}
 		}
 	}
@@ -115,6 +115,7 @@ Template.nickLimited.events({
 			Meteor.call('MemberListCollection.addLearner', {
 				hashtag: Router.current().params.quizName,
 				nick: nickname,
+				userRef: Meteor.user()._id,
 				privateKey: localData.getPrivateKey(),
 				backgroundColor: bgColor,
 				foregroundColor: lib.transformForegroundColor(lib.hexToRgb(bgColor))

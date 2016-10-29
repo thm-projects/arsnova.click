@@ -68,7 +68,7 @@ Template.questionList.events({
 		const nextId = id === 0 ? 0 : id - 1;
 		const questionItem = Session.get("questionGroup");
 		questionItem.removeQuestion(id);
-		if (id === 0) {
+		if (questionItem.getQuestionList().length === 0) {
 			questionItem.addDefaultQuestion();
 		}
 		Session.set("questionGroup", questionItem);

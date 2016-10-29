@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
@@ -28,6 +29,7 @@ import * as votingViewLib from "/client/layout/view_voting/scripts/lib.js";
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen, ErrorSplashscreen, showReadingConfirmationSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
+import {hasTHMMail} from "/client/layout/view_choose_nickname/scripts/lib";
 
 function addDefaultChangeEvents() {
 	globalEventStackObserver.onChange([
@@ -67,11 +69,35 @@ function addMemberlistChangeEvents() {
 	});
 
 	globalEventStackObserver.onChange([
-		"HashtagsCollection.setDefaultTheme"
+		"SessionConfiguration.setTheme", "SessionConfiguration.setConfig"
 	], function (key, value) {
 		if (value.theme) {
 			sessionStorage.setItem("quizTheme", value.theme);
 			Session.set("theme", value.theme);
+		}
+	});
+
+	globalEventStackObserver.onChange([
+		"SessionConfiguration.setNicks", "SessionConfiguration.setConfig"
+	], function (key, value) {
+		if (value.nicks.restrictToCASLogin && !Meteor.user()) {
+			Meteor.loginWithCas(function () {
+				if (!hasTHMMail()) {
+					return;
+				}
+				Meteor.call('MemberListCollection.setLearnerReference', {
+					hashtag: Router.current().params.quizName,
+					nick: localStorage.getItem(Router.current().params.quizName + "nick"),
+					userRef: Meteor.user()._id
+				});
+			});
+		} else if (!value.nicks.restrictToCASLogin) {
+			Meteor.logout();
+			Meteor.call('MemberListCollection.setLearnerReference', {
+				hashtag: Router.current().params.quizName,
+				nick: localStorage.getItem(Router.current().params.quizName + "nick"),
+				userRef: ""
+			});
 		}
 	});
 }

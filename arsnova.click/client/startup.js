@@ -16,10 +16,14 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {calculateTitelHeight} from '/client/layout/region_header/lib.js';
 import {calculateFooterFontSize} from '/client/layout/region_footer/scripts/lib.js';
+import * as nicknameLib from '/client/layout/view_choose_nickname/scripts/lib.js';
+import {cleanUp} from "./routes.js";
 
 export function getUserLanguage() {
 	/* Get the language of the browser */
@@ -90,5 +94,64 @@ Meteor.startup(function () {
 			$('.smallGlyphicon').removeClass("smallGlyphicon");
 			calculateTitelHeight();
 		};
+		if (location.origin.indexOf("staging.arsnova.click") > -1 || location.origin.indexOf("localhost") > -1) {
+			// Enable Debug object
+			Debug = {
+				addMembers: function (amount) {
+					if (amount > 50) {
+						throw new Error("Only 50 Members may be added per command call");
+					}
+					if (!Session.get("questionGroup") || !localData.containsHashtag(Session.get("questionGroup").getHashtag())) {
+						throw new Error("Unsupported Operation: Invalid credentials");
+					}
+					const debugMemberCount = MemberListCollection.find({nick: {$regex: "debug_user_*", $options: "i"}}).count();
+					for (let i = 1; i < amount + 1; i++) {
+						const hashtag  = Router.current().params.quizName;
+						const nickname = "debug_user_" + (i + debugMemberCount);
+						const bgColor  = nicknameLib.rgbToHex(nicknameLib.getRandomInt(0, 255), nicknameLib.getRandomInt(0, 255), nicknameLib.getRandomInt(0, 255));
+						Meteor.call('MemberListCollection.addLearner', {
+							hashtag: hashtag,
+							nick: nickname,
+							userRef: Meteor.user()._id,
+							privateKey: localData.getPrivateKey(),
+							backgroundColor: bgColor,
+							foregroundColor: nicknameLib.transformForegroundColor(nicknameLib.hexToRgb(bgColor))
+						});
+					}
+				},
+				removeMembers: function () {
+					if (!Session.get("questionGroup") || !localData.containsHashtag(Session.get("questionGroup").getHashtag())) {
+						throw new Error("Unsupported Operation: Invalid credentials");
+					}
+					Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
+				}
+			};
+		}
+		/* Triggers the session cleanup if the user closes the tab or the browser
+		 * @see http://stackoverflow.com/a/26275621
+		 */
+		const confirmLeave = function () {
+			if (typeof Router.current().params.quizName !== "undefined" && !localData.containsHashtag(Router.current().params.quizName)) {
+				cleanUp();
+				return "";
+			}
+		};
+		$(window).on('mouseover', (function () {
+			window.onbeforeunload = null;
+		}));
+		$(window).on('mouseout', (function () {
+			window.onbeforeunload = confirmLeave;
+		}));
+		var prevKey = "";
+		$(document).keydown(function (e) {
+			if (e.key.toUpperCase() == "W" && prevKey == "CONTROL") {
+				window.onbeforeunload = confirmLeave;
+			} else if (e.key.toUpperCase() == "R" && prevKey == "CONTROL") {
+				window.onbeforeunload = confirmLeave;
+			} else if (e.key.toUpperCase() == "F4" && (prevKey == "ALT" || prevKey == "CONTROL")) {
+				window.onbeforeunload = confirmLeave;
+			}
+			prevKey = e.key.toUpperCase();
+		});
 	}
 });

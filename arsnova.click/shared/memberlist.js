@@ -19,7 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {EventManagerCollection, questionIndexSchema} from '/lib/eventmanager/collection.js';
 import {hashtagSchema, privateKeySchema} from '/lib/hashtags/collection.js';
-import {MemberListCollection, userNickSchema, backgroundColorSchema, foregroundColorSchema, userNickIdSchema} from '/lib/member_list/collection.js';
+import {MemberListCollection, userNickSchema, backgroundColorSchema, foregroundColorSchema, userNickIdSchema, userRefSchema} from '/lib/member_list/collection.js';
 
 Meteor.methods({
 	'MemberListCollection.addLearner': function ({hashtag, nick, privateKey, backgroundColor, foregroundColor, userRef}) {
@@ -89,6 +89,32 @@ Meteor.methods({
 				}
 			});
 		}
+	},
+	"MemberListCollection.setLearnerReference": function ({hashtag, nick, userRef}) {
+		new SimpleSchema({
+			hashtag: hashtagSchema,
+			nick: userNickSchema,
+			userRef: userRefSchema
+		}).validate({hashtag, nick, userRef});
+		var member = MemberListCollection.findOne({
+			hashtag: hashtag,
+			nick: nick
+		});
+		if (!member) {
+			throw new Meteor.Error('MemberListCollection.setLearnerReference', 'member_not_found');
+		}
+		MemberListCollection.update(member._id, {$set: {userRef: userRef}});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "MemberListCollection.setLearnerReference",
+					value: {
+						user: nick,
+						userRef: userRef
+					}
+				}
+			}
+		});
 	},
 	'MemberListCollection.setReadConfirmed': function ({hashtag, questionIndex, nick}) {
 		new SimpleSchema({

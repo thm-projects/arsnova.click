@@ -33,9 +33,9 @@
         "fullscreen": "Vollbild",
         "show_more": "Mehr",
         "sound": "Sound",
-        "qr_code": "QR Code",
+        "qr_code": "QR",
         "nicknames": "Nicknamen",
-        "edit_quiz": "Quiz bearbeiten"
+        "edit_quiz": "Bearbeiten"
       },
       "about": {
         "title": "Über die Quiz-App",
@@ -143,6 +143,11 @@
           "title": "Soll das Quiz beendet werden?",
           "text": "Alle Teilnehmenden werden abgemeldet. Die Rangliste wird gelöscht. Dein Quiz mit allen Einstellungen verbleibt in diesem Browser, solange er nicht zurückgesetzt wird."
         },
+        "continue": "Fortfahren?"
+      },
+      "exit_session_confirmation": {
+        "title": "Möchtest du das Quiz verlassen?",
+        "text": "Du wirst aus dem Quiz entfernt und dein gesamter Fortschritt wird gelöscht.",
         "continue": "Fortfahren?"
       },
       "connection_status": {
@@ -492,6 +497,11 @@
       "active": "Sound ist aktiviert"
     },
     "splashscreen": {
+      "edit_session_confirmation": {
+        "title": "Möchtest du das Quiz bearbeiten?",
+        "text": "Alle Teilnehmenden werden abgemeldet und die Rangliste wird gelöscht.",
+        "continue": "Fortfahren?"
+      },
       "error": {
         "title": "Hinweis",
         "set_text_error": "Der Text des Splashscreens kann nur gesetzt werden, nachdem er gerendered wurde!",

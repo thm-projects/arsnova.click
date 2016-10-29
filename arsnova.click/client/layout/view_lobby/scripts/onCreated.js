@@ -29,12 +29,12 @@ Template.memberlist.onCreated(function () {
 
 	setMemberlistObserver({
 		added: function () {
-			calculateButtonCount(MemberListCollection.find().count());
 			Session.set("allMembersCount", MemberListCollection.find().count());
+			calculateButtonCount(MemberListCollection.find().count());
 		},
 		removed: function () {
-			calculateButtonCount(MemberListCollection.find().count());
 			Session.set("allMembersCount", MemberListCollection.find().count());
+			calculateButtonCount(MemberListCollection.find().count());
 		}
 	});
 

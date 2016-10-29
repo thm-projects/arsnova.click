@@ -208,7 +208,6 @@ export class ErrorSplashscreen extends Splashscreen {
 }
 
 export function showReadingConfirmationSplashscreen(index) {
-	$('.header-title').text(TAPi18n.__("region.footer.footer_bar.reading-confirmation"));
 	var questionDoc = QuestionGroupCollection.findOne();
 	new Splashscreen({
 		autostart: true,

@@ -101,18 +101,17 @@ Meteor.startup(function () {
 					if (amount > 50) {
 						throw new Error("Only 50 Members may be added per command call");
 					}
-					if (!Session.get("questionGroup") || !localData.containsHashtag(Session.get("questionGroup").getHashtag())) {
+					const hashtag  = Router.current().params.quizName;
+					if (!Session.get("questionGroup") || !localData.containsHashtag(hashtag)) {
 						throw new Error("Unsupported Operation: Invalid credentials");
 					}
-					const debugMemberCount = MemberListCollection.find({nick: {$regex: "debug_user_*", $options: "i"}}).count();
+					const debugMemberCount = MemberListCollection.find({hashtag: hashtag, nick: {$regex: "debug_user_*", $options: "i"}}).count();
 					for (let i = 1; i < amount + 1; i++) {
-						const hashtag  = Router.current().params.quizName;
 						const nickname = "debug_user_" + (i + debugMemberCount);
 						const bgColor  = nicknameLib.rgbToHex(nicknameLib.getRandomInt(0, 255), nicknameLib.getRandomInt(0, 255), nicknameLib.getRandomInt(0, 255));
 						Meteor.call('MemberListCollection.addLearner', {
 							hashtag: hashtag,
 							nick: nickname,
-							userRef: Meteor.user()._id,
 							privateKey: localData.getPrivateKey(),
 							backgroundColor: bgColor,
 							foregroundColor: nicknameLib.transformForegroundColor(nicknameLib.hexToRgb(bgColor))
@@ -123,7 +122,7 @@ Meteor.startup(function () {
 					if (!Session.get("questionGroup") || !localData.containsHashtag(Session.get("questionGroup").getHashtag())) {
 						throw new Error("Unsupported Operation: Invalid credentials");
 					}
-					Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
+					Meteor.call("MemberListCollection.removeDebugUsersFromSession", Router.current().params.quizName);
 				}
 			};
 		}

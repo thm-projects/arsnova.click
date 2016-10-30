@@ -25,7 +25,7 @@ import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {countdown, getPercentRead, getCurrentRead, hslColPerc, checkIfIsCorrect, isCountdownZero} from './lib.js';
+import {countdown, getPercentRead, getCurrentRead, hslColPerc, checkIfIsCorrect, isCountdownZero, setQuestionDialog} from './lib.js';
 
 Template.liveResults.helpers({
 	votingText: function () {
@@ -476,6 +476,9 @@ Template.gamificationAnimation.helpers({
 		const countdownAnimationWrapper = $('#countdownAnimationWrapper');
 		const countdownValue = countdown.get();
 
+		if (countdownValue <= 5) {
+			setQuestionDialog(null);
+		}
 		switch (countdownValue) {
 			case 0:
 				countdownAnimationWrapper.css("background-color", "#b22222");

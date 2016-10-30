@@ -123,7 +123,7 @@ function addLiveresultsChangeEvents() {
 					questionElement.type === "RangedQuestion" || questionElement.type === "FreeTextQuestion") {
 					return;
 				}
-				new Splashscreen({
+				liveResultsLib.setQuestionDialog(new Splashscreen({
 					autostart: true,
 					instanceId: "answers_" + value.questionIndex,
 					templateName: 'questionAndAnswerSplashscreen',
@@ -157,7 +157,7 @@ function addLiveresultsChangeEvents() {
 							instance.close();
 						}, questionElement.timer * 0.75 * 1000);
 					}
-				});
+				}));
 			} else {
 				Router.go("/" + Router.current().params.quizName + "/onpolling");
 			}

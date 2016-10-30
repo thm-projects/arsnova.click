@@ -135,6 +135,7 @@ Meteor.startup(function () {
 				cleanUp();
 				return "";
 			}
+			return null;
 		};
 		$(window).on('mouseover', (function () {
 			window.onbeforeunload = null;
@@ -145,8 +146,6 @@ Meteor.startup(function () {
 		var prevKey = "";
 		$(document).keydown(function (e) {
 			if (e.key.toUpperCase() == "W" && prevKey == "CONTROL") {
-				window.onbeforeunload = confirmLeave;
-			} else if (e.key.toUpperCase() == "R" && prevKey == "CONTROL") {
 				window.onbeforeunload = confirmLeave;
 			} else if (e.key.toUpperCase() == "F4" && (prevKey == "ALT" || prevKey == "CONTROL")) {
 				window.onbeforeunload = confirmLeave;

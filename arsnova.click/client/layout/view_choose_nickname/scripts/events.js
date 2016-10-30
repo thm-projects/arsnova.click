@@ -73,9 +73,18 @@ Template.nickStandardFooter.events({
 				privateKey: localData.getPrivateKey(),
 				backgroundColor: bgColor,
 				foregroundColor: lib.transformForegroundColor(lib.hexToRgb(bgColor))
+			}, function (err) {
+				if (err) {
+					$("#forwardButton").attr("disabled", "disabled");
+					new ErrorSplashscreen({
+						autostart: true,
+						errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
+					});
+				} else {
+					localStorage.setItem(hashtag + "nick", nickname);
+					Router.go("/" + hashtag + "/memberlist");
+				}
 			});
-			localStorage.setItem(hashtag + "nick", nickname);
-			Router.go("/" + hashtag + "/memberlist");
 		});
 	},
 	"click #backButton": function () {

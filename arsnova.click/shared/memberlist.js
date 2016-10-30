@@ -33,9 +33,12 @@ Meteor.methods({
 
 		if (MemberListCollection.findOne({
 				hashtag: hashtag,
-				nick: nick
+				$or: [
+					{nick: nick},
+					{userRef: userRef}
+				]
 			})) {
-			throw new Meteor.Error('MemberListCollection.addLearner', 'Nick already exists!');
+			throw new Meteor.Error('MemberListCollection.addLearner', 'nick_already_exists');
 		}
 		const query = {};
 		if (Meteor.isServer) {
@@ -96,6 +99,12 @@ Meteor.methods({
 			nick: userNickSchema,
 			userRef: userRefSchema
 		}).validate({hashtag, nick, userRef});
+		if (MemberListCollection.findOne({
+				hashtag: hashtag,
+				userRef: userRef
+			})) {
+			throw new Meteor.Error('MemberListCollection.setLearnerReference', 'nick_already_exists');
+		}
 		var member = MemberListCollection.findOne({
 			hashtag: hashtag,
 			nick: nick
@@ -175,7 +184,6 @@ Meteor.methods({
 
 		const result = MemberListCollection.find({hashtag: hashtag}).fetch();
 		result.forEach(function (item) {
-			console.log(item);
 			const user = Meteor.users.findOne({_id: item.userRef});
 			delete user._id;
 			item.userRef = user;

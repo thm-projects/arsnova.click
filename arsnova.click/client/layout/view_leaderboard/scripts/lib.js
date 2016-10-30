@@ -72,7 +72,7 @@ export function calculateButtonCount(allMembersCount) {
 
 function getLeaderBoardItemsByIndex(index) {
 	var allGoodMembers = [];
-	var param = {isCorrect: true};
+	var param = {isCorrect: true, hashtag: Router.current().params.quizName};
 	param.questionIndex = index;
 	var rightAnswerOptions = AnswerOptionCollection.find(param);
 	delete param.isCorrect;

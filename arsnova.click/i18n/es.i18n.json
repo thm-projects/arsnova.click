@@ -504,6 +504,7 @@
           "session_not_available": "En este momento no es posible ingresar al cuestionario.",
           "private_browsing": "Cuando tu navegador esté en modo privado, arsnova.click funcionará lamentablemente solo como participante, ya que el navegador rechazará la descripción de la memoria de la aplicación. Por favor desactiva el modo privado mientras utilices arsnova.click y reinicia arsnova.click. Tú anonimato se mantiene, aunque el modo privado esté desactivado.",
           "kicked_from_quiz": "¡Has sido sacado del cuestionario!",
+          "nick_already_exists": "Este apodo es ya existen",
           "export_failed": "¡Los datos del cuestionario no pudieron ser exportados! - %s",
           "not_authorized": "El cuestionario no está disponible o no cuentas con la autorización para leer estos datos",
           "maximum_answer_options_exceeded": "La cantidad máxima de opciones de respuesta ya ha sido alcanzada",

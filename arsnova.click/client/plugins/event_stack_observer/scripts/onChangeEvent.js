@@ -117,6 +117,12 @@ function addLiveresultsChangeEvents() {
 	], function (key, value) {
 		if (!isNaN(value.questionIndex) && value.questionIndex !== -1) {
 			if (localData.containsHashtag(Router.current().params.quizName)) {
+				const questionElement = QuestionGroupCollection.findOne().questionList[value.questionIndex];
+				const isReadingConfirmationEnabled = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled;
+				if (isReadingConfirmationEnabled &&
+					questionElement.type === "RangedQuestion" || questionElement.type === "FreeTextQuestion") {
+					return;
+				}
 				new Splashscreen({
 					autostart: true,
 					instanceId: "answers_" + value.questionIndex,
@@ -125,9 +131,8 @@ function addLiveresultsChangeEvents() {
 					onRendered: function (instance) {
 						var answerContent = "";
 						var questionContent = "";
-						const questionElement = QuestionGroupCollection.findOne().questionList[value.questionIndex];
 						mathjaxMarkdown.initializeMarkdownAndLatex();
-						if (SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled === false) {
+						if (!isReadingConfirmationEnabled) {
 							var questionDoc = QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName});
 							if (questionDoc) {
 								questionContent = mathjaxMarkdown.getContent(questionDoc.questionList[value.questionIndex].questionText);
@@ -153,14 +158,6 @@ function addLiveresultsChangeEvents() {
 						}, questionElement.timer * 0.75 * 1000);
 					}
 				});
-				/*
-				if (value.questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
-					footerElements.removeFooterElement(footerElements.footerElemReadingConfirmation);
-				} else {
-					footerElements.addFooterElement(footerElements.footerElemReadingConfirmation, 2);
-				}
-				footerElements.calculateFooter();
-				*/
 			} else {
 				Router.go("/" + Router.current().params.quizName + "/onpolling");
 			}

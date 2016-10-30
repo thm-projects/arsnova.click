@@ -139,6 +139,12 @@ let headerThemeTracker = null;
 Template.header.onRendered(function () {
 	headerThemeTracker = Tracker.autorun(function () {
 		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+		if (localStorage.getItem("theme")) {
+			Session.set("theme", localStorage.getItem("theme"));
+		} else {
+			localStorage.setItem("theme", "theme-arsnova-dot-click-contrast");
+			Session.set("theme", localStorage.getItem("theme"));
+		}
 		if (configDoc) {
 			Session.set("theme", configDoc.theme);
 		}

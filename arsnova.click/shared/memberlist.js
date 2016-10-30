@@ -31,12 +31,13 @@ Meteor.methods({
 			foregroundColor: foregroundColorSchema
 		}).validate({hashtag, nick, privateKey, backgroundColor, foregroundColor});
 
+		const duplicateFindObj = [{nick: nick}];
+		if (userRef) {
+			duplicateFindObj.push({userRef: userRef});
+		}
 		if (MemberListCollection.findOne({
 				hashtag: hashtag,
-				$or: [
-					{nick: nick},
-					{userRef: userRef}
-				]
+				$or: duplicateFindObj
 			})) {
 			throw new Meteor.Error('MemberListCollection.addLearner', 'nick_already_exists');
 		}
@@ -161,6 +162,19 @@ Meteor.methods({
 			$push: {
 				eventStack: {
 					key: "MemberListCollection.clearReadConfirmed",
+					value: {}
+				}
+			}
+		});
+	},
+	"MemberListCollection.removeDebugUsersFromSession": function (hashtag) {
+		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
+
+		MemberListCollection.remove({hashtag: hashtag, nick: {$regex: "debug_user_*", $options: "i"}});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "MemberListCollection.removeDebugUsersFromSession",
 					value: {}
 				}
 			}

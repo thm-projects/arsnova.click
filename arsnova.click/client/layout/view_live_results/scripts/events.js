@@ -26,7 +26,7 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {ErrorSplashscreen, Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
-import {calculateButtonCount, startCountdown, isCountdownZero} from './lib.js';
+import {calculateButtonCount, startCountdown, isCountdownZero, setQuestionDialog} from './lib.js';
 
 Template.liveResults.events({
 	'click #js-btn-showQuestionAndAnswerModal': function (event) {
@@ -73,7 +73,7 @@ Template.liveResults.events({
 			$('#answerOptionsHeader').hide();
 		}
 
-		new Splashscreen({
+		setQuestionDialog(new Splashscreen({
 			autostart: true,
 			templateName: 'questionAndAnswerSplashscreen',
 			closeOnButton: '#js-btn-hideQuestionModal',
@@ -84,7 +84,7 @@ Template.liveResults.events({
 				instance.templateSelector.find('#answerContent').html(answerContent);
 				mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#answerContent'));
 			}
-		});
+		}));
 	},
 	"click .btn-showLeaderBoard": function (event) {
 		event.stopPropagation();
@@ -135,7 +135,6 @@ Template.liveResults.events({
 			return;
 		}
 
-		//$('.header-title').text(TAPi18n.__("view.liveResults.title"));
 		calculateHeaderSize();
 
 		Meteor.call('Question.startTimer', {

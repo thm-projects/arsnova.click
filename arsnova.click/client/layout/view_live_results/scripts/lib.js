@@ -26,10 +26,12 @@ import {RangedQuestion} from "/lib/questions/question_ranged.js";
 import {FreeTextQuestion} from "/lib/questions/question_freetext.js";
 import * as localData from '/lib/local_storage.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
+import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {buzzsound1, whistleSound, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 
 export let countdown = null;
 export let routeToLeaderboardTimer = null;
+export let questionDialog = null;
 let questionIndex = -1;
 
 export function deleteCountdown() {
@@ -37,6 +39,13 @@ export function deleteCountdown() {
 		countdown.stop();
 	}
 	countdown = null;
+}
+
+export function setQuestionDialog(instance) {
+	if (questionDialog instanceof Splashscreen) {
+		questionDialog.close();
+	}
+	questionDialog = instance;
 }
 
 /**
@@ -87,6 +96,7 @@ export function checkIfIsCorrect(isCorrect) {
 }
 
 export function countdownFinish() {
+	setQuestionDialog(null);
 	Session.set("countdownInitialized", false);
 	deleteCountdown();
 	$('.disableOnActiveCountdown').removeAttr("disabled");

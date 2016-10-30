@@ -24,6 +24,7 @@ import {calculateTitelHeight} from '/client/layout/region_header/lib.js';
 import {calculateFooterFontSize} from '/client/layout/region_footer/scripts/lib.js';
 import * as nicknameLib from '/client/layout/view_choose_nickname/scripts/lib.js';
 import {cleanUp} from "./routes.js";
+import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
 
 export function getUserLanguage() {
 	/* Get the language of the browser */
@@ -131,7 +132,16 @@ Meteor.startup(function () {
 		 */
 		const confirmLeave = function () {
 			if (typeof Router.current().params.quizName !== "undefined" && !localData.containsHashtag(Router.current().params.quizName)) {
-				cleanUp();
+				new Splashscreen({
+					autostart: true,
+					templateName: "exitSessionSplashscreen",
+					closeOnButton: '#closeDialogButton, #exitSessionButton',
+					onRendered: function (instance) {
+						instance.templateSelector.find('#exitSessionButton').on('click', function () {
+							cleanUp();
+						});
+					}
+				});
 				return "";
 			}
 			return null;

@@ -77,7 +77,7 @@ export function stopPendingAnimation() {
 }
 
 export function resetConnectionIndication() {
-	connectionStatus.dbConnection.totalCount = 2;
+	connectionStatus.dbConnection.totalCount = 5;
 	connectionStatus.dbConnection.currentCount = 1;
 	connectionStatus.dbConnection.serverRTT = 0;
 	connectionStatus.dbConnection.serverRTTtotal = 0;

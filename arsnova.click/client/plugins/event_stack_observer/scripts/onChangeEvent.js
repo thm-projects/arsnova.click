@@ -25,7 +25,6 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
 import * as liveResultsLib from "/client/layout/view_live_results/scripts/lib.js";
-import * as votingViewLib from "/client/layout/view_voting/scripts/lib.js";
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen, ErrorSplashscreen, showReadingConfirmationSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';

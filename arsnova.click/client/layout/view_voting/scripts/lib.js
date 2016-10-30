@@ -20,7 +20,6 @@ import {Session} from 'meteor/session';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
-import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 export let countdown = null;
 export let currentButton = 0;
@@ -92,11 +91,14 @@ export function startCountdown(index) {
 			if (currentButton >= buttonsCount) {
 				currentButton = 0 - secondsUntilNextRound;
 			}
+		},
+		completed: function () {
+			if (countdown && countdown.get() === 0) {
+				countdownFinish();
+			}
 		}
 	});
-	countdown.start(function () {
-		countdownFinish();
-	});
+	countdown.start();
 	Session.set("countdownInitialized", true);
 }
 

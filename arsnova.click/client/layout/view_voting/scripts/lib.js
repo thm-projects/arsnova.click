@@ -28,19 +28,21 @@ export let countdownRunning = false;
 let questionIndex = -1;
 
 export function deleteCountdown() {
+	if (countdown) {
+		countdown.stop();
+	}
 	countdown = null;
 	countdownRunning = false;
 }
 
 export function countdownFinish() {
 	if (Session.get("countdownInitialized") && countdownRunning) {
+		Session.set("countdownInitialized", false);
 		deleteCountdown();
 		if (questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
 			Session.set("sessionClosed", true);
 		}
-		Session.set("countdownInitialized", false);
 		Router.go("/" + Router.current().params.quizName + "/results");
-		countdownRunning = false;
 	}
 }
 
@@ -104,13 +106,6 @@ export function makeAndSendResponse(answerOptionNumber) {
 		questionIndex: EventManagerCollection.findOne().questionIndex,
 		answerOptionNumber: Number(answerOptionNumber),
 		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
-	}, (err) => {
-		if (err) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
-			});
-		}
 	});
 }
 
@@ -120,13 +115,6 @@ export function makeAndSendRangedResponse(value) {
 		questionIndex: EventManagerCollection.findOne().questionIndex,
 		rangedInputValue: value,
 		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
-	}, (err) => {
-		if (err) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
-			});
-		}
 	});
 }
 
@@ -137,13 +125,6 @@ export function makeAndSendFreeTextResponse(value) {
 		freeTextInputValue: value,
 		answerOptionNumber: 0,
 		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
-	}, (err) => {
-		if (err) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
-			});
-		}
 	});
 }
 

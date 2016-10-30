@@ -22,7 +22,7 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
-import {makeAndSendResponse, makeAndSendRangedResponse, makeAndSendFreeTextResponse} from './lib.js';
+import {makeAndSendResponse, makeAndSendRangedResponse, makeAndSendFreeTextResponse, countdownFinish} from './lib.js';
 
 Template.votingview.events({
 	'click #js-btn-showQuestionAndAnswerModal': function (event) {
@@ -103,14 +103,14 @@ Template.votingview.events({
 		if (EventManagerCollection.findOne().questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
 			Session.set("sessionClosed", true);
 		}
-		Router.go("/" + Router.current().params.quizName + "/results");
+		countdownFinish();
 	},
 	"click .sendResponse": function (event) {
 		event.stopPropagation();
 
 		if (Session.get("questionSC")) {
 			makeAndSendResponse(event.currentTarget.id);
-			Router.go("/" + Router.current().params.quizName + "/results");
+			countdownFinish();
 		} else {
 			var responseArr = JSON.parse(Session.get("responses"));
 			var currentId = event.currentTarget.id;

@@ -183,13 +183,10 @@ function addOnPollingChangeEvents() {
 		let memberWithGivenResponsesAmount = _.uniq(allMemberResponses, false, function (user) {
 			return user.userNick;
 		}).length;
-		let memberAmount = MemberListCollection.find().count();
-		if (memberWithGivenResponsesAmount === memberAmount) {
-			if (localData.containsHashtag(Router.current().params.quizName)) {
-				liveResultsLib.countdownFinish();
-			} else {
-				votingViewLib.countdownFinish();
-			}
+		let memberAmount = MemberListCollection.find().fetch().length;
+		if (memberWithGivenResponsesAmount === memberAmount &&
+			localData.containsHashtag(Router.current().params.quizName)) {
+			liveResultsLib.countdownFinish();
 		}
 	});
 }

@@ -20,6 +20,7 @@ import {Template} from 'meteor/templating';
 import {countdown} from './lib.js';
 
 Template.votingview.onDestroyed(function () {
+	console.log("destroying votingview", Session, countdown);
 	Session.set("questionSC", undefined);
 	Session.set("responses", undefined);
 	Session.set("countdownInitialized", undefined);

@@ -208,6 +208,9 @@ export const mathjaxMarkdown = {
 
 			var maxWitdhOfContainer = $('.modal-markdown-body').width() - 60;
 
+			console.log(maxWitdhOfContainer);
+			console.log(size[0] === 'initial;' || maxWitdhOfContainer < size[0]);
+
 			if (size[0] === 'initial;' || maxWitdhOfContainer < size[0]) {
 				// width can't be larger than container width and initial equals auto alignment
 				size = '"width: 100%"';

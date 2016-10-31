@@ -98,7 +98,7 @@ Template.leaderBoard.helpers({
 		const hashtag = Router.current().params.quizName;
 		const time = new Date();
 		const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
-		const memberlistResult = MemberListCollection.find({hashtag: hashtag}, {fields: {userRef: 1, nick: 1}}).fetch();
+		const memberlistResult = MemberListCollection.find({hashtag: hashtag}, {fields: {userRef: 1, nick: 1}}).sort({nick: 1}).fetch();
 		let responseResult;
 		responseResult = Router.current().params.id === "all" ? getAllNicksWhichAreAlwaysRight() : getLeaderBoardItems();
 		let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";
@@ -120,11 +120,16 @@ Template.leaderBoard.helpers({
 				}
 			});
 			const user = Meteor.users.findOne({_id: item.userRef});
-			if (responseTime !== 0 && typeof user !== "undefined") {
-				responseTime = responseTime / responseCount;
-				item.id = user.profile.id;
-				item.mail = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
-				csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
+			if (responseTime !== 0) {
+				if (typeof user !== "undefined") {
+					responseTime = responseTime / responseCount;
+					item.id      = user.profile.id;
+					item.mail    = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
+					csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
+				} else {
+					responseTime = responseTime / responseCount;
+					csvString += item.nick + "," + responseTime + ",,\n";
+				}
 			}
 		});
 

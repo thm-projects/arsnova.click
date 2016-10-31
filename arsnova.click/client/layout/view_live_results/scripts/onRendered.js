@@ -19,8 +19,6 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {ResponsesCollection} from '/lib/responses/collection.js';
-import {MemberListCollection} from '/lib/member_list/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {showReadingConfirmationSplashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
@@ -72,15 +70,6 @@ Template.liveResults.onRendered(()=> {
 			footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		}
 		footerElements.calculateFooter();
-	} else {
-		let allMemberResponses = ResponsesCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).fetch();
-		let memberWithGivenResponsesAmount = _.uniq(allMemberResponses, false, function (user) {
-			return user.userNick;
-		}).length;
-		let memberAmount = MemberListCollection.find().fetch().length;
-		if (memberWithGivenResponsesAmount !== memberAmount) {
-			startCountdown(EventManagerCollection.findOne().questionIndex);
-		}
 	}
 
 	calculateButtonCount();

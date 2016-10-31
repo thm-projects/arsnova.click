@@ -98,7 +98,7 @@ Template.leaderBoard.helpers({
 		const hashtag = Router.current().params.quizName;
 		const time = new Date();
 		const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
-		const memberlistResult = MemberListCollection.find({hashtag: hashtag}, {fields: {userRef: 1, nick: 1}}).sort({nick: 1}).fetch();
+		const memberlistResult = MemberListCollection.find({hashtag: hashtag}, {fields: {userRef: 1, nick: 1}, sort: {nick: 1}}).fetch();
 		let responseResult;
 		responseResult = Router.current().params.id === "all" ? getAllNicksWhichAreAlwaysRight() : getLeaderBoardItems();
 		let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";

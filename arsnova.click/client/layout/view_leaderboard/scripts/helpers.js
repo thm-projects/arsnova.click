@@ -27,10 +27,8 @@ import {getLeaderBoardItems, getAllNicksWhichAreAlwaysRight} from './lib.js';
 Template.leaderBoard.helpers({
 	getButtonCols: ()=> {
 		const hasTooMuchButtons = Session.get("responsesCountOverride") || (Session.get("allMembersCount") - Session.get("maxResponseButtons") > 0);
-		return Session.get("nickCount") <= 0 ? 12 : hasTooMuchButtons ? 4 : 6;
-	},
-	hashtag: ()=> {
-		return Router.current().params.quizName;
+		const index = Router.current().params.id === "all" ? 0 : Router.current().params.id;
+		return Session.get("nicks")[index] <= 0 ? 12 : hasTooMuchButtons ? 4 : 6;
 	},
 	getNormalizedIndex: (index)=> {
 		return index + 1;
@@ -43,9 +41,6 @@ Template.leaderBoard.helpers({
 	},
 	getTitleText: ()=> {
 		return Router.current().params.id === "all" ? TAPi18n.__("view.leaderboard.title.all_questions") : TAPi18n.__("view.leaderboard.title.single_question", {questionId: (parseInt(Router.current().params.id) + 1)});
-	},
-	getPosition: function (index) {
-		return (index + 1);
 	},
 	parseTimeToSeconds: function (milliseconds) {
 		let seconds = (milliseconds / 1000).toFixed(2);
@@ -64,13 +59,13 @@ Template.leaderBoard.helpers({
 		return Router.current().params.id === "all";
 	},
 	leaderBoardSums: function () {
-		return getAllNicksWhichAreAlwaysRight();
+		return Session.get("nicks_alwaysCorrect");
 	},
 	noLeaderBoardItems: (index)=> {
 		if (Router.current().params.id === "all") {
-			return getAllNicksWhichAreAlwaysRight().length <= 0;
+			return Session.get("nicks_alwaysCorrect").length <= 0;
 		}
-		var items = getLeaderBoardItems();
+		var items = Session.get("nicks");
 		if (typeof index !== "undefined") {
 			if (items[index].value.length > 0) {
 				return false;
@@ -85,16 +80,13 @@ Template.leaderBoard.helpers({
 		return true;
 	},
 	leaderBoardItems: ()=> {
-		return getLeaderBoardItems();
+		return Session.get("nicks");
 	},
 	isFirstItem: function (index) {
 		return index === 0;
 	},
 	isOwner: function () {
 		return localData.containsHashtag(Router.current().params.quizName);
-	},
-	isRestrictedToCAS: function () {
-		return localData.containsHashtag(Router.current().params.quizName) && SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).nicks.restrictToCASLogin;
 	},
 	exportData: function () {
 		const hashtag = Router.current().params.quizName;

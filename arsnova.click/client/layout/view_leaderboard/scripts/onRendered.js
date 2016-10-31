@@ -20,7 +20,7 @@ import {Template} from 'meteor/templating';
 import * as localData from '/lib/local_storage.js';
 import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
-import {calculateButtonCount, getAllNicksWhichAreAlwaysRight, getAllNonPollingLeaderBoardItems} from './lib.js';
+import {calculateButtonCount} from './lib.js';
 
 Template.leaderBoard.onRendered(function () {
 	footerElements.removeFooterElements();
@@ -37,15 +37,6 @@ Template.leaderBoard.onRendered(function () {
 	footerElements.calculateFooter();
 
 	setTimeout(calculateButtonCount, 30);
-
-	let nickCount = 0;
-	if (Router.current().params.id === "all") {
-		nickCount = getAllNicksWhichAreAlwaysRight().length;
-	} else {
-		const allItems = getAllNonPollingLeaderBoardItems();
-		nickCount = allItems[parseInt(Router.current().params.id)].value.length;
-	}
-	Session.set("nickCount", nickCount);
 
 	$(window).resize(function () {
 		calculateHeaderSize();

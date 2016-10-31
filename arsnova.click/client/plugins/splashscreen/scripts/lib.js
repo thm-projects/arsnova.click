@@ -251,25 +251,6 @@ export const isMobileDevice = {
 	}
 };
 
-export function showVideo(videoImageContainer) {
-	var sourceURI = videoImageContainer.accessKey === "youtube" ? 'https://youtube.com/embed/' : 'https://player.vimeo.com/video/';
-	sourceURI += videoImageContainer.id + '?autoplay=1';
-
-	new Splashscreen({
-		autostart: true,
-		templateName: 'questionPreviewSplashscreen',
-		closeOnButton: '#js-btn-hidePreviewModal',
-		instanceId: "video" + videoImageContainer.title,
-		onRendered: function (instance) {
-			var body = instance.templateSelector.find('.modal-markdown-body');
-			var objectHtml = '<div scrolling="no">' +
-								'<iframe src=' + sourceURI + ' frameborder="0" style="border: 0" scrolling="yes" allowfullscreen="true" width="' + videoImageContainer.width + '" height="' + videoImageContainer.height + '"></iframe>' +
-							'</div>';
-			body.append(objectHtml);
-		}
-	});
-}
-
 export function showFullscreenPicture(event) {
 	var pictureElement = event.target;
 	var src = pictureElement.src;

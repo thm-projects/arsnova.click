@@ -253,10 +253,12 @@ export const mathjaxMarkdown = {
 					href.match(delimiters.videoIdDel)[7] :
 					href.match(delimiters.videoIdDel)[2];
 
-				var title = element.match(delimiters.titleDel)[1];
-				return '<p class="videoImageParagraph">' +
-							'<span class="videoImageContainer" id="' + videoId + '" accesskey="' + delimiters.accessKey + '" title="' + title + '">' + text + '</span>' +
-					'</p>';
+				var sourceURI = delimiters.accessKey === "youtube" ? 'https://youtube.com/embed/' : 'https://player.vimeo.com/video/';
+				sourceURI += videoId;
+
+				return '<div scrolling="no">' +
+					'<iframe src=' + sourceURI + ' frameborder="0" style="border: 0" scrolling="yes" allowfullscreen="true" width="100%" height="500px"></iframe>' +
+					'</div>';
 			});
 		};
 

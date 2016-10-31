@@ -73,14 +73,6 @@ Template.readingConfirmedSplashscreen.events({
 	"click .resizeableImage": function (event) {
 		showFullscreenPicture(event);
 	},
-	"click .videoImageParagraph": function (event) {
-		var targetElement = event.target;
-		if (targetElement.localName === "span") {
-			targetElement = event.target.firstChild;
-		}
-
-		showVideo({id: targetElement.offsetParent.id, accessKey: targetElement.offsetParent.accessKey, title: targetElement.offsetParent.title, width: targetElement.clientWidth, height: targetElement.clientHeight});
-	},
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
 	}
@@ -89,14 +81,6 @@ Template.readingConfirmedSplashscreen.events({
 Template.questionPreviewSplashscreen.events({
 	"click .resizeableImage": function (event) {
 		showFullscreenPicture(event);
-	},
-	"click .videoImageParagraph": function (event) {
-		var targetElement = event.target;
-		if (targetElement.localName === "span") {
-			targetElement = event.target.firstChild;
-		}
-
-		showVideo({id: targetElement.offsetParent.id, accessKey: targetElement.offsetParent.accessKey, title: targetElement.offsetParent.title, width: targetElement.clientWidth, height: targetElement.clientHeight});
 	},
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);

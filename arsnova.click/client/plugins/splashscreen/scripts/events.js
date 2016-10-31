@@ -74,7 +74,12 @@ Template.readingConfirmedSplashscreen.events({
 		showFullscreenPicture(event);
 	},
 	"click .videoImageParagraph": function (event) {
-		showVideo({id: event.target.offsetParent.id, accessKey: event.target.offsetParent.accessKey, title: event.target.offsetParent.title, width: event.target.clientWidth, height: event.target.clientHeight});
+		var targetElement = event.target;
+		if (targetElement.localName === "span") {
+			targetElement = event.target.firstChild;
+		}
+
+		showVideo({id: targetElement.offsetParent.id, accessKey: targetElement.offsetParent.accessKey, title: targetElement.offsetParent.title, width: targetElement.clientWidth, height: targetElement.clientHeight});
 	},
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);

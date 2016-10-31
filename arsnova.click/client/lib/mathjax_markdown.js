@@ -248,7 +248,7 @@ export const mathjaxMarkdown = {
 		};
 
 		var videoElementReplace = function (content, delimiters) {
-			return content.replace(delimiters.elementDel, function (element) {
+			return content.replace(delimiters.elementDel, function () {
 				var videoId = delimiters.accessKey === 'youtube' ?
 					href.match(delimiters.videoIdDel)[7] :
 					href.match(delimiters.videoIdDel)[2];

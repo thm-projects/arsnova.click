@@ -257,11 +257,11 @@ export function showVideo(videoImageContainer) {
 
 	new Splashscreen({
 		autostart: true,
-		templateName: 'splashscreen',
-		closeOnButton: '#btn-hidePreviewModal',
+		templateName: 'questionPreviewSplashscreen',
+		closeOnButton: '#js-btn-hidePreviewModal',
 		instanceId: "video" + videoImageContainer.title,
 		onRendered: function (instance) {
-			var body = instance.templateSelector.find('.modal-body');
+			var body = instance.templateSelector.find('.modal-markdown-body');
 			var objectHtml = '<div scrolling="no">' +
 								'<iframe src=' + sourceURI + ' frameborder="0" style="border: 0" scrolling="yes" allowfullscreen="true" width="' + videoImageContainer.width + '" height="' + videoImageContainer.height + '"></iframe>' +
 							'</div>';

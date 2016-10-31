@@ -70,7 +70,7 @@ Template.renameHashtagSplashscreen.events({
 });
 
 Template.readingConfirmedSplashscreen.events({
-	"click .img-responsive": function (event) {
+	"click .resizeableImage": function (event) {
 		showFullscreenPicture(event);
 	},
 	"click .videoImageParagraph": function (event) {
@@ -87,7 +87,7 @@ Template.readingConfirmedSplashscreen.events({
 });
 
 Template.questionPreviewSplashscreen.events({
-	"click .img-responsive": function (event) {
+	"click .resizeableImage": function (event) {
 		showFullscreenPicture(event);
 	},
 	"click .videoImageParagraph": function (event) {

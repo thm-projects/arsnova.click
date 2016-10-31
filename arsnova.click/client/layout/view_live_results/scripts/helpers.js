@@ -454,10 +454,11 @@ Template.liveResults.helpers({
 	},
 	getCSSClassForIsCorrect: checkIfIsCorrect,
 	hideCssIfCountdownRunning: function (index, cssClass) {
-		if (!isCountdownZero(index)) {
+		if (isCountdownZero(index)) {
+			return cssClass;
+		} else {
 			return "progress-default";
 		}
-		return cssClass;
 	}
 });
 
@@ -469,7 +470,7 @@ Template.readingConfirmedLearner.helpers({
 
 Template.gamificationAnimation.helpers({
 	getCurrentAnimationSrc: function () {
-		if (!Session.get("countdownInitialized") && !countdown) {
+		if (!Session.get("countdownInitialized") || !countdown) {
 			return;
 		}
 

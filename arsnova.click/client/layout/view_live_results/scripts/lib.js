@@ -58,12 +58,15 @@ export function hslColPerc(percent, start, end) {
 
 export function isCountdownZero(index) {
 	let eventDoc = EventManagerCollection.findOne();
-	if (!eventDoc) {
+	if (!eventDoc || Session.get("isQueringServerForTimeStamp")) {
 		return false;
 	}
-	if (!countdown || Session.get("sessionClosed") || !Session.get("countdownInitialized") || eventDoc.questionIndex !== index) {
+	if (Session.get("sessionClosed") || !Session.get("countdownInitialized") || eventDoc.questionIndex !== index) {
 		return true;
 	} else {
+		if (!countdown) {
+			return false;
+		}
 		var timer = Math.round(countdown.get());
 		return timer <= 0;
 	}
@@ -142,6 +145,7 @@ export function startCountdown(index, retry = 0) {
 	if (Session.get("countdownInitialized") || Session.get("sessionClosed")) {
 		return;
 	}
+	Session.set("isQueringServerForTimeStamp", true);
 	const questionDoc = QuestionGroupCollection.findOne().questionList[index];
 	const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 	if (!questionDoc) {
@@ -177,6 +181,7 @@ export function startCountdown(index, retry = 0) {
 			countdownFinish();
 		});
 		$('.navbar-fixed-bottom').hide();
+		Session.set("isQueringServerForTimeStamp", false);
 		Session.set("countdownInitialized", true);
 		$('.disableOnActiveCountdown').attr("disabled", "disabled");
 

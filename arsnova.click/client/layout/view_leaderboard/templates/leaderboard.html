@@ -111,7 +111,7 @@
                     {{/if}}
                 </div>
             {{/if}}
-            {{#if isRestrictedToCAS}}
+            {{#if isOwner}}
                 <div class="col-xs-{{getButtonCols}}">
                     {{#with exportData}}
                         <a href="{{this.href}}" download="{{this.name}}">

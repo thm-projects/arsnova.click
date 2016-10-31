@@ -182,7 +182,7 @@ export function getLeaderBoardItems() {
 	}
 }
 
-function getAllNonPollingLeaderBoardItems() {
+export function getAllNonPollingLeaderBoardItems() {
 	const result = [];
 	const questionGroup = QuestionGroupCollection.findOne();
 	for (var i = 0; i <= EventManagerCollection.findOne().questionIndex; i++) {

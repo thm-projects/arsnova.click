@@ -91,6 +91,9 @@ Template.leaderBoard.helpers({
 	isFirstItem: function (index) {
 		return index === 0;
 	},
+	isOwner: function () {
+		return localData.containsHashtag(Router.current().params.quizName);
+	},
 	isRestrictedToCAS: function () {
 		return localData.containsHashtag(Router.current().params.quizName) && SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).nicks.restrictToCASLogin;
 	},
@@ -121,13 +124,12 @@ Template.leaderBoard.helpers({
 			});
 			const user = Meteor.users.findOne({_id: item.userRef});
 			if (responseTime !== 0) {
+				responseTime = responseTime / responseCount;
 				if (typeof user !== "undefined") {
-					responseTime = responseTime / responseCount;
 					item.id      = user.profile.id;
 					item.mail    = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
 					csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
 				} else {
-					responseTime = responseTime / responseCount;
 					csvString += item.nick + "," + responseTime + ",,\n";
 				}
 			}

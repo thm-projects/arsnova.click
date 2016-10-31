@@ -180,10 +180,13 @@ export function startCountdown(index, retry = 0) {
 		Session.set("countdownInitialized", true);
 		$('.disableOnActiveCountdown').attr("disabled", "disabled");
 
+		if (!localData.containsHashtag(Router.current().params.quizName)) {
+			return;
+		}
 		const debugMembers = MemberListCollection.find({nick: {$regex: "debug_user_*", $options: "i"}}).fetch();
 		debugMembers.forEach(function (member) {
 			const replyTimer = randomIntFromInterval(0, countdownValue + 10);
-			if (replyTimer > countdownValue) {
+			if (replyTimer >= countdownValue) {
 				return;
 			}
 			const question = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex];

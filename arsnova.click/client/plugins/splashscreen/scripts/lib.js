@@ -290,7 +290,7 @@ export function showFullscreenPicture(event) {
 			img.src = src;
 
 			instance.templateSelector.find('.modal-dialog').css('width', 'auto');
-			instance.templateSelector.find('.modal-header').html(title);
+			instance.templateSelector.find('.modal-header-content').html(title);
 			var oldImgWidth = img.width;
 			var oldImgHeight = img.height;
 			var imageWidth = img.width + 60;

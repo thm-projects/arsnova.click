@@ -38,9 +38,6 @@ export function countdownFinish() {
 	if (Session.get("countdownInitialized") && countdownRunning) {
 		Session.set("countdownInitialized", false);
 		deleteCountdown();
-		if (questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
-			Session.set("sessionClosed", true);
-		}
 		Router.go("/" + Router.current().params.quizName + "/results");
 	}
 }

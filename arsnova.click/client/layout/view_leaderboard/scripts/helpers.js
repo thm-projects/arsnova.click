@@ -22,23 +22,12 @@ import {TAPi18n} from 'meteor/tap:i18n';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {getLeaderBoardItems, getAllNicksWhichAreAlwaysRight, getAllNonPollingLeaderBoardItems} from './lib.js';
+import {getLeaderBoardItems, getAllNicksWhichAreAlwaysRight} from './lib.js';
 
 Template.leaderBoard.helpers({
 	getButtonCols: ()=> {
-		let nickCount = 0;
-		if (Router.current().params.id === "all") {
-			const allItems = getAllNicksWhichAreAlwaysRight();
-			allItems.forEach(function (item) {
-				nickCount += item.value.length;
-			});
-		} else {
-			const allItems = getAllNonPollingLeaderBoardItems();
-			nickCount += allItems[parseInt(Router.current().params.id)].value.length;
-		}
-		console.log(nickCount);
 		const hasTooMuchButtons = Session.get("responsesCountOverride") || (Session.get("allMembersCount") - Session.get("maxResponseButtons") > 0);
-		return nickCount <= 0 ? 12 : hasTooMuchButtons ? 4 : 6;
+		return Session.get("nickCount") <= 0 ? 12 : hasTooMuchButtons ? 4 : 6;
 	},
 	hashtag: ()=> {
 		return Router.current().params.quizName;

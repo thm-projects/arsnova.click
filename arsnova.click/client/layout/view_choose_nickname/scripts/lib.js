@@ -87,10 +87,10 @@ export function parseEnteredNickname(event) {
 
 	if (currentNickName.length > 2 && currentNickName.length < 26 && !member) {
 		if (isNickAllowed(currentNickName)) {
-			$("#forwardButton").removeAttr("disabled");
+			$("#forwardButton, #loginViaCas").removeAttr("disabled");
 			$inputField.popover("destroy");
 		} else {
-			$("#forwardButton").attr("disabled", "disabled");
+			$("#forwardButton, #loginViaCas").attr("disabled", "disabled");
 			$inputField.popover("destroy");
 			$inputField.popover({
 				title: TAPi18n.__("view.choose_nickname.nickname_blacklist_popup"),
@@ -100,7 +100,7 @@ export function parseEnteredNickname(event) {
 			$inputField.popover("show");
 		}
 	} else {
-		$("#forwardButton").attr("disabled", "disabled");
+		$("#forwardButton, #loginViaCas").attr("disabled", "disabled");
 		if (currentNickName.length === 0 || !member) {
 			$inputField.popover("destroy");
 		}

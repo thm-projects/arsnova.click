@@ -17,9 +17,15 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {eventManagerHandle} from './lib.js';
+import {eventManagerTracker, eventManagerHandle, eventManagerCollectionObserver} from './lib.js';
 
 Template.hashtagView.onDestroyed(function () {
+	if (eventManagerTracker) {
+		eventManagerTracker.stop();
+	}
+	if (eventManagerCollectionObserver) {
+		eventManagerCollectionObserver.stop();
+	}
 	if (eventManagerHandle) {
 		eventManagerHandle.stop();
 		$("#joinSession").attr("disabled", "disabled");

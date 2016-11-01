@@ -61,12 +61,9 @@ export function isCountdownZero(index) {
 	if (!eventDoc || Session.get("isQueringServerForTimeStamp")) {
 		return false;
 	}
-	if (Session.get("sessionClosed") || !Session.get("countdownInitialized") || eventDoc.questionIndex !== index) {
+	if (!countdown || countdown.get() === 0 || Session.get("sessionClosed") || !Session.get("countdownInitialized") || eventDoc.questionIndex !== index) {
 		return true;
 	} else {
-		if (!countdown) {
-			return false;
-		}
 		var timer = Math.round(countdown.get());
 		return timer <= 0;
 	}
@@ -143,6 +140,7 @@ function randomIntFromInterval(min,max)
 
 export function startCountdown(index, retry = 0) {
 	if (Session.get("countdownInitialized") || Session.get("sessionClosed")) {
+		Session.set("isQueringServerForTimeStamp", false);
 		return;
 	}
 	Session.set("isQueringServerForTimeStamp", true);
@@ -152,6 +150,7 @@ export function startCountdown(index, retry = 0) {
 		if (retry < 5) {
 			setTimeout(startCountdown(index, ++retry), 20);
 		}
+		Session.set("isQueringServerForTimeStamp", false);
 		return;
 	}
 	questionIndex = index;
@@ -160,6 +159,7 @@ export function startCountdown(index, retry = 0) {
 		const timeDiff = new Date(currentTime.getTime() - questionDoc.startTime);
 
 		if ((questionDoc.timer - (timeDiff.getTime() / 1000)) <= 0) {
+			Session.set("isQueringServerForTimeStamp", false);
 			return;
 		}
 		if (localData.containsHashtag(Router.current().params.quizName)) {
@@ -178,7 +178,9 @@ export function startCountdown(index, retry = 0) {
 		countdown = new ReactiveCountdown(countdownValue);
 
 		countdown.start(function () {
-			countdownFinish();
+			if (countdown && countdown.get() === 0) {
+				countdownFinish();
+			}
 		});
 		$('.navbar-fixed-bottom').hide();
 		Session.set("isQueringServerForTimeStamp", false);

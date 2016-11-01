@@ -29,8 +29,7 @@ Template.memberlist.onRendered(function () {
 	Session.set("allMembersCount", MemberListCollection.find().count());
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		Session.set("lobbySoundIsPlaying", "LobbySong1");
-		setLobbySound("LobbySong1");
-		lobbySound.play();
+		setLobbySound("LobbySong1", Router.current().url.indexOf("localhost") === -1);
 	}
 	calculateButtonCount(MemberListCollection.find().count());
 	calculateHeaderSize();

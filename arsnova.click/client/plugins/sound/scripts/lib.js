@@ -45,7 +45,7 @@ export function setBuzzsound1(songName) {
 	});
 }
 
-export function setLobbySound(songName) {
+export function setLobbySound(songName, autostart = true) {
 	var fileName = "";
 	switch (songName) {
 		case "LobbySong1":
@@ -67,6 +67,8 @@ export function setLobbySound(songName) {
 	lobbySound = new buzz.sound("/sounds/" + fileName, {
 		loop: true
 	});
-	lobbySound.play();
+	if (autostart) {
+		lobbySound.play();
+	}
 	$('#playStopLobbyMusic').toggleClass("down").removeClass("button-success").addClass("button-warning");
 }

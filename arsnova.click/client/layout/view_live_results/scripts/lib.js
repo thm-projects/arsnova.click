@@ -178,7 +178,9 @@ export function startCountdown(index, retry = 0) {
 		countdown = new ReactiveCountdown(countdownValue);
 
 		countdown.start(function () {
-			countdownFinish();
+			if (countdown && countdown.get() === 0) {
+				countdownFinish();
+			}
 		});
 		$('.navbar-fixed-bottom').hide();
 		Session.set("isQueringServerForTimeStamp", false);

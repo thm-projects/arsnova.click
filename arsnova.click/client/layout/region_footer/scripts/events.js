@@ -242,7 +242,8 @@ const clickEvents = {
 						$('#js-btn-playStopMusic').toggleClass("down").removeClass("button-success").addClass("button-warning");
 					}
 				});
-				instance.templateSelector.find("#playStopLobbyMusic").on('click', function () {
+
+				const checkLobbySoundPlaying = function () {
 					if (Session.get("lobbySoundIsPlaying")) {
 						lobbySound.stop();
 						Session.set("lobbySoundIsPlaying", false);
@@ -252,7 +253,9 @@ const clickEvents = {
 						Session.set("lobbySoundIsPlaying", true);
 						$('#playStopLobbyMusic').toggleClass("down").removeClass("button-success").addClass("button-warning");
 					}
-				});
+				};
+				checkLobbySoundPlaying();
+				instance.templateSelector.find("#playStopLobbyMusic").on('click', checkLobbySoundPlaying);
 
 				instance.templateSelector.find("#js-btn-hideSoundModal").on('click', function () {
 					buzzsound1.stop();

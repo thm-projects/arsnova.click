@@ -61,7 +61,7 @@ export function isCountdownZero(index) {
 	if (!eventDoc || Session.get("isQueringServerForTimeStamp")) {
 		return false;
 	}
-	if (!countdown || Session.get("sessionClosed") || !Session.get("countdownInitialized") || eventDoc.questionIndex !== index) {
+	if (!countdown || countdown.get() === 0 || Session.get("sessionClosed") || !Session.get("countdownInitialized") || eventDoc.questionIndex !== index) {
 		return true;
 	} else {
 		var timer = Math.round(countdown.get());
@@ -140,6 +140,7 @@ function randomIntFromInterval(min,max)
 
 export function startCountdown(index, retry = 0) {
 	if (Session.get("countdownInitialized") || Session.get("sessionClosed")) {
+		Session.set("isQueringServerForTimeStamp", false);
 		return;
 	}
 	Session.set("isQueringServerForTimeStamp", true);
@@ -177,7 +178,9 @@ export function startCountdown(index, retry = 0) {
 		countdown = new ReactiveCountdown(countdownValue);
 
 		countdown.start(function () {
-			countdownFinish();
+			if (countdown && countdown.get() === 0) {
+				countdownFinish();
+			}
 		});
 		$('.navbar-fixed-bottom').hide();
 		Session.set("isQueringServerForTimeStamp", false);

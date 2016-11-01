@@ -21,8 +21,6 @@ import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 
 Template.nick.onRendered(function () {
-	$("#forwardButton").attr("disabled", "disabled");
-
 	if ($(window).width() >= 992) {
 		$('#nickname-input-field').focus();
 	}
@@ -37,6 +35,10 @@ Template.nick.onRendered(function () {
 	footerElements.calculateFooter();
 	calculateHeaderSize();
 	$(window).resize(calculateHeaderSize);
+});
+
+Template.nickStandardFooter.onRendered(function () {
+	$("#forwardButton, #loginViaCas").attr("disabled", "disabled");
 });
 
 Template.nickLimited.onRendered(function () {

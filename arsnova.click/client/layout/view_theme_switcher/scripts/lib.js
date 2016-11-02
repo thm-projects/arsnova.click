@@ -17,15 +17,15 @@
 
 export const themes = [
 	{
-		name: "view.theme_switcher.themes.black_beauty.name",
-		description: "view.theme_switcher.themes.black_beauty.description",
-		id: "theme-blackbeauty"
-	},
-	{
 		name: "view.theme_switcher.themes.theme-arsnova-dot-click-contrast.name",
 		description: "view.theme_switcher.themes.theme-arsnova-dot-click-contrast.description",
 		id: "theme-arsnova-dot-click-contrast"
 	},
+    {
+        name: "view.theme_switcher.themes.black_beauty.name",
+        description: "view.theme_switcher.themes.black_beauty.description",
+        id: "theme-blackbeauty"
+    },
 	{
 		name: "view.theme_switcher.themes.thm.name",
 		description: "view.theme_switcher.themes.thm.description",

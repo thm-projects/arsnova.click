@@ -59,11 +59,11 @@ Template.liveResults.events({
 					}
 
 					if (questionElement.type !== "FreeTextQuestion") {
-						answerContent += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
+						answerContent += "<strong>" + String.fromCharCode((answerOption.answerOptionNumber + 65)) + "</strong>" + "<br/>";
 					} else {
 						answerContent += TAPi18n.__("view.liveResults.correct_answer") + ":<br/>";
 					}
-					answerContent += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+					answerContent += mathjaxMarkdown.getContent(answerOption.answerText);
 				});
 			}
 		}

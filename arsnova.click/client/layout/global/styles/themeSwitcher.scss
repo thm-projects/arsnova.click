@@ -176,28 +176,28 @@
 	$fg-js-my-hash-invalidQuestion: $warning-text-color;
 
 	$colorChangingArs0: white;
-	$colorChangingArs25: $warning;
-	$colorChangingArs50: $info;
+	$colorChangingArs25: $input-background-color;
+	$colorChangingArs50: white;
 	$colorChangingArs75: $input-background-color;
 	$colorChangingArs100: white;
 
 	$colorChangingNova0: $input-background-color;
 	$colorChangingNova25: white;
-	$colorChangingNova50: $warning;
-	$colorChangingNova75: $info;
+	$colorChangingNova50: $input-background-color;
+	$colorChangingNova75: white;
 	$colorChangingNova100: $input-background-color;
 
-	$colorChangingDot0: $info;
+	$colorChangingDot0: white;
 	$colorChangingDot25: $input-background-color;
 	$colorChangingDot50: white;
-	$colorChangingDot75: $warning;
-	$colorChangingDot100: $info;
+	$colorChangingDot75: $input-background-color;
+	$colorChangingDot100: white;
 
-	$colorChangingClick0: $warning;
-	$colorChangingClick25: $info;
+	$colorChangingClick0: $input-background-color;
+	$colorChangingClick25: white;
 	$colorChangingClick50: $input-background-color;
 	$colorChangingClick75: white;
-	$colorChangingClick100: $warning;
+	$colorChangingClick100: $input-background-color;
 
 	$bg-colorChangingOwnNick0: $input-background-color;
 	$fg-colorChangingOwnNick0: white;
@@ -274,11 +274,6 @@
 		$bg-js-my-hash-invalidQuestion: $warning;
 		$bg-js-my-hash-invalidQuestion-hovered: lighten($warning, 10);
 		$bg-colorChangingOwnNick25: $warning;
-		$colorChangingClick100: $warning;
-		$colorChangingClick0: $warning;
-		$colorChangingDot75: $warning;
-		$colorChangingNova50: $warning;
-		$colorChangingArs25: $warning;
 
 		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
 		$splashscreen-question-preview-background-color: $splashscreen-background-color;

@@ -17,9 +17,9 @@
 
 import {Meteor} from 'meteor/meteor';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {BannedNicksCollection} from '/lib/banned_nicks/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 
 function componentToHex(c) {
 	var hex = c.toString(16);
@@ -45,7 +45,7 @@ export function transformForegroundColor(rgbObj) {
 }
 
 export function isNickAllowed(nick) {
-	if (!QuestionGroupCollection.findOne().blockIllegalNicks) {
+	if (!SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).nicks.blockIllegal) {
 		return true;
 	}
 	return typeof BannedNicksCollection.findOne({userNick: {$regex: new RegExp(".*" + nick.replace(/ /g, "").replace(/[0-9]/g,"") + ".*", "ig")}}) === "undefined";

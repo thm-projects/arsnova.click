@@ -51,7 +51,7 @@ Meteor.methods({
 			}
 		});
 	},
-	'HashtagsCollection.setDefaultTheme': function (hashtag, themeName = "theme-blackbeauty") {
+	'HashtagsCollection.setDefaultTheme': function (hashtag, themeName = "theme-arsnova-dot-click-contrast") {
 		new SimpleSchema({hashtag: hashtagSchema, theme: themeSchema}).validate({hashtag: hashtag, theme: themeName});
 
 		let queryParam = {};
@@ -187,7 +187,7 @@ Meteor.methods({
 			var hashtagDoc = data.hashtagDoc;
 
 			if (!hashtagDoc.theme) {
-				hashtagDoc.theme = "theme-blackbeauty";
+				hashtagDoc.theme = "theme-arsnova-dot-click-contrast";
 			}
 			if (!hashtagDoc.musicVolume) {
 				hashtagDoc.musicVolume = 80;

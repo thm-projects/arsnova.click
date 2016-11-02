@@ -27,11 +27,6 @@ export const themes = [
 		id: "theme-arsnova-dot-click-contrast"
 	},
 	{
-		name: "view.theme_switcher.themes.arsnova.name",
-		description: "view.theme_switcher.themes.arsnova.description",
-		id: "theme-arsnova"
-	},
-	{
 		name: "view.theme_switcher.themes.thm.name",
 		description: "view.theme_switcher.themes.thm.description",
 		id: "theme-thm"

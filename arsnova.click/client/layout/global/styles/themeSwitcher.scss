@@ -434,34 +434,6 @@
 		$splashscreen-sound-config-button-background-color: $success;
 	}
 
-	@if ($name == "theme-arsnova") {
-		$background-color: #dfe5e6;
-		$bg-nav-row: #3d9c19;
-		$bg-container: $background-color;
-		$bg-questionList-row: $bg-container;
-		$bg-footer: #dfe5e6;
-		$fg_a: #3d9c19;
-		$fg_quiz-name: white;
-		$fg_titel: black;
-		$fg_demo-quiz-description: $fg_titel;
-		$fg_lobby-waiting-for-players-notifier: $fg_titel;
-		$fg-question-title: black;
-		$fg-theme_description: black;
-		$default-text-color: black;
-		$fg-hashtag_management-hashtag_name: $default-text-color;
-		$border-hashtag_management-HR: $default-text-color;
-		$fg-text-light: black;
-		$fg_text-dark: black;
-		$fg-footer-info-bar: #394a59;
-		$fg-footer-info-bar-active: #459c2f;
-		$fg-footer-info-bar-active-hovered: #6aa05d;
-		$quiz-summary-row-color: $default-text-color;
-		$fg-quiz-summary-H4: $default-text-color;
-		$fg-quiz-summary-P: $default-text-color;
-		$fg-quiz-summary-UL: $default-text-color;
-		$fg-success: darken($success, 5);
-	}
-
 	@if ($name == "theme-hell") {
 		$background-color: #FC954B;
 		$bg-nav-row: #FC954B;
@@ -1299,7 +1271,6 @@
 
 @include theme(theme-thm);
 @include theme(theme-elegant);
-@include theme(theme-arsnova);
 @include theme(theme-blackbeauty);
 @include theme(theme-hell);
 @include theme(theme-bluetouch);

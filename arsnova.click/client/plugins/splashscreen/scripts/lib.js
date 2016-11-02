@@ -251,73 +251,20 @@ export const isMobileDevice = {
 	}
 };
 
-export function showVideo(videoImageContainer) {
-	var sourceURI = videoImageContainer.accessKey === "youtube" ? 'https://youtube.com/embed/' : 'https://player.vimeo.com/video/';
-	sourceURI += videoImageContainer.id + '?autoplay=1';
-
-	new Splashscreen({
-		autostart: true,
-		templateName: 'splashscreen',
-		closeOnButton: '#btn-hidePreviewModal',
-		instanceId: "video" + videoImageContainer.title,
-		onRendered: function (instance) {
-			var body = instance.templateSelector.find('.modal-body');
-			var objectHtml = '<div scrolling="no">' +
-								'<iframe src=' + sourceURI + ' frameborder="0" style="border: 0" scrolling="yes" allowfullscreen="true" width="' + videoImageContainer.width + '" height="' + videoImageContainer.height + '"></iframe>' +
-							'</div>';
-			body.append(objectHtml);
-		}
-	});
-}
-
 export function showFullscreenPicture(event) {
 	var pictureElement = event.target;
 	var src = pictureElement.src;
 	var title = pictureElement.title;
+
 	new Splashscreen({
 		autostart: true,
-		templateName: 'splashscreen',
-		closeOnButton: '#btn-hidePreviewModal',
-		instanceId: "resizeableImage_" + title,
+		templateName: 'questionPreviewSplashscreen',
+		closeOnButton: '#js-btn-hidePreviewModal',
+		instanceId: "resizeableImage",
 		onRendered: function (instance) {
-			var img = new Image();
-			var body = instance.templateSelector.find('.modal-body');
-			img.onload = function () {
-				body.append(img);
-			};
-
-			img.title = title;
-			img.src = src;
-
-			instance.templateSelector.find('.modal-dialog').css('width', 'auto');
-			instance.templateSelector.find('.modal-header').html(title);
-			var oldImgWidth = img.width;
-			var oldImgHeight = img.height;
-			var imageWidth = img.width + 60;
-			var windowWidth = $(window).width() - 80;
-			var imageHeight = img.height + 160;
-			var windowHeight = $(window).height() - 70;
-
-			if (imageWidth >  windowWidth) {
-				img.width = windowWidth - 30;
-				// scale the height
-				var widthProp = oldImgWidth / img.width;
-				img.height = oldImgHeight / widthProp;
-				imageHeight = img.height;
-			}
-			if (imageHeight > windowHeight) {
-				img.height = windowHeight - 160;
-				// scale the width
-				var heightProp = oldImgHeight / img.height;
-				img.width = oldImgWidth / heightProp;
-			}
-
-			var modalContentDiv = instance.templateSelector.find('.modal-content');
-			modalContentDiv.width(img.width + 60);
-			modalContentDiv.height(img.height + 170);
-			var leftMargin = ($(window).width() - (img.width + 60)) / 2;
-			modalContentDiv.css("margin-left", leftMargin);
-			img.style.textAlign = "center";
+			var body = instance.templateSelector.find('.modal-markdown-body');
+			var objectHtml =  '<img title="' + title + '" src="' + src + '" alt="' + title + '" style="width: 100%">';
+			body.append(objectHtml);
 		}
 	});
 }

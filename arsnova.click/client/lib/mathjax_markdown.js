@@ -206,9 +206,16 @@ export const mathjaxMarkdown = {
 			size[1] = isNaN(size[1]) ? 'initial;' : size[1] + 'px;';
 			alignment = size[2] ? size[2] : alignment;
 
-			size = size[1] && size[1] !== 'inital;' ?
-			'"max-width:' + size[0] + 'max-height:' + size[1] + '"' :
-			'"max-width:' + size[0] + '"';
+			var maxWitdhOfContainer = $('.modal-markdown-body').width() - 60;
+
+			if (size[0] === 'initial;' || maxWitdhOfContainer < size[0]) {
+				// width can't be larger than container width and initial equals auto alignment
+				size = '"width: 100%"';
+			} else {
+				size = size[1] && size[1] !== 'inital;' ?
+				'"max-width:' + size[0] + 'max-height:' + size[1] + '"' :
+				'"max-width:' + size[0] + '"';
+			}
 
 			return '<div style="text-align:' + alignment + '">' +
 				'<img class="resizeableImage" title="' + text + '" src="' + href + '" alt="' + text + '" style=' + size + '>' +
@@ -238,15 +245,17 @@ export const mathjaxMarkdown = {
 		};
 
 		var videoElementReplace = function (content, delimiters) {
-			return content.replace(delimiters.elementDel, function (element) {
+			return content.replace(delimiters.elementDel, function () {
 				var videoId = delimiters.accessKey === 'youtube' ?
 					href.match(delimiters.videoIdDel)[7] :
 					href.match(delimiters.videoIdDel)[2];
 
-				var title = element.match(delimiters.titleDel)[1];
-				return '<p class="videoImageParagraph">' +
-							'<span class="videoImageContainer" id="' + videoId + '" accesskey="' + delimiters.accessKey + '" title="' + title + '">' + text + '</span>' +
-					'</p>';
+				var sourceURI = delimiters.accessKey === "youtube" ? 'https://youtube.com/embed/' : 'https://player.vimeo.com/video/';
+				sourceURI += videoId;
+
+				return '<div scrolling="no">' +
+					'<iframe src=' + sourceURI + ' frameborder="0" style="border: 0" scrolling="yes" allowfullscreen="true" width="100%" height="500px"></iframe>' +
+					'</div>';
 			});
 		};
 

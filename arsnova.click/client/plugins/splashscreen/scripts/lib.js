@@ -260,7 +260,7 @@ export function showFullscreenPicture(event) {
 		autostart: true,
 		templateName: 'questionPreviewSplashscreen',
 		closeOnButton: '#js-btn-hidePreviewModal',
-		instanceId: "resizeableImage_" + title,
+		instanceId: "resizeableImage",
 		onRendered: function (instance) {
 			var body = instance.templateSelector.find('.modal-markdown-body');
 			var objectHtml =  '<img title="' + title + '" src="' + src + '" alt="' + title + '" style="width: 100%">';

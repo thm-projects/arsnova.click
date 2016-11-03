@@ -943,25 +943,6 @@
 		#waiting_for_players_notifier {
 			color: $fg-lobby-waiting-for-players-notifier;
 		}
-		@include logoKeyframes($input-background-color, "colorChangingArs");
-		@include logoKeyframes($input-background-color, "colorChangingNova" );
-		@include logoKeyframes($input-background-color, "colorChangingDot");
-		@include logoKeyframes($input-background-color, "colorChangingClick");
-		.color-changing-ars {
-			animation-name: colorChangingArs;
-		}
-
-		.color-changing-nova {
-			animation-name: colorChangingNova;
-		}
-
-		.color-changing-dot {
-			animation-name: colorChangingDot;
-		}
-
-		.color-changing-click {
-			animation-name: colorChangingClick;
-		}
 		@keyframes colorChangingOwnNick {
 			0% {
 				background-color: $bg-colorChangingOwnNick0;

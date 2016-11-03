@@ -175,30 +175,6 @@
 	$bg-js-my-hash-invalidQuestion-hovered: lighten($warning, 10);
 	$fg-js-my-hash-invalidQuestion: $warning-text-color;
 
-	$colorChangingArs0: white;
-	$colorChangingArs25: $input-background-color;
-	$colorChangingArs50: white;
-	$colorChangingArs75: $input-background-color;
-	$colorChangingArs100: white;
-
-	$colorChangingNova0: $input-background-color;
-	$colorChangingNova25: white;
-	$colorChangingNova50: $input-background-color;
-	$colorChangingNova75: white;
-	$colorChangingNova100: $input-background-color;
-
-	$colorChangingDot0: white;
-	$colorChangingDot25: $input-background-color;
-	$colorChangingDot50: white;
-	$colorChangingDot75: $input-background-color;
-	$colorChangingDot100: white;
-
-	$colorChangingClick0: $input-background-color;
-	$colorChangingClick25: white;
-	$colorChangingClick50: $input-background-color;
-	$colorChangingClick75: white;
-	$colorChangingClick100: $input-background-color;
-
 	$bg-colorChangingOwnNick0: $input-background-color;
 	$fg-colorChangingOwnNick0: white;
 	$bg-colorChangingOwnNick25: $warning;
@@ -937,75 +913,6 @@
 		.lockquote {
 			color: $fg-lockquote !important;
 		}
-
-		@keyframes colorChangingArs {
-			0% {
-				color: $colorChangingArs0;
-			}
-			25% {
-				color: $colorChangingArs25;
-			}
-			50% {
-				color: $colorChangingArs50;
-			}
-			75% {
-				color: $colorChangingArs75;
-			}
-			100% {
-				color: $colorChangingArs100;
-			}
-		}
-		@keyframes colorChangingNova {
-			0% {
-				color: $colorChangingNova0;
-			}
-			25% {
-				color: $colorChangingNova25;
-			}
-			50% {
-				color: $colorChangingNova50;
-			}
-			75% {
-				color: $colorChangingNova75;
-			}
-			100% {
-				color: $colorChangingNova100;
-			}
-		}
-		@keyframes colorChangingDot {
-			0% {
-				color: $colorChangingDot0;
-			}
-			25% {
-				color: $colorChangingDot25;
-			}
-			50% {
-				color: $colorChangingDot50;
-			}
-			75% {
-				color: $colorChangingDot75;
-			}
-			100% {
-				color: $colorChangingDot100;
-			}
-		}
-		@keyframes colorChangingClick {
-			0% {
-				color: $colorChangingClick0;
-			}
-			25% {
-				color: $colorChangingClick25;
-			}
-			50% {
-				color: $colorChangingClick50;
-			}
-			75% {
-				color: $colorChangingClick75;
-			}
-			100% {
-				color: $colorChangingClick100;
-			}
-		}
 		.button-import {
 			background: $bg-btn-file-input;
 		}
@@ -1035,6 +942,22 @@
 		}
 		#waiting_for_players_notifier {
 			color: $fg-lobby-waiting-for-players-notifier;
+		}
+		@include logoKeyframes($input-background-color);
+		.color-changing-ars {
+			animation-name: colorChangingArs;
+		}
+
+		.color-changing-nova {
+			animation-name: colorChangingNova;
+		}
+
+		.color-changing-dot {
+			animation-name: colorChangingDot;
+		}
+
+		.color-changing-click {
+			animation-name: colorChangingClick;
 		}
 		@keyframes colorChangingOwnNick {
 			0% {
@@ -1260,6 +1183,80 @@
 				  	color: $fg-free-text-header-color;
 				}
 			}
+		}
+	}
+}
+
+@mixin logoKeyframes($input-background-color) {
+	@keyframes colorChangingArs {
+		0% {
+			color: white;
+		}
+		25% {
+			color: $input-background-color;
+		}
+		50% {
+			color: white;
+		}
+		75% {
+			color: white;
+		}
+		100% {
+			color: white;
+		}
+	}
+
+	@keyframes colorChangingNova {
+		0% {
+			color: white;
+		}
+		25% {
+			color: white;
+		}
+		50% {
+			color: $input-background-color;
+		}
+		75% {
+			color: white;
+		}
+		100% {
+			color: white;
+		}
+	}
+
+	@keyframes colorChangingDot {
+		0% {
+			color: white;
+		}
+		25% {
+			color: white;
+		}
+		50% {
+			color: white;
+		}
+		75% {
+			color: $input-background-color;
+		}
+		100% {
+			color: white;
+		}
+	}
+
+	@keyframes colorChangingClick {
+		0% {
+			color: white;
+		}
+		25% {
+			color: white;
+		}
+		50% {
+			color: white;
+		}
+		75% {
+			color: white;
+		}
+		100% {
+			color: $input-background-color;
 		}
 	}
 }

@@ -480,12 +480,14 @@ Template.gamificationAnimation.helpers({
 		if (countdownValue <= 5) {
 			setQuestionDialog(null);
 		}
+		countdownAnimationWrapper.show();
 		switch (countdownValue) {
 			case 0:
 				countdownAnimationWrapper.css("background-color", "#b22222");
 				break;
 			case 1:
 				countdownAnimationWrapper.css("background-color", "#ff8c00");
+				countdownAnimationWrapper.delay(1000).fadeOut();
 				break;
 			case 2:
 				countdownAnimationWrapper.css("background-color", "#ffd700");
@@ -503,7 +505,6 @@ Template.gamificationAnimation.helpers({
 				countdownAnimationWrapper.hide();
 				return;
 		}
-		countdownAnimationWrapper.fadeIn(200).delay(600).fadeOut(200);
 
 		return "finger_" + countdownValue + ".gif";
 	}

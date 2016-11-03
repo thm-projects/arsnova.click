@@ -29,6 +29,30 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-xs-12 {{#if hasCASConfig}}col-sm-6{{/if}}">
+                    <div class="nickStyle" id="block_illegal_nicks_wrapper">
+                        <p>{{_ "view.nickname_categories.block_illegal_nicks"}}</p>
+                        <input type="checkbox"
+                               name='switch'
+                               id="block_illegal_nicks_switch"
+                               class="tabbable"
+                               title="{{_ "view.nickname_categories.block_illegal_nicks"}}"/>
+                    </div>
+                </div>
+                {{#if hasCASConfig}}
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="nickStyle" id="restrict_to_cas_wrapper">
+                            <p>{{_ "view.nickname_categories.restrict_to_cas"}}</p>
+                            <input type="checkbox"
+                                   name='switch'
+                                   id="restrict_to_cas_switch"
+                                   class="tabbable"
+                                   title="{{_ "view.nickname_categories.restrict_to_cas"}}"/>
+                        </div>
+                    </div>
+                {{/if}}
+            </div>
+            <div class="row">
                 <div class="col-xs-12 col-sm-6">
                     {{#if nickNames}}
                         <h3>{{_ "view.nickname_categories.available_nicknames"}}</h3>
@@ -39,7 +63,7 @@
                     {{/if}}
                     {{#each nickNames}}
                         <div class="nickStyle nickName {{#if isSelectedNick this.nick}}selectedNickName{{/if}} tabbable"
-                             id="nickName_{{this.nick}}">
+                             id="nickName_{{this._id}}">
                             <p>{{_ this.nick}}</p>
                         </div>
                     {{/each}}
@@ -50,24 +74,6 @@
                         <div class="nickStyle chosenNickName" id="no_nick_selected">
                             <p>{{_ "view.nickname_categories.no_nicks_selected"}}</p>
                         </div>
-                        <div class="nickStyle" id="block_illegal_nicks_wrapper">
-                            <p>{{_ "view.nickname_categories.block_illegal_nicks"}}</p>
-                            <input type="checkbox"
-                                   name='switch'
-                                   id="block_illegal_nicks_switch"
-                                   class="tabbable"
-                                   title="{{_ "view.nickname_categories.block_illegal_nicks"}}"/>
-                        </div>
-                        {{#if hasCASConfig}}
-                            <div class="nickStyle" id="restrict_to_cas_wrapper">
-                                <p>{{_ "view.nickname_categories.restrict_to_cas"}}</p>
-                                <input type="checkbox"
-                                       name='switch'
-                                       id="restrict_to_cas_switch"
-                                       class="tabbable"
-                                       title="{{_ "view.nickname_categories.restrict_to_cas"}}"/>
-                            </div>
-                        {{/if}}
                     {{else}}
                         <div class="nickStyle chosenNickName tabbable"
                              id="remove_all">
@@ -76,7 +82,7 @@
                     {{/unless}}
                     {{#each chosenNickNames}}
                         <div class="nickStyle chosenNickName tabbable"
-                             id="chosen_nickName_{{this.nick}}">
+                             id="chosen_nickName_{{this._id}}">
                             <p>{{_ this.nick}}</p>
                         </div>
                     {{/each}}

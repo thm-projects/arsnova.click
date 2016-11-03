@@ -248,6 +248,22 @@ select:-moz-focusring {
   font-weight: bold;
 }
 
+.color-changing-ars {
+  animation-name: colorChangingArs;
+}
+
+.color-changing-nova {
+  animation-name: colorChangingNova;
+}
+
+.color-changing-dot {
+  animation-name: colorChangingDot;
+}
+
+.color-changing-click {
+  animation-name: colorChangingClick;
+}
+
 .popover-title, .popover.bottom {
   font-family: $font;
   font-size: medium;

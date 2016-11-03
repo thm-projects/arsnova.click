@@ -943,73 +943,21 @@
 		#waiting_for_players_notifier {
 			color: $fg-lobby-waiting-for-players-notifier;
 		}
-		@keyframes colorChangingArs {
-			0% {
-				color: white;
-			}
-			25% {
-				color: $input-background-color !important;
-			}
-			50% {
-				color: white;
-			}
-			75% {
-				color: white;
-			}
-			100% {
-				color: white;
-			}
+		@include logoKeyframes($input-background-color);
+		.color-changing-ars {
+			animation-name: colorChangingArs;
 		}
-		@keyframes colorChangingNova {
-			0% {
-				color: white;
-			}
-			25% {
-				color: white;
-			}
-			50% {
-				color: $input-background-color;
-			}
-			75% {
-				color: white;
-			}
-			100% {
-				color: white;
-			}
+
+		.color-changing-nova {
+			animation-name: colorChangingNova;
 		}
-		@keyframes colorChangingDot {
-			0% {
-				color: white;
-			}
-			25% {
-				color: white;
-			}
-			50% {
-				color: white;
-			}
-			75% {
-				color: $input-background-color;
-			}
-			100% {
-				color: white;
-			}
+
+		.color-changing-dot {
+			animation-name: colorChangingDot;
 		}
-		@keyframes colorChangingClick {
-			0% {
-				color: white;
-			}
-			25% {
-				color: white;
-			}
-			50% {
-				color: white;
-			}
-			75% {
-				color: white;
-			}
-			100% {
-				color: $input-background-color;
-			}
+
+		.color-changing-click {
+			animation-name: colorChangingClick;
 		}
 		@keyframes colorChangingOwnNick {
 			0% {
@@ -1235,6 +1183,80 @@
 				  	color: $fg-free-text-header-color;
 				}
 			}
+		}
+	}
+}
+
+@mixin logoKeyframes($input-background-color) {
+	@keyframes colorChangingArs {
+		0% {
+			color: white;
+		}
+		25% {
+			color: $input-background-color;
+		}
+		50% {
+			color: white;
+		}
+		75% {
+			color: white;
+		}
+		100% {
+			color: white;
+		}
+	}
+
+	@keyframes colorChangingNova {
+		0% {
+			color: white;
+		}
+		25% {
+			color: white;
+		}
+		50% {
+			color: $input-background-color;
+		}
+		75% {
+			color: white;
+		}
+		100% {
+			color: white;
+		}
+	}
+
+	@keyframes colorChangingDot {
+		0% {
+			color: white;
+		}
+		25% {
+			color: white;
+		}
+		50% {
+			color: white;
+		}
+		75% {
+			color: $input-background-color;
+		}
+		100% {
+			color: white;
+		}
+	}
+
+	@keyframes colorChangingClick {
+		0% {
+			color: white;
+		}
+		25% {
+			color: white;
+		}
+		50% {
+			color: white;
+		}
+		75% {
+			color: white;
+		}
+		100% {
+			color: $input-background-color;
 		}
 	}
 }

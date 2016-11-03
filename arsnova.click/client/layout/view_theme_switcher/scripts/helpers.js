@@ -39,7 +39,6 @@ Template.themeSwitcher.helpers({
 	isBeamerFriendly: function (themeName) {
 		return themeName === "theme-dark" ||
 			themeName === "theme-blackbeauty" ||
-			themeName === "theme-arsnova" ||
 			themeName === "theme-thm" ||
 			themeName === "theme-default";
 	}

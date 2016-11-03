@@ -37,13 +37,13 @@
                                 <div class="col-xs-12">
                                     <div class="color-changing-own-nick firstLeaderBordItem">
                                         <span class="glyphicon glyphicon-education"></span>
-                                        <span>{{getPosition @index}}. {{value}} - {{parseTimeToSeconds sumResponseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
+                                        <span>{{getNormalizedIndex @index}}. {{value}} - {{parseTimeToSeconds sumResponseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
                                     </div>
                                 </div>
                             {{else}}
                                 <div class="col-md-6">
                                     <button class="button button-leader {{#if isOwnNick value}}color-changing-own-nick{{/if}}">
-                                        <span>{{getPosition @index}}. {{value}}
+                                        <span>{{getNormalizedIndex @index}}. {{value}}
                                             - {{parseTimeToSeconds sumResponseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
                                     </button>
                                 </div>
@@ -66,13 +66,13 @@
                                         <div class="col-xs-12">
                                             <div class="color-changing-own-nick firstLeaderBordItem">
                                                 <span class="glyphicon glyphicon-education"></span>
-                                                <span>{{getPosition @index}}. {{nick}} - {{parseTimeToSeconds responseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
+                                                <span>{{getNormalizedIndex @index}}. {{nick}} - {{parseTimeToSeconds responseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
                                             </div>
                                         </div>
                                     {{else}}
                                         <div class="col-md-6">
                                             <button class="button button-leader {{#if isOwnNick nick}}color-changing-own-nick{{/if}}">
-                                                <span>{{getPosition @index}}. {{nick}} - {{parseTimeToSeconds responseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
+                                                <span>{{getNormalizedIndex @index}}. {{nick}} - {{parseTimeToSeconds responseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
                                             </button>
                                         </div>
                                     {{/if}}
@@ -111,7 +111,7 @@
                     {{/if}}
                 </div>
             {{/if}}
-            {{#if isRestrictedToCAS}}
+            {{#if isOwner}}
                 <div class="col-xs-{{getButtonCols}}">
                     {{#with exportData}}
                         <a href="{{this.href}}" download="{{this.name}}">

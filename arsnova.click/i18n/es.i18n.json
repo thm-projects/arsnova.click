@@ -392,12 +392,8 @@
           "name": "THM (Beamer-adecuado)",
           "description": "Diseño Corporativo de la Universidad de Ciencias Aplicadas (THM)."
         },
-        "arsnova": {
-          "name": "arsnova.eu (Beamer-adecuado)",
-          "description": "¿Conoces arsnova.eu? ¡Entonces siéntete como en casa!"
-        },
         "black_beauty": {
-          "name" : "Estándar (Beamer-adecuado)",
+          "name" : "Black Beauty (Beamer-adecuado)",
           "description": "Oscuro, más oscuro y aún más oscuro."
         },
         "living_room": {

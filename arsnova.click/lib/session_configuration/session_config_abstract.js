@@ -51,7 +51,7 @@ export class AbstractSessionConfiguration {
 		this[hashtag] = options.hashtag;
 		this[music] = options.music;
 		this[nicks] = options.nicks;
-		this[theme] = options.theme || "theme-blackbeauty";
+		this[theme] = options.theme || "theme-arsnova-dot-click-contrast";
 		this[readingConfirmationEnabled] = options.readingConfirmationEnabled !== false;
 	}
 

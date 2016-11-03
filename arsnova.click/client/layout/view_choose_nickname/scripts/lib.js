@@ -17,9 +17,9 @@
 
 import {Meteor} from 'meteor/meteor';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {BannedNicksCollection} from '/lib/banned_nicks/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 
 function componentToHex(c) {
 	var hex = c.toString(16);
@@ -45,7 +45,7 @@ export function transformForegroundColor(rgbObj) {
 }
 
 export function isNickAllowed(nick) {
-	if (!QuestionGroupCollection.findOne().blockIllegalNicks) {
+	if (!SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).nicks.blockIllegal) {
 		return true;
 	}
 	return typeof BannedNicksCollection.findOne({userNick: {$regex: new RegExp(".*" + nick.replace(/ /g, "").replace(/[0-9]/g,"") + ".*", "ig")}}) === "undefined";
@@ -87,10 +87,10 @@ export function parseEnteredNickname(event) {
 
 	if (currentNickName.length > 2 && currentNickName.length < 26 && !member) {
 		if (isNickAllowed(currentNickName)) {
-			$("#forwardButton").removeAttr("disabled");
+			$("#forwardButton, #loginViaCas").removeAttr("disabled");
 			$inputField.popover("destroy");
 		} else {
-			$("#forwardButton").attr("disabled", "disabled");
+			$("#forwardButton, #loginViaCas").attr("disabled", "disabled");
 			$inputField.popover("destroy");
 			$inputField.popover({
 				title: TAPi18n.__("view.choose_nickname.nickname_blacklist_popup"),
@@ -100,7 +100,7 @@ export function parseEnteredNickname(event) {
 			$inputField.popover("show");
 		}
 	} else {
-		$("#forwardButton").attr("disabled", "disabled");
+		$("#forwardButton, #loginViaCas").attr("disabled", "disabled");
 		if (currentNickName.length === 0 || !member) {
 			$inputField.popover("destroy");
 		}

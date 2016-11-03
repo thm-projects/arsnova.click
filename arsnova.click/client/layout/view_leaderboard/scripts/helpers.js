@@ -20,18 +20,14 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {MemberListCollection} from '/lib/member_list/collection.js';
-import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {getLeaderBoardItems, getAllNicksWhichAreAlwaysRight} from './lib.js';
 
 Template.leaderBoard.helpers({
 	getButtonCols: ()=> {
-		const isCasQuiz = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).nicks.restrictToCASLogin;
 		const hasTooMuchButtons = Session.get("responsesCountOverride") || (Session.get("allMembersCount") - Session.get("maxResponseButtons") > 0);
-		return (!isCasQuiz && !hasTooMuchButtons) ? 12 : (isCasQuiz && !hasTooMuchButtons) || (!isCasQuiz && hasTooMuchButtons) ? 6 : isCasQuiz && hasTooMuchButtons ? 4 : 12;
-	},
-	hashtag: ()=> {
-		return Router.current().params.quizName;
+		const index = Router.current().params.id === "all" ? 0 : Router.current().params.id;
+		return Session.get("nicks")[index] <= 0 ? 12 : hasTooMuchButtons ? 4 : 6;
 	},
 	getNormalizedIndex: (index)=> {
 		return index + 1;
@@ -44,9 +40,6 @@ Template.leaderBoard.helpers({
 	},
 	getTitleText: ()=> {
 		return Router.current().params.id === "all" ? TAPi18n.__("view.leaderboard.title.all_questions") : TAPi18n.__("view.leaderboard.title.single_question", {questionId: (parseInt(Router.current().params.id) + 1)});
-	},
-	getPosition: function (index) {
-		return (index + 1);
 	},
 	parseTimeToSeconds: function (milliseconds) {
 		let seconds = (milliseconds / 1000).toFixed(2);
@@ -65,13 +58,13 @@ Template.leaderBoard.helpers({
 		return Router.current().params.id === "all";
 	},
 	leaderBoardSums: function () {
-		return getAllNicksWhichAreAlwaysRight();
+		return Session.get("nicks_alwaysCorrect");
 	},
 	noLeaderBoardItems: (index)=> {
 		if (Router.current().params.id === "all") {
-			return getAllNicksWhichAreAlwaysRight().length <= 0;
+			return Session.get("nicks_alwaysCorrect").length <= 0;
 		}
-		var items = getLeaderBoardItems();
+		var items = Session.get("nicks");
 		if (typeof index !== "undefined") {
 			if (items[index].value.length > 0) {
 				return false;
@@ -86,19 +79,19 @@ Template.leaderBoard.helpers({
 		return true;
 	},
 	leaderBoardItems: ()=> {
-		return getLeaderBoardItems();
+		return Session.get("nicks");
 	},
 	isFirstItem: function (index) {
 		return index === 0;
 	},
-	isRestrictedToCAS: function () {
-		return localData.containsHashtag(Router.current().params.quizName) && SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).nicks.restrictToCASLogin;
+	isOwner: function () {
+		return localData.containsHashtag(Router.current().params.quizName);
 	},
 	exportData: function () {
 		const hashtag = Router.current().params.quizName;
 		const time = new Date();
 		const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
-		const memberlistResult = MemberListCollection.find({hashtag: hashtag}, {fields: {userRef: 1, nick: 1}}).fetch();
+		const memberlistResult = MemberListCollection.find({hashtag: hashtag}, {fields: {userRef: 1, nick: 1}, sort: {nick: 1}}).fetch();
 		let responseResult;
 		responseResult = Router.current().params.id === "all" ? getAllNicksWhichAreAlwaysRight() : getLeaderBoardItems();
 		let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";
@@ -120,11 +113,15 @@ Template.leaderBoard.helpers({
 				}
 			});
 			const user = Meteor.users.findOne({_id: item.userRef});
-			if (responseTime !== 0 && typeof user !== "undefined") {
+			if (responseTime !== 0) {
 				responseTime = responseTime / responseCount;
-				item.id = user.profile.id;
-				item.mail = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
-				csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
+				if (typeof user !== "undefined") {
+					item.id      = user.profile.id;
+					item.mail    = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
+					csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
+				} else {
+					csvString += item.nick + "," + responseTime + ",,\n";
+				}
 			}
 		});
 

@@ -103,7 +103,7 @@ Router.onBeforeAction(function () {
 });
 
 Router.onBeforeAction(function () {
-	let theme = "theme-blackbeauty";
+	let theme = "theme-arsnova-dot-click-contrast";
 	if (!localStorage.getItem("theme")) {
 		localStorage.setItem("theme", theme);
 	} else {

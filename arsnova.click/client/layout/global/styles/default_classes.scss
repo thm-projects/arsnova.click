@@ -243,25 +243,9 @@ select:-moz-focusring {
 .color-changing-ars, .color-changing-nova, .color-changing-dot, .color-changing-click {
   width: 100px;
   height: 100px;
-  animation-duration: 7s;
+  animation-duration: 14s;
   animation-iteration-count: infinite;
   font-weight: bold;
-}
-
-.color-changing-ars {
-  animation-name: colorChangingArs;
-}
-
-.color-changing-nova {
-  animation-name: colorChangingNova;
-}
-
-.color-changing-dot {
-  animation-name: colorChangingDot;
-}
-
-.color-changing-click {
-  animation-name: colorChangingClick;
 }
 
 .popover-title, .popover.bottom {

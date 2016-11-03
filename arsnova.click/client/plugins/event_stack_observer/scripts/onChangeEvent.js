@@ -143,8 +143,8 @@ function addLiveresultsChangeEvents() {
 									answerOption.answerText = "";
 								}
 
-								answerContent += String.fromCharCode((answerOption.answerOptionNumber + 65)) + "<br/>";
-								answerContent += mathjaxMarkdown.getContent(answerOption.answerText) + "<br/>";
+								answerContent += "<strong>" + String.fromCharCode((answerOption.answerOptionNumber + 65)) + "</strong>" + "<br/>";
+								answerContent += mathjaxMarkdown.getContent(answerOption.answerText);
 							});
 						}
 

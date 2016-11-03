@@ -17,7 +17,9 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {getLeaderBoardItems, getAllNicksWhichAreAlwaysRight} from './lib.js';
 
 Template.leaderBoard.onCreated(function () {
-	Session.set("show_all_leaderboard", false);
+	Session.set("nicks", getLeaderBoardItems());
+	Session.set("nicks_alwaysCorrect", getAllNicksWhichAreAlwaysRight());
 });

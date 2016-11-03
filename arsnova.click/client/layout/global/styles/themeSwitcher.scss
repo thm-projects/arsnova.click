@@ -175,30 +175,6 @@
 	$bg-js-my-hash-invalidQuestion-hovered: lighten($warning, 10);
 	$fg-js-my-hash-invalidQuestion: $warning-text-color;
 
-	$colorChangingArs0: white;
-	$colorChangingArs25: $warning;
-	$colorChangingArs50: $info;
-	$colorChangingArs75: $input-background-color;
-	$colorChangingArs100: white;
-
-	$colorChangingNova0: $input-background-color;
-	$colorChangingNova25: white;
-	$colorChangingNova50: $warning;
-	$colorChangingNova75: $info;
-	$colorChangingNova100: $input-background-color;
-
-	$colorChangingDot0: $info;
-	$colorChangingDot25: $input-background-color;
-	$colorChangingDot50: white;
-	$colorChangingDot75: $warning;
-	$colorChangingDot100: $info;
-
-	$colorChangingClick0: $warning;
-	$colorChangingClick25: $info;
-	$colorChangingClick50: $input-background-color;
-	$colorChangingClick75: white;
-	$colorChangingClick100: $warning;
-
 	$bg-colorChangingOwnNick0: $input-background-color;
 	$fg-colorChangingOwnNick0: white;
 	$bg-colorChangingOwnNick25: $warning;
@@ -274,11 +250,6 @@
 		$bg-js-my-hash-invalidQuestion: $warning;
 		$bg-js-my-hash-invalidQuestion-hovered: lighten($warning, 10);
 		$bg-colorChangingOwnNick25: $warning;
-		$colorChangingClick100: $warning;
-		$colorChangingClick0: $warning;
-		$colorChangingDot75: $warning;
-		$colorChangingNova50: $warning;
-		$colorChangingArs25: $warning;
 
 		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
 		$splashscreen-question-preview-background-color: $splashscreen-background-color;
@@ -432,34 +403,6 @@
 		$splashscreen-sound-config-background-color: $splashscreen-background-color;
 		$splashscreen-delete-background-color: $splashscreen-background-color;
 		$splashscreen-sound-config-button-background-color: $success;
-	}
-
-	@if ($name == "theme-arsnova") {
-		$background-color: #dfe5e6;
-		$bg-nav-row: #3d9c19;
-		$bg-container: $background-color;
-		$bg-questionList-row: $bg-container;
-		$bg-footer: #dfe5e6;
-		$fg_a: #3d9c19;
-		$fg_quiz-name: white;
-		$fg_titel: black;
-		$fg_demo-quiz-description: $fg_titel;
-		$fg_lobby-waiting-for-players-notifier: $fg_titel;
-		$fg-question-title: black;
-		$fg-theme_description: black;
-		$default-text-color: black;
-		$fg-hashtag_management-hashtag_name: $default-text-color;
-		$border-hashtag_management-HR: $default-text-color;
-		$fg-text-light: black;
-		$fg_text-dark: black;
-		$fg-footer-info-bar: #394a59;
-		$fg-footer-info-bar-active: #459c2f;
-		$fg-footer-info-bar-active-hovered: #6aa05d;
-		$quiz-summary-row-color: $default-text-color;
-		$fg-quiz-summary-H4: $default-text-color;
-		$fg-quiz-summary-P: $default-text-color;
-		$fg-quiz-summary-UL: $default-text-color;
-		$fg-success: darken($success, 5);
 	}
 
 	@if ($name == "theme-hell") {
@@ -970,75 +913,6 @@
 		.lockquote {
 			color: $fg-lockquote !important;
 		}
-
-		@keyframes colorChangingArs {
-			0% {
-				color: $colorChangingArs0;
-			}
-			25% {
-				color: $colorChangingArs25;
-			}
-			50% {
-				color: $colorChangingArs50;
-			}
-			75% {
-				color: $colorChangingArs75;
-			}
-			100% {
-				color: $colorChangingArs100;
-			}
-		}
-		@keyframes colorChangingNova {
-			0% {
-				color: $colorChangingNova0;
-			}
-			25% {
-				color: $colorChangingNova25;
-			}
-			50% {
-				color: $colorChangingNova50;
-			}
-			75% {
-				color: $colorChangingNova75;
-			}
-			100% {
-				color: $colorChangingNova100;
-			}
-		}
-		@keyframes colorChangingDot {
-			0% {
-				color: $colorChangingDot0;
-			}
-			25% {
-				color: $colorChangingDot25;
-			}
-			50% {
-				color: $colorChangingDot50;
-			}
-			75% {
-				color: $colorChangingDot75;
-			}
-			100% {
-				color: $colorChangingDot100;
-			}
-		}
-		@keyframes colorChangingClick {
-			0% {
-				color: $colorChangingClick0;
-			}
-			25% {
-				color: $colorChangingClick25;
-			}
-			50% {
-				color: $colorChangingClick50;
-			}
-			75% {
-				color: $colorChangingClick75;
-			}
-			100% {
-				color: $colorChangingClick100;
-			}
-		}
 		.button-import {
 			background: $bg-btn-file-input;
 		}
@@ -1068,6 +942,25 @@
 		}
 		#waiting_for_players_notifier {
 			color: $fg-lobby-waiting-for-players-notifier;
+		}
+		@include logoKeyframes($input-background-color, "colorChangingArs");
+		@include logoKeyframes($input-background-color, "colorChangingNova" );
+		@include logoKeyframes($input-background-color, "colorChangingDot");
+		@include logoKeyframes($input-background-color, "colorChangingClick");
+		.color-changing-ars {
+			animation-name: colorChangingArs;
+		}
+
+		.color-changing-nova {
+			animation-name: colorChangingNova;
+		}
+
+		.color-changing-dot {
+			animation-name: colorChangingDot;
+		}
+
+		.color-changing-click {
+			animation-name: colorChangingClick;
 		}
 		@keyframes colorChangingOwnNick {
 			0% {
@@ -1297,9 +1190,56 @@
 	}
 }
 
+@mixin logoKeyframes($logoColor, $name) {
+	$color0: white;
+	$color15: white;
+	$color30: white;
+	$color45: white;
+	$color60: white;
+	$color75: white;
+	$color90: white;
+	$color100: white;
+
+	@if $name == "colorChangingArs" {
+	$color30: $logoColor;
+	} @else if $name == "colorChangingNova" {
+		$color45: $logoColor;
+	} @else if $name == "colorChangingDot" {
+		$color60: $logoColor;
+	} @else if $name == "colorChangingClick" {
+		$color75: $logoColor;
+	}
+
+	@keyframes #{$name} {
+		0% {
+			color: $color0;
+		}
+		15% {
+			color: $color15;
+		}
+		30% {
+			color: $color30;
+		}
+		45% {
+			color: $color45;
+		}
+		60% {
+			color: $color60;
+		}
+		75% {
+			color: $color75;
+		}
+		90% {
+			color: $color90;
+		}
+		100% {
+			color: $color100;
+		}
+	}
+}
+
 @include theme(theme-thm);
 @include theme(theme-elegant);
-@include theme(theme-arsnova);
 @include theme(theme-blackbeauty);
 @include theme(theme-hell);
 @include theme(theme-bluetouch);

@@ -1171,54 +1171,6 @@
 	}
 }
 
-@mixin logoKeyframes($logoColor, $name) {
-	$color0: white;
-	$color15: white;
-	$color30: white;
-	$color45: white;
-	$color60: white;
-	$color75: white;
-	$color90: white;
-	$color100: white;
-
-	@if $name == "colorChangingArs" {
-	$color30: $logoColor;
-	} @else if $name == "colorChangingNova" {
-		$color45: $logoColor;
-	} @else if $name == "colorChangingDot" {
-		$color60: $logoColor;
-	} @else if $name == "colorChangingClick" {
-		$color75: $logoColor;
-	}
-
-	@keyframes #{$name} {
-		0% {
-			color: $color0;
-		}
-		15% {
-			color: $color15;
-		}
-		30% {
-			color: $color30;
-		}
-		45% {
-			color: $color45;
-		}
-		60% {
-			color: $color60;
-		}
-		75% {
-			color: $color75;
-		}
-		90% {
-			color: $color90;
-		}
-		100% {
-			color: $color100;
-		}
-	}
-}
-
 @include theme(theme-thm);
 @include theme(theme-elegant);
 @include theme(theme-blackbeauty);

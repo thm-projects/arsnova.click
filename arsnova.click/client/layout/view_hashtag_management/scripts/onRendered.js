@@ -41,6 +41,155 @@ Template.hashtagView.onRendered(function () {
 	if ($(window).width() >= 992 && localData.getAllHashtags().length === 0) {
 		$('#hashtag-input-field').focus();
 	}
+
+	// set keyframes because they can't work dynamically (with sass) if they aren't standard input-background-color (yellow)
+	var currentTheme = localStorage.getItem("theme");
+	if (currentTheme == "theme-blackbeauty" ||
+		currentTheme == "theme-thm" ||
+		currentTheme == "theme-bluetouch" ||
+		currentTheme == "theme-green" ||
+		currentTheme == "theme-Psychology-Correct-Colours"){
+		// fallback
+		var themeLogoHighlightColor = '#ffd700';
+
+		switch (currentTheme) {
+			case "theme-blackbeauty":
+				themeLogoHighlightColor = '#FF8C00';
+				break;
+			case "theme-thm":
+				themeLogoHighlightColor = '#4a5c66';
+				break;
+			case "theme-bluetouch":
+				themeLogoHighlightColor = '#8dbfb9';
+				break;
+			case "theme-green":
+				themeLogoHighlightColor = '#ff9009';
+				break;
+			case "theme-Psychology-Correct-Colours":
+				themeLogoHighlightColor = '#f6f4f4';
+				break;
+		}
+
+		$.keyframe.define([{
+			name: 'colorChangingArs',
+			'0%': {
+				'color': 'white'
+			},
+			'0%': {
+				'color': 'white'
+			},
+			'15%': {
+				'color': 'white'
+			},
+			'30%': {
+				'color': themeLogoHighlightColor
+			},
+			'45%': {
+				'color': 'white'
+			},
+			'60%': {
+				'color': 'white'
+			},
+			'75%': {
+				'color': 'white'
+			},
+			'90%': {
+				'color': 'white'
+			},
+			'100%': {
+				'color': 'white'
+			}},
+			{
+			name: 'colorChangingNova',
+			'0%': {
+				'color': 'white'
+			},
+			'0%': {
+				'color': 'white'
+			},
+			'15%': {
+				'color': 'white'
+			},
+			'30%': {
+				'color': 'white'
+			},
+			'45%': {
+				'color': themeLogoHighlightColor
+			},
+			'60%': {
+				'color': 'white'
+			},
+			'75%': {
+				'color': 'white'
+			},
+			'90%': {
+				'color': 'white'
+			},
+			'100%': {
+				'color': 'white'
+			}},{
+			name: 'colorChangingDot',
+			'0%': {
+				'color': 'white'
+			},
+			'0%': {
+				'color': 'white'
+			},
+			'15%': {
+				'color': 'white'
+			},
+			'30%': {
+				'color': 'white'
+			},
+			'45%': {
+				'color': 'white'
+			},
+			'60%': {
+				'color': themeLogoHighlightColor
+			},
+			'75%': {
+				'color': 'white'
+			},
+			'90%': {
+				'color': 'white'
+			},
+			'100%': {
+				'color': 'white'
+			}},{
+			name: 'colorChangingClick',
+			'0%': {
+				'color': 'white'
+			},
+			'0%': {
+				'color': 'white'
+			},
+			'15%': {
+				'color': 'white'
+			},
+			'30%': {
+				'color': 'white'
+			},
+			'45%': {
+				'color': 'white'
+			},
+			'60%': {
+				'color': 'white'
+			},
+			'75%': {
+				'color': themeLogoHighlightColor
+			},
+			'90%': {
+				'color': 'white'
+			},
+			'100%': {
+				'color': 'white'
+			}}
+		]);
+
+		/*$('.color-changing-ars').remove("run-animation");
+		$('.color-changing-ars').add("run-animation");*/
+
+	}
 });
 
 Template.hashtagManagement.onRendered(function () {

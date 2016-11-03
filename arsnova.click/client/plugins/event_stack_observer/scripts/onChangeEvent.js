@@ -183,8 +183,7 @@ function addOnPollingChangeEvents() {
 			return user.userNick;
 		}).length;
 		let memberAmount = MemberListCollection.find().fetch().length;
-		if (memberWithGivenResponsesAmount === memberAmount &&
-			localData.containsHashtag(Router.current().params.quizName)) {
+		if (memberWithGivenResponsesAmount === memberAmount) {
 			liveResultsLib.countdownFinish();
 		}
 	});

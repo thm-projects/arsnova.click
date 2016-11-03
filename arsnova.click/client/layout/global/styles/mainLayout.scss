@@ -94,6 +94,17 @@ p, ul.list-unstyled {
 	margin: 10px 0;
 }
 
+.logo-header-dot {
+  cursor: default;
+  font-size: 1.8em; /* Fallback for old devices */
+  font-size: 7.5vw;
+  margin: 10px 0;
+}
+
+.logo-header-margin-for-dot {
+	margin-left: -5px
+}
+
 .row-landingpage-buttons {
 	margin-top: 10px;
 	margin-bottom: 20px;

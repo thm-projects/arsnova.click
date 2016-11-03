@@ -943,7 +943,10 @@
 		#waiting_for_players_notifier {
 			color: $fg-lobby-waiting-for-players-notifier;
 		}
-		@include logoKeyframes($input-background-color);
+		@include logoKeyframes($input-background-color, "colorChangingArs");
+		@include logoKeyframes($input-background-color, "colorChangingNova" );
+		@include logoKeyframes($input-background-color, "colorChangingDot");
+		@include logoKeyframes($input-background-color, "colorChangingClick");
 		.color-changing-ars {
 			animation-name: colorChangingArs;
 		}
@@ -1187,76 +1190,50 @@
 	}
 }
 
-@mixin logoKeyframes($input-background-color) {
-	@keyframes colorChangingArs {
-		0% {
-			color: white;
-		}
-		25% {
-			color: $input-background-color;
-		}
-		50% {
-			color: white;
-		}
-		75% {
-			color: white;
-		}
-		100% {
-			color: white;
-		}
+@mixin logoKeyframes($logoColor, $name) {
+	$color0: white;
+	$color15: white;
+	$color30: white;
+	$color45: white;
+	$color60: white;
+	$color75: white;
+	$color90: white;
+	$color100: white;
+
+	@if $name == "colorChangingArs" {
+	$color30: $logoColor;
+	} @else if $name == "colorChangingNova" {
+		$color45: $logoColor;
+	} @else if $name == "colorChangingDot" {
+		$color60: $logoColor;
+	} @else if $name == "colorChangingClick" {
+		$color75: $logoColor;
 	}
 
-	@keyframes colorChangingNova {
+	@keyframes #{$name} {
 		0% {
-			color: white;
+			color: $color0;
 		}
-		25% {
-			color: white;
+		15% {
+			color: $color15;
 		}
-		50% {
-			color: $input-background-color;
+		30% {
+			color: $color30;
+		}
+		45% {
+			color: $color45;
+		}
+		60% {
+			color: $color60;
 		}
 		75% {
-			color: white;
+			color: $color75;
+		}
+		90% {
+			color: $color90;
 		}
 		100% {
-			color: white;
-		}
-	}
-
-	@keyframes colorChangingDot {
-		0% {
-			color: white;
-		}
-		25% {
-			color: white;
-		}
-		50% {
-			color: white;
-		}
-		75% {
-			color: $input-background-color;
-		}
-		100% {
-			color: white;
-		}
-	}
-
-	@keyframes colorChangingClick {
-		0% {
-			color: white;
-		}
-		25% {
-			color: white;
-		}
-		50% {
-			color: white;
-		}
-		75% {
-			color: white;
-		}
-		100% {
-			color: $input-background-color;
+			color: $color100;
 		}
 	}
 }

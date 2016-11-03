@@ -42,7 +42,7 @@ Template.hashtagView.onRendered(function () {
 		$('#hashtag-input-field').focus();
 	}
 
-	// set keyframes because they can't work dynamically (with sass) if they aren't standard input-background-color (yellow)
+	// set keyframes because they can't work dynamically (with sass)
 	var currentTheme = localStorage.getItem("theme");
 
 	var themeLogoHighlightColor = '#ffd700';

@@ -122,6 +122,13 @@ Template.liveResults.events({
 	},
 	'click #backButton': (event)=> {
 		event.stopPropagation();
+		const returnToLobby = function () {
+			$('.sound-button').show();
+			Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);
+			Meteor.call("MemberListCollection.clearReadConfirmed", Router.current().params.quizName, function () {
+				Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
+			});
+		};
 		if (ResponsesCollection.findOne()) {
 			new Splashscreen({
 				autostart: true,
@@ -129,14 +136,12 @@ Template.liveResults.events({
 				closeOnButton: '#closeDialogButton, #returnToLobby',
 				onRendered: function (template) {
 					template.templateSelector.find("#returnToLobby").on("click", function () {
-						$('.sound-button').show();
-						Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);
-						Meteor.call("MemberListCollection.clearReadConfirmed", Router.current().params.quizName, function () {
-							Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
-						});
+						returnToLobby();
 					});
 				}
 			});
+		} else {
+			returnToLobby();
 		}
 	},
 	'click #startNextQuestion': (event)=> {

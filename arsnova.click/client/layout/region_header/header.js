@@ -19,11 +19,11 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
+import {TAPi18n} from 'meteor/tap:i18n';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {buzzsound1} from '/client/plugins/sound/scripts/lib.js';
-import {TAPi18n} from 'meteor/tap:i18n';
-import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib";
+import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.header.helpers({
@@ -68,7 +68,13 @@ Template.header.helpers({
 					case "memberlist":
 						return Router.current().params.quizName;
 					case "results":
-						return TAPi18n.__("view.liveResults.title");
+						let returnResult = TAPi18n.__("view.liveResults.title");
+						if (Session.get("countdownInitialized")) {
+							returnResult = TAPi18n.__("view.liveResults.title_running_countdown");
+						} else if (Session.get("showingReadingConfirmation")) {
+							returnResult = TAPi18n.__("view.liveResults.title_reading_confirmation");
+						}
+						return returnResult;
 					case "onpolling":
 						return TAPi18n.__("view.voting.title");
 					case "leaderBoard":

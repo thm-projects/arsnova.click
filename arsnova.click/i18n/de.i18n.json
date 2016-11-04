@@ -267,6 +267,8 @@
     },
     "liveResults": {
       "title": "Ergebnisse",
+      "title_reading_confirmation": "Frage gelesen...",
+      "title_running_countdown": "Abstimmung läuft...",
       "question": "Frage",
       "ranking": "Rangliste",
       "reading_confirmation": "Lesebestätigung",

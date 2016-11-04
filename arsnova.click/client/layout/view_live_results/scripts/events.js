@@ -23,6 +23,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {ResponsesCollection} from '/lib/responses/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {ErrorSplashscreen, Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
@@ -121,11 +122,22 @@ Template.liveResults.events({
 	},
 	'click #backButton': (event)=> {
 		event.stopPropagation();
-		$('.sound-button').show();
-		Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);
-		Meteor.call("MemberListCollection.clearReadConfirmed", Router.current().params.quizName, function () {
-			Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
-		});
+		if (ResponsesCollection.findOne()) {
+			new Splashscreen({
+				autostart: true,
+				templateName: 'returnToLobbySplashscreen',
+				closeOnButton: '#closeDialogButton, #returnToLobby',
+				onRendered: function (template) {
+					template.templateSelector.find("#returnToLobby").on("click", function () {
+						$('.sound-button').show();
+						Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);
+						Meteor.call("MemberListCollection.clearReadConfirmed", Router.current().params.quizName, function () {
+							Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
+						});
+					});
+				}
+			});
+		}
 	},
 	'click #startNextQuestion': (event)=> {
 		event.stopPropagation();

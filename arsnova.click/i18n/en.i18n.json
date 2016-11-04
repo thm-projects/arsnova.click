@@ -486,6 +486,11 @@
         "text": "All attendees will be removed and the leaderboard will be deleted.",
         "continue": "Continue?"
       },
+      "return_to_lobby": {
+        "title": "Warning",
+        "text": "If you proceed to the quiz lobby all played quiz rounds will be reset.",
+        "continue": "Continue?"
+      },
       "error": {
         "title": "Notification",
         "set_text_error": "The text of the error splashscreen can only be set after it has been rendered!",

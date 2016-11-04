@@ -486,6 +486,11 @@
         "text": "Todos los asistentes serán eliminados y se eliminarán la tabla de clasificación.",
         "continue": "¿Continuar?"
       },
+      "return_to_lobby": {
+        "title": "Advertencia",
+        "text": "Si continúa con el lobby del cuestionario, todas las rondas de preguntas contestadas se restablecerán.",
+        "continue": "¿Continuar?"
+      },
       "error": {
         "title": "Pista",
         "set_text_error": "¡El texto de la página inicial sólo pueder ser colocado después de haber sido renderizado!",

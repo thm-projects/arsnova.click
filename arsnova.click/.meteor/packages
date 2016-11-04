@@ -32,7 +32,6 @@ fastclick
 matb33:collection-hooks
 meteorhacks:subs-manager
 observe-sequence
-dschulz:jquery-qrcode
 jt6562:bootstrap-3-switch
 arsnova.click:nouislider
 trayhem:accounts-cas
@@ -42,3 +41,4 @@ twbs:bootstrap
 accounts-base
 routepolicy
 webapp
+arsnova.click:jquery-qr-code

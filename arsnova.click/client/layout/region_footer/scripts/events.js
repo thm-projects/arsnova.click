@@ -19,7 +19,6 @@ import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {qrCode} from "meteor/arsnova.click:jquery-qr-code";
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {DefaultQuestionGroup} from '/lib/questions/questiongroup_default.js';

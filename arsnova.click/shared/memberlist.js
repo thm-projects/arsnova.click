@@ -22,7 +22,7 @@ import {hashtagSchema, privateKeySchema} from '/lib/hashtags/collection.js';
 import {MemberListCollection, userNickSchema, backgroundColorSchema, foregroundColorSchema, userNickIdSchema, userRefSchema} from '/lib/member_list/collection.js';
 
 Meteor.methods({
-	'MemberListCollection.addLearner': function ({hashtag, nick, privateKey, backgroundColor, foregroundColor, userRef}) {
+	'MemberListCollection.addLearner': function ({hashtag, nick, privateKey, backgroundColor, foregroundColor, userRef, isDummyUser}) {
 		new SimpleSchema({
 			hashtag: hashtagSchema,
 			nick: userNickSchema,
@@ -57,7 +57,8 @@ Meteor.methods({
 			backgroundColor: backgroundColor,
 			foregroundColor: foregroundColor,
 			readConfirmed: [],
-			insertDate: new Date().getTime()
+			insertDate: new Date().getTime(),
+			isDummyUser: isDummyUser
 		});
 		EventManagerCollection.update(query, {
 			$push: {
@@ -170,7 +171,7 @@ Meteor.methods({
 	"MemberListCollection.removeDebugUsersFromSession": function (hashtag) {
 		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
 
-		MemberListCollection.remove({hashtag: hashtag, nick: {$regex: "debug_user_*", $options: "i"}});
+		MemberListCollection.remove({hashtag: hashtag, isDummyUser: true});
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$push: {
 				eventStack: {

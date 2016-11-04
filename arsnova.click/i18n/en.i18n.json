@@ -255,6 +255,8 @@
     },
     "liveResults": {
       "title": "Results",
+      "title_reading_confirmation": "Question read...",
+      "title_running_countdown": "Voting...",
       "question": "Question",
       "ranking": "Ranking",
       "reading_confirmation": "Reading confirmation",

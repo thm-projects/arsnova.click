@@ -16,6 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {Blaze} from 'meteor/blaze';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
@@ -208,6 +209,7 @@ export class ErrorSplashscreen extends Splashscreen {
 }
 
 export function showReadingConfirmationSplashscreen(index) {
+	Session.set("showingReadingConfirmation", true);
 	var questionDoc = QuestionGroupCollection.findOne();
 	new Splashscreen({
 		autostart: true,
@@ -238,6 +240,7 @@ export function showReadingConfirmationSplashscreen(index) {
 								errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
 							});
 						}
+						Session.set("showingReadingConfirmation", undefined);
 					});
 				});
 			}

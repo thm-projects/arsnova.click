@@ -143,6 +143,7 @@ export function startCountdown(index, retry = 0) {
 		Session.set("isQueringServerForTimeStamp", false);
 		return;
 	}
+	Session.set("showingReadingConfirmation", undefined);
 	Session.set("isQueringServerForTimeStamp", true);
 	const questionDoc = QuestionGroupCollection.findOne().questionList[index];
 	const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});

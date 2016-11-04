@@ -498,6 +498,11 @@
         "text": "Alle Teilnehmenden werden abgemeldet und die Rangliste wird gelöscht.",
         "continue": "Fortfahren?"
       },
+      "return_to_lobby": {
+        "title": "Warnung",
+        "text": "Wenn du zur Quiz Lobby zurückkehrst, werden alle bereits durchgeführten Quizrunden zurückgesetzt.",
+        "continue": "Fortfahren?"
+      },
       "error": {
         "title": "Hinweis",
         "set_text_error": "Der Text des Splashscreens kann nur gesetzt werden, nachdem er gerendered wurde!",

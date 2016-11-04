@@ -486,6 +486,11 @@
         "text": "Tous les participants seront supprimés et le classement seront supprimés.",
         "continue": "Continuer?"
       },
+      "return_to_lobby": {
+        "title": "Attention",
+        "text": "Si vous passez au lobby du quiz, tous les rounds de quiz seront réinitialisés.",
+        "continue": "Continuer?"
+      },
       "error": {
         "title": "Message d'erreur",
         "set_text_error": "Le texte du splashscreen ne peut que être mit, après avoir été soumis au rendu!",

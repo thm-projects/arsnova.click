@@ -19,12 +19,14 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {MemberListCollection} from '/lib/member_list/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {calculateTitelHeight} from '/client/layout/region_header/lib.js';
 import {calculateFooterFontSize} from '/client/layout/region_footer/scripts/lib.js';
 import * as nicknameLib from '/client/layout/view_choose_nickname/scripts/lib.js';
 import {cleanUp} from "./routes.js";
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
+import {randomIntFromInterval} from '/client/layout/view_live_results/scripts/lib.js';
 
 export function getUserLanguage() {
 	/* Get the language of the browser */
@@ -107,12 +109,24 @@ Meteor.startup(function () {
 						throw new Error("Unsupported Operation: Invalid credentials");
 					}
 					const debugMemberCount = MemberListCollection.find({hashtag: hashtag, nick: {$regex: "debug_user_*", $options: "i"}}).count();
+					const selectedNicks = SessionConfigurationCollection.findOne().nicks.selectedValues;
 					for (let i = 1; i < amount + 1; i++) {
-						const nickname = "debug_user_" + (i + debugMemberCount);
+						if (MemberListCollection.find().fetch().length === selectedNicks.length) {
+							return;
+						}
+						let nickname = "";
+						if (selectedNicks) {
+							do {
+								nickname = selectedNicks[randomIntFromInterval(0, selectedNicks.length - 1)];
+							} while (MemberListCollection.findOne({nick: nickname}));
+						} else {
+							nickname = "debug_user_" + (i + debugMemberCount);
+						}
 						const bgColor  = nicknameLib.rgbToHex(nicknameLib.getRandomInt(0, 255), nicknameLib.getRandomInt(0, 255), nicknameLib.getRandomInt(0, 255));
 						Meteor.call('MemberListCollection.addLearner', {
 							hashtag: hashtag,
 							nick: nickname,
+							isDummyUser: true,
 							privateKey: localData.getPrivateKey(),
 							backgroundColor: bgColor,
 							foregroundColor: nicknameLib.transformForegroundColor(nicknameLib.hexToRgb(bgColor))

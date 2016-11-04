@@ -103,6 +103,10 @@ Template.qrCodeDisplay.helpers({
 
 Template.header.events({
 	'click .arsnova-logo': function () {
+		if (!Router.current().params.quizName) {
+			Router.go("/");
+			return;
+		}
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			if (Session.get("soundIsPlaying")) {
 				buzzsound1.stop();

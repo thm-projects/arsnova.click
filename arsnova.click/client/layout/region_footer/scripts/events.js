@@ -65,6 +65,9 @@ const clickEvents = {
 		}
 	},
 	"click #fullscreen, switchChange.bootstrapSwitch .bootstrap-switch-id-fullscreen_switch ": function () {
+		var route = Router.current().route.getName();
+		route = route.replace(/(:quizName.)*(.:id)*/g, "");
+
 		if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement) {
 			if (document.cancelFullScreen) {
 				document.cancelFullScreen();
@@ -76,9 +79,7 @@ const clickEvents = {
 				document.webkitCancelFullScreen();
 			}
 
-			var route = Router.current().route.getName();
-			route = route.replace(/(:quizName.)*(.:id)*/g, "");
-			if (route === "memberlist"){
+			if (route === "memberlist") {
 				$('.navbar-footer-placeholder').hide();
 				$('.navbar-footer').show();
 			}
@@ -91,9 +92,7 @@ const clickEvents = {
 				document.documentElement.webkitRequestFullScreen();
 			}
 
-			var route = Router.current().route.getName();
-			route = route.replace(/(:quizName.)*(.:id)*/g, "");
-			if (route === "memberlist"){
+			if (route === "memberlist") {
 				$('.navbar-footer').hide();
 				$('.navbar-footer-placeholder').show();
 			}
@@ -393,17 +392,17 @@ Template.footer.events($.extend({}, clickEvents, {
 		Router.go("/" + Router.current().params.quizName + "/showMore");
 	},
 	"mouseenter .navbar-footer-placeholder": function () {
-        var route = Router.current().route.getName();
+		var route = Router.current().route.getName();
 		route = route.replace(/(:quizName.)*(.:id)*/g, "");
-		if (window.innerHeight == screen.height && route === "memberlist"){
+		if (window.innerHeight == screen.height && route === "memberlist") {
 			$('.navbar-footer-placeholder').hide();
 			$('.navbar-footer').show();
 		}
 	},
 	"mouseleave .navbar-footer": function () {
-        var route = Router.current().route.getName();
-        route = route.replace(/(:quizName.)*(.:id)*/g, "");
-		if (window.innerHeight == screen.height && route === "memberlist"){
+		var route = Router.current().route.getName();
+		route = route.replace(/(:quizName.)*(.:id)*/g, "");
+		if (window.innerHeight == screen.height && route === "memberlist") {
 			$('.navbar-footer').hide();
 			$('.navbar-footer-placeholder').show();
 		}

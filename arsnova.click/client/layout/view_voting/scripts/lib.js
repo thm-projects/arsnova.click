@@ -149,9 +149,12 @@ export function formatAnswerButtons() {
 		let scaleBaseHeight = 100;
 		const answerOptionElements = AnswerOptionCollection.find({hashtag: Router.current().params.quizName, questionIndex: EventManagerCollection.findOne().questionIndex}).count();
 		const calculateButtons = function (width, height) {
-			const maxButtonsPerRow = Math.floor(contentWidth / width);
+			var maxButtonsPerRow = Math.floor(contentWidth / width);
 			let maxRows = Math.floor((contentHeight) / height);
 			maxRows = Math.floor((contentHeight - maxRows * 10) / height);
+			if (answerOptionElements % 2 == 0 && maxButtonsPerRow % 2 != 0) {
+				maxButtonsPerRow--;
+			}
 			return {maxButtons: maxButtonsPerRow * maxRows, maxButtonsPerRow: maxButtonsPerRow, maxRows: maxRows};
 		};
 		let maxButtons = calculateButtons(scaleBaseWidth, scaleBaseHeight).maxButtons;

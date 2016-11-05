@@ -65,6 +65,9 @@ const clickEvents = {
 		}
 	},
 	"click #fullscreen, switchChange.bootstrapSwitch .bootstrap-switch-id-fullscreen_switch ": function () {
+		var route = Router.current().route.getName();
+		route = route.replace(/(:quizName.)*(.:id)*/g, "");
+
 		if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement) {
 			if (document.cancelFullScreen) {
 				document.cancelFullScreen();
@@ -75,6 +78,11 @@ const clickEvents = {
 			} else if (document.webkitFullscreenElement) {
 				document.webkitCancelFullScreen();
 			}
+
+			if (route === "memberlist") {
+				$('.navbar-footer-placeholder').hide();
+				$('.navbar-footer').show();
+			}
 		} else {
 			if (document.documentElement.requestFullscreen) {
 				document.documentElement.requestFullscreen();
@@ -82,6 +90,11 @@ const clickEvents = {
 				document.documentElement.mozRequestFullScreen();
 			} else if (document.documentElement.webkitRequestFullScreen) {
 				document.documentElement.webkitRequestFullScreen();
+			}
+
+			if (route === "memberlist") {
+				$('.navbar-footer').hide();
+				$('.navbar-footer-placeholder').show();
 			}
 		}
 	},
@@ -377,6 +390,22 @@ const defaultBackButtonBehavior = {
 Template.footer.events($.extend({}, clickEvents, {
 	"click #show-more": function () {
 		Router.go("/" + Router.current().params.quizName + "/showMore");
+	},
+	"mouseenter .navbar-footer-placeholder": function () {
+		var route = Router.current().route.getName();
+		route = route.replace(/(:quizName.)*(.:id)*/g, "");
+		if (window.innerHeight == screen.height && route === "memberlist") {
+			$('.navbar-footer-placeholder').hide();
+			$('.navbar-footer').show();
+		}
+	},
+	"mouseleave .navbar-footer": function () {
+		var route = Router.current().route.getName();
+		route = route.replace(/(:quizName.)*(.:id)*/g, "");
+		if (window.innerHeight == screen.height && route === "memberlist") {
+			$('.navbar-footer').hide();
+			$('.navbar-footer-placeholder').show();
+		}
 	}
 }));
 

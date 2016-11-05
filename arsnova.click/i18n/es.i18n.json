@@ -255,6 +255,8 @@
     },
     "liveResults": {
       "title": "Resultados",
+      "title_reading_confirmation": "Pregunta leída...",
+      "title_running_countdown": "Votación...",
       "question": "Pregunta",
       "ranking": "Lista de ranking",
       "reading_confirmation": "Confirmación de lectura",
@@ -484,6 +486,11 @@
       "edit_session_confirmation": {
         "title": "¿Quieres editar el cuestionario?",
         "text": "Todos los asistentes serán eliminados y se eliminarán la tabla de clasificación.",
+        "continue": "¿Continuar?"
+      },
+      "return_to_lobby": {
+        "title": "Advertencia",
+        "text": "Si continúa con el lobby del cuestionario, todas las rondas de preguntas contestadas se restablecerán.",
         "continue": "¿Continuar?"
       },
       "error": {

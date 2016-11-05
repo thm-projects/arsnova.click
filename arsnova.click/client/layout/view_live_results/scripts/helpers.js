@@ -477,34 +477,35 @@ Template.gamificationAnimation.helpers({
 		const countdownAnimationWrapper = $('#countdownAnimationWrapper');
 		const countdownValue = countdown.get();
 
-		if (countdownValue <= 5) {
+		if (countdownValue <= 6) {
 			setQuestionDialog(null);
 		}
+		countdownAnimationWrapper.show();
 		switch (countdownValue) {
-			case 0:
-				countdownAnimationWrapper.css("background-color", "#b22222");
-				break;
 			case 1:
-				countdownAnimationWrapper.css("background-color", "#ff8c00");
+				countdownAnimationWrapper.css("background-color", "#f4d717");
+				countdownAnimationWrapper.delay(1000).fadeOut();
 				break;
 			case 2:
-				countdownAnimationWrapper.css("background-color", "#ffd700");
+				countdownAnimationWrapper.css("background-color", "#eca121");
 				break;
 			case 3:
-				countdownAnimationWrapper.css("background-color", "#008000");
+				countdownAnimationWrapper.css("background-color", "#cd2a2b");
 				break;
 			case 4:
-				countdownAnimationWrapper.css("background-color", "#2f4f4f");
+				countdownAnimationWrapper.css("background-color", "#c51884");
 				break;
 			case 5:
-				countdownAnimationWrapper.css("background-color", "#663399");
+				countdownAnimationWrapper.css("background-color", "#1c7bb5");
+				break;
+			case 6:
+				countdownAnimationWrapper.css("background-color", "#66bb5e");
 				break;
 			default:
 				countdownAnimationWrapper.hide();
 				return;
 		}
-		countdownAnimationWrapper.fadeIn(200).delay(600).fadeOut(200);
 
-		return "finger_" + countdownValue + ".gif";
+		return "finger_" + (countdownValue - 1) + ".gif";
 	}
 });

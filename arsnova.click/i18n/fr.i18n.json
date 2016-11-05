@@ -255,6 +255,8 @@
     },
     "liveResults": {
       "title": "Résultats",
+      "title_reading_confirmation": "Question lue...",
+      "title_running_countdown": "Vote...",
       "question": "Question",
       "ranking": "Classement",
       "reading_confirmation": "Confirmation de lecture",
@@ -484,6 +486,11 @@
       "edit_session_confirmation": {
         "title": "Voulez-vous modifier le quiz?",
         "text": "Tous les participants seront supprimés et le classement seront supprimés.",
+        "continue": "Continuer?"
+      },
+      "return_to_lobby": {
+        "title": "Attention",
+        "text": "Si vous passez au lobby du quiz, tous les rounds de quiz seront réinitialisés.",
         "continue": "Continuer?"
       },
       "error": {

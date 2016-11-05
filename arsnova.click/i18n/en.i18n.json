@@ -255,6 +255,8 @@
     },
     "liveResults": {
       "title": "Results",
+      "title_reading_confirmation": "Question read...",
+      "title_running_countdown": "Voting...",
       "question": "Question",
       "ranking": "Ranking",
       "reading_confirmation": "Reading confirmation",
@@ -484,6 +486,11 @@
       "edit_session_confirmation": {
         "title": "Do you want to edit the quiz?",
         "text": "All attendees will be removed and the leaderboard will be deleted.",
+        "continue": "Continue?"
+      },
+      "return_to_lobby": {
+        "title": "Warning",
+        "text": "If you proceed to the quiz lobby all played quiz rounds will be reset.",
         "continue": "Continue?"
       },
       "error": {

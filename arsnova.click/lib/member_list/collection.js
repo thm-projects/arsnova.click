@@ -54,6 +54,10 @@ export const userRefSchema = {
 	type: String,
 	optional: true
 };
+export const isDummyUserSchema = {
+	type: Boolean,
+	defaultValue: false
+};
 export const memberListCollectionSchema = new SimpleSchema({
 	hashtag: hashtagSchema,
 	nick: userNickSchema,
@@ -63,7 +67,8 @@ export const memberListCollectionSchema = new SimpleSchema({
 	backgroundColor: backgroundColorSchema,
 	foregroundColor: foregroundColorSchema,
 	insertDate: insertDateSchema,
-	userRef: userRefSchema
+	userRef: userRefSchema,
+	isDummyUser: isDummyUserSchema
 });
 
 MemberListCollection.attachSchema(memberListCollectionSchema);

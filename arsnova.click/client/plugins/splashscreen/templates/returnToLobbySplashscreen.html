@@ -1,0 +1,53 @@
+<!--
+* This file is part of ARSnova Click.
+* Copyright (C) 2016 The ARSnova Team
+*
+* ARSnova Click is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* ARSnova Click is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
+
+<template name="returnToLobbySplashscreen">
+    <div class="modal {{#unless isMobileDevice}}fade {{/unless}}splashscreen" role="dialog">
+        <div class="modal-dialog">
+            <div class="noSplashscreenPadding">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
+                        <h2>{{_ "plugins.splashscreen.return_to_lobby.title"}}</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{_ "plugins.splashscreen.return_to_lobby.text"}}</p>
+                        <p style="margin-top:20px;">{{_ "plugins.splashscreen.return_to_lobby.continue"}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button id="closeDialogButton"
+                                        class="button button-back tabbable">
+                                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                                    {{_ "global.abort"}}
+                                </button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button id="returnToLobby"
+                                        class="button button-next tabbable">
+                                    {{_ "region.header.yes"}}
+                                    <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

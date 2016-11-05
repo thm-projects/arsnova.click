@@ -28,6 +28,9 @@ Template.splashscreen.events({
 });
 
 Template.questionAndAnswerSplashscreen.events({
+	"click .resizeableImage": function (event) {
+		showFullscreenPicture(event);
+	},
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);
 	}

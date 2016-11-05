@@ -267,6 +267,8 @@
     },
     "liveResults": {
       "title": "Ergebnisse",
+      "title_reading_confirmation": "Frage gelesen...",
+      "title_running_countdown": "Abstimmung läuft...",
       "question": "Frage",
       "ranking": "Rangliste",
       "reading_confirmation": "Lesebestätigung",
@@ -496,6 +498,11 @@
       "edit_session_confirmation": {
         "title": "Möchtest du das Quiz bearbeiten?",
         "text": "Alle Teilnehmenden werden abgemeldet und die Rangliste wird gelöscht.",
+        "continue": "Fortfahren?"
+      },
+      "return_to_lobby": {
+        "title": "Warnung",
+        "text": "Wenn du zur Quiz Lobby zurückkehrst, werden alle bereits durchgeführten Quizrunden zurückgesetzt.",
         "continue": "Fortfahren?"
       },
       "error": {

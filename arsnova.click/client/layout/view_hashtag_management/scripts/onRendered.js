@@ -41,6 +41,81 @@ Template.hashtagView.onRendered(function () {
 	if ($(window).width() >= 992 && localData.getAllHashtags().length === 0) {
 		$('#hashtag-input-field').focus();
 	}
+
+	// set keyframes because they can't work dynamically (with sass)
+	var currentTheme = localStorage.getItem("theme");
+
+	var themeLogoHighlightColor = '#ffd700';
+
+	switch (currentTheme) {
+		case "theme-blackbeauty":
+			themeLogoHighlightColor = '#FF8C00';
+			break;
+		case "theme-thm":
+			themeLogoHighlightColor = '#4a5c66';
+			break;
+		case "theme-bluetouch":
+			themeLogoHighlightColor = '#8dbfb9';
+			break;
+		case "theme-green":
+			themeLogoHighlightColor = '#ff9009';
+			break;
+		case "theme-Psychology-Correct-Colours":
+			themeLogoHighlightColor = '#f6f4f4';
+			break;
+	}
+
+	var cssLogoAnimation = document.createElement('style');
+	cssLogoAnimation.type = 'text/css';
+	var  animationRuleArs = document.createTextNode('@keyframes colorChangingArs {' +
+		'0% { color:white; }' +
+		'15% { color:white; }' +
+		'30% { color:' + themeLogoHighlightColor + '; }' +
+		'45% { color:white; }' +
+		'60% { color:white; }' +
+		'75% { color:white; }' +
+		'90% { color:white; }' +
+		'100% { color:white; }' +
+		'}');
+	cssLogoAnimation.appendChild(animationRuleArs);
+
+	var  animationRuleNova = document.createTextNode('@keyframes colorChangingNova {' +
+		'0% { color:white; }' +
+		'15% { color:white; }' +
+		'30% { color:white; }' +
+		'45% { color:' + themeLogoHighlightColor + '; }' +
+		'60% { color:white; }' +
+		'75% { color:white; }' +
+		'90% { color:white; }' +
+		'100% { color:white; }' +
+		'}');
+	cssLogoAnimation.appendChild(animationRuleNova);
+
+	var  animationRuleDot = document.createTextNode('@keyframes colorChangingDot {' +
+		'0% { color:white; }' +
+		'15% { color:white; }' +
+		'30% { color:white; }' +
+		'45% { color:white; }' +
+		'60% { color:' + themeLogoHighlightColor + '; }' +
+		'75% { color:white; }' +
+		'90% { color:white; }' +
+		'100% { color:white; }' +
+		'}');
+	cssLogoAnimation.appendChild(animationRuleDot);
+
+	var  animationRuleClick = document.createTextNode('@keyframes colorChangingClick {' +
+		'0% { color:white; }' +
+		'15% { color:white; }' +
+		'30% { color:white; }' +
+		'45% { color:white; }' +
+		'60% { color:white; }' +
+		'75% { color:' + themeLogoHighlightColor + '; }' +
+		'90% { color:white; }' +
+		'100% { color:white; }' +
+		'}');
+	cssLogoAnimation.appendChild(animationRuleClick);
+
+	document.getElementsByTagName("head")[0].appendChild(cssLogoAnimation);
 });
 
 Template.hashtagManagement.onRendered(function () {

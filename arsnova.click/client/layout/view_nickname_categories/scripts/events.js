@@ -48,10 +48,10 @@ Template.nicknameCategories.events({
 			}
 		} else {
 			if ($(event.currentTarget).hasClass("selectedNickName")) {
-				questionGroup.getConfiguration().getNickSettings().removeSelectedNickByName(NicknameCategoriesCollection.findOne({nick: $(event.currentTarget).attr("id").replace("nickName_", "")}).nick);
+				questionGroup.getConfiguration().getNickSettings().removeSelectedNickByName(NicknameCategoriesCollection.findOne({_id: $(event.currentTarget).attr("id").replace("nickName_", "")}).nick);
 				$(event.currentTarget).removeClass("selectedNickName");
 			} else {
-				questionGroup.getConfiguration().getNickSettings().addSelectedNick(NicknameCategoriesCollection.findOne({nick: $(event.currentTarget).attr("id").replace("nickName_", "")}).nick);
+				questionGroup.getConfiguration().getNickSettings().addSelectedNick(NicknameCategoriesCollection.findOne({_id: $(event.currentTarget).attr("id").replace("nickName_", "")}).nick);
 				$(event.currentTarget).addClass("selectedNickName");
 			}
 		}
@@ -72,7 +72,7 @@ Template.nicknameCategories.events({
 		const nickname = $(event.currentTarget).attr("id").replace("chosen_nickName_", "");
 		$('#nickName_' + nickname).removeClass("selectedNickName");
 		const questionGroup = Session.get("questionGroup");
-		questionGroup.getConfiguration().getNickSettings().removeSelectedNickByName(NicknameCategoriesCollection.findOne({nick: nickname}).nick);
+		questionGroup.getConfiguration().getNickSettings().removeSelectedNickByName(NicknameCategoriesCollection.findOne({_id: nickname}).nick);
 		Session.set("questionGroup", questionGroup);
 		localData.addHashtag(Session.get("questionGroup"));
 	}

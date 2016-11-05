@@ -19,6 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {MemberListCollection, userNickSchema} from '/lib/member_list/collection.js';
+import {NicknameCategoriesCollection} from '/lib/nickname_categories/collection.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 import * as lib from './lib.js';
@@ -119,7 +120,7 @@ Template.nickLimited.events({
 			if (!lib.hasTHMMail()) {
 				return;
 			}
-			const nickname = $(event.currentTarget).attr("id").replace("selectableNick_", "");
+			const nickname = NicknameCategoriesCollection.findOne({_id: $(event.currentTarget).attr("id").replace("selectableNick_", "")}).nick;
 			const bgColor = lib.rgbToHex(lib.getRandomInt(0, 255), lib.getRandomInt(0, 255), lib.getRandomInt(0, 255));
 			Meteor.call('MemberListCollection.addLearner', {
 				hashtag: Router.current().params.quizName,

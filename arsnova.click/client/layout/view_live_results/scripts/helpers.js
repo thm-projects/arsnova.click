@@ -473,7 +473,7 @@ Template.gamificationAnimation.helpers({
 		const countdownAnimationWrapper = $('#countdownAnimationWrapper');
 
 		if (!Session.get("countdownInitialized") || !countdown) {
-			if (countdownAnimationWrapper.is(":hidden")) {
+			if (!countdownAnimationWrapper.is(":hidden")) {
 				countdownAnimationWrapper.fadeOut();
 			}
 			return;

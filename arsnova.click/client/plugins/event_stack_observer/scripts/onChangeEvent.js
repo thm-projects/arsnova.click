@@ -82,7 +82,7 @@ function addMemberlistChangeEvents() {
 		if (value.nicks.restrictToCASLogin && !Meteor.user()) {
 			Meteor.loginWithCas(function () {
 				if (!hasTHMMail()) {
-					return;
+					Router.go("/" + Router.current().params.quizName + "/resetToHome");
 				}
 				Meteor.call('MemberListCollection.setLearnerReference', {
 					hashtag: Router.current().params.quizName,

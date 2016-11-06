@@ -470,11 +470,15 @@ Template.readingConfirmedLearner.helpers({
 
 Template.gamificationAnimation.helpers({
 	getCurrentAnimationSrc: function () {
+		const countdownAnimationWrapper = $('#countdownAnimationWrapper');
+
 		if (!Session.get("countdownInitialized") || !countdown) {
+			if (countdownAnimationWrapper.is(":hidden")) {
+				countdownAnimationWrapper.fadeOut();
+			}
 			return;
 		}
 
-		const countdownAnimationWrapper = $('#countdownAnimationWrapper');
 		const countdownValue = countdown.get();
 
 		if (countdownValue <= 6) {

@@ -60,6 +60,12 @@ Template.resetSessionSplashscreen.events({
 	}
 });
 
+Template.editSessionSplashscreen.events({
+	"click .splashscreen-container-close": function (event) {
+		closeSplashscreen(event);
+	}
+});
+
 Template.exitSessionSplashscreen.events({
 	"click .splashscreen-container-close": function (event) {
 		closeSplashscreen(event);

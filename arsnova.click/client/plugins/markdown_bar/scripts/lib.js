@@ -30,6 +30,8 @@ export function insertInQuestionText(textStart, textEnd) {
 	let strPosBegin = textarea.selectionStart;
 	let strPosEnd = textarea.selectionEnd;
 
+	console.log("strPosBegin: " + strPosBegin);
+	console.log("strPosEnd: " + strPosEnd);
 	let frontText = (textarea.value).substring(0, strPosBegin);
 	let backText = (textarea.value).substring(strPosEnd, textarea.value.length);
 	let selectedText = (textarea.value).substring(strPosBegin, strPosEnd);
@@ -45,6 +47,10 @@ export function insertInQuestionText(textStart, textEnd) {
 
 export function markdownAlreadyExistsAndAutoRemove(textStart, textEnd) {
 	let textarea = document.getElementById('questionText');
+
+	// fix for IE / Edge: get dismissed focus back to retrieve selection values
+	textarea.focus();
+
 	let scrollPos = textarea.scrollTop;
 	let strPosBegin = textarea.selectionStart;
 	let strPosEnd = textarea.selectionEnd;
@@ -70,6 +76,7 @@ export function markdownAlreadyExistsAndAutoRemove(textStart, textEnd) {
 		let middleText = (textarea.value).substring(strPosBegin, strPosEnd);
 		let backText = (textarea.value).substring(strPosEnd + textEnd.length, textarea.value.length);
 		textarea.value = frontText + middleText + backText;
+		console.log("new textarea start: " + (strPosBegin - textStart.length));
 		textarea.selectionStart = strPosBegin - textStart.length;
 		textarea.selectionEnd = strPosEnd - (textEnd.length === 0 ? textStart.length : textEnd.length);
 		textarea.focus();

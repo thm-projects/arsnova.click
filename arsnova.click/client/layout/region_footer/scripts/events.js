@@ -393,6 +393,9 @@ Template.footer.events($.extend({}, clickEvents, {
 	},
 	"mouseenter .navbar-footer-placeholder": function () {
 		var route = Router.current().route.getName();
+		if (typeof route === "undefined") {
+			return;
+		}
 		route = route.replace(/(:quizName.)*(.:id)*/g, "");
 		if (window.innerHeight == screen.height && route === "memberlist") {
 			$('.navbar-footer-placeholder').hide();
@@ -401,6 +404,9 @@ Template.footer.events($.extend({}, clickEvents, {
 	},
 	"mouseleave .navbar-footer": function () {
 		var route = Router.current().route.getName();
+		if (typeof route === "undefined") {
+			return;
+		}
 		route = route.replace(/(:quizName.)*(.:id)*/g, "");
 		if (window.innerHeight == screen.height && route === "memberlist") {
 			$('.navbar-footer').hide();

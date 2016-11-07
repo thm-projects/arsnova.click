@@ -17,19 +17,16 @@
 
 <template name="memberlist">
     <div id="memberlist">
-        <div class="hidden-xs">
-            {{> titel }}
-        </div>
         {{#if isOwner}}
-            <div class="row row-padding-bottom quiz-lobby-header">
+            <div class="row row-padding-bottom row-padding-top quiz-lobby-header">
                 <div class="col-xs-3">
 				    <div class="titel" id="memberListCounter">
                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                        <span class="titel">{{memberlistCount}}</span>
+                        <span>{{memberlistCount}}</span>
                     </div>
                 </div>
                 <div class="col-xs-7">
-                    <div id="lobbyTitle" class="titel">
+                    <div class="titel" id="lobbyTitle">
                         <span>{{_ "view.lobby.title"}}</span>
                     </div>
                 </div>
@@ -39,7 +36,7 @@
             <div class="col-md-12 contentFrame">
                 {{#unless isOwner}}
                     <div class="row">
-                        <div class=" titel-relative text-light text-center" id="attendee-in-quiz-wrapper">
+                        <div class="titel-relative text-light text-center" id="attendee-in-quiz-wrapper">
                             <div class="titel margin-to-logo">{{_ "view.lobby.ready"}}</div>
                         </div>
                     </div>
@@ -59,36 +56,6 @@
                         {{/each}}
                     {{/each}} <!-- learners -->
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="fixed-bottom col-xs-12 col-sm-6 col-sm-offset-3">
-                {{#if hasTooMuchButtons}}
-                    <div class="col-xs-{{#if isOwner}}4{{else}}12{{/if}} col-sm-{{#if isOwner}}6{{else}}{{/if}}">
-                        {{#if hasOverridenDefaultButtonCount }}
-                            <button class="button button-success tabbable"
-                                    id="showLess">
-                                <span class="ansBtn">{{_ "view.leaderboard.show_less"}}</span>
-                                <span class="glyphicon glyphicon-menu-up"></span>
-                            </button>
-                        {{else}}
-                            <button class="button button-success tabbable"
-                                    id="showMore">
-                                <span class="ansBtn">{{_ "view.leaderboard.show_more" invisibleLearnerCount count=invisibleLearnerCount}}</span>
-                                <span class="glyphicon glyphicon-menu-down"></span>
-                            </button>
-                        {{/if}}
-                    </div>
-                {{/if}}
-                {{#if isOwner}}{{#if hasPlayers}}
-                    <div class="col-xs-{{#if hasTooMuchButtons}}8{{else}}12{{/if}} col-sm-{{#if hasTooMuchButtons}}6{{else}}12{{/if}}">
-                        <button id="startPolling"
-                                class="button button-next button-start tabbable">
-                            {{_ "view.lobby.start_quiz" }}
-                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                        </button>
-                    </div>
-                {{/if}}{{/if}}
             </div>
         </div>
     </div>

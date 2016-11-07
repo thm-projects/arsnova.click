@@ -26,13 +26,5 @@ Template.createQuestionView.events({
 	},
 	'change #chooseQuestionType': function () {
 		lib.addQuestion(EventManagerCollection.findOne().questionIndex);
-	},
-	//Save question in Sessions-Collection when Button "Next" is clicked
-	'click #forwardButton': function () {
-		lib.addQuestion(EventManagerCollection.findOne().questionIndex);
-		Router.go("/" + Router.current().params.quizName + "/answeroptions");
-	},
-	"click #backButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/resetToHome");
 	}
 });

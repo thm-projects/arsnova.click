@@ -24,13 +24,6 @@ import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as lib from './lib.js';
 
 Template.memberlist.events({
-	'click #showMore': ()=> {
-		Session.set("learnerCountOverride", true);
-	},
-	'click #showLess': ()=> {
-		Session.set("learnerCountOverride", false);
-		lib.calculateButtonCount(MemberListCollection.find().count());
-	},
 	'click .btn-learner': function (event) {
 		event.preventDefault();
 		if (!localData.containsHashtag(Router.current().params.quizName)) {
@@ -50,6 +43,22 @@ Template.memberlist.events({
 				});
 			}
 		});
+	}
+});
+
+Template.kickMemberSplashscreen.events({
+	"click #ban-nick-label": function () {
+		const banNickInput = $('#ban-nick');
+		banNickInput.prop("checked",!banNickInput.prop("checked"));
+	}
+});
+
+Template.memberlistFooterNavButtons.events({
+	'click #showMore': ()=> {
+		Session.set("learnerCountOverride", true);
+	},
+	'click #showLess': ()=> {
+		Session.set("learnerCountOverride", false);
 	},
 	'click #startPolling': function () {
 		Session.set("sessionClosed", false);
@@ -58,12 +67,5 @@ Template.memberlist.events({
 		Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);
 		Meteor.call('MemberListCollection.clearReadConfirmed', Router.current().params.quizName);
 		Meteor.call('EventManagerCollection.setSessionStatus', Router.current().params.quizName, 3);
-	}
-});
-
-Template.kickMemberSplashscreen.events({
-	"click #ban-nick-label": function () {
-		const banNickInput = $('#ban-nick');
-		banNickInput.prop("checked",!banNickInput.prop("checked"));
 	}
 });

@@ -21,8 +21,11 @@
 	margin-top: 20px;
 }
 
-#waiting_for_players_notifier {
-	margin-top: 100px;
+#memberListCounter,
+#lobbyTitle,
+#attendee-in-quiz-wrapper>.titel {
+	position: relative;
+	margin-top: 0 !important;
 }
 
 .btn-more-learners,
@@ -32,6 +35,7 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
+	opacity: 1 !important;
 }
 
 .btn-learner {

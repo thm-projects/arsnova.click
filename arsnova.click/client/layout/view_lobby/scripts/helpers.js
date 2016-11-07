@@ -42,15 +42,6 @@ Template.memberlist.helpers({
 		}
 		return result;
 	},
-	hasOverridenDefaultButtonCount: function () {
-		return Session.get("learnerCountOverride");
-	},
-	hasTooMuchButtons: ()=> {
-		return Session.get("learnerCountOverride") || (Session.get("allMembersCount") - Session.get("maxLearnerButtons") > 0);
-	},
-	invisibleLearnerCount: function () {
-		return Session.get("allMembersCount") - Session.get("maxLearnerButtons");
-	},
 	memberlistCount: function () {
 		return MemberListCollection.find().count();
 	}
@@ -62,5 +53,23 @@ Template.learner.helpers({
 	},
 	isOwnNick: function (nickname) {
 		return nickname === localStorage.getItem(Router.current().params.quizName + "nick");
+	}
+});
+
+Template.memberlistFooterNavButtons.helpers({
+	hasTooMuchButtons: ()=> {
+		return Session.get("learnerCountOverride") || (Session.get("allMembersCount") - Session.get("maxLearnerButtons") > 0);
+	},
+	invisibleLearnerCount: function () {
+		return Session.get("allMembersCount") - Session.get("maxLearnerButtons");
+	},
+	hasOverridenDefaultButtonCount: function () {
+		return Session.get("learnerCountOverride");
+	},
+	hasPlayers: function () {
+		return MemberListCollection.find().count() > 0;
+	},
+	isOwner: function () {
+		return localData.containsHashtag(Router.current().params.quizName);
 	}
 });

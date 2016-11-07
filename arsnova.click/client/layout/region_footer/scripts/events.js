@@ -21,11 +21,13 @@ import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {DefaultQuestionGroup} from '/lib/questions/questiongroup_default.js';
 import * as localData from '/lib/local_storage.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
 import {buzzsound1, setBuzzsound1, lobbySound, setLobbySound} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 
 const clickEvents = {
 	"click #about": function () {
@@ -451,3 +453,71 @@ Template.imprint.events($.extend({}, defaultBackButtonBehavior, {
 Template.dataprivacy.events($.extend({}, defaultBackButtonBehavior, {
 
 }));
+
+Template.footerNavButtons.events({
+	'click #forwardButton': function () {
+		var route = Router.current().route.getName();
+		if (typeof route === "undefined") {
+			return;
+		}
+		route = route.replace(/(:quizName.)*(.:id)*/g, "");
+		switch (route) {
+			case "question":
+				questionLib.addQuestion(EventManagerCollection.findOne().questionIndex);
+				Router.go("/" + Router.current().params.quizName + "/answeroptions");
+				break;
+			case "answeroptions":
+				Router.go("/" + Router.current().params.quizName + "/settimer");
+				break;
+			case "settimer":
+				Router.go("/" + Router.current().params.quizName + "/quizSummary");
+				break;
+			case "quizSummary":
+				Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
+				Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
+				Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
+				Meteor.call('SessionConfiguration.addConfig', Session.get("questionGroup").getConfiguration().serialize());
+				Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
+				if (Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin()) {
+					Meteor.loginWithCas(function () {
+						Router.go("/" + Router.current().params.quizName + "/memberlist");
+					});
+				} else {
+					Router.go("/" + Router.current().params.quizName + "/memberlist");
+				}
+				break;
+		}
+	},
+	"click #backButton": function () {
+		var route = Router.current().route.getName();
+		if (typeof route === "undefined") {
+			return;
+		}
+		route = route.replace(/(:quizName.)*(.:id)*/g, "");
+		switch (route) {
+			case "question":
+				Router.go("/" + Router.current().params.quizName + "/resetToHome");
+				break;
+			case "answeroptions":
+				Router.go("/" + Router.current().params.quizName + "/question");
+				break;
+			case "settimer":
+				Router.go("/" + Router.current().params.quizName + "/answeroptions");
+				break;
+			case "quizSummary":
+				let firstFailedIndex = null;
+				Session.get("questionGroup").getQuestionList().forEach(function (questionItem) {
+					if (!firstFailedIndex && !questionItem.isValid()) {
+						firstFailedIndex = questionItem.getQuestionIndex();
+					}
+				});
+				if (firstFailedIndex) {
+					Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, firstFailedIndex);
+					Router.go("/" + Router.current().params.quizName + "/question");
+				} else {
+					Router.go("/" + Router.current().params.quizName + "/settimer");
+				}
+				break;
+		}
+	}
+});

@@ -17,6 +17,7 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
+import {Tracker} from 'meteor/tracker';
 import * as localData from '/lib/local_storage.js';
 
 export function isEditingQuestion() {
@@ -42,6 +43,7 @@ export function addNewQuestion() {
 	});
 }
 
+export const titelTracker = new Tracker.Dependency();
 export function calculateTitelHeight() {
 	var fixedTop = $(".navbar-fixed-top");
 	var container = $(".container");
@@ -49,9 +51,12 @@ export function calculateTitelHeight() {
 	var navbarFooterHeight = $('.navbar-fixed-bottom').is(":visible") ? $(".navbar-fixed-bottom").outerHeight() : 0;
 	var finalHeight = $(window).height() - fixedTop.outerHeight() - navbarFooterHeight - footerHeight;
 
+	$('.titel').css('margin-top', fixedTop.outerHeight() * 1.1);
+
 	container.css("height", finalHeight);
 	container.css("margin-top", fixedTop.outerHeight());
 
+	titelTracker.changed();
 	return {
 		height: finalHeight,
 		marginTop: fixedTop.outerHeight()

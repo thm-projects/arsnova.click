@@ -23,18 +23,12 @@ import * as localData from '/lib/local_storage.js';
 import {calculateButtonCount, setMemberlistObserver} from './lib.js';
 
 Template.memberlist.onCreated(function () {
-	$(window).resize(function () {
-		calculateButtonCount(MemberListCollection.find().count());
-	});
-
 	setMemberlistObserver({
 		added: function () {
 			Session.set("allMembersCount", MemberListCollection.find().count());
-			calculateButtonCount(MemberListCollection.find().count());
 		},
 		removed: function () {
 			Session.set("allMembersCount", MemberListCollection.find().count());
-			calculateButtonCount(MemberListCollection.find().count());
 		}
 	});
 

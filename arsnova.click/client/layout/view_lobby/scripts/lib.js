@@ -41,12 +41,15 @@ export function calculateButtonCount(allMembersCount) {
 	 - subtract the attendee-in-quiz-wrapper height (the session information for the attendees)
 	 - subtract the margin to the top (the title or the show more button)
 	 */
-	var viewport = $("#mainContentContainer"),
-		attendeeInQuiz = $('#attendee-in-quiz-wrapper'),
+	var viewport = $(".contentPosition"),
 		titleBar = $('.row-padding-bottom'),
 		learnerListMargin = $('.learner-list').length > 0 ? parseInt($('.learner-list').first().css('margin-top').replace("px", "")) : 0;
 
-	var viewPortHeight = viewport.outerHeight() - titleBar.height() - attendeeInQuiz.outerHeight() - $('.quiz-lobby-header').outerHeight() - learnerListMargin;
+	var viewPortHeight = viewport.height() -
+		titleBar.outerHeight(true) -
+		$('#waiting_for_players_notifier').outerHeight() -
+		$('#attendee-in-quiz-wrapper').outerHeight(true) -
+		learnerListMargin;
 	$('#learner-list').height(viewPortHeight);
 
 	/* The height of the learner button must be set manually if the html elements are not yet generated */
@@ -71,6 +74,7 @@ export function calculateButtonCount(allMembersCount) {
 	 Template.memberlist.scripts.learners which gets the attendees from the mongo db
 	 */
 	setMaxMemberButtons(queryLimiter);
+	return viewPortHeight;
 }
 
 export function setMemberlistObserver(options) {

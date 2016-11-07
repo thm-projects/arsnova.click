@@ -26,7 +26,7 @@
 }
 
 .contentPosition {
-	overflow: visible;
+	overflow: auto;
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -69,6 +69,8 @@ p, ul.list-unstyled {
 	font-size: 3vw;
 	width: 100%;
 	min-height: 20px;
+	position: fixed;
+	z-index: 1050;
 }
 
 .margin-top-logo {

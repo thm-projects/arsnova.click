@@ -23,12 +23,100 @@ import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {getLeaderBoardItems, getAllNicksWhichAreAlwaysRight} from './lib.js';
 
-Template.leaderBoard.helpers({
+Template.leaderboardTitle.helpers({
+	getTitleText: ()=> {
+		return Router.current().params.id === "all" ? TAPi18n.__("view.leaderboard.title.all_questions") : TAPi18n.__("view.leaderboard.title.single_question", {questionId: (parseInt(Router.current().params.id) + 1)});
+	}
+});
+
+Template.leaderboardFooterNavButtons.helpers({
 	getButtonCols: ()=> {
+		if (!Session.get("nicks")) {
+			return 12;
+		}
 		const hasTooMuchButtons = Session.get("responsesCountOverride") || (Session.get("allMembersCount") - (Session.get("maxResponseButtons") + 1) > 0);
-		const index = Router.current().params.id === "all" ? 0 : Router.current().params.id;
-		return Session.get("nicks")[index] <= 0 ? 12 : hasTooMuchButtons ? 4 : 6;
+		const index = Router.current().params.id === "all" ? -1 : Router.current().params.id;
+		return index === -1 ? Session.get("nicks_alwaysCorrect").length === 0 ? 12 : hasTooMuchButtons ? 4 : 6 : Session.get("nicks")[index] <= 0 ? 12 : hasTooMuchButtons ? 4 : 6;
 	},
+	noLeaderBoardItems: (index)=> {
+		if (!Session.get("nicks") && !Session.get("nicks_alwaysCorrect")) {
+			return true;
+		}
+		if (Router.current().params.id === "all") {
+			return Session.get("nicks_alwaysCorrect").length <= 0;
+		}
+		var items = Session.get("nicks");
+		if (typeof index !== "undefined") {
+			if (items[index].value.length > 0) {
+				return false;
+			}
+		} else {
+			for (var i = 0; i < items.length; i++) {
+				if (items[i].value.length > 0) {
+					return false;
+				}
+			}
+		}
+		return true;
+	},
+	hasTooMuchButtons: ()=> {
+		return Session.get("responsesCountOverride") || (Session.get("allMembersCount") - (Session.get("maxResponseButtons") + 1) > 0);
+	},
+	hasOverridenDefaultButtonCount: ()=> {
+		return Session.get("responsesCountOverride");
+	},
+	invisibleResponsesCount: ()=> {
+		return Session.get("allMembersCount") - (Session.get("maxResponseButtons") + 1);
+	},
+	isOwner: function () {
+		return localData.containsHashtag(Router.current().params.quizName);
+	},
+	exportData: function () {
+		const hashtag = Router.current().params.quizName;
+		const time = new Date();
+		const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
+		const memberlistResult = MemberListCollection.find({hashtag: hashtag}, {fields: {userRef: 1, nick: 1}, sort: {nick: 1}}).fetch();
+		let responseResult;
+		responseResult = Router.current().params.id === "all" ? getAllNicksWhichAreAlwaysRight() : getLeaderBoardItems();
+		let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";
+
+		memberlistResult.forEach(function (item) {
+			let responseTime = 0;
+			let responseCount = 0;
+			responseResult.forEach(function (responseItem) {
+				if (responseItem.value === item.nick) {
+					responseTime += responseItem.sumResponseTime;
+					responseCount++;
+				} else if (responseItem.value instanceof Array) {
+					responseItem.value.forEach(function (responseValue) {
+						if (responseValue.nick === item.nick) {
+							responseTime += responseValue.responseTime;
+							responseCount++;
+						}
+					});
+				}
+			});
+			const user = Meteor.users.findOne({_id: item.userRef});
+			if (responseTime !== 0) {
+				responseTime = responseTime / responseCount;
+				if (typeof user !== "undefined") {
+					item.id      = user.profile.id;
+					item.mail    = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
+					csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
+				} else {
+					csvString += item.nick + "," + responseTime + ",,\n";
+				}
+			}
+		});
+
+		return {
+			href: 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvString),
+			name: hashtag + "_evaluated_" + Router.current().params.id + "_" + timeString + ".csv"
+		};
+	}
+});
+
+Template.leaderBoard.helpers({
 	getNormalizedIndex: (index)=> {
 		return index + 1;
 	},
@@ -37,9 +125,6 @@ Template.leaderBoard.helpers({
 	},
 	isOwnNick: (nick) => {
 		return nick === localStorage.getItem(Router.current().params.quizName + "nick");
-	},
-	getTitleText: ()=> {
-		return Router.current().params.id === "all" ? TAPi18n.__("view.leaderboard.title.all_questions") : TAPi18n.__("view.leaderboard.title.single_question", {questionId: (parseInt(Router.current().params.id) + 1)});
 	},
 	parseTimeToSeconds: function (milliseconds) {
 		let seconds = (milliseconds / 1000).toFixed(2);
@@ -80,8 +165,14 @@ Template.leaderBoard.helpers({
 	},
 	leaderBoardItems: ()=> {
 		if (Session.get("responsesCountOverride")) {
+			if (Router.current().params.id === "all") {
+				return Session.get("nicks_alwaysCorrect");
+			}
 			return Session.get("nicks");
 		} else {
+			if (Router.current().params.id === "all") {
+				return [{value: Session.get("nicks_alwaysCorrect").slice(0, Session.get("maxResponseButtons") + 1)}];
+			}
 			return [{value: Session.get("nicks")[0].value.slice(0, Session.get("maxResponseButtons") + 1)}];
 		}
 	},

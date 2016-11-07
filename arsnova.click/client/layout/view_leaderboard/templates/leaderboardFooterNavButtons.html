@@ -1,0 +1,43 @@
+<template name="leaderboardFooterNavButtons">
+    <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" style="display:block;">
+        <div class="col-xs-{{getButtonCols}}">
+            <button class="button button-back tabbable"
+                    id="js-btn-backToResults">
+                <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
+                <span class="ansBtn">{{_ "global.back"}}</span>
+            </button>
+        </div>
+        {{#unless noLeaderBoardItems}}
+            {{#if hasTooMuchButtons}}
+                <div class="col-xs-4">
+                    {{#if hasOverridenDefaultButtonCount }}
+                        <button class="button button-success tabbable"
+                                id="showLess">
+                            <span class="glyphicon glyphicon-menu-up glyph-left"></span>
+                            <span class="ansBtn">{{_ "view.leaderboard.show_less"}}</span>
+                        </button>
+                    {{else}}
+                        <button class="button button-success tabbable"
+                                id="showMore">
+                            <span class="ansBtn">{{_ "view.leaderboard.show_more" invisibleResponsesCount count=invisibleResponsesCount}}</span>
+                            <span class="glyphicon glyphicon-menu-down glyph-right"></span>
+                        </button>
+                    {{/if}}
+                </div>
+            {{/if}}
+            {{#if isOwner}}
+                <div class="col-xs-{{getButtonCols}}">
+                    {{#with exportData}}
+                        <a href="{{this.href}}" download="{{this.name}}">
+                            <button class="button button-purple tabbable"
+                                    id="exportToCSV">
+                                <span class="ansBtn">{{_ "view.leaderboard.export"}}</span>
+                                <span class="glyphicon glyphicon-export glyph-right"></span>
+                            </button>
+                        </a>
+                    {{/with}}
+                </div>
+            {{/if}}
+        {{/unless}}
+    </div>
+</template>

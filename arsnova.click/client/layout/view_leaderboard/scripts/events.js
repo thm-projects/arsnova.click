@@ -18,7 +18,7 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 
-Template.leaderBoard.events({
+Template.leaderboardFooterNavButtons.events({
 	'click #showMore': ()=> {
 		Session.set("responsesCountOverride", true);
 	},

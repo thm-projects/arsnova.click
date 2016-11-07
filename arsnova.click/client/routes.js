@@ -395,9 +395,8 @@ Router.route('/:quizName/leaderBoard/:id', {
 		if (!globalEventStackObserver.isRunning()) {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
 		}
-		this.render('footerNavButtons', {to: 'footer.navigation', data: function () {
-			return {backId: "backButton", forwardId: "forwardButton"};
-		}});
+		this.render('leaderboardTitle', {to: 'header.title'});
+		this.render('leaderboardFooterNavButtons', {to: 'footer.navigation'});
 		this.render('leaderBoard');
 	}
 });

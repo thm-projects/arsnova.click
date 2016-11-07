@@ -20,6 +20,11 @@ import {Template} from 'meteor/templating';
 import {getLeaderBoardItems, getAllNicksWhichAreAlwaysRight} from './lib.js';
 
 Template.leaderBoard.onCreated(function () {
-	Session.set("nicks", getLeaderBoardItems());
-	Session.set("nicks_alwaysCorrect", getAllNicksWhichAreAlwaysRight());
+	if (Router.current().params.id === "all") {
+		Session.set("nicks_alwaysCorrect", getAllNicksWhichAreAlwaysRight());
+		Session.set("allMembersCount",Session.get("nicks_alwaysCorrect").length);
+	} else {
+		Session.set("nicks", getLeaderBoardItems());
+		Session.set("allMembersCount",Session.get("nicks")[0].value.length);
+	}
 });

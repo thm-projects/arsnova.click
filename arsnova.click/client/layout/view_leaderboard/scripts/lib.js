@@ -41,11 +41,10 @@ export function calculateButtonCount(allMembersCount) {
 	 - get the mainContentContainer height (the content wrapper for all elements)
 	 - subtract the appTitle height (the indicator for the question index)
 	 */
-	var viewport = $('.container'),
-		appTitle = $('#appTitle'),
+	var viewport = $('.contentPosition'),
 		firstItem = $('.firstLeaderBordItem');
 
-	var viewPortHeight = viewport.outerHeight() - appTitle.outerHeight() - firstItem.outerHeight();
+	var viewPortHeight = viewport.outerHeight() - firstItem.outerHeight();
 
 	/* The height of the learner button must be set manually if the html elements are not yet generated */
 	var btnLearnerHeight = $('.button-leader').first().parent().outerHeight(true) ? $('.button-leader').first().parent().outerHeight(true) : 70;
@@ -97,8 +96,7 @@ function getLeaderBoardItemsByIndex(index) {
 				delete param.isCorrect;
 				delete param.answerOptionNumber;
 				delete param.inputValue;
-				if (((questionItem.type !== "RangedQuestion" && !checkAnswerOptionDoc) || questionItem.type === "RangedQuestion") &&
-					!checkQuestionDoc) {
+				if ((questionItem.type !== "RangedQuestion" && !checkAnswerOptionDoc || questionItem.type === "RangedQuestion") && !checkQuestionDoc) {
 					userHasRightAnswers = false;
 				} else {
 					totalResponseTime += userResponse.responseTime;
@@ -159,7 +157,7 @@ function getLeaderBoardItemsByIndex(index) {
 		}
 	});
 
-	Session.set("allMembersCount",allGoodMembers.length);
+	console.log(index, allGoodMembers.length);
 	calculateButtonCount(allGoodMembers.length);
 	return _.sortBy(allGoodMembers, 'responseTime').slice(0, Session.get("maxResponseButtons") + 1);
 }

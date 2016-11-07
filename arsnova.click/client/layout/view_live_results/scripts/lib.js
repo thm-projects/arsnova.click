@@ -191,7 +191,7 @@ export function startCountdown(index, retry = 0) {
 		if (!localData.containsHashtag(Router.current().params.quizName)) {
 			return;
 		}
-		const debugMembers = MemberListCollection.find({nick: {$regex: "debug_user_*", $options: "i"}}).fetch();
+		const debugMembers = MemberListCollection.find({isDummyUser: true}).fetch();
 		debugMembers.forEach(function (member) {
 			const replyTimer = randomIntFromInterval(0, countdownValue - 1);
 			if (replyTimer >= countdownValue) {
@@ -222,23 +222,8 @@ export function startCountdown(index, retry = 0) {
 								}
 							});
 						} else if (randomChance > 0.25 && randomChance <= 0.75) {
-							if (Math.random() > 0.5) {
-								Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().forEach(function (answerItem) {
-									if (answerItem.getIsCorrect()) {
-										configObj.answerOptionNumber = answerItem.getAnswerOptionNumber();
-										Meteor.call('ResponsesCollection.addResponse', configObj);
-									}
-								});
-							} else {
-								let hasAnswered = false;
-								Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().forEach(function (answerItem) {
-									if (!answerItem.getIsCorrect() && !hasAnswered) {
-										hasAnswered = true;
-										configObj.answerOptionNumber = answerItem.getAnswerOptionNumber();
-										Meteor.call('ResponsesCollection.addResponse', configObj);
-									}
-								});
-							}
+							configObj.answerOptionNumber = randomIntFromInterval(0, Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().length - 1);
+							Meteor.call('ResponsesCollection.addResponse', configObj);
 						} else {
 							let hasAnswered = false;
 							Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().forEach(function (answerItem) {

@@ -529,6 +529,7 @@ Template.footerNavButtons.events({
 			case "leaderBoard":
 				break;
 			case "showMore":
+			case "nicknameCategories":
 				history.back();
 				break;
 		}

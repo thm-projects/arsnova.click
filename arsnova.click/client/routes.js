@@ -325,7 +325,7 @@ Router.route('/:quizName/nicknameCategories', {
 				globalEventStackObserver.startObserving(Router.current().params.quizName);
 			}
 			this.render('footerNavButtons', {to: 'footer.navigation', data: function () {
-				return {backId: "backButton", forwardId: "forwardButton"};
+				return {backId: "backButton", forwardText: 'view.nickname_categories.back'};
 			}});
 			this.render('nicknameCategories');
 		} else {

@@ -45,6 +45,10 @@ export function insertInQuestionText(textStart, textEnd) {
 
 export function markdownAlreadyExistsAndAutoRemove(textStart, textEnd) {
 	let textarea = document.getElementById('questionText');
+
+	// fix for IE / Edge: get dismissed focus back to retrieve selection values
+	textarea.focus();
+
 	let scrollPos = textarea.scrollTop;
 	let strPosBegin = textarea.selectionStart;
 	let strPosEnd = textarea.selectionEnd;

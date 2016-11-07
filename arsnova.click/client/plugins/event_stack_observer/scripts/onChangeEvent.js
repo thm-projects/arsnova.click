@@ -126,7 +126,7 @@ function addLiveresultsChangeEvents() {
 					autostart: true,
 					instanceId: "answers_" + value.questionIndex,
 					templateName: 'questionAndAnswerSplashscreen',
-					closeOnButton: '#js-btn-hideQuestionModal',
+					closeOnButton: '#js-btn-hideQuestionModal, .splashscreen-container-close',
 					onRendered: function (instance) {
 						var answerContent = "";
 						var questionContent = "";

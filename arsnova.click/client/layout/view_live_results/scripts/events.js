@@ -77,7 +77,7 @@ Template.liveResults.events({
 		setQuestionDialog(new Splashscreen({
 			autostart: true,
 			templateName: 'questionAndAnswerSplashscreen',
-			closeOnButton: '#js-btn-hideQuestionModal',
+			closeOnButton: '#js-btn-hideQuestionModal, .splashscreen-container-close',
 			instanceId: "questionAndAnswers_" + targetId,
 			onRendered: function (instance) {
 				instance.templateSelector.find('#questionContent').html(questionContent);
@@ -133,7 +133,7 @@ Template.liveResults.events({
 			new Splashscreen({
 				autostart: true,
 				templateName: 'returnToLobbySplashscreen',
-				closeOnButton: '#closeDialogButton, #returnToLobby',
+				closeOnButton: '#closeDialogButton, #returnToLobby, .splashscreen-container-close',
 				onRendered: function (template) {
 					template.templateSelector.find("#returnToLobby").on("click", function () {
 						returnToLobby();

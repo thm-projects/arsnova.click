@@ -149,7 +149,7 @@ Meteor.startup(function () {
 				new Splashscreen({
 					autostart: true,
 					templateName: "exitSessionSplashscreen",
-					closeOnButton: '#closeDialogButton, #exitSessionButton',
+					closeOnButton: '#closeDialogButton, #exitSessionButton, .splashscreen-container-close',
 					onRendered: function (instance) {
 						instance.templateSelector.find('#exitSessionButton').on('click', function () {
 							cleanUp();

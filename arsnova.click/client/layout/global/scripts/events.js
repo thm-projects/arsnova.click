@@ -24,11 +24,7 @@ Template.connectionQualityHeader.events({
 		new Splashscreen({
 			autostart: true,
 			templateName: "connectionQualitySplashscreen",
-			onRendered: function (template) {
-				template.templateSelector.find('#btn-hidePreviewModal').on('click', function () {
-					template.destroy();
-				});
-			}
+			closeOnButton: "#btn-hidePreviewModal, .splashscreen-container-close"
 		});
 		resetConnectionIndication();
 		startConnectionIndication();

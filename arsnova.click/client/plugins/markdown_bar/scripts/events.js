@@ -35,7 +35,7 @@ Template.markdownBar.events({
 	"click #previewMarkdownButton": function () {
 		new Splashscreen({autostart: true,
 			templateName: "questionPreviewSplashscreen",
-			closeOnButton: '#js-btn-hidePreviewModal',
+			closeOnButton: '#js-btn-hidePreviewModal, .splashscreen-container-close',
 			onRendered: function (instance) {
 				mathjaxMarkdown.initializeMarkdownAndLatex();
 				let content = mathjaxMarkdown.getContent($('#questionText').val());

@@ -39,7 +39,7 @@ Template.memberlist.events({
 		new Splashscreen({
 			autostart: true,
 			templateName: "kickMemberSplashscreen",
-			closeOnButton: '#closeDialogButton, #kickMemberButton',
+			closeOnButton: '#closeDialogButton, #kickMemberButton, .splashscreen-container-close',
 			onRendered: function (instance) {
 				instance.templateSelector.find('#nickName').text($(event.currentTarget).text().replace(/(?:\r\n|\r| |\n)/g, ''));
 				instance.templateSelector.find('#kickMemberButton').on('click', function () {

@@ -34,19 +34,14 @@ Template.liveResultsFooterNavButtons.helpers({
 	isRunningQuestion: ()=> {
 		return Session.get("countdownInitialized");
 	},
-	showLeaderBoardButton: function (index) {
-		const questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc) {
+	showGlobalLeaderboardButton: ()=> {
+		var questionDoc = QuestionGroupCollection.findOne();
+		let eventDoc = EventManagerCollection.findOne();
+		if (!questionDoc || !eventDoc) {
 			return;
 		}
-		return !Session.get("countdownInitialized") && (
-				questionDoc.questionList[index].type === "RangedQuestion" ||
-				questionDoc.questionList[index].type === "FreeTextQuestion" ||
-				AnswerOptionCollection.find({
-					questionIndex: index,
-					isCorrect: true
-				}).count() > 0
-			);
+
+		return countdown === null && questionDoc.questionList.length > 1 && eventDoc.questionIndex >= questionDoc.questionList.length - 1;
 	},
 	hasCorrectAnswerOptionsOrRangedQuestion: ()=> {
 		const questionDoc = QuestionGroupCollection.findOne();
@@ -107,10 +102,41 @@ Template.liveResultsFooterNavButtons.helpers({
 	}
 });
 
-Template.liveResults.helpers({
+Template.liveResultsTitle.helpers({
+	getCountVotings: function () {
+		let eventDoc = EventManagerCollection.findOne();
+		if (!eventDoc) {
+			return 0;
+		}
+
+		var sumVoted = 0;
+		MemberListCollection.find().map(function (member) {
+			var responseDoc = ResponsesCollection.findOne({
+				questionIndex: eventDoc.questionIndex,
+				userNick: member.nick
+			});
+			if (responseDoc !== undefined) {
+				sumVoted++;
+			}
+		});
+		return sumVoted;
+	},
+	getCountdown: function () {
+		if (Session.get("countdownInitialized")) {
+			var roundedCountdown = Math.round(countdown.get());
+			return roundedCountdown < 0 ? 0 : roundedCountdown;
+		}
+		return 0;
+	},
 	votingText: function () {
 		return Session.get("sessionClosed") ? "view.liveResults.game_over" : "view.liveResults.countdown";
 	},
+	isRunningQuestion: ()=> {
+		return Session.get("countdownInitialized");
+	}
+});
+
+Template.liveResults.helpers({
 	isOwner: function () {
 		return localData.containsHashtag(Router.current().params.quizName);
 	},

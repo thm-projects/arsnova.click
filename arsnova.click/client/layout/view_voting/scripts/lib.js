@@ -128,7 +128,7 @@ export function makeAndSendFreeTextResponse(value) {
 }
 
 function calculateAnswerRowHeight() {
-	return $(window).height() - $('.header-title').height() - $('#appTitle').height() - 20 /*padding height of apptitle*/ - $('.voting-helper-buttons').height() - $('.navbar-fixed-bottom').height() - 15;
+	return $(".contentPosition").height() - $('.voting-helper-buttons').height() - parseInt($('.answer-row').css("margin-top").replace("px",""));
 }
 
 export function formatAnswerButtons() {

@@ -80,7 +80,8 @@ Router.configure({
 			subscriptions.push(subsCache.subscribe('NicknameCategoriesCollection.join'));
 		}
 		return subscriptions;
-	}
+	},
+	fastRender: true
 });
 
 Router.onStop(function () {
@@ -368,6 +369,7 @@ Router.route('/:quizName/onpolling', {
 		if (!globalEventStackObserver.isRunning()) {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
 		}
+		this.render("votingviewTitel", {to: "header.title"});
 		this.render('votingview');
 	}
 });
@@ -376,9 +378,11 @@ Router.route('/:quizName/results', {
 		if (!globalEventStackObserver.isRunning()) {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
 		}
-		this.render('footerNavButtons', {to: 'footer.navigation', data: function () {
-			return {backId: "backButton", forwardId: "forwardButton"};
-		}});
+		if (localData.containsHashtag(Router.current().params.quizName)) {
+			this.render('gamificationAnimation', {to: 'global.gamificationAnimation'});
+		}
+		this.render('liveResultsTitle', {to: 'header.title'});
+		this.render('liveResultsFooterNavButtons', {to: 'footer.navigation'});
 		this.render('live_results');
 	}
 });

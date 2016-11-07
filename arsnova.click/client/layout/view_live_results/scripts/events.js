@@ -120,6 +120,20 @@ Template.liveResults.events({
 			}
 		});
 	},
+	"click .btn-more-learners": function () {
+		Session.set("LearnerCount", MemberListCollection.find().count());
+		Session.set("LearnerCountOverride", true);
+	},
+	'click .btn-less-learners': function () {
+		Session.set("LearnerCountOverride", false);
+		calculateButtonCount();
+	},
+	'click .btn-learner': function (event) {
+		event.preventDefault();
+	}
+});
+
+Template.liveResultsFooterNavButtons.events({
 	'click #backButton': (event)=> {
 		event.stopPropagation();
 		const returnToLobby = function () {
@@ -177,16 +191,5 @@ Template.liveResults.events({
 	'click #showNextQuestionDialog': (event)=> {
 		event.stopPropagation();
 		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, EventManagerCollection.findOne().questionIndex + 1);
-	},
-	"click .btn-more-learners": function () {
-		Session.set("LearnerCount", MemberListCollection.find().count());
-		Session.set("LearnerCountOverride", true);
-	},
-	'click .btn-less-learners': function () {
-		Session.set("LearnerCountOverride", false);
-		calculateButtonCount();
-	},
-	'click .btn-learner': function (event) {
-		event.preventDefault();
 	}
 });

@@ -17,6 +17,7 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
+import {Tracker} from 'meteor/tracker';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
@@ -25,6 +26,7 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {RangedQuestion} from "/lib/questions/question_ranged.js";
 import {FreeTextQuestion} from "/lib/questions/question_freetext.js";
 import * as localData from '/lib/local_storage.js';
+import * as headerlib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {buzzsound1, whistleSound, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
@@ -33,6 +35,7 @@ export let countdown = null;
 export let routeToLeaderboardTimer = null;
 export let questionDialog = null;
 let questionIndex = -1;
+export const liveResultsTracker = new Tracker.Dependency();
 
 export function deleteCountdown() {
 	if (countdown) {

@@ -33,15 +33,18 @@ Template.votingview.helpers({
 	answerOptionLetter: function (number) {
 		return String.fromCharCode((number.hash.number + 65));
 	},
-	getCountdown: function () {
-		if (Session.get("countdownInitialized")) {
-			return TAPi18n.__("view.voting.seconds_left", {value: countdown.get(), count: countdown.get()});
-		}
-	},
 	isRangedQuestion: function () {
 		return QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type === "RangedQuestion";
 	},
 	isFreeTextQuestion: function () {
 		return QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type === "FreeTextQuestion";
+	}
+});
+
+Template.votingviewTitel.helpers({
+	getCountdown: function () {
+		if (Session.get("countdownInitialized")) {
+			return TAPi18n.__("view.voting.seconds_left", {value: countdown.get(), count: countdown.get()});
+		}
 	}
 });

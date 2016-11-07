@@ -21,6 +21,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
+import * as headerLib from '/client/layout/region_header/lib.js';
 import {formatAnswerButtons, startCountdown} from './lib.js';
 
 Template.votingview.onRendered(function () {
@@ -31,6 +32,11 @@ Template.votingview.onRendered(function () {
 		});
 		Meteor.defer(formatAnswerButtons);
 	}
+
+	this.autorun(function () {
+		headerLib.titelTracker.depend();
+		formatAnswerButtons();
+	}.bind(this));
 
 	footerElements.removeFooterElements();
 	footerElements.calculateFooter();

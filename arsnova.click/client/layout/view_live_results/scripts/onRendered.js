@@ -23,9 +23,9 @@ import {SessionConfigurationCollection} from '/lib/session_configuration/collect
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {showReadingConfirmationSplashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
-import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
+import * as headerlib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
-import {calculateButtonCount, startCountdown} from './lib.js';
+import {calculateButtonCount, startCountdown, liveResultsTracker} from './lib.js';
 
 Template.liveResults.onRendered(()=> {
 	if (EventManagerCollection.findOne().readingConfirmationIndex < 1 &&
@@ -74,14 +74,26 @@ Template.liveResults.onRendered(()=> {
 
 	calculateButtonCount();
 	Session.set("LearnerCountOverride", false);
-	calculateHeaderSize();
+	headerlib.calculateHeaderSize();
 	$(window).resize(function () {
 		calculateButtonCount();
 		Session.set("LearnerCountOverride", false);
-		calculateHeaderSize();
+		headerlib.calculateHeaderSize();
 	});
 });
 
 Template.readingConfirmedLearner.onRendered(function () {
 	calculateButtonCount();
+});
+
+Template.liveResultsTitle.onRendered(function () {
+	let countdownActive = Session.get("countdownInitialized");
+	this.autorun(function () {
+		const tmpCountdownActive = Session.get("countdownInitialized");
+		if (countdownActive !== tmpCountdownActive) {
+			countdownActive = tmpCountdownActive;
+			liveResultsTracker.changed();
+		}
+	});
+	liveResultsTracker.changed();
 });

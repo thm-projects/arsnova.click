@@ -17,27 +17,7 @@
 
 <template name="liveResults">
 	<div id="liveResultsFrame">
-        {{#if isOwner}}
-            {{> gamificationAnimation}}
-        {{/if}}
         <div class="row full-screen-content">
-            {{#if isRunningQuestion}}
-                <div class="row-padding-bottom">
-                    <div class="col-xs-3 top-bar-content">
-                        <span class="glyphicon icon-top-bar glyphicon-send glyphicon-style center" aria-hidden="true">
-                            <span class="titel">{{getCountVotings}}</span>
-                        </span>
-                    </div>
-                    <div class="col-xs-6 text-center">
-                        <div id="appTitle" class="titel subtitel-padding-top">{{_ votingText}}</div>
-                    </div>
-                    <div class="col-xs-3 top-bar-content">
-                        <span class="glyphicon icon-top-bar glyphicon-hourglass glyphicon-style center" aria-hidden="true">
-                            <span class="titel">{{getCountdown}}</span>
-                        </span>
-                    </div>
-                </div>
-            {{/if}}
             <div class="col-xs-12 question-wrapper">
                 {{#each questionList}}
                     <div class="row question-row" id="question-row_{{displayIndex}}">

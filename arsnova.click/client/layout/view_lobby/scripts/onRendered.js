@@ -52,6 +52,9 @@ Template.memberlist.onRendered(function () {
 	}
 	footerElements.calculateFooter();
 
+	$('.navbar-footer-placeholder').hide();
+	$('.navbar-footer').show();
+
 	/* Auto-Open the QR-Code Window */
 	setTimeout(function () {
 		$('#qr-code').click();

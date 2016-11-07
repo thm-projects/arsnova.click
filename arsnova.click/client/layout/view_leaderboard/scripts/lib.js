@@ -48,7 +48,7 @@ export function calculateButtonCount(allMembersCount) {
 	var viewPortHeight = viewport.outerHeight() - appTitle.outerHeight() - firstItem.outerHeight();
 
 	/* The height of the learner button must be set manually if the html elements are not yet generated */
-	var btnLearnerHeight = $('.button-leader').first().outerHeight(true) ? $('.button-leader').first().outerHeight(true) : 50;
+	var btnLearnerHeight = $('.button-leader').first().parent().outerHeight(true) ? $('.button-leader').first().parent().outerHeight(true) : 70;
 
 	/* Calculate how much buttons we can place in the viewport until we need to scroll */
 	var queryLimiter = Math.floor(viewPortHeight / btnLearnerHeight);
@@ -60,6 +60,7 @@ export function calculateButtonCount(allMembersCount) {
 	var limitModifier = viewport.outerWidth() >= 992 ? 2 : 1;
 
 	queryLimiter *= limitModifier;
+	queryLimiter -= limitModifier;
 	if (queryLimiter <= 0) {
 		queryLimiter = limitModifier;
 	}
@@ -160,7 +161,7 @@ function getLeaderBoardItemsByIndex(index) {
 
 	Session.set("allMembersCount",allGoodMembers.length);
 	calculateButtonCount(allGoodMembers.length);
-	return _.sortBy(allGoodMembers, 'responseTime').slice(0, Session.get("maxResponseButtons"));
+	return _.sortBy(allGoodMembers, 'responseTime').slice(0, Session.get("maxResponseButtons") + 1);
 }
 
 export function getLeaderBoardItems() {

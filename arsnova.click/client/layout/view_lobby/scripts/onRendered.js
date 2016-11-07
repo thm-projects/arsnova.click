@@ -17,7 +17,6 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {Tracker} from 'meteor/tracker';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {calculateHeaderSize, titelTracker} from '/client/layout/region_header/lib.js';

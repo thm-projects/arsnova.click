@@ -56,6 +56,15 @@ Template.learner.helpers({
 	}
 });
 
+Template.memberlistTitel.helpers({
+	isOwner: function () {
+		return localData.containsHashtag(Router.current().params.quizName);
+	},
+	memberlistCount: function () {
+		return MemberListCollection.find().count();
+	}
+});
+
 Template.memberlistFooterNavButtons.helpers({
 	hasTooMuchButtons: ()=> {
 		return Session.get("learnerCountOverride") || (Session.get("allMembersCount") - Session.get("maxLearnerButtons") > 0);

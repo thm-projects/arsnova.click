@@ -49,12 +49,11 @@ export function calculateTitelHeight() {
 	var container = $(".container");
 	var footerHeight = $(".fixed-bottom").outerHeight(true) + $(".footer-info-bar").outerHeight();
 	var navbarFooterHeight = $('.navbar-fixed-bottom').is(":visible") ? $(".navbar-fixed-bottom").outerHeight() : 0;
-	var finalHeight = $(window).height() - fixedTop.outerHeight() - navbarFooterHeight - footerHeight;
 
 	$('.titel').css('margin-top', fixedTop.outerHeight() * 1.1);
 
+	var finalHeight = $(window).height() - $('.row-padding-bottom').outerHeight() - navbarFooterHeight - footerHeight;
 	container.css("height", finalHeight);
-	container.css("margin-top", fixedTop.outerHeight());
 
 	titelTracker.changed();
 	return {

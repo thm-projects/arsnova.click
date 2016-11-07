@@ -352,22 +352,11 @@ Router.route('/:quizName/memberlist', {
 		if (!globalEventStackObserver.isRunning()) {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
 		}
+		this.render("memberlistTitel", {to: "header.title"});
 		this.render('memberlistFooterNavButtons', {to: 'footer.navigation', data: function () {
 			return {backId: "backButton", forwardId: "forwardButton"};
 		}});
 		this.render("memberlist");
-	}
-});
-
-Router.route('/:quizName/votingview', {
-	action: function () {
-		if (!globalEventStackObserver.isRunning()) {
-			globalEventStackObserver.startObserving(Router.current().params.quizName);
-		}
-		this.render('footerNavButtons', {to: 'footer.navigation', data: function () {
-			return {backId: "backButton", forwardId: "forwardButton"};
-		}});
-		this.render('votingview');
 	}
 });
 
@@ -376,14 +365,7 @@ Router.route('/:quizName/onpolling', {
 		if (!globalEventStackObserver.isRunning()) {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
 		}
-		if (localData.containsHashtag(Router.current().params.quizName)) {
-			this.render('footerNavButtons', {to: 'footer.navigation', data: function () {
-				return {backId: "backButton", forwardId: "forwardButton"};
-			}});
-			this.render('live_results');
-		} else {
-			this.render('votingview');
-		}
+		this.render('votingview');
 	}
 });
 Router.route('/:quizName/results', {

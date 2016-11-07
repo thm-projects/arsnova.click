@@ -17,30 +17,8 @@
 
 <template name="memberlist">
     <div id="memberlist">
-        {{#if isOwner}}
-            <div class="row row-padding-bottom row-padding-top quiz-lobby-header">
-                <div class="col-xs-3">
-				    <div class="titel" id="memberListCounter">
-                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                        <span>{{memberlistCount}}</span>
-                    </div>
-                </div>
-                <div class="col-xs-7">
-                    <div class="titel" id="lobbyTitle">
-                        <span>{{_ "view.lobby.title"}}</span>
-                    </div>
-                </div>
-            </div>
-        {{/if}}
         <div class="row">
             <div class="col-md-12 contentFrame">
-                {{#unless isOwner}}
-                    <div class="row">
-                        <div class="titel-relative text-light text-center" id="attendee-in-quiz-wrapper">
-                            <div class="titel margin-to-logo">{{_ "view.lobby.ready"}}</div>
-                        </div>
-                    </div>
-                {{/unless}}
                 {{#unless hasPlayers}}
                     <div class="row">
                         <div class="col-xs-12">

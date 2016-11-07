@@ -41,15 +41,9 @@ export function calculateButtonCount(allMembersCount) {
 	 - subtract the attendee-in-quiz-wrapper height (the session information for the attendees)
 	 - subtract the margin to the top (the title or the show more button)
 	 */
-	var viewport = $(".contentPosition"),
-		titleBar = $('.row-padding-bottom'),
-		learnerListMargin = $('.learner-list').length > 0 ? parseInt($('.learner-list').first().css('margin-top').replace("px", "")) : 0;
+	var viewport = $(".contentPosition");
 
-	var viewPortHeight = viewport.height() -
-		titleBar.outerHeight(true) -
-		$('#waiting_for_players_notifier').outerHeight() -
-		$('#attendee-in-quiz-wrapper').outerHeight(true) -
-		learnerListMargin;
+	var viewPortHeight = viewport.height();
 	$('#learner-list').height(viewPortHeight);
 
 	/* The height of the learner button must be set manually if the html elements are not yet generated */

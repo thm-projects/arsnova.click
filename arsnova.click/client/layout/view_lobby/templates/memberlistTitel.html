@@ -1,0 +1,25 @@
+<template name="memberlistTitel">
+    <div class="container-fluid">
+        <div class="row row-padding-bottom row-padding-top quiz-lobby-header">
+            {{#if isOwner}}
+                <div class="col-xs-3">
+                    <div class="titel" id="memberListCounter">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        <span>{{memberlistCount}}</span>
+                    </div>
+                </div>
+                <div class="col-xs-7">
+                    <div class="titel" id="lobbyTitle">
+                        <span>{{_ "view.lobby.title"}}</span>
+                    </div>
+                </div>
+            {{else}}
+                <div class="col-xs-12">
+                    <div class="titel text-light text-center" id="attendee-in-quiz-wrapper">
+                        <span>{{_ "view.lobby.ready"}}</span>
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+</template>

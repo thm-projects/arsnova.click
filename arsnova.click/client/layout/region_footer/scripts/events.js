@@ -486,6 +486,12 @@ Template.footerNavButtons.events({
 					Router.go("/" + Router.current().params.quizName + "/memberlist");
 				}
 				break;
+			case "results":
+				break;
+			case "onpolling":
+				break;
+			case "leaderBoard":
+				break;
 		}
 	},
 	"click #backButton": function () {
@@ -517,6 +523,12 @@ Template.footerNavButtons.events({
 				} else {
 					Router.go("/" + Router.current().params.quizName + "/settimer");
 				}
+				break;
+			case "results":
+				break;
+			case "onpolling":
+				break;
+			case "leaderBoard":
 				break;
 		}
 	}

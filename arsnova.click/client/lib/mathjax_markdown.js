@@ -206,16 +206,9 @@ export const mathjaxMarkdown = {
 			size[1] = isNaN(size[1]) ? 'initial;' : size[1] + 'px;';
 			alignment = size[2] ? size[2] : alignment;
 
-			var maxWitdhOfContainer = $('.modal-markdown-body').width() - 60;
-
-			if (size[0] === 'initial;' || maxWitdhOfContainer < size[0]) {
-				// width can't be larger than container width and initial equals auto alignment
-				size = '"width: 100%"';
-			} else {
-				size = size[1] && size[1] !== 'inital;' ?
-				'"max-width:' + size[0] + 'max-height:' + size[1] + '"' :
-				'"max-width:' + size[0] + '"';
-			}
+			size = size[1] && size[1] !== 'inital;' ?
+			'"max-width:100%;width:' + size[0] + 'max-height:' + size[1] + '"' :
+			'"max-width:100%;width:' + size[0] + '"';
 
 			return '<div style="text-align:' + alignment + '">' +
 				'<img class="resizeableImage" title="' + text + '" src="' + href + '" alt="' + text + '" style=' + size + '>' +

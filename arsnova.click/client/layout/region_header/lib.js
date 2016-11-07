@@ -19,6 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
 import * as localData from '/lib/local_storage.js';
+import * as memberlistLib from '/client/layout/view_lobby/scripts/lib.js';
 
 export function isEditingQuestion() {
 	switch (Router.current().route.getName()) {
@@ -52,8 +53,14 @@ export function calculateTitelHeight() {
 
 	$('.titel').css('margin-top', fixedTop.outerHeight() * 1.1);
 
-	var finalHeight = $(window).height() - $('.row-padding-bottom').outerHeight() - navbarFooterHeight - footerHeight;
+	const marginTop = $('.row-padding-bottom').outerHeight(true) || fixedTop.outerHeight() * 1.1;
+	var finalHeight = $(window).height() - marginTop - navbarFooterHeight - footerHeight;
 	container.css("height", finalHeight);
+	if (!$('.row-padding-bottom').outerHeight()) {
+		container.css("margin-top", marginTop);
+	} else {
+		container.css("margin-top", 0);
+	}
 
 	titelTracker.changed();
 	return {
@@ -61,6 +68,10 @@ export function calculateTitelHeight() {
 		marginTop: fixedTop.outerHeight()
 	};
 }
+Tracker.autorun(function () {
+	memberlistLib.memberlistTracker.depend();
+	calculateTitelHeight();
+});
 
 export function calculateHeaderSize() {
 	var titel = $('.header-title').text().trim();

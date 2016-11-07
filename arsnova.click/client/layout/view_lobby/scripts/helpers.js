@@ -19,6 +19,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import * as localData from '/lib/local_storage.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
+import * as lib from './lib.js';
 
 Template.memberlist.helpers({
 	isOwner: function () {
@@ -76,6 +77,7 @@ Template.memberlistFooterNavButtons.helpers({
 		return Session.get("learnerCountOverride");
 	},
 	hasPlayers: function () {
+		lib.memberlistTracker.changed();
 		return MemberListCollection.find().count() > 0;
 	},
 	isOwner: function () {

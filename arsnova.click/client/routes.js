@@ -242,6 +242,9 @@ Router.route("/:quizName", {
 
 Router.route('/:quizName/showMore', {
 	action: function () {
+		this.render('footerNavButtons', {to: 'footer.navigation', data: function () {
+			return {backId: "backButton"};
+		}});
 		this.render('showMore');
 	}
 });

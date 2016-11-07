@@ -16,9 +16,12 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Session} from 'meteor/session';
+import {Tracker} from 'meteor/tracker';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 
 export let memberlistObserver = null;
+
+export const memberlistTracker = new Tracker.Dependency();
 
 export function setMaxMemberButtons(value) {
 	Session.set("maxLearnerButtons", value);
@@ -43,7 +46,7 @@ export function calculateButtonCount(allMembersCount) {
 	 */
 	var viewport = $(".contentPosition");
 
-	var viewPortHeight = viewport.height();
+	var viewPortHeight = viewport.height() - $('#waiting_for_players_notifier').outerHeight(true);
 	$('#learner-list').height(viewPortHeight);
 
 	/* The height of the learner button must be set manually if the html elements are not yet generated */

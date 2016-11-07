@@ -383,12 +383,6 @@ const clickEvents = {
 	}
 };
 
-const defaultBackButtonBehavior = {
-	"click #backButton": function () {
-		Router.go("/");
-	}
-};
-
 Template.footer.events($.extend({}, clickEvents, {
 	"click #show-more": function () {
 		Router.go("/" + Router.current().params.quizName + "/showMore");
@@ -418,9 +412,6 @@ Template.footer.events($.extend({}, clickEvents, {
 }));
 
 Template.showMore.events($.extend({}, clickEvents, {
-	"click #backButton": function () {
-		history.back();
-	}
 }));
 
 Template.contactHeaderBar.events({
@@ -438,19 +429,19 @@ Template.contactHeaderBar.events({
 	}
 });
 
-Template.about.events($.extend({}, defaultBackButtonBehavior, {
+Template.about.events($.extend({}, {
 
 }));
 
-Template.agb.events($.extend({}, defaultBackButtonBehavior, {
+Template.agb.events($.extend({}, {
 
 }));
 
-Template.imprint.events($.extend({}, defaultBackButtonBehavior, {
+Template.imprint.events($.extend({}, {
 
 }));
 
-Template.dataprivacy.events($.extend({}, defaultBackButtonBehavior, {
+Template.dataprivacy.events($.extend({}, {
 
 }));
 
@@ -501,6 +492,13 @@ Template.footerNavButtons.events({
 		}
 		route = route.replace(/(:quizName.)*(.:id)*/g, "");
 		switch (route) {
+			case "hashtagmanagement":
+			case "agb":
+			case "about":
+			case "imprint":
+			case "dataprivacy":
+				Router.go("/");
+				break;
 			case "question":
 				Router.go("/" + Router.current().params.quizName + "/resetToHome");
 				break;
@@ -529,6 +527,9 @@ Template.footerNavButtons.events({
 			case "onpolling":
 				break;
 			case "leaderBoard":
+				break;
+			case "showMore":
+				history.back();
 				break;
 		}
 	}

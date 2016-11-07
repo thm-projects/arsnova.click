@@ -31,12 +31,12 @@ Meteor.methods({
 	'Main.killAll': function (hashtag) {
 		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
 
+		Meteor.call("EventManagerCollection.beforeClear", hashtag);
 		AnswerOptionCollection.remove({hashtag: hashtag});
 		MemberListCollection.remove({hashtag: hashtag});
 		ResponsesCollection.remove({hashtag: hashtag});
 		QuestionGroupCollection.remove({hashtag: hashtag});
 		SessionConfigurationCollection.remove({hashtag: hashtag});
-		Meteor.call("EventManagerCollection.beforeClear", hashtag);
 	},
 	'Main.deleteEverything': function ({hashtag}) {
 		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});

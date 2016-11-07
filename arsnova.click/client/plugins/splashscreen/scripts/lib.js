@@ -214,7 +214,7 @@ export function showReadingConfirmationSplashscreen(index) {
 	new Splashscreen({
 		autostart: true,
 		templateName: 'readingConfirmedSplashscreen',
-		closeOnButton: '#setReadConfirmed',
+		closeOnButton: '#setReadConfirmed, .splashscreen-container-close',
 		onRendered: function (instance) {
 			var content = "";
 			if (questionDoc) {
@@ -262,7 +262,7 @@ export function showFullscreenPicture(event) {
 	new Splashscreen({
 		autostart: true,
 		templateName: 'questionPreviewSplashscreen',
-		closeOnButton: '#js-btn-hidePreviewModal',
+		closeOnButton: '#js-btn-hidePreviewModal, .splashscreen-container-close',
 		instanceId: "resizeableImage",
 		onRendered: function (instance) {
 			var body = instance.templateSelector.find('.modal-markdown-body');

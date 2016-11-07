@@ -121,7 +121,7 @@ Template.header.events({
 			new Splashscreen({
 				autostart: true,
 				templateName: "resetSessionSplashscreen",
-				closeOnButton: '#closeDialogButton, #resetSessionButton',
+				closeOnButton: '#closeDialogButton, #resetSessionButton, .splashscreen-container-close',
 				onRendered: function (instance) {
 					instance.templateSelector.find('#resetSessionButton').on('click', function () {
 						Meteor.call("Main.killAll", Router.current().params.quizName);
@@ -133,7 +133,7 @@ Template.header.events({
 			new Splashscreen({
 				autostart: true,
 				templateName: "exitSessionSplashscreen",
-				closeOnButton: '#closeDialogButton, #exitSessionButton',
+				closeOnButton: '#closeDialogButton, #exitSessionButton, .splashscreen-container-close',
 				onRendered: function (instance) {
 					instance.templateSelector.find('#exitSessionButton').on('click', function () {
 						Router.go("/" + Router.current().params.quizName + "/resetToHome");

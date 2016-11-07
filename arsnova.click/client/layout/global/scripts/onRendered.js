@@ -34,7 +34,8 @@ Template.home.onRendered(function () {
 	if (localData.getAllHashtags().length > 0) {
 		hashtagLib.setHashtagSplashscreen(new Splashscreen({
 			autostart: true,
-			templateName: "showHashtagsSplashscreen"
+			templateName: "showHashtagsSplashscreen",
+			closeOnButton: ".splashscreen-container-close"
 		}));
 	}
 

@@ -82,7 +82,7 @@ function addMemberlistChangeEvents() {
 		if (value.nicks.restrictToCASLogin && !Meteor.user()) {
 			Meteor.loginWithCas(function () {
 				if (!hasTHMMail()) {
-					return;
+					Router.go("/" + Router.current().params.quizName + "/resetToHome");
 				}
 				Meteor.call('MemberListCollection.setLearnerReference', {
 					hashtag: Router.current().params.quizName,
@@ -126,7 +126,7 @@ function addLiveresultsChangeEvents() {
 					autostart: true,
 					instanceId: "answers_" + value.questionIndex,
 					templateName: 'questionAndAnswerSplashscreen',
-					closeOnButton: '#js-btn-hideQuestionModal',
+					closeOnButton: '#js-btn-hideQuestionModal, .splashscreen-container-close',
 					onRendered: function (instance) {
 						var answerContent = "";
 						var questionContent = "";

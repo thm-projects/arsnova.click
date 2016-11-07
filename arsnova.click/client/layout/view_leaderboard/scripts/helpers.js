@@ -25,7 +25,7 @@ import {getLeaderBoardItems, getAllNicksWhichAreAlwaysRight} from './lib.js';
 
 Template.leaderBoard.helpers({
 	getButtonCols: ()=> {
-		const hasTooMuchButtons = Session.get("responsesCountOverride") || (Session.get("allMembersCount") - Session.get("maxResponseButtons") > 0);
+		const hasTooMuchButtons = Session.get("responsesCountOverride") || (Session.get("allMembersCount") - (Session.get("maxResponseButtons") + 1) > 0);
 		const index = Router.current().params.id === "all" ? 0 : Router.current().params.id;
 		return Session.get("nicks")[index] <= 0 ? 12 : hasTooMuchButtons ? 4 : 6;
 	},
@@ -46,13 +46,13 @@ Template.leaderBoard.helpers({
 		return String((seconds < 10 ? "0" + seconds : seconds)).replace(".",",");
 	},
 	invisibleResponsesCount: ()=> {
-		return Session.get("allMembersCount") - Session.get("maxResponseButtons");
+		return Session.get("allMembersCount") - (Session.get("maxResponseButtons") + 1);
 	},
 	hasOverridenDefaultButtonCount: ()=> {
 		return Session.get("responsesCountOverride");
 	},
 	hasTooMuchButtons: ()=> {
-		return Session.get("responsesCountOverride") || (Session.get("allMembersCount") - Session.get("maxResponseButtons") > 0);
+		return Session.get("responsesCountOverride") || (Session.get("allMembersCount") - (Session.get("maxResponseButtons") + 1) > 0);
 	},
 	isGlobalRanking: function () {
 		return Router.current().params.id === "all";
@@ -79,7 +79,11 @@ Template.leaderBoard.helpers({
 		return true;
 	},
 	leaderBoardItems: ()=> {
-		return Session.get("nicks");
+		if (Session.get("responsesCountOverride")) {
+			return Session.get("nicks");
+		} else {
+			return [{value: Session.get("nicks")[0].value.slice(0, Session.get("maxResponseButtons") + 1)}];
+		}
 	},
 	isFirstItem: function (index) {
 		return index === 0;

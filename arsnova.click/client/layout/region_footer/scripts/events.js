@@ -49,7 +49,7 @@ const clickEvents = {
 				new Splashscreen({
 					autostart: true,
 					templateName: "resetSessionSplashscreen",
-					closeOnButton: '#closeDialogButton, #resetSessionButton',
+					closeOnButton: '#closeDialogButton, #resetSessionButton, .splashscreen-container-close',
 					onRendered: function (instance) {
 						instance.templateSelector.find('#resetSessionButton').on('click', function () {
 							Meteor.call("Main.killAll", Router.current().params.quizName);
@@ -148,7 +148,7 @@ const clickEvents = {
 					new Splashscreen({
 						autostart: true,
 						templateName: "renameHashtagSplashscreen",
-						closeOnButton: "#js-btn-closeRenameHashtag, #js-btn-importSession",
+						closeOnButton: "#js-btn-closeRenameHashtag, #js-btn-importSession, .splashscreen-container-close",
 						onRendered: function () {
 							$('#js-btn-importSession').on('click', function () {
 								var hashtag = $("#hashtagRename-input-field").val().trim();
@@ -216,7 +216,7 @@ const clickEvents = {
 		new Splashscreen({
 			autostart: true,
 			templateName: "soundConfig",
-			closeOnButton: "#js-btn-hideSoundModal",
+			closeOnButton: "#js-btn-hideSoundModal, .splashscreen-container-close",
 			onRendered: function (instance) {
 				instance.templateSelector.find('#soundSelect').on('change', function (event) {
 					var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
@@ -352,7 +352,7 @@ const clickEvents = {
 		new Splashscreen({
 			autostart: true,
 			templateName: "editSessionSplashscreen",
-			closeOnButton: '#closeDialogButton, #editSessionButton',
+			closeOnButton: '#closeDialogButton, #editSessionButton, .splashscreen-container-close',
 			onRendered: function (instance) {
 				instance.templateSelector.find('#editSessionButton').on('click', function () {
 					Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
@@ -393,6 +393,9 @@ Template.footer.events($.extend({}, clickEvents, {
 	},
 	"mouseenter .navbar-footer-placeholder": function () {
 		var route = Router.current().route.getName();
+		if (typeof route === "undefined") {
+			return;
+		}
 		route = route.replace(/(:quizName.)*(.:id)*/g, "");
 		if (window.innerHeight == screen.height && route === "memberlist") {
 			$('.navbar-footer-placeholder').hide();
@@ -401,6 +404,9 @@ Template.footer.events($.extend({}, clickEvents, {
 	},
 	"mouseleave .navbar-footer": function () {
 		var route = Router.current().route.getName();
+		if (typeof route === "undefined") {
+			return;
+		}
 		route = route.replace(/(:quizName.)*(.:id)*/g, "");
 		if (window.innerHeight == screen.height && route === "memberlist") {
 			$('.navbar-footer').hide();

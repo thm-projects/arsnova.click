@@ -20,6 +20,7 @@ import {Template} from 'meteor/templating';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {MemberListCollection, userNickSchema} from '/lib/member_list/collection.js';
 import {NicknameCategoriesCollection} from '/lib/nickname_categories/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 import * as lib from './lib.js';
@@ -116,16 +117,14 @@ Template.nickLimitedFooter.events({
 });
 Template.nickLimited.events({
 	"click .selectableNick": function (event) {
-		Meteor.loginWithCas(function () {
-			if (!lib.hasTHMMail()) {
-				return;
-			}
+		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+		const login = function (userRef = undefined) {
 			const nickname = NicknameCategoriesCollection.findOne({_id: $(event.currentTarget).attr("id").replace("selectableNick_", "")}).nick;
 			const bgColor = lib.rgbToHex(lib.getRandomInt(0, 255), lib.getRandomInt(0, 255), lib.getRandomInt(0, 255));
 			Meteor.call('MemberListCollection.addLearner', {
 				hashtag: Router.current().params.quizName,
 				nick: nickname,
-				userRef: Meteor.user()._id,
+				userRef: userRef,
 				privateKey: localData.getPrivateKey(),
 				backgroundColor: bgColor,
 				foregroundColor: lib.transformForegroundColor(lib.hexToRgb(bgColor))
@@ -140,6 +139,19 @@ Template.nickLimited.events({
 					Router.go("/" + Router.current().params.quizName + "/memberlist");
 				}
 			});
-		});
+		};
+		if (!configDoc) {
+			return null;
+		}
+		if (configDoc.nicks.restrictToCASLogin) {
+			Meteor.loginWithCas(function () {
+				if (!lib.hasTHMMail()) {
+					return;
+				}
+				login(Meteor.user()._id);
+			});
+		} else {
+			login();
+		}
 	}
 });

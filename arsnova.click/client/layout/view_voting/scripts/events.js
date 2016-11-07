@@ -59,7 +59,7 @@ Template.votingview.events({
 		new Splashscreen({
 			autostart: true,
 			templateName: 'questionAndAnswerSplashscreen',
-			closeOnButton: '#js-btn-hideQuestionModal',
+			closeOnButton: '#js-btn-hideQuestionModal, .splashscreen-container-close',
 			instanceId: "questionAndAnswers_" + EventManagerCollection.findOne().questionIndex,
 			onRendered: function (instance) {
 				instance.templateSelector.find('#questionContent').html(questionContent);

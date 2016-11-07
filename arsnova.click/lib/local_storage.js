@@ -51,7 +51,7 @@ export function getAllLoweredHashtags() {
 
 export function containsHashtag(hashtag) {
 	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
-		return;
+		return false;
 	}
 	const hashtagString = localStorage.getItem("hashtags");
 	if (!hashtagString) {

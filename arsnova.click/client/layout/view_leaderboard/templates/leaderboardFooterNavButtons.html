@@ -9,7 +9,7 @@
         </div>
         {{#unless noLeaderBoardItems}}
             {{#if hasTooMuchButtons}}
-                <div class="col-xs-4">
+                <div class="col-xs-{{getButtonCols}}">
                     {{#if hasOverridenDefaultButtonCount }}
                         <button class="button button-success tabbable"
                                 id="showLess">

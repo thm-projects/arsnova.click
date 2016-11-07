@@ -21,7 +21,6 @@ import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {getLeaderBoardItems, getAllNicksWhichAreAlwaysRight} from './lib.js';
 
 Template.leaderboardTitle.helpers({
 	getTitleText: ()=> {
@@ -35,29 +34,27 @@ Template.leaderboardFooterNavButtons.helpers({
 			return 12;
 		}
 		const hasTooMuchButtons = Session.get("responsesCountOverride") || (Session.get("allMembersCount") - (Session.get("maxResponseButtons") + 1) > 0);
-		const index = Router.current().params.id === "all" ? -1 : Router.current().params.id;
-		return index === -1 ? Session.get("nicks_alwaysCorrect").length === 0 ? 12 : hasTooMuchButtons ? 4 : 6 : Session.get("nicks")[index] <= 0 ? 12 : hasTooMuchButtons ? 4 : 6;
-	},
-	noLeaderBoardItems: (index)=> {
-		if (!Session.get("nicks") && !Session.get("nicks_alwaysCorrect")) {
-			return true;
-		}
-		if (Router.current().params.id === "all") {
-			return Session.get("nicks_alwaysCorrect").length <= 0;
-		}
-		var items = Session.get("nicks");
-		if (typeof index !== "undefined") {
-			if (items[index].value.length > 0) {
-				return false;
+		if (Session.get("nicks").length === 0) {
+			return 12;
+		} else if (localData.containsHashtag(Router.current().params.quizName)) {
+			if (hasTooMuchButtons) {
+				return 4;
+			} else {
+				return 6;
 			}
 		} else {
-			for (var i = 0; i < items.length; i++) {
-				if (items[i].value.length > 0) {
-					return false;
-				}
+			if (hasTooMuchButtons) {
+				return 6;
+			} else {
+				return 12;
 			}
 		}
-		return true;
+	},
+	noLeaderBoardItems: ()=> {
+		if (!Session.get("nicks")) {
+			return true;
+		}
+		return Session.get("nicks").length === 0;
 	},
 	hasTooMuchButtons: ()=> {
 		return Session.get("responsesCountOverride") || (Session.get("allMembersCount") - (Session.get("maxResponseButtons") + 1) > 0);
@@ -76,8 +73,7 @@ Template.leaderboardFooterNavButtons.helpers({
 		const time = new Date();
 		const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
 		const memberlistResult = MemberListCollection.find({hashtag: hashtag}, {fields: {userRef: 1, nick: 1}, sort: {nick: 1}}).fetch();
-		let responseResult;
-		responseResult = Router.current().params.id === "all" ? getAllNicksWhichAreAlwaysRight() : getLeaderBoardItems();
+		let responseResult = Session.get("nicks");
 		let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";
 
 		memberlistResult.forEach(function (item) {
@@ -143,37 +139,22 @@ Template.leaderBoard.helpers({
 		return Router.current().params.id === "all";
 	},
 	leaderBoardSums: function () {
-		return Session.get("nicks_alwaysCorrect");
+		return Session.get("nicks");
 	},
-	noLeaderBoardItems: (index)=> {
-		if (Router.current().params.id === "all") {
-			return Session.get("nicks_alwaysCorrect").length <= 0;
+	noLeaderBoardItems: ()=> {
+		if (!Session.get("nicks")) {
+			return true;
 		}
-		var items = Session.get("nicks");
-		if (typeof index !== "undefined") {
-			if (items[index].value.length > 0) {
-				return false;
-			}
-		} else {
-			for (var i = 0; i < items.length; i++) {
-				if (items[i].value.length > 0) {
-					return false;
-				}
-			}
-		}
-		return true;
+		return Session.get("nicks").length === 0;
 	},
 	leaderBoardItems: ()=> {
+		if (!Session.get("nicks")) {
+			return false;
+		}
 		if (Session.get("responsesCountOverride")) {
-			if (Router.current().params.id === "all") {
-				return Session.get("nicks_alwaysCorrect");
-			}
 			return Session.get("nicks");
 		} else {
-			if (Router.current().params.id === "all") {
-				return [{value: Session.get("nicks_alwaysCorrect").slice(0, Session.get("maxResponseButtons") + 1)}];
-			}
-			return [{value: Session.get("nicks")[0].value.slice(0, Session.get("maxResponseButtons") + 1)}];
+			return Session.get("nicks").slice(0, Session.get("maxResponseButtons") + 1);
 		}
 	},
 	isFirstItem: function (index) {
@@ -188,7 +169,7 @@ Template.leaderBoard.helpers({
 		const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
 		const memberlistResult = MemberListCollection.find({hashtag: hashtag}, {fields: {userRef: 1, nick: 1}, sort: {nick: 1}}).fetch();
 		let responseResult;
-		responseResult = Router.current().params.id === "all" ? getAllNicksWhichAreAlwaysRight() : getLeaderBoardItems();
+		responseResult = Session.get("nicks");
 		let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";
 
 		memberlistResult.forEach(function (item) {

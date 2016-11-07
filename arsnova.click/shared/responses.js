@@ -17,7 +17,7 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {AnswerOptionCollection, answerOptionNumberSchema} from '/lib/answeroptions/collection.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {ResponsesCollection, rangedInputValueSchema, freeTextInputValueSchema} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {userNickSchema} from '/lib/member_list/collection.js';
@@ -44,14 +44,11 @@ Meteor.methods({
 					freeTextInputValue: freeTextInputValueSchema
 				}).validate({freeTextInputValue: responseDoc.freeTextInputValue});
 				responseValueObject.freeTextInputValue = responseDoc.freeTextInputValue;
-				responseValueObject.answerOptionNumber = 0;
+				responseValueObject.answerOptionNumber = [0];
 			} else {
 				throw new Meteor.Error("ResponsesCollection.addResponse", "invalid_response_value");
 			}
 		} else {
-			new SimpleSchema({
-				answerOptionNumber: answerOptionNumberSchema
-			}).validate({answerOptionNumber: responseDoc.answerOptionNumber});
 			responseValueObject.answerOptionNumber = responseDoc.answerOptionNumber;
 		}
 
@@ -98,7 +95,7 @@ Meteor.methods({
 			foundAnswerBase = AnswerOptionCollection.findOne({
 				hashtag: hashtag,
 				questionIndex: responseDoc.questionIndex,
-				answerOptionNumber: responseDoc.answerOptionNumber
+				answerOptionNumber: {$in: responseDoc.answerOptionNumber}
 			});
 		}
 		if (!foundAnswerBase) {

@@ -100,10 +100,17 @@ export function startCountdown(index) {
 }
 
 export function makeAndSendResponse(answerOptionNumber) {
+	if (answerOptionNumber instanceof Object) {
+		answerOptionNumber = $.map(answerOptionNumber, function (value, index) {
+			if (value) {
+				return index;
+			}
+		});
+	}
 	Meteor.call('ResponsesCollection.addResponse', {
 		hashtag: Router.current().params.quizName,
 		questionIndex: EventManagerCollection.findOne().questionIndex,
-		answerOptionNumber: Number(answerOptionNumber),
+		answerOptionNumber: answerOptionNumber,
 		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
 	});
 }
@@ -122,7 +129,7 @@ export function makeAndSendFreeTextResponse(value) {
 		hashtag: Router.current().params.quizName,
 		questionIndex: EventManagerCollection.findOne().questionIndex,
 		freeTextInputValue: value,
-		answerOptionNumber: 0,
+		answerOptionNumber: [0],
 		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
 	});
 }

@@ -46,7 +46,7 @@ export const responsesCollectionSchema = new SimpleSchema({
 		type: userNickSchema
 	},
 	answerOptionNumber: {
-		type: answerOptionNumberSchema,
+		type: [answerOptionNumberSchema],
 		optional: true
 	},
 	rangedInputValue: {

@@ -93,11 +93,7 @@ Template.votingview.events({
 				}
 				makeAndSendFreeTextResponse(freeTextInputField.val());
 			} else {
-				AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).forEach(function (cursor) {
-					if (responseArr[cursor.answerOptionNumber]) {
-						makeAndSendResponse(cursor.answerOptionNumber);
-					}
-				});
+				makeAndSendResponse(responseArr);
 			}
 		}
 		if (EventManagerCollection.findOne().questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
@@ -108,16 +104,15 @@ Template.votingview.events({
 	"click .sendResponse": function (event) {
 		event.stopPropagation();
 
+		var responseArr = JSON.parse(Session.get("responses"));
+		var currentId = event.currentTarget.id;
+		responseArr[currentId] = responseArr[currentId] ? false : true;
+		Session.set("responses", JSON.stringify(responseArr));
+		Session.set("hasToggledResponse", JSON.stringify(responseArr).indexOf("true") > -1);
+		$(event.target).toggleClass("answer-selected");
 		if (Session.get("questionSC")) {
-			makeAndSendResponse(event.currentTarget.id);
+			makeAndSendResponse(responseArr);
 			countdownFinish();
-		} else {
-			var responseArr = JSON.parse(Session.get("responses"));
-			var currentId = event.currentTarget.id;
-			responseArr[currentId] = responseArr[currentId] ? false : true;
-			Session.set("responses", JSON.stringify(responseArr));
-			Session.set("hasToggledResponse", JSON.stringify(responseArr).indexOf("true") > -1);
-			$(event.target).toggleClass("answer-selected");
 		}
 	},
 	"keydown #rangeInput": function (event) {

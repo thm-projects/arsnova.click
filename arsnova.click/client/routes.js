@@ -356,9 +356,12 @@ Router.route('/:quizName/memberlist', {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
 		}
 		this.render("memberlistTitel", {to: "header.title"});
-		this.render('memberlistFooterNavButtons', {to: 'footer.navigation', data: function () {
-			return {backId: "backButton", forwardId: "forwardButton"};
-		}});
+		this.render('memberlistFooterNavButtons', {
+			to: 'footer.navigation',
+			data: function () {
+				return {backId: "backButton", forwardId: "forwardButton"};
+			}
+		});
 		this.render("memberlist");
 	}
 });

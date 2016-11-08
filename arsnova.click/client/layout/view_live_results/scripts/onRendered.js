@@ -94,6 +94,6 @@ Template.liveResultsTitle.onRendered(function () {
 			countdownActive = tmpCountdownActive;
 			liveResultsTracker.changed();
 		}
-	});
+	}.bind(this));
 	liveResultsTracker.changed();
 });

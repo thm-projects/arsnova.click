@@ -144,7 +144,6 @@ Template.nickLimited.events({
 			return null;
 		}
 		if (configDoc.nicks.restrictToCASLogin) {
-			console.log(configDoc.nicks.restrictToCASLogin);
 			Meteor.loginWithCas(function () {
 				if (!lib.hasTHMMail()) {
 					return;

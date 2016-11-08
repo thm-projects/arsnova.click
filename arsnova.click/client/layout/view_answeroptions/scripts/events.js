@@ -23,12 +23,6 @@ import * as localData from '/lib/local_storage.js';
 import {parseSingleAnswerOptionInput, formatIsCorrectButtons} from './lib.js';
 
 Template.createAnswerOptions.events({
-	"click #backButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/question");
-	},
-	"click #forwardButton": function () {
-		Router.go("/" + Router.current().params.quizName + "/settimer");
-	}
 });
 
 Template.defaultAnswerOptionTemplate.events({

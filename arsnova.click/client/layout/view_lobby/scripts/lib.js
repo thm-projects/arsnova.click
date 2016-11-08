@@ -16,9 +16,12 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Session} from 'meteor/session';
+import {Tracker} from 'meteor/tracker';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 
 export let memberlistObserver = null;
+
+export const memberlistTracker = new Tracker.Dependency();
 
 export function setMaxMemberButtons(value) {
 	Session.set("maxLearnerButtons", value);
@@ -41,12 +44,9 @@ export function calculateButtonCount(allMembersCount) {
 	 - subtract the attendee-in-quiz-wrapper height (the session information for the attendees)
 	 - subtract the margin to the top (the title or the show more button)
 	 */
-	var viewport = $("#mainContentContainer"),
-		attendeeInQuiz = $('#attendee-in-quiz-wrapper'),
-		titleBar = $('.row-padding-bottom'),
-		learnerListMargin = $('.learner-list').length > 0 ? parseInt($('.learner-list').first().css('margin-top').replace("px", "")) : 0;
+	var viewport = $(".contentPosition");
 
-	var viewPortHeight = viewport.outerHeight() - titleBar.height() - attendeeInQuiz.outerHeight() - $('.quiz-lobby-header').outerHeight() - learnerListMargin;
+	var viewPortHeight = viewport.height() - $('#waiting_for_players_notifier').outerHeight(true);
 	$('#learner-list').height(viewPortHeight);
 
 	/* The height of the learner button must be set manually if the html elements are not yet generated */
@@ -71,6 +71,7 @@ export function calculateButtonCount(allMembersCount) {
 	 Template.memberlist.scripts.learners which gets the attendees from the mongo db
 	 */
 	setMaxMemberButtons(queryLimiter);
+	return viewPortHeight;
 }
 
 export function setMemberlistObserver(options) {

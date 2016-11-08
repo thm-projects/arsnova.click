@@ -17,9 +17,10 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {AnswerOptionCollection, answerOptionNumberSchema} from '/lib/answeroptions/collection.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {ResponsesCollection, rangedInputValueSchema, freeTextInputValueSchema} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
 import {userNickSchema} from '/lib/member_list/collection.js';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
 import {EventManagerCollection, questionIndexSchema} from '/lib/eventmanager/collection.js';
@@ -44,14 +45,11 @@ Meteor.methods({
 					freeTextInputValue: freeTextInputValueSchema
 				}).validate({freeTextInputValue: responseDoc.freeTextInputValue});
 				responseValueObject.freeTextInputValue = responseDoc.freeTextInputValue;
-				responseValueObject.answerOptionNumber = 0;
+				responseValueObject.answerOptionNumber = [0];
 			} else {
 				throw new Meteor.Error("ResponsesCollection.addResponse", "invalid_response_value");
 			}
 		} else {
-			new SimpleSchema({
-				answerOptionNumber: answerOptionNumberSchema
-			}).validate({answerOptionNumber: responseDoc.answerOptionNumber});
 			responseValueObject.answerOptionNumber = responseDoc.answerOptionNumber;
 		}
 
@@ -98,13 +96,17 @@ Meteor.methods({
 			foundAnswerBase = AnswerOptionCollection.findOne({
 				hashtag: hashtag,
 				questionIndex: responseDoc.questionIndex,
-				answerOptionNumber: responseDoc.answerOptionNumber
+				answerOptionNumber: {$in: responseDoc.answerOptionNumber}
 			});
 		}
 		if (!foundAnswerBase) {
 			throw new Meteor.Error('ResponsesCollection.addResponse', 'response_type_not_found');
 		}
 
+		const user = MemberListCollection.findOne({hashtag: responseDoc.hashtag, nick: responseDoc.userNick}, {userRef: 1});
+		if (user) {
+			responseDoc.userRef = user.userRef;
+		}
 		ResponsesCollection.insert(responseDoc);
 
 		Meteor.call('LeaderBoardCollection.addResponseSet', {

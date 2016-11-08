@@ -16,9 +16,6 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="leaderBoard">
-    {{#unless noLeaderBoardItems}}
-	    {{> titel titelText = getTitleText}}
-    {{/unless}}
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row learner-list margin-title" id="learner-list">
@@ -31,99 +28,35 @@
                         {{/if}}
 					</div>
 				{{ else }}
-                    {{#if isGlobalRanking}}
-                        {{#each leaderBoardSums}}
-                            {{#if isFirstItem @index}}
-                                <div class="col-xs-12">
-                                    <div class="color-changing-own-nick firstLeaderBordItem">
-                                        <span class="glyphicon glyphicon-education"></span>
-                                        <span>{{getNormalizedIndex @index}}. {{value}} - {{parseTimeToSeconds sumResponseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
-                                    </div>
-                                </div>
-                            {{else}}
-                                <div class="col-md-6">
-                                    <button class="button button-leader {{#if isOwnNick value}}color-changing-own-nick{{/if}}">
-                                        <span>{{getNormalizedIndex @index}}. {{value}}
-                                            - {{parseTimeToSeconds sumResponseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
-                                    </button>
-                                </div>
-                            {{/if}}
-                        {{/each}}
-                    {{else}}
-                        {{#each leaderBoardItems}}
-                            {{#if isNumber index}}
+                    {{#each leaderBoardItems}}
+                        {{#if isNumber index}}
                                 <div class="col-md-12">
                                     <h3 class="titel-relative text-light">{{_ "view.leaderboard.question"}} {{getNormalizedIndex index}}:</h3>
                                 </div>
-                            {{/if}}
-                            {{#if noLeaderBoardItems index}}
+                        {{/if}}
+                        {{#if noLeaderBoardItems index}}
                                 <div class="col-md-12">
                                     <p class="titel" style="font-weight: bold;font-size: 2vw;">{{_ "view.leaderboard.no_attendee_correct"}}</p>
                                 </div>
+                        {{else}}
+                            {{#if isFirstItem @index}}
+                                    <div class="col-xs-12">
+                                        <div class="color-changing-own-nick firstLeaderBordItem">
+                                            <span class="glyphicon glyphicon-education"></span>
+                                            <span>{{getNormalizedIndex @index}}. {{this.nick}} - {{parseTimeToSeconds this.responseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
+                                        </div>
+                                    </div>
                             {{else}}
-                                {{#each value}}
-                                    {{#if isFirstItem @index}}
-                                        <div class="col-xs-12">
-                                            <div class="color-changing-own-nick firstLeaderBordItem">
-                                                <span class="glyphicon glyphicon-education"></span>
-                                                <span>{{getNormalizedIndex @index}}. {{nick}} - {{parseTimeToSeconds responseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
-                                            </div>
-                                        </div>
-                                    {{else}}
-                                        <div class="col-md-6">
-                                            <button class="button button-leader {{#if isOwnNick nick}}color-changing-own-nick{{/if}}">
-                                                <span>{{getNormalizedIndex @index}}. {{nick}} - {{parseTimeToSeconds responseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
-                                            </button>
-                                        </div>
-                                    {{/if}}
-                                {{/each}}
+                                    <div class="col-md-6">
+                                        <button class="button button-leader {{#if isOwnNick this.nick}}color-changing-own-nick{{/if}}">
+                                            <span>{{getNormalizedIndex @index}}. {{this.nick}} - {{parseTimeToSeconds this.responseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
+                                        </button>
+                                    </div>
                             {{/if}}
-                        {{/each}}
-                    {{/if}}
+                        {{/if}}
+                    {{/each}}
 				{{/if}}
 			</div>
 		</div>
 	</div>
-    <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" style="display:block;">
-
-        <div class="col-xs-{{getButtonCols}}">
-            <button class="button button-back tabbable"
-                    id="js-btn-backToResults">
-                <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
-                <span class="ansBtn">{{_ "global.back"}}</span>
-            </button>
-        </div>
-        {{#unless noLeaderBoardItems}}
-            {{#if hasTooMuchButtons}}
-                <div class="col-xs-4">
-                    {{#if hasOverridenDefaultButtonCount }}
-                        <button class="button button-success tabbable"
-                                id="showLess">
-                            <span class="glyphicon glyphicon-menu-up glyph-left"></span>
-                            <span class="ansBtn">{{_ "view.leaderboard.show_less"}}</span>
-                        </button>
-                    {{else}}
-                        <button class="button button-success tabbable"
-                                id="showMore">
-                            <span class="ansBtn">{{_ "view.leaderboard.show_more" invisibleResponsesCount count=invisibleResponsesCount}}</span>
-                            <span class="glyphicon glyphicon-menu-down glyph-right"></span>
-                        </button>
-                    {{/if}}
-                </div>
-            {{/if}}
-            {{#if isOwner}}
-                <div class="col-xs-{{getButtonCols}}">
-                    {{#with exportData}}
-                        <a href="{{this.href}}" download="{{this.name}}">
-                            <button class="button button-purple tabbable"
-                                    id="exportToCSV">
-                                <span class="ansBtn">{{_ "view.leaderboard.export"}}</span>
-                                <span class="glyphicon glyphicon-export glyph-right"></span>
-                            </button>
-                        </a>
-                    {{/with}}
-                </div>
-            {{/if}}
-        {{/unless}}
-    </div>
 </template>

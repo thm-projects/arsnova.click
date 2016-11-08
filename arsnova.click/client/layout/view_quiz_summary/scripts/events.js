@@ -15,39 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 
 Template.quizSummary.events({
-	"click #forwardButton": function () {
-		Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
-		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
-		Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
-		Meteor.call('SessionConfiguration.addConfig', Session.get("questionGroup").getConfiguration().serialize());
-		Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
-		if (Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin()) {
-			Meteor.loginWithCas(function () {
-				Router.go("/" + Router.current().params.quizName + "/memberlist");
-			});
-		} else {
-			Router.go("/" + Router.current().params.quizName + "/memberlist");
-		}
-	},
-	"click #backButton": function () {
-		let firstFailedIndex = null;
-		Session.get("questionGroup").getQuestionList().forEach(function (questionItem) {
-			if (!firstFailedIndex && !questionItem.isValid()) {
-				firstFailedIndex = questionItem.getQuestionIndex();
-			}
-		});
-		if (firstFailedIndex) {
-			Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, firstFailedIndex);
-			Router.go("/" + Router.current().params.quizName + "/question");
-		} else {
-			Router.go("/" + Router.current().params.quizName + "/settimer");
-		}
-	},
 	"click #showSelectedNicks": function () {
 		if (Session.get("showSelectedNicks") === true) {
 			Session.set("showSelectedNicks", false);

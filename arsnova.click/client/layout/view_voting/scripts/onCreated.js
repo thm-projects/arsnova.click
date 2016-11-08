@@ -18,14 +18,19 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default";
 import {startCountdown} from './lib.js';
 
 Template.votingview.onCreated(function () {
+	const questionIndex = EventManagerCollection.findOne().questionIndex;
 	Session.set("sessionClosed",undefined);
-
-	startCountdown(EventManagerCollection.findOne().questionIndex);
-	var answerOptionCount = AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).count();
+	Session.set("questionGroup",new DefaultQuestionGroup(QuestionGroupCollection.findOne()));
+	Session.set("hasSendResponse", false);
+	Session.set("hasToggledResponse", false);
+	Session.set("questionSC", Session.get("questionGroup").getQuestionList()[questionIndex].typeName() === "SingleChoiceQuestion");
+	startCountdown(questionIndex);
+	var answerOptionCount = Session.get("questionGroup").getQuestionList()[questionIndex].getAnswerOptionList().length;
 	var responseArr = [];
 	for (var i = 0; i < answerOptionCount; i++) {
 		responseArr[i] = false;

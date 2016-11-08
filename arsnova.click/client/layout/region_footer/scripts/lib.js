@@ -108,6 +108,9 @@ const hiddenFooterElements = {
 	linkable: []
 };
 
+const footerFontSizeTracker = new Tracker.Dependency();
+const footerElementsTracker = new Tracker.Dependency();
+
 export function addFooterElement(footerElement, priority = 100) {
 	let hasItem = false;
 	$.each(footerElements, function (index, item) {
@@ -147,7 +150,9 @@ export function getFooterElementById(id) {
 	}
 }
 
-export const updateStatefulFooterElements = Tracker.autorun(function () {
+Tracker.autorun(function () {
+	footerFontSizeTracker.depend();
+	footerElementsTracker.depend();
 	const allElements = $.merge([], footerElements);
 	$.merge(allElements, hiddenFooterElements.selectable);
 	$.each(allElements, function (index, item) {
@@ -196,13 +201,16 @@ export function calculateFooterFontSize() {
 	navbarFooter.css({"fontSize": iconSize});
 	fixedBottom.css("bottom", navbarFooter.height());
 	fixedBottom.show();
-	headerLib.calculateTitelHeight();
-	updateStatefulFooterElements.invalidate();
+	footerFontSizeTracker.changed();
 	return {
 		icon: iconSize,
 		text: textSize
 	};
 }
+Tracker.autorun(function () {
+	footerElementsTracker.depend();
+	calculateFooterFontSize();
+});
 
 export function generateFooterElements() {
 	$.merge(footerElements, hiddenFooterElements.selectable);
@@ -228,9 +236,12 @@ export function generateFooterElements() {
 	}
 	Session.set("footerElements", footerElements);
 	Session.set("hiddenFooterElements", hiddenFooterElements);
-	Meteor.defer(calculateFooterFontSize);
+	footerElementsTracker.changed();
 	return footerElements;
 }
+Tracker.autorun(function () {
+	generateFooterElements();
+});
 
 export function removeFooterElement(footerElement) {
 	let hasFoundItem = false;

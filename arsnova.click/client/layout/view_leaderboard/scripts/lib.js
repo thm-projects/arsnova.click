@@ -184,21 +184,21 @@ export function getAllLeaderboardItems() {
 
 export function generateExportData() {
 	const items = Session.get("nicks");
-	let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";
+	let csvString = "";
+	let hasIdentifiedUsers = false;
 	items.forEach(function (item) {
-		let responseTime = 0;
+		let responseTime = item.responseTime;
 		const responses = ResponsesCollection.find({hashtag: Router.current().params.quizName, userNick: item.nick}, {userRef: 1});
 		const user = Meteor.users.findOne({_id: responses.collection.findOne().userRef});
-		if (user) {
-			responseTime = item.responseTime;
-			if (typeof user !== "undefined") {
-				item.id      = user.profile.id;
-				item.mail    = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
-				csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
-			} else {
-				csvString += item.nick + "," + responseTime + ",,\n";
-			}
+		if (typeof user !== "undefined") {
+			hasIdentifiedUsers = true;
+			item.id      = user.profile.id;
+			item.mail    = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
+			csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
+		} else {
+			csvString += item.nick + "," + responseTime + "\n";
 		}
 	});
-	return csvString;
+	const csvHeader = hasIdentifiedUsers ? "Nickname,ResponseTime (ms),UserID,Email\n" : "Nickname,ResponseTime (ms)\n";
+	return csvHeader + csvString;
 }

@@ -1,0 +1,20 @@
+<template name="progressBarFreeTextQuestion">
+    {{#with answerList displayIndex}}
+        {{> form_group
+                name = "view.liveResults.correct"
+                absolute = correct.absolute
+                percent = correct.percent
+                isCorrect = 1
+                id = 0
+                backgroundClass = correct.backgroundClass
+        }}
+        {{> form_group
+                name = "view.liveResults.wrong"
+                absolute = wrong.absolute
+                percent = wrong.percent
+                isCorrect = 0
+                id = 1
+                backgroundClass = wrong.backgroundClass
+        }}
+    {{/with}}
+</template>

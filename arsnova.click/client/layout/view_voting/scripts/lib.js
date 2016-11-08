@@ -18,13 +18,11 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 
 export let countdown = null;
 export let currentButton = 0;
 export let countdownRunning = false;
-let questionIndex = -1;
 
 export function deleteCountdown() {
 	if (countdown) {
@@ -35,68 +33,51 @@ export function deleteCountdown() {
 }
 
 export function countdownFinish() {
-	if (Session.get("countdownInitialized") && countdownRunning) {
-		Session.set("countdownInitialized", false);
-		deleteCountdown();
-		Router.go("/" + Router.current().params.quizName + "/results");
-	}
+	deleteCountdown();
+	Router.go("/" + Router.current().params.quizName + "/results");
 }
 
 export function startCountdown(index) {
-	questionIndex = index;
-	Session.set("hasSendResponse", false);
-	Session.set("hasToggledResponse", false);
+	Meteor.call("Main.calculateRemainingCountdown", Session.get("questionGroup").getHashtag(), index, function (error, response) {
+		Session.set("sessionCountDown", response);
+		countdown = new ReactiveCountdown(response, {
+			tick: function () {
+				var buttonsCount = $('.answer-row #buttonContainer').children().length;
+				var lastButton;
+				var secondsUntilNextRound = 3;
 
-	countdownRunning = true;
+				if (currentButton <= 0) {
+					lastButton = buttonsCount - 1;
+				} else {
+					lastButton = currentButton - 1;
+				}
 
-	Meteor.call('Question.isSC', {
-		hashtag: Router.current().params.quizName,
-		questionIndex: EventManagerCollection.findOne().questionIndex
-	}, (err, res) => {
-		if (!err && res) {
-			Session.set("questionSC", res);
-		}
-	});
+				/* skip the selected answer options */
+				while ($('#' + currentButton).hasClass('answer-selected')) {
+					currentButton++;
+					if (currentButton >= buttonsCount) {
+						currentButton = 0 - secondsUntilNextRound;
+					}
+				}
 
-	var questionDoc = QuestionGroupCollection.findOne().questionList[index];
-	Session.set("sessionCountDown", questionDoc.timer);
-	countdown = new ReactiveCountdown(questionDoc.timer, {
-		tick: function () {
-			var buttonsCount = $('.answer-row #buttonContainer').children().length;
-			var lastButton;
-			var secondsUntilNextRound = 3;
+				$('#' + lastButton).removeClass('button-green-transition').addClass('button-purple-transition');
+				$('#' + currentButton).addClass('button-green-transition').removeClass('button-purple-transition');
 
-			if (currentButton <= 0) {
-				lastButton = buttonsCount - 1;
-			} else {
-				lastButton = currentButton - 1;
-			}
-
-			/* skip the selected answer options */
-			while ($('#' + currentButton).hasClass('answer-selected')) {
 				currentButton++;
+
 				if (currentButton >= buttonsCount) {
 					currentButton = 0 - secondsUntilNextRound;
 				}
+			},
+			completed: function () {
+				if (countdown && countdown.get() === 0) {
+					countdownFinish();
+				}
 			}
-
-			$('#' + lastButton).removeClass('button-green-transition').addClass('button-purple-transition');
-			$('#' + currentButton).addClass('button-green-transition').removeClass('button-purple-transition');
-
-			currentButton++;
-
-			if (currentButton >= buttonsCount) {
-				currentButton = 0 - secondsUntilNextRound;
-			}
-		},
-		completed: function () {
-			if (countdown && countdown.get() === 0) {
-				countdownFinish();
-			}
-		}
+		});
+		countdown.start();
+		Session.set("countdownInitialized", true);
 	});
-	countdown.start();
-	Session.set("countdownInitialized", true);
 }
 
 export function makeAndSendResponse(answerOptionNumber) {

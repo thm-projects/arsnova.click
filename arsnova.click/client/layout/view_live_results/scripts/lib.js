@@ -18,7 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
-import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
+import {TAPi18n} from 'meteor/tap:i18n';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
@@ -27,6 +27,7 @@ import {RangedQuestion} from "/lib/questions/question_ranged.js";
 import {FreeTextQuestion} from "/lib/questions/question_freetext.js";
 import * as localData from '/lib/local_storage.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
+import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {buzzsound1, whistleSound, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 
@@ -34,6 +35,7 @@ export let countdown = null;
 export let routeToLeaderboardTimer = null;
 export let questionDialog = null;
 let questionIndex = -1;
+
 export const liveResultsTracker = new Tracker.Dependency();
 
 export function deleteCountdown() {
@@ -50,12 +52,8 @@ export function setQuestionDialog(instance) {
 	questionDialog = instance;
 }
 
-/**
- * @source http://stackoverflow.com/a/17267684
- */
-export function hslColPerc(percent, start, end) {
-	var a = percent / 100, b = end * a, c = b + start;
-	return 'hsl(' + c + ',100%,25%)';
+export function getQuestionDialog() {
+	return questionDialog;
 }
 
 export function isCountdownZero(index) {
@@ -69,6 +67,57 @@ export function isCountdownZero(index) {
 		var timer = Math.round(countdown.get());
 		return timer <= 0;
 	}
+}
+
+export function displayQuestionAndAnswerDialog(questionIndex) {
+	mathjaxMarkdown.initializeMarkdownAndLatex();
+	const questionElement = Session.get("questionGroup").getQuestionList()[questionIndex];
+	let answerContent = "";
+
+	if (questionElement.typeName() === "RangedQuestion") {
+		if (!isCountdownZero(questionIndex)) {
+			$('#answerOptionsHeader').hide();
+		} else {
+			answerContent += TAPi18n.__("view.answeroptions.ranged_question.min_range") + ": " + questionElement.getMinRange() + "<br/>";
+			answerContent += TAPi18n.__("view.answeroptions.ranged_question.max_range") + ": " + questionElement.getMaxRange() + "<br/><br/>";
+			answerContent += TAPi18n.__("view.answeroptions.ranged_question.correct_value") + ": " + questionElement.getCorrectValue() + "<br/>";
+		}
+	} else if (questionElement.typeName() === "FreeTextQuestion") {
+		if (!isCountdownZero(questionIndex)) {
+			$('#answerOptionsHeader').hide();
+		} else {
+			answerContent += TAPi18n.__("view.liveResults.correct_answer") + ":<br/>";
+		}
+	} else {
+		questionElement.getAnswerOptionList().forEach(function (answerOption) {
+			if (!answerOption.getAnswerText()) {
+				answerOption.setAnswerText("");
+			}
+			answerContent += "<strong>" + String.fromCharCode((answerOption.getAnswerOptionNumber() + 65)) + "</strong>" + "<br/>";
+			answerContent += mathjaxMarkdown.getContent(answerOption.getAnswerText());
+		});
+	}
+
+	setQuestionDialog(new Splashscreen({
+		autostart: true,
+		templateName: 'questionAndAnswerSplashscreen',
+		closeOnButton: '#js-btn-hideQuestionModal, .splashscreen-container-close',
+		instanceId: "questionAndAnswers_" + questionIndex,
+		onRendered: function (instance) {
+			instance.templateSelector.find('#questionContent').html(mathjaxMarkdown.getContent(questionElement.getQuestionText()));
+			mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#questionContent'));
+			instance.templateSelector.find('#answerContent').html(answerContent);
+			mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#answerContent'));
+		}
+	}));
+}
+
+/**
+ * @source http://stackoverflow.com/a/17267684
+ */
+export function hslColPerc(percent, start, end) {
+	var a = percent / 100, b = end * a, c = b + start;
+	return 'hsl(' + c + ',100%,25%)';
 }
 
 export function getPercentRead(index) {
@@ -123,11 +172,7 @@ export function countdownFinish() {
 		Session.set("sessionClosed", true);
 		if (localData.containsHashtag(Router.current().params.quizName) && AnswerOptionCollection.find({isCorrect: true}).count() > 0) {
 			routeToLeaderboardTimer = setTimeout(() => {
-				// don't reroute if the instructor already moved
-				var currentRoute = Router.current().route.getName().replace(":quizName.", "");
-				if (currentRoute === "results") {
-					Router.go("/" + Router.current().params.quizName + "/leaderBoard/all");
-				}
+				Router.go("/" + Router.current().params.quizName + "/leaderBoard/all");
 			}, 7000);
 		}
 		footerElements.removeFooterElement(footerElements.footerElemReadingConfirmation);
@@ -148,45 +193,106 @@ export function randomIntFromInterval(min,max)
 	return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-export function startCountdown(index, retry = 0) {
+export function startDebugVoting() {
+	const debugMembers = MemberListCollection.find({isDummyUser: true}).fetch();
+	const countdownValue = countdown.get();
+	const questionIndex = EventManagerCollection.findOne().questionIndex;
+	debugMembers.forEach(function (member) {
+		const replyTimer = randomIntFromInterval(0, countdownValue - 1);
+		if (replyTimer >= countdownValue) {
+			return;
+		}
+		const question = Session.get("questionGroup").getQuestionList()[questionIndex];
+		setTimeout(function () {
+			const configObj = {
+				hashtag: Router.current().params.quizName,
+				questionIndex: questionIndex,
+				userNick: member.nick
+			};
+			if (question instanceof RangedQuestion) {
+				configObj.rangedInputValue = Math.random() > 0.6 ? Session.get("questionGroup").getQuestionList()[questionIndex].getCorrectValue() : Session.get("questionGroup").getQuestionList()[questionIndex].getMaxRange() + 10;
+			} else if (question instanceof FreeTextQuestion) {
+				configObj.freeTextInputValue = Math.random() > 0.75 ? Session.get("questionGroup").getQuestionList()[questionIndex].getAnswerOptionList()[0].getAnswerText() : Session.get("questionGroup").getQuestionList()[questionIndex].getAnswerOptionList()[0].getAnswerText().split("").reverse().join("");
+				configObj.answerOptionNumber = [0];
+			} else {
+				const randomChance = Math.random();
+				configObj.answerOptionNumber = [];
+				const answerList = Session.get("questionGroup").getQuestionList()[questionIndex].getAnswerOptionList();
+				if (Session.get("questionGroup").getQuestionList()[questionIndex].typeName() === "SingleChoiceQuestion") {
+					if (randomChance > 0.75) {
+						answerList.forEach(function (answerItem) {
+							if (answerItem.getIsCorrect()) {
+								configObj.answerOptionNumber.push(answerItem.getAnswerOptionNumber());
+							}
+						});
+					} else if (randomChance > 0.25 && randomChance <= 0.75) {
+						configObj.answerOptionNumber.push(randomIntFromInterval(0, answerList.length - 1));
+					} else {
+						configObj.answerOptionNumber = [];
+						answerList.forEach(function (answerItem) {
+							if (!answerItem.getIsCorrect() && configObj.answerOptionNumber.length === 0) {
+								configObj.answerOptionNumber.push(answerItem.getAnswerOptionNumber());
+							}
+						});
+					}
+				} else {
+					if (randomChance > 0.75) {
+						answerList.forEach(function (answerItem) {
+							if (answerItem.getIsCorrect()) {
+								configObj.answerOptionNumber.push(answerItem.getAnswerOptionNumber());
+							}
+						});
+					} else if (randomChance > 0.25 && randomChance <= 0.75) {
+						for (let i = 0; i < randomIntFromInterval(0, answerList.length - 1); i++) {
+							const random = Math.random();
+							if (random > 0.5 && answerList[i].getIsCorrect()) {
+								configObj.answerOptionNumber.push(answerList[i].getAnswerOptionNumber());
+							} else if (random <= 0.5) {
+								configObj.answerOptionNumber.push(answerList[i].getAnswerOptionNumber());
+							}
+						}
+					} else {
+						configObj.answerOptionNumber = [];
+						answerList.forEach(function (answerItem) {
+							if (!answerItem.getIsCorrect() && configObj.answerOptionNumber.length === 0) {
+								configObj.answerOptionNumber.push(answerItem.getAnswerOptionNumber());
+							}
+						});
+					}
+				}
+			}
+			Meteor.call('ResponsesCollection.addResponse', configObj);
+		}, replyTimer * 1000);
+	});
+}
+
+export function startCountdown(index) {
 	if (Session.get("countdownInitialized") || Session.get("sessionClosed")) {
 		Session.set("isQueringServerForTimeStamp", false);
 		return;
 	}
 	Session.set("showingReadingConfirmation", undefined);
 	Session.set("isQueringServerForTimeStamp", true);
-	const questionDoc = QuestionGroupCollection.findOne().questionList[index];
-	const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-	if (!questionDoc) {
-		if (retry < 5) {
-			setTimeout(startCountdown(index, ++retry), 20);
-		}
-		Session.set("isQueringServerForTimeStamp", false);
-		return;
-	}
-	questionIndex = index;
-	Meteor.call("Main.getCurrentTimeStamp", function (error, response) {
-		const currentTime = new Date(response);
-		const timeDiff = new Date(currentTime.getTime() - questionDoc.startTime);
 
-		if ((questionDoc.timer - (timeDiff.getTime() / 1000)) <= 0) {
+	const isOwner = localData.containsHashtag(Session.get("questionGroup").getHashtag());
+	if (isOwner) {
+		Meteor.call("EventManagerCollection.setActiveQuestion", Session.get("questionGroup").getHashtag(), index);
+		const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
+		if (musicSettings.isEnabled()) {
+			if (buzzsound1 == null) {
+				setBuzzsound1(musicSettings.getTitle());
+			}
+			buzzsound1.setVolume(musicSettings.getVolume());
+			buzzsound1.play();
+			Session.set("soundIsPlaying", true);
+		}
+	}
+	Meteor.call("Main.calculateRemainingCountdown", Session.get("questionGroup").getHashtag(), index, function (error, response) {
+		if (response <= 0) {
 			Session.set("isQueringServerForTimeStamp", false);
 			return;
 		}
-		if (localData.containsHashtag(Router.current().params.quizName)) {
-			Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index);
-			if (configDoc.music.isEnabled) {
-				if (buzzsound1 == null) {
-					setBuzzsound1(configDoc.music.title);
-				}
-				buzzsound1.setVolume(configDoc.music.volume);
-				buzzsound1.play();
-				Session.set("soundIsPlaying", true);
-			}
-		}
-		const countdownValue = Math.round(questionDoc.timer - (timeDiff.getTime() / 1000));
-		Session.set("sessionCountDown", countdownValue);
-		countdown = new ReactiveCountdown(countdownValue);
+		countdown = new ReactiveCountdown(response);
 
 		countdown.start(function () {
 			if (countdown && countdown.get() === 0) {
@@ -196,86 +302,10 @@ export function startCountdown(index, retry = 0) {
 		$('.navbar-fixed-bottom').hide();
 		Session.set("isQueringServerForTimeStamp", false);
 		Session.set("countdownInitialized", true);
-		$('.disableOnActiveCountdown').attr("disabled", "disabled");
 
-		if (!localData.containsHashtag(Router.current().params.quizName)) {
-			return;
+		if (isOwner) {
+			startDebugVoting();
 		}
-		const debugMembers = MemberListCollection.find({isDummyUser: true}).fetch();
-		debugMembers.forEach(function (member) {
-			const replyTimer = randomIntFromInterval(0, countdownValue - 1);
-			if (replyTimer >= countdownValue) {
-				return;
-			}
-			const question = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex];
-			setTimeout(function () {
-				const configObj = {
-					hashtag: Router.current().params.quizName,
-					questionIndex: EventManagerCollection.findOne().questionIndex,
-					userNick: member.nick
-				};
-				if (question instanceof RangedQuestion) {
-					configObj.rangedInputValue = Math.random() > 0.6 ? Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getCorrectValue() : Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getMaxRange() + 10;
-					Meteor.call('ResponsesCollection.addResponse', configObj);
-				} else if (question instanceof FreeTextQuestion) {
-					configObj.freeTextInputValue = Math.random() > 0.75 ? Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].getAnswerText() : Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].getAnswerText().split("").reverse().join("");
-					configObj.answerOptionNumber = [0];
-					Meteor.call('ResponsesCollection.addResponse', configObj);
-				} else {
-					const randomChance = Math.random();
-					configObj.answerOptionNumber = [];
-					const answerList = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList();
-					if (Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SingleChoiceQuestion") {
-						if (randomChance > 0.75) {
-							answerList.forEach(function (answerItem) {
-								if (answerItem.getIsCorrect()) {
-									configObj.answerOptionNumber.push(answerItem.getAnswerOptionNumber());
-								}
-							});
-							Meteor.call('ResponsesCollection.addResponse', configObj);
-						} else if (randomChance > 0.25 && randomChance <= 0.75) {
-							configObj.answerOptionNumber.push(randomIntFromInterval(0, answerList.length - 1));
-							Meteor.call('ResponsesCollection.addResponse', configObj);
-						} else {
-							configObj.answerOptionNumber = [];
-							answerList.forEach(function (answerItem) {
-								if (!answerItem.getIsCorrect() && configObj.answerOptionNumber.length === 0) {
-									configObj.answerOptionNumber.push(answerItem.getAnswerOptionNumber());
-								}
-							});
-							Meteor.call('ResponsesCollection.addResponse', configObj);
-						}
-					} else {
-						if (randomChance > 0.75) {
-							answerList.forEach(function (answerItem) {
-								if (answerItem.getIsCorrect()) {
-									configObj.answerOptionNumber.push(answerItem.getAnswerOptionNumber());
-								}
-							});
-							Meteor.call('ResponsesCollection.addResponse', configObj);
-						} else if (randomChance > 0.25 && randomChance <= 0.75) {
-							for (let i = 0; i < randomIntFromInterval(0, answerList.length - 1); i++) {
-								const random = Math.random();
-								if (random > 0.5 && answerList[i].getIsCorrect()) {
-									configObj.answerOptionNumber.push(answerList[i].getAnswerOptionNumber());
-								} else if (random <= 0.5) {
-									configObj.answerOptionNumber.push(answerList[i].getAnswerOptionNumber());
-								}
-							}
-							Meteor.call('ResponsesCollection.addResponse', configObj);
-						} else {
-							configObj.answerOptionNumber = [];
-							answerList.forEach(function (answerItem) {
-								if (!answerItem.getIsCorrect() && configObj.answerOptionNumber.length === 0) {
-									configObj.answerOptionNumber.push(answerItem.getAnswerOptionNumber());
-								}
-							});
-							Meteor.call('ResponsesCollection.addResponse', configObj);
-						}
-					}
-				}
-			}, replyTimer * 1000);
-		});
 	});
 }
 

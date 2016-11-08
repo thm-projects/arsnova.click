@@ -46,11 +46,15 @@ function addDefaultChangeEvents() {
 
 function addMemberlistChangeEvents() {
 	globalEventStackObserver.onChange([
-		"EventManagerCollection.setSessionStatus"
+		"EventManagerCollection.startQuiz"
 	], function (key, value) {
 		if (!isNaN(value.sessionStatus)) {
 			if (value.sessionStatus === 3) {
-				Router.go("/" + Router.current().params.quizName + "/results");
+				if (localData.containsHashtag(Router.current().params.quizName)) {
+					Router.go("/" + Router.current().params.quizName + "/results");
+				} else {
+					Router.go("/" + Router.current().params.quizName + "/onpolling");
+				}
 			}
 		}
 	});
@@ -122,41 +126,13 @@ function addLiveresultsChangeEvents() {
 					questionElement.type === "RangedQuestion" || questionElement.type === "FreeTextQuestion") {
 					return;
 				}
-				liveResultsLib.setQuestionDialog(new Splashscreen({
-					autostart: true,
-					instanceId: "answers_" + value.questionIndex,
-					templateName: 'questionAndAnswerSplashscreen',
-					closeOnButton: '#js-btn-hideQuestionModal, .splashscreen-container-close',
-					onRendered: function (instance) {
-						var answerContent = "";
-						var questionContent = "";
-						mathjaxMarkdown.initializeMarkdownAndLatex();
-						if (!isReadingConfirmationEnabled) {
-							var questionDoc = QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName});
-							if (questionDoc) {
-								questionContent = mathjaxMarkdown.getContent(questionDoc.questionList[value.questionIndex].questionText);
-							}
-						}
-						if (questionElement.type !== "RangedQuestion" && questionElement.type !== "FreeTextQuestion") {
-							AnswerOptionCollection.find({questionIndex: value.questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
-								if (!answerOption.answerText) {
-									answerOption.answerText = "";
-								}
-
-								answerContent += "<strong>" + String.fromCharCode((answerOption.answerOptionNumber + 65)) + "</strong>" + "<br/>";
-								answerContent += mathjaxMarkdown.getContent(answerOption.answerText);
-							});
-						}
-
-						instance.templateSelector.find('#questionContent').html(questionContent);
-						mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#questionContent'));
-						instance.templateSelector.find('#answerContent').html(answerContent);
-						mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#answerContent'));
-						setTimeout(function () {
-							instance.close();
-						}, questionElement.timer * 0.75 * 1000);
+				liveResultsLib.displayQuestionAndAnswerDialog(value.questionIndex);
+				setTimeout(function () {
+					const dialog = liveResultsLib.getQuestionDialog();
+					if (dialog) {
+						dialog.close();
 					}
-				}));
+				}, questionElement.timer * 0.75 * 1000);
 			} else {
 				Router.go("/" + Router.current().params.quizName + "/onpolling");
 			}
@@ -172,9 +148,7 @@ function addLiveresultsChangeEvents() {
 			showReadingConfirmationSplashscreen(value.readingConfirmationIndex);
 		}
 	});
-}
 
-function addOnPollingChangeEvents() {
 	globalEventStackObserver.onChange([
 		"ResponsesCollection.addResponse"
 	], function () {
@@ -185,6 +159,17 @@ function addOnPollingChangeEvents() {
 		let memberAmount = MemberListCollection.find().fetch().length;
 		if (memberWithGivenResponsesAmount === memberAmount) {
 			liveResultsLib.countdownFinish();
+		}
+	});
+}
+
+function addVotingViewChangeEvents() {
+	globalEventStackObserver.onChange([
+		"EventManagerCollection.setSessionStatus"
+	], function (key, value) {
+		if (!isNaN(value.sessionStatus) && value.sessionStatus === 2) {
+			$('.modal-backdrop').remove();
+			Router.go("/" + Router.current().params.quizName + "/memberlist");
 		}
 	});
 }
@@ -200,11 +185,10 @@ export function getChangeEventsForRoute(route) {
 			addMemberlistChangeEvents();
 			break;
 		case "results":
-			addOnPollingChangeEvents();
 			addLiveresultsChangeEvents();
 			break;
-		case "statistics":
-			addLiveresultsChangeEvents();
+		case "onpolling":
+			addVotingViewChangeEvents();
 			break;
 		case "leaderBoard":
 			addLiveresultsChangeEvents();

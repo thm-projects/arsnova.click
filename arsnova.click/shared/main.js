@@ -61,6 +61,13 @@ if (Meteor.isServer) {
 		},
 		'Main.getCurrentTimeStamp': function () {
 			return new Date().getTime();
+		},
+		'Main.calculateRemainingCountdown': function (hashtag, index) {
+			const currentTime = new Date(new Date().getTime());
+			const questionDoc = QuestionGroupCollection.findOne({hashtag: hashtag}).questionList[index];
+			const timeDiff = new Date(currentTime.getTime() - questionDoc.startTime);
+
+			return Math.round(questionDoc.timer - (timeDiff.getTime() / 1000));
 		}
 	});
 }

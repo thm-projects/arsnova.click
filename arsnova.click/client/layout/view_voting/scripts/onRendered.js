@@ -25,8 +25,8 @@ import * as headerLib from '/client/layout/region_header/lib.js';
 import {formatAnswerButtons, startCountdown} from './lib.js';
 
 Template.votingview.onRendered(function () {
-	if (QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type !== "RangedQuestion" &&
-		QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].answerOptionList[0].type !== "FreeTextAnswerOption") {
+	const questionType = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type;
+	if (questionType !== "RangedQuestion" && questionType !== "FreeTextQuestion") {
 		$(window).resize(function () {
 			Meteor.defer(formatAnswerButtons);
 		});

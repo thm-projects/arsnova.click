@@ -137,85 +137,7 @@ Template.liveResultsTitle.helpers({
 	}
 });
 
-Template.liveResults.helpers({
-	isCountdownZero: function (index) {
-		return isCountdownZero(index);
-	},
-	getPercentRead: (index)=> {
-		return getPercentRead(index);
-	},
-	getCurrentRead: (index)=> {
-		var currentReadAmount = getCurrentRead(index);
-		if (currentReadAmount > 0 || SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled === false) {
-			$('#startNextQuestion').removeAttr('disabled');
-		}
-		return currentReadAmount;
-	},
-	showLeaderBoardButton: function (index) {
-		const questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc) {
-			return;
-		}
-		return !Session.get("countdownInitialized") && questionDoc.questionList[index].type !== "SurveyQuestion";
-	},
-	isMC: function (index) {
-		const questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc) {
-			return;
-		}
-		return questionDoc.questionList[index].type === "MultipleChoiceQuestion";
-	},
-	mcOptions: function (index) {
-		let allCorrect = 0;
-		let allWrong = 0;
-		const question = QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName}).questionList[index];
-		const responses = ResponsesCollection.find({questionIndex: index}).fetch();
-		const memberAmount = responses.length;
-		responses.forEach(function (responseItem) {
-			if (leaderboardLib.isCorrectResponse(responseItem, question, index)) {
-				allCorrect++;
-			} else {
-				allWrong++;
-			}
-		});
-		return {
-			allCorrect: {
-				absolute: allCorrect,
-				percent: memberAmount ? Math.floor((allCorrect * 100) / memberAmount) : 0,
-				backgroundClass: getProgressbarCSSClass(index, checkIfIsCorrect(1))
-			},
-			allWrong: {
-				absolute: allWrong,
-				percent: memberAmount ? Math.floor((allWrong * 100) / memberAmount) : 0,
-				backgroundClass: getProgressbarCSSClass(index, checkIfIsCorrect(0))
-			}
-		};
-	},
-	getNormalizedIndex: function (index) {
-		return index + 1;
-	},
-	allQuestionCount: function () {
-		var doc = QuestionGroupCollection.findOne();
-		return doc ? doc.questionList.length : false;
-	},
-	questionList: function () {
-		var questionDoc = QuestionGroupCollection.findOne();
-		let eventDoc = EventManagerCollection.findOne();
-		if (!questionDoc || !eventDoc) {
-			return;
-		}
-
-		var questionList = questionDoc.questionList;
-		if (eventDoc.readingConfirmationIndex < questionList.length - 1) {
-			questionList.splice(eventDoc.readingConfirmationIndex + 1, questionList.length - (eventDoc.readingConfirmationIndex + 1));
-		}
-
-		for (var i = 0; i < questionList.length; i++) {
-			questionList[i].displayIndex = i;
-		}
-
-		return questionList ? questionList.reverse() : false;
-	},
+Template.progressBarSingleChoiceQuestion.helpers({
 	answerList: function (index) {
 		const result = [];
 		const hashtag = Router.current().params.quizName;
@@ -244,8 +166,40 @@ Template.liveResults.helpers({
 			});
 		});
 		return result;
-	},
-	freeTextAnswerResult: function (index) {
+	}
+});
+
+Template.progressBarMultipleChoiceQuestion.helpers({
+	answerList: function (index) {
+		let allCorrect = 0;
+		let allWrong = 0;
+		const question = QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName}).questionList[index];
+		const responses = ResponsesCollection.find({questionIndex: index}).fetch();
+		const memberAmount = responses.length;
+		responses.forEach(function (responseItem) {
+			if (leaderboardLib.isCorrectResponse(responseItem, question, index)) {
+				allCorrect++;
+			} else {
+				allWrong++;
+			}
+		});
+		return {
+			allCorrect: {
+				absolute: allCorrect,
+				percent: memberAmount ? Math.floor((allCorrect * 100) / memberAmount) : 0,
+				backgroundClass: getProgressbarCSSClass(index, checkIfIsCorrect(1))
+			},
+			allWrong: {
+				absolute: allWrong,
+				percent: memberAmount ? Math.floor((allWrong * 100) / memberAmount) : 0,
+				backgroundClass: getProgressbarCSSClass(index, checkIfIsCorrect(0))
+			}
+		};
+	}
+});
+
+Template.progressBarFreeTextQuestion.helpers({
+	answerList: function (index) {
 		let correctAnswerCount = 0;
 		let wrongAnswerCount = 0;
 		const question = QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName}).questionList[index];
@@ -270,8 +224,11 @@ Template.liveResults.helpers({
 				backgroundClass: getProgressbarCSSClass(index, checkIfIsCorrect(0))
 			}
 		};
-	},
-	rangedAnswerResult: function (index) {
+	}
+});
+
+Template.progressBarRangedQuestion.helpers({
+	answerList: function (index) {
 		let inCorrectRange = 0;
 		let inWrongRange = 0;
 		const question = QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName}).questionList[index];
@@ -296,43 +253,77 @@ Template.liveResults.helpers({
 				backgroundClass: getProgressbarCSSClass(index, checkIfIsCorrect(0))
 			}
 		};
-	},
-	isRangedQuestion: function (index) {
-		const questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc) {
-			return;
-		}
-		return questionDoc.questionList[index].type === "RangedQuestion";
-	},
-	isFreeTextQuestion: function (index) {
-		const questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc) {
-			return;
-		}
-		return questionDoc.questionList[index].type === "FreeTextQuestion";
-	},
-	hasOnlyOneQuestion: ()=> {
-		var questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc) {
-			return;
-		}
+	}
+});
 
-		return questionDoc.questionList.length === 1;
+Template.liveResults.helpers({
+	getProgressbarTemplate: function (index) {
+		if (typeof index === "undefined") {
+			return null;
+		}
+		switch (Session.get("questionGroup").getQuestionList()[index].typeName()) {
+			case "SingleChoiceQuestion":
+			case "YesNoSingleChoiceQuestion":
+			case "TrueFalseSingleChoiceQuestion":
+			case "SurveyQuestion":
+				return "progressBarSingleChoiceQuestion";
+			case "MultipleChoiceQuestion":
+				return "progressBarMultipleChoiceQuestion";
+			case "RangedQuestion":
+				return "progressBarRangedQuestion";
+			case "FreeTextQuestion":
+				return "progressBarFreeTextQuestion";
+		}
 	},
-	hasReadConfirmationRequested: (index)=> {
-		const eventDoc = EventManagerCollection.findOne();
-		const configDoc = SessionConfigurationCollection.findOne();
+	isCountdownZero: function (index) {
+		return isCountdownZero(index);
+	},
+	getPercentRead: (index)=> {
+		return getPercentRead(index);
+	},
+	getCurrentRead: (index)=> {
+		var currentReadAmount = getCurrentRead(index);
+		if (currentReadAmount > 0 || SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled === false) {
+			$('#startNextQuestion').removeAttr('disabled');
+		}
+		return currentReadAmount;
+	},
+	showLeaderBoardButton: function (index) {
+		const questionDoc = QuestionGroupCollection.findOne();
+		if (!questionDoc) {
+			return;
+		}
+		return !Session.get("countdownInitialized") && questionDoc.questionList[index].type !== "SurveyQuestion";
+	},
+	getNormalizedIndex: function (index) {
+		return index + 1;
+	},
+	allQuestionCount: function () {
+		var doc = QuestionGroupCollection.findOne();
+		return doc ? doc.questionList.length : false;
+	},
+	questionList: function () {
+		let eventDoc = EventManagerCollection.findOne();
 		if (!eventDoc) {
 			return;
 		}
-		return index <= eventDoc.questionIndex || configDoc.readingConfirmationEnabled === false;
+
+		var questionList = Session.get("questionGroup").getQuestionList();
+		if (eventDoc.readingConfirmationIndex < questionList.length - 1) {
+			questionList.splice(eventDoc.readingConfirmationIndex + 1, questionList.length - (eventDoc.readingConfirmationIndex + 1));
+		}
+
+		for (var i = 0; i < questionList.length; i++) {
+			questionList[i].displayIndex = i;
+		}
+
+		return questionList ? questionList.reverse() : false;
+	},
+	hasOnlyOneQuestion: ()=> {
+		return Session.get("questionGroup").getQuestionList().length === 1;
 	},
 	isReadingConfirmationEnabled: ()=> {
-		const configDoc = SessionConfigurationCollection.findOne();
-		if (!configDoc) {
-			return;
-		}
-		return configDoc.readingConfirmationEnabled !== false;
+		return Session.get("questionGroup").getConfiguration().getReadingConfirmationEnabled();
 	},
 	readingConfirmationListForQuestion: (index)=> {
 		let result = [];

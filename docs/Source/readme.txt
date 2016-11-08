@@ -1,1 +1,0 @@
-*.uxf documents are editable with free-to-use tool "Umlet" (http://www.umlet.com/)

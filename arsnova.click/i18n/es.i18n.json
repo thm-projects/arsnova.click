@@ -302,7 +302,7 @@
       "chosen_nicknames": "Nombres de usuario elegidos",
       "no_nicks_selected": "Ningún nombre de usuario elegido, así los participantes pueden elegir sus propios nombres de usuario.",
       "block_illegal_nicks": "Bloquear apodos inapropiados",
-      "restrict_to_cas": "Restringir a los usuarios CAS",
+      "restrict_to_cas": "Restringir a los usuarios CAS (THM)",
       "category": {
         "disney": "Personajes Disney",
         "science": "Ciencia",

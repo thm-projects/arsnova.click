@@ -17,7 +17,7 @@
 
 <template name="hashtagManagement">
     <div class="hashtag-management">
-        <div class="row center-vertical full-screen-content">
+        <div class="row full-screen-content">
             <div class="col-md-12 contentFrame">
                 {{#if noHashtagsAvailable}}
                     {{> titel titelText = "view.hashtag_management.no_sessions"}}
@@ -70,17 +70,6 @@
                         {{/unless}}
                     {{/each}}
                 {{/if}}
-            </div>
-        </div>
-        <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" style="display: block;bottom:0 !important;">
-            <div class="row">
-                <div class="col-xs-12">
-                    <button class="button button-back tabbable"
-                            id="backButton">
-                        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                        <span class="fixed-bottom-item-text">{{_ "global.back"}}</span>
-                    </button>
-                </div>
             </div>
         </div>
     </div>

@@ -17,6 +17,7 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
+import {Tracker} from 'meteor/tracker';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
@@ -33,6 +34,7 @@ export let countdown = null;
 export let routeToLeaderboardTimer = null;
 export let questionDialog = null;
 let questionIndex = -1;
+export const liveResultsTracker = new Tracker.Dependency();
 
 export function deleteCountdown() {
 	if (countdown) {
@@ -209,58 +211,58 @@ export function startCountdown(index, retry = 0) {
 					Meteor.call('ResponsesCollection.addResponse', configObj);
 				} else if (question instanceof FreeTextQuestion) {
 					configObj.freeTextInputValue = Math.random() > 0.75 ? Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].getAnswerText() : Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].getAnswerText().split("").reverse().join("");
-					configObj.answerOptionNumber = 0;
+					configObj.answerOptionNumber = [0];
 					Meteor.call('ResponsesCollection.addResponse', configObj);
 				} else {
 					const randomChance = Math.random();
+					configObj.answerOptionNumber = [];
+					const answerList = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList();
 					if (Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SingleChoiceQuestion") {
 						if (randomChance > 0.75) {
-							Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().forEach(function (answerItem) {
+							answerList.forEach(function (answerItem) {
 								if (answerItem.getIsCorrect()) {
-									configObj.answerOptionNumber = answerItem.getAnswerOptionNumber();
-									Meteor.call('ResponsesCollection.addResponse', configObj);
+									configObj.answerOptionNumber.push(answerItem.getAnswerOptionNumber());
 								}
 							});
+							Meteor.call('ResponsesCollection.addResponse', configObj);
 						} else if (randomChance > 0.25 && randomChance <= 0.75) {
-							configObj.answerOptionNumber = randomIntFromInterval(0, Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().length - 1);
+							configObj.answerOptionNumber.push(randomIntFromInterval(0, answerList.length - 1));
 							Meteor.call('ResponsesCollection.addResponse', configObj);
 						} else {
-							let hasAnswered = false;
-							Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().forEach(function (answerItem) {
-								if (!answerItem.getIsCorrect() && !hasAnswered) {
-									hasAnswered = true;
-									configObj.answerOptionNumber = answerItem.getAnswerOptionNumber();
-									Meteor.call('ResponsesCollection.addResponse', configObj);
+							configObj.answerOptionNumber = [];
+							answerList.forEach(function (answerItem) {
+								if (!answerItem.getIsCorrect() && configObj.answerOptionNumber.length === 0) {
+									configObj.answerOptionNumber.push(answerItem.getAnswerOptionNumber());
 								}
 							});
+							Meteor.call('ResponsesCollection.addResponse', configObj);
 						}
 					} else {
 						if (randomChance > 0.75) {
-							Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().forEach(function (answerItem) {
+							answerList.forEach(function (answerItem) {
 								if (answerItem.getIsCorrect()) {
-									configObj.answerOptionNumber = answerItem.getAnswerOptionNumber();
-									Meteor.call('ResponsesCollection.addResponse', configObj);
+									configObj.answerOptionNumber.push(answerItem.getAnswerOptionNumber());
 								}
 							});
+							Meteor.call('ResponsesCollection.addResponse', configObj);
 						} else if (randomChance > 0.25 && randomChance <= 0.75) {
-							Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().forEach(function (answerItem) {
-								if (Math.random() > 0.5) {
-									if (answerItem.getIsCorrect()) {
-										configObj.answerOptionNumber = answerItem.getAnswerOptionNumber();
-										Meteor.call('ResponsesCollection.addResponse', configObj);
-									}
-								} else {
-									configObj.answerOptionNumber = answerItem.getAnswerOptionNumber();
-									Meteor.call('ResponsesCollection.addResponse', configObj);
+							for (let i = 0; i < randomIntFromInterval(0, answerList.length - 1); i++) {
+								const random = Math.random();
+								if (random > 0.5 && answerList[i].getIsCorrect()) {
+									configObj.answerOptionNumber.push(answerList[i].getAnswerOptionNumber());
+								} else if (random <= 0.5) {
+									configObj.answerOptionNumber.push(answerList[i].getAnswerOptionNumber());
 								}
-							});
+							}
+							Meteor.call('ResponsesCollection.addResponse', configObj);
 						} else {
-							Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().forEach(function (answerItem) {
-								if (!answerItem.getIsCorrect()) {
-									configObj.answerOptionNumber = answerItem.getAnswerOptionNumber();
-									Meteor.call('ResponsesCollection.addResponse', configObj);
+							configObj.answerOptionNumber = [];
+							answerList.forEach(function (answerItem) {
+								if (!answerItem.getIsCorrect() && configObj.answerOptionNumber.length === 0) {
+									configObj.answerOptionNumber.push(answerItem.getAnswerOptionNumber());
 								}
 							});
+							Meteor.call('ResponsesCollection.addResponse', configObj);
 						}
 					}
 				}

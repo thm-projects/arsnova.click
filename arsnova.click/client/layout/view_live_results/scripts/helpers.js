@@ -27,10 +27,116 @@ import {SessionConfigurationCollection} from '/lib/session_configuration/collect
 import * as localData from '/lib/local_storage.js';
 import {countdown, getPercentRead, getCurrentRead, hslColPerc, checkIfIsCorrect, isCountdownZero, setQuestionDialog} from './lib.js';
 
-Template.liveResults.helpers({
+Template.liveResultsFooterNavButtons.helpers({
+	isOwner: function () {
+		return localData.containsHashtag(Router.current().params.quizName);
+	},
+	isRunningQuestion: ()=> {
+		return Session.get("countdownInitialized");
+	},
+	showGlobalLeaderboardButton: ()=> {
+		var questionDoc = QuestionGroupCollection.findOne();
+		let eventDoc = EventManagerCollection.findOne();
+		if (!questionDoc || !eventDoc) {
+			return;
+		}
+
+		return countdown === null && questionDoc.questionList.length > 1 && eventDoc.questionIndex >= questionDoc.questionList.length - 1;
+	},
+	hasCorrectAnswerOptionsOrRangedQuestion: ()=> {
+		const questionDoc = QuestionGroupCollection.findOne();
+		let hasRangedQuestion = false;
+		if (!questionDoc) {
+			return;
+		}
+		$.each(questionDoc.questionList, function (index, element) {
+			if (element.type === "RangedQuestion" || element.type === "FreeTextQuestion") {
+				hasRangedQuestion = true;
+				return false;
+			}
+		});
+		return AnswerOptionCollection.find({isCorrect: true}).count() > 0 || hasRangedQuestion;
+	},
+	hasNextQuestion: ()=> {
+		var questionDoc = QuestionGroupCollection.findOne();
+		let eventDoc = EventManagerCollection.findOne();
+		if (!questionDoc || !eventDoc) {
+			return;
+		}
+
+		return eventDoc.questionIndex < questionDoc.questionList.length - 1;
+	},
+	showNextQuestionButton: ()=> {
+		let eventDoc = EventManagerCollection.findOne();
+		const configDoc = SessionConfigurationCollection.findOne();
+		if (!eventDoc || !configDoc) {
+			return;
+		}
+		return configDoc.readingConfirmationEnabled !== false && eventDoc.readingConfirmationIndex <= eventDoc.questionIndex;
+	},
+	allQuestionCount: function () {
+		var doc = QuestionGroupCollection.findOne();
+		return doc ? doc.questionList.length : false;
+	},
+	hasOnlyOneQuestion: ()=> {
+		var questionDoc = QuestionGroupCollection.findOne();
+		if (!questionDoc) {
+			return;
+		}
+
+		return questionDoc.questionList.length === 1;
+	},
+	nextReadingConfirmationIndex: ()=> {
+		let eventDoc = EventManagerCollection.findOne();
+		if (!eventDoc) {
+			return;
+		}
+		return eventDoc.readingConfirmationIndex + 2;
+	},
+	nextQuestionIndex: ()=> {
+		let eventDoc = EventManagerCollection.findOne();
+		if (!eventDoc) {
+			return;
+		}
+		return eventDoc.questionIndex + 2;
+	}
+});
+
+Template.liveResultsTitle.helpers({
+	getCountVotings: function () {
+		let eventDoc = EventManagerCollection.findOne();
+		if (!eventDoc) {
+			return 0;
+		}
+
+		var sumVoted = 0;
+		MemberListCollection.find().map(function (member) {
+			var responseDoc = ResponsesCollection.findOne({
+				questionIndex: eventDoc.questionIndex,
+				userNick: member.nick
+			});
+			if (responseDoc !== undefined) {
+				sumVoted++;
+			}
+		});
+		return sumVoted;
+	},
+	getCountdown: function () {
+		if (Session.get("countdownInitialized")) {
+			var roundedCountdown = Math.round(countdown.get());
+			return roundedCountdown < 0 ? 0 : roundedCountdown;
+		}
+		return 0;
+	},
 	votingText: function () {
 		return Session.get("sessionClosed") ? "view.liveResults.game_over" : "view.liveResults.countdown";
 	},
+	isRunningQuestion: ()=> {
+		return Session.get("countdownInitialized");
+	}
+});
+
+Template.liveResults.helpers({
 	isOwner: function () {
 		return localData.containsHashtag(Router.current().params.quizName);
 	},

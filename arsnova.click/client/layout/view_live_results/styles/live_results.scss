@@ -43,39 +43,44 @@
 }
 
 .glyphicon-style {
-  font-size: 5vw;
+  font-size: 3vw;
 }
 
 .row-padding-bottom {
   padding-bottom: 1vw;
 }
 
+.row-padding-top {
+	padding-top: 1vw;
+}
+
 .subtitel-padding-top {
   padding-top: 3vw;
 }
 
-#liveResultsFrame {
+#countdownAnimationWrapper {
+	z-index: 1070;
+	position: fixed;
+	left: 0;
+	top: 0;
 	height: 100%;
-	#countdownAnimationWrapper {
+	width: 100%;
+
+	#countdownAnimation {
 		z-index: 1070;
 		position: fixed;
-		left: 0;
 		top: 0;
-		height: 100%;
+		left: calc(50% - 150px);
 		width: 100%;
-
-		#countdownAnimation {
-			z-index: 1070;
-			position: fixed;
-			top: 0;
-			left: calc(50% - 150px);
-			width: 100%;
-			height: 100%;
-			background-image: none;
-			background-position: 0 100%;
-			background-repeat: no-repeat;
-		}
+		height: 100%;
+		background-image: none;
+		background-position: 0 100%;
+		background-repeat: no-repeat;
 	}
+}
+
+#liveResultsFrame {
+	height: 100%;
 
 	.top-bar-content {
 		margin-top: 18px;

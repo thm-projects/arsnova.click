@@ -19,6 +19,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import * as localData from '/lib/local_storage.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
+import * as lib from './lib.js';
 
 Template.memberlist.helpers({
 	isOwner: function () {
@@ -42,15 +43,6 @@ Template.memberlist.helpers({
 		}
 		return result;
 	},
-	hasOverridenDefaultButtonCount: function () {
-		return Session.get("learnerCountOverride");
-	},
-	hasTooMuchButtons: ()=> {
-		return Session.get("learnerCountOverride") || (Session.get("allMembersCount") - Session.get("maxLearnerButtons") > 0);
-	},
-	invisibleLearnerCount: function () {
-		return Session.get("allMembersCount") - Session.get("maxLearnerButtons");
-	},
 	memberlistCount: function () {
 		return MemberListCollection.find().count();
 	}
@@ -62,5 +54,33 @@ Template.learner.helpers({
 	},
 	isOwnNick: function (nickname) {
 		return nickname === localStorage.getItem(Router.current().params.quizName + "nick");
+	}
+});
+
+Template.memberlistTitel.helpers({
+	isOwner: function () {
+		return localData.containsHashtag(Router.current().params.quizName);
+	},
+	memberlistCount: function () {
+		return MemberListCollection.find().count();
+	}
+});
+
+Template.memberlistFooterNavButtons.helpers({
+	hasTooMuchButtons: ()=> {
+		return Session.get("learnerCountOverride") || (Session.get("allMembersCount") - Session.get("maxLearnerButtons") > 0);
+	},
+	invisibleLearnerCount: function () {
+		return Session.get("allMembersCount") - Session.get("maxLearnerButtons");
+	},
+	hasOverridenDefaultButtonCount: function () {
+		return Session.get("learnerCountOverride");
+	},
+	hasPlayers: function () {
+		lib.memberlistTracker.changed();
+		return MemberListCollection.find().count() > 0;
+	},
+	isOwner: function () {
+		return localData.containsHashtag(Router.current().params.quizName);
 	}
 });

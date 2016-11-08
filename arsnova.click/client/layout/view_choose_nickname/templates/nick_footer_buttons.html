@@ -1,11 +1,11 @@
 <template name="nickStandardFooter">
     {{#if isCASLogin}}
-        {{> footer_nav_buttons backId="backButton" forwardId="loginViaCas" forwardText="Login via CAS"}}
+        {{> footerNavButtons backId="backButton" forwardId="loginViaCas" forwardText="Login via CAS"}}
     {{else}}
-        {{> footer_nav_buttons backId="backButton" forwardId="forwardButton"}}
+        {{> footerNavButtons backId="backButton" forwardId="forwardButton"}}
     {{/if}}
 </template>
 
 <template name="nickLimitedFooter">
-    {{> footer_nav_buttons backId="backButton"}}
+    {{> footerNavButtons backId="backButton"}}
 </template>

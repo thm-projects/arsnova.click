@@ -528,8 +528,13 @@ Template.footerNavButtons.events({
 				break;
 			case "leaderBoard":
 				break;
-			case "showMore":
 			case "nicknameCategories":
+				if (Session.get("questionGroup")) {
+					Meteor.call("SessionConfiguration.setConfig", Session.get("questionGroup").getConfiguration().serialize());
+				}
+				history.back();
+				break;
+			case "showMore":
 				history.back();
 				break;
 		}

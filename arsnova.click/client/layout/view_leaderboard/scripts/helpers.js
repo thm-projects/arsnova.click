@@ -15,12 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
+import {generateExportData} from './lib.js';
 
 Template.leaderboardTitle.helpers({
 	getTitleText: ()=> {
@@ -72,41 +71,8 @@ Template.leaderboardFooterNavButtons.helpers({
 		const hashtag = Router.current().params.quizName;
 		const time = new Date();
 		const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
-		const memberlistResult = MemberListCollection.find({hashtag: hashtag}, {fields: {userRef: 1, nick: 1}, sort: {nick: 1}}).fetch();
-		let responseResult = Session.get("nicks");
-		let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";
-
-		memberlistResult.forEach(function (item) {
-			let responseTime = 0;
-			let responseCount = 0;
-			responseResult.forEach(function (responseItem) {
-				if (responseItem.value === item.nick) {
-					responseTime += responseItem.sumResponseTime;
-					responseCount++;
-				} else if (responseItem.value instanceof Array) {
-					responseItem.value.forEach(function (responseValue) {
-						if (responseValue.nick === item.nick) {
-							responseTime += responseValue.responseTime;
-							responseCount++;
-						}
-					});
-				}
-			});
-			const user = Meteor.users.findOne({_id: item.userRef});
-			if (responseTime !== 0) {
-				responseTime = responseTime / responseCount;
-				if (typeof user !== "undefined") {
-					item.id      = user.profile.id;
-					item.mail    = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
-					csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
-				} else {
-					csvString += item.nick + "," + responseTime + ",,\n";
-				}
-			}
-		});
-
 		return {
-			href: 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvString),
+			href: 'data:text/csv;charset=utf-8,' + encodeURIComponent(generateExportData()),
 			name: hashtag + "_evaluated_" + Router.current().params.id + "_" + timeString + ".csv"
 		};
 	}
@@ -167,42 +133,8 @@ Template.leaderBoard.helpers({
 		const hashtag = Router.current().params.quizName;
 		const time = new Date();
 		const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
-		const memberlistResult = MemberListCollection.find({hashtag: hashtag}, {fields: {userRef: 1, nick: 1}, sort: {nick: 1}}).fetch();
-		let responseResult;
-		responseResult = Session.get("nicks");
-		let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";
-
-		memberlistResult.forEach(function (item) {
-			let responseTime = 0;
-			let responseCount = 0;
-			responseResult.forEach(function (responseItem) {
-				if (responseItem.value === item.nick) {
-					responseTime += responseItem.sumResponseTime;
-					responseCount++;
-				} else if (responseItem.value instanceof Array) {
-					responseItem.value.forEach(function (responseValue) {
-						if (responseValue.nick === item.nick) {
-							responseTime += responseValue.responseTime;
-							responseCount++;
-						}
-					});
-				}
-			});
-			const user = Meteor.users.findOne({_id: item.userRef});
-			if (responseTime !== 0) {
-				responseTime = responseTime / responseCount;
-				if (typeof user !== "undefined") {
-					item.id      = user.profile.id;
-					item.mail    = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
-					csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
-				} else {
-					csvString += item.nick + "," + responseTime + ",,\n";
-				}
-			}
-		});
-
 		return {
-			href: 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvString),
+			href: 'data:text/csv;charset=utf-8,' + encodeURIComponent(generateExportData()),
 			name: hashtag + "_evaluated_" + Router.current().params.id + "_" + timeString + ".csv"
 		};
 	}

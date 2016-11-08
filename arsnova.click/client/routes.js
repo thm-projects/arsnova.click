@@ -43,7 +43,6 @@ export function cleanUp() {
 	} else {
 		const userDoc = MemberListCollection.findOne({nick: localStorage.getItem(Router.current().params.quizName + "nick")});
 		if (userDoc) {
-			console.log("userdoc", userDoc);
 			Meteor.call("MemberListCollection.removeLearner", Router.current().params.quizName, userDoc._id);
 		}
 	}

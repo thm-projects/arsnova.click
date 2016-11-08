@@ -93,6 +93,14 @@ export function getCurrentRead(index) {
 	return sumRead;
 }
 
+export function getProgressbarCSSClass(index, cssClass) {
+	if (isCountdownZero(index)) {
+		return cssClass;
+	} else {
+		return "progress-default";
+	}
+}
+
 export function checkIfIsCorrect(isCorrect) {
 	return isCorrect > 0 ? 'progress-success' : isCorrect < 0 ? 'progress-default' : 'progress-failure';
 }

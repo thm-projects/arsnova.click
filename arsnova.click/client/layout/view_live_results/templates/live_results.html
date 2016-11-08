@@ -75,7 +75,7 @@
                                             percent = allCorrect.percent
                                             isCorrect = 1
                                             id = 0
-                                            backgroundClass = (hideCssIfCountdownRunning displayIndex (getCSSClassForIsCorrect 1))
+                                            backgroundClass = allCorrect.backgroundClass
                                         }}
                                         {{> form_group
                                             name = "view.liveResults.guessed_wrong"
@@ -83,7 +83,7 @@
                                             percent = allWrong.percent
                                             isCorrect = 0
                                             id = 1
-                                            backgroundClass = (hideCssIfCountdownRunning displayIndex (getCSSClassForIsCorrect 0))
+                                            backgroundClass = allWrong.backgroundClass
                                         }}
                                     {{/with}}
                                 {{else}}
@@ -95,7 +95,7 @@
                                                 percent = correct.percent
                                                 isCorrect = 1
                                                 id = 0
-                                                backgroundClass = (hideCssIfCountdownRunning displayIndex (getCSSClassForIsCorrect 1))
+                                                backgroundClass = correct.backgroundClass
                                             }}
                                             {{> form_group
                                                 name = "view.liveResults.wrong"
@@ -103,16 +103,12 @@
                                                 percent = wrong.percent
                                                 isCorrect = 0
                                                 id = 1
-                                                backgroundClass = (hideCssIfCountdownRunning displayIndex (getCSSClassForIsCorrect 0))
+                                                backgroundClass = wrong.backgroundClass
                                             }}
                                         {{/with}}
                                     {{else}}
                                         {{#each answerList displayIndex}}
-                                            {{#if isCountdownZero questionIndex}}
-                                                {{> form_group name = name absolute = absolute percent = percent isCorrect = isCorrect backgroundClass = (getCSSClassForIsCorrect isCorrect) }}
-                                            {{else}}
-                                                {{> form_group name = name absolute = absolute percent = percent backgroundClass = (getCSSClassForIsCorrect -1) }}
-                                            {{/if}}
+                                            {{> form_group name = name absolute = absolute percent = percent isCorrect = isCorrect backgroundClass = backgroundClass }}
                                         {{/each}}
                                     {{/if}}
                                 {{/if}}

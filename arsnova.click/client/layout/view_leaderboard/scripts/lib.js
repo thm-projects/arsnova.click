@@ -118,7 +118,7 @@ function checkIsCorrectFreeTextQuestion(response, questionIndex) {
 	return userHasRightAnswers;
 }
 
-function isCorrectResponse(response, question, questionIndex) {
+export function isCorrectResponse(response, question, questionIndex) {
 	switch (question.type) {
 		case "SingleChoiceQuestion":
 		case "YesNoSingleChoiceQuestion":

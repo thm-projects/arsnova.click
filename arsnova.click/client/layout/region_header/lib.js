@@ -22,7 +22,6 @@ import * as localData from '/lib/local_storage.js';
 import * as memberlistLib from '/client/layout/view_lobby/scripts/lib.js';
 import * as liveresultsLib from '/client/layout/view_live_results/scripts/lib.js';
 import * as votingViewLib from '/client/layout/view_voting/scripts/lib.js';
-import * as footerElements from '/client/layout/region_footer/scripts/lib.js';
 
 export function isEditingQuestion() {
 	switch (Router.current().route.getName()) {
@@ -98,7 +97,6 @@ export function calculateTitelHeight() {
 
 	const marginTop = $('.row-padding-bottom').outerHeight(true) || fixedTop.outerHeight() * 1.1;
 	var finalHeight = $(window).height() - marginTop - navbarFooterHeight - footerHeight;
-	console.log(finalHeight, marginTop, fixedTop.outerHeight() * 1.1, navbarFooterHeight, footerHeight);
 	container.css("height", finalHeight);
 	if (!$('.row-padding-bottom').outerHeight()) {
 		container.css("margin-top", marginTop);

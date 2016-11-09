@@ -17,7 +17,6 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
-import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
@@ -25,8 +24,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
 import * as liveResultsLib from "/client/layout/view_live_results/scripts/lib.js";
-import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
-import {Splashscreen, ErrorSplashscreen, showReadingConfirmationSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {ErrorSplashscreen, showReadingConfirmationSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {globalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
 import {hasTHMMail} from "/client/layout/view_choose_nickname/scripts/lib";
 

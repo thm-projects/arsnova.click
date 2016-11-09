@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {Tracker} from 'meteor/tracker';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as headerLib from '/client/layout/region_header/lib.js';

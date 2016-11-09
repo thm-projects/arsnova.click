@@ -22,7 +22,6 @@ import * as localData from '/lib/local_storage.js';
 import {titelTracker} from '/client/layout/region_header/lib.js';
 import {setLobbySound} from '/client/plugins/sound/scripts/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
-import * as headerLib from "/client/layout/region_header/lib.js";
 import {calculateButtonCount, memberlistTracker} from './lib.js';
 
 Template.memberlist.onRendered(function () {

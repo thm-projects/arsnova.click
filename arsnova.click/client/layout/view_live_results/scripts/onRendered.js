@@ -24,7 +24,6 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import * as localData from '/lib/local_storage.js';
-import * as headerLib from "/client/layout/region_header/lib.js";
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 

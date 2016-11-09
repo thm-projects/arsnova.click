@@ -540,7 +540,11 @@ Template.footerNavButtons.events({
 				history.back();
 				break;
 			case "theme":
-				Session.get("questionGroup") ? Router.go("/" + Session.get("questionGroup").getHashtag() + "/memberlist") : history.back();
+				if (Session.get("questionGroup")) {
+					Router.go("/" + Session.get("questionGroup").getHashtag() + "/memberlist");
+				} else {
+					history.back();
+				}
 				break;
 		}
 	}

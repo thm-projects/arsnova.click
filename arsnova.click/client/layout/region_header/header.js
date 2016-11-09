@@ -18,7 +18,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {Tracker} from 'meteor/tracker';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
@@ -167,5 +166,4 @@ Template.header.onRendered(function () {
 			$(".thm-logo-background").hide();
 		}
 	});
-
 });

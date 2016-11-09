@@ -47,6 +47,7 @@ export function setBuzzsound1(songName) {
 
 export function setLobbySound(songName, autostart = true) {
 	var fileName = "";
+	Session.set("lobbySoundIsPlaying", false);
 	switch (songName) {
 		case "LobbySong1":
 			fileName = "bensound-clearday.mp3";
@@ -63,12 +64,11 @@ export function setLobbySound(songName, autostart = true) {
 		default:
 			break;
 	}
-	Session.set("lobbySoundIsPlaying", songName);
 	lobbySound = new buzz.sound("/sounds/" + fileName, {
 		loop: true
 	});
 	if (autostart) {
+		Session.set("lobbySoundIsPlaying", songName);
 		lobbySound.play();
 	}
-	$('#playStopLobbyMusic').toggleClass("down").removeClass("button-success").addClass("button-warning");
 }

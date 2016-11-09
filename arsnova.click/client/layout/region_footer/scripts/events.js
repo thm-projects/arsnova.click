@@ -18,14 +18,13 @@
 import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {Session} from 'meteor/session';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {DefaultQuestionGroup} from '/lib/questions/questiongroup_default.js';
 import * as localData from '/lib/local_storage.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
-import {buzzsound1, setBuzzsound1, lobbySound, setLobbySound} from '/client/plugins/sound/scripts/lib.js';
+import {buzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 
@@ -221,82 +220,6 @@ const clickEvents = {
 			autostart: true,
 			templateName: "soundConfig",
 			closeOnButton: "#js-btn-hideSoundModal, .splashscreen-container-close",
-			onRendered: function (instance) {
-				instance.templateSelector.find('#soundSelect').on('change', function (event) {
-					var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-					configDoc.music.title = $(event.target).val();
-					if (Session.get("soundIsPlaying")) {
-						buzzsound1.stop();
-						setBuzzsound1($(event.target).val());
-						buzzsound1.play();
-					} else {
-						setBuzzsound1($(event.target).val());
-					}
-					Meteor.call('SessionConfiguration.setMusic', configDoc);
-					const questionItem = Session.get("questionGroup");
-					questionItem.getConfiguration().getMusicSettings().setTitle($(event.target).val());
-					Session.set("questionGroup", questionItem);
-					localData.addHashtag(Session.get("questionGroup"));
-				});
-				instance.templateSelector.find('#lobbySoundSelect').on('change', function (event) {
-					if (Session.get("lobbySoundIsPlaying")) {
-						lobbySound.stop();
-						setLobbySound($(event.target).val());
-						lobbySound.play();
-					} else {
-						setLobbySound($(event.target).val());
-					}
-				});
-
-				instance.templateSelector.find("#js-btn-playStopMusic").on('click', function () {
-					if (Session.get("soundIsPlaying")) {
-						buzzsound1.stop();
-						Session.set("soundIsPlaying", false);
-						$('#js-btn-playStopMusic').toggleClass("down").removeClass("button-warning").addClass("button-success");
-					} else {
-						buzzsound1.play();
-						Session.set("soundIsPlaying", true);
-						$('#js-btn-playStopMusic').toggleClass("down").removeClass("button-success").addClass("button-warning");
-					}
-				});
-
-				const checkLobbySoundPlaying = function () {
-					if (Session.get("lobbySoundIsPlaying")) {
-						lobbySound.stop();
-						Session.set("lobbySoundIsPlaying", false);
-						$('#playStopLobbyMusic').toggleClass("down").removeClass("button-warning").addClass("button-success");
-					} else {
-						lobbySound.play();
-						Session.set("lobbySoundIsPlaying", true);
-						$('#playStopLobbyMusic').toggleClass("down").removeClass("button-success").addClass("button-warning");
-					}
-				};
-				checkLobbySoundPlaying();
-				instance.templateSelector.find("#playStopLobbyMusic").on('click', checkLobbySoundPlaying);
-
-				instance.templateSelector.find("#js-btn-hideSoundModal").on('click', function () {
-					buzzsound1.stop();
-					Session.set("soundIsPlaying", false);
-				});
-
-				instance.templateSelector.find('#isSoundOnButton').on('click', function () {
-					var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-					var btn = $('#isSoundOnButton');
-					btn.toggleClass("down");
-					if (btn.hasClass("down")) {
-						configDoc.music.isEnabled = true;
-						btn.html(TAPi18n.__("plugins.sound.active"));
-					} else {
-						configDoc.music.isEnabled = false;
-						btn.html(TAPi18n.__("plugins.sound.inactive"));
-					}
-					Meteor.call('SessionConfiguration.setMusic', configDoc);
-					const questionItem = Session.get("questionGroup");
-					questionItem.getConfiguration().getMusicSettings().setEnabled(configDoc.music.isEnabled);
-					Session.set("questionGroup", questionItem);
-					localData.addHashtag(Session.get("questionGroup"));
-				});
-			},
 			onDestroyed: function () {
 				var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 				configDoc.music.volume = Session.get("slider2");

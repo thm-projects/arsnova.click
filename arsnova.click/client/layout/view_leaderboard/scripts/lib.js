@@ -61,7 +61,6 @@ export function calculateButtonCount(allMembersCount) {
 	var limitModifier = viewport.outerWidth() >= 992 ? 2 : 1;
 
 	queryLimiter *= limitModifier;
-	queryLimiter -= limitModifier;
 	if (queryLimiter <= 0) {
 		queryLimiter = limitModifier;
 	}

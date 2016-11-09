@@ -223,7 +223,7 @@ export class AbstractQuestion {
 			tmpValue = tmpValue.replace(/>/g,"");
 			return tmpValue.length;
 		});
-		return answerOptionListValid && markdownChars[0] > 4 && markdownChars[0] < 10001 && this.getTimer() > 5 && this.getTimer() < 261;
+		return answerOptionListValid && markdownChars[0] > 4 && markdownChars[0] < 10001 && this.getTimer() > 9 && this.getTimer() < 301;
 	}
 
 	/**

@@ -22,9 +22,6 @@ import * as lib from './lib.js';
 let titelHeightTracker = null;
 
 Template.titel.onRendered(function () {
-	$(window).resize(function () {
-		lib.calculateTitelHeight();
-	});
 	titelHeightTracker = Tracker.autorun(function () {
 		lib.calculateTitelHeight();
 	});

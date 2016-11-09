@@ -21,10 +21,6 @@
 	margin-top: 20px;
 }
 
-#waiting_for_players_notifier {
-	margin-top: 100px;
-}
-
 .btn-more-learners,
 .btn-learner {
 	margin-top: 20px;
@@ -32,6 +28,7 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
+	opacity: 1 !important;
 }
 
 .btn-learner {

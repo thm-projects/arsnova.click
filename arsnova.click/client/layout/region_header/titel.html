@@ -16,14 +16,21 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="titel">
-    <div class="row distance-top">
-        <div class="titel-relative text-light text-center">
-            <div id="appTitle"
-                 class="titel margin-to-logo"
-                 aria-describedby="aria-description-appTitle">{{#if titelText}}{{_ titelText}}{{/if}}</div>
+    <div class="container-fluid">
+        <div class="row row-padding-bottom row-padding-top quiz-lobby-header">
+            <div class="col-xxs-12 col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="text-light text-center titel">
+                            <span id="appTitle"
+                                  aria-describedby="aria-description-appTitle">{{#if titelText}}{{_ titelText}}{{/if}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="aria-item" id="aria-description-appTitle">
-        {{_ (getAriaDescription titelText)}}
+        <div class="aria-item" id="aria-description-appTitle">
+            {{_ (getAriaDescription titelText)}}
+        </div>
     </div>
 </template>

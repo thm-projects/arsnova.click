@@ -19,7 +19,7 @@ import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {hashtagSchema} from '../hashtags/collection.js';
 import {questionIndexSchema} from '../eventmanager/collection.js';
-import {userNickSchema} from '../member_list/collection.js';
+import {userNickSchema, userRefSchema} from '../member_list/collection.js';
 import {answerOptionNumberSchema} from '../answeroptions/collection.js';
 import * as localData from '/lib/local_storage.js';
 
@@ -46,7 +46,7 @@ export const responsesCollectionSchema = new SimpleSchema({
 		type: userNickSchema
 	},
 	answerOptionNumber: {
-		type: answerOptionNumberSchema,
+		type: [answerOptionNumberSchema],
 		optional: true
 	},
 	rangedInputValue: {
@@ -59,6 +59,10 @@ export const responsesCollectionSchema = new SimpleSchema({
 	},
 	responseTime: {
 		type: responseTimeSchema
+	},
+	userRef: {
+		type: userRefSchema,
+		optional: true
 	}
 });
 

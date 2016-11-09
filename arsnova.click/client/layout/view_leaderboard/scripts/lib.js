@@ -15,10 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
-import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 
@@ -41,11 +41,9 @@ export function calculateButtonCount(allMembersCount) {
 	 - get the mainContentContainer height (the content wrapper for all elements)
 	 - subtract the appTitle height (the indicator for the question index)
 	 */
-	var viewport = $('.container'),
-		appTitle = $('#appTitle'),
-		firstItem = $('.firstLeaderBordItem');
+	var viewport = $('.contentPosition');
 
-	var viewPortHeight = viewport.outerHeight() - appTitle.outerHeight() - firstItem.outerHeight();
+	var viewPortHeight = viewport.outerHeight();
 
 	/* The height of the learner button must be set manually if the html elements are not yet generated */
 	var btnLearnerHeight = $('.button-leader').first().parent().outerHeight(true) ? $('.button-leader').first().parent().outerHeight(true) : 70;
@@ -71,191 +69,136 @@ export function calculateButtonCount(allMembersCount) {
 	setMaxResponseButtons(queryLimiter);
 }
 
-function getLeaderBoardItemsByIndex(index) {
-	var allGoodMembers = [];
-	var param = {isCorrect: true, hashtag: Router.current().params.quizName};
-	param.questionIndex = index;
-	var rightAnswerOptions = AnswerOptionCollection.find(param);
-	delete param.isCorrect;
+function checkIsCorrectSingleChoiceQuestion(response, questionIndex) {
+	let hasCorrectAnswer = false;
+	AnswerOptionCollection.find({
+		isCorrect: true,
+		questionIndex: questionIndex,
+		inputValue: response.inputValue,
+		hashtag: Router.current().params.quizName
+	}).fetch().forEach(function (answeroption) {
+		hasCorrectAnswer = $.inArray(answeroption.answerOptionNumber, response.answerOptionNumber) > -1;
+	});
+	return hasCorrectAnswer;
+}
 
-	MemberListCollection.find({}, {fields: {nick: 1}}).forEach(function (member) {
-		param.userNick = member.nick;
-		var userResponses = ResponsesCollection.find(param).fetch();
-		delete param.userNick;
-		var userHasRightAnswers = true;
-		// only put member in leaderboard when he clicked the right amount, then check whether he clicked all the right ones
-		var totalResponseTime = 0;
-		const questionItem = QuestionGroupCollection.findOne().questionList[index];
-		if ((userResponses.length === rightAnswerOptions.count() || questionItem.type === "RangedQuestion") &&
-			(userResponses.length > 0) && userHasRightAnswers && questionItem.type !== "FreeTextQuestion") {
-			userResponses.forEach(function (userResponse) {
-				param.isCorrect = true;
-				param.answerOptionNumber = userResponse.answerOptionNumber;
-				param.inputValue = questionItem.type === "RangedQuestion" ? userResponse.rangedInputValue : userResponse.inputValue;
-				const checkAnswerOptionDoc = AnswerOptionCollection.findOne(param);
-				const checkQuestionDoc = param.inputValue >= questionItem.rangeMin && param.inputValue <= questionItem.rangeMax;
-				delete param.isCorrect;
-				delete param.answerOptionNumber;
-				delete param.inputValue;
-				if (((questionItem.type !== "RangedQuestion" && !checkAnswerOptionDoc) || questionItem.type === "RangedQuestion") &&
-					!checkQuestionDoc) {
-					userHasRightAnswers = false;
-				} else {
-					totalResponseTime += userResponse.responseTime;
-				}
-			});
-			if (userHasRightAnswers) {
-				// rightAnswerOtions.count() will be 0 for RangedQuestions since they do not contain any answerOptions
-				const responseTime = rightAnswerOptions.count() === 0 ? 1 : rightAnswerOptions.count();
-				allGoodMembers.push({
-					nick: member.nick,
-					responseTime: totalResponseTime / responseTime
-				});
+function checkIsCorrectRangedQuestion(response, questionIndex) {
+	const question = QuestionGroupCollection.findOne({
+		hashtag: Router.current().params.quizName
+	}).questionList[questionIndex];
+	return response.rangedInputValue >= question.rangeMin && response.rangedInputValue <= question.rangeMax;
+}
+
+function checkIsCorrectFreeTextQuestion(response, questionIndex) {
+	const answerOption = AnswerOptionCollection.findOne({questionIndex: questionIndex});
+	let	userHasRightAnswers = false;
+	if (!answerOption.configCaseSensitive) {
+		answerOption.answerText = answerOption.answerText.toLowerCase();
+		response.freeTextInputValue = response.freeTextInputValue.toLowerCase();
+	}
+	if (!answerOption.configTrimWhitespaces) {
+		answerOption.answerText = answerOption.answerText.replace(/ /g, "");
+		response.freeTextInputValue = response.freeTextInputValue.replace(/ /g, "");
+	}
+	if (!answerOption.configUsePunctuation) {
+		answerOption.answerText = answerOption.answerText.replace(/(\.)*(,)*(!)*(")*(;)*(\?)*/g, "");
+		response.freeTextInputValue = response.freeTextInputValue.replace(/(\.)*(,)*(!)*(")*(;)*(\?)*/g, "");
+	}
+	if (answerOption.configUseKeywords) {
+		userHasRightAnswers = answerOption.answerText === response.freeTextInputValue;
+	} else {
+		let hasCorrectKeywords = true;
+		answerOption.answerText.split(" ").forEach(function (keyword) {
+			if (response.freeTextInputValue.indexOf(keyword) === -1) {
+				hasCorrectKeywords = false;
 			}
-		} else if (questionItem.type === "FreeTextQuestion") {
-			let answerOption = AnswerOptionCollection.findOne({questionIndex: index});
-			if (!answerOption.configCaseSensitive) {
-				answerOption.answerText = answerOption.answerText.toLowerCase();
+		});
+		userHasRightAnswers = hasCorrectKeywords;
+	}
+	return userHasRightAnswers;
+}
+
+function isCorrectResponse(response, question, questionIndex) {
+	switch (question.type) {
+		case "SingleChoiceQuestion":
+		case "YesNoSingleChoiceQuestion":
+		case "TrueFalseSingleChoiceQuestion":
+		case "MultipleChoiceQuestion":
+			return checkIsCorrectSingleChoiceQuestion(response, questionIndex);
+		case "SurveyQuestion":
+			return false;
+		case "RangedQuestion":
+			return checkIsCorrectRangedQuestion(response, questionIndex);
+		case "FreeTextQuestion":
+			return checkIsCorrectFreeTextQuestion(response, questionIndex);
+		default:
+			throw new Error("Unsupported question type while checking correct response");
+	}
+}
+
+export function objectToArray(obj) {
+	return $.map(obj, function (value, index) {
+		return [{nick: index, responseTime: value}];
+	});
+}
+
+export function getLeaderboardItemsByIndex(questionIndex) {
+	const hashtag = Router.current().params.quizName;
+	const question = QuestionGroupCollection.findOne({
+		hashtag: hashtag
+	}).questionList[questionIndex];
+	const result = {};
+	ResponsesCollection.find({
+		hashtag: hashtag,
+		questionIndex: questionIndex
+	}).fetch().forEach(function (response) {
+		const isCorrect = isCorrectResponse(response, question, questionIndex);
+		if (isCorrect) {
+			if (typeof result[response.userNick] === "undefined") {
+				result[response.userNick] = 0;
 			}
-			if (!answerOption.configTrimWhitespaces) {
-				answerOption.answerText = answerOption.answerText.replace(/ /g, "");
-			}
-			if (!answerOption.configUsePunctuation) {
-				answerOption.answerText = answerOption.answerText.replace(/(\.)*(,)*(!)*(")*(;)*(\?)*/g, "");
-			}
-			const responseValue = ResponsesCollection.findOne({
-				questionIndex: index,
-				answerOptionNumber: 0,
-				userNick: member.nick
-			});
-			if (responseValue) {
-				if (!answerOption.configCaseSensitive) {
-					responseValue.freeTextInputValue = responseValue.freeTextInputValue.toLowerCase();
-				}
-				if (!answerOption.configTrimWhitespaces) {
-					responseValue.freeTextInputValue = responseValue.freeTextInputValue.replace(/ /g, "");
-				}
-				if (!answerOption.configUsePunctuation) {
-					responseValue.freeTextInputValue = responseValue.freeTextInputValue.replace(/(\.)*(,)*(!)*(")*(;)*(\?)*/g, "");
-				}
-				if (answerOption.configUseKeywords) {
-					userHasRightAnswers = answerOption.answerText === responseValue.freeTextInputValue;
-				} else {
-					let hasCorrectKeywords = true;
-					answerOption.answerText.split(" ").forEach(function (keyword) {
-						if (responseValue.freeTextInputValue.indexOf(keyword) === -1) {
-							hasCorrectKeywords = false;
-						}
-					});
-					userHasRightAnswers = hasCorrectKeywords;
-				}
-				if (userHasRightAnswers) {
-					allGoodMembers.push({
-						nick: member.nick,
-						responseTime: responseValue.responseTime
-					});
-				}
-			}
+			result[response.userNick] += response.responseTime;
 		}
 	});
-
-	Session.set("allMembersCount",allGoodMembers.length);
-	calculateButtonCount(allGoodMembers.length);
-	return _.sortBy(allGoodMembers, 'responseTime').slice(0, Session.get("maxResponseButtons") + 1);
-}
-
-export function getLeaderBoardItems() {
-	if (Router.current().params.id === "all") {
-		if (!EventManagerCollection.findOne()) {
-			return [];
-		}
-		var result = [];
-		for (var i = 0; i <= EventManagerCollection.findOne().questionIndex; i++) {
-			result.push({
-				index: i,
-				value: getLeaderBoardItemsByIndex(i)
-			});
-		}
-
-		return result;
-	} else {
-		return [{value: getLeaderBoardItemsByIndex(parseInt(Router.current().params.id))}];
-	}
-}
-
-export function getAllNonPollingLeaderBoardItems() {
-	const result = [];
-	const questionGroup = QuestionGroupCollection.findOne();
-	for (var i = 0; i <= EventManagerCollection.findOne().questionIndex; i++) {
-		// pollings / surveys doesn't matter - just pick all others
-		if (questionGroup.questionList[i].type !== "SurveyQuestion") {
-			result.push({
-				index: i,
-				value: getLeaderBoardItemsByIndex(i)
-			});
-		}
-	}
 	return result;
 }
 
-/**
- * Sorts an object by its property value
- * @see http://stackoverflow.com/a/4760279
- * @param property
- * @returns {Function}
- */
-function dynamicSort(property) {
-	var sortOrder = 1;
-	if (property[0] === "-") {
-		sortOrder = -1;
-		property = property.substr(1);
+export function getAllLeaderboardItems() {
+	let allItems = getLeaderboardItemsByIndex(0);
+	for (let i = 1; i < EventManagerCollection.findOne().questionIndex; i++) {
+		const tmpItems = getLeaderboardItemsByIndex(i);
+		var result = $.extend({}, allItems, tmpItems);
+		for (const o in result) {
+			if (result.hasOwnProperty(o)) {
+				if (typeof allItems[o] !== "undefined" && typeof tmpItems[o] !== "undefined") {
+					result[o] = allItems[o] + tmpItems[o];
+				} else {
+					delete result[o];
+				}
+			}
+		}
+		allItems = result;
 	}
-	return function (a,b) {
-		var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-		return result * sortOrder;
-	};
+	return allItems;
 }
 
-export function getAllNicksWhichAreAlwaysRight() {
-	var leaderBoardItems = getAllNonPollingLeaderBoardItems();
-	var amountQuestions = EventManagerCollection.findOne().questionIndex + 1;
-	var amountSurveys = 0;
-	const questionGroup = QuestionGroupCollection.findOne();
-	for (var i = 0; i <= amountQuestions - 1; i++) {
-		if (questionGroup.questionList[i].type === "SurveyQuestion") {
-			amountSurveys++;
-		}
-	}
-	const amountRatableQuestions = amountQuestions - amountSurveys;
-
-	var allNicksAndTimes = [];
-	$.each(leaderBoardItems, function (index, value) {
-		$.each(value.value, function (i2, v2) {
-			allNicksAndTimes.push({nick: v2.nick, time: v2.responseTime});
-		});
-	});
-	var allTimeWinners = [];
-	$.each(allNicksAndTimes, function (index, value) {
-		var nickOccuresAmount = 0;
-		var nickSumTime = 0;
-		$.each(allNicksAndTimes, function (i2, v2) {
-			if (v2.nick === value.nick) {
-				nickOccuresAmount++;
-				nickSumTime += v2.time;
-			}
-		});
-		if (nickOccuresAmount === amountRatableQuestions) {
-			var alreadyExists = false;
-			$.each(allTimeWinners, function (i3, v3) {
-				if (v3.value === value.nick) {
-					alreadyExists = true;
-					return false;
-				}
-			});
-			if (!alreadyExists) {
-				allTimeWinners.push({value: value.nick, sumResponseTime: nickSumTime});
+export function generateExportData() {
+	const items = Session.get("nicks");
+	let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";
+	items.forEach(function (item) {
+		let responseTime = 0;
+		const responses = ResponsesCollection.find({hashtag: Router.current().params.quizName, userNick: item.nick}, {userRef: 1});
+		const user = Meteor.users.findOne({_id: responses.collection.findOne().userRef});
+		if (user) {
+			responseTime = item.responseTime;
+			if (typeof user !== "undefined") {
+				item.id      = user.profile.id;
+				item.mail    = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
+				csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
+			} else {
+				csvString += item.nick + "," + responseTime + ",,\n";
 			}
 		}
 	});
-	return allTimeWinners.sort(dynamicSort("sumResponseTime"));
+	return csvString;
 }

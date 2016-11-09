@@ -19,7 +19,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
+import {calculateHeaderSize, titelTracker} from '/client/layout/region_header/lib.js';
 import {setLobbySound} from '/client/plugins/sound/scripts/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount} from './lib.js';
@@ -31,9 +31,12 @@ Template.memberlist.onRendered(function () {
 		Session.set("lobbySoundIsPlaying", "LobbySong1");
 		setLobbySound("LobbySong1", Router.current().url.indexOf("localhost") === -1);
 	}
-	calculateButtonCount(MemberListCollection.find().count());
 	calculateHeaderSize();
 	$(window).resize(calculateHeaderSize);
+	this.autorun(function () {
+		titelTracker.depend();
+		calculateButtonCount(Session.get("allMembersCount"));
+	}.bind(this));
 
 	footerElements.removeFooterElements();
 	if (localData.containsHashtag(Router.current().params.quizName)) {
@@ -68,5 +71,5 @@ Template.memberlist.onRendered(function () {
 });
 
 Template.learner.onRendered(function () {
-	calculateButtonCount(MemberListCollection.find().count());
+	//calculateButtonCount(MemberListCollection.find().count());
 });

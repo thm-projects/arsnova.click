@@ -17,9 +17,14 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {getLeaderBoardItems, getAllNicksWhichAreAlwaysRight} from './lib.js';
+import {getLeaderboardItemsByIndex, getAllLeaderboardItems, objectToArray} from './lib.js';
 
 Template.leaderBoard.onCreated(function () {
-	Session.set("nicks", getLeaderBoardItems());
-	Session.set("nicks_alwaysCorrect", getAllNicksWhichAreAlwaysRight());
+	if (Router.current().params.id === "all") {
+		Session.set("nicks", objectToArray(getAllLeaderboardItems()));
+		Session.set("allMembersCount",Session.get("nicks").length);
+	} else {
+		Session.set("nicks", objectToArray(getLeaderboardItemsByIndex(parseInt(Router.current().params.id))));
+		Session.set("allMembersCount",Session.get("nicks").length);
+	}
 });

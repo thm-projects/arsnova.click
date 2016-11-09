@@ -18,7 +18,7 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import * as localData from '/lib/local_storage.js';
-import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
+import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount} from './lib.js';
 
@@ -33,16 +33,21 @@ Template.leaderBoard.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemAbout);
 	}
 
-	calculateHeaderSize();
+	headerLib.calculateHeaderSize();
 	footerElements.calculateFooter();
 
 	setTimeout(calculateButtonCount, 30);
 
 	$(window).resize(function () {
-		calculateHeaderSize();
+		headerLib.calculateHeaderSize();
 		if (Session.get("responsesCountOverride") && (Session.get("allMembersCount") - Session.get("maxResponseButtons") === 0)) {
 			Session.set("responsesCountOverride", false);
 		}
 		setTimeout(calculateButtonCount, 30);
 	});
+
+	this.autorun(function () {
+		headerLib.titelTracker.depend();
+		calculateButtonCount(Session.get("allMembersCount"));
+	}.bind(this));
 });

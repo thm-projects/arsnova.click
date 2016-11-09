@@ -20,21 +20,15 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {calculateButtonCount, setMemberlistObserver} from './lib.js';
+import {setMemberlistObserver} from './lib.js';
 
 Template.memberlist.onCreated(function () {
-	$(window).resize(function () {
-		calculateButtonCount(MemberListCollection.find().count());
-	});
-
 	setMemberlistObserver({
 		added: function () {
 			Session.set("allMembersCount", MemberListCollection.find().count());
-			calculateButtonCount(MemberListCollection.find().count());
 		},
 		removed: function () {
 			Session.set("allMembersCount", MemberListCollection.find().count());
-			calculateButtonCount(MemberListCollection.find().count());
 		}
 	});
 

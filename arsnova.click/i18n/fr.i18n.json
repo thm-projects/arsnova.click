@@ -302,7 +302,7 @@
       "chosen_nicknames": "Pseudos sélectionnés",
       "no_nicks_selected": "Pas de pseudos sélectionnés, ainsi les participants peuvent choisir leur pseudo de manière libre.",
       "block_illegal_nicks": "Bloquer surnoms inappropriés",
-      "restrict_to_cas": "Restreindre aux utilisateurs de CAS",
+      "restrict_to_cas": "Restreindre aux utilisateurs de CAS (THM)",
       "category": {
         "disney": "Caractères Disney",
         "science": "Science",

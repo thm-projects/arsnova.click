@@ -29,8 +29,6 @@ Template.memberlist.onRendered(function () {
 	Session.set("allMembersCount", MemberListCollection.find().count());
 	this.autorun(function () {
 		titelTracker.depend();
-		footerElements.footerTracker.changed();
-		memberlistTracker.changed();
 		calculateButtonCount(Session.get("allMembersCount"));
 	}.bind(this));
 	footerElements.footerTracker.changed();

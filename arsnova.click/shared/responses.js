@@ -34,6 +34,8 @@ Meteor.methods({
 		}).validate({hashtag: responseDoc.hashtag, questionIndex: responseDoc.questionIndex, userNick: responseDoc.userNick});
 
 		const responseValueObject = {};
+		const hashtag = responseDoc.hashtag;
+
 		if (typeof responseDoc.answerOptionNumber === "undefined") {
 			if (typeof responseDoc.rangedInputValue !== "undefined") {
 				new SimpleSchema({
@@ -52,11 +54,8 @@ Meteor.methods({
 		} else {
 			responseValueObject.answerOptionNumber = responseDoc.answerOptionNumber;
 		}
-
-		var timestamp = new Date().getTime();
-		var hashtag = responseDoc.hashtag;
 		var duplicateResponseSearch = {
-			hashtag: responseDoc.hashtag,
+			hashtag: hashtag,
 			questionIndex: responseDoc.questionIndex,
 			userNick: responseDoc.userNick
 		};
@@ -74,15 +73,14 @@ Meteor.methods({
 		}
 		const query = {};
 		if (Meteor.isServer) {
-			query.hashtag = responseDoc.hashtag;
+			query.hashtag = hashtag;
 		}
 		var questionGroupDoc = QuestionGroupCollection.findOne(query);
 		if (!questionGroupDoc) {
 			throw new Meteor.Error('ResponsesCollection.addResponse', 'hashtag_not_found');
 		}
 		const questionItem = questionGroupDoc.questionList[responseDoc.questionIndex];
-		var responseTime = Number(timestamp) - Number(questionItem.startTime);
-
+		var responseTime = Number(new Date().getTime()) - Number(questionItem.startTime);
 		if (responseTime > questionItem.timer * 1000) {
 			throw new Meteor.Error('ResponsesCollection.addResponse', 'response_timeout');
 		}
@@ -103,14 +101,14 @@ Meteor.methods({
 			throw new Meteor.Error('ResponsesCollection.addResponse', 'response_type_not_found');
 		}
 
-		const user = MemberListCollection.findOne({hashtag: responseDoc.hashtag, nick: responseDoc.userNick}, {userRef: 1});
+		const user = MemberListCollection.findOne({hashtag: hashtag, nick: responseDoc.userNick}, {userRef: 1});
 		if (user) {
 			responseDoc.userRef = user.userRef;
 		}
 		ResponsesCollection.insert(responseDoc);
 
 		Meteor.call('LeaderBoardCollection.addResponseSet', {
-			hashtag: responseDoc.hashtag,
+			hashtag: hashtag,
 			questionIndex: responseDoc.questionIndex,
 			nick: responseDoc.userNick,
 			responseTime: responseDoc.responseTime

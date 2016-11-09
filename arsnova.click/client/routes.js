@@ -239,6 +239,24 @@ Router.route('/theme', {
 	}
 });
 
+Router.route('/showMore', {
+	action: function () {
+		this.render("titel", {
+			to: "header.title",
+			data: function () {
+				return {titelText: 'region.footer.show-more.show-more-elements'};
+			}
+		});
+		this.render('footerNavButtons', {
+			to: 'footer.navigation',
+			data: function () {
+				return {backId: "backButton"};
+			}
+		});
+		this.render('showMore');
+	}
+});
+
 Router.route("/:quizName", {
 	action: function () {
 		if (this.ready()) {
@@ -266,6 +284,12 @@ Router.route("/:quizName", {
 
 Router.route('/:quizName/showMore', {
 	action: function () {
+		this.render("titel", {
+			to: "header.title",
+			data: function () {
+				return {titelText: 'region.footer.show-more.show-more-elements'};
+			}
+		});
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {

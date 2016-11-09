@@ -107,13 +107,14 @@ Template.votingview.events({
 		var responseArr = JSON.parse(Session.get("responses"));
 		var currentId = event.currentTarget.id;
 		responseArr[currentId] = responseArr[currentId] ? false : true;
-		Session.set("responses", JSON.stringify(responseArr));
-		Session.set("hasToggledResponse", JSON.stringify(responseArr).indexOf("true") > -1);
-		$(event.target).toggleClass("answer-selected");
 		if (Session.get("questionSC")) {
 			makeAndSendResponse(responseArr);
 			countdownFinish();
+			return;
 		}
+		Session.set("responses", JSON.stringify(responseArr));
+		Session.set("hasToggledResponse", JSON.stringify(responseArr).indexOf("true") > -1);
+		$(event.target).toggleClass("answer-selected");
 	},
 	"keydown #rangeInput": function (event) {
 		if ($(event.currentTarget).val().length > 0 && !isNaN(parseFloat($(event.currentTarget).val()))) {

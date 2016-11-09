@@ -33,7 +33,7 @@ Template.themeSwitcher.onRendered(function () {
 		}
 		footerElements.addFooterElement(footerElements.footerElemHashtagManagement);
 	}
-	footerElements.calculateFooter();
+	calculateHeaderSize();
 
 	const theme = localStorage.getItem("theme");
 	for (let i = 0; i < themes.length; i++) {
@@ -42,6 +42,4 @@ Template.themeSwitcher.onRendered(function () {
 			i = themes.length;
 		}
 	}
-	calculateHeaderSize();
-	$(window).resize(calculateHeaderSize);
 });

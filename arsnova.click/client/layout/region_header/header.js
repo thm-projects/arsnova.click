@@ -18,7 +18,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {Tracker} from 'meteor/tracker';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
@@ -144,10 +143,8 @@ Template.header.events({
 	}
 });
 
-let headerThemeTracker = null;
-
 Template.header.onRendered(function () {
-	headerThemeTracker = Tracker.autorun(function () {
+	this.autorun(function () {
 		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 		if (localStorage.getItem("theme")) {
 			Session.set("theme", localStorage.getItem("theme"));
@@ -158,7 +155,7 @@ Template.header.onRendered(function () {
 		if (configDoc) {
 			Session.set("theme", configDoc.theme);
 		}
-	});
+	}.bind(this));
 	if (!Session.get("questionGroup") && Router.current().params.quizName && localData.containsHashtag(Router.current().params.quizName)) {
 		Session.set("questionGroup", localData.reenterSession(Router.current().params.quizName));
 	}
@@ -169,10 +166,4 @@ Template.header.onRendered(function () {
 			$(".thm-logo-background").hide();
 		}
 	});
-});
-
-Template.header.onDestroyed(function () {
-	if (headerThemeTracker) {
-		headerThemeTracker.stop();
-	}
 });

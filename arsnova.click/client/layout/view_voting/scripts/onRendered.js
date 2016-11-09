@@ -15,33 +15,29 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as headerLib from '/client/layout/region_header/lib.js';
-import {formatAnswerButtons, startCountdown} from './lib.js';
+import {formatAnswerButtons, votingViewTracker} from './lib.js';
 
 Template.votingview.onRendered(function () {
-	if (QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type !== "RangedQuestion" &&
-		QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].answerOptionList[0].type !== "FreeTextAnswerOption") {
-		$(window).resize(function () {
-			Meteor.defer(formatAnswerButtons);
-		});
-		Meteor.defer(formatAnswerButtons);
+	const questionType = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type;
+
+	if (questionType !== "RangedQuestion" && questionType !== "FreeTextQuestion") {
+		this.autorun(function () {
+			headerLib.titelTracker.depend();
+			formatAnswerButtons();
+		}.bind(this));
 	}
-
-	this.autorun(function () {
-		headerLib.titelTracker.depend();
-		formatAnswerButtons();
-	}.bind(this));
-
 	footerElements.removeFooterElements();
-	footerElements.calculateFooter();
+	footerElements.footerTracker.changed();
+	votingViewTracker.changed();
+});
 
-	startCountdown(EventManagerCollection.findOne().questionIndex);
-	calculateHeaderSize();
-	$(window).resize(calculateHeaderSize);
+Template.liveResultsTitle.onRendered(function () {
+	footerElements.removeFooterElements();
+	footerElements.footerTracker.changed();
+	votingViewTracker.changed();
 });

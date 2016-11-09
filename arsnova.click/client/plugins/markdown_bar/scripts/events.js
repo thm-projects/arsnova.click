@@ -27,13 +27,16 @@ Template.markdownBar.events({
 		new Splashscreen({
 			autostart: true,
 			instanceId: "infoMarkdown",
+			templateName: "questionPreviewSplashscreen",
+			closeOnButton: '#js-btn-hidePreviewModal, .splashscreen-container-close',
 			onRendered: function (instance) {
-				instance.templateSelector.find(".modal-body").html(TAPi18n.__("plugins.markdown_bar.info_content"));
+				instance.templateSelector.find(".modal-markdown-body").html(TAPi18n.__("plugins.markdown_bar.info_content"));
 			}
 		});
 	},
 	"click #previewMarkdownButton": function () {
-		new Splashscreen({autostart: true,
+		new Splashscreen({
+			autostart: true,
 			templateName: "questionPreviewSplashscreen",
 			closeOnButton: '#js-btn-hidePreviewModal, .splashscreen-container-close',
 			onRendered: function (instance) {

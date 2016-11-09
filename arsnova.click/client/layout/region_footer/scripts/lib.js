@@ -15,12 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
-import * as headerLib from '/client/layout/region_header/lib.js';
 import {createTabIndices} from '/client/startup.js';
 
 export const footerElemTranslation = {
@@ -108,6 +106,8 @@ const hiddenFooterElements = {
 	linkable: []
 };
 
+export const footerTracker = new Tracker.Dependency();
+
 export function addFooterElement(footerElement, priority = 100) {
 	let hasItem = false;
 	$.each(footerElements, function (index, item) {
@@ -120,6 +120,7 @@ export function addFooterElement(footerElement, priority = 100) {
 		footerElements.splice(priority, 0, footerElement);
 	}
 	$('#' + footerElement.id).removeClass("error").removeClass("success");
+	//footerTracker.changed();
 }
 
 export function getCurrentFooterElements() {
@@ -147,7 +148,7 @@ export function getFooterElementById(id) {
 	}
 }
 
-export const updateStatefulFooterElements = Tracker.autorun(function () {
+function updateStatefulFooterElements() {
 	const allElements = $.merge([], footerElements);
 	$.merge(allElements, hiddenFooterElements.selectable);
 	$.each(allElements, function (index, item) {
@@ -186,7 +187,7 @@ export const updateStatefulFooterElements = Tracker.autorun(function () {
 		$('#' + item.id).find(".footerElemText").text(TAPi18n.__(item.textName));
 		createTabIndices();
 	});
-});
+}
 
 export function calculateFooterFontSize() {
 	let iconSize = "2rem", textSize = "1.5rem";
@@ -196,8 +197,6 @@ export function calculateFooterFontSize() {
 	navbarFooter.css({"fontSize": iconSize});
 	fixedBottom.css("bottom", navbarFooter.height());
 	fixedBottom.show();
-	headerLib.calculateTitelHeight();
-	updateStatefulFooterElements.invalidate();
 	return {
 		icon: iconSize,
 		text: textSize
@@ -228,7 +227,6 @@ export function generateFooterElements() {
 	}
 	Session.set("footerElements", footerElements);
 	Session.set("hiddenFooterElements", hiddenFooterElements);
-	Meteor.defer(calculateFooterFontSize);
 	return footerElements;
 }
 
@@ -260,6 +258,7 @@ export function removeFooterElement(footerElement) {
 			return false;
 		}
 	});
+	footerTracker.changed();
 }
 
 export function removeFooterElements() {
@@ -268,13 +267,18 @@ export function removeFooterElements() {
 	hiddenFooterElements.linkable.splice(0, hiddenFooterElements.linkable.length);
 	Session.set("footerElements", footerElements);
 	Session.set("hiddenFooterElements", hiddenFooterElements);
+	footerTracker.changed();
 }
 
-export function calculateFooter() {
-	$(window).on("resize", function () {
-		if ($(window).height() > 400) {
-			Meteor.defer(generateFooterElements);
-		}
-	});
-	Meteor.defer(generateFooterElements);
-}
+const footerTrackerCallback = function () {
+	footerTracker.depend();
+	if ($(window).height() > 400) {
+		generateFooterElements();
+		updateStatefulFooterElements();
+		calculateFooterFontSize();
+	}
+};
+
+$(window).on('resize', footerTrackerCallback);
+
+Tracker.autorun(footerTrackerCallback);

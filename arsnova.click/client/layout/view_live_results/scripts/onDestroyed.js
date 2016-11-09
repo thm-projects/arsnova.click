@@ -27,10 +27,10 @@ Template.liveResults.onDestroyed(function () {
 		countdown.stop();
 	}
 
-	if (Session.get("soundIsPlaying")) {
+	if (Session.get("soundIsPlaying") && buzzsound1) {
 		buzzsound1.stop();
-		Session.set("soundIsPlaying", false);
 	}
+	Session.set("soundIsPlaying", false);
 
 	if (routeToLeaderboardTimer) {
 		clearTimeout(routeToLeaderboardTimer);

@@ -36,7 +36,11 @@ const clickEvents = {
 		Router.go("/translate");
 	},
 	"click #theme": function () {
-		Router.go("/theme");
+		if (Router.current().params.quizName) {
+			Router.go("/" + Router.current().params.quizName + "/theme");
+		} else {
+			Router.go("/theme");
+		}
 	},
 	"click #hashtagManagement": function () {
 		Router.go("/hashtagmanagement");

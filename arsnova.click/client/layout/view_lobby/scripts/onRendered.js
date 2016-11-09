@@ -31,9 +31,6 @@ Template.memberlist.onRendered(function () {
 		titelTracker.depend();
 		calculateButtonCount(Session.get("allMembersCount"));
 	}.bind(this));
-	footerElements.footerTracker.changed();
-	memberlistTracker.changed();
-	calculateButtonCount(Session.get("allMembersCount"));
 
 	footerElements.removeFooterElements();
 	if (localData.containsHashtag(Router.current().params.quizName)) {
@@ -53,6 +50,9 @@ Template.memberlist.onRendered(function () {
 		}
 		footerElements.addFooterElement(footerElements.footerElemTheme);
 	}
+	calculateButtonCount(Session.get("allMembersCount"));
+	footerElements.footerTracker.changed();
+	memberlistTracker.changed();
 
 	$('.navbar-footer-placeholder').hide();
 	$('.navbar-footer').show();

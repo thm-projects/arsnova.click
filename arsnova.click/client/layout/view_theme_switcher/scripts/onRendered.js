@@ -15,16 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
-import {themes} from './lib.js';
+import {themes, themeTracker} from './lib.js';
 
 Template.themeSwitcher.onRendered(function () {
 	footerElements.removeFooterElements();
-	if (!Session.get("questionGroup")) {
+	if (!Router.current().params.quizName) {
 		footerElements.addFooterElement(footerElements.footerElemHome);
 		footerElements.addFooterElement(footerElements.footerElemAbout);
 		footerElements.addFooterElement(footerElements.footerElemTranslation);
@@ -33,7 +31,8 @@ Template.themeSwitcher.onRendered(function () {
 		}
 		footerElements.addFooterElement(footerElements.footerElemHashtagManagement);
 	}
-	calculateHeaderSize();
+	footerElements.footerTracker.changed();
+	themeTracker.changed();
 
 	const theme = localStorage.getItem("theme");
 	for (let i = 0; i < themes.length; i++) {

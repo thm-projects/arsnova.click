@@ -163,6 +163,7 @@ export function countdownFinish() {
 	if (!localData.containsHashtag(Router.current().params.quizName)) {
 		return;
 	}
+	Meteor.call("EventManagerCollection.setQuestionIndex", questionIndex + 1);
 	$('.navbar-footer').show();
 	if (Session.get("soundIsPlaying")) {
 		buzzsound1.stop();

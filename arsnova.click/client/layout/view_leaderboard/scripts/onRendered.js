@@ -30,7 +30,6 @@ Template.leaderBoard.onRendered(function () {
 		if (navigator.userAgent.match(/iPad/i) == null) {
 			footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		}
-		footerElements.addFooterElement(footerElements.footerElemAbout);
 	}
 
 	$(window).resize(function () {

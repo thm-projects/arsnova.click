@@ -147,7 +147,7 @@ Template.progressBarSingleChoiceQuestion.helpers({
 		const allAnswerOptions = AnswerOptionCollection.find({
 			hashtag: hashtag,
 			questionIndex: index
-		});
+		}).sort({answerOptionNumber: 1});
 		const correctAnswerOptions = allAnswerOptions.collection.find({hashtag: hashtag, isCorrect: true}).count();
 
 		allAnswerOptions.forEach(function (value) {
@@ -179,7 +179,7 @@ Template.progressBarSurveyQuestion.helpers({
 		const allAnswerOptions = AnswerOptionCollection.find({
 			hashtag: hashtag,
 			questionIndex: index
-		});
+		}).sort({answerOptionNumber: 1});
 
 		allAnswerOptions.forEach(function (value) {
 			const amount = responseSet.collection.find({

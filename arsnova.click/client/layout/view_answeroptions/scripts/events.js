@@ -20,7 +20,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {parseSingleAnswerOptionInput, formatIsCorrectButtons} from './lib.js';
+import {parseSingleAnswerOptionInput, formatIsCorrectButtons, styleFreetextAnswerOptionValidation} from './lib.js';
 
 Template.createAnswerOptions.events({
 });
@@ -96,7 +96,11 @@ Template.freeTextAnswerOptionTemplate.events({
 	"input #answerTextArea": function (event) {
 		const questionItem = Session.get("questionGroup");
 
-		questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].setAnswerText($(event.currentTarget).val());
+		var questionIndex = EventManagerCollection.findOne().questionIndex;
+
+		questionItem.getQuestionList()[questionIndex].getAnswerOptionList()[0].setAnswerText($(event.currentTarget).val());
+
+		styleFreetextAnswerOptionValidation(questionItem.getQuestionList()[questionIndex].getAnswerOptionList()[0].isValid());
 
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));

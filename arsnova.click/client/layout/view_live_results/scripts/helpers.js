@@ -298,7 +298,7 @@ Template.liveResults.helpers({
 			case "TrueFalseSingleChoiceQuestion":
 				return "progressBarSingleChoiceQuestion";
 			case "SurveyQuestion":
-				return "progressBarSurveyQuestion"
+				return "progressBarSurveyQuestion";
 			case "MultipleChoiceQuestion":
 				return "progressBarMultipleChoiceQuestion";
 			case "RangedQuestion":

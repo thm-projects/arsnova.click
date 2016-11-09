@@ -17,13 +17,13 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {countdownFinish} from './lib.js';
+import {deleteCountdown} from './lib.js';
 
 Template.votingview.onDestroyed(function () {
 	Session.set("questionSC", undefined);
 	Session.set("responses", undefined);
-	Session.set("countdownInitialized", undefined);
+	Session.set("countdownInitialized", false);
 	Session.set("hasToggledResponse", undefined);
 	Session.set("hasSendResponse", undefined);
-	countdownFinish();
+	deleteCountdown();
 });

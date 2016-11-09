@@ -17,8 +17,8 @@
 
 import {Template} from 'meteor/templating';
 import {MemberListCollection} from '/lib/member_list/collection.js';
-import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
+import * as headerLib from "/client/layout/region_header/lib.js";
 
 Template.nick.onRendered(function () {
 	if ($(window).width() >= 992) {
@@ -30,21 +30,21 @@ Template.nick.onRendered(function () {
 		localStorage.setItem(hashtag + "nick", MemberListCollection.findOne({hashtag: hashtag, privateKey: localStorage.getItem("privateKey")}).nick);
 		Router.go("/" + hashtag + "/memberlist");
 	}
-
-	footerElements.removeFooterElements();
-	footerElements.calculateFooter();
-	calculateHeaderSize();
-	$(window).resize(calculateHeaderSize);
 });
 
 Template.nickStandardFooter.onRendered(function () {
 	$("#forwardButton, #loginViaCas").attr("disabled", "disabled");
+
+	footerElements.removeFooterElements();
+	footerElements.footerTracker.changed();
+	headerLib.calculateHeaderSize();
+	headerLib.calculateTitelHeight();
 });
 
 Template.nickLimited.onRendered(function () {
 	footerElements.removeFooterElements();
-	footerElements.calculateFooter();
-	calculateHeaderSize();
-	$(window).resize(calculateHeaderSize);
+	footerElements.footerTracker.changed();
+	headerLib.calculateHeaderSize();
+	headerLib.calculateTitelHeight();
 });
 

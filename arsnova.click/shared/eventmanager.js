@@ -21,6 +21,32 @@ import {EventManagerCollection, sessionStatusSchema, readingConfirmationIndexSch
 import {hashtagSchema} from '/lib/hashtags/collection.js';
 
 Meteor.methods({
+	'EventManagerCollection.startQuiz': (hashtag)=> {
+		new SimpleSchema({
+			hashtag: hashtagSchema
+		}).validate({hashtag});
+
+		const query = {};
+		if (Meteor.isServer) {
+			query.hashtag = hashtag;
+		}
+		Meteor.call('Question.startTimer', {hashtag: hashtag, questionIndex: 0});
+		EventManagerCollection.update(query, {
+			$set: {
+				sessionStatus: 3,
+				questionIndex: 0
+			},
+			$push: {
+				eventStack: {
+					key: "EventManagerCollection.startQuiz",
+					value: {
+						sessionStatus: 3,
+						questionIndex: 0
+					}
+				}
+			}
+		});
+	},
 	'EventManagerCollection.setSessionStatus': (hashtag, sessionStatus)=> {
 		new SimpleSchema({
 			hashtag: hashtagSchema,

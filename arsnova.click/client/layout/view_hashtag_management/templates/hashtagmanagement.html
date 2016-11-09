@@ -20,7 +20,7 @@
         <div class="row full-screen-content">
             <div class="col-md-12 contentFrame">
                 {{#if noHashtagsAvailable}}
-                    {{> titel titelText = "view.hashtag_management.no_sessions"}}
+                    <h2 class="text-center text-light">{{_ "view.hashtag_management.no_sessions"}}</h2>
                 {{else}}
                     {{#each serverHashtags}}
                         <div class="row hashtagManagementRow" id="{{this}}">

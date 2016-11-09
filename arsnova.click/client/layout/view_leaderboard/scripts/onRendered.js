@@ -33,17 +33,10 @@ Template.leaderBoard.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemAbout);
 	}
 
-	headerLib.calculateHeaderSize();
-	footerElements.calculateFooter();
-
-	setTimeout(calculateButtonCount, 30);
-
 	$(window).resize(function () {
-		headerLib.calculateHeaderSize();
 		if (Session.get("responsesCountOverride") && (Session.get("allMembersCount") - Session.get("maxResponseButtons") === 0)) {
 			Session.set("responsesCountOverride", false);
 		}
-		setTimeout(calculateButtonCount, 30);
 	});
 
 	this.autorun(function () {

@@ -539,6 +539,13 @@ Template.footerNavButtons.events({
 			case "showMore":
 				history.back();
 				break;
+			case "theme":
+				if (Session.get("questionGroup")) {
+					Router.go("/" + Session.get("questionGroup").getHashtag() + "/memberlist");
+				} else {
+					history.back();
+				}
+				break;
 		}
 	}
 });

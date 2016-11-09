@@ -66,9 +66,9 @@ const clickEvents = {
 			Router.go("/");
 		}
 	},
-	"click #fullscreen, switchChange.bootstrapSwitch .bootstrap-switch-id-fullscreen_switch ": function () {
+	"click #fullscreen, switchChange.bootstrapSwitch .bootstrap-switch-id-fullscreen_switch": function () {
 		var route = Router.current().route.getName();
-		if (route !== "undefined") {
+		if (route !== undefined) {
 			route = route.replace(/(:quizName.)*(.:id)*/g, "");
 		}
 
@@ -83,7 +83,7 @@ const clickEvents = {
 				document.webkitCancelFullScreen();
 			}
 
-			if (route !== "undefined" && route === "memberlist") {
+			if (route !== undefined && route === "memberlist") {
 				$('.navbar-footer-placeholder').hide();
 				$('.navbar-footer').show();
 			}
@@ -96,7 +96,7 @@ const clickEvents = {
 				document.documentElement.webkitRequestFullScreen();
 			}
 
-			if (route !== "undefined" && route === "memberlist") {
+			if (route !== undefined && route === "memberlist") {
 				$('.navbar-footer').hide();
 				$('.navbar-footer-placeholder').show();
 			}

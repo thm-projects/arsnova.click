@@ -6,7 +6,7 @@
                 percent = allCorrect.percent
                 isCorrect = 1
                 id = 0
-                backgroundClass = (getCSSClassForIsCorrect 1)
+                backgroundClass = allCorrect.backgroundClass
         }}
         {{> form_group
                 name = "view.liveResults.complete_wrong"
@@ -14,7 +14,7 @@
                 percent = allWrong.percent
                 isCorrect = 0
                 id = 1
-                backgroundClass = (getCSSClassForIsCorrect 0)
+                backgroundClass = allWrong.backgroundClass
         }}
     {{/with}}
 </template>

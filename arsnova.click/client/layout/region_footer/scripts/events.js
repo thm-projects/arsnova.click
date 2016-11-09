@@ -360,7 +360,7 @@ const clickEvents = {
 			onRendered: function (instance) {
 				instance.templateSelector.find('#editSessionButton').on('click', function () {
 					Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
-					Meteor.call('EventManagerCollection.setSessionStatus', Router.current().params.quizName, 1);
+					Meteor.call('EventManagerCollection.reset', Router.current().params.quizName);
 					Router.go("/" + Router.current().params.quizName + "/question");
 				});
 			}

@@ -154,8 +154,8 @@ Meteor.methods({
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$set: {
 				sessionStatus: 1,
-				readingConfirmationIndex: -1,
-				questionIndex: -1,
+				readingConfirmationIndex: 0,
+				questionIndex: 0,
 				eventStack: [
 					{
 						key: "EventManagerCollection.reset",

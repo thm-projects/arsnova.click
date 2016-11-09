@@ -35,7 +35,7 @@ Template.liveResults.onRendered(()=> {
 	const questionCount = QuestionGroupCollection.findOne().questionList.length;
 
 	if (eventDoc.questionIndex < questionCount) {
-		if (sessionConfig.readingConfirmationEnabled && eventDoc.readingConfirmationIndex === 0) {
+		if (sessionConfig.readingConfirmationEnabled && eventDoc.readingConfirmationIndex === 0 && eventDoc.questionIndex === -1) {
 			if (isOwner) {
 				Meteor.call("EventManagerCollection.showReadConfirmedForIndex", hashtag, 0);
 			}
@@ -62,6 +62,7 @@ Template.liveResults.onRendered(()=> {
 			footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		}
 	}
+	lib.calculateButtonCount();
 	lib.liveResultsTracker.changed();
 });
 

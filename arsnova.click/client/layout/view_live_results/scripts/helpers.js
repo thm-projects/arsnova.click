@@ -169,6 +169,37 @@ Template.progressBarSingleChoiceQuestion.helpers({
 	}
 });
 
+Template.progressBarSurveyQuestion.helpers({
+	answerList: function (index) {
+		const result = [];
+		const hashtag = Router.current().params.quizName;
+		const responseSet = ResponsesCollection.find({hashtag: hashtag, questionIndex: index});
+		const memberAmount = responseSet.collection.find({hashtag: hashtag, questionIndex: index}).count();
+
+		const allAnswerOptions = AnswerOptionCollection.find({
+			hashtag: hashtag,
+			questionIndex: index
+		});
+
+		allAnswerOptions.forEach(function (value) {
+			const amount = responseSet.collection.find({
+				hashtag: hashtag,
+				questionIndex: index,
+				answerOptionNumber: value.answerOptionNumber
+			}).count();
+			result.push({
+				name: TAPi18n.__("view.liveResults.answer_option") + " " + String.fromCharCode(value.answerOptionNumber + 65),
+				absolute: amount,
+				percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
+				isCorrect: 0,
+				questionIndex: index,
+				backgroundClass: "progress-default"
+			});
+		});
+		return result;
+	}
+});
+
 Template.progressBarMultipleChoiceQuestion.helpers({
 	answerList: function (index) {
 		let allCorrect = 0;
@@ -265,8 +296,9 @@ Template.liveResults.helpers({
 			case "SingleChoiceQuestion":
 			case "YesNoSingleChoiceQuestion":
 			case "TrueFalseSingleChoiceQuestion":
-			case "SurveyQuestion":
 				return "progressBarSingleChoiceQuestion";
+			case "SurveyQuestion":
+				return "progressBarSurveyQuestion"
 			case "MultipleChoiceQuestion":
 				return "progressBarMultipleChoiceQuestion";
 			case "RangedQuestion":

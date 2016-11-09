@@ -326,7 +326,12 @@ Template.liveResults.helpers({
 		if (!questionDoc) {
 			return;
 		}
-		return !Session.get("countdownInitialized") && questionDoc.questionList[index].type !== "SurveyQuestion" && index <= eventDoc.questionIndex;
+
+		if (Session.get("countdownInitialized")) {
+			return questionDoc.questionList[index].type !== "SurveyQuestion" && index < eventDoc.questionIndex;
+		} else {
+			return !Session.get("countdownInitialized") && questionDoc.questionList[index].type !== "SurveyQuestion" && index <= eventDoc.questionIndex;
+		}
 	},
 	getNormalizedIndex: function (index) {
 		return index + 1;

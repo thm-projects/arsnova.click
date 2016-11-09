@@ -205,7 +205,17 @@ export class AbstractQuestion {
 				answerOptionListValid = false;
 			}
 		});
-		const markdownChars = this.getQuestionText().split().map(function (currentValue) {
+		const questionTextWithoutMarkdownChars = this.getQuestionTextWithoutMarkdownChars();
+		
+		// hard coded checkup values are ugly, but the schema import seems to be messed up here...
+		return answerOptionListValid && questionTextWithoutMarkdownChars[0] > 4 && questionTextWithoutMarkdownChars[0] < 50001 && this.getTimer() > 9 && this.getTimer() < 301;
+	}
+
+	/**
+	 * @returns {string} The question text without the markdown characters
+	 */
+	getQuestionTextWithoutMarkdownChars () {
+		return this.getQuestionText().split().map(function (currentValue) {
 			let tmpValue = currentValue;
 			tmpValue = tmpValue.replace(/#/g,"");
 			tmpValue = tmpValue.replace(/\*/g,"");
@@ -223,7 +233,6 @@ export class AbstractQuestion {
 			tmpValue = tmpValue.replace(/>/g,"");
 			return tmpValue.length;
 		});
-		return answerOptionListValid && markdownChars[0] > 4 && markdownChars[0] < 10001 && this.getTimer() > 9 && this.getTimer() < 301;
 	}
 
 	/**
@@ -232,27 +241,10 @@ export class AbstractQuestion {
 	 */
 	getValidationStackTrace () {
 		const result = [];
-		const markdownChars = this.getQuestionText().split().map(function (currentValue) {
-			let tmpValue = currentValue;
-			tmpValue = tmpValue.replace(/#/g,"");
-			tmpValue = tmpValue.replace(/\*/g,"");
-			tmpValue = tmpValue.replace(/1./g,"");
-			tmpValue = tmpValue.replace(/\[/g,"");
-			tmpValue = tmpValue.replace(/\]\(/g,"");
-			tmpValue = tmpValue.replace(/\)/g,"");
-			tmpValue = tmpValue.replace(/- /g,"");
-			tmpValue = tmpValue.replace(/ /g,"");
-			tmpValue = tmpValue.replace(/\\\(/g,"");
-			tmpValue = tmpValue.replace(/\\\)/g,"");
-			tmpValue = tmpValue.replace(/$/g,"");
-			tmpValue = tmpValue.replace(/<hlcode>/g,"");
-			tmpValue = tmpValue.replace(/<\/hlcode>/g,"");
-			tmpValue = tmpValue.replace(/>/g,"");
-			return tmpValue.length;
-		});
-		if (markdownChars[0] < 5) {
+		const questionTextWithoutMarkdownChars = this.getQuestionTextWithoutMarkdownChars();
+		if (questionTextWithoutMarkdownChars[0] < 5) {
 			result.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "question_text_too_small"});
-		} else if (markdownChars[0] > 1000) {
+		} else if (questionTextWithoutMarkdownChars[0] > 1000) {
 			result.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "question_text_too_long"});
 		}
 		if (this.getTimer() < 6) {

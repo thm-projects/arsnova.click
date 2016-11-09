@@ -72,8 +72,9 @@ export function addQuestion(index) {
 }
 
 export function checkForValidQuestionText() {
-	var isValid = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].isValid();
-	if (isValid) {
+	var questionTextWithoutMarkdownChars = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionTextWithoutMarkdownChars();
+
+	if (questionTextWithoutMarkdownChars > 4 && questionTextWithoutMarkdownChars < 50001) {
 		$('#questionText').removeClass("invalidQuestion");
 	} else {
 		$('#questionText').addClass("invalidQuestion");

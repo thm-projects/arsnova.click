@@ -67,4 +67,11 @@ Template.memberlist.onRendered(function () {
 			$('.qr-code-container').hide();
 		}
 	});
+
+	$(window).on("resize", function () {
+		if(window.innerHeight != screen.height) {
+			$('.navbar-footer-placeholder').hide();
+			$('.navbar-footer').show();
+		}
+	});
 });

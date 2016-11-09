@@ -37,7 +37,6 @@ Template.themeSwitcher.events({
 			quiz.getConfiguration().setTheme(theme);
 			Session.set("questionGroup", quiz);
 			Meteor.call("SessionConfiguration.setTheme", Session.get("questionGroup").getHashtag(), theme);
-			Meteor.call("SessionConfiguration.setTheme", Session.get("questionGroup").getHashtag(), theme);
 		}
 		localStorage.setItem("theme", theme);
 		Session.set("theme", theme);

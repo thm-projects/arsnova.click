@@ -23,65 +23,6 @@ import {questionReflection} from '/lib/questions/question_reflection.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 
-function doesMarkdownSyntaxExist(questionText, syntaxStart, syntaxMiddle, syntaxEnd) {
-	if (questionText.length <= 0) {
-		return false;
-	}
-
-	if (questionText.indexOf(syntaxStart) === -1) {
-		return false;
-	} else if (!syntaxMiddle && !syntaxEnd) {
-		return true;
-	}
-
-	questionText = questionText.substring(questionText.indexOf(syntaxStart) + syntaxStart.length, questionText.length);
-
-	if (questionText.indexOf(syntaxMiddle) === -1) {
-		return false;
-	} else if (!syntaxEnd) {
-		return true;
-	}
-
-	questionText = questionText.substring(questionText.indexOf(syntaxMiddle) + syntaxMiddle.length, questionText.length);
-
-	return questionText.indexOf(syntaxEnd) !== -1;
-}
-
-function questionTextLengthWithoutMarkdownSyntax(questionText, trimWhiteSpaces = true) {
-	var questionTextLength = questionText.length;
-	if (doesMarkdownSyntaxExist(questionText, '**', '**')) {
-		questionTextLength -= 4;
-	}
-	if (doesMarkdownSyntaxExist(questionText, '#', '#')) {
-		questionTextLength -= 4;
-	}
-	if (doesMarkdownSyntaxExist(questionText, '[', '](', ')')) {
-		questionTextLength -= 4;
-	}
-	if (doesMarkdownSyntaxExist(questionText, '- ')) {
-		questionTextLength -= 4;
-	}
-	if (doesMarkdownSyntaxExist(questionText, '1. ')) {
-		questionTextLength -= 4;
-	}
-	if (doesMarkdownSyntaxExist(questionText, '\\(', '\\)')) {
-		questionTextLength -= 4;
-	}
-	if (doesMarkdownSyntaxExist(questionText, '$$', '$$')) {
-		questionTextLength -= 4;
-	}
-	if (doesMarkdownSyntaxExist(questionText, '<hlcode>', '</hlcode>')) {
-		questionTextLength -= 4;
-	}
-	if (doesMarkdownSyntaxExist(questionText, '>')) {
-		questionTextLength -= 4;
-	}
-	if (trimWhiteSpaces) {
-		questionTextLength = questionText.replace(/ /g, "").length;
-	}
-	return questionTextLength;
-}
-
 export function addQuestion(index) {
 	const questionText = $('#questionText').val() || "";
 	const questionType = $('#chooseQuestionType').find('option:selected').attr("id");
@@ -131,11 +72,11 @@ export function addQuestion(index) {
 }
 
 export function checkForValidQuestionText() {
-	var questionText = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
-	if (questionTextLengthWithoutMarkdownSyntax(questionText) < 5) {
-		$('#questionText').addClass("invalidQuestion");
-	} else {
+	var isValid = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].isValid();
+	if (isValid) {
 		$('#questionText').removeClass("invalidQuestion");
+	} else {
+		$('#questionText').addClass("invalidQuestion");
 	}
 }
 

@@ -96,9 +96,11 @@ Template.freeTextAnswerOptionTemplate.events({
 	"input #answerTextArea": function (event) {
 		const questionItem = Session.get("questionGroup");
 
-		questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].setAnswerText($(event.currentTarget).val());
+		var questionIndex = EventManagerCollection.findOne().questionIndex;
 
-		styleFreetextAnswerOptionValidation(questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].isValid());
+		questionItem.getQuestionList()[questionIndex].getAnswerOptionList()[0].setAnswerText($(event.currentTarget).val());
+
+		styleFreetextAnswerOptionValidation(questionItem.getQuestionList()[questionIndex].getAnswerOptionList()[0].isValid());
 
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));

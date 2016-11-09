@@ -31,8 +31,8 @@ export function createSlider(index) {
 	sliderObject = noUiSlider.create(plainSlider, {
 		start: questionItem.getQuestionList()[index].getTimer(),
 		range: {
-			'min': 6,
-			'max': 260
+			'min': 10,
+			'max': 300
 		}
 	});
 	sliderObject.on('slide', function (val) {

@@ -21,6 +21,34 @@ import {EventManagerCollection, sessionStatusSchema, readingConfirmationIndexSch
 import {hashtagSchema} from '/lib/hashtags/collection.js';
 
 Meteor.methods({
+	'EventManagerCollection.startQuiz': (hashtag, index)=> {
+		new SimpleSchema({
+			hashtag: hashtagSchema
+		}).validate({hashtag});
+
+		const query = {};
+		if (Meteor.isServer) {
+			query.hashtag = hashtag;
+		}
+		Meteor.call('Question.startTimer', {hashtag: hashtag, questionIndex: 0});
+		EventManagerCollection.update(query, {
+			$set: {
+				sessionStatus: 3,
+				questionIndex: index,
+				readingConfirmationIndex: 0
+			},
+			$push: {
+				eventStack: {
+					key: "EventManagerCollection.startQuiz",
+					value: {
+						sessionStatus: 3,
+						questionIndex: index,
+						readingConfirmationIndex: 0
+					}
+				}
+			}
+		});
+	},
 	'EventManagerCollection.setSessionStatus': (hashtag, sessionStatus)=> {
 		new SimpleSchema({
 			hashtag: hashtagSchema,
@@ -41,6 +69,24 @@ Meteor.methods({
 			}
 		});
 	},
+	'EventManagerCollection.setQuestionIndex': (hashtag, questionIndex)=> {
+		new SimpleSchema({
+			hashtag: hashtagSchema,
+			questionIndex: questionIndexSchema
+		}).validate({hashtag, questionIndex});
+
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$set: {
+				questionIndex: questionIndex
+			},
+			$push: {
+				eventStack: {
+					key: "EventManagerCollection.setQuestionIndex",
+					value: {questionIndex: questionIndex}
+				}
+			}
+		});
+	},
 	'EventManagerCollection.showReadConfirmedForIndex': (hashtag, readingConfirmationIndex)=> {
 		new SimpleSchema({
 			hashtag: hashtagSchema,
@@ -48,7 +94,9 @@ Meteor.methods({
 		}).validate({hashtag, readingConfirmationIndex});
 
 		EventManagerCollection.update({hashtag: hashtag}, {
-			$set: {readingConfirmationIndex: readingConfirmationIndex},
+			$set: {
+				readingConfirmationIndex: readingConfirmationIndex
+			},
 			$push: {
 				eventStack: {
 					key: "EventManagerCollection.showReadConfirmedForIndex",
@@ -106,15 +154,15 @@ Meteor.methods({
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$set: {
 				sessionStatus: 1,
-				readingConfirmationIndex: -1,
-				questionIndex: -1,
+				readingConfirmationIndex: 0,
+				questionIndex: 0,
 				eventStack: [
 					{
 						key: "EventManagerCollection.reset",
 						value: {
 							sessionStatus: 1,
-							readingConfirmationIndex: -1,
-							questionIndex: -1
+							readingConfirmationIndex: 0,
+							questionIndex: 0
 						}
 					}
 				]
@@ -131,7 +179,7 @@ Meteor.methods({
 			hashtag: hashtag,
 			sessionStatus: 1,
 			lastConnection: 0,
-			readingConfirmationIndex: -1,
+			readingConfirmationIndex: 0,
 			questionIndex: 0,
 			eventStack: [
 				{

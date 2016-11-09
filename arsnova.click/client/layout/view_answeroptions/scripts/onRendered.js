@@ -18,14 +18,11 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
+import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.createAnswerOptions.onRendered(function () {
-	calculateHeaderSize();
-	$(window).resize(calculateHeaderSize);
-
 	var body = $('body');
 	body.on('click', '.questionIcon:not(.active)', function () {
 		Router.go("/" + Router.current().params.quizName + "/question");
@@ -34,12 +31,8 @@ Template.createAnswerOptions.onRendered(function () {
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	footerElements.addFooterElement(footerElements.footerElemNicknames);
-	footerElements.calculateFooter();
-
-	$(window).resize(function () {
-		setTimeout(lib.calculateXsViewport, 5);
-	});
-	setTimeout(lib.calculateXsViewport, 25);
+	headerLib.calculateHeaderSize();
+	headerLib.calculateTitelHeight();
 });
 
 Template.defaultAnswerOptionTemplate.onRendered(function () {
@@ -70,4 +63,7 @@ Template.rangedAnswerOptionTemplate.onRendered(function () {
 
 Template.freeTextAnswerOptionTemplate.onRendered(function () {
 	lib.formatFreeTextSettingsButtons();
+
+	const questionItem = Session.get("questionGroup");
+	lib.styleFreetextAnswerOptionValidation(questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].isValid());
 });

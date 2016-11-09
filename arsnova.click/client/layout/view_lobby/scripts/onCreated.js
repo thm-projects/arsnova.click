@@ -19,16 +19,21 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {MemberListCollection} from '/lib/member_list/collection.js';
+import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as localData from '/lib/local_storage.js';
-import {setMemberlistObserver} from './lib.js';
+import {setMemberlistObserver, memberlistTracker} from './lib.js';
 
 Template.memberlist.onCreated(function () {
 	setMemberlistObserver({
 		added: function () {
 			Session.set("allMembersCount", MemberListCollection.find().count());
+			footerElements.footerTracker.changed();
+			memberlistTracker.changed();
 		},
 		removed: function () {
 			Session.set("allMembersCount", MemberListCollection.find().count());
+			footerElements.footerTracker.changed();
+			memberlistTracker.changed();
 		}
 	});
 

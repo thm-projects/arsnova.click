@@ -18,7 +18,7 @@
 @import "../../global/styles/appearance.scss";
 
 .learner-list {
-	.firstLeaderBordItem {
+	.leaderBordItem {
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -37,6 +37,10 @@
 	}
 
 	.col-md-6 {
-		margin-top: 20px;
+		margin-top: 10px;
 	}
+}
+
+.adjustHeightForBoxShadow {
+	height: 55px;
 }

@@ -57,7 +57,7 @@
                             </select>
                         </div>
                         <div class="col-md-12">
-                            <button id="playStopLobbyMusic" class="button button-warning down">
+                            <button id="playStopLobbyMusic" class="button {{#if isLobbySoundPlaying}}button-warning down{{else}}button-success{{/if}}">
                                 <span class="glyphicon glyphicon-{{#if isLobbySoundPlaying}}stop{{ else }}play{{/if}}" aria-hidden="true"></span>
                             </button>
                         </div>

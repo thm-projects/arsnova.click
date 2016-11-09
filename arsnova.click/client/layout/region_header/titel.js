@@ -16,22 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {Tracker} from 'meteor/tracker';
-import * as lib from './lib.js';
-
-let titelHeightTracker = null;
-
-Template.titel.onRendered(function () {
-	titelHeightTracker = Tracker.autorun(function () {
-		lib.calculateTitelHeight();
-	});
-});
-
-Template.titel.onDestroyed(function () {
-	if (titelHeightTracker) {
-		titelHeightTracker.stop();
-	}
-});
 
 Template.titel.helpers({
 	getAriaDescription: function (text) {

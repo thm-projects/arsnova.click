@@ -25,7 +25,8 @@ import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {countdown, getPercentRead, getCurrentRead, hslColPerc, checkIfIsCorrect, isCountdownZero, setQuestionDialog} from './lib.js';
+import * as leaderboardLib from '/client/layout/view_leaderboard/scripts/lib.js';
+import * as lib from './lib.js';
 
 Template.liveResultsFooterNavButtons.helpers({
 	isOwner: function () {
@@ -41,7 +42,7 @@ Template.liveResultsFooterNavButtons.helpers({
 			return;
 		}
 
-		return countdown === null && questionDoc.questionList.length > 1 && eventDoc.questionIndex >= questionDoc.questionList.length - 1;
+		return lib.countdown === null && questionDoc.questionList.length > 1 && eventDoc.questionIndex >= questionDoc.questionList.length - 1;
 	},
 	hasCorrectAnswerOptionsOrRangedQuestion: ()=> {
 		const questionDoc = QuestionGroupCollection.findOne();
@@ -123,7 +124,7 @@ Template.liveResultsTitle.helpers({
 	},
 	getCountdown: function () {
 		if (Session.get("countdownInitialized")) {
-			var roundedCountdown = Math.round(countdown.get());
+			var roundedCountdown = Math.round(lib.countdown.get());
 			return roundedCountdown < 0 ? 0 : roundedCountdown;
 		}
 		return 0;
@@ -136,120 +137,201 @@ Template.liveResultsTitle.helpers({
 	}
 });
 
-Template.liveResults.helpers({
-	isOwner: function () {
-		return localData.containsHashtag(Router.current().params.quizName);
-	},
-	getCountdown: function () {
-		if (Session.get("countdownInitialized")) {
-			var roundedCountdown = Math.round(countdown.get());
-			return roundedCountdown < 0 ? 0 : roundedCountdown;
-		}
-		return 0;
-	},
-	isCountdownZero: function (index) {
-		return isCountdownZero(index);
-	},
-	getCountVotings: function () {
-		let eventDoc = EventManagerCollection.findOne();
-		if (!eventDoc) {
-			return 0;
-		}
+Template.progressBarSingleChoiceQuestion.helpers({
+	answerList: function (index) {
+		const result = [];
+		const hashtag = Router.current().params.quizName;
+		const responseSet = ResponsesCollection.find({hashtag: hashtag, questionIndex: index});
+		const memberAmount = responseSet.collection.find({hashtag: hashtag, questionIndex: index}).count();
 
-		var sumVoted = 0;
-		MemberListCollection.find().map(function (member) {
-			var responseDoc = ResponsesCollection.findOne({
-				questionIndex: eventDoc.questionIndex,
-				userNick: member.nick
-			});
-			if (responseDoc !== undefined) {
-				sumVoted++;
-			}
-		});
-		return sumVoted;
-	},
-	getPercentRead: (index)=> {
-		return getPercentRead(index);
-	},
-	getCurrentRead: (index)=> {
-		var currentReadAmount = getCurrentRead(index);
-		if (currentReadAmount > 0 || SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled === false) {
-			$('#startNextQuestion').removeAttr('disabled');
-		}
-		return currentReadAmount;
-	},
-	sessionClosed: function () {
-		return Session.get("sessionClosed");
-	},
-	showLeaderBoardButton: function (index) {
-		const questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc) {
-			return;
-		}
-		return !Session.get("countdownInitialized") && (
-				questionDoc.questionList[index].type === "RangedQuestion" ||
-				questionDoc.questionList[index].type === "FreeTextQuestion" ||
-				AnswerOptionCollection.find({
-					questionIndex: index,
-					isCorrect: true
-				}).count() > 0
-			);
-	},
-	isMC: function (index) {
-		return AnswerOptionCollection.find({
+		const allAnswerOptions = AnswerOptionCollection.find({
+			hashtag: hashtag,
+			questionIndex: index
+		}, {sort: {answerOptionNumber: 1}});
+		const correctAnswerOptions = allAnswerOptions.collection.find({hashtag: hashtag, isCorrect: true}).count();
+
+		allAnswerOptions.forEach(function (value) {
+			const amount = responseSet.collection.find({
+				hashtag: hashtag,
 				questionIndex: index,
-				isCorrect: true
-			}).count() > 1;
-	},
-	mcOptions: function (index) {
-		let memberAmount = ResponsesCollection.find({questionIndex: index}).fetch();
-		memberAmount = _.uniq(memberAmount, false, function (user) {
-			return user.userNick;
-		}).length;
-
-		const correctAnswers = [];
-		AnswerOptionCollection.find({
-			questionIndex: index,
-			isCorrect: true
-		}, {fields: {"answerOptionNumber": 1}}).forEach(function (answer) {
-			correctAnswers.push(answer.answerOptionNumber);
+				answerOptionNumber: value.answerOptionNumber
+			}).count();
+			result.push({
+				name: TAPi18n.__("view.liveResults.answer_option") + " " + String.fromCharCode(value.answerOptionNumber + 65),
+				absolute: amount,
+				percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
+				isCorrect: correctAnswerOptions ? value.isCorrect : -1,
+				questionIndex: index,
+				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(correctAnswerOptions ? value.isCorrect : -1))
+			});
 		});
+		return result;
+	}
+});
+
+Template.progressBarSurveyQuestion.helpers({
+	answerList: function (index) {
+		const result = [];
+		const hashtag = Router.current().params.quizName;
+		const responseSet = ResponsesCollection.find({hashtag: hashtag, questionIndex: index});
+		const memberAmount = responseSet.collection.find({hashtag: hashtag, questionIndex: index}).count();
+
+		const allAnswerOptions = AnswerOptionCollection.find({
+			hashtag: hashtag,
+			questionIndex: index
+		}).sort({answerOptionNumber: 1});
+
+		allAnswerOptions.forEach(function (value) {
+			const amount = responseSet.collection.find({
+				hashtag: hashtag,
+				questionIndex: index,
+				answerOptionNumber: value.answerOptionNumber
+			}).count();
+			result.push({
+				name: TAPi18n.__("view.liveResults.answer_option") + " " + String.fromCharCode(value.answerOptionNumber + 65),
+				absolute: amount,
+				percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
+				isCorrect: 0,
+				questionIndex: index,
+				backgroundClass: "progress-default"
+			});
+		});
+		return result;
+	}
+});
+
+Template.progressBarMultipleChoiceQuestion.helpers({
+	answerList: function (index) {
 		let allCorrect = 0;
 		let allWrong = 0;
-		MemberListCollection.find().forEach(function (user) {
-			let responseAmount = 0;
-			let everythingRight = true;
-			let everythingWrong = true;
-			ResponsesCollection.find({
-				questionIndex: index,
-				userNick: user.nick
-			}).forEach(function (response) {
-				if ($.inArray(response.answerOptionNumber, correctAnswers) !== -1) {
-					everythingWrong = false;
-				} else {
-					everythingRight = false;
-				}
-				responseAmount++;
-			});
-			if (responseAmount) {
-				if (everythingRight && responseAmount === correctAnswers.length) {
-					allCorrect++;
-				}
-				if (everythingWrong) {
-					allWrong++;
-				}
+		const question = QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName}).questionList[index];
+		const responses = ResponsesCollection.find({questionIndex: index}).fetch();
+		const memberAmount = responses.length;
+		responses.forEach(function (responseItem) {
+			if (leaderboardLib.isCorrectResponse(responseItem, question, index)) {
+				allCorrect++;
+			} else {
+				allWrong++;
 			}
 		});
 		return {
 			allCorrect: {
 				absolute: allCorrect,
-				percent: memberAmount ? Math.floor((allCorrect * 100) / memberAmount) : 0
+				percent: memberAmount ? Math.floor((allCorrect * 100) / memberAmount) : 0,
+				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(1))
 			},
 			allWrong: {
 				absolute: allWrong,
-				percent: memberAmount ? Math.floor((allWrong * 100) / memberAmount) : 0
+				percent: memberAmount ? Math.floor((allWrong * 100) / memberAmount) : 0,
+				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(0))
 			}
 		};
+	}
+});
+
+Template.progressBarFreeTextQuestion.helpers({
+	answerList: function (index) {
+		let correctAnswerCount = 0;
+		let wrongAnswerCount = 0;
+		const question = QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName}).questionList[index];
+		const responses = ResponsesCollection.find({questionIndex: index}).fetch();
+		const memberAmount = responses.length;
+		responses.forEach(function (responseItem) {
+			if (leaderboardLib.isCorrectResponse(responseItem, question, index)) {
+				correctAnswerCount++;
+			} else {
+				wrongAnswerCount++;
+			}
+		});
+		return {
+			correct: {
+				absolute: correctAnswerCount,
+				percent: memberAmount ? Math.floor((correctAnswerCount * 100) / memberAmount) : 0,
+				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(1))
+			},
+			wrong: {
+				absolute: wrongAnswerCount,
+				percent: memberAmount ? Math.floor((wrongAnswerCount * 100) / memberAmount) : 0,
+				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(0))
+			}
+		};
+	}
+});
+
+Template.progressBarRangedQuestion.helpers({
+	answerList: function (index) {
+		let inCorrectRange = 0;
+		let inWrongRange = 0;
+		const question = QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName}).questionList[index];
+		const responses = ResponsesCollection.find({questionIndex: index}).fetch();
+		const memberAmount = responses.length;
+		responses.forEach(function (responseItem) {
+			if (leaderboardLib.isCorrectResponse(responseItem, question, index)) {
+				inCorrectRange++;
+			} else {
+				inWrongRange++;
+			}
+		});
+		return {
+			allCorrect: {
+				absolute: inCorrectRange,
+				percent: memberAmount ? Math.floor((inCorrectRange * 100) / memberAmount) : 0,
+				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(1))
+			},
+			allWrong: {
+				absolute: inWrongRange,
+				percent: memberAmount ? Math.floor((inWrongRange * 100) / memberAmount) : 0,
+				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(0))
+			}
+		};
+	}
+});
+
+Template.liveResults.helpers({
+	getProgressbarTemplate: function (index) {
+		if (typeof index === "undefined") {
+			return null;
+		}
+		switch (Session.get("questionGroup").getQuestionList()[index].typeName()) {
+			case "SingleChoiceQuestion":
+			case "YesNoSingleChoiceQuestion":
+			case "TrueFalseSingleChoiceQuestion":
+				return "progressBarSingleChoiceQuestion";
+			case "SurveyQuestion":
+				return "progressBarSurveyQuestion";
+			case "MultipleChoiceQuestion":
+				return "progressBarMultipleChoiceQuestion";
+			case "RangedQuestion":
+				return "progressBarRangedQuestion";
+			case "FreeTextQuestion":
+				return "progressBarFreeTextQuestion";
+		}
+	},
+	isCountdownZero: function (index) {
+		return lib.isCountdownZero(index);
+	},
+	getPercentRead: (index)=> {
+		return lib.getPercentRead(index);
+	},
+	getCurrentRead: (index)=> {
+		var currentReadAmount = lib.getCurrentRead(index);
+		if (currentReadAmount > 0 || SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled === false) {
+			$('#startNextQuestion').removeAttr('disabled');
+		}
+		return currentReadAmount;
+	},
+	showLeaderBoardButton: function (index) {
+		const questionDoc = QuestionGroupCollection.findOne();
+		const eventDoc = EventManagerCollection.findOne();
+		if (!questionDoc) {
+			return;
+		}
+
+		if (Session.get("countdownInitialized")) {
+			return questionDoc.questionList[index].type !== "SurveyQuestion" && index < eventDoc.questionIndex;
+		} else {
+			return !Session.get("countdownInitialized") && questionDoc.questionList[index].type !== "SurveyQuestion" && index <= eventDoc.questionIndex;
+		}
 	},
 	getNormalizedIndex: function (index) {
 		return index + 1;
@@ -259,13 +341,12 @@ Template.liveResults.helpers({
 		return doc ? doc.questionList.length : false;
 	},
 	questionList: function () {
-		var questionDoc = QuestionGroupCollection.findOne();
 		let eventDoc = EventManagerCollection.findOne();
-		if (!questionDoc || !eventDoc) {
+		if (!eventDoc) {
 			return;
 		}
 
-		var questionList = questionDoc.questionList;
+		var questionList = Session.get("questionGroup").getQuestionList();
 		if (eventDoc.readingConfirmationIndex < questionList.length - 1) {
 			questionList.splice(eventDoc.readingConfirmationIndex + 1, questionList.length - (eventDoc.readingConfirmationIndex + 1));
 		}
@@ -276,250 +357,11 @@ Template.liveResults.helpers({
 
 		return questionList ? questionList.reverse() : false;
 	},
-	answerList: function (index) {
-		var result = [];
-		var memberAmount = ResponsesCollection.find({questionIndex: index}).fetch();
-		memberAmount = _.uniq(memberAmount, false, function (user) {
-			return user.userNick;
-		}).length;
-
-		var correctAnswerOptions = AnswerOptionCollection.find({
-			questionIndex: index,
-			isCorrect: true
-		}).count();
-		AnswerOptionCollection.find({questionIndex: index}, {sort: {'answerOptionNumber': 1}}).forEach(function (value) {
-			var amount = ResponsesCollection.find({
-				questionIndex: index,
-				answerOptionNumber: value.answerOptionNumber
-			}).count();
-			result.push({
-				name: TAPi18n.__("view.liveResults.answer_option") + " " + String.fromCharCode(value.answerOptionNumber + 65),
-				absolute: amount,
-				percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
-				isCorrect: correctAnswerOptions ? value.isCorrect : -1,
-				questionIndex: index
-			});
-		});
-		return result;
-	},
-	freeTextAnswerResult: function (index) {
-		let memberAmount = ResponsesCollection.find({questionIndex: index}).fetch();
-		memberAmount = _.uniq(memberAmount, false, function (user) {
-			return user.userNick;
-		}).length;
-		let correctAnswerCount = 0;
-		let wrongAnswerCount = 0;
-		let answerOption = AnswerOptionCollection.findOne({questionIndex: index});
-
-		if (!answerOption.configCaseSensitive) {
-			answerOption.answerText = answerOption.answerText.toLowerCase();
-		}
-		if (!answerOption.configTrimWhitespaces) {
-			answerOption.answerText = answerOption.answerText.replace(/ /g, "");
-		}
-		if (!answerOption.configUsePunctuation) {
-			answerOption.answerText = answerOption.answerText.replace(/(\.)*(,)*(!)*(")*(;)*(\?)*/g, "");
-		}
-		ResponsesCollection.find({
-			questionIndex: index,
-			answerOptionNumber: 0
-		}).forEach(function (value) {
-			if (!answerOption.configCaseSensitive) {
-				value.freeTextInputValue = value.freeTextInputValue.toLowerCase();
-			}
-			if (!answerOption.configTrimWhitespaces) {
-				value.freeTextInputValue = value.freeTextInputValue.replace(/ /g, "");
-			}
-			if (!answerOption.configUsePunctuation) {
-				value.freeTextInputValue = value.freeTextInputValue.replace(/(\.)*(,)*(!)*(")*(;)*(\?)*/g, "");
-			}
-			if (answerOption.configUseKeywords) {
-				if (answerOption.answerText === value.freeTextInputValue) {
-					correctAnswerCount++;
-				} else {
-					wrongAnswerCount++;
-				}
-			} else {
-				let hasCorrectKeywords = true;
-				answerOption.answerText.split(" ").forEach(function (keyword) {
-					if (value.freeTextInputValue.indexOf(keyword) === -1) {
-						hasCorrectKeywords = false;
-					}
-				});
-				if (hasCorrectKeywords) {
-					correctAnswerCount++;
-				} else {
-					wrongAnswerCount++;
-				}
-			}
-		});
-
-		return {
-			correct: {
-				absolute: correctAnswerCount,
-				percent: memberAmount ? Math.floor((correctAnswerCount * 100) / memberAmount) : 0
-			},
-			wrong: {
-				absolute: wrongAnswerCount,
-				percent: memberAmount ? Math.floor((wrongAnswerCount * 100) / memberAmount) : 0
-			}
-		};
-	},
-	rangedAnswerResult: function (index) {
-		var questionDoc = QuestionGroupCollection.findOne();
-		const memberAmount = ResponsesCollection.find({questionIndex: index}).count();
-		if (!questionDoc || !memberAmount) {
-			return;
-		}
-		const questionItem = QuestionGroupCollection.findOne().questionList[index];
-		let inCorrectRange = 0;
-		let inWrongRange = 0;
-		ResponsesCollection.find({questionIndex: index}).forEach(function (response) {
-			if (response && typeof response.rangedInputValue !== "undefined" && response.rangedInputValue >= questionItem.rangeMin && response.rangedInputValue <= questionItem.rangeMax) {
-				inCorrectRange++;
-			} else {
-				inWrongRange++;
-			}
-		});
-		return {
-			allCorrect: {
-				absolute: inCorrectRange,
-				percent: memberAmount ? Math.floor((inCorrectRange * 100) / memberAmount) : 0
-			},
-			allWrong: {
-				absolute: inWrongRange,
-				percent: memberAmount ? Math.floor((inWrongRange * 100) / memberAmount) : 0
-			}
-		};
-	},
-	isRangedQuestion: function (index) {
-		const questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc) {
-			return;
-		}
-		return questionDoc.questionList[index].type === "RangedQuestion";
-	},
-	isFreeTextQuestion: function (index) {
-		const questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc) {
-			return;
-		}
-		return questionDoc.questionList[index].type === "FreeTextQuestion";
-	},
-	isActiveQuestion: function (index) {
-		let eventDoc = EventManagerCollection.findOne();
-		if (!eventDoc) {
-			return;
-		}
-		return !Session.get("sessionClosed") && index === eventDoc.questionIndex;
-	},
-	isRunningQuestion: ()=> {
-		return Session.get("countdownInitialized");
-	},
-	showNextQuestionButton: ()=> {
-		let eventDoc = EventManagerCollection.findOne();
-		const configDoc = SessionConfigurationCollection.findOne();
-		if (!eventDoc || !configDoc) {
-			return;
-		}
-		return configDoc.readingConfirmationEnabled !== false && eventDoc.readingConfirmationIndex <= eventDoc.questionIndex;
-	},
-	nextQuestionIndex: ()=> {
-		let eventDoc = EventManagerCollection.findOne();
-		if (!eventDoc) {
-			return;
-		}
-		return eventDoc.questionIndex + 2;
-	},
-	nextReadingConfirmationIndex: ()=> {
-		let eventDoc = EventManagerCollection.findOne();
-		if (!eventDoc) {
-			return;
-		}
-		return eventDoc.readingConfirmationIndex + 2;
-	},
-	getCSSClassForPercent: (percent)=> {
-		return hslColPerc(percent, 0, 120);
-	},
-	showGlobalLeaderboardButton: ()=> {
-		var questionDoc = QuestionGroupCollection.findOne();
-		let eventDoc = EventManagerCollection.findOne();
-		if (!questionDoc || !eventDoc) {
-			return;
-		}
-
-		return countdown === null && questionDoc.questionList.length > 1 && eventDoc.questionIndex >= questionDoc.questionList.length - 1;
-	},
-	hasCorrectAnswerOptionsOrRangedQuestion: ()=> {
-		const questionDoc = QuestionGroupCollection.findOne();
-		let hasRangedQuestion = false;
-		if (!questionDoc) {
-			return;
-		}
-		$.each(questionDoc.questionList, function (index, element) {
-			if (element.type === "RangedQuestion" || element.type === "FreeTextQuestion") {
-				hasRangedQuestion = true;
-				return false;
-			}
-		});
-		return AnswerOptionCollection.find({isCorrect: true}).count() > 0 || hasRangedQuestion;
-	},
-	hasCorrectAnswerOptions: ()=> {
-		return AnswerOptionCollection.find({isCorrect: true}).count() > 0;
-	},
-	hasRangedQuestion: ()=> {
-		const questionDoc = QuestionGroupCollection.findOne();
-		let hasRangedQuestion = false;
-		if (!questionDoc) {
-			return;
-		}
-		$.each(questionDoc.questionList, function (index, element) {
-			if (element.type === "RangedQuestion" || element.type === "FreeTextQuestion") {
-				hasRangedQuestion = true;
-				return false;
-			}
-		});
-		return hasRangedQuestion;
-	},
-	showQuestionDialog: ()=> {
-		let eventDoc = EventManagerCollection.findOne();
-		if (!eventDoc) {
-			return;
-		}
-
-		return eventDoc.questionIndex === eventDoc.readingConfirmationIndex;
-	},
-	hasNextQuestion: ()=> {
-		var questionDoc = QuestionGroupCollection.findOne();
-		let eventDoc = EventManagerCollection.findOne();
-		if (!questionDoc || !eventDoc) {
-			return;
-		}
-
-		return eventDoc.questionIndex < questionDoc.questionList.length - 1;
-	},
 	hasOnlyOneQuestion: ()=> {
-		var questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc) {
-			return;
-		}
-
-		return questionDoc.questionList.length === 1;
-	},
-	hasReadConfirmationRequested: (index)=> {
-		const eventDoc = EventManagerCollection.findOne();
-		const configDoc = SessionConfigurationCollection.findOne();
-		if (!eventDoc) {
-			return;
-		}
-		return index <= eventDoc.questionIndex || configDoc.readingConfirmationEnabled === false;
+		return Session.get("questionGroup").getQuestionList().length === 1;
 	},
 	isReadingConfirmationEnabled: ()=> {
-		const configDoc = SessionConfigurationCollection.findOne();
-		if (!configDoc) {
-			return;
-		}
-		return configDoc.readingConfirmationEnabled !== false;
+		return SessionConfigurationCollection.findOne().readingConfirmationEnabled;
 	},
 	readingConfirmationListForQuestion: (index)=> {
 		let result = [];
@@ -536,9 +378,6 @@ Template.liveResults.helpers({
 			}
 		});
 		return result;
-	},
-	isOwnNick: (nick)=> {
-		return nick === localStorage.getItem(Router.current().params.quizName + "nick");
 	},
 	showMoreButton: function (index) {
 		var result = [];
@@ -557,16 +396,9 @@ Template.liveResults.helpers({
 			}
 		});
 		return result.length - Session.get("LearnerCount");
-	},
-	getCSSClassForIsCorrect: checkIfIsCorrect,
-	hideCssIfCountdownRunning: function (index, cssClass) {
-		if (isCountdownZero(index)) {
-			return cssClass;
-		} else {
-			return "progress-default";
-		}
 	}
 });
+
 
 Template.readingConfirmedLearner.helpers({
 	isOwnNick: function (nickname) {
@@ -578,17 +410,17 @@ Template.gamificationAnimation.helpers({
 	getCurrentAnimationSrc: function () {
 		const countdownAnimationWrapper = $('#countdownAnimationWrapper');
 
-		if (!Session.get("countdownInitialized") || !countdown) {
+		if (!Session.get("countdownInitialized") || !lib.countdown) {
 			if (!countdownAnimationWrapper.is(":hidden")) {
 				countdownAnimationWrapper.fadeOut();
 			}
 			return;
 		}
 
-		const countdownValue = countdown.get();
+		const countdownValue = lib.countdown.get();
 
 		if (countdownValue <= 6) {
-			setQuestionDialog(null);
+			lib.setQuestionDialog(null);
 		}
 		countdownAnimationWrapper.show();
 		switch (countdownValue) {

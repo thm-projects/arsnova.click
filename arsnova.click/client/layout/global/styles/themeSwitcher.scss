@@ -830,11 +830,7 @@
 		.button-leader {
 			background-color: $bg-button-leader;
 			color: $fg-button-leader;
-			&:active,
-			&:focus,
-			&:hover {
-				box-shadow: 1px 1px 5px $button-shadow;
-			}
+            box-shadow: 1px 1px 5px $button-shadow;
 		}
 		.button-result {
 			background-color: $bg-button-result;

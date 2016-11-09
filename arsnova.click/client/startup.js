@@ -115,7 +115,7 @@ Meteor.startup(function () {
 							return;
 						}
 						let nickname = "";
-						if (selectedNicks) {
+						if (selectedNicks.length > 0) {
 							do {
 								nickname = selectedNicks[randomIntFromInterval(0, selectedNicks.length - 1)];
 							} while (MemberListCollection.findOne({nick: nickname}));

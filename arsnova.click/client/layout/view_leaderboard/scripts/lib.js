@@ -17,10 +17,13 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
+import {Tracker} from 'meteor/tracker';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+
+export const leaderboardTracker = new Tracker.Dependency();
 
 export function setMaxResponseButtons(value) {
 	Session.set("maxResponseButtons", value);
@@ -58,7 +61,6 @@ export function calculateButtonCount(allMembersCount) {
 	var limitModifier = viewport.outerWidth() >= 992 ? 2 : 1;
 
 	queryLimiter *= limitModifier;
-	queryLimiter -= limitModifier;
 	if (queryLimiter <= 0) {
 		queryLimiter = limitModifier;
 	}
@@ -118,7 +120,7 @@ function checkIsCorrectFreeTextQuestion(response, questionIndex) {
 	return userHasRightAnswers;
 }
 
-function isCorrectResponse(response, question, questionIndex) {
+export function isCorrectResponse(response, question, questionIndex) {
 	switch (question.type) {
 		case "SingleChoiceQuestion":
 		case "YesNoSingleChoiceQuestion":
@@ -184,21 +186,21 @@ export function getAllLeaderboardItems() {
 
 export function generateExportData() {
 	const items = Session.get("nicks");
-	let csvString = "Nickname,ResponseTime (ms),UserID,Email\n";
+	let csvString = "";
+	let hasIdentifiedUsers = false;
 	items.forEach(function (item) {
-		let responseTime = 0;
+		let responseTime = item.responseTime;
 		const responses = ResponsesCollection.find({hashtag: Router.current().params.quizName, userNick: item.nick}, {userRef: 1});
 		const user = Meteor.users.findOne({_id: responses.collection.findOne().userRef});
-		if (user) {
-			responseTime = item.responseTime;
-			if (typeof user !== "undefined") {
-				item.id      = user.profile.id;
-				item.mail    = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
-				csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
-			} else {
-				csvString += item.nick + "," + responseTime + ",,\n";
-			}
+		if (typeof user !== "undefined") {
+			hasIdentifiedUsers = true;
+			item.id      = user.profile.id;
+			item.mail    = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
+			csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
+		} else {
+			csvString += item.nick + "," + responseTime + "\n";
 		}
 	});
-	return csvString;
+	const csvHeader = hasIdentifiedUsers ? "Nickname,ResponseTime (ms),UserID,Email\n" : "Nickname,ResponseTime (ms)\n";
+	return csvHeader + csvString;
 }

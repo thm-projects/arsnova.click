@@ -1,0 +1,5 @@
+<template name="progressBarSurveyQuestion">
+    {{#each answerList displayIndex}}
+        {{> form_group name = name absolute = absolute percent = percent isCorrect = isCorrect backgroundClass = backgroundClass }}
+    {{/each}}
+</template>

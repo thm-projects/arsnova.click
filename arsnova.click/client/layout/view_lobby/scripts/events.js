@@ -60,10 +60,7 @@ Template.memberlistFooterNavButtons.events({
 	},
 	'click #startPolling': function () {
 		Session.set("sessionClosed", false);
-		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, -1);
-		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, -1);
-		Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);
-		Meteor.call('MemberListCollection.clearReadConfirmed', Router.current().params.quizName);
-		Meteor.call('EventManagerCollection.setSessionStatus', Router.current().params.quizName, 3);
+		const index = Session.get("questionGroup").getConfiguration().getReadingConfirmationEnabled() ? -1 : 0;
+		Meteor.call('EventManagerCollection.startQuiz', Router.current().params.quizName, index);
 	}
 });

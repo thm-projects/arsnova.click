@@ -21,6 +21,9 @@ import {Tracker} from 'meteor/tracker';
 import * as localData from '/lib/local_storage.js';
 import * as memberlistLib from '/client/layout/view_lobby/scripts/lib.js';
 import * as liveresultsLib from '/client/layout/view_live_results/scripts/lib.js';
+import * as votingViewLib from '/client/layout/view_voting/scripts/lib.js';
+import * as leaderboardLib from '/client/layout/view_leaderboard/scripts/lib.js';
+import * as themeLib from '/client/layout/view_theme_switcher/scripts/lib.js';
 
 export function isEditingQuestion() {
 	switch (Router.current().route.getName()) {
@@ -44,36 +47,6 @@ export function addNewQuestion() {
 		Router.go("/" + Router.current().params.quizName + "/question");
 	});
 }
-
-export const titelTracker = new Tracker.Dependency();
-export function calculateTitelHeight() {
-	var fixedTop = $(".navbar-fixed-top");
-	var container = $(".container");
-	var footerHeight = $(".fixed-bottom").outerHeight(true) + $(".footer-info-bar").outerHeight();
-	var navbarFooterHeight = $('.navbar-fixed-bottom').is(":visible") ? $(".navbar-fixed-bottom").outerHeight() : 0;
-
-	$('.titel').css('margin-top', fixedTop.outerHeight() * 1.1);
-
-	const marginTop = $('.row-padding-bottom').outerHeight(true) || fixedTop.outerHeight() * 1.1;
-	var finalHeight = $(window).height() - marginTop - navbarFooterHeight - footerHeight;
-	container.css("height", finalHeight);
-	if (!$('.row-padding-bottom').outerHeight()) {
-		container.css("margin-top", marginTop);
-	} else {
-		container.css("margin-top", 0);
-	}
-
-	titelTracker.changed();
-	return {
-		height: finalHeight,
-		marginTop: fixedTop.outerHeight()
-	};
-}
-Tracker.autorun(function () {
-	memberlistLib.memberlistTracker.depend();
-	liveresultsLib.liveResultsTracker.depend();
-	calculateTitelHeight();
-});
 
 export function calculateHeaderSize() {
 	var titel = $('.header-title').text().trim();
@@ -114,3 +87,41 @@ export function calculateHeaderSize() {
 	}
 	$(".header-title").css({"font-size": fontSize, "line-height": $('.arsnova-logo').height() + "px"});
 }
+
+export const titelTracker = new Tracker.Dependency();
+export function calculateTitelHeight() {
+	var fixedTop = $(".navbar-fixed-top");
+	var container = $(".container");
+	var footerHeight = $(".fixed-bottom").outerHeight(true) + $(".footer-info-bar").outerHeight();
+	var navbarFooterHeight = $('.navbar-fixed-bottom').is(":visible") ? $(".navbar-fixed-bottom").outerHeight() : 0;
+
+	$('.titel').css('margin-top', fixedTop.outerHeight() * 1.1);
+
+	const marginTop = $('.row-padding-bottom').outerHeight(true) || fixedTop.outerHeight() * 1.1;
+	var finalHeight = $(window).height() - marginTop - navbarFooterHeight - footerHeight;
+	container.css("height", finalHeight);
+	if (!$('.row-padding-bottom').outerHeight()) {
+		container.css("margin-top", marginTop);
+	} else {
+		container.css("margin-top", 0);
+	}
+	titelTracker.changed();
+	return {
+		height: finalHeight,
+		marginTop: fixedTop.outerHeight()
+	};
+}
+
+const headerTrackerCallback = function () {
+	memberlistLib.memberlistTracker.depend();
+	liveresultsLib.liveResultsTracker.depend();
+	votingViewLib.votingViewTracker.depend();
+	leaderboardLib.leaderboardTracker.depend();
+	themeLib.themeTracker.depend();
+	calculateHeaderSize();
+	calculateTitelHeight();
+};
+
+$(window).on('resize', headerTrackerCallback);
+
+Tracker.autorun(headerTrackerCallback);

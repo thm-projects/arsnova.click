@@ -21,4 +21,5 @@ import {Template} from 'meteor/templating';
 Template.quizSummary.onDestroyed(function () {
 	Session.set("showSelectedNicks", undefined);
 	delete Session.keys.showSelectedNicks;
+	$('#forwardButton').prop("disabled", false);
 });

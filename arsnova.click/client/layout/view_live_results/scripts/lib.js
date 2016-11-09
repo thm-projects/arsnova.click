@@ -163,7 +163,7 @@ export function countdownFinish() {
 	if (!localData.containsHashtag(Router.current().params.quizName)) {
 		return;
 	}
-	$('.navbar-fixed-bottom').show();
+	$('.navbar-footer').show();
 	if (Session.get("soundIsPlaying")) {
 		buzzsound1.stop();
 		whistleSound.play();
@@ -300,7 +300,7 @@ export function startCountdown(index) {
 				countdownFinish();
 			}
 		});
-		$('.navbar-fixed-bottom').hide();
+		$('.navbar-footer').hide();
 		Session.set("isQueringServerForTimeStamp", false);
 		Session.set("countdownInitialized", true);
 

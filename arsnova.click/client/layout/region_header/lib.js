@@ -23,6 +23,7 @@ import * as memberlistLib from '/client/layout/view_lobby/scripts/lib.js';
 import * as liveresultsLib from '/client/layout/view_live_results/scripts/lib.js';
 import * as votingViewLib from '/client/layout/view_voting/scripts/lib.js';
 import * as leaderboardLib from '/client/layout/view_leaderboard/scripts/lib.js';
+import * as themeLib from '/client/layout/view_theme_switcher/scripts/lib.js';
 
 export function isEditingQuestion() {
 	switch (Router.current().route.getName()) {
@@ -116,6 +117,7 @@ const headerTrackerCallback = function () {
 	liveresultsLib.liveResultsTracker.depend();
 	votingViewLib.votingViewTracker.depend();
 	leaderboardLib.leaderboardTracker.depend();
+	themeLib.themeTracker.depend();
 	calculateHeaderSize();
 	calculateTitelHeight();
 };

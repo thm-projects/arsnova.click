@@ -282,6 +282,18 @@ Router.route("/:quizName", {
 	}
 });
 
+Router.route('/:quizName/theme', {
+	action: function () {
+		this.render('footerNavButtons', {
+			to: 'footer.navigation',
+			data: function () {
+				return {backId: "backButton"};
+			}
+		});
+		this.render('themeSwitcher');
+	}
+});
+
 Router.route('/:quizName/showMore', {
 	action: function () {
 		this.render("titel", {

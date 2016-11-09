@@ -322,10 +322,11 @@ Template.liveResults.helpers({
 	},
 	showLeaderBoardButton: function (index) {
 		const questionDoc = QuestionGroupCollection.findOne();
+		const eventDoc = EventManagerCollection.findOne();
 		if (!questionDoc) {
 			return;
 		}
-		return !Session.get("countdownInitialized") && questionDoc.questionList[index].type !== "SurveyQuestion";
+		return !Session.get("countdownInitialized") && questionDoc.questionList[index].type !== "SurveyQuestion" && index <= eventDoc.questionIndex;
 	},
 	getNormalizedIndex: function (index) {
 		return index + 1;

@@ -20,6 +20,7 @@ import {Tracker} from 'meteor/tracker';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {createTabIndices} from '/client/startup.js';
+import * as headerLib from '/client/layout/region_header/lib.js';
 
 export const footerElemTranslation = {
 	id: "translation",
@@ -272,6 +273,7 @@ export function removeFooterElements() {
 
 const footerTrackerCallback = function () {
 	footerTracker.depend();
+	headerLib.titelTracker.depend();
 	if ($(window).height() > 400) {
 		generateFooterElements();
 		updateStatefulFooterElements();

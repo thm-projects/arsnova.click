@@ -17,10 +17,13 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
+import {Tracker} from 'meteor/tracker';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+
+export const liveResultsTracker = new Tracker.Dependency();
 
 export function setMaxResponseButtons(value) {
 	Session.set("maxResponseButtons", value);

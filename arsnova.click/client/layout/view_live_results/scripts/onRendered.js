@@ -29,17 +29,18 @@ import * as lib from './lib.js';
 
 Template.liveResults.onRendered(()=> {
 	const eventDoc = EventManagerCollection.findOne();
-	const sessionConfig = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+	const hashtag = Router.current().params.quizName;
+	const sessionConfig = SessionConfigurationCollection.findOne({hashtag: hashtag});
 	const isOwner = localData.containsHashtag(Router.current().params.quizName);
 	const questionCount = QuestionGroupCollection.findOne().questionList.length;
 
 	if (eventDoc.questionIndex < questionCount) {
-		if (sessionConfig.readingConfirmationEnabled) {
+		if (sessionConfig.readingConfirmationEnabled && eventDoc.readingConfirmationIndex === 0) {
 			if (isOwner) {
-				Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, 0);
+				Meteor.call("EventManagerCollection.showReadConfirmedForIndex", hashtag, 0);
 			}
 		} else {
-			let allMemberResponses = ResponsesCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).fetch();
+			let allMemberResponses = ResponsesCollection.find({questionIndex: eventDoc.questionIndex}).fetch();
 			let memberWithGivenResponsesAmount = _.uniq(allMemberResponses, false, function (user) {
 				return user.userNick;
 			}).length;

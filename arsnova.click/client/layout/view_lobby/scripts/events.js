@@ -60,6 +60,7 @@ Template.memberlistFooterNavButtons.events({
 	},
 	'click #startPolling': function () {
 		Session.set("sessionClosed", false);
-		Meteor.call('EventManagerCollection.startQuiz', Router.current().params.quizName);
+		const index = Session.get("questionGroup").getConfiguration().getReadingConfirmationEnabled() ? -1 : 0;
+		Meteor.call('EventManagerCollection.startQuiz', Router.current().params.quizName, index);
 	}
 });

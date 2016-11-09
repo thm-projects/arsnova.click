@@ -108,7 +108,7 @@ Template.liveResultsFooterNavButtons.events({
 		if (!questionDoc) {
 			return;
 		}
-		const questionIndex = EventManagerCollection.findOne().questionIndex;
+		const questionIndex = EventManagerCollection.findOne().questionIndex + 1;
 		Meteor.call('Question.startTimer', {
 			hashtag: Router.current().params.quizName,
 			questionIndex: questionIndex

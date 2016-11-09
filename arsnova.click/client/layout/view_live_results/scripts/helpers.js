@@ -73,7 +73,7 @@ Template.liveResultsFooterNavButtons.helpers({
 		if (!eventDoc || !configDoc) {
 			return;
 		}
-		return configDoc.readingConfirmationEnabled !== false && eventDoc.readingConfirmationIndex < eventDoc.questionIndex;
+		return configDoc.readingConfirmationEnabled !== false && eventDoc.readingConfirmationIndex <= eventDoc.questionIndex;
 	},
 	allQuestionCount: function () {
 		var doc = QuestionGroupCollection.findOne();
@@ -99,7 +99,7 @@ Template.liveResultsFooterNavButtons.helpers({
 		if (!eventDoc) {
 			return;
 		}
-		return eventDoc.questionIndex + 1;
+		return eventDoc.questionIndex + 2;
 	}
 });
 

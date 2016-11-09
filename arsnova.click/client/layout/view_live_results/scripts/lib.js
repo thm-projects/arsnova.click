@@ -35,7 +35,6 @@ import * as headerLib from "/client/layout/region_header/lib.js";
 export let countdown = null;
 export let routeToLeaderboardTimer = null;
 export let questionDialog = null;
-let questionIndex = -1;
 
 export const liveResultsTracker = new Tracker.Dependency();
 
@@ -163,7 +162,7 @@ export function countdownFinish() {
 	if (!localData.containsHashtag(Router.current().params.quizName)) {
 		return;
 	}
-	Meteor.call("EventManagerCollection.setQuestionIndex", questionIndex + 1);
+	const questionIndex = EventManagerCollection.findOne().questionIndex;
 	$('.navbar-footer').show();
 	if (Session.get("soundIsPlaying")) {
 		buzzsound1.stop();

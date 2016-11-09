@@ -21,7 +21,7 @@ import {EventManagerCollection, sessionStatusSchema, readingConfirmationIndexSch
 import {hashtagSchema} from '/lib/hashtags/collection.js';
 
 Meteor.methods({
-	'EventManagerCollection.startQuiz': (hashtag)=> {
+	'EventManagerCollection.startQuiz': (hashtag, index)=> {
 		new SimpleSchema({
 			hashtag: hashtagSchema
 		}).validate({hashtag});
@@ -34,14 +34,15 @@ Meteor.methods({
 		EventManagerCollection.update(query, {
 			$set: {
 				sessionStatus: 3,
-				questionIndex: 0
+				questionIndex: index,
+				readingConfirmationIndex: 0
 			},
 			$push: {
 				eventStack: {
 					key: "EventManagerCollection.startQuiz",
 					value: {
 						sessionStatus: 3,
-						questionIndex: 0,
+						questionIndex: index,
 						readingConfirmationIndex: 0
 					}
 				}
@@ -68,6 +69,24 @@ Meteor.methods({
 			}
 		});
 	},
+	'EventManagerCollection.setQuestionIndex': (hashtag, questionIndex)=> {
+		new SimpleSchema({
+			hashtag: hashtagSchema,
+			questionIndex: questionIndexSchema
+		}).validate({hashtag, questionIndex});
+
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$set: {
+				questionIndex: questionIndex
+			},
+			$push: {
+				eventStack: {
+					key: "EventManagerCollection.setQuestionIndex",
+					value: {questionIndex: questionIndex}
+				}
+			}
+		});
+	},
 	'EventManagerCollection.showReadConfirmedForIndex': (hashtag, readingConfirmationIndex)=> {
 		new SimpleSchema({
 			hashtag: hashtagSchema,
@@ -75,7 +94,9 @@ Meteor.methods({
 		}).validate({hashtag, readingConfirmationIndex});
 
 		EventManagerCollection.update({hashtag: hashtag}, {
-			$set: {readingConfirmationIndex: readingConfirmationIndex},
+			$set: {
+				readingConfirmationIndex: readingConfirmationIndex
+			},
 			$push: {
 				eventStack: {
 					key: "EventManagerCollection.showReadConfirmedForIndex",
@@ -140,8 +161,8 @@ Meteor.methods({
 						key: "EventManagerCollection.reset",
 						value: {
 							sessionStatus: 1,
-							readingConfirmationIndex: -1,
-							questionIndex: -1
+							readingConfirmationIndex: 0,
+							questionIndex: 0
 						}
 					}
 				]
@@ -158,7 +179,7 @@ Meteor.methods({
 			hashtag: hashtag,
 			sessionStatus: 1,
 			lastConnection: 0,
-			readingConfirmationIndex: -1,
+			readingConfirmationIndex: 0,
 			questionIndex: 0,
 			eventStack: [
 				{

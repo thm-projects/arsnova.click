@@ -49,10 +49,9 @@ Template.memberlist.onRendered(function () {
 			footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		}
 		footerElements.addFooterElement(footerElements.footerElemTheme);
-	} else {
-		footerElements.footerTracker.changed();
-		memberlistTracker.changed();
 	}
+	footerElements.footerTracker.changed();
+	memberlistTracker.changed();
 
 	$('.navbar-footer-placeholder').hide();
 	$('.navbar-footer').show();

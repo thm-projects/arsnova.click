@@ -235,3 +235,11 @@ export function setSlider(index) {
 	const questionItem = Session.get("questionGroup");
 	$("#slider").val((questionItem.getQuestionList()[index].getTimer()));
 }
+
+export function styleFreetextAnswerOptionValidation(isValid) {
+	if (isValid) {
+		$('#answerTextArea').removeClass("invalidQuestion");
+	} else {
+		$('#answerTextArea').addClass("invalidQuestion");
+	}
+}

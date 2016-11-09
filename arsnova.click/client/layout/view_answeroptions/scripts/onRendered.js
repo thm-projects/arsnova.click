@@ -63,4 +63,7 @@ Template.rangedAnswerOptionTemplate.onRendered(function () {
 
 Template.freeTextAnswerOptionTemplate.onRendered(function () {
 	lib.formatFreeTextSettingsButtons();
+	
+	const questionItem = Session.get("questionGroup");
+	lib.styleFreetextAnswerOptionValidation(questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].isValid());
 });

@@ -52,4 +52,7 @@
 	border-radius: $corner-radius;
 	width: 100%;
   }
+	.invalidQuestion {
+		border: 2px solid red;
+	}
 }

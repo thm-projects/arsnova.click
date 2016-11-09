@@ -206,7 +206,7 @@ export class AbstractQuestion {
 			}
 		});
 		const questionTextWithoutMarkdownChars = this.getQuestionTextWithoutMarkdownChars();
-		
+
 		// hard coded checkup values are ugly, but the schema import seems to be messed up here...
 		return answerOptionListValid && questionTextWithoutMarkdownChars[0] > 4 && questionTextWithoutMarkdownChars[0] < 50001 && this.getTimer() > 9 && this.getTimer() < 301;
 	}

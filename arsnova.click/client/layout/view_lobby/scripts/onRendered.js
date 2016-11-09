@@ -29,8 +29,13 @@ Template.memberlist.onRendered(function () {
 	Session.set("allMembersCount", MemberListCollection.find().count());
 	this.autorun(function () {
 		titelTracker.depend();
+		footerElements.footerTracker.changed();
+		memberlistTracker.changed();
 		calculateButtonCount(Session.get("allMembersCount"));
 	}.bind(this));
+	footerElements.footerTracker.changed();
+	memberlistTracker.changed();
+	calculateButtonCount(Session.get("allMembersCount"));
 
 	footerElements.removeFooterElements();
 	if (localData.containsHashtag(Router.current().params.quizName)) {
@@ -50,8 +55,6 @@ Template.memberlist.onRendered(function () {
 		}
 		footerElements.addFooterElement(footerElements.footerElemTheme);
 	}
-	footerElements.footerTracker.changed();
-	memberlistTracker.changed();
 
 	$('.navbar-footer-placeholder').hide();
 	$('.navbar-footer').show();

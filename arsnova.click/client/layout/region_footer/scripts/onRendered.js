@@ -62,6 +62,9 @@ Template.showMore.onRendered(function () {
 			}
 		}
 	});
+	footerElements.footerTracker.changed();
+	headerLib.calculateHeaderSize();
+	headerLib.calculateTitelHeight();
 });
 
 Template.contactHeaderBar.onRendered(function () {

@@ -323,7 +323,7 @@ Template.liveResults.helpers({
 		return Session.get("questionGroup").getQuestionList().length === 1;
 	},
 	isReadingConfirmationEnabled: ()=> {
-		return Session.get("questionGroup").getConfiguration().getReadingConfirmationEnabled();
+		return SessionConfigurationCollection.findOne().readingConfirmationEnabled;
 	},
 	readingConfirmationListForQuestion: (index)=> {
 		let result = [];

@@ -45,7 +45,7 @@ Template.liveResults.onRendered(()=> {
 				return user.userNick;
 			}).length;
 			let memberAmount = MemberListCollection.find().fetch().length;
-			if (memberWithGivenResponsesAmount !== memberAmount) {
+			if (memberWithGivenResponsesAmount < memberAmount) {
 				lib.startCountdown(eventDoc.questionIndex);
 			}
 		}

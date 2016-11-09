@@ -108,8 +108,7 @@ const hiddenFooterElements = {
 	linkable: []
 };
 
-const footerFontSizeTracker = new Tracker.Dependency();
-const footerElementsTracker = new Tracker.Dependency();
+export const footerTracker = new Tracker.Dependency();
 
 export function addFooterElement(footerElement, priority = 100) {
 	let hasItem = false;
@@ -123,6 +122,7 @@ export function addFooterElement(footerElement, priority = 100) {
 		footerElements.splice(priority, 0, footerElement);
 	}
 	$('#' + footerElement.id).removeClass("error").removeClass("success");
+	//footerTracker.changed();
 }
 
 export function getCurrentFooterElements() {
@@ -150,9 +150,7 @@ export function getFooterElementById(id) {
 	}
 }
 
-Tracker.autorun(function () {
-	footerFontSizeTracker.depend();
-	footerElementsTracker.depend();
+function updateStatefulFooterElements() {
 	const allElements = $.merge([], footerElements);
 	$.merge(allElements, hiddenFooterElements.selectable);
 	$.each(allElements, function (index, item) {
@@ -191,7 +189,7 @@ Tracker.autorun(function () {
 		$('#' + item.id).find(".footerElemText").text(TAPi18n.__(item.textName));
 		createTabIndices();
 	});
-});
+}
 
 export function calculateFooterFontSize() {
 	let iconSize = "2rem", textSize = "1.5rem";
@@ -201,16 +199,11 @@ export function calculateFooterFontSize() {
 	navbarFooter.css({"fontSize": iconSize});
 	fixedBottom.css("bottom", navbarFooter.height());
 	fixedBottom.show();
-	footerFontSizeTracker.changed();
 	return {
 		icon: iconSize,
 		text: textSize
 	};
 }
-Tracker.autorun(function () {
-	footerElementsTracker.depend();
-	calculateFooterFontSize();
-});
 
 export function generateFooterElements() {
 	$.merge(footerElements, hiddenFooterElements.selectable);
@@ -236,12 +229,8 @@ export function generateFooterElements() {
 	}
 	Session.set("footerElements", footerElements);
 	Session.set("hiddenFooterElements", hiddenFooterElements);
-	footerElementsTracker.changed();
 	return footerElements;
 }
-Tracker.autorun(function () {
-	generateFooterElements();
-});
 
 export function removeFooterElement(footerElement) {
 	let hasFoundItem = false;
@@ -271,6 +260,7 @@ export function removeFooterElement(footerElement) {
 			return false;
 		}
 	});
+	footerTracker.changed();
 }
 
 export function removeFooterElements() {
@@ -279,13 +269,18 @@ export function removeFooterElements() {
 	hiddenFooterElements.linkable.splice(0, hiddenFooterElements.linkable.length);
 	Session.set("footerElements", footerElements);
 	Session.set("hiddenFooterElements", hiddenFooterElements);
+	footerTracker.changed();
 }
 
-export function calculateFooter() {
-	$(window).on("resize", function () {
-		if ($(window).height() > 400) {
-			Meteor.defer(generateFooterElements);
-		}
-	});
-	Meteor.defer(generateFooterElements);
-}
+const footerTrackerCallback = function () {
+	footerTracker.depend();
+	if ($(window).height() > 400) {
+		generateFooterElements();
+		updateStatefulFooterElements();
+		calculateFooterFontSize();
+	}
+};
+
+$(window).on('resize', footerTrackerCallback);
+
+Tracker.autorun(footerTrackerCallback);

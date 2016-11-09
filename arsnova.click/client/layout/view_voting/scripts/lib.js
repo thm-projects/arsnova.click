@@ -17,12 +17,15 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
+import {Tracker} from 'meteor/tracker';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 
 export let countdown = null;
 export let currentButton = 0;
 export let countdownRunning = false;
+
+export const votingViewTracker = new Tracker.Dependency();
 
 export function deleteCountdown() {
 	if (countdown) {

@@ -24,9 +24,6 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.nicknameCategories.onRendered(function () {
-	calculateHeaderSize();
-	$(window).resize(calculateHeaderSize);
-
 	$(document.getElementById('nickCategory_' + Session.get("selectedCategory"))).addClass("selectedCategory");
 
 	lib.formatBootstrapSwitch();
@@ -38,5 +35,4 @@ Template.nicknameCategories.onRendered(function () {
 
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.calculateFooter();
 });

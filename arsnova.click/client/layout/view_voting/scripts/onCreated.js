@@ -28,6 +28,7 @@ Template.votingview.onCreated(function () {
 	Session.set("questionGroup",new DefaultQuestionGroup(QuestionGroupCollection.findOne()));
 	Session.set("hasSendResponse", false);
 	Session.set("hasToggledResponse", false);
+	Session.set("countdownInitialized", false);
 	Session.set("questionSC", Session.get("questionGroup").getQuestionList()[questionIndex].typeName() === "SingleChoiceQuestion");
 	startCountdown(questionIndex);
 	var answerOptionCount = Session.get("questionGroup").getQuestionList()[questionIndex].getAnswerOptionList().length;

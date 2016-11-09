@@ -130,10 +130,6 @@ Template.hashtagManagement.onRendered(function () {
 	if (navigator.userAgent.match(/iPad/i) == null) {
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
 	}
-	footerElements.calculateFooter();
-
-	calculateHeaderSize();
-	$(window).resize(calculateHeaderSize);
 
 	$('.js-export').tooltip();
 	$('.js-delete').tooltip();

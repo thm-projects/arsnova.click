@@ -34,14 +34,10 @@ Template.nickViewWrapper.helpers({
 	},
 	getRequiredFooterButtons: function () {
 		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-		if (!configDoc) {
-			return null;
+		if (configDoc.nicks.selectedValues.length !== 0) {
+			return "nickLimitedFooter";
 		}
-		if (configDoc.nicks.selectedValues.length === 0) {
-			return Template.nickStandardFooter;
-		} else {
-			return Template.nickLimitedFooter;
-		}
+		return "nickStandardFooter";
 	}
 });
 

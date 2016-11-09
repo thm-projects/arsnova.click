@@ -19,20 +19,15 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {calculateHeaderSize, titelTracker} from '/client/layout/region_header/lib.js';
+import {titelTracker} from '/client/layout/region_header/lib.js';
 import {setLobbySound} from '/client/plugins/sound/scripts/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
+import * as headerLib from "/client/layout/region_header/lib.js";
 import {calculateButtonCount} from './lib.js';
 
 Template.memberlist.onRendered(function () {
 	Session.set("learnerCountOverride", false);
 	Session.set("allMembersCount", MemberListCollection.find().count());
-	if (localData.containsHashtag(Router.current().params.quizName)) {
-		Session.set("lobbySoundIsPlaying", "LobbySong1");
-		setLobbySound("LobbySong1", Router.current().url.indexOf("localhost") === -1);
-	}
-	calculateHeaderSize();
-	$(window).resize(calculateHeaderSize);
 	this.autorun(function () {
 		titelTracker.depend();
 		calculateButtonCount(Session.get("allMembersCount"));
@@ -40,6 +35,9 @@ Template.memberlist.onRendered(function () {
 
 	footerElements.removeFooterElements();
 	if (localData.containsHashtag(Router.current().params.quizName)) {
+		Session.set("lobbySoundIsPlaying", "LobbySong1");
+		setLobbySound("LobbySong1", Router.current().url.indexOf("localhost") === -1);
+
 		footerElements.addFooterElement((footerElements.footerElemEditQuiz));
 		footerElements.addFooterElement(footerElements.footerElemHome);
 		if ($(window).outerWidth() >= 1024) {
@@ -52,8 +50,10 @@ Template.memberlist.onRendered(function () {
 			footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		}
 		footerElements.addFooterElement(footerElements.footerElemTheme);
+	} else {
+		footerElements.footerTracker.changed();
+		headerLib.calculateTitelHeight();
 	}
-	footerElements.calculateFooter();
 
 	$('.navbar-footer-placeholder').hide();
 	$('.navbar-footer').show();
@@ -68,8 +68,4 @@ Template.memberlist.onRendered(function () {
 			$('.qr-code-container').hide();
 		}
 	});
-});
-
-Template.learner.onRendered(function () {
-	//calculateButtonCount(MemberListCollection.find().count());
 });

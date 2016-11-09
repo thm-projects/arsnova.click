@@ -24,10 +24,7 @@ Template.quizSummary.onRendered(function () {
 	if (!Session.get("questionGroup").isValid()) {
 		$('#forwardButton').attr("disabled", "disabled");
 	}
-	calculateHeaderSize();
-	$(window).resize(calculateHeaderSize);
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	footerElements.addFooterElement(footerElements.footerElemNicknames);
-	footerElements.calculateFooter();
 });

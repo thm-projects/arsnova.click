@@ -24,9 +24,6 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.createQuestionView.onRendered(function () {
-	calculateHeaderSize();
-	$(window).resize(calculateHeaderSize);
-
 	let index;
 	lib.subscriptionHandler = Tracker.autorun(()=> {
 		if (!EventManagerCollection.findOne()) {
@@ -54,5 +51,4 @@ Template.createQuestionView.onRendered(function () {
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	footerElements.addFooterElement(footerElements.footerElemNicknames);
-	footerElements.calculateFooter();
 });

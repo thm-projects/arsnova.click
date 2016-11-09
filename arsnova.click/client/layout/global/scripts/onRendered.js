@@ -52,8 +52,6 @@ Template.home.onRendered(function () {
 	} else {
 		footerElements.addFooterElement(footerElements.footerElemImport);
 	}
-
-	footerElements.calculateFooter();
 });
 
 Template.layout.onRendered(function () {

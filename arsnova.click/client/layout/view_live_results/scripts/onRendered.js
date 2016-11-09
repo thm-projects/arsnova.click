@@ -22,6 +22,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as localData from '/lib/local_storage.js';
+import * as headerLib from "/client/layout/region_header/lib.js";
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
@@ -50,11 +51,7 @@ Template.liveResults.onRendered(()=> {
 		if (navigator.userAgent.match(/iPad/i) == null) {
 			footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		}
-		footerElements.calculateFooter();
 	}
-});
-
-Template.readingConfirmedLearner.onRendered(function () {
 });
 
 Template.liveResultsTitle.onRendered(function () {

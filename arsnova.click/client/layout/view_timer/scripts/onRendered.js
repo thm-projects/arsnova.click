@@ -23,8 +23,6 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.createTimerView.onRendered(function () {
-	calculateHeaderSize();
-	$(window).resize(calculateHeaderSize);
 	let index = EventManagerCollection.findOne().questionIndex;
 	lib.createSlider(index);
 	lib.setSlider(index);
@@ -43,5 +41,4 @@ Template.createTimerView.onRendered(function () {
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	footerElements.addFooterElement(footerElements.footerElemNicknames);
-	footerElements.calculateFooter();
 });

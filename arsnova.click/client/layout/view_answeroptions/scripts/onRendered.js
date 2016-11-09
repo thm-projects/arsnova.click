@@ -23,9 +23,6 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.createAnswerOptions.onRendered(function () {
-	calculateHeaderSize();
-	$(window).resize(calculateHeaderSize);
-
 	var body = $('body');
 	body.on('click', '.questionIcon:not(.active)', function () {
 		Router.go("/" + Router.current().params.quizName + "/question");
@@ -34,12 +31,6 @@ Template.createAnswerOptions.onRendered(function () {
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	footerElements.addFooterElement(footerElements.footerElemNicknames);
-	footerElements.calculateFooter();
-
-	$(window).resize(function () {
-		setTimeout(lib.calculateXsViewport, 5);
-	});
-	setTimeout(lib.calculateXsViewport, 25);
 });
 
 Template.defaultAnswerOptionTemplate.onRendered(function () {

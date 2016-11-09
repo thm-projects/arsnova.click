@@ -23,6 +23,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {ResponsesCollection} from '/lib/responses/collection.js';
 import {RangedQuestion} from "/lib/questions/question_ranged.js";
 import {FreeTextQuestion} from "/lib/questions/question_freetext.js";
 import * as localData from '/lib/local_storage.js';
@@ -179,7 +180,6 @@ export function countdownFinish() {
 	} else {
 		footerElements.addFooterElement(footerElements.footerElemReadingConfirmation, 2);
 	}
-	footerElements.calculateFooter();
 }
 
 /**
@@ -267,7 +267,12 @@ export function startDebugVoting() {
 }
 
 export function startCountdown(index) {
-	if (Session.get("countdownInitialized") || Session.get("sessionClosed")) {
+	let allMemberResponses = ResponsesCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).fetch();
+	let memberWithGivenResponsesAmount = _.uniq(allMemberResponses, false, function (user) {
+		return user.userNick;
+	}).length;
+	let memberAmount = MemberListCollection.find().fetch().length;
+	if (Session.get("countdownInitialized") || Session.get("sessionClosed") || memberWithGivenResponsesAmount === memberAmount) {
 		Session.set("isQueringServerForTimeStamp", false);
 		return;
 	}

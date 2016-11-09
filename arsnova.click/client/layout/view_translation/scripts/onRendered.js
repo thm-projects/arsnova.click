@@ -28,7 +28,4 @@ Template.translate.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
 	}
 	footerElements.addFooterElement(footerElements.footerElemHashtagManagement);
-	footerElements.calculateFooter();
-	calculateHeaderSize();
-	$(window).resize(calculateHeaderSize);
 });

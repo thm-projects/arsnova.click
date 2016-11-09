@@ -81,9 +81,7 @@ Template.liveResultsFooterNavButtons.events({
 		event.stopPropagation();
 		const returnToLobby = function () {
 			$('.sound-button').show();
-			console.log(EventManagerCollection.findOne());
 			Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2, function () {
-				console.log(EventManagerCollection.findOne());
 				Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);
 				Meteor.call("MemberListCollection.clearReadConfirmed", Router.current().params.quizName);
 			});
@@ -110,9 +108,10 @@ Template.liveResultsFooterNavButtons.events({
 		if (!questionDoc) {
 			return;
 		}
+		const questionIndex = EventManagerCollection.findOne().questionIndex + 1;
 		Meteor.call('Question.startTimer', {
 			hashtag: Router.current().params.quizName,
-			questionIndex: EventManagerCollection.findOne().questionIndex + 1
+			questionIndex: questionIndex
 		}, (err) => {
 			if (err) {
 				new ErrorSplashscreen({
@@ -123,7 +122,7 @@ Template.liveResultsFooterNavButtons.events({
 				return;
 			}
 			Session.set("sessionClosed", false);
-			startCountdown(EventManagerCollection.findOne().questionIndex + 1);
+			startCountdown(questionIndex);
 		});
 	},
 	'click #goGlobalRanking': (event)=> {

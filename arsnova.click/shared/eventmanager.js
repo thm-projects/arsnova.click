@@ -41,7 +41,8 @@ Meteor.methods({
 					key: "EventManagerCollection.startQuiz",
 					value: {
 						sessionStatus: 3,
-						questionIndex: 0
+						questionIndex: 0,
+						readingConfirmationIndex: 0
 					}
 				}
 			}

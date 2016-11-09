@@ -48,7 +48,7 @@ function addMemberlistChangeEvents() {
 	], function (key, value) {
 		if (!isNaN(value.sessionStatus)) {
 			if (value.sessionStatus === 3) {
-				if (localData.containsHashtag(Router.current().params.quizName)) {
+				if (localData.containsHashtag(Router.current().params.quizName) || SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled) {
 					Router.go("/" + Router.current().params.quizName + "/results");
 				} else {
 					Router.go("/" + Router.current().params.quizName + "/onpolling");
@@ -141,7 +141,7 @@ function addLiveresultsChangeEvents() {
 		"EventManagerCollection.showReadConfirmedForIndex"
 	], function (key, value) {
 		if (!isNaN(value.readingConfirmationIndex) &&
-			value.readingConfirmationIndex > 0 &&
+			value.readingConfirmationIndex > -1 &&
 			SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled !== false) {
 			showReadingConfirmationSplashscreen(value.readingConfirmationIndex);
 		}

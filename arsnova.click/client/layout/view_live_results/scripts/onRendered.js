@@ -34,18 +34,19 @@ Template.liveResults.onRendered(()=> {
 	const questionCount = QuestionGroupCollection.findOne().questionList.length;
 
 	if (eventDoc.questionIndex < questionCount) {
-		if (isOwner) {
-			if (sessionConfig.readingConfirmationEnabled) {
+		if (sessionConfig.readingConfirmationEnabled) {
+			if (isOwner) {
 				Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, 0);
 			}
-		}
-		let allMemberResponses = ResponsesCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).fetch();
-		let memberWithGivenResponsesAmount = _.uniq(allMemberResponses, false, function (user) {
-			return user.userNick;
-		}).length;
-		let memberAmount = MemberListCollection.find().fetch().length;
-		if (memberWithGivenResponsesAmount !== memberAmount) {
-			lib.startCountdown(eventDoc.questionIndex);
+		} else {
+			let allMemberResponses = ResponsesCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).fetch();
+			let memberWithGivenResponsesAmount = _.uniq(allMemberResponses, false, function (user) {
+				return user.userNick;
+			}).length;
+			let memberAmount = MemberListCollection.find().fetch().length;
+			if (memberWithGivenResponsesAmount !== memberAmount) {
+				lib.startCountdown(eventDoc.questionIndex);
+			}
 		}
 	}
 

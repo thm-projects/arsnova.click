@@ -22,8 +22,5 @@ Template.createQuestionView.onDestroyed(function () {
 	var body = $('body');
 	body.off('click', '.questionIcon:not(.active)');
 	body.off('click', '.removeQuestion');
-	if (lib.subscriptionHandler) {
-		lib.subscriptionHandler.stop();
-	}
 	delete sessionStorage.overrideValidQuestionRedirect;
 });

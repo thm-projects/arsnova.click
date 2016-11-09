@@ -18,7 +18,7 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
+import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
@@ -41,4 +41,6 @@ Template.createTimerView.onRendered(function () {
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	footerElements.addFooterElement(footerElements.footerElemNicknames);
+	headerLib.calculateHeaderSize();
+	headerLib.calculateTitelHeight();
 });

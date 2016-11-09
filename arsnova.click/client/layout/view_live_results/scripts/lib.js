@@ -23,7 +23,6 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {ResponsesCollection} from '/lib/responses/collection.js';
 import {RangedQuestion} from "/lib/questions/question_ranged.js";
 import {FreeTextQuestion} from "/lib/questions/question_freetext.js";
 import * as localData from '/lib/local_storage.js';
@@ -31,6 +30,7 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {buzzsound1, whistleSound, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
+import * as headerLib from "/client/layout/region_header/lib.js";
 
 export let countdown = null;
 export let routeToLeaderboardTimer = null;
@@ -169,6 +169,7 @@ export function countdownFinish() {
 		whistleSound.play();
 		Session.set("soundIsPlaying", false);
 	}
+	headerLib.calculateTitelHeight();
 	if (questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
 		Session.set("sessionClosed", true);
 		if (localData.containsHashtag(Router.current().params.quizName) && AnswerOptionCollection.find({isCorrect: true}).count() > 0) {
@@ -267,12 +268,7 @@ export function startDebugVoting() {
 }
 
 export function startCountdown(index) {
-	let allMemberResponses = ResponsesCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).fetch();
-	let memberWithGivenResponsesAmount = _.uniq(allMemberResponses, false, function (user) {
-		return user.userNick;
-	}).length;
-	let memberAmount = MemberListCollection.find().fetch().length;
-	if (Session.get("countdownInitialized") || Session.get("sessionClosed") || memberWithGivenResponsesAmount === memberAmount) {
+	if (Session.get("countdownInitialized") || Session.get("sessionClosed")) {
 		Session.set("isQueringServerForTimeStamp", false);
 		return;
 	}

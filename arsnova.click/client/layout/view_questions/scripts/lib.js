@@ -82,8 +82,6 @@ function questionTextLengthWithoutMarkdownSyntax(questionText, trimWhiteSpaces =
 	return questionTextLength;
 }
 
-export var subscriptionHandler = null;
-
 export function addQuestion(index) {
 	const questionText = $('#questionText').val() || "";
 	const questionType = $('#chooseQuestionType').find('option:selected').attr("id");

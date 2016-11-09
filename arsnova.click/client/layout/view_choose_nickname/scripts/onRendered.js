@@ -17,8 +17,8 @@
 
 import {Template} from 'meteor/templating';
 import {MemberListCollection} from '/lib/member_list/collection.js';
-import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
+import * as headerLib from "/client/layout/region_header/lib.js";
 
 Template.nick.onRendered(function () {
 	if ($(window).width() >= 992) {
@@ -37,12 +37,14 @@ Template.nickStandardFooter.onRendered(function () {
 
 	footerElements.removeFooterElements();
 	footerElements.footerTracker.changed();
+	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
 });
 
 Template.nickLimited.onRendered(function () {
 	footerElements.removeFooterElements();
 	footerElements.footerTracker.changed();
+	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
 });
 

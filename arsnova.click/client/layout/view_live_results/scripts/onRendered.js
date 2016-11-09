@@ -21,6 +21,8 @@ import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
+import {ResponsesCollection} from '/lib/responses/collection.js';
 import * as localData from '/lib/local_storage.js';
 import * as headerLib from "/client/layout/region_header/lib.js";
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
@@ -38,7 +40,14 @@ Template.liveResults.onRendered(()=> {
 				Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, 0);
 			}
 		}
-		lib.startCountdown(eventDoc.questionIndex);
+		let allMemberResponses = ResponsesCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).fetch();
+		let memberWithGivenResponsesAmount = _.uniq(allMemberResponses, false, function (user) {
+			return user.userNick;
+		}).length;
+		let memberAmount = MemberListCollection.find().fetch().length;
+		if (memberWithGivenResponsesAmount !== memberAmount) {
+			lib.startCountdown(eventDoc.questionIndex);
+		}
 	}
 
 	footerElements.removeFooterElements();
@@ -52,16 +61,19 @@ Template.liveResults.onRendered(()=> {
 			footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		}
 	}
+	lib.liveResultsTracker.changed();
 });
 
 Template.liveResultsTitle.onRendered(function () {
-	let countdownActive = Session.get("countdownInitialized");
+	let init = Session.get("countdownInitialized");
 	this.autorun(function () {
-		const tmpCountdownActive = Session.get("countdownInitialized");
-		if (countdownActive !== tmpCountdownActive) {
-			countdownActive = tmpCountdownActive;
+		const tmpInit = Session.get("countdownInitialized");
+		if (init !== tmpInit) {
 			lib.liveResultsTracker.changed();
+			footerElements.footerTracker.changed();
+			init = tmpInit;
 		}
 	}.bind(this));
 	lib.liveResultsTracker.changed();
+	footerElements.footerTracker.changed();
 });

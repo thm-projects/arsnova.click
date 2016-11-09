@@ -81,9 +81,12 @@ Template.liveResultsFooterNavButtons.events({
 		event.stopPropagation();
 		const returnToLobby = function () {
 			$('.sound-button').show();
-			Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
-			Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);
-			Meteor.call("MemberListCollection.clearReadConfirmed", Router.current().params.quizName);
+			console.log(EventManagerCollection.findOne());
+			Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2, function () {
+				console.log(EventManagerCollection.findOne());
+				Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);
+				Meteor.call("MemberListCollection.clearReadConfirmed", Router.current().params.quizName);
+			});
 		};
 		if (ResponsesCollection.findOne()) {
 			new Splashscreen({

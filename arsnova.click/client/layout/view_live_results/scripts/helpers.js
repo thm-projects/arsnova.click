@@ -26,7 +26,7 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
 import * as leaderboardLib from '/client/layout/view_leaderboard/scripts/lib.js';
-import {countdown, getPercentRead, getCurrentRead, getProgressbarCSSClass, checkIfIsCorrect, isCountdownZero, setQuestionDialog} from './lib.js';
+import * as lib from './lib.js';
 
 Template.liveResultsFooterNavButtons.helpers({
 	isOwner: function () {
@@ -42,7 +42,7 @@ Template.liveResultsFooterNavButtons.helpers({
 			return;
 		}
 
-		return countdown === null && questionDoc.questionList.length > 1 && eventDoc.questionIndex >= questionDoc.questionList.length - 1;
+		return lib.countdown === null && questionDoc.questionList.length > 1 && eventDoc.questionIndex >= questionDoc.questionList.length - 1;
 	},
 	hasCorrectAnswerOptionsOrRangedQuestion: ()=> {
 		const questionDoc = QuestionGroupCollection.findOne();
@@ -124,7 +124,7 @@ Template.liveResultsTitle.helpers({
 	},
 	getCountdown: function () {
 		if (Session.get("countdownInitialized")) {
-			var roundedCountdown = Math.round(countdown.get());
+			var roundedCountdown = Math.round(lib.countdown.get());
 			return roundedCountdown < 0 ? 0 : roundedCountdown;
 		}
 		return 0;
@@ -162,7 +162,7 @@ Template.progressBarSingleChoiceQuestion.helpers({
 				percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
 				isCorrect: correctAnswerOptions ? value.isCorrect : -1,
 				questionIndex: index,
-				backgroundClass: getProgressbarCSSClass(index, checkIfIsCorrect(correctAnswerOptions ? value.isCorrect : -1))
+				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(correctAnswerOptions ? value.isCorrect : -1))
 			});
 		});
 		return result;
@@ -187,12 +187,12 @@ Template.progressBarMultipleChoiceQuestion.helpers({
 			allCorrect: {
 				absolute: allCorrect,
 				percent: memberAmount ? Math.floor((allCorrect * 100) / memberAmount) : 0,
-				backgroundClass: getProgressbarCSSClass(index, checkIfIsCorrect(1))
+				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(1))
 			},
 			allWrong: {
 				absolute: allWrong,
 				percent: memberAmount ? Math.floor((allWrong * 100) / memberAmount) : 0,
-				backgroundClass: getProgressbarCSSClass(index, checkIfIsCorrect(0))
+				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(0))
 			}
 		};
 	}
@@ -216,12 +216,12 @@ Template.progressBarFreeTextQuestion.helpers({
 			correct: {
 				absolute: correctAnswerCount,
 				percent: memberAmount ? Math.floor((correctAnswerCount * 100) / memberAmount) : 0,
-				backgroundClass: getProgressbarCSSClass(index, checkIfIsCorrect(1))
+				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(1))
 			},
 			wrong: {
 				absolute: wrongAnswerCount,
 				percent: memberAmount ? Math.floor((wrongAnswerCount * 100) / memberAmount) : 0,
-				backgroundClass: getProgressbarCSSClass(index, checkIfIsCorrect(0))
+				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(0))
 			}
 		};
 	}
@@ -245,12 +245,12 @@ Template.progressBarRangedQuestion.helpers({
 			allCorrect: {
 				absolute: inCorrectRange,
 				percent: memberAmount ? Math.floor((inCorrectRange * 100) / memberAmount) : 0,
-				backgroundClass: getProgressbarCSSClass(index, checkIfIsCorrect(1))
+				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(1))
 			},
 			allWrong: {
 				absolute: inWrongRange,
 				percent: memberAmount ? Math.floor((inWrongRange * 100) / memberAmount) : 0,
-				backgroundClass: getProgressbarCSSClass(index, checkIfIsCorrect(0))
+				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(0))
 			}
 		};
 	}
@@ -276,13 +276,13 @@ Template.liveResults.helpers({
 		}
 	},
 	isCountdownZero: function (index) {
-		return isCountdownZero(index);
+		return lib.isCountdownZero(index);
 	},
 	getPercentRead: (index)=> {
-		return getPercentRead(index);
+		return lib.getPercentRead(index);
 	},
 	getCurrentRead: (index)=> {
-		var currentReadAmount = getCurrentRead(index);
+		var currentReadAmount = lib.getCurrentRead(index);
 		if (currentReadAmount > 0 || SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled === false) {
 			$('#startNextQuestion').removeAttr('disabled');
 		}
@@ -372,17 +372,17 @@ Template.gamificationAnimation.helpers({
 	getCurrentAnimationSrc: function () {
 		const countdownAnimationWrapper = $('#countdownAnimationWrapper');
 
-		if (!Session.get("countdownInitialized") || !countdown) {
+		if (!Session.get("countdownInitialized") || !lib.countdown) {
 			if (!countdownAnimationWrapper.is(":hidden")) {
 				countdownAnimationWrapper.fadeOut();
 			}
 			return;
 		}
 
-		const countdownValue = countdown.get();
+		const countdownValue = lib.countdown.get();
 
 		if (countdownValue <= 6) {
-			setQuestionDialog(null);
+			lib.setQuestionDialog(null);
 		}
 		countdownAnimationWrapper.show();
 		switch (countdownValue) {

@@ -73,6 +73,7 @@ Template.contactHeaderBar.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
 	}
 	footerElements.addFooterElement(footerElements.footerElemHashtagManagement);
+	headerLib.calculateHeaderSize();
 });
 
 Template.about.onRendered(function () {

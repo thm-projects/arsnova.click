@@ -23,7 +23,7 @@ import {titelTracker} from '/client/layout/region_header/lib.js';
 import {setLobbySound} from '/client/plugins/sound/scripts/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as headerLib from "/client/layout/region_header/lib.js";
-import {calculateButtonCount} from './lib.js';
+import {calculateButtonCount, memberlistTracker} from './lib.js';
 
 Template.memberlist.onRendered(function () {
 	Session.set("learnerCountOverride", false);
@@ -52,7 +52,7 @@ Template.memberlist.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemTheme);
 	} else {
 		footerElements.footerTracker.changed();
-		headerLib.calculateTitelHeight();
+		memberlistTracker.changed();
 	}
 
 	$('.navbar-footer-placeholder').hide();

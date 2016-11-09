@@ -155,7 +155,7 @@ function addLiveresultsChangeEvents() {
 			return user.userNick;
 		}).length;
 		let memberAmount = MemberListCollection.find().fetch().length;
-		if (memberWithGivenResponsesAmount === memberAmount) {
+		if (memberWithGivenResponsesAmount >= memberAmount) {
 			liveResultsLib.countdownFinish();
 		}
 	});

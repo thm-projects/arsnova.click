@@ -43,8 +43,7 @@ Template.votingview.helpers({
 
 Template.votingviewTitel.helpers({
 	getCountdown: function () {
-		if (Session.get("countdownInitialized")) {
-			return TAPi18n.__("view.voting.seconds_left", {value: countdown.get(), count: countdown.get()});
-		}
+		let countdownValue = Session.get("countdownInitialized") && countdown ? countdown.get() : 0;
+		return TAPi18n.__("view.voting.seconds_left", {value: countdownValue, count: countdownValue});
 	}
 });

@@ -21,79 +21,58 @@ import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {showReadingConfirmationSplashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {MemberListCollection} from '/lib/member_list/collection.js';
+import {ResponsesCollection} from '/lib/responses/collection.js';
 import * as localData from '/lib/local_storage.js';
-import * as headerlib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
-import {calculateButtonCount, startCountdown, liveResultsTracker} from './lib.js';
+import * as lib from './lib.js';
 
 Template.liveResults.onRendered(()=> {
-	if (EventManagerCollection.findOne().readingConfirmationIndex < 1 &&
-		EventManagerCollection.findOne().questionIndex < 0 &&
-		SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled !== false) {
-		showReadingConfirmationSplashscreen(0);
-	}
-	if (SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled === false) {
-		if (EventManagerCollection.findOne().readingConfirmationIndex < 1 &&
-			EventManagerCollection.findOne().questionIndex < 0 &&
-			localData.containsHashtag(Router.current().params.quizName)) {
-			Meteor.call('Question.startTimer', {
-				hashtag: Router.current().params.quizName,
-				questionIndex: EventManagerCollection.findOne().questionIndex + 1
-			}, (err) => {
-				if (err) {
-					new ErrorSplashscreen({
-						autostart: true,
-						errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
-					});
-					Session.set("sessionClosed", true);
-				} else {
-					Session.set("sessionClosed", false);
-					startCountdown(EventManagerCollection.findOne().questionIndex + 1);
-				}
-			});
+	const eventDoc = EventManagerCollection.findOne();
+	const sessionConfig = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+	const isOwner = localData.containsHashtag(Router.current().params.quizName);
+	const questionCount = QuestionGroupCollection.findOne().questionList.length;
+
+	if (eventDoc.questionIndex < questionCount) {
+		if (isOwner) {
+			if (sessionConfig.readingConfirmationEnabled) {
+				Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, 0);
+			}
 		}
-		$('#startNextQuestion').removeAttr("disabled");
-	}
-	if (localData.containsHashtag(Router.current().params.quizName) && EventManagerCollection.findOne() && EventManagerCollection.findOne().readingConfirmationIndex === -1) {
-		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, 0);
+		let allMemberResponses = ResponsesCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}).fetch();
+		let memberWithGivenResponsesAmount = _.uniq(allMemberResponses, false, function (user) {
+			return user.userNick;
+		}).length;
+		let memberAmount = MemberListCollection.find().fetch().length;
+		if (memberWithGivenResponsesAmount !== memberAmount) {
+			lib.startCountdown(eventDoc.questionIndex);
+		}
 	}
 
 	footerElements.removeFooterElements();
-	if (localData.containsHashtag(Router.current().params.quizName)) {
+	if (isOwner) {
 		footerElements.addFooterElement(footerElements.footerElemHome);
 		footerElements.addFooterElement(footerElements.footerElemSound);
-		if (EventManagerCollection.findOne().readingConfirmationIndex < QuestionGroupCollection.findOne().questionList.length) {
+		if (eventDoc.questionIndex + 1 < questionCount) {
 			footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
 		}
 		if (navigator.userAgent.match(/iPad/i) == null) {
 			footerElements.addFooterElement(footerElements.footerElemFullscreen);
 		}
-		footerElements.calculateFooter();
 	}
-
-	calculateButtonCount();
-	Session.set("LearnerCountOverride", false);
-	headerlib.calculateHeaderSize();
-	$(window).resize(function () {
-		calculateButtonCount();
-		Session.set("LearnerCountOverride", false);
-		headerlib.calculateHeaderSize();
-	});
-});
-
-Template.readingConfirmedLearner.onRendered(function () {
-	calculateButtonCount();
+	lib.liveResultsTracker.changed();
 });
 
 Template.liveResultsTitle.onRendered(function () {
-	let countdownActive = Session.get("countdownInitialized");
+	let init = Session.get("countdownInitialized");
 	this.autorun(function () {
-		const tmpCountdownActive = Session.get("countdownInitialized");
-		if (countdownActive !== tmpCountdownActive) {
-			countdownActive = tmpCountdownActive;
-			liveResultsTracker.changed();
+		const tmpInit = Session.get("countdownInitialized");
+		if (init !== tmpInit) {
+			lib.liveResultsTracker.changed();
+			footerElements.footerTracker.changed();
+			init = tmpInit;
 		}
-	});
-	liveResultsTracker.changed();
+	}.bind(this));
+	lib.liveResultsTracker.changed();
+	footerElements.footerTracker.changed();
 });

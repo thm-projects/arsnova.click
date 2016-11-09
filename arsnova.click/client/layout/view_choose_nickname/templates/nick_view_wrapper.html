@@ -17,5 +17,5 @@
 
 <template name="nickViewWrapper">
     {{> getRequiredNickView}}
-    {{> getRequiredFooterButtons}}
+    {{> Template.dynamic template=getRequiredFooterButtons}}
 </template>

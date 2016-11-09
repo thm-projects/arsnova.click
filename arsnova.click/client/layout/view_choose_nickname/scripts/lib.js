@@ -76,10 +76,6 @@ export function hasTHMMail() {
 	return hasTHMMail;
 }
 
-export function loginWithCas() {
-	Meteor.loginWithCas();
-}
-
 export function parseEnteredNickname(event) {
 	var currentNickName = event.currentTarget.value;
 	var member = MemberListCollection.findOne({nick: currentNickName});

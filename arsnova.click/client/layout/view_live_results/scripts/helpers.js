@@ -322,12 +322,11 @@ Template.liveResults.helpers({
 	},
 	showLeaderBoardButton: function (index) {
 		const questionDoc = QuestionGroupCollection.findOne();
-		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled;
 		const eventDoc = EventManagerCollection.findOne();
 		if (!questionDoc) {
 			return;
 		}
-		return !Session.get("countdownInitialized") && questionDoc.questionList[index].type !== "SurveyQuestion" && (!configDoc.readingConfirmationEnabled  || eventDoc.readingConfirmationIndex < index);
+		return !Session.get("countdownInitialized") && questionDoc.questionList[index].type !== "SurveyQuestion" && index <= eventDoc.questionIndex;
 	},
 	getNormalizedIndex: function (index) {
 		return index + 1;

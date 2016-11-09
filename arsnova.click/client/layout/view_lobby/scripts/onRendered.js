@@ -69,7 +69,7 @@ Template.memberlist.onRendered(function () {
 	});
 
 	$(window).on("resize", function () {
-		if(window.innerHeight != screen.height) {
+		if (window.innerHeight != screen.height) {
 			$('.navbar-footer-placeholder').hide();
 			$('.navbar-footer').show();
 		}

@@ -41,16 +41,16 @@
                         {{else}}
                             {{#if isFirstItem @index}}
                                     <div class="col-xs-12">
-                                        <div class="color-changing-own-nick firstLeaderBordItem">
+                                        <div class="color-changing-own-nick leaderBordItem">
                                             <span class="glyphicon glyphicon-education"></span>
                                             <span>{{getNormalizedIndex @index}}. {{this.nick}} - {{parseTimeToSeconds this.responseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
                                         </div>
                                     </div>
                             {{else}}
                                     <div class="col-md-6">
-                                        <button class="button button-leader {{#if isOwnNick this.nick}}color-changing-own-nick{{/if}}">
+                                        <div class="leaderBordItem button-leader {{#if isOwnNick this.nick}}color-changing-own-nick{{/if}}">
                                             <span>{{getNormalizedIndex @index}}. {{this.nick}} - {{parseTimeToSeconds this.responseTime}} {{_ "view.leaderboard.second" count=2 }}</span>
-                                        </button>
+                                        </div>
                                     </div>
                             {{/if}}
                         {{/if}}

@@ -11,17 +11,19 @@
                                 <span class="ansBtn">{{_ "view.liveResults.back_to_lobby"}}</span>
                             </button>
                         </div>
-                        <div class="fixed-bottom-item col-xs-6">
-                            {{#if showGlobalLeaderboardButton}}
-                                {{#if hasCorrectAnswerOptionsOrRangedQuestion}}
+                        {{#if showGlobalLeaderboardButton}}
+                            {{#if hasCorrectAnswerOptionsOrRangedQuestion}}
+                                <div class="fixed-bottom-item col-xs-6">
                                     <button class="button button-next disableOnActiveCountdown tabbable"
                                             id="goGlobalRanking">
                                         <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
                                         <span class="ansBtn">{{_ "view.liveResults.global_ranking"}}</span>
                                     </button>
-                                {{/if}}
-                            {{else}}
-                                {{#if hasNextQuestion}}
+                                </div>
+                            {{/if}}
+                        {{else}}
+                            {{#if hasNextQuestion}}
+                                <div class="fixed-bottom-item col-xs-6">
                                     {{#if showNextQuestionButton}}
                                         <button class="button button-next button-start disableOnActiveCountdown tabbable"
                                                 id="showNextQuestionDialog">
@@ -37,9 +39,9 @@
                                                 / {{allQuestionCount}}{{/unless}}</span>
                                         </button>
                                     {{/if}}
-                                {{/if}}
+                                </div>
                             {{/if}}
-                        </div>
+                        {{/if}}
                     </div>
                 </div>
             </div>

@@ -387,7 +387,11 @@ const clickEvents = {
 
 Template.footer.events($.extend({}, clickEvents, {
 	"click #show-more": function () {
-		Router.go("/" + Router.current().params.quizName + "/showMore");
+		if (Router.current().params.quizName) {
+			Router.go("/" + Router.current().params.quizName + "/showMore");
+		} else {
+			Router.go("/showMore");
+		}
 	},
 	"mouseenter .navbar-footer-placeholder": function () {
 		var route = Router.current().route.getName();

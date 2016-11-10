@@ -65,9 +65,14 @@
 }
 
 .input-field {
+  @media (max-width: 599px) {
+    font-size: 18px;
+  }
+  @media (min-width: 600px) {
+    font-size: 1.5em;
+    font-size: 2.6vh;
+  }
   height: 50px;
-  font-size: 1.5em;
-  font-size: 2.6vh;
   width: 100%;
   padding-left: 10px;
   padding-right: 10px;

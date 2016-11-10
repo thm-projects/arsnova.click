@@ -101,9 +101,11 @@ Meteor.methods({
 			throw new Meteor.Error('ResponsesCollection.addResponse', 'response_type_not_found');
 		}
 
-		const user = MemberListCollection.findOne({hashtag: hashtag, nick: responseDoc.userNick}, {userRef: 1});
-		if (user) {
-			responseDoc.userRef = user.userRef;
+		const member = MemberListCollection.findOne({hashtag: hashtag, nick: responseDoc.userNick}, {userRef: 1});
+		const user = Meteor.users.findOne({_id: member.userRef});
+		if (member && user) {
+			responseDoc.userRef = member.userRef;
+			responseDoc.profile = JSON.stringify(user.profile);
 		}
 		ResponsesCollection.insert(responseDoc);
 

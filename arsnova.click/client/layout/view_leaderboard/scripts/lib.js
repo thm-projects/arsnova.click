@@ -83,6 +83,27 @@ function checkIsCorrectSingleChoiceQuestion(response, questionIndex) {
 	return hasCorrectAnswer;
 }
 
+function checkIsCorrectMultipleChoiceQuestion(response, questionIndex) {
+	let hasCorrectAnswer = -1;
+	const allCorrectAnswerOptions = AnswerOptionCollection.find({
+		isCorrect: true,
+		questionIndex: questionIndex,
+		inputValue: response.inputValue,
+		hashtag: Router.current().params.quizName
+	});
+	const allCorrectAnswerOptionsLength = allCorrectAnswerOptions.count();
+	allCorrectAnswerOptions.forEach(function (answeroption) {
+		if ($.inArray(answeroption.answerOptionNumber, response.answerOptionNumber) > -1) {
+			if (allCorrectAnswerOptionsLength === response.answerOptionNumber.length) {
+				hasCorrectAnswer = 1;
+			} else {
+				hasCorrectAnswer = 0;
+			}
+		}
+	});
+	return hasCorrectAnswer;
+}
+
 function checkIsCorrectRangedQuestion(response, questionIndex) {
 	const question = QuestionGroupCollection.findOne({
 		hashtag: Router.current().params.quizName
@@ -124,8 +145,9 @@ export function isCorrectResponse(response, question, questionIndex) {
 		case "SingleChoiceQuestion":
 		case "YesNoSingleChoiceQuestion":
 		case "TrueFalseSingleChoiceQuestion":
-		case "MultipleChoiceQuestion":
 			return checkIsCorrectSingleChoiceQuestion(response, questionIndex);
+		case "MultipleChoiceQuestion":
+			return checkIsCorrectMultipleChoiceQuestion(response, questionIndex);
 		case "SurveyQuestion":
 			return false;
 		case "RangedQuestion":

@@ -277,6 +277,7 @@
       "correct": "Richtig",
       "wrong": "Falsch",
       "complete_correct": "Ganz richtig",
+      "partially_correct": "Teilweise richtig",
       "complete_wrong": "Ganz falsch",
       "back_to_lobby": "Zurück zur Lobby",
       "global_ranking": "Globale Rangliste",

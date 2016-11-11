@@ -260,9 +260,13 @@ Template.progressBarFreeTextQuestion.helpers({
 
 Template.progressBarRangedQuestion.helpers({
 	answerList: function (index) {
+		const questionGroup = QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName});
+		if (!questionGroup) {
+			return null;
+		}
 		let inCorrectRange = 0;
 		let inWrongRange = 0;
-		const question = QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName}).questionList[index];
+		const question = questionGroup.questionList[index];
 		const responses = ResponsesCollection.find({questionIndex: index}).fetch();
 		const memberAmount = responses.length;
 		responses.forEach(function (responseItem) {
@@ -289,7 +293,7 @@ Template.progressBarRangedQuestion.helpers({
 
 Template.liveResults.helpers({
 	getProgressbarTemplate: function (index) {
-		if (typeof index === "undefined") {
+		if (typeof index === "undefined" || !Session.get("questionGroup")) {
 			return null;
 		}
 		switch (Session.get("questionGroup").getQuestionList()[index].typeName()) {
@@ -342,7 +346,7 @@ Template.liveResults.helpers({
 	},
 	questionList: function () {
 		let eventDoc = EventManagerCollection.findOne();
-		if (!eventDoc) {
+		if (!eventDoc || !Session.get("questionGroup")) {
 			return;
 		}
 
@@ -358,7 +362,7 @@ Template.liveResults.helpers({
 		return questionList ? questionList.reverse() : false;
 	},
 	hasOnlyOneQuestion: ()=> {
-		return Session.get("questionGroup").getQuestionList().length === 1;
+		return Session.get("questionGroup") ? Session.get("questionGroup").getQuestionList().length === 1 : null;
 	},
 	isReadingConfirmationEnabled: ()=> {
 		return SessionConfigurationCollection.findOne().readingConfirmationEnabled;

@@ -31,13 +31,6 @@ Template.nickViewWrapper.helpers({
 		} else {
 			return Template.nickLimited;
 		}
-	},
-	getRequiredFooterButtons: function () {
-		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-		if (configDoc.nicks.selectedValues.length !== 0) {
-			return "nickLimitedFooter";
-		}
-		return "nickStandardFooter";
 	}
 });
 

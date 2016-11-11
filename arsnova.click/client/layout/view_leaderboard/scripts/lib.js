@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
@@ -150,28 +149,27 @@ export function getLeaderboardItemsByIndex(questionIndex) {
 		hashtag: hashtag
 	}).questionList[questionIndex];
 	const result = {};
-	ResponsesCollection.find({
+	const response = ResponsesCollection.findOne({
 		hashtag: hashtag,
 		questionIndex: questionIndex
-	}).fetch().forEach(function (response) {
-		const isCorrect = isCorrectResponse(response, question, questionIndex);
-		if (isCorrect) {
-			if (typeof result[response.userNick] === "undefined") {
-				result[response.userNick] = 0;
-			}
-			result[response.userNick] += response.responseTime;
-		}
 	});
+	const isCorrect = isCorrectResponse(response, question, questionIndex);
+	if (isCorrect) {
+		if (typeof result[response.userNick] === "undefined") {
+			result[response.userNick] = 0;
+		}
+		result[response.userNick] += response.responseTime;
+	}
 	return result;
 }
 
 export function getAllLeaderboardItems() {
 	let allItems = getLeaderboardItemsByIndex(0);
-	for (let i = 1; i < EventManagerCollection.findOne().questionIndex; i++) {
+	for (let i = 1; i < EventManagerCollection.findOne().questionIndex + 1; i++) {
 		const tmpItems = getLeaderboardItemsByIndex(i);
-		var result = $.extend({}, allItems, tmpItems);
-		for (const o in result) {
-			if (result.hasOwnProperty(o)) {
+		var result = {};
+		for (const o in tmpItems) {
+			if (tmpItems.hasOwnProperty(o)) {
 				if (typeof allItems[o] !== "undefined" && typeof tmpItems[o] !== "undefined") {
 					result[o] = allItems[o] + tmpItems[o];
 				} else {
@@ -190,12 +188,12 @@ export function generateExportData() {
 	let hasIdentifiedUsers = false;
 	items.forEach(function (item) {
 		let responseTime = item.responseTime;
-		const responses = ResponsesCollection.find({hashtag: Router.current().params.quizName, userNick: item.nick}, {userRef: 1});
-		const user = Meteor.users.findOne({_id: responses.collection.findOne().userRef});
-		if (typeof user !== "undefined") {
+		const response = ResponsesCollection.findOne({hashtag: Router.current().params.quizName, userNick: item.nick}, {userRef: 1});
+		if (typeof response.profile !== "undefined") {
+			response.profile = $.parseJSON(response.profile);
 			hasIdentifiedUsers = true;
-			item.id      = user.profile.id;
-			item.mail    = user.profile.mail instanceof Array ? user.profile.mail.join(",") : user.profile.mail;
+			item.id      = response.profile.id;
+			item.mail    = response.profile.mail instanceof Array ? response.profile.mail.join(",") : response.profile.mail;
 			csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
 		} else {
 			csvString += item.nick + "," + responseTime + "\n";

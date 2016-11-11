@@ -63,6 +63,10 @@ export const responsesCollectionSchema = new SimpleSchema({
 	userRef: {
 		type: userRefSchema,
 		optional: true
+	},
+	profile: {
+		type: String,
+		optional: true
 	}
 });
 

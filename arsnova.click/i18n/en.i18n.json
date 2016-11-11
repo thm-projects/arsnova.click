@@ -265,6 +265,7 @@
       "correct": "Correct",
       "wrong": "Wrong",
       "complete_correct": "Everything correct",
+      "partially_correct": "Partially correct",
       "complete_wrong": "Everything wrong",
       "back_to_lobby": "Back to the lobby",
       "global_ranking": "Global ranking",

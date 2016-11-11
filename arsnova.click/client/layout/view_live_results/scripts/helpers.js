@@ -179,7 +179,7 @@ Template.progressBarSurveyQuestion.helpers({
 		const allAnswerOptions = AnswerOptionCollection.find({
 			hashtag: hashtag,
 			questionIndex: index
-		}).sort({answerOptionNumber: 1});
+		}, {sort: {answerOptionNumber: 1}});
 
 		allAnswerOptions.forEach(function (value) {
 			const amount = responseSet.collection.find({
@@ -202,30 +202,72 @@ Template.progressBarSurveyQuestion.helpers({
 
 Template.progressBarMultipleChoiceQuestion.helpers({
 	answerList: function (index) {
-		let allCorrect = 0;
-		let allWrong = 0;
-		const question = QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName}).questionList[index];
-		const responses = ResponsesCollection.find({questionIndex: index}).fetch();
-		const memberAmount = responses.length;
-		responses.forEach(function (responseItem) {
-			if (leaderboardLib.isCorrectResponse(responseItem, question, index)) {
-				allCorrect++;
-			} else {
-				allWrong++;
-			}
-		});
-		return {
-			allCorrect: {
+		const result = [];
+		const hashtag = Router.current().params.quizName;
+		const responses = ResponsesCollection.find({questionIndex: index});
+		const memberAmount = responses.collection.find({hashtag: hashtag, questionIndex: index}).count();
+		if (lib.isCountdownZero(index)) {
+			let allCorrect = 0;
+			let partiallyCorrect = 0;
+			let allWrong = 0;
+			const question = QuestionGroupCollection.findOne({hashtag: hashtag}).questionList[index];
+			responses.forEach(function (responseItem) {
+				const correctResponse = leaderboardLib.isCorrectResponse(responseItem, question, index);
+				if (correctResponse === -1) {
+					allWrong++;
+				} else if (correctResponse === 0) {
+					partiallyCorrect++;
+				} else {
+					allCorrect++;
+				}
+			});
+			result.push({
+				name: "view.liveResults.complete_correct",
 				absolute: allCorrect,
 				percent: memberAmount ? Math.floor((allCorrect * 100) / memberAmount) : 0,
+				id: 0,
+				isCorrect: 1,
 				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(1))
-			},
-			allWrong: {
+			});
+			result.push({
+				name: "view.liveResults.partially_correct",
+				absolute: partiallyCorrect,
+				percent: memberAmount ? Math.floor((partiallyCorrect * 100) / memberAmount) : 0,
+				id: 1,
+				isCorrect: -1,
+				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(-1))
+			});
+			result.push({
+				name: "view.liveResults.complete_wrong",
 				absolute: allWrong,
 				percent: memberAmount ? Math.floor((allWrong * 100) / memberAmount) : 0,
+				id: 2,
+				isCorrect: 0,
 				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(0))
-			}
-		};
+			});
+		} else {
+			const allAnswerOptions = AnswerOptionCollection.find({
+				hashtag: hashtag,
+				questionIndex: index
+			}, {sort: {answerOptionNumber: 1}});
+			const correctAnswerOptions = allAnswerOptions.collection.find({hashtag: hashtag, isCorrect: true}).count();
+			allAnswerOptions.forEach(function (value) {
+				const amount = responses.collection.find({
+					hashtag: hashtag,
+					questionIndex: index,
+					answerOptionNumber: value.answerOptionNumber
+				}).count();
+				result.push({
+					name: TAPi18n.__("view.liveResults.answer_option") + " " + String.fromCharCode(value.answerOptionNumber + 65),
+					absolute: amount,
+					percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
+					isCorrect: correctAnswerOptions ? value.isCorrect : -1,
+					questionIndex: index,
+					backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(correctAnswerOptions ? value.isCorrect : -1))
+				});
+			});
+		}
+		return result;
 	}
 });
 

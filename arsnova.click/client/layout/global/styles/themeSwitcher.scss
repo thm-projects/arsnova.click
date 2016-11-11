@@ -119,7 +119,7 @@
 	$progress-bar-success-color: green;
 	$progress-bar-read-confirmation: darkorange;
 	$progress-bar-failure-color: firebrick;
-	$progress-bar-default-color: grey;
+	$progress-bar-default-color: #b59f23;
 	$bg-progress-bar-reading_confirmation: purple;
 	$fg-progress-bar-reading_confirmation: white;
 	$bg_progress-bar: white;
@@ -870,7 +870,7 @@
 			background-color: $progress-bar-failure-color !important;
 		}
 		.progress-default {
-			background-color: $input-background-color !important;
+			background-color: $progress-bar-default-color !important;
 		}
 		.textarea {
 			background-color: $input-background-color;

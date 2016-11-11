@@ -24,6 +24,7 @@ import * as liveresultsLib from '/client/layout/view_live_results/scripts/lib.js
 import * as votingViewLib from '/client/layout/view_voting/scripts/lib.js';
 import * as leaderboardLib from '/client/layout/view_leaderboard/scripts/lib.js';
 import * as themeLib from '/client/layout/view_theme_switcher/scripts/lib.js';
+import * as chooseNickView from '/client/layout/view_choose_nickname/scripts/lib.js';
 
 export function isEditingQuestion() {
 	switch (Router.current().route.getName()) {
@@ -118,6 +119,7 @@ const headerTrackerCallback = function () {
 	votingViewLib.votingViewTracker.depend();
 	leaderboardLib.leaderboardTracker.depend();
 	themeLib.themeTracker.depend();
+	chooseNickView.nickTracker.depend();
 	calculateHeaderSize();
 	calculateTitelHeight();
 };

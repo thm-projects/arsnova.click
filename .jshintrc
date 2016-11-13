@@ -24,6 +24,11 @@
 
     "closeSplashscreen": true,
     "showSplashscreen": true,
-    "closeAndRedirectTo": true
+    "closeAndRedirectTo": true,
+
+    "self": true,
+    "caches": true,
+    "Response": true,
+    "Headers": true
   }
 }

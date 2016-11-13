@@ -84,24 +84,31 @@ function checkIsCorrectSingleChoiceQuestion(response, questionIndex) {
 }
 
 function checkIsCorrectMultipleChoiceQuestion(response, questionIndex) {
-	let hasCorrectAnswer = -1;
+	let hasCorrectAnswer = 0;
 	const allCorrectAnswerOptions = AnswerOptionCollection.find({
 		isCorrect: true,
 		questionIndex: questionIndex,
 		inputValue: response.inputValue,
 		hashtag: Router.current().params.quizName
-	});
-	const allCorrectAnswerOptionsLength = allCorrectAnswerOptions.count();
-	allCorrectAnswerOptions.forEach(function (answeroption) {
-		if ($.inArray(answeroption.answerOptionNumber, response.answerOptionNumber) > -1) {
-			if (allCorrectAnswerOptionsLength === response.answerOptionNumber.length) {
-				hasCorrectAnswer = 1;
-			} else {
-				hasCorrectAnswer = 0;
+	}).fetch();
+	response.answerOptionNumber.every(function (element) {
+		allCorrectAnswerOptions.every(function (item) {
+			if (element === item.answerOptionNumber) {
+				hasCorrectAnswer++;
+				return false;
 			}
-		}
+			return true;
+		});
+		return true;
 	});
-	return hasCorrectAnswer;
+	if (hasCorrectAnswer > 0) {
+		if (allCorrectAnswerOptions.length === hasCorrectAnswer) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	return -1;
 }
 
 function checkIsCorrectRangedQuestion(response, questionIndex) {
@@ -176,7 +183,7 @@ export function getLeaderboardItemsByIndex(questionIndex) {
 		questionIndex: questionIndex
 	});
 	const isCorrect = isCorrectResponse(response, question, questionIndex);
-	if (isCorrect) {
+	if (isCorrect === true || isCorrect > 0) {
 		if (typeof result[response.userNick] === "undefined") {
 			result[response.userNick] = 0;
 		}

@@ -186,17 +186,18 @@ export function getLeaderboardItemsByIndex(questionIndex) {
 		hashtag: hashtag
 	}).questionList[questionIndex];
 	const result = {};
-	const response = ResponsesCollection.findOne({
+	ResponsesCollection.find({
 		hashtag: hashtag,
 		questionIndex: questionIndex
-	});
-	const isCorrect = isCorrectResponse(response, question, questionIndex);
-	if (isCorrect === true || isCorrect > 0) {
-		if (typeof result[response.userNick] === "undefined") {
-			result[response.userNick] = 0;
+	}).forEach(function (item) {
+		const isCorrect = isCorrectResponse(item, question, questionIndex);
+		if (isCorrect === true || isCorrect > 0) {
+			if (typeof result[item.userNick] === "undefined") {
+				result[item.userNick] = 0;
+			}
+			result[item.userNick] += item.responseTime;
 		}
-		result[response.userNick] += response.responseTime;
-	}
+	});
 	return result;
 }
 

@@ -85,6 +85,7 @@ function checkIsCorrectSingleChoiceQuestion(response, questionIndex) {
 
 function checkIsCorrectMultipleChoiceQuestion(response, questionIndex) {
 	let hasCorrectAnswer = 0;
+	let hasWrongAnswer = 0;
 	const allCorrectAnswerOptions = AnswerOptionCollection.find({
 		isCorrect: true,
 		questionIndex: questionIndex,
@@ -92,6 +93,7 @@ function checkIsCorrectMultipleChoiceQuestion(response, questionIndex) {
 		hashtag: Router.current().params.quizName
 	}).fetch();
 	response.answerOptionNumber.every(function (element) {
+		const tmpCorrectAnswer = hasCorrectAnswer;
 		allCorrectAnswerOptions.every(function (item) {
 			if (element === item.answerOptionNumber) {
 				hasCorrectAnswer++;
@@ -99,9 +101,12 @@ function checkIsCorrectMultipleChoiceQuestion(response, questionIndex) {
 			}
 			return true;
 		});
+		if (tmpCorrectAnswer === hasCorrectAnswer) {
+			hasWrongAnswer++;
+		}
 		return true;
 	});
-	if (hasCorrectAnswer > 0) {
+	if (hasWrongAnswer === 0) {
 		if (allCorrectAnswerOptions.length === hasCorrectAnswer) {
 			return 1;
 		} else {

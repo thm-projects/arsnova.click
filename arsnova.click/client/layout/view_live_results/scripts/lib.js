@@ -277,7 +277,6 @@ export function startCountdown(index) {
 
 	const isOwner = localData.containsHashtag(Session.get("questionGroup").getHashtag());
 	if (isOwner) {
-		Meteor.call("EventManagerCollection.setActiveQuestion", Session.get("questionGroup").getHashtag(), index);
 		const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
 		if (musicSettings.isEnabled()) {
 			if (buzzsound1 == null) {
@@ -293,8 +292,11 @@ export function startCountdown(index) {
 			Session.set("isQueringServerForTimeStamp", false);
 			return;
 		}
-		countdown = new ReactiveCountdown(response);
+		if (isOwner) {
+			Meteor.call("EventManagerCollection.setActiveQuestion", Session.get("questionGroup").getHashtag(), index);
+		}
 
+		countdown = new ReactiveCountdown(response);
 		countdown.start(function () {
 			if (countdown && countdown.get() === 0) {
 				countdownFinish();

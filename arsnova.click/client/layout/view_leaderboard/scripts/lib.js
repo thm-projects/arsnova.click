@@ -107,7 +107,10 @@ function checkIsCorrectMultipleChoiceQuestion(response, questionIndex) {
 		return true;
 	});
 	if (hasCorrectAnswer > 0) {
-		if (allCorrectAnswerOptions.length === (hasCorrectAnswer + hasWrongAnswer)) {
+		if (hasWrongAnswer > 0) {
+			return 0;
+		}
+		if (allCorrectAnswerOptions.length === hasCorrectAnswer) {
 			return 1;
 		} else {
 			return 0;

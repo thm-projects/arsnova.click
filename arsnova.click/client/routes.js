@@ -323,6 +323,18 @@ Router.route('/:quizName/nick', {
 			if (!globalEventStackObserver.isRunning()) {
 				globalEventStackObserver.startObserving(Router.current().params.quizName);
 			}
+			const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+			if (configDoc) {
+				if (configDoc.nicks.selectedValues.length !== 0) {
+					this.render('nickLimitedFooter', {
+						to: 'footer.navigation'
+					});
+				} else {
+					this.render('nickStandardFooter', {
+						to: 'footer.navigation'
+					});
+				}
+			}
 			this.render('nickViewWrapper');
 		} else {
 			Router.go("/");

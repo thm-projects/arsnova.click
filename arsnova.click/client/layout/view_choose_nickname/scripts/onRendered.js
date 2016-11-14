@@ -18,33 +18,40 @@
 import {Template} from 'meteor/templating';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
-import * as headerLib from "/client/layout/region_header/lib.js";
+import * as lib from './lib.js';
 
 Template.nick.onRendered(function () {
-	if ($(window).width() >= 992) {
-		$('#nickname-input-field').focus();
-	}
-
 	var hashtag = Router.current().params.quizName;
 	if (MemberListCollection.findOne({hashtag: hashtag, privateKey: localStorage.getItem("privateKey")})) {
 		localStorage.setItem(hashtag + "nick", MemberListCollection.findOne({hashtag: hashtag, privateKey: localStorage.getItem("privateKey")}).nick);
 		Router.go("/" + hashtag + "/memberlist");
 	}
+
+	footerElements.removeFooterElements();
+	footerElements.footerTracker.changed();
+	lib.nickTracker.changed();
 });
 
 Template.nickStandardFooter.onRendered(function () {
 	$("#forwardButton, #loginViaCas").attr("disabled", "disabled");
+	if ($(window).width() >= 992) {
+		$('#nickname-input-field').focus();
+	}
 
 	footerElements.removeFooterElements();
 	footerElements.footerTracker.changed();
-	headerLib.calculateHeaderSize();
-	headerLib.calculateTitelHeight();
+	lib.nickTracker.changed();
+});
+
+Template.nickLimitedFooter.onRendered(function () {
+	footerElements.removeFooterElements();
+	footerElements.footerTracker.changed();
+	lib.nickTracker.changed();
 });
 
 Template.nickLimited.onRendered(function () {
 	footerElements.removeFooterElements();
 	footerElements.footerTracker.changed();
-	headerLib.calculateHeaderSize();
-	headerLib.calculateTitelHeight();
+	lib.nickTracker.changed();
 });
 

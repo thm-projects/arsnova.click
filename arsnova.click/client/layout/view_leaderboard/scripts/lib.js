@@ -106,8 +106,8 @@ function checkIsCorrectMultipleChoiceQuestion(response, questionIndex) {
 		}
 		return true;
 	});
-	if (hasWrongAnswer === 0) {
-		if (allCorrectAnswerOptions.length === hasCorrectAnswer) {
+	if (hasCorrectAnswer > 0) {
+		if (allCorrectAnswerOptions.length === (hasCorrectAnswer + hasWrongAnswer)) {
 			return 1;
 		} else {
 			return 0;

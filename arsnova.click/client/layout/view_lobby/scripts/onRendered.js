@@ -26,7 +26,6 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount, memberlistTracker} from './lib.js';
 
 Template.memberlist.onRendered(function () {
-	Meteor.call("EventManagerCollection.setActiveQuestion", 0);
 	Session.set("learnerCountOverride", false);
 	Session.set("allMembersCount", MemberListCollection.find().count());
 	this.autorun(function () {
@@ -36,6 +35,7 @@ Template.memberlist.onRendered(function () {
 
 	footerElements.removeFooterElements();
 	if (localData.containsHashtag(Router.current().params.quizName)) {
+		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
 		Session.set("lobbySoundIsPlaying", "LobbySong1");
 		setLobbySound("LobbySong1", Router.current().url.indexOf("localhost") === -1);
 

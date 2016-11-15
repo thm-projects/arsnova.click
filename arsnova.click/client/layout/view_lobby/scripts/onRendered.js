@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {MemberListCollection} from '/lib/member_list/collection.js';
@@ -25,6 +26,7 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount, memberlistTracker} from './lib.js';
 
 Template.memberlist.onRendered(function () {
+	Meteor.call("EventManagerCollection.setActiveQuestion", 0);
 	Session.set("learnerCountOverride", false);
 	Session.set("allMembersCount", MemberListCollection.find().count());
 	this.autorun(function () {

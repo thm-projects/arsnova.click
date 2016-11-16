@@ -18,6 +18,7 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 
-Template.themeSwitcher.onCreated(function () {
-	Session.set("currentTheme", Session.get("theme"));
+Template.themeSwitcher.onDestroyed(function () {
+	Session.set("currentTheme", undefined);
+	delete Session.keys.currentTheme;
 });

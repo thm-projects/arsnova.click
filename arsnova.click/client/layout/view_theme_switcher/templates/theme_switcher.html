@@ -1,36 +1,13 @@
 <template name="themeSwitcher">
-    <div class="row center-vertical">
+    <div class="row">
         <div class="col-xs-12">
             <div class="row distance-top">
-                <div class="col-xs-12">
-                    <select id="select-theme"
-                            class="round-corners textarea tabbable"
-                            title="{{_ "view.theme_switcher.select_a_theme_title"}}">
-                        {{#each themes}}
-                            <option id="{{this.id}}" {{isThemeSelected this.id}}>{{_ this.name}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                <!-- TODO: bootstrap dropdown list for glyphicons (removed the first curly braked from every blaze statement)-->
-                <!--<div class="col-xs-12">
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle round-corners textarea" type="button" data-toggle="dropdown">{themeName}}
-                            <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            {#each themes}}
-                                <li><a id="{this.id}}" href="#">{_ this.name}} {#if isBeamerFriendly this.id}}<span class="glyphicon glyphicon-facetime-video"></span>{/if}}</a></li>
-                            {/each}}
-                            <li><a href="#">HTML</a></li>
-                            <li><a href="#">CSS</a></li>
-                            <li><a href="#">JavaScript</a></li>
-                        </ul>
+                {{#each themes}}
+                    <div class="col-xs-12 col-md-6 themePreview {{#if isThemeSelected this.id}}selectedTheme{{/if}}" id="{{this.id}}">
+                        <img src="/images/themes/{{_ this.name}}.png" alt="Preview of theme {{_ this.name}}" />
+                        <span class="text-light">{{_ this.description}}</span>
                     </div>
-                </div>-->
-            </div>
-            <div class="row distance-top">
-                <div class="col-xs-12">
-                    <p class="theme-description"></p>
-                </div>
+                {{/each}}
             </div>
         </div>
     </div>

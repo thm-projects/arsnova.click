@@ -19,7 +19,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {noUiSlider} from 'meteor/arsnova.click:nouislider';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
-import {buzzsound1, setBuzzsound1, lobbySound} from './lib.js';
+import {buzzsound1, setBuzzsound1, lobbySound, setLobbySound} from './lib.js';
 import {TAPi18n} from 'meteor/tap:i18n';
 
 Template.soundConfig.onRendered(function () {
@@ -28,7 +28,15 @@ Template.soundConfig.onRendered(function () {
 	if (buzzsound1 == null) {
 		setBuzzsound1(configDoc.music.title);
 	}
-	$('#lobbySoundSelect').val(Session.get("lobbySoundIsPlaying") || "LobbySong1");
+	var lobbyTitle = configDoc.music.lobbyTitle;
+	if (lobbySound == null) {
+		var songTitle = lobbyTitle;
+		if (songTitle === "LobbyRandom") {
+			songTitle = "LobbySong" + (Math.floor(Math.random() * 4) + 1);
+		}
+		setLobbySound(songTitle, false);
+	}
+	$('#lobbySoundSelect').val(lobbyTitle);
 	$('#soundSelect').val(configDoc.music.title);
 
 	if (configDoc.music.isEnabled) {

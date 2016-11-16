@@ -125,7 +125,7 @@ Router.onBeforeAction(function () {
 });
 
 Router.onBeforeAction(function () {
-	if (Router.current().originalUrl === "/" + Router.current().params.quizName + "/resetToHome") {
+	if (Router.current().originalUrl === "/" && Router.current().params.quizName) {
 		this.next();
 		return;
 	}

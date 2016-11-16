@@ -481,7 +481,8 @@
       "lobby_music": "El sonido en el vestíbulo concurso",
       "volume": "Predeterminar volumen",
       "inactive": "Sonido está desactivado",
-      "active": "Sonido está activado"
+      "active": "Sonido está activado",
+      "random": "Selección aleatoria"
     },
     "splashscreen": {
       "edit_session_confirmation": {

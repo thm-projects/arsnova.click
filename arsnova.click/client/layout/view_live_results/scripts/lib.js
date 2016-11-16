@@ -279,9 +279,19 @@ export function startCountdown(index) {
 	if (isOwner) {
 		const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
 		if (musicSettings.isEnabled()) {
-			if (buzzsound1 == null) {
-				setBuzzsound1(musicSettings.getTitle());
+			var songTitle = musicSettings.getTitle();
+
+			if (songTitle === "Random") {
+				if (index === 0 || index % 3 === 0) {
+					songTitle = "Song3";
+				} else if (index % 2 === 0) {
+					songTitle = "Song2";
+				} else {
+					songTitle = "Song1";
+				}
 			}
+			setBuzzsound1(songTitle);
+
 			buzzsound1.setVolume(musicSettings.getVolume());
 			buzzsound1.play();
 			Session.set("soundIsPlaying", true);

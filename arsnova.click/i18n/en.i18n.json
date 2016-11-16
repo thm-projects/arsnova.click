@@ -481,7 +481,8 @@
       "lobby_music": "Sound in the quiz lobby",
       "volume": "Volume",
       "inactive": "Sound is inactive",
-      "active": "Sound is active"
+      "active": "Sound is active",
+      "random": "Random selection"
     },
     "splashscreen": {
       "edit_session_confirmation": {

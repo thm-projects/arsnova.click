@@ -493,7 +493,8 @@
       "lobby_music": "Sound in der Quiz Lobby",
       "volume": "Lautstärke vorgeben",
       "inactive": "Sound ist abgeschaltet",
-      "active": "Sound ist aktiviert"
+      "active": "Sound ist aktiviert",
+      "random": "Zufällige Auswahl"
     },
     "splashscreen": {
       "edit_session_confirmation": {

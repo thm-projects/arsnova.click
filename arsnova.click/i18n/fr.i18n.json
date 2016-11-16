@@ -481,7 +481,8 @@
       "lobby_music": "Son dans le hall quiz",
       "volume": "Attribuer le volume",
       "inactive": "Son désactivé",
-      "active": "Son activé"
+      "active": "Son activé",
+      "random": "Sélection aléatoire"
     },
     "splashscreen": {
       "edit_session_confirmation": {

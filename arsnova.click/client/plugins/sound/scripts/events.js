@@ -41,12 +41,23 @@ Template.soundConfig.events({
 		localData.addHashtag(Session.get("questionGroup"));
 	},
 	"change #lobbySoundSelect": function (event) {
+		var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+		var songTitle = $(event.target).val();
+		if (songTitle === "LobbyRandom") {
+			songTitle = "LobbySong" + (Math.floor(Math.random() * 4) + 1);
+		}
+		configDoc.music.lobbyTitle = songTitle;
 		if (Session.get("lobbySoundIsPlaying")) {
 			lib.lobbySound.stop();
-			lib.setLobbySound($(event.target).val());
+			lib.setLobbySound(songTitle);
 		} else {
-			lib.setLobbySound($(event.target).val());
+			lib.setLobbySound(songTitle, false);
 		}
+		Meteor.call('SessionConfiguration.setMusic', configDoc);
+		const questionItem = Session.get("questionGroup");
+		questionItem.getConfiguration().getMusicSettings().setLobbyTitle($(event.target).val());
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
 	},
 	"click #js-btn-playStopMusic": function () {
 		if (Session.get("soundIsPlaying")) {
@@ -60,15 +71,23 @@ Template.soundConfig.events({
 		}
 	},
 	"click #playStopLobbyMusic": function () {
+		var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 		if (Session.get("lobbySoundIsPlaying")) {
+			configDoc.music.isLobbyEnabled = false;
 			lib.lobbySound.stop();
 			Session.set("lobbySoundIsPlaying", false);
 			$('#playStopLobbyMusic').toggleClass("down").removeClass("button-warning").addClass("button-success");
 		} else {
+			configDoc.music.isLobbyEnabled = true;
 			lib.lobbySound.play();
 			Session.set("lobbySoundIsPlaying", true);
 			$('#playStopLobbyMusic').toggleClass("down").removeClass("button-success").addClass("button-warning");
 		}
+		Meteor.call('SessionConfiguration.setMusic', configDoc);
+		const questionItem = Session.get("questionGroup");
+		questionItem.getConfiguration().getMusicSettings().setIsLobbyEnabled(configDoc.music.isLobbyEnabled);
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
 	},
 	"click #js-btn-hideSoundModal": function () {
 		lib.buzzsound1.stop();

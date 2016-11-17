@@ -39,6 +39,12 @@ export const SessionConfigurationSchema = new SimpleSchema({
 	"music.title": {
 		type: String
 	},
+	"music.lobbyTitle": {
+		type: String
+	},
+	"music.isLobbyEnabled": {
+		type: Boolean
+	},
 	nicks: {
 		type: Object
 	},

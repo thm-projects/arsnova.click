@@ -19,6 +19,8 @@ const hashtag = Symbol("hashtag");
 const isEnabled = Symbol("isEnabled");
 const volume = Symbol("volume");
 const title = Symbol("title");
+const isLobbyEnabled = Symbol("isLobbyEnabled");
+const lobbyTitle = Symbol("lobbyTitle");
 
 export class MusicSessionConfiguration {
 	constructor (options = {}) {
@@ -26,6 +28,8 @@ export class MusicSessionConfiguration {
 		this[isEnabled] = typeof options.music.isEnabled === "undefined" ? true : options.music.isEnabled;
 		this[volume] = options.music.volume || 80;
 		this[title] = options.music.title || "Song1";
+		this[isLobbyEnabled] = typeof options.music.isLobbyEnabled === "undefined" ? true : options.music.isLobbyEnabled;
+		this[lobbyTitle] = options.music.lobbyTitle || "LobbySong1";
 	}
 
 	serialize () {
@@ -33,14 +37,18 @@ export class MusicSessionConfiguration {
 			hashtag: this.getHashtag(),
 			isEnabled: this.isEnabled(),
 			volume: this.getVolume(),
-			title: this.getTitle()
+			title: this.getTitle(),
+			isLobbyEnabled: this.getIsLobbyEnabled(),
+			lobbyTitle: this.getLobbyTitle()
 		};
 	}
 
 	equals (value) {
 		return this.isEnabled() === value.isEnabled() &&
 				this.getTitle() === value.getTitle() &&
-				this.getVolume() === value.getVolume();
+				this.getVolume() === value.getVolume() &&
+				this.getIsLobbyEnabled() === value.getIsLobbyEnabled &&
+				this.getLobbyTitle() === value.getLobbyTitle;
 	}
 
 	getHashtag () {
@@ -82,5 +90,27 @@ export class MusicSessionConfiguration {
 			throw new Error("Invalid argument list for MusicSessionConfiguration.setTitle");
 		}
 		this[title] = value;
+	}
+
+	getIsLobbyEnabled () {
+		return this[isLobbyEnabled];
+	}
+
+	setIsLobbyEnabled (value) {
+		if (typeof value !== "boolean") {
+			throw new Error("Invalid argument list for MusicSessionConfiguration.setEnabled");
+		}
+		this[isLobbyEnabled] = value;
+	}
+
+	getLobbyTitle () {
+		return this[lobbyTitle];
+	}
+
+	setLobbyTitle (value) {
+		if (typeof value !== "string") {
+			throw new Error("Invalid argument list for MusicSessionConfiguration.setTitle");
+		}
+		this[lobbyTitle] = value;
 	}
 }

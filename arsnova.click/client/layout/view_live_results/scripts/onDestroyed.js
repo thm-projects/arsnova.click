@@ -27,7 +27,7 @@ Template.liveResults.onDestroyed(function () {
 		countdown.stop();
 	}
 
-    lobbysound.stop();
+	lobbysound.stop();
 	buzzsound1.stop();
 	Session.set("soundIsPlaying", false);
 

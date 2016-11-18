@@ -26,10 +26,10 @@ import * as localData from '/lib/local_storage.js';
 Template.soundConfig.events({
 	"change #soundSelect": function (event) {
 		var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-        var songTitle = $(event.target).val();
-        if (songTitle === "Random") {
-            songTitle = "Song" + (Math.floor(Math.random() * 3) + 1);
-        }
+		var songTitle = $(event.target).val();
+		if (songTitle === "Random") {
+			songTitle = "Song" + (Math.floor(Math.random() * 3) + 1);
+		}
 		configDoc.music.title = $(event.target).val();
 		if (Session.get("soundIsPlaying")) {
 			lib.buzzsound1.stop();

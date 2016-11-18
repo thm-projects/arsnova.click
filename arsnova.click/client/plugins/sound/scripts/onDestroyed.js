@@ -15,23 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Session} from 'meteor/session';
-import {Template} from 'meteor/templating';
-import {buzzsound1, lobbysound} from '/client/plugins/sound/scripts/lib.js';
-import {countdown, routeToLeaderboardTimer} from './lib.js';
+import {lobbySound, buzzsound1} from '/client/plugins/sound/scripts/lib.js';
 
-Template.liveResults.onDestroyed(function () {
-	Session.set("countdownInitialized", undefined);
-	Session.set("sessionCountDown", undefined);
-	if (countdown) {
-		countdown.stop();
-	}
-
-    lobbysound.stop();
-	buzzsound1.stop();
-	Session.set("soundIsPlaying", false);
-
-	if (routeToLeaderboardTimer) {
-		clearTimeout(routeToLeaderboardTimer);
-	}
+Template.soundConfig.onDestroyed(function () {
+    let currentPath = Router.current().route.getName().replace(/(:quizName.)*(.:id)*/g, "");
+    if (currentPath !== "memberlist") {
+        lobbySound.stop();
+        Session.set("lobbySoundIsPlaying", false);
+    }
+    Session.set("soundIsPlaying", false);
+    buzzsound1.stop();
 });

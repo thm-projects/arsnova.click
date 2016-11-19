@@ -20,4 +20,14 @@ import {Template} from 'meteor/templating';
 Template.showHashtagsSplashscreen.onRendered(function () {
 	$('validQuestion').tooltip();
 	$('invalidQuestion').tooltip();
+
+	if ($('.errorSplashscreen').length) {
+		$('.showHashtagsSplashscreen').hide();
+	}
+});
+
+Template.errorSplashscreen.onDestroyed(function () {
+	if ($('.showHashtagsSplashscreen').length) {
+		$('.showHashtagsSplashscreen').show();
+	}
 });

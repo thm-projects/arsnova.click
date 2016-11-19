@@ -91,6 +91,7 @@ Router.onStop(function () {
 	} else if (lastRoute !== "agb" && lastRoute !== "dataprivacy" && lastRoute !== "imprint") {
 		localStorage.setItem("lastPage", lastRoute);
 	}
+	console.log("stop routing");
 });
 
 Router.onBeforeAction(function () {
@@ -102,6 +103,7 @@ Router.onBeforeAction(function () {
 			errorMessage: "plugins.splashscreen.error.error_messages.private_browsing"
 		});
 	} finally {
+		console.log("initializing private key");
 		this.next();
 	}
 });
@@ -121,6 +123,7 @@ Router.onBeforeAction(function () {
 		}
 	}
 	Session.set("theme", theme);
+	console.log("setting theme");
 	this.next();
 });
 
@@ -144,10 +147,12 @@ Router.onBeforeAction(function () {
 		getChangeEventsForRoute(Router.current().route.getName());
 		getRemoveEventsForRoute(Router.current().route.getName());
 	}
+	console.log("adding change / remove event observer");
 	this.next();
 });
 
 Router.onAfterAction(function () {
+	console.log("adding tab indices");
 	createTabIndices();
 });
 
@@ -166,6 +171,7 @@ Router.route('/', {
 			}
 		});
 		this.render('home');
+		console.log("rendering home route");
 	}
 });
 

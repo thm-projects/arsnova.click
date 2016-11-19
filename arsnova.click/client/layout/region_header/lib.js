@@ -126,4 +126,6 @@ const headerTrackerCallback = function () {
 
 $(window).on('resize', headerTrackerCallback);
 
-Tracker.autorun(headerTrackerCallback);
+Meteor.defer(function () {
+	Tracker.autorun(headerTrackerCallback);
+});

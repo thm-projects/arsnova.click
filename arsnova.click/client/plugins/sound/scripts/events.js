@@ -26,13 +26,17 @@ import * as localData from '/lib/local_storage.js';
 Template.soundConfig.events({
 	"change #soundSelect": function (event) {
 		var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+		var songTitle = $(event.target).val();
+		if (songTitle === "Random") {
+			songTitle = "Song" + (Math.floor(Math.random() * 3) + 1);
+		}
 		configDoc.music.title = $(event.target).val();
 		if (Session.get("soundIsPlaying")) {
 			lib.buzzsound1.stop();
-			lib.setBuzzsound1($(event.target).val());
+			lib.setBuzzsound1(songTitle);
 			lib.buzzsound1.play();
 		} else {
-			lib.setBuzzsound1($(event.target).val());
+			lib.setBuzzsound1(songTitle);
 		}
 		Meteor.call('SessionConfiguration.setMusic', configDoc);
 		const questionItem = Session.get("questionGroup");
@@ -46,7 +50,7 @@ Template.soundConfig.events({
 		if (songTitle === "LobbyRandom") {
 			songTitle = "LobbySong" + (Math.floor(Math.random() * 4) + 1);
 		}
-		configDoc.music.lobbyTitle = songTitle;
+		configDoc.music.lobbyTitle = $(event.target).val();
 		if (Session.get("lobbySoundIsPlaying")) {
 			lib.lobbySound.stop();
 			lib.setLobbySound(songTitle);

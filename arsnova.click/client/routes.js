@@ -159,6 +159,12 @@ Router.route('/', {
 				return {titelText: 'global.arsnova_slogan'};
 			}
 		});
+		this.render("titel", {
+			to: "header.title",
+			data: function () {
+				return {titelText: 'global.arsnova_slogan'};
+			}
+		});
 		this.render('home');
 	}
 });

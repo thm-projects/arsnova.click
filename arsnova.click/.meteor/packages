@@ -27,6 +27,7 @@ meteorhacks:subs-manager
 observe-sequence@1.0.14
 aldeed:simple-schema
 aldeed:collection2
+meteorhacks:fast-render
 
 tap:i18n
 tap:i18n-ui

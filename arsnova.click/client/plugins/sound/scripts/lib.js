@@ -68,7 +68,7 @@ export function setLobbySound(songName, autostart = true) {
 		loop: true
 	});
 	if (autostart) {
-		Session.set("lobbySoundIsPlaying", songName);
+		Session.set("lobbySoundIsPlaying", true);
 		lobbySound.play();
 	}
 }

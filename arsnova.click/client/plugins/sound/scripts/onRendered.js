@@ -36,8 +36,15 @@ Template.soundConfig.onRendered(function () {
 		}
 		setLobbySound(songTitle, false);
 	}
+
+    var votingTitle = configDoc.music.title;
+    if (votingTitle === "Random") {
+        votingTitle = "Song" + (Math.floor(Math.random() * 3) + 1);
+    }
+    setBuzzsound1(votingTitle);
+
 	$('#lobbySoundSelect').val(lobbyTitle);
-	$('#soundSelect').val(configDoc.music.title);
+	$('#soundSelect').val(votingTitle);
 
 	if (configDoc.music.isEnabled) {
 		$('#isSoundOnButton').toggleClass("down").html(TAPi18n.__("plugins.sound.active"));

@@ -43,11 +43,11 @@ Template.memberlist.onRendered(function () {
 			songTitle = "LobbySong" + (Math.floor(Math.random() * 4) + 1);
 		}
 
-		setLobbySound(songTitle, Router.current().url.indexOf("localhost") === -1);
+		setLobbySound(songTitle, false);
 		lobbySound.setVolume(musicSettings.getVolume());
 
 		if (musicSettings.getIsLobbyEnabled()) {
-			Session.set("lobbySoundIsPlaying", songTitle);
+			Session.set("lobbySoundIsPlaying", true);
 			lobbySound.play();
 		}
 

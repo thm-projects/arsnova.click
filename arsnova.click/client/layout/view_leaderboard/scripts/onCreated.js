@@ -21,10 +21,10 @@ import {getLeaderboardItemsByIndex, getAllLeaderboardItems, objectToArray} from 
 
 Template.leaderBoard.onCreated(function () {
 	if (Router.current().params.id === "all") {
-		Session.set("nicks", objectToArray(getAllLeaderboardItems()));
+		Session.set("nicks", _.sortBy(objectToArray(getAllLeaderboardItems()), function (o) { return o.responseTime; }));
 		Session.set("allMembersCount",Session.get("nicks").length);
 	} else {
-		Session.set("nicks", objectToArray(getLeaderboardItemsByIndex(parseInt(Router.current().params.id))));
+		Session.set("nicks", _.sortBy(objectToArray(getLeaderboardItemsByIndex(parseInt(Router.current().params.id))), function (o) { return o.responseTime; }));
 		Session.set("allMembersCount",Session.get("nicks").length);
 	}
 });

@@ -17,7 +17,7 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {buzzsound1, lobbysound} from '/client/plugins/sound/scripts/lib.js';
+import {buzzsound1, lobbySound} from '/client/plugins/sound/scripts/lib.js';
 import {countdown, routeToLeaderboardTimer} from './lib.js';
 
 Template.liveResults.onDestroyed(function () {
@@ -26,9 +26,12 @@ Template.liveResults.onDestroyed(function () {
 	if (countdown) {
 		countdown.stop();
 	}
-
-	lobbysound.stop();
-	buzzsound1.stop();
+	if (lobbySound) {
+		lobbySound.stop();
+	}
+	if (buzzsound1) {
+		buzzsound1.stop();
+	}
 	Session.set("soundIsPlaying", false);
 
 	if (routeToLeaderboardTimer) {

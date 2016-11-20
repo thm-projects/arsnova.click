@@ -24,7 +24,8 @@ Template.memberlist.onDestroyed(function () {
 	if (memberlistObserver) {
 		memberlistObserver.stop();
 	}
-	if (lobbySound) {
+	if (lobbySound !== null) {
+        Session.set("lobbySoundIsPlaying", false);
 		lobbySound.stop();
 	}
 	$('.qr-code-container').hide();

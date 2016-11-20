@@ -47,7 +47,6 @@ export function setBuzzsound1(songName) {
 
 export function setLobbySound(songName, autostart = true) {
 	var fileName = "";
-	Session.set("lobbySoundIsPlaying", false);
 	switch (songName) {
 		case "LobbySong1":
 			fileName = "bensound-clearday.mp3";

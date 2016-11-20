@@ -25,17 +25,30 @@ import {TAPi18n} from 'meteor/tap:i18n';
 Template.soundConfig.onRendered(function () {
 	var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 	Session.set("slider2", configDoc.music.volume);
+
 	if (buzzsound1 == null) {
 		setBuzzsound1(configDoc.music.title);
 	}
-	var lobbyTitle = configDoc.music.lobbyTitle;
-	if (lobbySound == null) {
-		var songTitle = lobbyTitle;
-		if (songTitle === "LobbyRandom") {
-			songTitle = "LobbySong" + (Math.floor(Math.random() * 4) + 1);
-		}
-		setLobbySound(songTitle, false);
+
+	if (lobbySound != null) {
+		lobbySound.stop();
+        Session.set("lobbySoundIsPlaying", false);
 	}
+
+	var lobbyTitle = configDoc.music.lobbyTitle;
+    $('#lobbySoundSelect').val(lobbyTitle);
+	if (lobbyTitle === "LobbyRandom") {
+        lobbyTitle = "LobbySong" + (Math.floor(Math.random() * 4) + 1);
+	}
+
+	setLobbySound(lobbyTitle, false);
+
+    let currentPath = Router.current().route.getName().replace(/(:quizName.)*(.:id)*/g, "");
+
+    if (currentPath === "memberlist" && configDoc.music.isLobbyEnabled) {
+        lobbySound.play();
+        Session.set("lobbySoundIsPlaying", true);
+    }
 
 	var votingTitle = configDoc.music.title;
 	if (votingTitle === "Random") {
@@ -43,7 +56,7 @@ Template.soundConfig.onRendered(function () {
 	}
 	setBuzzsound1(votingTitle);
 
-	$('#lobbySoundSelect').val(lobbyTitle);
+
 	$('#soundSelect').val(votingTitle);
 
 	if (configDoc.music.isEnabled) {

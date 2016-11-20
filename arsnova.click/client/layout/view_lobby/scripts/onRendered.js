@@ -46,7 +46,7 @@ Template.memberlist.onRendered(function () {
 		setLobbySound(songTitle, false);
 		lobbySound.setVolume(musicSettings.getVolume());
 
-        lobbySound.stop();
+		lobbySound.stop();
 		if (musicSettings.getIsLobbyEnabled()) {
 			Session.set("lobbySoundIsPlaying", true);
 			lobbySound.play();

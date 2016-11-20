@@ -32,23 +32,23 @@ Template.soundConfig.onRendered(function () {
 
 	if (lobbySound != null) {
 		lobbySound.stop();
-        Session.set("lobbySoundIsPlaying", false);
+		Session.set("lobbySoundIsPlaying", false);
 	}
 
 	var lobbyTitle = configDoc.music.lobbyTitle;
-    $('#lobbySoundSelect').val(lobbyTitle);
+	$('#lobbySoundSelect').val(lobbyTitle);
 	if (lobbyTitle === "LobbyRandom") {
-        lobbyTitle = "LobbySong" + (Math.floor(Math.random() * 4) + 1);
+		lobbyTitle = "LobbySong" + (Math.floor(Math.random() * 4) + 1);
 	}
 
 	setLobbySound(lobbyTitle, false);
 
-    let currentPath = Router.current().route.getName().replace(/(:quizName.)*(.:id)*/g, "");
+	let currentPath = Router.current().route.getName().replace(/(:quizName.)*(.:id)*/g, "");
 
-    if (currentPath === "memberlist" && configDoc.music.isLobbyEnabled) {
-        lobbySound.play();
-        Session.set("lobbySoundIsPlaying", true);
-    }
+	if (currentPath === "memberlist" && configDoc.music.isLobbyEnabled) {
+		lobbySound.play();
+		Session.set("lobbySoundIsPlaying", true);
+	}
 
 	var votingTitle = configDoc.music.title;
 	if (votingTitle === "Random") {

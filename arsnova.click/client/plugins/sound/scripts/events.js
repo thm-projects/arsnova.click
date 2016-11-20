@@ -50,7 +50,7 @@ Template.soundConfig.events({
 		if (songTitle === "LobbyRandom") {
 			songTitle = "LobbySong" + (Math.floor(Math.random() * 4) + 1);
 		}
-        lib.lobbySound.stop();
+		lib.lobbySound.stop();
 		configDoc.music.lobbyTitle = $(event.target).val();
 		if (Session.get("lobbySoundIsPlaying")) {
 			lib.setLobbySound(songTitle);
@@ -77,7 +77,7 @@ Template.soundConfig.events({
 	"click #playStopLobbyMusic": function () {
 		var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 		if (Session.get("lobbySoundIsPlaying")) {
-            lib.lobbySound.stop();
+			lib.lobbySound.stop();
 			configDoc.music.isLobbyEnabled = false;
 			Session.set("lobbySoundIsPlaying", false);
 			$('#playStopLobbyMusic').toggleClass("down").removeClass("button-warning").addClass("button-success");

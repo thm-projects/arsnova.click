@@ -25,7 +25,7 @@ Template.memberlist.onDestroyed(function () {
 		memberlistObserver.stop();
 	}
 	if (lobbySound !== null) {
-        Session.set("lobbySoundIsPlaying", false);
+		Session.set("lobbySoundIsPlaying", false);
 		lobbySound.stop();
 	}
 	$('.qr-code-container').hide();

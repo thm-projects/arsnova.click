@@ -115,17 +115,23 @@ export function connectEventManager(hashtag) {
 }
 
 export function addHashtag(questionGroup) {
-	Meteor.call('SessionConfiguration.addConfig', questionGroup.getConfiguration().serialize());
-	Meteor.call('HashtagsCollection.addHashtag', {
-		privateKey: localData.getPrivateKey(),
-		hashtag: questionGroup.getHashtag()
-	}, function (err) {
-		if (!err) {
-			localData.addHashtag(questionGroup);
-			Session.set("questionGroup", questionGroup);
-			connectEventManager(questionGroup.getHashtag());
-		}
-	});
+	if (!HashtagsCollection.findOne({hashtag: questionGroup.getHashtag()})) {
+		Meteor.call('SessionConfiguration.addConfig', questionGroup.getConfiguration().serialize());
+		Meteor.call('HashtagsCollection.addHashtag', {
+			privateKey: localData.getPrivateKey(),
+			hashtag: questionGroup.getHashtag()
+		}, function (err) {
+			if (!err) {
+				localData.addHashtag(questionGroup);
+				Session.set("questionGroup", questionGroup);
+				connectEventManager(questionGroup.getHashtag());
+			}
+		});
+	} else {
+		localData.addHashtag(questionGroup);
+		Session.set("questionGroup", questionGroup);
+		connectEventManager(questionGroup.getHashtag());
+	}
 }
 
 export function trimIllegalChars(hashtag) {

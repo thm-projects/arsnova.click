@@ -34,7 +34,7 @@ Template.liveResults.onRendered(()=> {
 	const isOwner = localData.containsHashtag(Router.current().params.quizName);
 	const questionCount = QuestionGroupCollection.findOne().questionList.length;
 
-	if (eventDoc.questionIndex < questionCount) {
+	if (eventDoc.questionIndex <= questionCount) {
 		if (sessionConfig.readingConfirmationEnabled && eventDoc.readingConfirmationIndex === 0 && eventDoc.questionIndex === -1) {
 			if (isOwner) {
 				Meteor.call("EventManagerCollection.showReadConfirmedForIndex", hashtag, 0);

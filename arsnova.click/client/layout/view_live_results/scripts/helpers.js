@@ -360,8 +360,12 @@ Template.liveResults.helpers({
 		return lib.getPercentRead(index);
 	},
 	getCurrentRead: (index)=> {
+		const sessionConfig = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+		if (!sessionConfig) {
+			return;
+		}
 		var currentReadAmount = lib.getCurrentRead(index);
-		if (currentReadAmount > 0 || SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled === false) {
+		if (currentReadAmount > 0 || sessionConfig.readingConfirmationEnabled === false) {
 			$('#startNextQuestion').removeAttr('disabled');
 		}
 		return currentReadAmount;
@@ -407,7 +411,11 @@ Template.liveResults.helpers({
 		return Session.get("questionGroup") ? Session.get("questionGroup").getQuestionList().length === 1 : null;
 	},
 	isReadingConfirmationEnabled: ()=> {
-		return SessionConfigurationCollection.findOne().readingConfirmationEnabled;
+		const sessionConfig = SessionConfigurationCollection.findOne();
+		if (!sessionConfig) {
+			return;
+		}
+		return sessionConfig.readingConfirmationEnabled;
 	},
 	readingConfirmationListForQuestion: (index)=> {
 		let result = [];

@@ -129,7 +129,7 @@ Template.hashtagView.events({
 			if (Session.get("questionGroup").isValid()) {
 				sessionStorage.setItem("overrideValidQuestionRedirect", true);
 			}
-			lib.connectEventManager(localData.findHashtagCaseInsensitiveFromLocalStorage(hashtag));
+			lib.addHashtag(Session.get("questionGroup"));
 		} else {
 			let questionGroup = null;
 			if (hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
@@ -207,7 +207,7 @@ Template.hashtagManagement.events({
 	"click .js-reactivate-hashtag": function (event) {
 		var hashtag = $(event.currentTarget).parent().parent()[0].id;
 		Session.set("questionGroup", localData.reenterSession(hashtag));
-		lib.connectEventManager(hashtag);
+		lib.addHashtag(Session.get("questionGroup"));
 	},
 	"click .js-delete": function (event) {
 		const hashtagRow = $(event.currentTarget).parent().parent();
@@ -236,7 +236,7 @@ Template.hashtagManagement.events({
 		if (Session.get("questionGroup").isValid()) {
 			sessionStorage.setItem("overrideValidQuestionRedirect", true);
 		}
-		lib.connectEventManager(hashtag);
+		lib.addHashtag(Session.get("questionGroup"));
 	}
 });
 
@@ -248,7 +248,7 @@ Template.showHashtagsSplashscreen.events({
 		if (Session.get("questionGroup").isValid()) {
 			sessionStorage.setItem("overrideValidQuestionRedirect", true);
 		}
-		lib.connectEventManager(hashtag);
+		lib.addHashtag(Session.get("questionGroup"));
 	},
 	"click #js-btn-showHashtagManagement": function () {
 		lib.hashtagSplashscreen.destroy();

@@ -37,11 +37,11 @@ Template.soundConfig.onRendered(function () {
 		setLobbySound(songTitle, false);
 	}
 
-    var votingTitle = configDoc.music.title;
-    if (votingTitle === "Random") {
-        votingTitle = "Song" + (Math.floor(Math.random() * 3) + 1);
-    }
-    setBuzzsound1(votingTitle);
+	var votingTitle = configDoc.music.title;
+	if (votingTitle === "Random") {
+		votingTitle = "Song" + (Math.floor(Math.random() * 3) + 1);
+	}
+	setBuzzsound1(votingTitle);
 
 	$('#lobbySoundSelect').val(lobbyTitle);
 	$('#soundSelect').val(votingTitle);

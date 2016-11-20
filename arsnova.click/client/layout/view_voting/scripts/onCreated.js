@@ -31,7 +31,7 @@ Template.votingview.onCreated(function () {
 	Session.set("countdownInitialized", false);
 	const sessionType = Session.get("questionGroup").getQuestionList()[questionIndex].typeName();
 	const answers = Session.get("questionGroup").getQuestionList()[questionIndex].getAnswerOptionList();
-	const redirectOnAnswerClick = $.inArray(sessionType, ["SingleChoiceQuestion", "YesNoSingleChoiceQuestion", "TrueFalseSingleChoiceQuestion"]);
+	const redirectOnAnswerClick = $.inArray(sessionType, ["SingleChoiceQuestion", "YesNoSingleChoiceQuestion", "TrueFalseSingleChoiceQuestion"]) > -1;
 	Session.set("questionSC", redirectOnAnswerClick);
 	startCountdown(questionIndex);
 	const responseArr = [];

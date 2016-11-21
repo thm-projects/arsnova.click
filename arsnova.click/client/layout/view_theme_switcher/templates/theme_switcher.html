@@ -3,7 +3,7 @@
         <div class="col-xs-12">
             <div class="row distance-top">
                 {{#each themes}}
-                    <div class="col-xs-12 col-md-6 themePreview {{#if isThemeSelected this.id}}selectedTheme{{/if}}" id="{{this.id}}">
+                    <div class="col-xs-12 col-sm-6 themePreview {{#if isThemeSelected this.id}}selectedTheme{{/if}}" id="{{this.id}}">
                         <img src="/images/themes/{{this.id}}.png" alt="Preview of theme {{_ this.name}}" />
                         <span class="text-light">{{_ this.description}}</span>
                     </div>

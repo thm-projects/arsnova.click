@@ -380,7 +380,7 @@
       "false": "No"
     },
     "theme_switcher": {
-      "set_theme": "Choose a theme for all attendees",
+      "set_theme": "Choose a theme",
       "select_a_theme_title": "Choose the theme",
       "themes": {
         "theme-arsnova-dot-click-contrast": {

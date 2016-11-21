@@ -64,6 +64,7 @@ export function createTabIndices() {
 
 Meteor.startup(function () {
 	if (Meteor.isClient) {
+		navigator.serviceWorker.register('/serviceWorker.js').then().catch(error => console.log(error));
 		$.getScript('/lib/highlight.pack.min.js');
 		$.getScript('/lib/marked.min.js');
 		TAPi18n.setLanguage(getUserLanguage());

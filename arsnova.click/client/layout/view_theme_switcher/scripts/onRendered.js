@@ -16,9 +16,9 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {TAPi18n} from 'meteor/tap:i18n';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
-import {themes, themeTracker} from './lib.js';
+import {themeTracker} from './lib.js';
+import * as headerLib from '/client/layout/region_header/lib.js';
 
 Template.themeSwitcher.onRendered(function () {
 	footerElements.removeFooterElements();
@@ -33,12 +33,6 @@ Template.themeSwitcher.onRendered(function () {
 	}
 	footerElements.footerTracker.changed();
 	themeTracker.changed();
-
-	const theme = localStorage.getItem("theme");
-	for (let i = 0; i < themes.length; i++) {
-		if (themes[i].id === theme) {
-			$('.theme-description').text(TAPi18n.__(themes[i].description));
-			i = themes.length;
-		}
-	}
+	headerLib.calculateHeaderSize();
+	headerLib.calculateTitelHeight();
 });

@@ -18,20 +18,16 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {TAPi18n} from 'meteor/tap:i18n';
-import {themes} from './lib.js';
 
 Template.themeSwitcher.events({
-	"change #select-theme": function (event) {
-		const theme = $(event.currentTarget).find("option:selected").attr("id");
-
-		for (let i = 0; i < themes.length; i++) {
-			if (themes[i].id === theme) {
-				$('.theme-description').text(TAPi18n.__(themes[i].description));
-				i = themes.length;
-			}
-		}
-
+	"mouseenter .themePreview": function (event) {
+		Session.set("theme", event.target.id);
+	},
+	"mouseleave .themePreview": function () {
+		Session.set("theme", localStorage.getItem("theme"));
+	},
+	"click .themePreview": function (event) {
+		const theme = event.currentTarget.id;
 		const quiz = Session.get("questionGroup");
 		if (quiz) {
 			quiz.getConfiguration().setTheme(theme);
@@ -40,5 +36,6 @@ Template.themeSwitcher.events({
 		}
 		localStorage.setItem("theme", theme);
 		Session.set("theme", theme);
+		Session.set("currentTheme", theme);
 	}
 });

@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 App.info({
-	version: '1.1.5',
+	version: '10.10.40',
 	id: 'click.arsnova',
 	name: 'ARSnova.click',
 	description: 'Quiz-App für alle(s) !',

@@ -1,6 +1,7 @@
 variables:
   PROJECT_PATH: arsnova.click
   MIRROR_REPO: git@github.com:thm-projects/arsnova.click.git
+  NODE_ENV: production
 
 jshint:
   stage: test
@@ -40,12 +41,13 @@ build:
     - /^v[0-9]+/
   tags:
     - meteor
+  image: local-nodejs-meteor:1.4
   dependencies: []
   script:
     - test -d package-metadata && rm -rf /opt/meteor/package-metadata && mv package-metadata /opt/meteor/
     - cd "$PROJECT_PATH"
-    - printf "browser\nserver\n" > .meteor/platforms
-    - meteor --verbose build --directory --server "$STAGING_HTTP_URL" build
+    - npm install
+    - meteor build --allow-superuser --server-only --directory ../build
     - mv /opt/meteor/package-metadata "$CI_PROJECT_DIR/"
   cache:
     paths:
@@ -53,7 +55,7 @@ build:
       - $PROJECT_PATH/.meteor/local
   artifacts:
     paths:
-      - $PROJECT_PATH/build/bundle/
+      - build/bundle/
 
 deploy_staging:
   stage: deploy
@@ -64,11 +66,11 @@ deploy_staging:
   dependencies:
     - build
   script:
-    - chmod -R a+rX,ug+w "$PROJECT_PATH/build"
+    - chmod -R a+rX,ug+w build
     - eval $(ssh-agent -s)
     - mkdir ~/.ssh && echo "$STAGING_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - ssh-add <(echo "$STAGING_SSH_PRIVATE_KEY")
-    - scp -r "$PROJECT_PATH/build/bundle/"* "$STAGING_SSH_URL"
+    - scp -r build/bundle/* "$STAGING_SSH_URL"
   environment: staging
 
 deploy_production:
@@ -80,11 +82,11 @@ deploy_production:
   dependencies:
     - build
   script:
-    - chmod -R a+rX,ug+w "$PROJECT_PATH/build"
+    - chmod -R a+rX,ug+w build
     - eval $(ssh-agent -s)
     - mkdir ~/.ssh && echo "$PRODUCTION_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - ssh-add <(echo "$PRODUCTION_SSH_PRIVATE_KEY")
-    - scp -r "$PROJECT_PATH/build/bundle/"* "$PRODUCTION_SSH_URL"
+    - scp -r build/bundle/* "$PRODUCTION_SSH_URL"
   environment: production
 
 sync_mirror:

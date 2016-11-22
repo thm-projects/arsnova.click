@@ -68,6 +68,7 @@ Meteor.startup(function () {
 		$.getScript('/lib/highlight.pack.min.js');
 		$.getScript('/lib/marked.min.js');
 		TAPi18n.setLanguage(getUserLanguage());
+		TAPi18n.precacheBundle = true;
 		navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 		document.onkeyup = function (event) {
 			if (event.keyCode === 9) {

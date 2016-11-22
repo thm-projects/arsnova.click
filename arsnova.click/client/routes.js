@@ -61,7 +61,7 @@ export function cleanUp() {
 Router.configure({
 	layoutTemplate: "layout",
 	loadingTemplate: "loading",
-	waitOn: function () {
+	subscriptions: function () {
 		const subscriptions = [
 			subsCache.subscribe('HashtagsCollection.public'),
 			subsCache.subscribe('BannedNicksCollection.public'),

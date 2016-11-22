@@ -98,7 +98,7 @@ export function calculateTitelHeight() {
 
 	$('.titel').css('margin-top', fixedTop.outerHeight() * 1.1);
 
-	const marginTop = $('.row-padding-bottom').outerHeight(true) || fixedTop.outerHeight() * 1.1;
+	const marginTop = $('.row-padding-bottom').outerHeight(true) || fixedTop.outerHeight();
 	var finalHeight = $(window).height() - marginTop - navbarFooterHeight - footerHeight;
 	container.css("height", finalHeight);
 	if (!$('.row-padding-bottom').outerHeight()) {

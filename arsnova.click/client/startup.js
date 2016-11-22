@@ -66,12 +66,9 @@ Meteor.startup(function () {
 	if (Meteor.isClient) {
 		navigator.serviceWorker.register('/serviceWorker.js').then().catch(error => console.log(error));
 		$.getScript('/lib/highlight.pack.min.js');
-		console.log("requested hightlight js");
 		$.getScript('/lib/marked.min.js');
-		console.log("requested marked js");
 		TAPi18n.setLanguage(getUserLanguage());
 		navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
-		console.log("added navigator vibrate api");
 		document.onkeyup = function (event) {
 			if (event.keyCode === 9) {
 				$(".focused").removeClass("focused");

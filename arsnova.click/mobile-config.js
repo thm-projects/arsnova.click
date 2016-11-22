@@ -24,6 +24,9 @@ App.info({
 	website: 'https://arsnova.click'
 });
 
+App.setPreference('Orientation', 'portrait');
+App.setPreference('DisallowOverscroll', 'true');
+
 App.icons({
 	'iphone': 'public/images/ios/icon_iphone_1x.png',
 	'iphone_2x': 'public/images/ios/icon_iphone_2x.png',

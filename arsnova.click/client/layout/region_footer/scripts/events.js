@@ -360,6 +360,9 @@ Template.contactHeaderBar.events({
 	},
 	"click #data-privacy": function () {
 		Router.go("/dataprivacy");
+	},
+	"click #blog": function () {
+		window.open("https://arsnova.click/blog/");
 	}
 });
 

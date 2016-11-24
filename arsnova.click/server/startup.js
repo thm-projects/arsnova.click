@@ -26,6 +26,9 @@ import {ConnectionStatusCollection} from '/lib/connection/collection.js';
 import {forbiddenNicks} from './forbiddenNicks.js';
 import {nickCategories} from './nickCategories.js';
 import {themes} from '/shared/themes.js';
+import phantomjs from 'phantomjs';
+import * as childProcess from 'child_process';
+import process from 'process';
 
 if (Meteor.isServer) {
 	Meteor.startup(function () {
@@ -94,13 +97,12 @@ if (Meteor.isServer) {
 		console.log("removed old connection status documents successfully");
 		Meteor.defer(function () {
 			console.log("generating preview images of all themes in all languages");
-			const phantomjs = Npm.require('phantomjs'),
-				  spawn = Npm.require('child_process').spawn,
-				  fs = require('fs');
+			const spawn = childProcess.spawn;
+			const languages = TAPi18n.getLanguages();
 
 			themes.forEach(function (theme) {
-				for (const languageKey in TAPi18n.languages_names) {
-					if (TAPi18n.languages_names.hasOwnProperty(languageKey)) {
+				for (const languageKey in languages) {
+					if (languages.hasOwnProperty(languageKey)) {
 						console.log("generating image for theme " + theme.id + " and language " + languageKey);
 						spawn(phantomjs.path, [process.cwd() + '/assets/app/phantomDriver.js', Meteor.absoluteUrl() + "preview/", theme.id, languageKey]);
 					}

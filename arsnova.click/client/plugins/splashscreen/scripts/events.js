@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {showFullscreenPicture} from './lib.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
@@ -41,8 +42,7 @@ Template.questionPreviewSplashscreen.events({
 
 Template.showHashtagsSplashscreen.events({
 	"click .js-my-hash": function (event) {
-		var hashtag = $(event.currentTarget).text();
-		Session.set("questionGroup", localData.reenterSession(hashtag));
+		Session.set("questionGroup", localData.reenterSession($(event.currentTarget).text()));
 		hashtagLib.hashtagSplashscreen.destroy();
 		if (Session.get("questionGroup").isValid()) {
 			sessionStorage.setItem("overrideValidQuestionRedirect", true);

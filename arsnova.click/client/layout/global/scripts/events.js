@@ -15,13 +15,18 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Tracker} from 'meteor/tracker';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection, hashtagSchema} from '/lib/hashtags/collection.js';
 import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
 import {resetConnectionIndication, startConnectionIndication, getRTT} from './lib.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
+import * as localData from '/lib/local_storage.js';
 
 Template.connectionQualityHeader.events({
 	"click #connectionQualityHeader": function () {

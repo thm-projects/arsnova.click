@@ -1,9 +1,9 @@
-
+import fs from 'fs';
+import process from 'process';
 
 Router.route("/server/preview/:themeName/:language", function () {
-	const fs = require('fs'),
-		  self = this,
-		  path = process.cwd() + '/arsnova_click_preview_' + self.params.themeName + "_" + self.params.language + '.png';
+	const self = this,
+		path = process.cwd() + '/arsnova_click_preview_' + self.params.themeName + "_" + self.params.language + '.png';
 
 	fs.access(path, function (error) {
 		if (error) {
@@ -11,12 +11,12 @@ Router.route("/server/preview/:themeName/:language", function () {
 			self.response.writeHead(404);
 			self.response.end("404 - File not found");
 		} else {
-			fs.readFile(path, function(err, data) {
+			fs.readFile(path, function (err, data) {
 				if (err) {
 					throw err;
 				}
 				self.response.end(data);
 			});
 		}
-	})
-}, { where: "server" });
+	});
+}, {where: "server"});

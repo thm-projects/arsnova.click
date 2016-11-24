@@ -17,6 +17,7 @@
 
 import {Template} from 'meteor/templating';
 import {Session} from 'meteor/session';
+import {TAPi18n} from 'meteor/tap:i18n';
 import {themes} from '/shared/themes.js';
 
 Template.themeSwitcher.helpers({

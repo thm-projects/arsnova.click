@@ -18,16 +18,13 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {Tracker} from 'meteor/tracker';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import * as localData from '/lib/local_storage.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as lib from './lib.js';
 
 Template.hashtagManagement.events({
 	"click .js-reactivate-hashtag": function (event) {
-		var hashtag = $(event.currentTarget).parent().parent()[0].id;
-		Session.set("questionGroup", localData.reenterSession(hashtag));
+		Session.set("questionGroup", localData.reenterSession($(event.currentTarget).parent().parent()[0].id));
 		lib.addHashtag(Session.get("questionGroup"));
 	},
 	"click .js-delete": function (event) {
@@ -52,8 +49,7 @@ Template.hashtagManagement.events({
 		});
 	},
 	"click .startQuiz": function (event) {
-		var hashtag = $(event.currentTarget).parents(".hashtagManagementRow").attr("id");
-		Session.set("questionGroup", localData.reenterSession(hashtag));
+		Session.set("questionGroup", localData.reenterSession($(event.currentTarget).parents(".hashtagManagementRow").attr("id")));
 		if (Session.get("questionGroup").isValid()) {
 			sessionStorage.setItem("overrideValidQuestionRedirect", true);
 		}

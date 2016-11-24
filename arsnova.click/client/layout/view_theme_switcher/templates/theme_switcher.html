@@ -4,7 +4,7 @@
             <div class="row distance-top">
                 {{#each themes}}
                     <div class="col-xs-12 col-sm-6 themePreview {{#if isThemeSelected this.id}}selectedTheme{{/if}}" id="{{this.id}}">
-                        <img src="/server/preview/{{this.id}}/{{getLanguageTag}}" alt="Preview of theme {{_ this.name}}" />
+                        <img src="/server/preview/{{this.id}}/{{getLanguageTag}}" alt="Preview of theme {{_ this.name}}" class="imagePreviewFile" />
                         <span class="text-light">{{_ this.description}}</span>
                     </div>
                 {{/each}}

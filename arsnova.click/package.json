@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "babel-runtime": "^6.18.0",
-    "casperjs": "^1.1.3",
     "meteor-node-stubs": "^0.2.4",
     "phantomjs": "^2.1.7",
     "webpage": "^0.3.0"

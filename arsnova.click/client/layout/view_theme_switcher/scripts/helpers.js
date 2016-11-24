@@ -17,7 +17,7 @@
 
 import {Template} from 'meteor/templating';
 import {Session} from 'meteor/session';
-import {themes} from './lib.js';
+import {themes} from '/shared/themes.js';
 
 Template.themeSwitcher.helpers({
 	themes: function () {
@@ -25,5 +25,8 @@ Template.themeSwitcher.helpers({
 	},
 	isThemeSelected: function (themeName) {
 		return Session.get("currentTheme") === themeName;
+	},
+	getLanguageTag: function () {
+		return TAPi18n.getLanguage();
 	}
 });

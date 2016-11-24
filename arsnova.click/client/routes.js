@@ -17,6 +17,7 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
+import {TAPi18n} from 'meteor/tap:i18n';
 import {SubsManager} from 'meteor/meteorhacks:subs-manager';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
@@ -92,7 +93,6 @@ Router.onStop(function () {
 		localStorage.setItem("lastPage", lastRoute);
 	}
 });
-
 Router.onBeforeAction(function () {
 	try {
 		localData.initializePrivateKey();
@@ -120,7 +120,9 @@ Router.onBeforeAction(function () {
 			theme = configDoc.theme;
 		}
 	}
-	Session.set("theme", theme);
+	if (!Session.get("overrideTheme")) {
+		Session.set("theme", theme);
+	}
 	this.next();
 });
 
@@ -159,12 +161,6 @@ Router.route('/', {
 				return {titelText: 'global.arsnova_slogan'};
 			}
 		});
-		this.render("titel", {
-			to: "header.title",
-			data: function () {
-				return {titelText: 'global.arsnova_slogan'};
-			}
-		});
 		this.render('home');
 	}
 });
@@ -178,6 +174,21 @@ Router.route('/hashtagmanagement', {
 			}
 		});
 		this.render('hashtagManagement');
+	}
+});
+
+Router.route('/preview/:themeName/:language', {
+	action: function () {
+		this.render("titel", {
+			to: "header.title",
+			data: function () {
+				return {titelText: 'global.arsnova_slogan'};
+			}
+		});
+		this.render('home');
+		Session.set("theme", Router.current().params.themeName);
+		Session.set("overrideTheme", true);
+		TAPi18n.setLanguage(Router.current().params.language);
 	}
 });
 

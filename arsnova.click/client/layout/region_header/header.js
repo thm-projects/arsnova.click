@@ -145,6 +145,9 @@ Template.header.events({
 
 Template.header.onRendered(function () {
 	this.autorun(function () {
+		if (Session.get("overrideTheme")) {
+			return;
+		}
 		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 		if (localStorage.getItem("theme")) {
 			Session.set("theme", localStorage.getItem("theme"));

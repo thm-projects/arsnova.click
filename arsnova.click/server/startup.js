@@ -18,12 +18,14 @@
 import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {WebApp} from 'meteor/webapp';
+import {TAPi18n} from 'meteor/tap:i18n';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {BannedNicksCollection} from '/lib/banned_nicks/collection.js';
 import {NicknameCategoriesCollection} from '/lib/nickname_categories/collection.js';
 import {ConnectionStatusCollection} from '/lib/connection/collection.js';
 import {forbiddenNicks} from './forbiddenNicks.js';
 import {nickCategories} from './nickCategories.js';
+import {themes} from '/shared/themes.js';
 
 if (Meteor.isServer) {
 	Meteor.startup(function () {
@@ -90,6 +92,22 @@ if (Meteor.isServer) {
 		console.log("removing old connection status documents");
 		ConnectionStatusCollection.remove({});
 		console.log("removed old connection status documents successfully");
+		Meteor.defer(function () {
+			console.log("generating preview images of all themes in all languages");
+			const phantomjs = Npm.require('phantomjs'),
+				  spawn = Npm.require('child_process').spawn,
+				  fs = require('fs');
+
+			themes.forEach(function (theme) {
+				for (const o in TAPi18n.languages_names) {
+					if (TAPi18n.languages_names.hasOwnProperty(o)) {
+						console.log("generating image for theme " + theme.id + " and language " + o);
+						spawn(phantomjs.path, [process.cwd() + '/assets/app/phantomDriver.js', Meteor.absoluteUrl() + "preview/", theme.id, o]);
+					}
+				}
+			});
+			console.log("preview images generated");
+		});
 		console.log("Server startup successful.");
 	});
 }

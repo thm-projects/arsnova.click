@@ -17,6 +17,8 @@
 
 import {Template} from 'meteor/templating';
 import {showFullscreenPicture} from './lib.js';
+import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
+import * as localData from '/lib/local_storage.js';
 
 Template.questionAndAnswerSplashscreen.events({
 	"click .resizeableImage": function (event) {
@@ -34,5 +36,25 @@ Template.readingConfirmedSplashscreen.events({
 Template.questionPreviewSplashscreen.events({
 	"click .resizeableImage": function (event) {
 		showFullscreenPicture(event);
+	}
+});
+
+Template.showHashtagsSplashscreen.events({
+	"click .js-my-hash": function (event) {
+		var hashtag = $(event.currentTarget).text();
+		Session.set("questionGroup", localData.reenterSession(hashtag));
+		hashtagLib.hashtagSplashscreen.destroy();
+		if (Session.get("questionGroup").isValid()) {
+			sessionStorage.setItem("overrideValidQuestionRedirect", true);
+		}
+		hashtagLib.addHashtag(Session.get("questionGroup"));
+	},
+	"click #js-btn-showHashtagManagement": function () {
+		hashtagLib.hashtagSplashscreen.destroy();
+		Router.go("/hashtagmanagement");
+	},
+	"click #closeButton": function () {
+		$('.showHashtagsSplashscreen').remove();
+		$('.modal-backdrop').remove();
 	}
 });

@@ -87,6 +87,16 @@ export function resetConnectionIndication() {
 }
 
 export function startConnectionIndication() {
+	if (Router.current() && Router.current().route.getName() === "preview.:themeName.:language") {
+		connectionStatus.dbConnection.totalCount = 5;
+		connectionStatus.dbConnection.currentCount = 5;
+		connectionStatus.dbConnection.serverRTT = 1;
+		connectionStatus.dbConnection.serverRTTtotal = 1;
+		connectionStatus.localStorage = true;
+		connectionStatus.sessionStorage = true;
+		Session.set("connectionStatus", connectionStatus);
+		return;
+	}
 	if (hasRunConnectionStatus) {
 		return;
 	}
@@ -123,6 +133,9 @@ export function startConnectionIndication() {
 }
 
 export function getRTT() {
+	if (Router.current() && Router.current().route.getName() === "preview.:themeName.:language") {
+		return;
+	}
 	startTime = new Date().getTime();
 	/*Meteor.call("Connection.sendConnectionStatus", localData.getPrivateKey());*/
 	$.ajax({

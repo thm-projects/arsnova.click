@@ -8,6 +8,7 @@ Router.route("/server/preview/:themeName/:language", function () {
 	fs.access(path, function (error) {
 		if (error) {
 			/* File not found (perhaps server is currently restarting) */
+			self.response.writeHead(404);
 			self.response.end("404 - File not found");
 		} else {
 			fs.readFile(path, function(err, data) {

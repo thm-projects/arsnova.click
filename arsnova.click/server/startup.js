@@ -99,10 +99,10 @@ if (Meteor.isServer) {
 				  fs = require('fs');
 
 			themes.forEach(function (theme) {
-				for (const o in TAPi18n.languages_names) {
-					if (TAPi18n.languages_names.hasOwnProperty(o)) {
-						console.log("generating image for theme " + theme.id + " and language " + o);
-						spawn(phantomjs.path, [process.cwd() + '/assets/app/phantomDriver.js', Meteor.absoluteUrl() + "preview/", theme.id, o]);
+				for (const languageKey in TAPi18n.languages_names) {
+					if (TAPi18n.languages_names.hasOwnProperty(languageKey)) {
+						console.log("generating image for theme " + theme.id + " and language " + languageKey);
+						spawn(phantomjs.path, [process.cwd() + '/assets/app/phantomDriver.js', Meteor.absoluteUrl() + "preview/", theme.id, languageKey]);
 					}
 				}
 			});

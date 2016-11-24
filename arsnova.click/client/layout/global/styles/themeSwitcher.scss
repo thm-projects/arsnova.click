@@ -224,6 +224,30 @@
 
 	$fg-free-text-header-color: $default-text-color;
 
+	$colorChangingArs0: white;
+	$colorChangingArs25: $warning;
+	$colorChangingArs50: $info;
+	$colorChangingArs75: $input-background-color;
+	$colorChangingArs100: white;
+
+	$colorChangingNova0: $input-background-color;
+	$colorChangingNova25: white;
+	$colorChangingNova50: $warning;
+	$colorChangingNova75: $info;
+	$colorChangingNova100: $input-background-color;
+
+	$colorChangingDot0: $info;
+	$colorChangingDot25: $input-background-color;
+	$colorChangingDot50: white;
+	$colorChangingDot75: $warning;
+	$colorChangingDot100: $info;
+
+	$colorChangingClick0: $warning;
+	$colorChangingClick25: $info;
+	$colorChangingClick50: $input-background-color;
+	$colorChangingClick75: white;
+	$colorChangingClick100: $warning;
+
 	@if ($name == "theme-arsnova-dot-click-contrast"){
 		$background-color: #23425b;
 		$warning: #991d1d;
@@ -998,6 +1022,86 @@
 				color: $fg-colorChangingOwnNick100;
 				transform: translateY(0%);
 				-webkit-transform: translateY(0%);
+			}
+		}
+		.color-changing-ars {
+			animation-name: #{$name}_colorChangingArs;
+		}
+		.color-changing-nova {
+			animation-name: #{$name}_colorChangingNova;
+		}
+		.color-changing-dot {
+			animation-name: #{$name}_colorChangingDot;
+		}
+		.color-changing-click {
+			animation-name: #{$name}_colorChangingClick;
+		}
+		@keyframes #{$name}_colorChangingArs {
+			0% {
+				color: white;
+			}
+			25% {
+				color: $input-background-color;
+			}
+			50% {
+				color: white;
+			}
+			75% {
+				color: white;
+			}
+			100% {
+				color: white;
+			}
+		}
+		@keyframes #{$name}_colorChangingNova {
+			0% {
+				color: white;
+			}
+			25% {
+				color: white;
+			}
+			50% {
+				color: $input-background-color;
+			}
+			75% {
+				color: white;
+			}
+			100% {
+				color: white;
+			}
+		}
+		@keyframes #{$name}_colorChangingDot {
+			0% {
+				color: white;
+			}
+			25% {
+				color: white;
+			}
+			50% {
+				color: white;
+			}
+			75% {
+				color: $input-background-color;
+			}
+			100% {
+				color: white;
+			}
+		}
+		@keyframes #{$name}_colorChangingClick {
+			0% {
+				color: white;
+			}
+			25% {
+				color: white;
+			}
+			50% {
+				color: white;
+			}
+			75% {
+				color: white;
+			}
+			100% {
+				color: $input-background-color;
 			}
 		}
 		.button-markdown-shadow, .button-markdown {

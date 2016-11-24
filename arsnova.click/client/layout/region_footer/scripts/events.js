@@ -452,8 +452,8 @@ Template.footerNavButtons.events({
 						firstFailedIndex = questionItem.getQuestionIndex();
 					}
 				});
-				if (firstFailedIndex) {
-					Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, firstFailedIndex);
+				if (!isNaN(firstFailedIndex)) {
+					Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, parseInt(firstFailedIndex));
 					Router.go("/" + Router.current().params.quizName + "/question");
 				} else {
 					Router.go("/" + Router.current().params.quizName + "/settimer");

@@ -50,6 +50,9 @@ export function getUserLanguage() {
 	} catch (err) {
 		// Private mode enabled. Error splashscreen is shown in route.js
 	}
+	if (Router.current() && Router.current().params.language) {
+		selectedLang = Router.current().params.language;
+	}
 	return selectedLang;
 }
 
@@ -64,11 +67,12 @@ export function createTabIndices() {
 
 Meteor.startup(function () {
 	if (Meteor.isClient) {
-		navigator.serviceWorker.register('/serviceWorker.js').then().catch(error => console.log(error));
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('/serviceWorker.js').then().catch(error => console.log(error));
+		}
 		$.getScript('/lib/highlight.pack.min.js');
 		$.getScript('/lib/marked.min.js');
 		TAPi18n.setLanguage(getUserLanguage());
-		TAPi18n.precacheBundle = true;
 		navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 		document.onkeyup = function (event) {
 			if (event.keyCode === 9) {

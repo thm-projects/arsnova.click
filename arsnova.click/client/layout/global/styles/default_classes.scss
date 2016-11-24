@@ -30,12 +30,9 @@
 }
 
 .center-vertical {
+  top: 25%;
   position: absolute;
   width: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  overflow-y: auto;
-  overflow-x: hidden;
 }
 
 .center-vertical-non-scrollable {
@@ -263,25 +260,9 @@ select:-moz-focusring {
 .color-changing-ars, .color-changing-nova, .color-changing-dot, .color-changing-click {
   width: 100px;
   height: 100px;
-  animation-duration: 14s;
+  animation-duration: 7s;
   animation-iteration-count: infinite;
   font-weight: bold;
-}
-
-.color-changing-ars {
-  animation-name: colorChangingArs;
-}
-
-.color-changing-nova {
-  animation-name: colorChangingNova;
-}
-
-.color-changing-dot {
-  animation-name: colorChangingDot;
-}
-
-.color-changing-click {
-  animation-name: colorChangingClick;
 }
 
 .popover-title, .popover.bottom {

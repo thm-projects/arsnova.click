@@ -18,7 +18,7 @@ phantom.addCookie({
 page.open(url, function () {
 	console.log("Requesting page load: ", url);
 	page.onCallback = function() {
-		console.log('Main page is loaded and ready');
+		console.log('Page ( ' + url + ' ) is loaded and ready');
 		page.render('arsnova_click_preview_' + args[2] + '_' + args[3] + '.png');
 		phantom.exit();
 	};

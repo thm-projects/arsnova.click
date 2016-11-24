@@ -103,8 +103,14 @@ if (Meteor.isServer) {
 			themes.forEach(function (theme) {
 				for (const languageKey in languages) {
 					if (languages.hasOwnProperty(languageKey)) {
-						console.log("generating image for theme " + theme.id + " and language " + languageKey);
-						spawn(phantomjs.path, [process.cwd() + '/assets/app/phantomDriver.js', Meteor.absoluteUrl() + "preview/", theme.id, languageKey]);
+						console.log("invoking phantomjs to generate image for theme " + theme.id + " and language " + languageKey);
+						const command = spawn(phantomjs.path, [process.cwd() + '/assets/app/phantomDriver.js', Meteor.absoluteUrl() + "preview/", theme.id, languageKey]);
+						command.stdout.on("data", function (data) {
+							console.log("phantomjs (stdout): ", data.toString());
+						});
+						command.stderr.on("data", function (data) {
+							console.log("phantomjs (stderr): ", data.toString());
+						});
 					}
 				}
 			});

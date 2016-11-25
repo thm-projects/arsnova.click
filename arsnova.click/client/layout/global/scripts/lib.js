@@ -23,16 +23,17 @@ const standardAnimationDelay = 200;
 const standardFadeInAnimationTime = 150;
 const timeoutHolder = [];
 
-export const connectionStatus = {
-	webSocket: Meteor.status(),
-	localStorage: false,
-	sessionStorage: false,
-	dbConnection: {
-		totalCount: 5,
-		currentCount: 1,
-		serverRTT: 0,
-		serverRTTtotal: 0
-	}
+export const connectionStatus = {};
+connectionStatus.webSocket = {
+	connected: true
+};
+connectionStatus.localStorage = true;
+connectionStatus.sessionStorage = true;
+connectionStatus.dbConnection = {
+	totalCount: 5,
+	currentCount: 5,
+	serverRTT: 1,
+	serverRTTtotal: 1
 };
 let hasRunConnectionStatus = false;
 let restartTimeout = null;
@@ -88,15 +89,17 @@ export function resetConnectionIndication() {
 
 export function startConnectionIndication() {
 	if (Router.current() && Router.current().route.getName() === "preview.:themeName.:language") {
-		connectionStatus.dbConnection.totalCount = 5;
-		connectionStatus.dbConnection.currentCount = 5;
-		connectionStatus.dbConnection.serverRTT = 1;
-		connectionStatus.dbConnection.serverRTTtotal = 1;
-		connectionStatus.localStorage = true;
-		connectionStatus.sessionStorage = true;
-		Session.set("connectionStatus", connectionStatus);
 		return;
 	}
+	connectionStatus.webSocket = Meteor.status();
+	connectionStatus.localStorage = false;
+	connectionStatus.sessionStorage = false;
+	connectionStatus.dbConnection = {
+		totalCount: 5,
+		currentCount: 1,
+		serverRTT: 0,
+		serverRTTtotal: 0
+	};
 	if (hasRunConnectionStatus) {
 		return;
 	}
@@ -113,22 +116,6 @@ export function startConnectionIndication() {
 	} catch (ex) {
 		connectionStatus.sessionStorage = false;
 	}
-	/*
-	 ConnectionStatusCollection.find().observeChanges({
-	 added: function (id, doc) {
-	 if (doc.key === localData.getPrivateKey()) {
-	 connectionStatus.dbConnection.serverRTTtotal = (connectionStatus.dbConnection.serverRTTtotal + (new Date().getTime() - startTime));
-	 connectionStatus.dbConnection.serverRTT = 1 / connectionStatus.dbConnection.currentCount * connectionStatus.dbConnection.serverRTTtotal;
-	 Meteor.call("Connection.receivedConnectionStatus", localData.getPrivateKey());
-	 if (connectionStatus.dbConnection.currentCount < connectionStatus.dbConnection.totalCount) {
-	 connectionStatus.dbConnection.currentCount++;
-	 setTimeout(startRTT, 200);
-	 }
-	 Session.set("connectionStatus", connectionStatus);
-	 }
-	 }
-	 });
-	 */
 	Session.set("connectionStatus", connectionStatus);
 }
 
@@ -137,7 +124,6 @@ export function getRTT() {
 		return;
 	}
 	startTime = new Date().getTime();
-	/*Meteor.call("Connection.sendConnectionStatus", localData.getPrivateKey());*/
 	$.ajax({
 		url: "/connection-test",
 		cache: false,

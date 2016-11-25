@@ -22,6 +22,11 @@ page.open(url, function () {
 		page.render('arsnova_click_preview_' + args[2] + '_' + args[3] + '.png');
 		phantom.exit();
 	};
+	page.evaluate(function () {
+		setTimeout(function () {
+			callPhantom();
+		}, 3000);
+	})
 });
 page.onConsoleMessage = function (message) {
 	console.log('Received message: ' + message);

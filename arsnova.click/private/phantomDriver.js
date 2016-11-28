@@ -5,8 +5,8 @@ const system = require('system'),
 
 const host = /localhost/.test(args[1]) ? "localhost" : /staging.arsnova.click/.test(args[1]) ? "staging.arsnova.click" : /arsnova.click/.test(args[1]) ? "arsnova.click" : "";
 page.viewportSize = {
-	width: 1920,
-	height: 1080
+	width: 1280,
+	height: 720
 };
 phantom.addCookie({
 	'name'     : 'cookieconsent_dismissed',

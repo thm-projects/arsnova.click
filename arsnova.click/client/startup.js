@@ -74,6 +74,9 @@ Meteor.startup(function () {
 		$.getScript('/lib/marked.min.js');
 		TAPi18n.setLanguage(getUserLanguage());
 		navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+		$(function() {
+			FastClick.attach(document.body);
+		});
 		document.onkeyup = function (event) {
 			if (event.keyCode === 9) {
 				$(".focused").removeClass("focused");

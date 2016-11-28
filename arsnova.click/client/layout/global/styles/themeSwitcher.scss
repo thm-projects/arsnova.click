@@ -1025,15 +1025,19 @@
 			}
 		}
 		.color-changing-ars {
+			color: $fg-footer-info-bar;
 			animation-name: #{$name}_colorChangingArs;
 		}
 		.color-changing-nova {
+			color: $fg-footer-info-bar;
 			animation-name: #{$name}_colorChangingNova;
 		}
 		.color-changing-dot {
+			color: $fg-footer-info-bar;
 			animation-name: #{$name}_colorChangingDot;
 		}
 		.color-changing-click {
+			color: $fg-footer-info-bar;
 			animation-name: #{$name}_colorChangingClick;
 		}
 		@keyframes #{$name}_colorChangingArs {

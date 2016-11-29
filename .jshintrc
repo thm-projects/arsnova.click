@@ -20,6 +20,7 @@
     "ReactiveCountdown": false,
     "App": false,
     "console": false,
+    "FastClick": false,
     "Debug": true, // true => Writable object
 
     "closeSplashscreen": true,

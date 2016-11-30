@@ -69,7 +69,7 @@ Template.soundConfig.events({
 
 		configDoc.music.finishSoundTitle = songTitle;
 
-		if (songTitle !== "Silence"){
+		if (songTitle !== "Silence") {
 			lib.setFinishSoundTitle(songTitle);
 			lib.finishSound.play();
 		}

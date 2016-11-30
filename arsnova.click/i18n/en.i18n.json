@@ -484,6 +484,9 @@
     "sound": {
       "title": "Countdown Sound",
       "lobby_music": "Sound in the quiz lobby",
+      "finish_music": "Sound at the end of the countdown",
+      "whistle": "Whistle",
+      "silence": "No sound",
       "volume": "Volume",
       "inactive": "Sound is inactive",
       "active": "Sound is active",

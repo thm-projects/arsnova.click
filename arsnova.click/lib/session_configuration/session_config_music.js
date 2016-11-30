@@ -21,7 +21,6 @@ const volume = Symbol("volume");
 const title = Symbol("title");
 const isLobbyEnabled = Symbol("isLobbyEnabled");
 const lobbyTitle = Symbol("lobbyTitle");
-const isFinishSoundEnabled = Symbol("isFinishSoundEnabled");
 const finishSoundTitle = Symbol("finishSoundTitle");
 
 export class MusicSessionConfiguration {
@@ -32,7 +31,6 @@ export class MusicSessionConfiguration {
 		this[title] = options.music.title || "Song1";
 		this[isLobbyEnabled] = typeof options.music.isLobbyEnabled === "undefined" ? true : options.music.isLobbyEnabled;
 		this[lobbyTitle] = options.music.lobbyTitle || "LobbySong1";
-		this[isFinishSoundEnabled] = typeof options.music.isFinishSoundEnabled === "undefined" ? true : options.music.isFinishSoundEnabled;
 		this[finishSoundTitle] = options.music.lobbyTitle || "Whistle";
 	}
 
@@ -44,7 +42,6 @@ export class MusicSessionConfiguration {
 			title: this.getTitle(),
 			isLobbyEnabled: this.getIsLobbyEnabled(),
 			lobbyTitle: this.getLobbyTitle(),
-			isFinishSoundEnabled: this.getIsFinishSoundEnabled(),
 			finishSoundTitle: this.getFinishSoundTitle()
 		};
 	}
@@ -118,17 +115,6 @@ export class MusicSessionConfiguration {
 			throw new Error("Invalid argument list for MusicSessionConfiguration.setTitle");
 		}
 		this[lobbyTitle] = value;
-	}
-
-	getIsFinishSoundEnabled () {
-		return this[isLobbyEnabled];
-	}
-
-	setIsFinishSoundEnabled (value) {
-		if (typeof value !== "boolean") {
-			throw new Error("Invalid argument list for MusicSessionConfiguration.setIsFinishSoundEnabled");
-		}
-		this[isFinishSoundEnabled] = value;
 	}
 
 	getFinishSoundTitle () {

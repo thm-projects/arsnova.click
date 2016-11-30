@@ -48,9 +48,6 @@ export const SessionConfigurationSchema = new SimpleSchema({
 	"music.finishSoundTitle": {
 		type: String
 	},
-	"music.isFinishSoundEnabled": {
-		type: Boolean
-	},
 	nicks: {
 		type: Object
 	},

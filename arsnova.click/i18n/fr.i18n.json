@@ -484,6 +484,9 @@
     "sound": {
       "title": "Son pendant le compte à rebours",
       "lobby_music": "Son dans le hall quiz",
+      "finish_music": "Son à la fin du compte à rebours",
+      "whistle": "Sifflet",
+      "silence": "Pas de son",
       "volume": "Attribuer le volume",
       "inactive": "Son désactivé",
       "active": "Son activé",

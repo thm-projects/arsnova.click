@@ -484,6 +484,9 @@
     "sound": {
       "title": "Sonido durante cuenta atrás",
       "lobby_music": "El sonido en el vestíbulo concurso",
+      "finish_music": "Sonido al final de la cuenta atrás",
+      "whistle": "Silbar",
+      "silence": "Sin sonido",
       "volume": "Predeterminar volumen",
       "inactive": "Sonido está desactivado",
       "active": "Sonido está activado",

@@ -496,6 +496,9 @@
     "sound": {
       "title": "Sound während des Countdowns",
       "lobby_music": "Sound in der Quiz Lobby",
+      "finish_music": "Sound zum Ende des Countdowns",
+      "whistle": "Pfeifen",
+      "silence": "Kein Ton",
       "volume": "Lautstärke vorgeben",
       "inactive": "Sound ist abgeschaltet",
       "active": "Sound ist aktiviert",

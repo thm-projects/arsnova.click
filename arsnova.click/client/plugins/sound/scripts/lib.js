@@ -21,11 +21,6 @@ export let buzzsound1 = null;
 export let lobbySound = null;
 export let finishSound = null;
 
-// TODO remove
-export const whistleSound = new buzz.sound('/sounds/whistle.mp3', {
-	volume: Session.get("slider2") || 40
-});
-
 export function setBuzzsound1(songName) {
 	var fileName = "";
 	switch (songName) {
@@ -76,7 +71,7 @@ export function setLobbySound(songName, autostart = true) {
 
 export function setFinishSoundTitle(songName) {
 	var fileName = "";
-
+	console.log(songName);
 	switch (songName) {
 		case "Whistle":
 			fileName = "whistle.mp3";

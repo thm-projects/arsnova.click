@@ -31,7 +31,7 @@ export class MusicSessionConfiguration {
 		this[title] = options.music.title || "Song1";
 		this[isLobbyEnabled] = typeof options.music.isLobbyEnabled === "undefined" ? true : options.music.isLobbyEnabled;
 		this[lobbyTitle] = options.music.lobbyTitle || "LobbySong1";
-		this[finishSoundTitle] = options.music.lobbyTitle || "Whistle";
+		this[finishSoundTitle] = options.music.finishSoundTitle || "Whistle";
 	}
 
 	serialize () {

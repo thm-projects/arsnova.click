@@ -70,6 +70,10 @@
           "title": "License",
           "text": "ARSnova.click is a free webservice (Software as a Service). The software is <a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a> und is distributed under the <a href='http://www.gnu.org/licenses/gpl-3.0-standalone.html' target='_blank'>GNU General Public License Version 3</a>."
         },
+        "musicLicense": {
+          "title": "Music license",
+          "text": "The sound <a href='http://soundbible.com/2148-Chinese-Gong.html' target='_blank'>Chinese Gong</a> by Daniel Simon is licensed under <a href='https://creativecommons.org/licenses/by/3.0/' target='_blank'>CC BY 3.0</a>."
+        },
         "warranty": {
           "title": "Warranty",
           "text": "We are trying to maintain the online service of ARSnova.click reliable but we cannot guarantee that. The quiz files are located exclusively in the local browser storage of the quiz owner. We do not give any legal responsibility for any data loss for example via deleting the local browser storage or by illegal usage of the service."
@@ -480,6 +484,9 @@
     "sound": {
       "title": "Countdown Sound",
       "lobby_music": "Sound in the quiz lobby",
+      "finish_music": "Sound at the end of the countdown",
+      "whistle": "Whistle",
+      "silence": "No sound",
       "volume": "Volume",
       "inactive": "Sound is inactive",
       "active": "Sound is active",

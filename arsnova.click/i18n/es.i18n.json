@@ -70,6 +70,10 @@
           "title": "Licencia",
           "text": "Arsnova.click es un servicio web gratuito (Software como un servicio de asistencia). El Software es de <a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>código abierto</a> y se encuentra bajo la <a href='http://www.gnu.org/licenses/gpl-3.0-standalone.html' target='_blank'>Licencia Pública General de GNU versión 3</a>."
         },
+        "musicLicense": {
+          "title": "Licencia de música",
+          "text": "El sonido <a href='http://soundbible.com/2148-Chinese-Gong.html' target='_blank'>Chinese Gong</a> de Daniel Simon está licenciado bajo <a href='https://creativecommons.org/licenses/by/3.0/' target='_blank'>CC BY 3.0</a>."
+        },
         "warranty": {
           "title": "Garantía",
           "text": "En arsnova.click nos esforzamos por proporcionar un servicio en línea confiable y sin perturbaciones, sin embargo, esto no lo podemos garantizar. Todos los datos del cuestionario son almacenados exclusivamente en la memoria del navegador del usuario que crea el cuestionario. No nos responsabilizamos por pérdida de datos, por ejemplo, al borrar la memoria del navegador, sin antes haber exportado los cuestionarios, o por uso ilegítimo del servicio."
@@ -480,6 +484,9 @@
     "sound": {
       "title": "Sonido durante cuenta atrás",
       "lobby_music": "El sonido en el vestíbulo concurso",
+      "finish_music": "Sonido al final de la cuenta atrás",
+      "whistle": "Silbar",
+      "silence": "Sin sonido",
       "volume": "Predeterminar volumen",
       "inactive": "Sonido está desactivado",
       "active": "Sonido está activado",

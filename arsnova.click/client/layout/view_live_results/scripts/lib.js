@@ -29,7 +29,8 @@ import * as localData from '/lib/local_storage.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import {buzzsound1, whistleSound, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
+import {buzzsound1, finishSound, setFinishSoundTitle, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as headerLib from "/client/layout/region_header/lib.js";
 
 export let countdown = null;
@@ -166,7 +167,14 @@ export function countdownFinish() {
 	$('.navbar-footer').show();
 	if (Session.get("soundIsPlaying")) {
 		buzzsound1.stop();
-		whistleSound.play();
+		var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+
+		if (configDoc.music.finishSoundTitle !== "Silence") {
+			setFinishSoundTitle(configDoc.music.finishSoundTitle);
+			finishSound.play();
+		}
+
+
 		Session.set("soundIsPlaying", false);
 	}
 	headerLib.calculateTitelHeight();

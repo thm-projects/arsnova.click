@@ -43,6 +43,9 @@ Template.soundConfig.onRendered(function () {
 
 	setLobbySound(lobbyTitle, false);
 
+	var finishTitle = configDoc.music.finishSoundTitle;
+	$('#finishSoundSelect').value(finishTitle);
+
 	let currentPath = Router.current().route.getName().replace(/(:quizName.)*(.:id)*/g, "");
 
 	if (currentPath === "memberlist" && configDoc.music.isLobbyEnabled) {

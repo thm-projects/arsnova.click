@@ -21,6 +21,7 @@ const volume = Symbol("volume");
 const title = Symbol("title");
 const isLobbyEnabled = Symbol("isLobbyEnabled");
 const lobbyTitle = Symbol("lobbyTitle");
+const finishSoundTitle = Symbol("finishSoundTitle");
 
 export class MusicSessionConfiguration {
 	constructor (options = {}) {
@@ -30,6 +31,7 @@ export class MusicSessionConfiguration {
 		this[title] = options.music.title || "Song1";
 		this[isLobbyEnabled] = typeof options.music.isLobbyEnabled === "undefined" ? true : options.music.isLobbyEnabled;
 		this[lobbyTitle] = options.music.lobbyTitle || "LobbySong1";
+		this[finishSoundTitle] = options.music.finishSoundTitle || "Whistle";
 	}
 
 	serialize () {
@@ -39,7 +41,8 @@ export class MusicSessionConfiguration {
 			volume: this.getVolume(),
 			title: this.getTitle(),
 			isLobbyEnabled: this.getIsLobbyEnabled(),
-			lobbyTitle: this.getLobbyTitle()
+			lobbyTitle: this.getLobbyTitle(),
+			finishSoundTitle: this.getFinishSoundTitle()
 		};
 	}
 
@@ -112,5 +115,16 @@ export class MusicSessionConfiguration {
 			throw new Error("Invalid argument list for MusicSessionConfiguration.setTitle");
 		}
 		this[lobbyTitle] = value;
+	}
+
+	getFinishSoundTitle () {
+		return this[lobbyTitle];
+	}
+
+	setFinishSoundTitle (value) {
+		if (typeof value !== "string") {
+			throw new Error("Invalid argument list for MusicSessionConfiguration.setFinishSoundTitle");
+		}
+		this[finishSoundTitle] = value;
 	}
 }

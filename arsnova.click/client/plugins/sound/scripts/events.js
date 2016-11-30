@@ -63,6 +63,23 @@ Template.soundConfig.events({
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
 	},
+	"change #finishSoundSelect": function (event) {
+		var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+		var songTitle = $(event.target).val();
+
+		configDoc.music.finishSoundTitle = songTitle;
+
+		if (songTitle !== "Silence") {
+			lib.setFinishSoundTitle(songTitle);
+			lib.finishSound.play();
+		}
+
+		Meteor.call('SessionConfiguration.setMusic', configDoc);
+		const questionItem = Session.get("questionGroup");
+		questionItem.getConfiguration().getMusicSettings().setFinishSoundTitle(songTitle);
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
+	},
 	"click #js-btn-playStopMusic": function () {
 		if (Session.get("soundIsPlaying")) {
 			lib.buzzsound1.stop();

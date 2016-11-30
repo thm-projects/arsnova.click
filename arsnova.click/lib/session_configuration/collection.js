@@ -45,6 +45,9 @@ export const SessionConfigurationSchema = new SimpleSchema({
 	"music.isLobbyEnabled": {
 		type: Boolean
 	},
+	"music.finishSoundTitle": {
+		type: String
+	},
 	nicks: {
 		type: Object
 	},

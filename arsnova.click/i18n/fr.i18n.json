@@ -70,6 +70,10 @@
           "title": "Licence",
           "text": "arsnova.click es tun service web gratuit (software comme service). Le logiciel est <a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a> et est sous la license <a href='http://www.gnu.org/licenses/gpl-3.0-standalone.html' target='_blank'>GNU General Public Version 3</a>."
         },
+        "musicLicense": {
+          "title": "Licence de musique",
+          "text": "Le son <a href='http://soundbible.com/2148-Chinese-Gong.html' target='_blank'>Chinese Gong</a> de Daniel Simon est sous licence <a href='https://creativecommons.org/licenses/by/3.0/' target='_blank'>CC BY 3.0</a>."
+        },
         "warranty": {
           "title": "Garantie",
           "text": "Nous nous sommes efforcés d'exploiter le service en ligne arsnova.click afin qu'il soit fiable et sans bug, par contre nous ne pouvons pas le garantir. Toutes les données du quiz se trouvent exclusivement dans la mémoire du browser du créateur/de la créatrice du quiz. Nous déclinons toute responsabilité quant à la perte des données, par exemple par l'effacement de la mémoire du browser sans avoir exporté les quiz ou par l'utilisation illégale du service."

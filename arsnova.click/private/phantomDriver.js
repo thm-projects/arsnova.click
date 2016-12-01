@@ -15,8 +15,8 @@ phantom.addCookie({
 	'path'     : '/',
 	'expires'  : (new Date()).getTime() + (1000 * 60 * 60)   /* <-- expires in 1 hour */
 });
-page.open(url, function () {
-	console.log("Requesting page load: ", url);
+page.open(url, function (status) {
+	console.log("Requesting page load: ", url, " with status: ", status);
 	page.onCallback = function() {
 		console.log('Page ( ' + url + ' ) is loaded and ready');
 		page.render('arsnova_click_preview_' + args[2] + '_' + args[3] + '.png');
@@ -24,10 +24,14 @@ page.open(url, function () {
 	};
 	page.evaluate(function () {
 		setTimeout(function () {
-			callPhantom();
+			if (status !== "success") {
+				location.reload();
+			} else {
+				callPhantom();
+			}
 		}, 3000);
 	})
 });
 page.onConsoleMessage = function (message) {
-	console.log('Received message: ' + message);
+	console.log('Received message from phantomjs process: ' + message);
 };

@@ -95,29 +95,27 @@ if (Meteor.isServer) {
 		console.log("removing old connection status documents");
 		ConnectionStatusCollection.remove({});
 		console.log("removed old connection status documents successfully");
-		Meteor.setTimeout(function () {
-			console.log("generating preview images of all themes in all languages");
-			const spawn = childProcess.spawn;
-			const languages = TAPi18n.getLanguages();
-			const stdoutCallback = function (data) {
-				console.log("phantomjs (stdout): ", data.toString());
-			};
-			const stderrCallback = function (data) {
-				console.log("phantomjs (stderr): ", data.toString());
-			};
+		console.log("generating preview images of all themes in all languages");
+		const spawn = childProcess.spawn;
+		const languages = TAPi18n.getLanguages();
+		const stdoutCallback = function (data) {
+			console.log("phantomjs (stdout): ", data.toString());
+		};
+		const stderrCallback = function (data) {
+			console.log("phantomjs (stderr): ", data.toString());
+		};
 
-			themes.forEach(function (theme) {
-				for (const languageKey in languages) {
-					if (languages.hasOwnProperty(languageKey)) {
-						console.log("invoking phantomjs to generate image for theme " + theme.id + " and language " + languageKey);
-						const command = spawn(phantomjs.path, [process.cwd() + '/assets/app/phantomDriver.js', Meteor.absoluteUrl() + "preview/", theme.id, languageKey]);
-						command.stdout.on("data", stdoutCallback);
-						command.stderr.on("data", stderrCallback);
-					}
+		themes.forEach(function (theme) {
+			for (const languageKey in languages) {
+				if (languages.hasOwnProperty(languageKey)) {
+					console.log("invoking phantomjs to generate image for theme " + theme.id + " and language " + languageKey);
+					const command = spawn(phantomjs.path, [process.cwd() + '/assets/app/phantomDriver.js', Meteor.absoluteUrl() + "preview/", theme.id, languageKey]);
+					command.stdout.on("data", stdoutCallback);
+					command.stderr.on("data", stderrCallback);
 				}
-			});
-			console.log("preview images generated");
-		}, 10000);
+			}
+		});
+		console.log("all phantomjs processes to generate the images have been invoked");
 		console.log("Server startup successful.");
 	});
 }

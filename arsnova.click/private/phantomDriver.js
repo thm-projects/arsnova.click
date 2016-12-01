@@ -13,10 +13,15 @@ function handle_page(url){
 	console.log("Requesting page load:", url);
 	page.open(url, function(status) {
 		const urlSeparated = url.split("/");
-		console.log('Page', url, 'is loaded and ready with status:', status);
-		setTimeout(function () {
+		page.onCallback = function() {
+			console.log('Page', url, 'is loaded and ready with status:', status);
 			page.render('arsnova_click_preview_' + urlSeparated[urlSeparated.length - 2] + '_' + urlSeparated[urlSeparated.length - 1] + '.png');
 			setTimeout(next_page, 100);
+		};
+		setTimeout(function () {
+			page.evaluate(function () {
+				callPhantom();
+			});
 		}, 500);
 	});
 }

@@ -96,10 +96,9 @@ if (Meteor.isServer) {
 		ConnectionStatusCollection.remove({});
 		console.log("server startup: removed old connection status documents successfully");
 		console.log("server startup: generating preview images of all themes in all languages");
-		const spawn = childProcess.spawn;
-		const languages = TAPi18n.getLanguages();
-		let params = [process.cwd() + '/assets/app/phantomDriver.js'];
-
+		const spawn = childProcess.spawn,
+			languages = TAPi18n.getLanguages(),
+			params = [process.cwd() + '/assets/app/phantomDriver.js'];
 		themes.forEach(function (theme) {
 			for (const languageKey in languages) {
 				if (languages.hasOwnProperty(languageKey)) {

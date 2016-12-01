@@ -36,4 +36,4 @@ function next_page(){
 	handle_page(url);
 }
 args.shift();
-next_page();
+setTimeout(next_page,100);

@@ -95,7 +95,7 @@ if (Meteor.isServer) {
 		console.log("removing old connection status documents");
 		ConnectionStatusCollection.remove({});
 		console.log("removed old connection status documents successfully");
-		Meteor.defer(function () {
+		Meteor.setTimeout(function () {
 			console.log("generating preview images of all themes in all languages");
 			const spawn = childProcess.spawn;
 			const languages = TAPi18n.getLanguages();
@@ -117,7 +117,7 @@ if (Meteor.isServer) {
 				}
 			});
 			console.log("preview images generated");
-		});
+		}, 2000);
 		console.log("Server startup successful.");
 	});
 }

@@ -117,7 +117,7 @@ if (Meteor.isServer) {
 				}
 			});
 			console.log("preview images generated");
-		}, 2000);
+		}, 10000);
 		console.log("Server startup successful.");
 	});
 }

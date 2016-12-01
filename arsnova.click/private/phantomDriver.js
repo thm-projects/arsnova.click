@@ -16,8 +16,8 @@ function handle_page(url){
 		console.log('Page', url, 'is loaded and ready with status:', status);
 		setTimeout(function () {
 			page.render('arsnova_click_preview_' + urlSeparated[urlSeparated.length - 2] + '_' + urlSeparated[urlSeparated.length - 1] + '.png');
-		}, 150);
-		setTimeout(next_page, 250);
+			setTimeout(next_page, 100);
+		}, 500);
 	});
 }
 function next_page(){

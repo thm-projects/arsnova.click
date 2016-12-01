@@ -18,6 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Tracker} from 'meteor/tracker';
 import {Router} from 'meteor/iron:router';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
@@ -169,5 +170,14 @@ Template.header.onRendered(function () {
 		} else {
 			$(".thm-logo-background").hide();
 		}
+	});
+
+	$(window).on('resize', lib.headerTrackerCallback);
+
+	$(function () {
+		setTimeout(function () {
+			console.log("timeout run up");
+			Tracker.autorun(lib.headerTrackerCallback);
+		}, 100);
 	});
 });

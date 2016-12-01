@@ -111,7 +111,7 @@ export function calculateTitelHeight() {
 	titelTracker.changed();
 }
 
-const headerTrackerCallback = function () {
+export const headerTrackerCallback = function () {
 	memberlistLib.memberlistTracker.depend();
 	liveresultsLib.liveResultsTracker.depend();
 	votingViewLib.votingViewTracker.depend();
@@ -121,9 +121,3 @@ const headerTrackerCallback = function () {
 	calculateHeaderSize();
 	calculateTitelHeight();
 };
-
-$(window).on('resize', headerTrackerCallback);
-
-$(function () {
-	Tracker.autorun(headerTrackerCallback);
-});

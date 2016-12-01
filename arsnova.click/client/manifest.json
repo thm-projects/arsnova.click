@@ -30,5 +30,5 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "orientation": "landscape"
+  "orientation": "portrait"
 }

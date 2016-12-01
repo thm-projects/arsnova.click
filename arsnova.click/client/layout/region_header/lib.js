@@ -39,8 +39,9 @@ export function isEditingQuestion() {
 }
 
 export function addNewQuestion() {
-	const questionItem = Session.get("questionGroup");
-	const index = questionItem.getQuestionList().length;
+	const questionItem = Session.get("questionGroup"),
+		index          = questionItem.getQuestionList().length;
+
 	questionItem.addDefaultQuestion();
 	Session.set("questionGroup", questionItem);
 	localData.addHashtag(questionItem);
@@ -50,11 +51,12 @@ export function addNewQuestion() {
 }
 
 export function calculateHeaderSize() {
-	var titel = $('.header-title').text().trim();
-	var titleLength = titel.length;
+	const headerTitle = $('.header-title'),
+		titel         = headerTitle.text().trim(),
+		titleLength   = titel.length;
 
-	var fontSize = "";
-	let logoHeight;
+	let fontSize = "",
+		logoHeight;
 
 	if ($(document).width() > $(document).height()) {
 		logoHeight = "8vw";
@@ -86,31 +88,26 @@ export function calculateHeaderSize() {
 			fontSize = "3vh";
 		}
 	}
-	$(".header-title").css({"font-size": fontSize, "line-height": $('.arsnova-logo').height() + "px"});
+	headerTitle.css({"font-size": fontSize, "line-height": $('.arsnova-logo').height() + "px"});
 }
 
 export const titelTracker = new Tracker.Dependency();
 export function calculateTitelHeight() {
-	var fixedTop = $(".navbar-fixed-top");
-	var container = $(".container");
-	var footerHeight = $(".fixed-bottom").outerHeight(true) + $(".footer-info-bar").outerHeight();
-	var navbarFooterHeight = $('.navbar-fixed-bottom').is(":visible") ? $(".navbar-fixed-bottom").outerHeight() : 0;
+	const fixedTop         = $(".navbar-fixed-top"),
+		fixedBottom        = $('.navbar-fixed-bottom'),
+		container          = $(".container"),
+		rowBottom          = $('.row-padding-bottom'),
+		centerVertical     = $('.center-vertical'),
+		footerHeight       = $(".fixed-bottom").outerHeight(true) + $(".footer-info-bar").outerHeight(),
+		navbarFooterHeight = fixedBottom.is(":visible") ? fixedBottom.outerHeight() : 0,
+		marginTop          = rowBottom.outerHeight(true) || fixedTop.outerHeight(),
+		finalHeight        = $(window).height() - marginTop - navbarFooterHeight - footerHeight;
 
 	$('.titel').css('margin-top', fixedTop.outerHeight() * 1.1);
-
-	const marginTop = $('.row-padding-bottom').outerHeight(true) || fixedTop.outerHeight();
-	var finalHeight = $(window).height() - marginTop - navbarFooterHeight - footerHeight;
 	container.css("height", finalHeight);
-	if (!$('.row-padding-bottom').outerHeight()) {
-		container.css("margin-top", marginTop);
-	} else {
-		container.css("margin-top", 0);
-	}
+	container.css("margin-top", !rowBottom.outerHeight() ? marginTop : 0);
+	centerVertical.css("top", finalHeight / 2 - centerVertical.outerHeight() / 2);
 	titelTracker.changed();
-	return {
-		height: finalHeight,
-		marginTop: fixedTop.outerHeight()
-	};
 }
 
 const headerTrackerCallback = function () {

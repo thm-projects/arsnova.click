@@ -16,6 +16,9 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <head>
+
+    <title>arsnova.click</title>
+
 	<meta charset="utf-8" />
 	<meta http-equiv="language" content="de">
 	<meta name="application-name" content="arsnova.click">
@@ -23,25 +26,30 @@
 	<meta name="keywords" content="audience response system, classroom response system, clicker, ARS, ARSnova, gamification, arsnova.click">
 	<meta name="author" content="The ARSnova Team">
 	<meta name="copyright" content="GNU GPLv3">
-
-	<title>arsnova.click</title>
-
 	<!-- all metas from https://github.com/h5bp/mobile-boilerplate -->
 	<meta name="apple-mobile-web-app-title" content="arsnova.click">
 	<meta name="HandheldFriendly" content="true">
 	<meta name="MobileOptimized" content="320">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimal-ui">
 	<meta http-equiv="cleartype" content="on">
-
 	<!-- open website in fullscreen mode -->
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="/images/icons/arsNovaClick-144.png">
+    <meta name="msapplication-TileColor" content="#222222">
+    <!-- wp icon -->
+    <meta name="msapplication-square70x70logo" content="/images/icons/arsNovaClick-72.png">
+    <meta name="msapplication-square150x150logo" content="/images/icons/arsNovaClick-152.png">
+    <meta name="theme-color" content="#23425b">
 
+    <link rel="manifest" href="/arsnova_click_manifest.json">
+    <!-- Fallback for everything else -->
+    <link rel="shortcut icon" href="/images/icons/arsnova_click-180.png">
 	<link rel="icon" sizes="16x16 32x32" href="/images/icons/favicon.ico?v=2">
 	<!-- special tag for apple "set to homescreen" favicon  -->
 	<link rel="apple-touch-icon" href="/images/icons/favicon.ico?v=2">
 	<link rel="apple-touch-icon-precomposed" href="/images/icons/favicon.ico?v=2">
-
 	<!-- iPad and iPad mini (with @2× display) iOS ≥ 8 -->
 	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/images/icons/arsnova_click-180.png">
 	<!-- iPad 3+ (with @2× display) iOS ≥ 7 -->
@@ -58,37 +66,40 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/icons/arsnova_click-72.png">
 	<!-- Android Stock Browser and non-Retina iPhone and iPod Touch -->
 	<link rel="apple-touch-icon-precomposed" href="/images/icons/arsnova_click-72.png">
-	<!-- Fallback for everything else -->
-	<link rel="shortcut icon" href="/images/icons/arsnova_click-180.png">
-
-	<!--
-			Chrome 31+ has home screen icon 192×192 (the recommended size for multiple resolutions).
-			If it’s not defined on that size it will take 128×128.
-		-->
-	<link rel="icon" sizes="192x192" href="/images/icons/arsnova_click-192.png">
-	<link rel="icon" sizes="128x128" href="/images/icons/arsnova_click-128.png">
-
-
-    <link rel="manifest" href="/manifest.json">
-
-	<!-- Tile icon for Win8 (144x144 + tile color) -->
-	<meta name="msapplication-TileImage" content="/images/icons/arsNovaClick-144.png">
-	<meta name="msapplication-TileColor" content="#222222">
-
-	<!-- wp icon -->
-	<meta name="msapplication-square70x70logo" content="/images/icons/arsNovaClick-72.png">
-	<meta name="msapplication-square150x150logo" content="/images/icons/arsNovaClick-152.png">
 
 	<!-- piwik -->
-	<script src="//arsnova.thm.de/stats/piwik.js" async defer></script>
+	<script async="async" defer="defer" type="text/javascript" src="//arsnova.thm.de/stats/piwik.js"></script>
 
     <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
-    <script type="text/javascript">
+    <script async="async" type="text/javascript">
         window.cookieconsent_options = {"message":"arsnova.click is a web app that uses cookies to ensure you get the best experience.","dismiss":"Got it!","learnMore":" More about data privacy","link":"dataprivacy","theme":"dark-floating"};
     </script>
 
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
+    <script async="async" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
     <!-- End Cookie Consent plugin -->
+
+    <noscript>
+        <div>
+            <h1>JavaScript nicht aktiviert</h1>
+            <p>Um arsnova.click nutzen zu können, muss JavaScript aktiviert sein!</p>
+            <hr />
+        </div>
+        <div>
+            <h1>JavaScript not activated</h1>
+            <p>JavaScript is required to run arsnova.click!</p>
+            <hr />
+        </div>
+        <div>
+            <h1>JavaScript n'est pas activé</h1>
+            <p>JavaScript est nécessaire pour exécuter arsnova.click!</p>
+            <hr />
+        </div>
+        <div>
+            <h1>JavaScript no activado</h1>
+            <p>JavaScript es necesario para ejecutar arsnova.click!</p>
+            <hr />
+        </div>
+    </noscript>
 
 </head>
 <template name="layout">

@@ -31,7 +31,7 @@ import {createTabIndices} from '/client/startup.js';
 
 const subsCache = new SubsManager({
 	/* maximum number of cached subscriptions */
-	cacheLimit: 9,
+	cacheLimit: 11,
 	/* any subscription will expire after 15 minutes, if it's not subscribed again */
 	expireIn: 15
 });
@@ -64,20 +64,19 @@ Router.configure({
 	loadingTemplate: "loading",
 	subscriptions: function () {
 		const subscriptions = [
-			subsCache.subscribe('HashtagsCollection.public'),
-			subsCache.subscribe('BannedNicksCollection.public'),
-			Meteor.subscribe("ConnectionStatusCollection.join", localData.getPrivateKey())
+			subsCache.subscribe('HashtagsCollection.public')
 		];
 		const currentHashtag = Router.current().params.quizName;
 		if (typeof currentHashtag !== "undefined") {
-			Meteor.subscribe('SessionConfigurationCollection.join', currentHashtag);
+			subscriptions.push(subsCache.subscribe('BannedNicksCollection.public'));
+			subscriptions.push(subsCache.subscribe('NicknameCategoriesCollection.join'));
+			subscriptions.push(subsCache.subscribe('SessionConfigurationCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('ResponsesCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('AnswerOptionCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('QuestionGroupCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('MemberListCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('LeaderBoardCollection.join', currentHashtag));
 			subscriptions.push(subsCache.subscribe('EventManagerCollection.join', currentHashtag));
-			subscriptions.push(subsCache.subscribe('NicknameCategoriesCollection.join'));
 		}
 		return subscriptions;
 	},
@@ -85,7 +84,7 @@ Router.configure({
 });
 
 Router.onStop(function () {
-	var lastRoute = Router.current().route.getName();
+	const lastRoute = Router.current().route.getName();
 	if (lastRoute === undefined) {
 		//homeView
 		localStorage.setItem("lastPage", "/");

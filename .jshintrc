@@ -16,7 +16,6 @@
     "marked": false,
     "MathJax": false,
     "buzz": false,
-    "Router": false,
     "ReactiveCountdown": false,
     "App": false,
     "console": false,

@@ -17,6 +17,7 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
+import {Router} from 'meteor/iron:router';
 
 let pendingAnimationRunning = false;
 const standardAnimationDelay = 200;

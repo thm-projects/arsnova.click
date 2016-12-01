@@ -17,6 +17,7 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
+import {Router} from 'meteor/iron:router';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';

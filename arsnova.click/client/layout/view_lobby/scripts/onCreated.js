@@ -18,6 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as localData from '/lib/local_storage.js';

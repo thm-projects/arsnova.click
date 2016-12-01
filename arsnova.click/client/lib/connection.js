@@ -16,7 +16,8 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import * as localData from './../../lib/local_storage.js';
+import {Router} from 'meteor/iron:router';
+import * as localData from '/lib/local_storage.js';
 
 Meteor.setInterval(function () {
 	if (localData.containsHashtag(Router.current().params.quizName)) {

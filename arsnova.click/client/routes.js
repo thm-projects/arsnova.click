@@ -18,6 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {Router, RouteController} from 'meteor/iron:router';
 import {SubsManager} from 'meteor/meteorhacks:subs-manager';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
@@ -31,7 +32,7 @@ import {createTabIndices} from '/client/startup.js';
 
 const subsCache = new SubsManager({
 	/* maximum number of cached subscriptions */
-	cacheLimit: 9,
+	cacheLimit: 11,
 	/* any subscription will expire after 15 minutes, if it's not subscribed again */
 	expireIn: 15
 });
@@ -62,30 +63,33 @@ export function cleanUp() {
 Router.configure({
 	layoutTemplate: "layout",
 	loadingTemplate: "loading",
-	subscriptions: function () {
-		const subscriptions = [
-			subsCache.subscribe('HashtagsCollection.public'),
-			subsCache.subscribe('BannedNicksCollection.public'),
-			Meteor.subscribe("ConnectionStatusCollection.join", localData.getPrivateKey())
-		];
-		const currentHashtag = Router.current().params.quizName;
-		if (typeof currentHashtag !== "undefined") {
-			Meteor.subscribe('SessionConfigurationCollection.join', currentHashtag);
-			subscriptions.push(subsCache.subscribe('ResponsesCollection.join', currentHashtag));
-			subscriptions.push(subsCache.subscribe('AnswerOptionCollection.join', currentHashtag));
-			subscriptions.push(subsCache.subscribe('QuestionGroupCollection.join', currentHashtag));
-			subscriptions.push(subsCache.subscribe('MemberListCollection.join', currentHashtag));
-			subscriptions.push(subsCache.subscribe('LeaderBoardCollection.join', currentHashtag));
-			subscriptions.push(subsCache.subscribe('EventManagerCollection.join', currentHashtag));
-			subscriptions.push(subsCache.subscribe('NicknameCategoriesCollection.join'));
-		}
-		return subscriptions;
-	},
 	fastRender: true
 });
 
+const NonBlockingRouteController = RouteController.extend({
+	subscriptions: function () {
+		subsCache.subscribe('HashtagsCollection.public');
+	}
+});
+const BlockingRouteController = RouteController.extend({
+	waitOn: function () {
+		const currentHashtag = Router.current().params.quizName;
+		return [
+			subsCache.subscribe('BannedNicksCollection.public'),
+			subsCache.subscribe('NicknameCategoriesCollection.join'),
+			subsCache.subscribe('SessionConfigurationCollection.join', currentHashtag),
+			subsCache.subscribe('ResponsesCollection.join', currentHashtag),
+			subsCache.subscribe('AnswerOptionCollection.join', currentHashtag),
+			subsCache.subscribe('QuestionGroupCollection.join', currentHashtag),
+			subsCache.subscribe('MemberListCollection.join', currentHashtag),
+			subsCache.subscribe('LeaderBoardCollection.join', currentHashtag),
+			subsCache.subscribe('EventManagerCollection.join', currentHashtag)
+		];
+	}
+});
+
 Router.onStop(function () {
-	var lastRoute = Router.current().route.getName();
+	const lastRoute = Router.current().route.getName();
 	if (lastRoute === undefined) {
 		//homeView
 		localStorage.setItem("lastPage", "/");
@@ -154,6 +158,7 @@ Router.onAfterAction(function () {
 });
 
 Router.route('/', {
+	controller: NonBlockingRouteController,
 	action: function () {
 		this.render("titel", {
 			to: "header.title",
@@ -166,6 +171,7 @@ Router.route('/', {
 });
 
 Router.route('/hashtagmanagement', {
+	controller: NonBlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
@@ -178,6 +184,7 @@ Router.route('/hashtagmanagement', {
 });
 
 Router.route('/preview/:themeName/:language', {
+	controller: NonBlockingRouteController,
 	action: function () {
 		this.render("titel", {
 			to: "header.title",
@@ -194,57 +201,73 @@ Router.route('/preview/:themeName/:language', {
 
 // Routes for Footer-Links
 
-Router.route('/about', function () {
-	this.render('footerNavButtons', {
-		to: 'footer.navigation',
-		data: function () {
-			return {backId: "backButton"};
-		}
-	});
-	this.render('about');
+Router.route('/about', {
+	controller: NonBlockingRouteController,
+	action: function () {
+		this.render('footerNavButtons', {
+			to: 'footer.navigation',
+			data: function () {
+				return {backId: "backButton"};
+			}
+		});
+		this.render('about');
+	}
 });
 
-Router.route('/agb', function () {
-	this.render('footerNavButtons', {
-		to: 'footer.navigation',
-		data: function () {
-			return {backId: "backButton"};
-		}
-	});
-	this.render('agb');
+Router.route('/agb', {
+	controller: NonBlockingRouteController,
+	action: function () {
+		this.render('footerNavButtons', {
+			to: 'footer.navigation',
+			data: function () {
+				return {backId: "backButton"};
+			}
+		});
+		this.render('agb');
+	}
 });
 
-Router.route('/dataprivacy', function () {
-	this.render('footerNavButtons', {
-		to: 'footer.navigation',
-		data: function () {
-			return {backId: "backButton"};
-		}
-	});
-	this.render('dataprivacy');
+Router.route('/dataprivacy', {
+	controller: NonBlockingRouteController,
+	action: function () {
+		this.render('footerNavButtons', {
+			to: 'footer.navigation',
+			data: function () {
+				return {backId: "backButton"};
+			}
+		});
+		this.render('dataprivacy');
+	}
 });
 
-Router.route('/imprint', function () {
-	this.render('footerNavButtons', {
-		to: 'footer.navigation',
-		data: function () {
-			return {backId: "backButton"};
-		}
-	});
-	this.render('imprint');
+Router.route('/imprint', {
+	controller: NonBlockingRouteController,
+	action: function () {
+		this.render('footerNavButtons', {
+			to: 'footer.navigation',
+			data: function () {
+				return {backId: "backButton"};
+			}
+		});
+		this.render('imprint');
+	}
 });
 
-Router.route('/translate', function () {
-	this.render('footerNavButtons', {
-		to: 'footer.navigation',
-		data: function () {
-			return {backId: "backButton"};
-		}
-	});
-	this.render('translate');
+Router.route('/translate', {
+	controller: NonBlockingRouteController,
+	action: function () {
+		this.render('footerNavButtons', {
+			to: 'footer.navigation',
+			data: function () {
+				return {backId: "backButton"};
+			}
+		});
+		this.render('translate');
+	}
 });
 
 Router.route('/theme', {
+	controller: NonBlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
@@ -257,6 +280,7 @@ Router.route('/theme', {
 });
 
 Router.route('/showMore', {
+	controller: NonBlockingRouteController,
 	action: function () {
 		this.render("titel", {
 			to: "header.title",
@@ -275,6 +299,7 @@ Router.route('/showMore', {
 });
 
 Router.route("/:quizName", {
+	controller: BlockingRouteController,
 	action: function () {
 		if (this.ready()) {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
@@ -300,6 +325,7 @@ Router.route("/:quizName", {
 });
 
 Router.route('/:quizName/theme', {
+	controller: BlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
@@ -312,6 +338,7 @@ Router.route('/:quizName/theme', {
 });
 
 Router.route('/:quizName/showMore', {
+	controller: BlockingRouteController,
 	action: function () {
 		this.render("titel", {
 			to: "header.title",
@@ -329,12 +356,16 @@ Router.route('/:quizName/showMore', {
 	}
 });
 
-Router.route('/:quizName/resetToHome', function () {
-	cleanUp();
-	Router.go("/");
+Router.route('/:quizName/resetToHome', {
+	controller: BlockingRouteController,
+	action: function () {
+		cleanUp();
+		Router.go("/");
+	}
 });
 
 Router.route('/:quizName/nick', {
+	controller: BlockingRouteController,
 	action: function () {
 		if (EventManagerCollection.findOne() && EventManagerCollection.findOne().sessionStatus === 2) {
 			if (!globalEventStackObserver.isRunning()) {
@@ -360,6 +391,7 @@ Router.route('/:quizName/nick', {
 });
 
 Router.route('/:quizName/question', {
+	controller: BlockingRouteController,
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			if (!globalEventStackObserver.isRunning()) {
@@ -380,6 +412,7 @@ Router.route('/:quizName/question', {
 });
 
 Router.route('/:quizName/answeroptions', {
+	controller: BlockingRouteController,
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			if (!globalEventStackObserver.isRunning()) {
@@ -400,6 +433,7 @@ Router.route('/:quizName/answeroptions', {
 });
 
 Router.route('/:quizName/settimer', {
+	controller: BlockingRouteController,
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			if (!globalEventStackObserver.isRunning()) {
@@ -420,6 +454,7 @@ Router.route('/:quizName/settimer', {
 });
 
 Router.route('/:quizName/nicknameCategories', {
+	controller: BlockingRouteController,
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			if (!globalEventStackObserver.isRunning()) {
@@ -439,6 +474,7 @@ Router.route('/:quizName/nicknameCategories', {
 });
 
 Router.route('/:quizName/quizSummary', {
+	controller: BlockingRouteController,
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			if (!globalEventStackObserver.isRunning()) {
@@ -458,6 +494,7 @@ Router.route('/:quizName/quizSummary', {
 });
 
 Router.route('/:quizName/memberlist', {
+	controller: BlockingRouteController,
 	action: function () {
 		if (!globalEventStackObserver.isRunning()) {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
@@ -474,6 +511,7 @@ Router.route('/:quizName/memberlist', {
 });
 
 Router.route('/:quizName/onpolling', {
+	controller: BlockingRouteController,
 	action: function () {
 		if (!globalEventStackObserver.isRunning()) {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
@@ -483,6 +521,7 @@ Router.route('/:quizName/onpolling', {
 	}
 });
 Router.route('/:quizName/results', {
+	controller: BlockingRouteController,
 	action: function () {
 		if (!globalEventStackObserver.isRunning()) {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
@@ -497,6 +536,7 @@ Router.route('/:quizName/results', {
 });
 
 Router.route('/:quizName/leaderBoard/:id', {
+	controller: BlockingRouteController,
 	waitOn: function () {
 		Meteor.subscribe('AllAttendeeUsersList', Router.current().params.quizName, localData.getPrivateKey());
 	},

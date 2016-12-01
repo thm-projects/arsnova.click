@@ -1,0 +1,36 @@
+{
+  "short_name": "arsnova.click",
+  "name": "arsnova.click",
+  "icons": [
+    {
+      "src": "/images/icons/arsnova_click-114.png",
+      "sizes": "114x114",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icons/arsnova_click-144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icons/arsnova_click-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icons/arsnova_click-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icons/arsnova_click-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "#23425b",
+  "theme_color": "#23425b",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
+}

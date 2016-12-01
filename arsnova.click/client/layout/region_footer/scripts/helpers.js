@@ -17,6 +17,7 @@
 
 import {Template} from 'meteor/templating';
 import {Session} from 'meteor/session';
+import {Router} from 'meteor/iron:router';
 
 Template.footer.helpers({
 	footerElements: function () {

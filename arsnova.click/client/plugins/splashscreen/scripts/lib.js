@@ -19,6 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Blaze} from 'meteor/blaze';
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';

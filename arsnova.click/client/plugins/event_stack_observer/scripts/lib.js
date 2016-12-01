@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Router} from 'meteor/iron:router';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {ObserveSequence} from 'meteor/observe-sequence';
 

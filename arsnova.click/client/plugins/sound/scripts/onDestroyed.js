@@ -17,6 +17,7 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 import {lobbySound, buzzsound1} from '/client/plugins/sound/scripts/lib.js';
 
 Template.soundConfig.onDestroyed(function () {

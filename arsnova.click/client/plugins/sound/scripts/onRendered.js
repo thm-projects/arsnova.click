@@ -17,6 +17,7 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 import {noUiSlider} from 'meteor/arsnova.click:nouislider';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {buzzsound1, setBuzzsound1, lobbySound, setLobbySound} from './lib.js';

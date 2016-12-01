@@ -18,6 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';

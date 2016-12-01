@@ -19,6 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
+import {Router} from 'meteor/iron:router';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';

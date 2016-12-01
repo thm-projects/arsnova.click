@@ -18,6 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 import * as localData from '/lib/local_storage.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 

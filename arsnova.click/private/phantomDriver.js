@@ -13,15 +13,17 @@ function handle_page(url){
 	console.log("Requesting page load:", url);
 	page.open(url, function(status) {
 		const urlSeparated = url.split("/");
-		console.log('Page', url ,'is loaded and ready with status:', status);
-		page.render('arsnova_click_preview_' + urlSeparated[urlSeparated.length - 2] + '_' + urlSeparated[urlSeparated.length - 1] + '.png');
-		setTimeout(next_page,100);
+		console.log('Page', url, 'is loaded and ready with status:', status);
+		setTimeout(function () {
+			page.render('arsnova_click_preview_' + urlSeparated[urlSeparated.length - 2] + '_' + urlSeparated[urlSeparated.length - 1] + '.png');
+		}, 100);
+		setTimeout(next_page, 200);
 	});
 }
 function next_page(){
 	const url=args.shift();
 	if (!url){
-		console.log("all files have been handled, exiting process");
+		console.log("All files have been handled, exiting process");
 		phantom.exit(0);
 	}
 	const host = /localhost/.test(url) ? "localhost" : /staging.arsnova.click/.test(url) ? "staging.arsnova.click" : /arsnova.click/.test(url) ? "arsnova.click" : "";
@@ -32,8 +34,8 @@ function next_page(){
 		'path'     : '/',
 		'expires'  : (new Date()).getTime() + (1000 * 60 * 60)   /* <-- expires in 1 hour */
 	});
-	console.log("handling url", url, "from args", args);
+	console.log("Handling url", url, "from args", args);
 	handle_page(url);
 }
 args.shift();
-setTimeout(next_page,100);
+next_page();

@@ -16,6 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 import * as lib from './lib.js';
 
 Template.nicknameCategories.onDestroyed(function () {

@@ -17,6 +17,7 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Tracker} from 'meteor/tracker';
+import {Router} from 'meteor/iron:router';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {BannedNicksCollection} from '/lib/banned_nicks/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';

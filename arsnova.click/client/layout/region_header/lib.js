@@ -18,6 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
+import {Router} from 'meteor/iron:router';
 import * as localData from '/lib/local_storage.js';
 import * as memberlistLib from '/client/layout/view_lobby/scripts/lib.js';
 import * as liveresultsLib from '/client/layout/view_live_results/scripts/lib.js';

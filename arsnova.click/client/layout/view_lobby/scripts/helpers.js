@@ -17,6 +17,7 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 import * as localData from '/lib/local_storage.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as lib from './lib.js';

@@ -32,12 +32,12 @@ import process from 'process';
 
 if (Meteor.isServer) {
 	Meteor.startup(function () {
-		console.log("Running server startup...");
-		console.log("create htmlAttributeHook...");
+		console.log("server startup: Running server startup...");
+		console.log("server startup: create htmlAttributeHook...");
 		WebApp.addHtmlAttributeHook(function () {
 			return {"lang": "de"};
 		});
-		console.log("htmlAttributeHook created successfully");
+		console.log("server startup: htmlAttributeHook created successfully");
 		if (HashtagsCollection && !HashtagsCollection.findOne()) {
 			// block this hash / pk -> do not use and merge to production server!
 			var blockedHashtag1 = {
@@ -58,27 +58,27 @@ if (Meteor.isServer) {
 				sessionStatus: 0,
 				lastConnection: (new Date()).getTime()
 			};
-			console.log("inserting blocking hashtags...");
+			console.log("server startup: inserting blocking hashtags...");
 			HashtagsCollection.insert(blockedHashtag1);
 			HashtagsCollection.insert(blockedHashtag2);
 			HashtagsCollection.insert(blockedHashtag3);
 
-			console.log("inserted blocking hashtags successfully");
+			console.log("server startup: inserted blocking hashtags successfully");
 		}
-		console.log("inserting banned nicknames...");
+		console.log("server startup: inserting banned nicknames...");
 		if (BannedNicksCollection && !BannedNicksCollection.findOne()) {
 			forbiddenNicks.forEach(function (item) {
 				BannedNicksCollection.insert({userNick: item});
 			});
 		}
-		console.log("inserted banned nicknames successfully");
-		console.log("inserting nick categories...");
+		console.log("server startup: inserted banned nicknames successfully");
+		console.log("server startup: inserting nick categories...");
 		nickCategories.forEach(function (item) {
 			if (!NicknameCategoriesCollection.findOne({nick: item.nick})) {
 				NicknameCategoriesCollection.insert({nick: item.nick, nickCategory: item.nickCategory, insertDate: new Date(), lastUsedDate: new Date()});
 			}
 		});
-		console.log("manipulating nicknames on selected nickname categories...");
+		console.log("server startup: manipulating nicknames on selected nickname categories...");
 		NicknameCategoriesCollection.find().fetch().forEach(function (item) {
 			let foundItem = false;
 			for (let i = 0; i < nickCategories.length; i++) {
@@ -91,31 +91,32 @@ if (Meteor.isServer) {
 				NicknameCategoriesCollection.remove({nick: item.nick});
 			}
 		});
-		console.log("inserted nick categories successfully");
-		console.log("removing old connection status documents");
+		console.log("server startup: inserted nick categories successfully");
+		console.log("server startup: removing old connection status documents");
 		ConnectionStatusCollection.remove({});
-		console.log("removed old connection status documents successfully");
-		console.log("generating preview images of all themes in all languages");
+		console.log("server startup: removed old connection status documents successfully");
+		console.log("server startup: generating preview images of all themes in all languages");
 		const spawn = childProcess.spawn;
 		const languages = TAPi18n.getLanguages();
-		const stdoutCallback = function (data) {
-			console.log("phantomjs (stdout): ", data.toString());
-		};
-		const stderrCallback = function (data) {
-			console.log("phantomjs (stderr): ", data.toString());
-		};
+		let params = [process.cwd() + '/assets/app/phantomDriver.js'];
 
 		themes.forEach(function (theme) {
 			for (const languageKey in languages) {
 				if (languages.hasOwnProperty(languageKey)) {
-					console.log("invoking phantomjs to generate image for theme " + theme.id + " and language " + languageKey);
-					const command = spawn(phantomjs.path, [process.cwd() + '/assets/app/phantomDriver.js', Meteor.absoluteUrl() + "preview/", theme.id, languageKey]);
-					command.stdout.on("data", stdoutCallback);
-					command.stderr.on("data", stderrCallback);
+					params.push(Meteor.absoluteUrl() + "preview/" + theme.id + "/" + languageKey);
 				}
 			}
 		});
-		console.log("all phantomjs processes to generate the images have been invoked");
-		console.log("Server startup successful.");
+		const command = spawn(phantomjs.path, params);
+		command.stdout.on("data", function (data) {
+			console.log("phantomjs (stdout):", data.toString());
+		});
+		command.stderr.on("data", function (data) {
+			console.log("phantomjs (stderr):", data.toString());
+		});
+		command.on('exit', function () {
+			console.log("server startup: all preview images have been generated");
+		});
+		console.log("server startup: Server startup successful.");
 	});
 }

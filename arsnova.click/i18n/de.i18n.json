@@ -397,7 +397,7 @@
       "false": "Nein"
     },
     "theme_switcher": {
-      "set_theme": "Stil wählen",
+      "set_theme": "Dein Stil",
       "select_a_theme_title": "Wähle einen Stil",
       "themes": {
         "theme-arsnova-dot-click-contrast": {
@@ -444,7 +444,7 @@
       "second_plural": "Sekunden"
     },
     "translation": {
-      "translations": "Wähle Deine Sprache:",
+      "translations": "Deine Sprache",
       "i18n_currently_not_available": "i18n ist aktuell nicht verfügbar!",
       "beta": "Beta"
     },

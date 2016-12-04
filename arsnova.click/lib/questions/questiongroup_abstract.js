@@ -19,7 +19,6 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
 import {AbstractQuestion} from './question_abstract.js';
 import {questionReflection} from "./question_reflection.js";
-import {SingleChoiceQuestion} from './question_choice_single.js';
 import {SessionConfiguration} from '../session_configuration/session_config.js';
 
 const hashtag = Symbol("hashtag");

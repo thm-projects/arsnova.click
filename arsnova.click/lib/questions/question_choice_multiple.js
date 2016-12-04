@@ -42,7 +42,7 @@ export class MultipleChoiceQuestion extends AbstractChoiceQuestion {
 	}
 
 	translationReferrer () {
-		return "view.questions.multiple_choice_question"
+		return "view.questions.multiple_choice_question";
 	}
 
 	/**

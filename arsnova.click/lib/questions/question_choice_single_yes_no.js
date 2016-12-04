@@ -63,7 +63,7 @@ export class YesNoSingleChoiceQuestion extends SingleChoiceQuestion {
 	}
 
 	translationReferrer () {
-		return "view.questions.single_choice_question_yes_no"
+		return "view.questions.single_choice_question_yes_no";
 	}
 
 	removeAnswerOption () {

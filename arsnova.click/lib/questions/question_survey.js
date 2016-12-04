@@ -76,7 +76,7 @@ export class SurveyQuestion extends AbstractChoiceQuestion {
 	}
 
 	translationReferrer () {
-		return "view.questions.survey_question"
+		return "view.questions.survey_question";
 	}
 }
 

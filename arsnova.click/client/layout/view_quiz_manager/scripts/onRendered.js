@@ -10,7 +10,6 @@ import * as lib from './lib.js';
 Template.quizManager.onRendered(function () {
 	Session.get("questionGroup").getQuestionList().forEach(function (item) {
 		$('#added_questions_wrapper').append('<li id="' + item.getQuestionIndex() + '_added_question" class="draggable">' + TAPi18n.__(item.translationReferrer()) + '</li>');
-
 	});
 	$('#added_questions_wrapper').find('.draggable').draggable({
 		connectToSortable: "#added_questions_wrapper, #removeQuestionWrapper",
@@ -61,7 +60,7 @@ Template.quizManager.onRendered(function () {
 			if (typeof ui.item.attr("id") === "undefined") {
 				const classNames = $(ui.item).attr('class').split(" ");
 				const index      = classNames.map(function (elem) {
-					return elem.indexOf("questionType_") > -1
+					return elem.indexOf("questionType_") > -1;
 				}).indexOf(true);
 				const indexTo   = questionGroup.getQuestionList().length;
 				const indexFrom = ui.item.index();

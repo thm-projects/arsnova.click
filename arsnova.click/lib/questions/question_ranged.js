@@ -161,7 +161,7 @@ export class RangedQuestion extends AbstractQuestion {
 	}
 
 	translationReferrer () {
-		return "view.questions.ranged_question"
+		return "view.questions.ranged_question";
 	}
 }
 

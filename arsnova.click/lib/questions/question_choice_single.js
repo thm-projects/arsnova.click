@@ -76,7 +76,7 @@ export class SingleChoiceQuestion extends AbstractChoiceQuestion {
 	}
 
 	translationReferrer () {
-		return "view.questions.single_choice_question"
+		return "view.questions.single_choice_question";
 	}
 }
 

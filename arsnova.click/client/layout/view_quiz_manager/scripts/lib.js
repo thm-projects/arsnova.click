@@ -1,7 +1,5 @@
 
-import {Tracker} from 'meteor/tracker';
-
-export function recalculateIndices (questionGroup, indexFrom, indexTo) {
+export function recalculateIndices(questionGroup, indexFrom, indexTo) {
 	if (indexTo > -1 && indexFrom !== indexTo) {
 		if (indexFrom < indexTo) {
 			for (let i = indexFrom; i < indexTo; i++) {

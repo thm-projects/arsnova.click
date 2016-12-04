@@ -83,7 +83,7 @@ export class FreeTextQuestion extends AbstractQuestion {
 	}
 
 	translationReferrer () {
-		return "view.questions.free_text_question"
+		return "view.questions.free_text_question";
 	}
 
 	/**

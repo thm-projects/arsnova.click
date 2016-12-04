@@ -63,7 +63,7 @@ export class TrueFalseSingleChoiceQuestion extends SingleChoiceQuestion {
 	}
 
 	translationReferrer () {
-		return "view.questions.single_choice_question_true_false"
+		return "view.questions.single_choice_question_true_false";
 	}
 
 	removeAnswerOption () {

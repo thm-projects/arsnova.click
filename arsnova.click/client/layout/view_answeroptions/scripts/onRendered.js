@@ -40,14 +40,6 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 	if ($(window).width() >= 992) {
 		$('#answerOptionText_Number0').focus();
 	}
-
-	var inputFieldElements = document.getElementsByClassName("input-field");
-	for (var i = inputFieldElements.length - 1; i >= 0; --i) {
-		if ($(inputFieldElements[i]).val().length === 0) {
-			$(inputFieldElements[i]).closest(".input-group").addClass("invalidAnswerOption");
-		}
-	}
-
 	lib.formatIsCorrectButtons();
 });
 

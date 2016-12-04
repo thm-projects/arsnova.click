@@ -45,8 +45,6 @@ Template.createQuestionView.onRendered(function () {
 		lib.checkForValidQuestionText();
 	});
 
-	lib.checkForValidQuestionText();
-
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	footerElements.addFooterElement(footerElements.footerElemNicknames);

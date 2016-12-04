@@ -6,7 +6,12 @@
     "delete": "Supprimer",
     "save": "Enregistrer",
     "abort": "Annuler",
-    "close_window": "Fermer la fenêtre"
+    "close_window": "Fermer la fenêtre",
+    "cookie_consent": {
+      "message": "arsnova.click est une application Web qui utilise des cookies pour vous assurer d'obtenir la meilleure expérience.",
+      "dismiss": "Je l'ai!",
+      "learn_more": "En savoir plus sur la confidentialité des données"
+    }
   },
   "region": {
     "footer": {

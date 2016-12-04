@@ -8,6 +8,7 @@ const questionText = Symbol("questionText");
 const timer = Symbol("timer");
 const startTime = Symbol("startTime");
 const questionIndex = Symbol("questionIndex");
+const _id = Symbol("_id");
 const answerOptionList = Symbol("answerOptionList");
 
 export class AbstractQuestion {
@@ -31,6 +32,7 @@ export class AbstractQuestion {
 		this[timer] = options.timer;
 		this[startTime] = options.startTime;
 		this[questionIndex] = options.questionIndex;
+		this[_id] = options.questionIndex;
 		this[answerOptionList] = [];
 	}
 
@@ -86,6 +88,7 @@ export class AbstractQuestion {
 	 */
 	setQuestionIndex (index) {
 		this[questionIndex] = index;
+		this[_id] = index;
 		for (let i = 0; i < this.getAnswerOptionList().length; i++) {
 			this.getAnswerOptionList()[i].setQuestionIndex(index);
 		}
@@ -189,6 +192,7 @@ export class AbstractQuestion {
 			timer: this.getTimer(),
 			startTime: this.getStartTime(),
 			questionIndex: this.getQuestionIndex(),
+			_id: this.getQuestionIndex(),
 			answerOptionList: answerOptionListSerialized
 		};
 	}

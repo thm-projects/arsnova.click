@@ -74,6 +74,10 @@ export class SurveyQuestion extends AbstractChoiceQuestion {
 	typeName () {
 		return "SurveyQuestion";
 	}
+
+	translationReferrer () {
+		return "view.questions.survey_question"
+	}
 }
 
 /**

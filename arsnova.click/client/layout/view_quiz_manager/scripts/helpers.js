@@ -1,0 +1,14 @@
+
+import {Session} from 'meteor/session';
+import {Template} from 'meteor/templating';
+import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
+import * as lib from './lib.js';
+
+Template.quizManager.helpers({
+	questionTypes: function () {
+		return questionLib.getQuestionTypes();
+	},
+	isMovingQuestion: function () {
+		return Session.get("isMovingQuestion");
+	},
+});

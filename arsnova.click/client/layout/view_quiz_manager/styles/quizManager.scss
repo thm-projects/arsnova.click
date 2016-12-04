@@ -1,0 +1,47 @@
+
+@import "../../../layout/global/styles/appearance";
+
+#quizManager {
+	.sortable-placeholder {
+		color: black;
+		background-color: white;
+		opacity: 0.2;
+	}
+	.remove-sortable-placeholder {
+		border: none;
+		font-size: 14px;
+	}
+	#removeQuestionWrapper {
+		height: 100px;
+		background-color: white;
+		border-radius: 10px;
+		opacity: 0.2;
+		line-height: 100px;
+		width: 100%;
+		text-align: center;
+		color: black;
+		font-size: 50px;
+	}
+	ul {
+		color: white;
+		padding: 0;
+
+		&#added_questions_wrapper {
+			min-height: 100px;
+		}
+	}
+
+	li {
+		list-style-type: none;
+		border: 1px solid white;
+		margin: 5px 0;
+		width: 100% !important;
+		padding: 5px;
+		border-radius: $corner-radius;
+		cursor: pointer;
+
+		&.draggable {
+			z-index: 1080 !important;
+		}
+	}
+}

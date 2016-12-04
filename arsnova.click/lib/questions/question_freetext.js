@@ -82,6 +82,10 @@ export class FreeTextQuestion extends AbstractQuestion {
 		return "FreeTextQuestion";
 	}
 
+	translationReferrer () {
+		return "view.questions.free_text_question"
+	}
+
 	/**
 	 * Quick way to insert a default AnswerOption to the Question instance.
 	 */

@@ -390,6 +390,26 @@ Router.route('/:quizName/nick', {
 	}
 });
 
+Router.route('/:quizName/quizManager', {
+	controller: BlockingRouteController,
+	action: function () {
+		if (localData.containsHashtag(Router.current().params.quizName)) {
+			if (!globalEventStackObserver.isRunning()) {
+				globalEventStackObserver.startObserving(Router.current().params.quizName);
+			}
+			this.render('footerNavButtons', {
+				to: 'footer.navigation',
+				data: function () {
+					return {backId: "backButton", forwardId: "forwardButton"};
+				}
+			});
+			this.render('quizManager');
+		} else {
+			Router.go("/");
+		}
+	}
+});
+
 Router.route('/:quizName/question', {
 	controller: BlockingRouteController,
 	action: function () {

@@ -62,6 +62,10 @@ export class TrueFalseSingleChoiceQuestion extends SingleChoiceQuestion {
 		return "TrueFalseSingleChoiceQuestion";
 	}
 
+	translationReferrer () {
+		return "view.questions.single_choice_question_true_false"
+	}
+
 	removeAnswerOption () {
 		throw Error("AnswerOptions cannot be modified for this type of Question!");
 	}

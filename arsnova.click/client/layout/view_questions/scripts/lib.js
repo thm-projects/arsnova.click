@@ -89,37 +89,37 @@ export function getQuestionTypes() {
 		{
 			id: "SingleChoiceQuestion",
 			translationName: "view.questions.single_choice_question",
-			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SingleChoiceQuestion" ? 'selected' : ""
+			selected: Session.get("questionGroup").getQuestionList().length > 0 && Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SingleChoiceQuestion" ? 'selected' : ""
 		},
 		{
 			id: "YesNoSingleChoiceQuestion",
 			translationName: "view.questions.single_choice_question_yes_no",
-			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "YesNoSingleChoiceQuestion" ? 'selected' : ""
+			selected: Session.get("questionGroup").getQuestionList().length > 0 && Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "YesNoSingleChoiceQuestion" ? 'selected' : ""
 		},
 		{
 			id: "TrueFalseSingleChoiceQuestion",
 			translationName: "view.questions.single_choice_question_true_false",
-			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "TrueFalseSingleChoiceQuestion" ? 'selected' : ""
+			selected: Session.get("questionGroup").getQuestionList().length > 0 && Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "TrueFalseSingleChoiceQuestion" ? 'selected' : ""
 		},
 		{
 			id: "MultipleChoiceQuestion",
 			translationName: "view.questions.multiple_choice_question",
-			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "MultipleChoiceQuestion" ? 'selected' : ""
+			selected: Session.get("questionGroup").getQuestionList().length > 0 && Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "MultipleChoiceQuestion" ? 'selected' : ""
 		},
 		{
 			id: "RangedQuestion",
 			translationName: "view.questions.ranged_question",
-			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "RangedQuestion" ? 'selected' : ""
+			selected: Session.get("questionGroup").getQuestionList().length > 0 && Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "RangedQuestion" ? 'selected' : ""
 		},
 		{
 			id: "FreeTextQuestion",
 			translationName: "view.questions.free_text_question",
-			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "FreeTextQuestion" ? 'selected' : ""
+			selected: Session.get("questionGroup").getQuestionList().length > 0 && Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "FreeTextQuestion" ? 'selected' : ""
 		},
 		{
 			id: "SurveyQuestion",
 			translationName: "view.questions.survey_question",
-			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SurveyQuestion" ? 'selected' : ""
+			selected: Session.get("questionGroup").getQuestionList().length > 0 && Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SurveyQuestion" ? 'selected' : ""
 		}
 	];
 }

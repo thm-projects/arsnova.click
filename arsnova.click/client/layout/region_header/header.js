@@ -176,7 +176,6 @@ Template.header.onRendered(function () {
 
 	$(function () {
 		setTimeout(function () {
-			console.log("timeout run up");
 			Tracker.autorun(lib.headerTrackerCallback);
 		}, 100);
 	});

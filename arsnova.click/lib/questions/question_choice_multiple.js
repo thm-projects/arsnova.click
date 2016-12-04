@@ -41,6 +41,10 @@ export class MultipleChoiceQuestion extends AbstractChoiceQuestion {
 		return "MultipleChoiceQuestion";
 	}
 
+	translationReferrer () {
+		return "view.questions.multiple_choice_question"
+	}
+
 	/**
 	 * Gets the validation error reason from the question and all included answerOptions as a stackable array
 	 * @returns {Array} Contains an Object which holds the number of the current question and the reason why the validation has failed

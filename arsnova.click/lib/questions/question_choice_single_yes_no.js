@@ -62,6 +62,10 @@ export class YesNoSingleChoiceQuestion extends SingleChoiceQuestion {
 		return "YesNoSingleChoiceQuestion";
 	}
 
+	translationReferrer () {
+		return "view.questions.single_choice_question_yes_no"
+	}
+
 	removeAnswerOption () {
 		throw Error("AnswerOptions cannot be modified for this type of Question!");
 	}

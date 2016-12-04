@@ -41,7 +41,8 @@
         "sound": "Sound",
         "qr_code": "QR",
         "nicknames": "Nicknamen",
-        "edit_quiz": "Bearbeiten"
+        "edit_quiz": "Bearbeiten",
+        "remove": "Entfernen"
       },
       "about": {
         "title": "Über die Quiz-App",

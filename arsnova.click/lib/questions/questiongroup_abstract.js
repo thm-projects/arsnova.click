@@ -68,8 +68,10 @@ export class AbstractQuestionGroup {
 	addQuestion (question, index) {
 		if (question instanceof AbstractQuestion) {
 			if (typeof index === "undefined" || index >= this.getQuestionList().length) {
+				question.setQuestionIndex(this.getQuestionList().length);
 				this[questionList].push(question);
 			} else {
+				question.setQuestionIndex(index);
 				this[questionList][index] = question;
 			}
 			return question;
@@ -195,11 +197,11 @@ export class AbstractQuestionGroup {
 	 * Quick way to insert a default question to the QuestionGroup instance.
 	 * @param {Number} [index] The index where the question should be inserted. If not passed, it will be added to the end of the questionList
 	 */
-	addDefaultQuestion (index) {
-		if (typeof index === "undefined" || index >= this.getQuestionList().length) {
+	addDefaultQuestion (index = -1, type = "SingleChoiceQuestion") {
+		if (typeof index === "undefined" || index === -1 || index >= this.getQuestionList().length) {
 			index = this.getQuestionList().length;
 		}
-		const questionItem = new SingleChoiceQuestion({
+		let questionItem = questionReflection[type]({
 			hashtag: this.getHashtag(),
 			questionText: "",
 			questionIndex: index,
@@ -207,12 +209,11 @@ export class AbstractQuestionGroup {
 			startTime: 0,
 			answerOptionList: []
 		});
-		for (let i = 0; i < 4; i++) {
-			questionItem.addDefaultAnswerOption(i);
-		}
-		this.addQuestion(
-			questionItem,
-			index
-		);
+		try {
+			for (let i = 0; i < 4; i++) {
+				questionItem.addDefaultAnswerOption(i);
+			}
+		} catch (ex) {}
+		this.addQuestion(questionItem, index);
 	}
 }

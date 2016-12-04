@@ -239,6 +239,10 @@
       "no_sessions": "There are no quizzes stored in your browser."
     },
     "hashtag_view": {
+      "hashtag_input": {
+        "already_exists": "This quizname is already taken.",
+        "illegal_chars": "The quizname contains illegal characters."
+      },
       "demo_quiz": {
         "title": {
           "1": "Not sure where to start?",

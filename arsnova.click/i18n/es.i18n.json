@@ -239,6 +239,10 @@
       "no_sessions": "No hay pruebas almacenadas en su navegador."
     },
     "hashtag_view": {
+      "hashtag_input": {
+        "already_exists": "Este quizname ya está en uso.",
+        "illegal_chars": "El cuestionario contiene caracteres ilegales."
+      },
       "demo_quiz": {
         "title": {
           "1": "¿No estás seguro por dónde empezar?",

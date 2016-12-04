@@ -251,6 +251,10 @@
       }
     },
     "hashtag_view": {
+      "hashtag_input": {
+        "already_exists": "Dieser Quizname ist vergeben.",
+        "illegal_chars": "Der Quizname enthält ungültige Zeichen"
+      },
       "demo_quiz": {
         "title": {
           "1": "Nicht sicher, wo du anfangen sollst?",

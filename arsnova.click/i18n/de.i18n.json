@@ -9,6 +9,11 @@
     "close_window": "Fenster schließen",
     "aria_description": {
       "arsnova_slogan": "Quiz-App für alles und jeden"
+    },
+    "cookie_consent": {
+      "message": "arsnova.click ist eine WebApp, welche Cookies zur Sicherstellung der optimalen Weberfahrung nutzt.",
+      "dismiss": "Verstanden!",
+      "learn_more": "Mehr zum Thema Datenschutz & Privatsphäre"
     }
   },
   "region": {

@@ -73,7 +73,16 @@ Meteor.startup(function () {
 		}
 		$.getScript('/lib/highlight.pack.min.js');
 		$.getScript('/lib/marked.min.js');
-		TAPi18n.setLanguage(getUserLanguage());
+		TAPi18n.setLanguage(getUserLanguage()).then(function () {
+			window.cookieconsent_options = {
+				"message": TAPi18n.__("global.cookie_consent.message"),
+				"dismiss": TAPi18n.__("global.cookie_consent.dismiss"),
+				"learnMore": TAPi18n.__("global.cookie_consent.learn_more"),
+				"link": "dataprivacy",
+				"theme": "dark-floating"
+			};
+			$.getScript("//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js");
+		});
 		navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 		$(function() {
 			FastClick.attach(document.body);

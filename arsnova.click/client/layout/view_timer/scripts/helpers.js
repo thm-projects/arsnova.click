@@ -17,13 +17,13 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {Router} from 'meteor/iron:router';
 
 Template.createTimerView.helpers({
 	slider: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getTimer();
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getTimer();
 	}
 });

@@ -18,7 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {Router} from 'meteor/iron:router';
 import * as localData from '/lib/local_storage.js';
 import {parseSingleAnswerOptionInput, formatIsCorrectButtons, styleFreetextAnswerOptionValidation} from './lib.js';
 
@@ -28,7 +28,7 @@ Template.createAnswerOptions.events({
 Template.defaultAnswerOptionTemplate.events({
 	"click #addAnswerOption": function () {
 		const questionItem = Session.get("questionGroup");
-		const answerlist = questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex];
+		const answerlist = questionItem.getQuestionList()[Router.current().params.questionIndex];
 		let answerOptionsCount = answerlist.getAnswerOptionList().length;
 
 		if (answerOptionsCount < 26) {
@@ -50,7 +50,7 @@ Template.defaultAnswerOptionTemplate.events({
 	},
 	"click #deleteAnswerOption": function () {
 		const questionItem = Session.get("questionGroup");
-		const answerlist = questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex];
+		const answerlist = questionItem.getQuestionList()[Router.current().params.questionIndex];
 		let answerOptionsCount = answerlist.getAnswerOptionList().length;
 
 		if (answerOptionsCount > 1) {
@@ -71,7 +71,7 @@ Template.defaultAnswerOptionTemplate.events({
 	},
 	"keydown .input-field": function (event) {
 		if ((event.keyCode === 13) && !event.shiftKey) {
-			var nextElement = $(event.currentTarget).closest(".form-group").next();
+			const nextElement = $(event.currentTarget).closest(".form-group").next();
 			if (nextElement.length <= 0) {
 				event.preventDefault();
 				$("#addAnswerOption").click();
@@ -88,20 +88,16 @@ Template.defaultAnswerOptionTemplate.events({
 		}
 	},
 	"input .input-field": function (event) {
-		parseSingleAnswerOptionInput(EventManagerCollection.findOne().questionIndex, $(event.currentTarget).attr("id").replace("answerOptionText_Number",""));
+		parseSingleAnswerOptionInput(Router.current().params.questionIndex, $(event.currentTarget).attr("id").replace("answerOptionText_Number",""));
 	}
 });
 
 Template.freeTextAnswerOptionTemplate.events({
 	"input #answerTextArea": function (event) {
 		const questionItem = Session.get("questionGroup");
-
-		var questionIndex = EventManagerCollection.findOne().questionIndex;
-
+		const questionIndex = Router.current().params.questionIndex;
 		questionItem.getQuestionList()[questionIndex].getAnswerOptionList()[0].setAnswerText($(event.currentTarget).val());
-
 		styleFreetextAnswerOptionValidation(questionItem.getQuestionList()[questionIndex].getAnswerOptionList()[0].isValid());
-
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
 	}

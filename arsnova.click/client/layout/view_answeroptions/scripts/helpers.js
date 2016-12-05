@@ -17,15 +17,15 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 import {answerTextSchema} from '/lib/answeroptions/collection.js';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Template.createAnswerOptions.helpers({
 	renderTemplate: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-		switch (Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName()) {
+		switch (Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName()) {
 			case "SingleChoiceQuestion":
 			case "YesNoSingleChoiceQuestion":
 			case "TrueFalseSingleChoiceQuestion":
@@ -45,31 +45,31 @@ Template.createAnswerOptions.helpers({
 Template.defaultAnswerOptionTemplate.helpers({
 	getAnswerTextSchema: answerTextSchema,
 	getAnswerOptions: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList();
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList();
 	},
 	answerOptionLetter: function (Nr) {
 		return String.fromCharCode(Nr + 65);
 	},
 	showDeleteButtonOnStart: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().length === 1 ? "hide" : "";
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().length === 1 ? "hide" : "";
 	},
 	isValidAnswerOption: function (item) {
 		return item.isValid();
 	},
 	isSurveyQuestion: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SurveyQuestion";
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() === "SurveyQuestion";
 	},
 	isSpecialSingleChoiceQuestion: function () {
-		switch (Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName()) {
+		switch (Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName()) {
 			case "YesNoSingleChoiceQuestion":
 			case "TrueFalseSingleChoiceQuestion":
 				return true;
@@ -81,22 +81,22 @@ Template.defaultAnswerOptionTemplate.helpers({
 
 Template.rangedAnswerOptionTemplate.helpers({
 	getMinValue: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getMinRange();
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getMinRange();
 	},
 	getMaxValue: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getMaxRange();
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getMaxRange();
 	},
 	getCorrectValue: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getCorrectValue();
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getCorrectValue();
 	}
 });
 
@@ -110,9 +110,9 @@ Template.freeTextAnswerOptionTemplate.helpers({
 		];
 	},
 	answerText: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].getAnswerText();
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].getAnswerText();
 	}
 });

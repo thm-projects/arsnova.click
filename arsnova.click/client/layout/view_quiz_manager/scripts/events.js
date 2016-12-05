@@ -1,5 +1,6 @@
 
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 
 Template.quizManager.events({
 	"click #added_questions_wrapper .draggable": function (event) {
@@ -19,5 +20,5 @@ Template.quizManagerDetails.events({
 	},
 	"click #gotoNicknames": function () {
 		Router.go("/" + Router.current().params.quizName + "/nicknameCategories");
-	},
+	}
 });

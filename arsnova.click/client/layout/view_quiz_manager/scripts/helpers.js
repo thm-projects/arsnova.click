@@ -1,6 +1,7 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 
 Template.quizManager.helpers({

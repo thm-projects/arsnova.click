@@ -18,20 +18,13 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.createAnswerOptions.onRendered(function () {
-	var body = $('body');
-	body.on('click', '.questionIcon:not(.active)', function () {
-		Router.go("/" + Router.current().params.quizName + "/question");
-	});
-
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.addFooterElement(footerElements.footerElemNicknames);
 	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
 });
@@ -44,9 +37,9 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 });
 
 Template.rangedAnswerOptionTemplate.onRendered(function () {
-	lib.createSlider(EventManagerCollection.findOne().questionIndex);
+	lib.createSlider(Router.current().params.questionIndex);
 	const correctValueInputField = $('#correctValueInput');
-	$.each(Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getValidationStackTrace(), function (index, element) {
+	$.each(Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getValidationStackTrace(), function (index, element) {
 		if (element.reason === "invalid_correct_value") {
 			correctValueInputField.addClass("invalid");
 			return false;
@@ -58,5 +51,5 @@ Template.freeTextAnswerOptionTemplate.onRendered(function () {
 	lib.formatFreeTextSettingsButtons();
 
 	const questionItem = Session.get("questionGroup");
-	lib.styleFreetextAnswerOptionValidation(questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].isValid());
+	lib.styleFreetextAnswerOptionValidation(questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].isValid());
 });

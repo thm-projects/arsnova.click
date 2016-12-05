@@ -18,6 +18,4 @@
 import {Template} from 'meteor/templating';
 
 Template.createAnswerOptions.onDestroyed(function () {
-	var body = $('body');
-	body.off('click', '.questionIcon:not(.active)');
 });

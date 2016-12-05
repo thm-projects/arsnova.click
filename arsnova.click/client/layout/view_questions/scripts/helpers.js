@@ -17,6 +17,7 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {questionTextSchema} from '/lib/questions/collection.js';
 import * as lib from './lib.js';

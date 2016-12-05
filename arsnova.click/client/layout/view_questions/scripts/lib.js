@@ -16,11 +16,8 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Session} from 'meteor/session';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {questionTextSchema} from '/lib/questions/collection.js';
-import {questionReflection} from '/lib/questions/question_reflection.js';
-import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {Router} from 'meteor/iron:router';
 import * as localData from '/lib/local_storage.js';
 
 export function addQuestion(index) {

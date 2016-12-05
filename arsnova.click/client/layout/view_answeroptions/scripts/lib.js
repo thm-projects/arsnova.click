@@ -19,8 +19,8 @@ import {Session} from 'meteor/session';
 import {noUiSlider} from 'meteor/arsnova.click:nouislider';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {Router} from 'meteor/iron:router';
 import {answerTextSchema} from '/lib/answeroptions/collection.js';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {calculateHeaderSize, calculateTitelHeight} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
@@ -30,7 +30,7 @@ export function parseAnswerOptionInput(index) {
 	const questionItem = Session.get("questionGroup");
 	const answerlist = questionItem.getQuestionList()[index].getAnswerOptionList();
 
-	for (var i = 0; i < answerlist.length; i++) {
+	for (let i = 0; i < answerlist.length; i++) {
 		answerlist[i].setAnswerText($("#answerOptionText_Number" + i).val());
 		answerlist[i].setIsCorrect($('#answerOption-' + i).find(".check-mark-checked").length > 0);
 	}
@@ -83,7 +83,7 @@ export function formatIsCorrectButtons() {
 		onSwitchChange: function (event, state) {
 			const item = $('.bootstrap-switch-id-' + event.target.id);
 			const questionItem = Session.get("questionGroup");
-			const answerlist = questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex];
+			const answerlist = questionItem.getQuestionList()[Router.current().params.questionIndex];
 			if (state) {
 				item.find('.bootstrap-switch-handle-off').addClass("hiddenImportant");
 				item.find(".bootstrap-switch-container").css({width: "auto"});
@@ -103,7 +103,7 @@ export function formatIsCorrectButtons() {
 		}
 	});
 
-	Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().forEach(function (answerOption) {
+	Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().forEach(function (answerOption) {
 		if (answerOption.getIsCorrect()) {
 			const item = $('#answerOption-' + answerOption.getAnswerOptionNumber());
 			item.bootstrapSwitch('state', 'true');
@@ -120,7 +120,7 @@ export function formatFreeTextSettingsButtons() {
 		animate: false,
 		onSwitchChange: function (event) {
 			const questionItem = Session.get("questionGroup");
-			questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].setConfig(event.target.id, $('#' + event.target.id).prop("checked"));
+			questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].setConfig(event.target.id, $('#' + event.target.id).prop("checked"));
 			if (event.target.id === "config_use_keywords_switch") {
 				if ($('#config_use_keywords_switch').prop("checked")) {
 					$('#config_trim_whitespaces_switch').bootstrapSwitch('disabled',false);
@@ -128,8 +128,8 @@ export function formatFreeTextSettingsButtons() {
 				} else {
 					$('#config_trim_whitespaces_switch').bootstrapSwitch('state', false).bootstrapSwitch('disabled',true);
 					$('#config_use_punctuation_switch').bootstrapSwitch('state', false).bootstrapSwitch('disabled',true);
-					questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].setConfig("config_trim_whitespaces_switch", false);
-					questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].setConfig("config_use_punctuation_switch", false);
+					questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].setConfig("config_trim_whitespaces_switch", false);
+					questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].setConfig("config_use_punctuation_switch", false);
 				}
 			}
 			Session.set("questionGroup", questionItem);
@@ -142,7 +142,7 @@ export function formatFreeTextSettingsButtons() {
 		}
 	});
 
-	Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().forEach(function (answerOption) {
+	Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().forEach(function (answerOption) {
 		$('#config_case_sensitive_switch').bootstrapSwitch('state', answerOption.getConfigCaseSensitive());
 		$('#config_trim_whitespaces_switch').bootstrapSwitch('state', answerOption.getConfigTrimWhitespaces()).bootstrapSwitch('disabled',!answerOption.getConfigUseKeywords());
 		$('#config_use_keywords_switch').bootstrapSwitch('state', answerOption.getConfigUseKeywords());
@@ -218,11 +218,11 @@ export function createSlider(index) {
 	$('#correctValueInput').on("change", function () {
 		const correctValueInputField = $('#correctValueInput');
 		const value = parseFloat(correctValueInputField.val());
-		questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].setCorrectValue(value);
+		questionItem.getQuestionList()[Router.current().params.questionIndex].setCorrectValue(value);
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(questionItem);
 		correctValueInputField.removeClass("invalid");
-		$.each(Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getValidationStackTrace(), function (index, element) {
+		$.each(Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getValidationStackTrace(), function (index, element) {
 			if (element.reason === "invalid_correct_value") {
 				correctValueInputField.addClass("invalid");
 				return false;

@@ -15,33 +15,19 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.createTimerView.onRendered(function () {
-	let index = EventManagerCollection.findOne().questionIndex;
+	let index = Router.current().params.questionIndex;
 	lib.createSlider(index);
 	lib.setSlider(index);
-	var body = $('body');
-	body.on('click', '.questionIcon:not(.active)', function () {
-		if (index >= Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList().length) {
-			return;
-		}
-
-		Router.go("/" + Router.current().params.quizName + "/question");
-	});
-	body.on('click', '.removeQuestion', function () {
-		index = EventManagerCollection.findOne().questionIndex;
-	});
 
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.addFooterElement(footerElements.footerElemNicknames);
 	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
 });

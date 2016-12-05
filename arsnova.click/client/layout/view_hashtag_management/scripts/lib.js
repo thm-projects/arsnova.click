@@ -98,10 +98,10 @@ export function connectEventManager(hashtag) {
 					Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
 					Router.go("/" + hashtag + "/memberlist");
 				} else {
-					Router.go("/" + hashtag + "/question");
+					Router.go("/" + hashtag + "/quizManager");
 				}
 			} else {
-				Router.go("/" + hashtag + "/question");
+				Router.go("/" + hashtag + "/quizManager");
 			}
 			sessionStorage.removeItem("overrideValidQuestionRedirect");
 		});

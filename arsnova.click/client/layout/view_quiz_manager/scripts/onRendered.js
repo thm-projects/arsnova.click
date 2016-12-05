@@ -9,7 +9,9 @@ import * as lib from './lib.js';
 
 Template.quizManager.onRendered(function () {
 	Session.get("questionGroup").getQuestionList().forEach(function (item) {
-		$('#added_questions_wrapper').append('<li id="' + item.getQuestionIndex() + '_added_question" class="draggable">' + TAPi18n.__(item.translationReferrer()) + '</li>');
+		$('#added_questions_wrapper').append(
+			'<li id="' + item.getQuestionIndex() + '_added_question" data-valid="' + (item.isValid() ? "true" : "false") + '" class="draggable">' + TAPi18n.__(item.translationReferrer()) + '</li>'
+		);
 	});
 	$('#added_questions_wrapper').find('.draggable').draggable({
 		connectToSortable: "#added_questions_wrapper, #removeQuestionWrapper",
@@ -64,8 +66,10 @@ Template.quizManager.onRendered(function () {
 				}).indexOf(true);
 				const indexTo   = questionGroup.getQuestionList().length;
 				const indexFrom = ui.item.index();
-				lib.recalculateIndices(questionGroup, indexFrom, indexTo);
-				questionGroup.addDefaultQuestion(indexFrom, classNames[index].replace("questionType_", ""), true);
+				lib.recalculateIndices(questionGroup, indexFrom, indexTo, true);
+				questionGroup.addDefaultQuestion(indexFrom, classNames[index].replace("questionType_", ""));
+				console.log(questionGroup);
+				ui.item.attr("data-valid", questionGroup.getQuestionList()[indexFrom].isValid());
 			} else {
 				/* We're moving a question around so we need to recalculate the question indices */
 				const indexTo   = ui.item.index();

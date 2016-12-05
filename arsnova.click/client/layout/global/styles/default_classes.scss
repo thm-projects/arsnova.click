@@ -31,12 +31,14 @@
 .center-vertical {
   top: 25%;
   position: absolute;
-  width: 100%;
+  width: 70%;
+  margin: 0 15%;
 }
 
 .center-vertical-non-scrollable {
   position: absolute;
-  width: 100%;
+  width: 70%;
+  margin: 0 15%;
   top: 50%;
   transform: translateY(-50%);
 }

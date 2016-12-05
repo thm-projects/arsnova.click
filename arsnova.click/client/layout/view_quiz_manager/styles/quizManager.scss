@@ -40,6 +40,21 @@
 		border-radius: $corner-radius;
 		cursor: pointer;
 
+		&[data-valid='true'] {
+			&:before {
+				content: "\2611";
+				margin-right: 5px;
+				color: #00e600;
+			}
+		}
+		&[data-valid='false'] {
+			&:before {
+				content: "\2612";
+				margin-right: 5px;
+				color: red;
+			}
+		}
+
 		&.draggable {
 			z-index: 1080 !important;
 		}

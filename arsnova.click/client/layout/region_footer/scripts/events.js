@@ -290,7 +290,7 @@ const clickEvents = {
 				instance.templateSelector.find('#editSessionButton').on('click', function () {
 					Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
 					Meteor.call('EventManagerCollection.reset', Router.current().params.quizName);
-					Router.go("/" + Router.current().params.quizName + "/question");
+					Router.go("/" + Router.current().params.quizName + "/quizManager");
 				});
 			}
 		});
@@ -402,6 +402,7 @@ Template.footerNavButtons.events({
 				Router.go("/" + Router.current().params.quizName + "/quizSummary");
 				break;
 			case "quizSummary":
+			case "quizManager":
 				Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
 				Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
 				Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);

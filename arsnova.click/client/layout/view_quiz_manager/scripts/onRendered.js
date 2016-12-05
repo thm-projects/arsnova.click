@@ -68,7 +68,6 @@ Template.quizManager.onRendered(function () {
 				const indexFrom = ui.item.index();
 				lib.recalculateIndices(questionGroup, indexFrom, indexTo, true);
 				questionGroup.addDefaultQuestion(indexFrom, classNames[index].replace("questionType_", ""));
-				console.log(questionGroup);
 				ui.item.attr("data-valid", questionGroup.getQuestionList()[indexFrom].isValid());
 			} else {
 				/* We're moving a question around so we need to recalculate the question indices */

@@ -16,6 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Session} from 'meteor/session';
+import {Router} from 'meteor/iron:router';
 import * as localData from '/lib/local_storage.js';
 
 export const urlSchema = {

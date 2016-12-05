@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Session} from 'meteor/session';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {Router} from 'meteor/iron:router';
 import * as localData from '/lib/local_storage.js';
 
@@ -39,9 +38,6 @@ export function checkForValidQuestionText() {
 }
 
 export function getQuestionTypes() {
-	if (!Session.get("questionGroup") || !EventManagerCollection.findOne()) {
-		return [];
-	}
 	return [
 		{
 			id: "SingleChoiceQuestion",

@@ -40,7 +40,9 @@
 		width: 365px;
 		height: 540px;
 		overflow-y: auto;
+		overflow-x: hidden;
 		color: white;
+		word-wrap: break-word;
 
 		p {
 			color: white;

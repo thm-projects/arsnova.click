@@ -38,7 +38,7 @@
 		width: 100% !important;
 		padding: 5px;
 		border-radius: $corner-radius;
-		cursor: pointer;
+		cursor: move;
 
 		&[data-valid='true'] {
 			&:before {

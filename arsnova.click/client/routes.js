@@ -400,7 +400,7 @@ Router.route('/:quizName/quizManager', {
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {backId: "backButton", forwardId: "forwardButton"};
+					return {backId: "backButton", forwardId: "forwardButton", forwardText: 'view.quiz_summary.start_quiz'};
 				}
 			});
 			this.render('quizManager');

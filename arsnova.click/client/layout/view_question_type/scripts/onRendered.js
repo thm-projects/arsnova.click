@@ -8,4 +8,4 @@ Template.questionTypeView.onRendered(function () {
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
-})
+});

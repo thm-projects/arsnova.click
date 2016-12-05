@@ -437,14 +437,17 @@ Template.footerNavButtons.events({
 			case "dataprivacy":
 				Router.go("/");
 				break;
+			case "quizManager":
+				if (typeof Router.current().params.questionIndex !== "undefined") {
+					Router.go("/" + Router.current().params.quizName + "/quizManager");
+				} else {
+					Router.go("/" + Router.current().params.quizName + "/resetToHome");
+				}
+				break;
 			case "question":
-				Router.go("/" + Router.current().params.quizName + "/quizManager");
-				break;
 			case "answeroptions":
-				Router.go("/" + Router.current().params.quizName + "/quizManager");
-				break;
 			case "settimer":
-				Router.go("/" + Router.current().params.quizName + "/quizManager");
+				history.back();
 				break;
 			case "quizSummary":
 				let firstFailedIndex = null;

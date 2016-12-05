@@ -11,3 +11,9 @@ Template.quizManager.helpers({
 		return Session.get("isMovingQuestion");
 	}
 });
+
+Template.quizManagerDetails.helpers({
+	getQuestionIndex: function () {
+		return Router.current().params.questionIndex;
+	}
+});

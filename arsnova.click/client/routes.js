@@ -410,6 +410,23 @@ Router.route('/:quizName/quizManager', {
 	}
 });
 
+Router.route('/:quizName/quizManager/:questionIndex', {
+	controller: BlockingRouteController,
+	action: function () {
+		if (localData.containsHashtag(Router.current().params.quizName)) {
+			this.render('footerNavButtons', {
+				to: 'footer.navigation',
+				data: function () {
+					return {backId: "backButton", backText: "global.save"};
+				}
+			});
+			this.render('quizManagerDetails');
+		} else {
+			Router.go("/");
+		}
+	}
+});
+
 Router.route('/:quizName/question/:questionIndex', {
 	controller: BlockingRouteController,
 	action: function () {
@@ -427,18 +444,14 @@ Router.route('/:quizName/question/:questionIndex', {
 	}
 });
 
-Router.route('/:quizName/answeroptions', {
+Router.route('/:quizName/answeroptions/:questionIndex', {
 	controller: BlockingRouteController,
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (!globalEventStackObserver.isRunning()) {
-				globalEventStackObserver.startObserving(Router.current().params.quizName);
-			}
-			this.render('questionList', {to: 'header.questionList'});
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {backId: "backButton", forwardId: "forwardButton"};
+					return {backId: "backButton", backText: "global.save"};
 				}
 			});
 			this.render('createAnswerOptions');
@@ -448,18 +461,14 @@ Router.route('/:quizName/answeroptions', {
 	}
 });
 
-Router.route('/:quizName/settimer', {
+Router.route('/:quizName/settimer/:questionIndex', {
 	controller: BlockingRouteController,
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (!globalEventStackObserver.isRunning()) {
-				globalEventStackObserver.startObserving(Router.current().params.quizName);
-			}
-			this.render('questionList', {to: 'header.questionList'});
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {backId: "backButton", forwardId: "forwardButton"};
+					return {backId: "backButton", backText: "global.save"};
 				}
 			});
 			this.render('createTimerView');
@@ -473,9 +482,6 @@ Router.route('/:quizName/nicknameCategories', {
 	controller: BlockingRouteController,
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (!globalEventStackObserver.isRunning()) {
-				globalEventStackObserver.startObserving(Router.current().params.quizName);
-			}
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {

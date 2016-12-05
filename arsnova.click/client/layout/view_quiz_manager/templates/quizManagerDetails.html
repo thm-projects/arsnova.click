@@ -1,0 +1,16 @@
+<template name="quizManagerDetails">
+    <div class="row" id="quizManagerDetails">
+        <div class="col-xs-12">
+            <div class="btn-group btn-group-justified">
+                <div class="btn-group"><button type="button" class="btn btn-default" id="gotoQuestionText">Fragetyp bearbeiten</button></div>
+                <div class="btn-group"><button type="button" class="btn btn-default" id="gotoQuestionText">Frage bearbeiten</button></div>
+                <div class="btn-group"><button type="button" class="btn btn-default" id="gotoAnswerOptionText">Antwortoptionen bearbeiten</button></div>
+                <div class="btn-group"><button type="button" class="btn btn-default" id="gotoTimer">Timer bearbeiten</button></div>
+                <div class="btn-group"><button type="button" class="btn btn-default" id="gotoNicknames">Nicknamen bearbeiten</button></div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            {{> quizSummary item=getQuestionIndex}}
+        </div>
+    </div>
+</template>

@@ -2,15 +2,17 @@
     <div class="row">
         <div class="col-md-12">
             <div class="quizSummary margin-title">
-                <p>{{_ "view.quiz_summary.quiz_name"}}: {{getSessionName}}</p>
-                <p>{{_ "view.quiz_summary.quiz_url"}}: {{getSessionUrl}}</p>
-                <p>{{_ "view.quiz_summary.question_amount"}}: {{getQuestionCount}}</p>
-                <p>{{_ "view.quiz_summary.validation_question_group"}}: <span class="{{#if isQuestionGroupValid}}success{{else}}failed{{/if}}">{{_ getQuestionGroupValidation}}</span></p>
-                <p>{{_ "view.quiz_summary.isRestrictingRudeNicks"}}: {{_ getIsRestrictingRudeNicks}}</p>
-                <p>{{_ "view.quiz_summary.isRestrictingToCAS"}}: {{_ getIsRestrictingToCAS}}</p>
-                <p>{{_ "view.quiz_summary.selected_nicks"}}: {{#if noSelectedNicks}}{{_ "view.quiz_summary.no_selected_nicks"}}{{else}}{{selectedNicksCount}} <span class="tabbable" id="showSelectedNicks">{{_ getShowSelectedNicksText}}</span>{{/if}}</p>
-                <p>{{selectedNicks}}</p>
-                <hr />
+                {{#if showHeader}}
+                    <p>{{_ "view.quiz_summary.quiz_name"}}: {{getSessionName}}</p>
+                    <p>{{_ "view.quiz_summary.quiz_url"}}: {{getSessionUrl}}</p>
+                    <p>{{_ "view.quiz_summary.question_amount"}}: {{getQuestionCount}}</p>
+                    <p>{{_ "view.quiz_summary.validation_question_group"}}: <span class="{{#if isQuestionGroupValid}}success{{else}}failed{{/if}}">{{_ getQuestionGroupValidation}}</span></p>
+                    <p>{{_ "view.quiz_summary.isRestrictingRudeNicks"}}: {{_ getIsRestrictingRudeNicks}}</p>
+                    <p>{{_ "view.quiz_summary.isRestrictingToCAS"}}: {{_ getIsRestrictingToCAS}}</p>
+                    <p>{{_ "view.quiz_summary.selected_nicks"}}: {{#if noSelectedNicks}}{{_ "view.quiz_summary.no_selected_nicks"}}{{else}}{{selectedNicksCount}} <span class="tabbable" id="showSelectedNicks">{{_ getShowSelectedNicksText}}</span>{{/if}}</p>
+                    <p>{{selectedNicks}}</p>
+                    <hr />
+                {{/if}}
                 {{#each getQuestions}}
                     <div class="questionItem row">
                         <div class="col-xs-12">

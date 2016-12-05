@@ -100,3 +100,10 @@ Template.quizManager.onRendered(function () {
 	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
 });
+
+Template.quizManagerDetails.onRendered(function () {
+	footerElements.removeFooterElements();
+	footerElements.addFooterElement(footerElements.footerElemHome);
+	headerLib.calculateHeaderSize();
+	headerLib.calculateTitelHeight();
+});

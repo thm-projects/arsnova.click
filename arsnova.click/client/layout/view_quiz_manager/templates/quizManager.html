@@ -1,5 +1,8 @@
 <template name="quizManager">
     <div class="row" id="quizManager">
+        <div class="col-xs-12">
+            {{> quizSummary item="header"}}
+        </div>
         <div class="col-xs-12 col-sm-6">
             <h2 class="text-light">Verfügbare Quizfragen</h2>
             <ul id="available_questions_wrapper">
@@ -12,9 +15,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <h2 class="text-light">Erstellte Quizfragen</h2>
-                    <ul id="added_questions_wrapper">
-
-                    </ul>
+                    <ul id="added_questions_wrapper"></ul>
                 </div>
                 <div class="col-xs-12 {{#unless isMovingQuestion}}hidden{{/unless}}">
                     <div id="removeQuestionWrapper">

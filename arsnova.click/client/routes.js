@@ -419,7 +419,7 @@ Router.route('/:quizName/question/:questionIndex', {
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {backId: "backButton", forwardId: "forwardButton"};
+					return {backId: "backButton", backText: "global.save"};
 				}
 			});
 			this.render('createQuestionView');

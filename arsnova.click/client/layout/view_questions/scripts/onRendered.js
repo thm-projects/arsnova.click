@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
@@ -24,7 +25,17 @@ import * as lib from './lib.js';
 
 Template.createQuestionView.onRendered(function () {
 
-	$('.textarea').height($('#mainContentContainer').height() - $('#markdownBarDiv').height());
+	this.autorun(function () {
+		headerLib.titelTracker.depend();
+		const mainContentContainer = $('#mainContentContainer');
+		const previewQuestionImage = $('#previewQuestionImage');
+		$('.textarea').css("height", mainContentContainer.height() - $('#markdownBarDiv').outerHeight(true) - 6);
+		previewQuestionImage.css("height", mainContentContainer.height());
+		$('#markdownPreviewWrapper').css({
+			height: previewQuestionImage.height() - 140,
+			width: (previewQuestionImage.width() ? previewQuestionImage.width() : previewQuestionImage.height() / 1.7758186397984888) - 10
+		});
+	}.bind(this));
 
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);

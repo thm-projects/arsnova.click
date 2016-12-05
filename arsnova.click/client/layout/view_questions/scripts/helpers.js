@@ -35,8 +35,7 @@ Template.createQuestionView.helpers({
 			return;
 		}
 		mathjaxMarkdown.initializeMarkdownAndLatex();
-		let content = mathjaxMarkdown.getContent($('#questionText').val());
-		return content;
+		return mathjaxMarkdown.getContent(Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getQuestionText());
 	},
 	isLargeWindow: function () {
 		return $(window).height() > 699;

@@ -13,4 +13,4 @@ Template.questionTypeView.events({
 		Session.set("questionGroup", questionGroup);
 		localData.addHashtag(questionGroup);
 	}
-})
+});

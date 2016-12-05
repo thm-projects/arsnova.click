@@ -101,7 +101,7 @@ Template.quizManager.onRendered(function () {
 	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
 
-	var guide = $("body").guide();
+	const guide = $("body").guide();
 	guide.addStep(".quizSummary", "Hier ist die Zusammenfassung der gesamten Quizrunde zu sehen");
 	guide.addStep(".quizSummary #sessionUrl", "Unter dieser URL können Teilnehmer das Quiz betreten, sobald du es freigibst");
 	guide.addStep(".quizSummary #questionGroupValidation", "Die Validierung der Quizrunde schlägt fehl, sofern das Quiz noch nicht fertiggstellt ist. Dazu zählen nicht vorhandene Quizfragen, fehlende oder unvollständige Antwortoptionen, nicht gesetzte Timer, usw.");

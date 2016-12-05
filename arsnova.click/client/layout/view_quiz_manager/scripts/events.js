@@ -9,6 +9,9 @@ Template.quizManager.events({
 });
 
 Template.quizManagerDetails.events({
+	"click #gotoQuestionType": function () {
+		Router.go("/" + Router.current().params.quizName + "/questionType/" + Router.current().params.questionIndex);
+	},
 	"click #gotoQuestionText": function () {
 		Router.go("/" + Router.current().params.quizName + "/question/" + Router.current().params.questionIndex);
 	},
@@ -17,8 +20,5 @@ Template.quizManagerDetails.events({
 	},
 	"click #gotoTimer": function () {
 		Router.go("/" + Router.current().params.quizName + "/settimer/" + Router.current().params.questionIndex);
-	},
-	"click #gotoNicknames": function () {
-		Router.go("/" + Router.current().params.quizName + "/nicknameCategories");
 	}
 });

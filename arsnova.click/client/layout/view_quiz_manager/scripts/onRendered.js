@@ -97,8 +97,25 @@ Template.quizManager.onRendered(function () {
 
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
+	footerElements.addFooterElement(footerElements.footerElemNicknames);
 	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
+
+	var guide = $("body").guide();
+	guide.addStep(".quizSummary", "Hier ist die Zusammenfassung der gesamten Quizrunde zu sehen");
+	guide.addStep(".quizSummary #sessionUrl", "Unter dieser URL können Teilnehmer das Quiz betreten, sobald du es freigibst");
+	guide.addStep(".quizSummary #questionGroupValidation", "Die Validierung der Quizrunde schlägt fehl, sofern das Quiz noch nicht fertiggstellt ist. Dazu zählen nicht vorhandene Quizfragen, fehlende oder unvollständige Antwortoptionen, nicht gesetzte Timer, usw.");
+	guide.addStep(".quizSummary #restrictToCas", "Ist diese Einstellung aktiv, müssen sich die Teilnehmer am zentralen Authentifizierungsdienst der Technischen Hochschule Mittelhessen anmelden, um am Quiz teilnehmen zu können");
+	guide.addStep("#available_questions_wrapper", "Hier siehst du alle Fragetypen, aus denen du wählen kannst. Jeder Fragetyp bietet unterschiedliche Vorsteinllungen und Möglichkeitung zur Gestaltung des Quizzes");
+	guide.addStep("#available_questions_wrapper .questionType_SingleChoiceQuestion", "SingleChoice Fragen enhalten beliebig viele Antwortoptionen, von denen genau eine als richtig markiert werden muss");
+	guide.addStep("#available_questions_wrapper .questionType_YesNoSingleChoiceQuestion", "Ja|Nein Fragen enthalten nur zwei Antwortopionen (Ja und Nein), von denen eine als richtig markiert werden muss");
+	guide.addStep("#available_questions_wrapper .questionType_TrueFalseSingleChoiceQuestion", "Wahr|Falsch Fragen enthalten ebenfalls nur zwei Antwortopionen (Wahr und Falsch), von denen eine als richtig markiert werden muss");
+	guide.addStep("#available_questions_wrapper .questionType_MultipleChoiceQuestion", "Multiple-Choice Fragen enthalten beliebig viele Antwortoptionen, von denen beliebig viele (mindestens jedoch zwei) als richtig markiert werden können");
+	guide.addStep("#available_questions_wrapper .questionType_RangedQuestion", "Für die Schätzfrage muss eine Ganzzahl als richtig angegeben werden. Zusätzlich können Toleranzen nach oben und unten eingegeben werden");
+	guide.addStep("#available_questions_wrapper .questionType_FreeTextQuestion", "In der Freitextfrage muss der Teilnehmer einen beliebigen Text eingeben. Dieser wird mit dem vorab eingegebenen Referenzwert verglichen");
+	guide.addStep("#available_questions_wrapper .questionType_SurveyQuestion", "Umfragen enthalten beliebig viele Antwortoptionen, von denen keine als richtig oder falsch markiert werden darf.");
+	guide.addStep("#added_questions_wrapper", "Hier findest du alle deine Quizfragen, die im Quiz vorhanden sind. Um eine Quizfrage dem Quiz hinzuzufügen, ziehe sie einfach aus dem linken Stapel hierher. Mit einem Klick auf die Frage kannst du die Inhalte der Quizfrage einstellen.");
+	guide.start();
 });
 
 Template.quizManagerDetails.onRendered(function () {

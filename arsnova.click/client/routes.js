@@ -427,6 +427,23 @@ Router.route('/:quizName/quizManager/:questionIndex', {
 	}
 });
 
+Router.route('/:quizName/questionType/:questionIndex', {
+	controller: BlockingRouteController,
+	action: function () {
+		if (!localData.containsHashtag(Router.current().params.quizName)) {
+			Router.go("/");
+		} else {
+			this.render('footerNavButtons', {
+				to: 'footer.navigation',
+				data: function () {
+					return {backId: "backButton", backText: "global.save"};
+				}
+			});
+			this.render('questionTypeView');
+		}
+	}
+});
+
 Router.route('/:quizName/question/:questionIndex', {
 	controller: BlockingRouteController,
 	action: function () {

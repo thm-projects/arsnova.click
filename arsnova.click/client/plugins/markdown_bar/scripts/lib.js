@@ -15,6 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Session} from 'meteor/session';
+import * as localData from '/lib/local_storage.js';
+
 export const urlSchema = {
 	type: String,
 	min: 1,
@@ -41,6 +44,11 @@ export function insertInQuestionText(textStart, textEnd) {
 	textarea.focus();
 
 	textarea.scrollTop = scrollPos;
+	const questionText = textarea.value;
+	const questionItem = Session.get("questionGroup");
+	questionItem.getQuestionList()[Router.current().params.questionIndex].setQuestionText(questionText);
+	Session.set("questionGroup", questionItem);
+	localData.addHashtag(questionItem);
 }
 
 export function markdownAlreadyExistsAndAutoRemove(textStart, textEnd) {
@@ -79,6 +87,12 @@ export function markdownAlreadyExistsAndAutoRemove(textStart, textEnd) {
 		textarea.focus();
 
 		textarea.scrollTop = scrollPos;
+
+		const questionText = textarea.value;
+		const questionItem = Session.get("questionGroup");
+		questionItem.getQuestionList()[Router.current().params.questionIndex].setQuestionText(questionText);
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(questionItem);
 
 		return true;
 	}

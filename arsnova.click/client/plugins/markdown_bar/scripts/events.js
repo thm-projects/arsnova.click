@@ -20,7 +20,6 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {markdownAlreadyExistsAndAutoRemove, insertInQuestionText, urlSchema} from './lib.js';
-import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 
 Template.markdownBar.events({
 	"click #infoMarkdownButton": function () {
@@ -31,20 +30,6 @@ Template.markdownBar.events({
 			closeOnButton: '#js-btn-hidePreviewModal, .splashscreen-container-close',
 			onRendered: function (instance) {
 				instance.templateSelector.find(".modal-markdown-body").html(TAPi18n.__("plugins.markdown_bar.info_content"));
-			}
-		});
-	},
-	"click #previewMarkdownButton": function () {
-		new Splashscreen({
-			autostart: true,
-			templateName: "questionPreviewSplashscreen",
-			closeOnButton: '#js-btn-hidePreviewModal, .splashscreen-container-close',
-			onRendered: function (instance) {
-				mathjaxMarkdown.initializeMarkdownAndLatex();
-				let content = mathjaxMarkdown.getContent($('#questionText').val());
-
-				instance.templateSelector.find('.modal-markdown-body').html(content).find('p').css("margin-left", "0px");
-				mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('.modal-markdown-body'));
 			}
 		});
 	},

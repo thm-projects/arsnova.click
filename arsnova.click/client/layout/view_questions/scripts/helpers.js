@@ -24,7 +24,6 @@ import * as lib from './lib.js';
 
 Template.createQuestionView.helpers({
 	getQuestionTextSchema: questionTextSchema,
-	//Get question from Sessions-Collection if it already exists
 	questionText: function () {
 		if (!Session.get("questionGroup")) {
 			return;

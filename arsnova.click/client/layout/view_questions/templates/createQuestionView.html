@@ -17,29 +17,20 @@
 
 <template name="createQuestionView">
 	<div class="row full-screen-content">
-		<div class="col-md-12">
-            <div class="row distance-top">
-                <div class="col-xs-12">
-                    <select title="chooseQuestionType"
-                            class="round-corners textarea tabbable"
-                            id="chooseQuestionType">
-                        {{#each questionTypes }}
-                            <option id="{{this.id}}" {{this.selected}}>{{_ this.translationName}}</option>
-                        {{/each}}
-                    </select>
-                </div>
+        <div id="editQuestionText" class="col-md-12 col-lg-6">
+            {{> markdownBar }}
+            <textarea class="round-corners-markdown textarea placeholder-align-center tabbable"
+                      maxlength="{{getQuestionTextSchema.max}}"
+                      rows="{{#if isLargeWindow}}8{{else}}4{{/if}}"
+                      id="questionText"
+                      placeholder="{{_ "view.questions.enter_question_here"}}"
+            >{{questionText}}</textarea>
+        </div>
+        <div id="previewQuestionContentWrapper" class="hidden-xs hidden-sm hidden-md col-lg-6">
+            <img id="previewQuestionImage" src="/images/preview/question_preview.png" alt="question preview" />
+            <div id="markdownPreviewWrapper">
+                {{{previewQuestionText}}}
             </div>
-            <div class="row distance-top">
-                <div id="editQuestionText" class="col-md-12">
-                    {{> markdownBar }}
-                    <textarea class="round-corners-markdown textarea placeholder-align-center tabbable"
-                              maxlength="{{getQuestionTextSchema.max}}"
-                              rows="{{#if isLargeWindow}}8{{else}}4{{/if}}"
-                              id="questionText"
-                              placeholder="{{_ "view.questions.enter_question_here"}}"
-                    >{{questionText}}</textarea>
-                </div>
-            </div>
-		</div>
+        </div>
 	</div>
 </template>

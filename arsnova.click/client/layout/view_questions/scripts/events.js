@@ -21,10 +21,10 @@ import * as lib from './lib.js';
 
 Template.createQuestionView.events({
 	'input #questionText': function () {
-		lib.addQuestion(EventManagerCollection.findOne().questionIndex);
+		lib.addQuestion(parseInt(Router.current().params.questionIndex));
 		lib.checkForValidQuestionText();
 	},
 	'change #chooseQuestionType': function () {
-		lib.addQuestion(EventManagerCollection.findOne().questionIndex);
+		lib.addQuestion(parseInt(Router.current().params.questionIndex));
 	}
 });

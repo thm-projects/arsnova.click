@@ -410,14 +410,12 @@ Router.route('/:quizName/quizManager', {
 	}
 });
 
-Router.route('/:quizName/question', {
+Router.route('/:quizName/question/:questionIndex', {
 	controller: BlockingRouteController,
 	action: function () {
-		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (!globalEventStackObserver.isRunning()) {
-				globalEventStackObserver.startObserving(Router.current().params.quizName);
-			}
-			this.render('questionList', {to: 'header.questionList'});
+		if (!localData.containsHashtag(Router.current().params.quizName)) {
+			Router.go("/");
+		} else {
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
@@ -425,8 +423,6 @@ Router.route('/:quizName/question', {
 				}
 			});
 			this.render('createQuestionView');
-		} else {
-			Router.go("/");
 		}
 	}
 });

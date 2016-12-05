@@ -17,7 +17,7 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {questionTextSchema} from '/lib/questions/collection.js';
 import * as lib from './lib.js';
 
@@ -25,18 +25,23 @@ Template.createQuestionView.helpers({
 	getQuestionTextSchema: questionTextSchema,
 	//Get question from Sessions-Collection if it already exists
 	questionText: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getQuestionText();
+	},
+	previewQuestionText: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		mathjaxMarkdown.initializeMarkdownAndLatex();
+		let content = mathjaxMarkdown.getContent($('#questionText').val());
+		return content;
 	},
 	isLargeWindow: function () {
 		return $(window).height() > 699;
 	},
 	questionTypes: function () {
-		if (!EventManagerCollection.findOne()) {
-			return;
-		}
 		return lib.getQuestionTypes();
 	}
 });

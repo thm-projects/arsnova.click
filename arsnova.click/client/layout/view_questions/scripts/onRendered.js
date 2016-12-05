@@ -23,27 +23,8 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.createQuestionView.onRendered(function () {
-	let index;
-	this.autorun(function () {
-		if (!EventManagerCollection.findOne()) {
-			return;
-		}
-		index = EventManagerCollection.findOne().questionIndex;
-	}.bind(this));
-	var body = $('body');
-	body.on('click', '.questionIcon:not(.active)', function () {
-		var currentSession = QuestionGroupCollection.findOne();
-		if (!currentSession || index >= currentSession.questionList.length) {
-			return;
-		}
 
-		lib.addQuestion(index);
-		lib.checkForValidQuestionText();
-	});
-	body.on('click', '.removeQuestion', function () {
-		index = EventManagerCollection.findOne().questionIndex;
-		lib.checkForValidQuestionText();
-	});
+	$('.textarea').height($('#mainContentContainer').height() - $('#markdownBarDiv').height());
 
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);

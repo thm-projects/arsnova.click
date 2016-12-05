@@ -25,54 +25,14 @@ import * as localData from '/lib/local_storage.js';
 
 export function addQuestion(index) {
 	const questionText = $('#questionText').val() || "";
-	const questionType = $('#chooseQuestionType').find('option:selected').attr("id");
 	const questionItem = Session.get("questionGroup");
-
-	try {
-		new SimpleSchema({
-			questionText: questionTextSchema
-		}).validate({questionText: questionText});
-	} catch (ex) {
-		new ErrorSplashscreen({
-			autostart: true,
-			errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
-		});
-		return;
-	}
-
-	// Check if we need to change the type of the question
-	if (questionItem.getQuestionList()[index].typeName() !== questionType) {
-		switch (questionItem.getQuestionList()[index].typeName()) {
-			case "YesNoSingleChoiceQuestion":
-			case "TrueFalseSingleChoiceQuestion":
-			case "FreeTextQuestion":
-				questionItem.getQuestionList()[index].removeAllAnswerOptions();
-				break;
-		}
-		const serialized = questionItem.getQuestionList()[index].serialize();
-		delete serialized.type;
-		questionItem.addQuestion(questionReflection[questionType](serialized), index);
-		switch (questionType) {
-			case "RangedQuestion":
-				questionItem.getQuestionList()[index].setTimer(10);
-				break;
-			case "FreeTextQuestion":
-				questionItem.getQuestionList()[index].addDefaultAnswerOption();
-				break;
-			case "SurveyQuestion":
-				questionItem.getQuestionList()[index].getAnswerOptionList().forEach(function (answerOption) {
-					answerOption.setIsCorrect(false);
-				});
-				break;
-		}
-	}
 	questionItem.getQuestionList()[index].setQuestionText(questionText);
 	Session.set("questionGroup", questionItem);
 	localData.addHashtag(questionItem);
 }
 
 export function checkForValidQuestionText() {
-	var questionTextWithoutMarkdownChars = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionTextWithoutMarkdownChars();
+	const questionTextWithoutMarkdownChars = Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getQuestionTextWithoutMarkdownChars();
 
 	if (questionTextWithoutMarkdownChars > 4 && questionTextWithoutMarkdownChars < 50001) {
 		$('#questionText').removeClass("invalidQuestion");
@@ -88,38 +48,31 @@ export function getQuestionTypes() {
 	return [
 		{
 			id: "SingleChoiceQuestion",
-			translationName: "view.questions.single_choice_question",
-			selected: Session.get("questionGroup").getQuestionList().length > 0 && Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SingleChoiceQuestion" ? 'selected' : ""
+			translationName: "view.questions.single_choice_question"
 		},
 		{
 			id: "YesNoSingleChoiceQuestion",
-			translationName: "view.questions.single_choice_question_yes_no",
-			selected: Session.get("questionGroup").getQuestionList().length > 0 && Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "YesNoSingleChoiceQuestion" ? 'selected' : ""
+			translationName: "view.questions.single_choice_question_yes_no"
 		},
 		{
 			id: "TrueFalseSingleChoiceQuestion",
-			translationName: "view.questions.single_choice_question_true_false",
-			selected: Session.get("questionGroup").getQuestionList().length > 0 && Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "TrueFalseSingleChoiceQuestion" ? 'selected' : ""
+			translationName: "view.questions.single_choice_question_true_false"
 		},
 		{
 			id: "MultipleChoiceQuestion",
-			translationName: "view.questions.multiple_choice_question",
-			selected: Session.get("questionGroup").getQuestionList().length > 0 && Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "MultipleChoiceQuestion" ? 'selected' : ""
+			translationName: "view.questions.multiple_choice_question"
 		},
 		{
 			id: "RangedQuestion",
-			translationName: "view.questions.ranged_question",
-			selected: Session.get("questionGroup").getQuestionList().length > 0 && Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "RangedQuestion" ? 'selected' : ""
+			translationName: "view.questions.ranged_question"
 		},
 		{
 			id: "FreeTextQuestion",
-			translationName: "view.questions.free_text_question",
-			selected: Session.get("questionGroup").getQuestionList().length > 0 && Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "FreeTextQuestion" ? 'selected' : ""
+			translationName: "view.questions.free_text_question"
 		},
 		{
 			id: "SurveyQuestion",
-			translationName: "view.questions.survey_question",
-			selected: Session.get("questionGroup").getQuestionList().length > 0 && Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SurveyQuestion" ? 'selected' : ""
+			translationName: "view.questions.survey_question"
 		}
 	];
 }

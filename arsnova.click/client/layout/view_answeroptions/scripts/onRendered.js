@@ -15,11 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
+import * as localData from '/lib/local_storage.js';
 import * as lib from './lib.js';
 
 Template.createAnswerOptions.onRendered(function () {
@@ -33,7 +35,6 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 	if ($(window).width() >= 992) {
 		$('#answerOptionText_Number0').focus();
 	}
-	lib.formatIsCorrectButtons();
 	this.autorun(function () {
 		headerLib.titelTracker.depend();
 		const mainContentContainer = $('#mainContentContainer');
@@ -45,6 +46,54 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 		});
 		lib.answerOptionTracker.changed();
 	}.bind(this));
+	this.autorun(function () {
+		lib.answerOptionTracker.depend();
+		Meteor.defer(function () {
+			lib.formatIsCorrectButtons();
+		});
+	}.bind(this));
+	lib.formatIsCorrectButtons();
+	$('#answerOptionWrapper').sortable({
+		revert: "invalid",
+		scroll: false,
+		axis: 'y',
+		containment: "parent",
+		tolerance: "pointer",
+		update: function (event, ui) {
+			const questionGroup = Session.get("questionGroup");
+			const indexFrom = ui.item.index();
+			if (ui.item.hasClass("ui-draggable")) {
+				ui.item.remove();
+				questionGroup.getQuestionList()[Router.current().params.questionIndex].addDefaultAnswerOption(indexFrom);
+			} else {
+				const indexTo = questionGroup.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().length;
+				lib.recalculateIndices(questionGroup.getQuestionList()[Router.current().params.questionIndex], indexFrom, indexTo, true);
+			}
+			Session.set("questionGroup", questionGroup);
+			localData.addHashtag(questionGroup);
+			lib.answerOptionTracker.changed();
+		}
+	});
+	$('#default_answer_row').draggable({
+		connectToSortable: "#answerOptionWrapper",
+		scroll: false,
+		axis: 'y',
+		appendTo: "parent",
+		helper: "clone",
+		revert: "invalid",
+		stop: function (event, ui) {
+			ui.helper.find('.answer_row_default_text').remove();
+			const textFrame = $('.answer_row_text').first().clone().val("");
+			const bootstrapSwitch = $('.bootstrap-switch').first().clone();
+			ui.helper.append(textFrame).append(bootstrapSwitch);
+		}
+	}).css({"width": $('#default_answer_row').width()});
+	$('.answerOptionWrapper').find('.draggable').draggable({
+		connectToSortable: "#answerOptionWrapper",
+		scroll: false,
+		axis: 'y',
+		revert: "invalid"
+	}).disableSelection();
 });
 
 Template.rangedAnswerOptionTemplate.onRendered(function () {

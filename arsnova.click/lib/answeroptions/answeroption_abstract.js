@@ -84,6 +84,10 @@ export class AbstractAnswerOption {
 		return this[answerOptionNumber];
 	}
 
+	setAnswerOptionNumber (index) {
+		return this[answerOptionNumber] = index;
+	}
+
 	/**
 	 * Serialize the instance object to a JSON compatible object
 	 * @returns {{hashtag: String, type: String, questionIndex: Number, answerText: String, answerOptionNumber: Number}}

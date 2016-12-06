@@ -63,6 +63,56 @@
 	}
 }
 
+#editAnsweroptionText {
+	.answerOptionElementWrapper {
+		display: flex;
+		border-radius: $corner-radius;
+		background-color: #ffd700;
+		margin: 10px 0;
+		position: relative;
+		font-size: 1.3em;
+
+		.answer_row_short_text {
+			width: 80px;
+			line-height: 50px;
+			text-align: center;
+			font-weight: bold;
+			font-size: 3em;
+			height: 50px;
+		}
+		.answer_row_text {
+			width: calc(100% - 220px);
+			background-color: transparent;
+			border: none;
+		}
+		.bootstrap-switch {
+			height: 50px;
+			width: 80px;
+
+			.bootstrap-switch-container {
+				margin-top: 10px;
+			}
+		}
+		.removeAnsweroption {
+			margin-top: 10px;
+			font-size: 1.5em;
+			cursor: pointer;
+			width: 40px;
+		}
+	}
+
+	#default_answer_row {
+		background-color: #bda212 !important;
+		cursor: move !important;
+
+		.answer_row_default_text {
+			width: calc(100% - 80px);
+			margin: 0;
+			text-align: left;
+			line-height: 50px;
+		}
+	}
+}
 
 #previewAnsweroptionContentWrapper {
 	overflow: hidden;
@@ -84,6 +134,11 @@
 		overflow-x: hidden;
 		color: white;
 		word-wrap: break-word;
+
+		.full-screen-content {
+			width: 100%;
+			margin-left: 0;
+		}
 
 		p {
 			color: white;

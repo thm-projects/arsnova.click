@@ -142,9 +142,14 @@ export class AbstractQuestion {
 			throw new Error("Invalid argument for Question.addAnswerOption");
 		}
 		if (typeof index === "undefined" || index < 0 || index >= this.getAnswerOptionList().length) {
+			answerOption.setAnswerOptionNumber(this.getAnswerOptionList().length);
 			this[answerOptionList].push(answerOption);
 		} else {
-			this[answerOptionList][index] = answerOption;
+			answerOption.setAnswerOptionNumber(index);
+			this[answerOptionList].splice(index, 0, answerOption);
+			for (let i = index + 1; i < this.getAnswerOptionList().length; i++) {
+				this.getAnswerOptionList()[i].setAnswerOptionNumber(i);
+			}
 		}
 	}
 

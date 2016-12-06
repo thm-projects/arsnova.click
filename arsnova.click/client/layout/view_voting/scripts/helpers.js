@@ -46,10 +46,10 @@ Template.votingview.helpers({
 			allAnswerTexts.forEach(function (item) {
 				maxLength = maxLength < item.getAnswerText().length ? item.getAnswerText().length : maxLength;
 			});
-			if (maxLength > 5) {
+			if (maxLength > 6) {
 				return String.fromCharCode((number.hash.number + 65));
 			} else {
-				return allAnswerTexts[number.hash.number].getAnswerText();
+				return allAnswerTexts[number.hash.number] ? allAnswerTexts[number.hash.number].getAnswerText() : "";
 			}
 		} else {
 			return String.fromCharCode((number.hash.number + 65));

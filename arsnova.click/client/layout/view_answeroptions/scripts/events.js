@@ -48,28 +48,13 @@ Template.defaultAnswerOptionTemplate.events({
 			setTimeout(formatIsCorrectButtons, 20);
 		}
 	},
-	"click #deleteAnswerOption": function () {
+	"click .removeAnsweroption": function (event) {
 		const questionItem = Session.get("questionGroup");
-		const answerlist = questionItem.getQuestionList()[Router.current().params.questionIndex];
-		let answerOptionsCount = answerlist.getAnswerOptionList().length;
-
-		if (answerOptionsCount > 1) {
-			$("#addAnswerOption").removeClass("hide");
-
-			answerlist.removeAnswerOption(answerOptionsCount - 1);
-			Session.set("questionGroup", questionItem);
-			localData.addHashtag(Session.get("questionGroup"));
-
-			answerOptionsCount--;
-			if (answerOptionsCount === 1) {
-				$("#deleteAnswerOption").addClass("hide");
-			} else if (answerOptionsCount > 2) {
-				const answerOptionsField = $('.answer-options');
-				answerOptionsField.scrollTop(answerOptionsField[0].scrollHeight);
-			}
-		}
+		questionItem.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption(event.currentTarget.id.replace("removeAnsweroption_", ""));
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
 	},
-	"keydown .input-field": function (event) {
+	"keydown .answer_row_text": function (event) {
 		if ((event.keyCode === 13) && !event.shiftKey) {
 			const nextElement = $(event.currentTarget).closest(".form-group").next();
 			if (nextElement.length <= 0) {
@@ -87,7 +72,7 @@ Template.defaultAnswerOptionTemplate.events({
 			}
 		}
 	},
-	"input .input-field": function (event) {
+	"input .answer_row_text": function (event) {
 		parseSingleAnswerOptionInput(Router.current().params.questionIndex, $(event.currentTarget).attr("id").replace("answerOptionText_Number",""));
 	}
 });

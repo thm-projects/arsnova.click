@@ -85,7 +85,7 @@ export class AbstractAnswerOption {
 	}
 
 	setAnswerOptionNumber (index) {
-		return this[answerOptionNumber] = index;
+		this[answerOptionNumber] = index;
 	}
 
 	/**

@@ -51,5 +51,5 @@ Template.votingview.onRendered(function () {
 Template.liveResultsTitle.onRendered(function () {
 	footerElements.removeFooterElements();
 	footerElements.footerTracker.changed();
-	votingViewTracker.changed();
+	lib.votingViewTracker.changed();
 });

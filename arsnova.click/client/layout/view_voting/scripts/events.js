@@ -25,16 +25,16 @@ import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
 import {makeAndSendResponse, makeAndSendRangedResponse, makeAndSendFreeTextResponse, countdownFinish} from './lib.js';
 
 Template.votingview.events({
-	'click #js-btn-showQuestionAndAnswerModal': function (event) {
+	'click #js-btn-showQuestionAndAnswerModal': function (event, template) {
 		event.stopPropagation();
-		var questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc) {
+		const questionDoc = QuestionGroupCollection.findOne();
+		if (!questionDoc || template.data["data-questionIndex"]) {
 			return;
 		}
 
 		mathjaxMarkdown.initializeMarkdownAndLatex();
 		let questionContent = mathjaxMarkdown.getContent(questionDoc.questionList[EventManagerCollection.findOne().questionIndex].questionText);
-		var answerContent = "";
+		let answerContent = "";
 
 		let hasEmptyAnswers = true;
 
@@ -69,14 +69,14 @@ Template.votingview.events({
 			}
 		});
 	},
-	"click #forwardButton": function (event) {
+	"click #forwardButton": function (event, template) {
 		event.stopPropagation();
-		if (Session.get("hasSendResponse")) {
+		if (Session.get("hasSendResponse") || template.data["data-questionIndex"]) {
 			return;
 		}
 
 		Session.set("hasSendResponse", true);
-		var responseArr = JSON.parse(Session.get("responses"));
+		const responseArr = JSON.parse(Session.get("responses"));
 		if (responseArr.length === 0) {
 			const rangeInputField = $("#rangeInput");
 			if (rangeInputField.length > 0) {
@@ -101,12 +101,15 @@ Template.votingview.events({
 		}
 		countdownFinish();
 	},
-	"click .sendResponse": function (event) {
+	"click .sendResponse": function (event, template) {
 		event.stopPropagation();
+		if (template.data["data-questionIndex"]) {
+			return;
+		}
 
-		var responseArr = JSON.parse(Session.get("responses"));
-		var currentId = event.currentTarget.id;
-		responseArr[currentId] = responseArr[currentId] ? false : true;
+		const responseArr = JSON.parse(Session.get("responses"));
+		const currentId = event.currentTarget.id;
+		responseArr[currentId] = !responseArr[currentId];
 		if (Session.get("questionSC")) {
 			makeAndSendResponse(responseArr);
 			countdownFinish();
@@ -116,7 +119,10 @@ Template.votingview.events({
 		Session.set("hasToggledResponse", JSON.stringify(responseArr).indexOf("true") > -1);
 		$(event.target).toggleClass("answer-selected");
 	},
-	"keydown #rangeInput": function (event) {
+	"keydown #rangeInput": function (event, template) {
+		if (template.data["data-questionIndex"]) {
+			return;
+		}
 		if ($(event.currentTarget).val().length > 0 && !isNaN(parseFloat($(event.currentTarget).val()))) {
 			Session.set("hasToggledResponse", true);
 			if (event.keyCode === 13) {
@@ -126,7 +132,10 @@ Template.votingview.events({
 			Session.set("hasToggledResponse", false);
 		}
 	},
-	"input #answerTextArea": function (event) {
+	"input #answerTextArea": function (event, template) {
+		if (template.data["data-questionIndex"]) {
+			return;
+		}
 		Session.set("hasToggledResponse", $(event.currentTarget).val().length > 0);
 	}
 });

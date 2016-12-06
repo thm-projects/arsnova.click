@@ -23,6 +23,9 @@ import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default";
 import {startCountdown} from './lib.js';
 
 Template.votingview.onCreated(function () {
+	if (this.data["data-questionIndex"]) {
+		return;
+	}
 	const questionIndex = EventManagerCollection.findOne().questionIndex;
 	Session.set("sessionClosed",undefined);
 	Session.set("questionGroup",new DefaultQuestionGroup(QuestionGroupCollection.findOne()));

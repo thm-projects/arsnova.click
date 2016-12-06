@@ -26,6 +26,8 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 
+export const answerOptionTracker = new Tracker.Dependency();
+
 export function parseAnswerOptionInput(index) {
 	const questionItem = Session.get("questionGroup");
 	const answerlist = questionItem.getQuestionList()[index].getAnswerOptionList();

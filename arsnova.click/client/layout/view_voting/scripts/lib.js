@@ -23,10 +23,35 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 
 export let countdown = null;
-export let currentButton = 0;
+let currentButton = 0;
 export let countdownRunning = false;
 
 export const votingViewTracker = new Tracker.Dependency();
+
+export function answerButtonAnimation() {
+	const buttonsCount = $('.answer-row #buttonContainer').children().length;
+	let lastButton;
+	const secondsUntilNextRound = 1;
+	const currentButtonElement = $('#' + currentButton);
+	if (currentButton <= 0) {
+		lastButton = buttonsCount - 1;
+	} else {
+		lastButton = currentButton - 1;
+	}
+	/* skip the selected answer options */
+	while (currentButtonElement.hasClass('answer-selected')) {
+		currentButton++;
+		if (currentButton >= buttonsCount) {
+			currentButton = 0 - secondsUntilNextRound;
+		}
+	}
+	$('#' + lastButton).removeClass('button-green-transition').addClass('button-purple-transition');
+	currentButtonElement.addClass('button-green-transition').removeClass('button-purple-transition');
+	currentButton++;
+	if (currentButton >= buttonsCount) {
+		currentButton = 0 - secondsUntilNextRound;
+	}
+}
 
 export function deleteCountdown() {
 	if (countdown) {
@@ -44,42 +69,12 @@ export function countdownFinish() {
 export function startCountdown(index) {
 	Meteor.call("Main.calculateRemainingCountdown", Session.get("questionGroup").getHashtag(), index, function (error, response) {
 		Session.set("sessionCountDown", response);
-		countdown = new ReactiveCountdown(response, {
-			tick: function () {
-				var buttonsCount = $('.answer-row #buttonContainer').children().length;
-				var lastButton;
-				var secondsUntilNextRound = 3;
-
-				if (currentButton <= 0) {
-					lastButton = buttonsCount - 1;
-				} else {
-					lastButton = currentButton - 1;
-				}
-
-				/* skip the selected answer options */
-				while ($('#' + currentButton).hasClass('answer-selected')) {
-					currentButton++;
-					if (currentButton >= buttonsCount) {
-						currentButton = 0 - secondsUntilNextRound;
-					}
-				}
-
-				$('#' + lastButton).removeClass('button-green-transition').addClass('button-purple-transition');
-				$('#' + currentButton).addClass('button-green-transition').removeClass('button-purple-transition');
-
-				currentButton++;
-
-				if (currentButton >= buttonsCount) {
-					currentButton = 0 - secondsUntilNextRound;
-				}
-			},
-			completed: function () {
-				if (countdown && countdown.get() === 0) {
-					countdownFinish();
-				}
+		countdown = new ReactiveCountdown(response);
+		countdown.start(function () {
+			if (countdown && countdown.get() === 0) {
+				countdownFinish();
 			}
 		});
-		countdown.start();
 		Session.set("countdownInitialized", true);
 	});
 }
@@ -120,7 +115,8 @@ export function makeAndSendFreeTextResponse(value) {
 }
 
 function calculateAnswerRowHeight() {
-	return $(".contentPosition").height() - $('.voting-helper-buttons').height() - parseInt($('.answer-row').css("margin-top").replace("px",""));
+	let contentHeight = ($("#markdownPreviewWrapper").height() - $("h2.text-center").outerHeight(true)) || $(".contentPosition").height();
+	return contentHeight - $('.voting-helper-buttons').height() - parseInt($('.answer-row').css("margin-top").replace("px",""));
 }
 
 export function formatAnswerButtons() {
@@ -141,7 +137,7 @@ export function formatAnswerButtons() {
 		let scaleBaseHeight = 100;
 		const answerOptionElements = AnswerOptionCollection.find({hashtag: Router.current().params.quizName, questionIndex: EventManagerCollection.findOne().questionIndex}).count();
 		const calculateButtons = function (width, height) {
-			var maxButtonsPerRow = Math.floor(contentWidth / width);
+			let maxButtonsPerRow = Math.floor(contentWidth / width);
 			let maxRows = Math.floor((contentHeight) / height);
 			maxRows = Math.floor((contentHeight - maxRows * 10) / height);
 			if (answerOptionElements % 2 === 0 && maxButtonsPerRow % 2 !== 0) {

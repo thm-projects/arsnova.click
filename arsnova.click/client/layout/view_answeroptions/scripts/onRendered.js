@@ -34,6 +34,17 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 		$('#answerOptionText_Number0').focus();
 	}
 	lib.formatIsCorrectButtons();
+	this.autorun(function () {
+		headerLib.titelTracker.depend();
+		const mainContentContainer = $('#mainContentContainer');
+		const previewAnsweroptionImage = $('#previewAnsweroptionImage');
+		previewAnsweroptionImage.css("height", mainContentContainer.height() - 2);
+		$('#markdownPreviewWrapper').css({
+			height: previewAnsweroptionImage.height() - 140,
+			width: (previewAnsweroptionImage.width() ? previewAnsweroptionImage.width() : previewAnsweroptionImage.height() / 1.7758186397984888) - 10
+		});
+		lib.answerOptionTracker.changed();
+	}.bind(this));
 });
 
 Template.rangedAnswerOptionTemplate.onRendered(function () {

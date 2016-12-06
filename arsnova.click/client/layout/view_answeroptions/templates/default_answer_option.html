@@ -17,7 +17,7 @@
 
 <template name="defaultAnswerOptionTemplate">
     <div class="row full-screen-content">
-        <div class="col-md-12">
+        <div class="col-xs-12">
             {{#unless isSpecialSingleChoiceQuestion}}
                 <div class="row row-landingpage-buttons">
                     <div class="col-md-12 text-center">
@@ -32,6 +32,8 @@
                     </div>
                 </div>
             {{/unless}}
+        </div>
+        <div id="editAnsweroptionText" class="col-md-12 col-lg-6">
             <div class="row answer-options distance-top">
                 <div class="col-md-12">
                     <div class="row">
@@ -59,6 +61,15 @@
                             {{/each}}
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div id="previewAnsweroptionContentWrapper" class="hidden-xs hidden-sm hidden-md col-lg-6">
+            <div class="pull-right">
+                <img id="previewAnsweroptionImage" src="/images/preview/question_preview.png" alt="question preview" />
+                <div id="markdownPreviewWrapper">
+                    <h2 class="text-center">Vorschau</h2>
+                    {{> votingview data-questionIndex=getQuestionIndex}}
                 </div>
             </div>
         </div>

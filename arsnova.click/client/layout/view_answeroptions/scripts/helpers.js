@@ -43,6 +43,9 @@ Template.createAnswerOptions.helpers({
 });
 
 Template.defaultAnswerOptionTemplate.helpers({
+	getQuestionIndex: function () {
+		return Router.current().params.questionIndex;
+	},
 	getAnswerTextSchema: answerTextSchema,
 	getAnswerOptions: function () {
 		if (!Session.get("questionGroup")) {

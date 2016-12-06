@@ -20,6 +20,7 @@
         <div class="col-md-12">
             <div id="votingView">
                 <div class="row voting-helper-buttons">
+                    {{#if showQuestionButton}}
                     <div class="col-xs-{{#if showForwardButton}}6{{else}}12{{/if}}">
                         <button id="js-btn-showQuestionAndAnswerModal"
                                 type="button"
@@ -28,6 +29,7 @@
                             <span class="ansBtn">{{_ "view.voting.question"}}</span>
                         </button>
                     </div>
+                    {{/if}}
 
                     {{#if showForwardButton}}
                         <div class="col-xs-6">
@@ -65,9 +67,9 @@
                             <div id="buttonContainer">
                                 {{#each answerOptions}}
                                     <div class="buttonWrapper">
-                                        <button id="{{answerOptionNumber}}"
+                                        <button id="{{this.getAnswerOptionNumber}}"
                                                 class="sendResponse btn btn-answerOption btn-answerFont button-purple tabbable">
-                                            {{answerOptionLetter number=answerOptionNumber}}
+                                            {{answerOptionLetter number=this.getAnswerOptionNumber}}
                                         </button>
                                     </div>
                                 {{/each}}

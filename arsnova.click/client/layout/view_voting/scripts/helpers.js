@@ -25,24 +25,55 @@ import {countdown} from './lib.js';
 
 Template.votingview.helpers({
 	answerOptions: function () {
+		if (this["data-questionIndex"]) {
+			return Session.get("questionGroup").getQuestionList()[parseInt(this["data-questionIndex"])].getAnswerOptionList();
+		}
 		return AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}, {sort: {answerOptionNumber: 1}});
 	},
+	showQuestionButton: function () {
+		return !this["data-questionIndex"];
+	},
 	showForwardButton: function () {
+		if (this["data-questionIndex"]) {
+			return false;
+		}
 		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
 	},
 	answerOptionLetter: function (number) {
-		return String.fromCharCode((number.hash.number + 65));
+		if (Template.parentData()["data-questionIndex"]) {
+			const allAnswerTexts = Session.get("questionGroup").getQuestionList()[parseInt(Template.parentData()["data-questionIndex"])].getAnswerOptionList();
+			let maxLength = 0;
+			allAnswerTexts.forEach(function (item) {
+				maxLength = maxLength < item.getAnswerText().length ? item.getAnswerText().length : maxLength;
+			});
+			if (maxLength > 5) {
+				return String.fromCharCode((number.hash.number + 65));
+			} else {
+				return allAnswerTexts[number.hash.number].getAnswerText();
+			}
+		} else {
+			return String.fromCharCode((number.hash.number + 65));
+		}
 	},
 	isRangedQuestion: function () {
+		if (this["data-questionIndex"]) {
+			return false;
+		}
 		return QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type === "RangedQuestion";
 	},
 	isFreeTextQuestion: function () {
+		if (this["data-questionIndex"]) {
+			return false;
+		}
 		return QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type === "FreeTextQuestion";
 	}
 });
 
 Template.votingviewTitel.helpers({
 	getCountdown: function () {
+		if (this["data-questionIndex"]) {
+			return false;
+		}
 		let countdownValue = Session.get("countdownInitialized") && countdown ? countdown.get() : 0;
 		return TAPi18n.__("view.voting.seconds_left", {value: countdownValue, count: countdownValue});
 	}

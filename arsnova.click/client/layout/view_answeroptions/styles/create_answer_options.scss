@@ -62,3 +62,32 @@
 		}
 	}
 }
+
+
+#previewAnsweroptionContentWrapper {
+	overflow: hidden;
+	resize: none;
+	position: relative;
+
+	#previewAnsweroptionImage {
+		border: 1px solid white;
+		border-radius: $corner-radius;
+	}
+
+	#markdownPreviewWrapper {
+		position: absolute;
+		top: 90px;
+		right: 20px;
+		width: 365px;
+		height: 540px;
+		overflow-y: auto;
+		overflow-x: hidden;
+		color: white;
+		word-wrap: break-word;
+
+		p {
+			color: white;
+			margin: 0;
+		}
+	}
+}

@@ -101,14 +101,23 @@
 
 	#default_answer_row,
 	.answerOptionElementWrapper.ui-draggable-dragging {
-		background-color: #bda212 !important;
 		cursor: move !important;
 
 		.answer_row_default_text {
 			width: calc(100% - 80px);
 			margin: 0;
-			text-align: left;
+			text-align: center;
 			line-height: 50px;
+		}
+		&:before,
+		&:after {
+			content: "\25BD";
+			width: 80px;
+			line-height: 50px;
+			text-align: center;
+			font-weight: bold;
+			font-size: 2.5em;
+			height: 50px;
 		}
 	}
 	.answerOptionElementWrapper.ui-draggable-dragging {

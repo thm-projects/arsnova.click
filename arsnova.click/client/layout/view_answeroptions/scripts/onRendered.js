@@ -28,6 +28,7 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 	if ($(window).width() >= 992) {
 		$('#answerOptionText_Number0').focus();
 	}
+	this.autorun(lib.renderAnsweroptionItems);
 	this.autorun(function () {
 		headerLib.titelTracker.depend();
 		const mainContentContainer = $('#mainContentContainer');
@@ -41,19 +42,8 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 		$('#previewAnsweroptionContentWrapper').find('.center-block').css({width: contentWidth});
 		lib.answerOptionTracker.changed();
 	}.bind(this));
-	this.autorun(function () {
-		lib.answerOptionTracker.depend();
-		Meteor.defer(function () {
-			Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().forEach(function (answerOption) {
-				if (answerOption.getIsCorrect()) {
-					$('#answerOption-' + answerOption.getAnswerOptionNumber()).prop('checked', true);
-				}
-			});
-			lib.formatIsCorrectButtons();
-		});
-	}.bind(this));
 	$('#answerOptionWrapper').sortable({
-		revert: "invalid",
+		disabled: $.inArray(Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName(),["YesNoSingleChoiceQuestion","TrueFalseSingleChoiceQuestion"]) > -1,
 		scroll: false,
 		axis: 'y',
 		containment: "parent",
@@ -61,19 +51,21 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 		update: function (event, ui) {
 			const questionGroup = Session.get("questionGroup");
 			const indexTo = ui.item.index();
-			const indexFrom = ui.item.attr("data-_id");
+			const indexFrom = parseInt(ui.item.attr("data-id"));
 			if (ui.item.hasClass("ui-draggable")) {
 				ui.item.remove();
-				questionGroup.getQuestionList()[Router.current().params.questionIndex].addDefaultAnswerOption(indexFrom);
+				questionGroup.getQuestionList()[Router.current().params.questionIndex].addDefaultAnswerOption(indexTo);
+				lib.answerOptionTracker.changed();
 			} else {
 				const item = questionGroup.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[indexFrom];
-				questionGroup.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption(indexFrom);
+				questionGroup.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption(item.getAnswerOptionNumber());
 				questionGroup.getQuestionList()[Router.current().params.questionIndex].addAnswerOption(item, indexTo);
-				//lib.recalculateIndices(questionGroup.getQuestionList()[Router.current().params.questionIndex], indexFrom, indexTo, true);
+				if (item.getAnswerText() === "") {
+					lib.renderAnsweroptionItems();
+				}
 			}
 			Session.set("questionGroup", questionGroup);
 			localData.addHashtag(questionGroup);
-			lib.answerOptionTracker.changed();
 		}
 	});
 	$('#default_answer_row').draggable({
@@ -85,16 +77,9 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 		stop: function (event, ui) {
 			ui.helper.find('.answer_row_default_text').remove();
 			const textFrame = $('.answer_row_text').first().clone().val("");
-			const bootstrapSwitch = $('.bootstrap-switch').first().clone();
-			ui.helper.append(textFrame).append(bootstrapSwitch);
+			ui.helper.append(textFrame);
 		}
 	});
-	$('.answerOptionWrapper').find('.draggable').draggable({
-		connectToSortable: "#answerOptionWrapper",
-		scroll: false,
-		axis: 'y',
-		revert: "invalid"
-	}).disableSelection();
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	headerLib.calculateHeaderSize();

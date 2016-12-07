@@ -17,8 +17,10 @@
 
 import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
+import {jQuery} from 'meteor/jquery';
 import {noUiSlider} from 'meteor/arsnova.click:nouislider';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {TAPi18n} from 'meteor/tap:i18n';
 import {Router} from 'meteor/iron:router';
 import {answerTextSchema} from '/lib/answeroptions/collection.js';
 import {calculateHeaderSize, calculateTitelHeight} from '/client/layout/region_header/lib.js';
@@ -75,13 +77,6 @@ export function calculateXsViewport() {
 	}
 }
 
-export function recalculateIndices(questionItem, indexFrom, indexTo, addAnsweroption = false) {
-	console.log(indexFrom, indexTo);
-	const item = questionItem.getAnswerOptionList()[indexFrom];
-	questionItem.removeAnswerOption(indexFrom);
-	questionItem.addAnswerOption(item, indexTo);
-}
-
 export function formatIsCorrectButtons() {
 	if (Session.get("loading_language")) {
 		return;
@@ -89,7 +84,9 @@ export function formatIsCorrectButtons() {
 	$("[name='switch']").bootstrapToggle({
 		size: "small",
 		onstyle: "success",
-		offstyle: "danger"
+		offstyle: "danger",
+		on: TAPi18n.__("view.answeroptions.correct"),
+		off: TAPi18n.__("view.answeroptions.wrong")
 	});
 }
 
@@ -197,3 +194,39 @@ export function styleFreetextAnswerOptionValidation(isValid) {
 		$('#answerTextArea').addClass("invalidQuestion");
 	}
 }
+
+(function ($) {
+	$.fn.setCursorToTextEnd = function () {
+		const $initialVal = this.val();
+		this.val($initialVal);
+	};
+})(jQuery);
+
+export const renderAnsweroptionItems = function () {
+	if (Session.get("loading_language")) {
+		return;
+	}
+	$('#answerOptionWrapper').html("");
+	const typeName = Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName();
+	Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().forEach(function (item) {
+		const number = item.getAnswerOptionNumber();
+		const wrapper = $("<div data-id='" + number + "' class='answerOptionElementWrapper draggable'></div>");
+		wrapper.append(
+			"<div class='answer_row_short_text'>" + String.fromCharCode(number + 65) + "</div>"
+		).append(
+			"<input type='text' class='answer_row_text tabbable' id='answerOptionText_Number" + number + "' placeholder='" + TAPi18n.__("view.answeroptions.answeroptiontext_placeholder") + "' value='" + item.getAnswerText() + "' maxlength='" + answerTextSchema.max + "'/>"
+		);
+		if (typeName !== "SurveyQuestion") {
+			wrapper.append(
+				$("<input type='checkbox' id='answerOption-" + number + "' name='switch' data-width='80' title='answerOption-" + number + "' class='tabbable'/>").prop('checked', item.getIsCorrect())
+			);
+		}
+		if (typeName !== "YesNoSingleChoiceQuestion" && typeName !== "TrueFalseSingleChoiceQuestion") {
+			wrapper.append(
+				"<div class='removeAnsweroption' id='removeAnsweroption_" + number + "'><span class='glyphicon glyphicon-trash'></span></div>"
+			);
+		}
+		$('#answerOptionWrapper').append(wrapper);
+	});
+	formatIsCorrectButtons();
+};

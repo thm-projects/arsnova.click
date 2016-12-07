@@ -18,7 +18,6 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
-import {answerTextSchema} from '/lib/answeroptions/collection.js';
 
 Template.createAnswerOptions.helpers({
 	renderTemplate: function () {
@@ -46,13 +45,6 @@ Template.createAnswerOptions.helpers({
 Template.defaultAnswerOptionTemplate.helpers({
 	getQuestionIndex: function () {
 		return Router.current().params.questionIndex;
-	},
-	getAnswerTextSchema: answerTextSchema,
-	getAnswerOptions: function () {
-		if (!Session.get("questionGroup")) {
-			return;
-		}
-		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList();
 	},
 	answerOptionLetter: function (Nr) {
 		return String.fromCharCode(Nr + 65);

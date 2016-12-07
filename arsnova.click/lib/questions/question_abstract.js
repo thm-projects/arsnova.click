@@ -163,6 +163,9 @@ export class AbstractQuestion {
 			throw new Error("Invalid argument for Question.removeAnswerOption");
 		}
 		this[answerOptionList].splice(index, 1);
+		for (let i = index; i < this.getAnswerOptionList().length; i++) {
+			this.getAnswerOptionList()[i].setAnswerOptionNumber(i);
+		}
 	}
 
 	/**

@@ -20,7 +20,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import * as localData from '/lib/local_storage.js';
-import {parseSingleAnswerOptionInput, formatIsCorrectButtons, styleFreetextAnswerOptionValidation} from './lib.js';
+import {parseSingleAnswerOptionInput, styleFreetextAnswerOptionValidation} from './lib.js';
 
 Template.createAnswerOptions.events({
 });
@@ -43,54 +43,18 @@ Template.defaultAnswerOptionTemplate.events({
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
 	},
-	"click #addAnswerOption": function () {
-		const questionItem = Session.get("questionGroup");
-		const answerlist = questionItem.getQuestionList()[Router.current().params.questionIndex];
-		let answerOptionsCount = answerlist.getAnswerOptionList().length;
-
-		if (answerOptionsCount < 26) {
-			answerlist.addDefaultAnswerOption(answerOptionsCount);
-			Session.set("questionGroup", questionItem);
-			localData.addHashtag(Session.get("questionGroup"));
-			$("#deleteAnswerOption").removeClass("hide");
-
-			answerOptionsCount++;
-			if (answerOptionsCount > 25) {
-				$("#addAnswerOption").addClass("hide");
-			}
-
-			const answerOptionsField = $('.answer-options');
-			answerOptionsField.scrollTop(answerOptionsField[0].scrollHeight);
-
-			setTimeout(formatIsCorrectButtons, 20);
-		}
-	},
 	"click .removeAnsweroption": function (event) {
 		const questionItem = Session.get("questionGroup");
 		questionItem.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption(event.currentTarget.id.replace("removeAnsweroption_", ""));
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
 	},
-	"keydown .answer_row_text": function (event) {
-		if ((event.keyCode === 13) && !event.shiftKey) {
-			const nextElement = $(event.currentTarget).closest(".form-group").next();
-			if (nextElement.length <= 0) {
-				event.preventDefault();
-				$("#addAnswerOption").click();
-				//sets focus to the new input field - The field is not added instantly because of the sync to the localStorage so we need a small timeout here
-				const renderTimeoutFunction = function () {
-					if ($(event.currentTarget).closest(".form-group").next().find(".input-field").length > 0) {
-						$(event.currentTarget).closest(".form-group").next().find(".input-field").focus();
-					} else {
-						Meteor.setTimeout(renderTimeoutFunction, 20);
-					}
-				};
-				Meteor.setTimeout(renderTimeoutFunction, 20);
-			}
-		}
-	},
 	"input .answer_row_text": function (event) {
-		parseSingleAnswerOptionInput(Router.current().params.questionIndex, $(event.currentTarget).attr("id").replace("answerOptionText_Number",""));
+		const id = $(event.currentTarget).attr("id");
+		parseSingleAnswerOptionInput(Router.current().params.questionIndex, id.replace("answerOptionText_Number",""));
+		Meteor.defer(function () {
+			$("#" + id).focus().setCursorToTextEnd();
+		});
 	}
 });
 

@@ -24,43 +24,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div id="default_answer_row" class="answerOptionElementWrapper draggable">
-                                    <div class="answer_row_short_text">X</div>
                                     <p class="answer_row_default_text">Neue Antwortoption</p>
                                 </div>
                             </div>
                         </div>
                     {{/if}}
                     <div class="row">
-                        <div id="answerOptionWrapper" class="col-md-12">
-                            {{#each getAnswerOptions}}
-                                <div data-_id="{{getAnswerOptionNumber}}" class="answerOptionElementWrapper {{#unless (isValidAnswerOption this)}}invalidAnswerOption{{/unless}} draggable">
-                                    <div class="answer_row_short_text">{{answerOptionLetter getAnswerOptionNumber}}</div>
-                                    <input type="text"
-                                           class="answer_row_text tabbable"
-                                           id="answerOptionText_Number{{getAnswerOptionNumber}}"
-                                           placeholder="{{_ "view.answeroptions.answeroptiontext_placeholder"}}"
-                                           value="{{getAnswerText}}"
-                                           maxlength="{{getAnswerTextSchema.max}}"
-                                    />
-                                    {{#unless isSurveyQuestion}}
-                                        <input type="checkbox"
-                                               id="answerOption-{{getAnswerOptionNumber}}"
-                                               name="switch"
-                                               data-width="80"
-                                               data-toggle="toggle"
-                                               data-on="{{_ "view.answeroptions.correct"}}"
-                                               data-off="{{_ "view.answeroptions.wrong"}}"
-                                               title="answerOption-{{getAnswerOptionNumber}}"
-                                               class="tabbable"/>
-                                    {{/unless}}
-                                    {{#if canAddAnsweroption}}
-                                        <div class="removeAnsweroption" id="removeAnsweroption_{{getAnswerOptionNumber}}">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </div>
-                                    {{/if}}
-                                </div>
-                            {{/each}}
-                        </div>
+                        <div id="answerOptionWrapper" class="col-md-12"></div>
                     </div>
                 </div>
             </div>

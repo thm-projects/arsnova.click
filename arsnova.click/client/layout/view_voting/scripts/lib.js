@@ -135,7 +135,7 @@ export function formatAnswerButtons() {
 	} else {
 		let scaleBaseWidth = 100;
 		let scaleBaseHeight = 100;
-		const answerOptionElements = AnswerOptionCollection.find({hashtag: Router.current().params.quizName, questionIndex: EventManagerCollection.findOne().questionIndex}).count();
+		const answerOptionElements = $('.btn-answerOption').length;
 		const calculateButtons = function (width, height) {
 			let maxButtonsPerRow = Math.floor(contentWidth / width);
 			let maxRows = Math.floor((contentHeight) / height);

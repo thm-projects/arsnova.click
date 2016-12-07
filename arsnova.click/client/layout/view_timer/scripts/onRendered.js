@@ -22,9 +22,14 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.createTimerView.onRendered(function () {
-	let index = Router.current().params.questionIndex;
-	lib.createSlider(index);
-	lib.setSlider(index);
+	this.autorun(function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		let index = Router.current().params.questionIndex;
+		lib.createSlider(index);
+		lib.setSlider(index);
+	}.bind(this));
 
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);

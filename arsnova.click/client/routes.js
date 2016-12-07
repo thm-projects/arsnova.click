@@ -66,12 +66,37 @@ Router.configure({
 	fastRender: true
 });
 
+const onBeforeAction = function () {
+	if (Router.current().originalUrl === "/" && Router.current().params.quizName) {
+		this.next();
+		return;
+	}
+	if (!globalEventStackObserver) {
+		setGlobalEventStackObserver();
+	}
+	if (typeof Router.current().params.quizName !== "undefined" && !EventManagerCollection.findOne()) {
+		if (!localData.containsHashtag(Router.current().params.quizName)) {
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: "plugins.splashscreen.error.error_messages.session_closed"
+			});
+		}
+		Router.go("/" + Router.current().params.quizName + "/resetToHome");
+	} else {
+		getChangeEventsForRoute(Router.current().route.getName());
+		getRemoveEventsForRoute(Router.current().route.getName());
+	}
+	this.next();
+};
+
 const NonBlockingRouteController = RouteController.extend({
+	onBeforeAction: onBeforeAction,
 	subscriptions: function () {
 		subsCache.subscribe('HashtagsCollection.public');
 	}
 });
 const BlockingRouteController = RouteController.extend({
+	onBeforeAction: onBeforeAction,
 	waitOn: function () {
 		const currentHashtag = Router.current().params.quizName;
 		return [
@@ -126,29 +151,6 @@ Router.onBeforeAction(function () {
 	}
 	if (!Session.get("overrideTheme")) {
 		Session.set("theme", theme);
-	}
-	this.next();
-});
-
-Router.onBeforeAction(function () {
-	if (Router.current().originalUrl === "/" && Router.current().params.quizName) {
-		this.next();
-		return;
-	}
-	if (!globalEventStackObserver) {
-		setGlobalEventStackObserver();
-	}
-	if (typeof Router.current().params.quizName !== "undefined" && !EventManagerCollection.findOne()) {
-		if (!localData.containsHashtag(Router.current().params.quizName)) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: "plugins.splashscreen.error.error_messages.session_closed"
-			});
-		}
-		Router.go("/" + Router.current().params.quizName + "/resetToHome");
-	} else {
-		getChangeEventsForRoute(Router.current().route.getName());
-		getRemoveEventsForRoute(Router.current().route.getName());
 	}
 	this.next();
 });
@@ -357,7 +359,6 @@ Router.route('/:quizName/showMore', {
 });
 
 Router.route('/:quizName/resetToHome', {
-	controller: BlockingRouteController,
 	action: function () {
 		cleanUp();
 		Router.go("/");
@@ -391,12 +392,8 @@ Router.route('/:quizName/nick', {
 });
 
 Router.route('/:quizName/quizManager', {
-	controller: BlockingRouteController,
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (!globalEventStackObserver.isRunning()) {
-				globalEventStackObserver.startObserving(Router.current().params.quizName);
-			}
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
@@ -411,7 +408,6 @@ Router.route('/:quizName/quizManager', {
 });
 
 Router.route('/:quizName/quizManager/:questionIndex', {
-	controller: BlockingRouteController,
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			this.render('footerNavButtons', {
@@ -428,7 +424,6 @@ Router.route('/:quizName/quizManager/:questionIndex', {
 });
 
 Router.route('/:quizName/questionType/:questionIndex', {
-	controller: BlockingRouteController,
 	action: function () {
 		if (!localData.containsHashtag(Router.current().params.quizName)) {
 			Router.go("/");
@@ -445,7 +440,6 @@ Router.route('/:quizName/questionType/:questionIndex', {
 });
 
 Router.route('/:quizName/question/:questionIndex', {
-	controller: BlockingRouteController,
 	action: function () {
 		if (!localData.containsHashtag(Router.current().params.quizName)) {
 			Router.go("/");
@@ -462,7 +456,6 @@ Router.route('/:quizName/question/:questionIndex', {
 });
 
 Router.route('/:quizName/answeroptions/:questionIndex', {
-	controller: BlockingRouteController,
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			this.render('footerNavButtons', {
@@ -479,7 +472,6 @@ Router.route('/:quizName/answeroptions/:questionIndex', {
 });
 
 Router.route('/:quizName/settimer/:questionIndex', {
-	controller: BlockingRouteController,
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			this.render('footerNavButtons', {
@@ -496,7 +488,6 @@ Router.route('/:quizName/settimer/:questionIndex', {
 });
 
 Router.route('/:quizName/nicknameCategories', {
-	controller: BlockingRouteController,
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			this.render('footerNavButtons', {

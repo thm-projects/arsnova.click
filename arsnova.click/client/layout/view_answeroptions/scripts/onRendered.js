@@ -24,13 +24,6 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as localData from '/lib/local_storage.js';
 import * as lib from './lib.js';
 
-Template.createAnswerOptions.onRendered(function () {
-	footerElements.removeFooterElements();
-	footerElements.addFooterElement(footerElements.footerElemHome);
-	headerLib.calculateHeaderSize();
-	headerLib.calculateTitelHeight();
-});
-
 Template.defaultAnswerOptionTemplate.onRendered(function () {
 	if ($(window).width() >= 992) {
 		$('#answerOptionText_Number0').focus();
@@ -94,6 +87,10 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 		axis: 'y',
 		revert: "invalid"
 	}).disableSelection();
+	footerElements.removeFooterElements();
+	footerElements.addFooterElement(footerElements.footerElemHome);
+	headerLib.calculateHeaderSize();
+	headerLib.calculateTitelHeight();
 });
 
 Template.rangedAnswerOptionTemplate.onRendered(function () {
@@ -105,6 +102,10 @@ Template.rangedAnswerOptionTemplate.onRendered(function () {
 			return false;
 		}
 	});
+	footerElements.removeFooterElements();
+	footerElements.addFooterElement(footerElements.footerElemHome);
+	headerLib.calculateHeaderSize();
+	headerLib.calculateTitelHeight();
 });
 
 Template.freeTextAnswerOptionTemplate.onRendered(function () {
@@ -112,4 +113,8 @@ Template.freeTextAnswerOptionTemplate.onRendered(function () {
 
 	const questionItem = Session.get("questionGroup");
 	lib.styleFreetextAnswerOptionValidation(questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].isValid());
+	footerElements.removeFooterElements();
+	footerElements.addFooterElement(footerElements.footerElemHome);
+	headerLib.calculateHeaderSize();
+	headerLib.calculateTitelHeight();
 });

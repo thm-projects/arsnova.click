@@ -1,4 +1,5 @@
 
+import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
@@ -8,6 +9,13 @@ import * as localData from '/lib/local_storage.js';
 import * as lib from './lib.js';
 
 Template.quizManager.onRendered(function () {
+	this.autorun(function () {
+		if (Meteor.status().connected) {
+			$('#forwardButton').removeAttr("disabled");
+		} else {
+			$('#forwardButton').attr("disabled", "disabled");
+		}
+	}.bind(this));
 	Session.get("questionGroup").getQuestionList().forEach(function (item) {
 		$('#added_questions_wrapper').append(
 			'<li id="' + item.getQuestionIndex() + '_added_question" data-valid="' + (item.isValid() ? "true" : "false") + '" class="draggable">' + TAPi18n.__(item.translationReferrer()) + '</li>'

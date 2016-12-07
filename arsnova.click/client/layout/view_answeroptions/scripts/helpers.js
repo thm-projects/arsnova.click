@@ -23,7 +23,7 @@ import {answerTextSchema} from '/lib/answeroptions/collection.js';
 Template.createAnswerOptions.helpers({
 	renderTemplate: function () {
 		if (!Session.get("questionGroup")) {
-			return;
+			return null;
 		}
 		switch (Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName()) {
 			case "SingleChoiceQuestion":
@@ -38,6 +38,7 @@ Template.createAnswerOptions.helpers({
 				return Template.freeTextAnswerOptionTemplate;
 			default:
 				console.log("Template for unknown question group is requested.");
+				return null;
 		}
 	}
 });

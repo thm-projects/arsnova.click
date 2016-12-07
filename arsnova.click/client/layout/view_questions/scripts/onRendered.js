@@ -26,10 +26,12 @@ Template.createQuestionView.onRendered(function () {
 		const previewQuestionImage = $('#previewQuestionImage');
 		$('.textarea').css("height", mainContentContainer.height() - $('#markdownBarDiv').outerHeight(true) - 6);
 		previewQuestionImage.css("height", mainContentContainer.height());
+		const contentWidth = (previewQuestionImage.width() ? previewQuestionImage.width() : previewQuestionImage.height() / 1.7758186397984888);
 		$('#markdownPreviewWrapper').css({
 			height: previewQuestionImage.height() - 140,
-			width: (previewQuestionImage.width() ? previewQuestionImage.width() : previewQuestionImage.height() / 1.7758186397984888) - 10
+			width: contentWidth
 		});
+		$('#previewQuestionContentWrapper').find('.center-block').css({width: contentWidth});
 	}.bind(this));
 
 	footerElements.removeFooterElements();

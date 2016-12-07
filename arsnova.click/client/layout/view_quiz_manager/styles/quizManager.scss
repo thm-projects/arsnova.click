@@ -13,17 +13,34 @@
 	}
 	#removeQuestionWrapper {
 		height: 100px;
-		background-color: white;
-		border-radius: 10px;
-		opacity: 0.2;
-		line-height: 100px;
 		width: 100%;
-		text-align: center;
-		color: black;
-		font-size: 50px;
+		position: relative;
+
+		.background {
+			background-color: white;
+			border-radius: $corner-radius;
+			opacity: 0.2;
+			height: 100px;
+			width: 100%;
+			position: absolute;
+		}
+
+		.glyphicon-trash {
+			text-align: center;
+			color: black;
+			font-size: 50px;
+			line-height: 100px;
+			width: 100%;
+			position: absolute;
+			margin: 0;
+		}
+
+		li {
+			position: absolute;
+
+		}
 	}
 	ul {
-		color: white;
 		padding: 0;
 
 		&#added_questions_wrapper {
@@ -32,6 +49,7 @@
 	}
 
 	li {
+		color: white;
 		list-style-type: none;
 		border: 1px solid white;
 		margin: 5px 0;

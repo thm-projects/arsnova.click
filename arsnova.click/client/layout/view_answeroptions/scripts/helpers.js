@@ -72,10 +72,11 @@ Template.defaultAnswerOptionTemplate.helpers({
 		}
 		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() === "SurveyQuestion";
 	},
-	isSpecialSingleChoiceQuestion: function () {
+	canAddAnsweroption: function () {
 		switch (Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName()) {
-			case "YesNoSingleChoiceQuestion":
-			case "TrueFalseSingleChoiceQuestion":
+			case "SingleChoiceQuestion":
+			case "MultipleChoiceQuestion":
+			case "SurveyQuestion":
 				return true;
 			default:
 				return false;

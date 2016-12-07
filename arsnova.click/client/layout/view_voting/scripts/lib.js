@@ -31,7 +31,7 @@ export const votingViewTracker = new Tracker.Dependency();
 export function answerButtonAnimation() {
 	const buttonsCount = $('.answer-row #buttonContainer').children().length;
 	let lastButton;
-	const secondsUntilNextRound = 1;
+	const secondsUntilNextRound = buttonsCount;
 	const currentButtonElement = $('#' + currentButton);
 	if (currentButton <= 0) {
 		lastButton = buttonsCount - 1;

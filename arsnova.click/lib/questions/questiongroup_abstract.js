@@ -204,15 +204,10 @@ export class AbstractQuestionGroup {
 			hashtag: this.getHashtag(),
 			questionText: "",
 			questionIndex: index,
-			timer: 0,
+			timer: 40,
 			startTime: 0,
 			answerOptionList: []
 		});
-		try {
-			for (let i = 0; i < 4; i++) {
-				questionItem.addDefaultAnswerOption(i);
-			}
-		} catch (ex) {}
 		this.addQuestion(questionItem, index);
 	}
 }

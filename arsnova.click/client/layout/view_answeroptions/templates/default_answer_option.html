@@ -20,14 +20,16 @@
         <div id="editAnsweroptionText" class="col-md-12 col-lg-6">
             <div class="row answer-options distance-top">
                 <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="default_answer_row" class="answerOptionElementWrapper draggable">
-                                <div class="answer_row_short_text">X</div>
-                                <p class="answer_row_default_text">Neue Antwortoption</p>
+                    {{#if canAddAnsweroption}}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="default_answer_row" class="answerOptionElementWrapper draggable">
+                                    <div class="answer_row_short_text">X</div>
+                                    <p class="answer_row_default_text">Neue Antwortoption</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {{/if}}
                     <div class="row">
                         <div id="answerOptionWrapper" class="col-md-12">
                             {{#each getAnswerOptions}}
@@ -47,9 +49,11 @@
                                                title="answerOption-{{getAnswerOptionNumber}}"
                                                class="tabbable"/>
                                     {{/unless}}
-                                    <div class="removeAnsweroption" id="removeAnsweroption_{{getAnswerOptionNumber}}">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </div>
+                                    {{#if canAddAnsweroption}}
+                                        <div class="removeAnsweroption" id="removeAnsweroption_{{getAnswerOptionNumber}}">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </div>
+                                    {{/if}}
                                 </div>
                             {{/each}}
                         </div>

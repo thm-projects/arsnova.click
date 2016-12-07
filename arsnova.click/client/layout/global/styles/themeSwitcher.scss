@@ -957,13 +957,16 @@
 		p.failed, span.failed {
 			color : $fg-warning;
 		}
-		.popover-title, .popover.bottom {
+		.popover-title, .popover {
 			background-color: $warning;
 			color: $warning-text-color;
 			border-color: $warning;
 		}
 		.popover.bottom > .arrow:after {
 			border-bottom-color: $warning;
+		}
+		.popover.right > .arrow:after {
+			border-right-color: $warning;
 		}
 		.lockquote {
 			color: $fg-lockquote !important;

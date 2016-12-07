@@ -10,10 +10,33 @@ import * as lib from './lib.js';
 
 Template.quizManager.onRendered(function () {
 	this.autorun(function () {
-		if (Meteor.status().connected) {
-			$('#forwardButton').removeAttr("disabled");
+		const connected = Meteor.status().connected;
+		const valid = Session.get("questionGroup") ? Session.get("questionGroup").isValid() : false;
+		const forwardButton = $('#forwardButton');
+		if (connected && valid) {
+			forwardButton.removeAttr("disabled");
 		} else {
-			$('#forwardButton').attr("disabled", "disabled");
+			forwardButton.attr("disabled", "disabled");
+			if (!connected) {
+				forwardButton.popover("destroy");
+				forwardButton.popover({
+					title: TAPi18n.__("view.quiz_manager.connection_lost"),
+					trigger: 'manual',
+					placement: 'right'
+				});
+				forwardButton.popover("show");
+			} else if (!valid) {
+				forwardButton.popover("destroy");
+				forwardButton.popover({
+					title: TAPi18n.__("view.quiz_manager.session_invalid"),
+					trigger: 'manual',
+					placement: 'right'
+				});
+				forwardButton.popover("show");
+			}
+			Meteor.setTimeout(function () {
+				forwardButton.popover("destroy");
+			}, 4000);
 		}
 	}.bind(this));
 	Session.get("questionGroup").getQuestionList().forEach(function (item) {

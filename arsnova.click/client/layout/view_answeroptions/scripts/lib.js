@@ -19,7 +19,6 @@ import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
 import {noUiSlider} from 'meteor/arsnova.click:nouislider';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {Router} from 'meteor/iron:router';
 import {answerTextSchema} from '/lib/answeroptions/collection.js';
 import {calculateHeaderSize, calculateTitelHeight} from '/client/layout/region_header/lib.js';
@@ -102,79 +101,24 @@ export function recalculateIndices(questionItem, indexFrom, indexTo, addAnswerop
 }
 
 export function formatIsCorrectButtons() {
-	$("[name='switch']").bootstrapSwitch({
+	if (Session.get("loading_language")) {
+		return;
+	}
+	$("[name='switch']").bootstrapToggle({
 		size: "small",
-		onText: TAPi18n.__("view.answeroptions.correct"),
-		offText: TAPi18n.__("view.answeroptions.wrong"),
-		wrapperClass: "input-field",
-		animate: false,
-		onSwitchChange: function (event, state) {
-			const item = $('.bootstrap-switch-id-' + event.target.id);
-			const questionItem = Session.get("questionGroup");
-			const answerlist = questionItem.getQuestionList()[Router.current().params.questionIndex];
-			if (state) {
-				item.find('.bootstrap-switch-handle-off').addClass("hiddenImportant");
-				item.find(".bootstrap-switch-container").css({width: "auto"});
-				answerlist.getAnswerOptionList()[event.target.id.replace("answerOption-","")].setIsCorrect(true);
-			} else {
-				item.find('.bootstrap-switch-handle-off').removeClass("hiddenImportant");
-				item.find(".bootstrap-switch-container").css({width: "auto"});
-				answerlist.getAnswerOptionList()[event.target.id.replace("answerOption-","")].setIsCorrect(false);
-			}
-			Session.set("questionGroup", questionItem);
-			localData.addHashtag(Session.get("questionGroup"));
-		},
-		onInit: function (event) {
-			const item = $('.bootstrap-switch-id-' + event.target.id);
-			item.find("span").css({fontSize: "14px", "padding": "5px"});
-			item.find(".bootstrap-switch-container").css({"width": "auto"});
-		}
-	});
-
-	Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().forEach(function (answerOption) {
-		if (answerOption.getIsCorrect()) {
-			const item = $('#answerOption-' + answerOption.getAnswerOptionNumber());
-			item.bootstrapSwitch('state', 'true');
-		}
+		onstyle: "success",
+		offstyle: "danger"
 	});
 }
 
 export function formatFreeTextSettingsButtons() {
-	$("[name='switch']").bootstrapSwitch({
+	if (Session.get("loading_language")) {
+		return;
+	}
+	$("[name='switch']").bootstrapToggle({
 		size: "small",
-		onText: TAPi18n.__("view.answeroptions.free_text_question.onText"),
-		offText: TAPi18n.__("view.answeroptions.free_text_question.offText"),
-		wrapperClass: "input-field",
-		animate: false,
-		onSwitchChange: function (event) {
-			const questionItem = Session.get("questionGroup");
-			questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].setConfig(event.target.id, $('#' + event.target.id).prop("checked"));
-			if (event.target.id === "config_use_keywords_switch") {
-				if ($('#config_use_keywords_switch').prop("checked")) {
-					$('#config_trim_whitespaces_switch').bootstrapSwitch('disabled',false);
-					$('#config_use_punctuation_switch').bootstrapSwitch('disabled',false);
-				} else {
-					$('#config_trim_whitespaces_switch').bootstrapSwitch('state', false).bootstrapSwitch('disabled',true);
-					$('#config_use_punctuation_switch').bootstrapSwitch('state', false).bootstrapSwitch('disabled',true);
-					questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].setConfig("config_trim_whitespaces_switch", false);
-					questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].setConfig("config_use_punctuation_switch", false);
-				}
-			}
-			Session.set("questionGroup", questionItem);
-			localData.addHashtag(questionItem);
-		},
-		onInit: function (event) {
-			const item = $('.bootstrap-switch-id-' + event.target.id);
-			item.find("span").css({fontSize: "14px", "padding": "5px"});
-			item.find(".bootstrap-switch-container").css({"width": "auto"});
-		}
-	});
-
-	Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().forEach(function (answerOption) {
-		$('#config_case_sensitive_switch').bootstrapSwitch('state', answerOption.getConfigCaseSensitive());
-		$('#config_trim_whitespaces_switch').bootstrapSwitch('state', answerOption.getConfigTrimWhitespaces()).bootstrapSwitch('disabled',!answerOption.getConfigUseKeywords());
-		$('#config_use_keywords_switch').bootstrapSwitch('state', answerOption.getConfigUseKeywords());
-		$('#config_use_punctuation_switch').bootstrapSwitch('state', answerOption.getConfigUsePunctuation()).bootstrapSwitch('disabled',!answerOption.getConfigUseKeywords());
+		onstyle: "success",
+		offstyle: "danger"
 	});
 }
 

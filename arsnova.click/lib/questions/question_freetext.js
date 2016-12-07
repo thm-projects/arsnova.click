@@ -20,6 +20,8 @@ export class FreeTextQuestion extends AbstractQuestion {
 			} else {
 				this.addDefaultAnswerOption();
 			}
+		} else {
+			this.addDefaultAnswerOption();
 		}
 	}
 

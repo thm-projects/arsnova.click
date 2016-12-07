@@ -13,12 +13,12 @@ Template.quizManager.onRendered(function () {
 		const connected = Meteor.status().connected;
 		const valid = Session.get("questionGroup") ? Session.get("questionGroup").isValid() : false;
 		const forwardButton = $('#forwardButton');
+		forwardButton.popover("destroy");
 		if (connected && valid) {
 			forwardButton.removeAttr("disabled");
 		} else {
 			forwardButton.attr("disabled", "disabled");
 			if (!connected) {
-				forwardButton.popover("destroy");
 				forwardButton.popover({
 					title: TAPi18n.__("view.quiz_manager.connection_lost"),
 					trigger: 'manual',
@@ -26,7 +26,6 @@ Template.quizManager.onRendered(function () {
 				});
 				forwardButton.popover("show");
 			} else if (!valid) {
-				forwardButton.popover("destroy");
 				forwardButton.popover({
 					title: TAPi18n.__("view.quiz_manager.session_invalid"),
 					trigger: 'manual',

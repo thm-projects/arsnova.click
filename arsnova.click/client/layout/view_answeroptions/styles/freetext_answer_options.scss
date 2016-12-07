@@ -24,27 +24,24 @@
   }
 
   .configOptionContainer {
-	display: table;
+	display: flex;
 	height: 50px;
 
 	p {
-	  margin: 0;
-	  vertical-align: middle;
-	  display: table-cell;
+		margin: 0;
+		height: 30px;
+		line-height: 30px;
+		flex-grow: 1;
 	}
-	.bootstrap-switch {
-	  line-height: 50px;
-	  border-color: transparent; /* Ugly hack to prevent a border from showing up */
-	  outline: 0;
-	  box-shadow: none;
-	  float: right;
-
-	  .bootstrap-switch-container {
-		display: inline-flex;
-	  }
-	  .bootstrap-switch-label {
-		margin-top: 0;
-	  }
+	.toggle[disabled] {
+		* {
+			cursor: not-allowed;
+		}
+		label:hover {
+			color: #fff;
+			background-color: #c9302c;
+			border-color: #ac2925;
+		}
 	}
   }
 

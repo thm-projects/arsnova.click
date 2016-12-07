@@ -26,6 +26,25 @@ Template.createAnswerOptions.events({
 });
 
 Template.defaultAnswerOptionTemplate.events({
+	"change [name='switch']": function (event) {
+		const checked = $(event.target).prop('checked');
+		const id = event.target.id.replace("answerOption-","");
+		const questionItem = Session.get("questionGroup");
+		const answerlist = questionItem.getQuestionList()[Router.current().params.questionIndex];
+		for (let i = 0; i < answerlist.getAnswerOptionList().length; i++) {
+			if (i === id) {
+				continue;
+			}
+			answerlist.getAnswerOptionList()[i].setIsCorrect(false);
+			$('#answerOption-' + i).prop('checked', false);
+		}
+		if (checked) {
+			$('#answerOption-' + id).prop('checked', true);
+		}
+		answerlist.getAnswerOptionList()[id].setIsCorrect(checked);
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
+	},
 	"click #addAnswerOption": function () {
 		const questionItem = Session.get("questionGroup");
 		const answerlist = questionItem.getQuestionList()[Router.current().params.questionIndex];
@@ -78,6 +97,23 @@ Template.defaultAnswerOptionTemplate.events({
 });
 
 Template.freeTextAnswerOptionTemplate.events({
+	"change [name='switch']": function (event) {
+		const questionItem = Session.get("questionGroup");
+		questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].setConfig(event.target.id, $(event.target).prop("checked"));
+		if (event.target.id === "config_use_keywords_switch") {
+			if ($('#config_use_keywords_switch').prop("checked")) {
+				$('#config_trim_whitespaces_switch').bootstrapToggle('enable');
+				$('#config_use_punctuation_switch').bootstrapToggle('enable');
+			} else {
+				$('#config_trim_whitespaces_switch').bootstrapToggle('off').bootstrapToggle('disable');
+				$('#config_use_punctuation_switch').bootstrapToggle('off').bootstrapToggle('disable');
+				questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].setConfig("config_trim_whitespaces_switch", false);
+				questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].setConfig("config_use_punctuation_switch", false);
+			}
+		}
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(questionItem);
+	},
 	"input #answerTextArea": function (event) {
 		const questionItem = Session.get("questionGroup");
 		const questionIndex = Router.current().params.questionIndex;

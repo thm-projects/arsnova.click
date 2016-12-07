@@ -73,7 +73,9 @@ Meteor.startup(function () {
 		}
 		$.getScript('/lib/highlight.pack.min.js');
 		$.getScript('/lib/marked.min.js');
+		Session.set("loading_language", true);
 		TAPi18n.setLanguage(getUserLanguage()).then(function () {
+			Session.set("loading_language", false);
 			window.cookieconsent_options = {
 				"message": TAPi18n.__("global.cookie_consent.message"),
 				"dismiss": TAPi18n.__("global.cookie_consent.dismiss"),

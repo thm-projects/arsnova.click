@@ -81,20 +81,18 @@
 			height: 50px;
 		}
 		.answer_row_text {
-			width: calc(100% - 220px);
+			margin-right: 10px;
+			flex-grow: 1;
 			background-color: transparent;
 			border: none;
 		}
-		.bootstrap-switch {
-			height: 50px;
-			width: 80px;
-
-			.bootstrap-switch-container {
-				margin-top: 10px;
-			}
+		.toggle {
+			margin-top: 10px;
+			margin-right: 10px;
 		}
 		.removeAnsweroption {
 			margin-top: 10px;
+			margin-right: 10px;
 			font-size: 1.5em;
 			cursor: pointer;
 			width: 40px;

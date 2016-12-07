@@ -45,7 +45,11 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 			lib.formatIsCorrectButtons();
 		});
 	}.bind(this));
-	lib.formatIsCorrectButtons();
+	Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().forEach(function (answerOption) {
+		if (answerOption.getIsCorrect()) {
+			$('#answerOption-' + answerOption.getAnswerOptionNumber()).prop('checked', true).change();
+		}
+	});
 	$('#answerOptionWrapper').sortable({
 		revert: "invalid",
 		scroll: false,
@@ -109,10 +113,26 @@ Template.rangedAnswerOptionTemplate.onRendered(function () {
 });
 
 Template.freeTextAnswerOptionTemplate.onRendered(function () {
-	lib.formatFreeTextSettingsButtons();
-
-	const questionItem = Session.get("questionGroup");
-	lib.styleFreetextAnswerOptionValidation(questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].isValid());
+	const answerList = Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList();
+	this.autorun(function () {
+		if (Session.get("loading_language")) {
+			return;
+		}
+		Meteor.defer(function () {
+			lib.formatFreeTextSettingsButtons();
+			answerList.forEach(function (answerOption) {
+				const configCaseSensitiveState = answerOption.getConfigCaseSensitive() ? "on" : "off";
+				const configTrimWhitespacesState = answerOption.getConfigTrimWhitespaces() ? "on" : "off";
+				const configUseKeywordsState = answerOption.getConfigUseKeywords() ? "on" : "off";
+				const configUsePunctuationState = answerOption.getConfigUsePunctuation() ? "on" : "off";
+				$('#config_case_sensitive_switch').bootstrapToggle(configCaseSensitiveState);
+				$('#config_trim_whitespaces_switch').bootstrapToggle(configTrimWhitespacesState);
+				$('#config_use_keywords_switch').bootstrapToggle(configUseKeywordsState);
+				$('#config_use_punctuation_switch').bootstrapToggle(configUsePunctuationState);
+			});
+		});
+	}.bind(this));
+	lib.styleFreetextAnswerOptionValidation(answerList[0].isValid());
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	headerLib.calculateHeaderSize();

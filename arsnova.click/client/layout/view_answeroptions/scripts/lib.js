@@ -77,27 +77,9 @@ export function calculateXsViewport() {
 
 export function recalculateIndices(questionItem, indexFrom, indexTo, addAnsweroption = false) {
 	console.log(indexFrom, indexTo);
-	if (indexTo > -1 && indexFrom !== indexTo) {
-		if (indexFrom < indexTo) {
-			for (let i = indexFrom; i < indexTo; i++) {
-				const tmpNewPositionElem = questionItem.getAnswerOptionList()[i + 1];
-				if (addAnsweroption || tmpNewPositionElem) {
-					questionItem.addAnswerOption(questionItem.getAnswerOptionList()[i], i + 1);
-				}
-				if (tmpNewPositionElem) {
-					questionItem.addAnswerOption(tmpNewPositionElem, i);
-				}
-			}
-		} else {
-			for (let i = indexFrom; i > indexTo; i--) {
-				const tmpNewPositionElem = questionItem.getAnswerOptionList()[i - 1];
-				if (tmpNewPositionElem) {
-					questionItem.addAnswerOption(questionItem.getAnswerOptionList()[i], i - 1);
-				}
-				questionItem.addAnswerOption(tmpNewPositionElem, i);
-			}
-		}
-	}
+	const item = questionItem.getAnswerOptionList()[indexFrom];
+	questionItem.removeAnswerOption(indexFrom);
+	questionItem.addAnswerOption(item, indexTo);
 }
 
 export function formatIsCorrectButtons() {

@@ -40,7 +40,9 @@ Template.votingview.onRendered(function () {
 		this.autorun(function () {
 			headerLib.titelTracker.depend();
 			answerOptionLib.answerOptionTracker.depend();
-			lib.formatAnswerButtons();
+			Meteor.defer(function () {
+				lib.formatAnswerButtons();
+			});
 		}.bind(this));
 	}
 	lib.formatAnswerButtons();

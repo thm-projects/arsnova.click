@@ -42,14 +42,14 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 	this.autorun(function () {
 		lib.answerOptionTracker.depend();
 		Meteor.defer(function () {
+			Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().forEach(function (answerOption) {
+				if (answerOption.getIsCorrect()) {
+					$('#answerOption-' + answerOption.getAnswerOptionNumber()).prop('checked', true);
+				}
+			});
 			lib.formatIsCorrectButtons();
 		});
 	}.bind(this));
-	Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().forEach(function (answerOption) {
-		if (answerOption.getIsCorrect()) {
-			$('#answerOption-' + answerOption.getAnswerOptionNumber()).prop('checked', true).change();
-		}
-	});
 	$('#answerOptionWrapper').sortable({
 		revert: "invalid",
 		scroll: false,
@@ -58,13 +58,16 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 		tolerance: "pointer",
 		update: function (event, ui) {
 			const questionGroup = Session.get("questionGroup");
-			const indexFrom = ui.item.index();
+			const indexTo = ui.item.index();
+			const indexFrom = ui.item.attr("data-_id");
 			if (ui.item.hasClass("ui-draggable")) {
 				ui.item.remove();
 				questionGroup.getQuestionList()[Router.current().params.questionIndex].addDefaultAnswerOption(indexFrom);
 			} else {
-				const indexTo = questionGroup.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().length;
-				lib.recalculateIndices(questionGroup.getQuestionList()[Router.current().params.questionIndex], indexFrom, indexTo, true);
+				const item = questionGroup.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[indexFrom];
+				questionGroup.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption(indexFrom);
+				questionGroup.getQuestionList()[Router.current().params.questionIndex].addAnswerOption(item, indexTo);
+				//lib.recalculateIndices(questionGroup.getQuestionList()[Router.current().params.questionIndex], indexFrom, indexTo, true);
 			}
 			Session.set("questionGroup", questionGroup);
 			localData.addHashtag(questionGroup);
@@ -75,7 +78,6 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 		connectToSortable: "#answerOptionWrapper",
 		scroll: false,
 		axis: 'y',
-		appendTo: "parent",
 		helper: "clone",
 		revert: "invalid",
 		stop: function (event, ui) {
@@ -84,7 +86,7 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 			const bootstrapSwitch = $('.bootstrap-switch').first().clone();
 			ui.helper.append(textFrame).append(bootstrapSwitch);
 		}
-	}).css({"width": $('#default_answer_row').width()});
+	});
 	$('.answerOptionWrapper').find('.draggable').draggable({
 		connectToSortable: "#answerOptionWrapper",
 		scroll: false,

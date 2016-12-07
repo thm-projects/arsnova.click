@@ -99,7 +99,8 @@
 		}
 	}
 
-	#default_answer_row {
+	#default_answer_row,
+	.answerOptionElementWrapper.ui-draggable-dragging {
 		background-color: #bda212 !important;
 		cursor: move !important;
 
@@ -109,6 +110,9 @@
 			text-align: left;
 			line-height: 50px;
 		}
+	}
+	.answerOptionElementWrapper.ui-draggable-dragging {
+		width: calc(100% - 30px);
 	}
 }
 

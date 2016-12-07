@@ -30,18 +30,16 @@ Template.defaultAnswerOptionTemplate.events({
 		const checked = $(event.target).prop('checked');
 		const id = event.target.id.replace("answerOption-","");
 		const questionItem = Session.get("questionGroup");
-		const answerlist = questionItem.getQuestionList()[Router.current().params.questionIndex];
-		for (let i = 0; i < answerlist.getAnswerOptionList().length; i++) {
-			if (i === id) {
-				continue;
-			}
-			answerlist.getAnswerOptionList()[i].setIsCorrect(false);
-			$('#answerOption-' + i).prop('checked', false);
-		}
 		if (checked) {
-			$('#answerOption-' + id).prop('checked', true);
+			for (let i = 0; i < questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().length; i++) {
+				if (i === id) {
+					continue;
+				}
+				questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[i].setIsCorrect(false);
+				$('#answerOption-' + i).prop('checked', false).change();
+			}
 		}
-		answerlist.getAnswerOptionList()[id].setIsCorrect(checked);
+		questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[id].setIsCorrect(checked);
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
 	},

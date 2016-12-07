@@ -49,7 +49,7 @@ Template.votingview.helpers({
 			if (maxLength > 6) {
 				return String.fromCharCode((number.hash.number + 65));
 			} else {
-				return allAnswerTexts[number.hash.number] ? allAnswerTexts[number.hash.number].getAnswerText() : "";
+				return allAnswerTexts[number.hash.number] && allAnswerTexts[number.hash.number].getAnswerText().length > 0 ? allAnswerTexts[number.hash.number].getAnswerText() : String.fromCharCode((number.hash.number + 65));
 			}
 		} else {
 			return String.fromCharCode((number.hash.number + 65));

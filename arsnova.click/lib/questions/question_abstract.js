@@ -9,6 +9,7 @@ const timer = Symbol("timer");
 const startTime = Symbol("startTime");
 const questionIndex = Symbol("questionIndex");
 const answerOptionList = Symbol("answerOptionList");
+const displayAnswerText = Symbol("displayAnswerText");
 
 export class AbstractQuestion {
 
@@ -31,6 +32,7 @@ export class AbstractQuestion {
 		this[timer] = options.timer;
 		this[startTime] = options.startTime;
 		this[questionIndex] = options.questionIndex;
+		this[displayAnswerText] = typeof options.displayAnswerText === "undefined" ? false : options.displayAnswerText;
 		this[answerOptionList] = [];
 	}
 
@@ -197,6 +199,7 @@ export class AbstractQuestion {
 			timer: this.getTimer(),
 			startTime: this.getStartTime(),
 			questionIndex: this.getQuestionIndex(),
+			displayAnswerText: this.getDisplayAnswerText(),
 			answerOptionList: answerOptionListSerialized
 		};
 	}
@@ -219,8 +222,16 @@ export class AbstractQuestion {
 		return answerOptionListValid && questionTextWithoutMarkdownChars[0] > 4 && questionTextWithoutMarkdownChars[0] < 50001 && this.getTimer() > 9 && this.getTimer() < 301;
 	}
 
+	getDisplayAnswerText () {
+		return this[displayAnswerText];
+	}
+
+	setDisplayAnswerText (newVal) {
+		this[displayAnswerText] = newVal;
+	}
+
 	/**
-	 * @returns {string} The question text without the markdown characters
+	 * @returns {String} The question text without the markdown characters
 	 */
 	getQuestionTextWithoutMarkdownChars () {
 		return this.getQuestionText().split().map(function (currentValue) {
@@ -240,7 +251,7 @@ export class AbstractQuestion {
 			tmpValue = tmpValue.replace(/<\/hlcode>/g,"");
 			tmpValue = tmpValue.replace(/>/g,"");
 			return tmpValue.length;
-		});
+		}).join();
 	}
 
 	/**
@@ -290,6 +301,7 @@ export class AbstractQuestion {
 			if (question.getTimer() !== this.getTimer() ||
 				question.getStartTime() !== this.getStartTime() ||
 				question.getHashtag() !== this.getHashtag() ||
+				question.getDisplayAnswerText() !== this.getDisplayAnswerText() ||
 				question.getQuestionText() !== this.getQuestionText()) {
 				isEqual = false;
 			}

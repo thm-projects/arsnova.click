@@ -113,6 +113,53 @@ export function makeAndSendFreeTextResponse(value) {
 	});
 }
 
+export function quickfitText(reset) {
+	const quickFitClass = "quickfit";
+	const quickFitSetClass = "quickfitSet";
+
+	if (reset) {
+		$("." + quickFitSetClass).removeClass(quickFitSetClass);
+	}
+	const setMaxTextSize = function (item) {
+		let fontSize = parseInt($(item).css("fontSize").replace("px", ""));
+		let hasDummyText = false;
+		if ($(item).find("p").length === 0) {
+			$(item).append($("<p></p>").text($(item).text()));
+			hasDummyText = true;
+		}
+		const contentItem = $(item).find("p").first();
+		contentItem.css({"height": "auto"});
+		if (contentItem.find("iframe").length > 0 && contentItem.find("p").length !== 0) {
+			contentItem.css("height", "100%");
+		}
+		contentItem.css("display", "inline-flex");
+
+		if (contentItem.width() < $(item).width() && contentItem.height() < $(item).height()) {
+			do {
+				$(item).css("font-size", fontSize);
+			} while (++fontSize < 100 && contentItem.width() < $(item).width() && contentItem.height() < $(item).height());
+			fontSize -= 2;
+		} else {
+			do {
+				$(item).css("font-size", fontSize);
+			} while (--fontSize > 3 && (contentItem.width() > $(item).width() || contentItem.height() > $(item).height()));
+		}
+
+		$(item).css("font-size", fontSize);
+		$(item).addClass(quickFitSetClass);
+		contentItem.css({"display": "block"});
+		if (hasDummyText) {
+			contentItem.remove();
+		}
+	};
+	$("." + quickFitClass + ":not(." + quickFitSetClass + ")").each(function (index, item) {
+		setMaxTextSize($(item));
+	});
+}
+$(window).on("resize orientationchange", function () {
+	quickfitText(true);
+});
+
 function calculateAnswerRowHeight() {
 	let contentHeight = ($("#markdownPreviewWrapper").height() - $("h2.text-center").outerHeight(true)) || $(".contentPosition").height();
 	return contentHeight - $('.voting-helper-buttons').height() - parseInt($('.answer-row').css("margin-top").replace("px",""));

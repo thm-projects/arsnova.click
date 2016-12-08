@@ -21,6 +21,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
+import {markdownTracker} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
 import {makeAndSendResponse, makeAndSendRangedResponse, makeAndSendFreeTextResponse, countdownFinish} from './lib.js';
 
@@ -100,6 +101,11 @@ Template.votingview.events({
 			Session.set("sessionClosed", true);
 		}
 		countdownFinish();
+	},
+	"DOMSubtreeModified .sendResponse": function (event) {
+		const id = $(event.currentTarget).attr("id");
+		$('#' + id).removeClass("quickfitSet");
+		markdownTracker.changed();
 	},
 	"click .sendResponse": function (event, template) {
 		event.stopPropagation();

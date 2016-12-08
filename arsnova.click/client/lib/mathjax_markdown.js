@@ -15,6 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Tracker} from 'meteor/tracker';
+
+export const markdownTracker = new Tracker.Dependency();
 export const mathjaxMarkdown = {
 	scriptUrl: "https://arsnova.thm.de/mathjax/MathJax.js",
 
@@ -54,7 +57,7 @@ export const mathjaxMarkdown = {
 			showMathMenu: false
 		};
 
-		var mathjaxScriptLen = $('scripts[src*="' + this.scriptUrl + '"]').length;
+		var mathjaxScriptLen = $('script[src*="' + this.scriptUrl + '"]').length;
 
 		if (mathjaxScriptLen === 0) {
 			// mathjax config
@@ -99,6 +102,8 @@ export const mathjaxMarkdown = {
 			}
 
 			content = this.replaceBack(replStack[0]);
+
+			markdownTracker.changed();
 
 			return content;
 		} else {
@@ -246,8 +251,8 @@ export const mathjaxMarkdown = {
 				var sourceURI = delimiters.accessKey === "youtube" ? 'https://youtube.com/embed/' : 'https://player.vimeo.com/video/';
 				sourceURI += videoId;
 
-				return '<div scrolling="no">' +
-					'<iframe src=' + sourceURI + ' frameborder="0" style="border: 0" scrolling="yes" allowfullscreen="true" width="100%" height="500px"></iframe>' +
+				return '<div scrolling="no" style="height: inherit;">' +
+					'<iframe src=' + sourceURI + ' frameborder="0" style="border: 0; width:100%; max-height:100%;" scrolling="yes" allowfullscreen="true"></iframe>' +
 					'</div>';
 			});
 		};

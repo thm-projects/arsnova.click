@@ -196,11 +196,43 @@ export function styleFreetextAnswerOptionValidation(isValid) {
 }
 
 (function ($) {
-	$.fn.setCursorToTextEnd = function () {
-		const $initialVal = this.val();
-		this.val($initialVal);
+	$.fn.getCursorPosition = function () {
+		const input = this.get(0);
+		if (!input) { // No (input) element found
+			return;
+		}
+		if ('selectionStart' in input) {
+			// Standard-compliant browsers
+			return input.selectionStart;
+		} else if (document.selection) {
+			// IE
+			input.focus();
+			const sel = document.selection.createRange();
+			const selLen = document.selection.createRange().text.length;
+			sel.moveStart('character', -input.value.length);
+			return sel.text.length - selLen;
+		}
+	};
+	$.fn.setCaretPosition = function (caretPos) {
+		let range;
+		const elem = this.get(0);
+		if (!elem) { // No (input) element found
+			return;
+		}
+
+		if (elem.createTextRange) {
+			range = elem.createTextRange();
+			range.move('character', caretPos);
+			range.select();
+		} else {
+			elem.focus();
+			if (elem.selectionStart !== undefined) {
+				elem.setSelectionRange(caretPos, caretPos);
+			}
+		}
 	};
 })(jQuery);
+
 
 export const renderAnsweroptionItems = function () {
 	if (Session.get("loading_language")) {
@@ -218,7 +250,7 @@ export const renderAnsweroptionItems = function () {
 		);
 		if (typeName !== "SurveyQuestion") {
 			wrapper.append(
-				$("<input type='checkbox' id='answerOption-" + number + "' name='switch' data-width='80' title='answerOption-" + number + "' class='tabbable'/>").prop('checked', item.getIsCorrect())
+				$("<input type='checkbox' id='answerOption-" + number + "' name='switch' data-width='80' title='answerOption-" + number + "' class='tabbable isCorrectOption'/>").prop('checked', item.getIsCorrect())
 			);
 		}
 		if (typeName !== "YesNoSingleChoiceQuestion" && typeName !== "TrueFalseSingleChoiceQuestion") {
@@ -228,5 +260,7 @@ export const renderAnsweroptionItems = function () {
 		}
 		$('#answerOptionWrapper').append(wrapper);
 	});
+	const configShowAnswerContentOnButtonsState = Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getDisplayAnswerText() ? "on" : "off";
+	$('#config_showAnswerContentOnButtons_switch').bootstrapToggle(configShowAnswerContentOnButtonsState);
 	formatIsCorrectButtons();
 };

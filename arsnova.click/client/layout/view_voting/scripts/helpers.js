@@ -18,10 +18,12 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {DefaultQuestionGroup} from '/lib/questions/questiongroup_default.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {countdown} from './lib.js';
+import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
+import * as lib from './lib.js';
 
 Template.votingview.helpers({
 	answerOptions: function () {
@@ -40,30 +42,32 @@ Template.votingview.helpers({
 		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
 	},
 	answerOptionLetter: function (number) {
+		let questionItem;
 		if (Template.parentData()["data-questionIndex"]) {
-			const allAnswerTexts = Session.get("questionGroup").getQuestionList()[parseInt(Template.parentData()["data-questionIndex"])].getAnswerOptionList();
-			let maxLength = 0;
-			allAnswerTexts.forEach(function (item) {
-				maxLength = maxLength < item.getAnswerText().length ? item.getAnswerText().length : maxLength;
-			});
-			if (maxLength > 6) {
-				return String.fromCharCode((number.hash.number + 65));
-			} else {
-				return allAnswerTexts[number.hash.number] && allAnswerTexts[number.hash.number].getAnswerText().length > 0 ? allAnswerTexts[number.hash.number].getAnswerText() : String.fromCharCode((number.hash.number + 65));
-			}
+			questionItem = Session.get("questionGroup").getQuestionList()[parseInt(Template.parentData()["data-questionIndex"])];
 		} else {
+			questionItem = new DefaultQuestionGroup(QuestionGroupCollection.findOne());
+		}
+		const allAnswerTexts = questionItem.getAnswerOptionList();
+		const answer = allAnswerTexts[number.hash.number];
+		if (!answer || answer.getAnswerText().length === 0 || !questionItem.getDisplayAnswerText()) {
 			return String.fromCharCode((number.hash.number + 65));
+		} else {
+			if (answer.getAnswerText().length === answer.getAnswerTextLengthWithoutMarkdownChars()) {
+				return answer.getAnswerText();
+			}
+			return mathjaxMarkdown.getContent(answer.getAnswerText());
 		}
 	},
 	isRangedQuestion: function () {
 		if (this["data-questionIndex"]) {
-			return false;
+			return Session.get("questionGroup").getQuestionList()[parseInt(this["data-questionIndex"])].typeName() === "RangedQuestion";
 		}
 		return QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type === "RangedQuestion";
 	},
 	isFreeTextQuestion: function () {
 		if (this["data-questionIndex"]) {
-			return false;
+			return Session.get("questionGroup").getQuestionList()[parseInt(this["data-questionIndex"])].typeName() === "FreeTextQuestion";
 		}
 		return QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type === "FreeTextQuestion";
 	}
@@ -74,7 +78,7 @@ Template.votingviewTitel.helpers({
 		if (this["data-questionIndex"]) {
 			return false;
 		}
-		let countdownValue = Session.get("countdownInitialized") && countdown ? countdown.get() : 0;
+		let countdownValue = Session.get("countdownInitialized") && lib.countdown ? lib.countdown.get() : 0;
 		return TAPi18n.__("view.voting.seconds_left", {value: countdownValue, count: countdownValue});
 	}
 });

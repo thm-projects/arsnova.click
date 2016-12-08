@@ -17,12 +17,12 @@
 
 <template name="defaultAnswerOptionTemplate">
     <div class="row full-screen-content">
-        <div id="editAnsweroptionText" class="col-md-12 col-lg-6">
+        <div id="editAnsweroptionText" class="col-xs-12 col-lg-6">
             <div class="row answer-options distance-top">
-                <div class="col-md-12">
+                <div class="col-xs-12">
                     {{#if canAddAnsweroption}}
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-xs-12">
                                 <div id="default_answer_row" class="answerOptionElementWrapper draggable">
                                     <p class="answer_row_default_text">Neue Antwortoption</p>
                                 </div>
@@ -32,6 +32,18 @@
                     <div class="row">
                         <div id="answerOptionWrapper" class="col-md-12"></div>
                     </div>
+                </div>
+                <div class="col-xs-12">
+                    <p class="text-light checkboxLabel pull-left" id="showAnswerContentOnButtons">Soll auf den Buttons der Inhalt der Antwort angezeigt werden?</p>
+                    <input type="checkbox"
+                           id="config_showAnswerContentOnButtons_switch"
+                           name="switch"
+                           data-width="100"
+                           data-height="35"
+                           data-on="{{_ "view.answeroptions.free_text_question.onText"}}"
+                           data-off="{{_ "view.answeroptions.free_text_question.offText"}}"
+                           title="Soll auf den Buttons der Inhalt der Antwort angezeigt werden?"
+                           class="tabbable">
                 </div>
             </div>
         </div>

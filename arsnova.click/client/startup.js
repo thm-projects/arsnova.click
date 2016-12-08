@@ -28,6 +28,7 @@ import * as nicknameLib from '/client/layout/view_choose_nickname/scripts/lib.js
 import {cleanUp} from "./routes.js";
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
 import {randomIntFromInterval} from '/client/layout/view_live_results/scripts/lib.js';
+import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 
 export function getUserLanguage() {
 	/* Get the language of the browser */
@@ -73,6 +74,7 @@ Meteor.startup(function () {
 		}
 		$.getScript('/lib/highlight.pack.min.js');
 		$.getScript('/lib/marked.min.js');
+		mathjaxMarkdown.initializeMarkdownAndLatex();
 		Session.set("loading_language", true);
 		TAPi18n.setLanguage(getUserLanguage()).then(function () {
 			Session.set("loading_language", false);

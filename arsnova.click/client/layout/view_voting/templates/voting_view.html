@@ -68,8 +68,8 @@
                                 {{#each answerOptions}}
                                     <div class="buttonWrapper">
                                         <button id="{{this.getAnswerOptionNumber}}"
-                                                class="sendResponse btn btn-answerOption btn-answerFont button-purple tabbable">
-                                            {{answerOptionLetter number=this.getAnswerOptionNumber}}
+                                                class="sendResponse btn btn-answerOption btn-answerFont button-purple tabbable quickfit">
+                                            <p>{{{answerOptionLetter number=this.getAnswerOptionNumber}}}</p>
                                         </button>
                                     </div>
                                 {{/each}}

@@ -20,13 +20,14 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import * as localData from '/lib/local_storage.js';
+import {markdownTracker} from '/client/lib/mathjax_markdown.js';
 import {parseSingleAnswerOptionInput, styleFreetextAnswerOptionValidation} from './lib.js';
 
 Template.createAnswerOptions.events({
 });
 
 Template.defaultAnswerOptionTemplate.events({
-	"change [name='switch']": function (event) {
+	"change .isCorrectOption": function (event) {
 		const checked = $(event.target).prop('checked');
 		const id = event.target.id.replace("answerOption-","");
 		const questionItem = Session.get("questionGroup");
@@ -43,6 +44,14 @@ Template.defaultAnswerOptionTemplate.events({
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
 	},
+	"change #config_showAnswerContentOnButtons_switch": function (event) {
+		const checked = $(event.target).prop('checked');
+		const questionItem = Session.get("questionGroup");
+		questionItem.getQuestionList()[Router.current().params.questionIndex].setDisplayAnswerText(checked);
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
+		markdownTracker.changed();
+	},
 	"click .removeAnsweroption": function (event) {
 		const questionItem = Session.get("questionGroup");
 		questionItem.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption(event.currentTarget.id.replace("removeAnsweroption_", ""));
@@ -51,9 +60,12 @@ Template.defaultAnswerOptionTemplate.events({
 	},
 	"input .answer_row_text": function (event) {
 		const id = $(event.currentTarget).attr("id");
-		parseSingleAnswerOptionInput(Router.current().params.questionIndex, id.replace("answerOptionText_Number",""));
+		const plainId = id.replace("answerOptionText_Number","");
+		$('#' + plainId).removeClass("quickfitSet");
+		const cursorPosition = $("#" + id).getCursorPosition();
+		parseSingleAnswerOptionInput(Router.current().params.questionIndex, plainId);
 		Meteor.defer(function () {
-			$("#" + id).focus().setCursorToTextEnd();
+			$("#" + id).focus().setCaretPosition(cursorPosition);
 		});
 	}
 });

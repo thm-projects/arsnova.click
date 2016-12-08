@@ -23,6 +23,7 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as answerOptionLib from '/client/layout/view_answeroptions/scripts/lib.js';
+import {markdownTracker} from '/client/lib/mathjax_markdown.js';
 import * as lib from './lib.js';
 
 Template.votingview.onRendered(function () {
@@ -40,8 +41,10 @@ Template.votingview.onRendered(function () {
 		this.autorun(function () {
 			headerLib.titelTracker.depend();
 			answerOptionLib.answerOptionTracker.depend();
+			markdownTracker.depend();
 			Meteor.defer(function () {
 				lib.formatAnswerButtons();
+				lib.quickfitText();
 			});
 		}.bind(this));
 	}

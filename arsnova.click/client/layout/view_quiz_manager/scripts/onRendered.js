@@ -3,6 +3,7 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {introJs} from 'meteor/arsnova.click:introjs';
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as localData from '/lib/local_storage.js';
@@ -38,11 +39,17 @@ Template.quizManager.onRendered(function () {
 			}, 4000);
 		}
 	}.bind(this));
-	Session.get("questionGroup").getQuestionList().forEach(function (item) {
-		$('#added_questions_wrapper').append(
-			'<li id="' + item.getQuestionIndex() + '_added_question" data-valid="' + (item.isValid() ? "true" : "false") + '" class="draggable">' + TAPi18n.__(item.translationReferrer()) + '</li>'
-		);
-	});
+	this.autorun(function () {
+		if (Session.get("loading_language")) {
+			return;
+		}
+		Session.get("questionGroup").getQuestionList().forEach(function (item) {
+			$('#added_questions_wrapper').append(
+				'<li id="' + item.getQuestionIndex() + '_added_question" data-valid="' + (item.isValid() ? "true" : "false") + '" data-intro="' + TAPi18n.__(item.translationReferrer()) + '" class="draggable">' + TAPi18n.__(item.translationReferrer()) + '</li>'
+			);
+		});
+		introJs().start();
+	}.bind(this));
 	$('#added_questions_wrapper').find('.draggable').draggable({
 		connectToSortable: "#added_questions_wrapper, #removeQuestionWrapper",
 		scroll: false,
@@ -134,6 +141,7 @@ Template.quizManager.onRendered(function () {
 	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
 
+	/*
 	const guide = $("body").guide();
 	guide.addStep(".quizSummary", "Hier ist die Zusammenfassung der gesamten Quizrunde zu sehen");
 	guide.addStep(".quizSummary #sessionUrl", "Unter dieser URL können Teilnehmer das Quiz betreten, sobald du es freigibst");
@@ -149,6 +157,7 @@ Template.quizManager.onRendered(function () {
 	guide.addStep("#available_questions_wrapper .questionType_SurveyQuestion", "Umfragen enthalten beliebig viele Antwortoptionen, von denen keine als richtig oder falsch markiert werden darf.");
 	guide.addStep("#added_questions_wrapper", "Hier findest du alle deine Quizfragen, die im Quiz vorhanden sind. Um eine Quizfrage dem Quiz hinzuzufügen, ziehe sie einfach aus dem linken Stapel hierher. Mit einem Klick auf die Frage kannst du die Inhalte der Quizfrage einstellen.");
 	guide.start();
+	*/
 });
 
 Template.quizManagerDetails.onRendered(function () {

@@ -14,8 +14,8 @@
 			steps,
 			position,
 
-			prevButton = $("<button/>").addClass("btn").html("Prev"),
-			nextButton = $("<button/>").addClass("btn").html("Next"),
+			prevButton = $("<button/>").addClass("btn btn-danger").html("Prev"),
+			nextButton = $("<button/>").addClass("btn btn-success").html("Next"),
 			arrow = $("<div/>").addClass("guideBubble-arrow").addClass("top"),
 
 			gotoStep = function(i) {
@@ -58,9 +58,15 @@
 					height: (top - margin) + "px"
 				});
 
+				let bottomMaskTop = (height + top + margin) + "px";
+				if (bottomMaskTop > $('#theme-wrapper').height()) {
+					bottomMaskTop = "auto";
+				}
 				bottomMask.css({
-					top: (height + top + margin) + "px",
-					height: ($(document).height() - height - top - margin) + "px"
+					top: bottomMaskTop,
+					bottom: bottomMaskTop === "auto" ? $('.fixed-bottom').outerHeight() + $('.navbar-fixed-bottom').outerHeight() : "auto",
+					height: ($(document).height() - height - top - margin) + "px",
+					"min-height": bottomMaskTop === "auto" ? $('.fixed-bottom').outerHeight() + $('.navbar-fixed-bottom').outerHeight() : "auto"
 				});
 
 				leftMask.css({
@@ -84,9 +90,17 @@
 					width = element.outerWidth(),
 					height = element.outerHeight();
 
-				var css = {
-					top: (height + top + margin + 10) + "px"
-				};
+				console.log(element);
+				var css = {};
+				if (top + height + bubble.outerHeight() > $('#theme-wrapper').height()) {
+					css.top = "auto";
+					css.bottom = (top + margin + 10) + "px";
+					arrow.removeClass("top").addClass("bottom");
+				} else {
+					css.top = (height + top + margin + 10) + "px";
+					css.bottom = "auto";
+					arrow.removeClass("bottom").addClass("top");
+				}
 
 				if ((left + bubble.outerWidth()) > $(document).width()) {
 					$(".guideBubble-arrow", bubble).css({"right": "10px"});
@@ -97,15 +111,14 @@
 					css.left = left - margin;
 				}
 
+				$(".step", bubble).html(i + 1);
+				$(".intro", bubble).html(steps[i].intro);
 				bubble.animate(css, 500, function() {
 					scrollIntoView();
 					if (steps[i].options.callback) {
 						steps[i].options.callback();
 					}
 				});
-
-				$(".step", bubble).html(i + 1);
-				$(".intro", bubble).html(steps[i].intro);
 				prevButton.removeClass("disabled");
 				nextButton.removeClass("disabled");
 
@@ -159,7 +172,8 @@
 				steps = [];
 				holdingSteps = [];
 				position = -1;
-				zIndex = getMaximumZIndex();
+				//zIndex = getMaximumZIndex();
+				zIndex = 1070;
 
 				topMask.add(bottomMask).add(leftMask).add(rightMask).css("z-index", zIndex + 1);
 				bubble.css("z-index", zIndex + 2).html("").append(arrow).append($("<div/>").addClass("step").html("1")).append($("<div/>").addClass("intro")).append($("<div/>").addClass("btn-group pull-right").append(prevButton).append(nextButton));

@@ -9,7 +9,9 @@
 .guideBubble {
 	position: absolute;
 	width: 250px;
-	background-color: #fff;
+	background-color: #ffd700;
+	color: black;
+	border: 1px solid black;
 	padding: 10px;
 	border-radius: 5px;
 	box-shadow: 0 1px 10px rgba(0,0,0,.4);
@@ -40,7 +42,7 @@
 	top: -10px;
 	border-top-color:transparent;
 	border-right-color:transparent;
-	border-bottom-color:white;
+	border-bottom-color:#ffd700;
 	border-left-color:transparent;
 }
 .guideBubble-arrow.right {
@@ -49,11 +51,11 @@
 	border-top-color:transparent;
 	border-right-color:transparent;
 	border-bottom-color:transparent;
-	border-left-color:white;
+	border-left-color:#ffd700;
 }
 .guideBubble-arrow.bottom {
 	bottom: -10px;
-	border-top-color:white;
+	border-top-color:#ffd700;
 	border-right-color:transparent;
 	border-bottom-color:transparent;
 	border-left-color:transparent;
@@ -62,7 +64,7 @@
 	left: -10px;
 	top: 10px;
 	border-top-color:transparent;
-	border-right-color:white;
+	border-right-color:#ffd700;
 	border-bottom-color:transparent;
 	border-left-color:transparent;
 }

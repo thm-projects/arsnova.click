@@ -52,6 +52,14 @@ Template.defaultAnswerOptionTemplate.events({
 		localData.addHashtag(Session.get("questionGroup"));
 		markdownTracker.changed();
 	},
+	"change #config_multipleSelectionSurvey_switch": function (event) {
+		const checked = $(event.target).prop('checked');
+		const questionItem = Session.get("questionGroup");
+		questionItem.getQuestionList()[Router.current().params.questionIndex].setMultipleSelectionEnabled(checked);
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
+		markdownTracker.changed();
+	},
 	"click .removeAnsweroption": function (event) {
 		const questionItem = Session.get("questionGroup");
 		questionItem.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption(event.currentTarget.id.replace("removeAnsweroption_", ""));

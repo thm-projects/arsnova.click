@@ -239,8 +239,9 @@ export const renderAnsweroptionItems = function () {
 		return;
 	}
 	$('#answerOptionWrapper').html("");
-	const typeName = Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName();
-	Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().forEach(function (item) {
+	const questionItem = Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex];
+	const typeName = questionItem.typeName();
+	questionItem.getAnswerOptionList().forEach(function (item) {
 		const number = item.getAnswerOptionNumber();
 		const wrapper = $("<div data-id='" + number + "' class='answerOptionElementWrapper draggable'></div>");
 		wrapper.append(
@@ -260,7 +261,11 @@ export const renderAnsweroptionItems = function () {
 		}
 		$('#answerOptionWrapper').append(wrapper);
 	});
-	const configShowAnswerContentOnButtonsState = Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getDisplayAnswerText() ? "on" : "off";
+	const configShowAnswerContentOnButtonsState = questionItem.getDisplayAnswerText() ? "on" : "off";
 	$('#config_showAnswerContentOnButtons_switch').bootstrapToggle(configShowAnswerContentOnButtonsState);
+	if (typeName === "SurveyQuestion") {
+		const configMultipleSelectionEnabledState = questionItem.getMultipleSelectionEnabled() ? "on" : "off";
+		$('#config_multipleSelectionSurvey_switch').bootstrapToggle(configMultipleSelectionEnabledState);
+	}
 	formatIsCorrectButtons();
 };

@@ -32,14 +32,12 @@ Template.votingview.onCreated(function () {
 	Session.set("hasSendResponse", false);
 	Session.set("hasToggledResponse", false);
 	Session.set("countdownInitialized", false);
-	const sessionType = Session.get("questionGroup").getQuestionList()[questionIndex].typeName();
-	const answers = Session.get("questionGroup").getQuestionList()[questionIndex].getAnswerOptionList();
-	const redirectOnAnswerClick = $.inArray(sessionType, ["SingleChoiceQuestion", "YesNoSingleChoiceQuestion", "TrueFalseSingleChoiceQuestion"]) > -1;
+	const questionItem = Session.get("questionGroup").getQuestionList()[questionIndex];
+	const sessionType = questionItem.typeName();
+	const answers = questionItem.getAnswerOptionList();
+	const redirectOnAnswerClick = $.inArray(sessionType, ["SingleChoiceQuestion", "YesNoSingleChoiceQuestion", "TrueFalseSingleChoiceQuestion"]) > -1 ||
+		(sessionType === "SurveyQuestion" && !questionItem.getMultipleSelectionEnabled());
 	Session.set("questionSC", redirectOnAnswerClick);
 	startCountdown(questionIndex);
-	const responseArr = [];
-	for (let i = 0; i < answers.length; i++) {
-		responseArr[i] = false;
-	}
-	Session.set("responses",JSON.stringify(responseArr));
+	Session.set("responses",JSON.stringify(new Array(answers.length).fill(false)));
 });

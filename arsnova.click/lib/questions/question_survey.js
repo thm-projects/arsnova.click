@@ -1,6 +1,8 @@
 import {EJSON} from 'meteor/ejson';
 import {AbstractChoiceQuestion} from './question_choice_abstract.js';
 
+const multipleSelectionEnabled = Symbol("multipleSelectionEnabled");
+
 export class SurveyQuestion extends AbstractChoiceQuestion {
 
 	/**
@@ -13,6 +15,15 @@ export class SurveyQuestion extends AbstractChoiceQuestion {
 			throw new TypeError("Invalid construction type while creating new SurveyQuestion");
 		}
 		super(options);
+		this[multipleSelectionEnabled] = typeof options.multipleSelectionEnabled === "undefined" ? false : options.multipleSelectionEnabled;
+	}
+
+	setMultipleSelectionEnabled (newVal) {
+		this[multipleSelectionEnabled] = newVal;
+	}
+
+	getMultipleSelectionEnabled () {
+		return this[multipleSelectionEnabled];
 	}
 
 	/**
@@ -63,7 +74,16 @@ export class SurveyQuestion extends AbstractChoiceQuestion {
 	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
 	 */
 	serialize () {
-		return $.extend(super.serialize(), {type: "SurveyQuestion"});
+		return $.extend(super.serialize(), {
+			type: "SurveyQuestion",
+			multipleSelectionEnabled: this.getMultipleSelectionEnabled()
+		});
+	}
+
+	equals (question) {
+		return question.typeName() === this.typeName() &&
+			super.equals(question) &&
+			question.getMultipleSelectionEnabled() === this.getMultipleSelectionEnabled();
 	}
 
 	/**

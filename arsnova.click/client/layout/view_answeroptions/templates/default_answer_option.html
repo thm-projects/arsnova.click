@@ -33,18 +33,36 @@
                         <div id="answerOptionWrapper" class="col-md-12"></div>
                     </div>
                 </div>
-                <div class="col-xs-12">
+                <div class="col-xs-12 answerOptionConfig">
                     <p class="text-light checkboxLabel pull-left" id="showAnswerContentOnButtons">Soll auf den Buttons der Inhalt der Antwort angezeigt werden?</p>
                     <input type="checkbox"
                            id="config_showAnswerContentOnButtons_switch"
                            name="switch"
                            data-width="100"
                            data-height="35"
+                           data-onstyle="success"
+                           data-offstyle="danger"
                            data-on="{{_ "view.answeroptions.free_text_question.onText"}}"
                            data-off="{{_ "view.answeroptions.free_text_question.offText"}}"
                            title="Soll auf den Buttons der Inhalt der Antwort angezeigt werden?"
                            class="tabbable">
                 </div>
+                {{#if isSurveyQuestion}}
+                    <div class="col-xs-12 answerOptionConfig">
+                        <p class="text-light checkboxLabel pull-left" id="multipleSelectionSurvey">Sollen mehrere Antwortoptionen ausgewählt werden können?</p>
+                        <input type="checkbox"
+                               id="config_multipleSelectionSurvey_switch"
+                               name="switch"
+                               data-width="100"
+                               data-height="35"
+                               data-onstyle="success"
+                               data-offstyle="danger"
+                               data-on="{{_ "view.answeroptions.free_text_question.onText"}}"
+                               data-off="{{_ "view.answeroptions.free_text_question.offText"}}"
+                               title="Sollen mehrere Antwortoptionen ausgewählt werden können?"
+                               class="tabbable">
+                    </div>
+                {{/if}}
             </div>
         </div>
         <div id="previewAnsweroptionContentWrapper" class="hidden-xs hidden-sm hidden-md col-lg-6">

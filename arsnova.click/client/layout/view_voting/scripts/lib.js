@@ -162,7 +162,7 @@ $(window).on("resize orientationchange", function () {
 
 function calculateAnswerRowHeight() {
 	let contentHeight = ($("#markdownPreviewWrapper").height() - $("h2.text-center").outerHeight(true)) || $(".contentPosition").height();
-	return contentHeight - $('.voting-helper-buttons').height() - parseInt($('.answer-row').css("margin-top").replace("px",""));
+	return contentHeight - $('.voting-helper-buttons').height() - parseInt($('.answer-row').css("margin-top"));
 }
 
 export function formatAnswerButtons() {

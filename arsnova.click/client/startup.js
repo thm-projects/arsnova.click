@@ -17,8 +17,11 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
+import {Template} from 'meteor/templating';
+import {Showdown} from 'meteor/markdown';
 import {Router} from 'meteor/iron:router';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {MeteorMathJax} from 'meteor/mrt:mathjax';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
@@ -28,7 +31,6 @@ import * as nicknameLib from '/client/layout/view_choose_nickname/scripts/lib.js
 import {cleanUp} from "./routes.js";
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
 import {randomIntFromInterval} from '/client/layout/view_live_results/scripts/lib.js';
-import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 
 export function getUserLanguage() {
 	/* Get the language of the browser */
@@ -67,6 +69,32 @@ export function createTabIndices() {
 	});
 }
 
+const converter = new Showdown.converter();
+const helper = new MeteorMathJax.Helper({
+	useCache: true,
+	transform : function (x) {
+		return converter.makeHtml(x);
+	},
+});
+Template.registerHelper('mathjax', helper.getTemplate());
+MeteorMathJax.defaultConfig = {
+	config: ["MMLorHTML.js"],
+	jax: ["input/TeX","input/MathML","output/HTML-CSS","output/NativeMML", "output/PreviewHTML"],
+	extensions: ["tex2jax.js", "Safe.js", "mml2jax.js", "fast-preview.js", "AssistiveMML.js", "[Contrib]/a11y/accessibility-menu.js"],
+	TeX: {
+		extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+	},
+	tex2jax: {
+		inlineMath: [['$','$'],['(',')']],
+		displayMath: [['$$', '$$'], ['[', ']']],
+		processEscapes: false,
+		preview: 'none'
+	},
+	messageStyle: 'none',
+	showProcessingMessages: false,
+	showMathMenu: false
+};
+
 Meteor.startup(function () {
 	if (Meteor.isClient) {
 		if ('serviceWorker' in navigator) {
@@ -74,7 +102,6 @@ Meteor.startup(function () {
 		}
 		$.getScript('/lib/highlight.pack.min.js');
 		$.getScript('/lib/marked.min.js');
-		mathjaxMarkdown.initializeMarkdownAndLatex();
 		Session.set("loading_language", true);
 		TAPi18n.setLanguage(getUserLanguage()).then(function () {
 			Session.set("loading_language", false);

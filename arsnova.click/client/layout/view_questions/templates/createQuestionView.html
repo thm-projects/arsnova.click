@@ -31,7 +31,20 @@
                 <img id="previewQuestionImage" src="/images/preview/question_preview.png" alt="question preview" />
                 <div id="markdownPreviewWrapper">
                     <h2 class="text-center">Vorschau</h2>
-                    {{{previewQuestionText}}}
+                    {{#each splitQuestionTextOnNewLine}}
+                        {{#if isVideoQuestionText this}}
+                            {{#with getVideoData this}}
+                                <object width="100%" height="100%">
+                                    <param name="movie" value="{{this.origin}}{{this.videoId}}?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3"/>
+                                    <param name="allowFullScreen" value="true"/>
+                                    <param name="allowscriptaccess" value="always"/>
+                                    {{{this.embedTag}}}
+                                </object>
+                            {{/with}}
+                        {{else}}
+                            {{#mathjax}}{{this}}{{/mathjax}}
+                        {{/if}}
+                    {{/each}}
                 </div>
             </div>
         </div>

@@ -73,7 +73,7 @@ Template.defaultAnswerOptionTemplate.events({
 		const cursorPosition = $("#" + id).getCursorPosition();
 		parseSingleAnswerOptionInput(Router.current().params.questionIndex, plainId);
 		Meteor.defer(function () {
-			$("#" + id).focus().setCaretPosition(cursorPosition);
+			$("#" + id).setCursorPosition(cursorPosition).focus();
 		});
 	}
 });

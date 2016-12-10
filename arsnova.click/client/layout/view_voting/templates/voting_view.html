@@ -69,7 +69,22 @@
                                     <div class="buttonWrapper">
                                         <button id="{{this.getAnswerOptionNumber}}"
                                                 class="sendResponse btn btn-answerOption btn-answerFont button-purple tabbable quickfit">
-                                            <p>{{{answerOptionLetter number=this.getAnswerOptionNumber}}}</p>
+                                            {{#if getDisplayAnswerText}}
+                                                {{#if isVideoAnswerText this.getAnswerOptionNumber}}
+                                                    {{#with getVideoData this.getAnswerOptionNumber}}
+                                                        <object width="100%" height="100%">
+                                                            <param name="movie" value="{{this.origin}}{{this.videoId}}?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3"/>
+                                                            <param name="allowFullScreen" value="true"/>
+                                                            <param name="allowscriptaccess" value="always"/>
+                                                            {{{this.embedTag}}}
+                                                        </object>
+                                                    {{/with}}
+                                                {{else}}
+                                                    <p>{{#mathjax}}{{this.getAnswerText}}{{/mathjax}}</p>
+                                                {{/if}}
+                                            {{else}}
+                                                <p>{{answerOptionLetter this.getAnswerOptionNumber}}</p>
+                                            {{/if}}
                                         </button>
                                     </div>
                                 {{/each}}

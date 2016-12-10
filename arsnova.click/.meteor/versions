@@ -60,6 +60,7 @@ launch-screen@1.1.0
 livedata@1.0.18
 localstorage@1.0.12
 logging@1.1.16
+markdown@1.0.11
 matb33:collection-hooks@0.8.4
 mdg:validation-error@0.5.1
 meteor@1.6.0
@@ -79,6 +80,7 @@ modules@0.7.7
 modules-runtime@0.7.7
 mongo@1.1.14
 mongo-id@1.0.6
+mrt:mathjax@0.7.1
 npm-mongo@2.2.11_2
 observe-sequence@1.0.14
 ordered-dict@1.0.9

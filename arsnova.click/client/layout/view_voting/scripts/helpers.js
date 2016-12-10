@@ -18,11 +18,10 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {DefaultQuestionGroup} from '/lib/questions/questiongroup_default.js';
+import {Router} from 'meteor/iron:router';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import * as lib from './lib.js';
 
 Template.votingview.helpers({
@@ -41,23 +40,34 @@ Template.votingview.helpers({
 		}
 		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
 	},
+	getDisplayAnswerText: function () {
+		if (Router.current().params.questionIndex) {
+			return Session.get("questionGroup").getQuestionList()[parseInt(Router.current().params.questionIndex)].getDisplayAnswerText();
+		}
+	},
+	isVideoAnswerText: function (number) {
+		const answerText = Session.get("questionGroup").getQuestionList()[parseInt(Router.current().params.questionIndex)].getAnswerOptionList()[number].getAnswerText();
+		return /youtube/.test(answerText) || /youtu.be/.test(answerText) || /vimeo/.test(answerText);
+	},
+	getVideoData: function (number) {
+		const answerText = Session.get("questionGroup").getQuestionList()[parseInt(Router.current().params.questionIndex)].getAnswerOptionList()[number].getAnswerText();
+		const result = {};
+		if (/youtube/.test(answerText)) {
+			result.origin  = "https://www.youtube.com/embed/";
+			result.videoId = answerText.substr(answerText.lastIndexOf("=") + 1, answerText.length);
+		} else if (/youtu.be/.test(answerText)) {
+			result.origin  = "https://www.youtube.com/embed/";
+			result.videoId = answerText.substr(answerText.lastIndexOf("/") + 1, answerText.length);
+		} else if (/vimeo/.test(answerText)) {
+			result.origin = "https://player.vimeo.com/video/";
+			result.videoId = answerText.substr(answerText.lastIndexOf("/") + 1, answerText.length);
+		}
+		result.videoId = result.videoId.replace(/script/g, "");
+		result.embedTag = '<embed width="100%" height="100%" src="' + result.origin + result.videoId + '?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3" type="text/html" allowscriptaccess="always" allowfullscreen="true" />';
+		return result;
+	},
 	answerOptionLetter: function (number) {
-		let questionItem;
-		if (Template.parentData()["data-questionIndex"]) {
-			questionItem = Session.get("questionGroup").getQuestionList()[parseInt(Template.parentData()["data-questionIndex"])];
-		} else {
-			questionItem = new DefaultQuestionGroup(QuestionGroupCollection.findOne());
-		}
-		const allAnswerTexts = questionItem.getAnswerOptionList();
-		const answer = allAnswerTexts[number.hash.number];
-		if (!answer || answer.getAnswerText().length === 0 || !questionItem.getDisplayAnswerText()) {
-			return String.fromCharCode((number.hash.number + 65));
-		} else {
-			if (answer.getAnswerText().length === answer.getAnswerTextLengthWithoutMarkdownChars()) {
-				return answer.getAnswerText();
-			}
-			return mathjaxMarkdown.getContent(answer.getAnswerText());
-		}
+		return String.fromCharCode((number + 65));
 	},
 	isRangedQuestion: function () {
 		if (this["data-questionIndex"]) {

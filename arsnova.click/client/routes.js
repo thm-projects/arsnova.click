@@ -488,6 +488,11 @@ Router.route('/:quizName/settimer/:questionIndex', {
 });
 
 Router.route('/:quizName/nicknameCategories', {
+	waitOn: function () {
+		return [
+			subsCache.subscribe('NicknameCategoriesCollection.join')
+		];
+	},
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			this.render('footerNavButtons', {

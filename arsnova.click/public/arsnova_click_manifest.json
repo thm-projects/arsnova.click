@@ -1,6 +1,7 @@
 {
   "short_name": "arsnova.click",
   "name": "arsnova.click",
+  "description": "The ultimate quiz app from the future!",
   "icons": [
     {
       "src": "/images/icons/arsnova_click-114.png",
@@ -31,12 +32,13 @@
   "background_color": "#23425b",
   "theme_color": "#23425b",
   "start_url": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "orientation": "portrait",
   "prefer_related_applications": true,
   "related_applications": [
     {
       "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=click.arsnova",
       "id": "click.arsnova"
     }
   ]

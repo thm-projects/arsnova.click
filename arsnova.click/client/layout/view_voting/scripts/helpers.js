@@ -46,7 +46,11 @@ Template.votingview.helpers({
 		}
 	},
 	isVideoAnswerText: function (number) {
-		const answerText = Session.get("questionGroup").getQuestionList()[parseInt(Router.current().params.questionIndex)].getAnswerOptionList()[number].getAnswerText();
+		const answer = Session.get("questionGroup").getQuestionList()[parseInt(Router.current().params.questionIndex)].getAnswerOptionList()[number];
+		if (!answer) {
+			return;
+		}
+		const answerText = answer.getAnswerText();
 		return /youtube/.test(answerText) || /youtu.be/.test(answerText) || /vimeo/.test(answerText);
 	},
 	getVideoData: function (number) {

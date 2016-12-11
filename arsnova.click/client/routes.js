@@ -29,6 +29,7 @@ import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plu
 import {getChangeEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onChangeEvent.js';
 import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onRemoveEvent.js';
 import {createTabIndices} from '/client/startup.js';
+import {getTooltipForRoute} from "/client/layout/global/scripts/lib.js";
 
 const subsCache = new SubsManager({
 	/* maximum number of cached subscriptions */
@@ -157,6 +158,7 @@ Router.onBeforeAction(function () {
 
 Router.onAfterAction(function () {
 	createTabIndices();
+	getTooltipForRoute(Router.current().route.getName());
 });
 
 Router.route('/', {

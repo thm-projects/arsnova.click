@@ -7,7 +7,7 @@
             <h2 class="text-light">Verfügbare Quizfragen</h2>
             <ul id="available_questions_wrapper">
                 {{#each questionTypes}}
-                    <li id="{{this.id}}_draggable" class="draggable questionType_{{this.id}}">{{_ this.translationName}}</li>
+                    <li id="{{this.id}}_draggable" class="draggable questionType_{{this.id}}" data-intro="{{_ this.translationName}}" >{{_ this.translationName}}</li>
                 {{/each}}
             </ul>
         </div>

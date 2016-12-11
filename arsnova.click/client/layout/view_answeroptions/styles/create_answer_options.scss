@@ -35,13 +35,15 @@
 
 	.answerOptionConfig {
 		margin-top: 5px;
+		display: table;
 
 		#showAnswerContentOnButtons,
 		#multipleSelectionSurvey {
 			height: 35px;
-			line-height: 35px;
 			margin: 0;
 			width: calc(100% - 100px);
+			display: table-cell;
+			vertical-align: middle;
 		}
 	}
 }

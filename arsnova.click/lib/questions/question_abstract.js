@@ -251,7 +251,7 @@ export class AbstractQuestion {
 			tmpValue = tmpValue.replace(/<\/hlcode>/g,"");
 			tmpValue = tmpValue.replace(/>/g,"");
 			return tmpValue.length;
-		}).join();
+		});
 	}
 
 	/**

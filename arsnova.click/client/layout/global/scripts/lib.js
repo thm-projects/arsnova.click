@@ -17,7 +17,10 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
+import {Tracker} from 'meteor/tracker';
 import {Router} from 'meteor/iron:router';
+import {TAPi18n} from 'meteor/tap:i18n';
+import {introJs} from 'meteor/arsnova.click:introjs';
 
 let pendingAnimationRunning = false;
 const standardAnimationDelay = 200;
@@ -151,4 +154,51 @@ export function forceFeedback() {
 	if (navigator.vibrate) {
 		navigator.vibrate(100);
 	}
+}
+
+export function getTooltipForRoute(route, overridePreference = false) {
+	let hasStartedIntroJs = false;
+	route = route.replace(/(:quizName.)*(.:id)*(.:questionIndex)*/g, "");
+	const introState = $.parseJSON(sessionStorage.getItem("intro_state")) || {};
+	if (!introState[route]) {
+		introState[route] = {completed: false};
+		sessionStorage.setItem("intro_state", JSON.stringify(introState));
+	}
+	Tracker.autorun(function () {
+		if (hasStartedIntroJs || Session.get("loading_language") || (introState[route].completed && !overridePreference)) {
+			return;
+		}
+		hasStartedIntroJs = true;
+		const customIntroJs = introJs().setOptions({
+			'overlayOpacity': 0,
+			'showProgress': true,
+			'tooltipPosition': 'auto',
+			'nextLabel': TAPi18n.__("global.next"),
+			'prevLabel': TAPi18n.__("global.back"),
+			'doneLabel': TAPi18n.__("global.close_window"),
+			'skipLabel': TAPi18n.__("global.close_window")
+		});
+		switch (route) {
+			case "hashtagmanagement":
+			case "agb":
+			case "about":
+			case "imprint":
+			case "dataprivacy":
+			case "quizManager":
+				$('#forwardButton').attr('data-intro', "Starte Quiz");
+				break;
+			case "question":
+			case "answeroptions":
+			case "settimer":
+			case "questionType":
+			case "quizSummary":
+			case "results":
+			case "onpolling":
+			case "leaderBoard":
+			case "nicknameCategories":
+			case "showMore":
+			case "theme":
+		}
+		customIntroJs.start();
+	});
 }

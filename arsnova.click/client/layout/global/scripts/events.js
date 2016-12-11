@@ -119,7 +119,18 @@ Template.home.events({
 		}
 		if (!hashtagDoc) {
 			joinSessionItem.attr("disabled", "disabled");
-			addNewHashtagItem.removeAttr("disabled");
+			if (!Meteor.status().connected) {
+				addNewHashtagItem.attr("disabled", "disabled");
+				inputTarget.popover({
+					title: TAPi18n.__("view.hashtag_view.hashtag_input.server_offline"),
+					trigger: 'manual',
+					placement: 'bottom'
+				});
+				inputTarget.popover("show");
+				return;
+			} else {
+				addNewHashtagItem.removeAttr("disabled");
+			}
 		} else {
 			const localLoweredHashtags = localData.getAllLoweredHashtags();
 			if ($.inArray(inputHashtag.toLowerCase(), localLoweredHashtags) > -1) {

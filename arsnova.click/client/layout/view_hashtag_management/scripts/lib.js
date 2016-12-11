@@ -121,7 +121,7 @@ export function connectEventManager(hashtag) {
 }
 
 export function addHashtag(questionGroup) {
-	if (!HashtagsCollection.findOne({hashtag: questionGroup.getHashtag()})) {
+	if (Meteor.status().connected && !HashtagsCollection.findOne({hashtag: questionGroup.getHashtag()})) {
 		Meteor.call('SessionConfiguration.addConfig', questionGroup.getConfiguration().serialize());
 		Meteor.call('HashtagsCollection.addHashtag', {
 			privateKey: localData.getPrivateKey(),

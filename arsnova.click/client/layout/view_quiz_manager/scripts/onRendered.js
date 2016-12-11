@@ -40,9 +40,10 @@ Template.quizManager.onRendered(function () {
 		}
 	}.bind(this));
 	this.autorun(function () {
-		if (Session.get("loading_language")) {
+		if (Meteor.status().connected && Session.get("loading_language")) {
 			return;
 		}
+		$('#added_questions_wrapper').html("");
 		Session.get("questionGroup").getQuestionList().forEach(function (item) {
 			$('#added_questions_wrapper').append(
 				'<li id="' + item.getQuestionIndex() + '_added_question" data-valid="' + (item.isValid() ? "true" : "false") + '" data-intro="' + TAPi18n.__(item.translationReferrer()) + '" class="draggable">' + TAPi18n.__(item.translationReferrer()) + '</li>'

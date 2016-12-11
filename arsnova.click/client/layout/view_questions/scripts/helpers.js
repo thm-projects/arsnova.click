@@ -33,7 +33,9 @@ Template.createQuestionView.helpers({
 		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[parseInt(Router.current().params.questionIndex)].getQuestionText().split("\n");
+		const result = Session.get("questionGroup").getQuestionList()[parseInt(Router.current().params.questionIndex)].getQuestionText().split("\n");
+		lib.parseGithubFlavoredMarkdown(result);
+		return result;
 	},
 	isVideoQuestionText: function (questionText) {
 		return /youtube/.test(questionText) || /youtu.be/.test(questionText) || /vimeo/.test(questionText);

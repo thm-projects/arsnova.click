@@ -267,3 +267,21 @@ code {
 .markdown-content ol li {
   list-style-type: decimal;
 }
+
+.hljs {
+  margin: 0.5em 0;
+}
+
+.markdownCheckbox {
+  vertical-align: middle;
+  margin: 0 10px 0 0 !important;
+}
+
+table tr:nth-child(even) {
+  color: black;
+}
+
+table {
+  display: table !important;
+  overflow: hidden !important;
+}

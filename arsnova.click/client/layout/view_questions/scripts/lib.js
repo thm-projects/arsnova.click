@@ -37,6 +37,143 @@ export function checkForValidQuestionText() {
 	}
 }
 
+export function parseCodeBlock(result, i) {
+	let tmpNewItem = result[i] + "\n";
+	let mergeEndIndex = -1;
+	for (let j = i + 1; j < result.length; j++) {
+		tmpNewItem += result[j] + "\n";
+		if (result[j].startsWith("```")) {
+			mergeEndIndex = j;
+			break;
+		}
+	}
+	result.splice(i, mergeEndIndex - i + 1);
+	result.splice(i, 0, tmpNewItem);
+}
+
+export function parseOrderedList(result, i) {
+	let tmpNewItem = result[i] + "\n";
+	let mergeEndIndex = -1;
+	for (let j = i + 1; j < result.length; j++) {
+		if (!/^[0-9]*./.test(result[j])) {
+			mergeEndIndex = j - 1;
+			break;
+		}
+		tmpNewItem += result[j] + "\n";
+	}
+	result.splice(i, mergeEndIndex - i + 1);
+	result.splice(i, 0, tmpNewItem);
+}
+
+export function parseUnorderedList(result, i) {
+	let tmpNewItem = result[i] + "\n";
+	let mergeEndIndex = -1;
+	for (let j = i + 1; j < result.length; j++) {
+		if (!/^(   )[*-] /.test(result[j]) && !/^[0-9]*./.test(result[j])) {
+			mergeEndIndex = j - 1;
+			break;
+		}
+		tmpNewItem += result[j] + "\n";
+	}
+	result.splice(i, mergeEndIndex - i + 1);
+	result.splice(i, 0, tmpNewItem);
+}
+
+export function parseCommentBlock(result, i) {
+	let tmpNewItem = result[i] + "\n";
+	let mergeEndIndex = -1;
+	for (let j = i + 1; j < result.length; j++) {
+		if (!/^> /.test(result[j])) {
+			mergeEndIndex = j - 1;
+			break;
+		}
+		tmpNewItem += result[j] + "\n";
+	}
+	result.splice(i, mergeEndIndex - i + 1);
+	result.splice(i, 0, tmpNewItem);
+}
+
+export function parseLinkBlock(result, i) {
+	const startIndex = /(([A-Za-z]{3,9}):\/\/)?([-;:&=\+\$,\w]+@{1})?(([-A-Za-z0-9]+\.)+[A-Za-z]{2,3})(:\d+)?((\/[-\+~%/\.\w]+)?\/?([&?][-\+=&;%@\.\w]+)?(#[\w]+)?)?/g.exec(result[i]);
+	const linkStr = startIndex[0] || result[i];
+	const prevLinkContent = result[i].substring(0, startIndex.index);
+	const postLinkContent = result[i].indexOf(" ", startIndex.index) > -1 ? result[i].substring(result[i].indexOf(" ", startIndex.index)) : "";
+	result[i] = prevLinkContent + "<a href='" + linkStr + "'>" + linkStr + "</a>" + postLinkContent;
+}
+
+export function parseTableBlock(result, i) {
+	let tmpNewItem = result[i];
+	let mergeEndIndex = -1;
+	for (let j = i + 1; j < result.length; j++) {
+		if (result[j].indexOf(" | ") === -1 && !/:[-]*:/.test(result[j])) {
+			mergeEndIndex = j - 1;
+			break;
+		}
+		tmpNewItem += (result[j] + "\n");
+	}
+	const tmpNewItemElement = $("<table><thead></thead><tbody></tbody></table>");
+	let tableHasHeader = /|:[-]*:/.test(tmpNewItem);
+	tmpNewItem.split("|").forEach(function (element) {
+		if (element === "") {
+			return;
+		}
+		if (element === "\n") {
+			tmpNewItemElement.find("tbody").append($("<tr/>"));
+			return;
+		}
+		if (tableHasHeader && /:[-]*:/.test(element)) {
+			tableHasHeader = false;
+		} else {
+			if (tableHasHeader) {
+				tmpNewItemElement.find("thead").append($("<th/>").text(element));
+			} else {
+				tmpNewItemElement.find("tbody").find("tr").last().append($("<td/>").text(element));
+			}
+		}
+	});
+	result.splice(i, mergeEndIndex - i + 1);
+	result.splice(i, 0, tmpNewItemElement.prop('outerHTML'));
+}
+
+export function parseGithubFlavoredMarkdown(result) {
+	for (let i = 0; i < result.length; i++) {
+		switch (true) {
+			case /```/.test(result[i]):
+				parseCodeBlock(result, i);
+				break;
+			case /^([0-9]*\.)?(-)? \[x\] /.test(result[i]):
+				result[i] = ("<input class='markdownCheckbox' type='checkbox' checked='checked' disabled='disabled' />" + result[i].replace(/([0-9]*\.)?(-)? \[x\] /, ""));
+				break;
+			case /^([0-9]*\.)?(-)? \[ \] /.test(result[i]):
+				result[i] = ("<input class='markdownCheckbox' type='checkbox' disabled='disabled' />" + result[i].replace(/^([0-9]*\.)?(-)? \[ \] /, ""));
+				break;
+			case /1\./.test(result[i]):
+				parseOrderedList(result, i);
+				break;
+			case /^[*-] /.test(result[i]):
+				parseUnorderedList(result, i);
+				break;
+			case /^> /.test(result[i]):
+				parseCommentBlock(result, i);
+				break;
+			case /~~.*~~/.test(result[i]):
+				const index = /~~.*~~/.exec(result[i]);
+				result[i] = result[i].replace(index[0], "<del>" + index[0].replace(/~/g, "") + "</del>");
+				break;
+			case !/\(.*:\/\/(.*.)*.*\)/.test(result[i]) && /.*:\/\/(.*.)*.*/.test(result[i]) && !(/youtube/.test(result[i]) || /youtu.be/.test(result[i]) || /vimeo/.test(result[i])):
+				parseLinkBlock(result, i);
+				break;
+			case result[i] === "":
+				result.splice(i, 0, "<br/>");
+				i++;
+				break;
+			case result[i].indexOf(" | ") > -1:
+				parseTableBlock(result, i);
+				break;
+		}
+	}
+}
+
 export function getQuestionTypes() {
 	return [
 		{

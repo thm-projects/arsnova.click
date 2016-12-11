@@ -69,7 +69,11 @@ export function createTabIndices() {
 	});
 }
 
-const converter = new Showdown.converter();
+const converter = new Showdown.converter({
+	simplifiedAutoLink: true,
+	strikethrough: true,
+	tables: true
+});
 const helper = new MeteorMathJax.Helper({
 	useCache: true,
 	transform : function (x) {
@@ -85,8 +89,8 @@ MeteorMathJax.defaultConfig = {
 		extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
 	},
 	tex2jax: {
-		inlineMath: [['$','$'],['(',')']],
-		displayMath: [['$$', '$$'], ['[', ']']],
+		inlineMath: [['$','$']],
+		displayMath: [['$$', '$$']],
 		processEscapes: false,
 		preview: 'none'
 	},
@@ -100,8 +104,6 @@ Meteor.startup(function () {
 		if ('serviceWorker' in navigator) {
 			navigator.serviceWorker.register('/serviceWorker.js').then().catch(error => console.log(error));
 		}
-		$.getScript('/lib/highlight.pack.min.js');
-		$.getScript('/lib/marked.min.js');
 		Session.set("loading_language", true);
 		TAPi18n.setLanguage(getUserLanguage()).then(function () {
 			Session.set("loading_language", false);

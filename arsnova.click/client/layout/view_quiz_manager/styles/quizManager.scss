@@ -76,5 +76,9 @@
 		&.draggable {
 			z-index: 1080 !important;
 		}
+
+		&:hover {
+			background-color: lighten(black, 10);
+		}
 	}
 }

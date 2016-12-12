@@ -1,13 +1,19 @@
 <template name="questionTypeView">
     <div class="row" id="questionTypeView">
-        <div class="col-xs-12"><p class="text-light">Aktueller Typ der Quizfrage: {{_ currentQuestionType}}</p></div>
-        {{#each questionTypes}}
-            <div class="col-xs-12 col-sm-6 questionType" id="{{this.id}}_questionType">
-                <div class="wrapper">
-                    <p class="text-light">{{_ this.translationName}}</p>
-                    <p class="text-light">TODO: Beschreibungstext des Quiztyps</p>
-                </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <p class="text-light">{{_ "view.question_type.currentType"}} {{_ currentQuestionType}}</p>
             </div>
-        {{/each}}
+        </div>
+        <div class="row" data-intro="{{_ "view.question_type.description.type_wrapper" }}">
+            {{#each questionTypes}}
+                <div class="col-xs-12 col-sm-6 questionType" id="{{this.id}}_questionType">
+                    <div class="wrapper">
+                        <p class="text-light">{{_ this.translationName}}</p>
+                        <p class="text-light">{{_ (getDescriptionForQuestionType this.id)}}</p>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
     </div>
 </template>

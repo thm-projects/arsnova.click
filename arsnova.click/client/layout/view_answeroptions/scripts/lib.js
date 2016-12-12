@@ -26,9 +26,11 @@ import {answerTextSchema} from '/lib/answeroptions/collection.js';
 import {calculateHeaderSize, calculateTitelHeight} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {getTooltipForRoute} from "/client/layout/global/scripts/lib.js";
 import * as localData from '/lib/local_storage.js';
 
 export const answerOptionTracker = new Tracker.Dependency();
+export const answerCheckTracker = new Tracker.Dependency();
 
 export function parseAnswerOptionInput(index) {
 	const questionItem = Session.get("questionGroup");
@@ -94,11 +96,7 @@ export function formatFreeTextSettingsButtons() {
 	if (Session.get("loading_language")) {
 		return;
 	}
-	$("[name='switch']").bootstrapToggle({
-		size: "small",
-		onstyle: "success",
-		offstyle: "danger"
-	});
+	$("[name='switch']").bootstrapToggle();
 }
 
 export function createSlider(index) {
@@ -260,7 +258,7 @@ export const renderAnsweroptionItems = function () {
 		wrapper.append(
 			"<div class='answer_row_short_text'>" + String.fromCharCode(number + 65) + "</div>"
 		).append(
-			"<input type='text' class='answer_row_text tabbable' id='answerOptionText_Number" + number + "' placeholder='" + TAPi18n.__("view.answeroptions.answeroptiontext_placeholder") + "' value='" + item.getAnswerText() + "' maxlength='" + answerTextSchema.max + "'/>"
+			"<input type='text' class='answer_row_text tabbable' id='answerOptionText_Number" + number + "' placeholder='" + TAPi18n.__("view.answeroptions.answeroptiontext_placeholder") + "' value='" + item.getAnswerText() + "' maxlength='" + answerTextSchema.max + "' autocomplete='off' autocorrect='off' autocapitalize='off' spellcheck='false' />"
 		);
 		if (typeName !== "SurveyQuestion") {
 			wrapper.append(
@@ -281,4 +279,10 @@ export const renderAnsweroptionItems = function () {
 		$('#config_multipleSelectionSurvey_switch').bootstrapToggle(configMultipleSelectionEnabledState);
 	}
 	formatIsCorrectButtons();
+	const firstAnswerElement = $("[data-id=0]");
+	firstAnswerElement.find(".answer_row_short_text").attr("data-intro", TAPi18n.__("view.answeroptions.description.added_answer_short_text"));
+	firstAnswerElement.find(".answer_row_text").attr("data-intro", TAPi18n.__("view.answeroptions.description.added_answer_text"));
+	firstAnswerElement.find(".toggle").attr("data-intro", TAPi18n.__("view.answeroptions.description.added_answer_is_correct"));
+	firstAnswerElement.find(".removeAnsweroption").attr("data-intro", TAPi18n.__("view.answeroptions.description.added_answer_remove"));
+	getTooltipForRoute();
 };

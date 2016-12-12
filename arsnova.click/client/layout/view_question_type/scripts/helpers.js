@@ -13,5 +13,8 @@ Template.questionTypeView.helpers({
 	},
 	questionTypes: function () {
 		return questionLib.getQuestionTypes();
+	},
+	getDescriptionForQuestionType: function (typeName) {
+		return "view.question_type.description." + typeName;
 	}
 });

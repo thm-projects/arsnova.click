@@ -128,21 +128,21 @@ function checkIsCorrectRangedQuestion(response, questionIndex) {
 }
 
 function checkIsCorrectFreeTextQuestion(response, questionIndex) {
-	const answerOption = AnswerOptionCollection.findOne({questionIndex: questionIndex});
+	const answerOption = AnswerOptionCollection.findOne({questionIndex: questionIndex}) || Session.get("questionGroup").getQuestionList()[questionIndex].getAnswerOptionList()[0].serialize();
 	let	userHasRightAnswers = false;
 	if (!answerOption.configCaseSensitive) {
 		answerOption.answerText = answerOption.answerText.toLowerCase();
 		response.freeTextInputValue = response.freeTextInputValue.toLowerCase();
-	}
-	if (!answerOption.configTrimWhitespaces) {
-		answerOption.answerText = answerOption.answerText.replace(/ /g, "");
-		response.freeTextInputValue = response.freeTextInputValue.replace(/ /g, "");
 	}
 	if (!answerOption.configUsePunctuation) {
 		answerOption.answerText = answerOption.answerText.replace(/(\.)*(,)*(!)*(")*(;)*(\?)*/g, "");
 		response.freeTextInputValue = response.freeTextInputValue.replace(/(\.)*(,)*(!)*(")*(;)*(\?)*/g, "");
 	}
 	if (answerOption.configUseKeywords) {
+		if (!answerOption.configTrimWhitespaces) {
+			answerOption.answerText = answerOption.answerText.replace(/ /g, "");
+			response.freeTextInputValue = response.freeTextInputValue.replace(/ /g, "");
+		}
 		userHasRightAnswers = answerOption.answerText === response.freeTextInputValue;
 	} else {
 		let hasCorrectKeywords = true;

@@ -29,7 +29,6 @@ import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plu
 import {getChangeEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onChangeEvent.js';
 import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onRemoveEvent.js';
 import {createTabIndices} from '/client/startup.js';
-import {getTooltipForRoute} from "/client/layout/global/scripts/lib.js";
 
 const subsCache = new SubsManager({
 	/* maximum number of cached subscriptions */
@@ -158,7 +157,6 @@ Router.onBeforeAction(function () {
 
 Router.onAfterAction(function () {
 	createTabIndices();
-	getTooltipForRoute(Router.current().route.getName());
 });
 
 Router.route('/', {
@@ -180,7 +178,11 @@ Router.route('/hashtagmanagement', {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('hashtagManagement');
@@ -211,7 +213,11 @@ Router.route('/about', {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('about');
@@ -224,7 +230,11 @@ Router.route('/agb', {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('agb');
@@ -237,7 +247,11 @@ Router.route('/dataprivacy', {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('dataprivacy');
@@ -250,7 +264,11 @@ Router.route('/imprint', {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('imprint');
@@ -263,7 +281,11 @@ Router.route('/translate', {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('translate');
@@ -276,7 +298,11 @@ Router.route('/theme', {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('themeSwitcher');
@@ -295,7 +321,11 @@ Router.route('/showMore', {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('showMore');
@@ -334,7 +364,11 @@ Router.route('/:quizName/theme', {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('themeSwitcher');
@@ -353,7 +387,11 @@ Router.route('/:quizName/showMore', {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('showMore');
@@ -399,7 +437,17 @@ Router.route('/:quizName/quizManager', {
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {backId: "backButton", forwardId: "forwardButton", forwardText: 'view.quiz_summary.start_quiz'};
+					return {
+						backButton: {
+							id: "backButton",
+							intro: "view.quiz_manager.description.back_button"
+						},
+						forwardButton: {
+							id: "forwardButton",
+							text: 'view.quiz_summary.start_quiz',
+							intro: "view.quiz_manager.description.forward_button"
+						}
+					};
 				}
 			});
 			this.render('quizManager');
@@ -415,7 +463,12 @@ Router.route('/:quizName/quizManager/:questionIndex', {
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {backId: "backButton", backText: "global.save"};
+					return {
+						backButton: {
+							id: "backButton",
+							text: "global.save"
+						}
+					};
 				}
 			});
 			this.render('quizManagerDetails');
@@ -433,7 +486,12 @@ Router.route('/:quizName/questionType/:questionIndex', {
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {backId: "backButton", backText: "global.save"};
+					return {
+						backButton: {
+							id: "backButton",
+							text: "global.save"
+						}
+					};
 				}
 			});
 			this.render('questionTypeView');
@@ -449,7 +507,12 @@ Router.route('/:quizName/question/:questionIndex', {
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {backId: "backButton", backText: "global.save"};
+					return {
+						backButton: {
+							id: "backButton",
+							text: "global.save"
+						}
+					};
 				}
 			});
 			this.render('createQuestionView');
@@ -463,7 +526,12 @@ Router.route('/:quizName/answeroptions/:questionIndex', {
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {backId: "backButton", backText: "global.save"};
+					return {
+						backButton: {
+							id: "backButton",
+							text: "global.save"
+						}
+					};
 				}
 			});
 			this.render('createAnswerOptions');
@@ -479,7 +547,12 @@ Router.route('/:quizName/settimer/:questionIndex', {
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {backId: "backButton", backText: "global.save"};
+					return {
+						backButton: {
+							id: "backButton",
+							text: "global.save"
+						}
+					};
 				}
 			});
 			this.render('createTimerView');
@@ -500,30 +573,15 @@ Router.route('/:quizName/nicknameCategories', {
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {backId: "backButton", forwardText: 'view.nickname_categories.back'};
+					return {
+						backButton: {
+							id: "backButton",
+							text: 'view.nickname_categories.back'
+						}
+					};
 				}
 			});
 			this.render('nicknameCategories');
-		} else {
-			Router.go("/");
-		}
-	}
-});
-
-Router.route('/:quizName/quizSummary', {
-	controller: BlockingRouteController,
-	action: function () {
-		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (!globalEventStackObserver.isRunning()) {
-				globalEventStackObserver.startObserving(Router.current().params.quizName);
-			}
-			this.render('footerNavButtons', {
-				to: 'footer.navigation',
-				data: function () {
-					return {backId: "backButton", backText: 'view.quiz_summary.edit_quiz', forwardId: "forwardButton", forwardText: 'view.quiz_summary.start_quiz'};
-				}
-			});
-			this.render('quizSummary');
 		} else {
 			Router.go("/");
 		}
@@ -540,7 +598,14 @@ Router.route('/:quizName/memberlist', {
 		this.render('memberlistFooterNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton", forwardId: "forwardButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					},
+					forwardButton: {
+						id: "forwardButton"
+					}
+				};
 			}
 		});
 		this.render("memberlist");

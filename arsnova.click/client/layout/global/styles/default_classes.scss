@@ -269,6 +269,11 @@ select:-moz-focusring {
 .popover-title, .popover {
   font-family: $font;
   font-size: medium;
+
+  &.right {
+    height: 100%;
+    width: 100%;
+  }
 }
 
 @media (max-width: 550px) {

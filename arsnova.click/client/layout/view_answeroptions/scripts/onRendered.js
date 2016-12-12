@@ -22,6 +22,7 @@ import {Router} from 'meteor/iron:router';
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as localData from '/lib/local_storage.js';
+import {getTooltipForRoute} from "/client/layout/global/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.defaultAnswerOptionTemplate.onRendered(function () {
@@ -99,6 +100,7 @@ Template.rangedAnswerOptionTemplate.onRendered(function () {
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
+	getTooltipForRoute();
 });
 
 Template.freeTextAnswerOptionTemplate.onRendered(function () {
@@ -119,6 +121,7 @@ Template.freeTextAnswerOptionTemplate.onRendered(function () {
 				$('#config_use_keywords_switch').bootstrapToggle(configUseKeywordsState);
 				$('#config_use_punctuation_switch').bootstrapToggle(configUsePunctuationState);
 			});
+			getTooltipForRoute();
 		});
 	}.bind(this));
 	lib.styleFreetextAnswerOptionValidation(answerList[0].isValid());

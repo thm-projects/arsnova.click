@@ -54,8 +54,12 @@ Template.header.helpers({
 			case "/hashtagmanagement":
 				return TAPi18n.__("view.hashtag_management.session_management");
 			default:
-				let currentPath = Router.current().route.getName().replace(/(:quizName.)*(.:id)*/g, "");
+				let currentPath = Router.current().route.getName().replace(/(:quizName.)*(.:id)*(.:questionIndex)*/g, "");
 				switch (currentPath) {
+					case "quizManager":
+						return TAPi18n.__("view.quiz_manager.title");
+					case "questionType":
+						return TAPi18n.__("view.question_type.title");
 					case "question":
 						return TAPi18n.__("view.questions.title");
 					case "answeroptions":

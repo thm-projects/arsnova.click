@@ -14,42 +14,49 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
-
 @import "../../../layout/global/styles/appearance";
 
 .freeTextAnswerOptions {
 
-  .distance-top {
-	margin-bottom: 20px;
-  }
-
-  .configOptionContainer {
-	display: flex;
-	height: 50px;
-
-	p {
-		margin: 0;
-		height: 30px;
-		line-height: 30px;
-		flex-grow: 1;
+	.distance-top {
+		margin-bottom: 20px;
 	}
-	.toggle[disabled] {
-		* {
-			cursor: not-allowed;
-		}
-		label:hover {
-			color: #fff;
-			background-color: #c9302c;
-			border-color: #ac2925;
+
+	.configOptionContainer {
+		margin-top: 5px;
+		display: table;
+
+		.checkboxLabel {
+			height: 35px;
+			margin: 0;
+			width: calc(100% - 100px);
+			display: table-cell;
+			vertical-align: middle;
 		}
 	}
-  }
 
-  textarea {
-	border-radius: $corner-radius;
-	width: 100%;
-  }
+	textarea {
+		border-radius: $corner-radius;
+		width: 100%;
+	}
 	.invalidQuestion {
 		border: 2px solid red;
+	}
+	.padding-top {
+		padding-top: 20px;
+	}
+	.failed {
+		color: red;
+		background: white;
+		border-radius: $corner-radius;
+		padding: 5px;
+		opacity: .7;
+	}
+	.success {
+		color: green;
+		background: white;
+		border-radius: $corner-radius;
+		padding: 5px;
+		opacity: .7;
 	}
 }

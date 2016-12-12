@@ -17,9 +17,9 @@
 
 <template name="rangedAnswerOptionTemplate">
     <div class="row full-screen-content rangedAnswerOptions">
-        <div class="col-xs-12 rangedValues">
+        <div class="col-xs-12 rangedValues" data-intro="{{_ "view.answeroptions.description.range_area"}}">
             <div class="row">
-                <div class="col-xs-12 col-md-4">
+                <div class="col-xs-12 col-md-4" data-intro="{{_ "view.answeroptions.description.min_range"}}">
                     <h3>{{_ "view.answeroptions.ranged_question.min_range"}}</h3>
                     <input type="number"
                            id="minRangeInput"
@@ -29,7 +29,7 @@
                            value="{{getMinValue}}"
                            placeholder="{{_ "view.answeroptions.ranged_question.min_range"}}"/>
                 </div>
-                <div class="col-xs-12 col-md-4">
+                <div class="col-xs-12 col-md-4" data-intro="{{_ "view.answeroptions.description.correct_value"}}">
                     <h3>{{_ "view.answeroptions.ranged_question.correct_value"}}</h3>
                     <input type="number"
                            id="correctValueInput"
@@ -39,7 +39,7 @@
                            value="{{getCorrectValue}}"
                            placeholder="{{_ "view.answeroptions.ranged_question.min_range"}}"/>
                 </div>
-                <div class="col-xs-12 col-md-4">
+                <div class="col-xs-12 col-md-4" data-intro="{{_ "view.answeroptions.description.max_range"}}">
                     <h3>{{_ "view.answeroptions.ranged_question.max_range"}}</h3>
                     <input type="number"
                            id="maxRangeInput"
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12">
+        <div class="col-xs-12" data-intro="{{_ "view.answeroptions.description.range_slider"}}">
             <div id="rangedSlider"
                  class="rangedSlider tabbable"></div>
         </div>

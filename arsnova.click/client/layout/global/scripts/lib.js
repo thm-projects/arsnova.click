@@ -156,49 +156,43 @@ export function forceFeedback() {
 	}
 }
 
-export function getTooltipForRoute(route, overridePreference = false) {
+export function getTooltipForRoute(overridePreference = false) {
 	let hasStartedIntroJs = false;
-	route = route.replace(/(:quizName.)*(.:id)*(.:questionIndex)*/g, "");
-	const introState = $.parseJSON(sessionStorage.getItem("intro_state")) || {};
-	if (!introState[route]) {
-		introState[route] = {completed: false};
-		sessionStorage.setItem("intro_state", JSON.stringify(introState));
-	}
+	const introState = $.parseJSON(localStorage.getItem("intro_state")) || {};
+	const route = Router.current().route.getName();
 	Tracker.autorun(function () {
+		if (!introState[route]) {
+			introState[route] = {completed: false, elements: {}};
+			localStorage.setItem("intro_state", JSON.stringify(introState));
+		}
 		if (hasStartedIntroJs || Session.get("loading_language") || (introState[route].completed && !overridePreference)) {
 			return;
 		}
 		hasStartedIntroJs = true;
+		const elemCount = $('[data-intro]').length;
 		const customIntroJs = introJs().setOptions({
 			'overlayOpacity': 0,
-			'showProgress': true,
 			'tooltipPosition': 'auto',
+			'hidePrev': true,
+			'hideNext': true,
+			'showBullets': elemCount > 1,
+			'showProgress': elemCount > 1,
 			'nextLabel': TAPi18n.__("global.next"),
 			'prevLabel': TAPi18n.__("global.back"),
 			'doneLabel': TAPi18n.__("global.close_window"),
 			'skipLabel': TAPi18n.__("global.close_window")
+		}).onafterchange(function (targetElement) {
+			introState[route].elements[targetElement.id] = true;
+			localStorage.setItem("intro_state", JSON.stringify(introState));
+		}).oncomplete(function () {
+			introState[route].completed = true;
+			localStorage.setItem("intro_state", JSON.stringify(introState));
 		});
-		switch (route) {
-			case "hashtagmanagement":
-			case "agb":
-			case "about":
-			case "imprint":
-			case "dataprivacy":
-			case "quizManager":
-				$('#forwardButton').attr('data-intro', "Starte Quiz");
-				break;
-			case "question":
-			case "answeroptions":
-			case "settimer":
-			case "questionType":
-			case "quizSummary":
-			case "results":
-			case "onpolling":
-			case "leaderBoard":
-			case "nicknameCategories":
-			case "showMore":
-			case "theme":
+		const alreadyVisitedElements = Object.keys(introState[route].elements).length;
+		if (alreadyVisitedElements > 0) {
+			customIntroJs.goToStep(alreadyVisitedElements).start();
+		} else {
+			customIntroJs.start();
 		}
-		customIntroJs.start();
 	});
 }

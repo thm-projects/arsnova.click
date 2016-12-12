@@ -4,18 +4,18 @@
             {{> quizSummary item="header"}}
         </div>
         <div class="col-xs-12 col-sm-6">
-            <h2 class="text-light">Verfügbare Quizfragen</h2>
-            <ul id="available_questions_wrapper">
+            <h2 class="text-light">{{_ "view.quiz_manager.available_questions_title" }}</h2>
+            <ul id="available_questions_wrapper" data-intro="{{_ "view.quiz_manager.description.available_questions" }}">
                 {{#each questionTypes}}
-                    <li id="{{this.id}}_draggable" class="draggable questionType_{{this.id}}" data-intro="{{_ this.translationName}}" >{{_ this.translationName}}</li>
+                    <li id="{{this.id}}_draggable" class="draggable questionType_{{this.id}}" data-intro="{{_ (getDescriptionForQuestionType this.id)}}" >{{_ this.translationName}}</li>
                 {{/each}}
             </ul>
         </div>
         <div class="col-xs-12 col-sm-6">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2 class="text-light">Erstellte Quizfragen</h2>
-                    <ul id="added_questions_wrapper"></ul>
+                    <h2 class="text-light">{{_ "view.quiz_manager.added_questions_title" }}</h2>
+                    <ul id="added_questions_wrapper" data-intro="{{_ "view.quiz_manager.description.added_questions" }}"></ul>
                 </div>
                 <div class="col-xs-12 {{#unless isMovingQuestion}}hidden{{/unless}}">
                     <div id="removeQuestionWrapper">

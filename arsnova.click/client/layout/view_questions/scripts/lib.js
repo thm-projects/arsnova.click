@@ -39,7 +39,7 @@ export function checkForValidQuestionText() {
 
 export function parseCodeBlock(result, i) {
 	let tmpNewItem = result[i] + "\n";
-	let mergeEndIndex = -1;
+	let mergeEndIndex = result.length;
 	for (let j = i + 1; j < result.length; j++) {
 		tmpNewItem += result[j] + "\n";
 		if (result[j].startsWith("```")) {
@@ -53,7 +53,7 @@ export function parseCodeBlock(result, i) {
 
 export function parseOrderedList(result, i) {
 	let tmpNewItem = result[i] + "\n";
-	let mergeEndIndex = -1;
+	let mergeEndIndex = result.length;
 	for (let j = i + 1; j < result.length; j++) {
 		if (!/^[0-9]*./.test(result[j])) {
 			mergeEndIndex = j - 1;
@@ -67,7 +67,7 @@ export function parseOrderedList(result, i) {
 
 export function parseUnorderedList(result, i) {
 	let tmpNewItem = result[i] + "\n";
-	let mergeEndIndex = -1;
+	let mergeEndIndex = result.length;
 	for (let j = i + 1; j < result.length; j++) {
 		if (!/^(   )[*-] /.test(result[j]) && !/^[0-9]*./.test(result[j])) {
 			mergeEndIndex = j - 1;
@@ -81,7 +81,7 @@ export function parseUnorderedList(result, i) {
 
 export function parseCommentBlock(result, i) {
 	let tmpNewItem = result[i] + "\n";
-	let mergeEndIndex = -1;
+	let mergeEndIndex = result.length;
 	for (let j = i + 1; j < result.length; j++) {
 		if (!/^> /.test(result[j])) {
 			mergeEndIndex = j - 1;
@@ -103,7 +103,7 @@ export function parseLinkBlock(result, i) {
 
 export function parseTableBlock(result, i) {
 	let tmpNewItem = result[i];
-	let mergeEndIndex = -1;
+	let mergeEndIndex = result.length;
 	for (let j = i + 1; j < result.length; j++) {
 		if (result[j].indexOf(" | ") === -1 && !/:[-]*:/.test(result[j])) {
 			mergeEndIndex = j - 1;
@@ -138,6 +138,8 @@ export function parseTableBlock(result, i) {
 export function parseGithubFlavoredMarkdown(result) {
 	for (let i = 0; i < result.length; i++) {
 		switch (true) {
+			case /^\$\$/.test(result[i]):
+				break;
 			case /```/.test(result[i]):
 				parseCodeBlock(result, i);
 				break;

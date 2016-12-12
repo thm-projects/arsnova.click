@@ -193,10 +193,36 @@
   },
   "view": {
     "answeroptions": {
-      "title": "2/4: Antworten festlegen",
+      "title": "Antworten festlegen",
+      "new_answer": "Neue Antwortoption",
       "answeroptiontext_placeholder": "Antwortoption eingeben",
       "correct": "Richtig",
       "wrong": "Falsch",
+      "preview": "Vorschau",
+      "show_answer_content_on_buttons": "Soll auf den Buttons der Inhalt der Antwort angezeigt werden?",
+      "multiple_selection_survey": "Sollen mehrere Antwortoptionen ausgewählt werden können?",
+      "description": {
+        "default_answer_row": "Ziehe diesen Block in die Liste der erstellten Antwortoptionen, um eine neue Antwort einzufügen.",
+        "added_answers": "Hier siehst du alle bereits erstellten Antwortoptionen dieser Quizfrage. Du kannst die Anordnung der Antworten ändern, in dem du die Liste per Drag & Drop sortierst.",
+        "added_answer_short_text": "Jede Antwortoption enthält einen Buchstaben, der für die Teilnehmer angezeigt werden kann.",
+        "added_answer_text": "Hier kannst du den Text der Antwort eingeben. Die Auszeichnung mit Markdown und LaTeX ist möglich.",
+        "added_answer_is_correct": "Dieser Button regelt, ob die Antwort als richtig oder falsch gewertet werden soll.",
+        "added_answer_remove": "Bei einem Klick auf diese Schaltfläche wird die betreffende Antwort gelöscht.",
+        "show_answer_content_on_buttons": "Die Antwortbuttons für die Teilnehmer können entweder mit dem Buchstaben der Antwort oder dem vollständigen Inhalt der Antwort beschriftet werden. Beachte jedoch, dass zuviel Text in der Antwort abhängig vom Endgerät schlecht lesbar sein kann.",
+        "multiple_selection_survey": "Hier kannst du einstellen, ob die Teilnehmer nach dem Klick auf eine Antwort der Umfrage direkt zur Auswertung gelangen sollen, oder ob eine Mehrfachauswahl möglich sein soll.",
+        "preview": "Hier siehst du eine Vorschau der links eingegebenen Antwortoptionen.",
+        "range_area": "Hier kannst du die korrekte Antwort sowie die Toleranzen nach oben und unten angeben. Bitte beachte, dass die Eingabe in natürlichen Zahlen erfolgen muss.",
+        "min_range": "Hier kannst du den unteren Toleranzwert festlegen.",
+        "correct_value": "Diese Antwort ist vollständig korrekt.",
+        "max_range": "Hier kannst du den oberen Toleranzwert festlegen.",
+        "range_slider": "Mit diesem Schieberegler kannst du die oberen und unteren Toleranzen dynamisch verändern. Der korrekte Wert wird dem Mittelwert entsprechen.",
+        "free_text_question_text": "Hier kannst du die richtige Antwort eingeben. Die eingegebenen Antworten der Teilnehmer werden gemäß der Konfiguration gegen diese Antwort geprüft.",
+        "config_case_sensitive": "Ist diese Option aktiviert, muss die Groß- und Kleinschreibung der eingegebenen Antwort mit der der Referenzantwort übereinstimmen.",
+        "config_trim_whitespaces": "Legt fest, ob die Leerzeichen der eingegebenen Antwort geprüft werden sollen.",
+        "config_use_keywords": "Sollte diese Option aktiviert werden, muss die Reihenfolge der Wörter der eingegebenen Antwort der der Referenzantwort entsprechen. Ist diese Option deaktiviert, kann leider keine Prüfung der Leer-/ und Satzzeichen vorgenommen werden.",
+        "config_use_punctuation": "Diese Option legt fest, ob die Satzzeichen der eingegebenen Antwort geprüft werden sollen.",
+        "check_answer": "Hier kannst du mögliche Antworten der Teilnehmer gegen deine Referenzantwort und die aktuelle Konfiguration testen"
+      },
       "ranged_question": {
         "title": "Intervall der richtigen Antworten",
         "correct_value": "Richtiger Wert",
@@ -205,13 +231,16 @@
       },
       "free_text_question": {
         "title": "Richtige Antwort:",
+        "check_answer_title": "Eingaben testen:",
         "config_case_sensitive": "Groß- und Kleinschreibung beachten",
         "config_trim_whitespaces": "Leerzeichen in Antwort beachten",
         "config_use_keywords": "Reihenfolge der Wörter beachten",
         "config_use_punctuation": "Satzzeichen in Antwort beachten",
         "onText": "Ja",
         "offText": "Nein",
-        "text_placeholder": "Gib hier die Antwort ein"
+        "text_placeholder": "Gib hier die Antwort ein",
+        "check_correct": "Die eingegebene Antwort stimmt mit der Referenzantwort überein",
+        "check_incorrect": "Die eingegebene Antwort stimmt nicht mit der Referenzantwort überein!"
       }
     },
     "choose_nickname": {
@@ -342,21 +371,78 @@
         "turing_award": "Turing-Award"
       }
     },
+    "question_type": {
+      "title": "Fragetyp bearbeiten",
+      "currentType": "Aktueller Typ der Quizfrage:",
+      "description": {
+        "type_wrapper": "Hier kannst du den Typ der Quizfrage ändern. Jeder Typ hat unterschiedliche Einstellungen. Ändere den Typ durch einen Klick auf die jeweilige Box.",
+        "SingleChoiceQuestion": "Single-Choice-Fragen enhalten beliebig viele Antwortoptionen, von denen genau eine als richtig markiert werden muss.",
+        "YesNoSingleChoiceQuestion": "Ja|Nein-Fragen enthalten nur zwei Antwortopionen (Ja und Nein), von denen eine als richtig markiert werden muss.",
+        "TrueFalseSingleChoiceQuestion": "Wahr|Falsch-Fragen enthalten ebenfalls nur zwei Antwortopionen (Wahr und Falsch), von denen eine als richtig markiert werden muss.",
+        "MultipleChoiceQuestion": "Multiple-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen beliebig viele (mindestens jedoch zwei) als richtig markiert werden können.",
+        "RangedQuestion": "Für die Schätzfrage muss eine Ganzzahl als richtig angegeben werden. Zusätzlich können Toleranzen nach oben und unten eingegeben werden.",
+        "FreeTextQuestion": "In der Freitextfrage muss der Teilnehmer einen beliebigen Text eingeben. Dieser wird mit dem vorab eingegebenen Referenzwert verglichen.",
+        "SurveyQuestion": "Umfragen enthalten beliebig viele Antwortoptionen, von denen keine als richtig oder falsch markiert werden darf."
+      }
+    },
     "questions": {
-      "title": "1/4: Fragetext eingeben",
+      "title": "Fragetext eingeben",
       "enter_question_here": "Gib hier den Text der Frage ein",
-      "format": "Format",
-      "edit": "Bearbeiten",
       "preview": "Vorschau",
-      "single_choice_question": "Single-Choice-Frage (eine von mehreren Antworten ist richtig)",
+      "single_choice_question": "Single-Choice-Frage",
       "single_choice_question_yes_no": "Ja|Nein-Frage",
       "single_choice_question_true_false": "Wahr|Falsch-Frage",
-      "multiple_choice_question": "Multiple-Choice-Frage (eine oder mehrere Antworten sind richtig)",
-      "survey_question": "Umfrage (Antworten sind weder richtig noch falsch)",
-      "ranged_question": "Schätzfrage (alle Zahlen im vorgegebenen Bereich sind richtig)",
-      "free_text_question": "Kurzantwort (Text bei Übereinstimmung mit Vorgaben ist richtig)"
+      "multiple_choice_question": "Multiple-Choice-Frage",
+      "survey_question": "Umfrage",
+      "ranged_question": "Schätzfrage",
+      "free_text_question": "Freitextfrage",
+      "description": {
+        "preview": "Hier siehst du eine Vorschau des links eingegebenen Textes."
+      }
+    },
+    "quiz_manager": {
+      "title": "Quiz Manager",
+      "available_questions_title": "Verfügbare Quizfragen",
+      "added_questions_title": "Erstellte Quizfragen",
+      "session_invalid": "Das Quiz enthält noch unvollständige Quizfragen",
+      "connection_lost": "Die Verbindung zum Server wurde unterbrochen",
+      "details": {
+        "aria": {
+          "btn_group": "Auswahl an Einstellungen für das Quiz"
+        },
+        "question_type": {
+          "long": "Fragetyp bearbeiten",
+          "short": "Typ"
+        },
+        "question_text": {
+          "long": "Frage bearbeiten",
+          "short": "Fragetext"
+        },
+        "answeroptions": {
+          "long": "Antwortoptionen bearbeiten",
+          "short": "Antworten"
+        },
+        "timer": {
+          "long": "Timer bearbeiten",
+          "short": "Timer"
+        }
+      },
+      "description": {
+        "available_questions": "Hier siehst du alle Fragetypen, aus denen du wählen kannst. Jeder Fragetyp bietet unterschiedliche Voreinstellungen und Möglichkeiten zur Gestaltung des Quizzes",
+        "added_questions": "Hier findest du alle deine Quizfragen, die im Quiz vorhanden sind. Um eine Quizfrage dem Quiz hinzuzufügen, ziehe sie entweder aus dem linken Stapel hierher oder klicke im linken Stapel auf die jeweilige Quizfrage. Mit einem Klick auf die eingefügte Frage kannst du die Inhalte der Quizfrage einstellen.",
+        "back_button": "Du kannst jederzeit zurück gehen. Das Quiz wird bei Eingaben sofort gespeichert.",
+        "forward_button": "Sofern das Quiz gültig ist und eine Verbindung zum Server besteht, kannst du zur Quizlobby fortfahren und das Quiz für Teilnehmer öffnen."
+      }
     },
     "quiz_summary": {
+      "description": {
+        "header": "Hier ist die Zusammenfassung der gesamten Quizrunde zu sehen",
+        "session_url": "Unter dieser URL können Teilnehmer das Quiz betreten, sobald du es freigibst",
+        "question_group_validation": "Die Validierung der Quizrunde schlägt fehl, sofern das Quiz noch nicht fertiggstellt ist. Dazu zählen nicht vorhandene Quizfragen, fehlende oder unvollständige Antwortoptionen, nicht gesetzte Timer, usw.",
+        "restrict_to_cas": "Ist diese Einstellung aktiv, müssen sich die Teilnehmer am zentralen Authentifizierungsdienst der Technischen Hochschule Mittelhessen anmelden, um am Quiz teilnehmen zu können",
+        "question_item": "Dieser Bereich enthält Informationen zur ausgewählten Quizfrage.",
+        "validation_errors": "Nützlich bei der Fehlersuche können die hier aufgelisteten Validierungsfehler sein."
+      },
       "title": "4/4: Zusammenfassung",
       "quiz_name": "Name der Quizrunde",
       "quiz_url": "URL für Teilnehmer/innen",
@@ -449,9 +535,10 @@
       }
     },
     "timer": {
-      "title": "3/4: Countdown einstellen",
+      "title": "Countdown einstellen",
       "second": "Sekunde",
-      "second_plural": "Sekunden"
+      "second_plural": "Sekunden",
+      "description": "Hier kannst du den Countdown für die Quizfrage einstellen. Sobald er abläuft, oder alle Teilnehmer eine Antwort abgegeben haben, wird die Quizrunde beendet."
     },
     "translation": {
       "translations": "Deine Sprache",

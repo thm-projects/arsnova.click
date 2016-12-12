@@ -10,11 +10,17 @@ Template.quizManager.helpers({
 	},
 	isMovingQuestion: function () {
 		return Session.get("isMovingQuestion");
+	},
+	getDescriptionForQuestionType: function (typeName) {
+		return "view.question_type.description." + typeName;
 	}
 });
 
 Template.quizManagerDetails.helpers({
 	getQuestionIndex: function () {
 		return Router.current().params.questionIndex;
+	},
+	isXsDevice: function () {
+		return $(document).width() <= 768;
 	}
 });

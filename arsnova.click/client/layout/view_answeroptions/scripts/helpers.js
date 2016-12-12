@@ -18,6 +18,8 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
+import * as leaderboardLib from "/client/layout/view_leaderboard/scripts/lib.js";
+import * as lib from './lib.js';
 
 Template.createAnswerOptions.helpers({
 	renderTemplate: function () {
@@ -100,10 +102,10 @@ Template.rangedAnswerOptionTemplate.helpers({
 Template.freeTextAnswerOptionTemplate.helpers({
 	configOptions: function () {
 		return [
-			{id: "config_case_sensitive", textName: "view.answeroptions.free_text_question.config_case_sensitive"},
-			{id: "config_trim_whitespaces", textName: "view.answeroptions.free_text_question.config_trim_whitespaces"},
-			{id: "config_use_keywords", textName: "view.answeroptions.free_text_question.config_use_keywords"},
-			{id: "config_use_punctuation", textName: "view.answeroptions.free_text_question.config_use_punctuation"}
+			{id: "config_case_sensitive", textName: "view.answeroptions.free_text_question.config_case_sensitive", description: "view.answeroptions.description.config_case_sensitive"},
+			{id: "config_trim_whitespaces", textName: "view.answeroptions.free_text_question.config_trim_whitespaces", description: "view.answeroptions.description.config_trim_whitespaces"},
+			{id: "config_use_keywords", textName: "view.answeroptions.free_text_question.config_use_keywords", description: "view.answeroptions.description.config_use_keywords"},
+			{id: "config_use_punctuation", textName: "view.answeroptions.free_text_question.config_use_punctuation", description: "view.answeroptions.description.config_use_punctuation"}
 		];
 	},
 	answerText: function () {
@@ -111,5 +113,18 @@ Template.freeTextAnswerOptionTemplate.helpers({
 			return;
 		}
 		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].getAnswerText();
+	},
+	isCheckingResponse: function () {
+		lib.answerCheckTracker.depend();
+		const inputValue = $("#answerCheckArea").val();
+		return !!inputValue;
+	},
+	getIsCorrectResponse: function () {
+		lib.answerCheckTracker.depend();
+		const inputValue = $("#answerCheckArea").val();
+		if (!inputValue) {
+			return;
+		}
+		return leaderboardLib.isCorrectResponse({freeTextInputValue: inputValue}, {type: "FreeTextQuestion"}, Router.current().params.questionIndex);
 	}
 });

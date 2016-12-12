@@ -21,7 +21,7 @@ import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import * as localData from '/lib/local_storage.js';
 import {markdownTracker} from '/client/lib/mathjax_markdown.js';
-import {parseSingleAnswerOptionInput, styleFreetextAnswerOptionValidation} from './lib.js';
+import * as lib from './lib.js';
 
 Template.createAnswerOptions.events({
 });
@@ -31,7 +31,7 @@ Template.defaultAnswerOptionTemplate.events({
 		const checked = $(event.target).prop('checked');
 		const id = event.target.id.replace("answerOption-","");
 		const questionItem = Session.get("questionGroup");
-		if (checked) {
+		if (checked && questionItem.getQuestionList()[Router.current().params.questionIndex].typeName() !== "MultipleChoiceQuestion") {
 			for (let i = 0; i < questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().length; i++) {
 				if (i === id) {
 					continue;
@@ -71,7 +71,7 @@ Template.defaultAnswerOptionTemplate.events({
 		const plainId = id.replace("answerOptionText_Number","");
 		$('#' + plainId).removeClass("quickfitSet");
 		const cursorPosition = $("#" + id).getCursorPosition();
-		parseSingleAnswerOptionInput(Router.current().params.questionIndex, plainId);
+		lib.parseSingleAnswerOptionInput(Router.current().params.questionIndex, plainId);
 		Meteor.defer(function () {
 			$("#" + id).setCursorPosition(cursorPosition).focus();
 		});
@@ -100,8 +100,11 @@ Template.freeTextAnswerOptionTemplate.events({
 		const questionItem = Session.get("questionGroup");
 		const questionIndex = Router.current().params.questionIndex;
 		questionItem.getQuestionList()[questionIndex].getAnswerOptionList()[0].setAnswerText($(event.currentTarget).val());
-		styleFreetextAnswerOptionValidation(questionItem.getQuestionList()[questionIndex].getAnswerOptionList()[0].isValid());
+		lib.styleFreetextAnswerOptionValidation(questionItem.getQuestionList()[questionIndex].getAnswerOptionList()[0].isValid());
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
+	},
+	"input #answerCheckArea": function () {
+		lib.answerCheckTracker.changed();
 	}
 });

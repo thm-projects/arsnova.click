@@ -5,3 +5,23 @@
 	text-shadow: none;
 	font-weight: bold;
 }
+.introjs-overlay {
+	-webkit-transition: none !important;
+	-moz-transition: none !important;
+	-ms-transition: none !important;
+	-o-transition: none !important;
+	transition: none !important;
+}
+.introjs-hidden {
+	display: none !important;
+}
+
+.introCheckbox {
+	input[type=checkbox] {
+		visibility: hidden !important;
+		display: block !important;
+		width: calc(100% + 20px) !important;
+		height: calc(100% + 10px) !important;
+		margin: -5px -10px !important;
+	}
+}

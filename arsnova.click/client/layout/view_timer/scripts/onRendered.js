@@ -20,6 +20,7 @@ import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
+import {getTooltipForRoute} from "/client/layout/global/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.createTimerView.onRendered(function () {
@@ -36,4 +37,5 @@ Template.createTimerView.onRendered(function () {
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
+	getTooltipForRoute();
 });

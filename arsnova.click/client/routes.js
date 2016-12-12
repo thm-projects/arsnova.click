@@ -173,7 +173,6 @@ Router.route('/', {
 });
 
 Router.route('/hashtagmanagement', {
-	controller: NonBlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
@@ -190,7 +189,6 @@ Router.route('/hashtagmanagement', {
 });
 
 Router.route('/preview/:themeName/:language', {
-	controller: NonBlockingRouteController,
 	action: function () {
 		this.render("titel", {
 			to: "header.title",
@@ -208,7 +206,6 @@ Router.route('/preview/:themeName/:language', {
 // Routes for Footer-Links
 
 Router.route('/about', {
-	controller: NonBlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
@@ -225,7 +222,6 @@ Router.route('/about', {
 });
 
 Router.route('/agb', {
-	controller: NonBlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
@@ -242,7 +238,6 @@ Router.route('/agb', {
 });
 
 Router.route('/dataprivacy', {
-	controller: NonBlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
@@ -259,7 +254,6 @@ Router.route('/dataprivacy', {
 });
 
 Router.route('/imprint', {
-	controller: NonBlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
@@ -276,7 +270,6 @@ Router.route('/imprint', {
 });
 
 Router.route('/translate', {
-	controller: NonBlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
@@ -293,7 +286,6 @@ Router.route('/translate', {
 });
 
 Router.route('/theme', {
-	controller: NonBlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',

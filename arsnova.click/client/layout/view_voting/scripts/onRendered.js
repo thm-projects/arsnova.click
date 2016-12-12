@@ -28,7 +28,7 @@ import * as lib from './lib.js';
 
 Template.votingview.onRendered(function () {
 	let questionType = "";
-	if (this.data["data-questionIndex"]) {
+	if (this.data && this.data["data-questionIndex"]) {
 		Session.set("previewQuestionIndex", parseInt(this.data["data-questionIndex"]));
 		questionType = Session.get("questionGroup").getQuestionList()[this.data["data-questionIndex"]].typeName();
 	} else {

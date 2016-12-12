@@ -42,12 +42,23 @@ Template.nick.helpers({
 });
 
 Template.nickStandardFooter.helpers({
-	isCASLogin: function () {
+	getFooterConfig: function () {
 		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 		if (!configDoc) {
 			return null;
 		}
-		return configDoc.nicks.restrictToCASLogin;
+		const footerConfig = {
+			backButton: {
+				id: "backButton"
+			},
+			forwardButton: {
+				id: "loginViaCas"
+			}
+		};
+		if (configDoc.nicks.restrictToCASLogin) {
+			footerConfig.forwardButton.text = "Login via CAS";
+		}
+		return footerConfig;
 	}
 });
 
@@ -64,5 +75,12 @@ Template.nickLimited.helpers({
 		}).fetch().filter(function (item) {
 			return !MemberListCollection.findOne({hashtag: Router.current().params.quizName, nick: item.nick});
 		});
+	},
+	getFooterConfig: function () {
+		return {
+			backButton: {
+				id: "backButton"
+			}
+		};
 	}
 });

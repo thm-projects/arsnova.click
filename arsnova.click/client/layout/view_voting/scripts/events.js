@@ -72,7 +72,7 @@ Template.votingview.events({
 	},
 	"click #forwardButton": function (event, template) {
 		event.stopPropagation();
-		if (Session.get("hasSendResponse") || template.data["data-questionIndex"]) {
+		if (Session.get("hasSendResponse") || (template.data && template.data["data-questionIndex"])) {
 			return;
 		}
 
@@ -109,7 +109,7 @@ Template.votingview.events({
 	},
 	"click .sendResponse": function (event, template) {
 		event.stopPropagation();
-		if (template.data["data-questionIndex"]) {
+		if (template.data && template.data["data-questionIndex"]) {
 			return;
 		}
 
@@ -126,7 +126,7 @@ Template.votingview.events({
 		$(event.target).toggleClass("answer-selected");
 	},
 	"keydown #rangeInput": function (event, template) {
-		if (template.data["data-questionIndex"]) {
+		if (template.data && template.data["data-questionIndex"]) {
 			return;
 		}
 		if ($(event.currentTarget).val().length > 0 && !isNaN(parseFloat($(event.currentTarget).val()))) {
@@ -139,7 +139,7 @@ Template.votingview.events({
 		}
 	},
 	"input #answerTextArea": function (event, template) {
-		if (template.data["data-questionIndex"]) {
+		if (template.data && template.data["data-questionIndex"]) {
 			return;
 		}
 		Session.set("hasToggledResponse", $(event.currentTarget).val().length > 0);

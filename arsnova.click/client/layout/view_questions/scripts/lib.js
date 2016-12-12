@@ -94,7 +94,7 @@ export function parseCommentBlock(result, i) {
 }
 
 export function parseLinkBlock(result, i) {
-	const startIndex = /(([A-Za-z]{3,9}):\/\/)?([-;:&=\+\$,\w]+@{1})?(([-A-Za-z0-9]+\.)+[A-Za-z]{2,3})(:\d+)?((\/[-\+~%/\.\w]+)?\/?([&?][-\+=&;%@\.\w]+)?(#[\w]+)?)?/g.exec(result[i]);
+	const startIndex = /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.exec(result[i]);
 	const linkStr = startIndex[0] || result[i];
 	const prevLinkContent = result[i].substring(0, startIndex.index);
 	const postLinkContent = result[i].indexOf(" ", startIndex.index) > -1 ? result[i].substring(result[i].indexOf(" ", startIndex.index)) : "";
@@ -162,7 +162,7 @@ export function parseGithubFlavoredMarkdown(result) {
 				const index = /~~.*~~/.exec(result[i]);
 				result[i] = result[i].replace(index[0], "<del>" + index[0].replace(/~/g, "") + "</del>");
 				break;
-			case !/\(.*:\/\/(.*.)*.*\)/.test(result[i]) && /.*:\/\/(.*.)*.*/.test(result[i]) && !(/youtube/.test(result[i]) || /youtu.be/.test(result[i]) || /vimeo/.test(result[i])):
+			case !/(^!)?\[.*\]\(.*\)/.test(result[i]) && /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(result[i]) && !(/youtube/.test(result[i]) || /youtu.be/.test(result[i]) || /vimeo/.test(result[i])):
 				parseLinkBlock(result, i);
 				break;
 			case result[i] === "":

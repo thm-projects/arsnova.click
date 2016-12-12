@@ -69,6 +69,10 @@ export const questionGroupSchema = new SimpleSchema({
 		type: Number,
 		optional: true
 	},
+	"questionList.$.displayAnswerText": {
+		type: Boolean,
+		optional: true
+	},
 	"questionList.$.answerOptionList": {
 		type: [Object],
 		optional: true,

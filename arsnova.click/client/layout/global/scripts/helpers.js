@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
@@ -49,7 +50,7 @@ Template.connectionQualityHeader.helpers({
 			errors: [],
 			warnings: []
 		};
-		if (!Session.get("connectionStatus").webSocket.connected) {
+		if (!Meteor.status().connected) {
 			result.errors.push("webSocket");
 		}
 		if (!Session.get("connectionStatus").localStorage) {

@@ -449,6 +449,7 @@ Template.footerNavButtons.events({
 			case "answeroptions":
 			case "settimer":
 			case "questionType":
+			case "translate":
 				history.back();
 				break;
 			case "quizSummary":

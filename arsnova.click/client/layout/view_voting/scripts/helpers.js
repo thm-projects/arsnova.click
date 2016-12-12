@@ -19,34 +19,31 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {Router} from 'meteor/iron:router';
-import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as lib from './lib.js';
 
 Template.votingview.helpers({
 	answerOptions: function () {
-		if (this["data-questionIndex"]) {
-			return Session.get("questionGroup").getQuestionList()[parseInt(this["data-questionIndex"])].getAnswerOptionList();
-		}
-		return AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}, {sort: {answerOptionNumber: 1}});
+		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
+		return Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList();
 	},
 	showQuestionButton: function () {
-		return !this["data-questionIndex"];
+		return !(this.data && this.data["data-questionIndex"]);
 	},
 	showForwardButton: function () {
-		if (this["data-questionIndex"]) {
+		if (this.data && this.data["data-questionIndex"]) {
 			return false;
 		}
 		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
 	},
 	getDisplayAnswerText: function () {
-		if (Router.current().params.questionIndex) {
-			return Session.get("questionGroup").getQuestionList()[parseInt(Router.current().params.questionIndex)].getDisplayAnswerText();
-		}
+		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
+		return Session.get("questionGroup").getQuestionList()[index].getDisplayAnswerText();
 	},
 	isVideoAnswerText: function (number) {
-		const answer = Session.get("questionGroup").getQuestionList()[parseInt(Router.current().params.questionIndex)].getAnswerOptionList()[number];
+		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
+		const answer = Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList()[number];
 		if (!answer) {
 			return;
 		}
@@ -54,7 +51,8 @@ Template.votingview.helpers({
 		return /youtube/.test(answerText) || /youtu.be/.test(answerText) || /vimeo/.test(answerText);
 	},
 	getVideoData: function (number) {
-		const answerText = Session.get("questionGroup").getQuestionList()[parseInt(Router.current().params.questionIndex)].getAnswerOptionList()[number].getAnswerText();
+		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
+		const answerText = Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList()[number].getAnswerText();
 		const result = {};
 		if (/youtube/.test(answerText)) {
 			result.origin  = "https://www.youtube.com/embed/";
@@ -74,22 +72,18 @@ Template.votingview.helpers({
 		return String.fromCharCode((number + 65));
 	},
 	isRangedQuestion: function () {
-		if (this["data-questionIndex"]) {
-			return Session.get("questionGroup").getQuestionList()[parseInt(this["data-questionIndex"])].typeName() === "RangedQuestion";
-		}
-		return QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type === "RangedQuestion";
+		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
+		return QuestionGroupCollection.findOne().questionList[index].type === "RangedQuestion";
 	},
 	isFreeTextQuestion: function () {
-		if (this["data-questionIndex"]) {
-			return Session.get("questionGroup").getQuestionList()[parseInt(this["data-questionIndex"])].typeName() === "FreeTextQuestion";
-		}
-		return QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type === "FreeTextQuestion";
+		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
+		return QuestionGroupCollection.findOne().questionList[index].type === "FreeTextQuestion";
 	}
 });
 
 Template.votingviewTitel.helpers({
 	getCountdown: function () {
-		if (this["data-questionIndex"]) {
+		if (this.data && this.data["data-questionIndex"]) {
 			return false;
 		}
 		let countdownValue = Session.get("countdownInitialized") && lib.countdown ? lib.countdown.get() : 0;

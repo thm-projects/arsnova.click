@@ -253,6 +253,10 @@
       "no_selectable_nick_available": {
         "1": "Alle verfügbaren Nicknamen wurden bereits gewählt.",
         "2": "Eine Teilnahme am Quiz ist nicht möglich."
+      },
+      "description": {
+        "nickname_input": "Hier kannst du einen Namen eingeben, der dich am Ende des Quizzes in der Rangliste von den anderen Mitspielern unterscheidet.",
+        "choose_selectable_nick": "Du kannst aus dieser Liste einen der verfügbaren Nicknamen auswählen."
       }
     },
     "hashtag_management": {

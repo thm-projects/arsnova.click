@@ -23,7 +23,7 @@ import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default";
 import {startCountdown} from './lib.js';
 
 Template.votingview.onCreated(function () {
-	if (this.data["data-questionIndex"]) {
+	if (this.data && this.data["data-questionIndex"]) {
 		return;
 	}
 	const questionIndex = EventManagerCollection.findOne().questionIndex;

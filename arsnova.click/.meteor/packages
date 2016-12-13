@@ -52,4 +52,6 @@ arsnova.click:introjs
 mrt:mathjax
 markdown
 simple:highlight.js
-tap:i18n-bundler
+arsnova.click:bootstrap-toggle
+arsnova.click:jquery-ui
+arsnova.click:i18n-bundler

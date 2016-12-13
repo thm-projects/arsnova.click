@@ -6,8 +6,11 @@ aldeed:schema-index@1.1.1
 aldeed:simple-schema@1.5.3
 allow-deny@1.0.5
 amplify@1.0.0
+arsnova.click:bootstrap-toggle@2.2.2
+arsnova.click:i18n-bundler@0.3.0
 arsnova.click:introjs@2.3.0
 arsnova.click:jquery-qr-code@1.14.0
+arsnova.click:jquery-ui@1.12.1
 arsnova.click:nouislider@8.5.1
 autoupdate@1.3.12
 babel-compiler@6.13.0
@@ -103,7 +106,6 @@ spacebars-compiler@1.0.13
 standard-minifier-css@1.3.2
 standard-minifier-js@1.2.1
 tap:i18n@1.8.2
-tap:i18n-bundler@0.3.0
 tap:i18n-ui@0.8.0
 templating@1.2.15
 templating-compiler@1.2.15

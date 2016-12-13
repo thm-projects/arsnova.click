@@ -71,7 +71,10 @@ export class AbstractQuestionGroup {
 				this[questionList].push(question);
 			} else {
 				question.setQuestionIndex(index);
-				this[questionList][index] = question;
+				this[questionList].splice(index, 0, question);
+				for (let i = index + 1; i < this.getQuestionList().length; i++) {
+					this.getQuestionList()[i].setQuestionIndex(i);
+				}
 			}
 			return question;
 		}

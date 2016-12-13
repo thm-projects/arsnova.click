@@ -72,11 +72,15 @@
                                             {{#if getDisplayAnswerText}}
                                                 {{#if isVideoAnswerText this.getAnswerOptionNumber}}
                                                     {{#with getVideoData this.getAnswerOptionNumber}}
-                                                        <object width="100%" height="100%">
-                                                            <param name="movie" value="{{this.origin}}{{this.videoId}}?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3"/>
-                                                            <param name="allowFullScreen" value="true"/>
-                                                            <param name="allowscriptaccess" value="always"/>
-                                                            {{{this.embedTag}}}
+                                                        <object width="100%"
+                                                                height="100%"
+                                                                type="text/html"
+                                                                allowscriptaccess="always"
+                                                                allowfullscreen="true"
+                                                                data="{{this.origin}}{{this.videoId}}">
+                                                            <param
+                                                                    allowscriptaccess="always"
+                                                                    allowfullscreen="true" name="movie" value="{{this.origin}}{{this.videoId}}?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3"/>
                                                         </object>
                                                     {{/with}}
                                                 {{else}}

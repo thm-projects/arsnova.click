@@ -22,7 +22,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {startCountdown} from './lib.js';
 
 Template.votingview.onCreated(function () {
-	const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
+	const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
 	Session.set("sessionClosed",undefined);
 	Session.set("hasSendResponse", false);
 	Session.set("hasToggledResponse", false);

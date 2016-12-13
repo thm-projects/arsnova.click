@@ -112,23 +112,26 @@ export function parseTableBlock(result, i) {
 		tmpNewItem += (result[j] + "\n");
 	}
 	const tmpNewItemElement = $("<table><thead></thead><tbody></tbody></table>");
-	let tableHasHeader = /|:[-]*:/.test(tmpNewItem);
+	let tableHasHeader = /[-]+\s\|\s[-]+/.test(tmpNewItem);
 	tmpNewItem.split("|").forEach(function (element) {
 		if (element === "") {
+			return;
+		}
+		if (/^\s*[-]+/.test(element)) {
+			if (!tableHasHeader && /^\s+[-]+(\n)/.test(element)) {
+				tmpNewItemElement.find("tbody").append($("<tr/>"));
+			}
+			tableHasHeader = false;
 			return;
 		}
 		if (element === "\n") {
 			tmpNewItemElement.find("tbody").append($("<tr/>"));
 			return;
 		}
-		if (tableHasHeader && /:[-]*:/.test(element)) {
-			tableHasHeader = false;
+		if (tableHasHeader) {
+			tmpNewItemElement.find("thead").append($("<th/>").text(element));
 		} else {
-			if (tableHasHeader) {
-				tmpNewItemElement.find("thead").append($("<th/>").text(element));
-			} else {
-				tmpNewItemElement.find("tbody").find("tr").last().append($("<td/>").text(element));
-			}
+			tmpNewItemElement.find("tbody").find("tr").last().append($("<td/>").text(element));
 		}
 	});
 	result.splice(i, mergeEndIndex - i + 1);

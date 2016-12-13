@@ -127,7 +127,9 @@ export function quickfitText(reset) {
 		}
 	};
 	$("." + quickFitClass + ":not(." + quickFitSetClass + ")").each(function (index, item) {
-		setMaxTextSize($(item));
+		if ($(item).find("object").length === 0) {
+			setMaxTextSize($(item));
+		}
 	});
 }
 $(window).on("resize orientationchange", function () {

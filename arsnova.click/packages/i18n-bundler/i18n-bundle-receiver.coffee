@@ -1,11 +1,11 @@
 i18nPath = 'i18n/tap-i18n.json'
 
 Meteor.startup ->
-
   if TAPi18n.precacheBundle
     $.ajax
       type: 'GET',
-      url: i18nPath
+      async: true,
+      url: location.href + i18nPath
       dataType: 'json',
       success: (data) ->
         for language, translations of data

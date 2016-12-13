@@ -24,7 +24,7 @@ import * as lib from './lib.js';
 
 Template.votingview.helpers({
 	answerOptions: function () {
-		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
+		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
 		return Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList();
 	},
 	showQuestionButton: function () {
@@ -34,11 +34,11 @@ Template.votingview.helpers({
 		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
 	},
 	getDisplayAnswerText: function () {
-		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
+		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
 		return Session.get("questionGroup").getQuestionList()[index].getDisplayAnswerText();
 	},
 	isVideoAnswerText: function (number) {
-		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
+		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
 		const answer = Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList()[number];
 		if (!answer) {
 			return;
@@ -47,7 +47,7 @@ Template.votingview.helpers({
 		return /youtube/.test(answerText) || /youtu.be/.test(answerText) || /vimeo/.test(answerText);
 	},
 	getVideoData: function (number) {
-		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
+		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
 		const answerText = Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList()[number].getAnswerText();
 		const result = {};
 		if (/youtube/.test(answerText)) {
@@ -61,18 +61,18 @@ Template.votingview.helpers({
 			result.videoId = answerText.substr(answerText.lastIndexOf("/") + 1, answerText.length);
 		}
 		result.videoId = result.videoId.replace(/script/g, "");
-		result.embedTag = '<embed width="100%" height="100%" src="' + result.origin + result.videoId + '?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3" type="text/html" allowscriptaccess="always" allowfullscreen="true" />';
+		result.embedTag = '<embed width="100%" height="100%" src="' + result.origin + result.videoId + '?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" />';
 		return result;
 	},
 	answerOptionLetter: function (number) {
 		return String.fromCharCode((number + 65));
 	},
 	isRangedQuestion: function () {
-		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
+		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
 		return Session.get("questionGroup").getQuestionList()[index].typeName() === "RangedQuestion";
 	},
 	isFreeTextQuestion: function () {
-		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
+		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
 		return Session.get("questionGroup").getQuestionList()[index].typeName() === "FreeTextQuestion";
 	}
 });

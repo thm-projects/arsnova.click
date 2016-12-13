@@ -8,7 +8,6 @@ import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as localData from '/lib/local_storage.js';
 import {getTooltipForRoute} from "/client/layout/global/scripts/lib.js";
-import * as lib from './lib.js';
 
 Template.quizManager.onRendered(function () {
 	const questionAddedTracker = new Tracker.Dependency();
@@ -107,16 +106,15 @@ Template.quizManager.onRendered(function () {
 					const index      = classNames.map(function (elem) {
 						return elem.indexOf("questionType_") > -1;
 					}).indexOf(true);
-					const indexTo   = questionGroup.getQuestionList().length;
 					const indexFrom = ui.item.index();
-					lib.recalculateIndices(questionGroup, indexFrom, indexTo, true);
 					questionGroup.addDefaultQuestion(indexFrom, classNames[index].replace("questionType_", ""));
 					ui.item.attr("data-valid", questionGroup.getQuestionList()[indexFrom].isValid());
 				} else {
-					/* We're moving a question around so we need to recalculate the question indices */
 					const indexTo   = ui.item.index();
 					const indexFrom = parseInt(ui.item.attr("id").replace("_added_question", ""));
-					lib.recalculateIndices(questionGroup, indexFrom, indexTo);
+					const question = questionGroup.getQuestionList()[indexFrom];
+					questionGroup.removeQuestion(indexFrom);
+					questionGroup.addQuestion(question, indexTo);
 				}
 				$('#added_questions_wrapper').find('.draggable').each(function (index, item) {
 					$(item).attr("id", index + "_added_question");
@@ -125,7 +123,7 @@ Template.quizManager.onRendered(function () {
 					scroll: false,
 					appendTo: document.body,
 					revert: false
-				}).disableSelection();
+				});
 				Session.set("questionGroup", questionGroup);
 				localData.addHashtag(Session.get("questionGroup"));
 			}
@@ -146,7 +144,6 @@ Template.quizManager.onRendered(function () {
 				Session.set("isMovingQuestion", false);
 			}
 		});
-		$("ul, li").disableSelection();
 	}.bind(this));
 	this.autorun(function () {
 		footerElements.removeFooterElements();

@@ -127,7 +127,7 @@ Template.votingview.events({
 	"click .sendResponse": function (event, template) {
 		event.stopPropagation();
 		event.preventDefault();
-		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
+		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
 		const responseArr = JSON.parse(Session.get("responses"));
 		const currentId = event.currentTarget.id;
 		responseArr[currentId] = !responseArr[currentId];

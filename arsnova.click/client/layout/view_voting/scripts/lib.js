@@ -22,35 +22,9 @@ import {Router} from 'meteor/iron:router';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 export let countdown = null;
-let currentButton = 0;
 export let countdownRunning = false;
 
 export const votingViewTracker = new Tracker.Dependency();
-
-export function answerButtonAnimation() {
-	const buttonsCount = $('.answer-row #buttonContainer').children().length;
-	let lastButton;
-	const secondsUntilNextRound = buttonsCount;
-	const currentButtonElement = $('#' + currentButton);
-	if (currentButton <= 0) {
-		lastButton = buttonsCount - 1;
-	} else {
-		lastButton = currentButton - 1;
-	}
-	/* skip the selected answer options */
-	while (currentButtonElement.hasClass('answer-selected')) {
-		currentButton++;
-		if (currentButton >= buttonsCount) {
-			currentButton = 0 - secondsUntilNextRound;
-		}
-	}
-	$('#' + lastButton).removeClass('button-green-transition').addClass('button-purple-transition');
-	currentButtonElement.addClass('button-green-transition').removeClass('button-purple-transition');
-	currentButton++;
-	if (currentButton >= buttonsCount) {
-		currentButton = 0 - secondsUntilNextRound;
-	}
-}
 
 export function deleteCountdown() {
 	if (countdown) {
@@ -174,8 +148,7 @@ export function formatAnswerButtons() {
 	const contentHeight = calculateAnswerRowHeight();
 	answerRow.css({height: contentHeight + 'px'});
 	const contentWidth = answerRow.outerWidth();
-	const containerWidth = $(window).outerWidth();
-	if (containerWidth <= 768) {
+	if ($(window).outerWidth() <= 768) {
 		buttonElements.find("button").css({margin: "5px 0"});
 		buttonElements.addClass("col-xs-6");
 	} else {
@@ -184,15 +157,14 @@ export function formatAnswerButtons() {
 		const answerOptionElements = $('.btn-answerOption').length;
 		const calculateButtons = function (width, height) {
 			let maxButtonsPerRow = Math.floor(contentWidth / width);
-			let maxRows = Math.floor((contentHeight) / height);
-			maxRows = Math.floor((contentHeight - maxRows * 10) / height);
+			const maxRows = Math.floor((contentHeight - (Math.floor(contentHeight / height)) * 10) / height);
 			if (answerOptionElements % 2 === 0 && maxButtonsPerRow % 2 !== 0) {
 				maxButtonsPerRow--;
 			}
 			return {maxButtons: maxButtonsPerRow * maxRows, maxButtonsPerRow: maxButtonsPerRow, maxRows: maxRows};
 		};
 		let maxButtons = calculateButtons(scaleBaseWidth, scaleBaseHeight).maxButtons;
-		while (calculateButtons(scaleBaseWidth + 1, scaleBaseHeight + 1).maxButtons > answerOptionElements) {
+		while (calculateButtons(scaleBaseWidth + 1, scaleBaseHeight + 1).maxButtons >= answerOptionElements) {
 			maxButtons = calculateButtons(++scaleBaseWidth, ++scaleBaseHeight).maxButtons;
 		}
 		const calculateResult = calculateButtons(scaleBaseWidth, scaleBaseHeight);

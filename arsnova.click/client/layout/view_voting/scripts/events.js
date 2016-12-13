@@ -15,8 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
@@ -72,12 +74,13 @@ Template.votingview.events({
 	},
 	"click #forwardButton": function (event, template) {
 		event.stopPropagation();
-		if (Session.get("hasSendResponse") || (template.data && template.data["data-questionIndex"])) {
+		if (Session.get("hasSendResponse")) {
 			return;
 		}
 
 		Session.set("hasSendResponse", true);
 		const responseArr = JSON.parse(Session.get("responses"));
+		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
 		if (responseArr.length === 0) {
 			const rangeInputField = $("#rangeInput");
 			if (rangeInputField.length > 0) {
@@ -94,7 +97,26 @@ Template.votingview.events({
 				}
 				makeAndSendFreeTextResponse(freeTextInputField.val());
 			} else {
-				makeAndSendResponse(responseArr);
+				if (template.data && template.data["data-questionIndex"]) {
+					if ($('.correctAnswer, .wrongAnswer').length > 0) {
+						return;
+					}
+					Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList().forEach(function (element) {
+						if (element.getIsCorrect()) {
+							$('#' + element.getAnswerOptionNumber()).addClass("correctAnswer");
+						} else {
+							$('#' + element.getAnswerOptionNumber()).addClass("wrongAnswer");
+						}
+					});
+					Meteor.setTimeout(function () {
+						$('.sendResponse').removeClass("correctAnswer wrongAnswer");
+						Session.set("hasSendResponse", false);
+					}, 2000);
+					return;
+				} else {
+					makeAndSendResponse(responseArr);
+					return;
+				}
 			}
 		}
 		if (EventManagerCollection.findOne().questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
@@ -102,28 +124,44 @@ Template.votingview.events({
 		}
 		countdownFinish();
 	},
-	"DOMSubtreeModified .sendResponse": function (event) {
-		const id = $(event.currentTarget).attr("id");
-		$('#' + id).removeClass("quickfitSet");
-		markdownTracker.changed();
-	},
 	"click .sendResponse": function (event, template) {
 		event.stopPropagation();
-		if (template.data && template.data["data-questionIndex"]) {
-			return;
-		}
-
+		event.preventDefault();
+		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
 		const responseArr = JSON.parse(Session.get("responses"));
 		const currentId = event.currentTarget.id;
 		responseArr[currentId] = !responseArr[currentId];
 		if (Session.get("questionSC")) {
-			makeAndSendResponse(responseArr);
-			countdownFinish();
-			return;
+			if (template.data && template.data["data-questionIndex"]) {
+				if ($('.correctAnswer, .wrongAnswer').length > 0) {
+					return;
+				}
+				Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList().forEach(function (element) {
+					if (element.getIsCorrect()) {
+						$('#' + element.getAnswerOptionNumber()).addClass("correctAnswer");
+					} else {
+						$('#' + element.getAnswerOptionNumber()).addClass("wrongAnswer");
+					}
+				});
+				Meteor.setTimeout(function () {
+					$('.sendResponse').removeClass("correctAnswer wrongAnswer");
+				}, 2000);
+				return;
+			} else {
+				makeAndSendResponse(responseArr);
+				countdownFinish();
+				return;
+			}
 		}
 		Session.set("responses", JSON.stringify(responseArr));
 		Session.set("hasToggledResponse", JSON.stringify(responseArr).indexOf("true") > -1);
-		$(event.target).toggleClass("answer-selected");
+		$(event.currentTarget).toggleClass("answer-selected");
+		markdownTracker.changed();
+	},
+	"DOMSubtreeModified .sendResponse": function (event) {
+		const id = $(event.currentTarget).attr("id");
+		$('#' + id).removeClass("quickfitSet");
+		markdownTracker.changed();
 	},
 	"keydown #rangeInput": function (event, template) {
 		if (template.data && template.data["data-questionIndex"]) {

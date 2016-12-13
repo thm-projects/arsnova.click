@@ -49,8 +49,6 @@ Template.votingview.onRendered(function () {
 		}.bind(this));
 	}
 	lib.formatAnswerButtons();
-	lib.answerButtonAnimation();
-	Meteor.setInterval(lib.answerButtonAnimation, 1000);
 });
 
 Template.liveResultsTitle.onRendered(function () {

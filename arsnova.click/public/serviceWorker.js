@@ -75,7 +75,10 @@ self.addEventListener('fetch', (event) => {
 					caches.open(version).then(cache => cache.put(event.request, clonedResponse));
 				}
 				return response;
-			}).catch(() => {
+			}).catch((ex) => {
+				if (ex) {
+					return cached;
+				}
 				if (hasHash(event.request.url)) {
 					return caches.match(event.request.url);
 				}

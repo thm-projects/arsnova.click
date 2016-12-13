@@ -17,27 +17,24 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default";
 import {startCountdown} from './lib.js';
 
 Template.votingview.onCreated(function () {
-	if (this.data && this.data["data-questionIndex"]) {
-		return;
-	}
-	const questionIndex = EventManagerCollection.findOne().questionIndex;
+	const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
 	Session.set("sessionClosed",undefined);
-	Session.set("questionGroup",new DefaultQuestionGroup(QuestionGroupCollection.findOne()));
 	Session.set("hasSendResponse", false);
 	Session.set("hasToggledResponse", false);
 	Session.set("countdownInitialized", false);
-	const questionItem = Session.get("questionGroup").getQuestionList()[questionIndex];
+	const questionItem = Session.get("questionGroup").getQuestionList()[index];
 	const sessionType = questionItem.typeName();
 	const answers = questionItem.getAnswerOptionList();
 	const redirectOnAnswerClick = $.inArray(sessionType, ["SingleChoiceQuestion", "YesNoSingleChoiceQuestion", "TrueFalseSingleChoiceQuestion"]) > -1 ||
 		(sessionType === "SurveyQuestion" && !questionItem.getMultipleSelectionEnabled());
 	Session.set("questionSC", redirectOnAnswerClick);
-	startCountdown(questionIndex);
 	Session.set("responses",JSON.stringify(new Array(answers.length).fill(false)));
+	if (!(this.data && this.data["data-questionIndex"])) {
+		startCountdown(index);
+	}
 });

@@ -20,7 +20,6 @@ import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {Router} from 'meteor/iron:router';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as lib from './lib.js';
 
 Template.votingview.helpers({
@@ -32,9 +31,6 @@ Template.votingview.helpers({
 		return !(this.data && this.data["data-questionIndex"]);
 	},
 	showForwardButton: function () {
-		if (this.data && this.data["data-questionIndex"]) {
-			return false;
-		}
 		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
 	},
 	getDisplayAnswerText: function () {
@@ -73,11 +69,11 @@ Template.votingview.helpers({
 	},
 	isRangedQuestion: function () {
 		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
-		return QuestionGroupCollection.findOne().questionList[index].type === "RangedQuestion";
+		return Session.get("questionGroup").getQuestionList()[index].typeName() === "RangedQuestion";
 	},
 	isFreeTextQuestion: function () {
 		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
-		return QuestionGroupCollection.findOne().questionList[index].type === "FreeTextQuestion";
+		return Session.get("questionGroup").getQuestionList()[index].typeName() === "FreeTextQuestion";
 	}
 });
 

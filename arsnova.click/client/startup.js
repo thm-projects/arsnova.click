@@ -76,9 +76,9 @@ const converter = new Showdown.converter({
 });
 const helper = new MeteorMathJax.Helper({
 	useCache: true,
-	transform : function (x) {
+	transform: function (x) {
 		return converter.makeHtml(x);
-	},
+	}
 });
 Template.registerHelper('mathjax', helper.getTemplate());
 MeteorMathJax.defaultConfig = {
@@ -105,6 +105,7 @@ Meteor.startup(function () {
 			navigator.serviceWorker.register('/serviceWorker.js').then().catch(error => console.log(error));
 		}
 		Session.set("loading_language", true);
+		TAPi18n.precacheBundle = true;
 		TAPi18n.setLanguage(getUserLanguage()).then(function () {
 			Session.set("loading_language", false);
 			window.cookieconsent_options = {

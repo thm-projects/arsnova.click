@@ -31,6 +31,12 @@
 		p {
 			margin: 0;
 		}
+		&.correctAnswer {
+			background-color: green !important;
+		}
+		&.wrongAnswer {
+			background-color: red !important;
+		}
 	}
 
 	.btn-answerOption {

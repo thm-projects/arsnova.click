@@ -5,80 +5,78 @@
 	.sortable-placeholder {
 		color: black;
 		background-color: white;
+		border-radius: $corner-radius;
 		opacity: 0.2;
+		height: 30px;
 	}
 	.remove-sortable-placeholder {
 		border: none;
 		font-size: 14px;
 	}
-	#removeQuestionWrapper {
-		height: 100px;
-		width: 100%;
-		position: relative;
-
-		.background {
-			background-color: white;
-			border-radius: $corner-radius;
-			opacity: 0.2;
-			height: 100px;
-			width: 100%;
-			position: absolute;
-		}
-
-		.glyphicon-trash {
-			text-align: center;
-			color: black;
-			font-size: 50px;
-			line-height: 100px;
-			width: 100%;
-			position: absolute;
-			margin: 0;
-		}
-
-		li {
-			position: absolute;
-
-		}
-	}
 	ul {
 		padding: 0;
+		margin: 0;
 
+		li {
+			color: white;
+			list-style-type: none;
+			cursor: move;
+
+			&.draggable {
+				z-index: 1080 !important;
+			}
+		}
+
+		&#available_questions_wrapper,
 		&#added_questions_wrapper {
 			min-height: 100px;
-		}
-	}
 
-	li {
-		color: white;
-		list-style-type: none;
-		border: 1px solid white;
-		margin: 5px 0;
-		width: 100% !important;
-		padding: 5px;
-		border-radius: $corner-radius;
-		cursor: move;
+			.questionElementWrapper {
+				border: 1px solid white;
+				margin: 5px 0;
+				padding: 5px;
+				border-radius: $corner-radius;
+				position: relative;
 
-		&[data-valid='true'] {
-			&:before {
-				content: "\2611";
-				margin-right: 5px;
-				color: #00e600;
+				&:hover {
+					background-color: lighten(black, 10);
+					.removeQuestion {
+						visibility: visible;
+					}
+				}
+
+				li {
+					width: calc(100% - 30px);
+					&[data-valid='true'] {
+						&:before {
+							content: "\2611";
+							margin-right: 5px;
+							color: #00e600;
+						}
+					}
+					&[data-valid='false'] {
+						&:before {
+							content: "\2612";
+							margin-right: 5px;
+							color: red;
+						}
+					}
+				}
+
+				.removeQuestion {
+					visibility: hidden;
+					cursor: pointer;
+					float: right;
+					top: 4px;
+					position: absolute;
+					right: 10px;
+					font-size: 20px;
+				}
 			}
-		}
-		&[data-valid='false'] {
-			&:before {
-				content: "\2612";
-				margin-right: 5px;
-				color: red;
+
+			.ui-draggable-dragging {
+				width: calc(100% - 30px) !important;
 			}
-		}
-
-		&.draggable {
-			z-index: 1080 !important;
-		}
-
-		&:hover {
-			background-color: lighten(black, 10);
 		}
 	}
 }

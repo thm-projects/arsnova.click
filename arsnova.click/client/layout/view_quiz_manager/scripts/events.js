@@ -14,6 +14,15 @@ Template.quizManager.events({
 		questionGroup.addDefaultQuestion(-1, targetId);
 		Session.set("questionGroup", questionGroup);
 		localData.addHashtag(Session.get("questionGroup"));
+	},
+	"click .removeQuestion": function (event) {
+		event.stopPropagation();
+		event.preventDefault();
+		const questionGroup = Session.get("questionGroup");
+		const targetId = event.currentTarget.id.replace("removeQuestion_", "");
+		questionGroup.removeQuestion(targetId);
+		Session.set("questionGroup", questionGroup);
+		localData.addHashtag(Session.get("questionGroup"));
 	}
 });
 

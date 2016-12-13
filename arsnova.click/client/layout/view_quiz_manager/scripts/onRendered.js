@@ -53,7 +53,9 @@ Template.quizManager.onRendered(function () {
 		$('#added_questions_wrapper').html("");
 		Session.get("questionGroup").getQuestionList().forEach(function (item) {
 			$('#added_questions_wrapper').append(
-				'<li id="' + item.getQuestionIndex() + '_added_question" data-valid="' + (item.isValid() ? "true" : "false") + '" class="draggable">' + TAPi18n.__(item.translationReferrer()) + '</li>'
+				$('<div id="' + item.getQuestionIndex() + '_added_question" class="questionElementWrapper draggable"/>').append(
+					'<li data-valid="' + (item.isValid() ? "true" : "false") + '">' + TAPi18n.__(item.translationReferrer()) + '</li>'
+				).append("<div class='removeQuestion text-light' id='removeQuestion_" + item.getQuestionIndex() + "'><span class='glyphicon glyphicon-trash'></span></div>")
 			);
 		});
 		questionAddedTracker.changed();
@@ -63,43 +65,16 @@ Template.quizManager.onRendered(function () {
 		if (Session.get("loading_language")) {
 			return;
 		}
-		$("#removeQuestionWrapper").sortable({
-			revert: "invalid",
-			scroll: false,
-			placeholder: "remove-sortable-placeholder",
-			appendTo: document.body,
-			forceHelperSize: true,
-			forcePlaceholderSize: true,
-			tolerance: "pointer",
-			accept: "#added_questions_wrapper .draggable",
-			stop: function (event, ui) {
-				Session.set("isMovingQuestion", false);
-				const questionGroup = Session.get("questionGroup");
-				const targetId = $(ui.item).attr("id").replace("_added_question", "");
-				$(ui.item).remove();
-				questionGroup.removeQuestion(targetId);
-				Session.set("questionGroup", questionGroup);
-				localData.addHashtag(Session.get("questionGroup"));
-			}
-		});
 		$("#added_questions_wrapper").sortable({
 			revert: "invalid",
 			forceHelperSize: true,
-			appendTo: document.body,
+			appendTo: "parent",
 			scroll: false,
 			helper: "clone",
 			placeholder: "sortable-placeholder",
 			forcePlaceholderSize: true,
 			tolerance: "pointer",
-			classes: {
-				"ui-droppable-active": "highlight",
-				"ui-droppable-hover": "highlight"
-			},
-			start: function () {
-				Session.set("isMovingQuestion", true);
-			},
 			stop: function (event, ui) {
-				Session.set("isMovingQuestion", false);
 				const questionGroup = Session.get("questionGroup");
 				if (typeof ui.item.attr("id") === "undefined") {
 					const classNames = $(ui.item).attr('class').split(" ");
@@ -118,21 +93,9 @@ Template.quizManager.onRendered(function () {
 				}
 				$('#added_questions_wrapper').find('.draggable').each(function (index, item) {
 					$(item).attr("id", index + "_added_question");
-				}).draggable({
-					connectToSortable: "#added_questions_wrapper, #removeQuestionWrapper",
-					scroll: false,
-					appendTo: document.body,
-					revert: false
 				});
 				Session.set("questionGroup", questionGroup);
 				localData.addHashtag(Session.get("questionGroup"));
-			}
-		}).find('.draggable').draggable({
-			connectToSortable: "#added_questions_wrapper, #removeQuestionWrapper",
-			scroll: false,
-			revert: "invalid",
-			stop: function () {
-				Session.set("isMovingQuestion", false);
 			}
 		});
 		$("#available_questions_wrapper").find(".draggable").draggable({

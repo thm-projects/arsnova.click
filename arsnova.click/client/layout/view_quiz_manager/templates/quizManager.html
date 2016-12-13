@@ -7,7 +7,9 @@
             <h2 class="text-light">{{_ "view.quiz_manager.available_questions_title" }}</h2>
             <ul id="available_questions_wrapper" data-intro="{{_ "view.quiz_manager.description.available_questions" }}">
                 {{#each questionTypes}}
-                    <li id="{{this.id}}_draggable" class="draggable questionType_{{this.id}}" data-intro="{{_ (getDescriptionForQuestionType this.id)}}" >{{_ this.translationName}}</li>
+                    <div>
+                        <li id="{{this.id}}_draggable" class="questionElementWrapper draggable questionType_{{this.id}}" data-intro="{{_ (getDescriptionForQuestionType this.id)}}" >{{_ this.translationName}}</li>
+                    </div>
                 {{/each}}
             </ul>
         </div>
@@ -16,12 +18,6 @@
                 <div class="col-xs-12">
                     <h2 class="text-light">{{_ "view.quiz_manager.added_questions_title" }}</h2>
                     <ul id="added_questions_wrapper" data-intro="{{_ "view.quiz_manager.description.added_questions" }}"></ul>
-                </div>
-                <div class="col-xs-12 {{#unless isMovingQuestion}}hidden{{/unless}}">
-                    <div id="removeQuestionWrapper">
-                        <div class="background"></div>
-                        <p class="glyphicon glyphicon-trash"></p>
-                    </div>
                 </div>
             </div>
         </div>

@@ -48,8 +48,16 @@
 			color: white;
 			margin: 0;
 
-			img {
+			img:not(.emojiImage) {
 				width: 100%;
+			}
+		}
+
+		.emojiWrapper {
+			height: 30px;
+
+			img {
+				height: inherit;
 			}
 		}
 	}

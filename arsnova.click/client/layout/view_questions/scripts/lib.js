@@ -117,9 +117,9 @@ export function parseTableBlock(result, i) {
 		if (element === "") {
 			return;
 		}
-		if (/^\s*[-]+/.test(element)) {
-			if (!tableHasHeader && /^\s+[-]+(\n)/.test(element)) {
-				tmpNewItemElement.find("tbody").append($("<tr/>"));
+		if (/[-]+/.test(element) || /[-]+\n/.test(element)) {
+			if (!tableHasHeader) {
+				tmpNewItemElement.find("tbody").append($("<tr/>").append($("<td/>").text(element.replace(/[-]+/, "").replace(/[-]+\n/, ""))));
 			}
 			tableHasHeader = false;
 			return;
@@ -136,6 +136,17 @@ export function parseTableBlock(result, i) {
 	});
 	result.splice(i, mergeEndIndex - i + 1);
 	result.splice(i, 0, tmpNewItemElement.prop('outerHTML'));
+}
+
+export function parseEmojiBlock(result, i) {
+	const iconData = /:.*:/.exec(result[i]);
+	const iconRef = iconData[0].replace(/:/g, "");
+	console.log(iconData);
+	const wrapper = $("<div class='emojiWrapper'/>");
+	wrapper.append("<span>" + iconData.input.substring(0, iconData.index) + "</span>");
+	wrapper.append("<img class='emojiImage' src='/emojis/" + iconRef + ".png' alt='" + iconRef + ".png' />");
+	wrapper.append("<span>" + iconData.input.substring(iconData.index + iconRef.length + 2, iconData.input.length) + "</span>");
+	result[i] = wrapper.prop("outerHTML");
 }
 
 export function parseGithubFlavoredMarkdown(result) {
@@ -174,6 +185,9 @@ export function parseGithubFlavoredMarkdown(result) {
 				break;
 			case result[i].indexOf(" | ") > -1:
 				parseTableBlock(result, i);
+				break;
+			case /:.*:/.test(result[i]):
+				parseEmojiBlock(result, i);
 				break;
 		}
 	}

@@ -158,10 +158,27 @@ export function parseEmojiBlock(result, i) {
 	result[i] = wrapper.prop("outerHTML");
 }
 
+export function parseMathjaxBlock(result, i) {
+	let tmpNewItem = result[i] + "\n";
+	let mergeEndIndex = result.length;
+	for (let j = i + 1; j < result.length; j++) {
+		if (/^(\$){2}$/.test(result[j])) {
+			mergeEndIndex = j;
+			break;
+		}
+		tmpNewItem += (result[j] + "\n");
+	}
+	result.splice(i, mergeEndIndex - i + 1);
+	result.splice(i, 0, $("<div/>").append((tmpNewItem + "$$")).prop("outerHTML"));
+}
+
 export function parseGithubFlavoredMarkdown(result) {
 	for (let i = 0; i < result.length; i++) {
 		switch (true) {
-			case /^\$\$/.test(result[i]):
+			case /^(\$){2}$/.test(result[i]):
+				parseMathjaxBlock(result, i);
+				break;
+			case /^[\$]+/.test(result[i]):
 				break;
 			case /```/.test(result[i]):
 				parseCodeBlock(result, i);

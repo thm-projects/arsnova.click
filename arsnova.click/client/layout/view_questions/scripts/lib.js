@@ -102,10 +102,10 @@ export function parseLinkBlock(result, i) {
 }
 
 export function parseTableBlock(result, i) {
-	let tmpNewItem = result[i];
+	let tmpNewItem = result[i] + "\n";
 	let mergeEndIndex = result.length;
 	for (let j = i + 1; j < result.length; j++) {
-		if (result[j].indexOf(" | ") === -1 && !/:[-]*:/.test(result[j])) {
+		if (result[j].indexOf(" | ") === -1) {
 			mergeEndIndex = j - 1;
 			break;
 		}
@@ -113,39 +113,48 @@ export function parseTableBlock(result, i) {
 	}
 	const tmpNewItemElement = $("<table><thead></thead><tbody></tbody></table>");
 	let tableHasHeader = /[-]+\s\|\s[-]+/.test(tmpNewItem);
-	tmpNewItem.split("|").forEach(function (element) {
+	tmpNewItem.split(" | ").forEach(function (element) {
 		if (element === "") {
 			return;
 		}
-		if (/[-]+/.test(element) || /[-]+\n/.test(element)) {
-			if (!tableHasHeader) {
-				tmpNewItemElement.find("tbody").append($("<tr/>").append($("<td/>").text(element.replace(/[-]+/, "").replace(/[-]+\n/, ""))));
-			}
-			tableHasHeader = false;
-			return;
-		}
-		if (element === "\n") {
-			tmpNewItemElement.find("tbody").append($("<tr/>"));
-			return;
-		}
-		if (tableHasHeader) {
-			tmpNewItemElement.find("thead").append($("<th/>").text(element));
+		const isLastElementInRow = /^.*\n.*$/.test(element);
+		if (isLastElementInRow) {
+			element = element.split(/\n/);
 		} else {
-			tmpNewItemElement.find("tbody").find("tr").last().append($("<td/>").text(element));
+			element = [element];
 		}
+		element.forEach(function (elementPart) {
+			if (elementPart === "") {
+				return;
+			}
+			if (/[-]+/.test(elementPart)) {
+				tableHasHeader = false;
+			} else {
+				if (tableHasHeader) {
+					tmpNewItemElement.find("thead").append($("<th/>").text(elementPart));
+				} else {
+					if (element.slice(-1)[0] === elementPart && element.length > 1) {
+						tmpNewItemElement.find("tbody").append($("<tr/>"));
+					}
+					tmpNewItemElement.find("tbody").find("tr").last().append($("<td/>").text(elementPart));
+				}
+			}
+		});
 	});
 	result.splice(i, mergeEndIndex - i + 1);
 	result.splice(i, 0, tmpNewItemElement.prop('outerHTML'));
 }
 
 export function parseEmojiBlock(result, i) {
-	const iconData = /:.*:/.exec(result[i]);
-	const iconRef = iconData[0].replace(/:/g, "");
-	console.log(iconData);
 	const wrapper = $("<div class='emojiWrapper'/>");
-	wrapper.append("<span>" + iconData.input.substring(0, iconData.index) + "</span>");
-	wrapper.append("<img class='emojiImage' src='/emojis/" + iconRef + ".png' alt='" + iconRef + ".png' />");
-	wrapper.append("<span>" + iconData.input.substring(iconData.index + iconRef.length + 2, iconData.input.length) + "</span>");
+	let lastIndex = 0;
+	result[i].match(/:([a-z0-9_\+\-]+):/g).forEach(function (emoji) {
+		const emojiPlain = emoji.replace(/:/g, "");
+		wrapper.append("<span>" + result[i].substring(lastIndex, result[i].indexOf(emoji)) + "</span>");
+		lastIndex = result[i].indexOf(emoji) + emoji.length;
+		wrapper.append("<img class='emojiImage' src='/images/emojis/" + emojiPlain + ".png' alt='" + emojiPlain + ".png' />");
+	});
+	wrapper.append("<span>" + result[i].substring(lastIndex, result[i].length) + "</span>");
 	result[i] = wrapper.prop("outerHTML");
 }
 

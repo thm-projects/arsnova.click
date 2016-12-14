@@ -49,7 +49,8 @@
 			margin: 0;
 
 			img:not(.emojiImage) {
-				width: 100%;
+				max-width: 100%;
+				height: auto;
 			}
 		}
 

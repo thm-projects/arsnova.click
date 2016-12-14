@@ -133,11 +133,10 @@ export function addHashtag(questionGroup) {
 				connectEventManager(questionGroup.getHashtag());
 			}
 		});
-	} else {
-		localData.addHashtag(questionGroup);
-		Session.set("questionGroup", questionGroup);
-		connectEventManager(questionGroup.getHashtag());
 	}
+	localData.addHashtag(questionGroup);
+	Session.set("questionGroup", questionGroup);
+	connectEventManager(questionGroup.getHashtag());
 }
 
 export function trimIllegalChars(hashtag) {

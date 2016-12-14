@@ -38,7 +38,7 @@ Template.createQuestionView.helpers({
 		return result;
 	},
 	isVideoQuestionText: function (questionText) {
-		return /youtube/.test(questionText) || /youtu.be/.test(questionText) || /vimeo/.test(questionText);
+		return !/(^!)?\[.*\]\(.*\)/.test(questionText) && /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(questionText) && (/youtube/.test(questionText) || /youtu.be/.test(questionText) || /vimeo/.test(questionText));
 	},
 	getVideoData: function (questionText) {
 		const result = {};

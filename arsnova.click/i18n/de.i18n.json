@@ -383,7 +383,7 @@
         "SingleChoiceQuestion": "Single-Choice-Fragen enhalten beliebig viele Antwortoptionen, von denen genau eine als richtig markiert werden muss.",
         "YesNoSingleChoiceQuestion": "Ja|Nein-Fragen enthalten nur zwei Antwortopionen (Ja und Nein), von denen eine als richtig markiert werden muss.",
         "TrueFalseSingleChoiceQuestion": "Wahr|Falsch-Fragen enthalten ebenfalls nur zwei Antwortopionen (Wahr und Falsch), von denen eine als richtig markiert werden muss.",
-        "MultipleChoiceQuestion": "Multiple-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen beliebig viele (mindestens jedoch zwei) als richtig markiert werden können.",
+        "MultipleChoiceQuestion": "Multiple-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen beliebig viele (mindestens jedoch eine) als richtig markiert werden können.",
         "RangedQuestion": "Für die Schätzfrage muss eine Ganzzahl als richtig angegeben werden. Zusätzlich können Toleranzen nach oben und unten eingegeben werden.",
         "FreeTextQuestion": "In der Freitextfrage muss der Teilnehmer einen beliebigen Text eingeben. Dieser wird mit dem vorab eingegebenen Referenzwert verglichen.",
         "SurveyQuestion": "Umfragen enthalten beliebig viele Antwortoptionen, von denen keine als richtig oder falsch markiert werden darf."

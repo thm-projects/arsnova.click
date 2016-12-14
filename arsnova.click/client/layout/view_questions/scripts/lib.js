@@ -42,7 +42,7 @@ export function parseCodeBlock(result, i) {
 	let mergeEndIndex = result.length;
 	for (let j = i + 1; j < result.length; j++) {
 		tmpNewItem += result[j] + "\n";
-		if (result[j].startsWith("```")) {
+		if (/^```/.test(result[j])) {
 			mergeEndIndex = j;
 			break;
 		}
@@ -105,7 +105,7 @@ export function parseTableBlock(result, i) {
 	let tmpNewItem = result[i] + "\n";
 	let mergeEndIndex = result.length;
 	for (let j = i + 1; j < result.length; j++) {
-		if (result[j].indexOf(" | ") === -1) {
+		if (!/\s\|\s/.test(result[j])) {
 			mergeEndIndex = j - 1;
 			break;
 		}
@@ -113,7 +113,7 @@ export function parseTableBlock(result, i) {
 	}
 	const tmpNewItemElement = $("<table><thead></thead><tbody></tbody></table>");
 	let tableHasHeader = /[-]+\s\|\s[-]+/.test(tmpNewItem);
-	tmpNewItem.split(" | ").forEach(function (element) {
+	tmpNewItem.split(/\s\|\s/).forEach(function (element) {
 		if (element === "") {
 			return;
 		}
@@ -124,7 +124,7 @@ export function parseTableBlock(result, i) {
 			element = [element];
 		}
 		element.forEach(function (elementPart) {
-			if (elementPart === "") {
+			if (elementPart.length === 0) {
 				return;
 			}
 			if (/[-]+/.test(elementPart)) {
@@ -180,16 +180,16 @@ export function parseGithubFlavoredMarkdown(result) {
 				break;
 			case /^[\$]+/.test(result[i]):
 				break;
-			case /```/.test(result[i]):
+			case /^```/.test(result[i]):
 				parseCodeBlock(result, i);
 				break;
-			case /^([0-9]*\.)?(-)? \[x\] /.test(result[i]):
-				result[i] = ("<input class='markdownCheckbox' type='checkbox' checked='checked' disabled='disabled' />" + result[i].replace(/([0-9]*\.)?(-)? \[x\] /, ""));
+			case /^([0-9]*\.)?(-)?(\*)? \[x\] /.test(result[i]):
+				result[i] = ("<input class='markdownCheckbox' type='checkbox' checked='checked' disabled='disabled' />" + result[i].replace(/([0-9]*\.)?(-)?(\*)? \[x\] /, ""));
 				break;
-			case /^([0-9]*\.)?(-)? \[ \] /.test(result[i]):
-				result[i] = ("<input class='markdownCheckbox' type='checkbox' disabled='disabled' />" + result[i].replace(/^([0-9]*\.)?(-)? \[ \] /, ""));
+			case /^([0-9]*\.)?(-)?(\*)? \[ \] /.test(result[i]):
+				result[i] = ("<input class='markdownCheckbox' type='checkbox' disabled='disabled' />" + result[i].replace(/^([0-9]*\.)?(-)?(\*)? \[ \] /, ""));
 				break;
-			case /1\./.test(result[i]):
+			case /^[\s]*1\./.test(result[i]):
 				parseOrderedList(result, i);
 				break;
 			case /^[*-] /.test(result[i]):
@@ -199,20 +199,21 @@ export function parseGithubFlavoredMarkdown(result) {
 				parseCommentBlock(result, i);
 				break;
 			case /~~.*~~/.test(result[i]):
-				const index = /~~.*~~/.exec(result[i]);
-				result[i] = result[i].replace(index[0], "<del>" + index[0].replace(/~/g, "") + "</del>");
+				result[i].match(/~~[^~{2}]*~~/gi).forEach(function (element) {
+					result[i] = result[i].replace(element, "<del>" + element.replace(/~~/g, "") + "</del>");
+				});
 				break;
 			case !/(^!)?\[.*\]\(.*\)/.test(result[i]) && /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(result[i]) && !(/youtube/.test(result[i]) || /youtu.be/.test(result[i]) || /vimeo/.test(result[i])):
 				parseLinkBlock(result, i);
 				break;
-			case result[i] === "":
+			case result[i].length === 0:
 				result.splice(i, 0, "<br/>");
 				i++;
 				break;
-			case result[i].indexOf(" | ") > -1:
+			case /\s\|\s/.test(result[i]):
 				parseTableBlock(result, i);
 				break;
-			case /:.*:/.test(result[i]):
+			case /:[^\S]*:/.test(result[i]):
 				parseEmojiBlock(result, i);
 				break;
 		}

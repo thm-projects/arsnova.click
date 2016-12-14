@@ -263,7 +263,7 @@ export class AbstractQuestion {
 		const questionTextWithoutMarkdownChars = this.getQuestionTextWithoutMarkdownChars();
 		if (questionTextWithoutMarkdownChars[0] < 5) {
 			result.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "question_text_too_small"});
-		} else if (questionTextWithoutMarkdownChars[0] > 1000) {
+		} else if (questionTextWithoutMarkdownChars[0] > 50000) {
 			result.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "question_text_too_long"});
 		}
 		if (this.getTimer() < 6) {

@@ -24,26 +24,26 @@ import * as lib from './lib.js';
 
 Template.hashtagManagement.events({
 	"click .js-reactivate-hashtag": function (event) {
-		Session.set("questionGroup", localData.reenterSession($(event.currentTarget).parent().parent()[0].id));
+		Session.set("questionGroup", localData.reenterSession($(event.currentTarget).parents(".hashtagManagementRow").attr("id")));
 		lib.addHashtag(Session.get("questionGroup"));
 	},
 	"click .js-delete": function (event) {
-		const hashtagRow = $(event.currentTarget).parent().parent();
+		const id = $(event.currentTarget).parents(".hashtagManagementRow").attr("id");
 
 		new Splashscreen({
 			autostart: true,
 			templateName: "deleteConfirmationSplashscreen",
 			closeOnButton: "#closeDialogButton, #deleteSessionButton, .splashscreen-container-close",
 			onRendered: function (instance) {
-				instance.templateSelector.find("#session_name").text(hashtagRow[0].id);
+				instance.templateSelector.find("#session_name").text(id);
 
 				instance.templateSelector.find("#deleteSessionButton").on('click', function () {
-					localData.deleteHashtag(hashtagRow[0].id);
+					localData.deleteHashtag(id);
 					Meteor.call('Main.deleteEverything', {
-						hashtag: hashtagRow[0].id
+						hashtag: id
 					});
-					hashtagRow.prev("hr").remove();
-					hashtagRow.remove();
+					$('#' + id).prev("hr").remove();
+					$('#' + id).remove();
 				});
 			}
 		});

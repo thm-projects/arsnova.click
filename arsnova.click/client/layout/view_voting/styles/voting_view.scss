@@ -28,6 +28,14 @@
 
 	.sendResponse {
 		font-size: 1px;
+		position: relative;
+		object {
+			width: calc(100% - 10px);
+			height: calc(100% - 60px);
+			top: 5px;
+			position: absolute;
+			left: 5px;
+		}
 		p {
 			margin: 0;
 		}

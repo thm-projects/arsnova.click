@@ -19,7 +19,7 @@ Template.quizManager.events({
 		event.stopPropagation();
 		event.preventDefault();
 		const questionGroup = Session.get("questionGroup");
-		const targetId = event.currentTarget.id.replace("removeQuestion_", "");
+		const targetId = parseInt(event.currentTarget.id.replace("removeQuestion_", ""));
 		questionGroup.removeQuestion(targetId);
 		Session.set("questionGroup", questionGroup);
 		localData.addHashtag(Session.get("questionGroup"));

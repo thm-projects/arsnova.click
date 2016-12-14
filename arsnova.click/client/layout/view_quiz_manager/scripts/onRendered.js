@@ -16,9 +16,8 @@ Template.quizManager.onRendered(function () {
 		const connected = Meteor.status().connected;
 		const valid = Session.get("questionGroup") ? Session.get("questionGroup").isValid() : false;
 		const forwardButton = $('#forwardButton');
-		if (popoverTimeout) {
-			Meteor.clearTimeout(popoverTimeout);
-			popoverTimeout = null;
+		if (popoverTimeout && (!connected || !valid)) {
+			return;
 		}
 		forwardButton.popover("destroy");
 		if (connected && valid) {

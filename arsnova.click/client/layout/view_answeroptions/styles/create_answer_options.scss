@@ -70,6 +70,8 @@
 		margin: 10px 0;
 		position: relative;
 		font-size: 1.3em;
+		overflow-y: hidden;
+		overflow-x: auto;
 
 		.answer_row_short_text {
 			width: 80px;
@@ -84,10 +86,13 @@
 			flex-grow: 1;
 			background-color: transparent;
 			border: none;
+			width: 100%;
+			text-overflow: initial;
 		}
 		.toggle {
 			margin-top: 10px;
 			margin-right: 10px;
+			min-width: 80px !important;
 		}
 		.removeAnsweroption {
 			padding-top: 10px;

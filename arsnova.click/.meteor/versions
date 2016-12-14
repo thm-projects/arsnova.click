@@ -7,7 +7,6 @@ aldeed:simple-schema@1.5.3
 allow-deny@1.0.5
 amplify@1.0.0
 arsnova.click:bootstrap-toggle@2.2.2
-arsnova.click:i18n-bundler@0.3.0
 arsnova.click:introjs@2.3.0
 arsnova.click:jquery-qr-code@1.14.0
 arsnova.click:jquery-ui@1.12.1

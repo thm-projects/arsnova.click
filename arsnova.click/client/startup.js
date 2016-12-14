@@ -82,7 +82,7 @@ const helper = new MeteorMathJax.Helper({
 });
 Template.registerHelper('mathjax', helper.getTemplate());
 MeteorMathJax.defaultConfig = {
-	config: ["MMLorHTML.js"],
+	config: ["TeX-AMS-MML_HTMLorMML.js"],
 	jax: ["input/TeX","input/MathML","output/HTML-CSS","output/NativeMML", "output/PreviewHTML"],
 	extensions: ["tex2jax.js", "Safe.js", "mml2jax.js", "fast-preview.js", "AssistiveMML.js", "[Contrib]/a11y/accessibility-menu.js"],
 	TeX: {
@@ -91,7 +91,7 @@ MeteorMathJax.defaultConfig = {
 	tex2jax: {
 		inlineMath: [['$','$']],
 		displayMath: [['$$', '$$']],
-		processEscapes: false,
+		processEscapes: true,
 		preview: 'none'
 	},
 	messageStyle: 'none',

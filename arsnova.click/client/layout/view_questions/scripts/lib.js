@@ -22,19 +22,12 @@ import * as localData from '/lib/local_storage.js';
 export function addQuestion(index) {
 	const questionText = $('#questionText').val() || "";
 	const questionItem = Session.get("questionGroup");
+	if (!Session.get("questionGroup")) {
+		return;
+	}
 	questionItem.getQuestionList()[index].setQuestionText(questionText);
 	Session.set("questionGroup", questionItem);
 	localData.addHashtag(questionItem);
-}
-
-export function checkForValidQuestionText() {
-	const questionTextWithoutMarkdownChars = Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getQuestionTextWithoutMarkdownChars();
-
-	if (questionTextWithoutMarkdownChars > 4 && questionTextWithoutMarkdownChars < 50001) {
-		$('#questionText').removeClass("invalidQuestion");
-	} else {
-		$('#questionText').addClass("invalidQuestion");
-	}
 }
 
 export function parseCodeBlock(result, i) {

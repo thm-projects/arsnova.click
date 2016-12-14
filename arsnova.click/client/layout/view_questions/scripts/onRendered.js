@@ -19,6 +19,8 @@ import {Template} from 'meteor/templating';
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {getTooltipForRoute} from "/client/layout/global/scripts/lib.js";
+import {markdownBarTracker} from '/client/plugins/markdown_bar/scripts/lib.js';
+import * as lib from './lib.js';
 
 Template.createQuestionView.onRendered(function () {
 	this.autorun(function () {
@@ -33,6 +35,10 @@ Template.createQuestionView.onRendered(function () {
 			width: contentWidth
 		});
 		$('#previewQuestionContentWrapper').find('.center-block').css({width: contentWidth});
+	}.bind(this));
+	this.autorun(function () {
+		markdownBarTracker.depend();
+		lib.addQuestion(parseInt(Router.current().params.questionIndex));
 	}.bind(this));
 
 	footerElements.removeFooterElements();

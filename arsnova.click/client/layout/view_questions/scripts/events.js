@@ -22,6 +22,5 @@ import * as lib from './lib.js';
 Template.createQuestionView.events({
 	'input #questionText': function () {
 		lib.addQuestion(parseInt(Router.current().params.questionIndex));
-		lib.checkForValidQuestionText();
 	}
 });

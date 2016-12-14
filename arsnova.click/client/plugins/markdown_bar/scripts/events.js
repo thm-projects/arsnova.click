@@ -22,31 +22,30 @@ import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scri
 import {markdownAlreadyExistsAndAutoRemove, insertInQuestionText, urlSchema} from './lib.js';
 
 Template.markdownBar.events({
-	"click #infoMarkdownButton": function () {
-		new Splashscreen({
-			autostart: true,
-			instanceId: "infoMarkdown",
-			templateName: "questionPreviewSplashscreen",
-			closeOnButton: '#js-btn-hidePreviewModal, .splashscreen-container-close',
-			onRendered: function (instance) {
-				instance.templateSelector.find(".modal-markdown-body").html(TAPi18n.__("plugins.markdown_bar.info_content"));
-			}
-		});
-	},
 	"click #boldMarkdownButton": function () {
 		if (!markdownAlreadyExistsAndAutoRemove('**', '**')) {
 			insertInQuestionText('**', '**');
 		}
 	},
+	"click #italicMarkdownButton": function () {
+		if (!markdownAlreadyExistsAndAutoRemove('*', '*')) {
+			insertInQuestionText('*', '*');
+		}
+	},
+	"click #lineThroughMarkdownButton": function () {
+		if (!markdownAlreadyExistsAndAutoRemove('<del>', '</del>')) {
+			insertInQuestionText('<del>', '</del>');
+		}
+	},
 	"click #headerMarkdownButton": function () {
-		if (!markdownAlreadyExistsAndAutoRemove('###', '###')) {
-			if (markdownAlreadyExistsAndAutoRemove('##', '##')) {
-				insertInQuestionText('###', '###');
+		if (!markdownAlreadyExistsAndAutoRemove('###', '')) {
+			if (markdownAlreadyExistsAndAutoRemove('##', '')) {
+				insertInQuestionText('###', '');
 			} else {
-				if (markdownAlreadyExistsAndAutoRemove('#', '#')) {
-					insertInQuestionText('##', '##');
+				if (markdownAlreadyExistsAndAutoRemove('#', '')) {
+					insertInQuestionText('##', '');
 				} else {
-					insertInQuestionText('#', '#');
+					insertInQuestionText('#', '');
 				}
 			}
 		}
@@ -57,24 +56,27 @@ Template.markdownBar.events({
 			templateName: "hyperlinkInsertSplashscreen",
 			closeOnButton: "#js-btn-closeHyperlink, #js-btn-saveHyperlink, .splashscreen-container-close",
 			onRendered: function (instance) {
-				var textarea = document.getElementById('questionText');
+				const textarea = document.getElementById('questionText');
+				let frontText;
+				let middleText;
+				let backText;
 				if (textarea.selectionStart != textarea.selectionEnd) {
-					var strPosBegin = textarea.selectionStart;
-					var strPosEnd = textarea.selectionEnd;
-					var frontText = (textarea.value).substring(0, strPosBegin);
-					var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
-					var backText = (textarea.value).substring(strPosEnd, textarea.value.length);
+					const strPosBegin = textarea.selectionStart;
+					const strPosEnd = textarea.selectionEnd;
+					frontText = (textarea.value).substring(0, strPosBegin);
+					middleText = (textarea.value).substring(strPosBegin, strPosEnd);
+					backText = (textarea.value).substring(strPosEnd, textarea.value.length);
 
 					instance.templateSelector.find('#hyperlinkText').val(middleText);
-					textarea.value = frontText + backText;
 				}
 				$('#js-btn-saveHyperlink').on('click', function () {
-					var linkText = document.getElementById('hyperlinkText').value;
-					var linkDestination = document.getElementById('hyperlinkDestination').value;
+					const linkText = document.getElementById('hyperlinkText').value;
+					const linkDestination = document.getElementById('hyperlinkDestination').value;
 					try {
 						new SimpleSchema({
 							hyperlink: urlSchema
 						}).validate({hyperlink: linkDestination});
+						textarea.value = frontText + backText;
 						insertInQuestionText('[' + linkText + '](' + linkDestination + ')');
 					} catch (ex) {
 						new ErrorSplashscreen({
@@ -97,147 +99,22 @@ Template.markdownBar.events({
 		}
 	},
 	"click #latexMarkdownButton": function () {
-		if (!markdownAlreadyExistsAndAutoRemove('\\(', '\\)')) {
-			if (!markdownAlreadyExistsAndAutoRemove('$$', '$$')) {
-				insertInQuestionText('\\(', '\\)');
+		if (!markdownAlreadyExistsAndAutoRemove('$$', '$$')) {
+			if (!markdownAlreadyExistsAndAutoRemove('$', '$')) {
+				insertInQuestionText('$$', '$$');
 			}
 		} else {
-			insertInQuestionText('$$', '$$');
+			insertInQuestionText('$', '$');
 		}
 	},
 	"click #codeMarkdownButton": function () {
-		if (!markdownAlreadyExistsAndAutoRemove('<hlcode>', '</hlcode>')) {
-			insertInQuestionText('<hlcode>', '</hlcode>');
+		if (!markdownAlreadyExistsAndAutoRemove('```\n', '\n```')) {
+			insertInQuestionText('```\n', '\n```');
 		}
 	},
 	"click #commentMarkdownButton": function () {
-		if (!markdownAlreadyExistsAndAutoRemove('>')) {
-			insertInQuestionText('>');
+		if (!markdownAlreadyExistsAndAutoRemove('> ')) {
+			insertInQuestionText('> ');
 		}
-	},
-	"click #pictureMarkdownButton": function () {
-		new Splashscreen({
-			autostart: true,
-			templateName: "pictureInsertSplashscreen",
-			closeOnButton: "#js-btn-closePicture, #js-btn-savePicture, .splashscreen-container-close",
-			onRendered: function (instance) {
-				$("[name='toggleAdvancedOptions']").bootstrapSwitch();
-
-				var textarea = document.getElementById('questionText');
-				if (textarea.selectionStart != textarea.selectionEnd) {
-					var strPosBegin = textarea.selectionStart;
-					var strPosEnd = textarea.selectionEnd;
-					var frontText = (textarea.value).substring(0, strPosBegin);
-					var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
-					var backText = (textarea.value).substring(strPosEnd, textarea.value.length);
-
-					instance.templateSelector.find('#hyperlinkText').val(middleText);
-					textarea.value = frontText + backText;
-				}
-
-				$('input[name="toggleAdvancedOptions"]').on('switchChange.bootstrapSwitch', function (event, state) {
-					if (state) {
-						$("#advancedOptionsDiv").removeClass("hidden");
-					} else {
-						$("#advancedOptionsDiv").addClass("hidden");
-					}
-				});
-
-				$('#js-btn-savePicture').on('click', function () {
-					var linkText = document.getElementById('pictureText').value;
-					var linkDestination = document.getElementById('pictureDestination').value;
-					try {
-						new SimpleSchema({
-							hyperlink: urlSchema
-						}).validate({hyperlink: linkDestination});
-
-						var width = $('#pictureWidth').val() === "" ? "auto" : $('#pictureWidth').val();
-						var height = $('#pictureHeight').val() === "" ? "auto" : $('#pictureHeight').val();
-						var position = $("#picturePosition option:selected").val();
-
-						insertInQuestionText('![' + linkText + '](' + linkDestination + ' "' + width + 'x' + height + 'x' + position + '")');
-					} catch (ex) {
-						new ErrorSplashscreen({
-							autostart: true,
-							errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
-						});
-					}
-				});
-			}
-		});
-	},
-	"click #youtubeMarkdownButton": function () {
-		new Splashscreen({
-			autostart: true,
-			templateName: "youtubeInsertSplashscreen",
-			closeOnButton: "#js-btn-closeYoutube, #js-btn-saveYoutube, .splashscreen-container-close",
-			onRendered: function (instance) {
-				var textarea = document.getElementById('questionText');
-				if (textarea.selectionStart != textarea.selectionEnd) {
-					var strPosBegin = textarea.selectionStart;
-					var strPosEnd = textarea.selectionEnd;
-					var frontText = (textarea.value).substring(0, strPosBegin);
-					var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
-					var backText = (textarea.value).substring(strPosEnd, textarea.value.length);
-
-					instance.templateSelector.find('#youtubeText').val(middleText);
-					textarea.value = frontText + backText;
-				}
-				$('#js-btn-saveYoutube').on('click', function () {
-					var linkText = document.getElementById('youtubeText').value;
-					var linkDestination = document.getElementById('youtubeDestination').value;
-					var picUrl = linkDestination.replace("www.", "img.").replace("watch?v=", "vi/").concat("/0.jpg");
-					try {
-						new SimpleSchema({
-							hyperlink: urlSchema
-						}).validate({hyperlink: linkDestination});
-						insertInQuestionText('[![' + linkText + '](' + picUrl + ')](' + linkDestination + ')');
-					} catch (ex) {
-						new ErrorSplashscreen({
-							autostart: true,
-							errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
-						});
-					}
-				});
-			}
-		});
-	},
-	"click #vimeoMarkdownButton": function () {
-		new Splashscreen({
-			autostart: true,
-			templateName: "vimeoInsertSplashscreen",
-			closeOnButton: "#js-btn-closeVimeo, #js-btn-saveVimeo, .splashscreen-container-close",
-			onRendered: function (instance) {
-				var textarea = document.getElementById('questionText');
-				if (textarea.selectionStart != textarea.selectionEnd) {
-					var strPosBegin = textarea.selectionStart;
-					var strPosEnd = textarea.selectionEnd;
-					var frontText = (textarea.value).substring(0, strPosBegin);
-					var middleText = (textarea.value).substring(strPosBegin, strPosEnd);
-					var backText = (textarea.value).substring(strPosEnd, textarea.value.length);
-
-					instance.templateSelector.find('#vimeoText').val(middleText);
-					textarea.value = frontText + backText;
-				}
-				$('#js-btn-saveVimeo').on('click', function () {
-					var linkText = document.getElementById('vimeoText').value;
-					var linkDestination = document.getElementById('vimeoDestination').value;
-					var videoId = linkDestination.substr(linkDestination.lastIndexOf("/") + 1);
-					var picUrl = 'https://i.vimeocdn.com/video/' + videoId + '_200x150.jpg';
-					var videoUrl = 'https://player.vimeo.com/video/' + videoId;
-					try {
-						new SimpleSchema({
-							hyperlink: urlSchema
-						}).validate({hyperlink: linkDestination});
-						insertInQuestionText('[![' + linkText + '](' + picUrl + ')](' + videoUrl + ')');
-					} catch (ex) {
-						new ErrorSplashscreen({
-							autostart: true,
-							errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
-						});
-					}
-				});
-			}
-		});
 	}
 });

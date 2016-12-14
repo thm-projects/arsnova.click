@@ -581,6 +581,8 @@
         "info": "Info",
         "preview": "Vorschau",
         "bold": "Fett",
+        "italic": "Kursiv",
+        "line_through": "Durchgestrichen",
         "heading": "Überschrift",
         "hyperlink": "Hyperlink",
         "unordered_list": "Unsortierte Liste",

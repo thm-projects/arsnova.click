@@ -30,7 +30,7 @@
             <div class="center-block" data-intro="{{_ "view.questions.description.preview"}}">
                 <img id="previewQuestionImage" src="/images/preview/question_preview.png" alt="question preview" />
                 <div id="markdownPreviewWrapper">
-                    <h2 class="text-center">Vorschau</h2>
+                    <h2 class="text-center">{{_ "view.questions.preview"}}</h2>
                     {{#each splitQuestionTextOnNewLine}}
                         {{#if isVideoQuestionText this}}
                             {{#with getVideoData this}}

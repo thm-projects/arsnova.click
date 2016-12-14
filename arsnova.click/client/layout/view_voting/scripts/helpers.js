@@ -20,12 +20,17 @@ import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {Router} from 'meteor/iron:router';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as lib from './lib.js';
 
 Template.votingview.helpers({
-	answerOptions: function () {
+	getAnswerOptions: function () {
 		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
-		return Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList();
+		const result = Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList().map(function (elem) {
+			return elem.getAnswerText();
+		});
+		questionLib.parseGithubFlavoredMarkdown(result);
+		return result;
 	},
 	showQuestionButton: function () {
 		return !(this.data && this.data["data-questionIndex"]);
@@ -37,31 +42,23 @@ Template.votingview.helpers({
 		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
 		return Session.get("questionGroup").getQuestionList()[index].getDisplayAnswerText();
 	},
-	isVideoAnswerText: function (number) {
-		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
-		const answer = Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList()[number];
-		if (!answer) {
-			return;
-		}
-		const answerText = answer.getAnswerText();
-		return /youtube/.test(answerText) || /youtu.be/.test(answerText) || /vimeo/.test(answerText);
+	isVideoAnswerText: function (questionText) {
+		return !/(^!)?\[.*\]\(.*\)/.test(questionText) && /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(questionText) && (/youtube/.test(questionText) || /youtu.be/.test(questionText) || /vimeo/.test(questionText));
 	},
-	getVideoData: function (number) {
-		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
-		const answerText = Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList()[number].getAnswerText();
+	getVideoData: function (questionText) {
 		const result = {};
-		if (/youtube/.test(answerText)) {
+		if (/youtube/.test(questionText)) {
 			result.origin  = "https://www.youtube.com/embed/";
-			result.videoId = answerText.substr(answerText.lastIndexOf("=") + 1, answerText.length);
-		} else if (/youtu.be/.test(answerText)) {
+			result.videoId = questionText.substr(questionText.lastIndexOf("=") + 1, questionText.length);
+		} else if (/youtu.be/.test(questionText)) {
 			result.origin  = "https://www.youtube.com/embed/";
-			result.videoId = answerText.substr(answerText.lastIndexOf("/") + 1, answerText.length);
-		} else if (/vimeo/.test(answerText)) {
+			result.videoId = questionText.substr(questionText.lastIndexOf("/") + 1, questionText.length);
+		} else if (/vimeo/.test(questionText)) {
 			result.origin = "https://player.vimeo.com/video/";
-			result.videoId = answerText.substr(answerText.lastIndexOf("/") + 1, answerText.length);
+			result.videoId = questionText.substr(questionText.lastIndexOf("/") + 1, questionText.length);
 		}
 		result.videoId = result.videoId.replace(/script/g, "");
-		result.embedTag = '<embed width="100%" height="100%" src="' + result.origin + result.videoId + '?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" />';
+		result.embedTag = '<embed width="100%" height="200px" src="' + result.origin + result.videoId + '?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3" type="text/html" allowscriptaccess="always" allowfullscreen="true" />';
 		return result;
 	},
 	answerOptionLetter: function (number) {

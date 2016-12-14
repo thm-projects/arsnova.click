@@ -286,7 +286,6 @@ table {
   overflow: hidden !important;
 }
 
-
 #markdownPreviewWrapper,
 .markdown-content {
   p {
@@ -297,7 +296,10 @@ table {
       height: auto;
     }
   }
+}
 
+#markdownPreviewWrapper:not(.answerWrapper),
+.markdown-content {
   .emojiWrapper {
     height: 30px;
 

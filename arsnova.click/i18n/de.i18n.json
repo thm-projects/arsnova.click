@@ -606,6 +606,14 @@
       "random": "Zufällige Auswahl"
     },
     "splashscreen": {
+      "question_and_answer": {
+        "answeroption": "Antwort",
+        "answeroption_plural": "Mögliche Antworten",
+        "min_range": "Minimale Toleranz",
+        "correct_value": "Richtiger Wert",
+        "max_range": "Maximale Toleranz",
+        "reference_value": "Referenzwert"
+      },
       "edit_session_confirmation": {
         "title": "Möchtest du das Quiz bearbeiten?",
         "text": "Alle Teilnehmenden werden abgemeldet und die Rangliste wird gelöscht.",

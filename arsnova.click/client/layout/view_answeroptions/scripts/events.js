@@ -20,7 +20,6 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import * as localData from '/lib/local_storage.js';
-import {markdownTracker} from '/client/lib/mathjax_markdown.js';
 import * as lib from './lib.js';
 
 Template.createAnswerOptions.events({
@@ -50,7 +49,6 @@ Template.defaultAnswerOptionTemplate.events({
 		questionItem.getQuestionList()[Router.current().params.questionIndex].setDisplayAnswerText(checked);
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
-		markdownTracker.changed();
 	},
 	"change #config_multipleSelectionSurvey_switch": function (event) {
 		const checked = $(event.target).prop('checked');
@@ -58,7 +56,6 @@ Template.defaultAnswerOptionTemplate.events({
 		questionItem.getQuestionList()[Router.current().params.questionIndex].setMultipleSelectionEnabled(checked);
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
-		markdownTracker.changed();
 	},
 	"click .removeAnsweroption": function (event) {
 		const questionItem = Session.get("questionGroup");

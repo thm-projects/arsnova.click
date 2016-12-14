@@ -43,23 +43,8 @@
 		overflow-x: hidden;
 		color: white;
 		word-wrap: break-word;
-
 		p {
 			color: white;
-			margin: 0;
-
-			img:not(.emojiImage) {
-				max-width: 100%;
-				height: auto;
-			}
-		}
-
-		.emojiWrapper {
-			height: 30px;
-
-			img {
-				height: inherit;
-			}
 		}
 	}
 }

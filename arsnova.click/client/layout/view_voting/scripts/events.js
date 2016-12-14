@@ -20,10 +20,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
-import {markdownTracker} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
 import {makeAndSendResponse, makeAndSendRangedResponse, makeAndSendFreeTextResponse, countdownFinish} from './lib.js';
 
@@ -31,45 +28,17 @@ Template.votingview.events({
 	'click #js-btn-showQuestionAndAnswerModal': function (event, template) {
 		event.stopPropagation();
 		const questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc || template.data["data-questionIndex"]) {
+		if (!questionDoc || template.data && template.data["data-questionIndex"]) {
 			return;
 		}
-
-		mathjaxMarkdown.initializeMarkdownAndLatex();
-		let questionContent = mathjaxMarkdown.getContent(questionDoc.questionList[EventManagerCollection.findOne().questionIndex].questionText);
-		let answerContent = "";
-
-		let hasEmptyAnswers = true;
-
-		if (questionDoc.questionList[EventManagerCollection.findOne().questionIndex].type !== "FreeTextQuestion") {
-			AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
-				if (!answerOption.answerText) {
-					answerOption.answerText = "";
-				} else {
-					hasEmptyAnswers = false;
-				}
-
-				answerContent += "<strong>" + String.fromCharCode((answerOption.answerOptionNumber + 65)) + "</strong>" + "<br/>";
-				answerContent += mathjaxMarkdown.getContent(answerOption.answerText);
-			});
-		}
-
-		if (hasEmptyAnswers) {
-			answerContent = "";
-			$('#answerOptionsHeader').hide();
-		}
-
 		new Splashscreen({
 			autostart: true,
 			templateName: 'questionAndAnswerSplashscreen',
+			dataContext: {
+				questionIndex: EventManagerCollection.findOne().questionIndex
+			},
 			closeOnButton: '#js-btn-hideQuestionModal, .splashscreen-container-close',
-			instanceId: "questionAndAnswers_" + EventManagerCollection.findOne().questionIndex,
-			onRendered: function (instance) {
-				instance.templateSelector.find('#questionContent').html(questionContent);
-				mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#questionContent'));
-				instance.templateSelector.find('#answerContent').html(answerContent);
-				mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#answerContent'));
-			}
+			instanceId: "questionAndAnswers_" + EventManagerCollection.findOne().questionIndex
 		});
 	},
 	"click #forwardButton": function (event, template) {
@@ -115,7 +84,6 @@ Template.votingview.events({
 					return;
 				} else {
 					makeAndSendResponse(responseArr);
-					return;
 				}
 			}
 		}
@@ -156,12 +124,10 @@ Template.votingview.events({
 		Session.set("responses", JSON.stringify(responseArr));
 		Session.set("hasToggledResponse", JSON.stringify(responseArr).indexOf("true") > -1);
 		$(event.currentTarget).toggleClass("answer-selected");
-		markdownTracker.changed();
 	},
 	"DOMSubtreeModified .sendResponse": function (event) {
 		const id = $(event.currentTarget).attr("id");
 		$('#' + id).removeClass("quickfitSet");
-		markdownTracker.changed();
 	},
 	"keydown #rangeInput": function (event, template) {
 		if (template.data && template.data["data-questionIndex"]) {

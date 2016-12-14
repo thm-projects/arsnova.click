@@ -28,7 +28,6 @@ import {RangedQuestion} from "/lib/questions/question_ranged.js";
 import {FreeTextQuestion} from "/lib/questions/question_freetext.js";
 import * as localData from '/lib/local_storage.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
-import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {buzzsound1, finishSound, setFinishSoundTitle, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
@@ -72,45 +71,14 @@ export function isCountdownZero(index) {
 }
 
 export function displayQuestionAndAnswerDialog(questionIndex) {
-	mathjaxMarkdown.initializeMarkdownAndLatex();
-	const questionElement = Session.get("questionGroup").getQuestionList()[questionIndex];
-	let answerContent = "";
-
-	if (questionElement.typeName() === "RangedQuestion") {
-		if (!isCountdownZero(questionIndex)) {
-			$('#answerOptionsHeader').hide();
-		} else {
-			answerContent += TAPi18n.__("view.answeroptions.ranged_question.min_range") + ": " + questionElement.getMinRange() + "<br/>";
-			answerContent += TAPi18n.__("view.answeroptions.ranged_question.max_range") + ": " + questionElement.getMaxRange() + "<br/><br/>";
-			answerContent += TAPi18n.__("view.answeroptions.ranged_question.correct_value") + ": " + questionElement.getCorrectValue() + "<br/>";
-		}
-	} else if (questionElement.typeName() === "FreeTextQuestion") {
-		if (!isCountdownZero(questionIndex)) {
-			$('#answerOptionsHeader').hide();
-		} else {
-			answerContent += TAPi18n.__("view.liveResults.correct_answer") + ":<br/>";
-		}
-	} else {
-		questionElement.getAnswerOptionList().forEach(function (answerOption) {
-			if (!answerOption.getAnswerText()) {
-				answerOption.setAnswerText("");
-			}
-			answerContent += "<strong>" + String.fromCharCode((answerOption.getAnswerOptionNumber() + 65)) + "</strong>" + "<br/>";
-			answerContent += mathjaxMarkdown.getContent(answerOption.getAnswerText());
-		});
-	}
-
 	setQuestionDialog(new Splashscreen({
 		autostart: true,
 		templateName: 'questionAndAnswerSplashscreen',
+		dataContext: {
+			questionIndex: questionIndex
+		},
 		closeOnButton: '#js-btn-hideQuestionModal, .splashscreen-container-close',
-		instanceId: "questionAndAnswers_" + questionIndex,
-		onRendered: function (instance) {
-			instance.templateSelector.find('#questionContent').html(mathjaxMarkdown.getContent(questionElement.getQuestionText()));
-			mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#questionContent'));
-			instance.templateSelector.find('#answerContent').html(answerContent);
-			mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#answerContent'));
-		}
+		instanceId: "questionAndAnswers_" + questionIndex
 	}));
 }
 

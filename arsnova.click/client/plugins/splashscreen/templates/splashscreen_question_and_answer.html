@@ -24,8 +24,91 @@
                         <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
                     </div>
                     <div class="modal-markdown-body">
-                        <div id="questionContent" class="markdown-content"></div>
-                        <div id="answerContent" class="markdown-content"></div>
+                        <div id="questionContent" class="markdown-content">
+                            {{#each splitQuestionTextOnNewLine}}
+                                {{#if isVideoQuestionText this}}
+                                    {{#with getVideoData this}}
+                                        <object width="100%" height="100%">
+                                            <param name="movie" value="{{this.origin}}{{this.videoId}}?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3"/>
+                                            <param name="allowFullScreen" value="true"/>
+                                            <param name="allowscriptaccess" value="always"/>
+                                            {{{this.embedTag}}}
+                                        </object>
+                                    {{/with}}
+                                {{else}}
+                                    {{#mathjax}}{{this}}{{/mathjax}}
+                                {{/if}}
+                            {{/each}}
+                        </div>
+                        <hr/>
+                        <div id="answerContent" class="markdown-content">
+                            {{#if isRangedQuestion}}
+                                <h1>{{_"plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
+                                {{#with getAnswerOptions}}
+                                    <div class="answerContentElementWrapper">
+                                        <div class="answerContentElementLetter">
+                                            <span>{{_"plugins.splashscreen.question_and_answer.min_range"}}</span>
+                                        </div>
+                                        <div class="answerContentElementItem">
+                                            <span>{{this.[0]}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="answerContentElementWrapper">
+                                        <div class="answerContentElementLetter">
+                                            <span>{{_"plugins.splashscreen.question_and_answer.correct_value"}}</span>
+                                        </div>
+                                        <div class="answerContentElementItem">
+                                            <span>{{this.[1]}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="answerContentElementWrapper">
+                                        <div class="answerContentElementLetter">
+                                            <span>{{_"plugins.splashscreen.question_and_answer.max_range"}}</span>
+                                        </div>
+                                        <div class="answerContentElementItem">
+                                            <span>{{this.[2]}}</span>
+                                        </div>
+                                    </div>
+                                {{/with}}
+                            {{else}}
+                                {{#if isFreeTextQuestion}}
+                                    <h1>{{_"plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
+                                    {{#with getAnswerOptions}}
+                                        <div class="answerContentElementWrapper">
+                                            <div class="answerContentElementLetter">
+                                                <span>{{_"plugins.splashscreen.question_and_answer.reference_value"}}</span>
+                                            </div>
+                                            <div class="answerContentElementItem">
+                                                {{#mathjax}}{{this[0]}}{{/mathjax}}
+                                            </div>
+                                        </div>
+                                    {{/with}}
+                                {{else}}
+                                    <h1>{{_"plugins.splashscreen.question_and_answer.answeroption" count=2}}</h1>
+                                    {{#each getAnswerOptions}}
+                                        <div class="answerContentElementWrapper">
+                                            <div class="answerContentElementLetter">
+                                                <span>{{_"plugins.splashscreen.question_and_answer.answeroption" count=1}} {{answerOptionLetter @index}}</span>
+                                            </div>
+                                            <div class="answerContentElementItem">
+                                                {{#if isVideoQuestionText this}}
+                                                    {{#with getVideoData this}}
+                                                        <object width="100%" height="100%">
+                                                            <param name="movie" value="{{this.origin}}{{this.videoId}}?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3"/>
+                                                            <param name="allowFullScreen" value="true"/>
+                                                            <param name="allowscriptaccess" value="always"/>
+                                                            {{{this.embedTag}}}
+                                                        </object>
+                                                    {{/with}}
+                                                {{else}}
+                                                    {{#mathjax}}{{this}}{{/mathjax}}
+                                                {{/if}}
+                                            </div>
+                                        </div>
+                                    {{/each}}
+                                {{/if}}
+                            {{/if}}
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button id="js-btn-hideQuestionModal"

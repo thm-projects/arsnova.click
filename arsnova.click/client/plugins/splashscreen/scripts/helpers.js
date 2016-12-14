@@ -20,7 +20,7 @@ import {Template} from 'meteor/templating';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
-import {isMobileDevice} from './lib.js';
+import {isMobileDevice, parseMarkdown} from './lib.js';
 
 Template.splashscreen.helpers($.extend(isMobileDevice, {
 
@@ -55,15 +55,11 @@ Template.showHashtagsSplashscreen.helpers($.extend(isMobileDevice, {
 	}
 }));
 
-Template.questionPreviewSplashscreen.helpers($.extend(isMobileDevice, {
+Template.readingConfirmedSplashscreen.helpers($.extend(isMobileDevice, parseMarkdown, {
 
 }));
 
-Template.readingConfirmedSplashscreen.helpers($.extend(isMobileDevice, {
-
-}));
-
-Template.questionAndAnswerSplashscreen.helpers($.extend(isMobileDevice, {
+Template.questionAndAnswerSplashscreen.helpers($.extend(isMobileDevice, parseMarkdown, {
 
 }));
 

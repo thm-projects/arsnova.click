@@ -51,12 +51,16 @@ Template.nickStandardFooter.helpers({
 			backButton: {
 				id: "backButton"
 			},
-			forwardButton: {
-				id: "loginViaCas"
-			}
 		};
 		if (configDoc.nicks.restrictToCASLogin) {
-			footerConfig.forwardButton.text = "Login via CAS";
+			footerConfig.forwardButton = {
+				text: "Login via CAS",
+				id: "loginViaCas"
+			};
+		} else {
+			footerConfig.forwardButton = {
+				id: "forwardButton"
+			};
 		}
 		return footerConfig;
 	}

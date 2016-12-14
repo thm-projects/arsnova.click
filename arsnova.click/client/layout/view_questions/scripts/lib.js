@@ -96,9 +96,10 @@ export function parseCommentBlock(result, i) {
 export function parseLinkBlock(result, i) {
 	const startIndex = /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.exec(result[i]);
 	const linkStr = startIndex[0] || result[i];
+	const link = !/^https?:\/\//.test(linkStr) ? "http://" + linkStr : linkStr;
 	const prevLinkContent = result[i].substring(0, startIndex.index);
 	const postLinkContent = result[i].indexOf(" ", startIndex.index) > -1 ? result[i].substring(result[i].indexOf(" ", startIndex.index)) : "";
-	result[i] = prevLinkContent + "<a href='" + linkStr + "'>" + linkStr + "</a>" + postLinkContent;
+	result[i] = prevLinkContent + "<a href='" + link + "' target='_blank'>" + linkStr + "</a>" + postLinkContent;
 }
 
 export function parseTableBlock(result, i) {
@@ -213,7 +214,7 @@ export function parseGithubFlavoredMarkdown(result) {
 			case /\s\|\s/.test(result[i]):
 				parseTableBlock(result, i);
 				break;
-			case /:[^\S]*:/.test(result[i]):
+			case /:[^\s]*:/.test(result[i]) && /:([a-z0-9_\+\-]+):/g.test(result[i]):
 				parseEmojiBlock(result, i);
 				break;
 		}

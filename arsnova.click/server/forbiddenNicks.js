@@ -72,7 +72,6 @@ export var forbiddenNicks = [
 	"MAMADA",
 	"MAMON",
 	"MAMÓN",
-	"MAMONA",
 	"MARICA",
 	"MARICON",
 	"MARICÓN",

@@ -78,6 +78,10 @@ Template.home.events({
 		if (hashtagLib.eventManagerCollectionObserver) {
 			hashtagLib.eventManagerCollectionObserver.stop();
 		}
+		if (inputHashtag === "") {
+			$("#joinSession, #addNewHashtag").attr("disabled", "disabled");
+			return;
+		}
 		if (originalHashtag === "") {
 			Session.set("isEditingQuiz", false);
 		} else {
@@ -91,8 +95,17 @@ Template.home.events({
 							if (!isNaN(changedFields.sessionStatus)) {
 								if (changedFields.sessionStatus === 2) {
 									joinSessionItem.removeAttr("disabled");
+									inputTarget.popover("destroy");
 								} else {
 									joinSessionItem.attr("disabled", "disabled");
+									if (!!addNewHashtagItem.attr("disabled")) {
+										inputTarget.popover({
+											title: TAPi18n.__("view.hashtag_view.hashtag_input.already_exists"),
+											trigger: 'manual',
+											placement: 'bottom'
+										});
+										inputTarget.popover("show");
+									}
 								}
 							}
 						},
@@ -104,8 +117,17 @@ Template.home.events({
 								originalHashtag = hashtagLib.findOriginalHashtag(inputHashtag);
 								if (doc.sessionStatus === 2) {
 									joinSessionItem.removeAttr("disabled");
+									inputTarget.popover("destroy");
 								} else {
 									joinSessionItem.attr("disabled", "disabled");
+									if (!!addNewHashtagItem.attr("disabled")) {
+										inputTarget.popover({
+											title: TAPi18n.__("view.hashtag_view.hashtag_input.already_exists"),
+											trigger: 'manual',
+											placement: 'bottom'
+										});
+										inputTarget.popover("show");
+									}
 								}
 							}
 						}
@@ -140,14 +162,6 @@ Template.home.events({
 				Session.set("isEditingQuiz", false);
 				addNewHashtagItem.attr("disabled", "disabled");
 			}
-		}
-		if (!!joinSessionItem.attr("disabled") && !!addNewHashtagItem.attr("disabled")) {
-			inputTarget.popover({
-				title: TAPi18n.__("view.hashtag_view.hashtag_input.already_exists"),
-				trigger: 'manual',
-				placement: 'bottom'
-			});
-			inputTarget.popover("show");
 		}
 	},
 	"click #addNewHashtag": function () {

@@ -111,7 +111,7 @@ code {
 }
 /* line 59, /Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 .markdown-content p {
-  margin: 0 0 1.5em;
+  margin: 0;
 }
 /* line 60, /Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 .markdown-content p .left {
@@ -284,4 +284,25 @@ table tr:nth-child(even) {
 table {
   display: table !important;
   overflow: hidden !important;
+}
+
+
+#markdownPreviewWrapper,
+.markdown-content {
+  p {
+    margin: 0;
+
+    img:not(.emojiImage) {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  .emojiWrapper {
+    height: 30px;
+
+    img {
+      height: inherit;
+    }
+  }
 }

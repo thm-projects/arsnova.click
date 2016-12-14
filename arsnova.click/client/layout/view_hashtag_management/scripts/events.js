@@ -28,22 +28,22 @@ Template.hashtagManagement.events({
 		lib.addHashtag(Session.get("questionGroup"));
 	},
 	"click .js-delete": function (event) {
-		const id = $(event.currentTarget).parents(".hashtagManagementRow").attr("id");
+		const parent = $(event.currentTarget).parents(".hashtagManagementRow");
 
 		new Splashscreen({
 			autostart: true,
 			templateName: "deleteConfirmationSplashscreen",
 			closeOnButton: "#closeDialogButton, #deleteSessionButton, .splashscreen-container-close",
 			onRendered: function (instance) {
-				instance.templateSelector.find("#session_name").text(id);
+				instance.templateSelector.find("#session_name").text(parent.attr("id"));
 
 				instance.templateSelector.find("#deleteSessionButton").on('click', function () {
-					localData.deleteHashtag(id);
+					localData.deleteHashtag(parent.attr("id"));
 					Meteor.call('Main.deleteEverything', {
-						hashtag: id
+						hashtag: parent.attr("id")
 					});
-					$('#' + id).prev("hr").remove();
-					$('#' + id).remove();
+					$(parent).prev("hr").remove();
+					$(parent).remove();
 				});
 			}
 		});

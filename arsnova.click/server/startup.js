@@ -32,53 +32,61 @@ import process from 'process';
 
 if (Meteor.isServer) {
 	Meteor.startup(function () {
-		console.log("server startup: Running server startup...");
-		console.log("server startup: create htmlAttributeHook...");
+		if (Meteor.settings.serverStartup.verbose) {
+			console.log("server startup: Running server startup...");
+			console.log("server startup: create htmlAttributeHook...");
+		}
 		WebApp.addHtmlAttributeHook(function () {
 			return {"lang": "de"};
 		});
-		console.log("server startup: htmlAttributeHook created successfully");
+		if (Meteor.settings.serverStartup.verbose) {
+			console.log("server startup: htmlAttributeHook created successfully");
+		}
 		if (HashtagsCollection && !HashtagsCollection.findOne()) {
 			// block this hash / pk -> do not use and merge to production server!
-			var blockedHashtag1 = {
+			const blockedHashtag1 = {
 				hashtag: "hashtags",
-				privateKey: new Mongo.ObjectID()._str,
-				sessionStatus: 0,
-				lastConnection: (new Date()).getTime()
+				privateKey: new Mongo.ObjectID()._str
 			};
-			var blockedHashtag2 = {
+			const blockedHashtag2 = {
 				hashtag: "privateKey",
-				privateKey: new Mongo.ObjectID()._str,
-				sessionStatus: 0,
-				lastConnection: (new Date()).getTime()
+				privateKey: new Mongo.ObjectID()._str
 			};
-			var blockedHashtag3 = {
+			const blockedHashtag3 = {
 				hashtag: "ImportFromARSnova",
-				privateKey: new Mongo.ObjectID()._str,
-				sessionStatus: 0,
-				lastConnection: (new Date()).getTime()
+				privateKey: new Mongo.ObjectID()._str
 			};
-			console.log("server startup: inserting blocking hashtags...");
+			if (Meteor.settings.serverStartup.verbose) {
+				console.log("server startup: inserting blocking hashtags...");
+			}
 			HashtagsCollection.insert(blockedHashtag1);
 			HashtagsCollection.insert(blockedHashtag2);
 			HashtagsCollection.insert(blockedHashtag3);
 
-			console.log("server startup: inserted blocking hashtags successfully");
+			if (Meteor.settings.serverStartup.verbose) {
+				console.log("server startup: inserted blocking hashtags successfully");
+			}
 		}
-		console.log("server startup: inserting banned nicknames...");
+		if (Meteor.settings.serverStartup.verbose) {
+			console.log("server startup: inserting banned nicknames...");
+		}
 		if (BannedNicksCollection && !BannedNicksCollection.findOne()) {
 			forbiddenNicks.forEach(function (item) {
 				BannedNicksCollection.insert({userNick: item});
 			});
 		}
-		console.log("server startup: inserted banned nicknames successfully");
-		console.log("server startup: inserting nick categories...");
+		if (Meteor.settings.serverStartup.verbose) {
+			console.log("server startup: inserted banned nicknames successfully");
+			console.log("server startup: inserting nick categories...");
+		}
 		nickCategories.forEach(function (item) {
 			if (!NicknameCategoriesCollection.findOne({nick: item.nick})) {
 				NicknameCategoriesCollection.insert({nick: item.nick, nickCategory: item.nickCategory, insertDate: new Date(), lastUsedDate: new Date()});
 			}
 		});
-		console.log("server startup: manipulating nicknames on selected nickname categories...");
+		if (Meteor.settings.serverStartup.verbose) {
+			console.log("server startup: manipulating nicknames on selected nickname categories...");
+		}
 		NicknameCategoriesCollection.find().fetch().forEach(function (item) {
 			let foundItem = false;
 			for (let i = 0; i < nickCategories.length; i++) {
@@ -91,11 +99,15 @@ if (Meteor.isServer) {
 				NicknameCategoriesCollection.remove({nick: item.nick});
 			}
 		});
-		console.log("server startup: inserted nick categories successfully");
-		console.log("server startup: removing old connection status documents");
+		if (Meteor.settings.serverStartup.verbose) {
+			console.log("server startup: inserted nick categories successfully");
+			console.log("server startup: removing old connection status documents");
+		}
 		ConnectionStatusCollection.remove({});
-		console.log("server startup: removed old connection status documents successfully");
-		console.log("server startup: generating preview images of all themes in all languages");
+		if (Meteor.settings.serverStartup.verbose) {
+			console.log("server startup: removed old connection status documents successfully");
+			console.log("server startup: generating preview images of all themes in all languages");
+		}
 		const spawn = childProcess.spawn,
 			languages = TAPi18n.getLanguages(),
 			params = [process.cwd() + '/assets/app/phantomDriver.js'];
@@ -108,13 +120,19 @@ if (Meteor.isServer) {
 		});
 		const command = spawn(phantomjs.path, params);
 		command.stdout.on("data", function (data) {
-			console.log("phantomjs (stdout):", data.toString());
+			if (Meteor.settings.serverStartup.verbose) {
+				console.log("phantomjs (stdout):", data.toString());
+			}
 		});
 		command.stderr.on("data", function (data) {
-			console.log("phantomjs (stderr):", data.toString());
+			if (Meteor.settings.serverStartup.verbose) {
+				console.log("phantomjs (stderr):", data.toString());
+			}
 		});
 		command.on('exit', function () {
-			console.log("server startup: all preview images have been generated");
+			if (Meteor.settings.serverStartup.verbose) {
+				console.log("server startup: all preview images have been generated");
+			}
 		});
 		console.log("server startup: Server startup successful.");
 	});

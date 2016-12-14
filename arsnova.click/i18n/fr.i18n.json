@@ -7,6 +7,9 @@
     "save": "Enregistrer",
     "abort": "Annuler",
     "close_window": "Fermer la fenêtre",
+    "aria_description": {
+      "arsnova_slogan": "Application quiz pour tout/tous"
+    },
     "cookie_consent": {
       "message": "arsnova.click est une application Web qui utilise des cookies pour vous assurer d'obtenir la meilleure expérience.",
       "dismiss": "Je l'ai!",
@@ -38,7 +41,8 @@
         "sound": "Son",
         "qr_code": "QR",
         "nicknames": "Pseudos",
-        "edit_quiz": "Modifier"
+        "edit_quiz": "Modifier",
+        "remove": "Retirer"
       },
       "about": {
         "title": "À propos de l'application quiz",
@@ -181,6 +185,9 @@
           "slow": "lent",
           "ok": "bien"
         }
+      },
+      "aria_description": {
+        "logo-header-chars": "arsnova.click"
       }
     }
   },
@@ -190,6 +197,31 @@
       "answeroptiontext_placeholder": "Option de réponse",
       "correct": "Vrai",
       "wrong": "Faux",
+      "preview": "Aperçu",
+      "show_answer_content_on_buttons": "Afficher le contenu de la réponse sur les boutons?",
+      "multiple_selection_survey": "Permettre la sélection de réponses multiples?",
+      "description": {
+        "default_answer_row": "Faites glisser ce bloc dans la liste des options de réponse pour en créer un nouveau.",
+        "added_answers": "Voici toutes les answeroptions déjà créées. Vous pouvez modifier l'ordre des réponses par glisser-déposer.",
+        "added_answer_short_text": "Chaque answeroption contient une lettre unique qui peut être affichée pour les participants du quiz.",
+        "added_answer_text": "Ici, vous pouvez saisir du texte pour la réponse. Markup comme Markdown et LaTeX est pris en charge.",
+        "added_answer_is_correct": "Ce bouton détermine si la réponse est marquée comme correcte ou incorrecte.",
+        "added_answer_remove": "Cliquer sur ce bouton supprime la réponse.",
+        "show_answer_content_on_buttons": "Les boutons de réponse pour les participants peuvent être étiquetés avec la lettre de la réponse ou le texte de la réponse complète. Notez toutefois que trop de texte dans la réponse peut être mal lisible en fonction de la taille de la fenêtre.",
+        "multiple_selection_survey": "Ici, vous pouvez définir si les participants doivent passer directement à l'évaluation après avoir cliqué sur une réponse de l'enquête ou si une sélection multiple doit être possible.",
+        "preview": "Ici, vous pouvez voir un aperçu du contenu de réponse entré sur la gauche.",
+        "range_area": "Ici vous pouvez spécifier la réponse correcte ainsi que les tolérances supérieure et inférieure. Veuillez noter que l'entrée doit être en nombres naturels.",
+        "min_range": "Ici, vous pouvez définir la valeur de tolérance inférieure.",
+        "correct_value": "Cette réponse est tout à fait correcte.",
+        "max_range": "Ici, vous pouvez définir la valeur de tolérance supérieure.",
+        "range_slider": "Avec ce curseur, vous pouvez modifier dynamiquement les tolérances supérieure et inférieure. La valeur correcte correspondra à la valeur moyenne.",
+        "free_text_question_text": "Ici vous pouvez entrer la bonne réponse. Les réponses entrées par les participants sont comparées à cette réponse selon la configuration.",
+        "config_case_sensitive": "Si cette option est activée, le cas de la réponse entrée doit correspondre à celui de la réponse de référence.",
+        "config_trim_whitespaces": "Spécifie si les espaces de la réponse saisie doivent être vérifiés.",
+        "config_use_keywords": "Cette option doit être activée, l'ordre des mots de la réponse introduite doit correspondre à la valeur de référence. Si cette option est désactivée, il est malheureusement impossible de vérifier les espaces et les signes de ponctuation.",
+        "config_use_punctuation": "Cette option détermine si les signes de ponctuation de la valeur saisie doivent être vérifiés.",
+        "check_answer": "Ici vous pouvez tester les réponses possibles des participants par rapport à votre valeur de référence et la configuration actuelle."
+      },
       "ranged_question": {
         "title": "Intervalle des réponses correctes",
         "correct_value": "Valeur correcte",

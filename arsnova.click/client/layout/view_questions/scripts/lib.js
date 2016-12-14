@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Session} from 'meteor/session';
-import {Router} from 'meteor/iron:router';
 import * as localData from '/lib/local_storage.js';
 
 export function addQuestion(index) {
@@ -166,6 +165,12 @@ export function parseMathjaxBlock(result, i) {
 	result.splice(i, 0, $("<div/>").append((tmpNewItem + "$$")).prop("outerHTML"));
 }
 
+export function parseStrikeThroughBlock(result, i) {
+	result[i].match(/~~[^~{2}]*~~/gi).forEach(function (element) {
+		result[i] = result[i].replace(element, "<del>" + element.replace(/~~/g, "") + "</del>");
+	});
+}
+
 export function parseGithubFlavoredMarkdown(result) {
 	for (let i = 0; i < result.length; i++) {
 		switch (true) {
@@ -193,9 +198,7 @@ export function parseGithubFlavoredMarkdown(result) {
 				parseCommentBlock(result, i);
 				break;
 			case /~~.*~~/.test(result[i]):
-				result[i].match(/~~[^~{2}]*~~/gi).forEach(function (element) {
-					result[i] = result[i].replace(element, "<del>" + element.replace(/~~/g, "") + "</del>");
-				});
+				parseStrikeThroughBlock(result, i);
 				break;
 			case !/(^!)?\[.*\]\(.*\)/.test(result[i]) && /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(result[i]) && !(/youtube/.test(result[i]) || /youtu.be/.test(result[i]) || /vimeo/.test(result[i])):
 				parseLinkBlock(result, i);

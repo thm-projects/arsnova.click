@@ -21,7 +21,6 @@ import {Blaze} from 'meteor/blaze';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {forceFeedback} from '/client/layout/global/scripts/lib.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
@@ -212,7 +211,6 @@ export class ErrorSplashscreen extends Splashscreen {
 
 export function showReadingConfirmationSplashscreen(index) {
 	Session.set("showingReadingConfirmation", true);
-	var questionDoc = QuestionGroupCollection.findOne();
 	new Splashscreen({
 		autostart: true,
 		templateName: 'readingConfirmedSplashscreen',
@@ -311,7 +309,7 @@ export const parseMarkdown = {
 		result.embedTag = '<embed width="100%" height="200px" src="' + result.origin + result.videoId + '?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3" type="text/html" allowscriptaccess="always" allowfullscreen="true" />';
 		return result;
 	}
-}
+};
 
 export function showFullscreenPicture(event) {
 	var pictureElement = event.target;

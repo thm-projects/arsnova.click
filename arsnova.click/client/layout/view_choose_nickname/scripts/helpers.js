@@ -50,7 +50,7 @@ Template.nickStandardFooter.helpers({
 		const footerConfig = {
 			backButton: {
 				id: "backButton"
-			},
+			}
 		};
 		if (configDoc.nicks.restrictToCASLogin) {
 			footerConfig.forwardButton = {

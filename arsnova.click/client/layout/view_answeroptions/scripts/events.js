@@ -49,6 +49,9 @@ Template.defaultAnswerOptionTemplate.events({
 		questionItem.getQuestionList()[Router.current().params.questionIndex].setDisplayAnswerText(checked);
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
+		Meteor.defer(function () {
+			lib.answerOptionTracker.changed();
+		});
 	},
 	"change #config_multipleSelectionSurvey_switch": function (event) {
 		const checked = $(event.target).prop('checked');
@@ -71,6 +74,7 @@ Template.defaultAnswerOptionTemplate.events({
 		lib.parseSingleAnswerOptionInput(Router.current().params.questionIndex, plainId);
 		Meteor.defer(function () {
 			$("#" + id).setCursorPosition(cursorPosition).focus();
+			lib.answerOptionTracker.changed();
 		});
 	}
 });

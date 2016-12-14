@@ -67,7 +67,7 @@
                             <div id="buttonContainer">
                                 {{#each getAnswerOptions}}
                                     <div class="buttonWrapper">
-                                        <button id="{{this.getAnswerOptionNumber}}"
+                                        <button id="{{@index}}"
                                                 class="sendResponse btn btn-answerOption btn-answerFont button-purple tabbable quickfit">
                                             {{#if getDisplayAnswerText}}
                                                 {{#if isVideoAnswerText this}}
@@ -87,7 +87,7 @@
                                                     <p>{{#mathjax}}{{this}}{{/mathjax}}</p>
                                                 {{/if}}
                                             {{else}}
-                                                <p>{{answerOptionLetter this}}</p>
+                                                <p>{{answerOptionLetter @index}}</p>
                                             {{/if}}
                                         </button>
                                     </div>

@@ -20,10 +20,8 @@ import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
 import {Router} from 'meteor/iron:router';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 
 export let countdown = null;
-export let currentButton = 0;
 export let countdownRunning = false;
 
 export const votingViewTracker = new Tracker.Dependency();
@@ -44,42 +42,12 @@ export function countdownFinish() {
 export function startCountdown(index) {
 	Meteor.call("Main.calculateRemainingCountdown", Session.get("questionGroup").getHashtag(), index, function (error, response) {
 		Session.set("sessionCountDown", response);
-		countdown = new ReactiveCountdown(response, {
-			tick: function () {
-				var buttonsCount = $('.answer-row #buttonContainer').children().length;
-				var lastButton;
-				var secondsUntilNextRound = 3;
-
-				if (currentButton <= 0) {
-					lastButton = buttonsCount - 1;
-				} else {
-					lastButton = currentButton - 1;
-				}
-
-				/* skip the selected answer options */
-				while ($('#' + currentButton).hasClass('answer-selected')) {
-					currentButton++;
-					if (currentButton >= buttonsCount) {
-						currentButton = 0 - secondsUntilNextRound;
-					}
-				}
-
-				$('#' + lastButton).removeClass('button-green-transition').addClass('button-purple-transition');
-				$('#' + currentButton).addClass('button-green-transition').removeClass('button-purple-transition');
-
-				currentButton++;
-
-				if (currentButton >= buttonsCount) {
-					currentButton = 0 - secondsUntilNextRound;
-				}
-			},
-			completed: function () {
-				if (countdown && countdown.get() === 0) {
-					countdownFinish();
-				}
+		countdown = new ReactiveCountdown(response);
+		countdown.start(function () {
+			if (countdown && countdown.get() === 0) {
+				countdownFinish();
 			}
 		});
-		countdown.start();
 		Session.set("countdownInitialized", true);
 	});
 }
@@ -119,8 +87,58 @@ export function makeAndSendFreeTextResponse(value) {
 	});
 }
 
+export function quickfitText(reset) {
+	const quickFitClass = "quickfit";
+	const quickFitSetClass = "quickfitSet";
+
+	if (reset) {
+		$("." + quickFitSetClass).removeClass(quickFitSetClass);
+	}
+	const setMaxTextSize = function (item) {
+		let fontSize = parseInt($(item).css("fontSize").replace("px", ""));
+		let hasDummyText = false;
+		if ($(item).find("p").length === 0) {
+			$(item).append($("<p></p>").text($(item).text()));
+			hasDummyText = true;
+		}
+		const contentItem = $(item).find("p").first();
+		contentItem.css({"height": "auto"});
+		if (contentItem.find("iframe").length > 0 && contentItem.find("p").length !== 0) {
+			contentItem.css("height", "100%");
+		}
+		contentItem.css("display", "inline-flex");
+
+		if (contentItem.width() < $(item).width() && contentItem.height() < $(item).height()) {
+			do {
+				$(item).css("font-size", fontSize);
+			} while (++fontSize < 100 && contentItem.width() < $(item).width() && contentItem.height() < $(item).height());
+			fontSize -= 2;
+		} else {
+			do {
+				$(item).css("font-size", fontSize);
+			} while (--fontSize > 3 && (contentItem.width() > $(item).width() || contentItem.height() > $(item).height()));
+		}
+
+		$(item).css("font-size", fontSize);
+		$(item).addClass(quickFitSetClass);
+		contentItem.css({"display": "block"});
+		if (hasDummyText) {
+			contentItem.remove();
+		}
+	};
+	$("." + quickFitClass + ":not(." + quickFitSetClass + ")").each(function (index, item) {
+		if ($(item).find("object").length === 0) {
+			setMaxTextSize($(item));
+		}
+	});
+}
+$(window).on("resize orientationchange", function () {
+	quickfitText(true);
+});
+
 function calculateAnswerRowHeight() {
-	return $(".contentPosition").height() - $('.voting-helper-buttons').height() - parseInt($('.answer-row').css("margin-top").replace("px",""));
+	let contentHeight = ($("#markdownPreviewWrapper").height() - $("h2.text-center").outerHeight(true)) || $(".contentPosition").height();
+	return contentHeight - $('.voting-helper-buttons').height() - parseInt($('.answer-row').css("margin-top"));
 }
 
 export function formatAnswerButtons() {
@@ -132,29 +150,30 @@ export function formatAnswerButtons() {
 	const contentHeight = calculateAnswerRowHeight();
 	answerRow.css({height: contentHeight + 'px'});
 	const contentWidth = answerRow.outerWidth();
-	const containerWidth = $(window).outerWidth();
-	if (containerWidth <= 768) {
+	if ($(window).outerWidth() <= 768) {
 		buttonElements.find("button").css({margin: "5px 0"});
 		buttonElements.addClass("col-xs-6");
 	} else {
 		let scaleBaseWidth = 100;
 		let scaleBaseHeight = 100;
-		const answerOptionElements = AnswerOptionCollection.find({hashtag: Router.current().params.quizName, questionIndex: EventManagerCollection.findOne().questionIndex}).count();
+		const answerOptionElements = $('.btn-answerOption').length;
 		const calculateButtons = function (width, height) {
-			var maxButtonsPerRow = Math.floor(contentWidth / width);
-			let maxRows = Math.floor((contentHeight) / height);
-			maxRows = Math.floor((contentHeight - maxRows * 10) / height);
+			let maxButtonsPerRow = Math.floor(contentWidth / width);
+			const maxRows = Math.floor((contentHeight - (Math.floor(contentHeight / height)) * 10) / height);
 			if (answerOptionElements % 2 === 0 && maxButtonsPerRow % 2 !== 0) {
 				maxButtonsPerRow--;
 			}
 			return {maxButtons: maxButtonsPerRow * maxRows, maxButtonsPerRow: maxButtonsPerRow, maxRows: maxRows};
 		};
 		let maxButtons = calculateButtons(scaleBaseWidth, scaleBaseHeight).maxButtons;
-		while (calculateButtons(scaleBaseWidth + 1, scaleBaseHeight + 1).maxButtons > answerOptionElements) {
+		while (calculateButtons(scaleBaseWidth + 1, scaleBaseHeight + 1).maxButtons >= answerOptionElements) {
 			maxButtons = calculateButtons(++scaleBaseWidth, ++scaleBaseHeight).maxButtons;
 		}
 		const calculateResult = calculateButtons(scaleBaseWidth, scaleBaseHeight);
 		const strechedWidth = ((contentWidth / calculateResult.maxButtonsPerRow) - 10);
+		if ($("object").length > 0) {
+			scaleBaseHeight += 30;
+		}
 		buttonElements.css({float: "left", margin: "5px", width: strechedWidth + "px", height: scaleBaseHeight});
 		buttonContainer.css({width: strechedWidth * calculateResult.maxButtonsPerRow + (calculateResult.maxButtonsPerRow * 10)});
 	}

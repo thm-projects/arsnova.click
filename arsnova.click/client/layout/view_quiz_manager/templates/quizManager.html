@@ -1,0 +1,25 @@
+<template name="quizManager">
+    <div class="row" id="quizManager">
+        <div class="col-xs-12">
+            {{> quizSummary item="header"}}
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <h2 class="text-light">{{_ "view.quiz_manager.available_questions_title" }}</h2>
+            <ul id="available_questions_wrapper" data-intro="{{_ "view.quiz_manager.description.available_questions" }}">
+                {{#each questionTypes}}
+                    <div>
+                        <li id="{{this.id}}_draggable" class="questionElementWrapper draggable questionType_{{this.id}}" data-intro="{{_ (getDescriptionForQuestionType this.id)}}" >{{_ this.translationName}}</li>
+                    </div>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="text-light">{{_ "view.quiz_manager.added_questions_title" }}</h2>
+                    <ul id="added_questions_wrapper" data-intro="{{_ "view.quiz_manager.description.added_questions" }}"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

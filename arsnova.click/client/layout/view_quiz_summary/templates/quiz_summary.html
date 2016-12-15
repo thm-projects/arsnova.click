@@ -1,18 +1,20 @@
 <template name="quizSummary">
     <div class="row">
         <div class="col-md-12">
-            <div class="quizSummary margin-title">
-                <p>{{_ "view.quiz_summary.quiz_name"}}: {{getSessionName}}</p>
-                <p>{{_ "view.quiz_summary.quiz_url"}}: {{getSessionUrl}}</p>
-                <p>{{_ "view.quiz_summary.question_amount"}}: {{getQuestionCount}}</p>
-                <p>{{_ "view.quiz_summary.validation_question_group"}}: <span class="{{#if isQuestionGroupValid}}success{{else}}failed{{/if}}">{{_ getQuestionGroupValidation}}</span></p>
-                <p>{{_ "view.quiz_summary.isRestrictingRudeNicks"}}: {{_ getIsRestrictingRudeNicks}}</p>
-                <p>{{_ "view.quiz_summary.isRestrictingToCAS"}}: {{_ getIsRestrictingToCAS}}</p>
-                <p>{{_ "view.quiz_summary.selected_nicks"}}: {{#if noSelectedNicks}}{{_ "view.quiz_summary.no_selected_nicks"}}{{else}}{{selectedNicksCount}} <span class="tabbable" id="showSelectedNicks">{{_ getShowSelectedNicksText}}</span>{{/if}}</p>
-                <p>{{selectedNicks}}</p>
-                <hr />
+            <div id="quizSummaryHeader" class="quizSummary margin-title" data-intro="{{#if showHeader}}{{_ "view.quiz_summary.description.header"}}{{/if}}">
+                {{#if showHeader}}
+                    <p>{{_ "view.quiz_summary.quiz_name"}}: {{getSessionName}}</p>
+                    <p id="quizSummarySessionUrl" data-intro="{{_ "view.quiz_summary.description.session_url"}}" >{{_ "view.quiz_summary.quiz_url"}}: <span id="sessionUrl">{{getSessionUrl}}</span></p>
+                    <p>{{_ "view.quiz_summary.question_amount"}}: {{getQuestionCount}}</p>
+                    <p id="quizSummaryQuestionGroupValidation" data-intro="{{_ "view.quiz_summary.description.question_group_validation"}}" >{{_ "view.quiz_summary.validation_question_group"}}: <span class="{{#if isQuestionGroupValid}}success{{else}}failed{{/if}}">{{_ getQuestionGroupValidation}}</span></p>
+                    <p>{{_ "view.quiz_summary.isRestrictingRudeNicks"}}: {{_ getIsRestrictingRudeNicks}}</p>
+                    <p id="quizSummaryRestrictToCas" data-intro="{{_ "view.quiz_summary.description.restrict_to_cas"}}" >{{_ "view.quiz_summary.isRestrictingToCAS"}}: {{_ getIsRestrictingToCAS}}</p>
+                    <p>{{_ "view.quiz_summary.selected_nicks"}}: {{#if noSelectedNicks}}{{_ "view.quiz_summary.no_selected_nicks"}}{{else}}{{selectedNicksCount}} <span class="tabbable" id="showSelectedNicks">{{_ getShowSelectedNicksText}}</span>{{/if}}</p>
+                    <p>{{selectedNicks}}</p>
+                    <hr />
+                {{/if}}
                 {{#each getQuestions}}
-                    <div class="questionItem row">
+                    <div id="quizSummaryQuestionItem" class="questionItem row" data-intro="{{_ "view.quiz_summary.description.question_item"}}">
                         <div class="col-xs-12">
                             <div class="question">
                                 <h4>{{_ "view.quiz_summary.question"}} {{getNormalizedIndex this.getQuestionIndex}}: </h4>
@@ -70,7 +72,7 @@
                             <div class="validation">
                                 <h4>{{_ "view.quiz_summary.validation"}}: <span class="{{#if this.isValid}}success{{else}}failed{{/if}}">{{_ (getValidationStatus this)}}</span></h4>
                                 {{#unless this.isValid}}
-                                    <ul>
+                                    <ul id="quizSummaryValidationErrors" data-intro="{{_ "view.quiz_summary.description.validation_errors"}}">
                                         {{#each getValidationErrors this}}
                                             <li>{{#unless isQuestionType this.occuredAt.type}}{{_ (getTranslationForType this.occuredAt.type)}} {{getNormalizedIndex this.occuredAt.id}}: {{/unless}}{{_ (getTranslationForReason this.reason)}}</li>
                                         {{/each}}

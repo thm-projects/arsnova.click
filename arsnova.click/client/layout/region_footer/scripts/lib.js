@@ -97,6 +97,12 @@ export const footerElemEditQuiz = {
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.edit_quiz"
 };
+export const footerElemRemove = {
+	id: "remove",
+	iconClass: "glyphicon glyphicon-trash",
+	textClass: "footerElementText",
+	textName: "region.footer.footer_bar.remove"
+};
 const footerElemShowMore = {
 	id: "show-more",
 	iconClass: "glyphicon glyphicon-menu-hamburger",

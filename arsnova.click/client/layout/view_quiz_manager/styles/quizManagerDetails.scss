@@ -1,0 +1,14 @@
+#quizManagerDetails {
+	.btn-group {
+		display: flex;
+		flex-direction: row;
+
+		.btn-group {
+			width: 100%;
+
+			button {
+				width: 100%;
+			}
+		}
+	}
+}

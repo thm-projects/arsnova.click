@@ -21,9 +21,8 @@ import {Blaze} from 'meteor/blaze';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import {TAPi18n} from 'meteor/tap:i18n';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {forceFeedback} from '/client/layout/global/scripts/lib.js';
+import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 
 export function closeSplashscreen() {
@@ -68,6 +67,7 @@ export class Splashscreen {
 		this.options = {
 			autostart: options.autostart || false,
 			templateName: options.templateName || "splashscreen",
+			dataContext: options.dataContext || {},
 			instanceId: options.instanceId || 0,
 			closeOnButton: options.closeOnButton || false,
 			onCreated: options.onCreated || undefined,
@@ -115,7 +115,7 @@ export class Splashscreen {
 			throw new Error('Invalid template name');
 		}
 
-		this.templateInstance = Blaze.render(Template[this.options.templateName], document.getElementById("theme-wrapper"));
+		this.templateInstance = Blaze.renderWithData(Template[this.options.templateName], this.options.dataContext, document.getElementById("theme-wrapper"));
 		$(this.templateInstance.firstNode()).addClass(this.options.templateName).attr("id", this.options.templateName + "_" + this.options.instanceId);
 		this.templateSelector = $(this.templateInstance.firstNode());
 
@@ -211,21 +211,14 @@ export class ErrorSplashscreen extends Splashscreen {
 
 export function showReadingConfirmationSplashscreen(index) {
 	Session.set("showingReadingConfirmation", true);
-	var questionDoc = QuestionGroupCollection.findOne();
 	new Splashscreen({
 		autostart: true,
 		templateName: 'readingConfirmedSplashscreen',
+		dataContext: {
+			questionIndex: index
+		},
 		closeOnButton: '#setReadConfirmed, .splashscreen-container-close',
 		onRendered: function (instance) {
-			var content = "";
-			if (questionDoc) {
-				mathjaxMarkdown.initializeMarkdownAndLatex();
-				var questionText = questionDoc.questionList[index].questionText;
-				content = mathjaxMarkdown.getContent(questionText);
-			}
-			instance.templateSelector.find('#questionContent').html(content);
-			mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#questionContent'));
-
 			if (localData.containsHashtag(Router.current().params.quizName)) {
 				instance.templateSelector.find('#setReadConfirmed').text(TAPi18n.__("global.close_window"));
 			} else {
@@ -252,6 +245,69 @@ export function showReadingConfirmationSplashscreen(index) {
 export const isMobileDevice = {
 	isMobileDevice: function () {
 		return $(window).width() < 1024;
+	}
+};
+
+export const parseMarkdown = {
+	splitQuestionTextOnNewLine: function () {
+		const instance = Template.instance();
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		const result = Session.get("questionGroup").getQuestionList()[parseInt(instance.data.questionIndex)].getQuestionText().split("\n");
+		questionLib.parseGithubFlavoredMarkdown(result);
+		return result;
+	},
+	answerOptionLetter: function (number) {
+		return String.fromCharCode(number + 65);
+	},
+	isFreeTextQuestion: function () {
+		const instance = Template.instance();
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList()[parseInt(instance.data.questionIndex)].typeName() === "FreeTextQuestion";
+	},
+	isRangedQuestion: function () {
+		const instance = Template.instance();
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList()[parseInt(instance.data.questionIndex)].typeName() === "RangedQuestion";
+	},
+	getAnswerOptions: function () {
+		const instance = Template.instance();
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		const question = Session.get("questionGroup").getQuestionList()[parseInt(instance.data.questionIndex)];
+		if (question.typeName() === "RangedQuestion") {
+			return [question.getMinRange(), question.getCorrectValue(), question.getMaxRange()];
+		}
+		const result = question.getAnswerOptionList().map(function (elem) {
+			return elem.getAnswerText();
+		});
+		questionLib.parseGithubFlavoredMarkdown(result);
+		return result;
+	},
+	isVideoQuestionText: function (questionText) {
+		return !/(^!)?\[.*\]\(.*\)/.test(questionText) && /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(questionText) && (/youtube/.test(questionText) || /youtu.be/.test(questionText) || /vimeo/.test(questionText));
+	},
+	getVideoData: function (questionText) {
+		const result = {};
+		if (/youtube/.test(questionText)) {
+			result.origin  = "https://www.youtube.com/embed/";
+			result.videoId = questionText.substr(questionText.lastIndexOf("=") + 1, questionText.length);
+		} else if (/youtu.be/.test(questionText)) {
+			result.origin  = "https://www.youtube.com/embed/";
+			result.videoId = questionText.substr(questionText.lastIndexOf("/") + 1, questionText.length);
+		} else if (/vimeo/.test(questionText)) {
+			result.origin = "https://player.vimeo.com/video/";
+			result.videoId = questionText.substr(questionText.lastIndexOf("/") + 1, questionText.length);
+		}
+		result.videoId = result.videoId.replace(/script/g, "");
+		result.embedTag = '<embed width="100%" height="200px" src="' + result.origin + result.videoId + '?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3" type="text/html" allowscriptaccess="always" allowfullscreen="true" />';
+		return result;
 	}
 };
 

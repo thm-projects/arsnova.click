@@ -18,16 +18,33 @@
 @import "../../../layout/global/styles/appearance";
 
 #votingView {
-	.btn-answerFont {
-		font-size: 4em;
-	}
-
 	.answer-row {
 		margin-top: 10px;
 	}
 
 	#buttonContainer {
 		margin: 0 auto;
+	}
+
+	.sendResponse {
+		font-size: 1px;
+		position: relative;
+		object {
+			width: calc(100% - 10px);
+			height: calc(100% - 60px);
+			top: 5px;
+			position: absolute;
+			left: 5px;
+		}
+		p {
+			margin: 0;
+		}
+		&.correctAnswer {
+			background-color: green !important;
+		}
+		&.wrongAnswer {
+			background-color: red !important;
+		}
 	}
 
 	.btn-answerOption {

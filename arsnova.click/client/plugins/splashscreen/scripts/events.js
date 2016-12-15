@@ -28,14 +28,7 @@ Template.questionAndAnswerSplashscreen.events({
 	}
 });
 
-
 Template.readingConfirmedSplashscreen.events({
-	"click .resizeableImage": function (event) {
-		showFullscreenPicture(event);
-	}
-});
-
-Template.questionPreviewSplashscreen.events({
 	"click .resizeableImage": function (event) {
 		showFullscreenPicture(event);
 	}

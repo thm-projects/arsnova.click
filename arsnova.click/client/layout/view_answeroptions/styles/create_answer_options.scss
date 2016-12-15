@@ -33,18 +33,17 @@
 		border-top-right-radius: $corner-radius;
 	}
 
-	.bootstrap-switch {
-		display: table-cell;
-		padding-right: 10px;
-		border-bottom-right-radius: $corner-radius;
-		border-top-right-radius: $corner-radius;
+	.answerOptionConfig {
+		margin-top: 5px;
+		display: table;
 
-		.bootstrap-switch-container {
-			margin-right: -10px;
-		}
-
-		.hiddenImportant {
-			display: none !important;
+		#showAnswerContentOnButtons,
+		#multipleSelectionSurvey {
+			height: 35px;
+			margin: 0;
+			width: calc(100% - 100px);
+			display: table-cell;
+			vertical-align: middle;
 		}
 	}
 }
@@ -59,6 +58,105 @@
 			text-align: center;
 			width: 100%;
 			border-radius: $corner-radius
+		}
+	}
+}
+
+#editAnsweroptionText {
+	.answerOptionElementWrapper {
+		display: flex;
+		border-radius: $corner-radius;
+		background-color: #ffd700;
+		margin: 10px 0;
+		position: relative;
+		font-size: 1.3em;
+		overflow-y: hidden;
+		overflow-x: auto;
+
+		.answer_row_short_text {
+			width: 80px;
+			line-height: 50px;
+			text-align: center;
+			font-weight: bold;
+			font-size: 3em;
+			height: 50px;
+		}
+		.answer_row_text {
+			margin-right: 10px;
+			flex-grow: 1;
+			background-color: transparent;
+			border: none;
+			width: 100%;
+			text-overflow: initial;
+		}
+		.toggle {
+			margin-top: 10px;
+			margin-right: 10px;
+			min-width: 80px !important;
+		}
+		.removeAnsweroption {
+			padding-top: 10px;
+			margin-right: 10px;
+			font-size: 1.5em;
+			cursor: pointer;
+			height: 40px;
+		}
+	}
+
+	#default_answer_row,
+	.answerOptionElementWrapper.ui-draggable-dragging {
+		cursor: move !important;
+
+		.answer_row_default_text {
+			width: calc(100% - 80px);
+			margin: 0;
+			text-align: center;
+			line-height: 50px;
+		}
+		&:before,
+		&:after {
+			content: "\25BD";
+			width: 80px;
+			line-height: 50px;
+			text-align: center;
+			font-weight: bold;
+			font-size: 2.5em;
+			height: 50px;
+		}
+	}
+	.answerOptionElementWrapper.ui-draggable-dragging {
+		width: calc(100% - 30px);
+	}
+}
+
+#previewAnsweroptionContentWrapper {
+	overflow: hidden;
+	resize: none;
+	position: relative;
+
+	#previewAnsweroptionImage {
+		border: 1px solid white;
+		border-radius: $corner-radius;
+	}
+
+	#markdownPreviewWrapper {
+		position: absolute;
+		top: 90px;
+		width: 365px;
+		height: 540px;
+		overflow-y: auto;
+		overflow-x: hidden;
+		color: white;
+		word-wrap: break-word;
+
+		.full-screen-content {
+			width: 100%;
+			margin-left: 0;
+		}
+
+		p {
+			color: white;
+			margin: 0;
 		}
 	}
 }

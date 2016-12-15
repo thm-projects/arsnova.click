@@ -9,6 +9,7 @@ const timer = Symbol("timer");
 const startTime = Symbol("startTime");
 const questionIndex = Symbol("questionIndex");
 const answerOptionList = Symbol("answerOptionList");
+const displayAnswerText = Symbol("displayAnswerText");
 
 export class AbstractQuestion {
 
@@ -31,6 +32,7 @@ export class AbstractQuestion {
 		this[timer] = options.timer;
 		this[startTime] = options.startTime;
 		this[questionIndex] = options.questionIndex;
+		this[displayAnswerText] = typeof options.displayAnswerText === "undefined" ? false : options.displayAnswerText;
 		this[answerOptionList] = [];
 	}
 
@@ -142,9 +144,14 @@ export class AbstractQuestion {
 			throw new Error("Invalid argument for Question.addAnswerOption");
 		}
 		if (typeof index === "undefined" || index < 0 || index >= this.getAnswerOptionList().length) {
+			answerOption.setAnswerOptionNumber(this.getAnswerOptionList().length);
 			this[answerOptionList].push(answerOption);
 		} else {
-			this[answerOptionList][index] = answerOption;
+			answerOption.setAnswerOptionNumber(index);
+			this[answerOptionList].splice(index, 0, answerOption);
+			for (let i = index + 1; i < this.getAnswerOptionList().length; i++) {
+				this.getAnswerOptionList()[i].setAnswerOptionNumber(i);
+			}
 		}
 	}
 
@@ -158,6 +165,9 @@ export class AbstractQuestion {
 			throw new Error("Invalid argument for Question.removeAnswerOption");
 		}
 		this[answerOptionList].splice(index, 1);
+		for (let i = index; i < this.getAnswerOptionList().length; i++) {
+			this.getAnswerOptionList()[i].setAnswerOptionNumber(i);
+		}
 	}
 
 	/**
@@ -189,6 +199,7 @@ export class AbstractQuestion {
 			timer: this.getTimer(),
 			startTime: this.getStartTime(),
 			questionIndex: this.getQuestionIndex(),
+			displayAnswerText: this.getDisplayAnswerText(),
 			answerOptionList: answerOptionListSerialized
 		};
 	}
@@ -211,8 +222,16 @@ export class AbstractQuestion {
 		return answerOptionListValid && questionTextWithoutMarkdownChars[0] > 4 && questionTextWithoutMarkdownChars[0] < 50001 && this.getTimer() > 9 && this.getTimer() < 301;
 	}
 
+	getDisplayAnswerText () {
+		return this[displayAnswerText];
+	}
+
+	setDisplayAnswerText (newVal) {
+		this[displayAnswerText] = newVal;
+	}
+
 	/**
-	 * @returns {string} The question text without the markdown characters
+	 * @returns {String} The question text without the markdown characters
 	 */
 	getQuestionTextWithoutMarkdownChars () {
 		return this.getQuestionText().split().map(function (currentValue) {
@@ -244,7 +263,7 @@ export class AbstractQuestion {
 		const questionTextWithoutMarkdownChars = this.getQuestionTextWithoutMarkdownChars();
 		if (questionTextWithoutMarkdownChars[0] < 5) {
 			result.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "question_text_too_small"});
-		} else if (questionTextWithoutMarkdownChars[0] > 1000) {
+		} else if (questionTextWithoutMarkdownChars[0] > 50000) {
 			result.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "question_text_too_long"});
 		}
 		if (this.getTimer() < 6) {
@@ -282,6 +301,7 @@ export class AbstractQuestion {
 			if (question.getTimer() !== this.getTimer() ||
 				question.getStartTime() !== this.getStartTime() ||
 				question.getHashtag() !== this.getHashtag() ||
+				question.getDisplayAnswerText() !== this.getDisplayAnswerText() ||
 				question.getQuestionText() !== this.getQuestionText()) {
 				isEqual = false;
 			}

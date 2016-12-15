@@ -14,45 +14,49 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
-
 @import "../../../layout/global/styles/appearance";
 
 .freeTextAnswerOptions {
 
-  .distance-top {
-	margin-bottom: 20px;
-  }
-
-  .configOptionContainer {
-	display: table;
-	height: 50px;
-
-	p {
-	  margin: 0;
-	  vertical-align: middle;
-	  display: table-cell;
+	.distance-top {
+		margin-bottom: 20px;
 	}
-	.bootstrap-switch {
-	  line-height: 50px;
-	  border-color: transparent; /* Ugly hack to prevent a border from showing up */
-	  outline: 0;
-	  box-shadow: none;
-	  float: right;
 
-	  .bootstrap-switch-container {
-		display: inline-flex;
-	  }
-	  .bootstrap-switch-label {
-		margin-top: 0;
-	  }
+	.configOptionContainer {
+		margin-top: 5px;
+		display: table;
+
+		.checkboxLabel {
+			height: 35px;
+			margin: 0;
+			width: calc(100% - 100px);
+			display: table-cell;
+			vertical-align: middle;
+		}
 	}
-  }
 
-  textarea {
-	border-radius: $corner-radius;
-	width: 100%;
-  }
+	textarea {
+		border-radius: $corner-radius;
+		width: 100%;
+	}
 	.invalidQuestion {
 		border: 2px solid red;
+	}
+	.padding-top {
+		padding-top: 20px;
+	}
+	.failed {
+		color: red;
+		background: white;
+		border-radius: $corner-radius;
+		padding: 5px;
+		opacity: .7;
+	}
+	.success {
+		color: green;
+		background: white;
+		border-radius: $corner-radius;
+		padding: 5px;
+		opacity: .7;
 	}
 }

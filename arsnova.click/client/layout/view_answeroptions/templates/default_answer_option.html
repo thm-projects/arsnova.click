@@ -17,48 +17,62 @@
 
 <template name="defaultAnswerOptionTemplate">
     <div class="row full-screen-content">
-        <div class="col-md-12">
-            {{#unless isSpecialSingleChoiceQuestion}}
-                <div class="row row-landingpage-buttons">
-                    <div class="col-md-12 text-center">
-                        <button type="button" id="addAnswerOption"
-                                class="button btn-add-remove-ans_opt round-corners button-shadow button-success tabbable">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                        <button type="button" id="deleteAnswerOption"
-                                class="button btn-add-remove-ans_opt round-corners button-shadow button-warning {{showDeleteButtonOnStart}} tabbable">
-                            <span class="glyphicon glyphicon-minus"></span>
-                        </button>
+        <div id="editAnsweroptionText" class="col-xs-12 col-lg-6">
+            <div class="row answer-options distance-top">
+                <div class="col-xs-12">
+                    {{#if canAddAnsweroption}}
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div id="default_answer_row" class="answerOptionElementWrapper draggable" data-intro="{{_ "view.answeroptions.description.default_answer_row"}}" data-step="2" >
+                                    <p class="answer_row_default_text">{{_ "view.answeroptions.new_answer"}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {{/if}}
+                    <div class="row">
+                        <div id="answerOptionWrapper" class="col-md-12" data-intro="{{_ "view.answeroptions.description.added_answers"}}" data-step="1" ></div>
                     </div>
                 </div>
-            {{/unless}}
-            <div class="row answer-options distance-top">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-12 ">
-                            {{#each getAnswerOptions}}
-                                <div class="form-group">
-                                    <div class="input-group {{#unless (isValidAnswerOption this)}}invalidAnswerOption{{/unless}}">
-                                        <div class="input-group-letter round-corners input-group-addon input-field-bg-color">{{answerOptionLetter getAnswerOptionNumber}}</div>
-                                        <input type="text"
-                                               class="input-field {{#if isSurveyQuestion}}surveyQuestion{{/if}} tabbable"
-                                               id="answerOptionText_Number{{getAnswerOptionNumber}}"
-                                               placeholder="{{_ "view.answeroptions.answeroptiontext_placeholder"}}"
-                                               value="{{getAnswerText}}"
-                                               maxlength="{{getAnswerTextSchema.max}}"
-                                        />
-                                        {{#unless isSurveyQuestion}}
-                                            <input type="checkbox"
-                                                   id="answerOption-{{getAnswerOptionNumber}}"
-                                                   name="switch"
-                                                   title="answerOption-{{getAnswerOptionNumber}}"
-                                                   class="tabbable"/>
-                                        {{/unless}}
-                                    </div>
-                                </div>
-                            {{/each}}
-                        </div>
+                <div class="col-xs-12 answerOptionConfig" data-intro="{{_ "view.answeroptions.description.show_answer_content_on_buttons"}}">
+                    <p class="text-light checkboxLabel" id="showAnswerContentOnButtons">{{_ "view.answeroptions.show_answer_content_on_buttons"}}</p>
+                    <input type="checkbox"
+                           id="config_showAnswerContentOnButtons_switch"
+                           name="switch"
+                           data-width="100"
+                           data-height="35"
+                           data-style="pull-right"
+                           data-onstyle="success"
+                           data-offstyle="danger"
+                           data-on="{{_ "view.answeroptions.free_text_question.onText"}}"
+                           data-off="{{_ "view.answeroptions.free_text_question.offText"}}"
+                           title="{{_ "view.answeroptions.show_answer_content_on_buttons"}}"
+                           class="tabbable">
+                </div>
+                {{#if isSurveyQuestion}}
+                    <div class="col-xs-12 answerOptionConfig" data-intro="{{_ "view.answeroptions.description.multiple_selection_survey"}}">
+                        <p class="text-light checkboxLabel" id="multipleSelectionSurvey">{{_ "view.answeroptions.multiple_selection_survey"}}</p>
+                        <input type="checkbox"
+                               id="config_multipleSelectionSurvey_switch"
+                               name="switch"
+                               data-width="100"
+                               data-height="35"
+                               data-style="pull-right"
+                               data-onstyle="success"
+                               data-offstyle="danger"
+                               data-on="{{_ "view.answeroptions.free_text_question.onText"}}"
+                               data-off="{{_ "view.answeroptions.free_text_question.offText"}}"
+                               title="{{_ "view.answeroptions.multiple_selection_survey"}}"
+                               class="tabbable">
                     </div>
+                {{/if}}
+            </div>
+        </div>
+        <div id="previewAnsweroptionContentWrapper" class="hidden-xs hidden-sm hidden-md col-lg-6">
+            <div class="center-block" data-intro="{{_ "view.answeroptions.description.preview"}}">
+                <img id="previewAnsweroptionImage" src="/images/preview/question_preview.png" alt="question preview" />
+                <div id="markdownPreviewWrapper" class="answerWrapper">
+                    <h2 class="text-center">{{_ "view.answeroptions.preview"}}</h2>
+                    {{> votingview data-questionIndex=getQuestionIndex}}
                 </div>
             </div>
         </div>

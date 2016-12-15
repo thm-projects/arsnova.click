@@ -290,7 +290,7 @@ const clickEvents = {
 				instance.templateSelector.find('#editSessionButton').on('click', function () {
 					Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
 					Meteor.call('EventManagerCollection.reset', Router.current().params.quizName);
-					Router.go("/" + Router.current().params.quizName + "/question");
+					Router.go("/" + Router.current().params.quizName + "/quizManager");
 				});
 			}
 		});
@@ -402,6 +402,7 @@ Template.footerNavButtons.events({
 				Router.go("/" + Router.current().params.quizName + "/quizSummary");
 				break;
 			case "quizSummary":
+			case "quizManager":
 				Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
 				Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
 				Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
@@ -424,11 +425,11 @@ Template.footerNavButtons.events({
 		}
 	},
 	"click #backButton": function () {
-		var route = Router.current().route.getName();
+		let route = Router.current().route.getName();
 		if (typeof route === "undefined") {
 			return;
 		}
-		route = route.replace(/(:quizName.)*(.:id)*/g, "");
+		route = route.replace(/(:quizName.)*(.:id)*(.:questionIndex)*/g, "");
 		switch (route) {
 			case "hashtagmanagement":
 			case "agb":
@@ -437,14 +438,19 @@ Template.footerNavButtons.events({
 			case "dataprivacy":
 				Router.go("/");
 				break;
+			case "quizManager":
+				if (typeof Router.current().params.questionIndex !== "undefined") {
+					Router.go("/" + Router.current().params.quizName + "/quizManager");
+				} else {
+					Router.go("/" + Router.current().params.quizName + "/resetToHome");
+				}
+				break;
 			case "question":
-				Router.go("/" + Router.current().params.quizName + "/resetToHome");
-				break;
 			case "answeroptions":
-				Router.go("/" + Router.current().params.quizName + "/question");
-				break;
 			case "settimer":
-				Router.go("/" + Router.current().params.quizName + "/answeroptions");
+			case "questionType":
+			case "translate":
+				history.back();
 				break;
 			case "quizSummary":
 				let firstFailedIndex = null;
@@ -455,9 +461,9 @@ Template.footerNavButtons.events({
 				});
 				if (!isNaN(firstFailedIndex)) {
 					Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, parseInt(firstFailedIndex));
-					Router.go("/" + Router.current().params.quizName + "/question");
+					Router.go("/" + Router.current().params.quizName + "/quizManager");
 				} else {
-					Router.go("/" + Router.current().params.quizName + "/settimer");
+					Router.go("/" + Router.current().params.quizName + "/quizManager");
 				}
 				break;
 			case "results":

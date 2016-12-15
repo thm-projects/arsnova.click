@@ -39,11 +39,19 @@ Template.quizSummary.helpers({
 		}
 		return Session.get("questionGroup").getQuestionList().length;
 	},
+	showHeader: function () {
+		return typeof this.item === "undefined" || this.item === "header";
+	},
 	getQuestions: function () {
-		if (!Session.get("questionGroup")) {
+		if (!Session.get("questionGroup") || this.item === "header") {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList();
+		const index = parseInt(this.item);
+		const questionList = Session.get("questionGroup").getQuestionList();
+		if (isNaN(index) || index < 0 || index > questionList.length) {
+			return questionList;
+		}
+		return [questionList[index]];
 	},
 	getNormalizedIndex: function (index) {
 		return index + 1;
@@ -81,7 +89,7 @@ Template.quizSummary.helpers({
 		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return index === Session.get("questionGroup").getQuestionList().length - 1;
+		return typeof parseInt(Template.parentData().item) !== "undefined" || index === Session.get("questionGroup").getQuestionList().length - 1;
 	},
 	isQuestionType: function (type) {
 		return type === "question";

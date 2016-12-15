@@ -10,5 +10,8 @@
   "cas": {
     "baseUrl": "https://cas.thm.de/cas",
     "autoClose": true
+  },
+  "serverStartup": {
+    "verbose": true
   }
 }

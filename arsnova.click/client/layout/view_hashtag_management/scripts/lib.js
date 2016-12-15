@@ -98,25 +98,30 @@ export function connectEventManager(hashtag) {
 					Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
 					Router.go("/" + hashtag + "/memberlist");
 				} else {
-					Router.go("/" + hashtag + "/question");
+					Router.go("/" + hashtag + "/quizManager");
 				}
 			} else {
-				Router.go("/" + hashtag + "/question");
+				Router.go("/" + hashtag + "/quizManager");
 			}
 			sessionStorage.removeItem("overrideValidQuestionRedirect");
 		});
 	};
-	if (Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin()) {
-		Meteor.loginWithCas(function () {
+	if (Meteor.status().connected) {
+		if (Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin()) {
+			Meteor.loginWithCas(function () {
+				connect(hashtag);
+			});
+		} else {
 			connect(hashtag);
-		});
+		}
 	} else {
-		connect(hashtag);
+		Router.go("/" + hashtag + "/quizManager");
+		sessionStorage.removeItem("overrideValidQuestionRedirect");
 	}
 }
 
 export function addHashtag(questionGroup) {
-	if (!HashtagsCollection.findOne({hashtag: questionGroup.getHashtag()})) {
+	if (Meteor.status().connected && !HashtagsCollection.findOne({hashtag: questionGroup.getHashtag()})) {
 		Meteor.call('SessionConfiguration.addConfig', questionGroup.getConfiguration().serialize());
 		Meteor.call('HashtagsCollection.addHashtag', {
 			privateKey: localData.getPrivateKey(),
@@ -128,11 +133,10 @@ export function addHashtag(questionGroup) {
 				connectEventManager(questionGroup.getHashtag());
 			}
 		});
-	} else {
-		localData.addHashtag(questionGroup);
-		Session.set("questionGroup", questionGroup);
-		connectEventManager(questionGroup.getHashtag());
 	}
+	localData.addHashtag(questionGroup);
+	Session.set("questionGroup", questionGroup);
+	connectEventManager(questionGroup.getHashtag());
 }
 
 export function trimIllegalChars(hashtag) {

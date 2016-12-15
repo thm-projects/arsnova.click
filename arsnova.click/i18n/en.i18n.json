@@ -7,6 +7,9 @@
     "save": "Save",
     "abort": "Abort",
     "close_window": "Close window",
+    "aria_description": {
+      "arsnova_slogan": "Quizzes for everyone & anything"
+    },
     "cookie_consent": {
       "message": "arsnova.click is a web app that uses cookies to ensure you get the best experience.",
       "dismiss": "Got it!",
@@ -38,7 +41,8 @@
         "sound": "Sound",
         "qr_code": "QR",
         "nicknames": "Nicknames",
-        "edit_quiz": "Edit"
+        "edit_quiz": "Edit",
+        "remove": "Remove"
       },
       "about": {
         "title": "About the quiz app",
@@ -181,6 +185,9 @@
           "slow": "poor",
           "ok": "good"
         }
+      },
+      "aria_description": {
+        "logo-header-chars": "arsnova.click"
       }
     }
   },
@@ -190,6 +197,31 @@
       "answeroptiontext_placeholder": "Answer option required",
       "correct": "Correct",
       "wrong": "Wrong",
+      "preview": "Preview",
+      "show_answer_content_on_buttons": "Display the answer's content on the buttons?",
+      "multiple_selection_survey": "Allow selection of multiple answers?",
+      "description": {
+        "default_answer_row": "Drag this block into the list of answeroptions to create a new one.",
+        "added_answers": "Here are all already created answeroptions. You can change the order of the answers via drag & drop.",
+        "added_answer_short_text": "Every answeroption contains a unique letter which can be displayed for the quiz attendees.",
+        "added_answer_text": "Here you can enter some text for the answeroption. Markup like Markdown and LaTeX is supported.",
+        "added_answer_is_correct": "This button determines if the answeroption is marked as correct or wrong.",
+        "added_answer_remove": "Clicking on this button deletes the response.",
+        "show_answer_content_on_buttons": "The response buttons for the participants can either be labeled with the letter of the response or the complete answer's text. Note, however, that too much text in the answer can be badly readable depending on the size of the viewport.",
+        "multiple_selection_survey": "Here you can set whether the participants are to go directly to the evaluation after clicking on a response of the survey, or whether a multiple selection should be possible.",
+        "preview": "Here you can see a preview of the answer content entered on the left.",
+        "range_area": "Here you can specify the correct answer as well as the top and lower tolerances. Please note that the input must be in natural numbers.",
+        "min_range": "Here you can set the lower tolerance value.",
+        "correct_value": "This answer is completely correct.",
+        "max_range": "Here you can set the upper tolerance value.",
+        "range_slider": "With this slider you can dynamically change the upper and lower tolerances. The correct value will correspond to the mean value.",
+        "free_text_question_text": "Here you can enter the correct answer. The responses entered by the participants are checked against this response according to the configuration.",
+        "config_case_sensitive": "If this option is activated, the case of the entered response must match that of the reference response.",
+        "config_trim_whitespaces": "Specifies whether the whitespaces of the entered response are to be checked.",
+        "config_use_keywords": "This option must be activated, the order of the words of the entered response must correspond to the reference value. If this option is deactivated, it is unfortunately not possible to check the spaces and punctuation marks.",
+        "config_use_punctuation": "This option determines whether the punctuation marks of the entered value are to be checked.",
+        "check_answer": "Here you can test possible answers of the participants against your reference value and the current configuration."
+      },
       "ranged_question": {
         "title": "Interval of correct answers",
         "correct_value": "Correct value",
@@ -239,6 +271,10 @@
       "no_sessions": "There are no quizzes stored in your browser."
     },
     "hashtag_view": {
+      "hashtag_input": {
+        "already_exists": "This quizname is already taken.",
+        "illegal_chars": "The quizname contains illegal characters."
+      },
       "demo_quiz": {
         "title": {
           "1": "Not sure where to start?",

@@ -20,6 +20,11 @@ import {Template} from 'meteor/templating';
 import {deleteCountdown} from './lib.js';
 
 Template.votingview.onDestroyed(function () {
+	if (this.data && this.data["data-questionIndex"]) {
+		Session.set("previewQuestionIndex", undefined);
+		delete Session.keys.previewQuestionIndex;
+		return;
+	}
 	Session.set("questionSC", undefined);
 	Session.set("responses", undefined);
 	Session.set("countdownInitialized", false);

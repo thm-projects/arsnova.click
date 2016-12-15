@@ -17,8 +17,11 @@
 
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
+import {Template} from 'meteor/templating';
+import {Showdown} from 'meteor/markdown';
 import {Router} from 'meteor/iron:router';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {MeteorMathJax} from 'meteor/mrt:mathjax';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
@@ -66,14 +69,45 @@ export function createTabIndices() {
 	});
 }
 
+const converter = new Showdown.converter({
+	simplifiedAutoLink: true,
+	strikethrough: true,
+	tables: true
+});
+const helper = new MeteorMathJax.Helper({
+	useCache: true,
+	transform: function (x) {
+		return converter.makeHtml(x);
+	}
+});
+Template.registerHelper('mathjax', helper.getTemplate());
+MeteorMathJax.defaultConfig = {
+	config: ["TeX-AMS-MML_HTMLorMML.js"],
+	jax: ["input/TeX","input/MathML","output/HTML-CSS","output/NativeMML", "output/PreviewHTML"],
+	extensions: ["tex2jax.js", "Safe.js", "mml2jax.js", "fast-preview.js", "AssistiveMML.js", "[Contrib]/a11y/accessibility-menu.js"],
+	TeX: {
+		extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+	},
+	tex2jax: {
+		inlineMath: [['$','$']],
+		displayMath: [['$$', '$$']],
+		processEscapes: true,
+		preview: 'none'
+	},
+	messageStyle: 'none',
+	showProcessingMessages: false,
+	showMathMenu: false
+};
+
 Meteor.startup(function () {
 	if (Meteor.isClient) {
 		if ('serviceWorker' in navigator) {
 			navigator.serviceWorker.register('/serviceWorker.js').then().catch(error => console.log(error));
 		}
-		$.getScript('/lib/highlight.pack.min.js');
-		$.getScript('/lib/marked.min.js');
+		Session.set("loading_language", true);
+		TAPi18n.precacheBundle = true;
 		TAPi18n.setLanguage(getUserLanguage()).then(function () {
+			Session.set("loading_language", false);
 			window.cookieconsent_options = {
 				"message": TAPi18n.__("global.cookie_consent.message"),
 				"dismiss": TAPi18n.__("global.cookie_consent.dismiss"),

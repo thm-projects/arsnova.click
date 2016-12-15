@@ -43,7 +43,7 @@
 	$fg-success: lighten($success, 20);
 	$warning: #b22222;
 	$warning-text-color: #ffffff;
-	$fg-warning: #a22c2c;
+	$fg-warning: red;
 	$info: #663399;
 	$info-text-color: #ffffff;
 	$default: #808080;
@@ -957,13 +957,16 @@
 		p.failed, span.failed {
 			color : $fg-warning;
 		}
-		.popover-title, .popover.bottom {
+		.popover-title, .popover {
 			background-color: $warning;
 			color: $warning-text-color;
 			border-color: $warning;
 		}
 		.popover.bottom > .arrow:after {
 			border-bottom-color: $warning;
+		}
+		.popover.right > .arrow:after {
+			border-right-color: $warning;
 		}
 		.lockquote {
 			color: $fg-lockquote !important;

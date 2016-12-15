@@ -21,6 +21,7 @@ import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
 import {Router} from 'meteor/iron:router';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {TAPi18n} from 'meteor/tap:i18n';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection, hashtagSchema} from '/lib/hashtags/collection.js';
@@ -44,9 +45,22 @@ Template.connectionQualityHeader.events({
 
 Template.home.events({
 	"input #hashtag-input-field": function (event) {
-		var inputHashtag = $(event.target).val().trim();
+		const inputTarget = $(event.target);
+		const addNewHashtagItem = $("#addNewHashtag");
+		const joinSessionItem = $("#joinSession");
+		let inputHashtag = inputTarget.val().trim();
+		let originalHashtag = hashtagLib.findOriginalHashtag(inputHashtag);
+		const hashtagDoc = HashtagsCollection.findOne({hashtag: originalHashtag});
+
+		inputTarget.popover("destroy");
 		if (["?", "/", "\\", "#", "\"", "'"].some(function (v) { return inputHashtag.indexOf(v) >= 0; })) {
 			$("#joinSession, #addNewHashtag").attr("disabled", "disabled");
+			inputTarget.popover({
+				title: TAPi18n.__("view.hashtag_view.hashtag_input.illegal_chars"),
+				trigger: 'manual',
+				placement: 'bottom'
+			});
+			inputTarget.popover("show");
 			return;
 		}
 		if (inputHashtag.toLowerCase() === "demo quiz") {
@@ -64,22 +78,34 @@ Template.home.events({
 		if (hashtagLib.eventManagerCollectionObserver) {
 			hashtagLib.eventManagerCollectionObserver.stop();
 		}
-		let originalHashtag = hashtagLib.findOriginalHashtag(inputHashtag);
+		if (inputHashtag === "") {
+			$("#joinSession, #addNewHashtag").attr("disabled", "disabled");
+			return;
+		}
 		if (originalHashtag === "") {
 			Session.set("isEditingQuiz", false);
 		} else {
 			hashtagLib.setEventManagerTracker(Tracker.autorun(function () {
 				hashtagLib.setEventManagerHandle(Meteor.subscribe("EventManagerCollection.join", originalHashtag, function () {
 					if (!EventManagerCollection.findOne() || localData.containsHashtag(originalHashtag)) {
-						$("#joinSession").attr("disabled", "disabled");
+						joinSessionItem.attr("disabled", "disabled");
 					}
 					hashtagLib.setEventManagerCollectionObserver(EventManagerCollection.find({hashtag: originalHashtag}).observeChanges({
 						changed: function (id, changedFields) {
 							if (!isNaN(changedFields.sessionStatus)) {
 								if (changedFields.sessionStatus === 2) {
-									$("#joinSession").removeAttr("disabled");
+									joinSessionItem.removeAttr("disabled");
+									inputTarget.popover("destroy");
 								} else {
-									$("#joinSession").attr("disabled", "disabled");
+									joinSessionItem.attr("disabled", "disabled");
+									if (!!addNewHashtagItem.attr("disabled")) {
+										inputTarget.popover({
+											title: TAPi18n.__("view.hashtag_view.hashtag_input.already_exists"),
+											trigger: 'manual',
+											placement: 'bottom'
+										});
+										inputTarget.popover("show");
+									}
 								}
 							}
 						},
@@ -90,9 +116,18 @@ Template.home.events({
 								}
 								originalHashtag = hashtagLib.findOriginalHashtag(inputHashtag);
 								if (doc.sessionStatus === 2) {
-									$("#joinSession").removeAttr("disabled");
+									joinSessionItem.removeAttr("disabled");
+									inputTarget.popover("destroy");
 								} else {
-									$("#joinSession").attr("disabled", "disabled");
+									joinSessionItem.attr("disabled", "disabled");
+									if (!!addNewHashtagItem.attr("disabled")) {
+										inputTarget.popover({
+											title: TAPi18n.__("view.hashtag_view.hashtag_input.already_exists"),
+											trigger: 'manual',
+											placement: 'bottom'
+										});
+										inputTarget.popover("show");
+									}
 								}
 							}
 						}
@@ -100,18 +135,26 @@ Template.home.events({
 				}));
 			}));
 		}
-		let addNewHashtagItem = $("#addNewHashtag");
 		if (hashtagLib.trimIllegalChars(inputHashtag).length === 0) {
 			addNewHashtagItem.attr("disabled", "disabled");
 			return;
 		}
-
-		var hashtagDoc = HashtagsCollection.findOne({hashtag: originalHashtag});
 		if (!hashtagDoc) {
-			$("#joinSession").attr("disabled", "disabled");
-			addNewHashtagItem.removeAttr("disabled");
+			joinSessionItem.attr("disabled", "disabled");
+			if (!Meteor.status().connected) {
+				addNewHashtagItem.attr("disabled", "disabled");
+				inputTarget.popover({
+					title: TAPi18n.__("view.hashtag_view.hashtag_input.server_offline"),
+					trigger: 'manual',
+					placement: 'bottom'
+				});
+				inputTarget.popover("show");
+				return;
+			} else {
+				addNewHashtagItem.removeAttr("disabled");
+			}
 		} else {
-			var localLoweredHashtags = localData.getAllLoweredHashtags();
+			const localLoweredHashtags = localData.getAllLoweredHashtags();
 			if ($.inArray(inputHashtag.toLowerCase(), localLoweredHashtags) > -1) {
 				Session.set("isEditingQuiz", true);
 				addNewHashtagItem.removeAttr("disabled");

@@ -1,0 +1,19 @@
+
+@import "../../../layout/global/styles/appearance";
+
+#questionTypeView {
+	.questionType {
+		cursor: pointer;
+
+		.wrapper {
+			margin: 5px;
+			border: 1px solid black;
+			border-radius: $corner-radius;
+			padding: 5px;
+
+			&:hover {
+				background-color: lighten(black, 10);
+			}
+		}
+	}
+}

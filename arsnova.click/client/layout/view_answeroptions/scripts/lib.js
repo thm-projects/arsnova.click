@@ -16,21 +16,27 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Session} from 'meteor/session';
+import {Tracker} from 'meteor/tracker';
+import {jQuery} from 'meteor/jquery';
 import {noUiSlider} from 'meteor/arsnova.click:nouislider';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {Router} from 'meteor/iron:router';
 import {answerTextSchema} from '/lib/answeroptions/collection.js';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {calculateHeaderSize, calculateTitelHeight} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
+import {getTooltipForRoute} from "/client/layout/global/scripts/lib.js";
 import * as localData from '/lib/local_storage.js';
+
+export const answerOptionTracker = new Tracker.Dependency();
+export const answerCheckTracker = new Tracker.Dependency();
 
 export function parseAnswerOptionInput(index) {
 	const questionItem = Session.get("questionGroup");
 	const answerlist = questionItem.getQuestionList()[index].getAnswerOptionList();
 
-	for (var i = 0; i < answerlist.length; i++) {
+	for (let i = 0; i < answerlist.length; i++) {
 		answerlist[i].setAnswerText($("#answerOptionText_Number" + i).val());
 		answerlist[i].setIsCorrect($('#answerOption-' + i).find(".check-mark-checked").length > 0);
 	}
@@ -74,80 +80,23 @@ export function calculateXsViewport() {
 }
 
 export function formatIsCorrectButtons() {
-	$("[name='switch']").bootstrapSwitch({
+	if (Session.get("loading_language")) {
+		return;
+	}
+	$("[name='switch']").bootstrapToggle({
 		size: "small",
-		onText: TAPi18n.__("view.answeroptions.correct"),
-		offText: TAPi18n.__("view.answeroptions.wrong"),
-		wrapperClass: "input-field",
-		animate: false,
-		onSwitchChange: function (event, state) {
-			const item = $('.bootstrap-switch-id-' + event.target.id);
-			const questionItem = Session.get("questionGroup");
-			const answerlist = questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex];
-			if (state) {
-				item.find('.bootstrap-switch-handle-off').addClass("hiddenImportant");
-				item.find(".bootstrap-switch-container").css({width: "auto"});
-				answerlist.getAnswerOptionList()[event.target.id.replace("answerOption-","")].setIsCorrect(true);
-			} else {
-				item.find('.bootstrap-switch-handle-off').removeClass("hiddenImportant");
-				item.find(".bootstrap-switch-container").css({width: "auto"});
-				answerlist.getAnswerOptionList()[event.target.id.replace("answerOption-","")].setIsCorrect(false);
-			}
-			Session.set("questionGroup", questionItem);
-			localData.addHashtag(Session.get("questionGroup"));
-		},
-		onInit: function (event) {
-			const item = $('.bootstrap-switch-id-' + event.target.id);
-			item.find("span").css({fontSize: "14px", "padding": "5px"});
-			item.find(".bootstrap-switch-container").css({"width": "auto"});
-		}
-	});
-
-	Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().forEach(function (answerOption) {
-		if (answerOption.getIsCorrect()) {
-			const item = $('#answerOption-' + answerOption.getAnswerOptionNumber());
-			item.bootstrapSwitch('state', 'true');
-		}
+		onstyle: "success",
+		offstyle: "danger",
+		on: TAPi18n.__("view.answeroptions.correct"),
+		off: TAPi18n.__("view.answeroptions.wrong")
 	});
 }
 
 export function formatFreeTextSettingsButtons() {
-	$("[name='switch']").bootstrapSwitch({
-		size: "small",
-		onText: TAPi18n.__("view.answeroptions.free_text_question.onText"),
-		offText: TAPi18n.__("view.answeroptions.free_text_question.offText"),
-		wrapperClass: "input-field",
-		animate: false,
-		onSwitchChange: function (event) {
-			const questionItem = Session.get("questionGroup");
-			questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].setConfig(event.target.id, $('#' + event.target.id).prop("checked"));
-			if (event.target.id === "config_use_keywords_switch") {
-				if ($('#config_use_keywords_switch').prop("checked")) {
-					$('#config_trim_whitespaces_switch').bootstrapSwitch('disabled',false);
-					$('#config_use_punctuation_switch').bootstrapSwitch('disabled',false);
-				} else {
-					$('#config_trim_whitespaces_switch').bootstrapSwitch('state', false).bootstrapSwitch('disabled',true);
-					$('#config_use_punctuation_switch').bootstrapSwitch('state', false).bootstrapSwitch('disabled',true);
-					questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].setConfig("config_trim_whitespaces_switch", false);
-					questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].setConfig("config_use_punctuation_switch", false);
-				}
-			}
-			Session.set("questionGroup", questionItem);
-			localData.addHashtag(questionItem);
-		},
-		onInit: function (event) {
-			const item = $('.bootstrap-switch-id-' + event.target.id);
-			item.find("span").css({fontSize: "14px", "padding": "5px"});
-			item.find(".bootstrap-switch-container").css({"width": "auto"});
-		}
-	});
-
-	Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().forEach(function (answerOption) {
-		$('#config_case_sensitive_switch').bootstrapSwitch('state', answerOption.getConfigCaseSensitive());
-		$('#config_trim_whitespaces_switch').bootstrapSwitch('state', answerOption.getConfigTrimWhitespaces()).bootstrapSwitch('disabled',!answerOption.getConfigUseKeywords());
-		$('#config_use_keywords_switch').bootstrapSwitch('state', answerOption.getConfigUseKeywords());
-		$('#config_use_punctuation_switch').bootstrapSwitch('state', answerOption.getConfigUsePunctuation()).bootstrapSwitch('disabled',!answerOption.getConfigUseKeywords());
-	});
+	if (Session.get("loading_language")) {
+		return;
+	}
+	$("[name='switch']").bootstrapToggle();
 }
 
 export function createSlider(index) {
@@ -218,11 +167,11 @@ export function createSlider(index) {
 	$('#correctValueInput').on("change", function () {
 		const correctValueInputField = $('#correctValueInput');
 		const value = parseFloat(correctValueInputField.val());
-		questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex].setCorrectValue(value);
+		questionItem.getQuestionList()[Router.current().params.questionIndex].setCorrectValue(value);
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(questionItem);
 		correctValueInputField.removeClass("invalid");
-		$.each(Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getValidationStackTrace(), function (index, element) {
+		$.each(Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getValidationStackTrace(), function (index, element) {
 			if (element.reason === "invalid_correct_value") {
 				correctValueInputField.addClass("invalid");
 				return false;
@@ -243,3 +192,97 @@ export function styleFreetextAnswerOptionValidation(isValid) {
 		$('#answerTextArea').addClass("invalidQuestion");
 	}
 }
+
+(function ($) {
+	$.fn.getCursorPosition = function () {
+		const input = this.get(0);
+		if (!input) { // No (input) element found
+			return;
+		}
+		if ('selectionStart' in input) {
+			// Standard-compliant browsers
+			return input.selectionStart;
+		} else if (document.selection) {
+			// IE
+			input.focus();
+			const sel = document.selection.createRange();
+			const selLen = document.selection.createRange().text.length;
+			sel.moveStart('character', -input.value.length);
+			return sel.text.length - selLen;
+		}
+	};
+	$.fn.setCaretPosition = function (caretPos) {
+		let range;
+		const elem = this.get(0);
+		if (!elem) { // No (input) element found
+			return;
+		}
+
+		if (elem.createTextRange) {
+			range = elem.createTextRange();
+			range.move('character', caretPos);
+			range.select();
+		} else {
+			elem.focus();
+			if (elem.selectionStart !== undefined) {
+				elem.setSelectionRange(caretPos, caretPos);
+			}
+		}
+	};
+	$.fn.setCursorPosition = function (pos) {
+		this.each(function (index, elem) {
+			if (elem.setSelectionRange) {
+				elem.setSelectionRange(pos, pos);
+			} else if (elem.createTextRange) {
+				const range = elem.createTextRange();
+				range.collapse(true);
+				range.moveEnd('character', pos);
+				range.moveStart('character', pos);
+				range.select();
+			}
+		});
+		return this;
+	};
+})(jQuery);
+
+export const renderAnsweroptionItems = function () {
+	if (Session.get("loading_language")) {
+		return;
+	}
+	$('#answerOptionWrapper').html("");
+	const questionItem = Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex];
+	const typeName = questionItem.typeName();
+	questionItem.getAnswerOptionList().forEach(function (item) {
+		const number = item.getAnswerOptionNumber();
+		const wrapper = $("<div data-id='" + number + "' class='answerOptionElementWrapper draggable'></div>");
+		wrapper.append(
+			"<div class='answer_row_short_text'>" + String.fromCharCode(number + 65) + "</div>"
+		).append(
+			"<input type='text' class='answer_row_text tabbable' id='answerOptionText_Number" + number + "' placeholder='" + TAPi18n.__("view.answeroptions.answeroptiontext_placeholder") + "' value='" + item.getAnswerText() + "' maxlength='" + answerTextSchema.max + "' autocomplete='off' autocorrect='off' autocapitalize='off' spellcheck='false' />"
+		);
+		if (typeName !== "SurveyQuestion") {
+			wrapper.append(
+				$("<input type='checkbox' id='answerOption-" + number + "' name='switch' data-width='80' title='answerOption-" + number + "' class='tabbable isCorrectOption'/>").prop('checked', item.getIsCorrect())
+			);
+		}
+		if (typeName !== "YesNoSingleChoiceQuestion" && typeName !== "TrueFalseSingleChoiceQuestion") {
+			wrapper.append(
+				"<div class='removeAnsweroption' id='removeAnsweroption_" + number + "'><span class='glyphicon glyphicon-trash'></span></div>"
+			);
+		}
+		$('#answerOptionWrapper').append(wrapper);
+	});
+	const configShowAnswerContentOnButtonsState = questionItem.getDisplayAnswerText() ? "on" : "off";
+	$('#config_showAnswerContentOnButtons_switch').bootstrapToggle(configShowAnswerContentOnButtonsState);
+	if (typeName === "SurveyQuestion") {
+		const configMultipleSelectionEnabledState = questionItem.getMultipleSelectionEnabled() ? "on" : "off";
+		$('#config_multipleSelectionSurvey_switch').bootstrapToggle(configMultipleSelectionEnabledState);
+	}
+	formatIsCorrectButtons();
+	const firstAnswerElement = $("[data-id=0]");
+	firstAnswerElement.find(".answer_row_short_text").attr("data-intro", TAPi18n.__("view.answeroptions.description.added_answer_short_text"));
+	firstAnswerElement.find(".answer_row_text").attr("data-intro", TAPi18n.__("view.answeroptions.description.added_answer_text"));
+	firstAnswerElement.find(".toggle").attr("data-intro", TAPi18n.__("view.answeroptions.description.added_answer_is_correct"));
+	firstAnswerElement.find(".removeAnsweroption").attr("data-intro", TAPi18n.__("view.answeroptions.description.added_answer_remove"));
+	getTooltipForRoute();
+};

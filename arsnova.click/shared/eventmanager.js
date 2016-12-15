@@ -30,6 +30,8 @@ Meteor.methods({
 		if (Meteor.isServer) {
 			query.hashtag = hashtag;
 		}
+		Meteor.call('ResponsesCollection.clearAll', hashtag);
+		Meteor.call("MemberListCollection.clearReadConfirmed", hashtag);
 		Meteor.call('Question.startTimer', {hashtag: hashtag, questionIndex: 0});
 		EventManagerCollection.update(query, {
 			$set: {

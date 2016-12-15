@@ -17,15 +17,16 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {answerTextSchema} from '/lib/answeroptions/collection.js';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {Router} from 'meteor/iron:router';
+import * as leaderboardLib from "/client/layout/view_leaderboard/scripts/lib.js";
+import * as lib from './lib.js';
 
 Template.createAnswerOptions.helpers({
 	renderTemplate: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
-			return;
+		if (!Session.get("questionGroup")) {
+			return null;
 		}
-		switch (Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName()) {
+		switch (Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName()) {
 			case "SingleChoiceQuestion":
 			case "YesNoSingleChoiceQuestion":
 			case "TrueFalseSingleChoiceQuestion":
@@ -38,40 +39,38 @@ Template.createAnswerOptions.helpers({
 				return Template.freeTextAnswerOptionTemplate;
 			default:
 				console.log("Template for unknown question group is requested.");
+				return null;
 		}
 	}
 });
 
 Template.defaultAnswerOptionTemplate.helpers({
-	getAnswerTextSchema: answerTextSchema,
-	getAnswerOptions: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
-			return;
-		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList();
+	getQuestionIndex: function () {
+		return Router.current().params.questionIndex;
 	},
 	answerOptionLetter: function (Nr) {
 		return String.fromCharCode(Nr + 65);
 	},
 	showDeleteButtonOnStart: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList().length === 1 ? "hide" : "";
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().length === 1 ? "hide" : "";
 	},
 	isValidAnswerOption: function (item) {
 		return item.isValid();
 	},
 	isSurveyQuestion: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SurveyQuestion";
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() === "SurveyQuestion";
 	},
-	isSpecialSingleChoiceQuestion: function () {
-		switch (Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName()) {
-			case "YesNoSingleChoiceQuestion":
-			case "TrueFalseSingleChoiceQuestion":
+	canAddAnsweroption: function () {
+		switch (Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName()) {
+			case "SingleChoiceQuestion":
+			case "MultipleChoiceQuestion":
+			case "SurveyQuestion":
 				return true;
 			default:
 				return false;
@@ -81,38 +80,51 @@ Template.defaultAnswerOptionTemplate.helpers({
 
 Template.rangedAnswerOptionTemplate.helpers({
 	getMinValue: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getMinRange();
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getMinRange();
 	},
 	getMaxValue: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getMaxRange();
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getMaxRange();
 	},
 	getCorrectValue: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getCorrectValue();
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getCorrectValue();
 	}
 });
 
 Template.freeTextAnswerOptionTemplate.helpers({
 	configOptions: function () {
 		return [
-			{id: "config_case_sensitive", textName: "view.answeroptions.free_text_question.config_case_sensitive"},
-			{id: "config_trim_whitespaces", textName: "view.answeroptions.free_text_question.config_trim_whitespaces"},
-			{id: "config_use_keywords", textName: "view.answeroptions.free_text_question.config_use_keywords"},
-			{id: "config_use_punctuation", textName: "view.answeroptions.free_text_question.config_use_punctuation"}
+			{id: "config_case_sensitive", textName: "view.answeroptions.free_text_question.config_case_sensitive", description: "view.answeroptions.description.config_case_sensitive"},
+			{id: "config_trim_whitespaces", textName: "view.answeroptions.free_text_question.config_trim_whitespaces", description: "view.answeroptions.description.config_trim_whitespaces"},
+			{id: "config_use_keywords", textName: "view.answeroptions.free_text_question.config_use_keywords", description: "view.answeroptions.description.config_use_keywords"},
+			{id: "config_use_punctuation", textName: "view.answeroptions.free_text_question.config_use_punctuation", description: "view.answeroptions.description.config_use_punctuation"}
 		];
 	},
 	answerText: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getAnswerOptionList()[0].getAnswerText();
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].getAnswerText();
+	},
+	isCheckingResponse: function () {
+		lib.answerCheckTracker.depend();
+		const inputValue = $("#answerCheckArea").val();
+		return !!inputValue;
+	},
+	getIsCorrectResponse: function () {
+		lib.answerCheckTracker.depend();
+		const inputValue = $("#answerCheckArea").val();
+		if (!inputValue) {
+			return;
+		}
+		return leaderboardLib.isCorrectResponse({freeTextInputValue: inputValue}, {type: "FreeTextQuestion"}, Router.current().params.questionIndex);
 	}
 });

@@ -20,6 +20,8 @@ export class FreeTextQuestion extends AbstractQuestion {
 			} else {
 				this.addDefaultAnswerOption();
 			}
+		} else {
+			this.addDefaultAnswerOption();
 		}
 	}
 
@@ -80,6 +82,10 @@ export class FreeTextQuestion extends AbstractQuestion {
 	 */
 	typeName () {
 		return "FreeTextQuestion";
+	}
+
+	translationReferrer () {
+		return "view.questions.free_text_question";
 	}
 
 	/**

@@ -16,40 +16,35 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {Router} from 'meteor/iron:router';
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
+import {getTooltipForRoute} from "/client/layout/global/scripts/lib.js";
+import {markdownBarTracker} from '/client/plugins/markdown_bar/scripts/lib.js';
 import * as lib from './lib.js';
 
 Template.createQuestionView.onRendered(function () {
-	let index;
 	this.autorun(function () {
-		if (!EventManagerCollection.findOne()) {
-			return;
-		}
-		index = EventManagerCollection.findOne().questionIndex;
+		headerLib.titelTracker.depend();
+		const mainContentContainer = $('#mainContentContainer');
+		const previewQuestionImage = $('#previewQuestionImage');
+		$('.textarea').css("height", mainContentContainer.height() - $('#markdownBarDiv').outerHeight(true) - 6);
+		previewQuestionImage.css("height", mainContentContainer.height());
+		const contentWidth = (previewQuestionImage.width() ? previewQuestionImage.width() : previewQuestionImage.height() / 1.7758186397984888);
+		$('#markdownPreviewWrapper').css({
+			height: previewQuestionImage.height() - 140,
+			width: contentWidth
+		});
+		$('#previewQuestionContentWrapper').find('.center-block').css({width: contentWidth});
 	}.bind(this));
-	var body = $('body');
-	body.on('click', '.questionIcon:not(.active)', function () {
-		var currentSession = QuestionGroupCollection.findOne();
-		if (!currentSession || index >= currentSession.questionList.length) {
-			return;
-		}
-
-		lib.addQuestion(index);
-		lib.checkForValidQuestionText();
-	});
-	body.on('click', '.removeQuestion', function () {
-		index = EventManagerCollection.findOne().questionIndex;
-		lib.checkForValidQuestionText();
-	});
-
-	lib.checkForValidQuestionText();
+	this.autorun(function () {
+		markdownBarTracker.depend();
+		lib.addQuestion(parseInt(Router.current().params.questionIndex));
+	}.bind(this));
 
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.addFooterElement(footerElements.footerElemNicknames);
 	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
+	getTooltipForRoute();
 });

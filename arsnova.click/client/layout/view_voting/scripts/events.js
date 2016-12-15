@@ -15,68 +15,41 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {mathjaxMarkdown} from '/client/lib/mathjax_markdown.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
 import {makeAndSendResponse, makeAndSendRangedResponse, makeAndSendFreeTextResponse, countdownFinish} from './lib.js';
 
 Template.votingview.events({
-	'click #js-btn-showQuestionAndAnswerModal': function (event) {
+	'click #js-btn-showQuestionAndAnswerModal': function (event, template) {
 		event.stopPropagation();
-		var questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc) {
+		const questionDoc = QuestionGroupCollection.findOne();
+		if (!questionDoc || template.data && template.data["data-questionIndex"]) {
 			return;
 		}
-
-		mathjaxMarkdown.initializeMarkdownAndLatex();
-		let questionContent = mathjaxMarkdown.getContent(questionDoc.questionList[EventManagerCollection.findOne().questionIndex].questionText);
-		var answerContent = "";
-
-		let hasEmptyAnswers = true;
-
-		if (questionDoc.questionList[EventManagerCollection.findOne().questionIndex].type !== "FreeTextQuestion") {
-			AnswerOptionCollection.find({questionIndex: EventManagerCollection.findOne().questionIndex}, {sort: {answerOptionNumber: 1}}).forEach(function (answerOption) {
-				if (!answerOption.answerText) {
-					answerOption.answerText = "";
-				} else {
-					hasEmptyAnswers = false;
-				}
-
-				answerContent += "<strong>" + String.fromCharCode((answerOption.answerOptionNumber + 65)) + "</strong>" + "<br/>";
-				answerContent += mathjaxMarkdown.getContent(answerOption.answerText);
-			});
-		}
-
-		if (hasEmptyAnswers) {
-			answerContent = "";
-			$('#answerOptionsHeader').hide();
-		}
-
 		new Splashscreen({
 			autostart: true,
 			templateName: 'questionAndAnswerSplashscreen',
+			dataContext: {
+				questionIndex: EventManagerCollection.findOne().questionIndex
+			},
 			closeOnButton: '#js-btn-hideQuestionModal, .splashscreen-container-close',
-			instanceId: "questionAndAnswers_" + EventManagerCollection.findOne().questionIndex,
-			onRendered: function (instance) {
-				instance.templateSelector.find('#questionContent').html(questionContent);
-				mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#questionContent'));
-				instance.templateSelector.find('#answerContent').html(answerContent);
-				mathjaxMarkdown.addSyntaxHighlightLineNumbers(instance.templateSelector.find('#answerContent'));
-			}
+			instanceId: "questionAndAnswers_" + EventManagerCollection.findOne().questionIndex
 		});
 	},
-	"click #forwardButton": function (event) {
+	"click #forwardButton": function (event, template) {
 		event.stopPropagation();
 		if (Session.get("hasSendResponse")) {
 			return;
 		}
 
 		Session.set("hasSendResponse", true);
-		var responseArr = JSON.parse(Session.get("responses"));
+		const responseArr = JSON.parse(Session.get("responses"));
+		const index = parseInt(Router.current().params.questionIndex) || EventManagerCollection.findOne().questionIndex;
 		if (responseArr.length === 0) {
 			const rangeInputField = $("#rangeInput");
 			if (rangeInputField.length > 0) {
@@ -93,7 +66,25 @@ Template.votingview.events({
 				}
 				makeAndSendFreeTextResponse(freeTextInputField.val());
 			} else {
-				makeAndSendResponse(responseArr);
+				if (template.data && template.data["data-questionIndex"]) {
+					if ($('.correctAnswer, .wrongAnswer').length > 0) {
+						return;
+					}
+					Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList().forEach(function (element) {
+						if (element.getIsCorrect()) {
+							$('#' + element.getAnswerOptionNumber()).addClass("correctAnswer");
+						} else {
+							$('#' + element.getAnswerOptionNumber()).addClass("wrongAnswer");
+						}
+					});
+					Meteor.setTimeout(function () {
+						$('.sendResponse').removeClass("correctAnswer wrongAnswer");
+						Session.set("hasSendResponse", false);
+					}, 2000);
+					return;
+				} else {
+					makeAndSendResponse(responseArr);
+				}
 			}
 		}
 		if (EventManagerCollection.findOne().questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
@@ -101,22 +92,47 @@ Template.votingview.events({
 		}
 		countdownFinish();
 	},
-	"click .sendResponse": function (event) {
+	"click .sendResponse": function (event, template) {
 		event.stopPropagation();
-
-		var responseArr = JSON.parse(Session.get("responses"));
-		var currentId = event.currentTarget.id;
-		responseArr[currentId] = responseArr[currentId] ? false : true;
+		event.preventDefault();
+		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
+		const responseArr = JSON.parse(Session.get("responses"));
+		const currentId = event.currentTarget.id;
+		responseArr[currentId] = !responseArr[currentId];
 		if (Session.get("questionSC")) {
-			makeAndSendResponse(responseArr);
-			countdownFinish();
-			return;
+			if (template.data && template.data["data-questionIndex"]) {
+				if ($('.correctAnswer, .wrongAnswer').length > 0) {
+					return;
+				}
+				Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList().forEach(function (element) {
+					if (element.getIsCorrect()) {
+						$('#' + element.getAnswerOptionNumber()).addClass("correctAnswer");
+					} else {
+						$('#' + element.getAnswerOptionNumber()).addClass("wrongAnswer");
+					}
+				});
+				Meteor.setTimeout(function () {
+					$('.sendResponse').removeClass("correctAnswer wrongAnswer");
+				}, 2000);
+				return;
+			} else {
+				makeAndSendResponse(responseArr);
+				countdownFinish();
+				return;
+			}
 		}
 		Session.set("responses", JSON.stringify(responseArr));
 		Session.set("hasToggledResponse", JSON.stringify(responseArr).indexOf("true") > -1);
-		$(event.target).toggleClass("answer-selected");
+		$(event.currentTarget).toggleClass("answer-selected");
 	},
-	"keydown #rangeInput": function (event) {
+	"DOMSubtreeModified .sendResponse": function (event) {
+		const id = $(event.currentTarget).attr("id");
+		$('#' + id).removeClass("quickfitSet");
+	},
+	"keydown #rangeInput": function (event, template) {
+		if (template.data && template.data["data-questionIndex"]) {
+			return;
+		}
 		if ($(event.currentTarget).val().length > 0 && !isNaN(parseFloat($(event.currentTarget).val()))) {
 			Session.set("hasToggledResponse", true);
 			if (event.keyCode === 13) {
@@ -126,7 +142,10 @@ Template.votingview.events({
 			Session.set("hasToggledResponse", false);
 		}
 	},
-	"input #answerTextArea": function (event) {
+	"input #answerTextArea": function (event, template) {
+		if (template.data && template.data["data-questionIndex"]) {
+			return;
+		}
 		Session.set("hasToggledResponse", $(event.currentTarget).val().length > 0);
 	}
 });

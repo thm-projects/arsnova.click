@@ -16,15 +16,11 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {Router} from 'meteor/iron:router';
 import * as lib from './lib.js';
 
 Template.createQuestionView.events({
 	'input #questionText': function () {
-		lib.addQuestion(EventManagerCollection.findOne().questionIndex);
-		lib.checkForValidQuestionText();
-	},
-	'change #chooseQuestionType': function () {
-		lib.addQuestion(EventManagerCollection.findOne().questionIndex);
+		lib.addQuestion(parseInt(Router.current().params.questionIndex));
 	}
 });

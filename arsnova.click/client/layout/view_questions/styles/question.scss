@@ -19,13 +19,34 @@
 
 #editQuestionText {
 	.invalidQuestion {
-		border-radius: 0px, 0px, $corner-radius, $corner-radius;
+		border-radius: 0, 0, $corner-radius, $corner-radius;
 	}
 }
 
-#previewQuestionText {
+#previewQuestionContentWrapper {
 	overflow: hidden;
 	resize: none;
+	position: relative;
+
+	#previewQuestionImage {
+		border: 1px solid white;
+		border-radius: $corner-radius;
+	}
+
+	#markdownPreviewWrapper {
+		position: absolute;
+		top: 90px;
+		padding: 0 10px;
+		width: 365px;
+		height: 540px;
+		overflow-y: auto;
+		overflow-x: hidden;
+		color: white;
+		word-wrap: break-word;
+		p {
+			color: white;
+		}
+	}
 }
 
 .previewTextContainer-small {

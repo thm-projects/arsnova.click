@@ -15,29 +15,42 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as headerLib from '/client/layout/region_header/lib.js';
-import {formatAnswerButtons, votingViewTracker} from './lib.js';
+import * as answerOptionLib from '/client/layout/view_answeroptions/scripts/lib.js';
+import * as lib from './lib.js';
 
 Template.votingview.onRendered(function () {
-	const questionType = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type;
-
-	if (questionType !== "RangedQuestion" && questionType !== "FreeTextQuestion") {
-		this.autorun(function () {
-			headerLib.titelTracker.depend();
-			formatAnswerButtons();
-		}.bind(this));
+	let questionType = "";
+	if (this.data && this.data["data-questionIndex"]) {
+		Session.set("previewQuestionIndex", parseInt(this.data["data-questionIndex"]));
+		questionType = Session.get("questionGroup").getQuestionList()[this.data["data-questionIndex"]].typeName();
+	} else {
+		questionType = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type;
 	}
 	footerElements.removeFooterElements();
 	footerElements.footerTracker.changed();
-	votingViewTracker.changed();
+	lib.votingViewTracker.changed();
+	if (questionType !== "RangedQuestion" && questionType !== "FreeTextQuestion") {
+		this.autorun(function () {
+			headerLib.titelTracker.depend();
+			answerOptionLib.answerOptionTracker.depend();
+			Meteor.defer(function () {
+				lib.formatAnswerButtons();
+				lib.quickfitText();
+			});
+		}.bind(this));
+	}
+	lib.formatAnswerButtons();
 });
 
 Template.liveResultsTitle.onRendered(function () {
 	footerElements.removeFooterElements();
 	footerElements.footerTracker.changed();
-	votingViewTracker.changed();
+	lib.votingViewTracker.changed();
 });

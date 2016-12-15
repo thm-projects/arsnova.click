@@ -24,7 +24,22 @@
                         <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
                     </div>
                     <div class="modal-markdown-body">
-                        <div id="questionContent" class="markdown-content"></div>
+                        <div id="questionContent" class="markdown-content">
+                            {{#each splitQuestionTextOnNewLine}}
+                                {{#if isVideoQuestionText this}}
+                                    {{#with getVideoData this}}
+                                        <object width="100%" height="100%">
+                                            <param name="movie" value="{{this.origin}}{{this.videoId}}?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3"/>
+                                            <param name="allowFullScreen" value="true"/>
+                                            <param name="allowscriptaccess" value="always"/>
+                                            {{{this.embedTag}}}
+                                        </object>
+                                    {{/with}}
+                                {{else}}
+                                    {{#mathjax}}{{this}}{{/mathjax}}
+                                {{/if}}
+                            {{/each}}
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button id="setReadConfirmed"

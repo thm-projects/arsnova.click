@@ -18,91 +18,94 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {Router} from 'meteor/iron:router';
 import * as localData from '/lib/local_storage.js';
-import {parseSingleAnswerOptionInput, formatIsCorrectButtons, styleFreetextAnswerOptionValidation} from './lib.js';
+import * as lib from './lib.js';
 
 Template.createAnswerOptions.events({
 });
 
 Template.defaultAnswerOptionTemplate.events({
-	"click #addAnswerOption": function () {
+	"change .isCorrectOption": function (event) {
+		const checked = $(event.target).prop('checked');
+		const id = event.target.id.replace("answerOption-","");
 		const questionItem = Session.get("questionGroup");
-		const answerlist = questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex];
-		let answerOptionsCount = answerlist.getAnswerOptionList().length;
-
-		if (answerOptionsCount < 26) {
-			answerlist.addDefaultAnswerOption(answerOptionsCount);
-			Session.set("questionGroup", questionItem);
-			localData.addHashtag(Session.get("questionGroup"));
-			$("#deleteAnswerOption").removeClass("hide");
-
-			answerOptionsCount++;
-			if (answerOptionsCount > 25) {
-				$("#addAnswerOption").addClass("hide");
+		if (checked && questionItem.getQuestionList()[Router.current().params.questionIndex].typeName() !== "MultipleChoiceQuestion") {
+			for (let i = 0; i < questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().length; i++) {
+				if (i === id) {
+					continue;
+				}
+				questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[i].setIsCorrect(false);
+				$('#answerOption-' + i).prop('checked', false).change();
 			}
-
-			const answerOptionsField = $('.answer-options');
-			answerOptionsField.scrollTop(answerOptionsField[0].scrollHeight);
-
-			setTimeout(formatIsCorrectButtons, 20);
 		}
+		questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[id].setIsCorrect(checked);
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
 	},
-	"click #deleteAnswerOption": function () {
+	"change #config_showAnswerContentOnButtons_switch": function (event) {
+		const checked = $(event.target).prop('checked');
 		const questionItem = Session.get("questionGroup");
-		const answerlist = questionItem.getQuestionList()[EventManagerCollection.findOne().questionIndex];
-		let answerOptionsCount = answerlist.getAnswerOptionList().length;
-
-		if (answerOptionsCount > 1) {
-			$("#addAnswerOption").removeClass("hide");
-
-			answerlist.removeAnswerOption(answerOptionsCount - 1);
-			Session.set("questionGroup", questionItem);
-			localData.addHashtag(Session.get("questionGroup"));
-
-			answerOptionsCount--;
-			if (answerOptionsCount === 1) {
-				$("#deleteAnswerOption").addClass("hide");
-			} else if (answerOptionsCount > 2) {
-				const answerOptionsField = $('.answer-options');
-				answerOptionsField.scrollTop(answerOptionsField[0].scrollHeight);
-			}
-		}
+		questionItem.getQuestionList()[Router.current().params.questionIndex].setDisplayAnswerText(checked);
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
+		Meteor.defer(function () {
+			lib.answerOptionTracker.changed();
+		});
 	},
-	"keydown .input-field": function (event) {
-		if ((event.keyCode === 13) && !event.shiftKey) {
-			var nextElement = $(event.currentTarget).closest(".form-group").next();
-			if (nextElement.length <= 0) {
-				event.preventDefault();
-				$("#addAnswerOption").click();
-				//sets focus to the new input field - The field is not added instantly because of the sync to the localStorage so we need a small timeout here
-				const renderTimeoutFunction = function () {
-					if ($(event.currentTarget).closest(".form-group").next().find(".input-field").length > 0) {
-						$(event.currentTarget).closest(".form-group").next().find(".input-field").focus();
-					} else {
-						Meteor.setTimeout(renderTimeoutFunction, 20);
-					}
-				};
-				Meteor.setTimeout(renderTimeoutFunction, 20);
-			}
-		}
+	"change #config_multipleSelectionSurvey_switch": function (event) {
+		const checked = $(event.target).prop('checked');
+		const questionItem = Session.get("questionGroup");
+		questionItem.getQuestionList()[Router.current().params.questionIndex].setMultipleSelectionEnabled(checked);
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
 	},
-	"input .input-field": function (event) {
-		parseSingleAnswerOptionInput(EventManagerCollection.findOne().questionIndex, $(event.currentTarget).attr("id").replace("answerOptionText_Number",""));
+	"click .removeAnsweroption": function (event) {
+		const questionItem = Session.get("questionGroup");
+		questionItem.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption(event.currentTarget.id.replace("removeAnsweroption_", ""));
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
+	},
+	"input .answer_row_text": function (event) {
+		const id = $(event.currentTarget).attr("id");
+		const plainId = id.replace("answerOptionText_Number","");
+		$('#' + plainId).removeClass("quickfitSet");
+		const cursorPosition = $("#" + id).getCursorPosition();
+		lib.parseSingleAnswerOptionInput(Router.current().params.questionIndex, plainId);
+		Meteor.defer(function () {
+			$("#" + id).setCursorPosition(cursorPosition).focus();
+			lib.answerOptionTracker.changed();
+		});
 	}
 });
 
 Template.freeTextAnswerOptionTemplate.events({
+	"change [name='switch']": function (event) {
+		const questionItem = Session.get("questionGroup");
+		questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].setConfig(event.target.id, $(event.target).prop("checked"));
+		if (event.target.id === "config_use_keywords_switch") {
+			if ($('#config_use_keywords_switch').prop("checked")) {
+				$('#config_trim_whitespaces_switch').bootstrapToggle('enable');
+				$('#config_use_punctuation_switch').bootstrapToggle('enable');
+			} else {
+				$('#config_trim_whitespaces_switch').bootstrapToggle('off').bootstrapToggle('disable');
+				$('#config_use_punctuation_switch').bootstrapToggle('off').bootstrapToggle('disable');
+				questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].setConfig("config_trim_whitespaces_switch", false);
+				questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[0].setConfig("config_use_punctuation_switch", false);
+			}
+		}
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(questionItem);
+	},
 	"input #answerTextArea": function (event) {
 		const questionItem = Session.get("questionGroup");
-
-		var questionIndex = EventManagerCollection.findOne().questionIndex;
-
+		const questionIndex = Router.current().params.questionIndex;
 		questionItem.getQuestionList()[questionIndex].getAnswerOptionList()[0].setAnswerText($(event.currentTarget).val());
-
-		styleFreetextAnswerOptionValidation(questionItem.getQuestionList()[questionIndex].getAnswerOptionList()[0].isValid());
-
+		lib.styleFreetextAnswerOptionValidation(questionItem.getQuestionList()[questionIndex].getAnswerOptionList()[0].isValid());
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
+	},
+	"input #answerCheckArea": function () {
+		lib.answerCheckTracker.changed();
 	}
 });

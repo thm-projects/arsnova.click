@@ -19,7 +19,6 @@
 
 .navbar-fixed-bottom,
 .navbar-fixed-top {
-  z-index: 1050;
 }
 
 .modal-backdrop {
@@ -32,12 +31,14 @@
 .center-vertical {
   top: 25%;
   position: absolute;
-  width: 100%;
+  width: 70%;
+  margin: 0 15%;
 }
 
 .center-vertical-non-scrollable {
   position: absolute;
-  width: 100%;
+  width: 70%;
+  margin: 0 15%;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -188,6 +189,7 @@
   left: 0;
   padding-top: 5px;
   padding-bottom: 5px;
+  z-index: 1050;
 
   &.col-xxs-12 {
     .fixed-bottom-item {
@@ -265,9 +267,14 @@ select:-moz-focusring {
   font-weight: bold;
 }
 
-.popover-title, .popover.bottom {
+.popover-title, .popover {
   font-family: $font;
   font-size: medium;
+
+  &.right {
+    height: 100%;
+    width: 100%;
+  }
 }
 
 @media (max-width: 550px) {

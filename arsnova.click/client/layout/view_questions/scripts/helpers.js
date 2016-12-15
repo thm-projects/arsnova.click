@@ -17,26 +17,49 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {Router} from 'meteor/iron:router';
 import {questionTextSchema} from '/lib/questions/collection.js';
 import * as lib from './lib.js';
 
 Template.createQuestionView.helpers({
 	getQuestionTextSchema: questionTextSchema,
-	//Get question from Sessions-Collection if it already exists
 	questionText: function () {
-		if (!EventManagerCollection.findOne() || !Session.get("questionGroup")) {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionText();
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getQuestionText();
+	},
+	splitQuestionTextOnNewLine: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		const result = Session.get("questionGroup").getQuestionList()[parseInt(Router.current().params.questionIndex)].getQuestionText().split("\n");
+		lib.parseGithubFlavoredMarkdown(result);
+		return result;
+	},
+	isVideoQuestionText: function (questionText) {
+		return !/(^!)?\[.*\]\(.*\)/.test(questionText) && /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(questionText) && (/youtube/.test(questionText) || /youtu.be/.test(questionText) || /vimeo/.test(questionText));
+	},
+	getVideoData: function (questionText) {
+		const result = {};
+		if (/youtube/.test(questionText)) {
+			result.origin  = "https://www.youtube.com/embed/";
+			result.videoId = questionText.substr(questionText.lastIndexOf("=") + 1, questionText.length);
+		} else if (/youtu.be/.test(questionText)) {
+			result.origin  = "https://www.youtube.com/embed/";
+			result.videoId = questionText.substr(questionText.lastIndexOf("/") + 1, questionText.length);
+		} else if (/vimeo/.test(questionText)) {
+			result.origin = "https://player.vimeo.com/video/";
+			result.videoId = questionText.substr(questionText.lastIndexOf("/") + 1, questionText.length);
+		}
+		result.videoId = result.videoId.replace(/script/g, "");
+		result.embedTag = '<embed width="100%" height="200px" src="' + result.origin + result.videoId + '?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3" type="text/html" allowscriptaccess="always" allowfullscreen="true" />';
+		return result;
 	},
 	isLargeWindow: function () {
 		return $(window).height() > 699;
 	},
 	questionTypes: function () {
-		if (!EventManagerCollection.findOne()) {
-			return;
-		}
 		return lib.getQuestionTypes();
 	}
 });

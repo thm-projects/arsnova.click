@@ -16,110 +16,236 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Session} from 'meteor/session';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {questionTextSchema} from '/lib/questions/collection.js';
-import {questionReflection} from '/lib/questions/question_reflection.js';
-import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 
 export function addQuestion(index) {
 	const questionText = $('#questionText').val() || "";
-	const questionType = $('#chooseQuestionType').find('option:selected').attr("id");
 	const questionItem = Session.get("questionGroup");
-
-	try {
-		new SimpleSchema({
-			questionText: questionTextSchema
-		}).validate({questionText: questionText});
-	} catch (ex) {
-		new ErrorSplashscreen({
-			autostart: true,
-			errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
-		});
+	if (!Session.get("questionGroup")) {
 		return;
-	}
-
-	// Check if we need to change the type of the question
-	if (questionItem.getQuestionList()[index].typeName() !== questionType) {
-		switch (questionItem.getQuestionList()[index].typeName()) {
-			case "YesNoSingleChoiceQuestion":
-			case "TrueFalseSingleChoiceQuestion":
-			case "FreeTextQuestion":
-				questionItem.getQuestionList()[index].removeAllAnswerOptions();
-				break;
-		}
-		const serialized = questionItem.getQuestionList()[index].serialize();
-		delete serialized.type;
-		questionItem.addQuestion(questionReflection[questionType](serialized), index);
-		switch (questionType) {
-			case "RangedQuestion":
-				questionItem.getQuestionList()[index].setTimer(10);
-				break;
-			case "FreeTextQuestion":
-				questionItem.getQuestionList()[index].addDefaultAnswerOption();
-				break;
-			case "SurveyQuestion":
-				questionItem.getQuestionList()[index].getAnswerOptionList().forEach(function (answerOption) {
-					answerOption.setIsCorrect(false);
-				});
-				break;
-		}
 	}
 	questionItem.getQuestionList()[index].setQuestionText(questionText);
 	Session.set("questionGroup", questionItem);
 	localData.addHashtag(questionItem);
 }
 
-export function checkForValidQuestionText() {
-	var questionTextWithoutMarkdownChars = Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].getQuestionTextWithoutMarkdownChars();
+export function parseCodeBlock(result, i) {
+	let tmpNewItem = result[i] + "\n";
+	let mergeEndIndex = result.length;
+	for (let j = i + 1; j < result.length; j++) {
+		tmpNewItem += result[j] + "\n";
+		if (/^```/.test(result[j])) {
+			mergeEndIndex = j;
+			break;
+		}
+	}
+	result.splice(i, mergeEndIndex - i + 1);
+	result.splice(i, 0, tmpNewItem);
+}
 
-	if (questionTextWithoutMarkdownChars > 4 && questionTextWithoutMarkdownChars < 50001) {
-		$('#questionText').removeClass("invalidQuestion");
-	} else {
-		$('#questionText').addClass("invalidQuestion");
+export function parseOrderedList(result, i) {
+	let tmpNewItem = result[i] + "\n";
+	let mergeEndIndex = result.length;
+	for (let j = i + 1; j < result.length; j++) {
+		if (!/^[0-9]*./.test(result[j])) {
+			mergeEndIndex = j - 1;
+			break;
+		}
+		tmpNewItem += result[j] + "\n";
+	}
+	result.splice(i, mergeEndIndex - i + 1);
+	result.splice(i, 0, tmpNewItem);
+}
+
+export function parseUnorderedList(result, i) {
+	let tmpNewItem = result[i] + "\n";
+	let mergeEndIndex = result.length;
+	for (let j = i + 1; j < result.length; j++) {
+		if (!/^(   )[*-] /.test(result[j]) && !/^[0-9]*./.test(result[j])) {
+			mergeEndIndex = j - 1;
+			break;
+		}
+		tmpNewItem += result[j] + "\n";
+	}
+	result.splice(i, mergeEndIndex - i + 1);
+	result.splice(i, 0, tmpNewItem);
+}
+
+export function parseCommentBlock(result, i) {
+	let tmpNewItem = result[i] + "\n";
+	let mergeEndIndex = result.length;
+	for (let j = i + 1; j < result.length; j++) {
+		if (!/^> /.test(result[j])) {
+			mergeEndIndex = j - 1;
+			break;
+		}
+		tmpNewItem += result[j] + "\n";
+	}
+	result.splice(i, mergeEndIndex - i + 1);
+	result.splice(i, 0, tmpNewItem);
+}
+
+export function parseLinkBlock(result, i) {
+	const startIndex = /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.exec(result[i]);
+	const linkStr = startIndex[0] || result[i];
+	const link = !/^https?:\/\//.test(linkStr) ? "http://" + linkStr : linkStr;
+	const prevLinkContent = result[i].substring(0, startIndex.index);
+	const postLinkContent = result[i].indexOf(" ", startIndex.index) > -1 ? result[i].substring(result[i].indexOf(" ", startIndex.index)) : "";
+	result[i] = prevLinkContent + "<a href='" + link + "' target='_blank'>" + linkStr + "</a>" + postLinkContent;
+}
+
+export function parseTableBlock(result, i) {
+	let tmpNewItem = result[i] + "\n";
+	let mergeEndIndex = result.length;
+	for (let j = i + 1; j < result.length; j++) {
+		if (!/\s\|\s/.test(result[j])) {
+			mergeEndIndex = j - 1;
+			break;
+		}
+		tmpNewItem += (result[j] + "\n");
+	}
+	const tmpNewItemElement = $("<table><thead></thead><tbody></tbody></table>");
+	let tableHasHeader = /[-]+\s\|\s[-]+/.test(tmpNewItem);
+	tmpNewItem.split(/\s\|\s/).forEach(function (element) {
+		if (element === "") {
+			return;
+		}
+		const isLastElementInRow = /^.*\n.*$/.test(element);
+		if (isLastElementInRow) {
+			element = element.split(/\n/);
+		} else {
+			element = [element];
+		}
+		element.forEach(function (elementPart) {
+			if (elementPart.length === 0) {
+				return;
+			}
+			if (/[-]+/.test(elementPart)) {
+				tableHasHeader = false;
+			} else {
+				if (tableHasHeader) {
+					tmpNewItemElement.find("thead").append($("<th/>").text(elementPart));
+				} else {
+					if (element.slice(-1)[0] === elementPart && element.length > 1) {
+						tmpNewItemElement.find("tbody").append($("<tr/>"));
+					}
+					tmpNewItemElement.find("tbody").find("tr").last().append($("<td/>").text(elementPart));
+				}
+			}
+		});
+	});
+	result.splice(i, mergeEndIndex - i + 1);
+	result.splice(i, 0, tmpNewItemElement.prop('outerHTML'));
+}
+
+export function parseEmojiBlock(result, i) {
+	const wrapper = $("<div class='emojiWrapper'/>");
+	let lastIndex = 0;
+	result[i].match(/:([a-z0-9_\+\-]+):/g).forEach(function (emoji) {
+		const emojiPlain = emoji.replace(/:/g, "");
+		wrapper.append("<span>" + result[i].substring(lastIndex, result[i].indexOf(emoji)) + "</span>");
+		lastIndex = result[i].indexOf(emoji) + emoji.length;
+		wrapper.append("<img class='emojiImage' src='/images/emojis/" + emojiPlain + ".png' alt='" + emojiPlain + ".png' />");
+	});
+	wrapper.append("<span>" + result[i].substring(lastIndex, result[i].length) + "</span>");
+	result[i] = wrapper.prop("outerHTML");
+}
+
+export function parseMathjaxBlock(result, i) {
+	let tmpNewItem = result[i] + "\n";
+	let mergeEndIndex = result.length;
+	for (let j = i + 1; j < result.length; j++) {
+		if (/^(\$){2}$/.test(result[j])) {
+			mergeEndIndex = j;
+			break;
+		}
+		tmpNewItem += (result[j] + "\n");
+	}
+	result.splice(i, mergeEndIndex - i + 1);
+	result.splice(i, 0, $("<div/>").append((tmpNewItem + "$$")).prop("outerHTML"));
+}
+
+export function parseStrikeThroughBlock(result, i) {
+	result[i].match(/~~[^~{2}]*~~/gi).forEach(function (element) {
+		result[i] = result[i].replace(element, "<del>" + element.replace(/~~/g, "") + "</del>");
+	});
+}
+
+export function parseGithubFlavoredMarkdown(result) {
+	for (let i = 0; i < result.length; i++) {
+		switch (true) {
+			case /^(\$){2}$/.test(result[i]):
+				parseMathjaxBlock(result, i);
+				break;
+			case /^[\$]+/.test(result[i]):
+				break;
+			case /^```/.test(result[i]):
+				parseCodeBlock(result, i);
+				break;
+			case /^([0-9]*\.)?(-)?(\*)? \[x\] /.test(result[i]):
+				result[i] = ("<input class='markdownCheckbox' type='checkbox' checked='checked' disabled='disabled' />" + result[i].replace(/([0-9]*\.)?(-)?(\*)? \[x\] /, ""));
+				break;
+			case /^([0-9]*\.)?(-)?(\*)? \[ \] /.test(result[i]):
+				result[i] = ("<input class='markdownCheckbox' type='checkbox' disabled='disabled' />" + result[i].replace(/^([0-9]*\.)?(-)?(\*)? \[ \] /, ""));
+				break;
+			case /^[\s]*1\./.test(result[i]):
+				parseOrderedList(result, i);
+				break;
+			case /^[*-] /.test(result[i]):
+				parseUnorderedList(result, i);
+				break;
+			case /^> /.test(result[i]):
+				parseCommentBlock(result, i);
+				break;
+			case /~~.*~~/.test(result[i]):
+				parseStrikeThroughBlock(result, i);
+				break;
+			case !/(^!)?\[.*\]\(.*\)/.test(result[i]) && /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(result[i]) && !(/youtube/.test(result[i]) || /youtu.be/.test(result[i]) || /vimeo/.test(result[i])):
+				parseLinkBlock(result, i);
+				break;
+			case result[i].length === 0:
+				result.splice(i, 0, "<br/>");
+				i++;
+				break;
+			case /\s\|\s/.test(result[i]):
+				parseTableBlock(result, i);
+				break;
+			case /:[^\s]*:/.test(result[i]) && /:([a-z0-9_\+\-]+):/g.test(result[i]):
+				parseEmojiBlock(result, i);
+				break;
+		}
 	}
 }
 
 export function getQuestionTypes() {
-	if (!Session.get("questionGroup") || !EventManagerCollection.findOne()) {
-		return [];
-	}
 	return [
 		{
 			id: "SingleChoiceQuestion",
-			translationName: "view.questions.single_choice_question",
-			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SingleChoiceQuestion" ? 'selected' : ""
+			translationName: "view.questions.single_choice_question"
 		},
 		{
 			id: "YesNoSingleChoiceQuestion",
-			translationName: "view.questions.single_choice_question_yes_no",
-			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "YesNoSingleChoiceQuestion" ? 'selected' : ""
+			translationName: "view.questions.single_choice_question_yes_no"
 		},
 		{
 			id: "TrueFalseSingleChoiceQuestion",
-			translationName: "view.questions.single_choice_question_true_false",
-			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "TrueFalseSingleChoiceQuestion" ? 'selected' : ""
+			translationName: "view.questions.single_choice_question_true_false"
 		},
 		{
 			id: "MultipleChoiceQuestion",
-			translationName: "view.questions.multiple_choice_question",
-			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "MultipleChoiceQuestion" ? 'selected' : ""
+			translationName: "view.questions.multiple_choice_question"
 		},
 		{
 			id: "RangedQuestion",
-			translationName: "view.questions.ranged_question",
-			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "RangedQuestion" ? 'selected' : ""
+			translationName: "view.questions.ranged_question"
 		},
 		{
 			id: "FreeTextQuestion",
-			translationName: "view.questions.free_text_question",
-			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "FreeTextQuestion" ? 'selected' : ""
+			translationName: "view.questions.free_text_question"
 		},
 		{
 			id: "SurveyQuestion",
-			translationName: "view.questions.survey_question",
-			selected: Session.get("questionGroup").getQuestionList()[EventManagerCollection.findOne().questionIndex].typeName() === "SurveyQuestion" ? 'selected' : ""
+			translationName: "view.questions.survey_question"
 		}
 	];
 }

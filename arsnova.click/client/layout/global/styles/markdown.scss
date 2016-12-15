@@ -111,7 +111,7 @@ code {
 }
 /* line 59, /Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 .markdown-content p {
-  margin: 0 0 1.5em;
+  margin: 0;
 }
 /* line 60, /Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 .markdown-content p .left {
@@ -266,4 +266,45 @@ code {
 /* line 127, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/base/src/_Class.scss */
 .markdown-content ol li {
   list-style-type: decimal;
+}
+
+.hljs {
+  margin: 0.5em 0;
+}
+
+.markdownCheckbox {
+  vertical-align: middle;
+  margin: 0 10px 0 0 !important;
+}
+
+table tr:nth-child(even) {
+  color: black;
+}
+
+table {
+  display: table !important;
+  overflow: hidden !important;
+}
+
+#markdownPreviewWrapper,
+.markdown-content {
+  p {
+    margin: 0;
+
+    img:not(.emojiImage) {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+#markdownPreviewWrapper:not(.answerWrapper),
+.markdown-content {
+  .emojiWrapper {
+    height: 30px;
+
+    img {
+      height: inherit;
+    }
+  }
 }

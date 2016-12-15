@@ -65,6 +65,29 @@ export class AbstractAnswerOption {
 	}
 
 	/**
+	 * @returns {Number} The answer text length without the markdown characters
+	 */
+	getAnswerTextLengthWithoutMarkdownChars () {
+		return parseInt(this.getAnswerText().split().map(function (currentValue) {
+			let tmpValue = currentValue;
+			tmpValue = tmpValue.replace(/#/g,"");
+			tmpValue = tmpValue.replace(/\*/g,"");
+			tmpValue = tmpValue.replace(/1./g,"");
+			tmpValue = tmpValue.replace(/\[/g,"");
+			tmpValue = tmpValue.replace(/\]\(/g,"");
+			tmpValue = tmpValue.replace(/\)/g,"");
+			tmpValue = tmpValue.replace(/- /g,"");
+			tmpValue = tmpValue.replace(/\\\(/g,"");
+			tmpValue = tmpValue.replace(/\\\)/g,"");
+			tmpValue = tmpValue.replace(/$/g,"");
+			tmpValue = tmpValue.replace(/<hlcode>/g,"");
+			tmpValue = tmpValue.replace(/<\/hlcode>/g,"");
+			tmpValue = tmpValue.replace(/>/g,"");
+			return tmpValue.length;
+		}).join());
+	}
+
+	/**
 	 * Sets the answer text for this AnswerOption instance
 	 * @param {String} text The text which shall be displayed during a quiz
 	 * @throws {Error} If the text is not of type String
@@ -82,6 +105,10 @@ export class AbstractAnswerOption {
 	 */
 	getAnswerOptionNumber () {
 		return this[answerOptionNumber];
+	}
+
+	setAnswerOptionNumber (index) {
+		this[answerOptionNumber] = index;
 	}
 
 	/**

@@ -18,8 +18,4 @@
 import {Template} from 'meteor/templating';
 
 Template.createQuestionView.onDestroyed(function () {
-	var body = $('body');
-	body.off('click', '.questionIcon:not(.active)');
-	body.off('click', '.removeQuestion');
-	delete sessionStorage.overrideValidQuestionRedirect;
 });

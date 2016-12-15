@@ -74,6 +74,10 @@ export class SingleChoiceQuestion extends AbstractChoiceQuestion {
 	typeName () {
 		return "SingleChoiceQuestion";
 	}
+
+	translationReferrer () {
+		return "view.questions.single_choice_question";
+	}
 }
 
 /**

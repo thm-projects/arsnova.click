@@ -66,12 +66,37 @@ Router.configure({
 	fastRender: true
 });
 
+const onBeforeAction = function () {
+	if (Router.current().originalUrl === "/" && Router.current().params.quizName) {
+		this.next();
+		return;
+	}
+	if (!globalEventStackObserver) {
+		setGlobalEventStackObserver();
+	}
+	if (typeof Router.current().params.quizName !== "undefined" && !EventManagerCollection.findOne()) {
+		if (!localData.containsHashtag(Router.current().params.quizName)) {
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: "plugins.splashscreen.error.error_messages.session_closed"
+			});
+		}
+		Router.go("/" + Router.current().params.quizName + "/resetToHome");
+	} else {
+		getChangeEventsForRoute(Router.current().route.getName());
+		getRemoveEventsForRoute(Router.current().route.getName());
+	}
+	this.next();
+};
+
 const NonBlockingRouteController = RouteController.extend({
+	onBeforeAction: onBeforeAction,
 	subscriptions: function () {
 		subsCache.subscribe('HashtagsCollection.public');
 	}
 });
 const BlockingRouteController = RouteController.extend({
+	onBeforeAction: onBeforeAction,
 	waitOn: function () {
 		const currentHashtag = Router.current().params.quizName;
 		return [
@@ -130,29 +155,6 @@ Router.onBeforeAction(function () {
 	this.next();
 });
 
-Router.onBeforeAction(function () {
-	if (Router.current().originalUrl === "/" && Router.current().params.quizName) {
-		this.next();
-		return;
-	}
-	if (!globalEventStackObserver) {
-		setGlobalEventStackObserver();
-	}
-	if (typeof Router.current().params.quizName !== "undefined" && !EventManagerCollection.findOne()) {
-		if (!localData.containsHashtag(Router.current().params.quizName)) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: "plugins.splashscreen.error.error_messages.session_closed"
-			});
-		}
-		Router.go("/" + Router.current().params.quizName + "/resetToHome");
-	} else {
-		getChangeEventsForRoute(Router.current().route.getName());
-		getRemoveEventsForRoute(Router.current().route.getName());
-	}
-	this.next();
-});
-
 Router.onAfterAction(function () {
 	createTabIndices();
 });
@@ -171,12 +173,15 @@ Router.route('/', {
 });
 
 Router.route('/hashtagmanagement', {
-	controller: NonBlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('hashtagManagement');
@@ -184,7 +189,6 @@ Router.route('/hashtagmanagement', {
 });
 
 Router.route('/preview/:themeName/:language', {
-	controller: NonBlockingRouteController,
 	action: function () {
 		this.render("titel", {
 			to: "header.title",
@@ -202,12 +206,15 @@ Router.route('/preview/:themeName/:language', {
 // Routes for Footer-Links
 
 Router.route('/about', {
-	controller: NonBlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('about');
@@ -215,12 +222,15 @@ Router.route('/about', {
 });
 
 Router.route('/agb', {
-	controller: NonBlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('agb');
@@ -228,12 +238,15 @@ Router.route('/agb', {
 });
 
 Router.route('/dataprivacy', {
-	controller: NonBlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('dataprivacy');
@@ -241,12 +254,15 @@ Router.route('/dataprivacy', {
 });
 
 Router.route('/imprint', {
-	controller: NonBlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('imprint');
@@ -254,12 +270,15 @@ Router.route('/imprint', {
 });
 
 Router.route('/translate', {
-	controller: NonBlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('translate');
@@ -267,12 +286,15 @@ Router.route('/translate', {
 });
 
 Router.route('/theme', {
-	controller: NonBlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('themeSwitcher');
@@ -291,7 +313,11 @@ Router.route('/showMore', {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('showMore');
@@ -330,7 +356,11 @@ Router.route('/:quizName/theme', {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('themeSwitcher');
@@ -349,7 +379,11 @@ Router.route('/:quizName/showMore', {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					}
+				};
 			}
 		});
 		this.render('showMore');
@@ -357,7 +391,6 @@ Router.route('/:quizName/showMore', {
 });
 
 Router.route('/:quizName/resetToHome', {
-	controller: BlockingRouteController,
 	action: function () {
 		cleanUp();
 		Router.go("/");
@@ -390,39 +423,107 @@ Router.route('/:quizName/nick', {
 	}
 });
 
-Router.route('/:quizName/question', {
-	controller: BlockingRouteController,
+Router.route('/:quizName/quizManager', {
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (!globalEventStackObserver.isRunning()) {
-				globalEventStackObserver.startObserving(Router.current().params.quizName);
-			}
-			this.render('questionList', {to: 'header.questionList'});
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {backId: "backButton", forwardId: "forwardButton"};
+					return {
+						backButton: {
+							id: "backButton",
+							intro: "view.quiz_manager.description.back_button"
+						},
+						forwardButton: {
+							id: "forwardButton",
+							text: 'view.quiz_summary.start_quiz',
+							intro: "view.quiz_manager.description.forward_button"
+						}
+					};
 				}
 			});
-			this.render('createQuestionView');
+			this.render('quizManager');
 		} else {
 			Router.go("/");
 		}
 	}
 });
 
-Router.route('/:quizName/answeroptions', {
-	controller: BlockingRouteController,
+Router.route('/:quizName/quizManager/:questionIndex', {
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (!globalEventStackObserver.isRunning()) {
-				globalEventStackObserver.startObserving(Router.current().params.quizName);
-			}
-			this.render('questionList', {to: 'header.questionList'});
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {backId: "backButton", forwardId: "forwardButton"};
+					return {
+						backButton: {
+							id: "backButton",
+							text: "global.save"
+						}
+					};
+				}
+			});
+			this.render('quizManagerDetails');
+		} else {
+			Router.go("/");
+		}
+	}
+});
+
+Router.route('/:quizName/questionType/:questionIndex', {
+	action: function () {
+		if (!localData.containsHashtag(Router.current().params.quizName)) {
+			Router.go("/");
+		} else {
+			this.render('footerNavButtons', {
+				to: 'footer.navigation',
+				data: function () {
+					return {
+						backButton: {
+							id: "backButton",
+							text: "global.save"
+						}
+					};
+				}
+			});
+			this.render('questionTypeView');
+		}
+	}
+});
+
+Router.route('/:quizName/question/:questionIndex', {
+	action: function () {
+		if (!localData.containsHashtag(Router.current().params.quizName)) {
+			Router.go("/");
+		} else {
+			this.render('footerNavButtons', {
+				to: 'footer.navigation',
+				data: function () {
+					return {
+						backButton: {
+							id: "backButton",
+							text: "global.save"
+						}
+					};
+				}
+			});
+			this.render('createQuestionView');
+		}
+	}
+});
+
+Router.route('/:quizName/answeroptions/:questionIndex', {
+	action: function () {
+		if (localData.containsHashtag(Router.current().params.quizName)) {
+			this.render('footerNavButtons', {
+				to: 'footer.navigation',
+				data: function () {
+					return {
+						backButton: {
+							id: "backButton",
+							text: "global.save"
+						}
+					};
 				}
 			});
 			this.render('createAnswerOptions');
@@ -432,18 +533,18 @@ Router.route('/:quizName/answeroptions', {
 	}
 });
 
-Router.route('/:quizName/settimer', {
-	controller: BlockingRouteController,
+Router.route('/:quizName/settimer/:questionIndex', {
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (!globalEventStackObserver.isRunning()) {
-				globalEventStackObserver.startObserving(Router.current().params.quizName);
-			}
-			this.render('questionList', {to: 'header.questionList'});
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {backId: "backButton", forwardId: "forwardButton"};
+					return {
+						backButton: {
+							id: "backButton",
+							text: "global.save"
+						}
+					};
 				}
 			});
 			this.render('createTimerView');
@@ -454,39 +555,25 @@ Router.route('/:quizName/settimer', {
 });
 
 Router.route('/:quizName/nicknameCategories', {
-	controller: BlockingRouteController,
+	waitOn: function () {
+		return [
+			subsCache.subscribe('NicknameCategoriesCollection.join')
+		];
+	},
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (!globalEventStackObserver.isRunning()) {
-				globalEventStackObserver.startObserving(Router.current().params.quizName);
-			}
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {backId: "backButton", forwardText: 'view.nickname_categories.back'};
+					return {
+						backButton: {
+							id: "backButton",
+							text: 'view.nickname_categories.back'
+						}
+					};
 				}
 			});
 			this.render('nicknameCategories');
-		} else {
-			Router.go("/");
-		}
-	}
-});
-
-Router.route('/:quizName/quizSummary', {
-	controller: BlockingRouteController,
-	action: function () {
-		if (localData.containsHashtag(Router.current().params.quizName)) {
-			if (!globalEventStackObserver.isRunning()) {
-				globalEventStackObserver.startObserving(Router.current().params.quizName);
-			}
-			this.render('footerNavButtons', {
-				to: 'footer.navigation',
-				data: function () {
-					return {backId: "backButton", backText: 'view.quiz_summary.edit_quiz', forwardId: "forwardButton", forwardText: 'view.quiz_summary.start_quiz'};
-				}
-			});
-			this.render('quizSummary');
 		} else {
 			Router.go("/");
 		}
@@ -503,7 +590,14 @@ Router.route('/:quizName/memberlist', {
 		this.render('memberlistFooterNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
-				return {backId: "backButton", forwardId: "forwardButton"};
+				return {
+					backButton: {
+						id: "backButton"
+					},
+					forwardButton: {
+						id: "forwardButton"
+					}
+				};
 			}
 		});
 		this.render("memberlist");

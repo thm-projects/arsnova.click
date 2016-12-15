@@ -18,30 +18,24 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
+import {getTooltipForRoute} from "/client/layout/global/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.createTimerView.onRendered(function () {
-	let index = EventManagerCollection.findOne().questionIndex;
-	lib.createSlider(index);
-	lib.setSlider(index);
-	var body = $('body');
-	body.on('click', '.questionIcon:not(.active)', function () {
-		if (index >= Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList().length) {
+	this.autorun(function () {
+		if (!Session.get("questionGroup")) {
 			return;
 		}
-
-		Router.go("/" + Router.current().params.quizName + "/question");
-	});
-	body.on('click', '.removeQuestion', function () {
-		index = EventManagerCollection.findOne().questionIndex;
-	});
+		let index = Router.current().params.questionIndex;
+		lib.createSlider(index);
+		lib.setSlider(index);
+	}.bind(this));
 
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.addFooterElement(footerElements.footerElemNicknames);
 	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
+	getTooltipForRoute();
 });

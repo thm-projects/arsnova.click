@@ -18,7 +18,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {MeteorMathJax} from 'meteor/mrt:mathjax';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";

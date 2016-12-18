@@ -15,10 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
 import {Tracker} from 'meteor/tracker';
 import {Router} from 'meteor/iron:router';
-import * as localData from '/lib/local_storage.js';
 import * as memberlistLib from '/client/layout/view_lobby/scripts/lib.js';
 import * as liveresultsLib from '/client/layout/view_live_results/scripts/lib.js';
 import * as votingViewLib from '/client/layout/view_voting/scripts/lib.js';

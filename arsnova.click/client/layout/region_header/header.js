@@ -18,7 +18,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {Tracker} from 'meteor/tracker';
 import {Router} from 'meteor/iron:router';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
@@ -150,21 +149,8 @@ Template.header.events({
 });
 
 Template.header.onRendered(function () {
-	this.autorun(function () {
-		if (Session.get("overrideTheme")) {
-			return;
-		}
-		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-		if (localStorage.getItem("theme")) {
-			Session.set("theme", localStorage.getItem("theme"));
-		} else {
-			localStorage.setItem("theme", "theme-arsnova-dot-click-contrast");
-			Session.set("theme", localStorage.getItem("theme"));
-		}
-		if (configDoc) {
-			Session.set("theme", configDoc.theme);
-		}
-	}.bind(this));
+	const self = this;
+
 	if (!Session.get("questionGroup") && Router.current().params.quizName && localData.containsHashtag(Router.current().params.quizName)) {
 		Session.set("questionGroup", localData.reenterSession(Router.current().params.quizName));
 	}
@@ -180,7 +166,9 @@ Template.header.onRendered(function () {
 
 	$(function () {
 		setTimeout(function () {
-			Tracker.autorun(lib.headerTrackerCallback);
+			self.autorun(function () {
+				lib.headerTrackerCallback();
+			}.bind(this));
 		}, 100);
 	});
 });

@@ -15,8 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import  * as localData from '/lib/local_storage.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
@@ -79,4 +81,23 @@ Template.layout.onRendered(function () {
 	startConnectionIndication();
 	getRTT();
 	$("body").on("click", "button", forceFeedback);
+
+	this.autorun(function () {
+		if (Session.get("overrideTheme")) {
+			return;
+		}
+		if (!Session.get("theme") || (Session.get("currentTheme") && Session.get("theme") === Session.get("currentTheme"))) {
+			const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+			if (localStorage.getItem("theme")) {
+				Session.set("theme", localStorage.getItem("theme"));
+			} else {
+				localStorage.setItem("theme", "theme-arsnova-dot-click-contrast");
+				Session.set("theme", localStorage.getItem("theme"));
+			}
+			if (configDoc) {
+				Session.set("theme", configDoc.theme);
+			}
+		}
+		$("body").removeClass().addClass(Session.get("theme"));
+	}.bind(this));
 });

@@ -66,7 +66,6 @@
 	.answerOptionElementWrapper {
 		display: flex;
 		border-radius: $corner-radius;
-		background-color: #ffd700;
 		margin: 10px 0;
 		position: relative;
 		font-size: 1.3em;
@@ -135,7 +134,6 @@
 	position: relative;
 
 	#previewAnsweroptionImage {
-		border: 1px solid white;
 		border-radius: $corner-radius;
 	}
 
@@ -155,7 +153,6 @@
 		}
 
 		p {
-			color: white;
 			margin: 0;
 		}
 	}

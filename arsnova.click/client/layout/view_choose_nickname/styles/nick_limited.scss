@@ -10,7 +10,6 @@
 
 	h3 {
 	  text-align: center;
-	  color: white;
 	  width: 100%;
 	}
 
@@ -31,14 +30,6 @@
 		width: 100%;
 		text-align: center;
 	  }
-
-	  &:hover {
-		background-color: lightgrey;
-	  }
-	  &:active {
-		background-color: grey;
-	  }
-	  background-color: white;
 	}
   }
 }

@@ -5,28 +5,10 @@
 	font-size: 4vh;
 }
 
-select {
-	&.textarea {
-		text-align-last:center;
-		text-align: center;
-	}
-}
-
-option {
-	text-align: left;
-}
-
 .themePreview {
 	cursor: pointer;
 	padding: 5px;
 	img {
 		width: 100%;
-		border: 2px solid white;
-	}
-
-	&.selectedTheme {
-		img {
-			border: 2px solid green;
-		}
 	}
 }

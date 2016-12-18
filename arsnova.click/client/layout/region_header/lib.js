@@ -16,7 +16,6 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
 import {Router} from 'meteor/iron:router';
 import * as localData from '/lib/local_storage.js';
@@ -37,18 +36,6 @@ export function isEditingQuestion() {
 		default:
 			return false;
 	}
-}
-
-export function addNewQuestion() {
-	const questionItem = Session.get("questionGroup"),
-		index          = questionItem.getQuestionList().length;
-
-	questionItem.addDefaultQuestion();
-	Session.set("questionGroup", questionItem);
-	localData.addHashtag(questionItem);
-	Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index, function () {
-		Router.go("/" + Router.current().params.quizName + "/question");
-	});
 }
 
 export function calculateHeaderSize() {

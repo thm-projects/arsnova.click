@@ -17,19 +17,12 @@
 
 @import "../../../layout/global/styles/appearance";
 
-#editQuestionText {
-	.invalidQuestion {
-		border-radius: 0, 0, $corner-radius, $corner-radius;
-	}
-}
-
 #previewQuestionContentWrapper {
 	overflow: hidden;
 	resize: none;
 	position: relative;
 
 	#previewQuestionImage {
-		border: 1px solid white;
 		border-radius: $corner-radius;
 	}
 
@@ -41,11 +34,7 @@
 		height: 540px;
 		overflow-y: auto;
 		overflow-x: hidden;
-		color: white;
 		word-wrap: break-word;
-		p {
-			color: white;
-		}
 	}
 }
 

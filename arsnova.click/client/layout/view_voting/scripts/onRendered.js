@@ -18,11 +18,13 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {MeteorMathJax} from 'meteor/mrt:mathjax';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as answerOptionLib from '/client/layout/view_answeroptions/scripts/lib.js';
+import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as lib from './lib.js';
 
 Template.votingview.onRendered(function () {
@@ -35,18 +37,18 @@ Template.votingview.onRendered(function () {
 	}
 	footerElements.removeFooterElements();
 	footerElements.footerTracker.changed();
-	lib.votingViewTracker.changed();
 	if (questionType !== "RangedQuestion" && questionType !== "FreeTextQuestion") {
 		this.autorun(function () {
 			headerLib.titelTracker.depend();
 			answerOptionLib.answerOptionTracker.depend();
+			questionLib.markdownRenderingTracker.depend();
 			Meteor.defer(function () {
 				lib.formatAnswerButtons();
 				lib.quickfitText();
 			});
 		}.bind(this));
 	}
-	lib.formatAnswerButtons();
+	lib.votingViewTracker.changed();
 });
 
 Template.liveResultsTitle.onRendered(function () {

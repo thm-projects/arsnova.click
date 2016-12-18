@@ -22,6 +22,7 @@ import {Router} from 'meteor/iron:router';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
+import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import {makeAndSendResponse, makeAndSendRangedResponse, makeAndSendFreeTextResponse, countdownFinish} from './lib.js';
 
 Template.votingview.events({
@@ -128,6 +129,7 @@ Template.votingview.events({
 	"DOMSubtreeModified .sendResponse": function (event) {
 		const id = $(event.currentTarget).attr("id");
 		$('#' + id).removeClass("quickfitSet");
+		questionLib.markdownRenderingTracker.changed();
 	},
 	"keydown #rangeInput": function (event, template) {
 		if (template.data && template.data["data-questionIndex"]) {

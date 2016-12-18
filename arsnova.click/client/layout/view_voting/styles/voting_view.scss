@@ -24,6 +24,8 @@
 
 	#buttonContainer {
 		margin: 0 auto;
+		overflow: hidden;
+		max-width: 100%;
 	}
 
 	.sendResponse {

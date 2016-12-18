@@ -103,7 +103,7 @@ export function quickfitText(reset) {
 		}
 		const contentItem = $(item).find("p").first();
 		contentItem.css({"height": "auto"});
-		if (contentItem.find("iframe").length > 0 && contentItem.find("p").length !== 0) {
+		if (contentItem.find("object").length > 0 && contentItem.find("p").length !== 0) {
 			contentItem.css("height", "100%");
 		}
 		contentItem.css("display", "inline-flex");
@@ -150,31 +150,33 @@ export function formatAnswerButtons() {
 	const contentHeight = calculateAnswerRowHeight();
 	answerRow.css({height: contentHeight + 'px'});
 	const contentWidth = answerRow.outerWidth();
-	if ($(window).outerWidth() <= 768) {
-		buttonElements.find("button").css({margin: "5px 0"});
-		buttonElements.addClass("col-xs-6");
-	} else {
-		let scaleBaseWidth = 100;
-		let scaleBaseHeight = 100;
-		const answerOptionElements = $('.btn-answerOption').length;
-		const calculateButtons = function (width, height) {
-			let maxButtonsPerRow = Math.floor(contentWidth / width);
-			const maxRows = Math.floor((contentHeight - (Math.floor(contentHeight / height)) * 10) / height);
-			if (answerOptionElements % 2 === 0 && maxButtonsPerRow % 2 !== 0) {
-				maxButtonsPerRow--;
-			}
-			return {maxButtons: maxButtonsPerRow * maxRows, maxButtonsPerRow: maxButtonsPerRow, maxRows: maxRows};
-		};
-		let maxButtons = calculateButtons(scaleBaseWidth, scaleBaseHeight).maxButtons;
-		while (calculateButtons(scaleBaseWidth + 1, scaleBaseHeight + 1).maxButtons >= answerOptionElements) {
-			maxButtons = calculateButtons(++scaleBaseWidth, ++scaleBaseHeight).maxButtons;
-		}
-		const calculateResult = calculateButtons(scaleBaseWidth, scaleBaseHeight);
-		const strechedWidth = ((contentWidth / calculateResult.maxButtonsPerRow) - 10);
-		if ($("object").length > 0) {
-			scaleBaseHeight += 30;
-		}
-		buttonElements.css({float: "left", margin: "5px", width: strechedWidth + "px", height: scaleBaseHeight});
-		buttonContainer.css({width: strechedWidth * calculateResult.maxButtonsPerRow + (calculateResult.maxButtonsPerRow * 10)});
+	let scaleBaseWidth = 100;
+	let scaleBaseHeight = 100;
+	const hasVideoElements = $("object").length > 0;
+	if ($(window).width() < 786 || hasVideoElements) {
+		scaleBaseWidth  = contentWidth / 2 - 10;
 	}
+	if (hasVideoElements) {
+		scaleBaseHeight = 160;
+	}
+	const answerOptionElements = $('.sendResponse').length;
+	const calculateButtons = function (width, height) {
+		let maxButtonsPerRow = Math.floor(contentWidth / width);
+		const maxRows = Math.floor((contentHeight - (Math.floor(contentHeight / height)) * 10) / height);
+		if (answerOptionElements % 2 === 0 && maxButtonsPerRow % 2 !== 0) {
+			maxButtonsPerRow--;
+		}
+		return {maxButtons: maxButtonsPerRow * maxRows, maxButtonsPerRow: maxButtonsPerRow, maxRows: maxRows};
+	};
+	let calculateResult;
+	do {
+		calculateResult = calculateButtons(++scaleBaseWidth, ++scaleBaseHeight);
+	} while (calculateResult.maxButtons >= answerOptionElements);
+	console.log(contentWidth, calculateResult.maxButtonsPerRow, ((contentWidth / calculateResult.maxButtonsPerRow) - 10));
+	let strechedWidth = ((contentWidth / calculateResult.maxButtonsPerRow) - 10);
+	if (scaleBaseHeight * calculateResult.maxRows > contentHeight) {
+		strechedWidth -= 10;
+	}
+	buttonElements.css({float: "left", margin: "5px", width: strechedWidth + "px", height: scaleBaseHeight});
+	buttonContainer.css({width: strechedWidth * calculateResult.maxButtonsPerRow + (calculateResult.maxButtonsPerRow * 10)});
 }

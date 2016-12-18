@@ -18,6 +18,8 @@
 import {Session} from 'meteor/session';
 import * as localData from '/lib/local_storage.js';
 
+export const markdownRenderingTracker = new Tracker.Dependency();
+
 export function addQuestion(index) {
 	const questionText = $('#questionText').val() || "";
 	const questionItem = Session.get("questionGroup");
@@ -215,6 +217,7 @@ export function parseGithubFlavoredMarkdown(result) {
 				break;
 		}
 	}
+	markdownRenderingTracker.changed();
 }
 
 export function getQuestionTypes() {

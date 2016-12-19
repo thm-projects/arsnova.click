@@ -44,13 +44,26 @@
 	display:none;
 }
 
-.showMoreCheckboxLabel {
-	margin-bottom: 0;
-	line-height: 30px;
-}
-
 .contactHeaderBarButtonGroup {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+#showMore {
+	.footerElement {
+		cursor: pointer;
+		padding: 0;
+		width: 100%;
+
+		p {
+			margin: 0;
+			line-height: 25px;
+			text-align: center;
+
+			&.footerElemIcon {
+				margin-top: 5px;
+			}
+		}
+	}
 }

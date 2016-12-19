@@ -27,6 +27,7 @@
 
 	p {
 		margin: 0 20px 5px;
+		word-wrap: break-word;
 
 		&.success, &.failed {
 			font-weight: bold;

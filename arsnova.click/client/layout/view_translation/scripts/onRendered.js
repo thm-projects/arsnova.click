@@ -15,8 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
-import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
+import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 
 Template.translate.onRendered(function () {
@@ -28,5 +29,8 @@ Template.translate.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
 	}
 	footerElements.addFooterElement(footerElements.footerElemHashtagManagement);
-	calculateHeaderSize();
+	Meteor.defer(function () {
+		headerLib.calculateHeaderSize();
+		headerLib.calculateTitelHeight();
+	});
 });

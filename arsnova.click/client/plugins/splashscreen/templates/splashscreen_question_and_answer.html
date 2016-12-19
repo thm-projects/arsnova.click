@@ -43,11 +43,11 @@
                         <hr/>
                         <div id="answerContent" class="markdown-content">
                             {{#if isRangedQuestion}}
-                                <h1>{{_"plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
+                                <h1>{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
                                 {{#with getAnswerOptions}}
                                     <div class="answerContentElementWrapper">
                                         <div class="answerContentElementLetter">
-                                            <span>{{_"plugins.splashscreen.question_and_answer.min_range"}}</span>
+                                            <span>{{_ "plugins.splashscreen.question_and_answer.min_range"}}</span>
                                         </div>
                                         <div class="answerContentElementItem">
                                             <span>{{this.[0]}}</span>
@@ -55,7 +55,7 @@
                                     </div>
                                     <div class="answerContentElementWrapper">
                                         <div class="answerContentElementLetter">
-                                            <span>{{_"plugins.splashscreen.question_and_answer.correct_value"}}</span>
+                                            <span>{{_ "plugins.splashscreen.question_and_answer.correct_value"}}</span>
                                         </div>
                                         <div class="answerContentElementItem">
                                             <span>{{this.[1]}}</span>
@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="answerContentElementWrapper">
                                         <div class="answerContentElementLetter">
-                                            <span>{{_"plugins.splashscreen.question_and_answer.max_range"}}</span>
+                                            <span>{{_ "plugins.splashscreen.question_and_answer.max_range"}}</span>
                                         </div>
                                         <div class="answerContentElementItem">
                                             <span>{{this.[2]}}</span>
@@ -72,11 +72,11 @@
                                 {{/with}}
                             {{else}}
                                 {{#if isFreeTextQuestion}}
-                                    <h1>{{_"plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
+                                    <h1>{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
                                     {{#with getAnswerOptions}}
                                         <div class="answerContentElementWrapper">
                                             <div class="answerContentElementLetter">
-                                                <span>{{_"plugins.splashscreen.question_and_answer.reference_value"}}</span>
+                                                <span>{{_ "plugins.splashscreen.question_and_answer.reference_value"}}</span>
                                             </div>
                                             <div class="answerContentElementItem">
                                                 {{#mathjax}}{{this[0]}}{{/mathjax}}
@@ -84,11 +84,11 @@
                                         </div>
                                     {{/with}}
                                 {{else}}
-                                    <h1>{{_"plugins.splashscreen.question_and_answer.answeroption" count=2}}</h1>
+                                    <h1>{{_ "plugins.splashscreen.question_and_answer.answeroption" count=2}}</h1>
                                     {{#each getAnswerOptions}}
                                         <div class="answerContentElementWrapper">
                                             <div class="answerContentElementLetter">
-                                                <span>{{_"plugins.splashscreen.question_and_answer.answeroption" count=1}} {{answerOptionLetter @index}}</span>
+                                                <span>{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}} {{answerOptionLetter @index}}</span>
                                             </div>
                                             <div class="answerContentElementItem">
                                                 {{#if isVideoQuestionText this}}
@@ -115,7 +115,7 @@
                                 type="button"
                                 class="btn btn-success btn-answerOption btn-lg tabbable">
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                            {{_ "global.close_window"}}
+                            <span class="hidden-xs">{{_ "global.close_window"}}</span>
                         </button>
                     </div>
                 </div>

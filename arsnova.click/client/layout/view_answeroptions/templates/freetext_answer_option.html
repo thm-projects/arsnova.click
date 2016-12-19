@@ -17,54 +17,56 @@
 
 <template name="freeTextAnswerOptionTemplate">
     <div class="row full-screen-content freeTextAnswerOptions">
-        <div class="row">
-            <h2 class="col-xs-12 text-light text-center">{{_ "view.answeroptions.free_text_question.title"}}</h2>
-            <div class="col-xs-12">
+        <div class="col-xs-12">
+            <div class="row">
+                <h2 class="col-xs-12 text-light text-center">{{_ "view.answeroptions.free_text_question.title"}}</h2>
+                <div class="col-xs-12">
             <textarea id="answerTextArea"
                       class="round-corners textarea placeholder-align-center tabbable"
                       rows="3"
                       data-intro="{{_ "view.answeroptions.description.free_text_question_text"}}"
                       placeholder="{{_ "view.answeroptions.free_text_question.text_placeholder" }}">{{answerText}}</textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="row">
-                    {{#each configOptions}}
-                        <div class="col-xs-12 col-sm-6 configOptionContainer" data-intro="{{_ this.description}}">
-                            <p class="text-light checkboxLabel">{{_ this.textName}}: </p>
-                            <input type="checkbox"
-                                   id="{{this.id}}_switch"
-                                   name="switch"
-                                   data-size="small"
-                                   data-width="100"
-                                   data-style="pull-right introCheckbox"
-                                   data-onstyle="success"
-                                   data-offstyle="danger"
-                                   data-on="{{_ "view.answeroptions.free_text_question.onText"}}"
-                                   data-off="{{_ "view.answeroptions.free_text_question.offText"}}"
-                                   title="{{_ this.textName}}"
-                                   class="tabbable">
-                        </div>
-                    {{/each}}
                 </div>
             </div>
-        </div>
-        <div class="row distance-top" data-intro="{{_ "view.answeroptions.description.check_answer"}}">
-            <h2 class="col-xs-12 text-light text-center">{{_ "view.answeroptions.free_text_question.check_answer_title"}}</h2>
-            <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        {{#each configOptions}}
+                            <div class="col-xs-12 col-sm-6 configOptionContainer" data-intro="{{_ this.description}}">
+                                <p class="text-light checkboxLabel">{{_ this.textName}}: </p>
+                                <input type="checkbox"
+                                       id="{{this.id}}_switch"
+                                       name="switch"
+                                       data-size="small"
+                                       data-width="100"
+                                       data-style="pull-right introCheckbox"
+                                       data-onstyle="success"
+                                       data-offstyle="danger"
+                                       data-on="{{_ "view.answeroptions.free_text_question.onText"}}"
+                                       data-off="{{_ "view.answeroptions.free_text_question.offText"}}"
+                                       title="{{_ this.textName}}"
+                                       class="tabbable">
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <div class="row distance-top" data-intro="{{_ "view.answeroptions.description.check_answer"}}">
+                <h2 class="col-xs-12 text-light text-center">{{_ "view.answeroptions.free_text_question.check_answer_title"}}</h2>
+                <div class="col-xs-12">
             <textarea id="answerCheckArea"
                       class="round-corners textarea placeholder-align-center tabbable"
                       rows="3"
                       placeholder="{{_ "view.answeroptions.free_text_question.text_placeholder" }}"></textarea>
-                <div class="center-block">
-                    {{#if isCheckingResponse}}
-                        {{#if getIsCorrectResponse}}
-                            <h4 class="text-center success">{{_ "view.answeroptions.free_text_question.check_correct"}}</h4>
-                        {{else}}
-                            <h4 class="text-center failed">{{_ "view.answeroptions.free_text_question.check_incorrect"}}</h4>
+                    <div class="center-block">
+                        {{#if isCheckingResponse}}
+                            {{#if getIsCorrectResponse}}
+                                <h4 class="text-center success">{{_ "view.answeroptions.free_text_question.check_correct"}}</h4>
+                            {{else}}
+                                <h4 class="text-center failed">{{_ "view.answeroptions.free_text_question.check_incorrect"}}</h4>
+                            {{/if}}
                         {{/if}}
-                    {{/if}}
+                    </div>
                 </div>
             </div>
         </div>

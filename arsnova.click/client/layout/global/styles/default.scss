@@ -16,10 +16,13 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 @import "appearance";
-@import "themeSwitcher";
 
 body {
   font-family: $font;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
 }
 
 *:fullscreen,

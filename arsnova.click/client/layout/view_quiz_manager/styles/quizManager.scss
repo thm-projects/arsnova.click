@@ -3,8 +3,6 @@
 
 #quizManager {
 	.sortable-placeholder {
-		color: black;
-		background-color: white;
 		border-radius: $corner-radius;
 		opacity: 0.2;
 		height: 30px;
@@ -18,7 +16,6 @@
 		margin: 0;
 
 		li {
-			color: white;
 			list-style-type: none;
 			cursor: move;
 
@@ -32,14 +29,12 @@
 			min-height: 100px;
 
 			.questionElementWrapper {
-				border: 1px solid white;
 				margin: 5px 0;
 				padding: 5px;
 				border-radius: $corner-radius;
 				position: relative;
 
 				&:hover {
-					background-color: lighten(black, 10);
 					.removeQuestion {
 						visibility: visible;
 					}
@@ -51,14 +46,12 @@
 						&:before {
 							content: "\2611";
 							margin-right: 5px;
-							color: #00e600;
 						}
 					}
 					&[data-valid='false'] {
 						&:before {
 							content: "\2612";
 							margin-right: 5px;
-							color: red;
 						}
 					}
 				}

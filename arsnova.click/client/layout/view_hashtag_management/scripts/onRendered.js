@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Template} from 'meteor/templating';
-import {calculateHeaderSize} from '/client/layout/region_header/lib.js';
+import * as headerLib from '/client/layout/region_header/lib.js';
 import * as localData from '/lib/local_storage.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 
@@ -32,7 +32,8 @@ Template.hashtagManagement.onRendered(function () {
 	if (navigator.userAgent.match(/iPad/i) == null) {
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
 	}
-	calculateHeaderSize();
+	headerLib.calculateHeaderSize();
+	headerLib.calculateTitelHeight();
 
 	$('.js-export').tooltip();
 	$('.js-delete').tooltip();

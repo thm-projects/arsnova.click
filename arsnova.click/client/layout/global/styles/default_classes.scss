@@ -137,7 +137,6 @@
 }
 
 .button-result {
-  background-color: #eeeeee;
   box-shadow: none;
   height: auto;
 }
@@ -226,11 +225,6 @@
   border: 0;
 }
 
-select:-moz-focusring {
-  color: transparent;
-  text-shadow: 0 0 0 #000;
-}
-
 .previewText {
   width: 100%;
   font-size: 1.5em;
@@ -287,10 +281,6 @@ select:-moz-focusring {
 
 .aria-item {
   display: none;
-}
-
-.focused {
-  border: 3px solid red !important;
 }
 
 * {

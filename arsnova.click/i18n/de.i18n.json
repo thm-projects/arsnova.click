@@ -6,6 +6,8 @@
     "delete": "Löschen",
     "save": "Speichern",
     "abort": "Abbrechen",
+    "yes": "Ja",
+    "no": "Nein",
     "close_window": "Fenster schließen",
     "aria_description": {
       "arsnova_slogan": "Quiz-App für alles und jeden"
@@ -33,7 +35,7 @@
         "blog": "Blog",
         "languages": "Sprache",
         "style": "Stil",
-        "import": "Quiz importieren",
+        "import": "Import",
         "info": "Info",
         "reading-confirmation": "Lesebestätigung",
         "fullscreen": "Vollbild",

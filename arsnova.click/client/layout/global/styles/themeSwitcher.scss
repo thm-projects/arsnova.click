@@ -72,6 +72,8 @@
 	$border-questionScrollPane-active-remove-question: beige;
 	$bg-questionScrollPane-active-remove-question-hovered: red;
 	$fg-questionScrollPane-active-remove-question-hovered: white;
+	$border-previewQuestionContentWrapper-image: white;
+	$fg-previewQuestionContentWrapper: white;
 
 	$border-answer_options-invalidAnswerOption: red;
 	$border-answer_options-invalidQuestion: red;
@@ -85,6 +87,9 @@
 	$border-answer_options-bootstrap_switch_focused: none;
 	$box-shadow-answer_options-bootstrap_switch_focused: none;
 	$outline-answer_options-bootstrap_switch_focused: none;
+	$bg-edit_answeroption_text-element_wrapper: #ffd700;
+	$border-preview_answeroption_content_wrapper-image: white;
+	$fg-preview_answeroption_content_wrapper: white;
 
 	$disabled-button-background: #808080;
 
@@ -109,8 +114,8 @@
 	$fg-footer-info-bar-active-hovered: #33FF00;
 	$fg-footer-element: white;
 	$fg-footer-element-hovered: white;
-	$fg-footer-element-deactivated: $warning;
-	$fg-footer-element-deactivated-hovered: red;
+	$fg-footer-element-deactivated: red;
+	$fg-footer-element-deactivated-hovered: #ff3e3e;
 	$fg-footer-element-activated: $success;
 	$fg-footer-element-activated-hovered: $success;
 
@@ -125,14 +130,11 @@
 	$bg_progress-bar: white;
 	$fg_progress-bar: black;
 
-	$bg-connection-quality-header_connection-pending: grey;
-	$fg-connection-quality-header_connection-pending: white;
-	$bg-connection-quality-header_connection-ok: green;
-	$fg-connection-quality-header_connection-ok: white;
-	$bg-connection-quality-header_connection-warning: orange;
-	$fg-connection-quality-header_connection-warning: white;
-	$bg-connection-quality-header_connection-error: red;
-	$fg-connection-quality-header_connection-error: white;
+	$fg-connection-quality-header_connection-pending: grey;
+	$fg-connection-quality-header_connection-ok: green;
+	$fg-connection-quality-header_connection-warning: orange;
+	$fg-connection-quality-header_connection-failed: red;
+	$fg-connection-quality-header_connection-error: red;
 	$fg-connection-quality-header_details-link: white;
 
 	$splash-screen-header-color: #2f4f4f;
@@ -248,6 +250,51 @@
 	$colorChangingClick75: white;
 	$colorChangingClick100: $warning;
 
+	$bg-thm_logo_background: #dfe5e6;
+	$border-focused: red;
+	$bg-button_result: #eeeeee;
+
+	$border-loader_wrapper-outer_spin: #3498db;
+	$border-loader_wrapper-middle_spin: #e74c3c;
+	$border-loader_wrapper-inner_spin: #f9c922;
+
+	$fg-quiz_manager-sortable_placeholder: black;
+	$bg-quiz_manager-sortable_placeholder: white;
+	$fg-quiz_manager-ul-li: white;
+	$border-quiz_manager-available_questions_wrapper: white;
+	$bg-quiz_manager-available_questions_wrapper-hovered: lighten(black, 10);
+	$border-quiz_manager-available_questions_wrapper-valid: #00e600;
+	$border-quiz_manager-available_questions_wrapper-invalid: red;
+
+	$border-question_type_view-wrapper: black;
+	$fg-question_type_view-wrapper-hovered: white;
+	$bg-question_type_view-wrapper-hovered: lighten(black, 10);
+
+	$border-theme-preview-img: white;
+	$border-theme-preview-img-selected: green;
+
+	$fg-nickname_categories-h3: white;
+	$bg-nickname_categories-nick_style: white;
+	$bg-nickname_categories-nick_style-hovered: lightgrey;
+	$bg-nickname_categories-nick_style-active: grey;
+	$bg-nickname_categories-nick_style-selected_category: lightgreen;
+	$bg-nickname_categories-nick_chosen_nick: white;
+	$bg-nickname_categories-nick_chosen_nick-hovered: lightgrey;
+	$bg-nickname_categories-nick_chosen_nick-active: grey;
+	$bg-nickname_categories-nick_chosen_nick-selected: lightgreen;
+	$fg-nickname_categories-options: white;
+
+	$fg-nick_limited-h3: white;
+	$bg-nick_limited-selectable_nick: white;
+	$bg-nick_limited-selectable_nick-hovered: lightgrey;
+	$bg-nick_limited-selectable_nick-active: grey;
+
+	$bg-introjs-helper_layer: white;
+
+	$fg-quiz_manager_details-btn_group-button: black;
+	$bg-quiz_manager_details-btn_group-button: #ffd700;
+	$bg-quiz_manager_details-btn_group-button-hovered: darken($bg-quiz_manager_details-btn_group-button, 10);
+
 	@if ($name == "theme-arsnova-dot-click-contrast"){
 		$background-color: #23425b;
 		$warning: #991d1d;
@@ -270,8 +317,6 @@
 
 		$bg-answer_options-bootstrap_switch_handle_off: $warning;
 		$bg-rangedSlider-invalid: $warning;
-		$fg-footer-element-deactivated: $warning;
-		$bg-js-my-hash-invalidQuestion: $warning;
 		$bg-js-my-hash-invalidQuestion-hovered: lighten($warning, 10);
 		$bg-colorChangingOwnNick25: $warning;
 
@@ -309,6 +354,9 @@
 
 		$check-mark-checked: $success;
 		$check-mark-unchecked: $warning;
+
+		$bg-quiz_manager-available_questions_wrapper-hovered: #444444;
+		$border-question_type_view-wrapper-hovered: #444444;
 
 		$fg-warning: $warning;
 
@@ -352,6 +400,14 @@
 		$success-text-color: white;
 		$fg_titel: $thmgray;
 
+		$bg-quiz_manager-sortable_placeholder: $default-text-color;
+		$fg-quiz_manager-ul-li: $default-text-color;
+		$border-quiz_manager-available_questions_wrapper: $default-text-color;
+		$bg-quiz_manager-available_questions_wrapper-hovered: #BBBCBC;
+		$border-question_type_view-wrapper-hovered: #BBBCBC;
+
+		$bg-introjs-helper_layer: black;
+
 		$fg_demo-quiz-description: $fg_titel;
 		$fg_lobby-waiting-for-players-notifier: $fg_titel;
 
@@ -365,8 +421,6 @@
 		$footer-background-color: #000000; /*gainsboro */
 		$fg-footer-info-bar-active: #00CC00;
 		$fg-footer-info-bar-active-hovered: #00FF00;
-		$fg-footer-element-deactivated: #E00000;
-		$fg-footer-element-deactivated-hovered: #FF0000;
 
 		$bg-answer_options-bootstrap_switch: $thmgray;
 
@@ -417,6 +471,12 @@
 		$fg-quiz-summary-H4: $default-text-color;
 		$fg-quiz-summary-P: $default-text-color;
 		$fg-quiz-summary-UL: $default-text-color;
+		$bg-quiz_manager-sortable_placeholder: $default-text-color;
+		$fg-quiz_manager-ul-li: $default-text-color;
+		$border-quiz_manager-available_questions_wrapper: $default-text-color;
+		$bg-quiz_manager-available_questions_wrapper-hovered: #BBBCBC;
+		$border-question_type_view-wrapper-hovered: #BBBCBC;
+		$bg-introjs-helper_layer: black;
 		$fg-success: $success;
 		$splashscreen-background-color: #b3c8da;
 		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
@@ -454,6 +514,12 @@
 		$fg-quiz-summary-H4: $default-text-color;
 		$fg-quiz-summary-P: $default-text-color;
 		$fg-quiz-summary-UL: $default-text-color;
+		$bg-quiz_manager-sortable_placeholder: $default-text-color;
+		$fg-quiz_manager-ul-li: $default-text-color;
+		$border-quiz_manager-available_questions_wrapper: $default-text-color;
+		$bg-quiz_manager-available_questions_wrapper-hovered: #BBBCBC;
+		$border-question_type_view-wrapper-hovered: #BBBCBC;
+		$bg-introjs-helper_layer: black;
 		$fg-success: darken($success, 5);
 	}
 
@@ -569,12 +635,24 @@
 
 	@if ($name == "theme-action") {
 		$fg_quiz-name: black;
+		$fg-text-light: black;
+		$default-text-color: black;
 		$background-color: darkorange;
 		$bg-nav-row: #B40404;  /*dark-red*/
 		$bg-footer: darkorange;
 
 		$bg-container: $background-color;
 		$bg-questionList-row: $bg-container;
+
+		$fg-hashtag_management-hashtag_name: $default-text-color;
+		$border-hashtag_management-HR: $default-text-color;
+		$quiz-summary-row-color: $default-text-color;
+		$fg-quiz-summary-H4: $default-text-color;
+		$fg-quiz-summary-P: $default-text-color;
+		$fg-quiz-summary-UL: $default-text-color;
+		$bg-quiz_manager-sortable_placeholder: $default-text-color;
+		$fg-quiz_manager-ul-li: $default-text-color;
+		$border-quiz_manager-available_questions_wrapper: $default-text-color;
 
 		$slider-color: $bg-nav-row;
 
@@ -613,6 +691,12 @@
 		$fg-quiz-summary-H4: $default-text-color;
 		$fg-quiz-summary-P: $default-text-color;
 		$fg-quiz-summary-UL: $default-text-color;
+		$bg-quiz_manager-sortable_placeholder: $default-text-color;
+		$fg-quiz_manager-ul-li: $default-text-color;
+		$border-quiz_manager-available_questions_wrapper: $default-text-color;
+		$bg-quiz_manager-available_questions_wrapper-hovered: #F9C5C5;
+		$border-question_type_view-wrapper-hovered: #F9C5C5;
+		$bg-introjs-helper_layer: black;
 		$fg-success: $success;
 		$splashscreen-background-color: #b3c8da;
 		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
@@ -626,16 +710,12 @@
 	}
 
 	.#{$name} {
-		height: 100%;
-		width: 100%;
-		position: absolute;
 		background: $background-color;
 		-webkit-transition: background-color 800ms linear;
 		-moz-transition: background-color 800ms linear;
 		-o-transition: background-color 800ms linear;
 		-ms-transition: background-color 800ms linear;
 		transition: background-color 800ms linear;
-
 		*:fullscreen,
 		*:-webkit-full-screen,
 		*:-moz-full-screen {
@@ -646,262 +726,270 @@
 			-ms-transition: background-color 800ms linear;
 			transition: background-color 800ms linear;
 		}
-		.text-light, a.text-light, a:hover.text-light, a:active.text-light, a:visited.text-light, a:focus.text-light {
-			color: $fg-text-light;
+		.introjs-helperLayer {
+			background: $bg-introjs-helper_layer;
 		}
-		a.text-dark, a:hover.text-dark, a:active.text-dark, a:visited.text-dark, a:focus.text-dark {
-			color: $fg_text-dark !important;
-		}
-		a, a:hover, a:active, a:visited, a:focus {
-			color: $fg_a;
-		}
-		.titel {
-			color: $fg_titel;
-		}
-	  	#landingPageContent {
-			#demo-quiz-description {
-				color: $fg_demo-quiz-description;
+		#theme-wrapper {
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			.text-light, a.text-light, a:hover.text-light, a:active.text-light, a:visited.text-light, a:focus.text-light {
+				color: $fg-text-light;
 			}
-		}
-		.quizName {
-			color: $fg_quiz-name;
-		}
-		.container, .fixed-bottom {
-			background-color: $bg-container;
-			-webkit-transition: background-color 800ms linear;
-			-moz-transition: background-color 800ms linear;
-			-o-transition: background-color 800ms linear;
-			-ms-transition: background-color 800ms linear;
-			transition: background-color 800ms linear;
-		}
-		.footer-info-bar {
-			background-color: $bg-footer;
-			color: $fg-footer-info-bar;
-		}
-		.footer-gradient {
-			color: $footer-text-color;
-		}
-		.footer a {
-			color: $footer-text-color;
-			div {
-				border-left: solid $footer-text-color 1px;
-				color: $footer-text-color !important;
+			a.text-dark, a:hover.text-dark, a:active.text-dark, a:visited.text-dark, a:focus.text-dark {
+				color: $fg_text-dark !important;
 			}
-		}
-		.navbar-fixed-top {
-			background-color: $bg-nav-row;
-			-webkit-transition: background-color 800ms linear;
-			-moz-transition: background-color 800ms linear;
-			-o-transition: background-color 800ms linear;
-			-ms-transition: background-color 800ms linear;
-			transition: background-color 800ms linear;
-			.questionList-row {
-				background-color: $bg-questionList-row;
+			a, a:hover, a:active, a:visited, a:focus {
+				color: $fg_a;
+			}
+			.titel {
+				color: $fg_titel;
+			}
+			#landingPageContent {
+				#demo-quiz-description {
+					color: $fg_demo-quiz-description;
+				}
+			}
+			.quizName {
+				color: $fg_quiz-name;
+			}
+			.container, .fixed-bottom {
+				background-color: $bg-container;
 				-webkit-transition: background-color 800ms linear;
 				-moz-transition: background-color 800ms linear;
 				-o-transition: background-color 800ms linear;
 				-ms-transition: background-color 800ms linear;
 				transition: background-color 800ms linear;
 			}
-			.nav-row {
+			.footer-info-bar {
+				background-color: $bg-footer;
+				color: $fg-footer-info-bar;
+			}
+			.footer-gradient {
+				color: $footer-text-color;
+			}
+			.footer a {
+				color: $footer-text-color;
+				div {
+					border-left: solid $footer-text-color 1px;
+					color: $footer-text-color !important;
+				}
+			}
+			.navbar-fixed-top {
 				background-color: $bg-nav-row;
 				-webkit-transition: background-color 800ms linear;
 				-moz-transition: background-color 800ms linear;
 				-o-transition: background-color 800ms linear;
 				-ms-transition: background-color 800ms linear;
 				transition: background-color 800ms linear;
-			}
-		}
-		*::-webkit-input-placeholder {
-			color: $placeholder-color;
-			opacity: 1;
-		}
-		*:-moz-placeholder, *::-moz-placeholder {
-			color: $placeholder-color;
-			opacity: 1;
-		}
-		*:-ms-input-placeholder {
-			color: $placeholder-color;
-			opacity: 1;
-		}
-		.hashtag-management {
-			hr {
-				border-color: $border-hashtag_management-HR;
-			}
-			.hashtag-name {
-				color: $fg-hashtag_management-hashtag_name;
-			}
-		}
-		button:disabled {
-			background-color: $disabled-button-background;
-		}
-		.qr-code-button {
-			color: $fg-qr-code-button;
-			&:hover {
-				color: $fg-qr-code-button-hovered;
-			}
-		}
-		.qr-code-container {
-			border: 1px solid $border-qr-code-container;
-			background-color: $bg-qr-code-container;
-		}
-		.qr-code-container-close {
-			color: $fg-qr-code-container-close;
-			&:hover {
-				color: $fg-qr-code-container-close-hovered;
-			}
-			.glyphicon-remove {
-				border: 1px solid $border-qr-code-container-close-icon;
-				background-color: $background-qr-code-container-close-icon;
-			}
-		}
-		.qr-code-label {
-			color: $fg-qr-code-label;
-		}
-		.questionScrollPane {
-			.indexNumber {
-				color: $fg-questionScrollPane-index-number;
-			}
-			.removeQuestion {
-				color: $fg-questionScrollPane-remove-question;
-			}
-			.questionIcon {
-				&.valid {
-					.indexNumber {
-						background-color: $bg-questionScrollPane-question-icon-valid-index-number;
-					}
-					&:hover:not(.active) {
-						.indexNumber {
-							background-color: $bg-questionScrollPane-question-icon-valid-index-number-hovered;
-						}
-					}
+				.questionList-row {
+					background-color: $bg-questionList-row;
+					-webkit-transition: background-color 800ms linear;
+					-moz-transition: background-color 800ms linear;
+					-o-transition: background-color 800ms linear;
+					-ms-transition: background-color 800ms linear;
+					transition: background-color 800ms linear;
 				}
-				&:not(.valid) {
-					.indexNumber {
-						background-color: $bg-questionScrollPane-question-icon-invalid-index-number;
-					}
-					&:hover:not(.active) {
-						.indexNumber {
-							background-color: $bg-questionScrollPane-question-icon-invalid-index-number-hovered;
-						}
-					}
+				.nav-row {
+					background-color: $bg-nav-row;
+					-webkit-transition: background-color 800ms linear;
+					-moz-transition: background-color 800ms linear;
+					-o-transition: background-color 800ms linear;
+					-ms-transition: background-color 800ms linear;
+					transition: background-color 800ms linear;
 				}
-				&.active {
-					border: 1px solid $border-questionScrollPane-active;
+			}
+			*::-webkit-input-placeholder {
+				color: $placeholder-color;
+				opacity: 1;
+			}
+			*:-moz-placeholder, *::-moz-placeholder {
+				color: $placeholder-color;
+				opacity: 1;
+			}
+			*:-ms-input-placeholder {
+				color: $placeholder-color;
+				opacity: 1;
+			}
+			.hashtag-management {
+				hr {
+					border-color: $border-hashtag_management-HR;
+				}
+				.hashtag-name {
+					color: $fg-hashtag_management-hashtag_name;
+				}
+			}
+			button:disabled {
+				background-color: $disabled-button-background;
+			}
+			.qr-code-button {
+				color: $fg-qr-code-button;
+				&:hover {
+					color: $fg-qr-code-button-hovered;
+				}
+			}
+			.qr-code-container {
+				border: 1px solid $border-qr-code-container;
+				background-color: $bg-qr-code-container;
+			}
+			.qr-code-container-close {
+				color: $fg-qr-code-container-close;
+				&:hover {
+					color: $fg-qr-code-container-close-hovered;
+				}
+				.glyphicon-remove {
+					border: 1px solid $border-qr-code-container-close-icon;
+					background-color: $background-qr-code-container-close-icon;
+				}
+			}
+			.qr-code-label {
+				color: $fg-qr-code-label;
+			}
+			.questionScrollPane {
+				.indexNumber {
+					color: $fg-questionScrollPane-index-number;
+				}
+				.removeQuestion {
+					color: $fg-questionScrollPane-remove-question;
+				}
+				.questionIcon {
 					&.valid {
+						.indexNumber {
+							background-color: $bg-questionScrollPane-question-icon-valid-index-number;
+						}
+						&:hover:not(.active) {
+							.indexNumber {
+								background-color: $bg-questionScrollPane-question-icon-valid-index-number-hovered;
+							}
+						}
+					}
+					&:not(.valid) {
+						.indexNumber {
+							background-color: $bg-questionScrollPane-question-icon-invalid-index-number;
+						}
+						&:hover:not(.active) {
+							.indexNumber {
+								background-color: $bg-questionScrollPane-question-icon-invalid-index-number-hovered;
+							}
+						}
+					}
+					&.active {
+						border: 1px solid $border-questionScrollPane-active;
+						&.valid {
+							.removeQuestion {
+								background-color: $border-questionScrollPane-active-valid-remove-question;
+							}
+						}
 						.removeQuestion {
-							background-color: $border-questionScrollPane-active-valid-remove-question;
-						}
-					}
-					.removeQuestion {
-						box-shadow: $box-shadow-questionScrollPane-active-remove-question;
-						border-left: 1px solid $border-questionScrollPane-active-remove-question;
-						&:hover {
-							background-color: $bg-questionScrollPane-active-remove-question-hovered;
-							color: $fg-questionScrollPane-active-remove-question-hovered;
+							box-shadow: $box-shadow-questionScrollPane-active-remove-question;
+							border-left: 1px solid $border-questionScrollPane-active-remove-question;
+							&:hover {
+								background-color: $bg-questionScrollPane-active-remove-question-hovered;
+								color: $fg-questionScrollPane-active-remove-question-hovered;
+							}
 						}
 					}
 				}
 			}
-		}
-		.answer-options {
-			.invalidAnswerOption {
-				border: 2px solid $border-answer_options-invalidAnswerOption;
-			}
-			.bootstrap-switch {
-				background-color: $bg-answer_options-bootstrap_switch;
-				border: $border-answer_options-bootstrap_switch;
-				border-radius: $border-radius_answer_options-bootstrap_switch;
-				.bootstrap-switch-handle-off {
-					background-color: $bg-answer_options-bootstrap_switch_handle_off;
-					color: $fg-answer_options-bootstrap_switch_handle_off;
+			.answer-options {
+				.invalidAnswerOption {
+					border: 2px solid $border-answer_options-invalidAnswerOption;
 				}
-				.bootstrap-switch-handle-on {
-					background-color: $bg-answer_options-bootstrap_switch_handle_on;
-					color: $fg-answer_options-bootstrap_switch_handle_on;
+				.bootstrap-switch {
+					background-color: $bg-answer_options-bootstrap_switch;
+					border: $border-answer_options-bootstrap_switch;
+					border-radius: $border-radius_answer_options-bootstrap_switch;
+					.bootstrap-switch-handle-off {
+						background-color: $bg-answer_options-bootstrap_switch_handle_off;
+						color: $fg-answer_options-bootstrap_switch_handle_off;
+					}
+					.bootstrap-switch-handle-on {
+						background-color: $bg-answer_options-bootstrap_switch_handle_on;
+						color: $fg-answer_options-bootstrap_switch_handle_on;
+					}
+					&.bootstrap-switch-focused {
+						border: $border-answer_options-bootstrap_switch_focused;
+						box-shadow: $box-shadow-answer_options-bootstrap_switch_focused;
+						outline: $outline-answer_options-bootstrap_switch_focused;
+					}
 				}
-				&.bootstrap-switch-focused {
-					border: $border-answer_options-bootstrap_switch_focused;
-					box-shadow: $box-shadow-answer_options-bootstrap_switch_focused;
-					outline: $outline-answer_options-bootstrap_switch_focused;
+			}
+			#editQuestionText {
+				.invalidQuestion {
+					border: 2px solid $border-answer_options-invalidQuestion;
 				}
 			}
-		}
-		#editQuestionText {
-			.invalidQuestion {
-				border: 2px solid $border-answer_options-invalidQuestion;
+			.progress-bar {
+				background: $bg_progress-bar;
+				color: $fg_progress-bar;
 			}
-		}
-		.progress-bar {
-			background: $bg_progress-bar;
-			color: $fg_progress-bar;
-		}
-		.progress-reading_confirmation {
-			background-color: $bg-progress-bar-reading_confirmation;
-			color: $fg-progress-bar-reading_confirmation;
-		}
-		.slider, .slider .noUi-handle {
-			background-color: $slider-color;
-		}
-		.button-shadow, .button {
-			box-shadow: 1px 1px 5px $button-shadow;
-		}
-		.input-field {
-			color: $input-foreground-color !important;
-		}
-		.input-field-bg-color, .input-field {
-			background-color: $input-background-color;
-		}
-		.default-yellow-text-color {
-			color: $input-background-color;
-		}
-		.input-group-letter, .button-result-letter {
-			color: $input-group-letter-color;
-		}
-		.button-foreground-color {
-			color: $input-foreground-color !important;
-		}
-		.button-next, .button-success {
-			background-color: $success;
-			color: $success-text-color;
-		}
-		.button-warning, .button-back, div.warning {
-			background-color: $warning;
-			color: $warning-text-color;
-		}
-		.button-purple {
-			background-color: $info;
-			color: $info-text-color;
-		}
-		.button-grey {
-			background-color: $grey-button-background;
-			color: $grey-button-color;
-		}
-		.button-default {
-			background-color: $default;
-			color: $default-text-color;
-		}
-		.button-leader {
-			background-color: $bg-button-leader;
-			color: $fg-button-leader;
-            box-shadow: 1px 1px 5px $button-shadow;
-		}
-		.button-result {
-			background-color: $bg-button-result;
-			.percentage {
-				color: $fg-button-result-percentage;
+			.progress-reading_confirmation {
+				background-color: $bg-progress-bar-reading_confirmation;
+				color: $fg-progress-bar-reading_confirmation;
 			}
-			.progress {
-				background-color: $bg-button-result-progress;
+			.slider, .slider .noUi-handle {
+				background-color: $slider-color;
 			}
-		}
-		.navbar-footer {
-			background-color: $bg-footer;
-			-webkit-transition: background-color 800ms linear;
-			-moz-transition: background-color 800ms linear;
-			-o-transition: background-color 800ms linear;
-			-ms-transition: background-color 800ms linear;
-			transition: background-color 800ms linear;
+			.button-shadow, .button {
+				box-shadow: 1px 1px 5px $button-shadow;
+			}
+			.input-field {
+				color: $input-foreground-color !important;
+			}
+			.input-field-bg-color, .input-field {
+				background-color: $input-background-color;
+			}
+			.default-yellow-text-color {
+				color: $input-background-color;
+			}
+			.input-group-letter, .button-result-letter {
+				color: $input-group-letter-color;
+			}
+			.button-foreground-color {
+				color: $input-foreground-color !important;
+			}
+			.button-next, .button-success {
+				background-color: $success;
+				color: $success-text-color;
+			}
+			.button-warning, .button-back, div.warning {
+				background-color: $warning;
+				color: $warning-text-color;
+			}
+			.button-purple {
+				background-color: $info;
+				color: $info-text-color;
+			}
+			.button-grey {
+				background-color: $grey-button-background;
+				color: $grey-button-color;
+			}
+			.button-default {
+				background-color: $default;
+				color: $default-text-color;
+			}
+			.button-leader {
+				background-color: $bg-button-leader;
+				color: $fg-button-leader;
+				box-shadow: 1px 1px 5px $button-shadow;
+			}
+			.button-result {
+				background-color: $bg-button-result;
+				.percentage {
+					color: $fg-button-result-percentage;
+				}
+				.progress {
+					background-color: $bg-button-result-progress;
+				}
+			}
+			.navbar-footer {
+				background-color: $bg-footer;
+				-webkit-transition: background-color 800ms linear;
+				-moz-transition: background-color 800ms linear;
+				-o-transition: background-color 800ms linear;
+				-ms-transition: background-color 800ms linear;
+				transition: background-color 800ms linear;
+			}
 			.footerElement {
 				color: $fg-footer-info-bar;
 				&:hover {
@@ -921,392 +1009,574 @@
 					}
 				}
 			}
-		}
-		.progress-success {
-			background-color: $progress-bar-success-color !important;
-		}
-		.progress-failure {
-			background-color: $progress-bar-failure-color !important;
-		}
-		.progress-default {
-			background-color: $progress-bar-default-color !important;
-		}
-		.textarea {
-			background-color: $input-background-color;
-			color: $input-foreground-color !important;
-		}
-		.previewText {
-			background-color: $input-background-color;
-			color: $input-foreground-color !important;
-		}
-		.check-mark-checked {
-			color: $check-mark-checked;
-		}
-		.check-mark-unchecked {
-			color: $check-mark-unchecked;
-		}
-		.success input, .success textarea, input.success, textarea.success {
-			border: 3px solid $success;
-		}
-		.error input, .error textarea, input.error, textarea.error {
-			border: 3px solid $warning;
-		}
-		p.success, span.success {
-			color : $fg-success;
-		}
-		p.failed, span.failed {
-			color : $fg-warning;
-		}
-		.popover-title, .popover {
-			background-color: $warning;
-			color: $warning-text-color;
-			border-color: $warning;
-		}
-		.popover.bottom > .arrow:after {
-			border-bottom-color: $warning;
-		}
-		.popover.right > .arrow:after {
-			border-right-color: $warning;
-		}
-		.lockquote {
-			color: $fg-lockquote !important;
-		}
-		.button-import {
-			background: $bg-btn-file-input;
-		}
-		.question-title {
-			color: $fg-question-title;
-		}
-		.glyphicon-style {
-			color: $fg-glyphicon-style;
-		}
-		.formGroupProgressRow {
-			.progress {
-				.percentage {
-					.label {
-						color: $fg-formGroup-progress-percentage-label;
+			.progress-success {
+				background-color: $progress-bar-success-color !important;
+			}
+			.progress-failure {
+				background-color: $progress-bar-failure-color !important;
+			}
+			.progress-default {
+				background-color: $progress-bar-default-color !important;
+			}
+			.textarea {
+				background-color: $input-background-color;
+				color: $input-foreground-color !important;
+			}
+			.previewText {
+				background-color: $input-background-color;
+				color: $input-foreground-color !important;
+			}
+			.check-mark-checked {
+				color: $check-mark-checked;
+			}
+			.check-mark-unchecked {
+				color: $check-mark-unchecked;
+			}
+			.success input, .success textarea, input.success, textarea.success {
+				border: 3px solid $success;
+			}
+			.error input, .error textarea, input.error, textarea.error {
+				border: 3px solid $warning;
+			}
+			p.success, span.success {
+				color : $fg-success;
+			}
+			p.failed, span.failed {
+				color : $fg-warning;
+			}
+			.popover-title, .popover {
+				background-color: $warning;
+				color: $warning-text-color;
+				border-color: $warning;
+			}
+			.popover.bottom > .arrow:after {
+				border-bottom-color: $warning;
+			}
+			.popover.right > .arrow:after {
+				border-right-color: $warning;
+			}
+			.lockquote {
+				color: $fg-lockquote !important;
+			}
+			.button-import {
+				background: $bg-btn-file-input;
+			}
+			.question-title {
+				color: $fg-question-title;
+			}
+			.glyphicon-style {
+				color: $fg-glyphicon-style;
+			}
+			.formGroupProgressRow {
+				.progress {
+					.percentage {
+						.label {
+							color: $fg-formGroup-progress-percentage-label;
+						}
 					}
 				}
 			}
-		}
-		.question-row.active {
-			-webkit-box-shadow: 0 0 13px 3px $box-shadow-question-row-active;
-			-moz-box-shadow: 0 0 13px 3px $box-shadow-question-row-active;
-			box-shadow: 0 0 13px 3px $box-shadow-question-row-active;
-		}
-		.btn-more-learners {
-			background-color: $bg-btn-more-learners;
-			color: $fg-btn-more-learners;
-		}
-		#waiting_for_players_notifier {
-			color: $fg-lobby-waiting-for-players-notifier;
-		}
-		@keyframes colorChangingOwnNick {
-			0% {
-				background-color: $bg-colorChangingOwnNick0;
-				color: $fg-colorChangingOwnNick0;
-				transform: translateY(0%);
-				-webkit-transform: translateY(0%);
+			.question-row.active {
+				-webkit-box-shadow: 0 0 13px 3px $box-shadow-question-row-active;
+				-moz-box-shadow: 0 0 13px 3px $box-shadow-question-row-active;
+				box-shadow: 0 0 13px 3px $box-shadow-question-row-active;
 			}
-			25% {
-				background-color: $bg-colorChangingOwnNick25;
-				color: $fg-colorChangingOwnNick25;
+			.btn-more-learners {
+				background-color: $bg-btn-more-learners;
+				color: $fg-btn-more-learners;
 			}
-			50% {
-				background-color: $bg-colorChangingOwnNick50;
-				color: $fg-colorChangingOwnNick50;
+			#waiting_for_players_notifier {
+				color: $fg-lobby-waiting-for-players-notifier;
 			}
-			75% {
-				background-color: $bg-colorChangingOwnNick75;
-				color: $fg-colorChangingOwnNick75;
+			@keyframes colorChangingOwnNick {
+				0% {
+					background-color: $bg-colorChangingOwnNick0;
+					color: $fg-colorChangingOwnNick0;
+					transform: translateY(0%);
+					-webkit-transform: translateY(0%);
+				}
+				25% {
+					background-color: $bg-colorChangingOwnNick25;
+					color: $fg-colorChangingOwnNick25;
+				}
+				50% {
+					background-color: $bg-colorChangingOwnNick50;
+					color: $fg-colorChangingOwnNick50;
+				}
+				75% {
+					background-color: $bg-colorChangingOwnNick75;
+					color: $fg-colorChangingOwnNick75;
+				}
+				100% {
+					background-color: $bg-colorChangingOwnNick100;
+					color: $fg-colorChangingOwnNick100;
+					transform: translateY(0%);
+					-webkit-transform: translateY(0%);
+				}
 			}
-			100% {
-				background-color: $bg-colorChangingOwnNick100;
-				color: $fg-colorChangingOwnNick100;
-				transform: translateY(0%);
-				-webkit-transform: translateY(0%);
+			.color-changing-ars {
+				color: $fg-footer-info-bar;
+				animation-name: #{$name}_colorChangingArs;
 			}
-		}
-		.color-changing-ars {
-			color: $fg-footer-info-bar;
-			animation-name: #{$name}_colorChangingArs;
-		}
-		.color-changing-nova {
-			color: $fg-footer-info-bar;
-			animation-name: #{$name}_colorChangingNova;
-		}
-		.color-changing-dot {
-			color: $fg-footer-info-bar;
-			animation-name: #{$name}_colorChangingDot;
-		}
-		.color-changing-click {
-			color: $fg-footer-info-bar;
-			animation-name: #{$name}_colorChangingClick;
-		}
-		@keyframes #{$name}_colorChangingArs {
-			0% {
-				color: white;
+			.color-changing-nova {
+				color: $fg-footer-info-bar;
+				animation-name: #{$name}_colorChangingNova;
 			}
-			25% {
-				color: $input-background-color;
+			.color-changing-dot {
+				color: $fg-footer-info-bar;
+				animation-name: #{$name}_colorChangingDot;
 			}
-			50% {
-				color: white;
+			.color-changing-click {
+				color: $fg-footer-info-bar;
+				animation-name: #{$name}_colorChangingClick;
 			}
-			75% {
-				color: white;
+			@keyframes #{$name}_colorChangingArs {
+				0% {
+					color: white;
+				}
+				25% {
+					color: $input-background-color;
+				}
+				50% {
+					color: white;
+				}
+				75% {
+					color: white;
+				}
+				100% {
+					color: white;
+				}
 			}
-			100% {
-				color: white;
+			@keyframes #{$name}_colorChangingNova {
+				0% {
+					color: white;
+				}
+				25% {
+					color: white;
+				}
+				50% {
+					color: $input-background-color;
+				}
+				75% {
+					color: white;
+				}
+				100% {
+					color: white;
+				}
 			}
-		}
-		@keyframes #{$name}_colorChangingNova {
-			0% {
-				color: white;
+			@keyframes #{$name}_colorChangingDot {
+				0% {
+					color: white;
+				}
+				25% {
+					color: white;
+				}
+				50% {
+					color: white;
+				}
+				75% {
+					color: $input-background-color;
+				}
+				100% {
+					color: white;
+				}
 			}
-			25% {
-				color: white;
+			@keyframes #{$name}_colorChangingClick {
+				0% {
+					color: white;
+				}
+				25% {
+					color: white;
+				}
+				50% {
+					color: white;
+				}
+				75% {
+					color: white;
+				}
+				100% {
+					color: $input-background-color;
+				}
 			}
-			50% {
-				color: $input-background-color;
+			.button-markdown-shadow, .button-markdown {
+				box-shadow: 1px 1px 5px $box-shadow-markdown;
 			}
-			75% {
-				color: white;
+			.input-label {
+				color: $input-group-letter-color;
 			}
-			100% {
-				color: white;
-			}
-		}
-		@keyframes #{$name}_colorChangingDot {
-			0% {
-				color: white;
-			}
-			25% {
-				color: white;
-			}
-			50% {
-				color: white;
-			}
-			75% {
-				color: $input-background-color;
-			}
-			100% {
-				color: white;
-			}
-		}
-		@keyframes #{$name}_colorChangingClick {
-			0% {
-				color: white;
-			}
-			25% {
-				color: white;
-			}
-			50% {
-				color: white;
-			}
-			75% {
-				color: white;
-			}
-			100% {
-				color: $input-background-color;
-			}
-		}
-		.button-markdown-shadow, .button-markdown {
-			box-shadow: 1px 1px 5px $box-shadow-markdown;
-		}
-		.input-label {
-			color: $input-group-letter-color;
-		}
-		.rangedAnswerOptions {
-			.rangedSlider {
-				background-color: $bg-rangedSlider-invalid;
-				.noUi-background {
+			.rangedAnswerOptions {
+				.rangedSlider {
 					background-color: $bg-rangedSlider-invalid;
-				}
-				.noUi-connect {
-					background-color: $bg-rangedSlider-valid;
-				}
-				.noUi-handle {
-					background-color: $bg-rangedSlider-handle;
-				}
-			}
-		}
-		.rangedValues {
-			color: $default-text-color;
-			input[type="number"] {
-				&.invalid {
-					border: 3px solid $bg-rangedSlider-invalid
-				}
-			}
-		}
-		.soundConfig {
-			.modal-content {
-				background-color: $splashscreen-sound-config-background-color;
-				select {
-					color: $splashscreen-sound-config-select-foreground-color;
-				}
-				#isSoundOnButton.down {
-					background: $splashscreen-sound-config-button-background-color;
-				}
-			}
-		}
-		.splashscreen {
-			.modal-content {
-				background: $splashscreen-background-color;
-				.modal-header {
-					color: $splash-screen-header-color;
-				}
-				.modal-body {
-					color: $splashscreen-foreground-color;
-					a, a:hover, a:active, a:visited, a:focus, p {
-						color: $splashscreen-foreground-color !important;
+					.noUi-background {
+						background-color: $bg-rangedSlider-invalid;
+					}
+					.noUi-connect {
+						background-color: $bg-rangedSlider-valid;
+					}
+					.noUi-handle {
+						background-color: $bg-rangedSlider-handle;
 					}
 				}
 			}
-		}
-		.splashscreen-container-close {
-			color: $fg-qr-code-container-close;
-			&:hover {
-				color: $fg-qr-code-container-close-hovered;
-			}
-			.glyphicon-remove {
-				border: 1px solid $border-qr-code-container-close-icon;
-				background-color: $background-qr-code-container-close-icon;
-			}
-		}
-		.modal-backdrop {
-			background-color: $background-color;
-		}
-		.questionAndAnswerSplashscreen {
-			.modal-content {
-				background: white;
-			}
-		}
-		.deleteConfirmationSplashscreen {
-			.modal-content {
-				background: $splashscreen-delete-background-color;
-			}
-		}
-		.kickMemberSplashscreen {
-			.modal-content {
-				background: $splash-screen-error-message-background-color;
-				.modal-header {
-					color: $splash-screen-error-message-foreground-color;
-				}
-				.modal-body {
-					color: $splash-screen-error-message-foreground-color;
+			.rangedValues {
+				color: $default-text-color;
+				input[type="number"] {
+					&.invalid {
+						border: 3px solid $bg-rangedSlider-invalid
+					}
 				}
 			}
-		}
-		.showHashtagsSplashscreen {
-			.modal-content {
-				background: $splashscreen-show-hashtags-background-color;
-				.js-my-hash {
-					background-color: $bg-js-my-hash;
-					color: $fg-js-my-hash;
-					&:hover {
-						background-color: $bg-js-my-hash-hovered;
+			.soundConfig {
+				.modal-content {
+					background-color: $splashscreen-sound-config-background-color;
+					select {
+						color: $splashscreen-sound-config-select-foreground-color;
 					}
-					&:active {
-						background-color: $bg-js-my-hash-active;
+					#isSoundOnButton.down {
+						background: $splashscreen-sound-config-button-background-color;
 					}
-					&.validQuestion {
-						color: $fg-js-my-hash-validQuestion;
-						background-color: $bg-js-my-hash-validQuestion;
-						&:hover {
-							background-color: $bg-js-my-hash-validQuestion-hovered;
-						}
+				}
+			}
+			.splashscreen {
+				.modal-content {
+					background: $splashscreen-background-color;
+					.modal-header {
+						color: $splash-screen-header-color;
 					}
-					&.invalidQuestion {
-						color: $fg-js-my-hash-invalidQuestion;
-						background-color: $bg-js-my-hash-invalidQuestion;
-						&:hover {
-							background-color: $bg-js-my-hash-invalidQuestion-hovered;
+					.modal-body {
+						color: $splashscreen-foreground-color;
+						a, a:hover, a:active, a:visited, a:focus, p {
+							color: $splashscreen-foreground-color !important;
 						}
 					}
 				}
 			}
-		}
-		.readingConfirmedSplashscreen {
-			.modal-content {
-				background: white;
-			}
-		}
-		.questionPreviewSplashscreen {
-			.modal-content {
-				background: white;
-			}
-		}
-		.errorSplashscreen {
-			.modal-content {
-				background: $splash-screen-error-message-background-color;
-				.modal-header {
-					color: $splash-screen-error-message-foreground-color;
+			.splashscreen-container-close {
+				color: $fg-qr-code-container-close;
+				&:hover {
+					color: $fg-qr-code-container-close-hovered;
 				}
-				.modal-body {
-					color: $splash-screen-error-message-foreground-color;
+				.glyphicon-remove {
+					border: 1px solid $border-qr-code-container-close-icon;
+					background-color: $background-qr-code-container-close-icon;
 				}
 			}
-			.splash-button-error-message {
-				background-color: $splash-screen-error-message-button-background-color;
-				color: $splash-screen-error-message-button-foreground-color;
+			.modal-backdrop {
+				background-color: $background-color;
 			}
-		}
-		.theme-description {
-			color: $fg-theme_description;
-		}
-		.quizSummary {
-			hr {
-				border-color: $quiz-summary-row-color;
+			.questionAndAnswerSplashscreen {
+				.modal-content {
+					background: white;
+				}
 			}
-			h4 {
-				color: $fg-quiz-summary-H4;
+			.deleteConfirmationSplashscreen {
+				.modal-content {
+					background: $splashscreen-delete-background-color;
+				}
 			}
-			p {
-				color: $fg-quiz-summary-P;
+			.kickMemberSplashscreen {
+				.modal-content {
+					background: $splash-screen-error-message-background-color;
+					.modal-header {
+						color: $splash-screen-error-message-foreground-color;
+					}
+					.modal-body {
+						color: $splash-screen-error-message-foreground-color;
+					}
+				}
 			}
-			ul {
-				color: $fg-quiz-summary-UL;
+			.showHashtagsSplashscreen {
+				.modal-content {
+					background: $splashscreen-show-hashtags-background-color;
+					.js-my-hash {
+						background-color: $bg-js-my-hash;
+						color: $fg-js-my-hash;
+						&:hover {
+							background-color: $bg-js-my-hash-hovered;
+						}
+						&:active {
+							background-color: $bg-js-my-hash-active;
+						}
+						&.validQuestion {
+							color: $fg-js-my-hash-validQuestion;
+							background-color: $bg-js-my-hash-validQuestion;
+							&:hover {
+								background-color: $bg-js-my-hash-validQuestion-hovered;
+							}
+						}
+						&.invalidQuestion {
+							color: $fg-js-my-hash-invalidQuestion;
+							background-color: $bg-js-my-hash-invalidQuestion;
+							&:hover {
+								background-color: $bg-js-my-hash-invalidQuestion-hovered;
+							}
+						}
+					}
+				}
 			}
-		}
-		#connectionQualityHeader {
-			&.connectionPending {
-				background: $bg-connection-quality-header_connection-pending;
-				color: $fg-connection-quality-header_connection-pending;
+			.readingConfirmedSplashscreen {
+				.modal-content {
+					background: white;
+				}
 			}
-			&.connectionOk {
-				background: $bg-connection-quality-header_connection-ok;
-				color: $fg-connection-quality-header_connection-ok;
+			.questionPreviewSplashscreen {
+				.modal-content {
+					background: white;
+				}
 			}
-			&.connectionWarning {
-				background: $bg-connection-quality-header_connection-warning;
-				color: $fg-connection-quality-header_connection-warning;
+			.errorSplashscreen {
+				.modal-content {
+					background: $splash-screen-error-message-background-color;
+					.modal-header {
+						color: $splash-screen-error-message-foreground-color;
+					}
+					.modal-body {
+						color: $splash-screen-error-message-foreground-color;
+					}
+				}
+				.splash-button-error-message {
+					background-color: $splash-screen-error-message-button-background-color;
+					color: $splash-screen-error-message-button-foreground-color;
+				}
 			}
-			&.connectionError {
-				background: $bg-connection-quality-header_connection-error;
-				color: $fg-connection-quality-header_connection-error;
+			.theme-description {
+				color: $fg-theme_description;
 			}
+			.quizSummary {
+				hr {
+					border-color: $quiz-summary-row-color;
+				}
+				h4 {
+					color: $fg-quiz-summary-H4;
+				}
+				p {
+					color: $fg-quiz-summary-P;
+				}
+				ul {
+					color: $fg-quiz-summary-UL;
+				}
+			}
+			#connectionQualityHeader {
+				#connectionQualityImage {
+					&.connectionPending {
+						fill: $fg-connection-quality-header_connection-pending;
+					}
+					&.connectionOk {
+						fill: $fg-connection-quality-header_connection-ok;
+					}
+					&.connectionWarning {
+						fill: $fg-connection-quality-header_connection-warning;
+					}
+					&.connectionError {
+						fill: $fg-connection-quality-header_connection-error;
+					}
+					&.connectionFailed {
+						fill: $fg-connection-quality-header_connection-failed;
+					}
+				}
+				#detailsLink {
+					color: $fg-connection-quality-header_details-link;
+				}
+			}
+			.answer-row {
+				.answer-selected{
+					background-color: $bg-answer_row-answer_selected !important;
+					color: $fg-answer_row-answer_selected !important;
+				}
+				.button-purple-transition {
+					background-color: $bg-answer_row-button_purple_transition;
+					color: $fg-answer_row-button_purple_transition;
+				}
+				.button-green-transition {
+					background-color: $bg-answer_row-button_green_transition;
+					color: $fg-answer_row-button_green_transition;
+				}
+				.freeTextFrame {
+					h1 {
+						color: $fg-free-text-header-color;
+					}
+				}
+			}
+			#quizManager {
+				.sortable-placeholder {
+					color: $fg-quiz_manager-sortable_placeholder;
+					background-color: $bg-quiz_manager-sortable_placeholder;
+				}
+				ul {
+					li {
+						color: $fg-quiz_manager-ul-li;
+					}
+					&#available_questions_wrapper,
+					&#added_questions_wrapper {
+						.questionElementWrapper {
+							border: 1px solid $border-quiz_manager-available_questions_wrapper;
+							&:hover {
+								background-color: $bg-quiz_manager-available_questions_wrapper-hovered;
+							}
+							li {
+								&[data-valid='true'] {
+									&:before {
+										color: $border-quiz_manager-available_questions_wrapper-valid;
+									}
+								}
+								&[data-valid='false'] {
+									&:before {
+										color: $border-quiz_manager-available_questions_wrapper-invalid;
+									}
+								}
+							}
 
-			#detailsLink {
-			  	color: $fg-connection-quality-header_details-link;
+						}
+					}
+				}
 			}
-		}
-		.answer-row {
-			.answer-selected{
-				background-color: $bg-answer_row-answer_selected !important;
-				color: $fg-answer_row-answer_selected !important;
+			#quizManagerDetails {
+				.btn-group {
+					button {
+						color: $fg-quiz_manager_details-btn_group-button;
+						background-color: $bg-quiz_manager_details-btn_group-button;
+						&:hover {
+							background-color: $bg-quiz_manager_details-btn_group-button-hovered;
+						}
+					}
+				}
 			}
-			.button-purple-transition {
-				background-color: $bg-answer_row-button_purple_transition;
-				color: $fg-answer_row-button_purple_transition;
+			#previewQuestionContentWrapper {
+				#previewQuestionImage {
+					border: 1px solid $border-previewQuestionContentWrapper-image;
+				}
+				#markdownPreviewWrapper {
+					color: $fg-previewQuestionContentWrapper;
+					p {
+						color: $fg-previewQuestionContentWrapper;
+					}
+				}
 			}
-			.button-green-transition {
-				background-color: $bg-answer_row-button_green_transition;
-				color: $fg-answer_row-button_green_transition;
+			#questionTypeView {
+				.questionType {
+					.wrapper {
+						border: 1px solid $border-question_type_view-wrapper;
+						&:hover {
+							background-color: $bg-question_type_view-wrapper-hovered;
+							p {
+								color: $fg-question_type_view-wrapper-hovered;
+							}
+						}
+					}
+				}
 			}
-		  	.freeTextFrame {
-				h1 {
-				  	color: $fg-free-text-header-color;
+			.themePreview {
+				img {
+					border: 2px solid $border-theme-preview-img;
+				}
+				&.selectedTheme {
+					img {
+						border: 2px solid $border-theme-preview-img-selected;
+					}
+				}
+			}
+			#votingView {
+				.sendResponse {
+					&.correctAnswer {
+						background-color: green !important;
+					}
+					&.wrongAnswer {
+						background-color: red !important;
+					}
+				}
+			}
+			.nicknameCategories {
+				h3 {
+					color: $fg-nickname_categories-h3;
+				}
+				.nickStyle {
+					&.nickCategory {
+						&:hover {
+							background-color: $bg-nickname_categories-nick_style-hovered;
+						}
+						&:active {
+							background-color: $bg-nickname_categories-nick_style-active;
+						}
+						&.selectedCategory {
+							background-color: $bg-nickname_categories-nick_style-selected_category;
+						}
+						background-color: $bg-nickname_categories-nick_style;
+					}
+
+					&.nickName,
+					&.chosenNickName {
+						&:hover {
+							background-color: $bg-nickname_categories-nick_chosen_nick-hovered;
+						}
+						&:active {
+							background-color: $bg-nickname_categories-nick_chosen_nick-active;
+						}
+						&.selectedNickName {
+							background-color: $bg-nickname_categories-nick_chosen_nick-selected;
+						}
+						background-color: $bg-nickname_categories-nick_chosen_nick;
+					}
+					&#block_illegal_nicks_wrapper,
+					&#restrict_to_cas_wrapper {
+						p {
+							color: $fg-nickname_categories-options;
+						}
+					}
+				}
+			}
+			.nickLimited {
+				.selectableNickWrapper {
+					h3 {
+						color: $fg-nick_limited-h3;
+					}
+					.selectableNick {
+						&:hover {
+							background-color: $bg-nick_limited-selectable_nick-hovered;
+						}
+						&:active {
+							background-color: $bg-nick_limited-selectable_nick-active;
+						}
+						background-color: $bg-nick_limited-selectable_nick;
+					}
+				}
+			}
+			#editAnsweroptionText {
+				.answerOptionElementWrapper {
+					background-color: $bg-edit_answeroption_text-element_wrapper;
+				}
+			}
+			#previewAnsweroptionContentWrapper {
+				#previewAnsweroptionImage {
+					border: 1px solid $border-preview_answeroption_content_wrapper-image;
+				}
+				#markdownPreviewWrapper {
+					color: $fg-preview_answeroption_content_wrapper;
+					p {
+						color: $fg-preview_answeroption_content_wrapper;
+					}
+				}
+			}
+			.thm-logo-background {
+				background-color: $bg-thm_logo_background;
+			}
+			.focused {
+				border: 3px solid $border-focused !important;
+			}
+			.button-result {
+				background-color: $bg-button_result;
+			}
+			#loader-wrapper {
+				#loader {
+					border: 3px solid transparent;
+					border-top-color: $border-loader_wrapper-outer_spin;
+					&:before {
+						border: 3px solid transparent;
+						border-top-color: $border-loader_wrapper-inner_spin;
+					}
+					&:after {
+						border: 3px solid transparent;
+						border-top-color: $border-loader_wrapper-middle_spin;
+					}
 				}
 			}
 		}

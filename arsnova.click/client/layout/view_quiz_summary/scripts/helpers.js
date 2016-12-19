@@ -17,7 +17,6 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {NicknameCategoriesCollection} from '/lib/nickname_categories/collection.js';
 import {getQuestionTypes} from '/client/layout/view_questions/scripts/lib.js';
 
 Template.quizSummary.helpers({
@@ -105,8 +104,8 @@ Template.quizSummary.helpers({
 			return;
 		}
 		let result = "";
-		NicknameCategoriesCollection.find({nick: {$in: Session.get("questionGroup").getConfiguration().getNickSettings().getSelectedValues()}}, {sort: {nick: 1}}).fetch().forEach(function (item) {
-			result += item.nick + ", ";
+		Session.get("questionGroup").getConfiguration().getNickSettings().getSelectedValues().forEach(function (item) {
+			result += item + ", ";
 		});
 		return result.slice(0, result.length - 2);
 	},

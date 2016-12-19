@@ -18,9 +18,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
-import {Router} from 'meteor/iron:router';
-import {TAPi18n} from 'meteor/tap:i18n';
-import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {createTabIndices} from '/client/startup.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
 
@@ -34,7 +31,8 @@ export const footerElemSound = {
 	id: "sound",
 	iconClass: "glyphicon glyphicon-music",
 	textClass: "footerElementText",
-	textName: "region.footer.footer_bar.sound"
+	textName: "region.footer.footer_bar.sound",
+	selectable: true
 };
 export const footerElemReadingConfirmation = {
 	id: "reading-confirmation",
@@ -89,7 +87,8 @@ export const footerElemNicknames = {
 	id: "nicknames",
 	iconClass: "glyphicon glyphicon-sunglasses",
 	textClass: "footerElementText",
-	textName: "region.footer.footer_bar.nicknames"
+	textName: "region.footer.footer_bar.nicknames",
+	selectable: true
 };
 export const footerElemEditQuiz = {
 	id: "edit-quiz",
@@ -97,13 +96,7 @@ export const footerElemEditQuiz = {
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.edit_quiz"
 };
-export const footerElemRemove = {
-	id: "remove",
-	iconClass: "glyphicon glyphicon-trash",
-	textClass: "footerElementText",
-	textName: "region.footer.footer_bar.remove"
-};
-const footerElemShowMore = {
+export const footerElemShowMore = {
 	id: "show-more",
 	iconClass: "glyphicon glyphicon-menu-hamburger",
 	textClass: "footerElementText",
@@ -128,8 +121,6 @@ export function addFooterElement(footerElement, priority = 100) {
 	if (!hasItem) {
 		footerElements.splice(priority, 0, footerElement);
 	}
-	$('#' + footerElement.id).removeClass("error").removeClass("success");
-	//footerTracker.changed();
 }
 
 export function getCurrentFooterElements() {
@@ -157,45 +148,8 @@ export function getFooterElementById(id) {
 	}
 }
 
-function updateStatefulFooterElements() {
-	const allElements = $.merge([], footerElements);
-	$.merge(allElements, hiddenFooterElements.selectable);
-	$.each(allElements, function (index, item) {
-		let state = true;
-		if (item.id === "sound") {
-			const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-			if (configDoc && configDoc.music.isEnabled) {
-				$('#sound').removeClass("error").addClass("success");
-			} else {
-				state = false;
-				$('#sound').removeClass("success").addClass("error");
-			}
-			$('#sound_switch').bootstrapSwitch('state', state, true);
-		}
-
-		if (item.id === 'reading-confirmation') {
-			const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-			if (configDoc && configDoc.readingConfirmationEnabled) {
-				$("#" + item.id).removeClass("error").addClass("success").find(".footerElemIcon").find("span").removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open");
-			} else {
-				state = false;
-				$("#" + item.id).removeClass("success").addClass("error").find(".footerElemIcon").find("span").removeClass("glyphicon-eye-open").addClass("glyphicon-eye-close");
-			}
-			$('#reading-confirmation_switch').bootstrapSwitch('state', state, true);
-		}
-
-		if (item.id === "nicknames" && typeof Session.get("questionGroup") !== "undefined") {
-			if (Session.get("questionGroup").getConfiguration().getNickSettings().getSelectedValues().length === 0) {
-				$('#nicknames').removeClass("success").find(".footerElemText").text(TAPi18n.__("view.nickname_categories.free_choice"));
-			} else {
-				$('#nicknames').addClass("success").find(".footerElemText").text(TAPi18n.__("region.footer.footer_bar.nicknames"));
-			}
-			return;
-		}
-
-		$('#' + item.id).find(".footerElemText").text(TAPi18n.__(item.textName));
-		createTabIndices();
-	});
+export function updateStatefulFooterElements() {
+	createTabIndices();
 }
 
 export function calculateFooterFontSize() {
@@ -267,7 +221,7 @@ export function removeFooterElement(footerElement) {
 			return false;
 		}
 	});
-	footerTracker.changed();
+	//footerTracker.changed();
 }
 
 export function removeFooterElements() {
@@ -276,7 +230,7 @@ export function removeFooterElements() {
 	hiddenFooterElements.linkable.splice(0, hiddenFooterElements.linkable.length);
 	Session.set("footerElements", footerElements);
 	Session.set("hiddenFooterElements", hiddenFooterElements);
-	footerTracker.changed();
+	//footerTracker.changed();
 }
 
 const footerTrackerCallback = function () {
@@ -289,8 +243,7 @@ const footerTrackerCallback = function () {
 	}
 };
 
-$(window).on('resize', footerTrackerCallback);
-
 Meteor.defer(function () {
 	Tracker.autorun(footerTrackerCallback);
+	$(window).on('resize', footerTrackerCallback);
 });

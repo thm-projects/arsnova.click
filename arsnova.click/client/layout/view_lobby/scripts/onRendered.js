@@ -21,8 +21,8 @@ import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {titelTracker} from '/client/layout/region_header/lib.js';
 import {setLobbySound, lobbySound} from '/client/plugins/sound/scripts/lib.js';
+import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount, memberlistTracker} from './lib.js';
 
@@ -30,7 +30,7 @@ Template.memberlist.onRendered(function () {
 	Session.set("learnerCountOverride", false);
 	Session.set("allMembersCount", MemberListCollection.find().count());
 	this.autorun(function () {
-		titelTracker.depend();
+		headerLib.titelTracker.depend();
 		calculateButtonCount(Session.get("allMembersCount"));
 	}.bind(this));
 
@@ -89,5 +89,9 @@ Template.memberlist.onRendered(function () {
 			$('.navbar-footer-placeholder').hide();
 			$('.navbar-footer').show();
 		}
+	});
+	Meteor.defer(function () {
+		headerLib.calculateHeaderSize();
+		headerLib.calculateTitelHeight();
 	});
 });

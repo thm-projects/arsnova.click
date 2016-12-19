@@ -15,11 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
-import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
 import {Router} from 'meteor/iron:router';
-import * as localData from '/lib/local_storage.js';
 import * as memberlistLib from '/client/layout/view_lobby/scripts/lib.js';
 import * as liveresultsLib from '/client/layout/view_live_results/scripts/lib.js';
 import * as votingViewLib from '/client/layout/view_voting/scripts/lib.js';
@@ -37,18 +34,6 @@ export function isEditingQuestion() {
 		default:
 			return false;
 	}
-}
-
-export function addNewQuestion() {
-	const questionItem = Session.get("questionGroup"),
-		index          = questionItem.getQuestionList().length;
-
-	questionItem.addDefaultQuestion();
-	Session.set("questionGroup", questionItem);
-	localData.addHashtag(questionItem);
-	Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index, function () {
-		Router.go("/" + Router.current().params.quizName + "/question");
-	});
 }
 
 export function calculateHeaderSize() {
@@ -108,6 +93,9 @@ export function calculateTitelHeight() {
 	container.css("height", finalHeight);
 	container.css("margin-top", !rowBottom.outerHeight() ? marginTop : 0);
 	centerVertical.css("top", finalHeight / 2 - centerVertical.outerHeight() / 2);
+	if ($(window).height() < 768) {
+		centerVertical.css({width: "100%", margin: "0 -15px"});
+	}
 	titelTracker.changed();
 }
 

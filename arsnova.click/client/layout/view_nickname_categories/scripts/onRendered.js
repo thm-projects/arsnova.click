@@ -15,24 +15,17 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {Tracker} from 'meteor/tracker';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as headerLib from '/client/layout/region_header/lib.js';
-import * as lib from './lib.js';
 
 Template.nicknameCategories.onRendered(function () {
 	$(document.getElementById('nickCategory_' + Session.get("selectedCategory"))).addClass("selectedCategory");
-
-	lib.formatBootstrapSwitch();
-	lib.setFormatBootstrapSwitchTracker(Tracker.autorun(function () {
-		if (Session.get("questionGroup").getConfiguration().getNickSettings().getSelectedValues().length === 0) {
-			Meteor.defer(lib.formatBootstrapSwitch);
-		}
-	}));
-
+	const configBlockNicks = Session.get("questionGroup").getConfiguration().getNickSettings().getBlockIllegal() ? "on" : "off";
+	const configCasEnabled = Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin() ? "on" : "off";
+	$('#block_illegal_nicks').bootstrapToggle(configBlockNicks);
+	$('#restrict_to_cas').bootstrapToggle(configCasEnabled);
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	headerLib.calculateHeaderSize();

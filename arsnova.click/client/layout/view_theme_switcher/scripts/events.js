@@ -21,7 +21,7 @@ import {Template} from 'meteor/templating';
 
 Template.themeSwitcher.events({
 	"mouseenter .themePreview": function (event) {
-		Session.set("theme", event.target.id);
+		Session.set("theme", event.currentTarget.id);
 	},
 	"mouseleave .themePreview": function () {
 		Session.set("theme", localStorage.getItem("theme"));

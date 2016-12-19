@@ -24,6 +24,8 @@
 
 	#buttonContainer {
 		margin: 0 auto;
+		overflow: hidden;
+		max-width: 100%;
 	}
 
 	.sendResponse {
@@ -39,12 +41,6 @@
 		p {
 			margin: 0;
 		}
-		&.correctAnswer {
-			background-color: green !important;
-		}
-		&.wrongAnswer {
-			background-color: red !important;
-		}
 	}
 
 	.btn-answerOption {
@@ -58,22 +54,6 @@
 		-ms-transition: background 500ms ease-in-out;
 		-o-transition: background 500ms ease-in-out;
 		transition: background 500ms ease-in-out;
-	}
-
-	.button-purple-transition {
-		-webkit-transition: background 2000ms ease-in-out;
-		-moz-transition: background 2000ms ease-in-out;
-		-ms-transition: background 2000ms ease-in-out;
-		-o-transition: background 2000ms ease-in-out;
-		transition: background 2000ms ease-in-out;
-	}
-
-	.button-green-transition {
-		-webkit-transition: background 2000ms ease-in-out;
-		-moz-transition: background 2000ms ease-in-out;
-		-ms-transition: background 2000ms ease-in-out;
-		-o-transition: background 2000ms ease-in-out;
-		transition: background 2000ms ease-in-out;
 	}
 
 	.answer-disabled {

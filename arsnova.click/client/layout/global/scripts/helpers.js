@@ -41,7 +41,7 @@ Template.connectionQualityHeader.helpers({
 			return {
 				resultString: "region.header.connection_status.pending",
 				pending: true,
-				statusColor: "lightgrey"
+				statusClass: "Pending"
 			};
 		}
 		const result = {
@@ -68,15 +68,15 @@ Template.connectionQualityHeader.helpers({
 		}
 		lib.stopPendingAnimation();
 		if (result.failures.length > 0) {
-			return $.extend({resultString: "region.header.connection_status.finished_with_errors"}, result, {finishedWithErrors: true, statusColor: "grey"});
+			return $.extend({resultString: "region.header.connection_status.finished_with_errors"}, result, {finishedWithErrors: true, statusClass: "Failed"});
 		}
 		if (result.errors.length > 0) {
-			return $.extend({resultString: "region.header.connection_status.finished_with_errors"}, result, {finishedWithErrors: true, statusColor: "red"});
+			return $.extend({resultString: "region.header.connection_status.finished_with_errors"}, result, {finishedWithErrors: true, statusClass: "Error"});
 		}
 		if (result.warnings.length > 0) {
-			return $.extend({resultString: "region.header.connection_status.finished_with_warnings"}, result, {finishedWithWarnings: true, statusColor: "orange"});
+			return $.extend({resultString: "region.header.connection_status.finished_with_warnings"}, result, {finishedWithWarnings: true, statusClass: "Warning"});
 		}
-		return {resultString: "region.header.connection_status.finished_without_warnings", finishedWithoutWarnings: true, statusColor: "green"};
+		return {resultString: "region.header.connection_status.finished_without_warnings", finishedWithoutWarnings: true, statusClass: "Ok"};
 	}
 });
 

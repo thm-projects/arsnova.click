@@ -1,5 +1,6 @@
 import {AbstractQuestion} from './question_abstract.js';
 import {DefaultAnswerOption} from '../answeroptions/answeroption_default.js';
+import {FreeTextAnswerOption} from "../answeroptions/answeroption_freetext.js";
 
 export class AbstractChoiceQuestion extends AbstractQuestion {
 
@@ -14,7 +15,7 @@ export class AbstractChoiceQuestion extends AbstractQuestion {
 		if (this.constructor === AbstractChoiceQuestion) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
-		if (typeof options.answerOptionList === "undefined" || options.answerOptionList.length === 0) {
+		if (typeof options.answerOptionList === "undefined" || options.answerOptionList.length === 0 || options.answerOptionList[0] instanceof FreeTextAnswerOption || options.answerOptionList[0].type === "FreeTextAnswerOption") {
 			for (let i = 0; i < 4; i++) {
 				this.addAnswerOption(
 					new DefaultAnswerOption({

@@ -22,7 +22,7 @@ function handle_page(url){
 			page.evaluate(function () {
 				callPhantom();
 			});
-		}, 500);
+		}, 800);
 	});
 }
 function next_page(){

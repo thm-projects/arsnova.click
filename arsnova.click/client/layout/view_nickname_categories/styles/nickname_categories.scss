@@ -28,7 +28,7 @@
 		text-align: center;
 	}
 
-	.nickStyle {
+	.nickStyle:not(#block_illegal_nicks_wrapper):not(#restrict_to_cas_wrapper) {
 		border-radius: $corner-radius;
 		padding: 10px;
 		margin: 10px;
@@ -57,24 +57,16 @@
 		&#no_nick_selected {
 			p {
 				text-align: center;
-				text-decoration: underline;
 			}
 		}
-		&#block_illegal_nicks_wrapper,
-		&#restrict_to_cas_wrapper {
-			height: 50px;
+	}
 
-			p {
-				line-height: 30px;
-				position: absolute;
-				width: auto;
-				margin-left: 100px;
-			}
-			.bootstrap-switch-id-block_illegal_nicks_switch,
-			.bootstrap-switch-id-restrict_to_cas_switch {
-				float: left;
-				margin-right: 20px;
-			}
+	#block_illegal_nicks_wrapper,
+	#restrict_to_cas_wrapper {
+		margin-top: 10px;
+		overflow: hidden;
+		p {
+			margin: 0;
 		}
 	}
 }

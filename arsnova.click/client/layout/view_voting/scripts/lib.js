@@ -172,7 +172,7 @@ export function formatAnswerButtons() {
 	do {
 		calculateResult = calculateButtons(++scaleBaseWidth, ++scaleBaseHeight);
 	} while (calculateResult.maxButtons >= answerOptionElements);
-	console.log(contentWidth, calculateResult.maxButtonsPerRow, ((contentWidth / calculateResult.maxButtonsPerRow) - 10));
+	calculateResult = calculateButtons(--scaleBaseWidth, --scaleBaseHeight);
 	let strechedWidth = ((contentWidth / calculateResult.maxButtonsPerRow) - 10);
 	if (scaleBaseHeight * calculateResult.maxRows > contentHeight) {
 		strechedWidth -= 10;

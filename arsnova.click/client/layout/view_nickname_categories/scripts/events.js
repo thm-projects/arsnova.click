@@ -69,5 +69,17 @@ Template.nicknameCategories.events({
 		questionGroup.getConfiguration().getNickSettings().removeSelectedNickByName(NicknameCategoriesCollection.findOne({_id: nickname}).nick);
 		Session.set("questionGroup", questionGroup);
 		localData.addHashtag(Session.get("questionGroup"));
+	},
+	"change #block_illegal_nicks": function () {
+		const questionItem = Session.get("questionGroup");
+		questionItem.getConfiguration().getNickSettings().setBlockIllegal($('#block_illegal_nicks').prop("checked"));
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
+	},
+	"change #restrict_to_cas": function () {
+		const questionItem = Session.get("questionGroup");
+		questionItem.getConfiguration().getNickSettings().setRestrictToCASLogin($('#restrict_to_cas').prop("checked"));
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
 	}
 });

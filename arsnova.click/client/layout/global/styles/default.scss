@@ -19,6 +19,10 @@
 
 body {
   font-family: $font;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
 }
 
 *:fullscreen,

@@ -31,23 +31,39 @@
             <div class="row">
                 <div class="col-xs-12 {{#if hasCASConfig}}col-sm-6{{/if}}">
                     <div class="nickStyle" id="block_illegal_nicks_wrapper">
-                        <p>{{_ "view.nickname_categories.block_illegal_nicks"}}</p>
+                        <p class="text-light col-xs-12">{{_ "view.nickname_categories.block_illegal_nicks"}}</p>
                         <input type="checkbox"
-                               name='switch'
-                               id="block_illegal_nicks_switch"
-                               class="tabbable"
-                               title="{{_ "view.nickname_categories.block_illegal_nicks"}}"/>
+                               id="block_illegal_nicks"
+                               name="switch"
+                               data-width="100%"
+                               data-height="35"
+                               data-style="col-xs-12"
+                               data-onstyle="success"
+                               data-offstyle="danger"
+                               data-on="{{_ "global.yes"}}"
+                               data-off="{{_ "global.no"}}"
+                               data-toggle="toggle"
+                               title="{{_ "view.nickname_categories.block_illegal_nicks"}}"
+                               class="tabbable">
                     </div>
                 </div>
                 {{#if hasCASConfig}}
                     <div class="col-xs-12 col-sm-6">
                         <div class="nickStyle" id="restrict_to_cas_wrapper">
-                            <p>{{_ "view.nickname_categories.restrict_to_cas"}}</p>
+                            <p class="text-light col-xs-12">{{_ "view.nickname_categories.restrict_to_cas"}}</p>
                             <input type="checkbox"
-                                   name='switch'
-                                   id="restrict_to_cas_switch"
-                                   class="tabbable"
-                                   title="{{_ "view.nickname_categories.restrict_to_cas"}}"/>
+                                   id="restrict_to_cas"
+                                   name="switch"
+                                   data-width="100%"
+                                   data-height="35"
+                                   data-style="col-xs-12"
+                                   data-onstyle="success"
+                                   data-offstyle="danger"
+                                   data-toggle="toggle"
+                                   data-on="{{_ "global.yes"}}"
+                                   data-off="{{_ "global.no"}}"
+                                   title="{{_ "view.nickname_categories.restrict_to_cas"}}"
+                                   class="tabbable">
                         </div>
                     </div>
                 {{/if}}

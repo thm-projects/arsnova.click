@@ -200,6 +200,7 @@ Router.route('/preview/:themeName/:language', {
 		Session.set("theme", Router.current().params.themeName);
 		Session.set("overrideTheme", true);
 		TAPi18n.setLanguage(Router.current().params.language);
+		$("body").removeClass().addClass(Session.get("theme"));
 	}
 });
 
@@ -304,12 +305,6 @@ Router.route('/theme', {
 Router.route('/showMore', {
 	controller: NonBlockingRouteController,
 	action: function () {
-		this.render("titel", {
-			to: "header.title",
-			data: function () {
-				return {titelText: 'region.footer.show-more.show-more-elements'};
-			}
-		});
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {
@@ -370,12 +365,6 @@ Router.route('/:quizName/theme', {
 Router.route('/:quizName/showMore', {
 	controller: BlockingRouteController,
 	action: function () {
-		this.render("titel", {
-			to: "header.title",
-			data: function () {
-				return {titelText: 'region.footer.show-more.show-more-elements'};
-			}
-		});
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',
 			data: function () {

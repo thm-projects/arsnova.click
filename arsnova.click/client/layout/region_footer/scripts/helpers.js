@@ -15,9 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {Session} from 'meteor/session';
 import {Router} from 'meteor/iron:router';
+import {TAPi18n} from 'meteor/tap:i18n';
+import * as footerElements from "./lib.js";
 
 Template.footer.helpers({
 	footerElements: function () {
@@ -25,9 +28,51 @@ Template.footer.helpers({
 	}
 });
 
+Template.hiddenFooterElement.helpers({
+	isStatefulElement: function (item) {
+		return !!item.selectable;
+	},
+	isEnabled: function (item) {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		const configDoc = Session.get("questionGroup").getConfiguration();
+		switch (item.id) {
+			case "sound":
+				return !!(configDoc && configDoc.getMusicSettings().isEnabled());
+			case "reading-confirmation":
+				if (configDoc && configDoc.getReadingConfirmationEnabled()) {
+					Meteor.defer(function () {
+						$('#reading-confirmation').find(".footerElemIcon").find(".glyphicon").removeClass("glyphicon-eye-open").addClass("glyphicon-eye-close");
+					});
+					return false;
+				} else {
+					Meteor.defer(function () {
+						$('#reading-confirmation').find(".footerElemIcon").find(".glyphicon").removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open");
+					});
+					return true;
+				}
+				break;
+			case "nicknames":
+				if (configDoc.getNickSettings().getSelectedValues().length === 0) {
+					$('#nicknames').find(".footerElemText").text(TAPi18n.__("view.nickname_categories.free_choice"));
+					return false;
+				} else {
+					$('#nicknames').find(".footerElemText").text(TAPi18n.__("region.footer.footer_bar.nicknames"));
+					return true;
+				}
+		}
+	}
+});
+
 Template.showMore.helpers({
-	hiddenFooterElements: function () {
-		return Session.get("hiddenFooterElements");
+	footerElements: function () {
+		footerElements.footerTracker.depend();
+		Meteor.defer(function () {
+			footerElements.updateStatefulFooterElements();
+			footerElements.calculateFooterFontSize();
+		});
+		return $.parseJSON(sessionStorage.getItem("footerElementsBackup"));
 	}
 });
 

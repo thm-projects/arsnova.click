@@ -9,8 +9,10 @@ Template.questionTypeView.events({
 	"click .questionType": function (event) {
 		const questionGroup = Session.get("questionGroup");
 		const currentQuestion = questionGroup.getQuestionList()[Router.current().params.questionIndex].serialize();
+		const index = parseInt(Router.current().params.questionIndex);
 		delete currentQuestion.type;
-		questionGroup.addQuestion(questionReflection[event.currentTarget.id.replace("_questionType", "")](currentQuestion), parseInt(Router.current().params.questionIndex));
+		questionGroup.removeQuestion(index);
+		questionGroup.addQuestion(questionReflection[event.currentTarget.id.replace("_questionType", "")](currentQuestion), index);
 		Session.set("questionGroup", questionGroup);
 		localData.addHashtag(questionGroup);
 	}

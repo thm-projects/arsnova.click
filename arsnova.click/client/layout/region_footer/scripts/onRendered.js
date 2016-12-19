@@ -16,55 +16,31 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {TAPi18n} from 'meteor/tap:i18n';
-import * as localData from '/lib/local_storage.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "./lib.js";
 
 Template.hiddenFooterElement.onRendered(function () {
-	footerElements.footerTracker.changed();
-	headerLib.calculateTitelHeight();
+	Meteor.defer(function () {
+		headerLib.calculateHeaderSize();
+		headerLib.calculateTitelHeight();
+	});
 });
 
 Template.showMore.onRendered(function () {
 	if (footerElements.getCurrentFooterElements().length === 0 || localStorage.getItem("lastPage") === ":quizName.showMore") {
 		const restoredFooters = JSON.parse(sessionStorage.getItem("footerElementsBackup"));
 		if (restoredFooters && restoredFooters.length > 0) {
-			footerElements.removeFooterElements();
 			restoredFooters.forEach(function (item) {
-				footerElements.addFooterElement(footerElements.getFooterElementById(item));
+				footerElements.addFooterElement(footerElements.getFooterElementById(item.id));
 			});
 		}
-	} else {
-		const footerList = [];
-		footerElements.getCurrentFooterElements().forEach(function (item) {
-			footerList.push(item.id);
-		});
-		sessionStorage.setItem("footerElementsBackup", JSON.stringify(footerList));
 	}
-	$("[name='switch']").bootstrapSwitch({
-		size: "small",
-		onText: TAPi18n.__("region.footer.show-more.onText"),
-		offText: TAPi18n.__("region.footer.show-more.offText"),
-		onSwitchChange: function (event, state) {
-			switch (event.target.id.replace("_switch", "")) {
-				case "reading-confirmation":
-					const questionGroup = Session.get("questionGroup");
-					questionGroup.getConfiguration().setReadingConfirmationEnabled(state);
-					Session.set("questionGroup", questionGroup);
-					localData.addHashtag(questionGroup);
-					Meteor.call("SessionConfiguration.setReadingConfirmationEnabled",
-						Session.get("questionGroup").getHashtag(),
-						Session.get("questionGroup").getConfiguration().getReadingConfirmationEnabled()
-					);
-			}
-		}
-	});
+	footerElements.removeFooterElement(footerElements.footerElemShowMore);
+	footerElements.removeFooterElement(footerElements.footerElemHome);
+	sessionStorage.setItem("footerElementsBackup", JSON.stringify(footerElements.getCurrentFooterElements()));
+	footerElements.removeFooterElements();
 	footerElements.footerTracker.changed();
-	headerLib.calculateHeaderSize();
-	headerLib.calculateTitelHeight();
 });
 
 Template.contactHeaderBar.onRendered(function () {
@@ -80,13 +56,29 @@ Template.contactHeaderBar.onRendered(function () {
 });
 
 Template.about.onRendered(function () {
+	Meteor.defer(function () {
+		headerLib.calculateHeaderSize();
+		headerLib.calculateTitelHeight();
+	});
 });
 
 Template.agb.onRendered(function () {
+	Meteor.defer(function () {
+		headerLib.calculateHeaderSize();
+		headerLib.calculateTitelHeight();
+	});
 });
 
 Template.dataprivacy.onRendered(function () {
+	Meteor.defer(function () {
+		headerLib.calculateHeaderSize();
+		headerLib.calculateTitelHeight();
+	});
 });
 
 Template.imprint.onRendered(function () {
+	Meteor.defer(function () {
+		headerLib.calculateHeaderSize();
+		headerLib.calculateTitelHeight();
+	});
 });

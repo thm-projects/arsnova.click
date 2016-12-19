@@ -114,8 +114,8 @@
 	$fg-footer-info-bar-active-hovered: #33FF00;
 	$fg-footer-element: white;
 	$fg-footer-element-hovered: white;
-	$fg-footer-element-deactivated: $warning;
-	$fg-footer-element-deactivated-hovered: red;
+	$fg-footer-element-deactivated: red;
+	$fg-footer-element-deactivated-hovered: #ff3e3e;
 	$fg-footer-element-activated: $success;
 	$fg-footer-element-activated-hovered: $success;
 
@@ -291,9 +291,9 @@
 
 	$bg-introjs-helper_layer: white;
 
-	$fg-quiz_manager_details-btn_group-button: white;
-	$bg-quiz_manager_details-btn_group-button: #B40404;
-	$bg-quiz_manager_details-btn_group-button-hovered: lighten($bg-quiz_manager_details-btn_group-button, 10);
+	$fg-quiz_manager_details-btn_group-button: black;
+	$bg-quiz_manager_details-btn_group-button: #ffd700;
+	$bg-quiz_manager_details-btn_group-button-hovered: darken($bg-quiz_manager_details-btn_group-button, 10);
 
 	@if ($name == "theme-arsnova-dot-click-contrast"){
 		$background-color: #23425b;
@@ -317,8 +317,6 @@
 
 		$bg-answer_options-bootstrap_switch_handle_off: $warning;
 		$bg-rangedSlider-invalid: $warning;
-		$fg-footer-element-deactivated: $warning;
-		$bg-js-my-hash-invalidQuestion: $warning;
 		$bg-js-my-hash-invalidQuestion-hovered: lighten($warning, 10);
 		$bg-colorChangingOwnNick25: $warning;
 
@@ -423,8 +421,6 @@
 		$footer-background-color: #000000; /*gainsboro */
 		$fg-footer-info-bar-active: #00CC00;
 		$fg-footer-info-bar-active-hovered: #00FF00;
-		$fg-footer-element-deactivated: #E00000;
-		$fg-footer-element-deactivated-hovered: #FF0000;
 
 		$bg-answer_options-bootstrap_switch: $thmgray;
 
@@ -993,23 +989,23 @@
 				-o-transition: background-color 800ms linear;
 				-ms-transition: background-color 800ms linear;
 				transition: background-color 800ms linear;
-				.footerElement {
-					color: $fg-footer-info-bar;
+			}
+			.footerElement {
+				color: $fg-footer-info-bar;
+				&:hover {
+					color: $fg-footer-info-bar-hovered;
+				}
+				&.error {
+					color: $fg-footer-element-deactivated;
 					&:hover {
-						color: $fg-footer-info-bar-hovered;
+						color: $fg-footer-element-deactivated-hovered;
 					}
-					&.error {
-						color: $fg-footer-element-deactivated;
-						&:hover {
-							color: $fg-footer-element-deactivated-hovered;
-						}
-					}
-					&.success {
-						color: $fg-footer-info-bar-active;
+				}
+				&.success {
+					color: $fg-footer-info-bar-active;
 
-						&:hover {
-							color: $fg-footer-info-bar-active-hovered;
-						}
+					&:hover {
+						color: $fg-footer-info-bar-active-hovered;
 					}
 				}
 			}

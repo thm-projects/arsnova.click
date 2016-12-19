@@ -93,6 +93,9 @@ export function calculateTitelHeight() {
 	container.css("height", finalHeight);
 	container.css("margin-top", !rowBottom.outerHeight() ? marginTop : 0);
 	centerVertical.css("top", finalHeight / 2 - centerVertical.outerHeight() / 2);
+	if ($(window).height() < 768) {
+		centerVertical.css({width: "100%", margin: "0 -15px"});
+	}
 	titelTracker.changed();
 }
 

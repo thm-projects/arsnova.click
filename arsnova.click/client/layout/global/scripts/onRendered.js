@@ -28,13 +28,6 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {startConnectionIndication, getRTT, forceFeedback} from '/client/layout/global/scripts/lib.js';
 
 Template.home.onRendered(function () {
-	HashtagsCollection.find().observeChanges({
-		added: function (id, doc) {
-			if (doc.hashtag === $("#hashtag-input-field").val()) {
-				$("#addNewHashtag").attr("disabled", "disabled");
-			}
-		}
-	});
 	if (localData.getAllHashtags().length > 0) {
 		hashtagLib.setHashtagSplashscreen(new Splashscreen({
 			autostart: true,
@@ -68,7 +61,6 @@ Template.home.onRendered(function () {
 	if (navigator.userAgent.match(/iPad/i) == null) {
 		footerElements.addFooterElement(footerElements.footerElemFullscreen);
 	}
-
 	if (localData.getAllHashtags().length > 0) {
 		footerElements.addFooterElement(footerElements.footerElemHashtagManagement);
 	} else {

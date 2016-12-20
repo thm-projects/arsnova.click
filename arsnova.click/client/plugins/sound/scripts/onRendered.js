@@ -31,7 +31,7 @@ Template.soundConfig.onRendered(function () {
 
 	title = configDoc.music.lobbyTitle;
 	$('#lobbySoundSelect').val(title);
-	if (lib.countdownEndSound === null) {
+	if (lib.lobbySound === null) {
 		if (title === "Random") {
 			title = MusicSessionConfiguration.getAvailableMusic().lobbyMusic[randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().lobbyMusic.length - 1)];
 		}

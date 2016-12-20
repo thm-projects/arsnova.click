@@ -72,9 +72,15 @@ Template.soundConfig.events({
 	"change #lobbySoundSelect": function (event) {
 		if (lib.lobbySound) {
 			lib.lobbySound.stop();
+			Session.set("lobbySoundIsPlaying", false);
+			$('#playStopLobbyMusic').prop("checked", true).change();
+		}
+		const songTitle = $(event.target).val();
+		if (songTitle !== "Random") {
+			lib.setLobbySound(songTitle, false);
 		}
 		const questionItem = Session.get("questionGroup");
-		questionItem.getConfiguration().getMusicSettings().setLobbyTitle($(event.target).val());
+		questionItem.getConfiguration().getMusicSettings().setLobbyTitle(songTitle);
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(questionItem);
 		Meteor.call('SessionConfiguration.setMusic', questionItem.getConfiguration());
@@ -103,9 +109,15 @@ Template.soundConfig.events({
 	"change #countdownRunningSelect": function (event) {
 		if (lib.countdownRunningSound) {
 			lib.countdownRunningSound.stop();
+			Session.set("countdownRunningSoundIsPlaying", false);
+			$('#playStopCountdownRunningSound').prop("checked", true).change();
+		}
+		const songTitle = $(event.target).val();
+		if (songTitle !== "Random") {
+			lib.setCountdownRunningSound(songTitle, false);
 		}
 		const questionItem = Session.get("questionGroup");
-		questionItem.getConfiguration().getMusicSettings().setCountdownRunningTitle($(event.target).val());
+		questionItem.getConfiguration().getMusicSettings().setCountdownRunningTitle(songTitle);
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(questionItem);
 		Meteor.call('SessionConfiguration.setMusic', questionItem.getConfiguration());
@@ -134,9 +146,15 @@ Template.soundConfig.events({
 	"change #countdownEndSelect": function (event) {
 		if (lib.countdownEndSound) {
 			lib.countdownRunningSound.stop();
+			Session.set("countdownEndSoundIsPlaying", false);
+			$('#playStopCountdownEndSound').prop("checked", true).change();
+		}
+		const songTitle = $(event.target).val();
+		if (songTitle !== "Random") {
+			lib.setCountdownEndSound(songTitle);
 		}
 		const questionItem = Session.get("questionGroup");
-		questionItem.getConfiguration().getMusicSettings().setCountdownEndTitle($(event.target).val());
+		questionItem.getConfiguration().getMusicSettings().setCountdownEndTitle(songTitle);
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(questionItem);
 		Meteor.call('SessionConfiguration.setMusic', questionItem.getConfiguration());

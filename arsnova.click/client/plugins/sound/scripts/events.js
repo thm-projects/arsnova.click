@@ -18,118 +18,162 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {Router} from 'meteor/iron:router';
-import {TAPi18n} from 'meteor/tap:i18n';
-import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
-import * as lib from './lib.js';
+import {randomIntFromInterval} from '/client/layout/view_live_results/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
+import * as lib from './lib.js';
 
 Template.soundConfig.events({
-	"change #soundSelect": function (event) {
-		var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-		var songTitle = $(event.target).val();
-		if (songTitle === "Random") {
-			songTitle = "Song" + (Math.floor(Math.random() * 3) + 1);
-		}
-		configDoc.music.title = $(event.target).val();
-		if (Session.get("soundIsPlaying")) {
-			lib.buzzsound1.stop();
-			lib.setBuzzsound1(songTitle);
-			lib.buzzsound1.play();
+	"change #activateDeactivateGlobalVolume": function (event) {
+		const questionGroup = Session.get("questionGroup");
+		const currentConfig = Session.get("musicSlider");
+
+		if ($(event.target).prop("checked")) {
+			const musicVolume = Math.round(document.getElementById('slider-global-volume').noUiSlider.get());
+
+			currentConfig.global = musicVolume;
+			currentConfig.lobbyMusic = musicVolume;
+			currentConfig.countdownRunning = musicVolume;
+			currentConfig.countdownEnd = musicVolume;
+
+			lib.lobbySound.setVolume(musicVolume);
+			lib.countdownRunningSound.setVolume(musicVolume);
+			lib.countdownEndSound.setVolume(musicVolume);
+
+			questionGroup.getConfiguration().getMusicSettings().setIsUsingGlobalVolume(true);
+			questionGroup.getConfiguration().getMusicSettings().setGlobalVolume(musicVolume);
+
+			document.getElementById("slider-global-volume").removeAttribute('disabled');
+
+			document.getElementById("slider-lobby-music").setAttribute('disabled', true);
+			document.getElementById("slider-lobby-music").noUiSlider.set(musicVolume);
+			document.getElementById("slider-countdown-running").setAttribute('disabled', true);
+			document.getElementById("slider-countdown-running").noUiSlider.set(musicVolume);
+			document.getElementById("slider-countdown-end").setAttribute('disabled', true);
+			document.getElementById("slider-countdown-end").noUiSlider.set(musicVolume);
 		} else {
-			lib.setBuzzsound1(songTitle);
+			currentConfig.global = 80;
+
+			questionGroup.getConfiguration().getMusicSettings().setIsUsingGlobalVolume(false);
+
+			document.getElementById("slider-global-volume").setAttribute('disabled', true);
+			document.getElementById("slider-global-volume").noUiSlider.set(80);
+
+			document.getElementById("slider-lobby-music").removeAttribute('disabled');
+			document.getElementById("slider-countdown-running").removeAttribute('disabled');
+			document.getElementById("slider-countdown-end").removeAttribute('disabled');
 		}
-		Meteor.call('SessionConfiguration.setMusic', configDoc);
-		const questionItem = Session.get("questionGroup");
-		questionItem.getConfiguration().getMusicSettings().setTitle($(event.target).val());
-		Session.set("questionGroup", questionItem);
-		localData.addHashtag(Session.get("questionGroup"));
+
+		Session.set('musicSlider', currentConfig);
+		Session.set("questionGroup", questionGroup);
+		localData.addHashtag(questionGroup);
+		Meteor.call('SessionConfiguration.setMusic', questionGroup.getConfiguration());
 	},
 	"change #lobbySoundSelect": function (event) {
-		var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-		var songTitle = $(event.target).val();
-		if (songTitle === "LobbyRandom") {
-			songTitle = "LobbySong" + (Math.floor(Math.random() * 4) + 1);
+		let songTitle = $(event.target).val();
+		if (songTitle === "Random") {
+			songTitle = "Song" + randomIntFromInterval(0, $(event.target).find("option").length - 2);
 		}
-		lib.lobbySound.stop();
-		configDoc.music.lobbyTitle = $(event.target).val();
-		if (Session.get("lobbySoundIsPlaying")) {
-			lib.setLobbySound(songTitle);
-		} else {
-			lib.setLobbySound(songTitle, false);
-		}
-		Meteor.call('SessionConfiguration.setMusic', configDoc);
+
+		lib.setLobbySound(songTitle, Session.get("lobbySoundIsPlaying"));
+		$('#playStopLobbyMusic').bootstrapToggle("on");
+
 		const questionItem = Session.get("questionGroup");
-		questionItem.getConfiguration().getMusicSettings().setLobbyTitle($(event.target).val());
+		questionItem.getConfiguration().getMusicSettings().setLobbyTitle(songTitle);
 		Session.set("questionGroup", questionItem);
-		localData.addHashtag(Session.get("questionGroup"));
+		localData.addHashtag(questionItem);
+		Meteor.call('SessionConfiguration.setMusic', questionItem.getConfiguration());
 	},
-	"change #finishSoundSelect": function (event) {
-		var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-		var songTitle = $(event.target).val();
-
-		configDoc.music.finishSoundTitle = songTitle;
-
-		if (songTitle !== "Silence") {
-			lib.setFinishSoundTitle(songTitle);
-			lib.finishSound.play();
-		}
-
-		Meteor.call('SessionConfiguration.setMusic', configDoc);
-		const questionItem = Session.get("questionGroup");
-		questionItem.getConfiguration().getMusicSettings().setFinishSoundTitle(songTitle);
-		Session.set("questionGroup", questionItem);
-		localData.addHashtag(Session.get("questionGroup"));
-	},
-	"click #js-btn-playStopMusic": function () {
-		if (Session.get("soundIsPlaying")) {
-			lib.buzzsound1.stop();
-			Session.set("soundIsPlaying", false);
-			$('#js-btn-playStopMusic').toggleClass("down").removeClass("button-warning").addClass("button-success");
-		} else {
-			lib.buzzsound1.play();
-			Session.set("soundIsPlaying", true);
-			$('#js-btn-playStopMusic').toggleClass("down").removeClass("button-success").addClass("button-warning");
-		}
-	},
-	"click #playStopLobbyMusic": function () {
-		var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-		if (Session.get("lobbySoundIsPlaying")) {
+	"change #playStopLobbyMusic": function (event) {
+		if ($(event.target).prop("checked")) {
 			lib.lobbySound.stop();
-			configDoc.music.isLobbyEnabled = false;
 			Session.set("lobbySoundIsPlaying", false);
-			$('#playStopLobbyMusic').toggleClass("down").removeClass("button-warning").addClass("button-success");
 		} else {
-			configDoc.music.isLobbyEnabled = true;
+			let songTitle = $('#lobbySoundSelect').val();
+			if (songTitle === "Random") {
+				songTitle = "Song" + randomIntFromInterval(0, $('#lobbySoundSelect').find("option").length - 2);
+				lib.setLobbySound(songTitle);
+			}
 			lib.lobbySound.play();
 			Session.set("lobbySoundIsPlaying", true);
-			$('#playStopLobbyMusic').toggleClass("down").removeClass("button-success").addClass("button-warning");
 		}
-		Meteor.call('SessionConfiguration.setMusic', configDoc);
+	},
+	"change #activateDeactivateLobbyMusic": function (event) {
 		const questionItem = Session.get("questionGroup");
-		questionItem.getConfiguration().getMusicSettings().setIsLobbyEnabled(configDoc.music.isLobbyEnabled);
+		questionItem.getConfiguration().getMusicSettings().setLobbyEnabled($(event.target).prop("checked"));
 		Session.set("questionGroup", questionItem);
-		localData.addHashtag(Session.get("questionGroup"));
+		localData.addHashtag(questionItem);
+		Meteor.call('SessionConfiguration.setMusic', questionItem.getConfiguration());
 	},
-	"click #js-btn-hideSoundModal": function () {
-		lib.buzzsound1.stop();
-		Session.set("soundIsPlaying", false);
+	"change #countdownRunningSelect": function (event) {
+		let songTitle = $(event.target).val();
+		if (songTitle === "Random") {
+			songTitle = "Song" + randomIntFromInterval(0, $(event.target).find("option").length - 2);
+		}
+
+		lib.setCountdownRunningSound(songTitle, Session.get("countdownRunningSoundIsPlaying"));
+		$('#playStopCountdownRunningSound').bootstrapToggle("on");
+
+		const questionItem = Session.get("questionGroup");
+		questionItem.getConfiguration().getMusicSettings().setCountdownRunningTitle(songTitle);
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(questionItem);
+		Meteor.call('SessionConfiguration.setMusic', questionItem.getConfiguration());
 	},
-	"click #isSoundOnButton": function () {
-		var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-		var btn = $('#isSoundOnButton');
-		btn.toggleClass("down");
-		if (btn.hasClass("down")) {
-			configDoc.music.isEnabled = true;
-			btn.html(TAPi18n.__("plugins.sound.active"));
+	"change #playStopCountdownRunningSound": function (event) {
+		if ($(event.target).prop("checked")) {
+			lib.countdownRunningSound.stop();
+			Session.set("countdownRunningSoundIsPlaying", false);
 		} else {
-			configDoc.music.isEnabled = false;
-			btn.html(TAPi18n.__("plugins.sound.inactive"));
+			let songTitle = $('#countdownRunningSelect').val();
+			if (songTitle === "Random") {
+				songTitle = "Song" + randomIntFromInterval(0, $('#countdownRunningSelect').find("option").length - 2);
+				lib.setCountdownRunningSound(songTitle);
+			}
+			lib.countdownRunningSound.play();
+			Session.set("countdownRunningSoundIsPlaying", true);
 		}
-		Meteor.call('SessionConfiguration.setMusic', configDoc);
+	},
+	"change #activateDeactivateCountdownRunningSound": function (event) {
 		const questionItem = Session.get("questionGroup");
-		questionItem.getConfiguration().getMusicSettings().setEnabled(configDoc.music.isEnabled);
+		questionItem.getConfiguration().getMusicSettings().setCountdownRunningEnabled($(event.target).prop("checked"));
 		Session.set("questionGroup", questionItem);
-		localData.addHashtag(Session.get("questionGroup"));
+		localData.addHashtag(questionItem);
+		Meteor.call('SessionConfiguration.setMusic', questionItem.getConfiguration());
+	},
+	"change #countdownEndSelect": function (event) {
+		let songTitle = $(event.target).val();
+		if (songTitle === "Random") {
+			songTitle = "Song" + randomIntFromInterval(0, $(event.target).find("option").length - 2);
+		}
+
+		lib.setCountdownEndSound(songTitle);
+		$('#playStopCountdownEndSound').bootstrapToggle("on");
+
+		const questionItem = Session.get("questionGroup");
+		questionItem.getConfiguration().getMusicSettings().setCountdownEndTitle(songTitle);
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(questionItem);
+		Meteor.call('SessionConfiguration.setMusic', questionItem.getConfiguration());
+	},
+	"change #playStopCountdownEndSound": function (event) {
+		if ($(event.target).prop("checked")) {
+			lib.countdownEndSound.stop();
+			Session.set("countdownEndSoundIsPlaying", false);
+		} else {
+			let songTitle = $('#countdownEndSelect').val();
+			if (songTitle === "Random") {
+				songTitle = "Song" + randomIntFromInterval(0, $('#countdownEndSelect').find("option").length - 2);
+				lib.setCountdownEndSound(songTitle);
+			}
+			lib.countdownEndSound.play();
+			Session.set("countdownEndSoundIsPlaying", true);
+		}
+	},
+	"change #activateDeactivateCountdownEndSound": function (event) {
+		const questionItem = Session.get("questionGroup");
+		questionItem.getConfiguration().getMusicSettings().setCountdownEndEnabled($(event.target).prop("checked"));
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(questionItem);
+		Meteor.call('SessionConfiguration.setMusic', questionItem.getConfiguration());
 	}
 });

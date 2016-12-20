@@ -19,6 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
 import {Router} from 'meteor/iron:router';
+import {ReactiveCountdown} from 'meteor/flyandi:reactive-countdown';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 export let countdown = null;

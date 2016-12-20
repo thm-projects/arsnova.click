@@ -36,6 +36,13 @@ Template.layout.helpers({
 
 Template.connectionQualityHeader.helpers({
 	status: function () {
+		if (!Meteor.status().connected) {
+			return {
+				resultString: "region.header.connection_status.websocket_status.disconnected",
+				ready: true,
+				statusClass: "Offline"
+			};
+		}
 		if (!Session.get("connectionStatus") || Session.get("connectionStatus").dbConnection.currentCount < Session.get("connectionStatus").dbConnection.totalCount) {
 			lib.startPendingAnimation();
 			return {
@@ -50,9 +57,6 @@ Template.connectionQualityHeader.helpers({
 			errors: [],
 			warnings: []
 		};
-		if (!Meteor.status().connected) {
-			result.errors.push("webSocket");
-		}
 		if (!Session.get("connectionStatus").localStorage) {
 			result.errors.push("localStorage");
 		}

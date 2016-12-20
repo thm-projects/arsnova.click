@@ -29,10 +29,7 @@ Template.memberlist.onDestroyed(function () {
 		lobbySound.stop();
 	}
 	$('.qr-code-container').hide();
-	Session.set("allMembersCount", undefined);
-	Session.set("maxLearnerButtons", undefined);
-	Session.set("learnerCountOverride", undefined);
-	delete Session.keys.allMembersCount;
-	delete Session.keys.maxLearnerButtons;
-	delete Session.keys.learnerCountOverride;
+	Session.delete("allMembersCount");
+	Session.delete("maxLearnerButtons");
+	Session.delete("learnerCountOverride");
 });

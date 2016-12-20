@@ -19,8 +19,6 @@ import {Meteor} from 'meteor/meteor';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {AbstractSessionConfiguration} from '/lib/session_configuration/session_config_abstract.js';
-import {MusicSessionConfiguration} from '/lib/session_configuration/session_config_music.js';
-import {NickSessionConfiguration} from '/lib/session_configuration/session_config_nicks.js';
 
 Meteor.methods({
 	"SessionConfiguration.addConfig": function (sessionConfigObject) {
@@ -76,7 +74,7 @@ Meteor.methods({
 		});
 	},
 	"SessionConfiguration.setMusic": function (configObject) {
-		if (Meteor.isClient && configObject instanceof MusicSessionConfiguration) {
+		if (configObject instanceof AbstractSessionConfiguration) {
 			configObject = configObject.serialize();
 		}
 		SessionConfigurationCollection.update({hashtag: configObject.hashtag}, {$set: {music: configObject.music}});
@@ -92,7 +90,7 @@ Meteor.methods({
 		});
 	},
 	"SessionConfiguration.setNicks": function (configObject) {
-		if (Meteor.isClient && configObject instanceof NickSessionConfiguration) {
+		if (Meteor.isClient && configObject instanceof AbstractSessionConfiguration) {
 			configObject = configObject.serialize();
 		}
 		SessionConfigurationCollection.update({hashtag: configObject.hashtag}, {$set: {nicks: configObject.nicks}});

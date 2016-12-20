@@ -20,12 +20,11 @@ import {Template} from 'meteor/templating';
 import {Session} from 'meteor/session';
 import {Router} from 'meteor/iron:router';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
-import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {DefaultQuestionGroup} from '/lib/questions/questiongroup_default.js';
 import * as localData from '/lib/local_storage.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
-import {buzzsound1} from '/client/plugins/sound/scripts/lib.js';
+import {countdownRunningSound} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 
@@ -50,7 +49,7 @@ const clickEvents = {
 		if (Router.current().params.quizName) {
 			if (localData.containsHashtag(Router.current().params.quizName)) {
 				if (Session.get("soundIsPlaying")) {
-					buzzsound1.stop();
+					countdownRunningSound.stop();
 				}
 				new Splashscreen({
 					autostart: true,
@@ -225,16 +224,7 @@ const clickEvents = {
 		new Splashscreen({
 			autostart: true,
 			templateName: "soundConfig",
-			closeOnButton: "#js-btn-hideSoundModal, .splashscreen-container-close",
-			onDestroyed: function () {
-				var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-				configDoc.music.volume = Session.get("slider2");
-				Meteor.call('SessionConfiguration.setMusic', configDoc);
-				const questionItem = Session.get("questionGroup");
-				questionItem.getConfiguration().getMusicSettings().setVolume(configDoc.music.volume);
-				Session.set("questionGroup", questionItem);
-				localData.addHashtag(Session.get("questionGroup"));
-			}
+			closeOnButton: "#js-btn-hideSoundModal, .splashscreen-container-close"
 		});
 	},
 	"click #qr-code": function () {

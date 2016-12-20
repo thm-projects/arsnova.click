@@ -19,6 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
 import {Router} from 'meteor/iron:router';
+import {ReactiveCountdown} from 'meteor/flyandi:reactive-countdown';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
@@ -28,8 +29,7 @@ import {FreeTextQuestion} from "/lib/questions/question_freetext.js";
 import * as localData from '/lib/local_storage.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import {buzzsound1, finishSound, setFinishSoundTitle, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
-import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
+import * as musicLib from '/client/plugins/sound/scripts/lib.js';
 import * as headerLib from "/client/layout/region_header/lib.js";
 
 export let countdown = null;
@@ -133,17 +133,15 @@ export function countdownFinish() {
 	}
 	const questionIndex = EventManagerCollection.findOne().questionIndex;
 	$('.navbar-footer').show();
-	if (Session.get("soundIsPlaying")) {
-		buzzsound1.stop();
-		var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-
-		if (configDoc.music.finishSoundTitle !== "Silence") {
-			setFinishSoundTitle(configDoc.music.finishSoundTitle);
-			finishSound.play();
-		}
-
-
-		Session.set("soundIsPlaying", false);
+	if (Session.get("countdownRunningSoundIsPlaying")) {
+		musicLib.countdownRunningSound.stop();
+		Session.set("countdownRunningSoundIsPlaying", false);
+	}
+	const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
+	if (musicSettings.getCountdownEndEnabled()) {
+		musicLib.setCountdownEndSound(musicSettings.getCountdownEndTitle());
+		musicLib.countdownEndSound.setVolume(musicSettings.getCountdownEndVolume());
+		musicLib.countdownEndSound.play();
 	}
 	headerLib.calculateTitelHeight();
 	if (questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
@@ -254,23 +252,11 @@ export function startCountdown(index) {
 	const isOwner = localData.containsHashtag(Session.get("questionGroup").getHashtag());
 	if (isOwner) {
 		const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
-		if (musicSettings.isEnabled()) {
-			var songTitle = musicSettings.getTitle();
-
-			if (songTitle === "Random") {
-				if (index === 0 || index % 3 === 0) {
-					songTitle = "Song3";
-				} else if (index % 2 === 0) {
-					songTitle = "Song2";
-				} else {
-					songTitle = "Song1";
-				}
-			}
-			setBuzzsound1(songTitle);
-
-			buzzsound1.setVolume(musicSettings.getVolume());
-			buzzsound1.play();
-			Session.set("soundIsPlaying", true);
+		if (musicSettings.getCountdownRunningEnabled()) {
+			musicLib.setCountdownRunningSound(musicSettings.getCountdownRunningTitle(), false);
+			musicLib.countdownRunningSound.setVolume(musicSettings.getCountdownRunningVolume());
+			musicLib.countdownRunningSound.play();
+			Session.set("countdownRunningSoundIsPlaying", true);
 		}
 	}
 	Meteor.call("Main.calculateRemainingCountdown", Session.get("questionGroup").getHashtag(), index, function (error, response) {

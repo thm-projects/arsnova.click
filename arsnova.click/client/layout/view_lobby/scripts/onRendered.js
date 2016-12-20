@@ -39,16 +39,16 @@ Template.memberlist.onRendered(function () {
 		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
 		const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
 
-		var songTitle = musicSettings.getLobbyTitle();
+		let songTitle = musicSettings.getLobbyTitle();
 		if (songTitle === "LobbyRandom") {
 			songTitle = "LobbySong" + (Math.floor(Math.random() * 4) + 1);
 		}
 
 		setLobbySound(songTitle, false);
-		lobbySound.setVolume(musicSettings.getVolume());
+		lobbySound.setVolume(musicSettings.getLobbyVolume());
 
 		lobbySound.stop();
-		if (musicSettings.getIsLobbyEnabled()) {
+		if (musicSettings.getLobbyEnabled()) {
 			Session.set("lobbySoundIsPlaying", true);
 			lobbySound.play();
 		}

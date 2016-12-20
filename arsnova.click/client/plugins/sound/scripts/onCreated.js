@@ -17,19 +17,15 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {isMobileDevice} from '/client/plugins/splashscreen/scripts/lib.js';
+import {Router} from 'meteor/iron:router';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 
-Template.soundConfig.helpers($.extend(isMobileDevice, {
-	sliderLobbyMusic: function () {
-		return Session.get("musicSlider").lobbyMusic;
-	},
-	sliderCountdownRunning: function () {
-		return Session.get("musicSlider").countdownRunning;
-	},
-	sliderCountdownEnd: function () {
-		return Session.get("musicSlider").countdownEnd;
-	},
-	sliderGlobalVolume: function () {
-		return Session.get("musicSlider").global;
-	}
-}));
+Template.soundConfig.onCreated(function () {
+	const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
+	Session.set("musicSlider", {
+		lobbyMusic: configDoc.music.lobbyVolume,
+		countdownRunning: configDoc.music.countdownRunningVolume,
+		countdownEnd: configDoc.music.countdownEndVolume,
+		global: configDoc.music.isUsingGlobalVolume ? configDoc.music.lobbyVolume : 80
+	});
+});

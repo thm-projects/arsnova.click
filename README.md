@@ -2,7 +2,7 @@
 
 [arsnova.click](http://arsnova.click) is a little bit [Kahoot!](https://getkahoot.com/) and a little bit [ARSnova](https://arsnova.eu/).
 
-While Kahoot! is a small game-based audience-response app, ARSnova is a full-grown innovative audience-response platform for colleges and universities. 
+While Kahoot! is a small game-based audience-response app for schools, ARSnova is a full-grown innovative audience-response platform for colleges and universities. 
 
 arsnova.click is somewhere in the feature range of both:
 
@@ -21,7 +21,7 @@ arsnova.click is somewhere in the feature range of both:
 
 # Getting started
 
-To run arsnova.click on your own Node.js-Server, at least a [MongoDB](https://docs.mongodb.org/manual/installation/) and [Meteor](https://www.meteor.com/) is needed. Furthermore, a HTTP-Proxy-Server (for example Nginx) is highly recommended.
+To run arsnova.click on your own Node.js-Server, at least a [MongoDB](https://docs.mongodb.org/manual/installation/) and [Meteor](https://www.meteor.com/) is needed. Furthermore, a HTTPS-Proxy-Server (for example Nginx) is highly recommended.
 Note, that Meteor is currently only offering support for the old node.js-version 0.10.x. If you want to use Node.js 4/5, additional adjustments are required.
 
 Install Meteor version 1.3.5.1: `curl https://install.meteor.com/?release=1.3.5.1 | sh`
@@ -43,7 +43,7 @@ For 100+ users, we recommend:
 
 Our application uses Meteor as application framework. Download and install [Meteor](https://www.meteor.com/install) to get arsnova.click running on your local development environment.
 
-You can start the app using the 'meteor --settings settings.json'-command in the main directory, the application will rebuild itself automatically on code changes.
+You can start the app using the `meteor --settings settings.json` command in the main directory, the application will rebuild itself automatically on code changes.
 Get additional informations through the official [Meteor Guide](http://guide.meteor.com/) and its [API-Documentation](http://docs.meteor.com/#/basic/).
 
 For code-checking we use [jshint](http://jshint.com/).

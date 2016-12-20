@@ -20,6 +20,7 @@ import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import {noUiSlider} from 'meteor/arsnova.click:nouislider';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
+import {MusicSessionConfiguration} from "/lib/session_configuration/session_config_music.js";
 import * as localData from '/lib/local_storage.js';
 import * as lib from './lib.js';
 
@@ -31,8 +32,7 @@ Template.soundConfig.onRendered(function () {
 	$('#lobbySoundSelect').val(title);
 	if (lib.countdownEndSound === null) {
 		if (title === "Random") {
-			title = "Song" + (Math.floor(Math.random() * $("#lobbySoundSelect").find("option").length) + 1);
-			$('#lobbySoundSelect').val(title);
+			title = "Song" + (Math.floor(Math.random() * MusicSessionConfiguration.getAvailableMusic().lobbyMusic.length - 1));
 		}
 		lib.setLobbySound(title, false);
 		lib.lobbySound.setVolume(configDoc.music.lobbyVolume);
@@ -42,8 +42,7 @@ Template.soundConfig.onRendered(function () {
 	$('#countdownRunningSelect').val(title);
 	if (lib.countdownRunningSound === null) {
 		if (title === "Random") {
-			title = "Song" + (Math.floor(Math.random() * $("#countdownRunningSelect").find("option").length) + 1);
-			$('#countdownRunningSelect').val(title);
+			title = "Song" + (Math.floor(Math.random() * MusicSessionConfiguration.getAvailableMusic().countdownRunning.length - 1));
 		}
 		lib.setCountdownRunningSound(title, false);
 		lib.countdownRunningSound.setVolume(configDoc.music.countdownRunningVolume);
@@ -53,8 +52,7 @@ Template.soundConfig.onRendered(function () {
 	$('#countdownEndSelect').val(title);
 	if (lib.countdownEndSound === null) {
 		if (title === "Random") {
-			title = "Song" + (Math.floor(Math.random() * $("#countdownEndSelect").find("option").length) + 1);
-			$('#countdownRunningSelect').val(title);
+			title = "Song" + (Math.floor(Math.random() * MusicSessionConfiguration.getAvailableMusic().countdownEnd.length - 1));
 		}
 		lib.setCountdownEndSound(title);
 		lib.countdownEndSound.setVolume(configDoc.music.countdownEndVolume);

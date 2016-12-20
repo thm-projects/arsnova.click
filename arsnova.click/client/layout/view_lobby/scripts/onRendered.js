@@ -20,6 +20,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import {MemberListCollection} from '/lib/member_list/collection.js';
+import {MusicSessionConfiguration} from "/lib/session_configuration/session_config_music.js";
 import * as localData from '/lib/local_storage.js';
 import {setLobbySound, lobbySound} from '/client/plugins/sound/scripts/lib.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
@@ -40,8 +41,8 @@ Template.memberlist.onRendered(function () {
 		const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
 
 		let songTitle = musicSettings.getLobbyTitle();
-		if (songTitle === "LobbyRandom") {
-			songTitle = "LobbySong" + (Math.floor(Math.random() * 4) + 1);
+		if (songTitle === "Random") {
+			songTitle = "Song" + (Math.floor(Math.random() * MusicSessionConfiguration.getAvailableMusic().lobbyMusic.length - 1));
 		}
 
 		setLobbySound(songTitle, false);

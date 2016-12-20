@@ -224,4 +224,12 @@ export class MusicSessionConfiguration {
 		}
 		this[countdownEndVolume] = value;
 	}
+
+	static getAvailableMusic () {
+		return {
+			lobbyMusic: ["Song0", "Song1", "Song2", "Song3"],
+			countdownRunning: ["Song0", "Song1", "Song2"],
+			countdownEnd: ["Song0", "Song1"]
+		};
+	}
 }

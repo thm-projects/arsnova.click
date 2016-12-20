@@ -24,6 +24,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {MusicSessionConfiguration} from "/lib/session_configuration/session_config_music.js";
 import {RangedQuestion} from "/lib/questions/question_ranged.js";
 import {FreeTextQuestion} from "/lib/questions/question_freetext.js";
 import * as localData from '/lib/local_storage.js';
@@ -45,6 +46,17 @@ export function deleteCountdown() {
 	countdown = null;
 }
 
+/**
+ * @see http://stackoverflow.com/a/7228322
+ * @param min Minimum range
+ * @param max Maximum range
+ * @returns {number} A random integer between min and max
+ */
+export function randomIntFromInterval(min, max)
+{
+	return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 export function setQuestionDialog(instance) {
 	if (questionDialog instanceof Splashscreen) {
 		questionDialog.close();
@@ -64,8 +76,7 @@ export function isCountdownZero(index) {
 	if (!countdown || countdown.get() === 0 || Session.get("sessionClosed") || !Session.get("countdownInitialized") || eventDoc.questionIndex !== index) {
 		return true;
 	} else {
-		var timer = Math.round(countdown.get());
-		return timer <= 0;
+		return Math.round(countdown.get()) <= 0;
 	}
 }
 
@@ -139,7 +150,11 @@ export function countdownFinish() {
 	}
 	const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
 	if (musicSettings.getCountdownEndEnabled()) {
-		musicLib.setCountdownEndSound(musicSettings.getCountdownEndTitle());
+		let title = musicSettings.getCountdownEndTitle();
+		if (title === "Random") {
+			title = MusicSessionConfiguration.getAvailableMusic().countdownEnd[randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().countdownEnd.length - 1)];
+		}
+		musicLib.setCountdownEndSound(title);
 		musicLib.countdownEndSound.setVolume(musicSettings.getCountdownEndVolume());
 		musicLib.countdownEndSound.play();
 	}
@@ -155,17 +170,6 @@ export function countdownFinish() {
 	} else {
 		footerElements.addFooterElement(footerElements.footerElemReadingConfirmation, 2);
 	}
-}
-
-/**
- * @see http://stackoverflow.com/a/7228322
- * @param min Minimum range
- * @param max Maximum range
- * @returns {number} A random integer between min and max
- */
-export function randomIntFromInterval(min,max)
-{
-	return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 export function startDebugVoting() {
@@ -253,7 +257,11 @@ export function startCountdown(index) {
 	if (isOwner) {
 		const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
 		if (musicSettings.getCountdownRunningEnabled()) {
-			musicLib.setCountdownRunningSound(musicSettings.getCountdownRunningTitle(), false);
+			let title = musicSettings.getCountdownRunningTitle();
+			if (title === "Random") {
+				title = MusicSessionConfiguration.getAvailableMusic().countdownRunning[randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().countdownRunning.length - 1)];
+			}
+			musicLib.setCountdownRunningSound(title, false);
 			musicLib.countdownRunningSound.setVolume(musicSettings.getCountdownRunningVolume());
 			musicLib.countdownRunningSound.play();
 			Session.set("countdownRunningSoundIsPlaying", true);

@@ -18,6 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {MusicSessionConfiguration} from "/lib/session_configuration/session_config_music.js";
 import {randomIntFromInterval} from '/client/layout/view_live_results/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 import * as lib from './lib.js';
@@ -69,16 +70,11 @@ Template.soundConfig.events({
 		Meteor.call('SessionConfiguration.setMusic', questionGroup.getConfiguration());
 	},
 	"change #lobbySoundSelect": function (event) {
-		let songTitle = $(event.target).val();
-		if (songTitle === "Random") {
-			songTitle = "Song" + randomIntFromInterval(0, $(event.target).find("option").length - 2);
+		if (lib.lobbySound) {
+			lib.lobbySound.stop();
 		}
-
-		lib.setLobbySound(songTitle, Session.get("lobbySoundIsPlaying"));
-		$('#playStopLobbyMusic').bootstrapToggle("on");
-
 		const questionItem = Session.get("questionGroup");
-		questionItem.getConfiguration().getMusicSettings().setLobbyTitle(songTitle);
+		questionItem.getConfiguration().getMusicSettings().setLobbyTitle($(event.target).val());
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(questionItem);
 		Meteor.call('SessionConfiguration.setMusic', questionItem.getConfiguration());
@@ -90,7 +86,7 @@ Template.soundConfig.events({
 		} else {
 			let songTitle = $('#lobbySoundSelect').val();
 			if (songTitle === "Random") {
-				songTitle = "Song" + randomIntFromInterval(0, $('#lobbySoundSelect').find("option").length - 2);
+				songTitle = "Song" + randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().lobbyMusic.length - 1);
 				lib.setLobbySound(songTitle);
 			}
 			lib.lobbySound.play();
@@ -105,16 +101,11 @@ Template.soundConfig.events({
 		Meteor.call('SessionConfiguration.setMusic', questionItem.getConfiguration());
 	},
 	"change #countdownRunningSelect": function (event) {
-		let songTitle = $(event.target).val();
-		if (songTitle === "Random") {
-			songTitle = "Song" + randomIntFromInterval(0, $(event.target).find("option").length - 2);
+		if (lib.countdownRunningSound) {
+			lib.countdownRunningSound.stop();
 		}
-
-		lib.setCountdownRunningSound(songTitle, Session.get("countdownRunningSoundIsPlaying"));
-		$('#playStopCountdownRunningSound').bootstrapToggle("on");
-
 		const questionItem = Session.get("questionGroup");
-		questionItem.getConfiguration().getMusicSettings().setCountdownRunningTitle(songTitle);
+		questionItem.getConfiguration().getMusicSettings().setCountdownRunningTitle($(event.target).val());
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(questionItem);
 		Meteor.call('SessionConfiguration.setMusic', questionItem.getConfiguration());
@@ -126,7 +117,7 @@ Template.soundConfig.events({
 		} else {
 			let songTitle = $('#countdownRunningSelect').val();
 			if (songTitle === "Random") {
-				songTitle = "Song" + randomIntFromInterval(0, $('#countdownRunningSelect').find("option").length - 2);
+				songTitle = "Song" + randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().countdownRunning.length - 1);
 				lib.setCountdownRunningSound(songTitle);
 			}
 			lib.countdownRunningSound.play();
@@ -141,16 +132,11 @@ Template.soundConfig.events({
 		Meteor.call('SessionConfiguration.setMusic', questionItem.getConfiguration());
 	},
 	"change #countdownEndSelect": function (event) {
-		let songTitle = $(event.target).val();
-		if (songTitle === "Random") {
-			songTitle = "Song" + randomIntFromInterval(0, $(event.target).find("option").length - 2);
+		if (lib.countdownEndSound) {
+			lib.countdownRunningSound.stop();
 		}
-
-		lib.setCountdownEndSound(songTitle);
-		$('#playStopCountdownEndSound').bootstrapToggle("on");
-
 		const questionItem = Session.get("questionGroup");
-		questionItem.getConfiguration().getMusicSettings().setCountdownEndTitle(songTitle);
+		questionItem.getConfiguration().getMusicSettings().setCountdownEndTitle($(event.target).val());
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(questionItem);
 		Meteor.call('SessionConfiguration.setMusic', questionItem.getConfiguration());
@@ -162,7 +148,7 @@ Template.soundConfig.events({
 		} else {
 			let songTitle = $('#countdownEndSelect').val();
 			if (songTitle === "Random") {
-				songTitle = "Song" + randomIntFromInterval(0, $('#countdownEndSelect').find("option").length - 2);
+				songTitle = "Song" + randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().countdownEnd.length - 1);
 				lib.setCountdownEndSound(songTitle);
 			}
 			lib.countdownEndSound.play();

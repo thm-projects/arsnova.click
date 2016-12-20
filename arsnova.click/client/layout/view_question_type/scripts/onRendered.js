@@ -16,7 +16,9 @@ Template.questionTypeView.onRendered(function () {
 	$(window).on("resize",function () {
 		calculateRowHeight();
 	});
-	calculateRowHeight();
+	Meteor.defer(function () {
+		calculateRowHeight();
+	});
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	headerLib.calculateHeaderSize();

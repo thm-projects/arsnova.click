@@ -5,11 +5,11 @@ import {Router} from 'meteor/iron:router';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 
 Template.questionTypeView.helpers({
-	currentQuestionType: function () {
+	isCurrentQuestionType: function (type) {
 		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].translationReferrer();
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() === type;
 	},
 	questionTypes: function () {
 		return questionLib.getQuestionTypes();

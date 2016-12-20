@@ -11,4 +11,10 @@
 			padding: 5px;
 		}
 	}
+	.activeQuestionType {
+		.wrapper {
+			opacity: 0.6;
+			cursor: not-allowed;
+		}
+	}
 }

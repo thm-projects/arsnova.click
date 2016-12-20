@@ -43,14 +43,14 @@ Template.hiddenFooterElement.helpers({
 			case "reading-confirmation":
 				if (configDoc && configDoc.getReadingConfirmationEnabled()) {
 					Meteor.defer(function () {
-						$('#reading-confirmation').find(".footerElemIcon").find(".glyphicon").removeClass("glyphicon-eye-open").addClass("glyphicon-eye-close");
-					});
-					return false;
-				} else {
-					Meteor.defer(function () {
 						$('#reading-confirmation').find(".footerElemIcon").find(".glyphicon").removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open");
 					});
 					return true;
+				} else {
+					Meteor.defer(function () {
+						$('#reading-confirmation').find(".footerElemIcon").find(".glyphicon").removeClass("glyphicon-eye-open").addClass("glyphicon-eye-close");
+					});
+					return false;
 				}
 				break;
 			case "nicknames":

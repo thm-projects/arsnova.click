@@ -23,6 +23,7 @@ import {MemberListCollection} from '/lib/member_list/collection.js';
 import {MusicSessionConfiguration} from "/lib/session_configuration/session_config_music.js";
 import * as localData from '/lib/local_storage.js';
 import {setLobbySound, lobbySound} from '/client/plugins/sound/scripts/lib.js';
+import {randomIntFromInterval} from '/client/layout/view_live_results/scripts/lib.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount, memberlistTracker} from './lib.js';
@@ -42,7 +43,7 @@ Template.memberlist.onRendered(function () {
 
 		let songTitle = musicSettings.getLobbyTitle();
 		if (songTitle === "Random") {
-			songTitle = "Song" + (Math.floor(Math.random() * MusicSessionConfiguration.getAvailableMusic().lobbyMusic.length - 1));
+			songTitle = MusicSessionConfiguration.getAvailableMusic().lobbyMusic[randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().lobbyMusic.length - 1)];
 		}
 
 		setLobbySound(songTitle, false);

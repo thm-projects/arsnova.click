@@ -86,7 +86,7 @@ Template.soundConfig.events({
 		} else {
 			let songTitle = $('#lobbySoundSelect').val();
 			if (songTitle === "Random") {
-				songTitle = "Song" + randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().lobbyMusic.length - 1);
+				songTitle = MusicSessionConfiguration.getAvailableMusic().lobbyMusic[randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().lobbyMusic.length - 1)];
 				lib.setLobbySound(songTitle);
 			}
 			lib.lobbySound.play();
@@ -117,7 +117,7 @@ Template.soundConfig.events({
 		} else {
 			let songTitle = $('#countdownRunningSelect').val();
 			if (songTitle === "Random") {
-				songTitle = "Song" + randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().countdownRunning.length - 1);
+				songTitle = MusicSessionConfiguration.getAvailableMusic().countdownRunning[randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().countdownRunning.length - 1)];
 				lib.setCountdownRunningSound(songTitle);
 			}
 			lib.countdownRunningSound.play();
@@ -148,7 +148,7 @@ Template.soundConfig.events({
 		} else {
 			let songTitle = $('#countdownEndSelect').val();
 			if (songTitle === "Random") {
-				songTitle = "Song" + randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().countdownEnd.length - 1);
+				songTitle = MusicSessionConfiguration.getAvailableMusic().countdownEnd[randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().countdownEnd.length - 1)];
 				lib.setCountdownEndSound(songTitle);
 			}
 			lib.countdownEndSound.play();

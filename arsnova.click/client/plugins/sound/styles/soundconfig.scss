@@ -21,10 +21,9 @@
 	.modal-content {
 		#soundTab {
 			overflow: hidden;
-			.nav-pills {
-				margin-bottom: 10px;
-				li > a {
-					border-radius: 4px 4px 0 0 ;
+			.btn-group {
+				margin-bottom: 20px;
+				span {
 					text-decoration: none;
 				}
 			}

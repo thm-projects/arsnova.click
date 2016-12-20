@@ -31,5 +31,8 @@ Template.soundConfig.helpers($.extend(isMobileDevice, {
 	},
 	sliderGlobalVolume: function () {
 		return Session.get("musicSlider").global;
+	},
+	isXsDevice: function () {
+		return $(document).width() <= 768;
 	}
 }));

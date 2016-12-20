@@ -53,7 +53,7 @@ Template.quizManager.onRendered(function () {
 		Session.get("questionGroup").getQuestionList().forEach(function (item) {
 			$('#added_questions_wrapper').append(
 				$('<div id="' + item.getQuestionIndex() + '_added_question" class="questionElementWrapper draggable"/>').append(
-					'<li data-valid="' + (item.isValid() ? "true" : "false") + '">' + TAPi18n.__(item.translationReferrer()) + '</li>'
+					'<li data-valid="' + (item.isValid() ? "true" : "false") + '">' + (item.getQuestionIndex() + 1) + ') ' + TAPi18n.__(item.translationReferrer()) + '</li>'
 				).append("<div class='removeQuestion text-light' id='removeQuestion_" + item.getQuestionIndex() + "'><span class='glyphicon glyphicon-trash'></span></div>")
 			);
 		});

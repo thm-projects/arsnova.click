@@ -17,7 +17,7 @@
 
 <template name="createQuestionView">
 	<div class="row full-screen-content">
-        <div id="editQuestionText" class="col-md-12 col-lg-6" data-intro="{{_ "plugins.markdown_bar.info_content"}}">
+        <div id="editQuestionText" class="col-md-12 col-md-6" data-intro="{{_ "plugins.markdown_bar.info_content"}}">
             {{> markdownBar }}
             <textarea class="round-corners-markdown textarea placeholder-align-center tabbable"
                       maxlength="{{getQuestionTextSchema.max}}"
@@ -26,7 +26,7 @@
                       placeholder="{{_ "view.questions.enter_question_here"}}"
             >{{questionText}}</textarea>
         </div>
-        <div id="previewQuestionContentWrapper" class="hidden-xs hidden-sm hidden-md col-lg-6">
+        <div id="previewQuestionContentWrapper" class="hidden-xs hidden-sm col-md-6">
             <div class="center-block" data-intro="{{_ "view.questions.description.preview"}}">
                 <img id="previewQuestionImage" src="/images/preview/question_preview.png" alt="question preview" />
                 <div id="markdownPreviewWrapper">

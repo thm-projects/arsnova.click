@@ -161,7 +161,7 @@ export function getTooltipForRoute(overridePreference = false) {
 	const introState = $.parseJSON(localStorage.getItem("intro_state")) || {};
 	const route = Router.current().route.getName();
 	Tracker.autorun(function () {
-		if ($(window).width() < 768) {
+		if ($(window).width() <= 768) {
 			return;
 		}
 		if (!introState[route]) {

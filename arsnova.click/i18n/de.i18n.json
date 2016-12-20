@@ -171,21 +171,21 @@
         "finished_with_warnings": "Mit Warnungen beendet",
         "finished_without_warnings": "Erfolgreich",
         "websocket_status": {
-          "connected": "verbunden",
-          "disconnected": "getrennt"
+          "connected": "Verbunden",
+          "disconnected": "Offline"
         },
         "localStorage_status": {
-          "writable": "beschreibbar",
-          "non_writable": "nicht beschreibbar"
+          "writable": "Beschreibbar",
+          "non_writable": "Nicht beschreibbar"
         },
         "sessionStorage_status": {
-          "writable": "beschreibbar",
-          "non_writable": "nicht beschreibbar"
+          "writable": "Beschreibbar",
+          "non_writable": "Nicht beschreibbar"
         },
         "dbConnection_status": {
-          "very_slow": "sehr langsam",
-          "slow": "langsam",
-          "ok": "gut"
+          "very_slow": "Sehr langsam",
+          "slow": "Langsam",
+          "ok": "Gut"
         }
       },
       "aria_description": {
@@ -599,15 +599,23 @@
       "info_content": "Du kannst Text mit <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown-Optionen werden in Form von Schaltflächen über dem Eingabefeld angeboten. Zudem unterstützt arsnova.click <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown.</a>"
     },
     "sound": {
-      "title": "Sound während des Countdowns",
-      "lobby_music": "Sound in der Quiz Lobby",
-      "finish_music": "Sound zum Ende des Countdowns",
+      "running_music": "Countdown (Laufend)",
+      "lobby_music": "Quiz Lobby",
+      "finish_music": "Countdown (Ende)",
+      "running_music_detailed": "Sound während des Countdowns",
+      "lobby_music_detailed": "Sound in der Quiz Lobby",
+      "finish_music_detailed": "Sound zum Ende des Countdowns",
       "whistle": "Pfeifen",
       "silence": "Kein Ton",
+      "global_volume": "Globale Lautstärke",
       "volume": "Lautstärke vorgeben",
       "inactive": "Sound ist abgeschaltet",
       "active": "Sound ist aktiviert",
-      "random": "Zufällige Auswahl"
+      "activated": "Aktiviert",
+      "deactivated": "Deaktiviert",
+      "random": "Zufällige Auswahl",
+      "play": "Play",
+      "stop": "Stop"
     },
     "splashscreen": {
       "question_and_answer": {

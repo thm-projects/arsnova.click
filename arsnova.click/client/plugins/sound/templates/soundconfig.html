@@ -19,66 +19,185 @@
 	<div class="modal {{#unless isMobileDevice}}fade {{/unless}}splashscreen" id="soundModal" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h2>{{_ "plugins.sound.title"}}</h2>
-				</div>
+				<div class="modal-header"></div>
 				<div class="modal-body">
-					<div class="row">
-						<div id="slider2"></div>
-						<p>{{_ "plugins.sound.volume"}}: {{slider2}} %</p>
-                        <div class="col-md-12">
-                            <button id="js-btn-playStopMusic" class="button button-success">
-                                <span class="glyphicon glyphicon-{{#if isSoundPlaying}}stop{{ else }}play{{/if}}" aria-hidden="true"></span>
-                            </button>
+                    <div id="soundTab" class="tabbedPane">
+                        <ul  class="nav nav-pills">
+                            <li class="active">
+                                <a href="#panel-lobby-music" data-toggle="tab">{{_ "plugins.sound.lobby_music"}}</a>
+                            </li>
+                            <li>
+                                <a  href="#panel-countdown-running" data-toggle="tab">{{_ "plugins.sound.running_music"}}</a>
+                            </li>
+                            <li>
+                                <a href="#panel-countdown-end" data-toggle="tab">{{_ "plugins.sound.finish_music"}}</a>
+                            </li>
+                        </ul>
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <input type="checkbox"
+                                           name="switch"
+                                           id="activateDeactivateGlobalVolume"
+                                           title="Activate/Deactivate global volume button"
+                                           data-toggle="toggle"
+                                           data-width="100%"
+                                           data-onstyle="success"
+                                           data-offstyle="danger"
+                                           data-on="{{_ "plugins.sound.global_volume"}}: {{_ "plugins.sound.activated"}}"
+                                           data-off="{{_ "plugins.sound.global_volume"}}: {{_ "plugins.sound.deactivated"}}">
+                                </div>
+                                <div class="col-xs-4">
+                                    <div id="slider-global-volume"></div>
+                                    <p id="slider-global-volume-description">{{sliderGlobalVolume}} %</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-12">
-                            <select id="soundSelect" title="soundSelect">
-                                <option value="Song1">Relax mood: "The Lounge" | Bensound.com</option>
-                                <option value="Song2">Ukulele: "Cute" | Bensound.com</option>
-                                <option value="Song3">Driving tune: "Epic" | Bensound.com</option>
-                                <option value="Random">{{_ "plugins.sound.random"}}</option>
-                            </select>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="panel-lobby-music">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h3>{{_ "plugins.sound.lobby_music_detailed" }}</h3>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div id="slider-lobby-music"></div>
+                                        <p>{{_ "plugins.sound.volume"}}: {{sliderLobbyMusic}} %</p>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <select id="lobbySoundSelect" title="soundSelect">
+                                            <option value="Song0">Happy & fun mood: "Clear day" | Bensound.com</option>
+                                            <option value="Song1">House music: "House" | Bensound.com</option>
+                                            <option value="Song2">Gypsy french jazz: "Jazzy frenchy" | Bensound.com</option>
+                                            <option value="Song3">Childish: "Little idea" | Bensound.com</option>
+                                            <option value="Random">{{_ "plugins.sound.random"}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <input type="checkbox"
+                                                       name="switch"
+                                                       id="playStopLobbyMusic"
+                                                       title="Play/Stop Button"
+                                                       data-toggle="toggle"
+                                                       data-width="100%"
+                                                       data-onstyle="success"
+                                                       data-offstyle="danger"
+                                                       data-on="<span class='glyphicon glyphicon-play'> {{_ "plugins.sound.play"}}"
+                                                       data-off="<span class='glyphicon glyphicon-stop'> {{_ "plugins.sound.stop"}}">
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input type="checkbox"
+                                                       name="switch"
+                                                       id="activateDeactivateLobbyMusic"
+                                                       title="Activate/Deactivate Countdown Running Button"
+                                                       data-toggle="toggle"
+                                                       data-width="100%"
+                                                       data-onstyle="success"
+                                                       data-offstyle="danger"
+                                                       data-on="{{_ "plugins.sound.active"}}"
+                                                       data-off="{{_ "plugins.sound.inactive"}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="panel-countdown-running">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h3>{{_ "plugins.sound.running_music_detailed" }}</h3>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div id="slider-countdown-running"></div>
+                                        <p>{{_ "plugins.sound.volume"}}: {{sliderCountdownRunning}} %</p>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <select id="countdownRunningSelect" title="soundSelect">
+                                            <option value="Song0">Relax mood: "The Lounge" | Bensound.com</option>
+                                            <option value="Song1">Ukulele: "Cute" | Bensound.com</option>
+                                            <option value="Song2">Driving tune: "Epic" | Bensound.com</option>
+                                            <option value="Random">{{_ "plugins.sound.random"}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <input type="checkbox"
+                                                       name="switch"
+                                                       id="playStopCountdownRunningSound"
+                                                       title="Play/Stop Button"
+                                                       data-toggle="toggle"
+                                                       data-width="100%"
+                                                       data-onstyle="success"
+                                                       data-offstyle="danger"
+                                                       data-on="<span class='glyphicon glyphicon-play'> {{_ "plugins.sound.play"}}"
+                                                       data-off="<span class='glyphicon glyphicon-stop'> {{_ "plugins.sound.stop"}}">
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input type="checkbox"
+                                                       name="switch"
+                                                       id="activateDeactivateCountdownRunningSound"
+                                                       title="Activate/Deactivate Countdown Running Button"
+                                                       data-toggle="toggle"
+                                                       data-width="100%"
+                                                       data-onstyle="success"
+                                                       data-offstyle="danger"
+                                                       data-on="{{_ "plugins.sound.active"}}"
+                                                       data-off="{{_ "plugins.sound.inactive"}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="panel-countdown-end">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h3>{{_ "plugins.sound.finish_music_detailed" }}</h3>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div id="slider-countdown-end"></div>
+                                        <p>{{_ "plugins.sound.volume"}}: {{sliderCountdownEnd}} %</p>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <select id="countdownEndSelect" title="soundSelect">
+                                            <option value="Song0">{{_ "plugins.sound.whistle"}}</option>
+                                            <option value="Song1">Chinese Gong</option>
+                                            <option value="Random">{{_ "plugins.sound.random"}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <input type="checkbox"
+                                                       name="switch"
+                                                       id="playStopCountdownEndSound"
+                                                       title="Play/Stop Button"
+                                                       data-toggle="toggle"
+                                                       data-width="100%"
+                                                       data-onstyle="success"
+                                                       data-offstyle="danger"
+                                                       data-on="<span class='glyphicon glyphicon-play'> {{_ "plugins.sound.play"}}"
+                                                       data-off="<span class='glyphicon glyphicon-stop'> {{_ "plugins.sound.stop"}}">
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input type="checkbox"
+                                                       name="switch"
+                                                       id="activateDeactivateCountdownEndSound"
+                                                       title="Activate/Deactivate Countdown End Button"
+                                                       data-toggle="toggle"
+                                                       data-width="100%"
+                                                       data-onstyle="success"
+                                                       data-offstyle="danger"
+                                                       data-on="{{_ "plugins.sound.active"}}"
+                                                       data-off="{{_ "plugins.sound.inactive"}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-						<div class="col-md-12">
-                            <button id="isSoundOnButton" class="button button-warning">{{_ "plugins.sound.inactive"}}</button>
-						</div>
-					</div>
+                    </div>
 				</div>
-                <div class="modal-header">
-                    <h2>{{_ "plugins.sound.lobby_music"}}</h2>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <select id="lobbySoundSelect" title="soundSelect">
-                                <option value="LobbySong1">Happy & fun mood: "Clear day" | Bensound.com</option>
-                                <option value="LobbySong2">House music: "House" | Bensound.com</option>
-                                <option value="LobbySong3">Gypsy french jazz: "Jazzy frenchy" | Bensound.com</option>
-                                <option value="LobbySong4">Childish: "Little idea" | Bensound.com</option>
-                                <option value="LobbyRandom">{{_ "plugins.sound.random"}}</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12">
-                            <button id="playStopLobbyMusic" class="button {{#if isLobbySoundPlaying}}button-warning down{{else}}button-success{{/if}}">
-                                <span class="glyphicon glyphicon-{{#if isLobbySoundPlaying}}stop{{ else }}play{{/if}}" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-header">
-                    <h2>{{_ "plugins.sound.finish_music"}}</h2>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <select id="finishSoundSelect" title="soundSelect">
-                                <option value="Whistle">{{_ "plugins.sound.whistle"}}</option>
-                                <option value="Gong">Chinese Gong</option>
-                                <option value="Silence">{{_ "plugins.sound.silence"}}</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
 				<div class="modal-footer">
 					<button id="js-btn-hideSoundModal" type="button" class="btn btn-success btn-answerOption btn-lg">
 						<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>

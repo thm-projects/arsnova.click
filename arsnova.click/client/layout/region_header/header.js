@@ -22,7 +22,7 @@ import {Router} from 'meteor/iron:router';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
-import {buzzsound1} from '/client/plugins/sound/scripts/lib.js';
+import {countdownRunningSound} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
 import * as lib from './lib.js';
 
@@ -119,7 +119,7 @@ Template.header.events({
 		}
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			if (Session.get("soundIsPlaying")) {
-				buzzsound1.stop();
+				countdownRunningSound.stop();
 			}
 
 			new Splashscreen({

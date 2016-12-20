@@ -17,72 +17,108 @@
 
 import {Session} from 'meteor/session';
 
-export let buzzsound1 = null;
 export let lobbySound = null;
-export let finishSound = null;
+export let countdownRunningSound = null;
+export let countdownEndSound = null;
 
-export function setBuzzsound1(songName) {
-	var fileName = "";
+export function setLobbySound(songName, autostart = true) {
+	let fileName = "";
 	switch (songName) {
+		case "Song0":
+			fileName = "bensound-clearday.mp3";
+			break;
 		case "Song1":
-			fileName = "bensound-thelounge.mp3";
+			fileName = "bensound-house.mp3";
 			break;
 		case "Song2":
-			fileName = "bensound-cute.mp3";
+			fileName = "bensound-jazzyfrenchy.mp3";
 			break;
 		case "Song3":
+			fileName = "bensound-littleidea.mp3";
+			break;
+		default:
+			break;
+	}
+
+	if (lobbySound) {
+		lobbySound.stop();
+		Session.set("lobbySoundIsPlaying", false);
+	}
+
+	lobbySound = new buzz.sound("/sounds/" + fileName, {
+		loop: true,
+		preload: true,
+		volume: lobbySound ? lobbySound.getVolume() : 80
+	});
+	lobbySound.bind("ended", function () {
+		$('#playStopLobbyMusic').bootstrapToggle("on");
+	});
+
+	if (autostart) {
+		lobbySound.play();
+		Session.set("lobbySoundIsPlaying", true);
+	}
+}
+
+export function setCountdownRunningSound(songName, autostart = true) {
+	let fileName = "";
+	switch (songName) {
+		case "Song0":
+			fileName = "bensound-thelounge.mp3";
+			break;
+		case "Song1":
+			fileName = "bensound-cute.mp3";
+			break;
+		case "Song2":
 			fileName = "bensound-epic.mp3";
 			break;
 		default:
 			break;
 	}
 
-	buzzsound1 = new buzz.sound('/sounds/' + fileName, {
-		loop: true
-	});
-}
-
-export function setLobbySound(songName, autostart = true) {
-	var fileName = "";
-	switch (songName) {
-		case "LobbySong1":
-			fileName = "bensound-clearday.mp3";
-			break;
-		case "LobbySong2":
-			fileName = "bensound-house.mp3";
-			break;
-		case "LobbySong3":
-			fileName = "bensound-jazzyfrenchy.mp3";
-			break;
-		case "LobbySong4":
-			fileName = "bensound-littleidea.mp3";
-			break;
-		default:
-			break;
+	if (countdownRunningSound) {
+		countdownRunningSound.stop();
+		Session.set("countdownRunningSoundIsPlaying", false);
 	}
-	lobbySound = new buzz.sound("/sounds/" + fileName, {
-		loop: true
+
+	countdownRunningSound = new buzz.sound('/sounds/' + fileName, {
+		loop: true,
+		preload: true,
+		volume: countdownRunningSound ? countdownRunningSound.getVolume() : 80
 	});
+	countdownRunningSound.bind("ended", function () {
+		$('#playStopCountdownRunningSound').bootstrapToggle("on");
+	});
+
 	if (autostart) {
-		Session.set("lobbySoundIsPlaying", true);
-		lobbySound.play();
+		countdownRunningSound.play();
+		Session.set("countdownRunningSoundIsPlaying", true);
 	}
 }
 
-export function setFinishSoundTitle(songName) {
-	var fileName = "";
-	console.log(songName);
+export function setCountdownEndSound(songName) {
+	let fileName = "";
 	switch (songName) {
-		case "Whistle":
+		case "Song0":
 			fileName = "whistle.mp3";
 			break;
-		case "Gong":
+		case "Song1":
 			fileName = "chinese_gong.mp3";
 			break;
 		default:
 			break;
 	}
-	finishSound = new buzz.sound("/sounds/" + fileName, {
-		loop: false
+
+	if (countdownEndSound) {
+		countdownEndSound.stop();
+	}
+
+	countdownEndSound = new buzz.sound("/sounds/" + fileName, {
+		loop: false,
+		preload: true,
+		volume: countdownEndSound ? countdownEndSound.getVolume() : 80
+	});
+	countdownEndSound.bind("ended", function () {
+		$('#playStopCountdownEndSound').bootstrapToggle("on");
 	});
 }

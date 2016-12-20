@@ -20,8 +20,10 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import {MemberListCollection} from '/lib/member_list/collection.js';
+import {MusicSessionConfiguration} from "/lib/session_configuration/session_config_music.js";
 import * as localData from '/lib/local_storage.js';
 import {setLobbySound, lobbySound} from '/client/plugins/sound/scripts/lib.js';
+import {randomIntFromInterval} from '/client/layout/view_live_results/scripts/lib.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount, memberlistTracker} from './lib.js';
@@ -39,16 +41,16 @@ Template.memberlist.onRendered(function () {
 		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
 		const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
 
-		var songTitle = musicSettings.getLobbyTitle();
-		if (songTitle === "LobbyRandom") {
-			songTitle = "LobbySong" + (Math.floor(Math.random() * 4) + 1);
+		let songTitle = musicSettings.getLobbyTitle();
+		if (songTitle === "Random") {
+			songTitle = MusicSessionConfiguration.getAvailableMusic().lobbyMusic[randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().lobbyMusic.length - 1)];
 		}
 
 		setLobbySound(songTitle, false);
-		lobbySound.setVolume(musicSettings.getVolume());
+		lobbySound.setVolume(musicSettings.getLobbyVolume());
 
 		lobbySound.stop();
-		if (musicSettings.getIsLobbyEnabled()) {
+		if (musicSettings.getLobbyEnabled()) {
 			Session.set("lobbySoundIsPlaying", true);
 			lobbySound.play();
 		}

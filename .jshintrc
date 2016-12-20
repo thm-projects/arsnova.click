@@ -12,23 +12,9 @@
   "globals": {
     "_": false,
     "$": false,
-    "hljs": false,
-    "marked": false,
-    "MathJax": false,
-    "buzz": false,
-    "ReactiveCountdown": false,
     "App": false,
     "console": false,
-    "FastClick": false,
-    "Debug": true, // true => Writable object
-
-    "closeSplashscreen": true,
-    "showSplashscreen": true,
-    "closeAndRedirectTo": true,
-
-    "self": true,
-    "caches": true,
-    "Response": true,
-    "Headers": true
+    "buzz": false,
+    "Debug": true // true => Writable object
   }
 }

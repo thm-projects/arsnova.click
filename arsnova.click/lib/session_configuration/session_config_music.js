@@ -16,42 +16,73 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 const hashtag = Symbol("hashtag");
-const isEnabled = Symbol("isEnabled");
-const volume = Symbol("volume");
-const title = Symbol("title");
-const isLobbyEnabled = Symbol("isLobbyEnabled");
+const isUsingGlobalVolume = Symbol("isUsingGlobalVolume");
+
+const lobbyEnabled = Symbol("lobbyEnabled");
 const lobbyTitle = Symbol("lobbyTitle");
-const finishSoundTitle = Symbol("finishSoundTitle");
+const lobbyVolume = Symbol("lobbyVolume");
+
+const countdownRunningEnabled = Symbol("countdownRunningEnabled");
+const countdownRunningTitle = Symbol("countdownRunningTitle");
+const countdownRunningVolume = Symbol("countdownRunningVolume");
+
+const countdownEndEnabled = Symbol("countdownEndEnabled");
+const countdownEndTitle = Symbol("countdownEndTitle");
+const countdownEndVolume = Symbol("countdownEndVolume");
 
 export class MusicSessionConfiguration {
 	constructor (options = {}) {
 		this[hashtag] = options.hashtag;
-		this[isEnabled] = typeof options.music.isEnabled === "undefined" ? true : options.music.isEnabled;
-		this[volume] = options.music.volume || 80;
-		this[title] = options.music.title || "Song1";
-		this[isLobbyEnabled] = typeof options.music.isLobbyEnabled === "undefined" ? true : options.music.isLobbyEnabled;
-		this[lobbyTitle] = options.music.lobbyTitle || "LobbySong1";
-		this[finishSoundTitle] = options.music.finishSoundTitle || "Whistle";
+		this[isUsingGlobalVolume] = typeof options.music.isUsingGlobalVolume === "undefined" ? true : options.music.isUsingGlobalVolume;
+
+		this[lobbyEnabled] = typeof options.music.lobbyEnabled === "undefined" ? true : options.music.lobbyEnabled;
+		this[lobbyTitle] = options.music.lobbyTitle || "Song1";
+		this[lobbyVolume] = options.music.lobbyVolume || 80;
+
+		this[countdownRunningEnabled] = typeof options.music.countdownRunningEnabled === "undefined" ? true : options.music.countdownRunningEnabled;
+		this[countdownRunningTitle] = options.music.countdownRunningTitle || "Song1";
+		this[countdownRunningVolume] = options.music.countdownRunningVolume || 80;
+
+		this[countdownEndEnabled] = typeof options.music.countdownEndEnabled === "undefined" ? true : options.music.countdownEndEnabled;
+		this[countdownEndTitle] = options.music.countdownEndTitle || "Song1";
+		this[countdownEndVolume] = options.music.countdownEndVolume || 80;
 	}
 
 	serialize () {
 		return {
 			hashtag: this.getHashtag(),
-			isEnabled: this.isEnabled(),
-			volume: this.getVolume(),
-			title: this.getTitle(),
-			isLobbyEnabled: this.getIsLobbyEnabled(),
+			isUsingGlobalVolume: this.getIsUsingGlobalVolume(),
+
+			lobbyEnabled: this.getLobbyEnabled(),
 			lobbyTitle: this.getLobbyTitle(),
-			finishSoundTitle: this.getFinishSoundTitle()
+			lobbyVolume: this.getLobbyVolume(),
+
+			countdownRunningEnabled: this.getCountdownRunningEnabled(),
+			countdownRunningTitle: this.getCountdownRunningTitle(),
+			countdownRunningVolume: this.getCountdownRunningVolume(),
+
+			countdownEndEnabled: this.getCountdownEndEnabled(),
+			countdownEndTitle: this.getCountdownEndTitle(),
+			countdownEndVolume: this.getCountdownEndVolume()
 		};
 	}
 
 	equals (value) {
-		return this.isEnabled() === value.isEnabled() &&
-				this.getTitle() === value.getTitle() &&
-				this.getVolume() === value.getVolume() &&
-				this.getIsLobbyEnabled() === value.getIsLobbyEnabled &&
-				this.getLobbyTitle() === value.getLobbyTitle;
+		return (
+			this.getIsUsingGlobalVolume() === value.getIsUsingGlobalVolume() &&
+
+			this.getLobbyEnabled() === value.getLobbyEnabled() &&
+			this.getLobbyTitle() === value.getLobbyTitle() &&
+			this.getLobbyVolume() === value.getLobbyVolume() &&
+
+			this.getCountdownRunningEnabled() === value.getCountdownRunningEnabled() &&
+			this.getCountdownRunningTitle() === value.getCountdownRunningTitle() &&
+			this.getCountdownRunningVolume() === value.getCountdownRunningVolume() &&
+
+			this.getCountdownEndEnabled() === value.getCountdownEndEnabled() &&
+			this.getCountdownEndTitle() === value.getCountdownEndTitle() &&
+			this.getCountdownEndVolume() === value.getCountdownEndVolume()
+		);
 	}
 
 	getHashtag () {
@@ -62,69 +93,143 @@ export class MusicSessionConfiguration {
 		this[hashtag] = value;
 	}
 
-	isEnabled () {
-		return this[isEnabled];
+	/* Global volume settings */
+
+	getGlobalVolume () {
+		return this.getIsUsingGlobalVolume() ? this.getLobbyVolume() : null;
 	}
 
-	setEnabled (value) {
-		if (typeof value !== "boolean") {
-			throw new Error("Invalid argument list for MusicSessionConfiguration.setEnabled");
-		}
-		this[isEnabled] = value;
+	getIsUsingGlobalVolume () {
+		return this[isUsingGlobalVolume];
 	}
 
-	getVolume () {
-		return this[volume];
-	}
-
-	setVolume (value) {
+	setGlobalVolume (value) {
 		if (typeof value !== "number") {
-			throw new Error("Invalid argument list for MusicSessionConfiguration.setVolume");
+			throw new Error("Invalid argument list for MusicSessionConfiguration.setGlobalVolume");
 		}
-		this[volume] = value;
+		this.setLobbyVolume(value);
+		this.setCountdownRunningVolume(value);
+		this.setCountdownEndVolume(value);
+		this.setIsUsingGlobalVolume(true);
 	}
 
-	getTitle () {
-		return this[title];
-	}
-
-	setTitle (value) {
-		if (typeof value !== "string") {
-			throw new Error("Invalid argument list for MusicSessionConfiguration.setTitle");
-		}
-		this[title] = value;
-	}
-
-	getIsLobbyEnabled () {
-		return this[isLobbyEnabled];
-	}
-
-	setIsLobbyEnabled (value) {
+	setIsUsingGlobalVolume (value) {
 		if (typeof value !== "boolean") {
-			throw new Error("Invalid argument list for MusicSessionConfiguration.setEnabled");
+			throw new Error("Invalid argument list for MusicSessionConfiguration.setIsUsingGlobalVolume");
 		}
-		this[isLobbyEnabled] = value;
+		this[isUsingGlobalVolume] = value;
+	}
+
+	/* Lobby sound settings */
+
+	getLobbyEnabled () {
+		return this[lobbyEnabled];
 	}
 
 	getLobbyTitle () {
 		return this[lobbyTitle];
 	}
 
+	getLobbyVolume () {
+		return this[lobbyVolume];
+	}
+
+	setLobbyEnabled (value) {
+		if (typeof value !== "boolean") {
+			throw new Error("Invalid argument list for MusicSessionConfiguration.setLobbyEnabled");
+		}
+		this[lobbyEnabled] = value;
+	}
+
 	setLobbyTitle (value) {
 		if (typeof value !== "string") {
-			throw new Error("Invalid argument list for MusicSessionConfiguration.setTitle");
+			throw new Error("Invalid argument list for MusicSessionConfiguration.setLobbyTitle");
 		}
 		this[lobbyTitle] = value;
 	}
 
-	getFinishSoundTitle () {
-		return this[lobbyTitle];
+	setLobbyVolume (value) {
+		if (typeof value !== "number") {
+			throw new Error("Invalid argument list for MusicSessionConfiguration.setLobbyVolume");
+		}
+		this[lobbyVolume] = value;
 	}
 
-	setFinishSoundTitle (value) {
-		if (typeof value !== "string") {
-			throw new Error("Invalid argument list for MusicSessionConfiguration.setFinishSoundTitle");
+	/* Countdown-Running settings */
+
+	getCountdownRunningEnabled () {
+		return this[countdownRunningEnabled];
+	}
+
+	getCountdownRunningTitle () {
+		return this[countdownRunningTitle];
+	}
+
+	getCountdownRunningVolume () {
+		return this[countdownRunningVolume];
+	}
+
+	setCountdownRunningEnabled (value) {
+		if (typeof value !== "boolean") {
+			throw new Error("Invalid argument list for MusicSessionConfiguration.setCountdownRunningEnabled");
 		}
-		this[finishSoundTitle] = value;
+		this[countdownRunningEnabled] = value;
+	}
+
+	setCountdownRunningTitle (value) {
+		if (typeof value !== "string") {
+			throw new Error("Invalid argument list for MusicSessionConfiguration.setCountdownRunningTitle");
+		}
+		this[countdownRunningTitle] = value;
+	}
+
+	setCountdownRunningVolume (value) {
+		if (typeof value !== "number") {
+			throw new Error("Invalid argument list for MusicSessionConfiguration.setCountdownRunningVolume");
+		}
+		this[countdownRunningVolume] = value;
+	}
+
+	/* Countdown-Ending settings */
+
+	getCountdownEndEnabled () {
+		return this[countdownEndEnabled];
+	}
+
+	getCountdownEndTitle () {
+		return this[countdownEndTitle];
+	}
+
+	getCountdownEndVolume () {
+		return this[countdownEndVolume];
+	}
+
+	setCountdownEndEnabled (value) {
+		if (typeof value !== "boolean") {
+			throw new Error("Invalid argument list for MusicSessionConfiguration.setCountdownEndEnabled");
+		}
+		this[countdownEndEnabled] = value;
+	}
+
+	setCountdownEndTitle (value) {
+		if (typeof value !== "string") {
+			throw new Error("Invalid argument list for MusicSessionConfiguration.setCountdownEndTitle");
+		}
+		this[countdownEndTitle] = value;
+	}
+
+	setCountdownEndVolume (value) {
+		if (typeof value !== "number") {
+			throw new Error("Invalid argument list for MusicSessionConfiguration.setCountdownEndVolume");
+		}
+		this[countdownEndVolume] = value;
+	}
+
+	static getAvailableMusic () {
+		return {
+			lobbyMusic: ["Song0", "Song1", "Song2", "Song3"],
+			countdownRunning: ["Song0", "Song1", "Song2"],
+			countdownEnd: ["Song0", "Song1"]
+		};
 	}
 }

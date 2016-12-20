@@ -19,17 +19,18 @@ import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
 import {Router} from 'meteor/iron:router';
+import {ReactiveCountdown} from 'meteor/flyandi:reactive-countdown';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {MusicSessionConfiguration} from "/lib/session_configuration/session_config_music.js";
 import {RangedQuestion} from "/lib/questions/question_ranged.js";
 import {FreeTextQuestion} from "/lib/questions/question_freetext.js";
 import * as localData from '/lib/local_storage.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import {buzzsound1, finishSound, setFinishSoundTitle, setBuzzsound1} from '/client/plugins/sound/scripts/lib.js';
-import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
+import * as musicLib from '/client/plugins/sound/scripts/lib.js';
 import * as headerLib from "/client/layout/region_header/lib.js";
 
 export let countdown = null;
@@ -43,6 +44,17 @@ export function deleteCountdown() {
 		countdown.stop();
 	}
 	countdown = null;
+}
+
+/**
+ * @see http://stackoverflow.com/a/7228322
+ * @param min Minimum range
+ * @param max Maximum range
+ * @returns {number} A random integer between min and max
+ */
+export function randomIntFromInterval(min, max)
+{
+	return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 export function setQuestionDialog(instance) {
@@ -64,8 +76,7 @@ export function isCountdownZero(index) {
 	if (!countdown || countdown.get() === 0 || Session.get("sessionClosed") || !Session.get("countdownInitialized") || eventDoc.questionIndex !== index) {
 		return true;
 	} else {
-		var timer = Math.round(countdown.get());
-		return timer <= 0;
+		return Math.round(countdown.get()) <= 0;
 	}
 }
 
@@ -133,17 +144,19 @@ export function countdownFinish() {
 	}
 	const questionIndex = EventManagerCollection.findOne().questionIndex;
 	$('.navbar-footer').show();
-	if (Session.get("soundIsPlaying")) {
-		buzzsound1.stop();
-		var configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-
-		if (configDoc.music.finishSoundTitle !== "Silence") {
-			setFinishSoundTitle(configDoc.music.finishSoundTitle);
-			finishSound.play();
+	if (Session.get("countdownRunningSoundIsPlaying")) {
+		musicLib.countdownRunningSound.stop();
+		Session.set("countdownRunningSoundIsPlaying", false);
+	}
+	const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
+	if (musicSettings.getCountdownEndEnabled()) {
+		let title = musicSettings.getCountdownEndTitle();
+		if (title === "Random") {
+			title = MusicSessionConfiguration.getAvailableMusic().countdownEnd[randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().countdownEnd.length - 1)];
 		}
-
-
-		Session.set("soundIsPlaying", false);
+		musicLib.setCountdownEndSound(title);
+		musicLib.countdownEndSound.setVolume(musicSettings.getCountdownEndVolume());
+		musicLib.countdownEndSound.play();
 	}
 	headerLib.calculateTitelHeight();
 	if (questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
@@ -157,17 +170,6 @@ export function countdownFinish() {
 	} else {
 		footerElements.addFooterElement(footerElements.footerElemReadingConfirmation, 2);
 	}
-}
-
-/**
- * @see http://stackoverflow.com/a/7228322
- * @param min Minimum range
- * @param max Maximum range
- * @returns {number} A random integer between min and max
- */
-export function randomIntFromInterval(min,max)
-{
-	return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 export function startDebugVoting() {
@@ -254,23 +256,15 @@ export function startCountdown(index) {
 	const isOwner = localData.containsHashtag(Session.get("questionGroup").getHashtag());
 	if (isOwner) {
 		const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
-		if (musicSettings.isEnabled()) {
-			var songTitle = musicSettings.getTitle();
-
-			if (songTitle === "Random") {
-				if (index === 0 || index % 3 === 0) {
-					songTitle = "Song3";
-				} else if (index % 2 === 0) {
-					songTitle = "Song2";
-				} else {
-					songTitle = "Song1";
-				}
+		if (musicSettings.getCountdownRunningEnabled()) {
+			let title = musicSettings.getCountdownRunningTitle();
+			if (title === "Random") {
+				title = MusicSessionConfiguration.getAvailableMusic().countdownRunning[randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().countdownRunning.length - 1)];
 			}
-			setBuzzsound1(songTitle);
-
-			buzzsound1.setVolume(musicSettings.getVolume());
-			buzzsound1.play();
-			Session.set("soundIsPlaying", true);
+			musicLib.setCountdownRunningSound(title, false);
+			musicLib.countdownRunningSound.setVolume(musicSettings.getCountdownRunningVolume());
+			musicLib.countdownRunningSound.play();
+			Session.set("countdownRunningSoundIsPlaying", true);
 		}
 	}
 	Meteor.call("Main.calculateRemainingCountdown", Session.get("questionGroup").getHashtag(), index, function (error, response) {

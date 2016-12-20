@@ -131,6 +131,7 @@
 	$fg_progress-bar: black;
 
 	$fg-connection-quality-header_connection-pending: grey;
+	$fg-connection-quality-header_connection-offline: grey;
 	$fg-connection-quality-header_connection-ok: green;
 	$fg-connection-quality-header_connection-warning: orange;
 	$fg-connection-quality-header_connection-failed: red;
@@ -153,6 +154,8 @@
 	$splash-screen-error-message-foreground-color: white;
 	$splash-screen-error-message-button-background-color: #ad9595;
 	$splash-screen-error-message-button-foreground-color: black;
+
+	$bg-soundConfig_soundTab_navPills: white;
 
 	$check-mark-checked: #00882a;
 	$check-mark-unchecked: #aaaaaa;
@@ -198,6 +201,8 @@
 	$fg-question-title: white;
 
 	$fg-glyphicon-style: #FFF;
+
+	$bg-disabled-slider: lightgrey;
 
 	$fg-qr-code-button: white;
 	$fg-qr-code-button-hovered: darken($fg-qr-code-button, 20);
@@ -1358,6 +1363,9 @@
 			}
 			#connectionQualityHeader {
 				#connectionQualityImage {
+					&.connectionOffline {
+						fill: $fg-connection-quality-header_connection-offline;
+					}
 					&.connectionPending {
 						fill: $fg-connection-quality-header_connection-pending;
 					}
@@ -1579,9 +1587,25 @@
 					}
 				}
 			}
-		}
-	}
-}
+			.soundConfig {
+				.modal-content {
+					#soundTab {
+						.nav-pills > li > a {
+							background-color: $bg-soundConfig_soundTab_navPills;
+						}
+					}
+				}
+			}
+			[disabled].noUi-target {
+				background: $bg-disabled-slider;
+				box-shadow: inset 0 1px 1px $bg-disabled-slider, 0 3px 6px -5px $bg-disabled-slider;
+				.noUi-handle {
+					background: $bg-disabled-slider;
+				}
+			}
+		} /* End of #theme-wrapper */
+	} /* End of <body/> */
+} /* End of mixin declaration */
 
 @include theme(theme-thm);
 @include theme(theme-elegant);

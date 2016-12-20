@@ -30,23 +30,35 @@ export const SessionConfigurationSchema = new SimpleSchema({
 	music: {
 		type: Object
 	},
-	"music.volume": {
-		type: Number
-	},
-	"music.isEnabled": {
+	"music.isUsingGlobalVolume": {
 		type: Boolean
 	},
-	"music.title": {
-		type: String
+	"music.lobbyEnabled": {
+		type: Boolean
 	},
 	"music.lobbyTitle": {
 		type: String
 	},
-	"music.isLobbyEnabled": {
+	"music.lobbyVolume": {
+		type: Number
+	},
+	"music.countdownRunningEnabled": {
 		type: Boolean
 	},
-	"music.finishSoundTitle": {
+	"music.countdownRunningTitle": {
 		type: String
+	},
+	"music.countdownRunningVolume": {
+		type: Number
+	},
+	"music.countdownEndEnabled": {
+		type: Boolean
+	},
+	"music.countdownEndTitle": {
+		type: String
+	},
+	"music.countdownEndVolume": {
+		type: Number
 	},
 	nicks: {
 		type: Object

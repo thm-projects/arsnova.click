@@ -16,7 +16,7 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="footer">
-    <nav class="navbar navbar-fixed-bottom navbar-footer">
+    <nav class="navbar navbar-fixed-bottom navbar-footer" role="navigation">
         <input class="js-import-input-home hidden" type="file" accept="application/json" multiple="multiple" />
         {{#each footerElements}}
             {{> hiddenFooterElement}}
@@ -29,7 +29,7 @@
 <template name="hiddenFooterElement">
     <div class="footerElement tabbable {{#if isStatefulElement this}}{{#if isEnabled this}}success{{else}}error{{/if}}{{/if}}"
          id="{{this.id}}">
-        <p class="footerElemIcon"><span class="{{this.iconClass}}"></span></p>
+        <p class="footerElemIcon"><span class="{{this.iconClass}}" aria-hidden="true"></span></p>
         <p class="footerElemText"><span class="{{this.textClass}}">{{_ this.textName}}</span></p>
     </div>
 </template>

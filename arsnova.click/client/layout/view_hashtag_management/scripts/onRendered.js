@@ -41,13 +41,13 @@ Template.hashtagManagement.onRendered(function () {
 	$('.startQuiz').tooltip();
 
 	$('.hashtagManagementRow').each(function (i, element) {
-		var hashtag = element.id;
-		var exportData = localData.exportFromLocalStorage(hashtag);
+		const hashtag = element.id;
+		const exportData = localData.exportFromLocalStorage(hashtag);
 		if (exportData) {
-			var exportDataJson = "text/json;charset=utf-8," + encodeURIComponent(exportData);
-			var a = document.createElement('a');
-			var time = new Date();
-			var timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
+			const exportDataJson = "text/json;charset=utf-8," + encodeURIComponent(exportData);
+			const a = document.createElement('a');
+			const time = new Date();
+			const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
 			a.href = 'data:' + exportDataJson;
 			a.download = hashtag + "-" + timeString + ".json";
 			a.innerHTML = '<span class="glyphicon glyphicon-export glyph-left alignGlyphicon button-foreground-color" aria-hidden="true"></span>';

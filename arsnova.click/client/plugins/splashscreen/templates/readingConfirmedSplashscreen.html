@@ -21,7 +21,7 @@
             <div class="noSplashscreenPadding">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
+                        <div class="splashscreen-container-close" aria-label="{{_ "global.close_window"}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
                     </div>
                     <div class="modal-markdown-body">
                         <div id="questionContent" class="markdown-content">
@@ -43,6 +43,7 @@
                     </div>
                     <div class="modal-footer">
                         <button id="setReadConfirmed"
+                                aria-label="{{_ "view.liveResults.confirm_read"}}"
                                 class="btn btn-success btn-answerOption btn-lg tabbable">
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                             <span class="hidden-xs" id="readConfirmedText">{{_ "view.liveResults.confirm_read"}}</span>

@@ -26,6 +26,12 @@ Template.createAnswerOptions.events({
 });
 
 Template.defaultAnswerOptionTemplate.events({
+	"click #default_answer_row": function () {
+		const questionGroup = Session.get("questionGroup");
+		questionGroup.getQuestionList()[Router.current().params.questionIndex].addDefaultAnswerOption(-1);
+		Session.set("questionGroup", questionGroup);
+		localData.addHashtag(Session.get("questionGroup"));
+	},
 	"change .isCorrectOption": function (event) {
 		const checked = $(event.target).prop('checked');
 		const id = event.target.id.replace("answerOption-","");

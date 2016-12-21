@@ -21,11 +21,12 @@
             <div class="row">
                 <h2 class="col-xs-12 text-light text-center">{{_ "view.answeroptions.free_text_question.title"}}</h2>
                 <div class="col-xs-12">
-            <textarea id="answerTextArea"
-                      class="round-corners textarea placeholder-align-center tabbable"
-                      rows="3"
-                      data-intro="{{_ "view.answeroptions.description.free_text_question_text"}}"
-                      placeholder="{{_ "view.answeroptions.free_text_question.text_placeholder" }}">{{answerText}}</textarea>
+                    <textarea id="answerTextArea"
+                              class="round-corners textarea placeholder-align-center tabbable"
+                              aria-label="{{_ "view.answeroptions.description.free_text_question_text"}}"
+                              rows="3"
+                              data-intro="{{_ "view.answeroptions.description.free_text_question_text"}}"
+                              placeholder="{{_ "view.answeroptions.free_text_question.text_placeholder" }}">{{answerText}}</textarea>
                 </div>
             </div>
             <div class="row">
@@ -36,6 +37,8 @@
                                 <p class="text-light checkboxLabel">{{_ this.textName}}: </p>
                                 <input type="checkbox"
                                        id="{{this.id}}_switch"
+                                       aria-label="{{_ this.description}}"
+                                       role="switch"
                                        name="switch"
                                        data-size="small"
                                        data-width="100"
@@ -54,10 +57,11 @@
             <div class="row distance-top" data-intro="{{_ "view.answeroptions.description.check_answer"}}">
                 <h2 class="col-xs-12 text-light text-center">{{_ "view.answeroptions.free_text_question.check_answer_title"}}</h2>
                 <div class="col-xs-12">
-            <textarea id="answerCheckArea"
-                      class="round-corners textarea placeholder-align-center tabbable"
-                      rows="3"
-                      placeholder="{{_ "view.answeroptions.free_text_question.text_placeholder" }}"></textarea>
+                    <textarea id="answerCheckArea"
+                              aria-label="{{_ "view.answeroptions.description.check_answer"}}"
+                              class="round-corners textarea placeholder-align-center tabbable"
+                              rows="3"
+                              placeholder="{{_ "view.answeroptions.free_text_question.text_placeholder" }}"></textarea>
                     <div class="center-block">
                         {{#if isCheckingResponse}}
                             {{#if getIsCorrectResponse}}

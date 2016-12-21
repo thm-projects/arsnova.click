@@ -18,16 +18,17 @@
 <template name="createTimerView">
 	<div class="row center-vertical">
 		<div class="col-md-12">
-			<div class="row distance-top" data-intro="{{_ "view.timer.description"}}">
-				<div class="col-lg-7">
+			<div class="row distance-top" data-intro="{{_ "view.timer.description"}}" aria-label="{{_ "view.timer.description"}}">
+				<div class="col-lg-7" role="slider">
 					<div id="slider" class="slider"></div>
 				</div>
 				<div class="col-lg-5">
 					<div class="input-group input-group-slider">
-						<span class="input-group-addon round-corners input-field-bg-color input-group-letter glyphicon-hourglass"></span>
+						<span class="input-group-addon round-corners input-field-bg-color input-group-letter glyphicon-hourglass" aria-hidden="true"></span>
 						<div id="slider-timer-input-field"
                              class="input-field round-corners slider-timer-input tabbable"
-                             aria-describedby="basic-addon1">
+                             aria-valuetext="{{slider}} {{_ "view.timer.second" count=2}}"
+                             aria-valuenow="{{slider}}">
                             <p class="text-center">{{slider}} {{_ "view.timer.second" count=2}}</p>
                         </div>
 					</div>

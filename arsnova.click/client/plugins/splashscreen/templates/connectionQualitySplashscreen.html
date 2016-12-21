@@ -21,8 +21,8 @@
             <div class="noSplashscreenPadding">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
-                        <h2>{{_ "region.header.connection_status.title"}}</h2>
+                        <div class="splashscreen-container-close" aria-label="{{_ "global.close_window"}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
+                        <h2 role="heading">{{_ "region.header.connection_status.title"}}</h2>
                     </div>
                     <div class="modal-body">
                         <p>WebSocket: <span>{{_ websocketStatus.text}}</span> </p>
@@ -37,6 +37,7 @@
                     <div class="modal-footer">
                         <button id="btn-hidePreviewModal"
                                 type="button"
+                                aria-label="{{_ "global.close_window"}}"
                                 class="btn btn-success btn-answerOption btn-lg tabbable">
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                             <span class="hidden-xs">{{_ "global.close_window"}}</span>

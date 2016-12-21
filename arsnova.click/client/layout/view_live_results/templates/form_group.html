@@ -16,11 +16,12 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="form_group">
-	<div class="row button button-result form-group formGroupProgressRow">
+	<div class="row button button-result form-group formGroupProgressRow" role="region">
 		<div class="col-xs-12">
 			<div class="progress" id="mc_bar{{id}}">
 				<div class="progress-bar {{#if backgroundClass}}{{backgroundClass}}{{/if}}"
 					 role="progressbar"
+                     aria-valuenow="{{percent}}"
 					 aria-valuemin="0"
 					 aria-valuemax="100"
 					 style="width: {{percent}}%; {{#if backgroundStyle}}background:{{backgroundStyle}};{{/if}}">

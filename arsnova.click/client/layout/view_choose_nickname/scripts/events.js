@@ -29,12 +29,12 @@ import * as lib from './lib.js';
 Template.nickStandardFooter.events({
 	"click #forwardButton": function (event) {
 		event.stopPropagation();
-		var nickname = $("#nickname-input-field").val();
+		const nickname = $("#nickname-input-field").val();
 		try {
 			new SimpleSchema({
 				userNick: userNickSchema
 			}).validate({userNick: nickname});
-			var bgColor = lib.rgbToHex(lib.getRandomInt(0, 255), lib.getRandomInt(0, 255), lib.getRandomInt(0, 255));
+			const bgColor = lib.rgbToHex(lib.getRandomInt(0, 255), lib.getRandomInt(0, 255), lib.getRandomInt(0, 255));
 			Meteor.call('MemberListCollection.addLearner', {
 				hashtag: Router.current().params.quizName,
 				nick: nickname,
@@ -101,8 +101,8 @@ Template.nick.events({
 	},
 	"keydown #nickname-input-field": function (event) {
 		if (event.keyCode === 13) {
-			var currentNickName = event.currentTarget.value;
-			var member = MemberListCollection.findOne({nick: currentNickName});
+			const currentNickName = event.currentTarget.value;
+			const member = MemberListCollection.findOne({nick: currentNickName});
 
 			if (currentNickName.length > 2 && !member) {
 				$("#forwardButton, #loginViaCas").click();

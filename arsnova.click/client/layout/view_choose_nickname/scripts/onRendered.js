@@ -22,7 +22,7 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 
 Template.nick.onRendered(function () {
-	var hashtag = Router.current().params.quizName;
+	const hashtag = Router.current().params.quizName;
 	if (MemberListCollection.findOne({hashtag: hashtag, privateKey: localStorage.getItem("privateKey")})) {
 		localStorage.setItem(hashtag + "nick", MemberListCollection.findOne({hashtag: hashtag, privateKey: localStorage.getItem("privateKey")}).nick);
 		Router.go("/" + hashtag + "/memberlist");

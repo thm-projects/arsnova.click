@@ -19,9 +19,10 @@
     <div class="row nicknameCategories">
         <div class="col-xs-12">
             <div class="row">
-                <div class="col-xs-12 nickCategoryWrapper">
+                <div class="col-xs-12 nickCategoryWrapper" role="list">
                     {{#each nickNameCategories}}
                         <div class="nickStyle nickCategory tabbable"
+                             role="listitem"
                              id="nickCategory_{{this}}">
                             <p>{{_ this}}</p>
                         </div>
@@ -31,9 +32,11 @@
             <div class="row">
                 <div class="col-xs-12 {{#if hasCASConfig}}col-sm-6{{/if}}">
                     <div class="nickStyle" id="block_illegal_nicks_wrapper">
-                        <p class="text-light col-xs-12">{{_ "view.nickname_categories.block_illegal_nicks"}}</p>
+                        <p class="text-light col-xs-12" id="block_illegal_nicks_description">{{_ "view.nickname_categories.block_illegal_nicks"}}</p>
                         <input type="checkbox"
                                id="block_illegal_nicks"
+                               aria-labelledby="block_illegal_nicks_description"
+                               role="switch"
                                name="switch"
                                data-width="100%"
                                data-height="35"
@@ -50,9 +53,11 @@
                 {{#if hasCASConfig}}
                     <div class="col-xs-12 col-sm-6">
                         <div class="nickStyle" id="restrict_to_cas_wrapper">
-                            <p class="text-light col-xs-12">{{_ "view.nickname_categories.restrict_to_cas"}}</p>
+                            <p class="text-light col-xs-12" id="restrict_to_cas_description">{{_ "view.nickname_categories.restrict_to_cas"}}</p>
                             <input type="checkbox"
                                    id="restrict_to_cas"
+                                   aria-labelledby="block_illegal_nicks_description"
+                                   role="switch"
                                    name="switch"
                                    data-width="100%"
                                    data-height="35"
@@ -84,20 +89,20 @@
                         </div>
                     {{/each}}
                 </div>
-                <div class="col-xs-12 col-sm-6">
-                    <h3>{{_ "view.nickname_categories.chosen_nicknames"}}</h3>
+                <div class="col-xs-12 col-sm-6" role="list">
+                    <h3 role="heading">{{_ "view.nickname_categories.chosen_nicknames"}}</h3>
                     {{#unless chosenNickNames.count}}
-                        <div class="nickStyle chosenNickName" id="no_nick_selected">
+                        <div class="nickStyle chosenNickName" id="no_nick_selected" role="listitem">
                             <p>{{_ "view.nickname_categories.no_nicks_selected"}}</p>
                         </div>
                     {{else}}
-                        <div class="nickStyle chosenNickName tabbable"
+                        <div class="nickStyle chosenNickName tabbable" role="listitem"
                              id="remove_all">
                             <p>{{_ "view.nickname_categories.remove_all"}}</p>
                         </div>
                     {{/unless}}
                     {{#each chosenNickNames}}
-                        <div class="nickStyle chosenNickName tabbable"
+                        <div class="nickStyle chosenNickName tabbable" role="listitem"
                              id="chosen_nickName_{{this._id}}">
                             <p>{{_ this.nick}}</p>
                         </div>

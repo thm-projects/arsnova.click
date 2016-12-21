@@ -254,20 +254,20 @@ export const renderAnsweroptionItems = function () {
 	const typeName = questionItem.typeName();
 	questionItem.getAnswerOptionList().forEach(function (item) {
 		const number = item.getAnswerOptionNumber();
-		const wrapper = $("<div data-id='" + number + "' class='answerOptionElementWrapper draggable'></div>");
+		const wrapper = $("<div data-id='" + number + "' class='answerOptionElementWrapper draggable' role='listitem'></div>");
 		wrapper.append(
 			"<div class='answer_row_short_text'>" + String.fromCharCode(number + 65) + "</div>"
 		).append(
-			"<input type='text' class='answer_row_text tabbable' id='answerOptionText_Number" + number + "' placeholder='" + TAPi18n.__("view.answeroptions.answeroptiontext_placeholder") + "' value='" + item.getAnswerText() + "' maxlength='" + answerTextSchema.max + "' autocomplete='off' autocorrect='off' autocapitalize='off' spellcheck='false' />"
+			"<input type='text' class='answer_row_text tabbable' id='answerOptionText_Number" + number + "' placeholder='" + TAPi18n.__("view.answeroptions.answeroptiontext_placeholder") + "' value='" + item.getAnswerText() + "' aria-valuenow='" + item.getAnswerText() + "' maxlength='" + answerTextSchema.max + "' aria-multiline='false' autocomplete='off' autocorrect='off' autocapitalize='off' spellcheck='false' />"
 		);
 		if (typeName !== "SurveyQuestion") {
 			wrapper.append(
-				$("<input type='checkbox' id='answerOption-" + number + "' name='switch' data-width='80' title='answerOption-" + number + "' class='tabbable isCorrectOption'/>").prop('checked', item.getIsCorrect())
+				$("<input type='checkbox' role='switch' id='answerOption-" + number + "' name='switch' data-width='80' title='answerOption-" + number + "' class='tabbable isCorrectOption'/>").prop('checked', item.getIsCorrect())
 			);
 		}
 		if (typeName !== "YesNoSingleChoiceQuestion" && typeName !== "TrueFalseSingleChoiceQuestion") {
 			wrapper.append(
-				"<div class='removeAnsweroption' id='removeAnsweroption_" + number + "'><span class='glyphicon glyphicon-trash'></span></div>"
+				"<div class='removeAnsweroption' id='removeAnsweroption_" + number + "'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></div>"
 			);
 		}
 		$('#answerOptionWrapper').append(wrapper);

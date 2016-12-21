@@ -1,9 +1,9 @@
 <template name="questionTypeView">
     <div class="row" id="questionTypeView">
         <div class="col-xs-12">
-            <div class="row" data-intro="{{_ "view.question_type.description.type_wrapper" }}">
+            <div class="row" data-intro="{{_ "view.question_type.description.type_wrapper" }}" role="list" aria-label="{{_ "view.question_type.description.type_wrapper" }}">
                 {{#each questionTypes}}
-                    <div class="col-xs-12 col-sm-6 questionType {{#if isCurrentQuestionType this.id}}activeQuestionType{{/if}}" id="{{this.id}}_questionType">
+                    <div class="col-xs-12 col-sm-6 questionType {{#if isCurrentQuestionType this.id}}activeQuestionType{{/if}}" id="{{this.id}}_questionType" role="listitem" aria-selected="{{#if isCurrentQuestionType this.id}}true{{else}}false{{/if}}">
                         <div class="wrapper">
                             <p class="text-light">{{_ this.translationName}}</p>
                             <p class="text-light">{{_ (getDescriptionForQuestionType this.id)}}</p>

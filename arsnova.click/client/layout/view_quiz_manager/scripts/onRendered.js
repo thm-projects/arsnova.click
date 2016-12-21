@@ -52,9 +52,9 @@ Template.quizManager.onRendered(function () {
 		$('#added_questions_wrapper').html("");
 		Session.get("questionGroup").getQuestionList().forEach(function (item) {
 			$('#added_questions_wrapper').append(
-				$('<div id="' + item.getQuestionIndex() + '_added_question" class="questionElementWrapper draggable"/>').append(
-					'<li data-valid="' + (item.isValid() ? "true" : "false") + '">' + (item.getQuestionIndex() + 1) + ') ' + TAPi18n.__(item.translationReferrer()) + '</li>'
-				).append("<div class='removeQuestion text-light' id='removeQuestion_" + item.getQuestionIndex() + "'><span class='glyphicon glyphicon-trash'></span></div>")
+				$('<div id="' + item.getQuestionIndex() + '_added_question" class="questionElementWrapper draggable" role="listitem"/>').append(
+					'<li data-valid="' + (item.isValid() ? "true" : "false") + '" aria-invalid="' + (item.isValid() ? "false" : "true") + '">' + (item.getQuestionIndex() + 1) + ')' + TAPi18n.__(item.translationReferrer()) + '</li>'
+				).append("<div class='removeQuestion text-light' id='removeQuestion_" + item.getQuestionIndex() + "'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></div>")
 			);
 		});
 		questionAddedTracker.changed();

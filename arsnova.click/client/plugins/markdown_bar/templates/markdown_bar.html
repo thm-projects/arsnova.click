@@ -17,10 +17,11 @@
 
 <template name="markdownBar">
 	<div id="markdownBarDiv" class="input-field round-corners-top markdown-box">
-        <div class="row row-centered">
+        <div class="row row-centered" role="list">
             {{#each getMarkdownBarElements}}
                 <div id="{{this.id}}"
                      class="button-markdown button-purple col-xs-1 col-sm-1 col-md-1 col-centered tabbable"
+                     role="listitem"
                      data-toggle="tooltip"
                      data-placement="bottom"
                      title="{{_ this.titleRef}}"

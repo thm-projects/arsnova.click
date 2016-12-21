@@ -21,8 +21,8 @@
             <div class="noSplashscreenPadding">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
-                        <h2>{{_ "view.hashtag_management.delete_session"}}</h2>
+                        <div class="splashscreen-container-close" aria-label="{{_ "global.close_window"}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
+                        <h2 role="heading">{{_ "view.hashtag_management.delete_session"}}</h2>
                     </div>
                     <div class="modal-body">
                         <p>{{{_ "view.hashtag_management.delete_session_confirmation" }}}</p>
@@ -31,6 +31,7 @@
                         <div class="row">
                             <div class="col-xs-6">
                                 <button id="closeDialogButton"
+                                        aria-label="{{_ "region.header.no"}}"
                                         class="button button-back tabbable">
                                     <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                                     <span class="hidden-xs">{{_ "region.header.no"}}</span>
@@ -38,6 +39,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <button id="deleteSessionButton"
+                                        aria-label="{{_ "region.header.yes"}}"
                                         class="button button-next tabbable">
                                     <span class="hidden-xs">{{_ "region.header.yes"}}</span>
                                     <span class="glyphicon glyphicon-send" aria-hidden="true"></span>

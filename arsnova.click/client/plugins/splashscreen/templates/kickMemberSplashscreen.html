@@ -21,12 +21,13 @@
             <div class="noSplashscreenPadding">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
+                        <div class="splashscreen-container-close" aria-label="{{_ "global.close_window"}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
                         <p>{{{_ "view.lobby.kick_member_confirmation"}}}</p>
                     </div>
                     <div class="modal-body">
                         <input type="checkbox"
                                id="ban-nick"
+                               aria-labelledby="ban-nick-label"
                                title="{{_ "view.lobby.add_kicked_member_to_ban_list"}}"
                                class="tabbable"/>
                         <label id="ban-nick-label">{{_ "view.lobby.add_kicked_member_to_ban_list"}}</label>
@@ -35,6 +36,7 @@
                         <div class="row">
                             <div class="col-xs-6">
                                 <button id="closeDialogButton"
+                                        aria-label="{{_ "view.lobby.no"}}"
                                         class="button button-back tabbable">
                                     <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                                     <span class="hidden-xs">{{_ "view.lobby.no"}}</span>
@@ -42,6 +44,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <button id="kickMemberButton"
+                                        aria-label="{{_ "view.lobby.yes"}}"
                                         class="button button-next tabbable">
                                     <span class="hidden-xs">{{_ "view.lobby.yes"}}</span>
                                     <span class="glyphicon glyphicon-send" aria-hidden="true"></span>

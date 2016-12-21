@@ -8,7 +8,7 @@
             <ul id="available_questions_wrapper" data-intro="{{_ "view.quiz_manager.description.available_questions" }}" aria-label="{{_ "view.quiz_manager.description.available_questions" }}">
                 {{#each questionTypes}}
                     <div role="listitem">
-                        <li id="{{this.id}}_draggable" class="questionElementWrapper draggable questionType_{{this.id}}" data-intro="{{_ (getDescriptionForQuestionType this.id)}}" aria-label="{{_ (getDescriptionForQuestionType this.id)}}">{{_ this.translationName}}</li>
+                        <li id="{{this.id}}_draggable" class="questionElementWrapper draggable tabbable questionType_{{this.id}}" data-intro="{{_ (getDescriptionForQuestionType this.id)}}" aria-label="{{_ (getDescriptionForQuestionType this.id)}}">{{_ this.translationName}}</li>
                     </div>
                 {{/each}}
             </ul>

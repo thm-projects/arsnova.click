@@ -262,12 +262,12 @@ export const renderAnsweroptionItems = function () {
 		);
 		if (typeName !== "SurveyQuestion") {
 			wrapper.append(
-				$("<input type='checkbox' role='switch' id='answerOption-" + number + "' name='switch' data-width='80' title='answerOption-" + number + "' class='tabbable isCorrectOption'/>").prop('checked', item.getIsCorrect())
+				$("<input type='checkbox' role='switch' id='answerOption-" + number + "' name='switch' data-width='80' title='answerOption-" + number + "' class='tabbable isCorrectOption tabbable'/>").prop('checked', item.getIsCorrect())
 			);
 		}
 		if (typeName !== "YesNoSingleChoiceQuestion" && typeName !== "TrueFalseSingleChoiceQuestion") {
 			wrapper.append(
-				"<div class='removeAnsweroption' id='removeAnsweroption_" + number + "'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></div>"
+				"<div class='removeAnsweroption tabbable' id='removeAnsweroption_" + number + "'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></div>"
 			);
 		}
 		$('#answerOptionWrapper').append(wrapper);

@@ -48,10 +48,18 @@ Template.votingview.onRendered(function () {
 		}.bind(this));
 	}
 	lib.votingViewTracker.changed();
+	Meteor.defer(function () {
+		headerLib.calculateHeaderSize();
+		headerLib.calculateTitelHeight();
+	});
 });
 
 Template.liveResultsTitle.onRendered(function () {
 	footerElements.removeFooterElements();
 	footerElements.footerTracker.changed();
 	lib.votingViewTracker.changed();
+	Meteor.defer(function () {
+		headerLib.calculateHeaderSize();
+		headerLib.calculateTitelHeight();
+	});
 });

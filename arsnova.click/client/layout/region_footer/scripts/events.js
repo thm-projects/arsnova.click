@@ -278,9 +278,10 @@ const clickEvents = {
 			closeOnButton: '#closeDialogButton, #editSessionButton, .splashscreen-container-close',
 			onRendered: function (instance) {
 				instance.templateSelector.find('#editSessionButton').on('click', function () {
-					Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
-					Meteor.call('EventManagerCollection.reset', Router.current().params.quizName);
-					Router.go("/" + Router.current().params.quizName + "/quizManager");
+					Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName, function () {
+						Meteor.call('EventManagerCollection.reset', Router.current().params.quizName);
+						Router.go("/" + Router.current().params.quizName + "/quizManager");
+					});
 				});
 			}
 		});

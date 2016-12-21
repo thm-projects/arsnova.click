@@ -17,22 +17,19 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {countdownRunningSound, lobbySound} from '/client/plugins/sound/scripts/lib.js';
+import {countdownRunningSound} from '/client/plugins/sound/scripts/lib.js';
 import {countdown, routeToLeaderboardTimer} from './lib.js';
 
 Template.liveResults.onDestroyed(function () {
-	Session.set("countdownInitialized", undefined);
-	Session.set("sessionCountDown", undefined);
+	Session.delete("countdownInitialized");
+	Session.delete("sessionCountDown");
 	if (countdown) {
 		countdown.stop();
-	}
-	if (lobbySound) {
-		lobbySound.stop();
 	}
 	if (countdownRunningSound) {
 		countdownRunningSound.stop();
 	}
-	Session.set("soundIsPlaying", false);
+	Session.set("countdownRunningSoundIsPlaying", false);
 
 	if (routeToLeaderboardTimer) {
 		clearTimeout(routeToLeaderboardTimer);

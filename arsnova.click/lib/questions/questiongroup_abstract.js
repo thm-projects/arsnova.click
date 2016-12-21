@@ -30,7 +30,7 @@ export class AbstractQuestionGroup {
 	/**
 	 * Constructor super method for creating a QuestionGroup instance
 	 * This method cannot be invoked directly.
-	 * @param {{hashtag: String, questionList: Array, theme: String}} options An object containing the hashtag and an optional questionList
+	 * @param {{hashtag: String, questionList: Array, theme: String, isClient: Boolean}} options An object containing the hashtag, a theme name to use for the quiz, a switch if the current user is an attendee of the quiz and an optional questionList
 	 * @throws {TypeError} If this method is invoked directly
 	 * @throws {Error} If the hashtag of the options Object is missing
 	 */
@@ -49,6 +49,18 @@ export class AbstractQuestionGroup {
 						options.questionList[i] = questionReflection[options.questionList[i].type](options.questionList[i]);
 					} else {
 						throw new Error("Invalid argument list for " + this.constructor.name + " instantiation");
+					}
+				}
+				if (options.isClient) {
+					if (options.questionList[i].typeName() === "RangedQuestion") {
+						options.questionList[i].setRange(-1,0);
+						options.questionList[i].setCorrectValue(0);
+					} else if (options.questionList[i].typeName() === "FreeTextQuestion") {
+						options.questionList[i].getAnswerOptionList()[0].setAnswerText("");
+					} else {
+						options.questionList[i].getAnswerOptionList().forEach(function (elem) {
+							elem.setIsCorrect(false);
+						});
 					}
 				}
 				this[questionList].push(options.questionList[i]);

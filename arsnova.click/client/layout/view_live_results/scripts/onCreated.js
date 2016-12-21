@@ -17,13 +17,17 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
-import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
-import {SessionConfiguration} from "/lib/session_configuration/session_config.js";
+import * as localData from "/lib/local_storage.js";
 
 Template.liveResults.onCreated(function () {
-	const questionGroup = new DefaultQuestionGroup(QuestionGroupCollection.findOne());
-	questionGroup.setConfiguration(new SessionConfiguration(SessionConfigurationCollection.findOne()));
-	Session.set("questionGroup",questionGroup);
+	if (!Session.get("questionGroup")) {
+		if (localData.containsHashtag(Router.current().params.quizName)) {
+			Session.set("questionGroup", new DefaultQuestionGroup(QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName})));
+		} else {
+			Session.set("questionGroup", new DefaultQuestionGroup($.extend({isClient: true}, QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName}))));
+		}
+	}
 });

@@ -19,6 +19,8 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {QuestionGroupCollection} from "/lib/questions/collection.js";
+import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
 import {startCountdown} from './lib.js';
 
 Template.votingview.onCreated(function () {
@@ -27,6 +29,9 @@ Template.votingview.onCreated(function () {
 	Session.set("hasSendResponse", false);
 	Session.set("hasToggledResponse", false);
 	Session.set("countdownInitialized", false);
+	if (!Session.get("questionGroup")) {
+		Session.set("questionGroup", new DefaultQuestionGroup($.extend({isClient: true}, QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName}))));
+	}
 	const questionItem = Session.get("questionGroup").getQuestionList()[index];
 	const sessionType = questionItem.typeName();
 	const answers = questionItem.getAnswerOptionList();

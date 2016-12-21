@@ -381,7 +381,7 @@ Template.liveResults.helpers({
 		if (Session.get("countdownInitialized")) {
 			return questionDoc.questionList[index].type !== "SurveyQuestion" && index < eventDoc.questionIndex;
 		} else {
-			return !Session.get("countdownInitialized") && questionDoc.questionList[index].type !== "SurveyQuestion" && index <= eventDoc.questionIndex;
+			return questionDoc.questionList[index].type !== "SurveyQuestion" && index <= eventDoc.questionIndex;
 		}
 	},
 	getNormalizedIndex: function (index) {

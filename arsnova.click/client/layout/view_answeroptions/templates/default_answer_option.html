@@ -23,20 +23,22 @@
                     {{#if canAddAnsweroption}}
                         <div class="row">
                             <div class="col-xs-12">
-                                <div id="default_answer_row" class="answerOptionElementWrapper draggable" data-intro="{{_ "view.answeroptions.description.default_answer_row"}}" data-step="2" >
+                                <div id="default_answer_row" class="answerOptionElementWrapper tabbable draggable" data-intro="{{_ "view.answeroptions.description.default_answer_row"}}" data-step="2" aria-label="{{_ "view.answeroptions.description.default_answer_row"}}">
                                     <p class="answer_row_default_text">{{_ "view.answeroptions.new_answer"}}</p>
                                 </div>
                             </div>
                         </div>
                     {{/if}}
                     <div class="row">
-                        <div id="answerOptionWrapper" class="col-md-12" data-intro="{{_ "view.answeroptions.description.added_answers"}}" data-step="1" ></div>
+                        <div id="answerOptionWrapper" class="col-md-12" data-intro="{{_ "view.answeroptions.description.added_answers"}}" data-step="1" role="list" aria-label="{{_ "view.answeroptions.description.added_answers"}}"></div>
                     </div>
                 </div>
                 <div class="col-xs-12 answerOptionConfig" data-intro="{{_ "view.answeroptions.description.show_answer_content_on_buttons"}}">
                     <p class="text-light checkboxLabel" id="showAnswerContentOnButtons">{{_ "view.answeroptions.show_answer_content_on_buttons"}}</p>
                     <input type="checkbox"
                            id="config_showAnswerContentOnButtons_switch"
+                           aria-label="{{_ "view.answeroptions.description.show_answer_content_on_buttons"}}"
+                           role="switch"
                            name="switch"
                            data-width="100"
                            data-height="35"
@@ -53,6 +55,8 @@
                         <p class="text-light checkboxLabel" id="multipleSelectionSurvey">{{_ "view.answeroptions.multiple_selection_survey"}}</p>
                         <input type="checkbox"
                                id="config_multipleSelectionSurvey_switch"
+                               aria-label="{{_ "view.answeroptions.description.multiple_selection_survey"}}"
+                               role="switch"
                                name="switch"
                                data-width="100"
                                data-height="35"
@@ -70,7 +74,7 @@
         <div id="previewAnsweroptionContentWrapper" class="hidden-xs hidden-sm col-md-6">
             <div class="center-block" data-intro="{{_ "view.answeroptions.description.preview"}}">
                 <img id="previewAnsweroptionImage" src="/images/preview/question_preview.png" alt="question preview" />
-                <div id="markdownPreviewWrapper" class="answerWrapper">
+                <div id="markdownPreviewWrapper" class="answerWrapper" aria-label="{{_ "view.answeroptions.description.preview"}}">
                     <h2 class="text-center">{{_ "view.answeroptions.preview"}}</h2>
                     {{> votingview data-questionIndex=getQuestionIndex}}
                 </div>

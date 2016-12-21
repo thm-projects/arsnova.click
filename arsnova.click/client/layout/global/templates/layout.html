@@ -72,25 +72,27 @@
 	<script async="async" defer="defer" type="text/javascript" src="//arsnova.thm.de/stats/piwik.js"></script>
 
     <noscript>
-        <div>
-            <h1>JavaScript nicht aktiviert</h1>
-            <p>Um arsnova.click nutzen zu können, muss JavaScript aktiviert sein!</p>
-            <hr />
-        </div>
-        <div>
-            <h1>JavaScript not activated</h1>
-            <p>JavaScript is required to run arsnova.click!</p>
-            <hr />
-        </div>
-        <div>
-            <h1>JavaScript n'est pas activé</h1>
-            <p>JavaScript est nécessaire pour exécuter arsnova.click!</p>
-            <hr />
-        </div>
-        <div>
-            <h1>JavaScript no activado</h1>
-            <p>JavaScript es necesario para ejecutar arsnova.click!</p>
-            <hr />
+        <div role="main">
+            <div>
+                <h1>JavaScript nicht aktiviert</h1>
+                <p>Um arsnova.click nutzen zu können, muss JavaScript aktiviert sein!</p>
+                <hr />
+            </div>
+            <div>
+                <h1>JavaScript not activated</h1>
+                <p>JavaScript is required to run arsnova.click!</p>
+                <hr />
+            </div>
+            <div>
+                <h1>JavaScript n'est pas activé</h1>
+                <p>JavaScript est nécessaire pour exécuter arsnova.click!</p>
+                <hr />
+            </div>
+            <div>
+                <h1>JavaScript no activado</h1>
+                <p>JavaScript es necesario para ejecutar arsnova.click!</p>
+                <hr />
+            </div>
         </div>
     </noscript>
 
@@ -102,7 +104,7 @@
         {{>yield "header.title"}}
         <div class="container contentPosition">
             <div class="row">
-                <div id="mainContentContainer" class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
+                <div id="mainContentContainer" class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1" role="main">
                     {{>yield}}
                 </div>
             </div>

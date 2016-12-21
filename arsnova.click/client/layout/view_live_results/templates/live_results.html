@@ -18,14 +18,14 @@
 <template name="liveResults">
 	<div id="liveResultsFrame">
         <div class="row full-screen-content">
-            <div class="col-xs-12 question-wrapper">
+            <div class="col-xs-12 question-wrapper" role="list">
                 {{#each questionList}}
-                    <div class="row question-row" id="question-row_{{displayIndex}}">
+                    <div class="row question-row" id="question-row_{{displayIndex}}" role="listitem">
                         <div class="col-md-12">
                             {{#unless hasOnlyOneQuestion}}
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <p class="question-title">{{_ "view.liveResults.question"}} {{getNormalizedIndex displayIndex}} / {{allQuestionCount}}</p>
+                                        <p class="question-title" role="heading">{{_ "view.liveResults.question"}} {{getNormalizedIndex displayIndex}} / {{allQuestionCount}}</p>
                                     </div>
                                 </div>
                             {{/unless}}
@@ -47,8 +47,7 @@
                                             <button id="js-btn-showQuestionAndAnswerModal"
                                                     type="button"
                                                     class="btn btn-info btn-lg btn-answerOption tabbable">
-                                                    <span class="glyphicon glyphicon-question-sign glyph-left"
-                                                          aria-hidden="true"></span>
+                                                <span class="glyphicon glyphicon-question-sign glyph-left" aria-hidden="true"></span>
                                                 <span class="ansBtn">{{_ "view.liveResults.question"}}</span>
                                             </button>
                                         </div>
@@ -70,8 +69,8 @@
                                     <div class="col-xs-12">
                                         <button class="btn btn-more-learners tabbable"
                                                 id="more-learners">
-                                            <span class="glyphicon glyphicon-align-justify"></span>
-                                            ({{_ "view.liveResults.show_more" (invisibleLearnerCount displayIndex) count=(invisibleLearnerCount displayIndex)}})
+                                            <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                                            <span>({{_ "view.liveResults.show_more" (invisibleLearnerCount displayIndex) count=(invisibleLearnerCount displayIndex)}})</span>
                                         </button>
                                     </div>
                                 </div>

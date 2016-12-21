@@ -33,7 +33,7 @@ Template.liveResults.events({
 	},
 	"click .btn-showLeaderBoard": function (event) {
 		event.stopPropagation();
-		var targetId = parseInt($(event.currentTarget).attr("id").replace("js-btn-showLeaderBoard_", ""));
+		const targetId = parseInt($(event.currentTarget).attr("id").replace("js-btn-showLeaderBoard_", ""));
 		Router.go("/" + Router.current().params.quizName + "/leaderBoard/" + targetId);
 	},
 	"click #js-btn-export": function (event) {
@@ -47,10 +47,10 @@ Template.liveResults.events({
 					errorMessage: "plugins.splashscreen.error.error_messages.export_failed"
 				});
 			} else {
-				var exportData = "text/json;charset=utf-8," + encodeURIComponent(res);
-				var a = document.createElement('a');
-				var time = new Date();
-				var timestring = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
+				const exportData = "text/json;charset=utf-8," + encodeURIComponent(res);
+				const a = document.createElement('a');
+				const time = new Date();
+				const timestring = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
 				a.href = 'data:' + exportData;
 				a.download = Router.current().params.quizName + "-" + timestring + ".json";
 				a.innerHTML = '';
@@ -105,7 +105,7 @@ Template.liveResultsFooterNavButtons.events({
 	'click #startNextQuestion': (event)=> {
 		event.stopPropagation();
 
-		var questionDoc = QuestionGroupCollection.findOne();
+		const questionDoc = QuestionGroupCollection.findOne();
 		if (!questionDoc) {
 			return;
 		}

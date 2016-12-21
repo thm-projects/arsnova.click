@@ -220,7 +220,7 @@ Meteor.startup(function () {
 		$(window).on('mouseout', (function () {
 			window.onbeforeunload = confirmLeave;
 		}));
-		var prevKey = "";
+		let prevKey = "";
 		$(document).keydown(function (e) {
 			if (e.key.toUpperCase() == "W" && prevKey == "CONTROL") {
 				window.onbeforeunload = confirmLeave;

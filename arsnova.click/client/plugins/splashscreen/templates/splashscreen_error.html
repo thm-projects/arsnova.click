@@ -16,18 +16,19 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="errorSplashscreen">
-	<div class="modal splashscreen" role="dialog">
+	<div class="modal splashscreen" role="alertdialog">
 		<div class="modal-dialog">
             <div class="noSplashscreenPadding">
                 <div class="modal-content splash-screen-error-message">
                     <div class="modal-header">
-                        <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
-                        <h2>{{_ "plugins.splashscreen.error.title"}}</h2>
+                        <div class="splashscreen-container-close" aria-label="{{_ "global.close_window"}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
+                        <h2 role="heading">{{_ "plugins.splashscreen.error.title"}}</h2>
                     </div>
                     <div class="modal-body"></div>
                     <div class="modal-footer">
                         <button id="js-btn-hideErrorMessageModal"
                                 type="button"
+                                aria-label="{{_ "global.close_window"}}"
                                 class="btn splash-button-error-message btn-answerOption btn-lg tabbable">
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                             <span class="hidden-xs">{{_ "global.close_window"}}</span>

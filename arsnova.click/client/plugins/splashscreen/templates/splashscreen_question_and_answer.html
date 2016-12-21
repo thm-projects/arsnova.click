@@ -21,7 +21,7 @@
             <div class="noSplashscreenPadding">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
+                        <div class="splashscreen-container-close" aria-label="{{_ "global.close_window"}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
                     </div>
                     <div class="modal-markdown-body">
                         <div id="questionContent" class="markdown-content">
@@ -41,11 +41,11 @@
                             {{/each}}
                         </div>
                         <hr/>
-                        <div id="answerContent" class="markdown-content">
+                        <div id="answerContent" class="markdown-content" role="list">
                             {{#if isRangedQuestion}}
-                                <h1>{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
+                                <h1 role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
                                 {{#with getAnswerOptions}}
-                                    <div class="answerContentElementWrapper">
+                                    <div class="answerContentElementWrapper" role="listitem">
                                         <div class="answerContentElementLetter">
                                             <span>{{_ "plugins.splashscreen.question_and_answer.min_range"}}</span>
                                         </div>
@@ -53,7 +53,7 @@
                                             <span>{{this.[0]}}</span>
                                         </div>
                                     </div>
-                                    <div class="answerContentElementWrapper">
+                                    <div class="answerContentElementWrapper" role="listitem">
                                         <div class="answerContentElementLetter">
                                             <span>{{_ "plugins.splashscreen.question_and_answer.correct_value"}}</span>
                                         </div>
@@ -61,7 +61,7 @@
                                             <span>{{this.[1]}}</span>
                                         </div>
                                     </div>
-                                    <div class="answerContentElementWrapper">
+                                    <div class="answerContentElementWrapper" role="listitem">
                                         <div class="answerContentElementLetter">
                                             <span>{{_ "plugins.splashscreen.question_and_answer.max_range"}}</span>
                                         </div>
@@ -72,9 +72,9 @@
                                 {{/with}}
                             {{else}}
                                 {{#if isFreeTextQuestion}}
-                                    <h1>{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
+                                    <h1 role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
                                     {{#with getAnswerOptions}}
-                                        <div class="answerContentElementWrapper">
+                                        <div class="answerContentElementWrapper" role="listitem">
                                             <div class="answerContentElementLetter">
                                                 <span>{{_ "plugins.splashscreen.question_and_answer.reference_value"}}</span>
                                             </div>
@@ -84,9 +84,9 @@
                                         </div>
                                     {{/with}}
                                 {{else}}
-                                    <h1>{{_ "plugins.splashscreen.question_and_answer.answeroption" count=2}}</h1>
+                                    <h1 role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=2}}</h1>
                                     {{#each getAnswerOptions}}
-                                        <div class="answerContentElementWrapper">
+                                        <div class="answerContentElementWrapper" role="listitem">
                                             <div class="answerContentElementLetter">
                                                 <span>{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}} {{answerOptionLetter @index}}</span>
                                             </div>
@@ -113,6 +113,7 @@
                     <div class="modal-footer">
                         <button id="js-btn-hideQuestionModal"
                                 type="button"
+                                aria-label="{{_ "global.close_window"}}"
                                 class="btn btn-success btn-answerOption btn-lg tabbable">
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                             <span class="hidden-xs">{{_ "global.close_window"}}</span>

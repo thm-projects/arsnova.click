@@ -17,11 +17,12 @@
 
 <template name="rangedAnswerOptionTemplate">
     <div class="row full-screen-content rangedAnswerOptions">
-        <div class="col-xs-12 rangedValues" data-intro="{{_ "view.answeroptions.description.range_area"}}">
+        <div class="col-xs-12 rangedValues" data-intro="{{_ "view.answeroptions.description.range_area"}}" aria-label="{{_ "view.answeroptions.description.range_area"}}">
             <div class="row">
                 <div class="col-xs-12 col-md-4" data-intro="{{_ "view.answeroptions.description.min_range"}}">
                     <h3>{{_ "view.answeroptions.ranged_question.min_range"}}</h3>
                     <input type="number"
+                           aria-label="{{_ "view.answeroptions.description.min_range"}}"
                            id="minRangeInput"
                            class="input-field tabbable"
                            step="any"
@@ -32,6 +33,7 @@
                 <div class="col-xs-12 col-md-4" data-intro="{{_ "view.answeroptions.description.correct_value"}}">
                     <h3>{{_ "view.answeroptions.ranged_question.correct_value"}}</h3>
                     <input type="number"
+                           aria-label="{{_ "view.answeroptions.description.correct_value"}}"
                            id="correctValueInput"
                            class="input-field tabbable"
                            step="any"
@@ -42,6 +44,7 @@
                 <div class="col-xs-12 col-md-4" data-intro="{{_ "view.answeroptions.description.max_range"}}">
                     <h3>{{_ "view.answeroptions.ranged_question.max_range"}}</h3>
                     <input type="number"
+                           aria-label="{{_ "view.answeroptions.description.max_range"}}"
                            id="maxRangeInput"
                            class="input-field tabbable"
                            step="any"
@@ -51,8 +54,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12" data-intro="{{_ "view.answeroptions.description.range_slider"}}">
+        <div class="col-xs-12" data-intro="{{_ "view.answeroptions.description.range_slider"}}" aria-label="{{_ "view.answeroptions.description.range_slider"}}">
             <div id="rangedSlider"
+                 role="slider"
                  class="rangedSlider tabbable"></div>
         </div>
     </div>

@@ -218,8 +218,8 @@ Template.home.events({
 		}
 	},
 	"click #joinSession": function () {
-		var hashtag = $("#hashtag-input-field").val().trim();
-		var session = EventManagerCollection.findOne({hashtag: {'$regex': hashtag, $options: 'i'}});
+		const hashtag = $("#hashtag-input-field").val().trim();
+		const session = EventManagerCollection.findOne({hashtag: {'$regex': hashtag, $options: 'i'}});
 		if (session.sessionStatus === 2) {
 			Router.go("/" + session.hashtag + "/nick");
 		} else {
@@ -231,21 +231,21 @@ Template.home.events({
 		}
 	},
 	"keydown #hashtag-input-field": function (event) {
-		var keyWhiteList = [
+		const keyWhiteList = [
 			37,
 			39,
 			8,
 			46,
 			13
 		]; //left, right, delete, entf
-		var charCount = $(event.currentTarget).val().length;
+		const charCount = $(event.currentTarget).val().length;
 		if (charCount >= 25 && keyWhiteList.indexOf(event.keyCode) === -1) {
 			event.preventDefault();
 		}
 
 		//Select option on enter
 		if (event.keyCode === 13) {
-			var inputHashtag = $(event.target).val();
+			const inputHashtag = $(event.target).val();
 			if (inputHashtag.length === 0) {
 				return;
 			}

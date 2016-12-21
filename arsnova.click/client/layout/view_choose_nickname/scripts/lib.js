@@ -26,12 +26,12 @@ import {SessionConfigurationCollection} from '/lib/session_configuration/collect
 export const nickTracker = new Tracker.Dependency();
 
 function componentToHex(c) {
-	var hex = c.toString(16);
+	const hex = c.toString(16);
 	return hex.length === 1 ? "0" + hex : hex;
 }
 
 export function hexToRgb(hex) {
-	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 	return result ? {
 		r: parseInt(result[1], 16),
 		g: parseInt(result[2], 16),
@@ -44,7 +44,7 @@ export function rgbToHex(r, g, b) {
 }
 
 export function transformForegroundColor(rgbObj) {
-	var o = Math.round(((parseInt(rgbObj.r) * 299) + (parseInt(rgbObj.g) * 587) + (parseInt(rgbObj.b) * 114)) / 1000);
+	const o = Math.round(((parseInt(rgbObj.r) * 299) + (parseInt(rgbObj.g) * 587) + (parseInt(rgbObj.b) * 114)) / 1000);
 	return o < 125 ? "#ffffff" : "#000000";
 }
 
@@ -81,9 +81,9 @@ export function hasTHMMail() {
 }
 
 export function parseEnteredNickname(event) {
-	var currentNickName = event.currentTarget.value;
-	var member = MemberListCollection.findOne({nick: currentNickName});
-	var $inputField = $("#nickname-input-field");
+	const currentNickName = event.currentTarget.value;
+	const member = MemberListCollection.findOne({nick: currentNickName});
+	const $inputField = $("#nickname-input-field");
 
 	if (currentNickName.length > 2 && currentNickName.length < 26 && !member) {
 		if (isNickAllowed(currentNickName)) {

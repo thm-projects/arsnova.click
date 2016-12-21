@@ -16,11 +16,12 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="readingConfirmedLearner">
-	<div class="col-xs-12 col-sm-6 col-md-4">
-		<button class="btn btn-learner {{#if isOwnNick nick}}color-changing-own-nick{{/if}} disabled"
+	<div class="col-xs-12 col-sm-6 col-md-4" role="list">
+		<div class="btn btn-learner {{#if isOwnNick nick}}color-changing-own-nick{{/if}} disabled"
 				id="{{_id}}"
+                role="listitem"
 				style="background-color: {{backgroundColor}}; color:{{foregroundColor}}; opacity: 1;">
 			{{nick}}
-		</button>
+		</div>
 	</div>
 </template>

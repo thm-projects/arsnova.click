@@ -16,12 +16,12 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="translate">
-	<div class="row center-vertical-non-scrollable">
-		<div class="col-md-12">
+	<div class="row center-vertical">
+		<div class="col-xs-12">
 			{{#if i18n_enabled}}
-				<div class="row">
+				<div class="row" role="list">
 					{{#each i18n_sortedLanguages }}
-						<div class="col-xs-12 col-md-6 available_translations">
+						<div class="col-xs-12 col-md-6 available_translations" role="listitem">
 							<button type="button"
                                     id="translation_{{this.tag}}"
 									class="button btn{{#if i18n_isCurrentLanguage this.tag}} selectedLanguageButton button-success{{else}} button-grey{{/if}} tabbable"

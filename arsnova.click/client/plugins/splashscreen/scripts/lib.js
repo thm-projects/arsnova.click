@@ -312,9 +312,9 @@ export const parseMarkdown = {
 };
 
 export function showFullscreenPicture(event) {
-	var pictureElement = event.target;
-	var src = pictureElement.src;
-	var title = pictureElement.title;
+	const pictureElement = event.target;
+	const src = pictureElement.src;
+	const title = pictureElement.title;
 
 	new Splashscreen({
 		autostart: true,
@@ -322,8 +322,8 @@ export function showFullscreenPicture(event) {
 		closeOnButton: '#js-btn-hidePreviewModal, .splashscreen-container-close',
 		instanceId: "resizeableImage",
 		onRendered: function (instance) {
-			var body = instance.templateSelector.find('.modal-markdown-body');
-			var objectHtml =  '<img title="' + title + '" src="' + src + '" alt="' + title + '" style="width: 100%">';
+			const body = instance.templateSelector.find('.modal-markdown-body');
+			const objectHtml =  '<img title="' + title + '" src="' + src + '" alt="' + title + '" style="width: 100%">';
 			body.append(objectHtml);
 		}
 	});

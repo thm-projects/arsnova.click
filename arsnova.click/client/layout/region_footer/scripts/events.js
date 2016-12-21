@@ -70,7 +70,7 @@ const clickEvents = {
 		}
 	},
 	"click #fullscreen, switchChange.bootstrapSwitch .bootstrap-switch-id-fullscreen_switch": function () {
-		var route = Router.current().route.getName();
+		let route = Router.current().route.getName();
 		if (route !== undefined) {
 			route = route.replace(/(:quizName.)*(.:id)*/g, "");
 		}
@@ -110,8 +110,8 @@ const clickEvents = {
 		importButton.click();
 		importButton[0].value = null;
 		importButton.on("change", function () {
-			var fileList = importButton[0].files;
-			var fileReader = new FileReader();
+			const fileList = importButton[0].files;
+			const fileReader = new FileReader();
 			fileReader.onload = function () {
 				let asJSON = null;
 				try {
@@ -158,8 +158,8 @@ const clickEvents = {
 						closeOnButton: "#js-btn-closeRenameHashtag, #js-btn-importSession, .splashscreen-container-close",
 						onRendered: function () {
 							$('#js-btn-importSession').on('click', function () {
-								var hashtag = $("#hashtagRename-input-field").val().trim();
-								var hashtagDoc = HashtagsCollection.findOne({hashtag: hashtag});
+								const hashtag = $("#hashtagRename-input-field").val().trim();
+								const hashtagDoc = HashtagsCollection.findOne({hashtag: hashtag});
 								if (hashtagDoc) {
 									return;
 								}
@@ -191,7 +191,7 @@ const clickEvents = {
 								}
 							});
 							$('#hashtagRename-input-field').on('input', function (event) {
-								var inputHashtag = $(event.target).val();
+								const inputHashtag = $(event.target).val();
 								if (["?", "/", "\\"].some(function (v) { return inputHashtag.indexOf(v) >= 0; })) {
 									$("#js-btn-importSession").attr("disabled", "disabled");
 									return;
@@ -200,7 +200,7 @@ const clickEvents = {
 									$("#js-btn-importSession").attr("disabled", "disabled");
 									return;
 								}
-								var hashtagDoc = HashtagsCollection.findOne({hashtag: inputHashtag});
+								const hashtagDoc = HashtagsCollection.findOne({hashtag: inputHashtag});
 								if (!hashtagDoc) {
 									$("#js-btn-importSession").removeAttr("disabled");
 								} else {
@@ -215,7 +215,7 @@ const clickEvents = {
 					});
 				}
 			};
-			for (var i = 0; i < fileList.length; i++) {
+			for (let i = 0; i < fileList.length; i++) {
 				fileReader.readAsText(fileList[i], "UTF-8");
 			}
 		});
@@ -236,7 +236,7 @@ const clickEvents = {
 		};
 		const calcQrCodeContainerSize = function () {
 			qrCodeContainer.find("canvas").remove();
-			var img = new window.Image();
+			const img = new window.Image();
 			img.addEventListener("load", function () {
 				qrCodeContainer.find(".qr-code-item").qrcode({
 					background: "white",
@@ -311,7 +311,7 @@ Template.footer.events($.extend({}, clickEvents, {
 		}
 	},
 	"mouseenter .navbar-footer-placeholder": function () {
-		var route = Router.current().route.getName();
+		let route = Router.current().route.getName();
 		if (typeof route === "undefined") {
 			return;
 		}
@@ -322,7 +322,7 @@ Template.footer.events($.extend({}, clickEvents, {
 		}
 	},
 	"mouseleave .navbar-footer": function () {
-		var route = Router.current().route.getName();
+		let route = Router.current().route.getName();
 		if (typeof route === "undefined") {
 			return;
 		}
@@ -373,7 +373,7 @@ Template.dataprivacy.events($.extend({}, {
 
 Template.footerNavButtons.events({
 	'click #forwardButton': function () {
-		var route = Router.current().route.getName();
+		let route = Router.current().route.getName();
 		if (typeof route === "undefined") {
 			return;
 		}

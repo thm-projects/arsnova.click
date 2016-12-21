@@ -44,22 +44,22 @@ export function calculateButtonCount(allMembersCount) {
 	 - subtract the attendee-in-quiz-wrapper height (the session information for the attendees)
 	 - subtract the margin to the top (the title or the show more button)
 	 */
-	var viewport = $(".contentPosition");
+	const viewport = $(".contentPosition");
 
-	var viewPortHeight = viewport.height() - $('#waiting_for_players_notifier').outerHeight(true);
+	const viewPortHeight = viewport.height() - $('#waiting_for_players_notifier').outerHeight(true);
 	$('#learner-list').height(viewPortHeight);
 
 	/* The height of the learner button must be set manually if the html elements are not yet generated */
-	var btnLearnerHeight = $('.btn-learner').first().parent().outerHeight() ? $('.btn-learner').first().parent().outerHeight() : 54;
+	const btnLearnerHeight = $('.btn-learner').first().parent().outerHeight() ? $('.btn-learner').first().parent().outerHeight() : 54;
 
 	/* Calculate how much buttons we can place in the viewport until we need to scroll */
-	var queryLimiter = Math.floor(viewPortHeight / btnLearnerHeight);
+	let queryLimiter = Math.floor(viewPortHeight / btnLearnerHeight);
 
 	/*
 	 Multiply the displayed elements by 3 if on widescreen and reduce the max output of buttons by 1 row for the display
 	 more button if necessary. Also make sure there is at least one row of buttons shown even if the user has to scroll
 	 */
-	var limitModifier = $(document).width() >= 992 ? 3 : $(document).width() >= 768 ? 2 : 1;
+	const limitModifier = $(document).width() >= 992 ? 3 : $(document).width() >= 768 ? 2 : 1;
 
 	queryLimiter *= limitModifier;
 	if (queryLimiter <= 0) {

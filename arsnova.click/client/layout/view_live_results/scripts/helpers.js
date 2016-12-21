@@ -37,7 +37,7 @@ Template.liveResultsFooterNavButtons.helpers({
 		return Session.get("countdownInitialized");
 	},
 	showGlobalLeaderboardButton: ()=> {
-		var questionDoc = QuestionGroupCollection.findOne();
+		const questionDoc = QuestionGroupCollection.findOne();
 		let eventDoc = EventManagerCollection.findOne();
 		if (!questionDoc || !eventDoc) {
 			return;
@@ -60,7 +60,7 @@ Template.liveResultsFooterNavButtons.helpers({
 		return AnswerOptionCollection.find({isCorrect: true}).count() > 0 || hasRangedQuestion;
 	},
 	hasNextQuestion: ()=> {
-		var questionDoc = QuestionGroupCollection.findOne();
+		const questionDoc = QuestionGroupCollection.findOne();
 		let eventDoc = EventManagerCollection.findOne();
 		if (!questionDoc || !eventDoc) {
 			return;
@@ -77,11 +77,11 @@ Template.liveResultsFooterNavButtons.helpers({
 		return configDoc.readingConfirmationEnabled !== false && eventDoc.readingConfirmationIndex <= eventDoc.questionIndex;
 	},
 	allQuestionCount: function () {
-		var doc = QuestionGroupCollection.findOne();
+		const doc = QuestionGroupCollection.findOne();
 		return doc ? doc.questionList.length : false;
 	},
 	hasOnlyOneQuestion: ()=> {
-		var questionDoc = QuestionGroupCollection.findOne();
+		const questionDoc = QuestionGroupCollection.findOne();
 		if (!questionDoc) {
 			return;
 		}
@@ -111,9 +111,9 @@ Template.liveResultsTitle.helpers({
 			return 0;
 		}
 
-		var sumVoted = 0;
+		let sumVoted = 0;
 		MemberListCollection.find().map(function (member) {
-			var responseDoc = ResponsesCollection.findOne({
+			const responseDoc = ResponsesCollection.findOne({
 				questionIndex: eventDoc.questionIndex,
 				userNick: member.nick
 			});
@@ -125,7 +125,7 @@ Template.liveResultsTitle.helpers({
 	},
 	getCountdown: function () {
 		if (Session.get("countdownInitialized")) {
-			var roundedCountdown = Math.round(lib.countdown.get());
+			const roundedCountdown = Math.round(lib.countdown.get());
 			return roundedCountdown < 0 ? 0 : roundedCountdown;
 		}
 		return 0;
@@ -365,7 +365,7 @@ Template.liveResults.helpers({
 		if (!sessionConfig) {
 			return;
 		}
-		var currentReadAmount = lib.getCurrentRead(index);
+		const currentReadAmount = lib.getCurrentRead(index);
 		if (currentReadAmount > 0 || sessionConfig.readingConfirmationEnabled === false) {
 			$('#startNextQuestion').removeAttr('disabled');
 		}
@@ -388,7 +388,7 @@ Template.liveResults.helpers({
 		return index + 1;
 	},
 	allQuestionCount: function () {
-		var doc = QuestionGroupCollection.findOne();
+		const doc = QuestionGroupCollection.findOne();
 		return doc ? doc.questionList.length : false;
 	},
 	questionList: function () {
@@ -397,12 +397,12 @@ Template.liveResults.helpers({
 			return;
 		}
 
-		var questionList = Session.get("questionGroup").getQuestionList();
+		const questionList = Session.get("questionGroup").getQuestionList();
 		if (eventDoc.readingConfirmationIndex < questionList.length - 1) {
 			questionList.splice(eventDoc.readingConfirmationIndex + 1, questionList.length - (eventDoc.readingConfirmationIndex + 1));
 		}
 
-		for (var i = 0; i < questionList.length; i++) {
+		for (let i = 0; i < questionList.length; i++) {
 			questionList[i].displayIndex = i;
 		}
 
@@ -435,7 +435,7 @@ Template.liveResults.helpers({
 		return result;
 	},
 	showMoreButton: function (index) {
-		var result = [];
+		const result = [];
 		MemberListCollection.find().forEach(function (doc) {
 			if (doc.readConfirmed[index]) {
 				result.push(doc);
@@ -444,7 +444,7 @@ Template.liveResults.helpers({
 		return ((result.length - Session.get("LearnerCount")) > 1);
 	},
 	invisibleLearnerCount: function (index) {
-		var result = [];
+		const result = [];
 		MemberListCollection.find().forEach(function (doc) {
 			if (doc.readConfirmed[index]) {
 				result.push(doc);

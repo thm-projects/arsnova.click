@@ -96,13 +96,13 @@ export function displayQuestionAndAnswerDialog(questionIndex) {
  * @source http://stackoverflow.com/a/17267684
  */
 export function hslColPerc(percent, start, end) {
-	var a = percent / 100, b = end * a, c = b + start;
+	const a = percent / 100, b = end * a, c = b + start;
 	return 'hsl(' + c + ',100%,25%)';
 }
 
 export function getPercentRead(index) {
-	var sumRead = 0;
-	var count = 0;
+	let sumRead = 0;
+	let count = 0;
 	MemberListCollection.find().map(function (member) {
 		count++;
 		if (member.readConfirmed[index]) {
@@ -113,7 +113,7 @@ export function getPercentRead(index) {
 }
 
 export function getCurrentRead(index) {
-	var sumRead = 0;
+	let sumRead = 0;
 	MemberListCollection.find().map(function (member) {
 		if (member.readConfirmed[index]) {
 			sumRead += member.readConfirmed[index];
@@ -311,27 +311,27 @@ export function calculateButtonCount() {
 	 - subtract the attendee-in-quiz-wrapper height (the session information for the attendees)
 	 - subtract the margin to the top (the title or the show more button)
 	 */
-	var viewport = $(".contentPosition"), learnerListMargin = $('.learner-list').length > 0 ? parseInt($('.learner-list').first().css('margin-top').replace("px", "")) : 0;
+	const viewport = $(".contentPosition"), learnerListMargin = $('.learner-list').length > 0 ? parseInt($('.learner-list').first().css('margin-top').replace("px", "")) : 0;
 
-	var viewPortHeight = viewport.outerHeight() - $('.question-title').outerHeight(true) - $('.readingConfirmationProgressRow').outerHeight(true) - $('.btn-more-learners').outerHeight(true) - learnerListMargin;
+	const viewPortHeight = viewport.outerHeight() - $('.question-title').outerHeight(true) - $('.readingConfirmationProgressRow').outerHeight(true) - $('.btn-more-learners').outerHeight(true) - learnerListMargin;
 
 	/* The height of the learner button must be set manually if the html elements are not yet generated */
-	var btnLearnerHeight = $('.btn-learner').first().parent().outerHeight() ? $('.btn-learner').first().parent().outerHeight() : 54;
+	const btnLearnerHeight = $('.btn-learner').first().parent().outerHeight() ? $('.btn-learner').first().parent().outerHeight() : 54;
 
 	/* Calculate how much buttons we can place in the viewport until we need to scroll */
-	var queryLimiter = Math.floor(viewPortHeight / btnLearnerHeight);
+	let queryLimiter = Math.floor(viewPortHeight / btnLearnerHeight);
 
 	/*
 	 Multiply the displayed elements by 3 if on widescreen and reduce the max output of buttons by 1 row for the display
 	 more button if necessary. Also make sure there is at least one row of buttons shown even if the user has to scroll
 	 */
-	var allMembers = [];
+	const allMembers = [];
 	MemberListCollection.find().forEach(function (doc) {
 		if (doc.readConfirmed[EventManagerCollection.findOne().readingConfirmationIndex]) {
 			allMembers.push(doc);
 		}
 	});
-	var limitModifier = (viewport.outerWidth() >= 992) ? 3 : (viewport.outerWidth() >= 768 && viewport.outerWidth() < 992) ? 2 : 1;
+	const limitModifier = (viewport.outerWidth() >= 992) ? 3 : (viewport.outerWidth() >= 768 && viewport.outerWidth() < 992) ? 2 : 1;
 
 	queryLimiter *= limitModifier;
 	if (queryLimiter <= 0) {

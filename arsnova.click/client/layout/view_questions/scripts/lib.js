@@ -174,7 +174,7 @@ export function parseStrikeThroughBlock(result, i) {
 	});
 }
 
-export function parseGithubFlavoredMarkdown(result) {
+export function parseGithubFlavoredMarkdown(result, overrideLineBreaks = true) {
 	for (let i = 0; i < result.length; i++) {
 		switch (true) {
 			case /^(\$){2}$/.test(result[i]):
@@ -206,7 +206,7 @@ export function parseGithubFlavoredMarkdown(result) {
 			case !/(^!)?\[.*\]\(.*\)/.test(result[i]) && /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(result[i]) && !(/youtube/.test(result[i]) || /youtu.be/.test(result[i]) || /vimeo/.test(result[i])):
 				parseLinkBlock(result, i);
 				break;
-			case result[i].length === 0:
+			case overrideLineBreaks && result[i].length === 0:
 				result.splice(i, 0, "<br/>");
 				i++;
 				break;

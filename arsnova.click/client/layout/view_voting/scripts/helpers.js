@@ -29,7 +29,7 @@ Template.votingview.helpers({
 		const result = Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList().map(function (elem) {
 			return elem.getAnswerText();
 		});
-		questionLib.parseGithubFlavoredMarkdown(result);
+		questionLib.parseGithubFlavoredMarkdown(result, false);
 		return result;
 	},
 	showQuestionButton: function () {

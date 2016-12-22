@@ -19,32 +19,37 @@
 
 .soundConfig {
 	.modal-content {
-		#soundTab {
-			overflow: hidden;
-			.btn-group {
-				margin-bottom: 20px;
-				span {
-					text-decoration: none;
-				}
-			}
-			#slider-global-volume-description {
-				text-align: center;
-				margin: 0;
-			}
-			.tab-content {
-				padding : 5px 15px;
-				h3 {
+		.modal-header {
+			min-height: initial;
+		}
+		.modal-body {
+			#soundTab {
+				overflow: hidden;
+				.btn-group {
 					margin-bottom: 20px;
+					span {
+						text-decoration: none;
+					}
 				}
-				#countdownRunningSelect,
-				#lobbySoundSelect,
-				#countdownEndSelect {
-					width: 100%;
-					border-radius: $corner-radius;
-					height: 46px;
-					padding: 0 10px;
-					outline: none;
-					margin-bottom: 20px;
+				#slider-global-volume-description {
+					text-align: center;
+					margin: 0;
+				}
+				.tab-content {
+					padding : 5px 15px;
+					h3 {
+						margin-bottom: 20px;
+					}
+					#countdownRunningSelect,
+					#lobbySoundSelect,
+					#countdownEndSelect {
+						width: 100%;
+						border-radius: $corner-radius;
+						height: 46px;
+						padding: 0 10px;
+						outline: none;
+						margin-bottom: 20px;
+					}
 				}
 			}
 		}

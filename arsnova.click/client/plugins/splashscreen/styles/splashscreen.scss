@@ -65,35 +65,6 @@
 
 .modal-body {
 	padding: 0 30px;
-	/* Currently not supported by Chrome and Opera! see http://caniuse.com/#feat=css-hyphens */
-	/*
-	-webkit-hyphens: auto;
-	-moz-hyphens: auto;
-	-ms-hyphens: auto;
-	hyphens: auto;
-	text-align: justify;
-	text-align: -webkit-left;
-	*/
-	text-align: left;
-
-	p {
-		margin-left: 0;
-		margin-right: 0;
-	}
-}
-
-.modal-markdown-body {
-	padding: 15px 30px;
-	/* Currently not supported by Chrome and Opera! see http://caniuse.com/#feat=css-hyphens */
-	/*
-	-webkit-hyphens: auto;
-	-moz-hyphens: auto;
-	-ms-hyphens: auto;
-	hyphens: auto;
-	text-align: justify;
-	text-align: -webkit-left;
-	*/
-
 	p {
 		margin-left: 0;
 		margin-right: 0;
@@ -103,6 +74,7 @@
 .modal-header {
 	border-bottom: none;
 	padding: 20px;
+	min-height: 100px;
 }
 
 .modal-footer {

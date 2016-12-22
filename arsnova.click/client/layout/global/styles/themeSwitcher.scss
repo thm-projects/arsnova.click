@@ -31,7 +31,7 @@
 	/* Default Theme */
 	$fg-text-light: white;
 	$fg_text-dark: black;
-	$fg_a: #ff4500;
+	$fg_a: yellow;
 	$fg_quiz-name: #ffd700;
 	$fg_titel: white;
 
@@ -963,6 +963,14 @@
 			.button-next, .button-success {
 				background-color: $success;
 				color: $success-text-color;
+			}
+			.btn-success,
+			.btn-info,
+			.btn-warning {
+				color: black;
+				&:hover {
+					color: black;
+				}
 			}
 			.button-warning, .button-back, div.warning {
 				background-color: $warning;

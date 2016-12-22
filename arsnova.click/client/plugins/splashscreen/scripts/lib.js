@@ -322,7 +322,7 @@ export function showFullscreenPicture(event) {
 		closeOnButton: '#js-btn-hidePreviewModal, .splashscreen-container-close',
 		instanceId: "resizeableImage",
 		onRendered: function (instance) {
-			const body = instance.templateSelector.find('.modal-markdown-body');
+			const body = instance.templateSelector.find('.modal-body');
 			const objectHtml =  '<img title="' + title + '" src="' + src + '" alt="' + title + '" style="width: 100%">';
 			body.append(objectHtml);
 		}

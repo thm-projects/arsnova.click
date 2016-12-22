@@ -148,7 +148,7 @@ export function parseEmojiBlock(result, i) {
 		const emojiPlain = emoji.replace(/:/g, "");
 		wrapper.append("<span>" + result[i].substring(lastIndex, result[i].indexOf(emoji)) + "</span>");
 		lastIndex = result[i].indexOf(emoji) + emoji.length;
-		wrapper.append("<img class='emojiImage' src='/images/emojis/" + emojiPlain + ".png' alt='" + emojiPlain + ".png' />");
+		wrapper.append("<img class='emojiImage' src='/images/emojis/" + emojiPlain + ".png' alt='" + emojiPlain + ".png' aria-label='" + emojiPlain + "' />");
 	});
 	wrapper.append("<span>" + result[i].substring(lastIndex, result[i].length) + "</span>");
 	result[i] = wrapper.prop("outerHTML");
@@ -186,10 +186,10 @@ export function parseGithubFlavoredMarkdown(result, overrideLineBreaks = true) {
 				parseCodeBlock(result, i);
 				break;
 			case /^([0-9]*\.)?(-)?(\*)? \[x\] /.test(result[i]):
-				result[i] = ("<input class='markdownCheckbox' type='checkbox' checked='checked' disabled='disabled' />" + result[i].replace(/([0-9]*\.)?(-)?(\*)? \[x\] /, ""));
+				result[i] = ("<input class='markdownCheckbox' type='checkbox' checked='checked' disabled='disabled' aria-label='ToDo (checked)' />" + result[i].replace(/([0-9]*\.)?(-)?(\*)? \[x\] /, ""));
 				break;
 			case /^([0-9]*\.)?(-)?(\*)? \[ \] /.test(result[i]):
-				result[i] = ("<input class='markdownCheckbox' type='checkbox' disabled='disabled' />" + result[i].replace(/^([0-9]*\.)?(-)?(\*)? \[ \] /, ""));
+				result[i] = ("<input class='markdownCheckbox' type='checkbox' disabled='disabled' aria-label='ToDo (unchecked)' />" + result[i].replace(/^([0-9]*\.)?(-)?(\*)? \[ \] /, ""));
 				break;
 			case /^[\s]*1\./.test(result[i]):
 				parseOrderedList(result, i);

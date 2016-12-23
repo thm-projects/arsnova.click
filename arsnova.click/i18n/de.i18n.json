@@ -13,9 +13,9 @@
       "arsnova_slogan": "Quiz-App für alles und jeden"
     },
     "cookie_consent": {
-      "message": "arsnova.click ist eine WebApp, welche Cookies zur Sicherstellung der optimalen Weberfahrung nutzt.",
-      "dismiss": "Verstanden!",
-      "learn_more": "Mehr zum Thema Datenschutz & Privatsphäre"
+      "message": "arsnova.click ist eine Web-App, die Cookies verwendet.",
+      "dismiss": "Hinweis nicht mehr anzeigen",
+      "learn_more": "Datenschutzerklärung"
     }
   },
   "region": {
@@ -28,7 +28,7 @@
       },
       "footer_bar": {
         "about": "Über",
-        "home": "Home",
+        "home": "Start",
         "tos": "AGB",
         "imprint": "Impressum",
         "data_privacy": "Datenschutz",
@@ -124,7 +124,7 @@
         "provider": {
           "title": "Dienstanbieter",
           "text": {
-            "1": "Der Betrieb der Webapp arsnova.click ist eine kostenlose Dienstleistung der TransMIT-Gesellschaft für Technologietransfer mbH, Projektbereich für mobile Anwendungen.",
+            "1": "Der Betrieb der Web-App arsnova.click ist eine kostenlose Dienstleistung der TransMIT-Gesellschaft für Technologietransfer mbH, Projektbereich für mobile Anwendungen.",
             "2": "c/o THM – Technische Hochschule Mittelhessen",
             "3": "Fachbereich MNI – Mathematik, Naturwissenschaften und Informatik",
             "4": "Prof. Dr. Klaus Quibeldey-Cirkel",
@@ -195,35 +195,35 @@
   },
   "view": {
     "answeroptions": {
-      "title": "Antworten festlegen",
+      "title": "Antwortoptionen bearbeiten",
       "new_answer": "Neue Antwortoption",
       "answeroptiontext_placeholder": "Antwortoption eingeben",
       "correct": "Richtig",
       "wrong": "Falsch",
       "preview": "Vorschau",
-      "show_answer_content_on_buttons": "Soll auf den Buttons der Inhalt der Antwort angezeigt werden?",
+      "show_answer_content_on_buttons": "Soll auf den Abstimmungsbuttons der Inhalt der Antwort angezeigt werden?",
       "multiple_selection_survey": "Sollen mehrere Antwortoptionen ausgewählt werden können?",
       "description": {
         "default_answer_row": "Ziehe diesen Block in die Liste der erstellten Antwortoptionen, um eine neue Antwort einzufügen.",
-        "added_answers": "Hier siehst du alle bereits erstellten Antwortoptionen dieser Quizfrage. Du kannst die Anordnung der Antworten ändern, in dem du die Liste per Drag & Drop sortierst.",
-        "added_answer_short_text": "Jede Antwortoption enthält einen Buchstaben, der für die Teilnehmer angezeigt werden kann.",
-        "added_answer_text": "Hier kannst du den Text der Antwort eingeben. Die Auszeichnung mit Markdown und LaTeX ist möglich.",
+        "added_answers": "Hier siehst Du alle bereits erstellten Antwortoptionen dieser Quizfrage. Du kannst die Anordnung der Antworten ändern, indem Du die Liste per Drag & Drop sortierst.",
+        "added_answer_short_text": "Jede Antwortoption enthält einen Buchstaben, der für die Teilnehmer/innen angezeigt werden kann.",
+        "added_answer_text": "Hier kannst Du den Text der Antwort eingeben. Eine Auszeichnung mit Markdown und LaTeX ist möglich.",
         "added_answer_is_correct": "Dieser Button regelt, ob die Antwort als richtig oder falsch gewertet werden soll.",
         "added_answer_remove": "Bei einem Klick auf diese Schaltfläche wird die betreffende Antwort gelöscht.",
-        "show_answer_content_on_buttons": "Die Antwortbuttons für die Teilnehmer können entweder mit dem Buchstaben der Antwort oder dem vollständigen Inhalt der Antwort beschriftet werden. Beachte jedoch, dass zuviel Text in der Antwort abhängig vom Endgerät schlecht lesbar sein kann.",
-        "multiple_selection_survey": "Hier kannst du einstellen, ob die Teilnehmer nach dem Klick auf eine Antwort der Umfrage direkt zur Auswertung gelangen sollen, oder ob eine Mehrfachauswahl möglich sein soll.",
-        "preview": "Hier siehst du eine Vorschau der links eingegebenen Antwortoptionen.",
-        "range_area": "Hier kannst du die korrekte Antwort sowie die Toleranzen nach oben und unten angeben. Bitte beachte, dass die Eingabe in natürlichen Zahlen erfolgen muss.",
-        "min_range": "Hier kannst du den unteren Toleranzwert festlegen.",
+        "show_answer_content_on_buttons": "Die Antwortbuttons für die Teilnehmer/innen können entweder mit dem Buchstaben der Antwort oder dem vollständigen Inhalt der Antwort beschriftet werden. Beachte jedoch, dass zuviel Text in der Antwort abhängig vom Endgerät schlecht lesbar sein kann.",
+        "multiple_selection_survey": "Hier kannst Du einstellen, ob die Teilnehmer/innen nach dem Klick auf eine Antwort der Umfrage direkt zur Auswertung gelangen sollen oder ob eine Mehrfachauswahl möglich sein soll.",
+        "preview": "Hier siehst Du eine Smartphone-Vorschau der links eingegebenen Antwortoptionen.",
+        "range_area": "Hier kannst Du die korrekte Antwort und die Toleranzen nach oben und unten angeben. Bitte beachte, dass die Eingabe in natürlichen Zahlen erfolgen muss.",
+        "min_range": "Hier kannst Du den unteren Toleranzwert festlegen.",
         "correct_value": "Diese Antwort ist vollständig korrekt.",
-        "max_range": "Hier kannst du den oberen Toleranzwert festlegen.",
-        "range_slider": "Mit diesem Schieberegler kannst du die oberen und unteren Toleranzen dynamisch verändern. Der korrekte Wert wird dem Mittelwert entsprechen.",
-        "free_text_question_text": "Hier kannst du die richtige Antwort eingeben. Die eingegebenen Antworten der Teilnehmer werden gemäß der Konfiguration gegen diese Antwort geprüft.",
+        "max_range": "Hier kannst Du den oberen Toleranzwert festlegen.",
+        "range_slider": "Mit diesem Schieberegler kannst Du die oberen und unteren Toleranzen dynamisch verändern. Der korrekte Wert wird dem Mittelwert entsprechen.",
+        "free_text_question_text": "Hier kannst Du die richtige Antwort eingeben. Die eingegebenen Antworten der Teilnehmer/innen werden gemäß den Kriterien gegen diese Antwort geprüft.",
         "config_case_sensitive": "Ist diese Option aktiviert, muss die Groß- und Kleinschreibung der eingegebenen Antwort mit der der Referenzantwort übereinstimmen.",
         "config_trim_whitespaces": "Legt fest, ob die Leerzeichen der eingegebenen Antwort geprüft werden sollen.",
-        "config_use_keywords": "Sollte diese Option aktiviert werden, muss die Reihenfolge der Wörter der eingegebenen Antwort der der Referenzantwort entsprechen. Ist diese Option deaktiviert, kann leider keine Prüfung der Leer-/ und Satzzeichen vorgenommen werden.",
+        "config_use_keywords": "Sollte diese Option aktiviert werden, muss die Reihenfolge der Wörter der eingegebenen Antwort der der Referenzantwort entsprechen. Ist diese Option deaktiviert, kann keine Prüfung der Leer- und Satzzeichen vorgenommen werden.",
         "config_use_punctuation": "Diese Option legt fest, ob die Satzzeichen der eingegebenen Antwort geprüft werden sollen.",
-        "check_answer": "Hier kannst du mögliche Antworten der Teilnehmer gegen deine Referenzantwort und die aktuelle Konfiguration testen"
+        "check_answer": "Hier kannst Du mögliche Antworten der Teilnehmer/innen gegen deine Referenzantwort und unter Berücksichtigung der aktuellen Kriterien testen"
       },
       "ranged_question": {
         "title": "Intervall der richtigen Antworten",
@@ -257,8 +257,8 @@
         "2": "Eine Teilnahme am Quiz ist nicht möglich."
       },
       "description": {
-        "nickname_input": "Hier kannst du einen Namen eingeben, der dich am Ende des Quizzes in der Rangliste von den anderen Mitspielern unterscheidet.",
-        "choose_selectable_nick": "Du kannst aus dieser Liste einen der verfügbaren Nicknamen auswählen."
+        "nickname_input": "Hier kannst Du dir einen Namen geben, der in der Quiz-Lobby und in der Rangliste angezeigt wird.",
+        "choose_selectable_nick": "Du kannst aus dieser Liste einen Nicknamen auswählen."
       }
     },
     "hashtag_management": {
@@ -270,7 +270,7 @@
       "create_session": "Mach neu!",
       "create_demo_session": "Starte Demo Quiz!",
       "quiz_management": "Gespeicherte Quizze",
-      "available_sessions": "Diese Quizze sind in deinem Browser:",
+      "available_sessions": "Diese Quizze sind in Deinem Browser:",
       "session_management": "Quizverwaltung",
       "import": "Quiz importieren",
       "delete_session": "Quiz löschen",
@@ -288,12 +288,12 @@
     },
     "hashtag_view": {
       "hashtag_input": {
-        "already_exists": "Dieser Quizname ist vergeben.",
+        "already_exists": "Dieser Quizname ist vergeben",
         "illegal_chars": "Der Quizname enthält ungültige Zeichen"
       },
       "demo_quiz": {
         "title": {
-          "1": "Nicht sicher, wo du anfangen sollst?",
+          "1": "Nicht sicher, wo Du anfangen sollst?",
           "2": "Gib \"Demo Quiz\" ein!"
         }
       }
@@ -332,7 +332,7 @@
       "back_to_lobby": "Zurück zur Lobby",
       "global_ranking": "Globale Rangliste",
       "show_question": "Zeige die Frage",
-      "show_question_plural": "Zeige Frage",
+      "show_question_plural": "Zeige Fragen",
       "start_round": "Starte Quiz",
       "start_round_plural": "Starte Runde",
       "confirm_read": "Ich habe die Frage gelesen",
@@ -344,7 +344,7 @@
       "correct_answer": "Richtige Antwort"
     },
     "lobby": {
-      "title": "Quiz Lobby",
+      "title": "Quiz-Lobby",
       "yes": "Ja",
       "no": "Nein",
       "ready": "Warten, dass es losgeht...",
@@ -353,7 +353,7 @@
       "start_quiz": "Los geht's!",
       "kick_member_confirmation": "Soll die Person '<span id=\"nickName\"></span>' aus dem Quiz entfernt werden?",
       "add_kicked_member_to_ban_list": "Den Nicknamen für immer bannen",
-      "waiting_for_players": "Warten auf die Mitspielerinnen und Mitspieler..."
+      "waiting_for_players": "Warten auf die Anderen..."
     },
     "nickname_categories": {
       "title": "Nicknamen vorgeben",
@@ -365,7 +365,7 @@
       "chosen_nicknames": "Ausgewählte Nicknamen",
       "no_nicks_selected": "Keine Nicknamen ausgewählt, somit können die Teilnehmenden ihre Nicknamen frei wählen.",
       "block_illegal_nicks": "Blockiere unangemessene Nicknamen",
-      "restrict_to_cas": "Auf CAS User beschränken (nur für TH Mittelhessen)",
+      "restrict_to_cas": "User müssen sich anmelden (nur für TH Mittelhessen)",
       "category": {
         "disney": "Disney-Figuren",
         "science": "Wissenschaft",
@@ -378,21 +378,21 @@
       }
     },
     "question_type": {
-      "title": "Fragetyp bearbeiten",
+      "title": "Fragetyp auswählen",
       "currentType": "Aktueller Typ der Quizfrage:",
       "description": {
-        "type_wrapper": "Hier kannst du den Typ der Quizfrage ändern. Jeder Typ hat unterschiedliche Einstellungen. Ändere den Typ durch einen Klick auf die jeweilige Box.",
+        "type_wrapper": "Hier kannst Du den Typ der Quizfrage ändern. Jeder Typ hat unterschiedliche Einstellungen. Ändere den Typ durch einen Klick auf die jeweilige Box.",
         "SingleChoiceQuestion": "Single-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen genau eine als richtig markiert werden muss.",
         "YesNoSingleChoiceQuestion": "Ja|Nein-Fragen enthalten nur zwei Antwortopionen (Ja und Nein), von denen eine als richtig markiert werden muss.",
-        "TrueFalseSingleChoiceQuestion": "Wahr|Falsch-Fragen enthalten ebenfalls nur zwei Antwortopionen (Wahr und Falsch), von denen eine als richtig markiert werden muss.",
+        "TrueFalseSingleChoiceQuestion": "Wahr|Falsch-Fragen enthalten nur zwei Antwortopionen (Wahr und Falsch), von denen eine als richtig markiert werden muss.",
         "MultipleChoiceQuestion": "Multiple-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen beliebig viele (mindestens jedoch eine) als richtig markiert werden können.",
         "RangedQuestion": "Für die Schätzfrage muss eine Ganzzahl als richtig angegeben werden. Zusätzlich können Toleranzen nach oben und unten eingegeben werden.",
-        "FreeTextQuestion": "In der Freitextfrage muss der Teilnehmer einen beliebigen Text eingeben. Dieser wird mit dem vorab eingegebenen Referenzwert verglichen.",
-        "SurveyQuestion": "Umfragen enthalten beliebig viele Antwortoptionen, von denen keine als richtig oder falsch markiert werden darf."
+        "FreeTextQuestion": "Bei der Freitextfrage muss die Teilnehmerin oder der Teilnehmer einen Text eingeben. Dieser wird mit dem vorab eingegebenen Referenzwert verglichen.",
+        "SurveyQuestion": "Umfragen enthalten beliebig viele Antwortoptionen, die nicht bewertet werden."
       }
     },
     "questions": {
-      "title": "Fragetext eingeben",
+      "title": "Frage bearbeiten",
       "enter_question_here": "Gib hier den Text der Frage ein",
       "preview": "Vorschau",
       "single_choice_question": "Single-Choice-Frage",
@@ -403,12 +403,12 @@
       "ranged_question": "Schätzfrage",
       "free_text_question": "Freitextfrage",
       "description": {
-        "preview": "Hier siehst du eine Vorschau des links eingegebenen Textes."
+        "preview": "Hier siehst Du, wie der Text auf einem Smartphone angezeigt wird."
       }
     },
     "quiz_manager": {
-      "title": "Quiz Manager",
-      "available_questions_title": "Verfügbare Quizfragen",
+      "title": "Quiz-Manager",
+      "available_questions_title": "Verfügbare Vorlagen",
       "added_questions_title": "Erstellte Quizfragen",
       "session_invalid": "Das Quiz enthält noch unvollständige Quizfragen",
       "connection_lost": "Die Verbindung zum Server wurde unterbrochen",
@@ -417,7 +417,7 @@
           "btn_group": "Auswahl an Einstellungen für das Quiz"
         },
         "question_type": {
-          "long": "Fragetyp bearbeiten",
+          "long": "Fragetyp auswählen",
           "short": "Typ"
         },
         "question_text": {
@@ -429,23 +429,23 @@
           "short": "Antworten"
         },
         "timer": {
-          "long": "Timer bearbeiten",
-          "short": "Timer"
+          "long": "Countdown einstellen",
+          "short": "Countdown"
         }
       },
       "description": {
-        "available_questions": "Hier siehst du alle Fragetypen, aus denen du wählen kannst. Jeder Fragetyp bietet unterschiedliche Voreinstellungen und Möglichkeiten zur Gestaltung des Quizzes",
-        "added_questions": "Hier findest du alle deine Quizfragen, die im Quiz vorhanden sind. Um eine Quizfrage dem Quiz hinzuzufügen, ziehe sie entweder aus dem linken Stapel hierher oder klicke im linken Stapel auf die jeweilige Quizfrage. Mit einem Klick auf die eingefügte Frage kannst du die Inhalte der Quizfrage einstellen.",
-        "back_button": "Du kannst jederzeit zurück gehen. Das Quiz wird bei Eingaben sofort gespeichert.",
-        "forward_button": "Sofern das Quiz gültig ist und eine Verbindung zum Server besteht, kannst du zur Quizlobby fortfahren und das Quiz für Teilnehmer öffnen."
+        "available_questions": "Hier siehst Du alle Fragetypen, aus denen Du wählen kannst. Jeder Fragetyp bietet unterschiedliche Voreinstellungen und Möglichkeiten zur Gestaltung des Quiz.",
+        "added_questions": "Hier findest Du alle deine Quizfragen, die im Quiz vorhanden sind. Um eine Quizfrage dem Quiz hinzuzufügen, ziehe sie entweder aus dem linken Stapel hierher oder klicke im linken Stapel auf die jeweilige Quizfrage. Mit einem Klick auf die eingefügte Frage kannst Du die Inhalte der Quizfrage einstellen.",
+        "back_button": "Du kannst jederzeit zurückgehen. Das Quiz wird beim Eingeben sofort gespeichert.",
+        "forward_button": "Sofern das Quiz gültig ist und eine Verbindung zum Server besteht, kannst Du zur Quiz-Lobby gehen und das Quiz eröffnen."
       }
     },
     "quiz_summary": {
       "title": "Zusammenfassung",
-      "quiz_name": "Name der Quizrunde",
-      "quiz_url": "URL für Teilnehmer/innen",
-      "question_amount": "Gesamtanzahl der Quizfragen",
-      "validation_question_group": "Validierung der gesamten Quizrunde",
+      "quiz_name": "Quizname",
+      "quiz_url": "URL",
+      "question_amount": "Anzahl Fragen",
+      "validation_question_group": "Validierung des gesamten Quiz",
       "successful": "Erfolgreich",
       "failed": "Fehlgeschlagen",
       "correct": "Richtig",
@@ -455,8 +455,8 @@
       "type": "Typ",
       "answer": "Antwort",
       "answer_plural": "Antworten",
-      "answer_configuration": "Konfiguration der Antwort",
-      "answer_configuration_plural": "Konfiguration der Antworten",
+      "answer_configuration": "Formale Kriterien der Antwort",
+      "answer_configuration_plural": "Formale Kriterien der Antworten",
       "timer": "Countdown",
       "second": "Sekunde",
       "second_plural": "Sekunden",
@@ -474,9 +474,9 @@
           "no_valid_answers": "Mindestens eine Antwort muss als richtig markiert sein",
           "one_valid_answer_required": "Es muss exakt eine Antwort als richtig markiert sein",
           "no_valid_answer_required": "Bei einer Umfrage sind Antworten weder richtig noch falsch",
-          "invalid_range": "Die minimale Reichweite muss geringer als die maximale Reichweite sein",
-          "invalid_correct_value": "Der richtige Wert muss innerhalb der Reichweite liegen",
-          "answer_text_empty": "Der Text der Antwort darf nicht leer sein"
+          "invalid_range": "Der Minimalwert ist größer als der Maximalwert",
+          "invalid_correct_value": "Der richtige Wert muss zwischen Minimal- und Maximalwert liegen",
+          "answer_text_empty": "Die Antwort darf nicht leer sein"
         }
       },
       "edit_quiz": "Quiz bearbeiten",
@@ -485,15 +485,15 @@
       "no_selected_nicks": "Keine Nicknamen vorgegeben. Alle Namen sind erlaubt.",
       "hide_selected_nicks": "Verberge Nicknamen",
       "show_selected_nicks": "Zeige Nicknamen",
-      "isRestrictingRudeNicks": "Blockiere unangemessene Nicknamen",
-      "isRestrictingToCAS": "Teilnehmer müssen sich per CAS authentifizieren",
+      "isRestrictingRudeNicks": "Unangemessene Nicknamen blockieren",
+      "isRestrictingToCAS": "Teilnehmer/innen müssen sich anmelden",
       "true": "Ja",
       "false": "Nein",
       "description": {
         "header": "Hier ist die Zusammenfassung der gesamten Quizrunde zu sehen",
-        "session_url": "Unter dieser URL können Teilnehmer das Quiz betreten, sobald du es freigibst",
-        "question_group_validation": "Die Validierung der Quizrunde schlägt fehl, sofern das Quiz noch nicht fertiggstellt ist. Dazu zählen nicht vorhandene Quizfragen, fehlende oder unvollständige Antwortoptionen, nicht gesetzte Timer, usw.",
-        "restrict_to_cas": "Ist diese Einstellung aktiv, müssen sich die Teilnehmer am zentralen Authentifizierungsdienst der Technischen Hochschule Mittelhessen anmelden, um am Quiz teilnehmen zu können",
+        "session_url": "Unter dieser URL können die Teilnehmer/innen dem Quiz beitreten, sobald Du es freigibst",
+        "question_group_validation": "Die Validierung der Quizrunde schlägt fehl, sofern das Quiz noch nicht fertiggstellt ist. Dazu zählen nicht vorhandene Quizfragen, fehlende oder unvollständige Antwortoptionen, nicht gesetzte Timer usw.",
+        "restrict_to_cas": "Ist diese Einstellung aktiv, müssen sich die Teilnehmer/innen am zentralen Authentifizierungsdienst der Technischen Hochschule Mittelhessen anmelden, um am Quiz teilnehmen zu können",
         "question_item": "Dieser Bereich enthält Informationen zur ausgewählten Quizfrage.",
         "validation_errors": "Nützlich bei der Fehlersuche können die hier aufgelisteten Validierungsfehler sein."
       }
@@ -544,7 +544,7 @@
       "title": "Countdown einstellen",
       "second": "Sekunde",
       "second_plural": "Sekunden",
-      "description": "Hier kannst du den Countdown für die Quizfrage einstellen. Sobald er abläuft, oder alle Teilnehmer eine Antwort abgegeben haben, wird die Quizrunde beendet."
+      "description": "Hier kannst Du den Countdown für die Quizfrage einstellen. Sobald er abläuft oder alle Teilnehmer/innen eine Antwort abgegeben haben, wird die Quizrunde beendet."
     },
     "translation": {
       "translations": "Deine Sprache",
@@ -596,10 +596,10 @@
     },
     "sound": {
       "running_music": "Countdown (Laufend)",
-      "lobby_music": "Quiz Lobby",
+      "lobby_music": "Quiz-Lobby",
       "finish_music": "Countdown (Ende)",
       "running_music_detailed": "Sound während des Countdowns",
-      "lobby_music_detailed": "Sound in der Quiz Lobby",
+      "lobby_music_detailed": "Sound in der Quiz-Lobby",
       "finish_music_detailed": "Sound zum Ende des Countdowns",
       "whistle": "Pfeifen",
       "silence": "Kein Ton",
@@ -617,19 +617,19 @@
       "question_and_answer": {
         "answeroption": "Antwort",
         "answeroption_plural": "Mögliche Antworten",
-        "min_range": "Minimale Toleranz",
+        "min_range": "Minimalwert",
         "correct_value": "Richtiger Wert",
-        "max_range": "Maximale Toleranz",
+        "max_range": "Maximalwert",
         "reference_value": "Referenzwert"
       },
       "edit_session_confirmation": {
-        "title": "Möchtest du das Quiz bearbeiten?",
+        "title": "Möchtest Du das Quiz bearbeiten?",
         "text": "Alle Teilnehmenden werden abgemeldet und die Rangliste wird gelöscht.",
         "continue": "Fortfahren?"
       },
       "return_to_lobby": {
         "title": "Warnung",
-        "text": "Wenn du zur Quiz Lobby zurückkehrst, werden alle bereits durchgeführten Quizrunden zurückgesetzt.",
+        "text": "Wenn Du zur Quiz-Lobby zurückkehrst, werden alle bereits durchgeführten Quizrunden zurückgesetzt.",
         "continue": "Fortfahren?"
       },
       "error": {
@@ -637,14 +637,14 @@
         "set_text_error": "Der Text des Splashscreens kann nur gesetzt werden, nachdem er gerendered wurde!",
         "error_messages": {
           "Internal Server Error": "Interner Serverfehler",
-          "update_failed": "Es ist ein Fehler bei der Aktualisierung deiner Frage aufgetreten.",
+          "update_failed": "Es ist ein Fehler bei der Aktualisierung Deiner Frage aufgetreten.",
           "session_exists": "Dieses Quiz existiert bereits!",
           "session_exists_warning": "Der Name dieses Quiz ist bereits vergeben.",
           "session_exists_new": "Gib einen neuen ein:",
           "session_not_exists": "Dieses Quiz existiert nicht!",
           "hashtag_exists": "Dieser Quizname existiert bereits!",
           "session_not_available": "Dieser Quizrunde kann aktuell nicht beigetreten werden.",
-          "private_browsing": "Im Privatmodus deines Browsers funktioniert arsnova.click leider nur als Teilnehmer/in, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von arsnova.click den Privatmodus deaktivieren und arsnova.click erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.",
+          "private_browsing": "Im Privatmodus Deines Browsers funktioniert arsnova.click leider nur als Teilnehmer/in, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von arsnova.click den Privatmodus deaktivieren und arsnova.click erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.",
           "kicked_from_quiz": "Du wurdest aus dem Quiz geworfen!",
           "nick_already_exists": "Dieser Benutzername existiert bereits",
           "export_failed": "Konnte die Quizdaten nicht exportieren! - %s",

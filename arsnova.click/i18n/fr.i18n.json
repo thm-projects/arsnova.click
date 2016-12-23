@@ -6,6 +6,8 @@
     "delete": "Supprimer",
     "save": "Enregistrer",
     "abort": "Annuler",
+    "yes": "Oui",
+    "no": "Aucun",
     "close_window": "Fermer la fenêtre",
     "aria_description": {
       "arsnova_slogan": "Application quiz pour tout/tous"
@@ -193,7 +195,8 @@
   },
   "view": {
     "answeroptions": {
-      "title": "2/4 Définir les réponses",
+      "title": "Définir les réponses",
+      "new_answer": "Nouvelle réponse",
       "answeroptiontext_placeholder": "Option de réponse",
       "correct": "Vrai",
       "wrong": "Faux",
@@ -230,13 +233,16 @@
       },
       "free_text_question": {
         "title": "Réponse correcte:",
+        "check_answer_title": "Testez les entrées possibles:",
         "config_case_sensitive": "Respecter l’emploi de minuscule/majuscule",
         "config_trim_whitespaces": "Respecter les espaces dans les réponses",
         "config_use_keywords": "Respecter l’ordre des mots",
         "config_use_punctuation": "Respecter la ponctuation dans les réponses",
         "onText": "Oui",
         "offText": "Non",
-        "text_placeholder": "Donne la réponse ici"
+        "text_placeholder": "Donne la réponse ici",
+        "check_correct": "La réponse saisie correspond à la référence fournie.",
+        "check_incorrect": "La réponse saisie ne correspond pas à la référence fournie."
       }
     },
     "choose_nickname": {
@@ -249,6 +255,10 @@
       "no_selectable_nick_available": {
         "1": "Tous les pseudos disponibles ont déjà été choisis.",
         "2": "Une participation au quiz n’est pas possible."
+      },
+      "description": {
+        "nickname_input": "Ici vous pouvez entrer un nom, qui est différent des autres joueurs.",
+        "choose_selectable_nick": "Vous pouvez sélectionner l'un des pseudonymes disponibles dans cette liste."
       }
     },
     "hashtag_management": {
@@ -268,7 +278,13 @@
       "export": "Exporter quiz",
       "valid_question": "Tournée de quiz valable",
       "invalid_question": "Tournée de quiz non-valable",
-      "no_sessions": "Il n'y a pas des quiz stockés dans votre navigateur."
+      "no_sessions": "Il n'y a pas des quiz stockés dans votre navigateur.",
+      "aria_description": {
+        "hashtag-input-field": "Ingrese el Quizname aquí",
+        "joinSession": "Participar en un concurso activo",
+        "addNewHashtag": "Crear un nuevo cuestionario",
+        "splashscreen_description": "Lista de todos los cuestionarios válidos e inválidos en su navegador"
+      }
     },
     "hashtag_view": {
       "hashtag_input": {
@@ -361,11 +377,23 @@
         "turing_award": "Turing-Award"
       }
     },
+    "question_type": {
+      "title": "Modifier le type de question",
+      "currentType": "Type de question actuel:",
+      "description": {
+        "type_wrapper": "Ici, vous pouvez modifier le type de question du quiz. Chaque type a des réglages différents. Modifiez le type en cliquant sur la case correspondante.",
+        "SingleChoiceQuestion": "Les questions à choix unique contiennent autant d'options de réponse que vous le souhaitez, l'une d'entre elles doit être marquée comme correcte.",
+        "YesNoSingleChoiceQuestion": "Oui|Aucune question ne contient que deux réponses (oui et non), l'une d'elles doit être marquée comme correcte.",
+        "TrueFalseSingleChoiceQuestion": "Vrai|Les fausses questions ne contiennent que deux réponses (Vrai et Faux), l'une d'elles doit être marquée comme correcte.",
+        "MultipleChoiceQuestion": "Les questions à choix multiples contiennent autant d'options de réponse que vous le souhaitez, dont autant que vous le souhaitez (au moins un) peuvent être marqués comme corrects.",
+        "RangedQuestion": "Pour la question à distance, un entier doit être spécifié comme correct. De plus, des tolérances supérieure et inférieure peuvent être saisies.",
+        "FreeTextQuestion": "Dans la requête texte libre, le participant doit entrer n'importe quel texte. Cette valeur correspond à la valeur de référence fournie.",
+        "SurveyQuestion": "Les enquêtes peuvent contenir un certain nombre de réponses, aucune ne peut être marquée comme bonne ou mauvaise."
+      }
+    },
     "questions": {
-      "title": "1/4 Entrer le texte de la question",
+      "title": "Entrer le texte de la question",
       "enter_question_here": "Donne ici le texte de la question",
-      "format": "Format",
-      "edit": "Modifier",
       "preview": "Aperçu",
       "single_choice_question": "Question choix simple (parmi toutes, une réponse est correcte)",
       "single_choice_question_yes_no": "Question Oui|Non",
@@ -373,10 +401,47 @@
       "multiple_choice_question": "Question choix multiple (une ou plusieurs réponses sont justes)",
       "survey_question": "Sondage (Réponses ne sont ni vrai ni fausse)",
       "ranged_question": "Question d’estimation (chiffres dans la fourchette de valeur sont correctes)",
-      "free_text_question": "Réponse courte (texte correcte si identique aux prescriptions)"
+      "free_text_question": "Réponse courte (texte correcte si identique aux prescriptions)",
+      "description": {
+        "preview": "Voici un aperçu du texte saisi à gauche."
+      }
+    },
+    "quiz_manager": {
+      "title": "Gestionnaire de Quiz",
+      "available_questions_title": "Questions disponibles",
+      "added_questions_title": "Questions créées",
+      "session_invalid": "Le quiz contient des questions incomplètes",
+      "connection_lost": "La connexion au serveur est perdue",
+      "details": {
+        "aria": {
+          "btn_group": "Liste des paramètres du quiz"
+        },
+        "question_type": {
+          "long": "Modifier le type de question",
+          "short": "Type"
+        },
+        "question_text": {
+          "long": "Modifier le texte de la question",
+          "short": "Texte de la question"
+        },
+        "answeroptions": {
+          "long": "Modifier les options de réponses",
+          "short": "Réponses"
+        },
+        "timer": {
+          "long": "Modifier la minuterie",
+          "short": "Minuteur"
+        }
+      },
+      "description": {
+        "available_questions": "Ici vous pouvez voir tous les types de questions à partir de laquelle vous pouvez choisir. Chaque type de question offre différents presets et possibilités pour la conception des quiz",
+        "added_questions": "Ici vous trouverez toutes vos questions de quiz, qui sont disponibles dans le quiz. Pour ajouter une question de quiz au quiz, faites-la glisser de la pile de gauche ou cliquez sur la question de quiz dans la pile de gauche. En cliquant sur la question insérée, vous pouvez définir le contenu de la question.",
+        "back_button": "Vous pouvez revenir en arrière n'importe quand. Le quiz est enregistré immédiatement.",
+        "forward_button": "Si le quiz est valide et que vous êtes connecté au serveur, vous pouvez passer au lobby du quiz et ouvrir le quiz pour les participants."
+      }
     },
     "quiz_summary": {
-      "title": "4/4 Résumé",
+      "title": "Résumé",
       "quiz_name": "Nom de la tournée de quiz",
       "quiz_url": "Adresse URL pour participants",
       "question_amount": "Nombre total des questions du quiz",
@@ -423,7 +488,15 @@
       "isRestrictingRudeNicks": "Bloquer surnoms inappropriés",
       "isRestrictingToCAS": "Les participants doivent authentifier via CAS",
       "true": "Oui",
-      "false": "Non"
+      "false": "Non",
+      "description": {
+        "header": "Voici le résumé de l'ensemble du quiz rond",
+        "session_url": "Sous cette URL, les participants peuvent participer au quiz dès que vous le relâchez",
+        "question_group_validation": "La validation du quiz rond échoue si le quiz n'est pas encore terminé. Cela inclut les questionnaires non existants, les options de réponse manquantes ou incomplètes, les temporisations non définies, etc.",
+        "restrict_to_cas": "Si ce réglage est actif, les participants doivent s'inscrire au service central d'authentification de l'Université des Sciences Appliquées de Mittelhessen afin de participer au quiz",
+        "question_item": "Cette section contient des informations sur la question sélectionnée.",
+        "validation_errors": "Les erreurs de validation listées ici peuvent être utiles pour le dépannage."
+      }
     },
     "theme_switcher": {
       "set_theme": "Choisir un style",
@@ -468,9 +541,10 @@
       }
     },
     "timer": {
-      "set_countdown": "3/4 Régler le compte à rebours",
+      "set_countdown": "Régler le compte à rebours",
       "second": "seconde",
-      "second_plural": "secondes"
+      "second_plural": "secondes",
+      "description": "Ici, vous pouvez définir le compte à rebours pour la question du quiz. Dès qu'il expire ou que tous les participants ont répondu, le rond-point est terminé."
     },
     "translation": {
       "translations": "Langues disponibles:",
@@ -506,9 +580,9 @@
       "option_centered": "centré",
       "option_right": "droite",
       "tooltip": {
-        "info": "Info",
-        "preview": "Aperçu",
         "bold": "Gras",
+        "italic": "Italique",
+        "line_through": "Barrée",
         "heading": "Titre",
         "hyperlink": "Lien hypertexte",
         "unordered_list": "Liste non assortie",
@@ -516,24 +590,38 @@
         "latex": "Caractérisation LaTeX",
         "code": "Caractérisation Code",
         "citation": "Citation",
-        "image": "Image",
-        "youtube": "YouTube",
-        "vimeo": "Vimeo"
+        "image": "Image"
       },
       "info_content": "Tu peux caractériser des textes à l'aide de <a target='_blank' class='hyperlink' href='https://fr.wikipedia.org/wiki/Markdown'>Markdown</a>. Les options de Markdown les plus utilisées sont présentées sous forme d'icônes au dessus du champ de saisie. De plus, arsnova.click soutient <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
     },
     "sound": {
-      "title": "Son pendant le compte à rebours",
-      "lobby_music": "Son dans le hall quiz",
-      "finish_music": "Son à la fin du compte à rebours",
+      "running_music": "Compte à rebours (en cours)",
+      "lobby_music": "Quiz Lobby",
+      "finish_music": "Compte à rebours (Fin)",
+      "running_music_detailed": "Son pendant le compte à rebours",
+      "lobby_music_detailed": "Son dans le hall quiz",
+      "finish_music_detailed": "Son à la fin du compte à rebours",
       "whistle": "Sifflet",
       "silence": "Pas de son",
+      "global_volume": "Volume global",
       "volume": "Attribuer le volume",
       "inactive": "Son désactivé",
       "active": "Son activé",
-      "random": "Sélection aléatoire"
+      "activated": "Activé",
+      "deactivated": "Désactivé",
+      "random": "Sélection aléatoire",
+      "play": "Jouer",
+      "stop": "Arrêtez"
     },
     "splashscreen": {
+      "question_and_answer": {
+        "answeroption": "Répondre",
+        "answeroption_plural": "Des réponses possibles",
+        "min_range": "Tolérance inférieure",
+        "correct_value": "Valeur correcte",
+        "max_range": "Tolérance supérieure",
+        "reference_value": "Valeur de référence"
+      },
       "edit_session_confirmation": {
         "title": "Voulez-vous modifier le quiz?",
         "text": "Tous les participants seront supprimés et le classement seront supprimés.",

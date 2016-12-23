@@ -382,7 +382,7 @@
       "currentType": "Aktueller Typ der Quizfrage:",
       "description": {
         "type_wrapper": "Hier kannst du den Typ der Quizfrage ändern. Jeder Typ hat unterschiedliche Einstellungen. Ändere den Typ durch einen Klick auf die jeweilige Box.",
-        "SingleChoiceQuestion": "Single-Choice-Fragen enhalten beliebig viele Antwortoptionen, von denen genau eine als richtig markiert werden muss.",
+        "SingleChoiceQuestion": "Single-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen genau eine als richtig markiert werden muss.",
         "YesNoSingleChoiceQuestion": "Ja|Nein-Fragen enthalten nur zwei Antwortopionen (Ja und Nein), von denen eine als richtig markiert werden muss.",
         "TrueFalseSingleChoiceQuestion": "Wahr|Falsch-Fragen enthalten ebenfalls nur zwei Antwortopionen (Wahr und Falsch), von denen eine als richtig markiert werden muss.",
         "MultipleChoiceQuestion": "Multiple-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen beliebig viele (mindestens jedoch eine) als richtig markiert werden können.",
@@ -441,15 +441,7 @@
       }
     },
     "quiz_summary": {
-      "description": {
-        "header": "Hier ist die Zusammenfassung der gesamten Quizrunde zu sehen",
-        "session_url": "Unter dieser URL können Teilnehmer das Quiz betreten, sobald du es freigibst",
-        "question_group_validation": "Die Validierung der Quizrunde schlägt fehl, sofern das Quiz noch nicht fertiggstellt ist. Dazu zählen nicht vorhandene Quizfragen, fehlende oder unvollständige Antwortoptionen, nicht gesetzte Timer, usw.",
-        "restrict_to_cas": "Ist diese Einstellung aktiv, müssen sich die Teilnehmer am zentralen Authentifizierungsdienst der Technischen Hochschule Mittelhessen anmelden, um am Quiz teilnehmen zu können",
-        "question_item": "Dieser Bereich enthält Informationen zur ausgewählten Quizfrage.",
-        "validation_errors": "Nützlich bei der Fehlersuche können die hier aufgelisteten Validierungsfehler sein."
-      },
-      "title": "4/4: Zusammenfassung",
+      "title": "Zusammenfassung",
       "quiz_name": "Name der Quizrunde",
       "quiz_url": "URL für Teilnehmer/innen",
       "question_amount": "Gesamtanzahl der Quizfragen",
@@ -496,7 +488,15 @@
       "isRestrictingRudeNicks": "Blockiere unangemessene Nicknamen",
       "isRestrictingToCAS": "Teilnehmer müssen sich per CAS authentifizieren",
       "true": "Ja",
-      "false": "Nein"
+      "false": "Nein",
+      "description": {
+        "header": "Hier ist die Zusammenfassung der gesamten Quizrunde zu sehen",
+        "session_url": "Unter dieser URL können Teilnehmer das Quiz betreten, sobald du es freigibst",
+        "question_group_validation": "Die Validierung der Quizrunde schlägt fehl, sofern das Quiz noch nicht fertiggstellt ist. Dazu zählen nicht vorhandene Quizfragen, fehlende oder unvollständige Antwortoptionen, nicht gesetzte Timer, usw.",
+        "restrict_to_cas": "Ist diese Einstellung aktiv, müssen sich die Teilnehmer am zentralen Authentifizierungsdienst der Technischen Hochschule Mittelhessen anmelden, um am Quiz teilnehmen zu können",
+        "question_item": "Dieser Bereich enthält Informationen zur ausgewählten Quizfrage.",
+        "validation_errors": "Nützlich bei der Fehlersuche können die hier aufgelisteten Validierungsfehler sein."
+      }
     },
     "theme_switcher": {
       "set_theme": "Dein Stil",
@@ -580,8 +580,6 @@
       "option_centered": "zentriert",
       "option_right": "rechts",
       "tooltip": {
-        "info": "Info",
-        "preview": "Vorschau",
         "bold": "Fett",
         "italic": "Kursiv",
         "line_through": "Durchgestrichen",
@@ -592,9 +590,7 @@
         "latex": "LaTeX-Auszeichnung",
         "code": "Code-Auszeichnung",
         "citation": "Zitat",
-        "image": "Bild",
-        "youtube": "YouTube",
-        "vimeo": "Vimeo"
+        "image": "Bild"
       },
       "info_content": "Du kannst Text mit <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown-Optionen werden in Form von Schaltflächen über dem Eingabefeld angeboten. Zudem unterstützt arsnova.click <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown.</a>"
     },

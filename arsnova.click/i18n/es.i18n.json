@@ -6,6 +6,8 @@
     "delete": "Borrar",
     "save": "Guardar",
     "abort": "Cancelar",
+    "yes": "Sí",
+    "no": "No",
     "close_window": "cerrar ventana",
     "aria_description": {
       "arsnova_slogan": "App de Cuestionario para todo(s)"
@@ -193,7 +195,8 @@
   },
   "view": {
     "answeroptions": {
-      "title": "2/4 Establecer respuestas",
+      "title": "Establecer respuestas",
+      "new_answer": "Nueva respuesta",
       "answeroptiontext_placeholder": "Opción de respuesta necesario",
       "correct": "Correcto",
       "wrong": "Incorrecto",
@@ -230,13 +233,16 @@
       },
       "free_text_question": {
         "title": "Respuesta Correcta",
+        "check_answer_title": "Prueba de posibles entradas:",
         "config_case_sensitive": "Prestar atención al uso de minúsculas y mayúsculas",
         "config_trim_whitespaces": "Prestar atención al espacio en respuesta",
         "config_use_keywords": "Prestar atención al orden de palabras",
         "config_use_punctuation": "Prestar atención a los signos de puntuación",
         "onText": "Sí",
         "offText": "No",
-        "text_placeholder": "Ingresa aquí tu respuesta"
+        "text_placeholder": "Ingresa aquí tu respuesta",
+        "check_correct": "La respuesta introducida coincide con la referencia proporcionada.",
+        "check_incorrect": "La respuesta introducida no coincide con la referencia proporcionada."
       }
     },
     "choose_nickname": {
@@ -249,6 +255,10 @@
       "no_selectable_nick_available": {
         "1": "Todos los nombres de usuario disponibles ya fueron elegidos.",
         "2": "No es posible participar en el cuestionario."
+      },
+      "description": {
+        "nickname_input": "Aquí puede introducir un nombre, que es diferente de los otros jugadores.",
+        "choose_selectable_nick": "Puede seleccionar uno de los apodos disponibles de esta lista."
       }
     },
     "hashtag_management": {
@@ -268,7 +278,13 @@
       "export": "Exportar cuestionario",
       "valid_question": "Pregunta valida",
       "invalid_question": "Pregunta invalida",
-      "no_sessions": "No hay pruebas almacenadas en su navegador."
+      "no_sessions": "No hay pruebas almacenadas en su navegador.",
+      "aria_description": {
+        "hashtag-input-field": "Ingrese el Quizname aquí",
+        "joinSession": "Participar en un concurso activo",
+        "addNewHashtag": "Crear un nuevo cuestionario",
+        "splashscreen_description": "Lista de todos los cuestionarios válidos e inválidos en su navegador"
+      }
     },
     "hashtag_view": {
       "hashtag_input": {
@@ -361,11 +377,23 @@
         "turing_award": "Turing-Award"
       }
     },
+    "question_type": {
+      "title": "Editar tipo de pregunta",
+      "currentType": "Tipo de pregunta actual:",
+      "description": {
+        "type_wrapper": "Aquí puede cambiar el tipo de pregunta del cuestionario. Cada tipo tiene configuraciones diferentes. Cambie el tipo haciendo clic en la casilla correspondiente.",
+        "SingleChoiceQuestion": "Las preguntas de una sola opción contienen tantas opciones de respuesta como desee, una de ellas debe estar marcada como correcta.",
+        "YesNoSingleChoiceQuestion": "Sí|Ninguna pregunta contiene sólo dos respuestas (sí y no), una de ellas debe estar marcada como correcta.",
+        "TrueFalseSingleChoiceQuestion": "Verdadero Las preguntas falsas también contienen sólo dos respuestas (Verdadero y Falso), una de ellas debe estar marcada como correcta.",
+        "MultipleChoiceQuestion": "Las preguntas de opción múltiple contienen tantas opciones de respuesta como quieras, de las cuales tantas como quieras (al menos una) se pueden marcar como correctas.",
+        "RangedQuestion": "Las preguntas de opción múltiple contienen tantas opciones de respuesta como quieras, de las cuales tantas como quieras (al menos una) se pueden marcar como correctas....",
+        "FreeTextQuestion": "En la consulta de texto libre, el participante debe ingresar cualquier texto. Esto se corresponde con el valor de referencia proporcionado.",
+        "SurveyQuestion": "Las encuestas pueden contener cualquier número de respuestas, ninguna de ellas puede ser marcada como correcta o incorrecta."
+      }
+    },
     "questions": {
-      "title": "1/4 Ingresar texto de pregunta",
+      "title": "Ingresar texto de pregunta",
       "enter_question_here": "Ingresa el texto de la pregunta aquí",
-      "format": "Formato",
-      "edit": "Editar",
       "preview": "Previsualizar",
       "single_choice_question": "Pregunta de selección única (solo una de más respuestas es la correcta)",
       "single_choice_question_yes_no": "Pregunta si/no",
@@ -373,10 +401,47 @@
       "multiple_choice_question": "Pregunta de selección múltiple (una o más respuestas son correctas)",
       "survey_question": "Encuesta (No hay respuestas correctas ni incorrectas)",
       "ranged_question": "Pregunta de estimación (Cifras dentro del área predeterminada son correctas)",
-      "free_text_question": "Respuesta corta (Si texto coincide con la solución es correcto)"
+      "free_text_question": "Respuesta corta (Si texto coincide con la solución es correcto)",
+      "description": {
+        "preview": "A continuación, se muestra una vista previa del texto introducido a la izquierda.."
+      }
+    },
+    "quiz_manager": {
+      "title": "Quiz Manager",
+      "available_questions_title": "Preguntas disponibles",
+      "added_questions_title": "Preguntas creadas",
+      "session_invalid": "El cuestionario contiene preguntas incompletas",
+      "connection_lost": "Se pierde la conexión con el servidor",
+      "details": {
+        "aria": {
+          "btn_group": "Lista de ajustes para el cuestionario"
+        },
+        "question_type": {
+          "long": "Editar tipo de pregunta",
+          "short": "Tipo"
+        },
+        "question_text": {
+          "long": "Editar el texto de la pregunta",
+          "short": "Texto de la pregunta"
+        },
+        "answeroptions": {
+          "long": "Editar opciones de respuesta",
+          "short": "Respuestas"
+        },
+        "timer": {
+          "long": "Editar temporizador",
+          "short": "Minutero"
+        }
+      },
+      "description": {
+        "available_questions": "Aquí puede ver todos los tipos de preguntas de las que puede elegir. Cada tipo de pregunta ofrece diferentes presets y posibilidades para el diseño de los concursos",
+        "added_questions": "Aquí encontrará todas sus preguntas del concurso, que están disponibles en el cuestionario. Para agregar una pregunta del cuestionario al cuestionario, arrástrelo desde la pila izquierda o haga clic en la pregunta del cuestionario en la pila izquierda. Al hacer clic en la pregunta insertada, puede definir el contenido de la pregunta.",
+        "back_button": "Puedes regresar en cualquier momento. El cuestionario se guarda inmediatamente.",
+        "forward_button": "Si el cuestionario es válido y está conectado al servidor, puede continuar al lobby del cuestionario y abrir el cuestionario para los participantes."
+      }
     },
     "quiz_summary": {
-      "title": "4/4 Resúmen",
+      "title": "Resúmen",
       "quiz_name": "Nombre de la ronda",
       "quiz_url": "URL para participantes",
       "question_amount": "Cantidad total de preguntas del cuestionario",
@@ -423,7 +488,15 @@
       "isRestrictingRudeNicks": "Bloquear apodos inapropiados",
       "isRestrictingToCAS": "Los asistentes deben autenticarse a través de CAS",
       "true": "Sí",
-      "false": "No"
+      "false": "No",
+      "description": {
+        "header": "Aquí está el resumen de toda la ronda de exámenes",
+        "session_url": "Bajo esta URL, los participantes pueden ingresar al cuestionario tan pronto como lo suelten",
+        "question_group_validation": "La validación de la ronda de exámenes falla si el cuestionario aún no se ha completado. Esto incluye exámenes no existentes, opciones de respuesta ausentes o incompletas, temporizadores no establecidos, etc.",
+        "restrict_to_cas": "Si esta configuración está activa, los participantes deben registrarse en el servicio de autenticación central de la Universidad de Ciencias Aplicadas de Mittelhessen para participar en el cuestionario",
+        "question_item": "Esta sección contiene información sobre la pregunta seleccionada.",
+        "validation_errors": "Los errores de validación enumerados aquí pueden ser útiles en la solución de problemas."
+      }
     },
     "theme_switcher": {
       "set_theme": "Elegir estilo",
@@ -468,9 +541,10 @@
       }
     },
     "timer": {
-      "title": "3/4 Ajustar el temporizador",
+      "title": "Ajustar el temporizador",
       "second": "Segundo",
-      "second_plural": "Segundos"
+      "second_plural": "Segundos",
+      "description": "Aquí puede configurar la cuenta regresiva para la pregunta de la prueba. Tan pronto como expire, o todos los participantes han contestado, la ronda de exámenes se termina."
     },
     "translation": {
       "translations": "Idiomas disponibles:",
@@ -506,9 +580,9 @@
       "option_centered": "centrado",
       "option_right": "derecho",
       "tooltip": {
-        "info": "Info",
-        "preview": "Previsualizar",
         "bold": "Negrita",
+        "italic": "Itálico",
+        "line_through": "Tachado",
         "heading": "Encabezado",
         "hyperlink": "Hipervínculo",
         "unordered_list": "Lista desordenada",
@@ -516,24 +590,38 @@
         "latex": "LaTeX-marcadores",
         "code": "Code-marcadores",
         "citation": "Cita",
-        "image": "Imagen",
-        "youtube": "YouTube",
-        "vimeo": "Vimeo"
+        "image": "Imagen"
       },
       "info_content": "Tú puedes marcar textos con <a target='_blank' class='hyperlink' href='https://es.wikipedia.org/wiki/Markdown'>Markdown</a>. Las opciones de Markdown utilizadas con mayor frecuencia están disponibles en forma de botones sobre la casilla. De igual modo, arsnova.click  soporta <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>."
     },
     "sound": {
-      "title": "Sonido durante cuenta atrás",
-      "lobby_music": "El sonido en el vestíbulo concurso",
-      "finish_music": "Sonido al final de la cuenta atrás",
+      "running_music": "Cuenta atrás (Correr)",
+      "lobby_music": "Lobby del concurso",
+      "finish_music": "Cuenta atrás (Fin)",
+      "running_music_detailed": "Sonido durante cuenta atrás",
+      "lobby_music_detailed": "El sonido en el vestíbulo concurso",
+      "finish_music_detailed": "Sonido al final de la cuenta atrás",
       "whistle": "Silbar",
       "silence": "Sin sonido",
+      "global_volume": "Volumen global",
       "volume": "Predeterminar volumen",
       "inactive": "Sonido está desactivado",
       "active": "Sonido está activado",
-      "random": "Selección aleatoria"
+      "activated": "Activado",
+      "deactivated": "Desactivado",
+      "random": "Selección aleatoria",
+      "play": "Jugar",
+      "stop": "Detener"
     },
     "splashscreen": {
+      "question_and_answer": {
+        "answeroption": "Responder",
+        "answeroption_plural": "Respuestas posibles",
+        "min_range": "Menor tolerancia",
+        "correct_value": "Valor correcto",
+        "max_range": "Tolerancia superior",
+        "reference_value": "Valor de referencia"
+      },
       "edit_session_confirmation": {
         "title": "¿Quieres editar el cuestionario?",
         "text": "Todos los asistentes serán eliminados y se eliminarán la tabla de clasificación.",

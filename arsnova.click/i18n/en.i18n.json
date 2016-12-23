@@ -6,6 +6,8 @@
     "delete": "Delete",
     "save": "Save",
     "abort": "Abort",
+    "yes": "Yes",
+    "no": "No",
     "close_window": "Close window",
     "aria_description": {
       "arsnova_slogan": "Quizzes for everyone & anything"
@@ -193,7 +195,8 @@
   },
   "view": {
     "answeroptions": {
-      "title": "2/4 Define answers",
+      "title": "Define answers",
+      "new_answer": "New answeroption",
       "answeroptiontext_placeholder": "Answer option required",
       "correct": "Correct",
       "wrong": "Wrong",
@@ -230,13 +233,16 @@
       },
       "free_text_question": {
         "title": "Free text answer",
+        "check_answer_title": "Test possible input:",
         "config_case_sensitive": "Observe upper and lower case",
         "config_trim_whitespaces": "Observe white spaces in the answer",
         "config_use_keywords": "Observe sequence of the words",
         "config_use_punctuation": "Observe punctuation marks",
         "onText": "Yes",
         "offText": "No",
-        "text_placeholder": "Enter your answer here"
+        "text_placeholder": "Enter your answer here",
+        "check_correct": "The entered answer matches the provided reference.",
+        "check_incorrect": "The entered answer does not match the provided reference."
       }
     },
     "choose_nickname": {
@@ -249,6 +255,10 @@
       "no_selectable_nick_available": {
         "1": "All available nicknames have been chosen.",
         "2": "It is not possible to join the quiz."
+      },
+      "description": {
+        "nickname_input": "Here you can enter a name, which is different from the other players.",
+        "choose_selectable_nick": "You can select one of the available nicknames from this list."
       }
     },
     "hashtag_management": {
@@ -268,7 +278,13 @@
       "export": "Export quiz",
       "valid_question": "Valid Quiz",
       "invalid_question": "Invalid Quiz",
-      "no_sessions": "There are no quizzes stored in your browser."
+      "no_sessions": "There are no quizzes stored in your browser.",
+      "aria_description": {
+        "hashtag-input-field": "Enter the Quizname here",
+        "joinSession": "Participate at an active quiz",
+        "addNewHashtag": "Create a new quiz",
+        "splashscreen_description": "List of all valid and invalid quizzes in your browser"
+      }
     },
     "hashtag_view": {
       "hashtag_input": {
@@ -361,11 +377,23 @@
         "turing_award": "Turing-Award"
       }
     },
+    "question_type": {
+      "title": "Edit question type",
+      "currentType": "Current question type:",
+      "description": {
+        "type_wrapper": "Here you can change the type of quiz question. Each type has different settings. Change the type by clicking on the respective box.",
+        "SingleChoiceQuestion": "Single-choice questions contain as many answer options as you like, one of them must be marked as correct.",
+        "YesNoSingleChoiceQuestion": "Yes|No questions contain only two answers (yes and no), one of them must be marked as correct.",
+        "TrueFalseSingleChoiceQuestion": "True|False questions also contain only two answers (True and False), one of them must be marked as correct.",
+        "MultipleChoiceQuestion": "Multiple-choice questions contain as many answer options as you like, of which as many as you like (at least one) can be marked as correct.",
+        "RangedQuestion": "For the ranged question, an integer must be specified as correct. In addition, upper and lower tolerances can be entered.",
+        "FreeTextQuestion": "In the free text query, the participant must enter any text. This is matched with the provided reference value.",
+        "SurveyQuestion": "Surveys may contain any number of answers, none of them can be marked as right or wrong."
+      }
+    },
     "questions": {
-      "title": "1/4 Enter question text",
+      "title": "Enter question text",
       "enter_question_here": "Enter your question here",
-      "format": "Format",
-      "edit": "Edit",
       "preview": "Preview",
       "single_choice_question": "Single-Choice",
       "single_choice_question_yes_no": "Yes-No Single-Choice question",
@@ -373,10 +401,47 @@
       "multiple_choice_question": "Multiple-Choice",
       "survey_question": "Survey",
       "ranged_question": "Question with ranged answeroptions",
-      "free_text_question": "Free text question (response is correct in accordance with the provided sample)"
+      "free_text_question": "Free text question (response is correct in accordance with the provided sample)",
+      "description": {
+        "preview": "Here is a preview of the entered text on the left."
+      }
+    },
+    "quiz_manager": {
+      "title": "Quiz Manager",
+      "available_questions_title": "Available questions",
+      "added_questions_title": "Created questions",
+      "session_invalid": "The quiz contains incomplete questions",
+      "connection_lost": "The connection to the server is lost",
+      "details": {
+        "aria": {
+          "btn_group": "List of settings for the quiz"
+        },
+        "question_type": {
+          "long": "Edit question type",
+          "short": "Type"
+        },
+        "question_text": {
+          "long": "Edit question text",
+          "short": "Question text"
+        },
+        "answeroptions": {
+          "long": "Edit answer options",
+          "short": "Answers"
+        },
+        "timer": {
+          "long": "Edit timer",
+          "short": "Timer"
+        }
+      },
+      "description": {
+        "available_questions": "Here you can see all types of questions from which you can choose. Each question type offers different presets and possibilities for the design of the quizzes",
+        "added_questions": "Here you will find all your quiz questions, which are available in the quiz. To add a quiz question to the quiz, either drag it from the left stack or click the quiz query in the left pile. By clicking on the inserted question, you can set the content of the question.",
+        "back_button": "You can go back any time. The quiz is saved immediately.",
+        "forward_button": "If the quiz is valid and you are connected to the server, you can continue to the quiz lobby and open the quiz for participants."
+      }
     },
     "quiz_summary": {
-      "title": "4/4 Summary",
+      "title": "Summary",
       "quiz_name": "Name of the quiz",
       "quiz_url": "URL for attendees",
       "question_amount": "Amount of all questions",
@@ -423,7 +488,15 @@
       "isRestrictingRudeNicks": "Block inappropriate nicknames",
       "isRestrictingToCAS": "Attendees must authenticate via CAS",
       "true": "Yes",
-      "false": "No"
+      "false": "No",
+      "description": {
+        "header": "Here is the summary of the entire quiz round",
+        "session_url": "Under this URL, participants can enter the quiz as soon as you release it",
+        "question_group_validation": "The validation of the quiz round fails if the quiz has not yet been completed. This includes non - existing quizzes, missing or incomplete response options, non - set timers, etc.",
+        "restrict_to_cas": "If this setting is active, the participants must register at the central authentication service of the University of Applied Sciences Mittelhessen in order to participate in the quiz",
+        "question_item": "This section contains information about the selected question.",
+        "validation_errors": "The validation errors listed here can be useful in troubleshooting."
+      }
     },
     "theme_switcher": {
       "set_theme": "Choose a theme",
@@ -468,9 +541,10 @@
       }
     },
     "timer": {
-      "title": "3/4 Set countdown",
+      "title": "Set countdown",
       "second": "Second",
-      "second_plural": "Seconds"
+      "second_plural": "Seconds",
+      "description": "Here you can set the countdown for the quiz question. As soon as it expires, or all participants have answered, the quiz round is ended."
     },
     "translation": {
       "translations": "Select your language:",
@@ -506,9 +580,9 @@
       "option_centered": "centered",
       "option_right": "right",
       "tooltip": {
-        "info": "Info",
-        "preview": "Preview",
         "bold": "Bold",
+        "italic": "Italic",
+        "line_through": "Crossed out",
         "heading": "Headline",
         "hyperlink": "Hyperlink",
         "unordered_list": "Unordered list",
@@ -516,24 +590,38 @@
         "latex": "LaTex Markup",
         "code": "Code Markup",
         "citation": "Citation",
-        "image": "Image",
-        "youtube": "YouTube",
-        "vimeo": "Vimeo"
+        "image": "Image"
       },
       "info_content": "You can use <a target='_blank' class='hyperlink' href='https://en.wikipedia.org/wiki/Markdown'>Markdown</a> markup for your text in ARSnova.click. Frequently used markup options are available via the button bar which is visible on all supported input fields. Additionally ARSnova.click supports <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>"
     },
     "sound": {
-      "title": "Countdown Sound",
-      "lobby_music": "Sound in the quiz lobby",
-      "finish_music": "Sound at the end of the countdown",
+      "running_music": "Countdown (Running)",
+      "lobby_music": "Quiz Lobby",
+      "finish_music": "Countdown (End)",
+      "running_music_detailed": "Countdown Sound",
+      "lobby_music_detailed": "Sound in the Quiz Lobby",
+      "finish_music_detailed": "Sound at the end of the Countdown",
       "whistle": "Whistle",
       "silence": "No sound",
+      "global_volume": "Global volume",
       "volume": "Volume",
       "inactive": "Sound is inactive",
       "active": "Sound is active",
-      "random": "Random selection"
+      "activated": "Activated",
+      "deactivated": "Deactivated",
+      "random": "Random selection",
+      "play": "Play",
+      "stop": "Stop"
     },
     "splashscreen": {
+      "question_and_answer": {
+        "answeroption": "Answer",
+        "answeroption_plural": "Possible answers",
+        "min_range": "Lower tolerance",
+        "correct_value": "Correct value",
+        "max_range": "Upper tolerance",
+        "reference_value": "Reference value"
+      },
       "edit_session_confirmation": {
         "title": "Do you want to edit the quiz?",
         "text": "All attendees will be removed and the leaderboard will be deleted.",

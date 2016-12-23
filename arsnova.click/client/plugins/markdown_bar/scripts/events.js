@@ -115,5 +115,42 @@ Template.markdownBar.events({
 		if (!markdownAlreadyExistsAndAutoRemove('> ')) {
 			insertInQuestionText('> ');
 		}
+	},
+	"click #imageMarkdownButton": function () {
+		new Splashscreen({
+			autostart: true,
+			templateName: "pictureInsertSplashscreen",
+			closeOnButton: "#js-btn-closePicture, #js-btn-savePicture",
+			onRendered: function (instance) {
+				const textarea = document.getElementById('questionText');
+				if (textarea.selectionStart != textarea.selectionEnd) {
+					const strPosBegin = textarea.selectionStart;
+					const strPosEnd = textarea.selectionEnd;
+					const frontText = (textarea.value).substring(0, strPosBegin);
+					const middleText = (textarea.value).substring(strPosBegin, strPosEnd);
+					const backText = (textarea.value).substring(strPosEnd, textarea.value.length);
+
+					instance.templateSelector.find('#hyperlinkText').val(middleText);
+					textarea.value = frontText + backText;
+				}
+
+				$('#js-btn-savePicture').on('click', function () {
+					const linkText = document.getElementById('pictureText').value;
+					const linkDestination = document.getElementById('pictureDestination').value;
+					try {
+						new SimpleSchema({
+							hyperlink: urlSchema
+						}).validate({hyperlink: linkDestination});
+
+						insertInQuestionText('![' + linkText + '](' + linkDestination + ')');
+					} catch (ex) {
+						new ErrorSplashscreen({
+							autostart: true,
+							errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
+						});
+					}
+				});
+			}
+		});
 	}
 });

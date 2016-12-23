@@ -15,23 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-.advancedOptionsSwitch {
-  .bootstrap-switch {
-    .bootstrap-switch-handle-on {
-      background: #008000;
-    }
-    .bootstrap-switch-handle-off {
-      background: #b22222;
-      color: white;
-    }
-  }
-}
-
-.input-label-full-width {
-  width: 100%;
-  text-align: left;
-}
-
-.dropdown-field-width {
-  width: 200px!important;
+.modal-header {
+  min-height: inherit !important;
 }

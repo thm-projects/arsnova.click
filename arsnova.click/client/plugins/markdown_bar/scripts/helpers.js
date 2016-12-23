@@ -24,7 +24,7 @@ const urlSchemaHelper = {
 	}
 };
 
-Template.hyperlinkInsertSplashscreen.helpers($.extend({}, urlSchemaHelper, {
+Template.pictureInsertSplashscreen.helpers($.extend({}, urlSchemaHelper, {
 
 }));
 
@@ -40,7 +40,8 @@ Template.markdownBar.helpers({
 			{id: "sortedListMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.ordered_list", "glyphClass": "iconEditorOl"},
 			{id: "latexMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.latex", "glyphClass": "latexIcon"},
 			{id: "codeMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.code", "glyphClass": "codeListingIcon"},
-			{id: "commentMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.citation", "glyphClass": "codeCommentIcon"}
+			{id: "commentMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.citation", "glyphClass": "codeCommentIcon"},
+			{id: "imageMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.image", "glyphClass": "glyphicon-picture"}
 		];
 	}
 });

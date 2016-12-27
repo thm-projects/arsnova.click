@@ -27,12 +27,12 @@
         "offText": "Deaktiviert"
       },
       "footer_bar": {
-        "about": "Über",
+        "about": "Über die Quiz-App",
         "home": "Start",
-        "tos": "AGB",
+        "tos": "Rechtliches",
         "imprint": "Impressum",
         "data_privacy": "Datenschutz",
-        "blog": "Blog",
+        "blog": "Projektblog",
         "languages": "Sprache",
         "style": "Stil",
         "import": "Import",
@@ -51,7 +51,7 @@
         "declaration": "Ein bisschen <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, <br />ein bisschen <a href='https://arsnova.eu/' target='_blank'>ARSnova</a>!",
         "ars": "arsnova.click ist ein innovatives <a href='https://de.wikipedia.org/wiki/Audience_Response_System' target='_blank'>Audience Response System (ARS)</a> für öffentliche Bildungseinrichtungen.",
         "developed_by": "Inspiriert durch <a href='https://getkahoot.com' target='_blank'>Kahoot!</a> entwickelte in nur 10 Tagen  ein <a href='https://de.wikipedia.org/wiki/Scrum' target='_blank'>Scrum-Team</a> aus Bachelor- und Masterstudenten der <a href='http://www.thm.de/site/' target='_blank'>TH Mittelhessen</a> die erste Version dieser <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>gamifizierten</a> Alternative zum ARSnova-Flaggschiff <a href='https://arsnova.eu/' target='_blank'>arsnova.eu</a>.",
-        "met_requirements": "Bisher wurden die folgenden aus der didaktischen Perspektive eines Hochschullehrers aufgestellten Anforderungen an arsnova.click implementiert:",
+        "met_requirements": "Bisher wurden die folgenden aus der didaktischen Perspektive eines Hochschullehrers (siehe Impressum)     aufgestellten Anforderungen an arsnova.click implementiert:",
         "requirements": {
           "1": "Absoluter Datenschutz: keine personenbezogenen Daten auf dem Server, alle Quizdaten liegen im Browser der Quizerstellerin oder des Quizerstellers (<a href='http://www.w3schools.com/html/html5_webstorage.asp' target='_blank'>HTML5 Local Storage</a>)",
           "2": "Keine Registrierung, keine Anmeldung, keine Installation (<a href='https://de.wikipedia.org/wiki/Bring_your_own_device' target='_blank'>BYOD</a>), keine Werbung, keine Kosten",
@@ -61,21 +61,21 @@
           "6": "Frageformate: Multiple/Single Choice, Schätzfrage, Kurzantwort, Umfrage; MC/SC-Fragen mit beliebig vielen Antwortoptionen",
           "7": "<a href='https://de.wikipedia.org/wiki/TeX' target='_blank'>TeX</a>-Formelsatz und Textformatierung mit <a href='https://guides.github.com/features/mastering-markdown/' target='_blank'>Markdown</a> und eingebetteten Videos im Fragetext und in den Antwortoptionen",
           "8": "Edutainment: Lernmotivation durch Live-Wettbewerb mit Sound gegen die Uhr und die Mitspieler/innen",
-          "9": "<a href='https://de.wikipedia.org/wiki/Responsive_Webdesign' target='_blank'>Responsives Webdesign</a>: egal ob Smartphone oder Wide Screen, das Design skaliert dank <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>",
-          "10": "Modernste reaktive Web-Technologie: <a href='https://www.meteor.com' target='_blank'>Meteor</a>",
+          "9": "<a href='https://de.wikipedia.org/wiki/Responsive_Webdesign' target='_blank'>Responsives Webdesign</a>: egal ob Smartphone, Beamer oder Wide Screen, das Design skaliert dank <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>",
+          "10": "Gebaut als <a href='https://infrequently.org/2016/09/what-exactly-makes-something-a-progressive-web-app/' target='_blank'>Progressive Web App</a> mit reaktiver Web-Technik von <a href='https://www.meteor.com' target='_blank'>Meteor</a>",
           "11": "<a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a>"
         },
         "manual": {
           "title": "Bedienungshandbuch?",
           "text": {
             "1": "Brauchst Du nicht!",
-            "2": "Tipp einfach den Namen des Quiz ein. Die Buttons werden aktiviert, sobald Du entweder den Namen eines freigeschalteten Quiz eingibst (Mach mit!) oder ein neues Quiz mit dem eingegebenen Namen erstellen kannst (Mach neu!).",
-            "3": "Danach heißt es: Klicken. Schauen. Quizzen."
+            "2": "Tipp einfach den Namen des Quiz ein. Die Buttons werden aktiviert, sobald Du entweder den Namen eines freigeschalteten Quiz eingibst: \"Mach mit!\" oder ein Quiz mit dem eingegebenen Namen erstellen kannst: \"Mach neu!\".",
+            "3": "Folge unserer interaktiven Product Tour oder einfach Deiner Intuition: schauen, klicken, quizzen."
           }
         }
       },
       "tos": {
-        "title": "Allgemeine Geschäftsbedingungen",
+        "title": "Rechtliches",
         "declaration": "Alle dürfen die Quiz-App arsnova.click für ihre Zwecke verwenden, solange dabei nicht gegen deutsches oder EU-Recht verstoßen wird.",
         "license": {
           "title": "Lizenz",
@@ -166,7 +166,7 @@
       "connection_status": {
         "title": "Verbindungsstatus",
         "show_result": "Details",
-        "pending": "Prüfe...",
+        "pending": "Prüfe ...",
         "finished_with_errors": "Mit Fehlern beendet",
         "finished_with_warnings": "Mit Warnungen beendet",
         "finished_without_warnings": "Erfolgreich",
@@ -262,7 +262,7 @@
       }
     },
     "hashtag_management": {
-      "enter_quiz_name": "Gib den Quiznamen ein...",
+      "enter_quiz_name": "Gib den Quiznamen ein ...",
       "join_session": "Mach mit!",
       "start_session": "Quiz starten",
       "edit_session": "Quiz bearbeiten",
@@ -302,8 +302,8 @@
       "header": "Rangliste",
       "global_header": "Globale Rangliste",
       "title": {
-        "single_question": "Frage __questionId__ - Alles richtig haben...",
-        "all_questions": "Alles richtig haben..."
+        "single_question": "Frage __questionId__ - Alles richtig haben ...",
+        "all_questions": "Alles richtig haben ..."
       },
       "no_attendee_correct": "Niemand hat diese Frage richtig beantwortet",
       "no_attendee_correct_global": "Niemand hat alle Fragen richtig beantwortet",
@@ -317,8 +317,8 @@
     },
     "liveResults": {
       "title": "Ergebnisse",
-      "title_reading_confirmation": "Frage gelesen...",
-      "title_running_countdown": "Abstimmung läuft...",
+      "title_reading_confirmation": "Frage gelesen ...",
+      "title_running_countdown": "Abstimmung läuft ...",
       "question": "Frage",
       "ranking": "Rangliste",
       "reading_confirmation": "Lesebestätigung",
@@ -347,13 +347,13 @@
       "title": "Quiz-Lobby",
       "yes": "Ja",
       "no": "Nein",
-      "ready": "Warten, dass es losgeht...",
+      "ready": "Warten, dass es losgeht ...",
       "show_more": "Zeige 1 weiteren",
       "show_more_plural": "Zeige %s weitere",
       "start_quiz": "Los geht's!",
       "kick_member_confirmation": "Soll die Person '<span id=\"nickName\"></span>' aus dem Quiz entfernt werden?",
       "add_kicked_member_to_ban_list": "Den Nicknamen für immer bannen",
-      "waiting_for_players": "Warten auf die Anderen..."
+      "waiting_for_players": "Warten auf die Anderen ..."
     },
     "nickname_categories": {
       "title": "Nicknamen vorgeben",

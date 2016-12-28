@@ -537,6 +537,10 @@
         "psychology": {
           "name": "Années 50",
           "description": "Vieux rose mélangé avec des couleurs délicates."
+        },
+        "material": {
+          "name": "Material Design",
+          "description": "Approche de la conception de Google."
         }
       }
     },

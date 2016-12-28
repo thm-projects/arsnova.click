@@ -537,6 +537,10 @@
         "psychology": {
           "name": "1950er Jahre",
           "description": "Altrosa gemischt mit dezenten Farben."
+        },
+        "material": {
+          "name": "Material Design Colors",
+          "description": "Annäherung an Google's Material Design."
         }
       }
     },

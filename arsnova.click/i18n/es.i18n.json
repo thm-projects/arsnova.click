@@ -537,6 +537,10 @@
         "psychology": {
           "name": "Los años 50",
           "description": "Rojo viejo mezclado con tonos discretos."
+        },
+        "material": {
+          "name": "Material Design",
+          "description": "Enfoque del diseño de Google."
         }
       }
     },

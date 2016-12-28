@@ -537,6 +537,10 @@
         "psychology": {
           "name": "A bit funky",
           "description": "Pink mixed with subtle colors."
+        },
+        "material": {
+          "name": "Material Design",
+          "description": "Approach to Google's Material Design."
         }
       }
     },

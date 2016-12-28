@@ -40,14 +40,14 @@ export const themes = [
 		description: "view.theme_switcher.themes.bluetouch.description",
 		id: "theme-bluetouch"
 	},
-    {
-        name: "view.theme_switcher.themes.living_room.name",
-        description: "view.theme_switcher.themes.living_room.description",
-        id: "theme-hell"
-    },
-    {
-        name: "view.theme_switcher.themes.material.name",
-        description: "view.theme_switcher.themes.material.description",
-        id: "theme-Material"
-    }
+	{
+		name: "view.theme_switcher.themes.living_room.name",
+		description: "view.theme_switcher.themes.living_room.description",
+		id: "theme-hell"
+	},
+	{
+		name: "view.theme_switcher.themes.material.name",
+		description: "view.theme_switcher.themes.material.description",
+		id: "theme-Material"
+	}
 ];

@@ -551,7 +551,7 @@
       "description": "Ici, vous pouvez définir le compte à rebours pour la question du quiz. Dès qu'il expire ou que tous les participants ont répondu, le rond-point est terminé."
     },
     "translation": {
-      "translations": "Langues disponibles:",
+      "translations": "Langues disponibles",
       "i18n_currently_not_available": "i18n n'est actuellement pas disponible!",
       "beta": "beta"
     },

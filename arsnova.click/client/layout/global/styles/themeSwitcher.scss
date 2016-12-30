@@ -925,6 +925,11 @@
 		$bg-question_type_view-wrapper-hovered: $md_orange_accent;
 		$border-question_type_view-activeQuestionType-wrapper: white;
 
+		/* Edit answer options and smartphone preview */
+		$bg-edit_answeroption_text-element_wrapper: white;
+		$border-preview_answeroption_content_wrapper-image: white;
+		$fg-preview_answeroption_content_wrapper: white;
+
 		/* QR code */
 		$fg-qr-code-button: white;
 		$fg-qr-code-button-hovered: darken($fg-qr-code-button, 20);

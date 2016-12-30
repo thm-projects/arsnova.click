@@ -551,7 +551,7 @@
       "description": "Here you can set the countdown for the quiz question. As soon as it expires, or all participants have answered, the quiz round is ended."
     },
     "translation": {
-      "translations": "Select your language:",
+      "translations": "Select your language",
       "i18n_currently_not_available": "I18n is currently not available!",
       "beta": "Beta"
     },

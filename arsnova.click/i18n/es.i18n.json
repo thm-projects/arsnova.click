@@ -551,7 +551,7 @@
       "description": "Aquí puede configurar la cuenta regresiva para la pregunta de la prueba. Tan pronto como expire, o todos los participantes han contestado, la ronda de exámenes se termina."
     },
     "translation": {
-      "translations": "Idiomas disponibles:",
+      "translations": "Idiomas disponibles",
       "i18n_currently_not_available": "i18n no se encuentra disponible!",
       "beta": "Beta"
     },

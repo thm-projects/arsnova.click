@@ -820,7 +820,7 @@
 
 		$background-color: $md_teal_300;
 		$bg-nav-row: $md_teal_300;
-		$bg-footer: $md_teal_500;
+		$bg-footer: $md_teal_700;
 		$bg-container: $background-color;
 
 		$input-background-color: $md_orange_accent;
@@ -894,7 +894,7 @@
 
 		$border-answer_options-invalidAnswerOption: red;
 		$border-answer_options-invalidQuestion: red;
-		$bg-answer_options-bootstrap_switch: #ffd700;
+		$bg-answer_options-bootstrap_switch: white;
 		$border-answer_options-bootstrap_switch: none;
 		$border-radius_answer_options-bootstrap_switch: 0px $corner-radius $corner-radius 0px !important;
 		$bg-answer_options-bootstrap_switch_handle_off: $warning;
@@ -904,7 +904,7 @@
 		$border-answer_options-bootstrap_switch_focused: none;
 		$box-shadow-answer_options-bootstrap_switch_focused: none;
 		$outline-answer_options-bootstrap_switch_focused: none;
-		$bg-edit_answeroption_text-element_wrapper: #ffd700;
+		$bg-edit_answeroption_text-element_wrapper: white;
 		$border-preview_answeroption_content_wrapper-image: white;
 		$fg-preview_answeroption_content_wrapper: white;
 
@@ -913,7 +913,7 @@
 		$bg-rangedSlider-handle: $md_orange_accent;
 
 		$footer-background-color: #dcdcdc;
-		$footer-text-color: #000000;
+		$footer-text-color: white;
 		$fg-footer-info-bar: white;
 		$fg-footer-info-bar-hovered: darken($fg-footer-info-bar, 30);
 		$fg-footer-info-bar-active: #00CC00;
@@ -1298,7 +1298,7 @@
 				background-color: $input-background-color;
 			}
 			.default-yellow-text-color {
-				color: $input-background-color;
+				color: white;
 			}
 			.input-group-letter, .button-result-letter {
 				color: $input-group-letter-color;
@@ -1389,8 +1389,8 @@
 				background-color: $progress-bar-default-color !important;
 			}
 			.textarea {
-				background-color: $input-background-color;
-				color: $input-foreground-color !important;
+				background-color: white;
+				color: $md_blue_grey_700;
 			}
 			.previewText {
 				background-color: $input-background-color;

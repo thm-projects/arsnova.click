@@ -228,8 +228,8 @@
       "ranged_question": {
         "title": "Interval of correct answers",
         "correct_value": "Correct value",
-        "min_range": "Minimum range",
-        "max_range": "Maximum range"
+        "min_range": "Minimum value",
+        "max_range": "Maximum value"
       },
       "free_text_question": {
         "title": "Free text answer",

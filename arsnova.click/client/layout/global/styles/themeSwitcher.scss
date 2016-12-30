@@ -818,12 +818,12 @@
 
 	@if ($name == "theme-Material") {
 
-		$background-color: $md_teal_300;
+		$background-color: $md_teal_300; /* primary color */
 		$bg-nav-row: $md_teal_300;
 		$bg-footer: $md_teal_700;
 		$bg-container: $background-color;
 
-		$input-background-color: $md_orange_accent;
+		$input-background-color: $md_orange_700; /* accent color */
 		$placeholder-color: white;
 		$input-foreground-color: white;
 

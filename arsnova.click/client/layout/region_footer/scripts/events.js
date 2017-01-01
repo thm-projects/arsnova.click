@@ -243,14 +243,15 @@ const clickEvents = {
 					size: qrCodeSize(),
 					text: url,
 					quiet: 1,
-					mode: 4,
+					mode: 0,
+					radius: 0,
 					minVersion: 6,
 					mSize: 0.3,
 					ecLevel: 'H',
 					image: img
 				});
 			});
-			img.setAttribute("src", "/images/icons/arsnova_click-192.png");
+			img.setAttribute("src", "/images/icons/arsnova_click-512.png");
 			qrCodeContainer.css({
 				top: $('.navbar-fixed-top').outerHeight(),
 				left: $(window).outerWidth() / 2 - qrCodeSize() / 2

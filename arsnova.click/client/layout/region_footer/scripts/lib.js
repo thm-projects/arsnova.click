@@ -55,7 +55,7 @@ export const footerElemImport = {
 };
 export const footerElemHashtagManagement = {
 	id: "hashtagManagement",
-	iconClass: "glyphicon glyphicon-cog",
+	iconClass: "glyphicon glyphicon-wrench",
 	textClass: "footerElementText",
 	textName: "view.hashtag_management.session_management"
 };
@@ -98,7 +98,7 @@ export const footerElemEditQuiz = {
 };
 export const footerElemShowMore = {
 	id: "show-more",
-	iconClass: "glyphicon glyphicon-menu-hamburger",
+	iconClass: "glyphicon glyphicon-option-vertical",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.show_more"
 };

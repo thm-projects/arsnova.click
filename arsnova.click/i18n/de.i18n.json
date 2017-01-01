@@ -27,7 +27,7 @@
         "offText": "Deaktiviert"
       },
       "footer_bar": {
-        "about": "Über die Quiz-App",
+        "about": "arsnova.click",
         "home": "Start",
         "tos": "Rechtliches",
         "imprint": "Impressum",
@@ -47,7 +47,7 @@
         "remove": "Entfernen"
       },
       "about": {
-        "title": "Über die Quiz-App",
+        "title": "arsnova.click",
         "declaration": "Ein bisschen <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, <br />ein bisschen <a href='https://arsnova.eu/' target='_blank'>ARSnova</a>!",
         "ars": "arsnova.click ist ein innovatives <a href='https://de.wikipedia.org/wiki/Audience_Response_System' target='_blank'>Audience Response System (ARS)</a> für öffentliche Bildungseinrichtungen.",
         "developed_by": "Inspiriert durch <a href='https://getkahoot.com' target='_blank'>Kahoot!</a> entwickelte in nur 10 Tagen  ein <a href='https://de.wikipedia.org/wiki/Scrum' target='_blank'>Scrum-Team</a> aus Bachelor- und Masterstudenten der <a href='http://www.thm.de/site/' target='_blank'>TH Mittelhessen</a> die erste Version dieser <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>gamifizierten</a> Alternative zum ARSnova-Flaggschiff <a href='https://arsnova.eu/' target='_blank'>arsnova.eu</a>.",
@@ -271,7 +271,7 @@
       "create_demo_session": "Starte Demo Quiz!",
       "quiz_management": "Gespeicherte Quizze",
       "available_sessions": "Diese Quizze sind in Deinem Browser:",
-      "session_management": "Quizverwaltung",
+      "session_management": "Quizze",
       "import": "Quiz importieren",
       "delete_session": "Quiz löschen",
       "delete_session_confirmation": "Soll das Quiz '<span id=\"session_name\"></span>' unwiderruflich gelöscht werden?",

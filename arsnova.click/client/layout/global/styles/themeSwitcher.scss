@@ -835,10 +835,9 @@
 		$fg-connection-quality-header_connection-pending: $md_blue_grey_700;
 		$fg-connection-quality-header_connection-offline: $md_blue_grey_300;
 		$fg-connection-quality-header_connection-ok: $md_teal_500;
-		$fg-connection-quality-header_connection-warning: $md_orange_accent;
+		$fg-connection-quality-header_connection-warning: $md_orange_700;
 		$fg-connection-quality-header_connection-failed: $md_red_500;
 		$fg-connection-quality-header_connection-error: $md_red_accent;
-		$fg-connection-quality-header_details-link: white;
 
 		/* Semantic colors */
 		$success: $md_orange_accent;
@@ -847,10 +846,18 @@
 		$warning: $md_teal_700;
 		$warning-text-color: white;
 		$fg-warning: $md_teal_accent;
-		$info: $md_orange_500;
+		$info: $md_orange_300;
 		$info-text-color: $md_blue_grey_700;
 		$default: $md_blue_grey_500;
 		$default-text-color: white;
+
+		/* Footer Icons */
+		$fg-footer-info-bar: white;
+		$fg-footer-info-bar-hovered: $md_orange_500;
+		$fg-footer-info-bar-active: $md_green_300;
+		$fg-footer-info-bar-active-hovered: $md_green_500;
+		$fg-footer-element-deactivated: $md_red_300;
+		$fg-footer-element-deactivated-hovered: $md_red_500;
 
 		/* Quizzes stored in browser */
 		$bg-js-my-hash-validQuestion: $success;
@@ -889,7 +896,6 @@
 		$fg-text-light: white;
 		$fg_text-dark: $md_blue_grey_700;
 		$fg_a: $md_orange_300;
-		$fg_quiz-name: $md_orange_accent;
 		$button-shadow: $md_grey_700;
 		$box-shadow-markdown: $md_grey_700;
 		$bg-btn-file-input: $md_orange_500;
@@ -912,17 +918,17 @@
 		$bg-quiz_manager-sortable_placeholder: white;
 		$fg-quiz_manager-ul-li: white;
 		$border-quiz_manager-available_questions_wrapper: white;
-		$bg-quiz_manager-available_questions_wrapper-hovered: lighten($md_orange_accent, 10);
+		$bg-quiz_manager-available_questions_wrapper-hovered: $md_orange_300;
 		$border-quiz_manager-available_questions_wrapper-valid: springgreen;
 		$border-quiz_manager-available_questions_wrapper-invalid: red;
 		$fg-quiz_manager_details-btn_group-button: $md_blue_grey_700;
 		$bg-quiz_manager_details-btn_group-button: $md_orange_300;
-		$bg-quiz_manager_details-btn_group-button-hovered: $md_orange_accent;
+		$bg-quiz_manager_details-btn_group-button-hovered: $md_orange_700;
 
 		/* Question type selection */
-		$border-question_type_view-wrapper: $md_orange_accent;
+		$border-question_type_view-wrapper: $md_orange_500;
 		$fg-question_type_view-wrapper-hovered: white;
-		$bg-question_type_view-wrapper-hovered: $md_orange_accent;
+		$bg-question_type_view-wrapper-hovered: $md_orange_500;
 		$border-question_type_view-activeQuestionType-wrapper: white;
 
 		/* Edit answer options and smartphone preview */
@@ -1755,7 +1761,7 @@
 			}
 			#previewQuestionContentWrapper {
 				#previewQuestionImage {
-					border: 1px solid $border-previewQuestionContentWrapper-image;
+					border: 5px solid $border-previewQuestionContentWrapper-image;
 				}
 				#markdownPreviewWrapper {
 					color: $fg-previewQuestionContentWrapper;
@@ -1767,7 +1773,7 @@
 			#questionTypeView {
 				.questionType {
 					.wrapper {
-						border: 1px solid $border-question_type_view-wrapper;
+						border: 5px solid $border-question_type_view-wrapper;
 						&:hover {
 							background-color: $bg-question_type_view-wrapper-hovered;
 							p {
@@ -1778,7 +1784,7 @@
 				}
 				.activeQuestionType {
 					.wrapper {
-						border: 1px solid $border-question_type_view-activeQuestionType-wrapper;
+						border: 5px solid $border-question_type_view-activeQuestionType-wrapper;
 						&:hover {
 							background-color: initial;
 						}
@@ -1787,11 +1793,11 @@
 			}
 			.themePreview {
 				img {
-					border: 2px solid $border-theme-preview-img;
+					border: 5px solid $border-theme-preview-img;
 				}
 				&.selectedTheme {
 					img {
-						border: 2px solid $border-theme-preview-img-selected;
+						border: 5px solid $border-theme-preview-img-selected;
 					}
 				}
 			}
@@ -1867,7 +1873,7 @@
 			}
 			#previewAnsweroptionContentWrapper {
 				#previewAnsweroptionImage {
-					border: 1px solid $border-preview_answeroption_content_wrapper-image;
+					border: 5px solid $border-preview_answeroption_content_wrapper-image;
 				}
 				#markdownPreviewWrapper {
 					color: $fg-preview_answeroption_content_wrapper;

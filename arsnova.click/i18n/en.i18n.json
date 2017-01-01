@@ -27,7 +27,7 @@
         "offText": "Deactivated"
       },
       "footer_bar": {
-        "about": "About",
+        "about": "arsnova.click",
         "home": "Home",
         "tos": "ToS",
         "imprint": "Imprint",
@@ -47,7 +47,7 @@
         "remove": "Remove"
       },
       "about": {
-        "title": "About the quiz app",
+        "title": "arsnova.click",
         "declaration": "A little bit <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, <br />a little bit <a href='https://arsnova.eu/' target='_blank'>ARSnova</a>!",
         "ars": "First one is gamificated and the second one designed for educational use. Both are an <a href='https://en.wikipedia.org/wiki/Audience_Response_System' target='_blank'>Audience Response System (ARS)</a>.",
         "developed_by": "Inspired by <a href='https://getkahoot.com' target='_blank'>Kahoot!</a> a <a href='http://www.scrumhub.com' target='_blank'>Scrum-Team</a> of Bachelor and Master students of the <a href='http://www.thm.de/site/' target='_blank'>TH Mittelhessen</a> designed and developed in only 10 days this <a href='https://en.wikipedia.org/wiki/Gamification' target='_blank'>gamificated</a> alternative to our ARSnova-Flagship <a href='https://arsnova.eu/' target='_blank'>arsnova.eu</a>.",
@@ -271,7 +271,7 @@
       "create_demo_session": "Start demo quiz!",
       "quiz_management": "Stored Quizzes",
       "available_sessions": "These quizzes are stored in your browser:",
-      "session_management": "Quiz Management",
+      "session_management": "Quizzes",
       "import": "Import quiz",
       "delete_session": "Delete quiz",
       "delete_session_confirmation": "Shall the quiz '<span id=\"session_name\"></span>' be removed permanently?",

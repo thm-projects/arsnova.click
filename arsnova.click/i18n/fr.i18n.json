@@ -27,7 +27,7 @@
         "offText": "Desactivé"
       },
       "footer_bar": {
-        "about": "À propos de",
+        "about": "arsnova.click",
         "home": "Accueil",
         "tos": "CG",
         "imprint": "Mentions légales",
@@ -47,7 +47,7 @@
         "remove": "Retirer"
       },
       "about": {
-        "title": "À propos de l'application quiz",
+        "title": "arsnova.click",
         "declaration": "Un peu de <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, <br />un peu de <a href='https://arsnova.eu/' target='_blank'>ARSnova</a>!",
         "ars": "arsnova.click es tun <a href='https://en.wikipedia.org/wiki/Audience_response#Audience_response_systems' target='_blank'>système de réponse d’audience (SRA)</a> innovatif pour des institutions d’éducation publiques.",
         "developed_by": "Inspiré de <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, un <a href='http://www.scrumhub.com' target='_blank'>Scrum-Team</a> composé d'étudiants en Bachelor et Master de l'<a href='http://www.thm.de/site/' target='_blank'>école polytechnique de Mittelhessen</a> a developpé en seulement 10 jours la première version de cette alternative <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>ludique</a> au produit-phare de ARSnova <a href='https://arsnova.eu/' target='_blank'>arsnova.eu</a>.",

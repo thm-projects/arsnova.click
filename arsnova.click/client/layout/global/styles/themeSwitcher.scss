@@ -862,8 +862,8 @@
 		$fg-warning: $dark_primary_color;
 		$info: $accent_color;
 		$info-text-color: $primary_text_color;
-		$default: $md_blue_grey_500;
-		$default-text-color: white;
+		$default: $primary_text_color;
+		$default-text-color: $text_icon_color;
 
 		/* Footer Icons */
 		$fg-footer-info-bar: white;
@@ -885,7 +885,7 @@
 		$splash-screen-header-color: white;
 		$splash-screen-body-color: white;
 		$splashscreen-background-color: $primary_color;
-		$splashscreen-foreground-color: white;
+		$splashscreen-foreground-color: $primary_text_color;
 		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
 		$splashscreen-question-preview-background-color: $splashscreen-background-color;
 		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
@@ -893,7 +893,7 @@
 		$splashscreen-sound-config-background-color: $splashscreen-background-color;
 		$splashscreen-sound-config-button-background-color: $success;
 		$splashscreen-sound-config-select-foreground-color: $primary_text_color;
-		$splashscreen-delete-background-color: white;
+		$splashscreen-delete-background-color: $md_red_300;
 		$splash-screen-error-message-background-color: $md_red_300;
 		$splash-screen-error-message-foreground-color: white;
 		$splash-screen-error-message-button-background-color: $primary_text_color;

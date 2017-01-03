@@ -818,15 +818,29 @@
 
 	@if ($name == "theme-Material") {
 
+		/* Color palette, see: https://www.materialpalette.com/teal/orange */
+
+		$primary_color: #009688;
+		$light_primary_color: #B2DFDB;
+		$dark_primary_color: #00796B;
+
+		$accent_color: #FF9800;
+
+		$primary_text_color: #212121;
+		$secondary_text_color: #757575;
+		$text_icon_color: white;
+
+		/* $devider_color: #BDBDBD; */
+
 		/* Landing page */
-		$background-color: $md_teal_300; /* primary color */
-		$bg-nav-row: $md_teal_300;
+		$background-color: $primary_color;
+		$bg-nav-row: $primary_color;
 		$bg-container: $background-color;
-		$bg-footer: $md_teal_700;
+		$bg-footer: $dark_primary_color;
 		$fg_titel: white;
 
 		/* Quiz name input */
-		$input-background-color: $md_orange_700; /* accent color */
+		$input-background-color: $accent_color;
 		$placeholder-color: white;
 		$input-foreground-color: white;
 		$disabled-button-background: $md_blue_grey_300;
@@ -834,26 +848,26 @@
 		/* Connection status */
 		$fg-connection-quality-header_connection-pending: $md_blue_grey_700;
 		$fg-connection-quality-header_connection-offline: $md_blue_grey_300;
-		$fg-connection-quality-header_connection-ok: $md_teal_500;
-		$fg-connection-quality-header_connection-warning: $md_orange_700;
+		$fg-connection-quality-header_connection-ok: $md_teal_300;
+		$fg-connection-quality-header_connection-warning: $accent_color;
 		$fg-connection-quality-header_connection-failed: $md_red_500;
-		$fg-connection-quality-header_connection-error: $md_red_accent;
+		$fg-connection-quality-header_connection-error: $md_red_500;
 
 		/* Semantic colors */
-		$success: $md_orange_accent;
+		$success: $accent_color;
 		$success-text-color: white;
 		$fg-success: lighten($success, 20);
-		$warning: $md_teal_700;
+		$warning: $dark_primary_color;
 		$warning-text-color: white;
-		$fg-warning: $md_teal_accent;
-		$info: $md_orange_300;
-		$info-text-color: $md_blue_grey_700;
+		$fg-warning: $dark_primary_color;
+		$info: $accent_color;
+		$info-text-color: $primary_text_color;
 		$default: $md_blue_grey_500;
 		$default-text-color: white;
 
 		/* Footer Icons */
 		$fg-footer-info-bar: white;
-		$fg-footer-info-bar-hovered: $md_orange_500;
+		$fg-footer-info-bar-hovered: $accent_color;
 		$fg-footer-info-bar-active: $md_green_300;
 		$fg-footer-info-bar-active-hovered: $md_green_500;
 		$fg-footer-element-deactivated: $md_red_300;
@@ -868,21 +882,21 @@
 		$fg-js-my-hash-invalidQuestion: $warning-text-color;
 
 		/* Splash screen */
-		$splash-screen-header-color: $md_blue_grey_700;
-		$splash-screen-body-color: $md_blue_grey_700;
-		$splashscreen-background-color: $md_teal_300;
-		$splashscreen-foreground-color: $md_blue_grey_700;
+		$splash-screen-header-color: white;
+		$splash-screen-body-color: white;
+		$splashscreen-background-color: $primary_color;
+		$splashscreen-foreground-color: white;
 		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
 		$splashscreen-question-preview-background-color: $splashscreen-background-color;
 		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
 		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
 		$splashscreen-sound-config-background-color: $splashscreen-background-color;
 		$splashscreen-sound-config-button-background-color: $success;
-		$splashscreen-sound-config-select-foreground-color: $md_blue_grey_700;
-		$splashscreen-delete-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-select-foreground-color: $primary_text_color;
+		$splashscreen-delete-background-color: white;
 		$splash-screen-error-message-background-color: $md_red_300;
 		$splash-screen-error-message-foreground-color: white;
-		$splash-screen-error-message-button-background-color: $md_blue_grey_700;
+		$splash-screen-error-message-button-background-color: $primary_text_color;
 		$splash-screen-error-message-button-foreground-color: white;
 
 		/* Product Tour */
@@ -893,12 +907,13 @@
 		$bg-disabled-slider: $md_grey_500;
 
 		/* Miscellaneous */
-		$fg-text-light: white;
-		$fg_text-dark: $md_blue_grey_700;
-		$fg_a: white;
+		$fg-text-light: $text_icon_color;
+		$fg_text-dark: $primary_text_color;
+		$fg_a: $text_icon_color;
 		$button-shadow: $md_grey_700;
 		$box-shadow-markdown: $md_grey_700;
-		$bg-btn-file-input: $md_orange_500;
+		$bg-btn-file-input: $accent_color;
+		$slider-color: $dark_primary_color;
 
 		/* Theme switcher */
 		$border-theme-preview-img: white;
@@ -909,26 +924,26 @@
 		$grey-button-color: white;
 
 		/* Loading indicator */
-		$border-loader_wrapper-outer_spin: $md_orange_700;
-		$border-loader_wrapper-middle_spin: $md_orange_500;
-		$border-loader_wrapper-inner_spin: $md_orange_300;
+		$border-loader_wrapper-outer_spin: white;
+		$border-loader_wrapper-middle_spin: $accent_color;
+		$border-loader_wrapper-inner_spin: $md_teal_300;
 
 		/* Quiz Manager */
 		$fg-quiz_manager-sortable_placeholder: black;
 		$bg-quiz_manager-sortable_placeholder: white;
 		$fg-quiz_manager-ul-li: white;
 		$border-quiz_manager-available_questions_wrapper: white;
-		$bg-quiz_manager-available_questions_wrapper-hovered: $md_orange_300;
+		$bg-quiz_manager-available_questions_wrapper-hovered: $accent_color;
 		$border-quiz_manager-available_questions_wrapper-valid: springgreen;
 		$border-quiz_manager-available_questions_wrapper-invalid: red;
-		$fg-quiz_manager_details-btn_group-button: $md_blue_grey_700;
-		$bg-quiz_manager_details-btn_group-button: $md_orange_300;
+		$fg-quiz_manager_details-btn_group-button: $primary_text_color;
+		$bg-quiz_manager_details-btn_group-button: $accent_color;
 		$bg-quiz_manager_details-btn_group-button-hovered: $md_orange_700;
 
 		/* Question type selection */
-		$border-question_type_view-wrapper: $md_orange_500;
+		$border-question_type_view-wrapper: $accent_color;
 		$fg-question_type_view-wrapper-hovered: white;
-		$bg-question_type_view-wrapper-hovered: $md_orange_500;
+		$bg-question_type_view-wrapper-hovered: $accent_color;
 		$border-question_type_view-activeQuestionType-wrapper: white;
 
 		/* Edit answer options and smartphone preview */
@@ -938,52 +953,52 @@
 
 		/* QR code */
 		$fg-qr-code-button: white;
-		$fg-qr-code-button-hovered: darken($fg-qr-code-button, 20);
+		$fg-qr-code-button-hovered: darken($fg-qr-code-button, 10);
 		$border-qr-code-container: white;
 		$bg-qr-code-container: white;
-		$fg-qr-code-container-close: $md_blue_grey_700;
+		$fg-qr-code-container-close: $accent_color;
 		$fg-qr-code-container-close-hovered: lighten($fg-qr-code-container-close, 20);
-		$border-qr-code-container-close-icon: $md_blue_grey_700;
-		$background-qr-code-container-close-icon: transparent;
-		$fg-qr-code-label: $md_blue_grey_700;
+		$border-qr-code-container-close-icon: $accent_color;
+		$background-qr-code-container-close-icon: white;
+		$fg-qr-code-label: $primary_text_color;
 
 		/* Nickname limitation */
 		$fg-nickname_categories-h3: white;
 		$bg-nickname_categories-nick_style: white;
 		$bg-nickname_categories-nick_style-hovered: $md_grey_500;
 		$bg-nickname_categories-nick_style-active: $md_grey_500;
-		$bg-nickname_categories-nick_style-selected_category: $md_orange_300;
-		$bg-nickname_categories-nick_chosen_nick: $md_orange_300;
+		$bg-nickname_categories-nick_style-selected_category: $accent_color;
+		$bg-nickname_categories-nick_chosen_nick: $accent_color;
 		$bg-nickname_categories-nick_chosen_nick-hovered: $md_grey_300;
 		$bg-nickname_categories-nick_chosen_nick-active: $md_grey_500;
 		$bg-nickname_categories-nick_chosen_nick-selected: $md_grey_500;
 		$fg-nickname_categories-options: white;
 		$fg-nick_limited-h3: white;
 		$bg-nick_limited-selectable_nick: white;
-		$bg-nick_limited-selectable_nick-hovered: $md_orange_300;
-		$bg-nick_limited-selectable_nick-active: $md_orange_accent;
+		$bg-nick_limited-selectable_nick-hovered: $accent_color;
+		$bg-nick_limited-selectable_nick-active: $accent_color;
 
 		/* Highlighting one's own nickname */
-		$bg-colorChangingOwnNick0: $md_teal_700;
+		$bg-colorChangingOwnNick0: $dark_primary_color;
 		$fg-colorChangingOwnNick0: white;
-		$bg-colorChangingOwnNick25: $md_orange_accent;
+		$bg-colorChangingOwnNick25: $accent_color;
 		$fg-colorChangingOwnNick25: white;
-		$bg-colorChangingOwnNick50: $md_orange_accent;
+		$bg-colorChangingOwnNick50: $accent_color;
 		$fg-colorChangingOwnNick50: white;
-		$bg-colorChangingOwnNick75: $md_orange_accent;
+		$bg-colorChangingOwnNick75: $accent_color;
 		$fg-colorChangingOwnNick75: white;
-		$bg-colorChangingOwnNick100: $md_teal_700;
+		$bg-colorChangingOwnNick100: $dark_primary_color;
 		$fg-colorChangingOwnNick100: white;
 
 		/*Countdown running view */
 		$fg-question-title: white;
 
 		/* Voting results */
-		$bg-button_result: $md_teal_500;
+		$bg-button_result: $primary_color;
 		$progress-bar-success-color: $md_green_500;
 		$progress-bar-failure-color: $md_red_500;
 		$progress-bar-default-color: $md_blue_grey_700; /* partially correct */
-		$bg-button-result-progress: $md_teal_500;
+		$bg-button-result-progress: $primary_color;
 		$fg-button-result-percentage: white;
 
 		/* Winning player on ranking list */
@@ -991,13 +1006,13 @@
 		$fg-button-leader: $input-foreground-color;
 
 		/* Voting buttons */
-		$bg-answer_row-answer_selected: $md_orange_accent;
+		$bg-answer_row-answer_selected: $accent_color;
 		$fg-answer_row-answer_selected: white;
-		$bg-answer_row-button_purple_transition: $md_teal_700;
+		$bg-answer_row-button_purple_transition: $dark_primary_color;
 		$fg-answer_row-button_purple_transition: white;
 
 		/* Quiz lobby */
-		$fg_lobby-waiting-for-players-notifier: $md_teal_700;
+		$fg_lobby-waiting-for-players-notifier: $dark_primary_color;
 		$bg-btn-more-learners: $md_purple_500;
 		$fg-btn-more-learners: white;
 
@@ -1007,8 +1022,8 @@
 
 		/* Slider for estimation answer */
 		$bg-rangedSlider-invalid: $md_red_500;
-		$bg-rangedSlider-valid: $md_green_500;
-		$bg-rangedSlider-handle: $md_teal_700;
+		$bg-rangedSlider-valid: $dark_primary_color;
+		$bg-rangedSlider-handle: $accent_color;
 
 	} /* End of theme "Material" */
 
@@ -1141,7 +1156,7 @@
 					color: $fg-qr-code-container-close-hovered;
 				}
 				.glyphicon-remove {
-					border: 1px solid $border-qr-code-container-close-icon;
+					border: 0px solid $border-qr-code-container-close-icon;
 					background-color: $background-qr-code-container-close-icon;
 				}
 			}

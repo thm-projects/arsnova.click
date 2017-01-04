@@ -29,17 +29,9 @@
       "type": "image/png"
     }
   ],
-  "background_color": "#23425b",
-  "theme_color": "#23425b",
+  "background_color": "009688",
+  "theme_color": "#009688",
   "start_url": "/",
   "display": "fullscreen",
-  "orientation": "portrait",
-  "prefer_related_applications": true,
-  "related_applications": [
-    {
-      "platform": "play",
-      "url": "https://play.google.com/store/apps/details?id=click.arsnova",
-      "id": "click.arsnova"
-    }
-  ]
+  "orientation": "portrait"
 }

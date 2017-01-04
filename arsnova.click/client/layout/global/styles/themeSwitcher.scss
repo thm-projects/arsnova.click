@@ -847,7 +847,7 @@
 
 		/* Connection status */
 		$fg-connection-quality-header_connection-pending: $md_blue_grey_700;
-		$fg-connection-quality-header_connection-offline: $md_blue_grey_300;
+		$fg-connection-quality-header_connection-offline: $md_red_500;
 		$fg-connection-quality-header_connection-ok: $md_teal_300;
 		$fg-connection-quality-header_connection-warning: $accent_color;
 		$fg-connection-quality-header_connection-failed: $md_red_500;
@@ -920,7 +920,7 @@
 		$border-theme-preview-img-selected: $md_green_500;
 
 		/* Language select buttons */
-		$grey-button-background: $md_blue_grey_500;
+		$grey-button-background: $dark_primary_color;
 		$grey-button-color: white;
 
 		/* Loading indicator */

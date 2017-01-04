@@ -29,7 +29,7 @@
       "type": "image/png"
     }
   ],
-  "background_color": "009688",
+  "background_color": "#009688",
   "theme_color": "#009688",
   "start_url": "/",
   "display": "fullscreen",

@@ -394,7 +394,7 @@
 	$bg-quiz_manager_details-btn_group-button: #ffd700;
 	$bg-quiz_manager_details-btn_group-button-hovered: darken($bg-quiz_manager_details-btn_group-button, 10);
 
-	@if ($name == "theme-arsnova-dot-click-contrast"){
+	@if ($name == "theme-Material"){
 		$background-color: #23425b;
 		$warning: #991d1d;
 		$splashscreen-background-color: #b6fcb6;
@@ -816,7 +816,7 @@
 		$splashscreen-sound-config-button-background-color: $success;
 	}
 
-	@if ($name == "theme-Material") {
+	@if ($name == "theme-arsnova-dot-click-contrast") {
 
 		/* Color palette, see: https://www.materialpalette.com/teal/orange */
 

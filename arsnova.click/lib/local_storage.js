@@ -23,7 +23,11 @@ import {MultipleChoiceQuestion} from "/lib/questions/question_choice_multiple.js
 import {DefaultAnswerOption} from "/lib/answeroptions/answeroption_default.js";
 
 export function getLanguage() {
-	return $.parseJSON(localStorage.getItem("__amplify__tap-i18n-language"));
+	return localStorage.getItem("language");
+}
+
+export function setLanguage(language) {
+	localStorage.setItem("language", language);
 }
 
 export function getAllHashtags() {

@@ -35,7 +35,7 @@ import {randomIntFromInterval} from '/client/layout/view_live_results/scripts/li
 
 export function getUserLanguage() {
 	/* Get the language of the browser */
-	let userLang = navigator.language || navigator.userLanguage;
+	let userLang = (navigator.language || navigator.userLanguage).match(/[a-zA-Z]*/)[0];
 	/* Provide a fallback language */
 	let selectedLang = "en";
 	// If private mode is enabled, the access to the local storage will fail.
@@ -47,8 +47,8 @@ export function getUserLanguage() {
 			selectedLang = userLang;
 		}
 		/* Override the browser language with the set language of the local storage if available */
-		if (TAPi18n.languages_names[localStorageLang.data]) {
-			selectedLang = localStorageLang.data;
+		if (TAPi18n.languages_names[localStorageLang]) {
+			selectedLang = localStorageLang;
 		}
 		localData.initializePrivateKey();
 		localStorage.setItem("localStorageAvailable", true);
@@ -58,6 +58,7 @@ export function getUserLanguage() {
 	if (Router.current() && Router.current().params.language) {
 		selectedLang = Router.current().params.language;
 	}
+	localData.setLanguage(selectedLang);
 	return selectedLang;
 }
 
@@ -106,7 +107,6 @@ Meteor.startup(function () {
 			navigator.serviceWorker.register('/serviceWorker.js').then().catch(error => console.log(error));
 		}
 		Session.set("loading_language", true);
-		TAPi18n.precacheBundle = true;
 		TAPi18n.setLanguage(getUserLanguage()).then(function () {
 			Session.set("loading_language", false);
 			window.cookieconsent_options = {

@@ -1,0 +1,56 @@
+/*
+ * This file is part of ARSnova Click.
+ * Copyright (C) 2016 The ARSnova Team
+ *
+ * ARSnova Click is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ARSnova Click is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
+
+@function theme-elegant() {
+	@return (
+		"background-color": #dbe4e9,
+		"bg-nav-row": #002d47,
+		"bg-container": #dbe4e9,
+		"bg-questionList-row": #B1C5D0,
+		"bg-footer": #374e5b,
+		"default-text-color": black,
+		"fg-text-light": black,
+		"fg_text-dark": black,
+		"fg_a": #337ab7,
+		"fg_quiz-name": #ffd700,
+		"fg_titel": black,
+		"fg_demo-quiz-description": black,
+		"fg_lobby-waiting-for-players-notifier": black,
+		"fg-question-title": black,
+		"fg-theme_description": black,
+		"fg-hashtag_management-hashtag_name": black,
+		"border-hashtag_management-HR": black,
+		"quiz-summary-row-color": black,
+		"fg-quiz-summary-H4": black,
+		"fg-quiz-summary-P": black,
+		"fg-quiz-summary-UL": black,
+		"bg-quiz_manager-sortable_placeholder": black,
+		"fg-quiz_manager-ul-li": black,
+		"border-quiz_manager-available_questions_wrapper": black,
+		"bg-quiz_manager-available_questions_wrapper-hovered": #BBBCBC,
+		"border-question_type_view-wrapper-hovered": #BBBCBC,
+		"border-question_type_view-activeQuestionType-wrapper": white,
+		"bg-introjs-helper_layer": black,
+		"splashscreen-background-color": #b3c8da,
+		"splashscreen-show-hashtags-background-color": #b3c8da,
+		"bg-splashscreen-question-and-answer": #b3c8da,
+		"splashscreen-question-preview-background-color": #b3c8da,
+		"splashscreen-reading-confirmed-background-color": #b3c8da,
+		"splashscreen-sound-config-background-color": #b3c8da,
+		"splashscreen-delete-background-color": #b3c8da
+	);
+}

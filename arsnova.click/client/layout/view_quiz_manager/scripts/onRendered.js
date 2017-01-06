@@ -117,6 +117,7 @@ Template.quizManager.onRendered(function () {
 		headerLib.calculateTitelHeight();
 	}.bind(this));
 	getTooltipForRoute();
+	$(".contentPosition").scrollTop(0);
 });
 
 Template.quizManagerDetails.onRendered(function () {
@@ -125,4 +126,5 @@ Template.quizManagerDetails.onRendered(function () {
 	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
 	getTooltipForRoute();
+	$(".contentPosition").scrollTop(0);
 });

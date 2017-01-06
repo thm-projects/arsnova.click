@@ -1,0 +1,46 @@
+/*
+ * This file is part of ARSnova Click.
+ * Copyright (C) 2016 The ARSnova Team
+ *
+ * ARSnova Click is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ARSnova Click is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
+
+@function theme-arsnova-dot-click-contrast() {
+	@return (
+		"background-color": #23425b,
+		"warning": #991d1d,
+		"splashscreen-background-color": #b6fcb6,
+		"default": #424242,
+		"disabled-button-background": #424242,
+		"grey-button-background": #424242,
+		"success": #006000,
+		"slider-color": #006000,
+		"bg-btn-file-input": #5c3909,
+		"info": yellow,
+		"info-text-color": black,
+		"bg-answer_row-button_purple_transition": #562b81,
+		"fg-answer_row-button_green_transition": #562b81,
+		"bg-nav-row": #23425b,
+		"bg-container": #23425b,
+		"bg-footer": #23425b,
+		"bg-rangedSlider-invalid": #991d1d,
+		"bg-js-my-hash-invalidQuestion-hovered": lighten(#991d1d, 10),
+		"bg-colorChangingOwnNick25": #991d1d,
+		"bg-splashscreen-question-and-answer": #b6fcb6,
+		"splashscreen-question-preview-background-color": #b6fcb6,
+		"splashscreen-reading-confirmed-background-color": #b6fcb6,
+		"splashscreen-show-hashtags-background-color": #b6fcb6,
+		"splashscreen-sound-config-background-color": #b6fcb6,
+		"splashscreen-delete-background-color": #b6fcb6
+	);
+}

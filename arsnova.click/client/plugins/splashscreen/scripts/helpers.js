@@ -60,7 +60,9 @@ Template.readingConfirmedSplashscreen.helpers($.extend(isMobileDevice, parseMark
 }));
 
 Template.questionAndAnswerSplashscreen.helpers($.extend(isMobileDevice, parseMarkdown, {
-
+	revealAnswerText: function () {
+		return Template.instance().data.revealCorrectValues;
+	}
 }));
 
 Template.renameHashtagSplashscreen.helpers($.extend(isMobileDevice, {getHashtagSchema: hashtagSchema}, {

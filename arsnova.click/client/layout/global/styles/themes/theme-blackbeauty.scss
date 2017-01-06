@@ -1,0 +1,59 @@
+/*
+ * This file is part of ARSnova Click.
+ * Copyright (C) 2016 The ARSnova Team
+ *
+ * ARSnova Click is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ARSnova Click is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
+
+@function theme-blackbeauty() {
+	@return (
+		"success": #00A000, /* green */
+		"success-text-color": white,
+		"warning": #b10d0d, /* firebrick */
+		"info": yellow,
+		"info-text-color": black,
+		"background-color": #010101, /* black */
+		"switch": #444444, /* grey */
+		"switch-text-color": #ffffff,
+		"bg-nav-row": #010101,
+		"bg-questionList-row": #010101,
+		"bg-container": #010101,
+		"bg-footer": #010101,
+		"footer-text-color": #FFFFFF, /* white */
+		"disabled-button-background": darkgrey, /* darkgrey */
+		"placeholder-color": #FFFFFF, /* white */
+		"input-background-color": #FF8C00, /* orange */
+		"input-group-letter-color": white, /* darkslategrey */
+		"check-mark-checked": #00A000,
+		"check-mark-unchecked": #b10d0d,
+		"bg-quiz_manager-available_questions_wrapper-hovered": #444444,
+		"border-question_type_view-wrapper-hovered": #444444,
+		"border-question_type_view-activeQuestionType-wrapper": white,
+		"fg-warning": #b10d0d,
+		"splashscreen-background-color": #6b6b6b,
+		"splashscreen-foreground-color": white,
+		"splash-screen-header-color": white,
+		"splashscreen-show-hashtags-background-color": #6b6b6b,
+		"bg-splashscreen-question-and-answer": #6b6b6b,
+		"bg-splashscreen-question-and-answer_question-content": #6b6b6b,
+		"bg-splashscreen-question-and-answer_answer-content": #6b6b6b,
+		"fg-splashscreen-question-and-answer_answer-content-header": #6b6b6b,
+		"bg-splashscreen-question-and-answer_answer-content-header": #6b6b6b,
+		"splashscreen-question-preview-background-color": #6b6b6b,
+		"splashscreen-reading-confirmed-background-color": #6b6b6b,
+		"splashscreen-sound-config-background-color": #6b6b6b,
+		"splashscreen-delete-background-color": #6b6b6b,
+		"splashscreen-sound-config-button-background-color": #00A000,
+		"splashscreen-sound-config-select-foreground-color": black
+	);
+}

@@ -125,6 +125,7 @@ function addLiveresultsChangeEvents() {
 					questionElement.type === "RangedQuestion" || questionElement.type === "FreeTextQuestion") {
 					return;
 				}
+				Session.set("countdownInitialized", true);
 				liveResultsLib.displayQuestionAndAnswerDialog(value.questionIndex);
 				setTimeout(function () {
 					const dialog = liveResultsLib.getQuestionDialog();

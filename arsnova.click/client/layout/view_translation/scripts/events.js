@@ -17,12 +17,14 @@
 
 import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
+import * as localData from '/lib/local_storage.js';
 
 Template.translate.events({
 	'click .available_translations button': function (event) {
 		$(event.target).removeClass('button-purple').addClass('button-success').css("box-shadow", "none !important")
 			.siblings('[type="button"]')
 			.removeClass('input-field-bg-color').addClass('button-purple').css("box-shadow", "1px 1px 5px black");
+		localData.setLanguage(this.tag);
 		return TAPi18n.setLanguageAmplify(this.tag);
 	},
 	'click #backButton': function () {

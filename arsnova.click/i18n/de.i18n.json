@@ -412,6 +412,7 @@
       "added_questions_title": "Erstellte Quizfragen",
       "session_invalid": "Das Quiz enthält noch unvollständige Quizfragen",
       "connection_lost": "Die Verbindung zum Server wurde unterbrochen",
+      "back_to_quiz_administration": "Quizverwaltung",
       "details": {
         "aria": {
           "btn_group": "Auswahl an Einstellungen für das Quiz"

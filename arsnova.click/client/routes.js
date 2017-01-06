@@ -421,6 +421,7 @@ Router.route('/:quizName/quizManager', {
 					return {
 						backButton: {
 							id: "backButton",
+							text: 'view.quiz_manager.back_to_quiz_administration',
 							intro: "view.quiz_manager.description.back_button"
 						},
 						forwardButton: {

@@ -62,6 +62,7 @@ Template.nickStandardFooter.events({
 	},
 	"click #loginViaCas": function () {
 		Meteor.loginWithCas(function () {
+			console.log(lib.hasTHMMail());
 			if (!lib.hasTHMMail()) {
 				return;
 			}

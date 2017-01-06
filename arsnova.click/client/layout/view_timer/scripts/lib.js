@@ -32,7 +32,7 @@ export function createSlider(index) {
 		start: questionItem.getQuestionList()[index].getTimer(),
 		range: {
 			'min': 10,
-			'max': 300
+			'max': 600
 		}
 	});
 	sliderObject.on('slide', function (val) {

@@ -231,7 +231,7 @@ const clickEvents = {
 		const url = window.location.protocol + "//" + window.location.host + "/" + Router.current().params.quizName;
 		const qrCodeContainer = $(".qr-code-container");
 		const qrCodeSize = function () {
-			const height = $(window).outerHeight() - $('.navbar-fixed-top').outerHeight() - $('.navbar-fixed-bottom').outerHeight();
+			const height = $(window).outerHeight() - $('.navbar-fixed-bottom').outerHeight() - $('.quiz-lobby-header').outerHeight();
 			return height * 0.9;
 		};
 		const calcQrCodeContainerSize = function () {
@@ -253,7 +253,7 @@ const clickEvents = {
 			});
 			img.setAttribute("src", "/images/icons/arsnova_click-512.png");
 			qrCodeContainer.css({
-				top: $('.navbar-fixed-top').outerHeight(),
+				top: $('.quiz-lobby-header').outerHeight(),
 				left: $(window).outerWidth() / 2 - qrCodeSize() / 2
 			});
 			$('.qr-code-container-close').css("left", qrCodeSize() - 45);
@@ -397,13 +397,7 @@ Template.footerNavButtons.events({
 				Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
 				Meteor.call('SessionConfiguration.addConfig', Session.get("questionGroup").getConfiguration().serialize());
 				Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
-				if (Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin()) {
-					Meteor.loginWithCas(function () {
-						Router.go("/" + Router.current().params.quizName + "/memberlist");
-					});
-				} else {
-					Router.go("/" + Router.current().params.quizName + "/memberlist");
-				}
+				Router.go("/" + Router.current().params.quizName + "/memberlist");
 				break;
 			case "results":
 				break;

@@ -395,433 +395,7 @@
 	$bg-quiz_manager_details-btn_group-button-hovered: darken($bg-quiz_manager_details-btn_group-button, 10);
 
 	@if ($name == "theme-Material"){
-		$background-color: #23425b;
-		$warning: #991d1d;
-		$splashscreen-background-color: #b6fcb6;
-		$default: #424242;
-		$disabled-button-background: #424242;
-		$grey-button-background: #424242;
-		$disabled-button-background: #424242;
-		$success: #006000;
-		$slider-color: #006000;
-		$bg-btn-file-input: #5c3909;
-		$info: yellow;
-		$info-text-color: black;
-		$bg-answer_row-button_purple_transition: #562b81;
-		$fg-answer_row-button_green_transition: #562b81;
-
-		$bg-nav-row: $background-color;
-		$bg-container: $background-color;
-		$bg-questionList-row: $background-color;
-		$bg-footer: $background-color;
-
-		$bg-answer_options-bootstrap_switch_handle_off: $warning;
-		$bg-rangedSlider-invalid: $warning;
-		$bg-js-my-hash-invalidQuestion-hovered: lighten($warning, 10);
-		$bg-colorChangingOwnNick25: $warning;
-
-		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
-		$splashscreen-question-preview-background-color: $splashscreen-background-color;
-		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-background-color: $splashscreen-background-color;
-		$splashscreen-delete-background-color: $splashscreen-background-color;
-	}
-
-	@if ($name == "theme-blackbeauty") {
-		$success: #00A000; /* green */
-		$success-text-color: white;
-		$warning: #b10d0d; /* firebrick */
-		$info: yellow;
-		$info-text-color: black;
-		$background-color: #010101; /* black */
-
-		$switch: #444444; /* grey */
-		$switch-text-color: #ffffff;
-
-		$bg-nav-row: $background-color;
-
-		$bg-questionList-row: $bg-nav-row;
-
-		$bg-container: $background-color;
-
-		$bg-footer: $background-color;
-		$footer-text-color: #FFFFFF; /* white */
-
-		$disabled-button-background: darkgrey; /* darkgrey */
-		$placeholder-color: #FFFFFF ; /* white */
-		$input-background-color: #FF8C00; /* orange */
-		$input-group-letter-color: white; /* darkslategrey */
-
-		$check-mark-checked: $success;
-		$check-mark-unchecked: $warning;
-
-		$bg-quiz_manager-available_questions_wrapper-hovered: #444444;
-		$border-question_type_view-wrapper-hovered: #444444;
-		$border-question_type_view-activeQuestionType-wrapper: white;
-
-		$fg-warning: $warning;
-
-		$bg-answer_options-bootstrap_switch: $input-background-color;
-
-		$splashscreen-background-color: #6b6b6b;
-		$splashscreen-foreground-color: white;
-		$splash-screen-header-color: white;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
-		$splashscreen-question-preview-background-color: $splashscreen-background-color;
-		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-background-color: $splashscreen-background-color;
-		$splashscreen-delete-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-button-background-color: $success;
-		$splashscreen-sound-config-select-foreground-color: black;
-	}
-
-	@if ($name == "theme-thm") {
-		$thmred: #971B2F;
-		$thmorange: #F2A900;
-		$thmbabyblue: #00B5E2;
-		$thmnavy: #012169;
-		$thmgreen: #80ba24;
-		$thmgray: #4a5c66;
-
-		$background-color: #dfeec8;
-		$bg-nav-row: $background-color;
-		$bg-container: $background-color;
-		$bg-nav-row: $thmgreen;
-		$bg-footer: $thmgray;
-
-		$fg-text-light: black;
-		$fg_text-dark: black;
-		$fg-question-title: black;
-		$fg_a: #009900;
-		$fg_quiz-name: #b5003f;
-		$default: #d3d3d3; /* light grey */
-		$default-text-color: $thmgray;
-		$success-text-color: white;
-		$fg_titel: $thmgray;
-
-		$bg-quiz_manager-sortable_placeholder: $default-text-color;
-		$fg-quiz_manager-ul-li: $default-text-color;
-		$border-quiz_manager-available_questions_wrapper: $default-text-color;
-		$bg-quiz_manager-available_questions_wrapper-hovered: #BBBCBC;
-		$border-question_type_view-wrapper-hovered: #BBBCBC;
-		$border-question_type_view-activeQuestionType-wrapper: white;
-
-		$bg-introjs-helper_layer: black;
-
-		$fg_demo-quiz-description: $fg_titel;
-		$fg_lobby-waiting-for-players-notifier: $fg_titel;
-
-		$fg-hashtag_management-hashtag_name: $default-text-color;
-		$border-hashtag_management-HR: $default-text-color;
-
-		$placeholder-color: #d3d3d3; /* light grey */
-		$input-background-color: $thmgray;
-		$input-foreground-color: white;
-		$input-group-letter-color: white;
-		$footer-background-color: #000000; /*gainsboro */
-		$fg-footer-info-bar-active: #00CC00;
-		$fg-footer-info-bar-active-hovered: #00FF00;
-
-		$bg-answer_options-bootstrap_switch: $thmgray;
-
-		$bg-questionList-row: $bg-nav-row;
-
-		$bg-container: $background-color;
-
-		$disabled-button-background: #808080; /* grey */
-
-		$check-mark-unchecked: #aaaaaa;
-
-		$fg-theme_description: black;
-		$quiz-summary-row-color: $default-text-color;
-		$fg-quiz-summary-H4: $default-text-color;
-		$fg-quiz-summary-P: $default-text-color;
-		$fg-quiz-summary-UL: $default-text-color;
-		$fg-success: $success;
-
-		$splashscreen-background-color: #b9d68b;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
-		$splashscreen-question-preview-background-color: $splashscreen-background-color;
-		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-background-color: $splashscreen-background-color;
-		$splashscreen-delete-background-color: $splashscreen-background-color;
-	}
-
-	@if ($name == "theme-elegant") {
-		$background-color: #dbe4e9;
-		$bg-nav-row: #002d47;
-		$bg-container: $background-color;
-		$bg-questionList-row: #B1C5D0;
-		$bg-footer: #374e5b;
-		$default-text-color: black;
-		$fg-text-light: black;
-		$fg_text-dark: black;
-		$fg_a: #337ab7;
-		$fg_quiz-name: #ffd700;
-		$fg_titel: black;
-		$fg_demo-quiz-description: $fg_titel;
-		$fg_lobby-waiting-for-players-notifier: $fg_titel;
-		$fg-question-title: black;
-		$fg-theme_description: black;
-		$fg-hashtag_management-hashtag_name: $default-text-color;;
-		$border-hashtag_management-HR: $default-text-color;
-		$quiz-summary-row-color: $default-text-color;
-		$fg-quiz-summary-H4: $default-text-color;
-		$fg-quiz-summary-P: $default-text-color;
-		$fg-quiz-summary-UL: $default-text-color;
-		$bg-quiz_manager-sortable_placeholder: $default-text-color;
-		$fg-quiz_manager-ul-li: $default-text-color;
-		$border-quiz_manager-available_questions_wrapper: $default-text-color;
-		$bg-quiz_manager-available_questions_wrapper-hovered: #BBBCBC;
-		$border-question_type_view-wrapper-hovered: #BBBCBC;
-		$border-question_type_view-activeQuestionType-wrapper: white;
-		$bg-introjs-helper_layer: black;
-		$fg-success: $success;
-		$splashscreen-background-color: #b3c8da;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
-		$splashscreen-question-preview-background-color: $splashscreen-background-color;
-		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-background-color: $splashscreen-background-color;
-		$splashscreen-delete-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-button-background-color: $success;
-	}
-
-	@if ($name == "theme-hell") {
-		$background-color: #FC954B;
-		$bg-nav-row: #FC954B;
-		$bg-container: $background-color;
-		$bg-questionList-row: $bg-container;
-		$bg-footer: #FC954B;
-		$fg_a: #3d9c19;
-		$fg_quiz-name: F08080;
-		$fg_titel: #232737;
-		$fg_demo-quiz-description: $fg_titel;
-		$fg_lobby-waiting-for-players-notifier: $fg_titel;
-		$fg-question-title: #292929;
-		$fg-theme_description: black;
-		$default-text-color: #292929;
-		$fg-hashtag_management-hashtag_name: $default-text-color;
-		$border-hashtag_management-HR: $default-text-color;
-		$fg-text-light: black;
-		$fg_text-dark: black;
-		$fg-footer-info-bar: #394a59;
-		$fg-footer-info-bar-active: #F90840;
-		$fg-footer-info-bar-active-hovered: #C4D200;
-		$quiz-summary-row-color: $default-text-color;
-		$fg-quiz-summary-H4: $default-text-color;
-		$fg-quiz-summary-P: $default-text-color;
-		$fg-quiz-summary-UL: $default-text-color;
-		$bg-quiz_manager-sortable_placeholder: $default-text-color;
-		$fg-quiz_manager-ul-li: $default-text-color;
-		$border-quiz_manager-available_questions_wrapper: $default-text-color;
-		$bg-quiz_manager-available_questions_wrapper-hovered: #BBBCBC;
-		$border-question_type_view-wrapper-hovered: #BBBCBC;
-		$border-question_type_view-activeQuestionType-wrapper: white;
-		$bg-introjs-helper_layer: black;
-		$fg-success: darken($success, 5);
-	}
-
-	@if ($name == "theme-bluetouch") {
-		$green: #80ba24;
-		$red: #971B2F;
-		$success: $green;
-		$failure: $red;
-		$warning: $red;
-
-		$background-color: #2a386d;
-		$bg-nav-row: #2a386d;
-		$bg-container: $background-color;
-		$bg-questionList-row: $bg-container;
-		$bg-footer: #2a386d;
-		$fg_a: #0DA292;
-		$fg_quiz-name: white;
-		$fg_titel: white;
-		$fg_demo-quiz-description: $fg_titel;
-		$fg_lobby-waiting-for-players-notifier: $fg_titel;
-		$fg_quiz-name: #white;
-		$fg-question-title: white;
-		$fg-theme_description: white;
-		$default-text-color: white;
-		$fg-hashtag_management-hashtag_name: $default-text-color;
-		$border-hashtag_management-HR: $default-text-color;
-		$fg-text-light: white;
-		$fg_text-dark: white;
-		$fg-footer-info-bar: white;
-		$fg-footer-info-bar-active: #8dbfb9;
-		$fg-footer-info-bar-active-hovered: #8dbfb9;
-		$quiz-summary-row-color: $default-text-color;
-		$fg-quiz-summary-H4: $default-text-color;
-		$fg-quiz-summary-P: $default-text-color;
-		$fg-quiz-summary-UL: $default-text-color;
-		$fg-success: darken($success, 5);
-		$bg-answer_options-bootstrap_switch: #8dbfb9;
-		$input-background-color: #8dbfb9;
-
-		$bg-questionScrollPane-question-icon-valid-index-number: $green;
-		$border-questionScrollPane-active-valid-remove-question: $green;
-		$slider-color: $green;
-		$bg-answer_options-bootstrap_switch_handle_on: $success;
-
-		$bg-rangedSlider-invalid: $warning;
-		$bg-rangedSlider-valid: $success;
-
-		$border-answer_options-invalidAnswerOption: $red;
-		$border-answer_options-invalidQuestion: $red;
-
-		$splash-screen-header-color: white;
-		$splash-screen-body-color: white;
-		$splashscreen-background-color: $bg-nav-row;
-		$splashscreen-foreground-color: white;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
-		$splashscreen-question-preview-background-color: $splashscreen-background-color;
-		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-background-color: $splashscreen-background-color;
-		$splashscreen-delete-background-color: $splashscreen-background-color;
-		$splash-screen-error-message-background-color: #971B2F;
-		$splashscreen-sound-config-button-background-color: $green;
-
-		$bg-js-my-hash-validQuestion: springgreen;
-		$bg-js-my-hash-invalidQuestion: red;
-		$button-warning: $red;
-		$progress-bar-success-color: $green;
-	}
-
-	@if ($name == "theme-green") {
-
-		$success: #ff9009;
-		$success-text-color: black;
-		$warning: #b10d0d;
-		$info: yellow;
-		$info-text-color: black;
-		$background-color: #118c4e;
-		$switch: #00CD00;
-		$switch-text-color: black;
-		$bg-nav-row: $background-color;
-
-		$bg-questionList-row: $bg-nav-row;
-
-		$bg-container: $background-color;
-
-		$bg-footer: $background-color;
-		$footer-text-color: black;
-
-		$disabled-button-background: #aaaaaa;
-		$placeholder-color: black;
-		$input-background-color: #ff9009;
-		$input-group-letter-color: #2f4f4f;
-
-		$check-mark-checked: $success;
-		$check-mark-unchecked: $warning;
-
-
-		$bg-answer_options-bootstrap_switch: $input-background-color;
-
-		$splashscreen-background-color: #b6b480;
-		$splashscreen-foreground-color: white;
-		$splash-screen-header-color: white;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
-		$splashscreen-question-preview-background-color: $splashscreen-background-color;
-		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-background-color: $splashscreen-background-color;
-		$splashscreen-delete-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-button-background-color: $success;
-		$splashscreen-sound-config-select-foreground-color: black;
-	}
-
-	@if ($name == "theme-action") {
-		$fg_quiz-name: black;
-		$fg-text-light: black;
-		$default-text-color: black;
-		$background-color: darkorange;
-		$bg-nav-row: #B40404;  /*dark-red*/
-		$bg-footer: darkorange;
-
-		$bg-container: $background-color;
-		$bg-questionList-row: $bg-container;
-
-		$fg-hashtag_management-hashtag_name: $default-text-color;
-		$border-hashtag_management-HR: $default-text-color;
-		$quiz-summary-row-color: $default-text-color;
-		$fg-quiz-summary-H4: $default-text-color;
-		$fg-quiz-summary-P: $default-text-color;
-		$fg-quiz-summary-UL: $default-text-color;
-		$bg-quiz_manager-sortable_placeholder: $default-text-color;
-		$fg-quiz_manager-ul-li: $default-text-color;
-		$border-quiz_manager-available_questions_wrapper: $default-text-color;
-
-		$slider-color: $bg-nav-row;
-
-		$bg-progress-bar-reading_confirmation: $bg-footer;
-
-		$splashscreen-background-color: $bg-container;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
-		$splashscreen-question-preview-background-color: $splashscreen-background-color;
-		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-background-color: $splashscreen-background-color;
-		$splashscreen-delete-background-color: $splashscreen-background-color;
-	}
-
-	@if ($name == "theme-Psychology-Correct-Colours") {
-		$background-color: #D96C6C;
-		$bg-nav-row: #D96C6C;
-		$bg-container: $background-color;
-		$bg-questionList-row: #918477;
-		$bg-footer: #D96C6C;
-		$input-background-color: #f6f4f4;
-		$default-text-color: black;
-		$fg-text-light: white;
-		$fg_text-dark: white;
-		$fg_a: #337ab7;
-		$fg_quiz-name: #ffd700;
-		$fg_titel: white;
-		$fg_demo-quiz-description: $fg_titel;
-		$fg_lobby-waiting-for-players-notifier: $fg_titel;
-		$fg-question-title: white;
-		$fg-theme_description: white;
-		$fg-hashtag_management-hashtag_name: $default-text-color;;
-		$border-hashtag_management-HR: $default-text-color;
-		$quiz-summary-row-color: $default-text-color;
-		$fg-quiz-summary-H4: $default-text-color;
-		$fg-quiz-summary-P: $default-text-color;
-		$fg-quiz-summary-UL: $default-text-color;
-		$bg-quiz_manager-sortable_placeholder: $default-text-color;
-		$fg-quiz_manager-ul-li: $default-text-color;
-		$border-quiz_manager-available_questions_wrapper: $default-text-color;
-		$bg-quiz_manager-available_questions_wrapper-hovered: #F9C5C5;
-		$border-question_type_view-wrapper-hovered: #F9C5C5;
-		$border-question_type_view-activeQuestionType-wrapper: black;
-		$bg-introjs-helper_layer: black;
-		$fg-success: $success;
-		$splashscreen-background-color: #b3c8da;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
-		$splashscreen-question-preview-background-color: $splashscreen-background-color;
-		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-background-color: $splashscreen-background-color;
-		$splashscreen-delete-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-button-background-color: $success;
-	}
-
-    /* Default theme */
-    
-	@if ($name == "theme-arsnova-dot-click-contrast") {
-
 		/* Color palette generated by Material Palette - materialpalette.com/teal/orange */
-
 		$primary_color: #009688;
 		$light_primary_color: #B2DFDB;
 		$dark_primary_color: #00796B;
@@ -1026,7 +600,132 @@
 		$bg-rangedSlider-invalid: $md_red_500;
 		$bg-rangedSlider-valid: $dark_primary_color;
 		$bg-rangedSlider-handle: $accent_color;
+	}
 
+	@if ($name == "theme-blackbeauty") {
+		$success: #00A000; /* green */
+		$success-text-color: white;
+		$warning: #b10d0d; /* firebrick */
+		$info: yellow;
+		$info-text-color: black;
+		$background-color: #010101; /* black */
+
+		$switch: #444444; /* grey */
+		$switch-text-color: #ffffff;
+
+		$bg-nav-row: $background-color;
+
+		$bg-questionList-row: $bg-nav-row;
+
+		$bg-container: $background-color;
+
+		$bg-footer: $background-color;
+		$footer-text-color: #FFFFFF; /* white */
+
+		$disabled-button-background: darkgrey; /* darkgrey */
+		$placeholder-color: #FFFFFF ; /* white */
+		$input-background-color: #FF8C00; /* orange */
+		$input-group-letter-color: white; /* darkslategrey */
+
+		$check-mark-checked: $success;
+		$check-mark-unchecked: $warning;
+
+		$bg-quiz_manager-available_questions_wrapper-hovered: #444444;
+		$border-question_type_view-wrapper-hovered: #444444;
+		$border-question_type_view-activeQuestionType-wrapper: white;
+
+		$fg-warning: $warning;
+
+		$bg-answer_options-bootstrap_switch: $input-background-color;
+
+		$splashscreen-background-color: #6b6b6b;
+		$splashscreen-foreground-color: white;
+		$splash-screen-header-color: white;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-button-background-color: $success;
+		$splashscreen-sound-config-select-foreground-color: black;
+	}
+
+	@if ($name == "theme-elegant") {
+		$background-color: #dbe4e9;
+		$bg-nav-row: #002d47;
+		$bg-container: $background-color;
+		$bg-questionList-row: #B1C5D0;
+		$bg-footer: #374e5b;
+		$default-text-color: black;
+		$fg-text-light: black;
+		$fg_text-dark: black;
+		$fg_a: #337ab7;
+		$fg_quiz-name: #ffd700;
+		$fg_titel: black;
+		$fg_demo-quiz-description: $fg_titel;
+		$fg_lobby-waiting-for-players-notifier: $fg_titel;
+		$fg-question-title: black;
+		$fg-theme_description: black;
+		$fg-hashtag_management-hashtag_name: $default-text-color;;
+		$border-hashtag_management-HR: $default-text-color;
+		$quiz-summary-row-color: $default-text-color;
+		$fg-quiz-summary-H4: $default-text-color;
+		$fg-quiz-summary-P: $default-text-color;
+		$fg-quiz-summary-UL: $default-text-color;
+		$bg-quiz_manager-sortable_placeholder: $default-text-color;
+		$fg-quiz_manager-ul-li: $default-text-color;
+		$border-quiz_manager-available_questions_wrapper: $default-text-color;
+		$bg-quiz_manager-available_questions_wrapper-hovered: #BBBCBC;
+		$border-question_type_view-wrapper-hovered: #BBBCBC;
+		$border-question_type_view-activeQuestionType-wrapper: white;
+		$bg-introjs-helper_layer: black;
+		$fg-success: $success;
+		$splashscreen-background-color: #b3c8da;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-button-background-color: $success;
+	}
+
+    /* Default theme */
+	@if ($name == "theme-arsnova-dot-click-contrast") {
+		$background-color: #23425b;
+		$warning: #991d1d;
+		$splashscreen-background-color: #b6fcb6;
+		$default: #424242;
+		$disabled-button-background: #424242;
+		$grey-button-background: #424242;
+		$disabled-button-background: #424242;
+		$success: #006000;
+		$slider-color: #006000;
+		$bg-btn-file-input: #5c3909;
+		$info: yellow;
+		$info-text-color: black;
+		$bg-answer_row-button_purple_transition: #562b81;
+		$fg-answer_row-button_green_transition: #562b81;
+
+		$bg-nav-row: $background-color;
+		$bg-container: $background-color;
+		$bg-questionList-row: $background-color;
+		$bg-footer: $background-color;
+
+		$bg-answer_options-bootstrap_switch_handle_off: $warning;
+		$bg-rangedSlider-invalid: $warning;
+		$bg-js-my-hash-invalidQuestion-hovered: lighten($warning, 10);
+		$bg-colorChangingOwnNick25: $warning;
+
+		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
+		$splashscreen-question-preview-background-color: $splashscreen-background-color;
+		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
+		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
+		$splashscreen-sound-config-background-color: $splashscreen-background-color;
+		$splashscreen-delete-background-color: $splashscreen-background-color;
 	} /* End of default theme */
 
 	.#{$name} {
@@ -1942,13 +1641,7 @@
 	} /* End of <body/> */
 } /* End of mixin declaration */
 
-@include theme(theme-thm);
 @include theme(theme-elegant);
 @include theme(theme-blackbeauty);
-@include theme(theme-hell);
-@include theme(theme-bluetouch);
-@include theme(theme-green);
-@include theme(theme-action);
-@include theme(theme-Psychology-Correct-Colours);
 @include theme(theme-arsnova-dot-click-contrast); // default theme
 @include theme(theme-Material);

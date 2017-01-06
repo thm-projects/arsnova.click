@@ -80,12 +80,10 @@ Template.layout.onRendered(function () {
 		}
 		if (!Session.get("theme") || (Session.get("currentTheme") && Session.get("theme") === Session.get("currentTheme"))) {
 			const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
-			if (localStorage.getItem("theme")) {
-				Session.set("theme", localStorage.getItem("theme"));
-			} else {
+			if (!localStorage.getItem("theme")) {
 				localStorage.setItem("theme", "theme-arsnova-dot-click-contrast");
-				Session.set("theme", localStorage.getItem("theme"));
 			}
+			Session.set("theme", localStorage.getItem("theme"));
 			if (configDoc) {
 				Session.set("theme", configDoc.theme);
 			}

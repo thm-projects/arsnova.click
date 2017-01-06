@@ -35,17 +35,13 @@
 			text-align: center;
 		}
 		.answerContentElementWrapper {
-			border: 1px solid black;
+			border: 1px solid;
 			border-radius: $corner-radius;
 			margin: 10px 0;
-
-			&:nth-child(even) {
-				background-color: lightgrey;
-			}
 		}
 		.answerContentElementLetter {
 			text-align: center;
-			border-bottom: 1px solid black;
+			border-bottom: 1px solid;
 			font-size: 1.5em;
 		}
 		.answerContentElementItem {

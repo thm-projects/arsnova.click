@@ -15,961 +15,246 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-@import "appearance";
-
-@mixin theme($name) {
-
-	/* Google Material Design Color Palette */
-	$md_red_300: #e57373;
-	$md_red_500: #f44336;
-	$md_red_700: #d32f2f;
-	$md_red_accent: #d50000;
-
-	$md_pink_300: #F06292;
-	$md_pink_500: #e91e63;
-	$md_pink_700: #C2185B;
-	$md_pink_accent: #c51162;
-
-	$md_purple_300: #BA68C8;
-	$md_purple_500: #9C27B0;
-	$md_purple_700: #7B1FA2;
-	$md_purple_accent: #AA00FF;
-
-	$md_deep_purple_300: #9575CD;
-	$md_deep_purple_500: #673AB7;
-	$md_deep_purple_700: #512DA8;
-	$md_deep_purple_accent: #6200EA;
-
-	$md_indigo_300: #7986CB;
-	$md_indigo_500: #3F51B5;
-	$md_indigo_700: #303F9F;
-	$md_indigo_accent: #304FFE;
-
-	$md_blue_300: #64B5F6;
-	$md_blue_500: #2196F3;
-	$md_blue_700: #1976D2;
-	$md_blue_accent: #2962FF;
-
-	$md_light_blue_300: #4FC3F7;
-	$md_light_blue_500: #03A9F4;
-	$md_light_blue_700: #0288D1;
-	$md_light_blue_accent: #0091EA;
-
-	$md_cyan_300: #4DD0E1;
-	$md_cyan_500: #00BCD4;
-	$md_cyan_700: #0097A7;
-	$md_cyan_accent: #00B8D4;
-
-	$md_teal_300: #4db6ac;
-	$md_teal_500: #009688;
-	$md_teal_700: #00796b;
-	$md_teal_accent: #00BFA5;
-
-	$md_green_300: #81C784;
-	$md_green_500: #4CAF50;
-	$md_green_700: #388E3C;
-	$md_green_accent: #00C853;
-
-	$md_light_green_300: #AED581;
-	$md_light_green_500: #8BC34A;
-	$md_light_green_700: #689F38;
-	$md_light_green_accent: #64DD17;
-
-	$md_lime_300: #DCE775;
-	$md_lime_500: #CDDC39;
-	$md_lime_700: #AFB42B;
-	$md_lime_accent: #AEEA00;
-
-	$md_yellow_300: #FFF176;
-	$md_yellow_500: #FFEB3B;
-	$md_yellow_700: #FBC02D;
-	$md_yellow_accent: #FFD600;
-
-	$md_amber_300: #FFD54F;
-	$md_amber_500: #FFC107;
-	$md_amber_700: #FFA000;
-	$md_amber_accent: #FFAB00;
-
-	$md_orange_300: #FFB74D;
-	$md_orange_500: #FF9800;
-	$md_orange_700: #F57C00;
-	$md_orange_accent: #FF6D00;
-
-	$md_deep_orange_300: #FF8A65;
-	$md_deep_orange_500: #FF5722;
-	$md_deep_orange_700: #E64A19;
-	$md_deep_orange_accent: #DD2C00;
-
-	$md_brown_300: #A1887F;
-	$md_brown_500: #795548;
-	$md_brown_700: #5D4037;
-
-	$md_grey_300: #E0E0E0;
-	$md_grey_500: #9E9E9E;
-	$md_grey_700: #616161;
-
-	$md_blue_grey_300: #90A4AE;
-	$md_blue_grey_500: #607D8B;
-	$md_blue_grey_700: #455A64;
-
-	/* Global Colors defined on Material Design */
-	$theme_red: $md_red_accent;
-	$theme_orange: $md_deep_orange_500;
-	$theme_blue: $md_blue_500;
-	$theme_yellow: $md_yellow_500;
-	$theme_green: $md_green_accent;
-	$theme_gray: $md_grey_500;
-
-	/* Default Theme */
-	$fg-text-light: white;
-	$fg_text-dark: black;
-	$fg_a: yellow;
-	$fg_quiz-name: #ffd700;
-	$fg_titel: white;
-
-	$fg_demo-quiz-description: $fg_titel;
-	$fg_lobby-waiting-for-players-notifier: $fg_titel;
-
-	$success: #008000;
-	$success-text-color: #ffffff;
-	$fg-success: lighten($success, 20);
-	$warning: #b22222;
-	$warning-text-color: #ffffff;
-	$fg-warning: red;
-	$info: yellow;
-	$info-text-color: black;
-	$default: #808080;
-	$default-text-color: #ffffff;
-
-	$background-color: #4682b4;
-	$button-shadow: black;
-
-	$fg-hashtag_management-hashtag_name: $default-text-color;
-	$border-hashtag_management-HR: $default-text-color;
-
-	$bg-nav-row: $background-color;
-	$bg-container: $background-color;
-
-	$bg-questionList-row: $background-color;
-	$box-shadow-question-row-active: rebeccapurple;
-	$fg-questionScrollPane-index-number: white;
-	$fg-questionScrollPane-remove-question: white;
-	$bg-questionScrollPane-question-icon-valid-index-number: green;
-	$bg-questionScrollPane-question-icon-invalid-index-number: grey;
-	$bg-questionScrollPane-question-icon-valid-index-number-hovered: darken($bg-questionScrollPane-question-icon-valid-index-number, 5%);
-	$bg-questionScrollPane-question-icon-invalid-index-number-hovered: darken($bg-questionScrollPane-question-icon-invalid-index-number, 10%);
-	$border-questionScrollPane-active: beige;
-	$border-questionScrollPane-active-valid-remove-question: green;
-	$box-shadow-questionScrollPane-active-remove-question: none;
-	$border-questionScrollPane-active-remove-question: beige;
-	$bg-questionScrollPane-active-remove-question-hovered: red;
-	$fg-questionScrollPane-active-remove-question-hovered: white;
-	$border-previewQuestionContentWrapper-image: white;
-	$fg-previewQuestionContentWrapper: white;
-
-	$border-answer_options-invalidAnswerOption: red;
-	$border-answer_options-invalidQuestion: red;
-	$bg-answer_options-bootstrap_switch: #ffd700;
-	$border-answer_options-bootstrap_switch: none;
-	$border-radius_answer_options-bootstrap_switch: 0px $corner-radius $corner-radius 0px !important;
-	$bg-answer_options-bootstrap_switch_handle_off: $warning;
-	$fg-answer_options-bootstrap_switch_handle_off: $warning-text-color;
-	$bg-answer_options-bootstrap_switch_handle_on: $success;
-	$fg-answer_options-bootstrap_switch_handle_on: $success-text-color;
-	$border-answer_options-bootstrap_switch_focused: none;
-	$box-shadow-answer_options-bootstrap_switch_focused: none;
-	$outline-answer_options-bootstrap_switch_focused: none;
-	$bg-edit_answeroption_text-element_wrapper: #ffd700;
-	$border-preview_answeroption_content_wrapper-image: white;
-	$fg-preview_answeroption_content_wrapper: white;
-
-	$disabled-button-background: #808080;
-
-	$bg-rangedSlider-invalid: $warning;
-	$bg-rangedSlider-valid: $success;
-	$bg-rangedSlider-handle: rebeccapurple;
-
-	$grey-button-background: #808080;
-	$grey-button-color: white;
-
-	$placeholder-color: #4D4D4D;
-	$input-background-color: #ffd700;
-	$input-foreground-color: black;
-	$input-group-letter-color: #2f4f4f;
-
-	$bg-footer: $background-color;
-	$footer-background-color: #dcdcdc;
-	$footer-text-color: #000000;
-	$fg-footer-info-bar: white;
-	$fg-footer-info-bar-hovered: darken($fg-footer-info-bar, 30);
-	$fg-footer-info-bar-active: #00CC00;
-	$fg-footer-info-bar-active-hovered: #33FF00;
-	$fg-footer-element: white;
-	$fg-footer-element-hovered: white;
-	$fg-footer-element-deactivated: red;
-	$fg-footer-element-deactivated-hovered: #ff3e3e;
-	$fg-footer-element-activated: $success;
-	$fg-footer-element-activated-hovered: $success;
-
-	$slider-color: #008000;
-
-	$progress-bar-success-color: green;
-	$progress-bar-read-confirmation: darkorange;
-	$progress-bar-failure-color: firebrick;
-	$progress-bar-default-color: #b59f23;
-	$bg-progress-bar-reading_confirmation: purple;
-	$fg-progress-bar-reading_confirmation: white;
-	$bg_progress-bar: white;
-	$fg_progress-bar: black;
-
-	$fg-connection-quality-header_connection-pending: grey;
-	$fg-connection-quality-header_connection-offline: grey;
-	$fg-connection-quality-header_connection-ok: green;
-	$fg-connection-quality-header_connection-warning: orange;
-	$fg-connection-quality-header_connection-failed: red;
-	$fg-connection-quality-header_connection-error: red;
-	$fg-connection-quality-header_details-link: white;
-
-	$splash-screen-header-color: #2f4f4f;
-	$splash-screen-body-color: #2f4f4f;
-	$splashscreen-background-color: #98fb98;
-	$splashscreen-foreground-color: black;
-	$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
-	$splashscreen-question-preview-background-color: $splashscreen-background-color;
-	$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
-	$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-	$splashscreen-sound-config-background-color: $splashscreen-background-color;
-	$splashscreen-sound-config-button-background-color: $success;
-	$splashscreen-sound-config-select-foreground-color: black;
-	$splashscreen-delete-background-color: $splashscreen-background-color;
-	$splash-screen-error-message-background-color: #770000;
-	$splash-screen-error-message-foreground-color: white;
-	$splash-screen-error-message-button-background-color: #ad9595;
-	$splash-screen-error-message-button-foreground-color: black;
-
-	$bg-soundConfig_soundTab_navPills: white;
-
-	$check-mark-checked: springgreen;
-	$check-mark-unchecked: grey;
-
-	$fg-theme_description: white;
-
-	$bg-button-leader: $input-background-color;
-	$fg-button-leader: $input-foreground-color;
-
-	$bg-button-result: #eeeeee;
-	$fg-button-result-percentage: #ffffff;
-	$bg-button-result-progress: LightSteelBlue;
-
-	$fg-js-my-hash: black;
-	$bg-js-my-hash: #ffffe0;
-	$bg-js-my-hash-hovered: lighten($bg-js-my-hash, 20);
-	$bg-js-my-hash-active: darken($bg-js-my-hash, 10);
-	$bg-js-my-hash-validQuestion: $success;
-	$bg-js-my-hash-validQuestion-hovered: lighten($success, 10);
-	$fg-js-my-hash-validQuestion: $success-text-color;
-	$bg-js-my-hash-invalidQuestion: $warning;
-	$bg-js-my-hash-invalidQuestion-hovered: lighten($warning, 10);
-	$fg-js-my-hash-invalidQuestion: $warning-text-color;
-
-	$bg-colorChangingOwnNick0: $input-background-color;
-	$fg-colorChangingOwnNick0: white;
-	$bg-colorChangingOwnNick25: $warning;
-	$fg-colorChangingOwnNick25: white;
-	$bg-colorChangingOwnNick50: $info;
-	$fg-colorChangingOwnNick50: white;
-	$bg-colorChangingOwnNick75: $default;
-	$fg-colorChangingOwnNick75: white;
-	$bg-colorChangingOwnNick100: #98fb98;
-	$fg-colorChangingOwnNick100: black;
-
-	$bg-btn-more-learners: rebeccapurple;
-	$fg-btn-more-learners: white;
-
-	$fg-formGroup-progress-percentage-label: white;
-
-	$bg-btn-file-input: #f0ad4e;
-
-	$fg-question-title: white;
-
-	$fg-glyphicon-style: #FFF;
-
-	$bg-disabled-slider: lightgrey;
-
-	$fg-qr-code-button: white;
-	$fg-qr-code-button-hovered: darken($fg-qr-code-button, 20);
-	$border-qr-code-container: white;
-	$bg-qr-code-container: white;
-	$fg-qr-code-container-close: black;
-	$fg-qr-code-container-close-hovered: lighten($fg-qr-code-container-close, 20);
-	$border-qr-code-container-close-icon: black;
-	$background-qr-code-container-close-icon: transparent;
-	$fg-qr-code-label: black;
-
-	$box-shadow-markdown: black;
-	$fg-lockquote: #394a59;
-
-	$quiz-summary-row-color: white;
-	$fg-quiz-summary-H4: white;
-	$fg-quiz-summary-P: white;
-	$fg-quiz-summary-UL: white;
-
-	$bg-answer_row-answer_selected: #ffd700;
-	$fg-answer_row-answer_selected: black;
-	$bg-answer_row-button_purple_transition: #663399;
-	$fg-answer_row-button_purple_transition: white;
-	$bg-answer_row-button_green_transition: white;
-	$fg-answer_row-button_green_transition: #663399;
-
-	$fg-free-text-header-color: $default-text-color;
-
-	$colorChangingArs0: white;
-	$colorChangingArs25: $warning;
-	$colorChangingArs50: $info;
-	$colorChangingArs75: $input-background-color;
-	$colorChangingArs100: white;
-
-	$colorChangingNova0: $input-background-color;
-	$colorChangingNova25: white;
-	$colorChangingNova50: $warning;
-	$colorChangingNova75: $info;
-	$colorChangingNova100: $input-background-color;
-
-	$colorChangingDot0: $info;
-	$colorChangingDot25: $input-background-color;
-	$colorChangingDot50: white;
-	$colorChangingDot75: $warning;
-	$colorChangingDot100: $info;
-
-	$colorChangingClick0: $warning;
-	$colorChangingClick25: $info;
-	$colorChangingClick50: $input-background-color;
-	$colorChangingClick75: white;
-	$colorChangingClick100: $warning;
-
-	$bg-thm_logo_background: #dfe5e6;
-	$border-focused: red;
-	$bg-button_result: #eeeeee;
-
-	$border-loader_wrapper-outer_spin: #3498db;
-	$border-loader_wrapper-middle_spin: #e74c3c;
-	$border-loader_wrapper-inner_spin: #f9c922;
-
-	$fg-quiz_manager-sortable_placeholder: black;
-	$bg-quiz_manager-sortable_placeholder: white;
-	$fg-quiz_manager-ul-li: white;
-	$border-quiz_manager-available_questions_wrapper: white;
-	$bg-quiz_manager-available_questions_wrapper-hovered: lighten(black, 10);
-	$border-quiz_manager-available_questions_wrapper-valid: #00e600;
-	$border-quiz_manager-available_questions_wrapper-invalid: red;
-
-	$border-question_type_view-wrapper: black;
-	$fg-question_type_view-wrapper-hovered: white;
-	$bg-question_type_view-wrapper-hovered: lighten(black, 10);
-
-	$border-question_type_view-activeQuestionType-wrapper: green;
-
-	$border-theme-preview-img: white;
-	$border-theme-preview-img-selected: green;
-
-	$fg-nickname_categories-h3: white;
-	$bg-nickname_categories-nick_style: white;
-	$bg-nickname_categories-nick_style-hovered: lightgrey;
-	$bg-nickname_categories-nick_style-active: grey;
-	$bg-nickname_categories-nick_style-selected_category: lightgreen;
-	$bg-nickname_categories-nick_chosen_nick: white;
-	$bg-nickname_categories-nick_chosen_nick-hovered: lightgrey;
-	$bg-nickname_categories-nick_chosen_nick-active: grey;
-	$bg-nickname_categories-nick_chosen_nick-selected: lightgreen;
-	$fg-nickname_categories-options: white;
-
-	$fg-nick_limited-h3: white;
-	$bg-nick_limited-selectable_nick: white;
-	$bg-nick_limited-selectable_nick-hovered: lightgrey;
-	$bg-nick_limited-selectable_nick-active: grey;
-
-	$bg-introjs-helper_layer: white;
-
-	$fg-quiz_manager_details-btn_group-button: black;
-	$bg-quiz_manager_details-btn_group-button: #ffd700;
-	$bg-quiz_manager_details-btn_group-button-hovered: darken($bg-quiz_manager_details-btn_group-button, 10);
-
-	@if ($name == "theme-Material"){
-		/* Color palette generated by Material Palette - materialpalette.com/teal/orange */
-		$primary_color: #009688;
-		$light_primary_color: #B2DFDB;
-		$dark_primary_color: #00796B;
-
-		$accent_color: #FF9800;
-
-		$primary_text_color: #212121;
-		$secondary_text_color: #757575;
-		$text_icon_color: white;
-
-		/* $devider_color: #BDBDBD; (not used) */
-
-		/* Landing page */
-		$background-color: $primary_color;
-		$bg-nav-row: $primary_color;
-		$bg-container: $background-color;
-		$bg-footer: $dark_primary_color;
-		$fg_titel: white;
-
-		/* Quiz name input */
-		$input-background-color: $accent_color;
-		$placeholder-color: white;
-		$input-foreground-color: white;
-		$disabled-button-background: $md_blue_grey_300;
-
-		/* Connection status */
-		$fg-connection-quality-header_connection-pending: $md_blue_grey_700;
-		$fg-connection-quality-header_connection-offline: $md_red_500;
-		$fg-connection-quality-header_connection-ok: $md_teal_300;
-		$fg-connection-quality-header_connection-warning: $accent_color;
-		$fg-connection-quality-header_connection-failed: $md_red_500;
-		$fg-connection-quality-header_connection-error: $md_red_500;
-
-		/* Semantic colors */
-		$success: $accent_color;
-		$success-text-color: white;
-		$fg-success: lighten($success, 20);
-		$warning: $dark_primary_color;
-		$warning-text-color: white;
-		$fg-warning: $dark_primary_color;
-		$info: $accent_color;
-		$info-text-color: $primary_text_color;
-		$default: $primary_text_color;
-		$default-text-color: $text_icon_color;
-
-		/* Footer Icons */
-		$fg-footer-info-bar: white;
-		$fg-footer-info-bar-hovered: $accent_color;
-		$fg-footer-info-bar-active: $md_green_300;
-		$fg-footer-info-bar-active-hovered: $md_green_500;
-		$fg-footer-element-deactivated: $md_red_300;
-		$fg-footer-element-deactivated-hovered: $md_red_500;
-
-		/* Quizzes stored in browser */
-		$bg-js-my-hash-validQuestion: $success;
-		$bg-js-my-hash-validQuestion-hovered: lighten($success, 20);
-		$fg-js-my-hash-validQuestion: $success-text-color;
-		$bg-js-my-hash-invalidQuestion: $md_grey_700;
-		$bg-js-my-hash-invalidQuestion-hovered: lighten($bg-js-my-hash-invalidQuestion, 20);
-		$fg-js-my-hash-invalidQuestion: $warning-text-color;
-
-		/* Splash screen */
-		$splash-screen-header-color: white;
-		$splash-screen-body-color: white;
-		$splashscreen-background-color: $primary_color;
-		$splashscreen-foreground-color: $primary_text_color;
-		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
-		$splashscreen-question-preview-background-color: $splashscreen-background-color;
-		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-button-background-color: $success;
-		$splashscreen-sound-config-select-foreground-color: $primary_text_color;
-		$splashscreen-delete-background-color: $md_red_300;
-		$splash-screen-error-message-background-color: $md_red_300;
-		$splash-screen-error-message-foreground-color: white;
-		$splash-screen-error-message-button-background-color: $primary_text_color;
-		$splash-screen-error-message-button-foreground-color: white;
-
-		/* Product Tour */
-		$bg-introjs-helper_layer: white;
-
-		/* Sound configuration */
-		$bg-soundConfig_soundTab_navPills: white;
-		$bg-disabled-slider: $md_grey_500;
-
-		/* Miscellaneous */
-		$fg-text-light: $text_icon_color;
-		$fg_text-dark: $primary_text_color;
-		$fg_a: $text_icon_color;
-		$button-shadow: $md_grey_700;
-		$box-shadow-markdown: $md_grey_700;
-		$bg-btn-file-input: $accent_color;
-		$slider-color: $dark_primary_color;
-
-		/* Theme switcher */
-		$border-theme-preview-img: white;
-		$border-theme-preview-img-selected: $md_green_500;
-
-		/* Language select buttons */
-		$grey-button-background: $dark_primary_color;
-		$grey-button-color: white;
-
-		/* Loading indicator */
-		$border-loader_wrapper-outer_spin: white;
-		$border-loader_wrapper-middle_spin: $accent_color;
-		$border-loader_wrapper-inner_spin: $md_teal_300;
-
-		/* Quiz Manager */
-		$fg-quiz_manager-sortable_placeholder: black;
-		$bg-quiz_manager-sortable_placeholder: white;
-		$fg-quiz_manager-ul-li: white;
-		$border-quiz_manager-available_questions_wrapper: white;
-		$bg-quiz_manager-available_questions_wrapper-hovered: $accent_color;
-		$border-quiz_manager-available_questions_wrapper-valid: springgreen;
-		$border-quiz_manager-available_questions_wrapper-invalid: red;
-		$fg-quiz_manager_details-btn_group-button: $primary_text_color;
-		$bg-quiz_manager_details-btn_group-button: $accent_color;
-		$bg-quiz_manager_details-btn_group-button-hovered: $md_orange_700;
-
-		/* Question type selection */
-		$border-question_type_view-wrapper: $accent_color;
-		$fg-question_type_view-wrapper-hovered: white;
-		$bg-question_type_view-wrapper-hovered: $accent_color;
-		$border-question_type_view-activeQuestionType-wrapper: white;
-
-		/* Edit answer options and smartphone preview */
-		$bg-edit_answeroption_text-element_wrapper: white;
-		$border-preview_answeroption_content_wrapper-image: white;
-		$fg-preview_answeroption_content_wrapper: white;
-
-		/* QR code */
-		$fg-qr-code-button: white;
-		$fg-qr-code-button-hovered: darken($fg-qr-code-button, 10);
-		$border-qr-code-container: white;
-		$bg-qr-code-container: white;
-		$fg-qr-code-container-close: $accent_color;
-		$fg-qr-code-container-close-hovered: lighten($fg-qr-code-container-close, 20);
-		$border-qr-code-container-close-icon: $accent_color;
-		$background-qr-code-container-close-icon: white;
-		$fg-qr-code-label: $primary_text_color;
-
-		/* Nickname limitation */
-		$fg-nickname_categories-h3: white;
-		$bg-nickname_categories-nick_style: white;
-		$bg-nickname_categories-nick_style-hovered: $md_grey_500;
-		$bg-nickname_categories-nick_style-active: $md_grey_500;
-		$bg-nickname_categories-nick_style-selected_category: $accent_color;
-		$bg-nickname_categories-nick_chosen_nick: $accent_color;
-		$bg-nickname_categories-nick_chosen_nick-hovered: $md_grey_300;
-		$bg-nickname_categories-nick_chosen_nick-active: $md_grey_500;
-		$bg-nickname_categories-nick_chosen_nick-selected: $md_grey_500;
-		$fg-nickname_categories-options: white;
-		$fg-nick_limited-h3: white;
-		$bg-nick_limited-selectable_nick: white;
-		$bg-nick_limited-selectable_nick-hovered: $accent_color;
-		$bg-nick_limited-selectable_nick-active: $accent_color;
-
-		/* Highlighting one's own nickname */
-		$bg-colorChangingOwnNick0: $dark_primary_color;
-		$fg-colorChangingOwnNick0: white;
-		$bg-colorChangingOwnNick25: $accent_color;
-		$fg-colorChangingOwnNick25: white;
-		$bg-colorChangingOwnNick50: $accent_color;
-		$fg-colorChangingOwnNick50: white;
-		$bg-colorChangingOwnNick75: $accent_color;
-		$fg-colorChangingOwnNick75: white;
-		$bg-colorChangingOwnNick100: $dark_primary_color;
-		$fg-colorChangingOwnNick100: white;
-
-		/*Countdown running view */
-		$fg-question-title: white;
-
-		/* Voting results */
-		$bg-button_result: $primary_color;
-		$progress-bar-success-color: $md_green_500;
-		$progress-bar-failure-color: $md_red_500;
-		$progress-bar-default-color: $md_blue_grey_700; /* partially correct */
-		$bg-button-result-progress: $primary_color;
-		$fg-button-result-percentage: white;
-
-		/* Winning player on ranking list */
-		$bg-button-leader: $input-background-color;
-		$fg-button-leader: $input-foreground-color;
-
-		/* Voting buttons */
-		$bg-answer_row-answer_selected: $accent_color;
-		$fg-answer_row-answer_selected: white;
-		$bg-answer_row-button_purple_transition: $dark_primary_color;
-		$fg-answer_row-button_purple_transition: white;
-
-		/* Quiz lobby */
-		$fg_lobby-waiting-for-players-notifier: $light_primary_color;
-		$bg-btn-more-learners: $dark_primary_color;
-		$fg-btn-more-learners: white;
-
-		/* Quiz management */
-		$fg-hashtag_management-hashtag_name: $default-text-color;
-		$border-hashtag_management-HR: $default-text-color;
-
-		/* Slider for estimation answer */
-		$bg-rangedSlider-invalid: $md_red_500;
-		$bg-rangedSlider-valid: $dark_primary_color;
-		$bg-rangedSlider-handle: $accent_color;
-	}
-
-	@if ($name == "theme-blackbeauty") {
-		$success: #00A000; /* green */
-		$success-text-color: white;
-		$warning: #b10d0d; /* firebrick */
-		$info: yellow;
-		$info-text-color: black;
-		$background-color: #010101; /* black */
-
-		$switch: #444444; /* grey */
-		$switch-text-color: #ffffff;
-
-		$bg-nav-row: $background-color;
-
-		$bg-questionList-row: $bg-nav-row;
-
-		$bg-container: $background-color;
-
-		$bg-footer: $background-color;
-		$footer-text-color: #FFFFFF; /* white */
-
-		$disabled-button-background: darkgrey; /* darkgrey */
-		$placeholder-color: #FFFFFF ; /* white */
-		$input-background-color: #FF8C00; /* orange */
-		$input-group-letter-color: white; /* darkslategrey */
-
-		$check-mark-checked: $success;
-		$check-mark-unchecked: $warning;
-
-		$bg-quiz_manager-available_questions_wrapper-hovered: #444444;
-		$border-question_type_view-wrapper-hovered: #444444;
-		$border-question_type_view-activeQuestionType-wrapper: white;
-
-		$fg-warning: $warning;
-
-		$bg-answer_options-bootstrap_switch: $input-background-color;
-
-		$splashscreen-background-color: #6b6b6b;
-		$splashscreen-foreground-color: white;
-		$splash-screen-header-color: white;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
-		$splashscreen-question-preview-background-color: $splashscreen-background-color;
-		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-background-color: $splashscreen-background-color;
-		$splashscreen-delete-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-button-background-color: $success;
-		$splashscreen-sound-config-select-foreground-color: black;
-	}
-
-	@if ($name == "theme-elegant") {
-		$background-color: #dbe4e9;
-		$bg-nav-row: #002d47;
-		$bg-container: $background-color;
-		$bg-questionList-row: #B1C5D0;
-		$bg-footer: #374e5b;
-		$default-text-color: black;
-		$fg-text-light: black;
-		$fg_text-dark: black;
-		$fg_a: #337ab7;
-		$fg_quiz-name: #ffd700;
-		$fg_titel: black;
-		$fg_demo-quiz-description: $fg_titel;
-		$fg_lobby-waiting-for-players-notifier: $fg_titel;
-		$fg-question-title: black;
-		$fg-theme_description: black;
-		$fg-hashtag_management-hashtag_name: $default-text-color;;
-		$border-hashtag_management-HR: $default-text-color;
-		$quiz-summary-row-color: $default-text-color;
-		$fg-quiz-summary-H4: $default-text-color;
-		$fg-quiz-summary-P: $default-text-color;
-		$fg-quiz-summary-UL: $default-text-color;
-		$bg-quiz_manager-sortable_placeholder: $default-text-color;
-		$fg-quiz_manager-ul-li: $default-text-color;
-		$border-quiz_manager-available_questions_wrapper: $default-text-color;
-		$bg-quiz_manager-available_questions_wrapper-hovered: #BBBCBC;
-		$border-question_type_view-wrapper-hovered: #BBBCBC;
-		$border-question_type_view-activeQuestionType-wrapper: white;
-		$bg-introjs-helper_layer: black;
-		$fg-success: $success;
-		$splashscreen-background-color: #b3c8da;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
-		$splashscreen-question-preview-background-color: $splashscreen-background-color;
-		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-background-color: $splashscreen-background-color;
-		$splashscreen-delete-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-button-background-color: $success;
-	}
-
-    /* Default theme */
-	@if ($name == "theme-arsnova-dot-click-contrast") {
-		$background-color: #23425b;
-		$warning: #991d1d;
-		$splashscreen-background-color: #b6fcb6;
-		$default: #424242;
-		$disabled-button-background: #424242;
-		$grey-button-background: #424242;
-		$disabled-button-background: #424242;
-		$success: #006000;
-		$slider-color: #006000;
-		$bg-btn-file-input: #5c3909;
-		$info: yellow;
-		$info-text-color: black;
-		$bg-answer_row-button_purple_transition: #562b81;
-		$fg-answer_row-button_green_transition: #562b81;
-
-		$bg-nav-row: $background-color;
-		$bg-container: $background-color;
-		$bg-questionList-row: $background-color;
-		$bg-footer: $background-color;
-
-		$bg-answer_options-bootstrap_switch_handle_off: $warning;
-		$bg-rangedSlider-invalid: $warning;
-		$bg-js-my-hash-invalidQuestion-hovered: lighten($warning, 10);
-		$bg-colorChangingOwnNick25: $warning;
-
-		$splashscreen-question-and-answer-background-color: $splashscreen-background-color;
-		$splashscreen-question-preview-background-color: $splashscreen-background-color;
-		$splashscreen-reading-confirmed-background-color: $splashscreen-background-color;
-		$splashscreen-show-hashtags-background-color: $splashscreen-background-color;
-		$splashscreen-sound-config-background-color: $splashscreen-background-color;
-		$splashscreen-delete-background-color: $splashscreen-background-color;
-	} /* End of default theme */
-
-	.#{$name} {
-		background: $background-color;
+@import "themes/standard-style-definitions";
+@import "themes/theme-arsnova-dot-click-contrast";
+@import "themes/theme-blackbeauty";
+@import "themes/theme-elegant";
+@import "themes/theme-Material";
+
+$themes: (
+	theme-arsnova-dot-click-contrast: map-merge(standard-style-definitions(), theme-arsnova-dot-click-contrast()),
+	theme-blackbeauty: map-merge(standard-style-definitions(), theme-blackbeauty()),
+	theme-elegant: map-merge(standard-style-definitions(), theme-elegant()),
+	theme-Material: map-merge(standard-style-definitions(), theme-Material())
+);
+
+@each $theme, $map in $themes {
+	.#{$theme} {
+		background-color: map-get($map, "background-color");
 		-webkit-transition: background-color 800ms linear;
 		-moz-transition: background-color 800ms linear;
 		-o-transition: background-color 800ms linear;
-		-ms-transition: background-color 800ms linear;
 		transition: background-color 800ms linear;
 		*:fullscreen,
 		*:-webkit-full-screen,
 		*:-moz-full-screen {
-			background-color: $background-color;
+			background-color: map-get($map, "background-color");
 			-webkit-transition: background-color 800ms linear;
 			-moz-transition: background-color 800ms linear;
 			-o-transition: background-color 800ms linear;
-			-ms-transition: background-color 800ms linear;
 			transition: background-color 800ms linear;
 		}
 		.introjs-helperLayer {
-			background: $bg-introjs-helper_layer;
+			background-color: map-get($map, "bg-introjs-helper_layer");
 		}
 		#theme-wrapper {
 			height: 100%;
 			width: 100%;
 			position: absolute;
 			.text-light, a.text-light, a:hover.text-light, a:active.text-light, a:visited.text-light, a:focus.text-light {
-				color: $fg-text-light;
+				color: map-get($map, "fg-text-light");
 			}
 			a.text-dark, a:hover.text-dark, a:active.text-dark, a:visited.text-dark, a:focus.text-dark {
-				color: $fg_text-dark !important;
+				color: map-get($map, "fg_text-dark") !important;
 			}
 			a, a:hover, a:active, a:visited, a:focus {
-				color: $fg_a;
+				color: map-get($map, "fg_a");
 			}
 			.titel {
-				color: $fg_titel;
+				color: map-get($map, "fg_titel");
 			}
 			#landingPageContent {
 				#demo-quiz-description {
-					color: $fg_demo-quiz-description;
+					color: map-get($map, "fg_demo-quiz-description");
 				}
 			}
 			.quizName {
-				color: $fg_quiz-name;
+				color: map-get($map, "fg_quiz-name");
 			}
-			.container, .fixed-bottom {
-				background-color: $bg-container;
+			.container,
+			.fixed-bottom {
+				background-color: map-get($map, "bg-container");
 				-webkit-transition: background-color 800ms linear;
 				-moz-transition: background-color 800ms linear;
 				-o-transition: background-color 800ms linear;
-				-ms-transition: background-color 800ms linear;
 				transition: background-color 800ms linear;
 			}
 			.footer-info-bar {
-				background-color: $bg-footer;
-				color: $fg-footer-info-bar;
+				background-color: map-get($map, "bg-footer");
+				color: map-get($map, "fg-footer-info-bar");
 			}
 			.footer-gradient {
-				color: $footer-text-color;
+				color: map-get($map, "footer-text-color");
 			}
 			.footer a {
-				color: $footer-text-color;
+				color: map-get($map, "footer-text-color");
 				div {
-					border-left: solid $footer-text-color 1px;
-					color: $footer-text-color !important;
+					border-left: 1px solid map-get($map, "footer-text-color");
+					color: map-get($map, "footer-text-color") !important;
 				}
 			}
 			.navbar-fixed-top {
-				background-color: $bg-nav-row;
+				background-color: map-get($map, "bg-nav-row");
 				-webkit-transition: background-color 800ms linear;
 				-moz-transition: background-color 800ms linear;
 				-o-transition: background-color 800ms linear;
-				-ms-transition: background-color 800ms linear;
 				transition: background-color 800ms linear;
-				.questionList-row {
-					background-color: $bg-questionList-row;
-					-webkit-transition: background-color 800ms linear;
-					-moz-transition: background-color 800ms linear;
-					-o-transition: background-color 800ms linear;
-					-ms-transition: background-color 800ms linear;
-					transition: background-color 800ms linear;
-				}
 				.nav-row {
-					background-color: $bg-nav-row;
+					background-color: map-get($map, "bg-nav-row");
 					-webkit-transition: background-color 800ms linear;
 					-moz-transition: background-color 800ms linear;
 					-o-transition: background-color 800ms linear;
-					-ms-transition: background-color 800ms linear;
 					transition: background-color 800ms linear;
 				}
 			}
 			*::-webkit-input-placeholder {
-				color: $placeholder-color;
+				color: map-get($map, "placeholder-color");
 				opacity: 1;
 			}
 			*:-moz-placeholder, *::-moz-placeholder {
-				color: $placeholder-color;
+				color: map-get($map, "placeholder-color");
 				opacity: 1;
 			}
 			*:-ms-input-placeholder {
-				color: $placeholder-color;
+				color: map-get($map, "placeholder-color");
 				opacity: 1;
+			}
+			.btn-info {
+				color: map-get($map, "fg-btn_info");
+				background-color: map-get($map, "bg-btn_info");
+				border-color: map-get($map, "border-btn_info");
+				&:hover {
+					color: map-get($map, "fg-btn_info-hovered");
+					background-color: map-get($map, "bg-btn_info-hovered");
+					border-color: map-get($map, "border-btn_info-hovered");
+				}
+				&:focus {
+					color: map-get($map, "fg-btn_info-focused");
+					background-color: map-get($map, "bg-btn_info-focused");
+					border-color: map-get($map, "border-btn_info-focused");
+				}
+			}
+			.btn-warning {
+				color: map-get($map, "fg-btn_warning");
+				background-color: map-get($map, "bg-btn_warning");
+				border-color: map-get($map, "border-btn_warning");
+				&:hover {
+					color: map-get($map, "fg-btn_warning-hovered");
+					background-color: map-get($map, "bg-btn_warning-hovered");
+					border-color: map-get($map, "border-btn_warning-hovered");
+				}
+				&:focus {
+					color: map-get($map, "fg-btn_warning-focused");
+					background-color: map-get($map, "bg-btn_warning-focused");
+					border-color: map-get($map, "border-btn_warning-focused");
+				}
+			}
+			.btn-success {
+				color: map-get($map, "fg-btn_success");
+				background-color: map-get($map, "bg-btn_success");
+				border-color: map-get($map, "border-btn_success");
+				&:hover {
+					color: map-get($map, "fg-btn_success-hovered");
+					background-color: map-get($map, "bg-btn_success-hovered");
+					border-color: map-get($map, "border-btn_success-hovered");
+				}
+				&:focus {
+					color: map-get($map, "fg-btn_success-focused");
+					background-color: map-get($map, "bg-btn_success-focused");
+					border-color: map-get($map, "border-btn_success-focused");
+				}
+			}
+			.btn-default {
+				color: map-get($map, "fg-btn_default");
+				background-color: map-get($map, "bg-btn_default");
+				border-color: map-get($map, "border-btn_default");
+				&:hover {
+					color: map-get($map, "fg-btn_default-hovered");
+					background-color: map-get($map, "bg-btn_default-hovered");
+					border-color: map-get($map, "border-btn_default-hovered");
+				}
+				&:focus {
+					color: map-get($map, "fg-btn_default-focused");
+					background-color: map-get($map, "bg-btn_default-focused");
+					border-color: map-get($map, "border-btn_default-focused");
+				}
 			}
 			.hashtag-management {
 				hr {
-					border-color: $border-hashtag_management-HR;
+					border-color: map-get($map, "border-hashtag_management-HR");
 				}
 				.hashtag-name {
-					color: $fg-hashtag_management-hashtag_name;
+					color: map-get($map, "fg-hashtag_management-hashtag_name");
 				}
 			}
 			button:disabled {
-				background-color: $disabled-button-background;
+				background-color: map-get($map, "disabled-button-background");
 			}
 			.qr-code-button {
-				color: $fg-qr-code-button;
+				color: map-get($map, "fg-qr-code-button");
 				&:hover {
-					color: $fg-qr-code-button-hovered;
+					color: map-get($map, "fg-qr-code-button-hovered");
 				}
 			}
 			.qr-code-container {
-				border: 1px solid $border-qr-code-container;
-				background-color: $bg-qr-code-container;
+				border: 1px solid map-get($map, "border-qr-code-container");
+				background-color: map-get($map, "bg-qr-code-container");
 			}
 			.qr-code-container-close {
-				color: $fg-qr-code-container-close;
+				color: map-get($map, "fg-qr-code-container-close");
 				&:hover {
-					color: $fg-qr-code-container-close-hovered;
+					color: map-get($map, "fg-qr-code-container-close-hovered");
 				}
 				.glyphicon-remove {
-					border: 0px solid $border-qr-code-container-close-icon;
-					background-color: $background-qr-code-container-close-icon;
+					border: 0 solid map-get($map, "border-qr-code-container-close-icon");
+					background-color: map-get($map, "background-qr-code-container-close-icon");
 				}
 			}
 			.qr-code-label {
-				color: $fg-qr-code-label;
-			}
-			.questionScrollPane {
-				.indexNumber {
-					color: $fg-questionScrollPane-index-number;
-				}
-				.removeQuestion {
-					color: $fg-questionScrollPane-remove-question;
-				}
-				.questionIcon {
-					&.valid {
-						.indexNumber {
-							background-color: $bg-questionScrollPane-question-icon-valid-index-number;
-						}
-						&:hover:not(.active) {
-							.indexNumber {
-								background-color: $bg-questionScrollPane-question-icon-valid-index-number-hovered;
-							}
-						}
-					}
-					&:not(.valid) {
-						.indexNumber {
-							background-color: $bg-questionScrollPane-question-icon-invalid-index-number;
-						}
-						&:hover:not(.active) {
-							.indexNumber {
-								background-color: $bg-questionScrollPane-question-icon-invalid-index-number-hovered;
-							}
-						}
-					}
-					&.active {
-						border: 1px solid $border-questionScrollPane-active;
-						&.valid {
-							.removeQuestion {
-								background-color: $border-questionScrollPane-active-valid-remove-question;
-							}
-						}
-						.removeQuestion {
-							box-shadow: $box-shadow-questionScrollPane-active-remove-question;
-							border-left: 1px solid $border-questionScrollPane-active-remove-question;
-							&:hover {
-								background-color: $bg-questionScrollPane-active-remove-question-hovered;
-								color: $fg-questionScrollPane-active-remove-question-hovered;
-							}
-						}
-					}
-				}
+				color: map-get($map, "fg-qr-code-label");
 			}
 			.answer-options {
 				.invalidAnswerOption {
-					border: 2px solid $border-answer_options-invalidAnswerOption;
-				}
-				.bootstrap-switch {
-					background-color: $bg-answer_options-bootstrap_switch;
-					border: $border-answer_options-bootstrap_switch;
-					border-radius: $border-radius_answer_options-bootstrap_switch;
-					.bootstrap-switch-handle-off {
-						background-color: $bg-answer_options-bootstrap_switch_handle_off;
-						color: $fg-answer_options-bootstrap_switch_handle_off;
-					}
-					.bootstrap-switch-handle-on {
-						background-color: $bg-answer_options-bootstrap_switch_handle_on;
-						color: $fg-answer_options-bootstrap_switch_handle_on;
-					}
-					&.bootstrap-switch-focused {
-						border: $border-answer_options-bootstrap_switch_focused;
-						box-shadow: $box-shadow-answer_options-bootstrap_switch_focused;
-						outline: $outline-answer_options-bootstrap_switch_focused;
-					}
+					border: 2px solid map-get($map, "border-answer_options-invalidAnswerOption");
 				}
 			}
 			#editQuestionText {
 				.invalidQuestion {
-					border: 2px solid $border-answer_options-invalidQuestion;
+					border: 2px solid map-get($map, "border-answer_options-invalidQuestion");
 				}
 			}
 			.progress-bar {
-				background: $bg_progress-bar;
-				color: $fg_progress-bar;
+				background: map-get($map, "bg_progress-bar");
+				color: map-get($map, "fg_progress-bar");
 			}
 			.progress-reading_confirmation {
-				background-color: $bg-progress-bar-reading_confirmation;
-				color: $fg-progress-bar-reading_confirmation;
+				background-color: map-get($map, "bg-progress-bar-reading_confirmation");
+				color: map-get($map, "fg-progress-bar-reading_confirmation");
 			}
 			.slider, .slider .noUi-handle {
-				background-color: $slider-color;
+				background-color: map-get($map, "slider-color");
 			}
 			.button-shadow, .button {
-				box-shadow: 1px 1px 5px $button-shadow;
+				box-shadow: 1px 1px 5px map-get($map, "button-shadow");
 			}
 			.input-field {
-				color: $input-foreground-color !important;
+				color: map-get($map, "input-foreground-color") !important;
 			}
 			.input-field-bg-color, .input-field {
-				background-color: $input-background-color;
+				background-color: map-get($map, "input-background-color");
 			}
 			.default-yellow-text-color {
 				color: white;
 			}
 			.input-group-letter, .button-result-letter {
-				color: $input-group-letter-color;
+				color: map-get($map, "input-group-letter-color");
 			}
 			.button-foreground-color {
-				color: $input-foreground-color !important;
+				color: map-get($map, "input-foreground-color") !important;
 			}
 			.button-next, .button-success {
-				background-color: $success;
-				color: $success-text-color;
+				background-color: map-get($map, "success");
+				color: map-get($map, "success-text-color");
 			}
 			.btn-success,
 			.btn-info,
@@ -980,193 +265,187 @@
 				}
 			}
 			.button-selected {
-				background-color: $info;
-				color: $info-text-color;
+				background-color: map-get($map, "info");
+				color: map-get($map, "info-text-color");
 			}
 			.button-warning, .button-back, div.warning {
-				background-color: $warning;
-				color: $warning-text-color;
+				background-color: map-get($map, "warning");
+				color: map-get($map, "warning-text-color");
 			}
 			.button-purple {
-				background-color: $bg-answer_row-button_purple_transition;
-				color: $fg-answer_row-button_purple_transition;
+				background-color: map-get($map, "bg-answer_row-button_purple_transition");
+				color: map-get($map, "fg-answer_row-button_purple_transition");
 			}
 			.button-grey {
-				background-color: $grey-button-background;
-				color: $grey-button-color;
+				background-color: map-get($map, "grey-button-background");
+				color: map-get($map, "grey-button-color");
 			}
 			.button-default {
-				background-color: $default;
-				color: $default-text-color;
+				background-color: map-get($map, "default");
+				color: map-get($map, "default-text-color");
 			}
 			.button-leader {
-				background-color: $bg-button-leader;
-				color: $fg-button-leader;
-				box-shadow: 1px 1px 5px $button-shadow;
+				background-color: map-get($map, "bg-button-leader");
+				color: map-get($map, "fg-button-leader");
+				box-shadow: 1px 1px 5px map-get($map, "button-shadow");
 			}
 			.button-result {
-				background-color: $bg-button-result;
+				background-color: map-get($map, "bg-button-result");
 				.percentage {
-					color: $fg-button-result-percentage;
+					color: map-get($map, "fg-button-result-percentage");
 				}
 				.progress {
-					background-color: $bg-button-result-progress;
+					background-color: map-get($map, "bg-button-result-progress");
 				}
 			}
 			.navbar-footer {
-				background-color: $bg-footer;
+				background-color: map-get($map, "bg-footer");
 				-webkit-transition: background-color 800ms linear;
 				-moz-transition: background-color 800ms linear;
 				-o-transition: background-color 800ms linear;
-				-ms-transition: background-color 800ms linear;
 				transition: background-color 800ms linear;
 			}
 			.footerElement {
-				color: $fg-footer-info-bar;
+				color: map-get($map, "fg-footer-info-bar");
 				&:hover {
-					color: $fg-footer-info-bar-hovered;
+					color: map-get($map, "fg-footer-info-bar-hovered");
 				}
 				&.error {
-					color: $fg-footer-element-deactivated;
+					color: map-get($map, "fg-footer-element-deactivated");
 					&:hover {
-						color: $fg-footer-element-deactivated-hovered;
+						color: map-get($map, "fg-footer-element-deactivated-hovered");
 					}
 				}
 				&.success {
-					color: $fg-footer-info-bar-active;
+					color: map-get($map, "fg-footer-info-bar-active");
 
 					&:hover {
-						color: $fg-footer-info-bar-active-hovered;
+						color: map-get($map, "fg-footer-info-bar-active-hovered");
 					}
 				}
 			}
 			.progress-success {
-				background-color: $progress-bar-success-color !important;
+				background-color: map-get($map, "progress-bar-success-color") !important;
 			}
 			.progress-failure {
-				background-color: $progress-bar-failure-color !important;
+				background-color: map-get($map, "progress-bar-failure-color") !important;
 			}
 			.progress-default {
-				background-color: $progress-bar-default-color !important;
+				background-color: map-get($map, "progress-bar-default-color") !important;
 			}
 			.textarea {
 				background-color: white;
-				color: $md_blue_grey_700;
+				color: map-get($map, "md_blue_grey_700");
 			}
 			.previewText {
-				background-color: $input-background-color;
-				color: $input-foreground-color !important;
+				background-color: map-get($map, "input-background-color");
+				color: map-get($map, "input-foreground-color") !important;
 			}
 			.check-mark-checked {
-				color: $check-mark-checked;
+				color: map-get($map, "check-mark-checked");
 			}
 			.check-mark-unchecked {
-				color: $check-mark-unchecked;
+				color: map-get($map, "check-mark-unchecked");
 			}
 			.success input, .success textarea, input.success, textarea.success {
-				border: 3px solid $success;
+				border: 3px solid map-get($map, "success");
 			}
 			.error input, .error textarea, input.error, textarea.error {
-				border: 3px solid $warning;
+				border: 3px solid map-get($map, "warning");
 			}
 			p.success, span.success {
-				color : springgreen;
+				color: springgreen;
 			}
 			p.failed, span.failed {
-				color : red;
+				color: red;
 			}
 			.popover-title, .popover {
-				background-color: $warning;
-				color: $warning-text-color;
-				border-color: $warning;
+				background-color: map-get($map, "warning");
+				color: map-get($map, "warning-text-color");
+				border-color: map-get($map, "warning");
 			}
 			.popover.bottom > .arrow:after {
-				border-bottom-color: $warning;
+				border-bottom-color: map-get($map, "warning");
 			}
 			.popover.right > .arrow:after {
-				border-right-color: $warning;
+				border-right-color: map-get($map, "warning");
 			}
 			.lockquote {
-				color: $fg-lockquote !important;
+				color: map-get($map, "fg-lockquote") !important;
 			}
 			.button-import {
-				background: $bg-btn-file-input;
+				background: map-get($map, "bg-btn-file-input");
 			}
 			.question-title {
-				color: $fg-question-title;
+				color: map-get($map, "fg-question-title");
 			}
 			.glyphicon-style {
-				color: $fg-glyphicon-style;
+				color: map-get($map, "fg-glyphicon-style");
 			}
 			.formGroupProgressRow {
 				.progress {
 					.percentage {
 						.label {
-							color: $fg-formGroup-progress-percentage-label;
+							color: map-get($map, "fg-formGroup-progress-percentage-label");
 						}
 					}
 				}
 			}
-			.question-row.active {
-				-webkit-box-shadow: 0 0 13px 3px $box-shadow-question-row-active;
-				-moz-box-shadow: 0 0 13px 3px $box-shadow-question-row-active;
-				box-shadow: 0 0 13px 3px $box-shadow-question-row-active;
-			}
 			.btn-more-learners {
-				background-color: $bg-btn-more-learners;
-				color: $fg-btn-more-learners;
+				background-color: map-get($map, "bg-btn-more-learners");
+				color: map-get($map, "fg-btn-more-learners");
 			}
 			#waiting_for_players_notifier {
-				color: $fg-lobby-waiting-for-players-notifier;
+				color: map-get($map, "fg-lobby-waiting-for-players-notifier");
 			}
 			@keyframes colorChangingOwnNick {
 				0% {
-					background-color: $bg-colorChangingOwnNick0;
-					color: $fg-colorChangingOwnNick0;
+					background-color: map-get($map, "bg-colorChangingOwnNick0");
+					color: map-get($map, "fg-colorChangingOwnNick0");
 					transform: translateY(0%);
 					-webkit-transform: translateY(0%);
 				}
 				25% {
-					background-color: $bg-colorChangingOwnNick25;
-					color: $fg-colorChangingOwnNick25;
+					background-color: map-get($map, "bg-colorChangingOwnNick25");
+					color: map-get($map, "fg-colorChangingOwnNick25");
 				}
 				50% {
-					background-color: $bg-colorChangingOwnNick50;
-					color: $fg-colorChangingOwnNick50;
+					background-color: map-get($map, "bg-colorChangingOwnNick50");
+					color: map-get($map, "fg-colorChangingOwnNick50");
 				}
 				75% {
-					background-color: $bg-colorChangingOwnNick75;
-					color: $fg-colorChangingOwnNick75;
+					background-color: map-get($map, "bg-colorChangingOwnNick75");
+					color: map-get($map, "fg-colorChangingOwnNick75");
 				}
 				100% {
-					background-color: $bg-colorChangingOwnNick100;
-					color: $fg-colorChangingOwnNick100;
+					background-color: map-get($map, "bg-colorChangingOwnNick100");
+					color: map-get($map, "fg-colorChangingOwnNick100");
 					transform: translateY(0%);
 					-webkit-transform: translateY(0%);
 				}
 			}
 			.color-changing-ars {
-				color: $fg-footer-info-bar;
-				animation-name: #{$name}_colorChangingArs;
+				color: map-get($map, "fg-footer-info-bar");
+				animation-name: #{$theme}_colorChangingArs;
 			}
 			.color-changing-nova {
-				color: $fg-footer-info-bar;
-				animation-name: #{$name}_colorChangingNova;
+				color: map-get($map, "fg-footer-info-bar");
+				animation-name: #{$theme}_colorChangingNova;
 			}
 			.color-changing-dot {
-				color: $fg-footer-info-bar;
-				animation-name: #{$name}_colorChangingDot;
+				color: map-get($map, "fg-footer-info-bar");
+				animation-name: #{$theme}_colorChangingDot;
 			}
 			.color-changing-click {
-				color: $fg-footer-info-bar;
-				animation-name: #{$name}_colorChangingClick;
+				color: map-get($map, "fg-footer-info-bar");
+				animation-name: #{$theme}_colorChangingClick;
 			}
-			@keyframes #{$name}_colorChangingArs {
+			@keyframes #{$theme}_colorChangingArs {
 				0% {
 					color: white;
 				}
 				25% {
-					color: $input-background-color;
+					color: map-get($map, "input-background-color");
 				}
 				50% {
 					color: white;
@@ -1178,7 +457,7 @@
 					color: white;
 				}
 			}
-			@keyframes #{$name}_colorChangingNova {
+			@keyframes #{$theme}_colorChangingNova {
 				0% {
 					color: white;
 				}
@@ -1186,7 +465,7 @@
 					color: white;
 				}
 				50% {
-					color: $input-background-color;
+					color: map-get($map, "input-background-color");
 				}
 				75% {
 					color: white;
@@ -1195,7 +474,7 @@
 					color: white;
 				}
 			}
-			@keyframes #{$name}_colorChangingDot {
+			@keyframes #{$theme}_colorChangingDot {
 				0% {
 					color: white;
 				}
@@ -1206,13 +485,13 @@
 					color: white;
 				}
 				75% {
-					color: $input-background-color;
+					color: map-get($map, "input-background-color");
 				}
 				100% {
 					color: white;
 				}
 			}
-			@keyframes #{$name}_colorChangingClick {
+			@keyframes #{$theme}_colorChangingClick {
 				0% {
 					color: white;
 				}
@@ -1226,120 +505,143 @@
 					color: white;
 				}
 				100% {
-					color: $input-background-color;
+					color: map-get($map, "input-background-color");
 				}
 			}
 			.button-markdown-shadow, .button-markdown {
-				box-shadow: 1px 1px 5px $box-shadow-markdown;
+				box-shadow: 1px 1px 5px map-get($map, "box-shadow-markdown");
 			}
 			.input-label {
-				color: $input-group-letter-color;
+				color: map-get($map, "input-group-letter-color");
 			}
 			.rangedAnswerOptions {
 				.rangedSlider {
-					background-color: $bg-rangedSlider-invalid;
+					background-color: map-get($map, "bg-rangedSlider-invalid");
 					.noUi-background {
-						background-color: $bg-rangedSlider-invalid;
+						background-color: map-get($map, "bg-rangedSlider-invalid");
 					}
 					.noUi-connect {
-						background-color: $bg-rangedSlider-valid;
+						background-color: map-get($map, "bg-rangedSlider-valid");
 					}
 					.noUi-handle {
-						background-color: $bg-rangedSlider-handle;
+						background-color: map-get($map, "bg-rangedSlider-handle");
 					}
 				}
 			}
 			.rangedValues {
-				color: $default-text-color;
+				color: map-get($map, "default-text-color");
 				input[type="number"] {
 					&.invalid {
-						border: 3px solid $bg-rangedSlider-invalid
+						border: 3px solid map-get($map, "bg-rangedSlider-invalid");
 					}
 				}
 			}
 			.soundConfig {
 				.modal-content {
-					background-color: $splashscreen-sound-config-background-color;
+					background-color: map-get($map, "splashscreen-sound-config-background-color");
 					select {
-						color: $splashscreen-sound-config-select-foreground-color;
+						color: map-get($map, "splashscreen-sound-config-select-foreground-color");
 					}
 					#isSoundOnButton.down {
-						background: $splashscreen-sound-config-button-background-color;
+						background: map-get($map, "splashscreen-sound-config-button-background-color");
 					}
 				}
 			}
 			.splashscreen {
 				.modal-content {
-					background: $splashscreen-background-color;
+					background: map-get($map, "splashscreen-background-color");
 					.modal-header {
-						color: $splash-screen-header-color;
+						color: map-get($map, "splash-screen-header-color");
 					}
 					.modal-body {
-						color: $splashscreen-foreground-color;
+						color: map-get($map, "splashscreen-foreground-color");
 						a, a:hover, a:active, a:visited, a:focus, p {
-							color: $splashscreen-foreground-color !important;
+							color: map-get($map, "splashscreen-foreground-color") !important;
 						}
 					}
 				}
 			}
 			.splashscreen-container-close {
-				color: $fg-qr-code-container-close;
+				color: map-get($map, "fg-qr-code-container-close");
 				&:hover {
-					color: $fg-qr-code-container-close-hovered;
+					color: map-get($map, "fg-qr-code-container-close-hovered");
 				}
 				.glyphicon-remove {
-					border: 1px solid $border-qr-code-container-close-icon;
-					background-color: $background-qr-code-container-close-icon;
+					border: 1px solid map-get($map, "border-qr-code-container-close-icon");
+					background-color: map-get($map, "background-qr-code-container-close-icon");
 				}
 			}
 			.modal-backdrop {
-				background-color: $background-color;
+				background-color: map-get($map, "background-color");
 			}
 			.questionAndAnswerSplashscreen {
 				.modal-content {
-					background: white;
+					background-color: map-get($map, "bg-splashscreen-question-and-answer");
+					#questionContent {
+						color: map-get($map, "fg-splashscreen-question-and-answer_question-content");
+						background-color: map-get($map, "bg-splashscreen-question-and-answer_question-content");
+					}
+					#answerContent {
+						#answerHeader {
+							color: map-get($map, "fg-splashscreen-question-and-answer_answer-content-header");
+							background-color: map-get($map, "bg-splashscreen-question-and-answer_answer-content-header");
+						}
+						.answerContentElementWrapper {
+							color: map-get($map, "fg-splashscreen-question-and-answer_answer-content-odd-row");
+							background-color: map-get($map, "bg-splashscreen-question-and-answer_answer-content-odd-row");
+							border-color: map-get($map, "border-splashscreen-question-and-answer_answer-content-odd-row");
+							&:nth-child(even) {
+								color: map-get($map, "fg-splashscreen-question-and-answer_answer-content-even-row");
+								background-color: map-get($map, "bg-splashscreen-question-and-answer_answer-content-even-row");
+								border-color: map-get($map, "border-splashscreen-question-and-answer_answer-content-even-row");
+							}
+						}
+						.answerContentElementLetter {
+							border-bottom-color: map-get($map, "border-splashscreen-question-and-answer_answer-content-odd-row");
+						}
+					}
 				}
 			}
 			.deleteConfirmationSplashscreen {
 				.modal-content {
-					background: $splashscreen-delete-background-color;
+					background: map-get($map, "splashscreen-delete-background-color");
 				}
 			}
 			.kickMemberSplashscreen {
 				.modal-content {
-					background: $splash-screen-error-message-background-color;
+					background: map-get($map, "splash-screen-error-message-background-color");
 					.modal-header {
-						color: $splash-screen-error-message-foreground-color;
+						color: map-get($map, "splash-screen-error-message-foreground-color");
 					}
 					.modal-body {
-						color: $splash-screen-error-message-foreground-color;
+						color: map-get($map, "splash-screen-error-message-foreground-color");
 					}
 				}
 			}
 			.showHashtagsSplashscreen {
 				.modal-content {
-					background: $splashscreen-show-hashtags-background-color;
+					background: map-get($map, "splashscreen-show-hashtags-background-color");
 					.js-my-hash {
-						background-color: $bg-js-my-hash;
-						color: $fg-js-my-hash;
+						background-color: map-get($map, "bg-js-my-hash");
+						color: map-get($map, "fg-js-my-hash");
 						&:hover {
-							background-color: $bg-js-my-hash-hovered;
+							background-color: map-get($map, "bg-js-my-hash-hovered");
 						}
 						&:active {
-							background-color: $bg-js-my-hash-active;
+							background-color: map-get($map, "bg-js-my-hash-active");
 						}
 						&.validQuestion {
-							color: $fg-js-my-hash-validQuestion;
-							background-color: $bg-js-my-hash-validQuestion;
+							color: map-get($map, "fg-js-my-hash-validQuestion");
+							background-color: map-get($map, "bg-js-my-hash-validQuestion");
 							&:hover {
-								background-color: $bg-js-my-hash-validQuestion-hovered;
+								background-color: map-get($map, "bg-js-my-hash-validQuestion-hovered");
 							}
 						}
 						&.invalidQuestion {
-							color: $fg-js-my-hash-invalidQuestion;
-							background-color: $bg-js-my-hash-invalidQuestion;
+							color: map-get($map, "fg-js-my-hash-invalidQuestion");
+							background-color: map-get($map, "bg-js-my-hash-invalidQuestion");
 							&:hover {
-								background-color: $bg-js-my-hash-invalidQuestion-hovered;
+								background-color: map-get($map, "bg-js-my-hash-invalidQuestion-hovered");
 							}
 						}
 					}
@@ -1357,105 +659,105 @@
 			}
 			.errorSplashscreen {
 				.modal-content {
-					background: $splash-screen-error-message-background-color;
+					background: map-get($map, "splash-screen-error-message-background-color");
 					.modal-header {
-						color: $splash-screen-error-message-foreground-color;
+						color: map-get($map, "splash-screen-error-message-foreground-color");
 					}
 					.modal-body {
-						color: $splash-screen-error-message-foreground-color;
+						color: map-get($map, "splash-screen-error-message-foreground-color");
 					}
 				}
 				.splash-button-error-message {
-					background-color: $splash-screen-error-message-button-background-color;
-					color: $splash-screen-error-message-button-foreground-color;
+					background-color: map-get($map, "splash-screen-error-message-button-background-color");
+					color: map-get($map, "splash-screen-error-message-button-foreground-color");
 				}
 			}
 			.theme-description {
-				color: $fg-theme_description;
+				color: map-get($map, "fg-theme_description");
 			}
 			.quizSummary {
 				hr {
-					border-color: $quiz-summary-row-color;
+					border-color: map-get($map, "quiz-summary-row-color");
 				}
 				h4 {
-					color: $fg-quiz-summary-H4;
+					color: map-get($map, "fg-quiz-summary-H4");
 				}
 				p {
-					color: $fg-quiz-summary-P;
+					color: map-get($map, "fg-quiz-summary-P");
 				}
 				ul {
-					color: $fg-quiz-summary-UL;
+					color: map-get($map, "fg-quiz-summary-UL");
 				}
 			}
 			#connectionQualityHeader {
 				#connectionQualityImage {
 					&.connectionOffline {
-						fill: $fg-connection-quality-header_connection-offline;
+						fill: map-get($map, "fg-connection-quality-header_connection-offline");
 					}
 					&.connectionPending {
-						fill: $fg-connection-quality-header_connection-pending;
+						fill: map-get($map, "fg-connection-quality-header_connection-pending");
 					}
 					&.connectionOk {
-						fill: $fg-connection-quality-header_connection-ok;
+						fill: map-get($map, "fg-connection-quality-header_connection-ok");
 					}
 					&.connectionWarning {
-						fill: $fg-connection-quality-header_connection-warning;
+						fill: map-get($map, "fg-connection-quality-header_connection-warning");
 					}
 					&.connectionError {
-						fill: $fg-connection-quality-header_connection-error;
+						fill: map-get($map, "fg-connection-quality-header_connection-error");
 					}
 					&.connectionFailed {
-						fill: $fg-connection-quality-header_connection-failed;
+						fill: map-get($map, "fg-connection-quality-header_connection-failed");
 					}
 				}
 				#detailsLink {
-					color: $fg-connection-quality-header_details-link;
+					color: map-get($map, "fg-connection-quality-header_details-link");
 				}
 			}
 			.answer-row {
-				.answer-selected{
-					background-color: $bg-answer_row-answer_selected !important;
-					color: $fg-answer_row-answer_selected !important;
+				.answer-selected {
+					background-color: map-get($map, "bg-answer_row-answer_selected") !important;
+					color: map-get($map, "fg-answer_row-answer_selected") !important;
 				}
 				.button-purple-transition {
-					background-color: $bg-answer_row-button_purple_transition;
-					color: $fg-answer_row-button_purple_transition;
+					background-color: map-get($map, "bg-answer_row-button_purple_transition");
+					color: map-get($map, "fg-answer_row-button_purple_transition");
 				}
 				.button-green-transition {
-					background-color: $bg-answer_row-button_green_transition;
-					color: $fg-answer_row-button_green_transition;
+					background-color: map-get($map, "bg-answer_row-button_green_transition");
+					color: map-get($map, "fg-answer_row-button_green_transition");
 				}
 				.freeTextFrame {
 					h1 {
-						color: $fg-free-text-header-color;
+						color: map-get($map, "fg-free-text-header-color");
 					}
 				}
 			}
 			#quizManager {
 				.sortable-placeholder {
-					color: $fg-quiz_manager-sortable_placeholder;
-					background-color: $bg-quiz_manager-sortable_placeholder;
+					color: map-get($map, "fg-quiz_manager-sortable_placeholder");
+					background-color: map-get($map, "bg-quiz_manager-sortable_placeholder");
 				}
 				ul {
 					li {
-						color: $fg-quiz_manager-ul-li;
+						color: map-get($map, "fg-quiz_manager-ul-li");
 					}
 					&#available_questions_wrapper,
 					&#added_questions_wrapper {
 						.questionElementWrapper {
-							border: 2px solid $border-quiz_manager-available_questions_wrapper;
+							border: 2px solid map-get($map, "border-quiz_manager-available_questions_wrapper");
 							&:hover {
-								background-color: $bg-quiz_manager-available_questions_wrapper-hovered;
+								background-color: map-get($map, "bg-quiz_manager-available_questions_wrapper-hovered");
 							}
 							li {
 								&[data-valid='true'] {
 									&:before {
-										color: $border-quiz_manager-available_questions_wrapper-valid;
+										color: map-get($map, "border-quiz_manager-available_questions_wrapper-valid");
 									}
 								}
 								&[data-valid='false'] {
 									&:before {
-										color: $border-quiz_manager-available_questions_wrapper-invalid;
+										color: map-get($map, "border-quiz_manager-available_questions_wrapper-invalid");
 									}
 								}
 							}
@@ -1467,40 +769,40 @@
 			#quizManagerDetails {
 				.btn-group {
 					button {
-						color: $fg-quiz_manager_details-btn_group-button;
-						background-color: $bg-quiz_manager_details-btn_group-button;
+						color: map-get($map, "fg-quiz_manager_details-btn_group-button");
+						background-color: map-get($map, "bg-quiz_manager_details-btn_group-button");
 						&:hover {
-							background-color: $bg-quiz_manager_details-btn_group-button-hovered;
+							background-color: map-get($map, "bg-quiz_manager_details-btn_group-button-hovered");
 						}
 					}
 				}
 			}
 			#previewQuestionContentWrapper {
 				#previewQuestionImage {
-					border: 5px solid $border-previewQuestionContentWrapper-image;
+					border: 5px solid map-get($map, "border-previewQuestionContentWrapper-image");
 				}
 				#markdownPreviewWrapper {
-					color: $fg-previewQuestionContentWrapper;
+					color: map-get($map, "fg-previewQuestionContentWrapper");
 					p {
-						color: $fg-previewQuestionContentWrapper;
+						color: map-get($map, "fg-previewQuestionContentWrapper");
 					}
 				}
 			}
 			#questionTypeView {
 				.questionType {
 					.wrapper {
-						border: 5px solid $border-question_type_view-wrapper;
+						border: 5px solid map-get($map, "border-question_type_view-wrapper");
 						&:hover {
-							background-color: $bg-question_type_view-wrapper-hovered;
+							background-color: map-get($map, "bg-question_type_view-wrapper-hovered");
 							p {
-								color: $fg-question_type_view-wrapper-hovered;
+								color: map-get($map, "fg-question_type_view-wrapper-hovered");
 							}
 						}
 					}
 				}
 				.activeQuestionType {
 					.wrapper {
-						border: 5px solid $border-question_type_view-activeQuestionType-wrapper;
+						border: 5px solid map-get($map, "border-question_type_view-activeQuestionType-wrapper");
 						&:hover {
 							background-color: initial;
 						}
@@ -1509,11 +811,11 @@
 			}
 			.themePreview {
 				img {
-					border: 5px solid $border-theme-preview-img;
+					border: 5px solid map-get($map, "border-theme-preview-img");
 				}
 				&.selectedTheme {
 					img {
-						border: 5px solid $border-theme-preview-img-selected;
+						border: 5px solid map-get($map, "border-theme-preview-img-selected");
 					}
 				}
 			}
@@ -1529,39 +831,39 @@
 			}
 			.nicknameCategories {
 				h3 {
-					color: $fg-nickname_categories-h3;
+					color: map-get($map, "fg-nickname_categories-h3");
 				}
 				.nickStyle {
 					&.nickCategory {
 						&:hover {
-							background-color: $bg-nickname_categories-nick_style-hovered;
+							background-color: map-get($map, "bg-nickname_categories-nick_style-hovered");
 						}
 						&:active {
-							background-color: $bg-nickname_categories-nick_style-active;
+							background-color: map-get($map, "bg-nickname_categories-nick_style-active");
 						}
 						&.selectedCategory {
-							background-color: $bg-nickname_categories-nick_style-selected_category;
+							background-color: map-get($map, "bg-nickname_categories-nick_style-selected_category");
 						}
-						background-color: $bg-nickname_categories-nick_style;
+						background-color: map-get($map, "bg-nickname_categories-nick_style");
 					}
 
 					&.nickName,
 					&.chosenNickName {
 						&:hover {
-							background-color: $bg-nickname_categories-nick_chosen_nick-hovered;
+							background-color: map-get($map, "bg-nickname_categories-nick_chosen_nick-hovered");
 						}
 						&:active {
-							background-color: $bg-nickname_categories-nick_chosen_nick-active;
+							background-color: map-get($map, "bg-nickname_categories-nick_chosen_nick-active");
 						}
 						&.selectedNickName {
-							background-color: $bg-nickname_categories-nick_chosen_nick-selected;
+							background-color: map-get($map, "bg-nickname_categories-nick_chosen_nick-selected");
 						}
-						background-color: $bg-nickname_categories-nick_chosen_nick;
+						background-color: map-get($map, "bg-nickname_categories-nick_chosen_nick");
 					}
 					&#block_illegal_nicks_wrapper,
 					&#restrict_to_cas_wrapper {
 						p {
-							color: $fg-nickname_categories-options;
+							color: map-get($map, "fg-nickname_categories-options");
 						}
 					}
 				}
@@ -1569,55 +871,55 @@
 			.nickLimited {
 				.selectableNickWrapper {
 					h3 {
-						color: $fg-nick_limited-h3;
+						color: map-get($map, "fg-nick_limited-h3");
 					}
 					.selectableNick {
 						&:hover {
-							background-color: $bg-nick_limited-selectable_nick-hovered;
+							background-color: map-get($map, "bg-nick_limited-selectable_nick-hovered");
 						}
 						&:active {
-							background-color: $bg-nick_limited-selectable_nick-active;
+							background-color: map-get($map, "bg-nick_limited-selectable_nick-active");
 						}
-						background-color: $bg-nick_limited-selectable_nick;
+						background-color: map-get($map, "bg-nick_limited-selectable_nick");
 					}
 				}
 			}
 			#editAnsweroptionText {
 				.answerOptionElementWrapper {
-					background-color: $bg-edit_answeroption_text-element_wrapper;
+					background-color: map-get($map, "bg-edit_answeroption_text-element_wrapper");
 				}
 			}
 			#previewAnsweroptionContentWrapper {
 				#previewAnsweroptionImage {
-					border: 5px solid $border-preview_answeroption_content_wrapper-image;
+					border: 5px solid map-get($map, "border-preview_answeroption_content_wrapper-image");
 				}
 				#markdownPreviewWrapper {
-					color: $fg-preview_answeroption_content_wrapper;
+					color: map-get($map, "fg-preview_answeroption_content_wrapper");
 					p {
-						color: $fg-preview_answeroption_content_wrapper;
+						color: map-get($map, "fg-preview_answeroption_content_wrapper");
 					}
 				}
 			}
 			.thm-logo-background {
-				background-color: $bg-thm_logo_background;
+				background-color: map-get($map, "bg-thm_logo_background");
 			}
 			.focused {
-				border: 3px solid $border-focused !important;
+				border: 3px solid map-get($map, "border-focused") !important;
 			}
 			.button-result {
-				background-color: $bg-button_result;
+				background-color: map-get($map, "bg-button_result");
 			}
 			#loader-wrapper {
 				#loader {
 					border: 3px solid transparent;
-					border-top-color: $border-loader_wrapper-outer_spin;
+					border-top-color: map-get($map, "border-loader_wrapper-outer_spin");
 					&:before {
 						border: 3px solid transparent;
-						border-top-color: $border-loader_wrapper-inner_spin;
+						border-top-color: map-get($map, "border-loader_wrapper-inner_spin");
 					}
 					&:after {
 						border: 3px solid transparent;
-						border-top-color: $border-loader_wrapper-middle_spin;
+						border-top-color: map-get($map, "border-loader_wrapper-middle_spin");
 					}
 				}
 			}
@@ -1625,23 +927,21 @@
 				.modal-content {
 					#soundTab {
 						.nav-pills > li > a {
-							background-color: $bg-soundConfig_soundTab_navPills;
+							background-color: map-get($map, "bg-soundConfig_soundTab_navPills");
 						}
 					}
 				}
 			}
 			[disabled].noUi-target {
-				background: $bg-disabled-slider;
-				box-shadow: inset 0 1px 1px $bg-disabled-slider, 0 3px 6px -5px $bg-disabled-slider;
+				background: map-get($map, "bg-disabled-slider");
+				box-shadow: inset 0 1px 1px map-get($map, "bg-disabled-slider"), 0 3px 6px -5px map-get($map, "bg-disabled-slider");
 				.noUi-handle {
-					background: $bg-disabled-slider;
+					background: map-get($map, "bg-disabled-slider");
 				}
 			}
-		} /* End of #theme-wrapper */
-	} /* End of <body/> */
-} /* End of mixin declaration */
+		}
+		/* End of #theme-wrapper */
+	}
+	/* End of <body/> */
+}
 
-@include theme(theme-elegant);
-@include theme(theme-blackbeauty);
-@include theme(theme-arsnova-dot-click-contrast); // default theme
-@include theme(theme-Material);

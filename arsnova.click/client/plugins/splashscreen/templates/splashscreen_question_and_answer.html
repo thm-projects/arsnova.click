@@ -44,7 +44,7 @@
                         <div id="answerContent" class="markdown-content" role="list">
                             {{#if isRangedQuestion}}
                                 {{#if revealAnswerText}}
-                                    <h1 role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
+                                    <h1 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
                                     {{#with getAnswerOptions}}
                                         <div class="answerContentElementWrapper" role="listitem">
                                             <div class="answerContentElementLetter">
@@ -75,7 +75,7 @@
                             {{else}}
                                 {{#if isFreeTextQuestion}}
                                     {{#if revealAnswerText}}
-                                        <h1 role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
+                                        <h1 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
                                         {{#with getAnswerOptions}}
                                             <div class="answerContentElementWrapper" role="listitem">
                                                 <div class="answerContentElementLetter">
@@ -88,7 +88,7 @@
                                         {{/with}}
                                     {{/if}}
                                 {{else}}
-                                    <h1 role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=2}}</h1>
+                                    <h1 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=2}}</h1>
                                     {{#each getAnswerOptions}}
                                         <div class="answerContentElementWrapper" role="listitem">
                                             <div class="answerContentElementLetter">

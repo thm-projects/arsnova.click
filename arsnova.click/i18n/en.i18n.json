@@ -412,6 +412,7 @@
       "added_questions_title": "Created questions",
       "session_invalid": "The quiz contains incomplete questions",
       "connection_lost": "The connection to the server is lost",
+      "back_to_quiz_administration": "Quiz-Administration",
       "details": {
         "aria": {
           "btn_group": "List of settings for the quiz"

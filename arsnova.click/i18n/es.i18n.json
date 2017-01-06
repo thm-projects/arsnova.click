@@ -412,6 +412,7 @@
       "added_questions_title": "Preguntas creadas",
       "session_invalid": "El cuestionario contiene preguntas incompletas",
       "connection_lost": "Se pierde la conexión con el servidor",
+      "back_to_quiz_administration": "Administración del cuestionario",
       "details": {
         "aria": {
           "btn_group": "Lista de ajustes para el cuestionario"

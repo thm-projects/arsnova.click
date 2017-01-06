@@ -426,6 +426,7 @@ Template.footerNavButtons.events({
 					Router.go("/" + Router.current().params.quizName + "/quizManager");
 				} else {
 					Router.go("/" + Router.current().params.quizName + "/resetToHome");
+					Router.go("/hashtagmanagement");
 				}
 				break;
 			case "question":

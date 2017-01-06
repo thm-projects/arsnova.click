@@ -39,7 +39,6 @@ export function getUserLanguage() {
 	/* Provide a fallback language */
 	let selectedLang = "en";
 	// If private mode is enabled, the access to the local storage will fail.
-	console.log(selectedLang);
 	try {
 		/* Get the language setting from the local storage */
 		let localStorageLang = localData.getLanguage();
@@ -47,17 +46,14 @@ export function getUserLanguage() {
 		if (TAPi18n.languages_names[userLang]) {
 			selectedLang = userLang;
 		}
-		console.log(selectedLang);
 		/* Override the browser language with the set language of the local storage if available */
 		if (TAPi18n.languages_names[localStorageLang]) {
 			selectedLang = localStorageLang;
 		}
-		console.log(selectedLang);
 		localData.initializePrivateKey();
 		localStorage.setItem("localStorageAvailable", true);
 	} catch (err) {
 		// Private mode enabled. Error splashscreen is shown in route.js
-		console.log(err);
 	}
 	if (Router.current() && Router.current().params.language) {
 		selectedLang = Router.current().params.language;

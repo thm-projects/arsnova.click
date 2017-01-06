@@ -85,7 +85,8 @@ export function displayQuestionAndAnswerDialog(questionIndex) {
 		autostart: true,
 		templateName: 'questionAndAnswerSplashscreen',
 		dataContext: {
-			questionIndex: questionIndex
+			questionIndex: questionIndex,
+			revealCorrectValues: !Session.get("countdownInitialized")
 		},
 		closeOnButton: '#js-btn-hideQuestionModal, .splashscreen-container-close',
 		instanceId: "questionAndAnswers_" + questionIndex

@@ -43,46 +43,50 @@
                         <hr/>
                         <div id="answerContent" class="markdown-content" role="list">
                             {{#if isRangedQuestion}}
-                                <h1 role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
-                                {{#with getAnswerOptions}}
-                                    <div class="answerContentElementWrapper" role="listitem">
-                                        <div class="answerContentElementLetter">
-                                            <span>{{_ "plugins.splashscreen.question_and_answer.min_range"}}</span>
-                                        </div>
-                                        <div class="answerContentElementItem">
-                                            <span>{{this.[0]}}</span>
-                                        </div>
-                                    </div>
-                                    <div class="answerContentElementWrapper" role="listitem">
-                                        <div class="answerContentElementLetter">
-                                            <span>{{_ "plugins.splashscreen.question_and_answer.correct_value"}}</span>
-                                        </div>
-                                        <div class="answerContentElementItem">
-                                            <span>{{this.[1]}}</span>
-                                        </div>
-                                    </div>
-                                    <div class="answerContentElementWrapper" role="listitem">
-                                        <div class="answerContentElementLetter">
-                                            <span>{{_ "plugins.splashscreen.question_and_answer.max_range"}}</span>
-                                        </div>
-                                        <div class="answerContentElementItem">
-                                            <span>{{this.[2]}}</span>
-                                        </div>
-                                    </div>
-                                {{/with}}
-                            {{else}}
-                                {{#if isFreeTextQuestion}}
+                                {{#if revealAnswerText}}
                                     <h1 role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
                                     {{#with getAnswerOptions}}
                                         <div class="answerContentElementWrapper" role="listitem">
                                             <div class="answerContentElementLetter">
-                                                <span>{{_ "plugins.splashscreen.question_and_answer.reference_value"}}</span>
+                                                <span>{{_ "plugins.splashscreen.question_and_answer.min_range"}}</span>
                                             </div>
                                             <div class="answerContentElementItem">
-                                                {{#mathjax}}{{this[0]}}{{/mathjax}}
+                                                <span>{{this.[0]}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="answerContentElementWrapper" role="listitem">
+                                            <div class="answerContentElementLetter">
+                                                <span>{{_ "plugins.splashscreen.question_and_answer.correct_value"}}</span>
+                                            </div>
+                                            <div class="answerContentElementItem">
+                                                <span>{{this.[1]}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="answerContentElementWrapper" role="listitem">
+                                            <div class="answerContentElementLetter">
+                                                <span>{{_ "plugins.splashscreen.question_and_answer.max_range"}}</span>
+                                            </div>
+                                            <div class="answerContentElementItem">
+                                                <span>{{this.[2]}}</span>
                                             </div>
                                         </div>
                                     {{/with}}
+                                {{/if}}
+                            {{else}}
+                                {{#if isFreeTextQuestion}}
+                                    {{#if revealAnswerText}}
+                                        <h1 role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
+                                        {{#with getAnswerOptions}}
+                                            <div class="answerContentElementWrapper" role="listitem">
+                                                <div class="answerContentElementLetter">
+                                                    <span>{{_ "plugins.splashscreen.question_and_answer.reference_value"}}</span>
+                                                </div>
+                                                <div class="answerContentElementItem">
+                                                    {{#mathjax}}{{this[0]}}{{/mathjax}}
+                                                </div>
+                                            </div>
+                                        {{/with}}
+                                    {{/if}}
                                 {{else}}
                                     <h1 role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=2}}</h1>
                                     {{#each getAnswerOptions}}

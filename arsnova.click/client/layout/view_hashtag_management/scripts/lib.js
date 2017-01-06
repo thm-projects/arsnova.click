@@ -107,13 +107,7 @@ export function connectEventManager(hashtag) {
 		});
 	};
 	if (Meteor.status().connected) {
-		if (Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin()) {
-			Meteor.loginWithCas(function () {
-				connect(hashtag);
-			});
-		} else {
-			connect(hashtag);
-		}
+		connect(hashtag);
 	} else {
 		Router.go("/" + hashtag + "/quizManager");
 		sessionStorage.removeItem("overrideValidQuestionRedirect");

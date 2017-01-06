@@ -24,6 +24,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {DefaultQuestionGroup} from '/lib/questions/questiongroup_default.js';
 import * as localData from '/lib/local_storage.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
+import * as routerLib from '/client/routes.js';
 import {countdownRunningSound} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
@@ -425,7 +426,7 @@ Template.footerNavButtons.events({
 				if (typeof Router.current().params.questionIndex !== "undefined") {
 					Router.go("/" + Router.current().params.quizName + "/quizManager");
 				} else {
-					Router.go("/" + Router.current().params.quizName + "/resetToHome");
+					routerLib.cleanUp();
 					Router.go("/hashtagmanagement");
 				}
 				break;

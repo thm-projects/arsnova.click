@@ -33,7 +33,7 @@ export function addQuestion(index) {
 }
 
 export function parseCodeBlock(result, i) {
-	let tmpNewItem = result[i] + "\n";
+	let tmpNewItem = result[i].replace(/\s/g, "") + "\n";
 	let mergeEndIndex = result.length;
 	for (let j = i + 1; j < result.length; j++) {
 		tmpNewItem += result[j] + "\n";
@@ -64,7 +64,7 @@ export function parseUnorderedList(result, i) {
 	let tmpNewItem = result[i] + "\n";
 	let mergeEndIndex = result.length;
 	for (let j = i + 1; j < result.length; j++) {
-		if (!/^(   )[*-] /.test(result[j]) && !/^[0-9]*./.test(result[j])) {
+		if (!/^(  )[*-+] /.test(result[j]) && !/^[0-9]*./.test(result[j])) {
 			mergeEndIndex = j - 1;
 			break;
 		}
@@ -97,45 +97,71 @@ export function parseLinkBlock(result, i) {
 	result[i] = prevLinkContent + "<a href='" + link + "' target='_blank'>" + linkStr + "</a>" + postLinkContent;
 }
 
+export function parseStrikeThroughBlock(result, i) {
+	result[i].match(/~~[^~{2}]*~~/gi).forEach(function (element) {
+		result[i] = result[i].replace(element, "<del>" + element.replace(/~~/g, "") + "</del>");
+	});
+	return result[i];
+}
+
 export function parseTableBlock(result, i) {
 	let tmpNewItem = result[i] + "\n";
 	let mergeEndIndex = result.length;
 	for (let j = i + 1; j < result.length; j++) {
-		if (!/\s\|\s/.test(result[j])) {
+		if (!/[\s:]?\|[\s:]?/.test(result[j])) {
 			mergeEndIndex = j - 1;
 			break;
 		}
 		tmpNewItem += (result[j] + "\n");
 	}
 	const tmpNewItemElement = $("<table><thead></thead><tbody></tbody></table>");
-	let tableHasHeader = /[-]+\s\|\s[-]+/.test(tmpNewItem);
-	tmpNewItem.split(/\s\|\s/).forEach(function (element) {
-		if (element === "") {
-			return;
-		}
-		const isLastElementInRow = /^.*\n.*$/.test(element);
-		if (isLastElementInRow) {
-			element = element.split(/\n/);
-		} else {
-			element = [element];
-		}
-		element.forEach(function (elementPart) {
-			if (elementPart.length === 0) {
-				return;
-			}
-			if (/[-]+/.test(elementPart)) {
-				tableHasHeader = false;
+	let tableHasHeader = /[-]+[\s:]?|[\s:]?[-]+/.test(tmpNewItem);
+	const tableHeaderMetadata = [];
+	if (tableHasHeader) {
+		tmpNewItem.match(/([\|]?)([\s:]+[-]+[\s:]+)([\|]?)/g).forEach(function (element) {
+			element = element.replace(/\|/g, "");
+			const hasLeftAlign = element.startsWith(":") || (element.startsWith(" ") && element.endsWith(" "));
+			const hasRightAlign = element.endsWith(":");
+			if (hasLeftAlign && hasRightAlign) {
+				tableHeaderMetadata.push({align: "center"});
 			} else {
-				if (tableHasHeader) {
-					tmpNewItemElement.find("thead").append($("<th/>").text(elementPart));
-				} else {
-					if (element.slice(-1)[0] === elementPart && element.length > 1) {
-						tmpNewItemElement.find("tbody").append($("<tr/>"));
-					}
-					tmpNewItemElement.find("tbody").find("tr").last().append($("<td/>").text(elementPart));
+				if (hasLeftAlign) {
+					tableHeaderMetadata.push({align: "left"});
+				} else if (hasRightAlign) {
+					tableHeaderMetadata.push({align: "right"});
 				}
 			}
 		});
+	}
+	let columnCounter = 0;
+	tmpNewItem.split(/[\s:]?\|[\s:]?/).forEach(function (element) {
+		if (element === "") {
+			columnCounter = 0;
+			return;
+		}
+		if (/~~.*~~/.test(element)) {
+			element = parseStrikeThroughBlock([element], 0);
+		}
+		if (/[\*\_]{2}.*[\*\_]{2}/.test(element)) {
+			element = "<strong>" + element.replace(/[\*\_]/g, "") + "</strong>";
+		}
+		if (/[\*\_]{1}.*[\*\_]{1}/.test(element)) {
+			element = "<em>" + element.replace(/[\*\_]/g, "") + "</em>";
+		}
+		if (/[\W]+[-]+[\W]+/.test(element)) {
+			tableHasHeader = false;
+			columnCounter = 0;
+		} else {
+			if (tableHasHeader) {
+				tmpNewItemElement.find("thead").append($("<th style='text-align: " + tableHeaderMetadata[columnCounter].align + ";'/>").html(element));
+			} else {
+				if (columnCounter === 0) {
+					tmpNewItemElement.find("tbody").append($("<tr/>"));
+				}
+				tmpNewItemElement.find("tbody").find("tr").last().append($("<td style='text-align: " + tableHeaderMetadata[columnCounter].align + ";'/>").html(element));
+			}
+			columnCounter++;
+		}
 	});
 	result.splice(i, mergeEndIndex - i + 1);
 	result.splice(i, 0, tmpNewItemElement.prop('outerHTML'));
@@ -158,7 +184,7 @@ export function parseMathjaxBlock(result, i) {
 	let tmpNewItem = result[i] + "\n";
 	let mergeEndIndex = result.length;
 	for (let j = i + 1; j < result.length; j++) {
-		if (/^(\$){2}$/.test(result[j])) {
+		if (/^\$\$/.test(result[j])) {
 			mergeEndIndex = j;
 			break;
 		}
@@ -168,19 +194,13 @@ export function parseMathjaxBlock(result, i) {
 	result.splice(i, 0, $("<div/>").append((tmpNewItem + "$$")).prop("outerHTML"));
 }
 
-export function parseStrikeThroughBlock(result, i) {
-	result[i].match(/~~[^~{2}]*~~/gi).forEach(function (element) {
-		result[i] = result[i].replace(element, "<del>" + element.replace(/~~/g, "") + "</del>");
-	});
-}
-
 export function parseGithubFlavoredMarkdown(result, overrideLineBreaks = true) {
 	for (let i = 0; i < result.length; i++) {
 		switch (true) {
-			case /^(\$){2}$/.test(result[i]):
+			case /^\$\$$/.test(result[i]):
 				parseMathjaxBlock(result, i);
 				break;
-			case /^[\$]+/.test(result[i]):
+			case /\$/.test(result[i]):
 				break;
 			case /^```/.test(result[i]):
 				parseCodeBlock(result, i);
@@ -194,7 +214,7 @@ export function parseGithubFlavoredMarkdown(result, overrideLineBreaks = true) {
 			case /^[\s]*1\./.test(result[i]):
 				parseOrderedList(result, i);
 				break;
-			case /^[*-] /.test(result[i]):
+			case /^[*-+] /.test(result[i]):
 				parseUnorderedList(result, i);
 				break;
 			case /^> /.test(result[i]):
@@ -210,7 +230,7 @@ export function parseGithubFlavoredMarkdown(result, overrideLineBreaks = true) {
 				result.splice(i, 0, "<br/>");
 				i++;
 				break;
-			case /\s\|\s/.test(result[i]):
+			case /[\s:]?\|[\s:]?/.test(result[i]):
 				parseTableBlock(result, i);
 				break;
 			case /:[^\s]*:/.test(result[i]) && /:([a-z0-9_\+\-]+):/g.test(result[i]):

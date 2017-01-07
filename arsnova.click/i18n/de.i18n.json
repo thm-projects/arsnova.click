@@ -394,7 +394,7 @@
     "questions": {
       "title": "Frage bearbeiten",
       "enter_question_here": "Gib hier den Text der Frage ein",
-      "preview": "Smartphone-Vorschau",
+      "preview": "Vorschau",
       "single_choice_question": "Single-Choice-Frage",
       "single_choice_question_yes_no": "Ja|Nein-Frage",
       "single_choice_question_true_false": "Wahr|Falsch-Frage",

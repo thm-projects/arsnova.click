@@ -1,8 +1,13 @@
 
 export const themes = [
 	{
-		name: "view.theme_switcher.themes.material.name",
+		name: "view.theme_switcher.themes.theme-arsnova-dot-click-contrast.name",
 		description: "view.theme_switcher.themes.theme-arsnova-dot-click-contrast.description",
+		id: "theme-arsnova-dot-click-contrast"
+	},
+	{
+		name: "view.theme_switcher.themes.material.name",
+		description: "view.theme_switcher.themes.material.description",
 		id: "theme-Material"
 	},
 	{
@@ -14,10 +19,5 @@ export const themes = [
 		name: "view.theme_switcher.themes.elegant.name",
 		description: "view.theme_switcher.themes.elegant.description",
 		id: "theme-elegant"
-	},
-	{
-		name: "view.theme_switcher.themes.theme-arsnova-dot-click-contrast.name",
-		description: "view.theme_switcher.themes.material.description",
-		id: "theme-arsnova-dot-click-contrast"
 	}
 ];

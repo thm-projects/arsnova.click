@@ -200,7 +200,7 @@
       "answeroptiontext_placeholder": "Antwortoption eingeben",
       "correct": "Richtig",
       "wrong": "Falsch",
-      "preview": "Vorschau",
+      "preview": "Smartphone-Vorschau",
       "show_answer_content_on_buttons": "Soll auf den Abstimmungsbuttons der Inhalt der Antwort angezeigt werden?",
       "multiple_selection_survey": "Sollen mehrere Antwortoptionen ausgewählt werden können?",
       "description": {
@@ -621,7 +621,7 @@
     "splashscreen": {
       "question_and_answer": {
         "answeroption": "Antwort",
-        "answeroption_plural": "Mögliche Antworten",
+        "answeroption_plural": "Antwortoptionen",
         "min_range": "Minimalwert",
         "correct_value": "Richtiger Wert",
         "max_range": "Maximalwert",

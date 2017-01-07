@@ -75,7 +75,7 @@
                             {{else}}
                                 {{#if isFreeTextQuestion}}
                                     {{#if revealAnswerText}}
-                                        <h1 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
+                                        <h2 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h2>
                                         {{#with getAnswerOptions}}
                                             <div class="answerContentElementWrapper" role="listitem">
                                                 <div class="answerContentElementLetter">
@@ -88,7 +88,7 @@
                                         {{/with}}
                                     {{/if}}
                                 {{else}}
-                                    <h1 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=2}}</h1>
+                                    <h2 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=2}}</h2>
                                     {{#each getAnswerOptions}}
                                         <div class="answerContentElementWrapper" role="listitem">
                                             <div class="answerContentElementLetter">

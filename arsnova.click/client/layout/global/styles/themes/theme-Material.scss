@@ -71,10 +71,10 @@
 		"fg-footer-element-deactivated-hovered": map-get($stdStyle, "md_red_500"),
 		/* Quizzes stored in browser */
 		"bg-js-my-hash-validQuestion": map-get($stdStyle, "success"),
-		"bg-js-my-hash-validQuestion-hovered": lighten(map-get($stdStyle, "success"), 20),
+		"bg-js-my-hash-validQuestion-hovered": lighten(map-get($stdStyle, "success"), 10),
 		"fg-js-my-hash-validQuestion": map-get($stdStyle, "success-text-color"),
 		"bg-js-my-hash-invalidQuestion": map-get($stdStyle, "md_grey_700"),
-		"bg-js-my-hash-invalidQuestion-hovered": lighten(map-get($stdStyle, "bg-js-my-hash-invalidQuestion"), 20),
+		"bg-js-my-hash-invalidQuestion-hovered": lighten(map-get($stdStyle, "bg-js-my-hash-invalidQuestion"), 10),
 		"fg-js-my-hash-invalidQuestion": map-get($stdStyle, "warning-text-color"),
 		/* Splash screen */
 		"splash-screen-header-color": white,

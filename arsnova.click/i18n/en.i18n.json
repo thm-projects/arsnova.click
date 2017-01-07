@@ -196,11 +196,11 @@
   "view": {
     "answeroptions": {
       "title": "Define answers",
-      "new_answer": "New answeroption",
+      "new_answer": "New answer option",
       "answeroptiontext_placeholder": "Answer option required",
       "correct": "Correct",
       "wrong": "Wrong",
-      "preview": "Preview",
+      "preview": "Smartphone Preview",
       "show_answer_content_on_buttons": "Display the answer's content on the buttons?",
       "multiple_selection_survey": "Allow selection of multiple answers?",
       "description": {
@@ -394,11 +394,11 @@
     "questions": {
       "title": "Enter question text",
       "enter_question_here": "Enter your question here",
-      "preview": "Preview",
-      "single_choice_question": "Single-Choice",
+      "preview": "Smartphone Preview",
+      "single_choice_question": "Single Choice",
       "single_choice_question_yes_no": "Yes-No Single-Choice question",
       "single_choice_question_true_false": "True-False Single-Choice question",
-      "multiple_choice_question": "Multiple-Choice",
+      "multiple_choice_question": "Multiple Choice",
       "survey_question": "Survey",
       "ranged_question": "Question with ranged answeroptions",
       "free_text_question": "Free text question (response is correct in accordance with the provided sample)",
@@ -412,7 +412,7 @@
       "added_questions_title": "Created questions",
       "session_invalid": "The quiz contains incomplete questions",
       "connection_lost": "The connection to the server is lost",
-      "back_to_quiz_administration": "Quiz-Administration",
+      "back_to_quiz_administration": "Quiz Administration",
       "details": {
         "aria": {
           "btn_group": "List of settings for the quiz"
@@ -455,7 +455,7 @@
       "text": "Text",
       "type": "Type",
       "answer": "Answer",
-      "answer_plural": "Answers",
+      "answer_plural": "Answer options",
       "answer_configuration": "Configuration of the answer",
       "answer_configuration_plural": "Configuration of the answers",
       "timer": "Countdown",

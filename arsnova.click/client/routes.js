@@ -448,7 +448,7 @@ Router.route('/:quizName/quizManager/:questionIndex', {
 					return {
 						backButton: {
 							id: "backButton",
-							text: "global.save"
+							text: "global.back"
 						}
 					};
 				}
@@ -471,7 +471,7 @@ Router.route('/:quizName/questionType/:questionIndex', {
 					return {
 						backButton: {
 							id: "backButton",
-							text: "global.save"
+							text: "global.back"
 						}
 					};
 				}
@@ -492,7 +492,7 @@ Router.route('/:quizName/question/:questionIndex', {
 					return {
 						backButton: {
 							id: "backButton",
-							text: "global.save"
+							text: "global.back"
 						}
 					};
 				}
@@ -511,7 +511,7 @@ Router.route('/:quizName/answeroptions/:questionIndex', {
 					return {
 						backButton: {
 							id: "backButton",
-							text: "global.save"
+							text: "global.back"
 						}
 					};
 				}
@@ -532,7 +532,7 @@ Router.route('/:quizName/settimer/:questionIndex', {
 					return {
 						backButton: {
 							id: "backButton",
-							text: "global.save"
+							text: "global.back"
 						}
 					};
 				}

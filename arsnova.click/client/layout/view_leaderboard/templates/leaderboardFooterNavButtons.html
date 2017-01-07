@@ -29,7 +29,7 @@
                 {{#if isOwner}}
                     <div class="col-xs-{{getButtonCols}}">
                         {{#with exportData}}
-                            <a href="{{this.href}}" download="{{this.name}}">
+                            <a href="{{this.href}}" download="{{this.name}}" id="downloadData">
                                 <button class="button button-purple tabbable"
                                         id="exportToCSV">
                                     <span class="ansBtn">{{_ "view.leaderboard.export"}}</span>

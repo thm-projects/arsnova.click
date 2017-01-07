@@ -18,6 +18,7 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
+import {generateExportData} from './lib.js';
 
 Template.leaderboardFooterNavButtons.events({
 	'click #showMore': ()=> {
@@ -29,5 +30,12 @@ Template.leaderboardFooterNavButtons.events({
 	'click #js-btn-backToResults': ()=> {
 		Session.set("showGlobalRanking", false);
 		Router.go("/" + Router.current().params.quizName + "/results");
+	},
+	'click #downloadData': ()=> {
+		if ( navigator.msSaveOrOpenBlob ) {
+			const hashtag = Router.current().params.quizName;
+			const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
+			navigator.msSaveOrOpenBlob( new Blob( [ generateExportData() ], { type: "text/csv"} ), hashtag + "_evaluated_" + Router.current().params.id + "_" + timeString + ".csv" );
+		}
 	}
 });

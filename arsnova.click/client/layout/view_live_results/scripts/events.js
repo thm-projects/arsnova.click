@@ -53,6 +53,11 @@ Template.liveResults.events({
 				const timestring = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
 				a.href = 'data:' + exportData;
 				a.download = Router.current().params.quizName + "-" + timestring + ".json";
+				a.addEventListener("click", function () {
+					if ( navigator.msSaveOrOpenBlob ) {
+						navigator.msSaveOrOpenBlob( new Blob( [ exportData ], { type: "text/json"} ), Router.current().params.quizName + "-" + timestring + ".json" );
+					}
+				});
 				a.innerHTML = '';
 				event.target.appendChild(a);
 				if (Session.get("exportReady")) {

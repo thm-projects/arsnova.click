@@ -45,12 +45,17 @@ Template.hashtagManagement.onRendered(function () {
 		const exportData = localData.exportFromLocalStorage(hashtag);
 		if (exportData) {
 			const exportDataJson = "text/json;charset=utf-8," + encodeURIComponent(exportData);
-			const a = document.createElement('a');
-			const time = new Date();
-			const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
-			a.href = 'data:' + exportDataJson;
-			a.download = hashtag + "-" + timeString + ".json";
-			a.innerHTML = '<span class="glyphicon glyphicon-export glyph-left alignGlyphicon button-foreground-color" aria-hidden="true"></span>';
+			const a              = document.createElement('a');
+			const time           = new Date();
+			const timeString     = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
+			a.href               = 'data:' + exportDataJson;
+			a.addEventListener("click", function () {
+				if ( navigator.msSaveOrOpenBlob ) {
+					navigator.msSaveOrOpenBlob( new Blob( [ exportData ], { type: "text/json"} ), hashtag + "-" + timeString + ".json" );
+				}
+			});
+			a.download           = hashtag + "-" + timeString + ".json";
+			a.innerHTML          = '<span class="glyphicon glyphicon-export glyph-left alignGlyphicon button-foreground-color" aria-hidden="true"></span>';
 			$(element).find('.js-export').append(a);
 		}
 		const session = localData.reenterSession(hashtag);

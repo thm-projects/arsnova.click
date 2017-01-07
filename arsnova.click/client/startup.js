@@ -88,10 +88,11 @@ MeteorMathJax.defaultConfig = {
 	jax: ["input/TeX","input/MathML","output/HTML-CSS","output/NativeMML", "output/PreviewHTML"],
 	extensions: ["tex2jax.js", "Safe.js", "mml2jax.js", "fast-preview.js", "AssistiveMML.js", "[Contrib]/a11y/accessibility-menu.js"],
 	TeX: {
-		extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+		extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"],
+		equationNumbers: { autoNumber: "AMS" }
 	},
 	tex2jax: {
-		inlineMath: [['$','$']],
+		inlineMath: [['$','$'], ['\\(','\\)']],
 		displayMath: [['$$', '$$']],
 		processEscapes: true,
 		preview: 'none'

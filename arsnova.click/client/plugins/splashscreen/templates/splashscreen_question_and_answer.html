@@ -44,7 +44,7 @@
                         <div id="answerContent" class="markdown-content" role="list">
                             {{#if isRangedQuestion}}
                                 {{#if revealAnswerText}}
-                                    <h1 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h1>
+                                    <h2 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h2>
                                     {{#with getAnswerOptions}}
                                         <div class="answerContentElementWrapper" role="listitem">
                                             <div class="answerContentElementLetter">
@@ -118,7 +118,7 @@
                         <button id="js-btn-hideQuestionModal"
                                 type="button"
                                 aria-label="{{_ "global.close_window"}}"
-                                class="btn btn-success btn-answerOption btn-lg tabbable">
+                                class="btn btn-info btn-answerOption btn-lg tabbable">
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                             <span class="hidden-xs">{{_ "global.close_window"}}</span>
                         </button>

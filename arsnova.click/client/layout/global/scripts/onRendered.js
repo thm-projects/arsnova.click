@@ -81,7 +81,7 @@ Template.layout.onRendered(function () {
 		if (!Session.get("theme") || (Session.get("currentTheme") && Session.get("theme") === Session.get("currentTheme"))) {
 			const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 			if (!localStorage.getItem("theme")) {
-				localStorage.setItem("theme", "theme-arsnova-dot-click-contrast");
+				localStorage.setItem("theme", Meteor.settings.public.defaultTheme);
 			}
 			Session.set("theme", localStorage.getItem("theme"));
 			if (configDoc) {

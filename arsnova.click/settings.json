@@ -5,7 +5,8 @@
       "serviceParam": "service",
       "popupWidth": 810,
       "popupHeight": 610
-    }
+    },
+    "defaultTheme": "theme-Material"
   },
   "cas": {
     "baseUrl": "https://cas.thm.de/cas",

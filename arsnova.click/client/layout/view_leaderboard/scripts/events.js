@@ -32,10 +32,11 @@ Template.leaderboardFooterNavButtons.events({
 		Router.go("/" + Router.current().params.quizName + "/results");
 	},
 	'click #downloadData': ()=> {
-		if ( navigator.msSaveOrOpenBlob ) {
+		if (navigator.msSaveOrOpenBlob) {
 			const hashtag = Router.current().params.quizName;
+			const time = new Date();
 			const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
-			navigator.msSaveOrOpenBlob( new Blob( [ generateExportData() ], { type: "text/csv"} ), hashtag + "_evaluated_" + Router.current().params.id + "_" + timeString + ".csv" );
+			navigator.msSaveOrOpenBlob(new Blob([generateExportData()], {type: "text/csv"}), hashtag + "_evaluated_" + Router.current().params.id + "_" + timeString + ".csv");
 		}
 	}
 });

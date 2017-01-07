@@ -50,8 +50,8 @@ Template.hashtagManagement.onRendered(function () {
 			const timeString     = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
 			a.href               = 'data:' + exportDataJson;
 			a.addEventListener("click", function () {
-				if ( navigator.msSaveOrOpenBlob ) {
-					navigator.msSaveOrOpenBlob( new Blob( [ exportData ], { type: "text/json"} ), hashtag + "-" + timeString + ".json" );
+				if (navigator.msSaveOrOpenBlob) {
+					navigator.msSaveOrOpenBlob(new Blob([exportData], {type: "text/json"}), hashtag + "-" + timeString + ".json");
 				}
 			});
 			a.download           = hashtag + "-" + timeString + ".json";

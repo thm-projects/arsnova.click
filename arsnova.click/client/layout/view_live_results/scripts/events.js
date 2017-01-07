@@ -54,8 +54,8 @@ Template.liveResults.events({
 				a.href = 'data:' + exportData;
 				a.download = Router.current().params.quizName + "-" + timestring + ".json";
 				a.addEventListener("click", function () {
-					if ( navigator.msSaveOrOpenBlob ) {
-						navigator.msSaveOrOpenBlob( new Blob( [ exportData ], { type: "text/json"} ), Router.current().params.quizName + "-" + timestring + ".json" );
+					if (navigator.msSaveOrOpenBlob) {
+						navigator.msSaveOrOpenBlob(new Blob([exportData], {type: "text/json"}), Router.current().params.quizName + "-" + timestring + ".json");
 					}
 				});
 				a.innerHTML = '';

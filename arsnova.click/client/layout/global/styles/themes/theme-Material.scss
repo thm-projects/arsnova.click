@@ -131,6 +131,7 @@
 		"fg-quiz_manager_details-btn_group-button": $primary_text_color,
 		"bg-quiz_manager_details-btn_group-button": $accent_color,
 		"bg-quiz_manager_details-btn_group-button-hovered": map-get($stdStyle, "md_orange_700"),
+		"border-quiz_manager_details-btn_group-button": map-get($stdStyle, $primary_color) !important,
 		/* Question type selection */
 		"border-question_type_view-wrapper": $accent_color,
 		"fg-question_type_view-wrapper-hovered": white,
@@ -208,9 +209,9 @@
 		"fg-btn_info": $primary_text_color !important,
 		"bg-btn_info": $accent_color,
 		"border-btn_info": $primary_color !important,
-		"fg-btn_info-hovered": $primary_text_color !important,
-		"bg-btn_info-hovered": $accent_color,
-		"border-btn_info-hovered": $accent_color,
+		"fg-btn_info-hovered": $text_icon_color !important,
+		"bg-btn_info-hovered": $dark_primary_color,
+		"border-btn_info-hovered": $primary_color,
 		"fg-btn_info-focused": $primary_text_color !important,
 		"bg-btn_info-focused": $accent_color,
 		"border-btn_info-focused": $accent_color,
@@ -237,9 +238,9 @@
 		"border-btn_default": $primary_color,
 		"fg-btn_default-hovered": $text_icon_color !important,
 		"bg-btn_default-hovered": $dark_primary_color,
-		"border-btn_default-hovered": $light_primary_color,
+		"border-btn_default-hovered": $primary_color,
 		"fg-btn_default-focused": $primary_text_color !important,
 		"bg-btn_default-focused": $light_primary_color,
-		"border-btn_default-focused": $light_primary_color
+		"border-btn_default-focused": $primary_color
 	);
 }

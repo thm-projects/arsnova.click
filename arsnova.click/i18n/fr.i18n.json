@@ -632,6 +632,11 @@
         "text": "Tous les participants seront supprimés et le classement seront supprimés.",
         "continue": "Continuer?"
       },
+      "reminder_leaderboard_data": {
+        "title": "Attention",
+        "text": "Les données du leaderboard seront supprimées dès que vous quitterez le quiz. Vous pouvez télécharger les données pour une utilisation ultérieure ici.",
+        "continue": "Continuer?"
+      },
       "return_to_lobby": {
         "title": "Attention",
         "text": "Si vous passez au lobby du quiz, tous les rounds de quiz seront réinitialisés.",

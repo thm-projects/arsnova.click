@@ -632,6 +632,11 @@
         "text": "All attendees will be removed and the leaderboard will be deleted.",
         "continue": "Continue?"
       },
+      "reminder_leaderboard_data": {
+        "title": "Warning",
+        "text": "The data of the leaderboard will be removed as soon as you leave the quiz. You can download the data for later use here.",
+        "continue": "Continue?"
+      },
       "return_to_lobby": {
         "title": "Warning",
         "text": "If you proceed to the quiz lobby all played quiz rounds will be reset.",

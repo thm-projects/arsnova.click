@@ -406,6 +406,9 @@ Template.liveResults.helpers({
 			questionList[i].displayIndex = i;
 		}
 
+		if (Session.get("countdownInitialized") || (lib.countdown && lib.countdown.get() > 0)) {
+			return [questionList[eventDoc.questionIndex]];
+		}
 		return questionList ? questionList.reverse() : false;
 	},
 	hasOnlyOneQuestion: ()=> {

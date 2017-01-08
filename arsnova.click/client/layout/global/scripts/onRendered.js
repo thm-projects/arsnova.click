@@ -26,6 +26,7 @@ import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {startConnectionIndication, getRTT, forceFeedback} from '/client/layout/global/scripts/lib.js';
+import {checkIfThemeExist} from "/shared/themes.js";
 
 Template.home.onRendered(function () {
 	if (localData.getAllHashtags().length > 0) {
@@ -84,9 +85,16 @@ Template.layout.onRendered(function () {
 			if (!localStorage.getItem("theme")) {
 				localStorage.setItem("theme", Meteor.settings.public.defaultTheme);
 			}
-			Session.set("theme", localStorage.getItem("theme"));
 			if (configDoc) {
+				if (!checkIfThemeExist(configDoc.theme)) {
+					configDoc.theme = Meteor.settings.public.defaultTheme;
+				}
 				Session.set("theme", configDoc.theme);
+			} else {
+				if (!checkIfThemeExist(localStorage.getItem("theme"))) {
+					localStorage.setItem("theme", Meteor.settings.public.defaultTheme);
+				}
+				Session.set("theme", localStorage.getItem("theme"));
 			}
 		}
 		$("body").removeClass().addClass(Session.get("theme"));

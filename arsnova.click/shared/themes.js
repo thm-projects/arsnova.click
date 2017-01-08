@@ -21,3 +21,14 @@ export const themes = [
 		id: "theme-elegant"
 	}
 ];
+
+export function checkIfThemeExist(theme) {
+	let themeExists = false;
+	$.each(themes, function (index, value) {
+		if (value.id === theme) {
+			themeExists = true;
+			return false;
+		}
+	});
+	return themeExists;
+}

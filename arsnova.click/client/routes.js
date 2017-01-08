@@ -136,7 +136,7 @@ Router.onBeforeAction(function () {
 });
 
 Router.onBeforeAction(function () {
-	let theme = "theme-arsnova-dot-click-contrast";
+	let theme = Meteor.settings.public.defaultTheme;
 	if (!localStorage.getItem("theme")) {
 		localStorage.setItem("theme", theme);
 	} else {

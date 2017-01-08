@@ -29,6 +29,7 @@ import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plu
 import {getChangeEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onChangeEvent.js';
 import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onRemoveEvent.js';
 import {createTabIndices} from '/client/startup.js';
+import {checkIfThemeExist} from "/shared/themes.js";
 
 const subsCache = new SubsManager({
 	/* maximum number of cached subscriptions */
@@ -141,10 +142,17 @@ Router.onBeforeAction(function () {
 		localStorage.setItem("theme", theme);
 	} else {
 		theme = localStorage.getItem("theme");
+		if (!checkIfThemeExist(theme)) {
+			theme = Meteor.settings.public.defaultTheme;
+			localStorage.setItem("theme", theme);
+		}
 	}
 	if (Router.current().params.quizName) {
 		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 		if (configDoc && configDoc.theme && !localData.containsHashtag(Router.current().params.quizName)) {
+			if (!checkIfThemeExist(configDoc.theme)) {
+				configDoc.theme = Meteor.settings.public.defaultTheme;
+			}
 			sessionStorage.setItem("quizTheme", configDoc.theme);
 			theme = configDoc.theme;
 		}

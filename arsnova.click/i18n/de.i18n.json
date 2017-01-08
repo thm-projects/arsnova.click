@@ -632,6 +632,11 @@
         "text": "Alle Teilnehmenden werden abgemeldet und die Rangliste wird gelöscht.",
         "continue": "Fortfahren?"
       },
+      "reminder_leaderboard_data": {
+        "title": "Warnung",
+        "text": "Die Daten der Rangliste werden gelöscht, wenn du das Quiz verlässt. Du kannst hier die Daten für eine spätere Verwendung exportieren.",
+        "continue": "Fortfahren?"
+      },
       "return_to_lobby": {
         "title": "Warnung",
         "text": "Wenn Du zur Quiz-Lobby zurückkehrst, werden alle bereits durchgeführten Quizrunden zurückgesetzt.",

@@ -179,5 +179,16 @@ Template.soundConfig.events({
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(questionItem);
 		Meteor.call('SessionConfiguration.setMusic', questionItem.getConfiguration());
+	},
+	"click .btn_panel-switcher": function () {
+		lib.countdownEndSound.stop();
+		lib.countdownRunningSound.stop();
+		lib.lobbySound.stop();
+		Session.set("countdownEndSoundIsPlaying", false);
+		Session.set("countdownRunningSoundIsPlaying", false);
+		Session.set("lobbySoundIsPlaying", false);
+		$('#playStopCountdownEndSound').prop("checked", true).change();
+		$('#playStopCountdownRunningSound').prop("checked", true).change();
+		$('#playStopLobbyMusic').prop("checked", true).change();
 	}
 });

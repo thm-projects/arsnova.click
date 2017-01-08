@@ -14,7 +14,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
-
 @import "standard-style-definitions";
 
 @function theme-Material() {
@@ -47,7 +46,7 @@
 		/* Connection status */
 		"fg-connection-quality-header_connection-pending": map-get($stdStyle, "md_blue_grey_700"),
 		"fg-connection-quality-header_connection-offline": map-get($stdStyle, "md_red_500"),
-		"fg-connection-quality-header_connection-ok": map-get($stdStyle, "md_teal_300"),
+		"fg-connection-quality-header_connection-ok": map-get($stdStyle, "md_teal_700"),
 		"fg-connection-quality-header_connection-warning": $accent_color,
 		"fg-connection-quality-header_connection-failed": map-get($stdStyle, "md_red_500"),
 		"fg-connection-quality-header_connection-error": map-get($stdStyle, "md_red_500"),
@@ -55,8 +54,6 @@
 		"success": $accent_color,
 		"success-text-color": white,
 		"fg-success": lighten(map-get($stdStyle, "success"), 20),
-		"warning": $dark_primary_color,
-		"warning-text-color": white,
 		"fg-warning": $dark_primary_color,
 		"info": $accent_color,
 		"info-text-color": $primary_text_color,
@@ -81,21 +78,16 @@
 		"splash-screen-body-color": white,
 		"splashscreen-background-color": $primary_color,
 		"splashscreen-foreground-color": $primary_text_color,
-
-    "bg-splashscreen-question-and-answer": $light_primary_color,
-    "splashscreen-question-preview-background-color": $light_primary_color,
-
-    "bg-splashscreen-question-and-answer_question-content": $light_primary_color,
-
-    "bg-splashscreen-question-and-answer_answer-content-header": $light_primary_color,
-
-    "bg-splashscreen-question-and-answer_answer-content-odd-row": $light_primary_color,
-    "border-splashscreen-question-and-answer_answer-content-odd-row": white,
-    "fg-splashscreen-question-and-answer_answer-content-odd-row": white,
-    "bg-splashscreen-question-and-answer_answer-content-even-row": $light_primary_color,
-    "border-splashscreen-question-and-answer_answer-content-even-row": white,
-    "fg-splashscreen-question-and-answer_answer-content-even-row": white,
-
+		"bg-splashscreen-question-and-answer": $light_primary_color,
+		"splashscreen-question-preview-background-color": $light_primary_color,
+		"bg-splashscreen-question-and-answer_question-content": $light_primary_color,
+		"bg-splashscreen-question-and-answer_answer-content-header": $light_primary_color,
+		"bg-splashscreen-question-and-answer_answer-content-odd-row": $light_primary_color,
+		"border-splashscreen-question-and-answer_answer-content-odd-row": white,
+		"fg-splashscreen-question-and-answer_answer-content-odd-row": white,
+		"bg-splashscreen-question-and-answer_answer-content-even-row": $light_primary_color,
+		"border-splashscreen-question-and-answer_answer-content-even-row": white,
+		"fg-splashscreen-question-and-answer_answer-content-even-row": white,
 		"splashscreen-show-hashtags-background-color": map-get($stdStyle, "splashscreen-background-color"),
 		"splashscreen-sound-config-background-color": map-get($stdStyle, "splashscreen-background-color"),
 		"splashscreen-sound-config-button-background-color": map-get($stdStyle, "success"),
@@ -212,46 +204,42 @@
 		"bg-rangedSlider-invalid": map-get($stdStyle, "md_red_500"),
 		"bg-rangedSlider-valid": $dark_primary_color,
 		"bg-rangedSlider-handle": $accent_color,
-
-    /* Bootstrap button styles */
-    "fg-btn_info": $primary_text_color !important,
-    "bg-btn_info": $accent_color,
-    "border-btn_info": $accent_color,
-    "fg-btn_info-hovered": $primary_text_color !important,
-    "bg-btn_info-hovered": $accent_color,
-    "border-btn_info-hovered": $accent_color,
-    "fg-btn_info-focused": $primary_text_color !important,
-    "bg-btn_info-focused": $accent_color,
-    "border-btn_info-focused": $accent_color,
-
-    "fg-btn_warning": $primary_text_color !important,
-    "bg-btn_warning": "md_red_500",
-    "border-btn_warning": "md_red_500",
-    "fg-btn_warning-hovered": $primary_text_color !important,
-    "bg-btn_warning-hovered": "md_red_500",
-    "border-btn_warning-hovered": "md_red_500",
-    "fg-btn_warning-focused": $primary_text_color !important,
-    "bg-btn_warning-focused": "md_red_500",
-    "border-btn_warning-focused": "md_red_500",
-
-    "fg-btn_success": $primary_text_color !important,
-    "bg-btn_success": "md_green_500",
-    "border-btn_success": "md_green_500",
-    "fg-btn_success-hovered": $primary_text_color !important,
-    "bg-btn_success-hovered": "md_green_500",
-    "border-btn_success-hovered": "md_green_500",
-    "fg-btn_success-focused": $primary_text_color !important,
-    "bg-btn_success-focused": "md_green_500",
-    "border-btn_success-focused": "md_green_500",
-
-    "fg-btn_default": $primary_text_color !important,
-    "bg-btn_default": $light_primary_color,
-    "border-btn_default": $light_primary_color,
-    "fg-btn_default-hovered": $primary_text_color !important,
-    "bg-btn_default-hovered": $light_primary_color,
-    "border-btn_default-hovered": $light_primary_color,
-    "fg-btn_default-focused": $primary_text_color !important,
-    "bg-btn_default-focused": $light_primary_color,
-    "border-btn_default-focused": $light_primary_color
+		/* Bootstrap button styles */
+		"fg-btn_info": $primary_text_color !important,
+		"bg-btn_info": $accent_color,
+		"border-btn_info": $accent_color,
+		"fg-btn_info-hovered": $primary_text_color !important,
+		"bg-btn_info-hovered": $accent_color,
+		"border-btn_info-hovered": $accent_color,
+		"fg-btn_info-focused": $primary_text_color !important,
+		"bg-btn_info-focused": $accent_color,
+		"border-btn_info-focused": $accent_color,
+		"fg-btn_warning": $primary_text_color !important,
+		"bg-btn_warning": map-get($stdStyle, "md_red_500"),
+		"border-btn_warning": map-get($stdStyle, "md_red_500"),
+		"fg-btn_warning-hovered": $primary_text_color !important,
+		"bg-btn_warning-hovered": map-get($stdStyle, "md_red_500"),
+		"border-btn_warning-hovered": map-get($stdStyle, "md_red_500"),
+		"fg-btn_warning-focused": $primary_text_color !important,
+		"bg-btn_warning-focused": map-get($stdStyle, "md_red_500"),
+		"border-btn_warning-focused": map-get($stdStyle, "md_red_500"),
+		"fg-btn_success": $primary_text_color !important,
+		"bg-btn_success": map-get($stdStyle, "md_green_500"),
+		"border-btn_success": map-get($stdStyle, "md_green_500"),
+		"fg-btn_success-hovered": $primary_text_color !important,
+		"bg-btn_success-hovered": map-get($stdStyle, "md_green_500"),
+		"border-btn_success-hovered": map-get($stdStyle, "md_green_500"),
+		"fg-btn_success-focused": $primary_text_color !important,
+		"bg-btn_success-focused": map-get($stdStyle, "md_green_500"),
+		"border-btn_success-focused": map-get($stdStyle, "md_green_500"),
+		"fg-btn_default": $primary_text_color !important,
+		"bg-btn_default": $light_primary_color,
+		"border-btn_default": $light_primary_color,
+		"fg-btn_default-hovered": $primary_text_color !important,
+		"bg-btn_default-hovered": $light_primary_color,
+		"border-btn_default-hovered": $light_primary_color,
+		"fg-btn_default-focused": $primary_text_color !important,
+		"bg-btn_default-focused": $light_primary_color,
+		"border-btn_default-focused": $light_primary_color
 	);
 }

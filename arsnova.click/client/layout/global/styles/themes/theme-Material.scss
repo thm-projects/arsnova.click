@@ -131,7 +131,7 @@
 		"fg-quiz_manager_details-btn_group-button": $primary_text_color,
 		"bg-quiz_manager_details-btn_group-button": $accent_color,
 		"bg-quiz_manager_details-btn_group-button-hovered": map-get($stdStyle, "md_orange_700"),
-		"border-quiz_manager_details-btn_group-button": map-get($stdStyle, $primary_color) !important,
+		"border-quiz_manager_details-btn_group-button": map-get($stdStyle, "md_teal_300") !important,
 		/* Question type selection */
 		"border-question_type_view-wrapper": $accent_color,
 		"fg-question_type_view-wrapper-hovered": white,

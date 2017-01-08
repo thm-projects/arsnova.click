@@ -63,6 +63,43 @@
 }
 
 #editAnsweroptionText {
+	.contextMenu {
+		@-webkit-keyframes fadeOut {
+			from { opacity: 0; }
+			to { opacity: 1; }
+		}
+		@keyframes fadeOut {
+			from { opacity: 0; }
+			to { opacity: 1; }
+		}
+		display: none;
+		-webkit-animation: fadeOut 0.2s;
+		animation: fadeOut 0.2s;
+
+		&.displayContextMenu {
+			display: flex;
+			@-webkit-keyframes fadeIn {
+				from { opacity: 0; }
+				to { opacity: 1; }
+			}
+			@keyframes fadeIn {
+				from { opacity: 0; }
+				to { opacity: 1; }
+			}
+			-webkit-animation: fadeIn 0.2s;
+			animation: fadeIn 0.2s;
+			.contextMenuItem {
+				cursor: pointer;
+				flex: 100% 1 1;
+				font-size: 20px;
+				text-align: center;
+
+				&:hover {
+					border-bottom: 1px solid;
+				}
+			}
+		}
+	}
 	.answerOptionElementWrapper {
 		display: flex;
 		border-radius: $corner-radius;
@@ -92,13 +129,6 @@
 			margin-top: 10px;
 			margin-right: 10px;
 			min-width: 80px !important;
-		}
-		.removeAnsweroption {
-			padding-top: 10px;
-			margin-right: 10px;
-			font-size: 1.5em;
-			cursor: pointer;
-			height: 40px;
 		}
 	}
 

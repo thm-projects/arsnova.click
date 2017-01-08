@@ -52,14 +52,14 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 		update: function (event, ui) {
 			const questionGroup = Session.get("questionGroup");
 			const indexTo = ui.item.index();
-			const indexFrom = parseInt(ui.item.attr("data-id"));
+			const indexFrom = parseInt(ui.item.attr("id"));
 			if (ui.item.hasClass("ui-draggable")) {
 				ui.item.remove();
 				questionGroup.getQuestionList()[Router.current().params.questionIndex].addDefaultAnswerOption(indexTo);
 				lib.answerOptionTracker.changed();
 			} else {
 				const item = questionGroup.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[indexFrom];
-				questionGroup.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption(item.getAnswerOptionNumber());
+				questionGroup.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption(indexFrom);
 				questionGroup.getQuestionList()[Router.current().params.questionIndex].addAnswerOption(item, indexTo);
 				if (item.getAnswerText() === "") {
 					lib.renderAnsweroptionItems();

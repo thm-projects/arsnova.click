@@ -254,23 +254,28 @@ export const renderAnsweroptionItems = function () {
 	const typeName = questionItem.typeName();
 	questionItem.getAnswerOptionList().forEach(function (item) {
 		const number = item.getAnswerOptionNumber();
-		const wrapper = $("<div data-id='" + number + "' class='answerOptionElementWrapper draggable' role='listitem'></div>");
-		wrapper.append(
+		const answerWrapper = $("<div class='answerOptionElementWrapper' style='position:relative;' />");
+		answerWrapper.append(
 			"<div class='answer_row_short_text'>" + String.fromCharCode(number + 65) + "</div>"
 		).append(
 			"<input type='text' class='answer_row_text tabbable' id='answerOptionText_Number" + number + "' placeholder='" + TAPi18n.__("view.answeroptions.answeroptiontext_placeholder") + "' value='" + item.getAnswerText() + "' aria-valuenow='" + item.getAnswerText() + "' maxlength='" + answerTextSchema.max + "' aria-multiline='false' autocomplete='off' autocorrect='off' autocapitalize='off' spellcheck='false' />"
 		);
 		if (typeName !== "SurveyQuestion") {
-			wrapper.append(
+			answerWrapper.append(
 				$("<input type='checkbox' role='switch' id='answerOption-" + number + "' name='switch' data-width='80' title='answerOption-" + number + "' class='tabbable isCorrectOption tabbable'/>").prop('checked', item.getIsCorrect())
 			);
 		}
+		const contextMenu = $('<div class="contextMenu"/>').append(
+			"<div class='moveAnsweroptionUp text-light contextMenuItem'><span class='glyphicon glyphicon-chevron-up' aria-hidden='true'></span></div>",
+			"<div class='moveAnsweroptionDown text-light contextMenuItem'><span class='glyphicon glyphicon-chevron-down' aria-hidden='true'></span></div>"
+		);
 		if (typeName !== "YesNoSingleChoiceQuestion" && typeName !== "TrueFalseSingleChoiceQuestion") {
-			wrapper.append(
-				"<div class='removeAnsweroption tabbable' id='removeAnsweroption_" + number + "'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></div>"
+			contextMenu.append(
+				"<div class='removeAnsweroption text-light contextMenuItem'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></div>"
 			);
 		}
-		$('#answerOptionWrapper').append(wrapper);
+		answerWrapper.append(contextMenu);
+		$('#answerOptionWrapper').append($("<div id='" + number + "_answeroption' class='draggable' role='listitem'></div>").append(answerWrapper).append(contextMenu));
 	});
 	const configShowAnswerContentOnButtonsState = questionItem.getDisplayAnswerText() ? "on" : "off";
 	$('#config_showAnswerContentOnButtons_switch').bootstrapToggle(configShowAnswerContentOnButtonsState);

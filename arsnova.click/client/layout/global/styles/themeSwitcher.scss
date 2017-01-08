@@ -777,7 +777,7 @@ $themes: (
 					button {
 						color: map-get($map, "fg-quiz_manager_details-btn_group-button");
 						background-color: map-get($map, "bg-quiz_manager_details-btn_group-button");
-						border: map-get($map, "border-quiz_manager_details-btn_group-button");
+						border-color: map-get($map, "border-quiz_manager_details-btn_group-button");
 						&:hover {
 							background-color: map-get($map, "bg-quiz_manager_details-btn_group-button-hovered");
 						}

@@ -39,7 +39,7 @@ Template.hiddenFooterElement.helpers({
 		const configDoc = Session.get("questionGroup").getConfiguration();
 		switch (item.id) {
 			case "sound":
-				return !!(configDoc && configDoc.getMusicSettings().getCountdownRunningEnabled());
+				return !!(configDoc && configDoc.getMusicSettings().getCountdownRunningEnabled() && configDoc.getMusicSettings().getLobbyEnabled());
 			case "reading-confirmation":
 				if (configDoc && configDoc.getReadingConfirmationEnabled()) {
 					Meteor.defer(function () {

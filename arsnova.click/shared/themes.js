@@ -22,9 +22,9 @@ export const themes = [
 	}
 ];
 
-export function checkIfThemeExist (theme) {
+export function checkIfThemeExist(theme) {
 	let themeExists = false;
-	$.each(themes, function( index, value ) {
+	$.each(themes, function (index, value) {
 		if (value.id === theme) {
 			themeExists = true;
 			return false;

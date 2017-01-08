@@ -61,8 +61,17 @@ Template.nickStandardFooter.events({
 		}
 	},
 	"click #loginViaCas": function () {
+		if (MemberListCollection.findOne({hashtag: Router.current().params.quizName, userRef: Meteor.user()._id})) {
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: "plugins.splashscreen.error.error_messages.duplicate_user",
+				onDestroyed: function () {
+					Router.go("/");
+				}
+			});
+			return;
+		}
 		Meteor.loginWithCas(function () {
-			console.log(lib.hasTHMMail());
 			if (!lib.hasTHMMail()) {
 				return;
 			}
@@ -146,6 +155,16 @@ Template.nickLimited.events({
 			return null;
 		}
 		if (configDoc.nicks.restrictToCASLogin) {
+			if (MemberListCollection.findOne({hashtag: Router.current().params.quizName, userRef: Meteor.user()._id})) {
+				new ErrorSplashscreen({
+					autostart: true,
+					errorMessage: "plugins.splashscreen.error.error_messages.duplicate_user",
+					onDestroyed: function () {
+						Router.go("/");
+					}
+				});
+				return;
+			}
 			Meteor.loginWithCas(function () {
 				if (!lib.hasTHMMail()) {
 					return;

@@ -668,7 +668,8 @@
           "insert_leaderboard_failed": "Fehler beim Hinzufügen der Antwort zur Rangliste",
           "session_closed": "Die Quizrunde wurde beendet",
           "invalid_data": "Die zu importierenden Daten sind fehlerhaft!",
-          "invalid_input_data": "Die eingegebenen Daten sind ungültig oder fehlerhaft!"
+          "invalid_input_data": "Die eingegebenen Daten sind ungültig oder fehlerhaft!",
+          "duplicate_user": "Du versuchst gerade, mit einem zweiten Nicknamen einem Quiz beizutreten. Dies ist nicht möglich!"
         }
       }
     }

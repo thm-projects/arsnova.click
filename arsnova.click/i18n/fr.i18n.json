@@ -668,7 +668,8 @@
           "insert_leaderboard_failed": "Erreur pendant l'intégration de la réponse dans le classement",
           "session_closed": "La tournée de quiz est terminée",
           "invalid_data": "Les données à importer sont défectueuses!",
-          "invalid_input_data": "Les données entrées sont non conformes ou défectueuses!"
+          "invalid_input_data": "Les données entrées sont non conformes ou défectueuses!",
+          "duplicate_user": "Vous essayez de participer avec une deuxième identité. Ce n'est pas possible!"
         }
       }
     }

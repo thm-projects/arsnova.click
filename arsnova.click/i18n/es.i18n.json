@@ -668,7 +668,8 @@
           "insert_leaderboard_failed": "Error al añadir la respuesta a la lista del Ranking",
           "session_closed": "Esta ronda ha sido finalizada",
           "invalid_data": "¡Los datos a importar están defectuosos!",
-          "invalid_input_data": "¡Los datos ingresados son inválidos o erróneos!"
+          "invalid_input_data": "¡Los datos ingresados son inválidos o erróneos!",
+          "duplicate_user": "Está intentando participar con una segunda identidad. ¡Esto no es posible!"
         }
       }
     }

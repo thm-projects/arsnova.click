@@ -54,7 +54,14 @@ Template.quizManager.onRendered(function () {
 			$('#added_questions_wrapper').append(
 				$('<div id="' + item.getQuestionIndex() + '_added_question" class="questionElementWrapper tabbable draggable" role="listitem"/>').append(
 					'<li data-valid="' + (item.isValid() ? "true" : "false") + '" aria-invalid="' + (item.isValid() ? "false" : "true") + '">' + (item.getQuestionIndex() + 1) + ')' + TAPi18n.__(item.translationReferrer()) + '</li>'
-				).append("<div class='removeQuestion text-light' id='removeQuestion_" + item.getQuestionIndex() + "'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></div>")
+				).append(
+					$('<div class="contextMenu" />').append(
+						"<div class='moveQuestionUp text-light contextMenuItem'><span class='glyphicon glyphicon-chevron-up' aria-hidden='true'></span></div>",
+						"<div class='moveQuestionDown text-light contextMenuItem'><span class='glyphicon glyphicon-chevron-down' aria-hidden='true'></span></div>",
+						"<div class='editQuestion text-light contextMenuItem'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></div>",
+						"<div class='removeQuestion text-light contextMenuItem'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></div>"
+					)
+				)
 			);
 		});
 		questionAddedTracker.changed();

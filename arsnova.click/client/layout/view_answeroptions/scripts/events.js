@@ -66,9 +66,44 @@ Template.defaultAnswerOptionTemplate.events({
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
 	},
+	"click .answerOptionElementWrapper, mouseover .answerOptionElementWrapper": function (event) {
+		$(".contextMenu").removeClass("displayContextMenu");
+		$(event.currentTarget).parent().find(".contextMenu").addClass("displayContextMenu");
+	},
+	"mouseleave .contextMenu": function () {
+		$(".contextMenu").removeClass("displayContextMenu");
+	},
+	"click .moveAnsweroptionUp": function (event) {
+		event.stopPropagation();
+		event.preventDefault();
+		const questionGroup = Session.get("questionGroup");
+		const indexFrom = parseInt($(event.currentTarget).parents(".draggable").attr("id").replace("_answeroption", ""));
+		if (indexFrom > 0) {
+			const item = questionGroup.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[indexFrom];
+			questionGroup.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption(indexFrom);
+			questionGroup.getQuestionList()[Router.current().params.questionIndex].addAnswerOption(item, indexFrom - 1);
+			Session.set("questionGroup", questionGroup);
+			localData.addHashtag(Session.get("questionGroup"));
+		}
+	},
+	"click .moveAnsweroptionDown": function (event) {
+		event.stopPropagation();
+		event.preventDefault();
+		const questionGroup = Session.get("questionGroup");
+		const indexFrom = parseInt($(event.currentTarget).parents(".draggable").attr("id").replace("_answeroption", ""));
+		if (indexFrom < questionGroup.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().length - 1) {
+			const item = questionGroup.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[indexFrom];
+			questionGroup.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption(indexFrom);
+			questionGroup.getQuestionList()[Router.current().params.questionIndex].addAnswerOption(item, indexFrom + 1);
+			Session.set("questionGroup", questionGroup);
+			localData.addHashtag(Session.get("questionGroup"));
+		}
+	},
 	"click .removeAnsweroption": function (event) {
+		event.stopPropagation();
+		event.preventDefault();
 		const questionItem = Session.get("questionGroup");
-		questionItem.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption(event.currentTarget.id.replace("removeAnsweroption_", ""));
+		questionItem.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption($(event.currentTarget).parents(".draggable").attr("id").replace("_answeroption", ""));
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
 	},

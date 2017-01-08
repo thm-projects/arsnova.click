@@ -5,9 +5,6 @@ import {Router} from 'meteor/iron:router';
 import * as localData from '/lib/local_storage.js';
 
 Template.quizManager.events({
-	"click #added_questions_wrapper .draggable": function (event) {
-		Router.go("/" + Router.current().params.quizName + "/quizManager/" + event.currentTarget.id.replace("_added_question", ""));
-	},
 	"click #available_questions_wrapper .draggable": function (event) {
 		const questionGroup = Session.get("questionGroup");
 		const targetId = event.target.id.replace("_draggable", "");
@@ -15,11 +12,47 @@ Template.quizManager.events({
 		Session.set("questionGroup", questionGroup);
 		localData.addHashtag(Session.get("questionGroup"));
 	},
+	"click #added_questions_wrapper .draggable, mouseover #added_questions_wrapper .draggable": function (event) {
+		$('#added_questions_wrapper').find(".draggable").removeClass("displayContextMenu");
+		$(event.currentTarget).addClass("displayContextMenu");
+	},
+	"mouseleave #added_questions_wrapper .draggable": function () {
+		$('#added_questions_wrapper').find(".draggable").removeClass("displayContextMenu");
+	},
+	"click .moveQuestionUp": function (event) {
+		event.stopPropagation();
+		event.preventDefault();
+		const questionGroup = Session.get("questionGroup");
+		const indexFrom = parseInt($(event.currentTarget).parents(".draggable").attr("id").replace("_added_question", ""));
+		if (indexFrom > 0) {
+			const question = questionGroup.getQuestionList()[indexFrom];
+			questionGroup.removeQuestion(indexFrom);
+			questionGroup.addQuestion(question, indexFrom - 1);
+			Session.set("questionGroup", questionGroup);
+			localData.addHashtag(Session.get("questionGroup"));
+		}
+	},
+	"click .moveQuestionDown": function (event) {
+		event.stopPropagation();
+		event.preventDefault();
+		const questionGroup = Session.get("questionGroup");
+		const indexFrom = parseInt($(event.currentTarget).parents(".draggable").attr("id").replace("_added_question", ""));
+		if (indexFrom < questionGroup.getQuestionList().length - 1) {
+			const question = questionGroup.getQuestionList()[indexFrom];
+			questionGroup.removeQuestion(indexFrom);
+			questionGroup.addQuestion(question, indexFrom + 1);
+			Session.set("questionGroup", questionGroup);
+			localData.addHashtag(Session.get("questionGroup"));
+		}
+	},
+	"click .editQuestion": function (event) {
+		Router.go("/" + Router.current().params.quizName + "/quizManager/" + $(event.currentTarget).parents(".draggable").attr("id").replace("_added_question", ""));
+	},
 	"click .removeQuestion": function (event) {
 		event.stopPropagation();
 		event.preventDefault();
 		const questionGroup = Session.get("questionGroup");
-		const targetId = parseInt(event.currentTarget.id.replace("removeQuestion_", ""));
+		const targetId = parseInt($(event.currentTarget).parents(".draggable").attr("id").replace("_added_question", ""));
 		questionGroup.removeQuestion(targetId);
 		Session.set("questionGroup", questionGroup);
 		localData.addHashtag(Session.get("questionGroup"));

@@ -180,15 +180,44 @@ Template.soundConfig.events({
 		localData.addHashtag(questionItem);
 		Meteor.call('SessionConfiguration.setMusic', questionItem.getConfiguration());
 	},
-	"click .btn_panel-switcher": function () {
-		lib.countdownEndSound.stop();
-		lib.countdownRunningSound.stop();
-		lib.lobbySound.stop();
-		Session.set("countdownEndSoundIsPlaying", false);
-		Session.set("countdownRunningSoundIsPlaying", false);
-		Session.set("lobbySoundIsPlaying", false);
-		$('#playStopCountdownEndSound').prop("checked", true).change();
-		$('#playStopCountdownRunningSound').prop("checked", true).change();
-		$('#playStopLobbyMusic').prop("checked", true).change();
+	"click .btn_panel-switcher": function (event) {
+		const countdownEndSwitch = $('#playStopCountdownEndSound');
+		const countdownRunningSwitch = $('#playStopCountdownRunningSound');
+		const lobbyMusicSwitch = $('#playStopLobbyMusic');
+		switch ($(event.currentTarget).attr("href")) {
+			case "#panel-countdown-end":
+				lib.countdownRunningSound.stop();
+				lib.lobbySound.stop();
+				Session.set("countdownRunningSoundIsPlaying", false);
+				Session.set("lobbySoundIsPlaying", false);
+				countdownRunningSwitch.prop("checked", true).change();
+				lobbyMusicSwitch.prop("checked", true).change();
+				lib.countdownEndSound.play();
+				Session.set("countdownEndSoundIsPlaying", true);
+				countdownEndSwitch.prop("checked", false).change();
+				break;
+			case "#panel-countdown-running":
+				lib.countdownEndSound.stop();
+				lib.lobbySound.stop();
+				Session.set("countdownEndSoundIsPlaying", false);
+				Session.set("lobbySoundIsPlaying", false);
+				countdownEndSwitch.prop("checked", true).change();
+				lobbyMusicSwitch.prop("checked", true).change();
+				lib.countdownRunningSound.play();
+				Session.set("countdownRunningSoundIsPlaying", true);
+				countdownRunningSwitch.prop("checked", false).change();
+				break;
+			case "#panel-lobby-music":
+				lib.countdownEndSound.stop();
+				lib.countdownRunningSound.stop();
+				Session.set("countdownRunningSoundIsPlaying", false);
+				Session.set("countdownEndSoundIsPlaying", false);
+				countdownEndSwitch.prop("checked", true).change();
+				countdownRunningSwitch.prop("checked", true).change();
+				lib.lobbySound.play();
+				Session.set("lobbySoundIsPlaying", true);
+				lobbyMusicSwitch.prop("checked", false).change();
+				break;
+		}
 	}
 });

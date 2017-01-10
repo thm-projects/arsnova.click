@@ -203,6 +203,7 @@
       "preview": "",
       "show_answer_content_on_buttons": "Mostrar el contenido de la respuesta de los botones?",
       "multiple_selection_survey": "Permitir la selección de múltiples respuestas?",
+      "emoji_info": "Puedes incorporar también uno de estos <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis (sitio web externo!)</a> en tus respuestas <img style='width: 30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png' /> <br/>Simplemente haga clic en el sitio web en el Emoji y péguelo en la answeroption.",
       "description": {
         "default_answer_row": "Arrastre este bloque a la lista de opciones de respuesta para crear una nueva.",
         "added_answers": "Aquí están todas las answeroptions creadas. Puede cambiar el orden de las respuestas mediante arrastrar y soltar.",

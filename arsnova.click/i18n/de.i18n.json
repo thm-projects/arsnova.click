@@ -203,6 +203,7 @@
       "preview": "",
       "show_answer_content_on_buttons": "Soll auf den Abstimmungsbuttons der Inhalt der Antwort angezeigt werden?",
       "multiple_selection_survey": "Sollen mehrere Antwortoptionen ausgewählt werden können?",
+      "emoji_info": "Du kannst auch eines dieser <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis (externe Webseite!)</a> in deine Antworten einbetten <img style='width:30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/> <br/>Klicke auf der Webseite einfach auf das jeweilige Emoji und füge es in die Antwort ein.",
       "description": {
         "default_answer_row": "Ziehe diesen Block in die Liste der erstellten Antwortoptionen, um eine neue Antwort einzufügen.",
         "added_answers": "Hier siehst Du alle bereits erstellten Antwortoptionen dieser Quizfrage. Du kannst die Anordnung der Antworten ändern, indem Du die Liste per Drag & Drop sortierst.",

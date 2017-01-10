@@ -203,6 +203,7 @@
       "preview": "",
       "show_answer_content_on_buttons": "Display the answer's content on the buttons?",
       "multiple_selection_survey": "Allow selection of multiple answers?",
+      "emoji_info": "You can embed also one of these <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis (external website!)</a> in your answeroptions <img style='width:30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/> <br/>Simply click on the website on the Emoji and paste it into the answeroption.",
       "description": {
         "default_answer_row": "Drag this block into the list of answeroptions to create a new one.",
         "added_answers": "Here are all already created answeroptions. You can change the order of the answers via drag & drop.",

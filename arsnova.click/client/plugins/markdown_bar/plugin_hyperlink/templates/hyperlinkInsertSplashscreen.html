@@ -1,0 +1,61 @@
+<!--
+* This file is part of ARSnova Click.
+* Copyright (C) 2016 The ARSnova Team
+*
+* ARSnova Click is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* ARSnova Click is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
+
+<template name="hyperlinkInsertSplashscreen">
+    <div class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="noSplashscreenPadding col-md-11 col-sm-11 col-xs-10">
+                <div class="modal-content">
+                    <div class="modal-header"></div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-label round-corners-top-left input-group-addon input-field-bg-color">{{_ "plugins.markdown_bar.link_text"}}:</div>
+                                <input type="text" class="input-field round-corners-top-right" id="hyperlinkText" placeholder="{{_ "plugins.markdown_bar.visible_text"}}" maxlength="{{getUrlSchema.max}}">
+                            </div>
+                            <hr class="hr-without-margin">
+                            <div class="input-group">
+                                <div class="input-label round-corners-bottom-left input-group-addon input-field-bg-color">{{_ "plugins.markdown_bar.link_destination"}}:</div>
+                                <input type="text" class="input-field round-corners-bottom-right" id="hyperlinkDestination" placeholder="http://" maxlength="{{getUrlSchema.max}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button id="js-btn-closeHyperlink" type="button"
+                                        class="btn button-back btn-lg btn-answerOption">
+                                    <span class="glyphicon glyphicon-remove glyph-left" aria-hidden="true"></span>
+                                    <span class="ansBtn">{{_ "global.abort"}}</span>
+                                </button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button id="js-btn-saveHyperlink" type="button" class="btn btn-success btn-lg btn-answerOption">
+                                    <span class="glyphicon glyphicon-ok glyph-left" aria-hidden="true"></span>
+                                    <span class="ansBtn">{{_ "global.save"}}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="noSplashscreenPadding col-md-1 col-sm-1 col-xs-2">
+                <div class="splashscreen-container-close"><span class="glyphicon glyphicon-remove"></span></div>
+            </div>
+        </div>
+    </div>
+</template>

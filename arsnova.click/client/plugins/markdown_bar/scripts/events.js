@@ -50,42 +50,9 @@ Template.markdownBar.events({
 		}
 	},
 	"click #hyperlinkMarkdownButton": function () {
-		new Splashscreen({
-			autostart: true,
-			templateName: "hyperlinkInsertSplashscreen",
-			closeOnButton: "#js-btn-closeHyperlink, #js-btn-saveHyperlink, .splashscreen-container-close",
-			onRendered: function (instance) {
-				const textarea = document.getElementById('questionText');
-				let frontText;
-				let middleText;
-				let backText;
-				if (textarea.selectionStart != textarea.selectionEnd) {
-					const strPosBegin = textarea.selectionStart;
-					const strPosEnd = textarea.selectionEnd;
-					frontText = (textarea.value).substring(0, strPosBegin);
-					middleText = (textarea.value).substring(strPosBegin, strPosEnd);
-					backText = (textarea.value).substring(strPosEnd, textarea.value.length);
-
-					instance.templateSelector.find('#hyperlinkText').val(middleText);
-				}
-				$('#js-btn-saveHyperlink').on('click', function () {
-					const linkText = document.getElementById('hyperlinkText').value;
-					const linkDestination = document.getElementById('hyperlinkDestination').value;
-					try {
-						new SimpleSchema({
-							hyperlink: urlSchema
-						}).validate({hyperlink: linkDestination});
-						textarea.value = frontText + backText;
-						insertInQuestionText('[' + linkText + '](' + linkDestination + ')');
-					} catch (ex) {
-						new ErrorSplashscreen({
-							autostart: true,
-							errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
-						});
-					}
-				});
-			}
-		});
+		if (!markdownAlreadyExistsAndAutoRemove('[' + TAPi18n.__("plugins.markdown_bar.visible_text") + '](' + TAPi18n.__("plugins.markdown_bar.link_destination") + ')')) {
+			insertInQuestionText('[' + TAPi18n.__("plugins.markdown_bar.visible_text") + '](' + TAPi18n.__("plugins.markdown_bar.link_destination") + ')');
+		}
 	},
 	"click #unsortedListMarkdownButton": function () {
 		if (!markdownAlreadyExistsAndAutoRemove('- ')) {

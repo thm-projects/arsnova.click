@@ -76,6 +76,7 @@ $themes: (
 			.quizName {
 				color: map-get($map, "fg_quiz-name");
 			}
+			.plain_view #containerFrame,
 			.quiz-lobby-header,
 			.container,
 			.fixed-bottom {
@@ -99,6 +100,7 @@ $themes: (
 					color: map-get($map, "footer-text-color") !important;
 				}
 			}
+			.plain_view #topNav,
 			.navbar-fixed-top {
 				background-color: map-get($map, "bg-nav-row");
 				-webkit-transition: background-color 800ms linear;
@@ -785,8 +787,10 @@ $themes: (
 				}
 			}
 			#previewQuestionContentWrapper {
-				#previewQuestionImage {
-					border: 5px solid map-get($map, "border-previewQuestionContentWrapper-image");
+				.plain_view {
+					#content {
+						border: 5px solid map-get($map, "border-previewQuestionContentWrapper-image");
+					}
 				}
 				#markdownPreviewWrapper {
 					color: map-get($map, "fg-previewQuestionContentWrapper");

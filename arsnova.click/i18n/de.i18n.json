@@ -200,7 +200,7 @@
       "answeroptiontext_placeholder": "Antwortoption eingeben",
       "correct": "Richtig",
       "wrong": "Falsch",
-      "preview": "Smartphone-Vorschau",
+      "preview": "",
       "show_answer_content_on_buttons": "Soll auf den Abstimmungsbuttons der Inhalt der Antwort angezeigt werden?",
       "multiple_selection_survey": "Sollen mehrere Antwortoptionen ausgewählt werden können?",
       "description": {
@@ -394,7 +394,7 @@
     "questions": {
       "title": "Frage bearbeiten",
       "enter_question_here": "Gib hier den Text der Frage ein",
-      "preview": "Vorschau",
+      "preview": "",
       "single_choice_question": "Single-Choice-Frage",
       "single_choice_question_yes_no": "Ja|Nein-Frage",
       "single_choice_question_true_false": "Wahr|Falsch-Frage",

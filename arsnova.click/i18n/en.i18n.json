@@ -200,7 +200,7 @@
       "answeroptiontext_placeholder": "Answer option required",
       "correct": "Correct",
       "wrong": "Wrong",
-      "preview": "Smartphone Preview",
+      "preview": "",
       "show_answer_content_on_buttons": "Display the answer's content on the buttons?",
       "multiple_selection_survey": "Allow selection of multiple answers?",
       "description": {
@@ -394,7 +394,7 @@
     "questions": {
       "title": "Enter question text",
       "enter_question_here": "Enter your question here",
-      "preview": "Smartphone Preview",
+      "preview": "",
       "single_choice_question": "Single Choice",
       "single_choice_question_yes_no": "Yes-No Single-Choice question",
       "single_choice_question_true_false": "True-False Single-Choice question",

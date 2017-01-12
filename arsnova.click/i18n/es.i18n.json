@@ -200,7 +200,7 @@
       "answeroptiontext_placeholder": "Opción de respuesta necesario",
       "correct": "Correcto",
       "wrong": "Incorrecto",
-      "preview": "Preestreno",
+      "preview": "",
       "show_answer_content_on_buttons": "Mostrar el contenido de la respuesta de los botones?",
       "multiple_selection_survey": "Permitir la selección de múltiples respuestas?",
       "description": {
@@ -394,7 +394,7 @@
     "questions": {
       "title": "Ingresar texto de pregunta",
       "enter_question_here": "Ingresa el texto de la pregunta aquí",
-      "preview": "Previsualizar",
+      "preview": "",
       "single_choice_question": "Pregunta de selección única (solo una de más respuestas es la correcta)",
       "single_choice_question_yes_no": "Pregunta si/no",
       "single_choice_question_true_false": "Pregunta Verdadero/Falso",

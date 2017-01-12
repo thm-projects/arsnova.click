@@ -138,8 +138,10 @@
 		"bg-question_type_view-wrapper-hovered": $accent_color,
 		"border-question_type_view-activeQuestionType-wrapper": white,
 		/* Edit answer options and smartphone preview */
+		"border-previewQuestionContentWrapper-image": black,
+		"fg-previewQuestionContentWrapper": white,
 		"bg-edit_answeroption_text-element_wrapper": white,
-		"border-preview_answeroption_content_wrapper-image": white,
+		"border-preview_answeroption_content_wrapper-image": black,
 		"fg-preview_answeroption_content_wrapper": white,
 		/* QR code */
 		"fg-qr-code-button": white,
@@ -208,10 +210,10 @@
 		/* Bootstrap button styles */
 		"fg-btn_info": $primary_text_color !important,
 		"bg-btn_info": $accent_color !important,
-		"border-btn_info": $primary_color !important,
+		"border-btn_info": $accent_color !important,
 		"fg-btn_info-hovered": $text_icon_color !important,
 		"bg-btn_info-hovered": $dark_primary_color !important,
-		"border-btn_info-hovered": $primary_color !important,
+		"border-btn_info-hovered": $dark_primary_color !important,
 		"fg-btn_info-focused": $primary_text_color !important,
 		"bg-btn_info-focused": $accent_color !important,
 		"border-btn_info-focused": $primary_color !important,

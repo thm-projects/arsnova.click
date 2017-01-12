@@ -27,6 +27,7 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
 import * as leaderboardLib from '/client/layout/view_leaderboard/scripts/lib.js';
+import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as lib from './lib.js';
 
 Template.liveResultsFooterNavButtons.helpers({
@@ -157,8 +158,10 @@ Template.progressBarSingleChoiceQuestion.helpers({
 				questionIndex: index,
 				answerOptionNumber: value.answerOptionNumber
 			}).count();
+			const answerTextValue = [value.answerText.replace(/\$\$/g, '$')];
+			questionLib.parseGithubFlavoredMarkdown(answerTextValue);
 			result.push({
-				name: String.fromCharCode(value.answerOptionNumber + 65) + ": " + value.answerText,
+				name: String.fromCharCode(value.answerOptionNumber + 65) + ": " + answerTextValue[0],
 				absolute: amount,
 				percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
 				isCorrect: correctAnswerOptions ? value.isCorrect : -1,
@@ -188,8 +191,10 @@ Template.progressBarSurveyQuestion.helpers({
 				questionIndex: index,
 				answerOptionNumber: value.answerOptionNumber
 			}).count();
+			const answerTextValue = [value.answerText.replace(/\$\$/g, '$')];
+			questionLib.parseGithubFlavoredMarkdown(answerTextValue);
 			result.push({
-				name: String.fromCharCode(value.answerOptionNumber + 65) + ": " + value.answerText,
+				name: String.fromCharCode(value.answerOptionNumber + 65) + ": " + answerTextValue[0],
 				absolute: amount,
 				percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
 				isCorrect: 0,
@@ -258,8 +263,10 @@ Template.progressBarMultipleChoiceQuestion.helpers({
 					questionIndex: index,
 					answerOptionNumber: value.answerOptionNumber
 				}).count();
+				const answerTextValue = [value.answerText.replace(/\$\$/g, '$')];
+				questionLib.parseGithubFlavoredMarkdown(answerTextValue);
 				result.push({
-					name: String.fromCharCode(value.answerOptionNumber + 65) + ": " + value.answerText,
+					name: String.fromCharCode(value.answerOptionNumber + 65) + ": " + answerTextValue[0],
 					absolute: amount,
 					percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
 					isCorrect: correctAnswerOptions ? value.isCorrect : -1,

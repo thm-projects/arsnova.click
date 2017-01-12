@@ -53,5 +53,12 @@ export function createSlider(index) {
 
 export function setSlider(index) {
 	const questionItem = Session.get("questionGroup");
+	sliderObject.updateOptions({
+		margin: 1,
+		range: {
+			'min': 1,
+			'max': questionItem.getQuestionList()[index].getTimer() + 50 || 100
+		}
+	});
 	sliderObject.set(questionItem.getQuestionList()[index].getTimer());
 }

@@ -45,7 +45,9 @@
                             {{#if this.minutes}}
                                 <span id="minutes">{{this.minutes}} {{_ "view.timer.minute" count=this.minutes}}</span>
                             {{/if}}
-                            <span id="seconds">{{this.seconds}} {{_ "view.timer.second" count=this.seconds}}</span>
+                            {{#if this.seconds}}
+                                <span id="seconds">{{this.seconds}} {{_ "view.timer.second" count=this.seconds}}</span>
+                            {{/if}}
                         {{/with}}
                     </p>
                 </div>

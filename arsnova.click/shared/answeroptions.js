@@ -22,6 +22,26 @@ import {EventManagerCollection, questionIndexSchema} from '/lib/eventmanager/col
 import {hashtagSchema} from '/lib/hashtags/collection.js';
 
 Meteor.methods({
+	'AnswerOptionCollection.clear': function (answerDoc) {
+		const schema = {
+			hashtag: hashtagSchema,
+			questionIndex: questionIndexSchema
+		};
+		const validation = {
+			hashtag: answerDoc.hashtag,
+			questionIndex: answerDoc.questionIndex
+		};
+		new SimpleSchema(schema).validate(validation);
+		answerOptionLib.AnswerOptionCollection.remove(validation);
+		EventManagerCollection.update({hashtag: answerDoc.hashtag}, {
+			$push: {
+				eventStack: {
+					key: "AnswerOptionCollection.clear",
+					value: validation
+				}
+			}
+		});
+	},
 	'AnswerOptionCollection.addOption': function (answerDoc) {
 		const schema = {
 			hashtag: hashtagSchema,

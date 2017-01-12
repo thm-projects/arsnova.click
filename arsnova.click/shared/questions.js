@@ -35,6 +35,7 @@ Meteor.methods({
 		}
 		QuestionGroupCollection.update(query, questionGroup, {upsert: true});
 		for (let i = 0; i < questionGroup.questionList.length; i++) {
+			Meteor.call("AnswerOptionCollection.clear", {hashtag: questionGroup.hashtag, questionIndex: i});
 			const questionItem = questionGroup.questionList[i];
 			for (let j = 0; j < questionItem.answerOptionList.length; j++) {
 				const answerItem = questionItem.answerOptionList[j];
@@ -124,6 +125,9 @@ Meteor.methods({
 			}
 		});
 	},
+	/**
+	 * @return {boolean}
+	 */
 	"Question.isSC": function ({hashtag, questionIndex}) {
 		new SimpleSchema({
 			hashtag: hashtagSchema,

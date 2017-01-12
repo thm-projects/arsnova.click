@@ -69,11 +69,14 @@
                                class="tabbable">
                     </div>
                 {{/if}}
+                <div class="col-xs-12">
+                    <p class="text-light text-center" id="emojiInfo">{{{_ "view.answeroptions.emoji_info"}}}</p>
+                </div>
             </div>
         </div>
         <div id="previewAnsweroptionContentWrapper" class="hidden-xs hidden-sm col-md-6">
             <div class="center-block" data-intro="{{_ "view.answeroptions.description.preview"}}">
-                <img id="previewAnsweroptionImage" src="/images/preview/question_preview.png" alt="question preview" />
+                {{> plain_view}}
                 <div id="markdownPreviewWrapper" class="answerWrapper" aria-label="{{_ "view.answeroptions.description.preview"}}">
                     <h2 class="text-center">{{_ "view.answeroptions.preview"}}</h2>
                     {{> votingview data-questionIndex=getQuestionIndex}}

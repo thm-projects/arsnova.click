@@ -27,15 +27,12 @@ Template.createQuestionView.onRendered(function () {
 	this.autorun(function () {
 		headerLib.titelTracker.depend();
 		const mainContentContainer = $('#mainContentContainer');
-		const previewQuestionImage = $('#previewQuestionImage');
+		const content = $('#content');
 		$('.textarea').css("height", mainContentContainer.height() - $('#markdownBarDiv').outerHeight(true) - 6);
-		previewQuestionImage.css("height", mainContentContainer.height());
-		const contentWidth = (previewQuestionImage.width() ? previewQuestionImage.width() : previewQuestionImage.height() / 1.7758186397984888);
-		$('#markdownPreviewWrapper').css({
-			height: previewQuestionImage.height() - 140,
-			width: contentWidth
-		});
+		content.css("height", mainContentContainer.height());
+		const contentWidth = ((content.height() / 1.8805970149253732) + 10);
 		$('#previewQuestionContentWrapper').find('.center-block').css({width: contentWidth});
+		content.css({"font-size": "50px"});
 	}.bind(this));
 	this.autorun(function () {
 		markdownBarTracker.depend();

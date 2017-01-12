@@ -76,6 +76,7 @@ $themes: (
 			.quizName {
 				color: map-get($map, "fg_quiz-name");
 			}
+			.plain_view #containerFrame,
 			.quiz-lobby-header,
 			.container,
 			.fixed-bottom {
@@ -99,6 +100,7 @@ $themes: (
 					color: map-get($map, "footer-text-color") !important;
 				}
 			}
+			.plain_view #topNav,
 			.navbar-fixed-top {
 				background-color: map-get($map, "bg-nav-row");
 				-webkit-transition: background-color 800ms linear;
@@ -785,13 +787,28 @@ $themes: (
 				}
 			}
 			#previewQuestionContentWrapper {
-				#previewQuestionImage {
-					border: 5px solid map-get($map, "border-previewQuestionContentWrapper-image");
+				.plain_view {
+					#content {
+						border: 5px solid map-get($map, "border-previewQuestionContentWrapper-image");
+					}
 				}
 				#markdownPreviewWrapper {
 					color: map-get($map, "fg-previewQuestionContentWrapper");
 					p {
 						color: map-get($map, "fg-previewQuestionContentWrapper");
+					}
+				}
+			}
+			#previewAnsweroptionContentWrapper {
+				.plain_view {
+					#content {
+						border: 5px solid map-get($map, "border-previewAnsweroptionContentWrapper-image");
+					}
+				}
+				#markdownPreviewWrapper {
+					color: map-get($map, "fg-previewAnsweroptionContentWrapper");
+					p {
+						color: map-get($map, "fg-previewAnsweroptionContentWrapper");
 					}
 				}
 			}
@@ -894,17 +911,6 @@ $themes: (
 			#editAnsweroptionText {
 				.answerOptionElementWrapper {
 					background-color: map-get($map, "bg-edit_answeroption_text-element_wrapper");
-				}
-			}
-			#previewAnsweroptionContentWrapper {
-				#previewAnsweroptionImage {
-					border: 5px solid map-get($map, "border-preview_answeroption_content_wrapper-image");
-				}
-				#markdownPreviewWrapper {
-					color: map-get($map, "fg-preview_answeroption_content_wrapper");
-					p {
-						color: map-get($map, "fg-preview_answeroption_content_wrapper");
-					}
 				}
 			}
 			.thm-logo-background {

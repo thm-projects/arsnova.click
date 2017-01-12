@@ -154,13 +154,6 @@ Template.header.onRendered(function () {
 	if (!Session.get("questionGroup") && Router.current().params.quizName && localData.containsHashtag(Router.current().params.quizName)) {
 		Session.set("questionGroup", localData.reenterSession(Router.current().params.quizName));
 	}
-	$(window).resize(function () {
-		if ($(window).width() > 999) {
-			$(".thm-logo-background").show();
-		} else {
-			$(".thm-logo-background").hide();
-		}
-	});
 
 	$(window).on('resize', lib.headerTrackerCallback);
 

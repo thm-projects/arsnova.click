@@ -203,6 +203,7 @@
       "preview": "",
       "show_answer_content_on_buttons": "Display the answer's content on the buttons?",
       "multiple_selection_survey": "Allow selection of multiple answers?",
+      "emoji_info": "You can embed also one of these <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis (external website!)</a> in your answeroptions <img style='width:30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/> <br/>Simply click on the website on the Emoji and paste it into the answeroption.",
       "description": {
         "default_answer_row": "Drag this block into the list of answeroptions to create a new one.",
         "added_answers": "Here are all already created answeroptions. You can change the order of the answers via drag & drop.",
@@ -461,6 +462,10 @@
       "timer": "Countdown",
       "second": "second",
       "second_plural": "seconds",
+      "minute": "minute",
+      "minute_plural": "minutes",
+      "hour": "hour",
+      "hour_plural": "hours",
       "validation": "Validation",
       "validation_errors": {
         "types": {
@@ -505,7 +510,7 @@
       "themes": {
         "theme-arsnova-dot-click-contrast": {
           "name": "arsnova.click (high contrast)",
-          "description": "First theme of arsnova.click"
+          "description": "Beamerfriendly theme of arsnova.click"
         },
         "elegant": {
           "name": "Elegant",
@@ -549,6 +554,10 @@
       "title": "Set countdown",
       "second": "Second",
       "second_plural": "Seconds",
+      "minute": "minute",
+      "minute_plural": "minutes",
+      "hour": "hour",
+      "hour_plural": "hours",
       "description": "Here you can set the countdown for the quiz question. As soon as it expires, or all participants have answered, the quiz round is ended."
     },
     "translation": {

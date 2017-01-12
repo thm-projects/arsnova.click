@@ -19,15 +19,14 @@
 	<div class="row center-vertical" id="createTimerView">
 		<div class="col-md-12">
 			<div class="row distance-top" data-intro="{{_ "view.timer.description"}}" aria-label="{{_ "view.timer.description"}}">
-				<div class="col-lg-7" role="slider">
+				<div class="col-xs-12" role="slider">
 					<div id="slider" class="slider"></div>
 				</div>
-				<div class="col-lg-5">
+				<div class="col-xs-12">
 					<div class="input-group input-group-slider">
 						<span class="input-group-addon round-corners input-field-bg-color input-group-letter glyphicon-hourglass" aria-hidden="true"></span>
 						<input type="number"
-                               min="5"
-                               max="600"
+                               min="1"
                                title="{{slider}} {{_ "view.timer.second" count=slider}}"
                                id="slider-timer-input-field"
                                class="input-field round-corners slider-timer-input tabbable"
@@ -37,6 +36,19 @@
                         <p class="text-center text-light">{{_ "view.timer.second" count=slider}}</p>
 					</div>
 				</div>
+                <div class="col-xs-12">
+                    <p class="text-center text-light" id="parsedSeconds">
+                        {{#with getParsedSeconds}}
+                            {{#if this.hours}}
+                                <span id="hours">{{this.hours}} {{_ "view.timer.hour" count=this.hours}}</span>
+                            {{/if}}
+                            {{#if this.minutes}}
+                                <span id="minutes">{{this.minutes}} {{_ "view.timer.minute" count=this.minutes}}</span>
+                            {{/if}}
+                            <span id="seconds">{{this.seconds}} {{_ "view.timer.second" count=this.seconds}}</span>
+                        {{/with}}
+                    </p>
+                </div>
 			</div>
 		</div>
 	</div>

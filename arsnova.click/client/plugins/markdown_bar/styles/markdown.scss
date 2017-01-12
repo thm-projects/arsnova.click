@@ -62,30 +62,13 @@
 	position: absolute !important;
 }
 
-@media (max-width: 500px) {
-	.markdown-box {
-		display: none;
-	}
-
-	.row-create-question-buttons {
-		display: none;
-		height: 55px;
-		margin-bottom: 5px;
-	}
-
-	.round-corners-markdown {
-		border-radius: $corner-radius;
-	}
-}
-
 .formatPreviewButton {
 	margin-bottom: 5px;
 }
 
 .markdown-box {
-	padding-left: 5px;
-	padding-right: 5px;
 	margin-bottom: 1px;
+	overflow: hidden;
 }
 
 .button-markdown {
@@ -154,7 +137,11 @@
 .row-centered {
 	text-align: center;
 	padding-top: 3px;
-	display: inline-block;
+	display: flex;
+	margin: 0;
+	flex-flow: row;
+	overflow-x: auto;
+	overflow-y: hidden;
 }
 
 .col-centered {

@@ -20,27 +20,21 @@
 #previewQuestionContentWrapper {
 	overflow: hidden;
 	resize: none;
-	position: relative;
+	position: fixed;
+	right: 0;
 
-	#previewQuestionImage {
-		border-radius: $corner-radius;
+	.center-block {
+		position: relative;
 	}
 
 	#markdownPreviewWrapper {
 		position: absolute;
-		top: 90px;
+		top: calc(6.8vh + 10px);
 		padding: 0 10px;
-		width: 365px;
-		height: 540px;
+		width: 100%;
+		height: calc(100% - 3.1% - 11vh);
 		overflow-y: auto;
 		overflow-x: hidden;
 		word-wrap: break-word;
 	}
-}
-
-.previewTextContainer-small {
-	height: 145px;
-}
-.previewTextContainer-large {
-	height: 290px;
 }

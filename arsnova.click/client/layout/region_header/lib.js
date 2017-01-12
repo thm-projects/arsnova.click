@@ -37,7 +37,8 @@ export function isEditingQuestion() {
 }
 
 export function calculateHeaderSize() {
-	const headerTitle = $('.header-title'),
+	const header = $('.navbar-fixed-top'),
+		headerTitle = header.find('.header-title'),
 		titel         = headerTitle.text().trim(),
 		titleLength   = titel.length;
 
@@ -49,7 +50,7 @@ export function calculateHeaderSize() {
 	} else {
 		logoHeight = "8vh";
 	}
-	$('.arsnova-logo img').css("height", logoHeight);
+	header.find('.arsnova-logo img').css("height", logoHeight);
 
 	if (titleLength <= 15) {
 		if ($(document).width() > $(document).height()) {
@@ -74,7 +75,7 @@ export function calculateHeaderSize() {
 			fontSize = "3vh";
 		}
 	}
-	headerTitle.css({"font-size": fontSize, "line-height": $('.arsnova-logo').height() + "px"});
+	headerTitle.css({"font-size": fontSize, "line-height": header.find('.arsnova-logo').height() + "px"});
 }
 
 export const titelTracker = new Tracker.Dependency();

@@ -61,7 +61,7 @@ Template.nickStandardFooter.events({
 		}
 	},
 	"click #loginViaCas": function () {
-		if (MemberListCollection.findOne({hashtag: Router.current().params.quizName, userRef: Meteor.user()._id})) {
+		if (Meteor.user() && MemberListCollection.findOne({hashtag: Router.current().params.quizName, userRef: Meteor.user()._id})) {
 			new ErrorSplashscreen({
 				autostart: true,
 				errorMessage: "plugins.splashscreen.error.error_messages.duplicate_user",

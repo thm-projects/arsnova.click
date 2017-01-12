@@ -25,5 +25,18 @@ Template.createTimerView.helpers({
 			return;
 		}
 		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getTimer();
+	},
+	getParsedSeconds: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		const date = new Date(null);
+		date.setSeconds(Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getTimer());
+		const formatted = date.toISOString().substr(11, 8).split(":");
+		return {
+			hours: parseInt(formatted[0]),
+			minutes: parseInt(formatted[1]),
+			seconds: parseInt(formatted[2])
+		};
 	}
 });

@@ -219,7 +219,7 @@ export class AbstractQuestion {
 		const questionTextWithoutMarkdownChars = this.getQuestionTextWithoutMarkdownChars();
 
 		// hard coded checkup values are ugly, but the schema import seems to be messed up here...
-		return answerOptionListValid && questionTextWithoutMarkdownChars[0] > 4 && questionTextWithoutMarkdownChars[0] < 50001 && this.getTimer() > 0 && this.getTimer() < 601;
+		return answerOptionListValid && questionTextWithoutMarkdownChars[0] > 4 && questionTextWithoutMarkdownChars[0] < 50001 && this.getTimer() > 0;
 	}
 
 	getDisplayAnswerText () {
@@ -266,10 +266,8 @@ export class AbstractQuestion {
 		} else if (questionTextWithoutMarkdownChars[0] > 50000) {
 			result.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "question_text_too_long"});
 		}
-		if (this.getTimer() < 6) {
+		if (this.getTimer() < 1) {
 			result.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "timer_too_small"});
-		} else if (this.getTimer() > 260) {
-			result.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "timer_too_big"});
 		}
 		this.getAnswerOptionList().forEach(function (answerOption) {
 			if (!answerOption.isValid()) {

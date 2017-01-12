@@ -462,6 +462,10 @@
       "timer": "Compte à rebours",
       "second": "seconde",
       "second_plural": "secondes",
+      "minute": "minute",
+      "minute_plural": "minutes",
+      "hour": "heure",
+      "hour_plural": "heures",
       "validation": "Validation",
       "validation_errors": {
         "types": {
@@ -550,6 +554,10 @@
       "set_countdown": "Régler le compte à rebours",
       "second": "seconde",
       "second_plural": "secondes",
+      "minute": "minute",
+      "minute_plural": "minutes",
+      "hour": "heure",
+      "hour_plural": "heures",
       "description": "Ici, vous pouvez définir le compte à rebours pour la question du quiz. Dès qu'il expire ou que tous les participants ont répondu, le rond-point est terminé."
     },
     "translation": {

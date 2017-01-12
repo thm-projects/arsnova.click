@@ -462,6 +462,10 @@
       "timer": "Countdown",
       "second": "second",
       "second_plural": "seconds",
+      "minute": "minute",
+      "minute_plural": "minutes",
+      "hour": "hour",
+      "hour_plural": "hours",
       "validation": "Validation",
       "validation_errors": {
         "types": {
@@ -550,6 +554,10 @@
       "title": "Set countdown",
       "second": "Second",
       "second_plural": "Seconds",
+      "minute": "minute",
+      "minute_plural": "minutes",
+      "hour": "hour",
+      "hour_plural": "hours",
       "description": "Here you can set the countdown for the quiz question. As soon as it expires, or all participants have answered, the quiz round is ended."
     },
     "translation": {

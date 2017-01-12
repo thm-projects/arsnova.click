@@ -20,6 +20,8 @@
 #previewQuestionContentWrapper {
 	overflow: hidden;
 	resize: none;
+	position: fixed;
+	right: 0;
 
 	.center-block {
 		position: relative;

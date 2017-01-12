@@ -33,14 +33,11 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 	this.autorun(function () {
 		headerLib.titelTracker.depend();
 		const mainContentContainer = $('#mainContentContainer');
-		const previewAnsweroptionImage = $('#previewAnsweroptionImage');
-		previewAnsweroptionImage.css("height", mainContentContainer.height() - 2);
-		const contentWidth = (previewAnsweroptionImage.width() ? previewAnsweroptionImage.width() : previewAnsweroptionImage.height() / 1.7758186397984888);
-		$('#markdownPreviewWrapper').css({
-			height: previewAnsweroptionImage.height() - 140,
-			width: contentWidth
-		});
+		const content = $('#content');
+		content.css("height", mainContentContainer.height());
+		const contentWidth = ((content.height() / 1.8805970149253732) + 10);
 		$('#previewAnsweroptionContentWrapper').find('.center-block').css({width: contentWidth});
+		content.css({"font-size": "50px"});
 		lib.answerOptionTracker.changed();
 	}.bind(this));
 	$('#answerOptionWrapper').sortable({

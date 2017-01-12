@@ -21,6 +21,11 @@
 .navbar-fixed-top {
 }
 
+.ui-draggable-handle {
+  touch-action: auto;
+  -ms-touch-action: auto;
+}
+
 .modal-backdrop {
   z-index: 1050;
 }

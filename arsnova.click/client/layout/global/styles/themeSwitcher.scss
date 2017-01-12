@@ -799,6 +799,19 @@ $themes: (
 					}
 				}
 			}
+			#previewAnsweroptionContentWrapper {
+				.plain_view {
+					#content {
+						border: 5px solid map-get($map, "border-previewAnsweroptionContentWrapper-image");
+					}
+				}
+				#markdownPreviewWrapper {
+					color: map-get($map, "fg-previewAnsweroptionContentWrapper");
+					p {
+						color: map-get($map, "fg-previewAnsweroptionContentWrapper");
+					}
+				}
+			}
 			#questionTypeView {
 				.questionType {
 					.wrapper {
@@ -898,17 +911,6 @@ $themes: (
 			#editAnsweroptionText {
 				.answerOptionElementWrapper {
 					background-color: map-get($map, "bg-edit_answeroption_text-element_wrapper");
-				}
-			}
-			#previewAnsweroptionContentWrapper {
-				#previewAnsweroptionImage {
-					border: 5px solid map-get($map, "border-preview_answeroption_content_wrapper-image");
-				}
-				#markdownPreviewWrapper {
-					color: map-get($map, "fg-preview_answeroption_content_wrapper");
-					p {
-						color: map-get($map, "fg-preview_answeroption_content_wrapper");
-					}
 				}
 			}
 			.thm-logo-background {

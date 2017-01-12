@@ -1,7 +1,7 @@
 <template name="progressBarFreeTextQuestion">
     {{#with answerList displayIndex}}
         {{> form_group
-                name = name
+                name = correct.name
                 absolute = correct.absolute
                 percent = correct.percent
                 isCorrect = 1
@@ -9,7 +9,7 @@
                 backgroundClass = correct.backgroundClass
         }}
         {{> form_group
-                name = name
+                name = wrong.name
                 absolute = wrong.absolute
                 percent = wrong.percent
                 isCorrect = 0

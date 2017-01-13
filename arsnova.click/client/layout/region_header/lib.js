@@ -60,7 +60,7 @@ export function calculateHeaderSize() {
 				fontSize = "5vw";
 			}
 		} else {
-			fontSize = "5vh";
+			fontSize = "5vmin";
 		}
 	} else if (titleLength <= 20) {
 		if ($(document).width() > $(document).height()) {

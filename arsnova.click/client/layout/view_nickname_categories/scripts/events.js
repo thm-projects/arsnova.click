@@ -23,10 +23,16 @@ import * as localData from '/lib/local_storage.js';
 
 Template.nicknameCategories.events({
 	"click .nickCategory": function (event) {
-		$('.nickCategory').removeClass("selectedCategory");
-		$(event.currentTarget).addClass("selectedCategory");
-		Session.set("selectedCategory", $(event.currentTarget).attr("id").replace("nickCategory_", ""));
-		sessionStorage.setItem(Router.current().params.quizName + "_selectedCategory", Session.get("selectedCategory"));
+		if ($(event.currentTarget).hasClass("selectedCategory")) {
+			$(event.currentTarget).removeClass("selectedCategory");
+			Session.delete("selectedCategory");
+			sessionStorage.removeItem(Router.current().params.quizName + "_selectedCategory");
+		} else {
+			$('.nickCategory').removeClass("selectedCategory");
+			$(event.currentTarget).addClass("selectedCategory");
+			Session.set("selectedCategory", $(event.currentTarget).attr("id").replace("nickCategory_", ""));
+			sessionStorage.setItem(Router.current().params.quizName + "_selectedCategory", Session.get("selectedCategory"));
+		}
 	},
 	"click .nickName": function (event) {
 		const questionGroup = Session.get("questionGroup");

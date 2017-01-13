@@ -19,20 +19,25 @@
 
 .arsnova-logo {
 	cursor: pointer;
-}
-
-.thm-logo-background img {
-	max-width: 90%;
-	height: auto;
-	margin-left: 8px;
-	margin-right: 12px;
-}
-
-.thm-logo-background {
-	margin-top: 1.5vw;
-	border-radius: $corner-radius;
-	margin-right: 12px;
-	width: 100%;
+	#arsnova-logo-image {
+		enable-background: new 0 0 1024 1024;
+		width: 8vw;
+		.arsnova-logo-origin {
+			font-size: 200px;
+			text-anchor: middle;
+			animation-duration: 2s;
+			animation-iteration-count: infinite;
+		}
+		.arsnova-logo-ars {
+			font-size: 261px;
+		}
+		.arsnova-logo-nova {
+			font-size: 261px;
+		}
+		.arsnova-logo-click {
+			font-size: 400px;
+		}
+	}
 }
 
 .header-title {

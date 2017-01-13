@@ -432,6 +432,32 @@ $themes: (
 					-webkit-transform: translateY(0%);
 				}
 			}
+			@-webkit-keyframes colorChangingOwnNick {
+				0% {
+					background-color: map-get($map, "bg-colorChangingOwnNick0");
+					color: map-get($map, "fg-colorChangingOwnNick0");
+					transform: translateY(0%);
+					-webkit-transform: translateY(0%);
+				}
+				25% {
+					background-color: map-get($map, "bg-colorChangingOwnNick25");
+					color: map-get($map, "fg-colorChangingOwnNick25");
+				}
+				50% {
+					background-color: map-get($map, "bg-colorChangingOwnNick50");
+					color: map-get($map, "fg-colorChangingOwnNick50");
+				}
+				75% {
+					background-color: map-get($map, "bg-colorChangingOwnNick75");
+					color: map-get($map, "fg-colorChangingOwnNick75");
+				}
+				100% {
+					background-color: map-get($map, "bg-colorChangingOwnNick100");
+					color: map-get($map, "fg-colorChangingOwnNick100");
+					transform: translateY(0%);
+					-webkit-transform: translateY(0%);
+				}
+			}
 			.color-changing-ars {
 				color: map-get($map, "fg-footer-info-bar");
 				animation-name: #{$theme}_colorChangingArs;
@@ -500,6 +526,74 @@ $themes: (
 				}
 			}
 			@keyframes #{$theme}_colorChangingClick {
+				0% {
+					color: white;
+				}
+				25% {
+					color: white;
+				}
+				50% {
+					color: white;
+				}
+				75% {
+					color: white;
+				}
+				100% {
+					color: map-get($map, "input-background-color");
+				}
+			}
+			@-webkit-keyframes #{$theme}_colorChangingArs {
+				0% {
+					color: white;
+				}
+				25% {
+					color: map-get($map, "input-background-color");
+				}
+				50% {
+					color: white;
+				}
+				75% {
+					color: white;
+				}
+				100% {
+					color: white;
+				}
+			}
+			@-webkit-keyframes #{$theme}_colorChangingNova {
+				0% {
+					color: white;
+				}
+				25% {
+					color: white;
+				}
+				50% {
+					color: map-get($map, "input-background-color");
+				}
+				75% {
+					color: white;
+				}
+				100% {
+					color: white;
+				}
+			}
+			@-webkit-keyframes #{$theme}_colorChangingDot {
+				0% {
+					color: white;
+				}
+				25% {
+					color: white;
+				}
+				50% {
+					color: white;
+				}
+				75% {
+					color: map-get($map, "input-background-color");
+				}
+				100% {
+					color: white;
+				}
+			}
+			@-webkit-keyframes #{$theme}_colorChangingClick {
 				0% {
 					color: white;
 				}
@@ -913,8 +1007,44 @@ $themes: (
 					background-color: map-get($map, "bg-edit_answeroption_text-element_wrapper");
 				}
 			}
-			.thm-logo-background {
-				background-color: map-get($map, "bg-thm_logo_background");
+			.arsnova-logo {
+				#arsnova-logo-image {
+					background-color: map-get($map, "bg-arsnova_logo_image");
+					.arsnova-logo-origin {
+						animation-name: #{$theme}_arsnova-logo-image-origin;
+					}
+					.arsnova-logo-ars {
+						fill: map-get($map, "fg-arsnova_logo_image-ars");
+					}
+					.arsnova-logo-nova {
+						fill: map-get($map, "fg-arsnova_logo_image-nova");
+					}
+					.arsnova-logo-click {
+						fill: map-get($map, "fg-arsnova_logo_image-click");
+					}
+				}
+			}
+			@keyframes #{$theme}_arsnova-logo-image-origin {
+				0% {
+					fill: map-get($map, "fg-arsnova_logo_image-ars");
+				}
+				50% {
+					fill: map-get($map, "fg-arsnova_logo_image-nova");
+				}
+				100% {
+					fill: map-get($map, "fg-arsnova_logo_image-click");
+				}
+			}
+			@-webkit-keyframes #{$theme}_arsnova-logo-image-origin {
+				0% {
+					fill: map-get($map, "fg-arsnova_logo_image-ars");
+				}
+				50% {
+					fill: map-get($map, "fg-arsnova_logo_image-nova");
+				}
+				100% {
+					fill: map-get($map, "fg-arsnova_logo_image-click");
+				}
 			}
 			.focused {
 				border: 3px solid map-get($map, "border-focused") !important;

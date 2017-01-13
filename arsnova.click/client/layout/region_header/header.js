@@ -33,9 +33,6 @@ Template.header.helpers({
 	isInHomePath: function () {
 		return Router.current().route.path() === '/';
 	},
-	isTHMStyleSelectedAndGreaterThan999Pixels: function () {
-		return localStorage.getItem("theme") === "theme-thm" && $(window).width() > 999;
-	},
 	getCurrentTitle: function () {
 		switch (Router.current().route.path()) {
 			case "/about":
@@ -111,6 +108,12 @@ Template.qrCodeDisplay.helpers({
 	}
 });
 
+Template.arsnovaClickLogo.helpers({
+	getOrigin: function () {
+		return /^localhost/.test(window.location.host) ? "alpha" : /^staging/.test(window.location.host) ? "staging" : "";
+	}
+});
+
 Template.header.events({
 	'click .arsnova-logo': function () {
 		if (!Router.current().params.quizName) {
@@ -161,6 +164,15 @@ Template.header.onRendered(function () {
 		setTimeout(function () {
 			self.autorun(function () {
 				lib.headerTrackerCallback();
+			}.bind(this));
+			self.autorun(function () {
+				let title = "arsnova.click";
+				if (/^localhost/.test(window.location.host)) {
+					title += " (local)";
+				} else if (/^staging/.test(window.location.host)) {
+					title += " (staging)";
+				}
+				$('title').text(title);
 			}.bind(this));
 		}, 100);
 	});

@@ -31,7 +31,7 @@ Template.header.helpers({
 		return Router.current().params.quizName ? Router.current().params.quizName + "/resetToHome" : "";
 	},
 	isInHomePath: function () {
-		return $.inArray(Router.current().route.path(), ['/', null] > -1);
+		return Router.current().route.path() === '/' || Router.current().route.getName() === "preview.:themeName.:language";
 	},
 	getCurrentTitle: function () {
 		switch (Router.current().route.path()) {

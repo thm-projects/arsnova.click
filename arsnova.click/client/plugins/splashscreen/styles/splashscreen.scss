@@ -71,6 +71,10 @@
 	border-bottom: none;
 	padding: 20px;
 	min-height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin-right: 10px;
 }
 
 .modal-footer {
@@ -91,20 +95,20 @@
 .splashscreen-container-close {
 	font-size: 4rem;
 	display: inline-block;
-	position: absolute;
-	right: 10px;
-	margin-top: 10px;
-
-	&:hover {
-		-webkit-transition: opacity 0.5s ease-in;
-		-moz-transition: opacity 0.5s ease-in;
-		-o-transition: opacity 0.5s ease-in;
-		opacity: 1;
-	}
+	flex-grow: 1;
+	text-align: right;
+	align-self: flex-end;
 
 	.glyphicon-remove {
 		border-radius: $corner-radius;
 		cursor: pointer;
+
+		&:hover {
+			-webkit-transition: opacity 0.5s ease-in;
+			-moz-transition: opacity 0.5s ease-in;
+			-o-transition: opacity 0.5s ease-in;
+			opacity: 1;
+		}
 	}
 }
 

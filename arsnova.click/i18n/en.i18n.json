@@ -629,8 +629,8 @@
     },
     "splashscreen": {
       "question_and_answer": {
-        "answeroption": "Answer",
-        "answeroption_plural": "Possible answers",
+        "answeroption": "",
+        "answeroption_plural": "Answers",
         "min_range": "Lower tolerance",
         "correct_value": "Correct value",
         "max_range": "Upper tolerance",

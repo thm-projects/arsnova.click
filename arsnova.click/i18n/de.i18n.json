@@ -629,8 +629,8 @@
     },
     "splashscreen": {
       "question_and_answer": {
-        "answeroption": "Antwort",
-        "answeroption_plural": "Antwortoptionen",
+        "answeroption": "",
+        "answeroption_plural": "Antworten",
         "min_range": "Minimalwert",
         "correct_value": "Richtiger Wert",
         "max_range": "Maximalwert",

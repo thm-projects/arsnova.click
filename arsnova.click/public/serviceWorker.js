@@ -40,7 +40,7 @@ self.addEventListener('fetch', (event) => {
 	event.respondWith(
 		caches.match(event.request.clone()).then((cached) => {
 			// We don't return cached HTML (except if fetch failed)
-			if (cached && !/server/.test(event.request.url)) {
+			if (cached) {
 				const resourceType = cached.headers.get('content-type');
 				// We only return non css/js/html cached response e.g images
 				if (!hasHash(event.request.url) && !/text\/html/.test(resourceType)) {
@@ -56,7 +56,7 @@ self.addEventListener('fetch', (event) => {
 				const clonedResponse = response.clone();
 				const contentType = clonedResponse.headers.get('content-type');
 
-				if (/server/.test(event.request.url) || !clonedResponse || clonedResponse.status !== 200 || clonedResponse.type !== 'basic' || /\/sockjs\//.test(event.request.url)) {
+				if (!clonedResponse || clonedResponse.status !== 200 || clonedResponse.type !== 'basic' || /\/sockjs\//.test(event.request.url)) {
 					return response;
 				}
 

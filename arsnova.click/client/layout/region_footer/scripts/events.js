@@ -55,7 +55,7 @@ const clickEvents = {
 				new Splashscreen({
 					autostart: true,
 					templateName: "resetSessionSplashscreen",
-					closeOnButton: '#closeDialogButton, #resetSessionButton, .splashscreen-container-close',
+					closeOnButton: '#closeDialogButton, #resetSessionButton, .splashscreen-container-close>.glyphicon-remove',
 					onRendered: function (instance) {
 						instance.templateSelector.find('#resetSessionButton').on('click', function () {
 							Meteor.call("Main.killAll", Router.current().params.quizName);
@@ -156,7 +156,7 @@ const clickEvents = {
 					new Splashscreen({
 						autostart: true,
 						templateName: "renameHashtagSplashscreen",
-						closeOnButton: "#js-btn-closeRenameHashtag, #js-btn-importSession, .splashscreen-container-close",
+						closeOnButton: "#js-btn-closeRenameHashtag, #js-btn-importSession, .splashscreen-container-close>.glyphicon-remove",
 						onRendered: function () {
 							$('#js-btn-importSession').on('click', function () {
 								const hashtag = $("#hashtagRename-input-field").val().trim();
@@ -225,7 +225,7 @@ const clickEvents = {
 		new Splashscreen({
 			autostart: true,
 			templateName: "soundConfig",
-			closeOnButton: "#js-btn-hideSoundModal, .splashscreen-container-close"
+			closeOnButton: "#js-btn-hideSoundModal, .splashscreen-container-close>.glyphicon-remove"
 		});
 	},
 	"click #qr-code": function () {
@@ -277,7 +277,7 @@ const clickEvents = {
 		new Splashscreen({
 			autostart: true,
 			templateName: "editSessionSplashscreen",
-			closeOnButton: '#closeDialogButton, #editSessionButton, .splashscreen-container-close',
+			closeOnButton: '#closeDialogButton, #editSessionButton, .splashscreen-container-close>.glyphicon-remove',
 			onRendered: function (instance) {
 				instance.templateSelector.find('#editSessionButton').on('click', function () {
 					Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName, function () {

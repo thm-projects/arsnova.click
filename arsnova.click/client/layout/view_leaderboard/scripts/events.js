@@ -39,7 +39,7 @@ Template.leaderboardFooterNavButtons.events({
 			new Splashscreen({
 				autostart: true,
 				templateName: 'leaderboardDataReminderSplashscreen',
-				closeOnButton: '#closeDialogButton, #returnToResults, .splashscreen-container-close',
+				closeOnButton: '#closeDialogButton, #returnToResults, .splashscreen-container-close>.glyphicon-remove',
 				onRendered: function (template) {
 					template.templateSelector.find("#returnToResults").on("click", function () {
 						goToResults();

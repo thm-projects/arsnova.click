@@ -97,7 +97,8 @@
 	display: inline-block;
 	flex-grow: 1;
 	text-align: right;
-	align-self: flex-end;
+	align-self: center;
+	margin: 10px 0 0 0;
 
 	.glyphicon-remove {
 		border-radius: $corner-radius;

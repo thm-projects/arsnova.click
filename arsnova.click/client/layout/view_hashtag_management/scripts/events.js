@@ -34,7 +34,7 @@ Template.hashtagManagement.events({
 		new Splashscreen({
 			autostart: true,
 			templateName: "deleteConfirmationSplashscreen",
-			closeOnButton: "#closeDialogButton, #deleteSessionButton, .splashscreen-container-close",
+			closeOnButton: "#closeDialogButton, #deleteSessionButton, .splashscreen-container-close>.glyphicon-remove",
 			onRendered: function (instance) {
 				instance.templateSelector.find("#session_name").text(parent.attr("id"));
 

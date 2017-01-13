@@ -96,7 +96,7 @@ Template.liveResultsFooterNavButtons.events({
 			new Splashscreen({
 				autostart: true,
 				templateName: 'returnToLobbySplashscreen',
-				closeOnButton: '#closeDialogButton, #returnToLobby, .splashscreen-container-close',
+				closeOnButton: '#closeDialogButton, #returnToLobby, .splashscreen-container-close>.glyphicon-remove',
 				onRendered: function (template) {
 					template.templateSelector.find("#returnToLobby").on("click", function () {
 						returnToLobby();

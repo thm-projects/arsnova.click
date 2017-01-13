@@ -210,12 +210,12 @@ $themes: (
 			}
 			.qr-code-container-close {
 				color: map-get($map, "fg-qr-code-container-close");
-				&:hover {
-					color: map-get($map, "fg-qr-code-container-close-hovered");
-				}
 				.glyphicon-remove {
 					border: 0 solid map-get($map, "border-qr-code-container-close-icon");
 					background-color: map-get($map, "background-qr-code-container-close-icon");
+					&:hover {
+						color: map-get($map, "fg-qr-code-container-close-hovered");
+					}
 				}
 			}
 			.qr-code-label {
@@ -665,12 +665,12 @@ $themes: (
 			}
 			.splashscreen-container-close {
 				color: map-get($map, "fg-qr-code-container-close");
-				&:hover {
-					color: map-get($map, "fg-qr-code-container-close-hovered");
-				}
 				.glyphicon-remove {
 					border: 1px solid map-get($map, "border-qr-code-container-close-icon");
 					background-color: map-get($map, "background-qr-code-container-close-icon");
+					&:hover {
+						color: map-get($map, "fg-qr-code-container-close-hovered");
+					}
 				}
 			}
 			.modal-backdrop {

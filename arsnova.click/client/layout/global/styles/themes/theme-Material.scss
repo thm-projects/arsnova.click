@@ -50,6 +50,11 @@
 		"fg-connection-quality-header_connection-warning": $accent_color,
 		"fg-connection-quality-header_connection-failed": map-get($stdStyle, "md_red_500"),
 		"fg-connection-quality-header_connection-error": map-get($stdStyle, "md_red_500"),
+		/* Logo colors */
+		"bg-arsnova_logo_image": transparent,
+		"fg-arsnova_logo_image-ars": white,
+		"fg-arsnova_logo_image-nova": $accent_color,
+		"fg-arsnova_logo_image-click": white,
 		/* Semantic colors */
 		"success": $accent_color,
 		"success-text-color": white,
@@ -88,6 +93,7 @@
 		"bg-splashscreen-question-and-answer_answer-content-even-row": $light_primary_color,
 		"border-splashscreen-question-and-answer_answer-content-even-row": white,
 		"fg-splashscreen-question-and-answer_answer-content-even-row": white,
+		"splashscreen-reading-confirmed-background-color": $light_primary_color,
 		"splashscreen-show-hashtags-background-color": map-get($stdStyle, "splashscreen-background-color"),
 		"splashscreen-sound-config-background-color": map-get($stdStyle, "splashscreen-background-color"),
 		"splashscreen-sound-config-button-background-color": map-get($stdStyle, "success"),

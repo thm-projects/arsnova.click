@@ -76,7 +76,7 @@ Meteor.methods({
 			}).count() > 25) {
 			throw new Meteor.Error('AnswerOptionCollection.addOption', 'maximum_answer_options_exceeded');
 		}
-		var answerOptionDoc = answerOptionLib.AnswerOptionCollection.findOne({
+		const answerOptionDoc = answerOptionLib.AnswerOptionCollection.findOne({
 			hashtag: answerDoc.hashtag,
 			questionIndex: answerDoc.questionIndex,
 			answerOptionNumber: answerDoc.answerOptionNumber
@@ -144,7 +144,7 @@ Meteor.methods({
 			answerOptionNumber: answerOptionLib.answerOptionNumberSchema
 		}).validate({hashtag, questionIndex, answerOptionNumber});
 
-		var query = {
+		const query = {
 			hashtag: hashtag,
 			questionIndex: questionIndex,
 			answerOptionNumber: answerOptionNumber
@@ -181,7 +181,7 @@ Meteor.methods({
 			isCorrect: answerOptionLib.isCorrectSchema
 		}).validate({hashtag, questionIndex, answerOptionNumber, answerText, isCorrect});
 
-		var answerOptionDoc = answerOptionLib.AnswerOptionCollection.findOne({
+		const answerOptionDoc = answerOptionLib.AnswerOptionCollection.findOne({
 			hashtag: hashtag,
 			questionIndex: questionIndex,
 			answerOptionNumber: answerOptionNumber

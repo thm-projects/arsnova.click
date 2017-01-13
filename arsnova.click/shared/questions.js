@@ -62,7 +62,7 @@ Meteor.methods({
 		if (Meteor.isServer) {
 			query.hashtag = questionItem.hashtag;
 		}
-		var questionGroup = QuestionGroupCollection.findOne(query);
+		const questionGroup = QuestionGroupCollection.findOne(query);
 		if (!questionGroup) {
 			QuestionGroupCollection.insert({
 				hashtag: questionItem.hashtag,
@@ -95,7 +95,7 @@ Meteor.methods({
 		if (Meteor.isServer) {
 			query.hashtag = hashtag;
 		}
-		var questionGroup = QuestionGroupCollection.findOne(query);
+		const questionGroup = QuestionGroupCollection.findOne(query);
 		if (questionGroup) {
 			questionGroup.questionList.splice(questionIndex, 1);
 			QuestionGroupCollection.update(questionGroup._id, {$set: {questionList: questionGroup.questionList}});
@@ -151,7 +151,7 @@ Meteor.methods({
 		if (Meteor.isServer) {
 			query.hashtag = hashtag;
 		}
-		var questionGroup = QuestionGroupCollection.findOne(query);
+		const questionGroup = QuestionGroupCollection.findOne(query);
 		if (!questionGroup) {
 			throw new Meteor.Error('Question.setTimer', 'hashtag_not_found');
 		}
@@ -179,13 +179,13 @@ Meteor.methods({
 			questionIndex: questionIndexSchema
 		}).validate({hashtag, questionIndex});
 
-		var startTime = new Date();
+		const startTime = new Date();
 
 		const query = {};
 		if (Meteor.isServer) {
 			query.hashtag = hashtag;
 		}
-		var questionGroup = QuestionGroupCollection.findOne(query);
+		const questionGroup = QuestionGroupCollection.findOne(query);
 		if (!questionGroup) {
 			throw new Meteor.Error('Question.startTimer', 'hashtag_not_found');
 		}

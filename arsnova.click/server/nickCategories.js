@@ -1,4 +1,4 @@
-export var nickCategories = [
+export const nickCategories = [
 	{nick: "Donald Duck", nickCategory: "view.nickname_categories.category.disney"},
 	{nick: "Daisy Duck", nickCategory: "view.nickname_categories.category.disney"},
 	{nick: "Tarzan", nickCategory: "view.nickname_categories.category.disney"},

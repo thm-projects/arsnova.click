@@ -31,7 +31,7 @@ export function setLanguage(language) {
 }
 
 export function getAllHashtags() {
-	var hashtagString = localStorage.getItem("hashtags");
+	const hashtagString = localStorage.getItem("hashtags");
 	if (!hashtagString) {
 		localStorage.setItem("hashtags", JSON.stringify([]));
 		return [];
@@ -40,13 +40,13 @@ export function getAllHashtags() {
 }
 
 export function getAllLoweredHashtags() {
-	var hashtagString = localStorage.getItem("hashtags");
+	const hashtagString = localStorage.getItem("hashtags");
 	if (!hashtagString) {
 		localStorage.setItem("hashtags", JSON.stringify([]));
 		return [];
 	}
-	var sortedHashtags = JSON.parse(hashtagString).sort();
-	var loweredSortedHastags = [];
+	const sortedHashtags = JSON.parse(hashtagString).sort();
+	const loweredSortedHastags = [];
 	$.each(sortedHashtags, function (i, hashtag) {
 		loweredSortedHastags.push(hashtag.toLowerCase());
 	});
@@ -61,11 +61,11 @@ export function containsHashtag(hashtag) {
 	if (!hashtagString) {
 		return false;
 	} else {
-		var loweredHashtags = [];
+		const loweredHashtags = [];
 		$.each(JSON.parse(hashtagString), function (i, hashtagElement) {
 			loweredHashtags.push(hashtagElement.toLowerCase());
 		});
-		var loweredHashtag = hashtag.toLowerCase();
+		const loweredHashtag = hashtag.toLowerCase();
 		return $.inArray(loweredHashtag, loweredHashtags) > -1;
 	}
 }
@@ -74,11 +74,11 @@ export function deleteHashtag(hashtag) {
 	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
 		return;
 	}
-	var allHashtags = JSON.parse(localStorage.getItem("hashtags"));
+	const allHashtags = JSON.parse(localStorage.getItem("hashtags"));
 	if (!allHashtags) {
 		return false;
 	}
-	var index = $.inArray(hashtag, allHashtags);
+	const index = $.inArray(hashtag, allHashtags);
 	if (index > -1) {
 		localStorage.removeItem(hashtag);
 		allHashtags.splice(index, 1);
@@ -132,57 +132,13 @@ export function removeQuestion(hashtag, questionIndex) {
 	}
 }
 
-export function addTimer(hashtag, questionIndex, timer) {
-	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
-		return;
-	}
-	const sessionDataString = localStorage.getItem(hashtag);
-	if (sessionDataString) {
-		const sessionData = JSON.parse(sessionDataString);
-		sessionData.questionList[questionIndex].timer = timer;
-		localStorage.setItem(hashtag, JSON.stringify(sessionData));
-	}
-}
-
-export function addAnswers({hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}) {
-	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
-		return;
-	}
-	const sessionDataString = localStorage.getItem(hashtag);
-	if (sessionDataString) {
-		const sessionData = JSON.parse(sessionDataString);
-		if (!sessionData.questionList[questionIndex].answers) {
-			sessionData.questionList[questionIndex].answers = [];
-		}
-		sessionData.questionList[questionIndex].answers.push({
-			answerOptionNumber: answerOptionNumber,
-			answerText: answerText,
-			isCorrect: isCorrect
-		});
-		localStorage.setItem(hashtag, JSON.stringify(sessionData));
-	}
-}
-
-export function findHashtagCaseInsensitiveFromLocalStorage(hashtag) {
-	var loweredHashtag = hashtag.toLowerCase();
-	var hashtagString = localStorage.getItem("hashtags");
-	var allHashtags = JSON.parse(hashtagString);
-	var result = "";
-	$.each(allHashtags, function (i, originalHashtag) {
-		if (originalHashtag.toLowerCase() === loweredHashtag) {
-			result = originalHashtag;
-		}
-	});
-	return result;
-}
-
 export function reenterSession(hashtag) {
 	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
 		throw new TypeError("Undefined or illegal hashtag provided");
 	}
 
-	var hashtagString = localStorage.getItem("hashtags");
-	var hashtags = JSON.parse(hashtagString);
+	const hashtagString = localStorage.getItem("hashtags");
+	const hashtags = JSON.parse(hashtagString);
 	$.each(hashtags, function (i, hashtagElement) {
 		if (hashtag.toLowerCase() === hashtagElement.toLowerCase()) {
 			hashtag = hashtagElement;
@@ -254,27 +210,6 @@ export function deleteAnswerOption(hashtag, questionIndex, answerOptionNumber) {
 	}
 }
 
-export function updateAnswerText({hashtag, questionIndex, answerOptionNumber, answerText, isCorrect}) {
-	if (!hashtag || hashtag === "hashtags" || hashtag === "privateKey") {
-		return;
-	}
-	const sessionDataString = localStorage.getItem(hashtag);
-	if (!sessionDataString) {
-		return;
-	}
-
-	const sessionData = JSON.parse(sessionDataString);
-	if (typeof sessionData === "object") {
-		$.each(sessionData.questionList[questionIndex].answers, function (key, value) {
-			if (value.answerOptionNumber === answerOptionNumber) {
-				value.answerText = answerText;
-				value.isCorrect = isCorrect;
-			}
-		});
-		localStorage.setItem(hashtag, JSON.stringify(sessionData));
-	}
-}
-
 export function initializePrivateKey() {
 	if (!localStorage.getItem("privateKey")) {
 		localStorage.setItem("privateKey", new Mongo.ObjectID()._str);
@@ -283,27 +218,6 @@ export function initializePrivateKey() {
 
 export function getPrivateKey() {
 	return localStorage.getItem("privateKey");
-}
-
-export function importFromFile(data) {
-	var hashtag = data.hashtag;
-	if ((hashtag === "hashtags") || (hashtag === "privateKey")) {
-		return;
-	}
-
-	var allHashtags = JSON.parse(localStorage.getItem("hashtags"));
-	allHashtags = $.grep(allHashtags, function (value) {
-		return value !== data.hashtag;
-	});
-	allHashtags.push(hashtag);
-	localStorage.setItem("hashtags", JSON.stringify(allHashtags));
-
-	if (data.type === "DefaultQuestionGroup") {
-		const instance = new DefaultQuestionGroup(data);
-		localStorage.setItem(instance.getHashtag(), JSON.stringify(instance.serialize()));
-	} else {
-		throw new TypeError("Undefined session type '" + data.type + "' while importing");
-	}
 }
 
 export function exportFromLocalStorage(hashtag) {

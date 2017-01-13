@@ -130,6 +130,9 @@ Template.home.events({
 									}
 								}
 							}
+						},
+						removed: function () {
+							joinSessionItem.attr("disabled", "disabled");
 						}
 					}));
 				}));
@@ -149,7 +152,6 @@ Template.home.events({
 					placement: 'bottom'
 				});
 				inputTarget.popover("show");
-				return;
 			} else {
 				addNewHashtagItem.removeAttr("disabled");
 			}

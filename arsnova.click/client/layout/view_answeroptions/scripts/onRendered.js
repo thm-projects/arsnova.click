@@ -41,7 +41,6 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 		lib.answerOptionTracker.changed();
 	}.bind(this));
 	$('#answerOptionWrapper').sortable({
-		disabled: $.inArray(Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName(),["YesNoSingleChoiceQuestion","TrueFalseSingleChoiceQuestion"]) > -1,
 		scroll: false,
 		axis: 'y',
 		containment: "parent",

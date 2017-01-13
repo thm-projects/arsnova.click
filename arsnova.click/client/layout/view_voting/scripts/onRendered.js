@@ -41,10 +41,10 @@ Template.votingview.onRendered(function () {
 			headerLib.titelTracker.depend();
 			answerOptionLib.answerOptionTracker.depend();
 			questionLib.markdownRenderingTracker.depend();
-			Meteor.defer(function () {
+			Meteor.setTimeout(function () {
 				lib.formatAnswerButtons();
 				lib.quickfitText();
-			});
+			}, 100);
 		}.bind(this));
 	}
 	lib.votingViewTracker.changed();

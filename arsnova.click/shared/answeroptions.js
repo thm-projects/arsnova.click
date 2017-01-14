@@ -22,6 +22,26 @@ import {EventManagerCollection, questionIndexSchema} from '/lib/eventmanager/col
 import {hashtagSchema} from '/lib/hashtags/collection.js';
 
 Meteor.methods({
+	'AnswerOptionCollection.clear': function (answerDoc) {
+		const schema = {
+			hashtag: hashtagSchema,
+			questionIndex: questionIndexSchema
+		};
+		const validation = {
+			hashtag: answerDoc.hashtag,
+			questionIndex: answerDoc.questionIndex
+		};
+		new SimpleSchema(schema).validate(validation);
+		answerOptionLib.AnswerOptionCollection.remove(validation);
+		EventManagerCollection.update({hashtag: answerDoc.hashtag}, {
+			$push: {
+				eventStack: {
+					key: "AnswerOptionCollection.clear",
+					value: validation
+				}
+			}
+		});
+	},
 	'AnswerOptionCollection.addOption': function (answerDoc) {
 		const schema = {
 			hashtag: hashtagSchema,
@@ -56,7 +76,7 @@ Meteor.methods({
 			}).count() > 25) {
 			throw new Meteor.Error('AnswerOptionCollection.addOption', 'maximum_answer_options_exceeded');
 		}
-		var answerOptionDoc = answerOptionLib.AnswerOptionCollection.findOne({
+		const answerOptionDoc = answerOptionLib.AnswerOptionCollection.findOne({
 			hashtag: answerDoc.hashtag,
 			questionIndex: answerDoc.questionIndex,
 			answerOptionNumber: answerDoc.answerOptionNumber
@@ -124,7 +144,7 @@ Meteor.methods({
 			answerOptionNumber: answerOptionLib.answerOptionNumberSchema
 		}).validate({hashtag, questionIndex, answerOptionNumber});
 
-		var query = {
+		const query = {
 			hashtag: hashtag,
 			questionIndex: questionIndex,
 			answerOptionNumber: answerOptionNumber
@@ -161,7 +181,7 @@ Meteor.methods({
 			isCorrect: answerOptionLib.isCorrectSchema
 		}).validate({hashtag, questionIndex, answerOptionNumber, answerText, isCorrect});
 
-		var answerOptionDoc = answerOptionLib.AnswerOptionCollection.findOne({
+		const answerOptionDoc = answerOptionLib.AnswerOptionCollection.findOne({
 			hashtag: hashtag,
 			questionIndex: questionIndex,
 			answerOptionNumber: answerOptionNumber

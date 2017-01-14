@@ -22,7 +22,7 @@ import * as localData from '/lib/local_storage.js';
 import * as lib from './lib.js';
 
 Template.createTimerView.events({
-	'keydown #slider-timer-input-field': function (event) {
+	'keydown #slider-timer-input-field, change #slider-timer-input-field': function (event) {
 		const questionItem = Session.get("questionGroup");
 		const index = Router.current().params.questionIndex;
 		questionItem.getQuestionList()[index].setTimer(Math.round($(event.currentTarget).val()));

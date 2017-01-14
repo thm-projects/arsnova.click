@@ -200,9 +200,10 @@
       "answeroptiontext_placeholder": "Antwortoption eingeben",
       "correct": "Richtig",
       "wrong": "Falsch",
-      "preview": "Smartphone-Vorschau",
+      "preview": "",
       "show_answer_content_on_buttons": "Soll auf den Abstimmungsbuttons der Inhalt der Antwort angezeigt werden?",
       "multiple_selection_survey": "Sollen mehrere Antwortoptionen ausgewählt werden können?",
+      "emoji_info": "Du kannst auch eines dieser <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis (externe Webseite!)</a> in deine Antworten einbetten <img style='width:30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/> <br/>Klicke auf der Webseite einfach auf das jeweilige Emoji und füge es in die Antwort ein.",
       "description": {
         "default_answer_row": "Ziehe diesen Block in die Liste der erstellten Antwortoptionen, um eine neue Antwort einzufügen.",
         "added_answers": "Hier siehst Du alle bereits erstellten Antwortoptionen dieser Quizfrage. Du kannst die Anordnung der Antworten ändern, indem Du die Liste per Drag & Drop sortierst.",
@@ -394,7 +395,7 @@
     "questions": {
       "title": "Frage bearbeiten",
       "enter_question_here": "Gib hier den Text der Frage ein",
-      "preview": "Vorschau",
+      "preview": "",
       "single_choice_question": "Single-Choice-Frage",
       "single_choice_question_yes_no": "Ja|Nein-Frage",
       "single_choice_question_true_false": "Wahr|Falsch-Frage",
@@ -461,6 +462,10 @@
       "timer": "Countdown",
       "second": "Sekunde",
       "second_plural": "Sekunden",
+      "minute": "Minute",
+      "minute_plural": "Minuten",
+      "hour": "Stunde",
+      "hour_plural": "Stunden",
       "validation": "Validierung",
       "validation_errors": {
         "types": {
@@ -505,7 +510,7 @@
       "themes": {
         "theme-arsnova-dot-click-contrast": {
           "name": "arsnova.click (kontrastreich)",
-          "description": "Stil der ersten Stunde."
+          "description": "Beamerfreundlicher Stil der ersten Stunde."
         },
         "elegant": {
           "name": "Eleganz",
@@ -549,6 +554,10 @@
       "title": "Countdown einstellen",
       "second": "Sekunde",
       "second_plural": "Sekunden",
+      "minute": "Minute",
+      "minute_plural": "Minuten",
+      "hour": "Stunde",
+      "hour_plural": "Stunden",
       "description": "Hier kannst Du den Countdown für die Quizfrage einstellen. Sobald er abläuft oder alle Teilnehmer/innen eine Antwort abgegeben haben, wird die Quizrunde beendet."
     },
     "translation": {
@@ -620,8 +629,8 @@
     },
     "splashscreen": {
       "question_and_answer": {
-        "answeroption": "Antwort",
-        "answeroption_plural": "Antwortoptionen",
+        "answeroption": "",
+        "answeroption_plural": "Antworten",
         "min_range": "Minimalwert",
         "correct_value": "Richtiger Wert",
         "max_range": "Maximalwert",

@@ -54,7 +54,7 @@ Meteor.methods({
 		} else {
 			responseValueObject.answerOptionNumber = responseDoc.answerOptionNumber;
 		}
-		var duplicateResponseSearch = {
+		const duplicateResponseSearch = {
 			hashtag: hashtag,
 			questionIndex: responseDoc.questionIndex,
 			userNick: responseDoc.userNick
@@ -67,7 +67,7 @@ Meteor.methods({
 		} else {
 			duplicateResponseSearch.answerOptionNumber = responseValueObject.answerOptionNumber;
 		}
-		var dupDoc = ResponsesCollection.findOne(duplicateResponseSearch);
+		const dupDoc = ResponsesCollection.findOne(duplicateResponseSearch);
 		if (dupDoc) {
 			throw new Meteor.Error('ResponsesCollection.addResponse', 'duplicate_response');
 		}
@@ -75,12 +75,12 @@ Meteor.methods({
 		if (Meteor.isServer) {
 			query.hashtag = hashtag;
 		}
-		var questionGroupDoc = QuestionGroupCollection.findOne(query);
+		const questionGroupDoc = QuestionGroupCollection.findOne(query);
 		if (!questionGroupDoc) {
 			throw new Meteor.Error('ResponsesCollection.addResponse', 'hashtag_not_found');
 		}
 		const questionItem = questionGroupDoc.questionList[responseDoc.questionIndex];
-		var responseTime = Number(new Date().getTime()) - Number(questionItem.startTime);
+		const responseTime = Number(new Date().getTime()) - Number(questionItem.startTime);
 		if (responseTime > questionItem.timer * 1000) {
 			throw new Meteor.Error('ResponsesCollection.addResponse', 'response_timeout');
 		}

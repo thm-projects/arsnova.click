@@ -217,7 +217,7 @@ export function showReadingConfirmationSplashscreen(index) {
 		dataContext: {
 			questionIndex: index
 		},
-		closeOnButton: '#setReadConfirmed, .splashscreen-container-close',
+		closeOnButton: '#setReadConfirmed, .splashscreen-container-close>.glyphicon-remove',
 		onRendered: function (instance) {
 			if (localData.containsHashtag(Router.current().params.quizName)) {
 				instance.templateSelector.find('#setReadConfirmed').text(TAPi18n.__("global.close_window"));
@@ -319,7 +319,7 @@ export function showFullscreenPicture(event) {
 	new Splashscreen({
 		autostart: true,
 		templateName: 'questionPreviewSplashscreen',
-		closeOnButton: '#js-btn-hidePreviewModal, .splashscreen-container-close',
+		closeOnButton: '#js-btn-hidePreviewModal, .splashscreen-container-close>.glyphicon-remove',
 		instanceId: "resizeableImage",
 		onRendered: function (instance) {
 			const body = instance.templateSelector.find('.modal-body');

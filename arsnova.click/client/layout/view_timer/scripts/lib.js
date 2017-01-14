@@ -29,14 +29,23 @@ export function createSlider(index) {
 	}
 	const plainSlider = document.getElementById('slider');
 	sliderObject = noUiSlider.create(plainSlider, {
+		step: 1,
+		margin: 1,
 		start: questionItem.getQuestionList()[index].getTimer(),
 		range: {
-			'min': 10,
-			'max': 600
+			'min': 1,
+			'max': questionItem.getQuestionList()[index].getTimer() + 50 || 100
 		}
 	});
 	sliderObject.on('slide', function (val) {
 		questionItem.getQuestionList()[index].setTimer(Math.round(val));
+		sliderObject.updateOptions({
+			margin: 1,
+			range: {
+				'min': 1,
+				'max': questionItem.getQuestionList()[index].getTimer() + 50 || 100
+			}
+		});
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
 	});
@@ -44,5 +53,12 @@ export function createSlider(index) {
 
 export function setSlider(index) {
 	const questionItem = Session.get("questionGroup");
+	sliderObject.updateOptions({
+		margin: 1,
+		range: {
+			'min': 1,
+			'max': questionItem.getQuestionList()[index].getTimer() + 50 || 100
+		}
+	});
 	sliderObject.set(questionItem.getQuestionList()[index].getTimer());
 }

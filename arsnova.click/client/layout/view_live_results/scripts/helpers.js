@@ -27,6 +27,7 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
 import * as leaderboardLib from '/client/layout/view_leaderboard/scripts/lib.js';
+import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as lib from './lib.js';
 
 Template.liveResultsFooterNavButtons.helpers({
@@ -157,8 +158,10 @@ Template.progressBarSingleChoiceQuestion.helpers({
 				questionIndex: index,
 				answerOptionNumber: value.answerOptionNumber
 			}).count();
+			const answerTextValue = [value.answerText.replace(/\$\$/g, '$')];
+			questionLib.parseGithubFlavoredMarkdown(answerTextValue);
 			result.push({
-				name: TAPi18n.__("view.liveResults.answer_option") + " " + String.fromCharCode(value.answerOptionNumber + 65),
+				name: String.fromCharCode(value.answerOptionNumber + 65) + ": " + answerTextValue[0],
 				absolute: amount,
 				percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
 				isCorrect: correctAnswerOptions ? value.isCorrect : -1,
@@ -188,8 +191,10 @@ Template.progressBarSurveyQuestion.helpers({
 				questionIndex: index,
 				answerOptionNumber: value.answerOptionNumber
 			}).count();
+			const answerTextValue = [value.answerText.replace(/\$\$/g, '$')];
+			questionLib.parseGithubFlavoredMarkdown(answerTextValue);
 			result.push({
-				name: TAPi18n.__("view.liveResults.answer_option") + " " + String.fromCharCode(value.answerOptionNumber + 65),
+				name: String.fromCharCode(value.answerOptionNumber + 65) + ": " + answerTextValue[0],
 				absolute: amount,
 				percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
 				isCorrect: 0,
@@ -223,7 +228,7 @@ Template.progressBarMultipleChoiceQuestion.helpers({
 				}
 			});
 			result.push({
-				name: "view.liveResults.complete_correct",
+				name: TAPi18n.__("view.liveResults.complete_correct"),
 				absolute: allCorrect,
 				percent: memberAmount ? Math.floor((allCorrect * 100) / memberAmount) : 0,
 				id: 0,
@@ -231,7 +236,7 @@ Template.progressBarMultipleChoiceQuestion.helpers({
 				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(1))
 			});
 			result.push({
-				name: "view.liveResults.partially_correct",
+				name: TAPi18n.__("view.liveResults.partially_correct"),
 				absolute: partiallyCorrect,
 				percent: memberAmount ? Math.floor((partiallyCorrect * 100) / memberAmount) : 0,
 				id: 1,
@@ -239,7 +244,7 @@ Template.progressBarMultipleChoiceQuestion.helpers({
 				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(-1))
 			});
 			result.push({
-				name: "view.liveResults.complete_wrong",
+				name: TAPi18n.__("view.liveResults.complete_wrong"),
 				absolute: allWrong,
 				percent: memberAmount ? Math.floor((allWrong * 100) / memberAmount) : 0,
 				id: 2,
@@ -258,8 +263,10 @@ Template.progressBarMultipleChoiceQuestion.helpers({
 					questionIndex: index,
 					answerOptionNumber: value.answerOptionNumber
 				}).count();
+				const answerTextValue = [value.answerText.replace(/\$\$/g, '$')];
+				questionLib.parseGithubFlavoredMarkdown(answerTextValue);
 				result.push({
-					name: TAPi18n.__("view.liveResults.answer_option") + " " + String.fromCharCode(value.answerOptionNumber + 65),
+					name: String.fromCharCode(value.answerOptionNumber + 65) + ": " + answerTextValue[0],
 					absolute: amount,
 					percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
 					isCorrect: correctAnswerOptions ? value.isCorrect : -1,
@@ -288,11 +295,13 @@ Template.progressBarFreeTextQuestion.helpers({
 		});
 		return {
 			correct: {
+				name: TAPi18n.__("view.liveResults.correct"),
 				absolute: correctAnswerCount,
 				percent: memberAmount ? Math.floor((correctAnswerCount * 100) / memberAmount) : 0,
 				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(1))
 			},
 			wrong: {
+				name: TAPi18n.__("view.liveResults.wrong"),
 				absolute: wrongAnswerCount,
 				percent: memberAmount ? Math.floor((wrongAnswerCount * 100) / memberAmount) : 0,
 				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(0))
@@ -321,11 +330,13 @@ Template.progressBarRangedQuestion.helpers({
 		});
 		return {
 			allCorrect: {
+				name: TAPi18n.__("view.liveResults.guessed_correct"),
 				absolute: inCorrectRange,
 				percent: memberAmount ? Math.floor((inCorrectRange * 100) / memberAmount) : 0,
 				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(1))
 			},
 			allWrong: {
+				name: TAPi18n.__("view.liveResults.guessed_wrong"),
 				absolute: inWrongRange,
 				percent: memberAmount ? Math.floor((inWrongRange * 100) / memberAmount) : 0,
 				backgroundClass: lib.getProgressbarCSSClass(index, lib.checkIfIsCorrect(0))

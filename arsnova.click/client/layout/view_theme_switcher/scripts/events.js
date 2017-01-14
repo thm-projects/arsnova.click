@@ -18,6 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import * as localData from '/lib/local_storage.js';
 
 Template.themeSwitcher.events({
 	"mouseenter .themePreview": function (event) {
@@ -32,6 +33,7 @@ Template.themeSwitcher.events({
 		if (quiz) {
 			quiz.getConfiguration().setTheme(theme);
 			Session.set("questionGroup", quiz);
+			localData.addHashtag(quiz);
 			Meteor.call("SessionConfiguration.setTheme", Session.get("questionGroup").getHashtag(), theme);
 		}
 		localStorage.setItem("theme", theme);

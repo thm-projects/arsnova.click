@@ -200,9 +200,10 @@
       "answeroptiontext_placeholder": "Option de réponse",
       "correct": "Vrai",
       "wrong": "Faux",
-      "preview": "Aperçu",
+      "preview": "",
       "show_answer_content_on_buttons": "Afficher le contenu de la réponse sur les boutons?",
       "multiple_selection_survey": "Permettre la sélection de réponses multiples?",
+      "emoji_info": "Vous pouvez également intégrer un de ces <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis (site externe!)</a> dans vos réponses <img style='width: 30px;' src='/images/emojis/smile.png' alt='smile_emoji.png'/><br/>Cliquez simplement sur le site sur le Emoji et collez-le dans l'answeroption.",
       "description": {
         "default_answer_row": "Faites glisser ce bloc dans la liste des options de réponse pour en créer un nouveau.",
         "added_answers": "Voici toutes les answeroptions déjà créées. Vous pouvez modifier l'ordre des réponses par glisser-déposer.",
@@ -394,7 +395,7 @@
     "questions": {
       "title": "Entrer le texte de la question",
       "enter_question_here": "Donne ici le texte de la question",
-      "preview": "Aperçu",
+      "preview": "",
       "single_choice_question": "Question choix simple (parmi toutes, une réponse est correcte)",
       "single_choice_question_yes_no": "Question Oui|Non",
       "single_choice_question_true_false": "Question Vrai|Faux",
@@ -461,6 +462,10 @@
       "timer": "Compte à rebours",
       "second": "seconde",
       "second_plural": "secondes",
+      "minute": "minute",
+      "minute_plural": "minutes",
+      "hour": "heure",
+      "hour_plural": "heures",
       "validation": "Validation",
       "validation_errors": {
         "types": {
@@ -549,6 +554,10 @@
       "set_countdown": "Régler le compte à rebours",
       "second": "seconde",
       "second_plural": "secondes",
+      "minute": "minute",
+      "minute_plural": "minutes",
+      "hour": "heure",
+      "hour_plural": "heures",
       "description": "Ici, vous pouvez définir le compte à rebours pour la question du quiz. Dès qu'il expire ou que tous les participants ont répondu, le rond-point est terminé."
     },
     "translation": {
@@ -620,8 +629,8 @@
     },
     "splashscreen": {
       "question_and_answer": {
-        "answeroption": "Répondre",
-        "answeroption_plural": "Des réponses possibles",
+        "answeroption": "",
+        "answeroption_plural": "Des réponses",
         "min_range": "Tolérance inférieure",
         "correct_value": "Valeur correcte",
         "max_range": "Tolérance supérieure",

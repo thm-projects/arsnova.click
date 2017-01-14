@@ -39,7 +39,7 @@ Template.votingview.events({
 				questionIndex: EventManagerCollection.findOne().questionIndex,
 				revealCorrectValues: false
 			},
-			closeOnButton: '#js-btn-hideQuestionModal, .splashscreen-container-close',
+			closeOnButton: '#js-btn-hideQuestionModal, .splashscreen-container-close>.glyphicon-remove',
 			instanceId: "questionAndAnswers_" + EventManagerCollection.findOne().questionIndex
 		});
 	},

@@ -56,7 +56,7 @@
                             </div>
                             {{#if isReadingConfirmationEnabled}}
                                 {{> form_group
-                                        name = "view.liveResults.reading_confirmation"
+                                        name = (_ "view.liveResults.reading_confirmation")
                                         absolute = (getCurrentRead displayIndex)
                                         base = getCountStudents
                                         percent = (getPercentRead displayIndex)

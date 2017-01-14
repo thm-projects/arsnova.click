@@ -70,6 +70,14 @@ Template.defaultAnswerOptionTemplate.events({
 		$(".contextMenu").removeClass("displayContextMenu");
 		$(event.currentTarget).parent().find(".contextMenu").addClass("displayContextMenu");
 	},
+	"mouseleave .answerOptionElementWrapper": function () {
+		lib.setContextTimeout(Meteor.setTimeout(function () {
+			$(".contextMenu").removeClass("displayContextMenu");
+		}, 200));
+	},
+	"mouseover .contextMenu": function () {
+		lib.setContextTimeout(null);
+	},
 	"mouseleave .contextMenu": function () {
 		$(".contextMenu").removeClass("displayContextMenu");
 	},

@@ -21,6 +21,11 @@
 .navbar-fixed-top {
 }
 
+.ui-draggable-handle {
+  touch-action: auto;
+  -ms-touch-action: auto;
+}
+
 .modal-backdrop {
   z-index: 1050;
 }
@@ -72,7 +77,6 @@
   }
   @media (min-width: 600px) {
     font-size: 1.5em;
-    font-size: 2.6vh;
   }
   height: 50px;
   width: 100%;

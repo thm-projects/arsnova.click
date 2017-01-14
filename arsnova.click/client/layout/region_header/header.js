@@ -31,10 +31,7 @@ Template.header.helpers({
 		return Router.current().params.quizName ? Router.current().params.quizName + "/resetToHome" : "";
 	},
 	isInHomePath: function () {
-		return Router.current().route.path() === '/';
-	},
-	isTHMStyleSelectedAndGreaterThan999Pixels: function () {
-		return localStorage.getItem("theme") === "theme-thm" && $(window).width() > 999;
+		return Router.current().route.path() === '/' || Router.current().route.getName() === "preview.:themeName.:language";
 	},
 	getCurrentTitle: function () {
 		switch (Router.current().route.path()) {
@@ -111,6 +108,12 @@ Template.qrCodeDisplay.helpers({
 	}
 });
 
+Template.arsnovaClickLogo.helpers({
+	getOrigin: function () {
+		return /^localhost/.test(window.location.host) ? "alpha" : /^staging/.test(window.location.host) ? "staging" : "";
+	}
+});
+
 Template.header.events({
 	'click .arsnova-logo': function () {
 		if (!Router.current().params.quizName) {
@@ -125,7 +128,7 @@ Template.header.events({
 			new Splashscreen({
 				autostart: true,
 				templateName: "resetSessionSplashscreen",
-				closeOnButton: '#closeDialogButton, #resetSessionButton, .splashscreen-container-close',
+				closeOnButton: '#closeDialogButton, #resetSessionButton, .splashscreen-container-close>.glyphicon-remove',
 				onRendered: function (instance) {
 					instance.templateSelector.find('#resetSessionButton').on('click', function () {
 						Meteor.call("Main.killAll", Router.current().params.quizName);
@@ -137,7 +140,7 @@ Template.header.events({
 			new Splashscreen({
 				autostart: true,
 				templateName: "exitSessionSplashscreen",
-				closeOnButton: '#closeDialogButton, #exitSessionButton, .splashscreen-container-close',
+				closeOnButton: '#closeDialogButton, #exitSessionButton, .splashscreen-container-close>.glyphicon-remove',
 				onRendered: function (instance) {
 					instance.templateSelector.find('#exitSessionButton').on('click', function () {
 						Router.go("/" + Router.current().params.quizName + "/resetToHome");
@@ -154,13 +157,6 @@ Template.header.onRendered(function () {
 	if (!Session.get("questionGroup") && Router.current().params.quizName && localData.containsHashtag(Router.current().params.quizName)) {
 		Session.set("questionGroup", localData.reenterSession(Router.current().params.quizName));
 	}
-	$(window).resize(function () {
-		if ($(window).width() > 999) {
-			$(".thm-logo-background").show();
-		} else {
-			$(".thm-logo-background").hide();
-		}
-	});
 
 	$(window).on('resize', lib.headerTrackerCallback);
 
@@ -168,6 +164,15 @@ Template.header.onRendered(function () {
 		setTimeout(function () {
 			self.autorun(function () {
 				lib.headerTrackerCallback();
+			}.bind(this));
+			self.autorun(function () {
+				let title = "arsnova.click";
+				if (/^localhost/.test(window.location.host)) {
+					title += " (local)";
+				} else if (/^staging/.test(window.location.host)) {
+					title += " (staging)";
+				}
+				$('title').text(title);
 			}.bind(this));
 		}, 100);
 	});

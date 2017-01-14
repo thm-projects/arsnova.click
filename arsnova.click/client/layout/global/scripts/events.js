@@ -35,7 +35,7 @@ Template.connectionQualityHeader.events({
 		new Splashscreen({
 			autostart: true,
 			templateName: "connectionQualitySplashscreen",
-			closeOnButton: "#btn-hidePreviewModal, .splashscreen-container-close"
+			closeOnButton: "#btn-hidePreviewModal, .splashscreen-container-close>.glyphicon-remove"
 		});
 		resetConnectionIndication();
 		startConnectionIndication();
@@ -130,6 +130,9 @@ Template.home.events({
 									}
 								}
 							}
+						},
+						removed: function () {
+							joinSessionItem.attr("disabled", "disabled");
 						}
 					}));
 				}));
@@ -149,7 +152,6 @@ Template.home.events({
 					placement: 'bottom'
 				});
 				inputTarget.popover("show");
-				return;
 			} else {
 				addNewHashtagItem.removeAttr("disabled");
 			}

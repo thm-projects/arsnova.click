@@ -33,7 +33,7 @@ Template.home.onRendered(function () {
 		hashtagLib.setHashtagSplashscreen(new Splashscreen({
 			autostart: true,
 			templateName: "showHashtagsSplashscreen",
-			closeOnButton: ".splashscreen-container-close"
+			closeOnButton: ".splashscreen-container-close>.glyphicon-remove"
 		}));
 	}
 	try {

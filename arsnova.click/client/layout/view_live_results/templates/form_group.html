@@ -27,7 +27,9 @@
 					 style="width: {{percent}}%; {{#if backgroundStyle}}background:{{backgroundStyle}};{{/if}}">
 				</div>
 				<div class="percentage">
-					<p class="label">{{_ name}}</p>
+					<div class="label">
+                        {{#mathjax}}{{name}}{{/mathjax}}
+                    </div>
 					<div class="values"><p class="absolute">{{absolute}}{{#if base}} / {{base}}{{/if}}</p>|<p class="percent">{{percent}} %</p></div>
 				</div>
 			</div>

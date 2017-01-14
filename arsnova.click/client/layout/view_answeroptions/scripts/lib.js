@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
 import {jQuery} from 'meteor/jquery';
@@ -31,6 +32,7 @@ import * as localData from '/lib/local_storage.js';
 
 export const answerOptionTracker = new Tracker.Dependency();
 export const answerCheckTracker = new Tracker.Dependency();
+export let currentTimeout = null;
 
 export function parseAnswerOptionInput(index) {
 	const questionItem = Session.get("questionGroup");
@@ -291,3 +293,10 @@ export const renderAnsweroptionItems = function () {
 	firstAnswerElement.find(".removeAnsweroption").attr("data-intro", TAPi18n.__("view.answeroptions.description.added_answer_remove"));
 	getTooltipForRoute();
 };
+
+export function setContextTimeout(timeout) {
+	if (currentTimeout) {
+		Meteor.clearTimeout(currentTimeout);
+	}
+	currentTimeout = timeout;
+}

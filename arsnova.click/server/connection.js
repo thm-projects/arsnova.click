@@ -23,9 +23,9 @@ import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 
 Meteor.setInterval(function () {
-	var sessionDeleteAfterIdleMinutes = 10; //Minutes to session is idle
-	var now = (new Date()).getTime();
-	var sessionDeleteTimeInMilliseconds = (sessionDeleteAfterIdleMinutes * 60 * 1000);
+	const sessionDeleteAfterIdleMinutes = 10; //Minutes to session is idle
+	const now = (new Date()).getTime();
+	const sessionDeleteTimeInMilliseconds = (sessionDeleteAfterIdleMinutes * 60 * 1000);
 	EventManagerCollection.find({
 		lastConnection: {$lt: (now - sessionDeleteTimeInMilliseconds)},
 		sessionStatus: {$ne: 0}

@@ -200,9 +200,10 @@
       "answeroptiontext_placeholder": "Opción de respuesta necesario",
       "correct": "Correcto",
       "wrong": "Incorrecto",
-      "preview": "Preestreno",
+      "preview": "",
       "show_answer_content_on_buttons": "Mostrar el contenido de la respuesta de los botones?",
       "multiple_selection_survey": "Permitir la selección de múltiples respuestas?",
+      "emoji_info": "Puedes incorporar también uno de estos <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis (sitio web externo!)</a> en tus respuestas <img style='width: 30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png' /> <br/>Simplemente haga clic en el sitio web en el Emoji y péguelo en la answeroption.",
       "description": {
         "default_answer_row": "Arrastre este bloque a la lista de opciones de respuesta para crear una nueva.",
         "added_answers": "Aquí están todas las answeroptions creadas. Puede cambiar el orden de las respuestas mediante arrastrar y soltar.",
@@ -394,7 +395,7 @@
     "questions": {
       "title": "Ingresar texto de pregunta",
       "enter_question_here": "Ingresa el texto de la pregunta aquí",
-      "preview": "Previsualizar",
+      "preview": "",
       "single_choice_question": "Pregunta de selección única (solo una de más respuestas es la correcta)",
       "single_choice_question_yes_no": "Pregunta si/no",
       "single_choice_question_true_false": "Pregunta Verdadero/Falso",
@@ -461,6 +462,10 @@
       "timer": "Cuenta atrás",
       "second": "Segundo",
       "second_plural": "Segundos",
+      "minute": "Minuto",
+      "minute_plural": "Minutos",
+      "hour": "Hora",
+      "hour_plural": "Horas",
       "validation": "Validación",
       "validation_errors": {
         "types": {
@@ -549,6 +554,10 @@
       "title": "Ajustar el temporizador",
       "second": "Segundo",
       "second_plural": "Segundos",
+      "minute": "Minuto",
+      "minute_plural": "Minutos",
+      "hour": "Hora",
+      "hour_plural": "Horas",
       "description": "Aquí puede configurar la cuenta regresiva para la pregunta de la prueba. Tan pronto como expire, o todos los participantes han contestado, la ronda de exámenes se termina."
     },
     "translation": {
@@ -620,8 +629,8 @@
     },
     "splashscreen": {
       "question_and_answer": {
-        "answeroption": "Responder",
-        "answeroption_plural": "Respuestas posibles",
+        "answeroption": "",
+        "answeroption_plural": "Respuestas",
         "min_range": "Menor tolerancia",
         "correct_value": "Valor correcto",
         "max_range": "Tolerancia superior",

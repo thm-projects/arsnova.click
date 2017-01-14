@@ -50,8 +50,7 @@ export function cleanUp() {
 		}
 	}
 
-	Session.set("questionGroup", undefined);
-	delete Session.keys.questionGroup;
+	Session.delete("questionGroup");
 
 	Meteor.logout();
 

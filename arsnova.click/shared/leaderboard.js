@@ -44,8 +44,8 @@ Meteor.methods({
 				correctAnswers.push(answer.answerOptionNumber);
 			});
 
-			var responseAmount = 0;
-			var falseResponseAmount = 0;
+			let responseAmount = 0;
+			let falseResponseAmount = 0;
 
 			ResponsesCollection.find({
 				hashtag: hashtag,
@@ -58,8 +58,8 @@ Meteor.methods({
 				responseAmount++;
 			});
 
-			var rightResponseAmount = responseAmount - falseResponseAmount;
-			var memberEntry = LeaderBoardCollection.findOne({
+			const rightResponseAmount = responseAmount - falseResponseAmount;
+			const memberEntry = LeaderBoardCollection.findOne({
 				hashtag: hashtag,
 				questionIndex: questionIndex,
 				userNick: nick

@@ -1,4 +1,4 @@
-export var forbiddenNicks = [
+export const forbiddenNicks = [
 	"ASSHAT",
 	"MOTHERFUCKER",
 	"PUMUKEL",

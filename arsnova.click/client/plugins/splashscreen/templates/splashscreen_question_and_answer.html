@@ -40,11 +40,10 @@
                                 {{/if}}
                             {{/each}}
                         </div>
-                        <hr/>
                         <div id="answerContent" class="markdown-content" role="list">
                             {{#if isRangedQuestion}}
                                 {{#if revealAnswerText}}
-                                    <h2 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h2>
+                                    <h3 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h3>
                                     {{#with getAnswerOptions}}
                                         <div class="answerContentElementWrapper" role="listitem">
                                             <div class="answerContentElementLetter">
@@ -75,7 +74,7 @@
                             {{else}}
                                 {{#if isFreeTextQuestion}}
                                     {{#if revealAnswerText}}
-                                        <h2 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h2>
+                                        <h3 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h3>
                                         {{#with getAnswerOptions}}
                                             <div class="answerContentElementWrapper" role="listitem">
                                                 <div class="answerContentElementLetter">
@@ -88,7 +87,7 @@
                                         {{/with}}
                                     {{/if}}
                                 {{else}}
-                                    <h2 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=2}}</h2>
+                                    <h3 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=2}}</h3>
                                     {{#each getAnswerOptions}}
                                         <div class="answerContentElementWrapper" role="listitem">
                                             <div class="answerContentElementLetter">
@@ -119,8 +118,8 @@
                                 type="button"
                                 aria-label="{{_ "global.close_window"}}"
                                 class="btn btn-info btn-answerOption btn-lg tabbable">
-                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                            <span class="hidden-xs">{{_ "global.close_window"}}</span>
+                            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                            <span>{{_ "global.close_window"}}</span>
                         </button>
                     </div>
                 </div>

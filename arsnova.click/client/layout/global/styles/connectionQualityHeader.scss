@@ -14,8 +14,8 @@
 	position: absolute;
 
 	@media (orientation: portrait) {
-	  height: 8vh;
-	  width: 8vh;
+	  height: 8vmin;
+	  width: 8vmin;
 	}
   	@media (orientation: landscape) {
 	  height: 8vw;

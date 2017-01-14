@@ -88,7 +88,7 @@ export function displayQuestionAndAnswerDialog(questionIndex) {
 			questionIndex: questionIndex,
 			revealCorrectValues: !Session.get("countdownInitialized")
 		},
-		closeOnButton: '#js-btn-hideQuestionModal, .splashscreen-container-close',
+		closeOnButton: '#js-btn-hideQuestionModal, .splashscreen-container-close>.glyphicon-remove',
 		instanceId: "questionAndAnswers_" + questionIndex
 	}));
 }

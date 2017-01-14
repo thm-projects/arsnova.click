@@ -107,7 +107,7 @@ Meteor.methods({
 			})) {
 			throw new Meteor.Error('MemberListCollection.setLearnerReference', 'nick_already_exists');
 		}
-		var member = MemberListCollection.findOne({
+		const member = MemberListCollection.findOne({
 			hashtag: hashtag,
 			nick: nick
 		});
@@ -134,7 +134,7 @@ Meteor.methods({
 			nick: userNickSchema
 		}).validate({hashtag, questionIndex, nick});
 
-		var member = MemberListCollection.findOne({
+		const member = MemberListCollection.findOne({
 			hashtag: hashtag,
 			nick: nick
 		});

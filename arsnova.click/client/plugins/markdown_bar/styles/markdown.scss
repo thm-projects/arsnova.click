@@ -62,30 +62,13 @@
 	position: absolute !important;
 }
 
-@media (max-width: 500px) {
-	.markdown-box {
-		display: none;
-	}
-
-	.row-create-question-buttons {
-		display: none;
-		height: 55px;
-		margin-bottom: 5px;
-	}
-
-	.round-corners-markdown {
-		border-radius: $corner-radius;
-	}
-}
-
 .formatPreviewButton {
 	margin-bottom: 5px;
 }
 
 .markdown-box {
-	padding-left: 5px;
-	padding-right: 5px;
 	margin-bottom: 1px;
+	overflow: hidden;
 }
 
 .button-markdown {
@@ -154,16 +137,12 @@
 .row-centered {
 	text-align: center;
 	padding-top: 3px;
-	display: inline-block;
-}
-
-.col-centered {
-	display: inline-block;
-	float: left;
-}
-
-.clearFloat {
-	clear: left;
+	display: flex;
+	margin: 0;
+	flex-flow: row;
+	overflow-x: auto;
+	overflow-y: hidden;
+	justify-content: center;
 }
 
 .input-label {
@@ -175,31 +154,4 @@
 
 .hr-without-margin {
 	margin: 0;
-}
-
-table {
-	display: block;
-	overflow: auto !important;
-	width: 100%;
-}
-
-table th, table td {
-	padding: 6px 13px;
-	border: 1px solid #dddddd;
-}
-
-table tr:nth-child(2n) {
-	background-color: #f8f8f8;
-}
-
-.glyphicon-lineThrough {
-	font-size: 14px;
-	top: 10px;
-	margin-top: 0;
-	margin-left: -13px;
-	position: absolute;
-	text-decoration: line-through;
-	&:before {
-		content: "ABC";
-	}
 }

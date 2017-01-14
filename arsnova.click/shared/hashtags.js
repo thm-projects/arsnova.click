@@ -26,10 +26,13 @@ import {HashtagsCollection, hashtagsCollectionSchema, hashtagSchema, themeSchema
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
+	/**
+	 * @return {boolean}
+	 */
 	'HashtagsCollection.checkPrivateKey': function (privateKey, hashtag) {
 		hashtagsCollectionSchema.validate({hashtag, privateKey});
 
-		var doc = HashtagsCollection.findOne({
+		const doc = HashtagsCollection.findOne({
 			hashtag: hashtag,
 			privateKey: privateKey
 		});
@@ -102,7 +105,7 @@ Meteor.methods({
 		});
 	},
 	'HashtagsCollection.updateMusicSettings': function (doc) {
-		var hashtagDoc = HashtagsCollection.findOne({hashtag: doc.hashtag});
+		const hashtagDoc = HashtagsCollection.findOne({hashtag: doc.hashtag});
 
 		if (!hashtagDoc) {
 			throw new Meteor.Error('HashtagsCollection.updateMusicSettings', 'session_not_exists');
@@ -129,7 +132,7 @@ Meteor.methods({
 		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
 
 		if (Meteor.isServer) {
-			var hashtagDoc = HashtagsCollection.findOne({
+			const hashtagDoc = HashtagsCollection.findOne({
 				hashtag: hashtag
 			}, {
 				fields: {
@@ -140,32 +143,32 @@ Meteor.methods({
 			if (!hashtagDoc) {
 				throw new Meteor.Error('HashtagsCollection.export', 'hashtag_not_found');
 			}
-			var questionGroupDoc = QuestionGroupCollection.findOne({hashtag: hashtag}, {
+			const questionGroupDoc = QuestionGroupCollection.findOne({hashtag: hashtag}, {
 				fields: {
 					_id: 0
 				}
 			});
-			var configDoc = SessionConfigurationCollection.findOne({hashtag: hashtag}, {
+			const configDoc = SessionConfigurationCollection.findOne({hashtag: hashtag}, {
 				fields: {
 					_id: 0
 				}
 			});
-			var answerOptionsDoc = AnswerOptionCollection.find({hashtag: hashtag}, {
+			const answerOptionsDoc = AnswerOptionCollection.find({hashtag: hashtag}, {
 				fields: {
 					_id: 0
 				}
 			}).fetch();
-			var memberListDoc = MemberListCollection.find({hashtag: hashtag}, {
+			const memberListDoc = MemberListCollection.find({hashtag: hashtag}, {
 				fields: {
 					_id: 0
 				}
 			}).fetch();
-			var responsesDoc = ResponsesCollection.find({hashtag: hashtag}, {
+			const responsesDoc = ResponsesCollection.find({hashtag: hashtag}, {
 				fields: {
 					_id: 0
 				}
 			}).fetch();
-			var exportData = {
+			const exportData = {
 				hashtagDoc: hashtagDoc,
 				configDoc: configDoc,
 				questionGroupDoc: questionGroupDoc,
@@ -178,13 +181,13 @@ Meteor.methods({
 	},
 	'HashtagsCollection.import': function ({privateKey, data}) {
 		if (Meteor.isServer) {
-			var hashtag = data.hashtag;
-			var oldDoc = HashtagsCollection.findOne({hashtag: hashtag, privateKey: {$ne: privateKey}});
+			const hashtag = data.hashtag;
+			const oldDoc = HashtagsCollection.findOne({hashtag: hashtag, privateKey: {$ne: privateKey}});
 			if (oldDoc) {
 				throw new Meteor.Error('HashtagsCollection.import', 'hashtag_exists');
 			}
-			var questionList = [];
-			var hashtagDoc = data.hashtagDoc;
+			const questionList = [];
+			const hashtagDoc = data.hashtagDoc;
 
 			if (!hashtagDoc.theme) {
 				hashtagDoc.theme = "theme-arsnova-dot-click-contrast";
@@ -202,8 +205,8 @@ Meteor.methods({
 			hashtagDoc.privateKey = privateKey;
 			delete hashtagDoc._id;
 			HashtagsCollection.insert(hashtagDoc);
-			for (var i = 0; i < data.questionListDoc.length; i++) {
-				var question = data.questionListDoc[i];
+			for (let i = 0; i < data.questionListDoc.length; i++) {
+				const question = data.questionListDoc[i];
 				questionList.push({
 					hashtag: question.hashtag,
 					questionText: question.questionText,
@@ -213,8 +216,8 @@ Meteor.methods({
 					answerOptionList: [],
 					type: question.type
 				});
-				for (var j = 0; j < question.answerOptionList.length; j++) {
-					var answer = question.answerOptionList[j];
+				for (let j = 0; j < question.answerOptionList.length; j++) {
+					const answer = question.answerOptionList[j];
 					AnswerOptionCollection.insert({
 						hashtag: answer.hashtag,
 						questionIndex: answer.questionIndex,

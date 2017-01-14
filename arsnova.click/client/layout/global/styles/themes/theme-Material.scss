@@ -33,13 +33,13 @@
 
 	@return (
 		/* Landing page */
-		"background-color": #009688,
-		"bg-nav-row": #009688,
-		"bg-container": #009688,
-		"bg-footer": #00796B,
+		"background-color": $primary_color,
+		"bg-nav-row": $primary_color,
+		"bg-container": $primary_color,
+		"bg-footer": $dark_primary_color,
 		"fg_titel": white,
 		/* Quiz name input */
-		"input-background-color": #FF9800,
+		"input-background-color": $accent_color,
 		"placeholder-color": white,
 		"input-foreground-color": white,
 		"disabled-button-background": map-get($stdStyle, "md_blue_grey_300"),
@@ -50,6 +50,11 @@
 		"fg-connection-quality-header_connection-warning": $accent_color,
 		"fg-connection-quality-header_connection-failed": map-get($stdStyle, "md_red_500"),
 		"fg-connection-quality-header_connection-error": map-get($stdStyle, "md_red_500"),
+		/* Logo colors */
+		"bg-arsnova_logo_image": transparent,
+		"fg-arsnova_logo_image-ars": white,
+		"fg-arsnova_logo_image-nova": $accent_color,
+		"fg-arsnova_logo_image-click": white,
 		/* Semantic colors */
 		"success": $accent_color,
 		"success-text-color": white,
@@ -83,11 +88,12 @@
 		"bg-splashscreen-question-and-answer_question-content": $light_primary_color,
 		"bg-splashscreen-question-and-answer_answer-content-header": $light_primary_color,
 		"bg-splashscreen-question-and-answer_answer-content-odd-row": $light_primary_color,
-		"border-splashscreen-question-and-answer_answer-content-odd-row": white,
-		"fg-splashscreen-question-and-answer_answer-content-odd-row": white,
+		"border-splashscreen-question-and-answer_answer-content-odd-row": $primary_color,
+		"fg-splashscreen-question-and-answer_answer-content-odd-row": $primary_color,
 		"bg-splashscreen-question-and-answer_answer-content-even-row": $light_primary_color,
-		"border-splashscreen-question-and-answer_answer-content-even-row": white,
-		"fg-splashscreen-question-and-answer_answer-content-even-row": white,
+		"border-splashscreen-question-and-answer_answer-content-even-row": $primary_color,
+		"fg-splashscreen-question-and-answer_answer-content-even-row": $primary_color,
+		"splashscreen-reading-confirmed-background-color": $light_primary_color,
 		"splashscreen-show-hashtags-background-color": map-get($stdStyle, "splashscreen-background-color"),
 		"splashscreen-sound-config-background-color": map-get($stdStyle, "splashscreen-background-color"),
 		"splashscreen-sound-config-button-background-color": map-get($stdStyle, "success"),
@@ -112,7 +118,7 @@
 		"slider-color": $dark_primary_color,
 		/* Theme switcher */
 		"border-theme-preview-img": white,
-		"border-theme-preview-img-selected": map-get($stdStyle, "md_green_500"),
+		"border-theme-preview-img-selected": map-get($stdStyle, "md_orange_500"),
 		/* Language select buttons */
 		"grey-button-background": $dark_primary_color,
 		"grey-button-color": white,
@@ -138,8 +144,10 @@
 		"bg-question_type_view-wrapper-hovered": $accent_color,
 		"border-question_type_view-activeQuestionType-wrapper": white,
 		/* Edit answer options and smartphone preview */
+		"border-previewQuestionContentWrapper-image": black,
+		"fg-previewQuestionContentWrapper": white,
 		"bg-edit_answeroption_text-element_wrapper": white,
-		"border-preview_answeroption_content_wrapper-image": white,
+		"border-preview_answeroption_content_wrapper-image": black,
 		"fg-preview_answeroption_content_wrapper": white,
 		/* QR code */
 		"fg-qr-code-button": white,
@@ -184,7 +192,7 @@
 		"progress-bar-success-color": map-get($stdStyle, "md_green_500"),
 		"progress-bar-failure-color": map-get($stdStyle, "md_red_500"),
 		"progress-bar-default-color": map-get($stdStyle, "md_blue_grey_700"), /* partially correct */
-		"bg-button-result-progress": $primary_color,
+		"bg-button-result-progress": $dark_primary_color,
 		"fg-button-result-percentage": white,
 		/* Winning player on ranking list */
 		"bg-button-leader": map-get($stdStyle, "input-background-color"),
@@ -207,14 +215,14 @@
 		"bg-rangedSlider-handle": $accent_color,
 		/* Bootstrap button styles */
 		"fg-btn_info": $primary_text_color !important,
-		"bg-btn_info": $accent_color,
-		"border-btn_info": $primary_color !important,
+		"bg-btn_info": $accent_color !important,
+		"border-btn_info": $accent_color !important,
 		"fg-btn_info-hovered": $text_icon_color !important,
-		"bg-btn_info-hovered": $dark_primary_color,
-		"border-btn_info-hovered": $primary_color,
+		"bg-btn_info-hovered": $dark_primary_color !important,
+		"border-btn_info-hovered": $dark_primary_color !important,
 		"fg-btn_info-focused": $primary_text_color !important,
-		"bg-btn_info-focused": $accent_color,
-		"border-btn_info-focused": $accent_color,
+		"bg-btn_info-focused": $accent_color !important,
+		"border-btn_info-focused": $primary_color !important,
 		"fg-btn_warning": $primary_text_color !important,
 		"bg-btn_warning": map-get($stdStyle, "md_red_500"),
 		"border-btn_warning": map-get($stdStyle, "md_red_500"),

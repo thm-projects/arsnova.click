@@ -33,13 +33,13 @@
 
 	@return (
 		/* Landing page */
-		"background-color": #009688,
-		"bg-nav-row": #009688,
-		"bg-container": #009688,
-		"bg-footer": #00796B,
+		"background-color": $primary_color,
+		"bg-nav-row": $primary_color,
+		"bg-container": $primary_color,
+		"bg-footer": $dark_primary_color,
 		"fg_titel": white,
 		/* Quiz name input */
-		"input-background-color": #FF9800,
+		"input-background-color": $accent_color,
 		"placeholder-color": white,
 		"input-foreground-color": white,
 		"disabled-button-background": map-get($stdStyle, "md_blue_grey_300"),
@@ -118,7 +118,7 @@
 		"slider-color": $dark_primary_color,
 		/* Theme switcher */
 		"border-theme-preview-img": white,
-		"border-theme-preview-img-selected": map-get($stdStyle, "md_green_500"),
+		"border-theme-preview-img-selected": map-get($stdStyle, "md_orange_500"),
 		/* Language select buttons */
 		"grey-button-background": $dark_primary_color,
 		"grey-button-color": white,

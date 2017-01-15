@@ -183,9 +183,9 @@
           "non_writable": "Nicht beschreibbar"
         },
         "dbConnection_status": {
-          "very_slow": "Sehr langsam",
-          "slow": "Langsam",
-          "ok": "Gut"
+          "very_slow": "sehr langsam",
+          "slow": "langsam",
+          "ok": "gut"
         }
       },
       "aria_description": {
@@ -250,7 +250,7 @@
       "enter_nickname": "Gib dir einen Nicknamen",
       "enter_nickname_here": "Gib deinen Nick ein",
       "nickname_na_popup": "Dieser Name ist nicht verfügbar!",
-      "nickname_blacklist_popup": "Dieser Name ist nicht zulässig!",
+      "nickname_blacklist_popup": "Dieser Name ist unzulässig!",
       "nickname_too_long": "Der Name ist zu lang",
       "nickname_too_short": "Der Name ist zu kurz",
       "no_selectable_nick_available": {
@@ -258,7 +258,7 @@
         "2": "Eine Teilnahme am Quiz ist nicht möglich."
       },
       "description": {
-        "nickname_input": "Hier kannst Du dir einen Namen geben, der in der Quiz-Lobby und in der Rangliste angezeigt wird.",
+        "nickname_input": "Hier kannst Du dir einen Namen geben, der in der Quiz Lobby und in der Rangliste angezeigt wird.",
         "choose_selectable_nick": "Du kannst aus dieser Liste einen Nicknamen auswählen."
       }
     },
@@ -345,7 +345,7 @@
       "correct_answer": "Richtige Antwort"
     },
     "lobby": {
-      "title": "Quiz-Lobby",
+      "title": "Quiz Lobby",
       "yes": "Ja",
       "no": "Nein",
       "ready": "Warten, dass es losgeht ...",
@@ -439,7 +439,7 @@
         "available_questions": "Hier siehst Du alle Fragetypen, aus denen Du wählen kannst. Jeder Fragetyp bietet unterschiedliche Voreinstellungen und Möglichkeiten zur Gestaltung des Quiz.",
         "added_questions": "Hier findest Du alle deine Quizfragen, die im Quiz vorhanden sind. Um eine Quizfrage dem Quiz hinzuzufügen, ziehe sie entweder aus dem linken Stapel hierher oder klicke im linken Stapel auf die jeweilige Quizfrage. Mit einem Klick auf die eingefügte Frage kannst Du die Inhalte der Quizfrage einstellen.",
         "back_button": "Du kannst jederzeit zurückgehen. Das Quiz wird beim Eingeben sofort gespeichert.",
-        "forward_button": "Sofern das Quiz gültig ist und eine Verbindung zum Server besteht, kannst Du zur Quiz-Lobby gehen und das Quiz eröffnen."
+        "forward_button": "Sofern das Quiz gültig ist und eine Verbindung zum Server besteht, kannst Du zur Quiz Lobby gehen und das Quiz eröffnen."
       }
     },
     "quiz_summary": {
@@ -522,7 +522,7 @@
         },
         "black_beauty": {
           "name" : "Black Beauty (beamertauglich)",
-          "description": "Dunkel, dunkler und noch dunkler."
+          "description": "Akkufreundlich."
         },
         "living_room": {
           "name" : "Wohnzimmer",
@@ -609,11 +609,11 @@
       "info_content": "Du kannst Text mit <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown-Optionen werden in Form von Schaltflächen über dem Eingabefeld angeboten. Zudem unterstützt arsnova.click <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown.</a>"
     },
     "sound": {
-      "running_music": "Countdown (Laufend)",
-      "lobby_music": "Quiz-Lobby",
+      "running_music": "Countdown (laufend)",
+      "lobby_music": "Quiz Lobby",
       "finish_music": "Countdown (Ende)",
       "running_music_detailed": "Sound während des Countdowns",
-      "lobby_music_detailed": "Sound in der Quiz-Lobby",
+      "lobby_music_detailed": "Sound in der Quiz Lobby",
       "finish_music_detailed": "Sound zum Ende des Countdowns",
       "whistle": "Pfeifen",
       "silence": "Kein Ton",
@@ -634,7 +634,7 @@
         "min_range": "Minimalwert",
         "correct_value": "Richtiger Wert",
         "max_range": "Maximalwert",
-        "reference_value": "Referenzwert"
+        "reference_value": "Richtige Antwort"
       },
       "edit_session_confirmation": {
         "title": "Möchtest Du das Quiz bearbeiten?",
@@ -648,7 +648,7 @@
       },
       "return_to_lobby": {
         "title": "Warnung",
-        "text": "Wenn Du zur Quiz-Lobby zurückkehrst, werden alle bereits durchgeführten Quizrunden zurückgesetzt.",
+        "text": "Wenn Du zur Quiz Lobby zurückkehrst, werden alle bereits durchgeführten Quizrunden zurückgesetzt.",
         "continue": "Fortfahren?"
       },
       "error": {

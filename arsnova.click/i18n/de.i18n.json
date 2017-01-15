@@ -171,16 +171,16 @@
         "finished_with_warnings": "Mit Warnungen beendet",
         "finished_without_warnings": "Erfolgreich",
         "websocket_status": {
-          "connected": "Verbunden",
-          "disconnected": "Offline"
+          "connected": "verbunden",
+          "disconnected": "offline"
         },
         "localStorage_status": {
-          "writable": "Beschreibbar",
-          "non_writable": "Nicht beschreibbar"
+          "writable": "beschreibbar",
+          "non_writable": "nicht beschreibbar"
         },
         "sessionStorage_status": {
-          "writable": "Beschreibbar",
-          "non_writable": "Nicht beschreibbar"
+          "writable": "beschreibbar",
+          "non_writable": "nicht beschreibbar"
         },
         "dbConnection_status": {
           "very_slow": "sehr langsam",

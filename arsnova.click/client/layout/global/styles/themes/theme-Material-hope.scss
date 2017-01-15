@@ -41,7 +41,7 @@
 		"input-background-color": $accent_color,
 		"placeholder-color": white,
 		"input-foreground-color": white,
-		"disabled-button-background": map-get($stdStyle, "md_blue_grey_300"),
+		"disabled-button-background": map-get($stdStyle, "md_grey_300"),
 		/* Connection status */
 		"fg-connection-quality-header_connection-pending": map-get($stdStyle, "md_blue_grey_700"),
 		"fg-connection-quality-header_connection-offline": map-get($stdStyle, "md_red_500"),
@@ -68,8 +68,8 @@
 		"fg-footer-info-bar-hovered": $accent_color,
 		"fg-footer-info-bar-active": map-get($stdStyle, "md_green_300"),
 		"fg-footer-info-bar-active-hovered": map-get($stdStyle, "md_green_500"),
-		"fg-footer-element-deactivated": map-get($stdStyle, "md_red_300"),
-		"fg-footer-element-deactivated-hovered": map-get($stdStyle, "md_red_500"),
+		"fg-footer-element-deactivated": map-get($stdStyle, "md_grey_300"),
+		"fg-footer-element-deactivated-hovered": map-get($stdStyle, "md_grey_500"),
 		/* Quizzes stored in browser */
 		"bg-js-my-hash-validQuestion": map-get($stdStyle, "success"),
 		"bg-js-my-hash-validQuestion-hovered": lighten(map-get($stdStyle, "success"), 10),

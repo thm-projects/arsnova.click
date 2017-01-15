@@ -23,7 +23,7 @@
 	$light_primary_color: #AED581;
 	$dark_primary_color: #689F38;
 
-	$accent_color: #FFC107;
+	$accent_color: #FFC400;
 
 	$primary_text_color: #212121;
 	$secondary_text_color: #757575;
@@ -124,19 +124,19 @@
 		/* Loading indicator */
 		"border-loader_wrapper-outer_spin": white,
 		"border-loader_wrapper-middle_spin": $accent_color,
-		"border-loader_wrapper-inner_spin": map-get($stdStyle, "md_teal_300"),
+		"border-loader_wrapper-inner_spin": map-get($stdStyle, "md_amber_700"),
 		/* Quiz Manager */
 		"fg-quiz_manager-sortable_placeholder": black,
 		"bg-quiz_manager-sortable_placeholder": white,
 		"fg-quiz_manager-ul-li": white,
-		"border-quiz_manager-available_questions_wrapper": white,
+		"border-quiz_manager-available_questions_wrapper": map-get($stdStyle, "md_light_green_700"),
 		"bg-quiz_manager-available_questions_wrapper-hovered": $accent_color,
-		"border-quiz_manager-available_questions_wrapper-valid": springgreen,
-		"border-quiz_manager-available_questions_wrapper-invalid": red,
+		"border-quiz_manager-available_questions_wrapper-valid": map-get($stdStyle, "md_green_500"),
+		"border-quiz_manager-available_questions_wrapper-invalid": map-get($stdStyle, "md_red_700"),
 		"fg-quiz_manager_details-btn_group-button": $primary_text_color,
 		"bg-quiz_manager_details-btn_group-button": $accent_color,
 		"bg-quiz_manager_details-btn_group-button-hovered": map-get($stdStyle, "md_orange_700"),
-		"border-quiz_manager_details-btn_group-button": map-get($stdStyle, "md_teal_300") !important,
+		"border-quiz_manager_details-btn_group-button": map-get($stdStyle, "md_green_700") !important,
 		/* Question type selection */
 		"border-question_type_view-wrapper": $accent_color,
 		"fg-question_type_view-wrapper-hovered": white,
@@ -161,7 +161,7 @@
 		/* Nickname limitation */
 		"fg-nickname_categories-h3": white,
 		"bg-nickname_categories-nick_style": white,
-		"bg-nickname_categories-nick_style-hovered": map-get($stdStyle, "md_grey_500"),
+		"bg-nickname_categories-nick_style-hovered": $accent_color,
 		"bg-nickname_categories-nick_style-active": map-get($stdStyle, "md_grey_500"),
 		"bg-nickname_categories-nick_style-selected_category": $accent_color,
 		"bg-nickname_categories-nick_chosen_nick": $accent_color,

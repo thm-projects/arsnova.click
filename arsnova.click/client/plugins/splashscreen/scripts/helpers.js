@@ -61,7 +61,11 @@ Template.readingConfirmedSplashscreen.helpers($.extend(isMobileDevice, parseMark
 
 Template.questionAndAnswerSplashscreen.helpers($.extend(isMobileDevice, parseMarkdown, {
 	revealAnswerText: function () {
-		return Template.instance().data.revealCorrectValues;
+		const templateData = Template.instance().data;
+		if (!templateData) {
+			return;
+		}
+		return templateData.revealCorrectValues !== false && (!Session.get("countdownInitialized") || Session.get("sessionClosed"));
 	}
 }));
 

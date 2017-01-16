@@ -347,10 +347,11 @@ Template.progressBarRangedQuestion.helpers({
 
 Template.liveResults.helpers({
 	getProgressbarTemplate: function (index) {
-		if (typeof index === "undefined" || !Session.get("questionGroup")) {
+		const questionDoc = QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName});
+		if (typeof index === "undefined" || !questionDoc) {
 			return null;
 		}
-		switch (Session.get("questionGroup").getQuestionList()[index].typeName()) {
+		switch (questionDoc.questionList[index].type) {
 			case "SingleChoiceQuestion":
 			case "YesNoSingleChoiceQuestion":
 			case "TrueFalseSingleChoiceQuestion":
@@ -399,31 +400,35 @@ Template.liveResults.helpers({
 		return index + 1;
 	},
 	allQuestionCount: function () {
-		const doc = QuestionGroupCollection.findOne();
-		return doc ? doc.questionList.length : false;
+		const questionDoc = QuestionGroupCollection.findOne();
+		return questionDoc ? questionDoc.questionList.length : false;
 	},
 	questionList: function () {
 		let eventDoc = EventManagerCollection.findOne();
-		if (!eventDoc || !Session.get("questionGroup")) {
+		let questionDoc = QuestionGroupCollection.findOne();
+		if (!eventDoc || !questionDoc) {
 			return;
 		}
 
-		const questionList = Session.get("questionGroup").getQuestionList();
-		if (eventDoc.readingConfirmationIndex < questionList.length - 1) {
-			questionList.splice(eventDoc.readingConfirmationIndex + 1, questionList.length - (eventDoc.readingConfirmationIndex + 1));
+		if (eventDoc.readingConfirmationIndex < questionDoc.questionList.length - 1) {
+			questionDoc.questionList.splice(eventDoc.readingConfirmationIndex + 1, questionDoc.questionList.length - (eventDoc.readingConfirmationIndex + 1));
 		}
 
-		for (let i = 0; i < questionList.length; i++) {
-			questionList[i].displayIndex = i;
+		for (let i = 0; i < questionDoc.questionList.length; i++) {
+			questionDoc.questionList[i].displayIndex = i;
 		}
 
 		if (Session.get("countdownInitialized") || (lib.countdown && lib.countdown.get() > 0)) {
-			return [questionList[eventDoc.questionIndex]];
+			return [questionDoc.questionList[eventDoc.questionIndex]];
 		}
-		return questionList ? questionList.reverse() : false;
+		return questionDoc.questionList ? questionDoc.questionList.reverse() : false;
 	},
 	hasOnlyOneQuestion: ()=> {
-		return Session.get("questionGroup") ? Session.get("questionGroup").getQuestionList().length === 1 : null;
+		let questionDoc = QuestionGroupCollection.findOne();
+		if (!questionDoc) {
+			return;
+		}
+		return questionDoc.questionList.length === 1;
 	},
 	isReadingConfirmationEnabled: ()=> {
 		const sessionConfig = SessionConfigurationCollection.findOne();

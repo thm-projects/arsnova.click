@@ -24,6 +24,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {MusicSessionConfiguration} from "/lib/session_configuration/session_config_music.js";
 import {RangedQuestion} from "/lib/questions/question_ranged.js";
 import {FreeTextQuestion} from "/lib/questions/question_freetext.js";
@@ -69,7 +70,7 @@ export function getQuestionDialog() {
 }
 
 export function isCountdownZero(index) {
-	let eventDoc = EventManagerCollection.findOne();
+	const eventDoc = EventManagerCollection.findOne();
 	if (!eventDoc || Session.get("isQueringServerForTimeStamp")) {
 		return false;
 	}
@@ -85,8 +86,7 @@ export function displayQuestionAndAnswerDialog(questionIndex) {
 		autostart: true,
 		templateName: 'questionAndAnswerSplashscreen',
 		dataContext: {
-			questionIndex: questionIndex,
-			revealCorrectValues: !Session.get("countdownInitialized")
+			questionIndex: questionIndex
 		},
 		closeOnButton: '#js-btn-hideQuestionModal, .splashscreen-container-close>.glyphicon-remove',
 		instanceId: "questionAndAnswers_" + questionIndex
@@ -149,7 +149,7 @@ export function countdownFinish() {
 		musicLib.countdownRunningSound.stop();
 		Session.set("countdownRunningSoundIsPlaying", false);
 	}
-	const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
+	const musicSettings = new MusicSessionConfiguration(SessionConfigurationCollection.findOne());
 	if (musicSettings.getCountdownEndEnabled()) {
 		let title = musicSettings.getCountdownEndTitle();
 		if (title === "Random") {
@@ -254,9 +254,9 @@ export function startCountdown(index) {
 	Session.set("showingReadingConfirmation", undefined);
 	Session.set("isQueringServerForTimeStamp", true);
 
-	const isOwner = localData.containsHashtag(Session.get("questionGroup").getHashtag());
+	const isOwner = localData.containsHashtag(Router.current().params.quizName);
 	if (isOwner) {
-		const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
+		const musicSettings = new MusicSessionConfiguration(SessionConfigurationCollection.findOne());
 		if (musicSettings.getCountdownRunningEnabled()) {
 			let title = musicSettings.getCountdownRunningTitle();
 			if (title === "Random") {
@@ -268,13 +268,13 @@ export function startCountdown(index) {
 			Session.set("countdownRunningSoundIsPlaying", true);
 		}
 	}
-	Meteor.call("Main.calculateRemainingCountdown", Session.get("questionGroup").getHashtag(), index, function (error, response) {
+	Meteor.call("Main.calculateRemainingCountdown", Router.current().params.quizName, index, function (error, response) {
 		if (response <= 0) {
 			Session.set("isQueringServerForTimeStamp", false);
 			return;
 		}
 		if (isOwner) {
-			Meteor.call("EventManagerCollection.setActiveQuestion", Session.get("questionGroup").getHashtag(), index);
+			Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, index);
 		}
 
 		countdown = new ReactiveCountdown(response);

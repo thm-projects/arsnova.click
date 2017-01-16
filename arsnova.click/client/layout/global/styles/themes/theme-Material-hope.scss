@@ -68,8 +68,8 @@
 		/* Footer Icons */
 		"fg-footer-info-bar": white,
 		"fg-footer-info-bar-hovered": $accent_color,
-		"fg-footer-info-bar-active": white,
-		"fg-footer-info-bar-active-hovered": $accent_color,
+		"fg-footer-info-bar-active": $accent_color,
+		"fg-footer-info-bar-active-hovered": darken($accent_color, 10),
 		"fg-footer-element-deactivated": map-get($stdStyle, "md_grey_300"),
 		"fg-footer-element-deactivated-hovered": map-get($stdStyle, "md_grey_500"),
 		/* Quizzes stored in browser */
@@ -147,7 +147,7 @@
 		/* Edit answer options and smartphone preview */
 		"border-previewQuestionContentWrapper-image": black,
 		"fg-previewQuestionContentWrapper": $light_black,
-		"bg-edit_answeroption_text-element_wrapper": $light_black,
+		"bg-edit_answeroption_text-element_wrapper": white,
 		"border-preview_answeroption_content_wrapper-image": black,
 		"fg-preview_answeroption_content_wrapper": $light_black,
 		/* QR code */

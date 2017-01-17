@@ -39,6 +39,11 @@ Template.memberlist.onCreated(function () {
 	});
 
 	if (localData.containsHashtag(Router.current().params.quizName)) {
+		const questionGroup = Session.get("questionGroup");
+		questionGroup.getConfiguration().setTheme(Session.get("theme"));
+		localData.addHashtag(questionGroup);
+		Session.set("questionGroup", questionGroup);
 		Meteor.call('ResponsesCollection.clearAll', Router.current().params.quizName);
+		Meteor.call('SessionConfiguration.addConfig', questionGroup.getConfiguration().serialize());
 	}
 });

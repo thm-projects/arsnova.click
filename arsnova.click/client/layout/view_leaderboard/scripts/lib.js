@@ -165,7 +165,7 @@ export function isCorrectResponse(response, question, questionIndex) {
 		case "MultipleChoiceQuestion":
 			return checkIsCorrectMultipleChoiceQuestion(response, questionIndex);
 		case "SurveyQuestion":
-			return false;
+			return true;
 		case "RangedQuestion":
 			return checkIsCorrectRangedQuestion(response, questionIndex);
 		case "FreeTextQuestion":
@@ -196,7 +196,9 @@ export function getLeaderboardItemsByIndex(questionIndex) {
 			if (typeof result[item.userNick] === "undefined") {
 				result[item.userNick] = 0;
 			}
-			result[item.userNick] += item.responseTime;
+			if (question.type !== "SurveyQuestion") {
+				result[item.userNick] += item.responseTime;
+			}
 		}
 	});
 	return result;

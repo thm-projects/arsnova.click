@@ -29,7 +29,7 @@ Template.votingview.events({
 	'click #js-btn-showQuestionAndAnswerModal': function (event, template) {
 		event.stopPropagation();
 		const questionDoc = QuestionGroupCollection.findOne();
-		if (!questionDoc || template.data && template.data["data-questionIndex"]) {
+		if (!questionDoc || (template.data && template.data["data-questionIndex"])) {
 			return;
 		}
 		new Splashscreen({

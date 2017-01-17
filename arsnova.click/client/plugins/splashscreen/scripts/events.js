@@ -18,21 +18,8 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
-import {showFullscreenPicture} from './lib.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
-
-Template.questionAndAnswerSplashscreen.events({
-	"click .resizeableImage": function (event) {
-		showFullscreenPicture(event);
-	}
-});
-
-Template.readingConfirmedSplashscreen.events({
-	"click .resizeableImage": function (event) {
-		showFullscreenPicture(event);
-	}
-});
 
 Template.showHashtagsSplashscreen.events({
 	"click .js-my-hash": function (event) {

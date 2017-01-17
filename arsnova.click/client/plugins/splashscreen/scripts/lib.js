@@ -21,6 +21,7 @@ import {Blaze} from 'meteor/blaze';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import {TAPi18n} from 'meteor/tap:i18n';
+import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {forceFeedback} from '/client/layout/global/scripts/lib.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
@@ -251,10 +252,11 @@ export const isMobileDevice = {
 export const parseMarkdown = {
 	splitQuestionTextOnNewLine: function () {
 		const instance = Template.instance();
-		if (!Session.get("questionGroup")) {
+		const questionDoc = QuestionGroupCollection.findOne();
+		if (!questionDoc) {
 			return;
 		}
-		const result = Session.get("questionGroup").getQuestionList()[parseInt(instance.data.questionIndex)].getQuestionText().split("\n");
+		const result = QuestionGroupCollection.findOne().questionList[parseInt(instance.data.questionIndex)].questionText.split("\n");
 		questionLib.parseGithubFlavoredMarkdown(result);
 		return result;
 	},
@@ -263,29 +265,32 @@ export const parseMarkdown = {
 	},
 	isFreeTextQuestion: function () {
 		const instance = Template.instance();
-		if (!Session.get("questionGroup")) {
+		const questionDoc = QuestionGroupCollection.findOne();
+		if (!questionDoc) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[parseInt(instance.data.questionIndex)].typeName() === "FreeTextQuestion";
+		return QuestionGroupCollection.findOne().questionList[parseInt(instance.data.questionIndex)].type === "FreeTextQuestion";
 	},
 	isRangedQuestion: function () {
 		const instance = Template.instance();
-		if (!Session.get("questionGroup")) {
+		const questionDoc = QuestionGroupCollection.findOne();
+		if (!questionDoc) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[parseInt(instance.data.questionIndex)].typeName() === "RangedQuestion";
+		return QuestionGroupCollection.findOne().questionList[parseInt(instance.data.questionIndex)].type === "RangedQuestion";
 	},
 	getAnswerOptions: function () {
 		const instance = Template.instance();
-		if (!Session.get("questionGroup")) {
+		const questionDoc = QuestionGroupCollection.findOne();
+		if (!questionDoc) {
 			return;
 		}
-		const question = Session.get("questionGroup").getQuestionList()[parseInt(instance.data.questionIndex)];
-		if (question.typeName() === "RangedQuestion") {
-			return [question.getMinRange(), question.getCorrectValue(), question.getMaxRange()];
+		const question = QuestionGroupCollection.findOne().questionList[parseInt(instance.data.questionIndex)];
+		if (question.type === "RangedQuestion") {
+			return [question.rangeMin, question.correctValue, question.rangeMax];
 		}
-		const result = question.getAnswerOptionList().map(function (elem) {
-			return elem.getAnswerText();
+		const result = question.answerOptionList.map(function (elem) {
+			return elem.answerText;
 		});
 		questionLib.parseGithubFlavoredMarkdown(result);
 		return result;
@@ -310,21 +315,3 @@ export const parseMarkdown = {
 		return result;
 	}
 };
-
-export function showFullscreenPicture(event) {
-	const pictureElement = event.target;
-	const src = pictureElement.src;
-	const title = pictureElement.title;
-
-	new Splashscreen({
-		autostart: true,
-		templateName: 'questionPreviewSplashscreen',
-		closeOnButton: '#js-btn-hidePreviewModal, .splashscreen-container-close>.glyphicon-remove',
-		instanceId: "resizeableImage",
-		onRendered: function (instance) {
-			const body = instance.templateSelector.find('.modal-body');
-			const objectHtml =  '<img title="' + title + '" src="' + src + '" alt="' + title + '" style="width: 100%">';
-			body.append(objectHtml);
-		}
-	});
-}

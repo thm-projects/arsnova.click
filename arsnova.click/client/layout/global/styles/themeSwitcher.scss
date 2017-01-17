@@ -929,11 +929,11 @@ $themes: (
 			}
 			.themePreview {
 				img {
-					border: 5px solid map-get($map, "border-theme-preview-img");
+					border: 3px solid map-get($map, "border-theme-preview-img");
 				}
 				&.selectedTheme {
 					img {
-						border: 5px solid map-get($map, "border-theme-preview-img-selected");
+						border: 3px solid map-get($map, "border-theme-preview-img-selected");
 					}
 				}
 			}

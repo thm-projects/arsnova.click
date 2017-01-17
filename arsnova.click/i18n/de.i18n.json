@@ -164,28 +164,28 @@
         "continue": "Fortfahren?"
       },
       "connection_status": {
-        "title": "Verbindungsstatus",
+        "title": "Verbindung",
         "show_result": "Details",
         "pending": "Prüfe ...",
         "finished_with_errors": "Mit Fehlern beendet",
         "finished_with_warnings": "Mit Warnungen beendet",
         "finished_without_warnings": "Erfolgreich",
         "websocket_status": {
-          "connected": "Verbunden",
-          "disconnected": "Offline"
+          "connected": "verbunden",
+          "disconnected": "offline"
         },
         "localStorage_status": {
-          "writable": "Beschreibbar",
-          "non_writable": "Nicht beschreibbar"
+          "writable": "beschreibbar",
+          "non_writable": "nicht beschreibbar"
         },
         "sessionStorage_status": {
-          "writable": "Beschreibbar",
-          "non_writable": "Nicht beschreibbar"
+          "writable": "beschreibbar",
+          "non_writable": "nicht beschreibbar"
         },
         "dbConnection_status": {
-          "very_slow": "Sehr langsam",
-          "slow": "Langsam",
-          "ok": "Gut"
+          "very_slow": "sehr langsam",
+          "slow": "langsam",
+          "ok": "gut"
         }
       },
       "aria_description": {
@@ -201,7 +201,7 @@
       "correct": "Richtig",
       "wrong": "Falsch",
       "preview": "",
-      "show_answer_content_on_buttons": "Soll auf den Abstimmungsbuttons der Inhalt der Antwort angezeigt werden?",
+      "show_answer_content_on_buttons": "Soll auf den Abstimmungsbuttons die Antwort angezeigt werden?",
       "multiple_selection_survey": "Sollen mehrere Antwortoptionen ausgewählt werden können?",
       "emoji_info": "Du kannst auch eines dieser <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis (externe Webseite!)</a> in deine Antworten einbetten <img style='width:30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/> <br/>Klicke auf der Webseite einfach auf das jeweilige Emoji und füge es in die Antwort ein.",
       "description": {
@@ -250,7 +250,7 @@
       "enter_nickname": "Gib dir einen Nicknamen",
       "enter_nickname_here": "Gib deinen Nick ein",
       "nickname_na_popup": "Dieser Name ist nicht verfügbar!",
-      "nickname_blacklist_popup": "Dieser Name ist nicht zulässig!",
+      "nickname_blacklist_popup": "Dieser Name ist unzulässig!",
       "nickname_too_long": "Der Name ist zu lang",
       "nickname_too_short": "Der Name ist zu kurz",
       "no_selectable_nick_available": {
@@ -258,7 +258,7 @@
         "2": "Eine Teilnahme am Quiz ist nicht möglich."
       },
       "description": {
-        "nickname_input": "Hier kannst Du dir einen Namen geben, der in der Quiz-Lobby und in der Rangliste angezeigt wird.",
+        "nickname_input": "Hier kannst Du dir einen Namen geben, der in der Quiz Lobby und in der Rangliste angezeigt wird.",
         "choose_selectable_nick": "Du kannst aus dieser Liste einen Nicknamen auswählen."
       }
     },
@@ -345,7 +345,7 @@
       "correct_answer": "Richtige Antwort"
     },
     "lobby": {
-      "title": "Quiz-Lobby",
+      "title": "Quiz Lobby",
       "yes": "Ja",
       "no": "Nein",
       "ready": "Warten, dass es losgeht ...",
@@ -384,8 +384,8 @@
       "description": {
         "type_wrapper": "Hier kannst Du den Typ der Quizfrage ändern. Jeder Typ hat unterschiedliche Einstellungen. Ändere den Typ durch einen Klick auf die jeweilige Box.",
         "SingleChoiceQuestion": "Single-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen genau eine als richtig markiert werden muss.",
-        "YesNoSingleChoiceQuestion": "Ja|Nein-Fragen enthalten nur zwei Antwortopionen (Ja und Nein), von denen eine als richtig markiert werden muss.",
-        "TrueFalseSingleChoiceQuestion": "Wahr|Falsch-Fragen enthalten nur zwei Antwortopionen (Wahr und Falsch), von denen eine als richtig markiert werden muss.",
+        "YesNoSingleChoiceQuestion": "Ja-Nein-Fragen enthalten nur zwei Antwortopionen (Ja und Nein), von denen eine als richtig markiert werden muss.",
+        "TrueFalseSingleChoiceQuestion": "Wahr-Falsch-Fragen enthalten nur zwei Antwortopionen (Wahr und Falsch), von denen eine als richtig markiert werden muss.",
         "MultipleChoiceQuestion": "Multiple-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen beliebig viele (mindestens jedoch eine) als richtig markiert werden können.",
         "RangedQuestion": "Für die Schätzfrage muss eine Ganzzahl als richtig angegeben werden. Zusätzlich können Toleranzen nach oben und unten eingegeben werden.",
         "FreeTextQuestion": "Bei der Freitextfrage muss die Teilnehmerin oder der Teilnehmer einen Text eingeben. Dieser wird mit dem vorab eingegebenen Referenzwert verglichen.",
@@ -397,20 +397,20 @@
       "enter_question_here": "Gib hier den Text der Frage ein",
       "preview": "",
       "single_choice_question": "Single-Choice-Frage",
-      "single_choice_question_yes_no": "Ja|Nein-Frage",
-      "single_choice_question_true_false": "Wahr|Falsch-Frage",
+      "single_choice_question_yes_no": "Ja-Nein-Frage",
+      "single_choice_question_true_false": "Wahr-Falsch-Frage",
       "multiple_choice_question": "Multiple-Choice-Frage",
       "survey_question": "Umfrage",
       "ranged_question": "Schätzfrage",
-      "free_text_question": "Freitextfrage",
+      "free_text_question": "Kurzantwort-Frage",
       "description": {
         "preview": "Hier siehst Du, wie der Text auf einem Smartphone angezeigt wird."
       }
     },
     "quiz_manager": {
       "title": "Quiz-Manager",
-      "available_questions_title": "Verfügbare Vorlagen",
-      "added_questions_title": "Erstellte Quizfragen",
+      "available_questions_title": "Vorlagen",
+      "added_questions_title": "Quizfragen",
       "session_invalid": "Das Quiz enthält noch unvollständige Quizfragen",
       "connection_lost": "Die Verbindung zum Server wurde unterbrochen",
       "back_to_quiz_administration": "Quizverwaltung",
@@ -439,17 +439,17 @@
         "available_questions": "Hier siehst Du alle Fragetypen, aus denen Du wählen kannst. Jeder Fragetyp bietet unterschiedliche Voreinstellungen und Möglichkeiten zur Gestaltung des Quiz.",
         "added_questions": "Hier findest Du alle deine Quizfragen, die im Quiz vorhanden sind. Um eine Quizfrage dem Quiz hinzuzufügen, ziehe sie entweder aus dem linken Stapel hierher oder klicke im linken Stapel auf die jeweilige Quizfrage. Mit einem Klick auf die eingefügte Frage kannst Du die Inhalte der Quizfrage einstellen.",
         "back_button": "Du kannst jederzeit zurückgehen. Das Quiz wird beim Eingeben sofort gespeichert.",
-        "forward_button": "Sofern das Quiz gültig ist und eine Verbindung zum Server besteht, kannst Du zur Quiz-Lobby gehen und das Quiz eröffnen."
+        "forward_button": "Sofern das Quiz gültig ist und eine Verbindung zum Server besteht, kannst Du zur Quiz Lobby gehen und das Quiz eröffnen."
       }
     },
     "quiz_summary": {
       "title": "Zusammenfassung",
       "quiz_name": "Quizname",
-      "quiz_url": "URL",
-      "question_amount": "Anzahl Fragen",
-      "validation_question_group": "Validierung des gesamten Quiz",
-      "successful": "Erfolgreich",
-      "failed": "Fehlgeschlagen",
+      "quiz_url": "Link",
+      "question_amount": "Fragen",
+      "validation_question_group": "Status",
+      "successful": "valide",
+      "failed": "noch unvollständig",
       "correct": "Richtig",
       "wrong": "Falsch",
       "question": "Frage",
@@ -466,7 +466,7 @@
       "minute_plural": "Minuten",
       "hour": "Stunde",
       "hour_plural": "Stunden",
-      "validation": "Validierung",
+      "validation": "Status",
       "validation_errors": {
         "types": {
           "question": "Frage",
@@ -491,8 +491,8 @@
       "no_selected_nicks": "Keine Nicknamen vorgegeben. Alle Namen sind erlaubt.",
       "hide_selected_nicks": "Verberge Nicknamen",
       "show_selected_nicks": "Zeige Nicknamen",
-      "isRestrictingRudeNicks": "Unangemessene Nicknamen blockieren",
-      "isRestrictingToCAS": "Teilnehmer/innen müssen sich anmelden",
+      "isRestrictingRudeNicks": "Unangemessene Nicknamen blockieren?",
+      "isRestrictingToCAS": "Anmeldung erforderlich?",
       "true": "Ja",
       "false": "Nein",
       "description": {
@@ -522,7 +522,7 @@
         },
         "black_beauty": {
           "name" : "Black Beauty (beamertauglich)",
-          "description": "Dunkel, dunkler und noch dunkler."
+          "description": "Akkufreundlich."
         },
         "living_room": {
           "name" : "Wohnzimmer",
@@ -609,11 +609,11 @@
       "info_content": "Du kannst Text mit <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> auszeichnen. Die am häufigsten verwendeten Markdown-Optionen werden in Form von Schaltflächen über dem Eingabefeld angeboten. Zudem unterstützt arsnova.click <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown.</a>"
     },
     "sound": {
-      "running_music": "Countdown (Laufend)",
-      "lobby_music": "Quiz-Lobby",
+      "running_music": "Countdown (laufend)",
+      "lobby_music": "Quiz Lobby",
       "finish_music": "Countdown (Ende)",
       "running_music_detailed": "Sound während des Countdowns",
-      "lobby_music_detailed": "Sound in der Quiz-Lobby",
+      "lobby_music_detailed": "Sound in der Quiz Lobby",
       "finish_music_detailed": "Sound zum Ende des Countdowns",
       "whistle": "Pfeifen",
       "silence": "Kein Ton",
@@ -634,7 +634,7 @@
         "min_range": "Minimalwert",
         "correct_value": "Richtiger Wert",
         "max_range": "Maximalwert",
-        "reference_value": "Referenzwert"
+        "reference_value": "Richtige Antwort"
       },
       "edit_session_confirmation": {
         "title": "Möchtest Du das Quiz bearbeiten?",
@@ -648,7 +648,7 @@
       },
       "return_to_lobby": {
         "title": "Warnung",
-        "text": "Wenn Du zur Quiz-Lobby zurückkehrst, werden alle bereits durchgeführten Quizrunden zurückgesetzt.",
+        "text": "Wenn Du zur Quiz Lobby zurückkehrst, werden alle bereits durchgeführten Quizrunden zurückgesetzt.",
         "continue": "Fortfahren?"
       },
       "error": {

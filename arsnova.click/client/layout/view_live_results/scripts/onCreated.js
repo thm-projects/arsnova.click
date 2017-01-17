@@ -23,11 +23,7 @@ import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
 import * as localData from "/lib/local_storage.js";
 
 Template.liveResults.onCreated(function () {
-	if (!Session.get("questionGroup")) {
-		if (localData.containsHashtag(Router.current().params.quizName)) {
-			Session.set("questionGroup", new DefaultQuestionGroup(QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName})));
-		} else {
-			Session.set("questionGroup", new DefaultQuestionGroup($.extend({isClient: true}, QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName}))));
-		}
+	if (!Session.get("questionGroup") && localData.containsHashtag(Router.current().params.quizName)) {
+		Session.set("questionGroup", new DefaultQuestionGroup(QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName})));
 	}
 });

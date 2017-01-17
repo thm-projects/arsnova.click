@@ -122,7 +122,7 @@ function addLiveresultsChangeEvents() {
 				const questionElement = QuestionGroupCollection.findOne().questionList[value.questionIndex];
 				const isReadingConfirmationEnabled = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled;
 				if (isReadingConfirmationEnabled &&
-					questionElement.type === "RangedQuestion" || questionElement.type === "FreeTextQuestion") {
+					(questionElement.type === "RangedQuestion" || questionElement.type === "FreeTextQuestion")) {
 					return;
 				}
 				Session.set("countdownInitialized", true);

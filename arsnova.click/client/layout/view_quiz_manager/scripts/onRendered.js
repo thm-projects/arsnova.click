@@ -28,15 +28,23 @@ Template.quizManager.onRendered(function () {
 				forwardButton.popover({
 					title: TAPi18n.__("view.quiz_manager.connection_lost"),
 					trigger: 'manual',
-					placement: 'right'
+					placement: 'top'
 				});
 				forwardButton.popover("show");
 			} else if (!valid) {
-				forwardButton.popover({
-					title: TAPi18n.__("view.quiz_manager.session_invalid"),
-					trigger: 'manual',
-					placement: 'right'
-				});
+				if (Session.get("questionGroup").getQuestionList().length > 0) {
+					forwardButton.popover({
+						title: TAPi18n.__("view.quiz_manager.session_invalid"),
+						trigger: 'manual',
+						placement: 'top'
+					});
+				} else {
+					forwardButton.popover({
+						title: TAPi18n.__("view.quiz_manager.session_empty"),
+						trigger: 'manual',
+						placement: 'top'
+					});
+				}
 				forwardButton.popover("show");
 			}
 			popoverTimeout = Meteor.setTimeout(function () {
@@ -117,21 +125,27 @@ Template.quizManager.onRendered(function () {
 	this.autorun(function () {
 		footerElements.removeFooterElements();
 		footerElements.addFooterElement(footerElements.footerElemHome);
+		footerElements.addFooterElement(footerElements.footerElemProductTour);
 		if (Meteor.status().connected) {
 			footerElements.addFooterElement(footerElements.footerElemNicknames);
 		}
 		headerLib.calculateHeaderSize();
 		headerLib.calculateTitelHeight();
 	}.bind(this));
-	getTooltipForRoute();
+	if (localStorage.getItem("showProductTour") !== "false") {
+		getTooltipForRoute();
+	}
 	$(".contentPosition").scrollTop(0);
 });
 
 Template.quizManagerDetails.onRendered(function () {
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
+	footerElements.addFooterElement(footerElements.footerElemProductTour);
 	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
-	getTooltipForRoute();
+	if (localStorage.getItem("showProductTour") !== "false") {
+		getTooltipForRoute();
+	}
 	$(".contentPosition").scrollTop(0);
 });

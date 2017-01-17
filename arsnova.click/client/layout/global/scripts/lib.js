@@ -189,6 +189,7 @@ export function getTooltipForRoute(overridePreference = false) {
 			localStorage.setItem("intro_state", JSON.stringify(introState));
 		}).oncomplete(function () {
 			introState[route].completed = true;
+			hasStartedIntroJs = false;
 			localStorage.setItem("intro_state", JSON.stringify(introState));
 		});
 		const alreadyVisitedElements = Object.keys(introState[route].elements).length;
@@ -199,3 +200,18 @@ export function getTooltipForRoute(overridePreference = false) {
 		}
 	});
 }
+
+/**
+ * Resets a given input[type=file] field
+ * @see http://stackoverflow.com/a/22506053
+ * @param ctrl The input field
+ */
+export function clearFileInput(ctrl) {
+	try {
+		ctrl.value = null;
+	} catch (ex) { }
+	if (ctrl.value) {
+		ctrl.parentNode.replaceChild(ctrl.cloneNode(true), ctrl);
+	}
+}
+

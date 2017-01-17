@@ -130,5 +130,18 @@ Meteor.methods({
 				}
 			}
 		});
+	},
+	"SessionConfiguration.setShowResponseProgress": function (hashtag, showResponseProgress) {
+		SessionConfigurationCollection.update({hashtag: hashtag}, {$set: {"showResponseProgress": showResponseProgress}});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "SessionConfiguration.setShowResponseProgress",
+					value: {
+						showResponseProgress: showResponseProgress
+					}
+				}
+			}
+		});
 	}
 });

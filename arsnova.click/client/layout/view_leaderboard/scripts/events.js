@@ -18,9 +18,6 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
-import {ResponsesCollection} from '/lib/responses/collection.js';
-import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import * as localData from '/lib/local_storage.js';
 import {generateExportData} from './lib.js';
 
 Template.leaderboardFooterNavButtons.events({
@@ -31,24 +28,7 @@ Template.leaderboardFooterNavButtons.events({
 		Session.set("responsesCountOverride", false);
 	},
 	'click #js-btn-backToResults': ()=> {
-		const goToResults = function () {
-			Session.set("showGlobalRanking", false);
-			Router.go("/" + Router.current().params.quizName + "/results");
-		};
-		if (localData.containsHashtag(Router.current().params.quizName) && !Session.get("hasDownloadedLeaderboardData") && ResponsesCollection.findOne()) {
-			new Splashscreen({
-				autostart: true,
-				templateName: 'leaderboardDataReminderSplashscreen',
-				closeOnButton: '#closeDialogButton, #returnToResults, .splashscreen-container-close>.glyphicon-remove',
-				onRendered: function (template) {
-					template.templateSelector.find("#returnToResults").on("click", function () {
-						goToResults();
-					});
-				}
-			});
-		} else {
-			goToResults();
-		}
+		Router.go("/" + Router.current().params.quizName + "/results");
 	},
 	'click #downloadData': (event)=> {
 		Session.set("hasDownloadedLeaderboardData", true);

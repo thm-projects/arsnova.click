@@ -25,9 +25,11 @@ import {DefaultQuestionGroup} from '/lib/questions/questiongroup_default.js';
 import * as localData from '/lib/local_storage.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
 import * as routerLib from '/client/routes.js';
+import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
+import * as globalLib from '/client/layout/global/scripts/lib.js';
 import {countdownRunningSound} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
+import * as footerElements from './lib.js';
 
 const clickEvents = {
 	"click #about": function () {
@@ -109,117 +111,114 @@ const clickEvents = {
 	"click #import": function () {
 		const importButton = $('.js-import-input-home');
 		importButton.click();
-		importButton[0].value = null;
-		importButton.on("change", function () {
-			const fileList = importButton[0].files;
-			const fileReader = new FileReader();
-			fileReader.onload = function () {
-				let asJSON = null;
-				try {
-					asJSON = $.parseJSON(fileReader.result);
-				} catch (ex) {
-					new ErrorSplashscreen({
-						autostart: true,
-						errorMessage: "plugins.splashscreen.error.error_messages.invalid_data"
-					});
-					return;
-				}
-				let questionInstance = null;
+		const fileReader = new FileReader();
+		fileReader.onload = function () {
+			let asJSON = null;
+			try {
+				asJSON = $.parseJSON(fileReader.result);
+			} catch (ex) {
+				new ErrorSplashscreen({
+					autostart: true,
+					errorMessage: "plugins.splashscreen.error.error_messages.invalid_data"
+				});
+				return;
+			}
+			let questionInstance = null;
 
-				if (asJSON.type === "DefaultQuestionGroup") {
-					questionInstance = new DefaultQuestionGroup(asJSON);
+			if (asJSON.type === "DefaultQuestionGroup") {
+				questionInstance = new DefaultQuestionGroup(asJSON);
+			} else {
+				throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
+			}
+
+			if (!HashtagsCollection.findOne({hashtag: questionInstance.getHashtag()})) {
+				Meteor.call('SessionConfiguration.addConfig', questionInstance.getConfiguration().serialize());
+				Meteor.call('HashtagsCollection.addHashtag', {
+					privateKey: localData.getPrivateKey(),
+					hashtag: questionInstance.getHashtag()
+				});
+				localData.addHashtag(questionInstance);
+				Meteor.call('EventManagerCollection.add', questionInstance.getHashtag());
+				if (Router.current().route.path() === "/hashtagmanagement") {
+					localData.ownHashtagsTracker.changed();
 				} else {
-					throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
+					Router.go("/hashtagmanagement");
 				}
-
-				if (!HashtagsCollection.findOne({hashtag: questionInstance.getHashtag()})) {
-					Meteor.call('SessionConfiguration.addConfig', questionInstance.getConfiguration().serialize());
-					Meteor.call('HashtagsCollection.addHashtag', {
-						privateKey: localData.getPrivateKey(),
+			} else {
+				new Splashscreen({
+					autostart: true,
+					templateName: "renameHashtagSplashscreen",
+					dataContext: {
 						hashtag: questionInstance.getHashtag()
-					}, function (err) {
-						if (err) {
-							new ErrorSplashscreen({
-								autostart: true,
-								errorMessage: "plugins.splashscreen.error.error_messages.invalid_data"
-							});
-							return;
-						}
-						localData.addHashtag(questionInstance);
-						if (Router.current().route.path() === "/hashtagmanagement") {
-							location.reload();
-						} else {
-							Router.go("/hashtagmanagement");
-						}
-					});
-				} else {
-					new Splashscreen({
-						autostart: true,
-						templateName: "renameHashtagSplashscreen",
-						closeOnButton: "#js-btn-closeRenameHashtag, #js-btn-importSession, .splashscreen-container-close>.glyphicon-remove",
-						onRendered: function () {
-							$('#js-btn-importSession').on('click', function () {
-								const hashtag = $("#hashtagRename-input-field").val().trim();
-								const hashtagDoc = HashtagsCollection.findOne({hashtag: hashtag});
-								if (hashtagDoc) {
-									return;
-								}
+					},
+					closeOnButton: "#js-btn-closeRenameHashtag, #js-btn-importSession, .splashscreen-container-close>.glyphicon-remove",
+					onRendered: function () {
+						$('#js-btn-importSession').on('click', function () {
+							const hashtag = $("#hashtagRename-input-field").val().trim();
+							const hashtagDoc = HashtagsCollection.findOne({hashtag: hashtag});
+							if (hashtagDoc) {
+								return;
+							}
 
-								switch (asJSON.type) {
-									case "DefaultQuestionGroup":
-										questionInstance = new DefaultQuestionGroup(asJSON);
-										break;
-									default:
-										throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
-								}
+							switch (asJSON.type) {
+								case "DefaultQuestionGroup":
+									questionInstance = new DefaultQuestionGroup(asJSON);
+									break;
+								default:
+									throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
+							}
 
-								const oldSessionName = questionInstance.getHashtag();
-								questionInstance.setHashtag(hashtag);
-								Meteor.call('SessionConfiguration.addConfig', questionInstance.getConfiguration().serialize());
-								Meteor.call('HashtagsCollection.addHashtag', {
-									privateKey: localData.getPrivateKey(),
-									hashtag: questionInstance.getHashtag()
-								});
-								localData.addHashtag(questionInstance);
-								Meteor.call('EventManagerCollection.add', hashtag);
-								if (oldSessionName === "ImportFromARSnova") {
-									sessionStorage.setItem("overrideValidQuestionRedirect", true);
-									hashtagLib.connectEventManager(hashtag);
-								} else if (Router.current().route.path() === "/hashtagmanagement") {
-									location.reload();
-								} else {
-									Router.go("/hashtagmanagement");
-								}
+							const oldSessionName = questionInstance.getHashtag();
+							questionInstance.setHashtag(hashtag);
+							Meteor.call('SessionConfiguration.addConfig', questionInstance.getConfiguration().serialize());
+							Meteor.call('HashtagsCollection.addHashtag', {
+								privateKey: localData.getPrivateKey(),
+								hashtag: questionInstance.getHashtag()
 							});
-							$('#hashtagRename-input-field').on('input', function (event) {
-								const inputHashtag = $(event.target).val();
-								if (["?", "/", "\\"].some(function (v) { return inputHashtag.indexOf(v) >= 0; })) {
-									$("#js-btn-importSession").attr("disabled", "disabled");
-									return;
-								}
-								if (hashtagLib.trimIllegalChars(inputHashtag).length === 0) {
-									$("#js-btn-importSession").attr("disabled", "disabled");
-									return;
-								}
-								const hashtagDoc = HashtagsCollection.findOne({hashtag: inputHashtag});
-								if (!hashtagDoc) {
-									$("#js-btn-importSession").removeAttr("disabled");
-								} else {
-									$("#js-btn-importSession").attr("disabled", "disabled");
-								}
-							}).on('keydown', function (event) {
-								if (event.keyCode === 13 && !$('#js-btn-importSession').is(':disabled')) {
-									$('#js-btn-importSession').click();
-								}
-							});
-						}
-					});
-				}
-			};
+							localData.addHashtag(questionInstance);
+							Meteor.call('EventManagerCollection.add', hashtag);
+							if (oldSessionName === "ImportFromARSnova") {
+								sessionStorage.setItem("overrideValidQuestionRedirect", true);
+								hashtagLib.connectEventManager(hashtag);
+							} else if (Router.current().route.path() === "/hashtagmanagement") {
+								localData.ownHashtagsTracker.changed();
+							} else {
+								Router.go("/hashtagmanagement");
+							}
+						});
+						$('#hashtagRename-input-field').on('input', function (event) {
+							const inputHashtag = $(event.target).val();
+							if (["?", "/", "\\"].some(function (v) { return inputHashtag.indexOf(v) >= 0; })) {
+								$("#js-btn-importSession").attr("disabled", "disabled");
+								return;
+							}
+							if (hashtagLib.trimIllegalChars(inputHashtag).length === 0) {
+								$("#js-btn-importSession").attr("disabled", "disabled");
+								return;
+							}
+							const hashtagDoc = HashtagsCollection.findOne({hashtag: inputHashtag});
+							if (!hashtagDoc) {
+								$("#js-btn-importSession").removeAttr("disabled");
+							} else {
+								$("#js-btn-importSession").attr("disabled", "disabled");
+							}
+						}).on('keydown', function (event) {
+							if (event.keyCode === 13 && !$('#js-btn-importSession').is(':disabled')) {
+								$('#js-btn-importSession').click();
+							}
+						});
+					}
+				});
+			}
+		};
+		importButton.change(function () {
+			const fileList = importButton[0].files;
 			for (let i = 0; i < fileList.length; i++) {
 				fileReader.readAsText(fileList[i], "UTF-8");
 			}
+			importButton.val(null);
 		});
+		globalLib.clearFileInput(importButton[0]);
 	},
 	'click #sound': function () {
 		new Splashscreen({
@@ -300,6 +299,30 @@ const clickEvents = {
 		Meteor.call("SessionConfiguration.setReadingConfirmationEnabled",
 			questionGroup.getHashtag(),
 			questionGroup.getConfiguration().getReadingConfirmationEnabled()
+		);
+	},
+	"click #product-tour": function () {
+		if (localStorage.getItem("showProductTour") !== "false") {
+			localStorage.setItem("showProductTour", false);
+		} else {
+			localStorage.setItem("showProductTour", true);
+			localStorage.removeItem("intro_state");
+			globalLib.getTooltipForRoute();
+		}
+		footerElements.productTourTracker.changed();
+	},
+	"click #response-progress": function () {
+		const questionGroup = Session.get("questionGroup");
+		if (questionGroup.getConfiguration().getShowResponseProgress()) {
+			questionGroup.getConfiguration().setShowResponseProgress(false);
+		} else {
+			questionGroup.getConfiguration().setShowResponseProgress(true);
+		}
+		Session.set("questionGroup", questionGroup);
+		localData.addHashtag(questionGroup);
+		Meteor.call("SessionConfiguration.setShowResponseProgress",
+			questionGroup.getHashtag(),
+			questionGroup.getConfiguration().getShowResponseProgress()
 		);
 	}
 };

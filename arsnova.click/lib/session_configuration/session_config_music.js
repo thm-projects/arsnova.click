@@ -35,15 +35,15 @@ export class MusicSessionConfiguration {
 		this[hashtag] = options.hashtag;
 		this[isUsingGlobalVolume] = typeof options.music.isUsingGlobalVolume === "undefined" ? true : options.music.isUsingGlobalVolume;
 
-		this[lobbyEnabled] = typeof options.music.lobbyEnabled === "undefined" ? true : options.music.lobbyEnabled;
+		this[lobbyEnabled] = typeof options.music.lobbyEnabled === "undefined" ? false : options.music.lobbyEnabled;
 		this[lobbyTitle] = options.music.lobbyTitle || "Song1";
 		this[lobbyVolume] = options.music.lobbyVolume || 80;
 
-		this[countdownRunningEnabled] = typeof options.music.countdownRunningEnabled === "undefined" ? true : options.music.countdownRunningEnabled;
+		this[countdownRunningEnabled] = typeof options.music.countdownRunningEnabled === "undefined" ? false : options.music.countdownRunningEnabled;
 		this[countdownRunningTitle] = options.music.countdownRunningTitle || "Song1";
 		this[countdownRunningVolume] = options.music.countdownRunningVolume || 80;
 
-		this[countdownEndEnabled] = typeof options.music.countdownEndEnabled === "undefined" ? true : options.music.countdownEndEnabled;
+		this[countdownEndEnabled] = typeof options.music.countdownEndEnabled === "undefined" ? false : options.music.countdownEndEnabled;
 		this[countdownEndTitle] = options.music.countdownEndTitle || "Song1";
 		this[countdownEndVolume] = options.music.countdownEndVolume || 80;
 	}

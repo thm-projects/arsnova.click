@@ -44,6 +44,8 @@
         "qr_code": "QR",
         "nicknames": "Nombres de usuario",
         "edit_quiz": "Editar",
+        "show_product_tour": "Tour del producto",
+        "show_response_progress": "Progreso",
         "remove": "Retirar"
       },
       "about": {
@@ -412,7 +414,9 @@
       "title": "Quiz Manager",
       "available_questions_title": "Preguntas disponibles",
       "added_questions_title": "Preguntas creadas",
+      "no_added_questions": "No ha agregado ninguna pregunta.",
       "session_invalid": "El cuestionario contiene preguntas incompletas",
+      "session_empty": "El cuestionario no contiene preguntas",
       "connection_lost": "Se pierde la conexión con el servidor",
       "back_to_quiz_administration": "Administración del cuestionario",
       "details": {
@@ -664,6 +668,7 @@
           "update_failed": "Error al actualizar la pregunta.",
           "session_exists": "Este cuestionario ya existe.",
           "session_exists_warning": "El nombre de este cuestionario ya existe.",
+          "session_exists_arsnova_import": "Introduce un nombre para tu prueba de arsnova:",
           "session_exists_new": "Ingresa uno nuevo:",
           "session_not_exists": "¡Esta sesión no existe!",
           "hashtag_exists": "¡El nombre del cuestionario ya existe!",

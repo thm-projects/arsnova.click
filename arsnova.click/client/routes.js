@@ -180,6 +180,7 @@ Router.route('/', {
 });
 
 Router.route('/hashtagmanagement', {
+	controller: NonBlockingRouteController,
 	action: function () {
 		this.render('footerNavButtons', {
 			to: 'footer.navigation',

@@ -20,12 +20,15 @@ import * as localData from '/lib/local_storage.js';
 
 Template.hashtagManagement.helpers({
 	serverHashtags: function () {
+		localData.ownHashtagsTracker.depend();
 		return localData.getAllHashtags();
 	},
 	isLastItem: function (index) {
+		localData.ownHashtagsTracker.depend();
 		return index === localData.getAllHashtags().length - 1;
 	},
 	noHashtagsAvailable: function () {
+		localData.ownHashtagsTracker.depend();
 		return localData.getAllHashtags().length === undefined || localData.getAllHashtags().length === 0;
 	}
 });

@@ -75,11 +75,6 @@ Template.memberlist.onRendered(function () {
 	$('.navbar-footer-placeholder').hide();
 	$('.navbar-footer').show();
 
-	/* Auto-Open the QR-Code Window */
-	setTimeout(function () {
-		$('#qr-code').click();
-	}, 100);
-
 	$(document).on('keyup',function (event) {
 		if (event.keyCode === 27) {
 			$('.qr-code-container').hide();

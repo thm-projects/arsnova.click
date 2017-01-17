@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {MusicSessionConfiguration} from './session_config_music.js';
 import {NickSessionConfiguration} from './session_config_nicks.js';
 
@@ -23,6 +24,7 @@ const music = Symbol("music");
 const nicks = Symbol("nicks");
 const theme = Symbol("theme");
 const readingConfirmationEnabled = Symbol("readingConfirmationEnabled");
+const showResponseProgress = Symbol("showResponseProgress");
 
 export class AbstractSessionConfiguration {
 	constructor (options) {
@@ -51,8 +53,9 @@ export class AbstractSessionConfiguration {
 		this[hashtag] = options.hashtag;
 		this[music] = options.music;
 		this[nicks] = options.nicks;
-		this[theme] = options.theme || "theme-arsnova-dot-click-contrast";
-		this[readingConfirmationEnabled] = options.readingConfirmationEnabled !== false;
+		this[theme] = options.theme || Meteor.settings.public.defaultTheme;
+		this[readingConfirmationEnabled] = options.readingConfirmationEnabled === true;
+		this[showResponseProgress] = options.showResponseProgress === true;
 	}
 
 	serialize () {
@@ -61,7 +64,8 @@ export class AbstractSessionConfiguration {
 			music: this.getMusicSettings().serialize(),
 			nicks: this.getNickSettings().serialize(),
 			theme: this.getTheme(),
-			readingConfirmationEnabled: this.getReadingConfirmationEnabled()
+			readingConfirmationEnabled: this.getReadingConfirmationEnabled(),
+			showResponseProgress: this.getShowResponseProgress()
 		};
 	}
 
@@ -70,7 +74,8 @@ export class AbstractSessionConfiguration {
 				this.getMusicSettings().equals(value.getMusicSettings()) &&
 				this.getNickSettings().equals(value.getNickSettings()) &&
 				this.getTheme() === value.getTheme() &&
-				this.getReadingConfirmationEnabled() === value.getReadingConfirmationEnabled();
+				this.getReadingConfirmationEnabled() === value.getReadingConfirmationEnabled() &&
+				this.getShowResponseProgress() === value.getShowResponseProgress();
 	}
 
 	/**
@@ -128,6 +133,20 @@ export class AbstractSessionConfiguration {
 	}
 
 	setReadingConfirmationEnabled (value) {
+		if (typeof value !== "boolean") {
+			throw new Error("Invalid argument for AbstractSessionConfiguration.setReadingConfirmationEnabled");
+		}
 		this[readingConfirmationEnabled] = value;
+	}
+
+	getShowResponseProgress () {
+		return this[showResponseProgress];
+	}
+
+	setShowResponseProgress (value) {
+		if (typeof value !== "boolean") {
+			throw new Error("Invalid argument for AbstractSessionConfiguration.setShowResponseProgress");
+		}
+		this[showResponseProgress] = value;
 	}
 }

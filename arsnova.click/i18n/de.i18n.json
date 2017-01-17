@@ -44,6 +44,8 @@
         "qr_code": "QR",
         "nicknames": "Nicknamen",
         "edit_quiz": "Bearbeiten",
+        "show_product_tour": "Produktführung",
+        "show_response_progress": "Fortschritt",
         "remove": "Entfernen"
       },
       "about": {
@@ -412,7 +414,9 @@
       "title": "Quiz-Manager",
       "available_questions_title": "Vorlagen",
       "added_questions_title": "Quizfragen",
+      "no_added_questions": "Du hast bisher keine Quizfragen hinzugefügt.",
       "session_invalid": "Das Quiz enthält noch unvollständige Quizfragen",
+      "session_empty": "Das Quiz enthält noch keine Quizfragen",
       "connection_lost": "Die Verbindung zum Server wurde unterbrochen",
       "back_to_quiz_administration": "Quizverwaltung",
       "details": {
@@ -664,6 +668,7 @@
           "update_failed": "Es ist ein Fehler bei der Aktualisierung Deiner Frage aufgetreten.",
           "session_exists": "Dieses Quiz existiert bereits!",
           "session_exists_warning": "Der Name dieses Quiz ist bereits vergeben.",
+          "session_exists_arsnova_import": "Bitte gib für dein arsnova Quiz einen eindeutigen Namen ein:",
           "session_exists_new": "Gib einen neuen ein:",
           "session_not_exists": "Dieses Quiz existiert nicht!",
           "hashtag_exists": "Dieser Quizname existiert bereits!",

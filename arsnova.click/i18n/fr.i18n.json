@@ -44,6 +44,8 @@
         "qr_code": "QR",
         "nicknames": "Pseudos",
         "edit_quiz": "Modifier",
+        "show_product_tour": "Visite du produit",
+        "show_response_progress": "La progression",
         "remove": "Retirer"
       },
       "about": {
@@ -412,7 +414,9 @@
       "title": "Gestionnaire de Quiz",
       "available_questions_title": "Questions disponibles",
       "added_questions_title": "Questions créées",
+      "no_added_questions": "Vous ne l'avez pas encore ajouté des questions.",
       "session_invalid": "Le quiz contient des questions incomplètes",
+      "session_empty": "Le quiz ne contient aucune question",
       "connection_lost": "La connexion au serveur est perdue",
       "back_to_quiz_administration": "Administration de quiz",
       "details": {
@@ -664,6 +668,7 @@
           "update_failed": "Il y a eu une erreur pendant l'actualisation de ta question.",
           "session_exists": "Ce quiz existe déjà!",
           "session_exists_warning": "Le nom de ce quiz est déjà utilisé!",
+          "session_exists_arsnova_import": "Veuillez entrer un nom pour votre quiz arsnova:",
           "session_exists_new": "Donne un nouveau:",
           "session_not_exists": "Ce quiz n’existe pas!",
           "hashtag_exists": "Ce nom de quiz existe déjà!",

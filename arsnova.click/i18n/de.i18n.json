@@ -159,7 +159,7 @@
         "continue": "Fortfahren?"
       },
       "exit_session_confirmation": {
-        "title": "Möchtest du das Quiz verlassen?",
+        "title": "Willst du das Quiz verlassen?",
         "text": "Du wirst aus dem Quiz entfernt und dein gesamter Fortschritt wird gelöscht.",
         "continue": "Fortfahren?"
       },
@@ -201,9 +201,9 @@
       "correct": "Richtig",
       "wrong": "Falsch",
       "preview": "",
-      "show_answer_content_on_buttons": "Soll auf den Abstimmungsbuttons die Antwort angezeigt werden?",
-      "multiple_selection_survey": "Sollen mehrere Antwortoptionen ausgewählt werden können?",
-      "emoji_info": "Du kannst auch eines dieser <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis (externe Webseite!)</a> in deine Antworten einbetten <img style='width:30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/> <br/>Klicke auf der Webseite einfach auf das jeweilige Emoji und füge es in die Antwort ein.",
+      "show_answer_content_on_buttons": "Soll auf den Abstimmbuttons die Antwort stehen?",
+      "multiple_selection_survey": "Sollen mehrere Optionen auswählbar sein?",
+      "emoji_info": "Du kannst auch <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis von dieser Webseite</a> einfügen! <img style='width:30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/>",
       "description": {
         "default_answer_row": "Ziehe diesen Block in die Liste der erstellten Antwortoptionen, um eine neue Antwort einzufügen.",
         "added_answers": "Hier siehst Du alle bereits erstellten Antwortoptionen dieser Quizfrage. Du kannst die Anordnung der Antworten ändern, indem Du die Liste per Drag & Drop sortierst.",
@@ -383,13 +383,13 @@
       "currentType": "Aktueller Typ der Quizfrage:",
       "description": {
         "type_wrapper": "Hier kannst Du den Typ der Quizfrage ändern. Jeder Typ hat unterschiedliche Einstellungen. Ändere den Typ durch einen Klick auf die jeweilige Box.",
-        "SingleChoiceQuestion": "Single-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen genau eine als richtig markiert werden muss.",
-        "YesNoSingleChoiceQuestion": "Ja-Nein-Fragen enthalten nur zwei Antwortopionen (Ja und Nein), von denen eine als richtig markiert werden muss.",
-        "TrueFalseSingleChoiceQuestion": "Wahr-Falsch-Fragen enthalten nur zwei Antwortopionen (Wahr und Falsch), von denen eine als richtig markiert werden muss.",
-        "MultipleChoiceQuestion": "Multiple-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen beliebig viele (mindestens jedoch eine) als richtig markiert werden können.",
-        "RangedQuestion": "Für die Schätzfrage muss eine Ganzzahl als richtig angegeben werden. Zusätzlich können Toleranzen nach oben und unten eingegeben werden.",
-        "FreeTextQuestion": "Bei der Freitextfrage muss die Teilnehmerin oder der Teilnehmer einen Text eingeben. Dieser wird mit dem vorab eingegebenen Referenzwert verglichen.",
-        "SurveyQuestion": "Umfragen enthalten beliebig viele Antwortoptionen, die nicht bewertet werden."
+        "SingleChoiceQuestion": "Single-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen genau eine als richtig markiert sein muss.",
+        "YesNoSingleChoiceQuestion": "Ja-Nein-Fragen enthalten nur zwei Antwortopionen (Ja und Nein), von denen eine als richtig markiert sein muss.",
+        "TrueFalseSingleChoiceQuestion": "Wahr-Falsch-Fragen enthalten nur zwei Antwortopionen (Wahr und Falsch), von denen eine als richtig markiert sein muss.",
+        "MultipleChoiceQuestion": "Multiple-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen beliebig viele (mindestens jedoch eine) als richtig markiert sein können.",
+        "RangedQuestion": "Für die Schätzfrage muss eine Ganzzahl als richtig angegeben werden. Zusätzlich können Toleranzen nach oben und unten festgelegt werden.",
+        "FreeTextQuestion": "Bei der Kurzantwort-Frage müssen die Teilnehmenden einen Text eingeben. Dieser wird mit dem Referenzwert verglichen.",
+        "SurveyQuestion": "Umfragen enthalten beliebig viele Antwortoptionen, die nicht bewertet werden. Sie können vom Typ Single-Choice oder Multiple-Choice sein."
       }
     },
     "questions": {
@@ -488,10 +488,10 @@
       "edit_quiz": "Quiz bearbeiten",
       "start_quiz": "Quiz starten",
       "selected_nicks": "Vorgegebene Nicknamen",
-      "no_selected_nicks": "Keine Nicknamen vorgegeben. Alle Namen sind erlaubt.",
+      "no_selected_nicks": "keine",
       "hide_selected_nicks": "Verberge Nicknamen",
       "show_selected_nicks": "Zeige Nicknamen",
-      "isRestrictingRudeNicks": "Unangemessene Nicknamen blockieren?",
+      "isRestrictingRudeNicks": "Anstößige Nicknamen blockieren?",
       "isRestrictingToCAS": "Anmeldung erforderlich?",
       "true": "Ja",
       "false": "Nein",

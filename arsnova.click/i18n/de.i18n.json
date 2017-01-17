@@ -164,7 +164,7 @@
         "continue": "Fortfahren?"
       },
       "connection_status": {
-        "title": "Verbindungsstatus",
+        "title": "Verbindung",
         "show_result": "Details",
         "pending": "Prüfe ...",
         "finished_with_errors": "Mit Fehlern beendet",
@@ -201,7 +201,7 @@
       "correct": "Richtig",
       "wrong": "Falsch",
       "preview": "",
-      "show_answer_content_on_buttons": "Soll auf den Abstimmungsbuttons der Inhalt der Antwort angezeigt werden?",
+      "show_answer_content_on_buttons": "Soll auf den Abstimmungsbuttons die Antwort angezeigt werden?",
       "multiple_selection_survey": "Sollen mehrere Antwortoptionen ausgewählt werden können?",
       "emoji_info": "Du kannst auch eines dieser <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis (externe Webseite!)</a> in deine Antworten einbetten <img style='width:30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/> <br/>Klicke auf der Webseite einfach auf das jeweilige Emoji und füge es in die Antwort ein.",
       "description": {
@@ -384,8 +384,8 @@
       "description": {
         "type_wrapper": "Hier kannst Du den Typ der Quizfrage ändern. Jeder Typ hat unterschiedliche Einstellungen. Ändere den Typ durch einen Klick auf die jeweilige Box.",
         "SingleChoiceQuestion": "Single-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen genau eine als richtig markiert werden muss.",
-        "YesNoSingleChoiceQuestion": "Ja|Nein-Fragen enthalten nur zwei Antwortopionen (Ja und Nein), von denen eine als richtig markiert werden muss.",
-        "TrueFalseSingleChoiceQuestion": "Wahr|Falsch-Fragen enthalten nur zwei Antwortopionen (Wahr und Falsch), von denen eine als richtig markiert werden muss.",
+        "YesNoSingleChoiceQuestion": "Ja-Nein-Fragen enthalten nur zwei Antwortopionen (Ja und Nein), von denen eine als richtig markiert werden muss.",
+        "TrueFalseSingleChoiceQuestion": "Wahr-Falsch-Fragen enthalten nur zwei Antwortopionen (Wahr und Falsch), von denen eine als richtig markiert werden muss.",
         "MultipleChoiceQuestion": "Multiple-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen beliebig viele (mindestens jedoch eine) als richtig markiert werden können.",
         "RangedQuestion": "Für die Schätzfrage muss eine Ganzzahl als richtig angegeben werden. Zusätzlich können Toleranzen nach oben und unten eingegeben werden.",
         "FreeTextQuestion": "Bei der Freitextfrage muss die Teilnehmerin oder der Teilnehmer einen Text eingeben. Dieser wird mit dem vorab eingegebenen Referenzwert verglichen.",
@@ -397,20 +397,20 @@
       "enter_question_here": "Gib hier den Text der Frage ein",
       "preview": "",
       "single_choice_question": "Single-Choice-Frage",
-      "single_choice_question_yes_no": "Ja|Nein-Frage",
-      "single_choice_question_true_false": "Wahr|Falsch-Frage",
+      "single_choice_question_yes_no": "Ja-Nein-Frage",
+      "single_choice_question_true_false": "Wahr-Falsch-Frage",
       "multiple_choice_question": "Multiple-Choice-Frage",
       "survey_question": "Umfrage",
       "ranged_question": "Schätzfrage",
-      "free_text_question": "Freitextfrage",
+      "free_text_question": "Kurzantwort-Frage",
       "description": {
         "preview": "Hier siehst Du, wie der Text auf einem Smartphone angezeigt wird."
       }
     },
     "quiz_manager": {
       "title": "Quiz-Manager",
-      "available_questions_title": "Verfügbare Vorlagen",
-      "added_questions_title": "Erstellte Quizfragen",
+      "available_questions_title": "Vorlagen",
+      "added_questions_title": "Quizfragen",
       "session_invalid": "Das Quiz enthält noch unvollständige Quizfragen",
       "connection_lost": "Die Verbindung zum Server wurde unterbrochen",
       "back_to_quiz_administration": "Quizverwaltung",
@@ -445,11 +445,11 @@
     "quiz_summary": {
       "title": "Zusammenfassung",
       "quiz_name": "Quizname",
-      "quiz_url": "URL",
-      "question_amount": "Anzahl Fragen",
-      "validation_question_group": "Validierung des gesamten Quiz",
-      "successful": "Erfolgreich",
-      "failed": "Fehlgeschlagen",
+      "quiz_url": "Link",
+      "question_amount": "Fragen",
+      "validation_question_group": "Status",
+      "successful": "valide",
+      "failed": "noch unvollständig",
       "correct": "Richtig",
       "wrong": "Falsch",
       "question": "Frage",
@@ -466,7 +466,7 @@
       "minute_plural": "Minuten",
       "hour": "Stunde",
       "hour_plural": "Stunden",
-      "validation": "Validierung",
+      "validation": "Status",
       "validation_errors": {
         "types": {
           "question": "Frage",
@@ -491,8 +491,8 @@
       "no_selected_nicks": "Keine Nicknamen vorgegeben. Alle Namen sind erlaubt.",
       "hide_selected_nicks": "Verberge Nicknamen",
       "show_selected_nicks": "Zeige Nicknamen",
-      "isRestrictingRudeNicks": "Unangemessene Nicknamen blockieren",
-      "isRestrictingToCAS": "Teilnehmer/innen müssen sich anmelden",
+      "isRestrictingRudeNicks": "Unangemessene Nicknamen blockieren?",
+      "isRestrictingToCAS": "Anmeldung erforderlich?",
       "true": "Ja",
       "false": "Nein",
       "description": {

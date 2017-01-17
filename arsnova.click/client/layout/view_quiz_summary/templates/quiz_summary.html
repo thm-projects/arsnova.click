@@ -7,8 +7,8 @@
                     <p role="listitem" id="quizSummarySessionUrl" data-intro="{{_ "view.quiz_summary.description.session_url"}}" aria-label="{{_ "view.quiz_summary.description.session_url"}}">{{_ "view.quiz_summary.quiz_url"}}: <span id="sessionUrl">{{getSessionUrl}}</span></p>
                     <p role="listitem">{{_ "view.quiz_summary.question_amount"}}: {{getQuestionCount}}</p>
                     <p role="listitem" id="quizSummaryQuestionGroupValidation" data-intro="{{_ "view.quiz_summary.description.question_group_validation"}}" aria-label="{{_ "view.quiz_summary.description.question_group_validation"}}">{{_ "view.quiz_summary.validation_question_group"}}: <span class="{{#if isQuestionGroupValid}}success{{else}}failed{{/if}}">{{_ getQuestionGroupValidation}}</span></p>
-                    <p role="listitem">{{_ "view.quiz_summary.isRestrictingRudeNicks"}}: {{_ getIsRestrictingRudeNicks}}</p>
-                    <p role="listitem" id="quizSummaryRestrictToCas" data-intro="{{_ "view.quiz_summary.description.restrict_to_cas"}}" aria-label="{{_ "view.quiz_summary.description.restrict_to_cas"}}">{{_ "view.quiz_summary.isRestrictingToCAS"}}: {{_ getIsRestrictingToCAS}}</p>
+                    <p role="listitem">{{_ "view.quiz_summary.isRestrictingRudeNicks"}} {{_ getIsRestrictingRudeNicks}}</p>
+                    <p role="listitem" id="quizSummaryRestrictToCas" data-intro="{{_ "view.quiz_summary.description.restrict_to_cas"}}" aria-label="{{_ "view.quiz_summary.description.restrict_to_cas"}}">{{_ "view.quiz_summary.isRestrictingToCAS"}} {{_ getIsRestrictingToCAS}}</p>
                     <p role="listitem">{{_ "view.quiz_summary.selected_nicks"}}: {{#if noSelectedNicks}}{{_ "view.quiz_summary.no_selected_nicks"}}{{else}}{{selectedNicksCount}} <span class="tabbable" id="showSelectedNicks">{{_ getShowSelectedNicksText}}</span>{{/if}}</p>
                     <p role="listitem">{{selectedNicks}}</p>
                     <hr />

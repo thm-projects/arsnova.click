@@ -153,13 +153,13 @@
           "text": "Dein Quiz mit allen Einstellungen verbleibt in diesem Browser, solange er nicht zurückgesetzt wird."
         },
         "active_quiz": {
-          "title": "Soll das Quiz beendet werden?",
+          "title": "Quiz beenden?",
           "text": "Alle Teilnehmenden werden abgemeldet. Die Rangliste wird gelöscht. Dein Quiz mit allen Einstellungen verbleibt in diesem Browser, solange er nicht zurückgesetzt wird."
         },
         "continue": "Fortfahren?"
       },
       "exit_session_confirmation": {
-        "title": "Willst du das Quiz verlassen?",
+        "title": "Quiz verlassen?",
         "text": "Du wirst aus dem Quiz entfernt und dein gesamter Fortschritt wird gelöscht.",
         "continue": "Fortfahren?"
       },
@@ -274,7 +274,7 @@
       "available_sessions": "Diese Quizze sind in Deinem Browser:",
       "session_management": "Quizze",
       "import": "Quiz importieren",
-      "delete_session": "Quiz löschen",
+      "delete_session": "Quiz löschen?",
       "delete_session_confirmation": "Soll das Quiz '<span id=\"session_name\"></span>' unwiderruflich gelöscht werden?",
       "export": "Quiz exportieren",
       "valid_question": "Gültige Quizrunde",
@@ -320,7 +320,8 @@
       "title": "Ergebnisse",
       "title_reading_confirmation": "Frage gelesen ...",
       "title_running_countdown": "Abstimmung läuft ...",
-      "question": "Frage",
+      "question": "Frage anzeigen",
+      "question_number": "Frage",
       "ranking": "Rangliste",
       "reading_confirmation": "Lesebestätigung",
       "show_more": "Zeige 1 weiteren",
@@ -567,7 +568,7 @@
     },
     "voting": {
       "title": "Abstimmung",
-      "question": "Frage",
+      "question": "Frage anzeigen",
       "send": "Absenden",
       "seconds_left": "Noch 1 Sekunde!",
       "seconds_left_plural": "Noch __value__ Sekunden!",
@@ -637,7 +638,7 @@
         "reference_value": "Richtige Antwort"
       },
       "edit_session_confirmation": {
-        "title": "Möchtest Du das Quiz bearbeiten?",
+        "title": "Quiz bearbeiten?",
         "text": "Alle Teilnehmenden werden abgemeldet und die Rangliste wird gelöscht.",
         "continue": "Fortfahren?"
       },

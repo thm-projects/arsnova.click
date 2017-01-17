@@ -320,7 +320,8 @@
       "title": "Results",
       "title_reading_confirmation": "Question read...",
       "title_running_countdown": "Voting...",
-      "question": "Question",
+      "question": "Show question",
+      "question_number": "Question",
       "ranking": "Ranking",
       "reading_confirmation": "Reading confirmation",
       "show_more": "Show 1 more",
@@ -567,7 +568,7 @@
     },
     "voting": {
       "title": "Voting",
-      "question": "Question",
+      "question": "Show question",
       "send": "Send",
       "seconds_left": "1 Second left!",
       "seconds_left_plural": "__value__ Seconds left",

@@ -202,8 +202,8 @@
       "wrong": "Falsch",
       "preview": "",
       "show_answer_content_on_buttons": "Antworttext auf Abstimmbuttons?",
-      "multiple_selection_survey": "Sollen mehrere Optionen auswählbar sein?",
-      "emoji_info": "Du kannst auch <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis von dieser Webseite</a> einfügen! <img style='width:30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/>",
+      "multiple_selection_survey": "Mehrere Optionen auswählbar?",
+      "emoji_info": "Du kannst auch Emojis einfügen! <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'><img style='width:40px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/></a>",
       "description": {
         "default_answer_row": "Ziehe diesen Block in die Liste der erstellten Antwortoptionen, um eine neue Antwort einzufügen.",
         "added_answers": "Hier siehst Du alle bereits erstellten Antwortoptionen dieser Quizfrage. Du kannst die Anordnung der Antworten ändern, indem Du die Liste per Drag & Drop sortierst.",
@@ -275,7 +275,7 @@
       "session_management": "Quizze",
       "import": "Quiz importieren",
       "delete_session": "Quiz löschen?",
-      "delete_session_confirmation": "Soll das Quiz '<span id=\"session_name\"></span>' unwiderruflich gelöscht werden?",
+      "delete_session_confirmation": "Soll das Quiz &raquo;<span id=\"session_name\"></span>&laquo; unwiderruflich gelöscht werden?",
       "export": "Quiz exportieren",
       "valid_question": "Gültige Quizrunde",
       "invalid_question": "Ungültige Quizrunde",
@@ -353,7 +353,7 @@
       "show_more": "Zeige 1 weiteren",
       "show_more_plural": "Zeige %s weitere",
       "start_quiz": "Los geht's!",
-      "kick_member_confirmation": "Soll die Person '<span id=\"nickName\"></span>' aus dem Quiz entfernt werden?",
+      "kick_member_confirmation": "Soll die Person &raquo;<span id=\"nickName\"></span>&laquo; aus dem Quiz entfernt werden?",
       "add_kicked_member_to_ban_list": "Den Nicknamen für immer bannen",
       "waiting_for_players": "Warten auf die Anderen ..."
     },

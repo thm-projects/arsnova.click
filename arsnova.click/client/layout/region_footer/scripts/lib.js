@@ -32,14 +32,16 @@ export const footerElemSound = {
 	iconClass: "glyphicon glyphicon-music",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.sound",
-	selectable: true
+	selectable: true,
+	showIntro: true
 };
 export const footerElemReadingConfirmation = {
 	id: "reading-confirmation",
 	iconClass: "glyphicon glyphicon-eye-open",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.reading-confirmation",
-	selectable: true
+	selectable: true,
+	showIntro: true
 };
 export const footerElemTheme = {
 	id: "theme",
@@ -81,14 +83,16 @@ export const footerElemQRCode = {
 	id: "qr-code",
 	iconClass: "glyphicon glyphicon-qrcode",
 	textClass: "footerElementText",
-	textName: "region.footer.footer_bar.qr_code"
+	textName: "region.footer.footer_bar.qr_code",
+	showIntro: true
 };
 export const footerElemNicknames = {
 	id: "nicknames",
 	iconClass: "glyphicon glyphicon-sunglasses",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.nicknames",
-	selectable: true
+	selectable: true,
+	showIntro: true
 };
 export const footerElemEditQuiz = {
 	id: "edit-quiz",
@@ -108,7 +112,8 @@ export const footerElemResponseProgress = {
 	iconClass: "glyphicon glyphicon-tasks",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.show_response_progress",
-	selectable: true
+	selectable: true,
+	showIntro: true
 };
 export const footerElemShowMore = {
 	id: "show-more",

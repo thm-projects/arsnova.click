@@ -32,6 +32,11 @@ Template.hiddenFooterElement.helpers({
 	isStatefulElement: function (item) {
 		return !!item.selectable;
 	},
+	footerIntro: function (item) {
+		if (item.showIntro) {
+			return {"data-intro": TAPi18n.__("region.footer.footer_bar.description" + item.id)};
+		}
+	},
 	isEnabled: function (item) {
 		footerElements.productTourTracker.depend();
 		if (!Session.get("questionGroup")) {

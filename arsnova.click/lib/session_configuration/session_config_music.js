@@ -43,7 +43,7 @@ export class MusicSessionConfiguration {
 		this[countdownRunningTitle] = options.music.countdownRunningTitle || "Song1";
 		this[countdownRunningVolume] = options.music.countdownRunningVolume || 80;
 
-		this[countdownEndEnabled] = typeof options.music.countdownEndEnabled === "undefined" ? false : options.music.countdownEndEnabled;
+		this[countdownEndEnabled] = typeof options.music.countdownEndEnabled === "undefined" ? true : options.music.countdownEndEnabled;
 		this[countdownEndTitle] = options.music.countdownEndTitle || "Song1";
 		this[countdownEndVolume] = options.music.countdownEndVolume || 80;
 	}

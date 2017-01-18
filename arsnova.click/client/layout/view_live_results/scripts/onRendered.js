@@ -57,6 +57,7 @@ Template.liveResults.onRendered(()=> {
 		footerElements.addFooterElement(footerElements.footerElemHome);
 		footerElements.addFooterElement(footerElements.footerElemSound);
 		if (eventDoc.questionIndex + 1 < questionCount) {
+			footerElements.addFooterElement(footerElements.footerElemResponseProgress);
 			footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
 		}
 		if (navigator.userAgent.match(/iPad/i) == null) {

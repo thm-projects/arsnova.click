@@ -30,7 +30,8 @@ Meteor.methods({
 			music: sessionConfigObject.music,
 			nicks: sessionConfigObject.nicks,
 			theme: sessionConfigObject.theme,
-			readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled
+			readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled,
+			showResponseProgress: sessionConfigObject.showResponseProgress
 		}}, {upsert: true});
 		EventManagerCollection.update({hashtag: sessionConfigObject.hashtag}, {
 			$push: {
@@ -41,7 +42,8 @@ Meteor.methods({
 						music: sessionConfigObject.music,
 						nicks: sessionConfigObject.nicks,
 						theme: sessionConfigObject.theme,
-						readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled
+						readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled,
+						showResponseProgress: sessionConfigObject.showResponseProgress
 					}
 				}
 			}
@@ -56,7 +58,8 @@ Meteor.methods({
 			music: sessionConfigObject.music,
 			nicks: sessionConfigObject.nicks,
 			theme: sessionConfigObject.theme,
-			readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled
+			readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled,
+			showResponseProgress: sessionConfigObject.showResponseProgress
 		}});
 		EventManagerCollection.update({hashtag: sessionConfigObject.hashtag}, {
 			$push: {
@@ -67,7 +70,8 @@ Meteor.methods({
 						music: sessionConfigObject.music,
 						nicks: sessionConfigObject.nicks,
 						theme: sessionConfigObject.theme,
-						readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled
+						readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled,
+						showResponseProgress: sessionConfigObject.showResponseProgress
 					}
 				}
 			}

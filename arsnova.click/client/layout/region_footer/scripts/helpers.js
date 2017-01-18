@@ -34,7 +34,7 @@ Template.hiddenFooterElement.helpers({
 	},
 	footerIntro: function (item) {
 		if (item.showIntro) {
-			return {"data-intro": TAPi18n.__("region.footer.footer_bar.description" + item.id)};
+			return {"data-intro": TAPi18n.__("region.footer.footer_bar.description." + item.id)};
 		}
 	},
 	isEnabled: function (item) {

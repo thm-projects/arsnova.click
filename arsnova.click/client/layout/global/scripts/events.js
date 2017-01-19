@@ -208,13 +208,8 @@ Template.home.events({
 				});
 			} else {
 				questionGroup = new DefaultQuestionGroup({
-					hashtag: hashtag,
-					questionList: [],
-					configuration: {
-						hashtag: hashtag
-					}
+					hashtag: hashtag
 				});
-				questionGroup.addDefaultQuestion();
 				hashtagLib.addHashtag(questionGroup);
 			}
 		}

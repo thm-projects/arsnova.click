@@ -1,19 +1,38 @@
+<!--
+* This file is part of ARSnova Click.
+* Copyright (C) 2016 The ARSnova Team
+*
+* ARSnova Click is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* ARSnova Click is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
+
 <template name="liveResultsTitle">
     {{#if isRunningQuestion}}
-        <div class="container-fluid" role="banner">
-            <div class="row row-padding-bottom row-padding-top quiz-lobby-header">
+        <div class="container-fluid {{#unless showResponseProgress}}largeLiveResultsTitle{{/unless}}" role="banner">
+            <div class="row row-padding-bottom row-padding-top liveResultsTitle">
                 <div class="col-xxs-12 col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3">
                     <div class="row">
-                        <div class="col-xs-3 top-bar-content">
+                        <div class="col-xs-{{#if showResponseProgress}}3{{else}}6{{/if}} top-bar-content">
                             <div class="titel">
                                 <span class="glyphicon icon-top-bar glyphicon-send glyphicon-style center" aria-hidden="true"></span>
                                 <span>{{getCountVotings}}</span>
                             </div>
                         </div>
-                        <div class="col-xs-6 text-center">
-                            <div id="appTitle" class="titel">{{_ votingText}}</div>
-                        </div>
-                        <div class="col-xs-3 top-bar-content">
+                        {{#if showResponseProgress}}
+                            <div class="col-xs-6 text-center">
+                                <div id="appTitle" class="titel">{{_ votingText}}</div>
+                            </div>
+                        {{/if}}
+                        <div class="col-xs-{{#if showResponseProgress}}3{{else}}6{{/if}} top-bar-content">
                             <div class="titel">
                                 <span class="glyphicon icon-top-bar glyphicon-hourglass glyphicon-style center" aria-hidden="true"></span>
                                 <span>{{getCountdown}}</span>

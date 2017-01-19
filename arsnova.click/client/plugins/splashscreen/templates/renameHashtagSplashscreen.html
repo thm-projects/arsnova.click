@@ -25,8 +25,12 @@
                         <div class="splashscreen-container-close" aria-label="{{_ "global.close_window"}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
                     </div>
                     <div class="modal-body">
-                        <p>{{_ "plugins.splashscreen.error.error_messages.session_exists_warning"}}</p>
-                        <p>{{_ "plugins.splashscreen.error.error_messages.session_exists_new"}}</p>
+                        {{#if isArsnovaImport}}
+                            <p>{{_ "plugins.splashscreen.error.error_messages.session_exists_arsnova_import"}}</p>
+                        {{else}}
+                            <p>{{_ "plugins.splashscreen.error.error_messages.session_exists_warning"}}</p>
+                            <p>{{_ "plugins.splashscreen.error.error_messages.session_exists_new"}}</p>
+                        {{/if}}
                         <div class="form-group">
                             <input type="text"
                                    class="input-field round-corners hashtag-field text-center tabbable"

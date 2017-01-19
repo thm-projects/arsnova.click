@@ -32,7 +32,7 @@ export class AbstractQuestion {
 		this[timer] = options.timer;
 		this[startTime] = options.startTime;
 		this[questionIndex] = options.questionIndex;
-		this[displayAnswerText] = typeof options.displayAnswerText === "undefined" ? false : options.displayAnswerText;
+		this[displayAnswerText] = typeof options.displayAnswerText === "undefined" ? true : options.displayAnswerText;
 		this[answerOptionList] = [];
 	}
 

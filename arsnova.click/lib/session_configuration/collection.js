@@ -30,6 +30,12 @@ export const SessionConfigurationSchema = new SimpleSchema({
 	music: {
 		type: Object
 	},
+	readingConfirmationEnabled: {
+		type: Boolean
+	},
+	showResponseProgress: {
+		type: Boolean
+	},
 	"music.isUsingGlobalVolume": {
 		type: Boolean
 	},
@@ -70,9 +76,6 @@ export const SessionConfigurationSchema = new SimpleSchema({
 		type: Boolean
 	},
 	"nicks.restrictToCASLogin": {
-		type: Boolean
-	},
-	"readingConfirmationEnabled": {
 		type: Boolean
 	}
 });

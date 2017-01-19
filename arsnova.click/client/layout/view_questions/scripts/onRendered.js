@@ -41,7 +41,10 @@ Template.createQuestionView.onRendered(function () {
 
 	footerElements.removeFooterElements();
 	footerElements.addFooterElement(footerElements.footerElemHome);
+	footerElements.addFooterElement(footerElements.footerElemProductTour);
 	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
-	getTooltipForRoute();
+	if (localStorage.getItem("showProductTour") !== "false") {
+		getTooltipForRoute();
+	}
 });

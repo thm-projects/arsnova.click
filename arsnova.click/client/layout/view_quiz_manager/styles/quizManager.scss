@@ -38,13 +38,13 @@
 					width: calc(100% - 30px);
 					&[data-valid='true'] {
 						&:before {
-							content: "\2611";
+							content: "\2714";
 							margin-right: 5px;
 						}
 					}
 					&[data-valid='false'] {
 						&:before {
-							content: "\2612";
+							content: "\2718";
 							margin-right: 5px;
 						}
 					}

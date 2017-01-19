@@ -53,7 +53,7 @@ Template.quizManager.onRendered(function () {
 		Session.get("questionGroup").getQuestionList().forEach(function (item) {
 			$('#added_questions_wrapper').append(
 				$('<div id="' + item.getQuestionIndex() + '_added_question" class="questionElementWrapper tabbable draggable" role="listitem"/>').append(
-					'<li data-valid="' + (item.isValid() ? "true" : "false") + '" aria-invalid="' + (item.isValid() ? "false" : "true") + '">' + (item.getQuestionIndex() + 1) + ')' + TAPi18n.__(item.translationReferrer()) + '</li>'
+					'<li data-valid="' + (item.isValid() ? "true" : "false") + '" aria-invalid="' + (item.isValid() ? "false" : "true") + '">' + (item.getQuestionIndex() + 1) + '. ' + TAPi18n.__(item.translationReferrer()) + '</li>'
 				).append(
 					$('<div class="contextMenu" />').append(
 						"<div class='moveQuestionUp text-light contextMenuItem'><span class='glyphicon glyphicon-chevron-up' aria-hidden='true'></span></div>",

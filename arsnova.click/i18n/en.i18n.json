@@ -46,7 +46,14 @@
         "show_product_tour": "Product tour",
         "show_response_progress": "Progress",
         "edit_quiz": "Edit",
-        "remove": "Remove"
+        "remove": "Remove",
+        "description": {
+          "qr_code": "Attendees can scan the QR code via their mobile devices to join the quiz.",
+          "sound": "",
+          "reading-confirmation": "",
+          "show_response_progress": "",
+          "nicknames": ""
+        }
       },
       "about": {
         "title": "arsnova.click",
@@ -357,7 +364,12 @@
       "start_quiz": "Let's go!",
       "kick_member_confirmation": "Shall the attendee '<span id=\"nickName\"></span>' be removed from the session?",
       "add_kicked_member_to_ban_list": "Ban nickname permanently",
-      "waiting_for_players": "Waiting for the players..."
+      "waiting_for_players": "Waiting for the players...",
+      "description": {
+        "memberlist_count": "",
+        "title": "",
+        "waiting_for_players": ""
+      }
     },
     "nickname_categories": {
       "title": "Limit available nicknames",

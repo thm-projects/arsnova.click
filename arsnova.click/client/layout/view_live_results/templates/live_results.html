@@ -19,7 +19,8 @@
 	<div id="liveResultsFrame">
         <div class="row full-screen-content">
             <div class="col-xs-12 question-wrapper" role="list">
-                {{#each questionList}}
+                {{#if showResponseProgress}}
+                    {{#each questionList}}
                     <div class="row question-row" id="question-row_{{displayIndex}}" role="listitem">
                         <div class="col-md-12">
                             {{#unless hasOnlyOneQuestion}}
@@ -84,6 +85,7 @@
                         </div>
                     </div>
                 {{/each}}
+                {{/if}}
             </div>
         </div>
 	</div>

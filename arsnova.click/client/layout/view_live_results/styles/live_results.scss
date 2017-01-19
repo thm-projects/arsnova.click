@@ -81,12 +81,6 @@
 #liveResultsFrame {
 	height: 100%;
 
-	.top-bar-content {
-		margin-top: 18px;
-		text-align: center;
-		font-family: $font;
-	}
-
 	.btn-answerOption {
 		margin: 15px 0;
 		width: 100%;
@@ -155,4 +149,10 @@
 	font-size: 1.4em;
 	float: left;
 	margin: 0 10px 0 -5px;
+}
+
+.largeLiveResultsTitle {
+	.titel {
+		font-size: 100px !important;
+	}
 }

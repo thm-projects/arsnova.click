@@ -46,7 +46,14 @@
         "edit_quiz": "Modifier",
         "show_product_tour": "Visite du produit",
         "show_response_progress": "La progression",
-        "remove": "Retirer"
+        "remove": "Retirer",
+        "description": {
+          "qr_code": "Les participants peuvent scanner le code QR via leurs appareils mobiles pour participer au quiz.",
+          "sound": "",
+          "reading-confirmation": "",
+          "show_response_progress": "",
+          "nicknames": ""
+        }
       },
       "about": {
         "title": "arsnova.click",
@@ -357,7 +364,12 @@
       "start_quiz": "C'est parti!",
       "kick_member_confirmation": "Veux-tu supprimer la personne '<span id=\"nickName\"></span>' du quiz?",
       "add_kicked_member_to_ban_list": "Bânir ce pseudo à jamais",
-      "waiting_for_players": "En attente de joueurs..."
+      "waiting_for_players": "En attente de joueurs...",
+      "description": {
+        "memberlist_count": "",
+        "title": "",
+        "waiting_for_players": ""
+      }
     },
     "nickname_categories": {
       "title": "Attribuer des pseudos",

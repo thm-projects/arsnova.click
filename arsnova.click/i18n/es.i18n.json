@@ -46,7 +46,14 @@
         "edit_quiz": "Editar",
         "show_product_tour": "Tour del producto",
         "show_response_progress": "Progreso",
-        "remove": "Retirar"
+        "remove": "Retirar",
+        "description": {
+          "qr_code": "Los asistentes pueden escanear el código QR a través de sus dispositivos móviles para unirse al concurso.",
+          "sound": "",
+          "reading-confirmation": "",
+          "show_response_progress": "",
+          "nicknames": ""
+        }
       },
       "about": {
         "title": "arsnova.click",
@@ -357,7 +364,12 @@
       "start_quiz": "¡Comenzar!",
       "kick_member_confirmation": "¿Eliminar a esta persona '<span id=\"nickName\"></span>' del cuestionario?",
       "add_kicked_member_to_ban_list": "¿Bloquear el nombre de usuario definitivamente?",
-      "waiting_for_players": "A la espera de los jugadores..."
+      "waiting_for_players": "A la espera de los jugadores...",
+      "description": {
+        "memberlist_count": "",
+        "title": "",
+        "waiting_for_players": ""
+      }
     },
     "nickname_categories": {
       "title": "Predeterminar nombres de usuario",

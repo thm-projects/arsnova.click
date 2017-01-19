@@ -548,6 +548,10 @@
         "material": {
           "name": "Material Design",
           "description": "Enfoque del diseño de Google."
+        },
+        "material_hope": {
+          "name": "Material Hope",
+          "description": "Google Material y una chispa de esperanza."
         }
       }
     },

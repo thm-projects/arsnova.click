@@ -19,6 +19,11 @@ export const themes = [
 		name: "view.theme_switcher.themes.elegant.name",
 		description: "view.theme_switcher.themes.elegant.description",
 		id: "theme-elegant"
+	},
+	{
+		name: "view.theme_switcher.themes.material_hope.name",
+		description: "view.theme_switcher.themes.material_hope.description",
+		id: "theme-Material-hope"
 	}
 ];
 

@@ -27,6 +27,7 @@ import {randomIntFromInterval} from '/client/layout/view_live_results/scripts/li
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount, memberlistTracker} from './lib.js';
+import {getTooltipForRoute} from '/client/layout/global/scripts/lib.js';
 
 Template.memberlist.onRendered(function () {
 	Session.set("learnerCountOverride", false);
@@ -59,9 +60,11 @@ Template.memberlist.onRendered(function () {
 		footerElements.addFooterElement(footerElements.footerElemHome);
 		if ($(window).outerWidth() >= 1024) {
 			footerElements.addFooterElement(footerElements.footerElemQRCode);
+			footerElements.addFooterElement(footerElements.footerElemProductTour);
 		}
 		footerElements.addFooterElement(footerElements.footerElemSound);
 		footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
+		footerElements.addFooterElement(footerElements.footerElemResponseProgress);
 		footerElements.addFooterElement(footerElements.footerElemNicknames);
 		if (navigator.userAgent.match(/iPad/i) == null) {
 			footerElements.addFooterElement(footerElements.footerElemFullscreen);
@@ -74,11 +77,6 @@ Template.memberlist.onRendered(function () {
 
 	$('.navbar-footer-placeholder').hide();
 	$('.navbar-footer').show();
-
-	/* Auto-Open the QR-Code Window */
-	setTimeout(function () {
-		$('#qr-code').click();
-	}, 100);
 
 	$(document).on('keyup',function (event) {
 		if (event.keyCode === 27) {
@@ -95,5 +93,8 @@ Template.memberlist.onRendered(function () {
 	Meteor.defer(function () {
 		headerLib.calculateHeaderSize();
 		headerLib.calculateTitelHeight();
+		if (localStorage.getItem("showProductTour") !== "false") {
+			getTooltipForRoute();
+		}
 	});
 });

@@ -111,18 +111,7 @@ Template.liveResultsTitle.helpers({
 		if (!eventDoc) {
 			return 0;
 		}
-
-		let sumVoted = 0;
-		MemberListCollection.find().map(function (member) {
-			const responseDoc = ResponsesCollection.findOne({
-				questionIndex: eventDoc.questionIndex,
-				userNick: member.nick
-			});
-			if (responseDoc !== undefined) {
-				sumVoted++;
-			}
-		});
-		return sumVoted;
+		return ResponsesCollection.find({questionIndex: eventDoc.questionIndex}).fetch().length;
 	},
 	getCountdown: function () {
 		if (Session.get("countdownInitialized")) {
@@ -133,6 +122,13 @@ Template.liveResultsTitle.helpers({
 	},
 	votingText: function () {
 		return Session.get("sessionClosed") ? "view.liveResults.game_over" : "view.liveResults.countdown";
+	},
+	showResponseProgress: function () {
+		const sessionConfig = SessionConfigurationCollection.findOne();
+		if (!sessionConfig) {
+			return;
+		}
+		return sessionConfig.showResponseProgress;
 	},
 	isRunningQuestion: ()=> {
 		return Session.get("countdownInitialized");
@@ -402,6 +398,13 @@ Template.liveResults.helpers({
 	allQuestionCount: function () {
 		const questionDoc = QuestionGroupCollection.findOne();
 		return questionDoc ? questionDoc.questionList.length : false;
+	},
+	showResponseProgress: function () {
+		const sessionConfig = SessionConfigurationCollection.findOne();
+		if (!sessionConfig) {
+			return;
+		}
+		return sessionConfig.showResponseProgress || !Session.get("countdownInitialized");
 	},
 	questionList: function () {
 		let eventDoc = EventManagerCollection.findOne();

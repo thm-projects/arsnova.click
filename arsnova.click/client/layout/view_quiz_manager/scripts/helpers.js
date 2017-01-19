@@ -13,6 +13,12 @@ Template.quizManager.helpers({
 	},
 	getDescriptionForQuestionType: function (typeName) {
 		return "view.question_type.description." + typeName;
+	},
+	hasQuestionsAdded: ()=> {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList().length > 0;
 	}
 });
 

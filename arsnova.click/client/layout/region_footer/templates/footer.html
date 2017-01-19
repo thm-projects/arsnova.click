@@ -28,7 +28,8 @@
 
 <template name="hiddenFooterElement">
     <div class="footerElement tabbable {{#if isStatefulElement this}}{{#if isEnabled this}}success{{else}}error{{/if}}{{/if}}"
-         id="{{this.id}}">
+         id="{{this.id}}"
+         {{footerIntro this}}>
         <p class="footerElemIcon"><span class="{{this.iconClass}}" aria-hidden="true"></span></p>
         <p class="footerElemText"><span class="{{this.textClass}}">{{_ this.textName}}</span></p>
     </div>

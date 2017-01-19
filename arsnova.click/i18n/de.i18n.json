@@ -44,7 +44,16 @@
         "qr_code": "QR",
         "nicknames": "Nicknamen",
         "edit_quiz": "Bearbeiten",
-        "remove": "Entfernen"
+        "show_product_tour": "Produktführung",
+        "show_response_progress": "Fortschritt",
+        "remove": "Entfernen",
+        "description": {
+          "qr-code": "Dein Publikum kann den QR-Code scannen, um direkt in das Quiz einzusteigen.",
+          "sound": "Hier kannst Du die Hintergrundmusik in der Lobby und für den Countdown einstellen.",
+          "reading-confirmation": "Wenn Du diese Option aktivierst, wird zuerst die Frage ohne Antwortoptionen im Browser der Teilnehmenden angezeigt. Nur wer das Lesen der Frage bestätigt (die Anzahl der Lesebestätigungen wird angezeigt), kann am Quiz teilnehmen.",
+          "response-progress": "Soll die Anzahl der Stimmen zu den einzelnen Antwortoptionen während des Countdowns angezeigt werden? Dann aktiviere diese Option.",
+          "nicknames": "Hier kannst Du die Nicknamen vorgeben."
+        }
       },
       "about": {
         "title": "arsnova.click",
@@ -355,7 +364,12 @@
       "start_quiz": "Los geht's!",
       "kick_member_confirmation": "Soll die Person &raquo;<span id=\"nickName\"></span>&laquo; aus dem Quiz entfernt werden?",
       "add_kicked_member_to_ban_list": "Den Nicknamen für immer bannen",
-      "waiting_for_players": "Warten auf die Anderen ..."
+      "waiting_for_players": "Warten auf die Anderen ...",
+      "description": {
+        "memberlist_count": "So viele sind aktuell eingeloggt.",
+        "title": "Die Quiz Lobby zeigt die Nicknamen der Teilnehmenden in zeitlich umgekehrter Reihenfolge ihres Eintreffens.",
+        "waiting_for_players": "Sobald sich die Lobby füllt, kannst Du die Quizrunde starten. Nach dem Start kann sich niemand mehr einloggen."
+      }
     },
     "nickname_categories": {
       "title": "Nicknamen vorgeben",
@@ -412,7 +426,9 @@
       "title": "Quiz-Manager",
       "available_questions_title": "Vorlagen",
       "added_questions_title": "Quizfragen",
+      "no_added_questions": "Du hast bisher keine Quizfragen hinzugefügt.",
       "session_invalid": "Das Quiz enthält noch unvollständige Quizfragen",
+      "session_empty": "Das Quiz enthält noch keine Quizfragen",
       "connection_lost": "Die Verbindung zum Server wurde unterbrochen",
       "back_to_quiz_administration": "Quizverwaltung",
       "details": {
@@ -517,33 +533,9 @@
           "name": "Eleganz",
           "description": "Für anspruchsvolle Quizrunden."
         },
-        "thm": {
-          "name": "THM (beamertauglich)",
-          "description": "Corporate Design der TH Mittelhessen."
-        },
         "black_beauty": {
           "name" : "Black Beauty (beamertauglich)",
           "description": "Akkufreundlich."
-        },
-        "living_room": {
-          "name" : "Wohnzimmer",
-          "description": "Helle Wohnzimmer-Atmosphäre."
-        },
-        "bluetouch": {
-          "name": "Unter dem Meer",
-          "description": "Tiefblau mit hellen Akzenten."
-        },
-        "green": {
-          "name": "Simples Grün",
-          "description": "Grün halt."
-        },
-        "action": {
-          "name": "Blitz",
-          "description": "Für schnelle und wilde Quizrunden."
-        },
-        "psychology": {
-          "name": "1950er Jahre",
-          "description": "Altrosa gemischt mit dezenten Farben."
         },
         "material": {
           "name": "Material Design Colors",
@@ -664,6 +656,7 @@
           "update_failed": "Es ist ein Fehler bei der Aktualisierung Deiner Frage aufgetreten.",
           "session_exists": "Dieses Quiz existiert bereits!",
           "session_exists_warning": "Der Name dieses Quiz ist bereits vergeben.",
+          "session_exists_arsnova_import": "Bitte gib für dein arsnova Quiz einen eindeutigen Namen ein:",
           "session_exists_new": "Gib einen neuen ein:",
           "session_not_exists": "Dieses Quiz existiert nicht!",
           "hashtag_exists": "Dieser Quizname existiert bereits!",

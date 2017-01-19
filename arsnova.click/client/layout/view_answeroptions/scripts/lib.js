@@ -291,7 +291,9 @@ export const renderAnsweroptionItems = function () {
 	firstAnswerElement.find(".answer_row_text").attr("data-intro", TAPi18n.__("view.answeroptions.description.added_answer_text"));
 	firstAnswerElement.find(".toggle").attr("data-intro", TAPi18n.__("view.answeroptions.description.added_answer_is_correct"));
 	firstAnswerElement.find(".removeAnsweroption").attr("data-intro", TAPi18n.__("view.answeroptions.description.added_answer_remove"));
-	getTooltipForRoute();
+	if (localStorage.getItem("showProductTour") !== "false") {
+		getTooltipForRoute();
+	}
 };
 
 export function setContextTimeout(timeout) {

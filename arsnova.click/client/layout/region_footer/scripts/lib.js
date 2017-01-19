@@ -32,14 +32,16 @@ export const footerElemSound = {
 	iconClass: "glyphicon glyphicon-music",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.sound",
-	selectable: true
+	selectable: true,
+	showIntro: true
 };
 export const footerElemReadingConfirmation = {
 	id: "reading-confirmation",
 	iconClass: "glyphicon glyphicon-eye-open",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.reading-confirmation",
-	selectable: true
+	selectable: true,
+	showIntro: true
 };
 export const footerElemTheme = {
 	id: "theme",
@@ -81,14 +83,16 @@ export const footerElemQRCode = {
 	id: "qr-code",
 	iconClass: "glyphicon glyphicon-qrcode",
 	textClass: "footerElementText",
-	textName: "region.footer.footer_bar.qr_code"
+	textName: "region.footer.footer_bar.qr_code",
+	showIntro: true
 };
 export const footerElemNicknames = {
 	id: "nicknames",
 	iconClass: "glyphicon glyphicon-sunglasses",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.nicknames",
-	selectable: true
+	selectable: true,
+	showIntro: true
 };
 export const footerElemEditQuiz = {
 	id: "edit-quiz",
@@ -96,12 +100,28 @@ export const footerElemEditQuiz = {
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.edit_quiz"
 };
+export const footerElemProductTour = {
+	id: "product-tour",
+	iconClass: "glyphicon glyphicon-lamp",
+	textClass: "footerElementText",
+	textName: "region.footer.footer_bar.show_product_tour",
+	selectable: true
+};
+export const footerElemResponseProgress = {
+	id: "response-progress",
+	iconClass: "glyphicon glyphicon-object-align-left",
+	textClass: "footerElementText",
+	textName: "region.footer.footer_bar.show_response_progress",
+	selectable: true,
+	showIntro: true
+};
 export const footerElemShowMore = {
 	id: "show-more",
 	iconClass: "glyphicon glyphicon-option-vertical",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.show_more"
 };
+export const productTourTracker = new Tracker.Dependency();
 const footerElements = [];
 const hiddenFooterElements = {
 	selectable: [],
@@ -145,6 +165,8 @@ export function getFooterElementById(id) {
 		case "nicknames": return footerElemNicknames;
 		case "edit-quiz": return footerElemEditQuiz;
 		case "show-more": return footerElemShowMore;
+		case "footerElemProductTour": return footerElemProductTour;
+		case "footerElemResponseProgress": return footerElemResponseProgress;
 	}
 }
 

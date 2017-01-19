@@ -32,7 +32,13 @@ Template.hiddenFooterElement.helpers({
 	isStatefulElement: function (item) {
 		return !!item.selectable;
 	},
+	footerIntro: function (item) {
+		if (item.showIntro) {
+			return {"data-intro": TAPi18n.__("region.footer.footer_bar.description." + item.id)};
+		}
+	},
 	isEnabled: function (item) {
+		footerElements.productTourTracker.depend();
 		if (!Session.get("questionGroup")) {
 			return;
 		}
@@ -61,6 +67,11 @@ Template.hiddenFooterElement.helpers({
 					$('#nicknames').find(".footerElemText").text(TAPi18n.__("region.footer.footer_bar.nicknames"));
 					return true;
 				}
+				break;
+			case "product-tour":
+				return localStorage.getItem("showProductTour") !== "false";
+			case "response-progress":
+				return !!(configDoc && configDoc.getShowResponseProgress());
 		}
 	}
 });

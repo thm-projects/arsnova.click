@@ -16,11 +16,12 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Mongo} from 'meteor/mongo';
+import {Tracker} from 'meteor/tracker';
 import {AbstractQuestionGroup} from "/lib/questions/questiongroup_abstract.js";
 import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
 import {AbstractQuestion} from "/lib/questions/question_abstract.js";
-import {MultipleChoiceQuestion} from "/lib/questions/question_choice_multiple.js";
-import {DefaultAnswerOption} from "/lib/answeroptions/answeroption_default.js";
+
+export const ownHashtagsTracker = new Tracker.Dependency();
 
 export function getLanguage() {
 	return localStorage.getItem("language");
@@ -150,41 +151,11 @@ export function reenterSession(hashtag) {
 		throw new TypeError("Undefined session data");
 	}
 
-	let sessionData = JSON.parse(sessionDataString);
+	const sessionData = JSON.parse(sessionDataString);
 	if (typeof sessionData !== "object") {
 		throw new TypeError("Illegal session data");
 	}
-	if (typeof sessionData.type === "undefined") {
-		// Legacy mode -> Convert old session data to new OO style
-		const newQuestionGroup = new DefaultQuestionGroup({
-			hashtag: hashtag,
-			questionList: []
-		});
-		for (let i = 0; i < sessionData.questionList.length; i++) {
-			const answerOptions = [];
-			for (let j = 0; j < sessionData.questionList[i].answers.length; j++) {
-				answerOptions.push(new DefaultAnswerOption({
-					hashtag: hashtag,
-					questionIndex: i,
-					answerOptionNumber: j,
-					answerText: sessionData.questionList[i].answers[j].answerText,
-					isCorrect: sessionData.questionList[i].answers[j].isCorrect === 1
-				}));
-			}
-			newQuestionGroup.addQuestion(new MultipleChoiceQuestion({
-				hashtag: hashtag,
-				questionIndex: i,
-				questionText: sessionData.questionList[i].questionText,
-				timer: sessionData.questionList[i].timer / 1000,
-				startTime: 0,
-				answerOptionList: answerOptions
-			}));
-		}
-		localStorage.setItem(newQuestionGroup.getHashtag(), JSON.stringify(newQuestionGroup.serialize()));
-		sessionData = newQuestionGroup.serialize();
-	}
-
-	if (sessionData.type == "DefaultQuestionGroup") {
+	if (sessionData.type === "DefaultQuestionGroup") {
 		return new DefaultQuestionGroup(sessionData);
 	} else {
 		throw new TypeError("Undefined session type while reentering");
@@ -225,12 +196,10 @@ export function exportFromLocalStorage(hashtag) {
 	if (!localStorageData) {
 		throw new TypeError("Invalid local storage data while exporting");
 	}
-	let quizItem;
 
 	if (localStorageData.type == "DefaultQuestionGroup") {
-		quizItem = new DefaultQuestionGroup(localStorageData);
+		return JSON.stringify(new DefaultQuestionGroup(localStorageData).serialize());
 	} else {
 		throw new TypeError("Undefined session type while exporting");
 	}
-	return JSON.stringify(quizItem.serialize());
 }

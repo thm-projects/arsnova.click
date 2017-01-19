@@ -44,7 +44,16 @@
         "qr_code": "QR",
         "nicknames": "Nombres de usuario",
         "edit_quiz": "Editar",
-        "remove": "Retirar"
+        "show_product_tour": "Tour del producto",
+        "show_response_progress": "Progreso",
+        "remove": "Retirar",
+        "description": {
+          "qr-code": "Los asistentes pueden escanear el código QR a través de sus dispositivos móviles para unirse al concurso.",
+          "sound": "",
+          "reading-confirmation": "",
+          "response-progress": "",
+          "nicknames": ""
+        }
       },
       "about": {
         "title": "arsnova.click",
@@ -355,7 +364,12 @@
       "start_quiz": "¡Comenzar!",
       "kick_member_confirmation": "¿Eliminar a esta persona '<span id=\"nickName\"></span>' del cuestionario?",
       "add_kicked_member_to_ban_list": "¿Bloquear el nombre de usuario definitivamente?",
-      "waiting_for_players": "A la espera de los jugadores..."
+      "waiting_for_players": "A la espera de los jugadores...",
+      "description": {
+        "memberlist_count": "",
+        "title": "",
+        "waiting_for_players": ""
+      }
     },
     "nickname_categories": {
       "title": "Predeterminar nombres de usuario",
@@ -412,7 +426,9 @@
       "title": "Quiz Manager",
       "available_questions_title": "Preguntas disponibles",
       "added_questions_title": "Preguntas creadas",
+      "no_added_questions": "No ha agregado ninguna pregunta.",
       "session_invalid": "El cuestionario contiene preguntas incompletas",
+      "session_empty": "El cuestionario no contiene preguntas",
       "connection_lost": "Se pierde la conexión con el servidor",
       "back_to_quiz_administration": "Administración del cuestionario",
       "details": {
@@ -664,6 +680,7 @@
           "update_failed": "Error al actualizar la pregunta.",
           "session_exists": "Este cuestionario ya existe.",
           "session_exists_warning": "El nombre de este cuestionario ya existe.",
+          "session_exists_arsnova_import": "Introduce un nombre para tu prueba de arsnova:",
           "session_exists_new": "Ingresa uno nuevo:",
           "session_not_exists": "¡Esta sesión no existe!",
           "hashtag_exists": "¡El nombre del cuestionario ya existe!",

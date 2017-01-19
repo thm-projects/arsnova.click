@@ -67,7 +67,7 @@ export class AbstractQuestionGroup {
 			}
 		}
 		this[hashtag] = options.hashtag;
-		this[sessionConfig] = new SessionConfiguration(options.configuration);
+		this[sessionConfig] = new SessionConfiguration(options.configuration || {hashtag: options.hashtag});
 	}
 
 	/**
@@ -163,7 +163,7 @@ export class AbstractQuestionGroup {
 	 * @returns {boolean} True, if the complete QuestionGroup instance is valid, False otherwise
 	 */
 	isValid () {
-		let questionListValid = true;
+		let questionListValid = this.getQuestionList().length > 0;
 		this.getQuestionList().forEach(function (question) {
 			if (questionListValid && !question.isValid()) {
 				questionListValid = false;
@@ -210,6 +210,7 @@ export class AbstractQuestionGroup {
 	/**
 	 * Quick way to insert a default question to the QuestionGroup instance.
 	 * @param {Number} [index] The index where the question should be inserted. If not passed, it will be added to the end of the questionList
+	 * @param type
 	 */
 	addDefaultQuestion (index = -1, type = "SingleChoiceQuestion") {
 		if (typeof index === "undefined" || index === -1 || index >= this.getQuestionList().length) {

@@ -43,8 +43,17 @@
         "sound": "Sound",
         "qr_code": "QR",
         "nicknames": "Nicknames",
+        "show_product_tour": "Product tour",
+        "show_response_progress": "Progress",
         "edit_quiz": "Edit",
-        "remove": "Remove"
+        "remove": "Remove",
+        "description": {
+          "qr-code": "Attendees can scan the QR code via their mobile devices to join the quiz.",
+          "sound": "",
+          "reading-confirmation": "",
+          "response-progress": "",
+          "nicknames": ""
+        }
       },
       "about": {
         "title": "arsnova.click",
@@ -355,7 +364,12 @@
       "start_quiz": "Let's go!",
       "kick_member_confirmation": "Shall the attendee '<span id=\"nickName\"></span>' be removed from the session?",
       "add_kicked_member_to_ban_list": "Ban nickname permanently",
-      "waiting_for_players": "Waiting for the players..."
+      "waiting_for_players": "Waiting for the players...",
+      "description": {
+        "memberlist_count": "",
+        "title": "",
+        "waiting_for_players": ""
+      }
     },
     "nickname_categories": {
       "title": "Limit available nicknames",
@@ -412,7 +426,9 @@
       "title": "Quiz Manager",
       "available_questions_title": "Available questions",
       "added_questions_title": "Created questions",
+      "no_added_questions": "You haven't added any questions yet.",
       "session_invalid": "The quiz contains incomplete questions",
+      "session_empty": "The quiz contains no questions",
       "connection_lost": "The connection to the server is lost",
       "back_to_quiz_administration": "Quiz Administration",
       "details": {
@@ -664,6 +680,7 @@
           "update_failed": "The update of the question failed.",
           "session_exists": "This session exists already!",
           "session_exists_warning": "This session does already exist on the server!",
+          "session_exists_arsnova_import": "Please enter a name for your arsnova quiz:",
           "session_exists_new": "To import it it is required to rename the session:",
           "session_not_exists": "This session does not exist!",
           "hashtag_exists": "This hashtag exists already!",

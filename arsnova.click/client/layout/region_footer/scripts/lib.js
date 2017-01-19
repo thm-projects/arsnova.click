@@ -102,14 +102,14 @@ export const footerElemEditQuiz = {
 };
 export const footerElemProductTour = {
 	id: "product-tour",
-	iconClass: "glyphicon glyphicon-modal-window",
+	iconClass: "glyphicon glyphicon-lamp",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.show_product_tour",
 	selectable: true
 };
 export const footerElemResponseProgress = {
 	id: "response-progress",
-	iconClass: "glyphicon glyphicon-tasks",
+	iconClass: "glyphicon glyphicon-object-align-left",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.show_response_progress",
 	selectable: true,

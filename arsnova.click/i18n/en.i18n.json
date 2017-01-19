@@ -48,10 +48,10 @@
         "edit_quiz": "Edit",
         "remove": "Remove",
         "description": {
-          "qr_code": "Attendees can scan the QR code via their mobile devices to join the quiz.",
+          "qr-code": "Attendees can scan the QR code via their mobile devices to join the quiz.",
           "sound": "",
           "reading-confirmation": "",
-          "show_response_progress": "",
+          "response-progress": "",
           "nicknames": ""
         }
       },

@@ -48,10 +48,10 @@
         "show_response_progress": "Progreso",
         "remove": "Retirar",
         "description": {
-          "qr_code": "Los asistentes pueden escanear el código QR a través de sus dispositivos móviles para unirse al concurso.",
+          "qr-code": "Los asistentes pueden escanear el código QR a través de sus dispositivos móviles para unirse al concurso.",
           "sound": "",
           "reading-confirmation": "",
-          "show_response_progress": "",
+          "response-progress": "",
           "nicknames": ""
         }
       },

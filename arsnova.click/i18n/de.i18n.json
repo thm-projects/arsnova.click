@@ -206,7 +206,7 @@
     "answeroptions": {
       "title": "Antwortoptionen bearbeiten",
       "new_answer": "Neue Antwortoption",
-      "answeroptiontext_placeholder": "Antwortoption eingeben",
+      "answeroptiontext_placeholder": "Antworttext eingeben",
       "correct": "Richtig",
       "wrong": "Falsch",
       "preview": "",

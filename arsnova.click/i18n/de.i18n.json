@@ -48,11 +48,11 @@
         "show_response_progress": "Fortschritt",
         "remove": "Entfernen",
         "description": {
-          "qr-code": "Dein Publikum kann den QR-Code scannen, um direkt in das Quiz einzusteigen.",
-          "sound": "Hier kannst Du die Hintergrundmusik in der Lobby und für den Countdown einstellen.",
-          "reading-confirmation": "Wenn Du diese Option aktivierst, wird zuerst die Frage ohne Antwortoptionen im Browser der Teilnehmenden angezeigt. Nur wer das Lesen der Frage bestätigt (die Anzahl der Lesebestätigungen wird angezeigt), kann am Quiz teilnehmen.",
-          "response-progress": "Soll die Anzahl der Stimmen zu den einzelnen Antwortoptionen während des Countdowns angezeigt werden? Dann aktiviere diese Option.",
-          "nicknames": "Hier kannst Du die Nicknamen vorgeben."
+          "qr-code": "Dein Publikum kann den QR-Code scannen, um mit einem Klick – ohne Eintippen von Webadresse und Quiznamen – die Lobby zu betreten.",
+          "sound": "Stelle hier die Hintergrundmusik ein und entscheide dich beim Countdown für Abpfiff oder Gong.",
+          "reading-confirmation": "Aktiviere diese Option, wenn zuerst die Frage ohne Antwortoptionen angezeigt werden soll. Nur wer das Lesen (Verstehen) der Frage bestätigt, die Anzahl der Lesebestätigungen wird angezeigt, kann am Quiz teilnehmen.",
+          "response-progress": "Soll die Anzahl der Stimmen zu den einzelnen Antwortoptionen während des Countdowns angezeigt werden? Dann aktiviere diese Option. Beachte aber den psychologischen Effekt, mit der Mehrheit abzustimmen.",
+          "nicknames": "Hier kannst Du die Nicknamen aus Kategorien vorgeben. Tipp: Einen anstößigen Nicknamen entfernst Du, indem Du ihn anklickst."
         }
       },
       "about": {
@@ -60,7 +60,7 @@
         "declaration": "Ein bisschen <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, <br />ein bisschen <a href='https://arsnova.eu/' target='_blank'>ARSnova</a>!",
         "ars": "arsnova.click ist ein innovatives <a href='https://de.wikipedia.org/wiki/Audience_Response_System' target='_blank'>Audience Response System (ARS)</a> für öffentliche Bildungseinrichtungen.",
         "developed_by": "Inspiriert durch <a href='https://getkahoot.com' target='_blank'>Kahoot!</a> entwickelte in nur 10 Tagen  ein <a href='https://de.wikipedia.org/wiki/Scrum' target='_blank'>Scrum-Team</a> aus Bachelor- und Masterstudenten der <a href='http://www.thm.de/site/' target='_blank'>TH Mittelhessen</a> die erste Version dieser <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>gamifizierten</a> Alternative zum ARSnova-Flaggschiff <a href='https://arsnova.eu/' target='_blank'>arsnova.eu</a>.",
-        "met_requirements": "Bisher wurden die folgenden aus der didaktischen Perspektive eines Hochschullehrers (siehe Impressum)     aufgestellten Anforderungen an arsnova.click implementiert:",
+        "met_requirements": "Bisher wurden die folgenden aus der didaktischen Perspektive eines Hochschullehrers (siehe Impressum) aufgestellten Anforderungen an arsnova.click implementiert:",
         "requirements": {
           "1": "Absoluter Datenschutz: keine personenbezogenen Daten auf dem Server, alle Quizdaten liegen im Browser der Quizerstellerin oder des Quizerstellers (<a href='http://www.w3schools.com/html/html5_webstorage.asp' target='_blank'>HTML5 Local Storage</a>)",
           "2": "Keine Registrierung, keine Anmeldung, keine Installation (<a href='https://de.wikipedia.org/wiki/Bring_your_own_device' target='_blank'>BYOD</a>), keine Werbung, keine Kosten",

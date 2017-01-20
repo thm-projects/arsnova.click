@@ -40,7 +40,7 @@
 		"fg_titel": white,
 		/* Quiz name input */
 		"input-background-color": $accent_color,
-		"placeholder-color": white,
+		"placeholder-color": $secondary_text_color,
 		"input-foreground-color": white,
 		"disabled-button-background": map-get($stdStyle, "md_blue_grey_300"),
 		/* Connection status */

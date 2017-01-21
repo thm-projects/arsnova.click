@@ -13,7 +13,7 @@
       "arsnova_slogan": "Quiz-App für alles und jeden"
     },
     "cookie_consent": {
-      "message": "arsnova.click ist eine Web-App, die Cookies verwendet.",
+      "message": "arsnova.click ist eine App, die Cookies verwendet.",
       "dismiss": "Hinweis nicht mehr anzeigen",
       "learn_more": "Datenschutzerklärung"
     }
@@ -41,7 +41,7 @@
         "fullscreen": "Vollbild",
         "show_more": "Mehr",
         "sound": "Sound",
-        "qr_code": "QR",
+        "qr_code": "QR-Code",
         "nicknames": "Nicknamen",
         "edit_quiz": "Bearbeiten",
         "show_product_tour": "Produktführung",
@@ -50,9 +50,9 @@
         "description": {
           "qr-code": "Dein Publikum kann den QR-Code scannen, um mit einem Klick – ohne Eintippen von Webadresse und Quiznamen – die Lobby zu betreten.",
           "sound": "Stelle hier die Hintergrundmusik ein und entscheide dich beim Countdown für Abpfiff oder Gong.",
-          "reading-confirmation": "Aktiviere diese Option, wenn zuerst die Frage ohne Antwortoptionen angezeigt werden soll. Nur wer das Lesen (Verstehen) der Frage bestätigt, die Anzahl der Lesebestätigungen wird angezeigt, kann am Quiz teilnehmen.",
-          "response-progress": "Soll die Anzahl der Stimmen zu den einzelnen Antwortoptionen während des Countdowns angezeigt werden? Dann aktiviere diese Option. Beachte aber den psychologischen Effekt, mit der Mehrheit abzustimmen.",
-          "nicknames": "Hier kannst Du die Nicknamen aus Kategorien vorgeben. Tipp: Einen anstößigen Nicknamen entfernst Du, indem Du ihn anklickst."
+          "reading-confirmation": "Aktiviere diese Option, wenn zuerst nur die Frage <bold>ohne</bold> Antwortoptionen angezeigt werden soll. Nur wer das Lesen (Verstehen) der Frage bestätigt, die Anzahl der Lesebestätigungen wird angezeigt, kann am Quiz teilnehmen. Mit der Lesebestätigung schaffst Du gleiche Voraussetzungen beim Countdown.",
+          "response-progress": "Soll die Anzahl der Stimmen zu den einzelnen Antwortoptionen während des Countdowns angezeigt werden? Dann aktiviere diese Option. Beachte aber den psychologischen Effekt: Der Mensch neigt dazu, sich nach der Mehrheit zu richten (Herdentrieb).",
+          "nicknames": "Hier kannst Du die Nicknamen aus Kategorien vorgeben. Tipp: Einen anstößigen Nicknamen in der Lobby entfernst Du, indem Du ihn anklickst."
         }
       },
       "about": {
@@ -79,7 +79,7 @@
           "text": {
             "1": "Brauchst Du nicht!",
             "2": "Tipp einfach den Namen des Quiz ein. Die Buttons werden aktiviert, sobald Du entweder den Namen eines freigeschalteten Quiz eingibst: \"Mach mit!\" oder ein Quiz mit dem eingegebenen Namen erstellen kannst: \"Mach neu!\".",
-            "3": "Folge unserer interaktiven Product Tour oder einfach Deiner Intuition: schauen, klicken, quizzen."
+            "3": "Folge unserer interaktiven Product Tour oder einfach deiner Intuition: schauen, klicken, quizzen."
           }
         }
       },
@@ -215,7 +215,7 @@
       "emoji_info": "Du kannst auch Emojis einfügen! <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'><img style='width:40px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/></a>",
       "description": {
         "default_answer_row": "Ziehe diesen Block in die Liste der erstellten Antwortoptionen, um eine neue Antwort einzufügen.",
-        "added_answers": "Hier siehst Du alle bereits erstellten Antwortoptionen dieser Quizfrage. Du kannst die Anordnung der Antworten ändern, indem Du die Liste per Drag & Drop sortierst.",
+        "added_answers": "Hier siehst Du alle bereits erstellten Antwortoptionen dieser Quizfrage. Du kannst die Reihenfolge der Antworten per Drag & Drop ändern.",
         "added_answer_short_text": "Jede Antwortoption enthält einen Buchstaben, der für die Teilnehmer/innen angezeigt werden kann.",
         "added_answer_text": "Hier kannst Du den Text der Antwort eingeben. Eine Auszeichnung mit Markdown und LaTeX ist möglich.",
         "added_answer_is_correct": "Dieser Button regelt, ob die Antwort als richtig oder falsch gewertet werden soll.",
@@ -233,7 +233,7 @@
         "config_trim_whitespaces": "Legt fest, ob die Leerzeichen der eingegebenen Antwort geprüft werden sollen.",
         "config_use_keywords": "Sollte diese Option aktiviert werden, muss die Reihenfolge der Wörter der eingegebenen Antwort der der Referenzantwort entsprechen. Ist diese Option deaktiviert, kann keine Prüfung der Leer- und Satzzeichen vorgenommen werden.",
         "config_use_punctuation": "Diese Option legt fest, ob die Satzzeichen der eingegebenen Antwort geprüft werden sollen.",
-        "check_answer": "Hier kannst Du mögliche Antworten der Teilnehmer/innen gegen deine Referenzantwort und unter Berücksichtigung der aktuellen Kriterien testen"
+        "check_answer": "Hier kannst Du mögliche Antworten der Teilnehmer/innen gegen deine Referenzantwort und unter Berücksichtigung der aktuellen Kriterien testen."
       },
       "ranged_question": {
         "title": "Intervall der richtigen Antworten",
@@ -278,7 +278,7 @@
       "edit_session": "Quiz bearbeiten",
       "reenter_session": "Öffnen",
       "create_session": "Mach neu!",
-      "create_demo_session": "Starte Demo Quiz!",
+      "create_demo_session": "Starte \u00BBDemo Quiz\u00AB!",
       "quiz_management": "Quiz-Speicher",
       "available_sessions": "Diese Quizze sind in deinem Browser:",
       "session_management": "Quizze",
@@ -368,7 +368,7 @@
       "description": {
         "memberlist_count": "So viele sind aktuell eingeloggt.",
         "title": "Die Quiz Lobby zeigt die Nicknamen der Teilnehmenden in zeitlich umgekehrter Reihenfolge ihres Eintreffens.",
-        "waiting_for_players": "Sobald sich die Lobby füllt, kannst Du die Quizrunde starten. Nach dem Start kann sich niemand mehr einloggen."
+        "waiting_for_players": "Sobald sich die Lobby füllt, kannst Du die Quizrunde starten. Beachte: Nach dem Start kann sich niemand mehr einloggen!"
       }
     },
     "nickname_categories": {
@@ -426,7 +426,7 @@
       "title": "Quiz-Manager",
       "available_questions_title": "Vorlagen",
       "added_questions_title": "Quizfragen",
-      "no_added_questions": "Du hast bisher keine Quizfragen hinzugefügt.",
+      "no_added_questions": "Du hast noch keine Quizfrage erstellt.",
       "session_invalid": "Das Quiz enthält noch unvollständige Quizfragen",
       "session_empty": "Das Quiz enthält noch keine Quizfragen",
       "connection_lost": "Die Verbindung zum Server wurde unterbrochen",
@@ -437,11 +437,11 @@
         },
         "question_type": {
           "long": "Fragetyp auswählen",
-          "short": "Typ"
+          "short": "Fragetyp"
         },
         "question_text": {
           "long": "Frage bearbeiten",
-          "short": "Fragetext"
+          "short": "Frage"
         },
         "answeroptions": {
           "long": "Antwortoptionen bearbeiten",
@@ -453,16 +453,16 @@
         }
       },
       "description": {
-        "available_questions": "Hier siehst Du alle Fragetypen, aus denen Du wählen kannst. Jeder Fragetyp bietet unterschiedliche Voreinstellungen und Möglichkeiten zur Gestaltung des Quiz.",
-        "added_questions": "Hier findest Du alle deine Quizfragen, die im Quiz vorhanden sind. Um eine Quizfrage dem Quiz hinzuzufügen, ziehe sie entweder aus dem linken Stapel hierher oder klicke im linken Stapel auf die jeweilige Quizfrage. Mit einem Klick auf die eingefügte Frage kannst Du die Inhalte der Quizfrage einstellen.",
-        "back_button": "Du kannst jederzeit zurückgehen. Das Quiz wird beim Eingeben sofort gespeichert.",
-        "forward_button": "Sofern das Quiz gültig ist und eine Verbindung zum Server besteht, kannst Du zur Quiz Lobby gehen und das Quiz eröffnen."
+        "available_questions": "Hier siehst Du alle Fragetypen, aus denen Du wählen kannst. Jeder Fragetyp bietet eigene Voreinstellungen und Optionen zur Gestaltung deines Quiz.",
+        "added_questions": "Hier findest Du deine Quizfragen. Um eine Frage hinzuzufügen, ziehe eine Vorlage hierher oder klick auf sie. Wenn Du die eingefügte Vorlage berührst, siehst Du, was Du damit machen kannst.",
+        "back_button": "Du kannst jederzeit zurückgehen. Jede Änderung am Quiz wird beim Klicken oder Tippen sofort gespeichert. Das gilt für die ganze App. Du musst nie etwas speichern!",
+        "forward_button": "Ist dein Quiz vollständig und besteht eine Verbindung zum Server, kannst Du zur Quiz Lobby gehen und das Quiz eröffnen."
       }
     },
     "quiz_summary": {
       "title": "Zusammenfassung",
       "quiz_name": "Quizname",
-      "quiz_url": "Link",
+      "quiz_url": "",
       "question_amount": "Fragen",
       "validation_question_group": "Status",
       "successful": "valide",
@@ -513,17 +513,17 @@
       "true": "Ja",
       "false": "Nein",
       "description": {
-        "header": "Hier ist die Zusammenfassung der gesamten Quizrunde zu sehen",
-        "session_url": "Unter dieser URL können die Teilnehmer/innen dem Quiz beitreten, sobald Du es freigibst",
-        "question_group_validation": "Die Validierung der Quizrunde schlägt fehl, sofern das Quiz noch nicht fertiggstellt ist. Dazu zählen nicht vorhandene Quizfragen, fehlende oder unvollständige Antwortoptionen, nicht gesetzte Timer usw.",
-        "restrict_to_cas": "Ist diese Einstellung aktiv, müssen sich die Teilnehmer/innen am zentralen Authentifizierungsdienst der Technischen Hochschule Mittelhessen anmelden, um am Quiz teilnehmen zu können",
+        "header": "Hier stehen die wichtigsten Daten deiner Quizrunde. Hinweis: Du kannst die Hilfe unten mit der Schaltfläche \"Produktführung\" ein- und ausblenden.",
+        "session_url": "Mit diesem Link kann dein Publikum ohne Eintippen des Quiznamens direkt am Quiz teilnehmen.",
+        "question_group_validation": "Die Validierung deiner Quizrunde schlägt fehl, solange das Quiz noch nicht fertiggstellt ist, zum Beispiel: noch keine Quizfrage vorhanden, Frage fehlt, Antwortoptionen unvollständig.",
+        "restrict_to_cas": "Ist diese Einstellung aktiviert, müssen sich die Teilnehmer/innen am zentralen Authentifizierungsdienst der Technischen Hochschule Mittelhessen anmelden, um am Quiz teilnehmen zu können",
         "question_item": "Dieser Bereich enthält Informationen zur ausgewählten Quizfrage.",
         "validation_errors": "Nützlich bei der Fehlersuche können die hier aufgelisteten Validierungsfehler sein."
       }
     },
     "theme_switcher": {
       "set_theme": "Dein Stil",
-      "select_a_theme_title": "Wähle einen Stil",
+      "select_a_theme_title": "Wähle deinen Stil",
       "themes": {
         "theme-arsnova-dot-click-contrast": {
           "name": "arsnova.click (kontrastreich)",
@@ -653,7 +653,7 @@
         "set_text_error": "Der Text des Splashscreens kann nur gesetzt werden, nachdem er gerendered wurde!",
         "error_messages": {
           "Internal Server Error": "Interner Serverfehler",
-          "update_failed": "Es ist ein Fehler bei der Aktualisierung Deiner Frage aufgetreten.",
+          "update_failed": "Es ist ein Fehler bei der Aktualisierung deiner Frage aufgetreten.",
           "session_exists": "Dieses Quiz existiert bereits!",
           "session_exists_warning": "Der Name dieses Quiz ist bereits vergeben.",
           "session_exists_arsnova_import": "Bitte gib für dein arsnova Quiz einen eindeutigen Namen ein:",
@@ -661,7 +661,7 @@
           "session_not_exists": "Dieses Quiz existiert nicht!",
           "hashtag_exists": "Dieser Quizname existiert bereits!",
           "session_not_available": "Dieser Quizrunde kann aktuell nicht beigetreten werden.",
-          "private_browsing": "Im Privatmodus Deines Browsers funktioniert arsnova.click leider nur als Teilnehmer/in, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von arsnova.click den Privatmodus deaktivieren und arsnova.click erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.",
+          "private_browsing": "Im Privatmodus deines Browsers funktioniert arsnova.click leider nur als Teilnehmer/in, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von arsnova.click den Privatmodus deaktivieren und arsnova.click erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.",
           "kicked_from_quiz": "Du wurdest aus dem Quiz geworfen!",
           "nick_already_exists": "Dieser Benutzername existiert bereits",
           "export_failed": "Konnte die Quizdaten nicht exportieren! - %s",

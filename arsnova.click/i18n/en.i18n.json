@@ -462,7 +462,7 @@
     "quiz_summary": {
       "title": "Summary",
       "quiz_name": "Name of the quiz",
-      "quiz_url": "URL for attendees",
+      "quiz_url": "",
       "question_amount": "Amount of all questions",
       "validation_question_group": "Validation for the complete quiz",
       "successful": "Successful",

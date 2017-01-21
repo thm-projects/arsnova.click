@@ -4,7 +4,7 @@
             <div id="quizSummaryHeader" class="quizSummary margin-title" role="list" data-intro="{{#if showHeader}}{{_ "view.quiz_summary.description.header"}}{{/if}}" aria-label="{{_ "view.quiz_summary.description.header"}}">
                 {{#if showHeader}}
                     <p role="listitem">{{_ "view.quiz_summary.quiz_name"}}: {{getSessionName}}</p>
-                    <p role="listitem" id="quizSummarySessionUrl" data-intro="{{_ "view.quiz_summary.description.session_url"}}" aria-label="{{_ "view.quiz_summary.description.session_url"}}">{{_ "view.quiz_summary.quiz_url"}}: <span id="sessionUrl">{{getSessionUrl}}</span></p>
+                    <p role="listitem" id="quizSummarySessionUrl" data-intro="{{_ "view.quiz_summary.description.session_url"}}" aria-label="{{_ "view.quiz_summary.description.session_url"}}">{{_ "view.quiz_summary.quiz_url"}}<span id="sessionUrl">{{getSessionUrl}}</span></p>
                     <p role="listitem">{{_ "view.quiz_summary.question_amount"}}: {{getQuestionCount}}</p>
                     <p role="listitem" id="quizSummaryQuestionGroupValidation" data-intro="{{_ "view.quiz_summary.description.question_group_validation"}}" aria-label="{{_ "view.quiz_summary.description.question_group_validation"}}">{{_ "view.quiz_summary.validation_question_group"}}: <span class="{{#if isQuestionGroupValid}}success{{else}}failed{{/if}}">{{_ getQuestionGroupValidation}}</span></p>
                     {{#if noSelectedNicks}}

@@ -172,7 +172,6 @@ export function getTooltipForRoute(overridePreference = false) {
 			return;
 		}
 		hasStartedIntroJs = true;
-		const elemCount = $('[data-intro]').length;
 		const customIntroJs = introJs().setOptions({
 			'overlayOpacity': 0,
 			'tooltipPosition': 'auto',

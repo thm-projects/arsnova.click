@@ -172,16 +172,19 @@ export function getTooltipForRoute(overridePreference = false) {
 			return;
 		}
 		hasStartedIntroJs = true;
-		const elemCount = $('[data-intro]').length;
 		const customIntroJs = introJs().setOptions({
 			'overlayOpacity': 0,
 			'tooltipPosition': 'auto',
 			'hidePrev': true,
 			'hideNext': true,
-			'showBullets': elemCount > 1,
-			'showProgress': elemCount > 1,
-			'nextLabel': TAPi18n.__("global.next"),
-			'prevLabel': TAPi18n.__("global.back"),
+			'showStepNumbers': false,
+			'showBullets': false,
+			'showProgress': false,
+			'exitOnEsc': true,
+			'exitOnOverlayClick': true,
+			'nextLabel': " > ",
+			'prevLabel': " < ",
+			'scrollToElement': true,
 			'doneLabel': TAPi18n.__("global.close_window"),
 			'skipLabel': TAPi18n.__("global.close_window")
 		}).onafterchange(function (targetElement) {

@@ -541,6 +541,10 @@
           "name": "Material Design Colors",
           "description": "Annäherung an Google's Material Design."
         },
+          "decent_blue": {
+          "name": "Decent Blue",
+          "description": "Schlichte dezente Blautöne richten den Fokus auf das Wesentliche."
+        },
         "material_hope": {
           "name": "Material Hope",
           "description": "Google Material und ein Funken Hoffnung."

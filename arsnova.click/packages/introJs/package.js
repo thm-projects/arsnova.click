@@ -1,6 +1,6 @@
 Package.describe({
   name: 'arsnova.click:introjs',
-  version: '2.3.0',
+  version: '2.4.0',
   summary: 'Meteor package for intro.js',
   git: 'https://github.com/usablica/intro.js.git'
 });

@@ -36,9 +36,18 @@ Template.questionTypeView.onRendered(function () {
 	Meteor.defer(function () {
 		calculateRowHeight();
 	});
-	footerElements.removeFooterElements();
-	footerElements.addFooterElement(footerElements.footerElemHome);
-	headerLib.calculateHeaderSize();
-	headerLib.calculateTitelHeight();
-	getTooltipForRoute();
+	this.autorun(function () {
+		footerElements.removeFooterElements();
+		footerElements.addFooterElement(footerElements.footerElemHome);
+		if ($(window).width() > 768) {
+			footerElements.addFooterElement(footerElements.footerElemProductTour);
+		}
+		headerLib.calculateHeaderSize();
+		headerLib.calculateTitelHeight();
+	}.bind(this));
+	Meteor.defer(function () {
+		if (localStorage.getItem("showProductTour") !== "false") {
+			getTooltipForRoute();
+		}
+	});
 });

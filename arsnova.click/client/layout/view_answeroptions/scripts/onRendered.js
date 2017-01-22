@@ -77,11 +77,20 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 			ui.helper.append(textFrame);
 		}
 	});
-	footerElements.removeFooterElements();
-	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.addFooterElement(footerElements.footerElemProductTour);
-	headerLib.calculateHeaderSize();
-	headerLib.calculateTitelHeight();
+	this.autorun(function () {
+		footerElements.removeFooterElements();
+		footerElements.addFooterElement(footerElements.footerElemHome);
+		if ($(window).width() > 768) {
+			footerElements.addFooterElement(footerElements.footerElemProductTour);
+		}
+		headerLib.calculateHeaderSize();
+		headerLib.calculateTitelHeight();
+	}.bind(this));
+	Meteor.defer(function () {
+		if (localStorage.getItem("showProductTour") !== "false") {
+			getTooltipForRoute();
+		}
+	});
 });
 
 Template.rangedAnswerOptionTemplate.onRendered(function () {
@@ -93,14 +102,20 @@ Template.rangedAnswerOptionTemplate.onRendered(function () {
 			return false;
 		}
 	});
-	footerElements.removeFooterElements();
-	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.addFooterElement(footerElements.footerElemProductTour);
-	headerLib.calculateHeaderSize();
-	headerLib.calculateTitelHeight();
-	if (localStorage.getItem("showProductTour") !== "false") {
-		getTooltipForRoute();
-	}
+	this.autorun(function () {
+		footerElements.removeFooterElements();
+		footerElements.addFooterElement(footerElements.footerElemHome);
+		if ($(window).width() > 768) {
+			footerElements.addFooterElement(footerElements.footerElemProductTour);
+		}
+		headerLib.calculateHeaderSize();
+		headerLib.calculateTitelHeight();
+	}.bind(this));
+	Meteor.defer(function () {
+		if (localStorage.getItem("showProductTour") !== "false") {
+			getTooltipForRoute();
+		}
+	});
 });
 
 Template.freeTextAnswerOptionTemplate.onRendered(function () {
@@ -121,15 +136,21 @@ Template.freeTextAnswerOptionTemplate.onRendered(function () {
 				$('#config_use_keywords_switch').bootstrapToggle(configUseKeywordsState);
 				$('#config_use_punctuation_switch').bootstrapToggle(configUsePunctuationState);
 			});
-			if (localStorage.getItem("showProductTour") !== "false") {
-				getTooltipForRoute();
-			}
 		});
 	}.bind(this));
-	lib.styleFreetextAnswerOptionValidation(answerList[0].isValid());
-	footerElements.removeFooterElements();
-	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.addFooterElement(footerElements.footerElemProductTour);
-	headerLib.calculateHeaderSize();
-	headerLib.calculateTitelHeight();
+	this.autorun(function () {
+		lib.styleFreetextAnswerOptionValidation(answerList[0].isValid());
+		footerElements.removeFooterElements();
+		footerElements.addFooterElement(footerElements.footerElemHome);
+		if ($(window).width() > 768) {
+			footerElements.addFooterElement(footerElements.footerElemProductTour);
+		}
+		headerLib.calculateHeaderSize();
+		headerLib.calculateTitelHeight();
+	}.bind(this));
+	Meteor.defer(function () {
+		if (localStorage.getItem("showProductTour") !== "false") {
+			getTooltipForRoute();
+		}
+	});
 });

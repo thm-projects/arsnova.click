@@ -32,48 +32,6 @@ import {getTooltipForRoute} from '/client/layout/global/scripts/lib.js';
 Template.memberlist.onRendered(function () {
 	Session.set("learnerCountOverride", false);
 	Session.set("allMembersCount", MemberListCollection.find().count());
-	this.autorun(function () {
-		headerLib.titelTracker.depend();
-		calculateButtonCount(Session.get("allMembersCount"));
-	}.bind(this));
-
-	footerElements.removeFooterElements();
-	if (localData.containsHashtag(Router.current().params.quizName)) {
-		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
-		const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
-
-		let songTitle = musicSettings.getLobbyTitle();
-		if (songTitle === "Random") {
-			songTitle = MusicSessionConfiguration.getAvailableMusic().lobbyMusic[randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().lobbyMusic.length - 1)];
-		}
-
-		setLobbySound(songTitle, false);
-		lobbySound.setVolume(musicSettings.getLobbyVolume());
-
-		lobbySound.stop();
-		if (musicSettings.getLobbyEnabled()) {
-			Session.set("lobbySoundIsPlaying", true);
-			lobbySound.play();
-		}
-
-		footerElements.addFooterElement((footerElements.footerElemEditQuiz));
-		footerElements.addFooterElement(footerElements.footerElemHome);
-		if ($(window).outerWidth() >= 1024) {
-			footerElements.addFooterElement(footerElements.footerElemQRCode);
-			footerElements.addFooterElement(footerElements.footerElemProductTour);
-		}
-		footerElements.addFooterElement(footerElements.footerElemSound);
-		footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
-		footerElements.addFooterElement(footerElements.footerElemResponseProgress);
-		footerElements.addFooterElement(footerElements.footerElemNicknames);
-		if (navigator.userAgent.match(/iPad/i) == null) {
-			footerElements.addFooterElement(footerElements.footerElemFullscreen);
-		}
-		footerElements.addFooterElement(footerElements.footerElemTheme);
-	}
-	calculateButtonCount(Session.get("allMembersCount"));
-	footerElements.footerTracker.changed();
-	memberlistTracker.changed();
 
 	$('.navbar-footer-placeholder').hide();
 	$('.navbar-footer').show();
@@ -90,9 +48,51 @@ Template.memberlist.onRendered(function () {
 			$('.navbar-footer').show();
 		}
 	});
-	Meteor.defer(function () {
+	if (localData.containsHashtag(Router.current().params.quizName)) {
+		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
+		const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
+		let songTitle       = musicSettings.getLobbyTitle();
+		if (songTitle === "Random") {
+			songTitle = MusicSessionConfiguration.getAvailableMusic().lobbyMusic[randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().lobbyMusic.length - 1)];
+		}
+		setLobbySound(songTitle, false);
+		lobbySound.setVolume(musicSettings.getLobbyVolume());
+		lobbySound.stop();
+		if (musicSettings.getLobbyEnabled()) {
+			Session.set("lobbySoundIsPlaying", true);
+			lobbySound.play();
+		}
+	}
+	this.autorun(function () {
+		headerLib.titelTracker.depend();
+		calculateButtonCount(Session.get("allMembersCount"));
+	}.bind(this));
+	this.autorun(function () {
+		footerElements.removeFooterElements();
+		if (localData.containsHashtag(Router.current().params.quizName)) {
+			footerElements.addFooterElement((footerElements.footerElemEditQuiz));
+			footerElements.addFooterElement(footerElements.footerElemHome);
+			if ($(window).outerWidth() >= 1024) {
+				footerElements.addFooterElement(footerElements.footerElemQRCode);
+			}
+			if ($(window).width() > 768) {
+				footerElements.addFooterElement(footerElements.footerElemProductTour);
+			}
+			footerElements.addFooterElement(footerElements.footerElemSound);
+			footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
+			footerElements.addFooterElement(footerElements.footerElemResponseProgress);
+			footerElements.addFooterElement(footerElements.footerElemNicknames);
+			if (navigator.userAgent.match(/iPad/i) == null) {
+				footerElements.addFooterElement(footerElements.footerElemFullscreen);
+			}
+			footerElements.addFooterElement(footerElements.footerElemTheme);
+		}
+		footerElements.footerTracker.changed();
+		memberlistTracker.changed();
 		headerLib.calculateHeaderSize();
 		headerLib.calculateTitelHeight();
+	}.bind(this));
+	Meteor.defer(function () {
 		if (localStorage.getItem("showProductTour") !== "false") {
 			getTooltipForRoute();
 		}

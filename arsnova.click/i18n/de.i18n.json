@@ -436,19 +436,19 @@
           "btn_group": "Auswahl an Einstellungen für das Quiz"
         },
         "question_type": {
-          "long": "Fragetyp auswählen",
+          "long": "Fragetyp ändern",
           "short": "Typ"
         },
         "question_text": {
-          "long": "Frage bearbeiten",
+          "long": "1. Fragetext bearbeiten",
           "short": "Frage"
         },
         "answeroptions": {
-          "long": "Antwortoptionen bearbeiten",
+          "long": "2. Antwortoptionen bearbeiten",
           "short": "Antworten"
         },
         "timer": {
-          "long": "Countdown einstellen",
+          "long": "3. Countdown einstellen",
           "short": "Countdown"
         }
       },

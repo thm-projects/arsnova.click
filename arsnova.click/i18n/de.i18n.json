@@ -394,7 +394,7 @@
       }
     },
     "question_type": {
-      "title": "Fragetyp auswählen",
+      "title": "Fragetyp ändern",
       "currentType": "Aktueller Typ der Quizfrage:",
       "description": {
         "type_wrapper": "Hier kannst Du den Typ der Quizfrage ändern. Jeder Typ hat unterschiedliche Einstellungen. Ändere den Typ durch einen Klick auf die jeweilige Box.",
@@ -408,7 +408,7 @@
       }
     },
     "questions": {
-      "title": "Frage bearbeiten",
+      "title": "Fragetext bearbeiten",
       "enter_question_here": "Gib hier den Text der Frage ein",
       "preview": "",
       "single_choice_question": "Single-Choice-Frage",
@@ -437,7 +437,7 @@
         },
         "question_type": {
           "long": "Fragetyp auswählen",
-          "short": "Fragetyp"
+          "short": "Typ"
         },
         "question_text": {
           "long": "Frage bearbeiten",

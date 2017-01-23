@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import * as headerLib from '/client/layout/region_header/lib.js';
@@ -39,12 +40,18 @@ Template.createQuestionView.onRendered(function () {
 		lib.addQuestion(parseInt(Router.current().params.questionIndex));
 	}.bind(this));
 
-	footerElements.removeFooterElements();
-	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.addFooterElement(footerElements.footerElemProductTour);
-	headerLib.calculateHeaderSize();
-	headerLib.calculateTitelHeight();
-	if (localStorage.getItem("showProductTour") !== "false") {
-		getTooltipForRoute();
-	}
+	this.autorun(function () {
+		footerElements.removeFooterElements();
+		footerElements.addFooterElement(footerElements.footerElemHome);
+		if ($(window).width() > 768) {
+			footerElements.addFooterElement(footerElements.footerElemProductTour);
+		}
+		headerLib.calculateHeaderSize();
+		headerLib.calculateTitelHeight();
+	}.bind(this));
+	Meteor.defer(function () {
+		if (localStorage.getItem("showProductTour") !== "false") {
+			getTooltipForRoute();
+		}
+	});
 });

@@ -125,27 +125,37 @@ Template.quizManager.onRendered(function () {
 	this.autorun(function () {
 		footerElements.removeFooterElements();
 		footerElements.addFooterElement(footerElements.footerElemHome);
-		footerElements.addFooterElement(footerElements.footerElemProductTour);
+		if ($(window).width() > 768) {
+			footerElements.addFooterElement(footerElements.footerElemProductTour);
+		}
 		if (Meteor.status().connected) {
 			footerElements.addFooterElement(footerElements.footerElemNicknames);
 		}
 		headerLib.calculateHeaderSize();
 		headerLib.calculateTitelHeight();
 	}.bind(this));
-	if (localStorage.getItem("showProductTour") !== "false") {
-		getTooltipForRoute();
-	}
+	Meteor.defer(function () {
+		if (localStorage.getItem("showProductTour") !== "false") {
+			getTooltipForRoute();
+		}
+	});
 	$(".contentPosition").scrollTop(0);
 });
 
 Template.quizManagerDetails.onRendered(function () {
-	footerElements.removeFooterElements();
-	footerElements.addFooterElement(footerElements.footerElemHome);
-	footerElements.addFooterElement(footerElements.footerElemProductTour);
-	headerLib.calculateHeaderSize();
-	headerLib.calculateTitelHeight();
-	if (localStorage.getItem("showProductTour") !== "false") {
-		getTooltipForRoute();
-	}
+	this.autorun(function () {
+		footerElements.removeFooterElements();
+		footerElements.addFooterElement(footerElements.footerElemHome);
+		if ($(window).width() > 768) {
+			footerElements.addFooterElement(footerElements.footerElemProductTour);
+		}
+		headerLib.calculateHeaderSize();
+		headerLib.calculateTitelHeight();
+	}.bind(this));
+	Meteor.defer(function () {
+		if (localStorage.getItem("showProductTour") !== "false") {
+			getTooltipForRoute();
+		}
+	});
 	$(".contentPosition").scrollTop(0);
 });

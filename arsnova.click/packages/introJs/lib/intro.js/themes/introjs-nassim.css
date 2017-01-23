@@ -132,7 +132,7 @@
     margin-right: -10px;
     /* border-top: 1px solid #FFFFFF; */
     /* background: #FAFAFA; */
-    color: #2c3e50;
+    color: #00796B;
     padding: 25px 30px 15px;
     /* border-bottom: 1px solid #FFFFFF; */
 }
@@ -160,7 +160,7 @@
   background: transparent;
   text-decoration: none;
   font: 11px/normal sans-serif;
-  color: #2980b9 !important;
+  color: #FF9800 !important;
   white-space: nowrap;
   cursor: pointer;
   outline: none !important;
@@ -183,19 +183,19 @@
 }
 
 .introjs-button:hover {
-  color: #fff;
-  background: #2671A2;
+  color: #fff !important;
+  background: #FF9800;
   text-decoration: none;
-  border-color: #235677;
+  border-color: #FF9800;
 }
 
 .introjs-button:focus,
 .introjs-button:active {
-    background: #23587A;  text-decoration: none;
-    color: #fff;
+    background: #FF9800;  text-decoration: none;
+    color: #fff !important;
     /* bottom: -1px; */
     box-shadow: none;
-    border-color: #173B53;
+    border-color: #FF9800;
 }
 
 /* overrides extra padding on button elements in Firefox */
@@ -211,8 +211,8 @@
 }
 
 .introjs-skipbutton:hover {
-    background: #EB1540;
-    border-color: #B91D0D;
+    background: #FF9800;
+    border-color: #FF9800;
 
 }
 

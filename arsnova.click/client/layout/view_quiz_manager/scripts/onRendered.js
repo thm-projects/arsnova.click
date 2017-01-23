@@ -63,9 +63,9 @@ Template.quizManager.onRendered(function () {
 					'<li data-valid="' + (item.isValid() ? "true" : "false") + '" aria-invalid="' + (item.isValid() ? "false" : "true") + '">' + (item.getQuestionIndex() + 1) + '. ' + TAPi18n.__(item.translationReferrer()) + '</li>'
 				).append(
 					$('<div class="contextMenu" />').append(
-						"<div class='editQuestion text-light contextMenuItem'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></div>",
-						"<div class='moveQuestionUp text-light contextMenuItem'><span class='glyphicon glyphicon-chevron-up' aria-hidden='true'></span></div>",
-						"<div class='moveQuestionDown text-light contextMenuItem'><span class='glyphicon glyphicon-chevron-down' aria-hidden='true'></span></div>",
+						"<div class='editQuestion text-light contextMenuItem'><span class='glyphicon glyphicon-edit' aria-hidden='true'>edit</span></div>",
+						"<div class='moveQuestionUp text-light contextMenuItem'><span class='glyphicon glyphicon-chevron-up' aria-hidden='true'>up</span></div>",
+						"<div class='moveQuestionDown text-light contextMenuItem'><span class='glyphicon glyphicon-chevron-down' aria-hidden='true'>down</span></div>",
 						"<div class='removeQuestion text-light contextMenuItem'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></div>"
 					)
 				)

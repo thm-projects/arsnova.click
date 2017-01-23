@@ -440,15 +440,15 @@
           "short": "Typ"
         },
         "question_text": {
-          "long": "1. Fragetext bearbeiten",
+          "long": "Schritt 1: Fragetext bearbeiten",
           "short": "Frage"
         },
         "answeroptions": {
-          "long": "2. Antwortoptionen bearbeiten",
+          "long": "Schritt 2: Antwortoptionen bearbeiten",
           "short": "Antworten"
         },
         "timer": {
-          "long": "3. Countdown einstellen",
+          "long": "Schritt 3: Countdown einstellen",
           "short": "Countdown"
         }
       },

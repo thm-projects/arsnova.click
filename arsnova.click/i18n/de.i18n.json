@@ -394,7 +394,7 @@
       }
     },
     "question_type": {
-      "title": "Fragetyp auswählen",
+      "title": "Fragetyp ändern",
       "currentType": "Aktueller Typ der Quizfrage:",
       "description": {
         "type_wrapper": "Hier kannst Du den Typ der Quizfrage ändern. Jeder Typ hat unterschiedliche Einstellungen. Ändere den Typ durch einen Klick auf die jeweilige Box.",
@@ -408,7 +408,7 @@
       }
     },
     "questions": {
-      "title": "Frage bearbeiten",
+      "title": "Fragetext bearbeiten",
       "enter_question_here": "Gib hier den Text der Frage ein",
       "preview": "",
       "single_choice_question": "Single-Choice-Frage",
@@ -436,19 +436,19 @@
           "btn_group": "Auswahl an Einstellungen für das Quiz"
         },
         "question_type": {
-          "long": "Fragetyp auswählen",
-          "short": "Fragetyp"
+          "long": "Fragetyp ändern",
+          "short": "Typ"
         },
         "question_text": {
-          "long": "Frage bearbeiten",
+          "long": "Schritt 1: Fragetext bearbeiten",
           "short": "Frage"
         },
         "answeroptions": {
-          "long": "Antwortoptionen bearbeiten",
+          "long": "Schritt 2: Antwortoptionen bearbeiten",
           "short": "Antworten"
         },
         "timer": {
-          "long": "Countdown einstellen",
+          "long": "Schritt 3: Countdown einstellen",
           "short": "Countdown"
         }
       },
@@ -540,6 +540,10 @@
         "material": {
           "name": "Material Design Colors",
           "description": "Annäherung an Google's Material Design."
+        },
+          "decent_blue": {
+          "name": "Decent Blue",
+          "description": "Schlichte dezente Blautöne richten den Fokus auf das Wesentliche."
         },
         "material_hope": {
           "name": "Material Hope",

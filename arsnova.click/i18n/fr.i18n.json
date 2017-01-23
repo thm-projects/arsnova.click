@@ -565,6 +565,10 @@
           "name": "Material Design",
           "description": "Approche de la conception de Google."
         },
+          "decent_blue": {
+          "name": "Decent Blue",
+          "description": "Un gris bleu décent pour contrôler les utilisateurs se concentrer sur les principaux aspects de Quizzing"
+        },
         "material_hope": {
           "name": "Material Hope",
           "description": "Google Material et une étincelle d'espoir."

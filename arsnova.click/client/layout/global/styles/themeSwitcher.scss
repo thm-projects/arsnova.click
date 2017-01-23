@@ -21,13 +21,15 @@
 @import "themes/theme-elegant";
 @import "themes/theme-Material";
 @import "themes/theme-Material-hope";
+@import "themes/theme-decent-blue";
 
 $themes: (
 	theme-arsnova-dot-click-contrast: map-merge(standard-style-definitions(), theme-arsnova-dot-click-contrast()),
 	theme-blackbeauty: map-merge(standard-style-definitions(), theme-blackbeauty()),
 	theme-elegant: map-merge(standard-style-definitions(), theme-elegant()),
 	theme-Material: map-merge(standard-style-definitions(), theme-Material()),
-	theme-Material-hope: map-merge(standard-style-definitions(), theme-Material-hope())
+	theme-Material-hope: map-merge(standard-style-definitions(), theme-Material-hope()),
+    theme-decent-blue: map-merge(standard-style-definitions(), theme-decent-blue())
 );
 
 @each $theme, $map in $themes {

@@ -572,6 +572,10 @@
         "material_hope": {
           "name": "Material Hope",
           "description": "Google Material y una chispa de esperanza."
+        },
+        "material-blue": {
+          "name": "Material blue",
+          "description": "Google Material en azul y verde."
         }
       }
     },

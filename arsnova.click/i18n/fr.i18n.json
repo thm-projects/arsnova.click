@@ -572,6 +572,10 @@
         "material_hope": {
           "name": "Material Hope",
           "description": "Google Material et une étincelle d'espoir."
+        },
+        "material-blue": {
+          "name": "Material blue",
+          "description": "Google Material en bleu et vert."
         }
       }
     },

@@ -214,15 +214,15 @@
       "multiple_selection_survey": "Mehrere Optionen auswählbar?",
       "emoji_info": "Du kannst auch Emojis einfügen! <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'><img style='width:40px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/></a>",
       "description": {
-        "default_answer_row": "Ziehe diesen Block in die Liste der erstellten Antwortoptionen, um eine neue Antwort einzufügen.",
+        "default_answer_row": "Ziehe diesen Block in die Liste der erstellten Antwortoptionen oder klick auf ihn, um eine neue Antwort einzufügen.",
         "added_answers": "Hier siehst Du alle bereits erstellten Antwortoptionen dieser Quizfrage. Du kannst die Reihenfolge der Antworten per Drag & Drop ändern.",
         "added_answer_short_text": "Jede Antwortoption enthält einen Buchstaben, der für die Teilnehmer/innen angezeigt werden kann.",
         "added_answer_text": "Hier kannst Du den Text der Antwort eingeben. Eine Auszeichnung mit Markdown und LaTeX ist möglich. Auch Bilder können eingefügt werden.",
         "added_answer_is_correct": "Dieser Button regelt, ob die Antwort als richtig oder falsch gewertet werden soll.",
         "added_answer_remove": "Bei einem Klick auf diese Schaltfläche wird die betreffende Antwort gelöscht.",
-        "show_answer_content_on_buttons": "Die Antwortbuttons für die Teilnehmer/innen können entweder mit dem Buchstaben der Antwort oder dem vollständigen Inhalt der Antwort beschriftet werden. Beachte jedoch, dass zuviel Text in der Antwort abhängig vom Endgerät schlecht lesbar sein kann.",
+        "show_answer_content_on_buttons": "Die Antwortbuttons für die Teilnehmer/innen können entweder mit dem Buchstaben der Antwort oder dem vollständigen Inhalt der Antwort beschriftet werden. Beachte aber, dass zuviel Text in der Antwort abhängig vom Endgerät schlecht lesbar sein kann. Verschieden lange Antworttexte werden auf die Buttonbreite skaliert, was unschön aussehen kann oder einzelne Optionen überbetont.",
         "multiple_selection_survey": "Hier kannst Du einstellen, ob die Teilnehmer/innen nach dem Klick auf eine Antwort der Umfrage direkt zur Auswertung gelangen sollen oder ob eine Mehrfachauswahl möglich sein soll.",
-        "preview": "Hier siehst Du eine Smartphone-Vorschau der links eingegebenen Antwortoptionen.",
+        "preview": "Hier siehst Du, wie die Antwortoptionen auf einem Smartphone aussehen werden. Ein Klick auf einen der Antwortbuttons zeigt dir, was aktuell als richtig oder falsch bewertet wird.",
         "range_area": "Hier kannst Du die korrekte Antwort und die Toleranzen nach oben und unten angeben. Bitte beachte, dass die Eingabe in natürlichen Zahlen erfolgen muss.",
         "min_range": "Hier kannst Du den unteren Toleranzwert festlegen.",
         "correct_value": "Diese Antwort ist vollständig korrekt.",
@@ -454,8 +454,8 @@
       },
       "description": {
         "available_questions": "Hier siehst Du alle Fragetypen, aus denen Du wählen kannst. Jeder Fragetyp bietet eigene Voreinstellungen und Optionen zur Gestaltung deines Quiz.",
-        "added_questions": "Hier findest Du deine Quizfragen. Um eine Frage hinzuzufügen, ziehe eine Vorlage hierher oder klick auf sie. Wenn Du die eingefügte Vorlage berührst, siehst Du, was Du damit machen kannst.",
-        "back_button": "Du kannst jederzeit zurückgehen. Jede Änderung am Quiz wird beim Klicken oder Tippen sofort gespeichert. Das gilt für die ganze App. Du musst nie etwas speichern!",
+        "added_questions": "Hier findest Du deine Quizfragen. Um eine Frage hinzuzufügen, ziehe eine Vorlage hierher oder klick auf sie. Wenn Du die eingefügte Vorlage berührst, siehst Du, was Du damit machen kannst: Quizfrage editieren, Reihenfolge der Fragen ändern oder die Frage löschen.",
+        "back_button": "Du kannst jederzeit zurückgehen. Jede Änderung am Quiz wird beim Klicken oder Tippen sofort ohne Nachfragen gespeichert. Das gilt für die ganze App. Du musst nie etwas speichern!",
         "forward_button": "Ist dein Quiz vollständig und besteht eine Verbindung zum Server, kannst Du zur Quiz Lobby gehen und die Quizrunde eröffnen."
       }
     },
@@ -514,9 +514,9 @@
       "false": "Nein",
       "description": {
         "header": "Hier siehst Du die wichtigsten Daten deiner Quizrunde. Hinweis: Du kannst die Hilfetexte mit der Schaltfläche &raquo;Produktführung&laquo; in der Fußzeile ein- und ausschalten. Mit den Pfeiltasten springst Du bequem zum nächsten Hilfetext.",
-        "session_url": "Mit diesem Link kann dein Publikum ohne Eintippen des Quiznamens direkt am Quiz teilnehmen.",
-        "question_group_validation": "Die Validierung deiner Quizrunde schlägt fehl, solange das Quiz noch nicht fertiggstellt ist, zum Beispiel: Es ist noch keine Quizfrage erstellt worden, der Fragetext fehlt oder die Antwortoptionen sind unvollständig.",
-        "restrict_to_cas": "Ist diese Einstellung unter &raquo;Freie Auswahl&laquo; bzw. &raquo;Nicknamen&laquo; in der Fußzeile aktiviert, müssen sich die Teilnehmer/innen am zentralen Authentifizierungsdienst anmelden, um am Quiz teilnehmen zu können",
+        "session_url": "Mit diesem Link kann dein Publikum ohne Eintippen des Quiznamens direkt am Quiz teilnehmen.Schreib den Link an die Tafel oder auf Deine Folie. Sobald Du die Quizrunde startest, können sich deine Leute einloggen.",
+        "question_group_validation": "Die Validierung deiner Quizrunde schlägt fehl, solange das Quiz noch nicht fertiggstellt ist, zum Beispiel: Es ist noch keine Quizfrage mit einer der Vorlagen erstellt worden, der Fragetext fehlt oder die Antwortoptionen sind unvollständig.",
+        "restrict_to_cas": "Ist diese Einstellung unter &raquo;Freie Auswahl&laquo; bzw. &raquo;Nicknamen&laquo; in der Fußzeile aktiviert, müssen sich die Teilnehmer/innen am zentralen Authentifizierungsdienst anmelden. Hinweis: Diese Option steht nur an der THM zur Verfügung.",
         "question_item": "Dieser Bereich zeigt die aktuellen Daten der ausgewählten Quizfrage.",
         "validation_errors": "Gehe durch die obigen 3 Schritte, um die noch fehlenden Daten einzufügen oder Eingaben zu korrigieren."
       }
@@ -564,7 +564,7 @@
       "minute_plural": "Minuten",
       "hour": "Stunde",
       "hour_plural": "Stunden",
-      "description": "Hier kannst Du den Countdown für die Quizfrage einstellen. Sobald er abläuft oder alle Teilnehmer/innen eine Antwort abgegeben haben, wird die Quizrunde beendet."
+      "description": "Hier kannst Du den Countdown für die Quizfrage einstellen. Sobald er abläuft oder alle Teilnehmer/innen eine Antwort abgegeben haben, ertönt ein Gong oder Pfiff und die Quizrunde ist beendet."
     },
     "translation": {
       "translations": "Deine Sprache",

@@ -102,7 +102,7 @@ export const footerElemEditQuiz = {
 };
 export const footerElemProductTour = {
 	id: "product-tour",
-	iconClass: "glyphicon glyphicon-lamp",
+	iconClass: "glyphicon glyphicon-flag",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.show_product_tour",
 	selectable: true

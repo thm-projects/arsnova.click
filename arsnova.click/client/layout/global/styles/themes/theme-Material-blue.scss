@@ -74,10 +74,10 @@
 		/* Quizzes stored in browser */
 		"bg-js-my-hash-validQuestion": $accent_color,
 		"bg-js-my-hash-validQuestion-hovered": lighten(map-get($stdStyle, "success"), 10),
-		"fg-js-my-hash-validQuestion": map-get($stdStyle, "success-text-color"),
+		"fg-js-my-hash-validQuestion": $text_icon_color,
 		"bg-js-my-hash-invalidQuestion": map-get($stdStyle, "md_red_500"),
 		"bg-js-my-hash-invalidQuestion-hovered": map-get($stdStyle, "md_red_300"),
-		"fg-js-my-hash-invalidQuestion": $primary_text_color,
+		"fg-js-my-hash-invalidQuestion": $text_icon_color,
 		/* Splash screen */
 		"splash-screen-header-color": white,
 		"splash-screen-body-color": white,
@@ -136,7 +136,7 @@
 		"border-quiz_manager-available_questions_wrapper-invalid": red !important,
 		"fg-quiz_manager_details-btn_group-button": $primary_text_color,
 		"bg-quiz_manager_details-btn_group-button": $accent_color,
-		"bg-quiz_manager_details-btn_group-button-hovered": map-get($stdStyle, "md_orange_700"),
+		"bg-quiz_manager_details-btn_group-button-hovered": $dark_primary_color,
 		"border-quiz_manager_details-btn_group-button": map-get($stdStyle, "md_teal_300") !important,
 		/* Question type selection */
 		"border-question_type_view-wrapper": $accent_color,

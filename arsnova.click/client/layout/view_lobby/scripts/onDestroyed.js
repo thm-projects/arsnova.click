@@ -32,4 +32,7 @@ Template.memberlist.onDestroyed(function () {
 	Session.delete("allMembersCount");
 	Session.delete("maxLearnerButtons");
 	Session.delete("learnerCountOverride");
+
+	$('.navbar-footer-placeholder').hide();
+	$('.navbar-footer').show();
 });

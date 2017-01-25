@@ -248,16 +248,16 @@ export function getQuestionTypes() {
 			translationName: "view.questions.single_choice_question"
 		},
 		{
+			id: "MultipleChoiceQuestion",
+			translationName: "view.questions.multiple_choice_question"
+		},
+		{
 			id: "YesNoSingleChoiceQuestion",
 			translationName: "view.questions.single_choice_question_yes_no"
 		},
 		{
 			id: "TrueFalseSingleChoiceQuestion",
 			translationName: "view.questions.single_choice_question_true_false"
-		},
-		{
-			id: "MultipleChoiceQuestion",
-			translationName: "view.questions.multiple_choice_question"
 		},
 		{
 			id: "RangedQuestion",

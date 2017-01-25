@@ -547,11 +547,15 @@
         },
         "material_hope": {
           "name": "Material Hope",
+<<<<<<< HEAD
           "description": "Google Material und ein Funken Hoffnung."
         },
         "material-blue": {
           "name": "Material blue",
           "description": "Google Material in blau und grün."
+=======
+          "description": "Ein Funken Hoffnung."
+>>>>>>> 63fff60fbcdd088ef7abdf6b6839e6dc064ec010
         }
 
       }

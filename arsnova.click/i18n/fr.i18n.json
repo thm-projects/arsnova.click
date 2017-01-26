@@ -580,6 +580,10 @@
         "spiritual-purple": {
           "name": "Spiritual Purple",
           "description": "Spirituel."
+        },
+        "blue-purple": {
+          "name": "Blue purple",
+          "description": "Refroidir et intelligent."
         }
       }
     },

@@ -556,6 +556,10 @@
         "spiritual-purple": {
           "name": "Spiritual Purple",
           "description": "Spirituell."
+        },
+        "blue-purple": {
+          "name": "Blue purple",
+          "description": "Smart und cool."
         }
 
       }

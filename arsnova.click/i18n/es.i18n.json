@@ -576,6 +576,10 @@
         "material-blue": {
           "name": "Material blue",
           "description": "Google Material en azul y verde."
+        },
+        "spiritual-purple": {
+          "name": "Spiritual Purple",
+          "description": "Espiritual."
         }
       }
     },

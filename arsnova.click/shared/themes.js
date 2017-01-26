@@ -30,16 +30,16 @@ export const themes = [
 		description: "view.theme_switcher.themes.material_hope.description",
 		id: "theme-Material-hope"
 	},
-    {
-        name: "view.theme_switcher.themes.material-blue.name",
-        description: "view.theme_switcher.themes.material-blue.description",
-        id: "theme-Material-blue"
-    },
-    {
-        name: "view.theme_switcher.themes.spiritual-purple.name",
-        description: "view.theme_switcher.themes.material-blue.description",
-        id: "theme-Material-blue"
-    }
+	{
+		name: "view.theme_switcher.themes.material-blue.name",
+		description: "view.theme_switcher.themes.material-blue.description",
+		id: "theme-Material-blue"
+	},
+	{
+		name: "view.theme_switcher.themes.spiritual-purple.name",
+		description: "view.theme_switcher.themes.spiritual-purple.description",
+		id: "theme-spiritual-purple"
+	}
 ];
 
 export function checkIfThemeExist(theme) {

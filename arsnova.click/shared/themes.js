@@ -37,8 +37,8 @@ export const themes = [
     },
     {
         name: "view.theme_switcher.themes.spiritual-purple.name",
-        description: "view.theme_switcher.themes.spiritual-purple.description",
-        id: "theme-spiritual-purple"
+        description: "view.theme_switcher.themes.material-blue.description",
+        id: "theme-Material-blue"
     }
 ];
 

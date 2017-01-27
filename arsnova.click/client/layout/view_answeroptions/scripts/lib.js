@@ -267,23 +267,21 @@ export const renderAnsweroptionItems = function () {
 				$("<input type='checkbox' role='switch' id='answerOption-" + number + "' name='switch' data-width='80' title='answerOption-" + number + "' class='tabbable isCorrectOption tabbable'/>").prop('checked', item.getIsCorrect())
 			);
 		}
-		const contextMenu = $('<div class="contextMenu"/>').append(
-			"<div class='moveAnsweroptionUp text-light contextMenuItem'><span class='glyphicon glyphicon-chevron-up' aria-hidden='true'></span></div>",
-			"<div class='moveAnsweroptionDown text-light contextMenuItem'><span class='glyphicon glyphicon-chevron-down' aria-hidden='true'></span></div>"
-		);
+		$('#answerOptionWrapper').append($("<div id='" + number + "_answeroption' class='draggable' role='listitem'></div>").append(answerWrapper));
 		if (typeName !== "YesNoSingleChoiceQuestion" && typeName !== "TrueFalseSingleChoiceQuestion") {
+			const contextMenu = $('<div class="contextMenu"/>').append(
+				"<div class='moveAnsweroptionUp text-light contextMenuItem'><span class='glyphicon glyphicon-chevron-up' aria-hidden='true'></span></div>",
+				"<div class='moveAnsweroptionDown text-light contextMenuItem'><span class='glyphicon glyphicon-chevron-down' aria-hidden='true'></span></div>"
+			);
 			contextMenu.append(
 				"<div class='removeAnsweroption text-light contextMenuItem'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></div>"
 			);
+			answerWrapper.parent().append(contextMenu);
 		}
-		answerWrapper.append(contextMenu);
-		$('#answerOptionWrapper').append($("<div id='" + number + "_answeroption' class='draggable' role='listitem'></div>").append(answerWrapper).append(contextMenu));
 	});
-	const configShowAnswerContentOnButtonsState = questionItem.getDisplayAnswerText() ? "on" : "off";
-	$('#config_showAnswerContentOnButtons_switch').bootstrapToggle(configShowAnswerContentOnButtonsState);
+	$('#config_showAnswerContentOnButtons_switch').bootstrapToggle(questionItem.getDisplayAnswerText() ? "on" : "off");
 	if (typeName === "SurveyQuestion") {
-		const configMultipleSelectionEnabledState = questionItem.getMultipleSelectionEnabled() ? "on" : "off";
-		$('#config_multipleSelectionSurvey_switch').bootstrapToggle(configMultipleSelectionEnabledState);
+		$('#config_multipleSelectionSurvey_switch').bootstrapToggle(questionItem.getMultipleSelectionEnabled() ? "on" : "off");
 	}
 	formatIsCorrectButtons();
 	const firstAnswerElement = $("[data-id=0]");

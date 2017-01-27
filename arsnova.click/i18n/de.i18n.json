@@ -453,7 +453,7 @@
           "short": "Antworten"
         },
         "timer": {
-          "long": "Countdown ändern",
+          "long": "Countdown einstellen",
           "short": "Countdown"
         }
       },
@@ -525,8 +525,8 @@
         "session_url": "Mit diesem Link kann dein Publikum ohne Eintippen des Quiznamens direkt am Quiz teilnehmen. Schreib den Link an die Tafel oder auf Deine Folie. Sobald Du die Quizrunde startest, können sich deine Leute einloggen.",
         "question_group_validation": "Die Validierung deiner Quizrunde schlägt fehl, solange das Quiz noch nicht fertiggstellt ist, zum Beispiel: Es ist noch keine Quizfrage mit einer der Vorlagen erstellt worden, der Fragetext fehlt oder die Antwortoptionen sind unvollständig.",
         "restrict_to_cas": "Ist diese Einstellung unter &raquo;Freie Auswahl&laquo; bzw. &raquo;Nicknamen&laquo; in der Fußzeile aktiviert, müssen sich die Teilnehmer/innen am zentralen Authentifizierungsdienst anmelden. Hinweis: Diese Option steht nur an der THM zur Verfügung.",
-        "question_item": "Dieser Bereich zeigt die aktuellen Daten der ausgewählten Quizfrage.",
-        "validation_errors": "Mit den Buttons oben kannst Du die noch fehlenden Daten einfügen oder Eingaben korrigieren."
+        "question_item": "Hier siehst Du alle Daten deiner Quizfrage. Mit den Buttons oben kannst Du die Frage überarbeiten.",
+        "validation_errors": "Dein Quiz kann erst gestartet werden, wenn alle Fehler behoben wurden."
       }
     },
     "theme_switcher": {

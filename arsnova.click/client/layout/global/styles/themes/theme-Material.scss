@@ -105,6 +105,12 @@
 		"splash-screen-error-message-button-foreground-color": $primary_text_color !important,
 		/* Product Tour */
 		"bg-introjs-helper_layer": white,
+		"fg-introjs-tooltiptext": #00796B,
+		"fg-introjs-button": #FF9800,
+		"bg-introjs-button-hovered": #FF9800,
+		"fg-introjs-button-hovered": #fff,
+		"bg-introjs-button-focus": #FF9800,
+		"fg-introjs-button-focus": #fff,
 		/* Sound configuration */
 		"bg-soundConfig_soundTab_navPills": white,
 		"bg-disabled-slider": map-get($stdStyle, "md_grey_500"),

@@ -210,6 +210,8 @@
       "correct": "Correcto",
       "wrong": "Incorrecto",
       "preview": "",
+      "forward": "Proceder a la cuenta atrás",
+      "back": "Volver al administrador de preguntas",
       "show_answer_content_on_buttons": "Mostrar el contenido de la respuesta de los botones?",
       "multiple_selection_survey": "Permitir la selección de múltiples respuestas?",
       "emoji_info": "Puedes incorporar también uno de estos <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis (sitio web externo!)</a> en tus respuestas <img style='width: 30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png' /> <br/>Simplemente haga clic en el sitio web en el Emoji y péguelo en la answeroption.",
@@ -396,6 +398,7 @@
     "question_type": {
       "title": "Editar tipo de pregunta",
       "currentType": "Tipo de pregunta actual:",
+      "back": "Volver al administrador de preguntas",
       "description": {
         "type_wrapper": "Aquí puede cambiar el tipo de pregunta del cuestionario. Cada tipo tiene configuraciones diferentes. Cambie el tipo haciendo clic en la casilla correspondiente.",
         "SingleChoiceQuestion": "Las preguntas de una sola opción contienen tantas opciones de respuesta como desee, una de ellas debe estar marcada como correcta.",
@@ -411,6 +414,8 @@
       "title": "Ingresar texto de pregunta",
       "enter_question_here": "Ingresa el texto de la pregunta aquí",
       "preview": "",
+      "forward": "Proceder a las opciones de respuesta",
+      "back": "Volver al administrador de preguntas",
       "single_choice_question": "Pregunta de selección única (solo una de más respuestas es la correcta)",
       "single_choice_question_yes_no": "Pregunta si/no",
       "single_choice_question_true_false": "Pregunta Verdadero/Falso",
@@ -458,6 +463,9 @@
         "back_button": "Puedes regresar en cualquier momento. El cuestionario se guarda inmediatamente.",
         "forward_button": "Si el cuestionario es válido y está conectado al servidor, puede continuar al lobby del cuestionario y abrir el cuestionario para los participantes."
       }
+    },
+    "quiz_manager_details": {
+      "back": "Volver a la descripción de la prueba"
     },
     "quiz_summary": {
       "title": "Resúmen",
@@ -591,6 +599,8 @@
       "minute_plural": "Minutos",
       "hour": "Hora",
       "hour_plural": "Horas",
+      "forward": "Proceder al gestor de exámenes",
+      "back": "Volver al administrador de preguntas",
       "description": "Aquí puede configurar la cuenta regresiva para la pregunta de la prueba. Tan pronto como expire, o todos los participantes han contestado, la ronda de exámenes se termina."
     },
     "translation": {

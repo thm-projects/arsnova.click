@@ -1,7 +1,11 @@
 <template name="quizManager">
     <div class="row" id="quizManager">
         <div class="col-xs-12">
-            {{> quizSummary item="header"}}
+            {{#unless isFirstStart}}
+                {{#if hasQuestionsAdded}}
+                    {{> quizSummary item="header"}}
+                {{/if}}
+            {{/unless}}
         </div>
         <div class="col-xs-12 col-sm-6" role="list">
             <h2 class="text-light" role="heading">{{_ "view.quiz_manager.available_questions_title" }}</h2>

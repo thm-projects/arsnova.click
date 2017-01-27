@@ -13,7 +13,7 @@ Template.quizManager.onRendered(function () {
 	let popoverTimeout;
 	this.autorun(function () {
 		const connected = Meteor.status().connected;
-		const valid = Session.get("questionGroup") ? Session.get("questionGroup").isValid() : false;
+		const valid = typeof Session.get("questionGroup") !== "undefined" ? Session.get("questionGroup").isValid() : false;
 		const forwardButton = $('#forwardButton');
 		if (popoverTimeout && (!connected || !valid)) {
 			return;

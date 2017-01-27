@@ -210,6 +210,8 @@
       "correct": "Vrai",
       "wrong": "Faux",
       "preview": "",
+      "forward": "Passer au compte à rebours",
+      "back": "Retour au gestionnaire de quiz",
       "show_answer_content_on_buttons": "Afficher le contenu de la réponse sur les boutons?",
       "multiple_selection_survey": "Permettre la sélection de réponses multiples?",
       "emoji_info": "Vous pouvez également intégrer un de ces <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis (site externe!)</a> dans vos réponses <img style='width: 30px;' src='/images/emojis/smile.png' alt='smile_emoji.png'/><br/>Cliquez simplement sur le site sur le Emoji et collez-le dans l'answeroption.",
@@ -396,6 +398,7 @@
     "question_type": {
       "title": "Modifier le type de question",
       "currentType": "Type de question actuel:",
+      "back": "Volver al administrador de preguntas",
       "description": {
         "type_wrapper": "Ici, vous pouvez modifier le type de question du quiz. Chaque type a des réglages différents. Modifiez le type en cliquant sur la case correspondante.",
         "SingleChoiceQuestion": "Les questions à choix unique contiennent autant d'options de réponse que vous le souhaitez, l'une d'entre elles doit être marquée comme correcte.",
@@ -411,6 +414,8 @@
       "title": "Entrer le texte de la question",
       "enter_question_here": "Donne ici le texte de la question",
       "preview": "",
+      "forward": "Passer aux options de réponse",
+      "back": "Volver al administrador de preguntas",
       "single_choice_question": "Question choix simple (parmi toutes, une réponse est correcte)",
       "single_choice_question_yes_no": "Question Oui|Non",
       "single_choice_question_true_false": "Question Vrai|Faux",
@@ -458,6 +463,9 @@
         "back_button": "Vous pouvez revenir en arrière n'importe quand. Le quiz est enregistré immédiatement.",
         "forward_button": "Si le quiz est valide et que vous êtes connecté au serveur, vous pouvez passer au lobby du quiz et ouvrir le quiz pour les participants."
       }
+    },
+    "quiz_manager_details": {
+      "back": "Retour à la présentation du quiz"
     },
     "quiz_summary": {
       "title": "Résumé",
@@ -591,6 +599,8 @@
       "minute_plural": "minutes",
       "hour": "heure",
       "hour_plural": "heures",
+      "forward": "Passer au gestionnaire du quiz",
+      "back": "Retour au gestionnaire de quiz",
       "description": "Ici, vous pouvez définir le compte à rebours pour la question du quiz. Dès qu'il expire ou que tous les participants ont répondu, le rond-point est terminé."
     },
     "translation": {

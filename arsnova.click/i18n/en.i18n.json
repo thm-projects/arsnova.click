@@ -210,6 +210,8 @@
       "correct": "Correct",
       "wrong": "Wrong",
       "preview": "",
+      "forward": "Proceed to the countdown",
+      "back": "Back to the quiz manager",
       "show_answer_content_on_buttons": "Display the answer's content on the buttons?",
       "multiple_selection_survey": "Allow selection of multiple answers?",
       "emoji_info": "You can embed also one of these <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis (external website!)</a> in your answeroptions <img style='width:30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/> <br/>Simply click on the website on the Emoji and paste it into the answeroption.",
@@ -396,6 +398,7 @@
     "question_type": {
       "title": "Edit question type",
       "currentType": "Current question type:",
+      "back": "Back to the quiz manager",
       "description": {
         "type_wrapper": "Here you can change the type of quiz question. Each type has different settings. Change the type by clicking on the respective box.",
         "SingleChoiceQuestion": "Single-choice questions contain as many answer options as you like, one of them must be marked as correct.",
@@ -411,6 +414,8 @@
       "title": "Enter question text",
       "enter_question_here": "Enter your question here",
       "preview": "",
+      "forward": "Proceed to the answer options",
+      "back": "Back to the quiz manager",
       "single_choice_question": "Single Choice",
       "single_choice_question_yes_no": "Yes-No Single-Choice question",
       "single_choice_question_true_false": "True-False Single-Choice question",
@@ -458,6 +463,9 @@
         "back_button": "You can go back any time. The quiz is saved immediately.",
         "forward_button": "If the quiz is valid and you are connected to the server, you can continue to the quiz lobby and open the quiz for participants."
       }
+    },
+    "quiz_manager_details": {
+      "back": "Back to the quiz overview"
     },
     "quiz_summary": {
       "title": "Summary",
@@ -591,6 +599,8 @@
       "minute_plural": "minutes",
       "hour": "hour",
       "hour_plural": "hours",
+      "forward": "Proceed to the quiz manager",
+      "back": "Back to the quiz manager",
       "description": "Here you can set the countdown for the quiz question. As soon as it expires, or all participants have answered, the quiz round is ended."
     },
     "translation": {

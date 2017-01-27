@@ -456,7 +456,7 @@ Router.route('/:quizName/quizManager/:questionIndex', {
 					return {
 						backButton: {
 							id: "backButton",
-							text: "global.back"
+							text: "view.quiz_manager_details.back"
 						}
 					};
 				}
@@ -479,7 +479,7 @@ Router.route('/:quizName/questionType/:questionIndex', {
 					return {
 						backButton: {
 							id: "backButton",
-							text: "global.back"
+							text: "view.question_type.back"
 						}
 					};
 				}
@@ -497,12 +497,21 @@ Router.route('/:quizName/question/:questionIndex', {
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {
-						backButton: {
-							id: "backButton",
-							text: "global.back"
-						}
-					};
+					if (Session.get("questionGroup") && Session.get("questionGroup").getIsFirstStart()) {
+						return {
+							forwardButton: {
+								id: "forwardButton",
+								text: "view.questions.forward"
+							}
+						};
+					} else {
+						return {
+							backButton: {
+								id: "backButton",
+								text: "view.questions.back"
+							}
+						};
+					}
 				}
 			});
 			this.render('createQuestionView');
@@ -516,12 +525,21 @@ Router.route('/:quizName/answeroptions/:questionIndex', {
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {
-						backButton: {
-							id: "backButton",
-							text: "global.back"
-						}
-					};
+					if (Session.get("questionGroup") && Session.get("questionGroup").getIsFirstStart()) {
+						return {
+							forwardButton: {
+								id: "forwardButton",
+								text: "view.answeroptions.forward"
+							}
+						};
+					} else {
+						return {
+							backButton: {
+								id: "backButton",
+								text: "view.answeroptions.back"
+							}
+						};
+					}
 				}
 			});
 			this.render('createAnswerOptions');
@@ -537,12 +555,21 @@ Router.route('/:quizName/settimer/:questionIndex', {
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					return {
-						backButton: {
-							id: "backButton",
-							text: "global.back"
-						}
-					};
+					if (Session.get("questionGroup") && Session.get("questionGroup").getIsFirstStart()) {
+						return {
+							forwardButton: {
+								id: "forwardButton",
+								text: "view.timer.forward"
+							}
+						};
+					} else {
+						return {
+							backButton: {
+								id: "backButton",
+								text: "view.timer.back"
+							}
+						};
+					}
 				}
 			});
 			this.render('createTimerView');

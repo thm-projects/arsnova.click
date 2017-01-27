@@ -20,12 +20,10 @@ import {Template} from 'meteor/templating';
 import {Session} from 'meteor/session';
 import {Router} from 'meteor/iron:router';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {DefaultQuestionGroup} from '/lib/questions/questiongroup_default.js';
 import * as localData from '/lib/local_storage.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
 import * as routerLib from '/client/routes.js';
-import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as globalLib from '/client/layout/global/scripts/lib.js';
 import {countdownRunningSound} from '/client/plugins/sound/scripts/lib.js';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
@@ -402,17 +400,20 @@ Template.footerNavButtons.events({
 		if (typeof route === "undefined") {
 			return;
 		}
-		route = route.replace(/(:quizName.)*(.:id)*/g, "");
+		route = route.replace(/(:quizName.)*(.:id)*(.:questionIndex)*/g, "");
 		switch (route) {
 			case "question":
-				questionLib.addQuestion(EventManagerCollection.findOne().questionIndex);
-				Router.go("/" + Router.current().params.quizName + "/answeroptions");
+				Router.go("/" + Router.current().params.quizName + "/answeroptions/" + Router.current().params.questionIndex);
 				break;
 			case "answeroptions":
-				Router.go("/" + Router.current().params.quizName + "/settimer");
+				Router.go("/" + Router.current().params.quizName + "/settimer/" + Router.current().params.questionIndex);
 				break;
 			case "settimer":
-				Router.go("/" + Router.current().params.quizName + "/quizSummary");
+				const questionGroup = Session.get("questionGroup");
+				questionGroup.setIsFirstStart(false);
+				Session.set("questionGroup", questionGroup);
+				localData.addHashtag(questionGroup);
+				Router.go("/" + Router.current().params.quizName + "/quizManager/" + Router.current().params.questionIndex);
 				break;
 			case "quizSummary":
 			case "quizManager":

@@ -259,8 +259,8 @@ $themes: (
 			.input-field-bg-color, .input-field {
 				background-color: map-get($map, "input-background-color");
 			}
-			.default-yellow-text-color {
-				color: white;
+			.header-title {
+				color: map-get($map, "fg-header-title");
 			}
 			.input-group-letter, .button-result-letter {
 				color: map-get($map, "input-group-letter-color");

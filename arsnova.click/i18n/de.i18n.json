@@ -521,7 +521,7 @@
       "true": "Ja",
       "false": "Nein",
       "description": {
-        "header": "Hier siehst Du die wichtigsten Daten deiner Quizrunde. Hinweis: Du kannst die Hilfetexte mit der Schaltfläche &raquo;Tour&laquo; in der Fußzeile ein- und ausschalten. Mit den Pfeiltasten springst Du bequem zum nächsten Hilfetext.",
+        "header": "Hier siehst Du die wichtigsten Daten deiner Quizrunde.",
         "session_url": "Mit diesem Link kann dein Publikum ohne Eintippen des Quiznamens direkt am Quiz teilnehmen. Schreib den Link an die Tafel oder auf Deine Folie. Sobald Du die Quizrunde startest, können sich deine Leute einloggen.",
         "question_group_validation": "Die Validierung deiner Quizrunde schlägt fehl, solange das Quiz noch nicht fertiggstellt ist, zum Beispiel: Es ist noch keine Quizfrage mit einer der Vorlagen erstellt worden, der Fragetext fehlt oder die Antwortoptionen sind unvollständig.",
         "restrict_to_cas": "Ist diese Einstellung unter &raquo;Freie Auswahl&laquo; bzw. &raquo;Nicknamen&laquo; in der Fußzeile aktiviert, müssen sich die Teilnehmer/innen am zentralen Authentifizierungsdienst anmelden. Hinweis: Diese Option steht nur an der THM zur Verfügung.",

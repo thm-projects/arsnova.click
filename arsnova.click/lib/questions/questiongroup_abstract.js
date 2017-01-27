@@ -22,6 +22,7 @@ import {questionReflection} from "./question_reflection.js";
 import {SessionConfiguration} from '../session_configuration/session_config.js';
 
 const hashtag = Symbol("hashtag");
+const isFirstStart = Symbol("isFirstStart");
 const questionList = Symbol("questionList");
 const sessionConfig = Symbol("sessionConfig");
 
@@ -67,6 +68,7 @@ export class AbstractQuestionGroup {
 			}
 		}
 		this[hashtag] = options.hashtag;
+		this[isFirstStart] = typeof options.isFirstStart === "undefined" ? true : options.isFirstStart;
 		this[sessionConfig] = new SessionConfiguration(options.configuration || {hashtag: options.hashtag});
 	}
 
@@ -135,6 +137,17 @@ export class AbstractQuestionGroup {
 		return this[questionList];
 	}
 
+	getIsFirstStart () {
+		return this[isFirstStart];
+	}
+
+	setIsFirstStart (value) {
+		if (typeof value !== "boolean") {
+			throw new Error("Invalid argument for AbstractQuestionGroup.setIsFirstStart");
+		}
+		this[isFirstStart] = value;
+	}
+
 	getConfiguration () {
 		return this[sessionConfig];
 	}
@@ -152,6 +165,7 @@ export class AbstractQuestionGroup {
 		this.getQuestionList().forEach(function (question) { questionListSerialized.push(question.serialize()); });
 		return {
 			hashtag: this.getHashtag(),
+			isFirstStart: this.getIsFirstStart(),
 			questionList: questionListSerialized,
 			configuration: this.getConfiguration().serialize()
 		};
@@ -181,6 +195,7 @@ export class AbstractQuestionGroup {
 	equals (questionGroup) {
 		if (questionGroup instanceof AbstractQuestionGroup) {
 			if (questionGroup.getHashtag() !== this.getHashtag() ||
+				questionGroup.getIsFirstStart() !== this.getIsFirstStart() ||
 				!questionGroup.getConfiguration().equals(this.getConfiguration())) {
 				return false;
 			}

@@ -19,6 +19,12 @@ Template.quizManager.helpers({
 			return;
 		}
 		return Session.get("questionGroup").getQuestionList().length > 0;
+	},
+	isFirstStart: ()=> {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		return Session.get("questionGroup").getIsFirstStart();
 	}
 });
 

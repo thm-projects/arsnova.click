@@ -24,7 +24,7 @@
 @import "themes/theme-decent-blue";
 @import "themes/theme-Material-blue";
 @import "themes/theme-spiritual-purple";
-@import "themes/theme-blue-purple";
+
 $themes: (
 	theme-arsnova-dot-click-contrast: map-merge(standard-style-definitions(), theme-arsnova-dot-click-contrast()),
 	theme-blackbeauty: map-merge(standard-style-definitions(), theme-blackbeauty()),
@@ -33,8 +33,7 @@ $themes: (
 	theme-Material-hope: map-merge(standard-style-definitions(),theme-Material-hope()),
 	theme-Material-blue: map_merge(standard-style-definitions(),theme-Material-blue()),
 	theme-decent-blue: map-merge(standard-style-definitions(), theme-decent-blue()),
-	theme-spiritual-purple: map-merge(standard-style-definitions(), theme-spiritual-purple()),
-	theme-blue-purple: map-merge(standard-style-definitions(), theme-blue-purple())
+	theme-spiritual-purple: map-merge(standard-style-definitions(), theme-spiritual-purple())
 );
 
 @each $theme, $map in $themes {

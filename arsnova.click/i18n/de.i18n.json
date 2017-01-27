@@ -211,7 +211,7 @@
       "wrong": "Falsch",
       "preview": "",
       "forward": "Weiter zum Countdown",
-      "back": "Zurück zum Quiz Manager",
+      "back": "Zurück zum Quiz-Manager",
       "show_answer_content_on_buttons": "Antworttext auf Abstimmbuttons?",
       "multiple_selection_survey": "Mehrere Optionen auswählbar?",
       "emoji_info": "Du kannst auch Emojis einfügen! <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'><img style='width:40px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/></a>",
@@ -398,7 +398,7 @@
     "question_type": {
       "title": "Fragetyp ändern",
       "currentType": "Aktueller Typ der Quizfrage:",
-      "back": "Zurück zum Quiz Manager",
+      "back": "Zurück zum Quiz-Manager",
       "description": {
         "type_wrapper": "Hier kannst Du den Typ der Quizfrage ändern. Jeder Typ hat unterschiedliche Einstellungen. Ändere den Typ durch einen Klick auf die jeweilige Box. Beachte aber, dass zuvor eingegebene Antwortoptionen je nach Wechsel des Fragetyps verloren gehen können. Von Single-Choice nach Multiple-Choice zu wechseln und umgekehrt, ist unkritisch.",
         "SingleChoiceQuestion": "Single-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen genau eine als richtig markiert sein muss.",
@@ -415,7 +415,7 @@
       "enter_question_here": "Gib hier den Text der Frage ein",
       "preview": "",
       "forward": "Weiter zu den Antworten",
-      "back": "Zurück zum Quiz Manager",
+      "back": "Zurück zum Quiz-Manager",
       "single_choice_question": "Single-Choice-Frage",
       "single_choice_question_yes_no": "Ja-Nein-Frage",
       "single_choice_question_true_false": "Wahr-Falsch-Frage",
@@ -431,7 +431,7 @@
       "title": "Quiz-Manager",
       "available_questions_title": "Quizvorlagen",
       "added_questions_title": "Quizfragen",
-      "no_added_questions": "Du hast noch keine Quizfrage erstellt.",
+      "no_added_questions": "Wähle eine Vorlage aus!",
       "session_invalid": "Das Quiz enthält noch unvollständige Quizfragen",
       "session_empty": "Das Quiz enthält noch keine Quizfragen",
       "connection_lost": "Die Verbindung zum Server wurde unterbrochen",
@@ -465,7 +465,7 @@
       }
     },
     "quiz_manager_details": {
-      "back": "Zurück zur Quiz Übersicht"
+      "back": "Zurück zur Quiz-Übersicht"
     },
     "quiz_summary": {
       "title": "Zusammenfassung",
@@ -576,8 +576,8 @@
       "minute_plural": "Minuten",
       "hour": "Stunde",
       "hour_plural": "Stunden",
-      "forward": "Weiter zum Quiz Manager",
-      "back": "Zurück zum Quiz Manager",
+      "forward": "Weiter zum Quiz-Manager",
+      "back": "Zurück zum Quiz-Manager",
       "description": "Hier kannst Du den Countdown für die Quizfrage einstellen. Sobald er abläuft oder alle Teilnehmer/innen eine Antwort abgegeben haben, ertönt ein Gong oder Pfiff und die Quizrunde ist beendet."
     },
     "translation": {

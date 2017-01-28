@@ -177,6 +177,7 @@ const clickEvents = {
 							Meteor.call('EventManagerCollection.add', hashtag);
 							if (oldSessionName === "ImportFromARSnova") {
 								sessionStorage.setItem("overrideValidQuestionRedirect", true);
+								Session.set("questionGroup", questionInstance);
 								hashtagLib.connectEventManager(hashtag);
 							} else if (Router.current().route.path() === "/hashtagmanagement") {
 								localData.ownHashtagsTracker.changed();

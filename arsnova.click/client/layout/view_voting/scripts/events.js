@@ -89,9 +89,6 @@ Template.votingview.events({
 				}
 			}
 		}
-		if (EventManagerCollection.findOne().questionIndex + 1 >= QuestionGroupCollection.findOne().questionList.length) {
-			Session.set("sessionClosed", true);
-		}
 		countdownFinish();
 	},
 	"click .sendResponse": function (event, template) {

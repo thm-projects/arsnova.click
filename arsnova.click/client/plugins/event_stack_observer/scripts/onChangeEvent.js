@@ -178,7 +178,7 @@ export function getChangeEventsForRoute(route) {
 	if (typeof route === "undefined" || !route.startsWith(":quizName.") || !globalEventStackObserver || !globalEventStackObserver.isRunning()) {
 		return;
 	}
-	route = route.replace(/(:quizName.)*(.:id)*/g, "");
+	route = route.replace(/(:quizName.)*(.:id)*(.:questionIndex)*/g, "");
 
 	switch (route) {
 		case "memberlist":

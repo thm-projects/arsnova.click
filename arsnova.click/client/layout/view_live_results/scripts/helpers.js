@@ -402,7 +402,7 @@ Template.liveResults.helpers({
 	showResponseProgress: function () {
 		const sessionConfig = SessionConfigurationCollection.findOne();
 		if (!sessionConfig) {
-			return;
+			return false;
 		}
 		return sessionConfig.showResponseProgress || !Session.get("countdownInitialized");
 	},

@@ -45,6 +45,8 @@ Template.leaderBoard.onRendered(function () {
 	}.bind(this));
 	footerElements.footerTracker.changed();
 	leaderboardTracker.changed();
+	headerLib.calculateHeaderSize();
+	headerLib.calculateTitelHeight();
 });
 
 Template.liveResultsTitle.onRendered(function () {

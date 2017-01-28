@@ -17,30 +17,39 @@
 
 @import "../../global/styles/appearance.scss";
 
-.learner-list {
-	.leaderBordItem {
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		padding: 0 10px;
-		margin-bottom: 10px;
-		line-height: 50px;
-		text-align: center;
-		-webkit-border-radius: $corner-radius;
-		-moz-border-radius: $corner-radius;
-		border-radius: $corner-radius;
-		font-size: 1.4em;
+#leaderBoard {
+	.learner-list {
+		.leaderBordItem {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			padding: 0 10px;
+			margin-bottom: 10px;
+			line-height: 50px;
+			text-align: center;
+			-webkit-border-radius: $corner-radius;
+			-moz-border-radius: $corner-radius;
+			border-radius: $corner-radius;
+			font-size: 1.4em;
 
-		@media (max-width: 320px) {
-			font-size: 1.3em;
+			@media (max-width: 320px) {
+				font-size: 1.3em;
+			}
+		}
+
+		.col-md-6 {
+			margin-top: 10px;
 		}
 	}
 
-	.col-md-6 {
-		margin-top: 10px;
+	.color-changing-own-nick {
+		animation-iteration-count: infinite;
+		font-weight: bold;
+		animation-duration: 7s;
+		animation-name: colorChangingOwnNick;
 	}
-}
 
-.adjustHeightForBoxShadow {
-	height: 55px;
+	.adjustHeightForBoxShadow {
+		height: 55px;
+	}
 }

@@ -31,7 +31,7 @@ Template.quizManager.onRendered(function () {
 				});
 				forwardButton.popover("show");
 			} else if (!valid) {
-				if (Session.get("questionGroup").getQuestionList().length > 0) {
+				if (Session.get("questionGroup") && Session.get("questionGroup").getQuestionList().length > 0) {
 					forwardButton.popover({
 						title: TAPi18n.__("view.quiz_manager.session_invalid"),
 						trigger: 'manual',

@@ -92,6 +92,8 @@ Template.memberlist.onRendered(function () {
 		headerLib.calculateHeaderSize();
 		headerLib.calculateTitelHeight();
 	}.bind(this));
+	headerLib.calculateHeaderSize();
+	headerLib.calculateTitelHeight();
 	Meteor.defer(function () {
 		if (localStorage.getItem("showProductTour") !== "false") {
 			getTooltipForRoute();

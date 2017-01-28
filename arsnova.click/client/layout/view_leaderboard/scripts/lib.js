@@ -49,7 +49,7 @@ export function calculateButtonCount(allMembersCount) {
 	const viewPortHeight = viewport.outerHeight();
 
 	/* The height of the learner button must be set manually if the html elements are not yet generated */
-	const btnLearnerHeight = $('.button-leader').first().parent().outerHeight(true) ? $('.button-leader').first().parent().outerHeight(true) : 70;
+	const btnLearnerHeight = $('.button-leader').first().parent().outerHeight(true) ? $('.button-leader').first().parent().outerHeight(true) : 60;
 
 	/* Calculate how much buttons we can place in the viewport until we need to scroll */
 	let queryLimiter = Math.floor(viewPortHeight / btnLearnerHeight);
@@ -58,11 +58,14 @@ export function calculateButtonCount(allMembersCount) {
 	 Multiply the displayed elements by 2 if on widescreen and reduce the max output of buttons by 1 row for the display
 	 more button if necessary. Also make sure there is at least one row of buttons shown even if the user has to scroll
 	 */
-	const limitModifier = viewport.outerWidth() >= 992 ? 2 : 1;
+	const limitModifier = viewport.outerWidth() >= 768 ? 2 : 1;
 
 	queryLimiter *= limitModifier;
 	if (queryLimiter <= 0) {
 		queryLimiter = limitModifier;
+	}
+	if (limitModifier === 2) {
+		queryLimiter--;
 	}
 
 	/*

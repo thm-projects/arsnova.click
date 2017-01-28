@@ -33,7 +33,7 @@ Template.leaderboardFooterNavButtons.helpers({
 		if (!Session.get("nicks")) {
 			return 12;
 		}
-		const hasTooMuchButtons = Session.get("responsesCountOverride") || (Session.get("allMembersCount") - (Session.get("maxResponseButtons") + 1) > 0);
+		const hasTooMuchButtons = Session.get("responsesCountOverride") || (Session.get("allMembersCount") - (Session.get("maxResponseButtons")) > 0);
 		if (Session.get("nicks").length === 0) {
 			return 12;
 		} else if (localData.containsHashtag(Router.current().params.quizName)) {
@@ -63,7 +63,7 @@ Template.leaderboardFooterNavButtons.helpers({
 		return Session.get("responsesCountOverride");
 	},
 	invisibleResponsesCount: ()=> {
-		return Session.get("allMembersCount") - (Session.get("maxResponseButtons") + 1);
+		return Session.get("allMembersCount") - (Session.get("maxResponseButtons"));
 	},
 	isOwner: function () {
 		return localData.containsHashtag(Router.current().params.quizName);
@@ -94,13 +94,13 @@ Template.leaderBoard.helpers({
 		return String((seconds < 10 ? "0" + seconds : seconds)).replace(".",",");
 	},
 	invisibleResponsesCount: ()=> {
-		return Session.get("allMembersCount") - (Session.get("maxResponseButtons") + 1);
+		return Session.get("allMembersCount") - (Session.get("maxResponseButtons"));
 	},
 	hasOverridenDefaultButtonCount: ()=> {
 		return Session.get("responsesCountOverride");
 	},
 	hasTooMuchButtons: ()=> {
-		return Session.get("responsesCountOverride") || (Session.get("allMembersCount") - (Session.get("maxResponseButtons") + 1) > 0);
+		return Session.get("responsesCountOverride") || (Session.get("allMembersCount") - (Session.get("maxResponseButtons")) > 0);
 	},
 	isGlobalRanking: function () {
 		return Router.current().params.id === "all";
@@ -121,7 +121,7 @@ Template.leaderBoard.helpers({
 		if (Session.get("responsesCountOverride")) {
 			return Session.get("nicks");
 		} else {
-			return Session.get("nicks").slice(0, Session.get("maxResponseButtons") + 1);
+			return Session.get("nicks").slice(0, Session.get("maxResponseButtons"));
 		}
 	},
 	isFirstItem: function (index) {

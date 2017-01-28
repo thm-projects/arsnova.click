@@ -182,6 +182,7 @@ export function getTooltipForRoute(overridePreference = false) {
 			'showProgress': false,
 			'exitOnOverlayClick': true,
 			'keyboardNavigation': false,
+			'disableInteraction': false,
 			'nextLabel': " > ",
 			'prevLabel': " < ",
 			'scrollToElement': true,

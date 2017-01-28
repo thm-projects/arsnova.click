@@ -204,7 +204,7 @@
   },
   "view": {
     "answeroptions": {
-      "title": "Antwortoptionen bearbeiten",
+      "title": "Antwortoptionen",
       "new_answer": "Neue Antwortoption",
       "answeroptiontext_placeholder": "Antworttext eingeben",
       "correct": "Richtig",
@@ -216,15 +216,15 @@
       "multiple_selection_survey": "Mehrere Optionen auswählbar?",
       "emoji_info": "Du kannst auch Emojis einfügen! <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'><img style='width:40px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/></a>",
       "description": {
-        "default_answer_row": "Ziehe diesen Block in die Liste der erstellten Antwortoptionen oder klick auf ihn, um eine neue Antwort einzufügen.",
-        "added_answers": "Hier siehst Du alle bereits erstellten Antwortoptionen dieser Quizfrage. Du kannst die Reihenfolge der Antworten per Drag & Drop ändern.",
+        "default_answer_row": "Ziehe diesen Block in die Liste der Antwortoptionen oder klick auf ihn, um eine neue Antwort einzufügen.",
+        "added_answers": "Hier siehst Du die Antwortoptionen der Frage. Du kannst die Reihenfolge per Drag & Drop ändern.",
         "added_answer_short_text": "Jede Antwortoption enthält einen Buchstaben, der für die Teilnehmer/innen angezeigt werden kann.",
         "added_answer_text": "Hier kannst Du den Text der Antwort eingeben. Eine Auszeichnung mit Markdown und LaTeX ist möglich. Auch Bilder können eingefügt werden.",
         "added_answer_is_correct": "Dieser Button regelt, ob die Antwort als richtig oder falsch gewertet werden soll.",
         "added_answer_remove": "Bei einem Klick auf diese Schaltfläche wird die betreffende Antwort gelöscht.",
-        "show_answer_content_on_buttons": "Die Antwortbuttons für die Teilnehmer/innen können entweder mit dem Buchstaben der Antwort oder dem vollständigen Inhalt der Antwort beschriftet werden. Beachte aber, dass zuviel Text in der Antwort abhängig vom Endgerät schlecht lesbar sein kann. Verschieden lange Antworttexte werden auf die Buttonbreite skaliert, was unschön aussehen kann oder einzelne Optionen überbetont.",
+        "show_answer_content_on_buttons": "Die Antwortbuttons können entweder mit dem Buchstaben oder dem Inhalt der Antwort beschriftet werden. Beachte aber, dass zuviel Text auf dem Endgerät schlecht lesbar sein kann. Verschieden lange Antworttexte werden auf die Buttonbreite skaliert, was unschön aussehen kann oder einzelne Optionen überbetont.",
         "multiple_selection_survey": "Hier kannst Du einstellen, ob die Teilnehmer/innen nach dem Klick auf eine Antwort der Umfrage direkt zur Auswertung gelangen sollen oder ob eine Mehrfachauswahl möglich sein soll.",
-        "preview": "Hier siehst Du, wie die Antwortoptionen auf einem Smartphone aussehen werden. Ein Klick auf einen der Antwortbuttons zeigt dir, was aktuell als richtig oder falsch bewertet wird.",
+        "preview": "Hier siehst Du, wie die Antwortoptionen auf dem Smartphone aussehen werden.",
         "range_area": "Hier kannst Du die korrekte Antwort und die Toleranzen nach oben und unten angeben. Bitte beachte, dass die Eingabe in natürlichen Zahlen erfolgen muss.",
         "min_range": "Hier kannst Du den unteren Toleranzwert festlegen.",
         "correct_value": "Diese Antwort ist vollständig korrekt.",
@@ -396,7 +396,7 @@
       }
     },
     "question_type": {
-      "title": "Fragetyp ändern",
+      "title": "Fragetyp",
       "currentType": "Aktueller Typ der Quizfrage:",
       "back": "Zurück zum Quiz-Manager",
       "description": {
@@ -411,8 +411,8 @@
       }
     },
     "questions": {
-      "title": "Fragetext bearbeiten",
-      "enter_question_here": "Gib hier den Text der Frage ein",
+      "title": "Frage",
+      "enter_question_here": "Gib hier die Frage ein. Alles wird automatisch gespeichert.",
       "preview": "",
       "forward": "Weiter zu den Antworten",
       "back": "Zurück zum Quiz-Manager",
@@ -431,7 +431,7 @@
       "title": "Quiz-Manager",
       "available_questions_title": "Quizvorlagen",
       "added_questions_title": "Quizfragen",
-      "no_added_questions": "Wähle eine Vorlage aus!",
+      "no_added_questions": "Wähle eine Vorlage!",
       "session_invalid": "Das Quiz enthält noch unvollständige Quizfragen",
       "session_empty": "Das Quiz enthält noch keine Quizfragen",
       "connection_lost": "Die Verbindung zum Server wurde unterbrochen",
@@ -441,19 +441,19 @@
           "btn_group": "Auswahl an Einstellungen für das Quiz"
         },
         "question_type": {
-          "long": "Fragetyp ändern",
+          "long": "Fragetyp",
           "short": "Typ"
         },
         "question_text": {
-          "long": "Fragetext bearbeiten",
+          "long": "Fragetext",
           "short": "Frage"
         },
         "answeroptions": {
-          "long": "Antwortoptionen bearbeiten",
+          "long": "Antwortoptionen",
           "short": "Antworten"
         },
         "timer": {
-          "long": "Countdown einstellen",
+          "long": "Countdown",
           "short": "Countdown"
         }
       },
@@ -569,7 +569,7 @@
       }
     },
     "timer": {
-      "title": "Countdown einstellen",
+      "title": "Countdown",
       "second": "Sekunde",
       "second_plural": "Sekunden",
       "minute": "Minute",
@@ -626,7 +626,7 @@
         "citation": "Zitat",
         "image": "Bild"
       },
-      "info_content": "Formatiere deine Frage mit <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> und füge Bilder, Videos, Formeln oder Programmcode ein. Besonders cool: Du kannst Emojis einfügen! Klick auf diesen Smiley, um ein passendes Emoji zu finden: <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'><img style='width:30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/></a>"
+      "info_content": "Formatiere deine Frage mit <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> und füge Bilder, Videos oder Formeln ein. Besonders cool: Du kannst Emojis einfügen! Klick auf den Smiley, um ein passendes Emoji zu finden: <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'><img style='width:30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/></a>"
     },
     "sound": {
       "running_music": "Countdown (laufend)",

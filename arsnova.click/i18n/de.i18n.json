@@ -626,7 +626,7 @@
         "citation": "Zitat",
         "image": "Bild"
       },
-      "info_content": "Du kannst den Fragetext mit <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> auszeichnen, mathematische Formeln, Programmcode, Bilder oder Videos einfügen. Die am häufigsten verwendeten Markdown-Optionen werden in Form von Schaltflächen über dem Eingabefeld angeboten. Zudem unterstützt arsnova.click <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown.</a> Besonders cool: Du kannst auch Emojis einfügen! Klick auf diesen Smiley, um ein passendes Emoji zu finden: <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'><img style='width:30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/></a>"
+      "info_content": "Formatiere deine Frage mit <a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a> und füge Bilder, Videos, Formeln oder Programmcode ein. Besonders cool: Du kannst Emojis einfügen! Klick auf diesen Smiley, um ein passendes Emoji zu finden: <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'><img style='width:30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/></a>"
     },
     "sound": {
       "running_music": "Countdown (laufend)",

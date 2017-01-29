@@ -547,23 +547,23 @@
         },
         "material": {
           "name": "Material Design Colors",
-          "description": "Teal."
+          "description": "Der Standard."
         },
           "decent_blue": {
           "name": "Decent Blue",
-          "description": "Dezente Blautöne fokussieren auf das Wesentliche."
+          "description": "#5"
         },
         "material_hope": {
           "name": "Material Hope",
-          "description": "Google Material und ein Funken Hoffnung."
+          "description": "#6"
         },
         "material-blue": {
           "name": "Material blue",
-          "description": "Google Material in blau und grün."
+          "description": "#7"
         },
         "spiritual-purple": {
           "name": "Spiritual Purple",
-          "description": "Spirituell."
+          "description": "#8"
         }
 
       }

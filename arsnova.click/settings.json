@@ -11,7 +11,7 @@
 			"theme": "theme-Material",
 			"question": {
 				"text": "",
-				"timer": 40,
+				"timer": 60,
 				"multipleSurveySelectionEnabled": false
 			},
 			"answers": {

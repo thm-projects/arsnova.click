@@ -127,7 +127,7 @@ Template.defaultAnswerOptionTemplate.events({
 				$("#" + id).setCursorPosition(cursorPosition).focus();
 				lib.answerOptionTracker.changed();
 			});
-		}, 400));
+		}, 1000));
 	}
 });
 

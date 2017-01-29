@@ -38,12 +38,12 @@ Template.votingview.onRendered(function () {
 	footerElements.footerTracker.changed();
 	if (questionType !== "RangedQuestion" && questionType !== "FreeTextQuestion") {
 		this.autorun(function () {
-			headerLib.titelTracker.depend();
 			answerOptionLib.answerOptionTracker.depend();
 			questionLib.markdownRenderingTracker.depend();
 			Meteor.setTimeout(function () {
 				lib.formatAnswerButtons();
 				lib.quickfitText();
+				$('#buttonContainer').css("visibility", "initial");
 			}, 100);
 		}.bind(this));
 	}
@@ -51,6 +51,7 @@ Template.votingview.onRendered(function () {
 	Meteor.defer(function () {
 		headerLib.calculateHeaderSize();
 		headerLib.calculateTitelHeight();
+		lib.formatAnswerButtons();
 	});
 });
 

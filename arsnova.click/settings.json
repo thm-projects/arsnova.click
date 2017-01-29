@@ -22,16 +22,16 @@
 				"readingConfirmationEnabled": false,
 				"showResponseProgress": false,
 				"music": {
-					"isUsingGlobalVolume": true,
+					"isUsingGlobalVolume": false,
 					"lobbyEnabled": false,
-					"lobbyTitle": "Song1",
-					"lobbyVolume": 80,
+					"lobbyTitle": "Song2",
+					"lobbyVolume": 50,
 					"countdownRunningEnabled": false,
 					"countdownRunningTitle": "Song1",
 					"countdownRunningVolume": 80,
 					"countdownEndEnabled": true,
 					"countdownEndTitle": "Song1",
-					"countdownEndVolume": 80
+					"countdownEndVolume": 100
 				},
 				"nicks": {
 					"blockIllegalNames": true,

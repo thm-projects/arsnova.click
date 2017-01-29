@@ -136,13 +136,13 @@ Router.onBeforeAction(function () {
 });
 
 Router.onBeforeAction(function () {
-	let theme = Meteor.settings.public.defaultTheme;
+	let theme = Meteor.settings.public.default.theme;
 	if (!localStorage.getItem("theme")) {
 		localStorage.setItem("theme", theme);
 	} else {
 		theme = localStorage.getItem("theme");
 		if (!checkIfThemeExist(theme)) {
-			theme = Meteor.settings.public.defaultTheme;
+			theme = Meteor.settings.public.default.theme;
 			localStorage.setItem("theme", theme);
 		}
 	}
@@ -150,7 +150,7 @@ Router.onBeforeAction(function () {
 		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 		if (configDoc && configDoc.theme && !localData.containsHashtag(Router.current().params.quizName)) {
 			if (!checkIfThemeExist(configDoc.theme)) {
-				configDoc.theme = Meteor.settings.public.defaultTheme;
+				configDoc.theme = Meteor.settings.public.default.theme;
 			}
 			sessionStorage.setItem("quizTheme", configDoc.theme);
 			theme = configDoc.theme;

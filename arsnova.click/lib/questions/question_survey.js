@@ -1,3 +1,4 @@
+import {Meteor} from 'meteor/meteor';
 import {EJSON} from 'meteor/ejson';
 import {AbstractChoiceQuestion} from './question_choice_abstract.js';
 
@@ -15,7 +16,7 @@ export class SurveyQuestion extends AbstractChoiceQuestion {
 			throw new TypeError("Invalid construction type while creating new SurveyQuestion");
 		}
 		super(options);
-		this[multipleSelectionEnabled] = typeof options.multipleSelectionEnabled === "undefined" ? false : options.multipleSelectionEnabled;
+		this[multipleSelectionEnabled] = typeof options.multipleSelectionEnabled === "undefined" ? Meteor.settings.public.default.question.multipleSurveySelectionEnabled : options.multipleSelectionEnabled;
 	}
 
 	setMultipleSelectionEnabled (newVal) {

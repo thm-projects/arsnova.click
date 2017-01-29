@@ -15,6 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
+
 const hashtag = Symbol("hashtag");
 const isUsingGlobalVolume = Symbol("isUsingGlobalVolume");
 
@@ -33,19 +35,19 @@ const countdownEndVolume = Symbol("countdownEndVolume");
 export class MusicSessionConfiguration {
 	constructor (options = {}) {
 		this[hashtag] = options.hashtag;
-		this[isUsingGlobalVolume] = typeof options.music.isUsingGlobalVolume === "undefined" ? true : options.music.isUsingGlobalVolume;
+		this[isUsingGlobalVolume] = typeof options.music.isUsingGlobalVolume === "undefined" ? Meteor.settings.public.default.sessionConfiguration.music.isUsingGlobalVolume : options.music.isUsingGlobalVolume;
 
-		this[lobbyEnabled] = typeof options.music.lobbyEnabled === "undefined" ? false : options.music.lobbyEnabled;
-		this[lobbyTitle] = options.music.lobbyTitle || "Song1";
-		this[lobbyVolume] = options.music.lobbyVolume || 80;
+		this[lobbyEnabled] = typeof options.music.lobbyEnabled === "undefined" ? Meteor.settings.public.default.sessionConfiguration.music.lobbyEnabled : options.music.lobbyEnabled;
+		this[lobbyTitle] = options.music.lobbyTitle || Meteor.settings.public.default.sessionConfiguration.music.lobbyTitle;
+		this[lobbyVolume] = options.music.lobbyVolume || Meteor.settings.public.default.sessionConfiguration.music.lobbyVolume;
 
-		this[countdownRunningEnabled] = typeof options.music.countdownRunningEnabled === "undefined" ? false : options.music.countdownRunningEnabled;
-		this[countdownRunningTitle] = options.music.countdownRunningTitle || "Song1";
-		this[countdownRunningVolume] = options.music.countdownRunningVolume || 80;
+		this[countdownRunningEnabled] = typeof options.music.countdownRunningEnabled === "undefined" ? Meteor.settings.public.default.sessionConfiguration.music.countdownRunningEnabled : options.music.countdownRunningEnabled;
+		this[countdownRunningTitle] = options.music.countdownRunningTitle || Meteor.settings.public.default.sessionConfiguration.music.countdownRunningTitle;
+		this[countdownRunningVolume] = options.music.countdownRunningVolume || Meteor.settings.public.default.sessionConfiguration.music.countdownRunningVolume;
 
-		this[countdownEndEnabled] = typeof options.music.countdownEndEnabled === "undefined" ? true : options.music.countdownEndEnabled;
-		this[countdownEndTitle] = options.music.countdownEndTitle || "Song1";
-		this[countdownEndVolume] = options.music.countdownEndVolume || 80;
+		this[countdownEndEnabled] = typeof options.music.countdownEndEnabled === "undefined" ? Meteor.settings.public.default.sessionConfiguration.music.countdownEndEnabled : options.music.countdownEndEnabled;
+		this[countdownEndTitle] = options.music.countdownEndTitle || Meteor.settings.public.default.sessionConfiguration.music.countdownEndTitle;
+		this[countdownEndVolume] = options.music.countdownEndVolume || Meteor.settings.public.default.sessionConfiguration.music.countdownEndVolume;
 	}
 
 	serialize () {

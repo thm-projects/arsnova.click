@@ -75,6 +75,9 @@ Template.layout.onRendered(function () {
 	startConnectionIndication();
 	getRTT();
 	$("body").on("click", "button", forceFeedback);
+	if (!localStorage.getItem("showProductTour")) {
+		localStorage.setItem("showProductTour", Meteor.settings.public.default.productTourEnabled);
+	}
 
 	this.autorun(function () {
 		if (Session.get("overrideTheme")) {
@@ -83,16 +86,16 @@ Template.layout.onRendered(function () {
 		if (!Session.get("theme") || (Session.get("currentTheme") && Session.get("theme") === Session.get("currentTheme"))) {
 			const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 			if (!localStorage.getItem("theme")) {
-				localStorage.setItem("theme", Meteor.settings.public.defaultTheme);
+				localStorage.setItem("theme", Meteor.settings.public.default.theme);
 			}
 			if (configDoc) {
 				if (!checkIfThemeExist(configDoc.theme)) {
-					configDoc.theme = Meteor.settings.public.defaultTheme;
+					configDoc.theme = Meteor.settings.public.default.theme;
 				}
 				Session.set("theme", configDoc.theme);
 			} else {
 				if (!checkIfThemeExist(localStorage.getItem("theme"))) {
-					localStorage.setItem("theme", Meteor.settings.public.defaultTheme);
+					localStorage.setItem("theme", Meteor.settings.public.default.theme);
 				}
 				Session.set("theme", localStorage.getItem("theme"));
 			}

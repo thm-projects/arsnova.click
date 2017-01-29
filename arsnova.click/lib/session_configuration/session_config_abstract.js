@@ -53,9 +53,9 @@ export class AbstractSessionConfiguration {
 		this[hashtag] = options.hashtag;
 		this[music] = options.music;
 		this[nicks] = options.nicks;
-		this[theme] = options.theme || Meteor.settings.public.defaultTheme;
-		this[readingConfirmationEnabled] = options.readingConfirmationEnabled === true;
-		this[showResponseProgress] = options.showResponseProgress === true;
+		this[theme] = options.theme || Meteor.settings.public.default.theme;
+		this[readingConfirmationEnabled] = typeof options.readingConfirmationEnabled === "undefined" ? Meteor.settings.public.default.sessionConfiguration.readingConfirmationEnabled : options.readingConfirmationEnabled;
+		this[showResponseProgress] = typeof options.showResponseProgress === "undefined" ? Meteor.settings.public.default.sessionConfiguration.showResponseProgress : options.showResponseProgress === true;
 	}
 
 	serialize () {

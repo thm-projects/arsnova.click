@@ -15,6 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
+
 const hashtag = Symbol("hashtag");
 const selectedValues = Symbol("selectedValues");
 const blockIllegal = Symbol("blockIllegal");
@@ -24,8 +26,8 @@ export class NickSessionConfiguration {
 	constructor (options = {}) {
 		this[hashtag] = options.hashtag;
 		this[selectedValues] = options.nicks.selectedValues || [];
-		this[blockIllegal] = typeof options.nicks.blockIllegal === "undefined" ? true : options.nicks.blockIllegal;
-		this[restrictToCASLogin] = options.nicks.restrictToCASLogin || false;
+		this[blockIllegal] = typeof options.nicks.blockIllegal === "undefined" ? Meteor.settings.public.default.sessionConfiguration.nicks.blockIllegalNames : options.nicks.blockIllegal;
+		this[restrictToCASLogin] = typeof options.nicks.restrictToCASLogin === "undefined" ? Meteor.settings.public.default.sessionConfiguration.nicks.restrictToCASLogin : options.nicks.restrictToCASLogin;
 	}
 
 	serialize () {

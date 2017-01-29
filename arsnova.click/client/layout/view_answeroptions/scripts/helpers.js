@@ -38,7 +38,7 @@ Template.createAnswerOptions.helpers({
 			case "FreeTextQuestion":
 				return Template.freeTextAnswerOptionTemplate;
 			default:
-				console.log("Template for unknown question group is requested.");
+				console.log("Template for unknown question instance is requested.");
 				return null;
 		}
 	}

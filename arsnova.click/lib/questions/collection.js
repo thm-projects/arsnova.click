@@ -46,6 +46,9 @@ export const correctValueSchema = {
 	type: Number,
 	min: 0
 };
+export const isFirstStartSchema = {
+	type: Boolean
+};
 
 export const questionGroupSchema = new SimpleSchema({
 	hashtag: hashtagSchema,
@@ -59,6 +62,10 @@ export const questionGroupSchema = new SimpleSchema({
 	},
 	"questionList.$.type": {
 		type: String,
+		optional: true
+	},
+	"questionList.$.isFirstStart": {
+		type: isFirstStartSchema,
 		optional: true
 	},
 	"questionList.$.questionText": {

@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
@@ -39,5 +40,9 @@ Template.createTimerView.onRendered(function () {
 	footerElements.addFooterElement(footerElements.footerElemHome);
 	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
-	getTooltipForRoute();
+	Meteor.defer(function () {
+		if (localStorage.getItem("showProductTour") !== "false") {
+			getTooltipForRoute();
+		}
+	});
 });

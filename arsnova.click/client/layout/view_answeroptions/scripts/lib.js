@@ -33,6 +33,14 @@ import * as localData from '/lib/local_storage.js';
 export const answerOptionTracker = new Tracker.Dependency();
 export const answerCheckTracker = new Tracker.Dependency();
 export let currentTimeout = null;
+export let answerOptionTextTimeout;
+
+export function setAnswerOptionTextTimeout(timeout) {
+	if (answerOptionTextTimeout) {
+		Meteor.clearTimeout(answerOptionTextTimeout);
+	}
+	answerOptionTextTimeout = timeout;
+}
 
 export function parseAnswerOptionInput(index) {
 	const questionItem = Session.get("questionGroup");

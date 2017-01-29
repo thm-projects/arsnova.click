@@ -564,6 +564,10 @@
         "spiritual-purple": {
           "name": "Spiritual Purple",
           "description": "#8"
+        },
+        "GreyBlue-Lime": {
+          "name": "GreyBlue Lime",
+          "description": "GrauBlau mit einem Hauch von Limette."
         }
 
       }

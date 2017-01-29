@@ -116,15 +116,18 @@ Template.defaultAnswerOptionTemplate.events({
 		localData.addHashtag(Session.get("questionGroup"));
 	},
 	"input .answer_row_text": function (event) {
-		const id = $(event.currentTarget).attr("id");
-		const plainId = id.replace("answerOptionText_Number","");
-		$('#' + plainId).removeClass("quickfitSet");
-		const cursorPosition = $("#" + id).getCursorPosition();
-		lib.parseSingleAnswerOptionInput(Router.current().params.questionIndex, plainId);
-		Meteor.defer(function () {
-			$("#" + id).setCursorPosition(cursorPosition).focus();
-			lib.answerOptionTracker.changed();
-		});
+		lib.setAnswerOptionTextTimeout(Meteor.setTimeout(function () {
+			const id = $(event.currentTarget).attr("id");
+			const plainId = id.replace("answerOptionText_Number","");
+			$('#buttonContainer').css("visibility", "hidden");
+			$('#' + plainId).removeClass("quickfitSet");
+			const cursorPosition = $("#" + id).getCursorPosition();
+			lib.parseSingleAnswerOptionInput(Router.current().params.questionIndex, plainId);
+			Meteor.defer(function () {
+				$("#" + id).setCursorPosition(cursorPosition).focus();
+				lib.answerOptionTracker.changed();
+			});
+		}, 1000));
 	}
 });
 

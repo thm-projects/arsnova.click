@@ -1,18 +1,50 @@
 {
-  "public": {
-    "cas": {
-      "loginUrl": "https://cas.thm.de/cas/login",
-      "serviceParam": "service",
-      "popupWidth": 810,
-      "popupHeight": 610
-    },
-    "defaultTheme": "theme-Material"
-  },
-  "cas": {
-    "baseUrl": "https://cas.thm.de/cas",
-    "autoClose": true
-  },
-  "serverStartup": {
-    "verbose": true
-  }
+	"public": {
+		"cas": {
+			"loginUrl": "https://cas.thm.de/cas/login",
+			"serviceParam": "service",
+			"popupWidth": 810,
+			"popupHeight": 610
+		},
+		"default": {
+			"productTourEnabled": false,
+			"theme": "theme-Material",
+			"question": {
+				"text": "",
+				"timer": 60,
+				"multipleSurveySelectionEnabled": false
+			},
+			"answers": {
+				"text": "",
+				"displayAnswerTextOnButtons": false
+			},
+			"sessionConfiguration": {
+				"readingConfirmationEnabled": false,
+				"showResponseProgress": false,
+				"music": {
+					"isUsingGlobalVolume": false,
+					"lobbyEnabled": false,
+					"lobbyTitle": "Song2",
+					"lobbyVolume": 50,
+					"countdownRunningEnabled": false,
+					"countdownRunningTitle": "Song1",
+					"countdownRunningVolume": 80,
+					"countdownEndEnabled": true,
+					"countdownEndTitle": "Song1",
+					"countdownEndVolume": 100
+				},
+				"nicks": {
+					"blockIllegalNames": true,
+					"restrictToCASLogin": false
+				}
+			}
+		}
+	},
+	"cas": {
+		"baseUrl": "https://cas.thm.de/cas",
+		"autoClose": true
+	},
+	"serverStartup": {
+		"verbose": true
+	}
 }

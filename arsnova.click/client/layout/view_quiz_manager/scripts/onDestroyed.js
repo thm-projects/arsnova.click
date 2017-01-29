@@ -17,10 +17,13 @@
 
 import {Template} from 'meteor/templating';
 import {Session} from 'meteor/session';
-import {Router} from 'meteor/iron:router';
+import * as localData from '/lib/local_storage.js';
 
-Template.quizManagerDetails.onCreated(function () {
-	if (Session.get("questionGroup") && Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getIsFirstStart()) {
-		Router.go("/" + Router.current().params.quizName + "/question/" + Router.current().params.questionIndex);
+Template.quizManager.onDestroyed(function () {
+	const questionGroup = Session.get("questionGroup");
+	if (questionGroup) {
+		questionGroup.setIsFirstStart(false);
+		Session.set("questionGroup", questionGroup);
+		localData.addHashtag(questionGroup);
 	}
 });

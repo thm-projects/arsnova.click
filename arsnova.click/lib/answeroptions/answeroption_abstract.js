@@ -1,3 +1,5 @@
+import {Meteor} from 'meteor/meteor';
+
 const hashtag = Symbol("hashtag");
 const questionIndex = Symbol("questionIndex");
 const answerText = Symbol("answerText");
@@ -18,13 +20,12 @@ export class AbstractAnswerOption {
 		}
 		if (typeof options.hashtag === "undefined" ||
 			typeof options.questionIndex === "undefined" ||
-			typeof options.answerText === "undefined" ||
 			typeof options.answerOptionNumber === "undefined") {
 			throw new Error("Invalid argument list for AnswerOption instantiation");
 		}
 		this[hashtag] = options.hashtag;
 		this[questionIndex] = options.questionIndex;
-		this[answerText] = options.answerText;
+		this[answerText] = options.answerText || Meteor.settings.public.default.answers.text;
 		this[answerOptionNumber] = options.answerOptionNumber;
 	}
 

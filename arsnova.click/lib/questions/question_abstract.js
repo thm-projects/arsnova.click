@@ -1,3 +1,4 @@
+import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
 import {AbstractAnswerOption} from '../answeroptions/answeroption_abstract.js';
@@ -5,6 +6,7 @@ import {DefaultAnswerOption} from '../answeroptions/answeroption_default.js';
 
 const hashtag = Symbol("hashtag");
 const questionText = Symbol("questionText");
+const isFirstStart = Symbol("isFirstStart");
 const timer = Symbol("timer");
 const startTime = Symbol("startTime");
 const questionIndex = Symbol("questionIndex");
@@ -18,21 +20,22 @@ export class AbstractQuestion {
 	 * This method cannot be invoked directly.
 	 * @param {{hashtag:String,questionText:String,timer:Number,startTime:Number,questionIndex:Number,type:String,answerOptionList:Array}} options An object containing the parameters for creating a Question instance. The type and answerOptionList attributes are optional.
 	 * @throws {TypeError} If this method is invoked directly, the options Object is undefined or the optional type attribute is not matching the constructor name
-	 * @throws {Error} If the hashtag, the questionText, the timer, the startTime or the questionIndex attributes of the options Object are missing
+	 * @throws {Error} If the hashtag or the questionIndex attributes of the options Object are missing
 	 */
 	constructor (options) {
 		if (this.constructor === AbstractQuestion) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
-		if (typeof options.hashtag === "undefined" || typeof options.questionText === "undefined" || typeof options.timer === "undefined" || typeof options.startTime === "undefined" || typeof options.questionIndex === "undefined") {
+		if (typeof options.hashtag === "undefined" || typeof options.questionIndex === "undefined") {
 			throw new Error("Invalid argument list for Question instantiation");
 		}
 		this[hashtag] = options.hashtag;
-		this[questionText] = options.questionText;
-		this[timer] = options.timer;
-		this[startTime] = options.startTime;
+		this[isFirstStart] = typeof options.isFirstStart === "undefined" ? true : options.isFirstStart;
 		this[questionIndex] = options.questionIndex;
-		this[displayAnswerText] = typeof options.displayAnswerText === "undefined" ? false : options.displayAnswerText;
+		this[questionText] = options.questionText || Meteor.settings.public.default.question.text;
+		this[timer] = options.timer || Meteor.settings.public.default.question.timer;
+		this[startTime] = options.startTime || 0;
+		this[displayAnswerText] = typeof options.displayAnswerText === "undefined" ? Meteor.settings.public.default.answers.displayAnswerTextOnButtons : options.displayAnswerText;
 		this[answerOptionList] = [];
 	}
 
@@ -52,6 +55,17 @@ export class AbstractQuestion {
 		this.getAnswerOptionList().forEach(function (item) {
 			item.setHashtag(newHashtag);
 		});
+	}
+
+	getIsFirstStart () {
+		return this[isFirstStart];
+	}
+
+	setIsFirstStart (value) {
+		if (typeof value !== "boolean") {
+			throw new Error("Invalid argument for AbstractQuestion.setIsFirstStart");
+		}
+		this[isFirstStart] = value;
 	}
 
 	/**
@@ -195,6 +209,7 @@ export class AbstractQuestion {
 		this.getAnswerOptionList().forEach(function (answeroption) { answerOptionListSerialized.push(answeroption.serialize()); });
 		return {
 			hashtag: this.getHashtag(),
+			isFirstStart: this.getIsFirstStart(),
 			questionText: this.getQuestionText(),
 			timer: this.getTimer(),
 			startTime: this.getStartTime(),
@@ -299,6 +314,7 @@ export class AbstractQuestion {
 			if (question.getTimer() !== this.getTimer() ||
 				question.getStartTime() !== this.getStartTime() ||
 				question.getHashtag() !== this.getHashtag() ||
+				question.getIsFirstStart() !== this.getIsFirstStart() ||
 				question.getDisplayAnswerText() !== this.getDisplayAnswerText() ||
 				question.getQuestionText() !== this.getQuestionText()) {
 				isEqual = false;

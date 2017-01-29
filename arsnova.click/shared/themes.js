@@ -43,7 +43,7 @@ export const themes = [
 	{
 		name: "view.theme_switcher.themes.GreyBlue-Lime.name",
 		description: "view.theme_switcher.themes.GreyBlue-Lime.name",
-		id:"theme-GreyBlue-Lime"
+		id: "theme-GreyBlue-Lime"
 	}
 ];
 

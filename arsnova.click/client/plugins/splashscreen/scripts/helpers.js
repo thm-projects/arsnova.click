@@ -71,7 +71,7 @@ Template.questionAndAnswerSplashscreen.helpers($.extend(isMobileDevice, parseMar
 
 Template.renameHashtagSplashscreen.helpers($.extend(isMobileDevice, {getHashtagSchema: hashtagSchema}, {
 	isArsnovaImport: function () {
-		return Template.instance().data.hashtag === "ImportFromArsnova";
+		return Template.instance().data.hashtag === "ImportFromARSnova";
 	}
 }));
 

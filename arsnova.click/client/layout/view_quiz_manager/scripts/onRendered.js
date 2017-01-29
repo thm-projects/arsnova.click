@@ -16,6 +16,7 @@ Template.quizManager.onRendered(function () {
 		const valid = typeof Session.get("questionGroup") !== "undefined" ? Session.get("questionGroup").isValid() : false;
 		const forwardButton = $('#forwardButton');
 		if (popoverTimeout && (!connected || !valid)) {
+			forwardButton.attr("disabled", "disabled");
 			return;
 		}
 		forwardButton.popover("destroy");

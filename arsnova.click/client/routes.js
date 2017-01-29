@@ -497,7 +497,7 @@ Router.route('/:quizName/question/:questionIndex', {
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					if (Session.get("questionGroup") && Session.get("questionGroup").getIsFirstStart()) {
+					if (Session.get("questionGroup") && Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getIsFirstStart()) {
 						return {
 							forwardButton: {
 								id: "forwardButton",
@@ -525,7 +525,7 @@ Router.route('/:quizName/answeroptions/:questionIndex', {
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					if (Session.get("questionGroup") && Session.get("questionGroup").getIsFirstStart()) {
+					if (Session.get("questionGroup") && Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getIsFirstStart()) {
 						return {
 							forwardButton: {
 								id: "forwardButton",
@@ -555,7 +555,7 @@ Router.route('/:quizName/settimer/:questionIndex', {
 			this.render('footerNavButtons', {
 				to: 'footer.navigation',
 				data: function () {
-					if (Session.get("questionGroup") && Session.get("questionGroup").getIsFirstStart()) {
+					if (Session.get("questionGroup") && Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getIsFirstStart()) {
 						return {
 							forwardButton: {
 								id: "forwardButton",

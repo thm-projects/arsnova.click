@@ -6,6 +6,7 @@ import {DefaultAnswerOption} from '../answeroptions/answeroption_default.js';
 
 const hashtag = Symbol("hashtag");
 const questionText = Symbol("questionText");
+const isFirstStart = Symbol("isFirstStart");
 const timer = Symbol("timer");
 const startTime = Symbol("startTime");
 const questionIndex = Symbol("questionIndex");
@@ -29,6 +30,7 @@ export class AbstractQuestion {
 			throw new Error("Invalid argument list for Question instantiation");
 		}
 		this[hashtag] = options.hashtag;
+		this[isFirstStart] = typeof options.isFirstStart === "undefined" ? true : options.isFirstStart;
 		this[questionIndex] = options.questionIndex;
 		this[questionText] = options.questionText || Meteor.settings.public.default.question.text;
 		this[timer] = options.timer || Meteor.settings.public.default.question.timer;
@@ -53,6 +55,17 @@ export class AbstractQuestion {
 		this.getAnswerOptionList().forEach(function (item) {
 			item.setHashtag(newHashtag);
 		});
+	}
+
+	getIsFirstStart () {
+		return this[isFirstStart];
+	}
+
+	setIsFirstStart (value) {
+		if (typeof value !== "boolean") {
+			throw new Error("Invalid argument for AbstractQuestion.setIsFirstStart");
+		}
+		this[isFirstStart] = value;
 	}
 
 	/**
@@ -196,6 +209,7 @@ export class AbstractQuestion {
 		this.getAnswerOptionList().forEach(function (answeroption) { answerOptionListSerialized.push(answeroption.serialize()); });
 		return {
 			hashtag: this.getHashtag(),
+			isFirstStart: this.getIsFirstStart(),
 			questionText: this.getQuestionText(),
 			timer: this.getTimer(),
 			startTime: this.getStartTime(),
@@ -300,6 +314,7 @@ export class AbstractQuestion {
 			if (question.getTimer() !== this.getTimer() ||
 				question.getStartTime() !== this.getStartTime() ||
 				question.getHashtag() !== this.getHashtag() ||
+				question.getIsFirstStart() !== this.getIsFirstStart() ||
 				question.getDisplayAnswerText() !== this.getDisplayAnswerText() ||
 				question.getQuestionText() !== this.getQuestionText()) {
 				isEqual = false;

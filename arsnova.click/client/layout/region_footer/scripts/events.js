@@ -411,7 +411,7 @@ Template.footerNavButtons.events({
 				break;
 			case "settimer":
 				const questionGroup = Session.get("questionGroup");
-				questionGroup.setIsFirstStart(false);
+				questionGroup.getQuestionList()[Router.current().params.questionIndex].setIsFirstStart(false);
 				Session.set("questionGroup", questionGroup);
 				localData.addHashtag(questionGroup);
 				Router.go("/" + Router.current().params.quizName + "/quizManager/" + Router.current().params.questionIndex);

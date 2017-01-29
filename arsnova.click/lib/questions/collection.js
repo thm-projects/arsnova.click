@@ -47,7 +47,7 @@ export const correctValueSchema = {
 	min: 0
 };
 export const isFirstStartSchema = {
-	type: Boolean,
+	type: Boolean
 };
 
 export const questionGroupSchema = new SimpleSchema({

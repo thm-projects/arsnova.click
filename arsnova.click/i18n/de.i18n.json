@@ -78,7 +78,7 @@
           "title": "Bedienungshandbuch?",
           "text": {
             "1": "Brauchst Du nicht!",
-            "2": "Tipp einfach den Namen des Quiz ein. Die Buttons werden aktiviert, sobald Du entweder den Namen eines freigeschalteten Quiz eingibst: \"Mach mit!\" oder ein Quiz mit dem eingegebenen Namen erstellen kannst: \"Mach neu!\".",
+            "2": "Tipp einfach den Namen des Quiz ein. Die Buttons werden aktiviert, sobald Du entweder den Namen eines freigeschalteten Quiz eingibst: \"Mach mit beim Quiz!\" oder ein Quiz mit dem eingegebenen Namen erstellen kannst: \"Mach neu das Quiz!\".",
             "3": "Folge unserer interaktiven Product Tour oder einfach deiner Intuition: schauen, klicken, quizzen."
           }
         }
@@ -275,11 +275,11 @@
     },
     "hashtag_management": {
       "enter_quiz_name": "Quiznamen oder PIN eingeben ...",
-      "join_session": "Mach mit!",
+      "join_session": "Mach mit beim Quiz!",
       "start_session": "Quiz starten",
       "edit_session": "Quiz bearbeiten",
       "reenter_session": "Öffnen",
-      "create_session": "Mach neu!",
+      "create_session": "Mach neu das Quiz!",
       "create_demo_session": "Starte \u00BBDemo Quiz\u00AB!",
       "quiz_management": "Quiz-Speicher",
       "available_sessions": "Diese Quizze sind in deinem Browser:",

@@ -1,6 +1,6 @@
 {
   "global": {
-    "arsnova_slogan": "Quiz-App für alle(s)",
+    "arsnova_slogan": "Quiz-App für Schule & Uni",
     "back": "Zurück",
     "next": "Weiter",
     "delete": "Löschen",
@@ -10,7 +10,7 @@
     "no": "Nein",
     "close_window": "Fenster schließen",
     "aria_description": {
-      "arsnova_slogan": "Quiz-App für alles und jeden"
+      "arsnova_slogan": "Quiz-App für Schule & Uni"
     },
     "cookie_consent": {
       "message": "arsnova.click verwendet Cookies.",
@@ -305,8 +305,8 @@
       },
       "demo_quiz": {
         "title": {
-          "1": "Du bist Lehrer/in und willst eine Quiz-App in deinem Unterricht einsetzen?",
-          "2": "Teste arsnova.click und spiel eine Quizrunde in zwei Browsern: Gib \u00BBDemo Quiz\u00AB ein, starte es. Ruf die App im anderen Browser auf und fühl dich wie bei Günther Jauch!"
+          "1": "Du bist Lehrer/in und suchst eine Quiz-App für deinen Unterricht? Teste arsnova.click und spiel eine Quizrunde in zwei Browsern: Gib \u00BBDemo Quiz\u00AB ein, starte es. Ruf die App im zweiten Browser auf und fühl dich wie bei Günther Jauch!",
+          "2": "Geh auf die Projektseite arsnova.eu und erfahre, wie Du Quizze in deinem Unterricht einsetzen kannst."
         }
       }
     },

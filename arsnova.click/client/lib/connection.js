@@ -23,4 +23,4 @@ Meteor.setInterval(function () {
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		Meteor.call('keepalive', Router.current().params.quizName);
 	}
-}, 5000);
+}, 180000);

@@ -13,7 +13,7 @@
       "arsnova_slogan": "Quiz-App für alles und jeden"
     },
     "cookie_consent": {
-      "message": "arsnova.click ist eine App, die Cookies verwendet.",
+      "message": "arsnova.click verwendet Cookies.",
       "dismiss": "Hinweis nicht mehr anzeigen",
       "learn_more": "Datenschutzerklärung"
     }
@@ -44,7 +44,7 @@
         "qr_code": "QR-Code",
         "nicknames": "Nicknamen",
         "edit_quiz": "Bearbeiten",
-        "show_product_tour": "Tour",
+        "show_product_tour": "Tutorial",
         "show_response_progress": "Fortschritt",
         "remove": "Entfernen",
         "description": {
@@ -78,8 +78,8 @@
           "title": "Bedienungshandbuch?",
           "text": {
             "1": "Brauchst Du nicht!",
-            "2": "Tipp einfach den Namen des Quiz ein. Die Buttons werden aktiviert, sobald Du entweder den Namen eines freigeschalteten Quiz eingibst: \"Mach mit beim Quiz!\" oder ein Quiz mit dem eingegebenen Namen erstellen kannst: \"Mach neu das Quiz!\".",
-            "3": "Folge unserer interaktiven Product Tour oder einfach deiner Intuition: schauen, klicken, quizzen."
+            "2": "Tipp einfach den Namen des Quiz ein. Die Buttons werden aktiviert, sobald Du entweder den Namen eines freigeschalteten Quiz eingibst: \"Mach mit beim Quiz!\" oder ein Quiz mit dem eingegebenen Namen erstellen kannst: \"Mach ein neues Quiz!\".",
+            "3": "Folge dem Tutorial (Flagge in der Fußleiste) oder einfach deiner Intuition: schauen, klicken, quizzen."
           }
         }
       },
@@ -91,7 +91,7 @@
           "text": "arsnova.click ist ein kostenloser Webservice (Software as a Service). Die Software ist <a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a> und steht unter der <a href='http://www.gnu.org/licenses/gpl-3.0-standalone.html' target='_blank'>GNU General Public License Version 3</a>."
         },
         "musicLicense": {
-          "title": "Musik Lizenz",
+          "title": "Musik-Lizenz",
           "text": "Der Sound <a href='http://soundbible.com/2148-Chinese-Gong.html' target='_blank'>Chinese Gong</a> von Daniel Simon steht unter der <a href='https://creativecommons.org/licenses/by/3.0/de' target='_blank'>CC BY 3.0</a> Lizenz."
         },
         "warranty": {
@@ -252,7 +252,7 @@
         "config_use_punctuation": "Satzzeichen in Antwort beachten",
         "onText": "Ja",
         "offText": "Nein",
-        "text_placeholder": "Gib hier die Antwort ein",
+        "text_placeholder": "Gib hier deine Antwort ein",
         "check_correct": "Die eingegebene Antwort stimmt mit der Referenzantwort überein",
         "check_incorrect": "Die eingegebene Antwort stimmt nicht mit der Referenzantwort überein!"
       }
@@ -279,7 +279,7 @@
       "start_session": "Quiz starten",
       "edit_session": "Quiz bearbeiten",
       "reenter_session": "Öffnen",
-      "create_session": "Mach neu das Quiz!",
+      "create_session": "Mach ein neues Quiz!",
       "create_demo_session": "Starte \u00BBDemo Quiz\u00AB!",
       "quiz_management": "Quiz-Speicher",
       "available_sessions": "Diese Quizze sind in deinem Browser:",
@@ -306,7 +306,7 @@
       "demo_quiz": {
         "title": {
           "1": "Nicht sicher, wo Du anfangen sollst?",
-          "2": "Gib \u00BBDemo Quiz\u00AB ein!"
+          "2": "Gib \u00BBDemo Quiz\u00AB ein und ruf die App auf einem anderen Gerät auf!"
         }
       }
     },
@@ -317,7 +317,7 @@
         "single_question": "Frage __questionId__ - Alles richtig haben ...",
         "all_questions": "Alles richtig haben ..."
       },
-      "no_attendee_correct": "Niemand hat diese Frage richtig beantwortet",
+      "no_attendee_correct": "Niemand hat es gewusst!",
       "no_attendee_correct_global": "Niemand hat alle Fragen richtig beantwortet",
       "question": "Frage",
       "second": "Sekunde",
@@ -348,7 +348,7 @@
       "show_question_plural": "Zeige Frage",
       "start_round": "Starte Quiz",
       "start_round_plural": "Starte Runde",
-      "confirm_read": "Ich habe die Frage gelesen",
+      "confirm_read": "Ich habe die Frage verstanden",
       "game_over": "Game over",
       "countdown": "Countdown",
       "answer_option": "Antwort",
@@ -431,9 +431,9 @@
       "title": "Quiz-Manager",
       "available_questions_title": "Quizvorlagen",
       "added_questions_title": "Quizfragen",
-      "no_added_questions": "Wähle eine Vorlage!",
-      "session_invalid": "Das Quiz enthält noch unvollständige Quizfragen",
-      "session_empty": "Das Quiz enthält noch keine Quizfragen",
+      "no_added_questions": "Wähle eine Vorlage für Deine Quizfrage aus!",
+      "session_invalid": "Dein Quiz enthält noch unvollständige Fragen",
+      "session_empty": "Dein Quiz enthält noch keine Fragen",
       "connection_lost": "Die Verbindung zum Server wurde unterbrochen",
       "back_to_quiz_administration": "Quizverwaltung",
       "details": {
@@ -498,8 +498,8 @@
           "answerOption": "Antwort"
         },
         "reasons": {
-          "question_text_too_small": "Text der Quizfrage ist zu kurz",
-          "question_text_too_long": "Text der Quizfrage ist zu lang",
+          "question_text_too_small": "Text der Frage ist zu kurz",
+          "question_text_too_long": "Text der Frage ist zu lang",
           "timer_too_small": "Countdown ist zu kurz",
           "timer_too_big": "Countdown ist zu lang",
           "no_valid_answers": "Mindestens eine Antwort muss als richtig markiert sein",
@@ -567,7 +567,7 @@
         },
         "GreyBlue-Lime": {
           "name": "GreyBlue Lime",
-          "description": "GrauBlau mit einem Hauch von Limette."
+          "description": "#9"
         }
 
       }

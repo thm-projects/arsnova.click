@@ -207,21 +207,25 @@ export function getLeaderboardItemsByIndex(questionIndex) {
 	return result;
 }
 
-export function getAllLeaderboardItems() {
+export function getAllLeaderboardItems(keepAllNicks = false) {
 	let allItems = getLeaderboardItemsByIndex(0);
 	for (let i = 1; i < EventManagerCollection.findOne().questionIndex + 1; i++) {
 		const tmpItems = getLeaderboardItemsByIndex(i);
 		const result = {};
 		for (const o in tmpItems) {
 			if (tmpItems.hasOwnProperty(o)) {
-				if (typeof allItems[o] !== "undefined" && typeof tmpItems[o] !== "undefined") {
-					result[o] = allItems[o] + tmpItems[o];
+				if (!keepAllNicks) {
+					if (typeof allItems[o] !== "undefined" && typeof tmpItems[o] !== "undefined") {
+						result[o] = allItems[o] + tmpItems[o];
+					} else {
+						delete result[o];
+					}
 				} else {
-					delete result[o];
+					result[o] = allItems[o] + tmpItems[o];
 				}
 			}
 		}
-		allItems = result;
+		$.extend(allItems, result);
 	}
 	return allItems;
 }

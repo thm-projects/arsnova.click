@@ -396,7 +396,7 @@
       }
     },
     "question_type": {
-      "title": "Fragetyp",
+      "title": "Fragetyp ändern",
       "currentType": "Aktueller Typ der Quizfrage:",
       "back": "Zurück zum Quiz-Manager",
       "description": {
@@ -429,9 +429,9 @@
     },
     "quiz_manager": {
       "title": "Quiz-Manager",
-      "available_questions_title": "Quizvorlagen",
+      "available_questions_title": "Vorlagen",
       "added_questions_title": "Quizfragen",
-      "no_added_questions": "Wähle eine Vorlage für Deine Quizfrage aus!",
+      "no_added_questions": "Wähle eine Vorlage für Deine Frage aus!",
       "session_invalid": "Dein Quiz enthält noch unvollständige Fragen",
       "session_empty": "Dein Quiz enthält noch keine Fragen",
       "connection_lost": "Die Verbindung zum Server wurde unterbrochen",
@@ -498,8 +498,8 @@
           "answerOption": "Antwort"
         },
         "reasons": {
-          "question_text_too_small": "Text der Frage ist zu kurz",
-          "question_text_too_long": "Text der Frage ist zu lang",
+          "question_text_too_small": "Der Text der Frage ist zu kurz",
+          "question_text_too_long": "Der Text der Frage ist zu lang",
           "timer_too_small": "Countdown ist zu kurz",
           "timer_too_big": "Countdown ist zu lang",
           "no_valid_answers": "Mindestens eine Antwort muss als richtig markiert sein",
@@ -535,19 +535,19 @@
       "themes": {
         "theme-arsnova-dot-click-contrast": {
           "name": "arsnova.click (kontrastreich)",
-          "description": "Beamerfreundlich."
+          "description": "#2: Beamerfreundlich"
         },
         "elegant": {
           "name": "Eleganz",
-          "description": "Für anspruchsvolle Quizrunden."
+          "description": "#4: Für anspruchsvolle Quizrunden"
         },
         "black_beauty": {
           "name" : "Black Beauty (beamertauglich)",
-          "description": "Akkufreundlich."
+          "description": "#3: Akkufreundlich"
         },
         "material": {
           "name": "Material Design Colors",
-          "description": "Der Standard."
+          "description": "#1: Der Standard"
         },
           "decent_blue": {
           "name": "Decent Blue",

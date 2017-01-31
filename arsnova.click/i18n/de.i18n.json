@@ -459,7 +459,7 @@
       },
       "description": {
         "available_questions": "Hier siehst Du alle Fragetypen, aus denen Du wählen kannst. Jeder Fragetyp bietet eigene Voreinstellungen und Optionen zur Gestaltung deines Quiz.",
-        "added_questions": "Hier findest Du deine Quizfragen. Um eine Frage hinzuzufügen, ziehe eine Vorlage hierher oder klick auf sie. Wenn Du die eingefügte Vorlage berührst, siehst Du, was Du damit machen kannst: Quizfrage editieren, Reihenfolge der Fragen ändern oder die Frage löschen.",
+        "added_questions": "Um eine Frage hinzuzufügen, ziehe eine Vorlage hierher oder klick auf sie. Wenn Du die eingefügte Vorlage berührst, siehst Du, was Du damit machen kannst: Frage editieren, Reihenfolge der Fragen ändern oder die Frage löschen.",
         "back_button": "Du kannst jederzeit zurückgehen. Jede Änderung am Quiz wird beim Klicken oder Tippen sofort ohne Nachfragen gespeichert. Das gilt für die ganze App. Du musst nie etwas speichern!",
         "forward_button": "Ist dein Quiz vollständig und besteht eine Verbindung zum Server, kannst Du zur Quiz Lobby gehen und die Quizrunde eröffnen."
       }

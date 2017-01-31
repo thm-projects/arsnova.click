@@ -42,7 +42,7 @@ export const themes = [
 	},
 	{
 		name: "view.theme_switcher.themes.GreyBlue-Lime.name",
-		description: "view.theme_switcher.themes.GreyBlue-Lime.name",
+		description: "view.theme_switcher.themes.GreyBlue-Lime.description",
 		id: "theme-GreyBlue-Lime"
 	}
 ];

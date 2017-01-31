@@ -1,32 +1,36 @@
 <template name="quizManager">
-    <div class="row" id="quizManager">
-        <div class="col-xs-12">
-            {{#unless isFirstStart}}
-                {{#if hasQuestionsAdded}}
-                    {{> quizSummary item="header"}}
-                {{/if}}
-            {{/unless}}
-        </div>
-        <div class="col-xs-12 col-sm-6" role="list">
-            <h2 class="text-light" role="heading">{{_ "view.quiz_manager.available_questions_title" }}</h2>
-            <ul id="available_questions_wrapper" data-intro="{{_ "view.quiz_manager.description.available_questions" }}" aria-label="{{_ "view.quiz_manager.description.available_questions" }}">
-                {{#each questionTypes}}
-                    <div role="listitem">
-                        <li id="{{this.id}}_draggable" class="questionElementWrapper draggable tabbable questionType_{{this.id}}" data-intro="{{_ (getDescriptionForQuestionType this.id)}}" aria-label="{{_ (getDescriptionForQuestionType this.id)}}">{{_ this.translationName}}</li>
-                    </div>
-                {{/each}}
-            </ul>
-        </div>
-        <div class="col-xs-12 col-sm-6">
-            <div class="row" role="list">
-                <div class="col-xs-12">
-                    <h2 class="text-light" role="heading">{{_ "view.quiz_manager.added_questions_title" }}</h2>
-                    {{#unless hasQuestionsAdded}}
-                        <h4 class="text-light" role="heading">{{_ "view.quiz_manager.no_added_questions" }}</h4>
-                    {{/unless}}
-                    <ul id="added_questions_wrapper" data-intro="{{_ "view.quiz_manager.description.added_questions" }}" aria-label="{{_ "view.quiz_manager.description.added_questions" }}" role="list"></ul>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row" id="quizManager">
+		<div class="col-xs-12">
+			{{#unless isFirstStart}}
+				{{#if hasQuestionsAdded}}
+					{{> quizSummary item="header"}}
+				{{/if}}
+			{{/unless}}
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<div class="row" role="list">
+				<div class="col-xs-12">
+					<h2 class="text-light" role="heading">{{_ "view.quiz_manager.added_questions_title" }}</h2>
+					{{#unless hasQuestionsAdded}}
+						<h4 class="text-light" role="heading">{{_ "view.quiz_manager.no_added_questions" }}</h4>
+					{{/unless}}
+					<ul id="added_questions_wrapper" data-intro="{{_ "view.quiz_manager.description.added_questions" }}"
+					    aria-label="{{_ "view.quiz_manager.description.added_questions" }}" role="list"></ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6" role="list">
+			<h2 class="text-light" role="heading">{{_ "view.quiz_manager.available_questions_title" }}</h2>
+			<ul id="available_questions_wrapper" data-intro="{{_ "view.quiz_manager.description.available_questions" }}"
+			    aria-label="{{_ "view.quiz_manager.description.available_questions" }}">
+				{{#each questionTypes}}
+					<div role="listitem">
+						<li id="{{this.id}}_draggable" class="questionElementWrapper draggable tabbable questionType_{{this.id}}"
+						    data-intro="{{_ (getDescriptionForQuestionType this.id)}}"
+						    aria-label="{{_ (getDescriptionForQuestionType this.id)}}">{{_ this.translationName}}</li>
+					</div>
+				{{/each}}
+			</ul>
+		</div>
+	</div>
 </template>

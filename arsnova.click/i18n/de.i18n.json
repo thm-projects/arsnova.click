@@ -305,8 +305,8 @@
       },
       "demo_quiz": {
         "title": {
-          "1": "Nicht sicher, wo Du anfangen sollst?",
-          "2": "Gib \u00BBDemo Quiz\u00AB ein und ruf die App auf einem anderen Gerät auf!"
+          "1": "Du bist Lehrer/in und willst eine Quiz-App in deinem Unterricht einsetzen?",
+          "2": "Teste arsnova.click und spiel eine Quizrunde in zwei Browsern: Gib \u00BBDemo Quiz\u00AB ein, starte es. Ruf die App im anderen Browser auf und fühl dich wie bei Günther Jauch!"
         }
       }
     },

@@ -306,7 +306,8 @@
       "demo_quiz": {
         "title": {
           "1": "¿No estás seguro por dónde empezar?",
-          "2": "¡Introduzca \"Demo Quiz\"!"
+          "2": "¡Introduzca \"Demo Quiz\"!",
+          "3": ""
         }
       }
     },

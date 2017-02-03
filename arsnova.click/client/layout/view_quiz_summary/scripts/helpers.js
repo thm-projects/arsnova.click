@@ -76,10 +76,10 @@ Template.quizSummary.helpers({
 		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").isValid() ? "view.quiz_summary.successful" : "view.quiz_summary.failed";
+		return Session.get("questionGroup").isValid() ? "view.quiz_summary.question_group_successful" : "view.quiz_summary.question_group_failed";
 	},
 	getValidationStatus: function (question) {
-		return question.isValid() ? "view.quiz_summary.successful" : "view.quiz_summary.failed";
+		return question.isValid() ? "view.quiz_summary.question_successful" : "view.quiz_summary.question_failed";
 	},
 	getValidationErrors: function (question) {
 		return question.getValidationStackTrace();

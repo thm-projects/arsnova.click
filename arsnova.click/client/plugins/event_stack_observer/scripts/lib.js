@@ -39,6 +39,7 @@ export class EventStackObserver {
 		this.ignoreChanges = options.ignoreChanges || ["EventManager.keepalive"];
 		this.verbose = options.verbose || false;
 		this.running = false;
+		this.lastPerformedIndex = 0;
 		this.hooks = {
 			after: {
 				update: null,
@@ -58,8 +59,8 @@ export class EventStackObserver {
 		}, {
 			changedAt: function (id,newDocument, oldDocument) {
 				if (Router.current().route.getName() && oldDocument.eventStack.length < newDocument.eventStack.length) {
-					for (let i = oldDocument.eventStack.length - 1; i < newDocument.eventStack.length; i++) {
-						let currentPath = Router.current().route.getName().replace(/(:quizName.)*(.:id)*(.:questionIndex)*/g, "");
+					const currentPath = Router.current().route.getName().replace(/(:quizName.)*(.:id)*(.:questionIndex)*/g, "");
+					for (let i = observerInstance.lastPerformedIndex; i < newDocument.eventStack.length; i++) {
 						if (observerInstance.onChangeCallbacks[currentPath] && observerInstance.onChangeCallbacks[currentPath].length > 0) {
 							let item = newDocument.eventStack[i];
 							if (observerInstance.verbose) {
@@ -70,15 +71,15 @@ export class EventStackObserver {
 									"callbacks: ",observerInstance.onChangeCallbacks[currentPath]
 								);
 							}
-							if ($.inArray(item.key, observerInstance.ignoreChanges) > -1) {
-								return;
-							}
-							checkOnChangeCallbacks(observerInstance, item, currentPath);
-							if (observerInstance.verbose) {
-								console.log("EventStackObserver: All change callbacks have been called");
-								console.log("EventStackObserver: ---------------------------------------------------");
+							if ($.inArray(item.key, observerInstance.ignoreChanges) === -1) {
+								checkOnChangeCallbacks(observerInstance, item, currentPath);
+								if (observerInstance.verbose) {
+									console.log("EventStackObserver: All change callbacks have been called");
+									console.log("EventStackObserver: ---------------------------------------------------");
+								}
 							}
 						}
+						observerInstance.lastPerformedIndex++;
 					}
 				}
 			},

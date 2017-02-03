@@ -33,7 +33,7 @@ Template.votingview.helpers({
 		return result;
 	},
 	showQuestionButton: function () {
-		return !(this.data && this.data["data-questionIndex"]);
+		return isNaN(parseInt(Router.current().params.questionIndex));
 	},
 	showForwardButton: function () {
 		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));

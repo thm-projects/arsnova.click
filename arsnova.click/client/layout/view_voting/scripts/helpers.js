@@ -33,7 +33,7 @@ Template.votingview.helpers({
 		return result;
 	},
 	showQuestionButton: function () {
-		return !(this.data && this.data["data-questionIndex"]);
+		return isNaN(parseInt(Router.current().params.questionIndex));
 	},
 	showForwardButton: function () {
 		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
@@ -79,7 +79,7 @@ Template.votingviewTitel.helpers({
 		if (this.data && this.data["data-questionIndex"]) {
 			return false;
 		}
-		let countdownValue = Session.get("countdownInitialized") && lib.countdown ? lib.countdown.get() : 0;
+		let countdownValue = (Session.get("countdownInitialized") && lib.countdown) ? lib.countdown.get() : 0;
 		return TAPi18n.__("view.voting.seconds_left", {value: countdownValue, count: countdownValue});
 	}
 });

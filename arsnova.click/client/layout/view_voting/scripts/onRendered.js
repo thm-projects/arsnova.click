@@ -34,8 +34,6 @@ Template.votingview.onRendered(function () {
 	} else {
 		questionType = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type;
 	}
-	footerElements.removeFooterElements();
-	footerElements.footerTracker.changed();
 	if (questionType !== "RangedQuestion" && questionType !== "FreeTextQuestion") {
 		this.autorun(function () {
 			answerOptionLib.answerOptionTracker.depend();
@@ -46,12 +44,14 @@ Template.votingview.onRendered(function () {
 				$('#buttonContainer').css("visibility", "initial");
 			}, 100);
 		}.bind(this));
+		lib.formatAnswerButtons();
 	}
 	lib.votingViewTracker.changed();
+	footerElements.removeFooterElements();
+	footerElements.footerTracker.changed();
 	Meteor.defer(function () {
 		headerLib.calculateHeaderSize();
 		headerLib.calculateTitelHeight();
-		lib.formatAnswerButtons();
 	});
 });
 

@@ -55,7 +55,9 @@
                                     </div>
                                 </div>
                             </div>
-                            {{#if isReadingConfirmationEnabled}}
+                            {{#unless isReadingConfirmationEnabled displayIndex}}
+                                {{> Template.dynamic template=(getProgressbarTemplate displayIndex)}}
+                            {{else}}
                                 {{> form_group
                                         name = (_ "view.liveResults.reading_confirmation")
                                         absolute = (getCurrentRead displayIndex)
@@ -63,25 +65,24 @@
                                         percent = (getPercentRead displayIndex)
                                         backgroundClass = "progress-reading_confirmation"
                                 }}
-                            {{/if}}
-                            {{> Template.dynamic template=(getProgressbarTemplate displayIndex)}}
-                            {{#if showMoreButton displayIndex}}
-                                <div class="row more-learners-row">
-                                    <div class="col-xs-12">
-                                        <button class="btn btn-more-learners tabbable"
-                                                id="more-learners">
-                                            <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-                                            <span>({{_ "view.liveResults.show_more" (invisibleLearnerCount displayIndex) count=(invisibleLearnerCount displayIndex)}})</span>
-                                        </button>
+                                {{#if showMoreButton displayIndex}}
+                                    <div class="row more-learners-row">
+                                        <div class="col-xs-12">
+                                            <button class="btn btn-more-learners tabbable"
+                                                    id="more-learners">
+                                                <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                                                <span>({{_ "view.liveResults.show_more" (invisibleLearnerCount displayIndex) count=(invisibleLearnerCount displayIndex)}})</span>
+                                            </button>
+                                        </div>
                                     </div>
+                                {{/if}}
+                                <div class="row learner-list margin-title"
+                                     id="learner-list">
+                                    {{#each readingConfirmationListForQuestion displayIndex}}
+                                        {{> readingConfirmedLearner}}
+                                    {{/each}}
                                 </div>
-                            {{/if}}
-                            <div class="row learner-list margin-title"
-                                 id="learner-list">
-                                {{#each readingConfirmationListForQuestion displayIndex}}
-                                    {{> readingConfirmedLearner}}
-                                {{/each}}
-                            </div>
+                            {{/unless}}
                         </div>
                     </div>
                 {{/each}}

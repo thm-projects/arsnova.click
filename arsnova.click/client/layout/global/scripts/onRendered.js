@@ -102,4 +102,8 @@ Template.layout.onRendered(function () {
 		}
 		$("body").removeClass().addClass(Session.get("theme"));
 	}.bind(this));
+
+	if (localData.containsHashtag(Router.current().params.quizName)) {
+		Meteor.call('keepalive', Router.current().params.quizName);
+	}
 });

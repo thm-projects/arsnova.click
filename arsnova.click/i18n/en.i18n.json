@@ -689,6 +689,10 @@
         "text": "All attendees will be removed and the leaderboard will be deleted.",
         "continue": "Continue?"
       },
+      "remove_question_confirmation": {
+        "title": "Delete question?",
+        "text": "This cannot be undone!"
+      },
       "reminder_leaderboard_data": {
         "title": "Warning",
         "text": "The data of the leaderboard will be removed as soon as you leave the quiz. You can download the data for later use here.",

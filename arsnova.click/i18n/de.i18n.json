@@ -668,6 +668,10 @@
         "text": "Alle Teilnehmenden werden abgemeldet und die Rangliste wird gelöscht.",
         "continue": "Fortfahren?"
       },
+      "remove_question_confirmation": {
+        "title": "Quizfrage löschen?",
+        "text": "Dies kann nicht rückgängig gemacht werden!"
+      },
       "reminder_leaderboard_data": {
         "title": "Warnung",
         "text": "Die Daten der Rangliste werden gelöscht, wenn du das Quiz verlässt. Du kannst hier die Daten für eine spätere Verwendung exportieren.",

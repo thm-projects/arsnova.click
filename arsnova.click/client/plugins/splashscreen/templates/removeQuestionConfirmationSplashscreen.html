@@ -1,0 +1,54 @@
+<!--
+* This file is part of ARSnova Click.
+* Copyright (C) 2016 The ARSnova Team
+*
+* ARSnova Click is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* ARSnova Click is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
+
+<template name="removeQuestionConfirmationSplashscreen">
+	<div class="modal splashscreen" role="dialog">
+		<div class="modal-dialog">
+            <div class="noSplashscreenPadding">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>{{_ "plugins.splashscreen.remove_question_confirmation.title"}}</h2>
+                        <div class="splashscreen-container-close" aria-label="{{_ "global.close_window"}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{_ "plugins.splashscreen.remove_question_confirmation.text"}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button id="closeDialogButton"
+                                        aria-label="{{_ "view.lobby.no"}}"
+                                        class="button button-back tabbable">
+                                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                                    <span class="hidden-xs">{{_ "view.lobby.no"}}</span>
+                                </button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button id="removeQuestion"
+                                        aria-label="{{_ "view.lobby.yes"}}"
+                                        class="button button-next tabbable">
+                                    <span class="hidden-xs">{{_ "view.lobby.yes"}}</span>
+                                    <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</div>
+	</div>
+</template>

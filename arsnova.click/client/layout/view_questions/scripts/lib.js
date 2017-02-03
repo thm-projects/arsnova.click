@@ -202,7 +202,7 @@ export function parseGithubFlavoredMarkdown(result, overrideLineBreaks = true) {
 				break;
 			case /\$/.test(result[i]):
 				break;
-			case /^```/.test(result[i]):
+			case /^```/.test(result[i]) && !/(.)*(`){3}$/.test(result[i]):
 				parseCodeBlock(result, i);
 				break;
 			case /^([0-9]*\.)?(-)?(\*)? \[x\] /.test(result[i]):

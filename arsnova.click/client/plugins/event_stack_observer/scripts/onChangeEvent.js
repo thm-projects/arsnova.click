@@ -132,7 +132,7 @@ function addLiveresultsChangeEvents() {
 					if (dialog) {
 						dialog.close();
 					}
-				}, questionElement.timer * 0.75 * 1000);
+				}, (questionElement.timer - 6) * 1000);
 			} else {
 				Router.go("/" + Router.current().params.quizName + "/onpolling");
 			}

@@ -3,6 +3,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import * as localData from '/lib/local_storage.js';
+import {Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 
 Template.quizManager.events({
 	"click #available_questions_wrapper .draggable": function (event) {
@@ -51,11 +52,20 @@ Template.quizManager.events({
 	"click .removeQuestion": function (event) {
 		event.stopPropagation();
 		event.preventDefault();
-		const questionGroup = Session.get("questionGroup");
-		const targetId = parseInt($(event.currentTarget).parents(".draggable").attr("id").replace("_added_question", ""));
-		questionGroup.removeQuestion(targetId);
-		Session.set("questionGroup", questionGroup);
-		localData.addHashtag(Session.get("questionGroup"));
+		new Splashscreen({
+			autostart: true,
+			templateName: "removeQuestionConfirmationSplashscreen",
+			closeOnButton: '#closeDialogButton, #removeQuestion, .splashscreen-container-close>.glyphicon-remove',
+			onRendered: function (template) {
+				template.templateSelector.find("#removeQuestion").on("click", function () {
+					const questionGroup = Session.get("questionGroup");
+					const targetId = parseInt($(event.currentTarget).parents(".draggable").attr("id").replace("_added_question", ""));
+					questionGroup.removeQuestion(targetId);
+					Session.set("questionGroup", questionGroup);
+					localData.addHashtag(Session.get("questionGroup"));
+				});
+			}
+		});
 	}
 });
 

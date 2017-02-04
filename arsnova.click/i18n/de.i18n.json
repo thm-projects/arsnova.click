@@ -474,8 +474,10 @@
       "quiz_url": "",
       "question_amount": "Fragen",
       "validation_question_group": "Status",
-      "successful": "valide",
-      "failed": "noch unvollständig",
+      "question_successful": "Die Frage ist vollständig",
+      "question_failed": "Die Frage ist noch unvollständig",
+      "question_group_successful": "Dein Quiz ist einsatzbereit",
+      "question_group_failed": "Dein Quiz ist unvollständig",
       "correct": "Richtig",
       "wrong": "Falsch",
       "question": "Frage",
@@ -665,6 +667,10 @@
         "title": "Quiz bearbeiten?",
         "text": "Alle Teilnehmenden werden abgemeldet und die Rangliste wird gelöscht.",
         "continue": "Fortfahren?"
+      },
+      "remove_question_confirmation": {
+        "title": "Quizfrage löschen?",
+        "text": "Dies kann nicht rückgängig gemacht werden!"
       },
       "reminder_leaderboard_data": {
         "title": "Warnung",

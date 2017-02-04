@@ -24,6 +24,14 @@
 			}
 		}
 
+		&#added_questions_wrapper {
+			li {
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+			}
+		}
+
 		&#available_questions_wrapper,
 		&#added_questions_wrapper {
 			min-height: 100px;
@@ -35,7 +43,6 @@
 				position: relative;
 
 				li {
-					width: calc(100% - 30px);
 					&[data-valid='true'] {
 						&:before {
 							content: "\2714";

@@ -685,6 +685,10 @@
         "text": "Todos los asistentes serán eliminados y se eliminarán la tabla de clasificación.",
         "continue": "¿Continuar?"
       },
+      "remove_question_confirmation": {
+        "title": "¿Deseas eliminar la pregunta?",
+        "text": "¡Esto no se puede deshacer!"
+      },
       "reminder_leaderboard_data": {
         "title": "Advertencia",
         "text": "Los datos de la tabla de clasificación se eliminarán tan pronto como salga de la prueba. Puede descargar los datos para su uso posterior aquí.",

@@ -39,7 +39,7 @@ export class EventStackObserver {
 		this.ignoreChanges = options.ignoreChanges || ["EventManager.keepalive"];
 		this.verbose = options.verbose || false;
 		this.running = false;
-		this.lastPerformedIndex = 0;
+		this.lastPerformedIndex = sessionStorage.getItem("EventStackObserver.lastPerformedIndex") || 0;
 		this.hooks = {
 			after: {
 				update: null,
@@ -81,6 +81,7 @@ export class EventStackObserver {
 						}
 						observerInstance.lastPerformedIndex++;
 					}
+					sessionStorage.setItem("EventStackObserver.lastPerformedIndex", observerInstance.lastPerformedIndex);
 				}
 			},
 			addedAt: function () {

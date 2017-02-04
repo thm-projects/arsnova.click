@@ -17,8 +17,13 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {connectionStatus} from './lib.js';
 
 Template.layout.onCreated(function () {
 	Session.set("connectionStatus", connectionStatus);
+	const eventDoc = EventManagerCollection.findOne();
+	if (eventDoc) {
+		sessionStorage.setItem("EventStackObserver.lastPerformedIndex", eventDoc.eventStack.length);
+	}
 });

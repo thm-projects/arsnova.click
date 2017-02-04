@@ -221,6 +221,9 @@ export function getAllLeaderboardItems(keepAllNicks = false) {
 						delete result[o];
 					}
 				} else {
+					if (typeof allItems[o] === "undefined") {
+						allItems[o] = 0;
+					}
 					result[o] = allItems[o] + tmpItems[o];
 				}
 			}

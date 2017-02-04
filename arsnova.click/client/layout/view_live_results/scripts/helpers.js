@@ -433,12 +433,12 @@ Template.liveResults.helpers({
 		}
 		return questionDoc.questionList.length === 1;
 	},
-	isReadingConfirmationEnabled: ()=> {
+	isReadingConfirmationEnabled: (index)=> {
 		const sessionConfig = SessionConfigurationCollection.findOne();
 		if (!sessionConfig) {
 			return;
 		}
-		return sessionConfig.readingConfirmationEnabled;
+		return sessionConfig.readingConfirmationEnabled && (EventManagerCollection.findOne().questionIndex < index);
 	},
 	readingConfirmationListForQuestion: (index)=> {
 		let result = [];

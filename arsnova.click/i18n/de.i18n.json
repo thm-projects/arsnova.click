@@ -305,9 +305,9 @@
       },
       "demo_quiz": {
         "title": {
-          "1": "Du suchst eine Quiz-App für deinen Unterricht?",
-          "2": "Entdecke die Vielfalt von arsnova.click! Gib \u00BBDemo Quiz\u00AB ein und starte es. Ruf die App in einem zweiten Browser auf und spiel das Quiz in verteilten Rollen!",
-          "3": "Besuch arsnova.eu und erfahre, wie Du Quizze im Unterricht einsetzen kannst."
+          "1": "Entdecke arsnova.click!",
+          "2": "Gib \u00BBDemo Quiz\u00AB ein und starte es. Ruf die App in einem zweiten Browser auf und spiel das Quiz in verteilten Rollen.",
+          "3": "Besuch unseren Blog arsnova.eu und erfahr, wie Du Quizze im Unterricht und beim Vortragen einsetzen kannst."
         }
       }
     },

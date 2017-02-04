@@ -507,9 +507,8 @@
           "timer_too_big": "Countdown ist zu lang",
           "no_valid_answers": "Mindestens eine Antwort muss als richtig markiert sein",
           "one_valid_answer_required": "Es muss exakt eine Antwort als richtig markiert sein",
-          "no_valid_answer_required": "Bei einer Umfrage sind Antworten weder richtig noch falsch",
-          "invalid_range": "Der Minimalwert ist größer als der Maximalwert",
-          "invalid_correct_value": "Der richtige Wert muss zwischen Minimal- und Maximalwert liegen",
+          "invalid_range": "Kein Schätzwert angegeben",
+          "invalid_correct_value": "Der Schätzwert muss zwischen Minimal- und Maximalwert liegen",
           "answer_text_empty": "Die Antwort darf nicht leer sein"
         }
       },

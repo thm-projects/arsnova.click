@@ -108,13 +108,6 @@ Meteor.methods({
 			responseDoc.profile = JSON.stringify(user.profile);
 		}
 		ResponsesCollection.insert(responseDoc);
-
-		Meteor.call('LeaderBoardCollection.addResponseSet', {
-			hashtag: hashtag,
-			questionIndex: responseDoc.questionIndex,
-			nick: responseDoc.userNick,
-			responseTime: responseDoc.responseTime
-		});
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$push: {
 				eventStack: {

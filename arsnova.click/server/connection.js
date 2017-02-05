@@ -31,7 +31,6 @@ Meteor.setInterval(function () {
 		sessionStatus: {$ne: 0}
 	}).forEach(function (session) {
 		//Remove Session-Data
-		console.log(now - sessionDeleteAfterIdleMinutes, sessionDeleteAfterIdleMinutes, session);
 		AnswerOptionCollection.remove({hashtag: session.hashtag});
 		MemberListCollection.remove({hashtag: session.hashtag});
 		ResponsesCollection.remove({hashtag: session.hashtag});

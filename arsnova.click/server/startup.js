@@ -22,7 +22,6 @@ import {TAPi18n} from 'meteor/tap:i18n';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {BannedNicksCollection} from '/lib/banned_nicks/collection.js';
 import {NicknameCategoriesCollection} from '/lib/nickname_categories/collection.js';
-import {ConnectionStatusCollection} from '/lib/connection/collection.js';
 import {forbiddenNicks} from './forbiddenNicks.js';
 import {nickCategories} from './nickCategories.js';
 import {themes} from '/shared/themes.js';
@@ -103,7 +102,6 @@ if (Meteor.isServer) {
 			console.log("server startup: inserted nick categories successfully");
 			console.log("server startup: removing old connection status documents");
 		}
-		ConnectionStatusCollection.remove({});
 		if (Meteor.settings.serverStartup.verbose) {
 			console.log("server startup: removed old connection status documents successfully");
 			console.log("server startup: generating preview images of all themes in all languages");

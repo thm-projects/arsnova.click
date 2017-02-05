@@ -17,7 +17,6 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {ConnectionStatusCollection} from '/lib/connection/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
@@ -48,20 +47,11 @@ Meteor.methods({
 		QuestionGroupCollection.remove({hashtag: hashtag});
 		EventManagerCollection.remove({hashtag: hashtag});
 		SessionConfigurationCollection.remove({hashtag: hashtag});
-	},
-	'Connection.receivedConnectionStatus': function (key) {
-		ConnectionStatusCollection.remove({key: key});
 	}
 });
 
 if (Meteor.isServer) {
 	Meteor.methods({
-		'Connection.sendConnectionStatus': function (key) {
-			ConnectionStatusCollection.insert({key: key});
-		},
-		'Main.getCurrentTimeStamp': function () {
-			return new Date().getTime();
-		},
 		'Main.calculateRemainingCountdown': function (hashtag, index) {
 			const currentTime = new Date(new Date().getTime());
 			const questionDoc = QuestionGroupCollection.findOne({hashtag: hashtag}).questionList[index];

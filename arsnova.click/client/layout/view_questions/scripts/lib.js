@@ -197,7 +197,7 @@ export function parseMathjaxBlock(result, i) {
 export function parseGithubFlavoredMarkdown(result, overrideLineBreaks = true) {
 	for (let i = 0; i < result.length; i++) {
 		switch (true) {
-			case /^\$\$$/.test(result[i]):
+			case /^\$\$$/.test(result[i]) && !/(.)*(\$){2}$/.test(result[i]):
 				parseMathjaxBlock(result, i);
 				break;
 			case /\$/.test(result[i]):

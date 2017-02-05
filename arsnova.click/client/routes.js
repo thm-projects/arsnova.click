@@ -107,7 +107,6 @@ const BlockingRouteController = RouteController.extend({
 			subsCache.subscribe('AnswerOptionCollection.join', currentHashtag),
 			subsCache.subscribe('QuestionGroupCollection.join', currentHashtag),
 			subsCache.subscribe('MemberListCollection.join', currentHashtag),
-			subsCache.subscribe('LeaderBoardCollection.join', currentHashtag),
 			subsCache.subscribe('EventManagerCollection.join', currentHashtag)
 		];
 	}

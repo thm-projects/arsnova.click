@@ -46,11 +46,11 @@ export function calculateHeaderSize() {
 		logoHeight;
 
 	if ($(document).width() > $(document).height()) {
-		logoHeight = "8vw";
+		logoHeight = $(window).width() * 0.08;
 	} else {
-		logoHeight = "8vh";
+		logoHeight = $(window).height() * 0.08;
 	}
-	header.find('.arsnova-logo img').css("height", logoHeight);
+	header.find('#arsnova-logo-image').css("height", logoHeight);
 
 	if (titleLength <= 15) {
 		if ($(document).width() > $(document).height()) {
@@ -75,7 +75,7 @@ export function calculateHeaderSize() {
 			fontSize = "3vh";
 		}
 	}
-	headerTitle.css({"font-size": fontSize, "line-height": header.find('.arsnova-logo').height() + "px"});
+	headerTitle.css({"font-size": fontSize, "line-height": header.find('#arsnova-logo-image').css("height")});
 }
 
 export const titelTracker = new Tracker.Dependency();

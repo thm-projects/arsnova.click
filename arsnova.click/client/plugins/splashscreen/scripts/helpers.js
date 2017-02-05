@@ -60,12 +60,19 @@ Template.readingConfirmedSplashscreen.helpers($.extend(isMobileDevice, parseMark
 }));
 
 Template.questionAndAnswerSplashscreen.helpers($.extend(isMobileDevice, parseMarkdown, {
-	revealAnswerText: function () {
+	revealCorrectAnswerValue: function () {
 		const templateData = Template.instance().data;
 		if (!templateData) {
 			return;
 		}
-		return templateData.revealCorrectValues !== false && (!Session.get("countdownInitialized") || Session.get("sessionClosed"));
+		return templateData.revealCorrectAnswerValue !== false && (!Session.get("countdownInitialized") || Session.get("sessionClosed"));
+	},
+	revealAnswers: function () {
+		const templateData = Template.instance().data;
+		if (!templateData) {
+			return;
+		}
+		return templateData.revealAnswers !== false;
 	}
 }));
 

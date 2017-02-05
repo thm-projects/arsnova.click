@@ -40,9 +40,10 @@
                                 {{/if}}
                             {{/each}}
                         </div>
-                        <div id="answerContent" class="markdown-content" role="list">
+                        {{#if revealAnswers}}
+                            <div id="answerContent" class="markdown-content" role="list">
                             {{#if isRangedQuestion}}
-                                {{#if revealAnswerText}}
+                                {{#if revealCorrectAnswerValue}}
                                     <h3 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h3>
                                     {{#with getAnswerOptions}}
                                         <div class="answerContentElementWrapper" role="listitem">
@@ -73,7 +74,7 @@
                                 {{/if}}
                             {{else}}
                                 {{#if isFreeTextQuestion}}
-                                    {{#if revealAnswerText}}
+                                    {{#if revealCorrectAnswerValue}}
                                         <h3 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h3>
                                         {{#with getAnswerOptions}}
                                             <div class="answerContentElementWrapper" role="listitem">
@@ -112,6 +113,7 @@
                                 {{/if}}
                             {{/if}}
                         </div>
+                        {{/if}}
                     </div>
                     <div class="modal-footer">
                         <button id="js-btn-hideQuestionModal"

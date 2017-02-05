@@ -82,11 +82,14 @@ export function isCountdownZero(index) {
 }
 
 export function displayQuestionAndAnswerDialog(questionIndex) {
+	const sessionConfig = SessionConfigurationCollection.findOne();
+	const eventDoc = EventManagerCollection.findOne();
 	setQuestionDialog(new Splashscreen({
 		autostart: true,
 		templateName: 'questionAndAnswerSplashscreen',
 		dataContext: {
-			questionIndex: questionIndex
+			questionIndex: questionIndex,
+			revealAnswers: sessionConfig.readingConfirmationEnabled ? Session.get("countdownInitialized") ? true : eventDoc.questionIndex >= eventDoc.readingConfirmationIndex || eventDoc.readingConfirmationIndex > questionIndex : true
 		},
 		closeOnButton: '#js-btn-hideQuestionModal, .splashscreen-container-close>.glyphicon-remove',
 		instanceId: "questionAndAnswers_" + questionIndex

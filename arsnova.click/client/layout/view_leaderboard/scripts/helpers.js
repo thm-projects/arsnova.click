@@ -34,7 +34,7 @@ Template.leaderboardFooterNavButtons.helpers({
 			return 12;
 		}
 		const hasTooMuchButtons = Session.get("responsesCountOverride") || (Session.get("allMembersCount") - (Session.get("maxResponseButtons")) > 0);
-		if (Session.get("nicks").length === 0) {
+		if (Session.get("nicks").length === 0 && Session.get("exportItems").length === 0) {
 			return 12;
 		} else if (localData.containsHashtag(Router.current().params.quizName)) {
 			if (hasTooMuchButtons) {
@@ -54,7 +54,7 @@ Template.leaderboardFooterNavButtons.helpers({
 		if (!Session.get("nicks")) {
 			return true;
 		}
-		return Session.get("nicks").length === 0;
+		return Session.get("nicks").length === 0 && Session.get("exportItems").length === 0;
 	},
 	hasTooMuchButtons: ()=> {
 		return Session.get("responsesCountOverride") || (Session.get("allMembersCount") - (Session.get("maxResponseButtons") + 1) > 0);

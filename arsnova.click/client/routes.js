@@ -58,6 +58,7 @@ export function cleanUp() {
 	localStorage.removeItem("slider");
 	localStorage.removeItem("lastPage");
 	sessionStorage.removeItem("overrideValidQuestionRedirect");
+	sessionStorage.removeItem("EventStackObserver.lastPerformedIndex");
 }
 
 Router.configure({

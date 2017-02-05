@@ -180,7 +180,7 @@ export function isCorrectResponse(response, question, questionIndex) {
 
 export function objectToArray(obj) {
 	return $.map(obj, function (value, index) {
-		return [{nick: index, responseTime: value}];
+		return [{nick: index, responseTime: value.responseTime, correctQuestions: value.correctQuestions}];
 	});
 }
 
@@ -197,10 +197,12 @@ export function getLeaderboardItemsByIndex(questionIndex) {
 		const isCorrect = isCorrectResponse(item, question, questionIndex);
 		if (isCorrect === true || isCorrect > 0) {
 			if (typeof result[item.userNick] === "undefined") {
-				result[item.userNick] = 0;
+				result[item.userNick] = {
+					responseTime: 0
+				};
 			}
 			if (question.type !== "SurveyQuestion") {
-				result[item.userNick] += item.responseTime;
+				result[item.userNick].responseTime += item.responseTime;
 			}
 		}
 	});
@@ -211,45 +213,49 @@ export function getAllLeaderboardItems(keepAllNicks = false) {
 	let allItems = getLeaderboardItemsByIndex(0);
 	for (let i = 1; i < EventManagerCollection.findOne().questionIndex + 1; i++) {
 		const tmpItems = getLeaderboardItemsByIndex(i);
-		const result = {};
 		for (const o in tmpItems) {
 			if (tmpItems.hasOwnProperty(o)) {
-				if (!keepAllNicks) {
-					if (typeof allItems[o] !== "undefined" && typeof tmpItems[o] !== "undefined") {
-						result[o] = allItems[o] + tmpItems[o];
+				if (typeof allItems[o] === "undefined") {
+					if (!keepAllNicks) {
+						continue;
 					} else {
-						delete result[o];
+						allItems[o] = {
+							responseTime: 0,
+							correctQuestions: []
+						};
 					}
-				} else {
-					if (typeof allItems[o] === "undefined") {
-						allItems[o] = 0;
-					}
-					result[o] = allItems[o] + tmpItems[o];
 				}
+				allItems[o].responseTime += tmpItems[o].responseTime;
+				allItems[o].correctQuestions.push((i + 1));
 			}
 		}
-		$.extend(allItems, result);
 	}
 	return allItems;
 }
 
-export function generateExportData() {
-	const items = Session.get("nicks");
+function generateCSVExportData() {
+	const items = Session.get("exportItems");
 	let csvString = "";
 	let hasIdentifiedUsers = false;
 	items.forEach(function (item) {
-		let responseTime = item.responseTime;
 		const response = ResponsesCollection.findOne({hashtag: Router.current().params.quizName, userNick: item.nick}, {userRef: 1});
 		if (typeof response.profile !== "undefined") {
 			response.profile = $.parseJSON(response.profile);
 			hasIdentifiedUsers = true;
 			item.id      = response.profile.id;
-			item.mail    = response.profile.mail instanceof Array ? response.profile.mail.join(",") : response.profile.mail;
-			csvString += item.nick + "," + responseTime + "," + item.id + "," + item.mail + "\n";
+			item.mail    = response.profile.mail instanceof Array ? response.profile.mail.join(", ") : response.profile.mail;
+			csvString += item.nick + ";" + item.responseTime + ";" + item.correctQuestions.join(", ") + ";" + item.id + ";" + item.mail + "\n";
 		} else {
-			csvString += item.nick + "," + responseTime + "\n";
+			csvString += item.nick + ";" + item.responseTime + ";" + item.correctQuestions.join(", ") + "\n";
 		}
 	});
-	const csvHeader = hasIdentifiedUsers ? "Nickname,ResponseTime (ms),UserID,Email\n" : "Nickname,ResponseTime (ms)\n";
+	const csvHeader = hasIdentifiedUsers ? "Nickname;ResponseTime (ms);Correct question numbers;UserID,Email\n" : "Nickname;ResponseTime (ms);Correct question numbers\n";
 	return csvHeader + csvString;
+}
+
+export function generateExportData(type = "csv") {
+	switch (type) {
+		case "csv":
+			return generateCSVExportData();
+	}
 }

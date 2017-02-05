@@ -67,6 +67,7 @@ const clickEvents = {
 				Router.go("/" + Router.current().params.quizName + "/resetToHome");
 			}
 		} else {
+			sessionStorage.removeItem("EventStackObserver.lastPerformedIndex");
 			Router.go("/");
 		}
 	},
@@ -280,6 +281,7 @@ const clickEvents = {
 				instance.templateSelector.find('#editSessionButton').on('click', function () {
 					Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName, function () {
 						Meteor.call('EventManagerCollection.reset', Router.current().params.quizName);
+						sessionStorage.removeItem("EventStackObserver.lastPerformedIndex");
 						Router.go("/" + Router.current().params.quizName + "/quizManager");
 					});
 				});

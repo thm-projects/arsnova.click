@@ -42,6 +42,8 @@
 		.answerContentElementLetter {
 			text-align: center;
 			border-bottom: 1px solid;
+			border-top-left-radius: $corner-radius;
+			border-top-right-radius: $corner-radius;
 			font-size: 1.5em;
 		}
 		.answerContentElementItem {

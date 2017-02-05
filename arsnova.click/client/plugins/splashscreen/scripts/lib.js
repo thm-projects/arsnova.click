@@ -22,6 +22,7 @@ import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {forceFeedback} from '/client/layout/global/scripts/lib.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
@@ -294,6 +295,9 @@ export const parseMarkdown = {
 		});
 		questionLib.parseGithubFlavoredMarkdown(result);
 		return result;
+	},
+	isCorrectAnswer: function (answerindex) {
+		return AnswerOptionCollection.findOne({answerOptionNumber: answerindex}).isCorrect;
 	},
 	isVideoQuestionText: function (questionText) {
 		return !/(^!)?\[.*\]\(.*\)/.test(questionText) && /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(questionText) && (/youtube/.test(questionText) || /youtu.be/.test(questionText) || /vimeo/.test(questionText));

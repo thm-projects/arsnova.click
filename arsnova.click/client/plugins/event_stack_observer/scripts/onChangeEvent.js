@@ -48,7 +48,6 @@ function addMemberlistChangeEvents() {
 	globalEventStackObserver.onChange([
 		"EventManagerCollection.startQuiz"
 	], function (key, value) {
-		console.log(key,value);
 		if (!isNaN(value.sessionStatus)) {
 			if (value.sessionStatus === 3) {
 				if (localData.containsHashtag(Router.current().params.quizName) || SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).readingConfirmationEnabled) {

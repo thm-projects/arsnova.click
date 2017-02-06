@@ -14,145 +14,93 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
+
 @import "../../../layout/global/styles/appearance";
-
-#liveResultsFrame.fixed-bottom {
-	bottom: 0;
-}
-
-.question-title {
-	font-size: 1.5em;
-	margin: 10px 0 0;
-	padding: 5px 30px 0;
-}
-
-.question-wrapper {
-	overflow-x: hidden;
-	overflow-y: auto;
-	width: 100%;
-
-	.question-row {
-		margin-bottom: 20px;
-	}
-}
-
-.button-result-mc-letter {
-	font-size: 1.5em;
-	line-height: 40px;
-}
-
-.glyphicon-style {
-	font-size: 60%;
-}
-
-.row-padding-bottom {
-	padding-bottom: 1vw;
-}
-
-.row-padding-top {
-	padding-top: 1vw;
-}
-
-.subtitel-padding-top {
-	padding-top: 3vw;
-}
-
-#countdownAnimationWrapper {
-	z-index: 1070;
-	position: fixed;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
-
-	#countdownAnimation {
-		z-index: 1070;
-		position: fixed;
-		top: 0;
-		left: calc(50% - 150px);
-		width: 100%;
-		height: 100%;
-		background-image: none;
-		background-position: 0 100%;
-		background-repeat: no-repeat;
-	}
-}
 
 #liveResultsFrame {
 	height: 100%;
 
-	.btn-answerOption {
-		margin: 15px 0;
+	.question-wrapper {
+		overflow-x: hidden;
+		overflow-y: auto;
 		width: 100%;
-		height: 100%;
-	}
-}
 
-.formGroupProgressRow {
-	margin: 0 0 5px;
+		.question-row {
+			margin-bottom: 20px;
 
-	.progress {
-		margin: 10px 0;
-		height: 30px;
+			.question-title {
+				font-size: 1.5em;
+				margin: 10px 0 0;
+				padding: 5px 30px 0;
+			}
 
-		.percentage {
-			width: 100%;
+			.btn-answerOption {
+				margin: 15px 0;
+				width: 100%;
+				height: 100%;
+			}
 
-			.label {
-				overflow: hidden;
-				text-overflow: ellipsis;
-				white-space: nowrap;
-				float: left;
-				margin: 0;
-				line-height: 28px;
-				font-size: 1.3em;
-				font-weight: 800;
-				text-align: left;
-				display: inline-flex;
-				padding: 0;
-				border-radius: 0;
-				vertical-align: middle;
+			.formGroupProgressRow {
+				margin: 0 0 5px;
 
-				p {
-					margin: 0 20px 0 0;
-				}
-				img {
-					height: 1.3em;
+				.progress {
+					margin: 10px 0;
+					height: 30px;
+
+					.percentage {
+						width: 100%;
+
+						.label {
+							overflow: hidden;
+							text-overflow: ellipsis;
+							white-space: nowrap;
+							float: left;
+							margin: 0;
+							line-height: 28px;
+							font-size: 1.3em;
+							font-weight: 800;
+							text-align: left;
+							display: inline-flex;
+							padding: 0;
+							border-radius: 0;
+							vertical-align: middle;
+
+							p {
+								margin: 0 20px 0 0;
+							}
+
+							img {
+								height: 1.3em;
+							}
+						}
+
+						.values {
+							float: right;
+							line-height: 28px;
+							font-size: 17px;
+							display: inline-flex;
+
+							p {
+								margin: 1px 0 0;
+
+								&.absolute {
+									margin-right: 10px;
+								}
+
+								&.percent {
+									margin-left: 10px;
+									width: 50px;
+									text-align: right;
+								}
+							}
+						}
+					}
 				}
 			}
 
-			.values {
-				float: right;
-				line-height: 28px;
-				font-size: 17px;
-				display: inline-flex;
-
-				p {
-					margin: 1px 0 0;
-
-					&.absolute {
-						margin-right: 10px;
-					}
-					&.percent {
-						margin-left: 10px;
-						width: 50px;
-						text-align: right;
-					}
-				}
+			.btn-learner {
+				width: 100%;
 			}
 		}
-	}
-}
-
-.button-result-readingConfirmation {
-	line-height: 40px;
-	font-size: 1.4em;
-	float: left;
-	margin: 0 10px 0 -5px;
-}
-
-.largeLiveResultsTitle {
-	.titel {
-		font-size: 100px !important;
 	}
 }

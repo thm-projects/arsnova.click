@@ -58,7 +58,6 @@ const clickEvents = {
 					closeOnButton: '#closeDialogButton, #resetSessionButton, .splashscreen-container-close>.glyphicon-remove',
 					onRendered: function (instance) {
 						instance.templateSelector.find('#resetSessionButton').on('click', function () {
-							Meteor.call("Main.killAll", Router.current().params.quizName);
 							Router.go("/" + Router.current().params.quizName + "/resetToHome");
 						});
 					}

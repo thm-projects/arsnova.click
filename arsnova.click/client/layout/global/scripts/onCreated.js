@@ -26,8 +26,7 @@ Template.layout.onCreated(function () {
 	Tracker.autorun(function () {
 		const eventDoc = EventManagerCollection.findOne();
 		if (eventDoc) {
-			console.log(eventDoc.eventStack.length);
 			sessionStorage.setItem("EventStackObserver.lastPerformedIndex", eventDoc.eventStack.length);
 		}
-	})
+	});
 });

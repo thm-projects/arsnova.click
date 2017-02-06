@@ -272,6 +272,14 @@ export const parseMarkdown = {
 		}
 		return QuestionGroupCollection.findOne().questionList[parseInt(instance.data.questionIndex)].type === "FreeTextQuestion";
 	},
+	isSurveyQuestion: function () {
+		const instance = Template.instance();
+		const questionDoc = QuestionGroupCollection.findOne();
+		if (!questionDoc) {
+			return;
+		}
+		return QuestionGroupCollection.findOne().questionList[parseInt(instance.data.questionIndex)].type === "SurveyQuestion";
+	},
 	isRangedQuestion: function () {
 		const instance = Template.instance();
 		const questionDoc = QuestionGroupCollection.findOne();

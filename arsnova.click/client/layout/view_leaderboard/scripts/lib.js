@@ -219,7 +219,7 @@ export function getAllLeaderboardItems(keepAllNicks = false) {
 				if (typeof allItems[o] === "undefined") {
 					allItems[o] = {
 						responseTime: 0,
-						correctQuestions: tmpItems[o].correctQuestions
+						correctQuestions: []
 					};
 				}
 				allItems[o].responseTime += tmpItems[o].responseTime;

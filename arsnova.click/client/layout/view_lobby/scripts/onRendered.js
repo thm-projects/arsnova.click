@@ -49,7 +49,6 @@ Template.memberlist.onRendered(function () {
 		}
 	});
 	if (localData.containsHashtag(Router.current().params.quizName)) {
-		Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
 		const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
 		let songTitle       = musicSettings.getLobbyTitle();
 		if (songTitle === "Random") {

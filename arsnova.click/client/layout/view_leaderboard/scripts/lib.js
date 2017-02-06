@@ -227,15 +227,13 @@ export function getAllLeaderboardItems(keepAllNicks = false) {
 			}
 		}
 	}
-	const questionCount = QuestionGroupCollection.findOne().questionList.filter(function (item) {
-		return item.type !== "SurveyQuestion";
-	}).length;
 	if (!keepAllNicks) {
+		const questionCount = QuestionGroupCollection.findOne().questionList.filter(function (item) {
+			return item.type !== "SurveyQuestion";
+		}).length;
 		for (const o in allItems) {
-			if (allItems.hasOwnProperty(o)) {
-				if (allItems[o].correctQuestions.length !== questionCount) {
-					delete allItems[o];
-				}
+			if (allItems.hasOwnProperty(o) && allItems[o].correctQuestions.length !== questionCount) {
+				delete allItems[o];
 			}
 		}
 	}

@@ -39,6 +39,7 @@ function addDefaultChangeEvents() {
 				errorMessage: "plugins.splashscreen.error.error_messages.session_closed"
 			});
 		}
+		sessionStorage.removeItem("EventStackObserver.lastPerformedIndex");
 		Router.go("/" + Router.current().params.quizName + "/resetToHome");
 	});
 }

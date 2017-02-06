@@ -91,7 +91,7 @@
                                     <h3 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=2}}</h3>
                                     {{#each getAnswerOptions}}
                                         <div class="answerContentElementWrapper" role="listitem">
-                                            <div class="answerContentElementLetter">
+                                            <div class="answerContentElementLetter {{#unless isSurveyQuestion}}{{#if revealCorrectAnswerValue}}{{#if isCorrectAnswer @index}}correctAnswer{{else}}wrongAnswer{{/if}}{{/if}}{{/unless}}">
                                                 <span>{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}} {{answerOptionLetter @index}}</span>
                                             </div>
                                             <div class="answerContentElementItem">

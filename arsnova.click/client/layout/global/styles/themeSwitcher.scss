@@ -824,6 +824,14 @@ $themes: (
 						}
 						.answerContentElementLetter {
 							border-bottom-color: map-get($map, "border-splashscreen-question-and-answer_answer-content-odd-row");
+							&.correctAnswer {
+								background: map-get($map, "bg-splashscreen-question-and-answer_answer-content-correct");
+								color: map-get($map, "fg-splashscreen-question-and-answer_answer-content-correct");
+							}
+							&.wrongAnswer {
+								background: map-get($map, "bg-splashscreen-question-and-answer_answer-content-wrong");
+								color: map-get($map, "fg-splashscreen-question-and-answer_answer-content-wrong");
+							}
 						}
 					}
 				}

@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
@@ -131,7 +130,6 @@ Template.header.events({
 				closeOnButton: '#closeDialogButton, #resetSessionButton, .splashscreen-container-close>.glyphicon-remove',
 				onRendered: function (instance) {
 					instance.templateSelector.find('#resetSessionButton').on('click', function () {
-						Meteor.call("Main.killAll", Router.current().params.quizName);
 						Router.go("/" + Router.current().params.quizName + "/resetToHome");
 					});
 				}

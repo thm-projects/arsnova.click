@@ -41,7 +41,7 @@ const subsCache = new SubsManager({
 export function cleanUp() {
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		if (EventManagerCollection.findOne()) {
-			Meteor.call("EventManagerCollection.clear", Router.current().params.quizName);
+			Meteor.call("Main.killAll", Router.current().params.quizName);
 		}
 	} else {
 		const userDoc = MemberListCollection.findOne({nick: localStorage.getItem(Router.current().params.quizName + "nick")});
@@ -58,6 +58,7 @@ export function cleanUp() {
 	localStorage.removeItem("slider");
 	localStorage.removeItem("lastPage");
 	sessionStorage.removeItem("overrideValidQuestionRedirect");
+	sessionStorage.removeItem("EventStackObserver.lastPerformedIndex");
 }
 
 Router.configure({

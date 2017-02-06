@@ -58,7 +58,6 @@ const clickEvents = {
 					closeOnButton: '#closeDialogButton, #resetSessionButton, .splashscreen-container-close>.glyphicon-remove',
 					onRendered: function (instance) {
 						instance.templateSelector.find('#resetSessionButton').on('click', function () {
-							Meteor.call("Main.killAll", Router.current().params.quizName);
 							Router.go("/" + Router.current().params.quizName + "/resetToHome");
 						});
 					}
@@ -67,6 +66,7 @@ const clickEvents = {
 				Router.go("/" + Router.current().params.quizName + "/resetToHome");
 			}
 		} else {
+			sessionStorage.removeItem("EventStackObserver.lastPerformedIndex");
 			Router.go("/");
 		}
 	},
@@ -280,6 +280,7 @@ const clickEvents = {
 				instance.templateSelector.find('#editSessionButton').on('click', function () {
 					Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName, function () {
 						Meteor.call('EventManagerCollection.reset', Router.current().params.quizName);
+						sessionStorage.removeItem("EventStackObserver.lastPerformedIndex");
 						Router.go("/" + Router.current().params.quizName + "/quizManager");
 					});
 				});

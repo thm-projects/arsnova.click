@@ -23,5 +23,9 @@ Meteor.publish('MemberListCollection.join', function (hashtag) {
 	new SimpleSchema({
 		hashtag: {type: String}
 	}).validate({hashtag});
-	return MemberListCollection.find({hashtag: hashtag});
+	return MemberListCollection.find({hashtag: hashtag}, {
+		fields: {
+			privateKey: 0
+		}
+	});
 });

@@ -198,7 +198,8 @@ export function getLeaderboardItemsByIndex(questionIndex) {
 		if (isCorrect === true || isCorrect > 0) {
 			if (typeof result[item.userNick] === "undefined") {
 				result[item.userNick] = {
-					responseTime: 0
+					responseTime: 0,
+					correctQuestions: [1]
 				};
 			}
 			if (question.type !== "SurveyQuestion") {
@@ -216,17 +217,25 @@ export function getAllLeaderboardItems(keepAllNicks = false) {
 		for (const o in tmpItems) {
 			if (tmpItems.hasOwnProperty(o)) {
 				if (typeof allItems[o] === "undefined") {
-					if (!keepAllNicks) {
-						continue;
-					} else {
-						allItems[o] = {
-							responseTime: 0,
-							correctQuestions: []
-						};
-					}
+					allItems[o] = {
+						responseTime: 0,
+						correctQuestions: tmpItems[o].correctQuestions
+					};
 				}
 				allItems[o].responseTime += tmpItems[o].responseTime;
-				allItems[o].correctQuestions.push((i + 1));
+				allItems[o].correctQuestions.push(i + 1);
+			}
+		}
+	}
+	const questionCount = QuestionGroupCollection.findOne().questionList.filter(function (item) {
+		return item.type !== "SurveyQuestion";
+	}).length;
+	if (!keepAllNicks) {
+		for (const o in allItems) {
+			if (allItems.hasOwnProperty(o)) {
+				if (allItems[o].correctQuestions.length !== questionCount) {
+					delete allItems[o];
+				}
 			}
 		}
 	}

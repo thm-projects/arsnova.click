@@ -180,7 +180,7 @@ Meteor.methods({
 		EventManagerCollection.insert({
 			hashtag: hashtag,
 			sessionStatus: 1,
-			lastConnection: 0,
+			lastConnection: new Date().getTime(),
 			readingConfirmationIndex: 0,
 			questionIndex: 0,
 			eventStack: [

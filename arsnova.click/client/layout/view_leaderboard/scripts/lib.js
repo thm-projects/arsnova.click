@@ -190,23 +190,23 @@ export function getLeaderboardItemsByIndex(questionIndex) {
 		hashtag: hashtag
 	}).questionList[questionIndex];
 	const result = {};
-	ResponsesCollection.find({
-		hashtag: hashtag,
-		questionIndex: questionIndex
-	}).forEach(function (item) {
-		const isCorrect = isCorrectResponse(item, question, questionIndex);
-		if (isCorrect === true || isCorrect > 0) {
-			if (typeof result[item.userNick] === "undefined") {
-				result[item.userNick] = {
-					responseTime: 0,
-					correctQuestions: [1]
-				};
-			}
-			if (question.type !== "SurveyQuestion") {
+	if (question.type !== "SurveyQuestion") {
+		ResponsesCollection.find({
+			hashtag: hashtag,
+			questionIndex: questionIndex
+		}).forEach(function (item) {
+			const isCorrect = isCorrectResponse(item, question, questionIndex);
+			if (isCorrect === true || isCorrect > 0) {
+				if (typeof result[item.userNick] === "undefined") {
+					result[item.userNick] = {
+						responseTime: 0,
+						correctQuestions: [questionIndex + 1]
+					};
+				}
 				result[item.userNick].responseTime += item.responseTime;
 			}
-		}
-	});
+		});
+	}
 	return result;
 }
 

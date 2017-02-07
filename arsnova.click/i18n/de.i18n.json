@@ -1,6 +1,6 @@
 {
   "global": {
-    "arsnova_slogan": "Quiz-App für Schule & Uni",
+    "arsnova_slogan": "Quiz-App für die Schule 4.0",
     "back": "Zurück",
     "next": "Weiter",
     "delete": "Löschen",
@@ -10,7 +10,7 @@
     "no": "Nein",
     "close_window": "Fenster schließen",
     "aria_description": {
-      "arsnova_slogan": "Quiz-App für Schule & Uni"
+      "arsnova_slogan": "Quiz-App für Schule 4.0"
     },
     "cookie_consent": {
       "message": "arsnova.click verwendet Cookies.",

@@ -20,6 +20,7 @@ import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {Router} from 'meteor/iron:router';
 import {HashtagsCollection, hashtagSchema} from '/lib/hashtags/collection.js';
+import {questionGroupSchema} from '/lib/questions/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import fs from 'fs';

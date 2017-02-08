@@ -99,6 +99,8 @@ routepolicy@1.0.12
 service-configuration@1.0.11
 session@1.1.7
 shell-server@0.2.1
+simple:json-routes@2.1.0
+simple:rest@1.1.1
 simple:highlight.js@1.2.0
 spacebars@1.0.13
 spacebars-compiler@1.0.13

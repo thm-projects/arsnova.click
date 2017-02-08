@@ -24,4 +24,11 @@ Meteor.publish('SessionConfigurationCollection.join', function (hashtag) {
 		hashtag: {type: String}
 	}).validate({hashtag});
 	return SessionConfigurationCollection.find({hashtag: hashtag});
+}, {
+	url: "api/sessionConfiguration",
+	httpMethod: "post",
+	getArgsFromRequest: function (request) {
+		var content = request.body;
+		return [decodeURIComponent(content.hashtag)];
+	}
 });

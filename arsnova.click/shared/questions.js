@@ -23,7 +23,7 @@ import {QuestionGroupCollection, questionGroupSchema, questionTextSchema, timerS
 import {EventManagerCollection, questionIndexSchema} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
-	"QuestionGroupCollection.insert": function (questionGroup) {
+	"QuestionGroupCollection.insert": (questionGroup) => {
 		questionGroupSchema.validate({
 			hashtag: questionGroup.hashtag,
 			questionList: questionGroup.questionList
@@ -51,12 +51,16 @@ Meteor.methods({
 			}
 		});
 	},
-	"QuestionGroupCollection.addQuestion": function (questionItem) {
+	"QuestionGroupCollection.addQuestion": (questionItem) => {
 		new SimpleSchema({
 			hashtag: hashtagSchema,
 			questionIndex: questionIndexSchema,
 			questionText: questionTextSchema
-		}).validate({hashtag: questionItem.hashtag, questionIndex: questionItem.getQuestionIndex(), questionText: questionItem.getQuestionText()});
+		}).validate({
+			hashtag: questionItem.hashtag,
+			questionIndex: questionItem.getQuestionIndex(),
+			questionText: questionItem.getQuestionText()
+		});
 
 		const query = {};
 		if (Meteor.isServer) {
@@ -85,7 +89,7 @@ Meteor.methods({
 			}
 		});
 	},
-	"QuestionGroupCollection.removeQuestion": function ({hashtag, questionIndex}) {
+	"QuestionGroupCollection.removeQuestion": ({hashtag, questionIndex}) => {
 		new SimpleSchema({
 			hashtag: hashtagSchema,
 			questionIndex: questionIndexSchema
@@ -103,13 +107,13 @@ Meteor.methods({
 		EventManagerCollection.update({hashtag: hashtag}, {
 			$push: {
 				eventStack: {
-					key: "QuestionGroupCollection.addQuestion",
+					key: "QuestionGroupCollection.removeQuestion",
 					value: {questionIndex: questionIndex}
 				}
 			}
 		});
 	},
-	"QuestionGroupCollection.persist": function (questionGroupElement) {
+	"QuestionGroupCollection.persist": (questionGroupElement) => {
 		new SimpleSchema({
 			hashtag: hashtagSchema
 		}).validate({hashtag: questionGroupElement.hashtag});
@@ -128,7 +132,7 @@ Meteor.methods({
 	/**
 	 * @return {boolean}
 	 */
-	"Question.isSC": function ({hashtag, questionIndex}) {
+	"Question.isSC": ({hashtag, questionIndex}) => {
 		new SimpleSchema({
 			hashtag: hashtagSchema,
 			questionIndex: questionIndexSchema
@@ -140,7 +144,7 @@ Meteor.methods({
 			isCorrect: true
 		}).count() === 1);
 	},
-	"Question.setTimer": function ({hashtag, questionIndex, timer}) {
+	"Question.setTimer": ({hashtag, questionIndex, timer}) => {
 		new SimpleSchema({
 			hashtag: hashtagSchema,
 			questionIndex: questionIndexSchema,
@@ -170,7 +174,7 @@ Meteor.methods({
 			}
 		});
 	},
-	"Question.startTimer": function ({hashtag, questionIndex}) {
+	"Question.startTimer": ({hashtag, questionIndex})=> {
 		if (Meteor.isClient) {
 			return;
 		}

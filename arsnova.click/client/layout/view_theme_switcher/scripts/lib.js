@@ -18,4 +18,3 @@
 import {Tracker} from 'meteor/tracker';
 
 export const themeTracker = new Tracker.Dependency();
-

@@ -1,0 +1,25 @@
+<template name="docs">
+  {{#if preambleExists}}
+    <div id="preamble">
+      {{> preamble}}
+    </div>
+  {{/if}}
+  {{#each sections}}
+    {{#if type "spacer"}}
+      <div class="spacer"> </div>
+    {{/if}}
+    {{#if type "section"}}
+      {{#if depthIs 1}}
+        <h2 id="{{name}}">
+          {{#if templateHelper}}
+            Template helper
+          {{else}}
+            {{name}}
+          {{/if}}
+        </h2>
+      {{else}}
+        {{> autoApiBox this}}
+      {{/if}}
+    {{/if}}
+  {{/each}}
+</template>

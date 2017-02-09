@@ -1,0 +1,11 @@
+Can't listen on port 3333. Perhaps another Meteor is running?
+
+Running two copies of Meteor in the same application directory
+will not work. If something else is using port 3333, yo
+=> Meteor 1.3.4: npm@3.9.6, .babelrc support, improved import declarations,
+DDP update batching, and more:
+https://github.com/meteor/meteor/blob/master/History.md#v134
+
+This release is being downloaded in the background. Update your app to
+Meteor 1.3.4 by running 'meteor update'.
+

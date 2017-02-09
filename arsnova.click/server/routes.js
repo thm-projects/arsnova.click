@@ -258,5 +258,5 @@ Router.route('/api/updateQuestionGroup', {where: 'server'})
 		Meteor.call("QuestionGroupCollection.persist", questionGroupModel);
 
 		this.response.writeHead(200);
-		this.response.end("Session with hashtag " + hashtag + " successfully updated");
+		this.response.end("Session with hashtag " + questionGroupModel.hashtag + " successfully updated");
 	});

@@ -142,7 +142,6 @@ Router.route('api/showReadingConfirmation', {where: 'server'})
 		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, EventManagerCollection.findOne().questionIndex + 1);
 
 		this.response.writeHead(200);
-		this.response.end("Session successfully reseted");
 	});
 
 Router.route('/api/openSession', {where: 'server'})
@@ -201,7 +200,7 @@ Router.route('/api/startNextQuestion', {where: 'server'})
 		}
 
 		this.response.writeHead(200);
-		this.response.end("Session successfully reseted");
+		this.response.end("Next Question with index " + questionIndex + " started.");
 	});
 
 Router.route('/api/updateQuestionGroup', {where: 'server'})
@@ -259,5 +258,5 @@ Router.route('/api/updateQuestionGroup', {where: 'server'})
 		Meteor.call("QuestionGroupCollection.persist", questionGroupModel);
 
 		this.response.writeHead(200);
-		this.response.end("Hashtag successfully created");
+		this.response.end("Session with hashtag " + hashtag + " successfully updated");
 	});

@@ -63,7 +63,9 @@ GetTimerMap = function () {
 FinalizeTimers = function () {
 	for (const actionGroup in TimerMap) {
 		if (TimerMap.hasOwnProperty(actionGroup)) {
-			Meteor.call("PerformanceAnalysisCollection.addItem", actionGroup, TimerMap[actionGroup].getTimeDiff(), deviceType);
+			if (TimerMap[actionGroup].getTimeDiff() > 0) {
+				Meteor.call("PerformanceAnalysisCollection.addItem", actionGroup, TimerMap[actionGroup].getTimeDiff(), deviceType);
+			}
 		}
 	}
 };

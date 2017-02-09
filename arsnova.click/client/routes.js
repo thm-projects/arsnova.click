@@ -33,7 +33,7 @@ import {checkIfThemeExist} from "/shared/themes.js";
 
 const subsCache = new SubsManager({
 	/* maximum number of cached subscriptions */
-	cacheLimit: 11,
+	cacheLimit: 12,
 	/* any subscription will expire after 15 minutes, if it's not subscribed again */
 	expireIn: 15
 });
@@ -94,6 +94,7 @@ const NonBlockingRouteController = RouteController.extend({
 	onBeforeAction: onBeforeAction,
 	subscriptions: function () {
 		subsCache.subscribe('HashtagsCollection.public');
+		subsCache.subscribe('PerformanceAnalysis.join');
 	}
 });
 const BlockingRouteController = RouteController.extend({
@@ -102,6 +103,7 @@ const BlockingRouteController = RouteController.extend({
 		const currentHashtag = Router.current().params.quizName;
 		return [
 			subsCache.subscribe('BannedNicksCollection.public'),
+			subsCache.subscribe('PerformanceAnalysis.join'),
 			subsCache.subscribe('NicknameCategoriesCollection.join'),
 			subsCache.subscribe('SessionConfigurationCollection.join', currentHashtag),
 			subsCache.subscribe('ResponsesCollection.join', currentHashtag),

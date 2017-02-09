@@ -19,8 +19,14 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {lobbySound} from '/client/plugins/sound/scripts/lib.js';
 import {memberlistObserver} from './lib.js';
+import {Router} from 'meteor/iron:router';
+import  * as localData from '/lib/local_storage.js';
+import {TimerMap} from "/lib/performance_analysis/Timer.js";
 
 Template.memberlist.onDestroyed(function () {
+	if (!localData.containsHashtag(Router.current().params.quizName)) {
+		TimerMap.routeToVotingView.start();
+	}
 	if (memberlistObserver) {
 		memberlistObserver.stop();
 	}

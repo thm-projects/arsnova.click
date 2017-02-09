@@ -24,6 +24,7 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import {makeAndSendResponse, makeAndSendRangedResponse, makeAndSendFreeTextResponse, countdownFinish} from './lib.js';
+import {TimerMap} from "/lib/performance_analysis/Timer.js";
 
 Template.votingview.events({
 	'click #js-btn-showQuestionAndAnswerModal': function (event, template) {
@@ -48,6 +49,7 @@ Template.votingview.events({
 		if (Session.get("hasSendResponse")) {
 			return;
 		}
+		TimerMap.clickOnResponseButton.start();
 
 		Session.set("hasSendResponse", true);
 		const responseArr = JSON.parse(Session.get("responses"));
@@ -99,6 +101,7 @@ Template.votingview.events({
 		const currentId = event.currentTarget.id;
 		responseArr[currentId] = !responseArr[currentId];
 		if (Session.get("questionSC")) {
+			TimerMap.clickOnResponseButton.start();
 			if (template.data && template.data["data-questionIndex"]) {
 				if ($('.correctAnswer, .wrongAnswer').length > 0) {
 					return;

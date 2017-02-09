@@ -27,6 +27,7 @@ import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {startConnectionIndication, getRTT, forceFeedback} from '/client/layout/global/scripts/lib.js';
 import {checkIfThemeExist} from "/shared/themes.js";
+import {TimerMap} from "/lib/performance_analysis/Timer.js";
 
 Template.home.onRendered(function () {
 	if (localData.getAllHashtags().length > 0) {
@@ -106,4 +107,5 @@ Template.layout.onRendered(function () {
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		Meteor.call('keepalive', Router.current().params.quizName);
 	}
+	TimerMap.initLoad.end();
 });

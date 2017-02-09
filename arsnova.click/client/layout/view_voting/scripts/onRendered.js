@@ -25,6 +25,7 @@ import * as headerLib from '/client/layout/region_header/lib.js';
 import * as answerOptionLib from '/client/layout/view_answeroptions/scripts/lib.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as lib from './lib.js';
+import {TimerMap} from "/lib/performance_analysis/Timer.js";
 
 Template.votingview.onRendered(function () {
 	let questionType = "";
@@ -53,6 +54,7 @@ Template.votingview.onRendered(function () {
 		headerLib.calculateHeaderSize();
 		headerLib.calculateTitelHeight();
 	});
+	TimerMap.routeToVotingView.end();
 });
 
 Template.liveResultsTitle.onRendered(function () {

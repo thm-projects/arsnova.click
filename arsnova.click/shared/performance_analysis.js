@@ -15,20 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Session} from 'meteor/session';
-import {Template} from 'meteor/templating';
-import {Tracker} from 'meteor/tracker';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
-import {connectionStatus} from './lib.js';
-import {TimerMap} from "/lib/performance_analysis/Timer.js";
+import {Meteor} from 'meteor/meteor';
+import {PerformanceAnalysisCollection} from '/lib/performance_analysis/collection.js';
 
-Template.layout.onCreated(function () {
-	Session.set("connectionStatus", connectionStatus);
-	Tracker.autorun(function () {
-		const eventDoc = EventManagerCollection.findOne();
-		if (eventDoc) {
-			sessionStorage.setItem("EventStackObserver.lastPerformedIndex", eventDoc.eventStack.length);
-		}
-	});
-	TimerMap.initLoad.start();
+Meteor.methods({
+	"PerformanceAnalysisCollection.addItem": (actionGroup, timeDiff, device) => {
+		PerformanceAnalysisCollection.insert({actionGroup: actionGroup, timeDiff: timeDiff, device: device});
+	}
 });

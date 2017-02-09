@@ -15,6 +15,9 @@
     "App": false,
     "console": false,
     "buzz": false,
+    "GetTimerMap": true,
+    "FinalizeTimers": true,
+    "AnalyzeTimers": true,
     "Debug": true // true => Writable object
   }
 }

@@ -25,10 +25,12 @@ import {SessionConfigurationCollection} from '/lib/session_configuration/collect
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 import * as lib from './lib.js';
+import {TimerMap} from "/lib/performance_analysis/Timer.js";
 
 Template.nickStandardFooter.events({
 	"click #forwardButton": function (event) {
 		event.stopPropagation();
+		TimerMap.clickOnNicknameForward.start();
 		const nickname = $("#nickname-input-field").val();
 		try {
 			new SimpleSchema({
@@ -71,6 +73,7 @@ Template.nickStandardFooter.events({
 			});
 			return;
 		}
+		TimerMap.clickOnNicknameForward.start();
 		Meteor.loginWithCas(function () {
 			if (!lib.hasTHMMail()) {
 				return;
@@ -128,6 +131,7 @@ Template.nickLimitedFooter.events({
 });
 Template.nickLimited.events({
 	"click .selectableNick": function (event) {
+		TimerMap.clickOnNicknameForward.start();
 		const configDoc = SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName});
 		const login = function (userRef = undefined) {
 			const nickname = NicknameCategoriesCollection.findOne({_id: $(event.currentTarget).attr("id").replace("selectableNick_", "")}).nick;

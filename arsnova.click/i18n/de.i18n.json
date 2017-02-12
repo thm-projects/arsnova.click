@@ -175,7 +175,7 @@
       "connection_status": {
         "title": "Verbindung",
         "show_result": "Details",
-        "pending": "Prüfe ...",
+        "pending": "Prüfe …",
         "finished_with_errors": "Mit Fehlern beendet",
         "finished_with_warnings": "Mit Warnungen beendet",
         "finished_without_warnings": "Erfolgreich",
@@ -274,7 +274,7 @@
       }
     },
     "hashtag_management": {
-      "enter_quiz_name": "Quiznamen oder PIN eingeben ...",
+      "enter_quiz_name": "Quiznamen oder PIN eingeben …",
       "join_session": "Mach mit beim Quiz!",
       "start_session": "Quiz starten",
       "edit_session": "Quiz bearbeiten",
@@ -315,8 +315,8 @@
       "header": "Rangliste",
       "global_header": "Globale Rangliste",
       "title": {
-        "single_question": "Frage __questionId__ - Richtig geantwortet haben ...",
-        "all_questions": "Alles richtig haben ..."
+        "single_question": "Frage __questionId__ - Gewusst gaben es …",
+        "all_questions": "Alles richtig haben …"
       },
       "no_attendee_correct": "Niemand hat es gewusst!",
       "no_attendee_correct_global": "Niemand hat alle Fragen richtig beantwortet",
@@ -330,8 +330,8 @@
     },
     "liveResults": {
       "title": "Ergebnisse",
-      "title_reading_confirmation": "Frage gelesen ...",
-      "title_running_countdown": "Abstimmung läuft ...",
+      "title_reading_confirmation": "Frage gelesen …",
+      "title_running_countdown": "Abstimmung läuft …",
       "question": "Frage anzeigen",
       "question_number": "Frage",
       "ranking": "Rangliste",
@@ -361,13 +361,13 @@
       "title": "Quiz Lobby",
       "yes": "Ja",
       "no": "Nein",
-      "ready": "Warten, dass es losgeht ...",
+      "ready": "Warten, dass es losgeht …",
       "show_more": "Zeige 1 weiteren",
       "show_more_plural": "Zeige %s weitere",
       "start_quiz": "Los geht's!",
       "kick_member_confirmation": "Soll die Person &raquo;<span id=\"nickName\"></span>&laquo; aus dem Quiz entfernt werden?",
       "add_kicked_member_to_ban_list": "Den Nicknamen für immer bannen",
-      "waiting_for_players": "Warten auf die Anderen ...",
+      "waiting_for_players": "Warten auf die Anderen …",
       "description": {
         "memberlist_count": "So viele Personen sind aktuell eingeloggt.",
         "title": "Die Quiz Lobby zeigt die Nicknamen der Teilnehmenden in zeitlich umgekehrter Reihenfolge ihres Eintreffens.",

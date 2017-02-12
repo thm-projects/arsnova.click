@@ -28,6 +28,7 @@ import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount, memberlistTracker} from './lib.js';
 import {getTooltipForRoute} from '/client/layout/global/scripts/lib.js';
+import {TimerMap} from "/lib/performance_analysis/Timer.js";
 
 Template.memberlist.onRendered(function () {
 	Session.set("learnerCountOverride", false);
@@ -61,6 +62,8 @@ Template.memberlist.onRendered(function () {
 			Session.set("lobbySoundIsPlaying", true);
 			lobbySound.play();
 		}
+	} else {
+		TimerMap.clickOnNicknameForward.end();
 	}
 	this.autorun(function () {
 		headerLib.titelTracker.depend();

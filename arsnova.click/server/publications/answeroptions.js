@@ -24,4 +24,11 @@ Meteor.publish('AnswerOptionCollection.join', function (hashtag) {
 		hashtag: {type: String}
 	}).validate({hashtag});
 	return AnswerOptionCollection.find({hashtag: hashtag});
+}, {
+	url: "api/answerOptions",
+	httpMethod: "post",
+	getArgsFromRequest: function (request) {
+		var content = request.body;
+		return [decodeURIComponent(content.hashtag)];
+	}
 });

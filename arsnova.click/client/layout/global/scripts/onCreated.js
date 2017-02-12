@@ -20,6 +20,7 @@ import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {connectionStatus} from './lib.js';
+import {TimerMap} from "/lib/performance_analysis/Timer.js";
 
 Template.layout.onCreated(function () {
 	Session.set("connectionStatus", connectionStatus);
@@ -29,4 +30,5 @@ Template.layout.onCreated(function () {
 			sessionStorage.setItem("EventStackObserver.lastPerformedIndex", eventDoc.eventStack.length);
 		}
 	});
+	TimerMap.initLoad.start();
 });

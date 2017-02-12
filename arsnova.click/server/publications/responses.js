@@ -24,4 +24,11 @@ Meteor.publish('ResponsesCollection.join', function (hashtag) {
 		hashtag: {type: String}
 	}).validate({hashtag});
 	return ResponsesCollection.find({hashtag: hashtag});
+}, {
+	url: "api/getResultsFromHashtag",
+	httpMethod: "post",
+	getArgsFromRequest: function (request) {
+		var content = request.body;
+		return [decodeURIComponent(content.hashtag)];
+	}
 });

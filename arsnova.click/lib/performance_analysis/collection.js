@@ -15,6 +15,23 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Tracker} from 'meteor/tracker';
+import {Mongo} from 'meteor/mongo';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
-export const themeTracker = new Tracker.Dependency();
+export const PerformanceAnalysisCollection = new Mongo.Collection("PerformanceAnalysis");
+export const actionGroupSchema = {
+	type: String
+};
+export const timeDiffSchema = {
+	type: Number
+};
+export const deviceSchema = {
+	type: String,
+	allowedValues: ["desktop", "mobile-cordova", "mobile-browser", "server"]
+};
+export const PerformanceAnalysisCollectionSchema = new SimpleSchema({
+	actionGroup: actionGroupSchema,
+	timeDiff: timeDiffSchema,
+	device: deviceSchema
+});
+PerformanceAnalysisCollection.attachSchema(PerformanceAnalysisCollectionSchema);

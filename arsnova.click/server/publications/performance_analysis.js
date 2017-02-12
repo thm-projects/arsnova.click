@@ -15,6 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {Tracker} from 'meteor/tracker';
+import {Meteor} from 'meteor/meteor';
+import {PerformanceAnalysisCollection} from '/lib/performance_analysis/collection.js';
 
-export const themeTracker = new Tracker.Dependency();
+Meteor.publish('PerformanceAnalysis.join', function () {
+	return PerformanceAnalysisCollection.find();
+});

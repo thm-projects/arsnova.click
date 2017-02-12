@@ -27,6 +27,7 @@ import {ResponsesCollection} from '/lib/responses/collection.js';
 import * as localData from '/lib/local_storage.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
+import {TimerMap} from "/lib/performance_analysis/Timer.js";
 
 Template.liveResults.onRendered(()=> {
 	const eventDoc = EventManagerCollection.findOne();
@@ -66,6 +67,9 @@ Template.liveResults.onRendered(()=> {
 	}
 	lib.calculateButtonCount();
 	lib.liveResultsTracker.changed();
+	if (!isOwner) {
+		TimerMap.routeToLiveResults.end();
+	}
 });
 
 Template.liveResultsTitle.onRendered(function () {

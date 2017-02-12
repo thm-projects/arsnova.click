@@ -24,4 +24,11 @@ Meteor.publish('QuestionGroupCollection.join', function (hashtag) {
 		hashtag: {type: String}
 	}).validate({hashtag});
 	return QuestionGroupCollection.find({hashtag: hashtag});
+}, {
+	url: "api/getQuestionGroup",
+	httpMethod: "post",
+	getArgsFromRequest: function (request) {
+		var content = request.body;
+		return [decodeURIComponent(content.hashtag)];
+	}
 });

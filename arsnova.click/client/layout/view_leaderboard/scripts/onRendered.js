@@ -22,6 +22,7 @@ import * as localData from '/lib/local_storage.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {calculateButtonCount, leaderboardTracker} from './lib.js';
+import {TimerMap} from "/lib/performance_analysis/Timer.js";
 
 Template.leaderBoard.onRendered(function () {
 	footerElements.removeFooterElements();
@@ -47,6 +48,10 @@ Template.leaderBoard.onRendered(function () {
 	leaderboardTracker.changed();
 	headerLib.calculateHeaderSize();
 	headerLib.calculateTitelHeight();
+	if (!localData.containsHashtag(Router.current().params.quizName)) {
+		TimerMap.routeToLeaderboard.end();
+		FinalizeTimers();
+	}
 });
 
 Template.liveResultsTitle.onRendered(function () {

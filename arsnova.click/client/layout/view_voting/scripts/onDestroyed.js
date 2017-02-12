@@ -18,8 +18,15 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {deleteCountdown} from './lib.js';
+import {Router} from 'meteor/iron:router';
+import  * as localData from '/lib/local_storage.js';
+import {TimerMap} from "/lib/performance_analysis/Timer.js";
 
 Template.votingview.onDestroyed(function () {
+	if (!localData.containsHashtag(Router.current().params.quizName)) {
+		TimerMap.clickOnResponseButton.end();
+		TimerMap.routeToLiveResults.start();
+	}
 	if (this.data && this.data["data-questionIndex"]) {
 		Session.set("previewQuestionIndex", undefined);
 		delete Session.keys.previewQuestionIndex;

@@ -24,4 +24,7 @@ Meteor.publish('HashtagsCollection.public', function () {
 			privateKey: 0
 		}
 	});
+}, {
+	url: "api/hashtags",
+	httpMethod: "get"
 });

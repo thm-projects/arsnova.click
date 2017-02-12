@@ -25,6 +25,8 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {ErrorSplashscreen, Splashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {calculateButtonCount, startCountdown, displayQuestionAndAnswerDialog} from './lib.js';
+import  * as localData from '/lib/local_storage.js';
+import {TimerMap} from "/lib/performance_analysis/Timer.js";
 
 Template.liveResults.events({
 	'click #js-btn-showQuestionAndAnswerModal': function (event) {
@@ -133,6 +135,9 @@ Template.liveResultsFooterNavButtons.events({
 	},
 	'click #goGlobalRanking': (event)=> {
 		event.stopPropagation();
+		if (!localData.containsHashtag(Router.current().params.quizName)) {
+			TimerMap.routeToLeaderboard.start();
+		}
 		Router.go("/" + Router.current().params.quizName + "/leaderBoard/all");
 	},
 	'click #showNextQuestionDialog': (event)=> {

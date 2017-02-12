@@ -1,6 +1,6 @@
 {
   "global": {
-    "arsnova_slogan": "Quiz-App für die Schule 4.0",
+    "arsnova_slogan": "Quiz-App für den Unterricht",
     "back": "Zurück",
     "next": "Weiter",
     "delete": "Löschen",
@@ -10,7 +10,7 @@
     "no": "Nein",
     "close_window": "Fenster schließen",
     "aria_description": {
-      "arsnova_slogan": "Quiz-App für Schule 4.0"
+      "arsnova_slogan": "Quiz-App für den Unterricht"
     },
     "cookie_consent": {
       "message": "arsnova.click verwendet Cookies.",
@@ -315,7 +315,7 @@
       "header": "Rangliste",
       "global_header": "Globale Rangliste",
       "title": {
-        "single_question": "Frage __questionId__ - Alles richtig haben ...",
+        "single_question": "Frage __questionId__ - Richtig geantwortet haben ...",
         "all_questions": "Alles richtig haben ..."
       },
       "no_attendee_correct": "Niemand hat es gewusst!",
@@ -642,7 +642,7 @@
       "lobby_music_detailed": "Sound in der Quiz Lobby",
       "finish_music_detailed": "Sound zum Ende des Countdowns",
       "whistle": "Pfeifen",
-      "silence": "Kein Ton",
+      "silence": "Ohne Ton",
       "global_volume": "Globale Lautstärke",
       "volume": "Lautstärke vorgeben",
       "inactive": "Sound ist abgeschaltet",

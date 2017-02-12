@@ -315,7 +315,7 @@
       "header": "Rangliste",
       "global_header": "Globale Rangliste",
       "title": {
-        "single_question": "Frage __questionId__ - Gewusst gaben es …",
+        "single_question": "Frage __questionId__: Gewusst haben es …",
         "all_questions": "Alles richtig haben …"
       },
       "no_attendee_correct": "Niemand hat es gewusst!",

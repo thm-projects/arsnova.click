@@ -50,7 +50,7 @@
         "description": {
           "qr-code": "Attendees can scan the QR code via their mobile devices to join the quiz.",
           "sound": "Set the sound for the background music or the countdown here.",
-          "reading-confirmation": "Activate this option if only the question <bold>without</bold> reply options should be displayed first. Only those who confirm the reading (understanding) of the question can participate in the quiz. The number of confirmations is displayed. With the reading confirmation you can create the same conditions for all attendees at the countdown.",
+          "reading-confirmation": "Activate this option if only the question <bold>without</bold> answer options should be displayed first. Only those who confirm the reading (understanding) of the question can participate in the quiz. The number of confirmations is displayed. With the reading confirmation you can create the same conditions for all attendees at the countdown.",
           "response-progress": "Do you want to display the number of responses to the individual answer options during the countdown? Then activate this option. Note, however, the psychological effect: People tend to be directed to the majority (herd instinct).",
           "nicknames": "You can preset selectable nicknames out of multiple categories here. Hint: Block a rude nickname by clicking on the attendee in the quiz lobby."
         }

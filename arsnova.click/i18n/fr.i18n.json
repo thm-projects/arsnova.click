@@ -49,10 +49,10 @@
         "remove": "Retirer",
         "description": {
           "qr-code": "Les participants peuvent scanner le code QR via leurs appareils mobiles pour participer au quiz.",
-          "sound": "",
-          "reading-confirmation": "",
-          "response-progress": "",
-          "nicknames": ""
+          "sound": "<ÜBERSETZUNG_EINFÜGEN>",
+          "reading-confirmation": "<ÜBERSETZUNG_EINFÜGEN>",
+          "response-progress": "<ÜBERSETZUNG_EINFÜGEN>",
+          "nicknames": "<ÜBERSETZUNG_EINFÜGEN>"
         }
       },
       "about": {
@@ -307,7 +307,7 @@
         "title": {
           "1": "Tu ne sais pas par où commencer?",
           "2": "Insère \"Demo Quiz\"!",
-          "3": ""
+          "3": "<ÜBERSETZUNG_EINFÜGEN>"
         }
       }
     },
@@ -369,9 +369,9 @@
       "add_kicked_member_to_ban_list": "Bânir ce pseudo à jamais",
       "waiting_for_players": "En attente de joueurs...",
       "description": {
-        "memberlist_count": "",
-        "title": "",
-        "waiting_for_players": ""
+        "memberlist_count": "<ÜBERSETZUNG_EINFÜGEN>",
+        "title": "<ÜBERSETZUNG_EINFÜGEN>",
+        "waiting_for_players": "<ÜBERSETZUNG_EINFÜGEN>"
       }
     },
     "nickname_categories": {
@@ -474,8 +474,10 @@
       "quiz_url": "",
       "question_amount": "Nombre total des questions du quiz",
       "validation_question_group": "Validation de la tournée de quiz",
-      "successful": "Réussi",
-      "failed": "Échoué",
+      "question_successful": "Réussi",
+      "question_failed": "Échoué",
+      "question_group_successful": "<ÜBERSETZUNG_EINFÜGEN>",
+      "question_group_failed": "<ÜBERSETZUNG_EINFÜGEN>",
       "correct": "Vrai",
       "wrong": "Faux",
       "question": "Question",
@@ -505,7 +507,6 @@
           "timer_too_big": "Le compte à rebours est trop long",
           "no_valid_answers": "Au minimum une réponse doit être identifiée comme correcte",
           "one_valid_answer_required": "Exactement une réponse doit être identifiée comme correcte",
-          "no_valid_answer_required": "Dans un sondage, les réponses ne sont ni correctes ni fausses",
           "invalid_range": "La valeur minimale doit être inférieure à la valeur maximale",
           "invalid_correct_value": "La valeur correcte doit être comprise dans la fourchette des valeurs",
           "answer_text_empty": "Le texte de la réponse ne doit pas être vide"
@@ -542,33 +543,9 @@
           "name": "Élégant",
           "description": "Pour des tournées de quiz exigeantes."
         },
-        "thm": {
-          "name": "THM (beamer-adapté)",
-          "description": "Corporate Design de l'Université des sciences appliquées (THM)."
-        },
         "black_beauty": {
           "name": "Beauté noire",
           "description": "sombre, plus sombre et encore plus sombre."
-        },
-        "living_room": {
-          "name" : "Salon",
-          "description": "Atmosphère de salon lumineux."
-        },
-        "bluetouch": {
-          "name": "Sous la mer",
-          "description": "Bleu profond avec accents clairs."
-        },
-        "green": {
-          "name": "Vert simple",
-          "description": "Simplement vert."
-        },
-        "action": {
-          "name": "Éclair",
-          "description": "Pour des tournées de quiz rapides et sauvages."
-        },
-        "psychology": {
-          "name": "Années 50",
-          "description": "Vieux rose mélangé avec des couleurs délicates."
         },
         "material": {
           "name": "Material Design",
@@ -589,6 +566,10 @@
         "spiritual-purple": {
           "name": "Spiritual Purple",
           "description": "Spirituel."
+        },
+        "GreyBlue-Lime": {
+          "name": "GreyBlue Lime",
+          "description": "#9"
         }
       }
     },

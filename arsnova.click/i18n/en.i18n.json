@@ -49,10 +49,10 @@
         "remove": "Remove",
         "description": {
           "qr-code": "Attendees can scan the QR code via their mobile devices to join the quiz.",
-          "sound": "",
-          "reading-confirmation": "",
-          "response-progress": "",
-          "nicknames": ""
+          "sound": "Set the sound for the background music or the countdown here.",
+          "reading-confirmation": "Activate this option if only the question <bold>without</bold> reply options should be displayed first. Only those who confirm the reading (understanding) of the question can participate in the quiz. The number of confirmations is displayed. With the reading confirmation you can create the same conditions for all attendees at the countdown.",
+          "response-progress": "Do you want to display the number of responses to the individual answer options during the countdown? Then activate this option. Note, however, the psychological effect: People tend to be directed to the majority (herd instinct).",
+          "nicknames": "You can preset selectable nicknames out of multiple categories here. Hint: Block a rude nickname by clicking on the attendee in the quiz lobby."
         }
       },
       "about": {
@@ -305,9 +305,9 @@
       },
       "demo_quiz": {
         "title": {
-          "1": "Not sure where to start?",
-          "2": "Enter \"Demo Quiz\"!",
-          "3": ""
+          "1": "Discover arsnova.click",
+          "2": "Enter \"Demo Quiz\" and run it. Use the app in another browser and play the quiz in different roles",
+          "3": "Visit our blog at arsnova.eu and learn how to use quizzes in courses"
         }
       }
     },
@@ -369,9 +369,9 @@
       "add_kicked_member_to_ban_list": "Ban nickname permanently",
       "waiting_for_players": "Waiting for the players...",
       "description": {
-        "memberlist_count": "",
-        "title": "",
-        "waiting_for_players": ""
+        "memberlist_count": "Here's the amount of attendees.",
+        "title": "The quiz lobby displays the nicknames of the attendees in antichronologically order of their arrival.",
+        "waiting_for_players": "As soon as the attendees arrived at the quiz you can start the quiz round. Note that after starting the quiz no one can log into the quiz until you start it again."
       }
     },
     "nickname_categories": {
@@ -474,8 +474,10 @@
       "quiz_url": "",
       "question_amount": "Amount of all questions",
       "validation_question_group": "Validation for the complete quiz",
-      "successful": "Successful",
-      "failed": "Failed",
+      "question_successful": "The question is valid",
+      "question_failed": "The question is still incomplete",
+      "question_group_successful": "Your quiz is ready",
+      "question_group_failed": "Your quiz is incomplete",
       "correct": "Correct",
       "wrong": "Wrong",
       "question": "Question",
@@ -505,7 +507,6 @@
           "timer_too_big": "The timer is too long",
           "no_valid_answers": "There must be at least one correct answer",
           "one_valid_answer_required": "There must be exactly one correct answer",
-          "no_valid_answer_required": "There are no correct answers allowed",
           "invalid_range": "The minimum range must be smaller than the maximum range",
           "invalid_correct_value": "The correct value must be in the scope of the range",
           "answer_text_empty": "The answer's text is not allowed to be empty"
@@ -542,33 +543,9 @@
           "name": "Elegant",
           "description": "Elegant theme for sophisticated Quizzers."
         },
-        "thm": {
-          "name": "THM (beamer-suitable)",
-          "description": "Corporate Design of the University of Applied Science (THM)."
-        },
         "black_beauty": {
           "name" : "Black Beauty (beamer-suitable)",
           "description": "Dark, darker and even darker."
-        },
-        "living_room": {
-          "name" : "Living Room",
-          "description": "Bright living room atmosphere."
-        },
-        "bluetouch": {
-          "name": "Under the sea",
-          "description": "A dark blue style with bright accents."
-        },
-        "green": {
-          "name": "Simple green",
-          "description": "A simple green style."
-        },
-        "action": {
-          "name": "Lightning",
-          "description": "For fast and furious Quizzes."
-        },
-        "psychology": {
-          "name": "A bit funky",
-          "description": "Pink mixed with subtle colors."
         },
         "material": {
           "name": "Material Design",

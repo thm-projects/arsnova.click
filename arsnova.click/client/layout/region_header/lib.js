@@ -90,10 +90,15 @@ export function calculateTitelHeight() {
 		marginTop          = rowBottom.outerHeight(true) || fixedTop.outerHeight(),
 		finalHeight        = $(window).height() - marginTop - navbarFooterHeight - footerHeight;
 
+	let centerVerticalTop  = finalHeight / 2 - centerVertical.outerHeight() / 2;
+	if (centerVerticalTop < 0) {
+		centerVerticalTop = 0;
+	}
+
 	$('.titel').css('margin-top', fixedTop.outerHeight() * 1.1);
 	container.css("height", finalHeight);
 	container.css("margin-top", !rowBottom.outerHeight() ? marginTop : 0);
-	centerVertical.css("top", finalHeight / 2 - centerVertical.outerHeight() / 2);
+	centerVertical.css("top", centerVerticalTop);
 	if ($(window).height() < 768) {
 		centerVertical.css({width: "100%", margin: "0 -15px"});
 	}

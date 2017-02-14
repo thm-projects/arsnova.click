@@ -305,9 +305,9 @@
       },
       "demo_quiz": {
         "title": {
-          "1": "Discover arsnova.click",
-          "2": "Enter \"Demo Quiz\" and run it. Use the app in another browser and play the quiz in different roles",
-          "3": "Visit our blog at arsnova.eu and learn how to use quizzes in courses"
+          "1": "Discover arsnova.click!",
+          "2": "Enter \u00BBDemo Quiz\u00AB and run it. Use the app in another browser and play the quiz in different roles.",
+          "3": "Visit our blog at arsnova.io and learn how to use quizzes in courses."
         }
       }
     },
@@ -370,7 +370,7 @@
       "waiting_for_players": "Waiting for the players...",
       "description": {
         "memberlist_count": "Here's the amount of attendees.",
-        "title": "The quiz lobby displays the nicknames of the attendees in antichronologically order of their arrival.",
+        "title": "The quiz lobby displays the nicknames of the attendees in antichronological order of their arrival.",
         "waiting_for_players": "As soon as the attendees arrived at the quiz you can start the quiz round. Note that after starting the quiz no one can log into the quiz until you start it again."
       }
     },

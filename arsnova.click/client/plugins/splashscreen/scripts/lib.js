@@ -305,7 +305,7 @@ export const parseMarkdown = {
 		return result;
 	},
 	isCorrectAnswer: function (answerindex) {
-		return AnswerOptionCollection.findOne({answerOptionNumber: answerindex}).isCorrect;
+		return AnswerOptionCollection.findOne({answerOptionNumber: answerindex, questionIndex: Template.instance().data.questionIndex}).isCorrect;
 	},
 	isVideoQuestionText: function (questionText) {
 		return !/(^!)?\[.*\]\(.*\)/.test(questionText) && /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(questionText) && (/youtube/.test(questionText) || /youtu.be/.test(questionText) || /vimeo/.test(questionText));

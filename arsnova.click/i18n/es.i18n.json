@@ -49,10 +49,10 @@
         "remove": "Retirar",
         "description": {
           "qr-code": "Los asistentes pueden escanear el código QR a través de sus dispositivos móviles para unirse al concurso.",
-          "sound": "",
-          "reading-confirmation": "",
-          "response-progress": "",
-          "nicknames": ""
+          "sound": "<ÜBERSETZUNG_EINFÜGEN>",
+          "reading-confirmation": "<ÜBERSETZUNG_EINFÜGEN>",
+          "response-progress": "<ÜBERSETZUNG_EINFÜGEN>",
+          "nicknames": "<ÜBERSETZUNG_EINFÜGEN>"
         }
       },
       "about": {
@@ -307,7 +307,7 @@
         "title": {
           "1": "¿No estás seguro por dónde empezar?",
           "2": "¡Introduzca \"Demo Quiz\"!",
-          "3": ""
+          "3": "<ÜBERSETZUNG_EINFÜGEN>"
         }
       }
     },
@@ -369,9 +369,9 @@
       "add_kicked_member_to_ban_list": "¿Bloquear el nombre de usuario definitivamente?",
       "waiting_for_players": "A la espera de los jugadores...",
       "description": {
-        "memberlist_count": "",
-        "title": "",
-        "waiting_for_players": ""
+        "memberlist_count": "<ÜBERSETZUNG_EINFÜGEN>",
+        "title": "<ÜBERSETZUNG_EINFÜGEN>",
+        "waiting_for_players": "<ÜBERSETZUNG_EINFÜGEN>"
       }
     },
     "nickname_categories": {
@@ -474,8 +474,10 @@
       "quiz_url": "",
       "question_amount": "Cantidad total de preguntas del cuestionario",
       "validation_question_group": "Validación del total de la ronda",
-      "successful": "Exitoso",
-      "failed": "Fallido",
+      "question_successful": "Exitoso",
+      "question_failed": "Fallido",
+      "question_group_successful": "<ÜBERSETZUNG_EINFÜGEN>",
+      "question_group_failed": "<ÜBERSETZUNG_EINFÜGEN>",
       "correct": "Correcto",
       "wrong": "Incorrecto",
       "question": "Pregunta",
@@ -505,7 +507,6 @@
           "timer_too_big": "Temporizador es demasiado largo",
           "no_valid_answers": "Al menos una respuesta debe ser marcada como correcta",
           "one_valid_answer_required": "Solo una respuesta debe ser marcada como correcta",
-          "no_valid_answer_required": "En una encuesta no hay respuestas correctas ni incorrectas",
           "invalid_range": "El rango mínimo no debe sobrepasar el rango máximo",
           "invalid_correct_value": "El valor correcto debe estar dentro de los parámetros del rango",
           "answer_text_empty": "El texto de la respuesta no puede quedar vacío"
@@ -535,60 +536,40 @@
       "select_a_theme_title": "Elige un estilo",
       "themes": {
         "theme-arsnova-dot-click-contrast": {
-          "name": "arsnova.click (alto contraste)",
-          "description": "La primera tema de arsnova.click"
+          "name": "arsnova.click (<ÜBERSETZUNG_EINFÜGEN>)",
+          "description": "#2: <ÜBERSETZUNG_EINFÜGEN>"
         },
         "elegant": {
-          "name": "Elegante",
-          "description": "Para rondas de cuestionarios exigentes."
-        },
-        "thm": {
-          "name": "THM (Beamer-adecuado)",
-          "description": "Diseño Corporativo de la Universidad de Ciencias Aplicadas (THM)."
+          "name": "<ÜBERSETZUNG_EINFÜGEN>",
+          "description": "#4: <ÜBERSETZUNG_EINFÜGEN>"
         },
         "black_beauty": {
-          "name" : "Black Beauty (Beamer-adecuado)",
-          "description": "Oscuro, más oscuro y aún más oscuro."
-        },
-        "living_room": {
-          "name" : "Sala de estar",
-          "description": "Sala de estar con atmósfera clara."
-        },
-        "bluetouch": {
-          "name": "Bajo el mar",
-          "description": "Azul profundo con toques claros."
-        },
-        "green": {
-          "name": "Verde simple",
-          "description": "Pues verde."
-        },
-        "action": {
-          "name": "Relámpago",
-          "description": "Para rondas de cuestionarios rápidas y salvajes."
-        },
-        "psychology": {
-          "name": "Los años 50",
-          "description": "Rojo viejo mezclado con tonos discretos."
+          "name" : "Black Beauty (<ÜBERSETZUNG_EINFÜGEN>)",
+          "description": "#3: <ÜBERSETZUNG_EINFÜGEN>"
         },
         "material": {
-          "name": "Material Design",
-          "description": "Enfoque del diseño de Google."
+          "name": "Material Design Colors",
+          "description": "#1: <ÜBERSETZUNG_EINFÜGEN>"
         },
           "decent_blue": {
           "name": "Decent Blue",
-          "description": "A decent blue grey to controll the users focus on the main aspects of Quizzing"
+          "description": "#5"
         },
         "material_hope": {
           "name": "Material Hope",
-          "description": "Google Material y una chispa de esperanza."
+          "description": "#6"
         },
         "material-blue": {
           "name": "Material blue",
-          "description": "Google Material en azul y verde."
+          "description": "#7"
         },
         "spiritual-purple": {
           "name": "Spiritual Purple",
-          "description": "Espiritual."
+          "description": "#8"
+        },
+        "GreyBlue-Lime": {
+          "name": "GreyBlue Lime",
+          "description": "#9"
         }
       }
     },

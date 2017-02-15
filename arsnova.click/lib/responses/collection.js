@@ -30,6 +30,7 @@ export const responseTimeSchema = {
 };
 export const rangedInputValueSchema = {
 	type: Number,
+	decimal: true,
 	min: 0
 };
 export const freeTextInputValueSchema = {

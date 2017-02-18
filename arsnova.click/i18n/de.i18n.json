@@ -50,7 +50,7 @@
         "description": {
           "qr-code": "Dein Publikum kann den QR-Code scannen, um mit einem Klick – ohne Eintippen von Webadresse und Quiznamen – die Lobby zu betreten.",
           "sound": "Stelle hier die Hintergrundmusik ein und entscheide dich beim Countdown für Abpfiff oder Gong.",
-          "reading-confirmation": "Aktiviere diese Option, wenn zuerst nur die Frage <bold>ohne</bold> Antwortoptionen angezeigt werden soll. Nur wer das Lesen (Verstehen) der Frage bestätigt, die Anzahl der Lesebestätigungen wird angezeigt, kann am Quiz teilnehmen. Mit der Lesebestätigung schaffst Du gleiche Voraussetzungen beim Countdown.",
+          "reading-confirmation": "Aktiviere diese Option, wenn zuerst nur die Frage ohne Antwortoptionen angezeigt werden soll. Nur wer das Lesen (Verstehen) der Frage bestätigt, die Anzahl der Lesebestätigungen wird angezeigt, kann am Quiz teilnehmen. Mit der Lesebestätigung schaffst Du gleiche Voraussetzungen beim Countdown.",
           "response-progress": "Soll die Anzahl der Stimmen zu den einzelnen Antwortoptionen während des Countdowns angezeigt werden? Dann aktiviere diese Option. Beachte aber den psychologischen Effekt: Der Mensch neigt dazu, sich nach der Mehrheit zu richten (Herdentrieb).",
           "nicknames": "Hier kannst Du die Nicknamen aus Kategorien vorgeben. Tipp: Einen anstößigen Nicknamen in der Lobby entfernst Du, indem Du ihn anklickst."
         }
@@ -59,18 +59,18 @@
         "title": "arsnova.click",
         "declaration": "Ein bisschen <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, <br />ein bisschen <a href='https://arsnova.io/' target='_blank'>ARSnova</a>!",
         "ars": "arsnova.click ist ein innovatives <a href='https://de.wikipedia.org/wiki/Audience_Response_System' target='_blank'>Audience Response System (ARS)</a> für öffentliche Bildungseinrichtungen.",
-        "developed_by": "Inspiriert durch <a href='https://getkahoot.com' target='_blank'>Kahoot!</a> entwickelte ein Team aus Bachelor- und Masterstudenten der <a href='http://www.thm.de/site/' target='_blank'>TH Mittelhessen</a> im SoSe 2016 die erste Version dieser <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>gamifizierten</a> Alternative zum ARSnova-Flaggschiff <a href='https://arsnova.io/' target='_blank'>arsnova.voting</a>.",
-        "met_requirements": "Bisher wurden die folgenden aus der didaktischen Perspektive eines Lehrenden (siehe Impressum) aufgestellten Anforderungen an arsnova.click implementiert:",
+        "developed_by": "Inspiriert durch <a href='https://getkahoot.com' target='_blank'>Kahoot!</a> entwickelte ein Team aus Bachelor- und Masterstudenten der <a href='http://www.thm.de/site/' target='_blank'>TH Mittelhessen</a> die erste Version dieser <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>gamifizierten</a> Alternative zum ARSnova-Flaggschiff <a href='https://arsnova.io/' target='_blank'>arsnova.voting</a>.",
+        "met_requirements": "Bisher wurden die folgenden Features implementiert:",
         "requirements": {
-          "1": "Absoluter Datenschutz: keine personenbezogenen Daten auf dem Server, alle Quizdaten liegen im Browser der Quizerstellerin oder des Quizerstellers (<a href='http://www.w3schools.com/html/html5_webstorage.asp' target='_blank'>HTML5 Local Storage</a>)",
+          "1": "Absoluter Datenschutz: keine personenbezogenen Daten auf dem Server, alle Quizdaten liegen im Browser des Quizerstellers (<a href='http://www.w3schools.com/html/html5_webstorage.asp' target='_blank'>HTML5 Local Storage</a>)",
           "2": "Keine Registrierung, keine Anmeldung, keine Installation (<a href='https://de.wikipedia.org/wiki/Bring_your_own_device' target='_blank'>BYOD</a>), keine Werbung, keine Kosten",
           "3": "Dieselbe Startseite arsnova.click für beide Rollen: Quizmaster und Kandidat/in bzw. Lehrperson und Schüler/in",
-          "4": "Jeder darf Quizze erstellen: sofort und beliebig viele. Das Erstellen eines Quiz ist sogar auf dem Smartphone ein Kinderspiel!",
-          "5": "Extrem einfache, barrierefreie, beamertaugliche, vollständig in Englisch, Spanisch und Französich übersetzte Bedienoberfläche",
+          "4": "Jeder darf Quizze erstellen, sofort und beliebig viele. Das Erstellen eines Quiz ist sogar auf dem Smartphone ein Kinderspiel!",
+          "5": "Extrem einfache, barrierefreie, beamertaugliche, vollständig in Englisch, Spanisch, Französich und Italienisch übersetzte Bedienoberfläche",
           "6": "Frageformate: Multiple/Single Choice, Schätzfrage, Kurzantwort, Umfrage; MC/SC-Fragen mit beliebig vielen Antwortoptionen",
           "7": "<a href='https://de.wikipedia.org/wiki/TeX' target='_blank'>TeX</a>-Formelsatz, Textformatierung mit <a href='https://guides.github.com/features/mastering-markdown/' target='_blank'>Markdown</a>, <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis</a> und eingebetteten Videos im Fragetext und in den Antwortoptionen",
-          "8": "Edutainment: Lernmotivation durch Live-Wettbewerb mit Sound gegen die Uhr und die Mitspieler/innen",
-          "9": "<a href='https://de.wikipedia.org/wiki/Responsive_Webdesign' target='_blank'>Responsives Webdesign</a>: egal ob Smartphone, Beamer oder Wide Screen, das Design skaliert dank <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>. Selbst komplexe Quizze köönen auf dem Smartphone erstellt werden.",
+          "8": "Edutainment: Lernmotivation durch Live-Wettbewerb mit Sound gegen die Uhr und die Mitspielenden",
+          "9": "<a href='https://de.wikipedia.org/wiki/Responsive_Webdesign' target='_blank'>Responsives Webdesign</a>: egal ob Smartphone, Beamer oder Wide Screen, das Design skaliert dank <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>. Selbst komplexe Quizze können auf dem Smartphone erstellt werden.",
           "10": "Gebaut als <a href='https://infrequently.org/2016/09/what-exactly-makes-something-a-progressive-web-app/' target='_blank'>Progressive Web App</a> mit reaktiver Web-Technik von <a href='https://www.meteor.com' target='_blank'>Meteor</a>",
           "11": "<a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a>"
         },
@@ -85,7 +85,7 @@
       },
       "tos": {
         "title": "Rechtliches",
-        "declaration": "Alle dürfen die Quiz-App arsnova.click für ihre Zwecke verwenden, solange dabei nicht gegen deutsches oder EU-Recht verstoßen wird.",
+        "declaration": "Alle (nicht nur Lehrende) dürfen die Quiz-App arsnova.click für ihre Zwecke verwenden, solange dabei nicht gegen deutsches oder EU-Recht verstoßen wird.",
         "license": {
           "title": "Lizenz",
           "text": "arsnova.click ist ein kostenloser Webservice (Software as a Service). Die Software ist <a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a> und steht unter der <a href='http://www.gnu.org/licenses/gpl-3.0-standalone.html' target='_blank'>GNU General Public License Version 3</a>."
@@ -96,7 +96,7 @@
         },
         "warranty": {
           "title": "Gewährleistung",
-          "text": "Wir sind bemüht, den Online-Dienst arsnova.click zuverlässig und störungsfrei zu betreiben, können dies aber nicht garantieren. Alle Quizdaten liegen ausschließlich im Browser-Speicher der Quizerstellerin oder des Quizerstellers. Wir übernehmen keine Haftung für den Verlust der Daten, zum Beispiel durch Löschen des Browser-Speichers, ohne zuvor die Quizze exportiert zu haben, oder bei rechtswidriger Nutzung des Dienstes."
+          "text": "Wir sind bemüht, den Online-Dienst arsnova.click zuverlässig und störungsfrei zu betreiben, können dies aber nicht garantieren. Alle Quizdaten liegen ausschließlich im Browser-Speicher des Quizerstellers. Wir übernehmen keine Haftung für den Verlust der Daten, zum Beispiel durch Löschen des Browser-Speichers, ohne zuvor die Quizze exportiert zu haben, oder bei rechtswidriger Nutzung des Dienstes."
         }
       },
       "data_privacy": {
@@ -105,7 +105,7 @@
         "declaration": "Diese Datenschutzerklärung klärt Nutzer/innen von arsnova.click über die Art, den Umfang und den Zweck der Verwendung personenbezogener Daten durch den verantwortlichen Anbieter auf. Die rechtlichen Grundlagen des Datenschutzes finden sich im Bundesdatenschutzgesetz (BDSG) und dem Telemediengesetz (TMG).",
         "app_data": {
           "title": "Anwendungsdaten",
-          "text": "Alle Quizfragen und deren Antwortoptionen werden ausschließlich im Browser-Speicher (localStorage) der Quizerstellerin oder des Quizerstellers gehalten."
+          "text": "Alle Quizfragen und deren Antwortoptionen werden ausschließlich im Browser-Speicher (localStorage) des Quizerstellers gehalten."
         },
         "access_data": {
           "title": "Zugriffsdaten",
@@ -169,7 +169,7 @@
       },
       "exit_session_confirmation": {
         "title": "Quiz verlassen?",
-        "text": "Du wirst aus dem Quiz entfernt und dein gesamter Fortschritt wird gelöscht.",
+        "text": "Du wirst aus dem Quiz entfernt und deine Antworten werden gelöscht.",
         "continue": "Fortfahren?"
       },
       "connection_status": {
@@ -219,10 +219,10 @@
         "default_answer_row": "Ziehe diesen Block in die Liste der Antwortoptionen oder klick auf ihn, um eine neue Antwort einzufügen.",
         "added_answers": "Hier siehst Du die Antwortoptionen der Frage. Du kannst die Reihenfolge per Drag & Drop ändern.",
         "added_answer_short_text": "Jede Antwortoption enthält einen Buchstaben, der für die Teilnehmer/innen angezeigt werden kann.",
-        "added_answer_text": "Hier kannst Du den Text der Antwort eingeben. Eine Auszeichnung mit Markdown und LaTeX ist möglich. Auch Bilder können eingefügt werden.",
+        "added_answer_text": "Hier kannst Du den Text der Antwort eingeben. Eine Formatierung mit Markdown und TeX ist möglich. Auch Bilder können eingefügt werden.",
         "added_answer_is_correct": "Dieser Button regelt, ob die Antwort als richtig oder falsch gewertet werden soll.",
         "added_answer_remove": "Bei einem Klick auf diese Schaltfläche wird die betreffende Antwort gelöscht.",
-        "show_answer_content_on_buttons": "Die Antwortbuttons können entweder mit dem Buchstaben oder dem Inhalt der Antwort beschriftet werden. Beachte aber, dass zuviel Text auf dem Endgerät schlecht lesbar sein kann. Verschieden lange Antworttexte werden auf die Buttonbreite skaliert, was unschön aussehen kann oder einzelne Optionen überbetont.",
+        "show_answer_content_on_buttons": "Die Antwortbuttons können entweder mit dem Buchstaben oder dem Inhalt der Antwort beschriftet werden. Beachte aber, dass langer Text auf dem Endgerät schlecht lesbar sein kann. Verschieden lange Antworttexte werden auf die Buttonbreite skaliert, was unschön aussehen kann oder einzelne Optionen überbetont.",
         "multiple_selection_survey": "Hier kannst Du einstellen, ob die Teilnehmer/innen nach dem Klick auf eine Antwort der Umfrage direkt zur Auswertung gelangen sollen oder ob eine Mehrfachauswahl möglich sein soll.",
         "preview": "Hier siehst Du, wie die Antwortoptionen auf dem Smartphone aussehen werden.",
         "range_area": "Hier kannst Du die korrekte Antwort und die Toleranzen nach oben und unten angeben. Bitte beachte, dass die Eingabe in natürlichen Zahlen erfolgen muss.",
@@ -305,9 +305,9 @@
       },
       "demo_quiz": {
         "title": {
-          "1": "Entdecke arsnova.click!",
+          "1": "Entdecke arsnova.click !",
           "2": "Gib \u00BBDemo Quiz\u00AB ein und starte es. Ruf die App in einem zweiten Browser auf und spiel das Quiz in verteilten Rollen.",
-          "3": "Besuch unseren Blog arsnova.io und erfahr, wie Du Quizze im Unterricht und beim Vortragen einsetzen kannst."
+          "3": "Besuch unseren Blog arsnova.io und erfahr, wie Du Quizze in deinem Unterricht oder in einem Vortrag einsetzen kannst."
         }
       }
     },
@@ -403,8 +403,8 @@
       "description": {
         "type_wrapper": "Hier kannst Du den Typ der Quizfrage ändern. Jeder Typ hat unterschiedliche Einstellungen. Ändere den Typ durch einen Klick auf die jeweilige Box. Beachte aber, dass zuvor eingegebene Antwortoptionen je nach Wechsel des Fragetyps verloren gehen können. Von Single-Choice nach Multiple-Choice zu wechseln und umgekehrt, ist unkritisch.",
         "SingleChoiceQuestion": "Single-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen genau eine als richtig markiert sein muss.",
-        "YesNoSingleChoiceQuestion": "Ja-Nein-Fragen enthalten nur zwei Antwortopionen (Ja und Nein), von denen eine als richtig markiert sein muss.",
-        "TrueFalseSingleChoiceQuestion": "Wahr-Falsch-Fragen enthalten nur zwei Antwortopionen (Wahr und Falsch), von denen eine als richtig markiert sein muss.",
+        "YesNoSingleChoiceQuestion": "Ja-Nein-Fragen enthalten nur zwei Antwortopionen (Ja und Nein, überschreibbar), von denen eine als richtig markiert sein muss.",
+        "TrueFalseSingleChoiceQuestion": "Wahr-Falsch-Fragen enthalten nur zwei Antwortopionen (Wahr und Falsch, überschreibbar), von denen eine als richtig markiert sein muss.",
         "MultipleChoiceQuestion": "Multiple-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen beliebig viele (mindestens jedoch eine) als richtig markiert sein können.",
         "RangedQuestion": "Für die Schätzfrage muss eine Ganzzahl als richtig angegeben werden. Zusätzlich können Toleranzen nach oben und unten festgelegt werden.",
         "FreeTextQuestion": "Bei der Kurzantwort-Frage müssen die Teilnehmenden einen Text eingeben. Dieser wird mit dem Referenzwert verglichen.",
@@ -432,9 +432,9 @@
       "title": "Quiz-Manager",
       "available_questions_title": "Vorlagen",
       "added_questions_title": "Quizfragen",
-      "no_added_questions": "Wähle eine Vorlage für Deine Frage aus!",
+      "no_added_questions": "Wähle eine Vorlage für deine Frage aus!",
       "session_invalid": "Dein Quiz enthält noch unvollständige Fragen",
-      "session_empty": "Dein Quiz enthält noch keine Fragen",
+      "session_empty": "Noch keine Frage erstellt",
       "connection_lost": "Die Verbindung zum Server wurde unterbrochen",
       "back_to_quiz_administration": "Quizverwaltung",
       "details": {
@@ -553,23 +553,23 @@
         },
           "decent_blue": {
           "name": "Decent Blue",
-          "description": "#5"
+          "description": "#5: Elegantes Grau"
         },
         "material_hope": {
           "name": "Material Hope",
-          "description": "#6"
+          "description": "#6: Überwiegend grün"
         },
         "material-blue": {
           "name": "Material blue",
-          "description": "#7"
+          "description": "#7: Überwiegend blau"
         },
         "spiritual-purple": {
           "name": "Spiritual Purple",
-          "description": "#8"
+          "description": "#8: Spirituelles Lila"
         },
         "GreyBlue-Lime": {
           "name": "GreyBlue Lime",
-          "description": "#9"
+          "description": "#9: Unbunt"
         }
       }
     },
@@ -626,8 +626,8 @@
         "hyperlink": "Hyperlink",
         "unordered_list": "Unsortierte Liste",
         "ordered_list": "Sortierte Liste",
-        "latex": "LaTeX-Auszeichnung",
-        "code": "Code-Auszeichnung",
+        "latex": "TeX-Formel",
+        "code": "Code-Formatierung",
         "citation": "Zitat",
         "image": "Bild"
       },
@@ -688,12 +688,12 @@
           "update_failed": "Es ist ein Fehler bei der Aktualisierung deiner Frage aufgetreten.",
           "session_exists": "Dieses Quiz existiert bereits!",
           "session_exists_warning": "Der Name dieses Quiz ist bereits vergeben.",
-          "session_exists_arsnova_import": "Bitte gib für dein arsnova Quiz einen eindeutigen Namen ein:",
+          "session_exists_arsnova_import": "Bitte gib für dein Quiz einen eindeutigen Namen ein:",
           "session_exists_new": "Gib einen neuen ein:",
           "session_not_exists": "Dieses Quiz existiert nicht!",
           "hashtag_exists": "Dieser Quizname existiert bereits!",
           "session_not_available": "Dieser Quizrunde kann aktuell nicht beigetreten werden.",
-          "private_browsing": "Im Privatmodus deines Browsers funktioniert arsnova.click leider nur als Teilnehmer/in, da dein Browser das Beschreiben des App-Speichers verweigert. Bitte für die Dauer der Nutzung von arsnova.click den Privatmodus deaktivieren und arsnova.click erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.",
+          "private_browsing": "Im Privatmodus deines Browsers funktioniert arsnova.click leider nur als Teilnehmer/in, da dein Browser das Beschreiben des Speichers verweigert. Bitte für die Dauer der Nutzung von arsnova.click den Privatmodus deaktivieren und arsnova.click erneut aufrufen. Deine Anonymität bleibt auch bei deaktiviertem Privatmodus gewahrt.",
           "kicked_from_quiz": "Du wurdest aus dem Quiz geworfen!",
           "nick_already_exists": "Dieser Benutzername existiert bereits",
           "export_failed": "Konnte die Quizdaten nicht exportieren! - %s",

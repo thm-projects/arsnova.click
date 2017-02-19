@@ -33,7 +33,7 @@ export function createSlider(index) {
 		margin: 1,
 		start: questionItem.getQuestionList()[index].getTimer(),
 		range: {
-			'min': 1,
+			'min': 10,
 			'max': questionItem.getQuestionList()[index].getTimer() + 50 || 100
 		}
 	});
@@ -42,7 +42,7 @@ export function createSlider(index) {
 		sliderObject.updateOptions({
 			margin: 1,
 			range: {
-				'min': 1,
+				'min': 10,
 				'max': questionItem.getQuestionList()[index].getTimer() + 50 || 100
 			}
 		});
@@ -56,7 +56,7 @@ export function setSlider(index) {
 	sliderObject.updateOptions({
 		margin: 1,
 		range: {
-			'min': 1,
+			'min': 10,
 			'max': questionItem.getQuestionList()[index].getTimer() + 50 || 100
 		}
 	});

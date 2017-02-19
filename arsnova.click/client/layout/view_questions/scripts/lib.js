@@ -184,24 +184,27 @@ export function parseMathjaxBlock(result, i, endDelimiter) {
 	let tmpNewItem = result[i] + "\n";
 	let mergeEndIndex = result.length;
 	for (let j = i + 1; j < result.length; j++) {
-		if (result[j].startsWith(endDelimiter)) {
+		tmpNewItem += (result[j] + "\n");
+		if (result[j].endsWith(endDelimiter)) {
 			mergeEndIndex = j;
 			break;
 		}
-		tmpNewItem += (result[j] + "\n");
 	}
 	result.splice(i, mergeEndIndex - i + 1);
-	result.splice(i, 0, $("<div/>").append((tmpNewItem + endDelimiter)).prop("outerHTML"));
+	result.splice(i, 0, $("<div/>").append((tmpNewItem)).prop("outerHTML"));
 }
 
 export function parseGithubFlavoredMarkdown(result, overrideLineBreaks = true) {
 	for (let i = 0; i < result.length; i++) {
 		switch (true) {
-			case /^\$\$$/.test(result[i]) && overrideLineBreaks:
+			case /^\$\$/.test(result[i]) && overrideLineBreaks:
 				parseMathjaxBlock(result, i, "$$");
 				break;
 			case /^\\\[/.test(result[i]) && overrideLineBreaks:
 				parseMathjaxBlock(result, i, "\\]");
+				break;
+			case /^<math/.test(result[i]) && overrideLineBreaks:
+				parseMathjaxBlock(result, i, "</math>");
 				break;
 			case /\$/.test(result[i]) || /\\\(/.test(result[i]):
 				break;

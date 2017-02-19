@@ -32,8 +32,8 @@
 		top: calc(6.8vh + 10px);
 		margin: 0 10px;
 		height: calc(100% - 3.1% - 11vh);
-		overflow-y: auto;
-		overflow-x: hidden;
+		width: calc(100% - 20px);
+		overflow: auto;
 		word-wrap: break-word;
 	}
 }

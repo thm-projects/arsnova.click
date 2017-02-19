@@ -180,29 +180,32 @@ export function parseEmojiBlock(result, i) {
 	result[i] = wrapper.prop("outerHTML");
 }
 
-export function parseMathjaxBlock(result, i) {
+export function parseMathjaxBlock(result, i, endDelimiter) {
 	let tmpNewItem = result[i] + "\n";
 	let mergeEndIndex = result.length;
 	for (let j = i + 1; j < result.length; j++) {
-		if (/^\$\$/.test(result[j])) {
+		if (result[j].startsWith(endDelimiter)) {
 			mergeEndIndex = j;
 			break;
 		}
 		tmpNewItem += (result[j] + "\n");
 	}
 	result.splice(i, mergeEndIndex - i + 1);
-	result.splice(i, 0, $("<div/>").append((tmpNewItem + "$$")).prop("outerHTML"));
+	result.splice(i, 0, $("<div/>").append((tmpNewItem + endDelimiter)).prop("outerHTML"));
 }
 
 export function parseGithubFlavoredMarkdown(result, overrideLineBreaks = true) {
 	for (let i = 0; i < result.length; i++) {
 		switch (true) {
-			case /^\$\$$/.test(result[i]) && !/(.)*(\$){2}$/.test(result[i]):
-				parseMathjaxBlock(result, i);
+			case /^\$\$$/.test(result[i]) && overrideLineBreaks:
+				parseMathjaxBlock(result, i, "$$");
 				break;
-			case /\$/.test(result[i]):
+			case /^\\\[/.test(result[i]) && overrideLineBreaks:
+				parseMathjaxBlock(result, i, "\\]");
 				break;
-			case /^```/.test(result[i]) && !/(.)*(`){3}$/.test(result[i]):
+			case /\$/.test(result[i]) || /\\\(/.test(result[i]):
+				break;
+			case /^```/.test(result[i]) && overrideLineBreaks:
 				parseCodeBlock(result, i);
 				break;
 			case /^([0-9]*\.)?(-)?(\*)? \[x\] /.test(result[i]):

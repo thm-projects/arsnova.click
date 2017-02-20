@@ -66,7 +66,7 @@
           "2": "Keine Registrierung, keine Anmeldung, keine Installation (<a href='https://de.wikipedia.org/wiki/Bring_your_own_device' target='_blank'>BYOD</a>), keine Werbung, keine Kosten",
           "3": "Dieselbe Startseite arsnova.click für beide Rollen: Quizmaster und Kandidat/in bzw. Lehrperson und Schüler/in",
           "4": "Jeder darf Quizze erstellen, sofort und beliebig viele. Das Erstellen eines Quiz ist sogar auf dem Smartphone ein Kinderspiel!",
-          "5": "Extrem einfache, barrierefreie, beamertaugliche, vollständig in Englisch, Spanisch, Französich und Italienisch übersetzte Bedienoberfläche",
+          "5": "Extrem einfache, barrierefreie, beamertaugliche, vollständig in Englisch, Spanisch, Französisch und Italienisch übersetzte Bedienoberfläche",
           "6": "Frageformate: Multiple/Single Choice, Schätzfrage, Kurzantwort, Umfrage; MC/SC-Fragen mit beliebig vielen Antwortoptionen",
           "7": "<a href='https://de.wikipedia.org/wiki/TeX' target='_blank'>TeX</a>-Formelsatz, Textformatierung mit <a href='https://guides.github.com/features/mastering-markdown/' target='_blank'>Markdown</a>, <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis</a> und eingebetteten Videos im Fragetext und in den Antwortoptionen",
           "8": "Edutainment: Lernmotivation durch Live-Wettbewerb mit Sound gegen die Uhr und die Mitspielenden",
@@ -125,7 +125,7 @@
         },
         "piwik": {
           "title": "Piwik",
-          "text": "Dieses Angebot benutzt Piwik, eine Open-Source-Software zur statistischen Auswertung der Zugriffe, siehe <a href='http://piwik.org/' target='_blank'>piwik.org</a>. Piwik verwendet Cookies, die auf dem Computer der Nutzer/innen gespeichert werden und die eine Analyse der Benutzung der Webseite ermöglichen. Die durch den Cookie erzeugten Informationen über die Benutzung dieses Agebotes werden auf dem Server des Anbieters in Deutschland gespeichert. Die IP-Adresse wird sofort nach der Verarbeitung und vor deren Speicherung anonymisiert. Nutzer/innen können die Installation der Cookies durch eine entsprechende Einstellung ihrer Browser-Software verhindern."
+          "text": "Dieses Angebot benutzt Piwik, eine Open-Source-Software zur statistischen Auswertung der Zugriffe, siehe <a href='http://piwik.org/' target='_blank'>piwik.org</a>. Piwik verwendet Cookies, die auf dem Computer der Nutzer/innen gespeichert werden und die eine Analyse der Benutzung der Webseite ermöglichen. Die durch den Cookie erzeugten Informationen über die Benutzung dieses Angebotes werden auf dem Server des Anbieters in Deutschland gespeichert. Die IP-Adresse wird sofort nach der Verarbeitung und vor deren Speicherung anonymisiert. Nutzer/innen können die Installation der Cookies durch eine entsprechende Einstellung ihrer Browser-Software verhindern."
         }
       },
       "imprint": {
@@ -285,7 +285,7 @@
       "available_sessions": "Diese Quizze sind in deinem Browser:",
       "session_management": "Quizze",
       "import": "Quiz importieren",
-      "delete_session": "Quiz löschen?",
+      "delete_session": "Quiz löschen",
       "delete_session_confirmation": "Soll das Quiz &raquo;<span id=\"session_name\"></span>&laquo; unwiderruflich gelöscht werden?",
       "export": "Quiz exportieren",
       "valid_question": "Gültige Quizrunde",

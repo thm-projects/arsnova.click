@@ -42,7 +42,7 @@ Template.votingview.onRendered(function () {
 			questionLib.markdownRenderingTracker.depend();
 			Meteor.setTimeout(function () {
 				lib.formatAnswerButtons();
-				lib.quickfitText();
+				$('.quickfit').flowtype();
 				$('#buttonContainer').css("visibility", "initial");
 			}, 100);
 		}.bind(this));

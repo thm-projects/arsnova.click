@@ -92,8 +92,8 @@ MeteorMathJax.defaultConfig = {
 		equationNumbers: { autoNumber: "AMS" }
 	},
 	tex2jax: {
-		inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-		displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+		inlineMath: [ ['$','$'], ["\(","\)"] ],
+		displayMath: [ ['$$','$$'], ["\[","\]"] ],
 		processEscapes: true,
 		preview: 'none'
 	},

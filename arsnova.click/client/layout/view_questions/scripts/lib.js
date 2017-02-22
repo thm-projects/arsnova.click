@@ -200,13 +200,13 @@ export function parseGithubFlavoredMarkdown(result, overrideLineBreaks = true) {
 			case /^\$\$/.test(result[i]) && overrideLineBreaks:
 				parseMathjaxBlock(result, i, "$$");
 				break;
-			case /^\\\[/.test(result[i]) && overrideLineBreaks:
-				parseMathjaxBlock(result, i, "\\]");
+			case /^\[/.test(result[i]) && overrideLineBreaks:
+				parseMathjaxBlock(result, i, "\]");
 				break;
 			case /^<math/.test(result[i]) && overrideLineBreaks:
 				parseMathjaxBlock(result, i, "</math>");
 				break;
-			case /\$/.test(result[i]) || /\\\(/.test(result[i]):
+			case /\$/.test(result[i]) || /\(/.test(result[i]):
 				break;
 			case /^```/.test(result[i]) && overrideLineBreaks:
 				parseCodeBlock(result, i);

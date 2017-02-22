@@ -436,7 +436,7 @@
       "session_invalid": "Dein Quiz enthält noch unvollständige Fragen",
       "session_empty": "Noch keine Frage erstellt",
       "connection_lost": "Die Verbindung zum Server wurde unterbrochen",
-      "back_to_quiz_administration": "Quizverwaltung",
+      "back_to_quiz_administration": "Alle Quizze",
       "details": {
         "aria": {
           "btn_group": "Auswahl an Einstellungen für das Quiz"

@@ -205,12 +205,7 @@
   }
 
   .fixed-bottom-item-text {
-    display: none;
-  }
-  @media (min-width: 425px) {
-    .fixed-bottom-item-text {
-      display: inline;
-    }
+    display: inline;
   }
 }
 

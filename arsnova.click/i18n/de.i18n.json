@@ -642,15 +642,15 @@
       "finish_music_detailed": "Sound zum Ende des Countdowns",
       "whistle": "Pfeifen",
       "silence": "Ohne Ton",
-      "global_volume": "Globale Lautstärke",
+      "global_volume": "Lautstärke global",
       "volume": "Lautstärke vorgeben",
-      "inactive": "Sound ist abgeschaltet",
-      "active": "Sound ist aktiviert",
-      "activated": "aktiviert",
-      "deactivated": "deaktiviert",
+      "inactive": "deaktiviert",
+      "active": "aktiviert",
+      "activated": "",
+      "deactivated": "",
       "random": "Zufällige Auswahl",
-      "play": "Abspielen",
-      "stop": "Anhalten"
+      "play": "Play",
+      "stop": "Stop"
     },
     "splashscreen": {
       "question_and_answer": {

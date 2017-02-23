@@ -636,7 +636,7 @@
     "sound": {
       "running_music": "Countdown",
       "lobby_music": "Lobby",
-      "finish_music": "Gong oder Pfiff",
+      "finish_music": "Gong | Pfiff",
       "running_music_detailed": "Sound während des Countdowns",
       "lobby_music_detailed": "Sound in der Quiz Lobby",
       "finish_music_detailed": "Sound zum Ende des Countdowns",

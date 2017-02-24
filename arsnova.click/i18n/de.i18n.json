@@ -434,7 +434,7 @@
       "added_questions_title": "Quizfragen",
       "no_added_questions": "Wähle eine Vorlage für deine Frage aus!",
       "session_invalid": "Dein Quiz enthält noch unvollständige Fragen",
-      "session_empty": "Noch keine Frage erstellt",
+      "session_empty": "",
       "connection_lost": "Die Verbindung zum Server wurde unterbrochen",
       "back_to_quiz_administration": "Alle Quizze",
       "details": {
@@ -513,7 +513,7 @@
         }
       },
       "edit_quiz": "Quiz bearbeiten",
-      "start_quiz": "Quiz starten",
+      "start_quiz": "Starte Quiz",
       "selected_nicks": "Nicknamen",
       "no_selected_nicks": "beliebig",
       "hide_selected_nicks": "Verberge Nicknamen",

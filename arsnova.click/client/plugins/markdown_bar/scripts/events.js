@@ -27,16 +27,6 @@ Template.markdownBar.events({
 			insertInQuestionText('**', '**');
 		}
 	},
-	"click #italicMarkdownButton": function () {
-		if (!markdownAlreadyExistsAndAutoRemove('*', '*')) {
-			insertInQuestionText('*', '*');
-		}
-	},
-	"click #lineThroughMarkdownButton": function () {
-		if (!markdownAlreadyExistsAndAutoRemove('<del>', '</del>')) {
-			insertInQuestionText('<del>', '</del>');
-		}
-	},
 	"click #headerMarkdownButton": function () {
 		if (!markdownAlreadyExistsAndAutoRemove('###', '')) {
 			if (markdownAlreadyExistsAndAutoRemove('##', '')) {

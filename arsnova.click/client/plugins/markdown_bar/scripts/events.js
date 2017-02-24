@@ -69,11 +69,6 @@ Template.markdownBar.events({
 			insertInQuestionText('```\n', '\n```');
 		}
 	},
-	"click #commentMarkdownButton": function () {
-		if (!markdownAlreadyExistsAndAutoRemove('> ')) {
-			insertInQuestionText('> ');
-		}
-	},
 	"click #imageMarkdownButton": function () {
 		new Splashscreen({
 			autostart: true,

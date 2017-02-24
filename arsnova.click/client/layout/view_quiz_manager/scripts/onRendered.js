@@ -50,7 +50,7 @@ Template.quizManager.onRendered(function () {
 			popoverTimeout = Meteor.setTimeout(function () {
 				forwardButton.popover("destroy");
 				popoverTimeout = null;
-			}, 7000);
+			}, 4000);
 		}
 	}.bind(this));
 	this.autorun(function () {

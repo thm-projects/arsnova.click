@@ -29,19 +29,20 @@
 				text-overflow: ellipsis;
 				overflow: hidden;
 				white-space: nowrap;
+				text-align: left;
 			}
 		}
 
 		&#available_questions_wrapper,
 		&#added_questions_wrapper {
-			min-height: 100px;
+			min-height: 10px;
 
 			.questionElementWrapper {
 				margin: 5px 0;
 				padding: 5px;
 				border-radius: $corner-radius;
 				position: relative;
-
+				text-align: center;
 				li {
 					&[data-valid='true'] {
 						&:before {

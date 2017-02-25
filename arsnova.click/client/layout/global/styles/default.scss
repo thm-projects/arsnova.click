@@ -18,6 +18,7 @@
 @import "appearance";
 
 body {
+  -webkit-touch-callout: none;
   font-family: $font;
   height: 100%;
   width: 100%;

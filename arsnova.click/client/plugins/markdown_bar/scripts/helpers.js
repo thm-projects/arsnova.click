@@ -35,7 +35,6 @@ Template.markdownBar.helpers({
 			{id: "headerMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.heading", "glyphClass": "glyphicon-header"},
 			{id: "hyperlinkMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.hyperlink", "glyphClass": "glyphicon-globe"},
 			{id: "unsortedListMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.unordered_list", "glyphClass": "iconEditorUl"},
-			{id: "sortedListMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.ordered_list", "glyphClass": "iconEditorOl"},
 			{id: "latexMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.latex", "glyphClass": "latexIcon"},
 			{id: "codeMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.code", "glyphClass": "codeListingIcon"},
 			{id: "imageMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.image", "glyphClass": "glyphicon-picture"}

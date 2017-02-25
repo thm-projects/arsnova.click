@@ -433,6 +433,7 @@
       "available_questions_title": "Preguntas disponibles",
       "added_questions_title": "Preguntas creadas",
       "no_added_questions": "No ha agregado ninguna pregunta.",
+      "question_added": "",
       "session_invalid": "El cuestionario contiene preguntas incompletas",
       "session_empty": "El cuestionario no contiene preguntas",
       "connection_lost": "Se pierde la conexión con el servidor",

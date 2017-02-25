@@ -14,7 +14,10 @@
 					{{#unless hasQuestionsAdded}}
 						<h4 class="text-light" role="heading">{{_ "view.quiz_manager.no_added_questions" }}</h4>
 					{{/unless}}
-					<ul id="added_questions_wrapper" data-intro="{{_ "view.quiz_manager.description.added_questions" }}"
+                    {{#if hasQuestionsAdded}}
+                        <h4 class="text-light" role="heading">{{_ "view.quiz_manager.question_added" }}</h4>
+                    {{/if}}
+                    <ul id="added_questions_wrapper" data-intro="{{_ "view.quiz_manager.description.added_questions" }}"
 					    aria-label="{{_ "view.quiz_manager.description.added_questions" }}" role="list"></ul>
 				</div>
 			</div>

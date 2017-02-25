@@ -433,6 +433,7 @@
       "available_questions_title": "Available questions",
       "added_questions_title": "Created questions",
       "no_added_questions": "You haven't added any questions yet.",
+      "question_added": "To edit a question click on it.",
       "session_invalid": "The quiz contains incomplete questions",
       "session_empty": "The quiz contains no questions",
       "connection_lost": "The connection to the server is lost",

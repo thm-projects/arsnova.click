@@ -432,7 +432,7 @@
       "title": "Quiz-Manager",
       "available_questions_title": "Vorlagen",
       "added_questions_title": "Quizfragen",
-      "no_added_questions": "Wähle eine Vorlage für deine Frage aus …",
+      "no_added_questions": "Wähle zunächst eine Vorlage …",
       "session_invalid": "Dein Quiz enthält noch unvollständige Fragen",
       "session_empty": "",
       "connection_lost": "Die Verbindung zum Server wurde unterbrochen",

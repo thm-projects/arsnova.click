@@ -21,7 +21,7 @@
             <div id="votingView">
                 <div class="row voting-helper-buttons">
                     {{#if showQuestionButton}}
-                        <div class="col-xs-{{#if showForwardButton}}6{{else}}12{{/if}}">
+                        <div class="col-xs-12">
                             <button id="js-btn-showQuestionAndAnswerModal"
                                     type="button"
                                     aria-labelledby="showQuestionAndAnswerDialog_description"
@@ -31,20 +31,7 @@
                             </button>
                         </div>
                     {{/if}}
-
-                    {{#if showForwardButton}}
-                        <div class="col-xs-6">
-                            <button id="forwardButton"
-                                    type="button"
-                                    aria-labelledby="sendResponse_description"
-                                    class="btn btn-info btn-lg btn-answerOption tabbable">
-                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                <span class="ansBtn" id="sendResponse_description">{{_ "view.voting.send"}}</span>
-                            </button>
-                        </div>
-                    {{/if}}
                 </div>
-
                 <div class="row answer-row">
                     {{#if isRangedQuestion}}
                         <div class="col-xs-12 rangedValues">
@@ -101,6 +88,19 @@
                                 {{/each}}
                             </div>
                         {{/if}}
+                    {{/if}}
+                </div>
+                <div class="row voting-helper-buttons">
+                    {{#if showForwardButton}}
+                        <div class="col-xs-12">
+                            <button id="forwardButton"
+                                    type="button"
+                                    aria-labelledby="sendResponse_description"
+                                    class="btn btn-warning btn-lg btn-answerOption tabbable">
+                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                <span class="ansBtn" id="sendResponse_description">{{_ "view.voting.send"}}</span>
+                            </button>
+                        </div>
                     {{/if}}
                 </div>
             </div>

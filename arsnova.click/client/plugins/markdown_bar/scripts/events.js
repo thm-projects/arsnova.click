@@ -50,11 +50,6 @@ Template.markdownBar.events({
 			insertInQuestionText('- ');
 		}
 	},
-	"click #sortedListMarkdownButton": function () {
-		if (!markdownAlreadyExistsAndAutoRemove('1. ')) {
-			insertInQuestionText('1. ');
-		}
-	},
 	"click #latexMarkdownButton": function () {
 		if (!markdownAlreadyExistsAndAutoRemove('$$', '$$')) {
 			if (!markdownAlreadyExistsAndAutoRemove('$', '$')) {

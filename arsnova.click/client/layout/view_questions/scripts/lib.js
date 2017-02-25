@@ -250,13 +250,13 @@ export function parseGithubFlavoredMarkdown(result, overrideLineBreaks = true) {
 export function getQuestionTypes() {
 	return [
 		{
-			id: "SingleChoiceQuestion",
-			translationName: "view.questions.single_choice_question"
-		},
-		{
 			id: "MultipleChoiceQuestion",
 			translationName: "view.questions.multiple_choice_question"
 		},
+    {
+      id: "SingleChoiceQuestion",
+      translationName: "view.questions.single_choice_question"
+    },
 		{
 			id: "YesNoSingleChoiceQuestion",
 			translationName: "view.questions.single_choice_question_yes_no"

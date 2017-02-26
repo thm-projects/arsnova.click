@@ -433,7 +433,7 @@
       "available_questions_title": "Vorlagen",
       "added_questions_title": "Quizfragen",
       "no_added_questions": "Wähle zunächst eine Vorlage …",
-      "question_added": "Klick die Frage an, um sie zu editieren …",
+      "question_added": "Klick die Frage an, um sie zu editieren:",
       "session_invalid": "Dein Quiz enthält noch unvollständige Fragen",
       "session_empty": "",
       "connection_lost": "Die Verbindung zum Server wurde unterbrochen",

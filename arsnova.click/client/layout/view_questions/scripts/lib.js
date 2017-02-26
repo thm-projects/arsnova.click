@@ -254,8 +254,8 @@ export function getQuestionTypes() {
 			translationName: "view.questions.multiple_choice_question"
 		},
 		{
-		    id: "SingleChoiceQuestion",
-		    translationName: "view.questions.single_choice_question"
+			id: "SingleChoiceQuestion",
+			translationName: "view.questions.single_choice_question"
 		},
 		{
 			id: "YesNoSingleChoiceQuestion",

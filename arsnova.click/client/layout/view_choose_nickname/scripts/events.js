@@ -159,7 +159,7 @@ Template.nickLimited.events({
 			return null;
 		}
 		if (configDoc.nicks.restrictToCASLogin) {
-			if (MemberListCollection.findOne({hashtag: Router.current().params.quizName, userRef: Meteor.user()._id})) {
+			if (Meteor.user() && MemberListCollection.findOne({hashtag: Router.current().params.quizName, userRef: Meteor.user()._id})) {
 				new ErrorSplashscreen({
 					autostart: true,
 					errorMessage: "plugins.splashscreen.error.error_messages.duplicate_user",

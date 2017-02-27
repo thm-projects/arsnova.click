@@ -192,7 +192,7 @@ export class Splashscreen {
 export class ErrorSplashscreen extends Splashscreen {
 	constructor (options) {
 		options.templateName = "errorSplashscreen";
-		options.closeOnButton = "#js-btn-hideErrorMessageModal";
+		options.closeOnButton = ".splashscreen-container-close>.glyphicon-remove";
 		super(options);
 
 		if (!options.errorMessage) {

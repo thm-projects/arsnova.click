@@ -68,11 +68,11 @@
           "4": "Jeder darf Quizze erstellen, sofort und beliebig viele. Das Erstellen eines Quiz ist sogar auf dem Smartphone ein Kinderspiel!",
           "5": "Extrem einfache, barrierefreie, beamertaugliche, vollständig in Englisch, Spanisch, Französisch und Italienisch übersetzte Bedienoberfläche",
           "6": "Frageformate: Multiple/Single Choice, Schätzfrage, Kurzantwort, Umfrage; MC/SC-Fragen mit beliebig vielen Antwortoptionen",
-          "7": "<a href='https://de.wikipedia.org/wiki/TeX' target='_blank'>TeX</a>-Formelsatz, Textformatierung mit <a href='https://guides.github.com/features/mastering-markdown/' target='_blank'>Markdown</a>, <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis</a> und eingebetteten Videos im Fragetext und in den Antwortoptionen",
+          "7": "<a href='https://de.wikipedia.org/wiki/TeX' target='_blank'>TeX</a>-Formelsatz, Textformatierung mit <a href='https://de.wikipedia.org/wiki/Markdown' target='_blank'>Markdown</a>, <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis</a> und eingebetteten Videos im Fragetext und in den Antwortoptionen",
           "8": "Edutainment: Lernmotivation durch Live-Wettbewerb mit Sound gegen die Uhr und die Mitspielenden",
-          "9": "<a href='https://de.wikipedia.org/wiki/Responsive_Webdesign' target='_blank'>Responsives Webdesign</a>: egal ob Smartphone, Beamer oder Wide Screen, das Design skaliert dank <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>. Selbst komplexe Quizze können auf dem Smartphone erstellt werden.",
-          "10": "Gebaut als <a href='https://infrequently.org/2016/09/what-exactly-makes-something-a-progressive-web-app/' target='_blank'>Progressive Web App</a> mit reaktiver Web-Technik von <a href='https://www.meteor.com' target='_blank'>Meteor</a>",
-          "11": "<a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a>"
+          "9": "<a href='https://de.wikipedia.org/wiki/Responsive_Webdesign' target='_blank'>Responsives Webdesign</a>: egal ob Smartphone, Beamer oder Wide Screen, das Design skaliert dank <a href='https://de.wikipedia.org/wiki/Bootstrap_(Framework)' target='_blank'>Bootstrap</a>. Selbst komplexe Quizze können auf dem Smartphone erstellt werden.",
+          "10": "Gebaut als <a href='https://en.wikipedia.org/wiki/Progressive_web_app' target='_blank'>Progressive Web App</a> mit reaktiver Web-Technik von <a href='https://www.meteor.com' target='_blank'>Meteor</a>",
+          "11": "arsnova.click ist <a href='https://github.com/thm-projects/arsnova.click' target='_blank'>Open Source Software</a>"
         },
         "manual": {
           "title": "Bedienungshandbuch?",

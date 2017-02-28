@@ -1,6 +1,6 @@
 {
   "global": {
-    "arsnova_slogan": "Quiz-App für den Unterricht",
+    "arsnova_slogan": "Quiz-App für MINT",
     "back": "Zurück",
     "next": "Weiter",
     "delete": "Löschen",
@@ -10,7 +10,7 @@
     "no": "Nein",
     "close_window": "Fenster schließen",
     "aria_description": {
-      "arsnova_slogan": "Quiz-App für den Unterricht"
+      "arsnova_slogan": "Quiz-App für MINT-Fächer"
     },
     "cookie_consent": {
       "message": "arsnova.click verwendet Cookies.",
@@ -62,7 +62,7 @@
         "developed_by": "Inspiriert durch <a href='https://getkahoot.com' target='_blank'>Kahoot!</a> entwickelte ein Team aus Bachelor- und Masterstudenten der <a href='http://www.thm.de/site/' target='_blank'>TH Mittelhessen</a> die erste Version dieser <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>gamifizierten</a> Alternative zum ARSnova-Flaggschiff <a href='https://arsnova.io/' target='_blank'>arsnova.voting</a>.",
         "met_requirements": "Bisher wurden die folgenden Features implementiert:",
         "requirements": {
-          "1": "Absoluter Datenschutz: keine personenbezogenen Daten auf dem Server, alle Quizdaten liegen im Browser des Quizerstellers (<a href='http://www.w3schools.com/html/html5_webstorage.asp' target='_blank'>HTML5 Local Storage</a>)",
+          "1": "Absoluter Datenschutz: keine personenbezogenen Daten auf dem Server, alle Quizdaten liegen im Browser des Quizerstellers (<a href='https://de.wikipedia.org/wiki/Web_Storage' target='_blank'>Web Storage</a>)",
           "2": "Keine Registrierung, keine Anmeldung, keine Installation (<a href='https://de.wikipedia.org/wiki/Bring_your_own_device' target='_blank'>BYOD</a>), keine Werbung, keine Kosten",
           "3": "Dieselbe Startseite arsnova.click für beide Rollen: Quizmaster und Kandidat/in bzw. Lehrperson und Schüler/in",
           "4": "Jeder darf Quizze erstellen, sofort und beliebig viele. Das Erstellen eines Quiz ist sogar auf dem Smartphone ein Kinderspiel!",
@@ -367,7 +367,7 @@
       "start_quiz": "Los geht's!",
       "kick_member_confirmation": "Soll die Person &raquo;<span id=\"nickName\"></span>&laquo; aus dem Quiz entfernt werden?",
       "add_kicked_member_to_ban_list": "Den Nicknamen für immer bannen",
-      "waiting_for_players": "Warten auf die Anderen …",
+      "waiting_for_players": "Warten auf die Anderen…",
       "description": {
         "memberlist_count": "So viele Personen sind aktuell eingeloggt.",
         "title": "Die Quiz Lobby zeigt die Nicknamen der Teilnehmenden in zeitlich umgekehrter Reihenfolge ihres Eintreffens.",

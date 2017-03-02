@@ -36,6 +36,10 @@ export const rangedInputValueSchema = {
 export const freeTextInputValueSchema = {
 	type: String
 };
+export const confidenceValueSchema = {
+	type: Number,
+	min: 0
+};
 export const responsesCollectionSchema = new SimpleSchema({
 	hashtag: {
 		type: hashtagSchema
@@ -60,6 +64,9 @@ export const responsesCollectionSchema = new SimpleSchema({
 	},
 	responseTime: {
 		type: responseTimeSchema
+	},
+	confidenceValue: {
+		type: confidenceValueSchema
 	},
 	userRef: {
 		type: userRefSchema,

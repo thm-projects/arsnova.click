@@ -44,6 +44,67 @@ Template.votingview.events({
 			instanceId: "questionAndAnswers_" + EventManagerCollection.findOne().questionIndex
 		});
 	},
+	"click .sendResponse": function (event, template) {
+		event.stopPropagation();
+		event.preventDefault();
+		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
+		const responseArr = JSON.parse(Session.get("responses"));
+		const currentId = event.currentTarget.id;
+		if (Session.get("questionSC")) {
+			responseArr.forEach(function (item, index) {
+				responseArr[index] = false;
+			});
+			$(".sendResponse").removeClass("answer-selected");
+			TimerMap.clickOnResponseButton.start();
+			if (template.data && template.data["data-questionIndex"]) {
+				if ($('.correctAnswer, .wrongAnswer').length > 0) {
+					return;
+				}
+				Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList().forEach(function (element) {
+					if (element.getIsCorrect()) {
+						$('#' + element.getAnswerOptionNumber()).addClass("correctAnswer");
+					} else {
+						$('#' + element.getAnswerOptionNumber()).addClass("wrongAnswer");
+					}
+				});
+				Meteor.setTimeout(function () {
+					$('.sendResponse').removeClass("correctAnswer wrongAnswer");
+				}, 2000);
+				return;
+			}
+		}
+		responseArr[currentId] = !responseArr[currentId];
+		Session.set("responses", JSON.stringify(responseArr));
+		Session.set("hasToggledResponse", JSON.stringify(responseArr).indexOf("true") > -1);
+		$(event.currentTarget).toggleClass("answer-selected");
+	},
+	"DOMSubtreeModified .sendResponse": function (event) {
+		const id = $(event.currentTarget).attr("id");
+		$('#' + id).removeClass("quickfitSet");
+		questionLib.markdownRenderingTracker.changed();
+	},
+	"keydown #rangeInput": function (event, template) {
+		if (template.data && template.data["data-questionIndex"]) {
+			return;
+		}
+		if ($(event.currentTarget).val().length > 0 && !isNaN(parseFloat($(event.currentTarget).val()))) {
+			Session.set("hasToggledResponse", true);
+			if (event.keyCode === 13) {
+				$('#forwardButton').click();
+			}
+		} else {
+			Session.set("hasToggledResponse", false);
+		}
+	},
+	"input #answerTextArea": function (event, template) {
+		if (template.data && template.data["data-questionIndex"]) {
+			return;
+		}
+		Session.set("hasToggledResponse", $(event.currentTarget).val().length > 0);
+	}
+});
+
+Template.votingViewFooterNavButtons.events({
 	"click #forwardButton": function (event, template) {
 		event.stopPropagation();
 		if (Session.get("hasSendResponse")) {
@@ -92,63 +153,5 @@ Template.votingview.events({
 			}
 		}
 		countdownFinish();
-	},
-	"click .sendResponse": function (event, template) {
-		event.stopPropagation();
-		event.preventDefault();
-		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
-		const responseArr = JSON.parse(Session.get("responses"));
-		const currentId = event.currentTarget.id;
-		responseArr[currentId] = !responseArr[currentId];
-		if (Session.get("questionSC")) {
-			TimerMap.clickOnResponseButton.start();
-			if (template.data && template.data["data-questionIndex"]) {
-				if ($('.correctAnswer, .wrongAnswer').length > 0) {
-					return;
-				}
-				Session.get("questionGroup").getQuestionList()[index].getAnswerOptionList().forEach(function (element) {
-					if (element.getIsCorrect()) {
-						$('#' + element.getAnswerOptionNumber()).addClass("correctAnswer");
-					} else {
-						$('#' + element.getAnswerOptionNumber()).addClass("wrongAnswer");
-					}
-				});
-				Meteor.setTimeout(function () {
-					$('.sendResponse').removeClass("correctAnswer wrongAnswer");
-				}, 2000);
-				return;
-			} else {
-				makeAndSendResponse(responseArr);
-				countdownFinish();
-				return;
-			}
-		}
-		Session.set("responses", JSON.stringify(responseArr));
-		Session.set("hasToggledResponse", JSON.stringify(responseArr).indexOf("true") > -1);
-		$(event.currentTarget).toggleClass("answer-selected");
-	},
-	"DOMSubtreeModified .sendResponse": function (event) {
-		const id = $(event.currentTarget).attr("id");
-		$('#' + id).removeClass("quickfitSet");
-		questionLib.markdownRenderingTracker.changed();
-	},
-	"keydown #rangeInput": function (event, template) {
-		if (template.data && template.data["data-questionIndex"]) {
-			return;
-		}
-		if ($(event.currentTarget).val().length > 0 && !isNaN(parseFloat($(event.currentTarget).val()))) {
-			Session.set("hasToggledResponse", true);
-			if (event.keyCode === 13) {
-				$('#forwardButton').click();
-			}
-		} else {
-			Session.set("hasToggledResponse", false);
-		}
-	},
-	"input #answerTextArea": function (event, template) {
-		if (template.data && template.data["data-questionIndex"]) {
-			return;
-		}
-		Session.set("hasToggledResponse", $(event.currentTarget).val().length > 0);
 	}
 });

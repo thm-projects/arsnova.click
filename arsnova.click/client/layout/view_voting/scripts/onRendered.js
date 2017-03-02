@@ -54,6 +54,7 @@ Template.votingview.onRendered(function () {
 		headerLib.calculateHeaderSize();
 		headerLib.calculateTitelHeight();
 	});
+	lib.createSlider();
 	TimerMap.routeToVotingView.end();
 });
 

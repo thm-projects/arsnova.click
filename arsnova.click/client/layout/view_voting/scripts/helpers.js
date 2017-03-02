@@ -35,9 +35,6 @@ Template.votingview.helpers({
 	showQuestionButton: function () {
 		return isNaN(parseInt(Router.current().params.questionIndex));
 	},
-	showForwardButton: function () {
-		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
-	},
 	getDisplayAnswerText: function () {
 		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
 		return Session.get("questionGroup").getQuestionList()[index].getDisplayAnswerText();
@@ -81,5 +78,32 @@ Template.votingviewTitel.helpers({
 		}
 		let countdownValue = (Session.get("countdownInitialized") && lib.countdown) ? lib.countdown.get() : 0;
 		return TAPi18n.__("view.voting.seconds_left", {value: countdownValue, count: countdownValue});
+	}
+});
+
+Template.votingViewFooterNavButtons.helpers({
+	showForwardButton: function () {
+		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
+	},
+	getConfidenceTranslationReference: function () {
+		let confidenceLevel = Session.get("confidenceValue");
+		switch (true) {
+			case confidenceLevel > 90:
+				confidenceLevel = "very_sure";
+				break;
+			case confidenceLevel > 70:
+				confidenceLevel = "quite_sure";
+				break;
+			case confidenceLevel > 50:
+				confidenceLevel = "unsure";
+				break;
+			case confidenceLevel > 30:
+				confidenceLevel = "not_sure";
+				break;
+			default:
+				confidenceLevel = "no_idea";
+				break;
+		}
+		return "view.voting.confidence_level." + confidenceLevel;
 	}
 });

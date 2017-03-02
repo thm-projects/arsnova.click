@@ -20,12 +20,35 @@ import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
 import {Router} from 'meteor/iron:router';
 import {ReactiveCountdown} from 'meteor/flyandi:reactive-countdown';
+import {noUiSlider} from 'meteor/arsnova.click:nouislider';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {hslColPerc} from '/client/layout/view_live_results/scripts/lib.js';
 
 export let countdown = null;
 export let countdownRunning = false;
 
 export const votingViewTracker = new Tracker.Dependency();
+
+let sliderObject = null;
+export function createSlider() {
+	const plainSlider = document.getElementById('votingConfidenceSlider');
+	plainSlider.style.background = hslColPerc(100, 0, 100);
+	sliderObject = noUiSlider.create(plainSlider, {
+		step: 1,
+		margin: 1,
+		start: 100,
+		range: {
+			'min': 0,
+			'max': 100
+		}
+	});
+	Session.set("confidenceValue", 100);
+	sliderObject.on('slide', function (val) {
+		const roundedValue = Math.round(val);
+		Session.set("confidenceValue", roundedValue);
+		plainSlider.style.background = hslColPerc(roundedValue, 0, 100);
+	});
+}
 
 export function deleteCountdown() {
 	if (countdown) {
@@ -65,6 +88,7 @@ export function makeAndSendResponse(answerOptionNumber) {
 		hashtag: Router.current().params.quizName,
 		questionIndex: EventManagerCollection.findOne().questionIndex,
 		answerOptionNumber: answerOptionNumber,
+		confidenceValue: Session.get("confidenceValue"),
 		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
 	});
 }
@@ -74,6 +98,7 @@ export function makeAndSendRangedResponse(value) {
 		hashtag: Router.current().params.quizName,
 		questionIndex: EventManagerCollection.findOne().questionIndex,
 		rangedInputValue: value,
+		confidenceValue: Session.get("confidenceValue"),
 		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
 	});
 }
@@ -84,6 +109,7 @@ export function makeAndSendFreeTextResponse(value) {
 		questionIndex: EventManagerCollection.findOne().questionIndex,
 		freeTextInputValue: value,
 		answerOptionNumber: [0],
+		confidenceValue: Session.get("confidenceValue"),
 		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
 	});
 }
@@ -139,7 +165,7 @@ $(window).on("resize orientationchange", function () {
 
 function calculateAnswerRowHeight() {
 	let contentHeight = ($("#markdownPreviewWrapper").height() - $("h2.text-center").outerHeight(true)) || $(".contentPosition").height();
-	return contentHeight - $('.voting-helper-buttons').height() - parseInt($('.answer-row').css("margin-top"));
+	return contentHeight - $('.voting-helper-buttons').height() - $('#votingConfidenceSlider').height() - parseInt($('.answer-row').css("margin-top"));
 }
 
 export function formatAnswerButtons() {

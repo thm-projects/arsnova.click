@@ -604,6 +604,14 @@
       "free_text_question": {
         "title": "Gib deine Antwort ein!",
         "input_placeholder": "Antwort"
+      },
+      "confidence_level": {
+        "title": "Wie sicher bist du dir bei deiner Antwort?",
+        "no_idea": "...?",
+        "not_sure": "Keine Ahnung!",
+        "unsure": "Unsicher",
+        "quite_sure": "Relativ sicher",
+        "very_sure": "Fest überzeugt!"
       }
     }
   },

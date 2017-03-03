@@ -38,7 +38,7 @@ export const freeTextInputValueSchema = {
 };
 export const confidenceValueSchema = {
 	type: Number,
-	min: 0
+	min: -1
 };
 export const responsesCollectionSchema = new SimpleSchema({
 	hashtag: {

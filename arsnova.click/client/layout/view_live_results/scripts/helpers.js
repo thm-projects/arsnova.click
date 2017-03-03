@@ -492,6 +492,13 @@ Template.liveResults.helpers({
 			}
 		});
 		return result.length - Session.get("LearnerCount");
+	},
+	showConfidenceRate: (index)=> {
+		const responseDoc = ResponsesCollection.findOne({questionIndex: index});
+		if (!responseDoc || !lib.isCountdownZero(index)) {
+			return;
+		}
+		return responseDoc.confidenceValue > -1;
 	}
 });
 

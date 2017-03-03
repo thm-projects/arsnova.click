@@ -35,6 +35,7 @@ let sliderObject = null;
 export function createSlider() {
 	Session.set("confidenceValue", 100);
 	if (!SessionConfigurationCollection.findOne().confidenceSliderEnabled) {
+		Session.set("confidenceValue", -1);
 		return;
 	}
 	const plainSlider = document.getElementById('votingConfidenceSlider');

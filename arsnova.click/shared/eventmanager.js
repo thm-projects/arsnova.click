@@ -107,6 +107,21 @@ Meteor.methods({
 			}
 		});
 	},
+	'EventManagerCollection.abortCountdown': (hashtag, questionIndex)=> {
+		new SimpleSchema({
+			hashtag: hashtagSchema,
+			questionIndex: questionIndexSchema
+		}).validate({hashtag, questionIndex});
+
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "EventManagerCollection.abortCountdown",
+					value: {questionIndex: questionIndex}
+				}
+			}
+		});
+	},
 	'EventManagerCollection.setActiveQuestion': (hashtag, questionIndex)=> {
 		new SimpleSchema({
 			hashtag: hashtagSchema,

@@ -162,6 +162,12 @@ function addLiveresultsChangeEvents() {
 			liveResultsLib.countdownFinish();
 		}
 	});
+
+	globalEventStackObserver.onChange([
+		"EventManagerCollection.abortCountdown"
+	], function () {
+		liveResultsLib.countdownFinish();
+	});
 }
 
 function addVotingViewChangeEvents() {
@@ -172,6 +178,13 @@ function addVotingViewChangeEvents() {
 			$('.modal-backdrop').remove();
 			Router.go("/" + Router.current().params.quizName + "/memberlist");
 		}
+	});
+
+	globalEventStackObserver.onChange([
+		"EventManagerCollection.abortCountdown"
+	], function () {
+		liveResultsLib.countdownFinish();
+		Router.go("/" + Router.current().params.quizName + "/results");
 	});
 }
 

@@ -46,6 +46,7 @@
         "edit_quiz": "Modifier",
         "show_product_tour": "Visite du produit",
         "show_response_progress": "La progression",
+        "show_confidence_slider": "Confidence-Slider",
         "remove": "Retirer",
         "description": {
           "qr-code": "Les participants peuvent scanner le code QR via leurs appareils mobiles pour participer au quiz.",
@@ -604,6 +605,14 @@
       "free_text_question": {
         "title": "Donne ta réponse!",
         "input_placeholder": "Réponse"
+      },
+      "confidence_level": {
+        "title": "Dans quelle mesure êtes-vous confiant dans votre réponse?",
+        "no_idea": "Aucune idée",
+        "not_sure": "Pas certain!",
+        "unsure": "Incertain",
+        "quite_sure": "Assez sûr",
+        "very_sure": "Vraiment convaincu!"
       }
     }
   },

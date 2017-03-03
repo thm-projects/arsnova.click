@@ -143,5 +143,8 @@ Template.liveResultsFooterNavButtons.events({
 	'click #showNextQuestionDialog': (event)=> {
 		event.stopPropagation();
 		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, EventManagerCollection.findOne().questionIndex + 1);
+	},
+	"click #abortCountdown": ()=> {
+		Meteor.call("EventManagerCollection.abortCountdown", Router.current().params.quizName, EventManagerCollection.findOne().questionIndex);
 	}
 });

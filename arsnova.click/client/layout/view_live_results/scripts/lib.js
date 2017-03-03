@@ -358,3 +358,11 @@ export function calculateButtonCount() {
 	 */
 	Session.set("LearnerCount", queryLimiter);
 }
+
+Array.prototype.findLastIndex = function (callback) {
+	for (let i = this.length - 1; i >= 0; i--) {
+		if (callback(this[i]) === true) {
+			return i;
+		}
+	}
+};

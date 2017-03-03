@@ -20,11 +20,13 @@ import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {Router} from 'meteor/iron:router';
 import {HashtagsCollection, hashtagSchema} from '/lib/hashtags/collection.js';
-import {questionGroupSchema} from '/lib/questions/collection.js';
+import {QuestionGroupCollection, questionGroupSchema} from '/lib/questions/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
+import * as SingleChoiceExcelSheet from '/server/export_templates/excel_singlechoice_template.js';
 import fs from 'fs';
 import process from 'process';
+import xlsx from 'excel4node';
 
 Router.route("/server/preview/:themeName/:language", function () {
 	const self = this,
@@ -45,6 +47,23 @@ Router.route("/server/preview/:themeName/:language", function () {
 		}
 	});
 }, {where: "server"});
+
+Router.route("/server/generateExcelFile/:hashtag/", function () {
+	const wb = new xlsx.Workbook();
+	const questionGroup = QuestionGroupCollection.findOne({hashtag: this.params.hashtag});
+	for (let i = 0; i < questionGroup.questionList.length; i++) {
+		switch (questionGroup.questionList[i].type) {
+			case "SingleChoiceQuestion":
+			case "YesNoSingleChoiceQuestion":
+			case "TrueFalseSingleChoiceQuestion":
+				SingleChoiceExcelSheet.generateSheet(wb, this.params.hashtag, i);
+				break;
+
+		}
+	}
+	const date = new Date();
+	wb.write("Export-" + this.params.hashtag + "-" + date.getDate() + "_" + (date.getMonth() + 1) + "_" + date.getFullYear() + ".xlsx", this.response);
+}, {where: 'server'});
 
 Router.route('/api/keepalive', {where: 'server'})
 	.post(function () {

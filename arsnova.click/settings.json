@@ -46,6 +46,6 @@
 		"autoClose": true
 	},
 	"serverStartup": {
-		"verbose": true
+		"verbose": false
 	}
 }

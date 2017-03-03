@@ -356,7 +356,8 @@
       "answer_option": "Réponse",
       "guessed_correct": "Bien estimé",
       "guessed_wrong": "Mal estimé",
-      "correct_answer": "Bonne réponse"
+      "correct_answer": "Bonne réponse",
+      "abort_countdown": "Abandonner le compte à rebours"
     },
     "lobby": {
       "title": "Lobby du quiz",

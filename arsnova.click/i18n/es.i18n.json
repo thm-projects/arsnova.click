@@ -356,7 +356,8 @@
       "answer_option": "Respuesta",
       "guessed_correct": "Has adivinado",
       "guessed_wrong": "No has adivinado",
-      "correct_answer": "Respuesta correcta"
+      "correct_answer": "Respuesta correcta",
+      "abort_countdown": "Abortar cuenta atrás"
     },
     "lobby": {
       "title": "Lobby del cuestionario",

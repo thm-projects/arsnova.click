@@ -356,7 +356,8 @@
       "answer_option": "Answer",
       "guessed_correct": "Correctly estimated",
       "guessed_wrong": "Wrong estimated",
-      "correct_answer": "Correct answer"
+      "correct_answer": "Correct answer",
+      "abort_countdown": "Abort Countdown"
     },
     "lobby": {
       "title": "Quiz Lobby",

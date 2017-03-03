@@ -45,6 +45,7 @@
         "nicknames": "Nicknames",
         "show_product_tour": "Product tour",
         "show_response_progress": "Progress",
+        "show_confidence_slider": "Degree of Certainty",
         "edit_quiz": "Edit",
         "remove": "Remove",
         "description": {
@@ -604,6 +605,14 @@
       "free_text_question": {
         "title": "Provide your answer!",
         "input_placeholder": "Answer"
+      },
+      "confidence_level": {
+        "title": "How confident are you in your answer?",
+        "no_idea": "No idea",
+        "not_sure": "Not sure!",
+        "unsure": "Unsure",
+        "quite_sure": "Quite sure",
+        "very_sure": "Truly convinced!"
       }
     }
   },

@@ -72,6 +72,8 @@ Template.hiddenFooterElement.helpers({
 				return localStorage.getItem("showProductTour") !== "false";
 			case "response-progress":
 				return !!(configDoc && configDoc.getShowResponseProgress());
+			case "confidence-slider":
+				return !!(configDoc && configDoc.getConfidenceSliderEnabled());
 		}
 	}
 });

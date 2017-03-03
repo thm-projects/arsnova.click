@@ -115,6 +115,14 @@ export const footerElemResponseProgress = {
 	selectable: true,
 	showIntro: true
 };
+export const footerElemConfidenceSlider = {
+	id: "confidence-slider",
+	iconClass: "glyphicon glyphicon-object-align-right",
+	textClass: "footerElementText",
+	textName: "region.footer.footer_bar.show_confidence_slider",
+	selectable: true,
+	showIntro: true
+};
 export const footerElemShowMore = {
 	id: "show-more",
 	iconClass: "glyphicon glyphicon-option-vertical",

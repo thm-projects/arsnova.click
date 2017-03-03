@@ -60,6 +60,7 @@ Template.liveResults.onRendered(()=> {
 		if (eventDoc.questionIndex + 1 < questionCount) {
 			footerElements.addFooterElement(footerElements.footerElemResponseProgress);
 			footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
+			footerElements.addFooterElement(footerElements.footerElemConfidenceSlider);
 		}
 		if (navigator.userAgent.match(/iPad/i) == null) {
 			footerElements.addFooterElement(footerElements.footerElemFullscreen);

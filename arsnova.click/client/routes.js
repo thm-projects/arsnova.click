@@ -638,6 +638,9 @@ Router.route('/:quizName/onpolling', {
 			globalEventStackObserver.startObserving(Router.current().params.quizName);
 		}
 		this.render("votingviewTitel", {to: "header.title"});
+		this.render('votingViewFooterNavButtons', {
+			to: 'footer.navigation'
+		});
 		this.render('votingview');
 	}
 });

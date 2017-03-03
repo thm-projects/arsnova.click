@@ -46,6 +46,7 @@
         "edit_quiz": "Editar",
         "show_product_tour": "Tour del producto",
         "show_response_progress": "Progreso",
+        "show_confidence_slider": "Grado de certidumbre",
         "remove": "Retirar",
         "description": {
           "qr-code": "Los asistentes pueden escanear el código QR a través de sus dispositivos móviles para unirse al concurso.",
@@ -604,6 +605,14 @@
       "free_text_question": {
         "title": "¡Ingresa tu respuesta!",
         "input_placeholder": "Respuesta"
+      },
+      "confidence_level": {
+        "title": "¿Qué tan seguro está usted en su respuesta?",
+        "no_idea": "Ni idea",
+        "not_sure": "¡No es seguro!",
+        "unsure": "Inseguro",
+        "quite_sure": "Bastante seguro",
+        "very_sure": "Realmente convencido!"
       }
     }
   },

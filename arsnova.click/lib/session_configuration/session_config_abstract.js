@@ -25,6 +25,7 @@ const nicks = Symbol("nicks");
 const theme = Symbol("theme");
 const readingConfirmationEnabled = Symbol("readingConfirmationEnabled");
 const showResponseProgress = Symbol("showResponseProgress");
+const confidenceSliderEnabled = Symbol("confidenceSliderEnabled");
 
 export class AbstractSessionConfiguration {
 	constructor (options) {
@@ -56,6 +57,7 @@ export class AbstractSessionConfiguration {
 		this[theme] = options.theme || Meteor.settings.public.default.theme;
 		this[readingConfirmationEnabled] = typeof options.readingConfirmationEnabled === "undefined" ? Meteor.settings.public.default.sessionConfiguration.readingConfirmationEnabled : options.readingConfirmationEnabled;
 		this[showResponseProgress] = typeof options.showResponseProgress === "undefined" ? Meteor.settings.public.default.sessionConfiguration.showResponseProgress : options.showResponseProgress === true;
+		this[confidenceSliderEnabled] = typeof options.confidenceSliderEnabled === "undefined" ? Meteor.settings.public.default.sessionConfiguration.confidenceSliderEnabled : options.confidenceSliderEnabled === true;
 	}
 
 	serialize () {
@@ -65,7 +67,8 @@ export class AbstractSessionConfiguration {
 			nicks: this.getNickSettings().serialize(),
 			theme: this.getTheme(),
 			readingConfirmationEnabled: this.getReadingConfirmationEnabled(),
-			showResponseProgress: this.getShowResponseProgress()
+			showResponseProgress: this.getShowResponseProgress(),
+			confidenceSliderEnabled: this.getConfidenceSliderEnabled()
 		};
 	}
 
@@ -75,7 +78,8 @@ export class AbstractSessionConfiguration {
 				this.getNickSettings().equals(value.getNickSettings()) &&
 				this.getTheme() === value.getTheme() &&
 				this.getReadingConfirmationEnabled() === value.getReadingConfirmationEnabled() &&
-				this.getShowResponseProgress() === value.getShowResponseProgress();
+				this.getShowResponseProgress() === value.getShowResponseProgress() &&
+				this.getConfidenceSliderEnabled() === value.getConfidenceSliderEnabled();
 	}
 
 	/**
@@ -148,5 +152,16 @@ export class AbstractSessionConfiguration {
 			throw new Error("Invalid argument for AbstractSessionConfiguration.setShowResponseProgress");
 		}
 		this[showResponseProgress] = value;
+	}
+
+	getConfidenceSliderEnabled () {
+		return this[confidenceSliderEnabled];
+	}
+
+	setConfidenceSliderEnabled (value) {
+		if (typeof value !== "boolean") {
+			throw new Error("Invalid argument for AbstractSessionConfiguration.setConfidenceSliderEnabled");
+		}
+		this[confidenceSliderEnabled] = value;
 	}
 }

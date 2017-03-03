@@ -88,6 +88,7 @@ Template.memberlist.onRendered(function () {
 				footerElements.addFooterElement(footerElements.footerElemFullscreen);
 			}
 			footerElements.addFooterElement(footerElements.footerElemTheme);
+			footerElements.addFooterElement(footerElements.footerElemConfidenceSlider);
 		}
 		footerElements.footerTracker.changed();
 		memberlistTracker.changed();

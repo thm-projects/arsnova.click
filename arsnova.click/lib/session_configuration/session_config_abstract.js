@@ -154,7 +154,7 @@ export class AbstractSessionConfiguration {
 		this[showResponseProgress] = value;
 	}
 
-	getConfidenceSliderEnabled() {
+	getConfidenceSliderEnabled () {
 		return this[confidenceSliderEnabled];
 	}
 

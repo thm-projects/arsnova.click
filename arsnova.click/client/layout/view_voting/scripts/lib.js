@@ -22,6 +22,7 @@ import {Router} from 'meteor/iron:router';
 import {ReactiveCountdown} from 'meteor/flyandi:reactive-countdown';
 import {noUiSlider} from 'meteor/arsnova.click:nouislider';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {hslColPerc} from '/client/layout/view_live_results/scripts/lib.js';
 
 export let countdown = null;
@@ -31,6 +32,10 @@ export const votingViewTracker = new Tracker.Dependency();
 
 let sliderObject = null;
 export function createSlider() {
+	Session.set("confidenceValue", 100);
+	if (!SessionConfigurationCollection.findOne().confidenceSliderEnabled) {
+		return;
+	}
 	const plainSlider = document.getElementById('votingConfidenceSlider');
 	plainSlider.style.background = hslColPerc(100, 0, 100);
 	sliderObject = noUiSlider.create(plainSlider, {
@@ -42,7 +47,6 @@ export function createSlider() {
 			'max': 100
 		}
 	});
-	Session.set("confidenceValue", 100);
 	sliderObject.on('slide', function (val) {
 		const roundedValue = Math.round(val);
 		Session.set("confidenceValue", roundedValue);

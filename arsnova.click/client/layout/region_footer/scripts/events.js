@@ -324,6 +324,20 @@ const clickEvents = {
 			questionGroup.getHashtag(),
 			questionGroup.getConfiguration().getShowResponseProgress()
 		);
+	},
+	"click #confidence-slider": function () {
+		const questionGroup = Session.get("questionGroup");
+		if (questionGroup.getConfiguration().getConfidenceSliderEnabled()) {
+			questionGroup.getConfiguration().setConfidenceSliderEnabled(false);
+		} else {
+			questionGroup.getConfiguration().setConfidenceSliderEnabled(true);
+		}
+		Session.set("questionGroup", questionGroup);
+		localData.addHashtag(questionGroup);
+		Meteor.call("SessionConfiguration.setConfidenceSliderEnabled",
+			questionGroup.getHashtag(),
+			questionGroup.getConfiguration().getConfidenceSliderEnabled()
+		);
 	}
 };
 

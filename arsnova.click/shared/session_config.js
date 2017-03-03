@@ -147,5 +147,18 @@ Meteor.methods({
 				}
 			}
 		});
+	},
+	"SessionConfiguration.setConfidenceSliderEnabled": function (hashtag, confidenceSliderEnabled) {
+		SessionConfigurationCollection.update({hashtag: hashtag}, {$set: {"confidenceSliderEnabled": confidenceSliderEnabled}});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "SessionConfiguration.setConfidenceSliderEnabled",
+					value: {
+						confidenceSliderEnabled: confidenceSliderEnabled
+					}
+				}
+			}
+		});
 	}
 });

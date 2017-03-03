@@ -611,7 +611,7 @@
         "title": "Wie sicher bist du dir bei deiner Antwort?",
         "no_idea": "geraten",
         "not_sure": "sehr unsicher",
-        "unsure": unsicher",
+        "unsure": "unsicher",
         "quite_sure": "relaitiv sicher",
         "very_sure": "ganz sicher!"
       }

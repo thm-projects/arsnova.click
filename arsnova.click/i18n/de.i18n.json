@@ -46,7 +46,7 @@
         "edit_quiz": "Bearbeiten",
         "show_product_tour": "Tutorial",
         "show_response_progress": "Fortschritt",
-        "show_confidence_slider": "Gewissheitsgrad",
+        "show_confidence_slider": "Antwortsicherheit",
         "remove": "Entfernen",
         "description": {
           "qr-code": "Dein Publikum kann den QR-Code scannen, um mit einem Klick – ohne Eintippen von Webadresse und Quiznamen – die Lobby zu betreten.",
@@ -609,11 +609,11 @@
       },
       "confidence_level": {
         "title": "Wie sicher bist du dir bei deiner Antwort?",
-        "no_idea": "...?",
-        "not_sure": "Keine Ahnung!",
-        "unsure": "Unsicher",
-        "quite_sure": "Relativ sicher",
-        "very_sure": "Fest überzeugt!"
+        "no_idea": "geraten",
+        "not_sure": "sehr unsicher",
+        "unsure": unsicher",
+        "quite_sure": "relaitiv sicher",
+        "very_sure": "ganz sicher!"
       }
     }
   },

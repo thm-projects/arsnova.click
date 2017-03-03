@@ -20,6 +20,7 @@ import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {Router} from 'meteor/iron:router';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as lib from './lib.js';
 
@@ -83,7 +84,12 @@ Template.votingviewTitel.helpers({
 
 Template.votingViewFooterNavButtons.helpers({
 	showForwardButton: function () {
+		lib.toggledResponseTracker.changed();
 		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
+	},
+	isConfidenceSliderEnabled: function () {
+		const configDoc = SessionConfigurationCollection.findOne();
+		return !!(configDoc && configDoc.confidenceSliderEnabled);
 	},
 	getConfidenceTranslationReference: function () {
 		let confidenceLevel = Session.get("confidenceValue");

@@ -29,6 +29,7 @@ export let countdown = null;
 export let countdownRunning = false;
 
 export const votingViewTracker = new Tracker.Dependency();
+export const toggledResponseTracker = new Tracker.Dependency();
 
 let sliderObject = null;
 export function createSlider() {
@@ -169,7 +170,16 @@ $(window).on("resize orientationchange", function () {
 
 function calculateAnswerRowHeight() {
 	let contentHeight = ($("#markdownPreviewWrapper").height() - $("h2.text-center").outerHeight(true)) || $(".contentPosition").height();
-	return contentHeight - $('.voting-helper-buttons').height() - $('#votingConfidenceSlider').height() - parseInt($('.answer-row').css("margin-top"));
+	return contentHeight - $('.voting-helper-buttons').height() - $('#votingViewFooterNavButtons').height() - parseInt($('.answer-row').css("margin-top"));
+}
+
+function calculateButtons(answerOptionElements, contentWidth, contentHeight, width, height) {
+	let maxButtonsPerRow = Math.floor(contentWidth / width);
+	const maxRows = Math.floor((contentHeight - (Math.floor(contentHeight / height)) * 10) / height);
+	if (answerOptionElements % 2 === 0 && maxButtonsPerRow % 2 !== 0) {
+		maxButtonsPerRow--;
+	}
+	return {maxButtons: maxButtonsPerRow * maxRows, maxButtonsPerRow: maxButtonsPerRow, maxRows: maxRows};
 }
 
 export function formatAnswerButtons() {
@@ -191,23 +201,15 @@ export function formatAnswerButtons() {
 		scaleBaseHeight = 160;
 	}
 	const answerOptionElements = $('.sendResponse').length;
-	const calculateButtons = function (width, height) {
-		let maxButtonsPerRow = Math.floor(contentWidth / width);
-		const maxRows = Math.floor((contentHeight - (Math.floor(contentHeight / height)) * 10) / height);
-		if (answerOptionElements % 2 === 0 && maxButtonsPerRow % 2 !== 0) {
-			maxButtonsPerRow--;
-		}
-		return {maxButtons: maxButtonsPerRow * maxRows, maxButtonsPerRow: maxButtonsPerRow, maxRows: maxRows};
-	};
 	let calculateResult;
 	do {
-		calculateResult = calculateButtons(++scaleBaseWidth, ++scaleBaseHeight);
+		calculateResult = calculateButtons(answerOptionElements, contentWidth, contentHeight, ++scaleBaseWidth, ++scaleBaseHeight);
 	} while (calculateResult.maxButtons >= answerOptionElements);
-	calculateResult = calculateButtons(--scaleBaseWidth, --scaleBaseHeight);
-	let strechedWidth = ((contentWidth / calculateResult.maxButtonsPerRow) - 10);
+	calculateResult = calculateButtons(answerOptionElements, contentWidth, contentHeight, --scaleBaseWidth, --scaleBaseHeight);
+	let stretchedWidth = ((contentWidth / calculateResult.maxButtonsPerRow) - 10);
 	if (scaleBaseHeight * calculateResult.maxRows > contentHeight) {
-		strechedWidth -= 10;
+		stretchedWidth -= 10;
 	}
-	buttonElements.css({float: "left", margin: "5px", width: strechedWidth + "px", height: scaleBaseHeight});
-	buttonContainer.css({width: strechedWidth * calculateResult.maxButtonsPerRow + (calculateResult.maxButtonsPerRow * 10)});
+	buttonElements.css({float: "left", margin: "5px", width: stretchedWidth + "px", height: scaleBaseHeight});
+	buttonContainer.css({width: stretchedWidth * calculateResult.maxButtonsPerRow + (calculateResult.maxButtonsPerRow * 10)});
 }

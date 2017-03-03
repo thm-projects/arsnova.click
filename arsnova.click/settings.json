@@ -21,6 +21,7 @@
 			"sessionConfiguration": {
 				"readingConfirmationEnabled": false,
 				"showResponseProgress": false,
+				"confidenceSliderEnabled": true,
 				"music": {
 					"isUsingGlobalVolume": false,
 					"lobbyEnabled": false,

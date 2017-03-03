@@ -36,6 +36,9 @@ export const SessionConfigurationSchema = new SimpleSchema({
 	showResponseProgress: {
 		type: Boolean
 	},
+	confidenceSliderEnabled: {
+		type: Boolean
+	},
 	"music.isUsingGlobalVolume": {
 		type: Boolean
 	},

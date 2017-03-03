@@ -135,6 +135,25 @@ Template.liveResultsTitle.helpers({
 	}
 });
 
+Template.progressBarConfidenceRate.helpers({
+	getConfidenceRate: function (index) {
+		const responses = ResponsesCollection.find({questionIndex: index}).fetch();
+		let summarizedConfidence = 0;
+		responses.forEach(function (item) {
+			summarizedConfidence += item.confidenceValue;
+		});
+		const percent = summarizedConfidence ? summarizedConfidence / responses.length : 0;
+		return {
+			name: TAPi18n.__("region.footer.footer_bar.show_confidence_slider"),
+			absolute: responses.length,
+			percent: percent,
+			isCorrect: 0,
+			questionIndex: index,
+			backgroundStyle: lib.hslColPerc(percent, 0, 100)
+		};
+	}
+});
+
 Template.progressBarSingleChoiceQuestion.helpers({
 	answerList: function (index) {
 		const result = [];

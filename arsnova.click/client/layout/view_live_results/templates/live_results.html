@@ -55,6 +55,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {{> progressBarConfidenceRate displayIndex=displayIndex}}
                             {{#unless isReadingConfirmationEnabled displayIndex}}
                                 {{> Template.dynamic template=(getProgressbarTemplate displayIndex)}}
                             {{else}}

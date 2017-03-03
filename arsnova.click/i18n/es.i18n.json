@@ -46,7 +46,7 @@
         "edit_quiz": "Editar",
         "show_product_tour": "Tour del producto",
         "show_response_progress": "Progreso",
-        "show_confidence_slider": "Confidence-Slider",
+        "show_confidence_slider": "Grado de certidumbre",
         "remove": "Retirar",
         "description": {
           "qr-code": "Los asistentes pueden escanear el código QR a través de sus dispositivos móviles para unirse al concurso.",

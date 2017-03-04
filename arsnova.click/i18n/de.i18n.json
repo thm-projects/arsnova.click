@@ -735,5 +735,13 @@
         "false": "Falsch"
       }
     }
+  },
+  "export": {
+    "question": "Quizfrage",
+    "number_of_answers": "'- Anzahl der Antworten",
+    "percent_correct": "'- % korrekt",
+    "answer": "Antwort",
+    "attendee": "Teilnehmer",
+    "time": "Antwortzeit"
   }
 }

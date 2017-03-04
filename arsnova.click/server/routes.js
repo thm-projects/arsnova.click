@@ -48,15 +48,25 @@ Router.route("/server/preview/:themeName/:language", function () {
 	});
 }, {where: "server"});
 
-Router.route("/server/generateExcelFile/:hashtag/", function () {
-	const wb = new xlsx.Workbook();
+Router.route("/server/generateExcelFile/:hashtag/:translation/", function () {
+	const wb = new xlsx.Workbook({
+		jszip: {
+			compression: 'DEFLATE'
+		},
+		defaultFont: {
+			size: 12,
+			name: 'Calibri',
+			color: 'FF000000'
+		},
+		dateFormat: 'd.m.yyyy'
+	});
 	const questionGroup = QuestionGroupCollection.findOne({hashtag: this.params.hashtag});
 	for (let i = 0; i < questionGroup.questionList.length; i++) {
 		switch (questionGroup.questionList[i].type) {
 			case "SingleChoiceQuestion":
 			case "YesNoSingleChoiceQuestion":
 			case "TrueFalseSingleChoiceQuestion":
-				SingleChoiceExcelSheet.generateSheet(wb, this.params.hashtag, i);
+				SingleChoiceExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation}, i);
 				break;
 
 		}

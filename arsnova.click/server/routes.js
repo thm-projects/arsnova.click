@@ -24,6 +24,7 @@ import {QuestionGroupCollection, questionGroupSchema} from '/lib/questions/colle
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as SingleChoiceExcelSheet from '/server/export_templates/excel_singlechoice_template.js';
+import * as MultipleChoiceExcelSheet from '/server/export_templates/excel_multiplechoice_template.js';
 import fs from 'fs';
 import process from 'process';
 import xlsx from 'excel4node';
@@ -68,7 +69,8 @@ Router.route("/server/generateExcelFile/:hashtag/:translation/", function () {
 			case "TrueFalseSingleChoiceQuestion":
 				SingleChoiceExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation}, i);
 				break;
-
+			case "MultipleChoiceQuestion":
+				MultipleChoiceExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation}, i);
 		}
 	}
 	const date = new Date();

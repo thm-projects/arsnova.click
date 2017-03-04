@@ -26,7 +26,11 @@ export function generateSheet(wb, options, index) {
 			fgColor: "FF000000"
 		}
 	});
-	ws.cell(1, 1).string(TAPi18n.__('export.question_type', {lng: translation}) + ': ' + TAPi18n.__(questionGroupObject.getQuestionList()[index].translationReferrer(), {lng: translation}));
+	ws.cell(1, 1).style({
+		alignment: {
+			vertical: "center"
+		}
+	}).string(TAPi18n.__('export.question_type', {lng: translation}) + ': ' + TAPi18n.__(questionGroupObject.getQuestionList()[index].translationReferrer(), {lng: translation}));
 	ws.cell(2, 1, 2, (answerList.length + 1)).style({
 		font: {
 			color: "FFFFFFFF"
@@ -64,11 +68,21 @@ export function generateSheet(wb, options, index) {
 		(allResponses.map((x)=> {return leaderboardLib.isCorrectResponse(x, questionGroup.questionList[index], index);}).length / allResponses.fetch().length * 100) + " %"
 	);
 
-	ws.cell(4, 1).string(questionGroup.questionList[index].questionText);
+	ws.column(1).setWidth(30);
+	ws.cell(4, 1).style({
+		alignment: {
+			wrapText: true
+		}
+	}).string(questionGroup.questionList[index].questionText);
 	for (let j = 0; j < answerList.length; j++) {
 		ws.cell(2, (j + 2)).string(TAPi18n.__("export.answer", {lng: translation}) + " " + (j + 1));
 		const isAnswerCorrect = AnswerOptionCollection.findOne({hashtag: hashtag, questionIndex: index, answerText: answerList[j].answerText}).isCorrect;
+		ws.column((j + 2)).setWidth(20);
 		ws.cell(4, (j + 2)).style({
+			alignment: {
+				wrapText: true,
+				vertical: "center"
+			},
 			font: {
 				color: "FFFFFFFF"
 			},
@@ -78,7 +92,11 @@ export function generateSheet(wb, options, index) {
 				fgColor: isAnswerCorrect ? "FF008000" : "FFB22222"
 			}
 		}).string(answerList[j].answerText);
-		ws.cell(6, (j + 2)).number(calculateNumberOfAnswers(hashtag, index, j));
+		ws.cell(6, (j + 2)).style({
+			alignment: {
+				horizontal: "center"
+			}
+		}).number(calculateNumberOfAnswers(hashtag, index, j));
 	}
 
 	ws.cell(9, 1).string(TAPi18n.__("export.attendee", {lng: translation}));
@@ -106,7 +124,7 @@ export function generateSheet(wb, options, index) {
 				hashtag: hashtag,
 				questionIndex: index,
 				answerOptionNumber: {
-					$in: allResponses.answerOptionNumber
+					$in: ResponsesCollection.findOne({hashtag: hashtag, questionIndex: index, userNick: leaderboardData[j][k].nick}).answerOptionNumber
 				}
 			}).map((x) => {
 				return x.answerText;

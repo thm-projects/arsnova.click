@@ -68,26 +68,27 @@ function checkIsCorrectRangedQuestion(response, questionIndex) {
 }
 
 function checkIsCorrectFreeTextQuestion(response, questionIndex) {
-	const answerOption = AnswerOptionCollection.findOne({questionIndex: questionIndex}) || Session.get("questionGroup").getQuestionList()[questionIndex].getAnswerOptionList()[0].serialize();
+	const answerOption = AnswerOptionCollection.findOne({hashtag: hashtag, questionIndex: questionIndex}) || Session.get("questionGroup").getQuestionList()[questionIndex].getAnswerOptionList()[0].serialize();
 	let	userHasRightAnswers = false;
+	const clonedResponse = JSON.parse(JSON.stringify(response));
 	if (!answerOption.configCaseSensitive) {
 		answerOption.answerText = answerOption.answerText.toLowerCase();
-		response.freeTextInputValue = response.freeTextInputValue.toLowerCase();
+		clonedResponse.freeTextInputValue = clonedResponse.freeTextInputValue.toLowerCase();
 	}
 	if (!answerOption.configUsePunctuation) {
 		answerOption.answerText = answerOption.answerText.replace(/(\.)*(,)*(!)*(")*(;)*(\?)*/g, "");
-		response.freeTextInputValue = response.freeTextInputValue.replace(/(\.)*(,)*(!)*(")*(;)*(\?)*/g, "");
+		clonedResponse.freeTextInputValue = clonedResponse.freeTextInputValue.replace(/(\.)*(,)*(!)*(")*(;)*(\?)*/g, "");
 	}
 	if (answerOption.configUseKeywords) {
 		if (!answerOption.configTrimWhitespaces) {
 			answerOption.answerText = answerOption.answerText.replace(/ /g, "");
-			response.freeTextInputValue = response.freeTextInputValue.replace(/ /g, "");
+			clonedResponse.freeTextInputValue = clonedResponse.freeTextInputValue.replace(/ /g, "");
 		}
-		userHasRightAnswers = answerOption.answerText === response.freeTextInputValue;
+		userHasRightAnswers = answerOption.answerText === clonedResponse.freeTextInputValue;
 	} else {
 		let hasCorrectKeywords = true;
 		answerOption.answerText.split(" ").forEach(function (keyword) {
-			if (response.freeTextInputValue.indexOf(keyword) === -1) {
+			if (clonedResponse.freeTextInputValue.indexOf(keyword) === -1) {
 				hasCorrectKeywords = false;
 			}
 		});

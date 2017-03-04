@@ -120,6 +120,9 @@ export function generateSheet(wb, options, index) {
 	}
 
 	ws.column(1).setWidth(30);
+	ws.column(2).setWidth(20);
+	ws.column(3).setWidth(20);
+	ws.column(4).setWidth(20);
 	ws.cell(4, 1).style({
 		alignment: {
 			wrapText: true,

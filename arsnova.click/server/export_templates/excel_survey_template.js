@@ -43,7 +43,7 @@ export function generateSheet(wb, options, index) {
 			fgColor: "FF616161"
 		}
 	});
-	ws.cell(6, 1, 8, columnsToFormat).style({
+	ws.cell(6, 1, 7, columnsToFormat).style({
 		font: {
 			color: "FF000000"
 		},
@@ -53,7 +53,7 @@ export function generateSheet(wb, options, index) {
 			fgColor: "FFC5C5C5"
 		}
 	});
-	ws.cell(10, 1, 10, columnsToFormat).style({
+	ws.cell(9, 1, 9, columnsToFormat).style({
 		font: {
 			color: "FFFFFFFF"
 		},
@@ -72,29 +72,8 @@ export function generateSheet(wb, options, index) {
 			}
 		}
 	}).string(TAPi18n.__("export.number_of_answers", {lng: translation}) + ":");
-	ws.cell(7, 1).style({
-		border: {
-			bottom: {
-				style: "thin",
-				color: "black"
-			}
-		}
-	}).string(TAPi18n.__("export.percent_correct", {lng: translation}) + ":");
-	ws.cell(7, 2).style({
-		alignment: {
-			horizontal: "center"
-		},
-		border: {
-			bottom: {
-				style: "thin",
-				color: "black"
-			}
-		}
-	}).string(
-		(allResponses.map((x)=> {return leaderboardLib.isCorrectResponse(x, questionGroup.questionList[index], index);}).length / allResponses.fetch().length * 100) + " %"
-	);
 	if (responsesWithConfidenceValue.length > 0) {
-		ws.cell(8, 1).style({
+		ws.cell(7, 1).style({
 			border: {
 				bottom: {
 					style: "thin",
@@ -106,7 +85,7 @@ export function generateSheet(wb, options, index) {
 		allResponses.forEach(function (item) {
 			confidenceSummary += item.confidenceValue;
 		});
-		ws.cell(8, 2).style({
+		ws.cell(7, 2).style({
 			alignment: {
 				horizontal: "center"
 			},
@@ -131,7 +110,6 @@ export function generateSheet(wb, options, index) {
 	}).string(questionGroup.questionList[index].questionText);
 	for (let j = 0; j < answerList.length; j++) {
 		ws.cell(2, (j + 2)).string(TAPi18n.__("export.answer", {lng: translation}) + " " + (j + 1));
-		const isAnswerCorrect = AnswerOptionCollection.findOne({hashtag: hashtag, questionIndex: index, answerText: answerList[j].answerText}).isCorrect;
 		ws.column((j + 2)).setWidth(20);
 		ws.cell(4, (j + 2)).style({
 			alignment: {
@@ -139,18 +117,7 @@ export function generateSheet(wb, options, index) {
 				vertical: "center"
 			},
 			font: {
-				color: "FFFFFFFF"
-			},
-			border: {
-				right: {
-					style: (j + 2 <= answerList.length) ? "thin" : "none",
-					color: "black"
-				}
-			},
-			fill: {
-				type: "pattern",
-				patternType: "solid",
-				fgColor: isAnswerCorrect ? "FF008000" : "FFB22222"
+				color: "FF000000"
 			}
 		}).string(answerList[j].answerText);
 		ws.cell(6, (j + 2)).style({
@@ -167,17 +134,17 @@ export function generateSheet(wb, options, index) {
 	}
 
 	let nextColumnIndex = 1;
-	ws.cell(10, nextColumnIndex++).string(TAPi18n.__("export.attendee", {lng: translation}));
-	ws.cell(10, nextColumnIndex++).string(TAPi18n.__("export.answer", {lng: translation}));
+	ws.cell(9, nextColumnIndex++).string(TAPi18n.__("export.attendee", {lng: translation}));
+	ws.cell(9, nextColumnIndex++).string(TAPi18n.__("export.answer", {lng: translation}));
 	if (responsesWithConfidenceValue.length > 0) {
-		ws.cell(10, nextColumnIndex++).string(TAPi18n.__("export.confidence_level", {lng: translation}));
+		ws.cell(9, nextColumnIndex++).string(TAPi18n.__("export.confidence_level", {lng: translation}));
 	}
-	ws.cell(10, nextColumnIndex++).string(TAPi18n.__("export.time", {lng: translation}));
+	ws.cell(9, nextColumnIndex++).string(TAPi18n.__("export.time", {lng: translation}));
 
 	leaderboardLib.init(hashtag);
 	allResponses.forEach(function (responseItem, indexInList) {
 		let nextColumnIndex = 1;
-		ws.cell(((indexInList) + 12), 1, ((indexInList) + 12), columnsToFormat).style({
+		ws.cell(((indexInList) + 11), 1, ((indexInList) + 11), columnsToFormat).style({
 			font: {
 				color: "FF000000"
 			},
@@ -187,7 +154,7 @@ export function generateSheet(wb, options, index) {
 				fgColor: "FFC5C5C5"
 			}
 		});
-		ws.cell(((indexInList) + 12), nextColumnIndex++).string(responseItem.userNick);
+		ws.cell(((indexInList) + 11), nextColumnIndex++).string(responseItem.userNick);
 		const chosenAnswer = AnswerOptionCollection.find({
 			hashtag: hashtag,
 			questionIndex: index,
@@ -197,24 +164,19 @@ export function generateSheet(wb, options, index) {
 		}).map((x) => {
 			return x.answerText;
 		});
-		const chosenAnswerString = [];
-		chosenAnswer.forEach(function (chosenAnswerItem) {
-			const isAnswerCorrect = AnswerOptionCollection.findOne({hashtag: hashtag, questionIndex: index, answerText: chosenAnswerItem}).isCorrect;
-			chosenAnswerString.push({color: isAnswerCorrect ? "FF008000" : "FFB22222"});
-			chosenAnswerString.push(chosenAnswerItem);
-			chosenAnswerString.push({color: "FF000000"});
-			chosenAnswerString.push(", ");
-		});
-		chosenAnswerString.pop();
-		ws.cell(((indexInList) + 12), nextColumnIndex++).string(chosenAnswerString);
+		ws.cell(((indexInList) + 11), nextColumnIndex++).style({
+			font: {
+				color: "FF000000"
+			}
+		}).string(chosenAnswer.join(", "));
 		if (responsesWithConfidenceValue.length > 0) {
-			ws.cell(((indexInList) + 12), nextColumnIndex++).style({
+			ws.cell(((indexInList) + 11), nextColumnIndex++).style({
 				alignment: {
 					horizontal: "center"
 				}
 			}).string(responseItem.confidenceValue + "%");
 		}
-		ws.cell(((indexInList) + 12), nextColumnIndex++).style({
+		ws.cell(((indexInList) + 11), nextColumnIndex++).style({
 			alignment: {
 				horizontal: "center"
 			}

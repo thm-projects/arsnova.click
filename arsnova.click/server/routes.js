@@ -26,6 +26,7 @@ import {SessionConfigurationCollection} from '/lib/session_configuration/collect
 import * as SingleChoiceExcelSheet from '/server/export_templates/excel_singlechoice_template.js';
 import * as MultipleChoiceExcelSheet from '/server/export_templates/excel_multiplechoice_template.js';
 import * as RangedExcelSheet from '/server/export_templates/excel_ranged_template.js';
+import * as SurveyExcelSheet from '/server/export_templates/excel_survey_template.js';
 import fs from 'fs';
 import process from 'process';
 import xlsx from 'excel4node';
@@ -77,6 +78,7 @@ Router.route("/server/generateExcelFile/:hashtag/:translation/", function () {
 				RangedExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation}, i);
 				break;
 			case "SurveyQuestion":
+				SurveyExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation}, i);
 				break;
 			case "FreeTextQuestion":
 				break;

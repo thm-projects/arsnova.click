@@ -172,55 +172,50 @@ export function generateSheet(wb, options, index) {
 	ws.cell(10, nextColumnIndex++).string(TAPi18n.__("export.time", {lng: translation}));
 
 	leaderboardLib.init(hashtag);
-	const leaderboardData = _.sortBy(leaderboardLib.objectToArray(leaderboardLib.getLeaderboardItemsByIndex(index)), function (o) {
-		return o.responseTime;
-	});
-	for (let j = 0; j < leaderboardData.length; j++) {
-		for (let k = 0; k < leaderboardData[j].length; k++) {
-			let nextColumnIndex = 1;
-			ws.cell(((j * k) + 12), 1, ((j * k) + 12), columnsToFormat).style({
-				font: {
-					color: "FF000000"
-				},
-				fill: {
-					type: "pattern",
-					patternType: "solid",
-					fgColor: "FFC5C5C5"
-				}
-			});
-			ws.cell(((j * k) + 12), nextColumnIndex++).string(leaderboardData[j][k].nick);
-			const chosenAnswer = AnswerOptionCollection.find({
-				hashtag: hashtag,
-				questionIndex: index,
-				answerOptionNumber: {
-					$in: ResponsesCollection.findOne({hashtag: hashtag, questionIndex: index, userNick: leaderboardData[j][k].nick}).answerOptionNumber
-				}
-			}).map((x) => {
-				return x.answerText;
-			});
-			const isAnswerCorrect = AnswerOptionCollection.findOne({hashtag: hashtag, questionIndex: index, answerText: chosenAnswer[0]}).isCorrect;
-			ws.cell(((j * k) + 12), nextColumnIndex++).style({
-				font: {
-					color: "FFFFFFFF"
-				},
-				fill: {
-					type: "pattern",
-					patternType: "solid",
-					fgColor: isAnswerCorrect ? "FF008000" : "FFB22222"
-				}
-			}).string(chosenAnswer);
-			if (responsesWithConfidenceValue.length > 0) {
-				ws.cell(((j * k) + 12), nextColumnIndex++).style({
-					alignment: {
-						horizontal: "center"
-					}
-				}).string(ResponsesCollection.findOne({hashtag: hashtag, questionIndex: index, userNick: leaderboardData[j][k].nick}).confidenceValue + "%");
+	allResponses.forEach(function (responseItem, indexInList) {
+		let nextColumnIndex = 1;
+		ws.cell(((indexInList) + 12), 1, ((indexInList) + 12), columnsToFormat).style({
+			font: {
+				color: "FF000000"
+			},
+			fill: {
+				type: "pattern",
+				patternType: "solid",
+				fgColor: "FFC5C5C5"
 			}
-			ws.cell(((j * k) + 12), nextColumnIndex++).style({
+		});
+		ws.cell(((indexInList) + 12), nextColumnIndex++).string(responseItem.userNick);
+		const chosenAnswer = AnswerOptionCollection.find({
+			hashtag: hashtag,
+			questionIndex: index,
+			answerOptionNumber: {
+				$in: responseItem.answerOptionNumber
+			}
+		}).map((x) => {
+			return x.answerText;
+		});
+		const isAnswerCorrect = AnswerOptionCollection.findOne({hashtag: hashtag, questionIndex: index, answerText: chosenAnswer[0]}).isCorrect;
+		ws.cell(((indexInList) + 12), nextColumnIndex++).style({
+			font: {
+				color: "FFFFFFFF"
+			},
+			fill: {
+				type: "pattern",
+				patternType: "solid",
+				fgColor: isAnswerCorrect ? "FF008000" : "FFB22222"
+			}
+		}).string(chosenAnswer);
+		if (responsesWithConfidenceValue.length > 0) {
+			ws.cell(((indexInList) + 12), nextColumnIndex++).style({
 				alignment: {
 					horizontal: "center"
 				}
-			}).number(leaderboardData[j][k].responseTime);
+			}).string(responseItem.confidenceValue + "%");
 		}
-	}
+		ws.cell(((indexInList) + 12), nextColumnIndex++).style({
+			alignment: {
+				horizontal: "center"
+			}
+		}).number(responseItem.responseTime);
+	});
 }

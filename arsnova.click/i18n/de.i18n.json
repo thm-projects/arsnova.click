@@ -738,8 +738,9 @@
   },
   "export": {
     "question": "Quizfrage",
-    "number_of_answers": "'- Anzahl der Antworten",
-    "percent_correct": "'- % korrekt",
+    "question_type": "Typ der Quizfrage",
+    "number_of_answers": "Anzahl der Antworten",
+    "percent_correct": "Korrekte Antworten",
     "answer": "Antwort",
     "attendee": "Teilnehmer",
     "time": "Antwortzeit"

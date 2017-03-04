@@ -5,21 +5,28 @@ import {ResponsesCollection} from '/lib/responses/collection.js';
 import * as leaderboardLib from '/lib/leaderboard.js';
 import {excelDefaultWorksheetOptions} from './excel_default_options.js';
 import {calculateNumberOfAnswers} from './excel_function_library.js';
+import {DefaultQuestionGroup} from '/lib/questions/questiongroup_default.js';
 
 export function generateSheet(wb, options, index) {
 	const hashtag = options.hashtag;
 	const translation = options.translation;
 	const questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
+	const questionGroupObject = new DefaultQuestionGroup(JSON.parse(JSON.stringify(questionGroup)));
 	const ws = wb.addWorksheet(TAPi18n.__('export.question', {lng: translation}) + ' ' + (index + 1), excelDefaultWorksheetOptions);
 	const answerList = questionGroup.questionList[index].answerOptionList;
+	const allResponses = ResponsesCollection.find({hashtag: hashtag, questionIndex: index});
 	ws.row(1).setHeight(20);
 	ws.cell(1, 1, 1, (answerList.length + 1)).style({
+		font: {
+			color: "FFFFFFFF"
+		},
 		fill: {
 			type: "pattern",
 			patternType: "solid",
 			fgColor: "FF000000"
 		}
 	});
+	ws.cell(1, 1).string(TAPi18n.__('export.question_type', {lng: translation}) + ': ' + TAPi18n.__(questionGroupObject.getQuestionList()[index].translationReferrer(), {lng: translation}));
 	ws.cell(2, 1, 2, (answerList.length + 1)).style({
 		font: {
 			color: "FFFFFFFF"
@@ -51,10 +58,10 @@ export function generateSheet(wb, options, index) {
 		}
 	});
 	ws.cell(2, 1).string(TAPi18n.__("export.question", {lng: translation}));
-	ws.cell(6, 1).string(TAPi18n.__("export.number_of_answers", {lng: translation}));
-	ws.cell(7, 1).string(TAPi18n.__("export.percent_correct", {lng: translation}));
+	ws.cell(6, 1).string(TAPi18n.__("export.number_of_answers", {lng: translation}) + ":");
+	ws.cell(7, 1).string(TAPi18n.__("export.percent_correct", {lng: translation}) + ":");
 	ws.cell(7, 2).string(
-
+		(allResponses.map((x)=> {return leaderboardLib.isCorrectResponse(x, questionGroup.questionList[index], index);}).length / allResponses.fetch().length * 100) + " %"
 	);
 
 	ws.cell(4, 1).string(questionGroup.questionList[index].questionText);
@@ -99,9 +106,7 @@ export function generateSheet(wb, options, index) {
 				hashtag: hashtag,
 				questionIndex: index,
 				answerOptionNumber: {
-					$in: ResponsesCollection.findOne({
-						hashtag: hashtag, questionIndex: index
-					}).answerOptionNumber
+					$in: allResponses.answerOptionNumber
 				}
 			}).map((x) => {
 				return x.answerText;

@@ -25,6 +25,7 @@ import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as SingleChoiceExcelSheet from '/server/export_templates/excel_singlechoice_template.js';
 import * as MultipleChoiceExcelSheet from '/server/export_templates/excel_multiplechoice_template.js';
+import * as RangedExcelSheet from '/server/export_templates/excel_ranged_template.js';
 import fs from 'fs';
 import process from 'process';
 import xlsx from 'excel4node';
@@ -71,6 +72,14 @@ Router.route("/server/generateExcelFile/:hashtag/:translation/", function () {
 				break;
 			case "MultipleChoiceQuestion":
 				MultipleChoiceExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation}, i);
+				break;
+			case "RangedQuestion":
+				RangedExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation}, i);
+				break;
+			case "SurveyQuestion":
+				break;
+			case "FreeTextQuestion":
+				break;
 		}
 	}
 	const date = new Date();

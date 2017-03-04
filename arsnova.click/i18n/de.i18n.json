@@ -745,6 +745,9 @@
     "attendee": "Teilnehmer",
     "time": "Antwortzeit (in ms)",
 	  "confidence_level": "Gewissheitsgrad",
-    "percent_confidence": "Durchschnittlicher Gewissheitsgrad"
+    "percent_confidence": "Durchschnittlicher Gewissheitsgrad",
+    "correct_value": "Richtiger Wert",
+    "min_range": "Mindestwert",
+    "max_range": "Maximalwert"
   }
 }

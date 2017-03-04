@@ -743,6 +743,8 @@
     "percent_correct": "Korrekte Antworten",
     "answer": "Antwort",
     "attendee": "Teilnehmer",
-    "time": "Antwortzeit"
+    "time": "Antwortzeit (in ms)",
+	  "confidence_level": "Gewissheitsgrad",
+    "percent_confidence": "Durchschnittlicher Gewissheitsgrad"
   }
 }

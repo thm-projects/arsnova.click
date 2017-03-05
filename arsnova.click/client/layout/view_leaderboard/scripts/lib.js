@@ -80,8 +80,8 @@ function generateCSVExportData() {
 		if (typeof response.profile !== "undefined") {
 			response.profile = $.parseJSON(response.profile);
 			hasIdentifiedUsers = true;
-			item.id      = response.profile.id;
-			item.mail    = response.profile.mail instanceof Array ? response.profile.mail.join(", ") : response.profile.mail;
+			item.id = response.profile.id;
+			item.mail = response.profile.mail instanceof Array ? response.profile.mail.join(", ") : response.profile.mail;
 			csvString += item.nick + ";" + item.responseTime + ";" + item.correctQuestions.join(", ") + ";" + item.id + ";" + item.mail + "\n";
 		} else {
 			csvString += item.nick + ";" + item.responseTime + ";" + item.correctQuestions.join(", ") + "\n";

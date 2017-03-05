@@ -247,7 +247,7 @@ export function generateSheet(wb, options, index) {
 				horizontal: "center"
 			},
 			font: {
-				color: responseItem.rangedInputValue >= questionGroup.questionList[index].rangeMin || responseItem.rangedInputValue <= questionGroup.questionList[index].rangeMax ? "FF000000" : "FFFFFFFF"
+				color: responseItem.rangedInputValue === questionGroup.questionList[index].correctValue ? "FFFFFFFF" : responseItem.rangedInputValue >= questionGroup.questionList[index].rangeMin || responseItem.rangedInputValue <= questionGroup.questionList[index].rangeMax ? "FF000000" : "FFFFFFFF"
 			},
 			fill: {
 				type: "pattern",

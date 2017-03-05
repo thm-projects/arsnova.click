@@ -18,7 +18,7 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
-import * as leaderboardLib from "/client/layout/view_leaderboard/scripts/lib.js";
+import * as leaderboardLib from "/lib/leaderboard.js";
 import * as lib from './lib.js';
 
 Template.createAnswerOptions.helpers({
@@ -125,6 +125,7 @@ Template.freeTextAnswerOptionTemplate.helpers({
 		if (!inputValue) {
 			return;
 		}
+		leaderboardLib.init(Router.current().params.quizName);
 		return leaderboardLib.isCorrectResponse({freeTextInputValue: inputValue}, {type: "FreeTextQuestion"}, Router.current().params.questionIndex);
 	}
 });

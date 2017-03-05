@@ -50,7 +50,7 @@ export class YesNoSingleChoiceQuestion extends SingleChoiceQuestion {
 	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
 	 */
 	serialize () {
-		return $.extend(super.serialize(), {type: "YesNoSingleChoiceQuestion"});
+		return Object.assign(super.serialize(), {type: "YesNoSingleChoiceQuestion"});
 	}
 
 	/**

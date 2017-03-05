@@ -23,6 +23,7 @@ import {HashtagsCollection, hashtagSchema} from '/lib/hashtags/collection.js';
 import {QuestionGroupCollection, questionGroupSchema} from '/lib/questions/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
+import * as SummaryExcelSheet from '/server/export_templates/excel_summary_template.js';
 import * as SingleChoiceExcelSheet from '/server/export_templates/excel_singlechoice_template.js';
 import * as MultipleChoiceExcelSheet from '/server/export_templates/excel_multiplechoice_template.js';
 import * as RangedExcelSheet from '/server/export_templates/excel_ranged_template.js';
@@ -64,6 +65,7 @@ Router.route("/server/generateExcelFile/:hashtag/:translation/", function () {
 		},
 		dateFormat: 'd.m.yyyy'
 	});
+	SummaryExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation});
 	const questionGroup = QuestionGroupCollection.findOne({hashtag: this.params.hashtag});
 	for (let i = 0; i < questionGroup.questionList.length; i++) {
 		switch (questionGroup.questionList[i].type) {

@@ -24,7 +24,7 @@ Template.leaderBoard.onCreated(function () {
 	leaderboardLib.init(Router.current().params.quizName);
 	if (Router.current().params.id === "all") {
 		Session.set("nicks", _.sortBy(leaderboardLib.objectToArray(leaderboardLib.getAllLeaderboardItems()), function (o) { return o.responseTime; }));
-		Session.set("exportItems", _.sortBy(leaderboardLib.objectToArray(leaderboardLib.getAllLeaderboardItems(true)), function (o) { return o.responseTime; }));
+		Session.set("exportItems", _.sortBy(leaderboardLib.objectToArray(leaderboardLib.getAllLeaderboardItems(true)), function (o) { return o.responseTime; })[0]);
 		Session.set("allMembersCount", Session.get("nicks").length);
 	} else {
 		Session.set("nicks", _.sortBy(leaderboardLib.objectToArray(leaderboardLib.getLeaderboardItemsByIndex(parseInt(Router.current().params.id))), function (o) { return o.responseTime; }));

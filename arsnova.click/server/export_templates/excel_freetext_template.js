@@ -117,11 +117,43 @@ export function generateSheet(wb, options, index) {
 			}
 		}).string((confidenceSummary / responsesWithConfidenceValue.length) + " %");
 	}
+	ws.cell(6, 3).style({
+		border: {
+			bottom: {
+				style: "thin",
+				color: "black"
+			}
+		}
+	}).string(TAPi18n.__("view.answeroptions.free_text_question.config_case_sensitive", {lng: translation}) + ": " + TAPi18n.__("global." + (answerList[0].configCaseSensitive ? "yes" : "no"), {lng: translation}));
+	ws.cell(6, 4).style({
+		border: {
+			bottom: {
+				style: "thin",
+				color: "black"
+			}
+		}
+	}).string(TAPi18n.__("view.answeroptions.free_text_question.config_trim_whitespaces", {lng: translation}) + ": " + TAPi18n.__("global." + (answerList[0].configTrimWhitespaces ? "yes" : "no"), {lng: translation}));
+	ws.cell(7, 3).style({
+		border: {
+			bottom: {
+				style: "thin",
+				color: "black"
+			}
+		}
+	}).string(TAPi18n.__("view.answeroptions.free_text_question.config_use_keywords", {lng: translation}) + ": " + TAPi18n.__("global." + (answerList[0].configUseKeywords ? "yes" : "no"), {lng: translation}));
+	ws.cell(7, 4).style({
+		border: {
+			bottom: {
+				style: "thin",
+				color: "black"
+			}
+		}
+	}).string(TAPi18n.__("view.answeroptions.free_text_question.config_use_punctuation", {lng: translation}) + ": " + TAPi18n.__("global." + (answerList[0].configUsePunctuation ? "yes" : "no"), {lng: translation}));
 
 	ws.column(1).setWidth(30);
-	ws.column(2).setWidth(20);
-	ws.column(3).setWidth(20);
-	ws.column(4).setWidth(20);
+	ws.column(2).setWidth(30);
+	ws.column(3).setWidth(35);
+	ws.column(4).setWidth(35);
 	ws.cell(4, 1).style({
 		alignment: {
 			wrapText: true,

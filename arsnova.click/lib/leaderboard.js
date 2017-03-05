@@ -119,7 +119,7 @@ export function isCorrectResponse(response, question, questionIndex) {
 export function objectToArray(obj) {
 	const keyList = Object.keys(obj);
 	return keyList.map(function (value, index) {
-		return [{nick: keyList[index], responseTime: obj[value].responseTime, correctQuestions: obj[value].correctQuestions}];
+		return [{nick: keyList[index], responseTime: obj[value].responseTime, confidenceValue: obj[value].confidenceValue, correctQuestions: obj[value].correctQuestions}];
 	});
 }
 
@@ -138,10 +138,14 @@ export function getLeaderboardItemsByIndex(questionIndex) {
 				if (typeof result[item.userNick] === "undefined") {
 					result[item.userNick] = {
 						responseTime: 0,
+						confidenceValue: 0,
 						correctQuestions: [questionIndex + 1]
 					};
 				}
 				result[item.userNick].responseTime += item.responseTime;
+				if (item.confidenceValue > -1) {
+					result[item.userNick].confidenceValue += item.confidenceValue;
+				}
 			}
 		});
 	}
@@ -157,12 +161,19 @@ export function getAllLeaderboardItems(keepAllNicks = false) {
 				if (typeof allItems[o] === "undefined") {
 					allItems[o] = {
 						responseTime: 0,
+						confidenceValue: 0,
 						correctQuestions: []
 					};
 				}
 				allItems[o].responseTime += tmpItems[o].responseTime;
+				allItems[o].confidenceValue += tmpItems[o].confidenceValue;
 				allItems[o].correctQuestions.push(i + 1);
 			}
+		}
+	}
+	for (const key in allItems) {
+		if (allItems.hasOwnProperty(key)) {
+			allItems[key].confidenceValue = allItems[key].confidenceValue / EventManagerCollection.findOne().questionIndex;
 		}
 	}
 	if (!keepAllNicks) {

@@ -20,10 +20,12 @@ import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
+import * as leaderboardLib from '/lib/leaderboard.js';
 import * as localData from "/lib/local_storage.js";
 
 Template.liveResults.onCreated(function () {
 	if (!Session.get("questionGroup") && localData.containsHashtag(Router.current().params.quizName)) {
 		Session.set("questionGroup", new DefaultQuestionGroup(QuestionGroupCollection.findOne({hashtag: Router.current().params.quizName})));
 	}
+	leaderboardLib.init(Router.current().params.quizName);
 });

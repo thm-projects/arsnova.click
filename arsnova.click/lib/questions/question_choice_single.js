@@ -29,7 +29,7 @@ export class SingleChoiceQuestion extends AbstractChoiceQuestion {
 	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
 	 */
 	serialize () {
-		return $.extend(super.serialize(), {type: "SingleChoiceQuestion"});
+		return Object.assign(super.serialize(), {type: "SingleChoiceQuestion"});
 	}
 
 	/**

@@ -327,7 +327,7 @@
       "show_more": "Zeige 1 weiteren",
       "show_more_plural": "Zeige %s weitere",
       "show_less": "Zeige weniger",
-      "export": "Export (.csv)"
+      "export": "Export"
     },
     "liveResults": {
       "title": "Ergebnisse",

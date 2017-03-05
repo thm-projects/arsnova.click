@@ -1,7 +1,6 @@
 
 import {Session} from 'meteor/session';
 import {Router} from 'meteor/iron:router';
-import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';

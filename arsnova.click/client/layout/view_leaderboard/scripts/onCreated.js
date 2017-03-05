@@ -27,7 +27,7 @@ Template.leaderBoard.onCreated(function () {
 		Session.set("exportItems", _.sortBy(leaderboardLib.objectToArray(leaderboardLib.getAllLeaderboardItems(true)), function (o) { return o.responseTime; })[0]);
 		Session.set("allMembersCount", Session.get("nicks").length);
 	} else {
-		Session.set("nicks", _.sortBy(leaderboardLib.objectToArray(leaderboardLib.getLeaderboardItemsByIndex(parseInt(Router.current().params.id))), function (o) { return o.responseTime; }));
+		Session.set("nicks", _.sortBy(leaderboardLib.objectToArray(leaderboardLib.getLeaderboardItemsByIndex(parseInt(Router.current().params.id))), function (o) { return o.responseTime; })[0]);
 		Session.set("exportItems", Session.get("nicks"));
 		Session.set("allMembersCount", Session.get("nicks").length);
 	}

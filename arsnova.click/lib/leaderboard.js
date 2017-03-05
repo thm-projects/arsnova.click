@@ -119,7 +119,7 @@ export function isCorrectResponse(response, question, questionIndex) {
 export function objectToArray(obj) {
 	const keyList = Object.keys(obj);
 	return keyList.map(function (value, index) {
-		return [{nick: keyList[index], responseTime: obj[value].responseTime, confidenceValue: obj[value].confidenceValue, correctQuestions: obj[value].correctQuestions}];
+		return [{nick: keyList[index], responseTime: obj[value].responseTime, confidenceValue: obj[value].confidenceValue, correctQuestions: obj[value].correctQuestions, numberOfEntries: obj[value].numberOfEntries}];
 	});
 }
 
@@ -138,13 +138,16 @@ export function getLeaderboardItemsByIndex(questionIndex) {
 				if (typeof result[item.userNick] === "undefined") {
 					result[item.userNick] = {
 						responseTime: 0,
-						confidenceValue: 0,
-						correctQuestions: [questionIndex + 1]
+						confidenceValue: -1,
+						confidenceValueEntries: 0,
+						correctQuestions: [questionIndex + 1],
+						numberOfEntries: 1
 					};
 				}
 				result[item.userNick].responseTime += item.responseTime;
 				if (item.confidenceValue > -1) {
-					result[item.userNick].confidenceValue += item.confidenceValue;
+					result[item.userNick].confidenceValue = item.confidenceValue;
+					result[item.userNick].confidenceValueEntries = 1;
 				}
 			}
 		});
@@ -153,8 +156,12 @@ export function getLeaderboardItemsByIndex(questionIndex) {
 }
 
 export function getAllLeaderboardItems(keepAllNicks = false) {
+	const questionList = QuestionGroupCollection.findOne({hashtag: hashtag}).questionList;
+	const questionCount = questionList.filter(function (item) {
+		return item.type !== "SurveyQuestion";
+	}).length;
 	let allItems = getLeaderboardItemsByIndex(0);
-	for (let i = 1; i < EventManagerCollection.findOne().questionIndex + 1; i++) {
+	for (let i = 1; i < questionList.length; i++) {
 		const tmpItems = getLeaderboardItemsByIndex(i);
 		for (const o in tmpItems) {
 			if (tmpItems.hasOwnProperty(o)) {
@@ -162,24 +169,28 @@ export function getAllLeaderboardItems(keepAllNicks = false) {
 					allItems[o] = {
 						responseTime: 0,
 						confidenceValue: 0,
-						correctQuestions: []
+						confidenceValueEntries: 0,
+						correctQuestions: [],
+						numberOfEntries: 0
 					};
 				}
 				allItems[o].responseTime += tmpItems[o].responseTime;
-				allItems[o].confidenceValue += tmpItems[o].confidenceValue;
+				if (tmpItems[o].confidenceValue > -1) {
+					allItems[o].confidenceValue += tmpItems[o].confidenceValue;
+					allItems[o].confidenceValueEntries += 1;
+				}
 				allItems[o].correctQuestions.push(i + 1);
+				allItems[o].numberOfEntries += 1;
 			}
 		}
 	}
 	for (const key in allItems) {
 		if (allItems.hasOwnProperty(key)) {
-			allItems[key].confidenceValue = allItems[key].confidenceValue / EventManagerCollection.findOne().questionIndex;
+			console.log(allItems[key].numberOfEntries, allItems[key].confidenceValueEntries);
+			allItems[key].confidenceValue = allItems[key].confidenceValue / allItems[key].confidenceValueEntries;
 		}
 	}
 	if (!keepAllNicks) {
-		const questionCount = QuestionGroupCollection.findOne().questionList.filter(function (item) {
-			return item.type !== "SurveyQuestion";
-		}).length;
 		for (const o in allItems) {
 			if (allItems.hasOwnProperty(o) && allItems[o].correctQuestions.length !== questionCount) {
 				delete allItems[o];

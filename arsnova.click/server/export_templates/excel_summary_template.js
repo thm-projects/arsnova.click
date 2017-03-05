@@ -15,12 +15,18 @@ export function generateSheet(wb, options) {
 	const questionGroupObject = new DefaultQuestionGroup(JSON.parse(JSON.stringify(questionGroup)));
 	const ws = wb.addWorksheet(TAPi18n.__('export.summary', {lng: translation}), excelDefaultWorksheetOptions);
 	const allResponses = ResponsesCollection.find({hashtag: hashtag});
-	const responsesWithConfidenceValue = allResponses.map((x)=> {return x.confidenceValue > -1;});
+	const responsesWithConfidenceValue = allResponses.fetch().filter((x)=> {return x.confidenceValue > -1;});
 	leaderboardLib.init(hashtag);
 	const leaderboardData = _.sortBy(leaderboardLib.objectToArray(leaderboardLib.getAllLeaderboardItems(true)), function (o) { return o.responseTime; })[0];
 	const numberOfAttendees = distinctValuesFromCollection(ResponsesCollection, 'userNick', {hashtag: hashtag}).length;
 	const isCASRequired = SessionConfigurationCollection.findOne({hashtag: hashtag}).nicks.restrictToCASLogin;
-	const columnsToFormat = isCASRequired ? 7 : 5;
+	let columnsToFormat = 4;
+	if (responsesWithConfidenceValue.length > 0) {
+		columnsToFormat++;
+	}
+	if (isCASRequired) {
+		columnsToFormat += 2;
+	}
 	const date = new Date();
 	ws.row(1).setHeight(20);
 	ws.cell(1, 1, 1, columnsToFormat).style({
@@ -129,7 +135,7 @@ export function generateSheet(wb, options) {
 	}
 	ws.cell(9, nextColumnIndex++).style(headerStyle).string(TAPi18n.__("export.correct_questions", {lng: translation}));
 	if (responsesWithConfidenceValue.length > 0) {
-		ws.cell(9, nextColumnIndex++).style(headerStyle).string(TAPi18n.__("export.percent_confidence", {lng: translation}));
+		ws.cell(9, nextColumnIndex++).style(headerStyle).string(TAPi18n.__("export.average_confidence", {lng: translation}));
 	}
 	ws.cell(9, nextColumnIndex++).style(headerStyle).string(TAPi18n.__("export.overall_response_time", {lng: translation}));
 	ws.cell(9, nextColumnIndex++).style(headerStyle).string(TAPi18n.__("export.average_response_time", {lng: translation}));
@@ -166,11 +172,12 @@ export function generateSheet(wb, options) {
 			},
 			numberFormat: "#,##0;"
 		}).number(leaderboardItem.responseTime);
+		console.log(leaderboardItem);
 		ws.cell(((indexInList) + 11), nextColumnIndex++).style({
 			alignment: {
 				horizontal: "center"
 			},
 			numberFormat: "#,##0.00;"
-		}).number(Number(parseFloat(leaderboardItem.responseTime / ResponsesCollection.find({hashtag: hashtag, userNick: leaderboardItem.nick}).fetch().length).toFixed(2)));
+		}).number(Number(parseFloat(leaderboardItem.responseTime / leaderboardItem.numberOfEntries).toFixed(2)));
 	});
 }

@@ -1,7 +1,9 @@
+import {Meteor} from 'meteor/meteor';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as leaderboardLib from '/lib/leaderboard.js';
 import {excelDefaultWorksheetOptions} from './excel_default_options.js';
 import {calculateNumberOfAnswers} from './excel_function_library.js';
@@ -15,8 +17,16 @@ export function generateSheet(wb, options, index) {
 	const ws = wb.addWorksheet(TAPi18n.__('export.question', {lng: translation}) + ' ' + (index + 1), excelDefaultWorksheetOptions);
 	const answerList = questionGroup.questionList[index].answerOptionList;
 	const allResponses = ResponsesCollection.find({hashtag: hashtag, questionIndex: index});
-	const responsesWithConfidenceValue = allResponses.map((x)=> {return x.confidenceValue > -1;});
-	const columnsToFormat = answerList.length < 4 ? 4 : answerList.length + 1;
+	const responsesWithConfidenceValue = allResponses.fetch().filter((x)=> {return x.confidenceValue > -1;});
+	const isCASRequired = SessionConfigurationCollection.findOne({hashtag: hashtag}).nicks.restrictToCASLogin;
+	let minColums = 3;
+	if (responsesWithConfidenceValue.length > 0) {
+		minColums++;
+	}
+	if (isCASRequired) {
+		minColums += 2;
+	}
+	const columnsToFormat = answerList.length + 1 < minColums ? minColums : answerList.length + 1;
 	ws.row(1).setHeight(20);
 	ws.cell(1, 1, 1, columnsToFormat).style({
 		font: {
@@ -80,7 +90,7 @@ export function generateSheet(wb, options, index) {
 					color: "black"
 				}
 			}
-		}).string(TAPi18n.__("export.percent_confidence", {lng: translation}) + ":");
+		}).string(TAPi18n.__("export.average_confidence", {lng: translation}) + ":");
 		let confidenceSummary = 0;
 		allResponses.forEach(function (item) {
 			confidenceSummary += item.confidenceValue;
@@ -134,27 +144,47 @@ export function generateSheet(wb, options, index) {
 	}
 
 	let nextColumnIndex = 1;
-	ws.cell(9, nextColumnIndex++).string(TAPi18n.__("export.attendee", {lng: translation}));
-	ws.cell(9, nextColumnIndex++).string(TAPi18n.__("export.answer", {lng: translation}));
-	if (responsesWithConfidenceValue.length > 0) {
-		ws.cell(9, nextColumnIndex++).string(TAPi18n.__("export.confidence_level", {lng: translation}));
+	const headerStyle = {
+		alignment: {
+			wrapText: true,
+			horizontal: "center",
+			vertical: "center"
+		}
+	};
+	ws.cell(9, nextColumnIndex++).style({
+		alignment: {
+			vertical: "center"
+		}
+	}).string(TAPi18n.__("export.attendee", {lng: translation}));
+	if (isCASRequired) {
+		ws.cell(9, nextColumnIndex++).style(headerStyle).string(TAPi18n.__("export.cas_account_id", {lng: translation}));
+		ws.cell(9, nextColumnIndex++).style(headerStyle).string(TAPi18n.__("export.cas_account_email", {lng: translation}));
 	}
-	ws.cell(9, nextColumnIndex++).string(TAPi18n.__("export.time", {lng: translation}));
+	ws.cell(9, nextColumnIndex++).style(headerStyle).string(TAPi18n.__("export.answer", {lng: translation}));
+	if (responsesWithConfidenceValue.length > 0) {
+		ws.cell(9, nextColumnIndex++).style(headerStyle).string(TAPi18n.__("export.confidence_level", {lng: translation}));
+	}
+	ws.cell(9, nextColumnIndex++).style(headerStyle).string(TAPi18n.__("export.time", {lng: translation}));
 
 	leaderboardLib.init(hashtag);
+	ws.cell(11, 1, (allResponses.length + 10), columnsToFormat).style({
+		font: {
+			color: "FF000000"
+		},
+		fill: {
+			type: "pattern",
+			patternType: "solid",
+			fgColor: "FFC5C5C5"
+		}
+	});
 	allResponses.forEach(function (responseItem, indexInList) {
 		let nextColumnIndex = 1;
-		ws.cell(((indexInList) + 11), 1, ((indexInList) + 11), columnsToFormat).style({
-			font: {
-				color: "FF000000"
-			},
-			fill: {
-				type: "pattern",
-				patternType: "solid",
-				fgColor: "FFC5C5C5"
-			}
-		});
 		ws.cell(((indexInList) + 11), nextColumnIndex++).string(responseItem.userNick);
+		if (isCASRequired) {
+			const profile = Meteor.users.findOne({_id: responseItem.userRef}).profile;
+			ws.cell(((indexInList) + 11), nextColumnIndex++).string(profile.id);
+			ws.cell(((indexInList) + 11), nextColumnIndex++).string(profile.mail instanceof Array ? profile.mail.slice(-1)[0] : profile.mail);
+		}
 		const chosenAnswer = AnswerOptionCollection.find({
 			hashtag: hashtag,
 			questionIndex: index,

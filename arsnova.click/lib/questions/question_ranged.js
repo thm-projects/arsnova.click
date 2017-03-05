@@ -97,7 +97,7 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @returns {{hashtag, questionText, type, timer, startTime, questionIndex, answerOptionList}|{hashtag: String, questionText: String, type: AbstractQuestion, timer: Number, startTime: Number, questionIndex: Number, answerOptionList: Array}}
 	 */
 	serialize () {
-		return $.extend(super.serialize(), {type: "RangedQuestion", rangeMin: this.getMinRange(), rangeMax: this.getMaxRange(), correctValue: this.getCorrectValue()});
+		return Object.assign(super.serialize(), {type: "RangedQuestion", rangeMin: this.getMinRange(), rangeMax: this.getMaxRange(), correctValue: this.getCorrectValue()});
 	}
 
 	/**

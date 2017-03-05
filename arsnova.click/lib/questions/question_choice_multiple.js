@@ -29,7 +29,7 @@ export class MultipleChoiceQuestion extends AbstractChoiceQuestion {
 	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
 	 */
 	serialize () {
-		return $.extend(super.serialize(), {type: "MultipleChoiceQuestion"});
+		return Object.assign(super.serialize(), {type: "MultipleChoiceQuestion"});
 	}
 
 	/**

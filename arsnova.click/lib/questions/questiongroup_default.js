@@ -29,7 +29,7 @@ export class DefaultQuestionGroup extends AbstractQuestionGroup {
 	 * @returns {{hashtag: String, type: String, questionList: Array}}
 	 */
 	serialize () {
-		return $.extend(super.serialize(), {type: "DefaultQuestionGroup"});
+		return Object.assign(super.serialize(), {type: "DefaultQuestionGroup"});
 	}
 
 	/**

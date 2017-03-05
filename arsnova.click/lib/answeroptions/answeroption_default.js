@@ -57,7 +57,7 @@ export class DefaultAnswerOption extends AbstractAnswerOption {
 	 * @returns {{hashtag: String, type: String, questionIndex: Number, answerText: String, answerOptionNumber: Number, isCorrect: Boolean}}
 	 */
 	serialize () {
-		return $.extend(super.serialize(), {
+		return Object.assign(super.serialize(), {
 			isCorrect: this.getIsCorrect(),
 			type: TYPE
 		});

@@ -327,7 +327,7 @@
       "show_more": "Montre 1 de plus",
       "show_more_plural": "Montre %s de plus",
       "show_less": "Montre moins",
-      "export": "Exportation (.csv)"
+      "export": "Exportation"
     },
     "liveResults": {
       "title": "Résultats",
@@ -735,5 +735,30 @@
         "false": "Faux"
       }
     }
+  },
+  "export": {
+    "summary": "Résumé",
+    "exported_at_date": "Exporté à",
+    "session_content": "Exportation du Quiz (JSON)",
+    "cas_account_id": "Numéro de compte CAS",
+    "cas_account_email": "E-mail CAS",
+    "quiz_name": "Nom du quiz",
+    "question": "Question",
+    "question_type": "Type de la question",
+    "number_of_answers": "Nombre de réponses",
+    "percent_correct": "Corriger les réponses",
+    "answer": "Répondre",
+    "attendee": "Participant",
+    "time": "Temps de réponse (en ms)",
+    "confidence_level": "Niveau de confiance",
+    "correct_value": "Valeur correcte",
+    "min_range": "Portée minimale",
+    "max_range": "Portée maximale",
+    "correct_questions": "Questions correctement posées",
+    "overall_response_time": "Temps de réponse cumulé (en ms)",
+    "average_response_time": "Temps de réponse moyen (en ms)",
+    "number_attendees": "Montant des participants",
+    "average_correct_answered_questions": "Les questions ont-elles répondu en moyenne correctement?",
+    "average_confidence": "Niveau de confiance moyen"
   }
 }

@@ -186,7 +186,6 @@ export function getAllLeaderboardItems(keepAllNicks = false) {
 	}
 	for (const key in allItems) {
 		if (allItems.hasOwnProperty(key)) {
-			console.log(allItems[key].numberOfEntries, allItems[key].confidenceValueEntries);
 			allItems[key].confidenceValue = allItems[key].confidenceValue / allItems[key].confidenceValueEntries;
 		}
 	}

@@ -735,5 +735,30 @@
         "false": "Falso"
       }
     }
+  },
+  "export": {
+    "summary": "Resumen",
+    "exported_at_date": "Exportado a",
+    "session_content": "Exportación del Quiz (JSON)",
+    "cas_account_id": "ID de cuenta de CAS",
+    "cas_account_email": "E-Mail del CAS",
+    "quiz_name": "Nombre de prueba",
+    "question": "Pregunta",
+    "question_type": "Tipo de la pregunta",
+    "number_of_answers": "Número de respuestas",
+    "percent_correct": "Corregir Respuestas",
+    "answer": "Responder",
+    "attendee": "Asistente",
+    "time": "Tiempo de respuesta (en ms)",
+    "confidence_level": "Grado de confianza",
+    "correct_value": "Valor correcto",
+    "min_range": "Rango mínimo",
+    "max_range": "Rango maximo",
+    "correct_questions": "Preguntas correctamente contestadas",
+    "overall_response_time": "Tiempo de respuesta acumulado (en ms)",
+    "average_response_time": "Tiempo medio de respuesta (en ms)",
+    "number_attendees": "Cantidad de asistentes",
+    "average_correct_answered_questions": "Las preguntas respondieron en promedio correctamente",
+    "average_confidence": "Grado de confianza promedio"
   }
 }

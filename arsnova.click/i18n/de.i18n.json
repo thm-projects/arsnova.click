@@ -755,7 +755,7 @@
     "min_range": "Mindestwert",
     "max_range": "Maximalwert",
     "correct_questions": "Richtig beantwortete Fragen",
-    "overall_response_time": "Kummulierte Antwortzeit (in ms)",
+    "overall_response_time": "Kumulierte Antwortzeit (in ms)",
     "average_response_time": "Durchschnittliche Antwortzeit (in ms)",
     "number_attendees": "Anzahl der Teilnehmer",
     "average_correct_answered_questions": "Durchschnittlich richtig beantwortete Fragen",

@@ -172,7 +172,6 @@ export function generateSheet(wb, options) {
 			},
 			numberFormat: "#,##0;"
 		}).number(leaderboardItem.responseTime);
-		console.log(leaderboardItem);
 		ws.cell(((indexInList) + 11), nextColumnIndex++).style({
 			alignment: {
 				horizontal: "center"

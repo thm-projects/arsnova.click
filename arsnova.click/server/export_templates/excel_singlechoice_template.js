@@ -53,7 +53,7 @@ export function generateSheet(wb, options, index) {
 			fgColor: "FF616161"
 		}
 	});
-	ws.cell(6, 1, 8, columnsToFormat).style({
+	ws.cell(6, 1, responsesWithConfidenceValue.length > 0 ? 8 : 7, columnsToFormat).style({
 		font: {
 			color: "FF000000"
 		},

@@ -59,6 +59,7 @@ Router.route("/server/generateExcelFile/:hashtag/:translation/:privateKey/:theme
 		this.response.writeHead(500);
 		this.response.end("Hashtag not found");
 	}
+	console.log(HashtagsCollection.findOne({hashtag: this.params.hashtag}), this.params);
 	if (HashtagsCollection.findOne({hashtag: this.params.hashtag}).privateKey !== this.params.privateKey) {
 		this.response.writeHead(500);
 		this.response.end("Missing permissions.");

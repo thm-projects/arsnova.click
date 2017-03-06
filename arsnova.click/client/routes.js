@@ -44,7 +44,7 @@ export function cleanUp() {
 			Meteor.call("Main.killAll", Router.current().params.quizName);
 		}
 	} else {
-		const userDoc = MemberListCollection.findOne({nick: localStorage.getItem(Router.current().params.quizName + "nick")});
+		const userDoc = MemberListCollection.findOne({nick: sessionStorage.getItem(Router.current().params.quizName + "nick")});
 		if (userDoc) {
 			Meteor.call("MemberListCollection.removeLearner", Router.current().params.quizName, userDoc._id);
 		}

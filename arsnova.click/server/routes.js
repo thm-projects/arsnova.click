@@ -29,6 +29,7 @@ import * as MultipleChoiceExcelSheet from '/server/export_templates/excel_multip
 import * as RangedExcelSheet from '/server/export_templates/excel_ranged_template.js';
 import * as SurveyExcelSheet from '/server/export_templates/excel_survey_template.js';
 import * as FreeTextExcelSheet from '/server/export_templates/excel_freetext_template.js';
+import {ExcelTheme} from '/server/export_templates/excel_default_styles.js';
 import fs from 'fs';
 import process from 'process';
 import xlsx from 'excel4node';
@@ -53,7 +54,11 @@ Router.route("/server/preview/:themeName/:language", function () {
 	});
 }, {where: "server"});
 
-Router.route("/server/generateExcelFile/:hashtag/:translation/", function () {
+Router.route("/server/generateExcelFile/:hashtag/:translation/:privateKey/:theme?", function () {
+	if (HashtagsCollection.findOne({hashtag: this.params.hashtag}).privateKey !== this.params.privateKey) {
+		this.response.writeHead(500);
+		this.response.end("Missing permissions.");
+	}
 	const wb = new xlsx.Workbook({
 		jszip: {
 			compression: 'DEFLATE'
@@ -65,31 +70,32 @@ Router.route("/server/generateExcelFile/:hashtag/:translation/", function () {
 		},
 		dateFormat: 'd.m.yyyy'
 	});
-	SummaryExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation});
+	const themeInstance = new ExcelTheme(this.params.theme || SessionConfigurationCollection.findOne({hashtag: this.params.hashtag}).theme || Meteor.settings.public.default.theme);
+	SummaryExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()});
 	const questionGroup = QuestionGroupCollection.findOne({hashtag: this.params.hashtag});
 	for (let i = 0; i < questionGroup.questionList.length; i++) {
 		switch (questionGroup.questionList[i].type) {
 			case "SingleChoiceQuestion":
 			case "YesNoSingleChoiceQuestion":
 			case "TrueFalseSingleChoiceQuestion":
-				SingleChoiceExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation}, i);
+				SingleChoiceExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
 				break;
 			case "MultipleChoiceQuestion":
-				MultipleChoiceExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation}, i);
+				MultipleChoiceExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
 				break;
 			case "RangedQuestion":
-				RangedExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation}, i);
+				RangedExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
 				break;
 			case "SurveyQuestion":
-				SurveyExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation}, i);
+				SurveyExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
 				break;
 			case "FreeTextQuestion":
-				FreeTextExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation}, i);
+				FreeTextExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
 				break;
 		}
 	}
 	const date = new Date();
-	wb.write("Export-" + this.params.hashtag + "-" + date.getDate() + "_" + (date.getMonth() + 1) + "_" + date.getFullYear() + ".xlsx", this.response);
+	wb.write("Export-" + this.params.hashtag + "-" + date.getDate() + "_" + (date.getMonth() + 1) + "_" + date.getFullYear() + "-" + date.getHours() + "_" + date.getMinutes() + ".xlsx", this.response);
 }, {where: 'server'});
 
 Router.route('/api/keepalive', {where: 'server'})

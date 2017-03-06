@@ -118,7 +118,13 @@ export function isCorrectResponse(response, question, questionIndex) {
 export function objectToArray(obj) {
 	const keyList = Object.keys(obj);
 	return keyList.map(function (value, index) {
-		return [{nick: keyList[index], responseTime: obj[value].responseTime, confidenceValue: obj[value].confidenceValue, correctQuestions: obj[value].correctQuestions, numberOfEntries: obj[value].numberOfEntries}];
+		return {
+			nick: keyList[index],
+			responseTime: obj[value].responseTime,
+			confidenceValue: obj[value].confidenceValue,
+			correctQuestions: obj[value].correctQuestions,
+			numberOfEntries: obj[value].numberOfEntries
+		};
 	});
 }
 

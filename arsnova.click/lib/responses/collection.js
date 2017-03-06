@@ -95,7 +95,7 @@ ResponsesCollection.deny({
 ResponsesCollection.allow({
 	insert: function (userId, doc) {
 		const isOwner = localData.containsHashtag(doc.hashtag);
-		const isOwnNick = doc.userNick === localStorage.getItem(doc.hashtag + "nick");
+		const isOwnNick = doc.userNick === sessionStorage.getItem(doc.hashtag + "nick");
 		return isOwner || isOwnNick;
 	},
 	update: function (userId, doc) {

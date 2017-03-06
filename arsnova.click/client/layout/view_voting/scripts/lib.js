@@ -95,7 +95,7 @@ export function makeAndSendResponse(answerOptionNumber) {
 		questionIndex: EventManagerCollection.findOne().questionIndex,
 		answerOptionNumber: answerOptionNumber,
 		confidenceValue: Session.get("confidenceValue"),
-		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
+		userNick: sessionStorage.getItem(Router.current().params.quizName + "nick")
 	});
 }
 
@@ -105,7 +105,7 @@ export function makeAndSendRangedResponse(value) {
 		questionIndex: EventManagerCollection.findOne().questionIndex,
 		rangedInputValue: value,
 		confidenceValue: Session.get("confidenceValue"),
-		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
+		userNick: sessionStorage.getItem(Router.current().params.quizName + "nick")
 	});
 }
 
@@ -116,7 +116,7 @@ export function makeAndSendFreeTextResponse(value) {
 		freeTextInputValue: value,
 		answerOptionNumber: [0],
 		confidenceValue: Session.get("confidenceValue"),
-		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
+		userNick: sessionStorage.getItem(Router.current().params.quizName + "nick")
 	});
 }
 

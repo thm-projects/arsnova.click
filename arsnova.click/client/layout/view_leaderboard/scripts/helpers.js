@@ -69,7 +69,7 @@ Template.leaderboardFooterNavButtons.helpers({
 		return localData.containsHashtag(Router.current().params.quizName);
 	},
 	getExcelDownloadHref: function () {
-		return "/server/generateExcelFile/" + Router.current().params.quizName + "/" + TAPi18n.getLanguage();
+		return "/server/generateExcelFile/" + Router.current().params.quizName + "/" + TAPi18n.getLanguage() + "/" + localData.getPrivateKey() ;
 	},
 	exportCSVData: function () {
 		const hashtag = Router.current().params.quizName;
@@ -90,7 +90,7 @@ Template.leaderBoard.helpers({
 		return !isNaN(index);
 	},
 	isOwnNick: (nick) => {
-		return nick === localStorage.getItem(Router.current().params.quizName + "nick");
+		return nick === sessionStorage.getItem(Router.current().params.quizName + "nick");
 	},
 	parseTimeToSeconds: function (milliseconds) {
 		let seconds = (milliseconds / 1000).toFixed(2);

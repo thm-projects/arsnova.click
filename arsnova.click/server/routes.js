@@ -55,6 +55,10 @@ Router.route("/server/preview/:themeName/:language", function () {
 }, {where: "server"});
 
 Router.route("/server/generateExcelFile/:hashtag/:translation/:privateKey/:theme?", function () {
+	if (!HashtagsCollection.findOne({hashtag: hashtag})) {
+		this.response.writeHead(500);
+		this.response.end("Hashtag not found");
+	}
 	if (HashtagsCollection.findOne({hashtag: this.params.hashtag}).privateKey !== this.params.privateKey) {
 		this.response.writeHead(500);
 		this.response.end("Missing permissions.");

@@ -55,7 +55,7 @@ Router.route("/server/preview/:themeName/:language", function () {
 }, {where: "server"});
 
 Router.route("/server/generateExcelFile/:hashtag/:translation/:privateKey/:theme?", function () {
-	if (!HashtagsCollection.findOne({hashtag: hashtag})) {
+	if (!HashtagsCollection.findOne({hashtag: this.params.hashtag})) {
 		this.response.writeHead(500);
 		this.response.end("Hashtag not found");
 	}

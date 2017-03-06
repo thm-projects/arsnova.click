@@ -462,11 +462,11 @@ Template.liveResults.helpers({
 	readingConfirmationListForQuestion: (index)=> {
 		let result = [];
 		let sortParamObj = Session.get('LearnerCountOverride') ? {lowerCaseNick: 1} : {insertDate: -1};
-		let ownNick = MemberListCollection.findOne({nick: localStorage.getItem(Router.current().params.quizName + "nick")}, {limit: 1});
+		let ownNick = MemberListCollection.findOne({nick: sessionStorage.getItem(Router.current().params.quizName + "nick")}, {limit: 1});
 		if (ownNick && ownNick.readConfirmed[index]) {
 			result.push(ownNick);
 		}
-		MemberListCollection.find({nick: {$ne: localStorage.getItem(Router.current().params.quizName + "nick")}}, {
+		MemberListCollection.find({nick: {$ne: sessionStorage.getItem(Router.current().params.quizName + "nick")}}, {
 			sort: sortParamObj
 		}).forEach(function (doc) {
 			if (result.length < Session.get("LearnerCount") && doc.readConfirmed[index]) {
@@ -505,7 +505,7 @@ Template.liveResults.helpers({
 
 Template.readingConfirmedLearner.helpers({
 	isOwnNick: function (nickname) {
-		return nickname === localStorage.getItem(Router.current().params.quizName + "nick");
+		return nickname === sessionStorage.getItem(Router.current().params.quizName + "nick");
 	}
 });
 

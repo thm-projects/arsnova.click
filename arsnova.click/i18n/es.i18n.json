@@ -739,6 +739,8 @@
   "export": {
     "summary": "Resumen",
     "exported_at_date": "Exportado a",
+    "exported_at": "a",
+    "exported_at_time": "en punto",
     "session_content": "Exportación del Quiz (JSON)",
     "cas_account_id": "ID de cuenta de CAS",
     "cas_account_email": "E-Mail del CAS",

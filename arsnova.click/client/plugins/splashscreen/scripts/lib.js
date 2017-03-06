@@ -228,7 +228,7 @@ export function showReadingConfirmationSplashscreen(index) {
 					Meteor.call("MemberListCollection.setReadConfirmed", {
 						hashtag: Router.current().params.quizName,
 						questionIndex: index,
-						nick: localStorage.getItem(Router.current().params.quizName + "nick")
+						nick: sessionStorage.getItem(Router.current().params.quizName + "nick")
 					}, (err)=> {
 						if (err) {
 							new ErrorSplashscreen({

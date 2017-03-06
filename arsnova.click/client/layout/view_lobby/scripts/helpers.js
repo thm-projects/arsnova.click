@@ -33,13 +33,13 @@ Template.memberlist.helpers({
 		const limit = localData.containsHashtag(Router.current().params.quizName) ? Session.get("maxLearnerButtons") : Session.get("maxLearnerButtons") - 1;
 		const sortParamObj = Session.get("learnerCountOverride") ? {lowerCaseNick: 1} : {limit: limit, sort: {insertDate: -1}};
 		const result = [
-			MemberListCollection.find({nick: localStorage.getItem(Router.current().params.quizName + "nick")}, {
+			MemberListCollection.find({nick: sessionStorage.getItem(Router.current().params.quizName + "nick")}, {
 				limit: 1
 			})
 		];
 		if (Session.get("maxLearnerButtons") > 0 || localData.containsHashtag(Router.current().params.quizName)) {
 			result.push(
-				MemberListCollection.find({nick: {$ne: localStorage.getItem(Router.current().params.quizName + "nick")}}, sortParamObj)
+				MemberListCollection.find({nick: {$ne: sessionStorage.getItem(Router.current().params.quizName + "nick")}}, sortParamObj)
 			);
 		}
 		return result;
@@ -54,7 +54,7 @@ Template.learner.helpers({
 		return localData.containsHashtag(Router.current().params.quizName);
 	},
 	isOwnNick: function (nickname) {
-		return nickname === localStorage.getItem(Router.current().params.quizName + "nick");
+		return nickname === sessionStorage.getItem(Router.current().params.quizName + "nick");
 	}
 });
 

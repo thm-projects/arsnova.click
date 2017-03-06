@@ -1,25 +1,33 @@
 export const excelDefaultWorksheetOptions = {
 	margins: {
-		left: 0.75,
-		right: 0.75,
-		top: 1.0,
-		bottom: 1.0,
-		footer: 0.5,
-		header: 0.5
+		left: 0.4,    // 1cm
+		right: 0.4,   // 1cm
+		top: 0.59,    // 1.5cm
+		bottom: 0.59, // 1.5cm
+		footer: 0,
+		header: 0
+	},
+	headerFooter: {
+		firstFooter: "",
+		firstHeader: "",
+		alignWithMargins: true,
+		differentFirst: false,
+		differentOddEven: false,
+		scaleWithDoc: false
 	},
 	printOptions: {
-		centerHorizontal: true,
-		centerVertical: false
+		centerHorizontal: false,
+		centerVertical: false,
+		printGridLines: false,
+		printHeadings: false
 	},
-	view: {
-		zoom: 100
-	},
-	outline: {
-		summaryBelow: true
-	},
-	fitToPage: {
-		fitToHeight: 100,
-		orientation: 'landscape'
+	pageSetup: {
+		errors: "displayed",
+		fitToHeight: 1,
+		fitToWidth: 1,
+		orientation: 'landscape',
+		paperSize: "A4_PAPER",
+		scale: 100
 	}
 };
 
@@ -33,4 +41,3 @@ export const excelDefaultWorksheetValidationData = {
 		'value1,value2'
 	]
 };
-

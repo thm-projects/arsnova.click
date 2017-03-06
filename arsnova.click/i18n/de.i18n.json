@@ -53,7 +53,7 @@
           "sound": "Stelle hier die Hintergrundmusik ein und entscheide dich beim Countdown für Abpfiff oder Gong.",
           "reading-confirmation": "Aktiviere diese Option, wenn zuerst nur die Frage ohne Antwortoptionen angezeigt werden soll. Nur wer das Lesen (Verstehen) der Frage bestätigt, die Anzahl der Lesebestätigungen wird angezeigt, kann am Quiz teilnehmen. Mit der Lesebestätigung schaffst Du gleiche Voraussetzungen beim Countdown.",
           "response-progress": "Soll die Anzahl der Stimmen zu den einzelnen Antwortoptionen während des Countdowns angezeigt werden? Dann aktiviere diese Option. Beachte aber den psychologischen Effekt: Der Mensch neigt dazu, sich nach der Mehrheit zu richten (Herdentrieb).",
-          "confidence-slider": "Aktiviere diese Option, wenn beim Abstimmen die Antwortsicherheit auf einer Prozentskala mitgeteilt werden soll: von 0 \% \"geraten\" bis 100 \% \"absolut sicher!\". Der Mittelwert wird im Ergebnisdiagramm angezeigt.",
+          "confidence-slider": "Aktiviere diese Option, wenn beim Abstimmen die Antwortsicherheit auf einer Prozentskala mitgeteilt werden soll: von 0 &#37; \"geraten\" bis 100 &#37; \"absolut sicher!\". Der Mittelwert wird im Ergebnisdiagramm angezeigt.",
           "nicknames": "Hier kannst Du die Nicknamen aus Kategorien vorgeben. Tipp: Einen anstößigen Nicknamen in der Lobby entfernst Du, indem Du ihn anklickst."
         }
       },

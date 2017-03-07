@@ -10,7 +10,6 @@ import {calculateNumberOfAnswers} from './excel_function_library.js';
 import {DefaultQuestionGroup} from '/lib/questions/questiongroup_default.js';
 
 function formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequired, hashtag, allResponses, index, defaultStyles}) {
-	let minColums = 3;
 	const answerCellStyle = {
 		alignment: {
 			wrapText: true,
@@ -20,6 +19,7 @@ function formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequire
 			color: "FFFFFFFF"
 		}
 	};
+	let minColums = 3;
 	if (responsesWithConfidenceValue.length > 0) {
 		minColums++;
 	}
@@ -62,27 +62,25 @@ function formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequire
 		}
 	});
 
-	let nextColumnIndex = 1;
 	ws.cell(10, 1, 10, columnsToFormat).style(defaultStyles.attendeeHeaderRowStyle);
-	ws.cell(10, nextColumnIndex++).style({
+	ws.cell(10, 1).style({
 		alignment: {
-			vertical: "center"
+			horizontal: "left"
 		}
 	});
-	if (isCASRequired) {
-		ws.cell(10, nextColumnIndex++).style(defaultStyles.attendeeHeaderRowStyle);
-		ws.cell(10, nextColumnIndex++).style(defaultStyles.attendeeHeaderRowStyle);
-	}
-	ws.cell(10, nextColumnIndex++).style(defaultStyles.attendeeHeaderRowStyle);
-	if (responsesWithConfidenceValue.length > 0) {
-		ws.cell(10, nextColumnIndex++).style(defaultStyles.attendeeHeaderRowStyle);
-	}
-	ws.cell(10, nextColumnIndex++).style(defaultStyles.attendeeHeaderRowStyle);
 
-	ws.cell(12, 1, (allResponses.fetch().length + 11), columnsToFormat).style(defaultStyles.attendeeEntryRowStyle);
+	ws.row(10).filter({
+		firstRow: 10,
+		firstColumn: 1,
+		lastRow: 10,
+		lastColumn: minColums
+	});
+
+	ws.cell(11, 1, (allResponses.fetch().length + 10), columnsToFormat).style(defaultStyles.attendeeEntryRowStyle);
+
 	allResponses.forEach(function (responseItem, indexInList) {
-		nextColumnIndex = 2;
-		const targetRow = indexInList + 12;
+		let nextColumnIndex = 2;
+		const targetRow = indexInList + 11;
 		if (isCASRequired) {
 			nextColumnIndex += 2;
 		}
@@ -158,7 +156,7 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 
 	allResponses.forEach(function (responseItem, indexInList) {
 		nextColumnIndex = 1;
-		const targetRow = indexInList + 12;
+		const targetRow = indexInList + 11;
 		ws.cell(targetRow, nextColumnIndex++).string(responseItem.userNick);
 		if (isCASRequired) {
 			const profile = Meteor.users.findOne({_id: responseItem.userRef}).profile;

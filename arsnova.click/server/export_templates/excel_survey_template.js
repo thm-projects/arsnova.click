@@ -37,12 +37,24 @@ function formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequire
 		}
 	});
 	ws.cell(9, 1, 9, columnsToFormat).style(defaultStyles.attendeeHeaderRowStyle);
+	ws.cell(9, 1).style({
+		alignment: {
+			horizontal: "left"
+		}
+	});
 
-	ws.cell(11, 1, (allResponses.fetch().length + 10), columnsToFormat).style(defaultStyles.attendeeEntryRowStyle);
+	ws.row(9).filter({
+		firstRow: 9,
+		firstColumn: 1,
+		lastRow: 9,
+		lastColumn: minColums
+	});
+
+	ws.cell(10, 1, (allResponses.fetch().length + 9), columnsToFormat).style(defaultStyles.attendeeEntryRowStyle);
 
 	allResponses.forEach(function (responseItem, indexInList) {
 		let nextColumnIndex = 3;
-		const targetRow = indexInList + 11;
+		const targetRow = indexInList + 10;
 		if (isCASRequired) {
 			nextColumnIndex += 2;
 		}
@@ -97,7 +109,7 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 
 	allResponses.forEach(function (responseItem, indexInList) {
 		let nextColumnIndex = 1;
-		const targetRow = indexInList + 11;
+		const targetRow = indexInList + 10;
 		ws.cell(targetRow, nextColumnIndex++).string(responseItem.userNick);
 		if (isCASRequired) {
 			const profile = Meteor.users.findOne({_id: responseItem.userRef}).profile;

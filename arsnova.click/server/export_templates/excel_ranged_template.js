@@ -30,7 +30,7 @@ function formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequire
 	if (isCASRequired) {
 		minColums += 2;
 	}
-	const columnsToFormat = answerList.length + 1 < minColums ? minColums : answerList.length + 1;
+	const columnsToFormat = 4 < minColums ? minColums : 4;
 
 	ws.row(1).setHeight(20);
 	ws.column(1).setWidth(30);
@@ -101,26 +101,24 @@ function formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequire
 	}
 
 	ws.cell(10, 1, 10, columnsToFormat).style(defaultStyles.attendeeHeaderRowStyle);
-	let nextColumnIndex = 1;
-	ws.cell(10, nextColumnIndex++).style({
+	ws.cell(10, 1).style({
 		alignment: {
-			vertical: "center"
+			horizontal: "left"
 		}
 	});
-	if (isCASRequired) {
-		ws.cell(10, nextColumnIndex++).style(defaultStyles.attendeeHeaderRowStyle);
-		ws.cell(10, nextColumnIndex++).style(defaultStyles.attendeeHeaderRowStyle);
-	}
-	ws.cell(10, nextColumnIndex++).style(defaultStyles.attendeeHeaderRowStyle);
-	if (responsesWithConfidenceValue.length > 0) {
-		ws.cell(10, nextColumnIndex++).style(defaultStyles.attendeeHeaderRowStyle);
-	}
-	ws.cell(10, nextColumnIndex++).style(defaultStyles.attendeeHeaderRowStyle);
 
-	ws.cell(12, 1, (allResponses.fetch().length + 11), columnsToFormat).style(defaultStyles.attendeeEntryRowStyle);
+	ws.row(10).filter({
+		firstRow: 10,
+		firstColumn: 1,
+		lastRow: 10,
+		lastColumn: minColums
+	});
+
+	ws.cell(11, 1, (allResponses.fetch().length + 10), columnsToFormat).style(defaultStyles.attendeeEntryRowStyle);
+
 	allResponses.forEach(function (responseItem, indexInList) {
-		nextColumnIndex = 2;
-		const targetRow = indexInList + 12;
+		let nextColumnIndex = 2;
+		const targetRow = indexInList + 11;
 		if (isCASRequired) {
 			nextColumnIndex += 2;
 		}
@@ -201,7 +199,7 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 
 	allResponses.forEach(function (responseItem, indexInList) {
 		nextColumnIndex = 1;
-		const targetRow = indexInList + 12;
+		const targetRow = indexInList + 11;
 		ws.cell(targetRow, nextColumnIndex++).string(responseItem.userNick);
 		if (isCASRequired) {
 			const profile = Meteor.users.findOne({_id: responseItem.userRef}).profile;

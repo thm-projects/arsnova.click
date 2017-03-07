@@ -124,6 +124,10 @@ const themeData = {
 			fg: "#000000",
 			bg: "#B2DFDB"
 		},
+		attendeeHeaderGroupRowStyle: {
+			fg: "#FFFFFF",
+			bg: "#009688"
+		},
 		attendeeHeaderRowStyle: {
 			fg: "#000000",
 			bg: "#FF9800"
@@ -253,6 +257,17 @@ export class ExcelTheme {
 				}
 			},
 			statisticsRowInnerStyle: {},
+			attendeeHeaderGroupRowStyle: {
+				font: {
+					bold: true,
+					color: themeData[this[selectedTheme]].attendeeHeaderGroupRowStyle.fg
+				},
+				fill: {
+					type: "pattern",
+					patternType: "solid",
+					fgColor: themeData[this[selectedTheme]].attendeeHeaderGroupRowStyle.bg
+				}
+			},
 			attendeeHeaderRowStyle: {
 				alignment: {
 					wrapText: true,

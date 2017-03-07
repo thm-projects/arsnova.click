@@ -547,14 +547,14 @@
           "description": "#4: <ÜBERSETZUNG_EINFÜGEN>"
         },
         "black_beauty": {
-          "name" : "Black Beauty (<ÜBERSETZUNG_EINFÜGEN>)",
+          "name": "Black Beauty (<ÜBERSETZUNG_EINFÜGEN>)",
           "description": "#3: <ÜBERSETZUNG_EINFÜGEN>"
         },
         "material": {
           "name": "Material Design Colors",
           "description": "#1: <ÜBERSETZUNG_EINFÜGEN>"
         },
-          "decent_blue": {
+        "decent_blue": {
           "name": "Decent Blue",
           "description": "#5"
         },
@@ -751,6 +751,8 @@
     "percent_correct": "Corregir Respuestas",
     "answer": "Responder",
     "attendee": "Asistente",
+    "attendee_complete_correct": "Asistentes con preguntas correctas contestadas",
+    "attendee_all_entries": "Todos los asistentes",
     "time": "Tiempo de respuesta (en ms)",
     "confidence_level": "Grado de confianza",
     "correct_value": "Valor correcto",

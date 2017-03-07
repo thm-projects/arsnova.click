@@ -9,11 +9,14 @@ import {calculateNumberOfAnswers} from './excel_function_library.js';
 import {DefaultQuestionGroup} from '/lib/questions/questiongroup_default.js';
 
 function formatSheet(ws, {responsesWithConfidenceValue, isCASRequired, questionGroup, allResponses, index, defaultStyles}) {
-	let minColums = 4;
+	let minColums = 3;
+	if (responsesWithConfidenceValue.length > 0) {
+		minColums++;
+	}
 	if (isCASRequired) {
 		minColums += 2;
 	}
-	const columnsToFormat = minColums;
+	const columnsToFormat = 4 < minColums ? minColums : 4;
 
 	ws.row(1).setHeight(20);
 	ws.column(1).setWidth(30);
@@ -44,13 +47,25 @@ function formatSheet(ws, {responsesWithConfidenceValue, isCASRequired, questionG
 	});
 
 	ws.cell(10, 1, 10, columnsToFormat).style(defaultStyles.attendeeHeaderRowStyle);
+	ws.cell(10, 1).style({
+		alignment: {
+			horizontal: "left"
+		}
+	});
 
-	ws.cell(12, 1, (allResponses.fetch().length + 11), columnsToFormat).style(defaultStyles.attendeeEntryRowStyle);
+	ws.row(10).filter({
+		firstRow: 10,
+		firstColumn: 1,
+		lastRow: 10,
+		lastColumn: minColums
+	});
+
+	ws.cell(11, 1, (allResponses.fetch().length + 10), columnsToFormat).style(defaultStyles.attendeeEntryRowStyle);
 
 	allResponses.forEach(function (responseItem, indexInList) {
 		const isCorrectResponse = leaderboardLib.isCorrectResponse(responseItem, questionGroup.questionList[index], index);
 		let nextColumnIndex = 2;
-		const targetRow = indexInList + 12;
+		const targetRow = indexInList + 11;
 		if (isCASRequired) {
 			nextColumnIndex += 2;
 		}
@@ -122,7 +137,7 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 
 	allResponses.forEach(function (responseItem, indexInList) {
 		let nextColumnIndex = 1;
-		const targetRow = indexInList + 12;
+		const targetRow = indexInList + 11;
 		ws.cell(targetRow, nextColumnIndex++).string(responseItem.userNick);
 		if (isCASRequired) {
 			const profile = Meteor.users.findOne({_id: responseItem.userRef}).profile;

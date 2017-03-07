@@ -547,14 +547,14 @@
           "description": "Elegant theme for sophisticated Quizzers."
         },
         "black_beauty": {
-          "name" : "Black Beauty (beamer-suitable)",
+          "name": "Black Beauty (beamer-suitable)",
           "description": "Dark, darker and even darker."
         },
         "material": {
           "name": "Material Design",
           "description": "Approach to Google's Material Design."
         },
-          "decent_blue": {
+        "decent_blue": {
           "name": "Decent Blue",
           "description": "A decent blue grey to controll the users focus on the main aspects of Quizzing"
         },
@@ -751,6 +751,8 @@
     "percent_correct": "Correct Responses",
     "answer": "Answer",
     "attendee": "Attendee",
+    "attendee_complete_correct": "Attendees with completely correct answered questions",
+    "attendee_all_entries": "All attendees",
     "time": "Response Time (in ms)",
     "confidence_level": "Confidence Grade",
     "correct_value": "Correct Value",

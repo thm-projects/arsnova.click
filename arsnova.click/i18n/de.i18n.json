@@ -752,6 +752,8 @@
     "percent_correct": "Korrekte Antworten",
     "answer": "Antwort",
     "attendee": "Teilnehmer",
+    "attendee_complete_correct": "Teilnehmer mit vollständig richtig beantworteten Fragen",
+    "attendee_all_entries": "Alle Teilnehmer",
     "time": "Antwortzeit (in ms)",
 	  "confidence_level": "Antwortsicherheit",
     "correct_value": "Richtiger Wert",

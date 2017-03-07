@@ -752,6 +752,7 @@
     "answer": "Answer",
     "attendee": "Attendee",
     "attendee_complete_correct": "Attendees with completely correct answered questions",
+    "attendee_complete_correct_none_available": "None available",
     "attendee_all_entries": "All attendees",
     "time": "Response Time (in ms)",
     "confidence_level": "Confidence Grade",

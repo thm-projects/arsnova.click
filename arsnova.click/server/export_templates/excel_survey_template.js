@@ -18,6 +18,13 @@ function formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequire
 		minColums += 2;
 	}
 	const columnsToFormat = answerList.length + 1 < minColums ? minColums : answerList.length + 1;
+	const answerCellStyle = {
+		alignment: {
+			wrapText: true,
+			horizontal: "center",
+			vertical: "center"
+		}
+	};
 
 	ws.row(1).setHeight(20);
 	ws.column(1).setWidth(30);
@@ -27,8 +34,14 @@ function formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequire
 
 	ws.cell(1, 1, 1, columnsToFormat).style(defaultStyles.quizNameRowStyle);
 	ws.cell(2, 1, 2, columnsToFormat).style(defaultStyles.exportedAtRowStyle);
+	ws.cell(2, 2, 2, columnsToFormat).style({
+		alignment: {
+			horizontal: "center"
+		}
+	});
 
 	ws.cell(4, 1).style(defaultStyles.questionCellStyle);
+	ws.cell(4, 1, 4, columnsToFormat).style(Object.assign({}, answerCellStyle));
 
 	ws.cell(6, 1, responsesWithConfidenceValue.length > 0 ? 7 : 6, columnsToFormat).style(defaultStyles.statisticsRowStyle);
 	ws.cell(6, 2, responsesWithConfidenceValue.length > 0 ? 7 : 6, columnsToFormat).style({

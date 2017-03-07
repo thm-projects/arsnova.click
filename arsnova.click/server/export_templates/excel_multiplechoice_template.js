@@ -21,6 +21,7 @@ function formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequire
 	const answerCellStyle = {
 		alignment: {
 			wrapText: true,
+			horizontal: "center",
 			vertical: "center"
 		},
 		font: {
@@ -36,6 +37,11 @@ function formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequire
 
 	ws.cell(1, 1, 1, columnsToFormat).style(defaultStyles.quizNameRowStyle);
 	ws.cell(2, 1, 2, columnsToFormat).style(defaultStyles.exportedAtRowStyle);
+	ws.cell(2, 2, 2, columnsToFormat).style({
+		alignment: {
+			horizontal: "center"
+		}
+	});
 
 	ws.cell(4, 1).style(defaultStyles.questionCellStyle);
 	for (let j = 0; j < answerList.length; j++) {

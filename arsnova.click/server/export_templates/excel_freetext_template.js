@@ -26,6 +26,11 @@ function formatSheet(ws, {responsesWithConfidenceValue, isCASRequired, questionG
 
 	ws.cell(1, 1, 1, columnsToFormat).style(defaultStyles.quizNameRowStyle);
 	ws.cell(2, 1, 2, columnsToFormat).style(defaultStyles.exportedAtRowStyle);
+	ws.cell(2, 2, 2, columnsToFormat).style({
+		alignment: {
+			horizontal: "center"
+		}
+	});
 
 	ws.cell(4, 1).style({
 		alignment: {
@@ -34,6 +39,11 @@ function formatSheet(ws, {responsesWithConfidenceValue, isCASRequired, questionG
 		}
 	});
 	ws.cell(4, 2).style({
+		alignment: {
+			wrapText: true,
+			horizontal: "center",
+			vertical: "center"
+		},
 		font: {
 			color: "FF000000"
 		}

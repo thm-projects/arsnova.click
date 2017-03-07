@@ -97,7 +97,16 @@ function formatSheet(ws, {responsesWithConfidenceValue, isCASRequired, columnsTo
 			numberFormat: "#,##0.00;"
 		});
 	});
-	ws.cell(12, 1, (leaderboardData.length + 11 - dataWithoutCompleteCorrectQuestions), columnsToFormat).style(defaultStyles.attendeeEntryRowStyle);
+	if (nextStartRow === 17) {
+		ws.cell(12, 1, 12, columnsToFormat, true).style(Object.assign({}, defaultStyles.attendeeEntryRowStyle, {
+			alignment: {
+				horizontal: "center"
+			}
+		}));
+		nextStartRow++;
+	} else {
+		ws.cell(12, 1, (leaderboardData.length + 11 - dataWithoutCompleteCorrectQuestions), columnsToFormat).style(defaultStyles.attendeeEntryRowStyle);
+	}
 
 	ws.cell(nextStartRow++, 1, nextStartRow++, columnsToFormat).style(defaultStyles.attendeeHeaderGroupRowStyle);
 
@@ -220,6 +229,10 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 		ws.cell(targetRow, nextColumnIndex++).number(leaderboardItem.responseTime);
 		ws.cell(targetRow, nextColumnIndex++).number(Number(parseFloat(leaderboardItem.responseTime / leaderboardItem.numberOfEntries).toFixed(2)));
 	});
+	if (nextStartRow === 17) {
+		ws.cell(12, 1).string(TAPi18n.__("export.attendee_complete_correct_none_available", {lng: translation}));
+		nextStartRow++;
+	}
 
 	nextColumnIndex = 1;
 	ws.cell(nextStartRow, nextColumnIndex).string(TAPi18n.__("export.attendee_all_entries", {lng: translation}));

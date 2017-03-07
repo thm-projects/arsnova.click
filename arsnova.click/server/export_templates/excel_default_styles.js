@@ -14,6 +14,10 @@ const themeData = {
 			fg: "#FFFFFF",
 			bg: "#424242"
 		},
+		attendeeHeaderGroupRowStyle: {
+			fg: "#FFFFFF",
+			bg: "#814E33"
+		},
 		attendeeHeaderRowStyle: {
 			fg: "#FFFFFF",
 			bg: "#562b81"
@@ -35,6 +39,10 @@ const themeData = {
 		statisticsRowStyle: {
 			fg: "#FFFFFF",
 			bg: "#444444"
+		},
+		attendeeHeaderGroupRowStyle: {
+			fg: "#FFFFFF",
+			bg: "#010101"
 		},
 		attendeeHeaderRowStyle: {
 			fg: "#FFFFFF",
@@ -58,6 +66,10 @@ const themeData = {
 			fg: "#FFFFFF",
 			bg: "#90A4AE"
 		},
+		attendeeHeaderGroupRowStyle: {
+			fg: "#FFFFFF",
+			bg: "#607D8B"
+		},
 		attendeeHeaderRowStyle: {
 			fg: "#000000",
 			bg: "#00C853"
@@ -80,6 +92,10 @@ const themeData = {
 			fg: "#000000",
 			bg: "#dbe4e9"
 		},
+		attendeeHeaderGroupRowStyle: {
+			fg: "#000000",
+			bg: "#B1C5D0"
+		},
 		attendeeHeaderRowStyle: {
 			fg: "#FFFFFF",
 			bg: "#374e5b"
@@ -101,6 +117,10 @@ const themeData = {
 		statisticsRowStyle: {
 			fg: "#000000",
 			bg: "#cfd8dc"
+		},
+		attendeeHeaderGroupRowStyle: {
+			fg: "#FFFFFF",
+			bg: "#607d8b"
 		},
 		attendeeHeaderRowStyle: {
 			fg: "#000000",
@@ -150,6 +170,10 @@ const themeData = {
 			fg: "#000000",
 			bg: "#C5CAE9"
 		},
+		attendeeHeaderGroupRowStyle: {
+			fg: "#FFFFFF",
+			bg: "#3F51B5"
+		},
 		attendeeHeaderRowStyle: {
 			fg: "#000000",
 			bg: "#4CAF50"
@@ -172,6 +196,10 @@ const themeData = {
 			fg: "#000000",
 			bg: "#AED581"
 		},
+		attendeeHeaderGroupRowStyle: {
+			fg: "#FFFFFF",
+			bg: "#8BC34A"
+		},
 		attendeeHeaderRowStyle: {
 			fg: "#000000",
 			bg: "#FFC400"
@@ -191,15 +219,19 @@ const themeData = {
 			bg: "#512da8"
 		},
 		statisticsRowStyle: {
-			fg: "#000000",
+			fg: "#FFFFFF",
 			bg: "#9575cd"
+		},
+		attendeeHeaderGroupRowStyle: {
+			fg: "#FFFFFF",
+			bg: "#673ab7"
 		},
 		attendeeHeaderRowStyle: {
 			fg: "#000000",
 			bg: "#00bcd4"
 		},
 		attendeeEntryRowStyle: {
-			fg: "#000000",
+			fg: "#FFFFFF",
 			bg: "#9575cd"
 		}
 	}

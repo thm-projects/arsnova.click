@@ -21,6 +21,7 @@ import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 
 Meteor.setInterval(function () {
 	const sessionDeleteAfterIdleMinutes = 10; //Minutes to session is idle
@@ -36,5 +37,6 @@ Meteor.setInterval(function () {
 		ResponsesCollection.remove({hashtag: session.hashtag});
 		QuestionGroupCollection.remove({hashtag: session.hashtag});
 		EventManagerCollection.remove({hashtag: session.hashtag});
+		SessionConfigurationCollection.remove({hashtag: session.hashtag});
 	});
 }, 300000);

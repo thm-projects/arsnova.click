@@ -43,6 +43,18 @@
                     {{/if}}
                 </div>
             </div>
+        {{else}}
+            <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" style="display: block; bottom: 75px;" role="navigation">
+                <div class="row">
+                    <div class="fixed-bottom-item col-xs-12">
+                        <button class="button button-next button-start tabbable"
+                                id="abortCountdown">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                            <span class="ansBtn">{{_ "view.liveResults.abort_countdown"}}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         {{/unless}}
     {{else}}
         {{#unless isRunningQuestion}}{{#if showGlobalLeaderboardButton}}{{#if hasCorrectAnswerOptionsOrRangedQuestion}}

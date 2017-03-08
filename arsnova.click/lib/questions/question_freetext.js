@@ -31,7 +31,7 @@ export class FreeTextQuestion extends AbstractQuestion {
 	 * @returns {{hashtag, questionText, type, timer, startTime, questionIndex, answerOptionList}|{hashtag: String, questionText: String, type: AbstractQuestion, timer: Number, startTime: Number, questionIndex: Number, answerOptionList: Array}}
 	 */
 	serialize () {
-		return $.extend(super.serialize(), {
+		return Object.assign(super.serialize(), {
 			type: "FreeTextQuestion"
 		});
 	}

@@ -176,7 +176,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 * @returns {{hashtag:String,questionIndex:Number,answerText:String,answerOptionNumber:Number,configCaseSensitive:Boolean,configTrimWhitespaces:Boolean,configUseKeywords:Boolean,configUseKeywords:Boolean,configUsePunctuation:Boolean,type:String}}
 	 */
 	serialize () {
-		return $.extend(super.serialize(), {
+		return Object.assign(super.serialize(), {
 			configCaseSensitive: this.getConfigCaseSensitive(),
 			configTrimWhitespaces: this.getConfigTrimWhitespaces(),
 			configUseKeywords: this.getConfigUseKeywords(),

@@ -26,7 +26,7 @@ import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
-import * as leaderboardLib from '/client/layout/view_leaderboard/scripts/lib.js';
+import * as leaderboardLib from '/lib/leaderboard.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as lib from './lib.js';
 
@@ -132,6 +132,25 @@ Template.liveResultsTitle.helpers({
 	},
 	isRunningQuestion: ()=> {
 		return Session.get("countdownInitialized");
+	}
+});
+
+Template.progressBarConfidenceRate.helpers({
+	getConfidenceRate: function (index) {
+		const responses = ResponsesCollection.find({questionIndex: index}).fetch();
+		let summarizedConfidence = 0;
+		responses.forEach(function (item) {
+			summarizedConfidence += item.confidenceValue;
+		});
+		const percent = summarizedConfidence ? summarizedConfidence / responses.length : 0;
+		return {
+			name: TAPi18n.__("region.footer.footer_bar.show_confidence_slider"),
+			absolute: responses.length,
+			percent: percent,
+			isCorrect: 0,
+			questionIndex: index,
+			backgroundStyle: lib.hslColPerc(percent, 0, 100)
+		};
 	}
 });
 
@@ -443,11 +462,11 @@ Template.liveResults.helpers({
 	readingConfirmationListForQuestion: (index)=> {
 		let result = [];
 		let sortParamObj = Session.get('LearnerCountOverride') ? {lowerCaseNick: 1} : {insertDate: -1};
-		let ownNick = MemberListCollection.findOne({nick: localStorage.getItem(Router.current().params.quizName + "nick")}, {limit: 1});
+		let ownNick = MemberListCollection.findOne({nick: sessionStorage.getItem(Router.current().params.quizName + "nick")}, {limit: 1});
 		if (ownNick && ownNick.readConfirmed[index]) {
 			result.push(ownNick);
 		}
-		MemberListCollection.find({nick: {$ne: localStorage.getItem(Router.current().params.quizName + "nick")}}, {
+		MemberListCollection.find({nick: {$ne: sessionStorage.getItem(Router.current().params.quizName + "nick")}}, {
 			sort: sortParamObj
 		}).forEach(function (doc) {
 			if (result.length < Session.get("LearnerCount") && doc.readConfirmed[index]) {
@@ -473,13 +492,20 @@ Template.liveResults.helpers({
 			}
 		});
 		return result.length - Session.get("LearnerCount");
+	},
+	showConfidenceRate: (index)=> {
+		const responseDoc = ResponsesCollection.findOne({questionIndex: index});
+		if (!responseDoc || !lib.isCountdownZero(index)) {
+			return;
+		}
+		return responseDoc.confidenceValue > -1;
 	}
 });
 
 
 Template.readingConfirmedLearner.helpers({
 	isOwnNick: function (nickname) {
-		return nickname === localStorage.getItem(Router.current().params.quizName + "nick");
+		return nickname === sessionStorage.getItem(Router.current().params.quizName + "nick");
 	}
 });
 

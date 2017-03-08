@@ -51,7 +51,7 @@ Template.nickStandardFooter.events({
 						errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
 					});
 				} else {
-					localStorage.setItem(Router.current().params.quizName + "nick", nickname);
+					sessionStorage.setItem(Router.current().params.quizName + "nick", nickname);
 					Router.go("/" + Router.current().params.quizName + "/memberlist");
 				}
 			});
@@ -97,7 +97,7 @@ Template.nickStandardFooter.events({
 						errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
 					});
 				} else {
-					localStorage.setItem(hashtag + "nick", nickname);
+					sessionStorage.setItem(hashtag + "nick", nickname);
 					Router.go("/" + hashtag + "/memberlist");
 				}
 			});
@@ -150,7 +150,7 @@ Template.nickLimited.events({
 						errorMessage: "plugins.splashscreen.error.error_messages." + err.reason
 					});
 				} else {
-					localStorage.setItem(Router.current().params.quizName + "nick", nickname);
+					sessionStorage.setItem(Router.current().params.quizName + "nick", nickname);
 					Router.go("/" + Router.current().params.quizName + "/memberlist");
 				}
 			});

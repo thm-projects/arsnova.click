@@ -88,17 +88,17 @@ MemberListCollection.deny({
 MemberListCollection.allow({
 	insert: function (userId, doc) {
 		const isOwner = localData.containsHashtag(doc.hashtag);
-		const isOwnNick = doc.nick === localStorage.getItem(doc.hashtag + "nick");
+		const isOwnNick = doc.nick === sessionStorage.getItem(doc.hashtag + "nick");
 		return isOwner || isOwnNick;
 	},
 	update: function (userId, doc) {
 		const isOwner = localData.containsHashtag(doc.hashtag);
-		const isOwnNick = doc.nick === localStorage.getItem(doc.hashtag + "nick");
+		const isOwnNick = doc.nick === sessionStorage.getItem(doc.hashtag + "nick");
 		return isOwner || isOwnNick;
 	},
 	remove: function (userId, doc) {
 		const isOwner = localData.containsHashtag(doc.hashtag);
-		const isOwnNick = doc.nick === localStorage.getItem(doc.hashtag + "nick");
+		const isOwnNick = doc.nick === sessionStorage.getItem(doc.hashtag + "nick");
 		return isOwner || isOwnNick;
 	}
 });

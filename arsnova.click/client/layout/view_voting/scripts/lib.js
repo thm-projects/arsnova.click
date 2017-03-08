@@ -20,12 +20,44 @@ import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
 import {Router} from 'meteor/iron:router';
 import {ReactiveCountdown} from 'meteor/flyandi:reactive-countdown';
+import {noUiSlider} from 'meteor/arsnova.click:nouislider';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
+import {hslColPerc} from '/client/layout/view_live_results/scripts/lib.js';
 
 export let countdown = null;
 export let countdownRunning = false;
 
 export const votingViewTracker = new Tracker.Dependency();
+export const toggledResponseTracker = new Tracker.Dependency();
+
+let sliderObject = null;
+export function createSlider() {
+	Session.set("confidenceValue", 100);
+	if (!SessionConfigurationCollection.findOne().confidenceSliderEnabled) {
+		Session.set("confidenceValue", -1);
+		return;
+	}
+	const plainSlider = document.getElementById('votingConfidenceSlider');
+	if (!plainSlider) {
+		return;
+	}
+	plainSlider.style.background = hslColPerc(100, 0, 100);
+	sliderObject = noUiSlider.create(plainSlider, {
+		step: 25,
+		margin: 1,
+		start: 100,
+		range: {
+			'min': 0,
+			'max': 100
+		}
+	});
+	sliderObject.on('slide', function (val) {
+		const roundedValue = Math.round(val);
+		Session.set("confidenceValue", roundedValue);
+		plainSlider.style.background = hslColPerc(roundedValue, 0, 100);
+	});
+}
 
 export function deleteCountdown() {
 	if (countdown) {
@@ -65,7 +97,8 @@ export function makeAndSendResponse(answerOptionNumber) {
 		hashtag: Router.current().params.quizName,
 		questionIndex: EventManagerCollection.findOne().questionIndex,
 		answerOptionNumber: answerOptionNumber,
-		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
+		confidenceValue: Session.get("confidenceValue"),
+		userNick: sessionStorage.getItem(Router.current().params.quizName + "nick")
 	});
 }
 
@@ -74,7 +107,8 @@ export function makeAndSendRangedResponse(value) {
 		hashtag: Router.current().params.quizName,
 		questionIndex: EventManagerCollection.findOne().questionIndex,
 		rangedInputValue: value,
-		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
+		confidenceValue: Session.get("confidenceValue"),
+		userNick: sessionStorage.getItem(Router.current().params.quizName + "nick")
 	});
 }
 
@@ -84,7 +118,8 @@ export function makeAndSendFreeTextResponse(value) {
 		questionIndex: EventManagerCollection.findOne().questionIndex,
 		freeTextInputValue: value,
 		answerOptionNumber: [0],
-		userNick: localStorage.getItem(Router.current().params.quizName + "nick")
+		confidenceValue: Session.get("confidenceValue"),
+		userNick: sessionStorage.getItem(Router.current().params.quizName + "nick")
 	});
 }
 
@@ -139,7 +174,16 @@ $(window).on("resize orientationchange", function () {
 
 function calculateAnswerRowHeight() {
 	let contentHeight = ($("#markdownPreviewWrapper").height() - $("h2.text-center").outerHeight(true)) || $(".contentPosition").height();
-	return contentHeight - $('.voting-helper-buttons').height() - parseInt($('.answer-row').css("margin-top"));
+	return contentHeight - $('.voting-helper-buttons').height() - $('#votingViewFooterNavButtons').height() - parseInt($('.answer-row').css("margin-top"));
+}
+
+function calculateButtons(answerOptionElements, contentWidth, contentHeight, width, height) {
+	let maxButtonsPerRow = Math.floor(contentWidth / width);
+	const maxRows = Math.floor((contentHeight - (Math.floor(contentHeight / height)) * 10) / height);
+	if (answerOptionElements % 2 === 0 && maxButtonsPerRow % 2 !== 0) {
+		maxButtonsPerRow--;
+	}
+	return {maxButtons: maxButtonsPerRow * maxRows, maxButtonsPerRow: maxButtonsPerRow, maxRows: maxRows};
 }
 
 export function formatAnswerButtons() {
@@ -161,23 +205,15 @@ export function formatAnswerButtons() {
 		scaleBaseHeight = 160;
 	}
 	const answerOptionElements = $('.sendResponse').length;
-	const calculateButtons = function (width, height) {
-		let maxButtonsPerRow = Math.floor(contentWidth / width);
-		const maxRows = Math.floor((contentHeight - (Math.floor(contentHeight / height)) * 10) / height);
-		if (answerOptionElements % 2 === 0 && maxButtonsPerRow % 2 !== 0) {
-			maxButtonsPerRow--;
-		}
-		return {maxButtons: maxButtonsPerRow * maxRows, maxButtonsPerRow: maxButtonsPerRow, maxRows: maxRows};
-	};
 	let calculateResult;
 	do {
-		calculateResult = calculateButtons(++scaleBaseWidth, ++scaleBaseHeight);
+		calculateResult = calculateButtons(answerOptionElements, contentWidth, contentHeight, ++scaleBaseWidth, ++scaleBaseHeight);
 	} while (calculateResult.maxButtons >= answerOptionElements);
-	calculateResult = calculateButtons(--scaleBaseWidth, --scaleBaseHeight);
-	let strechedWidth = ((contentWidth / calculateResult.maxButtonsPerRow) - 10);
+	calculateResult = calculateButtons(answerOptionElements, contentWidth, contentHeight, --scaleBaseWidth, --scaleBaseHeight);
+	let stretchedWidth = ((contentWidth / calculateResult.maxButtonsPerRow) - 10);
 	if (scaleBaseHeight * calculateResult.maxRows > contentHeight) {
-		strechedWidth -= 10;
+		stretchedWidth -= 10;
 	}
-	buttonElements.css({float: "left", margin: "5px", width: strechedWidth + "px", height: scaleBaseHeight});
-	buttonContainer.css({width: strechedWidth * calculateResult.maxButtonsPerRow + (calculateResult.maxButtonsPerRow * 10)});
+	buttonElements.css({float: "left", margin: "5px", width: stretchedWidth + "px", height: scaleBaseHeight});
+	buttonContainer.css({width: stretchedWidth * calculateResult.maxButtonsPerRow + (calculateResult.maxButtonsPerRow * 10)});
 }

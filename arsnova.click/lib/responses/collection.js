@@ -36,6 +36,10 @@ export const rangedInputValueSchema = {
 export const freeTextInputValueSchema = {
 	type: String
 };
+export const confidenceValueSchema = {
+	type: Number,
+	min: -1
+};
 export const responsesCollectionSchema = new SimpleSchema({
 	hashtag: {
 		type: hashtagSchema
@@ -60,6 +64,9 @@ export const responsesCollectionSchema = new SimpleSchema({
 	},
 	responseTime: {
 		type: responseTimeSchema
+	},
+	confidenceValue: {
+		type: confidenceValueSchema
 	},
 	userRef: {
 		type: userRefSchema,
@@ -88,7 +95,7 @@ ResponsesCollection.deny({
 ResponsesCollection.allow({
 	insert: function (userId, doc) {
 		const isOwner = localData.containsHashtag(doc.hashtag);
-		const isOwnNick = doc.userNick === localStorage.getItem(doc.hashtag + "nick");
+		const isOwnNick = doc.userNick === sessionStorage.getItem(doc.hashtag + "nick");
 		return isOwner || isOwnNick;
 	},
 	update: function (userId, doc) {

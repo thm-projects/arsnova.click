@@ -68,7 +68,10 @@ Template.leaderboardFooterNavButtons.helpers({
 	isOwner: function () {
 		return localData.containsHashtag(Router.current().params.quizName);
 	},
-	exportData: function () {
+	getExcelDownloadHref: function () {
+		return "/server/generateExcelFile/" + Router.current().params.quizName + "/" + TAPi18n.getLanguage() + "/" + localData.getPrivateKey() ;
+	},
+	exportCSVData: function () {
 		const hashtag = Router.current().params.quizName;
 		const time = new Date();
 		const timeString = time.getDate() + "_" + (time.getMonth() + 1) + "_" + time.getFullYear();
@@ -87,7 +90,7 @@ Template.leaderBoard.helpers({
 		return !isNaN(index);
 	},
 	isOwnNick: (nick) => {
-		return nick === localStorage.getItem(Router.current().params.quizName + "nick");
+		return nick === sessionStorage.getItem(Router.current().params.quizName + "nick");
 	},
 	parseTimeToSeconds: function (milliseconds) {
 		let seconds = (milliseconds / 1000).toFixed(2);

@@ -45,6 +45,7 @@
         "nicknames": "Nicknames",
         "show_product_tour": "Product tour",
         "show_response_progress": "Progress",
+        "show_confidence_slider": "Degree of Certainty",
         "edit_quiz": "Edit",
         "remove": "Remove",
         "description": {
@@ -326,7 +327,7 @@
       "show_more": "Show 1 more",
       "show_more_plural": "Show %s more",
       "show_less": "Show less",
-      "export": "Export (.csv)"
+      "export": "Export"
     },
     "liveResults": {
       "title": "Results",
@@ -355,7 +356,8 @@
       "answer_option": "Answer",
       "guessed_correct": "Correctly estimated",
       "guessed_wrong": "Wrong estimated",
-      "correct_answer": "Correct answer"
+      "correct_answer": "Correct answer",
+      "abort_countdown": "Abort Countdown"
     },
     "lobby": {
       "title": "Quiz Lobby",
@@ -545,14 +547,14 @@
           "description": "Elegant theme for sophisticated Quizzers."
         },
         "black_beauty": {
-          "name" : "Black Beauty (beamer-suitable)",
+          "name": "Black Beauty (beamer-suitable)",
           "description": "Dark, darker and even darker."
         },
         "material": {
           "name": "Material Design",
           "description": "Approach to Google's Material Design."
         },
-          "decent_blue": {
+        "decent_blue": {
           "name": "Decent Blue",
           "description": "A decent blue grey to controll the users focus on the main aspects of Quizzing"
         },
@@ -604,6 +606,14 @@
       "free_text_question": {
         "title": "Provide your answer!",
         "input_placeholder": "Answer"
+      },
+      "confidence_level": {
+        "title": "How confident are you in your answer?",
+        "no_idea": "No idea",
+        "not_sure": "Not sure!",
+        "unsure": "Unsure",
+        "quite_sure": "Quite sure",
+        "very_sure": "Truly convinced!"
       }
     }
   },
@@ -725,5 +735,35 @@
         "false": "False"
       }
     }
+  },
+  "export": {
+    "summary": "Summary",
+    "exported_at_date": "Exported at",
+    "exported_at": "at",
+    "exported_at_time": "o'clock",
+    "session_content": "Export of the Quiz (JSON)",
+    "cas_account_id": "CAS Account ID",
+    "cas_account_email": "CAS E-Mail",
+    "quiz_name": "Quizname",
+    "question": "Question",
+    "question_type": "Type of the question",
+    "number_of_answers": "Number of Responses",
+    "percent_correct": "Correct Responses",
+    "answer": "Answer",
+    "attendee": "Attendee",
+    "attendee_complete_correct": "Attendees with completely correct answered questions",
+    "attendee_complete_correct_none_available": "None available",
+    "attendee_all_entries": "All attendees",
+    "time": "Response Time (in ms)",
+    "confidence_level": "Confidence Grade",
+    "correct_value": "Correct Value",
+    "min_range": "Minimum Range",
+    "max_range": "Maximum Range",
+    "correct_questions": "Correctly answered questions",
+    "overall_response_time": "Cumulative Response Time (in ms)",
+    "average_response_time": "Average Response Time (in ms)",
+    "number_attendees": "Amount of Attendees",
+    "average_correct_answered_questions": "Questions answered on average correctly",
+    "average_confidence": "Average confidence grade"
   }
 }

@@ -98,3 +98,16 @@ button:disabled {
 .titel-relative {
   cursor: default;
 }
+
+.dropup {
+  ul {
+    background: transparent;
+    li {
+      a {
+        &:hover {
+          background: transparent;
+        }
+      }
+    }
+  }
+}

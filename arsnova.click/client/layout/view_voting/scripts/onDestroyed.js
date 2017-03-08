@@ -28,14 +28,14 @@ Template.votingview.onDestroyed(function () {
 		TimerMap.routeToLiveResults.start();
 	}
 	if (this.data && this.data["data-questionIndex"]) {
-		Session.set("previewQuestionIndex", undefined);
-		delete Session.keys.previewQuestionIndex;
+		Session.delete("previewQuestionIndex");
 		return;
 	}
-	Session.set("questionSC", undefined);
-	Session.set("responses", undefined);
-	Session.set("countdownInitialized", false);
-	Session.set("hasToggledResponse", undefined);
-	Session.set("hasSendResponse", undefined);
+	Session.delete("questionSC");
+	Session.delete("responses");
+	Session.delete("countdownInitialized");
+	Session.delete("hasToggledResponse");
+	Session.delete("hasSendResponse");
+	Session.delete("confidenceValue");
 	deleteCountdown();
 });

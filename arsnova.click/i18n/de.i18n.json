@@ -46,12 +46,14 @@
         "edit_quiz": "Bearbeiten",
         "show_product_tour": "Tutorial",
         "show_response_progress": "Fortschritt",
+        "show_confidence_slider": "Antwortsicherheit",
         "remove": "Entfernen",
         "description": {
           "qr-code": "Dein Publikum kann den QR-Code scannen, um mit einem Klick – ohne Eintippen von Webadresse und Quiznamen – die Lobby zu betreten.",
           "sound": "Stelle hier die Hintergrundmusik ein und entscheide dich beim Countdown für Abpfiff oder Gong.",
           "reading-confirmation": "Aktiviere diese Option, wenn zuerst nur die Frage ohne Antwortoptionen angezeigt werden soll. Nur wer das Lesen (Verstehen) der Frage bestätigt, die Anzahl der Lesebestätigungen wird angezeigt, kann am Quiz teilnehmen. Mit der Lesebestätigung schaffst Du gleiche Voraussetzungen beim Countdown.",
           "response-progress": "Soll die Anzahl der Stimmen zu den einzelnen Antwortoptionen während des Countdowns angezeigt werden? Dann aktiviere diese Option. Beachte aber den psychologischen Effekt: Der Mensch neigt dazu, sich nach der Mehrheit zu richten (Herdentrieb).",
+          "confidence-slider": "Aktiviere diese Option, wenn beim Abstimmen die Antwortsicherheit auf einer Prozentskala mitgeteilt werden soll: von 0 &#37; \"geraten\" bis 100 &#37; \"absolut sicher!\". Der Mittelwert wird im Ergebnisdiagramm angezeigt.",
           "nicknames": "Hier kannst Du die Nicknamen aus Kategorien vorgeben. Tipp: Einen anstößigen Nicknamen in der Lobby entfernst Du, indem Du ihn anklickst."
         }
       },
@@ -326,7 +328,7 @@
       "show_more": "Zeige 1 weiteren",
       "show_more_plural": "Zeige %s weitere",
       "show_less": "Zeige weniger",
-      "export": "Export (.csv)"
+      "export": "Export"
     },
     "liveResults": {
       "title": "Ergebnisse",
@@ -355,7 +357,8 @@
       "answer_option": "Antwort",
       "guessed_correct": "Richtig geschätzt",
       "guessed_wrong": "Falsch geschätzt",
-      "correct_answer": "Richtige Antwort"
+      "correct_answer": "Richtige Antwort",
+      "abort_countdown": "Countdown abbrechen"
     },
     "lobby": {
       "title": "Quiz Lobby",
@@ -604,6 +607,14 @@
       "free_text_question": {
         "title": "Gib deine Antwort ein!",
         "input_placeholder": "Antwort"
+      },
+      "confidence_level": {
+        "title": "Wie sicher bist du dir bei deiner Antwort?",
+        "no_idea": "geraten",
+        "not_sure": "sehr unsicher",
+        "unsure": "unsicher",
+        "quite_sure": "relativ sicher",
+        "very_sure": "absolut sicher!"
       }
     }
   },
@@ -725,5 +736,35 @@
         "false": "Falsch"
       }
     }
+  },
+  "export": {
+    "summary": "Zusammenfassung",
+    "exported_at_date": "Exportiert am",
+    "exported_at": "um",
+    "exported_at_time": "Uhr",
+    "session_content": "Export des Quiz (JSON-Format)",
+    "cas_account_id": "CAS Account-ID",
+    "cas_account_email": "CAS E-Mail",
+    "quiz_name": "Quizname",
+    "question": "Quizfrage",
+    "question_type": "Typ der Quizfrage",
+    "number_of_answers": "Anzahl der Antworten",
+    "percent_correct": "Korrekte Antworten",
+    "answer": "Antwort",
+    "attendee": "Teilnehmer",
+    "attendee_complete_correct": "Teilnehmer mit vollständig richtig beantworteten Fragen",
+    "attendee_complete_correct_none_available": "Keine Einträge vorhanden",
+    "attendee_all_entries": "Alle Teilnehmer",
+    "time": "Antwortzeit (in ms)",
+	  "confidence_level": "Antwortsicherheit",
+    "correct_value": "Richtiger Wert",
+    "min_range": "Mindestwert",
+    "max_range": "Maximalwert",
+    "correct_questions": "Richtig beantwortete Fragen",
+    "overall_response_time": "Kumulierte Antwortzeit (in ms)",
+    "average_response_time": "Durchschnittliche Antwortzeit (in ms)",
+    "number_attendees": "Anzahl der Teilnehmer/innen",
+    "average_correct_answered_questions": "Durchschnittlich richtig beantwortete Fragen",
+    "average_confidence": "Durchschnittliche Antwortsicherheit"
   }
 }

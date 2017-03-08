@@ -18,15 +18,16 @@
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
-import {getLeaderboardItemsByIndex, getAllLeaderboardItems, objectToArray} from './lib.js';
+import * as leaderboardLib from '/lib/leaderboard.js';
 
 Template.leaderBoard.onCreated(function () {
+	leaderboardLib.init(Router.current().params.quizName);
 	if (Router.current().params.id === "all") {
-		Session.set("nicks", _.sortBy(objectToArray(getAllLeaderboardItems()), function (o) { return o.responseTime; }));
-		Session.set("exportItems", _.sortBy(objectToArray(getAllLeaderboardItems(true)), function (o) { return o.responseTime; }));
+		Session.set("nicks", _.sortBy(leaderboardLib.objectToArray(leaderboardLib.getAllLeaderboardItems()), function (o) { return o.responseTime; }));
+		Session.set("exportItems", _.sortBy(leaderboardLib.objectToArray(leaderboardLib.getAllLeaderboardItems(true)), function (o) { return o.responseTime; }));
 		Session.set("allMembersCount", Session.get("nicks").length);
 	} else {
-		Session.set("nicks", _.sortBy(objectToArray(getLeaderboardItemsByIndex(parseInt(Router.current().params.id))), function (o) { return o.responseTime; }));
+		Session.set("nicks", _.sortBy(leaderboardLib.objectToArray(leaderboardLib.getLeaderboardItemsByIndex(parseInt(Router.current().params.id))), function (o) { return o.responseTime; }));
 		Session.set("exportItems", Session.get("nicks"));
 		Session.set("allMembersCount", Session.get("nicks").length);
 	}

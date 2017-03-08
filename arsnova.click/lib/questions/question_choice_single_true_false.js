@@ -50,7 +50,7 @@ export class TrueFalseSingleChoiceQuestion extends SingleChoiceQuestion {
 	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
 	 */
 	serialize () {
-		return $.extend(super.serialize(), {type: "TrueFalseSingleChoiceQuestion"});
+		return Object.assign(super.serialize(), {type: "TrueFalseSingleChoiceQuestion"});
 	}
 
 	/**

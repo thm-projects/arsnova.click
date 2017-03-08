@@ -1,0 +1,36 @@
+<template name="votingViewFooterNavButtons">
+    <div class="fixed-bottom col-xxs-12 col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" role="navigation" id="votingViewFooterNavButtons">
+        {{#if isConfidenceSliderEnabled}}
+            <div class="{{#unless showConfidenceSlider}}hidden{{/unless}}">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="text-light text-center">{{_ "view.voting.confidence_level.title" }}</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div id="votingConfidenceSlider"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="text-light text-center">{{_ getConfidenceTranslationReference }}</h3>
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+        <div class="row">
+            {{#if showForwardButton}}
+                <div class="col-xs-12">
+                    <button id="forwardButton"
+                            type="button"
+                            aria-labelledby="sendResponse_description"
+                            class="btn btn-warning btn-lg btn-answerOption tabbable">
+                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                        <span class="ansBtn" id="sendResponse_description">{{_ "view.voting.send"}}</span>
+                    </button>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+</template>

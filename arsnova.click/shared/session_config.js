@@ -31,7 +31,8 @@ Meteor.methods({
 			nicks: sessionConfigObject.nicks,
 			theme: sessionConfigObject.theme,
 			readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled,
-			showResponseProgress: sessionConfigObject.showResponseProgress
+			showResponseProgress: sessionConfigObject.showResponseProgress,
+			confidenceSliderEnabled: sessionConfigObject.confidenceSliderEnabled
 		}}, {upsert: true});
 		EventManagerCollection.update({hashtag: sessionConfigObject.hashtag}, {
 			$push: {
@@ -43,7 +44,8 @@ Meteor.methods({
 						nicks: sessionConfigObject.nicks,
 						theme: sessionConfigObject.theme,
 						readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled,
-						showResponseProgress: sessionConfigObject.showResponseProgress
+						showResponseProgress: sessionConfigObject.showResponseProgress,
+						confidenceSliderEnabled: sessionConfigObject.confidenceSliderEnabled
 					}
 				}
 			}
@@ -59,7 +61,8 @@ Meteor.methods({
 			nicks: sessionConfigObject.nicks,
 			theme: sessionConfigObject.theme,
 			readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled,
-			showResponseProgress: sessionConfigObject.showResponseProgress
+			showResponseProgress: sessionConfigObject.showResponseProgress,
+			confidenceSliderEnabled: sessionConfigObject.confidenceSliderEnabled
 		}});
 		EventManagerCollection.update({hashtag: sessionConfigObject.hashtag}, {
 			$push: {
@@ -71,7 +74,8 @@ Meteor.methods({
 						nicks: sessionConfigObject.nicks,
 						theme: sessionConfigObject.theme,
 						readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled,
-						showResponseProgress: sessionConfigObject.showResponseProgress
+						showResponseProgress: sessionConfigObject.showResponseProgress,
+						confidenceSliderEnabled: sessionConfigObject.confidenceSliderEnabled
 					}
 				}
 			}
@@ -143,6 +147,19 @@ Meteor.methods({
 					key: "SessionConfiguration.setShowResponseProgress",
 					value: {
 						showResponseProgress: showResponseProgress
+					}
+				}
+			}
+		});
+	},
+	"SessionConfiguration.setConfidenceSliderEnabled": function (hashtag, confidenceSliderEnabled) {
+		SessionConfigurationCollection.update({hashtag: hashtag}, {$set: {"confidenceSliderEnabled": confidenceSliderEnabled}});
+		EventManagerCollection.update({hashtag: hashtag}, {
+			$push: {
+				eventStack: {
+					key: "SessionConfiguration.setConfidenceSliderEnabled",
+					value: {
+						confidenceSliderEnabled: confidenceSliderEnabled
 					}
 				}
 			}

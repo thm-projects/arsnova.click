@@ -37,6 +37,7 @@ Template.votingview.onRendered(function () {
 	}
 	if (questionType !== "RangedQuestion" && questionType !== "FreeTextQuestion") {
 		this.autorun(function () {
+			lib.toggledResponseTracker.depend();
 			answerOptionLib.answerOptionTracker.depend();
 			questionLib.markdownRenderingTracker.depend();
 			Meteor.setTimeout(function () {
@@ -54,6 +55,7 @@ Template.votingview.onRendered(function () {
 		headerLib.calculateHeaderSize();
 		headerLib.calculateTitelHeight();
 	});
+	lib.createSlider();
 	TimerMap.routeToVotingView.end();
 });
 

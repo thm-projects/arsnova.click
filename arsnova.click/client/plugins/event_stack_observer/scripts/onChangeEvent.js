@@ -62,7 +62,7 @@ function addMemberlistChangeEvents() {
 	globalEventStackObserver.onChange([
 		"MemberListCollection.removeLearner"
 	], function (key, value) {
-		if (value.user === localStorage.getItem(Router.current().params.quizName + "nick")) {
+		if (value.user === sessionStorage.getItem(Router.current().params.quizName + "nick")) {
 			new ErrorSplashscreen({
 				autostart: true,
 				errorMessage: "plugins.splashscreen.error.error_messages.kicked_from_quiz"
@@ -90,7 +90,7 @@ function addMemberlistChangeEvents() {
 				}
 				Meteor.call('MemberListCollection.setLearnerReference', {
 					hashtag: Router.current().params.quizName,
-					nick: localStorage.getItem(Router.current().params.quizName + "nick"),
+					nick: sessionStorage.getItem(Router.current().params.quizName + "nick"),
 					userRef: Meteor.user()._id
 				});
 			});
@@ -98,7 +98,7 @@ function addMemberlistChangeEvents() {
 			Meteor.logout();
 			Meteor.call('MemberListCollection.setLearnerReference', {
 				hashtag: Router.current().params.quizName,
-				nick: localStorage.getItem(Router.current().params.quizName + "nick"),
+				nick: sessionStorage.getItem(Router.current().params.quizName + "nick"),
 				userRef: ""
 			});
 		}
@@ -162,6 +162,12 @@ function addLiveresultsChangeEvents() {
 			liveResultsLib.countdownFinish();
 		}
 	});
+
+	globalEventStackObserver.onChange([
+		"EventManagerCollection.abortCountdown"
+	], function () {
+		liveResultsLib.countdownFinish();
+	});
 }
 
 function addVotingViewChangeEvents() {
@@ -172,6 +178,13 @@ function addVotingViewChangeEvents() {
 			$('.modal-backdrop').remove();
 			Router.go("/" + Router.current().params.quizName + "/memberlist");
 		}
+	});
+
+	globalEventStackObserver.onChange([
+		"EventManagerCollection.abortCountdown"
+	], function () {
+		liveResultsLib.countdownFinish();
+		Router.go("/" + Router.current().params.quizName + "/results");
 	});
 }
 

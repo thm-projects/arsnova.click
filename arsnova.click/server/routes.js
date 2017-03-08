@@ -20,11 +20,19 @@ import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {Router} from 'meteor/iron:router';
 import {HashtagsCollection, hashtagSchema} from '/lib/hashtags/collection.js';
-import {questionGroupSchema} from '/lib/questions/collection.js';
+import {QuestionGroupCollection, questionGroupSchema} from '/lib/questions/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
+import * as SummaryExcelSheet from '/server/export_templates/excel_summary_template.js';
+import * as SingleChoiceExcelSheet from '/server/export_templates/excel_singlechoice_template.js';
+import * as MultipleChoiceExcelSheet from '/server/export_templates/excel_multiplechoice_template.js';
+import * as RangedExcelSheet from '/server/export_templates/excel_ranged_template.js';
+import * as SurveyExcelSheet from '/server/export_templates/excel_survey_template.js';
+import * as FreeTextExcelSheet from '/server/export_templates/excel_freetext_template.js';
+import {ExcelTheme} from '/server/export_templates/excel_default_styles.js';
 import fs from 'fs';
 import process from 'process';
+import xlsx from 'excel4node';
 
 Router.route("/server/preview/:themeName/:language", function () {
 	const self = this,
@@ -45,6 +53,61 @@ Router.route("/server/preview/:themeName/:language", function () {
 		}
 	});
 }, {where: "server"});
+
+Router.route("/server/generateExcelFile/:hashtag/:translation/:privateKey/:theme?", function () {
+	if (!HashtagsCollection.findOne({hashtag: this.params.hashtag})) {
+		this.response.writeHead(500);
+		this.response.end("Hashtag not found");
+		return;
+	}
+	if (!SessionConfigurationCollection.findOne({hashtag: this.params.hashtag})) {
+		this.response.writeHead(500);
+		this.response.end("Session is inactive");
+		return;
+	}
+	if (HashtagsCollection.findOne({hashtag: this.params.hashtag}).privateKey !== this.params.privateKey) {
+		this.response.writeHead(500);
+		this.response.end("Missing permissions.");
+		return;
+	}
+	const wb = new xlsx.Workbook({
+		jszip: {
+			compression: 'DEFLATE'
+		},
+		defaultFont: {
+			size: 12,
+			name: 'Calibri',
+			color: 'FF000000'
+		},
+		dateFormat: 'd.m.yyyy'
+	});
+	const themeInstance = new ExcelTheme(this.params.theme || SessionConfigurationCollection.findOne({hashtag: this.params.hashtag}).theme || Meteor.settings.public.default.theme);
+	SummaryExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()});
+	const questionGroup = QuestionGroupCollection.findOne({hashtag: this.params.hashtag});
+	for (let i = 0; i < questionGroup.questionList.length; i++) {
+		switch (questionGroup.questionList[i].type) {
+			case "SingleChoiceQuestion":
+			case "YesNoSingleChoiceQuestion":
+			case "TrueFalseSingleChoiceQuestion":
+				SingleChoiceExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
+				break;
+			case "MultipleChoiceQuestion":
+				MultipleChoiceExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
+				break;
+			case "RangedQuestion":
+				RangedExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
+				break;
+			case "SurveyQuestion":
+				SurveyExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
+				break;
+			case "FreeTextQuestion":
+				FreeTextExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
+				break;
+		}
+	}
+	const date = new Date();
+	wb.write("Export-" + this.params.hashtag + "-" + date.getDate() + "_" + (date.getMonth() + 1) + "_" + date.getFullYear() + "-" + date.getHours() + "_" + date.getMinutes() + ".xlsx", this.response);
+}, {where: 'server'});
 
 Router.route('/api/keepalive', {where: 'server'})
 	.post(function () {

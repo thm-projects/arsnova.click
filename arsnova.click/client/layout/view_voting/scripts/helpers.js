@@ -20,6 +20,7 @@ import {Template} from 'meteor/templating';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {Router} from 'meteor/iron:router';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
+import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import * as lib from './lib.js';
 
@@ -34,9 +35,6 @@ Template.votingview.helpers({
 	},
 	showQuestionButton: function () {
 		return isNaN(parseInt(Router.current().params.questionIndex));
-	},
-	showForwardButton: function () {
-		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
 	},
 	getDisplayAnswerText: function () {
 		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
@@ -81,5 +79,40 @@ Template.votingviewTitel.helpers({
 		}
 		let countdownValue = (Session.get("countdownInitialized") && lib.countdown) ? lib.countdown.get() : 0;
 		return TAPi18n.__("view.voting.seconds_left", {value: countdownValue, count: countdownValue});
+	}
+});
+
+Template.votingViewFooterNavButtons.helpers({
+	showForwardButton: function () {
+		lib.toggledResponseTracker.changed();
+		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
+	},
+	isConfidenceSliderEnabled: function () {
+		const configDoc = SessionConfigurationCollection.findOne();
+		return !!(configDoc && configDoc.confidenceSliderEnabled);
+	},
+	showConfidenceSlider: function () {
+		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
+	},
+	getConfidenceTranslationReference: function () {
+		let confidenceLevel = Session.get("confidenceValue");
+		switch (true) {
+			case confidenceLevel >= 100:
+				confidenceLevel = "very_sure";
+				break;
+			case confidenceLevel >= 75:
+				confidenceLevel = "quite_sure";
+				break;
+			case confidenceLevel >= 50:
+				confidenceLevel = "unsure";
+				break;
+			case confidenceLevel >= 25:
+				confidenceLevel = "not_sure";
+				break;
+			default:
+				confidenceLevel = "no_idea";
+				break;
+		}
+		return "view.voting.confidence_level." + confidenceLevel;
 	}
 });

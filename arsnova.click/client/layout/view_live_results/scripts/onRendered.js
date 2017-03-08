@@ -42,6 +42,14 @@ Template.liveResults.onRendered(()=> {
 				Meteor.call("EventManagerCollection.showReadConfirmedForIndex", hashtag, 0);
 			}
 		} else {
+			const countdownAbortIndex = eventDoc.eventStack.findLastIndex(x => x.key === 'EventManagerCollection.abortCountdown');
+			const countdownAbort = eventDoc.eventStack[countdownAbortIndex];
+			if (countdownAbort && countdownAbort.value.questionIndex === eventDoc.questionIndex) {
+				const newCountdownStartIndex = eventDoc.eventStack.findLastIndex(x => x.key === 'EventManagerCollection.startQuiz');
+				if (!newCountdownStartIndex || newCountdownStartIndex < countdownAbortIndex) {
+					return;
+				}
+			}
 			let allMemberResponses = ResponsesCollection.find({questionIndex: eventDoc.questionIndex}).fetch();
 			let memberWithGivenResponsesAmount = _.uniq(allMemberResponses, false, function (user) {
 				return user.userNick;
@@ -60,6 +68,7 @@ Template.liveResults.onRendered(()=> {
 		if (eventDoc.questionIndex + 1 < questionCount) {
 			footerElements.addFooterElement(footerElements.footerElemResponseProgress);
 			footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
+			footerElements.addFooterElement(footerElements.footerElemConfidenceSlider);
 		}
 		if (navigator.userAgent.match(/iPad/i) == null) {
 			footerElements.addFooterElement(footerElements.footerElemFullscreen);

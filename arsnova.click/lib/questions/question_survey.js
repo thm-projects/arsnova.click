@@ -75,7 +75,7 @@ export class SurveyQuestion extends AbstractChoiceQuestion {
 	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
 	 */
 	serialize () {
-		return $.extend(super.serialize(), {
+		return Object.assign(super.serialize(), {
 			type: "SurveyQuestion",
 			multipleSelectionEnabled: this.getMultipleSelectionEnabled()
 		});

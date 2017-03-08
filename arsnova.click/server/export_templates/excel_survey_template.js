@@ -165,7 +165,8 @@ export function generateSheet(wb, {hashtag, translation, defaultStyles}, index) 
 			evenFooter: TAPi18n.__('export.page_footer', {lng: translation}),
 			oddHeader: TAPi18n.__('export.page_header', {lng: translation, createdAt: createdAt}),
 			oddFooter: TAPi18n.__('export.page_footer', {lng: translation}),
-			alignWithMargins: true
+			alignWithMargins: true,
+			scaleWithDoc: false
 		}
 	}));
 	const answerList = questionGroup.questionList[index].answerOptionList;

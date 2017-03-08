@@ -754,6 +754,7 @@
     "attendee": "Teilnehmer",
     "attendee_complete_correct": "Teilnehmer mit vollständig richtig beantworteten Fragen",
     "attendee_complete_correct_none_available": "Keine Einträge vorhanden",
+    "correct_questions_none_available": "Keine",
     "attendee_all_entries": "Alle Teilnehmer",
     "time": "Antwortzeit (in ms)",
 	  "confidence_level": "Antwortsicherheit",

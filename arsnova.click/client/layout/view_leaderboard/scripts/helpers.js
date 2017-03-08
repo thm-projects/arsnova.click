@@ -30,13 +30,8 @@ Template.leaderboardTitle.helpers({
 
 Template.leaderboardFooterNavButtons.helpers({
 	getButtonCols: ()=> {
-		if (!Session.get("nicks")) {
-			return 12;
-		}
 		const hasTooMuchButtons = Session.get("responsesCountOverride") || (Session.get("allMembersCount") - (Session.get("maxResponseButtons")) > 0);
-		if (Session.get("nicks").length === 0 && Session.get("exportItems").length === 0) {
-			return 12;
-		} else if (localData.containsHashtag(Router.current().params.quizName)) {
+		if (localData.containsHashtag(Router.current().params.quizName)) {
 			if (hasTooMuchButtons) {
 				return 4;
 			} else {
@@ -115,16 +110,22 @@ Template.leaderBoard.helpers({
 		if (!Session.get("nicks")) {
 			return true;
 		}
-		return Session.get("nicks").length === 0;
+		return Session.get("nicks").length === 0 || Session.get("nicks").filter(function (item) {
+			return item.correctQuestions.length > 0;
+		}).length === 0;
 	},
 	leaderBoardItems: ()=> {
 		if (!Session.get("nicks")) {
 			return false;
 		}
 		if (Session.get("responsesCountOverride")) {
-			return Session.get("nicks");
+			return Session.get("nicks").filter(function (item) {
+				return item.correctQuestions.length > 0;
+			});
 		} else {
-			return Session.get("nicks").slice(0, Session.get("maxResponseButtons"));
+			return Session.get("nicks").slice(0, Session.get("maxResponseButtons")).filter(function (item) {
+				return item.correctQuestions.length > 0;
+			});
 		}
 	},
 	isFirstItem: function (index) {

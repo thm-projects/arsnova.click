@@ -753,6 +753,7 @@
     "attendee": "Asistente",
     "attendee_complete_correct": "Asistentes con preguntas correctas contestadas",
     "attendee_complete_correct_none_available": "Ninguno disponible",
+    "correct_questions_none_available": "Ninguna",
     "attendee_all_entries": "Todos los asistentes",
     "time": "Tiempo de respuesta (en ms)",
     "confidence_level": "Grado de confianza",

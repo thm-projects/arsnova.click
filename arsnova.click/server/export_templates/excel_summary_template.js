@@ -259,7 +259,11 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 			ws.cell(targetRow, nextColumnIndex++).string(profile.id);
 			ws.cell(targetRow, nextColumnIndex++).string(profile.mail instanceof Array ? profile.mail.slice(-1)[0] : profile.mail);
 		}
-		ws.cell(targetRow, nextColumnIndex++).string(leaderboardItem.correctQuestions.join(", "));
+		if (leaderboardItem.correctQuestions.length === 0) {
+			ws.cell(targetRow, nextColumnIndex++).string(TAPi18n.__("export.correct_questions_none_available", {lng: translation}));
+		} else {
+			ws.cell(targetRow, nextColumnIndex++).string(leaderboardItem.correctQuestions.join(", "));
+		}
 		if (responsesWithConfidenceValue.length > 0) {
 			ws.cell(targetRow, nextColumnIndex++).string(leaderboardItem.confidenceValue.toFixed(2) + " %");
 		}

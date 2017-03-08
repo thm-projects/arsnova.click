@@ -91,19 +91,22 @@ Template.votingViewFooterNavButtons.helpers({
 		const configDoc = SessionConfigurationCollection.findOne();
 		return !!(configDoc && configDoc.confidenceSliderEnabled);
 	},
+	showConfidenceSlider: function () {
+		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
+	},
 	getConfidenceTranslationReference: function () {
 		let confidenceLevel = Session.get("confidenceValue");
 		switch (true) {
-			case confidenceLevel > 90:
+			case confidenceLevel >= 100:
 				confidenceLevel = "very_sure";
 				break;
-			case confidenceLevel > 70:
+			case confidenceLevel >= 75:
 				confidenceLevel = "quite_sure";
 				break;
-			case confidenceLevel > 50:
+			case confidenceLevel >= 50:
 				confidenceLevel = "unsure";
 				break;
-			case confidenceLevel > 30:
+			case confidenceLevel >= 25:
 				confidenceLevel = "not_sure";
 				break;
 			default:

@@ -39,9 +39,12 @@ export function createSlider() {
 		return;
 	}
 	const plainSlider = document.getElementById('votingConfidenceSlider');
+	if (!plainSlider) {
+		return;
+	}
 	plainSlider.style.background = hslColPerc(100, 0, 100);
 	sliderObject = noUiSlider.create(plainSlider, {
-		step: 1,
+		step: 25,
 		margin: 1,
 		start: 100,
 		range: {

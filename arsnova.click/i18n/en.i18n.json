@@ -737,6 +737,10 @@
     }
   },
   "export": {
+    /* See https://poi.apache.org/apidocs/org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html */
+    "page_header": "&LQuiz and ranking data generated from a live quiz session with arsnova.click&R__createdAt__",
+    "page_footer": "&L&A&Carsnova.click is open source software, see arsnova.io and https://github.com/thm-projects/arsnova.click&RPage &P of &N",
+
     "summary": "Summary",
     "exported_at_date": "Exported at",
     "exported_at": "at",

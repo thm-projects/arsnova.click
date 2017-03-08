@@ -177,7 +177,25 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 export function generateSheet(wb, {hashtag, translation, defaultStyles}, index) {
 	const questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
 	const questionGroupObject = new DefaultQuestionGroup(JSON.parse(JSON.stringify(questionGroup)));
-	const ws = wb.addWorksheet(TAPi18n.__('export.question', {lng: translation}) + ' ' + (index + 1), excelDefaultWorksheetOptions);
+	const date = new Date();
+	const createdAt = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) +
+		"." + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) +
+		"." + date.getFullYear() +
+		" " + TAPi18n.__('export.exported_at', {lng: translation}) +
+		" " + (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) +
+		":" + (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) +
+		" " + TAPi18n.__('export.exported_at_time', {lng: translation});
+	const ws = wb.addWorksheet(TAPi18n.__('export.question', {lng: translation}) + ' ' + (index + 1), Object.assign({}, excelDefaultWorksheetOptions, {
+		headerFooter: {
+			firstHeader: TAPi18n.__('export.page_header', {lng: translation, createdAt: createdAt}),
+			firstFooter: TAPi18n.__('export.page_footer', {lng: translation}),
+			evenHeader: TAPi18n.__('export.page_header', {lng: translation, createdAt: createdAt}),
+			evenFooter: TAPi18n.__('export.page_footer', {lng: translation}),
+			oddHeader: TAPi18n.__('export.page_header', {lng: translation, createdAt: createdAt}),
+			oddFooter: TAPi18n.__('export.page_footer', {lng: translation}),
+			alignWithMargins: true
+		}
+	}));
 	const answerList = questionGroup.questionList[index].answerOptionList;
 	const allResponses = ResponsesCollection.find({hashtag: hashtag, questionIndex: index});
 	const responsesWithConfidenceValue = allResponses.fetch().filter((x)=> {return x.confidenceValue > -1;});

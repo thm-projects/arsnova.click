@@ -276,7 +276,25 @@ export function generateSheet(wb, {hashtag, translation, defaultStyles}) {
 	leaderboardLib.init(hashtag);
 	const questionGroup = QuestionGroupCollection.findOne({hashtag: hashtag});
 	const questionGroupObject = new DefaultQuestionGroup(JSON.parse(JSON.stringify(questionGroup)));
-	const ws = wb.addWorksheet(TAPi18n.__('export.summary', {lng: translation}), excelDefaultWorksheetOptions);
+	const date = new Date();
+	const createdAt = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) +
+		"." + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) +
+		"." + date.getFullYear() +
+		" " + TAPi18n.__('export.exported_at', {lng: translation}) +
+		" " + (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) +
+		":" + (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) +
+		" " + TAPi18n.__('export.exported_at_time', {lng: translation});
+	const ws = wb.addWorksheet(TAPi18n.__('export.summary', {lng: translation}), Object.assign({}, excelDefaultWorksheetOptions, {
+		headerFooter: {
+			firstHeader: TAPi18n.__('export.page_header', {lng: translation, createdAt: createdAt}),
+			firstFooter: TAPi18n.__('export.page_footer', {lng: translation}),
+			evenHeader: TAPi18n.__('export.page_header', {lng: translation, createdAt: createdAt}),
+			evenFooter: TAPi18n.__('export.page_footer', {lng: translation}),
+			oddHeader: TAPi18n.__('export.page_header', {lng: translation, createdAt: createdAt}),
+			oddFooter: TAPi18n.__('export.page_footer', {lng: translation}),
+			alignWithMargins: true
+		}
+	}));
 	const allResponses = ResponsesCollection.find({hashtag: hashtag});
 	const responsesWithConfidenceValue = allResponses.fetch().filter((x)=> {return x.confidenceValue > -1;});
 	const leaderboardData = _.sortBy(leaderboardLib.objectToArray(leaderboardLib.getAllLeaderboardItems(true)), function (o) { return o.responseTime; });

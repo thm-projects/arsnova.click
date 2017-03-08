@@ -737,6 +737,10 @@
     }
   },
   "export": {
+    /* See https://poi.apache.org/apidocs/org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html */
+    "page_header": "&LQuiz y datos de clasificación generados a partir de una sesión de prueba en vivo con arsnova.click&R__createdAt__",
+    "page_footer": "&L&A&Carsnova.click es un software de código abierto, consulte arsnova.io y https://github.com/thm-projects/arsnova.clickPágina &P de &N",
+
     "summary": "Resumen",
     "exported_at_date": "Exportado a",
     "exported_at": "a",

@@ -78,7 +78,7 @@ export function calculateHeaderSize() {
 		}
 		headerTitle.css({"font-size": fontSize, "line-height": header.find('#arsnova-logo-image').css("height")});
 		resolve();
-	})
+	});
 }
 
 export const titelTracker = new Tracker.Dependency();
@@ -108,7 +108,7 @@ export function calculateTitelHeight() {
 		}
 		titelTracker.changed();
 		resolve();
-	})
+	});
 }
 
 export const headerTrackerCallback = function () {

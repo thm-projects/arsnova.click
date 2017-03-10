@@ -23,7 +23,6 @@ import * as headerLib from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as localData from '/lib/local_storage.js';
 import {getTooltipForRoute} from "/client/layout/global/scripts/lib.js";
-import * as votingViewLib from '/client/layout/view_voting/scripts/lib.js';
 import * as lib from './lib.js';
 
 Template.defaultAnswerOptionTemplate.onRendered(function () {

@@ -137,7 +137,7 @@ export function resetQuickfitText() {
  * @returns {Number} The width of the largest child element
  */
 function calcWidth(selector) {
-	return Math.max.apply(Math, $("#" + selector + ' *').map(function(){
+	return Math.max.apply(Math, $("#" + selector + ' *').map(function () {
 		if ($(this).text().length > 0) { return $(this).outerWidth(); }
 	}).get());
 }

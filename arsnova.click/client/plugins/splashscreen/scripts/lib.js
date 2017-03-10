@@ -301,7 +301,7 @@ export const parseMarkdown = {
 		const result = question.answerOptionList.map(function (elem) {
 			return elem.answerText;
 		});
-		questionLib.parseGithubFlavoredMarkdown(result);
+		questionLib.parseGithubFlavoredMarkdown(result, false);
 		return result;
 	},
 	isCorrectAnswer: function (answerindex) {

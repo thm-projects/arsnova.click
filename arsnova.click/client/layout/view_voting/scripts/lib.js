@@ -123,6 +123,69 @@ export function makeAndSendFreeTextResponse(value) {
 	});
 }
 
+const quickFitClass = "quickfit";
+const quickFitSetClass = "quickfitSet";
+let smallestFontSize = 3;
+export function resetQuickfitText() {
+	$("." + quickFitSetClass).removeClass(quickFitSetClass);
+	smallestFontSize = 3;
+}
+/**
+ * Calculates the width of the largest child element
+ * @source http://stackoverflow.com/a/20768042
+ * @param selector The id of the selector which has to be checked
+ * @returns {Number} The width of the largest child element
+ */
+function calcWidth(selector) {
+	return Math.max.apply(Math, $("#" + selector + ' *').map(function(){
+		if ($(this).text().length > 0) { return $(this).outerWidth(); }
+	}).get());
+}
+function calculateMaxTextSize(item) {
+	let hasDummyText = false;
+	const itemWidth = $(item).width();
+	const itemHeight = $(item).height();
+
+	if ($(item).find("p").length === 0) {
+		const itemText = $(item).text();
+		$(item).text("");
+		$(item).append($("<p></p>").text(itemText));
+		hasDummyText = true;
+	}
+	const contentItem = $(item).find("p").first();
+	contentItem.css({"height": "auto", "display": "inline-flex"});
+
+	$(contentItem).css("font-size", smallestFontSize);
+	while (calcWidth($(item).attr("id")) < itemWidth && $(contentItem).outerHeight() < itemHeight && smallestFontSize < 100) {
+		$(contentItem).css({"font-size": smallestFontSize++});
+	}
+	smallestFontSize += 3;
+	$(contentItem).css("font-size", "inherit");
+
+	if (hasDummyText) {
+		const itemText = $(contentItem).text();
+		contentItem.remove();
+		$(item).text(itemText);
+	}
+}
+export function quickfitText(reset) {
+	if (reset) {
+		resetQuickfitText();
+	}
+	const quickfitSelector = $("." + quickFitClass + ":not(." + quickFitSetClass + ")");
+	const quickfitMap = $.makeArray(quickfitSelector.map((i, x)=> {return $(x).text().length;}));
+	if (quickfitMap.length !== $('.buttonWrapper').length) {
+		return;
+	}
+	const sortedMap = JSON.parse(JSON.stringify(quickfitMap)).sort().reverse()[0];
+	const largestTextIndex = quickfitMap.indexOf(sortedMap);
+	calculateMaxTextSize($(quickfitSelector[largestTextIndex]));
+	$('.' + quickFitClass).addClass(quickFitSetClass).css("font-size", smallestFontSize);
+}
+$(window).on("resize orientationchange", function () {
+	quickfitText(true);
+});
+
 function calculateAnswerRowHeight() {
 	let contentHeight = ($("#markdownPreviewWrapper").height() - $("h2.text-center").outerHeight(true)) || $(".contentPosition").height();
 	return contentHeight - $('.voting-helper-buttons').height() - $('#votingViewFooterNavButtons').height() - parseInt($('.answer-row').css("margin-top"));

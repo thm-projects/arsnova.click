@@ -8,7 +8,6 @@ allow-deny@1.0.5
 amplify@1.0.0
 arsnova.click:bootstrap-toggle@2.2.2
 arsnova.click:introjs@2.4.0
-arsnova.click:jquery-flowtype@1.1.0
 arsnova.click:jquery-qr-code@1.14.0
 arsnova.click:jquery-ui@1.12.1
 arsnova.click:nouislider@8.5.1

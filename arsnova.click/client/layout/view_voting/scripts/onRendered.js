@@ -34,17 +34,25 @@ Template.votingview.onRendered(function () {
 		questionType = Session.get("questionGroup").getQuestionList()[this.data["data-questionIndex"]].typeName();
 	} else {
 		questionType = QuestionGroupCollection.findOne().questionList[EventManagerCollection.findOne().questionIndex].type;
+		lib.createSlider();
 	}
 	if (questionType !== "RangedQuestion" && questionType !== "FreeTextQuestion") {
 		this.autorun(function () {
 			lib.toggledResponseTracker.depend();
 			answerOptionLib.answerOptionTracker.depend();
 			questionLib.markdownRenderingTracker.depend();
-			Meteor.setTimeout(function () {
+			const renderPromise = new Promise(function (resolve) {
 				lib.formatAnswerButtons();
-				$('.quickfit').flowtype();
+				resolve();
+			});
+			renderPromise.then(function () {
+				Meteor.defer(function () {
+					lib.quickfitText(true);
+				});
+			});
+			renderPromise.then(function () {
 				$('#buttonContainer').css("visibility", "initial");
-			}, 100);
+			});
 		}.bind(this));
 		lib.formatAnswerButtons();
 	}
@@ -55,7 +63,6 @@ Template.votingview.onRendered(function () {
 		headerLib.calculateHeaderSize();
 		headerLib.calculateTitelHeight();
 	});
-	lib.createSlider();
 	TimerMap.routeToVotingView.end();
 });
 

@@ -37,72 +37,78 @@ export function isEditingQuestion() {
 }
 
 export function calculateHeaderSize() {
-	const header = $('.navbar-fixed-top'),
-		headerTitle = header.find('.header-title'),
-		titel         = headerTitle.text().trim(),
-		titleLength   = titel.length;
+	return new Promise(function (resolve) {
+		const header = $('.navbar-fixed-top'),
+			headerTitle = header.find('.header-title'),
+			titel         = headerTitle.text().trim(),
+			titleLength   = titel.length;
 
-	let fontSize = "",
-		logoHeight;
+		let fontSize = "",
+			logoHeight;
 
-	if ($(document).width() > $(document).height()) {
-		logoHeight = $(window).width() * 0.08;
-	} else {
-		logoHeight = $(window).height() * 0.08;
-	}
-	header.find('#arsnova-logo-image').css("height", logoHeight);
-
-	if (titleLength <= 15) {
 		if ($(document).width() > $(document).height()) {
-			if ($(document).width() < 1200) {
-				fontSize = "6vw";
+			logoHeight = $(window).width() * 0.08;
+		} else {
+			logoHeight = $(window).height() * 0.08;
+		}
+		header.find('#arsnova-logo-image').css("height", logoHeight);
+
+		if (titleLength <= 15) {
+			if ($(document).width() > $(document).height()) {
+				if ($(document).width() < 1200) {
+					fontSize = "6vw";
+				} else {
+					fontSize = "5vw";
+				}
 			} else {
-				fontSize = "5vw";
+				fontSize = "5vmin";
+			}
+		} else if (titleLength <= 20) {
+			if ($(document).width() > $(document).height()) {
+				fontSize = "5.5vw";
+			} else {
+				fontSize = "4vh";
 			}
 		} else {
-			fontSize = "5vmin";
+			if ($(document).width() > $(document).height()) {
+				fontSize = "4vw";
+			} else {
+				fontSize = "3vh";
+			}
 		}
-	} else if (titleLength <= 20) {
-		if ($(document).width() > $(document).height()) {
-			fontSize = "5.5vw";
-		} else {
-			fontSize = "4vh";
-		}
-	} else {
-		if ($(document).width() > $(document).height()) {
-			fontSize = "4vw";
-		} else {
-			fontSize = "3vh";
-		}
-	}
-	headerTitle.css({"font-size": fontSize, "line-height": header.find('#arsnova-logo-image').css("height")});
+		headerTitle.css({"font-size": fontSize, "line-height": header.find('#arsnova-logo-image').css("height")});
+		resolve();
+	})
 }
 
 export const titelTracker = new Tracker.Dependency();
 export function calculateTitelHeight() {
-	const fixedTop         = $(".navbar-fixed-top"),
-		fixedBottom        = $('.navbar-fixed-bottom'),
-		container          = $(".container"),
-		rowBottom          = $('.row-padding-bottom'),
-		centerVertical     = $('.center-vertical'),
-		footerHeight       = $(".fixed-bottom").outerHeight(true) + $(".footer-info-bar").outerHeight(),
-		navbarFooterHeight = fixedBottom.is(":visible") ? fixedBottom.outerHeight() : 0,
-		marginTop          = rowBottom.outerHeight(true) || fixedTop.outerHeight(),
-		finalHeight        = $(window).height() - marginTop - navbarFooterHeight - footerHeight;
+	return new Promise(function (resolve) {
+		const fixedTop         = $(".navbar-fixed-top"),
+			fixedBottom        = $('.navbar-fixed-bottom'),
+			container          = $(".container"),
+			rowBottom          = $('.row-padding-bottom'),
+			centerVertical     = $('.center-vertical'),
+			footerHeight       = $(".fixed-bottom").outerHeight(true) + $(".footer-info-bar").outerHeight(),
+			navbarFooterHeight = fixedBottom.is(":visible") ? fixedBottom.outerHeight() : 0,
+			marginTop          = rowBottom.outerHeight(true) || fixedTop.outerHeight(),
+			finalHeight        = $(window).height() - marginTop - navbarFooterHeight - footerHeight;
 
-	let centerVerticalTop  = finalHeight / 2 - centerVertical.outerHeight() / 2;
-	if (centerVerticalTop < 0) {
-		centerVerticalTop = 0;
-	}
+		let centerVerticalTop  = finalHeight / 2 - centerVertical.outerHeight() / 2;
+		if (centerVerticalTop < 0) {
+			centerVerticalTop = 0;
+		}
 
-	$('.titel').css('margin-top', fixedTop.outerHeight() * 1.1);
-	container.css("height", finalHeight);
-	container.css("margin-top", !rowBottom.outerHeight() ? marginTop : 0);
-	centerVertical.css("top", centerVerticalTop);
-	if ($(window).height() < 768) {
-		centerVertical.css({width: "100%", margin: "0 -15px"});
-	}
-	titelTracker.changed();
+		$('.titel').css('margin-top', fixedTop.outerHeight() * 1.1);
+		container.css("height", finalHeight);
+		container.css("margin-top", !rowBottom.outerHeight() ? marginTop : 0);
+		centerVertical.css("top", centerVerticalTop);
+		if ($(window).height() < 768) {
+			centerVertical.css({width: "100%", margin: "0 -15px"});
+		}
+		titelTracker.changed();
+		resolve();
+	})
 }
 
 export const headerTrackerCallback = function () {

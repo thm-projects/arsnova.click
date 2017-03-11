@@ -84,7 +84,7 @@
         }
       },
       "tos": {
-        "title": " Avisos legales ",
+        "title": "Avisos legales",
         "declaration": "Todo el mundo (no solo profesores) tiene permiso para usar el aplicación del concurso arsnova.click, en tanto que no contraviene para las leyes alemanes o lay leyes de la EU.",
         "license": {
           "title": "Licencia",
@@ -312,7 +312,7 @@
       }
     },
     "leaderboard": {
-      "header": "Escalafón ",
+      "header": "Escalafón",
       "global_header": "Escalafón global",
       "title": {
         "single_question": "… sabían pregunta __questionId__",
@@ -402,11 +402,11 @@
       "back": "Volver al mánager del concursos",
       "description": {
         "type_wrapper": "Aquí puedes cambiar el tipo de la pregunta. Cada tipo tiene distintas opciones. Puedes cambiar el tipo con un clic en las cajas sendas. ¡Cuidado!, opciones de respuestas que habías ya escrito pueden será borrado. Un cambio entre \"opción única\" y \"opción múltiple\" no es precario.",
-        "SingleChoiceQuestion": " \"Opción única\" preguntas implican cualquier opciones de respuestas. Solo una de las opciones es correcta.",
-        "YesNoSingleChoiceQuestion": " \"Sí/No\" preguntas implican solo dos opciones de preguntas (\"Si\" y \"No\", regrabable). Una de esos opciones tiene que marcado como correcto.",
-        "TrueFalseSingleChoiceQuestion": " \"Verdadero/Falso\" preguntas implican solo dos opciones (\"Verdadero\" y \"Falso\", regrabable). Una de esos opciones tiene que marcado como correcto.",
-        "MultipleChoiceQuestion": " \"Opción múltiple\" preguntas implican cualquier opciones de respuestas. Cualquier opciones (pero al menos una) pueden ser marcado como correcto.",
-        "RangedQuestion": " Por preguntas de estimación, una númera natural tiene que ser marcado como correcto. Adicionalmente, puedes fijar una tolerancia baja y alta.",
+        "SingleChoiceQuestion": "\"Opción única\" preguntas implican cualquier opciones de respuestas. Solo una de las opciones es correcta.",
+        "YesNoSingleChoiceQuestion": "\"Sí/No\" preguntas implican solo dos opciones de preguntas (\"Si\" y \"No\", regrabable). Una de esos opciones tiene que marcado como correcto.",
+        "TrueFalseSingleChoiceQuestion": "\"Verdadero/Falso\" preguntas implican solo dos opciones (\"Verdadero\" y \"Falso\", regrabable). Una de esos opciones tiene que marcado como correcto.",
+        "MultipleChoiceQuestion": "\"Opción múltiple\" preguntas implican cualquier opciones de respuestas. Cualquier opciones (pero al menos una) pueden ser marcado como correcto.",
+        "RangedQuestion": "Por preguntas de estimación, una númera natural tiene que ser marcado como correcto. Adicionalmente, puedes fijar una tolerancia baja y alta.",
         "FreeTextQuestion": "Con una \"respuesta corta\" pregunta, los participantes tienen que escribir un texto. Ese texto comparará con la respuesta de referencia",
         "SurveyQuestion": "Sondeos implican cualquier opciones de respuestas que no será evaluado. Sondeos pueden ser del tipo \"opción única\" u \"opción múltiple\"."
       }
@@ -691,7 +691,7 @@
           "session_exists_arsnova_import": "Por favor, da un nombre obvio para tu concurso:",
           "session_exists_new": "Da un nuevo:",
           "session_not_exists": "Eso concurso no existe",
-          "hashtag_exists": " Eso concurso ya existe",
+          "hashtag_exists": "Eso concurso ya existe",
           "session_not_available": "No puedes participar en eso rondo del concurso actualmente.",
           "private_browsing": "En el modo privado, solo puedes usar arsnova.click como un participante porque no permite usar tu memoria. Deactiva el modo privado durante el uso de arsnova.click. Quedas anónima aunque el modo privado es deactivado.",
           "kicked_from_quiz": "Eras echado del concurso",

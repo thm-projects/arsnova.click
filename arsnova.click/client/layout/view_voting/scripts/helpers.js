@@ -84,12 +84,11 @@ Template.votingviewTitel.helpers({
 
 Template.votingViewFooterNavButtons.helpers({
 	showForwardButton: function () {
-		lib.toggledResponseTracker.changed();
 		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
 	},
 	isConfidenceSliderEnabled: function () {
 		const configDoc = SessionConfigurationCollection.findOne();
-		return !!(configDoc && configDoc.confidenceSliderEnabled);
+		return isNaN(parseInt(Router.current().params.questionIndex)) && !!(configDoc && configDoc.confidenceSliderEnabled);
 	},
 	showConfidenceSlider: function () {
 		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));

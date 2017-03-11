@@ -123,50 +123,64 @@ export function makeAndSendFreeTextResponse(value) {
 	});
 }
 
-export function quickfitText(reset) {
-	const quickFitClass = "quickfit";
-	const quickFitSetClass = "quickfitSet";
+const quickFitClass = "quickfit";
+const quickFitSetClass = "quickfitSet";
+let smallestFontSize = 3;
+export function resetQuickfitText() {
+	$("." + quickFitSetClass).removeClass(quickFitSetClass);
+	smallestFontSize = 3;
+}
+/**
+ * Calculates the width of the largest child element
+ * @source http://stackoverflow.com/a/20768042
+ * @param selector The id of the selector which has to be checked
+ * @returns {Number} The width of the largest child element
+ */
+function calcWidth(selector) {
+	return Math.max.apply(Math, $("#" + selector + ' *').map(function () {
+		if ($(this).text().length > 0) { return $(this).outerWidth(); }
+	}).get());
+}
+function calculateMaxTextSize(item) {
+	let hasDummyText = false;
+	const itemWidth = $(item).width();
+	const itemHeight = $(item).height();
 
-	if (reset) {
-		$("." + quickFitSetClass).removeClass(quickFitSetClass);
+	if ($(item).find("p").length === 0) {
+		const itemText = $(item).text();
+		$(item).text("");
+		$(item).append($("<p></p>").text(itemText));
+		hasDummyText = true;
 	}
-	const setMaxTextSize = function (item) {
-		let fontSize = parseInt($(item).css("fontSize").replace("px", ""));
-		let hasDummyText = false;
-		if ($(item).find("p").length === 0) {
-			$(item).append($("<p></p>").text($(item).text()));
-			hasDummyText = true;
-		}
-		const contentItem = $(item).find("p").first();
-		contentItem.css({"height": "auto"});
-		if (contentItem.find("object").length > 0 && contentItem.find("p").length !== 0) {
-			contentItem.css("height", "100%");
-		}
-		contentItem.css("display", "inline-flex");
+	const contentItem = $(item).find("p").first();
+	contentItem.css({"height": "auto", "display": "inline-flex"});
 
-		if (contentItem.width() < $(item).width() && contentItem.height() < $(item).height()) {
-			do {
-				$(item).css("font-size", fontSize);
-			} while (++fontSize < 100 && contentItem.width() < $(item).width() && contentItem.height() < $(item).height());
-			fontSize -= 2;
-		} else {
-			do {
-				$(item).css("font-size", fontSize);
-			} while (--fontSize > 3 && (contentItem.width() > $(item).width() || contentItem.height() > $(item).height()));
-		}
+	$(contentItem).css("font-size", smallestFontSize);
+	while (calcWidth($(item).attr("id")) < itemWidth && $(contentItem).outerHeight() < itemHeight && smallestFontSize < 100) {
+		$(contentItem).css({"font-size": smallestFontSize++});
+	}
+	smallestFontSize += 3;
+	$(contentItem).css("font-size", "inherit");
 
-		$(item).css("font-size", fontSize);
-		$(item).addClass(quickFitSetClass);
-		contentItem.css({"display": "block"});
-		if (hasDummyText) {
-			contentItem.remove();
-		}
-	};
-	$("." + quickFitClass + ":not(." + quickFitSetClass + ")").each(function (index, item) {
-		if ($(item).find("object").length === 0) {
-			setMaxTextSize($(item));
-		}
-	});
+	if (hasDummyText) {
+		const itemText = $(contentItem).text();
+		contentItem.remove();
+		$(item).text(itemText);
+	}
+}
+export function quickfitText(reset) {
+	if (reset) {
+		resetQuickfitText();
+	}
+	const quickfitSelector = $("." + quickFitClass + ":not(." + quickFitSetClass + ")");
+	const quickfitMap = $.makeArray(quickfitSelector.map((i, x)=> {return $(x).text().length;}));
+	if (quickfitMap.length !== $('.buttonWrapper').length) {
+		return;
+	}
+	const sortedMap = JSON.parse(JSON.stringify(quickfitMap)).sort().reverse()[0];
+	const largestTextIndex = quickfitMap.indexOf(sortedMap);
+	calculateMaxTextSize($(quickfitSelector[largestTextIndex]));
+	$('.' + quickFitClass).addClass(quickFitSetClass).css("font-size", smallestFontSize);
 }
 $(window).on("resize orientationchange", function () {
 	quickfitText(true);

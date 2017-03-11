@@ -1135,8 +1135,13 @@ $themes: (
 				}
 			}
 			#editAnsweroptionText {
-				.answerOptionElementWrapper {
+				#default_answer_row {
 					background-color: map-get($map, "bg-edit_answeroption_text-element_wrapper");
+				}
+				#answerOptionWrapper {
+					.answerElementContextWrapper {
+						background-color: map-get($map, "bg-edit_answeroption_text-element_wrapper");
+					}
 				}
 			}
 			.arsnova-logo {

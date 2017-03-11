@@ -29,17 +29,6 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 	if ($(window).width() >= 992) {
 		$('#answerOptionText_Number0').focus();
 	}
-	this.autorun(lib.renderAnsweroptionItems);
-	this.autorun(function () {
-		headerLib.titelTracker.depend();
-		const mainContentContainer = $('#mainContentContainer');
-		const content = $('#content');
-		content.css("height", mainContentContainer.height());
-		const contentWidth = ((content.height() / 1.8805970149253732) + 10);
-		$('#previewAnsweroptionContentWrapper').find('.center-block').css({width: contentWidth});
-		content.css({"font-size": "50px"});
-		lib.answerOptionTracker.changed();
-	}.bind(this));
 	$('#answerOptionWrapper').sortable({
 		scroll: false,
 		axis: 'y',
@@ -59,6 +48,9 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 				questionGroup.getQuestionList()[Router.current().params.questionIndex].addAnswerOption(item, indexTo);
 				if (item.getAnswerText() === "") {
 					lib.renderAnsweroptionItems();
+					Meteor.defer(function () {
+						lib.answerOptionTracker.changed();
+					});
 				}
 			}
 			Session.set("questionGroup", questionGroup);
@@ -77,14 +69,32 @@ Template.defaultAnswerOptionTemplate.onRendered(function () {
 			ui.helper.append(textFrame);
 		}
 	});
+	const self = this;
 	this.autorun(function () {
 		footerElements.removeFooterElements();
 		footerElements.addFooterElement(footerElements.footerElemHome);
 		if ($(window).width() > 768) {
 			footerElements.addFooterElement(footerElements.footerElemProductTour);
 		}
-		headerLib.calculateHeaderSize();
-		headerLib.calculateTitelHeight();
+		const renderPromise = new Promise(function (resolve) {
+			headerLib.calculateHeaderSize();
+			headerLib.calculateTitelHeight();
+			resolve();
+		});
+		renderPromise.then(function () {
+			Meteor.defer(function () {
+				const mainContentContainer = $('#mainContentContainer');
+				const content = $('#content');
+				content.css("height", mainContentContainer.height());
+				const contentWidth = ((content.height() / 1.8805970149253732) + 10);
+				$('#previewAnsweroptionContentWrapper').find('.center-block').css({width: contentWidth});
+				content.css({"font-size": "50px"});
+				lib.answerOptionTracker.changed();
+			});
+		});
+		renderPromise.then(function () {
+			self.autorun(lib.renderAnsweroptionItems.bind(this));
+		});
 	}.bind(this));
 	Meteor.defer(function () {
 		if (localStorage.getItem("showProductTour") !== "false") {

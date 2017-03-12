@@ -145,7 +145,8 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 	}
 	ws.cell(10, nextColumnIndex++).string(TAPi18n.__("export.time", {lng: translation}));
 
-	allResponses.forEach(function (responseItem, indexInList) {
+	const sortedResponses = _.sortBy(allResponses.fetch(), function (o) { return o.responseTime; });
+	sortedResponses.forEach(function (responseItem, indexInList) {
 		let nextColumnIndex = 1;
 		const targetRow = indexInList + 11;
 		ws.cell(targetRow, nextColumnIndex++).string(responseItem.userNick);

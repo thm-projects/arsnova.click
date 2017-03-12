@@ -22,6 +22,7 @@ import {Router} from 'meteor/iron:router';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
+import * as headerLib from '/client/layout/region_header/lib.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
 import {makeAndSendResponse, makeAndSendRangedResponse, makeAndSendFreeTextResponse, countdownFinish} from './lib.js';
 import {TimerMap} from "/lib/performance_analysis/Timer.js";
@@ -77,6 +78,10 @@ Template.votingview.events({
 		Session.set("responses", JSON.stringify(responseArr));
 		Session.set("hasToggledResponse", JSON.stringify(responseArr).indexOf("true") > -1);
 		$(event.currentTarget).toggleClass("answer-selected");
+		Meteor.defer(function () {
+			headerLib.calculateHeaderSize();
+			headerLib.calculateTitelHeight();
+		});
 	},
 	"DOMSubtreeModified .sendResponse": function (event) {
 		const id = $(event.currentTarget).attr("id");

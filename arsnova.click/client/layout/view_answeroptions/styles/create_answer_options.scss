@@ -17,128 +17,27 @@
 
 @import "../../../layout/global/styles/appearance";
 
-.row-landingpage-buttons {
-	#addAnswerOption, #deleteAnswerOption {
-		margin: 0 15px;
+#editAnsweroptionText {
+	#emojiInfo {
+		margin-top: 10px;
 	}
-}
-.answer-options {
-
-	.invalidAnswerOption {
-		border-radius: $corner-radius;
-	}
-
-	.surveyQuestion {
-		border-bottom-right-radius: $corner-radius;
-		border-top-right-radius: $corner-radius;
-	}
-
 	.answerOptionConfig {
 		margin-top: 5px;
-		display: table;
+		display: flex;
 
 		#showAnswerContentOnButtons,
 		#multipleSelectionSurvey {
-			height: 35px;
 			margin: 0;
 			width: calc(100% - 100px);
-			display: table-cell;
-			vertical-align: middle;
+			align-self: center;
 		}
-	}
-}
-
-.rangedAnswerOptions {
-  	padding-bottom: 30px;
-
-  	.rangedValues {
-		text-align: center;
-		margin-bottom: 30px;
-		input[type="number"] {
-			text-align: center;
-			width: 100%;
-			border-radius: $corner-radius
-		}
-	}
-}
-
-#editAnsweroptionText {
-	.contextMenu {
-		@-webkit-keyframes fadeOut {
-			from { opacity: 0; }
-			to { opacity: 1; }
-		}
-		@keyframes fadeOut {
-			from { opacity: 0; }
-			to { opacity: 1; }
-		}
-		display: none;
-		-webkit-animation: fadeOut 0.2s;
-		animation: fadeOut 0.2s;
-
-		&.displayContextMenu {
-			display: flex;
-			@-webkit-keyframes fadeIn {
-				from { opacity: 0; }
-				to { opacity: 1; }
-			}
-			@keyframes fadeIn {
-				from { opacity: 0; }
-				to { opacity: 1; }
-			}
-			-webkit-animation: fadeIn 0.2s;
-			animation: fadeIn 0.2s;
-			.contextMenuItem {
-				cursor: pointer;
-				flex: 100% 1 1;
-				font-size: 20px;
-				text-align: center;
-
-				&:hover {
-					border-bottom: 1px solid;
-				}
-			}
-		}
-	}
-	.answerOptionElementWrapper {
-		display: flex;
-		border-radius: $corner-radius;
-		margin: 10px 0;
-		position: relative;
-		font-size: 1.3em;
-		overflow-y: hidden;
-		overflow-x: auto;
-
-		.answer_row_short_text {
-			width: 80px;
-			line-height: 50px;
-			text-align: center;
-			font-weight: bold;
-			font-size: 3em;
-			height: 50px;
-		}
-		.answer_row_text {
-			margin-right: 10px;
-			flex-grow: 1;
-			background-color: transparent;
-			border: none;
-			width: 100%;
-			text-overflow: initial;
-		}
-		.toggle {
-			margin-top: 10px;
-			margin-right: 10px;
-			min-width: 80px !important;
-		}
-	}
-	#emojiInfo {
-		margin-top: 10px;
 	}
 
 	#default_answer_row,
 	.answerOptionElementWrapper.ui-draggable-dragging {
+		border-radius: $corner-radius;
 		cursor: move !important;
-
+		display: flex;
 		.answer_row_default_text {
 			width: calc(100% - 80px);
 			margin: 0;
@@ -156,8 +55,93 @@
 			height: 50px;
 		}
 	}
+
 	.answerOptionElementWrapper.ui-draggable-dragging {
 		width: calc(100% - 30px);
+	}
+
+	#answerOptionWrapper {
+		.answerElementContextWrapper {
+			border-radius: $corner-radius;
+			.answerOptionElementWrapper {
+				display: flex;
+				margin-top: 10px;
+				position: relative;
+				font-size: 1.3em;
+				overflow-y: hidden;
+				overflow-x: auto;
+
+				.answer_row_short_text {
+					width: 80px;
+					line-height: 50px;
+					text-align: center;
+					font-weight: bold;
+					font-size: 3em;
+					height: 50px;
+				}
+				.answer_row_text {
+					margin-right: 10px;
+					flex-grow: 1;
+					background-color: transparent;
+					border: none;
+					width: 100%;
+					text-overflow: initial;
+				}
+				.toggle {
+					margin-top: 10px;
+					margin-right: 10px;
+					min-width: 80px !important;
+				}
+			}
+			.contextMenu {
+				display: none;
+			}
+			&:hover {
+				.contextMenu {
+					@-webkit-keyframes fadeOut {
+						from { opacity: 0; }
+						to { opacity: 1; }
+					}
+					@keyframes fadeOut {
+						from { opacity: 0; }
+						to { opacity: 1; }
+					}
+					-webkit-animation: fadeOut 0.2s;
+					animation: fadeOut 0.2s;
+					display: flex;
+					padding-bottom: 5px;
+					.contextMenuItem {
+						cursor: pointer;
+						flex: 100% 1 1;
+						font-size: 20px;
+						text-align: center;
+						margin: 0 10px;
+						border-bottom: 1px solid;
+
+						&:hover {
+							border-radius: $corner-radius;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.rangedAnswerOptions {
+	padding-bottom: 30px;
+
+	.rangedValues {
+		text-align: center;
+		margin-bottom: 5vh;
+		h1 {
+			margin-bottom: 5vh;
+		}
+		input[type="number"] {
+			text-align: center;
+			width: 100%;
+			border-radius: $corner-radius
+		}
 	}
 }
 

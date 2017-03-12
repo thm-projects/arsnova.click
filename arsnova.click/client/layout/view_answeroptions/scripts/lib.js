@@ -275,14 +275,14 @@ export const renderAnsweroptionItems = function () {
 				$("<input type='checkbox' role='switch' id='answerOption-" + number + "' name='switch' data-width='80' title='answerOption-" + number + "' class='tabbable isCorrectOption tabbable'/>").prop('checked', item.getIsCorrect())
 			);
 		}
-		$('#answerOptionWrapper').append($("<div id='" + number + "_answeroption' class='draggable' role='listitem'></div>").append(answerWrapper));
+		$('#answerOptionWrapper').append($("<div class='answerElementContextWrapper' id='" + number + "_answeroption' class='draggable' role='listitem'></div>").append(answerWrapper));
 		if (typeName !== "YesNoSingleChoiceQuestion" && typeName !== "TrueFalseSingleChoiceQuestion") {
 			const contextMenu = $('<div class="contextMenu"/>').append(
-				"<div class='moveAnsweroptionUp text-light contextMenuItem'><span class='glyphicon glyphicon-chevron-up' aria-hidden='true'></span></div>",
-				"<div class='moveAnsweroptionDown text-light contextMenuItem'><span class='glyphicon glyphicon-chevron-down' aria-hidden='true'></span></div>"
+				"<div class='moveAnsweroptionUp contextMenuItem'><span class='glyphicon glyphicon-chevron-up' aria-hidden='true'></span></div>",
+				"<div class='moveAnsweroptionDown contextMenuItem'><span class='glyphicon glyphicon-chevron-down' aria-hidden='true'></span></div>"
 			);
 			contextMenu.append(
-				"<div class='removeAnsweroption text-light contextMenuItem'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></div>"
+				"<div class='removeAnsweroption contextMenuItem'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></div>"
 			);
 			answerWrapper.parent().append(contextMenu);
 		}

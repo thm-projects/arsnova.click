@@ -139,21 +139,19 @@ export function getLeaderboardItemsByIndex(questionIndex) {
 			questionIndex: questionIndex
 		}).forEach(function (item) {
 			const isCorrect = isCorrectResponse(item, question, questionIndex);
-			if (isCorrect === true || isCorrect > 0) {
-				if (typeof result[item.userNick] === "undefined") {
-					result[item.userNick] = {
-						responseTime: 0,
-						confidenceValue: -1,
-						confidenceValueEntries: 0,
-						correctQuestions: [questionIndex + 1],
-						numberOfEntries: 1
-					};
-				}
-				result[item.userNick].responseTime += item.responseTime;
-				if (item.confidenceValue > -1) {
-					result[item.userNick].confidenceValue = item.confidenceValue;
-					result[item.userNick].confidenceValueEntries = 1;
-				}
+			if (typeof result[item.userNick] === "undefined") {
+				result[item.userNick] = {
+					responseTime: 0,
+					confidenceValue: -1,
+					confidenceValueEntries: 0,
+					correctQuestions: isCorrect === true || isCorrect > 0 ? [questionIndex + 1] : [],
+					numberOfEntries: 1
+				};
+			}
+			result[item.userNick].responseTime += item.responseTime;
+			if (item.confidenceValue > -1) {
+				result[item.userNick].confidenceValue = item.confidenceValue;
+				result[item.userNick].confidenceValueEntries = 1;
 			}
 		});
 	}
@@ -184,7 +182,9 @@ export function getAllLeaderboardItems(keepAllNicks = false) {
 					allItems[o].confidenceValue += tmpItems[o].confidenceValue;
 					allItems[o].confidenceValueEntries += 1;
 				}
-				allItems[o].correctQuestions.push(i + 1);
+				if (tmpItems[o].correctQuestions.length > 0) {
+					allItems[o].correctQuestions.push(i + 1);
+				}
 				allItems[o].numberOfEntries += 1;
 			}
 		}

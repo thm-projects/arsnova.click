@@ -1,115 +1,114 @@
 {
   "global": {
-    "arsnova_slogan": "App de Cuestionario para todo(s)",
+    "arsnova_slogan": "Aplicación del concurso para la clase",
     "back": "Volver",
-    "next": "Siguiente",
-    "delete": "Borrar",
-    "save": "Guardar",
+    "next": "Vontinuar",
+    "delete": "borrar",
+    "save": "Almacenar",
     "abort": "Cancelar",
     "yes": "Sí",
     "no": "No",
-    "close_window": "cerrar ventana",
+    "close_window": "Cerrar ventana",
     "aria_description": {
-      "arsnova_slogan": "App de Cuestionario para todo(s)"
+      "arsnova_slogan": "Aplicación del concurso para la clase"
     },
     "cookie_consent": {
-      "message": "arsnova.click es una aplicación web que usa cookies para asegurarte de obtener la mejor experiencia.",
-      "dismiss": "¡Lo tengo!",
-      "learn_more": "Más información sobre privacidad de datos"
+      "message": "arsnova.click utiliza cookies.",
+      "dismiss": "Desestimar la nota",
+      "learn_more": "Política de privacidad"
     }
   },
   "region": {
     "footer": {
-      "go_to": "Ir a:",
+      "go_to": "➝",
       "show-more": {
-        "show-more-elements": "Ver otras opciones:",
-        "onText": "Activado",
-        "offText": "Desactivado"
+        "show-more-elements": "Señalar más opciones:",
+        "onText": "Habilitado",
+        "offText": "Deshabilitado"
       },
       "footer_bar": {
         "about": "arsnova.click",
-        "home": "Home",
-        "tos": "TyC",
-        "imprint": "Aviso Legal",
+        "home": "Arranque",
+        "tos": "Avisos legales",
+        "imprint": "Pie de imprenta",
         "data_privacy": "Protección de datos",
         "blog": "Blog",
         "languages": "Idioma",
         "style": "Estilo",
-        "import": "Importar cuestionario",
-        "info": "Info",
-        "reading-confirmation": "Confirmación de lectura",
-        "fullscreen": "Pantalla completa",
-        "show_more": "Más",
-        "sound": "Sonido",
-        "qr_code": "QR",
-        "nicknames": "Nombres de usuario",
+        "import": "Importación",
+        "info": "Información",
+        "reading-confirmation": "Recibo de lectura",
+        "fullscreen": "Pantalla lleno",
+        "show_more": "Señalar más",
+        "sound": "Son",
+        "qr_code": "QR-code",
+        "nicknames": "Apodo",
         "edit_quiz": "Editar",
-        "show_product_tour": "Tour del producto",
+        "show_product_tour": "Tutorial",
         "show_response_progress": "Progreso",
-        "show_confidence_slider": "Grado de certidumbre",
-        "remove": "Retirar",
+        "remove": "Remover",
         "description": {
-          "qr-code": "Los asistentes pueden escanear el código QR a través de sus dispositivos móviles para unirse al concurso.",
-          "sound": "<ÜBERSETZUNG_EINFÜGEN>",
-          "reading-confirmation": "<ÜBERSETZUNG_EINFÜGEN>",
-          "response-progress": "<ÜBERSETZUNG_EINFÜGEN>",
-          "nicknames": "<ÜBERSETZUNG_EINFÜGEN>"
+          "qr-code": "Tu grupo puede escanear el QR-code para llegar al lobby – escribir un dirección web o un nombre de un concurso no es necesario.",
+          "sound": "Ajustas la música de fondo aquí y te decides por \"pitada\" o \"gong\" para el countdown.",
+          "reading-confirmation": "Aktivar esa opción, si quieres que los otros solo pueden ver la pregunta sin las opciones de respuestas. Solo aquel que confirma la lectura (comprender) de la pregunata, puede participar en el concurso. La confirmación de lectura crea condiciones iguales por el countdown.",
+          "response-progress": "¿Quieres que pueden ver la numera del sufragios por cada opción de respuesta durante el countdown? Entonces activa esa opción. Pero respeta el efecto psicológico: Humanos se adheren a la mayoría (Gregarismo).",
+          "nicknames": "Aquí puedes predeterminar los apodos de varias categorías. Sugerencia: Puedes remover un apodos obsceno cuando clicas en lo."
         }
       },
       "about": {
         "title": "arsnova.click",
-        "declaration": "Un poco <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, <br />un poco <a href='https://arsnova.eu/' target='_blank'>ARSnova</a>!",
-        "ars": "arsnova.click es un innovador <a href='https://es.wikipedia.org/wiki/Sistema_inal%C3%A1mbrico_de_respuesta' target='_blank'>sistema inalámbrico de respuesta</a> para establecimientos educacionales públicos.",
-        "developed_by": "Inspirado por <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, esta primera versión, una alternativa <a href='https://es.wikipedia.org/wiki/Ludificaci%C3%B3n' target='_blank'>gamificada</a> a nuestro buque insignia de ARSnova, <a href='https://arsnova.eu/' target='_blank'>arsnova.eu</a>, fue desarrollada solo en 10 días por un <a href='https://es.wikipedia.org/wiki/Scrum_(desarrollo_de_software)' target='_blank'>equipo Scrum</a> por estudiantes universitarios de TH Mittelhessen.",
-        "met_requirements": "Hasta el momento se han implementado las siguientes exigencias en arsnova.click desde la perspectiva didáctica de un docente universitario:",
+        "declaration": "Un pocito <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, <br />un pocito <a href='https://arsnova.io/' target='_blank'>ARSnova</a>!",
+        "ars": "arsnova.click es una <a href='https://es.wikipedia.org/wiki/Sistema_inalámbrico_de_respuesta' target='_blank'>sistema inalámbrico de respuesta (audience response system - ARS)</a> innovadora para centros de enseñanzas publicas.",
+        "developed_by": "La primera versión de la alternativa <a href='https://es.wikipedia.org/wiki/Ludificación' target='_blank'>gamificada</a> de nuestro buque insignia <a href='https://arsnova.io/' target='_blank'>arsnova.voting</a> fue inspirado por <a href='https://getkahoot.com' target='_blank'>Kahoot!</a> y desarollado de un equipo de estudiantes de la universidad <a href='http://www.thm.de/site/' target='_blank'>TH Mittelhessen</a>.",
+        "met_requirements": "Hasta el momento se han implementado las siguientes exigencias en arsnova.click:",
         "requirements": {
-          "1": "Privacidad absoluta de datos: el servidor no recoge datos personales del usuario, todos los datos del cuestionario se encuentran en el navegador del usuario que crea el cuestionario (<a href='http://www.w3schools.com/html/html5_webstorage.asp' target='_blank'>HTML5 Local Storage</a>)",
-          "2": "No es necesario registrarse, no requiere instalaciones (<a href='https://es.wikipedia.org/wiki/Bring_your_own_device' target='_blank'>BYOD</a>), sin publicidad, gratuito",
-          "3": "Igual página de inicio de arsnova.click para ambos roles: presentador y candidato",
-          "4": "¡Todos pueden crear un cuestionario: de manera inmediata y cuantos quieran!",
-          "5": "Extremadamente fácil, sin barreras, apto para proyectores, interfaz de usuario completamente traducida al Inglés, Español y Francés",
-          "6": "Formato de preguntas: selección múltiple/única, respuesta corta, encuesta, preguntas de selección múltiple/única con la cantidad de respuestas que se desee",
-          "7": "Marcador <a href='https://es.wikipedia.org/wiki/TeX' target='_blank'>TeX</a> y formato de texto con <a href='https://guides.github.com/features/mastering-markdown/' target='_blank'>Markdown</a> y videos insertados en el texto de preguntas y opciones de respuesta",
+          "1": "Protección de datos absolutamente: ningún datos personales son memorizado en el servidor todos los datos del cuestionario se encuentran en el navegador del usuario que crea el cuestionario (<a href='http://www.w3schools.com/html/html5_webstorage.asp' target='_blank'>HTML5 Local Storage</a>)",
+          "2": "No es necesario registrarse, no requiere instalaciones (<a href='https://de.wikipedia.org/wiki/Bring_your_own_device' target='_blank'>BYOD</a>), ningún reclamo, ninguna expensas",
+          "3": "Lo mismo página de inicio para todos los participantes: presentador de concurso y candidato respectivamente el profesor/a y estudiante",
+          "4": "Todo el mundo puede hacer un concurso, ahora mismo y tantos quiere",
+          "5": "Extremadamente fácil, sin barreras, apto para proyectores, interfaz de usuario completamente traducida al Inglés, Español, Francés e Italiano",
+          "6": "El corte de las preguntas: selección múltiple/única, preguntas para estimar, respuestas abiertas, encuestas",
+          "7": "Marcador <a href=' https://es.wikipedia.org/wiki/TeX' target='_blank'>TeX</a> y formato de texto con <a href='https://guides.github.com/features/mastering-markdown/' target='_blank'>Markdown</a>, <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis</a> y videos insertados en el texto de preguntas y opciones de respuesta",
           "8": "Entretenimiento educativo: motivación para el aprendizaje a través de competencias en vivo con sonido, límite de tiempo y contra otros jugadores",
-          "9": "<a href='https://de.wikipedia.org/wiki/Responsive_Webdesign' target='_blank'>Responsives Webdesign</a>: sin importar si se trata de un Smartphone o pantalla ancha, el diseño se adapta gracias a <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>",
-          "10": "Tecnología web reactiva de última generación: <a href='https://www.meteor.com' target='_blank'>Meteor</a>",
+          "9": "<a href='https://es.wikipedia.org/wiki/Diseño_web_adaptable' target='_blank'>Diseño web adaptable</a>: sin importar si se trata de un Smartphone o pantalla ancha, el diseño se adapta gracias a <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>. Concursos complejos pueden creados en el smartphone, también.",
+          "10": "Construido en calidad de un <a href='https://infrequently.org/2016/09/what-exactly-makes-something-a-progressive-web-app/' target='_blank'>Progressive Web App</a> con  tecnología web reactiva de <a href='https://www.meteor.com' target='_blank'>Meteor</a>",
           "11": "<a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a>"
         },
         "manual": {
-          "title": "¿Manual de usuario?",
+          "title": "¿Un manual de instrucciones?",
           "text": {
-            "1": "¡No es necesario!",
-            "2": "Solo ingresa el nombre del cuestionario. Los botones se activarán al ingresar el nombre de un cuestionario ya liberado (¡Participa!) o al crear un nuevo cuestionario con un nombre ya existente (¡Hazlo de nuevo!)",
-            "3": "Y ahora: A jugar"
+            "1": "¡No necesitas!",
+            "2": "Solo escribes el nombre del concurso. Los botones se activarán cuando escribes el nombre de un concurso ya liberado: \"¡Participa!\" o al crear un nuevo concurso con un nombre nuevo: \"¡Hazlo de nuevo!\".",
+            "3": "Ves el tutorial (la bandera en el pie de página) o seguir tu propia intuición: mirar, clicar, preguntar, contestar."
           }
         }
       },
       "tos": {
-        "title": "Términos generales de contrato",
-        "declaration": "La aplicación de cuestionario arsnova.click puede ser utilizada para fines personales, mientras su uso no atente contra las leyes alemanas o de la Unión Europea.",
+        "title": "Avisos legales",
+        "declaration": "Todo el mundo (no solo profesores) tiene permiso para usar el aplicación del concurso arsnova.click, en tanto que no contraviene para las leyes alemanes o lay leyes de la EU.",
         "license": {
           "title": "Licencia",
-          "text": "Arsnova.click es un servicio web gratuito (Software como un servicio de asistencia). El Software es de <a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>código abierto</a> y se encuentra bajo la <a href='http://www.gnu.org/licenses/gpl-3.0-standalone.html' target='_blank'>Licencia Pública General de GNU versión 3</a>."
+          "text": "arsnova.click es un servicio web gratuito (Software as a Service). El Software es <a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>Open Source</a> y se encuentra bajo la <a href='http://www.gnu.org/licenses/gpl-3.0-standalone.html' target='_blank'>GNU General Public License Version 3</a>."
         },
         "musicLicense": {
           "title": "Licencia de música",
-          "text": "El sonido <a href='http://soundbible.com/2148-Chinese-Gong.html' target='_blank'>Chinese Gong</a> de Daniel Simon está licenciado bajo <a href='https://creativecommons.org/licenses/by/3.0/' target='_blank'>CC BY 3.0</a>."
+          "text": "El sonido <a href='http://soundbible.com/2148-Chinese-Gong.html' target='_blank'>Chinese Gong</a> de Daniel Simon está licenciado bajo<a href='https://creativecommons.org/licenses/by/3.0/de' target='_blank'>CC BY 3.0</a>"
         },
         "warranty": {
           "title": "Garantía",
-          "text": "En arsnova.click nos esforzamos por proporcionar un servicio en línea confiable y sin perturbaciones, sin embargo, esto no lo podemos garantizar. Todos los datos del cuestionario son almacenados exclusivamente en la memoria del navegador del usuario que crea el cuestionario. No nos responsabilizamos por pérdida de datos, por ejemplo, al borrar la memoria del navegador, sin antes haber exportado los cuestionarios, o por uso ilegítimo del servicio."
+          "text": "En arsnova.click nos esforzamos por proporcionar un servicio en línea confiable y sin perturbaciones, sin embargo, esto no lo podemos garantizar. Todos los datos de los concursos son almacenados exclusivamente en la memoria del navegador del usuario que crea los concursos. No nos responsabilizamos por pérdida de datos, por ejemplo, al borrar la memoria del navegador, sin antes haber exportado los concursos, o por uso ilegítimo del servicio."
         }
       },
       "data_privacy": {
-        "title": "Protección de datos",
+        "title": "Protección de los datos",
         "scope": "Ambito de aplicación",
         "declaration": "Esta declaración de protección datos le explica a los usuarios de arsnova.click sobre la forma, alcance y finalidad de la recolección y utilización de datos personales a través de un proveedor responsable. Los fundamentos jurídicos de la protección de datos se encuentran en la ley federal de protección de datos(BDSG) y la ley de telemedia alemana (TMG).",
         "app_data": {
           "title": "Datos del programa",
-          "text": "Todas las preguntas del cuestionario y sus respectivas alternativas de respuestas serán únicamente almacenadas en la memoria del navegador del usuario que crea el cuestionario (localStorage) ."
+          "text": "Todas las preguntas del concurso y sus respectivas alternativas de respuestas serán únicamente almacenadas en la memoria del navegador del usuario que crea el concurso (localStorage)."
         },
         "access_data": {
-          "title": "Acceso de datos",
+          "title": "Acceso de los datos",
           "text": "Además del archivo de registro y servidor web, no se guardará ningún dato de acceso personal."
         },
         "logfiles": {
@@ -132,69 +131,69 @@
       "imprint": {
         "title": "Aviso legal",
         "provider": {
-          "title": "Proveedores de servicio",
+          "title": "Operadoras del servicio",
           "text": {
-            "1": "La aplicación web arsnova.click es un servicio gratuito de la compañía TransMIT-Gesellschaft für Technologietransfer mbH, área de proyecto de aplicaciones móbiles.",
-            "2": "c/o THM –Technische Hochschule Mittelhessen",
-            "3": "Fachbereich MNI – MAthematik, Naturwissenschaften und Informatik",
+            "1": "La aplicación web arsnova.click es un servicio gratuito de la compañía „TransMIT-Gesellschaft für Technologietransfer mbH\", área de proyecto de aplicaciones móbiles.",
+            "2": "c/o Universidad \"THM – Technische Hochschule Mittelhessen\"",
+            "3": "Facultad \"MNI – Mathematik, Naturwissenschaften und Informatik\"",
             "4": "Prof. Dr. Klaus Quibeldey-Cirkel",
-            "5": "Lehrstuhl für Softwaretechnik",
-            "6": "Wiesenstraße 14",
-            "7": "D-35390 Gießen",
-            "8": "Telefon: +49 641 309 – 24 50",
+            "5": "Cátedra por tecnología de software",
+            "6": "Wiesenstrasse 14",
+            "7": "Alemania - 35390 Giessen",
+            "8": "Teléfono: +49 641 309 – 24 50",
             "9": "E-Mail: <a href='mailto:klaus.quibeldey-cirkel@transmit.de' class='text-light'>klaus.quibeldey-cirkel@transmit.de</a>",
-            "10": "Sitz der Gesellschaft: Gießen",
-            "11": "Website: <a href='https://www.transmit.de' class='text-light'>https://www.transmit.de</a>",
-            "12": "Forma jurídica: GmbH",
-            "13": "Tribunal de distrito: Gießen HRB 3036",
+            "10": "Lugar de sociedad: Giessen",
+            "11": "Página web: <a href='https://www.transmit.de' class='text-light'>https://www.transmit.de</a>",
+            "12": "Forma jurídica: sociedad limitada (en Aleman: GmbH)",
+            "13": "Juzgado local: Giessen HRB 3036",
             "14": "CIF.: DE 188 685 037"
           }
         }
       }
     },
     "header": {
-      "new_question": "Nueva pregunta",
+      "new_question": "Nueva Pregunta",
       "reset": "Reiniciar",
-      "yes": "Si",
+      "yes": "Sí",
       "no": "No",
       "reset_session_confirmation": {
         "empty_lobby": {
-          "title": "Deje el modo de edición?",
-          "text": "Tu sesión será cerrada. Tu cuestionario con todos los ajustes permanecerá en este navegador, siempre y cuando no sea reiniciado."
+          "title": "¿Quieres dejar el modo de editar?",
+          "text": "Tu concurso con todas las calibriciones queda en el navegador, entretanto no es reiniciado."
         },
         "active_quiz": {
-          "title": "¿Quieres salir del cuestionario?",
-          "text": "La sesión de todos los participantes será cerrada. La lista del ranking será borrada. Tu cuestionario con todos los ajustes permanecerá en este navegador, siempre y cuando no sea reiniciado."
+          "title": "¿Quieres terminar el concurso?",
+          "text": "Todos los participantes tendrá que cerrar la sesión. El escalafón sería borrado. Tu concurso con todas las calibriciones queda el ese navegador, entretanto no se pondrá reiniciar."
         },
-        "continue": "¿Avanzar?"
+        "continue": "¿Continuar?"
       },
       "exit_session_confirmation": {
-        "title": "Deje el concurso?",
-        "text": "YouSe le quitó de la prueba y se perderá su progreso!",
-        "continue": "¿Avanzar?"
+        "title": "¿Dejar el consurso?",
+        "text": "Te pones remover del concusro y tu respuestas se ponen borrar.",
+        "continue": "¿Continuar?"
       },
       "connection_status": {
-        "title": "Estado de conexión",
+        "title": "Conexión",
         "show_result": "Detalles",
-        "pending": "Comprobar...",
-        "finished_with_errors": "Finalizado con errores",
-        "finished_with_warnings": "Finalizado con advertencia",
+        "pending": "Aquilatar …",
+        "finished_with_errors": "Terminado con errores",
+        "finished_with_warnings": "Terminado con advertencia",
         "finished_without_warnings": "Exitoso",
         "websocket_status": {
-          "connected": "conectado",
-          "disconnected": "desconectado"
+          "connected": "Connectado",
+          "disconnected": "Desconnectado"
         },
         "localStorage_status": {
-          "writable": "descriptible",
-          "non_writable": "indescriptible"
+          "writable": "beschreibbar",
+          "non_writable": "nicht beschreibbar"
         },
         "sessionStorage_status": {
           "writable": "descriptible",
           "non_writable": "indescriptible"
         },
         "dbConnection_status": {
-          "very_slow": "muy lento",
-          "slow": "lento",
+          "very_slow": "muy despacio",
+          "slow": "despacio",
           "ok": "bien"
         }
       },
@@ -205,38 +204,38 @@
   },
   "view": {
     "answeroptions": {
-      "title": "Establecer respuestas",
-      "new_answer": "Nueva respuesta",
-      "answeroptiontext_placeholder": "Opción de respuesta necesario",
+      "title": "Opciónes de respuestas",
+      "new_answer": "opción de respuesta nueva",
+      "answeroptiontext_placeholder": "inserta la respuesta aquí",
       "correct": "Correcto",
-      "wrong": "Incorrecto",
+      "wrong": "Falso",
       "preview": "",
-      "forward": "Proceder a la cuenta atrás",
-      "back": "Volver al administrador de preguntas",
-      "show_answer_content_on_buttons": "Mostrar el contenido de la respuesta de los botones?",
-      "multiple_selection_survey": "Permitir la selección de múltiples respuestas?",
-      "emoji_info": "Puedes incorporar también uno de estos <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis (sitio web externo!)</a> en tus respuestas <img style='width: 30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png' /> <br/>Simplemente haga clic en el sitio web en el Emoji y péguelo en la answeroption.",
+      "forward": "Continuar al countdown",
+      "back": "Volver al mánager del concurso",
+      "show_answer_content_on_buttons": "¿Respuesta en el pin?",
+      "multiple_selection_survey": "¿Varios opciones seleccionable?",
+      "emoji_info": "!También puedes usar emoticonos! <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'><img style='width:40px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/></a>",
       "description": {
-        "default_answer_row": "Arrastre este bloque a la lista de opciones de respuesta para crear una nueva.",
-        "added_answers": "Aquí están todas las answeroptions creadas. Puede cambiar el orden de las respuestas mediante arrastrar y soltar.",
-        "added_answer_short_text": "Cada answeroption contiene una letra única que se puede exhibir para los asistentes del concurso.",
-        "added_answer_text": "Aquí puede introducir texto para la opción de respuesta. Markup como Markdown y LaTeX es compatible.",
-        "added_answer_is_correct": "Este botón determina si la respuesta está marcada como correcta o incorrecta.",
-        "added_answer_remove": "Al hacer clic en este botón se elimina la respuesta.",
-        "show_answer_content_on_buttons": "Los botones de respuesta para los participantes pueden ser etiquetados con la letra de la respuesta o el texto completo de la respuesta. Tenga en cuenta, sin embargo, que demasiado texto en la respuesta puede ser mal legible dependiendo del tamaño de la ventana gráfica.",
-        "multiple_selection_survey": "Aquí puede establecer si los participantes van a ir directamente a la evaluación después de hacer clic en una respuesta de la encuesta, o si una selección múltiple debe ser posible.",
-        "preview": "Aquí puede ver una vista previa del contenido de la respuesta introducida a la izquierda.",
-        "range_area": "Aquí puede especificar la respuesta correcta, así como las tolerancias superior e inferior. Tenga en cuenta que la entrada debe estar en números naturales.",
-        "min_range": "Aquí puede ajustar el valor de tolerancia inferior.",
-        "correct_value": "Esta respuesta es completamente correcta.",
-        "max_range": "Aquí puede ajustar el valor de tolerancia superior.",
-        "range_slider": "Con este regulador puede cambiar dinámicamente las tolerancias superior e inferior. El valor correcto corresponderá al valor medio.",
-        "free_text_question_text": "Aquí puede introducir la respuesta correcta. Las respuestas introducidas por los participantes se contrastan con esta respuesta según la configuración.",
-        "config_case_sensitive": "Si esta opción está activada, el caso de la respuesta introducida debe coincidir con el de la respuesta de referencia.",
-        "config_trim_whitespaces": "Especifica si se deben comprobar los espacios en blanco de la respuesta introducida.",
-        "config_use_keywords": "Esta opción debe ser activada, el orden de las palabras de la respuesta introducida debe corresponder al valor de referencia. Si esta opción está desactivada, lamentablemente no es posible comprobar los espacios y los signos de puntuación.",
-        "config_use_punctuation": "Esta opción determina si se deben comprobar los signos de puntuación del valor introducido.",
-        "check_answer": "Aquí puede probar posibles respuestas de los participantes en relación con su valor de referencia y la configuración actual."
+        "default_answer_row": "Arrastra ese bloque en la lista de opciones de respuestas o clica en lo para integrar una respuesta nueva.",
+        "added_answers": "Aquí puedes ver las opciones de respustas para la pregunta. Puedes cambiar el orden por arrastrar y soltar.",
+        "added_answer_short_text": "Cada opción de respuesta recibe una letra que se puede indicar por los participantes.",
+        "added_answer_text": "Aquí puedes insertar la respuesta. Puede formatear con Markdown y TeX. También puedes integrar picturas.",
+        "added_answer_is_correct": "Ese pin regula cual si la respuesta sea contados correcta o falsa.",
+        "added_answer_remove": "La respuesta afectada se puede borrar con un clic en ese pin.",
+        "show_answer_content_on_buttons": "Los pines de las respuestas pueden rotularía con el contenido de la respuesta o con la letra. Pero respeta que una respuesta larga no es legible bien en un equipo móvil.",
+        "multiple_selection_survey": "Aquí puedes regular cual si los participantes puedan ver la evaluación del concurso directamente después del clic o cual si una selección multiple pueda ser posible.",
+        "preview": "Aquí ves como las opciones de respuestas se verá en el Smartphone.",
+        "range_area": "Aquí puedes dar la respuesta correcta y la tolerancia (en números naturales).",
+        "min_range": "Aquí puedes determinar la tolerancia baja.",
+        "correct_value": "Esa respuesta es completamente correcta.",
+        "max_range": "Aquí puedes determinar la tolerancia alta.",
+        "range_slider": "Con eso deslizador puedes adaptar las tolerancias. El valor correcto será el promedio.",
+        "free_text_question_text": "Aquí puedes insertar la respuesta correcta. Las respuestas insertadas de los participantes serán comprobar por los criterios contra esa respuesta.",
+        "config_case_sensitive": "Cuando eso opción es activada, el empleo de mayúsculas y minúsculas tiene que concordar con la respuesta de referencia.",
+        "config_trim_whitespaces": "¿Deberá comprobar los caracteres en blanco?",
+        "config_use_keywords": "Cuando eso opción es activada, el orden de las palabras de la respuesta insertada tienen que concordar con la respuesta de referencia.",
+        "config_use_punctuation": "¿Deberá comprobar los signos de puntuación?",
+        "check_answer": "Aquí puedes comprobar respuestas posibles de los participantes por tu respuesta de referencia y los criterios actuales."
       },
       "ranged_question": {
         "title": "Intervalo de respuestas correctas",
@@ -245,259 +244,257 @@
         "max_range": "Valor máximo"
       },
       "free_text_question": {
-        "title": "Respuesta Correcta",
-        "check_answer_title": "Prueba de posibles entradas:",
-        "config_case_sensitive": "Prestar atención al uso de minúsculas y mayúsculas",
-        "config_trim_whitespaces": "Prestar atención al espacio en respuesta",
-        "config_use_keywords": "Prestar atención al orden de palabras",
-        "config_use_punctuation": "Prestar atención a los signos de puntuación",
+        "title": "Respuesta correcta:",
+        "check_answer_title": "Probar entrada:",
+        "config_case_sensitive": "Atienda el empleo de mayúsculas y minúsculas",
+        "config_trim_whitespaces": "Atienda los caracteres en blanco",
+        "config_use_keywords": "Atienda el orden de las palabras de la respuesta",
+        "config_use_punctuation": "Atienda los signos de puntuación",
         "onText": "Sí",
         "offText": "No",
-        "text_placeholder": "Ingresa aquí tu respuesta",
-        "check_correct": "La respuesta introducida coincide con la referencia proporcionada.",
-        "check_incorrect": "La respuesta introducida no coincide con la referencia proporcionada."
+        "text_placeholder": "Inserta tu respuesta aquí.",
+        "check_correct": "La respuesta insertada concorda con la respuesta de referencia.",
+        "check_incorrect": "La respuesta insertada no concorda con la respuesta de referencia."
       }
     },
     "choose_nickname": {
-      "enter_nickname": "Elije un nombre de usario",
-      "enter_nickname_here": "Ingresa tu nombre de usario",
-      "nickname_na_popup": "¡Este nombre no está disponible!",
-      "nickname_blacklist_popup": "¡Este nombre no está permitido!",
-      "nickname_too_long": "El nombre es demasiado largo",
-      "nickname_too_short": "El nombre es demasiado corto",
+      "enter_nickname": "Elija un apodo",
+      "enter_nickname_here": "Inserta tu apodo",
+      "nickname_na_popup": "Eso apodo no es disponible.",
+      "nickname_blacklist_popup": "Eso apodo no es admisible.",
+      "nickname_too_long": "Eso apodo es demasiado largo.",
+      "nickname_too_short": "Eso apodo es demasiado corto.",
       "no_selectable_nick_available": {
-        "1": "Todos los nombres de usuario disponibles ya fueron elegidos.",
-        "2": "No es posible participar en el cuestionario."
+        "1": "Todos los apodos disponibles son ya adjudicadas.",
+        "2": "No puedes participar en el concurso."
       },
       "description": {
-        "nickname_input": "Aquí puede introducir un nombre, que es diferente de los otros jugadores.",
-        "choose_selectable_nick": "Puede seleccionar uno de los apodos disponibles de esta lista."
+        "nickname_input": "Aquí puedes elegir un nombre que es indicada en el Lobby del concursos y en el escalafón.",
+        "choose_selectable_nick": "Puedes elegir un apodo de esa lista."
       }
     },
     "hashtag_management": {
-      "enter_quiz_name": "Ingresa el nombre del cuestionario",
+      "enter_quiz_name": "Inserta el nombre del concurso o el PIN …",
       "join_session": "¡Participa!",
-      "start_session": "Iniciar cuestionario",
-      "edit_session": "Editar cuestionario",
+      "start_session": "Empezar el concurso",
+      "edit_session": "Editar el concurso",
       "reenter_session": "Abrir",
-      "create_session": "¡Crea uno nuevo!",
-      "create_demo_session": "¡Iniciar la prueba de demostración!",
-      "quiz_management": "cuestionarios guardados",
-      "available_sessions": "Estos cuestionarios se encuentran en tu navegador:",
-      "session_management": "Administración",
-      "import": "Importar cuestionario",
-      "delete_session": "Borrar cuestionario",
-      "delete_session_confirmation": "¿Seguro que quieres borrar el cuestionario '<span id=\"session_name\"></span>' definitivamente?",
-      "export": "Exportar cuestionario",
-      "valid_question": "Pregunta valida",
-      "invalid_question": "Pregunta invalida",
-      "no_sessions": "No hay pruebas almacenadas en su navegador.",
+      "create_session": "¡Crea und concurso nuevo!",
+      "create_demo_session": "Empieza »Demo Quiz«!",
+      "quiz_management": "Memoria del concursos",
+      "available_sessions": "Esos concursos son en tu navegador:",
+      "session_management": "Conursos",
+      "import": "importar el concurso",
+      "delete_session": "¿Borrar concurso?",
+      "delete_session_confirmation": "Quieres borrar el concurso &raquo;<span id=\"session_name\"></span>&laquo;?",
+      "export": "Exportar el concurso",
+      "valid_question": "Ronda del concurso válido",
+      "invalid_question": "Ronda del concurso inválido",
+      "no_sessions": "No concursos son memorizada en eso navegador.",
       "aria_description": {
-        "hashtag-input-field": "Ingrese el Quizname aquí",
-        "joinSession": "Participar en un concurso activo",
-        "addNewHashtag": "Crear un nuevo cuestionario",
-        "splashscreen_description": "Lista de todos los cuestionarios válidos e inválidos en su navegador"
+        "hashtag-input-field": "Inserta und nombre de concurso aquí.",
+        "joinSession": "Participa en un concurso existente.",
+        "addNewHashtag": "Crea un concurso nuevo.",
+        "splashscreen_description": "Eso es la liste de todos los concursos válidos e inválidos en tu navegador."
       }
     },
     "hashtag_view": {
       "hashtag_input": {
-        "already_exists": "Este quizname ya está en uso.",
-        "illegal_chars": "El cuestionario contiene caracteres ilegales."
+        "already_exists": "Eso nombre del concurso ya es perdido.",
+        "illegal_chars": "Eso nombre del concurso contiene caracteres inválidos."
       },
       "demo_quiz": {
         "title": {
-          "1": "¿No estás seguro por dónde empezar?",
-          "2": "¡Introduzca \"Demo Quiz\"!",
-          "3": "<ÜBERSETZUNG_EINFÜGEN>"
+          "1": "Descubrir arsnova.click !",
+          "2": "Inserta »Demo Quiz« y empieza. Abre la aplicación en una segunda venta para jugar el concurso con papeles distributivos.",
+          "3": "Visita nuestro blog arsnova.io y sabe que usa concursos por la clase o por una ponencia."
         }
       }
     },
     "leaderboard": {
-      "header": "Lista del ranking",
-      "global_header": "Lista de ranking global",
+      "header": "Escalafón",
+      "global_header": "Escalafón global",
       "title": {
-        "single_question": "Pregunta de cuestionario __questionId__ - Tener todas correctas...",
-        "all_questions": "Tener todas correctas..."
+        "single_question": "… sabían pregunta __questionId__",
+        "all_questions": "… sabían todas las preguntas"
       },
-      "no_attendee_correct": "Nadie ha respondido a esta pregunta correctamente",
-      "no_attendee_correct_global": "Nadie ha respondido a todas las preguntas correctamente",
+      "no_attendee_correct": "Ninguno sabía la respuesta",
+      "no_attendee_correct_global": "Ninguno respondía correctamente a todas las preguntas",
       "question": "Pregunta",
       "second": "Segundo",
       "second_plural": "Segundos",
-      "show_more": "Ver 1 más",
-      "show_more_plural": "Ver %s más",
-      "show_less": "Ver menos",
-      "export": "Exportar"
+      "show_more": "Presentar uno más",
+      "show_more_plural": "Presentar %s más",
+      "show_less": "Presentar menos",
+      "export": "Exportar (.csv)"
     },
     "liveResults": {
       "title": "Resultados",
-      "title_reading_confirmation": "Pregunta leída...",
-      "title_running_countdown": "Votación...",
-      "question": "Monstrar pregunta",
+      "title_reading_confirmation": "Pregunta había leído …",
+      "title_running_countdown": "La votación estás siguiendo …",
+      "question": "Presentar pregunta",
       "question_number": "Pregunta",
-      "ranking": "Lista de ranking",
+      "ranking": "Escalafón",
       "reading_confirmation": "Confirmación de lectura",
-      "show_more": "Ver 1 más",
-      "show_more_plural": "Ver %s más",
+      "show_more": "Presentar 1 más",
+      "show_more_plural": "Presentar %s más",
       "correct": "Correcto",
-      "wrong": "Mal",
-      "complete_correct": "Totalmente correcto",
-      "partially_correct": "Parcialmente correcto",
-      "complete_wrong": "Totalmente incorrecto",
+      "wrong": "Falso",
+      "complete_correct": "Completamente correcto",
+      "partially_correct": "Correcto en parte",
+      "complete_wrong": "completamente falso",
       "back_to_lobby": "Volver al lobby",
-      "global_ranking": "Lista de ranking global",
-      "show_question": "Ver la pregunta",
-      "show_question_plural": "Ver preguntas",
-      "start_round": "Iniciar cuestionario",
-      "start_round_plural": "Iniciar ronda",
-      "confirm_read": "He leído la pregunta",
-      "game_over": "Fin del juego",
-      "countdown": "Cuenta atrás",
+      "global_ranking": "Escalafón global",
+      "show_question": "Presentar la pregunta",
+      "show_question_plural": "Presentar pregunta",
+      "start_round": "Empezar el concurso",
+      "start_round_plural": "Empezar el rondo",
+      "confirm_read": "Entendí la pregunta",
+      "game_over": "Game over",
+      "countdown": "Countdown",
       "answer_option": "Respuesta",
-      "guessed_correct": "Has adivinado",
-      "guessed_wrong": "No has adivinado",
-      "correct_answer": "Respuesta correcta",
-      "abort_countdown": "Abortar cuenta atrás"
+      "guessed_correct": "Estimado correcto",
+      "guessed_wrong": "Estimado falso",
+      "correct_answer": "Respuesta correcta"
     },
     "lobby": {
-      "title": "Lobby del cuestionario",
+      "title": "Lobby de los concursos",
       "yes": "Si",
       "no": "No",
-      "ready": "Esperar a que comience",
-      "show_more": "Ver 1 más",
-      "show_more_plural": "Ver %s más",
-      "start_quiz": "¡Comenzar!",
-      "kick_member_confirmation": "¿Eliminar a esta persona '<span id=\"nickName\"></span>' del cuestionario?",
-      "add_kicked_member_to_ban_list": "¿Bloquear el nombre de usuario definitivamente?",
-      "waiting_for_players": "A la espera de los jugadores...",
+      "ready": "Esperar por el despegue …",
+      "show_more": "Presentar uno más",
+      "show_more_plural": "Presentar %s más",
+      "start_quiz": "¡Aquí vamos!",
+      "kick_member_confirmation": "¿Quieres remover esa persona &raquo;<span id=\"nickName\"></span>&laquo; del concurso?",
+      "add_kicked_member_to_ban_list": "Alejar el apodo para siempre",
+      "waiting_for_players": "Espera para los otros …",
       "description": {
-        "memberlist_count": "<ÜBERSETZUNG_EINFÜGEN>",
-        "title": "<ÜBERSETZUNG_EINFÜGEN>",
-        "waiting_for_players": "<ÜBERSETZUNG_EINFÜGEN>"
+        "memberlist_count": "Tantas personas están iniciando actualemente",
+        "title": "El lobby del concursos presenta los apodos de los participantes en el orden temporal de su llegada a la inversa.",
+        "waiting_for_players": "Cuando todos los participantes están en el lobby, puedes empieza el concurso. ¡Cuidado!, después de la empieza nadie puede iniciar al concurso."
       }
     },
     "nickname_categories": {
-      "title": "Predeterminar nombres de usuario",
+      "title": "Fijar los apodos",
       "back": "Volver",
-      "available_nicknames": "Nombres de usuario disponibles",
-      "choose_all": "Elegir todo",
-      "remove_all": "Eliminar todo",
-      "free_choice": "Libre elección",
-      "chosen_nicknames": "Nombres de usuario elegidos",
-      "no_nicks_selected": "Ningún nombre de usuario elegido, así los participantes pueden elegir sus propios nombres de usuario.",
-      "block_illegal_nicks": "Bloquear apodos inapropiados",
-      "restrict_to_cas": "Restringir a los usuarios CAS (THM)",
+      "available_nicknames": "Apodos disponibles",
+      "choose_all": "Elegir todos",
+      "remove_all": "Remover todos",
+      "free_choice": "Selección libre",
+      "chosen_nicknames": "Apodos elegidos",
+      "no_nicks_selected": "No apodo es elegido, por consiguiente todos puedes elegir sus apodos libres.",
+      "block_illegal_nicks": "¿Quieres bloquear apodos indecentes?",
+      "restrict_to_cas": "Tuiteros tienen que registrarse (solo THM)",
       "category": {
-        "disney": "Personajes Disney",
-        "science": "Ciencia",
+        "disney": "Disney",
+        "science": "Ciencias",
         "fantasy": "Fantasía",
         "literature": "Literatura",
         "mythology": "Mitología",
-        "actor": "Actuación",
+        "actor": "Película",
         "politics": "Política",
         "turing_award": "Turing-Award"
       }
     },
     "question_type": {
-      "title": "Editar tipo de pregunta",
-      "currentType": "Tipo de pregunta actual:",
-      "back": "Volver al administrador de preguntas",
+      "title": "Cambiar el tipo de la pregunta",
+      "currentType": "Tipo de la pregunta actualmente:",
+      "back": "Volver al mánager del concursos",
       "description": {
-        "type_wrapper": "Aquí puede cambiar el tipo de pregunta del cuestionario. Cada tipo tiene configuraciones diferentes. Cambie el tipo haciendo clic en la casilla correspondiente.",
-        "SingleChoiceQuestion": "Las preguntas de una sola opción contienen tantas opciones de respuesta como desee, una de ellas debe estar marcada como correcta.",
-        "YesNoSingleChoiceQuestion": "Sí|Ninguna pregunta contiene sólo dos respuestas (sí y no), una de ellas debe estar marcada como correcta.",
-        "TrueFalseSingleChoiceQuestion": "Verdadero Las preguntas falsas también contienen sólo dos respuestas (Verdadero y Falso), una de ellas debe estar marcada como correcta.",
-        "MultipleChoiceQuestion": "Las preguntas de opción múltiple contienen tantas opciones de respuesta como quieras, de las cuales tantas como quieras (al menos una) se pueden marcar como correctas.",
-        "RangedQuestion": "Las preguntas de opción múltiple contienen tantas opciones de respuesta como quieras, de las cuales tantas como quieras (al menos una) se pueden marcar como correctas....",
-        "FreeTextQuestion": "En la consulta de texto libre, el participante debe ingresar cualquier texto. Esto se corresponde con el valor de referencia proporcionado.",
-        "SurveyQuestion": "Las encuestas pueden contener cualquier número de respuestas, ninguna de ellas puede ser marcada como correcta o incorrecta."
+        "type_wrapper": "Aquí puedes cambiar el tipo de la pregunta. Cada tipo tiene distintas opciones. Puedes cambiar el tipo con un clic en las cajas sendas. ¡Cuidado!, opciones de respuestas que habías ya escrito pueden será borrado. Un cambio entre \"opción única\" y \"opción múltiple\" no es precario.",
+        "SingleChoiceQuestion": "\"Opción única\" preguntas implican cualquier opciones de respuestas. Solo una de las opciones es correcta.",
+        "YesNoSingleChoiceQuestion": "\"Sí/No\" preguntas implican solo dos opciones de preguntas (\"Si\" y \"No\", regrabable). Una de esos opciones tiene que marcado como correcto.",
+        "TrueFalseSingleChoiceQuestion": "\"Verdadero/Falso\" preguntas implican solo dos opciones (\"Verdadero\" y \"Falso\", regrabable). Una de esos opciones tiene que marcado como correcto.",
+        "MultipleChoiceQuestion": "\"Opción múltiple\" preguntas implican cualquier opciones de respuestas. Cualquier opciones (pero al menos una) pueden ser marcado como correcto.",
+        "RangedQuestion": "Por preguntas de estimación, una númera natural tiene que ser marcado como correcto. Adicionalmente, puedes fijar una tolerancia baja y alta.",
+        "FreeTextQuestion": "Con una \"respuesta corta\" pregunta, los participantes tienen que escribir un texto. Ese texto comparará con la respuesta de referencia",
+        "SurveyQuestion": "Sondeos implican cualquier opciones de respuestas que no será evaluado. Sondeos pueden ser del tipo \"opción única\" u \"opción múltiple\"."
       }
     },
     "questions": {
-      "title": "Ingresar texto de pregunta",
-      "enter_question_here": "Ingresa el texto de la pregunta aquí",
+      "title": "Pregunta",
+      "enter_question_here": "¡Inserta la pregunta aquí! Todo memorizas automático.",
       "preview": "",
-      "forward": "Proceder a las opciones de respuesta",
-      "back": "Volver al administrador de preguntas",
-      "single_choice_question": "Pregunta de selección única (solo una de más respuestas es la correcta)",
-      "single_choice_question_yes_no": "Pregunta si/no",
-      "single_choice_question_true_false": "Pregunta Verdadero/Falso",
-      "multiple_choice_question": "Pregunta de selección múltiple (una o más respuestas son correctas)",
-      "survey_question": "Encuesta (No hay respuestas correctas ni incorrectas)",
-      "ranged_question": "Pregunta de estimación (Cifras dentro del área predeterminada son correctas)",
-      "free_text_question": "Respuesta corta (Si texto coincide con la solución es correcto)",
+      "forward": "Continuar a las opciones de respuestas",
+      "back": "Volver al mánager del concursos",
+      "single_choice_question": "\"Opción única\" pregunta",
+      "single_choice_question_yes_no": "\"Sí/No\" pregunta",
+      "single_choice_question_true_false": "\"Verdadero/Falso\" pregunta",
+      "multiple_choice_question": "\"Opción múltiple\" pregunta",
+      "survey_question": "Sondeo",
+      "ranged_question": "Pregunta de estimación",
+      "free_text_question": "\"Respuesta corta\" pregunta",
       "description": {
-        "preview": "A continuación, se muestra una vista previa del texto introducido a la izquierda.."
+        "preview": "Aquí puedes ver como el texto se ve en un smartphone."
       }
     },
     "quiz_manager": {
-      "title": "Quiz Manager",
-      "available_questions_title": "Preguntas disponibles",
-      "added_questions_title": "Preguntas creadas",
-      "no_added_questions": "No ha agregado ninguna pregunta.",
-      "question_added": "",
-      "session_invalid": "El cuestionario contiene preguntas incompletas",
-      "session_empty": "El cuestionario no contiene preguntas",
-      "connection_lost": "Se pierde la conexión con el servidor",
-      "back_to_quiz_administration": "Administración del cuestionario",
+      "title": "Mánager del concursos",
+      "available_questions_title": "Modelos",
+      "added_questions_title": "Preguntas",
+      "no_added_questions": "Elegir un modelo por la pregunta",
+      "session_invalid": "Tu concurso implica preguntas incompletas",
+      "session_empty": "No pregunta ya creado",
+      "connection_lost": "La conexión al servidor es interrumpida",
+      "back_to_quiz_administration": "Administracíon",
       "details": {
         "aria": {
-          "btn_group": "Lista de ajustes para el cuestionario"
+          "btn_group": "Opciones de la calibración"
         },
         "question_type": {
-          "long": "Editar tipo de pregunta",
+          "long": "Tipo de pregunta",
           "short": "Tipo"
         },
         "question_text": {
-          "long": "Editar el texto de la pregunta",
-          "short": "Texto de la pregunta"
+          "long": "Texto de pregunta",
+          "short": "Pregunta"
         },
         "answeroptions": {
-          "long": "Editar opciones de respuesta",
+          "long": "Opciones de respuestas",
           "short": "Respuestas"
         },
         "timer": {
-          "long": "Editar temporizador",
-          "short": "Minutero"
+          "long": "Countdown",
+          "short": "Countdown"
         }
       },
       "description": {
-        "available_questions": "Aquí puede ver todos los tipos de preguntas de las que puede elegir. Cada tipo de pregunta ofrece diferentes presets y posibilidades para el diseño de los concursos",
-        "added_questions": "Aquí encontrará todas sus preguntas del concurso, que están disponibles en el cuestionario. Para agregar una pregunta del cuestionario al cuestionario, arrástrelo desde la pila izquierda o haga clic en la pregunta del cuestionario en la pila izquierda. Al hacer clic en la pregunta insertada, puede definir el contenido de la pregunta.",
-        "back_button": "Puedes regresar en cualquier momento. El cuestionario se guarda inmediatamente.",
-        "forward_button": "Si el cuestionario es válido y está conectado al servidor, puede continuar al lobby del cuestionario y abrir el cuestionario para los participantes."
+        "available_questions": "Aquí puedes ver todos tipos de preguntas. Cada tipo de pregunta tiene su propio calibración con que puedes configurar tu concurso.",
+        "added_questions": "Para añadir una pregunta, arrastra un modelo aquí o clicar en lo. Cuando tocas el modelo, puedes ver todas las opciones: editar la pregunta, cambiar el orden, borrar la pregunta.",
+        "back_button": "Puedes volver a todas horas. Cada cambio es memorizada automáticamente en toda la aplicación.",
+        "forward_button": "Cuando tu concurso es completo y existe una conexión al servidor, puedes ir al lobby y empezar el concurso."
       }
     },
     "quiz_manager_details": {
-      "back": "Volver a la descripción de la prueba"
+      "back": "Volver al sinopsis de concursos"
     },
     "quiz_summary": {
-      "title": "Resúmen",
-      "quiz_name": "Nombre de la ronda",
+      "title": "Sinopsis",
+      "quiz_name": "Nombre del concurso",
       "quiz_url": "",
-      "question_amount": "Cantidad total de preguntas del cuestionario",
-      "validation_question_group": "Validación del total de la ronda",
-      "question_successful": "Exitoso",
-      "question_failed": "Fallido",
-      "question_group_successful": "<ÜBERSETZUNG_EINFÜGEN>",
-      "question_group_failed": "<ÜBERSETZUNG_EINFÜGEN>",
+      "question_amount": "Preguntas",
+      "validation_question_group": "Estatus",
+      "question_successful": "La pregunta es completa",
+      "question_failed": "La pregunta no es completa",
+      "question_group_successful": "El concurso es disponible",
+      "question_group_failed": "El concurso no es completa",
       "correct": "Correcto",
-      "wrong": "Incorrecto",
+      "wrong": "Falso",
       "question": "Pregunta",
       "text": "Texto",
       "type": "Tipo",
       "answer": "Respuesta",
       "answer_plural": "Respuestas",
-      "answer_configuration": "Configuración de la respuesta",
-      "answer_configuration_plural": "Configuración de las respuestas",
-      "timer": "Cuenta atrás",
+      "answer_configuration": "Criterios formales de la respuesta",
+      "answer_configuration_plural": "Criterios formales de las respuestas",
+      "timer": "Countdown",
       "second": "Segundo",
       "second_plural": "Segundos",
       "minute": "Minuto",
       "minute_plural": "Minutos",
       "hour": "Hora",
       "hour_plural": "Horas",
-      "validation": "Validación",
+      "validation": "Estatus",
       "validation_errors": {
         "types": {
           "question": "Pregunta",
@@ -506,220 +503,212 @@
         "reasons": {
           "question_text_too_small": "El texto de la pregunta es demasiado corto",
           "question_text_too_long": "El texto de la pregunta es demasiado largo",
-          "timer_too_small": "Temporizador es demasiado corto",
-          "timer_too_big": "Temporizador es demasiado largo",
-          "no_valid_answers": "Al menos una respuesta debe ser marcada como correcta",
-          "one_valid_answer_required": "Solo una respuesta debe ser marcada como correcta",
-          "invalid_range": "El rango mínimo no debe sobrepasar el rango máximo",
-          "invalid_correct_value": "El valor correcto debe estar dentro de los parámetros del rango",
-          "answer_text_empty": "El texto de la respuesta no puede quedar vacío"
+          "timer_too_small": "El countdown es demasiado corto",
+          "timer_too_big": "El countdown es demasiado largo",
+          "no_valid_answers": "Al menos una respuesta tiene que marcado como correcta",
+          "one_valid_answer_required": "Tiene que UNA respuesta correcta",
+          "invalid_range": "No señalar un valor estimado",
+          "invalid_correct_value": "El valor estimado tiene que estar entre el valor máxima y el valor mínimo",
+          "answer_text_empty": "La respuesta no puede estar blanco"
         }
       },
-      "edit_quiz": "Editar cuestionario",
-      "start_quiz": "Comenzar cuestionario",
-      "selected_nicks": "Nombres de usuario predeterminados",
-      "no_selected_nicks": "No hay nombres de usuario predeterminados. Todos los nombres están permitidos.",
-      "hide_selected_nicks": "Ocultar nombres de usuario",
-      "show_selected_nicks": "Mostrar nombres de usuarios",
-      "isRestrictingRudeNicks": "Bloquear apodos inapropiados",
-      "isRestrictingToCAS": "Los asistentes deben autenticarse a través de CAS",
-      "true": "Sí",
+      "edit_quiz": "Editar el concurso",
+      "start_quiz": "Empezar el concurso",
+      "selected_nicks": "Apodod",
+      "no_selected_nicks": "cualquier",
+      "hide_selected_nicks": "Esconder los apodos",
+      "show_selected_nicks": "Indicar apodos",
+      "isRestrictingRudeNicks": "¿Quieres bloquear apodos obscenos?",
+      "isRestrictingToCAS": "¿Tienen que registrar?",
+      "true": "Si",
       "false": "No",
       "description": {
-        "header": "Aquí está el resumen de toda la ronda de exámenes",
-        "session_url": "Bajo esta URL, los participantes pueden ingresar al cuestionario tan pronto como lo suelten",
-        "question_group_validation": "La validación de la ronda de exámenes falla si el cuestionario aún no se ha completado. Esto incluye exámenes no existentes, opciones de respuesta ausentes o incompletas, temporizadores no establecidos, etc.",
-        "restrict_to_cas": "Si esta configuración está activa, los participantes deben registrarse en el servicio de autenticación central de la Universidad de Ciencias Aplicadas de Mittelhessen para participar en el cuestionario",
-        "question_item": "Esta sección contiene información sobre la pregunta seleccionada.",
-        "validation_errors": "Los errores de validación enumerados aquí pueden ser útiles en la solución de problemas."
+        "header": "Aquí puedes ver los datos más importantes del rondo del concurso.",
+        "session_url": "Tu publico puede participar directamente sin escribir el nombre del concurso con ese link. Puedes escribir el link a la pizarra o a un folio.",
+        "question_group_validation": "La validación de tu concurso falla hasta que el concurso es completo. El concurso por ejemplo no es completo cuando no hay un texto de pregunta.",
+        "restrict_to_cas": "Cuando esa calibración en &raquo;Freie Auswahl&laquo; bzw. &raquo;Nicknamen&laquo; en el pie de página es activada, los participantes tienen que registrase con el servicio de verificación de la autenticidad central. ¡Cuidado! Esa opción solo es posible en el THM.",
+        "question_item": "Aquí puedes ver todos los datos de tu pregunta del concurso. Puedes editar la pregunta con los pines.",
+        "validation_errors": "Solo puedes empezar tu concurso cuando todas las faltas son corregidos."
       }
     },
     "theme_switcher": {
-      "set_theme": "Elegir estilo",
-      "select_a_theme_title": "Elige un estilo",
+      "set_theme": "Estilo",
+      "select_a_theme_title": "Elegir estilo",
       "themes": {
         "theme-arsnova-dot-click-contrast": {
-          "name": "arsnova.click (<ÜBERSETZUNG_EINFÜGEN>)",
-          "description": "#2: <ÜBERSETZUNG_EINFÜGEN>"
+          "name": "arsnova.click (rico en contrastes)",
+          "description": "#2: gentil por el cañón"
         },
         "elegant": {
-          "name": "<ÜBERSETZUNG_EINFÜGEN>",
-          "description": "#4: <ÜBERSETZUNG_EINFÜGEN>"
+          "name": "Elegancia",
+          "description": "#4: Para rondós del concurso exigente"
         },
         "black_beauty": {
-          "name": "Black Beauty (<ÜBERSETZUNG_EINFÜGEN>)",
-          "description": "#3: <ÜBERSETZUNG_EINFÜGEN>"
+          "name": "Black Beauty (gentil por el cañón)",
+          "description": "#3: gentil por la batería"
         },
         "material": {
           "name": "Material Design Colors",
-          "description": "#1: <ÜBERSETZUNG_EINFÜGEN>"
+          "description": "#1: El Estandar"
         },
         "decent_blue": {
           "name": "Decent Blue",
-          "description": "#5"
+          "description": "#5: gris elegante"
         },
         "material_hope": {
           "name": "Material Hope",
-          "description": "#6"
+          "description": "#6: predominante verde"
         },
         "material-blue": {
           "name": "Material blue",
-          "description": "#7"
+          "description": "#7: predominante azul"
         },
         "spiritual-purple": {
           "name": "Spiritual Purple",
-          "description": "#8"
+          "description": "#8: lila espiritual"
         },
         "GreyBlue-Lime": {
           "name": "GreyBlue Lime",
-          "description": "#9"
+          "description": "#9: liso"
         }
       }
     },
     "timer": {
-      "title": "Ajustar el temporizador",
+      "title": "Countdown",
       "second": "Segundo",
       "second_plural": "Segundos",
       "minute": "Minuto",
       "minute_plural": "Minutos",
       "hour": "Hora",
       "hour_plural": "Horas",
-      "forward": "Proceder al gestor de exámenes",
-      "back": "Volver al administrador de preguntas",
-      "description": "Aquí puede configurar la cuenta regresiva para la pregunta de la prueba. Tan pronto como expire, o todos los participantes han contestado, la ronda de exámenes se termina."
+      "forward": "Continuar al mánager del concursos",
+      "back": "Volver al mánager del concursos",
+      "description": "Aquí puedes regular el countdown por la pregunta. Cuando el countdown es caduco o cuando todos los participantes han dado su respuesta, zona un gong o un pitido y el rondo del concurso es terminado."
     },
     "translation": {
-      "translations": "Idiomas disponibles",
-      "i18n_currently_not_available": "i18n no se encuentra disponible!",
+      "translations": "Tu Idioma",
+      "i18n_currently_not_available": "i18n no es disponible actualmente",
       "beta": "Beta"
     },
     "voting": {
       "title": "Votación",
-      "question": "Monstrar pregunta",
-      "send": "Enviar",
-      "seconds_left": "Sólo queda 1 segundo!",
-      "seconds_left_plural": "Sólo quedan __valor__ segundos!",
+      "question": "Indicar pregunta",
+      "send": "Mandar",
+      "seconds_left": "¡Solo otro segundo más!",
+      "seconds_left_plural": "¡Solo __value__ segundos más!",
       "ranged_question": {
-        "title": "¡Ingresa tu valor estimado!",
+        "title": "¡Ecribe tu valor estimado!",
         "input_placeholder": "Respuesta"
       },
       "free_text_question": {
-        "title": "¡Ingresa tu respuesta!",
+        "title": "¡Escribe tu respuesta!",
         "input_placeholder": "Respuesta"
-      },
-      "confidence_level": {
-        "title": "¿Qué tan seguro está usted en su respuesta?",
-        "no_idea": "Ni idea",
-        "not_sure": "¡No es seguro!",
-        "unsure": "Inseguro",
-        "quite_sure": "Bastante seguro",
-        "very_sure": "Realmente convencido!"
       }
     }
   },
   "plugins": {
     "markdown_bar": {
-      "visible_text": "Texto visible",
-      "link_text": "Enlace",
-      "link_destination": "Enlace de destino",
-      "advanced_options": "Opciones avanzadas",
-      "option_width": "Max. anchura (pixel)",
-      "option_height": "Max. altura (pixel)",
+      "visible_text": "Texto indicado",
+      "link_text": "Texto del link",
+      "link_destination": "Destino del link",
+      "advanced_options": "Opciones ampliadas",
+      "option_width": "Ancho máximo (pixel)",
+      "option_height": "Altura máxima (pixel)",
       "option_position": "Posición",
       "option_left": "izquierda",
-      "option_centered": "centrado",
-      "option_right": "derecho",
+      "option_centered": "centrada",
+      "option_right": "derecha",
       "tooltip": {
-        "bold": "Negrita",
-        "italic": "Itálico",
-        "line_through": "Tachado",
-        "heading": "Encabezado",
-        "hyperlink": "Hipervínculo",
+        "bold": "Negrilla",
+        "italic": "Cursiva",
+        "line_through": "tachado",
+        "heading": "Título",
+        "hyperlink": "Hyperlink",
         "unordered_list": "Lista desordenada",
         "ordered_list": "Lista ordenada",
-        "latex": "LaTeX-marcadores",
-        "code": "Code-marcadores",
+        "latex": "Fórmula del TeX",
+        "code": "Formateo del code",
         "citation": "Cita",
         "image": "Imagen"
       },
-      "info_content": "Tú puedes marcar textos con <a target='_blank' class='hyperlink' href='https://es.wikipedia.org/wiki/Markdown'>Markdown</a>. Las opciones de Markdown utilizadas con mayor frecuencia están disponibles en forma de botones sobre la casilla. De igual modo, arsnova.click  soporta <a target='_blank' class='hyperlink' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>GitHub Flavored Markdown</a>."
+      "info_content": "Formatea tu pregunta con <a target='_blank' class='hyperlink' href='https://es.wikipedia.org/wiki/Markdown'>Markdown</a> y integra imagenes, vidoes o formulas. Puedes usar emoticones también. Clica en el smiley para elegirlos: <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'><img style='width:30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/></a>"
     },
     "sound": {
-      "running_music": "Cuenta atrás (Correr)",
-      "lobby_music": "Lobby del concurso",
-      "finish_music": "Cuenta atrás (Fin)",
-      "running_music_detailed": "Sonido durante cuenta atrás",
-      "lobby_music_detailed": "El sonido en el vestíbulo concurso",
-      "finish_music_detailed": "Sonido al final de la cuenta atrás",
-      "whistle": "Silbar",
+      "running_music": "Countdown (continuamente)",
+      "lobby_music": "Lobby del concursos",
+      "finish_music": "Countdown (fin)",
+      "running_music_detailed": "Sonido mientras el countdown",
+      "lobby_music_detailed": "Sonido en el lobby del concursos",
+      "finish_music_detailed": "Sonido por el del countdown",
+      "whistle": "Pitar",
       "silence": "Sin sonido",
       "global_volume": "Volumen global",
-      "volume": "Predeterminar volumen",
-      "inactive": "Sonido está desactivado",
-      "active": "Sonido está activado",
-      "activated": "Activado",
-      "deactivated": "Desactivado",
-      "random": "Selección aleatoria",
-      "play": "Jugar",
-      "stop": "Detener"
+      "volume": "Fijar el volumen",
+      "inactive": "Sonido desactivado",
+      "active": "Sonido activado",
+      "activated": "activado",
+      "deactivated": "deactivado",
+      "random": "delección por casualidad",
+      "play": "Respendizar",
+      "stop": "Congelar"
     },
     "splashscreen": {
       "question_and_answer": {
         "answeroption": "",
-        "answeroption_plural": "Respuestas",
-        "min_range": "Menor tolerancia",
+        "answeroption_plural": "Responder",
+        "min_range": "valor mínimo",
         "correct_value": "Valor correcto",
-        "max_range": "Tolerancia superior",
-        "reference_value": "Valor de referencia"
+        "max_range": "Valor máximo",
+        "reference_value": "Valor correcto"
       },
       "edit_session_confirmation": {
-        "title": "¿Quieres editar el cuestionario?",
-        "text": "Todos los asistentes serán eliminados y se eliminarán la tabla de clasificación.",
-        "continue": "¿Continuar?"
+        "title": "Editar el concurso",
+        "text": "Todos los participantes tendrán que cerrar la sesión y el escalafón será borrado.",
+        "continue": "Continuar"
       },
       "remove_question_confirmation": {
-        "title": "¿Deseas eliminar la pregunta?",
-        "text": "¡Esto no se puede deshacer!"
+        "title": "Borrar preguntas del concurso",
+        "text": "No es posible anular eso acto"
       },
       "reminder_leaderboard_data": {
-        "title": "Advertencia",
-        "text": "Los datos de la tabla de clasificación se eliminarán tan pronto como salga de la prueba. Puede descargar los datos para su uso posterior aquí.",
-        "continue": "¿Continuar?"
+        "title": "Aviso",
+        "text": "Los datos del escalafón serán borrado cuando dejas el concurso. Aquí puedes exportar los datos.",
+        "continue": "Continuar"
       },
       "return_to_lobby": {
-        "title": "Advertencia",
-        "text": "Si continúa con el lobby del cuestionario, todas las rondas de preguntas contestadas se restablecerán.",
-        "continue": "¿Continuar?"
+        "title": "Aviso",
+        "text": "Todos los concursos que habías absolviendo serán borrado cuando vuelves al lobby del concursos.",
+        "continue": "Continuar"
       },
       "error": {
-        "title": "Pista",
-        "set_text_error": "¡El texto de la página inicial sólo pueder ser colocado después de haber sido renderizado!",
+        "title": "Aviso",
+        "set_text_error": "Solo puedes poner el texto del splashscreen cuando son elaborados.",
         "error_messages": {
-          "Internal Server Error": "Error interno del servidor",
-          "update_failed": "Error al actualizar la pregunta.",
-          "session_exists": "Este cuestionario ya existe.",
-          "session_exists_warning": "El nombre de este cuestionario ya existe.",
-          "session_exists_arsnova_import": "Introduce un nombre para tu prueba de arsnova:",
-          "session_exists_new": "Ingresa uno nuevo:",
-          "session_not_exists": "¡Esta sesión no existe!",
-          "hashtag_exists": "¡El nombre del cuestionario ya existe!",
-          "session_not_available": "En este momento no es posible ingresar al cuestionario.",
-          "private_browsing": "Cuando tu navegador esté en modo privado, arsnova.click funcionará lamentablemente solo como participante, ya que el navegador rechazará la descripción de la memoria de la aplicación. Por favor desactiva el modo privado mientras utilices arsnova.click y reinicia arsnova.click. Tú anonimato se mantiene, aunque el modo privado esté desactivado.",
-          "kicked_from_quiz": "¡Has sido sacado del cuestionario!",
-          "nick_already_exists": "Este apodo es ya existen",
-          "export_failed": "¡Los datos del cuestionario no pudieron ser exportados! - %s",
-          "not_authorized": "El cuestionario no está disponible o no cuentas con la autorización para leer estos datos",
-          "maximum_answer_options_exceeded": "La cantidad máxima de opciones de respuesta ya ha sido alcanzada",
-          "hashtag_not_found": "El nombre de este cuestionario lamentablemente no ha sido encontrado",
-          "member_not_found": "El participante lamentablemente no ha sido encontrado",
-          "duplicate_response": "El participante ya ha respondido",
-          "answeroption_not_found": "No existe una respuesta con este índice",
-          "response_timeout": "La cuenta atrás ya ha finalizado",
-          "insert_leaderboard_failed": "Error al añadir la respuesta a la lista del Ranking",
-          "session_closed": "Esta ronda ha sido finalizada",
-          "invalid_data": "¡Los datos a importar están defectuosos!",
-          "invalid_input_data": "¡Los datos ingresados son inválidos o erróneos!",
-          "duplicate_user": "Está intentando participar con una segunda identidad. ¡Esto no es posible!"
+          "Internal Server Error": "Falla interna del servidor",
+          "update_failed": "Hay un falla con la actualización de tu pregunta",
+          "session_exists": "Eso concurso ya existe",
+          "session_exists_warning": "Eso nombre del concurso ya es dado",
+          "session_exists_arsnova_import": "Por favor, da un nombre obvio para tu concurso:",
+          "session_exists_new": "Da un nuevo:",
+          "session_not_exists": "Eso concurso no existe",
+          "hashtag_exists": "Eso concurso ya existe",
+          "session_not_available": "No puedes participar en eso rondo del concurso actualmente.",
+          "private_browsing": "En el modo privado, solo puedes usar arsnova.click como un participante porque no permite usar tu memoria. Deactiva el modo privado durante el uso de arsnova.click. Quedas anónima aunque el modo privado es deactivado.",
+          "kicked_from_quiz": "Eras echado del concurso",
+          "nick_already_exists": "Eso apodo ya existe",
+          "export_failed": "No fue posible exportar los datos del concurso - %s",
+          "not_authorized": "O no hay el concurso o no estás autorizado para leer los datos.",
+          "maximum_answer_options_exceeded": "El número máximo de respuestas es logrado",
+          "hashtag_not_found": "No podemos encontrar eso nombre del concurso",
+          "member_not_found": "No podemos encontrar eso participante",
+          "duplicate_response": "El participante ya había dado un respuesta",
+          "answeroption_not_found": "No podemos encontrar una respuesta con eso índice",
+          "response_timeout": "El countdown es caduco",
+          "insert_leaderboard_failed": "Hay un falla con la añadidura en el escalafón",
+          "session_closed": "Ese rondo del concurso es determinado",
+          "invalid_data": "Los datos para importar son averiado",
+          "invalid_input_data": "Los datos inseridos son averiados o invalidos",
+          "duplicate_user": "No puedes participar en un concurso con dos apodos."
         }
       }
     }
@@ -727,7 +716,7 @@
   "lib": {
     "questions": {
       "question_choice_single_yes_no": {
-        "yes": "Sí",
+        "yes": "Si",
         "no": "No"
       },
       "question_choice_single_true_false": {
@@ -735,35 +724,5 @@
         "false": "Falso"
       }
     }
-  },
-  "export": {
-    "summary": "Resumen",
-    "exported_at_date": "Exportado a",
-    "exported_at": "a",
-    "exported_at_time": "en punto",
-    "session_content": "Exportación del Quiz (JSON)",
-    "cas_account_id": "ID de cuenta de CAS",
-    "cas_account_email": "E-Mail del CAS",
-    "quiz_name": "Nombre de prueba",
-    "question": "Pregunta",
-    "question_type": "Tipo de la pregunta",
-    "number_of_answers": "Número de respuestas",
-    "percent_correct": "Corregir Respuestas",
-    "answer": "Responder",
-    "attendee": "Asistente",
-    "attendee_complete_correct": "Asistentes con preguntas correctas contestadas",
-    "attendee_complete_correct_none_available": "Ninguno disponible",
-    "attendee_all_entries": "Todos los asistentes",
-    "time": "Tiempo de respuesta (en ms)",
-    "confidence_level": "Grado de confianza",
-    "correct_value": "Valor correcto",
-    "min_range": "Rango mínimo",
-    "max_range": "Rango maximo",
-    "correct_questions": "Preguntas correctamente contestadas",
-    "overall_response_time": "Tiempo de respuesta acumulado (en ms)",
-    "average_response_time": "Tiempo medio de respuesta (en ms)",
-    "number_attendees": "Cantidad de asistentes",
-    "average_correct_answered_questions": "Las preguntas respondieron en promedio correctamente",
-    "average_confidence": "Grado de confianza promedio"
   }
 }

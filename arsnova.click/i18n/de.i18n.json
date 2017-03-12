@@ -738,6 +738,10 @@
     }
   },
   "export": {
+    /* See https://poi.apache.org/apidocs/org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html */
+    "page_header": "&LQuiz und Rangliste wurden durch eine live session mit arsnova.click generiert&R__createdAt__",
+    "page_footer": "&L&A&Carsnova.click ist eine open source software, siehe arsnova.io und https://github.com/thm-projects/arsnova.click&RSeite &P von &N",
+
     "summary": "Zusammenfassung",
     "exported_at_date": "Exportiert am",
     "exported_at": "um",
@@ -754,6 +758,7 @@
     "attendee": "Teilnehmer",
     "attendee_complete_correct": "Teilnehmer mit vollständig richtig beantworteten Fragen",
     "attendee_complete_correct_none_available": "Keine Einträge vorhanden",
+    "correct_questions_none_available": "Keine",
     "attendee_all_entries": "Alle Teilnehmer",
     "time": "Antwortzeit (in ms)",
 	  "confidence_level": "Antwortsicherheit",

@@ -26,22 +26,22 @@
                         {{/if}}
                     </div>
                 {{/if}}
-                {{#if isOwner}}
-                    <div class="col-xs-{{getButtonCols}}">
-                        <div class="dropup">
-                            <button class="button button-purple tabbable dropdown-toggle" type="button" id="dropdownMenuLeaderboardExport" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="glyphicon glyphicon-export glyph-right" aria-hidden="true"></span>
-                                <span class="ansBtn">{{_ "view.leaderboard.export"}}</span>
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLeaderboardExport">
-                                <li><a href="{{getExcelDownloadHref}}" target="_blank">OpenXML Spreadsheet (.xslx)</a></li>
-                                <li>{{#with exportCSVData}}<a href="{{this.href}}" download="{{this.name}}">Comma-Separated-Values (.csv)</a>{{/with}}</li>
-                            </ul>
-                        </div>
-                    </div>
-                {{/if}}
             {{/unless}}
+            {{#if isOwner}}
+                <div class="col-xs-{{getButtonCols}}">
+                    <div class="dropup">
+                        <button class="button button-purple tabbable dropdown-toggle" type="button" id="dropdownMenuLeaderboardExport" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-export glyph-right" aria-hidden="true"></span>
+                            <span class="ansBtn">{{_ "view.leaderboard.export"}}</span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLeaderboardExport">
+                            <li><a href="{{getExcelDownloadHref}}" target="_blank">OpenXML Spreadsheet (.xslx)</a></li>
+                            <li>{{#with exportCSVData}}<a href="{{this.href}}" download="{{this.name}}">Comma-Separated-Values (.csv)</a>{{/with}}</li>
+                        </ul>
+                    </div>
+                </div>
+            {{/if}}
         </div>
     </div>
 </template>

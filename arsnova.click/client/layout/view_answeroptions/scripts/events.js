@@ -66,26 +66,11 @@ Template.defaultAnswerOptionTemplate.events({
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
 	},
-	"click .answerOptionElementWrapper, mouseover .answerOptionElementWrapper": function (event) {
-		$(".contextMenu").removeClass("displayContextMenu");
-		$(event.currentTarget).parent().find(".contextMenu").addClass("displayContextMenu");
-	},
-	"mouseleave .answerOptionElementWrapper": function () {
-		lib.setContextTimeout(Meteor.setTimeout(function () {
-			$(".contextMenu").removeClass("displayContextMenu");
-		}, 200));
-	},
-	"mouseover .contextMenu": function () {
-		lib.setContextTimeout(null);
-	},
-	"mouseleave .contextMenu": function () {
-		$(".contextMenu").removeClass("displayContextMenu");
-	},
 	"click .moveAnsweroptionUp": function (event) {
 		event.stopPropagation();
 		event.preventDefault();
 		const questionGroup = Session.get("questionGroup");
-		const indexFrom = parseInt($(event.currentTarget).parents(".draggable").attr("id").replace("_answeroption", ""));
+		const indexFrom = parseInt($(event.currentTarget).parents(".answerElementContextWrapper").attr("id").replace("_answeroption", ""));
 		if (indexFrom > 0) {
 			const item = questionGroup.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[indexFrom];
 			questionGroup.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption(indexFrom);
@@ -98,7 +83,7 @@ Template.defaultAnswerOptionTemplate.events({
 		event.stopPropagation();
 		event.preventDefault();
 		const questionGroup = Session.get("questionGroup");
-		const indexFrom = parseInt($(event.currentTarget).parents(".draggable").attr("id").replace("_answeroption", ""));
+		const indexFrom = parseInt($(event.currentTarget).parents(".answerElementContextWrapper").attr("id").replace("_answeroption", ""));
 		if (indexFrom < questionGroup.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().length - 1) {
 			const item = questionGroup.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList()[indexFrom];
 			questionGroup.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption(indexFrom);
@@ -111,23 +96,22 @@ Template.defaultAnswerOptionTemplate.events({
 		event.stopPropagation();
 		event.preventDefault();
 		const questionItem = Session.get("questionGroup");
-		questionItem.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption($(event.currentTarget).parents(".draggable").attr("id").replace("_answeroption", ""));
+		questionItem.getQuestionList()[Router.current().params.questionIndex].removeAnswerOption($(event.currentTarget).parents(".answerElementContextWrapper").attr("id").replace("_answeroption", ""));
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
+		Meteor.defer(function () {
+			lib.answerOptionTracker.changed();
+		});
 	},
 	"input .answer_row_text": function (event) {
-		lib.setAnswerOptionTextTimeout(Meteor.setTimeout(function () {
-			const id = $(event.currentTarget).attr("id");
-			const plainId = id.replace("answerOptionText_Number","");
-			$('#buttonContainer').css("visibility", "hidden");
-			$('#' + plainId).removeClass("quickfitSet");
-			const cursorPosition = $("#" + id).getCursorPosition();
-			lib.parseSingleAnswerOptionInput(Router.current().params.questionIndex, plainId);
-			Meteor.defer(function () {
-				$("#" + id).setCursorPosition(cursorPosition).focus();
-				lib.answerOptionTracker.changed();
-			});
-		}, 1000));
+		const id = $(event.currentTarget).attr("id");
+		const plainId = id.replace("answerOptionText_Number","");
+		const cursorPosition = $("#" + id).getCursorPosition();
+		lib.parseSingleAnswerOptionInput(Router.current().params.questionIndex, plainId);
+		Meteor.defer(function () {
+			$("#" + id).setCursorPosition(cursorPosition).focus();
+			lib.answerOptionTracker.changed();
+		});
 	}
 });
 

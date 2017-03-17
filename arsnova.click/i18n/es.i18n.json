@@ -434,6 +434,7 @@
     "quiz_manager": {
       "title": "Mánager del concursos",
       "available_questions_title": "Modelos",
+      "question_added": "Para editar una pregunta, haz clic en ella:",
       "added_questions_title": "Preguntas",
       "no_added_questions": "Elegir un modelo por la pregunta",
       "session_invalid": "Tu concurso implica preguntas incompletas",

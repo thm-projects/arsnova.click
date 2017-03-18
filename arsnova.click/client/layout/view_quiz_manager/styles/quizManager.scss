@@ -42,6 +42,8 @@
 				position: relative;
 				text-align: center;
 				li {
+					height: 20px;
+					line-height: 20px;
 					&[data-valid='true'] {
 						&:before {
 							content: "\2714";

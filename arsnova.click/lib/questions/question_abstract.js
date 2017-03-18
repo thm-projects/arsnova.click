@@ -249,7 +249,7 @@ export class AbstractQuestion {
 	 * @returns {String} The question text without the markdown characters
 	 */
 	getQuestionTextWithoutMarkdownChars () {
-		return this.getQuestionText().replace(/[\W\s]*/, "");
+		return this.getQuestionText().replace(/[\W\s]*/g, "");
 	}
 
 	/**

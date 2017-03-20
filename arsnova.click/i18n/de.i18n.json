@@ -51,10 +51,10 @@
         "description": {
           "qr-code": "Dein Publikum kann den QR-Code scannen, um mit einem Klick – ohne Eintippen von Webadresse und Quiznamen – die Lobby zu betreten.",
           "sound": "Stelle hier die Hintergrundmusik ein und entscheide dich beim Countdown für Abpfiff oder Gong.",
-          "reading-confirmation": "Aktiviere diese Option, wenn zuerst nur die Frage ohne Antwortoptionen angezeigt werden soll. Nur wer das Lesen (Verstehen) der Frage bestätigt, die Anzahl der Lesebestätigungen wird angezeigt, kann am Quiz teilnehmen. Mit der Lesebestätigung schaffst Du gleiche Voraussetzungen beim Countdown.",
+          "reading-confirmation": "Aktiviere diese Option, wenn zuerst nur die Frage ohne Antwortoptionen angezeigt werden soll. Nur wer das Lesen (Verstehen) der Frage bestätigt, die Anzahl der Lesebestätigungen wird angezeigt, kann am Quiz teilnehmen. Mit der Lesebestätigung schaffst du gleiche Voraussetzungen beim Countdown.",
           "response-progress": "Soll die Anzahl der Stimmen zu den einzelnen Antwortoptionen während des Countdowns angezeigt werden? Dann aktiviere diese Option. Beachte aber den psychologischen Effekt: Der Mensch neigt dazu, sich nach der Mehrheit zu richten (Herdentrieb).",
           "confidence-slider": "Aktiviere diese Option, wenn beim Abstimmen die Antwortsicherheit auf einer Prozentskala mitgeteilt werden soll: von 0 &#37; \"geraten\" bis 100 &#37; \"absolut sicher!\". Der Mittelwert wird im Ergebnisdiagramm angezeigt.",
-          "nicknames": "Hier kannst Du die Nicknamen aus Kategorien vorgeben. Tipp: Einen anstößigen Nicknamen in der Lobby entfernst Du, indem Du ihn anklickst."
+          "nicknames": "Hier kannst du die Nicknamen aus Kategorien vorgeben. Tipp: Einen anstößigen Nicknamen in der Lobby entfernst du, indem du ihn anklickst."
         }
       },
       "about": {
@@ -79,8 +79,8 @@
         "manual": {
           "title": "Bedienungshandbuch?",
           "text": {
-            "1": "Brauchst Du nicht!",
-            "2": "Tipp einfach den Namen des Quiz ein. Die Buttons werden aktiviert, sobald Du entweder den Namen eines freigeschalteten Quiz eingibst: \"Mach mit beim Quiz!\" oder ein Quiz mit dem eingegebenen Namen erstellen kannst: \"Mach ein neues Quiz!\".",
+            "1": "Brauchst du nicht!",
+            "2": "Tipp einfach den Namen des Quiz ein. Die Buttons werden aktiviert, sobald du entweder den Namen eines freigeschalteten Quiz eingibst: \"Mach mit beim Quiz!\" oder ein Quiz mit dem eingegebenen Namen erstellen kannst: \"Mach ein neues Quiz!\".",
             "3": "Folge dem Tutorial (Flagge in der Fußleiste) oder einfach deiner Intuition: schauen, klicken, quizzen."
           }
         }
@@ -219,16 +219,16 @@
       "emoji_info": "Du kannst auch Emojis einfügen! <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'><img style='width:40px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/></a>",
       "description": {
         "default_answer_row": "Ziehe diesen Block in die Liste der Antwortoptionen oder klick auf ihn, um eine neue Antwort einzufügen.",
-        "added_answers": "Hier siehst Du die Antwortoptionen der Frage. Du kannst die Reihenfolge per Drag & Drop ändern.",
+        "added_answers": "Hier siehst du die Antwortoptionen der Frage. Du kannst die Reihenfolge per Drag & Drop ändern.",
         "added_answer_short_text": "Jede Antwortoption enthält einen Buchstaben, der für die Teilnehmer/innen angezeigt werden kann.",
-        "added_answer_text": "Hier kannst Du den Text der Antwort eingeben. Eine Formatierung mit Markdown und TeX ist möglich. Auch Bilder können eingefügt werden.",
+        "added_answer_text": "Hier kannst du den Text der Antwort eingeben. Eine Formatierung mit Markdown und TeX ist möglich. Auch Bilder können eingefügt werden.",
         "added_answer_is_correct": "Dieser Button regelt, ob die Antwort als richtig oder falsch gewertet werden soll.",
         "added_answer_remove": "Bei einem Klick auf diese Schaltfläche wird die betreffende Antwort gelöscht.",
         "show_answer_content_on_buttons": "Die Antwortbuttons können entweder mit dem Buchstaben oder dem Inhalt der Antwort beschriftet werden. Beachte aber, dass langer Text auf dem Endgerät schlecht lesbar sein kann. Verschieden lange Antworttexte werden auf die Buttonbreite skaliert, was unschön aussehen kann oder einzelne Optionen überbetont.",
-        "multiple_selection_survey": "Hier kannst Du einstellen, ob die Teilnehmer/innen nach dem Klick auf eine Antwort der Umfrage direkt zur Auswertung gelangen sollen oder ob eine Mehrfachauswahl möglich sein soll.",
-        "preview": "Hier siehst Du, wie die Antwortoptionen auf dem Smartphone aussehen werden.",
-        "range_area": "Hier kannst Du die korrekte Antwort und die Toleranzen nach oben und unten angeben. Bitte beachte, dass die Eingabe in natürlichen Zahlen erfolgen muss.",
-        "min_range": "Hier kannst Du den unteren Toleranzwert festlegen.",
+        "multiple_selection_survey": "Hier kannst du einstellen, ob die Teilnehmer/innen nach dem Klick auf eine Antwort der Umfrage direkt zur Auswertung gelangen sollen oder ob eine Mehrfachauswahl möglich sein soll.",
+        "preview": "Hier siehst du, wie die Antwortoptionen auf dem Smartphone aussehen werden.",
+        "range_area": "Hier kannst du die korrekte Antwort und die Toleranzen nach oben und unten angeben. Bitte beachte, dass die Eingabe in natürlichen Zahlen erfolgen muss.",
+        "min_range": "Hier kannst du den unteren Toleranzwert festlegen.",
         "correct_value": "Diese Antwort ist vollständig korrekt.",
         "max_range": "Hier kannst Du den oberen Toleranzwert festlegen.",
         "range_slider": "Mit diesem Schieberegler kannst Du die oberen und unteren Toleranzen dynamisch verändern. Der korrekte Wert wird dem Mittelwert entsprechen.",
@@ -237,7 +237,7 @@
         "config_trim_whitespaces": "Legt fest, ob die Leerzeichen der eingegebenen Antwort geprüft werden sollen.",
         "config_use_keywords": "Sollte diese Option aktiviert werden, muss die Reihenfolge der Wörter der eingegebenen Antwort der der Referenzantwort entsprechen. Ist diese Option deaktiviert, kann keine Prüfung der Leer- und Satzzeichen vorgenommen werden.",
         "config_use_punctuation": "Diese Option legt fest, ob die Satzzeichen der eingegebenen Antwort geprüft werden sollen.",
-        "check_answer": "Hier kannst Du mögliche Antworten der Teilnehmer/innen gegen deine Referenzantwort und unter Berücksichtigung der aktuellen Kriterien testen."
+        "check_answer": "Hier kannst du mögliche Antworten der Teilnehmer/innen gegen deine Referenzantwort und unter Berücksichtigung der aktuellen Kriterien testen."
       },
       "ranged_question": {
         "title": "Intervall der richtigen Antworten",
@@ -271,7 +271,7 @@
         "2": "Eine Teilnahme am Quiz ist nicht möglich."
       },
       "description": {
-        "nickname_input": "Hier kannst Du dir einen Namen geben, der in der Quiz Lobby und in der Rangliste angezeigt wird.",
+        "nickname_input": "Hier kannst du dir einen Namen geben, der in der Quiz Lobby und in der Rangliste angezeigt wird.",
         "choose_selectable_nick": "Du kannst aus dieser Liste einen Nicknamen auswählen."
       }
     },
@@ -309,7 +309,7 @@
         "title": {
           "1": "Entdecke arsnova.click !",
           "2": "Gib \u00BBDemo Quiz\u00AB ein und starte es. Ruf die App in einem zweiten Browser auf und spiel das Quiz in verteilten Rollen.",
-          "3": "Besuch unseren Blog arsnova.io und erfahr, wie Du Quizze in deinem Unterricht oder in einem Vortrag einsetzen kannst."
+          "3": "Besuch unseren Blog arsnova.io und erfahr, wie du Quizze in deinem Unterricht oder in einem Vortrag einsetzen kannst."
         }
       }
     },
@@ -374,7 +374,7 @@
       "description": {
         "memberlist_count": "So viele Personen sind aktuell eingeloggt.",
         "title": "Die Quiz Lobby zeigt die Nicknamen der Teilnehmenden in zeitlich umgekehrter Reihenfolge ihres Eintreffens.",
-        "waiting_for_players": "Sobald sich die Lobby füllt, kannst Du die Quizrunde starten. Beachte: Nach dem Start kann sich niemand mehr einloggen!"
+        "waiting_for_players": "Sobald sich die Lobby füllt, kannst du die Quizrunde starten. Beachte: Nach dem Start kann sich niemand mehr einloggen!"
       }
     },
     "nickname_categories": {
@@ -404,7 +404,7 @@
       "currentType": "Aktueller Typ der Quizfrage:",
       "back": "Zurück zum Quiz-Manager",
       "description": {
-        "type_wrapper": "Hier kannst Du den Typ der Quizfrage ändern. Jeder Typ hat unterschiedliche Einstellungen. Ändere den Typ durch einen Klick auf die jeweilige Box. Beachte aber, dass zuvor eingegebene Antwortoptionen je nach Wechsel des Fragetyps verloren gehen können. Von Single-Choice nach Multiple-Choice zu wechseln und umgekehrt, ist unkritisch.",
+        "type_wrapper": "Hier kannst du den Typ der Quizfrage ändern. Jeder Typ hat unterschiedliche Einstellungen. Ändere den Typ durch einen Klick auf die jeweilige Box. Beachte aber, dass zuvor eingegebene Antwortoptionen je nach Wechsel des Fragetyps verloren gehen können. Von Single-Choice nach Multiple-Choice zu wechseln und umgekehrt, ist unkritisch.",
         "SingleChoiceQuestion": "Single-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen genau eine als richtig markiert sein muss.",
         "YesNoSingleChoiceQuestion": "Ja-Nein-Fragen enthalten nur zwei Antwortopionen (Ja und Nein, überschreibbar), von denen eine als richtig markiert sein muss.",
         "TrueFalseSingleChoiceQuestion": "Wahr-Falsch-Fragen enthalten nur zwei Antwortopionen (Wahr und Falsch, überschreibbar), von denen eine als richtig markiert sein muss.",
@@ -428,7 +428,7 @@
       "ranged_question": "Schätzfrage",
       "free_text_question": "Kurzantwort-Frage",
       "description": {
-        "preview": "Hier siehst Du, wie der Text auf einem Smartphone angezeigt wird."
+        "preview": "Hier siehst du, wie der Text auf einem Smartphone angezeigt wird."
       }
     },
     "quiz_manager": {
@@ -463,10 +463,10 @@
         }
       },
       "description": {
-        "available_questions": "Hier siehst Du alle Fragetypen, aus denen Du wählen kannst. Jeder Fragetyp bietet eigene Voreinstellungen und Optionen zur Gestaltung deines Quiz.",
-        "added_questions": "Um eine Frage hinzuzufügen, ziehe eine Vorlage hierher oder klick auf sie. Wenn Du die eingefügte Vorlage berührst, siehst Du, was Du damit machen kannst: Frage editieren, Reihenfolge der Fragen ändern oder die Frage löschen.",
+        "available_questions": "Hier siehst du alle Fragetypen, aus denen du wählen kannst. Jeder Fragetyp bietet eigene Voreinstellungen und Optionen zur Gestaltung deines Quiz.",
+        "added_questions": "Um eine Frage hinzuzufügen, ziehe eine Vorlage hierher oder klick auf sie. Wenn du die eingefügte Vorlage berührst, siehst du, was du damit machen kannst: Frage editieren, Reihenfolge der Fragen ändern oder die Frage löschen.",
         "back_button": "Du kannst jederzeit zurückgehen. Jede Änderung am Quiz wird beim Klicken oder Tippen sofort ohne Nachfragen gespeichert. Das gilt für die ganze App. Du musst nie etwas speichern!",
-        "forward_button": "Ist dein Quiz vollständig und besteht eine Verbindung zum Server, kannst Du zur Quiz Lobby gehen und die Quizrunde eröffnen."
+        "forward_button": "Ist dein Quiz vollständig und besteht eine Verbindung zum Server, kannst du zur Quiz Lobby gehen und die Quizrunde eröffnen."
       }
     },
     "quiz_manager_details": {
@@ -527,11 +527,11 @@
       "true": "Ja",
       "false": "Nein",
       "description": {
-        "header": "Hier siehst Du die wichtigsten Daten deiner Quizrunde.",
-        "session_url": "Mit diesem Link kann dein Publikum ohne Eintippen des Quiznamens direkt am Quiz teilnehmen. Schreib den Link an die Tafel oder auf Deine Folie. Sobald Du die Quizrunde startest, können sich deine Leute einloggen.",
+        "header": "Hier siehst du die wichtigsten Daten deiner Quizrunde.",
+        "session_url": "Mit diesem Link kann dein Publikum ohne Eintippen des Quiznamens direkt am Quiz teilnehmen. Schreib den Link an die Tafel oder auf Deine Folie. Sobald du die Quizrunde startest, können sich deine Leute einloggen.",
         "question_group_validation": "Die Validierung deiner Quizrunde schlägt fehl, solange das Quiz noch nicht fertiggestellt ist, zum Beispiel: Es ist noch keine Quizfrage mit einer der Vorlagen erstellt worden, der Fragetext fehlt oder die Antwortoptionen sind unvollständig.",
         "restrict_to_cas": "Ist diese Einstellung unter &raquo;Freie Auswahl&laquo; bzw. &raquo;Nicknamen&laquo; in der Fußzeile aktiviert, müssen sich die Teilnehmer/innen am zentralen Authentifizierungsdienst anmelden. Hinweis: Diese Option steht nur an der THM zur Verfügung.",
-        "question_item": "Hier siehst Du alle Daten deiner Quizfrage. Mit den Buttons oben kannst Du die Frage überarbeiten.",
+        "question_item": "Hier siehst du alle Daten deiner Quizfrage. Mit den Buttons oben kannst du die Frage überarbeiten.",
         "validation_errors": "Dein Quiz kann erst gestartet werden, wenn alle Fehler behoben wurden."
       }
     },
@@ -587,7 +587,7 @@
       "hour_plural": "Stunden",
       "forward": "Weiter zum Quiz-Manager",
       "back": "Zurück zum Quiz-Manager",
-      "description": "Hier kannst Du den Countdown für die Quizfrage einstellen. Sobald er abläuft oder alle Teilnehmer/innen eine Antwort abgegeben haben, ertönt ein Gong oder Pfiff und die Quizrunde ist beendet."
+      "description": "Hier kannst du den Countdown für die Quizfrage einstellen. Sobald er abläuft oder alle Teilnehmer/innen eine Antwort abgegeben haben, ertönt ein Gong oder Pfiff und die Quizrunde ist beendet."
     },
     "translation": {
       "translations": "Deine Sprache",
@@ -689,7 +689,7 @@
       },
       "return_to_lobby": {
         "title": "Warnung",
-        "text": "Wenn Du zur Quiz Lobby zurückkehrst, werden alle bereits durchgeführten Quizrunden zurückgesetzt.",
+        "text": "Wenn du zur Quiz Lobby zurückkehrst, werden alle bereits durchgeführten Quizrunden zurückgesetzt.",
         "continue": "Fortfahren?"
       },
       "error": {
@@ -709,7 +709,7 @@
           "kicked_from_quiz": "Du wurdest aus dem Quiz geworfen!",
           "nick_already_exists": "Dieser Benutzername existiert bereits",
           "export_failed": "Konnte die Quizdaten nicht exportieren! - %s",
-          "not_authorized": "Entweder ist das Quiz nicht vorhanden oder Du hast keine Berechtigung, diese Daten zu lesen",
+          "not_authorized": "Entweder ist das Quiz nicht vorhanden oder du hast keine Berechtigung, diese Daten zu lesen",
           "maximum_answer_options_exceeded": "Die maximale Anzahl an Antwortoptionen wurde bereits erreicht",
           "hashtag_not_found": "Dieser Quizname wurde leider nicht gefunden",
           "member_not_found": "Der Teilnehmer wurde leider nicht gefunden",
@@ -745,7 +745,7 @@
     "exported_at_date": "Exportiert am",
     "exported_at": "um",
     "exported_at_time": "Uhr",
-    "session_content": "Quiz importieren: Kopiere den Zellinhalt in eine leere .json-Datei.",
+    "session_content": "Archivierte Quizfragen (Um das Quiz zu importieren, kopiere den vollständigen Zellinhalt in eine leere .json-Datei. Importiere dann die Datei mit dem entsprechenden Icon in der Fußzeile der App.)",
     "cas_account_id": "CAS Account-ID",
     "cas_account_email": "CAS E-Mail",
     "quiz_name": "Quizname",
@@ -755,7 +755,7 @@
     "percent_correct": "Korrekte Antworten",
     "answer": "Antwort",
     "attendee": "Teilnehmer/in",
-    "attendee_complete_correct": "Teilnehmer/in mit vollständig richtig beantworteten Fragen",
+    "attendee_complete_correct": "Teilnehmer/innen mit vollständig richtig beantworteten Fragen",
     "attendee_complete_correct_none_available": "Keine Einträge vorhanden",
     "correct_questions_none_available": "Keine",
     "attendee_all_entries": "Alle Teilnehmer/innen",

@@ -117,7 +117,7 @@ export const footerElemResponseProgress = {
 };
 export const footerElemConfidenceSlider = {
 	id: "confidence-slider",
-	iconClass: "glyphicon glyphicon-scale",
+	iconClass: "glyphicon glyphicon-dashboard",
 	textClass: "footerElementText",
 	textName: "region.footer.footer_bar.show_confidence_slider",
 	selectable: true,

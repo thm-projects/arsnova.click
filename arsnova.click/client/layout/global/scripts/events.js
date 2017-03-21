@@ -192,18 +192,27 @@ Template.home.events({
 			hashtagLib.addHashtag(Session.get("questionGroup"));
 		} else {
 			let questionGroup = null;
+			const successCallback = function (data) {
+				questionGroup = new DefaultQuestionGroup(data);
+				questionGroup.setHashtag(hashtag);
+				if (questionGroup.isValid()) {
+					sessionStorage.setItem("overrideValidQuestionRedirect", true);
+				}
+				hashtagLib.addHashtag(questionGroup);
+			};
 			if (hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
 				$.ajax({
 					type: "GET",
-					url: "/test_data/quiz_with_3_questions.json",
+					url: `/demo_quiz/${TAPi18n.getLanguage()}.demo_quiz.json?_=${Date.now()}`,
 					dataType: 'json',
-					success: function (data) {
-						questionGroup = new DefaultQuestionGroup(data);
-						questionGroup.setHashtag(hashtag);
-						if (questionGroup.isValid()) {
-							sessionStorage.setItem("overrideValidQuestionRedirect", true);
-						}
-						hashtagLib.addHashtag(questionGroup);
+					success: successCallback,
+					error: function () {
+						$.ajax({
+							type: "GET",
+							url: `/demo_quiz/en.demo_quiz.json?_=${Date.now()}`,
+							dataType: 'json',
+							success: successCallback
+						});
 					}
 				});
 			} else {

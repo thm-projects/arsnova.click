@@ -36,32 +36,32 @@ function formatSheet(ws, {responsesWithConfidenceValue, isCASRequired, columnsTo
 		}
 	});
 
-	ws.cell(4, 1, 7, columnsToFormat).style(defaultStyles.statisticsRowStyle);
-	ws.cell(4, 3, 7, 3).style({
+	ws.cell(4, 1, 8, columnsToFormat).style(defaultStyles.statisticsRowStyle);
+	ws.cell(4, 3, 8, 3).style({
 		alignment: {
 			horizontal: "left"
 		}
 	});
-	ws.cell(7, 3).style({
+	ws.cell(8, 3).style({
 		numberFormat: '#,##0.00" ms"'
 	});
 
-	ws.cell(9, 1, 10, columnsToFormat).style(defaultStyles.attendeeHeaderGroupRowStyle);
-	ws.cell(11, 1, 11, columnsToFormat).style(defaultStyles.attendeeHeaderRowStyle);
-	ws.cell(11, 1).style({
+	ws.cell(10, 1, 11, columnsToFormat).style(defaultStyles.attendeeHeaderGroupRowStyle);
+	ws.cell(12, 1, 12, columnsToFormat).style(defaultStyles.attendeeHeaderRowStyle);
+	ws.cell(12, 1).style({
 		alignment: {
 			horizontal: "left"
 		}
 	});
 
-	ws.row(11).filter({
-		firstRow: 11,
+	ws.row(12).filter({
+		firstRow: 12,
 		firstColumn: 1,
-		lastRow: 11,
+		lastRow: 12,
 		lastColumn: columnsToFormat
 	});
 
-	let nextStartRow = 17;
+	let nextStartRow = 18;
 	let dataWithoutCompleteCorrectQuestions = 0;
 	leaderboardData.forEach(function (leaderboardItem, indexInList) {
 		let hasNotAllQuestionsCorrect = false;
@@ -76,7 +76,7 @@ function formatSheet(ws, {responsesWithConfidenceValue, isCASRequired, columnsTo
 		}
 		let nextColumnIndex = 3;
 		nextStartRow++;
-		const targetRow = indexInList + 12;
+		const targetRow = indexInList + 13;
 		if (responsesWithConfidenceValue.length > 0) {
 			ws.cell(targetRow, nextColumnIndex++).style({
 				alignment: {
@@ -97,15 +97,15 @@ function formatSheet(ws, {responsesWithConfidenceValue, isCASRequired, columnsTo
 			numberFormat: "#,##0.00;"
 		});
 	});
-	if (nextStartRow === 17) {
-		ws.cell(12, 1, 12, columnsToFormat, true).style(Object.assign({}, defaultStyles.attendeeEntryRowStyle, {
+	if (nextStartRow === 18) {
+		ws.cell(13, 1, 13, columnsToFormat, true).style(Object.assign({}, defaultStyles.attendeeEntryRowStyle, {
 			alignment: {
 				horizontal: "center"
 			}
 		}));
 		nextStartRow++;
 	} else {
-		ws.cell(12, 1, (leaderboardData.length + 11 - dataWithoutCompleteCorrectQuestions), columnsToFormat).style(defaultStyles.attendeeEntryRowStyle);
+		ws.cell(13, 1, (leaderboardData.length + 12 - dataWithoutCompleteCorrectQuestions), columnsToFormat).style(defaultStyles.attendeeEntryRowStyle);
 	}
 
 	ws.cell(nextStartRow++, 1, nextStartRow++, columnsToFormat).style(defaultStyles.attendeeHeaderGroupRowStyle);
@@ -147,10 +147,12 @@ function formatSheet(ws, {responsesWithConfidenceValue, isCASRequired, columnsTo
 
 function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequired, questionGroup, questionGroupObject, hashtag, columnsToFormat, leaderboardData, numberOfAttendees}) {
 	const date = new Date();
-	ws.cell(1, 1).string(TAPi18n.__('export.quiz_name', {lng: translation}) + ': ' + TAPi18n.__(questionGroupObject.getHashtag(), {lng: translation}));
-	ws.cell(1, columnsToFormat - 1).string(TAPi18n.__('export.session_content', {lng: translation}));
+	let currentRowIndex = 1;
+	ws.cell(currentRowIndex, 1).string(TAPi18n.__('export.quiz_name', {lng: translation}) + ': ' + TAPi18n.__(questionGroupObject.getHashtag(), {lng: translation}));
+	ws.cell(currentRowIndex, columnsToFormat - 1).string(TAPi18n.__('export.session_content', {lng: translation}));
+	currentRowIndex++;
 
-	ws.cell(2, 1).string(
+	ws.cell(currentRowIndex, 1).string(
 		TAPi18n.__('export.exported_at_date', {lng: translation}) +
 		" " + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) +
 		"." + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) +
@@ -160,7 +162,8 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 		":" + (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) +
 		" " + TAPi18n.__('export.exported_at_time', {lng: translation})
 	);
-	ws.cell(2, columnsToFormat - 1, 2, columnsToFormat, true).string(JSON.stringify(questionGroupObject.serialize()));
+	ws.cell(currentRowIndex, columnsToFormat - 1, currentRowIndex, columnsToFormat, true).string(JSON.stringify(questionGroupObject.serialize()));
+	currentRowIndex += 2;
 
 	ws.addImage({
 		path: '../web.browser/app/images/arsnova_click_small.png',
@@ -176,33 +179,45 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 		}
 	});
 
-	ws.cell(4, 1).string(TAPi18n.__('export.number_attendees', {lng: translation}) + ":");
-	ws.cell(4, 3).number(numberOfAttendees);
+	ws.cell(currentRowIndex, 1).string(TAPi18n.__('export.number_attendees', {lng: translation}) + ":");
+	ws.cell(currentRowIndex, 3).number(numberOfAttendees);
+	currentRowIndex++;
 
-	ws.cell(5, 1).string(TAPi18n.__('export.average_correct_answered_questions', {lng: translation}) + ":");
-	ws.cell(5, 3).number(leaderboardData.map((x)=> {return x.correctQuestions.length;}).reduce((a, b)=> {return a + b;}, 0) / numberOfAttendees);
+	ws.cell(currentRowIndex, 1).string(TAPi18n.__('export.average_number_attendees_participated', {lng: translation}) + ":");
+	ws.cell(currentRowIndex, 3).string(((ResponsesCollection.find({hashtag: hashtag}).fetch().length / numberOfAttendees / questionGroup.questionList.length) * 100 + " %").replace(".", ","));
+	currentRowIndex++;
 
-	ws.cell(6, 1).string(TAPi18n.__('export.average_confidence', {lng: translation}) + ":");
-	ws.cell(6, 3).string((leaderboardData.map((x)=> {return x.confidenceValue;}).reduce((a, b)=> {return a + b;}, 0) / numberOfAttendees).toFixed(2) + " %");
+	ws.cell(currentRowIndex, 1).string(TAPi18n.__('export.average_correct_answered_questions', {lng: translation}) + ":");
+	ws.cell(currentRowIndex, 3).number(leaderboardData.map((x)=> {return x.correctQuestions.length;}).reduce((a, b)=> {return a + b;}, 0) / numberOfAttendees);
+	currentRowIndex++;
 
-	ws.cell(7, 1).string(TAPi18n.__('export.average_response_time', {lng: translation}) + ":");
-	ws.cell(7, 3).number(Number(((leaderboardData.map((x)=> {return x.responseTime;}).reduce((a, b)=> {return a + b;}, 0) / numberOfAttendees) / questionGroup.questionList.length).toFixed(2)));
+	ws.cell(currentRowIndex, 1).string(TAPi18n.__('export.average_confidence', {lng: translation}) + ":");
+	const averageConfidencePercentage = (leaderboardData.filter((x)=> {return x.confidenceValue > -1;}).map((x)=> {return x.confidenceValue;}).reduce((a, b)=> {return a + b;}, 0) / numberOfAttendees);
+	ws.cell(currentRowIndex, 3).string((isNaN(averageConfidencePercentage) ? "0" : averageConfidencePercentage.toFixed(2)).replace(".", ",") + " %");
+	currentRowIndex++;
+
+	ws.cell(currentRowIndex, 1).string(TAPi18n.__('export.average_response_time', {lng: translation}) + ":");
+	ws.cell(currentRowIndex, 3).number(Number(((leaderboardData.map((x)=> {return x.responseTime;}).reduce((a, b)=> {return a + b;}, 0) / numberOfAttendees) / questionGroup.questionList.length).toFixed(2)));
+	currentRowIndex += 2;
 
 	let nextColumnIndex = 1;
-	ws.cell(9, nextColumnIndex).string(TAPi18n.__("export.attendee_complete_correct", {lng: translation}));
-	ws.cell(11, nextColumnIndex++).string(TAPi18n.__("export.attendee", {lng: translation}));
-	if (isCASRequired) {
-		ws.cell(11, nextColumnIndex++).string(TAPi18n.__("export.cas_account_id", {lng: translation}));
-		ws.cell(11, nextColumnIndex++).string(TAPi18n.__("export.cas_account_email", {lng: translation}));
-	}
-	ws.cell(11, nextColumnIndex++).string(TAPi18n.__("export.correct_questions", {lng: translation}));
-	if (responsesWithConfidenceValue.length > 0) {
-		ws.cell(11, nextColumnIndex++).string(TAPi18n.__("export.average_confidence", {lng: translation}));
-	}
-	ws.cell(11, nextColumnIndex++).string(TAPi18n.__("export.overall_response_time", {lng: translation}));
-	ws.cell(11, nextColumnIndex++).string(TAPi18n.__("export.average_response_time", {lng: translation}));
+	ws.cell(currentRowIndex, nextColumnIndex).string(TAPi18n.__("export.attendee_complete_correct", {lng: translation}));
+	currentRowIndex += 2;
 
-	let nextStartRow = 17;
+	ws.cell(currentRowIndex, nextColumnIndex++).string(TAPi18n.__("export.attendee", {lng: translation}));
+	if (isCASRequired) {
+		ws.cell(currentRowIndex, nextColumnIndex++).string(TAPi18n.__("export.cas_account_id", {lng: translation}));
+		ws.cell(currentRowIndex, nextColumnIndex++).string(TAPi18n.__("export.cas_account_email", {lng: translation}));
+	}
+	ws.cell(currentRowIndex, nextColumnIndex++).string(TAPi18n.__("export.correct_questions", {lng: translation}));
+	if (responsesWithConfidenceValue.length > 0) {
+		ws.cell(currentRowIndex, nextColumnIndex++).string(TAPi18n.__("export.average_confidence", {lng: translation}));
+	}
+	ws.cell(currentRowIndex, nextColumnIndex++).string(TAPi18n.__("export.overall_response_time", {lng: translation}));
+	ws.cell(currentRowIndex, nextColumnIndex++).string(TAPi18n.__("export.average_response_time", {lng: translation}));
+	currentRowIndex++;
+
+	let nextStartRow = currentRowIndex + 5;
 	leaderboardData.forEach(function (leaderboardItem, indexInList) {
 		let hasNotAllQuestionsCorrect = false;
 		questionGroup.questionList.forEach(function (item, index) {
@@ -215,7 +230,7 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 		}
 		nextColumnIndex = 1;
 		nextStartRow++;
-		const targetRow = indexInList + 12;
+		const targetRow = indexInList + currentRowIndex;
 		ws.cell(targetRow, nextColumnIndex++).string(leaderboardItem.nick);
 		if (isCASRequired) {
 			const profile = Meteor.users.findOne({_id: ResponsesCollection.findOne({hashtag: hashtag, userNick: leaderboardItem.nick}).userRef}).profile;
@@ -229,8 +244,8 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 		ws.cell(targetRow, nextColumnIndex++).number(leaderboardItem.responseTime);
 		ws.cell(targetRow, nextColumnIndex++).number(Number(parseFloat(leaderboardItem.responseTime / leaderboardItem.numberOfEntries).toFixed(2)));
 	});
-	if (nextStartRow === 17) {
-		ws.cell(12, 1).string(TAPi18n.__("export.attendee_complete_correct_none_available", {lng: translation}));
+	if (nextStartRow === currentRowIndex + 5) {
+		ws.cell(currentRowIndex, 1).string(TAPi18n.__("export.attendee_complete_correct_none_available", {lng: translation}));
 		nextStartRow++;
 	}
 

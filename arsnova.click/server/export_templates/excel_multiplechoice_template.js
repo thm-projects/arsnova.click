@@ -82,7 +82,14 @@ function formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequire
 		lastColumn: minColums
 	});
 
-	ws.cell(11, 1, (allResponses.fetch().length + 10), columnsToFormat).style(defaultStyles.attendeeEntryRowStyle);
+	const hasEntries = allResponses.fetch().length > 0;
+	const attendeeEntryRows = hasEntries ? (allResponses.fetch().length) : 1;
+	const attendeeEntryRowStyle = hasEntries ? defaultStyles.attendeeEntryRowStyle : Object.assign({}, defaultStyles.attendeeEntryRowStyle, {
+		alignment: {
+			horizontal: "center"
+		}
+	});
+	ws.cell(11, 1, attendeeEntryRows + 10, columnsToFormat, !hasEntries).style(attendeeEntryRowStyle);
 
 	allResponses.forEach(function (responseItem, indexInList) {
 		let nextColumnIndex = 3;
@@ -110,9 +117,8 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 	ws.cell(2, 1).string(TAPi18n.__("export.question", {lng: translation}));
 	ws.cell(6, 1).string(TAPi18n.__("export.number_of_answers", {lng: translation}) + ":");
 	ws.cell(7, 1).string(TAPi18n.__("export.percent_correct", {lng: translation}) + ":");
-	ws.cell(7, 2).string(
-		(allResponses.fetch().filter((x)=> {return leaderboardLib.isCorrectResponse(x, questionGroup.questionList[index], index) === 1;}).length / allResponses.fetch().length * 100) + " %"
-	);
+	const correctResponsesPercentage = (allResponses.fetch().filter((x)=> {return leaderboardLib.isCorrectResponse(x, questionGroup.questionList[index], index) === 1;}).length / allResponses.fetch().length * 100);
+	ws.cell(7, 2).string((isNaN(correctResponsesPercentage) ? "0" : correctResponsesPercentage) + " %");
 	if (responsesWithConfidenceValue.length > 0) {
 		ws.cell(8, 1).string(TAPi18n.__("export.average_confidence", {lng: translation}) + ":");
 		let confidenceSummary = 0;
@@ -121,7 +127,7 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 		});
 		ws.cell(8, 2).string((confidenceSummary / responsesWithConfidenceValue.length) + " %");
 	}
-	ws.cell(4, 1).string(questionGroup.questionList[index].questionText);
+	ws.cell(4, 1).string(questionGroup.questionList[index].questionText.replace(/[#]*[*]*/g, ""));
 	for (let j = 0; j < answerList.length; j++) {
 		ws.cell(2, (j + 2)).string(TAPi18n.__("export.answer", {lng: translation}) + " " + (j + 1));
 		ws.cell(4, (j + 2)).string(answerList[j].answerText);
@@ -140,14 +146,15 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 	ws.cell(10, nextColumnIndex++).string(TAPi18n.__("export.time", {lng: translation}));
 
 	const sortedResponses = _.sortBy(allResponses.fetch(), function (o) { return o.responseTime; });
-	sortedResponses.forEach(function (responseItem, indexInList) {
+	let nextStartRow = 10;
+	sortedResponses.forEach(function (responseItem) {
 		let nextColumnIndex = 1;
-		const targetRow = indexInList + 11;
-		ws.cell(targetRow, nextColumnIndex++).string(responseItem.userNick);
+		nextStartRow++;
+		ws.cell(nextStartRow, nextColumnIndex++).string(responseItem.userNick);
 		if (isCASRequired) {
 			const profile = Meteor.users.findOne({_id: responseItem.userRef}).profile;
-			ws.cell(targetRow, nextColumnIndex++).string(profile.id);
-			ws.cell(targetRow, nextColumnIndex++).string(profile.mail instanceof Array ? profile.mail.slice(-1)[0] : profile.mail);
+			ws.cell(nextStartRow, nextColumnIndex++).string(profile.id);
+			ws.cell(nextStartRow, nextColumnIndex++).string(profile.mail instanceof Array ? profile.mail.slice(-1)[0] : profile.mail);
 		}
 		const chosenAnswer = AnswerOptionCollection.find({
 			hashtag: hashtag,
@@ -167,12 +174,15 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 			chosenAnswerString.push(", ");
 		});
 		chosenAnswerString.pop();
-		ws.cell(targetRow, nextColumnIndex++).string(chosenAnswerString);
+		ws.cell(nextStartRow, nextColumnIndex++).string(chosenAnswerString);
 		if (responsesWithConfidenceValue.length > 0) {
-			ws.cell(targetRow, nextColumnIndex++).string(responseItem.confidenceValue + " %");
+			ws.cell(nextStartRow, nextColumnIndex++).string(responseItem.confidenceValue + " %");
 		}
-		ws.cell(targetRow, nextColumnIndex++).number(responseItem.responseTime);
+		ws.cell(nextStartRow, nextColumnIndex++).number(responseItem.responseTime);
 	});
+	if (nextStartRow === 10) {
+		ws.cell(11, 1).string(TAPi18n.__("export.attendee_complete_correct_none_available", {lng: translation}));
+	}
 }
 
 export function generateSheet(wb, {hashtag, translation, defaultStyles}, index) {

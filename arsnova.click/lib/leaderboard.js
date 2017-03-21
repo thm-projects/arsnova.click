@@ -46,10 +46,10 @@ function checkIsCorrectMultipleChoiceQuestion(response, questionIndex) {
 		}
 		return true;
 	});
+	if (hasWrongAnswer > 0) {
+		return -1;
+	}
 	if (hasCorrectAnswer > 0) {
-		if (hasWrongAnswer > 0) {
-			return 0;
-		}
 		if (allCorrectAnswerOptions.length === hasCorrectAnswer) {
 			return 1;
 		} else {

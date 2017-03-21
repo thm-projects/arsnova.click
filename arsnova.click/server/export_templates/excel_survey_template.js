@@ -63,7 +63,14 @@ function formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequire
 		lastColumn: minColums
 	});
 
-	ws.cell(10, 1, (allResponses.fetch().length + 9), columnsToFormat).style(defaultStyles.attendeeEntryRowStyle);
+	const hasEntries = allResponses.fetch().length > 0;
+	const attendeeEntryRows = hasEntries ? (allResponses.fetch().length) : 1;
+	const attendeeEntryRowStyle = hasEntries ? defaultStyles.attendeeEntryRowStyle : Object.assign({}, defaultStyles.attendeeEntryRowStyle, {
+		alignment: {
+			horizontal: "center"
+		}
+	});
+	ws.cell(10, 1, attendeeEntryRows + 9, columnsToFormat, !hasEntries).style(attendeeEntryRowStyle);
 
 	allResponses.forEach(function (responseItem, indexInList) {
 		let nextColumnIndex = 3;
@@ -90,7 +97,7 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 	ws.cell(1, 1).string(TAPi18n.__('export.question_type', {lng: translation}) + ': ' + TAPi18n.__(questionGroupObject.getQuestionList()[index].translationReferrer(), {lng: translation}));
 	ws.cell(2, 1).string(TAPi18n.__("export.question", {lng: translation}));
 
-	ws.cell(4, 1).string(questionGroup.questionList[index].questionText);
+	ws.cell(4, 1).string(questionGroup.questionList[index].questionText.replace(/[#]*[*]*/g, ""));
 	for (let j = 0; j < answerList.length; j++) {
 		ws.cell(2, (j + 2)).string(TAPi18n.__("export.answer", {lng: translation}) + " " + (j + 1));
 		ws.cell(4, (j + 2)).string(answerList[j].answerText);
@@ -121,14 +128,15 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 	ws.cell(9, nextColumnIndex++).string(TAPi18n.__("export.time", {lng: translation}));
 
 	const sortedResponses = _.sortBy(allResponses.fetch(), function (o) { return o.responseTime; });
-	sortedResponses.forEach(function (responseItem, indexInList) {
+	let nextStartRow = 9;
+	sortedResponses.forEach(function (responseItem) {
 		let nextColumnIndex = 1;
-		const targetRow = indexInList + 10;
-		ws.cell(targetRow, nextColumnIndex++).string(responseItem.userNick);
+		nextStartRow++;
+		ws.cell(nextStartRow, nextColumnIndex++).string(responseItem.userNick);
 		if (isCASRequired) {
 			const profile = Meteor.users.findOne({_id: responseItem.userRef}).profile;
-			ws.cell(targetRow, nextColumnIndex++).string(profile.id);
-			ws.cell(targetRow, nextColumnIndex++).string(profile.mail instanceof Array ? profile.mail.slice(-1)[0] : profile.mail);
+			ws.cell(nextStartRow, nextColumnIndex++).string(profile.id);
+			ws.cell(nextStartRow, nextColumnIndex++).string(profile.mail instanceof Array ? profile.mail.slice(-1)[0] : profile.mail);
 		}
 		const chosenAnswer = AnswerOptionCollection.find({
 			hashtag: hashtag,
@@ -139,12 +147,15 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 		}).map((x) => {
 			return x.answerText;
 		});
-		ws.cell(targetRow, nextColumnIndex++).string(chosenAnswer.join(", "));
+		ws.cell(nextStartRow, nextColumnIndex++).string(chosenAnswer.join(", "));
 		if (responsesWithConfidenceValue.length > 0) {
-			ws.cell(targetRow, nextColumnIndex++).string(responseItem.confidenceValue + " %");
+			ws.cell(nextStartRow, nextColumnIndex++).string(responseItem.confidenceValue + " %");
 		}
-		ws.cell(targetRow, nextColumnIndex++).number(responseItem.responseTime);
+		ws.cell(nextStartRow, nextColumnIndex++).number(responseItem.responseTime);
 	});
+	if (nextStartRow === 9) {
+		ws.cell(10, 1).string(TAPi18n.__("export.attendee_complete_correct_none_available", {lng: translation}));
+	}
 }
 
 export function generateSheet(wb, {hashtag, translation, defaultStyles}, index) {

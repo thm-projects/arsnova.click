@@ -183,7 +183,8 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 	ws.cell(5, 3).number(leaderboardData.map((x)=> {return x.correctQuestions.length;}).reduce((a, b)=> {return a + b;}, 0) / numberOfAttendees);
 
 	ws.cell(6, 1).string(TAPi18n.__('export.average_confidence', {lng: translation}) + ":");
-	ws.cell(6, 3).string((leaderboardData.map((x)=> {return x.confidenceValue;}).reduce((a, b)=> {return a + b;}, 0) / numberOfAttendees).toFixed(2) + " %");
+	const averageConfidencePercentage = (leaderboardData.filter((x)=> {return x.confidenceValue > -1;}).map((x)=> {return x.confidenceValue;}).reduce((a, b)=> {return a + b;}, 0) / numberOfAttendees);
+	ws.cell(6, 3).string((isNaN(averageConfidencePercentage) ? "0" : averageConfidencePercentage.toFixed(2)) + " %");
 
 	ws.cell(7, 1).string(TAPi18n.__('export.average_response_time', {lng: translation}) + ":");
 	ws.cell(7, 3).number(Number(((leaderboardData.map((x)=> {return x.responseTime;}).reduce((a, b)=> {return a + b;}, 0) / numberOfAttendees) / questionGroup.questionList.length).toFixed(2)));

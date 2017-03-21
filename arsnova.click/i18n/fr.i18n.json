@@ -595,6 +595,7 @@
       "title": "Sondage",
       "question": "Afficher la question",
       "send": "Envoyer",
+      "abstention": "Abstention",
       "seconds_left": "Encore 1 seconde!",
       "seconds_left_plural": "Encore __value__ secondes!",
       "ranged_question": {

@@ -86,6 +86,9 @@ Template.votingViewFooterNavButtons.helpers({
 	showForwardButton: function () {
 		return Session.get("hasToggledResponse") && !(Session.get("hasSendResponse"));
 	},
+	showAbstentionButton: function () {
+		return Session.get("confidenceValue") === 0;
+	},
 	isConfidenceSliderEnabled: function () {
 		const configDoc = SessionConfigurationCollection.findOne();
 		return isNaN(parseInt(Router.current().params.questionIndex)) && !!(configDoc && configDoc.confidenceSliderEnabled);

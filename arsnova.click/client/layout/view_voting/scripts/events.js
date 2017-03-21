@@ -111,6 +111,12 @@ Template.votingview.events({
 });
 
 Template.votingViewFooterNavButtons.events({
+	"click #abstentionButton": function (event, template) {
+		event.stopPropagation();
+		if (!template.data) {
+			lib.countdownFinish();
+		}
+	},
 	"click #forwardButton": function (event, template) {
 		event.stopPropagation();
 		if (Session.get("hasSendResponse")) {

@@ -598,6 +598,7 @@
       "title": "Abstimmung",
       "question": "Frage anzeigen",
       "send": " Absenden",
+      "abstention": "Enthaltung",
       "seconds_left": "Noch 1 Sekunde!",
       "seconds_left_plural": "Noch __value__ Sekunden!",
       "ranged_question": {

@@ -598,6 +598,7 @@
       "title": "Votación",
       "question": "Indicar pregunta",
       "send": "Mandar",
+      "abstention": "Abstención",
       "seconds_left": "¡Solo otro segundo más!",
       "seconds_left_plural": "¡Solo __value__ segundos más!",
       "ranged_question": {

@@ -597,6 +597,7 @@
       "title": "Voting",
       "question": "Show question",
       "send": "Send",
+      "abstention": "Abstention",
       "seconds_left": "1 Second left!",
       "seconds_left_plural": "__value__ Seconds left",
       "ranged_question": {

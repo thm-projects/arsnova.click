@@ -262,8 +262,7 @@
     "theme": "theme-Material",
     "readingConfirmationEnabled": false,
     "showResponseProgress": true,
-    "confidenceSliderEnabled": true,
-    "productTourEnabled": true
+    "confidenceSliderEnabled": true
   },
   "type": "DefaultQuestionGroup"
 }

@@ -198,6 +198,7 @@ Template.home.events({
 				if (questionGroup.isValid()) {
 					sessionStorage.setItem("overrideValidQuestionRedirect", true);
 				}
+				localStorage.setItem("showProductTour", true);
 				hashtagLib.addHashtag(questionGroup);
 			};
 			if (hashtag.toLowerCase().indexOf("demo quiz") !== -1) {

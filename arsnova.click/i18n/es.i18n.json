@@ -768,7 +768,8 @@
     "overall_response_time": "Tiempo por la respuesta cumulado (en ms)",
     "average_response_time": "Tiempo por la respuesta de promedio (en ms)",
     "number_attendees": "Número de participantes",
-    "average_correct_answered_questions": "Preguntas correctas de promedio",
+    "average_number_attendees_participated": "Durchschnittliche Teilnahmen am Quiz",
+    "average_correct_answered_questions": "Promedio de respuestas para el cuestionario",
     "average_confidence": "Certitud de responder promedio"
   }
 }

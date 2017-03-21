@@ -769,6 +769,7 @@
     "overall_response_time": "Kumulierte Antwortzeit (in ms)",
     "average_response_time": "Durchschnittliche Antwortzeit (in ms)",
     "number_attendees": "Anzahl der Teilnehmer/innen",
+    "average_number_attendees_participated": "Durchschnittliche Teilnahmen am Quiz",
     "average_correct_answered_questions": "Durchschnittlich richtig beantwortete Fragen",
     "average_confidence": "Durchschnittliche Antwortsicherheit"
   }

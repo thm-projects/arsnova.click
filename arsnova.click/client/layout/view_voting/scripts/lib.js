@@ -127,7 +127,7 @@ const quickFitClass = "quickfit";
 const quickFitSetClass = "quickfitSet";
 let smallestFontSize = 3;
 export function resetQuickfitText() {
-	$("." + quickFitSetClass).removeClass(quickFitSetClass);
+	$(`.${quickFitSetClass}`).removeClass(quickFitSetClass);
 	smallestFontSize = 3;
 }
 /**
@@ -137,7 +137,7 @@ export function resetQuickfitText() {
  * @returns {Number} The width of the largest child element
  */
 function calcWidth(selector) {
-	return Math.max.apply(Math, $("#" + selector + ' *').map(function () {
+	return Math.max.apply(Math, $(`#${selector} *`).map(function () {
 		if ($(this).text().length > 0) { return $(this).outerWidth(); }
 	}).get());
 }
@@ -159,7 +159,7 @@ function calculateMaxTextSize(item) {
 	while (calcWidth($(item).attr("id")) < itemWidth && $(contentItem).outerHeight() < itemHeight && smallestFontSize < 100) {
 		$(contentItem).css({"font-size": smallestFontSize++});
 	}
-	smallestFontSize += 3;
+	smallestFontSize -= 2; // -1 for the last incrementation in the loop, -1 again because the last loop incrementation doesn't fit anymore
 	$(contentItem).css("font-size", "inherit");
 
 	if (hasDummyText) {
@@ -172,15 +172,15 @@ export function quickfitText(reset) {
 	if (reset) {
 		resetQuickfitText();
 	}
-	const quickfitSelector = $("." + quickFitClass + ":not(." + quickFitSetClass + ")");
-	const quickfitMap = $.makeArray(quickfitSelector.map((i, x)=> {return $(x).text().length;}));
+	const quickfitSelector = $(`.${quickFitClass}:not(.${quickFitSetClass})`);
+	const quickfitMap = quickfitSelector.map((i, x)=> {return $(x).text().trim().length;}).get();
 	if (quickfitMap.length !== $('.buttonWrapper').length) {
 		return;
 	}
-	const sortedMap = JSON.parse(JSON.stringify(quickfitMap)).sort().reverse()[0];
+	const sortedMap = JSON.parse(JSON.stringify(quickfitMap)).sort((a, b) => a - b).reverse()[0];
 	const largestTextIndex = quickfitMap.indexOf(sortedMap);
 	calculateMaxTextSize($(quickfitSelector[largestTextIndex]));
-	$('.' + quickFitClass).addClass(quickFitSetClass).css("font-size", smallestFontSize);
+	$(`.${quickFitClass}`).addClass(quickFitSetClass).css("font-size", smallestFontSize);
 }
 $(window).on("resize orientationchange", function () {
 	quickfitText(true);

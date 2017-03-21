@@ -24,7 +24,7 @@ import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {Splashscreen} from "/client/plugins/splashscreen/scripts/lib.js";
 import * as headerLib from '/client/layout/region_header/lib.js';
 import * as questionLib from '/client/layout/view_questions/scripts/lib.js';
-import {makeAndSendResponse, makeAndSendRangedResponse, makeAndSendFreeTextResponse, countdownFinish} from './lib.js';
+import * as lib from './lib.js';
 import {TimerMap} from "/lib/performance_analysis/Timer.js";
 
 Template.votingview.events({
@@ -81,6 +81,7 @@ Template.votingview.events({
 		Meteor.defer(function () {
 			headerLib.calculateHeaderSize();
 			headerLib.calculateTitelHeight();
+			lib.toggledResponseTracker.changed();
 		});
 	},
 	"DOMSubtreeModified .sendResponse": function (event) {
@@ -126,7 +127,7 @@ Template.votingViewFooterNavButtons.events({
 				if (rangeInputField.val().length === 0 || isNaN(parseFloat(rangeInputField.val()))) {
 					return;
 				}
-				makeAndSendRangedResponse(parseFloat(rangeInputField.val()));
+				lib.makeAndSendRangedResponse(parseFloat(rangeInputField.val()));
 			}
 		} else {
 			const freeTextInputField = $("#answerTextArea");
@@ -134,7 +135,7 @@ Template.votingViewFooterNavButtons.events({
 				if (freeTextInputField.val().length === 0) {
 					return;
 				}
-				makeAndSendFreeTextResponse(freeTextInputField.val());
+				lib.makeAndSendFreeTextResponse(freeTextInputField.val());
 			} else {
 				if (template.data && template.data["data-questionIndex"]) {
 					if ($('.correctAnswer, .wrongAnswer').length > 0) {
@@ -153,10 +154,10 @@ Template.votingViewFooterNavButtons.events({
 					}, 2000);
 					return;
 				} else {
-					makeAndSendResponse(responseArr);
+					lib.makeAndSendResponse(responseArr);
 				}
 			}
 		}
-		countdownFinish();
+		lib.countdownFinish();
 	}
 });

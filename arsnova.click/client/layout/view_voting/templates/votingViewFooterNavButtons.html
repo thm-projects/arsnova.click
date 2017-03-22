@@ -20,16 +20,28 @@
             </div>
         {{/if}}
         <div class="row">
-            {{#if showForwardButton}}
+            {{#if showAbstentionButton}}
                 <div class="col-xs-12">
-                    <button id="forwardButton"
+                    <button id="abstentionButton"
                             type="button"
-                            aria-labelledby="sendResponse_description"
+                            aria-labelledby="abstentionResponse_description"
                             class="btn btn-warning btn-lg btn-answerOption tabbable">
                         <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                        <span class="ansBtn" id="sendResponse_description">{{_ "view.voting.send"}}</span>
+                        <span class="ansBtn" id="abstentionResponse_description">{{_ "view.voting.abstention"}}</span>
                     </button>
                 </div>
+            {{else}}
+                {{#if showForwardButton}}
+                    <div class="col-xs-12">
+                        <button id="forwardButton"
+                                type="button"
+                                aria-labelledby="sendResponse_description"
+                                class="btn btn-warning btn-lg btn-answerOption tabbable">
+                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                            <span class="ansBtn" id="sendResponse_description">{{_ "view.voting.send"}}</span>
+                        </button>
+                    </div>
+                {{/if}}
             {{/if}}
         </div>
     </div>

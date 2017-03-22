@@ -217,10 +217,10 @@ export function parseGithubFlavoredMarkdown(result, overrideLineBreaks = true) {
 			case /^([0-9]*\.)?(-)?(\*)? \[ \] /.test(result[i]):
 				result[i] = ("<input class='markdownCheckbox' type='checkbox' disabled='disabled' aria-label='ToDo (unchecked)' />" + result[i].replace(/^([0-9]*\.)?(-)?(\*)? \[ \] /, ""));
 				break;
-			case /^[\s]*1\./.test(result[i]):
+			case /^[\s]*1\./.test(result[i]) && overrideLineBreaks:
 				parseOrderedList(result, i);
 				break;
-			case /^[*-+] /.test(result[i]):
+			case /^[*-+] /.test(result[i]) && overrideLineBreaks:
 				parseUnorderedList(result, i);
 				break;
 			case /^> /.test(result[i]):

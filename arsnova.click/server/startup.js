@@ -18,6 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {WebApp} from 'meteor/webapp';
+import {HTTP} from 'meteor/http';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {HashtagsCollection} from '/lib/hashtags/collection.js';
 import {BannedNicksCollection} from '/lib/banned_nicks/collection.js';
@@ -116,22 +117,29 @@ if (Meteor.isServer) {
 				}
 			}
 		});
-		const command = spawn(phantomjs.path, params);
-		command.stdout.on("data", function (data) {
-			if (Meteor.settings.serverStartup.verbose) {
-				console.log("phantomjs (stdout):", data.toString());
-			}
-		});
-		command.stderr.on("data", function (data) {
-			if (Meteor.settings.serverStartup.verbose) {
-				console.log("phantomjs (stderr):", data.toString());
-			}
-		});
-		command.on('exit', function () {
-			if (Meteor.settings.serverStartup.verbose) {
-				console.log("server startup: all preview images have been generated");
-			}
-		});
-		console.log("server startup: Server startup successful.");
+		const checkServerStatusInterval = Meteor.setInterval(function () {
+			HTTP.call("GET", Meteor.absoluteUrl(), function (error) {
+				if (!error) {
+					Meteor.clearInterval(checkServerStatusInterval);
+					const command = spawn(phantomjs.path, params);
+					command.stdout.on("data", function (data) {
+						if (Meteor.settings.serverStartup.verbose) {
+							console.log("phantomjs (stdout):", data.toString());
+						}
+					});
+					command.stderr.on("data", function (data) {
+						if (Meteor.settings.serverStartup.verbose) {
+							console.log("phantomjs (stderr):", data.toString());
+						}
+					});
+					command.on('exit', function () {
+						if (Meteor.settings.serverStartup.verbose) {
+							console.log("server startup: all preview images have been generated");
+						}
+					});
+					console.log("server startup: Server startup successful.");
+				}
+			});
+		}, 800);
 	});
 }

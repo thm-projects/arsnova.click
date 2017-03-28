@@ -224,7 +224,7 @@
         "added_answer_text": "Hier kannst du den Text der Antwort eingeben. Eine Formatierung mit Markdown und TeX ist möglich. Auch Bilder können eingefügt werden.",
         "added_answer_is_correct": "Dieser Button regelt, ob die Antwort als richtig oder falsch gewertet werden soll.",
         "added_answer_remove": "Bei einem Klick auf diese Schaltfläche wird die betreffende Antwort gelöscht.",
-        "show_answer_content_on_buttons": "Die Antwortbuttons können entweder mit dem Buchstaben oder dem Inhalt der Antwort beschriftet werden. Beachte aber, dass langer Text auf dem Endgerät schlecht lesbar sein kann. Verschieden lange Antworttexte werden auf die Buttonbreite skaliert, was unschön aussehen kann oder einzelne Optionen überbetont.",
+        "show_answer_content_on_buttons": "Die Antwortbuttons können entweder mit dem Buchstaben oder dem Inhalt der Antwort beschriftet werden. Beachte aber, dass ein langer Text auf dem Smartphone schlecht lesbar ist.",
         "multiple_selection_survey": "Hier kannst du einstellen, ob eine Mehrfachauswahl möglich sein soll.",
         "preview": "Hier siehst du, wie die Antwortoptionen auf dem Smartphone aussehen werden.",
         "range_area": "Hier kannst du die korrekte Antwort und die Toleranzen nach oben und unten angeben. Bitte beachte, dass die Eingabe in natürlichen Zahlen erfolgen muss.",

@@ -59,9 +59,9 @@
       },
       "about": {
         "title": "arsnova.click",
-        "declaration": "Ein bisschen <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, <br />ein bisschen <a href='https://arsnova.io/' target='_blank'>ARSnova</a>!",
+        "declaration": "Ein bisschen <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, <br />ein bisschen <a href='https://arsnova.eu/' target='_blank'>ARSnova</a>!",
         "ars": "arsnova.click ist ein innovatives <a href='https://de.wikipedia.org/wiki/Audience_Response_System' target='_blank'>Audience Response System (ARS)</a> für öffentliche Bildungseinrichtungen.",
-        "developed_by": "Inspiriert durch <a href='https://getkahoot.com' target='_blank'>Kahoot!</a> entwickelte ein Team aus Bachelor- und Masterstudenten der <a href='http://www.thm.de/site/' target='_blank'>TH Mittelhessen</a> die erste Version dieser <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>gamifizierten</a> Alternative zum ARSnova-Flaggschiff <a href='https://arsnova.io/' target='_blank'>arsnova.voting</a>.",
+        "developed_by": "Inspiriert durch <a href='https://getkahoot.com' target='_blank'>Kahoot!</a> entwickelte ein Team aus Bachelor- und Masterstudenten der <a href='http://www.thm.de/site/' target='_blank'>TH Mittelhessen</a> die erste Version dieser <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>gamifizierten</a> Alternative zum ARSnova-Flaggschiff <a href='https://arsnova.eu/' target='_blank'>arsnova.voting</a>.",
         "met_requirements": "Bisher wurden die folgenden Features implementiert:",
         "requirements": {
           "1": "Absoluter Datenschutz: keine personenbezogenen Daten auf dem Server, alle Quizdaten liegen im Browser des Quizerstellers (<a href='https://de.wikipedia.org/wiki/Web_Storage' target='_blank'>Web Storage</a>)",
@@ -271,7 +271,7 @@
         "2": "Eine Teilnahme am Quiz ist nicht möglich."
       },
       "description": {
-        "nickname_input": "Hier kannst du dir einen Namen geben, der in der Quiz Lobby und in der Rangliste angezeigt wird.",
+        "nickname_input": "Hier kannst du dir einen Namen geben, der in der Quiz-Lobby und in der Rangliste angezeigt wird.",
         "choose_selectable_nick": "Du kannst aus dieser Liste einen Nicknamen auswählen."
       }
     },
@@ -309,7 +309,7 @@
         "title": {
           "1": "Entdecke arsnova.click !",
           "2": "Gib \u00BBDemo Quiz\u00AB ein und starte es. Ruf die App in einem zweiten Browser auf und spiel das Quiz in verteilten Rollen.",
-          "3": "Besuch unseren Blog arsnova.io und erfahr, wie du Quizze in deinem Unterricht oder in einem Vortrag einsetzen kannst."
+          "3": "Besuch unseren Blog arsnova.eu und erfahr, wie du Quizze in deinem Unterricht oder in einem Vortrag einsetzen kannst."
         }
       }
     },
@@ -361,7 +361,7 @@
       "abort_countdown": "Countdown abbrechen"
     },
     "lobby": {
-      "title": "Quiz Lobby",
+      "title": "Quiz-Lobby",
       "yes": "Ja",
       "no": "Nein",
       "ready": "Warten, dass es losgeht …",
@@ -372,8 +372,8 @@
       "add_kicked_member_to_ban_list": "Den Nicknamen für immer bannen",
       "waiting_for_players": "Warten auf die Anderen…",
       "description": {
-        "memberlist_count": "So viele Personen sind aktuell eingeloggt.Wenn du das Quiz einmal durchspielen willst, dann ruf die App im Browser deines Smartphones auf. Gib den oben angezeigten Quiznamen ein.",
-        "title": "Die Quiz Lobby zeigt die Nicknamen der Teilnehmenden in zeitlich umgekehrter Reihenfolge ihres Eintreffens.",
+        "memberlist_count": "So viele Personen sind aktuell eingeloggt. Wenn du das Quiz einmal durchspielen willst, dann ruf die App im Browser deines Smartphones auf. Gib den oben angezeigten Quiznamen ein.",
+        "title": "Die Quiz-Lobby zeigt die Nicknamen der Teilnehmenden in zeitlich umgekehrter Reihenfolge ihres Eintreffens.",
         "waiting_for_players": "Sobald sich die Lobby füllt, kannst du die Quizrunde starten. Beachte: Nach dem Start kann sich niemand mehr einloggen!"
       }
     },
@@ -466,7 +466,7 @@
         "available_questions": "Hier siehst du alle Fragetypen, aus denen du wählen kannst. Jeder Fragetyp bietet eigene Voreinstellungen und Optionen zur Gestaltung deines Quiz.",
         "added_questions": "Um eine Frage hinzuzufügen, ziehe eine Vorlage hierher oder klick auf sie. Wenn du die eingefügte Vorlage berührst, siehst du, was du damit machen kannst: Frage editieren, Reihenfolge der Fragen ändern oder die Frage löschen.",
         "back_button": "Du kannst jederzeit zurückgehen. Jede Änderung am Quiz wird beim Klicken oder Tippen sofort ohne Nachfragen gespeichert. Das gilt für die ganze App. Du musst nie etwas speichern!",
-        "forward_button": "Ist dein Quiz vollständig und besteht eine Verbindung zum Server, kannst du zur Quiz Lobby gehen und die Quizrunde eröffnen."
+        "forward_button": "Ist dein Quiz vollständig und besteht eine Verbindung zum Server, kannst du zur Quiz-Lobby gehen und die Quizrunde eröffnen."
       }
     },
     "quiz_manager_details": {
@@ -651,7 +651,7 @@
       "lobby_music": "Lobby",
       "finish_music": "Gong | Pfiff",
       "running_music_detailed": "Sound während des Countdowns",
-      "lobby_music_detailed": "Sound in der Quiz Lobby",
+      "lobby_music_detailed": "Sound in der Quiz-Lobby",
       "finish_music_detailed": "Sound zum Ende des Countdowns",
       "whistle": "Pfeifen",
       "silence": "Ohne Ton",
@@ -690,7 +690,7 @@
       },
       "return_to_lobby": {
         "title": "Warnung",
-        "text": "Wenn du zur Quiz Lobby zurückkehrst, werden alle bereits durchgeführten Quizrunden zurückgesetzt.",
+        "text": "Wenn du zur Quiz-Lobby zurückkehrst, werden alle bereits durchgeführten Quizrunden zurückgesetzt.",
         "continue": "Fortfahren?"
       },
       "error": {

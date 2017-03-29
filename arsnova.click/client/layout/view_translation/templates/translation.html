@@ -21,7 +21,7 @@
 			{{#if i18n_enabled}}
 				<div class="row" role="list">
 					{{#each i18n_sortedLanguages }}
-						<div class="col-xs-12 col-md-6 available_translations" role="listitem">
+						<div class="col-xs-12 col-md-6 margin-bottom available_translations" role="listitem">
 							<button type="button"
                                     id="translation_{{this.tag}}"
 									class="button btn{{#if i18n_isCurrentLanguage this.tag}} selectedLanguageButton button-success{{else}} button-grey{{/if}} tabbable"

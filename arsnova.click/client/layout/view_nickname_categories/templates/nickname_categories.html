@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 {{#if hasCASConfig}}
-                    <div class="col-xs-12 col-sm-6">
+                    <div class="col-xs-12 col-sm-6 margin-bottom">
                         <div class="nickStyle" id="restrict_to_cas_wrapper">
                             <p class="text-light col-xs-12" id="restrict_to_cas_description">{{_ "view.nickname_categories.restrict_to_cas"}}</p>
                             <input type="checkbox"
@@ -74,7 +74,7 @@
                 {{/if}}
             </div>
             <div class="row">
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-12 col-sm-6 margin-bottom">
                     {{#if nickNames}}
                         <h3>{{_ "view.nickname_categories.available_nicknames"}}</h3>
                         <div class="nickStyle nickName {{#if hasSelectedAll}}selectedNickName{{/if}} tabbable"

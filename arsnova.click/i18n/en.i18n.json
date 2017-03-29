@@ -752,7 +752,7 @@
     "question": "Question",
     "question_type": "Type of the question",
     "number_of_answers": "Number of Responses",
-    "percent_correct": "Correct Responses",
+    "percent_correct": "Correct Responses (in %)",
     "answer": "Answer",
     "attendee": "Attendee",
     "attendee_complete_correct": "Attendees with completely correct answered questions",
@@ -768,8 +768,8 @@
     "overall_response_time": "Cumulative Response Time (in ms)",
     "average_response_time": "Average Response Time (in ms)",
     "number_attendees": "Amount of Attendees",
-    "average_number_attendees_participated": "Average Responses for the Quiz",
+    "average_number_attendees_participated": "Average Responses for the Quiz (in %)",
     "average_correct_answered_questions": "Questions answered on average correctly",
-    "average_confidence": "Average confidence grade"
+    "average_confidence": "Average confidence grade (in %)"
   }
 }

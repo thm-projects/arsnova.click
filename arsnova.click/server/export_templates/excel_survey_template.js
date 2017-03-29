@@ -27,7 +27,7 @@ function formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequire
 	};
 
 	ws.row(1).setHeight(20);
-	ws.column(1).setWidth(30);
+	ws.column(1).setWidth(responsesWithConfidenceValue.length > 0 ? 40 : 30);
 	for (let j = 2; j <= columnsToFormat; j++) {
 		ws.column(j).setWidth(20);
 	}
@@ -88,7 +88,8 @@ function formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequire
 		ws.cell(targetRow, nextColumnIndex++).style({
 			alignment: {
 				horizontal: "center"
-			}
+			},
+			numberFormat: "#,##0;"
 		});
 	});
 }
@@ -112,7 +113,7 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 		allResponses.forEach(function (item) {
 			confidenceSummary += item.confidenceValue;
 		});
-		ws.cell(7, 2).string((confidenceSummary / responsesWithConfidenceValue.length) + " %");
+		ws.cell(7, 2).number(Math.round(confidenceSummary / responsesWithConfidenceValue.length));
 	}
 
 	let nextColumnIndex = 1;
@@ -149,7 +150,7 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 		});
 		ws.cell(nextStartRow, nextColumnIndex++).string(chosenAnswer.join(", "));
 		if (responsesWithConfidenceValue.length > 0) {
-			ws.cell(nextStartRow, nextColumnIndex++).string(responseItem.confidenceValue + " %");
+			ws.cell(nextStartRow, nextColumnIndex++).number(Math.round(responseItem.confidenceValue));
 		}
 		ws.cell(nextStartRow, nextColumnIndex++).number(responseItem.responseTime);
 	});

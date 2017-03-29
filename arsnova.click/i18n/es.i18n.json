@@ -752,7 +752,7 @@
     "question": "Pregunta del concurso",
     "question_type": "Tipo de la pregunta",
     "number_of_answers": "Número de respuestas",
-    "percent_correct": "Respuestas correctas",
+    "percent_correct": "Respuestas correctas (en %)",
     "answer": "Respuesta",
     "attendee": "Participantes",
     "attendee_complete_correct": "Participantes con respuestas completamente correctas",
@@ -768,8 +768,8 @@
     "overall_response_time": "Tiempo por la respuesta cumulado (en ms)",
     "average_response_time": "Tiempo por la respuesta de promedio (en ms)",
     "number_attendees": "Número de participantes",
-    "average_number_attendees_participated": "Durchschnittliche Teilnahmen am Quiz",
+    "average_number_attendees_participated": "Entradas Promedio en prueba (en %)",
     "average_correct_answered_questions": "Promedio de respuestas para el cuestionario",
-    "average_confidence": "Certitud de responder promedio"
+    "average_confidence": "Certitud de responder promedio (en %)"
   }
 }

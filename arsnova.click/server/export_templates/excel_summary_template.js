@@ -13,7 +13,7 @@ function formatSheet(ws, {responsesWithConfidenceValue, isCASRequired, columnsTo
 	ws.column(1).setWidth(30);
 	ws.column(2).setWidth(isCASRequired ? 10 : 20);
 	for (let i = 3; i <= columnsToFormat; i++) {
-		ws.column(i).setWidth(20);
+		ws.column(i).setWidth(22);
 	}
 
 	ws.cell(1, 1, 1, columnsToFormat).style(Object.assign({}, defaultStyles.quizNameRowStyle, {
@@ -43,7 +43,7 @@ function formatSheet(ws, {responsesWithConfidenceValue, isCASRequired, columnsTo
 		}
 	});
 	ws.cell(8, 3).style({
-		numberFormat: '#,##0.00" ms"'
+		numberFormat: '#,##0'
 	});
 
 	ws.cell(10, 1, 11, columnsToFormat).style(defaultStyles.attendeeHeaderGroupRowStyle);
@@ -94,7 +94,7 @@ function formatSheet(ws, {responsesWithConfidenceValue, isCASRequired, columnsTo
 			alignment: {
 				horizontal: "center"
 			},
-			numberFormat: "#,##0.00;"
+			numberFormat: "#,##0;"
 		});
 	});
 	if (nextStartRow === 18) {
@@ -140,7 +140,7 @@ function formatSheet(ws, {responsesWithConfidenceValue, isCASRequired, columnsTo
 			alignment: {
 				horizontal: "center"
 			},
-			numberFormat: "#,##0.00;"
+			numberFormat: "#,##0;"
 		});
 	});
 }
@@ -184,7 +184,7 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 	currentRowIndex++;
 
 	ws.cell(currentRowIndex, 1).string(TAPi18n.__('export.average_number_attendees_participated', {lng: translation}) + ":");
-	ws.cell(currentRowIndex, 3).string(((ResponsesCollection.find({hashtag: hashtag}).fetch().length / numberOfAttendees / questionGroup.questionList.length) * 100 + " %").replace(".", ","));
+	ws.cell(currentRowIndex, 3).number(Math.round((ResponsesCollection.find({hashtag: hashtag}).fetch().length / numberOfAttendees / questionGroup.questionList.length) * 100));
 	currentRowIndex++;
 
 	ws.cell(currentRowIndex, 1).string(TAPi18n.__('export.average_correct_answered_questions', {lng: translation}) + ":");
@@ -193,11 +193,11 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 
 	ws.cell(currentRowIndex, 1).string(TAPi18n.__('export.average_confidence', {lng: translation}) + ":");
 	const averageConfidencePercentage = (leaderboardData.filter((x)=> {return x.confidenceValue > -1;}).map((x)=> {return x.confidenceValue;}).reduce((a, b)=> {return a + b;}, 0) / numberOfAttendees);
-	ws.cell(currentRowIndex, 3).string((isNaN(averageConfidencePercentage) ? "0" : averageConfidencePercentage.toFixed(2)).replace(".", ",") + " %");
+	ws.cell(currentRowIndex, 3).number((isNaN(averageConfidencePercentage) ? 0 : Math.round(averageConfidencePercentage)));
 	currentRowIndex++;
 
 	ws.cell(currentRowIndex, 1).string(TAPi18n.__('export.average_response_time', {lng: translation}) + ":");
-	ws.cell(currentRowIndex, 3).number(Number(((leaderboardData.map((x)=> {return x.responseTime;}).reduce((a, b)=> {return a + b;}, 0) / numberOfAttendees) / questionGroup.questionList.length).toFixed(2)));
+	ws.cell(currentRowIndex, 3).number(Math.round(Number(((leaderboardData.map((x)=> {return x.responseTime;}).reduce((a, b)=> {return a + b;}, 0) / numberOfAttendees) / questionGroup.questionList.length))));
 	currentRowIndex += 2;
 
 	let nextColumnIndex = 1;
@@ -239,10 +239,10 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 		}
 		ws.cell(targetRow, nextColumnIndex++).string(leaderboardItem.correctQuestions.join(", "));
 		if (responsesWithConfidenceValue.length > 0) {
-			ws.cell(targetRow, nextColumnIndex++).string(leaderboardItem.confidenceValue.toFixed(2) + " %");
+			ws.cell(targetRow, nextColumnIndex++).number(Math.round(leaderboardItem.confidenceValue));
 		}
-		ws.cell(targetRow, nextColumnIndex++).number(leaderboardItem.responseTime);
-		ws.cell(targetRow, nextColumnIndex++).number(Number(parseFloat(leaderboardItem.responseTime / leaderboardItem.numberOfEntries).toFixed(2)));
+		ws.cell(targetRow, nextColumnIndex++).number(Math.round(leaderboardItem.responseTime));
+		ws.cell(targetRow, nextColumnIndex++).number(Math.round((leaderboardItem.responseTime / leaderboardItem.numberOfEntries)));
 	});
 	if (nextStartRow === currentRowIndex + 5) {
 		ws.cell(currentRowIndex, 1).string(TAPi18n.__("export.attendee_complete_correct_none_available", {lng: translation}));
@@ -280,10 +280,10 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 			ws.cell(targetRow, nextColumnIndex++).string(leaderboardItem.correctQuestions.join(", "));
 		}
 		if (responsesWithConfidenceValue.length > 0) {
-			ws.cell(targetRow, nextColumnIndex++).string(leaderboardItem.confidenceValue.toFixed(2) + " %");
+			ws.cell(targetRow, nextColumnIndex++).number(Math.round(leaderboardItem.confidenceValue));
 		}
-		ws.cell(targetRow, nextColumnIndex++).number(leaderboardItem.responseTime);
-		ws.cell(targetRow, nextColumnIndex++).number(Number(parseFloat(leaderboardItem.responseTime / leaderboardItem.numberOfEntries).toFixed(2)));
+		ws.cell(targetRow, nextColumnIndex++).number(Math.round(leaderboardItem.responseTime));
+		ws.cell(targetRow, nextColumnIndex++).number(Math.round(leaderboardItem.responseTime / leaderboardItem.numberOfEntries));
 	});
 }
 

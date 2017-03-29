@@ -30,7 +30,7 @@ function formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequire
 	};
 
 	ws.row(1).setHeight(20);
-	ws.column(1).setWidth(30);
+	ws.column(1).setWidth(responsesWithConfidenceValue.length > 0 ? 40 : 30);
 	for (let j = 2; j <= columnsToFormat; j++) {
 		ws.column(j).setWidth(20);
 	}
@@ -107,7 +107,8 @@ function formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequire
 		ws.cell(targetRow, nextColumnIndex++).style({
 			alignment: {
 				horizontal: "center"
-			}
+			},
+			numberFormat: "#,##0;"
 		});
 	});
 }
@@ -118,14 +119,14 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 	ws.cell(6, 1).string(TAPi18n.__("export.number_of_answers", {lng: translation}) + ":");
 	ws.cell(7, 1).string(TAPi18n.__("export.percent_correct", {lng: translation}) + ":");
 	const correctResponsesPercentage = (allResponses.fetch().filter((x)=> {return leaderboardLib.isCorrectResponse(x, questionGroup.questionList[index], index) === 1;}).length / allResponses.fetch().length * 100);
-	ws.cell(7, 2).string((isNaN(correctResponsesPercentage) ? "0" : correctResponsesPercentage) + " %");
+	ws.cell(7, 2).number((isNaN(correctResponsesPercentage) ? 0 : Math.round(correctResponsesPercentage)));
 	if (responsesWithConfidenceValue.length > 0) {
 		ws.cell(8, 1).string(TAPi18n.__("export.average_confidence", {lng: translation}) + ":");
 		let confidenceSummary = 0;
 		allResponses.forEach(function (item) {
 			confidenceSummary += item.confidenceValue;
 		});
-		ws.cell(8, 2).string((confidenceSummary / responsesWithConfidenceValue.length) + " %");
+		ws.cell(8, 2).number(Math.round((confidenceSummary / responsesWithConfidenceValue.length)));
 	}
 	ws.cell(4, 1).string(questionGroup.questionList[index].questionText.replace(/[#]*[*]*/g, ""));
 	for (let j = 0; j < answerList.length; j++) {
@@ -176,7 +177,7 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 		chosenAnswerString.pop();
 		ws.cell(nextStartRow, nextColumnIndex++).string(chosenAnswerString);
 		if (responsesWithConfidenceValue.length > 0) {
-			ws.cell(nextStartRow, nextColumnIndex++).string(responseItem.confidenceValue + " %");
+			ws.cell(nextStartRow, nextColumnIndex++).number(Math.round(responseItem.confidenceValue));
 		}
 		ws.cell(nextStartRow, nextColumnIndex++).number(responseItem.responseTime);
 	});

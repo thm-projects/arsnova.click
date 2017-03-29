@@ -1,7 +1,7 @@
 <template name="leaderboardFooterNavButtons">
     <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" style="display:block;" role="navigation">
         <div class="row">
-            <div class="col-xs-12 col-sm-{{getButtonCols}}">
+            <div class="col-xs-12 col-sm-{{getButtonCols}} margin-bottom">
                 <button class="button button-back tabbable"
                         id="js-btn-backToResults">
                     <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
@@ -10,7 +10,7 @@
             </div>
             {{#unless noLeaderBoardItems}}
                 {{#if hasTooMuchButtons}}
-                    <div class="col-xs-12 col-sm-{{getButtonCols}}">
+                    <div class="col-xs-12 col-sm-{{getButtonCols}} margin-bottom">
                         {{#if hasOverridenDefaultButtonCount }}
                             <button class="button button-success tabbable"
                                     id="showLess">

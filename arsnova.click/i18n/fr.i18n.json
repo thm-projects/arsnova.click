@@ -52,6 +52,7 @@
           "sound": "Régler la musique de fond et choisir pour le compte à rebours, entre coup de sifflet et sonnerie.",
           "reading-confirmation": "Cette option est à activer lorsque dans un premier temps, seule la question doit être visible. Pour voir les options de réponses, le participant doit au préalable confirmer la lecture de la question. Il en va de même pour la mise en marche du compte à rebours.",
           "response-progress": "Pour afficher le nombre de voies récoltées par chaque option de réponse tout au long du compte à rebours, activez ce bouton. Mais avant, pensez-y: Ceci pourrait influencer le raisonnement de vos participants, qui au lieu de se faire confiance, tendront à s‘orienter d’après les choix des autres candidats.",
+          "confidence_level": "Dégré de certitude",
           "nicknames": "Attribuez ici les pseudos par catégories. Pour supprimer du Lobby un pseudo inconvenable, cliquez simplement dessus."
         }
       },
@@ -435,6 +436,7 @@
       "no_added_questions": "Choisissez un modèle de question!",
       "session_invalid": "Votre quiz contient des questions incomplètes",
       "session_empty": "Aucune question créée",
+      "question_added": "Pour modifier une question, cliquez sur elle:",
       "connection_lost": "Connexion interrompue",
       "back_to_quiz_administration": "Quiz",
       "details": {
@@ -594,6 +596,7 @@
       "title": "Sondage",
       "question": "Afficher la question",
       "send": "Envoyer",
+      "abstention": "Abstention",
       "seconds_left": "Encore 1 seconde!",
       "seconds_left_plural": "Encore __value__ secondes!",
       "ranged_question": {
@@ -753,6 +756,7 @@
     "overall_response_time": "Temps de réponse cumulé (en ms)",
     "average_response_time": "Temps de réponse moyen (en ms)",
     "number_attendees": "Nombre de participants",
+    "average_number_attendees_participated": "Réponses moyennes pour le quiz (en %)",
     "average_correct_answered_questions": "Les questions ont-elles été répondues en moyenne correctement?",
     "average_confidence": "Niveau de certitude moyen"
   }

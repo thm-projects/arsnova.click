@@ -52,6 +52,7 @@
           "sound": "Régler la musique de fond et choisir pour le compte à rebours, entre coup de sifflet et sonnerie.",
           "reading-confirmation": "Cette option est à activer lorsque dans un premier temps, seule la question doit être visible. Pour voir les options de réponses, le participant doit au préalable confirmer la lecture de la question. Il en va de même pour la mise en marche du compte à rebours.",
           "response-progress": "Pour afficher le nombre de voies récoltées par chaque option de réponse tout au long du compte à rebours, activez ce bouton. Mais avant, pensez-y: Ceci pourrait influencer le raisonnement de vos participants, qui au lieu de se faire confiance, tendront à s‘orienter d’après les choix des autres candidats.",
+          "confidence_level": "Dégré de certitude",
           "nicknames": "Attribuez ici les pseudos par catégories. Pour supprimer du Lobby un pseudo inconvenable, cliquez simplement dessus."
         }
       },
@@ -105,7 +106,7 @@
         "declaration": " Par cette déclaration, nous, opérateurs de arsnova.click, informons tous nos utilisateurs sur la forme et le but de l’usage de leurs données personnelles. Pour ce qui est des fondements juridiques et lois de confidentialité, vous les trouverez dans la BDSG (abréviation allemande pour : Loi fédérale sur la protection des données) et la TMG (abréviation allemande pour : Loi sur les télé média).",
         "app_data": {
           "title": "Données d’app.",
-          "text": "Chacun des quiz et les données qui y correspondent sont exclusivement sauvegardées sur le navigateur (mémoire locale) de celui qui en est l’auteur."
+          "text": "Chacun des quiz et les données qui y correspondent sont exclusivement sauvegardés sur le navigateur (mémoire locale) de celui qui en est l’auteur."
         },
         "access_data": {
           "title": "Données d‘accès",
@@ -133,19 +134,19 @@
         "provider": {
           "title": "Fournisseur",
           "text": {
-            "1": "L’application-web arsnova.click est un service d‘offre gratuit de la part de du groupe TransMIT (Transfert de Technologie mbH), le secteur des applications mobiles du projet.",
+            "1": "L’application-web arsnova.click est un service d‘offre gratuit de la part de du groupe TransMIT (Transfert de Technologie mbH), secteur des applications mobiles du projet.",
             "2": "c/o THM – Technische Hochschule Mittelhessen",
-            "3": "Fachbereich MNI – Mathématiques, Sciences naturelles et Informatique",
+            "3": "Faculté MNI – Mathématiques, Sciences naturelles et Informatique",
             "4": "Prof. Dr. Klaus Quibeldey-Cirkel",
             "5": "Président du génie logiciel",
             "6": "Wiesenstraße 14",
             "7": "D-35390 Giessen",
-            "8": "Telefon: +49 641 309 – 24 50",
+            "8": "Téléphone: +49 641 309 – 24 50",
             "9": "E-Mail: <a href='mailto:klaus.quibeldey-cirkel@transmit.de' class='text-light'>klaus.quibeldey-cirkel@transmit.de</a>",
             "10": "Siège social: Giessen",
-            "11": "Website: <a href='https://www.transmit.de' class='text-light'>https://www.transmit.de</a>",
-            "12": "Rechtsform: GmbH",
-            "13": "Amtsgericht: Gießen HRB 3036",
+            "11": "Site Web: <a href='https://www.transmit.de' class='text-light'>https://www.transmit.de</a>",
+            "12": "Forme juridique: GmbH",
+            "13": "Tribunal: Gießen HRB 3036",
             "14": "USt-IdNr.: DE 188 685 037"
           }
         }
@@ -220,7 +221,7 @@
         "added_answers": "Voici les réponses à la question. En les glissant, vous pouvez les ranger dans l’ordre voulu.",
         "added_answer_short_text": "Chaque réponse correspond à une lettre qui sera montrée aux participants.",
         "added_answer_text": "Entrez l’énoncé de la réponse ici. Markdown et TeX vous sont disponibles, n’hésitez pas à ajouter des images!",
-        "added_answer_is_correct": "Cette réponse doit être évaluée correcte ou incorrecte?",
+        "added_answer_is_correct": "Cette réponse doit-elle être évaluée correcte ou incorrecte?",
         "added_answer_remove": "Cliquez ici pour supprimer cette réponse.",
         "show_answer_content_on_buttons": "Les boutons de réponse peuvent contenir soit les réponses, soit les lettres qui leurs correspondent. Il est cependant à noter que, bien qu’échelonnés, des textes longs deviennent illisibles, couvrant parfois d’autres boutons.",
         "multiple_selection_survey": "Voulez vous que les participants soient notés directement après un clic sur une réponse ou alors qu’ils puissent revenir sur leur choix.",
@@ -234,7 +235,7 @@
         "config_case_sensitive": "Activez cette fonction si la grosseur des caractères (maj/min) doit être prise en compte lors de l’évaluation de la réponse.",
         "config_trim_whitespaces": "Les espaces entres les mots doivent-ils être pris en compte lors de l’évaluation? ",
         "config_use_keywords": "L’ordre des mots du texte de réponse doit être pris en compte lors de l’evaluation. Si vous désactivez cette option, les espaces entres les mots ne seront plus pris en compte.",
-        "config_use_punctuation": "Diese Option legt fest, ob die Satzzeichen der eingegebenen Antwort geprüft werden sollen.",
+        "config_use_punctuation": "Activez ou désactivez cette option selon que la ponctuation dans la réponse importe ou non.",
         "check_answer": "Testez les critères actuels d’évaluation en comparant des réponses possibles à la réponse de référence."
       },
       "ranged_question": {
@@ -370,7 +371,7 @@
       "waiting_for_players": "En attente d’autres joueurs …",
       "description": {
         "memberlist_count": "Nombre de personnes en ligne",
-        "title": "Les pseudos des participants sont affichés du dernier qu premier à sêtre connecté.",
+        "title": "Les pseudos des participants sont affichés du dernier au premier à s’être connecté.",
         "waiting_for_players": "Aussitôt les joueurs connectés, vous pouvez lancer le quiz. Attention ! Après démarrage du quiz, impossible de joindre la partie!"
       }
     },
@@ -437,10 +438,10 @@
       "session_empty": "Aucune question créée",
       "question_added": "Pour modifier une question, cliquez sur elle:",
       "connection_lost": "Connexion interrompue",
-      "back_to_quiz_administration": "Gestion des quiz",
+      "back_to_quiz_administration": "Quiz",
       "details": {
         "aria": {
-          "btn_group": "Réglages pour le quiz"
+          "btn_group": "Réglages"
         },
         "question_type": {
           "long": "Type de question",
@@ -637,7 +638,7 @@
     },
     "sound": {
       "running_music": "Compteur en marche",
-      "lobby_music": "Lobby de quiz",
+      "lobby_music": "Lobby",
       "finish_music": " Compteur stop",
       "running_music_detailed": "Son du compteur en marche",
       "lobby_music_detailed": "Son dans le Lobby du Quiz",
@@ -645,14 +646,14 @@
       "whistle": "sifflet",
       "silence": "muet",
       "global_volume": "Volume global",
-      "volume": "régler volume",
-      "inactive": "Son désactivé",
-      "active": "Son activé",
-      "activated": "activé",
-      "deactivated": "désactivé",
-      "random": "choix au hasard",
+      "volume": "Volume",
+      "inactive": "Muet",
+      "active": "Son",
+      "activated": "On",
+      "deactivated": "Off",
+      "random": "Aléatoire",
       "play": "Lire",
-      "stop": "Arrêter"
+      "stop": "Stop"
     },
     "splashscreen": {
       "question_and_answer": {
@@ -728,35 +729,35 @@
     }
   },
   "export": {
-    "page_header": "&LQuiz et classement des données générées à partir d'une session de quiz en direct avec arsnova.click&R__createdAt__",
+    "page_header": "&LQuiz et le classement ont été générées lors d'une session de quiz en direct avec arsnova.click&R__createdAt__",
     "page_footer": "&L&A&Carsnova.click est un logiciel open source, voir arsnova.io et https://github.com/thm-projects/arsnova.clickPage &P de &N",
     "summary": "Résumé",
-    "exported_at_date": "Exporté à",
-    "session_content": "Exportation du Quiz (JSON)",
+    "exported_at_date": "Exporté le",
+    "session_content": "Export du Quiz (JSON)",
     "cas_account_id": "Numéro de compte CAS",
     "cas_account_email": "E-mail CAS",
     "quiz_name": "Nom du quiz",
     "question": "Question",
-    "question_type": "Type de la question",
+    "question_type": "Type de question",
     "number_of_answers": "Nombre de réponses",
-    "percent_correct": "Corriger les réponses (en %)",
+    "percent_correct": "Réponses correctes",
     "answer": "Répondre",
     "attendee": "Participant",
-    "attendee_complete_correct": "Participants ayant des questions exactes répondant aux questions",
-    "attendee_complete_correct_none_available": "Aucun disponible",
+    "attendee_complete_correct": "Participants ayant répondu correctement à toutes les questions",
+    "attendee_complete_correct_none_available": "Aucun",
     "correct_questions_none_available": "Aucun",
     "attendee_all_entries": "Tous les participants",
     "time": "Temps de réponse (en ms)",
-    "confidence_level": "Niveau de confiance",
+    "confidence_level": "Dégré de certitude",
     "correct_value": "Valeur correcte",
-    "min_range": "Portée minimale",
-    "max_range": "Portée maximale",
-    "correct_questions": "Questions correctement posées",
+    "min_range": "Valeur min.",
+    "max_range": "Valeur max.",
+    "correct_questions": "Questions correctement répondues",
     "overall_response_time": "Temps de réponse cumulé (en ms)",
     "average_response_time": "Temps de réponse moyen (en ms)",
-    "number_attendees": "Montant des participants",
+    "number_attendees": "Nombre de participants",
     "average_number_attendees_participated": "Réponses moyennes pour le quiz (en %)",
-    "average_correct_answered_questions": "Les questions ont-elles répondu en moyenne correctement?",
-    "average_confidence": "Niveau de confiance moyen (en %)"
+    "average_correct_answered_questions": "Les questions ont-elles été répondues en moyenne correctement?",
+    "average_confidence": "Niveau de certitude moyen"
   }
 }

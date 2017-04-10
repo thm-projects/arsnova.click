@@ -11,6 +11,7 @@ sonarqube {
 		property "sonar.sourceEncoding", "UTF-8"
 		property "sonar.language", "js"
 		property "sonar.sources", "arsnova.click"
+		property "sonar.exclusions", "**/node_modules/**,arsnova.click/packages/**,arsnova.click/client/layout/view_questions/scripts/lib.js"
 		property "sonar.host.url", "https://scm.thm.de/sonar/"
 	}
 }

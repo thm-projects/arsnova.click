@@ -46,6 +46,7 @@
 		"autoClose": true
 	},
 	"serverStartup": {
-		"verbose": true
+		"verbose": true,
+		"themeScreenshots": true
 	}
 }

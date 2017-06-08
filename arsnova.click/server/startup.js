@@ -107,39 +107,41 @@ if (Meteor.isServer) {
 			console.log("server startup: removed old connection status documents successfully");
 			console.log("server startup: generating preview images of all themes in all languages");
 		}
-		const spawn = childProcess.spawn,
-			languages = TAPi18n.getLanguages(),
-			params = [process.cwd() + '/assets/app/phantomDriver.js'];
-		themes.forEach(function (theme) {
-			for (const languageKey in languages) {
-				if (languages.hasOwnProperty(languageKey)) {
-					params.push(Meteor.absoluteUrl() + "preview/" + theme.id + "/" + languageKey);
-				}
-			}
-		});
-		const checkServerStatusInterval = Meteor.setInterval(function () {
-			HTTP.call("GET", Meteor.absoluteUrl(), function (error) {
-				if (!error) {
-					Meteor.clearInterval(checkServerStatusInterval);
-					const command = spawn(phantomjs.path, params);
-					command.stdout.on("data", function (data) {
-						if (Meteor.settings.serverStartup.verbose) {
-							console.log("phantomjs (stdout):", data.toString());
-						}
-					});
-					command.stderr.on("data", function (data) {
-						if (Meteor.settings.serverStartup.verbose) {
-							console.log("phantomjs (stderr):", data.toString());
-						}
-					});
-					command.on('exit', function () {
-						if (Meteor.settings.serverStartup.verbose) {
-							console.log("server startup: all preview images have been generated");
-						}
-					});
-					console.log("server startup: Server startup successful.");
+		if (Meteor.settings.serverStartup.themeScreenshots) {
+			const spawn = childProcess.spawn,
+				languages = TAPi18n.getLanguages(),
+				params = [process.cwd() + '/assets/app/phantomDriver.js'];
+			themes.forEach(function (theme) {
+				for (const languageKey in languages) {
+					if (languages.hasOwnProperty(languageKey)) {
+						params.push(Meteor.absoluteUrl() + "preview/" + theme.id + "/" + languageKey);
+					}
 				}
 			});
-		}, 800);
+			const checkServerStatusInterval = Meteor.setInterval(function () {
+				HTTP.call("GET", Meteor.absoluteUrl(), function (error) {
+					if (!error) {
+						Meteor.clearInterval(checkServerStatusInterval);
+						const command = spawn(phantomjs.path, params);
+						command.stdout.on("data", function (data) {
+							if (Meteor.settings.serverStartup.verbose) {
+								console.log("phantomjs (stdout):", data.toString());
+							}
+						});
+						command.stderr.on("data", function (data) {
+							if (Meteor.settings.serverStartup.verbose) {
+								console.log("phantomjs (stderr):", data.toString());
+							}
+						});
+						command.on('exit', function () {
+							if (Meteor.settings.serverStartup.verbose) {
+								console.log("server startup: all preview images have been generated");
+							}
+						});
+						console.log("server startup: Server startup successful.");
+					}
+				});
+			}, 800);
+		}
 	});
 }

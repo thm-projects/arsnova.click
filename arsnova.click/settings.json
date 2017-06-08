@@ -39,7 +39,8 @@
 					"restrictToCASLogin": false
 				}
 			}
-		}
+		},
+		"mathjaxUrl": "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"
 	},
 	"cas": {
 		"baseUrl": "https://cas.thm.de/cas",

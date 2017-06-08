@@ -83,6 +83,9 @@ const helper = new MeteorMathJax.Helper({
 	}
 });
 Template.registerHelper('mathjax', helper.getTemplate());
+if (Meteor.settings.public.mathjaxUrl) {
+	MeteorMathJax.sourceUrl = Meteor.settings.public.mathjaxUrl;
+}
 MeteorMathJax.defaultConfig = {
 	config: ["TeX-AMS-MML_HTMLorMML.js"],
 	jax: ["input/TeX","input/MathML","output/HTML-CSS","output/NativeMML", "output/PreviewHTML"],

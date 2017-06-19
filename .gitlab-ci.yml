@@ -100,6 +100,6 @@ sync_mirror:
     - eval $(ssh-agent -s)
     - mkdir ~/.ssh && echo "$SYNC_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - ssh-add <(echo "$SYNC_SSH_PRIVATE_KEY")
-    - git clone --bare "$CI_BUILD_REPO" mirror.git
+    - git clone --bare "$CI_REPOSITORY_URL" mirror.git
     - cd mirror.git
     - git push --mirror "$MIRROR_REPO"

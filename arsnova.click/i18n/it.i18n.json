@@ -1,0 +1,728 @@
+{
+  "global": {
+    "arsnova_slogan": "Quiz-app per l´insegnamento",
+    "back": "Indietro",
+    "next": "Continua",
+    "delete": "Cancella",
+    "save": "Salva",
+    "abort": "Interrompi",
+    "yes": "Sì",
+    "no": "No",
+    "close_window": "Chiudere la finestra",
+    "aria_description": {
+      "arsnova_slogan": "Quiz-app per l´insegnamento"
+    },
+    "cookie_consent": {
+      "message": "arsnova.clickutilizzacookies.",
+      "dismiss": "Non mostrare più questo avviso",
+      "learn_more": "Informativa sulla privacy"
+    }
+  },
+  "region": {
+    "footer": {
+      "go_to": "➝",
+      "show-more": {
+        "show-more-elements": "Tutte le altre opzioni:",
+        "onText": "Attivato",
+        "offText": "Disattivato"
+      },
+      "footer_bar": {
+        "about": "arsnova.click",
+        "home": "Inizio",
+        "tos": "Informazioni legali",
+        "imprint": "Colophon",
+        "data_privacy": "Tutela della privacy",
+        "blog": "Blog del progetto",
+        "languages": "Lingua",
+        "style": "Stile",
+        "import": "Importa il quiz",
+        "info": "Info",
+        "reading-confirmation": "Conferma di lettura",
+        "fullscreen": "Schermo intero",
+        "show_more": "più",
+        "sound": "Audio",
+        "qr_code": "Codice QR",
+        "nicknames": "Nicknamen",
+        "edit_quiz": "Elaborare",
+        "show_product_tour": "Tutorial",
+        "show_response_progress": "Avanti",
+        "remove": "Elimina",
+        "description": {
+          "qr-code": "Il tuo pubblico può scansionare il codice QR ed entrare nella lobbycon un click, senza dover digitare l´indirizzo web e il nome del quiz.",
+          "sound": "Qui puoi impostare la musica di sottofondo e decidere se usare il fischio o il gong per il countdown.",
+          "reading-confirmation": "Attiva questa opzione, se vuoi che inizialmente le domande vengano mostrate senza le risposte. Solo chi conferma la lettura (comprensione) della domanda - il numero delle conferme di lettura viene mostrato -può parteciare al quiz.Grazie alla conferma di lettura tutti possono partecipare con le stesse premesse all´avvio del countdown.",
+          "response-progress": "Se il numero dei consensi per ogni singola risposta deve essere mostrato durate il countdown, attiva questa opzione. Attenzione all´effetto psicologico: un essere umano tende adorientarsi verso l´opinione della maggioranza (istinto gregale)",
+          "nicknames": "Qui puoi definire i nicknamen secondo diverse categorie. Nota: Puoi cancellare un nickname inopportuno/scabroso dalla tua lobby.Suggerimento: un nickname inopportuno/scabroso puó essere allontanatocliccandoci sopra."
+        }
+      },
+      "about": {
+        "title": "arsnova.click",
+        "declaration": "Un poʼ<a href='https://getkahoot.com' target='_blank'>Kahoot!</a>, <br /> Un poʼ<a href='https://arsnova.io/' target='_blank'>ARSnova</a>!",
+        "ars": "arsnova.click è un innovativo<a href='https://de.wikipedia.org/wiki/Audience_Response_System' target='_blank'>Audience Response System (ARS)</a>per il sistema dell´istruzione pubblica.",
+        "developed_by": "Ispirato da <a href='https://getkahoot.com' target='_blank'>Kahoot!</a>sviluppato da un team di studenti del corso di laurea triennale e specialistica della<a href='http://www.thm.de/site/' target='_blank'>TH Mittelhessen</a>la prima versione di <a href='https://de.wikipedia.org/wiki/Gamification' target='_blank'>gamification</a> Alternative zum ARSnova-Flaggschiff<a href='https://arsnova.io/' target='_blank'>arsnova.voting</a>.",
+        "met_requirements": "Fino ad ora sono state implementate le seguenti Features:",
+        "requirements": {
+          "1": "Assoluta tutela della privacy: nessun dato personale sul Server, i dati dei quiz si trovano nel Browser di chi realizza il quiz(<a href='http://www.w3schools.com/html/html5_webstorage.asp' target='_blank'>HTML5 Local Storage</a>)",
+          "2": "Nessuna registrazione, nessun login, nessuna istallazione(<a href='https://de.wikipedia.org/wiki/Bring_your_own_device' target='_blank'>BYOD</a>), nessuna pubblicità, nessun costo",
+          "3": "Stessa pagina iniziale arsnova.click per i due ruoli: quizmaster e candidati, studenti o alunni",
+          "4": "Chiunque può creare un quiz, immediatamente e nella quantità che desidera.La creazione di un quiz è un gioco da ragazzi perfino sullo smartphone!",
+          "5": "Estremamente facile, priva di barrierearchitettoniche,adatta per il videoproiettore, interfaccia integralmente tradotta in inglese, spagnolo, francese e italiano.",
+          "6": "Tipi di domande: a risposta singola o multipla, di valutazione, a risposta breve, sondaggio;  domande a risposta singola o multipla con tante possibili tipologie di risposte",
+          "7": "<a href='https://de.wikipedia.org/wiki/TeX' target='_blank'>TeX</a>-Formelsatz, formattazione del testo con<a href='https://guides.github.com/features/mastering-markdown/' target='_blank'>Markdown</a>, <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis</a>e Video integrati nel testo della domanda o nelle risposte",
+          "8": "Edutainment: rafforzamento della motivazione ad imparare attraverso competizioni live con effetti sonori, contro il tempo e contro altri partecipanti",
+          "9": "<a href='https://de.wikipedia.org/wiki/Responsive_Webdesign' target='_blank'>Responsive Webdesign</a>: non importa se smartphone, videoproiettoreo, widescreen il design si adatta grazie a<a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>. Anche quiz complessi possono essere creati con uno smartphone.",
+          "10": "Costruita come<a href='https://infrequently.org/2016/09/what-exactly-makes-something-a-progressive-web-app/' target='_blank'>Web app progressiva</a>con la tecnologia web reattiva (reaktiv als responcive?) di<a href='https://www.meteor.com' target='_blank'>Meteor</a>",
+          "11": "<a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>open source</a>"
+        },
+        "manual": {
+          "title": "Manuale dʹuso?",
+          "text": {
+            "1": "Non ne hai bisogno!",
+            "2": "Scrivi semplicemente il nome del quiz. I pulsanti vengono attivati non appena inserirai il nome di un quiz già esistente: \"Partecipa al quiz!\" oppure un nome di tua invenzione, che, se non ancora in uso, ti permetterà di creare il tuo quiz: \"Crea un nuovo quiz!\".",
+            "3": "Segui il Tutorial(menù a piè di pagina)oppure la tua intuizione: guarda, clicca,gioca."
+          }
+        }
+      },
+      "tos": {
+        "title": "Informazioni legali",
+        "declaration": "Tutti (non solo insegnanti) possono usare la quiz-app arsnova.click per i loro scopi, purché non vengano violati il diritto tedesco e quello europeo.",
+        "license": {
+          "title": "Licenza",
+          "text": "arsnova.click è un servizio web gratuito(software as a service).Il software è<a href='https://git.thm.de/arsnova/arsnova.click/' target='_blank'>open source</a>e sottostà a<a href='http://www.gnu.org/licenses/gpl-3.0-standalone.html' target='_blank'>GNU General Public License Version 3</a>."
+        },
+        "musicLicense": {
+          "title": "Licenza per la musica",
+          "text": "Il motivo musicale<a href='http://soundbible.com/2148-Chinese-Gong.html' target='_blank'>il gong cinese</a>di Daniel Simon sottostà a<a href='https://creativecommons.org/licenses/by/3.0/de' target='_blank'>CC BY 3.0</a> Lizenz."
+        },
+        "warranty": {
+          "title": "Garanzia",
+          "text": "Facciamo di tutto per assicurare un funzionamento affidabile e privo di disturbi del servizio online di arsnova.click. zu betreiben ,tuttavia non possiamo garantirlo. Tutti i dati dei quiz sono salvati esclusivamente nella memoria del Browser di chi crea il quiz. Non ci assumiamo nessuna resposabilità per la perdita di dati, per esempio a causa della cancellazione della memoria del Browser prima di aver esportato i quiz, oppure per un uso illecito del servizio."
+        }
+      },
+      "data_privacy": {
+        "title": "Tutela della privacy",
+        "scope": "Ambito d´applicazione",
+        "declaration": "Questa informativa sulla privacy chiarisce agli utilizzatori di arsnova.click il tipo, l´entità e lo scopo dell´utilizzo dei dati personali attraverso l´operatore responsabile. Il fondamento legislativo della tutela della privacy si trova nella Bundesdatenschutzgesetz (BDSG) e nella Telemediengesetz (TMG).",
+        "app_data": {
+          "title": "Utilizzo dei dati",
+          "text": "Tutte le domande del quiz sono conservate esclusivamente della memoria del Browser (localStorage) del creatore del quiz."
+        },
+        "access_data": {
+          "title": "Accesso ai dati",
+          "text": "Esclusi i dati per il login al webserver, non sono salvati altri dati personali d´accesso."
+        },
+        "logfiles": {
+          "title": "Dati d´accesso al webserver",
+          "text": "Il fornitore raccoglie dati di protocollo per ogni accesso ad arsnova.click nei cosiddetti dati di login. Il fornitore utilizza i dati di protocollo esclusivamente per analisi statistiche per scopi aziendali, sicurezza e ottimizzazione dell´offerta. Il fornitore si riserva di controllare i dati di protocollo a posteriori, se sussiste il legittimo sospetto di un uso illecito sulla base di un indizio concreto."
+        },
+        "3rdparty": {
+          "title": "Servizi e contenuti di terzi",
+          "text": "Nelle domande del quiz possono essere inseriti contenuti di terzi, come ad esempio un video di youtube o vimeo oppure immagini di altri siti internet. Questo permette che il fornitore di questi contenuti venga a conoscenza dell´indirizzo IP degli utilizzatori. Senza indirizzo IP i contenuti non potrebbero essere inviati al Browser."
+        },
+        "cookies": {
+          "title": "Cookies",
+          "text": "I cookies sono piccoli file che permettono di salvare sull´apparecchio di accesso dell´utilizzatore informazioni specifiche, riferite all´apparecchio. L´offerta di arsnova.click utilizza cookies per raccogliere dati statistisci circa l´utilizzo del sito internet con piwik(guarda sotto) e per analizzarli al fine di migliorare l´offerta. Gli utenti possono influenzare l´azione dei cookies. La maggior parte dei Browser dispone di un´opzione, grazie alla quale la memorizzazione dei cookies può essere limitata o completamente impedita."
+        },
+        "piwik": {
+          "title": "Piwik",
+          "text": "Questa offerta utilizza piwik, un software open-source per l´analisi statistica degli accessi, guarda<a href='http://piwik.org/' target='_blank'>piwik.org</a>. Piwik utilizza cookies, che vengono salvati sul computer degli utenti e che rendono possibile un´analisi dell´utilizzo del sito internet. Le informazioni prodotte dai cookies circa l´uso di questa offerta vengono salvate sul server del fornitore in Germania. Gli indirizzi IP vengono anonimizzati subito dopo la lavorazione e prima che siano salvati. Gli utenti possono impedire l´istallazione dei cookies attraverso un´apposita impostazione del proprio Browser."
+        }
+      },
+      "imprint": {
+        "title": "Colophon",
+        "provider": {
+          "title": "Fornitore del servizio",
+          "text": {
+            "1": "L´attività della web-app arsnova.click è un servizio gratuito della TransMIT-Gesellschaft für Technologietransfer mbH, area di progetto per usi mobili.",
+            "2": "c/o THM – Technische Hochschule Mittelhessen",
+            "3": "Dipartimento – Matematica, Scienze Naturali e Informatica",
+            "4": "Prof. Dr. Klaus Quibeldey-Cirkel",
+            "5": "Cattedra in Softwaretechnik",
+            "6": "Wiesenstraße 14",
+            "7": "D-35390 Gießen",
+            "8": "Telefono:+49 641 309 – 24 50",
+            "9": "E-Mail:<a href='mailto:klaus.quibeldey-cirkel@transmit.de' class='text-light'>klaus.quibeldey-cirkel@transmit.de</a>",
+            "10": "Sede della società: Gießen",
+            "11": "Sito internet: <a href='https://www.transmit.de' class='text-light'>https://www.transmit.de</a>",
+            "12": "Forma giuridica: GmbH",
+            "13": "Pretura: Gießen HRB 3036",
+            "14": "USt-IdNr.: DE 188 685 037"
+          }
+        }
+      }
+    },
+    "header": {
+      "new_question": "Nuova domanda",
+      "reset": "Reset",
+      "yes": "Sì",
+      "no": "No",
+      "reset_session_confirmation": {
+        "empty_lobby": {
+          "title": "Lasciare la modalità modifica?",
+          "text": "Il tuo quiz e tutte le sue impostazioni rimarranno in questo Browser, fino a quando il Browser non sarà resettato."
+        },
+        "active_quiz": {
+          "title": "Lasciare il quiz?",
+          "text": "Tutti i partecipanti saranno disconnessi. La classifica sarà cancellata. Il tuo quiz e tutte le sue impostazioni rimarranno in questo Browser, fino a quando il Browser non sarà resettato."
+        },
+        "continue": "Continuare?"
+      },
+      "exit_session_confirmation": {
+        "title": "Lasciare il quiz?",
+        "text": "Sarai allontanato dal quiz e le tue risposte saranno cancellate.",
+        "continue": "Continuare?"
+      },
+      "connection_status": {
+        "title": "Connessione",
+        "show_result": "Dettagli",
+        "pending": "Analizza …",
+        "finished_with_errors": "Concluso con errore",
+        "finished_with_warnings": "Concluso con avvertimento",
+        "finished_without_warnings": "Con successo",
+        "websocket_status": {
+          "connected": "Connesso",
+          "disconnected": "Disconnesso"
+        },
+        "localStorage_status": {
+          "writable": "Descrivibile",
+          "non_writable": "Non descrivibile"
+        },
+        "sessionStorage_status": {
+          "writable": "Descrivibile",
+          "non_writable": "Non descrivibile"
+        },
+        "dbConnection_status": {
+          "very_slow": "Molto lento",
+          "slow": "Lento",
+          "ok": "Buono"
+        }
+      },
+      "aria_description": {
+        "logo-header-chars": "arsnova.click"
+      }
+    }
+  },
+  "view": {
+    "answeroptions": {
+      "title": "Tipi di risposte Antwortoptionen",
+      "new_answer": "Nuovo tipo di risposta",
+      "answeroptiontext_placeholder": "Inserire il testo della risposta",
+      "correct": "Giusto",
+      "wrong": "Sbagliato",
+      "preview": "",
+      "forward": "Vai alcountdown",
+      "back": "Torna al quiz-manager",
+      "show_answer_content_on_buttons": "Antworttext auf Abstimmbuttons?",
+      "multiple_selection_survey": "Selezionare diverse opzioni?",
+      "emoji_info": "Puoi aggiungere anche Emojis! <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'><img style='width:40px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/></a>",
+      "description": {
+        "default_answer_row": "Trascina questo blocco nella lista delle risposte oppure puoi cliccarci sopra per aggiungere una nuova risposta.",
+        "added_answers": "Qui puoi vedere i tipi di risposta alla domanda. Puoi cambiare l´ordine per Drag & Drop.",
+        "added_answer_short_text": "Ogni tipo di risposta contiene una lettera, che può essere visualizzaza per i partecipanti.",
+        "added_answer_text": "Qui puoi inserire il testo della risposta. Una formattazione con MarkdowneTeX è possibile. Possono essere inserite anche immagini.",
+        "added_answer_is_correct": "Con questo pulsante puoi decidere se la risposta è giusta o sbagliata",
+        "added_answer_remove": "Se clicchi su questo pulsante la risposta in questione sarà cancellata.",
+        "show_answer_content_on_buttons": "I pulsanti delle risposte possono essere etichettati o con lettere o con il contenuto della risposta. Considera però che un testo troppo lungo non è facilmente leggibile sul terminale. I testi di lunghezza diversa vengono scalati sulla larghezza del pulsante, cosa che non ha un bell´aspetto e che rischia di enfatizzare troppo una singola risposta.",
+        "multiple_selection_survey": "Qui puoi decidere se i partecipanti, dopo aver cliccato una risposta del questionario, possano attingere direttamente alla valutazione o se sia possible la scelta multipla.",
+        "preview": "Qui puoi vedere come saranno visualizzate le risposte sullo smartphone",
+        "range_area": "Qui puoi inserire la risposta corretta e le tolleranze verso l´alto o verso il basso. Nota che si possono usare solo numeri naturali",
+        "min_range": "Qui puoi definire il valore di tolleranza minimo",
+        "correct_value": "Questa risposta è totalmente corretta.",
+        "max_range": "Qui puoi definire il valore di tolleranza massimo.",
+        "range_slider": "Con questo cursore puoi cambiare in maniera dinamica la tolleranza minima e quella massima. Il valore corretto corrisponderà al valore medio.",
+        "free_text_question_text": "Qui puoi inserire la risposta corretta. Le risposte dei partecipanti verranno analizzate conformemente ai criteri e paragonatecon la risposta corretta.",
+        "config_case_sensitive": "Se questa opzione è attiva, la grafia con iniziale maiuscola e minusola nella risposta data deve corrispondere alla risposta corretta.",
+        "config_trim_whitespaces": "Stabilisci se gli spazi bianchi nella risposta data debbano essere verificati.",
+        "config_use_keywords": "Se questa opzione viene attivata, l´ordine delle parole nella risposta data deve corrispondere a quello nella risposta corretta. Se questa opzione è disattivata, la verifica degli spazi vuoti e della punteggiatura non sarà effettuata.",
+        "config_use_punctuation": "Questa opzione stabilisce se la punteggiatura della risposta data debba essere verificata.",
+        "check_answer": "Qui puoi testare le possibili risposte dei partecipanti paragonandole con la risposta corretta e prendendo in considerazione i criteri attuali."
+      },
+      "ranged_question": {
+        "title": "Intervallo delle risposte corrette",
+        "correct_value": "Valore corretto",
+        "min_range": "Valore massimo",
+        "max_range": "Valore minimo"
+      },
+      "free_text_question": {
+        "title": "Risposta esatta:",
+        "check_answer_title": "Verifica la domanda Eingabe:",
+        "config_case_sensitive": "Rispettare la grafia con iniziale maiuscola e minusola ",
+        "config_trim_whitespaces": "Rispettare spazi vuoti nella risposta",
+        "config_use_keywords": "Rispettare l´ordine delle parole",
+        "config_use_punctuation": "Rispettare la punteggiatura nella risposta",
+        "onText": "Sì",
+        "offText": "No",
+        "text_placeholder": "Inserisci qui la tua risposta.",
+        "check_correct": "La risposta data corrisponde alla risposta corretta.",
+        "check_incorrect": " La risposta data non corrisponde alla risposta corretta!"
+      }
+    },
+    "choose_nickname": {
+      "enter_nickname": "Scegli un nicknamen",
+      "enter_nickname_here": "Inserisci il tuo nickname",
+      "nickname_na_popup": "Questo nome non è disponibile!",
+      "nickname_blacklist_popup": " Questo nome non è affidabile",
+      "nickname_too_long": "Il nome è troppo lungo",
+      "nickname_too_short": "Il nome è troppo corto",
+      "no_selectable_nick_available": {
+        "1": "Tutti i nickname disponibili sono stati già selezionati.",
+        "2": "La partecipazione al quiz non è possibile."
+      },
+      "description": {
+        "nickname_input": "Qui puoi darti un nome, che apperirà nella lobby del quiz e nella classifica.",
+        "choose_selectable_nick": "Tu puoi scegliere un nickname da questo elenco."
+      }
+    },
+    "hashtag_management": {
+      "enter_quiz_name": "Inserire il nome del quiz o il PIN …",
+      "join_session": "Partecipa al quiz!",
+      "start_session": "Inizia il quiz",
+      "edit_session": "Modifica il quiz",
+      "reenter_session": "Apri",
+      "create_session": "Crea un nuovo quiz!",
+      "create_demo_session": "Inizia»Demo Quiz«!",
+      "quiz_management": "Memoria del quiz",
+      "available_sessions": "Questi quiz sono nel tuo browser:",
+      "session_management": "Quiz",
+      "import": "Importa il quiz",
+      "delete_session": "Cancellare il quiz?",
+      "delete_session_confirmation": "Cancellare difinitivamente il quiz&raquo;<span id=\"session_name\"></span>&laquo;?",
+      "export": "Esporta il quiz",
+      "valid_question": "Round valido",
+      "invalid_question": "Round non valido",
+      "no_sessions": "In questo browser non è stato salvato nessun quiz.",
+      "aria_description": {
+        "hashtag-input-field": "Inserisci qui il nome del quiz",
+        "joinSession": "Partecipa ad un quiz già esistente",
+        "addNewHashtag": "Crea un nuovo quiz",
+        "splashscreen_description": "Lista di tutti i quiz validi e non validi nel tuo browser"
+      }
+    },
+    "hashtag_view": {
+      "hashtag_input": {
+        "already_exists": "Questo nome del quiz è già stato assegnato",
+        "illegal_chars": "Il nome del quiz contiene simboli non validi"
+      },
+      "demo_quiz": {
+        "title": {
+          "1": "Scopri arsnova.click !",
+          "2": "Inserisci»Demo Quiz«e inizia. Apri l´app in un secondo browser e partecipa al quiz in diversi ruoli.",
+          "3": "Visita il nostro blog arsnova.io e scopri come poter inserire i quiz in una lezione o in una presentazione."
+        }
+      }
+    },
+    "leaderboard": {
+      "header": "Classifica",
+      "global_header": "Classifica generale",
+      "title": {
+        "single_question": "Domanda __questionId__ haben gewusst …",
+        "all_questions": "Alles richtig haben …"
+      },
+      "no_attendee_correct": "Nessuno ha risposto correttamente!",
+      "no_attendee_correct_global": "Nessuno ha risposto correttamente a tutte le domande.",
+      "question": "Domanda",
+      "second": "Secondo",
+      "second_plural": "Secondi",
+      "show_more": "Mostra 1 in più",
+      "show_more_plural": "Mostra %s in più",
+      "show_less": "Mostra di meno",
+      "export": "Export (.csv)"
+    },
+    "liveResults": {
+      "title": "Risultati",
+      "title_reading_confirmation": "Domanda letta …",
+      "title_running_countdown": "Votazione in corso…",
+      "question": "Mostrare la domanda",
+      "question_number": "Domanda",
+      "ranking": "Classifica",
+      "reading_confirmation": "Conferma di lettura",
+      "show_more": " Mostra 1 in più",
+      "show_more_plural": " Mostra %s in più",
+      "correct": "Giusto",
+      "wrong": "Sbagliato",
+      "complete_correct": "Tutto esatto",
+      "partially_correct": "In parte esatto",
+      "complete_wrong": "Tutto sbagliato",
+      "back_to_lobby": "Torna alla lobby",
+      "global_ranking": "Classifica generale",
+      "show_question": "Mostra la domanda",
+      "show_question_plural": "Mostra le domande",
+      "start_round": "Inizia il quiz",
+      "start_round_plural": "Inizia il round",
+      "confirm_read": "Ho capito la domanda",
+      "game_over": "Game over",
+      "countdown": "Countdown",
+      "answer_option": "Risposta",
+      "guessed_correct": "Valutato correttamente",
+      "guessed_wrong": "Valutato non correttamente",
+      "correct_answer": "Risposta corretta"
+    },
+    "lobby": {
+      "title": "La lobby del quiz",
+      "yes": "Sì",
+      "no": "No",
+      "ready": "Warten, dass es losgeht …",
+      "show_more": "Mostra uno in più",
+      "show_more_plural": "Mostra %s in più",
+      "start_quiz": "Via!",
+      "kick_member_confirmation": "Allontanare dal quiz la persona&raquo;<span id=\"nickName\"></span>&laquo;?",
+      "add_kicked_member_to_ban_list": "Allontanere per sempre il nickname",
+      "waiting_for_players": "Aspetta gli altri …",
+      "description": {
+        "memberlist_count": "Così tante persone hanno effettuato al momento il login.",
+        "title": "La lobby del quiz mostra i nicknamen dei partecipanti nell´ordine temporale inverso rispetto al loro ingresso.",
+        "waiting_for_players": "Non appena la lobby è piena puoi avviare il round. Attenzione: Dopo aver avviato il quiz nessuno potrà più effettuare il login!"
+      }
+    },
+    "nickname_categories": {
+      "title": "Stabilire il nickname",
+      "back": "Indietro",
+      "available_nicknames": "Nickname disponibili",
+      "choose_all": "Selaziona tutto",
+      "remove_all": "Cancella tutto",
+      "free_choice": "Seleziona liberamente",
+      "chosen_nicknames": "Nickname selezionati",
+      "no_nicks_selected": "Nessun nickname selezionato, quindi tutti possono scegliere il proprio nickname liberamente.",
+      "block_illegal_nicks": "Bloccare i nicknamen inopportuni?",
+      "restrict_to_cas": "Gli user si devono iscrivere? (solo THM)",
+      "category": {
+        "disney": "Disney",
+        "science": "Scienza",
+        "fantasy": "Fantasy",
+        "literature": "Letteratura",
+        "mythology": "Mitologia",
+        "actor": "Film",
+        "politics": "Politica",
+        "turing_award": "Turing-Award"
+      }
+    },
+    "question_type": {
+      "title": "Modifica il tipo di domanda",
+      "currentType": "Tipo attuale di domanda:",
+      "back": "Torna al quiz-manager",
+      "description": {
+        "type_wrapper": "Qui puoi modificare il tipo di domanda. Ogni tipo ha diverse impostazioni. Modifica il tipo di domanda cliccando sul settore corrispondente. Fai attenzione però perché, cambiando il tipo di domanda, le opzioni di risposta precedentemente inserite potrebbero andare perse. Se si cambia da risposta singola a risposta multipla e viceversa, non è un problema",
+        "SingleChoiceQuestion": "Le domande a risposta singola possono contenere tante risposte quante se ne desiderano. Tra esse però solo una deve essere selezionata come corretta.",
+        "YesNoSingleChoiceQuestion": "Le domande sì-no possono contenere solo due risposte (sì e no, überschreibbar).Tra esse però solo una deve essere selezionata come corretta.",
+        "TrueFalseSingleChoiceQuestion": "Le domande vero-falso possono contenere solo due risposte (vero e falso, überschreibbar), Tra esse però solo una deve essere selezionata come corretta.",
+        "MultipleChoiceQuestion": "Le domande a risposta multipla possono contenere tante risposte quante se ne desiderano e possono essere selezionate come corrette tante risposte quante se ne desiderano(almeno una).",
+        "RangedQuestion": "Per le domande di valutazionesi deve indicare come corretto un numero intero. In aggiunta si possomo aumentare o diminuire le tolleranze.",
+        "FreeTextQuestion": "Alla domanda a risposta breve i partecipanti devono rispondere con un testo. Tale testo sarà poi messo a confronto con il valore di riferimnto.",
+        "SurveyQuestion": "I sondaggi possono contenere tante risposte quante se ne desiderano. Esse non saranno valutate. Possono essere del tipo a risposta singola o multipla."
+      }
+    },
+    "questions": {
+      "title": "Domanda",
+      "enter_question_here": "Inserisci qui la domanda. Tutto sarà salvato automaticamente.",
+      "preview": "Preview",
+      "forward": "Vai alle risposte",
+      "back": " Torna al quiz-manager",
+      "single_choice_question": "Domanda a risposta singola",
+      "single_choice_question_yes_no": "Domanda si-no",
+      "single_choice_question_true_false": "Domanda vero-falso",
+      "multiple_choice_question": "Domanda a risposta multipla",
+      "survey_question": "Sondaggio",
+      "ranged_question": "Domanda di valutazione",
+      "free_text_question": "Damanda a risposta breve",
+      "description": {
+        "preview": "Qui puoi vedere, come sarà visualizzato il testo sullo smartphone."
+      }
+    },
+    "quiz_manager": {
+      "title": "Quiz-manager",
+      "available_questions_title": "Modelli",
+      "added_questions_title": "Domande del quiz",
+      "no_added_questions": "Scegli un modello per la tua domanda!",
+      "session_invalid": "Il tuo quiz contiene ancora domande non complete",
+      "session_empty": "Ancora nessuna domanda creata",
+      "connection_lost": "Il collegamento con il server è stato interrotto",
+      "back_to_quiz_administration": "Gestione del quiz",
+      "details": {
+        "aria": {
+          "btn_group": "Scelta delle impostazioni del quiz"
+        },
+        "question_type": {
+          "long": "Tipo di domanda",
+          "short": "Tipo"
+        },
+        "question_text": {
+          "long": "Testo della domanda",
+          "short": "Domanda"
+        },
+        "answeroptions": {
+          "long": "Opzioni di risposta",
+          "short": "Risposte"
+        },
+        "timer": {
+          "long": "Countdown",
+          "short": "Countdown"
+        }
+      },
+      "description": {
+        "available_questions": "Qui puoi vedere tutti i tipi di domanda, tra i quali puoi scegliere. Ogni tipo di domanda offre impostazioni predefinite e opzioni proprie per la configurazione di questo quiz.",
+        "added_questions": "Per aggiungere una domanda, trascina un modello qui oppure clicca sul modello. Se tocchi il modello prescelto,vedi cosa ci puoi fare: modifica una domanda, cambiare l´ordine delle domande oppure cancellare una domanda.",
+        "back_button": "Puoi tornare indietro quando vuoi. Ogni modifica al quiz viene salvata immediatamente nel momento in cui si clicca o si scrive qualcosa senza bisogno di conferma. Questo vale per tutta l´app. Non devi mai salvare niente!",
+        "forward_button": "Se il tuo quiz è completo e sussiste un collegamento con il server, puoi andare alla lobby del quiz e aprire il round."
+      }
+    },
+    "quiz_manager_details": {
+      "back": "Torna alla pagina principale"
+    },
+    "quiz_summary": {
+      "title": "Riepilogo",
+      "quiz_name": "Nome del quiz",
+      "quiz_url": "",
+      "question_amount": "Domande",
+      "validation_question_group": "Status",
+      "question_successful": "La domanda è completa",
+      "question_failed": "La domanda è ancora incompleta",
+      "question_group_successful": "Il tuo quiz è pronto",
+      "question_group_failed": "Il tuo quiz è ancora incompleto",
+      "correct": "Vero",
+      "wrong": "Falso",
+      "question": "Domanda",
+      "text": "Testo",
+      "type": "Tipo",
+      "answer": "Risposta",
+      "answer_plural": "Risposte",
+      "answer_configuration": "Criteri formali della risposta",
+      "answer_configuration_plural": "Criteri formali delle risposte",
+      "timer": "Countdown",
+      "second": "Secondo",
+      "second_plural": "Secondi",
+      "minute": "Minuto",
+      "minute_plural": "Minuti",
+      "hour": "Ora",
+      "hour_plural": "Ore",
+      "validation": "Status",
+      "validation_errors": {
+        "types": {
+          "question": "Domanda",
+          "answerOption": "Risposta"
+        },
+        "reasons": {
+          "question_text_too_small": "Il testo della domanda è troppo corto",
+          "question_text_too_long": "Il testo della domanda è troppo lungo",
+          "timer_too_small": "Il countdown è troppo corto",
+          "timer_too_big": "Il countdown è troppo lungo",
+          "no_valid_answers": "Almeno una risposta deve essere selezionata come corretta",
+          "one_valid_answer_required": "Deve essere selezionata come corretta esattamente exakt (Nur?) una risposta.",
+          "invalid_range": "Nessun valore stimato indicato",
+          "invalid_correct_value": "Il valore stimato deve trovarsi tra il valore minimo e massimo.",
+          "answer_text_empty": "La risposta non può rimanere vuota"
+        }
+      },
+      "edit_quiz": "Modifica il quiz",
+      "start_quiz": "Inizia il quiz",
+      "selected_nicks": "Nickname",
+      "no_selected_nicks": "A volontà beliebig",
+      "hide_selected_nicks": "Nascondi i nickname",
+      "show_selected_nicks": "Mostra inickname",
+      "isRestrictingRudeNicks": "Bloccare i nickname scabrosi?",
+      "isRestrictingToCAS": "Login avvenuto con successo?",
+      "true": "Sì",
+      "false": "No",
+      "description": {
+        "header": "Qui vedi i dati più importanti del tuo round.",
+        "session_url": "Con questo link il tuo pubblico può direttamente prendere parte al quiz senza dover digitare il nome del quiz. Scrivi il link sulla lavagna o nella tua presentazione. Non appena inizi il quiz il tuo pubblico potrà effettuare il login.",
+        "question_group_validation": "La convalida del tuo quiz non va a buon fine, finché il tuo quiz non è pronto, per esempio: non è ancora stata creata una domanda con uno dei modelli, il testo della domanda manca oppure le opzioni della risposta sono incomplete.",
+        "restrict_to_cas": "Se questa impostazione sotto&raquo;Freie Auswahl&laquo; bzw. &raquo;Nicknamen&laquo; è attiva nelle note a piè di pagina, i partecipanti si devono iscrivere al servizio centrale di autentificazione. Nota: Questa opzione è a disposizione solo presso THM.am zentralen Authentifizierungsdienst.",
+        "question_item": "Qui vedi tutti i dati delle tue domande del quiz. Con questi pulsanti in alto puoi rielaborare la domanda.",
+        "validation_errors": "Il tuo quiz può essere avviato solo quando tutti gli errori saranno risolti."
+      }
+    },
+    "theme_switcher": {
+      "set_theme": "Il tuo stile",
+      "select_a_theme_title": "Scegli il tuo stile",
+      "themes": {
+        "theme-arsnova-dot-click-contrast": {
+          "name": "arsnova.click (ricco di contrasti)",
+          "description": "#2: adatto al videoproiettore"
+        },
+        "elegant": {
+          "name": "Eleganz",
+          "description": "#4: Per round impegnativi"
+        },
+        "black_beauty": {
+          "name": "Black Beauty (adatto al videoproiettore)",
+          "description": "#3: per rispariare batteria Akkufreundlich"
+        },
+        "material": {
+          "name": "Material Design Colors",
+          "description": "#1: lo standard"
+        },
+        "decent_blue": {
+          "name": "Decent Blue",
+          "description": "#5: grigio elegante"
+        },
+        "material_hope": {
+          "name": "Material Hope",
+          "description": "#6: verde predominante"
+        },
+        "material-blue": {
+          "name": "Material blue",
+          "description": "#7: blu predominante"
+        },
+        "spiritual-purple": {
+          "name": "Spiritual Purple",
+          "description": "#8: lilla spirituale"
+        },
+        "GreyBlue-Lime": {
+          "name": "GreyBlue Lime",
+          "description": "#9: acromatico"
+        }
+      }
+    },
+    "timer": {
+      "title": "Countdown",
+      "second": "Secondo",
+      "second_plural": "Secondi",
+      "minute": "Minuto",
+      "minute_plural": "Minuti",
+      "hour": "Ora",
+      "hour_plural": "Ore",
+      "forward": "Vai al quiz-manager",
+      "back": "Torna al quiz-manager",
+      "description": "Qui puoi impostare il countdown per le domande. Non appena entrerà in funzione, o non appena tutti i partecimanti avranno risposto alla domanda, emetterà un gong o un fischio e il round sarà terminato."
+    },
+    "translation": {
+      "translations": "La tua ligua",
+      "i18n_currently_not_available": "i18nnon è disponibile al momento!",
+      "beta": "Beta"
+    },
+    "voting": {
+      "title": "Abstimmung",
+      "question": "Mostra la domanda",
+      "send": "Inviare",
+      "seconds_left": "Ancora un secondo!",
+      "seconds_left_plural": "Ancora__value__secondo!",
+      "ranged_question": {
+        "title": "Inserisci il tuo valore stimato!",
+        "input_placeholder": "Risposta"
+      },
+      "free_text_question": {
+        "title": "Inserisci la tua risposa!",
+        "input_placeholder": "Risposta"
+      }
+    }
+  },
+  "plugins": {
+    "markdown_bar": {
+      "visible_text": "Testo indicato Angezeigter Text",
+      "link_text": "Linktext",
+      "link_destination": "Linkziel",
+      "advanced_options": "Opzioni avanzate",
+      "option_width": "Massima larghezza (Pixel)",
+      "option_height": "Massima altezza (Pixel)",
+      "option_position": "Posizione",
+      "option_left": "A sinistra",
+      "option_centered": "Centrato",
+      "option_right": "A destra",
+      "tooltip": {
+        "bold": "Grassetto",
+        "italic": "Corsivo",
+        "line_through": "Depennato",
+        "heading": "Titolo",
+        "hyperlink": "Iperlink",
+        "unordered_list": "Elenco disordinato",
+        "ordered_list": "Elenco ordinato",
+        "latex": "TeX-Formel",
+        "code": "Formattazione del codice",
+        "citation": "Citazione",
+        "image": "Immagine"
+      },
+      "info_content": "Formatta la tua domanda con<a target='_blank' class='hyperlink' href='https://de.wikipedia.org/wiki/Markdown'>Markdown</a>e inserisci immagini, video e formule. Particolarmente divertente: puoi inserire Emojis! Clicca sullo smiley per scegliere l´Emoji che preferisci:<a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'><img style='width:30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/></a>"
+    },
+    "sound": {
+      "running_music": "Countdown (in funzione)",
+      "lobby_music": "La lobby del quiz",
+      "finish_music": "Countdown (fine)",
+      "running_music_detailed": "Audio durante il countdown",
+      "lobby_music_detailed": "Audio nella lobby del quiz",
+      "finish_music_detailed": "Audio alla fine del countdown",
+      "whistle": "Fischio",
+      "silence": "Senza audio",
+      "global_volume": "Volume globale",
+      "volume": "vorgeben il volume",
+      "inactive": "L´audio è spento",
+      "active": "L´audio è attivo",
+      "activated": "Attivato",
+      "deactivated": "Disattivato",
+      "random": "Scelta casuale",
+      "play": "Far suonare",
+      "stop": "Fermare"
+    },
+    "splashscreen": {
+      "question_and_answer": {
+        "answeroption": "",
+        "answeroption_plural": "Risposte",
+        "min_range": "Valore minimo",
+        "correct_value": "Valore esatto",
+        "max_range": "Valore massimo",
+        "reference_value": "Risposta esatta"
+      },
+      "edit_session_confirmation": {
+        "title": "Modificare il quiz?",
+        "text": "Tutti i partecipanti saranno disconnessi e la classifica sarà cancellata.",
+        "continue": "Continuare?"
+      },
+      "remove_question_confirmation": {
+        "title": "Cancellare la domanda?",
+        "text": "Non puoi più tornare indietro!"
+      },
+      "reminder_leaderboard_data": {
+        "title": "Avvertimento",
+        "text": "I dati della classifica saranno cancellati quando lascerai il quiz. Qui puoi esportare i dati per utilizzarli nuovamente.",
+        "continue": "Continuare?"
+      },
+      "return_to_lobby": {
+        "title": "Avvertimento",
+        "text": "Se torni alla lobby del quiz, tutti i round già effettuati saranno resettatti.",
+        "continue": "Continuare?"
+      },
+      "error": {
+        "title": "Avvertenza",
+        "set_text_error": "Il testo dello splashscreen può gesetzt werden benutzt werden?, solo dopo esser stato renderizzato!",
+        "error_messages": {
+          "Internal Server Error": "Errore interno del server",
+          "update_failed": "Si è verificato un errore durante l´aggiornamento della tua domanda.",
+          "session_exists": "Questo quiz esiste già!",
+          "session_exists_warning": "Il nome di questo quiz è già in uso.",
+          "session_exists_arsnova_import": "Dai al tuo quiz un nome univoco:",
+          "session_exists_new": "Dai un nuovo nome:",
+          "session_not_exists": "Questo quiz non esiste!",
+          "hashtag_exists": "Questo nome esiste già!",
+          "session_not_available": "Al momento non si può accedere a questo round.",
+          "private_browsing": "Se il tuo Browser è in modalità privata, arsnova.click funziona solo come partecipante visto che il tuo Browser nega la scrittra della memoria. Disattiva la modalità privata durante l´utilizzo di arsnova.click e avvia arsnova.click nuovamente. Il tuo anonimato è garantito, anche se la modalità privata è disattivata.",
+          "kicked_from_quiz": "Sei stato allontanato dal quiz!",
+          "nick_already_exists": "Questo nome utente esiste già",
+          "export_failed": "Non è stato possibile esportare i dati del quiz! - %s",
+          "not_authorized": "Il quiz non esiste oppure non hai il diritto di leggere questi dati",
+          "maximum_answer_options_exceeded": "Il numero massimo di possibili risposte è stato già raggiunto",
+          "hashtag_not_found": "Purtroppo il nome di questo quiz non è stato trovato",
+          "member_not_found": "Purtroppo il partecipante non è stato trovato",
+          "duplicate_response": "Il partecipante ha già dato una risposta",
+          "answeroption_not_found": "Non esiste nessuna risposta con questo index",
+          "response_timeout": "Ilcountdownè già scaduto",
+          "insert_leaderboard_failed": "Errore nell´aggiunta della risposta nella classifica",
+          "session_closed": "Il round del quiz è terminato",
+          "invalid_data": "I dati da importare sono difettosi/sbagliatizu importierenden!",
+          "invalid_input_data": "I dati inseriti non sono validi o sbagliati fehlerhaft nicht richtig?!",
+          "duplicate_user": "Stai cercando di accedere ad un quiz con un secondo nickname. Questo non è possibile!"
+        }
+      }
+    }
+  },
+  "lib": {
+    "questions": {
+      "question_choice_single_yes_no": {
+        "yes": "Sì",
+        "no": "No"
+      },
+      "question_choice_single_true_false": {
+        "true": "Vero",
+        "false": "Sbagliato"
+      }
+    }
+  }
+}

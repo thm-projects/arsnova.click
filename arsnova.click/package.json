@@ -1,9 +1,11 @@
 {
   "dependencies": {
-    "babel-runtime": "^6.22.0",
-    "excel4node": "^1.2.1",
-    "meteor-node-stubs": "^0.2.4",
-    "phantomjs": "^2.1.7",
-    "webpage": "^0.3.0"
+    "babel-runtime": "~6.25",
+    "child_process": "~1.0",
+    "excel4node": "~1.2",
+    "meteor-node-stubs": "~0.2",
+    "phantomjs-prebuilt": "~2.1",
+    "process": "~0.11",
+    "webpage": "~0.3"
   }
 }

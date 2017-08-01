@@ -26,7 +26,7 @@ import {NicknameCategoriesCollection} from '/lib/nickname_categories/collection.
 import {forbiddenNicks} from './forbiddenNicks.js';
 import {nickCategories} from './nickCategories.js';
 import {themes} from '/shared/themes.js';
-import phantomjs from 'phantomjs';
+import phantomjs from 'phantomjs-prebuilt';
 import * as childProcess from 'child_process';
 import process from 'process';
 

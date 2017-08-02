@@ -64,7 +64,7 @@ function runPendingAnimation() {
 
 export function checkABCDOrdering(data) {
 	let ordered = true;
-	if (!data || data.length < 2) {
+	if (!data || data.length < 2 || data.charAt(0) !== 'a') {
 		return false;
 	}
 	for (let i = 1; i < data.length; i++) {

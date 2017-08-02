@@ -184,6 +184,10 @@ export function parseGithubFlavoredMarkdown(result, overrideLineBreaks = true) {
 export function getQuestionTypes() {
 	return [
 		{
+			id: "ABCDSurveyQuestion",
+			translationName: "view.questions.survey_question_abcd"
+		},
+		{
 			id: "MultipleChoiceQuestion",
 			translationName: "view.questions.multiple_choice_question"
 		},
@@ -210,10 +214,6 @@ export function getQuestionTypes() {
 		{
 			id: "SurveyQuestion",
 			translationName: "view.questions.survey_question"
-		},
-		{
-			id: "ABCDSurveyQuestion",
-			translationName: "view.questions.survey_question_abcd"
 		}
 	];
 }

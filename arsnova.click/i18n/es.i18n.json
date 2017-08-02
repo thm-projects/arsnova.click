@@ -284,7 +284,8 @@
       "edit_session": "Editar el concurso",
       "reenter_session": "Abrir",
       "create_session": "¡Crea un concurso nuevo!",
-      "create_demo_session": "¡Empieza »Demo Quiz«!",
+      "create_demo_session": "¡Empieza \u00BBDemo Quiz\u00BB!",
+      "create_abcd_session": "¡Empieza \u00BBABCD Quiz\u00AB!",
       "quiz_management": "Memoria del concursos",
       "available_sessions": "Esos concursos son en tu navegador:",
       "session_management": "Concursos",
@@ -312,7 +313,8 @@
         "title": {
           "1": "Descubrir arsnova.click",
           "2": "Inserta »Demo Quiz« y empieza. ¡Abre la aplicación en una segunda venta para jugar el concurso con papeles distributivos!",
-          "3": "¡Visita nuestro blog arsnova.io y sabe que usa concursos por la clase o por una ponencia!"
+          "3": "Enter \u00BBABCD\u00AB and run a fast quiz session with only one question and four answer options from A to D. Present the question and the content of the answers to your audience offline.",
+          "4": "¡Visita nuestro blog arsnova.io y sabe que usa concursos por la clase o por una ponencia!"
         }
       }
     },
@@ -414,7 +416,8 @@
         "MultipleChoiceQuestion": "\"Opción múltiple\" preguntas implican cualquier opciones de respuestas. Cualquier opciones (pero al menos una) pueden ser marcado como correcto.",
         "RangedQuestion": "Por preguntas de estimación, una numera natural tiene que ser marcado como correcto. Adicionalmente, puedes fijar una tolerancia baja y alta.",
         "FreeTextQuestion": "Con una \"respuesta corta\" pregunta, los participantes tienen que escribir un texto. Ese texto comparará con la respuesta de referencia",
-        "SurveyQuestion": "Sondeos implican cualquier opciones de respuestas que no será evaluado. Sondeos pueden ser del tipo \"opción única\" u \"opción múltiple\"."
+        "SurveyQuestion": "Sondeos implican cualquier opciones de respuestas que no será evaluado. Sondeos pueden ser del tipo \"opción única\" u \"opción múltiple\".",
+        "ABCDSurveyQuestion": "ABCD preguntas contienen sólo cuatro opciones de respuesta y ningún texto de la pregunta. El contenido debe ser presentado por el Quizmaster fuera de línea antes."
       }
     },
     "questions": {
@@ -428,6 +431,7 @@
       "single_choice_question_true_false": "\"Verdadero/Falso\" pregunta",
       "multiple_choice_question": "\"Opción múltiple\" pregunta",
       "survey_question": "Sondeo",
+      "survey_question_abcd": "ABCD pregunta",
       "ranged_question": "Pregunta de estimación",
       "free_text_question": "\"Respuesta corta\" pregunta",
       "description": {

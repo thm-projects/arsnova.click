@@ -62,9 +62,9 @@ export function findOriginalHashtag(inputHashtag) {
 
 function getIncrementedQuizNameByRef(searchString) {
     let largestIndex = 0;
-    const hashtags = HashtagsCollection.find({hashtag: {$regex: searchString + "*", $options: 'i'}}).fetch();
+    const hashtags = HashtagsCollection.find({hashtag: {$regex: (searchString + "*"), $options: 'i'}}).fetch();
     hashtags.every(function (item) {
-        const tmpIndex = parseInt(item.hashtag.split(" ")[2]);
+        const tmpIndex = parseInt(item.hashtag.split(" ").slice(-1));
         if (tmpIndex > largestIndex) {
             largestIndex = tmpIndex;
         }

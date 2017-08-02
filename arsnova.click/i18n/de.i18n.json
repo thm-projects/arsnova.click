@@ -285,6 +285,7 @@
       "reenter_session": "Öffnen",
       "create_session": "Mach ein neues Quiz!",
       "create_demo_session": "Starte \u00BBDemo Quiz\u00AB!",
+      "create_abcd_session": "Starte \u00BBABCD Quiz\u00AB!",
       "quiz_management": "Quiz-Speicher",
       "available_sessions": "Diese Quizze sind in deinem Browser:",
       "session_management": "Quizze",
@@ -312,7 +313,8 @@
         "title": {
           "1": "Entdecke arsnova.click !",
           "2": "Gib \u00BBDemo Quiz\u00AB ein und starte es. Ruf die App in einem zweiten Browser auf und spiel das Quiz in verteilten Rollen.",
-          "3": "Besuch unseren Blog arsnova.eu und erfahr, wie du Quizze in deinem Unterricht oder in einem Vortrag einsetzen kannst."
+          "3": "Gib \u00BBABCD\u00AB ein und starte eine schnelle Quizsession mit nur einer Frage und 4 Antwortoptionen von A bis D. Die Frage und die Inhalte der Antworten kannst du vorher deinen Zuhörern präsentieren.",
+          "4": "Besuch unseren Blog arsnova.eu und erfahr, wie du Quizze in deinem Unterricht oder in einem Vortrag einsetzen kannst."
         }
       }
     },
@@ -414,7 +416,8 @@
         "MultipleChoiceQuestion": "Multiple-Choice-Fragen enthalten beliebig viele Antwortoptionen, von denen beliebig viele (mindestens jedoch eine) als richtig markiert sein können.",
         "RangedQuestion": "Für die Schätzfrage muss eine Ganzzahl als richtig angegeben werden. Zusätzlich können Toleranzen nach oben und unten festgelegt werden.",
         "FreeTextQuestion": "Bei der Kurzantwort-Frage müssen die Teilnehmenden einen Text eingeben. Dieser wird mit dem Referenzwert verglichen.",
-        "SurveyQuestion": "Umfragen enthalten beliebig viele Antwortoptionen, die nicht bewertet werden. Sie können vom Typ Single-Choice oder Multiple-Choice sein."
+        "SurveyQuestion": "Umfragen enthalten beliebig viele Antwortoptionen, die nicht bewertet werden. Sie können vom Typ Single-Choice oder Multiple-Choice sein.",
+        "ABCDSurveyQuestion": "ABCD Fragen enthalten lediglich 4 Antwortoptionen und keinen Fragetext. Der Inhalt muss vom Quizmaster vorher offline präsentiert werden."
       }
     },
     "questions": {
@@ -428,6 +431,7 @@
       "single_choice_question_true_false": "Wahr-Falsch-Frage",
       "multiple_choice_question": "Multiple-Choice-Frage",
       "survey_question": "Umfrage",
+      "survey_question_abcd": "ABCD-Frage",
       "ranged_question": "Schätzfrage",
       "free_text_question": "Kurzantwort-Frage",
       "description": {

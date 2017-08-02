@@ -51,7 +51,7 @@
 							{{#if isEditingQuiz}}{{_ "view.hashtag_management.reenter_session"}}{{else}}
 							{{#if isAddingDemoQuiz}}{{_ "view.hashtag_management.create_demo_session"}}{{else}}
 							{{#if isAddingABCDQuiz}}{{_ "view.hashtag_management.create_abcd_session"}}{{else}}
-							{{_"view.hashtag_management.create_session"}}
+							{{_ "view.hashtag_management.create_session"}}
 							{{/if}}{{/if}}{{/if}}
 						</span>
 						<span class="glyphicon glyphicon-{{#if isEditingQuiz}}log-in{{else}}{{#if
@@ -63,7 +63,8 @@
 				<div class="row" id="demo-quiz-description">
 					<p>{{_ "view.hashtag_view.demo_quiz.title.1" }}</p>
 					<p>{{_ "view.hashtag_view.demo_quiz.title.2" }}</p>
-					<p>{{_ "view.hashtag_view.demo_quiz.title.3" }}</p>
+                    <p>{{_ "view.hashtag_view.demo_quiz.title.3" }}</p>
+                    <p>{{_ "view.hashtag_view.demo_quiz.title.4" }}</p>
 				</div>
 			{{/unless}}
 		</div>

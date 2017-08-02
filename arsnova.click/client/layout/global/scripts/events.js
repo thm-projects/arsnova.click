@@ -69,6 +69,7 @@ Template.home.events({
 			inputHashtag = hashtagLib.getNewDemoQuizName();
 		} else if (inputHashtag.toLowerCase() === "abcd") {
             Session.set("isAddingQuizType", "abcd");
+            inputHashtag = hashtagLib.getNewABCDQuizName();
         } else {
             Session.set("isAddingQuizType", undefined);
         }

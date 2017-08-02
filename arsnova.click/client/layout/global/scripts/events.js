@@ -65,11 +65,13 @@ Template.home.events({
 			return;
 		}
 		if (inputHashtag.toLowerCase() === "demo quiz") {
-			Session.set("isAddingDemoQuiz", true);
+			Session.set("isAddingQuizType", "demoquiz");
 			inputHashtag = hashtagLib.getNewDemoQuizName();
-		} else {
-			Session.set("isAddingDemoQuiz", false);
-		}
+		} else if (inputHashtag.toLowerCase() === "abcd") {
+            Session.set("isAddingQuizType", "abcd");
+        } else {
+            Session.set("isAddingQuizType", undefined);
+        }
 		if (hashtagLib.eventManagerTracker) {
 			hashtagLib.eventManagerTracker.stop();
 		}
@@ -112,8 +114,10 @@ Template.home.events({
 						},
 						added: function (id, doc) {
 							if (!isNaN(doc.sessionStatus)) {
-								if (Session.get("isAddingDemoQuiz")) {
+								if (Session.get("isAddingQuizType") === "demoquiz") {
 									inputHashtag = hashtagLib.getNewDemoQuizName();
+								} else if (Session.get("isAddingQuizType") === "abcd") {
+									inputHashtag = hashtagLib.getNewABCDQuizName();
 								}
 								originalHashtag = hashtagLib.findOriginalHashtag(inputHashtag);
 								if (doc.sessionStatus === 2) {
@@ -213,64 +217,79 @@ Template.home.events({
 				resolve();
 			}
 		});
-		promise.then(function () {
-			let hashtag = $("#hashtag-input-field").val().trim();
-			if (hashtag.toLowerCase() === "demo quiz") {
-				hashtag = hashtagLib.getNewDemoQuizName();
+		promise.then(function () {let hashtag = $("#hashtag-input-field").val().trim();
+		if (hashtag.toLowerCase() === "demo quiz") {
+			hashtag = hashtagLib.getNewDemoQuizName();
+		}else if (hashtag.toLowerCase() === "abcd") {
+			hashtag = hashtagLib.getNewABCDQuizName();
+		}
+		try {
+			new SimpleSchema({
+				hashtag: hashtagSchema
+			}).validate({hashtag: hashtag});
+		} catch (ex) {
+			new ErrorSplashscreen({
+				autostart: true,
+				errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
+			});
+			return;
+		}
+		const localLoweredHashtags = localData.getAllLoweredHashtags();
+		if ($.inArray(hashtag.toLowerCase(), localLoweredHashtags) > -1 && HashtagsCollection.findOne()) {
+			const session = localData.reenterSession(hashtag);
+			Session.set("questionGroup", session);
+			if (Session.get("questionGroup").isValid()) {
+				sessionStorage.setItem("overrideValidQuestionRedirect", true);
 			}
-			try {
-				new SimpleSchema({
-					hashtag: hashtagSchema
-				}).validate({hashtag: hashtag});
-			} catch (ex) {
-				new ErrorSplashscreen({
-					autostart: true,
-					errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
-				});
-				return;
-			}
-			const localLoweredHashtags = localData.getAllLoweredHashtags();
-			if ($.inArray(hashtag.toLowerCase(), localLoweredHashtags) > -1 && HashtagsCollection.findOne()) {
-				const session = localData.reenterSession(hashtag);
-				Session.set("questionGroup", session);
-				if (Session.get("questionGroup").isValid()) {
+			hashtagLib.addHashtag(Session.get("questionGroup"));
+		} else {
+			let questionGroup = null;
+			const successCallback = function (data) {
+				questionGroup = new DefaultQuestionGroup(data);
+				questionGroup.setHashtag(hashtag);
+				if (questionGroup.isValid()) {
 					sessionStorage.setItem("overrideValidQuestionRedirect", true);
 				}
-				hashtagLib.addHashtag(Session.get("questionGroup"));
-			} else {
-				let questionGroup = null;
-				const successCallback = function (data) {
-					questionGroup = new DefaultQuestionGroup(data);
-					questionGroup.setHashtag(hashtag);
-					if (questionGroup.isValid()) {
-						sessionStorage.setItem("overrideValidQuestionRedirect", true);
-					}
-					localStorage.setItem("showProductTour", true);
-					hashtagLib.addHashtag(questionGroup);
-				};
-				if (hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
-					$.ajax({
-						type: "GET",
-						url: `/demo_quiz/${TAPi18n.getLanguage()}.demo_quiz.json?_=${Date.now()}`,
-						dataType: 'json',
-						success: successCallback,
-						error: function () {
-							$.ajax({
-								type: "GET",
-								url: `/demo_quiz/en.demo_quiz.json?_=${Date.now()}`,
-								dataType: 'json',
-								success: successCallback
-							});
+				localStorage.setItem("showProductTour", true);
+				hashtagLib.addHashtag(questionGroup);
+			};
+			if (hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
+				$.ajax({
+					type: "GET",
+					url: `/predefined_quizzes/demo_quiz/${TAPi18n.getLanguage()}.demo_quiz.json?_=${Date.now()}`,
+					dataType: 'json',
+					success: successCallback,
+					error: function () {
+						$.ajax({
+							type: "GET",
+							url: `/predefined_quizzes/demo_quiz/en.demo_quiz.json?_=${Date.now()}`,
+							dataType: 'json',
+							success: successCallback});
+                    }
+                });
+            } else if (hashtag.toLowerCase().indexOf("abcd") !== -1) {
+                $.ajax({
+                    type: "GET",
+                    url: `/predefined_quizzes/abcd_quiz/${TAPi18n.getLanguage()}.abcd_quiz.json?_=${Date.now()}`,
+                    dataType: 'json',
+                    success: successCallback,
+                    error: function () {
+                        $.ajax({
+                            type: "GET",
+                            url: `/predefined_quizzes/abcd_quiz/en.abcd_quiz.json?_=${Date.now()}`,
+                            dataType: 'json',
+                            success: successCallback
+                        });
 						}
 					});
-				} else {
-					questionGroup = new DefaultQuestionGroup({
-						hashtag: hashtag
-					});
-					hashtagLib.addHashtag(questionGroup);
-				}
+
+			} else {
+				questionGroup = new DefaultQuestionGroup({
+					hashtag: hashtag
+				});
+				hashtagLib.addHashtag(questionGroup);
 			}
-		}, function (rejectReason) {
+		}}, function (rejectReason) {
 			new ErrorSplashscreen({autostart: true, errorMessage: rejectReason});
 		});
 	},

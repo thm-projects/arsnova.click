@@ -206,10 +206,10 @@ Template.progressBarSurveyQuestion.helpers({
 				questionIndex: index,
 				answerOptionNumber: value.answerOptionNumber
 			}).count();
-			const answerTextValue = [value.answerText.replace(/\$\$/g, '$')];
+			const answerTextValue = [value.answerText ? value.answerText.replace(/\$\$/g, '$') : ''];
 			questionLib.parseGithubFlavoredMarkdown(answerTextValue);
 			result.push({
-				name: String.fromCharCode(value.answerOptionNumber + 65) + ": " + answerTextValue[0],
+				name: String.fromCharCode(value.answerOptionNumber + 65) + (value.answerText ? (": " + answerTextValue[0]) : ''),
 				absolute: amount,
 				percent: memberAmount ? (Math.floor((amount * 100) / memberAmount)) : 0,
 				isCorrect: 0,
@@ -372,6 +372,7 @@ Template.liveResults.helpers({
 			case "TrueFalseSingleChoiceQuestion":
 				return "progressBarSingleChoiceQuestion";
 			case "SurveyQuestion":
+			case "ABCDSurveyQuestion":
 				return "progressBarSurveyQuestion";
 			case "MultipleChoiceQuestion":
 				return "progressBarMultipleChoiceQuestion";
@@ -406,9 +407,9 @@ Template.liveResults.helpers({
 		}
 
 		if (Session.get("countdownInitialized")) {
-			return questionDoc.questionList[index].type !== "SurveyQuestion" && index < eventDoc.questionIndex;
+			return ["SurveyQuestion","ABCDSurveyQuestion"].indexOf(questionDoc.questionList[index].type) === -1 && index < eventDoc.questionIndex;
 		} else {
-			return questionDoc.questionList[index].type !== "SurveyQuestion" && index <= eventDoc.questionIndex;
+			return ["SurveyQuestion","ABCDSurveyQuestion"].indexOf(questionDoc.questionList[index].type) === -1 && index <= eventDoc.questionIndex;
 		}
 	},
 	getNormalizedIndex: function (index) {

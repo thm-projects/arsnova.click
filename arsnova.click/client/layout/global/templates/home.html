@@ -47,9 +47,13 @@
 					        class="button button-success tabbable"
 					        disabled="disabled"
 					        aria-describedby="aria-description-addNewHashtag">
-						<span>{{#if isEditingQuiz}}{{_ "view.hashtag_management.reenter_session"}}{{else}}{{#if
-							isAddingDemoQuiz}}{{_ "view.hashtag_management.create_demo_session"}}{{else}}{{_
-							"view.hashtag_management.create_session"}}{{/if}}{{/if}}</span>
+						<span>
+							{{#if isEditingQuiz}}{{_ "view.hashtag_management.reenter_session"}}{{else}}
+							{{#if isAddingDemoQuiz}}{{_ "view.hashtag_management.create_demo_session"}}{{else}}
+							{{#if isAddingABCDQuiz}}{{_ "view.hashtag_management.create_abcd_session"}}{{else}}
+							{{_"view.hashtag_management.create_session"}}
+							{{/if}}{{/if}}{{/if}}
+						</span>
 						<span class="glyphicon glyphicon-{{#if isEditingQuiz}}log-in{{else}}{{#if
 							isAddingDemoQuiz}}send{{else}}edit{{/if}}{{/if}} glyph-right" aria-hidden="true"></span>
 					</button>

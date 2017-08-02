@@ -19,6 +19,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import * as leaderboardLib from "/lib/leaderboard.js";
+import {SurveyQuestion} from '/lib/questions/question_survey.js';
 import * as lib from './lib.js';
 
 Template.createAnswerOptions.helpers({
@@ -32,6 +33,7 @@ Template.createAnswerOptions.helpers({
 			case "TrueFalseSingleChoiceQuestion":
 			case "MultipleChoiceQuestion":
 			case "SurveyQuestion":
+			case "ABCDSurveyQuestion":
 				return Template.defaultAnswerOptionTemplate;
 			case "RangedQuestion":
 				return Template.rangedAnswerOptionTemplate;
@@ -64,7 +66,7 @@ Template.defaultAnswerOptionTemplate.helpers({
 		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() === "SurveyQuestion";
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex] instanceof SurveyQuestion;
 	},
 	canAddAnsweroption: function () {
 		switch (Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName()) {

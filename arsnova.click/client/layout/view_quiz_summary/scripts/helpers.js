@@ -141,7 +141,7 @@ Template.quizSummary.helpers({
 		return "view.quiz_summary." + Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin();
 	},
 	isVotingQuestion: function (questionType) {
-		return questionType === "SurveyQuestion";
+		return ["SurveyQuestion","ABCDSurveyQuestion"].indexOf(questionType) > -1;
 	},
 	isRangedQuestion: function (questionType) {
 		return questionType === "RangedQuestion";

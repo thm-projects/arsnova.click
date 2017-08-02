@@ -85,9 +85,12 @@ Template.connectionQualityHeader.helpers({
 });
 
 Template.home.helpers($.extend({getHashtagSchema: hashtagSchema}, {
-	isAddingDemoQuiz: function () {
-		return Session.get("isAddingDemoQuiz");
-	},
+    isAddingDemoQuiz: function () {
+        return Session.get("isAddingQuizType") === "demoquiz";
+    },
+	isAddingABCDQuiz: function () {
+        return Session.get("isAddingQuizType") === "abcd";
+    },
 	isEditingQuiz: function () {
 		return Session.get("isEditingQuiz");
 	},

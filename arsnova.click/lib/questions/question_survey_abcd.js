@@ -13,38 +13,6 @@ export class ABCDSurveyQuestion extends SurveyQuestion {
 		if (typeof options.type !== "undefined" && options.type !== "ABCDSurveyQuestion") {
 			throw new TypeError("Invalid construction type while creating new ABCDSurveyQuestion");
 		}
-		if (options.type !== "ABCDSurveyQuestion") {
-			options.answerOptionList = [
-				new DefaultAnswerOption({
-					hashtag: options.hashtag,
-					questionIndex: options.questionIndex,
-					answerText: "",
-					answerOptionNumber: 0,
-					isCorrect: false
-				}),
-				new DefaultAnswerOption({
-					hashtag: options.hashtag,
-					questionIndex: options.questionIndex,
-					answerText: "",
-					answerOptionNumber: 1,
-					isCorrect: false
-				}),
-				new DefaultAnswerOption({
-					hashtag: options.hashtag,
-					questionIndex: options.questionIndex,
-					answerText: "",
-					answerOptionNumber: 2,
-					isCorrect: false
-				}),
-				new DefaultAnswerOption({
-					hashtag: options.hashtag,
-					questionIndex: options.questionIndex,
-					answerText: "",
-					answerOptionNumber: 3,
-					isCorrect: false
-				})
-			];
-		}
 		delete options.type;
 		super(options);
 	}
@@ -67,7 +35,7 @@ export class ABCDSurveyQuestion extends SurveyQuestion {
 	}
 
 	isValid() {
-		return this.getAnswerOptionList().length === 4;
+		return this.getAnswerOptionList().length > 1;
 	}
 
 	/**

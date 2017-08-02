@@ -62,6 +62,20 @@ function runPendingAnimation() {
 	}, standardAnimationDelay));
 }
 
+export function checkABCDOrdering(data) {
+	let ordered = true;
+	if (!data || data.length < 2) {
+		return false;
+	}
+	for (let i = 1; i < data.length; i++) {
+		if (data.charCodeAt(i) !== data.charCodeAt(i - 1) + 1) {
+			ordered = false;
+			break;
+		}
+	}
+	return ordered;
+}
+
 export function startPendingAnimation() {
 	if (pendingAnimationRunning) {
 		return;

@@ -9,40 +9,7 @@
       "startTime": 0,
       "questionIndex": 0,
       "displayAnswerText": false,
-      "answerOptionList": [
-        {
-          "hashtag": "ABCD Quiz 1",
-          "questionIndex": 0,
-          "answerText": "",
-          "answerOptionNumber": 0,
-          "isCorrect": false,
-          "type": "DefaultAnswerOption"
-        },
-        {
-          "hashtag": "ABCD Quiz 1",
-          "questionIndex": 0,
-          "answerText": "",
-          "answerOptionNumber": 1,
-          "isCorrect": false,
-          "type": "DefaultAnswerOption"
-        },
-        {
-          "hashtag": "ABCD Quiz 1",
-          "questionIndex": 0,
-          "answerText": "",
-          "answerOptionNumber": 2,
-          "isCorrect": false,
-          "type": "DefaultAnswerOption"
-        },
-        {
-          "hashtag": "ABCD Quiz 1",
-          "questionIndex": 0,
-          "answerText": "",
-          "answerOptionNumber": 3,
-          "isCorrect": false,
-          "type": "DefaultAnswerOption"
-        }
-      ],
+      "answerOptionList": [],
       "type": "ABCDSurveyQuestion",
       "multipleSelectionEnabled": false
     }

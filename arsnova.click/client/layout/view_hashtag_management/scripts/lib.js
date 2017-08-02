@@ -98,7 +98,7 @@ export function connectEventManager(hashtag) {
 				Meteor.call("EventManagerCollection.setActiveQuestion", hashtag, 0);
 			}
 			if (sessionStorage.getItem("overrideValidQuestionRedirect")) {
-				if (Session.get("questionGroup").isValid() || Session.get("questionGroup").getHashtag().toLowerCase().indexOf("demo quiz") !== -1) {
+				if (Session.get("questionGroup").isValid() || hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
 					Meteor.call("MemberListCollection.removeFromSession", hashtag);
 					Meteor.call("EventManagerCollection.setActiveQuestion", hashtag, 0);
 					Meteor.call("EventManagerCollection.setSessionStatus", hashtag, 2);
@@ -135,10 +135,11 @@ export function addHashtag(questionGroup) {
 				connectEventManager(questionGroup.getHashtag());
 			}
 		});
+	} else {
+		localData.addHashtag(questionGroup);
+		Session.set("questionGroup", questionGroup);
+		connectEventManager(questionGroup.getHashtag());
 	}
-	localData.addHashtag(questionGroup);
-	Session.set("questionGroup", questionGroup);
-	connectEventManager(questionGroup.getHashtag());
 }
 
 export function trimIllegalChars(hashtag) {

@@ -17,6 +17,7 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 import {getQuestionTypes} from '/client/layout/view_questions/scripts/lib.js';
 
 Template.quizSummary.helpers({
@@ -148,5 +149,17 @@ Template.quizSummary.helpers({
 	},
 	isFreeTextQuestion: function (questionType) {
 		return questionType === "FreeTextQuestion";
+	},
+	showQuestionText: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() !== 'ABCDSurveyQuestion';
+	},
+	showAnsweroptions: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() !== 'ABCDSurveyQuestion';
 	}
 });

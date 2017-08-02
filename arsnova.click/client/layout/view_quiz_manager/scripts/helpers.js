@@ -33,5 +33,23 @@ Template.quizManagerDetails.helpers({
 	},
 	isXsDevice: function () {
 		return $(document).width() <= 768;
+	},
+	canEditQuestionText: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() !== 'ABCDSurveyQuestion';
+	},
+	canEditAnsweroptions: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() !== 'ABCDSurveyQuestion';
+	},
+	canEditTimer: function () {
+		return true;
+	},
+	canEditQuestionType: function () {
+		return true;
 	}
 });

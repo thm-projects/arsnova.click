@@ -21,16 +21,16 @@ import {Router} from 'meteor/iron:router';
 import {generateExportData} from './lib.js';
 
 Template.leaderboardFooterNavButtons.events({
-	'click #showMore': ()=> {
+	'click #showMore': () => {
 		Session.set("responsesCountOverride", true);
 	},
-	'click #showLess': ()=> {
+	'click #showLess': () => {
 		Session.set("responsesCountOverride", false);
 	},
-	'click #js-btn-backToResults': ()=> {
+	'click #js-btn-backToResults': () => {
 		Router.go("/" + Router.current().params.quizName + "/results");
 	},
-	'click #downloadData': (event)=> {
+	'click #downloadData': (event) => {
 		Session.set("hasDownloadedLeaderboardData", true);
 		if (navigator.msSaveOrOpenBlob) {
 			event.stopPropagation();

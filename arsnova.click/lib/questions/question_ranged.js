@@ -15,7 +15,7 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @param options.rangeMax The maximum range which will be accepted as correct
 	 * @param options.correctValue The absolute correct value
 	 */
-	constructor (options) {
+	constructor(options) {
 		if (typeof options.type !== "undefined" && options.type !== "RangedQuestion") {
 			throw new TypeError("Invalid construction type while creating new RangedQuestion");
 		}
@@ -31,7 +31,7 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @param {Number} max The maximum allowed range
 	 * @throws {Error} If max is not a Number or max is smaller than or equal to the minimum range
 	 */
-	setMaxRange (max) {
+	setMaxRange(max) {
 		if (typeof max !== "number" || max <= this.getMinRange()) {
 			throw new Error("Invalid argument list " + max + ", " + this.getMinRange() + " for RangedQuestion.setMaxRange");
 		}
@@ -43,7 +43,7 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @param {Number} min The minimum allowed range
 	 * @throws {Error} If min is not a Number or min is bigger than or equal to the maximum range
 	 */
-	setMinRange (min) {
+	setMinRange(min) {
 		if (typeof min !== "number" || min >= this.getMaxRange()) {
 			throw new Error("Invalid argument list " + min + ", " + this.getMaxRange() + " for RangedQuestion.setMinRange");
 		}
@@ -56,7 +56,7 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @param {Number} max The maximum allowed range
 	 * @throws {Error} If min or max are not Numbers or min is bigger than or equal to max
 	 */
-	setRange (min, max) {
+	setRange(min, max) {
 		if (typeof min !== "number" || typeof max !== "number" || min >= max) {
 			throw new Error("Invalid argument list for RangedQuestion.setRange");
 		}
@@ -68,7 +68,7 @@ export class RangedQuestion extends AbstractQuestion {
 	 * Returns the current max range
 	 * @returns {Number} The current max range
 	 */
-	getMaxRange () {
+	getMaxRange() {
 		return this[rangeMax];
 	}
 
@@ -76,18 +76,18 @@ export class RangedQuestion extends AbstractQuestion {
 	 * Returns the current min range
 	 * @returns {Number} The current min range
 	 */
-	getMinRange () {
+	getMinRange() {
 		return this[rangeMin];
 	}
 
-	setCorrectValue (value) {
+	setCorrectValue(value) {
 		if (typeof value !== "number") {
 			throw new Error("Invalid argument list for RangedQuestion.setCorrectValue");
 		}
 		this[correctValue] = value;
 	}
 
-	getCorrectValue () {
+	getCorrectValue() {
 		return this[correctValue];
 	}
 
@@ -96,8 +96,13 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @see AbstractQuestion.serialize()
 	 * @returns {{hashtag, questionText, type, timer, startTime, questionIndex, answerOptionList}|{hashtag: String, questionText: String, type: AbstractQuestion, timer: Number, startTime: Number, questionIndex: Number, answerOptionList: Array}}
 	 */
-	serialize () {
-		return Object.assign(super.serialize(), {type: "RangedQuestion", rangeMin: this.getMinRange(), rangeMax: this.getMaxRange(), correctValue: this.getCorrectValue()});
+	serialize() {
+		return Object.assign(super.serialize(), {
+			type: "RangedQuestion",
+			rangeMin: this.getMinRange(),
+			rangeMax: this.getMaxRange(),
+			correctValue: this.getCorrectValue()
+		});
 	}
 
 	/**
@@ -106,7 +111,7 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @see AbstractQuestion.isValid()
 	 * @returns {boolean} True, if the complete Question instance is valid, False otherwise
 	 */
-	isValid () {
+	isValid() {
 		return super.isValid() &&
 			this.getAnswerOptionList().length === 0 &&
 			this.getMinRange() < this.getMaxRange() &&
@@ -118,15 +123,21 @@ export class RangedQuestion extends AbstractQuestion {
 	 * Gets the validation error reason from the question and all included answerOptions as a stackable array
 	 * @returns {Array} Contains an Object which holds the number of the current question and the reason why the validation has failed
 	 */
-	getValidationStackTrace () {
+	getValidationStackTrace() {
 		const parentStackTrace = super.getValidationStackTrace();
 		const hasValidRange = this.getMinRange() < this.getMaxRange();
 		const hasValidCorrectValue = this.getCorrectValue() >= this.getMinRange() && this.getCorrectValue() <= this.getMaxRange();
 		if (!hasValidRange) {
-			parentStackTrace.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "invalid_range"});
+			parentStackTrace.push({
+				occuredAt: {type: "question", id: this.getQuestionIndex()},
+				reason: "invalid_range"
+			});
 		}
 		if (!hasValidCorrectValue) {
-			parentStackTrace.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "invalid_correct_value"});
+			parentStackTrace.push({
+				occuredAt: {type: "question", id: this.getQuestionIndex()},
+				reason: "invalid_correct_value"
+			});
 		}
 		return parentStackTrace;
 	}
@@ -138,7 +149,7 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @param {RangedQuestion} question The Question instance which should be checked
 	 * @returns {boolean} True if both instances are completely equal, False otherwise
 	 */
-	equals (question) {
+	equals(question) {
 		return super.equals(question) && question.getMaxRange() === this.getMaxRange() && question.getMinRange() === this.getMinRange() && question.getCorrectValue() === this.getCorrectValue();
 	}
 
@@ -147,7 +158,7 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-clone
 	 * @returns {RangedQuestion} An independent deep copy of the current instance
 	 */
-	clone () {
+	clone() {
 		return new RangedQuestion(this.serialize());
 	}
 
@@ -156,11 +167,11 @@ export class RangedQuestion extends AbstractQuestion {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
 	 * @returns {String} The name of the instantiated class
 	 */
-	typeName () {
+	typeName() {
 		return "RangedQuestion";
 	}
 
-	translationReferrer () {
+	translationReferrer() {
 		return "view.questions.ranged_question";
 	}
 }

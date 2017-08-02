@@ -15,7 +15,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 * @see AbstractAnswerOption.constructor()
 	 * @param {{hashtag:String,questionIndex:Number,answerText:String,answerOptionNumber:Number,type:String,configCaseSensitive:Boolean,configTrimWhitespaces:Boolean,configUseKeywords:Boolean,configUsePunctuation:Boolean}} options An object containing the parameters for creating an AnswerOption instance. The type attribute is optional.
 	 */
-	constructor (options) {
+	constructor(options) {
 		if (typeof options.type !== "undefined" && options.type !== TYPE) {
 			throw new TypeError("Invalid construction type while creating new " + TYPE + ", got: " + options.type);
 		}
@@ -39,7 +39,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 * @throws ConfigNotFoundError If the specified configIdentifier does not exist
 	 * @throws InvalidParameterError If the specified configValue is not of type Boolean
 	 */
-	setConfig (configIdentifier, configValue) {
+	setConfig(configIdentifier, configValue) {
 		if (typeof configValue !== "boolean") {
 			throw new Error("Invalid Parameter");
 		}
@@ -65,7 +65,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 * Gets the currently set configuration as an array containing the values as object
 	 * @returns {*[]} The currently set configuration. The Objects contain the configTitle as localized config name and the configEnabled as localized true or false values
 	 */
-	getConfig () {
+	getConfig() {
 		return [
 			{
 				configTitle: "view.answeroptions.free_text_question.config_case_sensitive",
@@ -90,7 +90,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 * Returns the currently set configuration if the match of the correct answer is case sensitive
 	 * @returns {Boolean} The currently set configuration for the case sensitive check
 	 */
-	getConfigCaseSensitive () {
+	getConfigCaseSensitive() {
 		return this[configCaseSensitive];
 	}
 
@@ -98,7 +98,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 * Sets the currently set configuration if the match of the correct answer is case sensitive
 	 * @param {Boolean} newVal The new configuration setting
 	 */
-	setConfigCaseSensitive (newVal) {
+	setConfigCaseSensitive(newVal) {
 		if (typeof newVal === "undefined" || typeof newVal !== "boolean") {
 			throw TypeError("Invalid argument for " + TYPE + ".setConfigCaseSensitive: ", newVal);
 		}
@@ -109,7 +109,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 * Returns the currently set configuration if the match of the correct answer shall trim all whitespaces in the given answer
 	 * @returns {Boolean} The currently set configuration for the trim whitespaces check
 	 */
-	getConfigTrimWhitespaces () {
+	getConfigTrimWhitespaces() {
 		return this[configTrimWhitespaces];
 	}
 
@@ -117,7 +117,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 * Sets the currently set configuration if the match of the correct answer shall trim all whitespaces in the given answer
 	 * @param {Boolean} newVal The new configuration setting
 	 */
-	setConfigTrimWhitespaces (newVal) {
+	setConfigTrimWhitespaces(newVal) {
 		if (typeof newVal === "undefined" || typeof newVal !== "boolean") {
 			throw TypeError("Invalid type for " + TYPE + ".setConfigTrimWhitespaces: ", newVal);
 		}
@@ -128,7 +128,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 * Returns the currently set configuration if the match of the correct answer shall only check the keywords
 	 * @returns {Boolean} The currently set configuration if the answer should only check keywords
 	 */
-	getConfigUseKeywords () {
+	getConfigUseKeywords() {
 		return this[configUseKeywords];
 	}
 
@@ -136,7 +136,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 * Sets the currently set configuration if the match of the correct answer shall only check the keywords
 	 * @param {Boolean} newVal The new configuration setting
 	 */
-	setConfigUseKeywords (newVal) {
+	setConfigUseKeywords(newVal) {
 		if (typeof newVal === "undefined" || typeof newVal !== "boolean") {
 			throw TypeError("Invalid type for " + TYPE + ".setConfigUseKeywords: ", newVal);
 		}
@@ -147,7 +147,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 * Returns the currently set configuration if the match of the correct answer shall check the punctuation aswell
 	 * @returns {Boolean} The currently set configuration for the use punctuation check
 	 */
-	getConfigUsePunctuation () {
+	getConfigUsePunctuation() {
 		return this[configUsePunctuation];
 	}
 
@@ -155,7 +155,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 * Sets the currently set configuration if the match of the correct answer shall check the punctuation aswell
 	 * @param {Boolean} newVal The new configuration setting
 	 */
-	setConfigUsePunctuation (newVal) {
+	setConfigUsePunctuation(newVal) {
 		if (typeof newVal === "undefined" || typeof newVal !== "boolean") {
 			throw TypeError("Invalid type for " + TYPE + ".setConfigUsePunctuation: ", newVal);
 		}
@@ -167,7 +167,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-clone
 	 * @returns {FreeTextAnswerOption} An independent deep copy of the current instance
 	 */
-	clone () {
+	clone() {
 		return new FreeTextAnswerOption(this.serialize());
 	}
 
@@ -175,7 +175,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 * Serialize the instance object to a JSON compatible object
 	 * @returns {{hashtag:String,questionIndex:Number,answerText:String,answerOptionNumber:Number,configCaseSensitive:Boolean,configTrimWhitespaces:Boolean,configUseKeywords:Boolean,configUseKeywords:Boolean,configUsePunctuation:Boolean,type:String}}
 	 */
-	serialize () {
+	serialize() {
 		return Object.assign(super.serialize(), {
 			configCaseSensitive: this.getConfigCaseSensitive(),
 			configTrimWhitespaces: this.getConfigTrimWhitespaces(),
@@ -191,7 +191,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 * @param {AbstractAnswerOption} answerOption The AnswerOption instance which should be checked
 	 * @returns {boolean} True if both instances are completely equal, False otherwise
 	 */
-	equals (answerOption) {
+	equals(answerOption) {
 		return super.equals(answerOption) &&
 			answerOption instanceof FreeTextAnswerOption &&
 			answerOption.getConfigCaseSensitive() === this.getConfigCaseSensitive() &&
@@ -205,7 +205,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
 	 * @returns {String} The name of the instantiated class
 	 */
-	typeName () {
+	typeName() {
 		return TYPE;
 	}
 
@@ -215,7 +215,7 @@ export class FreeTextAnswerOption extends AbstractAnswerOption {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-toJSONValue
 	 * @returns {{hashtag:String,questionIndex:Number,answerText:String,answerOptionNumber:Number,configCaseSensitive:Boolean,configTrimWhitespaces:Boolean,configUseKeywords:Boolean,configUseKeywords:Boolean,configUsePunctuation:Boolean,type:String}}
 	 */
-	toJSONValue () {
+	toJSONValue() {
 		return this.serialize();
 	}
 }

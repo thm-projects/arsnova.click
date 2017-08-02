@@ -54,7 +54,9 @@ Template.home.events({
 		const hashtagDoc = HashtagsCollection.findOne({hashtag: originalHashtag});
 
 		inputTarget.popover("destroy");
-		if (["?", "/", "\\", "#", "\"", "'"].some(function (v) { return inputHashtag.indexOf(v) >= 0; })) {
+		if (["?", "/", "\\", "#", "\"", "'"].some(function (v) {
+				return inputHashtag.indexOf(v) >= 0;
+			})) {
 			$("#joinSession, #addNewHashtag").attr("disabled", "disabled");
 			inputTarget.popover({
 				title: TAPi18n.__("view.hashtag_view.hashtag_input.illegal_chars"),
@@ -68,11 +70,11 @@ Template.home.events({
 			Session.set("isAddingQuizType", "demoquiz");
 			inputHashtag = hashtagLib.getNewDemoQuizName();
 		} else if (inputHashtag.toLowerCase() === "abcd") {
-            Session.set("isAddingQuizType", "abcd");
-            inputHashtag = hashtagLib.getNewABCDQuizName();
-        } else {
-            Session.set("isAddingQuizType", undefined);
-        }
+			Session.set("isAddingQuizType", "abcd");
+			inputHashtag = hashtagLib.getNewABCDQuizName();
+		} else {
+			Session.set("isAddingQuizType", undefined);
+		}
 		if (hashtagLib.eventManagerTracker) {
 			hashtagLib.eventManagerTracker.stop();
 		}
@@ -255,20 +257,20 @@ Template.home.events({
 				hashtagLib.addHashtag(questionGroup);
 			};
 			if (hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
-				$.ajax({
-					type: "GET",
-					url: `/predefined_quizzes/demo_quiz/${TAPi18n.getLanguage()}.demo_quiz.json?_=${Date.now()}`,
-					dataType: 'json',
-					success: successCallback,
-					error: function () {
-						$.ajax({
-							type: "GET",
-							url: `/predefined_quizzes/demo_quiz/en.demo_quiz.json?_=${Date.now()}`,
-							dataType: 'json',
-							success: successCallback});
-                    }
-                });
-            } else if (hashtag.toLowerCase().indexOf("abcd") !== -1) {
+                $.ajax({
+                    type: "GET",
+                    url: `/predefined_quizzes/demo_quiz/${TAPi18n.getLanguage()}.demo_quiz.json?_=${Date.now()}`,
+                    dataType: 'json',
+                    success: successCallback,
+                    error: function () {
+                        $.ajax({
+                            type: "GET",
+                            url: `/predefined_quizzes/demo_quiz/en.demo_quiz.json?_=${Date.now()}`,
+                            dataType: 'json',
+                            success: successCallback});
+                        }
+                    });
+                } else if (hashtag.toLowerCase().indexOf("abcd") !== -1) {
                 $.ajax({
                     type: "GET",
                     url: `/predefined_quizzes/abcd_quiz/${TAPi18n.getLanguage()}.abcd_quiz.json?_=${Date.now()}`,
@@ -281,9 +283,8 @@ Template.home.events({
                             dataType: 'json',
                             success: successCallback
                         });
-						}
-					});
-
+                    }
+                });
 			} else {
 				questionGroup = new DefaultQuestionGroup({
 					hashtag: hashtag

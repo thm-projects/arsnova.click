@@ -103,7 +103,7 @@ Template.qrCodeDisplay.helpers({
 		if (!Router.current().params.quizName) {
 			return;
 		}
-		return window.location.host + "/" + Router.current().params.quizName.replace(/ /g,"+");
+		return window.location.host + "/" + Router.current().params.quizName.replace(/ /g, "+");
 	}
 });
 

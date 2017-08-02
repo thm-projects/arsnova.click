@@ -30,7 +30,7 @@ Template.questionTypeView.onRendered(function () {
 		}).get());
 		questionTypeWrapper.height(maxHeight);
 	};
-	$(window).on("resize",function () {
+	$(window).on("resize", function () {
 		calculateRowHeight();
 	});
 	Meteor.defer(function () {

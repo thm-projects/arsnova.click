@@ -31,7 +31,10 @@ Template.memberlist.helpers({
 	},
 	learners: function () {
 		const limit = localData.containsHashtag(Router.current().params.quizName) ? Session.get("maxLearnerButtons") : Session.get("maxLearnerButtons") - 1;
-		const sortParamObj = Session.get("learnerCountOverride") ? {lowerCaseNick: 1} : {limit: limit, sort: {insertDate: -1}};
+		const sortParamObj = Session.get("learnerCountOverride") ? {lowerCaseNick: 1} : {
+			limit: limit,
+			sort: {insertDate: -1}
+		};
 		const result = [
 			MemberListCollection.find({nick: sessionStorage.getItem(Router.current().params.quizName + "nick")}, {
 				limit: 1
@@ -68,7 +71,7 @@ Template.memberlistTitel.helpers({
 });
 
 Template.memberlistFooterNavButtons.helpers({
-	hasTooMuchButtons: ()=> {
+	hasTooMuchButtons: () => {
 		return Session.get("learnerCountOverride") || (Session.get("allMembersCount") - Session.get("maxLearnerButtons") > 0);
 	},
 	invisibleLearnerCount: function () {

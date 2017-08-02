@@ -22,7 +22,10 @@ import {userNickSchema} from '/lib/member_list/collection.js';
 
 Meteor.methods({
 	'NicknameCategoriesCollection.addNickname': function (name, category) {
-		new SimpleSchema({nick: userNickSchema, nickCategory: nickCategorySchema}).validate({nick: name, nickCategory: category});
+		new SimpleSchema({nick: userNickSchema, nickCategory: nickCategorySchema}).validate({
+			nick: name,
+			nickCategory: category
+		});
 		NicknameCategoriesCollection.insert({nick: name, nickCategory: category});
 	}
 });

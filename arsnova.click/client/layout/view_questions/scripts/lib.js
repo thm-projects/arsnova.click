@@ -195,10 +195,10 @@ export function getQuestionTypes() {
 			id: "YesNoSingleChoiceQuestion",
 			translationName: "view.questions.single_choice_question_yes_no"
 		},
-        {
-            id: "TrueFalseSingleChoiceQuestion",
-            translationName: "view.questions.single_choice_question_true_false"
-        },
+		{
+			id: "TrueFalseSingleChoiceQuestion",
+			translationName: "view.questions.single_choice_question_true_false"
+		},
 		{
 			id: "RangedQuestion",
 			translationName: "view.questions.ranged_question"
@@ -211,9 +211,9 @@ export function getQuestionTypes() {
 			id: "SurveyQuestion",
 			translationName: "view.questions.survey_question"
 		},
-        {
-            id: "ABCDSurveyQuestion",
-            translationName: "view.questions.survey_question_abcd"
-        }
+		{
+			id: "ABCDSurveyQuestion",
+			translationName: "view.questions.survey_question_abcd"
+		}
 	];
 }

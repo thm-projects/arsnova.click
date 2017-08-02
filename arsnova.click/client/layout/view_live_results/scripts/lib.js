@@ -53,8 +53,7 @@ export function deleteCountdown() {
  * @param max Maximum range
  * @returns {number} A random integer between min and max
  */
-export function randomIntFromInterval(min, max)
-{
+export function randomIntFromInterval(min, max) {
 	return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
@@ -315,7 +314,8 @@ export function calculateButtonCount() {
 	 - subtract the attendee-in-quiz-wrapper height (the session information for the attendees)
 	 - subtract the margin to the top (the title or the show more button)
 	 */
-	const viewport = $(".contentPosition"), learnerListMargin = $('.learner-list').length > 0 ? parseInt($('.learner-list').first().css('margin-top').replace("px", "")) : 0;
+	const viewport = $(".contentPosition"),
+		learnerListMargin = $('.learner-list').length > 0 ? parseInt($('.learner-list').first().css('margin-top').replace("px", "")) : 0;
 
 	const viewPortHeight = viewport.outerHeight() - $('.question-title').outerHeight(true) - $('.readingConfirmationProgressRow').outerHeight(true) - $('.btn-more-learners').outerHeight(true) - learnerListMargin;
 

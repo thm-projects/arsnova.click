@@ -25,20 +25,23 @@ const startTime = Symbol("startTime");
 const endTime = Symbol("endTime");
 
 class Timer {
-	constructor (action) {
+	constructor(action) {
 		this[actionGroup] = action;
 	}
-	start () {
+
+	start() {
 		if (!(this[startTime])) {
 			this[startTime] = Date.now();
 		}
 	}
-	end () {
+
+	end() {
 		if (!(this[endTime])) {
 			this[endTime] = Date.now();
 		}
 	}
-	getTimeDiff () {
+
+	getTimeDiff() {
 		const timeDiff = this[endTime] - this[startTime];
 		if (isNaN(timeDiff)) {
 			return -1;
@@ -83,16 +86,61 @@ AnalyzeTimers = function () {
 	const routeToLeaderboardTimers = PerformanceAnalysisCollection.find({actionGroup: "routeToLeaderboard"}).fetch();
 
 	const result = {
-		mobileBrowserTimers: {overallTimeDiff: 0, averageTimeDiff: 0, elementCount: mobileBrowserTimers.length, rawData: mobileBrowserTimers},
-		mobileCordovaTimers: {overallTimeDiff: 0, averageTimeDiff: 0, elementCount: mobileCordovaTimers.length, rawData: mobileCordovaTimers},
-		desktopTimers: {overallTimeDiff: 0, averageTimeDiff: 0, elementCount: desktopTimers.length, rawData: desktopTimers},
+		mobileBrowserTimers: {
+			overallTimeDiff: 0,
+			averageTimeDiff: 0,
+			elementCount: mobileBrowserTimers.length,
+			rawData: mobileBrowserTimers
+		},
+		mobileCordovaTimers: {
+			overallTimeDiff: 0,
+			averageTimeDiff: 0,
+			elementCount: mobileCordovaTimers.length,
+			rawData: mobileCordovaTimers
+		},
+		desktopTimers: {
+			overallTimeDiff: 0,
+			averageTimeDiff: 0,
+			elementCount: desktopTimers.length,
+			rawData: desktopTimers
+		},
 		actionGroupTimers: {
-			"initLoad": {overallTimeDiff: 0, averageTimeDiff: 0, elementCount: initLoadTimers.length, rawData: initLoadTimers},
-			"clickOnNicknameForward": {overallTimeDiff: 0, averageTimeDiff: 0, elementCount: clickOnNicknameForwardTimers.length, rawData: clickOnNicknameForwardTimers},
-			"routeToVotingView": {overallTimeDiff: 0, averageTimeDiff: 0, elementCount: routeToVotingViewTimers.length, rawData: routeToVotingViewTimers},
-			"clickOnResponseButton": {overallTimeDiff: 0, averageTimeDiff: 0, elementCount: clickOnResponseButtonTimers.length, rawData: clickOnResponseButtonTimers},
-			"routeToLiveResults": {overallTimeDiff: 0, averageTimeDiff: 0, elementCount: routeToLiveResultsTimers.length, rawData: routeToLiveResultsTimers},
-			"routeToLeaderboard": {overallTimeDiff: 0, averageTimeDiff: 0, elementCount: routeToLeaderboardTimers.length, rawData: routeToLeaderboardTimers}
+			"initLoad": {
+				overallTimeDiff: 0,
+				averageTimeDiff: 0,
+				elementCount: initLoadTimers.length,
+				rawData: initLoadTimers
+			},
+			"clickOnNicknameForward": {
+				overallTimeDiff: 0,
+				averageTimeDiff: 0,
+				elementCount: clickOnNicknameForwardTimers.length,
+				rawData: clickOnNicknameForwardTimers
+			},
+			"routeToVotingView": {
+				overallTimeDiff: 0,
+				averageTimeDiff: 0,
+				elementCount: routeToVotingViewTimers.length,
+				rawData: routeToVotingViewTimers
+			},
+			"clickOnResponseButton": {
+				overallTimeDiff: 0,
+				averageTimeDiff: 0,
+				elementCount: clickOnResponseButtonTimers.length,
+				rawData: clickOnResponseButtonTimers
+			},
+			"routeToLiveResults": {
+				overallTimeDiff: 0,
+				averageTimeDiff: 0,
+				elementCount: routeToLiveResultsTimers.length,
+				rawData: routeToLiveResultsTimers
+			},
+			"routeToLeaderboard": {
+				overallTimeDiff: 0,
+				averageTimeDiff: 0,
+				elementCount: routeToLeaderboardTimers.length,
+				rawData: routeToLeaderboardTimers
+			}
 		},
 		rawData: PerformanceAnalysisCollection.find().fetch()
 	};

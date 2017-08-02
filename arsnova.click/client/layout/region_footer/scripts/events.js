@@ -187,7 +187,9 @@ const clickEvents = {
 						});
 						$('#hashtagRename-input-field').on('input', function (event) {
 							const inputHashtag = $(event.target).val();
-							if (["?", "/", "\\"].some(function (v) { return inputHashtag.indexOf(v) >= 0; })) {
+							if (["?", "/", "\\"].some(function (v) {
+									return inputHashtag.indexOf(v) >= 0;
+								})) {
 								$("#js-btn-importSession").attr("disabled", "disabled");
 								return;
 							}
@@ -373,8 +375,7 @@ Template.footer.events($.extend({}, clickEvents, {
 	}
 }));
 
-Template.showMore.events($.extend({}, clickEvents, {
-}));
+Template.showMore.events($.extend({}, clickEvents, {}));
 
 Template.contactHeaderBar.events({
 	"click #tos": function () {
@@ -394,21 +395,13 @@ Template.contactHeaderBar.events({
 	}
 });
 
-Template.about.events($.extend({}, {
+Template.about.events($.extend({}, {}));
 
-}));
+Template.agb.events($.extend({}, {}));
 
-Template.agb.events($.extend({}, {
+Template.imprint.events($.extend({}, {}));
 
-}));
-
-Template.imprint.events($.extend({}, {
-
-}));
-
-Template.dataprivacy.events($.extend({}, {
-
-}));
+Template.dataprivacy.events($.extend({}, {}));
 
 Template.footerNavButtons.events({
 	'click #forwardButton': function () {

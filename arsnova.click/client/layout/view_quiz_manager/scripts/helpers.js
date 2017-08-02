@@ -1,4 +1,3 @@
-
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
@@ -14,13 +13,13 @@ Template.quizManager.helpers({
 	getDescriptionForQuestionType: function (typeName) {
 		return "view.question_type.description." + typeName;
 	},
-	hasQuestionsAdded: ()=> {
+	hasQuestionsAdded: () => {
 		if (!Session.get("questionGroup")) {
 			return;
 		}
 		return Session.get("questionGroup").getQuestionList().length > 0;
 	},
-	isFirstStart: ()=> {
+	isFirstStart: () => {
 		if (!Session.get("questionGroup")) {
 			return;
 		}

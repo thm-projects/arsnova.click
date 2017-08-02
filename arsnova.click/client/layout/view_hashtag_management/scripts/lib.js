@@ -61,24 +61,24 @@ export function findOriginalHashtag(inputHashtag) {
 }
 
 function getIncrementedQuizNameByRef(searchString) {
-    let largestIndex = 0;
-    const hashtags = HashtagsCollection.find({hashtag: {$regex: (searchString + "*"), $options: 'i'}}).fetch();
-    hashtags.every(function (item) {
-        const tmpIndex = parseInt(item.hashtag.split(" ").slice(-1));
-        if (tmpIndex > largestIndex) {
-            largestIndex = tmpIndex;
-        }
-        return true;
-    });
-    return largestIndex + 1;
+	let largestIndex = 0;
+	const hashtags = HashtagsCollection.find({hashtag: {$regex: (searchString + "*"), $options: 'i'}}).fetch();
+	hashtags.every(function (item) {
+		const tmpIndex = parseInt(item.hashtag.split(" ").slice(-1));
+		if (tmpIndex > largestIndex) {
+			largestIndex = tmpIndex;
+		}
+		return true;
+	});
+	return largestIndex + 1;
 }
 
 export function getNewDemoQuizName() {
-    return "Demo Quiz " + getIncrementedQuizNameByRef("demo quiz");
+	return "Demo Quiz " + getIncrementedQuizNameByRef("demo quiz");
 }
 
 export function getNewABCDQuizName() {
-    return "ABCD " + getIncrementedQuizNameByRef("abcd");
+	return "ABCD " + getIncrementedQuizNameByRef("abcd");
 }
 
 export function connectEventManager(hashtag) {
@@ -142,5 +142,5 @@ export function addHashtag(questionGroup) {
 }
 
 export function trimIllegalChars(hashtag) {
-	return hashtag.replace(/ /g,"");
+	return hashtag.replace(/ /g, "");
 }

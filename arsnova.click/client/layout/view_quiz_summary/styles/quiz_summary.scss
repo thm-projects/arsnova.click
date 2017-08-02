@@ -17,35 +17,35 @@
 
 .quizSummary {
 
-	hr {
-		margin: 10px 0;
-	}
+  hr {
+    margin: 10px 0;
+  }
 
-	h4 {
-		margin-bottom: 5px;
-	}
+  h4 {
+    margin-bottom: 5px;
+  }
 
-	p {
-		margin: 0 20px 5px;
-		word-wrap: break-word;
+  p {
+    margin: 0 20px 5px;
+    word-wrap: break-word;
 
-		&.success, &.failed {
-			font-weight: bold;
-		}
-	}
+    &.success, &.failed {
+      font-weight: bold;
+    }
+  }
 
-	span.success, span.failed {
-		font-weight: bold;
-	}
+  span.success, span.failed {
+    font-weight: bold;
+  }
 
   #showSelectedNicks {
-	text-decoration: underline;
-	margin-left: 50px;
-	cursor: pointer;
-	float: right;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    text-decoration: underline;
+    margin-left: 50px;
+    cursor: pointer;
+    float: right;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 }

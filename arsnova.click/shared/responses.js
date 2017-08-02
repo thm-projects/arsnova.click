@@ -31,7 +31,11 @@ Meteor.methods({
 			hashtag: hashtagSchema,
 			questionIndex: questionIndexSchema,
 			userNick: userNickSchema
-		}).validate({hashtag: responseDoc.hashtag, questionIndex: responseDoc.questionIndex, userNick: responseDoc.userNick});
+		}).validate({
+			hashtag: responseDoc.hashtag,
+			questionIndex: responseDoc.questionIndex,
+			userNick: responseDoc.userNick
+		});
 
 		const responseValueObject = {};
 		const hashtag = responseDoc.hashtag;

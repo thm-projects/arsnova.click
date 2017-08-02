@@ -555,14 +555,14 @@
           "description": "#4: Für anspruchsvolle Quizrunden"
         },
         "black_beauty": {
-          "name" : "Black Beauty (beamertauglich)",
+          "name": "Black Beauty (beamertauglich)",
           "description": "#3: Akkufreundlich"
         },
         "material": {
           "name": "Material Design Colors",
           "description": "#1: Der Standard"
         },
-          "decent_blue": {
+        "decent_blue": {
           "name": "Decent Blue",
           "description": "#5: Elegantes Grau"
         },
@@ -751,7 +751,6 @@
   "export": {
     "page_header": "&LQuiz-Statistik und Ranglisten generiert in einer Live-Session mit arsnova.click&R__createdAt__",
     "page_footer": "&L&A&Carsnova.click ist Open Source Software, siehe arsnova.io&R &P/&N",
-
     "summary": "Zusammenfassung",
     "exported_at_date": "Exportiert am",
     "exported_at": "um",
@@ -771,7 +770,7 @@
     "correct_questions_none_available": "Keine",
     "attendee_all_entries": "Alle Teilnehmer/innen",
     "time": "Antwortzeit (in ms)",
-	  "confidence_level": "Antwortsicherheit",
+    "confidence_level": "Antwortsicherheit",
     "correct_value": "Richtiger Wert",
     "min_range": "Mindestwert",
     "max_range": "Maximalwert",

@@ -1,4 +1,3 @@
 import {Template} from 'meteor/templating';
 
-Template.translate.helpers({
-});
+Template.translate.helpers({});

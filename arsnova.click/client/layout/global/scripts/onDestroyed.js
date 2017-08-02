@@ -17,7 +17,11 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
-import {eventManagerTracker, eventManagerHandle, eventManagerCollectionObserver} from '/client/layout/view_hashtag_management/scripts/lib.js';
+import {
+	eventManagerTracker,
+	eventManagerHandle,
+	eventManagerCollectionObserver
+} from '/client/layout/view_hashtag_management/scripts/lib.js';
 
 Template.home.onDestroyed(function () {
 	if (eventManagerTracker) {

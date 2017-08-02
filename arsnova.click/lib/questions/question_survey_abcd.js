@@ -1,5 +1,4 @@
 import {EJSON} from 'meteor/ejson';
-import {TAPi18n} from 'meteor/tap:i18n';
 import {SurveyQuestion} from './question_survey.js';
 import {DefaultAnswerOption} from '/lib/answeroptions/answeroption_default.js';
 
@@ -10,7 +9,7 @@ export class ABCDSurveyQuestion extends SurveyQuestion {
 	 * @see AbstractChoiceQuestion.constructor()
 	 * @param options
 	 */
-	constructor (options) {
+	constructor(options) {
 		if (typeof options.type !== "undefined" && options.type !== "ABCDSurveyQuestion") {
 			throw new TypeError("Invalid construction type while creating new ABCDSurveyQuestion");
 		}
@@ -23,27 +22,27 @@ export class ABCDSurveyQuestion extends SurveyQuestion {
 					answerOptionNumber: 0,
 					isCorrect: false
 				}),
-                new DefaultAnswerOption({
-                    hashtag: options.hashtag,
-                    questionIndex: options.questionIndex,
-                    answerText: "",
-                    answerOptionNumber: 1,
-                    isCorrect: false
-                }),
-                new DefaultAnswerOption({
-                    hashtag: options.hashtag,
-                    questionIndex: options.questionIndex,
-                    answerText: "",
-                    answerOptionNumber: 2,
-                    isCorrect: false
-                }),
-                new DefaultAnswerOption({
-                    hashtag: options.hashtag,
-                    questionIndex: options.questionIndex,
-                    answerText: "",
-                    answerOptionNumber: 3,
-                    isCorrect: false
-                })
+				new DefaultAnswerOption({
+					hashtag: options.hashtag,
+					questionIndex: options.questionIndex,
+					answerText: "",
+					answerOptionNumber: 1,
+					isCorrect: false
+				}),
+				new DefaultAnswerOption({
+					hashtag: options.hashtag,
+					questionIndex: options.questionIndex,
+					answerText: "",
+					answerOptionNumber: 2,
+					isCorrect: false
+				}),
+				new DefaultAnswerOption({
+					hashtag: options.hashtag,
+					questionIndex: options.questionIndex,
+					answerText: "",
+					answerOptionNumber: 3,
+					isCorrect: false
+				})
 			];
 		}
 		delete options.type;
@@ -55,7 +54,7 @@ export class ABCDSurveyQuestion extends SurveyQuestion {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-clone
 	 * @returns {ABCDSurveyQuestion} An independent deep copy of the current instance
 	 */
-	clone () {
+	clone() {
 		return new ABCDSurveyQuestion(this.serialize());
 	}
 
@@ -63,11 +62,11 @@ export class ABCDSurveyQuestion extends SurveyQuestion {
 	 * Serialize the instance object to a JSON compatible object
 	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
 	 */
-	serialize () {
+	serialize() {
 		return Object.assign(super.serialize(), {type: "ABCDSurveyQuestion"});
 	}
 
-	isValid () {
+	isValid() {
 		return this.getAnswerOptionList().length === 4;
 	}
 
@@ -76,19 +75,19 @@ export class ABCDSurveyQuestion extends SurveyQuestion {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
 	 * @returns {String} The name of the instantiated class
 	 */
-	typeName () {
+	typeName() {
 		return "ABCDSurveyQuestion";
 	}
 
-	translationReferrer () {
+	translationReferrer() {
 		return "view.questions.survey_question_abcd";
 	}
 
-	removeAnswerOption () {
+	removeAnswerOption() {
 		throw Error("AnswerOptions cannot be modified for this type of Question!");
 	}
 
-	addDefaultAnswerOption () {
+	addDefaultAnswerOption() {
 		throw Error("AnswerOptions cannot be modified for this type of Question!");
 	}
 }

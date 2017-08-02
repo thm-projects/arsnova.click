@@ -27,7 +27,8 @@
                                     aria-labelledby="showQuestionAndAnswerDialog_description"
                                     class="btn btn-info btn-lg btn-answerOption tabbable">
                                 <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                                <span class="ansBtn" id="showQuestionAndAnswerDialog_description">{{_ "view.voting.question"}}</span>
+                                <span class="ansBtn" id="showQuestionAndAnswerDialog_description">{{_
+                                        "view.voting.question"}}</span>
                             </button>
                         </div>
                     {{/if}}
@@ -48,14 +49,16 @@
                     {{else}}
                         {{#if isFreeTextQuestion}}
                             <div class="col-xs-12 freeTextFrame">
-                                <h1 role="heading" id="freeTextFrameTitle">{{_ "view.voting.free_text_question.title"}}</h1>
+                                <h1 role="heading" id="freeTextFrameTitle">{{_
+                                        "view.voting.free_text_question.title"}}</h1>
                                 <textarea id="answerTextArea"
                                           class="round-corners textarea placeholder-align-center tabbable"
                                           rows="1"
                                           role="textbox"
                                           aria-multiline="true"
                                           aria-label="{{_ "view.voting.free_text_question.input_placeholder"}}"
-                                          placeholder="{{_ "view.voting.free_text_question.input_placeholder"}}" ></textarea>
+                                          placeholder="{{_
+                                                  "view.voting.free_text_question.input_placeholder"}}"></textarea>
                             </div>
                         {{else}}
                             <div id="buttonContainer" role="list">
@@ -74,7 +77,8 @@
                                                                 data="{{this.origin}}{{this.videoId}}">
                                                             <param
                                                                     allowscriptaccess="always"
-                                                                    allowfullscreen="true" name="movie" value="{{this.origin}}{{this.videoId}}?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3"/>
+                                                                    allowfullscreen="true" name="movie"
+                                                                    value="{{this.origin}}{{this.videoId}}?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3"/>
                                                         </object>
                                                     {{/with}}
                                                 {{else}}

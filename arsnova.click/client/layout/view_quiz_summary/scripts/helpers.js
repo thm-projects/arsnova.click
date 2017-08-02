@@ -30,7 +30,7 @@ Template.quizSummary.helpers({
 		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return window.location.protocol + "//" + window.location.host + "/" + Session.get("questionGroup").getHashtag().replace(/ /g,"+");
+		return window.location.protocol + "//" + window.location.host + "/" + Session.get("questionGroup").getHashtag().replace(/ /g, "+");
 	},
 	getQuestionCount: function () {
 		if (!Session.get("questionGroup")) {
@@ -141,7 +141,7 @@ Template.quizSummary.helpers({
 		return "view.quiz_summary." + Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin();
 	},
 	isVotingQuestion: function (questionType) {
-		return ["SurveyQuestion","ABCDSurveyQuestion"].indexOf(questionType) > -1;
+		return ["SurveyQuestion", "ABCDSurveyQuestion"].indexOf(questionType) > -1;
 	},
 	isRangedQuestion: function (questionType) {
 		return questionType === "RangedQuestion";

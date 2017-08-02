@@ -240,14 +240,14 @@ const themeData = {
 const selectedTheme = Symbol("ExcelTheme");
 
 export class ExcelTheme {
-	constructor (theme) {
+	constructor(theme) {
 		if (!theme) {
 			theme = Meteor.settings.public.default.theme;
 		}
 		this[selectedTheme] = theme;
 	}
 
-	getStyles () {
+	getStyles() {
 		return {
 			quizNameRowStyle: {
 				alignment: {

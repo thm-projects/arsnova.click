@@ -7,5 +7,8 @@
     "phantomjs-prebuilt": "~2.1",
     "process": "~0.11",
     "webpage": "~0.3"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
   }
 }

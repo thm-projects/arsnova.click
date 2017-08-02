@@ -16,66 +16,69 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="hashtagManagement">
-	<div class="hashtag-management">
-		<div class="row full-screen-content">
-			<div class="col-md-12 contentFrame">
-				{{#if noHashtagsAvailable}}
-					<h2 class="text-center text-light">{{_ "view.hashtag_management.no_sessions"}}</h2>
-				{{else}}
-					{{#each serverHashtags}}
-						<div class="row hashtagManagementRow" id="{{this}}">
-							<div class="col-xs-12">
-								<p class="hashtag-name">{{this}}</p>
-							</div>
-							<div class="col-xs-3">
-								<button type="button"
-								        class="startQuiz btn btn-answerOption hashtag-management input-field btn-lg btn-cursor tabbable"
-								        data-toggle="tooltip"
-								        id="startQuiz_{{@index}}"
-								        title="{{_ "view.hashtag_management.start_session"}}"
-								        aria-label="{{_ "view.hashtag_management.start_session"}}"
-								        data-animation="false">
-									<span class="glyphicon glyphicon-play-circle glyph-left alignGlyphicon" aria-hidden="true"></span>
-								</button>
-							</div>
-							<div class="col-xs-3">
-								<button type="button"
-								        class="editQuiz js-reactivate-hashtag btn btn-answerOption hashtag-management input-field btn-lg btn-cursor tabbable"
-								        data-toggle="tooltip"
-								        id="editQuiz_{{@index}}"
-								        title="{{_ "view.hashtag_management.edit_session"}}"
-								        aria-label="{{_ "view.hashtag_management.edit_session"}}"
-								        data-animation="false">
-									<span class="glyphicon glyphicon-edit glyph-left alignGlyphicon" aria-hidden="true"></span>
-								</button>
-							</div>
-							<div class="col-xs-3">
-								<div class="exportQuiz js-export btn btn-answerOption hashtag-management input-field btn-lg tabbable"
-								     data-toggle="tooltip"
-								     id="exportQuiz_{{@index}}"
-								     title="{{_ "view.hashtag_management.export"}}"
-								     aria-label="{{_ "view.hashtag_management.export"}}"
-								     data-animation="false"></div>
-							</div>
-							<div class="col-xs-3">
-								<button type="button"
-								        class="deleteQuiz js-delete btn btn-answerOption hashtag-management input-field btn-lg btn-cursor tabbable"
-								        data-toggle="tooltip"
-								        id="deleteQuiz_{{@index}}"
-								        title="{{_ "view.hashtag_management.delete_session"}}"
-								        aria-label="{{_ "view.hashtag_management.delete_session"}}"
-								        data-animation="false">
-									<span class="glyphicon glyphicon-trash glyph-left alignGlyphicon" aria-hidden="true"></span>
-								</button>
-							</div>
+    <div class="hashtag-management">
+        <div class="row full-screen-content">
+            <div class="col-md-12 contentFrame">
+                {{#if noHashtagsAvailable}}
+                    <h2 class="text-center text-light">{{_ "view.hashtag_management.no_sessions"}}</h2>
+                {{else}}
+                    {{#each serverHashtags}}
+                        <div class="row hashtagManagementRow" id="{{this}}">
+                            <div class="col-xs-12">
+                                <p class="hashtag-name">{{this}}</p>
+                            </div>
+                            <div class="col-xs-3">
+                                <button type="button"
+                                        class="startQuiz btn btn-answerOption hashtag-management input-field btn-lg btn-cursor tabbable"
+                                        data-toggle="tooltip"
+                                        id="startQuiz_{{@index}}"
+                                        title="{{_ "view.hashtag_management.start_session"}}"
+                                        aria-label="{{_ "view.hashtag_management.start_session"}}"
+                                        data-animation="false">
+                                    <span class="glyphicon glyphicon-play-circle glyph-left alignGlyphicon"
+                                          aria-hidden="true"></span>
+                                </button>
+                            </div>
+                            <div class="col-xs-3">
+                                <button type="button"
+                                        class="editQuiz js-reactivate-hashtag btn btn-answerOption hashtag-management input-field btn-lg btn-cursor tabbable"
+                                        data-toggle="tooltip"
+                                        id="editQuiz_{{@index}}"
+                                        title="{{_ "view.hashtag_management.edit_session"}}"
+                                        aria-label="{{_ "view.hashtag_management.edit_session"}}"
+                                        data-animation="false">
+                                    <span class="glyphicon glyphicon-edit glyph-left alignGlyphicon"
+                                          aria-hidden="true"></span>
+                                </button>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="exportQuiz js-export btn btn-answerOption hashtag-management input-field btn-lg tabbable"
+                                     data-toggle="tooltip"
+                                     id="exportQuiz_{{@index}}"
+                                     title="{{_ "view.hashtag_management.export"}}"
+                                     aria-label="{{_ "view.hashtag_management.export"}}"
+                                     data-animation="false"></div>
+                            </div>
+                            <div class="col-xs-3">
+                                <button type="button"
+                                        class="deleteQuiz js-delete btn btn-answerOption hashtag-management input-field btn-lg btn-cursor tabbable"
+                                        data-toggle="tooltip"
+                                        id="deleteQuiz_{{@index}}"
+                                        title="{{_ "view.hashtag_management.delete_session"}}"
+                                        aria-label="{{_ "view.hashtag_management.delete_session"}}"
+                                        data-animation="false">
+                                    <span class="glyphicon glyphicon-trash glyph-left alignGlyphicon"
+                                          aria-hidden="true"></span>
+                                </button>
+                            </div>
 
-						</div>
-						{{#unless isLastItem @index}}
-							<hr/>
-						{{/unless}}
-					{{/each}}
-				{{/if}}
-			</div>
-		</div>
-	</div>
+                        </div>
+                        {{#unless isLastItem @index}}
+                            <hr/>
+                        {{/unless}}
+                    {{/each}}
+                {{/if}}
+            </div>
+        </div>
+    </div>
 </template>

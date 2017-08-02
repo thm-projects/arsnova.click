@@ -23,14 +23,14 @@ const blockIllegal = Symbol("blockIllegal");
 const restrictToCASLogin = Symbol("restrictToCASLogin");
 
 export class NickSessionConfiguration {
-	constructor (options = {}) {
+	constructor(options = {}) {
 		this[hashtag] = options.hashtag;
 		this[selectedValues] = options.nicks.selectedValues || [];
 		this[blockIllegal] = typeof options.nicks.blockIllegal === "undefined" ? Meteor.settings.public.default.sessionConfiguration.nicks.blockIllegalNames : options.nicks.blockIllegal;
 		this[restrictToCASLogin] = typeof options.nicks.restrictToCASLogin === "undefined" ? Meteor.settings.public.default.sessionConfiguration.nicks.restrictToCASLogin : options.nicks.restrictToCASLogin;
 	}
 
-	serialize () {
+	serialize() {
 		return {
 			hashtag: this.getHashtag(),
 			selectedValues: this.getSelectedValues(),
@@ -39,32 +39,32 @@ export class NickSessionConfiguration {
 		};
 	}
 
-	equals (value) {
+	equals(value) {
 		return this.getSelectedValues() === value.getSelectedValues() &&
 			this.getBlockIllegal() === value.getBlockIllegal() &&
 			this.getRestrictToCASLogin() === value.getRestrictToCASLogin();
 	}
 
-	getHashtag () {
+	getHashtag() {
 		return this[hashtag];
 	}
 
-	setHashtag (value) {
+	setHashtag(value) {
 		this[hashtag] = value;
 	}
 
-	getSelectedValues () {
+	getSelectedValues() {
 		return this[selectedValues];
 	}
 
-	setSelectedValues (newSelectedNicks) {
+	setSelectedValues(newSelectedNicks) {
 		if (!(newSelectedNicks instanceof Array) || newSelectedNicks.length === 0) {
 			throw new Error("Invalid argument list for NickSessionConfiguration.setSelectedValues");
 		}
 		this[selectedValues] = newSelectedNicks;
 	}
 
-	addSelectedNick (newSelectedNick) {
+	addSelectedNick(newSelectedNick) {
 		if (typeof newSelectedNick !== "string") {
 			throw new Error("Invalid argument list for NickSessionConfiguration.addSelectedNick");
 		}
@@ -74,7 +74,7 @@ export class NickSessionConfiguration {
 		this[selectedValues].push(newSelectedNick);
 	}
 
-	removeSelectedNickByName (selectedNick) {
+	removeSelectedNickByName(selectedNick) {
 		if (typeof selectedNick !== "string") {
 			throw new Error("Invalid argument list for NickSessionConfiguration.removeSelectedNickByName");
 		}
@@ -86,26 +86,26 @@ export class NickSessionConfiguration {
 		}
 	}
 
-	removeSelectedNicks () {
+	removeSelectedNicks() {
 		this[selectedValues] = [];
 	}
 
-	getBlockIllegal () {
+	getBlockIllegal() {
 		return this[blockIllegal];
 	}
 
-	setBlockIllegal (value) {
+	setBlockIllegal(value) {
 		if (typeof value !== "boolean") {
 			throw new Error("Invalid argument list for NickSessionConfiguration.setBlockIllegal");
 		}
 		this[blockIllegal] = value;
 	}
 
-	getRestrictToCASLogin () {
+	getRestrictToCASLogin() {
 		return this[restrictToCASLogin];
 	}
 
-	setRestrictToCASLogin (value) {
+	setRestrictToCASLogin(value) {
 		if (typeof value !== "boolean") {
 			throw new Error("Invalid argument list for NickSessionConfiguration.setRestrictToCASLogin");
 		}

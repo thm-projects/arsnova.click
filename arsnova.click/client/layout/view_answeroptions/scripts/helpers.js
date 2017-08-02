@@ -104,10 +104,26 @@ Template.rangedAnswerOptionTemplate.helpers({
 Template.freeTextAnswerOptionTemplate.helpers({
 	configOptions: function () {
 		return [
-			{id: "config_case_sensitive", textName: "view.answeroptions.free_text_question.config_case_sensitive", description: "view.answeroptions.description.config_case_sensitive"},
-			{id: "config_trim_whitespaces", textName: "view.answeroptions.free_text_question.config_trim_whitespaces", description: "view.answeroptions.description.config_trim_whitespaces"},
-			{id: "config_use_keywords", textName: "view.answeroptions.free_text_question.config_use_keywords", description: "view.answeroptions.description.config_use_keywords"},
-			{id: "config_use_punctuation", textName: "view.answeroptions.free_text_question.config_use_punctuation", description: "view.answeroptions.description.config_use_punctuation"}
+			{
+				id: "config_case_sensitive",
+				textName: "view.answeroptions.free_text_question.config_case_sensitive",
+				description: "view.answeroptions.description.config_case_sensitive"
+			},
+			{
+				id: "config_trim_whitespaces",
+				textName: "view.answeroptions.free_text_question.config_trim_whitespaces",
+				description: "view.answeroptions.description.config_trim_whitespaces"
+			},
+			{
+				id: "config_use_keywords",
+				textName: "view.answeroptions.free_text_question.config_use_keywords",
+				description: "view.answeroptions.description.config_use_keywords"
+			},
+			{
+				id: "config_use_punctuation",
+				textName: "view.answeroptions.free_text_question.config_use_punctuation",
+				description: "view.answeroptions.description.config_use_punctuation"
+			}
 		];
 	},
 	answerText: function () {

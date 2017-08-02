@@ -213,7 +213,8 @@ export function getTooltipForRoute(overridePreference = false) {
 export function clearFileInput(ctrl) {
 	try {
 		ctrl.value = null;
-	} catch (ex) { }
+	} catch (ex) {
+	}
 	if (ctrl.value) {
 		ctrl.parentNode.replaceChild(ctrl.cloneNode(true), ctrl);
 	}

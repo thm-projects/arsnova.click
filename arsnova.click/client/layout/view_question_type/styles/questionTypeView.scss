@@ -1,20 +1,19 @@
-
 @import "../../../layout/global/styles/appearance";
 
 #questionTypeView {
-	.questionType {
-		cursor: pointer;
+  .questionType {
+    cursor: pointer;
 
-		.wrapper {
-			margin: 5px;
-			border-radius: $corner-radius;
-			padding: 5px;
-		}
-	}
-	.activeQuestionType {
-		.wrapper {
-			opacity: 0.6;
-			cursor: not-allowed;
-		}
-	}
+    .wrapper {
+      margin: 5px;
+      border-radius: $corner-radius;
+      padding: 5px;
+    }
+  }
+  .activeQuestionType {
+    .wrapper {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
 }

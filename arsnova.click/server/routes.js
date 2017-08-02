@@ -82,26 +82,50 @@ Router.route("/server/generateExcelFile/:hashtag/:translation/:privateKey/:theme
 		dateFormat: 'd.m.yyyy'
 	});
 	const themeInstance = new ExcelTheme(this.params.theme || SessionConfigurationCollection.findOne({hashtag: this.params.hashtag}).theme || Meteor.settings.public.default.theme);
-	SummaryExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()});
+	SummaryExcelSheet.generateSheet(wb, {
+		hashtag: this.params.hashtag,
+		translation: this.params.translation,
+		defaultStyles: themeInstance.getStyles()
+	});
 	const questionGroup = QuestionGroupCollection.findOne({hashtag: this.params.hashtag});
 	for (let i = 0; i < questionGroup.questionList.length; i++) {
 		switch (questionGroup.questionList[i].type) {
 			case "SingleChoiceQuestion":
 			case "YesNoSingleChoiceQuestion":
 			case "TrueFalseSingleChoiceQuestion":
-				SingleChoiceExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
+				SingleChoiceExcelSheet.generateSheet(wb, {
+					hashtag: this.params.hashtag,
+					translation: this.params.translation,
+					defaultStyles: themeInstance.getStyles()
+				}, i);
 				break;
 			case "MultipleChoiceQuestion":
-				MultipleChoiceExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
+				MultipleChoiceExcelSheet.generateSheet(wb, {
+					hashtag: this.params.hashtag,
+					translation: this.params.translation,
+					defaultStyles: themeInstance.getStyles()
+				}, i);
 				break;
 			case "RangedQuestion":
-				RangedExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
+				RangedExcelSheet.generateSheet(wb, {
+					hashtag: this.params.hashtag,
+					translation: this.params.translation,
+					defaultStyles: themeInstance.getStyles()
+				}, i);
 				break;
 			case "SurveyQuestion":
-				SurveyExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
+				SurveyExcelSheet.generateSheet(wb, {
+					hashtag: this.params.hashtag,
+					translation: this.params.translation,
+					defaultStyles: themeInstance.getStyles()
+				}, i);
 				break;
 			case "FreeTextQuestion":
-				FreeTextExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
+				FreeTextExcelSheet.generateSheet(wb, {
+					hashtag: this.params.hashtag,
+					translation: this.params.translation,
+					defaultStyles: themeInstance.getStyles()
+				}, i);
 				break;
 		}
 	}
@@ -223,7 +247,7 @@ Router.route('/api/openSession', {where: 'server'})
 			this.response.end("Missing permissions.");
 		}
 
-		var eventManagerCollectionEntry =  EventManagerCollection.findOne({hashtag: hashtag});
+		var eventManagerCollectionEntry = EventManagerCollection.findOne({hashtag: hashtag});
 
 		if (!eventManagerCollectionEntry) {
 			Meteor.call('EventManagerCollection.add', hashtag);
@@ -293,14 +317,16 @@ Router.route('/api/updateQuestionGroup', {where: 'server'})
 		});
 
 		const sessionConfigObject = questionGroupModel.configuration;
-		SessionConfigurationCollection.update({hashtag: sessionConfigObject.hashtag}, {$set: {
-			hashtag: sessionConfigObject.hashtag,
-			music: sessionConfigObject.music,
-			nicks: sessionConfigObject.nicks,
-			theme: sessionConfigObject.theme,
-			showResponseProgress: sessionConfigObject.showResponseProgress,
-			readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled
-		}}, {upsert: true});
+		SessionConfigurationCollection.update({hashtag: sessionConfigObject.hashtag}, {
+			$set: {
+				hashtag: sessionConfigObject.hashtag,
+				music: sessionConfigObject.music,
+				nicks: sessionConfigObject.nicks,
+				theme: sessionConfigObject.theme,
+				showResponseProgress: sessionConfigObject.showResponseProgress,
+				readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled
+			}
+		}, {upsert: true});
 
 		Meteor.call('SessionConfiguration.addConfig', sessionConfigObject);
 

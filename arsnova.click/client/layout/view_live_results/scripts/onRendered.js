@@ -29,7 +29,7 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 import {TimerMap} from "/lib/performance_analysis/Timer.js";
 
-Template.liveResults.onRendered(()=> {
+Template.liveResults.onRendered(() => {
 	const eventDoc = EventManagerCollection.findOne();
 	const hashtag = Router.current().params.quizName;
 	const sessionConfig = SessionConfigurationCollection.findOne({hashtag: hashtag});

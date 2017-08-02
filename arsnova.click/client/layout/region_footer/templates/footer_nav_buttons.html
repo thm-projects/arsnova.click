@@ -16,15 +16,16 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="footerNavButtons">
-	<div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" role="navigation">
-		<div class="row">
+    <div class="fixed-bottom col-xs-12 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3" role="navigation">
+        <div class="row">
             {{#if backButton}}
                 <div class="col-xs-12 col-sm-{{#if forwardButton}}6{{else}}12{{/if}} fixed-bottom-item">
                     <button id="{{backButton.id}}"
                             data-intro="{{#if backButton.intro}}{{_ backButton.intro}}{{/if}}"
                             class="button button-back tabbable">
                         <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
-                        <span class="fixed-bottom-item-text">{{#if backButton.text}} {{_ backButton.text }} {{else}} {{_ 'global.back' }} {{/if}}</span>
+                        <span class="fixed-bottom-item-text">{{#if backButton.text}} {{_ backButton.text }} {{else}} {{_
+                                'global.back' }} {{/if}}</span>
                     </button>
                 </div>
             {{/if}}
@@ -33,11 +34,12 @@
                     <button id="{{forwardButton.id}}"
                             data-intro="{{#if forwardButton.intro}}{{_ forwardButton.intro}}{{/if}}"
                             class="button button-next tabbable">
-                        <span class="fixed-bottom-item-text">{{#if forwardButton.text}} {{_ forwardButton.text }} {{else}} {{_ 'global.next' }} {{/if}}</span>
+                        <span class="fixed-bottom-item-text">{{#if forwardButton.text}} {{_
+                                forwardButton.text }} {{else}} {{_ 'global.next' }} {{/if}}</span>
                         <span class="glyphicon glyphicon-arrow-right glyph-right" aria-hidden="true"></span>
                     </button>
                 </div>
             {{/if}}
-		</div>
-	</div>
+        </div>
+    </div>
 </template>

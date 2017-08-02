@@ -31,17 +31,11 @@
   "requireSpaceBeforeBlockStatements": true,
   "requireSpaceBeforeKeywords": ["else", "while", "catch"],
   "requireSpaceBeforeObjectValues": true,
-  "requireSpacesInAnonymousFunctionExpression": {
-    "beforeOpeningRoundBrace": true
-  },
   "requireSpacesInConditionalExpression": {
     "afterTest": true,
     "beforeConsequent": true,
     "afterConsequent": true,
     "beforeAlternate": true
-  },
-  "requireSpacesInFunction": {
-    "beforeOpeningCurlyBrace": true
   },
   "validateIndentation": "\t",
   "validateLineBreaks": "LF",

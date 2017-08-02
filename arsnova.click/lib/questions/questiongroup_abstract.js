@@ -35,7 +35,7 @@ export class AbstractQuestionGroup {
 	 * @throws {TypeError} If this method is invoked directly
 	 * @throws {Error} If the hashtag of the options Object is missing
 	 */
-	constructor (options) {
+	constructor(options) {
 		if (this.constructor === AbstractQuestionGroup) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
@@ -54,7 +54,7 @@ export class AbstractQuestionGroup {
 				}
 				if (options.isClient) {
 					if (options.questionList[i].typeName() === "RangedQuestion") {
-						options.questionList[i].setRange(-1,0);
+						options.questionList[i].setRange(-1, 0);
 						options.questionList[i].setCorrectValue(0);
 					} else if (options.questionList[i].typeName() === "FreeTextQuestion") {
 						options.questionList[i].getAnswerOptionList()[0].setAnswerText("");
@@ -78,7 +78,7 @@ export class AbstractQuestionGroup {
 	 * @param {Number} [index] An optional index position where the item should be added
 	 * @returns {AbstractQuestion|Null} if successful returns the inserted Question otherwise Null
 	 */
-	addQuestion (question, index) {
+	addQuestion(question, index) {
 		if (question instanceof AbstractQuestion) {
 			if (typeof index === "undefined" || index >= this.getQuestionList().length) {
 				question.setQuestionIndex(this.getQuestionList().length);
@@ -100,7 +100,7 @@ export class AbstractQuestionGroup {
 	 * @param {Number} index The index of the question to be removed
 	 * @throws {Error} If the index is not passed, smaller than 0 or larger than the length of the questionList
 	 */
-	removeQuestion (index) {
+	removeQuestion(index) {
 		if (typeof index === "undefined" || index < 0 || index > this.getQuestionList().length) {
 			throw new Error("Invalid argument list for QuestionGroup.removeQuestion");
 		}
@@ -114,11 +114,11 @@ export class AbstractQuestionGroup {
 	 * Returns the Hashtag of the questionGroup instance
 	 * @returns {String} The hashtag identifying the session
 	 */
-	getHashtag () {
+	getHashtag() {
 		return this[hashtag];
 	}
 
-	setHashtag (newHashtag) {
+	setHashtag(newHashtag) {
 		new SimpleSchema({
 			hashtag: hashtagSchema
 		}).validate({hashtag: newHashtag});
@@ -133,26 +133,26 @@ export class AbstractQuestionGroup {
 	 * Returns the questionList of the questionGroup instance
 	 * @returns {Array} The current list of questions
 	 */
-	getQuestionList () {
+	getQuestionList() {
 		return this[questionList];
 	}
 
-	getIsFirstStart () {
+	getIsFirstStart() {
 		return this[isFirstStart];
 	}
 
-	setIsFirstStart (value) {
+	setIsFirstStart(value) {
 		if (typeof value !== "boolean") {
 			throw new Error("Invalid argument for AbstractQuestionGroup.setIsFirstStart");
 		}
 		this[isFirstStart] = value;
 	}
 
-	getConfiguration () {
+	getConfiguration() {
 		return this[sessionConfig];
 	}
 
-	setConfiguration (value) {
+	setConfiguration(value) {
 		this[sessionConfig] = value;
 	}
 
@@ -160,9 +160,11 @@ export class AbstractQuestionGroup {
 	 * Serialize the instance object to a JSON compatible object
 	 * @returns {{hashtag: String, type: String, questionList: Array}}
 	 */
-	serialize () {
+	serialize() {
 		const questionListSerialized = [];
-		this.getQuestionList().forEach(function (question) { questionListSerialized.push(question.serialize()); });
+		this.getQuestionList().forEach(function (question) {
+			questionListSerialized.push(question.serialize());
+		});
 		return {
 			hashtag: this.getHashtag(),
 			isFirstStart: this.getIsFirstStart(),
@@ -176,7 +178,7 @@ export class AbstractQuestionGroup {
 	 * and summarizes their result of calling .isValid()
 	 * @returns {boolean} True, if the complete QuestionGroup instance is valid, False otherwise
 	 */
-	isValid () {
+	isValid() {
 		let questionListValid = this.getQuestionList().length > 0;
 		this.getQuestionList().forEach(function (question) {
 			if (questionListValid && !question.isValid()) {
@@ -192,7 +194,7 @@ export class AbstractQuestionGroup {
 	 * @param {AbstractQuestionGroup} questionGroup The questionGroup instance which should be checked
 	 * @returns {boolean} True if both instances are completely equal, False otherwise
 	 */
-	equals (questionGroup) {
+	equals(questionGroup) {
 		if (questionGroup instanceof AbstractQuestionGroup) {
 			if (questionGroup.getHashtag() !== this.getHashtag() ||
 				questionGroup.getIsFirstStart() !== this.getIsFirstStart() ||
@@ -218,7 +220,7 @@ export class AbstractQuestionGroup {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-toJSONValue
 	 * @returns {{hashtag, type, questionList}|{hashtag: String, type: String, questionList: Array}}
 	 */
-	toJSONValue () {
+	toJSONValue() {
 		return this.serialize();
 	}
 
@@ -227,7 +229,7 @@ export class AbstractQuestionGroup {
 	 * @param {Number} [index] The index where the question should be inserted. If not passed, it will be added to the end of the questionList
 	 * @param type
 	 */
-	addDefaultQuestion (index = -1, type = "SingleChoiceQuestion") {
+	addDefaultQuestion(index = -1, type = "SingleChoiceQuestion") {
 		if (typeof index === "undefined" || index === -1 || index >= this.getQuestionList().length) {
 			index = this.getQuestionList().length;
 		}

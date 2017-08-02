@@ -1,4 +1,3 @@
-
 import {SingleChoiceQuestion} from "./question_choice_single.js";
 import {YesNoSingleChoiceQuestion} from "./question_choice_single_yes_no.js";
 import {TrueFalseSingleChoiceQuestion} from "./question_choice_single_true_false.js";
@@ -15,18 +14,18 @@ export const questionReflection = {
 	YesNoSingleChoiceQuestion: function (options) {
 		return new YesNoSingleChoiceQuestion(options);
 	},
-    TrueFalseSingleChoiceQuestion: function (options) {
-        return new TrueFalseSingleChoiceQuestion(options);
-    },
+	TrueFalseSingleChoiceQuestion: function (options) {
+		return new TrueFalseSingleChoiceQuestion(options);
+	},
 	MultipleChoiceQuestion: function (options) {
 		return new MultipleChoiceQuestion(options);
 	},
 	SurveyQuestion: function (options) {
 		return new SurveyQuestion(options);
 	},
-    ABCDSurveyQuestion: function (options) {
-        return new ABCDSurveyQuestion(options);
-    },
+	ABCDSurveyQuestion: function (options) {
+		return new ABCDSurveyQuestion(options);
+	},
 	RangedQuestion: function (options) {
 		return new RangedQuestion(options);
 	},

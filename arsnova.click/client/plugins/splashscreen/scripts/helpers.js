@@ -22,29 +22,19 @@ import * as localData from '/lib/local_storage.js';
 import * as headerLib from '/client/layout/region_header/lib.js';
 import {isMobileDevice, parseMarkdown} from './lib.js';
 
-Template.splashscreen.helpers($.extend(isMobileDevice, {
+Template.splashscreen.helpers($.extend(isMobileDevice, {}));
 
-}));
+Template.kickMemberSplashscreen.helpers($.extend(isMobileDevice, {}));
 
-Template.kickMemberSplashscreen.helpers($.extend(isMobileDevice, {
-
-}));
-
-Template.deleteConfirmationSplashscreen.helpers($.extend(isMobileDevice, {
-
-}));
+Template.deleteConfirmationSplashscreen.helpers($.extend(isMobileDevice, {}));
 
 Template.resetSessionSplashscreen.helpers($.extend(isMobileDevice, {
 	isEditingQuestion: headerLib.isEditingQuestion
 }));
 
-Template.exitSessionSplashscreen.helpers($.extend(isMobileDevice, {
+Template.exitSessionSplashscreen.helpers($.extend(isMobileDevice, {}));
 
-}));
-
-Template.errorSplashscreen.helpers($.extend(isMobileDevice, {
-
-}));
+Template.errorSplashscreen.helpers($.extend(isMobileDevice, {}));
 
 Template.showHashtagsSplashscreen.helpers($.extend(isMobileDevice, {
 	hashtags: function () {
@@ -55,9 +45,7 @@ Template.showHashtagsSplashscreen.helpers($.extend(isMobileDevice, {
 	}
 }));
 
-Template.readingConfirmedSplashscreen.helpers($.extend(isMobileDevice, parseMarkdown, {
-
-}));
+Template.readingConfirmedSplashscreen.helpers($.extend(isMobileDevice, parseMarkdown, {}));
 
 Template.questionAndAnswerSplashscreen.helpers($.extend(isMobileDevice, parseMarkdown, {
 	revealCorrectAnswerValue: function () {
@@ -101,9 +89,9 @@ Template.connectionQualitySplashscreen.helpers($.extend(isMobileDevice, {
 	dbConnectionStatus: function () {
 		return {
 			text: Session.get("connectionStatus").dbConnection.currentCount < Session.get("connectionStatus").dbConnection.totalCount ? "region.header.connection_status.pending" :
-					Session.get("connectionStatus").dbConnection.serverRTT > 100 ? "region.header.connection_status.dbConnection_status.very_slow" :
+				Session.get("connectionStatus").dbConnection.serverRTT > 100 ? "region.header.connection_status.dbConnection_status.very_slow" :
 					Session.get("connectionStatus").dbConnection.serverRTT > 60 ? "region.header.connection_status.dbConnection_status.slow" :
-					"region.header.connection_status.dbConnection_status.ok",
+						"region.header.connection_status.dbConnection_status.ok",
 			averageTime: Session.get("connectionStatus").dbConnection.serverRTT.toFixed(2).replace(".", ","),
 			current: Session.get("connectionStatus").dbConnection.currentCount,
 			max: Session.get("connectionStatus").dbConnection.totalCount

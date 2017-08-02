@@ -24,7 +24,10 @@ import * as lib from './lib.js';
 Template.nick.onRendered(function () {
 	const hashtag = Router.current().params.quizName;
 	if (MemberListCollection.findOne({hashtag: hashtag, privateKey: localStorage.getItem("privateKey")})) {
-		sessionStorage.setItem(hashtag + "nick", MemberListCollection.findOne({hashtag: hashtag, privateKey: localStorage.getItem("privateKey")}).nick);
+		sessionStorage.setItem(hashtag + "nick", MemberListCollection.findOne({
+			hashtag: hashtag,
+			privateKey: localStorage.getItem("privateKey")
+		}).nick);
 		Router.go("/" + hashtag + "/memberlist");
 	}
 

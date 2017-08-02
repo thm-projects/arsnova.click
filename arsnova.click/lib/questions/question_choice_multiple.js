@@ -8,7 +8,7 @@ export class MultipleChoiceQuestion extends AbstractChoiceQuestion {
 	 * @see AbstractChoiceQuestion.constructor()
 	 * @param options
 	 */
-	constructor (options) {
+	constructor(options) {
 		if (typeof options.type !== "undefined" && options.type !== "MultipleChoiceQuestion") {
 			throw new TypeError("Invalid construction type while creating new MultipleChoiceQuestion");
 		}
@@ -20,7 +20,7 @@ export class MultipleChoiceQuestion extends AbstractChoiceQuestion {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-clone
 	 * @returns {MultipleChoiceQuestion} An independent deep copy of the current instance
 	 */
-	clone () {
+	clone() {
 		return new MultipleChoiceQuestion(this.serialize());
 	}
 
@@ -28,7 +28,7 @@ export class MultipleChoiceQuestion extends AbstractChoiceQuestion {
 	 * Serialize the instance object to a JSON compatible object
 	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
 	 */
-	serialize () {
+	serialize() {
 		return Object.assign(super.serialize(), {type: "MultipleChoiceQuestion"});
 	}
 
@@ -37,11 +37,11 @@ export class MultipleChoiceQuestion extends AbstractChoiceQuestion {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
 	 * @returns {String} The name of the instantiated class
 	 */
-	typeName () {
+	typeName() {
 		return "MultipleChoiceQuestion";
 	}
 
-	translationReferrer () {
+	translationReferrer() {
 		return "view.questions.multiple_choice_question";
 	}
 
@@ -49,7 +49,7 @@ export class MultipleChoiceQuestion extends AbstractChoiceQuestion {
 	 * Gets the validation error reason from the question and all included answerOptions as a stackable array
 	 * @returns {Array} Contains an Object which holds the number of the current question and the reason why the validation has failed
 	 */
-	getValidationStackTrace () {
+	getValidationStackTrace() {
 		const parentStackTrace = super.getValidationStackTrace();
 		let hasValidAnswer = false;
 		this.getAnswerOptionList().forEach(function (answeroption) {
@@ -58,7 +58,10 @@ export class MultipleChoiceQuestion extends AbstractChoiceQuestion {
 			}
 		});
 		if (!hasValidAnswer) {
-			parentStackTrace.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "no_valid_answers"});
+			parentStackTrace.push({
+				occuredAt: {type: "question", id: this.getQuestionIndex()},
+				reason: "no_valid_answers"
+			});
 		}
 		return parentStackTrace;
 	}

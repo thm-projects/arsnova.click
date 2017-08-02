@@ -37,7 +37,7 @@ Template.memberlist.onRendered(function () {
 	$('.navbar-footer-placeholder').hide();
 	$('.navbar-footer').show();
 
-	$(document).on('keyup',function (event) {
+	$(document).on('keyup', function (event) {
 		if (event.keyCode === 27) {
 			$('.qr-code-container').hide();
 		}
@@ -51,7 +51,7 @@ Template.memberlist.onRendered(function () {
 	});
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		const musicSettings = Session.get("questionGroup").getConfiguration().getMusicSettings();
-		let songTitle       = musicSettings.getLobbyTitle();
+		let songTitle = musicSettings.getLobbyTitle();
 		if (songTitle === "Random") {
 			songTitle = MusicSessionConfiguration.getAvailableMusic().lobbyMusic[randomIntFromInterval(0, MusicSessionConfiguration.getAvailableMusic().lobbyMusic.length - 1)];
 		}

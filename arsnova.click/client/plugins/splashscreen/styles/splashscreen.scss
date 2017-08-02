@@ -20,102 +20,102 @@
  * Splash screen appearance
  */
 .modal-content {
-	display: inline-block;
-	font-size: 20px;
-	border-radius: $splash-screen-corner-radius;
-	box-shadow: none;
-	width: 100%;
+  display: inline-block;
+  font-size: 20px;
+  border-radius: $splash-screen-corner-radius;
+  box-shadow: none;
+  width: 100%;
 
-	a, a:hover, a:active, a:visited, a:focus {
-		text-decoration: underline;
-	}
+  a, a:hover, a:active, a:visited, a:focus {
+    text-decoration: underline;
+  }
 
-	#answerContent {
-		&>h1 {
-			text-align: center;
-		}
-		.answerContentElementWrapper {
-			border: 1px solid;
-			border-radius: $corner-radius;
-			margin: 10px 0;
-		}
-		.answerContentElementLetter {
-			text-align: center;
-			border-bottom: 1px solid;
-			border-top-left-radius: $corner-radius;
-			border-top-right-radius: $corner-radius;
-			font-size: 1.5em;
-		}
-		.answerContentElementItem {
-			margin: 10px;
-		}
-	}
+  #answerContent {
+    & > h1 {
+      text-align: center;
+    }
+    .answerContentElementWrapper {
+      border: 1px solid;
+      border-radius: $corner-radius;
+      margin: 10px 0;
+    }
+    .answerContentElementLetter {
+      text-align: center;
+      border-bottom: 1px solid;
+      border-top-left-radius: $corner-radius;
+      border-top-right-radius: $corner-radius;
+      font-size: 1.5em;
+    }
+    .answerContentElementItem {
+      margin: 10px;
+    }
+  }
 }
 
 .modal-list ul {
-	list-style: initial;
-	margin: auto;
+  list-style: initial;
+  margin: auto;
 }
 
 .modal-center {
-	text-align: center;
+  text-align: center;
 }
 
 .modal-body {
-	padding: 0 30px;
-	p {
-		margin-left: 0;
-		margin-right: 0;
-	}
+  padding: 0 30px;
+  p {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .modal-header {
-	border-bottom: none;
-	padding: 20px;
-	min-height: 100px;
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	margin-right: 10px;
+  border-bottom: none;
+  padding: 20px;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 10px;
 }
 
 .modal-footer {
-	border-top: none;
-	padding: 20px;
+  border-top: none;
+  padding: 20px;
 
-	.btn-answerOption {
-		margin: 15px 0;
-		width: 100%;
-		height: 100%;
-	}
+  .btn-answerOption {
+    margin: 15px 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .resizeableImage {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .splashscreen-container-close {
-	font-size: 4rem;
-	display: inline-block;
-	flex-grow: 1;
-	text-align: right;
-	align-self: center;
-	margin: 10px 0 0 0;
+  font-size: 4rem;
+  display: inline-block;
+  flex-grow: 1;
+  text-align: right;
+  align-self: center;
+  margin: 10px 0 0 0;
 
-	.glyphicon-remove {
-		border-radius: $corner-radius;
-		cursor: pointer;
+  .glyphicon-remove {
+    border-radius: $corner-radius;
+    cursor: pointer;
 
-		&:hover {
-			-webkit-transition: opacity 0.5s ease-in;
-			-moz-transition: opacity 0.5s ease-in;
-			-o-transition: opacity 0.5s ease-in;
-			opacity: 1;
-		}
-	}
+    &:hover {
+      -webkit-transition: opacity 0.5s ease-in;
+      -moz-transition: opacity 0.5s ease-in;
+      -o-transition: opacity 0.5s ease-in;
+      opacity: 1;
+    }
+  }
 }
 
 .noSplashscreenPadding {
-	padding: 0 0 15px 0;
+  padding: 0 0 15px 0;
 }
 

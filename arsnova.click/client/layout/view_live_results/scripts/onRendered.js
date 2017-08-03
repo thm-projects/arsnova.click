@@ -67,7 +67,9 @@ Template.liveResults.onRendered(() => {
 		footerElements.addFooterElement(footerElements.footerElemSound);
 		if (eventDoc.questionIndex + 1 < questionCount) {
 			footerElements.addFooterElement(footerElements.footerElemResponseProgress);
-			footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
+			if (Session.get("questionGroup").getQuestionList()[eventDoc.questionIndex + 1].typeName() !== "ABCDSurveyQuestion") {
+				footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
+			}
 			footerElements.addFooterElement(footerElements.footerElemConfidenceSlider);
 		}
 		if (navigator.userAgent.match(/iPad/i) == null) {

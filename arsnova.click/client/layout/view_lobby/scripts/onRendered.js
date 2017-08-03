@@ -81,7 +81,9 @@ Template.memberlist.onRendered(function () {
 				footerElements.addFooterElement(footerElements.footerElemProductTour);
 			}
 			footerElements.addFooterElement(footerElements.footerElemSound);
-			footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
+			if (Session.get("questionGroup").getQuestionList()[0].typeName() !== "ABCDSurveyQuestion") {
+				footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
+			}
 			footerElements.addFooterElement(footerElements.footerElemResponseProgress);
 			footerElements.addFooterElement(footerElements.footerElemConfidenceSlider);
 			footerElements.addFooterElement(footerElements.footerElemNicknames);

@@ -49,6 +49,9 @@ export const correctValueSchema = {
 export const isFirstStartSchema = {
 	type: Boolean
 };
+export const showOneAnswerPerRow = {
+	type: Boolean
+};
 
 export const questionGroupSchema = new SimpleSchema({
 	hashtag: hashtagSchema,
@@ -77,6 +80,10 @@ export const questionGroupSchema = new SimpleSchema({
 		optional: true
 	},
 	"questionList.$.displayAnswerText": {
+		type: Boolean,
+		optional: true
+	},
+	"questionList.$.showOneAnswerPerRow": {
 		type: Boolean,
 		optional: true
 	},

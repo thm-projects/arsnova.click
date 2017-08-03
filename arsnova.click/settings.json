@@ -12,7 +12,8 @@
 			"question": {
 				"text": "",
 				"timer": 60,
-				"multipleSurveySelectionEnabled": false
+				"multipleSurveySelectionEnabled": false,
+				"showOneAnswerPerRow": false
 			},
 			"answers": {
 				"text": "",

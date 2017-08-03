@@ -215,6 +215,7 @@
       "forward": "Weiter zum Countdown",
       "back": "Zurück zum Quiz-Manager",
       "show_answer_content_on_buttons": "Antworttext auf Abstimmbuttons?",
+      "show_one_answer_per_row": "Zeige nur eine Antwortoption pro Zeile?",
       "multiple_selection_survey": "Mehrere Optionen auswählbar?",
       "emoji_info": "Du kannst auch Emojis einfügen! <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'><img style='width:40px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/></a>",
       "description": {
@@ -225,6 +226,7 @@
         "added_answer_is_correct": "Dieser Button regelt, ob die Antwort als richtig oder falsch gewertet werden soll.",
         "added_answer_remove": "Bei einem Klick auf diese Schaltfläche wird die betreffende Antwort gelöscht.",
         "show_answer_content_on_buttons": "Die Antwortbuttons können entweder mit dem Buchstaben oder dem Inhalt der Antwort beschriftet werden. Beachte aber, dass ein langer Text auf dem Smartphone schlecht lesbar ist.",
+        "show_one_answer_per_row": "Um lange Texte oder Formeln richtig anzuzeigen, kannst du hier festlegen, dass eine Antwortoption auf die komplette Breite der Zeile gestreckt wird.",
         "multiple_selection_survey": "Hier kannst du einstellen, ob eine Mehrfachauswahl möglich sein soll.",
         "preview": "Hier siehst du, wie die Antwortoptionen auf dem Smartphone aussehen werden.",
         "range_area": "Hier kannst du die korrekte Antwort und die Toleranzen nach oben und unten angeben. Bitte beachte, dass die Eingabe in natürlichen Zahlen erfolgen muss.",

@@ -412,9 +412,8 @@ Template.liveResults.helpers({
 			return ["SurveyQuestion", "ABCDSurveyQuestion"].indexOf(questionDoc.questionList[index].type) === -1 && index <= eventDoc.questionIndex;
 		}
 	},
-	showQuestionButton: function () {
-		const index = parseInt(Router.current().params.questionIndex);
-		return isNaN(index) && Session.get("questionGroup").getQuestionList()[index].typeName() !== "ABCDSurveyQuestion";
+	showQuestionButton: function (index) {
+		return Session.get("questionGroup").getQuestionList()[index].typeName() !== "ABCDSurveyQuestion";
 	},
 	getNormalizedIndex: function (index) {
 		return index + 1;

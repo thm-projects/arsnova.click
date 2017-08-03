@@ -88,6 +88,7 @@ Template.votingview.events({
 		const id = $(event.currentTarget).attr("id");
 		$('#' + id).removeClass("quickfitSet");
 		questionLib.markdownRenderingTracker.changed();
+		lib.quickfitText(true);
 	},
 	"keydown #rangeInput": function (event, template) {
 		if (template.data && template.data["data-questionIndex"]) {

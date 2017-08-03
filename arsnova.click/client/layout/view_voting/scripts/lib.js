@@ -224,10 +224,17 @@ export function formatAnswerButtons() {
 		calculateResult = calculateButtons(answerOptionElements, contentWidth, contentHeight, ++scaleBaseWidth, ++scaleBaseHeight);
 	} while (calculateResult.maxButtons >= answerOptionElements);
 	calculateResult = calculateButtons(answerOptionElements, contentWidth, contentHeight, --scaleBaseWidth, --scaleBaseHeight);
-	let stretchedWidth = ((contentWidth / calculateResult.maxButtonsPerRow) - 10);
-	if (scaleBaseHeight * calculateResult.maxRows > contentHeight) {
-		stretchedWidth -= 10;
+	let stretchedWidth;
+	const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
+	if (Session.get("questionGroup").getQuestionList()[index].getShowOneAnswerPerRow()) {
+		stretchedWidth = "calc(100% - 15px)";
+	} else {
+		stretchedWidth = ((contentWidth / calculateResult.maxButtonsPerRow) - 15);
+		if (scaleBaseHeight * calculateResult.maxRows > contentHeight) {
+			stretchedWidth -= 10;
+		}
+		stretchedWidth += "px";
 	}
-	buttonElements.css({float: "left", margin: "5px", width: stretchedWidth + "px", height: scaleBaseHeight});
+	buttonElements.css({float: "left", margin: "5px", width: stretchedWidth, height: scaleBaseHeight});
 	buttonContainer.css({width: stretchedWidth * calculateResult.maxButtonsPerRow + (calculateResult.maxButtonsPerRow * 10)});
 }

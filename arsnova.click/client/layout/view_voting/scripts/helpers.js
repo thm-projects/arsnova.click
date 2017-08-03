@@ -34,7 +34,8 @@ Template.votingview.helpers({
 		return result;
 	},
 	showQuestionButton: function () {
-		return isNaN(parseInt(Router.current().params.questionIndex));
+		const index = parseInt(Router.current().params.questionIndex);
+		return isNaN(index) && Session.get("questionGroup").getQuestionList()[index].typeName() !== "ABCDSurveyQuestion";
 	},
 	getDisplayAnswerText: function () {
 		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);

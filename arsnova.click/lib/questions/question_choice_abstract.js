@@ -1,6 +1,9 @@
+import {Meteor} from 'meteor/meteor';
 import {AbstractQuestion} from './question_abstract.js';
 import {DefaultAnswerOption} from '../answeroptions/answeroption_default.js';
 import {FreeTextAnswerOption} from "../answeroptions/answeroption_freetext.js";
+
+const showOneAnswerPerRow = Symbol("showOneAnswerPerRow");
 
 export class AbstractChoiceQuestion extends AbstractQuestion {
 
@@ -15,6 +18,7 @@ export class AbstractChoiceQuestion extends AbstractQuestion {
 		if (this.constructor === AbstractChoiceQuestion) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
+		this[showOneAnswerPerRow] = typeof options.showOneAnswerPerRow === "undefined" ? Meteor.settings.public.default.question.showOneAnswerPerRow : options.showOneAnswerPerRow;
 		if (typeof options.answerOptionList === "undefined" || options.answerOptionList.length === 0 || options.answerOptionList[0] instanceof FreeTextAnswerOption || options.answerOptionList[0].type === "FreeTextAnswerOption") {
 			for (let i = 0; i < 4; i++) {
 				this.addAnswerOption(
@@ -38,6 +42,34 @@ export class AbstractChoiceQuestion extends AbstractQuestion {
 				}
 			}
 		}
+	}
+
+	setShowOneAnswerPerRow (newVal) {
+		this[showOneAnswerPerRow] = newVal;
+	}
+
+	getShowOneAnswerPerRow () {
+		return this[showOneAnswerPerRow];
+	}
+
+	/**
+	 * Serialize the instance object to a JSON compatible object
+	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
+	 */
+	serialize () {
+		return Object.assign(super.serialize(), {
+			showOneAnswerPerRow: this.getShowOneAnswerPerRow()
+		});
+	}
+
+	/**
+	 * Checks if this question equals another question
+	 * @param question {AbstractChoiceQuestion}
+	 * @returns {boolean} True if both questions are equal. False otherwise.
+	 */
+	equals (question) {
+		return super.equals(question) &&
+			question.getShowOneAnswerPerRow() === this.getShowOneAnswerPerRow();
 	}
 
 	/**

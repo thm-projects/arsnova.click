@@ -214,6 +214,7 @@
       "forward": "Compte à rebours",
       "back": "Retour au Quiz-Manager",
       "show_answer_content_on_buttons": "Réponses sur les boutons?",
+      "show_one_answer_per_row": "Show only one answer per row?",
       "multiple_selection_survey": "Sélection multiple possible?",
       "emoji_info": "Ajouter des émoticons? <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'><img style='width:40px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/></a>",
       "description": {
@@ -224,6 +225,7 @@
         "added_answer_is_correct": "Cette réponse doit-elle être évaluée correcte ou incorrecte?",
         "added_answer_remove": "Cliquez ici pour supprimer cette réponse.",
         "show_answer_content_on_buttons": "Les boutons de réponse peuvent contenir soit les réponses, soit les lettres qui leurs correspondent. Il est cependant à noter que, bien qu’échelonnés, des textes longs deviennent illisibles, couvrant parfois d’autres boutons.",
+        "show_one_answer_per_row": "This will increase the width of the answer option button to use the full width of the row. Use this for large formulas or texts.",
         "multiple_selection_survey": "Voulez vous que les participants soient notés directement après un clic sur une réponse ou alors qu’ils puissent revenir sur leur choix.",
         "preview": "Les réponses sur un Smartphone.",
         "range_area": "Donnez la réponse correcte et les tolérances vers le haut et le bas. NB: Données numériques en nombres entiers naturels ici.",

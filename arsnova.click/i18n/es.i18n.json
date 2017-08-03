@@ -215,6 +215,7 @@
       "forward": "Continuar al countdown",
       "back": "Volver al mánager del concurso",
       "show_answer_content_on_buttons": "¿Respuesta en el pin?",
+      "show_one_answer_per_row": "Show only one answer per row?",
       "multiple_selection_survey": "¿Varios opciones seleccionable?",
       "emoji_info": "También puedes usar emoticonos. <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'><img style='width:40px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/></a>",
       "description": {
@@ -225,6 +226,7 @@
         "added_answer_is_correct": "Ese pin regula cual si la respuesta sea contados correcta o falsa.",
         "added_answer_remove": "La respuesta afectada te puedes borrar con un clic en ese pin.",
         "show_answer_content_on_buttons": "Los pines de las respuestas pueden rotularía con el contenido de la respuesta o con la letra. ¡Pero nota que una respuesta larga no es legible bien en un equipo móvil!",
+        "show_one_answer_per_row": "This will increase the width of the answer option button to use the full width of the row. Use this for large formulas or texts.",
         "multiple_selection_survey": "Aquí puedes regular cual si los participantes puedan ver la evaluación del concurso directamente después del clic o cual si una selección múltiple pueda ser posible.",
         "preview": "Aquí ves como las opciones de respuestas se verá en el Smartphone.",
         "range_area": "Aquí puedes dar la respuesta correcta y la tolerancia (en números naturales).",

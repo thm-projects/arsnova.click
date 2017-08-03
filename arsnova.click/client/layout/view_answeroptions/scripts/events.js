@@ -66,6 +66,13 @@ Template.defaultAnswerOptionTemplate.events({
 		Session.set("questionGroup", questionItem);
 		localData.addHashtag(Session.get("questionGroup"));
 	},
+	"change #config_showOneAnswerPerRow_switch": function (event) {
+		const checked = $(event.target).prop('checked');
+		const questionItem = Session.get("questionGroup");
+		questionItem.getQuestionList()[Router.current().params.questionIndex].setShowOneAnswerPerRow(checked);
+		Session.set("questionGroup", questionItem);
+		localData.addHashtag(Session.get("questionGroup"));
+	},
 	"click .moveAnsweroptionUp": function (event) {
 		event.stopPropagation();
 		event.preventDefault();

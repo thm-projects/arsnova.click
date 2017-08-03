@@ -50,6 +50,23 @@
                            title="{{_ "view.answeroptions.show_answer_content_on_buttons"}}"
                            class="tabbable">
                 </div>
+                <div class="col-xs-12 answerOptionConfig" data-intro="{{_ "view.answeroptions.description.show_one_answer_per_row"}}">
+                    <p class="text-light checkboxLabel" id="showOneAnswerPerRow">{{_ "view.answeroptions.show_one_answer_per_row"}}</p>
+                    <input type="checkbox"
+                           id="config_showOneAnswerPerRow_switch"
+                           aria-label="{{_ "view.answeroptions.description.show_one_answer_per_row"}}"
+                           role="switch"
+                           name="switch"
+                           data-width="100"
+                           data-height="35"
+                           data-style="pull-right"
+                           data-onstyle="success"
+                           data-offstyle="danger"
+                           data-on="{{_ "view.answeroptions.free_text_question.onText"}}"
+                           data-off="{{_ "view.answeroptions.free_text_question.offText"}}"
+                           title="{{_ "view.answeroptions.show_one_answer_per_row"}}"
+                           class="tabbable">
+                </div>
                 {{#if isSurveyQuestion}}
                     <div class="col-xs-12 answerOptionConfig" data-intro="{{_ "view.answeroptions.description.multiple_selection_survey"}}">
                         <p class="text-light checkboxLabel" id="multipleSelectionSurvey">{{_ "view.answeroptions.multiple_selection_survey"}}</p>

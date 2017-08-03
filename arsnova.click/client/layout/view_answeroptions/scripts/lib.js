@@ -288,6 +288,7 @@ export const renderAnsweroptionItems = function () {
 		}
 	});
 	$('#config_showAnswerContentOnButtons_switch').bootstrapToggle(questionItem.getDisplayAnswerText() ? "on" : "off");
+	$('#config_showOneAnswerPerRow_switch').bootstrapToggle(questionItem.getShowOneAnswerPerRow() ? "on" : "off");
 	if (typeName === "SurveyQuestion") {
 		$('#config_multipleSelectionSurvey_switch').bootstrapToggle(questionItem.getMultipleSelectionEnabled() ? "on" : "off");
 	}

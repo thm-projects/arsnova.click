@@ -214,6 +214,7 @@
       "forward": "Proceed to the countdown",
       "back": "Back to the quiz manager",
       "show_answer_content_on_buttons": "Display the answer's content on the buttons?",
+      "show_one_answer_per_row": "Show only one answer per row?",
       "multiple_selection_survey": "Allow selection of multiple answers?",
       "emoji_info": "You can embed also one of these <a href='http://www.webpagefx.com/tools/emoji-cheat-sheet/' target='_blank'>Emojis (external website!)</a> in your answeroptions <img style='width:30px;' src='/images/emojis/smile.png' alt='smiling_emoji.png'/> <br/>Simply click on the website on the Emoji and paste it into the answeroption.",
       "description": {
@@ -224,6 +225,7 @@
         "added_answer_is_correct": "This button determines if the answeroption is marked as correct or wrong.",
         "added_answer_remove": "Clicking on this button deletes the response.",
         "show_answer_content_on_buttons": "The response buttons for the participants can either be labeled with the letter of the response or the complete answer's text. Note, however, that too much text in the answer can be badly readable depending on the size of the viewport.",
+        "show_one_answer_per_row": "This will increase the width of the answer option button to use the full width of the row. Use this for large formulas or texts.",
         "multiple_selection_survey": "Here you can set whether the participants are to go directly to the evaluation after clicking on a response of the survey, or whether a multiple selection should be possible.",
         "preview": "Here you can see a preview of the answer content entered on the left.",
         "range_area": "Here you can specify the correct answer as well as the top and lower tolerances. Please note that the input must be in natural numbers.",

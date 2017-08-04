@@ -312,8 +312,8 @@
       "demo_quiz": {
         "title": {
           "1": "Entdecke arsnova.click !",
-          "2": "Die Publikumsfrage: Gib einfach \u00BBABCD\u00AB ein.",
-          "3": "Alle Features: Gib \u00BBDemo Quiz\u00AB ein. Ruf die App mit dem angezeigten Quiznamen in einem zweiten Browser auf. Spiel das Quiz in verteilten Rollen.",
+          "2": "Gib \u00BBABCD\u00AB ein oder mehr vom Alphabet. Ruf die App mit dem angezeigten Quiznamen in einem zweiten Browser auf. Spiel das Quiz in verteilten Rollen.",
+          "3": "Willst du alle Fragetypen sehen? Gib \u00BBDemo Quiz\u00AB ein.",
           "4": "Besuch arsnova.eu und lerne, wie du Quizze im Unterricht einsetzen kannst."
         }
       }

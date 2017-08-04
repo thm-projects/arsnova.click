@@ -312,9 +312,9 @@
       "demo_quiz": {
         "title": {
           "1": "Entdecke arsnova.click !",
-          "2": "Gib \u00BBDemo Quiz\u00AB ein und starte es. Ruf die App in einem zweiten Browser auf und spiel das Quiz in verteilten Rollen.",
-          "3": "Gib \u00BBABCD\u00AB ein und starte eine schnelle Quizsession mit nur einer Frage und 4 Antwortoptionen von A bis D. Die Frage und die Inhalte der Antworten kannst du vorher deinen Zuhörern präsentieren.",
-          "4": "Besuch unseren Blog arsnova.eu und erfahr, wie du Quizze in deinem Unterricht oder in einem Vortrag einsetzen kannst."
+          "2": "Die Publikumsfrage: Gib einfach \u00BBABCD\u00AB ein.",
+          "3": "Alle Features: Gib \u00BBDemo Quiz\u00AB ein. Ruf die App mit dem angezeigten Quiznamen in einem zweiten Browser auf. Spiel das Quiz in verteilten Rollen.",
+          "4": "Besuch arsnova.eu und lerne, wie du Quizze im Unterricht einsetzen kannst."
         }
       }
     },

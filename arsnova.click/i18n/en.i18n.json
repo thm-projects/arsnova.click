@@ -722,7 +722,9 @@
           "session_closed": "The quiz session has been closed",
           "invalid_data": "The imported files are corrupt or the access is denied!",
           "invalid_input_data": "The entered data is either invalid or the access is denied!",
-          "duplicate_user": "You are attempting to participate with a second identity. This is not possible!"
+          "duplicate_user": "You are attempting to participate with a second identity. This is not possible!",
+          "invalid_login": "This quiz can only be started by an authorized CAS user.",
+          "maximum_quizzes_exceeded": "Exceeded the maximum number of parallel quizzes on this server."
         }
       }
     }

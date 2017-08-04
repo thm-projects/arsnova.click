@@ -29,6 +29,7 @@ import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
 import {resetConnectionIndication, startConnectionIndication, getRTT} from './lib.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
+import * as nickLib from "/client/layout/view_choose_nickname/scripts/lib.js";
 
 Template.connectionQualityHeader.events({
 	"click #connectionQualityHeader": function () {
@@ -167,62 +168,80 @@ Template.home.events({
 		}
 	},
 	"click #addNewHashtag": function () {
-		let hashtag = $("#hashtag-input-field").val().trim();
-		if (hashtag.toLowerCase() === "demo quiz") {
-			hashtag = hashtagLib.getNewDemoQuizName();
-		}
-		try {
-			new SimpleSchema({
-				hashtag: hashtagSchema
-			}).validate({hashtag: hashtag});
-		} catch (ex) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
-			});
-			return;
-		}
-		const localLoweredHashtags = localData.getAllLoweredHashtags();
-		if ($.inArray(hashtag.toLowerCase(), localLoweredHashtags) > -1 && HashtagsCollection.findOne()) {
-			const session = localData.reenterSession(hashtag);
-			Session.set("questionGroup", session);
-			if (Session.get("questionGroup").isValid()) {
-				sessionStorage.setItem("overrideValidQuestionRedirect", true);
+		const promise = new Promise(function (resolve, reject) {
+			if (Meteor.settings.public.maximumActiveQuizzes) {
+				const currentActiveQuizzes = EventManagerCollection.find({sessionStatus: {$gt: 1}}).fetch();
+				if (currentActiveQuizzes < Meteor.settings.public.maximumActiveQuizzes) {
+					Meteor.loginWithCas(function () {
+						nickLib.hasTHMMail() ? resolve() : reject("plugins.splashscreen.error.error_messages.invalid_login");
+					});
+				} else {
+					reject("plugins.splashscreen.error.error_messages.maximum_quizzes_exceeded");
+				}
+			} else {
+				resolve();
 			}
-			hashtagLib.addHashtag(Session.get("questionGroup"));
-		} else {
-			let questionGroup = null;
-			const successCallback = function (data) {
-				questionGroup = new DefaultQuestionGroup(data);
-				questionGroup.setHashtag(hashtag);
-				if (questionGroup.isValid()) {
+		});
+		promise.then(function () {
+			let hashtag = $("#hashtag-input-field").val().trim();
+			if (hashtag.toLowerCase() === "demo quiz") {
+				hashtag = hashtagLib.getNewDemoQuizName();
+			}
+			try {
+				new SimpleSchema({
+					hashtag: hashtagSchema
+				}).validate({hashtag: hashtag});
+			} catch (ex) {
+				new ErrorSplashscreen({
+					autostart: true,
+					errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
+				});
+				return;
+			}
+			const localLoweredHashtags = localData.getAllLoweredHashtags();
+			if ($.inArray(hashtag.toLowerCase(), localLoweredHashtags) > -1 && HashtagsCollection.findOne()) {
+				const session = localData.reenterSession(hashtag);
+				Session.set("questionGroup", session);
+				if (Session.get("questionGroup").isValid()) {
 					sessionStorage.setItem("overrideValidQuestionRedirect", true);
 				}
-				localStorage.setItem("showProductTour", true);
-				hashtagLib.addHashtag(questionGroup);
-			};
-			if (hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
-				$.ajax({
-					type: "GET",
-					url: `/demo_quiz/${TAPi18n.getLanguage()}.demo_quiz.json?_=${Date.now()}`,
-					dataType: 'json',
-					success: successCallback,
-					error: function () {
-						$.ajax({
-							type: "GET",
-							url: `/demo_quiz/en.demo_quiz.json?_=${Date.now()}`,
-							dataType: 'json',
-							success: successCallback
-						});
-					}
-				});
+				hashtagLib.addHashtag(Session.get("questionGroup"));
 			} else {
-				questionGroup = new DefaultQuestionGroup({
-					hashtag: hashtag
-				});
-				hashtagLib.addHashtag(questionGroup);
+				let questionGroup = null;
+				const successCallback = function (data) {
+					questionGroup = new DefaultQuestionGroup(data);
+					questionGroup.setHashtag(hashtag);
+					if (questionGroup.isValid()) {
+						sessionStorage.setItem("overrideValidQuestionRedirect", true);
+					}
+					localStorage.setItem("showProductTour", true);
+					hashtagLib.addHashtag(questionGroup);
+				};
+				if (hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
+					$.ajax({
+						type: "GET",
+						url: `/demo_quiz/${TAPi18n.getLanguage()}.demo_quiz.json?_=${Date.now()}`,
+						dataType: 'json',
+						success: successCallback,
+						error: function () {
+							$.ajax({
+								type: "GET",
+								url: `/demo_quiz/en.demo_quiz.json?_=${Date.now()}`,
+								dataType: 'json',
+								success: successCallback
+							});
+						}
+					});
+				} else {
+					questionGroup = new DefaultQuestionGroup({
+						hashtag: hashtag
+					});
+					hashtagLib.addHashtag(questionGroup);
+				}
 			}
-		}
+		}, function (rejectReason) {
+			new ErrorSplashscreen({autostart: true, errorMessage: rejectReason});
+		});
 	},
 	"click #joinSession": function () {
 		const hashtag = $("#hashtag-input-field").val().trim();

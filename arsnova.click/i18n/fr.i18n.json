@@ -713,7 +713,9 @@
           "session_closed": "Fin de la partie",
           "invalid_data": "Les données à importer sont incorrectes!",
           "invalid_input_data": "Les données saisies sont invalides ou incorrectes!",
-          "duplicate_user": "Désolé, un seul Pseudonyme pour un utilisateur!"
+          "duplicate_user": "Désolé, un seul Pseudonyme pour un utilisateur!",
+          "invalid_login": "This quiz can only be started by an authorized CAS user.",
+          "maximum_quizzes_exceeded": "Exceeded the maximum number of parallel quizzes on this server."
         }
       }
     }

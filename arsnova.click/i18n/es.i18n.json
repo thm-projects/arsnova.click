@@ -723,7 +723,9 @@
           "session_closed": "Ese rondo del concurso es determinado",
           "invalid_data": "Los datos para importar son averiado",
           "invalid_input_data": "Los datos inseridos son averiados o inválidos",
-          "duplicate_user": "No puedes participar en un concurso con dos apodos."
+          "duplicate_user": "No puedes participar en un concurso con dos apodos.",
+          "invalid_login": "This quiz can only be started by an authorized CAS user.",
+          "maximum_quizzes_exceeded": "Exceeded the maximum number of parallel quizzes on this server."
         }
       }
     }

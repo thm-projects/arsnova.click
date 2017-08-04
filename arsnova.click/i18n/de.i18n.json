@@ -723,7 +723,9 @@
           "session_closed": "Die Quizrunde wurde beendet",
           "invalid_data": "Die zu importierenden Daten sind fehlerhaft!",
           "invalid_input_data": "Die eingegebenen Daten sind ungültig oder fehlerhaft!",
-          "duplicate_user": "Du versuchst gerade, mit einem zweiten Nicknamen einem Quiz beizutreten. Dies ist nicht möglich!"
+          "duplicate_user": "Du versuchst gerade, mit einem zweiten Nicknamen einem Quiz beizutreten. Dies ist nicht möglich!",
+          "invalid_login": "Dieses Quiz kann nur von einem durch CAS authentifizierten Benutzer gestartet werden.",
+          "maximum_quizzes_exceeded": "Die maximale Anzahl der parallelen Quizze auf diesem Server wurde erreicht."
         }
       }
     }

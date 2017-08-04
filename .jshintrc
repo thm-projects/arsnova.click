@@ -9,6 +9,7 @@
   "latedef": true,
   "noarg": true,
   "nonbsp": true,
+  "expr": true,
   "globals": {
     "_": false,
     "$": false,

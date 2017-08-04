@@ -710,7 +710,9 @@
           "session_closed": "Il round del quiz è terminato",
           "invalid_data": "I dati da importare sono difettosi/sbagliatizu importierenden!",
           "invalid_input_data": "I dati inseriti non sono validi o sbagliati fehlerhaft nicht richtig?!",
-          "duplicate_user": "Stai cercando di accedere ad un quiz con un secondo nickname. Questo non è possibile!"
+          "duplicate_user": "Stai cercando di accedere ad un quiz con un secondo nickname. Questo non è possibile!",
+          "invalid_login": "This quiz can only be started by an authorized CAS user.",
+          "maximum_quizzes_exceeded": "Exceeded the maximum number of parallel quizzes on this server."
         }
       }
     }

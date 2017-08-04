@@ -41,7 +41,8 @@
 				}
 			}
 		},
-		"mathjaxUrl": "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"
+		"mathjaxUrl": "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js",
+		"maximumActiveQuizzes": 1
 	},
 	"cas": {
 		"baseUrl": "https://cas.thm.de/cas",

@@ -38,6 +38,7 @@ export function parseQuizdata({quizData, privateKey}) {
 	const targetDirectory = `${process.cwd()}/quiz_assets/${privateKey}/${questionGroup.getHashtag()}`;
 	const supportedFileTypes = [".gif", ".png", ".mpg", ".jpg", ".jpeg", ".avi"];
 	const downloadMatches = [];
+	let failedDownloads = 0;
 
 	questionGroup.getQuestionList().forEach(function (question) {
 		const questiontext = question.getQuestionText().split("\n");
@@ -59,15 +60,15 @@ export function parseQuizdata({quizData, privateKey}) {
 		mkdirp(targetDirectory, function () {
 			urlsToParse.forEach(function (url) {
 				const fileLocation = `${targetDirectory}/${url.substring(url.lastIndexOf("/") + 1)}`;
-				try {
+				if (fs.existsSync(fileLocation)) {
 					fs.unlink(fileLocation);
-				} catch (ex) {}
+				}
 				if (url.indexOf("youtu") > -1) {
 					const video = ytdl(url);
 					video.pipe(fs.createWriteStream(fileLocation));
 					video.on('complete', function () {
 						downloadMatches.push({url, fileLocation});
-						if (downloadMatches.length === urlsToParse.length) {
+						if (downloadMatches.length + failedDownloads === urlsToParse.length) {
 							resolve(downloadMatches);
 						}
 					});
@@ -76,7 +77,7 @@ export function parseQuizdata({quizData, privateKey}) {
 					video.pipe(fs.createWriteStream(fileLocation));
 					video.on('end', function () {
 						downloadMatches.push({url, fileLocation});
-						if (downloadMatches.length === urlsToParse.length) {
+						if (downloadMatches.length + failedDownloads === urlsToParse.length) {
 							resolve(downloadMatches);
 						}
 					});
@@ -87,11 +88,14 @@ export function parseQuizdata({quizData, privateKey}) {
 						} else {
 							if (supportedFileTypes.indexOf(path.extname(fileLocation)) === -1) {
 								console.error(`Unsupported file type, received ${path.extname(fileLocation)}. Valid file types are: ${supportedFileTypes}`);
-								fs.unlink(fileLocation);
+								if (fs.existsSync(fileLocation)) {
+									fs.unlink(fileLocation);
+								}
+								failedDownloads++;
 							} else {
 								const fileName = path.basename(fileLocation);
 								downloadMatches.push({url, fileLocation, fileName});
-								if (downloadMatches.length === urlsToParse.length) {
+								if (downloadMatches.length + failedDownloads === urlsToParse.length) {
 									resolve(downloadMatches);
 								}
 							}

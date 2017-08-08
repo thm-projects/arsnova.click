@@ -432,9 +432,11 @@ Template.footerNavButtons.events({
 					Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
 					Meteor.call('SessionConfiguration.addConfig', Session.get("questionGroup").getConfiguration().serialize());
 					Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").rewrite().serialize());
+					Session.delete("serverDownloadsQuizAssets");
 					Router.go("/" + Router.current().params.quizName + "/memberlist");
 				};
 				if (Meteor.settings.public.useLocalAssetsCache) {
+					Session.set("serverDownloadsQuizAssets", true);
 					Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize(), function () {
 						$.post(`/api/downloadQuizAssets?_=${new Date().getTime()}`,
 							{

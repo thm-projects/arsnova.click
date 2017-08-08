@@ -16,7 +16,8 @@
       "message": "arsnova.click verwendet Cookies.",
       "dismiss": "Hinweis nicht mehr anzeigen",
       "learn_more": "Datenschutzerklärung"
-    }
+    },
+    "download_processing": "Bitte warten..."
   },
   "region": {
     "footer": {

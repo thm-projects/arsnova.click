@@ -89,7 +89,8 @@ export function parseCommentBlock(result, i) {
 }
 
 export function parseLinkBlock(result, i) {
-	const startIndex = /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.exec(result[i]);
+	const startIndex = /((https?:\/\/)?[\w-\/:]+(\.[\w-\/:]+)+\.?(:\d+)?(\/\S*\w)?)/.exec(result[i]);
+	console.log(startIndex);
 	const linkStr = startIndex[0] || result[i];
 	const link = !/^https?:\/\//.test(linkStr) ? "http://" + linkStr : linkStr;
 	const prevLinkContent = result[i].substring(0, startIndex.index);

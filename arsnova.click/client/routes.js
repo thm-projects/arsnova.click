@@ -426,6 +426,9 @@ Router.route('/:quizName/nick', {
 });
 
 Router.route('/:quizName/quizManager', {
+	subscriptions: function () {
+		subsCache.subscribe('ProxyCollection.join');
+	},
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			this.render('footerNavButtons', {

@@ -84,7 +84,11 @@ const helper = new MeteorMathJax.Helper({
 });
 Template.registerHelper('mathjax', helper.getTemplate());
 if (Meteor.settings.public.mathjaxUrl) {
-	MeteorMathJax.sourceUrl = Meteor.settings.public.mathjaxUrl;
+	if (Meteor.settings.public.useLocalAssetsCache) {
+		MeteorMathJax.sourceUrl = `/server/rewriteLibrary/mathjax/MathJax.js`;
+	} else {
+		MeteorMathJax.sourceUrl = Meteor.settings.public.mathjaxUrl;
+	}
 }
 MeteorMathJax.defaultConfig = {
 	config: ["TeX-AMS-MML_HTMLorMML.js"],
@@ -126,6 +130,8 @@ Meteor.startup(function () {
 			};
 			$.getScript("//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js");
 		});
+		const fontURL = Meteor.settings.public.useLocalAssetsCache ? "/server/rewriteLibrary/font/Font.css" : Meteor.settings.public.fontUrl;
+		$('head').append(`<link href="${fontURL}" rel="stylesheet" type='text/css'>`);
 		navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 		$(function () {
 			FastClick.attach(document.body);

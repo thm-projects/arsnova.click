@@ -3,12 +3,17 @@
     "babel-runtime": "~6.25",
     "child_process": "~1.0",
     "excel4node": "~1.2",
+    "file-type": "^5.2.0",
     "meteor-node-stubs": "~0.2",
+    "mkdir": "~0.0",
+    "mkdirp": "latest",
     "phantomjs-prebuilt": "~2.1",
     "process": "~0.11",
-    "webpage": "~0.3"
+    "vimeo-downloader": "~1.0",
+    "webpage": "~0.3",
+    "ytdl-core": "~0.15.0"
   },
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "gulp": "~3.9"
   }
 }

@@ -426,12 +426,29 @@ Template.footerNavButtons.events({
 				break;
 			case "quizSummary":
 			case "quizManager":
-				Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
-				Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
-				Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
-				Meteor.call('SessionConfiguration.addConfig', Session.get("questionGroup").getConfiguration().serialize());
-				Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
-				Router.go("/" + Router.current().params.quizName + "/memberlist");
+				const bootstrapQuiz = function () {
+					Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
+					Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
+					Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
+					Meteor.call('SessionConfiguration.addConfig', Session.get("questionGroup").getConfiguration().serialize());
+					Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").rewrite().serialize());
+					Router.go("/" + Router.current().params.quizName + "/memberlist");
+				};
+				if (Meteor.settings.public.useLocalAssetsCache) {
+					Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize(), function () {
+						$.post(`/api/downloadQuizAssets?_=${new Date().getTime()}`,
+							{
+								sessionConfiguration: {
+									hashtag: Router.current().params.quizName,
+									privateKey: localData.getPrivateKey()
+								}
+							},
+							bootstrapQuiz
+						);
+					});
+				} else {
+					bootstrapQuiz();
+				}
 				break;
 			case "results":
 				break;

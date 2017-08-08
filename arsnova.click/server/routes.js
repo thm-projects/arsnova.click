@@ -20,6 +20,7 @@ import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {Router} from 'meteor/iron:router';
 import {HashtagsCollection, hashtagSchema} from '/lib/hashtags/collection.js';
+import {ProxyCollection} from '/lib/proxy/collection.js';
 import {QuestionGroupCollection, questionGroupSchema} from '/lib/questions/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
@@ -33,6 +34,7 @@ import {ExcelTheme} from '/server/export_templates/excel_default_styles.js';
 import fs from 'fs';
 import process from 'process';
 import xlsx from 'excel4node';
+import {parseQuizdata} from "./lib";
 
 Router.route("/server/preview/:themeName/:language", function () {
 	const self = this,
@@ -132,6 +134,82 @@ Router.route("/server/generateExcelFile/:hashtag/:translation/:privateKey/:theme
 	const date = new Date();
 	wb.write("Export-" + this.params.hashtag + "-" + date.getDate() + "_" + (date.getMonth() + 1) + "_" + date.getFullYear() + "-" + date.getHours() + "_" + date.getMinutes() + ".xlsx", this.response);
 }, {where: 'server'});
+
+Router.route("/server/rewriteData/:hashtag/:fileName", function () {
+	if (!HashtagsCollection.findOne({hashtag: this.params.hashtag})) {
+		this.response.writeHead(500);
+		this.response.end("Hashtag not found");
+		return;
+	}
+	if (!SessionConfigurationCollection.findOne({hashtag: this.params.hashtag})) {
+		this.response.writeHead(500);
+		this.response.end("Session is inactive");
+		return;
+	}
+	const proxyDoc = ProxyCollection.findOne({hashtag: this.params.hashtag});
+	const self = this;
+	const fileLocation = proxyDoc.proxyFiles.find(function (element) {
+		return element.fileName === self.params.fileName;
+	}).fileLocation;
+	fs.access(fileLocation, function (error) {
+		if (error) {
+			self.response.writeHead(404);
+			self.response.end("404 - File not found");
+		} else {
+			fs.readFile(fileLocation, function (err, data) {
+				if (err) {
+					throw err;
+				}
+				self.response.end(data);
+			});
+		}
+	});
+}, {where: 'server'});
+
+Router.route('/server/rewriteLibrary/:libName/:fileName', function () {
+	const self = this;
+	const fileLocation = `${process.cwd()}/lib/${this.params.libName}/${this.params.fileName}`;
+	fs.access(fileLocation, function (error) {
+		if (error) {
+			self.response.writeHead(404);
+			self.response.end("404 - File not found");
+		} else {
+			fs.readFile(fileLocation, function (err, data) {
+				if (err) {
+					throw err;
+				}
+				self.response.end(data);
+			});
+		}
+	});
+}, {where: 'server'});
+
+Router.route('/api/downloadQuizAssets', {where: 'server'})
+	.post(function () {
+		const sessionConfiguration = this.request.body.sessionConfiguration;
+		const hashtag = decodeURIComponent(sessionConfiguration.hashtag);
+		const privateKey = decodeURIComponent(sessionConfiguration.privateKey);
+		const self = this;
+
+		if (!HashtagsCollection.findOne({hashtag: hashtag})) {
+			this.response.writeHead(500);
+			this.response.end("Hashtag not found");
+		}
+		if (HashtagsCollection.findOne({hashtag: hashtag}).privateKey !== privateKey) {
+			this.response.writeHead(500);
+			this.response.end("Missing permissions.");
+		}
+
+		const result = parseQuizdata({quizData: QuestionGroupCollection.findOne({hashtag: hashtag}), privateKey: privateKey});
+		result.then(function (proxyFiles) {
+			Meteor.call('ProxyCollection.updateData', {hashtag, proxyFiles});
+			self.response.writeHead(200);
+			self.response.end(JSON.stringify(proxyFiles));
+		}, function (data) {
+			self.response.writeHead(500);
+			self.response.end(JSON.stringify(data));
+		});
+	});
 
 Router.route('/api/keepalive', {where: 'server'})
 	.post(function () {

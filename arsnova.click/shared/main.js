@@ -39,16 +39,15 @@ Meteor.methods({
 			QuestionGroupCollection.remove({hashtag: hashtag});
 			EventManagerCollection.remove({hashtag: hashtag});
 			SessionConfigurationCollection.remove({hashtag: hashtag});
-
-			if (Meteor.isServer) {
-				childProcess.spawn(`rm`, [`-rf`, `${process.cwd()}/quiz_assets/${HashtagsCollection.findOne({hashtag: hashtag}).privateKey}/${hashtag}`]);
-			}
 		});
 	},
 	'Main.deleteEverything': function ({hashtag}) {
 		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
 
 		Meteor.call("Main.killAll", hashtag);
+		if (Meteor.isServer) {
+			childProcess.spawn(`rm`, [`-rf`, `${process.cwd()}/quiz_assets/${HashtagsCollection.findOne({hashtag: hashtag}).privateKey}/${hashtag}`]);
+		}
 		HashtagsCollection.remove({hashtag: hashtag});
 	}
 });

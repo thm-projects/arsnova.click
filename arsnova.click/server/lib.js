@@ -59,24 +59,41 @@ export function parseQuizdata({quizData, privateKey}) {
 	return new Promise(function (resolve) {
 		mkdirp(targetDirectory, function () {
 			urlsToParse.forEach(function (url) {
-				const fileLocation = `${targetDirectory}/${url.substring(url.lastIndexOf("/") + 1)}`;
+				let fileLocation = `${targetDirectory}/${url.substring(url.lastIndexOf("/") + 1).replace(/\?/g, "_")}`;
+				let fileName = path.basename(fileLocation);
 				if (fs.existsSync(fileLocation)) {
 					fs.unlink(fileLocation);
 				}
 				if (url.indexOf("youtu") > -1) {
+					fileLocation += "_youtube";
+					fileName += "_youtube";
 					const video = ytdl(url);
 					video.pipe(fs.createWriteStream(fileLocation));
+					video.on('end', function () {
+						downloadMatches.push({url, fileLocation, fileName});
+						if (downloadMatches.length + failedDownloads === urlsToParse.length) {
+							resolve(downloadMatches);
+						}
+					});
 					video.on('complete', function () {
-						downloadMatches.push({url, fileLocation});
+						downloadMatches.push({url, fileLocation, fileName});
 						if (downloadMatches.length + failedDownloads === urlsToParse.length) {
 							resolve(downloadMatches);
 						}
 					});
 				} else if (url.indexOf("vimeo") > -1) {
+					fileLocation += "_vimeo";
+					fileName += "_vimeo";
 					const video = vidl(url, {quality: '360p'});
 					video.pipe(fs.createWriteStream(fileLocation));
 					video.on('end', function () {
-						downloadMatches.push({url, fileLocation});
+						downloadMatches.push({url, fileLocation, fileName});
+						if (downloadMatches.length + failedDownloads === urlsToParse.length) {
+							resolve(downloadMatches);
+						}
+					});
+					video.on('complete', function () {
+						downloadMatches.push({url, fileLocation, fileName});
 						if (downloadMatches.length + failedDownloads === urlsToParse.length) {
 							resolve(downloadMatches);
 						}
@@ -87,13 +104,12 @@ export function parseQuizdata({quizData, privateKey}) {
 							console.error(error);
 						} else {
 							if (supportedFileTypes.indexOf(path.extname(fileLocation)) === -1) {
-								console.error(`Unsupported file type, received ${path.extname(fileLocation)}. Valid file types are: ${supportedFileTypes}`);
+								console.error(`Unsupported file type, received ${path.basename(fileLocation)}. Valid file types are: ${supportedFileTypes}. Assuming the url is a regular link which will not be rewritten.`);
 								if (fs.existsSync(fileLocation)) {
 									fs.unlink(fileLocation);
 								}
 								failedDownloads++;
 							} else {
-								const fileName = path.basename(fileLocation);
 								downloadMatches.push({url, fileLocation, fileName});
 								if (downloadMatches.length + failedDownloads === urlsToParse.length) {
 									resolve(downloadMatches);

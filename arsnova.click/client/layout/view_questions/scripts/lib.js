@@ -166,7 +166,7 @@ export function parseGithubFlavoredMarkdown(result, overrideLineBreaks = true) {
 			case /~~.*~~/.test(result[i]):
 				parseStrikeThroughBlock(result, i);
 				break;
-			case !/(^!)?\[.*\]\(.*\)/.test(result[i]) && /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(result[i]) && !(/youtube/.test(result[i]) || /youtu.be/.test(result[i]) || /vimeo/.test(result[i])):
+			case !/(^!)?\[.*\]\(.*\)/.test(result[i]) && /((https?:\/\/)?[\w-\/:]+(\.[\w-\/:]+)+\.?(:\d+)?(\/\S*\w)?)/.test(result[i]) && !(/youtube/.test(result[i]) || /youtu.be/.test(result[i]) || /vimeo/.test(result[i])):
 				parseLinkBlock(result, i);
 				break;
 			case overrideLineBreaks && result[i].length === 0:

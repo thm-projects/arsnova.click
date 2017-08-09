@@ -260,7 +260,7 @@ export class AbstractQuestionGroup {
 				if (match) {
 					proxyData.proxyFiles.forEach(function (element) {
 						if (questiontextLine.indexOf(element.url) > -1) {
-							const newQuestiontextLine = questiontextLine.replace(element.url, apiURL + element.fileName);
+							const newQuestiontextLine = questiontextLine.replace(element.url, apiURL + element.fileName).replace(/ /g, "%20");
 							question.setQuestionText(question.getQuestionText().replace(questiontextLine, newQuestiontextLine));
 						}
 					});
@@ -271,7 +271,7 @@ export class AbstractQuestionGroup {
 				if (match) {
 					proxyData.proxyFiles.forEach(function (element) {
 						if (answer.getAnswerText().indexOf(element.url) > -1) {
-							const newAnswerText = answer.getAnswerText().replace(element.url, apiURL + element.fileName);
+							const newAnswerText = answer.getAnswerText().replace(element.url, apiURL + element.fileName).replace(/ /g, "%20");
 							answer.setAnswerText(newAnswerText);
 						}
 					});

@@ -29,13 +29,20 @@
                             {{#each splitQuestionTextOnNewLine}}
                                 {{#if isVideoQuestionText this}}
                                     {{#with getVideoData this}}
-                                        <object width="100%" height="100%">
-                                            <param name="movie"
+                                        {{#if isLocalHostedVideo}}
+                                            <video width="100%" height="100%" controls>
+                                                <source src="{{this.srcAttr}}" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        {{else}}
+                                            <object width="100%" height="100%">
+                                                <param name="movie"
                                                    value="{{this.origin}}{{this.videoId}}?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3"/>
-                                            <param name="allowFullScreen" value="true"/>
-                                            <param name="allowscriptaccess" value="always"/>
-                                            {{{this.embedTag}}}
-                                        </object>
+                                                <param name="allowFullScreen" value="true"/>
+                                                <param name="allowscriptaccess" value="always"/>
+                                                {{{this.embedTag}}}
+                                            </object>
+                                        {{/if}}
                                     {{/with}}
                                 {{else}}
                                     {{#mathjax}}{{this}}{{/mathjax}}
@@ -44,89 +51,82 @@
                         </div>
                         {{#if revealAnswers}}
                             <div id="answerContent" class="markdown-content" role="list">
-                                {{#if isRangedQuestion}}
+                            {{#if isRangedQuestion}}
+                                {{#if revealCorrectAnswerValue}}
+                                    <h3 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h3>
+                                    {{#with getAnswerOptions}}
+                                        <div class="answerContentElementWrapper" role="listitem">
+                                            <div class="answerContentElementLetter">
+                                                <span>{{_ "plugins.splashscreen.question_and_answer.min_range"}}</span>
+                                            </div>
+                                            <div class="answerContentElementItem">
+                                                <span>{{this.[0]}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="answerContentElementWrapper" role="listitem">
+                                            <div class="answerContentElementLetter">
+                                                <span>{{_ "plugins.splashscreen.question_and_answer.correct_value"}}</span>
+                                            </div>
+                                            <div class="answerContentElementItem">
+                                                <span>{{this.[1]}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="answerContentElementWrapper" role="listitem">
+                                            <div class="answerContentElementLetter">
+                                                <span>{{_ "plugins.splashscreen.question_and_answer.max_range"}}</span>
+                                            </div>
+                                            <div class="answerContentElementItem">
+                                                <span>{{this.[2]}}</span>
+                                            </div>
+                                        </div>
+                                    {{/with}}
+                                {{/if}}
+                            {{else}}
+                                {{#if isFreeTextQuestion}}
                                     {{#if revealCorrectAnswerValue}}
-                                        <h3 id="answerHeader" role="heading">{{_
-                                                "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h3>
+                                        <h3 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}}</h3>
                                         {{#with getAnswerOptions}}
                                             <div class="answerContentElementWrapper" role="listitem">
                                                 <div class="answerContentElementLetter">
-                                                    <span>{{_
-                                                            "plugins.splashscreen.question_and_answer.min_range"}}</span>
+                                                    <span>{{_ "plugins.splashscreen.question_and_answer.reference_value"}}</span>
                                                 </div>
                                                 <div class="answerContentElementItem">
-                                                    <span>{{this.[0]}}</span>
-                                                </div>
-                                            </div>
-                                            <div class="answerContentElementWrapper" role="listitem">
-                                                <div class="answerContentElementLetter">
-                                                    <span>{{_
-                                                            "plugins.splashscreen.question_and_answer.correct_value"}}</span>
-                                                </div>
-                                                <div class="answerContentElementItem">
-                                                    <span>{{this.[1]}}</span>
-                                                </div>
-                                            </div>
-                                            <div class="answerContentElementWrapper" role="listitem">
-                                                <div class="answerContentElementLetter">
-                                                    <span>{{_
-                                                            "plugins.splashscreen.question_and_answer.max_range"}}</span>
-                                                </div>
-                                                <div class="answerContentElementItem">
-                                                    <span>{{this.[2]}}</span>
+                                                    {{#mathjax}}{{this[0]}}{{/mathjax}}
                                                 </div>
                                             </div>
                                         {{/with}}
                                     {{/if}}
                                 {{else}}
-                                    {{#if isFreeTextQuestion}}
-                                        {{#if revealCorrectAnswerValue}}
-                                            <h3 id="answerHeader" role="heading">{{_
-                                                    "plugins.splashscreen.question_and_answer.answeroption"
-                                                    count=1}}</h3>
-                                            {{#with getAnswerOptions}}
-                                                <div class="answerContentElementWrapper" role="listitem">
-                                                    <div class="answerContentElementLetter">
-                                                        <span>{{_
-                                                                "plugins.splashscreen.question_and_answer.reference_value"}}</span>
-                                                    </div>
-                                                    <div class="answerContentElementItem">
-                                                        {{#mathjax}}{{this[0]}}{{/mathjax}}
-                                                    </div>
-                                                </div>
-                                            {{/with}}
-                                        {{/if}}
-                                    {{else}}
-                                        <h3 id="answerHeader" role="heading">{{_
-                                                "plugins.splashscreen.question_and_answer.answeroption" count=2}}</h3>
-                                        {{#each getAnswerOptions}}
-                                            <div class="answerContentElementWrapper" role="listitem">
-                                                <div class="answerContentElementLetter {{#unless isSurveyQuestion}}{{#if
-                                                        revealCorrectAnswerValue}}{{#if isCorrectAnswer
-                                                                                        @index}}correctAnswer{{else}}wrongAnswer{{/if}}{{/if}}{{/unless}}">
-                                                    <span>{{_ "plugins.splashscreen.question_and_answer.answeroption"
-                                                              count=1}} {{answerOptionLetter @index}}</span>
-                                                </div>
-                                                <div class="answerContentElementItem">
-                                                    {{#if isVideoQuestionText this}}
-                                                        {{#with getVideoData this}}
-                                                            <object width="100%" height="100%">
-                                                                <param name="movie"
-                                                                       value="{{this.origin}}{{this.videoId}}?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3"/>
-                                                                <param name="allowFullScreen" value="true"/>
-                                                                <param name="allowscriptaccess" value="always"/>
-                                                                {{{this.embedTag}}}
-                                                            </object>
-                                                        {{/with}}
-                                                    {{else}}
-                                                        {{#mathjax}}{{this}}{{/mathjax}}
-                                                    {{/if}}
-                                                </div>
+                                    <h3 id="answerHeader" role="heading">{{_ "plugins.splashscreen.question_and_answer.answeroption" count=2}}</h3>
+                                    {{#each getAnswerOptions}}
+                                        <div class="answerContentElementWrapper" role="listitem">
+                                            <div class="answerContentElementLetter {{#unless isSurveyQuestion}}{{#if revealCorrectAnswerValue}}{{#if isCorrectAnswer @index}}correctAnswer{{else}}wrongAnswer{{/if}}{{/if}}{{/unless}}">
+                                                <span>{{_ "plugins.splashscreen.question_and_answer.answeroption" count=1}} {{answerOptionLetter @index}}</span>
                                             </div>
-                                        {{/each}}
-                                    {{/if}}
+                                            <div class="answerContentElementItem">
+                                                {{#if isVideoQuestionText this}}
+                                                    {{#with getVideoData this}}
+                                                        {{#if isLocalHostedVideo}}
+                                                            <video width="100%" height="100%" controls>
+                                                                <source src="{{this.srcAttr}}" type="video/mp4">
+                                                                Your browser does not support the video tag.
+                                                            </video>
+                                                        {{else}}<object width="100%" height="100%">
+                                                            <param name="movie" value="{{this.origin}}{{this.videoId}}?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3"/>
+                                                            <param name="allowFullScreen" value="true"/>
+                                                            <param name="allowscriptaccess" value="always"/>
+                                                            {{{this.embedTag}}}
+                                                        </object>{{/if}}
+                                                    {{/with}}
+                                                {{else}}
+                                                    {{#mathjax}}{{this}}{{/mathjax}}
+                                                {{/if}}
+                                            </div>
+                                        </div>
+                                    {{/each}}
                                 {{/if}}
-                            </div>
+                            {{/if}}
+                        </div>
                         {{/if}}
                     </div>
                     <div class="modal-footer">

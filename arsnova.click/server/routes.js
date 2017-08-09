@@ -136,6 +136,7 @@ Router.route("/server/generateExcelFile/:hashtag/:translation/:privateKey/:theme
 }, {where: 'server'});
 
 Router.route("/server/rewriteData/:hashtag/:fileName", function () {
+	this.params.hashtag = decodeURIComponent(this.params.hashtag);
 	if (!HashtagsCollection.findOne({hashtag: this.params.hashtag})) {
 		this.response.writeHead(500);
 		this.response.end("Hashtag not found");
@@ -156,24 +157,7 @@ Router.route("/server/rewriteData/:hashtag/:fileName", function () {
 			self.response.writeHead(404);
 			self.response.end("404 - File not found");
 		} else {
-			fs.readFile(fileLocation, function (err, data) {
-				if (err) {
-					throw err;
-				}
-				self.response.end(data);
-			});
-		}
-	});
-}, {where: 'server'});
-
-Router.route('/server/rewriteLibrary/:libName/:fileName', function () {
-	const self = this;
-	const fileLocation = `${process.cwd()}/lib/${this.params.libName}/${this.params.fileName}`;
-	fs.access(fileLocation, function (error) {
-		if (error) {
-			self.response.writeHead(404);
-			self.response.end("404 - File not found");
-		} else {
+			self.response.setHeader('content-type', "video/mpeg");
 			fs.readFile(fileLocation, function (err, data) {
 				if (err) {
 					throw err;
@@ -202,7 +186,7 @@ Router.route('/api/downloadQuizAssets', {where: 'server'})
 
 		const result = parseQuizdata({quizData: QuestionGroupCollection.findOne({hashtag: hashtag}), privateKey: privateKey});
 		result.then(function (proxyFiles) {
-			Meteor.call('ProxyCollection.updateData', {hashtag, proxyFiles});
+			Meteor.call('ProxyCollection.updateData', hashtag, proxyFiles);
 			self.response.writeHead(200);
 			self.response.end(JSON.stringify(proxyFiles));
 		}, function (data) {

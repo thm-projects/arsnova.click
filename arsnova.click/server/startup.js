@@ -150,13 +150,5 @@ if (Meteor.isServer) {
 				});
 			}, 800);
 		}
-		if (Meteor.settings.public.useLocalAssetsCache) {
-			mkdirp(`${process.cwd()}/lib/mathjax/`, function () {
-				download(Meteor.settings.public.mathjaxUrl, `${process.cwd()}/lib/mathjax/MathJax.js`);
-			});
-			mkdirp(`${process.cwd()}/lib/font/`, function () {
-				download(Meteor.settings.public.fontUrl, `${process.cwd()}/lib/font/Font.css`);
-			});
-		}
 	});
 }

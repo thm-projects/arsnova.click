@@ -172,6 +172,9 @@ Router.onAfterAction(function () {
 });
 
 Router.route('/', {
+	subscriptions: function () {
+		subsCache.subscribe('ProxyCollection.join');
+	},
 	controller: NonBlockingRouteController,
 	action: function () {
 		this.render("titel", {

@@ -295,6 +295,7 @@
       "valid_question": "Gültige Quizrunde",
       "invalid_question": "Ungültige Quizrunde",
       "no_sessions": "Es sind keine Quizze in diesem Browser gespeichert.",
+      "password": "Passwort zum Starten des Quizzes",
       "aria_description": {
         "hashtag-input-field": "Gib hier den Quiznamen ein",
         "joinSession": "Nimm an einem bestehenden Quiz teil",
@@ -723,7 +724,10 @@
           "session_closed": "Die Quizrunde wurde beendet",
           "invalid_data": "Die zu importierenden Daten sind fehlerhaft!",
           "invalid_input_data": "Die eingegebenen Daten sind ungültig oder fehlerhaft!",
-          "duplicate_user": "Du versuchst gerade, mit einem zweiten Nicknamen einem Quiz beizutreten. Dies ist nicht möglich!"
+          "duplicate_user": "Du versuchst gerade, mit einem zweiten Nicknamen einem Quiz beizutreten. Dies ist nicht möglich!",
+          "invalid_login": "Dieses Quiz kann nur von einem durch CAS authentifizierten Benutzer gestartet werden.",
+          "invalid_password": "Das Passwort ist nicht korrekt!",
+          "maximum_quizzes_exceeded": "Die maximale Anzahl der parallelen Quizze auf diesem Server wurde erreicht."
         }
       }
     }

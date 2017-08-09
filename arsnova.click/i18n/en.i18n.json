@@ -294,6 +294,7 @@
       "valid_question": "Valid Quiz",
       "invalid_question": "Invalid Quiz",
       "no_sessions": "There are no quizzes stored in your browser.",
+      "password": "Password for starting the quiz",
       "aria_description": {
         "hashtag-input-field": "Enter the Quizname here",
         "joinSession": "Participate at an active quiz",
@@ -722,7 +723,10 @@
           "session_closed": "The quiz session has been closed",
           "invalid_data": "The imported files are corrupt or the access is denied!",
           "invalid_input_data": "The entered data is either invalid or the access is denied!",
-          "duplicate_user": "You are attempting to participate with a second identity. This is not possible!"
+          "duplicate_user": "You are attempting to participate with a second identity. This is not possible!",
+          "invalid_login": "This quiz can only be started by an authorized CAS user.",
+          "invalid_password": "The password is not correct!",
+          "maximum_quizzes_exceeded": "Exceeded the maximum number of parallel quizzes on this server."
         }
       }
     }

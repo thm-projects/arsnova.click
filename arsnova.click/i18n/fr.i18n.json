@@ -294,6 +294,7 @@
       "valid_question": "Question valide",
       "invalid_question": "Question invalide",
       "no_sessions": "Aucun Quiz n’est enregistré sur ce navigateur.",
+      "password": "Password for starting the quiz",
       "aria_description": {
         "hashtag-input-field": "Entrez le nom du Quiz",
         "joinSession": "Faire une partie de Quiz",
@@ -713,7 +714,10 @@
           "session_closed": "Fin de la partie",
           "invalid_data": "Les données à importer sont incorrectes!",
           "invalid_input_data": "Les données saisies sont invalides ou incorrectes!",
-          "duplicate_user": "Désolé, un seul Pseudonyme pour un utilisateur!"
+          "duplicate_user": "Désolé, un seul Pseudonyme pour un utilisateur!",
+          "invalid_login": "This quiz can only be started by an authorized CAS user.",
+          "invalid_password": "The password is not correct!",
+          "maximum_quizzes_exceeded": "Exceeded the maximum number of parallel quizzes on this server."
         }
       }
     }

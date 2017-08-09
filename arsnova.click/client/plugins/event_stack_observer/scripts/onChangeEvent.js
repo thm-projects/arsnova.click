@@ -127,7 +127,7 @@ function addLiveresultsChangeEvents() {
 					return;
 				}
 				Session.set("countdownInitialized", true);
-				if (questionElement.type !== "ABCDSurveyQuestion") {
+				if (questionElement.type !== "ABCDSingleChoiceQuestion") {
 					liveResultsLib.displayQuestionAndAnswerDialog(value.questionIndex);
 				}
 				setTimeout(function () {

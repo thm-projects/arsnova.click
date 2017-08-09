@@ -171,7 +171,7 @@ export function countdownFinish() {
 		}
 		footerElements.removeFooterElement(footerElements.footerElemReadingConfirmation);
 	} else {
-		if (Session.get("questionGroup").getQuestionList()[questionIndex + 1].typeName() !== "ABCDSurveyQuestion") {
+		if (Session.get("questionGroup").getQuestionList()[questionIndex + 1].typeName() !== "ABCDSingleChoiceQuestion") {
 			footerElements.addFooterElement(footerElements.footerElemReadingConfirmation, 2);
 		}
 	}

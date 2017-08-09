@@ -38,13 +38,13 @@ Template.quizManagerDetails.helpers({
 		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() !== 'ABCDSurveyQuestion';
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() !== 'ABCDSingleChoiceQuestion';
 	},
 	canEditAnsweroptions: function () {
 		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() !== 'ABCDSurveyQuestion';
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() !== 'ABCDSingleChoiceQuestion';
 	},
 	canEditTimer: function () {
 		return true;

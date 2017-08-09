@@ -142,7 +142,7 @@ Template.quizSummary.helpers({
 		return "view.quiz_summary." + Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin();
 	},
 	isVotingQuestion: function (questionType) {
-		return ["SurveyQuestion", "ABCDSurveyQuestion"].indexOf(questionType) > -1;
+		return ["SurveyQuestion", "ABCDSingleChoiceQuestion"].indexOf(questionType) > -1;
 	},
 	isRangedQuestion: function (questionType) {
 		return questionType === "RangedQuestion";
@@ -154,12 +154,12 @@ Template.quizSummary.helpers({
 		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() !== 'ABCDSurveyQuestion';
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() !== 'ABCDSingleChoiceQuestion';
 	},
 	showAnsweroptions: function () {
 		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() !== 'ABCDSurveyQuestion';
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() !== 'ABCDSingleChoiceQuestion';
 	}
 });

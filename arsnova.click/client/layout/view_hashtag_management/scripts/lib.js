@@ -78,7 +78,7 @@ export function getNewDemoQuizName() {
 }
 
 export function getNewABCDQuizName() {
-	return "ABCD " + getIncrementedQuizNameByRef("abcd");
+	return getIncrementedQuizNameByRef("abcd");
 }
 
 export function connectEventManager(hashtag) {

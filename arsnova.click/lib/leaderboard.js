@@ -107,7 +107,7 @@ export function isCorrectResponse(response, question, questionIndex) {
 		case "MultipleChoiceQuestion":
 			return checkIsCorrectMultipleChoiceQuestion(response, questionIndex);
 		case "SurveyQuestion":
-		case "ABCDSurveyQuestion":
+		case "ABCDSingleChoiceQuestion":
 			return true;
 		case "RangedQuestion":
 			return checkIsCorrectRangedQuestion(response, questionIndex);
@@ -136,7 +136,7 @@ export function getLeaderboardItemsByIndex(questionIndex) {
 		hashtag: hashtag
 	}).questionList[questionIndex];
 	const result = {};
-	if (["SurveyQuestion", "ABCDSurveyQuestion"].indexOf(question.type) > -1) {
+	if (["SurveyQuestion", "ABCDSingleChoiceQuestion"].indexOf(question.type) > -1) {
 		ResponsesCollection.find({
 			hashtag: hashtag,
 			questionIndex: questionIndex
@@ -164,7 +164,7 @@ export function getLeaderboardItemsByIndex(questionIndex) {
 export function getAllLeaderboardItems(keepAllNicks = false) {
 	const questionList = QuestionGroupCollection.findOne({hashtag: hashtag}).questionList;
 	const questionCount = questionList.filter(function (item) {
-		return ["SurveyQuestion", "ABCDSurveyQuestion"].indexOf(item.type) > -1;
+		return ["SurveyQuestion", "ABCDSingleChoiceQuestion"].indexOf(item.type) > -1;
 	}).length;
 	let allItems = getLeaderboardItemsByIndex(0);
 	for (let i = 1; i < questionList.length; i++) {

@@ -10,7 +10,7 @@
       "questionIndex": 0,
       "displayAnswerText": false,
       "answerOptionList": [],
-      "type": "ABCDSurveyQuestion",
+      "type": "ABCDSingleChoiceQuestion",
       "multipleSelectionEnabled": false
     }
   ],

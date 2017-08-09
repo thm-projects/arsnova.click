@@ -372,7 +372,7 @@ Template.liveResults.helpers({
 			case "TrueFalseSingleChoiceQuestion":
 				return "progressBarSingleChoiceQuestion";
 			case "SurveyQuestion":
-			case "ABCDSurveyQuestion":
+			case "ABCDSingleChoiceQuestion":
 				return "progressBarSurveyQuestion";
 			case "MultipleChoiceQuestion":
 				return "progressBarMultipleChoiceQuestion";
@@ -407,13 +407,13 @@ Template.liveResults.helpers({
 		}
 
 		if (Session.get("countdownInitialized")) {
-			return ["SurveyQuestion", "ABCDSurveyQuestion"].indexOf(questionDoc.questionList[index].type) === -1 && index < eventDoc.questionIndex;
+			return ["SurveyQuestion", "ABCDSingleChoiceQuestion"].indexOf(questionDoc.questionList[index].type) === -1 && index < eventDoc.questionIndex;
 		} else {
-			return ["SurveyQuestion", "ABCDSurveyQuestion"].indexOf(questionDoc.questionList[index].type) === -1 && index <= eventDoc.questionIndex;
+			return ["SurveyQuestion", "ABCDSingleChoiceQuestion"].indexOf(questionDoc.questionList[index].type) === -1 && index <= eventDoc.questionIndex;
 		}
 	},
 	showQuestionButton: function (index) {
-		return Session.get("questionGroup").getQuestionList()[index].typeName() !== "ABCDSurveyQuestion";
+		return Session.get("questionGroup").getQuestionList()[index].typeName() !== "ABCDSingleChoiceQuestion";
 	},
 	getNormalizedIndex: function (index) {
 		return index + 1;

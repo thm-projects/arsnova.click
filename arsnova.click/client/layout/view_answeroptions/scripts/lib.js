@@ -277,7 +277,7 @@ export const renderAnsweroptionItems = function () {
 			);
 		}
 		$('#answerOptionWrapper').append($("<div class='answerElementContextWrapper' id='" + number + "_answeroption' class='draggable' role='listitem'></div>").append(answerWrapper));
-		if (["YesNoSingleChoiceQuestion", "TrueFalseSingleChoiceQuestion", "ABCDSurveyQuestion"].indexOf(typeName) === -1) {
+		if (["YesNoSingleChoiceQuestion", "TrueFalseSingleChoiceQuestion", "ABCDSingleChoiceQuestion"].indexOf(typeName) === -1) {
 			const contextMenu = $('<div class="contextMenu"/>').append(
 				"<div class='moveAnsweroptionUp contextMenuItem'><span class='glyphicon glyphicon-chevron-up' aria-hidden='true'></span></div>",
 				"<div class='moveAnsweroptionDown contextMenuItem'><span class='glyphicon glyphicon-chevron-down' aria-hidden='true'></span></div>"

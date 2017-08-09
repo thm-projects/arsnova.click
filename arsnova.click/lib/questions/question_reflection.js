@@ -4,7 +4,7 @@ import {TrueFalseSingleChoiceQuestion} from "./question_choice_single_true_false
 import {MultipleChoiceQuestion} from "./question_choice_multiple.js";
 import {RangedQuestion} from "./question_ranged.js";
 import {SurveyQuestion} from "./question_survey.js";
-import {ABCDSurveyQuestion} from "./question_survey_abcd.js";
+import {ABCDSingleChoiceQuestion} from "./question_choice_single_abcd.js";
 import {FreeTextQuestion} from "./question_freetext.js";
 
 export const questionReflection = {
@@ -17,14 +17,14 @@ export const questionReflection = {
 	TrueFalseSingleChoiceQuestion: function (options) {
 		return new TrueFalseSingleChoiceQuestion(options);
 	},
+	ABCDSingleChoiceQuestion: function (options) {
+		return new ABCDSingleChoiceQuestion(options);
+	},
 	MultipleChoiceQuestion: function (options) {
 		return new MultipleChoiceQuestion(options);
 	},
 	SurveyQuestion: function (options) {
 		return new SurveyQuestion(options);
-	},
-	ABCDSurveyQuestion: function (options) {
-		return new ABCDSurveyQuestion(options);
 	},
 	RangedQuestion: function (options) {
 		return new RangedQuestion(options);

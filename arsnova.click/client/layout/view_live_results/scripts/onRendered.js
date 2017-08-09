@@ -67,7 +67,7 @@ Template.liveResults.onRendered(() => {
 		footerElements.addFooterElement(footerElements.footerElemSound);
 		if (eventDoc.questionIndex + 1 < questionCount) {
 			footerElements.addFooterElement(footerElements.footerElemResponseProgress);
-			if (Session.get("questionGroup").getQuestionList()[eventDoc.questionIndex + 1].typeName() !== "ABCDSurveyQuestion") {
+			if (Session.get("questionGroup").getQuestionList()[eventDoc.questionIndex + 1].typeName() !== "ABCDSingleChoiceQuestion") {
 				footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
 			}
 			footerElements.addFooterElement(footerElements.footerElemConfidenceSlider);

@@ -25,6 +25,6 @@ Template.quizManagerDetails.onCreated(function () {
 	}
 	const question = Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex];
 	if (question.getIsFirstStart()) {
-		Router.go("/" + Router.current().params.quizName + "/" + (question.typeName() === "ABCDSurveyQuestion" ? "settimer" : "question") + "/" + Router.current().params.questionIndex);
+		Router.go("/" + Router.current().params.quizName + "/" + (question.typeName() === "ABCDSingleChoiceQuestion" ? "settimer" : "question") + "/" + Router.current().params.questionIndex);
 	}
 });

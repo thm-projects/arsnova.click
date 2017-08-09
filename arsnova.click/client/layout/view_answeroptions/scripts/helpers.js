@@ -33,7 +33,7 @@ Template.createAnswerOptions.helpers({
 			case "TrueFalseSingleChoiceQuestion":
 			case "MultipleChoiceQuestion":
 			case "SurveyQuestion":
-			case "ABCDSurveyQuestion":
+			case "ABCDSingleChoiceQuestion":
 				return Template.defaultAnswerOptionTemplate;
 			case "RangedQuestion":
 				return Template.rangedAnswerOptionTemplate;

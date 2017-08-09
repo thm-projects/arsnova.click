@@ -225,7 +225,7 @@ Template.home.events({
 		if (hashtag.toLowerCase() === "demo quiz") {
 			hashtag = hashtagLib.getNewDemoQuizName();
 		}else if (checkABCDOrdering(hashtag.toLowerCase())) {
-			hashtag = hashtagLib.getNewABCDQuizName();
+			hashtag = hashtag.toUpperCase() + " " + hashtagLib.getNewABCDQuizName();
 		}
 		try {
 			new SimpleSchema({

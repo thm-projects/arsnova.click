@@ -1,17 +1,16 @@
 import {EJSON} from 'meteor/ejson';
-import {SurveyQuestion} from './question_survey.js';
-import {DefaultAnswerOption} from '/lib/answeroptions/answeroption_default.js';
+import {SingleChoiceQuestion} from './question_choice_single.js';
 
-export class ABCDSurveyQuestion extends SurveyQuestion {
+export class ABCDSingleChoiceQuestion extends SingleChoiceQuestion {
 
 	/**
-	 * Constructs a ABCDSurveyQuestion instance
+	 * Constructs a ABCDSingleChoiceQuestion instance
 	 * @see AbstractChoiceQuestion.constructor()
 	 * @param options
 	 */
 	constructor(options) {
-		if (typeof options.type !== "undefined" && options.type !== "ABCDSurveyQuestion") {
-			throw new TypeError("Invalid construction type while creating new ABCDSurveyQuestion");
+		if (typeof options.type !== "undefined" && options.type !== "ABCDSingleChoiceQuestion") {
+			throw new TypeError("Invalid construction type while creating new ABCDSingleChoiceQuestion");
 		}
 		delete options.type;
 		super(options);
@@ -20,10 +19,10 @@ export class ABCDSurveyQuestion extends SurveyQuestion {
 	/**
 	 * Part of EJSON interface
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-clone
-	 * @returns {ABCDSurveyQuestion} An independent deep copy of the current instance
+	 * @returns {ABCDSingleChoiceQuestion} An independent deep copy of the current instance
 	 */
 	clone() {
-		return new ABCDSurveyQuestion(this.serialize());
+		return new ABCDSingleChoiceQuestion(this.serialize());
 	}
 
 	/**
@@ -31,7 +30,7 @@ export class ABCDSurveyQuestion extends SurveyQuestion {
 	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
 	 */
 	serialize() {
-		return Object.assign(super.serialize(), {type: "ABCDSurveyQuestion"});
+		return Object.assign(super.serialize(), {type: "ABCDSingleChoiceQuestion"});
 	}
 
 	isValid() {
@@ -44,7 +43,7 @@ export class ABCDSurveyQuestion extends SurveyQuestion {
 	 * @returns {String} The name of the instantiated class
 	 */
 	typeName() {
-		return "ABCDSurveyQuestion";
+		return "ABCDSingleChoiceQuestion";
 	}
 
 	translationReferrer() {
@@ -64,6 +63,6 @@ export class ABCDSurveyQuestion extends SurveyQuestion {
  * Adds a custom type to Meteor's EJSON
  * @see http://docs.meteor.com/api/ejson.html#EJSON-addType
  */
-EJSON.addType("ABCDSurveyQuestion", function (value) {
-	return new ABCDSurveyQuestion(value);
+EJSON.addType("ABCDSingleChoiceQuestion", function (value) {
+	return new ABCDSingleChoiceQuestion(value);
 });

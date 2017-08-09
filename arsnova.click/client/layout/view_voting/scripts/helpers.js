@@ -35,7 +35,7 @@ Template.votingview.helpers({
 	},
 	showQuestionButton: function () {
 		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
-		return isNaN(index) && Session.get("questionGroup").getQuestionList()[index].typeName() !== "ABCDSurveyQuestion";
+		return isNaN(index) && Session.get("questionGroup").getQuestionList()[index].typeName() !== "ABCDSingleChoiceQuestion";
 	},
 	getDisplayAnswerText: function () {
 		const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);

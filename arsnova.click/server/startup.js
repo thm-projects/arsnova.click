@@ -29,8 +29,6 @@ import {themes} from '/shared/themes.js';
 import phantomjs from 'phantomjs-prebuilt';
 import * as childProcess from 'child_process';
 import process from 'process';
-import mkdirp from 'mkdirp';
-import {download} from "./lib";
 
 if (Meteor.isServer) {
 	Meteor.startup(function () {

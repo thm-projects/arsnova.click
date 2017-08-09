@@ -23,7 +23,7 @@ export const HashtagsCollection = new Mongo.Collection("hashtags");
 export const hashtagSchema = {
 	type: String,
 	min: 1,
-	max: 26
+	max: 30
 };
 export const privateKeySchema = {
 	type: String,

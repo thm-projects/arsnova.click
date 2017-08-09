@@ -35,7 +35,7 @@ Template.votingview.onCreated(function () {
 	const questionItem = Session.get("questionGroup").getQuestionList()[index];
 	const sessionType = questionItem.typeName();
 	const answers = questionItem.getAnswerOptionList();
-	const redirectOnAnswerClick = $.inArray(sessionType, ["SingleChoiceQuestion", "YesNoSingleChoiceQuestion", "TrueFalseSingleChoiceQuestion"]) > -1 ||
+	const redirectOnAnswerClick = $.inArray(sessionType, ["SingleChoiceQuestion", "YesNoSingleChoiceQuestion", "TrueFalseSingleChoiceQuestion", "ABCDSingleChoiceQuestion"]) > -1 ||
 		(sessionType === "SurveyQuestion" && !questionItem.getMultipleSelectionEnabled());
 	Session.set("questionSC", redirectOnAnswerClick);
 	Session.set("responses", JSON.stringify(new Array(answers.length).fill(false)));

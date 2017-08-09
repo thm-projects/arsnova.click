@@ -72,7 +72,7 @@ Template.home.events({
 			inputHashtag = hashtagLib.getNewDemoQuizName();
 		} else if (checkABCDOrdering(inputHashtag.toLowerCase())) {
 			Session.set("isAddingQuizType", "abcd");
-			inputHashtag = hashtagLib.getNewABCDQuizName();
+			inputHashtag = inputHashtag + " " + hashtagLib.getNewABCDQuizName();
 		} else {
 			Session.set("isAddingQuizType", undefined);
 		}
@@ -335,7 +335,7 @@ Template.home.events({
 			13
 		]; //left, right, delete, entf
 		const charCount = $(event.currentTarget).val().length;
-		if (charCount >= 26 && keyWhiteList.indexOf(event.keyCode) === -1) {
+		if (charCount >= 30 && keyWhiteList.indexOf(event.keyCode) === -1) {
 			event.preventDefault();
 		}
 

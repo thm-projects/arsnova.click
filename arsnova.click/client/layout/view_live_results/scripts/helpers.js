@@ -407,13 +407,13 @@ Template.liveResults.helpers({
 		}
 
 		if (Session.get("countdownInitialized")) {
-			return ["SurveyQuestion", "ABCDSingleChoiceQuestion"].indexOf(questionDoc.questionList[index].type) === -1 && index < eventDoc.questionIndex;
+			return ["SurveyQuestion"].indexOf(questionDoc.questionList[index].type) === -1 && index < eventDoc.questionIndex;
 		} else {
-			return ["SurveyQuestion", "ABCDSingleChoiceQuestion"].indexOf(questionDoc.questionList[index].type) === -1 && index <= eventDoc.questionIndex;
+			return ["SurveyQuestion"].indexOf(questionDoc.questionList[index].type) === -1 && index <= eventDoc.questionIndex;
 		}
 	},
 	showQuestionButton: function (index) {
-		return Session.get("questionGroup").getQuestionList()[index].typeName() !== "ABCDSingleChoiceQuestion";
+		return Session.get("questionGroup") && Session.get("questionGroup").getQuestionList()[index].typeName() !== "ABCDSingleChoiceQuestion";
 	},
 	getNormalizedIndex: function (index) {
 		return index + 1;

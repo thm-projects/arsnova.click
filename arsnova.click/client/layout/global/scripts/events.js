@@ -172,8 +172,39 @@ Template.home.events({
 			if (Meteor.settings.public.maximumActiveQuizzes) {
 				const currentActiveQuizzes = EventManagerCollection.find({sessionStatus: {$gt: 1}}).fetch();
 				if (currentActiveQuizzes < Meteor.settings.public.maximumActiveQuizzes) {
-					Meteor.loginWithCas(function () {
-						nickLib.hasTHMMail() ? resolve() : reject("plugins.splashscreen.error.error_messages.invalid_login");
+					const passwordPromise = new Promise(function (passwordResolve, passwordReject) {
+						if (Meteor.settings.public.quizCreationPassword) {
+							new Splashscreen({
+								autostart: true,
+								templateName: "quizCreationPasswordSplashscreen",
+								closeOnButton: "#js-btn-close, #js-btn-validatePassword, .splashscreen-container-close>.glyphicon-remove",
+								onRendered: function (template) {
+									$(template.templateSelector).find('#js-btn-validatePassword').on('click', function () {
+										if ($(template.templateSelector).find('#password').val() === Meteor.settings.public.quizCreationPassword) {
+											passwordResolve();
+										} else {
+											passwordReject();
+										}
+									});
+								}
+							});
+						} else {
+							passwordResolve();
+						}
+					});
+					passwordPromise.then(function () {
+						if (Meteor.settings.public.restrictQuizmastersToCASUsers) {
+							Meteor.loginWithCas(function () {
+								nickLib.hasTHMMail() ? resolve() : reject("plugins.splashscreen.error.error_messages.invalid_login");
+							});
+						} else {
+							resolve();
+						}
+					}, function () {
+						new ErrorSplashscreen({
+							autostart: true,
+							errorMessage: "plugins.splashscreen.error.error_messages.invalid_password"
+						});
 					});
 				} else {
 					reject("plugins.splashscreen.error.error_messages.maximum_quizzes_exceeded");

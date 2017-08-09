@@ -295,6 +295,7 @@
       "valid_question": "Ronda del concurso válido",
       "invalid_question": "Ronda del concurso inválido",
       "no_sessions": "No concursos son memorizada en eso navegador.",
+      "password": "Password for starting the quiz",
       "aria_description": {
         "hashtag-input-field": "¡Inserta un nombre de concurso aquí!",
         "joinSession": "¡Participa en un concurso existente!",
@@ -725,6 +726,7 @@
           "invalid_input_data": "Los datos inseridos son averiados o inválidos",
           "duplicate_user": "No puedes participar en un concurso con dos apodos.",
           "invalid_login": "This quiz can only be started by an authorized CAS user.",
+          "invalid_password": "The password is not correct!",
           "maximum_quizzes_exceeded": "Exceeded the maximum number of parallel quizzes on this server."
         }
       }

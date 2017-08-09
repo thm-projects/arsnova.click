@@ -293,6 +293,7 @@
       "valid_question": "Round valido",
       "invalid_question": "Round non valido",
       "no_sessions": "In questo browser non è stato salvato nessun quiz.",
+      "password": "Password for starting the quiz",
       "aria_description": {
         "hashtag-input-field": "Inserisci qui il nome del quiz",
         "joinSession": "Partecipa ad un quiz già esistente",
@@ -712,6 +713,7 @@
           "invalid_input_data": "I dati inseriti non sono validi o sbagliati fehlerhaft nicht richtig?!",
           "duplicate_user": "Stai cercando di accedere ad un quiz con un secondo nickname. Questo non è possibile!",
           "invalid_login": "This quiz can only be started by an authorized CAS user.",
+          "invalid_password": "The password is not correct!",
           "maximum_quizzes_exceeded": "Exceeded the maximum number of parallel quizzes on this server."
         }
       }

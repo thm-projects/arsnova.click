@@ -42,7 +42,9 @@
 			}
 		},
 		"mathjaxUrl": "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js",
-		"maximumActiveQuizzes": 1
+		"maximumActiveQuizzes": 1,
+		"restrictQuizmastersToCASUsers": false,
+		"quizCreationPassword": "abc"
 	},
 	"cas": {
 		"baseUrl": "https://cas.thm.de/cas",

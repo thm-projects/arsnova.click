@@ -81,7 +81,12 @@ if (Meteor.isServer) {
 		}
 		nickCategories.forEach(function (item) {
 			if (!NicknameCategoriesCollection.findOne({nick: item.nick})) {
-				NicknameCategoriesCollection.insert({nick: item.nick, nickCategory: item.nickCategory, insertDate: new Date(), lastUsedDate: new Date()});
+				NicknameCategoriesCollection.insert({
+					nick: item.nick,
+					nickCategory: item.nickCategory,
+					insertDate: new Date(),
+					lastUsedDate: new Date()
+				});
 			}
 		});
 		if (Meteor.settings.serverStartup.verbose) {

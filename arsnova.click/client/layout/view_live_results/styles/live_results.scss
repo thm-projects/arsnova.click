@@ -16,89 +16,89 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 #liveResultsFrame {
-	height: 100%;
+  height: 100%;
 
-	.question-wrapper {
-		overflow-x: hidden;
-		overflow-y: auto;
-		width: 100%;
+  .question-wrapper {
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
 
-		.question-row {
-			margin-bottom: 20px;
+    .question-row {
+      margin-bottom: 20px;
 
-			.question-title {
-				font-size: 1.5em;
-				margin: 10px 0 0;
-				padding: 5px 30px 0;
-			}
+      .question-title {
+        font-size: 1.5em;
+        margin: 10px 0 0;
+        padding: 5px 30px 0;
+      }
 
-			.btn-answerOption {
-				margin: 15px 0;
-				width: 100%;
-				height: 100%;
-			}
+      .btn-answerOption {
+        margin: 15px 0;
+        width: 100%;
+        height: 100%;
+      }
 
-			.formGroupProgressRow {
-				margin: 0 0 5px;
+      .formGroupProgressRow {
+        margin: 0 0 5px;
 
-				.progress {
-					margin: 10px 0;
-					height: 30px;
+        .progress {
+          margin: 10px 0;
+          height: 30px;
 
-					.percentage {
-						width: 100%;
+          .percentage {
+            width: 100%;
 
-						.label {
-							overflow: hidden;
-							text-overflow: ellipsis;
-							white-space: nowrap;
-							float: left;
-							margin: 0;
-							line-height: 28px;
-							font-size: 1.3em;
-							font-weight: 800;
-							text-align: left;
-							display: inline-flex;
-							padding: 0;
-							border-radius: 0;
-							vertical-align: middle;
+            .label {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              float: left;
+              margin: 0;
+              line-height: 28px;
+              font-size: 1.3em;
+              font-weight: 800;
+              text-align: left;
+              display: inline-flex;
+              padding: 0;
+              border-radius: 0;
+              vertical-align: middle;
 
-							p {
-								margin: 0 20px 0 0;
-							}
+              p {
+                margin: 0 20px 0 0;
+              }
 
-							img {
-								height: 1.3em;
-							}
-						}
+              img {
+                height: 1.3em;
+              }
+            }
 
-						.values {
-							float: right;
-							line-height: 28px;
-							font-size: 17px;
-							display: inline-flex;
+            .values {
+              float: right;
+              line-height: 28px;
+              font-size: 17px;
+              display: inline-flex;
 
-							p {
-								margin: 1px 0 0;
+              p {
+                margin: 1px 0 0;
 
-								&.absolute {
-									margin-right: 10px;
-								}
+                &.absolute {
+                  margin-right: 10px;
+                }
 
-								&.percent {
-									margin-left: 10px;
-									width: 50px;
-									text-align: right;
-								}
-							}
-						}
-					}
-				}
-			}
+                &.percent {
+                  margin-left: 10px;
+                  width: 50px;
+                  text-align: right;
+                }
+              }
+            }
+          }
+        }
+      }
 
-			.btn-learner {
-				width: 100%;
-			}
-		}
-	}
+      .btn-learner {
+        width: 100%;
+      }
+    }
+  }
 }

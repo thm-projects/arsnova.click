@@ -16,56 +16,56 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 .navbar-footer {
-	text-align: center;
-	display: table;
-	width: 100%;
-	table-layout:fixed;
+  text-align: center;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 
-	.footerElement {
-		cursor: pointer;
-		padding: 0;
-		width: 100%;
-		display: table-cell;
+  .footerElement {
+    cursor: pointer;
+    padding: 0;
+    width: 100%;
+    display: table-cell;
 
-		p {
-			margin: 0;
-			line-height: 25px;
+    p {
+      margin: 0;
+      line-height: 25px;
 
-			&.footerElemIcon {
-				margin-top: 5px;
-			}
-		}
-	}
+      &.footerElemIcon {
+        margin-top: 5px;
+      }
+    }
+  }
 }
 
 .navbar-footer-placeholder {
-	height: 56px;
-	width: 100%;
-	display:none;
+  height: 56px;
+  width: 100%;
+  display: none;
 }
 
 .contactHeaderBarButtonGroup {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #showMore {
-	.footerElement {
-		cursor: pointer;
-		padding: 0;
-		width: 100%;
-		font-size: 50px;
-		margin-bottom: 20px;
+  .footerElement {
+    cursor: pointer;
+    padding: 0;
+    width: 100%;
+    font-size: 50px;
+    margin-bottom: 20px;
 
-		p {
-			margin: 0;
-			line-height: 25px;
-			text-align: center;
+    p {
+      margin: 0;
+      line-height: 25px;
+      text-align: center;
 
-			&.footerElemIcon {
-				margin-top: 5px;
-			}
-		}
-	}
+      &.footerElemIcon {
+        margin-top: 5px;
+      }
+    }
+  }
 }

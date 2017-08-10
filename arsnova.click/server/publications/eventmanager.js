@@ -19,7 +19,7 @@ import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
-Meteor.publish('EventManagerCollection.join', (hashtag)=> {
+Meteor.publish('EventManagerCollection.join', (hashtag) => {
 	new SimpleSchema({
 		hashtag: {type: String}
 	}).validate({hashtag: hashtag});

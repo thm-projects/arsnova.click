@@ -88,14 +88,14 @@ if (Meteor.settings.public.mathjaxUrl) {
 }
 MeteorMathJax.defaultConfig = {
 	config: ["TeX-AMS-MML_HTMLorMML.js"],
-	jax: ["input/TeX","input/MathML","output/HTML-CSS","output/NativeMML", "output/PreviewHTML"],
+	jax: ["input/TeX", "input/MathML", "output/HTML-CSS", "output/NativeMML", "output/PreviewHTML"],
 	extensions: ["tex2jax.js", "enclose.js", "Safe.js", "mml2jax.js", "fast-preview.js", "AssistiveMML.js", "[Contrib]/a11y/accessibility-menu.js"],
 	TeX: {
-		extensions: ["AMSmath.js","AMSsymbols.js", "autoload-all.js"]
+		extensions: ["AMSmath.js", "AMSsymbols.js", "autoload-all.js"]
 	},
 	tex2jax: {
-		inlineMath: [['$','$'], ["\(","\)"]],
-		displayMath: [['$$','$$'], ["\[","\]"]],
+		inlineMath: [['$', '$'], ["\(", "\)"]],
+		displayMath: [['$$', '$$'], ["\[", "\]"]],
 		processEscapes: true,
 		preview: 'none'
 	},
@@ -127,7 +127,7 @@ Meteor.startup(function () {
 			$.getScript("//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js");
 		});
 		navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
-		$(function() {
+		$(function () {
 			FastClick.attach(document.body);
 		});
 		document.onkeyup = function (event) {
@@ -166,11 +166,14 @@ Meteor.startup(function () {
 					if (amount > 50) {
 						throw new Error("Only 50 Members may be added per command call");
 					}
-					const hashtag  = Router.current().params.quizName;
+					const hashtag = Router.current().params.quizName;
 					if (!Session.get("questionGroup") || !localData.containsHashtag(hashtag)) {
 						throw new Error("Unsupported Operation: Invalid credentials");
 					}
-					const debugMemberCount = MemberListCollection.find({hashtag: hashtag, nick: {$regex: "debug_user_*", $options: "i"}}).count();
+					const debugMemberCount = MemberListCollection.find({
+						hashtag: hashtag,
+						nick: {$regex: "debug_user_*", $options: "i"}
+					}).count();
 					const selectedNicks = SessionConfigurationCollection.findOne().nicks.selectedValues;
 					for (let i = 1; i < amount + 1; i++) {
 						if (MemberListCollection.find().fetch().length === selectedNicks.length) {
@@ -184,7 +187,7 @@ Meteor.startup(function () {
 						} else {
 							nickname = "debug_user_" + (i + debugMemberCount);
 						}
-						const bgColor  = nicknameLib.rgbToHex(nicknameLib.getRandomInt(0, 255), nicknameLib.getRandomInt(0, 255), nicknameLib.getRandomInt(0, 255));
+						const bgColor = nicknameLib.rgbToHex(nicknameLib.getRandomInt(0, 255), nicknameLib.getRandomInt(0, 255), nicknameLib.getRandomInt(0, 255));
 						Meteor.call('MemberListCollection.addLearner', {
 							hashtag: hashtag,
 							nick: nickname,

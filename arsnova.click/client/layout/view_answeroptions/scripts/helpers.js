@@ -19,6 +19,7 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
 import * as leaderboardLib from "/lib/leaderboard.js";
+import {SurveyQuestion} from '/lib/questions/question_survey.js';
 import * as lib from './lib.js';
 
 Template.createAnswerOptions.helpers({
@@ -32,6 +33,7 @@ Template.createAnswerOptions.helpers({
 			case "TrueFalseSingleChoiceQuestion":
 			case "MultipleChoiceQuestion":
 			case "SurveyQuestion":
+			case "ABCDSingleChoiceQuestion":
 				return Template.defaultAnswerOptionTemplate;
 			case "RangedQuestion":
 				return Template.rangedAnswerOptionTemplate;
@@ -64,7 +66,7 @@ Template.defaultAnswerOptionTemplate.helpers({
 		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() === "SurveyQuestion";
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex] instanceof SurveyQuestion;
 	},
 	canAddAnsweroption: function () {
 		switch (Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName()) {
@@ -102,10 +104,26 @@ Template.rangedAnswerOptionTemplate.helpers({
 Template.freeTextAnswerOptionTemplate.helpers({
 	configOptions: function () {
 		return [
-			{id: "config_case_sensitive", textName: "view.answeroptions.free_text_question.config_case_sensitive", description: "view.answeroptions.description.config_case_sensitive"},
-			{id: "config_trim_whitespaces", textName: "view.answeroptions.free_text_question.config_trim_whitespaces", description: "view.answeroptions.description.config_trim_whitespaces"},
-			{id: "config_use_keywords", textName: "view.answeroptions.free_text_question.config_use_keywords", description: "view.answeroptions.description.config_use_keywords"},
-			{id: "config_use_punctuation", textName: "view.answeroptions.free_text_question.config_use_punctuation", description: "view.answeroptions.description.config_use_punctuation"}
+			{
+				id: "config_case_sensitive",
+				textName: "view.answeroptions.free_text_question.config_case_sensitive",
+				description: "view.answeroptions.description.config_case_sensitive"
+			},
+			{
+				id: "config_trim_whitespaces",
+				textName: "view.answeroptions.free_text_question.config_trim_whitespaces",
+				description: "view.answeroptions.description.config_trim_whitespaces"
+			},
+			{
+				id: "config_use_keywords",
+				textName: "view.answeroptions.free_text_question.config_use_keywords",
+				description: "view.answeroptions.description.config_use_keywords"
+			},
+			{
+				id: "config_use_punctuation",
+				textName: "view.answeroptions.free_text_question.config_use_punctuation",
+				description: "view.answeroptions.description.config_use_punctuation"
+			}
 		];
 	},
 	answerText: function () {

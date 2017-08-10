@@ -143,7 +143,9 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 	ws.cell(6, 1).string(TAPi18n.__("export.number_of_answers", {lng: translation}) + ":");
 
 	ws.cell(7, 1).string(TAPi18n.__("export.percent_correct", {lng: translation}) + ":");
-	const correctResponsesPercentage = (allResponses.fetch().filter((x)=> {return leaderboardLib.isCorrectResponse(x, questionGroup.questionList[index], index) === true;}).length / allResponses.fetch().length * 100);
+	const correctResponsesPercentage = (allResponses.fetch().filter((x) => {
+		return leaderboardLib.isCorrectResponse(x, questionGroup.questionList[index], index) === true;
+	}).length / allResponses.fetch().length * 100);
 	ws.cell(7, 2).number((isNaN(correctResponsesPercentage) ? 0 : Math.round(correctResponsesPercentage)));
 
 	if (responsesWithConfidenceValue.length > 0) {
@@ -167,7 +169,9 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 	}
 	ws.cell(10, nextColumnIndex++).string(TAPi18n.__("export.time", {lng: translation}));
 
-	const sortedResponses = _.sortBy(allResponses.fetch(), function (o) { return o.responseTime; });
+	const sortedResponses = _.sortBy(allResponses.fetch(), function (o) {
+		return o.responseTime;
+	});
 	let nextStartRow = 10;
 	sortedResponses.forEach(function (responseItem) {
 		nextColumnIndex = 1;
@@ -223,10 +227,30 @@ export function generateSheet(wb, {hashtag, translation, defaultStyles}, index) 
 	}));
 	const answerList = questionGroup.questionList[index].answerOptionList;
 	const allResponses = ResponsesCollection.find({hashtag: hashtag, questionIndex: index});
-	const responsesWithConfidenceValue = allResponses.fetch().filter((x)=> {return x.confidenceValue > -1;});
+	const responsesWithConfidenceValue = allResponses.fetch().filter((x) => {
+		return x.confidenceValue > -1;
+	});
 	const isCASRequired = SessionConfigurationCollection.findOne({hashtag: hashtag}).nicks.restrictToCASLogin;
 
 	leaderboardLib.init(hashtag);
-	formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequired, hashtag, allResponses, index, defaultStyles});
-	setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequired, questionGroup, questionGroupObject, allResponses, answerList, hashtag, index});
+	formatSheet(ws, {
+		responsesWithConfidenceValue,
+		answerList,
+		isCASRequired,
+		hashtag,
+		allResponses,
+		index,
+		defaultStyles
+	});
+	setSheetData(ws, {
+		responsesWithConfidenceValue,
+		translation,
+		isCASRequired,
+		questionGroup,
+		questionGroupObject,
+		allResponses,
+		answerList,
+		hashtag,
+		index
+	});
 }

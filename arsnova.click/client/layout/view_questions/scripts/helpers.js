@@ -43,10 +43,10 @@ Template.createQuestionView.helpers({
 	getVideoData: function (questionText) {
 		const result = {};
 		if (/youtube/.test(questionText)) {
-			result.origin  = "https://www.youtube.com/embed/";
+			result.origin = "https://www.youtube.com/embed/";
 			result.videoId = questionText.substr(questionText.lastIndexOf("=") + 1, questionText.length);
 		} else if (/youtu.be/.test(questionText)) {
-			result.origin  = "https://www.youtube.com/embed/";
+			result.origin = "https://www.youtube.com/embed/";
 			result.videoId = questionText.substr(questionText.lastIndexOf("/") + 1, questionText.length);
 		} else if (/vimeo/.test(questionText)) {
 			result.origin = "https://player.vimeo.com/video/";

@@ -22,7 +22,13 @@ import {MemberListCollection} from '/lib/member_list/collection.js';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
-import {HashtagsCollection, hashtagsCollectionSchema, hashtagSchema, themeSchema, selectedNicksSchema} from '/lib/hashtags/collection.js';
+import {
+	HashtagsCollection,
+	hashtagsCollectionSchema,
+	hashtagSchema,
+	themeSchema,
+	selectedNicksSchema
+} from '/lib/hashtags/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
 Meteor.methods({
@@ -249,5 +255,6 @@ Meteor.methods({
 					}
 				}
 			});
-		}}
+		}
+	}
 });

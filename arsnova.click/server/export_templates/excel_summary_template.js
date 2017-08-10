@@ -188,16 +188,30 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 	currentRowIndex++;
 
 	ws.cell(currentRowIndex, 1).string(TAPi18n.__('export.average_correct_answered_questions', {lng: translation}) + ":");
-	ws.cell(currentRowIndex, 3).number(leaderboardData.map((x)=> {return x.correctQuestions.length;}).reduce((a, b)=> {return a + b;}, 0) / numberOfAttendees);
+	ws.cell(currentRowIndex, 3).number(leaderboardData.map((x) => {
+		return x.correctQuestions.length;
+	}).reduce((a, b) => {
+		return a + b;
+	}, 0) / numberOfAttendees);
 	currentRowIndex++;
 
 	ws.cell(currentRowIndex, 1).string(TAPi18n.__('export.average_confidence', {lng: translation}) + ":");
-	const averageConfidencePercentage = (leaderboardData.filter((x)=> {return x.confidenceValue > -1;}).map((x)=> {return x.confidenceValue;}).reduce((a, b)=> {return a + b;}, 0) / numberOfAttendees);
+	const averageConfidencePercentage = (leaderboardData.filter((x) => {
+		return x.confidenceValue > -1;
+	}).map((x) => {
+		return x.confidenceValue;
+	}).reduce((a, b) => {
+		return a + b;
+	}, 0) / numberOfAttendees);
 	ws.cell(currentRowIndex, 3).number((isNaN(averageConfidencePercentage) ? 0 : Math.round(averageConfidencePercentage)));
 	currentRowIndex++;
 
 	ws.cell(currentRowIndex, 1).string(TAPi18n.__('export.average_response_time', {lng: translation}) + ":");
-	ws.cell(currentRowIndex, 3).number(Math.round(Number(((leaderboardData.map((x)=> {return x.responseTime;}).reduce((a, b)=> {return a + b;}, 0) / numberOfAttendees) / questionGroup.questionList.length))));
+	ws.cell(currentRowIndex, 3).number(Math.round(Number(((leaderboardData.map((x) => {
+		return x.responseTime;
+	}).reduce((a, b) => {
+		return a + b;
+	}, 0) / numberOfAttendees) / questionGroup.questionList.length))));
 	currentRowIndex += 2;
 
 	let nextColumnIndex = 1;
@@ -233,7 +247,12 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 		const targetRow = indexInList + currentRowIndex;
 		ws.cell(targetRow, nextColumnIndex++).string(leaderboardItem.nick);
 		if (isCASRequired) {
-			const profile = Meteor.users.findOne({_id: ResponsesCollection.findOne({hashtag: hashtag, userNick: leaderboardItem.nick}).userRef}).profile;
+			const profile = Meteor.users.findOne({
+				_id: ResponsesCollection.findOne({
+					hashtag: hashtag,
+					userNick: leaderboardItem.nick
+				}).userRef
+			}).profile;
 			ws.cell(targetRow, nextColumnIndex++).string(profile.id);
 			ws.cell(targetRow, nextColumnIndex++).string(profile.mail instanceof Array ? profile.mail.slice(-1)[0] : profile.mail);
 		}
@@ -270,7 +289,12 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 		const targetRow = indexInList + nextStartRow;
 		ws.cell(targetRow, nextColumnIndex++).string(leaderboardItem.nick);
 		if (isCASRequired) {
-			const profile = Meteor.users.findOne({_id: ResponsesCollection.findOne({hashtag: hashtag, userNick: leaderboardItem.nick}).userRef}).profile;
+			const profile = Meteor.users.findOne({
+				_id: ResponsesCollection.findOne({
+					hashtag: hashtag,
+					userNick: leaderboardItem.nick
+				}).userRef
+			}).profile;
 			ws.cell(targetRow, nextColumnIndex++).string(profile.id);
 			ws.cell(targetRow, nextColumnIndex++).string(profile.mail instanceof Array ? profile.mail.slice(-1)[0] : profile.mail);
 		}
@@ -312,8 +336,12 @@ export function generateSheet(wb, {hashtag, translation, defaultStyles}) {
 		}
 	}));
 	const allResponses = ResponsesCollection.find({hashtag: hashtag});
-	const responsesWithConfidenceValue = allResponses.fetch().filter((x)=> {return x.confidenceValue > -1;});
-	const leaderboardData = _.sortBy(leaderboardLib.objectToArray(leaderboardLib.getAllLeaderboardItems(true)), function (o) { return o.responseTime; });
+	const responsesWithConfidenceValue = allResponses.fetch().filter((x) => {
+		return x.confidenceValue > -1;
+	});
+	const leaderboardData = _.sortBy(leaderboardLib.objectToArray(leaderboardLib.getAllLeaderboardItems(true)), function (o) {
+		return o.responseTime;
+	});
 	const numberOfAttendees = distinctValuesFromCollection(ResponsesCollection, 'userNick', {hashtag: hashtag}).length;
 	const isCASRequired = SessionConfigurationCollection.findOne({hashtag: hashtag}).nicks.restrictToCASLogin;
 	let columnsToFormat = 4;
@@ -324,6 +352,23 @@ export function generateSheet(wb, {hashtag, translation, defaultStyles}) {
 		columnsToFormat += 2;
 	}
 
-	formatSheet(ws, {responsesWithConfidenceValue, isCASRequired, columnsToFormat, questionGroup, leaderboardData, defaultStyles});
-	setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequired, questionGroup, questionGroupObject, hashtag, columnsToFormat, leaderboardData, numberOfAttendees});
+	formatSheet(ws, {
+		responsesWithConfidenceValue,
+		isCASRequired,
+		columnsToFormat,
+		questionGroup,
+		leaderboardData,
+		defaultStyles
+	});
+	setSheetData(ws, {
+		responsesWithConfidenceValue,
+		translation,
+		isCASRequired,
+		questionGroup,
+		questionGroupObject,
+		hashtag,
+		columnsToFormat,
+		leaderboardData,
+		numberOfAttendees
+	});
 }

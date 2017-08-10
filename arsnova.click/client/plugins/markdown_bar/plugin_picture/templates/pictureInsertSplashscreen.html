@@ -16,16 +16,19 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="pictureInsertSplashscreen">
-	<div class="modal splashscreen" role="dialog">
-		<div class="modal-dialog">
+    <div class="modal splashscreen" role="dialog">
+        <div class="modal-dialog">
             <div class="noSplashscreenPadding">
                 <div class="modal-content">
                     <div class="modal-header"></div>
                     <div class="modal-body">
                         <h4 role="heading">{{_ "plugins.markdown_bar.link_text"}}:</h4>
-                        <input type="text" class="round-corners input-field input-field-bg-color tabbable" id="pictureText" placeholder="{{_ "plugins.markdown_bar.visible_text"}}" maxlength="{{getUrlSchema.max}}">
+                        <input type="text" class="round-corners input-field input-field-bg-color tabbable"
+                               id="pictureText" placeholder="{{_ "plugins.markdown_bar.visible_text"}}"
+                               maxlength="{{getUrlSchema.max}}">
                         <h4 role="heading">{{_ "plugins.markdown_bar.link_destination"}}:</h4>
-                        <input type="text" class="round-corners input-field input-field-bg-color tabbable" id="pictureDestination" placeholder="https://" maxlength="{{getUrlSchema.max}}">
+                        <input type="text" class="round-corners input-field input-field-bg-color tabbable"
+                               id="pictureDestination" placeholder="https://" maxlength="{{getUrlSchema.max}}">
                     </div>
                     <div class="modal-footer">
                         <div class="row">
@@ -37,7 +40,9 @@
                                 </button>
                             </div>
                             <div class="col-xs-6">
-                                <button id="js-btn-savePicture" type="button" class="btn btn-success btn-lg btn-answerOption tabbable" aria-label="{{_ "global.save"}}">
+                                <button id="js-btn-savePicture" type="button"
+                                        class="btn btn-success btn-lg btn-answerOption tabbable"
+                                        aria-label="{{_ "global.save"}}">
                                     <span class="glyphicon glyphicon-ok glyph-left" aria-hidden="true"></span>
                                     <span class="ansBtn hidden-xs">{{_ "global.save"}}</span>
                                 </button>
@@ -46,6 +51,6 @@
                     </div>
                 </div>
             </div>
-		</div>
-	</div>
+        </div>
+    </div>
 </template>

@@ -1,4 +1,3 @@
-
 export const themes = [
 	{
 		name: "view.theme_switcher.themes.material.name",

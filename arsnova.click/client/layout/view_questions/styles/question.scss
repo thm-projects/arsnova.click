@@ -14,26 +14,25 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
-
 @import "../../../layout/global/styles/appearance";
 
 #previewQuestionContentWrapper {
-	overflow: hidden;
-	resize: none;
-	position: fixed;
-	right: 0;
+  overflow: hidden;
+  resize: none;
+  position: fixed;
+  right: 0;
 
-	.center-block {
-		position: relative;
-	}
+  .center-block {
+    position: relative;
+  }
 
-	#markdownPreviewWrapper {
-		position: absolute;
-		top: calc(6.8vh + 10px);
-		margin: 0 10px;
-		height: calc(100% - 3.1% - 11vh);
-		width: calc(100% - 20px);
-		overflow: auto;
-		word-wrap: break-word;
-	}
+  #markdownPreviewWrapper {
+    position: absolute;
+    top: calc(6.8vh + 10px);
+    margin: 0 10px;
+    height: calc(100% - 3.1% - 11vh);
+    width: calc(100% - 20px);
+    overflow: auto;
+    word-wrap: break-word;
+  }
 }

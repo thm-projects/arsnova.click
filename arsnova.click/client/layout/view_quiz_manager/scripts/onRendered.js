@@ -61,7 +61,7 @@ Template.quizManager.onRendered(function () {
 		Session.get("questionGroup").getQuestionList().forEach(function (item) {
 			$('#added_questions_wrapper').append(
 				$('<div id="' + item.getQuestionIndex() + '_added_question" class="questionElementWrapper tabbable draggable" role="listitem"/>').append(
-					'<li data-valid="' + (item.isValid() ? "true" : "false") + '" aria-invalid="' + (item.isValid() ? "false" : "true") + '">' + (item.getQuestionIndex() + 1) + '. ' + TAPi18n.__(item.translationReferrer()) + ': ' + item.getQuestionText().replace(/([#$])*/g, "") + '</li>'
+					'<li data-valid="' + (item.isValid() ? "true" : "false") + '" aria-invalid="' + (item.isValid() ? "false" : "true") + '">' + (item.getQuestionIndex() + 1) + '. ' + TAPi18n.__(item.translationReferrer()) + (item.getQuestionText() ? ': ' + item.getQuestionText().replace(/([#$])*/g, "") : '') + '</li>'
 				).append(
 					$('<div class="contextMenu" />').append(
 						"<div class='editQuestion text-light contextMenuItem'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></div>",
@@ -92,14 +92,14 @@ Template.quizManager.onRendered(function () {
 				const questionGroup = Session.get("questionGroup");
 				if (typeof ui.item.attr("id") === "undefined") {
 					const classNames = $(ui.item).attr('class').split(" ");
-					const index      = classNames.map(function (elem) {
+					const index = classNames.map(function (elem) {
 						return elem.indexOf("questionType_") > -1;
 					}).indexOf(true);
 					const indexFrom = ui.item.index();
 					questionGroup.addDefaultQuestion(indexFrom, classNames[index].replace("questionType_", ""));
 					ui.item.attr("data-valid", questionGroup.getQuestionList()[indexFrom].isValid());
 				} else {
-					const indexTo   = ui.item.index();
+					const indexTo = ui.item.index();
 					const indexFrom = parseInt(ui.item.attr("id").replace("_added_question", ""));
 					const question = questionGroup.getQuestionList()[indexFrom];
 					questionGroup.removeQuestion(indexFrom);

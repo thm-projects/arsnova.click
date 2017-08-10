@@ -29,7 +29,7 @@ import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import * as lib from './lib.js';
 import {TimerMap} from "/lib/performance_analysis/Timer.js";
 
-Template.liveResults.onRendered(()=> {
+Template.liveResults.onRendered(() => {
 	const eventDoc = EventManagerCollection.findOne();
 	const hashtag = Router.current().params.quizName;
 	const sessionConfig = SessionConfigurationCollection.findOne({hashtag: hashtag});
@@ -67,7 +67,9 @@ Template.liveResults.onRendered(()=> {
 		footerElements.addFooterElement(footerElements.footerElemSound);
 		if (eventDoc.questionIndex + 1 < questionCount) {
 			footerElements.addFooterElement(footerElements.footerElemResponseProgress);
-			footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
+			if (Session.get("questionGroup").getQuestionList()[eventDoc.questionIndex + 1].typeName() !== "ABCDSingleChoiceQuestion") {
+				footerElements.addFooterElement(footerElements.footerElemReadingConfirmation);
+			}
 			footerElements.addFooterElement(footerElements.footerElemConfidenceSlider);
 		}
 		if (navigator.userAgent.match(/iPad/i) == null) {

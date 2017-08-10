@@ -128,7 +128,9 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 	}
 	ws.cell(9, nextColumnIndex++).string(TAPi18n.__("export.time", {lng: translation}));
 
-	const sortedResponses = _.sortBy(allResponses.fetch(), function (o) { return o.responseTime; });
+	const sortedResponses = _.sortBy(allResponses.fetch(), function (o) {
+		return o.responseTime;
+	});
 	let nextStartRow = 9;
 	sortedResponses.forEach(function (responseItem) {
 		let nextColumnIndex = 1;
@@ -184,10 +186,22 @@ export function generateSheet(wb, {hashtag, translation, defaultStyles}, index) 
 	}));
 	const answerList = questionGroup.questionList[index].answerOptionList;
 	const allResponses = ResponsesCollection.find({hashtag: hashtag, questionIndex: index});
-	const responsesWithConfidenceValue = allResponses.fetch().filter((x)=> {return x.confidenceValue > -1;});
+	const responsesWithConfidenceValue = allResponses.fetch().filter((x) => {
+		return x.confidenceValue > -1;
+	});
 	const isCASRequired = SessionConfigurationCollection.findOne({hashtag: hashtag}).nicks.restrictToCASLogin;
 
 	leaderboardLib.init(hashtag);
 	formatSheet(ws, {responsesWithConfidenceValue, answerList, isCASRequired, allResponses, defaultStyles});
-	setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequired, questionGroup, questionGroupObject, allResponses, answerList, hashtag, index});
+	setSheetData(ws, {
+		responsesWithConfidenceValue,
+		translation,
+		isCASRequired,
+		questionGroup,
+		questionGroupObject,
+		allResponses,
+		answerList,
+		hashtag,
+		index
+	});
 }

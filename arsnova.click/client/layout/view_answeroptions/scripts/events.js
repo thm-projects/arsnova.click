@@ -22,8 +22,7 @@ import {Router} from 'meteor/iron:router';
 import * as localData from '/lib/local_storage.js';
 import * as lib from './lib.js';
 
-Template.createAnswerOptions.events({
-});
+Template.createAnswerOptions.events({});
 
 Template.defaultAnswerOptionTemplate.events({
 	"click #default_answer_row": function () {
@@ -34,7 +33,7 @@ Template.defaultAnswerOptionTemplate.events({
 	},
 	"change .isCorrectOption": function (event) {
 		const checked = $(event.target).prop('checked');
-		const id = event.target.id.replace("answerOption-","");
+		const id = event.target.id.replace("answerOption-", "");
 		const questionItem = Session.get("questionGroup");
 		if (checked && questionItem.getQuestionList()[Router.current().params.questionIndex].typeName() !== "MultipleChoiceQuestion") {
 			for (let i = 0; i < questionItem.getQuestionList()[Router.current().params.questionIndex].getAnswerOptionList().length; i++) {
@@ -112,7 +111,7 @@ Template.defaultAnswerOptionTemplate.events({
 	},
 	"input .answer_row_text": function (event) {
 		const id = $(event.currentTarget).attr("id");
-		const plainId = id.replace("answerOptionText_Number","");
+		const plainId = id.replace("answerOptionText_Number", "");
 		const cursorPosition = $("#" + id).getCursorPosition();
 		lib.parseSingleAnswerOptionInput(Router.current().params.questionIndex, plainId);
 		Meteor.defer(function () {

@@ -17,7 +17,7 @@
 
 <template name="footer">
     <nav class="navbar navbar-fixed-bottom navbar-footer" role="navigation">
-        <input class="js-import-input-home hidden" type="file" accept="application/json" multiple="multiple" />
+        <input class="js-import-input-home hidden" type="file" accept="application/json" multiple="multiple"/>
         {{#each footerElements}}
             {{> hiddenFooterElement}}
         {{/each}}
@@ -27,9 +27,10 @@
 </template>
 
 <template name="hiddenFooterElement">
-    <div class="footerElement tabbable {{#if isStatefulElement this}}{{#if isEnabled this}}success{{else}}error{{/if}}{{/if}}"
+    <div class="footerElement tabbable {{#if isStatefulElement this}}{{#if isEnabled
+                                                                           this}}success{{else}}error{{/if}}{{/if}}"
          id="{{this.id}}"
-         {{footerIntro this}}>
+        {{footerIntro this}}>
         <p class="footerElemIcon"><span class="{{this.iconClass}}" aria-hidden="true"></span></p>
         <p class="footerElemText"><span class="{{this.textClass}}">{{_ this.textName}}</span></p>
     </div>

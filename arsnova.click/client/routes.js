@@ -25,7 +25,10 @@ import {MemberListCollection} from '/lib/member_list/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
+import {
+	globalEventStackObserver,
+	setGlobalEventStackObserver
+} from '/client/plugins/event_stack_observer/scripts/lib.js';
 import {getChangeEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onChangeEvent.js';
 import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onRemoveEvent.js';
 import {createTabIndices} from '/client/startup.js';

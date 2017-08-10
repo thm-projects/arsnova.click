@@ -17,11 +17,16 @@
 
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {EventManagerCollection, sessionStatusSchema, readingConfirmationIndexSchema, questionIndexSchema} from '/lib/eventmanager/collection.js';
+import {
+	EventManagerCollection,
+	sessionStatusSchema,
+	readingConfirmationIndexSchema,
+	questionIndexSchema
+} from '/lib/eventmanager/collection.js';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
 
 Meteor.methods({
-	'EventManagerCollection.startQuiz': (hashtag, index)=> {
+	'EventManagerCollection.startQuiz': (hashtag, index) => {
 		new SimpleSchema({
 			hashtag: hashtagSchema
 		}).validate({hashtag});
@@ -51,7 +56,7 @@ Meteor.methods({
 			}
 		});
 	},
-	'EventManagerCollection.setSessionStatus': (hashtag, sessionStatus)=> {
+	'EventManagerCollection.setSessionStatus': (hashtag, sessionStatus) => {
 		new SimpleSchema({
 			hashtag: hashtagSchema,
 			sessionStatus: sessionStatusSchema
@@ -71,7 +76,7 @@ Meteor.methods({
 			}
 		});
 	},
-	'EventManagerCollection.setQuestionIndex': (hashtag, questionIndex)=> {
+	'EventManagerCollection.setQuestionIndex': (hashtag, questionIndex) => {
 		new SimpleSchema({
 			hashtag: hashtagSchema,
 			questionIndex: questionIndexSchema
@@ -89,7 +94,7 @@ Meteor.methods({
 			}
 		});
 	},
-	'EventManagerCollection.showReadConfirmedForIndex': (hashtag, readingConfirmationIndex)=> {
+	'EventManagerCollection.showReadConfirmedForIndex': (hashtag, readingConfirmationIndex) => {
 		new SimpleSchema({
 			hashtag: hashtagSchema,
 			readingConfirmationIndex: readingConfirmationIndexSchema
@@ -107,7 +112,7 @@ Meteor.methods({
 			}
 		});
 	},
-	'EventManagerCollection.abortCountdown': (hashtag, questionIndex)=> {
+	'EventManagerCollection.abortCountdown': (hashtag, questionIndex) => {
 		new SimpleSchema({
 			hashtag: hashtagSchema,
 			questionIndex: questionIndexSchema
@@ -122,7 +127,7 @@ Meteor.methods({
 			}
 		});
 	},
-	'EventManagerCollection.setActiveQuestion': (hashtag, questionIndex)=> {
+	'EventManagerCollection.setActiveQuestion': (hashtag, questionIndex) => {
 		new SimpleSchema({
 			hashtag: hashtagSchema,
 			questionIndex: questionIndexSchema

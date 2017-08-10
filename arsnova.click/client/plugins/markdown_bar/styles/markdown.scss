@@ -16,142 +16,142 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 @font-face {
-	font-family: 'arsnova';
-	src: url('/fonts/arsnova.eot?u4wa2e');
-	src: url('/fonts/arsnova.eot?u4wa2e#iefix') format('embedded-opentype'),
-	url('/fonts/arsnova.ttf?u4wa2e') format('truetype'),
-	url('/fonts/arsnova.woff?u4wa2e') format('woff'),
-	url('/fonts/arsnova.svg?u4wa2e#arsnova') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'arsnova';
+  src: url('/fonts/arsnova.eot?u4wa2e');
+  src: url('/fonts/arsnova.eot?u4wa2e#iefix') format('embedded-opentype'),
+  url('/fonts/arsnova.ttf?u4wa2e') format('truetype'),
+  url('/fonts/arsnova.woff?u4wa2e') format('woff'),
+  url('/fonts/arsnova.svg?u4wa2e#arsnova') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @import "../../../layout/global/styles/appearance";
 
 .round-corners-top {
-	border-radius: $corner-radius $corner-radius 0 0;
+  border-radius: $corner-radius $corner-radius 0 0;
 }
 
 .round-corners-top-right {
-	border-radius: 0 $corner-radius 0 0;
+  border-radius: 0 $corner-radius 0 0;
 }
 
 .round-corners-top-left {
-	border-radius: $corner-radius 0 0 0;
+  border-radius: $corner-radius 0 0 0;
 }
 
 .round-corners-bottom-right {
-	border-radius: 0 0 $corner-radius 0;
+  border-radius: 0 0 $corner-radius 0;
 }
 
 .round-corners-bottom-left {
-	border-radius: 0 0 0 $corner-radius;
+  border-radius: 0 0 0 $corner-radius;
 }
 
 .round-corners-markdown {
-	border-radius: 0 0 $corner-radius $corner-radius;
+  border-radius: 0 0 $corner-radius $corner-radius;
 }
 
 .no-round-corners {
-	border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
 }
 
 .smallGlyphicon {
-	font-size: 16px !important;
-	top: 3px !important;
-	position: absolute !important;
+  font-size: 16px !important;
+  top: 3px !important;
+  position: absolute !important;
 }
 
 .formatPreviewButton {
-	margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .markdown-box {
-	margin-bottom: 1px;
-	overflow: hidden;
+  margin-bottom: 1px;
+  overflow: hidden;
 }
 
 .button-markdown {
-	border-radius: 5px;
-	border: 1px;
-	margin-right: 2px !important;
-	margin-left: 2px;
-	white-space: nowrap;
-	width: 35px;
-	height: 35px;
-	margin-top: 4px;
-	cursor: pointer;
+  border-radius: 5px;
+  border: 1px;
+  margin-right: 2px !important;
+  margin-left: 2px;
+  white-space: nowrap;
+  width: 35px;
+  height: 35px;
+  margin-top: 4px;
+  cursor: pointer;
 }
 
 .button-markdown:hover, .button-markdown:active:focus {
-	box-shadow: none;
+  box-shadow: none;
 }
 
 .glyph-markdown {
-	position: relative;
-	margin-top: 4px;
-	margin-left: -8px;
-	font-size: 22px;
+  position: relative;
+  margin-top: 4px;
+  margin-left: -8px;
+  font-size: 22px;
 }
 
 .icon-play-circle::before {
-	content: "\f01d";
-	font-family: "arsnova", serif;
+  content: "\f01d";
+  font-family: "arsnova", serif;
 }
 
 .vimeoIcon::before {
-	content: "\f194";
-	font-family: "arsnova", serif;
+  content: "\f194";
+  font-family: "arsnova", serif;
 }
 
 .youtubeIcon::before {
-	content: "\f167";
-	font-family: "arsnova", serif;
+  content: "\f167";
+  font-family: "arsnova", serif;
 }
 
 .latexIcon::before {
-	content: "\f12b";
-	font-family: "arsnova", serif;
+  content: "\f12b";
+  font-family: "arsnova", serif;
 }
 
 .codeListingIcon::before {
-	content: "\f121";
-	font-family: "arsnova", serif;
+  content: "\f121";
+  font-family: "arsnova", serif;
 }
 
 .codeCommentIcon::before {
-	content: "\f10e";
-	font-family: "arsnova", serif;
+  content: "\f10e";
+  font-family: "arsnova", serif;
 }
 
 .iconEditorUl::before {
-	content: "\f0ca";
-	font-family: "arsnova", serif;
+  content: "\f0ca";
+  font-family: "arsnova", serif;
 }
 
 .iconEditorOl::before {
-	content: "\f0cb";
-	font-family: "arsnova", serif;
+  content: "\f0cb";
+  font-family: "arsnova", serif;
 }
 
 .row-centered {
-	text-align: center;
-	padding-top: 3px;
-	display: flex;
-	margin: 0;
-	flex-flow: row;
-	overflow-x: auto;
-	overflow-y: hidden;
-	justify-content: center;
+  text-align: center;
+  padding-top: 3px;
+  display: flex;
+  margin: 0;
+  flex-flow: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  justify-content: center;
 }
 
 .input-label {
-	font-size: 1em;
-	font-weight: 600;
-	min-width: 20px;
-	margin-left: 5px;
+  font-size: 1em;
+  font-weight: 600;
+  min-width: 20px;
+  margin-left: 5px;
 }
 
 .hr-without-margin {
-	margin: 0;
+  margin: 0;
 }

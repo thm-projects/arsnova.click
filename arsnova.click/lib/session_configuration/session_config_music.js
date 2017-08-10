@@ -33,7 +33,7 @@ const countdownEndTitle = Symbol("countdownEndTitle");
 const countdownEndVolume = Symbol("countdownEndVolume");
 
 export class MusicSessionConfiguration {
-	constructor (options = {}) {
+	constructor(options = {}) {
 		this[hashtag] = options.hashtag;
 		this[isUsingGlobalVolume] = typeof options.music.isUsingGlobalVolume === "undefined" ? Meteor.settings.public.default.sessionConfiguration.music.isUsingGlobalVolume : options.music.isUsingGlobalVolume;
 
@@ -50,7 +50,7 @@ export class MusicSessionConfiguration {
 		this[countdownEndVolume] = options.music.countdownEndVolume || Meteor.settings.public.default.sessionConfiguration.music.countdownEndVolume;
 	}
 
-	serialize () {
+	serialize() {
 		return {
 			hashtag: this.getHashtag(),
 			isUsingGlobalVolume: this.getIsUsingGlobalVolume(),
@@ -69,7 +69,7 @@ export class MusicSessionConfiguration {
 		};
 	}
 
-	equals (value) {
+	equals(value) {
 		return (
 			this.getIsUsingGlobalVolume() === value.getIsUsingGlobalVolume() &&
 
@@ -87,25 +87,25 @@ export class MusicSessionConfiguration {
 		);
 	}
 
-	getHashtag () {
+	getHashtag() {
 		return this[hashtag];
 	}
 
-	setHashtag (value) {
+	setHashtag(value) {
 		this[hashtag] = value;
 	}
 
 	/* Global volume settings */
 
-	getGlobalVolume () {
+	getGlobalVolume() {
 		return this.getIsUsingGlobalVolume() ? this.getLobbyVolume() : null;
 	}
 
-	getIsUsingGlobalVolume () {
+	getIsUsingGlobalVolume() {
 		return this[isUsingGlobalVolume];
 	}
 
-	setGlobalVolume (value) {
+	setGlobalVolume(value) {
 		if (typeof value !== "number") {
 			throw new Error("Invalid argument list for MusicSessionConfiguration.setGlobalVolume");
 		}
@@ -115,7 +115,7 @@ export class MusicSessionConfiguration {
 		this.setIsUsingGlobalVolume(true);
 	}
 
-	setIsUsingGlobalVolume (value) {
+	setIsUsingGlobalVolume(value) {
 		if (typeof value !== "boolean") {
 			throw new Error("Invalid argument list for MusicSessionConfiguration.setIsUsingGlobalVolume");
 		}
@@ -124,33 +124,33 @@ export class MusicSessionConfiguration {
 
 	/* Lobby sound settings */
 
-	getLobbyEnabled () {
+	getLobbyEnabled() {
 		return this[lobbyEnabled];
 	}
 
-	getLobbyTitle () {
+	getLobbyTitle() {
 		return this[lobbyTitle];
 	}
 
-	getLobbyVolume () {
+	getLobbyVolume() {
 		return this[lobbyVolume];
 	}
 
-	setLobbyEnabled (value) {
+	setLobbyEnabled(value) {
 		if (typeof value !== "boolean") {
 			throw new Error("Invalid argument list for MusicSessionConfiguration.setLobbyEnabled");
 		}
 		this[lobbyEnabled] = value;
 	}
 
-	setLobbyTitle (value) {
+	setLobbyTitle(value) {
 		if (typeof value !== "string") {
 			throw new Error("Invalid argument list for MusicSessionConfiguration.setLobbyTitle");
 		}
 		this[lobbyTitle] = value;
 	}
 
-	setLobbyVolume (value) {
+	setLobbyVolume(value) {
 		if (typeof value !== "number") {
 			throw new Error("Invalid argument list for MusicSessionConfiguration.setLobbyVolume");
 		}
@@ -159,33 +159,33 @@ export class MusicSessionConfiguration {
 
 	/* Countdown-Running settings */
 
-	getCountdownRunningEnabled () {
+	getCountdownRunningEnabled() {
 		return this[countdownRunningEnabled];
 	}
 
-	getCountdownRunningTitle () {
+	getCountdownRunningTitle() {
 		return this[countdownRunningTitle];
 	}
 
-	getCountdownRunningVolume () {
+	getCountdownRunningVolume() {
 		return this[countdownRunningVolume];
 	}
 
-	setCountdownRunningEnabled (value) {
+	setCountdownRunningEnabled(value) {
 		if (typeof value !== "boolean") {
 			throw new Error("Invalid argument list for MusicSessionConfiguration.setCountdownRunningEnabled");
 		}
 		this[countdownRunningEnabled] = value;
 	}
 
-	setCountdownRunningTitle (value) {
+	setCountdownRunningTitle(value) {
 		if (typeof value !== "string") {
 			throw new Error("Invalid argument list for MusicSessionConfiguration.setCountdownRunningTitle");
 		}
 		this[countdownRunningTitle] = value;
 	}
 
-	setCountdownRunningVolume (value) {
+	setCountdownRunningVolume(value) {
 		if (typeof value !== "number") {
 			throw new Error("Invalid argument list for MusicSessionConfiguration.setCountdownRunningVolume");
 		}
@@ -194,40 +194,40 @@ export class MusicSessionConfiguration {
 
 	/* Countdown-Ending settings */
 
-	getCountdownEndEnabled () {
+	getCountdownEndEnabled() {
 		return this[countdownEndEnabled];
 	}
 
-	getCountdownEndTitle () {
+	getCountdownEndTitle() {
 		return this[countdownEndTitle];
 	}
 
-	getCountdownEndVolume () {
+	getCountdownEndVolume() {
 		return this[countdownEndVolume];
 	}
 
-	setCountdownEndEnabled (value) {
+	setCountdownEndEnabled(value) {
 		if (typeof value !== "boolean") {
 			throw new Error("Invalid argument list for MusicSessionConfiguration.setCountdownEndEnabled");
 		}
 		this[countdownEndEnabled] = value;
 	}
 
-	setCountdownEndTitle (value) {
+	setCountdownEndTitle(value) {
 		if (typeof value !== "string") {
 			throw new Error("Invalid argument list for MusicSessionConfiguration.setCountdownEndTitle");
 		}
 		this[countdownEndTitle] = value;
 	}
 
-	setCountdownEndVolume (value) {
+	setCountdownEndVolume(value) {
 		if (typeof value !== "number") {
 			throw new Error("Invalid argument list for MusicSessionConfiguration.setCountdownEndVolume");
 		}
 		this[countdownEndVolume] = value;
 	}
 
-	static getAvailableMusic () {
+	static getAvailableMusic() {
 		return {
 			lobbyMusic: ["Song0", "Song1", "Song2", "Song3"],
 			countdownRunning: ["Song0", "Song1", "Song2"],

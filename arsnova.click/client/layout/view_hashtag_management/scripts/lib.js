@@ -60,17 +60,25 @@ export function findOriginalHashtag(inputHashtag) {
 	return result;
 }
 
-export function getNewDemoQuizName() {
+function getIncrementedQuizNameByRef(searchString) {
 	let largestIndex = 0;
-	const hashtags = HashtagsCollection.find({hashtag: {$regex: "demo quiz *", $options: 'i'}}).fetch();
+	const hashtags = HashtagsCollection.find({hashtag: {$regex: (searchString + "*"), $options: 'i'}}).fetch();
 	hashtags.every(function (item) {
-		const tmpIndex = parseInt(item.hashtag.split(" ")[2]);
+		const tmpIndex = parseInt(item.hashtag.split(" ").slice(-1));
 		if (tmpIndex > largestIndex) {
 			largestIndex = tmpIndex;
 		}
 		return true;
 	});
-	return "Demo Quiz " + (largestIndex + 1);
+	return largestIndex + 1;
+}
+
+export function getNewDemoQuizName() {
+	return "Demo Quiz " + getIncrementedQuizNameByRef("demo quiz");
+}
+
+export function getNewABCDQuizName() {
+	return getIncrementedQuizNameByRef("abcd");
 }
 
 export function connectEventManager(hashtag) {
@@ -90,7 +98,7 @@ export function connectEventManager(hashtag) {
 				Meteor.call("EventManagerCollection.setActiveQuestion", hashtag, 0);
 			}
 			if (sessionStorage.getItem("overrideValidQuestionRedirect")) {
-				if (Session.get("questionGroup").isValid() || Session.get("questionGroup").getHashtag().toLowerCase().indexOf("demo quiz") !== -1) {
+				if (Session.get("questionGroup").isValid() || hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
 					Meteor.call("MemberListCollection.removeFromSession", hashtag);
 					Meteor.call("EventManagerCollection.setActiveQuestion", hashtag, 0);
 					Meteor.call("EventManagerCollection.setSessionStatus", hashtag, 2);
@@ -127,12 +135,13 @@ export function addHashtag(questionGroup) {
 				connectEventManager(questionGroup.getHashtag());
 			}
 		});
+	} else {
+		localData.addHashtag(questionGroup);
+		Session.set("questionGroup", questionGroup);
+		connectEventManager(questionGroup.getHashtag());
 	}
-	localData.addHashtag(questionGroup);
-	Session.set("questionGroup", questionGroup);
-	connectEventManager(questionGroup.getHashtag());
 }
 
 export function trimIllegalChars(hashtag) {
-	return hashtag.replace(/ /g,"");
+	return hashtag.replace(/ /g, "");
 }

@@ -26,10 +26,11 @@ import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scri
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection, hashtagSchema} from '/lib/hashtags/collection.js';
 import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
-import {resetConnectionIndication, startConnectionIndication, getRTT} from './lib.js';
+import {resetConnectionIndication, startConnectionIndication, getRTT, checkABCDOrdering} from './lib.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
 import * as nickLib from "/client/layout/view_choose_nickname/scripts/lib.js";
+import {DefaultAnswerOption} from "/lib/answeroptions/answeroption_default";
 
 Template.connectionQualityHeader.events({
 	"click #connectionQualityHeader": function () {
@@ -54,7 +55,9 @@ Template.home.events({
 		const hashtagDoc = HashtagsCollection.findOne({hashtag: originalHashtag});
 
 		inputTarget.popover("destroy");
-		if (["?", "/", "\\", "#", "\"", "'"].some(function (v) { return inputHashtag.indexOf(v) >= 0; })) {
+		if (["?", "/", "\\", "#", "\"", "'"].some(function (v) {
+				return inputHashtag.indexOf(v) >= 0;
+			})) {
 			$("#joinSession, #addNewHashtag").attr("disabled", "disabled");
 			inputTarget.popover({
 				title: TAPi18n.__("view.hashtag_view.hashtag_input.illegal_chars"),
@@ -65,10 +68,13 @@ Template.home.events({
 			return;
 		}
 		if (inputHashtag.toLowerCase() === "demo quiz") {
-			Session.set("isAddingDemoQuiz", true);
+			Session.set("isAddingQuizType", "demoquiz");
 			inputHashtag = hashtagLib.getNewDemoQuizName();
+		} else if (checkABCDOrdering(inputHashtag.toLowerCase())) {
+			Session.set("isAddingQuizType", "abcd");
+			inputHashtag = inputHashtag + " " + hashtagLib.getNewABCDQuizName();
 		} else {
-			Session.set("isAddingDemoQuiz", false);
+			Session.set("isAddingQuizType", undefined);
 		}
 		if (hashtagLib.eventManagerTracker) {
 			hashtagLib.eventManagerTracker.stop();
@@ -112,8 +118,10 @@ Template.home.events({
 						},
 						added: function (id, doc) {
 							if (!isNaN(doc.sessionStatus)) {
-								if (Session.get("isAddingDemoQuiz")) {
+								if (Session.get("isAddingQuizType") === "demoquiz") {
 									inputHashtag = hashtagLib.getNewDemoQuizName();
+								} else if (Session.get("isAddingQuizType") === "abcd") {
+									inputHashtag = hashtagLib.getNewABCDQuizName();
 								}
 								originalHashtag = hashtagLib.findOriginalHashtag(inputHashtag);
 								if (doc.sessionStatus === 2) {
@@ -217,6 +225,8 @@ Template.home.events({
 			let hashtag = $("#hashtag-input-field").val().trim();
 			if (hashtag.toLowerCase() === "demo quiz") {
 				hashtag = hashtagLib.getNewDemoQuizName();
+			} else if (checkABCDOrdering(hashtag.toLowerCase())) {
+				hashtag = hashtag.toUpperCase() + " " + hashtagLib.getNewABCDQuizName();
 			}
 			try {
 				new SimpleSchema({
@@ -239,7 +249,7 @@ Template.home.events({
 				hashtagLib.addHashtag(Session.get("questionGroup"));
 			} else {
 				let questionGroup = null;
-				const successCallback = function (data) {
+				const successDemoQuizCallback = function (data) {
 					questionGroup = new DefaultQuestionGroup(data);
 					questionGroup.setHashtag(hashtag);
 					if (questionGroup.isValid()) {
@@ -248,18 +258,49 @@ Template.home.events({
 					localStorage.setItem("showProductTour", true);
 					hashtagLib.addHashtag(questionGroup);
 				};
+				const successABCDQuizCallback = function (data) {
+					questionGroup = new DefaultQuestionGroup(data);
+					questionGroup.setHashtag(hashtag);
+					questionGroup.getQuestionList()[0].removeAllAnswerOptions();
+					for (let i = 0; i < $("#hashtag-input-field").val().trim().length; i++) {
+						questionGroup.getQuestionList()[0].addAnswerOption(new DefaultAnswerOption({
+							hashtag: questionGroup.getHashtag(),
+							questionIndex: 0,
+							answerText: "",
+							answerOptionNumber: i,
+							isCorrect: false
+						}));
+					}
+					sessionStorage.setItem("overrideValidQuestionRedirect", true);
+					hashtagLib.addHashtag(questionGroup);
+				};
 				if (hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
 					$.ajax({
 						type: "GET",
-						url: `/demo_quiz/${TAPi18n.getLanguage()}.demo_quiz.json?_=${Date.now()}`,
+						url: `/predefined_quizzes/demo_quiz/${TAPi18n.getLanguage()}.demo_quiz.json?_=${Date.now()}`,
 						dataType: 'json',
-						success: successCallback,
+						success: successDemoQuizCallback,
 						error: function () {
 							$.ajax({
 								type: "GET",
-								url: `/demo_quiz/en.demo_quiz.json?_=${Date.now()}`,
+								url: `/predefined_quizzes/demo_quiz/en.demo_quiz.json?_=${Date.now()}`,
 								dataType: 'json',
-								success: successCallback
+								success: successDemoQuizCallback
+							});
+						}
+					});
+				} else if (checkABCDOrdering($("#hashtag-input-field").val().trim())) {
+					$.ajax({
+						type: "GET",
+						url: `/predefined_quizzes/abcd_quiz/${TAPi18n.getLanguage()}.abcd_quiz.json?_=${Date.now()}`,
+						dataType: 'json',
+						success: successABCDQuizCallback,
+						error: function () {
+							$.ajax({
+								type: "GET",
+								url: `/predefined_quizzes/abcd_quiz/en.abcd_quiz.json?_=${Date.now()}`,
+								dataType: 'json',
+								success: successABCDQuizCallback
 							});
 						}
 					});
@@ -296,7 +337,7 @@ Template.home.events({
 			13
 		]; //left, right, delete, entf
 		const charCount = $(event.currentTarget).val().length;
-		if (charCount >= 25 && keyWhiteList.indexOf(event.keyCode) === -1) {
+		if (charCount >= 30 && keyWhiteList.indexOf(event.keyCode) === -1) {
 			event.preventDefault();
 		}
 

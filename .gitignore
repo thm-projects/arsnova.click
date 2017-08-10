@@ -55,3 +55,4 @@ node_modules
 arsnova.click-build/
 .build_local.sh.swp
 
+.DS_Store

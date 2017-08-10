@@ -10,8 +10,7 @@
       "questionIndex": 0,
       "displayAnswerText": false,
       "answerOptionList": [],
-      "type": "ABCDSingleChoiceQuestion",
-      "multipleSelectionEnabled": false
+      "type": "ABCDSingleChoiceQuestion"
     }
   ],
   "configuration": {
@@ -38,7 +37,7 @@
     "theme": "theme-Material",
     "readingConfirmationEnabled": false,
     "showResponseProgress": true,
-    "confidenceSliderEnabled": true
+    "confidenceSliderEnabled": false
   },
   "type": "DefaultQuestionGroup"
 }

@@ -189,10 +189,10 @@ function setSheetData(ws, {responsesWithConfidenceValue, translation, isCASRequi
 
 	ws.cell(currentRowIndex, 1).string(TAPi18n.__('export.average_correct_answered_questions', {lng: translation}) + ":");
 	ws.cell(currentRowIndex, 3).number(leaderboardData.map((x) => {
-			return x.correctQuestions.length;
-		}).reduce((a, b) => {
-			return a + b;
-		}, 0) / numberOfAttendees);
+		return x.correctQuestions.length;
+	}).reduce((a, b) => {
+		return a + b;
+	}, 0) / numberOfAttendees);
 	currentRowIndex++;
 
 	ws.cell(currentRowIndex, 1).string(TAPi18n.__('export.average_confidence', {lng: translation}) + ":");

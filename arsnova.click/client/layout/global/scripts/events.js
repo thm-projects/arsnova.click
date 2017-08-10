@@ -221,95 +221,97 @@ Template.home.events({
 				resolve();
 			}
 		});
-		promise.then(function () {let hashtag = $("#hashtag-input-field").val().trim();
-		if (hashtag.toLowerCase() === "demo quiz") {
-			hashtag = hashtagLib.getNewDemoQuizName();
-		}else if (checkABCDOrdering(hashtag.toLowerCase())) {
-			hashtag = hashtag.toUpperCase() + " " + hashtagLib.getNewABCDQuizName();
-		}
-		try {
-			new SimpleSchema({
-				hashtag: hashtagSchema
-			}).validate({hashtag: hashtag});
-		} catch (ex) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
-			});
-			return;
-		}
-		const localLoweredHashtags = localData.getAllLoweredHashtags();
-		if ($.inArray(hashtag.toLowerCase(), localLoweredHashtags) > -1 && HashtagsCollection.findOne()) {
-			const session = localData.reenterSession(hashtag);
-			Session.set("questionGroup", session);
-			if (Session.get("questionGroup").isValid()) {
-				sessionStorage.setItem("overrideValidQuestionRedirect", true);
+		promise.then(function () {
+			let hashtag = $("#hashtag-input-field").val().trim();
+			if (hashtag.toLowerCase() === "demo quiz") {
+				hashtag = hashtagLib.getNewDemoQuizName();
+			} else if (checkABCDOrdering(hashtag.toLowerCase())) {
+				hashtag = hashtag.toUpperCase() + " " + hashtagLib.getNewABCDQuizName();
 			}
-			hashtagLib.addHashtag(Session.get("questionGroup"));
-		} else {
-			let questionGroup = null;
-			const successDemoQuizCallback = function (data) {
-				questionGroup = new DefaultQuestionGroup(data);
-				questionGroup.setHashtag(hashtag);
-				if (questionGroup.isValid()) {
+			try {
+				new SimpleSchema({
+					hashtag: hashtagSchema
+				}).validate({hashtag: hashtag});
+			} catch (ex) {
+				new ErrorSplashscreen({
+					autostart: true,
+					errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
+				});
+				return;
+			}
+			const localLoweredHashtags = localData.getAllLoweredHashtags();
+			if ($.inArray(hashtag.toLowerCase(), localLoweredHashtags) > -1 && HashtagsCollection.findOne()) {
+				const session = localData.reenterSession(hashtag);
+				Session.set("questionGroup", session);
+				if (Session.get("questionGroup").isValid()) {
 					sessionStorage.setItem("overrideValidQuestionRedirect", true);
 				}
-				localStorage.setItem("showProductTour", true);
-				hashtagLib.addHashtag(questionGroup);
-			};
-			const successABCDQuizCallback = function (data) {
-				questionGroup = new DefaultQuestionGroup(data);
-				questionGroup.setHashtag(hashtag);
-				questionGroup.getQuestionList()[0].removeAllAnswerOptions();
-				for (let i = 0; i < $("#hashtag-input-field").val().trim().length; i++) {
-					questionGroup.getQuestionList()[0].addAnswerOption(new DefaultAnswerOption({
-						hashtag: questionGroup.getHashtag(),
-						questionIndex: 0,
-						answerText: "",
-						answerOptionNumber: i,
-						isCorrect: false
-					}));
-				}
-				sessionStorage.setItem("overrideValidQuestionRedirect", true);
-				hashtagLib.addHashtag(questionGroup);
-			};
-			if (hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
-				$.ajax({
-					type: "GET",
-					url: `/predefined_quizzes/demo_quiz/${TAPi18n.getLanguage()}.demo_quiz.json?_=${Date.now()}`,
-					dataType: 'json',
-					success: successDemoQuizCallback,
-					error: function () {
-						$.ajax({
-							type: "GET",
-							url: `/predefined_quizzes/demo_quiz/en.demo_quiz.json?_=${Date.now()}`,
-							dataType: 'json',
-							success: successDemoQuizCallback
-						});
-					}
-				});
-			} else if (checkABCDOrdering($("#hashtag-input-field").val().trim())) {
-				$.ajax({
-					type: "GET",
-					url: `/predefined_quizzes/abcd_quiz/${TAPi18n.getLanguage()}.abcd_quiz.json?_=${Date.now()}`,
-					dataType: 'json',
-					success: successABCDQuizCallback,
-					error: function () {
-						$.ajax({
-							type: "GET",
-							url: `/predefined_quizzes/abcd_quiz/en.abcd_quiz.json?_=${Date.now()}`,
-							dataType: 'json',
-							success: successABCDQuizCallback
-						});
-					}
-				});
+				hashtagLib.addHashtag(Session.get("questionGroup"));
 			} else {
-				questionGroup = new DefaultQuestionGroup({
-					hashtag: hashtag
-				});
-				hashtagLib.addHashtag(questionGroup);
+				let questionGroup = null;
+				const successDemoQuizCallback = function (data) {
+					questionGroup = new DefaultQuestionGroup(data);
+					questionGroup.setHashtag(hashtag);
+					if (questionGroup.isValid()) {
+						sessionStorage.setItem("overrideValidQuestionRedirect", true);
+					}
+					localStorage.setItem("showProductTour", true);
+					hashtagLib.addHashtag(questionGroup);
+				};
+				const successABCDQuizCallback = function (data) {
+					questionGroup = new DefaultQuestionGroup(data);
+					questionGroup.setHashtag(hashtag);
+					questionGroup.getQuestionList()[0].removeAllAnswerOptions();
+					for (let i = 0; i < $("#hashtag-input-field").val().trim().length; i++) {
+						questionGroup.getQuestionList()[0].addAnswerOption(new DefaultAnswerOption({
+							hashtag: questionGroup.getHashtag(),
+							questionIndex: 0,
+							answerText: "",
+							answerOptionNumber: i,
+							isCorrect: false
+						}));
+					}
+					sessionStorage.setItem("overrideValidQuestionRedirect", true);
+					hashtagLib.addHashtag(questionGroup);
+				};
+				if (hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
+					$.ajax({
+						type: "GET",
+						url: `/predefined_quizzes/demo_quiz/${TAPi18n.getLanguage()}.demo_quiz.json?_=${Date.now()}`,
+						dataType: 'json',
+						success: successDemoQuizCallback,
+						error: function () {
+							$.ajax({
+								type: "GET",
+								url: `/predefined_quizzes/demo_quiz/en.demo_quiz.json?_=${Date.now()}`,
+								dataType: 'json',
+								success: successDemoQuizCallback
+							});
+						}
+					});
+				} else if (checkABCDOrdering($("#hashtag-input-field").val().trim())) {
+					$.ajax({
+						type: "GET",
+						url: `/predefined_quizzes/abcd_quiz/${TAPi18n.getLanguage()}.abcd_quiz.json?_=${Date.now()}`,
+						dataType: 'json',
+						success: successABCDQuizCallback,
+						error: function () {
+							$.ajax({
+								type: "GET",
+								url: `/predefined_quizzes/abcd_quiz/en.abcd_quiz.json?_=${Date.now()}`,
+								dataType: 'json',
+								success: successABCDQuizCallback
+							});
+						}
+					});
+				} else {
+					questionGroup = new DefaultQuestionGroup({
+						hashtag: hashtag
+					});
+					hashtagLib.addHashtag(questionGroup);
+				}
 			}
-		}}, function (rejectReason) {
+		}, function (rejectReason) {
 			new ErrorSplashscreen({autostart: true, errorMessage: rejectReason});
 		});
 	},

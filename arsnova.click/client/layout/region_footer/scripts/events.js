@@ -391,7 +391,7 @@ Template.contactHeaderBar.events({
 		Router.go("/dataprivacy");
 	},
 	"click #blog": function () {
-		window.open("https://arsnova.thm.de/blog/");
+		window.open("https://arsnova.thm.de/blog/arsnova-click/");
 	}
 });
 

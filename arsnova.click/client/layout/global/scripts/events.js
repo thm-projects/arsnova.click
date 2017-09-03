@@ -218,7 +218,13 @@ Template.home.events({
 					reject("plugins.splashscreen.error.error_messages.maximum_quizzes_exceeded");
 				}
 			} else {
-				resolve();
+				if (Meteor.settings.public.restrictQuizmastersToCASUsers) {
+					Meteor.loginWithCas(function () {
+						nickLib.hasTHMMail() ? resolve() : reject("plugins.splashscreen.error.error_messages.invalid_login");
+					});
+				} else {
+					resolve();
+				}
 			}
 		});
 		promise.then(function () {

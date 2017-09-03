@@ -126,7 +126,7 @@ const clickEvents = {
 			if (asJSON.type === "DefaultQuestionGroup") {
 				questionInstance = new DefaultQuestionGroup(asJSON);
 			} else {
-				throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
+				throw new TypeError(`Undefined session type ${asJSON.type} while importing`);
 			}
 
 			if (!HashtagsCollection.findOne({hashtag: questionInstance.getHashtag()})) {

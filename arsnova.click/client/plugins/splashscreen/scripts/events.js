@@ -33,7 +33,7 @@ Template.showHashtagsSplashscreen.events({
 		const promise = new Promise(function (resolve, reject) {
 			if (Meteor.settings.public.maximumActiveQuizzes) {
 				const currentActiveQuizzes = EventManagerCollection.find({sessionStatus: {$gt: 1}}).fetch();
-				if (currentActiveQuizzes < Meteor.settings.public.maximumActiveQuizzes) {
+				if (currentActiveQuizzes.length < Meteor.settings.public.maximumActiveQuizzes) {
 					Meteor.loginWithCas(function () {
 						nickLib.hasTHMMail() ? resolve() : reject("plugins.splashscreen.error.error_messages.invalid_login");
 					});

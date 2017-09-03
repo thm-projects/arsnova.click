@@ -179,7 +179,7 @@ Template.home.events({
 		const promise = new Promise(function (resolve, reject) {
 			if (Meteor.settings.public.maximumActiveQuizzes) {
 				const currentActiveQuizzes = EventManagerCollection.find({sessionStatus: {$gt: 1}}).fetch();
-				if (currentActiveQuizzes < Meteor.settings.public.maximumActiveQuizzes) {
+				if (currentActiveQuizzes.length < Meteor.settings.public.maximumActiveQuizzes) {
 					const passwordPromise = new Promise(function (passwordResolve, passwordReject) {
 						if (Meteor.settings.public.quizCreationPassword) {
 							new Splashscreen({

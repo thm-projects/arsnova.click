@@ -25,3 +25,11 @@ Meteor.publish('EventManagerCollection.join', (hashtag) => {
 	}).validate({hashtag: hashtag});
 	return EventManagerCollection.find({hashtag});
 });
+
+Meteor.publish('EventManagerCollection.overview', () => {
+	return EventManagerCollection.find({}, {
+		fields: {
+			sessionStatus: 1
+		}
+	});
+});

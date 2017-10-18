@@ -97,6 +97,7 @@ const NonBlockingRouteController = RouteController.extend({
 	onBeforeAction: onBeforeAction,
 	subscriptions: function () {
 		subsCache.subscribe('HashtagsCollection.public');
+		subsCache.subscribe('EventManagerCollection.overview');
 		subsCache.subscribe('PerformanceAnalysis.join');
 	}
 });

@@ -37,7 +37,6 @@ build:
   stage: build
   only:
     - master
-    - staging
     - /^v[0-9]+/
   tags:
     - meteor
@@ -56,22 +55,6 @@ build:
   artifacts:
     paths:
       - build/bundle/
-
-deploy_staging:
-  stage: deploy
-  only:
-    - staging
-  tags:
-    - ssh
-  dependencies:
-    - build
-  script:
-    - chmod -R a+rX,ug+w build
-    - eval $(ssh-agent -s)
-    - mkdir ~/.ssh && echo "$STAGING_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-    - ssh-add <(echo "$STAGING_SSH_PRIVATE_KEY")
-    - scp -r build/bundle/* "$STAGING_SSH_URL"
-  environment: staging
 
 deploy_production:
   stage: deploy

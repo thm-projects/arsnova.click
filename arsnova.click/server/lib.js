@@ -57,7 +57,9 @@ export function parseQuizdata({quizData, privateKey}) {
 	});
 	return new Promise(function (resolve) {
 		mkdirp(targetDirectory, function () {
-			if (urlsToParse.length === 0) resolve([]);
+			if (urlsToParse.length === 0) {
+				resolve([]);
+			}
 			urlsToParse.forEach(function (url) {
 				let fileLocation = `${targetDirectory}/${url.substring(url.lastIndexOf("/") + 1).replace(/\?/g, "_")}`;
 				let fileName = path.basename(fileLocation);

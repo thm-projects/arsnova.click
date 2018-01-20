@@ -76,7 +76,7 @@ export const SessionConfigurationSchema = new SimpleSchema({
 		type: Array // [String]
 	},
 	"nicks.selectedValues.$": {
-		type: String,
+		type: String
 	},
 	"nicks.blockIllegal": {
 		type: Boolean

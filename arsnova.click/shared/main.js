@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {MemberListCollection} from '/lib/member_list/collection.js';
@@ -24,6 +24,8 @@ import {ResponsesCollection} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import {HashtagsCollection, hashtagSchema} from '/lib/hashtags/collection.js';
+import * as childProcess from 'child_process';
+import process from 'process';
 
 
 Meteor.methods({
@@ -43,6 +45,9 @@ Meteor.methods({
 		new SimpleSchema({hashtag: hashtagSchema}).validate({hashtag});
 
 		Meteor.call("Main.killAll", hashtag);
+		if (Meteor.isServer) {
+			childProcess.spawn(`rm`, [`-rf`, `${process.cwd()}/quiz_assets/${HashtagsCollection.findOne({hashtag: hashtag}).privateKey}/${hashtag}`]);
+		}
 		HashtagsCollection.remove({hashtag: hashtag});
 	}
 });

@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {NicknameCategoriesCollection, nickCategorySchema} from '/lib/nickname_categories/collection.js';
 import {userNickSchema} from '/lib/member_list/collection.js';
 

@@ -109,7 +109,16 @@ Template.qrCodeDisplay.helpers({
 
 Template.arsnovaClickLogo.helpers({
 	getOrigin: function () {
-		return /^localhost/.test(window.location.host) ? "alpha" : /^staging/.test(window.location.host) ? "staging" : "";
+		if (/^localhost/.test(window.location.host)) {
+			return "alpha";
+		}
+		if (/^arsnova\.local/.test(window.location.host)) {
+			return "local";
+		}
+		if (/^staging/.test(window.location.host)) {
+			return "staging";
+		}
+		return "";
 	}
 });
 

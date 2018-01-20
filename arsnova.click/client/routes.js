@@ -173,6 +173,9 @@ Router.onAfterAction(function () {
 });
 
 Router.route('/', {
+	subscriptions: function () {
+		subsCache.subscribe('ProxyCollection.join');
+	},
 	controller: NonBlockingRouteController,
 	action: function () {
 		this.render("titel", {
@@ -427,6 +430,9 @@ Router.route('/:quizName/nick', {
 });
 
 Router.route('/:quizName/quizManager', {
+	subscriptions: function () {
+		subsCache.subscribe('ProxyCollection.join');
+	},
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			this.render('footerNavButtons', {

@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Mongo} from 'meteor/mongo';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {hashtagSchema} from '../hashtags/collection.js';
 import {questionIndexSchema} from '../eventmanager/collection.js';
 import {userNickSchema, userRefSchema} from '../member_list/collection.js';
@@ -51,8 +51,11 @@ export const responsesCollectionSchema = new SimpleSchema({
 		type: userNickSchema
 	},
 	answerOptionNumber: {
-		type: [answerOptionNumberSchema],
+		type: Array, // [answerOptionNumberSchema],
 		optional: true
+	},
+	"answerOptionNumber.$": {
+		type: answerOptionNumberSchema
 	},
 	rangedInputValue: {
 		type: rangedInputValueSchema,

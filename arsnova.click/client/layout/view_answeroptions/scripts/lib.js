@@ -20,7 +20,7 @@ import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
 import {jQuery} from 'meteor/jquery';
 import {noUiSlider} from 'meteor/arsnova.click:nouislider';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {Router} from 'meteor/iron:router';
 import {answerTextSchema} from '/lib/answeroptions/collection.js';

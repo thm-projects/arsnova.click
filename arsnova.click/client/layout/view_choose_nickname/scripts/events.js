@@ -18,7 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {MemberListCollection, userNickSchema} from '/lib/member_list/collection.js';
 import {NicknameCategoriesCollection} from '/lib/nickname_categories/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';

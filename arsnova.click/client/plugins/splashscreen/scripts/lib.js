@@ -311,14 +311,24 @@ export const parseMarkdown = {
 		}).isCorrect;
 	},
 	isVideoQuestionText: function (questionText) {
-		return !/(^!)?\[.*\]\(.*\)/.test(questionText) && /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(questionText) && (/youtube/.test(questionText) || /youtu.be/.test(questionText) || /vimeo/.test(questionText));
+		return !/(^!)?\[.*\]\(.*\)/.test(questionText) && /((https?:\/\/)?[\w-]+([:0-9\.\w-]*)+\.?(:\d+)?(\/\S*\w)?)/.test(questionText) && (/youtube/.test(questionText) || /youtu\.be/.test(questionText) || /vimeo/.test(questionText));
+	},
+	isLocalHostedVideo: function () {
+		return Meteor.settings.public.useLocalAssetsCache;
 	},
 	getVideoData: function (questionText) {
 		const result = {};
+		if (/_(youtube|vimeo)/.test(questionText)) {
+			result.origin = questionText;
+			result.srcAttr = result.origin;
+			result.videoId = '';
+			result.embedTag = '';
+			return result;
+		}
 		if (/youtube/.test(questionText)) {
 			result.origin = "https://www.youtube.com/embed/";
 			result.videoId = questionText.substr(questionText.lastIndexOf("=") + 1, questionText.length);
-		} else if (/youtu.be/.test(questionText)) {
+		} else if (/youtu\.be/.test(questionText)) {
 			result.origin = "https://www.youtube.com/embed/";
 			result.videoId = questionText.substr(questionText.lastIndexOf("/") + 1, questionText.length);
 		} else if (/vimeo/.test(questionText)) {

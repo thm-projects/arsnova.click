@@ -16,7 +16,8 @@
       "message": "arsnova.click is a web app that uses cookies to ensure you get the best experience.",
       "dismiss": "Got it!",
       "learn_more": "More about data privacy"
-    }
+    },
+    "download_processing": "Please wait..."
   },
   "region": {
     "footer": {

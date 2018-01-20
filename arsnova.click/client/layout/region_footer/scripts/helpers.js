@@ -89,6 +89,12 @@ Template.showMore.helpers({
 	}
 });
 
+Template.footerNavButtons.helpers({
+	serverDownloadsQuizAssets: ()=> {
+		return Session.get("serverDownloadsQuizAssets");
+	}
+});
+
 Template.contactHeaderBar.helpers({
 	isCurrentRoute: function (route) {
 		return Router.current().url.indexOf(route) > -1;

@@ -30,12 +30,12 @@
                 </div>
             {{/if}}
             {{#if forwardButton}}
-                <div class="col-xs-12 col-md-{{#if backButton}}6{{else}}12{{/if}} fixed-bottom-item">
+                <div class="col-xs-12 col-sm-{{#if backButton}}6{{else}}12{{/if}} fixed-bottom-item">
                     <button id="{{forwardButton.id}}"
                             data-intro="{{#if forwardButton.intro}}{{_ forwardButton.intro}}{{/if}}"
                             class="button button-next tabbable">
-                        <span class="fixed-bottom-item-text">{{#if forwardButton.text}} {{_
-                                forwardButton.text }} {{else}} {{_ 'global.next' }} {{/if}}</span>
+                        <span class="fixed-bottom-item-text">{{#if serverDownloadsQuizAssets}}{{_ "global.download_processing"}}{{else}}{{#if forwardButton.text}} {{_
+                                forwardButton.text }} {{else}} {{_ 'global.next' }} {{/if}}{{/if}}</span>
                         <span class="glyphicon glyphicon-arrow-right glyph-right" aria-hidden="true"></span>
                     </button>
                 </div>

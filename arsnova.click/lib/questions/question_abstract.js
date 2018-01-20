@@ -1,5 +1,5 @@
 import {Meteor} from 'meteor/meteor';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
 import {AbstractAnswerOption} from '../answeroptions/answeroption_abstract.js';
 import {DefaultAnswerOption} from '../answeroptions/answeroption_default.js';

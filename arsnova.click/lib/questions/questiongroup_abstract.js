@@ -15,8 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
+import {ProxyCollection} from '/lib/proxy/collection.js';
 import {AbstractQuestion} from './question_abstract.js';
 import {questionReflection} from "./question_reflection.js";
 import {SessionConfiguration} from '../session_configuration/session_config.js';
@@ -242,5 +243,41 @@ export class AbstractQuestionGroup {
 			answerOptionList: []
 		});
 		this.addQuestion(questionItem, index);
+	}
+
+	rewrite () {
+		const proxyData = ProxyCollection.findOne({hashtag: this.getHashtag()});
+		if (!proxyData) {
+			return this;
+		}
+		const urlParser = /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*\w)?)/;
+		const apiURL = location.protocol + "//" + location.host + "/server/rewriteData/" + this.getHashtag() + "/";
+
+		this.getQuestionList().forEach(function (question) {
+			const questiontext = question.getQuestionText().split("\n");
+			questiontext.forEach(function (questiontextLine) {
+				const match = urlParser.exec(questiontextLine);
+				if (match) {
+					proxyData.proxyFiles.forEach(function (element) {
+						if (questiontextLine.indexOf(element.url) > -1) {
+							const newQuestiontextLine = questiontextLine.replace(element.url, apiURL + element.fileName).replace(/ /g, "%20");
+							question.setQuestionText(question.getQuestionText().replace(questiontextLine, newQuestiontextLine));
+						}
+					});
+				}
+			});
+			question.getAnswerOptionList().forEach(function (answer) {
+				const match = urlParser.exec(answer.getAnswerText());
+				if (match) {
+					proxyData.proxyFiles.forEach(function (element) {
+						if (answer.getAnswerText().indexOf(element.url) > -1) {
+							const newAnswerText = answer.getAnswerText().replace(element.url, apiURL + element.fileName).replace(/ /g, "%20");
+							answer.setAnswerText(newAnswerText);
+						}
+					});
+				}
+			});
+		});
+		return this;
 	}
 }

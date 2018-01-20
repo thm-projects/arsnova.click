@@ -9,6 +9,7 @@ jshint:
     - nodejs
   dependencies: []
   script:
+    - echo "{}" > package.json
     - npm install jshint@^2.9.0
     - node_modules/jshint/bin/jshint --config .jshintrc $PROJECT_PATH/client/ $PROJECT_PATH/server/ $PROJECT_PATH/shared/
 

@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Mongo} from 'meteor/mongo';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {hashtagSchema, privateKeySchema} from '/lib/hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
 
@@ -35,7 +35,7 @@ export const userNickIdSchema = {
 	type: String
 };
 export const readConfirmedSchema = {
-	type: [Number]
+	type: Array // [Number]
 };
 export const backgroundColorSchema = {
 	type: String,

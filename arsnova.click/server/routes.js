@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {Router} from 'meteor/iron:router';

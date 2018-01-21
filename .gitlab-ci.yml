@@ -38,6 +38,7 @@ build:
   stage: build
   only:
     - master
+    - staging
     - /^v[0-9]+/
   tags:
     - meteor

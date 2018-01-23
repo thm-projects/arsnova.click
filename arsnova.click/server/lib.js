@@ -38,7 +38,7 @@ export function parseQuizdata({quizData, privateKey}) {
 	const targetDirectory = `${process.cwd()}/quiz_assets/${privateKey}/${questionGroup.getHashtag()}`;
 	const supportedFileTypes = [".gif", ".png", ".mpg", ".jpg", ".jpeg", ".avi"];
 	const downloadMatches = [];
-	let failedDownloads = 0;
+	const failedDownloads = [];
 
 	questionGroup.getQuestionList().forEach(function (question) {
 		const questiontext = question.getQuestionText().split("\n");
@@ -64,61 +64,72 @@ export function parseQuizdata({quizData, privateKey}) {
 				let fileLocation = `${targetDirectory}/${url.substring(url.lastIndexOf("/") + 1).replace(/\?/g, "_")}`;
 				let fileName = path.basename(fileLocation);
 				if (fs.existsSync(fileLocation)) {
-					fs.unlink(fileLocation);
-				}
-				if (url.indexOf("youtu") > -1) {
-					fileLocation += "_youtube";
-					fileName += "_youtube";
-					const video = ytdl(url);
-					video.pipe(fs.createWriteStream(fileLocation));
-					video.on('end', function () {
-						downloadMatches.push({url, fileLocation, fileName});
-						if (downloadMatches.length + failedDownloads === urlsToParse.length) {
-							resolve(downloadMatches);
-						}
-					});
-					video.on('complete', function () {
-						downloadMatches.push({url, fileLocation, fileName});
-						if (downloadMatches.length + failedDownloads === urlsToParse.length) {
-							resolve(downloadMatches);
-						}
-					});
-				} else if (url.indexOf("vimeo") > -1) {
-					fileLocation += "_vimeo";
-					fileName += "_vimeo";
-					const video = vidl(url, {quality: '360p'});
-					video.pipe(fs.createWriteStream(fileLocation));
-					video.on('end', function () {
-						downloadMatches.push({url, fileLocation, fileName});
-						if (downloadMatches.length + failedDownloads === urlsToParse.length) {
-							resolve(downloadMatches);
-						}
-					});
-					video.on('complete', function () {
-						downloadMatches.push({url, fileLocation, fileName});
-						if (downloadMatches.length + failedDownloads === urlsToParse.length) {
-							resolve(downloadMatches);
-						}
-					});
+					downloadMatches.push({url, fileLocation, fileName});
 				} else {
-					download(url, fileLocation, function (error) {
-						if (error) {
-							console.error(error);
+					console.log(url);
+					if (url.indexOf("youtu") > -1) {
+						fileLocation += "_youtube";
+						fileName += "_youtube";
+						if (fs.existsSync(fileLocation)) {
+							downloadMatches.push({url, fileLocation, fileName});
 						} else {
-							if (supportedFileTypes.indexOf(path.extname(fileLocation)) === -1) {
-								console.error(`Unsupported file type, received ${path.basename(fileLocation)}. Valid file types are: ${supportedFileTypes}. Assuming the url is a regular link which will not be rewritten.`);
-								if (fs.existsSync(fileLocation)) {
-									fs.unlink(fileLocation);
-								}
-								failedDownloads++;
-							} else {
+							const video = ytdl(url);
+							video.pipe(fs.createWriteStream(fileLocation));
+							video.on('end', function () {
 								downloadMatches.push({url, fileLocation, fileName});
-								if (downloadMatches.length + failedDownloads === urlsToParse.length) {
+								if (downloadMatches.length + failedDownloads.length === urlsToParse.length) {
 									resolve(downloadMatches);
 								}
-							}
+							});
+							video.on('complete', function () {
+								downloadMatches.push({url, fileLocation, fileName});
+								if (downloadMatches.length + failedDownloads.length === urlsToParse.length) {
+									resolve(downloadMatches);
+								}
+							});
 						}
-					});
+					} else if (url.indexOf("vimeo") > -1) {
+						fileLocation += "_vimeo";
+						fileName += "_vimeo";
+						if (fs.existsSync(fileLocation)) {
+							downloadMatches.push({url, fileLocation, fileName});
+						} else {
+							const video = vidl(url, {quality: '360p'});
+							video.pipe(fs.createWriteStream(fileLocation));
+							video.on('end', function () {
+								downloadMatches.push({url, fileLocation, fileName});
+								if (downloadMatches.length + failedDownloads.length === urlsToParse.length) {
+									resolve(downloadMatches);
+								}
+							});
+							video.on('complete', function () {
+								downloadMatches.push({url, fileLocation, fileName});
+								if (downloadMatches.length + failedDownloads.length === urlsToParse.length) {
+									resolve(downloadMatches);
+								}
+							});
+						}
+					} else {
+						download(url, fileLocation, function (error) {
+							if (error) {
+								failedDownloads.push({url, fileLocation, fileName});
+								console.error(error);
+							} else {
+								if (supportedFileTypes.indexOf(path.extname(fileLocation)) === -1) {
+									console.error(`Unsupported file type, received ${path.basename(fileLocation)}. Valid file types are: ${supportedFileTypes}. Assuming the url is a regular link which will not be rewritten.`);
+									if (fs.existsSync(fileLocation)) {
+										fs.unlink(fileLocation);
+									}
+									failedDownloads.push({url, fileLocation, fileName});
+								} else {
+									downloadMatches.push({url, fileLocation, fileName});
+								}
+							}
+							if (downloadMatches.length + failedDownloads.length === urlsToParse.length) {
+								resolve(downloadMatches);
+							}
+						});
+					}
 				}
 			});
 		});

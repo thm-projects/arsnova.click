@@ -34,9 +34,15 @@ export const lowerCaseNickSchema = {
 export const userNickIdSchema = {
 	type: String
 };
-export const readConfirmedSchema = {
-	type: Array // [Number]
-};
+export const readConfirmedSchema = new SimpleSchema({
+	readConfirmed: {
+		type: Array
+	},
+	"readConfirmed.$": {
+		type: Number
+	}
+	//type: Array // [Number]
+});
 export const backgroundColorSchema = {
 	type: String,
 	min: 7,

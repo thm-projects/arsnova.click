@@ -41,8 +41,9 @@
 				}
 			}
 		},
-		"mathjaxUrl": "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML",
-    "fontUrl": "https://fonts.googleapis.com/css?family=Roboto:400,500,700,900",
+		"mathjaxUrl": "/MathJax-2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML",
+		"mathjaxRoot": "/MathJax-2.7.2",
+    "fontUrl": "/fonts/Roboto/Roboto-400-500-700-900.css",
     "useLocalAssetsCache": true,
     "maximumActiveQuizzes": 1,
     "restrictQuizmastersToCASUsers": false,

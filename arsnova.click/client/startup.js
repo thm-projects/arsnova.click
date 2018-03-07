@@ -23,6 +23,7 @@ import {Router} from 'meteor/iron:router';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {MeteorMathJax} from 'meteor/mrt:mathjax';
 import {FastClick} from 'meteor/fastclick';
+import cookieconsent from 'cookieconsent';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
@@ -84,8 +85,9 @@ const helper = new MeteorMathJax.Helper({
 	}
 });
 Template.registerHelper('mathjax', helper.getTemplate());
+MeteorMathJax.sourceUrl = Meteor.settings.public.mathjaxUrl;
 MeteorMathJax.defaultConfig = {
-	config: ["TeX-AMS-MML_HTMLorMML.js"],
+	root: Meteor.settings.public.mathjaxRoot,
 	jax: ["input/TeX", "input/MathML", "output/HTML-CSS", "output/NativeMML", "output/PreviewHTML"],
 	extensions: ["tex2jax.js", "enclose.js", "Safe.js", "mml2jax.js", "fast-preview.js", "AssistiveMML.js", "[Contrib]/a11y/accessibility-menu.js"],
 	TeX: {
@@ -120,9 +122,8 @@ Meteor.startup(function () {
 				"dismiss": TAPi18n.__("global.cookie_consent.dismiss"),
 				"learnMore": TAPi18n.__("global.cookie_consent.learn_more"),
 				"link": "dataprivacy",
-				"theme": "dark-floating"
+				"theme": false // we directly load the stylesheet via layout.html
 			};
-			$.getScript("//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js");
 		});
 		const fontURL = Meteor.settings.public.fontUrl;
 		$('head').append(`<link href="${fontURL}" rel="stylesheet" type='text/css'>`);

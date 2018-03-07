@@ -25,7 +25,7 @@ iron:router
 matb33:collection-hooks
 meteorhacks:subs-manager
 observe-sequence@1.0.16
-meteorhacks:fast-render
+staringatlights:fast-render
 
 tap:i18n
 tap:i18n-ui

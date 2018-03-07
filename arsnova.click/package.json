@@ -1,18 +1,19 @@
 {
   "dependencies": {
-    "babel-runtime": "~6.25",
+    "babel-runtime": "^6.25.0",
     "child_process": "~1.0",
+    "cookieconsent": "~2.0",
     "excel4node": "~1.2",
     "file-type": "^5.2.0",
     "meteor-node-stubs": "~0.2",
     "mkdir": "~0.0",
-    "mkdirp": "latest",
+    "mkdirp": "^0.5.1",
     "phantomjs-prebuilt": "~2.1",
     "process": "~0.11",
-    "simpl-schema": "^1.4.1",
-    "vimeo-downloader": "~1.0",
+    "simpl-schema": "^1.4.2",
+    "vimeo-downloader": "^1.0.4",
     "webpage": "~0.3",
-    "ytdl-core": "~0.15.0"
+    "ytdl-core": "^0.15.2"
   },
   "devDependencies": {
     "gulp": "~3.9"

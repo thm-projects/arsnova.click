@@ -23,6 +23,7 @@ import {Router} from 'meteor/iron:router';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {MeteorMathJax} from 'meteor/mrt:mathjax';
 import {FastClick} from 'meteor/fastclick';
+/* jshint unused:false */
 import cookieconsent from 'cookieconsent';
 import {MemberListCollection} from '/lib/member_list/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';

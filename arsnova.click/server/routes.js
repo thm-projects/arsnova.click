@@ -35,6 +35,7 @@ import fs from 'fs';
 import process from 'process';
 import xlsx from 'excel4node';
 import {parseQuizdata} from "./lib";
+import { AssetDownloader } from './downloader';
 
 Router.route("/server/preview/:themeName/:language", function () {
 	const self = this,
@@ -184,14 +185,16 @@ Router.route('/api/downloadQuizAssets', {where: 'server'})
 			this.response.end("Missing permissions.");
 		}
 
-		const result = parseQuizdata({quizData: QuestionGroupCollection.findOne({hashtag: hashtag}), privateKey: privateKey});
-		result.then(function (proxyFiles) {
+		const downloader = new AssetDownloader({quizData: QuestionGroupCollection.findOne({hashtag: hashtag}), privateKey: privateKey});
+		downloader.start().then(function (proxyFiles) {
 			Meteor.call('ProxyCollection.updateData', hashtag, proxyFiles);
 			self.response.writeHead(200);
 			self.response.end(JSON.stringify(proxyFiles));
-		}, function (data) {
-			self.response.writeHead(500);
-			self.response.end(JSON.stringify(data));
+		}).catch(function (data) {
+			// Downloading assets is optional.
+			// In this case, we could not download, so we do not send any data.
+			self.response.writeHead(204);
+			self.response.end();
 		});
 	});
 

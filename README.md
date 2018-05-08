@@ -40,6 +40,8 @@ For 100+ users, we recommend:
 
 Our application uses Meteor as application framework. Download and install [Meteor](https://www.meteor.com/install) to get arsnova.click running on your local development environment.
 
+Run `meteor npm install` to download all required dependencies.
+
 You can start the app using the `meteor --settings settings.json` command in the main directory, the application will rebuild itself automatically on code changes.
 Get additional informations through the official [Meteor Guide](http://guide.meteor.com/) and its [API-Documentation](http://docs.meteor.com/#/basic/).
 

@@ -101,11 +101,13 @@ export class AssetDownloader {
 					}
 
 					// FIXME cth: this should better check the domain name
+					// FIXME cth: combine with vimeo section
+					// FIXME cth: handle error case: delete file, refresh proxy data
 					if (url.indexOf("youtu") > -1) {
 						video = ytdl(url);
 						video.pipe(fs.createWriteStream(fileLocation));
 						video.on('end', function () {
-							// Finished the download
+							// Download finished!
 						});
 						// Don't wait for the download to finish
 						res(result);
@@ -117,7 +119,7 @@ export class AssetDownloader {
 						video = vidl(url, {quality: '360p'});
 						video.pipe(fs.createWriteStream(fileLocation));
 						video.on('end', function () {
-							// Finished the download
+							// Download finished!
 						});
 						// Don't wait for the download to finish
 						res(result);
@@ -130,7 +132,9 @@ export class AssetDownloader {
 						return;
 					}
 
+					// FIXME cth: regular file download currently blocks the request
 					dl(url, fileLocation, function success() {
+						// Download finished!
 						res(result);
 					}, rej);
 				});

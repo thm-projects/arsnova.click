@@ -105,8 +105,10 @@ export class AssetDownloader {
 						video = ytdl(url);
 						video.pipe(fs.createWriteStream(fileLocation));
 						video.on('end', function () {
-							res(result);
+							// Finished the download
 						});
+						// Don't wait for the download to finish
+						res(result);
 						return;
 					}
 
@@ -115,11 +117,10 @@ export class AssetDownloader {
 						video = vidl(url, {quality: '360p'});
 						video.pipe(fs.createWriteStream(fileLocation));
 						video.on('end', function () {
-							res(result);
+							// Finished the download
 						});
-						video.on('complete', function () {
-							res(result);
-						});
+						// Don't wait for the download to finish
+						res(result);
 						return;
 					}
 

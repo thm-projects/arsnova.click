@@ -21,6 +21,8 @@ import path from 'path';
 import fs from 'fs';
 import http from 'http';
 import https from 'https';
+import ytdl from 'ytdl-core';
+import vidl from 'vimeo-downloader';
 import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default";
 
 export class AssetDownloader {
@@ -85,9 +87,11 @@ export class AssetDownloader {
 			const promises = [];
 			urls.forEach(function (url) {
 				// FIXME cth: sanitize file name
+				// FIXME cth: add domain+path info into the file name to avoid conflicts
 				const fileLocation = `${targetDirectory}/${url.substring(url.lastIndexOf("/") + 1).replace(/\?/g, "_")}`;
 				const fileName = path.basename(fileLocation);
 				const result = {url, fileLocation, fileName};
+				let video = null;
 
 				const p = new Promise(function (res, rej) {
 					if (fs.existsSync(fileLocation)) {
@@ -96,15 +100,26 @@ export class AssetDownloader {
 						return;
 					}
 
+					// FIXME cth: this should better check the domain name
 					if (url.indexOf("youtu") > -1) {
-						// FIXME cth: download youtube
-						res(null);
+						video = ytdl(url);
+						video.pipe(fs.createWriteStream(fileLocation));
+						video.on('end', function () {
+							res(result);
+						});
 						return;
 					}
 
+					// FIXME cth: this should better check the domain name
 					if (url.indexOf("vimeo") > -1) {
-						// FIXME cth: download vimeo
-						res(null);
+						video = vidl(url, {quality: '360p'});
+						video.pipe(fs.createWriteStream(fileLocation));
+						video.on('end', function () {
+							res(result);
+						});
+						video.on('complete', function () {
+							res(result);
+						});
 						return;
 					}
 

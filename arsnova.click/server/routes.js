@@ -189,6 +189,7 @@ Router.route('/api/downloadQuizAssets', {where: 'server'})
 		downloader.start().then(function (proxyFiles) {
 			Meteor.call('ProxyCollection.updateData', hashtag, proxyFiles);
 			self.response.writeHead(200);
+			// FIXME cth: Exposing the assets (esp. the directory structure!) is unnecessary
 			self.response.end(JSON.stringify(proxyFiles));
 		}).catch(function (data) {
 			// Downloading assets is optional.

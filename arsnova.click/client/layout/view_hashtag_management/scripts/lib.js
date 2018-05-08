@@ -104,6 +104,7 @@ export function connectEventManager(hashtag) {
 						Meteor.call("EventManagerCollection.setActiveQuestion", hashtag, 0);
 						Meteor.call("EventManagerCollection.setSessionStatus", hashtag, 2);
 						Meteor.call('SessionConfiguration.addConfig', Session.get("questionGroup").getConfiguration().serialize());
+						// FIXME cth: Even if useLocalAssetsCache is disabled, this will still get data from the proxy store
 						Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").rewrite().serialize());
 						Session.delete("serverDownloadsQuizAssets");
 						Router.go("/" + hashtag + "/memberlist");

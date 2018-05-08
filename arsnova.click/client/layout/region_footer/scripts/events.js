@@ -431,6 +431,7 @@ Template.footerNavButtons.events({
 					Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
 					Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
 					Meteor.call('SessionConfiguration.addConfig', Session.get("questionGroup").getConfiguration().serialize());
+					// FIXME cth: Even if useLocalAssetsCache is disabled, this will still get data from the proxy store
 					Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").rewrite().serialize());
 					Session.delete("serverDownloadsQuizAssets");
 					Router.go("/" + Router.current().params.quizName + "/memberlist");

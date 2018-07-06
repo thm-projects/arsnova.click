@@ -271,5 +271,5 @@ Template.home.events({
 
 		$('.test-beta-hint').toggleClass('collapsed');
 		$('.show-beta-hints').toggleClass('glyphicon-plus glyphicon-minus');
-    }
+	}
 });

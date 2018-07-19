@@ -265,5 +265,11 @@ Template.home.events({
 				joinSessionElement.click();
 			}
 		}
+	},
+	"click .show-beta-hints, click .test-beta-hint.collapsed": function (event) {
+		event.stopPropagation();
+
+		$('.test-beta-hint').toggleClass('collapsed');
+		$('.show-beta-hints').toggleClass('glyphicon-plus glyphicon-minus');
 	}
 });

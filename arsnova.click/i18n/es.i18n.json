@@ -1,4 +1,15 @@
 {
+  "beta-hint": {
+    "title": "Prueba arsnova.click 2.0 ahora",
+    "advantage": {
+      "1": "Más rápido que nunca",
+      "2": "Juega concursos en equipos",
+      "3": "Las últimas tecnologías",
+      "4": "Optimizado para dispositivos móviles",
+      "5": "Altos estándares de privacidad"
+    },
+    "link": "Pruébalo ahora gratis"
+  },
   "global": {
     "arsnova_slogan": "Aplicación del concurso para la clase",
     "back": "Volver",

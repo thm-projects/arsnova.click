@@ -20,7 +20,11 @@ import {Session} from 'meteor/session';
 import {Router} from 'meteor/iron:router';
 
 Template.quizManagerDetails.onCreated(function () {
-	if (Session.get("questionGroup") && Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].getIsFirstStart()) {
-		Router.go("/" + Router.current().params.quizName + "/question/" + Router.current().params.questionIndex);
+	if (!Session.get("questionGroup")) {
+		return;
+	}
+	const question = Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex];
+	if (question.getIsFirstStart()) {
+		Router.go("/" + Router.current().params.quizName + "/" + (question.typeName() === "ABCDSingleChoiceQuestion" ? "settimer" : "question") + "/" + Router.current().params.questionIndex);
 	}
 });

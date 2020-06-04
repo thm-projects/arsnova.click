@@ -8,7 +8,7 @@ export class DefaultQuestionGroup extends AbstractQuestionGroup {
 	 * @see AbstractQuestionGroup.constructor()
 	 * @param options
 	 */
-	constructor (options) {
+	constructor(options) {
 		if (typeof options.type !== "undefined" && options.type !== "DefaultQuestionGroup") {
 			throw new TypeError("Invalid construction type while creating new DefaultQuestionGroup: " + options.type);
 		}
@@ -20,7 +20,7 @@ export class DefaultQuestionGroup extends AbstractQuestionGroup {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-clone
 	 * @returns {DefaultQuestionGroup} An independent deep copy of the current instance
 	 */
-	clone () {
+	clone() {
 		return new DefaultQuestionGroup(this.serialize());
 	}
 
@@ -28,7 +28,7 @@ export class DefaultQuestionGroup extends AbstractQuestionGroup {
 	 * Serialize the instance object to a JSON compatible object
 	 * @returns {{hashtag: String, type: String, questionList: Array}}
 	 */
-	serialize () {
+	serialize() {
 		return Object.assign(super.serialize(), {type: "DefaultQuestionGroup"});
 	}
 
@@ -37,7 +37,7 @@ export class DefaultQuestionGroup extends AbstractQuestionGroup {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
 	 * @returns {String} The name of the instantiated class
 	 */
-	typeName () {
+	typeName() {
 		return "DefaultQuestionGroup";
 	}
 }

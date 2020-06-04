@@ -16,24 +16,31 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="showHashtagsSplashscreen">
-	<div class="modal splashscreen" id="{{instanceId}}" role="dialog" aria-describedby="splashscreen-{{instanceId}}-description">
-		<div class="modal-dialog">
+    <div class="modal splashscreen" id="{{instanceId}}" role="dialog"
+         aria-describedby="splashscreen-{{instanceId}}-description">
+        <div class="modal-dialog">
             <div class="noSplashscreenPadding">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h2 role="heading">{{_ "view.hashtag_management.quiz_management"}}</h2>
-                        <div class="splashscreen-container-close" aria-label="{{_ "global.close_window"}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
+                        <div class="splashscreen-container-close" aria-label="{{_ "global.close_window"}}"><span
+                                class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
                     </div>
                     <div class="modal-body">
                         <p>{{_ "view.hashtag_management.available_sessions"}}</p><br/>
                         <div class="row" role="list">
                             {{#each hashtags}}
-                                <div class="col-xs-12 js-my-hash {{#unless isValid this}}in{{/unless}}validQuestion tabbable"
+                                <div class="col-xs-12 js-my-hash {{#unless isValid
+                                                                           this}}in{{/unless}}validQuestion tabbable"
                                      data-toggle="tooltip"
                                      role="listitem"
                                      id="quiz_{{@index}}"
-                                     aria-label="{{#if isValid this}}{{_ "view.hashtag_management.valid_question"}}{{else}}{{_ "view.hashtag_management.invalid_question"}}{{/if}}"
-                                     title="{{#if isValid this}}{{_ "view.hashtag_management.valid_question"}}{{else}}{{_ "view.hashtag_management.invalid_question"}}{{/if}}">{{this}}</div>
+                                     aria-label="{{#if isValid this}}{{_
+                                             "view.hashtag_management.valid_question"}}{{else}}{{_
+                                             "view.hashtag_management.invalid_question"}}{{/if}}"
+                                     title="{{#if isValid this}}{{_
+                                             "view.hashtag_management.valid_question"}}{{else}}{{_
+                                             "view.hashtag_management.invalid_question"}}{{/if}}">{{this}}</div>
                             {{/each}}
                         </div>
                     </div>
@@ -52,9 +59,9 @@
                     </div>
                 </div>
             </div>
-		</div>
+        </div>
         <div class="aria-item" id="splashscreen-{{instanceId}}-description">
             {{_ "view.hashtag_management.aria_description.splashscreen_description"}}
         </div>
-	</div>
+    </div>
 </template>

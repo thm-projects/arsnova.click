@@ -20,15 +20,17 @@ import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Tracker} from 'meteor/tracker';
 import {Router} from 'meteor/iron:router';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {Splashscreen, ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {HashtagsCollection, hashtagSchema} from '/lib/hashtags/collection.js';
 import {DefaultQuestionGroup} from "/lib/questions/questiongroup_default.js";
-import {resetConnectionIndication, startConnectionIndication, getRTT} from './lib.js';
+import {resetConnectionIndication, startConnectionIndication, getRTT, checkABCDOrdering} from './lib.js';
 import * as hashtagLib from '/client/layout/view_hashtag_management/scripts/lib.js';
 import * as localData from '/lib/local_storage.js';
+import * as nickLib from "/client/layout/view_choose_nickname/scripts/lib.js";
+import {DefaultAnswerOption} from "/lib/answeroptions/answeroption_default";
 
 Template.connectionQualityHeader.events({
 	"click #connectionQualityHeader": function () {
@@ -53,7 +55,9 @@ Template.home.events({
 		const hashtagDoc = HashtagsCollection.findOne({hashtag: originalHashtag});
 
 		inputTarget.popover("destroy");
-		if (["?", "/", "\\", "#", "\"", "'"].some(function (v) { return inputHashtag.indexOf(v) >= 0; })) {
+		if (["?", "/", "\\", "#", "\"", "'"].some(function (v) {
+				return inputHashtag.indexOf(v) >= 0;
+			})) {
 			$("#joinSession, #addNewHashtag").attr("disabled", "disabled");
 			inputTarget.popover({
 				title: TAPi18n.__("view.hashtag_view.hashtag_input.illegal_chars"),
@@ -64,10 +68,13 @@ Template.home.events({
 			return;
 		}
 		if (inputHashtag.toLowerCase() === "demo quiz") {
-			Session.set("isAddingDemoQuiz", true);
+			Session.set("isAddingQuizType", "demoquiz");
 			inputHashtag = hashtagLib.getNewDemoQuizName();
+		} else if (checkABCDOrdering(inputHashtag.toLowerCase())) {
+			Session.set("isAddingQuizType", "abcd");
+			inputHashtag = inputHashtag + " " + hashtagLib.getNewABCDQuizName();
 		} else {
-			Session.set("isAddingDemoQuiz", false);
+			Session.set("isAddingQuizType", undefined);
 		}
 		if (hashtagLib.eventManagerTracker) {
 			hashtagLib.eventManagerTracker.stop();
@@ -111,8 +118,10 @@ Template.home.events({
 						},
 						added: function (id, doc) {
 							if (!isNaN(doc.sessionStatus)) {
-								if (Session.get("isAddingDemoQuiz")) {
+								if (Session.get("isAddingQuizType") === "demoquiz") {
 									inputHashtag = hashtagLib.getNewDemoQuizName();
+								} else if (Session.get("isAddingQuizType") === "abcd") {
+									inputHashtag = hashtagLib.getNewABCDQuizName();
 								}
 								originalHashtag = hashtagLib.findOriginalHashtag(inputHashtag);
 								if (doc.sessionStatus === 2) {
@@ -167,62 +176,150 @@ Template.home.events({
 		}
 	},
 	"click #addNewHashtag": function () {
-		let hashtag = $("#hashtag-input-field").val().trim();
-		if (hashtag.toLowerCase() === "demo quiz") {
-			hashtag = hashtagLib.getNewDemoQuizName();
-		}
-		try {
-			new SimpleSchema({
-				hashtag: hashtagSchema
-			}).validate({hashtag: hashtag});
-		} catch (ex) {
-			new ErrorSplashscreen({
-				autostart: true,
-				errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
-			});
-			return;
-		}
-		const localLoweredHashtags = localData.getAllLoweredHashtags();
-		if ($.inArray(hashtag.toLowerCase(), localLoweredHashtags) > -1 && HashtagsCollection.findOne()) {
-			const session = localData.reenterSession(hashtag);
-			Session.set("questionGroup", session);
-			if (Session.get("questionGroup").isValid()) {
-				sessionStorage.setItem("overrideValidQuestionRedirect", true);
+		const promise = new Promise(function (resolve, reject) {
+			if (Meteor.settings.public.maximumActiveQuizzes) {
+				const currentActiveQuizzes = EventManagerCollection.find({sessionStatus: {$gt: 1}}).fetch();
+				if (currentActiveQuizzes.length < Meteor.settings.public.maximumActiveQuizzes) {
+					const passwordPromise = new Promise(function (passwordResolve, passwordReject) {
+						if (Meteor.settings.public.quizCreationPassword) {
+							new Splashscreen({
+								autostart: true,
+								templateName: "quizCreationPasswordSplashscreen",
+								closeOnButton: "#js-btn-close, #js-btn-validatePassword, .splashscreen-container-close>.glyphicon-remove",
+								onRendered: function (template) {
+									$(template.templateSelector).find('#js-btn-validatePassword').on('click', function () {
+										if ($(template.templateSelector).find('#password').val() === Meteor.settings.public.quizCreationPassword) {
+											passwordResolve();
+										} else {
+											passwordReject();
+										}
+									});
+								}
+							});
+						} else {
+							passwordResolve();
+						}
+					});
+					passwordPromise.then(function () {
+						if (Meteor.settings.public.restrictQuizmastersToCASUsers) {
+							Meteor.loginWithCas(function () {
+								nickLib.hasTHMMail() ? resolve() : reject("plugins.splashscreen.error.error_messages.invalid_login");
+							});
+						} else {
+							resolve();
+						}
+					}, function () {
+						new ErrorSplashscreen({
+							autostart: true,
+							errorMessage: "plugins.splashscreen.error.error_messages.invalid_password"
+						});
+					});
+				} else {
+					reject("plugins.splashscreen.error.error_messages.maximum_quizzes_exceeded");
+				}
+			} else {
+				if (Meteor.settings.public.restrictQuizmastersToCASUsers) {
+					Meteor.loginWithCas(function () {
+						nickLib.hasTHMMail() ? resolve() : reject("plugins.splashscreen.error.error_messages.invalid_login");
+					});
+				} else {
+					resolve();
+				}
 			}
-			hashtagLib.addHashtag(Session.get("questionGroup"));
-		} else {
-			let questionGroup = null;
-			const successCallback = function (data) {
-				questionGroup = new DefaultQuestionGroup(data);
-				questionGroup.setHashtag(hashtag);
-				if (questionGroup.isValid()) {
+		});
+		promise.then(function () {
+			let hashtag = $("#hashtag-input-field").val().trim();
+			if (hashtag.toLowerCase() === "demo quiz") {
+				hashtag = hashtagLib.getNewDemoQuizName();
+			} else if (checkABCDOrdering(hashtag.toLowerCase())) {
+				hashtag = hashtag.toUpperCase() + " " + hashtagLib.getNewABCDQuizName();
+			}
+			try {
+				new SimpleSchema({
+					hashtag: hashtagSchema
+				}).validate({hashtag: hashtag});
+			} catch (ex) {
+				new ErrorSplashscreen({
+					autostart: true,
+					errorMessage: "plugins.splashscreen.error.error_messages.invalid_input_data"
+				});
+				return;
+			}
+			const localLoweredHashtags = localData.getAllLoweredHashtags();
+			if ($.inArray(hashtag.toLowerCase(), localLoweredHashtags) > -1 && HashtagsCollection.findOne()) {
+				const session = localData.reenterSession(hashtag);
+				Session.set("questionGroup", session);
+				if (Session.get("questionGroup").isValid()) {
 					sessionStorage.setItem("overrideValidQuestionRedirect", true);
 				}
-				localStorage.setItem("showProductTour", true);
-				hashtagLib.addHashtag(questionGroup);
-			};
-			if (hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
-				$.ajax({
-					type: "GET",
-					url: `/demo_quiz/${TAPi18n.getLanguage()}.demo_quiz.json?_=${Date.now()}`,
-					dataType: 'json',
-					success: successCallback,
-					error: function () {
-						$.ajax({
-							type: "GET",
-							url: `/demo_quiz/en.demo_quiz.json?_=${Date.now()}`,
-							dataType: 'json',
-							success: successCallback
-						});
-					}
-				});
+				hashtagLib.addHashtag(Session.get("questionGroup"));
 			} else {
-				questionGroup = new DefaultQuestionGroup({
-					hashtag: hashtag
-				});
-				hashtagLib.addHashtag(questionGroup);
+				let questionGroup = null;
+				const successDemoQuizCallback = function (data) {
+					questionGroup = new DefaultQuestionGroup(data);
+					questionGroup.setHashtag(hashtag);
+					if (questionGroup.isValid()) {
+						sessionStorage.setItem("overrideValidQuestionRedirect", true);
+					}
+					localStorage.setItem("showProductTour", true);
+					hashtagLib.addHashtag(questionGroup);
+				};
+				const successABCDQuizCallback = function (data) {
+					questionGroup = new DefaultQuestionGroup(data);
+					questionGroup.setHashtag(hashtag);
+					questionGroup.getQuestionList()[0].removeAllAnswerOptions();
+					for (let i = 0; i < $("#hashtag-input-field").val().trim().length; i++) {
+						questionGroup.getQuestionList()[0].addAnswerOption(new DefaultAnswerOption({
+							hashtag: questionGroup.getHashtag(),
+							questionIndex: 0,
+							answerText: "",
+							answerOptionNumber: i,
+							isCorrect: false
+						}));
+					}
+					sessionStorage.setItem("overrideValidQuestionRedirect", true);
+					hashtagLib.addHashtag(questionGroup);
+				};
+				if (hashtag.toLowerCase().indexOf("demo quiz") !== -1) {
+					$.ajax({
+						type: "GET",
+						url: `/predefined_quizzes/demo_quiz/${TAPi18n.getLanguage()}.demo_quiz.json?_=${Date.now()}`,
+						dataType: 'json',
+						success: successDemoQuizCallback,
+						error: function () {
+							$.ajax({
+								type: "GET",
+								url: `/predefined_quizzes/demo_quiz/en.demo_quiz.json?_=${Date.now()}`,
+								dataType: 'json',
+								success: successDemoQuizCallback
+							});
+						}
+					});
+				} else if (checkABCDOrdering($("#hashtag-input-field").val().trim())) {
+					$.ajax({
+						type: "GET",
+						url: `/predefined_quizzes/abcd_quiz/${TAPi18n.getLanguage()}.abcd_quiz.json?_=${Date.now()}`,
+						dataType: 'json',
+						success: successABCDQuizCallback,
+						error: function () {
+							$.ajax({
+								type: "GET",
+								url: `/predefined_quizzes/abcd_quiz/en.abcd_quiz.json?_=${Date.now()}`,
+								dataType: 'json',
+								success: successABCDQuizCallback
+							});
+						}
+					});
+				} else {
+					questionGroup = new DefaultQuestionGroup({
+						hashtag: hashtag
+					});
+					hashtagLib.addHashtag(questionGroup);
+				}
 			}
-		}
+		}, function (rejectReason) {
+			new ErrorSplashscreen({autostart: true, errorMessage: rejectReason});
+		});
 	},
 	"click #joinSession": function () {
 		const hashtag = $("#hashtag-input-field").val().trim();
@@ -246,7 +343,7 @@ Template.home.events({
 			13
 		]; //left, right, delete, entf
 		const charCount = $(event.currentTarget).val().length;
-		if (charCount >= 25 && keyWhiteList.indexOf(event.keyCode) === -1) {
+		if (charCount >= 30 && keyWhiteList.indexOf(event.keyCode) === -1) {
 			event.preventDefault();
 		}
 

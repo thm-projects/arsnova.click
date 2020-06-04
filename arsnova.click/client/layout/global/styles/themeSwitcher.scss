@@ -14,7 +14,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
-
 @import "themes/standard-style-definitions";
 @import "themes/theme-arsnova-dot-click-contrast";
 @import "themes/theme-blackbeauty";
@@ -27,1201 +26,1201 @@
 @import "themes/theme-GreyBlue-Lime";
 
 $themes: (
-	theme-arsnova-dot-click-contrast: map-merge(standard-style-definitions(), theme-arsnova-dot-click-contrast()),
-	theme-blackbeauty: map-merge(standard-style-definitions(), theme-blackbeauty()),
-	theme-elegant: map-merge(standard-style-definitions(), theme-elegant()),
-	theme-Material: map-merge(standard-style-definitions(), theme-Material()),
-	theme-Material-hope: map-merge(standard-style-definitions(),theme-Material-hope()),
-	theme-Material-blue: map_merge(standard-style-definitions(),theme-Material-blue()),
-	theme-decent-blue: map-merge(standard-style-definitions(), theme-decent-blue()),
-	theme-spiritual-purple: map-merge(standard-style-definitions(), theme-spiritual-purple()),
-	theme-GreyBlue-Lime: map-merge(standard-style-definitions(), theme-GreyBlue-Lime())
+        theme-arsnova-dot-click-contrast: map-merge(standard-style-definitions(), theme-arsnova-dot-click-contrast()),
+        theme-blackbeauty: map-merge(standard-style-definitions(), theme-blackbeauty()),
+        theme-elegant: map-merge(standard-style-definitions(), theme-elegant()),
+        theme-Material: map-merge(standard-style-definitions(), theme-Material()),
+        theme-Material-hope: map-merge(standard-style-definitions(), theme-Material-hope()),
+        theme-Material-blue: map_merge(standard-style-definitions(), theme-Material-blue()),
+        theme-decent-blue: map-merge(standard-style-definitions(), theme-decent-blue()),
+        theme-spiritual-purple: map-merge(standard-style-definitions(), theme-spiritual-purple()),
+        theme-GreyBlue-Lime: map-merge(standard-style-definitions(), theme-GreyBlue-Lime())
 );
 
 @each $theme, $map in $themes {
-	.#{$theme} {
-		background-color: map-get($map, "background-color");
-		-webkit-transition: background-color 800ms linear;
-		-moz-transition: background-color 800ms linear;
-		-o-transition: background-color 800ms linear;
-		transition: background-color 800ms linear;
-		*:fullscreen,
-		*:-webkit-full-screen,
-		*:-moz-full-screen {
-			background-color: map-get($map, "background-color");
-			-webkit-transition: background-color 800ms linear;
-			-moz-transition: background-color 800ms linear;
-			-o-transition: background-color 800ms linear;
-			transition: background-color 800ms linear;
-		}
-		.introjs-helperLayer {
-			background-color: map-get($map, "bg-introjs-helper_layer");
-		}
-		.introjs-tooltip {
-			background-color: map-get($map, "bg-introjs-tooltip");
-			.introjs-tooltiptext {
-				background-color: map-get($map, "bg-introjs-tooltiptext");
-				color: map-get($map, "fg-introjs-tooltiptext");
-				border: map-get($map, "border-introjs-tooltiptext");
-			}
-			.introjs-bullets {
-				a {
-					background-color: map-get($map, "bg-introjs-bullets");
-					&.active {
-						background-color: map-get($map, "bg-introjs-bullets-active");
-					}
-				}
-			}
-			.introjs-progress {
-				background-color: map-get($map, "bg-introjs-progress-empty");
-				.introjs-progressbar {
-					background-color: map-get($map, "bg-introjs-progress-full");
-				}
-			}
-			.introjs-arrow {
-				&.top {
-					border-bottom-color: map-get($map, "bg-introjs-arrow-top");
-				}
-				&.left {
-					border-right-color: map-get($map, "bg-introjs-arrow-left");
-				}
-				&.right {
-					border-left-color: map-get($map, "bg-introjs-arrow-right");
-				}
-				&.bottom {
-					border-top-color: map-get($map, "bg-introjs-arrow-bottom");
-				}
-			}
-			.introjs-tooltipbuttons {
-				.introjs-button {
-					background-color: map-get($map, "bg-introjs-button");
-					color: map-get($map, "fg-introjs-button");
-					box-shadow: map-get($map, "boxshadow-introjs-button");
-					border: map-get($map, "border-introjs-button");
-					&:hover {
-						background-color: map-get($map, "bg-introjs-button-hovered");
-						color: map-get($map, "fg-introjs-button-hovered");
-						box-shadow: map-get($map, "boxshadow-introjs-button-hovered");
-						border: map-get($map, "border-introjs-button-hovered");
-					}
-					&:focus,
-					&:active {
-						background-color: map-get($map, "bg-introjs-button-focus");
-						color: map-get($map, "fg-introjs-button-focus");
-						box-shadow: map-get($map, "boxshadow-introjs-button-focus");
-						border: map-get($map, "border-introjs-button-focus");
-					}
-					&.introjs-skipbutton {
-						background-color: map-get($map, "bg-introjs-button-skip");
-						color: map-get($map, "fg-introjs-button-skip");
-						box-shadow: map-get($map, "boxshadow-introjs-button-skip");
-						border: map-get($map, "border-introjs-button-skip");
-						&:hover {
-							background-color: map-get($map, "bg-introjs-button-skip-hovered");
-							color: map-get($map, "fg-introjs-button-skip-hovered");
-							box-shadow: map-get($map, "boxshadow-introjs-button-skip-hovered");
-							border: map-get($map, "border-introjs-button-skip-hovered");
-						}
-						&:focus,
-						&:active {
-							background-color: map-get($map, "bg-introjs-button-skip-focus");
-							color: map-get($map, "fg-introjs-button-skip-focus");
-							box-shadow: map-get($map, "boxshadow-introjs-button-skip-focus");
-							border: map-get($map, "border-introjs-button-skip-focus");
-						}
-					}
-					&.introjs-prevbutton {
-						background-color: map-get($map, "bg-introjs-button-prev");
-						color: map-get($map, "fg-introjs-button-prev");
-						box-shadow: map-get($map, "boxshadow-introjs-button-prev");
-						border: map-get($map, "border-introjs-button-prev");
-						&:hover {
-							background-color: map-get($map, "bg-introjs-button-prev-hovered");
-							color: map-get($map, "fg-introjs-button-prev-hovered");
-							box-shadow: map-get($map, "boxshadow-introjs-button-prev-hovered");
-							border: map-get($map, "border-introjs-button-prev-hovered");
-						}
-						&:focus,
-						&:active {
-							background-color: map-get($map, "bg-introjs-button-prev-focus");
-							color: map-get($map, "fg-introjs-button-prev-focus");
-							box-shadow: map-get($map, "boxshadow-introjs-button-prev-focus");
-							border: map-get($map, "border-introjs-button-prev-focus");
-						}
-					}
-					&.introjs-nextbutton {
-						background-color: map-get($map, "bg-introjs-button-next");
-						color: map-get($map, "fg-introjs-button-next");
-						box-shadow: map-get($map, "boxshadow-introjs-button-next");
-						border: map-get($map, "border-introjs-button-next");
-						&:hover {
-							background-color: map-get($map, "bg-introjs-button-next-hovered");
-							color: map-get($map, "fg-introjs-button-next-hovered");
-							box-shadow: map-get($map, "boxshadow-introjs-button-next-hovered");
-							border: map-get($map, "border-introjs-button-next-hovered");
-						}
-						&:focus,
-						&:active {
-							background-color: map-get($map, "bg-introjs-button-next-focus");
-							color: map-get($map, "fg-introjs-button-next-focus");
-							box-shadow: map-get($map, "boxshadow-introjs-button-next-focus");
-							border: map-get($map, "border-introjs-button-next-focus");
-						}
-					}
-				}
-			}
-		}
-		#theme-wrapper {
-			height: 100%;
-			width: 100%;
-			position: absolute;
-			background-color: map-get($map, "background-color");
-			-webkit-transition: background-color 800ms linear;
-			-moz-transition: background-color 800ms linear;
-			-o-transition: background-color 800ms linear;
-			transition: background-color 800ms linear;
-			.text-light, a.text-light, a:hover.text-light, a:active.text-light, a:visited.text-light, a:focus.text-light {
-				color: map-get($map, "fg-text-light");
-			}
-			a.text-dark, a:hover.text-dark, a:active.text-dark, a:visited.text-dark, a:focus.text-dark {
-				color: map-get($map, "fg_text-dark") !important;
-			}
-			a, a:hover, a:active, a:visited, a:focus {
-				color: map-get($map, "fg_a");
-			}
-			.titel {
-				color: map-get($map, "fg_titel");
-			}
-			#landingPageContent {
-				#demo-quiz-description {
-					color: map-get($map, "fg_demo-quiz-description");
-				}
-			}
-			.quizName {
-				color: map-get($map, "fg_quiz-name");
-			}
-			.plain_view #containerFrame,
-			.quiz-lobby-header,
-			.container,
-			.fixed-bottom {
-				background-color: map-get($map, "bg-container");
-				-webkit-transition: background-color 800ms linear;
-				-moz-transition: background-color 800ms linear;
-				-o-transition: background-color 800ms linear;
-				transition: background-color 800ms linear;
-			}
-			.footer-info-bar {
-				background-color: map-get($map, "bg-footer");
-				color: map-get($map, "fg-footer-info-bar");
-			}
-			.footer-gradient {
-				color: map-get($map, "footer-text-color");
-			}
-			.footer a {
-				color: map-get($map, "footer-text-color");
-				div {
-					border-left: 1px solid map-get($map, "footer-text-color");
-					color: map-get($map, "footer-text-color") !important;
-				}
-			}
-			.plain_view #topNav,
-			.navbar-fixed-top {
-				background-color: map-get($map, "bg-nav-row");
-				-webkit-transition: background-color 800ms linear;
-				-moz-transition: background-color 800ms linear;
-				-o-transition: background-color 800ms linear;
-				transition: background-color 800ms linear;
-				.nav-row {
-					background-color: map-get($map, "bg-nav-row");
-					-webkit-transition: background-color 800ms linear;
-					-moz-transition: background-color 800ms linear;
-					-o-transition: background-color 800ms linear;
-					transition: background-color 800ms linear;
-				}
-			}
-			*::-webkit-input-placeholder {
-				color: map-get($map, "placeholder-color");
-				opacity: 1;
-			}
-			*:-moz-placeholder, *::-moz-placeholder {
-				color: map-get($map, "placeholder-color");
-				opacity: 1;
-			}
-			*:-ms-input-placeholder {
-				color: map-get($map, "placeholder-color");
-				opacity: 1;
-			}
-			.btn-info {
-				color: map-get($map, "fg-btn_info");
-				background-color: map-get($map, "bg-btn_info");
-				border-color: map-get($map, "border-btn_info");
-				&:hover {
-					color: map-get($map, "fg-btn_info-hovered");
-					background-color: map-get($map, "bg-btn_info-hovered");
-					border-color: map-get($map, "border-btn_info-hovered");
-				}
-				&:focus {
-					color: map-get($map, "fg-btn_info-focused");
-					background-color: map-get($map, "bg-btn_info-focused");
-					border-color: map-get($map, "border-btn_info-focused");
-				}
-			}
-			.btn-warning {
-				color: map-get($map, "fg-btn_warning");
-				background-color: map-get($map, "bg-btn_warning");
-				border-color: map-get($map, "border-btn_warning");
-				&:hover {
-					color: map-get($map, "fg-btn_warning-hovered");
-					background-color: map-get($map, "bg-btn_warning-hovered");
-					border-color: map-get($map, "border-btn_warning-hovered");
-				}
-				&:focus {
-					color: map-get($map, "fg-btn_warning-focused");
-					background-color: map-get($map, "bg-btn_warning-focused");
-					border-color: map-get($map, "border-btn_warning-focused");
-				}
-			}
-			.btn-success {
-				color: map-get($map, "fg-btn_success");
-				background-color: map-get($map, "bg-btn_success");
-				border-color: map-get($map, "border-btn_success");
-				&:hover {
-					color: map-get($map, "fg-btn_success-hovered");
-					background-color: map-get($map, "bg-btn_success-hovered");
-					border-color: map-get($map, "border-btn_success-hovered");
-				}
-				&:focus {
-					color: map-get($map, "fg-btn_success-focused");
-					background-color: map-get($map, "bg-btn_success-focused");
-					border-color: map-get($map, "border-btn_success-focused");
-				}
-			}
-			.btn-default {
-				color: map-get($map, "fg-btn_default");
-				background-color: map-get($map, "bg-btn_default");
-				border-color: map-get($map, "border-btn_default");
-				&:hover {
-					color: map-get($map, "fg-btn_default-hovered");
-					background-color: map-get($map, "bg-btn_default-hovered");
-					border-color: map-get($map, "border-btn_default-hovered");
-				}
-				&:focus {
-					color: map-get($map, "fg-btn_default-focused");
-					background-color: map-get($map, "bg-btn_default-focused");
-					border-color: map-get($map, "border-btn_default-focused");
-				}
-			}
-			.hashtag-management {
-				hr {
-					border-color: map-get($map, "border-hashtag_management-HR");
-				}
-				.hashtag-name {
-					color: map-get($map, "fg-hashtag_management-hashtag_name");
-				}
-			}
-			button:disabled {
-				background-color: map-get($map, "disabled-button-background");
-			}
-			.qr-code-button {
-				color: map-get($map, "fg-qr-code-button");
-				&:hover {
-					color: map-get($map, "fg-qr-code-button-hovered");
-				}
-			}
-			.qr-code-container {
-				border: 1px solid map-get($map, "border-qr-code-container");
-				background-color: map-get($map, "bg-qr-code-container");
-			}
-			.qr-code-container-close {
-				color: map-get($map, "fg-qr-code-container-close");
-				.glyphicon-remove {
-					border: 0 solid map-get($map, "border-qr-code-container-close-icon");
-					background-color: map-get($map, "background-qr-code-container-close-icon");
-					&:hover {
-						color: map-get($map, "fg-qr-code-container-close-hovered");
-					}
-				}
-			}
-			.qr-code-label {
-				color: map-get($map, "fg-qr-code-label");
-			}
-			.answer-options {
-				.invalidAnswerOption {
-					border: 2px solid map-get($map, "border-answer_options-invalidAnswerOption");
-				}
-			}
-			#editQuestionText {
-				.invalidQuestion {
-					border: 2px solid map-get($map, "border-answer_options-invalidQuestion");
-				}
-			}
-			.progress-bar {
-				background: map-get($map, "bg_progress-bar");
-				color: map-get($map, "fg_progress-bar");
-			}
-			.progress-reading_confirmation {
-				background-color: map-get($map, "bg-progress-bar-reading_confirmation");
-				color: map-get($map, "fg-progress-bar-reading_confirmation");
-			}
-			.slider, .slider .noUi-handle {
-				background-color: map-get($map, "slider-color");
-			}
-			.button-shadow, .button {
-				box-shadow: 1px 1px 5px map-get($map, "button-shadow");
-			}
-			.input-field {
-				color: map-get($map, "input-foreground-color") !important;
-			}
-			.input-field-bg-color, .input-field {
-				background-color: map-get($map, "input-background-color");
-			}
-			.header-title {
-				color: map-get($map, "fg-header-title");
-			}
-			.input-group-letter, .button-result-letter {
-				color: map-get($map, "input-group-letter-color");
-			}
-			.button-foreground-color {
-				color: map-get($map, "input-foreground-color") !important;
-			}
-			.button-next, .button-success {
-				background-color: map-get($map, "success");
-				color: map-get($map, "success-text-color");
-			}
-			.btn-success,
-			.btn-info,
-			.btn-warning {
-				color: black;
-				&:hover {
-					color: black;
-				}
-			}
-			.button-selected {
-				background-color: map-get($map, "info");
-				color: map-get($map, "info-text-color");
-			}
-			.button-warning, .button-back, div.warning {
-				background-color: map-get($map, "warning");
-				color: map-get($map, "warning-text-color");
-			}
-			.button-purple {
-				background-color: map-get($map, "bg-answer_row-button_purple_transition");
-				color: map-get($map, "fg-answer_row-button_purple_transition");
-			}
-			.button-grey {
-				background-color: map-get($map, "grey-button-background");
-				color: map-get($map, "grey-button-color");
-			}
-			.button-default {
-				background-color: map-get($map, "default");
-				color: map-get($map, "default-text-color");
-			}
-			.button-leader {
-				background-color: map-get($map, "bg-button-leader");
-				color: map-get($map, "fg-button-leader");
-				box-shadow: 1px 1px 5px map-get($map, "button-shadow");
-			}
-			.button-result {
-				background-color: map-get($map, "bg-button-result");
-				.percentage {
-					color: map-get($map, "fg-button-result-percentage");
-				}
-				.progress {
-					background-color: map-get($map, "bg-button-result-progress");
-				}
-			}
-			.navbar-footer {
-				background-color: map-get($map, "bg-footer");
-				-webkit-transition: background-color 800ms linear;
-				-moz-transition: background-color 800ms linear;
-				-o-transition: background-color 800ms linear;
-				transition: background-color 800ms linear;
-			}
-			.footerElement {
-				color: map-get($map, "fg-footer-info-bar");
-				&:hover {
-					color: map-get($map, "fg-footer-info-bar-hovered");
-				}
-				&.error {
-					color: map-get($map, "fg-footer-element-deactivated");
-					&:hover {
-						color: map-get($map, "fg-footer-element-deactivated-hovered");
-					}
-				}
-				&.success {
-					color: map-get($map, "fg-footer-info-bar-active");
+  .#{$theme} {
+    background-color: map-get($map, "background-color");
+    -webkit-transition: background-color 800ms linear;
+    -moz-transition: background-color 800ms linear;
+    -o-transition: background-color 800ms linear;
+    transition: background-color 800ms linear;
+    *:fullscreen,
+    *:-webkit-full-screen,
+    *:-moz-full-screen {
+      background-color: map-get($map, "background-color");
+      -webkit-transition: background-color 800ms linear;
+      -moz-transition: background-color 800ms linear;
+      -o-transition: background-color 800ms linear;
+      transition: background-color 800ms linear;
+    }
+    .introjs-helperLayer {
+      background-color: map-get($map, "bg-introjs-helper_layer");
+    }
+    .introjs-tooltip {
+      background-color: map-get($map, "bg-introjs-tooltip");
+      .introjs-tooltiptext {
+        background-color: map-get($map, "bg-introjs-tooltiptext");
+        color: map-get($map, "fg-introjs-tooltiptext");
+        border: map-get($map, "border-introjs-tooltiptext");
+      }
+      .introjs-bullets {
+        a {
+          background-color: map-get($map, "bg-introjs-bullets");
+          &.active {
+            background-color: map-get($map, "bg-introjs-bullets-active");
+          }
+        }
+      }
+      .introjs-progress {
+        background-color: map-get($map, "bg-introjs-progress-empty");
+        .introjs-progressbar {
+          background-color: map-get($map, "bg-introjs-progress-full");
+        }
+      }
+      .introjs-arrow {
+        &.top {
+          border-bottom-color: map-get($map, "bg-introjs-arrow-top");
+        }
+        &.left {
+          border-right-color: map-get($map, "bg-introjs-arrow-left");
+        }
+        &.right {
+          border-left-color: map-get($map, "bg-introjs-arrow-right");
+        }
+        &.bottom {
+          border-top-color: map-get($map, "bg-introjs-arrow-bottom");
+        }
+      }
+      .introjs-tooltipbuttons {
+        .introjs-button {
+          background-color: map-get($map, "bg-introjs-button");
+          color: map-get($map, "fg-introjs-button");
+          box-shadow: map-get($map, "boxshadow-introjs-button");
+          border: map-get($map, "border-introjs-button");
+          &:hover {
+            background-color: map-get($map, "bg-introjs-button-hovered");
+            color: map-get($map, "fg-introjs-button-hovered");
+            box-shadow: map-get($map, "boxshadow-introjs-button-hovered");
+            border: map-get($map, "border-introjs-button-hovered");
+          }
+          &:focus,
+          &:active {
+            background-color: map-get($map, "bg-introjs-button-focus");
+            color: map-get($map, "fg-introjs-button-focus");
+            box-shadow: map-get($map, "boxshadow-introjs-button-focus");
+            border: map-get($map, "border-introjs-button-focus");
+          }
+          &.introjs-skipbutton {
+            background-color: map-get($map, "bg-introjs-button-skip");
+            color: map-get($map, "fg-introjs-button-skip");
+            box-shadow: map-get($map, "boxshadow-introjs-button-skip");
+            border: map-get($map, "border-introjs-button-skip");
+            &:hover {
+              background-color: map-get($map, "bg-introjs-button-skip-hovered");
+              color: map-get($map, "fg-introjs-button-skip-hovered");
+              box-shadow: map-get($map, "boxshadow-introjs-button-skip-hovered");
+              border: map-get($map, "border-introjs-button-skip-hovered");
+            }
+            &:focus,
+            &:active {
+              background-color: map-get($map, "bg-introjs-button-skip-focus");
+              color: map-get($map, "fg-introjs-button-skip-focus");
+              box-shadow: map-get($map, "boxshadow-introjs-button-skip-focus");
+              border: map-get($map, "border-introjs-button-skip-focus");
+            }
+          }
+          &.introjs-prevbutton {
+            background-color: map-get($map, "bg-introjs-button-prev");
+            color: map-get($map, "fg-introjs-button-prev");
+            box-shadow: map-get($map, "boxshadow-introjs-button-prev");
+            border: map-get($map, "border-introjs-button-prev");
+            &:hover {
+              background-color: map-get($map, "bg-introjs-button-prev-hovered");
+              color: map-get($map, "fg-introjs-button-prev-hovered");
+              box-shadow: map-get($map, "boxshadow-introjs-button-prev-hovered");
+              border: map-get($map, "border-introjs-button-prev-hovered");
+            }
+            &:focus,
+            &:active {
+              background-color: map-get($map, "bg-introjs-button-prev-focus");
+              color: map-get($map, "fg-introjs-button-prev-focus");
+              box-shadow: map-get($map, "boxshadow-introjs-button-prev-focus");
+              border: map-get($map, "border-introjs-button-prev-focus");
+            }
+          }
+          &.introjs-nextbutton {
+            background-color: map-get($map, "bg-introjs-button-next");
+            color: map-get($map, "fg-introjs-button-next");
+            box-shadow: map-get($map, "boxshadow-introjs-button-next");
+            border: map-get($map, "border-introjs-button-next");
+            &:hover {
+              background-color: map-get($map, "bg-introjs-button-next-hovered");
+              color: map-get($map, "fg-introjs-button-next-hovered");
+              box-shadow: map-get($map, "boxshadow-introjs-button-next-hovered");
+              border: map-get($map, "border-introjs-button-next-hovered");
+            }
+            &:focus,
+            &:active {
+              background-color: map-get($map, "bg-introjs-button-next-focus");
+              color: map-get($map, "fg-introjs-button-next-focus");
+              box-shadow: map-get($map, "boxshadow-introjs-button-next-focus");
+              border: map-get($map, "border-introjs-button-next-focus");
+            }
+          }
+        }
+      }
+    }
+    #theme-wrapper {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      background-color: map-get($map, "background-color");
+      -webkit-transition: background-color 800ms linear;
+      -moz-transition: background-color 800ms linear;
+      -o-transition: background-color 800ms linear;
+      transition: background-color 800ms linear;
+      .text-light, a.text-light, a:hover.text-light, a:active.text-light, a:visited.text-light, a:focus.text-light {
+        color: map-get($map, "fg-text-light");
+      }
+      a.text-dark, a:hover.text-dark, a:active.text-dark, a:visited.text-dark, a:focus.text-dark {
+        color: map-get($map, "fg_text-dark") !important;
+      }
+      a, a:hover, a:active, a:visited, a:focus {
+        color: map-get($map, "fg_a");
+      }
+      .titel {
+        color: map-get($map, "fg_titel");
+      }
+      #landingPageContent {
+        #demo-quiz-description {
+          color: map-get($map, "fg_demo-quiz-description");
+        }
+      }
+      .quizName {
+        color: map-get($map, "fg_quiz-name");
+      }
+      .plain_view #containerFrame,
+      .quiz-lobby-header,
+      .container,
+      .fixed-bottom {
+        background-color: map-get($map, "bg-container");
+        -webkit-transition: background-color 800ms linear;
+        -moz-transition: background-color 800ms linear;
+        -o-transition: background-color 800ms linear;
+        transition: background-color 800ms linear;
+      }
+      .footer-info-bar {
+        background-color: map-get($map, "bg-footer");
+        color: map-get($map, "fg-footer-info-bar");
+      }
+      .footer-gradient {
+        color: map-get($map, "footer-text-color");
+      }
+      .footer a {
+        color: map-get($map, "footer-text-color");
+        div {
+          border-left: 1px solid map-get($map, "footer-text-color");
+          color: map-get($map, "footer-text-color") !important;
+        }
+      }
+      .plain_view #topNav,
+      .navbar-fixed-top {
+        background-color: map-get($map, "bg-nav-row");
+        -webkit-transition: background-color 800ms linear;
+        -moz-transition: background-color 800ms linear;
+        -o-transition: background-color 800ms linear;
+        transition: background-color 800ms linear;
+        .nav-row {
+          background-color: map-get($map, "bg-nav-row");
+          -webkit-transition: background-color 800ms linear;
+          -moz-transition: background-color 800ms linear;
+          -o-transition: background-color 800ms linear;
+          transition: background-color 800ms linear;
+        }
+      }
+      *::-webkit-input-placeholder {
+        color: map-get($map, "placeholder-color");
+        opacity: 1;
+      }
+      *:-moz-placeholder, *::-moz-placeholder {
+        color: map-get($map, "placeholder-color");
+        opacity: 1;
+      }
+      *:-ms-input-placeholder {
+        color: map-get($map, "placeholder-color");
+        opacity: 1;
+      }
+      .btn-info {
+        color: map-get($map, "fg-btn_info");
+        background-color: map-get($map, "bg-btn_info");
+        border-color: map-get($map, "border-btn_info");
+        &:hover {
+          color: map-get($map, "fg-btn_info-hovered");
+          background-color: map-get($map, "bg-btn_info-hovered");
+          border-color: map-get($map, "border-btn_info-hovered");
+        }
+        &:focus {
+          color: map-get($map, "fg-btn_info-focused");
+          background-color: map-get($map, "bg-btn_info-focused");
+          border-color: map-get($map, "border-btn_info-focused");
+        }
+      }
+      .btn-warning {
+        color: map-get($map, "fg-btn_warning");
+        background-color: map-get($map, "bg-btn_warning");
+        border-color: map-get($map, "border-btn_warning");
+        &:hover {
+          color: map-get($map, "fg-btn_warning-hovered");
+          background-color: map-get($map, "bg-btn_warning-hovered");
+          border-color: map-get($map, "border-btn_warning-hovered");
+        }
+        &:focus {
+          color: map-get($map, "fg-btn_warning-focused");
+          background-color: map-get($map, "bg-btn_warning-focused");
+          border-color: map-get($map, "border-btn_warning-focused");
+        }
+      }
+      .btn-success {
+        color: map-get($map, "fg-btn_success");
+        background-color: map-get($map, "bg-btn_success");
+        border-color: map-get($map, "border-btn_success");
+        &:hover {
+          color: map-get($map, "fg-btn_success-hovered");
+          background-color: map-get($map, "bg-btn_success-hovered");
+          border-color: map-get($map, "border-btn_success-hovered");
+        }
+        &:focus {
+          color: map-get($map, "fg-btn_success-focused");
+          background-color: map-get($map, "bg-btn_success-focused");
+          border-color: map-get($map, "border-btn_success-focused");
+        }
+      }
+      .btn-default {
+        color: map-get($map, "fg-btn_default");
+        background-color: map-get($map, "bg-btn_default");
+        border-color: map-get($map, "border-btn_default");
+        &:hover {
+          color: map-get($map, "fg-btn_default-hovered");
+          background-color: map-get($map, "bg-btn_default-hovered");
+          border-color: map-get($map, "border-btn_default-hovered");
+        }
+        &:focus {
+          color: map-get($map, "fg-btn_default-focused");
+          background-color: map-get($map, "bg-btn_default-focused");
+          border-color: map-get($map, "border-btn_default-focused");
+        }
+      }
+      .hashtag-management {
+        hr {
+          border-color: map-get($map, "border-hashtag_management-HR");
+        }
+        .hashtag-name {
+          color: map-get($map, "fg-hashtag_management-hashtag_name");
+        }
+      }
+      button:disabled {
+        background-color: map-get($map, "disabled-button-background");
+      }
+      .qr-code-button {
+        color: map-get($map, "fg-qr-code-button");
+        &:hover {
+          color: map-get($map, "fg-qr-code-button-hovered");
+        }
+      }
+      .qr-code-container {
+        border: 1px solid map-get($map, "border-qr-code-container");
+        background-color: map-get($map, "bg-qr-code-container");
+      }
+      .qr-code-container-close {
+        color: map-get($map, "fg-qr-code-container-close");
+        .glyphicon-remove {
+          border: 0 solid map-get($map, "border-qr-code-container-close-icon");
+          background-color: map-get($map, "background-qr-code-container-close-icon");
+          &:hover {
+            color: map-get($map, "fg-qr-code-container-close-hovered");
+          }
+        }
+      }
+      .qr-code-label {
+        color: map-get($map, "fg-qr-code-label");
+      }
+      .answer-options {
+        .invalidAnswerOption {
+          border: 2px solid map-get($map, "border-answer_options-invalidAnswerOption");
+        }
+      }
+      #editQuestionText {
+        .invalidQuestion {
+          border: 2px solid map-get($map, "border-answer_options-invalidQuestion");
+        }
+      }
+      .progress-bar {
+        background: map-get($map, "bg_progress-bar");
+        color: map-get($map, "fg_progress-bar");
+      }
+      .progress-reading_confirmation {
+        background-color: map-get($map, "bg-progress-bar-reading_confirmation");
+        color: map-get($map, "fg-progress-bar-reading_confirmation");
+      }
+      .slider, .slider .noUi-handle {
+        background-color: map-get($map, "slider-color");
+      }
+      .button-shadow, .button {
+        box-shadow: 1px 1px 5px map-get($map, "button-shadow");
+      }
+      .input-field {
+        color: map-get($map, "input-foreground-color") !important;
+      }
+      .input-field-bg-color, .input-field {
+        background-color: map-get($map, "input-background-color");
+      }
+      .header-title {
+        color: map-get($map, "fg-header-title");
+      }
+      .input-group-letter, .button-result-letter {
+        color: map-get($map, "input-group-letter-color");
+      }
+      .button-foreground-color {
+        color: map-get($map, "input-foreground-color") !important;
+      }
+      .button-next, .button-success {
+        background-color: map-get($map, "success");
+        color: map-get($map, "success-text-color");
+      }
+      .btn-success,
+      .btn-info,
+      .btn-warning {
+        color: black;
+        &:hover {
+          color: black;
+        }
+      }
+      .button-selected {
+        background-color: map-get($map, "info");
+        color: map-get($map, "info-text-color");
+      }
+      .button-warning, .button-back, div.warning {
+        background-color: map-get($map, "warning");
+        color: map-get($map, "warning-text-color");
+      }
+      .button-purple {
+        background-color: map-get($map, "bg-answer_row-button_purple_transition");
+        color: map-get($map, "fg-answer_row-button_purple_transition");
+      }
+      .button-grey {
+        background-color: map-get($map, "grey-button-background");
+        color: map-get($map, "grey-button-color");
+      }
+      .button-default {
+        background-color: map-get($map, "default");
+        color: map-get($map, "default-text-color");
+      }
+      .button-leader {
+        background-color: map-get($map, "bg-button-leader");
+        color: map-get($map, "fg-button-leader");
+        box-shadow: 1px 1px 5px map-get($map, "button-shadow");
+      }
+      .button-result {
+        background-color: map-get($map, "bg-button-result");
+        .percentage {
+          color: map-get($map, "fg-button-result-percentage");
+        }
+        .progress {
+          background-color: map-get($map, "bg-button-result-progress");
+        }
+      }
+      .navbar-footer {
+        background-color: map-get($map, "bg-footer");
+        -webkit-transition: background-color 800ms linear;
+        -moz-transition: background-color 800ms linear;
+        -o-transition: background-color 800ms linear;
+        transition: background-color 800ms linear;
+      }
+      .footerElement {
+        color: map-get($map, "fg-footer-info-bar");
+        &:hover {
+          color: map-get($map, "fg-footer-info-bar-hovered");
+        }
+        &.error {
+          color: map-get($map, "fg-footer-element-deactivated");
+          &:hover {
+            color: map-get($map, "fg-footer-element-deactivated-hovered");
+          }
+        }
+        &.success {
+          color: map-get($map, "fg-footer-info-bar-active");
 
-					&:hover {
-						color: map-get($map, "fg-footer-info-bar-active-hovered");
-					}
-				}
-			}
-			.progress-success {
-				background-color: map-get($map, "progress-bar-success-color") !important;
-			}
-			.progress-failure {
-				background-color: map-get($map, "progress-bar-failure-color") !important;
-			}
-			.progress-default {
-				background-color: map-get($map, "progress-bar-default-color") !important;
-			}
-			.textarea {
-				background-color: white;
-				color: map-get($map, "md_blue_grey_700");
-			}
-			.previewText {
-				background-color: map-get($map, "input-background-color");
-				color: map-get($map, "input-foreground-color") !important;
-			}
-			.check-mark-checked {
-				color: map-get($map, "check-mark-checked");
-			}
-			.check-mark-unchecked {
-				color: map-get($map, "check-mark-unchecked");
-			}
-			.success input, .success textarea, input.success, textarea.success {
-				border: 3px solid map-get($map, "success");
-			}
-			.error input, .error textarea, input.error, textarea.error {
-				border: 3px solid map-get($map, "warning");
-			}
-			p.success, span.success {
-				color: springgreen;
-			}
-			p.failed, span.failed {
-				color: red;
-			}
-			.popover-title, .popover {
-				background-color: map-get($map, "warning");
-				color: map-get($map, "warning-text-color");
-				border-color: map-get($map, "warning");
-			}
-			.popover.bottom > .arrow:after {
-				border-bottom-color: map-get($map, "warning");
-			}
-			.popover.right > .arrow:after {
-				border-right-color: map-get($map, "warning");
-			}
-			.lockquote {
-				color: map-get($map, "fg-lockquote") !important;
-			}
-			.button-import {
-				background: map-get($map, "bg-btn-file-input");
-			}
-			.question-title {
-				color: map-get($map, "fg-question-title");
-			}
-			.glyphicon-style {
-				color: map-get($map, "fg-glyphicon-style");
-			}
-			.formGroupProgressRow {
-				.progress {
-					.percentage {
-						.label {
-							color: map-get($map, "fg-formGroup-progress-percentage-label");
-						}
-					}
-				}
-			}
-			.btn-more-learners {
-				background-color: map-get($map, "bg-btn-more-learners");
-				color: map-get($map, "fg-btn-more-learners");
-			}
-			#waiting_for_players_notifier {
-				color: map-get($map, "fg-lobby-waiting-for-players-notifier");
-			}
-			@keyframes colorChangingOwnNick {
-				0% {
-					background-color: map-get($map, "bg-colorChangingOwnNick0");
-					color: map-get($map, "fg-colorChangingOwnNick0");
-					transform: translateY(0%);
-					-webkit-transform: translateY(0%);
-				}
-				25% {
-					background-color: map-get($map, "bg-colorChangingOwnNick25");
-					color: map-get($map, "fg-colorChangingOwnNick25");
-				}
-				50% {
-					background-color: map-get($map, "bg-colorChangingOwnNick50");
-					color: map-get($map, "fg-colorChangingOwnNick50");
-				}
-				75% {
-					background-color: map-get($map, "bg-colorChangingOwnNick75");
-					color: map-get($map, "fg-colorChangingOwnNick75");
-				}
-				100% {
-					background-color: map-get($map, "bg-colorChangingOwnNick100");
-					color: map-get($map, "fg-colorChangingOwnNick100");
-					transform: translateY(0%);
-					-webkit-transform: translateY(0%);
-				}
-			}
-			@-webkit-keyframes colorChangingOwnNick {
-				0% {
-					background-color: map-get($map, "bg-colorChangingOwnNick0");
-					color: map-get($map, "fg-colorChangingOwnNick0");
-					transform: translateY(0%);
-					-webkit-transform: translateY(0%);
-				}
-				25% {
-					background-color: map-get($map, "bg-colorChangingOwnNick25");
-					color: map-get($map, "fg-colorChangingOwnNick25");
-				}
-				50% {
-					background-color: map-get($map, "bg-colorChangingOwnNick50");
-					color: map-get($map, "fg-colorChangingOwnNick50");
-				}
-				75% {
-					background-color: map-get($map, "bg-colorChangingOwnNick75");
-					color: map-get($map, "fg-colorChangingOwnNick75");
-				}
-				100% {
-					background-color: map-get($map, "bg-colorChangingOwnNick100");
-					color: map-get($map, "fg-colorChangingOwnNick100");
-					transform: translateY(0%);
-					-webkit-transform: translateY(0%);
-				}
-			}
-			.color-changing-ars {
-				color: map-get($map, "fg-footer-info-bar");
-				animation-name: #{$theme}_colorChangingArs;
-			}
-			.color-changing-nova {
-				color: map-get($map, "fg-footer-info-bar");
-				animation-name: #{$theme}_colorChangingNova;
-			}
-			.color-changing-dot {
-				color: map-get($map, "fg-footer-info-bar");
-				animation-name: #{$theme}_colorChangingDot;
-			}
-			.color-changing-click {
-				color: map-get($map, "fg-footer-info-bar");
-				animation-name: #{$theme}_colorChangingClick;
-			}
-			@keyframes #{$theme}_colorChangingArs {
-				0% {
-					color: white;
-				}
-				25% {
-					color: map-get($map, "input-background-color");
-				}
-				50% {
-					color: white;
-				}
-				75% {
-					color: white;
-				}
-				100% {
-					color: white;
-				}
-			}
-			@keyframes #{$theme}_colorChangingNova {
-				0% {
-					color: white;
-				}
-				25% {
-					color: white;
-				}
-				50% {
-					color: map-get($map, "input-background-color");
-				}
-				75% {
-					color: white;
-				}
-				100% {
-					color: white;
-				}
-			}
-			@keyframes #{$theme}_colorChangingDot {
-				0% {
-					color: white;
-				}
-				25% {
-					color: white;
-				}
-				50% {
-					color: white;
-				}
-				75% {
-					color: map-get($map, "input-background-color");
-				}
-				100% {
-					color: white;
-				}
-			}
-			@keyframes #{$theme}_colorChangingClick {
-				0% {
-					color: white;
-				}
-				25% {
-					color: white;
-				}
-				50% {
-					color: white;
-				}
-				75% {
-					color: white;
-				}
-				100% {
-					color: map-get($map, "input-background-color");
-				}
-			}
-			@-webkit-keyframes #{$theme}_colorChangingArs {
-				0% {
-					color: white;
-				}
-				25% {
-					color: map-get($map, "input-background-color");
-				}
-				50% {
-					color: white;
-				}
-				75% {
-					color: white;
-				}
-				100% {
-					color: white;
-				}
-			}
-			@-webkit-keyframes #{$theme}_colorChangingNova {
-				0% {
-					color: white;
-				}
-				25% {
-					color: white;
-				}
-				50% {
-					color: map-get($map, "input-background-color");
-				}
-				75% {
-					color: white;
-				}
-				100% {
-					color: white;
-				}
-			}
-			@-webkit-keyframes #{$theme}_colorChangingDot {
-				0% {
-					color: white;
-				}
-				25% {
-					color: white;
-				}
-				50% {
-					color: white;
-				}
-				75% {
-					color: map-get($map, "input-background-color");
-				}
-				100% {
-					color: white;
-				}
-			}
-			@-webkit-keyframes #{$theme}_colorChangingClick {
-				0% {
-					color: white;
-				}
-				25% {
-					color: white;
-				}
-				50% {
-					color: white;
-				}
-				75% {
-					color: white;
-				}
-				100% {
-					color: map-get($map, "input-background-color");
-				}
-			}
-			.button-markdown-shadow, .button-markdown {
-				box-shadow: 1px 1px 5px map-get($map, "box-shadow-markdown");
-			}
-			.input-label {
-				color: map-get($map, "input-group-letter-color");
-			}
-			.rangedAnswerOptions {
-				.rangedSlider {
-					background-color: map-get($map, "bg-rangedSlider-invalid");
-					.noUi-background {
-						background-color: map-get($map, "bg-rangedSlider-invalid");
-					}
-					.noUi-connect {
-						background-color: map-get($map, "bg-rangedSlider-valid");
-					}
-					.noUi-handle {
-						background-color: map-get($map, "bg-rangedSlider-handle");
-					}
-				}
-			}
-			.rangedValues {
-				color: map-get($map, "default-text-color");
-				input[type="number"] {
-					&.invalid {
-						border: 3px solid map-get($map, "bg-rangedSlider-invalid");
-					}
-				}
-			}
-			.soundConfig {
-				.modal-content {
-					background-color: map-get($map, "splashscreen-sound-config-background-color");
-					select {
-						color: map-get($map, "splashscreen-sound-config-select-foreground-color");
-					}
-					#isSoundOnButton.down {
-						background: map-get($map, "splashscreen-sound-config-button-background-color");
-					}
-				}
-			}
-			.splashscreen {
-				.modal-content {
-					background: map-get($map, "splashscreen-background-color");
-					.modal-header {
-						color: map-get($map, "splash-screen-header-color");
-					}
-					.modal-body {
-						color: map-get($map, "splashscreen-foreground-color");
-						a, a:hover, a:active, a:visited, a:focus, p {
-							color: map-get($map, "splashscreen-foreground-color") !important;
-						}
-					}
-				}
-			}
-			.splashscreen-container-close {
-				color: map-get($map, "fg-qr-code-container-close");
-				.glyphicon-remove {
-					border: 1px solid map-get($map, "border-qr-code-container-close-icon");
-					background-color: map-get($map, "background-qr-code-container-close-icon");
-					&:hover {
-						color: map-get($map, "fg-qr-code-container-close-hovered");
-					}
-				}
-			}
-			.modal-backdrop {
-				background-color: map-get($map, "background-color");
-			}
-			.questionAndAnswerSplashscreen {
-				.modal-content {
-					background-color: map-get($map, "bg-splashscreen-question-and-answer");
-					#questionContent {
-						color: map-get($map, "fg-splashscreen-question-and-answer_question-content");
-						background-color: map-get($map, "bg-splashscreen-question-and-answer_question-content");
-					}
-					#answerContent {
-						#answerHeader {
-							color: map-get($map, "fg-splashscreen-question-and-answer_answer-content-header");
-							background-color: map-get($map, "bg-splashscreen-question-and-answer_answer-content-header");
-						}
-						.answerContentElementWrapper {
-							color: map-get($map, "fg-splashscreen-question-and-answer_answer-content-odd-row");
-							background-color: map-get($map, "bg-splashscreen-question-and-answer_answer-content-odd-row");
-							border-color: map-get($map, "border-splashscreen-question-and-answer_answer-content-odd-row");
-							&:nth-child(even) {
-								color: map-get($map, "fg-splashscreen-question-and-answer_answer-content-even-row");
-								background-color: map-get($map, "bg-splashscreen-question-and-answer_answer-content-even-row");
-								border-color: map-get($map, "border-splashscreen-question-and-answer_answer-content-even-row");
-							}
-						}
-						.answerContentElementLetter {
-							border-bottom-color: map-get($map, "border-splashscreen-question-and-answer_answer-content-odd-row");
-							&.correctAnswer {
-								background: map-get($map, "bg-splashscreen-question-and-answer_answer-content-correct");
-								color: map-get($map, "fg-splashscreen-question-and-answer_answer-content-correct");
-							}
-							&.wrongAnswer {
-								background: map-get($map, "bg-splashscreen-question-and-answer_answer-content-wrong");
-								color: map-get($map, "fg-splashscreen-question-and-answer_answer-content-wrong");
-							}
-						}
-					}
-				}
-			}
-			.deleteConfirmationSplashscreen {
-				.modal-content {
-					background: map-get($map, "splashscreen-delete-background-color");
-				}
-			}
-			.kickMemberSplashscreen {
-				.modal-content {
-					background: map-get($map, "splash-screen-error-message-background-color");
-					.modal-header {
-						color: map-get($map, "splash-screen-error-message-foreground-color");
-					}
-					.modal-body {
-						color: map-get($map, "splash-screen-error-message-foreground-color");
-					}
-				}
-			}
-			.showHashtagsSplashscreen {
-				.modal-content {
-					background: map-get($map, "splashscreen-show-hashtags-background-color");
-					.js-my-hash {
-						background-color: map-get($map, "bg-js-my-hash");
-						color: map-get($map, "fg-js-my-hash");
-						&:hover {
-							background-color: map-get($map, "bg-js-my-hash-hovered");
-						}
-						&:active {
-							background-color: map-get($map, "bg-js-my-hash-active");
-						}
-						&.validQuestion {
-							color: map-get($map, "fg-js-my-hash-validQuestion");
-							background-color: map-get($map, "bg-js-my-hash-validQuestion");
-							&:hover {
-								background-color: map-get($map, "bg-js-my-hash-validQuestion-hovered");
-							}
-						}
-						&.invalidQuestion {
-							color: map-get($map, "fg-js-my-hash-invalidQuestion");
-							background-color: map-get($map, "bg-js-my-hash-invalidQuestion");
-							&:hover {
-								background-color: map-get($map, "bg-js-my-hash-invalidQuestion-hovered");
-							}
-						}
-					}
-				}
-			}
-			.readingConfirmedSplashscreen {
-				.modal-content {
-					background: white;
-				}
-			}
-			.questionPreviewSplashscreen {
-				.modal-content {
-					background: white;
-				}
-			}
-			.errorSplashscreen {
-				.modal-content {
-					background: map-get($map, "splash-screen-error-message-background-color");
-					.modal-header {
-						color: map-get($map, "splash-screen-error-message-foreground-color");
-					}
-					.modal-body {
-						color: map-get($map, "splash-screen-error-message-foreground-color");
-					}
-				}
-				.splash-button-error-message {
-					background-color: map-get($map, "splash-screen-error-message-button-background-color");
-					color: map-get($map, "splash-screen-error-message-button-foreground-color");
-				}
-			}
-			.theme-description {
-				color: map-get($map, "fg-theme_description");
-			}
-			.quizSummary {
-				hr {
-					border-color: map-get($map, "quiz-summary-row-color");
-				}
-				h4 {
-					color: map-get($map, "fg-quiz-summary-H4");
-				}
-				p {
-					color: map-get($map, "fg-quiz-summary-P");
-				}
-				ul {
-					color: map-get($map, "fg-quiz-summary-UL");
-				}
-			}
-			#connectionQualityHeader {
-				#connectionQualityImage {
-					&.connectionOffline {
-						fill: map-get($map, "fg-connection-quality-header_connection-offline");
-					}
-					&.connectionPending {
-						fill: map-get($map, "fg-connection-quality-header_connection-pending");
-					}
-					&.connectionOk {
-						fill: map-get($map, "fg-connection-quality-header_connection-ok");
-					}
-					&.connectionWarning {
-						fill: map-get($map, "fg-connection-quality-header_connection-warning");
-					}
-					&.connectionError {
-						fill: map-get($map, "fg-connection-quality-header_connection-error");
-					}
-					&.connectionFailed {
-						fill: map-get($map, "fg-connection-quality-header_connection-failed");
-					}
-				}
-				#detailsLink {
-					color: map-get($map, "fg-connection-quality-header_details-link");
-				}
-			}
-			.answer-row {
-				.answer-selected {
-					background-color: map-get($map, "bg-answer_row-answer_selected") !important;
-					color: map-get($map, "fg-answer_row-answer_selected") !important;
-				}
-				.button-purple-transition {
-					background-color: map-get($map, "bg-answer_row-button_purple_transition");
-					color: map-get($map, "fg-answer_row-button_purple_transition");
-				}
-				.button-green-transition {
-					background-color: map-get($map, "bg-answer_row-button_green_transition");
-					color: map-get($map, "fg-answer_row-button_green_transition");
-				}
-				.freeTextFrame {
-					h1 {
-						color: map-get($map, "fg-free-text-header-color");
-					}
-				}
-			}
-			#quizManager {
-				.sortable-placeholder {
-					color: map-get($map, "fg-quiz_manager-sortable_placeholder");
-					background-color: map-get($map, "bg-quiz_manager-sortable_placeholder");
-				}
-				ul {
-					li {
-						color: map-get($map, "fg-quiz_manager-ul-li");
-					}
-					&#available_questions_wrapper,
-					&#added_questions_wrapper {
-						.questionElementWrapper {
-							border: 2px solid map-get($map, "border-quiz_manager-available_questions_wrapper");
-							&:hover {
-								background-color: map-get($map, "bg-quiz_manager-available_questions_wrapper-hovered");
-							}
-							li {
-								&[data-valid='true'] {
-									&:before {
-										color: map-get($map, "border-quiz_manager-available_questions_wrapper-valid");
-									}
-								}
-								&[data-valid='false'] {
-									&:before {
-										color: map-get($map, "border-quiz_manager-available_questions_wrapper-invalid");
-									}
-								}
-							}
+          &:hover {
+            color: map-get($map, "fg-footer-info-bar-active-hovered");
+          }
+        }
+      }
+      .progress-success {
+        background-color: map-get($map, "progress-bar-success-color") !important;
+      }
+      .progress-failure {
+        background-color: map-get($map, "progress-bar-failure-color") !important;
+      }
+      .progress-default {
+        background-color: map-get($map, "progress-bar-default-color") !important;
+      }
+      .textarea {
+        background-color: white;
+        color: map-get($map, "md_blue_grey_700");
+      }
+      .previewText {
+        background-color: map-get($map, "input-background-color");
+        color: map-get($map, "input-foreground-color") !important;
+      }
+      .check-mark-checked {
+        color: map-get($map, "check-mark-checked");
+      }
+      .check-mark-unchecked {
+        color: map-get($map, "check-mark-unchecked");
+      }
+      .success input, .success textarea, input.success, textarea.success {
+        border: 3px solid map-get($map, "success");
+      }
+      .error input, .error textarea, input.error, textarea.error {
+        border: 3px solid map-get($map, "warning");
+      }
+      p.success, span.success {
+        color: springgreen;
+      }
+      p.failed, span.failed {
+        color: red;
+      }
+      .popover-title, .popover {
+        background-color: map-get($map, "warning");
+        color: map-get($map, "warning-text-color");
+        border-color: map-get($map, "warning");
+      }
+      .popover.bottom > .arrow:after {
+        border-bottom-color: map-get($map, "warning");
+      }
+      .popover.right > .arrow:after {
+        border-right-color: map-get($map, "warning");
+      }
+      .lockquote {
+        color: map-get($map, "fg-lockquote") !important;
+      }
+      .button-import {
+        background: map-get($map, "bg-btn-file-input");
+      }
+      .question-title {
+        color: map-get($map, "fg-question-title");
+      }
+      .glyphicon-style {
+        color: map-get($map, "fg-glyphicon-style");
+      }
+      .formGroupProgressRow {
+        .progress {
+          .percentage {
+            .label {
+              color: map-get($map, "fg-formGroup-progress-percentage-label");
+            }
+          }
+        }
+      }
+      .btn-more-learners {
+        background-color: map-get($map, "bg-btn-more-learners");
+        color: map-get($map, "fg-btn-more-learners");
+      }
+      #waiting_for_players_notifier {
+        color: map-get($map, "fg-lobby-waiting-for-players-notifier");
+      }
+      @keyframes colorChangingOwnNick {
+        0% {
+          background-color: map-get($map, "bg-colorChangingOwnNick0");
+          color: map-get($map, "fg-colorChangingOwnNick0");
+          transform: translateY(0%);
+          -webkit-transform: translateY(0%);
+        }
+        25% {
+          background-color: map-get($map, "bg-colorChangingOwnNick25");
+          color: map-get($map, "fg-colorChangingOwnNick25");
+        }
+        50% {
+          background-color: map-get($map, "bg-colorChangingOwnNick50");
+          color: map-get($map, "fg-colorChangingOwnNick50");
+        }
+        75% {
+          background-color: map-get($map, "bg-colorChangingOwnNick75");
+          color: map-get($map, "fg-colorChangingOwnNick75");
+        }
+        100% {
+          background-color: map-get($map, "bg-colorChangingOwnNick100");
+          color: map-get($map, "fg-colorChangingOwnNick100");
+          transform: translateY(0%);
+          -webkit-transform: translateY(0%);
+        }
+      }
+      @-webkit-keyframes colorChangingOwnNick {
+        0% {
+          background-color: map-get($map, "bg-colorChangingOwnNick0");
+          color: map-get($map, "fg-colorChangingOwnNick0");
+          transform: translateY(0%);
+          -webkit-transform: translateY(0%);
+        }
+        25% {
+          background-color: map-get($map, "bg-colorChangingOwnNick25");
+          color: map-get($map, "fg-colorChangingOwnNick25");
+        }
+        50% {
+          background-color: map-get($map, "bg-colorChangingOwnNick50");
+          color: map-get($map, "fg-colorChangingOwnNick50");
+        }
+        75% {
+          background-color: map-get($map, "bg-colorChangingOwnNick75");
+          color: map-get($map, "fg-colorChangingOwnNick75");
+        }
+        100% {
+          background-color: map-get($map, "bg-colorChangingOwnNick100");
+          color: map-get($map, "fg-colorChangingOwnNick100");
+          transform: translateY(0%);
+          -webkit-transform: translateY(0%);
+        }
+      }
+      .color-changing-ars {
+        color: map-get($map, "fg-footer-info-bar");
+        animation-name: #{$theme}_colorChangingArs;
+      }
+      .color-changing-nova {
+        color: map-get($map, "fg-footer-info-bar");
+        animation-name: #{$theme}_colorChangingNova;
+      }
+      .color-changing-dot {
+        color: map-get($map, "fg-footer-info-bar");
+        animation-name: #{$theme}_colorChangingDot;
+      }
+      .color-changing-click {
+        color: map-get($map, "fg-footer-info-bar");
+        animation-name: #{$theme}_colorChangingClick;
+      }
+      @keyframes #{$theme}_colorChangingArs {
+        0% {
+          color: white;
+        }
+        25% {
+          color: map-get($map, "input-background-color");
+        }
+        50% {
+          color: white;
+        }
+        75% {
+          color: white;
+        }
+        100% {
+          color: white;
+        }
+      }
+      @keyframes #{$theme}_colorChangingNova {
+        0% {
+          color: white;
+        }
+        25% {
+          color: white;
+        }
+        50% {
+          color: map-get($map, "input-background-color");
+        }
+        75% {
+          color: white;
+        }
+        100% {
+          color: white;
+        }
+      }
+      @keyframes #{$theme}_colorChangingDot {
+        0% {
+          color: white;
+        }
+        25% {
+          color: white;
+        }
+        50% {
+          color: white;
+        }
+        75% {
+          color: map-get($map, "input-background-color");
+        }
+        100% {
+          color: white;
+        }
+      }
+      @keyframes #{$theme}_colorChangingClick {
+        0% {
+          color: white;
+        }
+        25% {
+          color: white;
+        }
+        50% {
+          color: white;
+        }
+        75% {
+          color: white;
+        }
+        100% {
+          color: map-get($map, "input-background-color");
+        }
+      }
+      @-webkit-keyframes #{$theme}_colorChangingArs {
+        0% {
+          color: white;
+        }
+        25% {
+          color: map-get($map, "input-background-color");
+        }
+        50% {
+          color: white;
+        }
+        75% {
+          color: white;
+        }
+        100% {
+          color: white;
+        }
+      }
+      @-webkit-keyframes #{$theme}_colorChangingNova {
+        0% {
+          color: white;
+        }
+        25% {
+          color: white;
+        }
+        50% {
+          color: map-get($map, "input-background-color");
+        }
+        75% {
+          color: white;
+        }
+        100% {
+          color: white;
+        }
+      }
+      @-webkit-keyframes #{$theme}_colorChangingDot {
+        0% {
+          color: white;
+        }
+        25% {
+          color: white;
+        }
+        50% {
+          color: white;
+        }
+        75% {
+          color: map-get($map, "input-background-color");
+        }
+        100% {
+          color: white;
+        }
+      }
+      @-webkit-keyframes #{$theme}_colorChangingClick {
+        0% {
+          color: white;
+        }
+        25% {
+          color: white;
+        }
+        50% {
+          color: white;
+        }
+        75% {
+          color: white;
+        }
+        100% {
+          color: map-get($map, "input-background-color");
+        }
+      }
+      .button-markdown-shadow, .button-markdown {
+        box-shadow: 1px 1px 5px map-get($map, "box-shadow-markdown");
+      }
+      .input-label {
+        color: map-get($map, "input-group-letter-color");
+      }
+      .rangedAnswerOptions {
+        .rangedSlider {
+          background-color: map-get($map, "bg-rangedSlider-invalid");
+          .noUi-background {
+            background-color: map-get($map, "bg-rangedSlider-invalid");
+          }
+          .noUi-connect {
+            background-color: map-get($map, "bg-rangedSlider-valid");
+          }
+          .noUi-handle {
+            background-color: map-get($map, "bg-rangedSlider-handle");
+          }
+        }
+      }
+      .rangedValues {
+        color: map-get($map, "default-text-color");
+        input[type="number"] {
+          &.invalid {
+            border: 3px solid map-get($map, "bg-rangedSlider-invalid");
+          }
+        }
+      }
+      .soundConfig {
+        .modal-content {
+          background-color: map-get($map, "splashscreen-sound-config-background-color");
+          select {
+            color: map-get($map, "splashscreen-sound-config-select-foreground-color");
+          }
+          #isSoundOnButton.down {
+            background: map-get($map, "splashscreen-sound-config-button-background-color");
+          }
+        }
+      }
+      .splashscreen {
+        .modal-content {
+          background: map-get($map, "splashscreen-background-color");
+          .modal-header {
+            color: map-get($map, "splash-screen-header-color");
+          }
+          .modal-body {
+            color: map-get($map, "splashscreen-foreground-color");
+            a, a:hover, a:active, a:visited, a:focus, p {
+              color: map-get($map, "splashscreen-foreground-color") !important;
+            }
+          }
+        }
+      }
+      .splashscreen-container-close {
+        color: map-get($map, "fg-qr-code-container-close");
+        .glyphicon-remove {
+          border: 1px solid map-get($map, "border-qr-code-container-close-icon");
+          background-color: map-get($map, "background-qr-code-container-close-icon");
+          &:hover {
+            color: map-get($map, "fg-qr-code-container-close-hovered");
+          }
+        }
+      }
+      .modal-backdrop {
+        background-color: map-get($map, "background-color");
+      }
+      .questionAndAnswerSplashscreen {
+        .modal-content {
+          background-color: map-get($map, "bg-splashscreen-question-and-answer");
+          #questionContent {
+            color: map-get($map, "fg-splashscreen-question-and-answer_question-content");
+            background-color: map-get($map, "bg-splashscreen-question-and-answer_question-content");
+          }
+          #answerContent {
+            #answerHeader {
+              color: map-get($map, "fg-splashscreen-question-and-answer_answer-content-header");
+              background-color: map-get($map, "bg-splashscreen-question-and-answer_answer-content-header");
+            }
+            .answerContentElementWrapper {
+              color: map-get($map, "fg-splashscreen-question-and-answer_answer-content-odd-row");
+              background-color: map-get($map, "bg-splashscreen-question-and-answer_answer-content-odd-row");
+              border-color: map-get($map, "border-splashscreen-question-and-answer_answer-content-odd-row");
+              &:nth-child(even) {
+                color: map-get($map, "fg-splashscreen-question-and-answer_answer-content-even-row");
+                background-color: map-get($map, "bg-splashscreen-question-and-answer_answer-content-even-row");
+                border-color: map-get($map, "border-splashscreen-question-and-answer_answer-content-even-row");
+              }
+            }
+            .answerContentElementLetter {
+              border-bottom-color: map-get($map, "border-splashscreen-question-and-answer_answer-content-odd-row");
+              &.correctAnswer {
+                background: map-get($map, "bg-splashscreen-question-and-answer_answer-content-correct");
+                color: map-get($map, "fg-splashscreen-question-and-answer_answer-content-correct");
+              }
+              &.wrongAnswer {
+                background: map-get($map, "bg-splashscreen-question-and-answer_answer-content-wrong");
+                color: map-get($map, "fg-splashscreen-question-and-answer_answer-content-wrong");
+              }
+            }
+          }
+        }
+      }
+      .deleteConfirmationSplashscreen {
+        .modal-content {
+          background: map-get($map, "splashscreen-delete-background-color");
+        }
+      }
+      .kickMemberSplashscreen {
+        .modal-content {
+          background: map-get($map, "splash-screen-error-message-background-color");
+          .modal-header {
+            color: map-get($map, "splash-screen-error-message-foreground-color");
+          }
+          .modal-body {
+            color: map-get($map, "splash-screen-error-message-foreground-color");
+          }
+        }
+      }
+      .showHashtagsSplashscreen {
+        .modal-content {
+          background: map-get($map, "splashscreen-show-hashtags-background-color");
+          .js-my-hash {
+            background-color: map-get($map, "bg-js-my-hash");
+            color: map-get($map, "fg-js-my-hash");
+            &:hover {
+              background-color: map-get($map, "bg-js-my-hash-hovered");
+            }
+            &:active {
+              background-color: map-get($map, "bg-js-my-hash-active");
+            }
+            &.validQuestion {
+              color: map-get($map, "fg-js-my-hash-validQuestion");
+              background-color: map-get($map, "bg-js-my-hash-validQuestion");
+              &:hover {
+                background-color: map-get($map, "bg-js-my-hash-validQuestion-hovered");
+              }
+            }
+            &.invalidQuestion {
+              color: map-get($map, "fg-js-my-hash-invalidQuestion");
+              background-color: map-get($map, "bg-js-my-hash-invalidQuestion");
+              &:hover {
+                background-color: map-get($map, "bg-js-my-hash-invalidQuestion-hovered");
+              }
+            }
+          }
+        }
+      }
+      .readingConfirmedSplashscreen {
+        .modal-content {
+          background: white;
+        }
+      }
+      .questionPreviewSplashscreen {
+        .modal-content {
+          background: white;
+        }
+      }
+      .errorSplashscreen {
+        .modal-content {
+          background: map-get($map, "splash-screen-error-message-background-color");
+          .modal-header {
+            color: map-get($map, "splash-screen-error-message-foreground-color");
+          }
+          .modal-body {
+            color: map-get($map, "splash-screen-error-message-foreground-color");
+          }
+        }
+        .splash-button-error-message {
+          background-color: map-get($map, "splash-screen-error-message-button-background-color");
+          color: map-get($map, "splash-screen-error-message-button-foreground-color");
+        }
+      }
+      .theme-description {
+        color: map-get($map, "fg-theme_description");
+      }
+      .quizSummary {
+        hr {
+          border-color: map-get($map, "quiz-summary-row-color");
+        }
+        h4 {
+          color: map-get($map, "fg-quiz-summary-H4");
+        }
+        p {
+          color: map-get($map, "fg-quiz-summary-P");
+        }
+        ul {
+          color: map-get($map, "fg-quiz-summary-UL");
+        }
+      }
+      #connectionQualityHeader {
+        #connectionQualityImage {
+          &.connectionOffline {
+            fill: map-get($map, "fg-connection-quality-header_connection-offline");
+          }
+          &.connectionPending {
+            fill: map-get($map, "fg-connection-quality-header_connection-pending");
+          }
+          &.connectionOk {
+            fill: map-get($map, "fg-connection-quality-header_connection-ok");
+          }
+          &.connectionWarning {
+            fill: map-get($map, "fg-connection-quality-header_connection-warning");
+          }
+          &.connectionError {
+            fill: map-get($map, "fg-connection-quality-header_connection-error");
+          }
+          &.connectionFailed {
+            fill: map-get($map, "fg-connection-quality-header_connection-failed");
+          }
+        }
+        #detailsLink {
+          color: map-get($map, "fg-connection-quality-header_details-link");
+        }
+      }
+      .answer-row {
+        .answer-selected {
+          background-color: map-get($map, "bg-answer_row-answer_selected") !important;
+          color: map-get($map, "fg-answer_row-answer_selected") !important;
+        }
+        .button-purple-transition {
+          background-color: map-get($map, "bg-answer_row-button_purple_transition");
+          color: map-get($map, "fg-answer_row-button_purple_transition");
+        }
+        .button-green-transition {
+          background-color: map-get($map, "bg-answer_row-button_green_transition");
+          color: map-get($map, "fg-answer_row-button_green_transition");
+        }
+        .freeTextFrame {
+          h1 {
+            color: map-get($map, "fg-free-text-header-color");
+          }
+        }
+      }
+      #quizManager {
+        .sortable-placeholder {
+          color: map-get($map, "fg-quiz_manager-sortable_placeholder");
+          background-color: map-get($map, "bg-quiz_manager-sortable_placeholder");
+        }
+        ul {
+          li {
+            color: map-get($map, "fg-quiz_manager-ul-li");
+          }
+          &#available_questions_wrapper,
+          &#added_questions_wrapper {
+            .questionElementWrapper {
+              border: 2px solid map-get($map, "border-quiz_manager-available_questions_wrapper");
+              &:hover {
+                background-color: map-get($map, "bg-quiz_manager-available_questions_wrapper-hovered");
+              }
+              li {
+                &[data-valid='true'] {
+                  &:before {
+                    color: map-get($map, "border-quiz_manager-available_questions_wrapper-valid");
+                  }
+                }
+                &[data-valid='false'] {
+                  &:before {
+                    color: map-get($map, "border-quiz_manager-available_questions_wrapper-invalid");
+                  }
+                }
+              }
 
-						}
-					}
-				}
-			}
-			#quizManagerDetails {
-				.btn-group {
-					button {
-						color: map-get($map, "fg-quiz_manager_details-btn_group-button");
-						background-color: map-get($map, "bg-quiz_manager_details-btn_group-button");
-						border-color: map-get($map, "border-quiz_manager_details-btn_group-button");
-						&:hover {
-							background-color: map-get($map, "bg-quiz_manager_details-btn_group-button-hovered");
-						}
-					}
-				}
-			}
-			#previewQuestionContentWrapper {
-				.plain_view {
-					#content {
-						border: 5px solid map-get($map, "border-previewQuestionContentWrapper-image");
-					}
-				}
-				#markdownPreviewWrapper {
-					color: map-get($map, "fg-previewQuestionContentWrapper");
-					p {
-						color: map-get($map, "fg-previewQuestionContentWrapper");
-					}
-				}
-			}
-			#previewAnsweroptionContentWrapper {
-				.plain_view {
-					#content {
-						border: 5px solid map-get($map, "border-previewAnsweroptionContentWrapper-image");
-					}
-				}
-				#markdownPreviewWrapper {
-					color: map-get($map, "fg-previewAnsweroptionContentWrapper");
-					p {
-						color: map-get($map, "fg-previewAnsweroptionContentWrapper");
-					}
-				}
-			}
-			#questionTypeView {
-				.questionType {
-					.wrapper {
-						border: 5px solid map-get($map, "border-question_type_view-wrapper");
-						&:hover {
-							background-color: map-get($map, "bg-question_type_view-wrapper-hovered");
-							p {
-								color: map-get($map, "fg-question_type_view-wrapper-hovered");
-							}
-						}
-					}
-				}
-				.activeQuestionType {
-					.wrapper {
-						border: 5px solid map-get($map, "border-question_type_view-activeQuestionType-wrapper");
-						&:hover {
-							background-color: initial;
-						}
-					}
-				}
-			}
-			.themePreview {
-				img {
-					border: 3px solid map-get($map, "border-theme-preview-img");
-				}
-				&.selectedTheme {
-					img {
-						border: 3px solid map-get($map, "border-theme-preview-img-selected");
-					}
-				}
-			}
-			#votingView {
-				.sendResponse {
-					&.correctAnswer {
-						background-color: green !important;
-					}
-					&.wrongAnswer {
-						background-color: red !important;
-					}
-				}
-			}
-			.nicknameCategories {
-				h3 {
-					color: map-get($map, "fg-nickname_categories-h3");
-				}
-				.nickStyle {
-					&.nickCategory {
-						&:hover {
-							background-color: map-get($map, "bg-nickname_categories-nick_style-hovered");
-						}
-						&:active {
-							background-color: map-get($map, "bg-nickname_categories-nick_style-active");
-						}
-						&.selectedCategory {
-							background-color: map-get($map, "bg-nickname_categories-nick_style-selected_category");
-						}
-						background-color: map-get($map, "bg-nickname_categories-nick_style");
-					}
+            }
+          }
+        }
+      }
+      #quizManagerDetails {
+        .btn-group {
+          button {
+            color: map-get($map, "fg-quiz_manager_details-btn_group-button");
+            background-color: map-get($map, "bg-quiz_manager_details-btn_group-button");
+            border-color: map-get($map, "border-quiz_manager_details-btn_group-button");
+            &:hover {
+              background-color: map-get($map, "bg-quiz_manager_details-btn_group-button-hovered");
+            }
+          }
+        }
+      }
+      #previewQuestionContentWrapper {
+        .plain_view {
+          #content {
+            border: 5px solid map-get($map, "border-previewQuestionContentWrapper-image");
+          }
+        }
+        #markdownPreviewWrapper {
+          color: map-get($map, "fg-previewQuestionContentWrapper");
+          p {
+            color: map-get($map, "fg-previewQuestionContentWrapper");
+          }
+        }
+      }
+      #previewAnsweroptionContentWrapper {
+        .plain_view {
+          #content {
+            border: 5px solid map-get($map, "border-previewAnsweroptionContentWrapper-image");
+          }
+        }
+        #markdownPreviewWrapper {
+          color: map-get($map, "fg-previewAnsweroptionContentWrapper");
+          p {
+            color: map-get($map, "fg-previewAnsweroptionContentWrapper");
+          }
+        }
+      }
+      #questionTypeView {
+        .questionType {
+          .wrapper {
+            border: 5px solid map-get($map, "border-question_type_view-wrapper");
+            &:hover {
+              background-color: map-get($map, "bg-question_type_view-wrapper-hovered");
+              p {
+                color: map-get($map, "fg-question_type_view-wrapper-hovered");
+              }
+            }
+          }
+        }
+        .activeQuestionType {
+          .wrapper {
+            border: 5px solid map-get($map, "border-question_type_view-activeQuestionType-wrapper");
+            &:hover {
+              background-color: initial;
+            }
+          }
+        }
+      }
+      .themePreview {
+        img {
+          border: 3px solid map-get($map, "border-theme-preview-img");
+        }
+        &.selectedTheme {
+          img {
+            border: 3px solid map-get($map, "border-theme-preview-img-selected");
+          }
+        }
+      }
+      #votingView {
+        .sendResponse {
+          &.correctAnswer {
+            background-color: green !important;
+          }
+          &.wrongAnswer {
+            background-color: red !important;
+          }
+        }
+      }
+      .nicknameCategories {
+        h3 {
+          color: map-get($map, "fg-nickname_categories-h3");
+        }
+        .nickStyle {
+          &.nickCategory {
+            &:hover {
+              background-color: map-get($map, "bg-nickname_categories-nick_style-hovered");
+            }
+            &:active {
+              background-color: map-get($map, "bg-nickname_categories-nick_style-active");
+            }
+            &.selectedCategory {
+              background-color: map-get($map, "bg-nickname_categories-nick_style-selected_category");
+            }
+            background-color: map-get($map, "bg-nickname_categories-nick_style");
+          }
 
-					&.nickName,
-					&.chosenNickName {
-						&:hover {
-							background-color: map-get($map, "bg-nickname_categories-nick_chosen_nick-hovered");
-						}
-						&:active {
-							background-color: map-get($map, "bg-nickname_categories-nick_chosen_nick-active");
-						}
-						&.selectedNickName {
-							background-color: map-get($map, "bg-nickname_categories-nick_chosen_nick-selected");
-						}
-						background-color: map-get($map, "bg-nickname_categories-nick_chosen_nick");
-					}
-					&#block_illegal_nicks_wrapper,
-					&#restrict_to_cas_wrapper {
-						p {
-							color: map-get($map, "fg-nickname_categories-options");
-						}
-					}
-				}
-			}
-			.nickLimited {
-				.selectableNickWrapper {
-					h3 {
-						color: map-get($map, "fg-nick_limited-h3");
-					}
-					.selectableNick {
-						&:hover {
-							background-color: map-get($map, "bg-nick_limited-selectable_nick-hovered");
-						}
-						&:active {
-							background-color: map-get($map, "bg-nick_limited-selectable_nick-active");
-						}
-						background-color: map-get($map, "bg-nick_limited-selectable_nick");
-					}
-				}
-			}
-			#editAnsweroptionText {
-				#default_answer_row {
-					background-color: map-get($map, "bg-edit_answeroption_text-element_wrapper");
-				}
-				#answerOptionWrapper {
-					.answerElementContextWrapper {
-						background-color: map-get($map, "bg-edit_answeroption_text-element_wrapper");
-					}
-				}
-			}
-			.arsnova-logo {
-				#arsnova-logo-image {
-					background-color: map-get($map, "bg-arsnova_logo_image");
-					.arsnova-logo-origin {
-						animation-name: #{$theme}_arsnova-logo-image-origin;
-					}
-					.arsnova-logo-ars {
-						fill: map-get($map, "fg-arsnova_logo_image-ars");
-					}
-					.arsnova-logo-nova {
-						fill: map-get($map, "fg-arsnova_logo_image-nova");
-					}
-					.arsnova-logo-click {
-						fill: map-get($map, "fg-arsnova_logo_image-click");
-					}
-				}
-			}
-			@keyframes #{$theme}_arsnova-logo-image-origin {
-				0% {
-					fill: map-get($map, "fg-arsnova_logo_image-ars");
-				}
-				50% {
-					fill: map-get($map, "fg-arsnova_logo_image-nova");
-				}
-				100% {
-					fill: map-get($map, "fg-arsnova_logo_image-click");
-				}
-			}
-			@-webkit-keyframes #{$theme}_arsnova-logo-image-origin {
-				0% {
-					fill: map-get($map, "fg-arsnova_logo_image-ars");
-				}
-				50% {
-					fill: map-get($map, "fg-arsnova_logo_image-nova");
-				}
-				100% {
-					fill: map-get($map, "fg-arsnova_logo_image-click");
-				}
-			}
-			.focused {
-				border: 3px solid map-get($map, "border-focused") !important;
-			}
-			.button-result {
-				background-color: map-get($map, "bg-button_result");
-			}
-			#loader-wrapper {
-				#loader {
-					border: 3px solid transparent;
-					border-top-color: map-get($map, "border-loader_wrapper-outer_spin");
-					&:before {
-						border: 3px solid transparent;
-						border-top-color: map-get($map, "border-loader_wrapper-inner_spin");
-					}
-					&:after {
-						border: 3px solid transparent;
-						border-top-color: map-get($map, "border-loader_wrapper-middle_spin");
-					}
-				}
-			}
-			.soundConfig {
-				.modal-content {
-					#soundTab {
-						.nav-pills > li > a {
-							background-color: map-get($map, "bg-soundConfig_soundTab_navPills");
-						}
-					}
-				}
-			}
-			[disabled].noUi-target {
-				background: map-get($map, "bg-disabled-slider");
-				box-shadow: inset 0 1px 1px map-get($map, "bg-disabled-slider"), 0 3px 6px -5px map-get($map, "bg-disabled-slider");
-				.noUi-handle {
-					background: map-get($map, "bg-disabled-slider");
-				}
-			}
-		}
-		/* End of #theme-wrapper */
-	}
-	/* End of <body/> */
+          &.nickName,
+          &.chosenNickName {
+            &:hover {
+              background-color: map-get($map, "bg-nickname_categories-nick_chosen_nick-hovered");
+            }
+            &:active {
+              background-color: map-get($map, "bg-nickname_categories-nick_chosen_nick-active");
+            }
+            &.selectedNickName {
+              background-color: map-get($map, "bg-nickname_categories-nick_chosen_nick-selected");
+            }
+            background-color: map-get($map, "bg-nickname_categories-nick_chosen_nick");
+          }
+          &#block_illegal_nicks_wrapper,
+          &#restrict_to_cas_wrapper {
+            p {
+              color: map-get($map, "fg-nickname_categories-options");
+            }
+          }
+        }
+      }
+      .nickLimited {
+        .selectableNickWrapper {
+          h3 {
+            color: map-get($map, "fg-nick_limited-h3");
+          }
+          .selectableNick {
+            &:hover {
+              background-color: map-get($map, "bg-nick_limited-selectable_nick-hovered");
+            }
+            &:active {
+              background-color: map-get($map, "bg-nick_limited-selectable_nick-active");
+            }
+            background-color: map-get($map, "bg-nick_limited-selectable_nick");
+          }
+        }
+      }
+      #editAnsweroptionText {
+        #default_answer_row {
+          background-color: map-get($map, "bg-edit_answeroption_text-element_wrapper");
+        }
+        #answerOptionWrapper {
+          .answerElementContextWrapper {
+            background-color: map-get($map, "bg-edit_answeroption_text-element_wrapper");
+          }
+        }
+      }
+      .arsnova-logo {
+        #arsnova-logo-image {
+          background-color: map-get($map, "bg-arsnova_logo_image");
+          .arsnova-logo-origin {
+            animation-name: #{$theme}_arsnova-logo-image-origin;
+          }
+          .arsnova-logo-ars {
+            fill: map-get($map, "fg-arsnova_logo_image-ars");
+          }
+          .arsnova-logo-nova {
+            fill: map-get($map, "fg-arsnova_logo_image-nova");
+          }
+          .arsnova-logo-click {
+            fill: map-get($map, "fg-arsnova_logo_image-click");
+          }
+        }
+      }
+      @keyframes #{$theme}_arsnova-logo-image-origin {
+        0% {
+          fill: map-get($map, "fg-arsnova_logo_image-ars");
+        }
+        50% {
+          fill: map-get($map, "fg-arsnova_logo_image-nova");
+        }
+        100% {
+          fill: map-get($map, "fg-arsnova_logo_image-click");
+        }
+      }
+      @-webkit-keyframes #{$theme}_arsnova-logo-image-origin {
+        0% {
+          fill: map-get($map, "fg-arsnova_logo_image-ars");
+        }
+        50% {
+          fill: map-get($map, "fg-arsnova_logo_image-nova");
+        }
+        100% {
+          fill: map-get($map, "fg-arsnova_logo_image-click");
+        }
+      }
+      .focused {
+        border: 3px solid map-get($map, "border-focused") !important;
+      }
+      .button-result {
+        background-color: map-get($map, "bg-button_result");
+      }
+      #loader-wrapper {
+        #loader {
+          border: 3px solid transparent;
+          border-top-color: map-get($map, "border-loader_wrapper-outer_spin");
+          &:before {
+            border: 3px solid transparent;
+            border-top-color: map-get($map, "border-loader_wrapper-inner_spin");
+          }
+          &:after {
+            border: 3px solid transparent;
+            border-top-color: map-get($map, "border-loader_wrapper-middle_spin");
+          }
+        }
+      }
+      .soundConfig {
+        .modal-content {
+          #soundTab {
+            .nav-pills > li > a {
+              background-color: map-get($map, "bg-soundConfig_soundTab_navPills");
+            }
+          }
+        }
+      }
+      [disabled].noUi-target {
+        background: map-get($map, "bg-disabled-slider");
+        box-shadow: inset 0 1px 1px map-get($map, "bg-disabled-slider"), 0 3px 6px -5px map-get($map, "bg-disabled-slider");
+        .noUi-handle {
+          background: map-get($map, "bg-disabled-slider");
+        }
+      }
+    }
+    /* End of #theme-wrapper */
+  }
+  /* End of <body/> */
 }
 

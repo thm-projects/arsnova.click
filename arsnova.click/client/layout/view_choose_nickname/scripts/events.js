@@ -18,7 +18,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {MemberListCollection, userNickSchema} from '/lib/member_list/collection.js';
 import {NicknameCategoriesCollection} from '/lib/nickname_categories/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
@@ -63,7 +63,10 @@ Template.nickStandardFooter.events({
 		}
 	},
 	"click #loginViaCas": function () {
-		if (Meteor.user() && MemberListCollection.findOne({hashtag: Router.current().params.quizName, userRef: Meteor.user()._id})) {
+		if (Meteor.user() && MemberListCollection.findOne({
+				hashtag: Router.current().params.quizName,
+				userRef: Meteor.user()._id
+			})) {
 			new ErrorSplashscreen({
 				autostart: true,
 				errorMessage: "plugins.splashscreen.error.error_messages.duplicate_user",
@@ -79,9 +82,9 @@ Template.nickStandardFooter.events({
 				return;
 			}
 
-			const hashtag  = Router.current().params.quizName;
+			const hashtag = Router.current().params.quizName;
 			const nickname = $("#nickname-input-field").val();
-			const bgColor  = lib.rgbToHex(lib.getRandomInt(0, 255), lib.getRandomInt(0, 255), lib.getRandomInt(0, 255));
+			const bgColor = lib.rgbToHex(lib.getRandomInt(0, 255), lib.getRandomInt(0, 255), lib.getRandomInt(0, 255));
 			Meteor.call('MemberListCollection.addLearner', {
 				hashtag: hashtag,
 				nick: nickname,
@@ -159,7 +162,10 @@ Template.nickLimited.events({
 			return null;
 		}
 		if (configDoc.nicks.restrictToCASLogin) {
-			if (Meteor.user() && MemberListCollection.findOne({hashtag: Router.current().params.quizName, userRef: Meteor.user()._id})) {
+			if (Meteor.user() && MemberListCollection.findOne({
+					hashtag: Router.current().params.quizName,
+					userRef: Meteor.user()._id
+				})) {
 				new ErrorSplashscreen({
 					autostart: true,
 					errorMessage: "plugins.splashscreen.error.error_messages.duplicate_user",

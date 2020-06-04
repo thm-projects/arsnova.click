@@ -19,15 +19,15 @@ import {EJSON} from 'meteor/ejson';
 import {AbstractSessionConfiguration} from './session_config_abstract.js';
 
 export class SessionConfiguration extends AbstractSessionConfiguration {
-	constructor (options) {
+	constructor(options) {
 		super(options);
 	}
 
-	clone () {
+	clone() {
 		return new SessionConfiguration(this.serialize());
 	}
 
-	typeName () {
+	typeName() {
 		return "SessionConfiguration";
 	}
 }

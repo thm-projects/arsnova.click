@@ -14,166 +14,173 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
-
 @import "../../../layout/global/styles/appearance";
 
 #editAnsweroptionText {
-	#emojiInfo {
-		margin-top: 10px;
-	}
-	.answerOptionConfig {
-		margin-top: 5px;
-		display: flex;
+  #emojiInfo {
+    margin-top: 10px;
+  }
+  .answerOptionConfig {
+    margin-top: 5px;
+    display: flex;
 
-		#showAnswerContentOnButtons,
-		#showOneAnswerPerRow,
+    #showAnswerContentOnButtons,
+    #showOneAnswerPerRow,
 		#multipleSelectionSurvey {
-			margin: 0;
-			width: calc(100% - 100px);
-			align-self: center;
-		}
-	}
+      margin: 0;
+      width: calc(100% - 100px);
+      align-self: center;
+    }
+  }
 
-	#default_answer_row,
-	.answerOptionElementWrapper.ui-draggable-dragging {
-		border-radius: $corner-radius;
-		cursor: move !important;
-		display: flex;
-		.answer_row_default_text {
-			width: calc(100% - 80px);
-			margin: 0;
-			text-align: center;
-			line-height: 50px;
-		}
-		&:before,
-		&:after {
-			content: "\25BD";
-			width: 80px;
-			line-height: 50px;
-			text-align: center;
-			font-weight: bold;
-			font-size: 2.5em;
-			height: 50px;
-		}
-	}
+  #default_answer_row,
+  .answerOptionElementWrapper.ui-draggable-dragging {
+    border-radius: $corner-radius;
+    cursor: move !important;
+    display: flex;
+    .answer_row_default_text {
+      width: calc(100% - 80px);
+      margin: 0;
+      text-align: center;
+      line-height: 50px;
+    }
+    &:before,
+    &:after {
+      content: "\25BD";
+      width: 80px;
+      line-height: 50px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 2.5em;
+      height: 50px;
+    }
+  }
 
-	.answerOptionElementWrapper.ui-draggable-dragging {
-		width: calc(100% - 30px);
-	}
+  .answerOptionElementWrapper.ui-draggable-dragging {
+    width: calc(100% - 30px);
+  }
 
-	#answerOptionWrapper {
-		.answerElementContextWrapper {
-			border-radius: $corner-radius;
-			.answerOptionElementWrapper {
-				display: flex;
-				margin-top: 10px;
-				position: relative;
-				font-size: 1.3em;
-				overflow-y: hidden;
-				overflow-x: auto;
+  #answerOptionWrapper {
+    .answerElementContextWrapper {
+      border-radius: $corner-radius;
+      .answerOptionElementWrapper {
+        display: flex;
+        margin-top: 10px;
+        position: relative;
+        font-size: 1.3em;
+        overflow-y: hidden;
+        overflow-x: auto;
 
-				.answer_row_short_text {
-					width: 80px;
-					line-height: 50px;
-					text-align: center;
-					font-weight: bold;
-					font-size: 3em;
-					height: 50px;
-				}
-				.answer_row_text {
-					margin-right: 10px;
-					flex-grow: 1;
-					background-color: transparent;
-					border: none;
-					width: 100%;
-					text-overflow: initial;
-				}
-				.toggle {
-					margin-top: 10px;
-					margin-right: 10px;
-					min-width: 80px !important;
-				}
-			}
-			.contextMenu {
-				display: none;
-			}
-			&:hover {
-				.contextMenu {
-					@-webkit-keyframes fadeOut {
-						from { opacity: 0; }
-						to { opacity: 1; }
-					}
-					@keyframes fadeOut {
-						from { opacity: 0; }
-						to { opacity: 1; }
-					}
-					-webkit-animation: fadeOut 0.2s;
-					animation: fadeOut 0.2s;
-					display: flex;
-					padding-bottom: 5px;
-					.contextMenuItem {
-						cursor: pointer;
-						flex: 100% 1 1;
-						font-size: 20px;
-						text-align: center;
-						margin: 0 10px;
-						border-bottom: 1px solid;
+        .answer_row_short_text {
+          width: 80px;
+          line-height: 50px;
+          text-align: center;
+          font-weight: bold;
+          font-size: 3em;
+          height: 50px;
+        }
+        .answer_row_text {
+          margin-right: 10px;
+          flex-grow: 1;
+          background-color: transparent;
+          border: none;
+          width: 100%;
+          text-overflow: initial;
+        }
+        .toggle {
+          margin-top: 10px;
+          margin-right: 10px;
+          min-width: 80px !important;
+        }
+      }
+      .contextMenu {
+        display: none;
+      }
+      &:hover {
+        .contextMenu {
+          @-webkit-keyframes fadeOut {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+          @keyframes fadeOut {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+          -webkit-animation: fadeOut 0.2s;
+          animation: fadeOut 0.2s;
+          display: flex;
+          padding-bottom: 5px;
+          .contextMenuItem {
+            cursor: pointer;
+            flex: 100% 1 1;
+            font-size: 20px;
+            text-align: center;
+            margin: 0 10px;
+            border-bottom: 1px solid;
 
-						&:hover {
-							border-radius: $corner-radius;
-						}
-					}
-				}
-			}
-		}
-	}
+            &:hover {
+              border-radius: $corner-radius;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .rangedAnswerOptions {
-	padding-bottom: 30px;
+  padding-bottom: 30px;
 
-	.rangedValues {
-		text-align: center;
-		margin-bottom: 5vh;
-		h1 {
-			margin-bottom: 5vh;
-		}
-		input[type="number"] {
-			text-align: center;
-			width: 100%;
-			border-radius: $corner-radius
-		}
-	}
+  .rangedValues {
+    text-align: center;
+    margin-bottom: 5vh;
+    h1 {
+      margin-bottom: 5vh;
+    }
+    input[type="number"] {
+      text-align: center;
+      width: 100%;
+      border-radius: $corner-radius
+    }
+  }
 }
 
 #previewAnsweroptionContentWrapper {
-	overflow: hidden;
-	resize: none;
-	position: fixed;
-	right: 0;
+  overflow: hidden;
+  resize: none;
+  position: fixed;
+  right: 0;
 
-	.center-block {
-		position: relative;
-	}
+  .center-block {
+    position: relative;
+  }
 
-	#markdownPreviewWrapper {
-		position: absolute;
-		top: calc(6.8vh + 10px);
-		margin: 0 10px;
-		width: 95%;
-		height: calc(100% - 3.1% - 11vh);
-		overflow-y: auto;
-		overflow-x: hidden;
-		color: white;
-		word-wrap: break-word;
+  #markdownPreviewWrapper {
+    position: absolute;
+    top: calc(6.8vh + 10px);
+    margin: 0 10px;
+    width: 95%;
+    height: calc(100% - 3.1% - 11vh);
+    overflow-y: auto;
+    overflow-x: hidden;
+    color: white;
+    word-wrap: break-word;
 
-		.full-screen-content {
-			width: 100%;
-			margin-left: 0;
-		}
+    .full-screen-content {
+      width: 100%;
+      margin-left: 0;
+    }
 
-		p {
-			margin: 0;
-		}
-	}
+    p {
+      margin: 0;
+    }
+  }
 }

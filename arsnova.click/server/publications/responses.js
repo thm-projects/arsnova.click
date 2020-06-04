@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {ResponsesCollection} from '/lib/responses/collection.js';
 
 Meteor.publish('ResponsesCollection.join', function (hashtag) {

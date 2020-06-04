@@ -28,7 +28,7 @@ const showResponseProgress = Symbol("showResponseProgress");
 const confidenceSliderEnabled = Symbol("confidenceSliderEnabled");
 
 export class AbstractSessionConfiguration {
-	constructor (options) {
+	constructor(options) {
 		if (this.constructor === AbstractSessionConfiguration) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
@@ -60,7 +60,7 @@ export class AbstractSessionConfiguration {
 		this[confidenceSliderEnabled] = typeof options.confidenceSliderEnabled === "undefined" ? Meteor.settings.public.default.sessionConfiguration.confidenceSliderEnabled : options.confidenceSliderEnabled === true;
 	}
 
-	serialize () {
+	serialize() {
 		return {
 			hashtag: this.getHashtag(),
 			music: this.getMusicSettings().serialize(),
@@ -72,14 +72,14 @@ export class AbstractSessionConfiguration {
 		};
 	}
 
-	equals (value) {
+	equals(value) {
 		return this.getHashtag() === value.getHashtag() &&
-				this.getMusicSettings().equals(value.getMusicSettings()) &&
-				this.getNickSettings().equals(value.getNickSettings()) &&
-				this.getTheme() === value.getTheme() &&
-				this.getReadingConfirmationEnabled() === value.getReadingConfirmationEnabled() &&
-				this.getShowResponseProgress() === value.getShowResponseProgress() &&
-				this.getConfidenceSliderEnabled() === value.getConfidenceSliderEnabled();
+			this.getMusicSettings().equals(value.getMusicSettings()) &&
+			this.getNickSettings().equals(value.getNickSettings()) &&
+			this.getTheme() === value.getTheme() &&
+			this.getReadingConfirmationEnabled() === value.getReadingConfirmationEnabled() &&
+			this.getShowResponseProgress() === value.getShowResponseProgress() &&
+			this.getConfidenceSliderEnabled() === value.getConfidenceSliderEnabled();
 	}
 
 	/**
@@ -88,77 +88,77 @@ export class AbstractSessionConfiguration {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-toJSONValue
 	 * @returns Object
 	 */
-	toJSONValue () {
+	toJSONValue() {
 		return this.serialize();
 	}
 
-	getHashtag () {
+	getHashtag() {
 		return this[hashtag];
 	}
 
-	setHashtag (value) {
+	setHashtag(value) {
 		this[hashtag] = value;
 		this.getMusicSettings().setHashtag(value);
 		this.getNickSettings().setHashtag(value);
 	}
 
-	getTheme () {
+	getTheme() {
 		return this[theme];
 	}
 
-	setTheme (value) {
+	setTheme(value) {
 		this[theme] = value;
 	}
 
-	getMusicSettings () {
+	getMusicSettings() {
 		return this[music];
 	}
 
-	setMusicSettings (value) {
+	setMusicSettings(value) {
 		if (value instanceof Object && !(value instanceof MusicSessionConfiguration)) {
 			value = new MusicSessionConfiguration(value);
 		}
 		this[music] = value;
 	}
 
-	getNickSettings () {
+	getNickSettings() {
 		return this[nicks];
 	}
 
-	setNickSettings (value) {
+	setNickSettings(value) {
 		if (value instanceof Object && !(value instanceof NickSessionConfiguration)) {
 			value = new NickSessionConfiguration(value);
 		}
 		this[nicks] = value;
 	}
 
-	getReadingConfirmationEnabled () {
+	getReadingConfirmationEnabled() {
 		return this[readingConfirmationEnabled];
 	}
 
-	setReadingConfirmationEnabled (value) {
+	setReadingConfirmationEnabled(value) {
 		if (typeof value !== "boolean") {
 			throw new Error("Invalid argument for AbstractSessionConfiguration.setReadingConfirmationEnabled");
 		}
 		this[readingConfirmationEnabled] = value;
 	}
 
-	getShowResponseProgress () {
+	getShowResponseProgress() {
 		return this[showResponseProgress];
 	}
 
-	setShowResponseProgress (value) {
+	setShowResponseProgress(value) {
 		if (typeof value !== "boolean") {
 			throw new Error("Invalid argument for AbstractSessionConfiguration.setShowResponseProgress");
 		}
 		this[showResponseProgress] = value;
 	}
 
-	getConfidenceSliderEnabled () {
+	getConfidenceSliderEnabled() {
 		return this[confidenceSliderEnabled];
 	}
 
-	setConfidenceSliderEnabled (value) {
+	setConfidenceSliderEnabled(value) {
 		if (typeof value !== "boolean") {
 			throw new Error("Invalid argument for AbstractSessionConfiguration.setConfidenceSliderEnabled");
 		}

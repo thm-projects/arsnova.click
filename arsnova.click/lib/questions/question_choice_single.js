@@ -8,7 +8,7 @@ export class SingleChoiceQuestion extends AbstractChoiceQuestion {
 	 * @see AbstractChoiceQuestion.constructor()
 	 * @param options
 	 */
-	constructor (options) {
+	constructor(options) {
 		if (typeof options.type !== "undefined" && options.type !== "SingleChoiceQuestion") {
 			throw new TypeError("Invalid construction type while creating new SingleChoiceQuestion");
 		}
@@ -20,7 +20,7 @@ export class SingleChoiceQuestion extends AbstractChoiceQuestion {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-clone
 	 * @returns {SingleChoiceQuestion} An independent deep copy of the current instance
 	 */
-	clone () {
+	clone() {
 		return new SingleChoiceQuestion(this.serialize());
 	}
 
@@ -28,7 +28,7 @@ export class SingleChoiceQuestion extends AbstractChoiceQuestion {
 	 * Serialize the instance object to a JSON compatible object
 	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
 	 */
-	serialize () {
+	serialize() {
 		return Object.assign(super.serialize(), {type: "SingleChoiceQuestion"});
 	}
 
@@ -38,7 +38,7 @@ export class SingleChoiceQuestion extends AbstractChoiceQuestion {
 	 * @see AbstractChoiceQuestion.isValid()
 	 * @returns {boolean} True, if the complete Question instance is valid, False otherwise
 	 */
-	isValid () {
+	isValid() {
 		let hasValidAnswer = 0;
 		this.getAnswerOptionList().forEach(function (answeroption) {
 			if (answeroption.getIsCorrect()) {
@@ -52,7 +52,7 @@ export class SingleChoiceQuestion extends AbstractChoiceQuestion {
 	 * Gets the validation error reason from the question and all included answerOptions as a stackable array
 	 * @returns {Array} Contains an Object which holds the number of the current question and the reason why the validation has failed
 	 */
-	getValidationStackTrace () {
+	getValidationStackTrace() {
 		let hasValidAnswer = 0;
 		this.getAnswerOptionList().forEach(function (answeroption) {
 			if (answeroption.getIsCorrect()) {
@@ -61,7 +61,10 @@ export class SingleChoiceQuestion extends AbstractChoiceQuestion {
 		});
 		const parentStackTrace = super.getValidationStackTrace();
 		if (hasValidAnswer !== 1) {
-			parentStackTrace.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "one_valid_answer_required"});
+			parentStackTrace.push({
+				occuredAt: {type: "question", id: this.getQuestionIndex()},
+				reason: "one_valid_answer_required"
+			});
 		}
 		return parentStackTrace;
 	}
@@ -71,11 +74,11 @@ export class SingleChoiceQuestion extends AbstractChoiceQuestion {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
 	 * @returns {String} The name of the instantiated class
 	 */
-	typeName () {
+	typeName() {
 		return "SingleChoiceQuestion";
 	}
 
-	translationReferrer () {
+	translationReferrer() {
 		return "view.questions.single_choice_question";
 	}
 }

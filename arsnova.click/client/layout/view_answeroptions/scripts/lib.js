@@ -20,10 +20,11 @@ import {Session} from 'meteor/session';
 import {Tracker} from 'meteor/tracker';
 import {jQuery} from 'meteor/jquery';
 import {noUiSlider} from 'meteor/arsnova.click:nouislider';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {TAPi18n} from 'meteor/tap:i18n';
 import {Router} from 'meteor/iron:router';
 import {answerTextSchema} from '/lib/answeroptions/collection.js';
+import {SurveyQuestion} from '/lib/questions/question_survey.js';
 import {calculateHeaderSize, calculateTitelHeight} from '/client/layout/region_header/lib.js';
 import * as footerElements from "/client/layout/region_footer/scripts/lib.js";
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
@@ -270,13 +271,13 @@ export const renderAnsweroptionItems = function () {
 		).append(
 			"<input type='text' class='answer_row_text tabbable' id='answerOptionText_Number" + number + "' placeholder='" + TAPi18n.__("view.answeroptions.answeroptiontext_placeholder") + "' value='" + item.getAnswerText() + "' aria-valuenow='" + item.getAnswerText() + "' maxlength='" + answerTextSchema.max + "' aria-multiline='false' autocomplete='off' autocorrect='off' autocapitalize='off' spellcheck='false' />"
 		);
-		if (typeName !== "SurveyQuestion") {
+		if (!(questionItem instanceof SurveyQuestion)) {
 			answerWrapper.append(
 				$("<input type='checkbox' role='switch' id='answerOption-" + number + "' name='switch' data-width='80' title='answerOption-" + number + "' class='tabbable isCorrectOption tabbable'/>").prop('checked', item.getIsCorrect())
 			);
 		}
 		$('#answerOptionWrapper').append($("<div class='answerElementContextWrapper' id='" + number + "_answeroption' class='draggable' role='listitem'></div>").append(answerWrapper));
-		if (typeName !== "YesNoSingleChoiceQuestion" && typeName !== "TrueFalseSingleChoiceQuestion") {
+		if (["YesNoSingleChoiceQuestion", "TrueFalseSingleChoiceQuestion", "ABCDSingleChoiceQuestion"].indexOf(typeName) === -1) {
 			const contextMenu = $('<div class="contextMenu"/>').append(
 				"<div class='moveAnsweroptionUp contextMenuItem'><span class='glyphicon glyphicon-chevron-up' aria-hidden='true'></span></div>",
 				"<div class='moveAnsweroptionDown contextMenuItem'><span class='glyphicon glyphicon-chevron-down' aria-hidden='true'></span></div>"
@@ -289,7 +290,7 @@ export const renderAnsweroptionItems = function () {
 	});
 	$('#config_showAnswerContentOnButtons_switch').bootstrapToggle(questionItem.getDisplayAnswerText() ? "on" : "off");
 	$('#config_showOneAnswerPerRow_switch').bootstrapToggle(questionItem.getShowOneAnswerPerRow() ? "on" : "off");
-	if (typeName === "SurveyQuestion") {
+	if (questionItem instanceof SurveyQuestion) {
 		$('#config_multipleSelectionSurvey_switch').bootstrapToggle(questionItem.getMultipleSelectionEnabled() ? "on" : "off");
 	}
 	formatIsCorrectButtons();

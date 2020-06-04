@@ -1,18 +1,18 @@
 
 #createTimerView {
-	.input-group-slider {
-		input {
-			width: 30%;
-			float:left;
-		}
-		p {
-			width: 60%;
-			line-height: 50px;
-			margin: 0;
-		}
-	}
-	#parsedSeconds {
-		font-size: 20px;
-		margin: 20px 0 0;
-	}
+  .input-group-slider {
+    input {
+      width: 30%;
+      float: left;
+    }
+    p {
+      width: 60%;
+      line-height: 50px;
+      margin: 0;
+    }
+  }
+  #parsedSeconds {
+    font-size: 20px;
+    margin: 20px 0 0;
+  }
 }

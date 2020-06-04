@@ -160,21 +160,36 @@ export function getCurrentFooterElements() {
 
 export function getFooterElementById(id) {
 	switch (id) {
-		case "translation": return footerElemTranslation;
-		case "sound": return footerElemSound;
-		case "reading-confirmation": return footerElemReadingConfirmation;
-		case "theme": return footerElemTheme;
-		case "import": return footerElemImport;
-		case "hashtagManagement": return footerElemHashtagManagement;
-		case "fullscreen": return footerElemFullscreen;
-		case "home": return footerElemHome;
-		case "about": return footerElemAbout;
-		case "qr-code": return footerElemQRCode;
-		case "nicknames": return footerElemNicknames;
-		case "edit-quiz": return footerElemEditQuiz;
-		case "show-more": return footerElemShowMore;
-		case "footerElemProductTour": return footerElemProductTour;
-		case "footerElemResponseProgress": return footerElemResponseProgress;
+		case "translation":
+			return footerElemTranslation;
+		case "sound":
+			return footerElemSound;
+		case "reading-confirmation":
+			return footerElemReadingConfirmation;
+		case "theme":
+			return footerElemTheme;
+		case "import":
+			return footerElemImport;
+		case "hashtagManagement":
+			return footerElemHashtagManagement;
+		case "fullscreen":
+			return footerElemFullscreen;
+		case "home":
+			return footerElemHome;
+		case "about":
+			return footerElemAbout;
+		case "qr-code":
+			return footerElemQRCode;
+		case "nicknames":
+			return footerElemNicknames;
+		case "edit-quiz":
+			return footerElemEditQuiz;
+		case "show-more":
+			return footerElemShowMore;
+		case "footerElemProductTour":
+			return footerElemProductTour;
+		case "footerElemResponseProgress":
+			return footerElemResponseProgress;
 	}
 }
 

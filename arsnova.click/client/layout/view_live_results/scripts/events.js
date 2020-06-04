@@ -85,7 +85,7 @@ Template.liveResults.events({
 });
 
 Template.liveResultsFooterNavButtons.events({
-	'click #backButton': (event)=> {
+	'click #backButton': (event) => {
 		event.stopPropagation();
 		const returnToLobby = function () {
 			$('.sound-button').show();
@@ -109,7 +109,7 @@ Template.liveResultsFooterNavButtons.events({
 			returnToLobby();
 		}
 	},
-	'click #startNextQuestion': (event)=> {
+	'click #startNextQuestion': (event) => {
 		event.stopPropagation();
 
 		const questionDoc = QuestionGroupCollection.findOne();
@@ -133,18 +133,18 @@ Template.liveResultsFooterNavButtons.events({
 			startCountdown(questionIndex);
 		});
 	},
-	'click #goGlobalRanking': (event)=> {
+	'click #goGlobalRanking': (event) => {
 		event.stopPropagation();
 		if (!localData.containsHashtag(Router.current().params.quizName)) {
 			TimerMap.routeToLeaderboard.start();
 		}
 		Router.go("/" + Router.current().params.quizName + "/leaderBoard/all");
 	},
-	'click #showNextQuestionDialog': (event)=> {
+	'click #showNextQuestionDialog': (event) => {
 		event.stopPropagation();
 		Meteor.call("EventManagerCollection.showReadConfirmedForIndex", Router.current().params.quizName, EventManagerCollection.findOne().questionIndex + 1);
 	},
-	"click #abortCountdown": ()=> {
+	"click #abortCountdown": () => {
 		Meteor.call("EventManagerCollection.abortCountdown", Router.current().params.quizName, EventManagerCollection.findOne().questionIndex);
 	}
 });

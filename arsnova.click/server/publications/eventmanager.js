@@ -16,12 +16,20 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 
-Meteor.publish('EventManagerCollection.join', (hashtag)=> {
+Meteor.publish('EventManagerCollection.join', (hashtag) => {
 	new SimpleSchema({
 		hashtag: {type: String}
 	}).validate({hashtag: hashtag});
 	return EventManagerCollection.find({hashtag});
+});
+
+Meteor.publish('EventManagerCollection.overview', () => {
+	return EventManagerCollection.find({}, {
+		fields: {
+			sessionStatus: 1
+		}
+	});
 });

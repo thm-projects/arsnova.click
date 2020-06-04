@@ -1,4 +1,3 @@
-
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
@@ -14,13 +13,13 @@ Template.quizManager.helpers({
 	getDescriptionForQuestionType: function (typeName) {
 		return "view.question_type.description." + typeName;
 	},
-	hasQuestionsAdded: ()=> {
+	hasQuestionsAdded: () => {
 		if (!Session.get("questionGroup")) {
 			return;
 		}
 		return Session.get("questionGroup").getQuestionList().length > 0;
 	},
-	isFirstStart: ()=> {
+	isFirstStart: () => {
 		if (!Session.get("questionGroup")) {
 			return;
 		}
@@ -34,5 +33,23 @@ Template.quizManagerDetails.helpers({
 	},
 	isXsDevice: function () {
 		return $(document).width() <= 768;
+	},
+	canEditQuestionText: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() !== 'ABCDSingleChoiceQuestion';
+	},
+	canEditAnsweroptions: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() !== 'ABCDSingleChoiceQuestion';
+	},
+	canEditTimer: function () {
+		return true;
+	},
+	canEditQuestionType: function () {
+		return true;
 	}
 });

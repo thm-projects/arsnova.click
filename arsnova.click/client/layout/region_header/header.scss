@@ -14,64 +14,65 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
-
 @import "../global/styles/appearance.scss";
 
 .arsnova-logo {
-	cursor: pointer;
-	#arsnova-logo-image {
-		enable-background: new 0 0 1024 1024;
-		width: 8vw;
-		.arsnova-logo-origin {
-			font-size: 200px;
-			text-anchor: middle;
-			animation-duration: 2s;
-			animation-iteration-count: infinite;
-		}
-		.arsnova-logo-ars {
-			font-size: 261px;
-		}
-		.arsnova-logo-nova {
-			font-size: 261px;
-		}
-		.arsnova-logo-click {
-			font-size: 400px;
-			text-anchor: middle;
-		}
-	}
+  cursor: pointer;
+  #arsnova-logo-image {
+    enable-background: new 0 0 1024 1024;
+    width: 8vw;
+    .arsnova-logo-origin {
+      font-size: 200px;
+      text-anchor: middle;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+    }
+    .arsnova-logo-ars {
+      font-size: 261px;
+    }
+    .arsnova-logo-nova {
+      font-size: 261px;
+    }
+    .arsnova-logo-click {
+      font-size: 400px;
+      text-anchor: middle;
+    }
+  }
 }
 
 .header-title {
-	p {
-		margin: 0;
-	}
-	cursor: default;
+  p {
+    margin: 0;
+  }
+  cursor: default;
 }
 
 .qr-code-container {
-	top: 0;
-	left: 0;
-	z-index: 1060;
-	position: fixed;
-	border-radius: $corner-radius;
+  top: 0;
+  left: 0;
+  z-index: 1060;
+  position: fixed;
+  border-radius: $corner-radius;
 
-	canvas {
-		&:hover {
-			cursor: pointer;
-		}
-	}
+  canvas {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
+
 .qr-code-container-close {
-	position: absolute;
-	font-size: 4rem;
+  position: absolute;
+  font-size: 4rem;
 
-	.glyphicon-remove {
-		border-radius: $corner-radius;
-		cursor: pointer;
-	}
+  .glyphicon-remove {
+    border-radius: $corner-radius;
+    cursor: pointer;
+  }
 }
+
 .qr-code-label {
-	font-size: 3rem;
-	text-align: left;
-	line-height: 50px;
+  font-size: 3rem;
+  text-align: left;
+  line-height: 50px;
 }

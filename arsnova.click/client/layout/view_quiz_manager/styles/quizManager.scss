@@ -1,108 +1,123 @@
-
 @import "../../../layout/global/styles/appearance";
 
 #quizManager {
-	.sortable-placeholder {
-		border-radius: $corner-radius;
-		opacity: 0.2;
-		height: 30px;
-	}
-	.remove-sortable-placeholder {
-		border: none;
-		font-size: 14px;
-	}
-	ul {
-		padding: 0;
-		margin: 0;
+  .sortable-placeholder {
+    border-radius: $corner-radius;
+    opacity: 0.2;
+    height: 30px;
+  }
+  .remove-sortable-placeholder {
+    border: none;
+    font-size: 14px;
+  }
+  ul {
+    padding: 0;
+    margin: 0;
 
-		li {
-			list-style-type: none;
-			cursor: move;
+    li {
+      list-style-type: none;
+      cursor: move;
 
-			&.draggable {
-				z-index: 1080 !important;
-			}
-		}
+      &.draggable {
+        z-index: 1080 !important;
+      }
+    }
 
-		&#added_questions_wrapper {
-			li {
-				text-overflow: ellipsis;
-				overflow: hidden;
-				white-space: nowrap;
-				text-align: left;
-			}
-		}
+    &#added_questions_wrapper {
+      li {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        text-align: left;
+      }
+    }
 
-		&#available_questions_wrapper,
-		&#added_questions_wrapper {
-			.questionElementWrapper {
-				margin: 5px 0;
-				padding: 5px;
-				border-radius: $corner-radius;
-				position: relative;
-				text-align: center;
-				li {
-					height: 20px;
-					line-height: 20px;
-					&[data-valid='true'] {
-						&:before {
-							content: "\2714";
-							margin-left: 5px;
-							margin-right: 10px;
-						}
-					}
-					&[data-valid='false'] {
-						&:before {
-							content: "\270d";
-							margin-left: 5px;
-							margin-right: 10px;
-						}
-					}
-				}
+    &#available_questions_wrapper,
+    &#added_questions_wrapper {
+      .questionElementWrapper {
+        margin: 5px 0;
+        padding: 5px;
+        border-radius: $corner-radius;
+        position: relative;
+        text-align: center;
+        li {
+          height: 20px;
+          line-height: 20px;
+          &[data-valid='true'] {
+            &:before {
+              content: "\2714";
+              margin-left: 5px;
+              margin-right: 10px;
+            }
+          }
+          &[data-valid='false'] {
+            &:before {
+              content: "\270d";
+              margin-left: 5px;
+              margin-right: 10px;
+            }
+          }
+        }
 
-				&.displayContextMenu {
-					.contextMenu {
-						display: flex;
-						@-webkit-keyframes fadeIn {
-							from { opacity: 0; }
-							to { opacity: 1; }
-						}
-						@keyframes fadeIn {
-							from { opacity: 0; }
-							to { opacity: 1; }
-						}
-						-webkit-animation: fadeIn 0.2s;
-						animation: fadeIn 0.2s;
-						.contextMenuItem {
-							cursor: pointer;
-							flex: 100% 1 1;
-							font-size: 20px;
-							text-align: center;
+        &.displayContextMenu {
+          .contextMenu {
+            display: flex;
+            @-webkit-keyframes fadeIn {
+              from {
+                opacity: 0;
+              }
+              to {
+                opacity: 1;
+              }
+            }
+            @keyframes fadeIn {
+              from {
+                opacity: 0;
+              }
+              to {
+                opacity: 1;
+              }
+            }
+            -webkit-animation: fadeIn 0.2s;
+            animation: fadeIn 0.2s;
+            .contextMenuItem {
+              cursor: pointer;
+              flex: 100% 1 1;
+              font-size: 20px;
+              text-align: center;
 
-							&:hover {
-								border-bottom: 1px solid;
-							}
-						}
-					}
-				}
-				.contextMenu {
-					@-webkit-keyframes fadeOut {
-						from { opacity: 0; }
-						to { opacity: 1; }
-					}
-					@keyframes fadeOut {
-						from { opacity: 0; }
-						to { opacity: 1; }
-					}
-					display: none;
-					-webkit-animation: fadeOut 0.2s;
-					animation: fadeOut 0.2s;
-				}
-			}
+              &:hover {
+                border-bottom: 1px solid;
+              }
+            }
+          }
+        }
+        .contextMenu {
+          @-webkit-keyframes fadeOut {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+          @keyframes fadeOut {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+          display: none;
+          -webkit-animation: fadeOut 0.2s;
+          animation: fadeOut 0.2s;
+        }
+      }
 
-			.ui-draggable-dragging {
-				width: calc(100% - 30px) !important;
-			}
-		}
-	}
+      .ui-draggable-dragging {
+        width: calc(100% - 30px) !important;
+      }
+    }
+  }
 }

@@ -25,15 +25,17 @@ Meteor.methods({
 		if (Meteor.isClient && sessionConfigObject instanceof AbstractSessionConfiguration) {
 			sessionConfigObject = sessionConfigObject.serialize();
 		}
-		SessionConfigurationCollection.update({hashtag: sessionConfigObject.hashtag}, {$set: {
-			hashtag: sessionConfigObject.hashtag,
-			music: sessionConfigObject.music,
-			nicks: sessionConfigObject.nicks,
-			theme: sessionConfigObject.theme,
-			readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled,
-			showResponseProgress: sessionConfigObject.showResponseProgress,
-			confidenceSliderEnabled: sessionConfigObject.confidenceSliderEnabled
-		}}, {upsert: true});
+		SessionConfigurationCollection.update({hashtag: sessionConfigObject.hashtag}, {
+			$set: {
+				hashtag: sessionConfigObject.hashtag,
+				music: sessionConfigObject.music,
+				nicks: sessionConfigObject.nicks,
+				theme: sessionConfigObject.theme,
+				readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled,
+				showResponseProgress: sessionConfigObject.showResponseProgress,
+				confidenceSliderEnabled: sessionConfigObject.confidenceSliderEnabled
+			}
+		}, {upsert: true});
 		EventManagerCollection.update({hashtag: sessionConfigObject.hashtag}, {
 			$push: {
 				eventStack: {
@@ -55,15 +57,17 @@ Meteor.methods({
 		if (Meteor.isClient && sessionConfigObject instanceof AbstractSessionConfiguration) {
 			sessionConfigObject = sessionConfigObject.serialize();
 		}
-		SessionConfigurationCollection.update({hashtag: sessionConfigObject.hashtag}, {$set: {
-			hashtag: sessionConfigObject.hashtag,
-			music: sessionConfigObject.music,
-			nicks: sessionConfigObject.nicks,
-			theme: sessionConfigObject.theme,
-			readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled,
-			showResponseProgress: sessionConfigObject.showResponseProgress,
-			confidenceSliderEnabled: sessionConfigObject.confidenceSliderEnabled
-		}});
+		SessionConfigurationCollection.update({hashtag: sessionConfigObject.hashtag}, {
+			$set: {
+				hashtag: sessionConfigObject.hashtag,
+				music: sessionConfigObject.music,
+				nicks: sessionConfigObject.nicks,
+				theme: sessionConfigObject.theme,
+				readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled,
+				showResponseProgress: sessionConfigObject.showResponseProgress,
+				confidenceSliderEnabled: sessionConfigObject.confidenceSliderEnabled
+			}
+		});
 		EventManagerCollection.update({hashtag: sessionConfigObject.hashtag}, {
 			$push: {
 				eventStack: {

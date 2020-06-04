@@ -14,75 +14,74 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
-
 @import "../../../layout/global/styles/appearance";
 
 #votingView {
-	.answer-row {
-		margin-top: 10px;
-	}
+  .answer-row {
+    margin-top: 10px;
+  }
 
-	#buttonContainer {
-		margin: 0 auto;
-		overflow: hidden;
-	}
+  #buttonContainer {
+    margin: 0 auto;
+    overflow: hidden;
+  }
 
-	.sendResponse {
-		font-size: 1px;
-		position: relative;
-		object {
-			width: calc(100% - 10px);
-			height: calc(100% - 60px);
-			top: 5px;
-			position: absolute;
-			left: 5px;
-		}
-		p {
-			margin: 0;
-		}
-	}
+  .sendResponse {
+    font-size: 1px;
+    position: relative;
+    object {
+      width: calc(100% - 10px);
+      height: calc(100% - 60px);
+      top: 5px;
+      position: absolute;
+      left: 5px;
+    }
+    p {
+      margin: 0;
+    }
+  }
 
-	.btn-answerOption {
-		width: 100%;
-		height: 100%;
-		white-space: normal;
-	}
+  .btn-answerOption {
+    width: 100%;
+    height: 100%;
+    white-space: normal;
+  }
 
-	.answer-selected{
-		-webkit-transition: background 500ms ease-in-out;
-		-moz-transition: background 500ms ease-in-out;
-		-ms-transition: background 500ms ease-in-out;
-		-o-transition: background 500ms ease-in-out;
-		transition: background 500ms ease-in-out;
-	}
+  .answer-selected {
+    -webkit-transition: background 500ms ease-in-out;
+    -moz-transition: background 500ms ease-in-out;
+    -ms-transition: background 500ms ease-in-out;
+    -o-transition: background 500ms ease-in-out;
+    transition: background 500ms ease-in-out;
+  }
 
-	.answer-disabled {
-		opacity: 1 !important;
-	}
+  .answer-disabled {
+    opacity: 1 !important;
+  }
 
-	.rangedValues {
-		text-align: center;
-		margin-bottom: 5vh;
-		h1 {
-			margin-bottom: 5vh;
-		}
-		input[type="number"] {
-			text-align: center;
-			width: 100%;
-			border-radius: $corner-radius
-		}
-	}
+  .rangedValues {
+    text-align: center;
+    margin-bottom: 5vh;
+    h1 {
+      margin-bottom: 5vh;
+    }
+    input[type="number"] {
+      text-align: center;
+      width: 100%;
+      border-radius: $corner-radius
+    }
+  }
 
-  	.freeTextFrame {
-	  	h1 {
-		  	text-align: center;
-		}
-	}
+  .freeTextFrame {
+    h1 {
+      text-align: center;
+    }
+  }
 }
 
 #votingViewFooterNavButtons {
-	#forwardButton,
-	#abstentionButton {
-		width: 100%;
-	}
+  #forwardButton,
+  #abstentionButton {
+    width: 100%;
+  }
 }

@@ -17,6 +17,7 @@
 
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
+import {Router} from 'meteor/iron:router';
 import {getQuestionTypes} from '/client/layout/view_questions/scripts/lib.js';
 
 Template.quizSummary.helpers({
@@ -30,7 +31,7 @@ Template.quizSummary.helpers({
 		if (!Session.get("questionGroup")) {
 			return;
 		}
-		return window.location.protocol + "//" + window.location.host + "/" + Session.get("questionGroup").getHashtag().replace(/ /g,"+");
+		return window.location.protocol + "//" + window.location.host + "/" + Session.get("questionGroup").getHashtag().replace(/ /g, "+");
 	},
 	getQuestionCount: function () {
 		if (!Session.get("questionGroup")) {
@@ -141,12 +142,24 @@ Template.quizSummary.helpers({
 		return "view.quiz_summary." + Session.get("questionGroup").getConfiguration().getNickSettings().getRestrictToCASLogin();
 	},
 	isVotingQuestion: function (questionType) {
-		return questionType === "SurveyQuestion";
+		return ["SurveyQuestion"].indexOf(questionType) > -1;
 	},
 	isRangedQuestion: function (questionType) {
 		return questionType === "RangedQuestion";
 	},
 	isFreeTextQuestion: function (questionType) {
 		return questionType === "FreeTextQuestion";
+	},
+	showQuestionText: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() !== 'ABCDSingleChoiceQuestion';
+	},
+	showAnsweroptions: function () {
+		if (!Session.get("questionGroup")) {
+			return;
+		}
+		return Session.get("questionGroup").getQuestionList()[Router.current().params.questionIndex].typeName() !== 'ABCDSingleChoiceQuestion';
 	}
 });

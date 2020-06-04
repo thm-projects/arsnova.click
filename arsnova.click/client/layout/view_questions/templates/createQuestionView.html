@@ -16,8 +16,9 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="createQuestionView">
-	<div class="row full-screen-content">
-        <div id="editQuestionText" class="col-md-12 col-md-6" data-intro="{{_ "plugins.markdown_bar.info_content"}}" aria-label="{{_ "plugins.markdown_bar.info_content"}}">
+    <div class="row full-screen-content">
+        <div id="editQuestionText" class="col-md-12 col-md-6" data-intro="{{_ "plugins.markdown_bar.info_content"}}"
+             aria-label="{{_ "plugins.markdown_bar.info_content"}}">
             {{> markdownBar }}
             <textarea class="round-corners-markdown textarea placeholder-align-center tabbable"
                       role="textbox"
@@ -30,7 +31,8 @@
             >{{questionText}}</textarea>
         </div>
         <div id="previewQuestionContentWrapper" class="hidden-xs hidden-sm col-md-6">
-            <div class="center-block" data-intro="{{_ "view.questions.description.preview"}}" aria-label="{{_ "view.questions.description.preview"}}">
+            <div class="center-block" data-intro="{{_ "view.questions.description.preview"}}"
+                 aria-label="{{_ "view.questions.description.preview"}}">
                 {{> plain_view}}
                 <div id="markdownPreviewWrapper">
                     <h2 class="text-center" role="heading">{{_ "view.questions.preview"}}</h2>
@@ -38,7 +40,8 @@
                         {{#if isVideoQuestionText this}}
                             {{#with getVideoData this}}
                                 <object width="100%" height="100%">
-                                    <param name="movie" value="{{this.origin}}{{this.videoId}}?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3"/>
+                                    <param name="movie"
+                                           value="{{this.origin}}{{this.videoId}}?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3"/>
                                     <param name="allowFullScreen" value="true"/>
                                     <param name="allowscriptaccess" value="always"/>
                                     {{{this.embedTag}}}
@@ -51,5 +54,5 @@
                 </div>
             </div>
         </div>
-	</div>
+    </div>
 </template>

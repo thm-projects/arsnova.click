@@ -4,22 +4,22 @@
   cursor: pointer;
 
   @media (orientation: portrait) {
-	right: 8vh;
+    right: 8vh;
   }
   @media (orientation: landscape) {
-	right: 8vw;
+    right: 8vw;
   }
 
   #connectionQualityImage {
-	position: absolute;
+    position: absolute;
 
-	@media (orientation: portrait) {
-	  height: 8vmin;
-	  width: 8vmin;
-	}
-  	@media (orientation: landscape) {
-	  height: 8vw;
-	  width: 8vw;
-	}
+    @media (orientation: portrait) {
+      height: 8vmin;
+      width: 8vmin;
+    }
+    @media (orientation: landscape) {
+      height: 8vw;
+      width: 8vw;
+    }
   }
 }

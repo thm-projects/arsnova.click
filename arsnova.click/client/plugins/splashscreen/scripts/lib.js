@@ -45,19 +45,19 @@ export function closeSplashscreen() {
  * registered any root-level event listeners. You can pass the event removing calls to the onDestroyed option.
  *
  * Valid construction parameters are:
- * - autostart	  -> True, if the splashscreen should show as soon as it has been rendered
+ * - autostart      -> True, if the splashscreen should show as soon as it has been rendered
  * - templateName   -> The Meteor Template which is used to display the splashscreen
- * - instanceId	 -> If you define and display multiple splashscreens of the same template on one page you'll need to give each of them unique id's
+ * - instanceId     -> If you define and display multiple splashscreens of the same template on one page you'll need to give each of them unique id's
  * - closeOnButton  -> A valid jQuery selector which shall trigger the close event. A click on the modal or the splashscreen itself will not trigger the close event if this option is set.
- * - onCreated	  -> Callback function which is called with the current instance as argument when the splashscreen is created
- * - onRendered	 -> Callback function which is called with the current instance as argument when the splashscreen template is rendered
- * - onDestroyed	-> Callback function which is called with the current instance as argument when the splashscreen template is destroyed
+ * - onCreated      -> Callback function which is called with the current instance as argument when the splashscreen is created
+ * - onRendered     -> Callback function which is called with the current instance as argument when the splashscreen template is rendered
+ * - onDestroyed    -> Callback function which is called with the current instance as argument when the splashscreen template is destroyed
  *
  * Read-Only members are:
  * - templateInstance   -> The Blaze template object
  * - templateSelector   -> The jQuery object of the current splashscreen template
- * - isCreated		  -> True, if the Splashscreen object has been created
- * - isRendered		 -> True, if the Splashscreen template has been rendered
+ * - isCreated          -> True, if the Splashscreen object has been created
+ * - isRendered         -> True, if the Splashscreen template has been rendered
  */
 export class Splashscreen {
 	/**
@@ -65,7 +65,7 @@ export class Splashscreen {
 	 *
 	 * @param options Must be an object with optional parameters
 	 */
-	constructor (options) {
+	constructor(options) {
 		this.options = {
 			autostart: options.autostart || false,
 			templateName: options.templateName || "splashscreen",
@@ -90,7 +90,7 @@ export class Splashscreen {
 		this.rendered();
 		this.isRendered = true;
 
-		$(document).on('keyup',function (event) {
+		$(document).on('keyup', function (event) {
 			if (event.keyCode === 27) {
 				closeSplashscreen(event);
 			}
@@ -101,7 +101,7 @@ export class Splashscreen {
 	 * This method will be called after the options have been parsed by the constructor
 	 * If a callback to options.onCreated has been specified this method will run the callback
 	 */
-	created () {
+	created() {
 		if (typeof this.options.onCreated === "function") {
 			this.options.onCreated(this);
 		}
@@ -111,7 +111,7 @@ export class Splashscreen {
 	 * This method will be called after the created method
 	 * If a callback to options.onRendered has been specified this method will run the callback
 	 */
-	rendered () {
+	rendered() {
 		let template = Template[this.options.templateName];
 		if (!template) {
 			throw new Error('Invalid template name');
@@ -135,7 +135,7 @@ export class Splashscreen {
 	 * This method must be called manually
 	 * If a callback to options.onDestroyed has been specified this method will run the callback
 	 */
-	destroy () {
+	destroy() {
 		if (!this.templateInstance) {
 			return;
 		}
@@ -151,7 +151,7 @@ export class Splashscreen {
 	/**
 	 * A call of this method will close (hide) the splashscreen
 	 */
-	close () {
+	close() {
 		this.templateSelector.off('hide.bs.modal').off('click', this.options.closeOnButton);
 		this.templateSelector.modal("hide");
 		this.isOpen = false;
@@ -161,7 +161,7 @@ export class Splashscreen {
 	/**
 	 * A call of this method will show (display) the splashscreen
 	 */
-	open () {
+	open() {
 		let self = this;
 		if (self.options.closeOnButton) {
 			let hasClickedOnCloseButton = false;
@@ -190,7 +190,7 @@ export class Splashscreen {
 
 
 export class ErrorSplashscreen extends Splashscreen {
-	constructor (options) {
+	constructor(options) {
 		options.templateName = "errorSplashscreen";
 		options.closeOnButton = ".splashscreen-container-close>.glyphicon-remove";
 		super(options);
@@ -201,7 +201,7 @@ export class ErrorSplashscreen extends Splashscreen {
 		this.setErrorText(options.errorMessage);
 	}
 
-	setErrorText (text) {
+	setErrorText(text) {
 		if (this.isRendered) {
 			$(this.templateSelector).find(".modal-header>h2").text(TAPi18n.__("plugins.splashscreen.error.title"));
 			$(this.templateSelector).find(".modal-body").text(TAPi18n.__(text));
@@ -229,7 +229,7 @@ export function showReadingConfirmationSplashscreen(index) {
 						hashtag: Router.current().params.quizName,
 						questionIndex: index,
 						nick: sessionStorage.getItem(Router.current().params.quizName + "nick")
-					}, (err)=> {
+					}, (err) => {
 						if (err) {
 							new ErrorSplashscreen({
 								autostart: true,
@@ -305,18 +305,31 @@ export const parseMarkdown = {
 		return result;
 	},
 	isCorrectAnswer: function (answerindex) {
-		return AnswerOptionCollection.findOne({answerOptionNumber: answerindex, questionIndex: Template.instance().data.questionIndex}).isCorrect;
+		return AnswerOptionCollection.findOne({
+			answerOptionNumber: answerindex,
+			questionIndex: Template.instance().data.questionIndex
+		}).isCorrect;
 	},
 	isVideoQuestionText: function (questionText) {
-		return !/(^!)?\[.*\]\(.*\)/.test(questionText) && /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(questionText) && (/youtube/.test(questionText) || /youtu.be/.test(questionText) || /vimeo/.test(questionText));
+		return !/(^!)?\[.*\]\(.*\)/.test(questionText) && /((https?:\/\/)?[\w-]+([:0-9\.\w-]*)+\.?(:\d+)?(\/\S*\w)?)/.test(questionText) && (/youtube/.test(questionText) || /youtu\.be/.test(questionText) || /vimeo/.test(questionText));
+	},
+	isLocalHostedVideo: function () {
+		return Meteor.settings.public.useLocalAssetsCache;
 	},
 	getVideoData: function (questionText) {
 		const result = {};
+		if (/_(youtube|vimeo)/.test(questionText)) {
+			result.origin = questionText;
+			result.srcAttr = result.origin;
+			result.videoId = '';
+			result.embedTag = '';
+			return result;
+		}
 		if (/youtube/.test(questionText)) {
-			result.origin  = "https://www.youtube.com/embed/";
+			result.origin = "https://www.youtube.com/embed/";
 			result.videoId = questionText.substr(questionText.lastIndexOf("=") + 1, questionText.length);
-		} else if (/youtu.be/.test(questionText)) {
-			result.origin  = "https://www.youtube.com/embed/";
+		} else if (/youtu\.be/.test(questionText)) {
+			result.origin = "https://www.youtube.com/embed/";
 			result.videoId = questionText.substr(questionText.lastIndexOf("/") + 1, questionText.length);
 		} else if (/vimeo/.test(questionText)) {
 			result.origin = "https://player.vimeo.com/video/";

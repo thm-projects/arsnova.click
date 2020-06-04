@@ -1,3 +1,15 @@
+# **DEPRECATED**
+
+This project is deprecated in favor of arsnova.click v2.
+
+Please submit issues and feature requests of arsnova.click here: [arsnova.click-v2](https://github.com/thm-projects/arsnova.click-v2)
+
+You can fetch the latest updates from the [backend](https://github.com/thm-projects/arsnova.click-v2-backend) and [frontend](https://github.com/thm-projects/arsnova-click-v2-frontend) repos
+or use the docker images: [Backend Docker](https://hub.docker.com/repository/docker/arsnova/arsnova-click-backend) and [Frontend Docker](https://hub.docker.com/repository/docker/arsnova/arsnova-click-frontend)
+
+---
+
+
 # Project Vision
 
 [arsnova.click](http://arsnova.click) is a little bit [Kahoot!](https://getkahoot.com/) and a little bit [ARSnova](https://arsnova.eu/).

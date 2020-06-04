@@ -10,7 +10,7 @@ export class TrueFalseSingleChoiceQuestion extends SingleChoiceQuestion {
 	 * @see AbstractChoiceQuestion.constructor()
 	 * @param options
 	 */
-	constructor (options) {
+	constructor(options) {
 		if (typeof options.type !== "undefined" && options.type !== "TrueFalseSingleChoiceQuestion") {
 			throw new TypeError("Invalid construction type while creating new TrueFalseSingleChoiceQuestion");
 		}
@@ -41,7 +41,7 @@ export class TrueFalseSingleChoiceQuestion extends SingleChoiceQuestion {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-clone
 	 * @returns {TrueFalseSingleChoiceQuestion} An independent deep copy of the current instance
 	 */
-	clone () {
+	clone() {
 		return new TrueFalseSingleChoiceQuestion(this.serialize());
 	}
 
@@ -49,7 +49,7 @@ export class TrueFalseSingleChoiceQuestion extends SingleChoiceQuestion {
 	 * Serialize the instance object to a JSON compatible object
 	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
 	 */
-	serialize () {
+	serialize() {
 		return Object.assign(super.serialize(), {type: "TrueFalseSingleChoiceQuestion"});
 	}
 
@@ -58,19 +58,19 @@ export class TrueFalseSingleChoiceQuestion extends SingleChoiceQuestion {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
 	 * @returns {String} The name of the instantiated class
 	 */
-	typeName () {
+	typeName() {
 		return "TrueFalseSingleChoiceQuestion";
 	}
 
-	translationReferrer () {
+	translationReferrer() {
 		return "view.questions.single_choice_question_true_false";
 	}
 
-	removeAnswerOption () {
+	removeAnswerOption() {
 		throw Error("AnswerOptions cannot be modified for this type of Question!");
 	}
 
-	addDefaultAnswerOption () {
+	addDefaultAnswerOption() {
 		throw Error("AnswerOptions cannot be modified for this type of Question!");
 	}
 }

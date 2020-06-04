@@ -1,39 +1,65 @@
 <template name="quizSummary">
     <div class="row">
         <div class="col-md-12">
-            <div id="quizSummaryHeader" class="quizSummary margin-title" role="list" data-intro="{{#if showHeader}}{{_ "view.quiz_summary.description.header"}}{{/if}}" aria-label="{{_ "view.quiz_summary.description.header"}}">
+            <div id="quizSummaryHeader" class="quizSummary margin-title" role="list"
+                 data-intro="{{#if showHeader}}{{_ "view.quiz_summary.description.header"}}{{/if}}"
+                 aria-label="{{_ "view.quiz_summary.description.header"}}">
                 {{#if showHeader}}
                     <p role="listitem">{{_ "view.quiz_summary.quiz_name"}}: {{getSessionName}}</p>
-                    <p role="listitem" id="quizSummarySessionUrl" data-intro="{{_ "view.quiz_summary.description.session_url"}}" aria-label="{{_ "view.quiz_summary.description.session_url"}}">{{_ "view.quiz_summary.quiz_url"}}<span id="sessionUrl">{{getSessionUrl}}</span></p>
+                    <p role="listitem" id="quizSummarySessionUrl"
+                       data-intro="{{_ "view.quiz_summary.description.session_url"}}"
+                       aria-label="{{_ "view.quiz_summary.description.session_url"}}">{{_ "view.quiz_summary.quiz_url"}}
+                        <span id="sessionUrl">{{getSessionUrl}}</span></p>
                     <p role="listitem">{{_ "view.quiz_summary.question_amount"}}: {{getQuestionCount}}</p>
-                    <p role="listitem" id="quizSummaryQuestionGroupValidation" data-intro="{{_ "view.quiz_summary.description.question_group_validation"}}" aria-label="{{_ "view.quiz_summary.description.question_group_validation"}}">{{_ "view.quiz_summary.validation_question_group"}}: <span class="{{#if isQuestionGroupValid}}success{{else}}failed{{/if}}">{{_ getQuestionGroupValidation}}</span></p>
+                    <p role="listitem" id="quizSummaryQuestionGroupValidation"
+                       data-intro="{{_ "view.quiz_summary.description.question_group_validation"}}"
+                       aria-label="{{_ "view.quiz_summary.description.question_group_validation"}}">{{_
+                            "view.quiz_summary.validation_question_group"}}: <span
+                            class="{{#if isQuestionGroupValid}}success{{else}}failed{{/if}}">{{_
+                            getQuestionGroupValidation}}</span></p>
                     {{#if noSelectedNicks}}
-                        <p role="listitem">{{_ "view.quiz_summary.isRestrictingRudeNicks"}} {{_ getIsRestrictingRudeNicks}}</p>
+                        <p role="listitem">{{_ "view.quiz_summary.isRestrictingRudeNicks"}} {{_
+                                getIsRestrictingRudeNicks}}</p>
                     {{/if}}
-                    <p role="listitem" id="quizSummaryRestrictToCas" data-intro="{{_ "view.quiz_summary.description.restrict_to_cas"}}" aria-label="{{_ "view.quiz_summary.description.restrict_to_cas"}}">{{_ "view.quiz_summary.isRestrictingToCAS"}} {{_ getIsRestrictingToCAS}}</p>
-                    <p role="listitem">{{_ "view.quiz_summary.selected_nicks"}}: {{#if noSelectedNicks}}{{_ "view.quiz_summary.no_selected_nicks"}}{{else}}{{selectedNicksCount}} <span class="tabbable" id="showSelectedNicks">{{_ getShowSelectedNicksText}}</span>{{/if}}</p>
+                    <p role="listitem" id="quizSummaryRestrictToCas"
+                       data-intro="{{_ "view.quiz_summary.description.restrict_to_cas"}}"
+                       aria-label="{{_ "view.quiz_summary.description.restrict_to_cas"}}">{{_
+                            "view.quiz_summary.isRestrictingToCAS"}} {{_ getIsRestrictingToCAS}}</p>
+                    <p role="listitem">{{_ "view.quiz_summary.selected_nicks"}}: {{#if noSelectedNicks}}{{_
+                            "view.quiz_summary.no_selected_nicks"}}{{else}}{{selectedNicksCount}} <span class="tabbable"
+                                                                                                        id="showSelectedNicks">{{_
+                            getShowSelectedNicksText}}</span>{{/if}}</p>
                     <p role="listitem">{{selectedNicks}}</p>
-                    <hr />
+                    <hr/>
                 {{/if}}
                 {{#each getQuestions}}
-                    <div role="listitem" id="quizSummaryQuestionItem" class="questionItem row" data-intro="{{_ "view.quiz_summary.description.question_item"}}">
+                    <div role="listitem" id="quizSummaryQuestionItem" class="questionItem row"
+                         data-intro="{{_ "view.quiz_summary.description.question_item"}}">
                         <div class="col-xs-12">
                             <div class="question">
-                                <h4 role="heading">{{_ "view.quiz_summary.question"}} {{getNormalizedIndex this.getQuestionIndex}}: </h4>
-                                <p>{{_ "view.quiz_summary.text"}}: {{this.getQuestionText}}</p>
+                                <h4 role="heading">{{_ "view.quiz_summary.question"}} {{getNormalizedIndex
+                                        this.getQuestionIndex}}: </h4>
+                                {{#if showQuestionText}}
+                                    <p>{{_ "view.quiz_summary.text"}}: {{this.getQuestionText}}</p>
+                                {{/if}}
                                 <p>{{_ "view.quiz_summary.type"}}: {{_ (getQuestionTypeTranslation this.typeName)}}</p>
                             </div>
                         </div>
-                        <div class="col-xs-12">
+                        {{#if showAnsweroptions}}
+                            <div class="col-xs-12">
                             <div class="answers">
                                 <div>
-                                    <h4 role="heading">{{_ "view.quiz_summary.answer" count=this.getAnswerOptionList.length}}: </h4>
+                                    <h4 role="heading">{{_ "view.quiz_summary.answer"
+                                                           count=this.getAnswerOptionList.length}}: </h4>
                                 </div>
                                 <div role="list">
                                     {{#if isRangedQuestion typeName}}
-                                        <p role="listitem">{{_ "view.answeroptions.ranged_question.correct_value"}}: {{getCorrectValue}}</p>
-                                        <p role="listitem">{{_ "view.answeroptions.ranged_question.min_range"}}: {{getMinRange}}</p>
-                                        <p role="listitem">{{_ "view.answeroptions.ranged_question.max_range"}}: {{getMaxRange}}</p>
+                                        <p role="listitem">{{_ "view.answeroptions.ranged_question.correct_value"}}
+                                            : {{getCorrectValue}}</p>
+                                        <p role="listitem">{{_ "view.answeroptions.ranged_question.min_range"}}
+                                            : {{getMinRange}}</p>
+                                        <p role="listitem">{{_ "view.answeroptions.ranged_question.max_range"}}
+                                            : {{getMaxRange}}</p>
                                     {{else}}
                                         {{#if isFreeTextQuestion typeName}}
                                             {{#with this.getAnswerOptionList.[0]}}
@@ -41,19 +67,26 @@
                                             {{/with}}
                                         {{else}}
                                             {{#each this.getAnswerOptionList}}
-                                                <p role="listitem">{{_ "view.quiz_summary.answer" count=1}} {{getNormalizedIndex this.getAnswerOptionNumber}}{{#unless isVotingQuestion ../typeName}} ({{_ (getIsCorrectAnswerOption this.getIsCorrect)}}){{/unless}}: {{this.getAnswerText}}</p>
+                                                <p role="listitem">{{_ "view.quiz_summary.answer"
+                                                                       count=1}} {{getNormalizedIndex
+                                                        this.getAnswerOptionNumber}}{{#unless isVotingQuestion
+                                                                                              ../typeName}}
+                                                    ({{_ (getIsCorrectAnswerOption this.getIsCorrect)}}){{/unless}}
+                                                    : {{this.getAnswerText}}</p>
                                             {{/each}}
                                         {{/if}}
                                     {{/if}}
                                 </div>
                             </div>
                         </div>
+                        {{/if}}
                         {{#if isFreeTextQuestion typeName}}
                             {{#with this.getAnswerOptionList.[0]}}
                                 <div class="col-xs-12">
                                     <div class="answers">
                                         <div>
-                                            <h4 role="heading">{{_ "view.quiz_summary.answer_configuration" count=this.getAnswerOptionList.length}}: </h4>
+                                            <h4 role="heading">{{_ "view.quiz_summary.answer_configuration"
+                                                                   count=this.getAnswerOptionList.length}}: </h4>
                                         </div>
                                         <div>
                                             {{#each this.getConfig}}
@@ -72,11 +105,18 @@
                         </div>
                         <div class="col-xs-12">
                             <div class="validation">
-                                <h4 role="heading">{{_ "view.quiz_summary.validation"}}: <span class="{{#if this.isValid}}success{{else}}failed{{/if}}">{{_ (getValidationStatus this)}}</span></h4>
+                                <h4 role="heading">{{_ "view.quiz_summary.validation"}}: <span
+                                        class="{{#if this.isValid}}success{{else}}failed{{/if}}">{{_
+                                        (getValidationStatus this)}}</span></h4>
                                 {{#unless this.isValid}}
-                                    <ul id="quizSummaryValidationErrors" data-intro="{{_ "view.quiz_summary.description.validation_errors"}}" aria-label="{{_ "view.quiz_summary.description.validation_errors"}}">
+                                    <ul id="quizSummaryValidationErrors"
+                                        data-intro="{{_ "view.quiz_summary.description.validation_errors"}}"
+                                        aria-label="{{_ "view.quiz_summary.description.validation_errors"}}">
                                         {{#each getValidationErrors this}}
-                                            <li>{{#unless isQuestionType this.occuredAt.type}}{{_ (getTranslationForType this.occuredAt.type)}} {{getNormalizedIndex this.occuredAt.id}}: {{/unless}}{{_ (getTranslationForReason this.reason)}}</li>
+                                            <li>{{#unless isQuestionType this.occuredAt.type}}{{_
+                                                    (getTranslationForType this.occuredAt.type)}} {{getNormalizedIndex
+                                                    this.occuredAt.id}}: {{/unless}}{{_
+                                                    (getTranslationForReason this.reason)}}</li>
                                         {{/each}}
                                     </ul>
                                 {{/unless}}
@@ -86,7 +126,7 @@
                     {{#if (isLastItem @index)}}
                         <div style="padding: 10px;" aria-hidden="true"></div>
                     {{else}}
-                        <hr />
+                        <hr/>
                     {{/if}}
                 {{/each}}
             </div>

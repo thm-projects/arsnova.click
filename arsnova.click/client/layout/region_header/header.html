@@ -16,13 +16,14 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="header">
-	<div class="navbar navbar-fixed-top navbar-transparent navbar-gradient" role="banner">
-		<div class="container-fluid">
-			<div class="row">
+    <div class="navbar navbar-fixed-top navbar-transparent navbar-gradient" role="banner">
+        <div class="container-fluid">
+            <div class="row">
                 {{#if isInHomePath}}
                     <div class="col-xxs-10 col-xxs-offset-0 col-xs-10 col-xs-offset-1 header-title">
                         <div class="container-fluid center-block">
-                            <div class="text-center text-size-medium" aria-labelledby="aria-description-logo-header-chars">
+                            <div class="text-center text-size-medium"
+                                 aria-labelledby="aria-description-logo-header-chars">
                                 <span class="color-changing-ars logo-header-chars">a r s </span>
                                 <span class="color-changing-nova logo-header-chars">n o v a </span>
                                 <span class="color-changing-dot logo-header-dot">. </span>
@@ -49,10 +50,10 @@
                             </div>
                         </div>
                     </div>
-				{{/if}}
-			</div>
-		</div> <!-- row -->
-	</div>
+                {{/if}}
+            </div>
+        </div> <!-- row -->
+    </div>
     {{> qrCodeDisplay}}
     <div class="aria-item" id="aria-description-logo-header-chars">
         {{_ "region.header.aria_description.logo-header-chars"}}

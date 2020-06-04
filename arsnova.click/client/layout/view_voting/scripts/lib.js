@@ -138,7 +138,9 @@ export function resetQuickfitText() {
  */
 function calcWidth(selector) {
 	return Math.max.apply(Math, $(`#${selector} *`).map(function () {
-		if ($(this).text().length > 0) { return $(this).outerWidth(); }
+		if ($(this).text().length > 0) {
+			return $(this).outerWidth();
+		}
 	}).get());
 }
 function calculateMaxTextSize(item) {
@@ -173,7 +175,9 @@ export function quickfitText(reset) {
 		resetQuickfitText();
 	}
 	const quickfitSelector = $(`.${quickFitClass}:not(.${quickFitSetClass})`);
-	const quickfitMap = quickfitSelector.map((i, x)=> {return $(x).text().trim().length;}).get();
+	const quickfitMap = quickfitSelector.map((i, x) => {
+		return $(x).text().trim().length;
+	}).get();
 	if (quickfitMap.length !== $('.buttonWrapper').length) {
 		return;
 	}
@@ -213,7 +217,7 @@ export function formatAnswerButtons() {
 	let scaleBaseHeight = 100;
 	const hasVideoElements = $("object").length > 0;
 	if ($(window).width() < 786 || hasVideoElements) {
-		scaleBaseWidth  = contentWidth / 2 - 10;
+		scaleBaseWidth = contentWidth / 2 - 10;
 	}
 	if (hasVideoElements) {
 		scaleBaseHeight = 160;

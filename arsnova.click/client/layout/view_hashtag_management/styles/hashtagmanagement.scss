@@ -14,97 +14,102 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
-
 @import "../../../layout/global/styles/appearance";
 
 .btn-file {
-	position: relative;
-	overflow: hidden;
-	width: 100%;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
 }
-.btn-file input[type=file] {
-	position: absolute;
-	top: 0;
-	right: 0;
-	min-width: 100%;
-	min-height: 100%;
-	font-size: 100px;
-	text-align: right;
-	filter: alpha(opacity=0);
-	opacity: 0;
-	outline: none;
-	cursor: inherit;
-	display: block;
-}
-.alignGlyphicon {
-	padding-top: 5px;
-	padding-right: 0;
-	text-align: center;
-	display: block;
 
-	@media screen and (min-width: 991px) and (max-width: 1100px) {
-		margin-left: -3px;
-	}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  cursor: inherit;
+  display: block;
 }
+
+.alignGlyphicon {
+  padding-top: 5px;
+  padding-right: 0;
+  text-align: center;
+  display: block;
+
+  @media screen and (min-width: 991px) and (max-width: 1100px) {
+    margin-left: -3px;
+  }
+}
+
 .js-my-hash {
-	border-radius: $corner-radius;
-  	cursor: pointer;
-  	padding: 5px;
-  	margin: 10px 0;
-  	text-align: center;
+  border-radius: $corner-radius;
+  cursor: pointer;
+  padding: 5px;
+  margin: 10px 0;
+  text-align: center;
 }
+
 #landingPageSlogan {
-	position: relative;
-	margin-top: 10%;
+  position: relative;
+  margin-top: 10%;
 }
+
 #landingPageContent {
-  	#demo-quiz-description {
-		text-align: center;
-		margin-top: 2vh;
-		font-size: 2.0vh;
-		p {
-			margin: 20px;
-		}
-  	}
+  #demo-quiz-description {
+    text-align: center;
+    margin-top: 2vh;
+    font-size: 2.0vh;
+    p {
+      margin: 20px;
+    }
+  }
 }
+
 .col-join-session,
 .col-create-session {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .hashtag-management {
 
-	.hashtagManagementRow {
+  .hashtagManagementRow {
 
-		.hashtag-name {
-			font-size: 1.5em;
-			font-size: 3vh;
-			text-align: center;
-			margin: 10px 0 0;
-		}
+    .hashtag-name {
+      font-size: 1.5em;
+      font-size: 3vh;
+      text-align: center;
+      margin: 10px 0 0;
+    }
 
-		.btn-hashtagOption {
-			margin: 5px 0 15px;
-			width: 100%;
-			height: 100%;
+    .btn-hashtagOption {
+      margin: 5px 0 15px;
+      width: 100%;
+      height: 100%;
 
-			@media (min-width: 768px) {
-				margin: 15px 0 15px;
-			}
-		}
+      @media (min-width: 768px) {
+        margin: 15px 0 15px;
+      }
+    }
 
-		hr {
-			margin: 0;
-		}
+    hr {
+      margin: 0;
+    }
 
-		.btn-answerOption {
-			margin: 15px 0;
-			width: 100%;
-			height: 100%;
-		}
-	}
+    .btn-answerOption {
+      margin: 15px 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 
 .btn-cursor {
-	cursor: pointer;
+  cursor: pointer;
 }

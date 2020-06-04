@@ -23,13 +23,13 @@ import * as localData from '/lib/local_storage.js';
 import {generateExportData} from './lib.js';
 
 Template.leaderboardTitle.helpers({
-	getTitleText: ()=> {
+	getTitleText: () => {
 		return Router.current().params.id === "all" ? TAPi18n.__("view.leaderboard.title.all_questions") : TAPi18n.__("view.leaderboard.title.single_question", {questionId: (parseInt(Router.current().params.id) + 1)});
 	}
 });
 
 Template.leaderboardFooterNavButtons.helpers({
-	getButtonCols: ()=> {
+	getButtonCols: () => {
 		const hasTooMuchButtons = Session.get("responsesCountOverride") || (Session.get("allMembersCount") - (Session.get("maxResponseButtons")) > 0);
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			if (hasTooMuchButtons) {
@@ -45,26 +45,26 @@ Template.leaderboardFooterNavButtons.helpers({
 			}
 		}
 	},
-	noLeaderBoardItems: ()=> {
+	noLeaderBoardItems: () => {
 		if (!Session.get("nicks")) {
 			return true;
 		}
 		return Session.get("nicks").length === 0 && Session.get("exportItems").length === 0;
 	},
-	hasTooMuchButtons: ()=> {
+	hasTooMuchButtons: () => {
 		return Session.get("responsesCountOverride") || (Session.get("allMembersCount") - (Session.get("maxResponseButtons") + 1) > 0);
 	},
-	hasOverridenDefaultButtonCount: ()=> {
+	hasOverridenDefaultButtonCount: () => {
 		return Session.get("responsesCountOverride");
 	},
-	invisibleResponsesCount: ()=> {
+	invisibleResponsesCount: () => {
 		return Session.get("allMembersCount") - (Session.get("maxResponseButtons"));
 	},
 	isOwner: function () {
 		return localData.containsHashtag(Router.current().params.quizName);
 	},
 	getExcelDownloadHref: function () {
-		return "/server/generateExcelFile/" + Router.current().params.quizName + "/" + TAPi18n.getLanguage() + "/" + localData.getPrivateKey() ;
+		return "/server/generateExcelFile/" + Router.current().params.quizName + "/" + TAPi18n.getLanguage() + "/" + localData.getPrivateKey();
 	},
 	exportCSVData: function () {
 		const hashtag = Router.current().params.quizName;
@@ -78,10 +78,10 @@ Template.leaderboardFooterNavButtons.helpers({
 });
 
 Template.leaderBoard.helpers({
-	getNormalizedIndex: (index)=> {
+	getNormalizedIndex: (index) => {
 		return index + 1;
 	},
-	isNumber: (index)=> {
+	isNumber: (index) => {
 		return !isNaN(index);
 	},
 	isOwnNick: (nick) => {
@@ -89,15 +89,15 @@ Template.leaderBoard.helpers({
 	},
 	parseTimeToSeconds: function (milliseconds) {
 		let seconds = (milliseconds / 1000).toFixed(2);
-		return String((seconds < 10 ? "0" + seconds : seconds)).replace(".",",");
+		return String((seconds < 10 ? "0" + seconds : seconds)).replace(".", ",");
 	},
-	invisibleResponsesCount: ()=> {
+	invisibleResponsesCount: () => {
 		return Session.get("allMembersCount") - (Session.get("maxResponseButtons"));
 	},
-	hasOverridenDefaultButtonCount: ()=> {
+	hasOverridenDefaultButtonCount: () => {
 		return Session.get("responsesCountOverride");
 	},
-	hasTooMuchButtons: ()=> {
+	hasTooMuchButtons: () => {
 		return Session.get("responsesCountOverride") || (Session.get("allMembersCount") - (Session.get("maxResponseButtons")) > 0);
 	},
 	isGlobalRanking: function () {
@@ -106,15 +106,15 @@ Template.leaderBoard.helpers({
 	leaderBoardSums: function () {
 		return Session.get("nicks");
 	},
-	noLeaderBoardItems: ()=> {
+	noLeaderBoardItems: () => {
 		if (!Session.get("nicks")) {
 			return true;
 		}
 		return Session.get("nicks").length === 0 || Session.get("nicks").filter(function (item) {
-			return item.correctQuestions.length > 0;
-		}).length === 0;
+				return item.correctQuestions.length > 0;
+			}).length === 0;
 	},
-	leaderBoardItems: ()=> {
+	leaderBoardItems: () => {
 		if (!Session.get("nicks")) {
 			return false;
 		}

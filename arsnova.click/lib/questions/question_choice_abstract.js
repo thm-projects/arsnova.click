@@ -13,7 +13,7 @@ export class AbstractChoiceQuestion extends AbstractQuestion {
 	 * @see AbstractQuestion.constructor()
 	 * @param options
 	 */
-	constructor (options) {
+	constructor(options) {
 		super(options);
 		if (this.constructor === AbstractChoiceQuestion) {
 			throw new TypeError("Cannot construct Abstract instances directly");
@@ -78,7 +78,7 @@ export class AbstractChoiceQuestion extends AbstractQuestion {
 	 * @see AbstractQuestion.isValid()
 	 * @returns {boolean} True, if the complete Question instance is valid, False otherwise
 	 */
-	isValid () {
+	isValid() {
 		let hasValidAnswer = false;
 		this.getAnswerOptionList().forEach(function (answeroption) {
 			if (answeroption.getIsCorrect()) {
@@ -88,7 +88,7 @@ export class AbstractChoiceQuestion extends AbstractQuestion {
 		return super.isValid() && this.getAnswerOptionList().length > 0 && hasValidAnswer;
 	}
 
-	isParentValid () {
+	isParentValid() {
 		return super.isValid();
 	}
 
@@ -96,7 +96,7 @@ export class AbstractChoiceQuestion extends AbstractQuestion {
 	 * Gets the validation error reason from the question and all included answerOptions as a stackable array
 	 * @returns {Array} Contains an Object which holds the number of the current question and the reason why the validation has failed
 	 */
-	getValidationStackTrace () {
+	getValidationStackTrace() {
 		return super.getValidationStackTrace();
 	}
 }

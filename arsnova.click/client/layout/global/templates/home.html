@@ -16,75 +16,63 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="home">
-	<div class="row center-vertical" id="landingPageContent">
-		<div class="col-md-12">
-			<div class="row distance-top">
-				<div class="col-md-12">
-					<input type="text"
-					       class="input-field round-corners hashtag-field text-center tabbable"
-					       id="hashtag-input-field"
-					       autocomplete="off"
-					       autocorrect="off"
-					       autocapitalize="off"
-					       spellcheck="false"
-					       placeholder="{{_ "view.hashtag_management.enter_quiz_name" }}"
-					       aria-label="{{_ "view.hashtag_management.enter_quiz_name" }}"
-					       maxlength="{{getHashtagSchema.max}}"/>
-				</div>
-			</div>
-			<div class="row distance-top">
-				<div class="col-xxs-12 col-sm-6 col-join-session">
-					<button id="joinSession"
-					        class="button button-success tabbable"
-					        disabled="disabled"
-					        aria-describedby="aria-description-joinSession">
-						<span class="glyphicon glyphicon-thumbs-up glyph-left"></span>
-						<span>{{_ "view.hashtag_management.join_session"}}</span>
-					</button>
-				</div>
-				<div class="col-xxs-12 col-sm-6 col-create-session">
-					<button id="addNewHashtag"
-					        class="button button-success tabbable"
-					        disabled="disabled"
-					        aria-describedby="aria-description-addNewHashtag">
-						<span>{{#if isEditingQuiz}}{{_ "view.hashtag_management.reenter_session"}}{{else}}{{#if
-							isAddingDemoQuiz}}{{_ "view.hashtag_management.create_demo_session"}}{{else}}{{_
-							"view.hashtag_management.create_session"}}{{/if}}{{/if}}</span>
-						<span class="glyphicon glyphicon-{{#if isEditingQuiz}}log-in{{else}}{{#if
-							isAddingDemoQuiz}}send{{else}}edit{{/if}}{{/if}} glyph-right" aria-hidden="true"></span>
-					</button>
-				</div>
-			</div>
-			{{#unless hasDemoQuiz}}
-				<div class="row" id="demo-quiz-description">
-					<p>{{_ "view.hashtag_view.demo_quiz.title.1" }}</p>
-					<p>{{_ "view.hashtag_view.demo_quiz.title.2" }}</p>
-					<p>{{_ "view.hashtag_view.demo_quiz.title.3" }}</p>
-				</div>
-			{{/unless}}
-		</div>
-	</div>
-	<div class="aria-item" id="aria-description-joinSession">
-		{{_ "view.hashtag_management.aria_description.joinSession"}}
-	</div>
-	<div class="aria-item" id="aria-description-addNewHashtag">
-		{{_ "view.hashtag_management.aria_description.addNewHashtag"}}
-	</div>
-
-	<div class="test-beta-hint collapsed">
-		<h5>
-            <span>{{_ "beta-hint.title"}}</span>
-            <i class="glyphicon glyphicon-plus show-beta-hints"></i>
-        </h5>
-		<ul>
-			<li>{{_ "beta-hint.advantage.1"}}</li>
-			<li>{{_ "beta-hint.advantage.2"}}</li>
-			<li>{{_ "beta-hint.advantage.3"}}</li>
-			<li>{{_ "beta-hint.advantage.4"}}</li>
-			<li>{{_ "beta-hint.advantage.5"}}</li>
-		</ul>
-        <a href="https://staging.arsnova.click">
-            <button class="btn btn-primary">{{_ "beta-hint.link"}}</button>
-        </a>
-	</div>
+    <div class="row center-vertical" id="landingPageContent">
+        <div class="col-md-12">
+            <div class="row distance-top">
+                <div class="col-md-12">
+                    <input type="text"
+                           class="input-field round-corners hashtag-field text-center tabbable"
+                           id="hashtag-input-field"
+                           autocomplete="off"
+                           autocorrect="off"
+                           autocapitalize="off"
+                           spellcheck="false"
+                           placeholder="{{_ "view.hashtag_management.enter_quiz_name" }}"
+                           aria-label="{{_ "view.hashtag_management.enter_quiz_name" }}"
+                           maxlength="{{getHashtagSchema.max}}"/>
+                </div>
+            </div>
+            <div class="row distance-top">
+                <div class="col-xxs-12 col-sm-6 col-join-session">
+                    <button id="joinSession"
+                            class="button button-success tabbable"
+                            disabled="disabled"
+                            aria-describedby="aria-description-joinSession">
+                        <span class="glyphicon glyphicon-thumbs-up glyph-left"></span>
+                        <span>{{_ "view.hashtag_management.join_session"}}</span>
+                    </button>
+                </div>
+                <div class="col-xxs-12 col-sm-6 col-create-session">
+                    <button id="addNewHashtag"
+                            class="button button-success tabbable"
+                            disabled="disabled"
+                            aria-describedby="aria-description-addNewHashtag">
+						<span>
+                            {{#if isEditingQuiz}}{{_ "view.hashtag_management.reenter_session"}}{{else}}
+                                {{#if isAddingDemoQuiz}}{{_ "view.hashtag_management.create_demo_session"}}{{else}}
+                                    {{#if isAddingABCDQuiz}}{{_ "view.hashtag_management.create_abcd_session"}}{{else}}
+                                        {{_ "view.hashtag_management.create_session"}}
+                                    {{/if}}{{/if}}{{/if}}
+                        </span>
+                        <span class="glyphicon glyphicon-{{#if isEditingQuiz}}log-in{{else}}{{#if
+                                isAddingDemoQuiz}}send{{else}}edit{{/if}}{{/if}} glyph-right" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+            {{#unless hasDemoQuiz}}
+                <div class="row" id="demo-quiz-description">
+                    <p>{{_ "view.hashtag_view.demo_quiz.title.1" }}</p>
+                    <p>{{_ "view.hashtag_view.demo_quiz.title.2" }}</p>
+                    <p>{{_ "view.hashtag_view.demo_quiz.title.3" }}</p>
+                    <p>{{_ "view.hashtag_view.demo_quiz.title.4" }}</p>
+                </div>
+            {{/unless}}
+        </div>
+    </div>
+    <div class="aria-item" id="aria-description-joinSession">
+        {{_ "view.hashtag_management.aria_description.joinSession"}}
+    </div>
+    <div class="aria-item" id="aria-description-addNewHashtag">
+        {{_ "view.hashtag_management.aria_description.addNewHashtag"}}
+    </div>
 </template>

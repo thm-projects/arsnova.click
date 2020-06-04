@@ -11,7 +11,7 @@ export class SurveyQuestion extends AbstractChoiceQuestion {
 	 * @see AbstractQuestion.constructor()
 	 * @param options
 	 */
-	constructor (options) {
+	constructor(options) {
 		if (typeof options.type !== "undefined" && options.type !== "SurveyQuestion") {
 			throw new TypeError("Invalid construction type while creating new SurveyQuestion");
 		}
@@ -19,11 +19,11 @@ export class SurveyQuestion extends AbstractChoiceQuestion {
 		this[multipleSelectionEnabled] = typeof options.multipleSelectionEnabled === "undefined" ? Meteor.settings.public.default.question.multipleSurveySelectionEnabled : options.multipleSelectionEnabled;
 	}
 
-	setMultipleSelectionEnabled (newVal) {
+	setMultipleSelectionEnabled(newVal) {
 		this[multipleSelectionEnabled] = newVal;
 	}
 
-	getMultipleSelectionEnabled () {
+	getMultipleSelectionEnabled() {
 		return this[multipleSelectionEnabled];
 	}
 
@@ -33,7 +33,7 @@ export class SurveyQuestion extends AbstractChoiceQuestion {
 	 * @see AbstractQuestion.isValid()
 	 * @returns {boolean} True, if the complete Question instance is valid, False otherwise
 	 */
-	isValid () {
+	isValid() {
 		let hasValidAnswer = 0;
 		this.getAnswerOptionList().forEach(function (answeroption) {
 			if (answeroption.getIsCorrect()) {
@@ -47,7 +47,7 @@ export class SurveyQuestion extends AbstractChoiceQuestion {
 	 * Gets the validation error reason from the question and all included answerOptions as a stackable array
 	 * @returns {Array} Contains an Object which holds the number of the current question and the reason why the validation has failed
 	 */
-	getValidationStackTrace () {
+	getValidationStackTrace() {
 		let hasValidAnswer = 0;
 		this.getAnswerOptionList().forEach(function (answeroption) {
 			if (answeroption.getIsCorrect()) {
@@ -56,7 +56,10 @@ export class SurveyQuestion extends AbstractChoiceQuestion {
 		});
 		const parentStackTrace = super.getValidationStackTrace();
 		if (hasValidAnswer !== 0) {
-			parentStackTrace.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "no_valid_answer_required"});
+			parentStackTrace.push({
+				occuredAt: {type: "question", id: this.getQuestionIndex()},
+				reason: "no_valid_answer_required"
+			});
 		}
 		return parentStackTrace;
 	}
@@ -66,7 +69,7 @@ export class SurveyQuestion extends AbstractChoiceQuestion {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-clone
 	 * @returns {SurveyQuestion} An independent deep copy of the current instance
 	 */
-	clone () {
+	clone() {
 		return new SurveyQuestion(this.serialize());
 	}
 
@@ -74,14 +77,14 @@ export class SurveyQuestion extends AbstractChoiceQuestion {
 	 * Serialize the instance object to a JSON compatible object
 	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
 	 */
-	serialize () {
+	serialize() {
 		return Object.assign(super.serialize(), {
 			type: "SurveyQuestion",
 			multipleSelectionEnabled: this.getMultipleSelectionEnabled()
 		});
 	}
 
-	equals (question) {
+	equals(question) {
 		return question.typeName() === this.typeName() &&
 			super.equals(question) &&
 			question.getMultipleSelectionEnabled() === this.getMultipleSelectionEnabled();
@@ -92,11 +95,11 @@ export class SurveyQuestion extends AbstractChoiceQuestion {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
 	 * @returns {String} The name of the instantiated class
 	 */
-	typeName () {
+	typeName() {
 		return "SurveyQuestion";
 	}
 
-	translationReferrer () {
+	translationReferrer() {
 		return "view.questions.survey_question";
 	}
 }

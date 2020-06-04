@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Mongo} from 'meteor/mongo';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {userNickSchema} from '../member_list/collection.js';
 
 export const NicknameCategoriesCollection = new Mongo.Collection("nicknameCategories");

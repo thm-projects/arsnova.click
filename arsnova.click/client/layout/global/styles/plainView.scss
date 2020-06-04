@@ -1,47 +1,46 @@
-
 @import "./appearance";
 
 .plain_view {
-	#content {
-		background: url("/images/preview/preview_image.png") no-repeat;
-		background-size: 100% 100%;
-		position: relative;
-		border-radius: $corner-radius;
+  #content {
+    background: url("/images/preview/preview_image.png") no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+    border-radius: $corner-radius;
 
-		#topNav {
-			padding-bottom: 10px;
-			position: absolute;
-			width: 100%;
-			top: 3.1%;
-			.arsnova-logo {
-				position: absolute;
-				cursor: default !important;
-				img {
-					height: 5vh;
-					width: 5vh;
-					position: absolute;
-				}
-			}
-			.header-title {
-				font-size: 2.5vh;
-				margin-top: 0.8vh;
-			}
-			#connectionQualityHeader {
-				height: 100%;
-				width: 100%;
-				position: absolute;
-				right: 0.7vh;
-				#connectionQualityImage {
-					height: 1em;
-					width: 1em;
-				}
-			}
-		}
-		#containerFrame {
-			height: calc(100% - 3.1% - 10vh);
-			position: absolute;
-			width: 100%;
-			top: calc(6.3vh + 10px);
-		}
-	}
+    #topNav {
+      padding-bottom: 10px;
+      position: absolute;
+      width: 100%;
+      top: 3.1%;
+      .arsnova-logo {
+        position: absolute;
+        cursor: default !important;
+        img {
+          height: 5vh;
+          width: 5vh;
+          position: absolute;
+        }
+      }
+      .header-title {
+        font-size: 2.5vh;
+        margin-top: 0.8vh;
+      }
+      #connectionQualityHeader {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        right: 0.7vh;
+        #connectionQualityImage {
+          height: 1em;
+          width: 1em;
+        }
+      }
+    }
+    #containerFrame {
+      height: calc(100% - 3.1% - 10vh);
+      position: absolute;
+      width: 100%;
+      top: calc(6.3vh + 10px);
+    }
+  }
 }

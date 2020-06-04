@@ -26,7 +26,7 @@ Template.layout.onCreated(function () {
 	Session.set("connectionStatus", connectionStatus);
 	Tracker.autorun(function () {
 		const eventDoc = EventManagerCollection.findOne();
-		if (eventDoc) {
+		if (eventDoc && eventDoc.eventStack) {
 			sessionStorage.setItem("EventStackObserver.lastPerformedIndex", eventDoc.eventStack.length);
 		}
 	});

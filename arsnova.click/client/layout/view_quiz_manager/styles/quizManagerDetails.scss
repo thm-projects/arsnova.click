@@ -1,17 +1,17 @@
 #quizManagerDetails {
-	.btn-group {
-		display: flex;
-		flex-direction: row;
+  .btn-group {
+    display: flex;
+    flex-direction: row;
 
-		.btn-group {
-			width: 100%;
-			margin-top: 10px;
+    .btn-group {
+      width: 100%;
+      margin-top: 10px;
 
-			button {
-				width: 100%;
-				border-top-left-radius: 0;
-				border-top-right-radius: 0;
-			}
-		}
-	}
+      button {
+        width: 100%;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+    }
+  }
 }

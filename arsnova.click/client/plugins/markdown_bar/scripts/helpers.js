@@ -24,20 +24,38 @@ const urlSchemaHelper = {
 	}
 };
 
-Template.pictureInsertSplashscreen.helpers($.extend({}, urlSchemaHelper, {
-
-}));
+Template.pictureInsertSplashscreen.helpers($.extend({}, urlSchemaHelper, {}));
 
 Template.markdownBar.helpers({
 	getMarkdownBarElements: function () {
 		return [
 			{id: "boldMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.bold", "glyphClass": "glyphicon-bold"},
-			{id: "headerMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.heading", "glyphClass": "glyphicon-header"},
-			{id: "hyperlinkMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.hyperlink", "glyphClass": "glyphicon-globe"},
-			{id: "unsortedListMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.unordered_list", "glyphClass": "iconEditorUl"},
+			{
+				id: "headerMarkdownButton",
+				"titleRef": "plugins.markdown_bar.tooltip.heading",
+				"glyphClass": "glyphicon-header"
+			},
+			{
+				id: "hyperlinkMarkdownButton",
+				"titleRef": "plugins.markdown_bar.tooltip.hyperlink",
+				"glyphClass": "glyphicon-globe"
+			},
+			{
+				id: "unsortedListMarkdownButton",
+				"titleRef": "plugins.markdown_bar.tooltip.unordered_list",
+				"glyphClass": "iconEditorUl"
+			},
 			{id: "latexMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.latex", "glyphClass": "latexIcon"},
-			{id: "codeMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.code", "glyphClass": "codeListingIcon"},
-			{id: "imageMarkdownButton", "titleRef": "plugins.markdown_bar.tooltip.image", "glyphClass": "glyphicon-picture"}
+			{
+				id: "codeMarkdownButton",
+				"titleRef": "plugins.markdown_bar.tooltip.code",
+				"glyphClass": "codeListingIcon"
+			},
+			{
+				id: "imageMarkdownButton",
+				"titleRef": "plugins.markdown_bar.tooltip.image",
+				"glyphClass": "glyphicon-picture"
+			}
 		];
 	}
 });

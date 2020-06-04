@@ -16,9 +16,11 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="nickLimited">
-	<div class="row full-screen-content nickLimited">
-		<div class="col-xs-12">
-            <div class="selectableNickWrapper" data-intro="{{_ "view.choose_nickname.description.choose_selectable_nick"}}" aria-label="{{_ "view.choose_nickname.description.choose_selectable_nick"}}">
+    <div class="row full-screen-content nickLimited">
+        <div class="col-xs-12">
+            <div class="selectableNickWrapper"
+                 data-intro="{{_ "view.choose_nickname.description.choose_selectable_nick"}}"
+                 aria-label="{{_ "view.choose_nickname.description.choose_selectable_nick"}}">
                 {{#unless getSelectableNicks.length}}
                     <h3>{{_ "view.choose_nickname.no_selectable_nick_available.1"}}</h3>
                     <h3>{{_ "view.choose_nickname.no_selectable_nick_available.2"}}</h3>
@@ -30,6 +32,6 @@
                     </div>
                 {{/each}}
             </div>
-		</div>
-	</div>
+        </div>
+    </div>
 </template>

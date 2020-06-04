@@ -25,7 +25,7 @@ import {startCountdown} from './lib.js';
 
 Template.votingview.onCreated(function () {
 	const index = typeof Router.current().params.questionIndex === "undefined" ? EventManagerCollection.findOne().questionIndex : parseInt(Router.current().params.questionIndex);
-	Session.set("sessionClosed",undefined);
+	Session.set("sessionClosed", undefined);
 	Session.set("hasSendResponse", false);
 	Session.set("hasToggledResponse", false);
 	Session.set("countdownInitialized", false);
@@ -35,10 +35,10 @@ Template.votingview.onCreated(function () {
 	const questionItem = Session.get("questionGroup").getQuestionList()[index];
 	const sessionType = questionItem.typeName();
 	const answers = questionItem.getAnswerOptionList();
-	const redirectOnAnswerClick = $.inArray(sessionType, ["SingleChoiceQuestion", "YesNoSingleChoiceQuestion", "TrueFalseSingleChoiceQuestion"]) > -1 ||
+	const redirectOnAnswerClick = $.inArray(sessionType, ["SingleChoiceQuestion", "YesNoSingleChoiceQuestion", "TrueFalseSingleChoiceQuestion", "ABCDSingleChoiceQuestion"]) > -1 ||
 		(sessionType === "SurveyQuestion" && !questionItem.getMultipleSelectionEnabled());
 	Session.set("questionSC", redirectOnAnswerClick);
-	Session.set("responses",JSON.stringify(new Array(answers.length).fill(false)));
+	Session.set("responses", JSON.stringify(new Array(answers.length).fill(false)));
 	if (!(this.data && this.data["data-questionIndex"])) {
 		startCountdown(index);
 	}

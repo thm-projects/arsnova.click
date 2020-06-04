@@ -27,7 +27,8 @@
       "message": "arsnova.click utilise des Cookies.",
       "dismiss": "Ne plus afficher",
       "learn_more": "En savoir plus"
-    }
+    },
+    "download_processing": "Please wait..."
   },
   "region": {
     "footer": {
@@ -294,7 +295,8 @@
       "edit_session": "Modifier",
       "reenter_session": "Ouvrir",
       "create_session": "Créer un Quiz?",
-      "create_demo_session": "Lancez »la Demo«!",
+      "create_demo_session": "Lancez \u00BBla Demo\u00BB!",
+      "create_abcd_session": "Lancez \u00BBABCD Quiz\u00AB!",
       "quiz_management": "Mémoire de Quiz",
       "available_sessions": "Ces Quiz sont sur votre navigateur:",
       "session_management": "Quiz",
@@ -305,6 +307,7 @@
       "valid_question": "Question valide",
       "invalid_question": "Question invalide",
       "no_sessions": "Aucun Quiz n’est enregistré sur ce navigateur.",
+      "password": "Password for starting the quiz",
       "aria_description": {
         "hashtag-input-field": "Entrez le nom du Quiz",
         "joinSession": "Faire une partie de Quiz",
@@ -321,7 +324,8 @@
         "title": {
           "1": "Découvrez arsnova.click!",
           "2": "Entrez »Demo Quiz« pour la démonstration. Connectez-vous sur un second appareil et jouez pour deux.",
-          "3": "Visitez notre Blog arsnova.io pour savoir comment utiliser l’application pour vos leçons ou présentations."
+          "3": "Enter \u00BBABCD\u00AB and run a fast quiz session with only one question and four answer options from A to D. Present the question and the content of the answers to your audience offline.",
+          "4": "Visitez notre Blog arsnova.io pour savoir comment utiliser l’application pour vos leçons ou présentations."
         }
       }
     },
@@ -422,7 +426,8 @@
         "MultipleChoiceQuestion": "Les questions à choix multiple contiennent autant de réponses justes que voulues par le créateur du quiz (avec au moins une juste).",
         "RangedQuestion": "Pour la question d’estimation, la réponse est un nombre entier. Cependant des tolérences vers le haut et vers le bas sont fixables lors de l’édition du quiz.",
         "FreeTextQuestion": "Pour répondre à la question à réponse libre, les participants doivent écrire un texte court, qui sera comparé à celui de référence.",
-        "SurveyQuestion": "Les sondages contiennent un nombre illimité d’options de réponses non évaluables, pouvant être du type choix multiple ou unique."
+        "SurveyQuestion": "Les sondages contiennent un nombre illimité d’options de réponses non évaluables, pouvant être du type choix multiple ou unique.",
+        "ABCDSurveyQuestion": "Les questions ABCD ne contiennent que quatre options de réponse et aucun texte de la question. Le contenu doit être présenté par le Quizmaster hors ligne avant."
       }
     },
     "questions": {
@@ -436,6 +441,7 @@
       "single_choice_question_true_false": "Vrai-Faux",
       "multiple_choice_question": "Choix multiple",
       "survey_question": "Sondage",
+      "survey_question_abcd": "ABCD-question",
       "ranged_question": "Estimation",
       "free_text_question": "Réponse ouverte",
       "description": {
@@ -724,7 +730,10 @@
           "session_closed": "Fin de la partie",
           "invalid_data": "Les données à importer sont incorrectes!",
           "invalid_input_data": "Les données saisies sont invalides ou incorrectes!",
-          "duplicate_user": "Désolé, un seul Pseudonyme pour un utilisateur!"
+          "duplicate_user": "Désolé, un seul Pseudonyme pour un utilisateur!",
+          "invalid_login": "This quiz can only be started by an authorized CAS user.",
+          "invalid_password": "The password is not correct!",
+          "maximum_quizzes_exceeded": "Exceeded the maximum number of parallel quizzes on this server."
         }
       }
     }

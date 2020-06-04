@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
+import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
 import {Template} from 'meteor/templating';
 import {Router} from 'meteor/iron:router';
@@ -38,15 +39,24 @@ Template.createQuestionView.helpers({
 		return result;
 	},
 	isVideoQuestionText: function (questionText) {
-		return !/(^!)?\[.*\]\(.*\)/.test(questionText) && /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(questionText) && (/youtube/.test(questionText) || /youtu.be/.test(questionText) || /vimeo/.test(questionText));
+		return !/(^!)?\[.*\]\(.*\)/.test(questionText) && /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(questionText) && (/youtube/.test(questionText) || /youtu\.be/.test(questionText) || /vimeo/.test(questionText));
+	},
+	isLocalHostedVideo: function () {
+		return Meteor.settings.public.useLocalAssetsCache;
 	},
 	getVideoData: function (questionText) {
 		const result = {};
-		if (/youtube/.test(questionText)) {
-			result.origin  = "https://www.youtube.com/embed/";
+		if (/_(youtube|vimeo)/.test(questionText)) {
+			result.origin = questionText;
+			result.srcAttr = result.origin;
+			result.videoId = '';
+			result.embedTag = '';
+			return result;
+		} else if (/youtube/.test(questionText)) {
+			result.origin = "https://www.youtube.com/embed/";
 			result.videoId = questionText.substr(questionText.lastIndexOf("=") + 1, questionText.length);
-		} else if (/youtu.be/.test(questionText)) {
-			result.origin  = "https://www.youtube.com/embed/";
+		} else if (/youtu\.be/.test(questionText)) {
+			result.origin = "https://www.youtube.com/embed/";
 			result.videoId = questionText.substr(questionText.lastIndexOf("/") + 1, questionText.length);
 		} else if (/vimeo/.test(questionText)) {
 			result.origin = "https://player.vimeo.com/video/";

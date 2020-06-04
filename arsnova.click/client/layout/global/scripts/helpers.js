@@ -72,21 +72,37 @@ Template.connectionQualityHeader.helpers({
 		}
 		lib.stopPendingAnimation();
 		if (result.failures.length > 0) {
-			return $.extend({resultString: "region.header.connection_status.finished_with_errors"}, result, {finishedWithErrors: true, statusClass: "Failed"});
+			return $.extend({resultString: "region.header.connection_status.finished_with_errors"}, result, {
+				finishedWithErrors: true,
+				statusClass: "Failed"
+			});
 		}
 		if (result.errors.length > 0) {
-			return $.extend({resultString: "region.header.connection_status.finished_with_errors"}, result, {finishedWithErrors: true, statusClass: "Error"});
+			return $.extend({resultString: "region.header.connection_status.finished_with_errors"}, result, {
+				finishedWithErrors: true,
+				statusClass: "Error"
+			});
 		}
 		if (result.warnings.length > 0) {
-			return $.extend({resultString: "region.header.connection_status.finished_with_warnings"}, result, {finishedWithWarnings: true, statusClass: "Warning"});
+			return $.extend({resultString: "region.header.connection_status.finished_with_warnings"}, result, {
+				finishedWithWarnings: true,
+				statusClass: "Warning"
+			});
 		}
-		return {resultString: "region.header.connection_status.finished_without_warnings", finishedWithoutWarnings: true, statusClass: "Ok"};
+		return {
+			resultString: "region.header.connection_status.finished_without_warnings",
+			finishedWithoutWarnings: true,
+			statusClass: "Ok"
+		};
 	}
 });
 
 Template.home.helpers($.extend({getHashtagSchema: hashtagSchema}, {
 	isAddingDemoQuiz: function () {
-		return Session.get("isAddingDemoQuiz");
+		return Session.get("isAddingQuizType") === "demoquiz";
+	},
+	isAddingABCDQuiz: function () {
+		return Session.get("isAddingQuizType") === "abcd";
 	},
 	isEditingQuiz: function () {
 		return Session.get("isEditingQuiz");

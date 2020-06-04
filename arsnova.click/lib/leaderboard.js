@@ -1,4 +1,3 @@
-
 import {Session} from 'meteor/session';
 import {Router} from 'meteor/iron:router';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
@@ -67,8 +66,11 @@ function checkIsCorrectRangedQuestion(response, questionIndex) {
 }
 
 function checkIsCorrectFreeTextQuestion(response, questionIndex) {
-	const answerOption = AnswerOptionCollection.findOne({hashtag: hashtag, questionIndex: questionIndex}) || Session.get("questionGroup").getQuestionList()[questionIndex].getAnswerOptionList()[0].serialize();
-	let	userHasRightAnswers = false;
+	const answerOption = AnswerOptionCollection.findOne({
+			hashtag: hashtag,
+			questionIndex: questionIndex
+		}) || Session.get("questionGroup").getQuestionList()[questionIndex].getAnswerOptionList()[0].serialize();
+	let userHasRightAnswers = false;
 	const clonedResponse = JSON.parse(JSON.stringify(response));
 	if (!answerOption.configCaseSensitive) {
 		answerOption.answerText = answerOption.answerText.toLowerCase();
@@ -105,6 +107,7 @@ export function isCorrectResponse(response, question, questionIndex) {
 		case "MultipleChoiceQuestion":
 			return checkIsCorrectMultipleChoiceQuestion(response, questionIndex);
 		case "SurveyQuestion":
+		case "ABCDSingleChoiceQuestion":
 			return true;
 		case "RangedQuestion":
 			return checkIsCorrectRangedQuestion(response, questionIndex);
@@ -133,7 +136,7 @@ export function getLeaderboardItemsByIndex(questionIndex) {
 		hashtag: hashtag
 	}).questionList[questionIndex];
 	const result = {};
-	if (question.type !== "SurveyQuestion") {
+	if (["SurveyQuestion"].indexOf(question.type) === -1) {
 		ResponsesCollection.find({
 			hashtag: hashtag,
 			questionIndex: questionIndex
@@ -161,7 +164,7 @@ export function getLeaderboardItemsByIndex(questionIndex) {
 export function getAllLeaderboardItems(keepAllNicks = false) {
 	const questionList = QuestionGroupCollection.findOne({hashtag: hashtag}).questionList;
 	const questionCount = questionList.filter(function (item) {
-		return item.type !== "SurveyQuestion";
+		return ["SurveyQuestion"].indexOf(item.type) === -1;
 	}).length;
 	let allItems = getLeaderboardItemsByIndex(0);
 	for (let i = 1; i < questionList.length; i++) {

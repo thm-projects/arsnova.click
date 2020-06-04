@@ -1,4 +1,15 @@
 {
+  "beta-hint": {
+    "title": "Prova arsnova.click 2.0 ora",
+    "advantage": {
+      "1": "Più veloce che mai",
+      "2": "Gioca a quiz in team",
+      "3": "Ultime tecnologie",
+      "4": "Mobile ottimizzato",
+      "5": "Elevati standard di privacy"
+    },
+    "link": "Prova ora gratuitamente"
+  },
   "global": {
     "arsnova_slogan": "Quiz-app per l´insegnamento",
     "back": "Indietro",

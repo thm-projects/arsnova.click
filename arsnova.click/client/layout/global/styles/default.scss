@@ -111,3 +111,39 @@ button:disabled {
     }
   }
 }
+
+.test-beta-hint {
+  position: fixed;
+  bottom: 56px;
+  right: 0;
+  background: white;
+  border-top-left-radius: 100px;
+  padding: 20px 20px 20px 50px;
+
+  &.collapsed {
+    padding: 0 20px 0 50px;
+
+    a,
+    ul {
+      display: none;
+    }
+  }
+
+  button {
+    width: 100%;
+  }
+
+  h5 {
+    text-align: right;
+  }
+
+  i {
+    color: lightgrey;
+    cursor: pointer;
+    padding-left: 10px;
+
+    &:hover {
+      color: black;
+    }
+  }
+}

@@ -1,4 +1,15 @@
 {
+  "beta-hint": {
+    "title": "Teste jetzt arsnova.click 2.0",
+    "advantage": {
+      "1": "Schneller als je zuvor",
+      "2": "Spiele Quizze in Teams",
+      "3": "Modernste Technologien",
+      "4": "Optimiert für Mobilgeräte",
+      "5": "Hohe Datenschutzstandards"
+    },
+    "link": "Jetzt kostenlos testen"
+  },
   "global": {
     "arsnova_slogan": "Quiz-App für MINT",
     "back": "Zurück",

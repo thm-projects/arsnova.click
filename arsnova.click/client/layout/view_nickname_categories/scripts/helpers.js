@@ -32,7 +32,10 @@ Template.nicknameCategories.helpers({
 		if (!Session.get("selectedCategory") || Session.get("selectedCategory") === "undefined") {
 			return false;
 		}
-		return NicknameCategoriesCollection.find({nickCategory: Session.get("selectedCategory")}, {sort: {nick: 1}, fields: {nick: 1}});
+		return NicknameCategoriesCollection.find({nickCategory: Session.get("selectedCategory")}, {
+			sort: {nick: 1},
+			fields: {nick: 1}
+		});
 	},
 	isSelectedNick: function (nick) {
 		return Session.get("questionGroup").getConfiguration().getNickSettings().getSelectedValues().indexOf(NicknameCategoriesCollection.findOne({nick: nick}).nick) !== -1;

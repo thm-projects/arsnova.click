@@ -1,4 +1,3 @@
-
 import {ResponsesCollection} from '/lib/responses/collection.js';
 
 export function calculateNumberOfAnswers(hashtag, index, answeroptionNumber) {
@@ -24,5 +23,9 @@ export function calculateNumberOfRangedAnswers(hashtag, index, minRange, correct
 			numberOfAnswersInMinRange++;
 		}
 	});
-	return {minRange: numberOfAnswersInMinRange, correctValue: numberOfCorrectAnswers, maxRange: numberOfAnswersInMaxRange};
+	return {
+		minRange: numberOfAnswersInMinRange,
+		correctValue: numberOfCorrectAnswers,
+		maxRange: numberOfAnswersInMaxRange
+	};
 }

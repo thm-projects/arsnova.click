@@ -27,7 +27,7 @@ import * as localData from '/lib/local_storage.js';
  * This file content will be called always when loading the page. The if inside of the
  * interval callback is required because the interval is set already on the landing page
  * and will trigger always when using the app. TODO: Replace this with a Tracker.Dependency
-*/
+ */
 Meteor.setInterval(function () {
 	if (localData.containsHashtag(Router.current().params.quizName)) {
 		Meteor.call('keepalive', Router.current().params.quizName);

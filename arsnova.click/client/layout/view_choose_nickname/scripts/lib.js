@@ -52,7 +52,7 @@ export function isNickAllowed(nick) {
 	if (!SessionConfigurationCollection.findOne({hashtag: Router.current().params.quizName}).nicks.blockIllegal) {
 		return true;
 	}
-	return typeof BannedNicksCollection.findOne({userNick: {$regex: new RegExp(".*" + nick.replace(/ /g, "").replace(/[0-9]/g,"") + ".*", "ig")}}) === "undefined";
+	return typeof BannedNicksCollection.findOne({userNick: {$regex: new RegExp(".*" + nick.replace(/ /g, "").replace(/[0-9]/g, "") + ".*", "ig")}}) === "undefined";
 }
 
 /**

@@ -76,7 +76,10 @@ function generateCSVExportData() {
 	let csvString = "";
 	let hasIdentifiedUsers = false;
 	items.forEach(function (item) {
-		const response = ResponsesCollection.findOne({hashtag: Router.current().params.quizName, userNick: item.nick}, {userRef: 1});
+		const response = ResponsesCollection.findOne({
+			hashtag: Router.current().params.quizName,
+			userNick: item.nick
+		}, {userRef: 1});
 		if (typeof response.profile !== "undefined") {
 			response.profile = $.parseJSON(response.profile);
 			hasIdentifiedUsers = true;

@@ -126,7 +126,7 @@ const clickEvents = {
 			if (asJSON.type === "DefaultQuestionGroup") {
 				questionInstance = new DefaultQuestionGroup(asJSON);
 			} else {
-				throw new TypeError("Undefined session type '" + asJSON.type + "' while importing");
+				throw new TypeError(`Undefined session type ${asJSON.type} while importing`);
 			}
 
 			if (!HashtagsCollection.findOne({hashtag: questionInstance.getHashtag()})) {
@@ -187,7 +187,9 @@ const clickEvents = {
 						});
 						$('#hashtagRename-input-field').on('input', function (event) {
 							const inputHashtag = $(event.target).val();
-							if (["?", "/", "\\"].some(function (v) { return inputHashtag.indexOf(v) >= 0; })) {
+							if (["?", "/", "\\"].some(function (v) {
+									return inputHashtag.indexOf(v) >= 0;
+								})) {
 								$("#js-btn-importSession").attr("disabled", "disabled");
 								return;
 							}
@@ -373,8 +375,7 @@ Template.footer.events($.extend({}, clickEvents, {
 	}
 }));
 
-Template.showMore.events($.extend({}, clickEvents, {
-}));
+Template.showMore.events($.extend({}, clickEvents, {}));
 
 Template.contactHeaderBar.events({
 	"click #tos": function () {
@@ -390,25 +391,17 @@ Template.contactHeaderBar.events({
 		Router.go("/dataprivacy");
 	},
 	"click #blog": function () {
-		window.open("https://arsnova.thm.de/blog/");
+		window.open("https://arsnova.thm.de/blog/arsnova-click/");
 	}
 });
 
-Template.about.events($.extend({}, {
+Template.about.events($.extend({}, {}));
 
-}));
+Template.agb.events($.extend({}, {}));
 
-Template.agb.events($.extend({}, {
+Template.imprint.events($.extend({}, {}));
 
-}));
-
-Template.imprint.events($.extend({}, {
-
-}));
-
-Template.dataprivacy.events($.extend({}, {
-
-}));
+Template.dataprivacy.events($.extend({}, {}));
 
 Template.footerNavButtons.events({
 	'click #forwardButton': function () {
@@ -433,12 +426,31 @@ Template.footerNavButtons.events({
 				break;
 			case "quizSummary":
 			case "quizManager":
-				Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
-				Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
-				Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
-				Meteor.call('SessionConfiguration.addConfig', Session.get("questionGroup").getConfiguration().serialize());
-				Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize());
-				Router.go("/" + Router.current().params.quizName + "/memberlist");
+				const bootstrapQuiz = function () {
+					Meteor.call("MemberListCollection.removeFromSession", Router.current().params.quizName);
+					Meteor.call("EventManagerCollection.setActiveQuestion", Router.current().params.quizName, 0);
+					Meteor.call("EventManagerCollection.setSessionStatus", Router.current().params.quizName, 2);
+					Meteor.call('SessionConfiguration.addConfig', Session.get("questionGroup").getConfiguration().serialize());
+					Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").rewrite().serialize());
+					Session.delete("serverDownloadsQuizAssets");
+					Router.go("/" + Router.current().params.quizName + "/memberlist");
+				};
+				if (Meteor.settings.public.useLocalAssetsCache) {
+					Session.set("serverDownloadsQuizAssets", true);
+					Meteor.call("QuestionGroupCollection.persist", Session.get("questionGroup").serialize(), function () {
+						$.post(`/api/downloadQuizAssets?_=${new Date().getTime()}`,
+							{
+								sessionConfiguration: {
+									hashtag: Router.current().params.quizName,
+									privateKey: localData.getPrivateKey()
+								}
+							},
+							bootstrapQuiz
+						);
+					});
+				} else {
+					bootstrapQuiz();
+				}
 				break;
 			case "results":
 				break;

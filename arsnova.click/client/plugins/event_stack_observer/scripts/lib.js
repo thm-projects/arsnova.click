@@ -32,7 +32,7 @@ function checkOnChangeCallbacks(observerInstance, item, currentPath) {
 }
 
 export class EventStackObserver {
-	constructor (options) {
+	constructor(options) {
 		this.observer = null;
 		this.onChangeCallbacks = [];
 		this.onRemoveCallbacks = [];
@@ -48,7 +48,7 @@ export class EventStackObserver {
 		};
 	}
 
-	startObserving () {
+	startObserving() {
 		this.stop();
 		if (!EventManagerCollection.findOne()) {
 			throw new Error("EventManager collection is not ready!");
@@ -57,7 +57,7 @@ export class EventStackObserver {
 		ObserveSequence.observe(function () {
 			return EventManagerCollection.find();
 		}, {
-			changedAt: function (id,newDocument, oldDocument) {
+			changedAt: function (id, newDocument, oldDocument) {
 				if (Router.current().route.getName() && oldDocument.eventStack.length < newDocument.eventStack.length) {
 					const currentPath = Router.current().route.getName().replace(/(:quizName.)*(.:id)*(.:questionIndex)*/g, "");
 					for (let i = observerInstance.lastPerformedIndex; i < newDocument.eventStack.length; i++) {
@@ -68,7 +68,7 @@ export class EventStackObserver {
 								console.log(
 									"EventStackObserver: Currently on route: " + currentPath,
 									"Number of callbacks: " + observerInstance.onChangeCallbacks[currentPath].length,
-									"callbacks: ",observerInstance.onChangeCallbacks[currentPath]
+									"callbacks: ", observerInstance.onChangeCallbacks[currentPath]
 								);
 							}
 							if ($.inArray(item.key, observerInstance.ignoreChanges) === -1) {
@@ -100,7 +100,7 @@ export class EventStackObserver {
 						console.log(
 							"EventStackObserver: Currently on route: " + currentPath,
 							"Number of callbacks: " + observerInstance.onRemoveCallbacks[currentPath].length,
-							"callbacks: ",observerInstance.onRemoveCallbacks[currentPath]
+							"callbacks: ", observerInstance.onRemoveCallbacks[currentPath]
 						);
 					}
 					observerInstance.onRemoveCallbacks[currentPath].forEach(function (callbackObject) {
@@ -120,7 +120,7 @@ export class EventStackObserver {
 		this.running = true;
 	}
 
-	stop () {
+	stop() {
 		if (this.isRunning()) {
 			this.hooks.after.remove.remove();
 			if (this.observer) {
@@ -130,11 +130,11 @@ export class EventStackObserver {
 		}
 	}
 
-	isRunning () {
+	isRunning() {
 		return this.running;
 	}
 
-	onChange (limiter, callback) {
+	onChange(limiter, callback) {
 		if (!(limiter instanceof Array)) {
 			throw new Error("Limiter must be an Array!");
 		}
@@ -157,12 +157,12 @@ export class EventStackObserver {
 				callback
 			});
 			if (this.verbose) {
-				console.log("EventObserver: Added callback to route ",currentPath, " via limiter ",limiter, " with callback ",[callback]);
+				console.log("EventObserver: Added callback to route ", currentPath, " via limiter ", limiter, " with callback ", [callback]);
 			}
 		}
 	}
 
-	onRemove (callback) {
+	onRemove(callback) {
 		if (typeof callback !== 'function') {
 			throw new Error("invalid callback!");
 		}
@@ -181,11 +181,11 @@ export class EventStackObserver {
 		}
 	}
 
-	getAllCallbacks (routeLimiter) {
+	getAllCallbacks(routeLimiter) {
 		return routeLimiter ? this.onChangeCallbacks[routeLimiter] : this.onChangeCallbacks;
 	}
 
-	getObserver () {
+	getObserver() {
 		return this.observer;
 	}
 }

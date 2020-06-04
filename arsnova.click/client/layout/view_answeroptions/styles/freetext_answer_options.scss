@@ -18,45 +18,45 @@
 
 .freeTextAnswerOptions {
 
-	.distance-top {
-		margin-bottom: 20px;
-	}
+  .distance-top {
+    margin-bottom: 20px;
+  }
 
-	.configOptionContainer {
-		margin-top: 5px;
-		display: table;
+  .configOptionContainer {
+    margin-top: 5px;
+    display: table;
 
-		.checkboxLabel {
-			height: 35px;
-			margin: 0;
-			width: calc(100% - 100px);
-			display: table-cell;
-			vertical-align: middle;
-		}
-	}
+    .checkboxLabel {
+      height: 35px;
+      margin: 0;
+      width: calc(100% - 100px);
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
 
-	textarea {
-		border-radius: $corner-radius;
-		width: 100%;
-	}
-	.invalidQuestion {
-		border: 2px solid red;
-	}
-	.padding-top {
-		padding-top: 20px;
-	}
-	.failed {
-		color: red;
-		background: white;
-		border-radius: $corner-radius;
-		padding: 5px;
-		opacity: .7;
-	}
-	.success {
-		color: green;
-		background: white;
-		border-radius: $corner-radius;
-		padding: 5px;
-		opacity: .7;
-	}
+  textarea {
+    border-radius: $corner-radius;
+    width: 100%;
+  }
+  .invalidQuestion {
+    border: 2px solid red;
+  }
+  .padding-top {
+    padding-top: 20px;
+  }
+  .failed {
+    color: red;
+    background: white;
+    border-radius: $corner-radius;
+    padding: 5px;
+    opacity: .7;
+  }
+  .success {
+    color: green;
+    background: white;
+    border-radius: $corner-radius;
+    padding: 5px;
+    opacity: .7;
+  }
 }

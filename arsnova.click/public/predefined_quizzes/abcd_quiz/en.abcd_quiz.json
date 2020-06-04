@@ -1,0 +1,43 @@
+{
+  "hashtag": "ABCD Quiz 1",
+  "isFirstStart": false,
+  "questionList": [
+    { "hashtag": "ABCD Quiz 1",
+      "isFirstStart": false,
+      "questionText": "",
+      "timer": 60,
+      "startTime": 0,
+      "questionIndex": 0,
+      "displayAnswerText": false,
+      "answerOptionList": [],
+      "type": "ABCDSingleChoiceQuestion"
+    }
+  ],
+  "configuration": {
+    "hashtag": "ABCD Quiz 1",
+    "music": {
+      "hashtag": "ABCD Quiz 1",
+      "isUsingGlobalVolume": false,
+      "lobbyEnabled": true,
+      "lobbyTitle": "Song2",
+      "lobbyVolume": 50,
+      "countdownRunningEnabled": true,
+      "countdownRunningTitle": "Song0",
+      "countdownRunningVolume": 50,
+      "countdownEndEnabled": true,
+      "countdownEndTitle": "Song1",
+      "countdownEndVolume": 100
+    },
+    "nicks": {
+      "hashtag": "ABCD Quiz 1",
+      "selectedValues": [],
+      "blockIllegal": true,
+      "restrictToCASLogin": false
+    },
+    "theme": "theme-Material",
+    "readingConfirmationEnabled": false,
+    "showResponseProgress": true,
+    "confidenceSliderEnabled": false
+  },
+  "type": "DefaultQuestionGroup"
+}

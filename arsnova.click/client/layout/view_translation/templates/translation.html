@@ -16,23 +16,24 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="translate">
-	<div class="row center-vertical">
-		<div class="col-xs-12">
-			{{#if i18n_enabled}}
-				<div class="row" role="list">
-					{{#each i18n_sortedLanguages }}
-						<div class="col-xs-12 col-md-6 margin-bottom available_translations" role="listitem">
-							<button type="button"
+    <div class="row center-vertical">
+        <div class="col-xs-12">
+            {{#if i18n_enabled}}
+                <div class="row" role="list">
+                    {{#each i18n_sortedLanguages }}
+                        <div class="col-xs-12 col-md-6 margin-bottom available_translations" role="listitem">
+                            <button type="button"
                                     id="translation_{{this.tag}}"
-									class="button btn{{#if i18n_isCurrentLanguage this.tag}} selectedLanguageButton button-success{{else}} button-grey{{/if}} tabbable"
-							>{{this.name}}</button>
-						</div>
-					{{/each}}
-				</div>
-			{{ else }}
-				<p>{{_ "view.translation.i18n_currently_not_available"}}</p>
-			{{/if}}
-		</div>
-	</div>
-	{{> footerNavButtons backId="backButton" }}
+                                    class="button btn{{#if i18n_isCurrentLanguage
+                                                           this.tag}} selectedLanguageButton button-success{{else}} button-grey{{/if}} tabbable"
+                            >{{this.name}}</button>
+                        </div>
+                    {{/each}}
+                </div>
+            {{ else }}
+                <p>{{_ "view.translation.i18n_currently_not_available"}}</p>
+            {{/if}}
+        </div>
+    </div>
+    {{> footerNavButtons backId="backButton" }}
 </template>

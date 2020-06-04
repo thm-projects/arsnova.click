@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {AnswerOptionCollection} from '/lib/answeroptions/collection.js';
 import {ResponsesCollection, rangedInputValueSchema, freeTextInputValueSchema} from '/lib/responses/collection.js';
 import {QuestionGroupCollection} from '/lib/questions/collection.js';
@@ -31,7 +31,11 @@ Meteor.methods({
 			hashtag: hashtagSchema,
 			questionIndex: questionIndexSchema,
 			userNick: userNickSchema
-		}).validate({hashtag: responseDoc.hashtag, questionIndex: responseDoc.questionIndex, userNick: responseDoc.userNick});
+		}).validate({
+			hashtag: responseDoc.hashtag,
+			questionIndex: responseDoc.questionIndex,
+			userNick: responseDoc.userNick
+		});
 
 		const responseValueObject = {};
 		const hashtag = responseDoc.hashtag;

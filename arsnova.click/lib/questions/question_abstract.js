@@ -1,5 +1,5 @@
 import {Meteor} from 'meteor/meteor';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {hashtagSchema} from '/lib/hashtags/collection.js';
 import {AbstractAnswerOption} from '../answeroptions/answeroption_abstract.js';
 import {DefaultAnswerOption} from '../answeroptions/answeroption_default.js';
@@ -22,7 +22,7 @@ export class AbstractQuestion {
 	 * @throws {TypeError} If this method is invoked directly, the options Object is undefined or the optional type attribute is not matching the constructor name
 	 * @throws {Error} If the hashtag or the questionIndex attributes of the options Object are missing
 	 */
-	constructor (options) {
+	constructor(options) {
 		if (this.constructor === AbstractQuestion) {
 			throw new TypeError("Cannot construct Abstract instances directly");
 		}
@@ -43,11 +43,11 @@ export class AbstractQuestion {
 	 * Returns the Hashtag of the Question instance
 	 * @returns {String} The hashtag identifying the session
 	 */
-	getHashtag () {
+	getHashtag() {
 		return this[hashtag];
 	}
 
-	setHashtag (newHashtag) {
+	setHashtag(newHashtag) {
 		new SimpleSchema({
 			hashtag: hashtagSchema
 		}).validate({hashtag: newHashtag});
@@ -57,11 +57,11 @@ export class AbstractQuestion {
 		});
 	}
 
-	getIsFirstStart () {
+	getIsFirstStart() {
 		return this[isFirstStart];
 	}
 
-	setIsFirstStart (value) {
+	setIsFirstStart(value) {
 		if (typeof value !== "boolean") {
 			throw new Error("Invalid argument for AbstractQuestion.setIsFirstStart");
 		}
@@ -73,7 +73,7 @@ export class AbstractQuestion {
 	 * @param {String} text The text which will be displayed during the quiz
 	 * @throws {Error} If the text is not of type String
 	 */
-	setQuestionText (text) {
+	setQuestionText(text) {
 		if (typeof text !== "string") {
 			throw new Error("Invalid argument for Question.setText");
 		}
@@ -84,7 +84,7 @@ export class AbstractQuestion {
 	 * Returns the currently set question text
 	 * @returns {String} The current question text
 	 */
-	getQuestionText () {
+	getQuestionText() {
 		return this[questionText];
 	}
 
@@ -92,7 +92,7 @@ export class AbstractQuestion {
 	 * Returns the current index of the question
 	 * @returns {Number} The current index of the question
 	 */
-	getQuestionIndex () {
+	getQuestionIndex() {
 		return this[questionIndex];
 	}
 
@@ -100,7 +100,7 @@ export class AbstractQuestion {
 	 * Sets the index of the question and populates the changes to the AnswerOptions of this Question instance
 	 * @param {Number} index The new index of the question
 	 */
-	setQuestionIndex (index) {
+	setQuestionIndex(index) {
 		this[questionIndex] = index;
 		for (let i = 0; i < this.getAnswerOptionList().length; i++) {
 			this.getAnswerOptionList()[i].setQuestionIndex(index);
@@ -112,7 +112,7 @@ export class AbstractQuestion {
 	 * @param {Number} time The timer for the questions countdown. Must be in seconds.
 	 * @throws {Error} If the time is not of type Number
 	 */
-	setTimer (time) {
+	setTimer(time) {
 		if (typeof time !== "number") {
 			throw new Error("Invalid argument for Question.setTimer");
 		}
@@ -123,7 +123,7 @@ export class AbstractQuestion {
 	 * Returns the currently set timer value
 	 * @returns {Number} The current timer value
 	 */
-	getTimer () {
+	getTimer() {
 		return this[timer];
 	}
 
@@ -132,7 +132,7 @@ export class AbstractQuestion {
 	 * @param {Number} time The timestamp of the Date() Object where the question starts
 	 * @throws {Error} If the timestamp is not of type Number or is in the past
 	 */
-	setStartTime (time) {
+	setStartTime(time) {
 		if (typeof time !== "number" || new Date(time) <= new Date()) {
 			throw new Error("Invalid argument for Question.setStartTime");
 		}
@@ -143,7 +143,7 @@ export class AbstractQuestion {
 	 * Returns the currently set start time
 	 * @returns {Number} The currently set start time
 	 */
-	getStartTime () {
+	getStartTime() {
 		return this[startTime];
 	}
 
@@ -153,7 +153,7 @@ export class AbstractQuestion {
 	 * @param {Number} [index] An optional index where the AnswerOption instance should be added. If not set or set to an invalid value the instance is added to the end of the answerOptionList
 	 * @throws {Error} If the answerOption is not of tye AbstractAnswerOption
 	 */
-	addAnswerOption (answerOption, index) {
+	addAnswerOption(answerOption, index) {
 		if (typeof answerOption === "undefined" || !(answerOption instanceof AbstractAnswerOption)) {
 			throw new Error("Invalid argument for Question.addAnswerOption");
 		}
@@ -174,7 +174,7 @@ export class AbstractQuestion {
 	 * @param {Number} index The index of the AnswerOption instance which shall be removed
 	 * @throws {Error} If the index is not set or set to an invalid value
 	 */
-	removeAnswerOption (index) {
+	removeAnswerOption(index) {
 		if (typeof index === "undefined" || index < 0 || index > this.getAnswerOptionList().length) {
 			throw new Error("Invalid argument for Question.removeAnswerOption");
 		}
@@ -188,7 +188,7 @@ export class AbstractQuestion {
 	 * Removes all AnswerOption instances in the answerOptionList.
 	 * The AnswerOption instance objects are not destroyed
 	 */
-	removeAllAnswerOptions () {
+	removeAllAnswerOptions() {
 		this[answerOptionList] = [];
 	}
 
@@ -196,7 +196,7 @@ export class AbstractQuestion {
 	 * Returns the answerOptionList
 	 * @returns {Array} The list of all AnswerOptions currently hold by this Question instance
 	 */
-	getAnswerOptionList () {
+	getAnswerOptionList() {
 		return this[answerOptionList];
 	}
 
@@ -204,9 +204,11 @@ export class AbstractQuestion {
 	 * Serialize the instance object to a JSON compatible object
 	 * @returns {{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
 	 */
-	serialize () {
+	serialize() {
 		let answerOptionListSerialized = [];
-		this.getAnswerOptionList().forEach(function (answeroption) { answerOptionListSerialized.push(answeroption.serialize()); });
+		this.getAnswerOptionList().forEach(function (answeroption) {
+			answerOptionListSerialized.push(answeroption.serialize());
+		});
 		return {
 			hashtag: this.getHashtag(),
 			isFirstStart: this.getIsFirstStart(),
@@ -224,7 +226,7 @@ export class AbstractQuestion {
 	 * and summarizes their result of calling .isValid()
 	 * @returns {boolean} True, if the complete Question instance is valid, False otherwise
 	 */
-	isValid () {
+	isValid() {
 		let answerOptionListValid = true;
 		this.getAnswerOptionList().forEach(function (answerOption) {
 			if (!answerOption.isValid()) {
@@ -237,30 +239,33 @@ export class AbstractQuestion {
 		return answerOptionListValid && questionTextWithoutMarkdownChars > 4 && questionTextWithoutMarkdownChars < 50001 && this.getTimer() > 0;
 	}
 
-	getDisplayAnswerText () {
+	getDisplayAnswerText() {
 		return this[displayAnswerText];
 	}
 
-	setDisplayAnswerText (newVal) {
+	setDisplayAnswerText(newVal) {
 		this[displayAnswerText] = newVal;
 	}
 
 	/**
 	 * @returns {String} The question text without the markdown characters
 	 */
-	getQuestionTextWithoutMarkdownChars () {
-		return this.getQuestionText().replace(/#/g,"").replace(/\*/g,"").replace(/1./g,"").replace(/\[/g,"").replace(/\]\(/g,"").replace(/\)/g,"").replace(/- /g,"").replace(/ /g,"").replace(/\\\(/g,"").replace(/\\\)/g,"").replace(/$/g,"").replace(/<hlcode>/g,"").replace(/<\/hlcode>/g,"").replace(/>/g,"");
+	getQuestionTextWithoutMarkdownChars() {
+		return this.getQuestionText().replace(/#/g, "").replace(/\*/g, "").replace(/1./g, "").replace(/\[/g, "").replace(/\]\(/g, "").replace(/\)/g, "").replace(/- /g, "").replace(/ /g, "").replace(/\\\(/g, "").replace(/\\\)/g, "").replace(/$/g, "").replace(/<hlcode>/g, "").replace(/<\/hlcode>/g, "").replace(/>/g, "");
 	}
 
 	/**
 	 * Gets the validation error reason from the question and all included answerOptions as a stackable array
 	 * @returns {Array} Contains an Object which holds the number of the current question and the reason why the validation has failed
 	 */
-	getValidationStackTrace () {
+	getValidationStackTrace() {
 		const result = [];
 		const questionTextWithoutMarkdownChars = this.getQuestionTextWithoutMarkdownChars().length;
 		if (questionTextWithoutMarkdownChars < 5) {
-			result.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "question_text_too_small"});
+			result.push({
+				occuredAt: {type: "question", id: this.getQuestionIndex()},
+				reason: "question_text_too_small"
+			});
 		} else if (questionTextWithoutMarkdownChars > 50000) {
 			result.push({occuredAt: {type: "question", id: this.getQuestionIndex()}, reason: "question_text_too_long"});
 		}
@@ -281,7 +286,7 @@ export class AbstractQuestion {
 	 * @param {AbstractQuestion} question The Question instance which should be checked
 	 * @returns {boolean} True if both instances are completely equal, False otherwise
 	 */
-	equals (question) {
+	equals(question) {
 		if (!(question instanceof AbstractQuestion)) {
 			return false;
 		}
@@ -312,7 +317,7 @@ export class AbstractQuestion {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-toJSONValue
 	 * @returns {{hashtag,questionText,type,timer,startTime,questionIndex,answerOptionList}|{hashtag:String,questionText:String,type:AbstractQuestion,timer:Number,startTime:Number,questionIndex:Number,answerOptionList:Array}}
 	 */
-	toJSONValue () {
+	toJSONValue() {
 		return this.serialize();
 	}
 
@@ -320,7 +325,7 @@ export class AbstractQuestion {
 	 * Quick way to insert a default AnswerOption to the Question instance.
 	 * @param {Number} [index] The index where the AnswerOption should be inserted. If not passed, it will be added to the end of the answerOptionList
 	 */
-	addDefaultAnswerOption (index) {
+	addDefaultAnswerOption(index) {
 		if (typeof index === "undefined" || index >= this.getAnswerOptionList().length) {
 			index = this.getAnswerOptionList().length;
 		}

@@ -16,13 +16,14 @@
 * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.-->
 
 <template name="renameHashtagSplashscreen">
-	<div class="modal splashscreen" role="dialog">
-		<div class="modal-dialog">
+    <div class="modal splashscreen" role="dialog">
+        <div class="modal-dialog">
             <div class="noSplashscreenPadding">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h2>{{{_ "view.hashtag_management.import"}}}</h2>
-                        <div class="splashscreen-container-close" aria-label="{{_ "global.close_window"}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
+                        <div class="splashscreen-container-close" aria-label="{{_ "global.close_window"}}"><span
+                                class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
                     </div>
                     <div class="modal-body">
                         {{#if isArsnovaImport}}
@@ -38,7 +39,7 @@
                                    aria-multiline="false"
                                    placeholder="{{_ "view.hashtag_management.enter_quiz_name" }}"
                                    aria-label="{{_ "view.hashtag_management.enter_quiz_name" }}"
-                                   maxlength="{{getHashtagSchema.max}}" />
+                                   maxlength="{{getHashtagSchema.max}}"/>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -66,6 +67,6 @@
                     </div>
                 </div>
             </div>
-		</div>
-	</div>
+        </div>
+    </div>
 </template>

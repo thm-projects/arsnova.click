@@ -15,11 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {Router} from 'meteor/iron:router';
 import {HashtagsCollection, hashtagSchema} from '/lib/hashtags/collection.js';
+import {ProxyCollection} from '/lib/proxy/collection.js';
 import {QuestionGroupCollection, questionGroupSchema} from '/lib/questions/collection.js';
 import {EventManagerCollection} from '/lib/eventmanager/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
@@ -33,6 +34,7 @@ import {ExcelTheme} from '/server/export_templates/excel_default_styles.js';
 import fs from 'fs';
 import process from 'process';
 import xlsx from 'excel4node';
+import {parseQuizdata} from "./lib";
 
 Router.route("/server/preview/:themeName/:language", function () {
 	const self = this,
@@ -82,32 +84,116 @@ Router.route("/server/generateExcelFile/:hashtag/:translation/:privateKey/:theme
 		dateFormat: 'd.m.yyyy'
 	});
 	const themeInstance = new ExcelTheme(this.params.theme || SessionConfigurationCollection.findOne({hashtag: this.params.hashtag}).theme || Meteor.settings.public.default.theme);
-	SummaryExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()});
+	SummaryExcelSheet.generateSheet(wb, {
+		hashtag: this.params.hashtag,
+		translation: this.params.translation,
+		defaultStyles: themeInstance.getStyles()
+	});
 	const questionGroup = QuestionGroupCollection.findOne({hashtag: this.params.hashtag});
 	for (let i = 0; i < questionGroup.questionList.length; i++) {
 		switch (questionGroup.questionList[i].type) {
 			case "SingleChoiceQuestion":
 			case "YesNoSingleChoiceQuestion":
 			case "TrueFalseSingleChoiceQuestion":
-				SingleChoiceExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
+				SingleChoiceExcelSheet.generateSheet(wb, {
+					hashtag: this.params.hashtag,
+					translation: this.params.translation,
+					defaultStyles: themeInstance.getStyles()
+				}, i);
 				break;
 			case "MultipleChoiceQuestion":
-				MultipleChoiceExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
+				MultipleChoiceExcelSheet.generateSheet(wb, {
+					hashtag: this.params.hashtag,
+					translation: this.params.translation,
+					defaultStyles: themeInstance.getStyles()
+				}, i);
 				break;
 			case "RangedQuestion":
-				RangedExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
+				RangedExcelSheet.generateSheet(wb, {
+					hashtag: this.params.hashtag,
+					translation: this.params.translation,
+					defaultStyles: themeInstance.getStyles()
+				}, i);
 				break;
 			case "SurveyQuestion":
-				SurveyExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
+				SurveyExcelSheet.generateSheet(wb, {
+					hashtag: this.params.hashtag,
+					translation: this.params.translation,
+					defaultStyles: themeInstance.getStyles()
+				}, i);
 				break;
 			case "FreeTextQuestion":
-				FreeTextExcelSheet.generateSheet(wb, {hashtag: this.params.hashtag, translation: this.params.translation, defaultStyles: themeInstance.getStyles()}, i);
+				FreeTextExcelSheet.generateSheet(wb, {
+					hashtag: this.params.hashtag,
+					translation: this.params.translation,
+					defaultStyles: themeInstance.getStyles()
+				}, i);
 				break;
 		}
 	}
 	const date = new Date();
 	wb.write("Export-" + this.params.hashtag + "-" + date.getDate() + "_" + (date.getMonth() + 1) + "_" + date.getFullYear() + "-" + date.getHours() + "_" + date.getMinutes() + ".xlsx", this.response);
 }, {where: 'server'});
+
+Router.route("/server/rewriteData/:hashtag/:fileName", function () {
+	this.params.hashtag = decodeURIComponent(this.params.hashtag);
+	if (!HashtagsCollection.findOne({hashtag: this.params.hashtag})) {
+		this.response.writeHead(500);
+		this.response.end("Hashtag not found");
+		return;
+	}
+	if (!SessionConfigurationCollection.findOne({hashtag: this.params.hashtag})) {
+		this.response.writeHead(500);
+		this.response.end("Session is inactive");
+		return;
+	}
+	const proxyDoc = ProxyCollection.findOne({hashtag: this.params.hashtag});
+	const self = this;
+	const fileLocation = proxyDoc.proxyFiles.find(function (element) {
+		return element.fileName === self.params.fileName;
+	}).fileLocation;
+	fs.access(fileLocation, function (error) {
+		if (error) {
+			self.response.writeHead(404);
+			self.response.end("404 - File not found");
+		} else {
+			self.response.setHeader('content-type', "video/mpeg");
+			fs.readFile(fileLocation, function (err, data) {
+				if (err) {
+					throw err;
+				}
+				self.response.end(data);
+			});
+		}
+	});
+}, {where: 'server'});
+
+Router.route('/api/downloadQuizAssets', {where: 'server'})
+	.post(function () {
+		const sessionConfiguration = this.request.body.sessionConfiguration;
+		const hashtag = decodeURIComponent(sessionConfiguration.hashtag);
+		const privateKey = decodeURIComponent(sessionConfiguration.privateKey);
+		const self = this;
+
+		if (!HashtagsCollection.findOne({hashtag: hashtag})) {
+			this.response.writeHead(500);
+			this.response.end("Hashtag not found");
+		}
+		if (HashtagsCollection.findOne({hashtag: hashtag}).privateKey !== privateKey) {
+			this.response.writeHead(500);
+			this.response.end("Missing permissions.");
+		}
+
+		const result = parseQuizdata({quizData: QuestionGroupCollection.findOne({hashtag: hashtag}), privateKey: privateKey});
+		result.then(function (proxyFiles) {
+			Meteor.call('ProxyCollection.updateData', hashtag, proxyFiles);
+			self.response.writeHead(200);
+			self.response.end(JSON.stringify(proxyFiles));
+		}, function (data) {
+			self.response.writeHead(500);
+			self.response.end(JSON.stringify(data));
+		});
+	});
 
 Router.route('/api/keepalive', {where: 'server'})
 	.post(function () {
@@ -223,7 +309,7 @@ Router.route('/api/openSession', {where: 'server'})
 			this.response.end("Missing permissions.");
 		}
 
-		var eventManagerCollectionEntry =  EventManagerCollection.findOne({hashtag: hashtag});
+		var eventManagerCollectionEntry = EventManagerCollection.findOne({hashtag: hashtag});
 
 		if (!eventManagerCollectionEntry) {
 			Meteor.call('EventManagerCollection.add', hashtag);
@@ -293,14 +379,16 @@ Router.route('/api/updateQuestionGroup', {where: 'server'})
 		});
 
 		const sessionConfigObject = questionGroupModel.configuration;
-		SessionConfigurationCollection.update({hashtag: sessionConfigObject.hashtag}, {$set: {
-			hashtag: sessionConfigObject.hashtag,
-			music: sessionConfigObject.music,
-			nicks: sessionConfigObject.nicks,
-			theme: sessionConfigObject.theme,
-			showResponseProgress: sessionConfigObject.showResponseProgress,
-			readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled
-		}}, {upsert: true});
+		SessionConfigurationCollection.update({hashtag: sessionConfigObject.hashtag}, {
+			$set: {
+				hashtag: sessionConfigObject.hashtag,
+				music: sessionConfigObject.music,
+				nicks: sessionConfigObject.nicks,
+				theme: sessionConfigObject.theme,
+				showResponseProgress: sessionConfigObject.showResponseProgress,
+				readingConfirmationEnabled: sessionConfigObject.readingConfirmationEnabled
+			}
+		}, {upsert: true});
 
 		Meteor.call('SessionConfiguration.addConfig', sessionConfigObject);
 

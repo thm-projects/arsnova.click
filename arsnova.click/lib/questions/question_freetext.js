@@ -9,7 +9,7 @@ export class FreeTextQuestion extends AbstractQuestion {
 	 * @see AbstractQuestion.constructor()
 	 * @param options @see AbstractQuestion.constructor().options
 	 */
-	constructor (options) {
+	constructor(options) {
 		if (typeof options.type !== "undefined" && options.type !== "FreeTextQuestion") {
 			throw new TypeError("Invalid construction type while creating new FreeTextQuestion");
 		}
@@ -30,7 +30,7 @@ export class FreeTextQuestion extends AbstractQuestion {
 	 * @see AbstractQuestion.serialize()
 	 * @returns {{hashtag, questionText, type, timer, startTime, questionIndex, answerOptionList}|{hashtag: String, questionText: String, type: AbstractQuestion, timer: Number, startTime: Number, questionIndex: Number, answerOptionList: Array}}
 	 */
-	serialize () {
+	serialize() {
 		return Object.assign(super.serialize(), {
 			type: "FreeTextQuestion"
 		});
@@ -42,13 +42,13 @@ export class FreeTextQuestion extends AbstractQuestion {
 	 * @see AbstractQuestion.isValid()
 	 * @returns {boolean} True, if the complete Question instance is valid, False otherwise
 	 */
-	isValid () {
+	isValid() {
 		return super.isValid() &&
 			this.getAnswerOptionList().length === 1 &&
 			this.getAnswerOptionList()[0].isValid();
 	}
 
-	addAnswerOption (answerOption) {
+	addAnswerOption(answerOption) {
 		if (typeof answerOption === "undefined" || !(answerOption instanceof FreeTextAnswerOption)) {
 			throw new Error("AnswerOptionType must match FreeTextAnswerOption, got: ", answerOption);
 		}
@@ -62,7 +62,7 @@ export class FreeTextQuestion extends AbstractQuestion {
 	 * @param {FreeTextQuestion} question The Question instance which should be checked
 	 * @returns {boolean} True if both instances are completely equal, False otherwise
 	 */
-	equals (question) {
+	equals(question) {
 		return super.equals(question);
 	}
 
@@ -71,7 +71,7 @@ export class FreeTextQuestion extends AbstractQuestion {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-clone
 	 * @returns {FreeTextQuestion} An independent deep copy of the current instance
 	 */
-	clone () {
+	clone() {
 		return new FreeTextQuestion(this.serialize());
 	}
 
@@ -80,18 +80,18 @@ export class FreeTextQuestion extends AbstractQuestion {
 	 * @see http://docs.meteor.com/api/ejson.html#EJSON-CustomType-typeName
 	 * @returns {String} The name of the instantiated class
 	 */
-	typeName () {
+	typeName() {
 		return "FreeTextQuestion";
 	}
 
-	translationReferrer () {
+	translationReferrer() {
 		return "view.questions.free_text_question";
 	}
 
 	/**
 	 * Quick way to insert a default AnswerOption to the Question instance.
 	 */
-	addDefaultAnswerOption () {
+	addDefaultAnswerOption() {
 		this.addAnswerOption(
 			new FreeTextAnswerOption({
 				hashtag: this.getHashtag(),

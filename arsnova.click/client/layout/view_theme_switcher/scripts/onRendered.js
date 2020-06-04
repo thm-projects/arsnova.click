@@ -38,7 +38,9 @@ Template.themeSwitcher.onRendered(function () {
 	headerLib.calculateTitelHeight();
 	$('.imagePreviewFile').on("load", function () {
 		const themePreviews = $(".themePreview");
-		const heights = themePreviews.map(function () { return $(this).height(); }).get();
+		const heights = themePreviews.map(function () {
+			return $(this).height();
+		}).get();
 		const maxHeight = Math.max.apply(null, heights);
 		themePreviews.height(maxHeight);
 	});

@@ -3,8 +3,10 @@
         <div class="col-xs-12">
             <div class="row distance-top" role="list">
                 {{#each themes}}
-                    <div class="col-xs-12 col-sm-6 themePreview {{#if isThemeSelected this.id}}selectedTheme{{/if}}" id="{{this.id}}" role="listitem">
-                        <img src="/server/preview/{{this.id}}/{{getLanguageTag}}" alt="Preview of theme {{_ this.name}}" class="imagePreviewFile" role="img" aria-describedby="{{this.id}}_description" />
+                    <div class="col-xs-12 col-sm-6 themePreview {{#if isThemeSelected this.id}}selectedTheme{{/if}}"
+                         id="{{this.id}}" role="listitem">
+                        <img src="/server/preview/{{this.id}}/{{getLanguageTag}}" alt="Preview of theme {{_ this.name}}"
+                             class="imagePreviewFile" role="img" aria-describedby="{{this.id}}_description"/>
                         <span class="text-light" id="{{this.id}}_description">{{_ this.description}}</span>
                     </div>
                 {{/each}}

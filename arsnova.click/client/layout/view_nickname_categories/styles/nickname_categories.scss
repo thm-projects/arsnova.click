@@ -17,58 +17,58 @@
 @import "../../../layout/global/styles/appearance";
 
 .nicknameCategories {
-	.nickCategoryWrapper {
-		display: flex;
-		justify-content: flex-start;
-		align-content: stretch;
-		flex-flow: row wrap;
-	}
+  .nickCategoryWrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-content: stretch;
+    flex-flow: row wrap;
+  }
 
-	h3 {
-		text-align: center;
-	}
+  h3 {
+    text-align: center;
+  }
 
-	.nickStyle:not(#block_illegal_nicks_wrapper):not(#restrict_to_cas_wrapper) {
-		border-radius: $corner-radius;
-		padding: 10px;
-		margin: 10px;
-		cursor: pointer;
-		user-select: none;
-		-moz-user-select: none;
-		-webkit-user-select: none;
-		-ms-user-select: none;
+  .nickStyle:not(#block_illegal_nicks_wrapper):not(#restrict_to_cas_wrapper) {
+    border-radius: $corner-radius;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 
-		p {
-			margin: 0;
-			width: 100%;
-		}
+    p {
+      margin: 0;
+      width: 100%;
+    }
 
-		&.nickCategory {
-			display: flex;
-			flex-basis: 20%;
-			flex-grow: 1;
-			flex-shrink: 1;
+    &.nickCategory {
+      display: flex;
+      flex-basis: 20%;
+      flex-grow: 1;
+      flex-shrink: 1;
 
-			p {
-				text-align: center;
-			}
-		}
+      p {
+        text-align: center;
+      }
+    }
 
-		&#select_all,
-		&#remove_all,
-		&#no_nick_selected {
-			p {
-				text-align: center;
-			}
-		}
-	}
+    &#select_all,
+    &#remove_all,
+    &#no_nick_selected {
+      p {
+        text-align: center;
+      }
+    }
+  }
 
-	#block_illegal_nicks_wrapper,
-	#restrict_to_cas_wrapper {
-		margin-top: 10px;
-		overflow: hidden;
-		p {
-			margin: 0;
-		}
-	}
+  #block_illegal_nicks_wrapper,
+  #restrict_to_cas_wrapper {
+    margin-top: 10px;
+    overflow: hidden;
+    p {
+      margin: 0;
+    }
+  }
 }

@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 
 Meteor.publish('SessionConfigurationCollection.join', function (hashtag) {

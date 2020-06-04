@@ -48,15 +48,15 @@ Template.memberlist.events({
 Template.kickMemberSplashscreen.events({
 	"click #ban-nick-label": function () {
 		const banNickInput = $('#ban-nick');
-		banNickInput.prop("checked",!banNickInput.prop("checked"));
+		banNickInput.prop("checked", !banNickInput.prop("checked"));
 	}
 });
 
 Template.memberlistFooterNavButtons.events({
-	'click #showMore': ()=> {
+	'click #showMore': () => {
 		Session.set("learnerCountOverride", true);
 	},
-	'click #showLess': ()=> {
+	'click #showLess': () => {
 		Session.set("learnerCountOverride", false);
 	},
 	'click #startPolling': function () {

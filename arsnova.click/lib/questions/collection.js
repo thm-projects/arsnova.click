@@ -16,7 +16,7 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Mongo} from 'meteor/mongo';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {hashtagSchema} from '../hashtags/collection.js';
 import * as localData from '/lib/local_storage.js';
 
@@ -57,7 +57,10 @@ export const questionGroupSchema = new SimpleSchema({
 	hashtag: hashtagSchema,
 	questionList: {
 		/* The index is defined in the EventManager.questionIndex variable. The arrays index represents the questionIndex. */
-		type: [Object]
+		type: Array // [Object]
+	},
+	"questionList.$": {
+		type: Object
 	},
 	"questionList.$.hashtag": {
 		type: hashtagSchema,
@@ -92,9 +95,12 @@ export const questionGroupSchema = new SimpleSchema({
 		optional: true
 	},
 	"questionList.$.answerOptionList": {
-		type: [Object],
+		type: Array, // [Object]
 		optional: true,
 		blackbox: true
+	},
+	"questionList.$.answerOptionList.$": {
+		type: Object
 	},
 	"questionList.$.timer": {
 		type: timerSchema

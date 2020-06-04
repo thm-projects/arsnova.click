@@ -26,7 +26,8 @@
                               aria-label="{{_ "view.answeroptions.description.free_text_question_text"}}"
                               rows="1"
                               data-intro="{{_ "view.answeroptions.description.free_text_question_text"}}"
-                              placeholder="{{_ "view.answeroptions.free_text_question.text_placeholder" }}">{{answerText}}</textarea>
+                              placeholder="{{_
+                                      "view.answeroptions.free_text_question.text_placeholder" }}">{{answerText}}</textarea>
                 </div>
             </div>
             <div class="row">
@@ -55,7 +56,8 @@
                 </div>
             </div>
             <div class="row distance-top" data-intro="{{_ "view.answeroptions.description.check_answer"}}">
-                <h2 class="col-xs-12 text-light text-center">{{_ "view.answeroptions.free_text_question.check_answer_title"}}</h2>
+                <h2 class="col-xs-12 text-light text-center">{{_
+                        "view.answeroptions.free_text_question.check_answer_title"}}</h2>
                 <div class="col-xs-12">
                     <textarea id="answerCheckArea"
                               aria-label="{{_ "view.answeroptions.description.check_answer"}}"
@@ -65,9 +67,11 @@
                     <div class="center-block">
                         {{#if isCheckingResponse}}
                             {{#if getIsCorrectResponse}}
-                                <h4 class="text-center success">{{_ "view.answeroptions.free_text_question.check_correct"}}</h4>
+                                <h4 class="text-center success">{{_
+                                        "view.answeroptions.free_text_question.check_correct"}}</h4>
                             {{else}}
-                                <h4 class="text-center failed">{{_ "view.answeroptions.free_text_question.check_incorrect"}}</h4>
+                                <h4 class="text-center failed">{{_
+                                        "view.answeroptions.free_text_question.check_incorrect"}}</h4>
                             {{/if}}
                         {{/if}}
                     </div>

@@ -16,29 +16,29 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 .contentContainer {
-	margin-bottom: 35px;
+  margin-bottom: 35px;
 }
 
 .scrollBarYContainer {
-	overflow-y: auto;
-	overflow-x: hidden;
-	height: 92%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 92%;
 }
 
 .contentPosition {
-	overflow: auto;
-	position: absolute;
-	width: 100%;
-	height: 100%;
-    z-index: 1040;
+  overflow: auto;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1040;
 }
 
 .contentPosition > .row {
-	height: 100%;
+  height: 100%;
 }
 
 .contentPosition > .row > .col-md-6 {
-	height: 100%;
+  height: 100%;
 }
 
 a,
@@ -46,49 +46,49 @@ a:hover,
 a:active,
 a:visited,
 a:focus {
-	text-decoration: underline;
-	outline: none;
+  text-decoration: underline;
+  outline: none;
 }
 
 p, ul.list-unstyled {
-	margin-left: 30px;
-	margin-right: 30px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .header-layout {
-	white-space: nowrap;
-	font-size: 3vw;
+  white-space: nowrap;
+  font-size: 3vw;
 }
 
 .header-session > .row {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 
 .titel {
-	text-align: center;
-	font-size: 3vw;
-	width: 100%;
-	min-height: 20px;
-	z-index: 1050;
+  text-align: center;
+  font-size: 3vw;
+  width: 100%;
+  min-height: 20px;
+  z-index: 1050;
 }
 
 .margin-top-logo {
-	margin-top: 10px;
+  margin-top: 10px;
 }
 
 .toggleCorrect:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .input-group-slider {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 
 .logo-header-chars {
-	cursor: default;
-	font-size: 1.5em; /* Fallback for old devices */
-	font-size: 5vw;
-	margin: 10px 0;
+  cursor: default;
+  font-size: 1.5em; /* Fallback for old devices */
+  font-size: 5vw;
+  margin: 10px 0;
 }
 
 .logo-header-dot {
@@ -99,38 +99,37 @@ p, ul.list-unstyled {
 }
 
 .logo-header-margin-for-dot {
-	margin-left: -5px
+  margin-left: -5px
 }
 
 .row-landingpage-buttons {
-	margin-top: 10px;
-	margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
-
 @media screen and (max-width: 991px) {
-	.titel {
-		font-size:6vw;
-	}
+  .titel {
+    font-size: 6vw;
+  }
 }
 
 #countdownAnimationWrapper {
-	z-index: 1070;
-	position: fixed;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
+  z-index: 1070;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
 
-	#countdownAnimation {
-		z-index: 1070;
-		position: fixed;
-		top: 0;
-		left: calc(50% - 150px);
-		width: 100%;
-		height: 100%;
-		background-image: none;
-		background-position: 0 100%;
-		background-repeat: no-repeat;
-	}
+  #countdownAnimation {
+    z-index: 1070;
+    position: fixed;
+    top: 0;
+    left: calc(50% - 150px);
+    width: 100%;
+    height: 100%;
+    background-image: none;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+  }
 }

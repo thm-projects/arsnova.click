@@ -40,8 +40,8 @@ export function calculateHeaderSize() {
 	return new Promise(function (resolve) {
 		const header = $('.navbar-fixed-top'),
 			headerTitle = header.find('.header-title'),
-			titel         = headerTitle.text().trim(),
-			titleLength   = titel.length;
+			titel = headerTitle.text().trim(),
+			titleLength = titel.length;
 
 		let fontSize = "",
 			logoHeight;
@@ -84,17 +84,17 @@ export function calculateHeaderSize() {
 export const titelTracker = new Tracker.Dependency();
 export function calculateTitelHeight() {
 	return new Promise(function (resolve) {
-		const fixedTop         = $(".navbar-fixed-top"),
-			fixedBottom        = $('.navbar-fixed-bottom'),
-			container          = $(".container"),
-			rowBottom          = $('.row-padding-bottom'),
-			centerVertical     = $('.center-vertical'),
-			footerHeight       = $(".fixed-bottom").outerHeight(true) + $(".footer-info-bar").outerHeight(),
+		const fixedTop = $(".navbar-fixed-top"),
+			fixedBottom = $('.navbar-fixed-bottom'),
+			container = $(".container"),
+			rowBottom = $('.row-padding-bottom'),
+			centerVertical = $('.center-vertical'),
+			footerHeight = $(".fixed-bottom").outerHeight(true) + $(".footer-info-bar").outerHeight(),
 			navbarFooterHeight = fixedBottom.is(":visible") ? fixedBottom.outerHeight() : 0,
-			marginTop          = rowBottom.outerHeight(true) || fixedTop.outerHeight(),
-			finalHeight        = $(window).height() - marginTop - navbarFooterHeight - footerHeight;
+			marginTop = rowBottom.outerHeight(true) || fixedTop.outerHeight(),
+			finalHeight = $(window).height() - marginTop - navbarFooterHeight - footerHeight;
 
-		let centerVerticalTop  = finalHeight / 2 - centerVertical.outerHeight() / 2;
+		let centerVerticalTop = finalHeight / 2 - centerVertical.outerHeight() / 2;
 		if (centerVerticalTop < 0) {
 			centerVerticalTop = 0;
 		}

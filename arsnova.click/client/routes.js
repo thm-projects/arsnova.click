@@ -25,7 +25,10 @@ import {MemberListCollection} from '/lib/member_list/collection.js';
 import {SessionConfigurationCollection} from '/lib/session_configuration/collection.js';
 import * as localData from '/lib/local_storage.js';
 import {ErrorSplashscreen} from '/client/plugins/splashscreen/scripts/lib.js';
-import {globalEventStackObserver, setGlobalEventStackObserver} from '/client/plugins/event_stack_observer/scripts/lib.js';
+import {
+	globalEventStackObserver,
+	setGlobalEventStackObserver
+} from '/client/plugins/event_stack_observer/scripts/lib.js';
 import {getChangeEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onChangeEvent.js';
 import {getRemoveEventsForRoute} from '/client/plugins/event_stack_observer/scripts/onRemoveEvent.js';
 import {createTabIndices} from '/client/startup.js';
@@ -94,6 +97,7 @@ const NonBlockingRouteController = RouteController.extend({
 	onBeforeAction: onBeforeAction,
 	subscriptions: function () {
 		subsCache.subscribe('HashtagsCollection.public');
+		subsCache.subscribe('EventManagerCollection.overview');
 		subsCache.subscribe('PerformanceAnalysis.join');
 	}
 });
@@ -169,6 +173,9 @@ Router.onAfterAction(function () {
 });
 
 Router.route('/', {
+	subscriptions: function () {
+		subsCache.subscribe('ProxyCollection.join');
+	},
 	controller: NonBlockingRouteController,
 	action: function () {
 		this.render("titel", {
@@ -423,6 +430,9 @@ Router.route('/:quizName/nick', {
 });
 
 Router.route('/:quizName/quizManager', {
+	subscriptions: function () {
+		subsCache.subscribe('ProxyCollection.join');
+	},
 	action: function () {
 		if (localData.containsHashtag(Router.current().params.quizName)) {
 			this.render('footerNavButtons', {

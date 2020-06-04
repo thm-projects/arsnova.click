@@ -16,10 +16,17 @@
  * along with ARSnova Click.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import {Meteor} from 'meteor/meteor';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import {EventManagerCollection, questionIndexSchema} from '/lib/eventmanager/collection.js';
 import {hashtagSchema, privateKeySchema} from '/lib/hashtags/collection.js';
-import {MemberListCollection, userNickSchema, backgroundColorSchema, foregroundColorSchema, userNickIdSchema, userRefSchema} from '/lib/member_list/collection.js';
+import {
+	MemberListCollection,
+	userNickSchema,
+	backgroundColorSchema,
+	foregroundColorSchema,
+	userNickIdSchema,
+	userRefSchema
+} from '/lib/member_list/collection.js';
 
 Meteor.methods({
 	'MemberListCollection.addLearner': function ({hashtag, nick, privateKey, backgroundColor, foregroundColor, userRef, isDummyUser}) {
